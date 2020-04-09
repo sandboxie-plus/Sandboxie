@@ -96,7 +96,7 @@
       <OmitFramePointers />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib;vcruntime.lib;libucrt.lib;libcmt.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
       <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
@@ -112,7 +112,7 @@
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib;vcruntime.lib;libucrt.lib;libcmt.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
@@ -129,7 +129,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib;vcruntime.lib;libucrt.lib;libcmt.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
       <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
@@ -144,7 +144,7 @@
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib;vcruntime.lib;libucrt.lib;libcmt.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>

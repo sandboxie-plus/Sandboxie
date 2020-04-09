@@ -69,32 +69,32 @@
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\api;$(IncludePath)</IncludePath>
-    <LibraryPath>$(WDKPATH)\lib\wnet\i386;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\WinDDK\7600.16385.1\inc\ddk;C:\WinDDK\7600.16385.1\inc\crt;C:\WinDDK\7600.16385.1\inc\api;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\i386;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <TargetExt>.sys</TargetExt>
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\api;$(IncludePath)</IncludePath>
-    <LibraryPath>$(WDKPATH)\lib\wnet\amd64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\WinDDK\7600.16385.1\inc\ddk;C:\WinDDK\7600.16385.1\inc\crt;C:\WinDDK\7600.16385.1\inc\api;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\amd64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <TargetExt>.sys</TargetExt>
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\api;$(IncludePath)</IncludePath>
-    <LibraryPath>$(WDKPATH)\lib\wnet\i386;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\WinDDK\7600.16385.1\inc\ddk;C:\WinDDK\7600.16385.1\inc\crt;C:\WinDDK\7600.16385.1\inc\api;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\i386;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <TargetExt>.sys</TargetExt>
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\api;$(IncludePath)</IncludePath>
-    <LibraryPath>$(WDKPATH)\lib\wnet\amd64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\WinDDK\7600.16385.1\inc\ddk;C:\WinDDK\7600.16385.1\inc\crt;C:\WinDDK\7600.16385.1\inc\api;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\amd64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>

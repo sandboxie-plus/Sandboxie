@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <WDKPATH>\WinDDK\7600.16385.1</WDKPATH>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IncludePath>..\;..\..\;..\..\..\;$(VCInstallDir)include;$(WindowsSDK_IncludePath);$(VCInstallDir)atlmfc\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LibraryPath>$(VCInstallDir)lib\amd64;$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\;$(WindowsSdkDir)lib\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;VISUAL_STUDIO_BUILD;_WIN64;_AMD64_;UNICODE;WINVER=0x0502;_WIN32_WINNT=0x0502;WIN32=100;_WIN32_IE=0x0603;WIN32_LEAN_AND_MEAN=1;WINNT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>StdCall</CallingConvention>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4267;4312;4996;4133;4577;4091;4200</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <ExceptionHandling>false</ExceptionHandling>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions></PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="WDKPATH">
+      <Value>$(WDKPATH)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

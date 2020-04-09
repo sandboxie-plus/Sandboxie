@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="SbieDebug|Win32">
+      <Configuration>SbieDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="SbieDebug|x64">
+      <Configuration>SbieDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="SbieRelease|Win32">
+      <Configuration>SbieRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="SbieRelease|x64">
+      <Configuration>SbieRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>SboxDll</ProjectName>
+    <ProjectGuid>{8E0EAA5B-6F5B-E0E2-338A-453EF2B548E4}</ProjectGuid>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="PropertySheets">
+    <Import Project="..\..\Sandbox32.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="PropertySheets">
+    <Import Project="..\..\Sandbox64.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="PropertySheets">
+    <Import Project="..\..\Sandbox32.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="PropertySheets">
+    <Import Project="..\..\Sandbox64.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
+    <TargetExt>.dll</TargetExt>
+    <TargetName>SbieDll</TargetName>
+    <LibraryPath>$(WDKPATH)\lib\wnet\i386;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
+    <TargetExt>.dll</TargetExt>
+    <TargetName>SbieDll</TargetName>
+    <LibraryPath>$(WDKPATH)\lib\wnet\amd64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
+    <TargetExt>.dll</TargetExt>
+    <TargetName>SbieDll</TargetName>
+    <LibraryPath>$(WDKPATH)\lib\wnet\i386;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
+    <TargetExt>.dll</TargetExt>
+    <TargetName>SbieDll</TargetName>
+    <LibraryPath>$(WDKPATH)\lib\wnet\amd64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CompileAs>Default</CompileAs>
+      <OmitFramePointers />
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
+      <BaseAddress>0x7D220000</BaseAddress>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <BaseAddress>0x7D220000</BaseAddress>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
+      <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
+    <ClCompile>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CompileAs>Default</CompileAs>
+      <OmitFramePointers />
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
+      <BaseAddress>0x7D220000</BaseAddress>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
+    <ClCompile>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <BaseAddress>0x7D220000</BaseAddress>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
+      <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\common\pattern.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pool.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="acscmonitor.c" />
+    <ClCompile Include="advapi.c">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">false</ShowIncludes>
+    </ClCompile>
+    <ClCompile Include="callsvc.c" />
+    <ClCompile Include="com.c" />
+    <ClCompile Include="cred.c" />
+    <ClCompile Include="crypt.c" />
+    <ClCompile Include="custom.c" />
+    <ClCompile Include="debug.c" />
+    <ClCompile Include="dllhook.c" />
+    <ClCompile Include="dllmain.c" />
+    <ClCompile Include="dllmem.c" />
+    <ClCompile Include="dllpath.c" />
+    <ClCompile Include="event.c" />
+    <ClCompile Include="file.c" />
+    <ClCompile Include="file_dir.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="file_init.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="file_link.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="file_misc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="file_pipe.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="gdi.c" />
+    <ClCompile Include="gui.c" />
+    <ClCompile Include="guiclass.c" />
+    <ClCompile Include="guicon.c" />
+    <ClCompile Include="guidde.c" />
+    <ClCompile Include="guidlg.c" />
+    <ClCompile Include="guienum.c" />
+    <ClCompile Include="guihook.c" />
+    <ClCompile Include="guimisc.c" />
+    <ClCompile Include="guimsg.c" />
+    <ClCompile Include="guiprop.c" />
+    <ClCompile Include="guititle.c" />
+    <ClCompile Include="includes.c" />
+    <ClCompile Include="ipc.c" />
+    <ClCompile Include="ipc_start.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="iphlp.c" />
+    <ClCompile Include="ipstore_enum.cpp" />
+    <ClCompile Include="ipstore_impl.cpp" />
+    <ClCompile Include="key.c" />
+    <ClCompile Include="key_merge.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="key_util.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ldr.c" />
+    <ClCompile Include="ldr_init.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="lsa.c" />
+    <ClCompile Include="mscoree.c" />
+    <ClCompile Include="net.c" />
+    <ClCompile Include="netapi.c" />
+    <ClCompile Include="obj.c" />
+    <ClCompile Include="ole.cpp" />
+    <ClCompile Include="pdh.c" />
+    <ClCompile Include="proc.c" />
+    <ClCompile Include="pst.cpp" />
+    <ClCompile Include="rpcrt.c" />
+    <ClCompile Include="sbieapi.c" />
+    <ClCompile Include="scm.c" />
+    <ClCompile Include="scm_create.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="scm_event.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="scm_misc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="scm_notify.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="scm_query.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="secure.c" />
+    <ClCompile Include="setup.c" />
+    <ClCompile Include="sfc.c" />
+    <ClCompile Include="sh.c" />
+    <ClCompile Include="support.c" />
+    <ClCompile Include="sxs.c" />
+    <ClCompile Include="sysinfo.c">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">false</ShowIncludes>
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">false</ShowIncludes>
+    </ClCompile>
+    <ClCompile Include="taskbar.c" />
+    <ClCompile Include="terminal.c" />
+    <ClCompile Include="userenv.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="util_asm.asm">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">ml -c  -Cx -nologo -Zi -Zm -Fo$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">ml64 -c  -Cx -nologo -D_WIN64 -Zi -Fo$(Platform)\$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">ml -c  -Cx -nologo -Zi -Zm -Fo$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">ml64 -c  -Cx -nologo -D_WIN64 -Zi -Fo$(Platform)\$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">%(ProjectDir)$(Configuration)\%(Filename).obj</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">%(ProjectDir)$(Platform)\$(Configuration)\%(Filename).obj</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">%(ProjectDir)$(Configuration)\%(Filename).obj</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">%(ProjectDir)$(Platform)\$(Configuration)\%(Filename).obj</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\pool.h" />
+    <ClInclude Include="advapi.h" />
+    <ClInclude Include="debug.h" />
+    <ClInclude Include="dll.h" />
+    <ClInclude Include="guidlg.h" />
+    <ClInclude Include="gui_p.h" />
+    <ClInclude Include="ipstore_enum.h" />
+    <ClInclude Include="ipstore_impl.h" />
+    <ClInclude Include="obj.h" />
+    <ClInclude Include="propsys.h" />
+    <ClInclude Include="pstore.h" />
+    <ClInclude Include="sbieapi.h" />
+    <ClInclude Include="sbiedll.h" />
+    <ClInclude Include="taskbar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="pstore.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SboxDll32.def" />
+    <None Include="SboxDll64.def" />
+    <None Include="util_32.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="util_64.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,255 @@
+import "oaidl.idl";
+
+cpp_quote("#define PST_KEY_CURRENT_USER    0")
+cpp_quote("#define PST_KEY_LOCAL_MACHINE   1")
+
+cpp_quote("#define PST_E_OK                     0x00000000L")
+cpp_quote("#define PST_E_TYPE_EXISTS            0x800C0004L")
+cpp_quote("#define PST_E_TYPE_NO_EXISTS		0x800C0005L")
+cpp_quote("#define PST_E_ITEM_EXISTS            0x800C000FL")
+cpp_quote("#define PST_E_ITEM_NO_EXISTS		0x800C0010L")
+
+cpp_quote("#define PST_NO_OVERWRITE             0x00000002L")
+cpp_quote("#define PST_UNRESTRICTED_ITEMDATA    0x00000004L")
+
+
+//#define  PST_PF_ALWAYS_SHOW   0x00000001 
+#define  PST_PF_NEVER_SHOW   0x00000002 
+//#define  PST_CF_DEFAULT   0x00000000 
+//#define  PST_CF_NONE   0x00000001 
+
+
+cpp_quote("#define PST_AUTHENTICODE        1")
+cpp_quote("#define PST_BINARY_CHECK        2")
+cpp_quote("#define PST_SECURITY_DESCRIPTOR 4")
+
+typedef DWORD PST_ACCESSMODE;
+typedef DWORD PST_ACCESSCLAUSETYPE;
+typedef DWORD PST_KEY;
+typedef DWORD PST_PROVIDERCAPABILITIES;
+typedef GUID PST_PROVIDERID, *PPST_PROVIDERID;
+
+typedef struct _PST_PROVIDERINFO
+{
+    DWORD cbSize;
+    PST_PROVIDERID ID;
+    PST_PROVIDERCAPABILITIES Capabilities;
+    LPWSTR szProviderName;
+} PST_PROVIDERINFO, *PPST_PROVIDERINFO;
+
+typedef struct {
+    DWORD cbSize;
+    PST_ACCESSCLAUSETYPE ClauseType;
+    DWORD cbClauseData;
+    BYTE* pbClauseData;
+} PST_ACCESSCLAUSE, *PPST_ACCESSCLAUSE;
+
+typedef struct {
+    DWORD cbSize;
+    PST_ACCESSMODE AccessModeFlags;
+    DWORD cClauses;
+    PST_ACCESSCLAUSE* rgClauses;
+} PST_ACCESSRULE, *PPST_ACCESSRULE;
+
+typedef struct {
+    DWORD cbSize;
+    DWORD cClause;
+    PST_ACCESSRULE* rgRules;
+} PST_ACCESSRULESET, *PPST_ACCESSRULESET;
+
+typedef struct {
+    DWORD cbSize;
+    LPWSTR szDisplayName;
+} PST_TYPEINFO, *PPST_TYPEINFO;
+
+typedef struct {
+    DWORD cbSize;
+    DWORD dwPromptFlags;
+    DWORD *hwndApp;
+    LPCWSTR szPrompt;
+} PST_PROMPTINFO, *PPST_PROMPTINFO;
+
+[
+  object,
+  uuid(4C83B307-0B70-4726-8F75-396EBBDAA401),
+  pointer_default(unique)
+]
+interface IEnumPStoreItems : IUnknown
+{
+    HRESULT Next(
+        [in] DWORD celt,
+        [in] LPWSTR* rgelt,
+        [in] DWORD* pceltFetched );
+
+    HRESULT Skip(
+        [in] DWORD celt );
+
+    HRESULT Reset();
+
+    HRESULT Clone(
+        [in] IEnumPStoreItems** ppenum );
+}
+
+[
+  object,
+  uuid(4C83B307-0B70-4726-8F75-396EBBDAA402),
+  pointer_default(unique)
+]
+interface IEnumPStoreTypes : IUnknown
+{
+    HRESULT Next(
+        [in] DWORD celt,
+        [in] GUID* rgelt,
+        [in] DWORD* pceltFetched );
+
+    HRESULT Skip(
+        [in] DWORD celt );
+
+    HRESULT Reset();
+
+    HRESULT Clone(
+        [in] IEnumPStoreTypes** ppenum );
+}
+
+/*****************************************************************************
+ * IPStore interface
+ */
+[
+  object,
+  uuid(4C83B307-0B70-4726-8F75-396EBBDAA403),
+  pointer_default(unique)
+]
+interface IPStore : IUnknown
+{
+    HRESULT GetInfo(
+        [in] PPST_PROVIDERINFO* ppProperties );
+
+    HRESULT GetProvParam(
+        [in] DWORD dwParam,
+        [out] DWORD* pcbData,
+        [out] BYTE** ppbData,
+        [in] DWORD dwFlags );
+
+    HRESULT SetProvParam(
+        [in] DWORD dwParam,
+        [in] DWORD cbData,
+        [in] BYTE* pbData,
+        [in] DWORD* dwFlags );
+
+    HRESULT CreateType(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] PPST_TYPEINFO pInfo,
+        [in] DWORD dwFlags );
+
+    HRESULT GetTypeInfo(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] PPST_TYPEINFO** ppInfo,
+        [in] DWORD dwFlags );
+
+    HRESULT DeleteType(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] DWORD dwFlags );
+
+    HRESULT CreateSubtype(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] const GUID* pSubtype,
+        [in] PPST_TYPEINFO pInfo,
+        [in] PPST_ACCESSRULESET pRules,
+        [in] DWORD dwFlags );
+
+    HRESULT GetSubtypeInfo(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] const GUID* pSubtype,
+        [in] PPST_TYPEINFO** ppInfo,
+        [in] DWORD dwFlags );
+
+    HRESULT DeleteSubtype(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] const GUID* pSubtype,
+        [in] DWORD dwFlags );
+
+    HRESULT ReadAccessRuleset(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] const GUID* pSubtype,
+        [in] PPST_TYPEINFO pInfo,
+        [in] PPST_ACCESSRULESET** ppRules,
+        [in] DWORD dwFlags );
+
+    HRESULT WriteAccessRuleset(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] const GUID* pSubtype,
+        [in] PPST_TYPEINFO pInfo,
+        [in] PPST_ACCESSRULESET pRules,
+        [in] DWORD dwFlags );
+
+    HRESULT EnumTypes(
+        [in] PST_KEY Key,
+        [in] DWORD dwFlags,
+        [in] IEnumPStoreTypes** ppenum );
+
+    HRESULT EnumSubtypes(
+        [in] PST_KEY Key,
+        [in] const GUID* pType,
+        [in] DWORD dwFlags,
+        [in] IEnumPStoreTypes** ppenum );
+
+    HRESULT DeleteItem(
+        [in] PST_KEY Key,
+        [in] const GUID* pItemType,
+        [in] const GUID* pItemSubType,
+        [in] LPCWSTR szItemName,
+        [in] PPST_PROMPTINFO pPromptInfo,
+        [in] DWORD dwFlags );
+
+    HRESULT ReadItem(
+        [in] PST_KEY Key,
+        [in] const GUID* pItemType,
+        [in] const GUID* pItemSubtype,
+        [in] LPCWSTR szItemName,
+        [in] DWORD *cbData,
+        [in] BYTE** ppbData,
+        [in] PPST_PROMPTINFO pPromptInfo,
+        [in] DWORD dwFlags );
+
+    HRESULT WriteItem(
+        [in] PST_KEY Key,
+        [in] const GUID* pItemType,
+        [in] const GUID* pItemSubtype,
+        [in] LPCWSTR szItemName,
+        [in] DWORD cbData,
+        [in,size_is(cbData)] BYTE *pbData,
+        [in] PPST_PROMPTINFO pPromptInfo,
+        [in] DWORD dwDefaultConfirmationStyle,
+        [in] DWORD dwFlags);
+
+    HRESULT OpenItem(
+        [in] PST_KEY Key,
+        [in] const GUID* pItemType,
+        [in] const GUID* pItemSubtype,
+        [in] LPCWSTR szItemName,
+        [in] PST_ACCESSMODE ModeFlags,
+        [in] PPST_PROMPTINFO pProomptInfo,
+        [in] DWORD dwFlags );
+
+    HRESULT CloseItem( 
+        [in] PST_KEY Key, 
+        [in] const GUID* pItemType, 
+        [in] const GUID* pItemSubtype,
+        [in] LPCWSTR* szItemName,
+        [in] DWORD dwFlags );
+
+    HRESULT EnumItems(
+        [in] PST_KEY Key,
+        [in] const GUID* pItemType,
+        [in] const GUID* pItemSubtype,
+        [in] DWORD dwFlags,
+        [in] IEnumPStoreItems** ppenum );
+}

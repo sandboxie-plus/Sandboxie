@@ -1,0 +1,3 @@
+LIBRARY SboxDll
+#define SBIEDLL_LIBRARY_STATEMENT_ISSUED
+#include "sbiedll.def"

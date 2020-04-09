@@ -1,0 +1,16 @@
+; \Sandbox\Projects\core\drv\SbieDvr_x64.ddf 
+    ;
+    .OPTION EXPLICIT     ; Generate errors
+    .Set CabinetFileCountThreshold=0
+    .Set FolderFileCountThreshold=0
+    .Set FolderSizeThreshold=0
+    .Set MaxCabinetSize=0
+    .Set MaxDiskFileCount=0
+    .Set MaxDiskSize=0
+    .Set CompressionType=MSZIP
+    .Set Cabinet=on
+    .Set Compress=on
+    .Set CabinetNameTemplate=SbieDrv_x64.cab
+    .Set DestinationDir=..\Projects\Bin\x64\SbieRelease
+    SbieDrv.inf
+    ..\..\Bin\x64\SbieRelease\SbieDrv.sys

@@ -1,0 +1,71 @@
+// Copyright 2004-2020 Sandboxie Holdings, LLC 
+//
+// This program is free software: you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation, either version 3 of the License, or
+//   (at your option) any later version.
+//
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+//---------------------------------------------------------------------------
+// SbieIni scripting utility
+//---------------------------------------------------------------------------
+
+
+#include <windows.h>
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#include "common/my_version.h"
+
+
+//---------------------------------------------------------------------------
+// Version
+//---------------------------------------------------------------------------
+
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION MY_VERSION_BINARY
+ PRODUCTVERSION MY_VERSION_BINARY
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", MY_COMPANY_NAME_STRING "\0"
+            VALUE "FileDescription", MY_PRODUCT_NAME_STRING " configuration file utility\0"
+            VALUE "FileVersion", MY_VERSION_STRING "\0"
+   OPTIONAL_VALUE("InternalName", "SbieIni\0")
+            VALUE "LegalCopyright", MY_COPYRIGHT_STRING "\0"
+            VALUE "LegalTrademarks", "\0"
+   OPTIONAL_VALUE("OriginalFilename", "SbieIni.exe\0")
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", MY_PRODUCT_NAME_STRING "\0"
+            VALUE "ProductVersion", MY_VERSION_STRING "\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+

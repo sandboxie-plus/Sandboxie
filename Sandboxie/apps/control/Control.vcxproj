@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="SbieDebug|Win32">
+      <Configuration>SbieDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="SbieDebug|x64">
+      <Configuration>SbieDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="SbieRelease|Win32">
+      <Configuration>SbieRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="SbieRelease|x64">
+      <Configuration>SbieRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D16E291A-1F8A-4B19-AE07-0AF8CB7CCBD0}</ProjectGuid>
+    <RootNamespace>Control</RootNamespace>
+    <ProjectName>SbieControl</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Sandbox32.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Sandbox64.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Sandbox32.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Sandbox64.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
+    <TargetName>SbieCtrl</TargetName>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
+    <TargetName>SbieCtrl</TargetName>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
+    <TargetName>SbieCtrl</TargetName>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
+    <TargetName>SbieCtrl</TargetName>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <MinimalRebuild />
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MinimalRebuild />
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
+    <ClCompile>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MinimalRebuild />
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
+    <ClCompile>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MinimalRebuild />
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\BoxOrder.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\common\FontStore.cpp" />
+    <ClCompile Include="..\common\Layout.cpp" />
+    <ClCompile Include="..\common\MyGdi.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\common\MyMsg.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\common\RunBrowser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\common\RunStartExe.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="AboutDialog.cpp" />
+    <ClCompile Include="AlertDialog.cpp" />
+    <ClCompile Include="AnimatedBitmap.cpp" />
+    <ClCompile Include="AppPage.cpp" />
+    <ClCompile Include="AutoPlay.cpp" />
+    <ClCompile Include="BaseDialog.cpp" />
+    <ClCompile Include="BorderGuard.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Boxes.cpp" />
+    <ClCompile Include="BoxFile.cpp" />
+    <ClCompile Include="BoxPage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="BoxProc.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CreateDialog.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DeleteDialog.cpp" />
+    <ClCompile Include="DisableForceDialog.cpp" />
+    <ClCompile Include="FileListCtrl.cpp" />
+    <ClCompile Include="FinderDialog.cpp" />
+    <ClCompile Include="FindTool.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="FlashingButton.cpp" />
+    <ClCompile Include="GettingStartedWizard.cpp" />
+    <ClCompile Include="InitWait.cpp" />
+    <ClCompile Include="LockConfigDialog.cpp" />
+    <ClCompile Include="MenuXP.cpp" />
+    <ClCompile Include="MenuXP_Draw.cpp" />
+    <ClCompile Include="MessageDialog.cpp" />
+    <ClCompile Include="MonitorDialog.cpp" />
+    <ClCompile Include="MyApp.cpp" />
+    <ClCompile Include="MyFrame.cpp" />
+    <ClCompile Include="MyListCtrl.cpp" />
+    <ClCompile Include="MyWizard.cpp" />
+    <ClCompile Include="ProcListCtrl.cpp" />
+    <ClCompile Include="ProcSettingsDialog.cpp" />
+    <ClCompile Include="ProgramSelector.cpp" />
+    <ClCompile Include="PropPageFrame.cpp" />
+    <ClCompile Include="PropPageFrameDefault.cpp" />
+    <ClCompile Include="QuickRecover.cpp" />
+    <ClCompile Include="RevealDialog.cpp" />
+    <ClCompile Include="SbieIni.cpp" />
+    <ClCompile Include="SetFolderDialog.cpp" />
+    <ClCompile Include="SetLayoutDialog.cpp" />
+    <ClCompile Include="ShellDialog.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TabbingComboBox.cpp" />
+    <ClCompile Include="TemplateListBox.cpp" />
+    <ClCompile Include="ThirdPartyDialog.cpp" />
+    <ClCompile Include="ToolTipButton.cpp" />
+    <ClCompile Include="TreePropSheet.cpp" />
+    <ClCompile Include="UserSettings.cpp" />
+    <ClCompile Include="ViewTemplateDialog.cpp" />
+    <ClCompile Include="WindowTitleMap.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\BoxOrder.h" />
+    <ClInclude Include="..\common\FontStore.h" />
+    <ClInclude Include="..\common\Layout.h" />
+    <ClInclude Include="..\common\MyGdi.h" />
+    <ClInclude Include="..\common\MyMsg.h" />
+    <ClInclude Include="..\common\RunBrowser.h" />
+    <ClInclude Include="AboutDialog.h" />
+    <ClInclude Include="AlertDialog.h" />
+    <ClInclude Include="AnimatedBitmap.h" />
+    <ClInclude Include="AppPage.h" />
+    <ClInclude Include="AutoPlay.h" />
+    <ClInclude Include="BaseDialog.h" />
+    <ClInclude Include="BorderGuard.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Boxes.h" />
+    <ClInclude Include="BoxFile.h" />
+    <ClInclude Include="BoxPage.h" />
+    <ClInclude Include="BoxProc.h" />
+    <ClInclude Include="CreateDialog.h" />
+    <ClInclude Include="DeleteDialog.h" />
+    <ClInclude Include="DisableForceDialog.h" />
+    <ClInclude Include="FileListCtrl.h" />
+    <ClInclude Include="FinderDialog.h" />
+    <ClInclude Include="FindTool.h" />
+    <ClInclude Include="FlashingButton.h" />
+    <ClInclude Include="GettingStartedWizard.h" />
+    <ClInclude Include="InitWait.h" />
+    <ClInclude Include="LockConfigDialog.h" />
+    <ClInclude Include="MenuXP.h" />
+    <ClInclude Include="MenuXP_Draw.h" />
+    <ClInclude Include="MenuXP_Tools.h" />
+    <ClInclude Include="MessageDialog.h" />
+    <ClInclude Include="MonitorDialog.h" />
+    <ClInclude Include="MyApp.h" />
+    <ClInclude Include="MyFrame.h" />
+    <ClInclude Include="MyListCtrl.h" />
+    <ClInclude Include="MyWizard.h" />
+    <ClInclude Include="ProcListCtrl.h" />
+    <ClInclude Include="ProcSettingsDialog.h" />
+    <ClInclude Include="ProgramSelector.h" />
+    <ClInclude Include="PropPageFrame.h" />
+    <ClInclude Include="PropPageFrameDefault.h" />
+    <ClInclude Include="QuickRecover.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RevealDialog.h" />
+    <ClInclude Include="SbieIni.h" />
+    <ClInclude Include="SetFolderDialog.h" />
+    <ClInclude Include="SetLayoutDialog.h" />
+    <ClInclude Include="ShellDialog.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TabbingComboBox.h" />
+    <ClInclude Include="TemplateListBox.h" />
+    <ClInclude Include="ThirdPartyDialog.h" />
+    <ClInclude Include="ToolTipButton.h" />
+    <ClInclude Include="TreePropSheet.h" />
+    <ClInclude Include="UserSettings.h" />
+    <ClInclude Include="ViewTemplateDialog.h" />
+    <ClInclude Include="WindowTitleMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SbieControl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\sbieweb\web\img\FrontPage\FrontPageAnimation.gif" />
+    <None Include="..\res\background.png" />
+    <None Include="..\res\bigex.ico" />
+    <None Include="..\res\checkmark.png" />
+    <None Include="..\res\controlwin.ico" />
+    <None Include="..\res\cycle.png" />
+    <None Include="..\res\exclamation.png" />
+    <None Include="..\res\finder-empty.bmp" />
+    <None Include="..\res\finder-full.bmp" />
+    <None Include="..\res\finder.cur" />
+    <None Include="..\res\folder-minus.ico" />
+    <None Include="..\res\folder-plus.ico" />
+    <None Include="..\res\GettingStartedLegend.png" />
+    <None Include="..\res\initwait1.ico" />
+    <None Include="..\res\initwait2.ico" />
+    <None Include="..\res\MastheadLogo.jpg" />
+    <None Include="..\res\none.ico" />
+    <None Include="..\res\proc-empty.ico" />
+    <None Include="..\res\proc-full-minus.ico" />
+    <None Include="..\res\proc-full-plus.ico" />
+    <None Include="..\res\questionmark.png" />
+    <None Include="..\res\sandbox-delete.ico" />
+    <None Include="..\res\sandbox-empty-dfp.ico" />
+    <None Include="..\res\sandbox-empty.ico" />
+    <None Include="..\res\sandbox-full-dfp.ico" />
+    <None Include="..\res\sandbox-full.ico" />
+    <None Include="SbieControl.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\res\xptheme.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\res\FrontPageAnimation.gif" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="SbieControl.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

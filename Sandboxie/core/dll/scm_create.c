@@ -824,6 +824,10 @@ _FX BOOL SbieDll_StartBoxedService(const WCHAR *ServiceName, BOOLEAN WithAdd)
     SERVICE_QUERY_RPL *rpl;
     ULONG retries, error;
 
+	//WCHAR text[130];
+	//Sbie_swprintf(text, L"StartBoxedService; name: '%s'; pid: %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+    //SbieApi_MonitorPut(MONITOR_OTHER, text);
+
     //
     // when invoked from SandboxieRpcSs to handle StartProcess,
     // specify WithAdd to add the service to the sandbox
@@ -1091,6 +1095,10 @@ _FX BOOL Scm_StartServiceW(
     if (! ServiceName)
         return FALSE;
 
+    WCHAR text[130];
+	Sbie_swprintf(text, L"StartService; name: '%s'; pid: %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
+
     if (Scm_IsBoxedService(ServiceName))
         return SbieDll_StartBoxedService(ServiceName, FALSE);
 
@@ -1190,7 +1198,7 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         L"00000000_" SBIE L"_SERVICE_NAME";
     WCHAR *ServiceName;
     WCHAR *Buffer;
-    UNICODE_STRING uni;
+    UNICODE_STRING uni; // fix-me: this mustbe freed !
     void *args[3];
     ULONG ThreadId;
     HANDLE hEvent;
@@ -1253,6 +1261,10 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
             //return FALSE;
         }
     }
+
+    //WCHAR text[130];
+	//Sbie_swprintf(text, L"StartServiceCtrlDispatcher; name: '%s'; pid %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+    //SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
     // open the key for the service

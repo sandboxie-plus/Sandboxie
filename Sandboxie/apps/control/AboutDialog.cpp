@@ -143,7 +143,7 @@ BOOL CAboutDialog::OnInitDialog()
         U_PDF = L' ';
     }
     text.Format(L"%S %c(%d-bit)%c",
-        MY_VERSION_STRING, U_LRO, _bitness, U_PDF);
+        MY_VERSION_STRING_EX, U_LRO, _bitness, U_PDF);
 
     CString ver = CMyMsg(MSG_3302, text);
     GetDlgItem(ID_ABOUT_VERSION)->SetWindowText(ver);

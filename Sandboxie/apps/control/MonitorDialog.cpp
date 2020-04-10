@@ -101,6 +101,7 @@ void CMonitorDialog::OnIdle()
     static const WCHAR *_Clsid      = L"Clsid    ";
     static const WCHAR *_Image      = L"Image    ";
     static const WCHAR *_FileOrKey  = L"File/Key ";
+	static const WCHAR *_Other      = L"Other    ";
     static const WCHAR *_Separator  = L"   -------------------------------";
 
     CListBox *listbox = (CListBox *)GetDlgItem(ID_MESSAGE_LIST);
@@ -147,6 +148,8 @@ void CMonitorDialog::OnIdle()
             PrefixPtr = _Image;
         else if (type == MONITOR_FILE_OR_KEY)
             PrefixPtr = _FileOrKey;
+        else if (type == MONITOR_OTHER)
+            PrefixPtr = _Other;
         wcsncpy(name, PrefixPtr, 9);
 
         int index = listbox->AddString(name);

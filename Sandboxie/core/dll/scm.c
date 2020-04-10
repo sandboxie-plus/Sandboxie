@@ -847,6 +847,13 @@ _FX BOOL Scm_CloseServiceHandle(SC_HANDLE hSCObject)
 _FX WCHAR *Scm_GetHandleName(SC_HANDLE hService)
 {
     WCHAR *name = NULL;
+	// fix-me: refactory include of SC_HANDLE_
+	if (hService == /*SC_HANDLE_RPCSS*/((SC_HANDLE)0x12345672))
+		return L"RpcSs";
+	if (hService == /*SC_HANDLE_MSISERVER*/((SC_HANDLE)0x12345673))
+		return L"MSIServer";
+	if (hService == /*SC_HANDLE_EVENTSYSTEM*/((SC_HANDLE)0x12345674))
+		return L"EventSystem";
     __try {
         if (hService && *(ULONG *)hService == tzuk)
             name = (WCHAR *)(((ULONG *)hService) + 1);

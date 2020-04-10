@@ -49,6 +49,7 @@
 #define MONITOR_IGNORE              0x066B
 #define MONITOR_IMAGE               0x077B
 #define MONITOR_FILE_OR_KEY         0x088B
+#define MONITOR_OTHER				0x099B
 #define MONITOR_OPEN                0x1000
 #define MONITOR_DENY                0x2000
 

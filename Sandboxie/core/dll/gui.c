@@ -724,26 +724,27 @@ _FX void Gui_InitWindows7(void)
 // Processthreadsapi.h from Windows 8 See
 // https://msdn.microsoft.com/en-us/library/windows/desktop/hh769085%28v=vs.85%29.aspx
 // https://msdn.microsoft.com/en-us/library/windows/desktop/hh871472(v=vs.85).aspx
+#if 0
+typedef enum _PROCESS_MITIGATION_POLICY { 
+  ProcessDEPPolicy                  = 0,
+  ProcessASLRPolicy                 = 1,
+  ProcessReserved1MitigationPolicy  = 2,
+  ProcessStrictHandleCheckPolicy    = 3,
+  ProcessSystemCallDisablePolicy    = 4,
+  MaxProcessMitigationPolicy        = 5
+} PROCESS_MITIGATION_POLICY, *PPROCESS_MITIGATION_POLICY;
 
-//typedef enum _PROCESS_MITIGATION_POLICY { 
-//  ProcessDEPPolicy                  = 0,
-//  ProcessASLRPolicy                 = 1,
-//  ProcessReserved1MitigationPolicy  = 2,
-//  ProcessStrictHandleCheckPolicy    = 3,
-//  ProcessSystemCallDisablePolicy    = 4,
-//  MaxProcessMitigationPolicy        = 5
-//} PROCESS_MITIGATION_POLICY, *PPROCESS_MITIGATION_POLICY;
-//
-//typedef struct _PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY {
-//  union {
-//      DWORD  Flags;
-//      struct {
-//          DWORD DisallowWin32kSystemCalls : 1;
-//          DWORD ReservedFlags : 31;
-//      };
-//  };
-//} PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY, *PPROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY;
-//
+typedef struct _PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY {
+  union {
+      DWORD  Flags;
+      struct {
+          DWORD DisallowWin32kSystemCalls : 1;
+          DWORD ReservedFlags : 31;
+      };
+  };
+} PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY, *PPROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY;
+#endif
+
 typedef BOOL (WINAPI * pGetProcessMitigationPolicy)(
     HANDLE hProcess,
     PROCESS_MITIGATION_POLICY MitigationPolicy,

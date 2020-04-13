@@ -1,0 +1,14 @@
+image: Visual Studio 2015
+
+build:
+  project: Sandboxie\Sandbox.sln
+  verbosity: minimal
+  
+platform:
+  - Win32
+  - x64
+
+configuration:
+  - SbieRelease
+# Build SbieDebug on appveyor is broken now
+#  - SbieDebug

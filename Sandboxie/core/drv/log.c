@@ -25,7 +25,6 @@
 #include "api.h"
 #include "util.h"
 
-
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -36,11 +35,11 @@ static void Log_Event_Msg(
     const WCHAR *string1,
     const WCHAR *string2);
 
-static void Log_Popup_Msg_2(
+/*static void Log_Popup_Msg_2(
     NTSTATUS error_code,
     const WCHAR *string1, ULONG string1_len,
     const WCHAR *string2, ULONG string2_len,
-    ULONG session_id);
+    ULONG session_id);*/
 
 
 //---------------------------------------------------------------------------
@@ -133,14 +132,16 @@ _FX void Log_Popup_Msg(
     if ((Driver_OsVersion >= DRIVER_WINDOWS_VISTA) && (session_id == 0))
         session_id = 1;
 
-    Log_Popup_Msg_2(
+    //Log_Popup_Msg_2(
+	Api_AddMessage(
         error_code, string1, string1_len, string2, string2_len, session_id);
 
     //
     // log message to SbieSvc and trigger SbieSvc to wake up and collect it
     //
 
-    Log_Popup_Msg_2(
+    //Log_Popup_Msg_2(
+	Api_AddMessage(
         error_code, string1, string1_len, string2, string2_len, -1);
 
     string1_len = 0;
@@ -155,7 +156,7 @@ _FX void Log_Popup_Msg(
 //---------------------------------------------------------------------------
 
 
-_FX void Log_Popup_Msg_2(
+/*_FX void Log_Popup_Msg_2(
     NTSTATUS error_code,
     const WCHAR *string1, ULONG string1_len,
     const WCHAR *string2, ULONG string2_len,
@@ -202,7 +203,7 @@ _FX void Log_Popup_Msg_2(
 
         Api_AddWork(work_item);
     }
-}
+}*/
 
 
 //---------------------------------------------------------------------------

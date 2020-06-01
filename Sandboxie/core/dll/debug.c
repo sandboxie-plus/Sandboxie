@@ -202,6 +202,7 @@ _FX int Debug_Init(void)
     // break
     //
 
+	OutputDebugString(L"Dll_ImageName: ");
     OutputDebugString(Dll_ImageName);
 
     //if (_wcsicmp(Dll_ImageName, L"explorer.exe") == 0) {
@@ -223,7 +224,6 @@ _FX int Debug_Init(void)
     if (0)
 #endif
     {
-
         while (! IsDebuggerPresent()) {
             OutputDebugString(L"BREAK\n");
             Sleep(500);

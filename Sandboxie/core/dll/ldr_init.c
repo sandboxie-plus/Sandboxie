@@ -399,7 +399,7 @@ _FX void Ldr_FixImagePath(void)
 
         //
         // if this is a forced program, we need to get the image path from
-        // the kernel (i.e. NtQueryVirtualMemory with MemorySectionName),
+        // the kernel (i.e. NtQueryVirtualMemory with MemoryMappedFilenameInformation),
         // in case the image path contains symbolic links or reparse points.
         // such links would have been translated by NtCreateFile if the
         // program was started by another program in the sandbox.  so if
@@ -471,7 +471,7 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
     BufferLength = 256;
     NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
     status = __sys_NtQueryVirtualMemory(
-        NtCurrentProcess(), (void *)Ldr_ImageBase, MemorySectionName,
+        NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
         NameUni, BufferLength, &BufferLength);
 
     if (status == STATUS_INFO_LENGTH_MISMATCH ||
@@ -480,7 +480,7 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
         Dll_Free(NameUni);
         NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
         status = __sys_NtQueryVirtualMemory(
-            NtCurrentProcess(), (void *)Ldr_ImageBase, MemorySectionName,
+            NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
             NameUni, BufferLength, &BufferLength);
     }
 

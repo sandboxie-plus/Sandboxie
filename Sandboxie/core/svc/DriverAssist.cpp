@@ -58,6 +58,8 @@ DriverAssist::DriverAssist()
     m_Threads = NULL;
     m_DriverReady = false;
 
+	m_last_message_number = 0;
+
     InitializeCriticalSection(&m_LogMessage_CritSec);
     InitializeCriticalSection(&m_critSecHostInjectedSvcs);
 }

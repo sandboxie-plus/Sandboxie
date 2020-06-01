@@ -12,7 +12,7 @@ echo. > %OUTPUT%
 
 for /F "tokens=3*" %%A in ('findstr /R "^#define.SBIE_INSTALLER_PATH\>"    %INPUT%') do ( echo ^^!define SBIE_INSTALLER_PATH %%A) >> %OUTPUT%
 
-for /F "tokens=3*" %%A in ('findstr /R "^#define.MY_VERSION_STRING\>"      %INPUT%') do ( echo ^^!define VERSION %%A) >> %OUTPUT%
+for /F "tokens=3*" %%A in ('findstr /R "^#define.MY_VERSION_STRING_EX\>"   %INPUT%') do ( echo ^^!define VERSION %%A) >> %OUTPUT%
 
 for /F "tokens=3*" %%A in ('findstr /R "^#define.MY_PRODUCT_NAME_STRING\>" %INPUT%') do ( set C=%%A %%B& echo ^^!define PRODUCT_FULL_NAME !C! & set C=!C: =!& echo ^^!define PRODUCT_NAME !C!) >> %OUTPUT%
 

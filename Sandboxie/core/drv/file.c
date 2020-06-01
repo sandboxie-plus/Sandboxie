@@ -989,7 +989,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
 
                 if (Session_MonitorCount &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
-                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4);
+                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
                 Mem_Free(ignore_str, ignore_str_len);
             }
@@ -1504,12 +1504,11 @@ skip_due_to_home_folder:
             mon_type |= MONITOR_OPEN;
         else
             mon_type |= MONITOR_DENY;
-        Session_MonitorPut(mon_type, mon_name);
+        Session_MonitorPut(mon_type, mon_name, proc->pid);
 
     } else if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(
-            MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer);
+        Session_MonitorPut(MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
     } else if (msg1313 && status == STATUS_ACCESS_DENIED
                        && device_type == FILE_DEVICE_DISK

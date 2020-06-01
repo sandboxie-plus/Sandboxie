@@ -62,11 +62,19 @@ SBIEAPI_EXPORT
 SBIEAPI_EXPORT LONG SbieApi_GetVersion(
     WCHAR *version_string);         // WCHAR [16]
 
-SBIEAPI_EXPORT
+/*SBIEAPI_EXPORT
 LONG SbieApi_GetWork(
     ULONG SessionId,
     void *Buffer,
-    ULONG *Length);
+    ULONG *Length);*/
+
+SBIEAPI_EXPORT 
+LONG SbieApi_GetMessage(
+	ULONG* MessageNum,
+	ULONG SessionId,
+	ULONG *MessageId,
+	wchar_t *Buffer,
+	ULONG Length);
 
 SBIEAPI_EXPORT LONG SbieApi_Log(
     ULONG msgid, const WCHAR *format, ...);
@@ -196,6 +204,13 @@ LONG SbieApi_MonitorGet(
     USHORT *Type,
     WCHAR *Name);                   // WCHAR [256]
 
+SBIEAPI_EXPORT
+LONG SbieApi_MonitorGetEx(
+	ULONG *SeqNum,
+	USHORT *Type,
+	ULONG64 *Pid,
+	WCHAR *Name);                   // WCHAR [256]
+
 
 //---------------------------------------------------------------------------
 
@@ -288,8 +303,6 @@ LONG SbieApi_QuerySymbolicLink(
 SBIEAPI_EXPORT
 LONG SbieApi_ReloadConf(ULONG session_id);
 
-SBIEAPI_EXPORT
-LONG SbieApi_ReloadConf2(ULONG session_id, const WCHAR *config_path);
 
 SBIEAPI_EXPORT
 LONG SbieApi_QueryConf(

@@ -252,7 +252,7 @@ _FX LONG SbieApi_GetVersion(
 // SbieApi_GetWork
 //---------------------------------------------------------------------------
 
-
+/*
 _FX LONG SbieApi_GetWork(
     ULONG SessionId,
     void *Buffer,
@@ -272,6 +272,40 @@ _FX LONG SbieApi_GetWork(
     status = SbieApi_Ioctl(parms);
 
     return status;
+}
+*/
+
+//---------------------------------------------------------------------------
+// SbieApi_GetMessage
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_GetMessage(
+	ULONG* MessageNum,
+	ULONG SessionId,
+	ULONG *MessageId,
+	wchar_t *Buffer,
+	ULONG Length)
+{
+	NTSTATUS status;
+	__declspec(align(8)) UNICODE_STRING64 msgtext;
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_GET_MESSAGE_ARGS *args = (API_GET_MESSAGE_ARGS *)parms;
+
+	msgtext.MaximumLength = (USHORT)Length;
+	msgtext.Buffer = (ULONG_PTR)Buffer;
+	msgtext.Length = 0;
+
+	memzero(parms, sizeof(parms));
+	args->func_code = API_GET_MESSAGE;
+	args->msg_num.val = MessageNum;
+	args->session_id.val = SessionId;
+	args->msgid.val = MessageId;
+	args->msgtext.val = &msgtext;
+
+	status = SbieApi_Ioctl(parms);
+
+	return status;
 }
 
 
@@ -1408,6 +1442,40 @@ _FX LONG SbieApi_MonitorGet(
     }
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorGetEx
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorGetEx(
+	ULONG *SeqNum,
+	USHORT *Type,
+	ULONG64 *Pid,
+	WCHAR *Name)                    // WCHAR [256]
+{
+	NTSTATUS status;
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_MONITOR_GET_EX_ARGS *args = (API_MONITOR_GET_EX_ARGS *)parms;
+
+	args->func_code = API_MONITOR_GET_EX;
+	args->name_seq.val64 = (ULONG64)(ULONG_PTR)SeqNum;
+	args->name_type.val64 = (ULONG64)(ULONG_PTR)Type;
+	args->name_pid.val64 = (ULONG64)(ULONG_PTR)Pid;
+	args->name_len.val64 = 256 * sizeof(WCHAR);
+	args->name_ptr.val64 = (ULONG64)(ULONG_PTR)Name;
+	status = SbieApi_Ioctl(parms);
+
+	if (!NT_SUCCESS(status)) {
+		if (Type)
+			*Type = 0;
+		if (Name)
+			*Name = L'\0';
+	}
+
+	return status;
 }
 
 

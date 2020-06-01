@@ -636,6 +636,7 @@ static UCHAR Support_BuiltinDomainRid[12] = {
 
 #endif  /* SBIEDLL_FORMATMESSAGE_ONLY */
 
+#if 1
 
 //---------------------------------------------------------------------------
 // SbieDll_FormatMessage_2
@@ -844,3 +845,5 @@ _FX WCHAR *SbieDll_FormatMessage2(
     ins[2] = ins2;
     return SbieDll_FormatMessage(code, ins);
 }
+
+#endif

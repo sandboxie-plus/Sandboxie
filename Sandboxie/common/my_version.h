@@ -22,7 +22,7 @@
 
 #define MY_VERSION_BINARY       5,40
 #define MY_VERSION_STRING       "5.40"
-#define MY_VERSION_STRING_EX	"5.40.1"
+#define MY_VERSION_STRING_EX	"5.40.2"
 
 // These #defines are used by either Resource Compiler, or by NSIC installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"

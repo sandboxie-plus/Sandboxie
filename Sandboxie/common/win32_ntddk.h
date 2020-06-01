@@ -218,7 +218,7 @@ typedef struct _OBJECT_BASIC_INFORMATION {
 } OBJECT_BASIC_INFORMATION, *POBJECT_BASIC_INFORMATION;
 
 typedef struct _OBJECT_NAME_INFORMATION {
-    UNICODE_STRING ObjectName;
+    UNICODE_STRING Name;
 } OBJECT_NAME_INFORMATION, *POBJECT_NAME_INFORMATION;
 
 typedef struct __PUBLIC_OBJECT_TYPE_INFORMATION {
@@ -921,6 +921,24 @@ typedef enum _PROCESSINFOCLASS {
     ProcessDebugObjectHandle,                           // 30
     ProcessDebugFlags,
     ProcessHandleTracing,
+	ProcessIoPriority,
+	ProcessExecuteFlags,
+	ProcessResourceManagement, // ProcessTlsInformation
+	ProcessCookie,
+	ProcessImageInformation,
+	ProcessCycleTime,
+	ProcessPagePriority,
+	ProcessInstrumentationCallback,						// 40
+	ProcessThreadStackAllocation,
+	ProcessWorkingSetWatchEx,
+	ProcessImageFileNameWin32,
+	ProcessImageFileMapping,
+	ProcessAffinityUpdateMode,
+	ProcessMemoryAllocationMode,
+	ProcessGroupInformation,
+	ProcessTokenVirtualizationEnabled,
+	ProcessConsoleHostProcess,
+	ProcessWindowInformation,							// 50
     MaxProcessInfoClass             // MaxProcessInfoClass should always be the last enum
     } PROCESSINFOCLASS;
 
@@ -931,7 +949,7 @@ typedef struct _PROCESS_BASIC_INFORMATION {
     LONG BasePriority;      // was type KPRIORITY
     ULONG_PTR UniqueProcessId;
     ULONG_PTR InheritedFromUniqueProcessId;
-} PROCESS_BASIC_INFORMATION;
+} PROCESS_BASIC_INFORMATION, *PPROCESS_BASIC_INFORMATION;
 
 typedef struct _PROCESS_IMAGE_FILE_NAME {
     USHORT  Length;
@@ -1241,56 +1259,110 @@ typedef enum _SYSTEM_INFORMATION_CLASS {
     SystemProcessorInformation,
     SystemPerformanceInformation,
     SystemTimeOfDayInformation,
-    SystemNotImplemented1,
+	SystemPathInformation,
     SystemProcessInformation,                               // 5
-    SystemCallCounts,
-    SystemConfigurationInformation,
-    SystemProcessorTimes,
-    SystemGlobalFlag,
-    SystemNotImplemented2,                                  // 10
+	SystemCallCountInformation,
+	SystemDeviceInformation,
+	SystemProcessorPerformanceInformation,
+	SystemFlagsInformation,
+    SystemCallTimeInformation,                              // 10
     SystemModuleInformation,                                // 11
-    SystemLockInformation,
-    SystemNotImplemented3,
-    SystemNotImplemented4,
-    SystemNotImplemented5,
+	SystemLocksInformation,
+	SystemStackTraceInformation,
+	SystemPagedPoolInformation,
+	SystemNonPagedPoolInformation,
     SystemHandleInformation,
     SystemObjectInformation,
-    SystemPagefileInformation,
-    SystemInstructionEmulationCounts,
-    SystemInvalidInfoClass1,
-    SystemCacheInformation,
-    SystemPoolTagInformation,
-    SystemProcessorStatistics,
-    SystemDpcInformation,
-    SystemNotImplemented6,
-    SystemLoadImage,
-    SystemUnloadImage,
-    SystemTimeAdjustment,
-    SystemNotImplemented7,
-    SystemNotImplemented8,
-    SystemNotImplemented9,
+	SystemPageFileInformation,
+	SystemVdmInstemulInformation,
+	SystemVdmBopInformation,
+	SystemFileCacheInformation,
+	SystemPoolTagInformation,
+	SystemInterruptInformation,
+	SystemDpcBehaviorInformation,
+	SystemFullMemoryInformation,
+	SystemLoadGdiDriverInformation,
+	SystemUnloadGdiDriverInformation,
+	SystemTimeAdjustmentInformation,
+	SystemSummaryMemoryInformation,
+	SystemMirrorMemoryInformation,
+	SystemPerformanceTraceInformation,
     SystemCrashDumpInformation,
     SystemExceptionInformation,                             // 33
     SystemCrashDumpStateInformation,
     SystemKernelDebuggerInformation,
     SystemContextSwitchInformation,
     SystemRegistryQuotaInformation,                         // 37
-    SystemLoadAndCallImage,
-    SystemPrioritySeparation,
-    SystemNotImplemented10,
-    SystemNotImplemented11,
-    SystemInvalidInfoClass2,
-    SystemInvalidInfoClass3,
-    SystemTimeZoneInformation,
+	SystemExtendServiceTableInformation,
+	SystemPrioritySeperation,
+	SystemVerifierAddDriverInformation,
+	SystemVerifierRemoveDriverInformation,
+	SystemProcessorIdleInformation,
+	SystemLegacyDriverInformation,
+    SystemCurrentTimeZoneInformation,
     SystemLookasideInformation,                             // 45
-    SystemSetTimeSlipEvent,
+	SystemTimeSlipNotification,
     SystemSessionCreate,
     SystemSessionDetach,
-    SystemInvalidInfoClass4,
+	SystemSessionInformation,
     SystemRangeStartInformation,                            // 50
     SystemVerifierInformation,
-    SystemAddVerifier,
-    SystemSessionProcessesInformation
+	SystemVerifierThunkExtend,
+	SystemSessionProcessInformation,
+	SystemLoadGdiDriverInSystemSpace,
+	SystemNumaProcessorMap,
+	SystemPrefetcherInformation,
+	SystemExtendedProcessInformation,
+	SystemRecommendedSharedDataAlignment,
+	SystemComPlusPackage,
+	SystemNumaAvailableMemory,
+	SystemProcessorPowerInformation,
+	SystemEmulationBasicInformation,				// WOW64
+	SystemEmulationProcessorInformation,		// WOW64
+	SystemExtendedHandleInformation,
+	SystemLostDelayedWriteInformation,
+	SystemBigPoolInformation,
+	SystemSessionPoolTagInformation,
+	SystemSessionMappedViewInformation,
+	SystemHotpatchInformation,
+	SystemObjectSecurityMode,
+	SystemWatchdogTimerHandler,
+	SystemWatchdogTimerInformation,
+	SystemLogicalProcessorInformation,
+	SystemWow64SharedInformationObsolete,
+	SystemRegisterFirmwareTableInformationHandler,
+	SystemFirmwareTableInformation,
+	SystemModuleInformationEx,
+	SystemVerifierTriageInformation,
+	SystemSuperfetchInformation,
+	SystemMemoryListInformation,
+	SystemFileCacheInformationEx,
+	SystemThreadPriorityClientIdInformation,
+	SystemProcessorIdleCycleTimeInformation,
+	SystemVerifierCancellationInformation,
+	SystemProcessorPowerInformationEx,
+	SystemRefTraceInformation,
+	SystemSpecialPoolInformation,
+	SystemProcessIdInformation,
+	SystemErrorPortInformation,
+	SystemBootEnvironmentInformation,
+	SystemHypervisorInformation,
+	SystemVerifierInformationEx,
+	SystemTimeZoneInformation,
+	SystemImageFileExecutionOptionsInformation,
+	SystemCoverageInformation,
+	SystemPrefetchPatchInformation,
+	SystemVerifierFaultsInformation,
+	SystemSystemPartitionInformation,
+	SystemSystemDiskInformation,
+	SystemProcessorPerformanceDistribution,
+	SystemNumaProximityNodeInformation,
+	SystemDynamicTimeZoneInformation,
+	SystemCodeIntegrityInformation,
+	SystemProcessorMicrocodeUpdateInformation,
+	SystemProcessorBrandString,
+	SystemVirtualAddressInformation,
+	MaxSystemInfoClass
 } SYSTEM_INFORMATION_CLASS;
 
 typedef struct _MODULE_INFO {
@@ -1711,10 +1783,11 @@ __declspec(dllimport) NTSTATUS NtUnloadDriver(
 //---------------------------------------------------------------------------
 
 typedef enum _MEMORY_INFORMATION_CLASS {
-    MemoryBasicInformation,
-    MemoryWorkingSetList,
-    MemorySectionName,
-    MemoryBasicVlmInformation
+	MemoryBasicInformation,
+	MemoryWorkingSetInformation,
+	MemoryMappedFilenameInformation,
+	MemoryRegionInformation,
+	MemoryWorkingSetExInformation
 } MEMORY_INFORMATION_CLASS;
 
 __declspec(dllimport) NTSTATUS NtAllocateVirtualMemory(

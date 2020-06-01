@@ -1730,7 +1730,7 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
             } else {
 
                 UNICODE_STRING *uni =
-                    &((OBJECT_NAME_INFORMATION *)dirname)->ObjectName;
+                    &((OBJECT_NAME_INFORMATION *)dirname)->Name;
                 length = uni->Length / sizeof(WCHAR);
                 if (length > 95)
                     length = 95;

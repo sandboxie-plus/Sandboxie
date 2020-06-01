@@ -308,7 +308,7 @@ _FX NTSTATUS Obj_NtQueryVirtualMemory(
     // if the request is not for an object name, then call the system
     //
 
-    if (MemoryInformationClass != MemorySectionName) {
+    if (MemoryInformationClass != MemoryMappedFilenameInformation) {
 
         return __sys_NtQueryVirtualMemory(
             ProcessHandle, BaseAddress, MemoryInformationClass,
@@ -328,7 +328,7 @@ _FX NTSTATUS Obj_NtQueryVirtualMemory(
     }
 
     status = __sys_NtQueryVirtualMemory(
-        ProcessHandle, BaseAddress, MemorySectionName,
+        ProcessHandle, BaseAddress, MemoryMappedFilenameInformation,
         name, maxlen, &outlen);
 
     if (status == STATUS_INFO_LENGTH_MISMATCH ||
@@ -340,7 +340,7 @@ _FX NTSTATUS Obj_NtQueryVirtualMemory(
         name = Dll_AllocTemp((ULONG)maxlen);
 
         status = __sys_NtQueryVirtualMemory(
-            ProcessHandle, BaseAddress, MemorySectionName,
+            ProcessHandle, BaseAddress, MemoryMappedFilenameInformation,
             name, maxlen, &outlen);
     }
 

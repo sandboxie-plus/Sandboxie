@@ -461,7 +461,7 @@ _FX NTSTATUS File_GetName(
         if (! NT_SUCCESS(status))
             return status;
 
-        uni = &((OBJECT_NAME_INFORMATION *)name)->ObjectName;
+        uni = &((OBJECT_NAME_INFORMATION *)name)->Name;
 
 #ifdef WOW64_FS_REDIR
         //

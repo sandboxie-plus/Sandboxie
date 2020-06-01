@@ -211,6 +211,10 @@ _FX void Dll_InitInjected(void)
     ULONG BoxKeyPathLen;
     ULONG BoxIpcPathLen;
 
+#ifdef WITH_DEBUG
+	OutputDebugString(L"SbieDll: Dll_InitInjected");
+#endif WITH_DEBUG
+
     //
     // confirm the process is sandboxed before going further
     //
@@ -690,7 +694,7 @@ _FX ULONG_PTR Dll_Ordinal1(
     {
         Ldr_Inject_Init(bHostInject);
     }
-
+	
     //
     // conclude the detour by passing control back to the original
     // RtlFindActivationContextSectionString.  the detour code used

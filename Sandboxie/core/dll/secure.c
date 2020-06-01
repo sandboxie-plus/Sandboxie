@@ -668,7 +668,7 @@ _FX NTSTATUS Secure_NtSetSecurityObject(
         OBJECT_NAME_INFORMATION *name =
             (OBJECT_NAME_INFORMATION *)name_space;
         status = Obj_GetObjectName(Handle, name, &name_len);
-        if (NT_SUCCESS(status) && name->ObjectName.Length == 0) {
+        if (NT_SUCCESS(status) && name->Name.Length == 0) {
 
             IsUnnamedObject = TRUE;
         }

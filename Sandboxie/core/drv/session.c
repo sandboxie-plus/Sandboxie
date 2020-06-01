@@ -26,6 +26,7 @@
 #include "api.h"
 #include "process.h"
 #include "obj.h"
+#include "log_buff.h"
 
 
 //---------------------------------------------------------------------------
@@ -70,9 +71,7 @@ struct _SESSION {
     // resource monitor
     //
 
-    WCHAR *monitor_buf;
-    WCHAR *monitor_read_ptr;
-    WCHAR *monitor_write_ptr;
+	LOG_BUFFER* monitor_log;
 
 };
 
@@ -109,6 +108,8 @@ static NTSTATUS Session_Api_MonitorPut(PROCESS *proc, ULONG64 *parms);
 static NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms);
+
+static NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms);
 
 
 //---------------------------------------------------------------------------
@@ -150,6 +151,7 @@ _FX BOOLEAN Session_Init(void)
     Api_SetFunction(API_MONITOR_PUT,            Session_Api_MonitorPut);
     Api_SetFunction(API_MONITOR_PUT2,           Session_Api_MonitorPut2);
     Api_SetFunction(API_MONITOR_GET,            Session_Api_MonitorGet);
+	Api_SetFunction(API_MONITOR_GET_EX,			Session_Api_MonitorGetEx);
 
     //
     // initialize set of recognized objects types for Session_Api_MonitorPut
@@ -338,8 +340,8 @@ _FX void Session_Cancel(HANDLE ProcessId)
     while (session) {
         if ((session->leader_pid == ProcessId) || (! ProcessId)) {
 
-            if (session->monitor_buf) {
-                ExFreePoolWithTag(session->monitor_buf, tzuk);
+            if (session->monitor_log) {
+				log_buffer_free(session->monitor_log);
                 InterlockedDecrement(&Session_MonitorCount);
             }
 
@@ -573,7 +575,7 @@ _FX BOOLEAN Session_IsForceDisabled(ULONG SessionId)
 //---------------------------------------------------------------------------
 
 
-_FX void Session_MonitorPut(USHORT type, const WCHAR *name)
+_FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 {
     SESSION *session;
     KIRQL irql;
@@ -582,41 +584,22 @@ _FX void Session_MonitorPut(USHORT type, const WCHAR *name)
     if (! session)
         return;
 
-    if (session->monitor_buf && *name) {
+    if (session->monitor_log && *name) {
 
-        WCHAR *buf0 = session->monitor_buf;
-        WCHAR *wptr = session->monitor_write_ptr;
-        WCHAR *rptr = session->monitor_read_ptr;
+		ULONG64 pid64 = (ULONG64)pid;
+		SIZE_T data_len = (wcslen(name) + 1) * 2;
 
-        ULONG name_len = wcslen(name) + 1;
+		//[Type 2][PID 8][Data n*2]
+		SIZE_T entry_size = 2 + 8 + data_len;
 
-        BOOLEAN first = TRUE;
-
-        while (name_len) {
-
-            if (first) {
-                first = FALSE;
-                *wptr = type;
-            } else {
-                *wptr = *name;
-                ++name;
-                --name_len;
-            }
-
-            ++wptr;
-            if (wptr >= buf0 + SESSION_MONITOR_BUF_SIZE)
-                wptr = buf0;
-            if (wptr == rptr) {
-                Log_Msg0(MSG_MONITOR_OVERFLOW);
-                *buf0 = L'\0';
-                wptr = buf0;
-                session->monitor_read_ptr = buf0;
-                break;
-            }
-        }
-
-        *wptr = L'\0';
-        session->monitor_write_ptr = wptr;
+		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log);
+		if (write_ptr) {
+			log_buffer_push_bytes((CHAR*)&type, 2, &write_ptr, session->monitor_log);
+			log_buffer_push_bytes((CHAR*)&pid64, 8, &write_ptr, session->monitor_log);
+			log_buffer_push_bytes((CHAR*)name, data_len, &write_ptr, session->monitor_log);
+		}
+		else // this can only happen when the entire buffer is to small to hold this entire entry
+			Log_Msg0(MSG_MONITOR_OVERFLOW);
     }
 
     Session_Unlock(irql);
@@ -650,7 +633,7 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
         *out_flag = FALSE;
         session = Session_Get(FALSE, -1, &irql);
         if (session) {
-            if (session->monitor_buf)
+            if (session->monitor_log)
                 *out_flag = TRUE;
             Session_Unlock(irql);
         }
@@ -676,24 +659,18 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
         session = Session_Get(FALSE, -1, &irql);
         if (session) {
 
-            if (EnableMonitor && (! session->monitor_buf)) {
+            if (EnableMonitor && (! session->monitor_log)) {
 
-                session->monitor_buf = ExAllocatePoolWithTag(PagedPool,
-                    SESSION_MONITOR_BUF_SIZE * sizeof(WCHAR), tzuk);
-                session->monitor_write_ptr = session->monitor_buf;
-                session->monitor_read_ptr  = session->monitor_buf;
-                if (session->monitor_buf) {
-                    *session->monitor_buf = L'\0';
+				session->monitor_log = log_buffer_init(SESSION_MONITOR_BUF_SIZE * sizeof(WCHAR));
+                if (session->monitor_log) {
                     InterlockedIncrement(&Session_MonitorCount);
                 } else
                     Log_Msg0(MSG_1201);
 
-            } else if ((! EnableMonitor) && session->monitor_buf) {
+            } else if ((! EnableMonitor) && session->monitor_log) {
 
-                ExFreePoolWithTag(session->monitor_buf, tzuk);
-                session->monitor_buf = NULL;
-                session->monitor_write_ptr = session->monitor_buf;
-                session->monitor_read_ptr  = session->monitor_buf;
+				log_buffer_free(session->monitor_log);
+				session->monitor_log = NULL;
                 InterlockedDecrement(&Session_MonitorCount);
             }
 
@@ -895,7 +872,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
             name[1] = L'\0';
         }
 
-        Session_MonitorPut(type, name);
+        Session_MonitorPut(type, name, proc->pid);
     }
 
     Mem_Free(name, 260 * sizeof(WCHAR));
@@ -908,12 +885,25 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 // Session_Api_MonitorGet
 //---------------------------------------------------------------------------
 
-
 _FX NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms)
 {
-    API_MONITOR_GET_PUT_ARGS *args = (API_MONITOR_GET_PUT_ARGS *)parms;
+	API_MONITOR_GET_PUT_ARGS *args = (API_MONITOR_GET_PUT_ARGS *)parms;
+	API_MONITOR_GET_EX_ARGS args2 = { args->func_code, 0, args->name_type.val64, 0, args->name_len.val64, args->name_ptr.val64 };
+
+	return Session_Api_MonitorGetEx(proc, (ULONG64*)&args2);
+}
+
+//---------------------------------------------------------------------------
+// Session_Api_MonitorGet
+//---------------------------------------------------------------------------
+
+_FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
+{
+	API_MONITOR_GET_EX_ARGS *args = (API_MONITOR_GET_EX_ARGS *)parms;
     NTSTATUS status;
+	ULONG *seq_num;
     USHORT *user_type;
+	ULONG64 *user_pid;
     ULONG name_len;
     WCHAR *user_name;
     SESSION *session;
@@ -922,8 +912,18 @@ _FX NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms)
     if (proc)
         return STATUS_NOT_IMPLEMENTED;
 
+	seq_num = args->name_seq.val;
+	if (seq_num != NULL) {
+		ProbeForRead(seq_num, sizeof(ULONG), sizeof(ULONG));
+		ProbeForWrite(seq_num, sizeof(ULONG), sizeof(ULONG));
+	}
+
     user_type = args->name_type.val;
     ProbeForWrite(user_type, sizeof(USHORT), sizeof(USHORT));
+
+	user_pid = args->name_pid.val;
+	if(user_pid != NULL)
+		ProbeForWrite(user_pid, sizeof(ULONG64), sizeof(ULONG64));
 
     name_len = args->name_len.val / sizeof(WCHAR);
     if ((! name_len) || name_len > 256)
@@ -932,6 +932,8 @@ _FX NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms)
     ProbeForWrite(user_name, name_len * sizeof(WCHAR), sizeof(WCHAR));
 
     *user_type = 0;
+	if (user_pid != NULL)
+		*user_pid = 0;
     *user_name = L'\0';
     status = STATUS_SUCCESS;
 
@@ -941,39 +943,31 @@ _FX NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms)
 
     __try {
 
-        if (session->monitor_buf) {
+        if (session->monitor_log) {
 
-            WCHAR *buf0 = session->monitor_buf;
-            WCHAR *rptr = session->monitor_read_ptr;
-            BOOLEAN first = TRUE;
+			CHAR* read_ptr = NULL;
+			if (seq_num != NULL)
+				read_ptr = log_buffer_get_next(*seq_num, session->monitor_log);
+			else if (session->monitor_log->buffer_size > 0) // for compatybility with older versions we return the oldest entry
+				read_ptr = session->monitor_log->buffer_start_ptr;
 
-            if (*rptr) {
+			if (read_ptr != NULL) {
+				LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, session->monitor_log);
+				LOG_BUFFER_SEQ_T seq_number = log_buffer_get_seq_num(&read_ptr, session->monitor_log);
+				if (seq_num != NULL)
+					*seq_num = seq_number;
+				//[Type 2][PID 8][Data n*2]
+				log_buffer_get_bytes((CHAR*)user_type, 2, &read_ptr, session->monitor_log);
+				ULONG64 pid64;
+				log_buffer_get_bytes((CHAR*)&pid64, 8, &read_ptr, session->monitor_log);
+				if (user_pid != NULL)
+					*user_pid = pid64;
+				log_buffer_get_bytes((CHAR*)user_name, entry_size - (2 + 8), &read_ptr, session->monitor_log);
+			}
 
-                while (*rptr) {
-
-                    if (first) {
-                        first = FALSE;
-                        *user_type = *rptr;
-                    } else if (name_len) {
-                        *user_name = *rptr;
-                        ++user_name;
-                        --name_len;
-                    } else
-                        status = STATUS_BUFFER_OVERFLOW;
-
-                    ++rptr;
-                    if (rptr >= buf0 + SESSION_MONITOR_BUF_SIZE)
-                        rptr = buf0;
-                }
-
-                ++rptr;
-                if (rptr >= buf0 + SESSION_MONITOR_BUF_SIZE)
-                    rptr = buf0;
-                session->monitor_read_ptr = rptr;
-
-                if (name_len)
-                    *user_name = L'\0';
-            }
+			// for compatybility with older versions we fall back to clearing the returned entry
+			if (seq_num != NULL)
+				log_buffer_pop_entry(session->monitor_log);
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {

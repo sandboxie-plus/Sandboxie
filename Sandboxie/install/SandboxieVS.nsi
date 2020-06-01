@@ -27,8 +27,8 @@ SetCompressor /SOLID /FINAL lzma
 ;----------------------------------------------------------------------------
 ; these are the build-time config settings.  Need to be cmd line args or something better.
 ; pick either 32 or 64 bit
-!define _BUILDARCH		Win32
-;!define _BUILDARCH		x64
+;!define _BUILDARCH		Win32
+!define _BUILDARCH		x64
 
 ; uncomment this line if you want to make the special versions that download VC Redist
 ;!define INCLUDE_VCREDIST_DNLD
@@ -764,21 +764,21 @@ FunctionEnd
 ; We download various files during install just to keep stats on activity
 
 Function DownloadStatPng
-
-	Pop $0	; Get the parameter (file name to download)
-	${If} ${RunningX64}
-	SetRegView 64
-	${EndIf}
-	ReadRegStr $1 HKLM "SOFTWARE\Microsoft\Cryptography" "MachineGuid"
-	StrCpy $2 "https://www.sandboxie.com/img/$0?SessionId=$1"
-	
-	;NSISdl::download_quiet /TIMEOUT=3000 $2 $TEMP\$0
-	inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $2 $TEMP\$0 /END
-	Pop $0 ;Get the return value
-	;MessageBox MB_OK|MB_ICONSTOP "DownloadStatPng:  $2$\n$0"
-	${If} ${RunningX64}
-	SetRegView 32
-	${EndIf}
+;
+;	Pop $0	; Get the parameter (file name to download)
+;	${If} ${RunningX64}
+;	SetRegView 64
+;	${EndIf}
+;	ReadRegStr $1 HKLM "SOFTWARE\Microsoft\Cryptography" "MachineGuid"
+;	StrCpy $2 "https://www.sandboxie.com/img/$0?SessionId=$1"
+;	
+;	;NSISdl::download_quiet /TIMEOUT=3000 $2 $TEMP\$0
+;	inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $2 $TEMP\$0 /END
+;	Pop $0 ;Get the return value
+;	;MessageBox MB_OK|MB_ICONSTOP "DownloadStatPng:  $2$\n$0"
+;	${If} ${RunningX64}
+;	SetRegView 32
+;	${EndIf}
 FunctionEnd
 
 

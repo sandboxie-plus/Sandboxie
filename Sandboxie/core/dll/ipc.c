@@ -575,7 +575,7 @@ _FX NTSTATUS Ipc_GetName(
         if (! NT_SUCCESS(status))
             return status;
 
-        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->ObjectName.Buffer;
+        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->Name.Buffer;
 
         if (! *OutTruePath) {
 
@@ -588,7 +588,7 @@ _FX NTSTATUS Ipc_GetName(
         }
 
         name = (*OutTruePath)
-             + ((OBJECT_NAME_INFORMATION *)name)->ObjectName.Length
+             + ((OBJECT_NAME_INFORMATION *)name)->Name.Length
                     / sizeof(WCHAR);
 
         if (objname_len) {
@@ -972,10 +972,10 @@ _FX void Ipc_AdjustPortPath(UNICODE_STRING *ObjectName)
         status = Obj_GetObjectName(handle, name, &length);
 
         if (NT_SUCCESS(status) &&
-                name->ObjectName.Length >= ParentLength * sizeof(WCHAR) &&
-            0 == _wcsnicmp(name->ObjectName.Buffer, Buffer, ParentLength)) {
+                name->Name.Length >= ParentLength * sizeof(WCHAR) &&
+            0 == _wcsnicmp(name->Name.Buffer, Buffer, ParentLength)) {
 
-            wmemcpy(Buffer, name->ObjectName.Buffer, ParentLength);
+            wmemcpy(Buffer, name->Name.Buffer, ParentLength);
         }
 
         Dll_Free(name);

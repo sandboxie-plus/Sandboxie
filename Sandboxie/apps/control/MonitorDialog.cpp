@@ -41,6 +41,8 @@ CMonitorDialog::CMonitorDialog(CWnd *pParentWnd)
         m_username[0] = L'\0';
     m_username[255] = L'\0';
     m_username_len = wcslen(m_username);
+
+	m_last_entry_seq_num = 0;
 }
 
 
@@ -105,15 +107,22 @@ void CMonitorDialog::OnIdle()
     static const WCHAR *_Separator  = L"   -------------------------------";
 
     CListBox *listbox = (CListBox *)GetDlgItem(ID_MESSAGE_LIST);
-    WCHAR name[280];
+    WCHAR name[300];
 
     while (1) {
 
+		ULONG seq_num = m_last_entry_seq_num;
         USHORT type;
-        SbieApi_MonitorGet(&type, &name[12]);
+		ULONG64 pid;
+        SbieApi_MonitorGetEx(&seq_num, &type, &pid, &name[12]);
         if ((! type) || (! name[12]))
             break;
 
+		if(seq_num != m_last_entry_seq_num + 1)
+			SbieApi_Log(MSG_1242, L"Resource access logger overflow!"); // MSG_MONITOR_OVERFLOW
+		m_last_entry_seq_num = seq_num;
+
+		// privacy protection, hide username
         while (m_username_len) {
             WCHAR *username_ptr = wcsstr(&name[12], m_username);
             if (! username_ptr)
@@ -126,12 +135,11 @@ void CMonitorDialog::OnIdle()
         name[10] = L' ';
         name[9] = L' ';
         if (type & MONITOR_OPEN) {
-            type &= ~MONITOR_OPEN;
             name[9] = L'O';
         } else if (type & MONITOR_DENY) {
-            type &= ~MONITOR_DENY;
             name[9] = L'X';
         }
+		type &= 0x0FFF;
 
         const WCHAR *PrefixPtr = _Unknown;
         if (type == MONITOR_PIPE)
@@ -151,6 +159,8 @@ void CMonitorDialog::OnIdle()
         else if (type == MONITOR_OTHER)
             PrefixPtr = _Other;
         wcsncpy(name, PrefixPtr, 9);
+
+		wsprintf(&name[wcslen(name)], L"; PID: %I64u", pid);
 
         int index = listbox->AddString(name);
 

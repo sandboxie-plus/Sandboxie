@@ -50,7 +50,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMenu->addSeparator();
 	m_pMenuCleanUp = m_pMenu->addAction(tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuRename = m_pMenu->addAction(tr("Rename Sadbox"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRename = m_pMenu->addAction(tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRemove = m_pMenu->addAction(tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMenuBox = m_pMenu->actions().count();
 

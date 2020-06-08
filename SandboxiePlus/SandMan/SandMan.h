@@ -8,7 +8,7 @@
 #include "Models/ResMonModel.h"
 
 #define VERSION_MJR		0
-#define VERSION_MIN 	1
+#define VERSION_MIN 	2
 #define VERSION_REV 	0
 #define VERSION_UPD 	0
 
@@ -31,13 +31,24 @@ public:
 	static void			CheckResults(QList<SB_STATUS> Results);
 
 protected:
+	SB_STATUS			ConnectSbie();
+	SB_STATUS			DisconnectSbie();
+	SB_STATUS			StopSbie(bool andRemove = false);
+
+	bool				IsFullyPortable();
+
 	void				closeEvent(QCloseEvent *e);
 	void				timerEvent(QTimerEvent* pEvent);
 	int					m_uTimerID;
+	bool				m_bConnectPending;
+	bool				m_bStopPending;
 
 	CApiLog*			m_ApiLog;
 
 public slots:
+	void				OnMessage(const QString&);
+
+	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message);
 	void				OnApiLogEntry(const QString& Message);
 
@@ -48,8 +59,11 @@ private slots:
 	//void				OnColumnsChanged();
 	//void				OnMenu(const QPoint& Point);
 
+	void				OnMenuHover(QAction* action);
+
 	void				OnNewBox();
 	void				OnEmptyAll();
+	void				OnMaintenance();
 
 	void				OnCleanUp();
 	void				OnSetKeep();
@@ -89,12 +103,30 @@ private:
 
 
 	QMenu*				m_pMenuFile;
-	QAction*			m_pMenuNew;
-	QAction*			m_pMenuEmptyAll;
-	QAction*			m_pMenuExit;
+	QAction*			m_pNew;
+	QAction*			m_pEmptyAll;
+	QMenu*				m_pMaintenance;
+	QAction*			m_pConnect;
+	QAction*			m_pDisconnect;
+	QMenu*				m_pMaintenanceItems;
+	QAction*			m_pInstallDrv;
+	QAction*			m_pStartDrv;
+	QAction*			m_pStopDrv;
+	QAction*			m_pUninstallDrv;
+	QAction*			m_pInstallSvc;
+	QAction*			m_pStartSvc;
+	QAction*			m_pStopSvc;
+	QAction*			m_pUninstallSvc;
+	QAction*			m_pStopAll;
+	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;
-	QAction*			m_pCleanUp;
+	QMenu*				m_pCleanUpMenu;
+	QAction*			m_pCleanUpProcesses;
+	QAction*			m_pCleanUpMsgLog;
+	QAction*			m_pCleanUpResLog;
+	QAction*			m_pCleanUpApiLog;
+	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
 
 	QMenu*				m_pMenuOptions;
@@ -104,12 +136,13 @@ private:
 	QAction*			m_pEnableLogging;
 
 	QMenu*				m_pMenuHelp;
-	QAction*			m_pMenuAbout;
-	QAction*			m_pMenuSupport;
-	QAction*			m_pMenuAboutQt;
+	QAction*			m_pAbout;
+	QAction*			m_pSupport;
+	QAction*			m_pAboutQt;
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	bool				m_bIconEmpty;
 
 	bool				m_bExit;
 };

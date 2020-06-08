@@ -18,6 +18,7 @@
 #pragma once
 
 #include <QThread>
+#include <QFileSystemWatcher>
 
 #include "qsbieapi_global.h"
 
@@ -61,11 +62,14 @@ public:
 	CSbieAPI(QObject* parent = 0);
 	virtual ~CSbieAPI();
 
-	virtual bool			IsValid() const;
+	virtual SB_STATUS		Connect(bool takeOver = false, bool andLoad = true);
+	virtual SB_STATUS		Disconnect();
+	virtual bool			IsConnected() const;
 
 	virtual QString			GetVersion();
 
 	virtual SB_STATUS		TakeOver();
+	virtual SB_STATUS		WatchIni(bool bEnable = true);
 
 	virtual QString			GetSbiePath() const { return m_SbiePath; }
 	virtual QString			GetIniPath() const { return m_IniPath; }
@@ -80,6 +84,8 @@ public:
 	virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
+
+	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
 
 	virtual SB_STATUS		TerminateAll();
 
@@ -102,18 +108,22 @@ public:
 	virtual bool			IsMonitoring();
 
 	virtual QList<CResLogEntryPtr> GetResLog() const { QReadLocker Lock(&m_ResLogMutex); return m_ResLogList; }
+	virtual void			ClearResLog() { QWriteLocker Lock(&m_ResLogMutex); m_ResLogList.clear(); }
 
 signals:
+	void					StatusChanged();
 	void					LogMessage(const QString& Message);
 
 private slots:
 	//virtual void			OnMonitorEntry(quint64 ProcessId, quint32 Type, const QString& Value);
+	virtual void			OnIniChanged(const QString &path);
 
 protected:
 	friend class CSandBox;
 	friend class CBoxedProcess;
 
 	virtual QString			GetSbieHome() const;
+	virtual QString			GetIniPath(bool* IsHome) const;
 
 	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command);
 
@@ -147,8 +157,15 @@ protected:
 
 	QString					m_SbiePath;
 	QString					m_IniPath;
+	QFileSystemWatcher		m_IniWatcher;
 
 	bool					m_bTerminate;
+
 private:
+	mutable QMutex			m_ThreadMutex;
+	mutable QWaitCondition	m_ThreadWait;
+
+	SB_STATUS CallServer(void* req, void* rpl) const;
+	SB_STATUS SbieIniSet(void *RequestBuf, void *pPasswordWithinRequestBuf, const QString& SectionName, const QString& SettingName);
 	struct SSbieAPI* m;
 };

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SandMan.h"
+#include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/ExitDialog.h"
 #include "../MiscHelpers/Common/SortFilterProxyModel.h"
 #include "Views/SbieView.h"
@@ -7,6 +8,7 @@
 #include <QWinEventNotifier>
 #include "ApiLog.h"
 #include "./Dialogs/MultiErrorDialog.h"
+#include "../QSbieAPI/SbieUtils.h"
 
 CSbieAPI* theAPI = NULL;
 
@@ -15,7 +17,7 @@ CSbieAPI* theAPI = NULL;
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
 
-BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result);
+//BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result);
 
 class CNativeEventFilter : public QAbstractNativeEventFilter
 {
@@ -31,9 +33,9 @@ public:
 
 			if (msg->message == WM_NOTIFY)
 			{
-				LRESULT ret;
-				if (OnWM_Notify((NMHDR*)msg->lParam, &ret))
-					*result = ret;
+				//LRESULT ret;
+				//if (OnWM_Notify((NMHDR*)msg->lParam, &ret))
+				//	*result = ret;
 				return true;
 			}
 			else if (msg->message == WM_DEVICECHANGE)
@@ -77,12 +79,15 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bExit = false;
 
 	theAPI = new CSbieAPI(this);
+	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
-	appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
 	this->setWindowTitle(appTitle);
 
-	theAPI->TakeOver();
+	m_ApiLog = NULL;
+
+	m_bConnectPending = false;
+	m_bStopPending = false;
 
 	m_pMainWidget = new QWidget();
 	m_pMainLayout = new QVBoxLayout(m_pMainWidget);
@@ -193,17 +198,43 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pApiLog->setEnabled(false);
 	//
 
+	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
+
 	m_pMenuFile = menuBar()->addMenu(tr("&Sandbox"));
-		m_pMenuNew = m_pMenuFile->addAction(QIcon(":/Actions/NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
+		m_pNew = m_pMenuFile->addAction(QIcon(":/Actions/NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
 		m_pMenuFile->addSeparator();
-		m_pMenuEmptyAll = m_pMenuFile->addAction(QIcon(":/Actions/EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
+		m_pEmptyAll = m_pMenuFile->addAction(QIcon(":/Actions/EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pMenuFile->addSeparator();
-		m_pMenuExit = m_pMenuFile->addAction(QIcon(":/Actions/Exit"), tr("Exit"), this, SLOT(OnExit()));
+		m_pMaintenance = m_pMenuFile->addMenu(QIcon(":/Actions/Maintenance"), tr("&Maintenance"));
+			m_pConnect = m_pMaintenance->addAction(QIcon(":/Actions/Connect"), tr("Connect"), this, SLOT(OnMaintenance()));
+			m_pDisconnect = m_pMaintenance->addAction(QIcon(":/Actions/Disconnect"), tr("Disconnect"), this, SLOT(OnMaintenance()));
+			m_pMaintenance->addSeparator();
+			m_pStopAll = m_pMaintenance->addAction(QIcon(":/Actions/Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
+			m_pMaintenance->addSeparator();
+			m_pMaintenanceItems = m_pMaintenance->addMenu(QIcon(":/Actions/Advanced"), tr("&Advanced"));
+				m_pInstallDrv = m_pMaintenanceItems->addAction(tr("Install Driver"), this, SLOT(OnMaintenance()));
+				m_pStartDrv = m_pMaintenanceItems->addAction(tr("Start Driver"), this, SLOT(OnMaintenance()));
+				m_pStopDrv = m_pMaintenanceItems->addAction(tr("Stop Driver"), this, SLOT(OnMaintenance()));
+				m_pUninstallDrv = m_pMaintenanceItems->addAction(tr("Uninstall Driver"), this, SLOT(OnMaintenance()));
+				m_pMaintenanceItems->addSeparator();
+				m_pInstallSvc = m_pMaintenanceItems->addAction(tr("Install Service"), this, SLOT(OnMaintenance()));
+				m_pStartSvc = m_pMaintenanceItems->addAction(tr("Start Service"), this, SLOT(OnMaintenance()));
+				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
+				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
+				
+		m_pMenuFile->addSeparator();
+		m_pExit = m_pMenuFile->addAction(QIcon(":/Actions/Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
 	m_pMenuView = menuBar()->addMenu(tr("&View"));
-		m_pCleanUp = m_pMenuView->addAction(QIcon(":/Actions/Clean"), tr("Clean Up"), this, SLOT(OnCleanUp()));
-		m_pKeepTerminated = m_pMenuView->addAction(QIcon(":/Actions/Keep"), tr("Keep closed"), this, SLOT(OnSetKeep()));
+		m_pCleanUpMenu = m_pMenuView->addMenu(QIcon(":/Actions/Clean"), tr("Clean Up"));
+			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
+			m_pCleanUpMenu->addSeparator();
+			m_pCleanUpMsgLog = m_pCleanUpMenu->addAction(tr("Cleanup Message Log"), this, SLOT(OnCleanUp()));
+			m_pCleanUpResLog = m_pCleanUpMenu->addAction(tr("Cleanup Resource Log"), this, SLOT(OnCleanUp()));
+			m_pCleanUpApiLog = m_pCleanUpMenu->addAction(tr("Cleanup Api Call Log"), this, SLOT(OnCleanUp()));
+
+		m_pKeepTerminated = m_pMenuView->addAction(QIcon(":/Actions/Keep"), tr("Keep terminated"), this, SLOT(OnSetKeep()));
 		m_pKeepTerminated->setCheckable(true);
 
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
@@ -218,11 +249,11 @@ CSandMan::CSandMan(QWidget *parent)
 		
 
 	m_pMenuHelp = menuBar()->addMenu(tr("&Help"));
-		m_pMenuSupport = m_pMenuHelp->addAction(tr("Support Sandboxie-Plus on Patreon"), this, SLOT(OnAbout()));
+		m_pSupport = m_pMenuHelp->addAction(tr("Support Sandboxie-Plus on Patreon"), this, SLOT(OnAbout()));
 		m_pMenuHelp->addSeparator();
-		m_pMenuAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
+		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
 		//m_pMenuHelp->addSeparator();
-		m_pMenuAbout = m_pMenuHelp->addAction(QIcon(":/SandMan.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(QIcon(":/SandMan.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 
 
 
@@ -230,7 +261,18 @@ CSandMan::CSandMan(QWidget *parent)
 	//m_pToolBar->addAction(m_pMenuEmptyAll);
 	//m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pKeepTerminated);
-	m_pToolBar->addAction(m_pCleanUp);
+	//m_pToolBar->addAction(m_pCleanUp);
+
+	m_pCleanUpButton = new QToolButton();
+	m_pCleanUpButton->setIcon(MakeActionIcon(":/Actions/Clean"));
+	m_pCleanUpButton->setToolTip(tr("Cleanup"));
+	m_pCleanUpButton->setPopupMode(QToolButton::MenuButtonPopup);
+	m_pCleanUpButton->setMenu(m_pCleanUpMenu);
+	//QObject::connect(m_pCleanUpButton, SIGNAL(triggered(QAction*)), , SLOT());
+	QObject::connect(m_pCleanUpButton, SIGNAL(pressed()), this, SLOT(OnCleanUp()));
+	m_pToolBar->addWidget(m_pCleanUpButton);
+
+
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
@@ -260,10 +302,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
+	m_bIconEmpty = false;
 
 	m_pTrayMenu = new QMenu();
 	m_pTrayMenu->addSeparator();
-	m_pTrayMenu->addAction(m_pMenuExit);
+	m_pTrayMenu->addAction(m_pExit);
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
@@ -291,15 +334,17 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/pKeepTerminated"));
 
-	// connect last so if there were unpurged messages they end up no ware
+
 	connect(theAPI, SIGNAL(LogMessage(const QString&)), this, SLOT(OnLogMessage(const QString&)));
 
-	m_ApiLog = NULL;
+	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
+		ConnectSbie();
 
-	statusBar()->showMessage("Ready", 3000);
+	if (theConf->GetBool("Options/WatchIni", true))
+		theAPI->WatchIni();
+
 
 	m_uTimerID = startTimer(250);
-
 }
 
 CSandMan::~CSandMan()
@@ -352,7 +397,69 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
+	if (IsFullyPortable() && theAPI->IsConnected())
+	{
+		int PortableStop = theConf->GetInt("Options/PortableStop", -1);
+		if (PortableStop == -1)
+		{
+			bool State = false;
+			PortableStop = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services, this will prompt for administrative privileges.")
+				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Ok, QMessageBox::Information) == QDialogButtonBox::Ok ? 1 : 0;
+
+			if (!PortableStop)
+			{
+				e->ignore();
+				return;
+			}
+
+			if (State)
+				theConf->SetValue("Options/PortableStop", PortableStop);
+		}
+
+		StopSbie(true);
+	}
+
 	QApplication::quit();
+}
+
+bool CSandMan::IsFullyPortable()
+{
+	QString SbiePath = theAPI->GetSbiePath();
+	QString AppPath = QApplication::applicationDirPath().replace("/", "\\");
+	return (theConf->IsPortable() && SbiePath.compare(AppPath, Qt::CaseInsensitive) == 0);
+}
+
+void CSandMan::OnMessage(const QString& Message)
+{
+	if (Message == "ShowWnd")
+	{
+		if (!isVisible())
+			show();
+		setWindowState(Qt::WindowActive);
+		SetForegroundWindow(MainWndHandle);
+	}
+	else if (Message.left(6) == "Status")
+	{
+		QString Status = Message.mid(7);
+		if (Status != "OK")
+		{
+			if(m_bStopPending)
+				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all sandboxie components"));
+			else if(m_bConnectPending)
+				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required sandboxie components"));
+
+			OnLogMessage(tr("Maintenance operation %1").arg(Status));
+			CheckResults(QList<SB_STATUS>() << SB_ERR(Status));
+		}
+		else
+		{
+			OnLogMessage(tr("Maintenance operation Successful"));
+			if (m_bConnectPending)
+				theAPI->Connect(true);
+		}
+		m_bConnectPending = false;
+		m_bStopPending = false;
+	}
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)
@@ -360,10 +467,21 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	if (pEvent->timerId() != m_uTimerID)
 		return;
 
-	theAPI->ReloadBoxes();
-	theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
+	if (theAPI->IsConnected())
+	{
+		theAPI->ReloadBoxes();
+		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
+	}
 
 	m_pBoxView->Refresh();
+
+	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0))
+	{
+		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+		QIcon Icon;
+		Icon.addFile(m_bIconEmpty ? ":/SandMan2.png" : ":/SandMan.png");
+		m_pTrayIcon->setIcon(Icon);
+	}
 
 	/*QList<QVariant> Added = m_pBoxModel->Sync(theAPI->GetAllBoxes());
 
@@ -398,6 +516,64 @@ void CSandMan::OnSelectionChanged()
 	QList<CResLogEntryPtr> ResourceLog = theAPI->GetResLog();
 
 	m_pResMonModel->Sync(ResourceLog, Pids);
+}
+
+void CSandMan::OnStatusChanged()
+{
+	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
+	if (theAPI->IsConnected())
+	{
+		appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
+		//appTitle.append(tr(" - %1").arg(theAPI->GetIniPath()));
+
+		if (theAPI->GetAllBoxes().count() == 0) {
+			OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));
+			theAPI->CreateBox("DefaultBox");
+		}
+
+		if(IsFullyPortable())
+			appTitle.append(tr("   -   Portable"));
+
+		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
+		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+	}
+	else
+	{
+		appTitle.append(tr("   -   Driver NOT connected").arg(theAPI->GetVersion()));
+	}
+	this->setWindowTitle(appTitle);
+}
+
+void CSandMan::OnMenuHover(QAction* action)
+{
+	//if (!menuBar()->actions().contains(action))
+	//	return; // ignore sub menus
+
+
+	if (menuBar()->actions().at(0) == action)
+	{
+		bool bConnected = theAPI->IsConnected();
+		m_pConnect->setEnabled(!bConnected);
+		m_pDisconnect->setEnabled(bConnected);
+
+		m_pMaintenanceItems->setEnabled(!bConnected);
+
+		bool DrvInstalled = CSbieUtils::IsInstalled(CSbieUtils::eDriver);
+		bool DrvLoaded = CSbieUtils::IsRunning(CSbieUtils::eDriver);
+		m_pInstallDrv->setEnabled(!DrvInstalled);
+		m_pStartDrv->setEnabled(!DrvLoaded);
+		m_pStopDrv->setEnabled(DrvLoaded);
+		m_pUninstallDrv->setEnabled(DrvInstalled);
+
+		bool SvcInstalled = CSbieUtils::IsInstalled(CSbieUtils::eService);
+		bool SvcStarted = CSbieUtils::IsRunning(CSbieUtils::eService);
+		m_pInstallSvc->setEnabled(!SvcInstalled);
+		m_pStartSvc->setEnabled(!SvcStarted && DrvInstalled);
+		m_pStopSvc->setEnabled(SvcStarted);
+		m_pUninstallSvc->setEnabled(SvcInstalled);
+
+		//m_pMenuStopAll - always enabled
+	}
 }
 
 void CSandMan::OnLogMessage(const QString& Message)
@@ -450,9 +626,115 @@ void CSandMan::OnEmptyAll()
 	theAPI->TerminateAll();
 }
 
+SB_STATUS CSandMan::ConnectSbie()
+{
+	SB_STATUS Status;
+
+	if (!CSbieUtils::IsRunning(CSbieUtils::eAll)) 
+	{
+		if (!CSbieUtils::IsInstalled(CSbieUtils::eAll))
+		{
+			int PortableStart = theConf->GetInt("Options/PortableStart", -1);
+			if (PortableStart == -1)
+			{
+				bool State = false;
+				PortableStart = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode and it needs to create nececery services, this will prompt for administrative privileges.")
+					, tr("Don't show this message again."), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Ok, QMessageBox::Information) == QDialogButtonBox::Ok ? 1 : 0;
+
+				if (State)
+					theConf->SetValue("Options/PortableStart", PortableStart);
+			}
+
+			if(!PortableStart)
+				return SB_OK;
+		}
+
+		Status = CSbieUtils::Start(CSbieUtils::eAll);
+	}
+
+	if (Status.GetStatus() == OP_ASYNC)
+		m_bConnectPending = true;
+	else if (!Status.IsError())
+		Status = theAPI->Connect(true);
+
+	return Status;
+}
+
+SB_STATUS CSandMan::DisconnectSbie()
+{
+	return theAPI->Disconnect();
+}
+
+SB_STATUS CSandMan::StopSbie(bool andRemove)
+{
+	SB_STATUS Status;
+
+	if (theAPI->IsConnected()) {
+		Status = theAPI->TerminateAll();
+		theAPI->Disconnect();
+	}
+	if (!Status.IsError()) {
+		if(andRemove)
+			Status = CSbieUtils::Uninstall(CSbieUtils::eAll); // it stops it first ofcause
+		else
+			Status = CSbieUtils::Stop(CSbieUtils::eAll);
+		if (Status.GetStatus() == OP_ASYNC)
+			m_bStopPending = true;
+	}
+
+	return Status;
+}
+
+void CSandMan::OnMaintenance()
+{
+	SB_STATUS Status;
+	if (sender() == m_pConnect)
+		Status = ConnectSbie();
+	else if (sender() == m_pDisconnect)
+		Status = DisconnectSbie();
+	else if (sender() == m_pStopAll)
+		Status = StopSbie();
+
+	// advanced
+	else if (sender() == m_pInstallDrv)
+		Status = CSbieUtils::Install(CSbieUtils::eDriver);
+	else if (sender() == m_pStartDrv)
+		Status = CSbieUtils::Start(CSbieUtils::eDriver);
+	else if (sender() == m_pStopDrv)
+		Status = CSbieUtils::Stop(CSbieUtils::eDriver);
+	else if (sender() == m_pUninstallDrv)
+		Status = CSbieUtils::Uninstall(CSbieUtils::eDriver);
+
+	else if (sender() == m_pInstallSvc)
+		Status = CSbieUtils::Install(CSbieUtils::eService);
+	else if(sender() == m_pStartSvc)
+		Status = CSbieUtils::Start(CSbieUtils::eService);
+	else if(sender() == m_pStopSvc)
+		Status = CSbieUtils::Stop(CSbieUtils::eService);
+	else if (sender() == m_pUninstallSvc)
+		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
+
+	if (Status.GetStatus() == OP_ASYNC) {
+		statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
+		return;
+	}
+
+	CheckResults(QList<SB_STATUS>() << Status);
+}
+
 void CSandMan::OnCleanUp()
 {
-	theAPI->UpdateProcesses(false);
+	if (sender() == m_pCleanUpMsgLog || sender() == m_pCleanUpButton)
+		m_pMessageLog->GetTree()->clear();
+	
+	if (sender() == m_pCleanUpResLog || sender() == m_pCleanUpButton)
+		theAPI->ClearResLog();
+	
+	if (sender() == m_pCleanUpApiLog || sender() == m_pCleanUpButton)
+		m_pApiLog->GetTree()->clear();
+	
+	if (sender() == m_pCleanUpProcesses || sender() == m_pCleanUpButton)
+		theAPI->UpdateProcesses(false);
 }
 
 void CSandMan::OnSetKeep()
@@ -488,6 +770,9 @@ void CSandMan::OnEditIni()
 	//WaitForSingleObject(si.hProcess, INFINITE);
 	//CloseHandle(si.hProcess);
 
+	if (theConf->GetBool("Options/WatchIni", true))
+		return; // if the ini s watched dont double reload
+	
 	QWinEventNotifier* processFinishedNotifier = new QWinEventNotifier(si.hProcess);
 	processFinishedNotifier->setEnabled(true);
 	connect(processFinishedNotifier, &QWinEventNotifier::activated, this, [processFinishedNotifier, this, si]() {
@@ -501,7 +786,6 @@ void CSandMan::OnEditIni()
 void CSandMan::OnReloadIni()
 {
 	theAPI->ReloadConfig();
-	statusBar()->showMessage(tr("Sandboxie config has been reloaded."), 3000);
 }
 
 void CSandMan::OnSetMonitoring()
@@ -592,11 +876,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 						return;
 					}
 					setWindowState(Qt::WindowActive);
-					//WINDOWPLACEMENT placement = { sizeof(placement) };
-					//GetWindowPlacement(PhMainWndHandle, &placement);
-					//if (placement.showCmd == SW_MINIMIZE || placement.showCmd == SW_SHOWMINIMIZED)
-					//	ShowWindowAsync(PhMainWndHandle, SW_RESTORE);
-					//SetForegroundWindow(PhMainWndHandle);
+					SetForegroundWindow(MainWndHandle);
 				} );
 			}
 #endif
@@ -620,7 +900,7 @@ QString CSandMan::GetVersion()
 
 void CSandMan::OnAbout()
 {
-	if (sender() == m_pMenuAbout)
+	if (sender() == m_pAbout)
 	{
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
@@ -649,7 +929,7 @@ void CSandMan::OnAbout()
 
 		msgBox->exec();
 	}
-	else if (sender() == m_pMenuAboutQt)
+	else if (sender() == m_pAboutQt)
 		QMessageBox::aboutQt(this);
 	else
 		QDesktopServices::openUrl(QUrl("https://www.patreon.com/DavidXanatos"));
@@ -657,7 +937,7 @@ void CSandMan::OnAbout()
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-
+/*
 #include <windows.h>
 #include <shellapi.h>
 
@@ -695,16 +975,16 @@ BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result)
 		*Result = RF_CANCEL;
 		return TRUE;
 	}
-	/*else if (Header->code == RFN_LIMITEDRUNAS)
-	{
-
-	}*/
+	//else if (Header->code == RFN_LIMITEDRUNAS)
+	//{
+	//
+	//}
 	return FALSE;
 }
 
 extern "C"
 {
-	NTSYSCALLAPI NTSTATUS NTAPI LdrGetProcedureAddress(IN PVOID DllHandle, IN VOID* /*PANSI_STRING*/ ProcedureName OPTIONAL, IN ULONG ProcedureNumber OPTIONAL, OUT PVOID *ProcedureAddress, IN BOOLEAN RunInitRoutines);
+	NTSYSCALLAPI NTSTATUS NTAPI LdrGetProcedureAddress(IN PVOID DllHandle, IN VOID* ProcedureName OPTIONAL, IN ULONG ProcedureNumber OPTIONAL, OUT PVOID *ProcedureAddress, IN BOOLEAN RunInitRoutines);
 	//NTSTATUS(NTAPI *LdrGetProcedureAddress)(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Oridinal, PVOID *FunctionAddress);
 }
 
@@ -717,7 +997,7 @@ BOOLEAN NTAPI ShowRunFileDialog(HWND WindowHandle, HICON WindowIcon, LPCWSTR Wor
 	if (HMODULE shell32Handle = LoadLibrary(L"shell32.dll"))
 	{
 		RunFileDlg_I dialog = NULL;
-		if (LdrGetProcedureAddress(shell32Handle, NULL, 61, (void**)&dialog, TRUE) == 0 /*STATUS_SUCCESS*/)
+		if (LdrGetProcedureAddress(shell32Handle, NULL, 61, (void**)&dialog, TRUE) == 0)
 			result = !!dialog(WindowHandle, WindowIcon, WorkingDirectory, WindowTitle, WindowDescription, Flags);
 
 		FreeLibrary(shell32Handle);
@@ -733,3 +1013,4 @@ QString ShowRunDialog(const QString& BoxName)
 	ShowRunFileDialog(MainWndHandle, NULL, NULL, boxName.c_str(), L"Enter the path of a program that will be created in a sandbox.", 0); // RFF_OPTRUNAS);
 	return g_RunDialogCommand;
 }
+*/

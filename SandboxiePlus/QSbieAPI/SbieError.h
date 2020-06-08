@@ -1,5 +1,8 @@
 #pragma once
 
+#define ERROR_OK (1)
+#define OP_ASYNC (2)
+
 class CSbieError
 {
 public:

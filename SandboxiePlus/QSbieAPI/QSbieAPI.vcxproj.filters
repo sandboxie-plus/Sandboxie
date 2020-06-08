@@ -42,12 +42,24 @@
     <ClCompile Include="Sandboxie\IniSection.cpp">
       <Filter>Sandboxie</Filter>
     </ClCompile>
+    <ClCompile Include="SbieUtils.cpp">
+      <Filter>SbieAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SbieError.h">
+      <Filter>SbieAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sandboxie\common\win32_ntddk.h">
+      <Filter>SbieAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SbieUtils.h">
+      <Filter>SbieAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SbieDefs.h">
       <Filter>SbieAPI</Filter>
     </ClInclude>
   </ItemGroup>

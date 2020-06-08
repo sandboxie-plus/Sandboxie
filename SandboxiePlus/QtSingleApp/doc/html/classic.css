@@ -1,0 +1,284 @@
+BODY,H1,H2,H3,H4,H5,H6,P,CENTER,TD,TH,UL,DL,DIV {
+  font-family: Arial, Geneva, Helvetica, sans-serif;
+}
+H1 {
+  text-align: center;
+  font-size: 160%;
+}
+H2 {
+  font-size: 120%;
+}
+H3 {
+  font-size: 100%;
+}
+
+h3.fn,span.fn
+{
+  background-color: #eee;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ddd;
+  font-weight: bold;
+  padding: 6px 0px 6px 10px;
+  margin: 42px 0px 0px 0px;
+}
+
+hr {
+  border: 0;
+  color: #a0a0a0;
+  background-color: #ccc;
+  height: 1px;
+  width: 100%;
+  text-align: left;
+  margin: 34px 0px 34px 0px;
+}
+
+table.valuelist {
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: #dddddd;
+	border-collapse: collapse;
+	background-color: #f0f0f0;
+}
+
+table.indextable {
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-collapse: collapse;
+	background-color: #f0f0f0;
+    border-color:#555;
+    font-size: 100%;
+}
+
+table td.largeindex {
+	border-width: 1px 1px 1px 1px;
+	border-collapse: collapse;
+	background-color: #f0f0f0;
+    border-color:#555;
+    font-size: 120%;
+}
+
+table.valuelist th {
+	border-width: 1px 1px 1px 2px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #666;
+    color:white;
+    background-color:#666;
+}
+
+th.titleheader  {
+	border-width: 1px 0px 1px 0px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666;
+    color:white;
+    background-color:#555;
+    background-image:url('images/gradient.png')};
+    background-repeat: repeat-x;
+    font-size: 100%;
+}
+
+
+th.largeheader {
+	border-width: 1px 0px 1px 0px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #444;
+    color:white;
+    background-color:#555555;
+    font-size: 120%;
+}
+
+p {
+
+  margin-left: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+a:link
+{
+  color: #0046ad;
+  text-decoration: none
+}
+
+a:visited
+{
+  color: #672967;
+  text-decoration: none
+}
+
+a.obsolete
+{
+  color: #661100;
+  text-decoration: none
+}
+
+a.compat
+{
+  color: #661100;
+  text-decoration: none
+}
+
+a.obsolete:visited
+{
+  color: #995500;
+  text-decoration: none
+}
+
+a.compat:visited
+{
+  color: #995500;
+  text-decoration: none
+}
+
+body
+{
+  background: #ffffff;
+  color: black
+}
+
+table.generic, table.annotated
+{
+  border-width: 1px;
+  border-color:#bbb;
+  border-style:solid;  
+  border-collapse:collapse;
+}
+
+table td.memItemLeft {
+  width: 180px;
+  padding: 2px 0px 0px 8px;
+  margin: 4px;
+  border-width: 1px;
+  border-color: #E0E0E0;
+  border-style: none;
+  font-size: 100%;
+  white-space: nowrap
+}
+
+table td.memItemRight {
+  padding: 2px 8px 0px 8px;
+  margin: 4px;
+  border-width: 1px;
+  border-color: #E0E0E0;
+  border-style: none;
+  font-size: 100%;
+}
+
+table tr.odd {
+  background: #f0f0f0;
+  color: black;
+}
+
+table tr.even {
+  background: #e4e4e4;
+  color: black;
+}
+
+table.annotated th {
+  padding: 3px;
+  text-align: left
+}
+
+table.annotated td {
+  padding: 3px;
+}
+
+table tr pre
+{
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border: none;
+  background: none
+}
+
+tr.qt-style
+{
+  background: #96E066;
+  color: black
+}
+
+body pre
+{
+  padding: 0.2em;
+  border: #e7e7e7 1px solid;
+  background: #f1f1f1;
+  color: black
+}
+
+table tr.qt-code pre
+{
+  padding: 0.2em;
+  border: #e7e7e7 1px solid;
+  background: #f1f1f1;
+  color: black
+}
+
+span.preprocessor, span.preprocessor a
+{
+  color: darkblue;
+}
+
+span.comment
+{
+  color: darkred;
+  font-style: italic
+}
+
+span.string,span.char
+{
+  color: darkgreen;
+}
+
+.title
+{
+    text-align: center
+}
+
+.subtitle
+{
+    font-size: 0.8em
+}
+
+.small-subtitle
+{
+    font-size: 0.65em
+}
+
+.qmlitem {
+    padding: 0;
+}
+
+.qmlname {
+    white-space: nowrap;
+}
+
+.qmltype {
+    text-align: center;
+    font-size: 160%;
+}
+
+.qmlproto {
+    background-color: #eee;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    font-weight: bold;
+    padding: 6px 10px 6px 10px;
+    margin: 42px 0px 0px 0px;
+}
+
+.qmlreadonly {
+    float: right;
+    color: red
+}
+
+.qmldoc {
+}
+
+*.qmlitem p {
+}

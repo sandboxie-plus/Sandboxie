@@ -1,11 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="SandMan.png">SandMan.png</file>
+        <file>SandMan.png</file>
         <file alias="BoxEmpty">sandbox-empty.png</file>
         <file alias="BoxInUse">sandbox-full.png</file>
         <file alias="dllIcon32">dll32.png</file>
         <file alias="exeIcon32">exe32.png</file>
         <file>close.png</file>
+        <file>SandMan2.png</file>
     </qresource>
     <qresource prefix="/Actions">
         <file alias="SetLogging">Actions/SetLogging.png</file>
@@ -17,5 +18,12 @@
         <file alias="ReloadIni">Actions/reload_ini.png</file>
         <file alias="EditIni">Actions/edit_ini.png</file>
         <file alias="LogAPI">Actions/log_api.png</file>
+        <file alias="Maintenance">Actions/Maintenance.png</file>
+        <file alias="Connect">Actions/Connect.png</file>
+        <file alias="Disconnect">Actions/Disconnect.png</file>
+        <file alias="Start">Actions/Start.png</file>
+        <file alias="Stop">Actions/Stop.png</file>
+        <file alias="Advanced">Actions/Advanced.png</file>
+        <file alias="Service">Actions/Service.png</file>
     </qresource>
 </RCC>

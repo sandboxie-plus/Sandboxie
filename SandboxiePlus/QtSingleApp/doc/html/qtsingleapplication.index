@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE QDOCINDEX>
+<INDEX url="" title="Qt Solutions: Single Application Documentation" version="">
+    <namespace access="public" threadsafety="unspecified" status="commendable" name="" href="" location="" module="">
+        <class access="public" threadsafety="unspecified" status="commendable" name="QtSingleCoreApplication" href="qtsinglecoreapplication.html" location="qtsinglecoreapplication.h" bases="QCoreApplication" module="">
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleCoreApplication" fullname="QtSingleCoreApplication::QtSingleCoreApplication" href="qtsinglecoreapplication.html#QtSingleCoreApplication" location="qtsinglecoreapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="false" type="" signature="QtSingleCoreApplication(int &amp; argc, char ** argv)">
+                <parameter left="int &amp;" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleCoreApplication" fullname="QtSingleCoreApplication::QtSingleCoreApplication" href="qtsinglecoreapplication.html#QtSingleCoreApplication-2" location="qtsinglecoreapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="2" type="" signature="QtSingleCoreApplication(const QString &amp; appId, int &amp; argc, char ** argv)">
+                <parameter left="const QString &amp;" right="" name="appId" default=""/>
+                <parameter left="int &amp;" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="isRunning" fullname="QtSingleCoreApplication::isRunning" href="qtsinglecoreapplication.html#isRunning" location="qtsinglecoreapplication.h" virtual="non" meta="plain" const="false" static="false" overload="false" type="bool" signature="isRunning()"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="id" fullname="QtSingleCoreApplication::id" href="qtsinglecoreapplication.html#id" location="qtsinglecoreapplication.h" virtual="non" meta="plain" const="true" static="false" overload="false" type="QString" signature="id() const"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="sendMessage" fullname="QtSingleCoreApplication::sendMessage" href="qtsinglecoreapplication.html#sendMessage" location="qtsinglecoreapplication.h" virtual="non" meta="slot" const="false" static="false" overload="false" type="bool" signature="sendMessage(const QString &amp; message, int timeout)">
+                <parameter left="const QString &amp;" right="" name="message" default=""/>
+                <parameter left="int" right="" name="timeout" default="5000"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="messageReceived" fullname="QtSingleCoreApplication::messageReceived" href="qtsinglecoreapplication.html#messageReceived" location="qtsinglecoreapplication.h" virtual="non" meta="signal" const="false" static="false" overload="false" type="void" signature="messageReceived(const QString &amp; message)">
+                <parameter left="const QString &amp;" right="" name="message" default=""/>
+            </function>
+        </class>
+        <class access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" href="qtsingleapplication.html" location="qtsingleapplication.h" bases="QApplication" module="">
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" fullname="QtSingleApplication::QtSingleApplication" href="qtsingleapplication.html#QtSingleApplication" location="qtsingleapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="false" type="" signature="QtSingleApplication(int &amp; argc, char ** argv, bool GUIenabled)">
+                <parameter left="int &amp;" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+                <parameter left="bool" right="" name="GUIenabled" default="true"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" fullname="QtSingleApplication::QtSingleApplication" href="qtsingleapplication.html#QtSingleApplication-2" location="qtsingleapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="2" type="" signature="QtSingleApplication(const QString &amp; appId, int &amp; argc, char ** argv)">
+                <parameter left="const QString &amp;" right="" name="appId" default=""/>
+                <parameter left="int &amp;" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" fullname="QtSingleApplication::QtSingleApplication" href="qtsingleapplication.html#QtSingleApplication-3" location="qtsingleapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="3" type="" signature="QtSingleApplication(int &amp; argc, char ** argv, Type type)">
+                <parameter left="int &amp;" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+                <parameter left="Type" right="" name="type" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" fullname="QtSingleApplication::QtSingleApplication" href="qtsingleapplication.html#QtSingleApplication-4" location="qtsingleapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="4" type="" signature="QtSingleApplication(Display * dpy, Qt::HANDLE visual, Qt::HANDLE cmap)">
+                <parameter left="Display *" right="" name="dpy" default=""/>
+                <parameter left="Qt::HANDLE" right="" name="visual" default="0"/>
+                <parameter left="Qt::HANDLE" right="" name="cmap" default="0"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" fullname="QtSingleApplication::QtSingleApplication" href="qtsingleapplication.html#QtSingleApplication-5" location="qtsingleapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="5" type="" signature="QtSingleApplication(Display * dpy, int &amp; argc, char ** argv, Qt::HANDLE visual, Qt::HANDLE cmap)">
+                <parameter left="Display *" right="" name="dpy" default=""/>
+                <parameter left="int &amp;" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+                <parameter left="Qt::HANDLE" right="" name="visual" default="0"/>
+                <parameter left="Qt::HANDLE" right="" name="cmap" default="0"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtSingleApplication" fullname="QtSingleApplication::QtSingleApplication" href="qtsingleapplication.html#QtSingleApplication-6" location="qtsingleapplication.h" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="6" type="" signature="QtSingleApplication(Display * dpy, const QString &amp; appId, int argc, char ** argv, Qt::HANDLE visual, Qt::HANDLE cmap)">
+                <parameter left="Display *" right="" name="dpy" default=""/>
+                <parameter left="const QString &amp;" right="" name="appId" default=""/>
+                <parameter left="int" right="" name="argc" default=""/>
+                <parameter left="char **" right="" name="argv" default=""/>
+                <parameter left="Qt::HANDLE" right="" name="visual" default="0"/>
+                <parameter left="Qt::HANDLE" right="" name="cmap" default="0"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="isRunning" fullname="QtSingleApplication::isRunning" href="qtsingleapplication.html#isRunning" location="qtsingleapplication.h" virtual="non" meta="plain" const="false" static="false" overload="false" type="bool" signature="isRunning()"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="id" fullname="QtSingleApplication::id" href="qtsingleapplication.html#id" location="qtsingleapplication.h" virtual="non" meta="plain" const="true" static="false" overload="false" type="QString" signature="id() const"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="setActivationWindow" fullname="QtSingleApplication::setActivationWindow" href="qtsingleapplication.html#setActivationWindow" location="qtsingleapplication.h" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="setActivationWindow(QWidget * aw, bool activateOnMessage)">
+                <parameter left="QWidget *" right="" name="aw" default=""/>
+                <parameter left="bool" right="" name="activateOnMessage" default="true"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="activationWindow" fullname="QtSingleApplication::activationWindow" href="qtsingleapplication.html#activationWindow" location="qtsingleapplication.h" virtual="non" meta="plain" const="true" static="false" overload="false" type="QWidget *" signature="activationWindow() const"/>
+            <function access="public" threadsafety="unspecified" status="obsolete" name="initialize" fullname="QtSingleApplication::initialize" href="qtsingleapplication-obsolete.html#initialize" location="qtsingleapplication.h" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="initialize(bool dummy)">
+                <parameter left="bool" right="" name="dummy" default="true"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="sendMessage" fullname="QtSingleApplication::sendMessage" href="qtsingleapplication.html#sendMessage" location="qtsingleapplication.h" virtual="non" meta="slot" const="false" static="false" overload="false" type="bool" signature="sendMessage(const QString &amp; message, int timeout)">
+                <parameter left="const QString &amp;" right="" name="message" default=""/>
+                <parameter left="int" right="" name="timeout" default="5000"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="activateWindow" fullname="QtSingleApplication::activateWindow" href="qtsingleapplication.html#activateWindow" location="qtsingleapplication.h" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="activateWindow()"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="messageReceived" fullname="QtSingleApplication::messageReceived" href="qtsingleapplication.html#messageReceived" location="qtsingleapplication.h" virtual="non" meta="signal" const="false" static="false" overload="false" type="void" signature="messageReceived(const QString &amp; message)">
+                <parameter left="const QString &amp;" right="" name="message" default=""/>
+            </function>
+        </class>
+        <page access="public" status="commendable" name="index.html" href="index.html" subtype="page" title="Single Application" fulltitle="Single Application" subtitle="" location="index.qdoc">
+            <contents name="description" title="Description" level="1"/>
+            <contents name="classes" title="Classes" level="1"/>
+            <contents name="examples" title="Examples" level="1"/>
+            <contents name="tested-platforms" title="Tested platforms" level="1"/>
+        </page>
+        <page access="public" status="commendable" name="qtsingleapplication-example-trivial.html" href="qtsingleapplication-example-trivial.html" subtype="page" title="A Trivial Example" fulltitle="A Trivial Example" subtitle="" location="trivial.qdoc"/>
+        <page access="public" status="commendable" name="qtsinglecoreapplication-example-console.html" href="qtsinglecoreapplication-example-console.html" subtype="page" title="A non-GUI example" fulltitle="A non-GUI example" subtitle="" location="console.qdoc"/>
+        <page access="public" status="commendable" name="qtsingleapplication-example-loader.html" href="qtsingleapplication-example-loader.html" subtype="page" title="Loading Documents" fulltitle="Loading Documents" subtitle="" location="loader.qdoc"/>
+    </namespace>
+</INDEX>

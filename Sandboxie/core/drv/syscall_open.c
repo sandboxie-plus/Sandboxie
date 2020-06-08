@@ -397,6 +397,7 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     HANDLE NewHandle;
     void *TargetProcessObject;
 
+
     //
     // if there is a target process handle, keep a record of the
     // associated process object so we can check it later
@@ -476,6 +477,9 @@ _FX NTSTATUS Syscall_DuplicateHandle(
 
         status = Syscall_DuplicateHandle_2(
             (HANDLE)user_args[2], NewHandle, TargetProcessObject, proc);
+
+		if (!NT_SUCCESS(status))
+			NtClose(NewHandle);
     }
 
     //

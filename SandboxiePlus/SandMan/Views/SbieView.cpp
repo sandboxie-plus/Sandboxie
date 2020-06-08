@@ -126,8 +126,6 @@ void CSbieView::OnMenu(const QPoint& Point)
 	CPanelView::OnMenu(Point);
 }
 
-QString ShowRunDialog(const QString& BoxName);
-
 void CSbieView::OnSandBoxAction()
 {
 	QList<SB_STATUS> Results;
@@ -184,16 +182,20 @@ void CSbieView::OnSandBoxAction()
 
 void CSbieView::OnProcessAction()
 {
+	QList<SB_STATUS> Results;
+
 	QAction* Action = qobject_cast<QAction*>(sender());
 	foreach(const CBoxedProcessPtr& pProcess, CSbieView::GetSelectedProcesses())
 	{
 		if (Action == m_pMenuTerminate)
-			pProcess->Terminate();
+			Results.append(pProcess->Terminate());
 		else if (Action == m_pMenuSuspend)
-			pProcess->SetSuspend(true);
+			Results.append(pProcess->SetSuspend(true));
 		else if (Action == m_pMenuResume)
-			pProcess->SetSuspend(false);
+			Results.append(pProcess->SetSuspend(false));
 	}
+
+	CSandMan::CheckResults(Results);
 }
 
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)

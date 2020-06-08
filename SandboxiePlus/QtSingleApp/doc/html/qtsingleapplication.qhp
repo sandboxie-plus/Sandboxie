@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>com.nokia.qtsolutions.qtsingleapplication_head</namespace>
+    <virtualFolder>qdoc</virtualFolder>
+    <customFilter name="Qt Solutions: Single Application">
+        <filterAttribute>qt</filterAttribute>
+        <filterAttribute>solutions</filterAttribute>
+        <filterAttribute>qtsingleapplication</filterAttribute>
+    </customFilter>
+    <filterSection>
+        <filterAttribute>qt</filterAttribute>
+        <filterAttribute>solutions</filterAttribute>
+        <filterAttribute>qtsingleapplication</filterAttribute>
+        <toc>
+            <section ref="index.html" title="Qt Solutions: Single Application Documentation">
+                <section ref="qtsingleapplication-example-trivial.html" title="A Trivial Example"/>
+                <section ref="qtsinglecoreapplication-example-console.html" title="A non-GUI example"/>
+                <section ref="qtsingleapplication-example-loader.html" title="Loading Documents"/>
+                <section ref="index.html" title="Single Application"/>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="A Trivial Example" id="A Trivial Example" ref="qtsingleapplication-example-trivial.html"/>
+            <keyword name="A non-GUI example" id="A non-GUI example" ref="qtsinglecoreapplication-example-console.html"/>
+            <keyword name="Loading Documents" id="Loading Documents" ref="qtsingleapplication-example-loader.html"/>
+            <keyword name="QtSingleApplication" id="QtSingleApplication" ref="qtsingleapplication.html"/>
+            <keyword name="activateWindow" id="QtSingleApplication::activateWindow" ref="qtsingleapplication.html#activateWindow"/>
+            <keyword name="activationWindow" id="QtSingleApplication::activationWindow" ref="qtsingleapplication.html#activationWindow"/>
+            <keyword name="id" id="QtSingleApplication::id" ref="qtsingleapplication.html#id"/>
+            <keyword name="initialize" id="QtSingleApplication::initialize" ref="qtsingleapplication-obsolete.html#initialize"/>
+            <keyword name="isRunning" id="QtSingleApplication::isRunning" ref="qtsingleapplication.html#isRunning"/>
+            <keyword name="messageReceived" id="QtSingleApplication::messageReceived" ref="qtsingleapplication.html#messageReceived"/>
+            <keyword name="sendMessage" id="QtSingleApplication::sendMessage" ref="qtsingleapplication.html#sendMessage"/>
+            <keyword name="setActivationWindow" id="QtSingleApplication::setActivationWindow" ref="qtsingleapplication.html#setActivationWindow"/>
+            <keyword name="QtSingleCoreApplication" id="QtSingleCoreApplication" ref="qtsinglecoreapplication.html"/>
+            <keyword name="id" id="QtSingleCoreApplication::id" ref="qtsinglecoreapplication.html#id"/>
+            <keyword name="isRunning" id="QtSingleCoreApplication::isRunning" ref="qtsinglecoreapplication.html#isRunning"/>
+            <keyword name="messageReceived" id="QtSingleCoreApplication::messageReceived" ref="qtsinglecoreapplication.html#messageReceived"/>
+            <keyword name="sendMessage" id="QtSingleCoreApplication::sendMessage" ref="qtsinglecoreapplication.html#sendMessage"/>
+            <keyword name="Single Application" id="Single Application" ref="index.html"/>
+        </keywords>
+        <files>
+            <file>qtsingleapplication.html</file>
+            <file>index.html</file>
+            <file>qtsingleapplication-example-trivial.html</file>
+            <file>qtsinglecoreapplication.html</file>
+            <file>qtsingleapplication-example-loader.html</file>
+            <file>qtsinglecoreapplication-example-console.html</file>
+            <file>classic.css</file>
+            <file>images/qt-logo.png</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

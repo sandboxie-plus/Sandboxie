@@ -319,3 +319,26 @@ QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, const QString& Text, c
 	pParent->addAction(pAction);
 	return pAction;
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// 
+// 
+
+#ifdef WIN32
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+
+bool InitConsole(bool bCreateIfNeeded)
+{
+	if (AttachConsole(ATTACH_PARENT_PROCESS) == FALSE)
+	{
+		if (!bCreateIfNeeded)
+			return false;
+		AllocConsole();
+	}
+	freopen("CONOUT$", "w", stdout);
+	printf("\r\n");
+	return true;
+}
+#endif

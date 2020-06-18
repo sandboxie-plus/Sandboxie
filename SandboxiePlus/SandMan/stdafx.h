@@ -133,4 +133,4 @@ using namespace std;
 #define USE_QEXTWIDGETS
 
 extern class CSettings*		theConf;
-extern class CSbieAPI*		theAPI;
+extern class CSbiePlusAPI*	theAPI;

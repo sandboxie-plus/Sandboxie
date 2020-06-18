@@ -5,15 +5,17 @@
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/TreeViewEx.h"
 #include "../MiscHelpers/Common/PanelView.h"
+#include "../MiscHelpers/Common/ProgressDialog.h"
 #include "Models/ResMonModel.h"
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	2
-#define VERSION_REV 	0
+#define VERSION_REV 	1
 #define VERSION_UPD 	0
 
 
-#include "../QSbieAPI/SbieAPI.h"
+//#include "../QSbieAPI/SbieAPI.h"
+#include "SbiePlusAPI.h"
 
 class CSbieView;
 class CApiLog;
@@ -25,6 +27,8 @@ class CSandMan : public QMainWindow
 public:
 	CSandMan(QWidget *parent = Q_NULLPTR);
 	virtual ~CSandMan();
+
+	CProgressDialog*	GetProgressDialog() { return m_pProgressDialog; }
 
 	static QString		GetVersion();
 
@@ -145,4 +149,8 @@ private:
 	bool				m_bIconEmpty;
 
 	bool				m_bExit;
+
+	CProgressDialog*	m_pProgressDialog;
 };
+
+extern CSandMan* theGUI;

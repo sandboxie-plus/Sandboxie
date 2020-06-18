@@ -35,6 +35,7 @@ SetCompressor /SOLID /FINAL lzma
 
 !define BIN_ROOT_BASE	"${SBIE_INSTALLER_PATH}"
 
+!define SBIEDRV_SYS4    "${SBIEDRV_SYS}.rc4"
 
 !define OUTFILE_BOTH    "${PRODUCT_NAME}Install.exe"
 !define NAME_Win32      "${PRODUCT_FULL_NAME} ${VERSION} (32-bit)"
@@ -428,7 +429,7 @@ InstDir_Check_Suffix:
     Push -12
     Pop  $2
     StrCpy $1 $0 "" $2
-    StrCmp $1 "\${SBIEDRV_SYS}" InstDir_Suffix_Good
+    StrCmp $1 "\${SBIEDRV_SYS4}" InstDir_Suffix_Good
     
     Goto InstDir_ProgramFiles
 
@@ -463,7 +464,7 @@ InstDir_Done:
     StrCmp "$EXEDIR"   "$WINDIR\Installer\"   InstType_Remove
     StrCmp "$EXEDIR\"  "$WINDIR\Installer"    InstType_Remove
     
-    IfFileExists $INSTDIR\${SBIEDRV_SYS}      InstType_Upgrade
+    IfFileExists $INSTDIR\${SBIEDRV_SYS4}      InstType_Upgrade
     IfFileExists $INSTDIR\${SBIESVC_EXE}      InstType_Upgrade
     IfFileExists $INSTDIR\${SBIEDLL_DLL}      InstType_Upgrade
     
@@ -967,7 +968,7 @@ WriteLoop:
 
     File /oname=${SBIEMSG_DLL} "${BIN_ROOT}\SbieMsg.dll"
 
-    File /oname=${SBIEDRV_SYS} "${BIN_ROOT}\SbieDrv.sys"
+    File /oname=${SBIEDRV_SYS4} "${BIN_ROOT}\SbieDrv.sys.rc4"
 
     File /oname=SboxHostDll.dll			   "${BIN_ROOT}\SboxHostDll.dll"
     
@@ -1072,7 +1073,7 @@ Function DeleteProgramFiles
 
     Delete "$INSTDIR\${SBIEMSG_DLL}"
 
-    Delete "$INSTDIR\${SBIEDRV_SYS}"
+    Delete "$INSTDIR\${SBIEDRV_SYS4}"
 
     Delete "$INSTDIR\${SANDBOXIE}WUAU.exe"
     Delete "$INSTDIR\${SANDBOXIE}EventSys.exe"
@@ -1422,7 +1423,7 @@ Driver_Silent:
 ; For Install and Upgrade, install the driver
 ;
 
-    StrCpy $0 'install ${SBIEDRV} "$INSTDIR\${SBIEDRV_SYS}" type=kernel start=demand "msgfile=$INSTDIR\${SBIEMSG_DLL}" altitude=${FILTER_ALTITUDE}'
+    StrCpy $0 'install ${SBIEDRV} "$INSTDIR\${SBIEDRV_SYS4}" type=kernel start=demand "msgfile=$INSTDIR\${SBIEMSG_DLL}" altitude=${FILTER_ALTITUDE}'
     Push $0
     Call KmdUtil
 

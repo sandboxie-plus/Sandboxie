@@ -1248,8 +1248,8 @@ _FX void Process_NotifyImage(
         if (ok)
             ok = Process_Low_InitConsole(proc);
 
-        if (ok)
-            ok = Token_ReplacePrimary(proc);
+		if (ok)
+			ok = Token_ReplacePrimary(proc);
 
         if (ok)
             ok = Thread_InitProcess(proc);

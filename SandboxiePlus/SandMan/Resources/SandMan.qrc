@@ -26,4 +26,20 @@
         <file alias="Advanced">Actions/Advanced.png</file>
         <file alias="Service">Actions/Service.png</file>
     </qresource>
+    <qresource prefix="/Boxes">
+        <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
+        <file alias="Full3">Boxes/sandbox-b-full.png</file>
+        <file alias="Empty4">Boxes/sandbox-c-empty.png</file>
+        <file alias="Full4">Boxes/sandbox-c-full.png</file>
+        <file alias="Empty2">Boxes/sandbox-g-empty.png</file>
+        <file alias="Full2">Boxes/sandbox-g-full.png</file>
+        <file alias="Empty5">Boxes/sandbox-m-empty.png</file>
+        <file alias="Full5">Boxes/sandbox-m-full.png</file>
+        <file alias="Empty1">Boxes/sandbox-r-empty.png</file>
+        <file alias="Full1">Boxes/sandbox-r-full.png</file>
+        <file alias="Empty0">Boxes/sandbox-y-empty.png</file>
+        <file alias="Full0">Boxes/sandbox-y-full.png</file>
+        <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
+        <file alias="Full6">Boxes/sandbox-o-full.png</file>
+    </qresource>
 </RCC>

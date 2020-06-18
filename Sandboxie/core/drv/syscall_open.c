@@ -19,6 +19,7 @@
 // Syscall Management
 //---------------------------------------------------------------------------
 
+#include "conf.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -643,6 +644,9 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
         // thread_token.c has a function for this specific case.
         //
 
+		// OpenBox2 BEGIN
+		if (!(Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
+		// OpenBox2 END
         status = Thread_CheckTokenObject(
                     proc, OpenedObject, HandleInfo.GrantedAccess);
     }

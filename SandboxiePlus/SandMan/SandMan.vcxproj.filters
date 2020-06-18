@@ -61,6 +61,9 @@
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp">
       <Filter>Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="SbiePlusAPI.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -88,6 +91,9 @@
     </QtMoc>
     <QtMoc Include="Dialogs\MultiErrorDialog.h">
       <Filter>Dialogs</Filter>
+    </QtMoc>
+    <QtMoc Include="SbiePlusAPI.h">
+      <Filter>SandMan</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

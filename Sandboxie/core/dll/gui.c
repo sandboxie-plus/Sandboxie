@@ -952,6 +952,11 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 
                 rc = (ULONG_PTR)NtCurrentThread();
 
+				// OpenBox1 BEGIN
+				if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+					rc = 0;
+				else
+				// OpenBox1 END
                 if (__sys_NtSetInformationThread)
                 {
                     rc = __sys_NtSetInformationThread(NtCurrentThread(),

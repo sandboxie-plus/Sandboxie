@@ -60,6 +60,10 @@ CSandBox::~CSandBox()
 	//delete m;
 }
 
+void CSandBox::UpdateDetails()
+{
+}
+
 SB_STATUS CSandBox::RunStart(const QString& Command)
 {
 	return m_pAPI->RunStart(m_Name, Command);
@@ -80,19 +84,26 @@ SB_STATUS CSandBox::CleanBox()
 	SB_STATUS Status = m_pAPI->TerminateAll(m_Name);
 	if (Status.IsError())
 		return Status;
-	return m_pAPI->CleanBox(m_Name);
+
+	QProcess* pProcess = new QProcess(this);
+	connect(pProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SIGNAL(BoxCleaned()));
+
+	// ToDo-later: do that manually
+	Status = m_pAPI->RunStart(m_Name, "delete_sandbox", pProcess);
+	
+	return Status;
 }
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
 	if (QDir(m_pAPI->Nt2DosPath(m_FilePath)).exists())
 		return SB_ERR("A sandbox must be emptied before it can be renamed.");
-	return m_pAPI->RenameBox(m_Name, NewName);
+	return RenameSection(NewName);
 }
 
 SB_STATUS CSandBox::RemoveBox()
 {
 	if (QDir(m_pAPI->Nt2DosPath(m_FilePath)).exists())
 		return SB_ERR("A sandbox must be emptied before it can be deleted.");
-	return m_pAPI->RemoveBox(m_Name);
+	return RemoveSection();
 }

@@ -10,7 +10,7 @@
 #include "./Dialogs/MultiErrorDialog.h"
 #include "../QSbieAPI/SbieUtils.h"
 
-CSbieAPI* theAPI = NULL;
+CSbiePlusAPI* theAPI = NULL;
 
 #if defined(Q_OS_WIN)
 #include <wtypes.h>
@@ -67,6 +67,8 @@ public:
 HWND MainWndHandle = NULL;
 #endif
 
+CSandMan* theGUI = NULL;
+
 CSandMan::CSandMan(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -76,9 +78,11 @@ CSandMan::CSandMan(QWidget *parent)
 	QApplication::instance()->installNativeEventFilter(new CNativeEventFilter);
 #endif
 
+	theGUI = this;
+
 	m_bExit = false;
 
-	theAPI = new CSbieAPI(this);
+	theAPI = new CSbiePlusAPI(this);
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
@@ -327,22 +331,24 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
 	m_pLogTabs->setCurrentIndex(theConf->GetInt("GUI/LogTab", 0));
 	
+	if (theConf->GetBool("Options/NoStatusBar", false))
+		statusBar()->hide();
+	else if (theConf->GetBool("Options/NoSizeGrip", false))
+		statusBar()->setSizeGripEnabled(false);
 
 	bool bIsMonitoring = theAPI->IsMonitoring();
 	m_pResourceLog->setEnabled(bIsMonitoring);
 	m_pEnableMonitoring->setChecked(bIsMonitoring);
 
-	m_pKeepTerminated->setChecked(theConf->GetBool("Options/pKeepTerminated"));
+	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 
+	m_pProgressDialog = new CProgressDialog("Maintenance operation progress...", this);
+	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 
 	connect(theAPI, SIGNAL(LogMessage(const QString&)), this, SLOT(OnLogMessage(const QString&)));
 
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 		ConnectSbie();
-
-	if (theConf->GetBool("Options/WatchIni", true))
-		theAPI->WatchIni();
-
 
 	m_uTimerID = startTimer(250);
 }
@@ -366,6 +372,8 @@ CSandMan::~CSandMan()
 	theConf->SetValue("GUI/LogTab", m_pLogTabs->currentIndex());
 
 	theAPI = NULL;
+
+	theGUI = NULL;
 }
 
 void CSandMan::OnExit()
@@ -457,6 +465,7 @@ void CSandMan::OnMessage(const QString& Message)
 			if (m_bConnectPending)
 				theAPI->Connect(true);
 		}
+		m_pProgressDialog->hide();
 		m_bConnectPending = false;
 		m_bStopPending = false;
 	}
@@ -536,10 +545,15 @@ void CSandMan::OnStatusChanged()
 
 		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+
+		if (theConf->GetBool("Options/WatchIni", true))
+			theAPI->WatchIni(true);
 	}
 	else
 	{
 		appTitle.append(tr("   -   Driver NOT connected").arg(theAPI->GetVersion()));
+
+		theAPI->WatchIni(false);
 	}
 	this->setWindowTitle(appTitle);
 }
@@ -716,6 +730,7 @@ void CSandMan::OnMaintenance()
 
 	if (Status.GetStatus() == OP_ASYNC) {
 		statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
+		m_pProgressDialog->show();
 		return;
 	}
 
@@ -739,7 +754,7 @@ void CSandMan::OnCleanUp()
 
 void CSandMan::OnSetKeep()
 {
-	theConf->SetValue("Options/pKeepTerminated", m_pKeepTerminated->isChecked());
+	theConf->SetValue("Options/KeepTerminated", m_pKeepTerminated->isChecked());
 }
 
 void CSandMan::OnEditIni()

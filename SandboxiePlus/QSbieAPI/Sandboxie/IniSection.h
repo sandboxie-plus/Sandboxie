@@ -1,9 +1,11 @@
 #pragma once
 #include <QObject>
 
+#include "../qsbieapi_global.h"
+
 #include "../SbieError.h"
 
-class CIniSection: public QObject
+class QSBIEAPI_EXPORT CIniSection: public QObject
 {
 	Q_OBJECT
 public:
@@ -20,10 +22,15 @@ public:
 	virtual __int64 GetNum64(const QString& Setting, __int64 Default = 0) const;
 	virtual bool GetBool(const QString& Setting, bool Default = false) const;
 
+	virtual QStringList GetTextList(const QString &Setting, bool withBrackets = false);
+
 	virtual SB_STATUS InsertText(const QString& Setting, const QString& Value);
 	virtual SB_STATUS AppendText(const QString& Setting, const QString& Value);
 
 	virtual SB_STATUS DelValue(const QString& Setting, const QString& Value);
+
+	virtual SB_STATUS RenameSection(const QString& NewName, bool deleteOld = true);
+	virtual SB_STATUS RemoveSection();
 
 protected:
 

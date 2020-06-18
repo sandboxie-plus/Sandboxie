@@ -52,7 +52,7 @@ CBoxedProcess::~CBoxedProcess()
 	//delete m;
 }
 
-void CBoxedProcess::UpdateProcessInfo()
+void CBoxedProcess::InitProcessInfo()
 {
 	HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, (DWORD)m_ProcessId);
 	if (ProcessHandle != INVALID_HANDLE_VALUE)

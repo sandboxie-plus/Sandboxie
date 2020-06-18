@@ -719,6 +719,19 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             CloseHandle(ThreadHandle);
 
+			// OpenBox1 BEGIN
+			if (!ok && SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+			{
+				ThreadHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE,
+					PipeServer::GetCallerProcessId());
+
+				ok = OpenProcessToken(
+					ThreadHandle, TOKEN_RIGHTS, &OldTokenHandle);
+
+				CloseHandle(ThreadHandle);
+			}
+			// OpenBox1 END
+
             if (! ok) {
                 SetLastError(LastError);
                 return NULL;

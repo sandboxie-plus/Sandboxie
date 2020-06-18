@@ -433,6 +433,12 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
         return NULL;
     }
 
+	// OpenBox2 BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)) {
+		return PrimaryToken;
+	}
+	// OpenBox2 END
+
     // DbgPrint("   Process Token %08X - %d <%S>\n", PrimaryToken, proc->pid, proc->image_name);
 
     proc->drop_rights =
@@ -775,6 +781,15 @@ _FX void *Token_Restrict(
     TOKEN_PRIVILEGES *privs;
     TOKEN_USER *user;
     void *NewTokenObject;
+	
+	// OpenBox2 BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
+		SeFilterToken(TokenObject, 0, NULL, NULL, NULL, &NewTokenObject);
+		return NewTokenObject;
+		//ObReferenceObject(TokenObject);
+		//return TokenObject;
+	}
+	// OpenBox2 END
 
     groups = Token_Query(TokenObject, TokenGroups, proc->box->session_id);
     privs = Token_Query(TokenObject, TokenPrivileges, proc->box->session_id);
@@ -1647,6 +1662,11 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
     PEPROCESS ProcessObject;
     NTSTATUS status;
     BOOLEAN ok = FALSE;
+
+	// OpenBox1 BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+		return TRUE;
+	// OpenBox1 END
 
     //
     // lookup the process object to get the old primary token

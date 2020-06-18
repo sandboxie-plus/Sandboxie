@@ -27,7 +27,7 @@
 #include "./Sandboxie/SandBox.h"
 #include "./Sandboxie/BoxedProcess.h"
 
-class CResLogEntry : public QSharedData
+class QSBIEAPI_EXPORT CResLogEntry : public QSharedData
 {
 public:
 	CResLogEntry(quint64 ProcessId, quint32 Type, const QString& Value);
@@ -77,7 +77,7 @@ public:
 	virtual void			UpdateDriveLetters();
 	virtual QString			Nt2DosPath(QString NtPath) const;
 
-	virtual SB_STATUS		ReloadBoxes();
+	virtual SB_STATUS		ReloadBoxes(bool bFull = false);
 	virtual SB_STATUS		CreateBox(const QString& BoxName);
 
 	virtual SB_STATUS		UpdateProcesses(bool bKeep);
@@ -122,14 +122,13 @@ protected:
 	friend class CSandBox;
 	friend class CBoxedProcess;
 
+	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
+	virtual CBoxedProcess*	NewBoxedProcess(quint64 ProcessId, class CSandBox* pBox);
+
 	virtual QString			GetSbieHome() const;
 	virtual QString			GetIniPath(bool* IsHome) const;
 
-	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command);
-
-	virtual SB_STATUS		CleanBox(const QString& BoxName);
-	virtual SB_STATUS		RenameBox(const QString& OldName, const QString& NewName, bool deleteOld = true);
-	virtual SB_STATUS		RemoveBox(const QString& BoxName);
+	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL);
 
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();

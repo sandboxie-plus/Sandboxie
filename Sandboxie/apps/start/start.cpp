@@ -925,7 +925,11 @@ int Program_Start(void)
         expanded = MyHeapAlloc(8192 * sizeof(WCHAR));
         ExpandEnvironmentStrings(cmdline, expanded, 8192);
 
-		if (wcsstr(expanded, L" ") && !wcsstr(expanded, L"\""))
+		//
+		// If the comman contains a space but no ", try to fix it
+		//
+
+		if (wcsstr(expanded, L" ") && !wcsstr(expanded, L"\"") && _waccess(expanded, 0) != -1)
 		{
 			wmemmove(expanded + 1, expanded, wcslen(expanded) + 1);
 			expanded[0] = L'\"';

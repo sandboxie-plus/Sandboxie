@@ -1230,7 +1230,7 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
 
         Conf_Data.pool = NULL;
         List_Init(&Conf_Data.sections);
-		Conf_Data.home = TRUE; // = FALSE;
+		Conf_Data.home = FALSE;
 
         ExReleaseResourceLite(Conf_Lock);
         KeLowerIrql(irql);
@@ -1371,7 +1371,7 @@ _FX BOOLEAN Conf_Init(void)
 {
     Conf_Data.pool = NULL;
     List_Init(&Conf_Data.sections);
-    Conf_Data.home = TRUE; // = FALSE;
+    Conf_Data.home = FALSE;
 
     if (! Mem_GetLockResource(&Conf_Lock, TRUE))
         return FALSE;

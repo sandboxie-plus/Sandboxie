@@ -168,8 +168,15 @@ void CSbieView::OnSandBoxAction()
 		if (QMessageBox("Sandboxie-Plus", tr("Do you really want delete teh content of the sellected sandboxes?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
 			return;
 
+		theGUI->GetProgressDialog()->show();
+
+		m_BoxesToClean = 0;
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
+		{
+			m_BoxesToClean++;
 			Results.append(pBox->CleanBox());
+			connect(pBox.data(), SIGNAL(BoxCleaned()), this, SLOT(OnBoxCleaned()));
+		}
 	}
 	else if (Action == m_pMenuEmptyBox)
 	{
@@ -178,6 +185,14 @@ void CSbieView::OnSandBoxAction()
 	}
 
 	CSandMan::CheckResults(Results);
+}
+
+void CSbieView::OnBoxCleaned()
+{
+	disconnect(sender(), SIGNAL(BoxCleaned()), this, SLOT(OnBoxCleaned()));
+
+	if(--m_BoxesToClean <= 0)
+		theGUI->GetProgressDialog()->hide();
 }
 
 void CSbieView::OnProcessAction()

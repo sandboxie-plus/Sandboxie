@@ -37,7 +37,7 @@
 #ifdef  WITH_DEBUG
 
 //#define  BREAK_IMAGE_1      L"java.exe" // L"jp2launcher.exe"
-#define  BREAK_IMAGE_1      L"TestTarget.exe" // L"jp2launcher.exe"
+#define  BREAK_IMAGE_1      L"TestTarget.exe" 
 
 int Debug_Init(void);
 

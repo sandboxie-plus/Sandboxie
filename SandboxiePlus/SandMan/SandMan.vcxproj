@@ -197,6 +197,7 @@
     <ClCompile Include="Models\ResMonModel.cpp" />
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="SandMan.cpp" />
+    <ClCompile Include="SbiePlusAPI.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -213,6 +214,7 @@
     <QtMoc Include="ApiLog.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
     <ClInclude Include="Resources\resource.h" />
+    <QtMoc Include="SbiePlusAPI.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

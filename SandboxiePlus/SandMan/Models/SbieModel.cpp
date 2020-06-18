@@ -7,8 +7,11 @@
 CSbieModel::CSbieModel(QObject *parent)
 :CTreeItemModel(parent)
 {
-	m_BoxEmpty = QIcon(":/BoxEmpty");
-	m_BoxInUse = QIcon(":/BoxInUse");
+	for (int i = 0; i < eMaxColor; i++)
+		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
+
+	//m_BoxEmpty = QIcon(":/BoxEmpty");
+	//m_BoxInUse = QIcon(":/BoxInUse");
 	m_ExeIcon = QIcon(":/exeIcon32");
 
 	m_Root = MkNode(QVariant());
@@ -91,6 +94,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 			Index = Find(m_Root, pNode);
 		}
 
+		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+
 		int Col = 0;
 		bool State = false;
 		int Changed = 0;
@@ -98,11 +103,16 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 		QMap<quint64, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
 		bool HasActive = Sync(pBox, ProcessList, New, Old, Added);
-
-		if (pNode->inUse != (HasActive ? 1 : 0))
+		int inUse = (HasActive ? 1 : 0);
+		int boxType = pBoxEx && pBoxEx->HasLogApi() ? eLogApi : eNormal;
+		if (pBoxEx && pBoxEx->IsOpenBox())
+			boxType = eOpenBox;// : eOpenInSys;
+		if (pNode->inUse != inUse || pNode->boxType != boxType)
 		{
-			pNode->inUse = (HasActive ? 1 : 0);
-			pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
+			pNode->inUse = inUse;
+			pNode->boxType = boxType;
+			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
+			pNode->Icon = pNode->inUse ? m_BoxIcons[(EBoxColors)boxType].second : m_BoxIcons[(EBoxColors)boxType].first;
 			Changed = 1; // set change for first column
 		}
 
@@ -115,6 +125,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 			switch(section)
 			{
 				case eName:				Value = pBox->GetName(); break;
+				case eStatus:			Value = boxType; break;
 			}
 
 			SSandBoxNode::SValue& ColValue = pNode->Values[section];
@@ -125,10 +136,10 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 					Changed = 1;
 				ColValue.Raw = Value;
 
-				/*switch (section)
+				switch (section)
 				{
-
-				}*/
+				case eStatus:			ColValue.Formated = boxType == eLogApi ? tr("LogApi Enabled") : tr("Normal"); break; // todo: add more
+				}
 			}
 
 			if(State != (Changed != 0))

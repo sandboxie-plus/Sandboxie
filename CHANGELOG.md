@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.2.1 / 5.41.1] - 2020-06-18
+
+### Added
+- added different sandbox icons for different types
+-- Red LogAPI/BSA enabled
+-- More to come :D
+- Added progress window for async operations that take time
+- added DPI awareness
+- the driver file is now obfuscated to avoid false positives
+- additional debug options to sandboxie.ini OpenToken=y that combines UnrestrictedToken=y and UnfilteredToken=y
+-- Note: using these options weekens the sandboxing, they are intended for debugging and may be used for better application virtualization later
+
+### Changed
+- SbieDll.dll when processinh InjectDll now looks in the SbieHome folder for the Dll's if the entered path starts with a backslash
+-- i.e. "InjectDll=\LogAPI\i386\logapi32v.dll" or "InjectDll64=\LogAPI\amd64\logapi64v.dll"
+
+### Fixed
+- IniWatcher did not work in portable mode
+- service path fix broke other services, now properly fixed, may be
+- found workaround for the msi installer issue
+
+
+
 ## [0.2 / 5.41.0] - 2020-06-08
 
 ### Added

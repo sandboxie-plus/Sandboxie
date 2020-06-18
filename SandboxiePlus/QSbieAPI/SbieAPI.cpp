@@ -122,6 +122,16 @@ CSbieAPI::~CSbieAPI()
 	delete m;
 }
 
+CSandBox* CSbieAPI::NewSandBox(const QString& BoxName, class CSbieAPI* pAPI)
+{
+	return new CSandBox(BoxName, pAPI);
+}
+
+CBoxedProcess* CSbieAPI::NewBoxedProcess(quint64 ProcessId, class CSandBox* pBox)
+{
+	return new CBoxedProcess(ProcessId, pBox);
+}
+
 SB_STATUS CSbieAPI::Connect(bool takeOver, bool andLoad)
 {
 	if (IsConnected())
@@ -575,7 +585,7 @@ QString CSbieAPI::GetIniPath(bool* IsHome) const
 	return IniPath;
 }
 
-SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command)
+SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(tr("Can't find Sandboxie instal path."));
@@ -583,12 +593,14 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command)
 	QStringList Arguments;
 	Arguments.append("/box:" + BoxName);
 	Arguments.append(Command);
-	QProcess::startDetached(m_SbiePath + "//" + QString::fromWCharArray(SBIESTART_EXE), Arguments);
-
+	if (pProcess)
+		pProcess->start(m_SbiePath + "//" + QString::fromWCharArray(SBIESTART_EXE), Arguments);
+	else
+		QProcess::startDetached(m_SbiePath + "//" + QString::fromWCharArray(SBIESTART_EXE), Arguments);
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::ReloadBoxes()
+SB_STATUS CSbieAPI::ReloadBoxes(bool bFull)
 {
 	QMap<QString, CSandBoxPtr> OldSandBoxes = m_SandBoxes;
 
@@ -603,11 +615,15 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		CSandBoxPtr pBox = OldSandBoxes.take(BoxName);
 		if (!pBox)
 		{
-			pBox = CSandBoxPtr(new CSandBox(BoxName, this));
+			pBox = CSandBoxPtr(NewSandBox(BoxName, this));
 			m_SandBoxes.insert(BoxName, pBox);
 
 			SetBoxPaths(pBox);
 		}
+		else if (!bFull)
+			continue;
+			
+		pBox->UpdateDetails();
 
 		// todo:
 	}
@@ -701,96 +717,6 @@ SB_STATUS CSbieAPI::CreateBox(const QString& BoxName)
 	return SbieIniSet(BoxName, "Enabled", "y");
 }
 
-SB_STATUS CSbieAPI::CleanBox(const QString& BoxName)
-{
-	// ToDo-later: do that manually
-	return RunStart(BoxName, "delete_sandbox");
-}
-
-SB_STATUS CSbieAPI::RenameBox(const QString& OldName, const QString& NewName, bool deleteOld) // Note: deleteOld is used when duplicating a box
-{
-	if (OldName.isEmpty() || NewName.isEmpty())
-		return SB_ERR();
-	bool SameName = (bool)(NewName.compare(OldName, Qt::CaseInsensitive) == 0);
-
-	qint32 status = STATUS_SUCCESS;
-
-	// Get all Settigns
-	QList<QPair<QString, QString>> Settings;
-	for (int setting_index = 0; ; setting_index++)
-	{
-		QString setting_name = SbieIniGet(OldName, NULL, setting_index | CONF_GET_NO_TEMPLS | CONF_GET_NO_EXPAND, &status);
-		if (status == STATUS_RESOURCE_NAME_NOT_FOUND) {
-			status = STATUS_SUCCESS;
-			break;
-		}
-		if (status != STATUS_SUCCESS)
-			break;
-
-		for (int value_index = 0; ; value_index++)
-		{
-			QString setting_value = SbieIniGet(OldName, setting_name, value_index | CONF_GET_NO_GLOBAL | CONF_GET_NO_TEMPLS | CONF_GET_NO_EXPAND, &status);
-			if (status == STATUS_RESOURCE_NAME_NOT_FOUND) {
-				status = STATUS_SUCCESS;
-				break;
-			}
-			if (status != STATUS_SUCCESS)
-				break;
-
-			Settings.append(qMakePair(setting_name, setting_value));
-		}
-
-		if (status != STATUS_SUCCESS)
-			break;
-	}
-
-	if (status != STATUS_SUCCESS)
-		return SB_ERR(CSbieAPI::tr("Failed to copy configuration from sandbox %1: %2").arg(OldName).arg(status, 8, 16), status);
-
-	// check if such a box already exists
-	if (!SameName) 
-	{
-		SbieIniGet(NewName, NULL, CONF_GET_NO_EXPAND, &status);
-		if (status != STATUS_RESOURCE_NAME_NOT_FOUND)
-			return SB_ERR(CSbieAPI::tr("A sandbox of the name %1 already exists").arg(NewName));
-	}
-
-	// if the name is the same we first delete than write, 
-	// else we first write and than delete, fro safety reasons
-	if (deleteOld && SameName)
-		goto do_delete;
-
-do_write:
-	// Apply all Settigns
-	for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
-	{
-		SB_STATUS Status = SbieIniSet(NewName, I->first, I->second);
-		if (Status.IsError())
-			return Status;
-	}
-
-do_delete:
-	// Selete ini section
-	if (deleteOld)
-	{
-		SB_STATUS Status = SbieIniSet(OldName, "*", "");
-		if (Status.IsError())
-			return SB_ERR(CSbieAPI::tr("Failed to delete sandbox %1: %2").arg(OldName).arg(Status.GetStatus(), 8, 16), Status.GetStatus());
-		deleteOld = false;
-
-		if (SameName)
-			goto do_write;
-	}
-
-	return SB_OK;
-}
-
-SB_STATUS CSbieAPI::RemoveBox(const QString& BoxName)
-{
-	// Note: SandBox must be emptied at this point
-	return SbieIniSet(BoxName, "*", "");
-}
-
 SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
 {
 	foreach(const CSandBoxPtr& pBox, m_SandBoxes)
@@ -827,13 +753,13 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 		CBoxedProcessPtr pProcess = OldProcessList.take(ProcessId);
 		if (!pProcess)
 		{
-			pProcess = CBoxedProcessPtr(new CBoxedProcess(ProcessId, pBox.data()));
+			pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 			//pProcess->m_pBox = pBox;
 			pBox->m_ProcessList.insert(ProcessId, pProcess);
 			m_BoxedProxesses.insert(ProcessId, pProcess);
 
 			SetProcessInfo(pProcess);
-			pProcess->UpdateProcessInfo();
+			pProcess->InitProcessInfo();
 		}
 
 		// todo:
@@ -1194,6 +1120,9 @@ SB_STATUS CSbieAPI::ReloadConfig(quint32 SessionId)
 		return SB_ERR(status);
 
 	emit LogMessage("Sandboxie config has been reloaded.");
+
+	ReloadBoxes(true);
+
 	return SB_OK;
 }
 

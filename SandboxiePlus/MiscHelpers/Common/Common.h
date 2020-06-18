@@ -90,3 +90,7 @@ MISCHELPERS_EXPORT QMenu* MakeMenu(QMenu* pParent, const QString& Text, const QS
 MISCHELPERS_EXPORT QAction* MakeAction(QMenu* pParent, const QString& Text, const QString& IconFile = "");
 MISCHELPERS_EXPORT QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, const QString& Text, const QVariant& Data);
 
+
+#ifdef WIN32
+MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
+#endif

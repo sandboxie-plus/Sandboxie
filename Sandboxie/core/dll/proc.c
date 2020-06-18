@@ -1106,6 +1106,9 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
             err = GetLastError();
         }
 
+		// OpenBox1 BEGIN
+		if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+		// OpenBox1 END
         if (ok) {
 
             //

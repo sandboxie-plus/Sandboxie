@@ -150,14 +150,14 @@ void CSbieView::OnSandBoxAction()
 		Results.append(SandBoxes.first()->RunCommand("cmd.exe"));
 	else if (Action == m_pMenuRename)
 	{
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", "Please enter a new name for the Sandbox.", QLineEdit::Normal, SandBoxes.first()->GetName());
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", "Please enter a new name for the Sandbox (without spaces).", QLineEdit::Normal, SandBoxes.first()->GetName());
 		if (Value.isEmpty() || Value == SandBoxes.first()->GetName())
 			return;
 		Results.append((SandBoxes.first()->RenameBox(Value)));
 	}
 	else if (Action == m_pMenuRemove)
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("Do you really want remove the sellected sandboxes?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+		if (QMessageBox("Sandboxie-Plus", tr("Do you really want remove the selected sandbox(es)?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
 			return;
 
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
@@ -165,7 +165,7 @@ void CSbieView::OnSandBoxAction()
 	}
 	else if (Action == m_pMenuCleanUp)
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("Do you really want delete teh content of the sellected sandboxes?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+		if (QMessageBox("Sandboxie-Plus", tr("Do you really want delete the content of the selected sandbox(es)?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
 			return;
 
 		theGUI->GetProgressDialog()->show();

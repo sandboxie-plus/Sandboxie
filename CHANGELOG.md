@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.2 / 5.41.2] - 2020-06-19
+
+### Added
+- added option SeparateUserFolders=n to no longer have the user profile files stored separately in the sandbox
+- added SandboxieLogon=y it makes processes run under the SID of the "Sandboxie" user instead of the Anonymous user
+-- Note: the global option AllowSandboxieLogon=y must be enabled, the "Sandboxie" user account must be manually created first and the driver reloaded, else process start will fail
+- improved debugging around process creation errors in the driver
+
+### Fixed
+- fixed some log messages going lost after driver reload
+- found a workable fix for the MSI installer issue, see Proc_CreateProcessInternalW_RS5
+
+
 
 ## [0.2.1 / 5.41.1] - 2020-06-18
 

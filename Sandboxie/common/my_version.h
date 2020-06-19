@@ -22,7 +22,7 @@
 
 #define MY_VERSION_BINARY       5,41
 #define MY_VERSION_STRING       "5.41"
-#define MY_VERSION_STRING_EX	"5.41.1"
+#define MY_VERSION_STRING_EX	"5.41.2"
 
 // These #defines are used by either Resource Compiler, or by NSIC installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"
@@ -35,6 +35,8 @@
 
 #define SANDBOXIE               L"Sandboxie"
 #define SBIE                    L"SBIE"
+
+#define SANDBOXIE_USER			L"Sandboxie"
 
 #define SBIE_BOXED_             SBIE L"_BOXED_"
 #define SBIE_BOXED_LEN          (4 + 7)

@@ -31,10 +31,12 @@ public:
 	virtual void			UpdateDetails();
 
 	virtual bool			HasLogApi() const { return m_bLogApiFound; }
-	virtual bool			IsOpenBox() const { return m_bIsOpenBox; }
+	virtual bool			NoAnonymousLogon() const { return m_bNoAnonymousLogon; }
+	virtual bool			HasOpenToken() const { return m_bHasOpenToken; }
 
 protected:
 	bool					m_bLogApiFound;
-	bool					m_bIsOpenBox;
+	bool					m_bNoAnonymousLogon;
+	bool					m_bHasOpenToken;
 
 };

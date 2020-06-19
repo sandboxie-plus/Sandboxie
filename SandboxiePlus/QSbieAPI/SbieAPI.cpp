@@ -159,6 +159,9 @@ SB_STATUS CSbieAPI::Connect(bool takeOver, bool andLoad)
 	m_SbiePath = GetSbieHome();
 	m->SbieMsgDll = LoadLibraryEx((m_SbiePath.toStdWString() + L"\\" SBIEMSG_DLL).c_str(), NULL, LOAD_LIBRARY_AS_DATAFILE);
 
+	m->lastMessageNum = 0;
+	m->lastRecordNum = 0;
+
 	m_bTerminate = false;
 	start();
 

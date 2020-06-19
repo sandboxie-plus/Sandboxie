@@ -29,7 +29,8 @@ CBoxedProcess* CSbiePlusAPI::NewBoxedProcess(quint64 ProcessId, class CSandBox* 
 CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSandBox(BoxName, pAPI)
 {
 	m_bLogApiFound = false;
-	m_bIsOpenBox = false;
+	m_bNoAnonymousLogon = false;
+	m_bHasOpenToken = false;
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -41,7 +42,9 @@ void CSandBoxPlus::UpdateDetails()
 	QStringList List = GetTextList("OpenPipePath");
 	m_bLogApiFound = List.contains("\\Device\\NamedPipe\\LogAPI");
 
-	m_bIsOpenBox = GetBool("OpenToken") || GetBool("UnrestrictedToken") || GetBool("UnfilteredToken") || GetBool("OriginalToken");
+	m_bNoAnonymousLogon = GetBool("AnonymousLogon", true) == false;
+
+	m_bHasOpenToken = GetBool("OpenToken") || GetBool("UnrestrictedToken") || GetBool("UnfilteredToken");
 
 	CSandBox::UpdateDetails();
 }

@@ -144,8 +144,10 @@ _FX BOOLEAN File_Init(void)
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
 
-    if (! File_InitUsers())
-        return FALSE;
+	if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+		if (!File_InitUsers())
+			return FALSE;
+	}
 
     File_InitRecoverFolders();
 

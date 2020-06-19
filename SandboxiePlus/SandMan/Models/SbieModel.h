@@ -67,7 +67,7 @@ private:
 
 		eNormal		= eYelow,
 		eLogApi		= eRed,
-		eOpenLogApi = eCyan,
+		//		    = eCyan,
 		eOpenBox	= eGreen,
 		//			= eMagenta,
 		//			= eOrang,

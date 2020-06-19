@@ -285,7 +285,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pToolBar->addSeparator();
 	
 
-	/*QWidget* pSpacer = new QWidget();
+	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	m_pToolBar->addWidget(pSpacer);
 
@@ -297,7 +297,7 @@ CSandMan::CSandMan(QWidget *parent)
 	pSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	connect(pSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnAbout()));
 	m_pToolBar->addWidget(pSupport);
-	m_pToolBar->addWidget(new QLabel("        "));*/
+	m_pToolBar->addWidget(new QLabel("        "));
 
 
 

@@ -105,8 +105,11 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 		bool HasActive = Sync(pBox, ProcessList, New, Old, Added);
 		int inUse = (HasActive ? 1 : 0);
 		int boxType = pBoxEx && pBoxEx->HasLogApi() ? eLogApi : eNormal;
-		if (pBoxEx && pBoxEx->IsOpenBox())
+		if (pBoxEx && pBoxEx->NoAnonymousLogon())
+			boxType = eCyan;
+		if (pBoxEx && pBoxEx->HasOpenToken())
 			boxType = eOpenBox;// : eOpenInSys;
+
 		if (pNode->inUse != inUse || pNode->boxType != boxType)
 		{
 			pNode->inUse = inUse;

@@ -1085,6 +1085,11 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
         lpApplicationName = TlsData->proc_image_path;
     }
 
+	if (Dll_OsBuild >= 17763) {
+		// Fix-Me: this is a workaround for the MSI installer to work properly
+		lpProcessAttributes = NULL;
+	}
+
     ok = __sys_CreateProcessInternalW_RS5(
         NULL, lpApplicationName, lpCommandLine,
         lpProcessAttributes, lpThreadAttributes, bInheritHandles,
@@ -1106,9 +1111,6 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
             err = GetLastError();
         }
 
-		// OpenBox1 BEGIN
-		if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
-		// OpenBox1 END
         if (ok) {
 
             //

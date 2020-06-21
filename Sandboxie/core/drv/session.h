@@ -41,7 +41,7 @@ void Session_Cancel(HANDLE ProcessId);
 
 BOOLEAN Session_IsForceDisabled(ULONG SessionId);
 
-void Session_MonitorPut(USHORT type, const WCHAR *name);
+void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid);
 
 
 //---------------------------------------------------------------------------

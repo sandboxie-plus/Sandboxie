@@ -196,19 +196,19 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
         return STATUS_INSUFFICIENT_RESOURCES;
 
     //
-    // open the configuration file, try both places
+    // open the configuration file, try both places, home first
     //
 
-    path_home = FALSE;
-    swprintf(path, path_sandboxie, SystemRoot);
+	path_home = TRUE; //  = FALSE;
+	swprintf(path, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
 
     status = Stream_Open(
         &stream, path, FILE_GENERIC_READ, 0, FILE_SHARE_READ, FILE_OPEN, 0);
 
     if (status == STATUS_OBJECT_NAME_NOT_FOUND) {
 
-        path_home = TRUE;
-        swprintf(path, path_sandboxie, Driver_HomePathDos);
+		path_home = FALSE; // = TRUE;
+		swprintf(path, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -1230,7 +1230,7 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
 
         Conf_Data.pool = NULL;
         List_Init(&Conf_Data.sections);
-        Conf_Data.home = FALSE;
+		Conf_Data.home = FALSE;
 
         ExReleaseResourceLite(Conf_Lock);
         KeLowerIrql(irql);

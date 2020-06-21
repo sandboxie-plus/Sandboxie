@@ -218,7 +218,7 @@ typedef struct _OBJECT_BASIC_INFORMATION {
 } OBJECT_BASIC_INFORMATION, *POBJECT_BASIC_INFORMATION;
 
 typedef struct _OBJECT_NAME_INFORMATION {
-    UNICODE_STRING ObjectName;
+    UNICODE_STRING Name;
 } OBJECT_NAME_INFORMATION, *POBJECT_NAME_INFORMATION;
 
 typedef struct __PUBLIC_OBJECT_TYPE_INFORMATION {
@@ -298,19 +298,22 @@ typedef struct _OBJECT_DIRECTORY_INFORMATION {
     UNICODE_STRING TypeName;
 } OBJECT_DIRECTORY_INFORMATION, *POBJECT_DIRECTORY_INFORMATION;
 
-__declspec(dllimport) NTSTATUS NtCreateDirectoryObject(
+__declspec(dllimport) NTSTATUS __stdcall
+NtCreateDirectoryObject(
     OUT PHANDLE             DirectoryHandle,
     IN ACCESS_MASK          DesiredAccess,
     IN POBJECT_ATTRIBUTES   ObjectAttributes
 );
 
-__declspec(dllimport) NTSTATUS NtOpenDirectoryObject(
+__declspec(dllimport) NTSTATUS __stdcall
+NtOpenDirectoryObject(
     OUT PHANDLE             DirectoryHandle,
     IN ACCESS_MASK          DesiredAccess,
     IN POBJECT_ATTRIBUTES   ObjectAttributes
 );
 
-__declspec(dllimport) NTSTATUS NtQueryDirectoryObject(
+__declspec(dllimport) NTSTATUS __stdcall
+NtQueryDirectoryObject(
     IN  HANDLE              DirectoryHandle,
     OUT PVOID               Buffer,
     IN  ULONG               Length,
@@ -921,6 +924,24 @@ typedef enum _PROCESSINFOCLASS {
     ProcessDebugObjectHandle,                           // 30
     ProcessDebugFlags,
     ProcessHandleTracing,
+	ProcessIoPriority,
+	ProcessExecuteFlags,
+	ProcessResourceManagement, // ProcessTlsInformation
+	ProcessCookie,
+	ProcessImageInformation,
+	ProcessCycleTime,
+	ProcessPagePriority,
+	ProcessInstrumentationCallback,						// 40
+	ProcessThreadStackAllocation,
+	ProcessWorkingSetWatchEx,
+	ProcessImageFileNameWin32,
+	ProcessImageFileMapping,
+	ProcessAffinityUpdateMode,
+	ProcessMemoryAllocationMode,
+	ProcessGroupInformation,
+	ProcessTokenVirtualizationEnabled,
+	ProcessConsoleHostProcess,
+	ProcessWindowInformation,							// 50
     MaxProcessInfoClass             // MaxProcessInfoClass should always be the last enum
     } PROCESSINFOCLASS;
 
@@ -931,7 +952,7 @@ typedef struct _PROCESS_BASIC_INFORMATION {
     LONG BasePriority;      // was type KPRIORITY
     ULONG_PTR UniqueProcessId;
     ULONG_PTR InheritedFromUniqueProcessId;
-} PROCESS_BASIC_INFORMATION;
+} PROCESS_BASIC_INFORMATION, *PPROCESS_BASIC_INFORMATION;
 
 typedef struct _PROCESS_IMAGE_FILE_NAME {
     USHORT  Length;
@@ -1011,7 +1032,8 @@ NtTerminateThread(
     IN NTSTATUS ExitStatus
 );
 
-__declspec(dllimport) NTSTATUS NtQueryInformationThread(
+__declspec(dllimport) NTSTATUS __stdcall 
+NtQueryInformationThread(
     IN  HANDLE ThreadHandle,
     IN  THREADINFOCLASS ThreadInformationClass,
     OUT PVOID ThreadInformation,
@@ -1188,7 +1210,8 @@ NtEnumerateKey(
     OUT PULONG ResultLength
 );
 
-__declspec(dllimport) NTSTATUS NtQueryKey(
+__declspec(dllimport) NTSTATUS __stdcall 
+NtQueryKey(
     IN HANDLE KeyHandle,
     IN KEY_INFORMATION_CLASS KeyInformationClass,
     OUT PVOID KeyInformation,
@@ -1241,56 +1264,110 @@ typedef enum _SYSTEM_INFORMATION_CLASS {
     SystemProcessorInformation,
     SystemPerformanceInformation,
     SystemTimeOfDayInformation,
-    SystemNotImplemented1,
+	SystemPathInformation,
     SystemProcessInformation,                               // 5
-    SystemCallCounts,
-    SystemConfigurationInformation,
-    SystemProcessorTimes,
-    SystemGlobalFlag,
-    SystemNotImplemented2,                                  // 10
+	SystemCallCountInformation,
+	SystemDeviceInformation,
+	SystemProcessorPerformanceInformation,
+	SystemFlagsInformation,
+    SystemCallTimeInformation,                              // 10
     SystemModuleInformation,                                // 11
-    SystemLockInformation,
-    SystemNotImplemented3,
-    SystemNotImplemented4,
-    SystemNotImplemented5,
+	SystemLocksInformation,
+	SystemStackTraceInformation,
+	SystemPagedPoolInformation,
+	SystemNonPagedPoolInformation,
     SystemHandleInformation,
     SystemObjectInformation,
-    SystemPagefileInformation,
-    SystemInstructionEmulationCounts,
-    SystemInvalidInfoClass1,
-    SystemCacheInformation,
-    SystemPoolTagInformation,
-    SystemProcessorStatistics,
-    SystemDpcInformation,
-    SystemNotImplemented6,
-    SystemLoadImage,
-    SystemUnloadImage,
-    SystemTimeAdjustment,
-    SystemNotImplemented7,
-    SystemNotImplemented8,
-    SystemNotImplemented9,
+	SystemPageFileInformation,
+	SystemVdmInstemulInformation,
+	SystemVdmBopInformation,
+	SystemFileCacheInformation,
+	SystemPoolTagInformation,
+	SystemInterruptInformation,
+	SystemDpcBehaviorInformation,
+	SystemFullMemoryInformation,
+	SystemLoadGdiDriverInformation,
+	SystemUnloadGdiDriverInformation,
+	SystemTimeAdjustmentInformation,
+	SystemSummaryMemoryInformation,
+	SystemMirrorMemoryInformation,
+	SystemPerformanceTraceInformation,
     SystemCrashDumpInformation,
     SystemExceptionInformation,                             // 33
     SystemCrashDumpStateInformation,
     SystemKernelDebuggerInformation,
     SystemContextSwitchInformation,
     SystemRegistryQuotaInformation,                         // 37
-    SystemLoadAndCallImage,
-    SystemPrioritySeparation,
-    SystemNotImplemented10,
-    SystemNotImplemented11,
-    SystemInvalidInfoClass2,
-    SystemInvalidInfoClass3,
-    SystemTimeZoneInformation,
+	SystemExtendServiceTableInformation,
+	SystemPrioritySeperation,
+	SystemVerifierAddDriverInformation,
+	SystemVerifierRemoveDriverInformation,
+	SystemProcessorIdleInformation,
+	SystemLegacyDriverInformation,
+    SystemCurrentTimeZoneInformation,
     SystemLookasideInformation,                             // 45
-    SystemSetTimeSlipEvent,
+	SystemTimeSlipNotification,
     SystemSessionCreate,
     SystemSessionDetach,
-    SystemInvalidInfoClass4,
+	SystemSessionInformation,
     SystemRangeStartInformation,                            // 50
     SystemVerifierInformation,
-    SystemAddVerifier,
-    SystemSessionProcessesInformation
+	SystemVerifierThunkExtend,
+	SystemSessionProcessInformation,
+	SystemLoadGdiDriverInSystemSpace,
+	SystemNumaProcessorMap,
+	SystemPrefetcherInformation,
+	SystemExtendedProcessInformation,
+	SystemRecommendedSharedDataAlignment,
+	SystemComPlusPackage,
+	SystemNumaAvailableMemory,
+	SystemProcessorPowerInformation,
+	SystemEmulationBasicInformation,				// WOW64
+	SystemEmulationProcessorInformation,		// WOW64
+	SystemExtendedHandleInformation,
+	SystemLostDelayedWriteInformation,
+	SystemBigPoolInformation,
+	SystemSessionPoolTagInformation,
+	SystemSessionMappedViewInformation,
+	SystemHotpatchInformation,
+	SystemObjectSecurityMode,
+	SystemWatchdogTimerHandler,
+	SystemWatchdogTimerInformation,
+	SystemLogicalProcessorInformation,
+	SystemWow64SharedInformationObsolete,
+	SystemRegisterFirmwareTableInformationHandler,
+	SystemFirmwareTableInformation,
+	SystemModuleInformationEx,
+	SystemVerifierTriageInformation,
+	SystemSuperfetchInformation,
+	SystemMemoryListInformation,
+	SystemFileCacheInformationEx,
+	SystemThreadPriorityClientIdInformation,
+	SystemProcessorIdleCycleTimeInformation,
+	SystemVerifierCancellationInformation,
+	SystemProcessorPowerInformationEx,
+	SystemRefTraceInformation,
+	SystemSpecialPoolInformation,
+	SystemProcessIdInformation,
+	SystemErrorPortInformation,
+	SystemBootEnvironmentInformation,
+	SystemHypervisorInformation,
+	SystemVerifierInformationEx,
+	SystemTimeZoneInformation,
+	SystemImageFileExecutionOptionsInformation,
+	SystemCoverageInformation,
+	SystemPrefetchPatchInformation,
+	SystemVerifierFaultsInformation,
+	SystemSystemPartitionInformation,
+	SystemSystemDiskInformation,
+	SystemProcessorPerformanceDistribution,
+	SystemNumaProximityNodeInformation,
+	SystemDynamicTimeZoneInformation,
+	SystemCodeIntegrityInformation,
+	SystemProcessorMicrocodeUpdateInformation,
+	SystemProcessorBrandString,
+	SystemVirtualAddressInformation,
+	MaxSystemInfoClass
 } SYSTEM_INFORMATION_CLASS;
 
 typedef struct _MODULE_INFO {
@@ -1346,13 +1423,13 @@ typedef struct _SYSTEM_HANDLE_INFORMATION {
 
 #endif
 
-__declspec(dllimport) NTSTATUS NtQuerySystemInformation(
+__declspec(dllimport) NTSTATUS __stdcall NtQuerySystemInformation(
     IN SYSTEM_INFORMATION_CLASS SystemInformationClass,
     OUT PVOID                   SystemInformation,
     IN ULONG                    SystemInformationLength,
     OUT PULONG                  ReturnLength OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtSetSystemInformation(
+__declspec(dllimport) NTSTATUS __stdcall NtSetSystemInformation(
     IN SYSTEM_INFORMATION_CLASS SystemInformationClass,
     IN OUT PVOID                   SystemInformation,
     IN ULONG                    SystemInformationLength);
@@ -1486,14 +1563,16 @@ typedef struct _ALPC_MESSAGE_VIEW {
 
 // end ALPC_INFO structure from LPC-ALPC-paper.pdf
 
-__declspec(dllimport) NTSTATUS NtCreatePort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtCreatePort(
     OUT PHANDLE PortHandle,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  ULONG MaxConnectInfoLength,
     IN  ULONG MaxMsgLength,
     IN  OUT PULONG Reserved OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtConnectPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtConnectPort(
     OUT PHANDLE ClientPortHandle,
     IN  PUNICODE_STRING ServerPortName,
     IN  PSECURITY_QUALITY_OF_SERVICE SecurityQos,
@@ -1503,7 +1582,8 @@ __declspec(dllimport) NTSTATUS NtConnectPort(
     IN  OUT PVOID ConnectionInfo OPTIONAL,
     IN  OUT PULONG ConnectionInfoLength OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtSecureConnectPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtSecureConnectPort(
     OUT PHANDLE ClientPortHandle,
     IN  PUNICODE_STRING ServerPortName,
     IN  PSECURITY_QUALITY_OF_SERVICE SecurityQos,
@@ -1514,7 +1594,8 @@ __declspec(dllimport) NTSTATUS NtSecureConnectPort(
     IN  OUT PVOID ConnectionInfo OPTIONAL,
     IN  OUT PULONG ConnectionInfoLength OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtAcceptConnectPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtAcceptConnectPort(
     OUT PHANDLE PortHandle,
     IN PVOID PortContext OPTIONAL,
     IN PPORT_MESSAGE ConnectionRequest,
@@ -1522,32 +1603,39 @@ __declspec(dllimport) NTSTATUS NtAcceptConnectPort(
     IN OUT PPORT_VIEW ServerView OPTIONAL,
     OUT PREMOTE_PORT_VIEW ClientView OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtCompleteConnectPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtCompleteConnectPort(
     IN  HANDLE PortHandle);
 
-__declspec(dllimport) NTSTATUS NtRegisterThreadTerminatePort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtRegisterThreadTerminatePort(
     IN  HANDLE PortHandle);
 
-__declspec(dllimport) NTSTATUS NtRequestPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtRequestPort(
     IN HANDLE PortHandle,
     IN PPORT_MESSAGE RequestMessage);
 
-__declspec(dllimport) NTSTATUS NtReplyPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtReplyPort(
     IN HANDLE PortHandle,
     IN PPORT_MESSAGE ReplyMessage);
 
-__declspec(dllimport) NTSTATUS NtRequestWaitReplyPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtRequestWaitReplyPort(
     IN HANDLE PortHandle,
     IN PPORT_MESSAGE RequestMessage,
     OUT PPORT_MESSAGE ReplyMessage);
 
-__declspec(dllimport) NTSTATUS NtReplyWaitReceivePort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtReplyWaitReceivePort(
     IN  HANDLE PortHandle,
     OUT PVOID *PortContext OPTIONAL,
     IN  PPORT_MESSAGE ReplyMessage OPTIONAL,
     OUT PPORT_MESSAGE ReceiveMessage);
 
-__declspec(dllimport) NTSTATUS NtImpersonateClientOfPort(
+__declspec(dllimport) NTSTATUS __stdcall
+NtImpersonateClientOfPort(
     IN  HANDLE PortHandle,
     IN  PPORT_MESSAGE PortMessage);
 
@@ -1652,18 +1740,18 @@ typedef NTSTATUS (*P_LdrGetDllHandleEx)(
 #define SYMBOLIC_LINK_QUERY (0x0001)
 #define SYMBOLIC_LINK_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED | 0x1)
 
-__declspec(dllimport) NTSTATUS NtCreateSymbolicLinkObject(
+__declspec(dllimport) NTSTATUS __stdcall NtCreateSymbolicLinkObject(
     OUT PHANDLE SymbolicLinkHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes,
     IN PUNICODE_STRING LinkTarget);
 
-__declspec(dllimport) NTSTATUS NtOpenSymbolicLinkObject(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenSymbolicLinkObject(
     OUT PHANDLE SymbolicLinkHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes);
 
-__declspec(dllimport) NTSTATUS NtQuerySymbolicLinkObject(
+__declspec(dllimport) NTSTATUS __stdcall NtQuerySymbolicLinkObject(
     IN HANDLE SymbolicLinkHandle,
     IN OUT PUNICODE_STRING LinkTarget,
     OUT PULONG ReturnedLength);
@@ -1702,22 +1790,23 @@ typedef ULONG EVENT_TYPE;
 
 //---------------------------------------------------------------------------
 
-__declspec(dllimport) NTSTATUS NtLoadDriver(
+__declspec(dllimport) NTSTATUS __stdcall NtLoadDriver(
     UNICODE_STRING *RegistryPath);
 
-__declspec(dllimport) NTSTATUS NtUnloadDriver(
+__declspec(dllimport) NTSTATUS __stdcall NtUnloadDriver(
     UNICODE_STRING *RegistryPath);
 
 //---------------------------------------------------------------------------
 
 typedef enum _MEMORY_INFORMATION_CLASS {
-    MemoryBasicInformation,
-    MemoryWorkingSetList,
-    MemorySectionName,
-    MemoryBasicVlmInformation
+	MemoryBasicInformation,
+	MemoryWorkingSetInformation,
+	MemoryMappedFilenameInformation,
+	MemoryRegionInformation,
+	MemoryWorkingSetExInformation
 } MEMORY_INFORMATION_CLASS;
 
-__declspec(dllimport) NTSTATUS NtAllocateVirtualMemory(
+__declspec(dllimport) NTSTATUS __stdcall NtAllocateVirtualMemory(
     IN  HANDLE ProcessHandle,
         PVOID *BaseAddress,
     IN  ULONG_PTR ZeroBits,
@@ -1725,28 +1814,28 @@ __declspec(dllimport) NTSTATUS NtAllocateVirtualMemory(
     IN  ULONG AllocationType,
     IN  ULONG Protect);
 
-__declspec(dllimport) NTSTATUS NtReadVirtualMemory(
+__declspec(dllimport) NTSTATUS __stdcall NtReadVirtualMemory(
     IN  HANDLE ProcessHandle,
     IN  PVOID BaseAddress,
     OUT PVOID Buffer,
     IN  SIZE_T BufferSize,
     OUT PSIZE_T NumberOfBytesRead OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtWriteVirtualMemory(
+__declspec(dllimport) NTSTATUS __stdcall NtWriteVirtualMemory(
     IN  HANDLE ProcessHandle,
     OUT PVOID BaseAddress,
     IN  PVOID Buffer,
     IN  SIZE_T BufferSize,
     OUT PSIZE_T NumberOfBytesWritten OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtProtectVirtualMemory(
+__declspec(dllimport) NTSTATUS __stdcall NtProtectVirtualMemory(
     IN  HANDLE ProcessHandle,
     IN  OUT PVOID *BaseAddress,
     IN  OUT PSIZE_T RegionSize,
     IN  ULONG NewProtect,
     OUT PULONG OldProtect);
 
-__declspec(dllimport) NTSTATUS NtQueryVirtualMemory(
+__declspec(dllimport) NTSTATUS __stdcall NtQueryVirtualMemory(
     IN  HANDLE ProcessHandle,
     IN  PVOID BaseAddress,
     IN  MEMORY_INFORMATION_CLASS MemoryInformationClass,
@@ -1756,26 +1845,26 @@ __declspec(dllimport) NTSTATUS NtQueryVirtualMemory(
 
 //---------------------------------------------------------------------------
 
-__declspec(dllimport) NTSTATUS NtSetEvent(
+__declspec(dllimport) NTSTATUS __stdcall NtSetEvent(
     IN  HANDLE EventHandle,
     OUT PLONG PreviousState OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtFlushInstructionCache(
+__declspec(dllimport) NTSTATUS __stdcall NtFlushInstructionCache(
     IN  HANDLE ProcessHandle,
     IN  PVOID BaseAddress OPTIONAL,
     IN  ULONG Length OPTIONAL);
 
 //---------------------------------------------------------------------------
 
-__declspec(dllimport) NTSTATUS NtLoadKey(
+__declspec(dllimport) NTSTATUS __stdcall NtLoadKey(
     POBJECT_ATTRIBUTES TargetObjectAttributes,
     POBJECT_ATTRIBUTES SourceObjectAttributes);
 
-__declspec(dllimport) NTSTATUS NtSaveKey(
+__declspec(dllimport) NTSTATUS __stdcall NtSaveKey(
     HANDLE KeyHandle,
     HANDLE FileHandle);
 
-__declspec(dllimport) NTSTATUS NtQueryValueKey(
+__declspec(dllimport) NTSTATUS __stdcall NtQueryValueKey(
     HANDLE KeyHandle,
     UNICODE_STRING *ValueName,
     KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
@@ -1783,7 +1872,7 @@ __declspec(dllimport) NTSTATUS NtQueryValueKey(
     ULONG Length,
     ULONG *ResultLength);
 
-__declspec(dllimport) NTSTATUS NtQueryMultipleValueKey(
+__declspec(dllimport) NTSTATUS __stdcall NtQueryMultipleValueKey(
     HANDLE KeyHandle,
     PKEY_VALUE_ENTRY ValueEntries,
     ULONG EntryCount,
@@ -1791,7 +1880,7 @@ __declspec(dllimport) NTSTATUS NtQueryMultipleValueKey(
     ULONG *Length,
     ULONG *ResultLength);
 
-__declspec(dllimport) NTSTATUS NtEnumerateValueKey(
+__declspec(dllimport) NTSTATUS __stdcall NtEnumerateValueKey(
     HANDLE KeyHandle,
     ULONG Index,
     KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
@@ -1799,7 +1888,7 @@ __declspec(dllimport) NTSTATUS NtEnumerateValueKey(
     ULONG Length,
     ULONG *ResultLength);
 
-__declspec(dllimport) NTSTATUS NtNotifyChangeKey(
+__declspec(dllimport) NTSTATUS __stdcall NtNotifyChangeKey(
     HANDLE KeyHandle,
     HANDLE Event OPTIONAL,
     PIO_APC_ROUTINE ApcRoutine OPTIONAL,
@@ -1811,7 +1900,7 @@ __declspec(dllimport) NTSTATUS NtNotifyChangeKey(
     ULONG BufferSize,
     BOOLEAN Asynchronous);
 
-__declspec(dllimport) NTSTATUS NtNotifyChangeMultipleKeys(
+__declspec(dllimport) NTSTATUS __stdcall NtNotifyChangeMultipleKeys(
     HANDLE MasterKeyHandle,
     ULONG Count,
     OBJECT_ATTRIBUTES SlaveObjects[],
@@ -1827,42 +1916,42 @@ __declspec(dllimport) NTSTATUS NtNotifyChangeMultipleKeys(
 
 //---------------------------------------------------------------------------
 
-__declspec(dllimport) NTSTATUS NtCreateEvent(
+__declspec(dllimport) NTSTATUS __stdcall NtCreateEvent(
     OUT PHANDLE EventHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  EVENT_TYPE EventType,
     IN  BOOLEAN InitialState);
 
-__declspec(dllimport) NTSTATUS NtOpenEvent(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenEvent(
     OUT PHANDLE EventHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
-__declspec(dllimport) NTSTATUS NtCreateMutant(
+__declspec(dllimport) NTSTATUS __stdcall NtCreateMutant(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  BOOLEAN InitialOwner);
 
-__declspec(dllimport) NTSTATUS NtOpenMutant(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenMutant(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
-__declspec(dllimport) NTSTATUS NtCreateSemaphore(
+__declspec(dllimport) NTSTATUS __stdcall NtCreateSemaphore(
     OUT PHANDLE SemaphoreHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  ULONG InitialCount,
     IN  ULONG MaximumCount);
 
-__declspec(dllimport) NTSTATUS NtOpenSemaphore(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenSemaphore(
     OUT PHANDLE SemaphoreHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
-__declspec(dllimport) NTSTATUS NtCreateSection(
+__declspec(dllimport) NTSTATUS __stdcall NtCreateSection(
     OUT PHANDLE SectionHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
@@ -1871,12 +1960,12 @@ __declspec(dllimport) NTSTATUS NtCreateSection(
     IN ULONG SectionAttributes,
     IN HANDLE FileHandle OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtOpenSection(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenSection(
     OUT PHANDLE SectionHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
-__declspec(dllimport) NTSTATUS NtMapViewOfSection(
+__declspec(dllimport) NTSTATUS __stdcall NtMapViewOfSection(
     IN  HANDLE SectionHandle,
     IN  HANDLE ProcessHandle,
     IN  OUT PVOID *BaseAddress,
@@ -1888,7 +1977,7 @@ __declspec(dllimport) NTSTATUS NtMapViewOfSection(
     IN  ULONG AllocationType,
     IN  ULONG Protect);
 
-__declspec(dllimport) NTSTATUS NtUnmapViewOfSection(
+__declspec(dllimport) NTSTATUS __stdcall NtUnmapViewOfSection(
     IN  HANDLE ProcessHandle,
     IN  PVOID BaseAddress);
 
@@ -1903,43 +1992,43 @@ __declspec(dllimport) NTSTATUS NtUnmapViewOfSection(
 #define TokenElevationTypeFull      2
 #define TokenElevationTypeLimited   3
 
-__declspec(dllimport) NTSTATUS NtOpenProcess(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenProcess(
     OUT PHANDLE ProcessHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  PCLIENT_ID ClientId);
 
-__declspec(dllimport) NTSTATUS NtOpenThread(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenThread(
     OUT PHANDLE ThreadHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  PCLIENT_ID ClientId);
 
-__declspec(dllimport) NTSTATUS NtOpenProcessToken(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenProcessToken(
     IN HANDLE       ProcessHandle,
     IN ACCESS_MASK  DesiredAccess,
     OUT PHANDLE     TokenHandle);
 
-__declspec(dllimport) NTSTATUS NtOpenThreadToken(
+__declspec(dllimport) NTSTATUS __stdcall NtOpenThreadToken(
     IN HANDLE       ThreadHandle,
     IN ACCESS_MASK  DesiredAccess,
     IN BOOLEAN      OpenAsSelf,
     OUT PHANDLE     TokenHandle);
 
-__declspec(dllimport) NTSTATUS NtQueryInformationToken(
+__declspec(dllimport) NTSTATUS __stdcall NtQueryInformationToken(
     IN HANDLE                   TokenHandle,
     IN TOKEN_INFORMATION_CLASS  TokenInformationClass,
     OUT PVOID                   TokenInformation,
     IN ULONG                    TokenInformationLength,
     OUT PULONG                  ReturnLength);
 
-__declspec(dllimport) NTSTATUS NtSetInformationToken(
+__declspec(dllimport) NTSTATUS __stdcall NtSetInformationToken(
     IN HANDLE                   TokenHandle,
     IN TOKEN_INFORMATION_CLASS  TokenInformationClass,
     OUT PVOID                   TokenInformation,
     IN ULONG                    TokenInformationLength);
 
-__declspec(dllimport) NTSTATUS NtDuplicateObject(
+__declspec(dllimport) NTSTATUS __stdcall NtDuplicateObject(
     IN  HANDLE SourceProcessHandle,
     IN  HANDLE SourceHandle,
     IN  HANDLE TargetProcessHandle,
@@ -1948,7 +2037,7 @@ __declspec(dllimport) NTSTATUS NtDuplicateObject(
     IN  ULONG HandleAttributes,
     IN  ULONG Options);
 
-__declspec(dllimport) NTSTATUS NtDuplicateToken(
+__declspec(dllimport) NTSTATUS __stdcall NtDuplicateToken(
     IN HANDLE ExistingTokenHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes,
@@ -1956,12 +2045,12 @@ __declspec(dllimport) NTSTATUS NtDuplicateToken(
     IN TOKEN_TYPE TokenType,
     OUT PHANDLE NewTokenHandle);
 
-__declspec(dllimport) NTSTATUS NtSetSecurityObject(
-    IN  HANDLE Handle,
-    IN  SECURITY_INFORMATION SecurityInformation,
-    IN  PSECURITY_DESCRIPTOR SecurityDescriptor);
+//__declspec(dllimport) NTSTATUS __stdcall NtSetSecurityObject(
+//    IN  HANDLE Handle,
+//    IN  SECURITY_INFORMATION SecurityInformation,
+//    IN  PSECURITY_DESCRIPTOR SecurityDescriptor);
 
-__declspec(dllimport) NTSTATUS NtFilterToken(
+__declspec(dllimport) NTSTATUS __stdcall NtFilterToken(
     IN HANDLE ExistingTokenHandle,
     IN ULONG Flags,
     IN PTOKEN_GROUPS SidsToDisable OPTIONAL,
@@ -1969,7 +2058,7 @@ __declspec(dllimport) NTSTATUS NtFilterToken(
     IN PTOKEN_GROUPS RestrictedSids OPTIONAL,
     OUT PHANDLE NewTokenHandle);
 
-__declspec(dllimport) NTSTATUS NtAdjustPrivilegesToken(
+__declspec(dllimport) NTSTATUS __stdcall NtAdjustPrivilegesToken(
     IN HANDLE TokenHandle,
     IN BOOLEAN DisableAllPrivileges,
     IN PTOKEN_PRIVILEGES NewState OPTIONAL,
@@ -1977,7 +2066,7 @@ __declspec(dllimport) NTSTATUS NtAdjustPrivilegesToken(
     OUT PTOKEN_PRIVILEGES PreviousState OPTIONAL,
     OUT PULONG ReturnLength);
 
-__declspec(dllimport) NTSTATUS NtPrivilegeCheck(
+__declspec(dllimport) NTSTATUS __stdcall NtPrivilegeCheck(
     IN HANDLE TokenHandle,
     IN OUT PPRIVILEGE_SET RequiredPrivileges,
     OUT PBOOLEAN Result);
@@ -1986,16 +2075,16 @@ typedef NTSTATUS (*P_RtlQueryElevationFlags)(ULONG *Flags);
 
 __declspec(dllimport) NTSTATUS RtlQueryElevationFlags(ULONG *Flags);
 
-__declspec(dllimport) NTSTATUS NtContinue(
+__declspec(dllimport) NTSTATUS __stdcall NtContinue(
     PCONTEXT ThreadContext, BOOLEAN RaiseAlert);
 
-__declspec(dllimport) NTSTATUS NtTestAlert(void);
+__declspec(dllimport) NTSTATUS __stdcall NtTestAlert(void);
 
-__declspec(dllimport) NTSTATUS NtImpersonateThread(
+__declspec(dllimport) NTSTATUS __stdcall NtImpersonateThread(
     HANDLE ServerThreadHandle, HANDLE ClientThreadHandle,
     PSECURITY_QUALITY_OF_SERVICE SecurityQos);
 
-__declspec(dllimport) NTSTATUS NtImpersonateAnonymousToken(
+__declspec(dllimport) NTSTATUS __stdcall NtImpersonateAnonymousToken(
     HANDLE ThreadHandle);
 
 //---------------------------------------------------------------------------
@@ -2068,15 +2157,15 @@ __declspec(dllimport) NTSTATUS RtlCreateProcessParameters(
     UNICODE_STRING *ShellInfo,
     UNICODE_STRING *RuntimeData);
 
-__declspec(dllimport) NTSTATUS NtCreateJobObject(
+__declspec(dllimport) NTSTATUS __stdcall NtCreateJobObject(
     OUT PHANDLE JobHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL);
 
-__declspec(dllimport) NTSTATUS NtAssignProcessToJobObject(
+__declspec(dllimport) NTSTATUS __stdcall NtAssignProcessToJobObject(
     HANDLE hJob, HANDLE hProcess);
 
-__declspec(dllimport) NTSTATUS NtSetInformationJobObject(
+__declspec(dllimport) NTSTATUS __stdcall NtSetInformationJobObject(
     IN  HANDLE JobHandle,
     IN  JOBOBJECTINFOCLASS JobObjectInformationClass,
     IN  PVOID JobObjectInformation,
@@ -2173,14 +2262,14 @@ __declspec(dllimport) void __stdcall RtlRaiseStatus(NTSTATUS Status);
 
 //---------------------------------------------------------------------------
 
-__declspec(dllimport) USHORT RtlCaptureStackBackTrace(
-    ULONG FramesToSkip,
-    ULONG FramesToCapture,
-    PVOID *BackTrace,
-    ULONG *BackTraceHash
-);
+//__declspec(dllimport) USHORT RtlCaptureStackBackTrace(
+//    ULONG FramesToSkip,
+//    ULONG FramesToCapture,
+//    PVOID *BackTrace,
+//    ULONG *BackTraceHash
+//);
 
-__declspec(dllimport) NTSTATUS NtRaiseHardError(
+__declspec(dllimport) NTSTATUS __stdcall NtRaiseHardError(
     NTSTATUS ErrorStatus,
     ULONG NumberOfParameters,
     ULONG UnicodeBitMask,

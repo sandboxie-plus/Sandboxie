@@ -55,6 +55,8 @@ class CMessageDialog : public CBaseDialog
 
     CPtrArray m_hidden;
 
+	ULONG m_last_message_number;
+
     BOOL IsHiddenMessage(
         ULONG code, const WCHAR *detail_1, const WCHAR *detail_2);
 

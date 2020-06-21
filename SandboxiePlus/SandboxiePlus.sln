@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SandMan", "SandMan\SandMan.vcxproj", "{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7AB8215A-59A4-4B8B-8090-16C87A860429} = {7AB8215A-59A4-4B8B-8090-16C87A860429}
+		{1433EC85-BDA4-402E-BEC1-48611206A64A} = {1433EC85-BDA4-402E-BEC1-48611206A64A}
+		{B12702AD-ABFB-343A-A199-8E24837244A3} = {B12702AD-ABFB-343A-A199-8E24837244A3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QSbieAPI", "QSbieAPI\QSbieAPI.vcxproj", "{1433EC85-BDA4-402E-BEC1-48611206A64A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiscHelpers", "MiscHelpers\MiscHelpers.vcxproj", "{7AB8215A-59A4-4B8B-8090-16C87A860429}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D28BB96E-F953-4FDF-818F-0CC48A5499FB}"
+	ProjectSection(SolutionItems) = preProject
+		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\TODO.md = ..\TODO.md
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtSingleApp", "QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Debug|x64.ActiveCfg = Debug|x64
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Debug|x64.Build.0 = Debug|x64
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Debug|x86.ActiveCfg = Debug|Win32
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Debug|x86.Build.0 = Debug|Win32
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Release|x64.ActiveCfg = Release|x64
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Release|x64.Build.0 = Release|x64
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Release|x86.ActiveCfg = Release|Win32
+		{B7A8576D-A08A-4A97-84E8-013DAF4D4F1F}.Release|x86.Build.0 = Release|Win32
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Debug|x64.ActiveCfg = Debug|x64
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Debug|x64.Build.0 = Debug|x64
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Debug|x86.ActiveCfg = Debug|Win32
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Debug|x86.Build.0 = Debug|Win32
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Release|x64.ActiveCfg = Release|x64
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Release|x64.Build.0 = Release|x64
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Release|x86.ActiveCfg = Release|Win32
+		{1433EC85-BDA4-402E-BEC1-48611206A64A}.Release|x86.Build.0 = Release|Win32
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Debug|x64.ActiveCfg = Debug|x64
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Debug|x64.Build.0 = Debug|x64
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Debug|x86.ActiveCfg = Debug|Win32
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Debug|x86.Build.0 = Debug|Win32
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Release|x64.ActiveCfg = Release|x64
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Release|x64.Build.0 = Release|x64
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Release|x86.ActiveCfg = Release|Win32
+		{7AB8215A-59A4-4B8B-8090-16C87A860429}.Release|x86.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.Build.0 = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DAAF42A-43C6-40CB-848F-DF67122CD602}
+		Qt5Version = msvc2015_64
+	EndGlobalSection
+EndGlobal

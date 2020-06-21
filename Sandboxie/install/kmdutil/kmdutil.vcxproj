@@ -70,9 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
-    <LibraryPath>$(WDKPATH)\lib\crt\amd64;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
@@ -125,6 +123,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="KmdUtil.c" />
+    <ClCompile Include="rc4.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="sbiedrv.c" />
     <ClCompile Include="scandll.c" />
     <ClCompile Include="stdafx.c">
@@ -135,6 +139,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="rc4.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

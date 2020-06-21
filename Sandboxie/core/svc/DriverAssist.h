@@ -96,7 +96,7 @@ private:
 
     void LogMessage();
 
-    void LogMessage_Single(void *data);
+    void LogMessage_Single(ULONG code, wchar_t* data);
     void LogMessage_Multi(ULONG msgid, const WCHAR *path, const WCHAR *text);
     void LogMessage_Write(const WCHAR *path, const WCHAR *text);
 
@@ -138,6 +138,8 @@ private:
     HANDLE *m_Threads;
 
     volatile bool m_DriverReady;
+
+	ULONG m_last_message_number;
 
     //
     // critical sections

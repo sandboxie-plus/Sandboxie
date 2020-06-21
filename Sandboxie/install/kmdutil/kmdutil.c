@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include "common/defines.h"
 #include "common/my_version.h"
+#include "rc4.h"
 
 extern void Kmd_ScanDll(BOOLEAN silent);
 
@@ -713,6 +714,39 @@ int __stdcall WinMain(
             &Driver_Altitude, &Driver_Group,
             &Options))
         return EXIT_FAILURE;
+
+	if (Driver_Path)
+	{
+		int path_len = wcslen(Driver_Path);
+		if (path_len > 8 && wcscmp(Driver_Path + path_len - 8, L".sys.rc4") == 0)
+		{
+			FILE* inFile = _wfopen(Driver_Path, L"rb");
+			if (inFile)
+			{
+				Driver_Path[path_len - 4] = L'\0';
+				FILE* outFile = _wfopen(Driver_Path, L"wb");
+				if (outFile)
+				{
+					fseek(inFile, 0, SEEK_END);
+					DWORD fileSize = ftell(inFile);
+					fseek(inFile, 0, SEEK_SET);
+
+					void* buffer = HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, fileSize);
+					fread(buffer, 1, fileSize, inFile);
+					
+					char key[] = "default_key";
+					rc4_sbox_t sbox;
+					rc4_init(&sbox, key, strlen(key));
+					rc4_transform(&sbox, buffer, fileSize);
+
+					fwrite(buffer, 1, fileSize, outFile);
+
+					fclose(outFile);
+				}
+				fclose(inFile);
+			}
+		}
+	}
 
     ScMgr = OpenSCManager(
         NULL, SERVICES_ACTIVE_DATABASE, SC_MANAGER_CREATE_SERVICE);

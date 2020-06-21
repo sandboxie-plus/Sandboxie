@@ -181,6 +181,9 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     WCHAR *dllname = Dll_AllocTemp(MAX_PATH * 2 * sizeof(WCHAR));
     ULONG index = 0;
 
+	WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
+	SbieApi_GetHomePath(NULL, 0, path, 1020);
+
     if (!__sys_LdrLoadDll)
         __sys_LdrLoadDll = (P_LdrLoadDll)GetProcAddress(Dll_Ntdll, "LdrLoadDll");
 
@@ -195,6 +198,18 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
                 continue;
             break;
         }
+
+		//
+		// For expidient use we allow to enter the dll name without a path 
+		// starting with \ in that case the DLL is looked for in %SbieHome%
+		//
+
+		if (dllname[0] == L'\\' && wcslen(path) + wcslen(dllname) + 1 < MAX_PATH  * 2)
+		{
+			wmemmove(dllname + wcslen(path), dllname, wcslen(dllname) + 1);
+			wmemcpy(dllname, path, wcslen(path));
+		}
+
 
         //
         // we have to prevent invocation of Ldr_CallDllCallbacks while
@@ -225,6 +240,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     }
 
     Dll_Free(dllname);
+	Dll_Free(path);
 }
 
 
@@ -399,7 +415,7 @@ _FX void Ldr_FixImagePath(void)
 
         //
         // if this is a forced program, we need to get the image path from
-        // the kernel (i.e. NtQueryVirtualMemory with MemorySectionName),
+        // the kernel (i.e. NtQueryVirtualMemory with MemoryMappedFilenameInformation),
         // in case the image path contains symbolic links or reparse points.
         // such links would have been translated by NtCreateFile if the
         // program was started by another program in the sandbox.  so if
@@ -471,7 +487,7 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
     BufferLength = 256;
     NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
     status = __sys_NtQueryVirtualMemory(
-        NtCurrentProcess(), (void *)Ldr_ImageBase, MemorySectionName,
+        NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
         NameUni, BufferLength, &BufferLength);
 
     if (status == STATUS_INFO_LENGTH_MISMATCH ||
@@ -480,7 +496,7 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
         Dll_Free(NameUni);
         NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
         status = __sys_NtQueryVirtualMemory(
-            NtCurrentProcess(), (void *)Ldr_ImageBase, MemorySectionName,
+            NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
             NameUni, BufferLength, &BufferLength);
     }
 

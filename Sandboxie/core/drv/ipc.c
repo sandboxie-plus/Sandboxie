@@ -940,7 +940,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
             mon_type |= MONITOR_OPEN;
         else
             mon_type |= MONITOR_DENY;
-        Session_MonitorPut(mon_type, mon_name);
+        Session_MonitorPut(mon_type, mon_name, proc->pid);
     }
 
     // DbgPrint("Process <%06d> Status <%08X> Object <%S>\n", proc->pid, status, Name->Name.Buffer);

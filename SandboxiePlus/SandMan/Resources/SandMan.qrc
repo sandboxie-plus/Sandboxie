@@ -1,0 +1,45 @@
+<RCC>
+    <qresource prefix="/">
+        <file>SandMan.png</file>
+        <file alias="BoxEmpty">sandbox-empty.png</file>
+        <file alias="BoxInUse">sandbox-full.png</file>
+        <file alias="dllIcon32">dll32.png</file>
+        <file alias="exeIcon32">exe32.png</file>
+        <file>close.png</file>
+        <file>SandMan2.png</file>
+    </qresource>
+    <qresource prefix="/Actions">
+        <file alias="SetLogging">Actions/SetLogging.png</file>
+        <file alias="Exit">Actions/exit.png</file>
+        <file alias="Keep">Actions/keep.png</file>
+        <file alias="Clean">Actions/clean.png</file>
+        <file alias="EmptyAll">Actions/empty_all.png</file>
+        <file alias="NewBox">Actions/new_box.png</file>
+        <file alias="ReloadIni">Actions/reload_ini.png</file>
+        <file alias="EditIni">Actions/edit_ini.png</file>
+        <file alias="LogAPI">Actions/log_api.png</file>
+        <file alias="Maintenance">Actions/Maintenance.png</file>
+        <file alias="Connect">Actions/Connect.png</file>
+        <file alias="Disconnect">Actions/Disconnect.png</file>
+        <file alias="Start">Actions/Start.png</file>
+        <file alias="Stop">Actions/Stop.png</file>
+        <file alias="Advanced">Actions/Advanced.png</file>
+        <file alias="Service">Actions/Service.png</file>
+    </qresource>
+    <qresource prefix="/Boxes">
+        <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
+        <file alias="Full3">Boxes/sandbox-b-full.png</file>
+        <file alias="Empty4">Boxes/sandbox-c-empty.png</file>
+        <file alias="Full4">Boxes/sandbox-c-full.png</file>
+        <file alias="Empty2">Boxes/sandbox-g-empty.png</file>
+        <file alias="Full2">Boxes/sandbox-g-full.png</file>
+        <file alias="Empty5">Boxes/sandbox-m-empty.png</file>
+        <file alias="Full5">Boxes/sandbox-m-full.png</file>
+        <file alias="Empty1">Boxes/sandbox-r-empty.png</file>
+        <file alias="Full1">Boxes/sandbox-r-full.png</file>
+        <file alias="Empty0">Boxes/sandbox-y-empty.png</file>
+        <file alias="Full0">Boxes/sandbox-y-full.png</file>
+        <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
+        <file alias="Full6">Boxes/sandbox-o-full.png</file>
+    </qresource>
+</RCC>

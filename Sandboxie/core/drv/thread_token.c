@@ -21,7 +21,7 @@
 
 
 #include "common/my_version.h"
-
+#include "conf.h"
 
 //---------------------------------------------------------------------------
 // Defines
@@ -1243,6 +1243,9 @@ _FX NTSTATUS Thread_SetInformationThread_ImpersonationToken(
                     MyTokenHandle, TOKEN_IMPERSONATE,
                     *SeTokenObjectType, UserMode, &TokenObject, NULL);
 
+		// OpenToken BEGIN
+		if (!(Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
+		// OpenToken END
         if (NT_SUCCESS(status)) {
 
             status = Thread_CheckTokenForImpersonation(

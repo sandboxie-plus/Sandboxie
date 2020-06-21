@@ -25,6 +25,7 @@
 #include "util.h"
 #include "hook.h"
 #include "common/my_version.h"
+#include "log_buff.h"
 
 
 //---------------------------------------------------------------------------
@@ -49,7 +50,7 @@ static BOOLEAN Api_FastIo_DEVICE_CONTROL(
     ULONG IoControlCode, IO_STATUS_BLOCK *IoStatus,
     DEVICE_OBJECT *DeviceObject);
 
-static void Api_DelWork(API_WORK_ITEM *work_item);
+//static void Api_DelWork(API_WORK_ITEM *work_item);
 
 
 //---------------------------------------------------------------------------
@@ -58,6 +59,8 @@ static void Api_DelWork(API_WORK_ITEM *work_item);
 static NTSTATUS Api_GetVersion(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms);
+
+static NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
 
@@ -92,8 +95,10 @@ volatile HANDLE Api_ServiceProcessId = NULL;
 
 static PERESOURCE Api_LockResource = NULL;
 
-static LIST Api_WorkList;
+//static LIST Api_WorkList;
 static BOOLEAN Api_WorkListInitialized = FALSE;
+
+static LOG_BUFFER* Api_LogBuffer = NULL;
 
 static volatile LONG Api_UseCount = -1;
 
@@ -108,11 +113,17 @@ _FX BOOLEAN Api_Init(void)
     NTSTATUS status;
     UNICODE_STRING uni;
 
+	//
+	// initialize log buffer
+	//
+
+	Api_LogBuffer = log_buffer_init(8 * 8 * 1024);
+
     //
     // initialize work list
     //
 
-    List_Init(&Api_WorkList);
+    //List_Init(&Api_WorkList);
 
     if (! Mem_GetLockResource(&Api_LockResource, TRUE))
         return FALSE;
@@ -168,6 +179,7 @@ _FX BOOLEAN Api_Init(void)
     Api_SetFunction(API_GET_VERSION,        Api_GetVersion);
     Api_SetFunction(API_GET_WORK,           Api_GetWork);
     Api_SetFunction(API_LOG_MESSAGE,        Api_LogMessage);
+	Api_SetFunction(API_GET_MESSAGE,        Api_GetMessage);
     Api_SetFunction(API_GET_HOME_PATH,      Api_GetHomePath);
     Api_SetFunction(API_SET_SERVICE_PORT,   Api_SetServicePort);
 
@@ -195,8 +207,6 @@ _FX BOOLEAN Api_Init(void)
 
 _FX void Api_Unload(void)
 {
-    API_WORK_ITEM *work_item;
-
     if (Api_DeviceObject) {
         IoDeleteDevice(Api_DeviceObject);
         Api_DeviceObject = NULL;
@@ -209,12 +219,18 @@ _FX void Api_Unload(void)
 
     if (Api_WorkListInitialized) {
 
-        while (1) {
+		if (Api_LogBuffer) {
+			log_buffer_free(Api_LogBuffer);
+			Api_LogBuffer = NULL;
+		}
+
+        /*API_WORK_ITEM *work_item;
+		while (1) {
             work_item = List_Head(&Api_WorkList);
             if (! work_item)
                 break;
             Api_DelWork(work_item);
-        }
+        }*/
 
         Mem_FreeLockResource(&Api_LockResource);
 
@@ -613,6 +629,136 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
+// Api_AddMessage
+//---------------------------------------------------------------------------
+
+
+_FX void Api_AddMessage(
+	NTSTATUS error_code,
+	const WCHAR *string1, ULONG string1_len,
+	const WCHAR *string2, ULONG string2_len,
+	ULONG session_id)
+{
+	KIRQL irql;
+
+	if (!Api_WorkListInitialized) // if (!Api_LogBuffer)
+		return;
+
+	//
+	// add work at the end of the work list
+	//
+
+	irql = Api_EnterCriticalSection();
+
+	ULONG entry_size = sizeof(ULONG)	// session_id
+		+ sizeof(ULONG)					// error_code
+		+ (string1_len + 1) * sizeof(WCHAR)
+		+ (string2_len + 1) * sizeof(WCHAR);
+
+	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer);
+	if (write_ptr) {
+		//[session_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
+		WCHAR null_char = L'\0';
+		log_buffer_push_bytes((CHAR*)&session_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&error_code, sizeof(ULONG), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)string1, string1_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)string2, string2_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+	}
+	// else // this can only happen when the entire buffer is to small to hold this entire entry
+		// if loging fails we can't log this error :/
+
+	Api_LeaveCriticalSection(irql);
+}
+
+
+//---------------------------------------------------------------------------
+// Api_GetMessage
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
+{
+	API_GET_MESSAGE_ARGS *args = (API_GET_MESSAGE_ARGS *)parms;
+	NTSTATUS status = STATUS_SUCCESS;
+	UNICODE_STRING64 *msgtext;
+	WCHAR *msgtext_buffer;
+	KIRQL irql;
+
+	if (proc)
+		return STATUS_NOT_IMPLEMENTED;
+
+	ProbeForRead(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
+	ProbeForWrite(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
+
+	ProbeForWrite(args->msgid.val, sizeof(ULONG), sizeof(ULONG));
+
+	msgtext = args->msgtext.val;
+	if (!msgtext)
+		return STATUS_INVALID_PARAMETER;
+	ProbeForRead(msgtext, sizeof(UNICODE_STRING64), sizeof(ULONG));
+	ProbeForWrite(msgtext, sizeof(UNICODE_STRING64), sizeof(ULONG));
+
+	msgtext_buffer = (WCHAR *)msgtext->Buffer;
+	if (!msgtext_buffer)
+		return STATUS_INVALID_PARAMETER;
+
+	irql = Api_EnterCriticalSection();
+
+	__try {
+
+		CHAR* read_ptr = log_buffer_get_next(*args->msg_num.val, Api_LogBuffer);
+
+		if (!read_ptr) {
+
+			status = STATUS_NO_MORE_ENTRIES;
+
+		} else {
+
+			LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, Api_LogBuffer);
+			LOG_BUFFER_SEQ_T seq_number = log_buffer_get_seq_num(&read_ptr, Api_LogBuffer);
+			*args->msg_num.val = seq_number;
+			//[session_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
+			ULONG session_id;
+			log_buffer_get_bytes((CHAR*)&session_id, 4, &read_ptr, Api_LogBuffer);
+
+			if (session_id == args->session_id.val) {
+
+				log_buffer_get_bytes((CHAR*)args->msgid.val, 4, &read_ptr, Api_LogBuffer);
+				SIZE_T msg_length = entry_size - (4 + 4);
+
+				if (msg_length <= msgtext->MaximumLength)
+				{
+					msgtext->Length = (USHORT)msg_length;
+					ProbeForWrite(msgtext_buffer, msg_length, sizeof(WCHAR));
+					memcpy(msgtext_buffer, read_ptr, msg_length);
+				}
+				else
+				{
+					status = STATUS_BUFFER_TOO_SMALL;
+				}
+
+			} else {
+				// this entry is not for us, so we return an empty result to maintain sequence consistency
+
+				*args->msgid.val = 0;
+
+			}
+
+		}
+
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+		status = GetExceptionCode();
+	}
+
+	Api_LeaveCriticalSection(irql);
+
+	return status;
+}
+
+
+//---------------------------------------------------------------------------
 // Api_SendServiceMessage
 //---------------------------------------------------------------------------
 
@@ -709,7 +855,7 @@ _FX BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
+/*_FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
 {
     KIRQL irql;
 
@@ -734,7 +880,7 @@ _FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
         return TRUE;
 
     return TRUE;
-}
+}*/
 
 
 //---------------------------------------------------------------------------
@@ -742,13 +888,13 @@ _FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
 //---------------------------------------------------------------------------
 
 
-_FX void Api_DelWork(API_WORK_ITEM *work_item)
+/*_FX void Api_DelWork(API_WORK_ITEM *work_item)
 {
     // this assumes Api_WorkList is already locked using Api_Lock
 
     List_Remove(&Api_WorkList, work_item);
     Mem_Free(work_item, work_item->length);
-}
+}*/
 
 
 //---------------------------------------------------------------------------
@@ -758,7 +904,9 @@ _FX void Api_DelWork(API_WORK_ITEM *work_item)
 
 _FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
 {
-    API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
+	return STATUS_NOT_IMPLEMENTED;
+
+    /*API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
     NTSTATUS status;
     void *buffer_ptr;
     ULONG buffer_len;
@@ -834,7 +982,7 @@ _FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
 
     Api_LeaveCriticalSection(irql);
 
-    return status;
+    return status;*/
 }
 
 

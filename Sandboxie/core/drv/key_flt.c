@@ -222,7 +222,6 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
         }
     }
 
-
     if (status != STATUS_SUCCESS)
         return status;
 

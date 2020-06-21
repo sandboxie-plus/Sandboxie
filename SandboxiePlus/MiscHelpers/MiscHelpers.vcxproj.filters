@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{964acff8-ecee-4dfc-939d-e2406a533100}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MiscHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CheckableMessageBox.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ComboInputDialog.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Common.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DebugHelpers.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Finder.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FlowLayout.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ItemChooser.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\KeyValueInputDialog.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ListItemModel.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\MultiLineInputDialog.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PanelView.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Settings.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SettingsWidgets.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SmartGridWidget.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SplitTreeView.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TabPanel.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TreeItemModel.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Xml.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\IconExtreactor.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\qRC4.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MiscHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DebugHelpers.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ExitDialog.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FlexError.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FlowLayout.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\HistoryGraph.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Xml.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\IconExtreactor.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\qRC4.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mischelpers_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Common\CheckableMessageBox.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\ComboInputDialog.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\Finder.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\ItemChooser.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\KeyValueInputDialog.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\ListItemModel.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\MultiLineInputDialog.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\PanelView.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\ProgressDialog.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\Settings.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\SettingsWidgets.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\SmartGridWidget.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\SortFilterProxyModel.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\SplitTreeView.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\TabPanel.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\TreeItemModel.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\TreeViewEx.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\TreeWidgetEx.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>

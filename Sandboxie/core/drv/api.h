@@ -38,7 +38,7 @@
 //---------------------------------------------------------------------------
 
 
-typedef struct _API_WORK_ITEM {
+/*typedef struct _API_WORK_ITEM {
 
     LIST_ELEM list_elem;
     ULONG length;           // length includes both header and data
@@ -47,7 +47,7 @@ typedef struct _API_WORK_ITEM {
 
     ULONG data[1];
 
-} API_WORK_ITEM;
+} API_WORK_ITEM;*/
 
 typedef struct _Sbie_SeFilterTokenArg
 {
@@ -110,7 +110,19 @@ BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data);
 // allocate work_item from Driver_Pool, and initialize type, length and data
 //
 
-BOOLEAN Api_AddWork(API_WORK_ITEM *work_item);
+//BOOLEAN Api_AddWork(API_WORK_ITEM *work_item);
+
+
+//
+// Add message to log buffer
+//
+
+void Api_AddMessage(
+	NTSTATUS error_code,
+	const WCHAR *string1, ULONG string1_len,
+	const WCHAR *string2, ULONG string2_len,
+	ULONG session_id);
+
 
 //
 // Copies boxname parameter from user

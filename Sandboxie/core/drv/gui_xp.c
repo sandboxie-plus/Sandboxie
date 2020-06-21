@@ -1334,7 +1334,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
                 --nptr; *nptr = L':';
                 --nptr; *nptr = L'$';
 
-                Session_MonitorPut(mon_type, nptr);
+                Session_MonitorPut(mon_type, nptr, proc->pid);
 
                 Mem_Free(nbuf, nlen);
             }

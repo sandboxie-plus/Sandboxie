@@ -825,7 +825,7 @@ _FX BOOL SbieDll_StartBoxedService(const WCHAR *ServiceName, BOOLEAN WithAdd)
     ULONG retries, error;
 
 	//WCHAR text[130];
-	//Sbie_swprintf(text, L"StartBoxedService; name: '%s'; pid: %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+	//Sbie_swprintf(text, L"StartBoxedService; name: '%s'", ServiceName); // fix-me: pottential buffer overflow
     //SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
@@ -1096,7 +1096,7 @@ _FX BOOL Scm_StartServiceW(
         return FALSE;
 
     WCHAR text[130];
-	Sbie_swprintf(text, L"StartService; name: '%s'; pid: %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+	Sbie_swprintf(text, L"StartService: %s", ServiceName); // fix-me: pottential buffer overflow
     SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     if (Scm_IsBoxedService(ServiceName))
@@ -1263,7 +1263,7 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
     }
 
     //WCHAR text[130];
-	//Sbie_swprintf(text, L"StartServiceCtrlDispatcher; name: '%s'; pid %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+	//Sbie_swprintf(text, L"StartServiceCtrlDispatcher; name: '%s'", ServiceName); // fix-me: pottential buffer overflow
     //SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
@@ -1304,8 +1304,9 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         args[2] = NULL;
     }
 
-    if (_wcsicmp(ServiceName, Scm_MsiServer) == 0)
-        Scm_IsMsiServer = TRUE;
+	if (_wcsicmp(ServiceName, Scm_MsiServer) == 0) {
+		Scm_IsMsiServer = TRUE;
+	}
 
     if (! CreateThread(NULL, 0, Scm_ServiceMainThread, args, 0, &ThreadId))
         Scm_Stopped = TRUE;

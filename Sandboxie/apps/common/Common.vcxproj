@@ -106,6 +106,7 @@
     <ClCompile Include="MyMsgBox.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\my_version.h" />
     <ClInclude Include="BoxOrder.h" />
     <ClInclude Include="CommonUtils.h" />
     <ClInclude Include="MyGdi.h" />

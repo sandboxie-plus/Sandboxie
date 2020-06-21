@@ -19,6 +19,7 @@
 // Syscall Management
 //---------------------------------------------------------------------------
 
+#include "conf.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -397,6 +398,7 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     HANDLE NewHandle;
     void *TargetProcessObject;
 
+
     //
     // if there is a target process handle, keep a record of the
     // associated process object so we can check it later
@@ -476,6 +478,9 @@ _FX NTSTATUS Syscall_DuplicateHandle(
 
         status = Syscall_DuplicateHandle_2(
             (HANDLE)user_args[2], NewHandle, TargetProcessObject, proc);
+
+		if (!NT_SUCCESS(status))
+			NtClose(NewHandle);
     }
 
     //
@@ -639,6 +644,9 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
         // thread_token.c has a function for this specific case.
         //
 
+		// OpenToken BEGIN
+		if (!(Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
+		// OpenToken END
         status = Thread_CheckTokenObject(
                     proc, OpenedObject, HandleInfo.GrantedAccess);
     }

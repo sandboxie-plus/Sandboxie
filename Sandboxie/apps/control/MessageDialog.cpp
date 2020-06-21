@@ -94,6 +94,8 @@ CMessageDialog::CMessageDialog(CWnd *pParentWnd, int mode)
     m_buf_len = (8 * 1024);
     m_buf = malloc_WCHAR(m_buf_len);
 
+	m_last_message_number = 0;
+
     if (mode == MSGDLG_NORMAL)
         ReloadConf();
 
@@ -250,19 +252,23 @@ void CMessageDialog::OnTimer()
     while (1) {
 
         ULONG len = m_buf_len;
-        LONG status = SbieApi_GetWork(CMyApp::m_session_id, m_buf, &len);
-        if (status != 0)
-            break;
+		ULONG message_number = m_last_message_number;
+		ULONG code = -1;
+        LONG status = SbieApi_GetMessage(&message_number, CMyApp::m_session_id, &code, m_buf, len);
+		if (status != 0)
+			break; // error or no more entries
 
-        ULONG *type = (ULONG *)m_buf;
-        if (*type != API_LOG_MESSAGE)
+		//if (message_number != m_last_message_number + 1)
+		//	we missed something
+		m_last_message_number = message_number;
+
+		if (code == 0)
+			continue; // empty dummy
+
+        if (/*code == MSG_2199 &&*/ m_firsttime)
             continue;
 
-        ULONG code = type[1];
-        if (code == MSG_2199 && m_firsttime)
-            continue;
-
-        WCHAR *str1 = (WCHAR *)&type[2];
+        WCHAR *str1 = m_buf;
         ULONG str1_len = wcslen(str1);
         WCHAR *str2 = str1 + str1_len + 1;
         ULONG str2_len = wcslen(str2);

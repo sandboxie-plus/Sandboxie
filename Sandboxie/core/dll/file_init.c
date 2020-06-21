@@ -144,8 +144,10 @@ _FX BOOLEAN File_Init(void)
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
 
-    if (! File_InitUsers())
-        return FALSE;
+	if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+		if (!File_InitUsers())
+			return FALSE;
+	}
 
     File_InitRecoverFolders();
 
@@ -1730,7 +1732,7 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
             } else {
 
                 UNICODE_STRING *uni =
-                    &((OBJECT_NAME_INFORMATION *)dirname)->ObjectName;
+                    &((OBJECT_NAME_INFORMATION *)dirname)->Name;
                 length = uni->Length / sizeof(WCHAR);
                 if (length > 95)
                     length = 95;

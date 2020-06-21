@@ -470,8 +470,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
     if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(
-            MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer);
+        Session_MonitorPut(MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
     }
 
     Mem_Free(Name, NameLength);

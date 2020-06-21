@@ -368,6 +368,7 @@ _FX NTSTATUS File_GetName(
     static const ULONG _ShareLen = 7;
     static const WCHAR *_Drive = L"\\drive\\";
     static const ULONG _DriveLen = 7;
+
     static const WCHAR *_User = L"\\user";
     static const ULONG _UserLen = 5;
     static const WCHAR *_UserAll = L"\\user\\all";
@@ -376,7 +377,7 @@ _FX NTSTATUS File_GetName(
     static const ULONG _UserCurrentLen = 13;
     static const WCHAR *_UserPublic = L"\\user\\public";
     static const ULONG _UserPublicLen = 12;
-
+	
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     NTSTATUS status;
@@ -461,7 +462,7 @@ _FX NTSTATUS File_GetName(
         if (! NT_SUCCESS(status))
             return status;
 
-        uni = &((OBJECT_NAME_INFORMATION *)name)->ObjectName;
+        uni = &((OBJECT_NAME_INFORMATION *)name)->Name;
 
 #ifdef WOW64_FS_REDIR
         //
@@ -791,7 +792,8 @@ check_sandbox_prefix:
     // that's ok because it hasn't been initialized yet
     //
 
-    else if (length >= _UserLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && // if we disable File_InitUsers we dont need to do it here and below
+			 length >= _UserLen &&
                 _wcsnicmp(*OutTruePath, _User, _UserLen) == 0) {
 
         if (File_AllUsersLen && length >= _UserAllLen &&
@@ -1045,7 +1047,8 @@ check_sandbox_prefix:
     // "\user\current", respectively
     //
 
-    else if (File_AllUsersLen && length >= File_AllUsersLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
+			 File_AllUsersLen && length >= File_AllUsersLen &&
                 0 == Dll_NlsStrCmp(
                         TruePath, File_AllUsers, File_AllUsersLen))
     {
@@ -1057,7 +1060,8 @@ check_sandbox_prefix:
 
     }
 
-    else if (File_CurrentUserLen && length >= File_CurrentUserLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
+			 File_CurrentUserLen && length >= File_CurrentUserLen &&
                 0 == Dll_NlsStrCmp(
                         TruePath, File_CurrentUser, File_CurrentUserLen))
     {
@@ -1069,7 +1073,8 @@ check_sandbox_prefix:
 
     }
 
-    else if (File_PublicUserLen && length >= File_PublicUserLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
+			 File_PublicUserLen && length >= File_PublicUserLen &&
                 0 == Dll_NlsStrCmp(
                         TruePath, File_PublicUser, File_PublicUserLen))
     {

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="SandMan">
+      <UniqueIdentifier>{66baf3d2-2745-4dfe-a2a8-b3a6e1b9edca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{4cb3f267-32bd-4389-b61a-47e231070586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views">
+      <UniqueIdentifier>{34eca1e5-cd50-4876-9f54-9eec4c393150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{6accf3ae-da17-4c0f-ba83-214e3874b029}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SandMan.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\SbieModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\SbieView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\ResMonModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ApiLog.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\MultiErrorDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="SbiePlusAPI.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="SandMan.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\SbieModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Views\SbieView.h">
+      <Filter>Views</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\ResMonModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="ApiLog.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Dialogs\MultiErrorDialog.h">
+      <Filter>Dialogs</Filter>
+    </QtMoc>
+    <QtMoc Include="SbiePlusAPI.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resources\SandMan.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\SandMan.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\SandMan.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- qtsinglecoreapplication.cpp -->
+<head>
+  <title>QtSingleCoreApplication Class Reference</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">QtSingleCoreApplication Class Reference</h1>
+<p>A variant of the <a href="qtsingleapplication.html">QtSingleApplication</a> class for non-GUI applications. <a href="#details">More...</a></p>
+<pre> #include &lt;QtSingleCoreApplication&gt;</pre><p>Inherits <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html">QCoreApplication</a>.</p>
+<ul>
+<li><a href="qtsinglecoreapplication-members.html">List of all members, including inherited members</a></li>
+</ul>
+<hr />
+<a name="public-functions"></a>
+<h2>Public Functions</h2>
+<table class="alignedsummary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td class="memItemLeft" align="right" valign="top"></td><td class="memItemRight" valign="bottom"><b><a href="qtsinglecoreapplication.html#QtSingleCoreApplication">QtSingleCoreApplication</a></b> ( int &amp; <i>argc</i>, char ** <i>argv</i> )</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"></td><td class="memItemRight" valign="bottom"><b><a href="qtsinglecoreapplication.html#QtSingleCoreApplication-2">QtSingleCoreApplication</a></b> ( const QString &amp; <i>appId</i>, int &amp; <i>argc</i>, char ** <i>argv</i> )</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString </td><td class="memItemRight" valign="bottom"><b><a href="qtsinglecoreapplication.html#id">id</a></b> () const</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool </td><td class="memItemRight" valign="bottom"><b><a href="qtsinglecoreapplication.html#isRunning">isRunning</a></b> ()</td></tr>
+</table>
+<ul>
+<li><div bar="2" class="fn"></div>4 public functions inherited from <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#public-functions">QCoreApplication</a></li>
+<li><div bar="2" class="fn"></div>29 public functions inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#public-functions">QObject</a></li>
+</ul>
+<hr />
+<a name="public-slots"></a>
+<h2>Public Slots</h2>
+<table class="alignedsummary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td class="memItemLeft" align="right" valign="top">bool </td><td class="memItemRight" valign="bottom"><b><a href="qtsinglecoreapplication.html#sendMessage">sendMessage</a></b> ( const QString &amp; <i>message</i>, int <i>timeout</i> = 5000 )</td></tr>
+</table>
+<ul>
+<li><div bar="2" class="fn"></div>1 public slot inherited from <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#public-slots">QCoreApplication</a></li>
+<li><div bar="2" class="fn"></div>1 public slot inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#public-slots">QObject</a></li>
+</ul>
+<hr />
+<a name="signals"></a>
+<h2>Signals</h2>
+<table class="alignedsummary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td class="memItemLeft" align="right" valign="top">void </td><td class="memItemRight" valign="bottom"><b><a href="qtsinglecoreapplication.html#messageReceived">messageReceived</a></b> ( const QString &amp; <i>message</i> )</td></tr>
+</table>
+<ul>
+<li><div bar="2" class="fn"></div>1 signal inherited from <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#signals">QCoreApplication</a></li>
+<li><div bar="2" class="fn"></div>1 signal inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#signals">QObject</a></li>
+</ul>
+<h3>Additional Inherited Members</h3>
+<ul>
+<li><div class="fn"></div>4 properties inherited from <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#properties">QCoreApplication</a></li>
+<li><div class="fn"></div>1 property inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#properties">QObject</a></li>
+<li><div class="fn"></div>1 public type inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#public-variables">QObject</a></li>
+<li><div class="fn"></div>38 static public members inherited from <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#static-public-members">QCoreApplication</a></li>
+<li><div class="fn"></div>4 static public members inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#static-public-members">QObject</a></li>
+<li><div class="fn"></div>1 protected function inherited from <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#protected-functions">QCoreApplication</a></li>
+<li><div class="fn"></div>7 protected functions inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#protected-functions">QObject</a></li>
+<li><div class="fn"></div>2 protected variables inherited from <a href="http://qt.nokia.com/doc/4.6/qobject.html#protected-variables">QObject</a></li>
+</ul>
+<a name="details"></a>
+<hr />
+<h2>Detailed Description</h2>
+<p>A variant of the <a href="qtsingleapplication.html">QtSingleApplication</a> class for non-GUI applications.</p>
+<p>This class is a variant of <a href="qtsingleapplication.html">QtSingleApplication</a> suited for use in console (non-GUI) applications. It is an extension of <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html">QCoreApplication</a> (instead of <a href="http://qt.nokia.com/doc/4.6/qapplication.html">QApplication</a>). It does not require the <a href="http://qt.nokia.com/doc/4.6/qtgui.html">QtGui</a> library.</p>
+<p>The API and usage is identical to <a href="qtsingleapplication.html">QtSingleApplication</a>, except that functions relating to the &quot;activation window&quot; are not present, for obvious reasons. Please refer to the <a href="qtsingleapplication.html">QtSingleApplication</a> documentation for explanation of the usage.</p>
+<p>A QtSingleCoreApplication instance can communicate to a <a href="qtsingleapplication.html">QtSingleApplication</a> instance if they share the same application id. Hence, this class can be used to create a light-weight command-line tool that sends commands to a GUI application.</p>
+<p>See also <a href="qtsingleapplication.html">QtSingleApplication</a>.</p>
+<hr />
+<h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="QtSingleCoreApplication"></a>QtSingleCoreApplication::QtSingleCoreApplication ( int &amp; <i>argc</i>, char ** <i>argv</i> )</h3>
+<p>Creates a <a href="qtsinglecoreapplication.html">QtSingleCoreApplication</a> object. The application identifier will be <a href="http://qt.nokia.com/doc/4.6/qcoreapplication.html#applicationFilePath">QCoreApplication::applicationFilePath</a>(). <i>argc</i> and <i>argv</i> are passed on to the QCoreAppliation constructor.</p>
+<h3 class="fn"><a name="QtSingleCoreApplication-2"></a>QtSingleCoreApplication::QtSingleCoreApplication ( const <a href="http://qt.nokia.com/doc/4.6/qstring.html">QString</a> &amp; <i>appId</i>, int &amp; <i>argc</i>, char ** <i>argv</i> )</h3>
+<p>Creates a <a href="qtsinglecoreapplication.html">QtSingleCoreApplication</a> object with the application identifier <i>appId</i>. <i>argc</i> and <i>argv</i> are passed on to the QCoreAppliation constructor.</p>
+<h3 class="fn"><a name="id"></a><a href="http://qt.nokia.com/doc/4.6/qstring.html">QString</a> QtSingleCoreApplication::id () const</h3>
+<p>Returns the application identifier. Two processes with the same identifier will be regarded as instances of the same application.</p>
+<h3 class="fn"><a name="isRunning"></a>bool QtSingleCoreApplication::isRunning ()</h3>
+<p>Returns true if another instance of this application is running; otherwise false.</p>
+<p>This function does not find instances of this application that are being run by a different user (on Windows: that are running in another session).</p>
+<p>See also <a href="qtsinglecoreapplication.html#sendMessage">sendMessage</a>().</p>
+<h3 class="fn"><a name="messageReceived"></a>void QtSingleCoreApplication::messageReceived ( const <a href="http://qt.nokia.com/doc/4.6/qstring.html">QString</a> &amp; <i>message</i> )&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted when the current instance receives a <i>message</i> from another instance of this application.</p>
+<p>See also <a href="qtsinglecoreapplication.html#sendMessage">sendMessage</a>().</p>
+<h3 class="fn"><a name="sendMessage"></a>bool QtSingleCoreApplication::sendMessage ( const <a href="http://qt.nokia.com/doc/4.6/qstring.html">QString</a> &amp; <i>message</i>, int <i>timeout</i> = 5000 )&nbsp;&nbsp;<tt> [slot]</tt></h3>
+<p>Tries to send the text <i>message</i> to the currently running instance. The <a href="qtsinglecoreapplication.html">QtSingleCoreApplication</a> object in the running instance will emit the <a href="qtsinglecoreapplication.html#messageReceived">messageReceived</a>() signal when it receives the message.</p>
+<p>This function returns true if the message has been sent to, and processed by, the current instance. If there is no instance currently running, or if the running instance fails to process the message within <i>timeout</i> milliseconds, this function return false.</p>
+<p>See also <a href="qtsinglecoreapplication.html#isRunning">isRunning</a>() and <a href="qtsinglecoreapplication.html#messageReceived">messageReceived</a>().</p>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2010 Nokia Corporation and/or its subsidiary(-ies)</td>
+<td width="40%" align="center"><a href="http://qt.nokia.com/doc/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

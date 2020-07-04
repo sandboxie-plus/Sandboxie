@@ -316,21 +316,23 @@ NTSTATUS Key_StoreValue(PROCESS *proc, REG_SET_VALUE_KEY_INFORMATION *pSetInfo, 
 
 			// Note: Driver verifyer does not like ZwXxx unctions being fed userspace memory
 			PUNICODE_STRING ValueName = (pSetInfo->ValueName && pSetInfo->ValueName->MaximumLength > 0) ?
-				(PUNICODE_STRING)ExAllocatePoolWithTag(NonPagedPool, sizeof(UNICODE_STRING) + pSetInfo->ValueName->MaximumLength, tzuk) : NULL;
+				(PUNICODE_STRING)ExAllocatePoolWithTag(NonPagedPool, sizeof(UNICODE_STRING) + pSetInfo->ValueName->MaximumLength + 8, tzuk) : NULL;
 			if (ValueName)
 			{
-				ValueName->Length = pSetInfo->ValueName->Length;
-				ValueName->MaximumLength = pSetInfo->ValueName->MaximumLength;
-				ValueName->Buffer = (PWCH)(((UCHAR*)ValueName) + sizeof(UNICODE_STRING));
-				memcpy(ValueName->Buffer, pSetInfo->ValueName->Buffer, pSetInfo->ValueName->Length);
-
-				PVOID Data = pSetInfo->DataSize > 0 ? ExAllocatePoolWithTag(NonPagedPool, pSetInfo->DataSize, tzuk) : NULL;
+				PVOID Data = pSetInfo->DataSize > 0 ? ExAllocatePoolWithTag(NonPagedPool, pSetInfo->DataSize + 8, tzuk) : NULL;
 				if (Data)
 				{
-					if (pSetInfo->Data) memcpy(Data, pSetInfo->Data, pSetInfo->DataSize);
-
 					__try
 					{
+						ValueName->Length = pSetInfo->ValueName->Length;
+						ValueName->MaximumLength = pSetInfo->ValueName->MaximumLength;
+						ValueName->Buffer = (PWCH)(((UCHAR*)ValueName) + sizeof(UNICODE_STRING));
+						if (ValueName->Length > ValueName->MaximumLength)
+							ValueName->Length = ValueName->MaximumLength;
+						memcpy(ValueName->Buffer, pSetInfo->ValueName->Buffer, ValueName->Length);
+
+						if (pSetInfo->Data) memcpy(Data, pSetInfo->Data, pSetInfo->DataSize);
+
 						rc = ZwSetValueKey(handle, ValueName, pSetInfo->TitleIndex, pSetInfo->Type, Data, pSetInfo->DataSize);
 					}
 					__except (EXCEPTION_EXECUTE_HANDLER) { }
@@ -385,24 +387,28 @@ NTSTATUS Key_PreDataInject(REG_QUERY_VALUE_KEY_INFORMATION *pPreInfo, ULONG spid
 
 			// Note: Driver verifyer does not like ZwXxx unctions being fed userspace memory
 			PUNICODE_STRING ValueName = (pPreInfo->ValueName && pPreInfo->ValueName->MaximumLength > 0) ?
-				(PUNICODE_STRING)ExAllocatePoolWithTag(NonPagedPool, sizeof(UNICODE_STRING) + pPreInfo->ValueName->MaximumLength, tzuk) : NULL;
+				(PUNICODE_STRING)ExAllocatePoolWithTag(NonPagedPool, sizeof(UNICODE_STRING) + pPreInfo->ValueName->MaximumLength + 8, tzuk) : NULL;
 			if (ValueName)
 			{
-				ValueName->Length = pPreInfo->ValueName->Length;
-				ValueName->MaximumLength = pPreInfo->ValueName->MaximumLength;
-				ValueName->Buffer = (PWCH)(((UCHAR*)ValueName) + sizeof(UNICODE_STRING));
-				memcpy(ValueName->Buffer, pPreInfo->ValueName->Buffer, pPreInfo->ValueName->Length);
-
-				PVOID KeyValueInformation = pPreInfo->Length > 0 ? ExAllocatePoolWithTag(NonPagedPool, pPreInfo->Length, tzuk) : NULL;
+				PVOID KeyValueInformation = pPreInfo->Length > 0 ? ExAllocatePoolWithTag(NonPagedPool, pPreInfo->Length + 8, tzuk) : NULL;
 				if (KeyValueInformation)
 				{
 					__try
 					{
+						ValueName->Length = pPreInfo->ValueName->Length;
+						ValueName->MaximumLength = pPreInfo->ValueName->MaximumLength;
+						ValueName->Buffer = (PWCH)(((UCHAR*)ValueName) + sizeof(UNICODE_STRING));
+						if (ValueName->Length > ValueName->MaximumLength)
+							ValueName->Length = ValueName->MaximumLength;
+						memcpy(ValueName->Buffer, pPreInfo->ValueName->Buffer, ValueName->Length);
+
 						ULONG  ResultLength = pPreInfo->ResultLength ? *pPreInfo->ResultLength : 0;
 
 						rc = ZwQueryValueKey(handle, ValueName, pPreInfo->KeyValueInformationClass, KeyValueInformation, pPreInfo->Length, &ResultLength);
 
 						if (pPreInfo->ResultLength) *pPreInfo->ResultLength = ResultLength;
+						if (ResultLength > pPreInfo->Length)
+							ResultLength = pPreInfo->Length;
 						if (pPreInfo->KeyValueInformation) memcpy(pPreInfo->KeyValueInformation, KeyValueInformation, ResultLength);
 					}
 					__except (EXCEPTION_EXECUTE_HANDLER) {}

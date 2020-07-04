@@ -10,8 +10,8 @@
 #include "Models/ApiMonModel.h"
 
 #define VERSION_MJR		0
-#define VERSION_MIN 	2
-#define VERSION_REV 	5
+#define VERSION_MIN 	3
+#define VERSION_REV 	0
 #define VERSION_UPD 	0
 
 

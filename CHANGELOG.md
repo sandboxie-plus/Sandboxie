@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.2.5 / 5.42] - 2020-07-04
+## [0.3 / 5.42] - 2020-07-04
 
 ### Added
 - API_QUERY_PROCESS_INFO can be now used to get the original process token of sandboxed processes

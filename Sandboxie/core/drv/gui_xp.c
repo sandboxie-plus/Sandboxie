@@ -410,7 +410,7 @@ _FX NTSTATUS Gui_Api_Init_XpHook(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         InterlockedExchange(&Gui_HookCount, Gui_HookCount | GUI_HOOK_FAILED);
-        Log_Msg0(MSG_GUI_INIT_FAILED);
+        Log_MsgP0(MSG_GUI_INIT_FAILED, proc->pid);
         return STATUS_UNSUCCESSFUL;
     }
 
@@ -437,7 +437,7 @@ _FX NTSTATUS Gui_Api_Init_XpHook(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         InterlockedExchange(&Gui_HookCount, Gui_HookCount | GUI_HOOK_FAILED);
-        Log_Msg0(MSG_GUI_INIT_FAILED);
+        Log_MsgP0(MSG_GUI_INIT_FAILED, proc->pid);
         return STATUS_UNSUCCESSFUL;
     }
 

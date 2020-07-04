@@ -104,11 +104,13 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 
 		bool HasActive = Sync(pBox, ProcessList, New, Old, Added);
 		int inUse = (HasActive ? 1 : 0);
-		int boxType = pBoxEx && pBoxEx->HasLogApi() ? eLogApi : eNormal;
-		if (pBoxEx && pBoxEx->NoAnonymousLogon())
-			boxType = eCyan;
-		if (pBoxEx && pBoxEx->HasOpenToken())
-			boxType = eOpenBox;// : eOpenInSys;
+		int boxType = eYelow;
+		if(pBoxEx->HasLogApi())
+			boxType = eRed;
+		if (pBoxEx->IsUnsecureDebugging())
+			boxType = eMagenta;
+		else if (pBoxEx->IsSecurityRestricted())
+			boxType = eOrang;
 
 		if (pNode->inUse != inUse || pNode->boxType != boxType)
 		{
@@ -128,7 +130,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 			switch(section)
 			{
 				case eName:				Value = pBox->GetName(); break;
-				case eStatus:			Value = boxType; break;
+				case eStatus:			Value = pBox.objectCast<CSandBoxPlus>()->GetStatusStr(); break;
+				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
 			SSandBoxNode::SValue& ColValue = pNode->Values[section];
@@ -141,7 +144,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 
 				switch (section)
 				{
-				case eStatus:			ColValue.Formated = boxType == eLogApi ? tr("LogApi Enabled") : tr("Normal"); break; // todo: add more
+				case eName:				ColValue.Formated = Value.toString().replace("_", " "); break;
 				}
 			}
 
@@ -234,6 +237,7 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QMap<quint64, CBoxedProcess
 			//case eTitle:			break; // todo
 			//case eLogCount:			break; // todo Value = pProcess->GetResourceLog().count(); break;
 			case eTimeStamp:		Value = pProcess->GetTimeStamp(); break;
+			case ePath:				Value = pProcess->GetFileName(); break;
 			}
 
 			SSandBoxNode::SValue& ColValue = pNode->Values[section];
@@ -308,6 +312,7 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 			//case eTitle:			return tr("Title");
 			//case eLogCount:			return tr("Log Count");
 			case eTimeStamp:		return tr("Start Time");
+			case ePath:				return tr("Path");
 		}
 	}
     return QVariant();

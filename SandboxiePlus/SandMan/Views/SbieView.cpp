@@ -41,6 +41,9 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	m_pMainLayout->addWidget(new CFinder(m_pSortProxy, this));
 
+
+	connect(m_pSbieModel, SIGNAL(ToolTipCallback(const QVariant&, QString&)), this, SLOT(OnToolTipCallback(const QVariant&, QString&)), Qt::DirectConnection);
+
 	m_pMenuRun = m_pMenu->addMenu(tr("Run"));
 		m_pMenuRunAny = m_pMenuRun->addAction(tr("Run Program"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunBrowser = m_pMenuRun->addAction(tr("Run Web Browser"), this, SLOT(OnSandBoxAction()));
@@ -50,11 +53,24 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMenu->addSeparator();
 	m_pMenuCleanUp = m_pMenu->addAction(tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
+	m_pMenuPresets = m_pMenu->addMenu(tr("Sandbox Presets"));
+		m_pMenuPresetsLogApi = m_pMenuPresets->addAction(tr("Enable API Call logging"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsLogApi->setCheckable(true);
+		m_pMenuPresetsINet = m_pMenuPresets->addAction(tr("Block Internet Access"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsINet->setCheckable(true);
+		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsShares->setCheckable(true);
+		m_pMenuPresetsNoAdmin = m_pMenuPresets->addAction(tr("Drop Admin Rights"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsNoAdmin->setCheckable(true);
+
 	m_pMenuRename = m_pMenu->addAction(tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRemove = m_pMenu->addAction(tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMenuBox = m_pMenu->actions().count();
 
 	m_pMenuTerminate = m_pMenu->addAction(tr("Terminate"), this, SLOT(OnProcessAction()));
+	m_pMenuTerminate->setShortcut(QKeySequence::Delete);
+	m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pMenuTerminate);
 	m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
 	m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
@@ -88,15 +104,43 @@ void CSbieView::Refresh()
 	}
 }
 
+void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
+{
+	if (ID.type() == QVariant::String)
+	{
+		QString BoxName = ID.toString();
+		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+		if (!pBoxEx)
+			return;
+
+		// todo more info
+
+		ToolTip = BoxName + "\n";
+		ToolTip += tr("    File root: %1\n").arg(pBoxEx->GetFileRoot());
+		ToolTip += tr("    Registry root: %1\n").arg(pBoxEx->GetRegRoot());
+		ToolTip += tr("    IPC root: %1\n").arg(pBoxEx->GetIpcRoot());
+		
+		ToolTip += tr("Options:\n    ");
+		ToolTip += pBoxEx->GetStatusStr().replace(", ", "\n    ");
+	}
+	else if (quint64 ProcessId = ID.toULongLong())
+	{
+		// todo proc info
+	}
+}
+
 void CSbieView::OnMenu(const QPoint& Point)
 {
+	CSandBoxPtr pBox;
+	CBoxedProcessPtr pProcess;
 	int iProcessCount = 0;
 	int iSandBoxeCount = 0;
 	int iSuspendedCount = 0;
 	foreach(const QModelIndex& Index, m_pSbieTree->selectedRows())
 	{
 		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
-		CBoxedProcessPtr pProcess = m_pSbieModel->GetProcess(ModelIndex);
+		pProcess = m_pSbieModel->GetProcess(ModelIndex);
 		if (pProcess)
 		{
 			iProcessCount++;
@@ -105,7 +149,7 @@ void CSbieView::OnMenu(const QPoint& Point)
 		}
 		else
 		{
-			CSandBoxPtr pBox = m_pSbieModel->GetSandBox(ModelIndex);
+			pBox = m_pSbieModel->GetSandBox(ModelIndex);
 			if (pBox)
 				iSandBoxeCount++;
 		}
@@ -117,6 +161,13 @@ void CSbieView::OnMenu(const QPoint& Point)
 		MenuActions[i]->setVisible(iSandBoxeCount > 0 && iProcessCount == 0);
 	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
 	m_pMenuRename->setEnabled(iSandBoxeCount == 1);
+
+	m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
+	m_pMenuPresetsLogApi->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasLogApi());
+	m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
+	m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
+	m_pMenuPresetsNoAdmin->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsDropRights());
+
 
 	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
 		MenuActions[i]->setVisible(iProcessCount > 0 && iSandBoxeCount == 0);
@@ -148,10 +199,20 @@ void CSbieView::OnSandBoxAction()
 		Results.append(SandBoxes.first()->RunCommand("explorer.exe /e,::{20D04FE0-3AEA-1069-A2D8-08002B30309D}"));
 	else if (Action == m_pMenuRunCmd)
 		Results.append(SandBoxes.first()->RunCommand("cmd.exe"));
+	else if (Action == m_pMenuPresetsLogApi)
+		SandBoxes.first().objectCast<CSandBoxPlus>()->SetLogApi(m_pMenuPresetsLogApi->isChecked());
+	else if (Action == m_pMenuPresetsINet)
+		SandBoxes.first().objectCast<CSandBoxPlus>()->SetINetBlock(m_pMenuPresetsINet->isChecked());
+	else if (Action == m_pMenuPresetsShares)
+		SandBoxes.first().objectCast<CSandBoxPlus>()->SetAllowShares(m_pMenuPresetsShares->isChecked());
+	else if (Action == m_pMenuPresetsNoAdmin)
+		SandBoxes.first().objectCast<CSandBoxPlus>()->SetDropRights(m_pMenuPresetsNoAdmin->isChecked());
+
 	else if (Action == m_pMenuRename)
 	{
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", "Please enter a new name for the Sandbox (without spaces).", QLineEdit::Normal, SandBoxes.first()->GetName());
-		if (Value.isEmpty() || Value == SandBoxes.first()->GetName())
+		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", "Please enter a new name for the Sandbox.", QLineEdit::Normal, OldValue);
+		if (Value.isEmpty() || Value == OldValue)
 			return;
 		Results.append((SandBoxes.first()->RenameBox(Value)));
 	}
@@ -200,6 +261,13 @@ void CSbieView::OnProcessAction()
 	QList<SB_STATUS> Results;
 
 	QAction* Action = qobject_cast<QAction*>(sender());
+	if (Action == m_pMenuTerminate)
+	{
+		if (QMessageBox("Sandboxie-Plus", tr("Do you want to %1 the selected process(es)").arg(((QAction*)sender())->text().toLower())
+			, QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+			return;
+	}
+
 	foreach(const CBoxedProcessPtr& pProcess, CSbieView::GetSelectedProcesses())
 	{
 		if (Action == m_pMenuTerminate)

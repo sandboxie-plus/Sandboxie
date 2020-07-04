@@ -284,6 +284,7 @@ _FX LONG SbieApi_GetMessage(
 	ULONG* MessageNum,
 	ULONG SessionId,
 	ULONG *MessageId,
+	ULONG *Pid,
 	wchar_t *Buffer,
 	ULONG Length)
 {
@@ -302,6 +303,7 @@ _FX LONG SbieApi_GetMessage(
 	args->session_id.val = SessionId;
 	args->msgid.val = MessageId;
 	args->msgtext.val = &msgtext;
+	args->process_id.val = Pid;
 
 	status = SbieApi_Ioctl(parms);
 

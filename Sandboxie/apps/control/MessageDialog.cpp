@@ -254,7 +254,8 @@ void CMessageDialog::OnTimer()
         ULONG len = m_buf_len;
 		ULONG message_number = m_last_message_number;
 		ULONG code = -1;
-        LONG status = SbieApi_GetMessage(&message_number, CMyApp::m_session_id, &code, m_buf, len);
+		ULONG pid = 0;
+        LONG status = SbieApi_GetMessage(&message_number, CMyApp::m_session_id, &code, &pid, m_buf, len);
 		if (status != 0)
 			break; // error or no more entries
 

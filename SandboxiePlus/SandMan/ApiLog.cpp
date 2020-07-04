@@ -1,5 +1,20 @@
 #include "stdafx.h"
 #include "ApiLog.h"
+#include <Windows.h>
+
+CApiLogEntry::CApiLogEntry(quint64 ProcessId, const QString& Message)
+{
+	m_ProcessId = ProcessId;
+	m_Message = Message;
+	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
+
+	static atomic<quint64> uid = 0;
+	m_uid = uid.fetch_add(1);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// 
+//
 
 CApiLog::CApiLog(QObject* parent) : QThread(parent)
 {
@@ -51,7 +66,10 @@ void CApiLogServer::OnPipe()
 	connect(pSocket, SIGNAL(readyRead()), this, SLOT(OnData()));
 	connect(pSocket, SIGNAL(disconnected()), this, SLOT(OnClose()));
 
-	m_pClients.insert(pSocket, new SApiLog());
+	ULONG ClientProcessId = 0;
+	GetNamedPipeClientProcessId((HANDLE)pSocket->socketDescriptor(), &ClientProcessId);
+
+	m_pClients.insert(pSocket, new SApiLog(ClientProcessId));
 }
 
 void CApiLogServer::OnData()
@@ -69,8 +87,11 @@ void CApiLogServer::OnData()
 		if (endPos == -1)
 			break;
 
-		emit m_pApiLog->ApiLogEntry(QString(ApiLog->Buffer.data()));
+		CApiLogEntryPtr LogEntry = CApiLogEntryPtr(new CApiLogEntry(ApiLog->ProcessId, QString(ApiLog->Buffer.data())));
 		ApiLog->Buffer.remove(0, endPos + 1);
+
+		QWriteLocker Lock(&m_pApiLog->m_ApiLogMutex);
+		m_pApiLog->m_ApiLogList.append(LogEntry);
 	}
 }
 

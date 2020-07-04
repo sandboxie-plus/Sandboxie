@@ -974,7 +974,7 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
     swprintf(text, L"%s [%s]", proc->image_name, box->name);
     if (proc->image_copy)
         wcscat(text, L" *");
-    Log_Msg1(msgid, text);
+    Log_MsgP1(msgid, text, proc->pid);
     Mem_Free(text, len);
 }
 

@@ -121,7 +121,8 @@ void Api_AddMessage(
 	NTSTATUS error_code,
 	const WCHAR *string1, ULONG string1_len,
 	const WCHAR *string2, ULONG string2_len,
-	ULONG session_id);
+	ULONG session_id,
+	ULONG process_id);
 
 
 //

@@ -239,7 +239,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
         ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenPath, TRUE);
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPath);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
         return FALSE;
     }
 
@@ -249,7 +249,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 
     ok = Process_GetPaths(proc, &proc->closed_key_paths, _ClosedPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 
@@ -261,7 +261,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     if (ok)
         ok = Process_GetPaths(proc, &proc->read_key_paths, _ReadPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ReadPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
     }
 
@@ -279,7 +279,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
                     proc, &proc->closed_key_paths, _WritePath, TRUE);
         }
         if (! ok) {
-            Log_Msg1(MSG_INIT_PATHS, _WritePath);
+            Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
             return FALSE;
         }
     }

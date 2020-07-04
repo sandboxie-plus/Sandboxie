@@ -388,7 +388,24 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
             *data = proc->ntdll32_base;
 
-        } else
+        } else if (args->info_type.val == 'ptok') {
+
+			void *PrimaryTokenObject = proc->primary_token;
+			if (PrimaryTokenObject)
+			{
+				ObReferenceObject(PrimaryTokenObject);
+
+				HANDLE MyTokenHandle;
+				status = ObOpenObjectByPointer(PrimaryTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
+
+				ObDereferenceObject(PrimaryTokenObject);
+
+				*data = (ULONG64)MyTokenHandle;
+			}
+			else
+				status = STATUS_NOT_FOUND;
+		}
+		else
             status = STATUS_INVALID_INFO_CLASS;
 
     //

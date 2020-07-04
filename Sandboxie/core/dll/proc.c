@@ -230,6 +230,20 @@ typedef BOOL(*P_GetTokenInformation)(
     _In_ DWORD TokenInformationLength,
     _Out_ PDWORD ReturnLength);
 
+typedef BOOL(*P_SetTokenInformation)(
+	_In_ HANDLE TokenHandle,
+	_In_ TOKEN_INFORMATION_CLASS TokenInformationClass,
+	_In_reads_bytes_(TokenInformationLength) LPVOID TokenInformation,
+	_In_ DWORD TokenInformationLength);
+
+typedef BOOL(*P_AddAccessAllowedAceEx)(
+	_Inout_ PACL pAcl,
+	_In_ DWORD dwAceRevision,
+	_In_ DWORD AccessMask,
+	_In_ PSID pSid);
+
+typedef BOOL(*P_GetLengthSid)(
+	_In_ _Post_readable_byte_size_(return) PSID pSid);
 
 //---------------------------------------------------------------------------
 
@@ -255,6 +269,12 @@ static P_NtQueryInformationProcess  __sys_NtQueryInformationProcess = NULL;
 static P_NtCreateProcessEx          __sys_NtCreateProcessEx         = NULL;
 
 static P_GetTokenInformation        __sys_GetTokenInformation       = NULL;
+/*static P_SetTokenInformation        __sys_SetTokenInformation		= NULL;
+
+static P_AddAccessAllowedAceEx      __sys_AddAccessAllowedAceEx		= NULL;
+
+static P_GetLengthSid				__sys_GetLengthSid				= NULL;*/
+
 
 
 //---------------------------------------------------------------------------
@@ -381,6 +401,11 @@ _FX BOOLEAN Proc_Init_AdvApi(HMODULE module)
     }
 
     __sys_GetTokenInformation = (P_GetTokenInformation) GetProcAddress(module, "GetTokenInformation");
+	/*__sys_SetTokenInformation = (P_SetTokenInformation) GetProcAddress(module, "SetTokenInformation");
+
+	__sys_AddAccessAllowedAceEx = (P_AddAccessAllowedAceEx) GetProcAddress(module, "AddAccessAllowedAceEx");
+
+	__sys_GetLengthSid = (P_GetLengthSid) GetProcAddress(module, "GetLengthSid");*/
 
     return TRUE;
 }

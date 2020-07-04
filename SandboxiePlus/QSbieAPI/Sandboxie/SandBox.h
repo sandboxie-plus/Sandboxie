@@ -34,6 +34,10 @@ public:
 
 	virtual QString					GetName() const { return m_Name; }
 
+	virtual QString					GetFileRoot() const { return m_FilePath; }
+	virtual QString					GetRegRoot() const { return m_RegPath; }
+	virtual QString					GetIpcRoot() const { return m_IpcPath; }
+
 	virtual QMap<quint64, CBoxedProcessPtr>	GetProcessList() const { return m_ProcessList; }
 
 	virtual SB_STATUS				RunStart(const QString& Command);

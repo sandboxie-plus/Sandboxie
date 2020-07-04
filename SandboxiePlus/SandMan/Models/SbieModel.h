@@ -28,6 +28,7 @@ public:
 		//eTitle,
 		//eLogCount,
 		eTimeStamp,
+		ePath,
 		eCount
 	};
 
@@ -63,15 +64,7 @@ private:
 		eCyan,
 		eMagenta,
 		eOrang,
-		eMaxColor,
-
-		eNormal		= eYelow,
-		eLogApi		= eRed,
-		//		    = eCyan,
-		eOpenBox	= eGreen,
-		//			= eMagenta,
-		//			= eOrang,
-		eAnonBox	= eBlue
+		eMaxColor
 	};
 
 	QMap<EBoxColors, QPair<QIcon, QIcon> > m_BoxIcons;

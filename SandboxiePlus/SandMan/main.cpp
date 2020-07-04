@@ -113,7 +113,7 @@ bool NotifyCert()
 		"<p>Unfortunately, such certificates have been abused by malware authors resulting in many Anti Malware Fools being Lazy and flagging Everything signed with them Wrongfully as Malware. "
 		"This Prejudice is Damaging the Open Source Ecosystem as most nonprofit developers can't afford to waste this kind of money every year only to pay that <u>Windows Kernel \"Tax\"</u>.</p>"
 		"<p>Therefore, the required driver is provided in an obfuscated form and before use must be unpacked. "
-		"<font color='red'>When doing so said said Anti Virus Ass's will complain and attempt to destroy the freshly created file.</font> "
+		"<font color='red'>When doing so said said Anti Viruses will complain and attempt to destroy the freshly created file.</font> "
 		"Please be aware that this is a <u>false positive</u> caused by the necessary use of a compromitted certificate. "
 		"If this happens you will be notified and offered the option to repeat the unpacking operation, for the operation to succeed you will need to <u>configure an aproproate exemption</u>.</p>"
 

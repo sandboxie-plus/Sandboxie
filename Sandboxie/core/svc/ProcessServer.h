@@ -60,9 +60,9 @@ protected:
     WCHAR *RunSandboxedCopyString(MSG_HEADER *msg, ULONG ofs, ULONG len);
     HANDLE RunSandboxedGetToken(
             HANDLE CallerProcessHandle, bool CallerInSandbox,
-            const WCHAR *BoxName);
+            const WCHAR *BoxName, ULONG idProcess);
     BOOL RunSandboxedSetDacl(
-            HANDLE CallerProcessHandle, HANDLE NewTokenHandle);
+            HANDLE CallerProcessHandle, HANDLE NewTokenHandle, DWORD AccessMask, bool useUserSID);
     BOOL RunSandboxedStartProcess(
             HANDLE PrimaryTokenHandle, LONG_PTR BoxNameOrModelPid,
             ULONG CallerProcessId,

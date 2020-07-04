@@ -133,12 +133,12 @@ private:
 };
 
 #include "TreeViewEx.h"
+#include "SortFilterProxyModel.h"
 
-template <class T>
-class CPanelViewImpl: public CPanelWidget<QTreeViewEx>
+class CPanelViewEx: public CPanelWidget<QTreeViewEx>
 {
 public:
-	CPanelViewImpl(T* pModel, QWidget *parent = 0) : CPanelWidget<QTreeViewEx>(parent)
+	CPanelViewEx(QAbstractItemModel* pModel, QWidget *parent = 0) : CPanelWidget<QTreeViewEx>(parent)
 	{
 		m_pModel = pModel;
 
@@ -162,9 +162,11 @@ public:
 		m_pTreeList->setColumnReset(1);
 		//connect(m_pTreeList, SIGNAL(ResetColumns()), m_pTreeList, SLOT(OnResetColumns()));
 		//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
+
+		m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, m_pSortProxy));
 	}
 
 protected:
-	T*						m_pModel;
+	QAbstractItemModel*		m_pModel;
 	QSortFilterProxyModel*	m_pSortProxy;
 };

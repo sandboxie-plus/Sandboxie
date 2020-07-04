@@ -273,7 +273,7 @@ _FX BOX *Process_GetForcedStartBox(
 
     if ((alert == 1) && (! same_image_name)) {
 
-        Log_Msg_Session(MSG_1301, ImageName, NULL, SessionId);
+		Log_Msg_Process(MSG_1301, ImageName, NULL, SessionId, ProcessId);
     }
 
     if (box) {

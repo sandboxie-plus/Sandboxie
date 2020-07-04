@@ -231,8 +231,7 @@ _FX BOOLEAN Process_Low_Inject(
             Process_CancelProcess(&dummy_proc);
         }
 
-        Log_Status_Ex_Session(
-                        MSG_1231, 0x22, status, image_name, session_id);
+		Log_Status_Ex_Process(MSG_1231, 0x22, status, image_name, session_id, process_id);
 
         return FALSE;
     }
@@ -410,8 +409,7 @@ _FX BOOLEAN Process_Low_InitConsole(PROCESS *proc)
 finish:
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex_Session(MSG_1231, 0x66, status,
-                              proc->image_name, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1231, 0x66, status, proc->image_name, proc->box->session_id, proc->pid);
         return FALSE;
     }
 

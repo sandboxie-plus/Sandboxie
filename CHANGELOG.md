@@ -2,6 +2,49 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [0.2.5 / 5.42] - 2020-07-04
+
+### Added
+- API_QUERY_PROCESS_INFO can be now used to get the original process token of sandboxed processes
+-- Note: this capability is used by TaskExplorer to allow inspecting sandbox internal tokens
+- Added option "KeepTokenIntegrity=y" to make the sbie token keep its initial integrity level (debug option)
+-- Note: Do NOT USE Debug Options if you dont know their security implications (!) 
+- Added process id to log messages very usefull for debugging
+- Added finder to resource log
+- Added option to hide host processes "HideHostProcess=[name]"
+-- Note: Sbie hides by default processes from other boxes, this behavioure can now be controlled with "HideOtherBoxes=n"
+- Sandboxed RpcSs and DcomLaunch can now be run as system with the option "ProtectRpcSs=y" howeever tht breaks sandboxed explorer and other
+- BuiltIn Clsid whitelist can now be disabled with "OpenDefaultClsid=n"
+- Processes can be now terminated with the del key, and require a confirmation
+- Added sandboxed window border display to SandMan.exe
+- Added notification for sbie log messages
+- Added Sandbox Presets sub menu allowing to quickly change some settings
+-- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus 
+-- And other: Drop admin rights; Block/Allow internet access; Block/Allow access to files on te network
+- Added more info to the sandbox status column
+- Added path column to SbieModel
+- Added info tooltips in SbieView
+
+### Changed
+- Reworked ApiLog, added pid and pid filter
+- Auto config reload on in change is now delayed by 500ms to not reload multiple times on incremental changes
+- Sandbox names now replace "_" witn " " for display allowing to use names that are build of separated words
+
+### Fixed
+- added mising PreferExternalManifest itialization to portable mode
+- fixed permission issues with sandboxed system processes
+-- Note: you can use "ExposeBoxedSystem=y" for the old behaviour (debug option)
+- fixed missing SCM access check for sandboxed services
+-- Note: to disable the access check use "UnrestrictedSCM=y" (debug option)
+- fixed missing initialization in serviceserver that caused sandboxed programs to crash when querying service status
+- fixed many bugs that caused the SbieDrv.sys to BSOD when run with MSFT Driver Verifier active
+-- 0xF6 in GetThreadTokenOwnerPid and File_Api_Rename
+-- missing non optional parameter for FltGetFileNameInformation in File_PreOperation
+-- 0xE3 in Key_StoreValue and Key_PreDataInject
+
+
+
 ## [0.2.2 / 5.41.2] - 2020-06-19
 
 ### Added

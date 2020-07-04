@@ -56,6 +56,8 @@ private:
     bool CanCallerDoElevation(
             HANDLE idProcess, const WCHAR *ServiceName, ULONG *pSessionId);
 
+	bool CanAccessSCM(HANDLE idProcess);
+
     static void ReportError2218(HANDLE idProcess, ULONG errlvl);
 
     static WCHAR *BuildPathForStartExe(
@@ -68,7 +70,8 @@ private:
         HANDLE idProcess, ULONG idSession,
         const WCHAR *devmap, const WCHAR *svcname, const WCHAR *path);
 
-    void SetTokenDefaultDacl(HANDLE hNewToken, HANDLE idProcess);
+	void SetTokenCustomDacl(
+		HANDLE hNewToken, HANDLE idProcess, DWORD AccessMask, bool useUserSID);
 
     MSG_HEADER *UacHandler(
         MSG_HEADER *msg, HANDLE idProcess, HANDLE idThread);

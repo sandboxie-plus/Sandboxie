@@ -61,7 +61,8 @@ SB_STATUS CSbieUtils::DoAssist()
 SB_STATUS CSbieUtils::Start(EComponent Component)
 {
 	QStringList Ops;
-	Install(Component, Ops);
+	if(!IsInstalled(Component))
+		Install(Component, Ops);
 	Start(Component, Ops);
 	return ElevateOps(Ops);
 }
@@ -69,9 +70,9 @@ SB_STATUS CSbieUtils::Start(EComponent Component)
 void CSbieUtils::Start(EComponent Component, QStringList& Ops)
 {
 	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) != SERVICE_RUNNING)
-		Ops.append(QString::fromWCharArray(L"start|" SBIEDRV));
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|start|" SBIEDRV));
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) != SERVICE_RUNNING)
-		Ops.append(QString::fromWCharArray(L"start|" SBIESVC));
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|start|" SBIESVC));
 }
 
 SB_STATUS CSbieUtils::Stop(EComponent Component)
@@ -84,9 +85,9 @@ SB_STATUS CSbieUtils::Stop(EComponent Component)
 void CSbieUtils::Stop(EComponent Component, QStringList& Ops)
 {
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) != SERVICE_STOPPED)
-		Ops.append(QString::fromWCharArray(L"stop|" SBIESVC));
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|stop|" SBIESVC));
 	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) != SERVICE_STOPPED)
-		Ops.append(QString::fromWCharArray(L"stop|" SBIEDRV));
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|stop|" SBIEDRV));
 }
 
 bool CSbieUtils::IsRunning(EComponent Component)
@@ -109,9 +110,11 @@ void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 {
 	QString HomePath = QCoreApplication::applicationDirPath().replace("/", "\\"); // "C:\\Program Files\\Sandboxie	"
 	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0)
-		Ops.append(QString::fromWCharArray(L"install|" SBIEDRV L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
-	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) == 0)
-		Ops.append(QString::fromWCharArray(L"install|" SBIESVC L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "\"" + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
+	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) == 0) {
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "\"" + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
+		Ops.append("reg.exe|ADD|HKLM\\SYSTEM\\ControlSet001\\Services\\SbieSvc|/v|PreferExternalManifest|/t|REG_DWORD|/d|1");
+	}
 }
 
 SB_STATUS CSbieUtils::Uninstall(EComponent Component)
@@ -125,9 +128,9 @@ SB_STATUS CSbieUtils::Uninstall(EComponent Component)
 void CSbieUtils::Uninstall(EComponent Component, QStringList& Ops)
 {
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) != 0)
-		Ops.append(QString::fromWCharArray(L"delete|" SBIESVC));
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|delete|" SBIESVC));
 	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) != 0)
-		Ops.append(QString::fromWCharArray(L"delete|" SBIEDRV));
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|delete|" SBIEDRV));
 }
 
 bool CSbieUtils::IsInstalled(EComponent Component)
@@ -170,9 +173,10 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 	foreach(const QString& Op, Ops)
 	{
 		QStringList Args = Op.split("|");
+		QString Prog = Args.takeFirst();
 
 		QProcess Proc;
-		Proc.execute("kmdutil.exe", Args);
+		Proc.execute(Prog, Args);
 		Proc.waitForFinished();
 		int ret = Proc.exitCode();
 		if (ret != 0)

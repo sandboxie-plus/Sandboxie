@@ -351,8 +351,7 @@ _FX BOOLEAN Ipc_CreateBoxPath(PROCESS *proc)
         status = STATUS_UNSUCCESSFUL;
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(
-            MSG_IPC_CREATE_BOX_PATH, 0, status, proc->box->ipc_path);
+		Log_Status_Ex_Process(MSG_IPC_CREATE_BOX_PATH, 0, status, proc->box->ipc_path, -1, proc->pid);
     }
 
     return (NT_SUCCESS(status));
@@ -632,7 +631,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPath);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
         return FALSE;
     }
 
@@ -642,7 +641,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
 
     ok = Process_GetPaths(proc, &proc->closed_ipc_paths, _ClosedPath, FALSE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 

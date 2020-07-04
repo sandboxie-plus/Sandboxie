@@ -96,14 +96,18 @@ SB_STATUS CSandBox::CleanBox()
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
-	if (QDir(m_pAPI->Nt2DosPath(m_FilePath)).exists())
-		return SB_ERR("A sandbox must be emptied before it can be renamed.");
-	return RenameSection(NewName);
+	if (QDir(m_FilePath).exists())
+		return SB_ERR(tr("A sandbox must be emptied before it can be renamed."));
+	if(NewName.length() > 32)
+		return SB_ERR(tr("The sandbox name can not be longer than 32 charakters."));
+	
+	return RenameSection(QString(NewName).replace(" ", "_"));
 }
 
 SB_STATUS CSandBox::RemoveBox()
 {
-	if (QDir(m_pAPI->Nt2DosPath(m_FilePath)).exists())
-		return SB_ERR("A sandbox must be emptied before it can be deleted.");
+	if (QDir(m_FilePath).exists())
+		return SB_ERR(tr("A sandbox must be emptied before it can be deleted."));
+
 	return RemoveSection();
 }

@@ -108,11 +108,19 @@ void Log_Msg_Session(
     const WCHAR *string2,
     ULONG session_id);
 
+void Log_Msg_Process(
+	NTSTATUS error_code,
+	const WCHAR *string1,
+	const WCHAR *string2,
+	ULONG session_id,
+	HANDLE process_id);
+
 void Log_Popup_Msg(
     NTSTATUS error_code,
     const WCHAR *string1,
     const WCHAR *string2,
-    ULONG session_id);
+    ULONG session_id,
+	HANDLE pid);
 
 void Log_Status_Ex(
     NTSTATUS error_code,
@@ -127,6 +135,14 @@ void Log_Status_Ex_Session(
     const WCHAR *string2 OPTIONAL,
     ULONG session_id);
 
+void Log_Status_Ex_Process(
+	NTSTATUS error_code,
+	ULONG error_subcode,
+	NTSTATUS nt_status,
+	const WCHAR *string2 OPTIONAL,
+	ULONG session_id,
+	HANDLE pocess_id);
+
 #define Log_Msg0(error_code) \
     Log_Msg(error_code,NULL,NULL)
 
@@ -135,6 +151,15 @@ void Log_Status_Ex_Session(
 
 #define Log_Msg2(error_code,str1,str2) \
     Log_Msg(error_code,str1,str2)
+
+#define Log_MsgP0(error_code, proc_id) \
+    Log_Msg_Process(error_code,NULL,NULL, -1, proc_id)
+
+#define Log_MsgP1(error_code,str1, proc_id) \
+    Log_Msg_Process(error_code,str1,NULL, -1, proc_id)
+
+#define Log_MsgP2(error_code,str1,str2, proc_id) \
+    Log_Msg_Process(error_code,str1,str2, -1, proc_id)
 
 #define Log_Status(error_code,error_subcode,ntstatus) \
     Log_Status_Ex(error_code, error_subcode, ntstatus, NULL)

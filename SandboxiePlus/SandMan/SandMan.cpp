@@ -9,6 +9,7 @@
 #include "ApiLog.h"
 #include "./Dialogs/MultiErrorDialog.h"
 #include "../QSbieAPI/SbieUtils.h"
+#include "../QSbieAPI/Sandboxie/BoxBorder.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -87,6 +88,8 @@ CSandMan::CSandMan(QWidget *parent)
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	this->setWindowTitle(appTitle);
+
+	m_pBoxBorder = new CBoxBorder(theAPI, this);
 
 	m_ApiLog = NULL;
 
@@ -180,7 +183,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pResMonModel = new CResMonModel();
 	//m_pResMonModel->SetUseIcons(true);
 
-	m_pResourceLog = new CPanelViewImpl<CResMonModel>(m_pResMonModel);
+	m_pResourceLog = new CPanelViewEx(m_pResMonModel);
 
 	//m_pResourceLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 
@@ -190,16 +193,17 @@ CSandMan::CSandMan(QWidget *parent)
 	//
 
 	// Api Log
-	m_pApiLog = new CPanelWidgetEx();
+	m_pApiMonModel = new CApiMonModel();
+	//m_pApiMonModel->SetUseIcons(true);
 
-	//m_pApiLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-	((QTreeWidgetEx*)m_pApiLog->GetView())->setHeaderLabels(tr("Time|Entry").split("|"));
+	m_pApiCallLog = new CPanelViewEx(m_pApiMonModel);
 
-	m_pApiLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	m_pApiLog->GetView()->setSortingEnabled(false);
+	//m_pApiCallLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 
-	m_pLogTabs->addTab(m_pApiLog, tr("Api Call Log"));
-	m_pApiLog->setEnabled(false);
+	m_pApiCallLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+
+	m_pLogTabs->addTab(m_pApiCallLog, tr("Api Call Log"));
+	m_pApiCallLog->setEnabled(false);
 	//
 
 	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
@@ -315,7 +319,7 @@ CSandMan::CSandMan(QWidget *parent)
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
 	m_pTrayIcon->show(); // Note: qt bug; without a first show hide does not work :/
-	if(!bAutoRun && !theConf->GetBool("SysTray/Show", true))
+	if(!bAutoRun && !theConf->GetBool("Options/ShowSysTray", true))
 		m_pTrayIcon->hide();
 
 	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
@@ -326,7 +330,11 @@ CSandMan::CSandMan(QWidget *parent)
 		((QTreeViewEx*)m_pResourceLog->GetView())->OnResetColumns();
 	else
 		((QTreeViewEx*)m_pResourceLog->GetView())->restoreState(Columns);
-	m_pApiLog->GetView()->header()->restoreState(theConf->GetBlob("GUI/ApiLogList_Columns"));
+	Columns = theConf->GetBlob("GUI/ApiLogList_Columns");
+	if (!Columns.isEmpty())
+		((QTreeViewEx*)m_pApiCallLog->GetView())->OnResetColumns();
+	else
+		((QTreeViewEx*)m_pApiCallLog->GetView())->restoreState(Columns);
 	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
 	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
 	m_pLogTabs->setCurrentIndex(theConf->GetInt("GUI/LogTab", 0));
@@ -336,19 +344,15 @@ CSandMan::CSandMan(QWidget *parent)
 	else if (theConf->GetBool("Options/NoSizeGrip", false))
 		statusBar()->setSizeGripEnabled(false);
 
-	bool bIsMonitoring = theAPI->IsMonitoring();
-	m_pResourceLog->setEnabled(bIsMonitoring);
-	m_pEnableMonitoring->setChecked(bIsMonitoring);
-
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 
 	m_pProgressDialog = new CProgressDialog("Maintenance operation progress...", this);
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 
-	connect(theAPI, SIGNAL(LogMessage(const QString&)), this, SLOT(OnLogMessage(const QString&)));
-
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 		ConnectSbie();
+
+	connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 
 	m_uTimerID = startTimer(250);
 }
@@ -366,7 +370,7 @@ CSandMan::~CSandMan()
 	//theConf->SetBlob("GUI/BoxTree_Columns", m_pBoxTree->saveState());
 	theConf->SetBlob("GUI/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
 	theConf->SetBlob("GUI/ResMonList_Columns", m_pResourceLog->GetView()->header()->saveState());
-	theConf->SetBlob("GUI/ApiLogList_Columns", m_pApiLog->GetView()->header()->saveState());
+	theConf->SetBlob("GUI/ApiLogList_Columns", m_pApiCallLog->GetView()->header()->saveState());
 	theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
 	theConf->SetBlob("MainWindow/Panel_Splitter", m_pPanelSplitter->saveState());
 	theConf->SetValue("GUI/LogTab", m_pLogTabs->currentIndex());
@@ -463,7 +467,7 @@ void CSandMan::OnMessage(const QString& Message)
 		{
 			OnLogMessage(tr("Maintenance operation Successful"));
 			if (m_bConnectPending)
-				theAPI->Connect(true);
+				ConnectSbieImpl();
 		}
 		m_pProgressDialog->hide();
 		m_bConnectPending = false;
@@ -506,6 +510,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	OnSelectionChanged();
 }
 
+
 void CSandMan::OnSelectionChanged()
 {
 	QList<CBoxedProcessPtr>	Processes = m_pBoxView->GetSelectedProcesses();
@@ -518,13 +523,15 @@ void CSandMan::OnSelectionChanged()
 
 	QSet<quint64> Pids;
 	foreach(const CBoxedProcessPtr& pProcess, Processes)
-	{
 		Pids.insert(pProcess->GetProcessId());
-	}
 
 	QList<CResLogEntryPtr> ResourceLog = theAPI->GetResLog();
-
 	m_pResMonModel->Sync(ResourceLog, Pids);
+
+	if (m_ApiLog) {
+		QList<CApiLogEntryPtr> ApiCallLog = m_ApiLog->GetApiLog();
+		m_pApiMonModel->Sync(ApiCallLog, Pids);
+	}
 }
 
 void CSandMan::OnStatusChanged()
@@ -534,11 +541,6 @@ void CSandMan::OnStatusChanged()
 	{
 		appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
 		//appTitle.append(tr(" - %1").arg(theAPI->GetIniPath()));
-
-		if (theAPI->GetAllBoxes().count() == 0) {
-			OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));
-			theAPI->CreateBox("DefaultBox");
-		}
 
 		if(IsFullyPortable())
 			appTitle.append(tr("   -   Portable"));
@@ -590,7 +592,7 @@ void CSandMan::OnMenuHover(QAction* action)
 	}
 }
 
-void CSandMan::OnLogMessage(const QString& Message)
+void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
 	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
@@ -598,19 +600,19 @@ void CSandMan::OnLogMessage(const QString& Message)
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
-
+	
 	statusBar()->showMessage(Message);
+
+	if (bNotify) 
+	{
+		int iNotify = theConf->GetInt("Options/Notifications", 1);
+		if (iNotify & 1)
+			m_pTrayIcon->showMessage("Sandboxie-Plus", Message);
+		if (iNotify & 2)
+			QApplication::beep();
+	}
 }
 
-void CSandMan::OnApiLogEntry(const QString& Message)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
-	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
-	pItem->setText(1, Message);
-	m_pApiLog->GetTree()->addTopLevelItem(pItem);
-
-	m_pApiLog->GetView()->verticalScrollBar()->setValue(m_pApiLog->GetView()->verticalScrollBar()->maximum());
-}
 /*
 void CSandMan::OnResetColumns()
 {
@@ -669,9 +671,31 @@ SB_STATUS CSandMan::ConnectSbie()
 	if (Status.GetStatus() == OP_ASYNC)
 		m_bConnectPending = true;
 	else if (!Status.IsError())
-		Status = theAPI->Connect(true);
+		Status = ConnectSbieImpl();
 
 	return Status;
+}
+
+SB_STATUS CSandMan::ConnectSbieImpl()
+{
+	SB_STATUS Status = theAPI->Connect();
+
+	if (Status && !CSbieAPI::IsSbieCtrlRunning()) // don't take over when SbieCtrl is up and running
+		Status = theAPI->TakeOver();
+
+	if (Status)
+		Status = theAPI->ReloadBoxes();
+
+	if (theAPI->GetAllBoxes().count() == 0) {
+		OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));
+		theAPI->CreateBox("DefaultBox");
+	}
+
+	bool bIsMonitoring = theAPI->IsMonitoring();
+	m_pResourceLog->setEnabled(bIsMonitoring);
+	m_pEnableMonitoring->setChecked(bIsMonitoring);
+
+	return SB_OK;
 }
 
 SB_STATUS CSandMan::DisconnectSbie()
@@ -746,7 +770,7 @@ void CSandMan::OnCleanUp()
 		theAPI->ClearResLog();
 	
 	if (sender() == m_pCleanUpApiLog || sender() == m_pCleanUpButton)
-		m_pApiLog->GetTree()->clear();
+		if(m_ApiLog) m_ApiLog->ClearApiLog();
 	
 	if (sender() == m_pCleanUpProcesses || sender() == m_pCleanUpButton)
 		theAPI->UpdateProcesses(false);
@@ -755,6 +779,9 @@ void CSandMan::OnCleanUp()
 void CSandMan::OnSetKeep()
 {
 	theConf->SetValue("Options/KeepTerminated", m_pKeepTerminated->isChecked());
+
+	if(!m_pKeepTerminated->isChecked()) // clear on disable
+		theAPI->UpdateProcesses(false);
 }
 
 void CSandMan::OnEditIni()
@@ -828,14 +855,13 @@ void CSandMan::OnSetLogging()
 
 		if (!m_ApiLog) {
 			m_ApiLog = new CApiLog();
-			connect(m_ApiLog, SIGNAL(ApiLogEntry(const QString&)), this, SLOT(OnApiLogEntry(const QString&)));
-			m_pApiLog->setEnabled(true);
+			m_pApiCallLog->setEnabled(true);
 		}
 	}
 	else
 	{
 		if (m_ApiLog) {
-			m_pApiLog->setEnabled(false);
+			m_pApiCallLog->setEnabled(false);
 			m_ApiLog->deleteLater();
 			m_ApiLog = NULL;
 		}

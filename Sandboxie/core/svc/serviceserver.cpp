@@ -59,11 +59,11 @@ MSG_HEADER *ServiceServer::Handler(void *_this, MSG_HEADER *msg)
 
     HANDLE idProcess = (HANDLE)(ULONG_PTR)PipeServer::GetCallerProcessId();
 
-    if (msg->msgid == MSGID_SERVICE_START)
+    if (msg->msgid == MSGID_SERVICE_START) // start unboxed service on the host
         return pThis->StartHandler(msg, idProcess);
 
-    if (msg->msgid == MSGID_SERVICE_RUN)
-        return pThis->RunHandler(msg, idProcess);
+    if (msg->msgid == MSGID_SERVICE_RUN) // start a sandboxed service inside a particular box
+        return pThis->RunHandler(msg, idProcess); 
 
     HANDLE idThread = (HANDLE)(ULONG_PTR)PipeServer::GetCallerThreadId();
 
@@ -209,6 +209,8 @@ MSG_HEADER *ServiceServer::QueryHandler(MSG_HEADER *msg)
 
     SERVICE_QUERY_RPL *rpl = (SERVICE_QUERY_RPL *)LONG_REPLY(rpl_len);
     if (rpl) {
+
+		memzero(((UCHAR *)rpl) + sizeof(MSG_HEADER), rpl_len - sizeof(MSG_HEADER));
 
         if (req->with_service_status) {
 

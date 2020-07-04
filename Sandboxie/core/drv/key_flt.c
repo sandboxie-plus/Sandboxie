@@ -312,14 +312,35 @@ NTSTATUS Key_StoreValue(PROCESS *proc, REG_SET_VALUE_KEY_INFORMATION *pSetInfo, 
         rc = ZwCreateKey(&handle, KEY_WRITE, &target, 0, NULL, REG_OPTION_NON_VOLATILE, &Disp);
         if (rc == STATUS_SUCCESS)
         {
-            __try
-            {
-                rc = ZwSetValueKey(handle, pSetInfo->ValueName, pSetInfo->TitleIndex, pSetInfo->Type, pSetInfo->Data, pSetInfo->DataSize);
-            }
-            __except (EXCEPTION_EXECUTE_HANDLER)
-            {
-                rc = STATUS_ACCESS_DENIED; //Block Path
-            }
+			rc = STATUS_ACCESS_DENIED; //Block Path
+
+			// Note: Driver verifyer does not like ZwXxx unctions being fed userspace memory
+			PUNICODE_STRING ValueName = (pSetInfo->ValueName && pSetInfo->ValueName->MaximumLength > 0) ?
+				(PUNICODE_STRING)ExAllocatePoolWithTag(NonPagedPool, sizeof(UNICODE_STRING) + pSetInfo->ValueName->MaximumLength, tzuk) : NULL;
+			if (ValueName)
+			{
+				ValueName->Length = pSetInfo->ValueName->Length;
+				ValueName->MaximumLength = pSetInfo->ValueName->MaximumLength;
+				ValueName->Buffer = (PWCH)(((UCHAR*)ValueName) + sizeof(UNICODE_STRING));
+				memcpy(ValueName->Buffer, pSetInfo->ValueName->Buffer, pSetInfo->ValueName->Length);
+
+				PVOID Data = pSetInfo->DataSize > 0 ? ExAllocatePoolWithTag(NonPagedPool, pSetInfo->DataSize, tzuk) : NULL;
+				if (Data)
+				{
+					if (pSetInfo->Data) memcpy(Data, pSetInfo->Data, pSetInfo->DataSize);
+
+					__try
+					{
+						rc = ZwSetValueKey(handle, ValueName, pSetInfo->TitleIndex, pSetInfo->Type, Data, pSetInfo->DataSize);
+					}
+					__except (EXCEPTION_EXECUTE_HANDLER) { }
+
+					ExFreePoolWithTag(Data, tzuk);
+				}
+
+				ExFreePoolWithTag(ValueName, tzuk);
+			}
+
             //DbgPrint("SBIE: Write redirect to sandbox: %x, %S, disp = %d\n",rc,targetName,Disp);
             ZwClose(handle);
         }
@@ -361,14 +382,37 @@ NTSTATUS Key_PreDataInject(REG_QUERY_VALUE_KEY_INFORMATION *pPreInfo, ULONG spid
         rc = ZwOpenKey(&handle, KEY_READ, &target);
         if (rc == STATUS_SUCCESS)
         {
-            __try
-            {
-                rc = ZwQueryValueKey(handle, pPreInfo->ValueName, pPreInfo->KeyValueInformationClass, pPreInfo->KeyValueInformation, pPreInfo->Length, pPreInfo->ResultLength);
-            }
-            __except (EXCEPTION_EXECUTE_HANDLER)
-            {
-                rc = STATUS_SUCCESS;    // Read from host
-            }
+
+			// Note: Driver verifyer does not like ZwXxx unctions being fed userspace memory
+			PUNICODE_STRING ValueName = (pPreInfo->ValueName && pPreInfo->ValueName->MaximumLength > 0) ?
+				(PUNICODE_STRING)ExAllocatePoolWithTag(NonPagedPool, sizeof(UNICODE_STRING) + pPreInfo->ValueName->MaximumLength, tzuk) : NULL;
+			if (ValueName)
+			{
+				ValueName->Length = pPreInfo->ValueName->Length;
+				ValueName->MaximumLength = pPreInfo->ValueName->MaximumLength;
+				ValueName->Buffer = (PWCH)(((UCHAR*)ValueName) + sizeof(UNICODE_STRING));
+				memcpy(ValueName->Buffer, pPreInfo->ValueName->Buffer, pPreInfo->ValueName->Length);
+
+				PVOID KeyValueInformation = pPreInfo->Length > 0 ? ExAllocatePoolWithTag(NonPagedPool, pPreInfo->Length, tzuk) : NULL;
+				if (KeyValueInformation)
+				{
+					__try
+					{
+						ULONG  ResultLength = pPreInfo->ResultLength ? *pPreInfo->ResultLength : 0;
+
+						rc = ZwQueryValueKey(handle, ValueName, pPreInfo->KeyValueInformationClass, KeyValueInformation, pPreInfo->Length, &ResultLength);
+
+						if (pPreInfo->ResultLength) *pPreInfo->ResultLength = ResultLength;
+						if (pPreInfo->KeyValueInformation) memcpy(pPreInfo->KeyValueInformation, KeyValueInformation, ResultLength);
+					}
+					__except (EXCEPTION_EXECUTE_HANDLER) {}
+
+					ExFreePoolWithTag(KeyValueInformation, tzuk);
+				}
+
+				ExFreePoolWithTag(ValueName, tzuk);
+			}
+
             if (rc == STATUS_SUCCESS)
             {
                 status = STATUS_CALLBACK_BYPASS;

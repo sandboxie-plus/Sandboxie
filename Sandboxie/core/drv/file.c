@@ -364,8 +364,7 @@ _FX BOOLEAN File_CreateBoxPath(PROCESS *proc)
         status = STATUS_UNSUCCESSFUL;
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(
-            MSG_FILE_CREATE_BOX_PATH, 0, status, proc->box->file_path);
+		Log_Status_Ex_Process(MSG_FILE_CREATE_BOX_PATH, 0, status, proc->box->file_path, -1, proc->pid);
     }
 
     return (NT_SUCCESS(status));
@@ -630,7 +629,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
     ok = Process_GetPaths(proc, open_file_paths, _OpenPipe, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPipe);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
     }
 
@@ -639,7 +638,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         ok = Process_GetPaths(proc, open_file_paths, _OpenFile, TRUE);
 
         if (! ok) {
-            Log_Msg1(MSG_INIT_PATHS, _OpenFile);
+            Log_MsgP1(MSG_INIT_PATHS, _OpenFile, proc->pid);
             return FALSE;
         }
     }
@@ -656,7 +655,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPipe);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
     }
 
@@ -681,7 +680,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 
@@ -693,7 +692,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     if (ok)
         ok = Process_GetPaths(proc, read_file_paths, _ReadPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ReadPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
     }
 
@@ -709,7 +708,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
                 proc, closed_file_paths, _WritePath, TRUE);
     }
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _WritePath);
+        Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
         return FALSE;
     }
 
@@ -1520,7 +1519,7 @@ skip_due_to_home_folder:
 
         if (proc->file_warn_direct_access) {
 
-            //Log_Msg1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name);
+            //Log_MsgP1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name, proc->pid);
             Process_LogMessage(proc, MSG_BLOCKED_DIRECT_DISK_ACCESS);
         }
     }
@@ -1834,7 +1833,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         info->FileNameLength = name_len;
         memcpy(info->FileName, name, name_len);
 
-        status = ZwSetInformationFile(
+        status = NtSetInformationFile(
             args->file_handle.val, &IoStatusBlock,
             info, info_len, FileRenameInformation);
 
@@ -1845,7 +1844,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         Mem_Free(info, info_len);
     }
 
-    ZwClose(dir_handle);
+    NtClose(dir_handle);
     Mem_Free(path, path_len);
     return status;
 }

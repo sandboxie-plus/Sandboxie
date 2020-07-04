@@ -328,8 +328,7 @@ _FX BOOLEAN Thread_InitProcess(PROCESS *proc)
 
         if (! NT_SUCCESS(status)) {
 
-            Log_Status_Ex_Session(
-                MSG_1231, 0x44, status, NULL, proc->box->session_id);
+			Log_Status_Ex_Process( MSG_1231, 0x44, status, NULL, proc->box->session_id, proc->pid);
             return FALSE;
         }
     }

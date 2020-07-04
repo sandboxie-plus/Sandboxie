@@ -342,7 +342,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
     }
 
     if (status == STATUS_ACCESS_DENIED)
-        Log_Msg0(MSG_1319);
+        Log_MsgP0(MSG_1319, proc->pid);
 
     return status;
 }
@@ -560,7 +560,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_WinApi(
             }
 
             if (msg2->api_code == KERNEL_CHECKVDM) {
-                Log_Msg0(MSG_BLOCKED_16_BIT);
+                Log_MsgP0(MSG_BLOCKED_16_BIT, proc->pid);
                 status = STATUS_ACCESS_DENIED;
             }
 
@@ -576,7 +576,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_WinApi(
             if ( ((Driver_OsVersion == DRIVER_WINDOWS_XP || Driver_OsVersion == DRIVER_WINDOWS_VISTA) && msg2->api_code == WINAPI_SRVDEVICEEVENT) ||
                  (Driver_OsVersion == DRIVER_WINDOWS_7 && msg2->api_code == WINAPI_SRVDEVICEEVENT_WIN7) ) {
 
-                Log_Msg0(MSG_1316);
+                Log_MsgP0(MSG_1316, proc->pid);
                 status = STATUS_ACCESS_DENIED;
             }
         }
@@ -692,7 +692,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_Lsa(
     }
 
     if (status == STATUS_ACCESS_DENIED)
-        Log_Msg(MSG_PASSWORD_CHANGE_DENIED, NULL, NULL);
+		Log_Msg_Process(MSG_PASSWORD_CHANGE_DENIED, NULL, NULL, -1, proc->pid);
 
     return status;
 }

@@ -143,7 +143,7 @@ BOOL CAboutDialog::OnInitDialog()
         U_PDF = L' ';
     }
     text.Format(L"%S %c(%d-bit)%c",
-        MY_VERSION_STRING_EX, U_LRO, _bitness, U_PDF);
+        MY_VERSION_STRING, U_LRO, _bitness, U_PDF);
 
     CString ver = CMyMsg(MSG_3302, text);
     GetDlgItem(ID_ABOUT_VERSION)->SetWindowText(ver);
@@ -152,7 +152,7 @@ BOOL CAboutDialog::OnInitDialog()
     //
     //
 
-    text.Format(L"%S", MY_COPYRIGHT_STRING);
+    text.Format(L"%S\r\n%S", MY_COPYRIGHT_STRING, MY_COPYRIGHT_STRING_OLD);
     GetDlgItem(ID_ABOUT_COPYRIGHT)->SetWindowText(text);
 
     GetDlgItem(IDOK)->SetWindowText(CMyMsg(MSG_3001));

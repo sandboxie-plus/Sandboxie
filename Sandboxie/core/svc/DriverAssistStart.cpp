@@ -136,7 +136,7 @@ driver_started:
         }
 
         WCHAR application_version[16];
-        wsprintf(application_version, L"%S", MY_VERSION_STRING);
+        wsprintf(application_version, L"%S", MY_VERSION_COMPAT);
 
         if (wcscmp(application_version, driver_version) != 0) {
             LogEvent(MSG_9234, 0x9154, 0);

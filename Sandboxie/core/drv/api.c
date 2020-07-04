@@ -619,7 +619,7 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
 
     if (status == STATUS_SUCCESS) {
         text[msgtext_length / sizeof(WCHAR)] = L'\0';
-        Log_Popup_Msg(msgid, text, NULL, args->session_id.val);
+        Log_Popup_Msg(msgid, text, NULL, args->session_id.val, proc->pid);
     }
 
     Mem_Free(text, msgtext_length + 8);
@@ -637,7 +637,8 @@ _FX void Api_AddMessage(
 	NTSTATUS error_code,
 	const WCHAR *string1, ULONG string1_len,
 	const WCHAR *string2, ULONG string2_len,
-	ULONG session_id)
+	ULONG session_id,
+	ULONG process_id)
 {
 	KIRQL irql;
 
@@ -651,15 +652,17 @@ _FX void Api_AddMessage(
 	irql = Api_EnterCriticalSection();
 
 	ULONG entry_size = sizeof(ULONG)	// session_id
+		+ sizeof(ULONG)					// process_id
 		+ sizeof(ULONG)					// error_code
 		+ (string1_len + 1) * sizeof(WCHAR)
 		+ (string2_len + 1) * sizeof(WCHAR);
 
 	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer);
 	if (write_ptr) {
-		//[session_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
+		//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
 		WCHAR null_char = L'\0';
 		log_buffer_push_bytes((CHAR*)&session_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&process_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)&error_code, sizeof(ULONG), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)string1, string1_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
@@ -719,14 +722,22 @@ _FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
 			LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, Api_LogBuffer);
 			LOG_BUFFER_SEQ_T seq_number = log_buffer_get_seq_num(&read_ptr, Api_LogBuffer);
 			*args->msg_num.val = seq_number;
-			//[session_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
+			//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
 			ULONG session_id;
 			log_buffer_get_bytes((CHAR*)&session_id, 4, &read_ptr, Api_LogBuffer);
+			ULONG process_id;
+			log_buffer_get_bytes((CHAR*)&process_id, 4, &read_ptr, Api_LogBuffer);
 
 			if (session_id == args->session_id.val) {
 
 				log_buffer_get_bytes((CHAR*)args->msgid.val, 4, &read_ptr, Api_LogBuffer);
 				SIZE_T msg_length = entry_size - (4 + 4);
+
+				if (args->process_id.val != NULL)
+				{
+					ProbeForWrite(args->process_id.val, sizeof(ULONG), sizeof(ULONG));
+					*args->process_id.val = process_id;
+				}
 
 				if (msg_length <= msgtext->MaximumLength)
 				{

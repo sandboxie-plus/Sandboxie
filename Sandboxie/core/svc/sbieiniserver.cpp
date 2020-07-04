@@ -233,7 +233,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
 MSG_HEADER *SbieIniServer::GetVersion(MSG_HEADER *msg)
 {
     WCHAR ver_str[16];
-    wsprintf(ver_str, L"%S", MY_VERSION_STRING);
+    wsprintf(ver_str, L"%S", MY_VERSION_COMPAT);
 
     ULONG ver_len = wcslen(ver_str);
     ULONG rpl_len = sizeof(SBIE_INI_GET_USER_RPL)

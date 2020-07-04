@@ -390,7 +390,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
 
                         // Get normalized full path to target file.
                         // Occasionally, certain PDF apps will send in a short name (containing '~'). That will break all of our folder name checking below.
-                        if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED, &pTargetFileNameInfo) != STATUS_SUCCESS)
+                        if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) != STATUS_SUCCESS)
                         {
                             status = STATUS_ACCESS_DENIED;      // if we can't get the name, just disallow the call
                         }
@@ -431,7 +431,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                                 pStr2 += pTargetFileNameInfo->Name.Length;
                                 memset(pStr2, 0, 2);    // add a wchar NULL
 
-                                Log_Msg_Session(MSG_1319, wcPid, (PWCHAR)pStr, proc->box->session_id);
+								Log_Msg_Process(MSG_1319, wcPid, (PWCHAR)pStr, proc->box->session_id, proc->pid);
                                 Mem_Free(pStr, len);
                             }
                             FltReleaseFileNameInformation(pTargetFileNameInfo);
@@ -488,7 +488,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
             {
                 // Get normalized path to target file.
                 FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
-                if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED, &pTargetFileNameInfo) == STATUS_SUCCESS)
+                if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) == STATUS_SUCCESS)
                 {
                     if (pTargetFileNameInfo)
                     {

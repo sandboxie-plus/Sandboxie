@@ -52,7 +52,8 @@ void DriverAssist::LogMessage()
         ULONG len = m_workItemLen;
 		ULONG message_number = m_last_message_number;
 		ULONG code = -1;
-		ULONG status = SbieApi_GetMessage(&message_number, -1, &code, (wchar_t*)m_workItemBuf, len);
+		ULONG pid = 0;
+		ULONG status = SbieApi_GetMessage(&message_number, -1, &code, &pid, (wchar_t*)m_workItemBuf, len);
 
         if (status == STATUS_BUFFER_TOO_SMALL) {
             HeapFree(GetProcessHeap(), 0, m_workItemBuf);

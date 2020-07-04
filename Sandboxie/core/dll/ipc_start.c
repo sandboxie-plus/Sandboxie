@@ -171,8 +171,17 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                     WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
                     Sbie_swprintf(fullpath, L"\"%s\\%s\"", homedir, program);
 
-                    if (! SbieDll_RunSandboxed(
-                            L"*THREAD*", fullpath, homedir, 0, &si, &pi))
+					//
+					// Note: many proesses started by DcomLaunch must be started as user this is currently a bit broken,
+					// see Proc_CreateProcessInternalW_RS5 so for successfull operation in most cases we can't run RpcSs with a system token
+					// Fix-Me: fix Proc_CreateProcessInternalW_RS5 and make prtected RpcSs and subsequently DcomLaunch the deault
+					//
+					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
+					//
+					const WCHAR* box_name = SbieApi_QueryConfBool(NULL, L"ProtectRpcSs", FALSE) ? L"*SYSTEM*" : L"*THREAD*";
+
+                    if (! SbieDll_RunSandboxed(//L"*THREAD*", 
+							box_name, fullpath, homedir, 0, &si, &pi))
                         errnum = GetLastError();
                     else
                         errnum = -1;

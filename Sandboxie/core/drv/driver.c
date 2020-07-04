@@ -84,7 +84,7 @@ const WCHAR *Driver_S_1_5_20 = L"S-1-5-20";
 
 DRIVER_OBJECT *Driver_Object;
 
-WCHAR *Driver_Version = TEXT(MY_VERSION_STRING);
+WCHAR *Driver_Version = TEXT(MY_VERSION_COMPAT);
 
 ULONG Driver_OsVersion = 0;
 ULONG Driver_OsBuild = 0;
@@ -709,7 +709,7 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         Process_ReadyToSandbox = ReadyToSandbox;
-        Log_Msg0(MSG_CANNOT_UNLOAD_DRIVER);
+        Log_MsgP0(MSG_CANNOT_UNLOAD_DRIVER, proc->pid);
         return STATUS_CONNECTION_IN_USE;
     }
 

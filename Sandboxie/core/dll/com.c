@@ -305,6 +305,7 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
         // check against list of built-in CLSID exclusions
         //
 
+		if (SbieApi_QueryConfBool(BoxName, L"OpenDefaultClsid", TRUE))
         if (memcmp(rclsid, &CLSID_WinMgmt,              sizeof(GUID)) == 0 ||
             memcmp(rclsid, &CLSID_NetworkListManager,   sizeof(GUID)) == 0 ||
             memcmp(rclsid, &CLSID_ShellServiceHostBrokerProvider, sizeof(GUID)) == 0 ||
@@ -408,6 +409,7 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
         }
     }
 
+	if (SbieApi_QueryConfBool(BoxName, L"OpenDefaultClsid", TRUE))
     if (Com_IsFirewallClsid(rclsid, BoxName))
         return TRUE;
 

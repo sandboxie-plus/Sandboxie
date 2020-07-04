@@ -73,6 +73,7 @@ LONG SbieApi_GetMessage(
 	ULONG* MessageNum,
 	ULONG SessionId,
 	ULONG *MessageId,
+	ULONG *Pid,
 	wchar_t *Buffer,
 	ULONG Length);
 

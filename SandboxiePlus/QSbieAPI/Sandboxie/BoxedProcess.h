@@ -45,6 +45,8 @@ public:
 	virtual SB_STATUS		SetSuspend(bool bSet);
 	virtual bool			IsSuspended() const;
 
+	virtual QString			GetBoxName() const;
+
 protected:
 	friend class CSbieAPI;
 

@@ -62,7 +62,10 @@ public:
 	CSbieAPI(QObject* parent = 0);
 	virtual ~CSbieAPI();
 
-	virtual SB_STATUS		Connect(bool takeOver = false, bool andLoad = true);
+	static bool				IsSbieCtrlRunning();
+	static bool				TerminateSbieCtrl();
+
+	virtual SB_STATUS		Connect();
 	virtual SB_STATUS		Disconnect();
 	virtual bool			IsConnected() const;
 
@@ -77,7 +80,7 @@ public:
 	virtual void			UpdateDriveLetters();
 	virtual QString			Nt2DosPath(QString NtPath) const;
 
-	virtual SB_STATUS		ReloadBoxes(bool bFull = false);
+	virtual SB_STATUS		ReloadBoxes();
 	virtual SB_STATUS		CreateBox(const QString& BoxName);
 
 	virtual SB_STATUS		UpdateProcesses(bool bKeep);
@@ -86,6 +89,9 @@ public:
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
 
 	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
+
+	virtual CSandBoxPtr		GetBoxByProcessId(quint64 ProcessId) const;
+	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
 
 	virtual SB_STATUS		TerminateAll();
 
@@ -112,11 +118,12 @@ public:
 
 signals:
 	void					StatusChanged();
-	void					LogMessage(const QString& Message);
+	void					LogMessage(const QString& Message, bool bNotify = true);
 
 private slots:
 	//virtual void			OnMonitorEntry(quint64 ProcessId, quint32 Type, const QString& Value);
 	virtual void			OnIniChanged(const QString &path);
+	virtual void			OnReloadConfig();
 
 protected:
 	friend class CSandBox;
@@ -138,8 +145,8 @@ protected:
 
 	virtual SB_STATUS		RunSandboxed(const QString& BoxName, const QString& Command, QString WrkDir = QString(), quint32 Flags = 0);
 
-	virtual SB_STATUS		SetBoxPaths(const CSandBoxPtr& pSandBox);
-	virtual SB_STATUS		SetProcessInfo(const CBoxedProcessPtr& pProcess);
+	virtual SB_STATUS		UpdateBoxPaths(const CSandBoxPtr& pSandBox);
+	virtual SB_STATUS		UpdateProcessInfo(const CBoxedProcessPtr& pProcess);
 
 	virtual QString			GetDeviceMap();
 	virtual QByteArray		MakeEnvironment(bool AddDeviceMap);
@@ -157,6 +164,8 @@ protected:
 	QString					m_SbiePath;
 	QString					m_IniPath;
 	QFileSystemWatcher		m_IniWatcher;
+
+	bool					m_bReloadPending;
 
 	bool					m_bTerminate;
 

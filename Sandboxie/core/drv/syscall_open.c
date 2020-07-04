@@ -195,7 +195,7 @@ _FX NTSTATUS Syscall_CheckObject(
 
             WCHAR msg[256];
             swprintf(msg, L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
-            Log_Msg(MSG_2101, msg, Name != NULL ? Name->Name.Buffer : L"Unnamed object");
+			Log_Msg_Process(MSG_2101, msg, Name != NULL ? Name->Name.Buffer : L"Unnamed object", -1, proc->pid);
         }
 
         if (Name != &Obj_Unnamed)

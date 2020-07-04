@@ -61,7 +61,7 @@ static void *Token_RestrictHelper1(
     void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc);
 
 static NTSTATUS Token_RestrictHelper2(
-    void *TokenObject, ULONG *OutIntegrityLevel, ULONG SessionId);
+    void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc);
 
 static void *Token_RestrictHelper3(
     void *TokenObject, TOKEN_GROUPS *Groups, TOKEN_PRIVILEGES *Privileges,
@@ -464,8 +464,7 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
     PrimaryToken = PsReferencePrimaryToken(ProcessObject);
     if (!PrimaryToken) {
 
-        Log_Status_Ex_Session(
-            MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id, proc->pid);
         return NULL;
     }
 
@@ -916,8 +915,7 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
     status = PsLookupProcessByProcessId(proc->pid, &ProcessObject);
     if (!NT_SUCCESS(status)) {
 
-        Log_Status_Ex_Session(
-            MSG_1222, 0x37, status, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x37, status, NULL, proc->box->session_id, proc->pid);
 
     }
     else {
@@ -925,8 +923,7 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
         void *TokenObject = PsReferencePrimaryToken(ProcessObject);
         if (!TokenObject) {
 
-            Log_Status_Ex_Session(
-                MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id);
+			Log_Status_Ex_Process(MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id, proc->pid);
 
         }
         else
@@ -1264,7 +1261,7 @@ _FX void *Token_RestrictHelper1(
         if (NT_SUCCESS(status)) {
 
             status = Token_RestrictHelper2(
-                NewTokenObject, OutIntegrityLevel, proc->box->session_id);
+                NewTokenObject, OutIntegrityLevel, proc);
         }
 
         if (!NT_SUCCESS(status)) {
@@ -1279,7 +1276,7 @@ _FX void *Token_RestrictHelper1(
     //
 
     if (!NT_SUCCESS(status))
-        Log_Status_Ex_Session(MSG_1222, 0x32, status, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x32, status, NULL, proc->box->session_id, proc->pid);
 
     return NewTokenObject;
 }
@@ -1291,7 +1288,7 @@ _FX void *Token_RestrictHelper1(
 
 
 _FX NTSTATUS Token_RestrictHelper2(
-    void *TokenObject, ULONG *OutIntegrityLevel, ULONG SessionId)
+    void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc)
 {
     NTSTATUS status;
     ULONG label;
@@ -1300,10 +1297,15 @@ _FX NTSTATUS Token_RestrictHelper2(
         return STATUS_SUCCESS;
 
     label = (ULONG)(ULONG_PTR)Token_Query(
-        TokenObject, TokenIntegrityLevel, SessionId);
+        TokenObject, TokenIntegrityLevel, proc->box->session_id);
 
     if (OutIntegrityLevel)
         *OutIntegrityLevel = label;
+
+	// OpenToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"KeepTokenIntegrity", 0, FALSE))
+		return STATUS_SUCCESS;
+	// OpenToken END
 
     if (label & 0xFFFF00FF)
         status = STATUS_INVALID_LEVEL;
@@ -1732,8 +1734,7 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
     status = PsLookupProcessByProcessId(proc->pid, &ProcessObject);
     if (!NT_SUCCESS(status)) {
 
-        Log_Status_Ex_Session(
-            MSG_1222, 0x37, status, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x37, status, NULL, proc->box->session_id, proc->pid);
 
     }
     else {
@@ -1975,8 +1976,8 @@ ULONG GetThreadTokenOwnerPid()
     ULONG ulResult = 0;
     PVOID impToken = NULL;
 
-    if (NT_SUCCESS(ZwOpenThreadToken(NtCurrentThread(), TOKEN_ALL_ACCESS, FALSE, &hHandle)) &&
-        NT_SUCCESS(ObReferenceObjectByHandle(hHandle, TOKEN_ALL_ACCESS, *SeTokenObjectType, KernelMode, &impToken, NULL)))
+	if (NT_SUCCESS(ZwOpenThreadToken(NtCurrentThread(), TOKEN_ALL_ACCESS, FALSE, &hHandle)) &&
+		NT_SUCCESS(ObReferenceObjectByHandle(hHandle, TOKEN_ALL_ACCESS, *SeTokenObjectType, UserMode, &impToken, NULL)))
     {
         // first field is token source
         TOKEN_SOURCE* tokenName = (TOKEN_SOURCE*)impToken;
@@ -1987,7 +1988,7 @@ ULONG GetThreadTokenOwnerPid()
         }
     }
     if (hHandle)
-        ZwClose(hHandle);
+        NtClose(hHandle);
     if (impToken)
         ObDereferenceObject(impToken);
     return ulResult;

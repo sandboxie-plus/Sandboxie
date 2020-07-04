@@ -30,13 +30,31 @@ public:
 
 	virtual void			UpdateDetails();
 
+	virtual QString			GetStatusStr() const;
+
+	virtual void			SetLogApi(bool bEnable);
 	virtual bool			HasLogApi() const { return m_bLogApiFound; }
-	virtual bool			NoAnonymousLogon() const { return m_bNoAnonymousLogon; }
-	virtual bool			HasOpenToken() const { return m_bHasOpenToken; }
+
+	virtual void			SetINetBlock(bool bEnable);
+	virtual bool			IsINetBlocked() const { return m_bINetBlocked; }
+
+	virtual void			SetAllowShares(bool bEnable);
+	virtual bool			HasSharesAccess() const { return m_bSharesAllowed; }
+
+	virtual void			SetDropRights(bool bEnable);
+	virtual bool			IsDropRights() const { return m_bDropRights; }
+
+	virtual bool			IsSecurityRestricted() const { return m_bSecurityRestricted; }
+	virtual bool			IsUnsecureDebugging() const { return m_iUnsecureDebugging != 0; }
 
 protected:
-	bool					m_bLogApiFound;
-	bool					m_bNoAnonymousLogon;
-	bool					m_bHasOpenToken;
+	virtual bool			CheckOpenToken() const;
 
+	bool					m_bLogApiFound;
+	bool					m_bINetBlocked;
+	bool					m_bSharesAllowed;
+	bool					m_bDropRights;
+
+	bool					m_bSecurityRestricted;
+	int						m_iUnsecureDebugging;
 };

@@ -220,7 +220,7 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
     }*/
 
     if (! ok)
-        Log_Msg1(MSG_INIT_PATHS, Gui_OpenClass_Name);
+        Log_MsgP1(MSG_INIT_PATHS, Gui_OpenClass_Name, proc->pid);
 
     return ok;
 }

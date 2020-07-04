@@ -1,22 +1,22 @@
 #include "stdafx.h"
-#include "ResMonModel.h"
+#include "ApiMonModel.h"
 #include "../MiscHelpers/Common/Common.h"
 
-CResMonModel::CResMonModel(QObject *parent)
+CApiMonModel::CApiMonModel(QObject *parent)
 :CListItemModel(parent)
 {
 }
 
-CResMonModel::~CResMonModel()
+CApiMonModel::~CApiMonModel()
 {
 }
 
-void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
+void CApiMonModel::Sync(const QList<CApiLogEntryPtr>& List, QSet<quint64> PIDs)
 {
 	QList<SListNode*> New;
 	QHash<QVariant, SListNode*> Old = m_Map;
 
-	foreach (const CResLogEntryPtr& pEntry, List)
+	foreach (const CApiLogEntryPtr& pEntry, List)
 	{
 		QVariant ID = pEntry->GetUID();
 
@@ -25,10 +25,10 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 
 		int Row = -1;
 		QHash<QVariant, SListNode*>::iterator I = Old.find(ID);
-		SResLogNode* pNode = I != Old.end() ? static_cast<SResLogNode*>(I.value()) : NULL;
+		SApiLogNode* pNode = I != Old.end() ? static_cast<SApiLogNode*>(I.value()) : NULL;
 		if(!pNode)
 		{
-			pNode = static_cast<SResLogNode*>(MkNode(ID));
+			pNode = static_cast<SApiLogNode*>(MkNode(ID));
 			pNode->Values.resize(columnCount());
 			pNode->pEntry = pEntry;
 			New.append(pNode);
@@ -63,11 +63,10 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 			{
 				case eProcess:			Value = pEntry->GetProcessId(); break;
 				case eTimeStamp:		Value = pEntry->GetTimeStamp(); break;
-				case eType:				Value = pEntry->GetType(); break;
-				case eValue:			Value = pEntry->GetValue(); break;
+				case eMessage:			Value = pEntry->GetMessage(); break;
 			}
 
-			SResLogNode::SValue& ColValue = pNode->Values[section];
+			SApiLogNode::SValue& ColValue = pNode->Values[section];
 
 			if (ColValue.Raw != Value)
 			{
@@ -102,21 +101,21 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 	CListItemModel::Sync(New, Old);
 }
 
-CResLogEntryPtr CResMonModel::GetEntry(const QModelIndex &index) const
+CApiLogEntryPtr CApiMonModel::GetEntry(const QModelIndex &index) const
 {
 	if (!index.isValid())
-        return CResLogEntryPtr();
+        return CApiLogEntryPtr();
 
-	SResLogNode* pNode = static_cast<SResLogNode*>(index.internalPointer());
+	SApiLogNode* pNode = static_cast<SApiLogNode*>(index.internalPointer());
 	return pNode->pEntry;
 }
 
-int CResMonModel::columnCount(const QModelIndex &parent) const
+int CApiMonModel::columnCount(const QModelIndex &parent) const
 {
 	return eCount;
 }
 
-QVariant CResMonModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CApiMonModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
@@ -124,8 +123,7 @@ QVariant CResMonModel::headerData(int section, Qt::Orientation orientation, int 
 		{
 			case eProcess:			return tr("Process");
 			case eTimeStamp:		return tr("Time Stamp");
-			case eType:				return tr("Type");
-			case eValue:			return tr("Value");
+			case eMessage:			return tr("Message");
 		}
 	}
     return QVariant();

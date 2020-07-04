@@ -175,7 +175,9 @@ _FX NTSTATUS SysInfo_NtQuerySystemInformation(
         SystemInformationClass, Buffer, BufferLength, ReturnLength);
 
     if (NT_SUCCESS(status) &&
-            SystemInformationClass == SystemProcessInformation) {
+            (SystemInformationClass == SystemProcessInformation
+			|| SystemInformationClass == SystemExtendedProcessInformation
+			|| SystemInformationClass == SystemFullProcessInformation)) {
 
         SysInfo_DiscardProcesses(Buffer);
     }
@@ -195,6 +197,35 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
     SYSTEM_PROCESS_INFORMATION *next;
     WCHAR boxname[48];
 
+	BOOL hideOther = SbieApi_QueryConfBool(NULL, L"HideOtherBoxes", TRUE);
+
+	WCHAR* hiddenProcesses = NULL;
+	WCHAR* hiddenProcessesPtr = NULL;
+	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, sould be enough
+	WCHAR hiddenProcess[110];
+
+	for (ULONG index = 0; ; ++index) {
+		NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"HideHostProcess", index, hiddenProcess, 108 * sizeof(WCHAR));
+		if (NT_SUCCESS(status)) {
+			if (hiddenProcesses == NULL) {
+				hiddenProcesses = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, hiddenProcessesLen * sizeof(WCHAR));
+				if (!hiddenProcesses)
+					break;
+				hiddenProcessesPtr = hiddenProcesses;
+			}
+			ULONG nameLen = wcslen(hiddenProcess) + 1; // include terminating 0
+			if ((hiddenProcessesPtr - hiddenProcesses) + nameLen + 1 > hiddenProcessesLen) {
+				SbieApi_Log(2310, L", 'HideProcess'"); // todo add custom message
+				break;
+			}
+			wmemcpy(hiddenProcessesPtr, hiddenProcess, nameLen);
+			hiddenProcessesPtr += nameLen;
+			*hiddenProcessesPtr = L'\0';
+		}
+		else if (status != STATUS_BUFFER_TOO_SMALL)
+			break;
+	}
+
     //
     // we assume the first record is always going to be the idle process or
     // a system process -- in any case, one we're not going to have to skip
@@ -202,21 +233,43 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 
     while (1) {
 
-        next = (SYSTEM_PROCESS_INFORMATION *)
-                    (((UCHAR *)curr) + curr->NextEntryOffset);
+        next = (SYSTEM_PROCESS_INFORMATION *) (((UCHAR *)curr) + curr->NextEntryOffset);
         if (next == curr)
-            return;
+            break;
 
-        SbieApi_QueryProcess(
-            next->UniqueProcessId, boxname, NULL, NULL, NULL);
+		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, NULL, NULL);
 
-        if ((! boxname[0]) || _wcsicmp(boxname, Dll_BoxName) == 0)
+		BOOL hideProcess = FALSE;
+		if (hideOther) {
+			if(boxname[0] && _wcsicmp(boxname, Dll_BoxName) != 0)
+				hideProcess = TRUE;
+		}
+
+		if(hiddenProcesses) {
+			if ((!boxname[0]) && next->ImageName.Buffer) {
+				WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
+				if (imagename)  imagename += 1; // skip L'\\'
+				else			imagename = next->ImageName.Buffer;
+
+				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
+					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
+						hideProcess = TRUE;
+						break;
+					}
+				}
+			}
+		}
+
+        if (!hideProcess)
             curr = next;
         else if (next->NextEntryOffset)
             curr->NextEntryOffset += next->NextEntryOffset;
         else
             curr->NextEntryOffset = 0;
     }
+
+	if(hiddenProcesses)
+		HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, hiddenProcesses);
 }
 
 

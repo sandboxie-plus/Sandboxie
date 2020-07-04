@@ -29,6 +29,7 @@
 #include "common/defines.h"
 #include "common/my_version.h"
 #include "core/dll/sbiedll.h"
+#include <aclapi.h>
 
 #define MISC_H_WITHOUT_WIN32_NTDDK_H
 #include "misc.h"
@@ -83,6 +84,69 @@ bool ServiceServer::CanCallerDoElevation(
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------
+// CanCallerDoElevation
+//---------------------------------------------------------------------------
+
+
+bool ServiceServer::CanAccessSCM(HANDLE idProcess)
+{
+	WCHAR boxname[48] = { 0 };
+	WCHAR imagename[128] = { 0 };
+	SbieApi_QueryProcess(idProcess, boxname, imagename, NULL, NULL); // if this fail we take the global config if present
+	if (SbieApi_QueryConfBool(boxname, L"UnrestrictedSCM", FALSE))
+		return true;
+
+	//
+	// Note: when RpcSs and DcomLaunch are not running as system, thay still are alowed to access the SCM
+	//
+	if (!SbieApi_QueryConfBool(boxname, L"ProtectRpcSs", FALSE))
+	{
+		if (_wcsicmp(imagename, SANDBOXIE L"DcomLaunch.exe") == 0)
+			return true;
+	}
+
+	bool bRet = false;
+
+	PSECURITY_DESCRIPTOR securityDescriptor = NULL;
+	SC_HANDLE scHandle = OpenSCManager(NULL, NULL, READ_CONTROL);
+	if (scHandle != NULL) {
+		GetSecurityInfo(scHandle, SE_SERVICE, OWNER_SECURITY_INFORMATION | GROUP_SECURITY_INFORMATION | DACL_SECURITY_INFORMATION, NULL, NULL, NULL, NULL, &securityDescriptor);
+		CloseServiceHandle(scHandle);
+	}
+	if (!securityDescriptor)
+		return bRet;
+
+	/*HANDLE hToken = NULL;
+	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)(UINT_PTR)idProcess);
+	if (hProcess != NULL) {
+		OpenProcessToken(hProcess, TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &hToken);
+		CloseHandle(hProcess);
+	}*/
+
+	HANDLE hToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
+	if (hToken) {
+		HANDLE hImpersonatedToken = NULL;
+		if (DuplicateToken(hToken, SecurityImpersonation, &hImpersonatedToken)) {
+			DWORD accessRights = SC_MANAGER_ALL_ACCESS;
+			GENERIC_MAPPING mapping = { 0xFFFFFFFF };
+			PRIVILEGE_SET privileges = { 0 };
+			DWORD grantedAccess = 0, privilegesLength = sizeof(privileges);
+			BOOL result = FALSE;
+			//::MapGenericMask(&genericAccessRights, &mapping);
+			if (::AccessCheck(securityDescriptor, hImpersonatedToken, accessRights,
+				&mapping, &privileges, &privilegesLength, &grantedAccess, &result)) {
+				bRet = (result == TRUE);
+			}
+			CloseHandle(hImpersonatedToken);
+		}
+		CloseHandle(hToken);
+	}
+	LocalFree(securityDescriptor);
+
+	return bRet;
 }
 
 
@@ -188,7 +252,7 @@ MSG_HEADER *ServiceServer::RunHandler(MSG_HEADER *msg, HANDLE idProcess)
     ULONG error;
     ULONG idSession;
 
-    if (! CanCallerDoElevation(idProcess, req->name, &idSession))
+    if (! CanCallerDoElevation(idProcess, req->name, &idSession) || !CanAccessSCM(idProcess))
         error = ERROR_ACCESS_DENIED;
     else {
         WCHAR *svcname = NULL;
@@ -252,7 +316,13 @@ ULONG ServiceServer::RunHandler2(
     }
 
     if (ok) {
-        SetTokenDefaultDacl(hNewToken, idProcess);
+		WCHAR boxname[48] = { 0 };
+		SbieApi_QueryProcess(idProcess, boxname, NULL, NULL, NULL); // if this fail we take the global config if present
+		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
+			SetTokenCustomDacl(hNewToken, idProcess, GENERIC_ALL, TRUE); 
+		else //if (_wcsicmp(svcname, L"MSIServer") == 0)
+			// The MSIServer needs to be extra allowances to work correctly
+			SetTokenCustomDacl(hNewToken, idProcess, GENERIC_READ, FALSE);
     }
 
     if (ok) {
@@ -295,11 +365,11 @@ ULONG ServiceServer::RunHandler2(
 
 
 //---------------------------------------------------------------------------
-// SetTokenDefaultDacl
+// SetTokenCustomDacl
 //---------------------------------------------------------------------------
 
 
-void ServiceServer::SetTokenDefaultDacl(HANDLE hNewToken, HANDLE idProcess)
+void ServiceServer::SetTokenCustomDacl(HANDLE hNewToken, HANDLE idProcess, DWORD AccessMask, bool useUserSID)
 {
     static UCHAR AnonymousLogonSid[12] = {
         1,                                      // Revision
@@ -325,9 +395,11 @@ void ServiceServer::SetTokenDefaultDacl(HANDLE hNewToken, HANDLE idProcess)
     if (! WorkSpace)
         return;
 
+	TOKEN_GROUPS	   *pLogOn = (TOKEN_GROUPS *)WorkSpace;
     TOKEN_USER         *pUser = (TOKEN_USER *)WorkSpace;
     TOKEN_DEFAULT_DACL *pDacl = (TOKEN_DEFAULT_DACL *)(WorkSpace + 128);
-
+	PSID pSid;
+	
     //
     // get the token for the calling process, extract the user SID
     //
@@ -344,35 +416,46 @@ void ServiceServer::SetTokenDefaultDacl(HANDLE hNewToken, HANDLE idProcess)
     if (! ok)
         goto finish;
 
-    ok = GetTokenInformation(hToken, TokenUser, pUser, 128, &len);
+	if (useUserSID)
+	{
+		ok = GetTokenInformation(hToken, TokenUser, pUser, 128, &len);
 
-    CloseHandle(hToken);
+		//
+		// in Sandboxie version 4, the primary process token is going to be
+		// the anonymous token which isn't very useful here, so get the
+		// textual SID string and convert it into a SID value
+		//
 
-    if (! ok)
-        goto finish;
+		if (ok && memcmp(pUser->User.Sid, AnonymousLogonSid,
+			sizeof(AnonymousLogonSid)) == 0) {
 
-    //
-    // in Sandboxie version 4, the primary process token is going to be
-    // the anonymous token which isn't very useful here, so get the
-    // textual SID string and convert it into a SID value
-    //
+			PSID TempSid;
+			WCHAR SidString[96];
+			SbieApi_QueryProcess(idProcess, NULL, NULL, SidString, NULL);
+			if (SidString[0]) {
+				if (ConvertStringSidToSid(SidString, &TempSid)) {
+					memcpy(pUser + 1, TempSid, GetLengthSid(TempSid));
+					pUser->User.Sid = (PSID)(pUser + 1);
+					LocalFree(TempSid);
+				}
+			}
+		}
 
-    if (memcmp(pUser->User.Sid, AnonymousLogonSid,
-               sizeof(AnonymousLogonSid)) == 0) {
+		pSid = pUser->User.Sid;
+	}
+	else
+	{
+		ok = GetTokenInformation(hToken, TokenLogonSid, pLogOn, 128, &len);
 
-        PSID TempSid;
-        WCHAR SidString[96];
-        SbieApi_QueryProcess(idProcess, NULL, NULL, SidString, NULL);
-        if (SidString[0]) {
-            if (ConvertStringSidToSid(SidString, &TempSid)) {
-                memcpy(pUser + 1, TempSid, GetLengthSid(TempSid));
-                pUser->User.Sid = (PSID)(pUser + 1);
-                LocalFree(TempSid);
-            }
-        }
-    }
+		pSid = pLogOn->Groups[0].Sid; // use the LogonSessionId token
+	}
+	
+	CloseHandle(hToken);
 
-    //
+	if (!ok)
+		goto finish;
+
+	//
     // extract the default DACL, update it and store it back
     //
 
@@ -385,9 +468,9 @@ void ServiceServer::SetTokenDefaultDacl(HANDLE hNewToken, HANDLE idProcess)
 
     pAcl->AclSize += sizeof(ACCESS_ALLOWED_ACE)
                    - sizeof(DWORD)              // minus SidStart member
-                   + (WORD)GetLengthSid(pUser->User.Sid);
+		+ (WORD)GetLengthSid(pSid);
 
-    AddAccessAllowedAce(pAcl, ACL_REVISION, GENERIC_ALL, pUser->User.Sid);
+	AddAccessAllowedAce(pAcl, ACL_REVISION, AccessMask, pSid);
 
     ok = SetTokenInformation(
             hNewToken, TokenDefaultDacl, pDacl, (1024 - 128));

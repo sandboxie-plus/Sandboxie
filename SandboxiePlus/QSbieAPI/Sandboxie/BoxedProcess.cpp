@@ -154,3 +154,8 @@ bool CBoxedProcess::IsSuspended() const
 
 	return isSuspended;
 }
+
+QString CBoxedProcess::GetBoxName() const 
+{ 
+	return m_pBox->GetName(); 
+}

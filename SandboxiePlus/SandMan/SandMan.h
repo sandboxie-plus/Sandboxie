@@ -7,10 +7,11 @@
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "Models/ResMonModel.h"
+#include "Models/ApiMonModel.h"
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	2
-#define VERSION_REV 	2
+#define VERSION_REV 	5
 #define VERSION_UPD 	0
 
 
@@ -19,6 +20,7 @@
 
 class CSbieView;
 class CApiLog;
+class CBoxBorder;
 
 class CSandMan : public QMainWindow
 {
@@ -36,6 +38,7 @@ public:
 
 protected:
 	SB_STATUS			ConnectSbie();
+	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
 	SB_STATUS			StopSbie(bool andRemove = false);
 
@@ -46,15 +49,16 @@ protected:
 	int					m_uTimerID;
 	bool				m_bConnectPending;
 	bool				m_bStopPending;
+	CBoxBorder*			m_pBoxBorder;
 
 	CApiLog*			m_ApiLog;
+	
 
 public slots:
 	void				OnMessage(const QString&);
 
 	void				OnStatusChanged();
-	void				OnLogMessage(const QString& Message);
-	void				OnApiLogEntry(const QString& Message);
+	void				OnLogMessage(const QString& Message, bool bNotify = false);
 
 private slots:
 	void				OnSelectionChanged();
@@ -101,9 +105,10 @@ private:
 	QTabWidget*			m_pLogTabs;
 
 	CPanelWidgetEx*		m_pMessageLog;
-	CPanelViewImpl<CResMonModel>* m_pResourceLog;
+	CPanelViewEx*		m_pResourceLog;
 	CResMonModel*		m_pResMonModel;
-	CPanelWidgetEx*		m_pApiLog;
+	CPanelViewEx*		m_pApiCallLog;
+	CApiMonModel*		m_pApiMonModel;
 
 
 	QMenu*				m_pMenuFile;

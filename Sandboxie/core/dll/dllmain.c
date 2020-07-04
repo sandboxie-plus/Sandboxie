@@ -87,7 +87,7 @@ ULONG Dll_Windows = 0;
 CRITICAL_SECTION  VT_CriticalSection;
 #endif
 
-const UCHAR *SbieDll_Version = MY_VERSION_STRING;
+const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
 
 //extern ULONG64 __security_cookie = 0;
 
@@ -389,11 +389,11 @@ _FX void Dll_InitInjected(void)
     if (! Dll_RestrictedToken)
         CustomizeSandbox();
 
-            /*while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();*/
+    /*while (! IsDebuggerPresent()) {
+        OutputDebugString(L"BREAK\n");
+        Sleep(500);
+    }
+    __debugbreak();*/
 
     /*if (_wcsicmp(Dll_ImageName, L"iexplore.exe") == 0) {
         WCHAR *cmd = GetCommandLine();

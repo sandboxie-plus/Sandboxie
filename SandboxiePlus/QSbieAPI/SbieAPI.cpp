@@ -72,7 +72,7 @@ struct SSbieAPI
 	ULONG SizeofPortMsg;
 	ULONG CallSeqNumber;
 
-	QString Password; // todo: suppor lcoked configurations
+	QString Password;
 
 	ULONG sessionId;
 
@@ -110,6 +110,8 @@ time_t FILETIME2time(quint64 fileTime)
 CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 {
 	m = new SSbieAPI();
+
+	m_pGlobalSection = new CSbieIni("GlobalSettings", this, this);
 
 	m_bReloadPending = false;
 
@@ -398,6 +400,11 @@ SB_STATUS CSbieAPI__CallServer(SSbieAPI* m, MSG_HEADER* req, MSG_HEADER** prpl)
 
 SB_STATUS CSbieAPI::CallServer(void* req, void* rpl) const
 {
+	//
+	// Note: Once we open a port to the server from a threat the service will remember it we can't reconnect after disconnection
+	//			So for every new connection we need a new threat, we achive this by letting our monitor threat issue all requests
+	//
+
 	while (InterlockedCompareExchange(&m->SvcLock, SVC_OP_STATE_PREP, SVC_OP_STATE_IDLE) != SVC_OP_STATE_IDLE)
 		QThread::msleep(1);
 
@@ -535,6 +542,7 @@ void CSbieAPI::OnIniChanged(const QString &path)
 
 void CSbieAPI::OnReloadConfig()
 {
+	m_bReloadPending = false;
 	ReloadConfig();
 }
 
@@ -668,7 +676,9 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 
 SB_STATUS CSbieAPI::SbieIniSet(void *RequestBuf, void *pPasswordWithinRequestBuf, const QString& SectionName, const QString& SettingName)
 {
+retry:
 	m->Password.toWCharArray((WCHAR*)pPasswordWithinRequestBuf); // fix-me: potential overflow
+	((WCHAR*)pPasswordWithinRequestBuf)[m->Password.length()] = L'\0';
 
 	MSG_HEADER *rpl = NULL;
 	SB_STATUS Status = CSbieAPI::CallServer((MSG_HEADER *)RequestBuf, &rpl);
@@ -679,8 +689,17 @@ SB_STATUS CSbieAPI::SbieIniSet(void *RequestBuf, void *pPasswordWithinRequestBuf
 	free(rpl);
 	if (status == 0)
 		return SB_OK;
-	if (status == STATUS_LOGON_NOT_GRANTED || status == STATUS_WRONG_PASSWORD)
+	if (status == STATUS_LOGON_NOT_GRANTED || status == STATUS_WRONG_PASSWORD) 
+	{
+		if (((MSG_HEADER *)RequestBuf)->msgid != MSGID_SBIE_INI_TEST_PASSWORD)
+		{
+			bool bRetry = false;
+			emit NotAuthorized(status == STATUS_WRONG_PASSWORD, bRetry);
+			if (bRetry)
+				goto retry;
+		}
 		return SB_ERR(CSbieAPI::tr("You are not authorized to update configuration in section '%1'").arg(SectionName), status);
+	}
 	return SB_ERR(CSbieAPI::tr("Failed to set configuration setting %1 in section %2: %3").arg(SettingName).arg(SectionName).arg(status, 8, 16), status);
 }
 
@@ -1179,6 +1198,43 @@ bool CSbieAPI::IsBoxEnabled(const QString& BoxName)
 	return NT_SUCCESS(m->IoControl(parms));
 }
 
+bool CSbieAPI::IsConfigLocked()
+{
+	return m->Password.isEmpty() && !SbieIniGet("GlobalSettings", "EditPassword", 0).isEmpty(); 
+}
+
+SB_STATUS CSbieAPI::UnlockConfig(const QString& Password)
+{
+	SBIE_INI_PASSWORD_REQ *req = (SBIE_INI_PASSWORD_REQ *)malloc(REQUEST_LEN);
+	req->h.msgid = MSGID_SBIE_INI_TEST_PASSWORD;
+	req->h.length = sizeof(SBIE_INI_PASSWORD_REQ);
+	m->Password = Password;
+	SB_STATUS Status = SbieIniSet(req, req->old_password, "GlobalSettings", "*");
+	if (Status.IsError())
+		m->Password.clear();
+	free(req);
+	return Status;
+}
+
+SB_STATUS CSbieAPI::LockConfig(const QString& NewPassword)
+{
+	SBIE_INI_PASSWORD_REQ *req = (SBIE_INI_PASSWORD_REQ *)malloc(REQUEST_LEN);
+	req->h.msgid = MSGID_SBIE_INI_SET_PASSWORD;
+	req->h.length = sizeof(SBIE_INI_PASSWORD_REQ);
+	m->Password.toWCharArray(req->new_password); // fix-me: potential overflow
+	req->new_password[m->Password.length()] = L'\0';
+	SB_STATUS Status = SbieIniSet(req, req->old_password, "GlobalSettings", "*");
+	if (!Status.IsError())
+		m->Password = NewPassword;
+	free(req);
+	return Status;
+}
+
+void CSbieAPI::ClearPassword()
+{
+	m->Password.clear();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Log
 //
@@ -1213,7 +1269,7 @@ bool CSbieAPI::GetLog()
 	wchar_t* Buffer[4*1024];
 	ULONG Length = ARRAYSIZE(Buffer);
 
-	ULONG MessageId = 0;
+	ULONG MsgCode = 0;
 	ULONG ProcessId = 0;
 	ULONG MessageNum = m->lastMessageNum;
 
@@ -1225,7 +1281,7 @@ bool CSbieAPI::GetLog()
 	args->func_code = API_GET_MESSAGE;
 	args->msg_num.val = &MessageNum;
 	args->session_id.val = m->sessionId;
-	args->msgid.val = &MessageId;
+	args->msgid.val = &MsgCode;
 	args->msgtext.val = &msgtext;
 	args->process_id.val = &ProcessId;
 
@@ -1237,7 +1293,7 @@ bool CSbieAPI::GetLog()
 	//	we missed something
 	m->lastMessageNum = MessageNum;
 
-	if (MessageId == 0)
+	if (MsgCode == 0)
 		return true; // empty dummy message for maintaining sequence consistency
 
     WCHAR *str1 = (WCHAR*)msgtext.Buffer;
@@ -1245,12 +1301,80 @@ bool CSbieAPI::GetLog()
     WCHAR *str2 = str1 + str1_len + 1;
     ULONG str2_len = wcslen(str2);
 
-	QString Message = CSbieAPI__FormatSbieMsg(m, MessageId, str1, str2);
+	//
+	//	0xTFFFMMMM
+	//
+	//	T = ttcr
+	//		tt = 00 - Ok
+	//		tt = 01 - Info
+	//		tt = 10 - Warning
+	//		tt = 11 - Error
+	//		c  = unused
+	//		r  = reserved
+	//
+	//	FFF = 0x000 UIstr
+	//	FFF = 0x101 POPUP
+	//	FFF = 0x102 EVENT
+	//
+	//	MMMM = Message Code
+	//
+	quint8  Severity = MsgCode >> 30;
+	quint16 Facility = (MsgCode >> 16) & 0x0FFF;
+	quint16 MessageId= MsgCode & 0xFFFF;
+
+	if (MessageId == 2199) // Auto Recovery notification
+	{
+		QString TempStr = QString::fromWCharArray(str1);
+		int TempPos = TempStr.indexOf(" ");
+		FileToRecover(TempStr.left(TempPos), Nt2DosPath(TempStr.mid(TempPos + 1)));
+		return true;
+	}
+
+	QString Message = CSbieAPI__FormatSbieMsg(m, MsgCode, str1, str2);
 	if(ProcessId != 4) // if its not from the driver add the pid
 		Message += tr(" by process: %1").arg(ProcessId);
 	emit LogMessage(Message);
 
 	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Forced Processes
+//
+
+SB_STATUS CSbieAPI::DisableForceProcess(bool Set)
+{
+	//m_pGlobalSection->SetNum("ForceDisableSeconds", Seconds);
+
+	ULONG uEnable = Set ? TRUE : FALSE;
+
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_DISABLE_FORCE_PROCESS_ARGS* args = (API_DISABLE_FORCE_PROCESS_ARGS*)parms;
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_DISABLE_FORCE_PROCESS;
+	args->set_flag.val = &uEnable; // NewState
+	args->get_flag.val = NULL; // OldState
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(status);
+	return SB_OK;
+}
+
+bool CSbieAPI::AreForceProcessDisabled()
+{
+	ULONG uEnabled = FALSE;
+
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_DISABLE_FORCE_PROCESS_ARGS* args = (API_DISABLE_FORCE_PROCESS_ARGS*)parms;
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_DISABLE_FORCE_PROCESS;
+	args->set_flag.val = NULL; // NewState
+	args->get_flag.val = &uEnabled; // OldState
+
+	return NT_SUCCESS(m->IoControl(parms)) && uEnabled;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1324,6 +1448,15 @@ bool CSbieAPI::GetMonitor()
 	QWriteLocker Lock(&m_ResLogMutex); 
 	m_ResLogList.append(LogEntry);
 	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Other 
+//
+
+QString CSbieAPI::GetSbieMessage(int MessageId, const QString& arg1, const QString& arg2) const
+{
+	return CSbieAPI__FormatSbieMsg(m, MessageId, arg1.toStdWString().c_str(), arg2.toStdWString().c_str());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -39,11 +39,14 @@
     <ClCompile Include="Sandboxie\SandBox.cpp">
       <Filter>Sandboxie</Filter>
     </ClCompile>
-    <ClCompile Include="Sandboxie\IniSection.cpp">
-      <Filter>Sandboxie</Filter>
-    </ClCompile>
     <ClCompile Include="SbieUtils.cpp">
       <Filter>SbieAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandboxie\BoxBorder.cpp">
+      <Filter>Sandboxie</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandboxie\SbieIni.cpp">
+      <Filter>Sandboxie</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,7 +81,10 @@
     <QtMoc Include="SbieAPI.h">
       <Filter>SbieAPI</Filter>
     </QtMoc>
-    <QtMoc Include="Sandboxie\IniSection.h">
+    <QtMoc Include="Sandboxie\BoxBorder.h">
+      <Filter>Sandboxie</Filter>
+    </QtMoc>
+    <QtMoc Include="Sandboxie\SbieIni.h">
       <Filter>Sandboxie</Filter>
     </QtMoc>
   </ItemGroup>

@@ -193,7 +193,9 @@
   <ItemGroup>
     <ClCompile Include="ApiLog.cpp" />
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
+    <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Models\ApiMonModel.cpp" />
     <ClCompile Include="Models\ResMonModel.cpp" />
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="SandMan.cpp" />
@@ -205,14 +207,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp" />
+    <ClCompile Include="Windows\OptionsWindow.cpp" />
+    <ClCompile Include="Windows\SettingsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\SettingsWindow.h" />
+    <QtMoc Include="Windows\OptionsWindow.h" />
     <QtMoc Include="Views\SbieView.h" />
     <QtMoc Include="SandMan.h" />
     <QtMoc Include="Models\SbieModel.h" />
     <QtMoc Include="Models\ResMonModel.h" />
     <QtMoc Include="ApiLog.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
+    <QtMoc Include="Models\ApiMonModel.h" />
+    <ClInclude Include="Helpers\WinAdmin.h" />
     <ClInclude Include="Resources\resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
     <ClInclude Include="stdafx.h" />
@@ -225,6 +233,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\SandMan.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Forms\OptionsWindow.ui" />
+    <QtUic Include="Forms\SettingsWindow.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

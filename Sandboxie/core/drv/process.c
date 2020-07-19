@@ -1024,7 +1024,7 @@ _FX void Process_NotifyProcess_Create(
                 // don't put the process into a job if OpenWinClass=*
                 //
 
-                if (new_proc->open_all_win_classes) {
+                if (new_proc->open_all_win_classes || Conf_Get_Boolean(box->name, L"NoAddProcessToJob", 0, FALSE)) {
 
                     add_process_to_job = FALSE;
                 }

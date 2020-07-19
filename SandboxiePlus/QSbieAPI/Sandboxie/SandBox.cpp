@@ -23,7 +23,7 @@
 //{
 //};
 
-CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CIniSection(BoxName, pAPI)
+CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxName, pAPI)
 {
 	//m = new SSandBox;
 
@@ -41,7 +41,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CIniSection(B
 	}
 	else
 	{
-		SetBool("AutoRecover", true);
+		SetBool("AutoRecover", false);
 		SetBool("BlockNetworkFiles", true);
 
 		//SetDefaultTemplates6(*this); // why 6?

@@ -8,10 +8,11 @@
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "Models/ResMonModel.h"
 #include "Models/ApiMonModel.h"
+#include <QTranslator>
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	3
-#define VERSION_REV 	0
+#define VERSION_REV 	5
 #define VERSION_UPD 	0
 
 
@@ -60,12 +61,12 @@ public slots:
 	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message, bool bNotify = false);
 
+	void				OnNotAuthorized(bool bLoginRequired, bool& bRetry);
+
+	void				UpdateSettings();
+
 private slots:
 	void				OnSelectionChanged();
-
-	//void				OnResetColumns();
-	//void				OnColumnsChanged();
-	//void				OnMenu(const QPoint& Point);
 
 	void				OnMenuHover(QAction* action);
 
@@ -76,6 +77,7 @@ private slots:
 	void				OnCleanUp();
 	void				OnSetKeep();
 
+	void				OnSettings();
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
@@ -96,9 +98,6 @@ private:
 
 	QSplitter*			m_pLogSplitter;
 
-	//QTreeViewEx*		m_pBoxTree;
-	//CSbieModel*			m_pBoxModel;
-	//QSortFilterProxyModel* m_pSortProxy;
 	CSbieView*			m_pBoxView;
 
 
@@ -139,6 +138,7 @@ private:
 	QAction*			m_pKeepTerminated;
 
 	QMenu*				m_pMenuOptions;
+	QAction*			m_pMenuSettings;
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
@@ -156,6 +156,14 @@ private:
 	bool				m_bExit;
 
 	CProgressDialog*	m_pProgressDialog;
+
+	void				SetDarkTheme(bool bDark);
+	QString				m_DefaultStyle;
+	QPalette			m_DefaultPalett;
+
+	void				LoadLanguage();
+	QTranslator			m_Translator;
+	QByteArray			m_Translation;
 };
 
 extern CSandMan* theGUI;

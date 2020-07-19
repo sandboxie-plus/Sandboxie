@@ -21,6 +21,7 @@ public slots:
 private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
 
+	void						OnDoubleClicked(const QModelIndex& index);
 	void						ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected);
 
 	void						OnSandBoxAction();
@@ -52,6 +53,7 @@ private:
 	QAction*				m_pMenuPresetsINet;
 	QAction*				m_pMenuPresetsShares;
 	QAction*				m_pMenuPresetsNoAdmin;
+	QAction*				m_pMenuOptions;
 	QAction*				m_pMenuEmptyBox;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;

@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.3.5 / 5.42.1] - 2020-07-19
+
+### Added
+- Added settings window
+- added translationsupport
+- added dark theme
+- added auto start option
+- added sandbox options
+- added debug option "NoAddProcessToJob=y"
+
+### Changed
+- improved empty sandbox tray icon
+- improved message parsing
+- updated homepage links
+
+### Fixed
+- fixed ini issue with sandman.exe when renaming sandboxes
+- fixed ini auto reload bug introduced in the last build
+- fixed issue when hooking delayd loaded libraries
+
+
+
 ## [0.3 / 5.42] - 2020-07-04
 
 ### Added

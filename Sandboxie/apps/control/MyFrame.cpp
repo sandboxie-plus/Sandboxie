@@ -223,7 +223,8 @@ CMyFrame::CMyFrame(BOOL ForceVisible, BOOL ForceSync)
     AdjustSizePosition(left, top, width, height);
 
     ULONG exStyle = (CMyApp::m_LayoutRTL) ? WS_EX_LAYOUTRTL : 0;
-    CreateEx(   exStyle, (LPCTSTR)CMyApp::m_atom, CMyApp::m_appTitle,
+	CString strTitle = CMyApp::m_appTitle + " - xanasoft.com";
+    CreateEx(   exStyle, (LPCTSTR)CMyApp::m_atom, strTitle,
                 WS_OVERLAPPEDWINDOW | WS_CAPTION | WS_SYSMENU,
                 left, top, width, height,
                 NULL, NULL, NULL);

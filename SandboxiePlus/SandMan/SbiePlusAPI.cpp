@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SbiePlusAPI.h"
+#include "..\MiscHelpers\Common\Common.h"
 
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
@@ -120,14 +121,14 @@ void CSandBoxPlus::SetLogApi(bool bEnable)
 void CSandBoxPlus::SetINetBlock(bool bEnable)
 {
 	if (bEnable)
-		DelValue("ClosedFilePath", "InternetAccessDevices");
+		DelValue("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
 	else
 		InsertText("ClosedFilePath", "InternetAccessDevices");
 }
 
 void CSandBoxPlus::SetAllowShares(bool bEnable)
 {
-	SetBool("BlockNetworkFiles", bEnable);
+	SetBool("BlockNetworkFiles", !bEnable);
 }
 
 void CSandBoxPlus::SetDropRights(bool bEnable)

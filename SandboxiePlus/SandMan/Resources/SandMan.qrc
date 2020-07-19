@@ -25,6 +25,7 @@
         <file alias="Stop">Actions/Stop.png</file>
         <file alias="Advanced">Actions/Advanced.png</file>
         <file alias="Service">Actions/Service.png</file>
+        <file alias="Settings">Actions/config.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

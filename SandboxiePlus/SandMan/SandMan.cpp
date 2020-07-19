@@ -10,6 +10,7 @@
 #include "./Dialogs/MultiErrorDialog.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "../QSbieAPI/Sandboxie/BoxBorder.h"
+#include "Windows/SettingsWindow.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -81,6 +82,13 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theGUI = this;
 
+	m_DefaultStyle = QApplication::style()->objectName();
+	m_DefaultPalett = QApplication::palette();
+
+	LoadLanguage();
+	if (theConf->GetBool("Options/DarkTheme", false))
+		SetDarkTheme(true);
+
 	m_bExit = false;
 
 	theAPI = new CSbiePlusAPI(this);
@@ -114,47 +122,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pPanelSplitter->setOrientation(Qt::Horizontal);
 	m_pLogSplitter->addWidget(m_pPanelSplitter);
 
-	/*
-	// Box Tree
-	m_pBoxModel = new CSbieModel();
-	m_pBoxModel->SetTree(true);
-	m_pBoxModel->SetUseIcons(true);
-
-	m_pSortProxy = new CSortFilterProxyModel(false, this);
-	m_pSortProxy->setSortRole(Qt::EditRole);
-	m_pSortProxy->setSourceModel(m_pBoxModel);
-	m_pSortProxy->setDynamicSortFilter(true);
-
-	m_pBoxTree = new QTreeViewEx();
-	//m_pBoxTree->setItemDelegate(theGUI->GetItemDelegate());
-
-	m_pBoxTree->setModel(m_pSortProxy);
-
-	m_pBoxTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
-#ifdef WIN32
-	QStyle* pStyle = QStyleFactory::create("windows");
-	m_pBoxTree->setStyle(pStyle);
-#endif
-	m_pBoxTree->setSortingEnabled(true);
-
-	m_pBoxTree->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(m_pBoxTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint &)));
-
-	//connect(theGUI, SIGNAL(ReloadPanels()), m_pWindowModel, SLOT(Clear()));
-
-	m_pBoxTree->setColumnReset(2);
-	connect(m_pBoxTree, SIGNAL(ResetColumns()), this, SLOT(OnResetColumns()));
-	connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
-
-	//m_pSplitter->addWidget(CFinder::AddFinder(m_pBoxTree, m_pSortProxy));
-	//m_pSplitter->setCollapsible(0, false);
-	// 
-
-	//connect(m_pBoxTree, SIGNAL(clicked(const QModelIndex&)), this, SLOT(OnItemSelected(const QModelIndex&)));
-	//connect(m_pBoxTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnItemSelected(QModelIndex)));
-
-	m_pPanelSplitter->addWidget(m_pBoxTree);
-	*/
 
 	m_pBoxView = new CSbieView();
 	m_pPanelSplitter->addWidget(m_pBoxView);
@@ -246,6 +213,8 @@ CSandMan::CSandMan(QWidget *parent)
 		m_pKeepTerminated->setCheckable(true);
 
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
+		m_pMenuSettings = m_pMenuOptions->addAction(MakeActionIcon(":/Actions/Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
+		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(QIcon(":/Actions/EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(QIcon(":/Actions/ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
 		m_pMenuOptions->addSeparator();
@@ -264,6 +233,8 @@ CSandMan::CSandMan(QWidget *parent)
 		m_pAbout = m_pMenuHelp->addAction(QIcon(":/SandMan.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 
 
+	m_pToolBar->addAction(m_pMenuSettings);
+	m_pToolBar->addSeparator();
 
 	//m_pToolBar->addAction(m_pMenuNew);
 	//m_pToolBar->addAction(m_pMenuEmptyAll);
@@ -341,18 +312,22 @@ CSandMan::CSandMan(QWidget *parent)
 	
 	if (theConf->GetBool("Options/NoStatusBar", false))
 		statusBar()->hide();
-	else if (theConf->GetBool("Options/NoSizeGrip", false))
-		statusBar()->setSizeGripEnabled(false);
+	//else if (theConf->GetBool("Options/NoSizeGrip", false))
+	//	statusBar()->setSizeGripEnabled(false);
 
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 
 	m_pProgressDialog = new CProgressDialog("Maintenance operation progress...", this);
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 
+	if (!bAutoRun)
+		show();
+
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 		ConnectSbie();
 
 	connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
+	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
 
 	m_uTimerID = startTimer(250);
 }
@@ -394,6 +369,9 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		if (m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0)
 		{
 			hide();
+
+			if (theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false))
+				theAPI->ClearPassword();
 
 			e->ignore();
 			return;
@@ -486,8 +464,6 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
 	}
 
-	m_pBoxView->Refresh();
-
 	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0))
 	{
 		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
@@ -496,16 +472,10 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		m_pTrayIcon->setIcon(Icon);
 	}
 
-	/*QList<QVariant> Added = m_pBoxModel->Sync(theAPI->GetAllBoxes());
+	if (!isVisible() || windowState().testFlag(Qt::WindowMinimized))
+		return;
 
-	if (m_pBoxModel->IsTree())
-	{
-		QTimer::singleShot(100, this, [this, Added]() {
-			foreach(const QVariant ID, Added) {
-				m_pBoxTree->expand(m_pSortProxy->mapFromSource(m_pBoxModel->FindIndex(ID)));
-			}
-		});
-	}*/
+	m_pBoxView->Refresh();
 
 	OnSelectionChanged();
 }
@@ -605,7 +575,7 @@ void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 
 	if (bNotify) 
 	{
-		int iNotify = theConf->GetInt("Options/Notifications", 1);
+		int iNotify = theConf->GetInt("Options/ShowNotifications", 1);
 		if (iNotify & 1)
 			m_pTrayIcon->showMessage("Sandboxie-Plus", Message);
 		if (iNotify & 2)
@@ -613,25 +583,36 @@ void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 	}
 }
 
-/*
-void CSandMan::OnResetColumns()
+void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 {
-	for (int i = 0; i < m_pBoxModel->columnCount(); i++)
-		m_pBoxTree->SetColumnHidden(i, false);
-}
+	if (!bLoginRequired)
+	{
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("Only Administrators can change the config."));
+		return;
+	}
 
-void CSandMan::OnColumnsChanged()
-{
-	m_pBoxModel->Sync(theAPI->GetAllBoxes());
+	static bool LoginOpen = false;
+	if (LoginOpen)
+		return;
+	LoginOpen = true;
+	for (;;)
+	{
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the configuration password."), QLineEdit::Password);
+		if (Value.isEmpty())
+			break;
+		SB_STATUS Status = theAPI->UnlockConfig(Value);
+		if (!Status.IsError()) {
+			bRetry = true;
+			break;
+		}
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed: %1").arg(Status.GetText()));
+	}
+	LoginOpen = false;
 }
-
-void CSandMan::OnMenu(const QPoint& Point)
-{
-}*/
 
 void CSandMan::OnNewBox()
 {
-	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", "Please enter a name for the new Sandbox.", QLineEdit::Normal, "NewBox");
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a name for the new Sandbox."), QLineEdit::Normal, "NewBox");
 	if (Value.isEmpty())
 		return;
 	theAPI->CreateBox(Value);
@@ -784,6 +765,23 @@ void CSandMan::OnSetKeep()
 		theAPI->UpdateProcesses(false);
 }
 
+void CSandMan::OnSettings()
+{
+	CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+	connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
+	pSettingsWindow->show();
+}
+
+void CSandMan::UpdateSettings()
+{
+	SetDarkTheme(theConf->GetBool("Options/DarkTheme", false));
+
+	if (theConf->GetBool("Options/ShowSysTray", true))
+		m_pTrayIcon->show();
+	else
+		m_pTrayIcon->hide();
+}
+
 void CSandMan::OnEditIni()
 {
 	if (theConf->GetBool("Options/NoEditInfo", true))
@@ -901,7 +899,12 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 			{
 				if(TriggerSet)
 					NullifyTrigger = true;
+				
 				hide();
+				
+				if (theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false))
+					theAPI->ClearPassword();
+
 				break;
 			}
 			show();
@@ -974,6 +977,62 @@ void CSandMan::OnAbout()
 		QMessageBox::aboutQt(this);
 	else
 		QDesktopServices::openUrl(QUrl("https://www.patreon.com/DavidXanatos"));
+}
+
+void CSandMan::SetDarkTheme(bool bDark)
+{
+	if (bDark)
+	{
+		QApplication::setStyle(QStyleFactory::create("Fusion"));
+		QPalette palette;
+		palette.setColor(QPalette::Window, QColor(53, 53, 53));
+		palette.setColor(QPalette::WindowText, Qt::white);
+		palette.setColor(QPalette::Base, QColor(25, 25, 25));
+		palette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+		palette.setColor(QPalette::ToolTipBase, Qt::white);
+		palette.setColor(QPalette::ToolTipText, Qt::white);
+		palette.setColor(QPalette::Text, Qt::white);
+		palette.setColor(QPalette::Button, QColor(53, 53, 53));
+		palette.setColor(QPalette::ButtonText, Qt::white);
+		palette.setColor(QPalette::BrightText, Qt::red);
+		palette.setColor(QPalette::Link, QColor(218, 130, 42));
+		palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+		palette.setColor(QPalette::HighlightedText, Qt::black);
+		QApplication::setPalette(palette);
+	}
+	else
+	{
+		QApplication::setStyle(QStyleFactory::create(m_DefaultStyle));
+		QApplication::setPalette(m_DefaultPalett);
+	}
+
+	CTreeItemModel::SetDarkMode(bDark);
+	CListItemModel::SetDarkMode(bDark);
+}
+
+void CSandMan::LoadLanguage()
+{
+	qApp->removeTranslator(&m_Translator);
+	m_Translation.clear();
+
+	QString Lang = theConf->GetString("Options/Language");
+	if (!Lang.isEmpty())
+	{
+		QString LangAux = Lang; // Short version as fallback
+		LangAux.truncate(LangAux.lastIndexOf('_'));
+
+		QString LangPath = QApplication::applicationDirPath() + "/translations/taskexplorer_";
+		bool bAux = false;
+		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
+		{
+			QFile File(LangPath + (bAux ? LangAux : Lang) + ".qm");
+			File.open(QFile::ReadOnly);
+			m_Translation = File.readAll();
+		}
+
+		if (!m_Translation.isEmpty() && m_Translator.load((const uchar*)m_Translation.data(), m_Translation.size()))
+			qApp->installTranslator(&m_Translator);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

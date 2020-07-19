@@ -108,6 +108,15 @@ public:
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
 	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
 	virtual bool			IsBoxEnabled(const QString& BoxName);
+	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
+	virtual bool			IsConfigLocked();
+	virtual SB_STATUS		UnlockConfig(const QString& Password);
+	virtual SB_STATUS		LockConfig(const QString& NewPassword);
+	virtual void			ClearPassword();
+
+	// Forced Processes
+	virtual SB_STATUS		DisableForceProcess(bool Set);
+	virtual bool			AreForceProcessDisabled();
 
 	// Monitor
 	virtual SB_STATUS		EnableMonitor(bool Enable);
@@ -116,9 +125,14 @@ public:
 	virtual QList<CResLogEntryPtr> GetResLog() const { QReadLocker Lock(&m_ResLogMutex); return m_ResLogList; }
 	virtual void			ClearResLog() { QWriteLocker Lock(&m_ResLogMutex); m_ResLogList.clear(); }
 
+	// Other
+	virtual QString			GetSbieMessage(int MessageId, const QString& arg1 = QString(), const QString& arg2 = QString()) const;
+
 signals:
 	void					StatusChanged();
 	void					LogMessage(const QString& Message, bool bNotify = true);
+	void					FileToRecover(const QString& BoxName, const QString& FilePath);
+	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 
 private slots:
 	//virtual void			OnMonitorEntry(quint64 ProcessId, quint32 Type, const QString& Value);
@@ -168,6 +182,8 @@ protected:
 	bool					m_bReloadPending;
 
 	bool					m_bTerminate;
+
+	CSbieIni*			m_pGlobalSection;
 
 private:
 	mutable QMutex			m_ThreadMutex;

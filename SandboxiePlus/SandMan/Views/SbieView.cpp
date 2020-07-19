@@ -4,6 +4,7 @@
 #include "../QSbieAPI/SbieAPI.h"
 #include "../../MiscHelpers/Common/SortFilterProxyModel.h"
 #include "../../MiscHelpers/Common/Settings.h"
+#include "../Windows/OptionsWindow.h"
 
 CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 {
@@ -32,6 +33,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	m_pSbieTree->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pSbieTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint &)));
+	connect(m_pSbieTree, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnDoubleClicked(const QModelIndex&)));
 	connect(m_pSbieTree->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), SLOT(ProcessSelection(QItemSelection, QItemSelection)));
 
 	//connect(theGUI, SIGNAL(ReloadPanels()), m_pSbieModel, SLOT(Clear()));
@@ -62,7 +64,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsShares->setCheckable(true);
 		m_pMenuPresetsNoAdmin = m_pMenuPresets->addAction(tr("Drop Admin Rights"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsNoAdmin->setCheckable(true);
-
+	m_pMenuOptions = m_pMenu->addAction(tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRename = m_pMenu->addAction(tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRemove = m_pMenu->addAction(tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMenuBox = m_pMenu->actions().count();
@@ -168,6 +170,7 @@ void CSbieView::OnMenu(const QPoint& Point)
 	m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
 	m_pMenuPresetsNoAdmin->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsDropRights());
 
+	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 
 	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
 		MenuActions[i]->setVisible(iProcessCount > 0 && iSandBoxeCount == 0);
@@ -207,11 +210,15 @@ void CSbieView::OnSandBoxAction()
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetAllowShares(m_pMenuPresetsShares->isChecked());
 	else if (Action == m_pMenuPresetsNoAdmin)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetDropRights(m_pMenuPresetsNoAdmin->isChecked());
-
+	else if (Action == m_pMenuOptions)
+	{
+		COptionsWindow* pOptionsWindow = new COptionsWindow(SandBoxes.first(), SandBoxes.first()->GetName(), this);
+		pOptionsWindow->show();
+	}
 	else if (Action == m_pMenuRename)
 	{
 		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", "Please enter a new name for the Sandbox.", QLineEdit::Normal, OldValue);
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
 		if (Value.isEmpty() || Value == OldValue)
 			return;
 		Results.append((SandBoxes.first()->RenameBox(Value)));
@@ -279,6 +286,17 @@ void CSbieView::OnProcessAction()
 	}
 
 	CSandMan::CheckResults(Results);
+}
+
+void CSbieView::OnDoubleClicked(const QModelIndex& index)
+{
+	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
+	CSandBoxPtr pBox = m_pSbieModel->GetSandBox(ModelIndex);
+	if (pBox.isNull())
+		return;
+
+	COptionsWindow* pOptionsWindow = new COptionsWindow(pBox, pBox->GetName(), this);
+	pOptionsWindow->show();
 }
 
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)

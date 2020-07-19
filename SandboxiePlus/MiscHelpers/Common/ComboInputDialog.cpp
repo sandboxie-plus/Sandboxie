@@ -132,6 +132,11 @@ void CComboInputDialog::setValue(const QString &t)
 		d->combo->setCurrentIndex(idx);
 }
 
+int CComboInputDialog::findValue(const QString &t) const
+{
+	return d->combo->findText(t);
+}
+
 QVariant CComboInputDialog::data() const
 {
 	return d->combo->currentData();
@@ -140,6 +145,11 @@ QVariant CComboInputDialog::data() const
 void CComboInputDialog::setData(const QVariant & v)
 {
 	d->combo->setCurrentIndex(d->combo->findData(v));
+}
+
+int CComboInputDialog::findData(const QVariant & v) const
+{
+	return d->combo->findData(v);
 }
 
 QPixmap CComboInputDialog::iconPixmap() const

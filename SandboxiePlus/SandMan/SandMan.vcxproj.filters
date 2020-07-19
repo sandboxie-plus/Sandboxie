@@ -35,6 +35,12 @@
     <Filter Include="Dialogs">
       <UniqueIdentifier>{6accf3ae-da17-4c0f-ba83-214e3874b029}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{20d5954b-be86-4a34-948d-00954dcfd07b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{d0068730-c9fb-49ef-90ec-8ecd2131ae47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -64,6 +70,18 @@
     <ClCompile Include="SbiePlusAPI.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
+    <ClCompile Include="Models\ApiMonModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\WinAdmin.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\SettingsWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -71,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="Resources\resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\WinAdmin.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +116,15 @@
     <QtMoc Include="SbiePlusAPI.h">
       <Filter>SandMan</Filter>
     </QtMoc>
+    <QtMoc Include="Models\ApiMonModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\OptionsWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\SettingsWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -110,5 +140,13 @@
     <Image Include="Resources\SandMan.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Forms\SettingsWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\OptionsWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

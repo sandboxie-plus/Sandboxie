@@ -21,9 +21,9 @@
 #include "../qsbieapi_global.h"
 
 #include "BoxedProcess.h"
-#include "IniSection.h"
+#include "SbieIni.h"
 
-class QSBIEAPI_EXPORT CSandBox : public CIniSection
+class QSBIEAPI_EXPORT CSandBox : public CSbieIni
 {
 	Q_OBJECT
 public:
@@ -31,8 +31,6 @@ public:
 	virtual ~CSandBox();
 
 	virtual void					UpdateDetails();
-
-	virtual QString					GetName() const { return m_Name; }
 
 	virtual QString					GetFileRoot() const { return m_FilePath; }
 	virtual QString					GetRegRoot() const { return m_RegPath; }

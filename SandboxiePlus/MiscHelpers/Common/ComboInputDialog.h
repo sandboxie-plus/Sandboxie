@@ -28,10 +28,11 @@ public:
 
 	QString value() const;
     void setValue(const QString &);
+	int findValue(const QString &) const;
 
 	QVariant data() const;
     void setData(const QVariant &);
-
+	int findData(const QVariant &) const;
 
     QDialogButtonBox::StandardButtons standardButtons() const;
     void setStandardButtons(QDialogButtonBox::StandardButtons s);

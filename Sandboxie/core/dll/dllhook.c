@@ -178,6 +178,12 @@ skip_e9_rewrite: ;
             SourceFunc = (void *)target;
     }
 
+	//
+	// this simplification fails for delay loaded libraries, see coments about SetSecurityInfo,
+	// resulting in an endless loop, so just dont do that 
+	//
+
+#if 0
     //
     // 64-bit only:  if the function begins with 'jmp qword ptr [x]'
     // (6 bytes) then replace the value at x, rather than overwrite
@@ -216,6 +222,7 @@ skip_e9_rewrite: ;
 
         return orig_addr;
     }
+#endif
 
 #endif _WIN64
 

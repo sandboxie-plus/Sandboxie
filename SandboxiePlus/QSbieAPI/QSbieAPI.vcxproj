@@ -185,9 +185,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sandboxie\BoxBorder.cpp" />
     <ClCompile Include="Sandboxie\BoxedProcess.cpp" />
     <ClCompile Include="Sandboxie\SandBox.cpp" />
-    <ClCompile Include="Sandboxie\IniSection.cpp" />
+    <ClCompile Include="Sandboxie\SbieIni.cpp" />
     <ClCompile Include="SbieAPI.cpp" />
     <ClCompile Include="SbieUtils.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -203,7 +204,8 @@
     <ClInclude Include="qsbieapi_global.h" />
     <QtMoc Include="Sandboxie\BoxedProcess.h" />
     <QtMoc Include="Sandboxie\SandBox.h" />
-    <QtMoc Include="Sandboxie\IniSection.h" />
+    <QtMoc Include="Sandboxie\SbieIni.h" />
+    <QtMoc Include="Sandboxie\BoxBorder.h" />
     <ClInclude Include="SbieDefs.h" />
     <ClInclude Include="SbieError.h" />
     <ClInclude Include="SbieUtils.h" />

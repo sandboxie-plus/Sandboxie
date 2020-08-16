@@ -148,7 +148,7 @@
               </font>
              </property>
              <property name="text">
-              <string>File Mrigration</string>
+              <string>File Migration</string>
              </property>
             </widget>
            </item>
@@ -323,7 +323,7 @@
            <item row="1" column="0">
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>Programs enteres here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in an otehr sandbox.</string>
+              <string>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -363,7 +363,7 @@
        </widget>
        <widget class="QWidget" name="tabStop">
         <attribute name="title">
-         <string>Stop Behavioure</string>
+         <string>Stop Behaviour</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_17">
          <item row="0" column="0">
@@ -378,9 +378,9 @@
            <item row="0" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>Lingering programs will be automatically terminated is thay are still running after all other processes have terminated.
+              <string>Lingering programs will be automatically terminated if they are still running after all other processes have terminated.
 
-If leader processes are defined all others are threated as lingering processes.</string>
+If leader processes are defined, all others are treated as lingering processes.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -508,7 +508,7 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="0" column="0">
             <widget class="QCheckBox" name="chkRestrictStart">
              <property name="text">
-              <string>Allow only sellected programs to start in this sandbox.</string>
+              <string>Allow only selected programs to start in this sandbox.</string>
              </property>
             </widget>
            </item>
@@ -591,7 +591,7 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="1" column="1" colspan="2">
             <widget class="QCheckBox" name="chkBlockShare">
              <property name="text">
-              <string>Block network files and folders, unless pecifically opened.</string>
+              <string>Block network files and folders, unless specifically opened.</string>
              </property>
             </widget>
            </item>
@@ -605,7 +605,7 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="5" column="1" colspan="2">
             <widget class="QCheckBox" name="chkProtectSCM">
              <property name="text">
-              <string>Limit access to the emulated service controll manager to privileged processes</string>
+              <string>Limit access to the emulated service control manager to privileged processes</string>
              </property>
             </widget>
            </item>
@@ -716,7 +716,7 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="2" column="0">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>Note: Programs installed to this sandbox wont be able access the internet at all.</string>
+              <string>Note: Programs installed to this sandbox will not be able access the internet at all.</string>
              </property>
             </widget>
            </item>
@@ -850,9 +850,9 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="0" column="0">
             <widget class="QLabel" name="lblResources">
              <property name="text">
-              <string>Configure which processec can access what resoutrces.
+              <string>Configure which processes can access what resources.
 Double click on an entry to edit it.
-Note: Not all access modes are available to processes instaleld into a sandbox.</string>
+Note: Not all access modes are available to processes installed into a sandbox.</string>
              </property>
             </widget>
            </item>

@@ -1010,7 +1010,7 @@ Note: Not all access modes are available to processes instaleld into a sandbox.<
            <item row="0" column="0" colspan="3">
             <widget class="QLabel" name="label_13">
              <property name="text">
-              <string>This list contains a large amount of sandbox comatybility enchancing templates</string>
+              <string>This list contains various sandbox compatibility enchancing templates</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>

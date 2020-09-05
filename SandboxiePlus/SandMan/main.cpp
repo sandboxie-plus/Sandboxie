@@ -147,7 +147,7 @@ void UnPackDrivers()
 
 		QFileInfo InInfo(InName);
 		QFileInfo OutInfo(OutName);
-		if (InInfo.size() != OutInfo.size() || InInfo.lastModified() > OutInfo.lastModified())
+		if (InInfo.size() != OutInfo.size() /*|| InInfo.lastModified() > OutInfo.lastModified()*/)
 		{
 			if (theConf->GetBool("Options/NotifyUnPack", true)) {
 				if (!NotifyCert()) {

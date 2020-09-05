@@ -303,6 +303,11 @@ _FX void Dll_FreeTlsData(void)
         if (buf)
             Dll_Free(buf);
         data->name_buffer[COPY_NAME_BUFFER][depth] = NULL;
+
+		buf = data->name_buffer[TMPL_NAME_BUFFER][depth];
+		if (buf)
+			Dll_Free(buf);
+		data->name_buffer[TMPL_NAME_BUFFER][depth] = NULL;
     }
 
     Dll_Free(data);
@@ -430,6 +435,8 @@ _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
             OutputDebugString(txt);
             __debugbreak();
         }
+
+	// todo: snapshots TMPL_NAME_BUFFER
 
     }
 

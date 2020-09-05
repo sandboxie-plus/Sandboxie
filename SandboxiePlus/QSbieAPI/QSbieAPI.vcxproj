@@ -73,19 +73,19 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>msvc2015_64</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>concurrent;core</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="QtSettings">
     <QtInstall>msvc2015_64</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>concurrent;core</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>msvc2015_64</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>concurrent;core</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="QtSettings">
     <QtInstall>msvc2015</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>concurrent;core</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -104,7 +104,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <PreprocessorDefinitions>QSBIEAPI_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -189,6 +189,7 @@
     <ClCompile Include="Sandboxie\BoxedProcess.cpp" />
     <ClCompile Include="Sandboxie\SandBox.cpp" />
     <ClCompile Include="Sandboxie\SbieIni.cpp" />
+    <ClCompile Include="Sandboxie\SbieTemplates.cpp" />
     <ClCompile Include="SbieAPI.cpp" />
     <ClCompile Include="SbieUtils.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -206,8 +207,9 @@
     <QtMoc Include="Sandboxie\SandBox.h" />
     <QtMoc Include="Sandboxie\SbieIni.h" />
     <QtMoc Include="Sandboxie\BoxBorder.h" />
+    <QtMoc Include="Sandboxie\SbieTemplates.h" />
     <ClInclude Include="SbieDefs.h" />
-    <ClInclude Include="SbieError.h" />
+    <QtMoc Include="SbieStatus.h" />
     <ClInclude Include="SbieUtils.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -24,8 +24,6 @@
 #include "hook.h"
 #include "util.h"
 
-BOOLEAN File_TrusteerLoaded(void);
-
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -185,7 +183,8 @@ _FX BOOLEAN Hook_Tramp_CountBytes(
     void *SysProc, ULONG *ByteCount, BOOLEAN is64, BOOLEAN probe)
 {
     UCHAR *addr = (UCHAR *)SysProc;
-    ULONG needlen = (is64 == 9 ? 13 : (is64 ? 12 : (File_TrusteerLoaded()?6:5)));
+    //ULONG needlen = (is64 == 9 ? 13 : (is64 ? 12 : (File_TrusteerLoaded()?6:5)));
+	ULONG needlen = (is64 ? 12 : 5);
     ULONG copylen = 0;
 
     // count at least the (needlen) bytes of instructions from the original
@@ -232,6 +231,7 @@ _FX BOOLEAN Hook_Tramp_Copy(
 
     tramp->eyecatcher = tzuk;
     tramp->target = src + ByteCount;
+	tramp->count = ByteCount;
 
     // copy ByteCount bytes from the original source function into
     // the code area of the trampoline stub, adjustmenting it as needed

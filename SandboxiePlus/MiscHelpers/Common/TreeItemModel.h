@@ -108,6 +108,8 @@ public:
 	
 	void					Sync(const QMap<QVariant, QVariantMap>& List);
 
+	QVariant				GetItemID(const QModelIndex &index) const;
+
 	void					setHeaderLabels(const QStringList& Columns) { m_Headers = Columns; }
 
 	virtual int				columnCount(const QModelIndex &parent = QModelIndex()) const;

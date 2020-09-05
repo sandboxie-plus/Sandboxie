@@ -327,13 +327,13 @@ _FX NTSTATUS Hook_Api_Tramp(PROCESS *proc, ULONG64 *parms)
     if (! Source)
         return STATUS_INVALID_PARAMETER;
 
-    // Trampoline is expected to point to a 80-byte writable buffer,
+    // Trampoline is expected to point to a 96-byte writable buffer,
     // aligned on a 16-byte boundary.
 
     Trampoline = (void *)parms[2];
     if (! Trampoline)
         return STATUS_INVALID_PARAMETER;
-    ProbeForWrite(Trampoline, 80 /* sizeof(HOOK_TRAMP) */, 16);
+    ProbeForWrite(Trampoline, 96 /* sizeof(HOOK_TRAMP) */, 16);
 
     //
     // build the trampoline

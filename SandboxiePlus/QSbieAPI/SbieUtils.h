@@ -2,7 +2,7 @@
 
 #include "qsbieapi_global.h"
 
-#include "SbieError.h"
+#include "SbieStatus.h"
 
 class QSBIEAPI_EXPORT CSbieUtils
 {

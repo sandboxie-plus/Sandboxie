@@ -110,7 +110,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -209,8 +209,10 @@
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Windows\OptionsWindow.cpp" />
     <ClCompile Include="Windows\SettingsWindow.cpp" />
+    <ClCompile Include="Windows\SnapshotsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\SnapshotsWindow.h" />
     <QtMoc Include="Windows\SettingsWindow.h" />
     <QtMoc Include="Windows\OptionsWindow.h" />
     <QtMoc Include="Views\SbieView.h" />
@@ -237,6 +239,7 @@
   <ItemGroup>
     <QtUic Include="Forms\OptionsWindow.ui" />
     <QtUic Include="Forms\SettingsWindow.ui" />
+    <QtUic Include="Forms\SnapshotsWindow.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

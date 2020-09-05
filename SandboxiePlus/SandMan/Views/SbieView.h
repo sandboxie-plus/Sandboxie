@@ -27,8 +27,6 @@ private slots:
 	void						OnSandBoxAction();
 	void						OnProcessAction();
 
-	void						OnBoxCleaned();
-
 protected:
 	virtual void				OnMenu(const QPoint& Point);
 	virtual QTreeView*			GetView() { return m_pSbieTree; }
@@ -54,6 +52,7 @@ private:
 	QAction*				m_pMenuPresetsShares;
 	QAction*				m_pMenuPresetsNoAdmin;
 	QAction*				m_pMenuOptions;
+	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
@@ -64,6 +63,4 @@ private:
 	QAction*				m_pMenuSuspend;
 	QAction*				m_pMenuResume;
 	int						m_iMenuProc;
-
-	int						m_BoxesToClean;
 };

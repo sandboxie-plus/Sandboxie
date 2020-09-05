@@ -56,17 +56,6 @@ static NTSTATUS File_CheckFileObject(
     PROCESS *proc, void *Object, UNICODE_STRING *NameString,
     ACCESS_MASK GrantedAccess);
 
-static void File_CheckFontAccess(
-    PFLT_CALLBACK_DATA Data,
-    FLT_IO_PARAMETER_BLOCK *Iopb,
-    NTSTATUS *out_status);
-
-static PFLT_FILTER File_Get_Trusteer_Filter(void);
-
-static BOOLEAN g_bTrusteerLoaded = FALSE;
-
-BOOLEAN File_TrusteerLoaded(void);
-
 
 //---------------------------------------------------------------------------
 // Filter Manager Registration
@@ -249,16 +238,6 @@ _FX BOOLEAN File_Init_Filter(void)
     //
     // successful initialization
     //
-
-    {
-        PFLT_FILTER pFltTrusteer = File_Get_Trusteer_Filter();
-
-        if (pFltTrusteer)
-        {
-            g_bTrusteerLoaded = TRUE;
-            FltObjectDereference(pFltTrusteer);
-        }
-    }
 
     return TRUE;
 }
@@ -774,78 +753,4 @@ _FX NTSTATUS File_CheckFileObject(
     return File_Generic_MyParseProc(
                 proc, FileObject, FileObject->DeviceObject->DeviceType,
                 &FileName, &MyContext, FALSE);
-}
-
-_FX PFLT_FILTER File_Get_Trusteer_Filter(void)
-{
-    PFLT_FILTER pRet = NULL;
-    NTSTATUS status;
-    ULONG NumberFiltersReturned = 0;
-    PFLT_FILTER *FilterList = NULL;
-    UNICODE_STRING usRapportCerberus;
-
-    RtlInitUnicodeString(&usRapportCerberus, L"RapportCerberus");
-
-    status = FltEnumerateFilters(NULL, 0, &NumberFiltersReturned);
-    if ((status == STATUS_BUFFER_TOO_SMALL) && (NumberFiltersReturned > 0))
-    {
-        int len = sizeof(PFLT_FILTER) * NumberFiltersReturned;
-
-        FilterList = Mem_AllocEx(Driver_Pool, len, TRUE);
-
-        if (FilterList != NULL)
-        {
-            ULONG i;
-            status = FltEnumerateFilters(FilterList, sizeof(PFLT_FILTER) * NumberFiltersReturned, &NumberFiltersReturned);
-            for (i = 0; (i < NumberFiltersReturned) && NT_SUCCESS(status); i++)
-            {
-
-                if (!pRet)
-                {
-                    ULONG BytesReturned = 0;
-
-                    status = FltGetFilterInformation(FilterList[i], FilterFullInformation, NULL, 0, &BytesReturned);
-
-                    if ((status == STATUS_BUFFER_TOO_SMALL) && (BytesReturned > 0))
-                    {
-                        ULONG nBytesNeeded = BytesReturned;
-
-                        PFILTER_FULL_INFORMATION myFilterFullInformation = Mem_AllocEx(Driver_Pool, nBytesNeeded, TRUE);
-                        if (myFilterFullInformation != NULL)
-                        {
-                            status = FltGetFilterInformation(FilterList[i], FilterFullInformation, myFilterFullInformation, BytesReturned, &BytesReturned);
-
-                            if (NT_SUCCESS(status) && myFilterFullInformation->FilterNameLength > usRapportCerberus.Length)
-                            {
-                                UNICODE_STRING usFilterName;
-
-                                usFilterName.Buffer = myFilterFullInformation->FilterNameBuffer;
-                                usFilterName.MaximumLength = usFilterName.Length = usRapportCerberus.Length;
-
-                                if (0 == RtlCompareUnicodeString(&usFilterName, &usRapportCerberus, TRUE))
-                                {
-                                    // DbgPrint("filter found %wZ\n", &usFilterName);
-                                    pRet = FilterList[i];
-                                    FltObjectReference(pRet);
-                                }
-                            }
-
-                            Mem_Free(myFilterFullInformation, nBytesNeeded);
-                        }
-                    }
-                }
-
-                FltObjectDereference(FilterList[i]);
-            }
-
-            Mem_Free(FilterList, len);
-        }
-    }
-
-    return pRet;
-}
-
-_FX BOOLEAN File_TrusteerLoaded(void)
-{
-    return  g_bTrusteerLoaded;
 }

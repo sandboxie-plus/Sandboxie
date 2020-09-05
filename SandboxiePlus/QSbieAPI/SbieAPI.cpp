@@ -34,6 +34,8 @@ typedef long NTSTATUS;
 #include "..\..\Sandboxie\core\svc\ProcessWire.h"
 #include "..\..\Sandboxie\core\svc\sbieiniwire.h"
 
+int _SB_STATUS_type = qRegisterMetaType<SB_STATUS>("SB_STATUS");
+
 struct SSbieAPI
 {
 	SSbieAPI()
@@ -775,23 +777,28 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
+SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* boxed_pids_512)
 {
-	wstring box_name = pBox->GetName().toStdWString(); // WCHAR [34]
+	wstring box_name = BoxName.toStdWString(); // WCHAR [34]
 	BOOLEAN all_sessions = TRUE;
 	ULONG which_session = 0; // -1 for current session
-	ULONG boxed_pids[512]; // ULONG [512]
 
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 
 	memset(parms, 0, sizeof(parms));
 	parms[0] = API_ENUM_PROCESSES;
-	parms[1] = (ULONG64)boxed_pids;
+	parms[1] = (ULONG64)boxed_pids_512;
 	parms[2] = (ULONG64)box_name.c_str();
 	parms[3] = (ULONG64)all_sessions;
 	parms[4] = (ULONG64)which_session;
 
-	NTSTATUS status = m->IoControl(parms);
+	return m->IoControl(parms);
+}
+
+SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
+{
+	ULONG boxed_pids[512]; // ULONG [512]
+	NTSTATUS status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), boxed_pids);
 	if (!NT_SUCCESS(status))
 		return SB_ERR(status);
 
@@ -829,6 +836,12 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 	}
 
 	return SB_OK;
+}
+
+bool CSbieAPI::HasProcesses(const QString& BoxName)
+{
+	ULONG boxed_pids[512]; // ULONG [512]
+	return CSbieAPI__GetProcessPIDs(m, BoxName, boxed_pids) && (boxed_pids[0] > 0);
 }
 
 SB_STATUS CSbieAPI__QueryBoxPath(SSbieAPI* m, const WCHAR *box_name, WCHAR *out_file_path, WCHAR *out_key_path, WCHAR *out_ipc_path,
@@ -880,9 +893,9 @@ SB_STATUS CSbieAPI::UpdateBoxPaths(const CSandBoxPtr& pSandBox)
 	if (!Status)
 		return Status;
 
-	pSandBox->m_FilePath = Nt2DosPath(QString::fromStdWString(FileRoot));
-	pSandBox->m_RegPath = QString::fromStdWString(KeyRoot);
-	pSandBox->m_IpcPath = QString::fromStdWString(IpcRoot);
+	pSandBox->m_FilePath = Nt2DosPath(QString::fromWCharArray(FileRoot.c_str(), wcslen(FileRoot.c_str())));
+	pSandBox->m_RegPath = QString::fromWCharArray(KeyRoot.c_str(), wcslen(KeyRoot.c_str()));
+	pSandBox->m_IpcPath = QString::fromWCharArray(IpcRoot.c_str(), wcslen(IpcRoot.c_str()));
 	return SB_OK;
 }
 
@@ -1446,6 +1459,11 @@ bool CSbieAPI::GetMonitor()
 	CResLogEntryPtr LogEntry = CResLogEntryPtr(new CResLogEntry(pid, type, QString::fromWCharArray(name)));
 
 	QWriteLocker Lock(&m_ResLogMutex); 
+	if (!m_ResLogList.isEmpty() && m_ResLogList.last()->GetValue() == LogEntry->GetValue())
+	{
+		m_ResLogList.last()->IncrCounter();
+		return true; 
+	}
 	m_ResLogList.append(LogEntry);
 	return true;
 }
@@ -1485,9 +1503,20 @@ CResLogEntry::CResLogEntry(quint64 ProcessId, quint32 Type, const QString& Value
 	//m_Verbose = (Type & MONITOR_VERBOSE) != 0;
 	//m_User = (Type & MONITOR_USER) != 0;
 	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
+	m_Counter = 0;
 
 	static atomic<quint64> uid = 0;
 	m_uid = uid.fetch_add(1);
+}
+
+QString CResLogEntry::GetStautsStr() const
+{
+	QString Str;
+	if(m_Open)
+		Str += "O ";
+	if(m_Deny)
+		Str += "X ";
+	return Str;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

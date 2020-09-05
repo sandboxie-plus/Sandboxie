@@ -3,6 +3,7 @@
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "Helpers/WinAdmin.h"
+#include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 
 
 CSettingsWindow::CSettingsWindow(QWidget *parent)
@@ -55,6 +56,29 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.chkAdminOnlyFP->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceDisableAdminOnly", false));
 	ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
 
+	connect(ui.btnAddWarnProg, SIGNAL(pressed()), this, SLOT(OnAddWarnProg()));
+	connect(ui.btnDelWarnProg, SIGNAL(pressed()), this, SLOT(OnDelWarnProg()));
+
+	QStringList WarnProgs = theAPI->GetGlobalSettings()->GetTextList("AlertProcess");
+	foreach(const QString& Value, WarnProgs) {
+		QTreeWidgetItem* pItem = new QTreeWidgetItem();
+		pItem->setText(0, Value);
+		ui.treeWarnProgs->addTopLevelItem(pItem);
+	}
+	m_WarnProgsChanged = false;
+
+	connect(ui.btnAddCompat, SIGNAL(pressed()), this, SLOT(OnAddCompat()));
+	connect(ui.btnDelCompat, SIGNAL(pressed()), this, SLOT(OnDelCompat()));
+
+	m_CompatLoaded = 0;
+	m_CompatChanged = false;
+
+	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
+
+	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
+
+	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
+
 	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(accept()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(pressed()), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
@@ -67,6 +91,13 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 CSettingsWindow::~CSettingsWindow()
 {
 	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
+}
+
+void CSettingsWindow::showCompat()
+{
+	m_CompatLoaded = 2;
+	ui.tabs->setCurrentWidget(ui.tabCompat);
+	show();
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -122,6 +153,37 @@ void CSettingsWindow::apply()
 	theAPI->GetGlobalSettings()->SetBool("ForceDisableAdminOnly", ui.chkAdminOnlyFP->isChecked());
 	theAPI->GetGlobalSettings()->SetBool("ForgetPassword", ui.chkClearPass->isChecked());
 
+	if (m_WarnProgsChanged)
+	{
+		QStringList WarnProgs;
+		for (int i = 0; i < ui.treeWarnProgs->topLevelItemCount(); i++) {
+			QTreeWidgetItem* pItem = ui.treeWarnProgs->topLevelItem(i);
+			WarnProgs.append(pItem->text(0));
+		}
+
+		theAPI->GetGlobalSettings()->UpdateTextList("AlertProcess", WarnProgs);
+		m_WarnProgsChanged = false;
+	}
+
+	if (m_CompatChanged)
+	{
+		QStringList Used;
+		QStringList Rejected;
+		for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
+			QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
+			if (pItem->checkState(0) == Qt::Checked)
+				Used.append(pItem->text(0));
+			else
+				Rejected.append(pItem->text(0));
+		}
+
+		theAPI->GetGlobalSettings()->UpdateTextList("Template", Used);
+		theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected);
+		m_CompatChanged = false;
+	}
+
+	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
+
 	emit OptionsChanged();
 }
 
@@ -148,6 +210,32 @@ void CSettingsWindow::OnChange()
 	ui.btnSetPassword->setEnabled(ui.chkPassRequired->isChecked());
 }
 
+void CSettingsWindow::OnTab()
+{
+	if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1)
+	{
+		if(m_CompatLoaded == 0)
+			theGUI->GetCompat()->RunCheck();
+
+		ui.treeCompat->clear();
+
+		QMap<QString, int> Templates = theGUI->GetCompat()->GetTemplates();
+		for (QMap<QString, int>::iterator I = Templates.begin(); I != Templates.end(); ++I)
+		{
+			if (I.value() == CSbieTemplates::eNone)
+				continue;
+
+			QTreeWidgetItem* pItem = new QTreeWidgetItem();
+			pItem->setText(0, I.key());
+			pItem->setCheckState(0, (I.value() & CSbieTemplates::eEnabled) ? Qt::Checked : Qt::Unchecked);
+			ui.treeCompat->addTopLevelItem(pItem);
+		}
+
+		m_CompatLoaded = 1;
+		m_CompatChanged = false;
+	}
+}
+
 void CSettingsWindow::OnSetPassword()
 {
 retry:
@@ -165,4 +253,53 @@ retry:
 	}
 
 	m_NewPassword = Value1;
+}
+
+void CSettingsWindow::OnAddWarnProg()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please a program file name"));
+	if (Value.isEmpty())
+		return;
+
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Value);
+	ui.treeWarnProgs->addTopLevelItem(pItem);
+
+	m_WarnProgsChanged = true;
+}
+
+void CSettingsWindow::OnDelWarnProg()
+{
+	QTreeWidgetItem* pItem = ui.treeWarnProgs->currentItem();
+	if (!pItem)
+		return;
+
+	delete pItem;
+	m_WarnProgsChanged = true;
+}
+
+void CSettingsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
+{
+	// todo: check if really changed
+	m_CompatChanged = true;
+}
+
+void CSettingsWindow::OnAddCompat()
+{
+	QTreeWidgetItem* pItem = ui.treeCompat->currentItem();
+	if (!pItem)
+		return;
+
+	pItem->setCheckState(0, Qt::Checked);
+	m_CompatChanged = true;
+}
+
+void CSettingsWindow::OnDelCompat()
+{
+	QTreeWidgetItem* pItem = ui.treeCompat->currentItem();
+	if (!pItem)
+		return;
+
+	pItem->setCheckState(0, Qt::Unchecked);
+	m_CompatChanged = true;
 }

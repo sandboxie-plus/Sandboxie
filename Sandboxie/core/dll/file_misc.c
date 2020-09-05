@@ -328,6 +328,9 @@ _FX void File_ReplaceFileW_3(
         (*FileFlags) &= FGN_IS_BOXED_PATH;
         if (*FileFlags) {
 
+			if (File_Snapshot != NULL)
+				File_FindSnapshotPath(&CopyPath);
+
             len = (wcslen(CopyPath) + 1) * sizeof(WCHAR);
             path = Dll_AllocTemp(len);
             memcpy(path, CopyPath, len);

@@ -113,7 +113,7 @@ void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) == 0) {
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "\"" + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
-		Ops.append("reg.exe|ADD|HKLM\\SYSTEM\\ControlSet001\\Services\\SbieSvc|/v|PreferExternalManifest|/t|REG_DWORD|/d|1");
+		Ops.append("reg.exe|ADD|HKLM\\SYSTEM\\ControlSet001\\Services\\SbieSvc|/v|PreferExternalManifest|/t|REG_DWORD|/d|1|/f");
 	}
 }
 

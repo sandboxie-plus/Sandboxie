@@ -56,8 +56,8 @@ extern const ULONG tzuk;
 
 /* CRC */
 
-#define CRC_WITH_ADLERTZUK64
-#include "common/crc.c"
+//#define CRC_WITH_ADLERTZUK64
+//#include "common/crc.c"
 
 /* BigNum */
 

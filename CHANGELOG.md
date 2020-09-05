@@ -3,6 +3,35 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.4.0 / 5.43] - 2020-09-05
+
+### Added
+- added a proper custom installer to the the Plus release
+- added sandbox snapshot functionality to sbie core
+-- filesystem is saved incrementally, the snapshots built upon each other
+-- each snapshot gets a full copy of the box registry for now
+-- each snapshot can have multiple children snapshots
+- added access status to resource monitor
+- added setting to change border width
+- added snapshot manager UI to SandMan
+- added template to enable authentication with an Yubikey or comparable 2FA device
+- added ui for program allert
+- added software compatybility options to teh UI
+
+### Changed
+- SandMan UI now handles deletion of sandboxe content on its own
+- no longer adding redundnat resource accesses as new events
+
+### Fixed
+- fixed issues when hooking functions from delay loaded libraries
+- fixed issues when hooking an already hooked function 
+- fixed issues with the new box settings editor
+
+### Removed
+- removes deprecated workaround in the hooking mechanism for an obsolete antimalware product
+
+
+
 ## [0.3.5 / 5.42.1] - 2020-07-19
 
 ### Added

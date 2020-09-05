@@ -83,6 +83,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.cmbBoxIndicator, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(pressed()), this, SLOT(OnPickColor()));
+	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkNoCopyWarn, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//
@@ -207,6 +208,9 @@ void COptionsWindow::LoadConfig()
 		ui.cmbBoxBorder->setCurrentIndex(ui.cmbBoxBorder->findData(BorderCfg.size() >= 2 ? BorderCfg[1].toLower() : "on"));
 		m_BorderColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2));
 		ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
+		int BorderWidth = BorderCfg.count() >= 3 ? BorderCfg[2].toInt() : 0;
+		if (!BorderWidth) BorderWidth = 6;
+		ui.spinBorderWidth->setValue(BorderWidth);
 
 		ui.txtCopyLimit->setText(QString::number(m_pBox->GetNum("CopyLimitKb", 80 * 1024)));
 		ui.chkNoCopyWarn->setChecked(!m_pBox->GetBool("CopyLimitSilent", false));
@@ -271,9 +275,9 @@ void COptionsWindow::SaveConfig()
 		m_pBox->SetText("BoxNameTitle", ui.cmbBoxIndicator->currentData().toString());
 
 		QStringList BorderCfg;
-		BorderCfg.append(QString("#%1,%2,%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
+		BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
 		BorderCfg.append(ui.cmbBoxBorder->currentData().toString());
-		//BorderCfg.append(5) // width
+		BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 		m_pBox->SetText("BorderColor", BorderCfg.join(","));
 
 		m_pBox->SetNum("CopyLimitKb", ui.txtCopyLimit->text().toInt());
@@ -302,10 +306,10 @@ void COptionsWindow::SaveConfig()
 	{
 		m_pBox->SetBool("BlockNetworkFiles", ui.chkBlockShare->isChecked());
 		m_pBox->SetBool("DropAdminRights", ui.chkDropRights->isChecked());
-		m_pBox->SetBool("OpenDefaultClsid", ui.chkNoDefaultCOM->isChecked());
-		m_pBox->SetBool("UnrestrictedSCM", ui.chkProtectSCM->isChecked());
+		m_pBox->SetBool("OpenDefaultClsid", !ui.chkNoDefaultCOM->isChecked());
+		m_pBox->SetBool("UnrestrictedSCM", !ui.chkProtectSCM->isChecked());
 		m_pBox->SetBool("ProtectRpcSs", ui.chkProtectRpcSs->isChecked());
-		m_pBox->SetBool("ExposeBoxedSystem", ui.chkProtectSystem->isChecked());
+		m_pBox->SetBool("ExposeBoxedSystem", !ui.chkProtectSystem->isChecked());
 
 		m_RestrictionChanged = false;
 	}

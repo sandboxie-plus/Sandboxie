@@ -10,6 +10,7 @@
 #include "./Dialogs/MultiErrorDialog.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "../QSbieAPI/Sandboxie/BoxBorder.h"
+#include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "Windows/SettingsWindow.h"
 
 CSbiePlusAPI* theAPI = NULL;
@@ -98,6 +99,8 @@ CSandMan::CSandMan(QWidget *parent)
 	this->setWindowTitle(appTitle);
 
 	m_pBoxBorder = new CBoxBorder(theAPI, this);
+
+	m_SbieTemplates = new CSbieTemplates(theAPI, this);
 
 	m_ApiLog = NULL;
 
@@ -319,6 +322,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pProgressDialog = new CProgressDialog("Maintenance operation progress...", this);
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
+	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 
 	if (!bAutoRun)
 		show();
@@ -518,6 +522,16 @@ void CSandMan::OnStatusChanged()
 		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
+		if (theConf->GetBool("Options/AutoRunSoftCompat", true))
+		{
+			if (m_SbieTemplates->RunCheck())
+			{
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
+				pSettingsWindow->showCompat();
+			}
+		}
+
 		if (theConf->GetBool("Options/WatchIni", true))
 			theAPI->WatchIni(true);
 	}
@@ -612,7 +626,7 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnNewBox()
 {
-	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a name for the new Sandbox."), QLineEdit::Normal, "NewBox");
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a name for the new Sandbox."), QLineEdit::Normal, tr("NewBox"));
 	if (Value.isEmpty())
 		return;
 	theAPI->CreateBox(Value);
@@ -866,6 +880,44 @@ void CSandMan::OnSetLogging()
 	}
 }
 
+void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)
+{
+	m_pAsyncProgress.insert(pProgress.data(), pProgress);
+	connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
+	connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
+	if (pProgress->IsFinished()) // Note: the operation runs asynchroniusly it may have already finished so we need to test for that
+		OnAsyncFinished(pProgress.data());
+
+	m_pProgressDialog->show();
+}
+
+void CSandMan::OnAsyncFinished()
+{
+	OnAsyncFinished(qobject_cast<CSbieProgress*>(sender()));
+}
+
+void CSandMan::OnAsyncFinished(CSbieProgress* pSender)
+{
+	CSbieProgressPtr pProgress = m_pAsyncProgress.take(pSender);
+	if (pProgress.isNull())
+		return;
+	disconnect(pProgress.data() , SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
+
+	if(m_pAsyncProgress.isEmpty())
+		m_pProgressDialog->hide();
+}
+
+void CSandMan::OnAsyncMessage(const QString& Text)
+{
+	m_pProgressDialog->OnStatusMessage(Text);
+}
+
+void CSandMan::OnCancelAsync()
+{
+	foreach(const CSbieProgressPtr& pProgress, m_pAsyncProgress)
+		pProgress->Cancel();
+}
+
 void CSandMan::CheckResults(QList<SB_STATUS> Results)
 {
 	for (QList<SB_STATUS>::iterator I = Results.begin(); I != Results.end(); )
@@ -932,7 +984,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 QString CSandMan::GetVersion()
 {
 	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) //.rightJustified(2, '0')
-#if VERSION_REV > 0
+#if VERSION_REV > 0 || VERSION_MJR == 0
 		+ "." + QString::number(VERSION_REV)
 #endif
 #if VERSION_UPD > 0

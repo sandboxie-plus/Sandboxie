@@ -11,8 +11,8 @@
 #include <QTranslator>
 
 #define VERSION_MJR		0
-#define VERSION_MIN 	3
-#define VERSION_REV 	5
+#define VERSION_MIN 	4
+#define VERSION_REV 	0
 #define VERSION_UPD 	0
 
 
@@ -22,6 +22,7 @@
 class CSbieView;
 class CApiLog;
 class CBoxBorder;
+class CSbieTemplates;
 
 class CSandMan : public QMainWindow
 {
@@ -31,10 +32,11 @@ public:
 	CSandMan(QWidget *parent = Q_NULLPTR);
 	virtual ~CSandMan();
 
-	CProgressDialog*	GetProgressDialog() { return m_pProgressDialog; }
+	CSbieTemplates*		GetCompat() { return m_SbieTemplates; }
 
 	static QString		GetVersion();
 
+	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
 protected:
@@ -51,9 +53,11 @@ protected:
 	bool				m_bConnectPending;
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
+	CSbieTemplates*		m_SbieTemplates;
 
 	CApiLog*			m_ApiLog;
 	
+	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
 
 public slots:
 	void				OnMessage(const QString&);
@@ -64,6 +68,11 @@ public slots:
 	void				OnNotAuthorized(bool bLoginRequired, bool& bRetry);
 
 	void				UpdateSettings();
+
+	void				OnAsyncFinished();
+	void				OnAsyncFinished(CSbieProgress* pProgress);
+	void				OnAsyncMessage(const QString& Text);
+	void				OnCancelAsync();
 
 private slots:
 	void				OnSelectionChanged();

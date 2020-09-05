@@ -486,6 +486,16 @@ int CTreeItemModel::rowCount(const QModelIndex &parent) const
 	return pNode->Children.count();
 }
 
+QVariant CSimpleTreeModel::GetItemID(const QModelIndex &index) const
+{
+	if (!index.isValid())
+		return QVariant();
+
+	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
+
+	return pNode->ID;
+}
+
 int CSimpleTreeModel::columnCount(const QModelIndex &parent) const
 {
 	return m_Headers.count();

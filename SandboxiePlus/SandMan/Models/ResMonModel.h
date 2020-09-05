@@ -24,6 +24,7 @@ public:
 		eTimeStamp,
 		eType,
 		eValue,
+		eStatus,
 		eCount
 	};
 

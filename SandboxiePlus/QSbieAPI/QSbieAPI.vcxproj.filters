@@ -48,21 +48,21 @@
     <ClCompile Include="Sandboxie\SbieIni.cpp">
       <Filter>Sandboxie</Filter>
     </ClCompile>
+    <ClCompile Include="Sandboxie\SbieTemplates.cpp">
+      <Filter>Sandboxie</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SbieError.h">
-      <Filter>SbieAPI</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Sandboxie\common\win32_ntddk.h">
       <Filter>SbieAPI</Filter>
     </ClInclude>
-    <ClInclude Include="SbieUtils.h">
+    <ClInclude Include="SbieDefs.h">
       <Filter>SbieAPI</Filter>
     </ClInclude>
-    <ClInclude Include="SbieDefs.h">
+    <ClInclude Include="SbieUtils.h">
       <Filter>SbieAPI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -85,6 +85,12 @@
       <Filter>Sandboxie</Filter>
     </QtMoc>
     <QtMoc Include="Sandboxie\SbieIni.h">
+      <Filter>Sandboxie</Filter>
+    </QtMoc>
+    <QtMoc Include="SbieStatus.h">
+      <Filter>SbieAPI</Filter>
+    </QtMoc>
+    <QtMoc Include="Sandboxie\SbieTemplates.h">
       <Filter>Sandboxie</Filter>
     </QtMoc>
   </ItemGroup>

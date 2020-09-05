@@ -83,6 +83,8 @@ typedef struct _HOOK_TRAMP {
     __declspec(align(16))
         UCHAR code[64];                 // (16) source code + extra jmp
 
+	ULONG count;						// original length of relocated code
+
 } HOOK_TRAMP;
 
 #pragma pack(pop)

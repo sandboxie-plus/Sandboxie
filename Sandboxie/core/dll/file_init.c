@@ -1770,8 +1770,8 @@ _FX void File_InitSnapshots(void)
 	if (*Shapshot == 0)
 		return; // not using snapshots
 
-	File_Snapshot = Dll_Alloc(sizeof(FILE_SNAPSHOT *));
-	memzero(File_Snapshot, sizeof(FILE_SNAPSHOT *));
+	File_Snapshot = Dll_Alloc(sizeof(FILE_SNAPSHOT));
+	memzero(File_Snapshot, sizeof(FILE_SNAPSHOT));
 	wcscpy(File_Snapshot->ID, Shapshot);
 	File_Snapshot->IDlen = wcslen(Shapshot);
 	FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot;
@@ -1793,8 +1793,8 @@ _FX void File_InitSnapshots(void)
 		if (*Shapshot == 0)
 			break; // no more snapshots
 
-		Cur_Snapshot->Parent = Dll_Alloc(sizeof(FILE_SNAPSHOT *));
-		memzero(Cur_Snapshot->Parent, sizeof(FILE_SNAPSHOT *));
+		Cur_Snapshot->Parent = Dll_Alloc(sizeof(FILE_SNAPSHOT));
+		memzero(Cur_Snapshot->Parent, sizeof(FILE_SNAPSHOT));
 		wcscpy(Cur_Snapshot->Parent->ID, Shapshot);
 		Cur_Snapshot->Parent->IDlen = wcslen(Shapshot);
 		Cur_Snapshot = Cur_Snapshot->Parent;

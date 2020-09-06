@@ -4,7 +4,7 @@
 
 __inline uint qHash( const QVariant & var )
 {
-    if ( !var.isValid() || var.isNull() )
+    if ( !var.isValid() /*|| var.isNull()*/ )
         //return -1;
         Q_ASSERT(0);
 

@@ -94,6 +94,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theAPI = new CSbiePlusAPI(this);
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
+	connect(theAPI, SIGNAL(BoxClosed(const QString&)), this, SLOT(OnBoxClosed(const QString&)));
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	this->setWindowTitle(appTitle);
@@ -328,7 +329,10 @@ CSandMan::CSandMan(QWidget *parent)
 		show();
 
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
-		ConnectSbie();
+	{
+		SB_STATUS Status = ConnectSbie();
+		CheckResults(QList<SB_STATUS>() << Status);
+	}
 
 	connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
@@ -484,6 +488,16 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	OnSelectionChanged();
 }
 
+void CSandMan::OnBoxClosed(const QString& BoxName)
+{
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	if (pBox && !pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false))
+	{
+		SB_PROGRESS Status = pBox->CleanBox();
+		if (Status.GetStatus() == OP_ASYNC)
+			theGUI->AddAsyncOp(Status.GetValue());
+	}
+}
 
 void CSandMan::OnSelectionChanged()
 {
@@ -680,6 +694,9 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 
 	if (Status)
 		Status = theAPI->ReloadBoxes();
+
+	if (!Status)
+		return Status;
 
 	if (theAPI->GetAllBoxes().count() == 0) {
 		OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));

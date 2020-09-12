@@ -3,6 +3,27 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.4.1 / 5.43.5] - 2020-09-12
+
+### Added
+- added core version compatybility check to sandman UI
+- added shell integration options to SbiePlus
+
+### Changed
+- SbieCtrl does not longer auto show the tutorian on first start
+- when hooking, the to the trampoline migrated section of the original function is not longer noped out
+-- it caused issues with unity games, will be investigated and re enabled later
+
+### Fixed
+- fixed color issue with vertical tabs in dark mode
+- fixed wrong path separators when adding new forced folders
+- fixed directroy listing bug intriduced in 5.43
+- fixed issues with settings window when not being connected to driver
+- fixed issue when starting sandman ui as admin
+- fixed auto content delete not working with sandman ui
+
+
+
 ## [0.4.0 / 5.43] - 2020-09-05
 
 ### Added

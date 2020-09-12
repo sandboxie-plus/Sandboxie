@@ -9,6 +9,8 @@
 
 class CustomTabStyle : public QProxyStyle {
 public:
+	CustomTabStyle(QStyle* style = 0) : QProxyStyle(style) {}
+
 	QSize sizeFromContents(ContentsType type, const QStyleOption* option,
 		const QSize& size, const QWidget* widget) const {
 		QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
@@ -48,7 +50,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	this->setWindowTitle(tr("Sandboxie Plus - '%1' Options").arg(Name));
 
 	ui.tabs->setTabPosition(QTabWidget::West);
-	ui.tabs->tabBar()->setStyle(new CustomTabStyle());
+	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
 	if (m_Template)
 	{
@@ -638,7 +640,7 @@ void COptionsWindow::OnForceDir()
 	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory"));
 	if (Value.isEmpty())
 		return;
-	AddForcedEntry(Value, 2);
+	AddForcedEntry(Value.replace("/","\\"), 2);
 	m_ForcedChanged = true;
 }
 

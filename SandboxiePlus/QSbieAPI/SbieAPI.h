@@ -136,6 +136,7 @@ signals:
 	void					StatusChanged();
 	void					LogMessage(const QString& Message, bool bNotify = true);
 	void					FileToRecover(const QString& BoxName, const QString& FilePath);
+	void					BoxClosed(const QString& BoxName);
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 
 private slots:

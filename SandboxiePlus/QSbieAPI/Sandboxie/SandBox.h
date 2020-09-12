@@ -48,6 +48,8 @@ public:
 
 	virtual QMap<quint64, CBoxedProcessPtr>	GetProcessList() const { return m_ProcessList; }
 
+	virtual int						GetActiveProcessCount() const { return m_ActiveProcessCount; }
+
 	virtual SB_STATUS				RunStart(const QString& Command);
 	virtual SB_STATUS				RunCommand(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
@@ -78,6 +80,7 @@ protected:
 	QString							m_IpcPath;
 
 	QMap<quint64, CBoxedProcessPtr>	m_ProcessList;
+	int								m_ActiveProcessCount;
 
 //private:
 //	struct SSandBox* m;

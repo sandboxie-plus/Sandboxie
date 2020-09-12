@@ -435,8 +435,9 @@ skip_e9_rewrite: ;
 #endif
 
 	// just in case nop out the rest of the code we moved to the trampoline
-	for(; UsedCount < ByteCount; UsedCount++)
-		func[UsedCount] = 0x90; // nop
+	// ToDo: why does this break unity games
+	//for(; UsedCount < ByteCount; UsedCount++)
+	//	func[UsedCount] = 0x90; // nop
 
 	VirtualProtect(&func[-8], 20, prot, &dummy_prot);
 

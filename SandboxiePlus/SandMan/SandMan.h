@@ -12,7 +12,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	4
-#define VERSION_REV 	0
+#define VERSION_REV 	1
 #define VERSION_UPD 	0
 
 
@@ -73,6 +73,8 @@ public slots:
 	void				OnAsyncFinished(CSbieProgress* pProgress);
 	void				OnAsyncMessage(const QString& Text);
 	void				OnCancelAsync();
+
+	void				OnBoxClosed(const QString& BoxName);
 
 private slots:
 	void				OnSelectionChanged();

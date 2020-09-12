@@ -26,6 +26,10 @@ public:
 	static SB_STATUS		Uninstall(EComponent Component);
 	static bool				IsInstalled(EComponent Component);
 
+	static int				IsContextMenu();
+	static void				AddContextMenu(const QString& StartPath);
+	static void				RemoveContextMenu();
+
 private:
 	static SB_STATUS		ElevateOps(const QStringList& Ops);
 	static SB_STATUS		ExecOps(const QStringList& Ops);
@@ -35,5 +39,8 @@ private:
 
 	static void				Install(EComponent Component, QStringList& Ops);
 	static void				Uninstall(EComponent Component, QStringList& Ops);
+
+	static bool				CheckRegValue(const wchar_t* key);
+	static void				CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd);
 };
 

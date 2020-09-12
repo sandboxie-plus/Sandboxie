@@ -185,7 +185,7 @@ SB_STATUS CSbieAPI::Connect()
 
 	if (status != STATUS_SUCCESS) {
 		m->SbieApiHandle = INVALID_HANDLE_VALUE;
-		return SB_ERR("Failed to connect to driver", status);
+		return SB_ERR(tr("Failed to connect to driver"), status);
 	}
 
 	UpdateDriveLetters();
@@ -195,6 +195,17 @@ SB_STATUS CSbieAPI::Connect()
 
 	m->lastMessageNum = 0;
 	m->lastRecordNum = 0;
+
+#ifndef _DEBUG
+	QStringList CompatVersions = QStringList () << "5.43" << "5.43.5";
+	QString CurVersion = GetVersion();
+	if (!CompatVersions.contains(CurVersion))
+	{
+		NtClose(m->SbieApiHandle);
+		m->SbieApiHandle = INVALID_HANDLE_VALUE;	
+		return SB_ERR(tr("Incompatible Version, found Sandboxie %1, compatible versions: %2").arg(CurVersion).arg(CompatVersions.join(", ")));
+	}
+#endif
 
 	m_bTerminate = false;
 	start();
@@ -834,6 +845,11 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 			m_BoxedProxesses.remove(pProcess->m_ProcessId);
 		}
 	}
+
+	bool WasBoxClosed = pBox->m_ActiveProcessCount > 0 && boxed_pids[0] == 0;
+	pBox->m_ActiveProcessCount = boxed_pids[0];
+	if (WasBoxClosed)
+		emit BoxClosed(pBox->GetName());
 
 	return SB_OK;
 }

@@ -109,8 +109,8 @@ SB_STATUS CSbieUtils::Install(EComponent Component)
 void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 {
 	QString HomePath = QCoreApplication::applicationDirPath().replace("/", "\\"); // "C:\\Program Files\\Sandboxie	"
-	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0)
-		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
+	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0) // todo: why when we are admin we need \??\ and else not and why knd util from console as admin also does not need that???
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + "\"\\??\\" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) == 0) {
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "\"" + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
 		Ops.append("reg.exe|ADD|HKLM\\SYSTEM\\ControlSet001\\Services\\SbieSvc|/v|PreferExternalManifest|/t|REG_DWORD|/d|1|/f");
@@ -183,4 +183,95 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 			return SB_ERR("Failed to execute: " + Args.join(" "));
 	}
 	return SB_OK;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Shell integration
+
+int CSbieUtils::IsContextMenu()
+{
+	if (!CheckRegValue(L"Software\\Classes\\*\\shell\\sandbox\\command"))
+		return 0;
+	if (!CheckRegValue(L"software\\classes\\folder\\shell\\sandbox\\command"))
+		return 1;
+	return 2;
+}
+
+bool CSbieUtils::CheckRegValue(const wchar_t* key)
+{
+	HKEY hkey;
+	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	if (rc != 0)
+		return false;
+
+	ULONG type;
+	WCHAR path[512];
+	ULONG path_len = sizeof(path) - sizeof(WCHAR) * 4;
+	rc = RegQueryValueEx(hkey, NULL, NULL, &type, (BYTE *)path, &path_len);
+	RegCloseKey(hkey);
+	if (rc != 0)
+		return false;
+
+	return true;
+}
+
+void CSbieUtils::AddContextMenu(const QString& StartPath)
+{
+	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+
+	CreateShellEntry(L"*", L"Run &Sandboxed", start_path, start_path + L" /box:__ask__ \"%1\" %*");
+
+	wstring explorer_path(512, L'\0');
+
+	HKEY hkeyWinlogon;
+	LONG rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"software\\microsoft\\windows nt\\currentversion\\winlogon", 0, KEY_READ, &hkeyWinlogon);
+	if (rc == 0)
+	{
+		ULONG path_len = explorer_path.size() * sizeof(WCHAR);
+		ULONG type;
+		rc = RegQueryValueEx(hkeyWinlogon, L"Shell", NULL, &type, (BYTE *)explorer_path.c_str(), &path_len);
+		if (rc == 0 && (type == REG_SZ || type == REG_EXPAND_SZ))
+			explorer_path.resize(path_len / sizeof(WCHAR));
+		RegCloseKey(hkeyWinlogon);
+	}
+
+	// get default explorer path
+	if (*explorer_path.c_str() == L'\0' || _wcsicmp(explorer_path.c_str(), L"explorer.exe") == 0)
+	{
+		GetWindowsDirectory((wchar_t*)explorer_path.c_str(), MAX_PATH);
+		ULONG path_len = wcslen(explorer_path.c_str());
+		explorer_path.resize(path_len);
+		explorer_path.append(L"\\explorer.exe");
+	}
+
+	CreateShellEntry(L"Folder", L"Explore &Sandboxed", start_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
+}
+
+void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)
+{
+	HKEY hkey;
+	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\sandbox").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	if (rc != 0)
+		return;
+
+	RegSetValueEx(hkey, NULL, 0, REG_SZ, (BYTE *)cmdtext.c_str(), (cmdtext.length() + 1) * sizeof(WCHAR));
+	RegSetValueEx(hkey, L"Icon", 0, REG_SZ, (BYTE *)iconpath.c_str(), (iconpath.length() + 1) * sizeof(WCHAR));
+
+	RegCloseKey(hkey);
+	if (rc != 0)
+		return;
+
+	rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\sandbox\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	if (rc != 0)
+		return;
+
+	RegSetValueEx(hkey, NULL, 0, REG_SZ, (BYTE *)startcmd.c_str(), (startcmd.length() + 1) * sizeof(WCHAR));
+
+	RegCloseKey(hkey);
+}
+
+void CSbieUtils::RemoveContextMenu()
+{
+	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\sandbox");
+	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\folder\\shell\\sandbox");
 }

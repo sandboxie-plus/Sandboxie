@@ -466,12 +466,12 @@ _FX int __stdcall WinMain(
         }
     }
 
-    if (1) {
+    /*if (1) {
         MSG_HEADER req;
         req.length = sizeof(req);
         req.msgid = MSGID_SBIE_INI_RUN_SBIE_CTRL;
         SbieDll_CallServer(&req);
-    }
+    }*/
 
     return DoLingerLeader();
 }

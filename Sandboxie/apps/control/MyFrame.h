@@ -55,7 +55,7 @@ class CMyFrame : public CFrameWnd
     CPoint m_TrayPoint;
 
     BOOL m_hidden;
-    BOOL m_ShowWelcome;
+    //BOOL m_ShowWelcome;
     BOOL m_ReSyncShortcuts;
     BOOL m_AutoRunSoftCompat;
     BOOL m_AlwaysOnTop;

@@ -309,7 +309,7 @@ _FX NTSTATUS File_NtQueryDirectoryFile(
     // we get an error return value, and have to add the trailing backslash
     //
 
-    if (status == STATUS_BAD_INITIAL_PC && TruePath) {
+    if (status == STATUS_BAD_INITIAL_PC && CopyPath) {
 
         WCHAR *ptr = TruePath + wcslen(TruePath);
         ptr[0] = L'\\';

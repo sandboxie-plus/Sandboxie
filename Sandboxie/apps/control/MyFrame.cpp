@@ -190,7 +190,7 @@ CMyFrame::CMyFrame(BOOL ForceVisible, BOOL ForceSync)
     m_view = m_view_old = 0;
     m_hidden = FALSE;
 
-    CUserSettings::GetInstance().GetBool(_ShowWelcome, m_ShowWelcome, TRUE);
+    //CUserSettings::GetInstance().GetBool(_ShowWelcome, m_ShowWelcome, TRUE);
     CUserSettings::GetInstance().GetBool(_AlwaysOnTop, m_AlwaysOnTop, FALSE);
 
     m_ReSyncShortcuts = ForceSync;
@@ -1975,7 +1975,7 @@ void CMyFrame::OnTimer(UINT_PTR nIDEvent)
         // first time?
         //
 
-        if (m_ShowWelcome && (! inModalState)) {
+        /*if (m_ShowWelcome && (! inModalState)) {
 
             m_ShowWelcome = FALSE;
             CUserSettings::GetInstance().SetBool(_ShowWelcome, FALSE);
@@ -1985,7 +1985,7 @@ void CMyFrame::OnTimer(UINT_PTR nIDEvent)
 
             CGettingStartedWizard wizard(this);
             return;
-        }
+        }*/
 
         //
         // resync shortcuts?  usually Sandboxie Control does not resync

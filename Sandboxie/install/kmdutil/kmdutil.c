@@ -720,11 +720,15 @@ int __stdcall WinMain(
 		int path_len = wcslen(Driver_Path);
 		if (path_len > 8 && wcscmp(Driver_Path + path_len - 8, L".sys.rc4") == 0)
 		{
-			FILE* inFile = _wfopen(Driver_Path, L"rb");
+			PWSTR Driver_Path_tmp = Driver_Path; // strip \??\ if present
+			if (Driver_Path_tmp[0] == L'\\' && Driver_Path_tmp[1] == L'?' && Driver_Path_tmp[2] == L'?' && Driver_Path_tmp[3] == L'\\')
+				Driver_Path_tmp += 4;
+
+			FILE* inFile = _wfopen(Driver_Path_tmp, L"rb");
 			if (inFile)
 			{
-				Driver_Path[path_len - 4] = L'\0';
-				FILE* outFile = _wfopen(Driver_Path, L"wb");
+				Driver_Path_tmp[path_len - 4] = L'\0'; // strip .rc4
+				FILE* outFile = _wfopen(Driver_Path_tmp, L"wb");
 				if (outFile)
 				{
 					fseek(inFile, 0, SEEK_END);

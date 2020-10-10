@@ -788,9 +788,9 @@ void ServiceServer::RunUacSlave2(ULONG_PTR *ThreadArgs)
     if (isAdmin) {
 
         CreateThread(
-            NULL, 0, RunUacSlave2Thread1, (void *)ThreadArgs, 0, NULL);
+            NULL, 0, RunUacSlave2Thread1, (void *)ThreadArgs, 0, NULL); // fix-me: i'm leaking a thread
         CreateThread(
-            NULL, 0, RunUacSlave2Thread2, (void *)ThreadArgs, 0, NULL);
+            NULL, 0, RunUacSlave2Thread2, (void *)ThreadArgs, 0, NULL); // fix-me: i'm leaking a thread
 
         while (1)
             SuspendThread(GetCurrentThread());
@@ -909,9 +909,9 @@ void ServiceServer::RunUacSlave2(ULONG_PTR *ThreadArgs)
 
             strings[2] = strings[1];
             CreateThread(
-                NULL, 0, RunUacSlave2Thread1, (void *)ThreadArgs, 0, NULL);
+                NULL, 0, RunUacSlave2Thread1, (void *)ThreadArgs, 0, NULL); // fix-me: i'm leaking a thread
             CreateThread(
-                NULL, 0, RunUacSlave2Thread2, (void *)ThreadArgs, 0, NULL);
+                NULL, 0, RunUacSlave2Thread2, (void *)ThreadArgs, 0, NULL); // fix-me: i'm leaking a thread
         }
     }
 }

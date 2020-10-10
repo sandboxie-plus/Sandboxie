@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.4.2 / 5.43.6] - 2020-10-10
+
+### Added
+- added explore box content menu option
+
+### Fixed
+- fixed thread handle leak in SbieSvc and other components
+- msedge.exe is now categorized as a chromium derivate
+- fixed chrome 86+ compatybility bug with chroms own sandbox
+
+
+
 ## [0.4.1 / 5.43.5] - 2020-09-12
 
 ### Added

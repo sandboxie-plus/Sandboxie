@@ -849,7 +849,9 @@ _FX BOOLEAN SH32_Init(HMODULE module)
             NULL, L"NoAutoExitExplorer", 0, buf, sizeof(buf));
         if (! buf[0]) {
 
-            CreateThread(NULL, 0, SH_WindowMonitorThread, NULL, 0, NULL);
+			HANDLE ThreadHandle = CreateThread(NULL, 0, SH_WindowMonitorThread, NULL, 0, NULL);
+			if (ThreadHandle)
+				CloseHandle(ThreadHandle);
         }
     }
 

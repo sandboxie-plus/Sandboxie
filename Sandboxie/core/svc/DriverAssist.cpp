@@ -89,6 +89,7 @@ bool DriverAssist::Initialize()
 
     hThread = CreateThread(NULL, 0,
         (LPTHREAD_START_ROUTINE)StartDriverAsync, m_instance, 0, &tid);
+	CloseHandle(hThread);
 
     return true;
 }
@@ -309,6 +310,7 @@ DWORD DriverAssist::MsgWorkerThreadStub(void *MyMsg)
 void DriverAssist::Thread()
 {
     NTSTATUS status;
+	HANDLE hThread;
     DWORD threadId;
     MSG_DATA *MsgData;
 
@@ -329,7 +331,11 @@ void DriverAssist::Thread()
         }
 
         MsgData->ClassContext = this;
-        CreateThread(NULL, 0, MsgWorkerThreadStub, (void *)MsgData, 0, &threadId);
+		hThread = CreateThread(NULL, 0, MsgWorkerThreadStub, (void *)MsgData, 0, &threadId);
+		if (hThread)
+			CloseHandle(hThread);
+		else
+			VirtualFree(MsgData, 0, MEM_RELEASE);
     }
 }
 

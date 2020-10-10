@@ -64,6 +64,15 @@ static BOOL Proc_CreateProcessInternalW_RS5(
     LPPROCESS_INFORMATION lpProcessInformation,
     HANDLE *hNewToken);
 
+static BOOL Proc_UpdateProcThreadAttribute(
+	_Inout_ LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+	_In_ DWORD dwFlags,
+	_In_ DWORD_PTR Attribute,
+	_In_reads_bytes_opt_(cbSize) PVOID lpValue,
+	_In_ SIZE_T cbSize,
+	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
+	_In_opt_ PSIZE_T lpReturnSize);
+
 static BOOL Proc_AlternateCreateProcess(
     const WCHAR *lpApplicationName, WCHAR *lpCommandLine,
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
@@ -245,6 +254,15 @@ typedef BOOL(*P_AddAccessAllowedAceEx)(
 typedef BOOL(*P_GetLengthSid)(
 	_In_ _Post_readable_byte_size_(return) PSID pSid);
 
+typedef BOOL(*P_UpdateProcThreadAttribute)(
+	_Inout_ LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+	_In_ DWORD dwFlags,
+	_In_ DWORD_PTR Attribute,
+	_In_reads_bytes_opt_(cbSize) PVOID lpValue,
+	_In_ SIZE_T cbSize,
+	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
+	_In_opt_ PSIZE_T lpReturnSize);
+
 //---------------------------------------------------------------------------
 
 
@@ -275,7 +293,7 @@ static P_AddAccessAllowedAceEx      __sys_AddAccessAllowedAceEx		= NULL;
 
 static P_GetLengthSid				__sys_GetLengthSid				= NULL;*/
 
-
+static P_UpdateProcThreadAttribute	__sys_UpdateProcThreadAttribute = NULL;
 
 //---------------------------------------------------------------------------
 // Variables
@@ -342,6 +360,16 @@ _FX BOOLEAN Proc_Init(void)
         status = LdrGetProcedureAddress(
             Dll_Kernel32, &ansi, 0, (void **)&CreateProcessInternalW);
     }
+
+	// fix for chrome 86+
+	if (Dll_OsBuild >= 7600) {
+		void* UpdateProcThreadAttribute = NULL;
+		RtlInitString(&ansi, "UpdateProcThreadAttribute");
+		status = LdrGetProcedureAddress(
+			Dll_KernelBase, &ansi, 0, (void **)&UpdateProcThreadAttribute);
+		if (NT_SUCCESS(status))
+			SBIEDLL_HOOK(Proc_, UpdateProcThreadAttribute);
+	}
 
     if(Dll_OsBuild < 17677) {
     
@@ -904,6 +932,26 @@ finish:
     return ok;
 }
 
+
+_FX BOOL Proc_UpdateProcThreadAttribute(
+	_Inout_ LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+	_In_ DWORD dwFlags,
+	_In_ DWORD_PTR Attribute,
+	_In_reads_bytes_opt_(cbSize) PVOID lpValue,
+	_In_ SIZE_T cbSize,
+	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
+	_In_opt_ PSIZE_T lpReturnSize)
+{
+	// fix for chreom 86+
+	// when the PROC_THREAD_ATTRIBUTE_JOB_LIST is set the call CreateProcessAsUserW -> CreateProcessInternalW -> NtCreateProcess 
+	// fals with an access denided error, so we need to block this attribute form being set
+	// if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
+	if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
+		return TRUE;
+
+	return __sys_UpdateProcThreadAttribute(lpAttributeList, dwFlags, Attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize);
+}
+
 void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)
 {
     if ((lpApplicationName == NULL) && (lpCommandLine == NULL))
@@ -948,6 +996,16 @@ void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpComma
     return mybuf;
 }
 
+#ifndef STARTUPINFOEXW
+typedef struct _STARTUPINFOEXA {
+	STARTUPINFOA StartupInfo;
+	LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
+} STARTUPINFOEXA, *LPSTARTUPINFOEXA;
+typedef struct _STARTUPINFOEXW {
+	STARTUPINFOW StartupInfo;
+	LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
+} STARTUPINFOEXW, *LPSTARTUPINFOEXW;
+#endif
 
 // Processes in Windows 10 RS5 will start with the Sandboxie restricted token.  
 // Thus the expected failure of the original call to CreateProcessInternalW doesn't 

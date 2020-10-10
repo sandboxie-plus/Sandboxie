@@ -254,7 +254,9 @@ _FX void Gui_InitConsole2(void)
 
     if (_wcsicmp(Dll_ImageName, L"klwtblfs.exe") == 0) {
 
-        CreateThread(NULL, 0, Proc_WaitForParentExit, (void *)1, 0, NULL);
+		HANDLE ThreadHandle = CreateThread(NULL, 0, Proc_WaitForParentExit, (void *)1, 0, NULL);
+		if (ThreadHandle)
+			CloseHandle(ThreadHandle); 
     }
 
     //

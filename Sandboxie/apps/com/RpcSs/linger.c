@@ -303,7 +303,9 @@ int DoLingerLeader(void)
 
     InitializeCriticalSection(&ProcessCritSec);
     heventRpcSs = CreateEvent(0, FALSE, FALSE, NULL);
-    CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ProcessStartMonitor, NULL, 0, NULL);
+	HANDLE ThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ProcessStartMonitor, NULL, 0, NULL);
+	if (ThreadHandle)
+		CloseHandle(ThreadHandle);
 
     if (1) {
         //

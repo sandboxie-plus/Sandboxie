@@ -54,6 +54,7 @@ private:
 	QAction*				m_pMenuOptions;
 	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;
+	QAction*				m_pMenuExplore;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
 	QAction*				m_pMenuRename;

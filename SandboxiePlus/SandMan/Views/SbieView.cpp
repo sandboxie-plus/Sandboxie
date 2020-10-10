@@ -7,6 +7,10 @@
 #include "../Windows/OptionsWindow.h"
 #include "../Windows/SnapshotsWindow.h"
 
+#include "qt_windows.h"
+#include "qwindowdefs_win.h"
+#include <shellapi.h>
+
 CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 {
 	m_pMainLayout = new QVBoxLayout();
@@ -53,6 +57,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuRunExplorer = m_pMenuRun->addAction(tr("Run Explorer"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmd = m_pMenuRun->addAction(tr("Run Cmd.exe"), this, SLOT(OnSandBoxAction()));
 	m_pMenuEmptyBox = m_pMenu->addAction(tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
+	m_pMenu->addSeparator();
+	m_pMenuExplore = m_pMenu->addAction(tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
 	m_pMenuSnapshots = m_pMenu->addAction(tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenu->addAction(tr("Delete Content"), this, SLOT(OnSandBoxAction()));
@@ -217,6 +223,11 @@ void CSbieView::OnSandBoxAction()
 	{
 		COptionsWindow* pOptionsWindow = new COptionsWindow(SandBoxes.first(), SandBoxes.first()->GetName(), this);
 		pOptionsWindow->show();
+	}
+	else if (Action == m_pMenuExplore)
+	{
+		::ShellExecute(NULL, NULL, SandBoxes.first()->GetFileRoot().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
+		// if (ret <= 32) error
 	}
 	else if (Action == m_pMenuSnapshots)
 	{

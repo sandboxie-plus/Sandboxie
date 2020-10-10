@@ -143,8 +143,10 @@ int __stdcall WinMain(
     // start dcom launcher service
     wcscpy(ServiceName, L"DCOMLAUNCH");
     ok = Service_Start_ServiceMain( ServiceName, L"rpcss.dll", "ServiceMain", TRUE);
+	if (ok)
+		WaitForSingleObject(hThreadEvent, INFINITE);
+	CloseHandle(hThreadEvent);
     if (! ok)
         return EXIT_FAILURE;
-    WaitForSingleObject(hThreadEvent, INFINITE);
     return 0;
 }

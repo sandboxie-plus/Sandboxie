@@ -12,7 +12,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	4
-#define VERSION_REV 	1
+#define VERSION_REV 	2
 #define VERSION_UPD 	0
 
 

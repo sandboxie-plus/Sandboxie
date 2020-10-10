@@ -524,6 +524,7 @@ _FX void Dll_SelectImageType(void)
         L"neon.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
+		L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // modern edge is chromium based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,

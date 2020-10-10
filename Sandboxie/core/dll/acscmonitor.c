@@ -42,6 +42,8 @@ ULONG CALLBACK Acscmonitor_LoadLibrary(LPVOID lpParam)
 
 _FX BOOLEAN Acscmonitor_Init(HMODULE hDll)
 {
-    CreateThread(NULL, 0, Acscmonitor_LoadLibrary, (LPVOID)0, 0, NULL);
+	HANDLE ThreadHandle = CreateThread(NULL, 0, Acscmonitor_LoadLibrary, (LPVOID)0, 0, NULL);
+	if (ThreadHandle)
+		CloseHandle(ThreadHandle); 
     return TRUE;
 }

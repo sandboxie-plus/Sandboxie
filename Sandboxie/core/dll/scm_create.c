@@ -1308,8 +1308,11 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
 		Scm_IsMsiServer = TRUE;
 	}
 
-    if (! CreateThread(NULL, 0, Scm_ServiceMainThread, args, 0, &ThreadId))
-        Scm_Stopped = TRUE;
+	HANDLE ThreadHandle = CreateThread(NULL, 0, Scm_ServiceMainThread, args, 0, &ThreadId);
+	if (ThreadHandle)
+		CloseHandle(ThreadHandle);
+	else
+		Scm_Stopped = TRUE;
 
     //
     // main loop:  wait for changes on the service key

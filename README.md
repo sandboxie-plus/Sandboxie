@@ -20,4 +20,4 @@ In 2020 Sophos has released Sandboxie as Open Source under the GPLv3 licence to 
 
 ## Support
 
-If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos
+If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos or directly through paypal with the donation link on my home page: https://xanasoft.com/

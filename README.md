@@ -5,6 +5,10 @@ Sandboxie is sandbox-based isolation software for 32- and 64-bit Windows NT-base
 # Sandboxie-Plus
 Adds new functionality like box snapshots, and better logging/tracing and provides a new Qt based UI to utilize that functionality.
 
+## Sandboxie-Classic Documentation
+
+The archived documentation of sandboxie can be found at: https://xanasoft.com/sandboxie/
+
 
 ## History
 

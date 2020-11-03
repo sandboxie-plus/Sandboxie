@@ -185,7 +185,7 @@ _FX BOOLEAN Api_Init(void)
 
     Api_SetFunction(API_UNLOAD_DRIVER,      Driver_Api_Unload);
 
-    Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
+    //Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;

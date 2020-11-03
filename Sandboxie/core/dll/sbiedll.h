@@ -192,6 +192,10 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_RegisterDllCallback(void *Callback);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command);
 
 
+SBIEDLL_EXPORT  ULONG SbieDll_InjectLow_InitHelper();
+SBIEDLL_EXPORT  ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init);
+SBIEDLL_EXPORT  ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInject, BOOLEAN dup_drv_handle);
+
 //---------------------------------------------------------------------------
 
 

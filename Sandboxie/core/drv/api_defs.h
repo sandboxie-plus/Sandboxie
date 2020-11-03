@@ -97,7 +97,7 @@ enum {
     API_QUERY_PATH_LIST,
     API_ENUM_PROCESSES,
     API_DISABLE_FORCE_PROCESS,
-    API_HOOK_TRAMP,
+    API_HOOK_TRAMP,								// deprecated
     API_UNMOUNT_HIVES,                          // deprecated
     API_QUERY_CONF,
     API_RELOAD_CONF,

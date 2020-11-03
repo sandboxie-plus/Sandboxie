@@ -22,6 +22,7 @@
 
 #define NOGDI
 #include "dll.h"
+#include "hook.h"
 #include "common/pool.h"
 #include "common/pattern.h"
 
@@ -67,6 +68,28 @@ VECTOR_TABLE SbieDllVectorTable[NUM_VTABLES] = {
 extern CRITICAL_SECTION VT_CriticalSection;
 #endif _WIN64
 extern ULONG Dll_Windows;
+
+//---------------------------------------------------------------------------
+// SbieApi_HookTramp
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
+{
+	NTSTATUS status;
+#ifdef _WIN64
+	BOOLEAN is64 = TRUE;
+#else
+	BOOLEAN is64 = FALSE;
+#endif _WIN64
+
+	if (Hook_BuildTramp(Source, Trampoline, is64, TRUE))
+		status = STATUS_SUCCESS;
+	else
+		status = STATUS_UNSUCCESSFUL;
+
+	return status;
+}
 
 
 //---------------------------------------------------------------------------

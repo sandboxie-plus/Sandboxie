@@ -20,9 +20,14 @@
 //---------------------------------------------------------------------------
 
 
+
+#ifdef KERNEL_MODE
+
+#else
+#include "dll.h"
 #define HOOK_WITH_PRIVATE_PARTS
 #include "hook.h"
-#include "util.h"
+#endif
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -41,9 +46,6 @@ typedef struct _HOOK_TRAMP_PAGE {
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
-
-
-static void *Hook_Tramp_Get(ULONG TrampSize);
 
 static BOOLEAN Hook_Tramp_CountBytes(
     void *SysProc, ULONG *ByteCount, BOOLEAN is64, BOOLEAN probe);
@@ -66,7 +68,7 @@ static BOOLEAN Hook_Tramp_Pages_Initialized = FALSE;
 // Hook_Tramp_Get
 //---------------------------------------------------------------------------
 
-
+#ifdef KERNEL_MODE
 _FX void *Hook_Tramp_Get(ULONG TrampSize)
 {
     NTSTATUS status;
@@ -172,7 +174,7 @@ finish:
 
     return tramp;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Hook_Tramp_CountBytes
@@ -452,13 +454,14 @@ _FX void *Hook_BuildTramp(
             return NULL;
     }
 
-    if (Trampoline)
+#ifdef KERNEL_MODE
+	if (!Trampoline)
+		tramp = (HOOK_TRAMP *)Hook_Tramp_Get(sizeof(HOOK_TRAMP));
+	else
+#endif
         tramp = (HOOK_TRAMP *)Trampoline;
-    else {
-        tramp = (HOOK_TRAMP *)Hook_Tramp_Get(sizeof(HOOK_TRAMP));
-        if (! tramp)
-            return NULL;
-    }
+    if (! tramp)
+        return NULL;
 
     if (SourceFunc) {
         if (! Hook_Tramp_Copy(tramp, SourceFunc, ByteCount, is64, probe))
@@ -479,6 +482,7 @@ _FX void Hook_BuildJump(
 {
     UCHAR *SourceAddr = (UCHAR *)WritableAddr;
 
+#ifdef KERNEL_MODE
     //
     // ideally, WritableAddr points at a writable page received through
     // MmGetSystemAddressForMdlSafe for the page at ExecutableAddr.
@@ -487,6 +491,7 @@ _FX void Hook_BuildJump(
     //
 
     DisableWriteProtect();
+#endif
 
     //
     // if we detect JMP DWORD/QWORD PTR [+00], then replace the jump target
@@ -545,5 +550,7 @@ _FX void Hook_BuildJump(
 
     }
 
+#ifdef KERNEL_MODE
     EnableWriteProtect();
+#endif
 }

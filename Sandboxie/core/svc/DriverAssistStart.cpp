@@ -158,7 +158,7 @@ driver_started:
     }
 
     if (ok) {
-        rc = m_instance->InjectLow_InitSyscalls();
+        SbieDll_InjectLow_InitSyscalls(TRUE);
         if (rc != 0) {
             LogEvent(MSG_9234, 0x9362, rc);
             ok = false;

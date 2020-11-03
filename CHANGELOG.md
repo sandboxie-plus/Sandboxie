@@ -4,12 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.4.4 / 5.44.0] - 2020-11-03
+
+### Added
+- added SbieLdr (experimental)
+
+### Changed
+- moved code injection mechanism from SbieSvc to SbieDll
+- moved function hooking mechanism from SbieDrv to SbieDll
+- introduced a new driverless method to resolve wow64 ntdll base address
+
+### Fixed
+
+### removed
+- removed support for windows vista x64
+
+
 ## [0.4.3 / 5.43.7] - 2020-11-03
 
 ### Added
 - added disable forced programs menu command to he sandman ui
-
-### Changed
 
 ### Fixed
 - fixed file rename bug introduced with an earlier driver verifier fix

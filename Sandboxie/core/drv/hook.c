@@ -24,6 +24,10 @@
 #include "hook.h"
 #include "dll.h"
 
+#include "util.h"
+#define KERNEL_MODE
+#include "../dll/hook_inst.c"
+#include "../dll/hook_tramp.c"
 
 //---------------------------------------------------------------------------
 // Defines

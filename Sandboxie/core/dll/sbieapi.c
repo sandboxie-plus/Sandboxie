@@ -850,7 +850,7 @@ _FX LONG SbieApi_DisableForceProcess(
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
+/*_FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -861,7 +861,7 @@ _FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
     status = SbieApi_Ioctl(parms);
 
     return status;
-}
+}*/
 
 
 //---------------------------------------------------------------------------

@@ -268,7 +268,6 @@
     <ClInclude Include="terminalwire.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="lowlevel.rc" />
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

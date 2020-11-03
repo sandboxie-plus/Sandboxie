@@ -104,27 +104,10 @@ private:
     // functions to inject low level code layer into new process
     //
 
-    bool InjectLow_Init();
-    bool InjectLow_InitHelper(ULONG *errlvl);
-    static ULONG_PTR InjectLow_FindHighestAddress();
-    ULONG InjectLow_InitSyscalls();
+	bool InjectLow_Init();
 
     void InjectLow(void *_msg);
-    HANDLE InjectLow_OpenProcess(void *_msg);
-    HANDLE InjectLow_SendHandle(HANDLE hProcess);
-    void *InjectLow_CopyCode(HANDLE hProcess, BOOLEAN iswow64,
-                             UCHAR *code, ULONG code_len);
-    bool InjectLow_BuildTramp(
-            void *_msg, BOOLEAN long_diff, UCHAR *code, ULONG_PTR addr);
-    void *InjectLow_CopySyscalls(HANDLE hProcess);
-    bool InjectLow_CopyData(
-            HANDLE hProcess, void *remote_addr, void *local_data);
-#ifdef _WIN64
-    void * InjectLow_getPage(HANDLE hProcess,void *remote_addr);
-    bool DriverAssist::Has32BitJumpHorizon(void * target, void * detour);
-#endif
-    bool InjectLow_WriteJump(
-            HANDLE hProcess, void *remote_addr, BOOLEAN long_diff, void * local_data);
+	HANDLE InjectLow_OpenProcess(void *_msg);
 
     //
     // data
@@ -147,21 +130,6 @@ private:
 
     CRITICAL_SECTION m_LogMessage_CritSec;
     CRITICAL_SECTION m_critSecHostInjectedSvcs;
-
-    //
-    // DriverAssistInject data
-    //
-
-    void *m_sbielow_ptr;
-    //adding two offsets variables to replace the "head" and "tail" dependency
-    ULONG m_sbielow_start_offset;
-    ULONG m_sbielow_data_offset;
-
-    ULONG m_sbielow_len;
-
-    ULONG *m_syscall_data;
-
-    ULONG_PTR m_LdrInitializeThunk;
 
 };
 

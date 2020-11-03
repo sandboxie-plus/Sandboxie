@@ -104,6 +104,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <ClCompile>
@@ -120,6 +123,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_WIN64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <ClCompile>
@@ -137,6 +143,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <ClCompile>
@@ -152,6 +161,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_WIN64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\pattern.c">
@@ -227,6 +239,8 @@
     <ClCompile Include="guimsg.c" />
     <ClCompile Include="guiprop.c" />
     <ClCompile Include="guititle.c" />
+    <ClCompile Include="hook_inst.c" />
+    <ClCompile Include="hook_tramp.c" />
     <ClCompile Include="includes.c" />
     <ClCompile Include="ipc.c" />
     <ClCompile Include="ipc_start.c">
@@ -258,6 +272,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="lowlevel_inject.c" />
     <ClCompile Include="lsa.c" />
     <ClCompile Include="mscoree.c" />
     <ClCompile Include="net.c" />
@@ -336,6 +351,7 @@
     <ClInclude Include="dll.h" />
     <ClInclude Include="guidlg.h" />
     <ClInclude Include="gui_p.h" />
+    <ClInclude Include="hook.h" />
     <ClInclude Include="ipstore_enum.h" />
     <ClInclude Include="ipstore_impl.h" />
     <ClInclude Include="obj.h" />
@@ -346,6 +362,7 @@
     <ClInclude Include="taskbar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="lowlevel.rc" />
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>

@@ -68,6 +68,7 @@ typedef struct _SBIELOW_DATA {
      ULONG64 RealNtDeviceIoControlFile;
 #ifdef _WIN64
     SBIELOW_J_TABLE * Sbie64bitJumpTable;
+	ULONG64     ntdll_wow64_base;
 #endif
 } SBIELOW_DATA;
 

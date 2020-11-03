@@ -197,7 +197,7 @@ SB_STATUS CSbieAPI::Connect()
 	m->lastRecordNum = 0;
 
 #ifndef _DEBUG
-	QStringList CompatVersions = QStringList () << "5.43" << "5.43.5";
+	QStringList CompatVersions = QStringList () << "5.43" << "5.43.5" << "5.44.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{

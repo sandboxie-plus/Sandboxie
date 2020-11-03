@@ -256,12 +256,12 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
 
     //
     // make sure we're running on Windows XP (v5.1) or later (32-bit)
-    // or Windows Vista (v6.0) or later (64-bit)
+    // or Windows 7 (v6.1) or later (64-bit)
     //
 
 #ifdef _WIN64
     const ULONG MajorVersionMin = 6;
-    const ULONG MinorVersionMin = 0;
+    const ULONG MinorVersionMin = 1;
 #else
     const ULONG MajorVersionMin = 5;
     const ULONG MinorVersionMin = 1;
@@ -601,28 +601,30 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
-    void *ptr;
-    WCHAR err_txt[128];
     UNICODE_STRING uni;
 
     //
     // Windows 7 kernel exports ZwSetInformationToken
     // on earlier versions of Windows, we search for it
     //
+#ifndef _WIN64
+    if (Driver_OsVersion < DRIVER_WINDOWS_7) {
+		
+		void *ptr;
+		WCHAR err_txt[128];
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+		FIND_SERVICE(ZwSetInformationToken, 4);
 
-        RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
-        ZwSetInformationToken = (P_NtSetInformationToken)
-            MmGetSystemRoutineAddress(&uni);
-        if (! ZwSetInformationToken) {
-            Log_Msg1(MSG_1108, uni.Buffer);
-            return FALSE;
-        }
-
-    } else {
-
-        FIND_SERVICE(ZwSetInformationToken, 4);
+    } else 
+#endif
+	{
+		RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
+		ZwSetInformationToken = (P_NtSetInformationToken)
+			MmGetSystemRoutineAddress(&uni);
+		if (!ZwSetInformationToken) {
+			Log_Msg1(MSG_1108, uni.Buffer);
+			return FALSE;
+		}
     }
 
     return TRUE;

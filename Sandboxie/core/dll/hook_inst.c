@@ -20,8 +20,16 @@
 //---------------------------------------------------------------------------
 
 
+#ifdef KERNEL_MODE
+#define Sbie_swprintf swprintf
+#else
+#include "dll.h"
+#include "msgs/msgs.h"
+#define MSG_HOOK_ANALYZE    MSG_1151
+#define Log_Msg1			SbieApi_Log
 #define HOOK_WITH_PRIVATE_PARTS
 #include "hook.h"
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -130,8 +138,10 @@ ALIGNED BOOLEAN Hook_Analyze(
 
     __try {
 
+#ifdef KERNEL_MODE
         if (probe_address)
             ProbeForRead(address, 16, sizeof(UCHAR));
+#endif
 
         /*if (1) {
             UCHAR *z = (UCHAR *)address;
@@ -147,7 +157,7 @@ ALIGNED BOOLEAN Hook_Analyze(
         addr = Hook_Analyze_Inst(addr, inst);
         if (! addr) {
             addr = address;
-            swprintf(text, L"%08p:  %02X,%02X,%02X,%02X,"
+			Sbie_swprintf(text, L"%08p:  %02X,%02X,%02X,%02X,"
                 L"%02X,%02X,%02X,%02X,%02X,%02X,%02X,%02X", addr,
                 addr[0],  addr[1],  addr[2],  addr[3],  addr[4],  addr[5],
                 addr[6],  addr[7],  addr[8],  addr[9],  addr[10], addr[11]);
@@ -158,7 +168,7 @@ ALIGNED BOOLEAN Hook_Analyze(
     } __except (EXCEPTION_EXECUTE_HANDLER) {
 
         addr = NULL;
-        swprintf(text, L"(fault at %p)", address);
+		Sbie_swprintf(text, L"(fault at %p)", address);
         Log_Msg1(MSG_HOOK_ANALYZE, text);
 
     }

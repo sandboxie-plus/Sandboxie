@@ -47,7 +47,14 @@ void CSandBoxPlus::UpdateDetails()
 {
 	m_bLogApiFound = GetTextList("OpenPipePath").contains("\\Device\\NamedPipe\\LogAPI");
 
-	m_bINetBlocked = GetTextList("ClosedFilePath").contains("InternetAccessDevices");
+	m_bINetBlocked = false;
+	foreach(const QString& Entry, GetTextList("ClosedFilePath"))
+	{
+		if (Entry.contains("InternetAccessDevices")) {
+			m_bINetBlocked = true;
+			break;
+		}
+	}
 
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
@@ -121,9 +128,9 @@ void CSandBoxPlus::SetLogApi(bool bEnable)
 void CSandBoxPlus::SetINetBlock(bool bEnable)
 {
 	if (bEnable)
-		DelValue("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+		InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
 	else
-		InsertText("ClosedFilePath", "InternetAccessDevices");
+		DelValue("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
 }
 
 void CSandBoxPlus::SetAllowShares(bool bEnable)

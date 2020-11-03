@@ -466,6 +466,7 @@ _FX int __stdcall WinMain(
         }
     }
 
+	// todo: xxx
     /*if (1) {
         MSG_HEADER req;
         req.length = sizeof(req);

@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [0.4.3 / 5.43.7] - 2020-11-03
+
+### Added
+- added disable forced programs menu command to he sandman ui
+
+### Changed
+
+### Fixed
+- fixed file rename bug introduced with an earlier driver verifier fix
+- fixed issue saving access lists
+- fixed issue with program groups parsing in the SandMan UI 
+- fixed issue with intrnet access restriction options
+- fixed issue deleting sandbox when located on a drive directly
+
+
+
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
 ### Added
@@ -11,28 +28,28 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed thread handle leak in SbieSvc and other components
 - msedge.exe is now categorized as a chromium derivate
-- fixed Chrome 86+ compatibility bug with Chrome's own sandbox
+- fixed chrome 86+ compatybility bug with chroms own sandbox
 
 
 
 ## [0.4.1 / 5.43.5] - 2020-09-12
 
 ### Added
-- added core version compatibility check to sandman UI
+- added core version compatybility check to sandman UI
 - added shell integration options to SbiePlus
 
 ### Changed
-- SbieCtrl does no longer auto-show the tutorial on first start
-- when hooking, the trampoline migrated section of the original function is no longer noped out
-- it caused issues with unity games, will be investigated and re-enabled later
+- SbieCtrl does not longer auto show the tutorian on first start
+- when hooking, the to the trampoline migrated section of the original function is not longer noped out
+-- it caused issues with unity games, will be investigated and re enabled later
 
 ### Fixed
 - fixed color issue with vertical tabs in dark mode
 - fixed wrong path separators when adding new forced folders
-- fixed directory listing bug introduced in 5.43
+- fixed directroy listing bug intriduced in 5.43
 - fixed issues with settings window when not being connected to driver
-- fixed issue when starting Sandman UI as admin
-- fixed auto content delete not working with Sandman UI
+- fixed issue when starting sandman ui as admin
+- fixed auto content delete not working with sandman ui
 
 
 
@@ -40,20 +57,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added a proper custom installer to the the Plus release
-- added sandbox snapshot functionality to SBIE core
-- filesystem is saved incrementally, the snapshots build upon each other
-- each snapshot gets a full copy of the box registry for now
-- each snapshot can have multiple children snapshots
+- added sandbox snapshot functionality to sbie core
+-- filesystem is saved incrementally, the snapshots built upon each other
+-- each snapshot gets a full copy of the box registry for now
+-- each snapshot can have multiple children snapshots
 - added access status to resource monitor
 - added setting to change border width
 - added snapshot manager UI to SandMan
 - added template to enable authentication with an Yubikey or comparable 2FA device
-- added UI for program allert
-- added software compatibility options to the UI
+- added ui for program allert
+- added software compatybility options to teh UI
 
 ### Changed
 - SandMan UI now handles deletion of sandboxe content on its own
-- no longer adding redundant resource accesses as new events
+- no longer adding redundnat resource accesses as new events
 
 ### Fixed
 - fixed issues when hooking functions from delay loaded libraries
@@ -68,8 +85,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.3.5 / 5.42.1] - 2020-07-19
 
 ### Added
-- added settings window
-- added translation support
+- Added settings window
+- added translationsupport
 - added dark theme
 - added auto start option
 - added sandbox options
@@ -83,7 +100,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed ini issue with sandman.exe when renaming sandboxes
 - fixed ini auto reload bug introduced in the last build
-- fixed issue when hooking delayed loaded libraries
+- fixed issue when hooking delayd loaded libraries
 
 
 
@@ -91,21 +108,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - API_QUERY_PROCESS_INFO can be now used to get the original process token of sandboxed processes
-- Note: this capability is used by TaskExplorer to allow inspecting sandbox internal tokens
+-- Note: this capability is used by TaskExplorer to allow inspecting sandbox internal tokens
 - Added option "KeepTokenIntegrity=y" to make the sbie token keep its initial integrity level (debug option)
-- Note: Do NOT USE Debug Options if you don't know their security implications (!) 
-- Added process ID to log messages very usefull for debugging
+-- Note: Do NOT USE Debug Options if you dont know their security implications (!) 
+- Added process id to log messages very usefull for debugging
 - Added finder to resource log
 - Added option to hide host processes "HideHostProcess=[name]"
-- Note: Sbie hides by default processes from other boxes, this behaviour can now be controlled with "HideOtherBoxes=n"
+-- Note: Sbie hides by default processes from other boxes, this behavioure can now be controlled with "HideOtherBoxes=n"
 - Sandboxed RpcSs and DcomLaunch can now be run as system with the option "ProtectRpcSs=y" howeever tht breaks sandboxed explorer and other
 - BuiltIn Clsid whitelist can now be disabled with "OpenDefaultClsid=n"
 - Processes can be now terminated with the del key, and require a confirmation
 - Added sandboxed window border display to SandMan.exe
 - Added notification for sbie log messages
 - Added Sandbox Presets sub menu allowing to quickly change some settings
-- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus 
-- And other: Drop admin rights; Block/Allow internet access; Block/Allow access to files on te network
+-- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus 
+-- And other: Drop admin rights; Block/Allow internet access; Block/Allow access to files on te network
 - Added more info to the sandbox status column
 - Added path column to SbieModel
 - Added info tooltips in SbieView
@@ -118,14 +135,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - added mising PreferExternalManifest itialization to portable mode
 - fixed permission issues with sandboxed system processes
-- Note: you can use "ExposeBoxedSystem=y" for the old behaviour (debug option)
+-- Note: you can use "ExposeBoxedSystem=y" for the old behaviour (debug option)
 - fixed missing SCM access check for sandboxed services
-- Note: to disable the access check use "UnrestrictedSCM=y" (debug option)
+-- Note: to disable the access check use "UnrestrictedSCM=y" (debug option)
 - fixed missing initialization in serviceserver that caused sandboxed programs to crash when querying service status
 - fixed many bugs that caused the SbieDrv.sys to BSOD when run with MSFT Driver Verifier active
-- 0xF6 in GetThreadTokenOwnerPid and File_Api_Rename
-- missing non-optional parameter for FltGetFileNameInformation in File_PreOperation
-- 0xE3 in Key_StoreValue and Key_PreDataInject
+-- 0xF6 in GetThreadTokenOwnerPid and File_Api_Rename
+-- missing non optional parameter for FltGetFileNameInformation in File_PreOperation
+-- 0xE3 in Key_StoreValue and Key_PreDataInject
 
 
 
@@ -134,7 +151,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option SeparateUserFolders=n to no longer have the user profile files stored separately in the sandbox
 - added SandboxieLogon=y it makes processes run under the SID of the "Sandboxie" user instead of the Anonymous user
-- Note: the global option AllowSandboxieLogon=y must be enabled, the "Sandboxie" user account must be manually created first and the driver reloaded, else process start will fail
+-- Note: the global option AllowSandboxieLogon=y must be enabled, the "Sandboxie" user account must be manually created first and the driver reloaded, else process start will fail
 - improved debugging around process creation errors in the driver
 
 ### Fixed
@@ -147,21 +164,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added different sandbox icons for different types
-- Red LogAPI/BSA enabled
-- More to come :D
+-- Red LogAPI/BSA enabled
+-- More to come :D
 - Added progress window for async operations that take time
 - added DPI awareness
 - the driver file is now obfuscated to avoid false positives
 - additional debug options to sandboxie.ini OpenToken=y that combines UnrestrictedToken=y and UnfilteredToken=y
-- Note: using these options weakens the sandboxing, they are intended for debugging and may be used for better application virtualization later
+-- Note: using these options weekens the sandboxing, they are intended for debugging and may be used for better application virtualization later
 
 ### Changed
-- SbieDll.dll when processing InjectDll now looks in the SbieHome folder for the Dll's if the entered path starts with a backslash
-- i.e. "InjectDll=\LogAPI\i386\logapi32v.dll" or "InjectDll64=\LogAPI\amd64\logapi64v.dll"
+- SbieDll.dll when processinh InjectDll now looks in the SbieHome folder for the Dll's if the entered path starts with a backslash
+-- i.e. "InjectDll=\LogAPI\i386\logapi32v.dll" or "InjectDll64=\LogAPI\amd64\logapi64v.dll"
 
 ### Fixed
 - IniWatcher did not work in portable mode
-- service path fix broke other services, now properly fixed, maybe
+- service path fix broke other services, now properly fixed, may be
 - found workaround for the msi installer issue
 
 
@@ -171,7 +188,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - IniWatcher, no more clicking reload, the ini is now reloaded automatically every time it changes
 - Added Mainanance menu to the Sandbox menu, allowing to install/uninstall and start/stop sandboxie driver, service
-- SandMan.exe now is packed with Sbie files and when no sbie is installed acts as a portable installation
+- SandMan.exe now is packed with Sbie files and when no sbie is installed acts as a portable instalation
 - Added option to clean up logs
 
 ### Changed
@@ -202,7 +219,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - "Other" type for the Resource Access Monitor
-- added call to StartService to the logged Resources
+-- added call to StartService to the logged Resources
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903

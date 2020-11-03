@@ -996,17 +996,6 @@ void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpComma
     return mybuf;
 }
 
-#ifndef STARTUPINFOEXW
-typedef struct _STARTUPINFOEXA {
-	STARTUPINFOA StartupInfo;
-	LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
-} STARTUPINFOEXA, *LPSTARTUPINFOEXA;
-typedef struct _STARTUPINFOEXW {
-	STARTUPINFOW StartupInfo;
-	LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
-} STARTUPINFOEXW, *LPSTARTUPINFOEXW;
-#endif
-
 // Processes in Windows 10 RS5 will start with the Sandboxie restricted token.  
 // Thus the expected failure of the original call to CreateProcessInternalW doesn't 
 // happen.  Proc_CreateProcessInternalW_RS5 handles this case.  The main difference

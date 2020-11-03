@@ -1371,9 +1371,10 @@ bool CSbieAPI::GetLog()
 // Forced Processes
 //
 
-SB_STATUS CSbieAPI::DisableForceProcess(bool Set)
+SB_STATUS CSbieAPI::DisableForceProcess(bool Set, int Seconds)
 {
-	//m_pGlobalSection->SetNum("ForceDisableSeconds", Seconds);
+	if(Seconds > 0)
+		m_pGlobalSection->SetNum("ForceDisableSeconds", Seconds);
 
 	ULONG uEnable = Set ? TRUE : FALSE;
 
@@ -1403,7 +1404,9 @@ bool CSbieAPI::AreForceProcessDisabled()
 	args->set_flag.val = NULL; // NewState
 	args->get_flag.val = &uEnabled; // OldState
 
-	return NT_SUCCESS(m->IoControl(parms)) && uEnabled;
+	if (!NT_SUCCESS(m->IoControl(parms)))
+		return false;
+	return uEnabled;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

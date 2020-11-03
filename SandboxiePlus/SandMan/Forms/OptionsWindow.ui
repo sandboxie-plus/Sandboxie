@@ -614,7 +614,7 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="1" column="1" colspan="2">
             <widget class="QCheckBox" name="chkBlockShare">
              <property name="text">
-              <string>Block network files and folders, unless pecifically opened.</string>
+              <string>Block network files and folders, unless specifically opened.</string>
              </property>
             </widget>
            </item>

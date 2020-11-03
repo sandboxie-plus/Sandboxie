@@ -12,7 +12,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	4
-#define VERSION_REV 	2
+#define VERSION_REV 	3
 #define VERSION_UPD 	0
 
 
@@ -83,6 +83,7 @@ private slots:
 
 	void				OnNewBox();
 	void				OnEmptyAll();
+	void				OnDisableForce();
 	void				OnMaintenance();
 
 	void				OnCleanUp();
@@ -124,6 +125,7 @@ private:
 	QMenu*				m_pMenuFile;
 	QAction*			m_pNew;
 	QAction*			m_pEmptyAll;
+	QAction*			m_pDisableForce;
 	QMenu*				m_pMaintenance;
 	QAction*			m_pConnect;
 	QAction*			m_pDisconnect;

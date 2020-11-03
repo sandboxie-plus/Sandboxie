@@ -119,7 +119,7 @@ public:
 	virtual void			ClearPassword();
 
 	// Forced Processes
-	virtual SB_STATUS		DisableForceProcess(bool Set);
+	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);
 	virtual bool			AreForceProcessDisabled();
 
 	// Monitor

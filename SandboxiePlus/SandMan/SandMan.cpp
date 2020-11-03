@@ -183,6 +183,8 @@ CSandMan::CSandMan(QWidget *parent)
 		m_pNew = m_pMenuFile->addAction(QIcon(":/Actions/NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(QIcon(":/Actions/EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
+		m_pDisableForce = m_pMenuFile->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
 		m_pMaintenance = m_pMenuFile->addMenu(QIcon(":/Actions/Maintenance"), tr("&Maintenance"));
 			m_pConnect = m_pMaintenance->addAction(QIcon(":/Actions/Connect"), tr("Connect"), this, SLOT(OnMaintenance()));
@@ -470,6 +472,8 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	{
 		theAPI->ReloadBoxes();
 		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
+
+		m_pDisableForce->setChecked(theAPI->AreForceProcessDisabled());
 	}
 
 	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0))
@@ -649,6 +653,20 @@ void CSandMan::OnNewBox()
 void CSandMan::OnEmptyAll()
 {
 	theAPI->TerminateAll();
+}
+
+void CSandMan::OnDisableForce()
+{
+	bool Status = m_pDisableForce->isChecked();
+	int Seconds = 0;
+	if (Status)
+	{
+		bool bOK = false;
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for which disable forced programs."), 10, 0, 3600, 1, &bOK);
+		if (!bOK)
+			return;
+	}
+	theAPI->DisableForceProcess(Status, Seconds);
 }
 
 SB_STATUS CSandMan::ConnectSbie()

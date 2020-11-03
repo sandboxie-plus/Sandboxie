@@ -432,7 +432,7 @@ void COptionsWindow::LoadGroups()
 		if (GroupName.length() > 2)
 			GroupName = GroupName.mid(1, GroupName.length() - 2);
 		pItem->setText(0, GroupName);
-		for (int i = 1; i < Entries.count(); i++) 
+		for (int i = 0; i < Entries.count(); i++) 
 		{
 			QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
 			SetProgramItem(Entries[i], pSubItem, 0);
@@ -864,6 +864,7 @@ void COptionsWindow::SetAccessEntry(EAccessType Type, const QString& Program, EA
 {
 	if (GetAccessEntry(Type, Program, Mode, Path) != NULL)
 		return; // already set
+	m_AccessChanged = true;
 	AddAccessEntry(Type, Mode, Program, Path);
 }
 
@@ -1070,7 +1071,7 @@ void COptionsWindow::SaveAccessList()
 		int Mode = pItem->data(2, Qt::UserRole).toInt();
 		QString Program = pItem->data(1, Qt::UserRole).toString();
 		QString Value = pItem->data(3, Qt::UserRole).toString();
-		if (Program.isEmpty())
+		if (!Program.isEmpty())
 			Value.prepend(Program + ",");
 		AccessMap.insertMulti(MakeAccessStr((EAccessType)Type, (EAccessMode)Mode), Value);
 	}

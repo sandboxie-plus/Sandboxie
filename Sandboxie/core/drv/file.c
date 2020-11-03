@@ -1833,9 +1833,27 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         info->FileNameLength = name_len;
         memcpy(info->FileName, name, name_len);
 
-        status = NtSetInformationFile(
-            args->file_handle.val, &IoStatusBlock,
-            info, info_len, FileRenameInformation);
+
+		FILE_OBJECT *object;
+		status = ObReferenceObjectByHandle(args->file_handle.val, 0L, *IoFileObjectType, UserMode, (PVOID)&object, NULL);
+
+		if (NT_SUCCESS(status)) {
+
+			HANDLE handle;
+			status = ObOpenObjectByPointer((PVOID)object, OBJ_FORCE_ACCESS_CHECK |
+				OBJ_KERNEL_HANDLE, NULL, GENERIC_ALL, *IoFileObjectType, KernelMode, &handle);
+
+			if (NT_SUCCESS(status)) {
+
+				status = ZwSetInformationFile(
+					handle, &IoStatusBlock, //args->file_handle.val, &IoStatusBlock,
+					info, info_len, FileRenameInformation);
+
+				ZwClose(handle);
+			}
+
+			ObDereferenceObject(object);
+		}
 
         // FIXME, we may get STATUS_NOT_SAME_DEVICE, however, in most cases,
         // this API call is used to rename a file inside a folder, rather

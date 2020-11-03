@@ -316,7 +316,7 @@ SB_STATUS CSandBox__OsRename(const wstring& SrcPath, const wstring& DestDir, con
 		return SB_ERR(CSandBox::tr("Can't open source path"), status);
 	}
 
-	wstring dst_path = L"\\??\\" + DestDir;
+	wstring dst_path = L"\\??\\" + DestDir + L"\\";
 	RtlInitUnicodeString(&uni, dst_path.c_str());
 	InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
 

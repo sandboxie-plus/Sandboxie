@@ -1681,7 +1681,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
             ch = towlower(buf[0]);
         }
 
-        if (ch == L'n') {
+        if (ch != L'y') {
             status = STATUS_LOGON_NOT_GRANTED;
             ok = FALSE;
         }

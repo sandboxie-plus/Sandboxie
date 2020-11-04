@@ -15,8 +15,12 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <ntstatus.h>
+#define WIN32_NO_STATUS
+typedef long NTSTATUS;
+
 #include <windows.h>
 #include <stdio.h>
 #include "core/dll/sbiedll.h"
 
-
+#include "common/win32_ntddk.h"

@@ -119,7 +119,7 @@ _FX void *Dll_AllocFromPool(POOL *pool, ULONG size)
     memset(ptr,             0xCC, 64);
     memset(ptr + size - 64, 0xCC, 64);
     //{
-    //WCHAR txt[64]; Sbie_swprintf(txt, L"Dll_Alloc for %-6d, block at %08X (%08X)\n", size, ptr, ptr + 64);
+    //WCHAR txt[64]; Sbie_snwprintf(txt, 64, L"Dll_Alloc for %-6d, block at %08X (%08X)\n", size, ptr, ptr + 64);
     //OutputDebugString(txt);
     //}
     ptr += 64;
@@ -129,7 +129,7 @@ _FX void *Dll_AllocFromPool(POOL *pool, ULONG size)
     InterlockedExchangeAdd(&Dll_MemUsage, size);
     if (Dll_MemTrace) {
         WCHAR txt[128];
-        Sbie_swprintf(txt, L"ALLOC %d POOL %s\n", size, (pool == Dll_Pool) ? L"Main" : (pool == Dll_PoolTemp) ? L"Temp" : L"?");
+        Sbie_snwprintf(txt, 128, L"ALLOC %d POOL %s\n", size, (pool == Dll_Pool) ? L"Main" : (pool == Dll_PoolTemp) ? L"Temp" : L"?");
         OutputDebugString(txt);
     }
 
@@ -182,7 +182,7 @@ _FX void Dll_Free(void *ptr)
     for (i = 0; i < 64; ++i)
         if (pre[i] != 0xCC || post[i] != 0xCC) {
             WCHAR txt[64];
-            Sbie_swprintf(txt, L"Memory corrupted, ptr=%p\n", ptr);
+            Sbie_snwprintf(txt, 64, L"Memory corrupted, ptr=%p\n", ptr);
             OutputDebugString(txt);
             SbieApi_Log(2316, NULL);
             while (! IsDebuggerPresent()) Sleep(500);
@@ -190,7 +190,7 @@ _FX void Dll_Free(void *ptr)
         }
 
     ptr2 -= 64;
-    //Sbie_swprintf(txt, L"Dll_Free  for %-6d        at %08X\n", size, ptr2);
+    //Sbie_snwprintf(txt, 64, L"Dll_Free  for %-6d        at %08X\n", size, ptr2);
     //OutputDebugString(txt);
     }
 #endif // DEBUG_MEMORY
@@ -201,7 +201,7 @@ _FX void Dll_Free(void *ptr)
     InterlockedExchangeAdd(&Dll_MemUsage, -(LONG)size);
     if (Dll_MemTrace) {
         WCHAR txt[128];
-        Sbie_swprintf(txt, L"FREE  %d\n", size);
+        Sbie_snwprintf(txt, 128, L"FREE  %d\n", size);
         OutputDebugString(txt);
     }
 #endif // DEBUG_MEMORY
@@ -418,7 +418,7 @@ _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
     debug_area      = ((UCHAR *)(*name_buffer)) + *name_buffer_len - 64;
     for (i = 0; i < 64 && (*name_buffer); ++i)
         if (debug_area[i] != 0xCC) {
-            Sbie_swprintf(txt, L"Buffer %d corrupted.  Buffer=%08X Length=%d Corrupt=%08X\n",
+            Sbie_snwprintf(txt, 128, L"Buffer %d corrupted.  Buffer=%08X Length=%d Corrupt=%08X\n",
                 which, *name_buffer, *name_buffer_len, &debug_area[i]);
             OutputDebugString(txt);
             __debugbreak();
@@ -430,7 +430,7 @@ _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
     debug_area      = ((UCHAR *)(*name_buffer)) + *name_buffer_len - 64;
     for (i = 0; i < 64 && (*name_buffer); ++i)
         if (debug_area[i] != 0xCC) {
-            Sbie_swprintf(txt, L"Buffer %d corrupted.  Buffer=%08X Length=%d Corrupt=%08X\n",
+            Sbie_snwprintf(txt, 128, L"Buffer %d corrupted.  Buffer=%08X Length=%d Corrupt=%08X\n",
                 which, *name_buffer, *name_buffer_len, &debug_area[i]);
             OutputDebugString(txt);
             __debugbreak();

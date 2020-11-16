@@ -577,17 +577,32 @@ _FX BOOLEAN Session_IsForceDisabled(ULONG SessionId)
 
 _FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 {
+	const WCHAR* strings[2] = { name, NULL };
+	Session_MonitorPutEx(type, strings, pid);
+}
+
+
+//---------------------------------------------------------------------------
+// Session_MonitorPutEx
+//---------------------------------------------------------------------------
+
+
+_FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, HANDLE pid)
+{
     SESSION *session;
     KIRQL irql;
+	const WCHAR** string;
 
     session = Session_Get(FALSE, -1, &irql);
     if (! session)
         return;
 
-    if (session->monitor_log && *name) {
+    if (session->monitor_log && *strings[0]) {
 
 		ULONG64 pid64 = (ULONG64)pid;
-		SIZE_T data_len = (wcslen(name) + 1) * 2;
+		SIZE_T data_len = 0;
+		for(string = strings; *string != NULL; string++)
+			data_len += wcslen(*string) * sizeof(WCHAR);
 
 		//[Type 2][PID 8][Data n*2]
 		SIZE_T entry_size = 2 + 8 + data_len;
@@ -596,9 +611,12 @@ _FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 		if (write_ptr) {
 			log_buffer_push_bytes((CHAR*)&type, 2, &write_ptr, session->monitor_log);
 			log_buffer_push_bytes((CHAR*)&pid64, 8, &write_ptr, session->monitor_log);
-			log_buffer_push_bytes((CHAR*)name, data_len, &write_ptr, session->monitor_log);
+
+			// join strings seamlessly
+			for (string = strings; *string != NULL; string++)
+				log_buffer_push_bytes((CHAR*)*string, wcslen(*string) * sizeof(WCHAR), &write_ptr, session->monitor_log);
 		}
-		else // this can only happen when the entire buffer is to small to hold this entire entry
+		else // this can only happen when the entire buffer is to small to hold this one entry
 			Log_Msg0(MSG_MONITOR_OVERFLOW);
     }
 
@@ -649,7 +667,7 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
         if (*in_flag) {
 
             if (! Session_CheckAdminAccess(L"MonitorAdminOnly"))
-                    return STATUS_ACCESS_DENIED;
+                return STATUS_ACCESS_DENIED;
 
             EnableMonitor = TRUE;
 
@@ -725,12 +743,14 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
         return STATUS_INVALID_PARAMETER;
 
     name_len = args->name_len.val / sizeof(WCHAR);
-    if ((! name_len) || name_len > 256)
+    if (! name_len)
         return STATUS_INVALID_PARAMETER;
+	if (name_len > 256) // truncate as we only have 260 in buffer
+		name_len = 256; 
     user_name = args->name_ptr.val;
     ProbeForRead(user_name, name_len * sizeof(WCHAR), sizeof(WCHAR));
 
-    name = Mem_Alloc(proc->pool, 260 * sizeof(WCHAR));
+    name = Mem_Alloc(proc->pool, 260 * sizeof(WCHAR)); // todo: should we increate this ?
     if (! name)
         return STATUS_INSUFFICIENT_RESOURCES;
 
@@ -841,7 +861,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
             if (NT_SUCCESS(status)) {
 
                 name_len = Name->Name.Length / sizeof(WCHAR);
-                if (name_len > 256)
+                if (name_len > 256) // truncate as we only have 260 in buffer
                     name_len = 256;
                 wmemcpy(name, Name->Name.Buffer, name_len);
                 name[name_len] = L'\0';
@@ -894,7 +914,7 @@ _FX NTSTATUS Session_Api_MonitorGet(PROCESS *proc, ULONG64 *parms)
 }
 
 //---------------------------------------------------------------------------
-// Session_Api_MonitorGet
+// Session_Api_MonitorGetEx
 //---------------------------------------------------------------------------
 
 _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
@@ -922,11 +942,11 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
     ProbeForWrite(user_type, sizeof(USHORT), sizeof(USHORT));
 
 	user_pid = args->name_pid.val;
-	if(user_pid != NULL)
+	if (user_pid != NULL)
 		ProbeForWrite(user_pid, sizeof(ULONG64), sizeof(ULONG64));
 
     name_len = args->name_len.val / sizeof(WCHAR);
-    if ((! name_len) || name_len > 256)
+    if (! name_len)
         return STATUS_INVALID_PARAMETER;
     user_name = args->name_ptr.val;
     ProbeForWrite(user_name, name_len * sizeof(WCHAR), sizeof(WCHAR));
@@ -962,7 +982,14 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
 				log_buffer_get_bytes((CHAR*)&pid64, 8, &read_ptr, session->monitor_log);
 				if (user_pid != NULL)
 					*user_pid = pid64;
-				log_buffer_get_bytes((CHAR*)user_name, entry_size - (2 + 8), &read_ptr, session->monitor_log);
+
+				name_len -= sizeof(WCHAR); // reserve room for the termination charakter
+				if (name_len > entry_size - (2 + 8))
+					name_len = entry_size - (2 + 8);
+				log_buffer_get_bytes((CHAR*)user_name, name_len, &read_ptr, session->monitor_log);
+
+				// add required termination charakter
+				*(WCHAR*)(((CHAR*)user_name) + name_len) = L'\0';
 			}
 
 			// for compatybility with older versions we fall back to clearing the returned entry

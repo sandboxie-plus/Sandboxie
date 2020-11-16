@@ -364,7 +364,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS)
     {
         WCHAR msg[512];
-        Sbie_swprintf(msg, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
             StringBinding,
             OutBinding,
             status);
@@ -511,7 +511,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         RPC_CSTR   StringUuid;
 
         __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);
-        Sbie_swprintf(msg, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
             Template && Template->StringEndpoint ? Template->StringEndpoint : L"null",
             StringUuid,
             status);

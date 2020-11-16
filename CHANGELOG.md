@@ -4,6 +4,47 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [0.4.5 / 5.44.1] - 2020-11-16
+
+### Added
+- added "Terminate all processes" and "disable forced programs" commands to tray menu in SandMan ui
+- program start restrictions settings now can be switsched between a white list and a black list
+-- programs can be terminated and blacklisted from the context menu
+- added additional process context menu options, lingering and leader process can be now set from menu
+- added option to view template presets for any given box
+- added text filter to template view
+- added new compatybility templates:
+-- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis
+-- FireFox Quantum, access to windows FontCachePort for compatybility with windows 7
+- added experimental debug option "OriginalToken=y" which lets sandboxed processes retain their original unrestricted token
+-- This option is comparable with "OpenToken=y" and is intended only for testing and debugging, it BREAKS most SECURITY guarantees (!)
+- added debug option "NoSandboxieDesktop=y" it disables the desktop proxy mechanism
+-- Note: without an unrestricted token with this option applications wont be able to start
+- added debug option "NoSysCallHooks=y" it disables the sys call processing by the driver
+-- Note: without an unrestricted token with this option applications wont be able to start
+- added ability to record verbost access tracess to the resource monitor
+-- use ini options "FileTrace=*", "PipeTrace=*", "KeyTrace=*", "IpcTrace=*", "GuiTrace=*" to record all events
+-- replace "*" to log only: "A" - allowed, "D" - denided, or "I" - ignore events
+- added ability to record debug output strings to the resource monitor,
+-- use ini option DebugTrace=y to enable
+
+### Changed
+- AppUserModelID sting no longer contains sandboxie version string
+- now by default sbie's application manifest hack is disabled, as it causes problems with version checking on windows 10
+-- to enable old behavioure add "PreferExternalManifest=y" to the global or the box specific ini section
+- the resource log mechanism can now handle multiple strings to reduce on string copy operations
+
+### Fixed
+- fixed issue with disabling some restriction settings failed
+- fixed disabling of internet block from the presets menu sometimes failed
+- the software compatybility list in the sandman UI now shows the proper template names
+- fixed use of freed memory in the driver
+- replaced swprintf with snwprintf to prevent potential buffer overflow in SbieDll.dll
+- fixed bad list performance with resource log and api log in SandMan UI
+
+
+
 ## [0.4.4 / 5.44.0] - 2020-11-03
 
 ### Added
@@ -14,16 +55,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - moved function hooking mechanism from SbieDrv to SbieDll
 - introduced a new driverless method to resolve wow64 ntdll base address
 
-### Fixed
-
 ### removed
 - removed support for windows vista x64
+
 
 
 ## [0.4.3 / 5.43.7] - 2020-11-03
 
 ### Added
-- added disable forced programs menu command to he sandman ui
+- added disable forced programs menu command to the sandman ui
 
 ### Fixed
 - fixed file rename bug introduced with an earlier driver verifier fix

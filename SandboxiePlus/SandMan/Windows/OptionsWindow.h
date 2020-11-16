@@ -22,6 +22,8 @@ public slots:
 
 private slots:
 
+	void OnWithTemplates();
+
 	void OnPickColor();
 
 	void OnAddGroup();

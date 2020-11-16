@@ -16,8 +16,23 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 	QList<SListNode*> New;
 	QHash<QVariant, SListNode*> Old = m_Map;
 
-	foreach (const CResLogEntryPtr& pEntry, List)
+	int i = 0;
+	if (List.count() >= m_List.count() && m_List.count() > 0)
 	{
+		i = m_List.count() - 1;
+		if (m_List.at(i)->ID == List.at(i)->GetUID())
+		{
+			i++;
+			Old.clear();
+		}
+		else
+			i = 0;
+	}
+	
+	for(; i < List.count(); i++)
+	{
+		CResLogEntryPtr pEntry = List.at(i);
+
 		QVariant ID = pEntry->GetUID();
 
 		if (!PIDs.isEmpty() && !PIDs.contains(pEntry->GetProcessId()))
@@ -63,7 +78,7 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 			{
 				case eProcess:			Value = pEntry->GetProcessId(); break;
 				case eTimeStamp:		Value = pEntry->GetTimeStamp(); break;
-				case eType:				Value = pEntry->GetType(); break;
+				case eType:				Value = pEntry->GetTypeStr(); break;
 				case eValue:			Value = pEntry->GetValue(); break;
 				case eStatus:			Value = pEntry->GetStautsStr(); break;
 			}

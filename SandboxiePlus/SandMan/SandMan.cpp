@@ -290,6 +290,8 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bIconEmpty = false;
 
 	m_pTrayMenu = new QMenu();
+	m_pTrayMenu->addAction(m_pEmptyAll);
+	m_pTrayMenu->addAction(m_pDisableForce);
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pExit);
 

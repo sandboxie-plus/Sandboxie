@@ -636,7 +636,7 @@ finish:
     /*TimeSpentHere += GetTickCount() - ticks;
     if (TimeSpentHere - TimeSpentHereLastReport > 5000) {
         WCHAR txt[256];
-        Sbie_swprintf(txt, L"Time Spent On Links = %d\n", TimeSpentHere);
+        Sbie_snwprintf(txt, 256, L"Time Spent On Links = %d\n", TimeSpentHere);
         OutputDebugString(txt);
         TimeSpentHereLastReport = TimeSpentHere;
     }*/

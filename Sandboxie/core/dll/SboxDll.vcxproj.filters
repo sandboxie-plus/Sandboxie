@@ -167,6 +167,7 @@
     <ClCompile Include="dllmain.c">
       <Filter>hook</Filter>
     </ClCompile>
+    <ClCompile Include="trace.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
@@ -208,9 +209,7 @@
     <ClInclude Include="obj.h">
       <Filter>com</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="util_asm.asm" />
+    <ClInclude Include="trace.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -219,13 +218,17 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="util_32.asm" />
-    <None Include="util_64.asm" />
     <None Include="SboxDll32.def">
       <Filter>api</Filter>
     </None>
     <None Include="SboxDll64.def">
       <Filter>api</Filter>
+    </None>
+    <None Include="util_64.asm">
+      <Filter>hook</Filter>
+    </None>
+    <None Include="util_32.asm">
+      <Filter>hook</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -264,5 +267,10 @@
     <Midl Include="pstore.idl">
       <Filter>pst</Filter>
     </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="util_asm.asm">
+      <Filter>hook</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

@@ -4059,7 +4059,7 @@ _FX NTSTATUS File_MigrateFile(
                     ULONG TruePathNameLen = wcslen(TruePathName);
                     WCHAR *text = Dll_AllocTemp(
                             (TruePathNameLen + 64) * sizeof(WCHAR));
-                    Sbie_swprintf(text, L"%s [%s / %d]",
+                    Sbie_snwprintf(text, (TruePathNameLen + 64), L"%s [%s / %d]",
                         TruePathName, Dll_BoxName, file_size);
 
                     SbieApi_Log(2102, text);
@@ -4540,7 +4540,7 @@ _FX BOOLEAN File_AdjustShortName(
             req->h.msgid = MSGID_FILE_SET_SHORT_NAME;
 
             memzero(&req->info, sizeof(req->info));
-            Sbie_swprintf(req->info.FileName,
+            Sbie_snwprintf(req->info.FileName, 12,
                      L"SB~%05X.%03X", ticks >> 12, ticks & 0xFFF);
             req->info.FileNameLength = (8 + 1 + 3) * sizeof(WCHAR);
 

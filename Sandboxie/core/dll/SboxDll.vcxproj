@@ -329,6 +329,7 @@
     </ClCompile>
     <ClCompile Include="taskbar.c" />
     <ClCompile Include="terminal.c" />
+    <ClCompile Include="trace.c" />
     <ClCompile Include="userenv.c" />
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +361,7 @@
     <ClInclude Include="sbieapi.h" />
     <ClInclude Include="sbiedll.h" />
     <ClInclude Include="taskbar.h" />
+    <ClInclude Include="trace.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="lowlevel.rc" />

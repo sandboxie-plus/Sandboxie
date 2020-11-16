@@ -1980,6 +1980,9 @@ _FX BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle)
     // a pre-set value for PreferExternalManifest
     //
 
+	if (!SbieApi_QueryConfBool(NULL, L"PreferExternalManifest", FALSE))
+		return FALSE;
+
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     if (TlsData->proc_image_path) {
@@ -2041,7 +2044,7 @@ _FX BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle)
                         *(ULONG *)info.kvpi.Data != 0) {
 
                         //WCHAR txt[1024];
-                        //Sbie_swprintf(txt, L"REDIR KEY - %s\n", path);
+                        //Sbie_snwprintf(txt, 1024, L"REDIR KEY - %s\n", path);
                         //OutputDebugString(txt);
 
                         *out_handle = handle;
@@ -2073,6 +2076,9 @@ _FX BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle)
     // and .config files and redirect them to our dummy/empty manifest from
     // our installation home directory
     //
+
+	if (!SbieApi_QueryConfBool(NULL, L"PreferExternalManifest", FALSE))
+		return FALSE;
 
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -2149,7 +2155,7 @@ _FX BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle)
                                 open_info.EndOfFile.QuadPart == FileSize) {
 
                     //WCHAR txt[1024];
-                    //Sbie_swprintf(txt, L"REDIR FILE - %s\n", path);
+                    //Sbie_snwprintf(txt, 1024, L"REDIR FILE - %s\n", path);
                     //OutputDebugString(txt);
 
                     *out_handle = handle;

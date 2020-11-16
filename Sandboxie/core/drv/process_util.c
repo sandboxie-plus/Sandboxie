@@ -352,7 +352,7 @@ _FX BOOLEAN Process_GetPaths(
             if (closed_ipc && proc->image_sbie)
                 continue;
 
-            if (proc->image_copy) {
+            if (proc->image_from_box) {
 
                 value = wcschr(value, L',');
                 if (! value)
@@ -972,7 +972,7 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
     ULONG len = proc->image_name_len + box->name_len + 8 * sizeof(WCHAR);
     WCHAR *text = Mem_Alloc(proc->pool, len);
     swprintf(text, L"%s [%s]", proc->image_name, box->name);
-    if (proc->image_copy)
+    if (proc->image_from_box)
         wcscat(text, L" *");
     Log_MsgP1(msgid, text, proc->pid);
     Mem_Free(text, len);

@@ -165,6 +165,11 @@ _FX BOOLEAN Gui_InitMisc(void)
         }
     }
 
+	// NoSbieDesk BEGIN
+	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+		return TRUE;
+	// NoSbieDesk END
+
     SBIEDLL_HOOK_GUI(OpenClipboard);
     SBIEDLL_HOOK_GUI(CloseClipboard);
     SBIEDLL_HOOK_GUI(GetClipboardData);

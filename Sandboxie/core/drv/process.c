@@ -629,7 +629,7 @@ _FX PROCESS *Process_Create(
             RtlInitUnicodeString(&image_uni, image_path);
             if (Box_IsBoxedPath(proc->box, file, &image_uni)) {
 
-                proc->image_copy = TRUE;
+                proc->image_from_box = TRUE;
             }
 
             ++image_name;
@@ -1024,10 +1024,10 @@ _FX void Process_NotifyProcess_Create(
                 // don't put the process into a job if OpenWinClass=*
                 //
 
-                if (new_proc->open_all_win_classes || Conf_Get_Boolean(box->name, L"NoAddProcessToJob", 0, FALSE)) {
+				if (new_proc->open_all_win_classes || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
 
-                    add_process_to_job = FALSE;
-                }
+					add_process_to_job = FALSE;
+				}
 
                 //
                 // on Windows Vista, a forced process may start inside a
@@ -1141,7 +1141,7 @@ _FX void Process_Delete(HANDLE ProcessId)
             if (proc->gui_lock)
                 Mem_FreeLockResource(&proc->gui_lock);
 
-            Token_ResetPrimary(proc);
+			Token_ResetPrimary(proc);
 
             Thread_ReleaseProcess(proc);
 

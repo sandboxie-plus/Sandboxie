@@ -531,6 +531,11 @@ import_fail:
     if (ok)
         ok = Gui_Init3();
 
+	// NoSbieDesk BEGIN
+	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+		return ok;
+	// NoSbieDesk END
+
     SBIEDLL_HOOK_GUI(AttachThreadInput);
 
     return ok;
@@ -952,6 +957,11 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 
                 rc = (ULONG_PTR)NtCurrentThread();
 
+				// OriginalToken BEGIN
+				if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+					rc = 0;
+				else
+				// OriginalToken END
                 if (__sys_NtSetInformationThread)
                 {
                     rc = __sys_NtSetInformationThread(NtCurrentThread(),
@@ -1020,7 +1030,7 @@ ConnectThread:
 
     if (errlvl) {
         WCHAR errtxt[48];
-        Sbie_swprintf(errtxt, L"Win32Init.%d (%08p)", errlvl, (void*)rc);
+        Sbie_snwprintf(errtxt, 48, L"Win32Init.%d (%08p)", errlvl, (void*)rc);
         SbieApi_Log(2205, errtxt);
     }
 
@@ -1165,7 +1175,7 @@ _FX HWND Gui_CreateDummyParentWindow(void)
         WCHAR clsnm[64], *boxed_clsnm;
         WNDCLASS wc;
 
-        Sbie_swprintf(clsnm, L"%s-DUMMY-%d-%d",
+        Sbie_snwprintf(clsnm, 64, L"%s-DUMMY-%d-%d",
                  SBIE, Dll_ProcessId, GetTickCount());
         boxed_clsnm = Gui_CreateClassNameW(clsnm);
 
@@ -2440,13 +2450,13 @@ _FX void *Gui_CallProxyEx(
 
     if (! _QueueName) {
         _QueueName = Dll_Alloc(32 * sizeof(WCHAR));
-        Sbie_swprintf(_QueueName, L"*GUIPROXY_%08X", Dll_SessionId);
+        Sbie_snwprintf(_QueueName, 32, L"*GUIPROXY_%08X", Dll_SessionId);
         //_Ticks = 0;
     }
 
     /*if (1) {
         WCHAR txt[128];
-        Sbie_swprintf(txt, L"Request command is %08X\n", *(ULONG *)req);
+        Sbie_snwprintf(txt, 128, L"Request command is %08X\n", *(ULONG *)req);
         OutputDebugString(txt);
     }*/
 
@@ -2564,7 +2574,7 @@ _FX void *Gui_CallProxyEx(
                 /*_Ticks += GetTickCount() - Ticks0;
                 if (_Ticks > _Ticks1 + 1000) {
                     WCHAR txt[128];
-                    Sbie_swprintf(txt, L"Already spent %d ticks in gui\n", _Ticks);
+                    Sbie_snwprintf(txt, 128, L"Already spent %d ticks in gui\n", _Ticks);
                     OutputDebugString(txt);
                     _Ticks1 = _Ticks;
                 }*/

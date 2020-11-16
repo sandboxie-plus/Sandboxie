@@ -371,6 +371,9 @@ _FX BOOLEAN Proc_Init(void)
 			SBIEDLL_HOOK(Proc_, UpdateProcThreadAttribute);
 	}
 
+	// OriginalToken BEGIN
+	if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+	// OriginalToken END
     if(Dll_OsBuild < 17677) {
     
         SBIEDLL_HOOK(Proc_,CreateProcessInternalW);
@@ -795,6 +798,9 @@ _FX BOOL Proc_CreateProcessInternalW(
             err = GetLastError();
         }
 
+		// OriginalToken BEGIN
+		if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+		// OriginalToken END
         if (ok) {
 
             //
@@ -948,6 +954,19 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 	// if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
 	if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
 		return TRUE;
+
+	// some mitigation flags break SbieDll.dll Injection, so we disable them
+	if (Attribute == 0x00020007) //PROC_THREAD_ATTRIBUTE_MITIGATION_POLICY
+	{
+		DWORD64* policy_value_1 = cbSize >= sizeof(DWORD64) ? lpValue : NULL;
+		//DWORD64* policy_value_2 = cbSize >= sizeof(DWORD64) * 2 ? &((DWORD64*)lpValue)[1] : NULL;
+
+		if (policy_value_1 != NULL)
+		{
+			*policy_value_1 &= ~(0x00000001ui64 << 44); // PROCESS_CREATION_MITIGATION_POLICY_BLOCK_NON_MICROSOFT_BINARIES_ALWAYS_ON;
+			//*policy_value_1 |= (0x00000002ui64 << 44); // PROCESS_CREATION_MITIGATION_POLICY_BLOCK_NON_MICROSOFT_BINARIES_ALWAYS_OFF
+		}
+	}
 
 	return __sys_UpdateProcThreadAttribute(lpAttributeList, dwFlags, Attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize);
 }
@@ -1183,6 +1202,9 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
             err = GetLastError();
         }
 
+		// OriginalToken BEGIN
+		if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+		// OriginalToken END
         if (ok) {
 
             //

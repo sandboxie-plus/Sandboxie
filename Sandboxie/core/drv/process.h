@@ -73,7 +73,7 @@ struct _PROCESS {
     WCHAR  *image_name;
     ULONG   image_name_len;             // in bytes, including NULL
 
-    BOOLEAN image_copy;
+    BOOLEAN image_from_box;
     BOOLEAN image_sbie;
 
     // process creation time and integrity level

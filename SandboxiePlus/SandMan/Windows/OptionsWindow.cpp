@@ -69,7 +69,15 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		ui.chkShowForceTmpl->setEnabled(false);
 		ui.chkShowStopTmpl->setEnabled(false);
 		ui.chkShowAccessTmpl->setEnabled(false);
+
+		ui.chkWithTemplates->setEnabled(false);
 	}
+
+	ui.tabs->setCurrentIndex(0);
+
+	connect(ui.chkWithTemplates, SIGNAL(clicked(bool)), this, SLOT(OnWithTemplates()));
+
+	//m_Template = true;
 
 	m_ConfigDirty = true;
 
@@ -111,7 +119,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//
 
 	// Start
-	connect(ui.chkRestrictStart, SIGNAL(clicked(bool)), this, SLOT(OnRestrictStart()));
+	connect(ui.radStartAll, SIGNAL(clicked(bool)), this, SLOT(OnRestrictStart()));
+	connect(ui.radStartExcept, SIGNAL(clicked(bool)), this, SLOT(OnRestrictStart()));
+	connect(ui.radStartSelected, SIGNAL(clicked(bool)), this, SLOT(OnRestrictStart()));
 	connect(ui.btnAddStartProg, SIGNAL(pressed()), this, SLOT(OnAddStartProg()));
 	connect(ui.btnDelStartProg, SIGNAL(pressed()), this, SLOT(OnDelStartProg()));
 	connect(ui.chkStartBlockMsg, SIGNAL(clicked(bool)), this, SLOT(OnStartChanged()));
@@ -161,6 +171,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	// Templates
 	connect(ui.cmbCategories, SIGNAL(currentIndexChanged(int)), this, SLOT(OnFilterTemplates()));
+	connect(ui.txtTemplates, SIGNAL(textChanged(const QString&)), this, SLOT(OnFilterTemplates()));
 	connect(ui.treeTemplates, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeTemplates, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
 	//
@@ -196,6 +207,13 @@ COptionsWindow::~COptionsWindow()
 void COptionsWindow::closeEvent(QCloseEvent *e)
 {
 	this->deleteLater();
+}
+
+void COptionsWindow::OnWithTemplates()
+{
+	m_Template = ui.chkWithTemplates->isChecked();
+	ui.buttonBox->setEnabled(!m_Template);
+	LoadConfig();
 }
 
 void COptionsWindow::LoadConfig()
@@ -461,7 +479,7 @@ void COptionsWindow::SaveGroups()
 		ProcessGroups.append(Group);
 	}
 
-	m_pBox->UpdateTextList("ProcessGroup", ProcessGroups);
+	m_pBox->UpdateTextList("ProcessGroup", ProcessGroups, m_Template);
 
 	m_GroupsChanged = false;
 }
@@ -620,8 +638,8 @@ void COptionsWindow::SaveForced()
 		}
 	}
 
-	m_pBox->UpdateTextList("ForceProcess", ForceProcess);
-	m_pBox->UpdateTextList("ForceFolder", ForceFolder);
+	m_pBox->UpdateTextList("ForceProcess", ForceProcess, m_Template);
+	m_pBox->UpdateTextList("ForceFolder", ForceFolder, m_Template);
 
 	m_ForcedChanged = false;
 }
@@ -701,8 +719,8 @@ void COptionsWindow::SaveStop()
 		}
 	}
 
-	m_pBox->UpdateTextList("LingerProcess", LingerProcess);
-	m_pBox->UpdateTextList("LeaderProcess", LeaderProcess);
+	m_pBox->UpdateTextList("LingerProcess", LingerProcess, m_Template);
+	m_pBox->UpdateTextList("LeaderProcess", LeaderProcess, m_Template);
 
 	m_StopChanged = false;
 }
@@ -733,11 +751,20 @@ void COptionsWindow::OnDelStopProg()
 
 void COptionsWindow::OnRestrictStart()
 {
-	bool Enable = ui.chkRestrictStart->isChecked();
+	// only sellected
+	bool Enable = ui.radStartSelected->isChecked();
 	if (Enable)
 		SetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*");
 	else
 		DelAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*");
+
+	// all except sellected
+	Enable = ui.radStartExcept->isChecked();
+	if (Enable)
+		SetAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*");
+	else
+		DelAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*");
+
 	//m_StartChanged = true;
 }
 
@@ -1061,7 +1088,11 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 
 void COptionsWindow::SaveAccessList()
 {
-	QMultiMap<QString, QString> AccessMap;
+	QStringList Keys = QStringList() << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
+									<< "OpenKeyPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath" 
+									<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid";
+
+	QMap<QString, QList<QString>> AccessMap;
 	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
 	{
 		QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
@@ -1073,11 +1104,11 @@ void COptionsWindow::SaveAccessList()
 		QString Value = pItem->data(3, Qt::UserRole).toString();
 		if (!Program.isEmpty())
 			Value.prepend(Program + ",");
-		AccessMap.insertMulti(MakeAccessStr((EAccessType)Type, (EAccessMode)Mode), Value);
+		AccessMap[MakeAccessStr((EAccessType)Type, (EAccessMode)Mode)].append(Value);
 	}
 
-	foreach(const QString& Key, AccessMap.uniqueKeys())
-		m_pBox->UpdateTextList(Key, AccessMap.values(Key));
+	foreach(const QString& Key, Keys)
+		m_pBox->UpdateTextList(Key, AccessMap[Key], m_Template);
 	
 	m_AccessChanged = false;
 }
@@ -1346,6 +1377,7 @@ void COptionsWindow::ShowTemplates()
 	ui.treeTemplates->clear();
 
 	QString Category = ui.cmbCategories->currentData().toString();
+	QString Filter = ui.txtTemplates->text();
 
 	for (QMultiMap<QString, QPair<QString, QString>>::iterator I = m_AllTemplates.begin(); I != m_AllTemplates.end(); ++I)
 	{
@@ -1353,6 +1385,9 @@ void COptionsWindow::ShowTemplates()
 			continue;
 
 		QString Name = I.value().first.mid(9);
+
+		if (!Name.isEmpty() && Name.indexOf(Filter, 0, Qt::CaseInsensitive) == -1)
+			continue;
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setText(0, I.key());
@@ -1402,7 +1437,7 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 
 void COptionsWindow::SaveTemplates()
 {
-	m_pBox->UpdateTextList("Template", m_BoxTemplates);
+	m_pBox->UpdateTextList("Template", m_BoxTemplates, m_Template);
 
 	m_TemplatesChanged = false;
 }
@@ -1421,7 +1456,12 @@ void COptionsWindow::OnTab()
 
 		if (ui.tabs->currentWidget() == ui.tabStart)
 		{
-			ui.chkRestrictStart->setChecked(GetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*") != NULL);
+			if(GetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*") != NULL)
+				ui.radStartSelected->setChecked(true);
+			else if (GetAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*") != NULL)
+				ui.radStartExcept->setChecked(true);
+			else
+				ui.radStartAll->setChecked(true);
 			CopyGroupToList("<StartRunAccess>", ui.treeStart);
 		}
 		else if (ui.tabs->currentWidget() == ui.tabInternet)

@@ -63,7 +63,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		connect(ui.btnAddWarnProg, SIGNAL(pressed()), this, SLOT(OnAddWarnProg()));
 		connect(ui.btnDelWarnProg, SIGNAL(pressed()), this, SLOT(OnDelWarnProg()));
 
-		QStringList WarnProgs = theAPI->GetGlobalSettings()->GetTextList("AlertProcess");
+		QStringList WarnProgs = theAPI->GetGlobalSettings()->GetTextList("AlertProcess", false);
 		foreach(const QString& Value, WarnProgs) {
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
 			pItem->setText(0, Value);
@@ -195,7 +195,7 @@ void CSettingsWindow::apply()
 				WarnProgs.append(pItem->text(0));
 			}
 
-			theAPI->GetGlobalSettings()->UpdateTextList("AlertProcess", WarnProgs);
+			theAPI->GetGlobalSettings()->UpdateTextList("AlertProcess", WarnProgs, false);
 			m_WarnProgsChanged = false;
 		}
 
@@ -206,13 +206,13 @@ void CSettingsWindow::apply()
 			for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
 				QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
 				if (pItem->checkState(0) == Qt::Checked)
-					Used.append(pItem->text(0));
+					Used.append(pItem->data(0, Qt::UserRole).toString());
 				else
-					Rejected.append(pItem->text(0));
+					Rejected.append(pItem->data(0, Qt::UserRole).toString());
 			}
 
-			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used);
-			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected);
+			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
+			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected, false);
 			m_CompatChanged = false;
 		}
 	}
@@ -260,8 +260,11 @@ void CSettingsWindow::OnTab()
 			if (I.value() == CSbieTemplates::eNone)
 				continue;
 
+			QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + I.key(), theAPI));
+
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
-			pItem->setText(0, I.key());
+			pItem->setText(0, pTemplate->GetText("Tmpl.Title"));
+			pItem->setData(0, Qt::UserRole, I.key());
 			pItem->setCheckState(0, (I.value() & CSbieTemplates::eEnabled) ? Qt::Checked : Qt::Unchecked);
 			ui.treeCompat->addTopLevelItem(pItem);
 		}

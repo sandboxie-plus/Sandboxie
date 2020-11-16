@@ -197,7 +197,7 @@ SB_STATUS CSbieAPI::Connect()
 	m->lastRecordNum = 0;
 
 #ifndef _DEBUG
-	QStringList CompatVersions = QStringList () << "5.43" << "5.43.5" << "5.44.0";
+	QStringList CompatVersions = QStringList () << "5.43" << "5.43.5" << "5.44.0" << "5.44.1";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -1448,9 +1448,11 @@ bool CSbieAPI::IsMonitoring()
 
 bool CSbieAPI::GetMonitor()
 {
+	const int max_len = 256; // versions prioir to 5.44.1 check for max_len <= 256 increase this later
+
 	USHORT type;
 	ULONG64 pid;
-	WCHAR name[256 + 1] = { 0 };
+	WCHAR name[max_len + 1] = { 0 };
 
 	ULONG RecordNum = m->lastRecordNum;
 
@@ -1462,7 +1464,7 @@ bool CSbieAPI::GetMonitor()
 	args->name_seq.val = &RecordNum;
     args->name_type.val = &type;
 	args->name_pid.val = &pid;
-    args->name_len.val = 256 * sizeof(WCHAR);
+    args->name_len.val = max_len * sizeof(WCHAR);
     args->name_ptr.val = name;
     
 	if (!NT_SUCCESS(m->IoControl(parms)))
@@ -1475,7 +1477,18 @@ bool CSbieAPI::GetMonitor()
 	if (type == 0)
 		return false;
 
-	CResLogEntryPtr LogEntry = CResLogEntryPtr(new CResLogEntry(pid, type, QString::fromWCharArray(name)));
+	QString data = QString::fromWCharArray(name);
+	if (data.length() == max_len - 1) // if we got exactly the max length assume data were truncated and indicate accordingly...
+		data += "..."; 
+
+	// cleanup debug output strings and drop empty once.
+	if (type == (MONITOR_OTHER | MONITOR_TRACE)) {
+		data = data.trimmed();
+		if (data.isEmpty())
+			return true;
+	}
+
+	CResLogEntryPtr LogEntry = CResLogEntryPtr(new CResLogEntry(pid, type, data));
 
 	QWriteLocker Lock(&m_ResLogMutex); 
 	if (!m_ResLogList.isEmpty() && m_ResLogList.last()->GetValue() == LogEntry->GetValue())
@@ -1504,23 +1517,8 @@ CResLogEntry::CResLogEntry(quint64 ProcessId, quint32 Type, const QString& Value
 {
 	m_ProcessId = ProcessId;
 	m_Name = Value;
-	switch (Type & 0x0FFF)
-	{
-	case MONITOR_PIPE:			m_Type = "Pipe"; break;
-	case MONITOR_IPC:			m_Type = "Ipc"; break;
-	case MONITOR_WINCLASS:		m_Type = "WinClass"; break;
-	case MONITOR_DRIVE:			m_Type = "Drive"; break;
-	case MONITOR_COMCLASS:		m_Type = "ComClass"; break;
-	case MONITOR_IGNORE:		m_Type = "Ignore"; break;
-	case MONITOR_IMAGE:			m_Type = "Image"; break;
-	case MONITOR_FILE_OR_KEY:	m_Type = "File"; break;
-	case MONITOR_OTHER:			m_Type = "Other"; break;
-	default:					m_Type = "Unknown: " + QString::number(Type);
-	}
-	m_Open = (Type & MONITOR_OPEN) != 0;
-	m_Deny = (Type & MONITOR_DENY) != 0;
-	//m_Verbose = (Type & MONITOR_VERBOSE) != 0;
-	//m_User = (Type & MONITOR_USER) != 0;
+	m_Type.Flags = Type;
+
 	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
 	m_Counter = 0;
 
@@ -1528,12 +1526,32 @@ CResLogEntry::CResLogEntry(quint64 ProcessId, quint32 Type, const QString& Value
 	m_uid = uid.fetch_add(1);
 }
 
+QString CResLogEntry::GetTypeStr() const
+{
+	switch (m_Type.Type)
+	{
+	case MONITOR_PIPE:			return "Pipe"; 
+	case MONITOR_IPC:			return "Ipc"; 
+	case MONITOR_WINCLASS:		return "WinClass"; 
+	case MONITOR_DRIVE:			return "Drive"; 
+	case MONITOR_COMCLASS:		return "ComClass"; 
+	case MONITOR_IGNORE:		return "Ignore"; 
+	case MONITOR_IMAGE:			return "Image"; 
+	case MONITOR_FILE_OR_KEY:	return "File/Key"; 
+	case MONITOR_OTHER:			return "Debug"; 
+	default:					return "Unknown: " + QString::number(m_Type.Type);
+	}
+}
+
 QString CResLogEntry::GetStautsStr() const
 {
+	if (m_Type.Trace)
+		return "Trace";
+
 	QString Str;
-	if(m_Open)
+	if(m_Type.Open)
 		Str += "O ";
-	if(m_Deny)
+	if(m_Type.Deny)
 		Str += "X ";
 	return Str;
 }

@@ -1060,7 +1060,7 @@ trace:
         if (Letter2) {
             swprintf(str, L"(%c%c) %08X %06d",
                                 Letter1, Letter2, GrantedAccess, (int)pid);
-            Log_Debug_Msg(str, Driver_Empty);
+            Log_Debug_Msg(MONITOR_IPC, str, Driver_Empty);
         }
     }
 

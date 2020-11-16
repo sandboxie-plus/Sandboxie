@@ -728,9 +728,9 @@ _FX HWND Gui_FindWindowW(
     WCHAR txt[256];
 
     if (((ULONG_PTR)lpClassName & 0xFFFF0000) != 0)
-        Sbie_swprintf(txt, L"FindWindowW   - %s\n", lpClassName);
+        Sbie_snwprintf(txt, 256, L"FindWindowW   - %s\n", lpClassName);
     else
-        Sbie_swprintf(txt, L"FindWindowW   - %X\n", lpClassName);
+        Sbie_snwprintf(txt, 256, L"FindWindowW   - %X\n", lpClassName);
     OutputDebugString(txt);
 #endif
 
@@ -762,7 +762,7 @@ _FX HWND Gui_FindWindowW(
         Gui_Free(clsnm);
 
 #ifdef DEBUG_FINDWINDOW
-    Sbie_swprintf(txt, L"FindWindowW   - Result HWND %X\n", hwndResult);
+    Sbie_snwprintf(txt, 256, L"FindWindowW   - Result HWND %X\n", hwndResult);
     OutputDebugString(txt);
 #endif
 
@@ -786,9 +786,9 @@ _FX HWND Gui_FindWindowA(
 #ifdef DEBUG_FINDWINDOW
     WCHAR txt[256];
     if (((ULONG_PTR)lpClassName & 0xFFFF0000) != 0)
-        Sbie_swprintf(txt, L"FindWindowA   - %S\n", lpClassName);
+        Sbie_snwprintf(txt, 256, L"FindWindowA   - %S\n", lpClassName);
     else
-        Sbie_swprintf(txt, L"FindWindowA   - %X\n", lpClassName);
+		Sbie_snwprintf(txt, 256, L"FindWindowA   - %X\n", lpClassName);
     OutputDebugString(txt);
 #endif
 
@@ -820,7 +820,7 @@ _FX HWND Gui_FindWindowA(
         Gui_Free(clsnm);
 
 #ifdef DEBUG_FINDWINDOW
-    Sbie_swprintf(txt, L"FindWindowA   - Result HWND %X\n", hwndResult);
+	Sbie_snwprintf(txt, 256, L"FindWindowA   - Result HWND %X\n", hwndResult);
     OutputDebugString(txt);
 #endif
 
@@ -845,9 +845,9 @@ _FX HWND Gui_FindWindowExW(
 #ifdef DEBUG_FINDWINDOW
     WCHAR txt[256];
     if (((ULONG_PTR)lpClassName & 0xFFFF0000) != 0)
-        Sbie_swprintf(txt, L"FindWindowExW - %s\n", lpClassName);
+		Sbie_snwprintf(txt, 256, L"FindWindowExW - %s\n", lpClassName);
     else
-        Sbie_swprintf(txt, L"FindWindowExW - %X\n", lpClassName);
+		Sbie_snwprintf(txt, 256, L"FindWindowExW - %X\n", lpClassName);
     OutputDebugString(txt);
 #endif
 
@@ -881,7 +881,7 @@ _FX HWND Gui_FindWindowExW(
         Gui_Free(clsnm);
 
 #ifdef DEBUG_FINDWINDOW
-    Sbie_swprintf(txt, L"FindWindowExW - Result HWND %X\n", hwndResult);
+	Sbie_snwprintf(txt, 256, L"FindWindowExW - Result HWND %X\n", hwndResult);
     OutputDebugString(txt);
 #endif
 
@@ -906,9 +906,9 @@ _FX HWND Gui_FindWindowExA(
 #ifdef DEBUG_FINDWINDOW
     WCHAR txt[256];
     if (((ULONG_PTR)lpClassName & 0xFFFF0000) != 0)
-        Sbie_swprintf(txt, L"FindWindowExA - %S\n", lpClassName);
+		Sbie_snwprintf(txt, 256, L"FindWindowExA - %S\n", lpClassName);
     else
-        Sbie_swprintf(txt, L"FindWindowExA - %X\n", lpClassName);
+		Sbie_snwprintf(txt, 256, L"FindWindowExA - %X\n", lpClassName);
     OutputDebugString(txt);
 #endif
 
@@ -942,7 +942,7 @@ _FX HWND Gui_FindWindowExA(
         Gui_Free(clsnm);
 
 #ifdef DEBUG_FINDWINDOW
-    Sbie_swprintf(txt, L"FindWindowExA - Result HWND %X\n", hwndResult);
+	Sbie_snwprintf(txt, 256, L"FindWindowExA - Result HWND %X\n", hwndResult);
     OutputDebugString(txt);
 #endif
 
@@ -962,7 +962,7 @@ _FX void Gui_MonitorW(const WCHAR *clsnm, USHORT monflag, HWND hwnd)
         wcsncpy(text, Gui_UnCreateClassName(clsnm), 128);
         text[128] = L'\0';
     } else
-        Sbie_swprintf(text, L"#%d", PtrToUlong(clsnm) & 0xFFFF);
+        Sbie_snwprintf(text, 130, L"#%d", PtrToUlong(clsnm) & 0xFFFF);
     if ((! hwnd) && (! monflag))
         monflag |= MONITOR_DENY;
     SbieApi_MonitorPut(MONITOR_WINCLASS | monflag, text);

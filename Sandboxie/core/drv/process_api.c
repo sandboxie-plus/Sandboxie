@@ -360,7 +360,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                     flags |= SBIE_FLAG_PROTECTED_PROCESS;
                 if (proc->image_sbie)
                     flags |= SBIE_FLAG_IMAGE_FROM_SBIE_DIR;
-                if (proc->image_copy)
+                if (proc->image_from_box)
                     flags |= SBIE_FLAG_IMAGE_FROM_SANDBOX;
                 if (proc->in_pca_job)
                     flags |= SBIE_FLAG_PROCESS_IN_PCA_JOB;

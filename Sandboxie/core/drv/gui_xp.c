@@ -1348,7 +1348,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
                 swprintf(access_str,
                     L"(GD) ThrdMessage %05d (%04X) to tid=%06d    pid=%06d",
                     Msg, Msg, idThread, idProcess);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
 
             return 0;
@@ -1441,7 +1441,7 @@ _FX ULONG_PTR Gui_NtUserSendInput(
             if (letter) {
 
                 swprintf(access_str, L"(G%c) SendInput", letter);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
         }
 
@@ -1537,7 +1537,7 @@ _FX ULONG_PTR Gui_NtUserSetWindowsHookEx(
                 swprintf(access_str,
                          L"(G%c) WinHook %04d on tid=%06d pid=%06d",
                          letter, HookType, idThread, idProcess);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
         }
 
@@ -1594,7 +1594,7 @@ _FX ULONG_PTR Gui_NtUserSetWinEventHook(
 
                 swprintf(access_str, L"(G%c) AccHook on tid=%06d pid=%06d",
                          letter, idThread, idProcess);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
         }
 

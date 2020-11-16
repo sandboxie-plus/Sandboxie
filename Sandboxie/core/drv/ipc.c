@@ -701,7 +701,7 @@ _FX BOOLEAN Ipc_IsComServer(PROCESS *proc)
     //   or kmplayer.exe    (from outside the sandbox)
     //
 
-    if (proc->image_copy)
+    if (proc->image_from_box)
         return FALSE;
 
     if (_wcsicmp(proc->image_name, L"iexplore.exe") != 0 &&
@@ -925,7 +925,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
         if (letter) {
             swprintf(access_str, L"(I%c) %08X", letter, GrantedAccess);
-            Log_Debug_Msg(access_str, Name->Buffer);
+            Log_Debug_Msg(MONITOR_IPC, access_str, Name->Buffer);
         }
     }
 

@@ -50,10 +50,30 @@ typedef struct _SBIELOW_DATA {
     ULONG       api_sbiedrv_ctlcode;
     ULONG       api_invoke_syscall;
 
-    BOOLEAN     is_wow64;
-    BOOLEAN     long_diff;
-    BOOLEAN     bHostInject;
-    BOOLEAN     is_win10;
+	BOOLEAN     is_wow64;
+	BOOLEAN     long_diff;
+	BOOLEAN     bHostInject;
+	BOOLEAN     is_win10;
+
+	/*union {
+		ULONG	init_flags;
+		struct {
+			ULONG
+				is_wow64		: 1,
+				reservd_1		: 7,
+
+				long_diff		: 1,
+				reservd_2		: 7,
+
+				bHostInject		: 1,
+				bNoSysHooks		: 1,
+				bNoConsole		: 1,
+				reservd_3		: 5,
+
+				is_win10		: 1,
+				reservd_4		: 7;
+		};
+	};*/
 
     __declspec(align(16))
         UCHAR   LdrInitializeThunk_tramp[48];

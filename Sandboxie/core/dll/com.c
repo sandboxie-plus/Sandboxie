@@ -3111,7 +3111,7 @@ _FX void *Com_Alloc(ULONG len)
 
     /*if (Com_Mem_Trace) {
         WCHAR txt[128];
-        Sbie_swprintf(txt, L"ALLOC <%s> AT <%08X>\n", Com_Mem_Trace, ptr);
+        Sbie_snwprintf(txt, 128, L"ALLOC <%s> AT <%08X>\n", Com_Mem_Trace, ptr);
         OutputDebugString(txt);
         Com_Mem_Trace = NULL;
     }*/
@@ -3129,7 +3129,7 @@ _FX void Com_Free(void *ptr)
 {
     /*if (Com_Mem_Trace) {
         WCHAR txt[128];
-        Sbie_swprintf(txt, L"FREE  <%s> AT <%08X>\n", Com_Mem_Trace, ptr);
+        Sbie_snwprintf(txt, 128, L"FREE  <%s> AT <%08X>\n", Com_Mem_Trace, ptr);
         OutputDebugString(txt);
         Com_Mem_Trace = NULL;
     }*/
@@ -3229,7 +3229,7 @@ _FX void Com_Trace(
         return;
 
     text = Com_Alloc(1024 * sizeof(WCHAR));
-    ptr = text + Sbie_swprintf(text, L"SBIE %s <%08X> ", TraceType, hr);
+    ptr = text + Sbie_snwprintf(text, 1024, L"SBIE %s <%08X> ", TraceType, hr);
 
     if (rclsid) {
         Com_Trace_Guid(ptr, rclsid, L"CLSID");

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 DavidXanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -16,45 +16,21 @@
  */
 
 //---------------------------------------------------------------------------
-// Session Management
+// Sandboxie Trace
 //---------------------------------------------------------------------------
 
 
-#ifndef _MY_SESSION_H
-#define _MY_SESSION_H
-
-
-#include "driver.h"
-#include "box.h"
-
-
-//---------------------------------------------------------------------------
-// Functions
-//---------------------------------------------------------------------------
-
-
-BOOLEAN Session_Init(void);
-
-void Session_Unload(void);
-
-void Session_Cancel(HANDLE ProcessId);
-
-BOOLEAN Session_IsForceDisabled(ULONG SessionId);
-
-void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid);
-
-void Session_MonitorPutEx(USHORT type, const WCHAR** strings, HANDLE pid);
-
-
-//---------------------------------------------------------------------------
-// Variables
-//---------------------------------------------------------------------------
-
-
-extern volatile LONG Session_MonitorCount;
+#ifndef _MY_TRACE_H
+#define _MY_TRACE_H
 
 
 //---------------------------------------------------------------------------
 
 
-#endif // _MY_SESSION_H
+int Trace_Init(void);
+
+
+//---------------------------------------------------------------------------
+
+
+#endif /* _MY_TRACE_H */

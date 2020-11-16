@@ -22,6 +22,7 @@
 
 #include "dll.h"
 #include "obj.h"
+#include "trace.h"
 #include "debug.h"
 #include "core/low/lowdata.h"
 #include "common/my_version.h"
@@ -200,20 +201,23 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
 
 _FX void Dll_InitInjected(void)
 {
-    //
-    // Dll_InitInjected is executed by Dll_Ordinal1 in the context
-    // of a program that is running in the sandbox
-    //
+	//
+	// Dll_InitInjected is executed by Dll_Ordinal1 in the context
+	// of a program that is running in the sandbox
+	//
 
-    LONG status;
-    BOOLEAN ok;
-    ULONG BoxFilePathLen;
-    ULONG BoxKeyPathLen;
-    ULONG BoxIpcPathLen;
+	LONG status;
+	BOOLEAN ok;
+	ULONG BoxFilePathLen;
+	ULONG BoxKeyPathLen;
+	ULONG BoxIpcPathLen;
 
-#ifdef WITH_DEBUG
-	OutputDebugString(L"SbieDll: Dll_InitInjected");
-#endif WITH_DEBUG
+	if (SbieApi_QueryConfBool(NULL, L"DebugTrace", FALSE)) {
+
+		Trace_Init();
+
+		OutputDebugString(L"SbieDll injected...");
+	}
 
     //
     // confirm the process is sandboxed before going further
@@ -632,7 +636,7 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
-    bHostInject = data->bHostInject;
+    bHostInject = data->bHostInject == 1;
 
     //
     // the SbieLow data area includes values that are useful to us

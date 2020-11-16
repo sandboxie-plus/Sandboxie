@@ -246,7 +246,7 @@ ALIGNED void Debug_RtlSetLastWin32Error(ULONG err)
     if (err) {
         if (InterlockedIncrement(&InError) == 1) {
             WCHAR txt[64];
-            Sbie_swprintf(txt, L"SetErr %d\n", err);
+            Sbie_snwprintf(txt, 64, L"SetErr %d\n", err);
             OutputDebugString(txt);
             InterlockedDecrement(&InError);
         }
@@ -300,7 +300,7 @@ ALIGNED BOOL Debug_DebugActiveProcess(ULONG dwProcessId)
     ULONG err;
 
     WCHAR txt[128];
-    Sbie_swprintf(txt, L"Debug Active Process Id %d\n", dwProcessId);
+    Sbie_snwprintf(txt, 128, L"Debug Active Process Id %d\n", dwProcessId);
     OutputDebugString(txt);
     Debug_dwProcessId = dwProcessId;
 
@@ -329,7 +329,7 @@ ALIGNED BOOL Debug_WaitForDebugEvent(
     ok = __sys_WaitForDebugEvent(lpDebugEvent, dwMilliseconds);
     err = GetLastError();
 
-    Sbie_swprintf(txt, L"Debug Event %d on Process Id %d\n",
+    Sbie_snwprintf(txt, 256, L"Debug Event %d on Process Id %d\n",
         ok ? lpDebugEvent->dwDebugEventCode : 0,
         ok ? lpDebugEvent->dwProcessId : 0);
     OutputDebugString(txt);

@@ -18,7 +18,7 @@ protected:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// CSandBox
+// CSandBoxPlus
 //
 
 class CSandBoxPlus : public CSandBox
@@ -33,19 +33,25 @@ public:
 	virtual QString			GetStatusStr() const;
 
 	virtual void			SetLogApi(bool bEnable);
-	virtual bool			HasLogApi() const { return m_bLogApiFound; }
+	virtual bool			HasLogApi() const					{ return m_bLogApiFound; }
 
 	virtual void			SetINetBlock(bool bEnable);
-	virtual bool			IsINetBlocked() const { return m_bINetBlocked; }
+	virtual bool			IsINetBlocked() const				{ return m_bINetBlocked; }
 
 	virtual void			SetAllowShares(bool bEnable);
-	virtual bool			HasSharesAccess() const { return m_bSharesAllowed; }
+	virtual bool			HasSharesAccess() const				{ return m_bSharesAllowed; }
 
 	virtual void			SetDropRights(bool bEnable);
-	virtual bool			IsDropRights() const { return m_bDropRights; }
+	virtual bool			IsDropRights() const				{ return m_bDropRights; }
 
-	virtual bool			IsSecurityRestricted() const { return m_bSecurityRestricted; }
-	virtual bool			IsUnsecureDebugging() const { return m_iUnsecureDebugging != 0; }
+	virtual bool			IsSecurityRestricted() const		{ return m_bSecurityRestricted; }
+	virtual bool			IsUnsecureDebugging() const			{ return m_iUnsecureDebugging != 0; }
+
+	virtual void			BlockProgram(const QString& ProgName);
+	virtual void			SetLingeringProgram(const QString& ProgName, bool bSet);
+	virtual int				IsLingeringProgram(const QString& ProgName);
+	virtual void			SetLeaderProgram(const QString& ProgName, bool bSet);
+	virtual int				IsLeaderProgram(const QString& ProgName);
 
 protected:
 	virtual bool			CheckOpenToken() const;
@@ -57,4 +63,23 @@ protected:
 
 	bool					m_bSecurityRestricted;
 	int						m_iUnsecureDebugging;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// CSbieProcess
+//
+
+class CSbieProcess : public CBoxedProcess
+{
+	Q_OBJECT
+public:
+	CSbieProcess(quint64 ProcessId, class CSandBox* pBox) : CBoxedProcess(ProcessId, pBox) {}
+
+	virtual void BlockProgram()									{ GetBox()->BlockProgram(m_ImageName); }
+	virtual void SetLingeringProgram(bool bSet)					{ GetBox()->SetLingeringProgram(m_ImageName, bSet); }
+	virtual int	 IsLingeringProgram()							{ return GetBox()->IsLingeringProgram(m_ImageName); }
+	virtual void SetLeaderProgram(bool bSet)					{ GetBox()->SetLeaderProgram(m_ImageName, bSet); }
+	virtual int	 IsLeaderProgram()								{ return GetBox()->IsLeaderProgram(m_ImageName); }
+
+	virtual CSandBoxPlus* GetBox()								{ return qobject_cast<CSandBoxPlus*>(m_pBox); }
 };

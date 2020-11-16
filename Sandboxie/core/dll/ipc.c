@@ -402,7 +402,7 @@ _FX void Ipc_CreateObjects(void)
     // the last path component (the dummy name itself)
     //
 
-    Sbie_swprintf(str, SBIE_BOXED_ L"DummyEvent_%d", Dll_ProcessId);
+    Sbie_snwprintf(str, 64, SBIE_BOXED_ L"DummyEvent_%d", Dll_ProcessId);
     handle = CreateEvent(NULL, FALSE, FALSE, str);
     if (! handle) {
         errlvl = 11;

@@ -2,13 +2,6 @@
 
 Sandboxie is sandbox-based isolation software for 32- and 64-bit Windows NT-based operating systems. It was developed by Sophos (which acquired it from Invincea, which acquired it earlier from the original author Ronen Tzur). It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying the local or mapped drive. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.
 
-# Sandboxie-Plus
-Adds new functionality like box snapshots, and better logging/tracing and provides a new Qt based UI to utilize that functionality.
-
-## Sandboxie-Classic Documentation
-
-The archived documentation of sandboxie can be found at: https://xanasoft.com/sandboxie/
-
 
 ## History
 
@@ -24,4 +17,4 @@ In 2020 Sophos has released Sandboxie as Open Source under the GPLv3 licence to 
 
 ## Support
 
-If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos or directly through paypal with the donation link on my home page: https://xanasoft.com/
+If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos

@@ -633,7 +633,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         return FALSE;
     }
 
-    if (! proc->image_copy) {
+    if (! proc->image_from_box) {
 
         ok = Process_GetPaths(proc, open_file_paths, _OpenFile, TRUE);
 
@@ -984,7 +984,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
                     L"(FI) %08X %s", device_type, device_name_ptr);
 
                 if (proc->file_trace & TRACE_IGNORE)
-                    Log_Debug_Msg(ignore_str, Driver_Empty);
+                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
                 if (Session_MonitorCount &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
@@ -1487,7 +1487,7 @@ skip_due_to_home_folder:
             swprintf(access_str, L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
-            Log_Debug_Msg(access_str, Name->Name.Buffer);
+            Log_Debug_Msg(IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE_OR_KEY, access_str, Name->Name.Buffer);
         }
     }
 

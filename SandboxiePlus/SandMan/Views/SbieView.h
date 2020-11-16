@@ -61,6 +61,10 @@ private:
 	int						m_iMenuBox;
 
 	QAction*				m_pMenuTerminate;
+	QMenu*					m_pMenuPreset;
+	QAction*				m_pMenuBlackList;
+	QAction*				m_pMenuMarkLinger;
+	QAction*				m_pMenuMarkLeader;
 	QAction*				m_pMenuSuspend;
 	QAction*				m_pMenuResume;
 	int						m_iMenuProc;

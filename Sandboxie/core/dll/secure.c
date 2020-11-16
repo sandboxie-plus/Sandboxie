@@ -675,7 +675,7 @@ _FX NTSTATUS Secure_NtSetSecurityObject(
     }
 
     //WCHAR txt[256];
-    //Sbie_swprintf(txt, L"NtSetSecurityObject Open=%d Handle=%08X Type=%d Info=%08X\n", IsOpenPath, Handle, type, SecurityInformation);
+    //Sbie_snwprintf(txt, 256, L"NtSetSecurityObject Open=%d Handle=%08X Type=%d Info=%08X\n", IsOpenPath, Handle, type, SecurityInformation);
     //OutputDebugString(txt);
     //while (! IsDebuggerPresent()) Sleep(500); __debugbreak();
 

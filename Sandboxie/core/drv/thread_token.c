@@ -94,7 +94,7 @@ static NTSTATUS Thread_SetInformationThread_ImpersonationToken(
 
 static NTSTATUS Thread_CheckTokenForImpersonation(
     void *TokenObject, BOOLEAN CheckTokenType,
-    BOOLEAN DropRights, ULONG SessionId);
+	PROCESS *proc);
 
 static NTSTATUS Thread_SetInformationThread_ChangeNotifyToken(PROCESS *proc);
 
@@ -1243,13 +1243,9 @@ _FX NTSTATUS Thread_SetInformationThread_ImpersonationToken(
                     MyTokenHandle, TOKEN_IMPERSONATE,
                     *SeTokenObjectType, UserMode, &TokenObject, NULL);
 
-		// OpenToken BEGIN
-		if (!(Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
-		// OpenToken END
         if (NT_SUCCESS(status)) {
 
-            status = Thread_CheckTokenForImpersonation(
-                TokenObject, TRUE, proc->drop_rights, proc->box->session_id);
+            status = Thread_CheckTokenForImpersonation(TokenObject, TRUE, proc);
 
             if (! NT_SUCCESS(status))
                 ObDereferenceObject(TokenObject);
@@ -1344,9 +1340,21 @@ _FX NTSTATUS Thread_SetInformationThread_ImpersonationToken(
 
 _FX NTSTATUS Thread_CheckTokenForImpersonation(
     void *TokenObject, BOOLEAN CheckTokenType,
-    BOOLEAN DropRights, ULONG SessionId)
+	PROCESS *proc)
 {
     NTSTATUS status;
+
+	// OpenToken BEGIN
+	if ((Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
+		return STATUS_SUCCESS;
+	// OpenToken END
+	// OriginalToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+		return STATUS_SUCCESS;
+	// OriginalToken END
+
+	BOOLEAN DropRights = proc->drop_rights;
+	ULONG SessionId = proc->box->session_id;
 
     //
     // make sure this is an impersonation token
@@ -1588,8 +1596,7 @@ _FX NTSTATUS Thread_CheckTokenObject(
     // by a process in a sandbox
     //
 
-    return Thread_CheckTokenForImpersonation(
-                Object, FALSE, proc->drop_rights, proc->box->session_id);
+    return Thread_CheckTokenForImpersonation(Object, FALSE, proc);
 }
 
 

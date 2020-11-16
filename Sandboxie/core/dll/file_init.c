@@ -430,7 +430,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
         path_len = 16;
         path = Dll_Alloc(path_len);
-        Sbie_swprintf(path, L"\\??\\%c:", L'A' + drive);
+        Sbie_snwprintf(path, 8, L"\\??\\%c:", L'A' + drive);
 
         RtlInitUnicodeString(&objname, path);
 
@@ -483,7 +483,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
                 status != STATUS_OBJECT_TYPE_MISMATCH &&
                 status != STATUS_ACCESS_DENIED) {
 
-                Sbie_swprintf(error_str, L"%c [%08X]", L'A' + drive, status);
+                Sbie_snwprintf(error_str, 16, L"%c [%08X]", L'A' + drive, status);
                 SbieApi_Log(2307, error_str);
             }
 
@@ -578,7 +578,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
         if (! NT_SUCCESS(status)) {
 
-            Sbie_swprintf(error_str, L"%c [%08X]", L'A' + drive, status);
+            Sbie_snwprintf(error_str, 16, L"%c [%08X]", L'A' + drive, status);
             SbieApi_Log(2307, error_str);
         }
     }
@@ -1015,7 +1015,7 @@ _FX BOOLEAN File_InitUsers(void)
 
     if (errlvl) {
         WCHAR error_str[16];
-        Sbie_swprintf(error_str, L"[%08X / %02X]", status, errlvl);
+        Sbie_snwprintf(error_str, 16, L"[%08X / %02X]", status, errlvl);
         SbieApi_Log(2306, error_str);
         return FALSE;
     }

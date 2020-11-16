@@ -112,9 +112,9 @@ QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates) co
 	return TextList;
 }
 
-SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& List)
+SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& List, bool withTemplates)
 {
-	QStringList OldSettings = GetTextList(Setting);
+	QStringList OldSettings = GetTextList(Setting, withTemplates);
 	QStringList NewSettings;
 	foreach(const QString& Value, List) {
 		if (!OldSettings.removeOne(Value))

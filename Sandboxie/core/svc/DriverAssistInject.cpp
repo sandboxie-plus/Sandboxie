@@ -67,11 +67,20 @@ void DriverAssist::InjectLow(void *_msg)
 		goto finish;
 	}
 
+	WCHAR boxname[48];
+	errlvl = SbieApi_QueryProcessEx2((HANDLE)msg->process_id, 0, boxname, NULL, NULL, NULL, NULL);
+	if (errlvl != 0)
+		goto finish;
+
 	//
 	// inject the lowlevel.dll into the target process
 	//
 
-	errlvl = SbieDll_InjectLow(hProcess, msg->is_wow64, msg->bHostInject, TRUE);
+	BOOLEAN bHostInject = msg->bHostInject;
+	if (!bHostInject && SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE))
+		bHostInject = 2;
+
+	errlvl = SbieDll_InjectLow(hProcess, msg->is_wow64, bHostInject, TRUE);
 	if(errlvl != 0)
 		goto finish;
 
@@ -81,6 +90,9 @@ void DriverAssist::InjectLow(void *_msg)
 
     if (!msg->bHostInject)
     {
+		// NoSbieDesk BEGIN
+		//if(status != 0 || !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE)) // we need the proxy for com as well...
+		// NoSbieDesk END
         if(! GuiServer::GetInstance()->InitProcess(
                 hProcess, msg->process_id, msg->session_id,
                 msg->add_to_job)) {

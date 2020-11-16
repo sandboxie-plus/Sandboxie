@@ -477,7 +477,7 @@ _FX LRESULT Gui_SendPostMessageCommon(
     /*if (uMsg >= WM_DDE_FIRST && uMsg <= WM_DDE_LAST) {
         WCHAR txt[128];
         UCHAR *ptr = (UCHAR *)&which;
-        Sbie_swprintf(txt, L"Doing (%c%c%c%c) MSG=%04X to HWND=%08X from WPARAM=%08X\n",
+        Sbie_snwprintf(txt, 128, L"Doing (%c%c%c%c) MSG=%04X to HWND=%08X from WPARAM=%08X\n",
                 ptr[3],ptr[2],ptr[1],ptr[0], uMsg, hWnd, wParam);
         OutputDebugString(txt);
     }*/
@@ -792,7 +792,7 @@ fail:
         return TRUE;
     }
 
-    Sbie_swprintf(name, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
+    Sbie_snwprintf(name, 48, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
     SbieApi_MonitorPut(MONITOR_WINCLASS | MONITOR_DENY, name);
 
     return FALSE;

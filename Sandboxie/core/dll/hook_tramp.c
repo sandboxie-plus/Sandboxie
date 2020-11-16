@@ -21,9 +21,7 @@
 
 
 
-#ifdef KERNEL_MODE
-
-#else
+#ifndef KERNEL_MODE
 #include "dll.h"
 #define HOOK_WITH_PRIVATE_PARTS
 #include "hook.h"

@@ -283,7 +283,7 @@ _FX void WSA_InitBlockedPorts_AddPort(
 {
     ULONG index;
 
-    //{WCHAR txt[128];Sbie_swprintf(txt, L"Adding port range %d - %d as %d\n", port1, port2, setOrClear); OutputDebugString(txt); }
+    //{WCHAR txt[128];Sbie_snwprintf(txt, 128, L"Adding port range %d - %d as %d\n", port1, port2, setOrClear); OutputDebugString(txt); }
 
     index = port2 / 512;
     if (index >= WSA_MaxBlockedPorts) {
@@ -407,20 +407,20 @@ _FX void WSA_InitBlockedPorts(void)
         }
     }
 
-    Dll_Free(text);
-
 #if 0
     for (index = 0; index < WSA_MaxBlockedPorts; ++index) {
         int other;
-        Sbie_swprintf(text, L"%04d - ", index);
+        Sbie_snwprintf(text, 1024, L"%04d - ", index);
         ptr = text + wcslen(text);
         for (other = 0; other < 64; ++other) {
-            Sbie_swprintf(ptr, L"%02X/", ((UCHAR *)(WSA_BlockedPorts[index]))[other]);
+            Sbie_snwprintf(ptr, 1024 - wcslen(text), L"%02X/", ((UCHAR *)(WSA_BlockedPorts[index]))[other]);
             ptr += wcslen(ptr);
         }
         OutputDebugString(text);
     }
 #endif
+
+	Dll_Free(text);
 }
 
 

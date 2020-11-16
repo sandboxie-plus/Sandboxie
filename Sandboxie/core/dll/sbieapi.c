@@ -50,34 +50,40 @@ HANDLE SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
 // SboxDll does not link in the CRT. Instead, it piggybacks onto the CRT routines that are in ntdll.dll.
 // However, the ntdll.lib from the 7600 DDK does not export everything we need. So we must use runtime dynamic linking.
 
-int __CRTDECL Sbie_swprintf(wchar_t *_Buffer, const wchar_t * const _Format, ...)
+int __CRTDECL Sbie_snwprintf(wchar_t *_Buffer, size_t Count, const wchar_t * const _Format, ...)
 {
-    int _Result;
-    va_list _ArgList;
+	int _Result;
+	va_list _ArgList;
 
-    int (*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args);
-    *(FARPROC*)&P_vsnwprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnwprintf");
+	int(*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args);
+	*(FARPROC*)&P_vsnwprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnwprintf");
 
-    va_start(_ArgList, _Format);
+	va_start(_ArgList, _Format);
+	_Result = P_vsnwprintf(_Buffer, Count, _Format, _ArgList);
+	va_end(_ArgList);
 
-    _Result = P_vsnwprintf(_Buffer, 2048, _Format, _ArgList);
-    va_end(_ArgList);
-    return _Result;
+	if (_Result == -1 && _Buffer != NULL && Count != 0)
+		_Buffer[Count - 1] = 0; // ensure the resulting string is always null terminated
+
+	return _Result;
 }
 
-int __CRTDECL Sbie_sprintf(char *_Buffer, const char * const _Format, ...)
+int __CRTDECL Sbie_snprintf(char *_Buffer, size_t Count, const char * const _Format, ...)
 {
-    int _Result;
-    va_list _ArgList;
+	int _Result;
+	va_list _ArgList;
 
-    int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
-    *(FARPROC*)&P_vsnprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnprintf");
+	int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+	*(FARPROC*)&P_vsnprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnprintf");
 
-    va_start(_ArgList, _Format);
+	va_start(_ArgList, _Format);
+	_Result = P_vsnprintf(_Buffer, Count, _Format, _ArgList);
+	va_end(_ArgList);
 
-    _Result = P_vsnprintf(_Buffer, 2048, _Format, _ArgList);
-    va_end(_ArgList);
-    return _Result;
+	if (_Result == -1 && _Buffer != NULL && Count != 0)
+		_Buffer[Count - 1] = 0; // ensure the resulting string is always null terminated
+
+	return _Result;
 }
 
 //---------------------------------------------------------------------------
@@ -367,19 +373,19 @@ _FX LONG SbieApi_vLogEx(
 
     // make sure to allocate at least twice API_LOG_MESSAGE_MAX_LEN
     tmp1 = Dll_AllocTemp((API_LOG_MESSAGE_MAX_LEN + 4) * 2);
-    tmp2 = (UCHAR *)tmp1 + API_LOG_MESSAGE_MAX_LEN + 4;
+    tmp2 = (UCHAR *)tmp1 + API_LOG_MESSAGE_MAX_LEN * 2 - 510;
     if (format) {
 
         int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
         *(FARPROC*)&P_vsnprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnprintf");
 
-        Sbie_sprintf(tmp1, "%S", format);
+        Sbie_snprintf(tmp1, 510, "%S", format);
         P_vsnprintf(tmp2, 510, tmp1, va_args);
 
     } else
         *tmp2 = '\0';
 
-    Sbie_swprintf((WCHAR *)tmp1, L"%S", tmp2);
+    Sbie_snwprintf((WCHAR *)tmp1, 510, L"%S", tmp2);
     msgtext.Buffer = (ULONG_PTR)tmp1;
     msgtext.Length = (USHORT)wcslen((WCHAR *)msgtext.Buffer) * sizeof(WCHAR);
     msgtext.MaximumLength = msgtext.Length + sizeof(WCHAR);

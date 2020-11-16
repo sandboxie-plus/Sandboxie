@@ -34,9 +34,10 @@ public:
 
 	quint64				GetProcessId() const { return m_ProcessId; }
 	QDateTime			GetTimeStamp() const { return m_TimeStamp; }
-	QString				GetType() const { return m_Type; }
+	quint16				GetType() const { return m_Type.Flags; }
 	QString				GetValue() const { return m_Name; }
-	QString				GetStautsStr()const;
+	QString				GetTypeStr() const;
+	QString				GetStautsStr() const;
 	void				IncrCounter() { m_Counter++; }
 	int					GetCount() const { return m_Counter; }
 
@@ -44,13 +45,23 @@ public:
 
 protected:
 	QString m_Name;
-	QString m_Type;
 	quint64 m_ProcessId;
 	QDateTime m_TimeStamp;
-	bool m_Open;
-	bool m_Deny;
-	//bool m_Verbose;
-	//bool m_User;
+
+	union
+	{
+		quint16 Flags;
+		struct
+		{
+			quint16
+				Type : 12,
+				Open : 1,
+				Deny : 1,
+				Reserved : 1,
+				Trace : 1;
+		};
+	} m_Type;
+
 	int m_Counter;
 
 	quint64 m_uid;

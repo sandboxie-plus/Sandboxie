@@ -263,12 +263,13 @@ void CSbieTemplates::CollectTemplates()
 	Templates.append(GetTemplateNames("Desktop"));
 	Templates.append(GetTemplateNames("Download"));
 	Templates.append(GetTemplateNames("Misc"));
+	Templates.append(GetTemplateNames("WebBrowser"));
 
 	foreach(const QString& Template, Templates)
 		m_Templates.insert(Template, 0);
 
-	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template");
-	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject");
+	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template", true);
+	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject", true);
 
 	for(QMap<QString, int>::iterator I = m_Templates.begin(); I != m_Templates.end(); ++I)
 	{

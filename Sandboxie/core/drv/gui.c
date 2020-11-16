@@ -195,6 +195,7 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
         }
     }
 
+	//if (Conf_Get_Boolean(proc->box->name, L"OpenDefaultWinClass", 0, TRUE)) // ToDo: can we do that
     if (ok) {
         BOOLEAN AddMSTaskSwWClass = FALSE;
         if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
@@ -202,7 +203,7 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
                     proc, &proc->open_win_classes, NULL,
                     TRUE, L"Sandbox:*:ConsoleWindowClass", FALSE);
             AddMSTaskSwWClass = TRUE;
-        } else if ((! proc->image_copy) &&
+        } else if ((! proc->image_from_box) &&
                 (  _wcsicmp(proc->image_name, L"excel.exe")    == 0
                 || _wcsicmp(proc->image_name, L"powerpnt.exe") == 0))
             AddMSTaskSwWClass = TRUE;

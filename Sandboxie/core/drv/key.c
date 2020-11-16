@@ -233,7 +233,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // open paths
     //
 
-    if (proc->image_copy)
+    if (proc->image_from_box)
         ok = TRUE;
     else
         ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenPath, TRUE);
@@ -464,7 +464,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
         if (letter) {
             swprintf(access_str, L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
-            Log_Debug_Msg(access_str, Name->Name.Buffer);
+            Log_Debug_Msg(MONITOR_FILE_OR_KEY, access_str, Name->Name.Buffer);
         }
     }
 

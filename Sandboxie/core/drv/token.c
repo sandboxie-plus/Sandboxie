@@ -872,6 +872,9 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
     BOOLEAN ok = FALSE;
     ULONG UserAndGroups_offset = 0;
 
+	if (!proc->primary_token)
+		return TRUE;
+
 #ifdef _WIN64
 
     if (Driver_OsVersion <= DRIVER_WINDOWS_7) {
@@ -1726,6 +1729,11 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
     PEPROCESS ProcessObject;
     NTSTATUS status;
     BOOLEAN ok = FALSE;
+
+	// OriginalToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+		return TRUE;
+	// OriginalToken END
 
     //
     // lookup the process object to get the old primary token

@@ -19,7 +19,7 @@ CSandBox* CSbiePlusAPI::NewSandBox(const QString& BoxName, class CSbieAPI* pAPI)
 
 CBoxedProcess* CSbiePlusAPI::NewBoxedProcess(quint64 ProcessId, class CSandBox* pBox)
 {
-	return new CBoxedProcess(ProcessId, pBox);
+	return new CSbieProcess(ProcessId, pBox);
 }
 
 
@@ -45,10 +45,10 @@ CSandBoxPlus::~CSandBoxPlus()
 
 void CSandBoxPlus::UpdateDetails()
 {
-	m_bLogApiFound = GetTextList("OpenPipePath").contains("\\Device\\NamedPipe\\LogAPI");
+	m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
 
 	m_bINetBlocked = false;
-	foreach(const QString& Entry, GetTextList("ClosedFilePath"))
+	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
 	{
 		if (Entry.contains("InternetAccessDevices")) {
 			m_bINetBlocked = true;
@@ -101,6 +101,7 @@ QString CSandBoxPlus::GetStatusStr() const
 
 bool CSandBoxPlus::CheckOpenToken() const
 {
+	if (GetBool("OriginalToken", false)) return true;
 	if (GetBool("OpenToken", false)) return true;
 		if(GetBool("UnrestrictedToken", false)) return true;
 			if (!GetBool("AnonymousLogon", true)) return true;
@@ -130,7 +131,13 @@ void CSandBoxPlus::SetINetBlock(bool bEnable)
 	if (bEnable)
 		InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
 	else
-		DelValue("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+	{
+		foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
+		{
+			if (Entry.contains("InternetAccessDevices"))
+				DelValue("ClosedFilePath", Entry);
+		}
+	}
 }
 
 void CSandBoxPlus::SetAllowShares(bool bEnable)
@@ -142,3 +149,110 @@ void CSandBoxPlus::SetDropRights(bool bEnable)
 {
 	SetBool("DropAdminRights", bEnable);
 }
+
+QStringList::iterator FindInStrList(QStringList& list, const QString& str)
+{
+	QStringList::iterator J = list.begin();
+	for (; J != list.end(); ++J)
+	{
+		if (J->compare(str, Qt::CaseInsensitive) == 0)
+			break;
+	}
+	return J;
+}
+
+void SetInStrList(QStringList& list, const QString& str, bool bSet)
+{
+	if (bSet)
+		list.append(str);
+	else
+	{
+		for (QStringList::iterator J = list.begin(); J != list.end();)
+		{
+			if (J->compare(str, Qt::CaseInsensitive) == 0) {
+				J = list.erase(J);
+				continue;
+			}
+			++J;
+		}
+	}
+}
+
+void CSandBoxPlus::BlockProgram(const QString& ProgName)
+{
+	bool WhiteList = false;
+	bool BlackList = false;
+	foreach(const QString& Entry, GetTextList("ClosedIpcPath", false))
+	{
+		StrPair ProgPath = Split2(Entry, ",");
+		if (ProgPath.second != "*")
+			continue;
+		if (ProgPath.first.compare("!<StartRunAccess>", Qt::CaseInsensitive) == 0)
+			WhiteList = true;
+		else if (ProgPath.first.compare("<StartRunAccess>", Qt::CaseInsensitive) == 0)
+			BlackList = true;
+		else
+			continue;
+		break;
+	}
+
+	if (!WhiteList && !BlackList)
+	{
+		BlackList = true;
+		InsertText("ClosedIpcPath", "<StartRunAccess>,*");
+	}
+
+	QStringList ProcessGroups = GetTextList("ProcessGroup", false);
+
+	QStringList Programs;
+	QStringList::iterator I = ProcessGroups.begin();
+	for (; I != ProcessGroups.end(); ++I)
+	{
+		StrPair GroupPaths = Split2(*I, ",");
+		if (GroupPaths.first == "<StartRunAccess>")
+		{
+			Programs = SplitStr(GroupPaths.second, ",");
+			break;
+		}
+	}
+	if (I == ProcessGroups.end())
+		I = ProcessGroups.insert(I, "");
+
+	SetInStrList(Programs, ProgName, !WhiteList);
+
+	*I = "<StartRunAccess>," + Programs.join(",");
+
+	UpdateTextList("ProcessGroup", ProcessGroups, false);
+}
+
+void CSandBoxPlus::SetLingeringProgram(const QString& ProgName, bool bSet)
+{
+	QStringList Programs = GetTextList("LingerProcess", false);
+	SetInStrList(Programs, ProgName, bSet);
+	UpdateTextList("LingerProcess", Programs, false);
+}
+
+int CSandBoxPlus::IsLingeringProgram(const QString& ProgName)
+{
+	QStringList Programs = GetTextList("LingerProcess", false);
+	if (FindInStrList(Programs, ProgName) != Programs.end())
+		return 1;
+	Programs = GetTextList("LingerProcess", true);
+	if (FindInStrList(Programs, ProgName) != Programs.end())
+		return 2;
+	return 0;
+}
+
+void CSandBoxPlus::SetLeaderProgram(const QString& ProgName, bool bSet)
+{
+	QStringList Programs = GetTextList("LeaderProcess", false);
+	SetInStrList(Programs, ProgName, bSet);
+	UpdateTextList("LeaderProcess", Programs, false);
+}
+
+int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
+{
+	QStringList Programs = GetTextList("LeaderProcess", false);
+	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
+}
+

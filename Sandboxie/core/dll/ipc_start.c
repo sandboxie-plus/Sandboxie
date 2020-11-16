@@ -40,7 +40,7 @@ _FX HANDLE Ipc_GetServerEvent(const WCHAR *service, BOOLEAN *create_flag)
     WCHAR event_name[64];
     HANDLE hEvent;
 
-    Sbie_swprintf(event_name, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
+    Sbie_snwprintf(event_name, 64, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
     if (create_flag) {
         *create_flag = FALSE;
         hEvent = CreateEvent(NULL, TRUE, FALSE, event_name);
@@ -169,7 +169,7 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                 else {
 
                     WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
-                    Sbie_swprintf(fullpath, L"\"%s\\%s\"", homedir, program);
+                    Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
 
 					//
 					// Note: many proesses started by DcomLaunch must be started as user this is currently a bit broken,
@@ -180,8 +180,7 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
 					//
 					const WCHAR* box_name = SbieApi_QueryConfBool(NULL, L"ProtectRpcSs", FALSE) ? L"*SYSTEM*" : L"*THREAD*";
 
-                    if (! SbieDll_RunSandboxed(//L"*THREAD*", 
-							box_name, fullpath, homedir, 0, &si, &pi))
+                    if (! SbieDll_RunSandboxed(box_name, fullpath, homedir, 0, &si, &pi))
                         errnum = GetLastError();
                     else
                         errnum = -1;

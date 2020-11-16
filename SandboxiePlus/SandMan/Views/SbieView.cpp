@@ -79,8 +79,17 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	m_pMenuTerminate = m_pMenu->addAction(tr("Terminate"), this, SLOT(OnProcessAction()));
 	m_pMenuTerminate->setShortcut(QKeySequence::Delete);
-	m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pMenuTerminate);
+	m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	m_pMenuPreset = m_pMenu->addMenu(tr("Preset"));
+	m_pMenuBlackList = m_pMenuPreset->addAction(tr("Block and Terminate"), this, SLOT(OnProcessAction()));
+	m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
+	m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pMenuBlackList);
+	m_pMenuMarkLinger = m_pMenuPreset->addAction(tr("Linger Process"), this, SLOT(OnProcessAction()));
+	m_pMenuMarkLinger->setCheckable(true);
+	m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Leader Process"), this, SLOT(OnProcessAction()));
+	m_pMenuMarkLeader->setCheckable(true);
 	m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
 	m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
@@ -183,6 +192,13 @@ void CSbieView::OnMenu(const QPoint& Point)
 
 	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
 		MenuActions[i]->setVisible(iProcessCount > 0 && iSandBoxeCount == 0);
+	
+	if (!pProcess.isNull()) {
+		int isLingering = pProcess.objectCast<CSbieProcess>()->IsLingeringProgram();
+		m_pMenuMarkLinger->setChecked(isLingering != 0);
+		m_pMenuMarkLinger->setEnabled(isLingering != 2);
+		m_pMenuMarkLeader->setChecked(pProcess.objectCast<CSbieProcess>()->IsLeaderProgram());
+	}
 	m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
 	m_pMenuResume->setEnabled(iSuspendedCount > 0);
 
@@ -278,7 +294,7 @@ void CSbieView::OnProcessAction()
 	QList<SB_STATUS> Results;
 
 	QAction* Action = qobject_cast<QAction*>(sender());
-	if (Action == m_pMenuTerminate)
+	if (Action == m_pMenuTerminate || Action == m_pMenuBlackList)
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Do you want to %1 the selected process(es)").arg(((QAction*)sender())->text().toLower())
 			, QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
@@ -289,6 +305,15 @@ void CSbieView::OnProcessAction()
 	{
 		if (Action == m_pMenuTerminate)
 			Results.append(pProcess->Terminate());
+		else if (Action == m_pMenuBlackList)
+		{
+			Results.append(pProcess->Terminate());
+			pProcess.objectCast<CSbieProcess>()->BlockProgram();
+		}
+		else if (Action == m_pMenuMarkLinger)
+			pProcess.objectCast<CSbieProcess>()->SetLingeringProgram(m_pMenuMarkLinger->isChecked());
+		else if (Action == m_pMenuMarkLeader)
+			pProcess.objectCast<CSbieProcess>()->SetLeaderProgram(m_pMenuMarkLeader->isChecked());
 		else if (Action == m_pMenuSuspend)
 			Results.append(pProcess->SetSuspend(true));
 		else if (Action == m_pMenuResume)

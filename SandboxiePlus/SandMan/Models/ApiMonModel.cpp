@@ -16,8 +16,22 @@ void CApiMonModel::Sync(const QList<CApiLogEntryPtr>& List, QSet<quint64> PIDs)
 	QList<SListNode*> New;
 	QHash<QVariant, SListNode*> Old = m_Map;
 
-	foreach (const CApiLogEntryPtr& pEntry, List)
+	int i = 0;
+	if (List.count() >= m_List.count() && m_List.count() > 0)
 	{
+		i = m_List.count() - 1;
+		if (m_List.at(i)->ID == List.at(i)->GetUID())
+		{
+			i++;
+			Old.clear();
+		}
+		else
+			i = 0;
+	}
+
+	for (; i < List.count(); i++)
+	{
+		CApiLogEntryPtr pEntry = List.at(i);
 		QVariant ID = pEntry->GetUID();
 
 		if (!PIDs.isEmpty() && !PIDs.contains(pEntry->GetProcessId()))

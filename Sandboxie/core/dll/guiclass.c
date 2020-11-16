@@ -137,7 +137,7 @@ _FX BOOLEAN Gui_InitClass(void)
     len = (wcslen(Sandbox) + 1 + wcslen(Dll_BoxName) + 1 + 1)
         * sizeof(WCHAR);
     Gui_BoxPrefixW = Dll_Alloc(len);
-    Sbie_swprintf(Gui_BoxPrefixW, L"%s:%s:", Sandbox, Dll_BoxName);
+    Sbie_snwprintf(Gui_BoxPrefixW, len / sizeof(WCHAR), L"%s:%s:", Sandbox, Dll_BoxName);
     Gui_BoxPrefix_Len = wcslen(Gui_BoxPrefixW);
 
     len = Gui_BoxPrefix_Len + 1;
@@ -146,6 +146,15 @@ _FX BOOLEAN Gui_InitClass(void)
         CP_ACP, 0, Gui_BoxPrefixW, wcslen(Gui_BoxPrefixW),
         Gui_BoxPrefixA, len, NULL, NULL);
     Gui_BoxPrefixA[len - 1] = '\0';
+
+	// NoSbieDesk BEGIN
+	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE)) {
+
+		Gui_OpenAllWinClasses = TRUE;
+		Gui_RenameClasses = FALSE;
+	}
+	else
+	// NoSbieDesk END
 
     //
     // if OpenWinClass specifies *, we will not do any window class

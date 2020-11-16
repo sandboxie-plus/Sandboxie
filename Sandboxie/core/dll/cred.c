@@ -270,9 +270,9 @@ _FX WCHAR *Cred_GetName(
     name = Dll_Alloc(len * sizeof(WCHAR));
 
     if (DomainName)
-        Sbie_swprintf(name, L"%s%s-%s", Cred_DomainCred, DomainName, TargetName);
+        Sbie_snwprintf(name, len, L"%s%s-%s", Cred_DomainCred, DomainName, TargetName);
     else
-        Sbie_swprintf(name, L"%s%08X-%s", Cred_SimpleCred, Type, TargetName);
+        Sbie_snwprintf(name, len, L"%s%08X-%s", Cred_SimpleCred, Type, TargetName);
 
     return name;
 }

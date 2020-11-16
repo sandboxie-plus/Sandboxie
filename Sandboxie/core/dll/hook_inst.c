@@ -20,9 +20,7 @@
 //---------------------------------------------------------------------------
 
 
-#ifdef KERNEL_MODE
-#define Sbie_swprintf swprintf
-#else
+#ifndef KERNEL_MODE
 #include "dll.h"
 #include "msgs/msgs.h"
 #define MSG_HOOK_ANALYZE    MSG_1151
@@ -157,7 +155,12 @@ ALIGNED BOOLEAN Hook_Analyze(
         addr = Hook_Analyze_Inst(addr, inst);
         if (! addr) {
             addr = address;
-			Sbie_swprintf(text, L"%08p:  %02X,%02X,%02X,%02X,"
+#ifdef KERNEL_MODE
+			swprintf(text,
+#else
+			Sbie_snwprintf(text, 64, 
+#endif
+				L"%08p:  %02X,%02X,%02X,%02X,"
                 L"%02X,%02X,%02X,%02X,%02X,%02X,%02X,%02X", addr,
                 addr[0],  addr[1],  addr[2],  addr[3],  addr[4],  addr[5],
                 addr[6],  addr[7],  addr[8],  addr[9],  addr[10], addr[11]);
@@ -168,7 +171,12 @@ ALIGNED BOOLEAN Hook_Analyze(
     } __except (EXCEPTION_EXECUTE_HANDLER) {
 
         addr = NULL;
-		Sbie_swprintf(text, L"(fault at %p)", address);
+#ifdef KERNEL_MODE
+		swprintf(text,
+#else
+		Sbie_snwprintf(text, 64,
+#endif
+			L"(fault at %p)", address);
         Log_Msg1(MSG_HOOK_ANALYZE, text);
 
     }

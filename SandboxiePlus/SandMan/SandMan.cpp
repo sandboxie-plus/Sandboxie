@@ -953,7 +953,8 @@ void CSandMan::OnAbout()
 			"<p>Copyright (c) 2020</p>"
 		).arg(GetVersion());
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is a powerful sandboxing and application virtualization tool. Based on the well-known <a href=\"https://www.sandboxie.com\">Sandboxie</a>.</p>"
+			"<p>Sandboxie-Plus is a powerful sandboxing and application virtualization tool based on the well-known <a href=\"https://www.sandboxie.com\">Sandboxie</a>.</p>"
+
 			"<p></p>"
 			"<p>Visit <a href=\"https://github.com/Sandboxie-Plus\">Sandboxie-Plus on github</a> for more information.</p>"
 			"<p></p>"

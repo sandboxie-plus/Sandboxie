@@ -15,14 +15,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
-        
-      - name: Build Driver
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
-      - name: Upload artifacts
+      - name: Build Driver
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+
+      - name: Build SandboxiePlus
+        run: msbuild /t:build SandboxiePlus\SandboxPlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
+
+      - name: Upload Sandboxie
         uses: actions/upload-artifact@v2
         with:
           name: Sandboxie (${{ matrix.platform }})
@@ -34,4 +40,11 @@ jobs:
             !**/*.iobj
             !**/*.lib
             !**/*.cer
-            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
+
+      - name: Upload SandboxiePlus
+        uses: actions/upload-artifact@v2
+        with:
+          name: Sandboxie Plus (${{ matrix.platform }})
+          path: |
+            SandboxiePlus/${{ matrix.platform }}/Release
+            !**/*.pdb

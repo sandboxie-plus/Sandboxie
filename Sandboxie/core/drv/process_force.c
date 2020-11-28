@@ -133,9 +133,9 @@ _FX BOX *Process_GetForcedStartBox(
     NTSTATUS status;
     ULONG SessionId;
     UNICODE_STRING SidString;
-    WCHAR *ImagePath2;
+    WCHAR *ImagePath2 = L"";
     ULONG ImagePath2_len;
-    const WCHAR *ImageName;
+    const WCHAR *ImageName = L"";
 
     PEPROCESS ProcessObject;
     WCHAR *CurDir, *DocArg;

@@ -1314,7 +1314,7 @@ _FX NTSTATUS Ipc_Api_CreateDirOrLink(PROCESS *proc, ULONG64 *parms)
     NTSTATUS status;
     HANDLE handle;
     UNICODE_STRING64 *user_uni;
-    WCHAR *user_buf, *objname_buf, *target_buf;
+    WCHAR *user_buf, *objname_buf = L"", *target_buf;
     ULONG user_len,  objname_len,  target_len;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname, target;

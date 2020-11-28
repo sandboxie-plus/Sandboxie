@@ -53,8 +53,8 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
 {
     LONG_PTR user_box_parm;
     HANDLE user_pid_parm;
-    BOX *box;
-    PEPROCESS ProcessObject;
+    BOX *box = NULL;
+    PEPROCESS ProcessObject = NULL;
     NTSTATUS status;
 
     //

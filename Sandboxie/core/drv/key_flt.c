@@ -486,13 +486,13 @@ WCHAR * Key_GetSandboxPath(ULONG spid, void *Object)
                 if (temp)
                 {
                     // Matches "\REGISTRY\USER\S-1-5-21*\"
-                    if (!wcsnicmp(&KeyName->Buffer[head_len], USERS, wcslen(USERS)))
+                    if (!_wcsnicmp(&KeyName->Buffer[head_len], USERS, wcslen(USERS)))
                     {
                         ULONG sidSize = (ULONG)temp - (ULONG)&KeyName->Buffer[head_len];
                         if (sidSize < MAX_USER_SID_SIZE)
                         {
                             // Matches "\REGISTRY\USER\S-1-5-21*_Classes\"
-                            if (!wcsnicmp(temp - wcslen(CLASSES), L"_Classes", wcslen(CLASSES)))
+                            if (!_wcsnicmp(temp - wcslen(CLASSES), L"_Classes", wcslen(CLASSES)))
                             {
                                 wcscpy(targetName + path_len, L"\\user\\current_classes");
                                 path_len += wcslen(L"\\user\\current_classes");
@@ -509,7 +509,7 @@ WCHAR * Key_GetSandboxPath(ULONG spid, void *Object)
                 }
             }
             // starts with "\REGISTRY\\MACHINE\"
-            else if (!wcsnicmp(KeyName->Buffer, HEADER_MACHINE, wcslen(HEADER_MACHINE)))
+            else if (!_wcsnicmp(KeyName->Buffer, HEADER_MACHINE, wcslen(HEADER_MACHINE)))
             {
                 wcscpy(targetName + path_len, KeyName->Buffer + 9);
                 targetFound = 1;

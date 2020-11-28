@@ -71,22 +71,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\i386</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\amd64</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\i386</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\amd64</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>

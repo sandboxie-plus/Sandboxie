@@ -79,32 +79,24 @@
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>..\;..\..\;..\..\..\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(KM_IncludePath);$(KMDF_INC_PATH)$(KMDF_VER_PATH);$(IncludePath)</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\;$(WindowsSdkDir)lib;$(DDK_LibraryPath_DDKPlatform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <TargetExt>.sys</TargetExt>
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>..\;..\..\;..\..\..\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(KM_IncludePath);$(KMDF_INC_PATH)$(KMDF_VER_PATH);$(IncludePath)</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\;$(WindowsSdkDir)lib;$(DDK_LibraryPath_DDKPlatform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <TargetExt>.sys</TargetExt>
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>..\;..\..\;..\..\..\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(KM_IncludePath);$(KMDF_INC_PATH)$(KMDF_VER_PATH);$(IncludePath)</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\;$(WindowsSdkDir)lib;$(DDK_LibraryPath_DDKPlatform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <TargetExt>.sys</TargetExt>
     <GenerateManifest>false</GenerateManifest>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
-    <IncludePath>..\;..\..\;..\..\..\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(KM_IncludePath);$(KMDF_INC_PATH)$(KMDF_VER_PATH);$(IncludePath)</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\;$(WindowsSdkDir)lib;$(DDK_LibraryPath_DDKPlatform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>

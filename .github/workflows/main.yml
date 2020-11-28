@@ -13,15 +13,17 @@ jobs:
         platform: [Win32, x64]
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
         
-      - name: setup-msbuild
+      - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
         
       - name: Build Driver
-        run: msbuild /t:build Sandboxie\Sandboxdrv.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
         with:
           name: Sandboxie (${{ matrix.platform }})
           path: |

@@ -93,13 +93,15 @@ bool CSbieIni::GetBool(const QString& Setting, bool Default) const
 	return Default;
 }
 
-QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates) const
+QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bool expand) const
 {
 	QStringList TextList;
 
-	int flags = (m_Name.isEmpty() ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
+	int flags = (m_Name.isEmpty() ? 0 : CONF_GET_NO_GLOBAL);
 	if (!withTemplates)
 		flags |= CONF_GET_NO_TEMPLS;
+	if (!expand)
+		flags |= CONF_GET_NO_EXPAND;
 
 	for (int index = 0; ; index++)
 	{

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -194,7 +195,7 @@ _FX BOOLEAN Ipc_Init(void)
     Api_SetFunction(API_CREATE_DIR_OR_LINK,     Ipc_Api_CreateDirOrLink);
     Api_SetFunction(API_OPEN_DEVICE_MAP,        Ipc_Api_OpenDeviceMap);
     Api_SetFunction(API_QUERY_SYMBOLIC_LINK,    Ipc_Api_QuerySymbolicLink);
-    Api_SetFunction(API_ALLOW_SPOOLER_PRINT_TO_FILE, Ipc_Api_AllowSpoolerPrintToFile);
+    //Api_SetFunction(API_ALLOW_SPOOLER_PRINT_TO_FILE, Ipc_Api_AllowSpoolerPrintToFile);
 
 #ifndef _WIN64
     Api_SetFunction(API_SET_LSA_AUTH_PKG,       Ipc_Api_SetLsaAuthPkg);
@@ -749,36 +750,44 @@ _FX BOOLEAN Ipc_InitProcess(PROCESS *proc)
     BOOLEAN ok = Ipc_InitPaths(proc);
 
     //
-    // check Start/Run restrictions
-    // issue message SBIE1308 when Start/Run restrictions apply
-    //
-
-    if (ok) {
-
-        PATTERN *pattern = List_Head(&proc->closed_ipc_paths);
-        while (pattern) {
-
-            const WCHAR *source = Pattern_Source(pattern);
-            if (source[0] == L'*' && source[1] == L'\0') {
-
-                if (proc->ipc_warn_startrun) {
-
-                    Process_LogMessage(proc, MSG_STARTRUN_ACCESS_DENIED);
-                    proc->ipc_warn_startrun = FALSE;
-                }
-
-                return FALSE;
-            }
-
-            pattern = List_Next(pattern);
-        }
-    }
-
-    //
     // finish
     //
 
     return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_IsRunRestricted
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Ipc_IsRunRestricted(PROCESS *proc)
+{
+    //
+    // check Start/Run restrictions
+    // issue message SBIE1308 when Start/Run restrictions apply
+    //
+
+    PATTERN *pattern = List_Head(&proc->closed_ipc_paths);
+    while (pattern) {
+
+        const WCHAR *source = Pattern_Source(pattern);
+        if (source[0] == L'*' && source[1] == L'\0') {
+
+            if (proc->ipc_warn_startrun) {
+
+                Process_LogMessage(proc, MSG_STARTRUN_ACCESS_DENIED);
+                proc->ipc_warn_startrun = FALSE;
+            }
+
+            return TRUE;
+        }
+
+        pattern = List_Next(pattern);
+    }
+
+    return FALSE;
 }
 
 

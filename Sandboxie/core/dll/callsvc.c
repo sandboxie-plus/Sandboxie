@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -323,6 +324,78 @@ _FX MSG_HEADER *SbieDll_CallServer(MSG_HEADER *req)
 
     memzero(buf, 8);
     return rpl;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_CallServerQueue
+//---------------------------------------------------------------------------
+
+
+_FX void *SbieDll_CallServerQueue(const WCHAR* queue, void *req, ULONG req_len, ULONG rpl_min_len)
+{
+	//static ULONG _Ticks = 0;
+	//static ULONG _Ticks1 = 0;
+	WCHAR QueueName[64];
+	NTSTATUS status;
+	ULONG req_id;
+	ULONG data_len;
+	void *data;
+	HANDLE event;
+
+	//ULONG Ticks0 = GetTickCount();
+
+	/*if (1) {
+		WCHAR txt[128];
+		Sbie_snwprintf(txt, 128, L"Request command is %08X\n", *(ULONG *)req);
+		OutputDebugString(txt);
+	}*/
+
+	Sbie_snwprintf(QueueName, 64, L"*%s_%08X", queue, Dll_SessionId);
+
+	status = SbieDll_QueuePutReq(QueueName, req, req_len, &req_id, &event);
+	if (NT_SUCCESS(status)) {
+
+		if (WaitForSingleObject(event, 60 * 1000) != 0)
+			status = STATUS_TIMEOUT;
+
+		CloseHandle(event);
+	}
+
+	if (status == 0) {
+
+		status = SbieDll_QueueGetRpl(QueueName, req_id, &data, &data_len);
+
+		if (NT_SUCCESS(status)) {
+
+			if (data_len >= sizeof(ULONG) && *(ULONG *)data) {
+
+				status = *(ULONG *)data;
+
+			}
+			else if (data_len >= rpl_min_len) {
+
+				/*_Ticks += GetTickCount() - Ticks0;
+				if (_Ticks > _Ticks1 + 1000) {
+					WCHAR txt[128];
+					Sbie_snwprintf(txt, 128, L"Already spent %d ticks in gui\n", _Ticks);
+					OutputDebugString(txt);
+					_Ticks1 = _Ticks;
+				}*/
+
+				return data;
+
+			}
+			else
+				status = STATUS_INFO_LENGTH_MISMATCH;
+
+			Dll_Free(data);
+		}
+	}
+
+	SbieApi_Log(2203, L"%S - %S [%08X]", QueueName, Dll_ImageName, status);
+	SetLastError(ERROR_SERVER_DISABLED);
+	return NULL;
 }
 
 
@@ -763,3 +836,4 @@ _FX BOOL SbieDll_RunSandboxed(
     SetLastError(err);
     return ok;
 }
+

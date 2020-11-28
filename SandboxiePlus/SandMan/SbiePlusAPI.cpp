@@ -17,7 +17,7 @@ CSandBox* CSbiePlusAPI::NewSandBox(const QString& BoxName, class CSbieAPI* pAPI)
 	return new CSandBoxPlus(BoxName, pAPI);
 }
 
-CBoxedProcess* CSbiePlusAPI::NewBoxedProcess(quint64 ProcessId, class CSandBox* pBox)
+CBoxedProcess* CSbiePlusAPI::NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 {
 	return new CSbieProcess(ProcessId, pBox);
 }
@@ -37,6 +37,8 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 
 	m_bSecurityRestricted = false;
 	m_iUnsecureDebugging = 0;
+
+	m_SuspendRecovery = false;
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -72,6 +74,13 @@ void CSandBoxPlus::UpdateDetails()
 	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false) || GetBool("ProtectRpcSs", false) || !GetBool("OpenDefaultClsid", true));
 
 	CSandBox::UpdateDetails();
+}
+
+void CSandBoxPlus::CloseBox()
+{
+	CSandBox::CloseBox();
+
+	m_SuspendRecovery = false;
 }
 
 QString CSandBoxPlus::GetStatusStr() const

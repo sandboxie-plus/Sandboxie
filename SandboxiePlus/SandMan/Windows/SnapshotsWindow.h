@@ -13,9 +13,6 @@ public:
 	CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent = Q_NULLPTR);
 	~CSnapshotsWindow();
 
-signals:
-	void OptionsChanged();
-
 private slots:
 	void UpdateSnapshots();
 	void UpdateSnapshot(const QModelIndex& Index);

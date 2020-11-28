@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -3534,8 +3535,10 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
 
         if (send2199) {
             WCHAR *colon = wcschr(rec->path, L':');
-            if (! colon)
-                SbieApi_Log2199(rec->path);
+			if (!colon) {
+				const WCHAR* strings[] = { Dll_BoxName, rec->path, NULL };
+				SbieApi_LogMsgExt(2199, strings);
+			}
             List_Remove(&File_RecPaths, rec);
         }
 

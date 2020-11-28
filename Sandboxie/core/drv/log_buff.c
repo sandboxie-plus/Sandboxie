@@ -132,7 +132,7 @@ CHAR* log_buffer_get_next(LOG_BUFFER_SEQ_T seq_number, LOG_BUFFER* ptr_buffer)
 			return NULL; // the last entry in the list is the last one we already got, return NULL
 
 		if (cur_number == seq_number + 1)
-			return read_ptr; // this entry is the one after the last oen we already got, return it
+			return read_ptr; // this entry is the one after the last one we already got, return it
 
 		size_left -= total_size;
 	}

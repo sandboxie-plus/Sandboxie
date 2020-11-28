@@ -33,7 +33,7 @@ public:
 	};
 
 protected:
-	bool			Sync(const CSandBoxPtr& pBox, const QMap<quint64, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added);
+	bool			Sync(const CSandBoxPtr& pBox, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added);
 
 	struct SSandBoxNode: STreeNode
 	{
@@ -48,9 +48,9 @@ protected:
 
 	virtual STreeNode*		MkNode(const QVariant& Id) { return new SSandBoxNode(Id); }
 
-	QList<QVariant>			MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint64, CBoxedProcessPtr>& ProcessList);
-	QList<QVariant>			MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint64, CBoxedProcessPtr>& ProcessList);
-	bool					TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint64, CBoxedProcessPtr>& ProcessList, int Index = 0);
+	QList<QVariant>			MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
+	QList<QVariant>			MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
+	bool					TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, int Index = 0);
 
 	//virtual QVariant		GetDefaultIcon() const;
 

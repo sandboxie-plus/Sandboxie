@@ -18,3 +18,5 @@
 #define SBIESTART_EXE   L"Start.exe"
 
 #define SBIEMSG_DLL     L"SbieMsg.dll"
+
+#define MAX_RPL_BUF_SIZE    32768

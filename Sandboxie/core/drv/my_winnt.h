@@ -254,6 +254,7 @@ typedef void(*P_KeRevertToUserAffinityThreadEx)(KAFFINITY Affinity);
 #define PROCESS_QUERY_INFORMATION (0x0400)
 #define PROCESS_SUSPEND_RESUME    (0x0800)
 #define PROCESS_QUERY_LIMITED_INFORMATION  (0x1000)     // vista
+#define PROCESS_SET_LIMITED_INFORMATION    (0x2000)
 #if (NTDDI_VERSION >= NTDDI_VISTA)
 #define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
                                    0xFFFF)

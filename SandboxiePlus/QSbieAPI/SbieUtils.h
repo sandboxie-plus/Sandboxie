@@ -30,6 +30,8 @@ public:
 	static void				AddContextMenu(const QString& StartPath);
 	static void				RemoveContextMenu();
 
+	static void				CreateDesktopShortcut(const QString& BoxName, class CSbieAPI* pApi);
+
 private:
 	static SB_STATUS		ElevateOps(const QStringList& Ops);
 	static SB_STATUS		ExecOps(const QStringList& Ops);

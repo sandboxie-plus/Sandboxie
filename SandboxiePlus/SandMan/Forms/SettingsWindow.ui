@@ -353,35 +353,33 @@
        </widget>
        <widget class="QWidget" name="tabAlerts">
         <attribute name="title">
-         <string>Program Alerts</string>
+         <string>Program Restrictions</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout">
-           <item row="1" column="0" rowspan="3">
+           <item row="2" column="0" rowspan="4">
             <widget class="QTreeWidget" name="treeWarnProgs">
              <column>
               <property name="text">
                <string>Name</string>
               </property>
              </column>
+             <column>
+              <property name="text">
+               <string>Path</string>
+              </property>
+             </column>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="btnAddWarnProg">
-             <property name="text">
-              <string>Add Program</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
+           <item row="5" column="1">
             <widget class="QPushButton" name="btnDelWarnProg">
              <property name="text">
               <string>Remove Program</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="4" column="1">
             <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -394,7 +392,14 @@
              </property>
             </spacer>
            </item>
-           <item row="0" column="0" colspan="2">
+           <item row="2" column="1">
+            <widget class="QPushButton" name="btnAddWarnProg">
+             <property name="text">
+              <string>Add Program</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>When any of following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</string>
@@ -404,7 +409,28 @@
              </property>
             </widget>
            </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="btnAddWarnFolder">
+             <property name="text">
+              <string>Add Folder</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="chkStartBlock">
+             <property name="text">
+              <string>Prevent the listed programs from starting on this system</string>
+             </property>
+            </widget>
+           </item>
           </layout>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="chkStartBlockMsg">
+           <property name="text">
+            <string>Issue message 1308 when a program fails to start</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

@@ -26,6 +26,24 @@
         <file alias="Advanced">Actions/Advanced.png</file>
         <file alias="Service">Actions/Service.png</file>
         <file alias="Settings">Actions/config.png</file>
+        <file alias="Explore">Actions/explore.png</file>
+        <file alias="Presets">Actions/presets.png</file>
+        <file alias="Options">Actions/options.png</file>
+        <file alias="Erase">Actions/erase.png</file>
+        <file alias="Remove">Actions/remove.png</file>
+        <file alias="Recover">Actions/recover.png</file>
+        <file alias="Snapshots">Actions/snapshots.png</file>
+        <file alias="Rename">Actions/rename.png</file>
+        <file alias="Run">Actions/run.png</file>
+        <file alias="MkLink">Actions/mkLink.png</file>
+        <file alias="Registry">Actions/registry.png</file>
+        <file alias="Template">Actions/template.png</file>
+        <file alias="ManMaintenance">Actions/ManMaintenance.png</file>
+        <file alias="Wall">Actions/wall.png</file>
+        <file alias="Internet">Actions/internet.png</file>
+        <file alias="Force">Actions/force.png</file>
+        <file alias="Group">Actions/grouping.png</file>
+        <file alias="Box">Actions/box.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

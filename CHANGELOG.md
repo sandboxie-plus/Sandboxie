@@ -3,6 +3,46 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.0 / 5.45.0] - 2020-11-28
+
+### Added
+- added new notification window
+- added user interactive control mechanism when using the new SandMan UI
+-- when a file exeeds the copy limit instead of failing, the user is prompted if the file should be copied or not
+-- when internet access is blocked it now can be exempted in real time by the user
+- added missing file recovery and auto/quick recovery functionality
+- added silent MSG_1399 boxed process start notification to keep track of short lived boxed processes
+- added ability to prvent system wide process starts, sandboxie can now instead of just alerting also block processed on the alert list
+-- set "StartRunAlertDenied=y" to enable prcess blocking
+- the process start alert/block mechanism can now also handle folders use "AlertFolder=..." 
+- added ability to merge snapshots
+- added icons to the sandbox context menu in the new UI
+- added more advanced options to the sandbox options window
+- added file migration progress indicator
+- added more run commands and custom run commands per sandbox
+-- the the box settings users can now speficy programs to be available from the box run menu
+-- also processes can be pinned to that list from the presets menu
+- added more windows 10 specific template presets
+- added ability to create desktop shortcuts to sandboxed items
+- added icons to box option tabs
+
+### Changed
+- File migration limit can now be disabled by specifying "CopyLimitKb=-1"
+- improved and refactored mesage logging mechanism, reducing memory usage by factor of 2
+- terminated boxed processes are now kept listed for a coupel of seconds
+- reworked sandbox dletion mechaism ofthe new UI
+- restructured sandbox options window
+
+### Fixed
+- fixed issues migrating files > 4GB
+- fixed a issue that would allow a maliciosue application to bypass the internet blockade
+- fixed issue when logging messages from a non sandboxed process, added process_id parameter to API_LOG_MESSAGE_ARGS
+- fixed issues with localization
+- fixed issue using file recovery in legacy ui SbieCtrl.exe when "SeparateUserFolders=n" is set
+- when a program is blocked from starting due to restrictions no redundant messages are issues anymore
+- fixed UI not properly displaying async errors
+- fixed issues when a snapshot operation failed
+- fixed some special cases of IpcPath and WinClass in the new UI
 
 
 ## [0.4.5 / 5.44.1] - 2020-11-16

@@ -1,5 +1,6 @@
 ﻿/*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -82,9 +83,9 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
 const ULONG tzuk = 'xobs';
 
-const WCHAR *Driver_S_1_5_18 = L"S-1-5-18";
-const WCHAR *Driver_S_1_5_19 = L"S-1-5-19";
-const WCHAR *Driver_S_1_5_20 = L"S-1-5-20";
+const WCHAR *Driver_S_1_5_18 = L"S-1-5-18"; //	System
+const WCHAR *Driver_S_1_5_19 = L"S-1-5-19"; //	Local Service
+const WCHAR *Driver_S_1_5_20 = L"S-1-5-20"; //	Network Service
 
 DRIVER_OBJECT *Driver_Object;
 

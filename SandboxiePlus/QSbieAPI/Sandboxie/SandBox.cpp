@@ -27,6 +27,8 @@ typedef long NTSTATUS;
 #include <windows.h>
 #include "..\..\Sandboxie\common\win32_ntddk.h"
 
+#include "Helpers/NtIO.h"
+
 //struct SSandBox
 //{
 //};
@@ -98,30 +100,50 @@ SB_PROGRESS CSandBox::CleanBox()
 	if (Status.IsError())
 		return Status;
 
-	QString TempPath;
-	Status = RenameForDelete(m_FilePath, TempPath);
-	if (Status.IsError()) {
-		if (Status.GetStatus() == STATUS_OBJECT_NAME_NOT_FOUND || Status.GetStatus() == STATUS_OBJECT_PATH_NOT_FOUND)
-			return SB_OK; // no sandbox folder, nothing to do
-		return Status;
-	}
-
-	return CleanBoxFolders(QStringList(TempPath));
+	return CleanBoxFolders(QStringList(m_FilePath));
 }
 
 SB_PROGRESS CSandBox::CleanBoxFolders(const QStringList& BoxFolders)
 {
-	// cache the DeleteCommand as GetText is not thread safe
-	QString DeleteCommand = GetText("DeleteCommand", "%SystemRoot%\\System32\\cmd.exe /c rmdir /s /q \"%SANDBOX%\"");
-
-	// do the actual delete asynchroniusly in a reandom worker thread...
-	//QFutureWatcher<bool>* pFuture = new QFutureWatcher<bool>();
-	//connect(pFuture, SIGNAL(finished()), pFuture, SLOT(deleteLater()));
-	//pFuture->setFuture(QtConcurrent::run(CSandBox::CleanBoxAsync, pProgress, BoxFolders, DeleteCommand));
-
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBox::CleanBoxAsync, pProgress, BoxFolders, DeleteCommand);
+	QtConcurrent::run(CSandBox::CleanBoxAsync, pProgress, BoxFolders);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
+}
+
+SB_STATUS CSandBox__DeleteFolder(const CSbieProgressPtr& pProgress, const QString& Folder)
+{
+	if (!QDir().exists(Folder))
+		return SB_OK;
+
+	pProgress->ShowMessage(CSandBox::tr("Waiting for folder: %1").arg(Folder));
+
+	SNtObject ntObject(L"\\??\\" + Folder.toStdWString());
+
+	NtIo_WaitForFolder(&ntObject.attr);
+
+	if (pProgress->IsCancel())
+		return STATUS_REQUEST_ABORTED; // or STATUS_TRANSACTION_ABORTED ?
+
+	pProgress->ShowMessage(CSandBox::tr("Deleting folder: %1").arg(Folder));
+
+	NTSTATUS status = NtIo_DeleteFolderRecursively(&ntObject.attr);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(CSandBox::tr("Error deleting sandbox folder: %1").arg(Folder), status);
+	return SB_OK;
+}
+
+void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringList& BoxFolders)
+{
+	SB_STATUS Status;
+
+	foreach(const QString& Folder, BoxFolders)
+	{
+		Status = CSandBox__DeleteFolder(pProgress, Folder);
+		if (Status.IsError())
+			break;
+	}
+
+	pProgress->Finish(Status);
 }
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
@@ -170,7 +192,17 @@ QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent) const
 	return Snapshots;
 }
 
-SB_STATUS CSandBox__OsRename(const wstring& SrcPath, const wstring& DestDir, const wstring& DestName, int Mode);
+QStringList CSandBox__BoxSubFolders = QStringList() << "drive" << "user" << "share";
+
+SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentFolder, const QString& TargetName)
+{
+	SNtObject src_dir(L"\\??\\" + SourcePath.toStdWString());
+	SNtObject dest_dir(L"\\??\\" + ParentFolder.toStdWString());
+	NTSTATUS status = NtIo_RenameFolder(&src_dir.attr, &dest_dir.attr, TargetName.toStdWString().c_str());
+	if (!NT_SUCCESS(status) && status != STATUS_OBJECT_NAME_NOT_FOUND && status != STATUS_OBJECT_PATH_NOT_FOUND)
+		return SB_ERR(CSandBox::tr("Failed to move directory '%1' to '%2'").arg(SourcePath).arg(ParentFolder + "\\" + TargetName), status);
+	return SB_OK;
+}
 
 SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 {
@@ -203,17 +235,12 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	ini.setValue("Current/Snapshot", ID);
 	ini.sync();
 
-	wstring dest_dir = (m_FilePath + "\\snapshot-" + ID).toStdWString();
-	SB_STATUS Status = CSandBox__OsRename((m_FilePath + "\\drive").toStdWString(), dest_dir, L"drive", 1);
-	if (Status.IsError() && Status.GetStatus() != STATUS_OBJECT_NAME_NOT_FOUND && Status.GetStatus() != STATUS_OBJECT_PATH_NOT_FOUND)
-		return Status;
-	Status = CSandBox__OsRename((m_FilePath + "\\share").toStdWString(), dest_dir, L"share", 1);
-	if (Status.IsError() && Status.GetStatus() != STATUS_OBJECT_NAME_NOT_FOUND && Status.GetStatus() != STATUS_OBJECT_PATH_NOT_FOUND)
-		return Status;
-	Status = CSandBox__OsRename((m_FilePath + "\\user").toStdWString(), dest_dir, L"user", 1);
-	if (Status.IsError() && Status.GetStatus() != STATUS_OBJECT_NAME_NOT_FOUND && Status.GetStatus() != STATUS_OBJECT_PATH_NOT_FOUND)
-		return Status;
-
+	foreach(const QString& BoxSubFolder, CSandBox__BoxSubFolders) 
+	{
+		SB_STATUS Status = CSandBox__MoveFolder(m_FilePath + "\\" + BoxSubFolder, m_FilePath + "\\snapshot-" + ID, BoxSubFolder);
+		if (Status.IsError())
+			return Status;
+	}
 	return SB_OK;
 }
 
@@ -224,28 +251,160 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 	if (!ini.childGroups().contains("Snapshot_" + ID))
 		return SB_ERR(tr("Snapshot not found"));
 
-	QString Current = ini.value("Current/Snapshot").toString();
-	if(Current == ID)
-		return SB_ERR(tr("Can't remove a currently used snapshot"));
+	if (m_pAPI->HasProcesses(m_Name))
+		return SB_ERR(tr("Can't remove a snapshots while processes are running in the box."), OP_CONFIRM);
 	
+	QStringList ChildIDs;
 	foreach(const QString& Snapshot, ini.childGroups())
 	{
 		if (Snapshot.indexOf("Snapshot_") != 0)
 			continue;
 
-		if(ini.value(Snapshot + "/Parent").toString() == ID)
-			return SB_ERR(tr("Can't remove a snapshots that is used by an other snapshot"));
+		if (ini.value(Snapshot + "/Parent").toString() == ID)
+			ChildIDs.append(Snapshot.mid(9));
 	}
 
-	// ToDo: allow removel of intermediate snapshots by merging the folders
+	QString Current = ini.value("Current/Snapshot").toString();
+	bool IsCurrent = Current == ID;
 
-	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(tr("Can't remove a snapshots while processes are running in the box."), OP_CONFIRM);
+	if (ChildIDs.count() >= 2 || (ChildIDs.count() == 1 && IsCurrent))
+		return SB_ERR(tr("Can't remove a snapshots that is shared by multiple later snapshots"));
 
-	ini.remove("Snapshot_" + ID);
-	ini.sync();
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	if (ChildIDs.count() == 1 || IsCurrent)
+		QtConcurrent::run(CSandBox::MergeSnapshotAsync, pProgress, m_FilePath, ID, IsCurrent ? QString() : ChildIDs.first());
+	else
+		QtConcurrent::run(CSandBox::DeleteSnapshotAsync, pProgress, m_FilePath, ID);
+	return SB_PROGRESS(OP_ASYNC, pProgress);
+}
 
-	return CleanBoxFolders(QStringList(m_FilePath + "\\snapshot-" + ID));
+void CSandBox::DeleteSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& ID)
+{
+	SB_STATUS Status = CSandBox__DeleteFolder(pProgress, BoxPath + "\\snapshot-" + ID);
+
+	if (!Status.IsError())
+	{
+		QSettings ini(BoxPath + "\\Snapshots.ini", QSettings::IniFormat);
+
+		ini.remove("Snapshot_" + ID);
+		ini.sync();
+	}
+
+	pProgress->Finish(Status);
+}
+
+SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QString& TargetFolder, const QString& SourceFolder)
+{
+	if (!QDir().exists(SourceFolder))
+		return SB_OK; // nothing to do
+
+	pProgress->ShowMessage(CSandBox::tr("Waiting for folder: %1").arg(SourceFolder));
+
+	SNtObject ntSource(L"\\??\\" + SourceFolder.toStdWString());
+
+	NtIo_WaitForFolder(&ntSource.attr);
+
+	if (!QDir().exists(TargetFolder))
+		QDir().mkpath(TargetFolder); // just make it
+	
+	pProgress->ShowMessage(CSandBox::tr("Waiting for folder: %1").arg(TargetFolder));
+
+	SNtObject ntTarget(L"\\??\\" + TargetFolder.toStdWString());
+
+	NtIo_WaitForFolder(&ntTarget.attr);
+
+	if (pProgress->IsCancel())
+		return STATUS_REQUEST_ABORTED; // or STATUS_TRANSACTION_ABORTED ?
+
+	pProgress->ShowMessage(CSandBox::tr("Merging folders: %1 >> %2").arg(SourceFolder).arg(TargetFolder));
+
+	NTSTATUS status = NtIo_MergeFolder(&ntSource.attr, &ntTarget.attr);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(CSandBox::tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged.").arg(TargetFolder).arg(SourceFolder), status);
+	return SB_OK;
+}
+
+SB_STATUS CSandBox__CleanupSnapshot(const QString& Folder)
+{
+	SNtObject ntHiveFile(L"\\??\\" + (Folder + "\\RegHive").toStdWString());
+	SB_STATUS status = NtDeleteFile(&ntHiveFile.attr);
+	if (NT_SUCCESS(status)) {
+		SNtObject ntSnapshotFile(L"\\??\\" + Folder.toStdWString());
+		status = NtDeleteFile(&ntSnapshotFile.attr);
+	}
+	if (!NT_SUCCESS(status))
+		return SB_ERR(CSandBox::tr("Failed to remove old snapshot directory '%1'").arg(Folder), status);
+	return SB_OK;
+}
+
+void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID)
+{
+	//
+	// Targe is to be removed;
+	// Source is the child snpshot that has to remain
+	// we merge target with source by overwrite target with source
+	// than we rename target to source
+	// finally we adapt the ini
+	//
+
+	bool IsCurrent = SourceID.isEmpty();
+	QString SourceFolder = IsCurrent ? BoxPath : (BoxPath + "\\snapshot-" + SourceID);
+	QString TargetFolder = BoxPath + "\\snapshot-" + TargetID;
+
+	SB_STATUS Status = SB_OK;
+	
+	foreach(const QString& BoxSubFolder, CSandBox__BoxSubFolders) 
+	{
+		Status = CSandBox__MergeFolders(pProgress, TargetFolder + "\\" + BoxSubFolder, SourceFolder + "\\" + BoxSubFolder);
+		if (Status.IsError())
+			break;
+	}
+
+	pProgress->ShowMessage(CSandBox::tr("Finishing Snapshot Merge..."));
+
+	if(!Status.IsError())
+	{
+		if (IsCurrent)
+		{
+			// move all folders out of the snapshot to root
+			foreach(const QString& BoxSubFolder, CSandBox__BoxSubFolders) 
+			{
+				Status = CSandBox__MoveFolder(TargetFolder + "\\" + BoxSubFolder, SourceFolder, BoxSubFolder);
+				if (Status.IsError())
+					break;
+			}
+
+			// delete snapshot rest
+			if (!Status.IsError())
+				Status = CSandBox__CleanupSnapshot(TargetFolder);
+		}
+		else
+		{
+			// delete rest of source snpshot
+			Status = CSandBox__CleanupSnapshot(SourceFolder);
+
+			// rename target snapshot o source snapshot
+			if (!Status.IsError())
+				Status = CSandBox__MoveFolder(TargetFolder, BoxPath, "snapshot-" + SourceID);
+		}
+	}
+
+	// save changes to the ini
+	if (!Status.IsError())
+	{
+		QSettings ini(BoxPath + "\\Snapshots.ini", QSettings::IniFormat);
+
+		QString TargetParent = ini.value("Snapshot_" + TargetID + "/Parent").toString();
+		if (IsCurrent)
+			ini.setValue("Current/Snapshot", TargetParent);
+		else
+			ini.setValue("Snapshot_" + SourceID + "/Parent", TargetParent);
+
+		ini.remove("Snapshot_" + TargetID);
+		ini.sync();
+	}
+
+	pProgress->Finish(Status);
 }
 
 SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
@@ -258,18 +417,17 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 	if (m_pAPI->HasProcesses(m_Name))
 		return SB_ERR(tr("Can't switch snapshots while processes are running in the box."), OP_CONFIRM);
 
-	ini.setValue("Current/Snapshot", ID);
-	ini.sync();
-
 	if (!QFile::remove(m_FilePath + "\\RegHive"))
 		return SB_ERR(tr("Failed to remove old RegHive"));
 	if (!QFile::copy(m_FilePath + "\\snapshot-" + ID + "\\RegHive", m_FilePath + "\\RegHive"))
 		return SB_ERR(tr("Failed to copy RegHive from snapshot"));
 
+	ini.setValue("Current/Snapshot", ID);
+	ini.sync();
+
 	QStringList BoxFolders;
-	BoxFolders.append(m_FilePath + "\\drive");
-	BoxFolders.append(m_FilePath + "\\share");
-	BoxFolders.append(m_FilePath + "\\user");
+	foreach(const QString& BoxSubFolder, CSandBox__BoxSubFolders)
+		BoxFolders.append(m_FilePath + "\\" + BoxSubFolder);
 	return CleanBoxFolders(BoxFolders);
 }
 
@@ -286,356 +444,4 @@ SB_STATUS CSandBox::SetSnapshotInfo(const QString& ID, const QString& Name, cons
 		ini.setValue("Snapshot_" + ID + "/Description", Description);
 
 	return SB_OK;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// SBox Deletion
-//
-
-SB_STATUS CSandBox__OsRename(const wstring& SrcPath, const wstring& DestDir, const wstring& DestName, int Mode)
-{
-	NTSTATUS status;
-	IO_STATUS_BLOCK IoStatusBlock;
-
-	wstring src_path = L"\\??\\" + SrcPath;
-	UNICODE_STRING uni;
-	RtlInitUnicodeString(&uni, src_path.c_str());
-
-	OBJECT_ATTRIBUTES objattrs;
-	InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-	HANDLE src_handle = NULL; // open source file/folder
-	status = NtCreateFile(&src_handle, DELETE | SYNCHRONIZE, &objattrs, &IoStatusBlock, NULL, 
-		NULL,
-		Mode == 1 ? (FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE) : 0,			// mode 1 = folder, 0 = file
-		FILE_OPEN,
-		FILE_SYNCHRONOUS_IO_NONALERT | (Mode == 1 ? (FILE_DIRECTORY_FILE) : 0),				// mode 1 = folder, 0 = file
-		NULL, NULL);
-
-	if (!NT_SUCCESS(status)) {
-		return SB_ERR(CSandBox::tr("Can't open source path"), status);
-	}
-
-	wstring dst_path = L"\\??\\" + DestDir + L"\\";
-	RtlInitUnicodeString(&uni, dst_path.c_str());
-	InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-	HANDLE dst_handle = NULL; // open destination fodler
-	status = NtCreateFile(&dst_handle, FILE_GENERIC_READ, &objattrs, &IoStatusBlock, NULL, 
-		Mode == 1 ? 0 : FILE_ATTRIBUTE_NORMAL,												// mode 1 = folder, 0 = file
-		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, 
-		FILE_OPEN, 
-		FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT, 
-		NULL, NULL);
-
-	if (!NT_SUCCESS(status)) {
-		NtClose(src_handle);
-		return SB_ERR(CSandBox::tr("Can't open destination folder"), status);
-	}
-
-	// do the rename and retry if needed
-	union {
-		FILE_RENAME_INFORMATION info;
-		WCHAR space[128];
-	} u;
-	u.info.ReplaceIfExists = FALSE;
-	u.info.RootDirectory = dst_handle;
-	u.info.FileNameLength = DestName.length() * sizeof(WCHAR);
-	wcscpy(u.info.FileName, DestName.c_str());
-
-	for (int retries = 0; retries < 20; retries++)
-	{
-		status = NtSetInformationFile(src_handle, &IoStatusBlock, &u.info, sizeof(u), FileRenameInformation);
-		/*if (status == STATUS_ACCESS_DENIED || status == STATUS_SHARING_VIOLATION)
-		{
-			// Please terminate programs running in the sandbox before deleting its contents - 3221
-		}*/
-		if (status != STATUS_SHARING_VIOLATION)
-			break;
-
-		Sleep(300);
-	}
-
-	NtClose(dst_handle);
-	NtClose(src_handle);
-
-	if (!NT_SUCCESS(status)) {
-		//SetLastError(RtlNtStatusToDosError(status));
-		return SB_ERR(CSandBox::tr("Rename operation failed"), status);
-	}
-	return SB_OK;
-}
-
-SB_STATUS CSandBox::RenameForDelete(const QString& BoxPath, QString& TempPath)
-{
-	wstring box_path = BoxPath.toStdWString();
-
-	size_t pos = box_path.find_last_of(L'\\');
-	wstring box_name = box_path.substr(pos + 1);
-	wstring box_root = box_path.substr(0, pos);
-
-	WCHAR temp_name[64];
-	FILETIME ft;
-	GetSystemTimeAsFileTime(&ft);
-	wsprintf(temp_name, L"__Delete_%s_%08X%08X", box_name.c_str(), ft.dwHighDateTime, ft.dwLowDateTime); // maintain a compatible naming convention
-
-	TempPath = QString::fromStdWString(box_root + L"\\" + temp_name);
-
-	SB_STATUS Status = CSandBox__OsRename(box_path, box_root, temp_name, 1);
-	if (Status.IsError())
-		return SB_ERR(tr("Could not move the sandbox folder out of the way %1").arg(Status.GetText()), Status.GetStatus());
-	return SB_OK;
-}
-
-bool CSandBox__WaitForFolder(const wstring& folder, int seconds = 10)
-{
-	NTSTATUS status = STATUS_SUCCESS;
-	IO_STATUS_BLOCK IoStatusBlock;
-
-	wstring path = L"\\??\\" + folder;
-	UNICODE_STRING uni;
-	RtlInitUnicodeString(&uni, path.c_str());
-
-	OBJECT_ATTRIBUTES objattrs;
-	InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-	for (int retries = 0; retries < seconds * 2; retries++)
-	{
-		HANDLE handle = NULL;
-		status = NtCreateFile(&handle, DELETE | SYNCHRONIZE, &objattrs, &IoStatusBlock, NULL, FILE_ATTRIBUTE_NORMAL,
-			0, FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
-		if (NT_SUCCESS(status)) {
-			NtClose(handle);
-			return true;
-		}
-
-		Sleep(500);
-	}
-
-	return false;
-}
-
-bool CSandBox__RemoveFileAttributes(const WCHAR *parent, const WCHAR *child)
-{
-	IO_STATUS_BLOCK IoStatusBlock;
-	NTSTATUS status;
-
-	wstring path = L"\\??\\" + wstring(parent) + L"\\" + wstring(child);
-	UNICODE_STRING uni;
-	RtlInitUnicodeString(&uni, path.c_str());
-
-	OBJECT_ATTRIBUTES objattrs;
-	InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-	HANDLE handle = NULL;
-	status = NtCreateFile(&handle, FILE_READ_ATTRIBUTES | FILE_WRITE_ATTRIBUTES | SYNCHRONIZE,
-		&objattrs, &IoStatusBlock, NULL, 0, 0, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
-	if (NT_SUCCESS(status)) 
-	{
-		union {
-			FILE_BASIC_INFORMATION info;
-			WCHAR space[128];
-		} u;
-
-		status = NtQueryInformationFile(handle, &IoStatusBlock, &u.info, sizeof(u), FileBasicInformation);
-		if (NT_SUCCESS(status)) 
-		{
-			u.info.FileAttributes &= ~(FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM);
-			if (u.info.FileAttributes == 0 || u.info.FileAttributes == FILE_ATTRIBUTE_DIRECTORY)
-				u.info.FileAttributes |= FILE_ATTRIBUTE_NORMAL;
-
-			status = NtSetInformationFile(handle, &IoStatusBlock, &u.info, sizeof(u), FileBasicInformation);
-		}
-	}
-
-	if (handle)
-		NtClose(handle);
-
-	//SetLastError(RtlNtStatusToDosError(status));
-	return (status == STATUS_SUCCESS);
-}
-
-SB_STATUS CSandBox__PrepareForDelete(const wstring& BoxFolder)
-{
-	static const WCHAR *deviceNames[] = {
-		L"aux", L"clock$", L"con", L"nul", L"prn",
-		L"com1", L"com2", L"com3", L"com4", L"com5",
-		L"com6", L"com7", L"com8", L"com9",
-		L"lpt1", L"lpt2", L"lpt3", L"lpt4", L"lpt5",
-		L"lpt6", L"lpt7", L"lpt8", L"lpt9",
-		NULL
-	};
-
-	static const UCHAR valid_chars[] =
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-		"0123456789 ^&@{}[],$=!-#()%.+~_";
-
-	//
-	// prepare the removel of the folder, remove all file attributes and junction points.
-	// if any path is longer than MAX_PATH shorten it by copying the offending entry to the box folder root
-	//
-
-	list<wstring> folders;
-	folders.push_back(BoxFolder);
-
-	while (!folders.empty())
-	{
-		wstring folder = folders.front();
-		folders.pop_front();
-
-		HANDLE hFind = NULL;
-		
-		for (;;)
-		{
-			WIN32_FIND_DATA data;
-			if (hFind == NULL)
-			{
-				hFind = FindFirstFile((folder + L"\\*").c_str(), &data);
-				if (hFind == INVALID_HANDLE_VALUE)
-					break;
-			}
-			else if (!FindNextFile(hFind, &data))
-				break;
-
-			WCHAR *name = data.cFileName;
-			if (wcscmp(name, L".") == 0 || wcscmp(name, L"..") == 0)
-				continue;
-			ULONG name_len = wcslen(name);
-
-			// clear problrmativ attributes
-			if (data.dwFileAttributes & (FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM))
-				CSandBox__RemoveFileAttributes(folder.c_str(), name);
-
-			// Check if the path is too long
-			bool needRename = ((folder.length() + name_len) > 220);
-			// Check if the file name matches a DOS device name
-			if ((!needRename) && (name_len <= 8)) {
-				for (ULONG devNum = 0; deviceNames[devNum]; ++devNum) {
-					const WCHAR *devName = deviceNames[devNum];
-					ULONG devNameLen = wcslen(devName);
-					if (_wcsnicmp(name, devName, devNameLen) == 0) {
-						needRename = true;
-						break;
-					}
-				}
-			}
-			// Check if the file name contains non-ASCII or invalid ASCII characters
-			if (!needRename) {
-				for (const WCHAR *nameptr = name; *nameptr; ++nameptr) {
-					const UCHAR *charptr;
-					if (*nameptr >= 0x80) {
-						needRename = TRUE;
-						break;
-					}
-					for (charptr = valid_chars; *charptr; ++charptr) {
-						if ((UCHAR)*nameptr == *charptr)
-							break;
-					}
-					if (!*charptr) {
-						needRename = TRUE;
-						break;
-					}
-				}
-			}
-			// Check if the file name ends with a dot or a space
-			if (!needRename) {
-				if (name_len > 1 && (name[name_len - 1] == L'.' || name[name_len - 1] == L' '))
-					needRename = TRUE;
-			}
-
-			// rename and move the offending file to the box folder root
-			if (needRename) 
-			{
-				FILETIME now;
-				GetSystemTimeAsFileTime(&now);
-				static ULONG counter = 0;
-				WCHAR temp_name[64];
-				wsprintf(temp_name, L"%08X-%08X-%08X", now.dwHighDateTime, now.dwLowDateTime, ++counter);
-
-				SB_STATUS Status = CSandBox__OsRename(folder + L"\\" + name, BoxFolder, temp_name, 0);
-				if (Status.IsError())
-					return Status;
-				
-				folder = BoxFolder;
-				wcscpy(name, temp_name);
-				//name_len = wcslen(name);
-			}
-			
-			// If the filesystem item is a folder add it to the processing queue, ...
-			if (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) 
-			{
-				// ... although if the directory is a reparse point delete it right away.
-				if (data.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT) 
-				{
-					wstring full_path = folder + L"\\" + name;
-					if (RemoveDirectory(full_path.c_str()))
-						return SB_ERR(CSandBox::tr("Failed to remove a reparse point!"));
-				}
-				else
-					folders.push_front(folder + L"\\" + name);
-			}
-		}
-
-		if (hFind != INVALID_HANDLE_VALUE)
-			FindClose(hFind);
-	}
-
-	CSandBox__RemoveFileAttributes(BoxFolder.c_str(), L"");
-
-	return SB_OK;
-}
-
-bool CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringList& BoxFolders, const QString& DeleteCommand)
-{
-	SB_STATUS Status;
-
-	foreach(const QString& CurFolder, BoxFolders)
-	{
-		if (!QDir().exists(CurFolder))
-			continue;
-
-		wstring BoxFolder = CurFolder.toStdWString();
-
-		pProgress->ShowMessage(tr("Waiting for folder"));
-
-		// Prepare the folder to be deleted
-		CSandBox__WaitForFolder(BoxFolder);
-
-		if (pProgress->IsCancel())
-			break;
-
-		pProgress->ShowMessage(tr("Preparing for deletion"));
-		Status = CSandBox__PrepareForDelete(BoxFolder);
-		if (Status.IsError()) {
-			Status = SB_ERR(CSandBox::tr("Error renaming one of the long file names in the sandbox: %1. The contents of the sandbox will not be deleted.").arg(Status.GetText()), Status.GetStatus());
-			break;
-		}
-		
-		// Prepare and issue the delete command
-		CSandBox__WaitForFolder(BoxFolder);
-
-		if (pProgress->IsCancel())
-			break;
-
-		pProgress->ShowMessage(tr("Running delete command"));
-
-		QString Cmd = DeleteCommand;
-		Cmd.replace("%SANDBOX%", CurFolder); // expand %SANDBOX%
-
-		// Expand other environment variables
-		foreach(const QString& key, QProcessEnvironment::systemEnvironment().keys())
-			Cmd.replace("%" + key + "%", QProcessEnvironment::systemEnvironment().value(key));
-
-		QProcess Proc;
-		Proc.execute(Cmd);
-		Proc.waitForFinished();
-		if (Proc.exitCode() != 0){
-			Status = SB_ERR(CSandBox::tr("Error sandbox delete command returned %1. The contents of the sandbox will not be deleted.").arg(Proc.exitCode()));
-			break;
-		}
-	}
-
-	pProgress->Finish(Status);
-
-	return !Status.IsError();
 }

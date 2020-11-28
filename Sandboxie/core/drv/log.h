@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -120,6 +121,13 @@ void Log_Popup_Msg(
     const WCHAR *string1,
     const WCHAR *string2,
     ULONG session_id,
+	HANDLE pid);
+
+void Log_Popup_MsgEx(
+	NTSTATUS error_code,
+	const WCHAR *string1, ULONG string1_len,
+	const WCHAR *string2, ULONG string2_len,
+	ULONG session_id,
 	HANDLE pid);
 
 void Log_Status_Ex(

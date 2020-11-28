@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -67,6 +68,8 @@ static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
 static NTSTATUS Api_GetHomePath(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms);
+
+static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
 
 //---------------------------------------------------------------------------
@@ -186,6 +189,8 @@ _FX BOOLEAN Api_Init(void)
     Api_SetFunction(API_UNLOAD_DRIVER,      Driver_Api_Unload);
 
     //Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
+
+	Api_SetFunction(API_PROCESS_EXEMPTION_CONTROL, Api_ProcessExemptionControl);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;
@@ -575,6 +580,7 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
     WCHAR *msgtext_buffer;
     POOL *pool;
     WCHAR *text;
+	HANDLE pid;
 
     msgid = args->msgid.val;
     if (msgid >= 2101 && msgid <= 2199)
@@ -602,10 +608,16 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
         return STATUS_INVALID_PARAMETER;
     ProbeForRead(msgtext_buffer, msgtext_length, sizeof(WCHAR));
 
-    if (proc)
-        pool = proc->pool;
-    else
-        pool = Driver_Pool;
+	pid = (HANDLE)args->process_id.val;
+	if (proc) {
+		pool = proc->pool;
+		if (!pid) pid = proc->pid;
+	}
+	else {
+		pool = Driver_Pool;
+		if (!pid) pid = PsGetCurrentProcessId();
+	}
+
     text = Mem_Alloc(pool, msgtext_length + 8);
     if (! text)
         return STATUS_INSUFFICIENT_RESOURCES;
@@ -619,7 +631,7 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
 
     if (status == STATUS_SUCCESS) {
         text[msgtext_length / sizeof(WCHAR)] = L'\0';
-        Log_Popup_Msg(msgid, text, NULL, args->session_id.val, proc->pid);
+		Log_Popup_MsgEx(msgid, text, msgtext_length / sizeof(WCHAR), NULL, 0, args->session_id.val, pid);
     }
 
     Mem_Free(text, msgtext_length + 8);
@@ -689,7 +701,7 @@ _FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
 	WCHAR *msgtext_buffer;
 	KIRQL irql;
 
-	if (proc)
+	if (proc) // sandboxed processes can't read the log
 		return STATUS_NOT_IMPLEMENTED;
 
 	ProbeForRead(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
@@ -711,52 +723,62 @@ _FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
 
 	__try {
 
-		CHAR* read_ptr = log_buffer_get_next(*args->msg_num.val, Api_LogBuffer);
+		LOG_BUFFER_SEQ_T seq_number = *args->msg_num.val;
+		for (;;) {
 
-		if (!read_ptr) {
+			CHAR* read_ptr = log_buffer_get_next(seq_number, Api_LogBuffer);
+			if (!read_ptr) {
 
-			status = STATUS_NO_MORE_ENTRIES;
-
-		} else {
-
-			LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, Api_LogBuffer);
-			LOG_BUFFER_SEQ_T seq_number = log_buffer_get_seq_num(&read_ptr, Api_LogBuffer);
-			*args->msg_num.val = seq_number;
-			//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
-			ULONG session_id;
-			log_buffer_get_bytes((CHAR*)&session_id, 4, &read_ptr, Api_LogBuffer);
-			ULONG process_id;
-			log_buffer_get_bytes((CHAR*)&process_id, 4, &read_ptr, Api_LogBuffer);
-
-			if (session_id == args->session_id.val) {
-
-				log_buffer_get_bytes((CHAR*)args->msgid.val, 4, &read_ptr, Api_LogBuffer);
-				SIZE_T msg_length = entry_size - (4 + 4);
-
-				if (args->process_id.val != NULL)
-				{
-					ProbeForWrite(args->process_id.val, sizeof(ULONG), sizeof(ULONG));
-					*args->process_id.val = process_id;
-				}
-
-				if (msg_length <= msgtext->MaximumLength)
-				{
-					msgtext->Length = (USHORT)msg_length;
-					ProbeForWrite(msgtext_buffer, msg_length, sizeof(WCHAR));
-					memcpy(msgtext_buffer, read_ptr, msg_length);
-				}
-				else
-				{
-					status = STATUS_BUFFER_TOO_SMALL;
-				}
-
-			} else {
-				// this entry is not for us, so we return an empty result to maintain sequence consistency
-
-				*args->msgid.val = 0;
-
+				status = STATUS_NO_MORE_ENTRIES;
+				break;
 			}
 
+			LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, Api_LogBuffer);
+			seq_number = log_buffer_get_seq_num(&read_ptr, Api_LogBuffer);
+
+			//if (seq_number != *args->msg_num.val + 1) {
+			//
+			//	status = STATUS_REQUEST_OUT_OF_SEQUENCE;
+			//	*args->msg_num.val = seq_number - 1;
+			//	break;
+			//}
+
+			//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]...[stringN n*2][\0 2][\0 2]
+
+			ULONG session_id;
+			log_buffer_get_bytes((CHAR*)&session_id, 4, &read_ptr, Api_LogBuffer);
+			entry_size -= 4;
+
+			if (args->session_id.val != -1 && session_id != args->session_id.val) // Note: the service (session_id == -1) gets all the entries
+				continue;
+
+			ULONG process_id;
+			log_buffer_get_bytes((CHAR*)&process_id, 4, &read_ptr, Api_LogBuffer);
+			entry_size -= 4;
+
+			log_buffer_get_bytes((CHAR*)args->msgid.val, 4, &read_ptr, Api_LogBuffer);
+			entry_size -= 4;
+
+			if (args->process_id.val != NULL)
+			{
+				ProbeForWrite(args->process_id.val, sizeof(ULONG), sizeof(ULONG));
+				*args->process_id.val = process_id;
+			}
+
+			// we return all strings in one
+			if (entry_size <= msgtext->MaximumLength)
+			{
+				msgtext->Length = (USHORT)entry_size;
+				ProbeForWrite(msgtext_buffer, entry_size, sizeof(WCHAR));
+				memcpy(msgtext_buffer, read_ptr, entry_size);
+			}
+			else
+			{
+				status = STATUS_BUFFER_TOO_SMALL;
+			}
+
+			*args->msg_num.val = seq_number; // update when everything went fine
+			break;
 		}
 
 	} __except (EXCEPTION_EXECUTE_HANDLER) {
@@ -1161,4 +1183,58 @@ _FX void Api_CopyStringToUser(
                 uni->Length = 0;
         }
     }
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_Api_AllowSpoolerPrintToFile
+//---------------------------------------------------------------------------
+
+_FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
+{
+	API_PROCESS_EXEMPTION_CONTROL_ARGS *pArgs = (API_PROCESS_EXEMPTION_CONTROL_ARGS *)parms;
+	ULONG *in_flag;
+	ULONG *out_flag;
+
+	if (proc) // is caller sandboxed?
+		return STATUS_ACCESS_DENIED;
+
+	if (pArgs->process_id.val == 0)
+		return STATUS_INVALID_PARAMETER;
+	
+	proc = Process_Find(pArgs->process_id.val, NULL);
+	if (!proc || proc == PROCESS_TERMINATED)
+		return STATUS_NOT_FOUND;
+
+	in_flag = pArgs->set_flag.val;
+	if (in_flag) {
+		ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
+	}
+
+	out_flag = pArgs->get_flag.val;
+	if (out_flag) {
+		ProbeForWrite(out_flag, sizeof(ULONG), sizeof(ULONG));
+	}
+
+	if(!in_flag && !out_flag)
+		return STATUS_INVALID_PARAMETER;
+
+	if (pArgs->action_id.val == 'splr')
+	{
+		if(in_flag)
+			proc->m_boolAllowSpoolerPrintToFile = *in_flag != 0;
+		if (out_flag)
+			*out_flag = proc->m_boolAllowSpoolerPrintToFile;
+	}
+	else if (pArgs->action_id.val == 'inet')
+	{
+		if(in_flag)
+			proc->AllowInternetAccess = *in_flag != 0;
+		if (out_flag)
+			*out_flag = proc->AllowInternetAccess;
+	}
+	else
+		return STATUS_INVALID_INFO_CLASS;
+	
+	return 0;
 }

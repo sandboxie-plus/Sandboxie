@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -190,7 +191,7 @@ _FX BOOLEAN Process_Low_Inject(
             if (sbielow_loaded)
                 break;
 
-            time.QuadPart = -(SECONDS(1) / 4);
+            time.QuadPart = -(SECONDS(1) / 4); // 250ms*40 = 10s
             KeWaitForSingleObject(Process_Low_Event,
                                   Executive, KernelMode, FALSE, &time);
             ++retries;

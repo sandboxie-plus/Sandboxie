@@ -80,19 +80,19 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>msvc2015_64</QtInstall>
-    <QtModules>core;gui;network;widgets;winextras</QtModules>
+    <QtModules>concurrent;core;gui;network;widgets;winextras</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="QtSettings">
     <QtInstall>msvc2015_64</QtInstall>
-    <QtModules>core;gui;network;widgets;winextras</QtModules>
+    <QtModules>concurrent;core;gui;network;widgets;winextras</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>msvc2015_64</QtInstall>
-    <QtModules>core;gui;network;widgets;winextras</QtModules>
+    <QtModules>concurrent;core;gui;network;widgets;winextras</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="QtSettings">
     <QtInstall>msvc2015</QtInstall>
-    <QtModules>core;gui;network;widgets;winextras</QtModules>
+    <QtModules>concurrent;core;gui;network;widgets;winextras</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -208,10 +208,14 @@
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Windows\OptionsWindow.cpp" />
+    <ClCompile Include="Windows\PopUpWindow.cpp" />
+    <ClCompile Include="Windows\RecoveryWindow.cpp" />
     <ClCompile Include="Windows\SettingsWindow.cpp" />
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\RecoveryWindow.h" />
+    <QtMoc Include="Windows\PopUpWindow.h" />
     <QtMoc Include="Windows\SnapshotsWindow.h" />
     <QtMoc Include="Windows\SettingsWindow.h" />
     <QtMoc Include="Windows\OptionsWindow.h" />
@@ -238,6 +242,8 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Forms\OptionsWindow.ui" />
+    <QtUic Include="Forms\PopUpWindow.ui" />
+    <QtUic Include="Forms\RecoveryWindow.ui" />
     <QtUic Include="Forms\SettingsWindow.ui" />
     <QtUic Include="Forms\SnapshotsWindow.ui" />
   </ItemGroup>

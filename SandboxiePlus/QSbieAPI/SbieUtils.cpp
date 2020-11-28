@@ -7,9 +7,12 @@
 typedef long NTSTATUS;
 
 #include <windows.h>
+#include <Shlobj.h>
 #include "SbieDefs.h"
 
 #include "..\..\Sandboxie\common\win32_ntddk.h"
+
+#include "SbieAPI.h"
 
 int GetServiceStatus(const wchar_t* name)
 {
@@ -274,4 +277,144 @@ void CSbieUtils::RemoveContextMenu()
 {
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\sandbox");
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\folder\\shell\\sandbox");
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Shortcuts
+
+bool CreateShortcut(CSbieAPI* pApi, const QString &LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath, int iconIndex, const QString &workdir, BOOL run_elevated = 0)
+{
+	QString StartExe = pApi->GetStartPath();
+
+	QString StartArgs;
+	if (run_elevated)
+		StartArgs += "/elevated ";
+	StartArgs += "/box:" + boxname;
+	if (!arguments.isEmpty())
+		StartArgs += " \"" + arguments + "\"";
+
+	IUnknown *pUnknown;
+	HRESULT hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC, IID_IUnknown, (void **)&pUnknown);
+	if (FAILED(hr))
+		return false;
+
+	IShellLink *pShellLink;
+	hr = pUnknown->QueryInterface(IID_IShellLink, (void **)&pShellLink);
+	if (SUCCEEDED(hr)) 
+	{			
+		pShellLink->SetPath(StartExe.toStdWString().c_str());
+		pShellLink->SetArguments(StartArgs.toStdWString().c_str());
+		if (!iconPath.isEmpty())
+			pShellLink->SetIconLocation(iconPath.toStdWString().c_str(), iconIndex);
+		if (!workdir.isEmpty())
+			pShellLink->SetWorkingDirectory(workdir.toStdWString().c_str());
+		if (!LinkName.isEmpty()) {
+			QString desc = QObject::tr("Open %1 in sandbox %2").arg(LinkName).arg(boxname);
+			pShellLink->SetDescription(desc.toStdWString().c_str());
+		}
+
+		IPersistFile *pPersistFile;
+		hr = pUnknown->QueryInterface(IID_IPersistFile, (void **)&pPersistFile);
+		if (SUCCEEDED(hr)) 
+		{
+			pPersistFile->Save((LinkPath.toStdWString() + L".lnk").c_str(), FALSE);
+
+			pPersistFile->Release();
+		}
+
+		pShellLink->Release();
+	}
+
+	pUnknown->Release();
+	return (SUCCEEDED(hr));
+}
+
+void CreateDesktopShortcut(CSbieAPI* pApi, const QString &BoxName, const QString &LinkPath, const QString &IconPath, quint32 IconIndex, const QString &WorkDir)
+{
+	WCHAR path[512];
+	HRESULT hr = SHGetFolderPathW(NULL, CSIDL_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, path);
+	if (hr != 0 || *path == L'\0')
+		return;
+
+	QString LinkName;
+	int pos = LinkPath.lastIndexOf(L'\\');
+	if (pos == -1)
+		return;
+	if (pos == 2 && LinkPath.length() == 3)
+		LinkName = QObject::tr("Drive %1").arg(LinkPath.left(1));
+	else {
+		LinkName = LinkPath.mid(pos + 1);
+		pos = LinkName.indexOf(QRegExp("[" + QRegExp::escape("\":;,*?.") + "]"));
+		if (pos != -1)
+			LinkName = LinkName.left(pos);
+	}
+
+	QString Path = QString::fromWCharArray(path);
+	if (Path.right(1) != "\\")
+		Path.append("\\");
+	Path += "[" + BoxName + "] " + LinkName;
+
+	CreateShortcut(pApi, Path, LinkName, BoxName, LinkPath , IconPath, IconIndex, WorkDir);
+}
+
+bool GetStartMenuShortcut(CSbieAPI* pApi, QString &BoxName, QString &LinkPath, QString &IconPath, quint32& IconIndex, QString &WorkDir)
+{
+	WCHAR MapName[128];
+	wsprintf(MapName, SANDBOXIE L"_StartMenu_WorkArea_%08X_%08X", GetCurrentProcessId(), GetTickCount());
+	HANDLE hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 8192, MapName);
+	if (!hMapping)
+		return false;
+
+	WCHAR* buf = (WCHAR *)MapViewOfFile(hMapping, FILE_MAP_WRITE, 0, 0, 8192);
+	if (!buf) {
+		CloseHandle(hMapping);
+		return false;
+	}
+	memset(buf, 0, 8192);
+	
+
+	QProcess Process;
+	QString Command = "start_menu:" + QString::fromWCharArray(MapName);
+	if (!LinkPath.isEmpty())
+		Command += ":" + LinkPath;
+	pApi->RunStart(BoxName, Command, &Process);
+	//Process.waitForFinished(-1);
+	while(Process.state() != QProcess::NotRunning)
+		QCoreApplication::processEvents(); // keep UI responsive
+	
+
+	struct SLnk {
+		WCHAR box_name[34];		//0
+		WCHAR reserved[30];		//34
+		WCHAR link_path[956];	//64
+		ULONG IconIndex;		//1020
+		WCHAR unused[2];		//1022
+		WCHAR icon_path[1024];	//1024
+		WCHAR work_dir[1024];	//2048
+								//3072
+	} *lnk = (SLnk*)buf;
+
+	BoxName = QString::fromWCharArray(lnk->box_name, wcsnlen_s(lnk->box_name, sizeof(lnk->box_name)));
+	LinkPath = QString::fromWCharArray(lnk->link_path, wcsnlen_s(lnk->link_path, sizeof(lnk->link_path)));
+	if (*lnk->icon_path) {
+		IconIndex = lnk->IconIndex;
+		IconPath = QString::fromWCharArray(lnk->icon_path, wcsnlen_s(lnk->icon_path, sizeof(lnk->icon_path)));
+	}
+	if (*lnk->work_dir)	WorkDir = QString::fromWCharArray(lnk->work_dir, wcsnlen_s(lnk->work_dir, sizeof(lnk->work_dir)));
+	else				WorkDir = LinkPath.left(LinkPath.lastIndexOf('\\'));
+
+	UnmapViewOfFile(buf);
+	CloseHandle(hMapping);
+
+	if (BoxName.isEmpty() || LinkPath.isEmpty())
+		return false;
+	return true;
+}
+
+void CSbieUtils::CreateDesktopShortcut(const QString& BoxName, CSbieAPI* pApi)
+{
+	QString LinkPath, IconPath, WorkDir;
+	quint32 IconIndex;
+	if (::GetStartMenuShortcut(pApi, QString(BoxName), LinkPath, IconPath, IconIndex, WorkDir))
+		::CreateDesktopShortcut(pApi, BoxName, LinkPath, IconPath, IconIndex, WorkDir);
 }

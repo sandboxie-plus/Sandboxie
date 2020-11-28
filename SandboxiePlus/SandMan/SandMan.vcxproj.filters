@@ -85,6 +85,12 @@
     <ClCompile Include="Windows\SnapshotsWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\PopUpWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\RecoveryWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -131,6 +137,12 @@
     <QtMoc Include="Windows\SnapshotsWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\PopUpWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\RecoveryWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -155,6 +167,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\SnapshotsWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\PopUpWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\RecoveryWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

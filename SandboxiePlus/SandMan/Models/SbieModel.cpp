@@ -21,16 +21,16 @@ CSbieModel::~CSbieModel()
 {
 }
 
-QList<QVariant> CSbieModel::MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint64, CBoxedProcessPtr>& ProcessList)
+QList<QVariant> CSbieModel::MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList)
 {
 	QList<QVariant> Path = MakeProcPath(pProcess, ProcessList);
 	Path.prepend(BoxName);
 	return Path;
 }
 
-QList<QVariant> CSbieModel::MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint64, CBoxedProcessPtr>& ProcessList)
+QList<QVariant> CSbieModel::MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList)
 {
-	quint64 ParentID = pProcess->GetParendPID();
+	quint32 ParentID = pProcess->GetParendPID();
 	CBoxedProcessPtr pParent = ProcessList.value(ParentID);
 
 	QList<QVariant> Path;
@@ -42,7 +42,7 @@ QList<QVariant> CSbieModel::MakeProcPath(const CBoxedProcessPtr& pProcess, const
 	return Path;
 }
 
-bool CSbieModel::TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint64, CBoxedProcessPtr>& ProcessList, int Index)
+bool CSbieModel::TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, int Index)
 {
 	if (Index == 0)
 	{
@@ -52,7 +52,7 @@ bool CSbieModel::TestProcPath(const QList<QVariant>& Path, const QString& BoxNam
 		return TestProcPath(Path, BoxName, pProcess, ProcessList, 1);
 	}
 
-	quint64 ParentID = pProcess->GetParendPID();
+	quint32 ParentID = pProcess->GetParendPID();
 	CBoxedProcessPtr pParent = ProcessList.value(ParentID);
 
 	if (!pParent.isNull() && ParentID != pProcess->GetProcessId())
@@ -100,7 +100,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 		bool State = false;
 		int Changed = 0;
 
-		QMap<quint64, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
+		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
 		bool HasActive = Sync(pBox, ProcessList, New, Old, Added);
 		int inUse = (HasActive ? 1 : 0);
@@ -166,7 +166,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList)
 	return Added;
 }
 
-bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QMap<quint64, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added)
+bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added)
 {
 	QString BoxName = pBox->GetName();
 

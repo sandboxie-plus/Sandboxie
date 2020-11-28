@@ -8,14 +8,15 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        platform: [Win32, x64]
     runs-on: windows-latest
-
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v1
         
       - name: Build Driver
-        run: msbuild /t:build Sandboxie\Sandboxdrv.sln /p:Configuration="SbieRelease" /p:Platform="x64"
+        run: msbuild /t:build Sandboxie\Sandboxdrv.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}

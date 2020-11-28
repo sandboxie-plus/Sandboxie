@@ -20,3 +20,16 @@ jobs:
         
       - name: Build Driver
         run: msbuild /t:build Sandboxie\Sandboxdrv.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Sandboxie (${{ matrix.platform }})
+          path: |
+            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
+            !**/*.pdb
+            !**/*.exp
+            !**/*.ilk
+            !**/*.iobj
+            !**/*.lib
+            !**/*.cer
+            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb

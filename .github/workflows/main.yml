@@ -26,7 +26,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
 
       - name: Build SandboxiePlus
-        run: msbuild /t:build SandboxiePlus\SandboxPlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
+        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
 
       - name: Upload Sandboxie
         uses: actions/upload-artifact@v2

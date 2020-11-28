@@ -22,7 +22,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 #endif
 
 	m_pSnapshotModel = new CSimpleTreeModel();
-	m_pSnapshotModel->setHeaderLabels(tr("Snapshot").split("|"));
+	m_pSnapshotModel->AddColumn(tr("Snapshot"), "Name");
 
 	/*m_pSortProxy = new CSortFilterProxyModel(false, this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
@@ -56,7 +56,6 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	QModelIndex CurIndex = m_pSnapshotModel->FindIndex(m_CurSnapshot);
 	if (CurIndex.isValid()) {
 		ui.treeSnapshots->selectionModel()->select(CurIndex, QItemSelectionModel::ClearAndSelect);
-		UpdateSnapshot(CurIndex);
 	}
 }
 
@@ -82,9 +81,6 @@ void CSnapshotsWindow::UpdateSnapshots()
 		BoxSnapshot["Name"] = Snapshot.NameStr;
 		BoxSnapshot["Info"] = Snapshot.InfoStr;
 		BoxSnapshot["Date"] = Snapshot.SnapDate;
-		QVariantMap Values;
-		Values["0"] = Snapshot.NameStr;
-		BoxSnapshot["Values"] = Values;
 		if(m_CurSnapshot == Snapshot.ID)
 			BoxSnapshot["IsBold"] = true;
 		m_SnapshotMap.insert(Snapshot.ID, BoxSnapshot);

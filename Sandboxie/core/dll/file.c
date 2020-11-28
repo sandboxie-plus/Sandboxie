@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@
 #include <stdio.h>
 #include <dbt.h>
 #include "core/svc/FileWire.h"
+#include "core/svc/InteractiveWire.h"
 
 
 //---------------------------------------------------------------------------
@@ -198,6 +200,8 @@ static NTSTATUS File_CreatePath_2(
 static NTSTATUS File_MigrateFile(
     const WCHAR *TruePath, const WCHAR *CopyPath,
     BOOLEAN IsWritePath, BOOLEAN WithContents);
+
+static const BOOLEAN File_MigrateFile_ManualBypass(const WCHAR *TruePath, ULONGLONG file_size);
 
 static const WCHAR *File_MigrateFile_ShouldBypass(const WCHAR *TruePath);
 
@@ -3979,7 +3983,7 @@ _FX NTSTATUS File_MigrateFile(
     UNICODE_STRING objname;
     IO_STATUS_BLOCK IoStatusBlock;
     FILE_NETWORK_OPEN_INFORMATION open_info;
-    ULONG file_size;
+    ULONGLONG file_size;
     ACCESS_MASK DesiredAccess;
     ULONG CreateOptions;
 
@@ -4042,15 +4046,14 @@ _FX NTSTATUS File_MigrateFile(
             File_InitCopyLimit();
         }
 
-        file_size = open_info.EndOfFile.LowPart;
+        file_size = open_info.EndOfFile.QuadPart;
 
-        if (open_info.EndOfFile.HighPart != 0 ||
-            file_size > (File_CopyLimitKb * 1024)) {
+        if (File_CopyLimitKb != -1 && file_size > (File_CopyLimitKb * 1024)) {
 
             const WCHAR *TruePathName =
                 File_MigrateFile_ShouldBypass(TruePath);
 
-            if (TruePathName) {
+            if (TruePathName && !File_MigrateFile_ManualBypass(TruePath, file_size)) {
 
                 NtClose(TrueHandle);
 
@@ -4059,7 +4062,7 @@ _FX NTSTATUS File_MigrateFile(
                     ULONG TruePathNameLen = wcslen(TruePathName);
                     WCHAR *text = Dll_AllocTemp(
                             (TruePathNameLen + 64) * sizeof(WCHAR));
-                    Sbie_snwprintf(text, (TruePathNameLen + 64), L"%s [%s / %d]",
+                    Sbie_snwprintf(text, (TruePathNameLen + 64), L"%s [%s / %I64u]",
                         TruePathName, Dll_BoxName, file_size);
 
                     SbieApi_Log(2102, text);
@@ -4108,6 +4111,8 @@ _FX NTSTATUS File_MigrateFile(
 
     if (file_size) {
 
+		ULONG Next_Status = GetTickCount() + 3000; // wait 3 seconds
+
         void *buffer = Dll_AllocTemp(PAGE_SIZE);
         if (! buffer) {
             status = STATUS_INSUFFICIENT_RESOURCES;
@@ -4117,7 +4122,7 @@ _FX NTSTATUS File_MigrateFile(
         while (file_size > 0) {
 
             ULONG buffer_size =
-                (file_size > PAGE_SIZE) ? PAGE_SIZE : file_size;
+                (file_size > PAGE_SIZE) ? PAGE_SIZE : (ULONG)file_size;
 
             status = NtReadFile(
                 TrueHandle, NULL, NULL, NULL, &IoStatusBlock,
@@ -4126,7 +4131,7 @@ _FX NTSTATUS File_MigrateFile(
             if (NT_SUCCESS(status)) {
 
                 buffer_size = (ULONG)IoStatusBlock.Information;
-                file_size -= buffer_size;
+                file_size -= (ULONGLONG)buffer_size;
 
                 status = NtWriteFile(
                     CopyHandle, NULL, NULL, NULL, &IoStatusBlock,
@@ -4135,6 +4140,16 @@ _FX NTSTATUS File_MigrateFile(
 
             if (! NT_SUCCESS(status))
                 break;
+
+			ULONG Cur_Ticks = GetTickCount();
+			if (Next_Status < Cur_Ticks) {
+				Next_Status = Cur_Ticks + 1000; // update prgress every second
+
+				WCHAR size_str[32];
+				Sbie_snwprintf(size_str, 32, L"%I64u", file_size);
+				const WCHAR* strings[] = { Dll_BoxName, TruePath, size_str, NULL };
+				SbieApi_LogMsgExt(2198, strings);
+			}
         }
 
         if (buffer)
@@ -4179,12 +4194,39 @@ _FX NTSTATUS File_MigrateFile(
 
 
 //---------------------------------------------------------------------------
+// File_MigrateFile_ManualBypass
+//---------------------------------------------------------------------------
+
+
+_FX const BOOLEAN File_MigrateFile_ManualBypass(const WCHAR *TruePath, ULONGLONG file_size)
+{
+	MAN_FILE_MIGRATION_REQ req;
+	MAN_FILE_MIGRATION_RPL *rpl = NULL;
+	BOOLEAN ok = FALSE;
+
+	req.msgid = MAN_FILE_MIGRATION;
+	req.file_size = file_size;
+	wcscpy(req.file_path, TruePath);
+
+	rpl = SbieDll_CallServerQueue(INTERACTIVE_QUEUE_NAME, &req, sizeof(req), sizeof(*rpl));
+	if (rpl)
+	{
+		ok = rpl->retval != 0;
+		Dll_Free(rpl);
+	}
+
+	return ok;
+}
+
+
+//---------------------------------------------------------------------------
 // File_MigrateFile_ShouldBypass
 //---------------------------------------------------------------------------
 
 
 _FX const WCHAR *File_MigrateFile_ShouldBypass(const WCHAR *TruePath)
 {
+	// todo: load this list from file
     static const WCHAR *_names[] = {
         // firefox
         L"places.sqlite", L"xul.mfl",

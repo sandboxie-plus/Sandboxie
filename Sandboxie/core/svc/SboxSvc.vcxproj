@@ -244,6 +244,8 @@
     <ClInclude Include="fileserver.h" />
     <ClInclude Include="filewire.h" />
     <ClInclude Include="GuiServer.h" />
+    <ClInclude Include="GuiWire.h" />
+    <ClInclude Include="InteractiveWire.h" />
     <ClInclude Include="iphlpserver.h" />
     <ClInclude Include="iphlpwire.h" />
     <ClInclude Include="misc.h" />

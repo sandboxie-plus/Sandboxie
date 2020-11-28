@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -69,7 +70,7 @@ LONG SbieApi_GetWork(
     ULONG *Length);*/
 
 SBIEAPI_EXPORT 
-LONG SbieApi_GetMessage(
+ULONG SbieApi_GetMessage(
 	ULONG* MessageNum,
 	ULONG SessionId,
 	ULONG *MessageId,
@@ -86,7 +87,11 @@ SBIEAPI_EXPORT LONG SbieApi_LogEx(
 SBIEAPI_EXPORT LONG SbieApi_vLogEx(
     ULONG session_id, ULONG msgid, const WCHAR *format, va_list va_args);
 
-LONG SbieApi_Log2199(const WCHAR *path);
+SBIEAPI_EXPORT LONG SbieApi_LogMsgEx(
+	ULONG session_id, ULONG msgid, const WCHAR* msg_data, USHORT msg_len);
+
+SBIEAPI_EXPORT LONG SbieApi_LogMsgExt(
+	ULONG msgid, const WCHAR** strings);
 
 SBIEAPI_EXPORT
 LONG SbieApi_GetHomePath(
@@ -353,6 +358,14 @@ LONG SbieApi_GetUnmountHive(
 
 //---------------------------------------------------------------------------
 
+SBIEAPI_EXPORT
+LONG SbieApi_ProcessExemptionControl(
+	HANDLE process_id,
+	ULONG action_id,
+	ULONG *NewState,
+	ULONG *OldState);
+
+//---------------------------------------------------------------------------
 
 #ifdef __cplusplus
 }

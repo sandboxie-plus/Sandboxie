@@ -24,7 +24,7 @@
 #define _MY_QUEUEWIRE_H
 
 
-#include "common/defines.h"
+#include "../../common/defines.h"
 #include "msgids.h"
 
 

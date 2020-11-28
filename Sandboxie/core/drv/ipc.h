@@ -1,5 +1,6 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
+ * Copyright 2020 David Xanatos, xanasoft.com 
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -64,6 +65,8 @@ void *Ipc_GetServerPort(void *Object);
 
 BOOLEAN Ipc_InitProcess(PROCESS *proc);
 
+BOOLEAN Ipc_IsRunRestricted(PROCESS *proc);
+
 
 //---------------------------------------------------------------------------
 
@@ -89,7 +92,7 @@ NTSTATUS Ipc_Api_GetSpoolerPort(PROCESS *proc, ULONG64 *parms);
 
 NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms);
 
-NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms);
+//NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms);
 
 NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms);
 NTSTATUS Ipc_Api_GetWpadPortFromPid(PROCESS *proc, ULONG64 *parms);

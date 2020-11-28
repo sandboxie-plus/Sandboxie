@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -114,13 +115,16 @@ void CMonitorDialog::OnIdle()
 		ULONG seq_num = m_last_entry_seq_num;
         USHORT type;
 		ULONG64 pid;
-        SbieApi_MonitorGetEx(&seq_num, &type, &pid, &name[12]);
-        if ((! type) || (! name[12]))
-            break;
+        ULONG status = SbieApi_MonitorGetEx(&seq_num, &type, &pid, &name[12]);
+		if (status != 0)
+			break; // error or no more entries
 
 		if(seq_num != m_last_entry_seq_num + 1)
-			SbieApi_Log(MSG_1242, L"Resource access logger overflow!"); // MSG_MONITOR_OVERFLOW
+			SbieApi_Log(MSG_1242, NULL); // MSG_MONITOR_OVERFLOW
 		m_last_entry_seq_num = seq_num;
+
+		if ((!type) || (!name[12]))
+			break;
 
 		// privacy protection, hide username
         while (m_username_len) {

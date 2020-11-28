@@ -28,7 +28,9 @@ private slots:
 
 	void OnSetPassword();
 
+	void OnWarnChanged() { m_WarnProgsChanged = true; }
 	void OnAddWarnProg();
+	void OnAddWarnFolder();
 	void OnDelWarnProg();
 
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
@@ -37,6 +39,8 @@ private slots:
 
 protected:
 	void closeEvent(QCloseEvent *e);
+
+	void	AddWarnEntry(const QString& Name, int type);
 
 	int 	m_CompatLoaded;
 	QString m_NewPassword;

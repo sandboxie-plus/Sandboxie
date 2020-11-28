@@ -2,8 +2,10 @@
 #include "SbieView.h"
 #include "..\SandMan.h"
 #include "../QSbieAPI/SbieAPI.h"
+#include "../QSbieAPI/SbieUtils.h"
 #include "../../MiscHelpers/Common/SortFilterProxyModel.h"
 #include "../../MiscHelpers/Common/Settings.h"
+#include "../../MiscHelpers/Common/Common.h"
 #include "../Windows/OptionsWindow.h"
 #include "../Windows/SnapshotsWindow.h"
 
@@ -51,19 +53,25 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	connect(m_pSbieModel, SIGNAL(ToolTipCallback(const QVariant&, QString&)), this, SLOT(OnToolTipCallback(const QVariant&, QString&)), Qt::DirectConnection);
 
-	m_pMenuRun = m_pMenu->addMenu(tr("Run"));
+	m_pMenuRun = m_pMenu->addMenu(QIcon(":/Actions/Run"), tr("Run"));
 		m_pMenuRunAny = m_pMenuRun->addAction(tr("Run Program"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunMenu = m_pMenuRun->addAction(tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunBrowser = m_pMenuRun->addAction(tr("Run Web Browser"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunMailer = m_pMenuRun->addAction(tr("Run eMail Client"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunExplorer = m_pMenuRun->addAction(tr("Run Explorer"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmd = m_pMenuRun->addAction(tr("Run Cmd.exe"), this, SLOT(OnSandBoxAction()));
-	m_pMenuEmptyBox = m_pMenu->addAction(tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRun->addSeparator();
+		m_iMenuRun = m_pMenuRun->actions().count();
+	m_pMenuEmptyBox = m_pMenu->addAction(QIcon(":/Actions/EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuExplore = m_pMenu->addAction(tr("Explore Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenuMkLink = m_pMenu->addAction(QIcon(":/Actions/MkLink"), tr("Create Desktop Shortcut"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuSnapshots = m_pMenu->addAction(tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
-	m_pMenuCleanUp = m_pMenu->addAction(tr("Delete Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenuExplore = m_pMenu->addAction(QIcon(":/Actions/Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenuSnapshots = m_pMenu->addAction(QIcon(":/Actions/Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRecover = m_pMenu->addAction(QIcon(":/Actions/Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
+	m_pMenuCleanUp = m_pMenu->addAction(QIcon(":/Actions/Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuPresets = m_pMenu->addMenu(tr("Sandbox Presets"));
+	m_pMenuPresets = m_pMenu->addMenu(QIcon(":/Actions/Presets"), tr("Sandbox Presets"));
 		m_pMenuPresetsLogApi = m_pMenuPresets->addAction(tr("Enable API Call logging"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsLogApi->setCheckable(true);
 		m_pMenuPresetsINet = m_pMenuPresets->addAction(tr("Block Internet Access"), this, SLOT(OnSandBoxAction()));
@@ -72,29 +80,33 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsShares->setCheckable(true);
 		m_pMenuPresetsNoAdmin = m_pMenuPresets->addAction(tr("Drop Admin Rights"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsNoAdmin->setCheckable(true);
-	m_pMenuOptions = m_pMenu->addAction(tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRename = m_pMenu->addAction(tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRemove = m_pMenu->addAction(tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_pMenuOptions = m_pMenu->addAction(QIcon(":/Actions/Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRename = m_pMenu->addAction(QIcon(":/Actions/Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRemove = m_pMenu->addAction(QIcon(":/Actions/Remove"), tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMenuBox = m_pMenu->actions().count();
 
-	m_pMenuTerminate = m_pMenu->addAction(tr("Terminate"), this, SLOT(OnProcessAction()));
+	//UpdateRunMenu();
+
+	m_pMenuTerminate = m_pMenu->addAction(QIcon(":/Actions/Remove"), tr("Terminate"), this, SLOT(OnProcessAction()));
 	m_pMenuTerminate->setShortcut(QKeySequence::Delete);
 	this->addAction(m_pMenuTerminate);
 	m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-	m_pMenuPreset = m_pMenu->addMenu(tr("Preset"));
+	m_pMenuPreset = m_pMenu->addMenu(QIcon(":/Actions/Presets"), tr("Preset"));
+	m_pMenuPinToRun = m_pMenuPreset->addAction(tr("Pin to Run Menu"), this, SLOT(OnProcessAction()));
+	m_pMenuPinToRun->setCheckable(true);
 	m_pMenuBlackList = m_pMenuPreset->addAction(tr("Block and Terminate"), this, SLOT(OnProcessAction()));
 	m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
 	m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pMenuBlackList);
-	m_pMenuMarkLinger = m_pMenuPreset->addAction(tr("Linger Process"), this, SLOT(OnProcessAction()));
+	m_pMenuMarkLinger = m_pMenuPreset->addAction(tr("Set Linger Process"), this, SLOT(OnProcessAction()));
 	m_pMenuMarkLinger->setCheckable(true);
-	m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Leader Process"), this, SLOT(OnProcessAction()));
+	m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Set Leader Process"), this, SLOT(OnProcessAction()));
 	m_pMenuMarkLeader->setCheckable(true);
 	m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
 	m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
 
-	QByteArray Columns = theConf->GetBlob("GUI/BoxTree_Columns");
+	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty())
 		m_pSbieTree->OnResetColumns();
 	else
@@ -106,7 +118,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 CSbieView::~CSbieView()
 {
-	theConf->SetBlob("GUI/BoxTree_Columns", m_pSbieTree->saveState());
+	theConf->SetBlob("MainWindow/BoxTree_Columns", m_pSbieTree->saveState());
 }
 
 void CSbieView::Refresh()
@@ -143,7 +155,7 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 		ToolTip += tr("Options:\n    ");
 		ToolTip += pBoxEx->GetStatusStr().replace(", ", "\n    ");
 	}
-	else if (quint64 ProcessId = ID.toULongLong())
+	else if (quint32 ProcessId = ID.toUInt())
 	{
 		// todo proc info
 	}
@@ -179,7 +191,13 @@ void CSbieView::OnMenu(const QPoint& Point)
 	for (int i = 0; i < m_iMenuBox; i++)
 		MenuActions[i]->setVisible(iSandBoxeCount > 0 && iProcessCount == 0);
 	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
+
+	if(iSandBoxeCount == 1)
+		UpdateRunMenu(pBox);
+
+	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
 	m_pMenuRename->setEnabled(iSandBoxeCount == 1);
+	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
 
 	m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
 	m_pMenuPresetsLogApi->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasLogApi());
@@ -194,6 +212,30 @@ void CSbieView::OnMenu(const QPoint& Point)
 		MenuActions[i]->setVisible(iProcessCount > 0 && iSandBoxeCount == 0);
 	
 	if (!pProcess.isNull()) {
+		CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
+		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
+
+		QString FoundPin;
+		QString FileName = pProcess->GetFileName();
+		foreach(const QString& RunOption, RunOptions) {
+			if (Split2(RunOption, "|").second.indexOf(FileName) == 0) {
+				FoundPin = RunOption;
+				break;
+			}
+		}
+		if (FoundPin.isEmpty() && FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
+			FileName.remove(0, pBoxPlus->GetFileRoot().length());
+			foreach(const QString& RunOption, RunOptions) {
+				if (Split2(RunOption, "|").second.indexOf(FileName) == 0) {
+					FoundPin = RunOption;
+					break;
+				}
+			}
+		}
+
+		m_pMenuPinToRun->setChecked(!FoundPin.isEmpty());
+		m_pMenuPinToRun->setData(FoundPin);
+
 		int isLingering = pProcess.objectCast<CSbieProcess>()->IsLingeringProgram();
 		m_pMenuMarkLinger->setChecked(isLingering != 0);
 		m_pMenuMarkLinger->setEnabled(isLingering != 2);
@@ -221,8 +263,12 @@ void CSbieView::OnSandBoxAction()
 
 		Results.append(SandBoxes.first()->RunStart("run_dialog"));
 	}
+	else if (Action == m_pMenuRunMenu)
+		Results.append(SandBoxes.first()->RunStart("start_menu"));
 	else if (Action == m_pMenuRunBrowser)
 		Results.append(SandBoxes.first()->RunStart("default_browser"));
+	else if (Action == m_pMenuRunMailer)
+		Results.append(SandBoxes.first()->RunStart("mail_agent"));
 	else if (Action == m_pMenuRunExplorer)
 		Results.append(SandBoxes.first()->RunCommand("explorer.exe /e,::{20D04FE0-3AEA-1069-A2D8-08002B30309D}"));
 	else if (Action == m_pMenuRunCmd)
@@ -266,6 +312,10 @@ void CSbieView::OnSandBoxAction()
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 			Results.append(pBox->RemoveBox());
 	}
+	else if (Action == m_pMenuRecover)
+	{
+		emit RecoveryRequested(SandBoxes.first()->GetName());
+	}
 	else if (Action == m_pMenuCleanUp)
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Do you really want delete the content of the selected sandbox(es)?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
@@ -284,6 +334,20 @@ void CSbieView::OnSandBoxAction()
 	{
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 			Results.append(pBox->TerminateAll());
+	}
+	else if (Action == m_pMenuMkLink)
+	{
+		CSbieUtils::CreateDesktopShortcut(SandBoxes.first()->GetName(), theAPI);
+	}
+	else // custom run menu command
+	{
+		QString Command = Action->data().toString();
+		if (!Command.isEmpty())
+		{
+			if (Command.left(1) == "\\" && !SandBoxes.isEmpty())
+				Command.prepend(SandBoxes.first()->GetFileRoot());
+			Results.append(SandBoxes.first()->RunCommand(Command));
+		}
 	}
 
 	CSandMan::CheckResults(Results);
@@ -305,6 +369,24 @@ void CSbieView::OnProcessAction()
 	{
 		if (Action == m_pMenuTerminate)
 			Results.append(pProcess->Terminate());
+		else if (Action == m_pMenuPinToRun)
+		{
+			CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
+
+			if (m_pMenuPinToRun->isChecked())
+			{
+				QString FileName = pProcess->GetFileName();
+				if (FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
+					FileName.remove(0, pBoxPlus->GetFileRoot().length());
+					if (FileName.at(0) != "\\")
+						FileName.prepend("\\");
+				}
+
+				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|" + pProcess->GetFileName());
+			}
+			else if(!m_pMenuPinToRun->data().toString().isEmpty())
+				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());
+		}
 		else if (Action == m_pMenuBlackList)
 		{
 			Results.append(pProcess->Terminate());
@@ -385,4 +467,33 @@ QList<CBoxedProcessPtr> CSbieView::GetSelectedProcesses()
 		List.append(pProcess);
 	}
 	return  List;
+}
+
+/*void CSbieView::UpdateRunMenu()
+{
+	while (m_iMenuRun < m_pMenuRun->actions().count())
+		m_pMenuRun->removeAction(m_pMenuRun->actions().at(m_iMenuRun));
+
+	QStringList RunOptions = theConf->ListKeys("RunOptions");
+	foreach(const QString& RunOption, RunOptions)
+	{
+		StrPair NameCmd = Split2(theConf->GetString("RunOptions/" + RunOption), "|");
+
+		QAction* pAction = m_pMenuRun->addAction(NameCmd.first, this, SLOT(OnSandBoxAction()));
+		pAction->setData(NameCmd.second);
+	}
+}*/
+
+void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
+{
+	while (m_iMenuRun < m_pMenuRun->actions().count())
+		m_pMenuRun->removeAction(m_pMenuRun->actions().at(m_iMenuRun));
+
+	QStringList RunOptions = pBox->GetTextList("RunCommand", true);
+	foreach(const QString& RunOption, RunOptions) 
+	{
+		StrPair NameCmd = Split2(RunOption, "|");
+		QAction* pAction = m_pMenuRun->addAction(NameCmd.first, this, SLOT(OnSandBoxAction()));
+		pAction->setData(NameCmd.second);
+	}
 }

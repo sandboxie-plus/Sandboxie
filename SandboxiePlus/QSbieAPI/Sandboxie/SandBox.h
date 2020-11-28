@@ -46,13 +46,15 @@ public:
 	virtual QString					GetRegRoot() const { return m_RegPath; }
 	virtual QString					GetIpcRoot() const { return m_IpcPath; }
 
-	virtual QMap<quint64, CBoxedProcessPtr>	GetProcessList() const { return m_ProcessList; }
+	virtual QMap<quint32, CBoxedProcessPtr>	GetProcessList() const { return m_ProcessList; }
 
 	virtual int						GetActiveProcessCount() const { return m_ActiveProcessCount; }
 
 	virtual SB_STATUS				RunStart(const QString& Command);
 	virtual SB_STATUS				RunCommand(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
+
+	virtual void					CloseBox() {}
 
 	virtual SB_PROGRESS				CleanBox();
 	virtual SB_STATUS				RenameBox(const QString& NewName);
@@ -70,16 +72,16 @@ protected:
 	friend class CSbieAPI;
 
 	SB_PROGRESS						CleanBoxFolders(const QStringList& BoxFolders);
+	static void						CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringList& BoxFolders);
 
-	static SB_STATUS				RenameForDelete(const QString& BoxPath, QString& TempPath);
-
-	static bool						CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringList& BoxFolders, const QString& DeleteCommand);
+	static void						DeleteSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& ID);
+	static void						MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID);
 
 	QString							m_FilePath;
 	QString							m_RegPath;
 	QString							m_IpcPath;
 
-	QMap<quint64, CBoxedProcessPtr>	m_ProcessList;
+	QMap<quint32, CBoxedProcessPtr>	m_ProcessList;
 	int								m_ActiveProcessCount;
 
 //private:

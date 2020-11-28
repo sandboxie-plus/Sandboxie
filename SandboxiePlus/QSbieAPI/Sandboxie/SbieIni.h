@@ -24,7 +24,7 @@ public:
 	virtual __int64 GetNum64(const QString& Setting, __int64 Default = 0) const;
 	virtual bool GetBool(const QString& Setting, bool Default = false) const;
 
-	virtual QStringList GetTextList(const QString &Setting, bool withTemplates) const;
+	virtual QStringList GetTextList(const QString &Setting, bool withTemplates, bool expand = false) const;
 	virtual SB_STATUS UpdateTextList(const QString &Setting, const QStringList& List, bool withTemplates);
 	virtual QStringList GetTemplates() const;
 	virtual QStringList GetTextListTmpl(const QString &Setting, const QString& Template) const;
@@ -32,7 +32,7 @@ public:
 	virtual SB_STATUS InsertText(const QString& Setting, const QString& Value);
 	virtual SB_STATUS AppendText(const QString& Setting, const QString& Value);
 
-	virtual SB_STATUS DelValue(const QString& Setting, const QString& Value);
+	virtual SB_STATUS DelValue(const QString& Setting, const QString& Value = QString());
 
 	virtual QList<QPair<QString, QString>> GetIniSection(qint32* pStatus = NULL, bool withTemplates = false) const;
 

@@ -22,9 +22,13 @@ public slots:
 
 private slots:
 
-	void OnWithTemplates();
+	//void OnWithTemplates();
 
 	void OnPickColor();
+
+	void OnBrowsePath();
+	void OnAddCommand();
+	void OnDelCommand();
 
 	void OnAddGroup();
 	void OnAddProg();
@@ -50,6 +54,7 @@ private slots:
 
 	void OnAccessItemClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
+	void OnAccessSelectionChanged();
 
 	void OnAddFile()				{ AddAccessEntry(eFile, eDirect, "", ""); }
 	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); }
@@ -58,6 +63,17 @@ private slots:
 	void OnAddCOM()					{ AddAccessEntry(eClsId, eDirect, "", ""); }
 	void OnDelAccess();
 	void OnShowAccessTmpl()			{ LoadAccessList(); }
+
+	void OnAddRecFolder();
+	void OnAddRecIgnore();
+	void OnAddRecIgnoreExt();
+	void OnDelRecEntry();
+	void OnShowRecoveryTmpl()		{ LoadRecoveryList(); }
+
+	void OnAddProcess();
+	void OnDelProcess();
+
+	void OnNoWindowRename();
 
 	void OnAddUser();
 	void OnDelUser();
@@ -70,9 +86,11 @@ private slots:
 
 	void OnGeneralChanged();
 	void OnStartChanged()			{ m_StartChanged = true; }
-	void OnRestrictionChanged()		{ m_RestrictionChanged = true; }
-	void OnINetBlockChanged()		{ m_INetBlockChanged = true; }
+	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; }
+	void OnINetBlockChanged();
+	void OnRecoveryChanged()		{ m_RecoveryChanged = true; }
 	void OnAdvancedChanged();
+	void OnDebugChanged();
 
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
@@ -81,6 +99,8 @@ private slots:
 
 protected:
 	void closeEvent(QCloseEvent *e);
+
+	bool eventFilter(QObject *watched, QEvent *e);
 
 	enum EAccessEntry
 	{
@@ -117,7 +137,7 @@ protected:
 	enum EAccessMode
 	{
 		eDirect,
-		eFull,
+		eDirectAll,
 		eClosed,
 		eReadOnly,
 		eWriteOnly
@@ -137,6 +157,8 @@ protected:
 
 	void LoadConfig();
 	void SaveConfig();
+
+	void AddRunItem(const QString& Name, const QString& Command);
 
 	void LoadGroups();
 	void SaveGroups();
@@ -160,6 +182,10 @@ protected:
 	QList<EAccessMode> GetAccessModes(EAccessType Type);
 	void DeleteAccessEntry(QTreeWidgetItem* pItem);
 
+	void LoadRecoveryList();
+	void AddRecoveryEntry(const QString& Name, int type, const QString& Template = QString());
+	void SaveRecoveryList();
+
 	void LoadTemplates();
 	void ShowTemplates();
 	void SaveTemplates();
@@ -175,10 +201,11 @@ protected:
 	bool m_ForcedChanged;
 	bool m_StopChanged;
 	bool m_StartChanged;
-	bool m_RestrictionChanged;
+	//bool m_RestrictionChanged;
 	bool m_INetBlockChanged;
 	bool m_AccessChanged;
 	bool m_TemplatesChanged;
+	bool m_RecoveryChanged;
 	bool m_AdvancedChanged;
 
 	bool m_Template;
@@ -194,5 +221,15 @@ protected:
 	QSharedPointer<CSbieIni> m_pBox;
 
 private:
+	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
+	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");
+
 	Ui::OptionsWindow ui;
+
+	struct SDbgOpt {
+		QString Name;
+		QString Value;
+		bool Changed;
+	};
+	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
 };

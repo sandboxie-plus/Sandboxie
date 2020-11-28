@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -1517,7 +1518,7 @@ _FX void File_InitCopyLimit(void)
 
     if (SetMaxCopyLimit) {
 
-        File_CopyLimitKb     = 99999999;
+        File_CopyLimitKb     = -1;
         File_CopyLimitSilent = FALSE;
         return;
     }
@@ -1529,9 +1530,9 @@ _FX void File_InitCopyLimit(void)
     status = SbieApi_QueryConfAsIs(
         NULL, _CopyLimitKb, 0, str, sizeof(str) - sizeof(WCHAR));
     if (NT_SUCCESS(status)) {
-        ULONG num = _wtoi(str);
+        ULONGLONG num = _wtoi64(str);
         if (num)
-            File_CopyLimitKb = num;
+            File_CopyLimitKb = (num > 0x000000007fffffff) ? -1 : (ULONG)num;
         else
             SbieApi_Log(2207, _CopyLimitKb);
     }

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="HostInjectProcessUtil.cpp" />
+    <ClCompile Include="includes.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\..\common\crc.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pool.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverAssist.cpp">
+      <Filter>DriverAssist</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverAssistInject.cpp">
+      <Filter>DriverAssist</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverAssistLog.cpp">
+      <Filter>DriverAssist</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverAssistStart.cpp">
+      <Filter>DriverAssist</Filter>
+    </ClCompile>
+    <ClCompile Include="pipeserver.cpp" />
+    <ClCompile Include="proxyhandle.cpp" />
+    <ClCompile Include="GuiServer.cpp">
+      <Filter>GuiProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="comserver.cpp">
+      <Filter>ComProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="comserver9.c">
+      <Filter>ComProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="comserver9_ie.c">
+      <Filter>ComProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="comserver9_wmp.c">
+      <Filter>ComProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="netapiserver.cpp">
+      <Filter>NetProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="EpMapperServer.cpp" />
+    <ClCompile Include="fileserver.cpp" />
+    <ClCompile Include="iphlpserver.cpp" />
+    <ClCompile Include="namedpipeserver.cpp" />
+    <ClCompile Include="ProcessServer.cpp" />
+    <ClCompile Include="pstoreserver.cpp" />
+    <ClCompile Include="queueserver.cpp" />
+    <ClCompile Include="sbieiniserver.cpp" />
+    <ClCompile Include="serviceserver.cpp" />
+    <ClCompile Include="serviceserver2.cpp" />
+    <ClCompile Include="terminalserver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="misc.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="DriverAssist.h">
+      <Filter>DriverAssist</Filter>
+    </ClInclude>
+    <ClInclude Include="proxyhandle.h" />
+    <ClInclude Include="msgids.h" />
+    <ClInclude Include="pipeserver.h" />
+    <ClInclude Include="GuiServer.h">
+      <Filter>GuiProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiWire.h">
+      <Filter>GuiProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="comserver.h">
+      <Filter>ComProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="comwire.h">
+      <Filter>ComProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="netapiserver.h">
+      <Filter>NetProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="netapiwire.h">
+      <Filter>NetProxy</Filter>
+    </ClInclude>
+    <ClInclude Include="terminalwire.h" />
+    <ClInclude Include="EpMapperServer.h" />
+    <ClInclude Include="EpMapperWire.h" />
+    <ClInclude Include="fileserver.h" />
+    <ClInclude Include="filewire.h" />
+    <ClInclude Include="iphlpserver.h" />
+    <ClInclude Include="iphlpwire.h" />
+    <ClInclude Include="namedpipeserver.h" />
+    <ClInclude Include="namedpipewire.h" />
+    <ClInclude Include="ProcessServer.h" />
+    <ClInclude Include="pstoreserver.h" />
+    <ClInclude Include="pstorewire.h" />
+    <ClInclude Include="queueserver.h" />
+    <ClInclude Include="queuewire.h" />
+    <ClInclude Include="sbieiniserver.h" />
+    <ClInclude Include="sbieiniwire.h" />
+    <ClInclude Include="serviceserver.h" />
+    <ClInclude Include="servicewire.h" />
+    <ClInclude Include="terminalserver.h" />
+    <ClInclude Include="InteractiveWire.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{9263f742-b15f-46d1-8c3d-c0f6ac0c651f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DriverAssist">
+      <UniqueIdentifier>{bc571f2d-5ec8-4562-8f41-926cfb485cad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComProxy">
+      <UniqueIdentifier>{dd43a4f9-b97e-4d06-9497-309ad147cf31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiProxy">
+      <UniqueIdentifier>{4fada38f-4ec6-44c2-b2d7-627b9568aa64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetProxy">
+      <UniqueIdentifier>{64abb84f-3356-45fc-a1ee-bbce8eaa90cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

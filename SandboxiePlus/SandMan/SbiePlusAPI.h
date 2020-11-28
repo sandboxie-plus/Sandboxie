@@ -13,7 +13,7 @@ public:
 
 protected:
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
-	virtual CBoxedProcess*	NewBoxedProcess(quint64 ProcessId, class CSandBox* pBox);
+	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
 
 };
 
@@ -29,6 +29,8 @@ public:
 	virtual ~CSandBoxPlus();
 
 	virtual void			UpdateDetails();
+
+	virtual void			CloseBox();
 
 	virtual QString			GetStatusStr() const;
 
@@ -53,6 +55,9 @@ public:
 	virtual void			SetLeaderProgram(const QString& ProgName, bool bSet);
 	virtual int				IsLeaderProgram(const QString& ProgName);
 
+	virtual bool			IsRecoverySuspended() const { return m_SuspendRecovery; }
+	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
+
 protected:
 	virtual bool			CheckOpenToken() const;
 
@@ -63,6 +68,8 @@ protected:
 
 	bool					m_bSecurityRestricted;
 	int						m_iUnsecureDebugging;
+
+	bool					m_SuspendRecovery;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -73,7 +80,7 @@ class CSbieProcess : public CBoxedProcess
 {
 	Q_OBJECT
 public:
-	CSbieProcess(quint64 ProcessId, class CSandBox* pBox) : CBoxedProcess(ProcessId, pBox) {}
+	CSbieProcess(quint32 ProcessId, class CSandBox* pBox) : CBoxedProcess(ProcessId, pBox) {}
 
 	virtual void BlockProgram()									{ GetBox()->BlockProgram(m_ImageName); }
 	virtual void SetLingeringProgram(bool bSet)					{ GetBox()->SetLingeringProgram(m_ImageName, bSet); }
@@ -82,4 +89,10 @@ public:
 	virtual int	 IsLeaderProgram()								{ return GetBox()->IsLeaderProgram(m_ImageName); }
 
 	virtual CSandBoxPlus* GetBox()								{ return qobject_cast<CSandBoxPlus*>(m_pBox); }
+
+	virtual int GetRememberedAction(int Action)					{ return m_RememberedActions.value(Action, -1); }
+	virtual void SetRememberedAction(int Action, int retval)	{ m_RememberedActions.insert(Action, retval); }
+
+protected:
+	QMap<int, int>			m_RememberedActions;
 };

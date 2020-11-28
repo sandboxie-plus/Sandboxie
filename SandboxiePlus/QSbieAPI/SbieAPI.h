@@ -30,9 +30,9 @@
 class QSBIEAPI_EXPORT CResLogEntry : public QSharedData
 {
 public:
-	CResLogEntry(quint64 ProcessId, quint32 Type, const QString& Value);
+	CResLogEntry(quint32 ProcessId, quint32 Type, const QString& Value);
 
-	quint64				GetProcessId() const { return m_ProcessId; }
+	quint32				GetProcessId() const { return m_ProcessId; }
 	QDateTime			GetTimeStamp() const { return m_TimeStamp; }
 	quint16				GetType() const { return m_Type.Flags; }
 	QString				GetValue() const { return m_Name; }
@@ -45,7 +45,7 @@ public:
 
 protected:
 	QString m_Name;
-	quint64 m_ProcessId;
+	quint32 m_ProcessId;
 	QDateTime m_TimeStamp;
 
 	union
@@ -80,7 +80,7 @@ public:
 	static bool				IsSbieCtrlRunning();
 	static bool				TerminateSbieCtrl();
 
-	virtual SB_STATUS		Connect();
+	virtual SB_STATUS		Connect(bool withQueue = true);
 	virtual SB_STATUS		Disconnect();
 	virtual bool			IsConnected() const;
 
@@ -105,10 +105,17 @@ public:
 
 	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
 
-	virtual CSandBoxPtr		GetBoxByProcessId(quint64 ProcessId) const;
+	virtual CSandBoxPtr		GetBoxByProcessId(quint32 ProcessId) const;
 	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
+	virtual CBoxedProcessPtr GetProcessById(quint32 ProcessId) const;
 
 	virtual SB_STATUS		TerminateAll();
+
+	virtual SB_STATUS		SetProcessExemption(quint32 process_id, quint32 action_id, bool NewState);
+	virtual bool			GetProcessExemption(quint32 process_id, quint32 action_id);
+
+	virtual QString			GetBoxedPath(const QString& BoxName, const QString& Path);
+	virtual QString			GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path);
 
 	enum ESetMode
 	{
@@ -124,6 +131,7 @@ public:
 	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
 	virtual bool			IsBoxEnabled(const QString& BoxName);
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
+	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
 	virtual bool			IsConfigLocked();
 	virtual SB_STATUS		UnlockConfig(const QString& Password);
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
@@ -141,44 +149,65 @@ public:
 	virtual void			ClearResLog() { QWriteLocker Lock(&m_ResLogMutex); m_ResLogList.clear(); }
 
 	// Other
-	virtual QString			GetSbieMessage(int MessageId, const QString& arg1 = QString(), const QString& arg2 = QString()) const;
+	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
+
+	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL);
+	virtual QString			GetStartPath() const;
+
+	enum ESbieQueuedRequests
+	{
+		ePrintSpooler = -1,
+		eInvalidQueuedRequests = 0,
+		eFileMigration = 1,
+		eInetBlockade= 2,
+	};
+
+public slots:
+	virtual void			SendReplyData(quint32 RequestId, const QVariantMap& Result);
 
 signals:
 	void					StatusChanged();
-	void					LogMessage(const QString& Message, bool bNotify = true);
-	void					FileToRecover(const QString& BoxName, const QString& FilePath);
+	void					ConfigReloaded();
+	//void					LogMessage(const QString& Message, bool bNotify = true);
+	void					LogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
+	void					ProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
+	void					FileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
 	void					BoxClosed(const QString& BoxName);
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
+	void					QueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 
 private slots:
-	//virtual void			OnMonitorEntry(quint64 ProcessId, quint32 Type, const QString& Value);
+	//virtual void			OnMonitorEntry(quint32 ProcessId, quint32 Type, const QString& Value);
 	virtual void			OnIniChanged(const QString &path);
 	virtual void			OnReloadConfig();
+	virtual void			OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
 
 protected:
 	friend class CSandBox;
 	friend class CBoxedProcess;
 
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
-	virtual CBoxedProcess*	NewBoxedProcess(quint64 ProcessId, class CSandBox* pBox);
+	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
 
 	virtual QString			GetSbieHome() const;
 	virtual QString			GetIniPath(bool* IsHome) const;
-
-	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL);
+	virtual QString			GetUserSection() const;
 
 	virtual bool			HasProcesses(const QString& BoxName);
 
+	virtual bool			GetQueue();
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
 
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
-	virtual SB_STATUS		Terminate(quint64 ProcessId);
+	virtual SB_STATUS		Terminate(quint32 ProcessId);
 
 	virtual SB_STATUS		RunSandboxed(const QString& BoxName, const QString& Command, QString WrkDir = QString(), quint32 Flags = 0);
 
 	virtual SB_STATUS		UpdateBoxPaths(const CSandBoxPtr& pSandBox);
 	virtual SB_STATUS		UpdateProcessInfo(const CBoxedProcessPtr& pProcess);
+
+	virtual void			GetUserPaths();
 
 	virtual QString			GetDeviceMap();
 	virtual QByteArray		MakeEnvironment(bool AddDeviceMap);
@@ -186,11 +215,12 @@ protected:
 	virtual void			run();
 
 	QMap<QString, CSandBoxPtr> m_SandBoxes;
-	QMap<quint64, CBoxedProcessPtr> m_BoxedProxesses;
+	QMap<quint32, CBoxedProcessPtr> m_BoxedProxesses;
 
 	mutable QReadWriteLock	m_ResLogMutex;
 	QList<CResLogEntryPtr>	m_ResLogList;
 
+	mutable QReadWriteLock	m_DriveLettersMutex;
 	QMap<QString, QString>	m_DriveLetters;
 
 	QString					m_SbiePath;
@@ -199,9 +229,15 @@ protected:
 
 	bool					m_bReloadPending;
 
+	bool					m_bWithQueue;
 	bool					m_bTerminate;
 
-	CSbieIni*			m_pGlobalSection;
+	CSbieIni*				m_pGlobalSection;
+	CSbieIni*				m_pUserSection;
+
+	QString					m_ProgramDataDir;
+	QString					m_PublicDir;
+	QString					m_UserDir;
 
 private:
 	mutable QMutex			m_ThreadMutex;

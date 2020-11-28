@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -64,13 +65,7 @@ void DriverAssist::LogMessage()
 
         if (status != 0)
             break; // error or no more entries
-
-		//if (message_number != m_last_message_number + 1)
-		//	we missed something
 		m_last_message_number = message_number;
-
-		if (code == 0)
-			break; // empty dummy
 
 		LogMessage_Single(code, (wchar_t*)m_workItemBuf);
     }
@@ -118,6 +113,10 @@ void DriverAssist::LogMessage_Single(ULONG code, wchar_t* data)
 
     if (code == MSG_2199)
         return;
+	if (code == MSG_2198)
+		return;
+	if (code == MSG_1399)
+		return;
 
     WCHAR *str1 = data;
     ULONG str1_len = wcslen(str1);

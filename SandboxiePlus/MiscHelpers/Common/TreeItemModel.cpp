@@ -30,7 +30,7 @@ QList<QVariant> CSimpleTreeModel::MakePath(const QVariantMap& Cur, const QMap<QV
 	QVariantMap Parent = List.value(ParentID);
 
 	QList<QVariant> Path;
-	if (!Parent.isEmpty())
+	if (!Parent.isEmpty() && ParentID != Cur["ID"])
 	{
 		Path = MakePath(Parent, List);
 		Path.append(ParentID);
@@ -72,7 +72,6 @@ void CSimpleTreeModel::Sync(const QMap<QVariant, QVariantMap>& List)
 			pNode->Values.resize(columnCount());
 			if(m_bTree)
 				pNode->Path = MakePath(Cur, List);
-			pNode->IsBold = Cur["IsBold"].toBool();
 			pNode->Icon = Cur["Icon"];
 			New[pNode->Path].append(pNode);
 		}
@@ -89,13 +88,18 @@ void CSimpleTreeModel::Sync(const QMap<QVariant, QVariantMap>& List)
 		bool State = false;
 		bool Changed = false;
 
+		if (pNode->IsBold != Cur["IsBold"].toBool()) {
+			pNode->IsBold = Cur["IsBold"].toBool();
+			Changed = true;
+		}
+
 		QVariantMap Values = Cur["Values"].toMap();
 		for(int section = FIRST_COLUMN; section < columnCount(); section++)
 		{
 			if (!m_Columns.contains(section))
 				continue; // ignore columns which are hidden
 
-			QVariant Value = Values[QString::number(section)];
+			QVariant Value = Cur[m_ColumnKeys.at(section).second];
 
 			STreeNode::SValue& ColValue = pNode->Values[section];
 
@@ -498,15 +502,15 @@ QVariant CSimpleTreeModel::GetItemID(const QModelIndex &index) const
 
 int CSimpleTreeModel::columnCount(const QModelIndex &parent) const
 {
-	return m_Headers.count();
+	return m_ColumnKeys.count();
 }
 
 QVariant CSimpleTreeModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
-		if (section < m_Headers.size())
-			return m_Headers.at(section);
+		if (section < m_ColumnKeys.size())
+			return m_ColumnKeys.at(section).first;
 	}
     return QVariant();
 }

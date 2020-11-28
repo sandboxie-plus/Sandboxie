@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -749,6 +750,13 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
 {
     BOOLEAN is_open, is_closed;
     BOOLEAN ok;
+
+    //
+    // is this process excempted from the blocade
+    //
+
+	if (proc->AllowInternetAccess)
+		return TRUE;
 
     //
     // should we warn on access to internet resources
@@ -2098,6 +2106,16 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
         memcpy(&proc->closed_file_paths,  &closed_paths,    sizeof(LIST));
         memcpy(&proc->read_file_paths,    &read_paths,      sizeof(LIST));
         memcpy(&proc->write_file_paths,   &write_paths,     sizeof(LIST));
+	}
+
+	//
+	// now we need to re block the internet access
+	//
+
+	if (ok)
+		ok = File_BlockInternetAccess(proc);
+
+	if (ok) {
 
         status = STATUS_SUCCESS;
 

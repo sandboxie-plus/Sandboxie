@@ -12,6 +12,8 @@
 #include "../QSbieAPI/Sandboxie/BoxBorder.h"
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "Windows/SettingsWindow.h"
+#include "Windows/RecoveryWindow.h"
+#include <QtConcurrent>
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -86,6 +88,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
 
+	m_LanguageId = 1033; // lang en_us
 	LoadLanguage();
 	if (theConf->GetBool("Options/DarkTheme", false))
 		SetDarkTheme(true);
@@ -131,6 +134,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pPanelSplitter->addWidget(m_pBoxView);
 
 	connect(m_pBoxView->GetTree()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnSelectionChanged()));
+	connect(m_pBoxView, SIGNAL(RecoveryRequested(const QString&)), this, SLOT(OpenRecovery(const QString&)));
 
 	//m_pPanelSplitter->addWidget();
 
@@ -192,7 +196,7 @@ CSandMan::CSandMan(QWidget *parent)
 			m_pMaintenance->addSeparator();
 			m_pStopAll = m_pMaintenance->addAction(QIcon(":/Actions/Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
-			m_pMaintenanceItems = m_pMaintenance->addMenu(QIcon(":/Actions/Advanced"), tr("&Advanced"));
+			m_pMaintenanceItems = m_pMaintenance->addMenu(QIcon(":/Actions/ManMaintenance"), tr("&Advanced"));
 				m_pInstallDrv = m_pMaintenanceItems->addAction(tr("Install Driver"), this, SLOT(OnMaintenance()));
 				m_pStartDrv = m_pMaintenanceItems->addAction(tr("Start Driver"), this, SLOT(OnMaintenance()));
 				m_pStopDrv = m_pMaintenanceItems->addAction(tr("Stop Driver"), this, SLOT(OnMaintenance()));
@@ -302,21 +306,21 @@ CSandMan::CSandMan(QWidget *parent)
 		m_pTrayIcon->hide();
 
 	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
-	//m_pBoxTree->restoreState(theConf->GetBlob("GUI/BoxTree_Columns"));
-	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("GUI/LogList_Columns"));
-	QByteArray Columns = theConf->GetBlob("GUI/ResMonList_Columns");
+	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
+	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
+	QByteArray Columns = theConf->GetBlob("MainWindow/ResMonList_Columns");
 	if (!Columns.isEmpty())
 		((QTreeViewEx*)m_pResourceLog->GetView())->OnResetColumns();
 	else
 		((QTreeViewEx*)m_pResourceLog->GetView())->restoreState(Columns);
-	Columns = theConf->GetBlob("GUI/ApiLogList_Columns");
+	Columns = theConf->GetBlob("MainWindow/ApiLogList_Columns");
 	if (!Columns.isEmpty())
 		((QTreeViewEx*)m_pApiCallLog->GetView())->OnResetColumns();
 	else
 		((QTreeViewEx*)m_pApiCallLog->GetView())->restoreState(Columns);
 	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
 	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
-	m_pLogTabs->setCurrentIndex(theConf->GetInt("GUI/LogTab", 0));
+	m_pLogTabs->setCurrentIndex(theConf->GetInt("MainWindow/LogTab", 0));
 	
 	if (theConf->GetBool("Options/NoStatusBar", false))
 		statusBar()->hide();
@@ -329,19 +333,26 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 
+	m_pPopUpWindow = new CPopUpWindow(this);
+	connect(m_pPopUpWindow, SIGNAL(RecoveryRequested(const QString&)), this, SLOT(OpenRecovery(const QString&)));
+
 	if (!bAutoRun)
 		show();
+
+	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
+	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
+	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
+	connect(theAPI, SIGNAL(QueuedRequest(quint32, quint32, quint32, const QVariantMap&)), this, SLOT(OnQueuedRequest(quint32, quint32, quint32, const QVariantMap&)), Qt::QueuedConnection);
+	connect(theAPI, SIGNAL(FileToRecover(const QString&, const QString&, quint32)), this, SLOT(OnFileToRecover(const QString&, const QString&, quint32)), Qt::QueuedConnection);
+	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
+
+	m_uTimerID = startTimer(250);
 
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 	{
 		SB_STATUS Status = ConnectSbie();
 		CheckResults(QList<SB_STATUS>() << Status);
 	}
-
-	connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
-	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
-
-	m_uTimerID = startTimer(250);
 }
 
 CSandMan::~CSandMan()
@@ -354,13 +365,13 @@ CSandMan::~CSandMan()
 	m_pTrayIcon->hide();
 
 	theConf->SetBlob("MainWindow/Window_Geometry", saveGeometry());
-	//theConf->SetBlob("GUI/BoxTree_Columns", m_pBoxTree->saveState());
-	theConf->SetBlob("GUI/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
-	theConf->SetBlob("GUI/ResMonList_Columns", m_pResourceLog->GetView()->header()->saveState());
-	theConf->SetBlob("GUI/ApiLogList_Columns", m_pApiCallLog->GetView()->header()->saveState());
+	//theConf->SetBlob("MainWindow/BoxTree_Columns", m_pBoxTree->saveState());
+	theConf->SetBlob("MainWindow/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
+	theConf->SetBlob("MainWindow/ResMonList_Columns", m_pResourceLog->GetView()->header()->saveState());
+	theConf->SetBlob("MainWindow/ApiLogList_Columns", m_pApiCallLog->GetView()->header()->saveState());
 	theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
 	theConf->SetBlob("MainWindow/Panel_Splitter", m_pPanelSplitter->saveState());
-	theConf->SetValue("GUI/LogTab", m_pLogTabs->currentIndex());
+	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
 
 	theAPI = NULL;
 
@@ -497,8 +508,17 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 void CSandMan::OnBoxClosed(const QString& BoxName)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	if (pBox && !pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false))
+	if (!pBox)
+		return;
+
+	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false))
 	{
+		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
+		if (pRecoveryWindow->FindFiles() == 0)
+			delete pRecoveryWindow;
+		else if (pRecoveryWindow->exec() != 1)
+			return;
+
 		SB_PROGRESS Status = pBox->CleanBox();
 		if (Status.GetStatus() == OP_ASYNC)
 			theGUI->AddAsyncOp(Status.GetValue());
@@ -551,6 +571,8 @@ void CSandMan::OnStatusChanged()
 				pSettingsWindow->showCompat();
 			}
 		}
+
+		OnIniReloaded();
 
 		if (theConf->GetBool("Options/WatchIni", true))
 			theAPI->WatchIni(true);
@@ -607,14 +629,89 @@ void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 	
 	statusBar()->showMessage(Message);
 
-	if (bNotify) 
+	if (bNotify)
+		m_pTrayIcon->showMessage("Sandboxie-Plus", Message);
+}
+
+void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
+{
+	if ((MsgCode & 0xFFFF) == 2198) // file migration progress
 	{
-		int iNotify = theConf->GetInt("Options/ShowNotifications", 1);
-		if (iNotify & 1)
-			m_pTrayIcon->showMessage("Sandboxie-Plus", Message);
-		if (iNotify & 2)
-			QApplication::beep();
+		m_pPopUpWindow->ShowProgress(MsgCode, MsgData, ProcessId);
+		return;
 	}
+
+	QString Message = MsgCode != 0 ? theAPI->GetSbieMsgStr(MsgCode, m_LanguageId) : (MsgData.size() > 0 ? MsgData[0] : QString());
+
+	for (int i = 1; i < MsgData.size(); i++)
+		Message = Message.arg(MsgData[i]);
+
+	if (ProcessId != 4) // if its not from the driver add the pid
+	{
+		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
+		if(pProcess.isNull())
+			Message.prepend(tr("PID %1: ").arg(ProcessId));
+		else
+			Message.prepend(tr("%1 (%2): ").arg(pProcess->GetProcessName()).arg(ProcessId));
+	}
+
+	OnLogMessage(Message);
+
+	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true))
+		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
+}
+
+void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)
+{
+	m_pPopUpWindow->AddUserPrompt(RequestId, Data, ClientPid);
+}
+
+void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId)
+{
+	m_pPopUpWindow->AddFileToRecover(FilePath, BoxName, ProcessId);
+}
+
+void CSandMan::OpenRecovery(const QString& BoxName)
+{
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	if (!pBox)
+		return;
+
+	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
+	pRecoveryWindow->FindFiles();
+	pRecoveryWindow->show();
+}
+
+SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList)
+{
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	QtConcurrent::run(CSandMan::RecoverFilesAsync, pProgress, FileList);
+	return SB_PROGRESS(OP_ASYNC, pProgress);
+}
+
+void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList)
+{
+	SB_STATUS Status = SB_OK;
+
+	QStringList Unrecovered;
+	for (QList<QPair<QString, QString>>::const_iterator I = FileList.begin(); I != FileList.end(); ++I)
+	{
+		QString BoxPath = I->first;
+		QString RecoveryPath = I->second;
+		QString FileName = BoxPath.mid(BoxPath.lastIndexOf("\\") + 1);
+		QString RecoveryFolder = RecoveryPath.left(RecoveryPath.lastIndexOf("\\") + 1);
+
+		pProgress->ShowMessage(tr("Recovering file %1 to %2").arg(FileName).arg(RecoveryFolder));
+
+		QDir().mkpath(RecoveryFolder);
+		if (!QFile::rename(BoxPath, RecoveryPath))
+			Unrecovered.append(BoxPath);
+	}
+
+	if (!Unrecovered.isEmpty())
+		Status = SB_ERR(tr("Failed to recovery some files: \n") + Unrecovered.join("\n"));
+
+	pProgress->Finish(Status);
 }
 
 void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
@@ -707,7 +804,7 @@ SB_STATUS CSandMan::ConnectSbie()
 
 SB_STATUS CSandMan::ConnectSbieImpl()
 {
-	SB_STATUS Status = theAPI->Connect();
+	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
 
 	if (Status && !CSbieAPI::IsSbieCtrlRunning()) // don't take over when SbieCtrl is up and running
 		Status = theAPI->TakeOver();
@@ -827,6 +924,8 @@ void CSandMan::UpdateSettings()
 {
 	SetDarkTheme(theConf->GetBool("Options/DarkTheme", false));
 
+	//m_pBoxView->UpdateRunMenu();
+
 	if (theConf->GetBool("Options/ShowSysTray", true))
 		m_pTrayIcon->show();
 	else
@@ -877,6 +976,11 @@ void CSandMan::OnEditIni()
 void CSandMan::OnReloadIni()
 {
 	theAPI->ReloadConfig();
+}
+
+void CSandMan::OnIniReloaded()
+{
+	m_pPopUpWindow->ReloadHiddenMessages();
 }
 
 void CSandMan::OnSetMonitoring()
@@ -939,6 +1043,10 @@ void CSandMan::OnAsyncFinished(CSbieProgress* pSender)
 	if (pProgress.isNull())
 		return;
 	disconnect(pProgress.data() , SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
+
+	SB_STATUS Status = pProgress->GetStatus();
+	if(Status.IsError())
+		CSandMan::CheckResults(QList<SB_STATUS>() << Status);
 
 	if(m_pAsyncProgress.isEmpty())
 		m_pProgressDialog->hide();
@@ -1103,14 +1211,17 @@ void CSandMan::LoadLanguage()
 {
 	qApp->removeTranslator(&m_Translator);
 	m_Translation.clear();
+	m_LanguageId = 0;
 
 	QString Lang = theConf->GetString("Options/Language");
 	if (!Lang.isEmpty())
 	{
+		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+
 		QString LangAux = Lang; // Short version as fallback
 		LangAux.truncate(LangAux.lastIndexOf('_'));
 
-		QString LangPath = QApplication::applicationDirPath() + "/translations/taskexplorer_";
+		QString LangPath = QApplication::applicationDirPath() + "/translations/sandman_";
 		bool bAux = false;
 		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
 		{
@@ -1122,6 +1233,9 @@ void CSandMan::LoadLanguage()
 		if (!m_Translation.isEmpty() && m_Translator.load((const uchar*)m_Translation.data(), m_Translation.size()))
 			qApp->installTranslator(&m_Translator);
 	}
+
+	if (!m_LanguageId) 
+		m_LanguageId = 1033; // default to englich
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

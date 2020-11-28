@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -77,6 +78,8 @@ typedef struct _FILE_PIPE_WAIT_FOR_BUFFER {
 static BOOLEAN File_IsPipeSuffix(const WCHAR *ptr);
 
 static ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server);
+
+static const BOOLEAN File_InternetBlockade_ManualBypass();
 
 static NTSTATUS File_NtCreateFilePipe(
     HANDLE *FileHandle,
@@ -253,9 +256,12 @@ _FX ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server)
 
     if (len >= 10 && _wcsnicmp(path, File_Mup, 8) == 0) {
 
-        if (SbieApi_CheckInternetAccess(NULL, path + 8, TRUE) ==
-                                                STATUS_ACCESS_DENIED)
-            return TYPE_NET_DEVICE;
+		BOOLEAN prompt = SbieApi_QueryConfBool(NULL, L"PromptForInternetAccess", FALSE);
+		if (SbieApi_CheckInternetAccess(NULL, path + 8, !prompt) == STATUS_ACCESS_DENIED
+			&& (!prompt || !File_InternetBlockade_ManualBypass())) {
+
+			return TYPE_NET_DEVICE;
+		}
     }
 
     //
@@ -263,6 +269,42 @@ _FX ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server)
     //
 
     return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// File_InternetBlockade_ManualBypass
+//---------------------------------------------------------------------------
+
+
+_FX const BOOLEAN File_InternetBlockade_ManualBypass()
+{
+	MAN_INET_BLOCKADE_REQ req;
+	MAN_INET_BLOCKADE_RPL *rpl = NULL;
+	BOOLEAN ok = FALSE;
+
+	req.msgid = MAN_INET_BLOCKADE;
+
+	rpl = SbieDll_CallServerQueue(INTERACTIVE_QUEUE_NAME, &req, sizeof(req), sizeof(*rpl));
+	if (rpl)
+	{
+		ok = rpl->retval != 0;
+		Dll_Free(rpl);
+	}
+	else if(SbieApi_QueryConfBool(NULL, L"NotifyInternetAccessDenied", TRUE))
+		SbieApi_Log(1307, L"%s [%s]", Dll_ImageName, Dll_BoxName);
+
+	//
+	// Note: the granting process must notify the driver about the exemption 
+	//			and we must ask the driver to update the open/closed path lists
+	//
+
+	if (ok) 
+	{
+		Dll_RefreshPathList();
+	}
+
+	return ok;
 }
 
 

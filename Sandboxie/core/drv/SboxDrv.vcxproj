@@ -233,6 +233,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\list.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\common\pattern.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
@@ -382,6 +388,18 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\list.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_version.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\common\pattern.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>

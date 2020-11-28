@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -304,6 +305,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
     NTSTATUS status;
     HANDLE ProcessId;
     KIRQL irql;
+	BOOLEAN is_caller_sandboxed = FALSE;
 
     //
     // if a ProcessId was specified, then locate and lock the matching
@@ -312,6 +314,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
     ProcessId = args->process_id.val;
     if (proc) {
+		is_caller_sandboxed = TRUE;
         if (ProcessId == proc->pid || IS_ARG_CURRENT_PROCESS(ProcessId))
             ProcessId = 0;  // don't have to search for the current pid
     } else {
@@ -390,20 +393,25 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
         } else if (args->info_type.val == 'ptok') {
 
-			void *PrimaryTokenObject = proc->primary_token;
-			if (PrimaryTokenObject)
-			{
-				ObReferenceObject(PrimaryTokenObject);
-
-				HANDLE MyTokenHandle;
-				status = ObOpenObjectByPointer(PrimaryTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
-
-				ObDereferenceObject(PrimaryTokenObject);
-
-				*data = (ULONG64)MyTokenHandle;
-			}
+			if(is_caller_sandboxed)
+				status = STATUS_ACCESS_DENIED;
 			else
-				status = STATUS_NOT_FOUND;
+			{
+				void *PrimaryTokenObject = proc->primary_token;
+				if (PrimaryTokenObject)
+				{
+					ObReferenceObject(PrimaryTokenObject);
+
+					HANDLE MyTokenHandle;
+					status = ObOpenObjectByPointer(PrimaryTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
+
+					ObDereferenceObject(PrimaryTokenObject);
+
+					*data = (ULONG64)MyTokenHandle;
+				}
+				else
+					status = STATUS_NOT_FOUND;
+			}
 		}
 		else
             status = STATUS_INVALID_INFO_CLASS;

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -103,24 +104,40 @@ _FX void Log_Event_Msg(
 
 
 _FX void Log_Popup_Msg(
-    NTSTATUS error_code,
-    const WCHAR *string1,
-    const WCHAR *string2,
-    ULONG session_id,
+	NTSTATUS error_code,
+	const WCHAR *string1,
+	const WCHAR *string2,
+	ULONG session_id,
 	HANDLE pid)
 {
-    ULONG string1_len, string2_len;
+	ULONG string1_len, string2_len;
 
-    if (string1)
-        string1_len = wcslen(string1);
-    else
-        string1_len = 0;
+	if (string1)
+		string1_len = wcslen(string1);
+	else
+		string1_len = 0;
 
-    if (string2)
-        string2_len = wcslen(string2);
-    else
-        string2_len = 0;
+	if (string2)
+		string2_len = wcslen(string2);
+	else
+		string2_len = 0;
 
+	Log_Popup_MsgEx(error_code, string1, string1_len, string2, string2_len, session_id, pid);
+}
+
+
+//---------------------------------------------------------------------------
+// Log_Popup_MsgEx
+//---------------------------------------------------------------------------
+
+
+_FX void Log_Popup_MsgEx(
+	NTSTATUS error_code,
+	const WCHAR *string1, ULONG string1_len,
+	const WCHAR *string2, ULONG string2_len,
+	ULONG session_id,
+	HANDLE pid)
+{
     //
     // log message to target session
     //
@@ -143,11 +160,10 @@ _FX void Log_Popup_Msg(
     //
 
     //Log_Popup_Msg_2(
-	Api_AddMessage(
-        error_code, string1, string1_len, string2, string2_len, -1, (ULONG)pid);
+    //    error_code, string1, string1_len, string2, string2_len, -1, (ULONG)pid);
 
-    string1_len = 0;
-    Api_SendServiceMessage(SVC_LOG_MESSAGE, sizeof(ULONG), &string1_len);
+	ULONG data = 0;
+    Api_SendServiceMessage(SVC_LOG_MESSAGE, sizeof(ULONG), &data);
 
     // DbgPrint("POPUP %04d %S %S\n", error_code & 0xFFFF, string1, string2);
 }

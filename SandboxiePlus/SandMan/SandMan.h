@@ -9,10 +9,11 @@
 #include "Models/ResMonModel.h"
 #include "Models/ApiMonModel.h"
 #include <QTranslator>
+#include "Windows/PopUpWindow.h"
 
 #define VERSION_MJR		0
-#define VERSION_MIN 	4
-#define VERSION_REV 	4
+#define VERSION_MIN 	5
+#define VERSION_REV 	0
 #define VERSION_UPD 	0
 
 
@@ -36,6 +37,8 @@ public:
 
 	static QString		GetVersion();
 
+	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList);
+
 	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
@@ -44,6 +47,8 @@ protected:
 	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
 	SB_STATUS			StopSbie(bool andRemove = false);
+
+	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList);
 
 	bool				IsFullyPortable();
 
@@ -64,10 +69,17 @@ public slots:
 
 	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message, bool bNotify = false);
+	void				OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 
 	void				OnNotAuthorized(bool bLoginRequired, bool& bRetry);
 
+	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
+	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
+
+	void				OpenRecovery(const QString& BoxName);
+
 	void				UpdateSettings();
+	void				OnIniReloaded();
 
 	void				OnAsyncFinished();
 	void				OnAsyncFinished(CSbieProgress* pProgress);
@@ -169,6 +181,7 @@ private:
 	bool				m_bExit;
 
 	CProgressDialog*	m_pProgressDialog;
+	CPopUpWindow*		m_pPopUpWindow;
 
 	void				SetDarkTheme(bool bDark);
 	QString				m_DefaultStyle;
@@ -177,6 +190,8 @@ private:
 	void				LoadLanguage();
 	QTranslator			m_Translator;
 	QByteArray			m_Translation;
+public:
+	quint32				m_LanguageId;
 };
 
 extern CSandMan* theGUI;

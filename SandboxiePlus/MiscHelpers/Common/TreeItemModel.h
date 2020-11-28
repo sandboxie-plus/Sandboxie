@@ -110,7 +110,7 @@ public:
 
 	QVariant				GetItemID(const QModelIndex &index) const;
 
-	void					setHeaderLabels(const QStringList& Columns) { m_Headers = Columns; }
+	void					AddColumn(const QString& Name, const QString& Key) { m_ColumnKeys.append(qMakePair(Name, Key)); }
 
 	virtual int				columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -121,5 +121,5 @@ protected:
 	QList<QVariant>			MakePath(const QVariantMap& Cur, const QMap<QVariant, QVariantMap>& List);
 	bool					TestPath(const QList<QVariant>& Path, const QVariantMap& Cur, const QMap<QVariant, QVariantMap>& List, int Index = 0);
 
-	QStringList				m_Headers;
+	QList<QPair<QString, QString>> m_ColumnKeys;
 };

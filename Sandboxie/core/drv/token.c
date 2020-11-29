@@ -501,7 +501,7 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
 _FX void *Token_Filter(void *TokenObject, ULONG DropRights, ULONG SessionId)
 {
     TOKEN_GROUPS *groups;
-    void *ReturnToken;
+    void *ReturnToken = NULL;
     NTSTATUS status;
     ULONG i, j;
     BOOLEAN ShouldFilterToken = FALSE;
@@ -1015,7 +1015,7 @@ _FX BOOLEAN Token_IsSharedSid_W8(void *TokenObject)
 _FX void *Token_RestrictHelper1(
     void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc)
 {
-    void *NewTokenObject;
+    void *NewTokenObject = NULL;
     SID_AND_ATTRIBUTES *SidAndAttrsInToken = NULL;
     ULONG RestrictedSidCount_offset = 0;
     ULONG RestrictedSids_offset = 0;
@@ -1505,7 +1505,7 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
 {
     NTSTATUS status;
     HANDLE ProcessHandle;
-    ULONG *PtrPrimaryTokenFrozen;
+    ULONG *PtrPrimaryTokenFrozen = NULL;
     ULONG SavePrimaryTokenFrozen;
 
     //

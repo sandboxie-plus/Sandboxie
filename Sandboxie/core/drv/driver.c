@@ -47,8 +47,8 @@
 
 
 NTSTATUS DriverEntry(
-    DRIVER_OBJECT  *DriverObject,
-    UNICODE_STRING *RegistryPath);
+    IN DRIVER_OBJECT  *DriverObject,
+    IN UNICODE_STRING *RegistryPath);
 
 static BOOLEAN Driver_CheckOsVersion(void);
 
@@ -56,7 +56,9 @@ static BOOLEAN Driver_InitPublicSecurity(void);
 
 static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
+#ifdef WINXP_SUPPORT
 static BOOLEAN Driver_FindMissingServices(void);
+#endif // WINXP_SUPPORT
 
 static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
@@ -68,7 +70,9 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #pragma alloc_text (INIT, DriverEntry)
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
 #pragma alloc_text (INIT, Driver_FindHomePath)
+#ifdef WINXP_SUPPORT
 #pragma alloc_text (INIT, Driver_FindMissingServices)
+#endif // WINXP_SUPPORT
 #endif // ALLOC_PRAGMA
 
 
@@ -122,7 +126,9 @@ ULONG Process_Flags3 = 0;
 //---------------------------------------------------------------------------
 
 
+#ifdef WINXP_SUPPORT
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
+#endif // WINXP_SUPPORT
 
 
 //---------------------------------------------------------------------------
@@ -135,6 +141,8 @@ _FX NTSTATUS DriverEntry(
     IN  UNICODE_STRING *RegistryPath)
 {
     BOOLEAN ok = TRUE;
+
+	ExInitializeDriverRuntime(DrvRtPoolNxOptIn);
 
     //
     // initialize global driver variables
@@ -188,8 +196,10 @@ _FX NTSTATUS DriverEntry(
     if (ok)
         ok = Session_Init();
 
+#ifdef WINXP_SUPPORT
     if (ok)
         ok = Driver_FindMissingServices();
+#endif // WINXP_SUPPORT
 
     if (ok)
         ok = Token_Init();
@@ -585,6 +595,8 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 //---------------------------------------------------------------------------
 
 
+#ifdef WINXP_SUPPORT
+
 #define FIND_SERVICE(svc,prmcnt)                                \
     {                                                           \
     static const char *ProcName = #svc;                         \
@@ -633,6 +645,8 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 
 
 #undef FIND_SERVICE
+
+#endif // WINXP_SUPPORT
 
 
 //---------------------------------------------------------------------------

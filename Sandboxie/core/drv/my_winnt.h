@@ -45,7 +45,7 @@
 #define SE_GROUP_LOGON_ID               (0xC0000000L)
 #define SE_GROUP_RESOURCE               (0x20000000L)
 
-
+#ifdef WINXP_SUPPORT
 typedef enum _TOKEN_INFORMATION_CLASS2 {
     TokenIsAppContainer = 29,
     TokenCapabilities,
@@ -63,6 +63,7 @@ typedef enum _TOKEN_INFORMATION_CLASS2 {
     TokenPrivateNameSpace//,
     //MaxTokenInfoClass  // MaxTokenInfoClass should always be the last enum
 } TOKEN_INFORMATION_CLASS2;
+#endif // WINXP_SUPPORT
 
 NTOS_NTSTATUS   ZwOpenThreadToken(
     IN HANDLE       ThreadHandle,
@@ -310,8 +311,13 @@ NTOS_NTSTATUS   ZwSetInformationProcess(
 #define THREAD_DIRECT_IMPERSONATION    (0x0200)
 #define THREAD_SET_LIMITED_INFORMATION   (0x0400)       // vista
 #define THREAD_QUERY_LIMITED_INFORMATION (0x0800)       // vista
+#if (NTDDI_VERSION >= NTDDI_VISTA)
 #define THREAD_ALL_ACCESS         (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
-    0x3FF)
+                                   0xFFFF)
+#else
+#define THREAD_ALL_ACCESS         (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
+                                   0x3FF)
+#endif
 
 
 NTOS_NTSTATUS  PsSetThreadHardErrorsAreDisabled(
@@ -624,6 +630,7 @@ typedef ULONG OB_OPERATION;
 #define OB_OPERATION_HANDLE_CREATE              0x00000001
 #define OB_OPERATION_HANDLE_DUPLICATE           0x00000002
 
+#if (NTDDI_VERSION < NTDDI_VISTASP1)
 NTOS_NTSTATUS   ObRegisterCallbacks(
     __in POB_CALLBACK_REGISTRATION CallbackRegistration,
     __deref_out PVOID *RegistrationHandle);
@@ -631,6 +638,7 @@ NTOS_NTSTATUS   ObRegisterCallbacks(
 
 NTOS_NTSTATUS   ObUnRegisterCallbacks(
     __in PVOID RegistrationHandle);
+#endif
 
 
 // ------------------------------------------------------------------

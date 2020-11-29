@@ -83,7 +83,9 @@ typedef struct _KEY_MOUNT           KEY_MOUNT;
 //---------------------------------------------------------------------------
 
 
+#ifdef WINXP_SUPPORT
 extern P_NtSetInformationToken          ZwSetInformationToken;
+#endif // WINXP_SUPPORT
 
 
 //---------------------------------------------------------------------------

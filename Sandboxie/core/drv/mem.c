@@ -130,8 +130,7 @@ _FX void Mem_FreeString(WCHAR *string)
 
 _FX BOOLEAN Mem_GetLockResource(PERESOURCE *ppResource, BOOLEAN InitMsg)
 {
-    *ppResource = ExAllocatePoolWithTag(
-                                    NonPagedPool, sizeof(ERESOURCE), tzuk);
+    *ppResource = ExAllocatePoolWithTag(NonPagedPool, sizeof(ERESOURCE), tzuk);
     if (*ppResource) {
         ExInitializeResourceLite(*ppResource);
         return TRUE;

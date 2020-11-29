@@ -40,9 +40,6 @@
     <ClCompile Include="gui_xp.c">
       <Filter>xp</Filter>
     </ClCompile>
-    <ClCompile Include="key_flt.c">
-      <Filter>xp</Filter>
-    </ClCompile>
     <ClCompile Include="key_xp.c">
       <Filter>xp</Filter>
     </ClCompile>
@@ -74,6 +71,7 @@
     <ClCompile Include="..\..\common\list.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="key_flt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="alpc.h" />

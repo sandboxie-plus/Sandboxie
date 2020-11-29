@@ -308,7 +308,7 @@ _FX WCHAR *Conf_Expand_Helper(
     static const WCHAR *_DefaultSpoolDirectoryPrefix =
         L"%SystemRoot%\\System32\\spool\\";
     NTSTATUS status;
-    const WCHAR *ptr1, *ptr2;
+    const WCHAR *ptr1, *ptr2 = L"";
     WCHAR varname[66];
     ULONG len;
     WCHAR *buf, *ptr;

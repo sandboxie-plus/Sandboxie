@@ -1172,7 +1172,7 @@ _FX NTSTATUS Thread_SetInformationThread_ImpersonationToken(
     void *ProcessObject;
     PROCESS *proc2;
     THREAD *thrd2;
-    HANDLE MyTokenHandle;
+    HANDLE MyTokenHandle = NULL;
     NTSTATUS status;
     SECURITY_IMPERSONATION_LEVEL ImpersonationLevel;
     BOOLEAN MustCreateThread;

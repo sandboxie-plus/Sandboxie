@@ -284,7 +284,7 @@ _FX NTSTATUS File_TranslateShares(
 _FX NTSTATUS File_TranslateSymlinks(WCHAR *name, ULONG max_len)
 {
     NTSTATUS status;
-    HANDLE handle;
+    HANDLE handle = NULL;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING uni;
     ULONG len, rem, ofs;

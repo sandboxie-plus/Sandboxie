@@ -915,7 +915,7 @@ _FX NTSTATUS Process_GetSidStringAndSessionId(
     UNICODE_STRING *SidString, ULONG *SessionId)
 {
     NTSTATUS status;
-    PEPROCESS ProcessObject;
+    PEPROCESS ProcessObject = NULL;
     PACCESS_TOKEN TokenObject;
 
     if (ProcessHandle == NtCurrentProcess()) {

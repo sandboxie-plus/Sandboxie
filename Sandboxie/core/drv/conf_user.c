@@ -91,8 +91,7 @@ _FX BOOLEAN Conf_Init_User(void)
 {
     List_Init(&Conf_Users);
 
-    Conf_Users_Event =
-        ExAllocatePoolWithTag(NonPagedPool, sizeof(KEVENT), tzuk);
+    Conf_Users_Event = ExAllocatePoolWithTag(NonPagedPool, sizeof(KEVENT), tzuk);
     if (! Conf_Users_Event) {
         Log_Msg0(MSG_1104);
         return FALSE;

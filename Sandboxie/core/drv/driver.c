@@ -142,6 +142,8 @@ _FX NTSTATUS DriverEntry(
 {
     BOOLEAN ok = TRUE;
 
+	ExInitializeDriverRuntime(DrvRtPoolNxOptIn);
+
     //
     // initialize global driver variables
     //

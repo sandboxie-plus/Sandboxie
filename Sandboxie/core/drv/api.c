@@ -137,8 +137,7 @@ _FX BOOLEAN Api_Init(void)
     // initialize Fast IO dispatch pointers
     //
 
-    Api_FastIoDispatch = ExAllocatePoolWithTag(
-                            NonPagedPool, sizeof(FAST_IO_DISPATCH), tzuk);
+    Api_FastIoDispatch = ExAllocatePoolWithTag(NonPagedPool, sizeof(FAST_IO_DISPATCH), tzuk);
     if (! Api_FastIoDispatch) {
         Log_Status(MSG_API_DEVICE, 0, STATUS_INSUFFICIENT_RESOURCES);
         return FALSE;

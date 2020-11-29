@@ -58,8 +58,7 @@ static KEVENT *Process_Low_Event = NULL;
 
 _FX BOOLEAN Process_Low_Init(void)
 {
-    Process_Low_Event =
-                ExAllocatePoolWithTag(NonPagedPool, sizeof(KEVENT), tzuk);
+    Process_Low_Event = ExAllocatePoolWithTag(NonPagedPool, sizeof(KEVENT), tzuk);
     if (! Process_Low_Event) {
         Log_Msg0(MSG_1104);
         return FALSE;

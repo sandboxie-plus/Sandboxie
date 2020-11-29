@@ -22,12 +22,6 @@ jobs:
       - name: Build Driver
         run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-
-      - name: Build SandboxiePlus
-        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
-
       - name: Upload Sandboxie
         uses: actions/upload-artifact@v2
         with:
@@ -40,11 +34,3 @@ jobs:
             !**/*.iobj
             !**/*.lib
             !**/*.cer
-
-      - name: Upload SandboxiePlus
-        uses: actions/upload-artifact@v2
-        with:
-          name: Sandboxie Plus (${{ matrix.platform }})
-          path: |
-            SandboxiePlus/${{ matrix.platform }}/Release
-            !**/*.pdb

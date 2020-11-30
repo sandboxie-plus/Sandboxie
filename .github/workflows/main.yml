@@ -34,3 +34,4 @@ jobs:
             !**/*.iobj
             !**/*.lib
             !**/*.cer
+            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb

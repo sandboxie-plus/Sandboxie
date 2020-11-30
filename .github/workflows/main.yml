@@ -29,6 +29,7 @@ jobs:
           path: |
             Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
             !**/*.pdb
+            !**/*.ipdb
             !**/*.exp
             !**/*.ilk
             !**/*.iobj

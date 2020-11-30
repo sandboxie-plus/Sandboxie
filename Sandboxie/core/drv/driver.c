@@ -56,9 +56,9 @@ static BOOLEAN Driver_InitPublicSecurity(void);
 
 static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
-#ifdef WINXP_SUPPORT
+#ifdef OLD_DDK
 static BOOLEAN Driver_FindMissingServices(void);
-#endif // WINXP_SUPPORT
+#endif // OLD_DDK
 
 static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
@@ -70,9 +70,9 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #pragma alloc_text (INIT, DriverEntry)
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
 #pragma alloc_text (INIT, Driver_FindHomePath)
-#ifdef WINXP_SUPPORT
+#ifdef OLD_DDK
 #pragma alloc_text (INIT, Driver_FindMissingServices)
-#endif // WINXP_SUPPORT
+#endif // OLD_DDK
 #endif // ALLOC_PRAGMA
 
 
@@ -126,9 +126,9 @@ ULONG Process_Flags3 = 0;
 //---------------------------------------------------------------------------
 
 
-#ifdef WINXP_SUPPORT
+#ifdef OLD_DDK
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
-#endif // WINXP_SUPPORT
+#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------
@@ -196,10 +196,10 @@ _FX NTSTATUS DriverEntry(
     if (ok)
         ok = Session_Init();
 
-#ifdef WINXP_SUPPORT
+#ifdef OLD_DDK
     if (ok)
         ok = Driver_FindMissingServices();
-#endif // WINXP_SUPPORT
+#endif // OLD_DDK
 
     if (ok)
         ok = Token_Init();
@@ -595,7 +595,7 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 //---------------------------------------------------------------------------
 
 
-#ifdef WINXP_SUPPORT
+#ifdef OLD_DDK
 
 #define FIND_SERVICE(svc,prmcnt)                                \
     {                                                           \
@@ -646,7 +646,7 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 
 #undef FIND_SERVICE
 
-#endif // WINXP_SUPPORT
+#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------

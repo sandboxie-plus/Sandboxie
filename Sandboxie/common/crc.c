@@ -36,7 +36,7 @@ extern "C" {
 
 ULONG CRC_Adler32(const UCHAR *data, int len);
 ULONG CRC_Tzuk32(const UCHAR *data, int len);
-ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len);
+//ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len);
 
 
 #ifdef __cplusplus
@@ -148,14 +148,14 @@ _FX ULONG CRC_Tzuk32(const UCHAR *data, int len)
 #ifdef CRC_WITH_ADLERTZUK64
 
 
-_FX ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len)
+/*_FX ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len)
 {
     ULONG a = CRC_Adler32(data, len);
     ULONG b = CRC_Tzuk32(data, len);
     ULONG64 ab = (ULONG64)a;
     ab = (ab << 32) | b;
     return ab;
-}
+}*/
 
 
 #endif CRC_WITH_ADLERTZUK64

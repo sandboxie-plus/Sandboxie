@@ -32,8 +32,6 @@ typedef long NTSTATUS;
 // If you are missing some expected functions we probably just not added them here yet, so just add what you need.
 //
 
-#define OLD_DDK
-
 //int __cdecl __stdio_common_vswprintf(unsigned __int64 options, wchar_t *str, size_t len, const wchar_t *format, _locale_t locale, va_list valist);
 //int __cdecl __stdio_common_vfwprintf(unsigned __int64 options, FILE *file, const wchar_t *format, _locale_t locale, va_list valist);
 //int __cdecl __stdio_common_vswscanf(unsigned __int64 options, const wchar_t *input, size_t length, const wchar_t *format, _locale_t locale, va_list valist);

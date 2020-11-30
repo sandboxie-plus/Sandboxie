@@ -296,7 +296,7 @@ _FX NTSTATUS Ipc_Api_CopyRpcPortName(enum ENUM_DYNAMIC_PORT_TYPE ePortType, WCHA
     if (Ipc_Dynamic_Ports[ePortType].pPortLock) {
 
         KeEnterCriticalRegion();
-        ExAcquireResourceExclusive(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
+        ExAcquireResourceExclusiveLite(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
 
         if (pSrcPortName && (*pSrcPortName))
         {

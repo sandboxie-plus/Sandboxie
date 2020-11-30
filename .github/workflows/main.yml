@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [Win32, x64]
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup msbuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Build Driver
+        run: msbuild /t:build Sandboxie\SandboxDrv.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+
+      - name: Upload Sandboxie
+        uses: actions/upload-artifact@v2
+        with:
+          name: Sandboxie (${{ matrix.platform }})
+          path: |
+            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
+            !**/*.pdb
+            !**/*.exp
+            !**/*.ilk
+            !**/*.iobj
+            !**/*.lib
+            !**/*.cer

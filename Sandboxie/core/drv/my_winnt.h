@@ -45,7 +45,7 @@
 #define SE_GROUP_LOGON_ID               (0xC0000000L)
 #define SE_GROUP_RESOURCE               (0x20000000L)
 
-#ifdef WINXP_SUPPORT
+#ifdef OLD_DDK
 typedef enum _TOKEN_INFORMATION_CLASS2 {
     TokenIsAppContainer = 29,
     TokenCapabilities,
@@ -63,7 +63,7 @@ typedef enum _TOKEN_INFORMATION_CLASS2 {
     TokenPrivateNameSpace//,
     //MaxTokenInfoClass  // MaxTokenInfoClass should always be the last enum
 } TOKEN_INFORMATION_CLASS2;
-#endif // WINXP_SUPPORT
+#endif // OLD_DDK
 
 NTOS_NTSTATUS   ZwOpenThreadToken(
     IN HANDLE       ThreadHandle,

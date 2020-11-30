@@ -132,7 +132,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>Default</CompileAs>
       <OmitFramePointers />
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
@@ -166,6 +166,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\my_ntdll.c">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Disabled</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">Disabled</Optimization>
+    </ClCompile>
     <ClCompile Include="..\..\common\pattern.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>

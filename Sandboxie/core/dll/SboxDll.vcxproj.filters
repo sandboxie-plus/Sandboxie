@@ -168,6 +168,9 @@
       <Filter>hook</Filter>
     </ClCompile>
     <ClCompile Include="trace.c" />
+    <ClCompile Include="..\..\common\my_ntdll.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />

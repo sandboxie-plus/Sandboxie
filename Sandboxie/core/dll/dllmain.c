@@ -33,7 +33,6 @@
 // Functions
 //---------------------------------------------------------------------------
 
-
 static void Dll_InitGeneric(HINSTANCE hInstance);
 
 static void Dll_InitInjected(void);
@@ -187,6 +186,9 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
     Dll_Ntdll = GetModuleHandle(L"ntdll.dll");
     Dll_Kernel32 = GetModuleHandle(DllName_kernel32);
     Dll_KernelBase = GetModuleHandle(DllName_kernelbase);
+
+	extern void InitMyNtDll(HMODULE Ntdll);
+	InitMyNtDll(Dll_Ntdll);
 
     if (! Dll_InitMem()) {
         SbieApi_Log(2305, NULL);

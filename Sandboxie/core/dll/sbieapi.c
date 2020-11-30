@@ -56,8 +56,7 @@ int __CRTDECL Sbie_snwprintf(wchar_t *_Buffer, size_t Count, const wchar_t * con
 	int _Result;
 	va_list _ArgList;
 
-	int(*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args);
-	*(FARPROC*)&P_vsnwprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnwprintf");
+	extern int(*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args);
 
 	va_start(_ArgList, _Format);
 	_Result = P_vsnwprintf(_Buffer, Count, _Format, _ArgList);
@@ -74,8 +73,7 @@ int __CRTDECL Sbie_snprintf(char *_Buffer, size_t Count, const char * const _For
 	int _Result;
 	va_list _ArgList;
 
-	int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
-	*(FARPROC*)&P_vsnprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnprintf");
+	extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
 
 	va_start(_ArgList, _Format);
 	_Result = P_vsnprintf(_Buffer, Count, _Format, _ArgList);
@@ -374,8 +372,7 @@ _FX LONG SbieApi_vLogEx(
     tmp2 = (UCHAR *)tmp1 + API_LOG_MESSAGE_MAX_LEN * 2 - 510;
     if (format) {
 
-        int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
-        *(FARPROC*)&P_vsnprintf = GetProcAddress(GetModuleHandleW(L"ntdll"), "_vsnprintf");
+        extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
 
         Sbie_snprintf(tmp1, 510, "%S", format);
         P_vsnprintf(tmp2, 510, tmp1, va_args);

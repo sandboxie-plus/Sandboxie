@@ -19,7 +19,7 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
 
-      - name: Build Driver
+      - name: Build Sandboxie
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
       - name: Upload Sandboxie

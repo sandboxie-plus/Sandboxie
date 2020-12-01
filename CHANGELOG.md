@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.5.0 / 5.45.0] - 2020-11-28
+## [0.5.0 / 5.45.0] - 2020-12-01
 
 ### Added
 - added new notification window
@@ -25,6 +25,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added more windows 10 specific template presets
 - added ability to create desktop shortcuts to sandboxed items
 - added icons to box option tabs
+- added box grouping
+- added new debug option "DebugTrace=y" to log debug output to the trace log
 
 ### Changed
 - File migration limit can now be disabled by specifying "CopyLimitKb=-1"
@@ -32,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - terminated boxed processes are now kept listed for a coupel of seconds
 - reworked sandbox dletion mechaism ofthe new UI
 - restructured sandbox options window
+- SbieDLL.dll can now be compiled with an up to date nitll.lib
 
 ### Fixed
 - fixed issues migrating files > 4GB
@@ -43,6 +46,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UI not properly displaying async errors
 - fixed issues when a snapshot operation failed
 - fixed some special cases of IpcPath and WinClass in the new UI
+- fixed driver issues with WHQL passing compatybility testing
+
 
 
 ## [0.4.5 / 5.44.1] - 2020-11-16

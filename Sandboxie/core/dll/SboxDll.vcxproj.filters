@@ -233,6 +233,9 @@
     <None Include="util_32.asm">
       <Filter>hook</Filter>
     </None>
+    <None Include="..\..\common\except_handler3.asm">
+      <Filter>common</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="scm">

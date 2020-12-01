@@ -15,8 +15,6 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
 typedef long NTSTATUS;
@@ -31,11 +29,6 @@ typedef long NTSTATUS;
 // As more recent versions of ntdll.lib are not offering many CRT functions we have to dynamically link them.
 // If you are missing some expected functions we probably just not added them here yet, so just add what you need.
 //
-
-//int __cdecl __stdio_common_vswprintf(unsigned __int64 options, wchar_t *str, size_t len, const wchar_t *format, _locale_t locale, va_list valist);
-//int __cdecl __stdio_common_vfwprintf(unsigned __int64 options, FILE *file, const wchar_t *format, _locale_t locale, va_list valist);
-//int __cdecl __stdio_common_vswscanf(unsigned __int64 options, const wchar_t *input, size_t length, const wchar_t *format, _locale_t locale, va_list valist);
-//int __cdecl __stdio_common_vfwscanf(unsigned __int64 options, FILE *file, const wchar_t *format, _locale_t locale, va_list valist);
 
 int(*P_vsnwprintf)(wchar_t *_Buffer, size_t Count, const wchar_t * const, va_list Args) = NULL;
 int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args) = NULL;
@@ -142,12 +135,7 @@ char * __cdecl strstr(char const* _Str, char const* _SubStr) { return Pstrstr(_S
 char*(__cdecl *P_strlwr)(const* str) = NULL;
 char* __cdecl _strlwr(char* str) { return P_strlwr(str); }
 
-#ifndef _WIN64
-int(__cdecl *P_except_handler3)(void* exception_record, void* registration, void* context, void* dispatcher);
-int __cdecl _except_handler3(void* exception_record, void* registration, void* context, void* dispatcher) {
-	return P_except_handler3(exception_record, registration, context, dispatcher);
-}
-#else
+#ifdef _WIN64
 EXCEPTION_DISPOSITION(__cdecl *P__C_specific_handler)(struct _EXCEPTION_RECORD *ExceptionRecord, void* EstablisherFrame, struct _CONTEXT* ContextRecord, struct _DISPATCHER_CONTEXT *DispatcherContext) = NULL;
 EXCEPTION_DISPOSITION __cdecl __C_specific_handler(struct _EXCEPTION_RECORD *ExceptionRecord, void* EstablisherFrame, struct _CONTEXT* ContextRecord, struct _DISPATCHER_CONTEXT *DispatcherContext) {
 	return P__C_specific_handler(ExceptionRecord, EstablisherFrame, ContextRecord, DispatcherContext);
@@ -155,6 +143,22 @@ EXCEPTION_DISPOSITION __cdecl __C_specific_handler(struct _EXCEPTION_RECORD *Exc
 
 ULONG(__cdecl *P__chkstk)() = NULL;
 ULONG __cdecl __chkstk() { return P__chkstk(); }
+#else
+
+// Global variables for  __NLG_Destination
+typedef struct {
+	unsigned long dwSig;
+	unsigned long uoffDestination;
+	unsigned long dwCode;
+	unsigned long uoffFramePointer;
+} _NLG_INFO;
+_NLG_INFO _NLG_Destination = { 0x019930520, 0, 0, 0 };
+
+// Global variables for  __ValidateEH3RN
+INT		_nValidPages = 0;
+PVOID	_rgValidPages[0x10] = { NULL };
+BOOL	_lModifying = FALSE;
+
 #endif
 #endif
 
@@ -199,17 +203,10 @@ void InitMyNtDll(HMODULE Ntdll)
 	*(FARPROC*)&Pstrstr = GetProcAddress(Ntdll, "strstr");
 	*(FARPROC*)&P_strlwr = GetProcAddress(Ntdll, "_strlwr");
 
-#ifndef _WIN64
-	*(FARPROC*)&P_except_handler3 = GetProcAddress(Ntdll, "_except_handler3");
-#else	
+#ifdef _WIN64
 	*(FARPROC*)&P__C_specific_handler = GetProcAddress(Ntdll, "__C_specific_handler");
 	*(FARPROC*)&P__chkstk = GetProcAddress(Ntdll, "__chkstk");
 #endif
 
 #endif
 }
-
-
-
-
-

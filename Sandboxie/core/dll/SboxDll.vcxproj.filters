@@ -233,7 +233,10 @@
     <None Include="util_32.asm">
       <Filter>hook</Filter>
     </None>
-    <None Include="..\..\common\except_handler3.asm">
+    <None Include="..\..\common\NtCRT\x64\ntdll.def">
+      <Filter>common</Filter>
+    </None>
+    <None Include="..\..\common\NtCRT\x86\ntdll.def">
       <Filter>common</Filter>
     </None>
   </ItemGroup>
@@ -277,6 +280,9 @@
   <ItemGroup>
     <CustomBuild Include="util_asm.asm">
       <Filter>hook</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x86\except_handler3.asm">
+      <Filter>common</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

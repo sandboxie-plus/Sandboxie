@@ -6,11 +6,12 @@
 ;
 ;----------------------------------------------------------------------------
 
-                .386
-_TEXT           segment use32 para public 'CODE'
-                public  __except_handler3
+.386
 
-;EXTERN __ValidateEH3RN    : PROC
+_TEXT         segment use32 para public 'CODE'
+
+
+public  __except_handler3
 
 ;__except_handler3        proc    near
 
@@ -136,23 +137,7 @@ __seh_longjmp_unwind@4:
 
 ;__except_handler3        endp
 
-
-
-;EXTERN C P_RtlUnwind : DWORD
 EXTERN _RtlUnwind@16 	  : PROC
-
-
-;MAGIC_NUMBER1			equ	019930520h
-;
-;_NLG_INFO struc
-;    dwSig				dd	MAGIC_NUMBER1
-;    uoffDestination		dd	0
-;    dwCode				dd	0
-;    uoffFramePointer	dd	0
-;_NLG_INFO ends
-
-;extern	__NLG_Destination:_NLG_INFO
-extern	__NLG_Destination: FAR
 
 ;__global_unwind2        proc    near
 
@@ -285,14 +270,7 @@ __NLG_Dispatch:
 ;__global_unwind2        endp
 
 
-
-;EXTERN C _NtQueryVirtualMemory : DWORD
 EXTERN _NtQueryVirtualMemory@24: PROC
-
-EXTERN C _nValidPages : DWORD
-EXTERN C _rgValidPages : DWORD
-EXTERN C _lModifying : DWORD
-
 
 ;__ValidateEH3RN        proc    near
 
@@ -534,6 +512,41 @@ label03:
 
 ;__ValidateEH3RN        endp
 
-
 _TEXT           ends
-                end
+
+
+.model flat
+.data
+
+; Global variables for  __NLG_Destination
+;typedef struct {
+;	unsigned long dwSig;
+;	unsigned long uoffDestination;
+;	unsigned long dwCode;
+;	unsigned long uoffFramePointer;
+;} _NLG_INFO;
+;_NLG_INFO _NLG_Destination = { 0x019930520, 0, 0, 0 };
+__NLG_Destination LABEL DWORD
+	dd	1 dup (019930520h) ; MAGIC_NUMBER1
+	dd	1 dup (0)
+	dd	1 dup (0)
+	dd	1 dup (0)
+	public  __NLG_Destination
+
+
+; Global variables for  __ValidateEH3RN
+;INT		_nValidPages = 0;
+_nValidPages LABEL DWORD
+	dd	1 dup (0)
+	public  _nValidPages
+;PVOID	_rgValidPages[0x10] = { NULL };
+_rgValidPages LABEL DWORD
+	dd	16 dup (0)
+	public  _rgValidPages
+;BOOL	_lModifying = FALSE;
+_lModifying LABEL DWORD
+	dd	1 dup (0)
+	public  _lModifying
+
+
+end

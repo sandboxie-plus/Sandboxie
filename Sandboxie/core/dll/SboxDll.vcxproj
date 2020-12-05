@@ -96,7 +96,7 @@
       <OmitFramePointers />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
@@ -115,7 +115,7 @@
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
@@ -135,7 +135,7 @@
       <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
@@ -153,7 +153,7 @@
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
@@ -375,6 +375,31 @@
     <Midl Include="pstore.idl" />
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="..\..\common\NtCRT\x86\except_handler3.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">ml -c  -Cx -nologo -Zi -Zm -Fo$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">%(ProjectDir)$(Configuration)\%(Filename).obj</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">ml -c  -Cx -nologo -Zi -Zm -Fo$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">%(ProjectDir)$(Configuration)\%(Filename).obj</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x64\ntdll.def">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x64</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x64</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x86\ntdll.def">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x86</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x86</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+    </CustomBuild>
     <None Include="SboxDll32.def" />
     <None Include="SboxDll64.def" />
     <None Include="util_32.asm">

@@ -190,6 +190,9 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
 	extern void InitMyNtDll(HMODULE Ntdll);
 	InitMyNtDll(Dll_Ntdll);
 
+	extern FARPROC __sys_GetModuleInformation;
+	__sys_GetModuleInformation = GetProcAddress(LoadLibraryW(L"psapi.dll"), "GetModuleInformation");
+
     if (! Dll_InitMem()) {
         SbieApi_Log(2305, NULL);
         ExitProcess(-1);

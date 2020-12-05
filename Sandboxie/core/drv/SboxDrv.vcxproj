@@ -98,6 +98,9 @@
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
     <TargetName>SbieDrv</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(CI)'=='On'">
+    <SignMode>Off</SignMode>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>

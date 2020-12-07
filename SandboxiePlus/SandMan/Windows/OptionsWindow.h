@@ -87,7 +87,7 @@ private slots:
 	void OnGeneralChanged();
 	void OnStartChanged()			{ m_StartChanged = true; }
 	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; }
-	void OnINetBlockChanged();
+	void OnINetBlockChanged()		{ m_INetBlockChanged = true; }
 	void OnRecoveryChanged()		{ m_RecoveryChanged = true; }
 	void OnAdvancedChanged();
 	void OnDebugChanged();

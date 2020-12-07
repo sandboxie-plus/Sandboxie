@@ -12,10 +12,19 @@ public:
     CSbieModel(QObject *parent = 0);
 	~CSbieModel();
 
-	QList<QVariant>	Sync(const QMap<QString, CSandBoxPtr>& BoxList);
+	QList<QVariant>	Sync(const QMap<QString, CSandBoxPtr>& BoxList, const QMap<QString, QStringList>& Groups = QMap<QString, QStringList>());
 
 	CSandBoxPtr		GetSandBox(const QModelIndex &index) const;
 	CBoxedProcessPtr GetProcess(const QModelIndex &index) const;
+	QVariant		GetID(const QModelIndex &index) const;
+
+	enum ETypes
+	{
+		eNone = 0,
+		eGroup,
+		eBox,
+		eProcess
+	}				GetType(const QModelIndex &index) const;
 
 	int				columnCount(const QModelIndex &parent = QModelIndex()) const;
 	QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -33,7 +42,7 @@ public:
 	};
 
 protected:
-	bool			Sync(const CSandBoxPtr& pBox, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added);
+	bool			Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added);
 
 	struct SSandBoxNode: STreeNode
 	{
@@ -51,6 +60,9 @@ protected:
 	QList<QVariant>			MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
 	QList<QVariant>			MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
 	bool					TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, int Index = 0);
+
+	QString					FindParent(const QVariant& Name, const QMap<QString, QStringList>& Groups);
+	QList<QVariant>			MakeBoxPath(const QVariant& Name, const QMap<QString, QStringList>& Groups);
 
 	//virtual QVariant		GetDefaultIcon() const;
 

@@ -45,7 +45,7 @@
         <enum>QTabWidget::West</enum>
        </property>
        <property name="currentIndex">
-        <number>6</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1300,20 +1300,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
               <layout class="QGridLayout" name="gridLayout_34">
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_32">
-                 <item row="8" column="2">
-                  <spacer name="horizontalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="8" column="1">
+                 <item row="9" column="1">
                   <spacer name="verticalSpacer_2">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -1325,6 +1312,33 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QCheckBox" name="chkPipeTrace">
+                   <property name="text">
+                    <string>Pipe Trace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2" rowspan="5">
+                  <widget class="QLabel" name="label_26">
+                   <property name="text">
+                    <string>Log all access events as seen by the driver to the resource access log.
+
+This options set the event amsk to &quot;*&quot; - All access events
+You can customize the logging using the ini by specifying
+&quot;A&quot; - Allowed accesses
+&quot;D&quot; - Denidec accesses
+&quot;I&quot; - Ignore access requests
+instead of &quot;*&quot;.</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="label_19">
@@ -1346,24 +1360,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1">
-                  <widget class="QCheckBox" name="chkIpcTrace">
-                   <property name="text">
-                    <string>IPC Trace</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="5" column="1">
                   <widget class="QCheckBox" name="chkKeyTrace">
                    <property name="text">
                     <string>Key Trace</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QCheckBox" name="chkPipeTrace">
-                   <property name="text">
-                    <string>Pipe Trace</string>
                    </property>
                   </widget>
                  </item>
@@ -1374,23 +1374,30 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="2" rowspan="5">
-                  <widget class="QLabel" name="label_26">
+                 <item row="9" column="2">
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="6" column="1">
+                  <widget class="QCheckBox" name="chkIpcTrace">
                    <property name="text">
-                    <string>Log all access events as seen by the driver to the resource access log.
-
-This options set the event amsk to &quot;*&quot; - All access events
-You can customize the logging using the ini by specifying
-&quot;A&quot; - Allowed accesses
-&quot;D&quot; - Denidec accesses
-&quot;I&quot; - Ignore access requests
-instead of &quot;*&quot;.</string>
+                    <string>IPC Trace</string>
                    </property>
-                   <property name="alignment">
-                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                   </property>
-                   <property name="wordWrap">
-                    <bool>true</bool>
+                  </widget>
+                 </item>
+                 <item row="8" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkDbgTrace">
+                   <property name="text">
+                    <string>Log Debug Output to the Trace Log</string>
                    </property>
                   </widget>
                  </item>
@@ -1419,8 +1426,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>530</width>
-                    <height>251</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">

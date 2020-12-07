@@ -6,6 +6,7 @@
 #include "../MiscHelpers/Common/TreeViewEx.h"
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
+#include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include "Models/ResMonModel.h"
 #include "Models/ApiMonModel.h"
 #include <QTranslator>
@@ -42,6 +43,9 @@ public:
 	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
+	QAction*			GetNewAction() { return m_pNew; }
+	QAction*			GetEmptyAllAction() { return m_pEmptyAll; }
+
 protected:
 	SB_STATUS			ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
@@ -63,6 +67,8 @@ protected:
 	CApiLog*			m_ApiLog;
 	
 	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
+
+	CNetworkAccessManager*	m_RequestManager;
 
 public slots:
 	void				OnMessage(const QString&);
@@ -88,6 +94,8 @@ public slots:
 
 	void				OnBoxClosed(const QString& BoxName);
 
+	void				CheckForUpdates(bool bManual = true);
+
 private slots:
 	void				OnSelectionChanged();
 
@@ -108,11 +116,19 @@ private slots:
 	void				OnSetLogging();
 
 	void				OnExit();
+	void				OnHelp();
 	void				OnAbout();
 
 	void				OnSysTray(QSystemTrayIcon::ActivationReason Reason);
 
+	void				OnUpdateCheck();
+	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
+	void				OnUpdateDownload();
+
 private:
+	void				CreateMenus();
+	void				CreateToolBar();
+
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;
 
@@ -170,8 +186,11 @@ private:
 	QAction*			m_pEnableLogging;
 
 	QMenu*				m_pMenuHelp;
-	QAction*			m_pAbout;
 	QAction*			m_pSupport;
+	QAction*			m_pForum;
+	QAction*			m_pManual;
+	QAction*			m_pUpdate;
+	QAction*			m_pAbout;
 	QAction*			m_pAboutQt;
 
 	QSystemTrayIcon*	m_pTrayIcon;

@@ -138,6 +138,18 @@ void CCheckableMessageBox::setIconPixmap(const QPixmap &p)
     d->pixmapLabel->setVisible(!p.isNull());
 }
 
+Qt::TextFormat CCheckableMessageBox::textFormat() const
+{
+	return d->messageLabel->textFormat();
+}
+
+void CCheckableMessageBox::setTextFormat(Qt::TextFormat format)
+{
+	d->messageLabel->setTextFormat(format);
+	d->messageLabel->setWordWrap(format == Qt::RichText
+		|| (format == Qt::AutoText && Qt::mightBeRichText(d->messageLabel->text())));
+}
+
 bool CCheckableMessageBox::isChecked() const
 {
     return d->checkBox->isChecked();

@@ -22,6 +22,7 @@ signals:
 
 public slots:
 	void						Refresh();
+	void						ReloadGroups();
 
 private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
@@ -29,6 +30,7 @@ private slots:
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected);
 
+	void						OnGroupAction();
 	void						OnSandBoxAction();
 	void						OnProcessAction();
 
@@ -39,6 +41,8 @@ protected:
 
 	virtual void				UpdateRunMenu(const CSandBoxPtr& pBox);
 
+	QMap<QString, QStringList>	m_Groups;
+
 private:
 
 	QVBoxLayout*			m_pMainLayout;
@@ -47,7 +51,9 @@ private:
 	CSbieModel*				m_pSbieModel;
 	QSortFilterProxyModel*	m_pSortProxy;
 
-
+	QAction*				m_pAddGroupe;
+	QAction*				m_pDelGroupe;
+	int						m_iMenuTop;
 	QMenu*					m_pMenuRun;
 	QAction*				m_pMenuRunAny;
 	QAction*				m_pMenuRunMenu;
@@ -68,6 +74,8 @@ private:
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
+	QMenu*					m_pMenuMoveTo;
+	int						m_iMoveTo;
 	QAction*				m_pMenuRename;
 	int						m_iMenuBox;
 

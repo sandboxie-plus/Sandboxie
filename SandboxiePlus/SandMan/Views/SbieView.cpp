@@ -53,6 +53,13 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	connect(m_pSbieModel, SIGNAL(ToolTipCallback(const QVariant&, QString&)), this, SLOT(OnToolTipCallback(const QVariant&, QString&)), Qt::DirectConnection);
 
+	m_pMenu->addAction(theGUI->GetNewAction());
+	//m_pMenu->addAction(theGUI->GetEmptyAllAction());
+	m_pAddGroupe = m_pMenu->addAction(QIcon(":/Actions/Group"), tr("Add Group"), this, SLOT(OnGroupAction()));
+	m_pDelGroupe = m_pMenu->addAction(QIcon(":/Actions/Remove"), tr("Remove Group"), this, SLOT(OnGroupAction()));
+	m_iMenuTop = m_pMenu->actions().count();
+	//m_pMenu->addSeparator();
+
 	m_pMenuRun = m_pMenu->addMenu(QIcon(":/Actions/Run"), tr("Run"));
 		m_pMenuRunAny = m_pMenuRun->addAction(tr("Run Program"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMenu = m_pMenuRun->addAction(tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
@@ -82,6 +89,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsNoAdmin->setCheckable(true);
 	m_pMenuOptions = m_pMenu->addAction(QIcon(":/Actions/Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRename = m_pMenu->addAction(QIcon(":/Actions/Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_iMoveTo = m_pMenu->actions().count();
+	m_pMenuMoveTo = m_pMenu->addMenu(QIcon(":/Actions/Group"), tr("Move to Group"));
 	m_pMenuRemove = m_pMenu->addAction(QIcon(":/Actions/Remove"), tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMenuBox = m_pMenu->actions().count();
 
@@ -123,7 +132,7 @@ CSbieView::~CSbieView()
 
 void CSbieView::Refresh()
 {
-	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes());
+	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes(), m_Groups);
 
 	if (m_pSbieModel->IsTree())
 	{
@@ -168,7 +177,8 @@ void CSbieView::OnMenu(const QPoint& Point)
 	int iProcessCount = 0;
 	int iSandBoxeCount = 0;
 	int iSuspendedCount = 0;
-	foreach(const QModelIndex& Index, m_pSbieTree->selectedRows())
+	QModelIndexList Rows = m_pSbieTree->selectedRows();
+	foreach(const QModelIndex& Index, Rows)
 	{
 		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
 		pProcess = m_pSbieModel->GetProcess(ModelIndex);
@@ -188,9 +198,15 @@ void CSbieView::OnMenu(const QPoint& Point)
 
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
-	for (int i = 0; i < m_iMenuBox; i++)
+	for (int i = 0; i < m_iMenuTop; i++)
+		MenuActions[i]->setVisible(iSandBoxeCount == 0 && iProcessCount == 0);
+	m_pDelGroupe->setVisible(!Rows.isEmpty() && iSandBoxeCount == 0 && iProcessCount == 0);
+
+	for (int i = m_iMenuTop; i < m_iMenuBox; i++)
 		MenuActions[i]->setVisible(iSandBoxeCount > 0 && iProcessCount == 0);
 	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
+
+	MenuActions[m_iMoveTo]->setVisible(!Rows.isEmpty() && iProcessCount == 0);
 
 	if(iSandBoxeCount == 1)
 		UpdateRunMenu(pBox);
@@ -245,6 +261,134 @@ void CSbieView::OnMenu(const QPoint& Point)
 	m_pMenuResume->setEnabled(iSuspendedCount > 0);
 
 	CPanelView::OnMenu(Point);
+}
+
+int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m_Groups, const QString& Parent = "", int Index = 0)
+{
+	QRegExp RegExp("[,()]", Qt::CaseInsensitive, QRegExp::RegExp);
+	for (; ; )
+	{
+		int pos = Grouping.indexOf(RegExp, Index);
+		QString Name;
+		if (pos == -1) {
+			Name = Grouping.mid(Index);
+			Index = Grouping.length();
+		}
+		else {
+			Name = Grouping.mid(Index, pos - Index);
+			Index = pos + 1;
+		}
+		if (!Name.isEmpty())
+			m_Groups[Parent].append(Name);
+		if (pos == -1)
+			break;
+		if (Grouping.at(pos) == "(")
+			Index = CSbieView__ParseGroup(Grouping, m_Groups, Name, Index);
+		else if (Grouping.at(pos) == ")")
+			break;
+	}
+	return Index;
+}
+
+void CSbieView::ReloadGroups()
+{
+	m_Groups.clear();
+
+	QString Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
+
+	CSbieView__ParseGroup(Grouping, m_Groups);
+
+	// update move to menu
+	foreach(QAction* pAction, m_pMenuMoveTo->actions())
+		m_pMenuMoveTo->removeAction(pAction);
+	foreach(const QString& Group, m_Groups.keys())
+	{
+		QAction* pAction = m_pMenuMoveTo->addAction(Group.isEmpty() ? tr("[None]") : Group, this, SLOT(OnGroupAction()));
+		pAction->setData(Group);
+	}
+}
+
+QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QString& Parent = "")
+{
+	QStringList Grouping;
+	foreach(const QString& Name, m_Groups[Parent])
+	{
+		if (m_Groups.contains(Name))
+			Grouping.append(Name + "(" + CSbieView__SerializeGroup(m_Groups, Name) + ")");
+		else
+			Grouping.append(Name);
+	}
+	return Grouping.join(",");
+}
+
+void CSbieView::OnGroupAction()
+{
+	QAction* Action = qobject_cast<QAction*>(sender());
+
+	if (Action == m_pAddGroupe)
+	{
+		QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new group name"), QLineEdit::Normal);
+		if (Name.isEmpty() || m_Groups.contains(Name))
+			return;
+		m_Groups[Name] = QStringList();
+
+		QModelIndex ModelIndex = m_pSortProxy->mapToSource(m_pSbieTree->currentIndex());
+		QString Parent;
+		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+			Parent = m_pSbieModel->GetID(ModelIndex).toString();
+
+		if (!Parent.isEmpty())
+			m_Groups[Parent].append(Name);
+	}
+	else if (Action == m_pDelGroupe)
+	{
+		if (QMessageBox("Sandboxie-Plus", tr("Do you really want remove the selected group(s)?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+			return;
+
+		foreach(const QModelIndex& Index, m_pSbieTree->selectedRows())
+		{
+			QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
+			if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+			{
+				QString Group = m_pSbieModel->GetID(ModelIndex).toString();
+				m_Groups.remove(Group);
+				
+				// remove from parents
+				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+					I.value().removeAll(Group);
+			}
+		}
+
+		m_pSbieModel->Clear(); //todo improve that, also move boxes to grant parent?
+	}
+	else // move to groupe
+	{
+		QString Group = Action->data().toString();
+		
+		foreach(const QModelIndex& Index, m_pSbieTree->selectedRows())
+		{
+			QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
+			QString Name;
+			if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+				Name = m_pSbieModel->GetID(ModelIndex).toString();
+			else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
+				Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
+			if (Name.isEmpty() || Name == Group)
+				continue;
+
+			// remove from old
+			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+				I.value().removeAll(Name);
+
+			// add to new
+			m_Groups[Group].append(Name);
+		}
+
+		m_pSbieModel->Clear(); //todo improve that
+	}
+
+	QString Grouping = CSbieView__SerializeGroup(m_Groups);
+	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
 }
 
 void CSbieView::OnSandBoxAction()
@@ -337,7 +481,39 @@ void CSbieView::OnSandBoxAction()
 	}
 	else if (Action == m_pMenuMkLink)
 	{
-		CSbieUtils::CreateDesktopShortcut(SandBoxes.first()->GetName(), theAPI);
+		QString BoxName = SandBoxes.first()->GetName();
+		QString LinkPath, IconPath, WorkDir;
+		quint32 IconIndex;
+		if (!CSbieUtils::GetStartMenuShortcut(theAPI, BoxName, LinkPath, IconPath, IconIndex, WorkDir))
+			return;
+		
+		QString LinkName;
+		int pos = LinkPath.lastIndexOf(L'\\');
+		if (pos == -1)
+			return;
+		if (pos == 2 && LinkPath.length() == 3)
+			LinkName = QObject::tr("Drive %1").arg(LinkPath.left(1));
+		else {
+			LinkName = LinkPath.mid(pos + 1);
+			pos = LinkName.indexOf(QRegExp("[" + QRegExp::escape("\":;,*?.") + "]"));
+			if (pos != -1)
+				LinkName = LinkName.left(pos);
+		}
+
+		QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
+		//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shorcut in"), Path).replace("/", "\\");
+		//if (Path.isEmpty())
+		//	return;
+
+		if (Path.right(1) != "\\")
+			Path.append("\\");
+		Path += "[" + BoxName + "] " + LinkName;
+
+		Path = QFileDialog::getSaveFileName(this, tr("Create Shortcut to sandbox %1").arg(BoxName), Path, QString("Shortcut files (*.lnk)")).replace("/", "\\");
+		if (Path.isEmpty())
+			return;
+
+		CSbieUtils::CreateShortcut(theAPI, Path, LinkName, BoxName, LinkPath, IconPath, IconIndex, WorkDir);
 	}
 	else // custom run menu command
 	{
@@ -422,13 +598,14 @@ void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSele
 		return;
 
 	QItemSelectionModel* selectionModel = m_pSbieTree->selectionModel();
-
 	QItemSelection selection = selectionModel->selection();
+	QItemSelection invalid;
+
+	/*
 	QModelIndex root_parent = m_pSbieTree->currentIndex().parent();
 	while (root_parent.isValid() && root_parent.parent().isValid())
 		root_parent = root_parent.parent();
 
-	QItemSelection invalid;
 	foreach(const QModelIndex& index, selection.indexes())
 	{
 		QModelIndex parent = index.parent();
@@ -437,7 +614,16 @@ void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSele
 
 		if (parent != root_parent)
 			invalid.select(index, index);
+	}*/
+
+	int Type = m_pSbieModel->GetType(m_pSortProxy->mapToSource(m_pSbieTree->currentIndex()));
+
+	foreach(const QModelIndex& index, selection.indexes())
+	{
+		if (m_pSbieModel->GetType(m_pSortProxy->mapToSource(index)) != Type)
+			invalid.select(index, index);
 	}
+
 	selectionModel->select(invalid, QItemSelectionModel::Deselect);
 }
 

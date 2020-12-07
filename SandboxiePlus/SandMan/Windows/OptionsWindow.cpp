@@ -234,6 +234,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkKeyTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkIpcTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnAddProcess, SIGNAL(pressed()), this, SLOT(OnAddProcess()));
@@ -356,7 +357,7 @@ void COptionsWindow::LoadConfig()
 	LoadStop();
 
 	{
-		ui.chkStartBlockMsg->setEnabled(ui.radStartAll->isChecked());
+		ui.chkStartBlockMsg->setEnabled(!ui.radStartAll->isChecked());
 		ui.chkStartBlockMsg->setChecked(m_pBox->GetBool("NotifyStartRunAccessDenied", true));
 	
 		m_StartChanged = false;
@@ -392,6 +393,7 @@ void COptionsWindow::LoadConfig()
 		ReadAdvancedCheck("KeyTrace", ui.chkKeyTrace, "*");
 		ReadAdvancedCheck("IpcTrace", ui.chkIpcTrace, "*");
 		ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
+		ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 
 		ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
 		QStringList Processes = m_pBox->GetTextList("HideHostProcess", false);
@@ -507,6 +509,7 @@ void COptionsWindow::SaveConfig()
 		WriteAdvancedCheck(ui.chkKeyTrace, "KeyTrace", "*");
 		WriteAdvancedCheck(ui.chkIpcTrace, "IpcTrace", "*");
 		WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
+		WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 
 		WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
 
@@ -992,7 +995,7 @@ void COptionsWindow::OnRestrictStart()
 	else
 		DelAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*");
 
-	ui.chkStartBlockMsg->setEnabled(ui.radStartAll->isChecked());
+	ui.chkStartBlockMsg->setEnabled(!ui.radStartAll->isChecked());
 	//m_StartChanged = true;
 }
 
@@ -1011,6 +1014,8 @@ void COptionsWindow::OnDelStartProg()
 void COptionsWindow::OnBlockINet()
 {
 	bool Enable = ui.chkBlockINet->isChecked();
+	ui.chkINetBlockPrompt->setEnabled(Enable);
+	ui.chkINetBlockMsg->setEnabled(Enable);
 	if (Enable)
 		SetAccessEntry(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices");
 	else
@@ -1028,14 +1033,6 @@ void COptionsWindow::OnDelINetProg()
 {
 	DelProgFromGroup(ui.treeINet, "<InternetAccess>");
 	//m_INetBlockChanged = true;
-}
-
-void COptionsWindow::OnINetBlockChanged()
-{
-	ui.chkINetBlockPrompt->setEnabled(ui.chkBlockINet->isChecked());
-	ui.chkINetBlockMsg->setEnabled(ui.chkBlockINet->isChecked());
-
-	m_INetBlockChanged = true;
 }
 
 void COptionsWindow::AddProgToGroup(QTreeWidget* pTree, const QString& Groupe)

@@ -28,6 +28,13 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
 
+	switch (theConf->GetInt("Options/CheckForUpdates", 2)) {
+	case 0: ui.chkAutoUpdate->setCheckState(Qt::Unchecked); break;
+	case 1: ui.chkAutoUpdate->setCheckState(Qt::Checked); break;
+	case 2: ui.chkAutoUpdate->setCheckState(Qt::PartiallyChecked); break;
+	}
+
+
 	ui.chkShellMenu->setCheckState((Qt::CheckState)CSbieUtils::IsContextMenu());
 
 	ui.chkDarkTheme->setChecked(theConf->GetBool("Options/DarkTheme", false));
@@ -139,6 +146,12 @@ void CSettingsWindow::apply()
 	theConf->SetValue("Options/DarkTheme", ui.chkDarkTheme->isChecked());
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
+
+	switch (ui.chkAutoUpdate->checkState()) {
+	case Qt::Unchecked: theConf->SetValue("Options/CheckForUpdates", 0); break;
+	case Qt::PartiallyChecked: theConf->SetValue("Options/CheckForUpdates", 2); break;
+	case Qt::Checked: theConf->SetValue("Options/CheckForUpdates", 1); break;
+	}
 
 	if (ui.chkShellMenu->checkState() != CSbieUtils::IsContextMenu())
 	{

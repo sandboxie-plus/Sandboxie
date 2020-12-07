@@ -181,7 +181,7 @@ QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent) const
 
 		BoxSnapshot.NameStr = ini.value(Snapshot + "/Name").toString();
 		BoxSnapshot.InfoStr = ini.value(Snapshot + "/Description").toString();
-		BoxSnapshot.SnapDate = ini.value(Snapshot + "/SnapshotDate").toDateTime();
+		BoxSnapshot.SnapDate = QDateTime::fromTime_t(ini.value(Snapshot + "/SnapshotDate").toULongLong());
 
 		Snapshots.append(BoxSnapshot);
 	}
@@ -227,7 +227,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 		return SB_ERR(tr("Failed to copy RegHive to snapshot"));
 
 	ini.setValue("Snapshot_" + ID + "/Name", Name);
-	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime());
+	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime().toTime_t());
 	QString Current = ini.value("Current/Snapshot").toString();
 	if(!Current.isEmpty())
 		ini.setValue("Snapshot_" + ID + "/Parent", Current);

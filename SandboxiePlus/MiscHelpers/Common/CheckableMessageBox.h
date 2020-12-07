@@ -12,6 +12,7 @@ class MISCHELPERS_EXPORT CCheckableMessageBox : public QDialog
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText)
+	Q_PROPERTY(Qt::TextFormat textFormat READ textFormat WRITE setTextFormat)
     Q_PROPERTY(QPixmap iconPixmap READ iconPixmap WRITE setIconPixmap)
     Q_PROPERTY(bool isChecked READ isChecked WRITE setChecked)
     Q_PROPERTY(QString checkBoxText READ checkBoxText WRITE setCheckBoxText)
@@ -34,6 +35,9 @@ public:
 
     QString text() const;
     void setText(const QString &);
+
+	Qt::TextFormat textFormat() const;
+	void setTextFormat(Qt::TextFormat format);
 
     bool isChecked() const;
     void setChecked(bool s);

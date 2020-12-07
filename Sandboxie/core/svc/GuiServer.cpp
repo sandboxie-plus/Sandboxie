@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@
 #include <sddl.h>
 #include <aclapi.h>
 #include <dde.h>
+#include "misc.h"
 
 #define PATTERN XPATTERN
 extern "C" {
@@ -87,9 +89,14 @@ GuiServer::GuiServer()
     m_ParentPid = 0;
     m_SessionId = 0;
 
-    OSVERSIONINFO osvi = { 0 };
-    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-    GetVersionEx(&osvi);
+    OSVERSIONINFOW osvi = { 0 };
+    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
+	/*NTSTATUS(WINAPI *RtlGetVersion)(LPOSVERSIONINFOW);
+	*(FARPROC*)&RtlGetVersion = GetProcAddress(_Ntdll, "RtlGetVersion");
+	if (RtlGetVersion != NULL)
+		RtlGetVersion(&osvi);
+	else*/
+	GetVersionExW(&osvi); // since windows 10 this one is lying
     m_nOSVersion = osvi.dwMajorVersion * 10 + osvi.dwMinorVersion;
 }
 
@@ -999,6 +1006,16 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
                                          | JOB_OBJECT_UILIMIT_READCLIPBOARD;
 
                 BOOL ok = FALSE;        // set TRUE to skip UIRestrictions
+
+				// OpenToken BEGIN
+				if ((SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) || SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE)))
+					ok = TRUE;
+				// OpenToken END
+				// OriginalToken BEGIN
+				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+					ok = TRUE;
+				// OriginalToken END
+
                 if (! ok) {
                     ok = SetInformationJobObject(
                                 hJobObject, JobObjectBasicUIRestrictions,

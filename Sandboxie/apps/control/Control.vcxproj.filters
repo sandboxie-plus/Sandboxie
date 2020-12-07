@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Manifest Include="..\res\xptheme.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutDialog.cpp" />
+    <ClCompile Include="AlertDialog.cpp" />
+    <ClCompile Include="AnimatedBitmap.cpp" />
+    <ClCompile Include="AppPage.cpp" />
+    <ClCompile Include="AutoPlay.cpp" />
+    <ClCompile Include="BaseDialog.cpp" />
+    <ClCompile Include="BorderGuard.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Boxes.cpp" />
+    <ClCompile Include="BoxFile.cpp" />
+    <ClCompile Include="BoxPage.cpp" />
+    <ClCompile Include="BoxProc.cpp" />
+    <ClCompile Include="CreateDialog.cpp" />
+    <ClCompile Include="DeleteDialog.cpp" />
+    <ClCompile Include="DisableForceDialog.cpp" />
+    <ClCompile Include="FileListCtrl.cpp" />
+    <ClCompile Include="FinderDialog.cpp" />
+    <ClCompile Include="FindTool.c" />
+    <ClCompile Include="FlashingButton.cpp" />
+    <ClCompile Include="GettingStartedWizard.cpp" />
+    <ClCompile Include="InitWait.cpp" />
+    <ClCompile Include="LockConfigDialog.cpp" />
+    <ClCompile Include="MenuXP.cpp" />
+    <ClCompile Include="MenuXP_Draw.cpp" />
+    <ClCompile Include="MessageDialog.cpp" />
+    <ClCompile Include="MonitorDialog.cpp" />
+    <ClCompile Include="MyApp.cpp" />
+    <ClCompile Include="MyFrame.cpp" />
+    <ClCompile Include="MyListCtrl.cpp" />
+    <ClCompile Include="MyWizard.cpp" />
+    <ClCompile Include="ProcListCtrl.cpp" />
+    <ClCompile Include="ProcSettingsDialog.cpp" />
+    <ClCompile Include="ProgramSelector.cpp" />
+    <ClCompile Include="PropPageFrame.cpp" />
+    <ClCompile Include="PropPageFrameDefault.cpp" />
+    <ClCompile Include="QuickRecover.cpp" />
+    <ClCompile Include="RevealDialog.cpp" />
+    <ClCompile Include="SbieIni.cpp" />
+    <ClCompile Include="SetFolderDialog.cpp" />
+    <ClCompile Include="SetLayoutDialog.cpp" />
+    <ClCompile Include="ShellDialog.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TabbingComboBox.cpp" />
+    <ClCompile Include="TemplateListBox.cpp" />
+    <ClCompile Include="ThirdPartyDialog.cpp" />
+    <ClCompile Include="ToolTipButton.cpp" />
+    <ClCompile Include="TreePropSheet.cpp" />
+    <ClCompile Include="UserSettings.cpp" />
+    <ClCompile Include="ViewTemplateDialog.cpp" />
+    <ClCompile Include="WindowTitleMap.cpp" />
+    <ClCompile Include="..\common\BoxOrder.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\FontStore.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Layout.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\MyGdi.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\MyMsg.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\RunBrowser.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\RunStartExe.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\json\JSON.cpp">
+      <Filter>common\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\json\JSONValue.cpp">
+      <Filter>common\json</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateDialog.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutDialog.h" />
+    <ClInclude Include="AlertDialog.h" />
+    <ClInclude Include="AnimatedBitmap.h" />
+    <ClInclude Include="AppPage.h" />
+    <ClInclude Include="AutoPlay.h" />
+    <ClInclude Include="BaseDialog.h" />
+    <ClInclude Include="BorderGuard.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Boxes.h" />
+    <ClInclude Include="BoxFile.h" />
+    <ClInclude Include="BoxPage.h" />
+    <ClInclude Include="BoxProc.h" />
+    <ClInclude Include="CreateDialog.h" />
+    <ClInclude Include="DeleteDialog.h" />
+    <ClInclude Include="DisableForceDialog.h" />
+    <ClInclude Include="FileListCtrl.h" />
+    <ClInclude Include="FinderDialog.h" />
+    <ClInclude Include="FindTool.h" />
+    <ClInclude Include="FlashingButton.h" />
+    <ClInclude Include="GettingStartedWizard.h" />
+    <ClInclude Include="InitWait.h" />
+    <ClInclude Include="LockConfigDialog.h" />
+    <ClInclude Include="MenuXP.h" />
+    <ClInclude Include="MenuXP_Draw.h" />
+    <ClInclude Include="MenuXP_Tools.h" />
+    <ClInclude Include="MessageDialog.h" />
+    <ClInclude Include="MonitorDialog.h" />
+    <ClInclude Include="MyApp.h" />
+    <ClInclude Include="MyFrame.h" />
+    <ClInclude Include="MyListCtrl.h" />
+    <ClInclude Include="MyWizard.h" />
+    <ClInclude Include="ProcListCtrl.h" />
+    <ClInclude Include="ProcSettingsDialog.h" />
+    <ClInclude Include="ProgramSelector.h" />
+    <ClInclude Include="PropPageFrame.h" />
+    <ClInclude Include="PropPageFrameDefault.h" />
+    <ClInclude Include="QuickRecover.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RevealDialog.h" />
+    <ClInclude Include="SbieIni.h" />
+    <ClInclude Include="SetFolderDialog.h" />
+    <ClInclude Include="SetLayoutDialog.h" />
+    <ClInclude Include="ShellDialog.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TabbingComboBox.h" />
+    <ClInclude Include="TemplateListBox.h" />
+    <ClInclude Include="ThirdPartyDialog.h" />
+    <ClInclude Include="ToolTipButton.h" />
+    <ClInclude Include="TreePropSheet.h" />
+    <ClInclude Include="UserSettings.h" />
+    <ClInclude Include="ViewTemplateDialog.h" />
+    <ClInclude Include="WindowTitleMap.h" />
+    <ClInclude Include="..\common\BoxOrder.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\FontStore.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Layout.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\MyGdi.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\MyMsg.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\RunBrowser.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_version.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\json\JSON.h">
+      <Filter>common\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\json\JSONValue.h">
+      <Filter>common\json</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateDialog.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SbieControl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\res\FrontPageAnimation.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\res\background.png" />
+    <None Include="..\res\bigex.ico" />
+    <None Include="..\res\checkmark.png" />
+    <None Include="..\res\controlwin.ico" />
+    <None Include="..\res\cycle.png" />
+    <None Include="..\res\exclamation.png" />
+    <None Include="..\res\finder-empty.bmp" />
+    <None Include="..\res\finder-full.bmp" />
+    <None Include="..\res\finder.cur" />
+    <None Include="..\res\folder-minus.ico" />
+    <None Include="..\res\folder-plus.ico" />
+    <None Include="..\res\GettingStartedLegend.png" />
+    <None Include="..\res\initwait1.ico" />
+    <None Include="..\res\initwait2.ico" />
+    <None Include="..\res\MastheadLogo.jpg" />
+    <None Include="..\res\none.ico" />
+    <None Include="..\res\proc-empty.ico" />
+    <None Include="..\res\proc-full-minus.ico" />
+    <None Include="..\res\proc-full-plus.ico" />
+    <None Include="..\res\questionmark.png" />
+    <None Include="..\res\sandbox-delete.ico" />
+    <None Include="..\res\sandbox-empty-dfp.ico" />
+    <None Include="..\res\sandbox-empty.ico" />
+    <None Include="..\res\sandbox-full-dfp.ico" />
+    <None Include="..\res\sandbox-full.ico" />
+    <None Include="SbieControl.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{be66dba5-2f3c-4325-abc0-4283750262a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\json">
+      <UniqueIdentifier>{1eb5d258-3c21-4ed6-9384-57dd80c51c36}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

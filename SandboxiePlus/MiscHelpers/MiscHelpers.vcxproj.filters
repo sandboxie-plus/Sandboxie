@@ -90,6 +90,9 @@
     <ClCompile Include="Common\qRC4.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="Common\NetworkAccessManager.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiscHelpers.h">
@@ -184,6 +187,9 @@
       <Filter>Common</Filter>
     </QtMoc>
     <QtMoc Include="Common\TreeWidgetEx.h">
+      <Filter>Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\NetworkAccessManager.h">
       <Filter>Common</Filter>
     </QtMoc>
   </ItemGroup>

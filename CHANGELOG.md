@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.5.0 / 5.45.0] - 2020-12-01
+## [0.5.0 / 5.45.0] - 2020-12-06
 
 ### Added
 - added new notification window
@@ -27,6 +27,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added icons to box option tabs
 - added box grouping
 - added new debug option "DebugTrace=y" to log debug output to the trace log
+- added check for updates to the new SandMan UI
+- added check for updates to the legacy SbieCtrl UI
 
 ### Changed
 - File migration limit can now be disabled by specifying "CopyLimitKb=-1"
@@ -35,6 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked sandbox dletion mechaism ofthe new UI
 - restructured sandbox options window
 - SbieDLL.dll can now be compiled with an up to date nitll.lib
+- improved automated driver self repair
 
 ### Fixed
 - fixed issues migrating files > 4GB
@@ -47,6 +50,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues when a snapshot operation failed
 - fixed some special cases of IpcPath and WinClass in the new UI
 - fixed driver issues with WHQL passing compatybility testing
+- fixed issues with classical installer
 
 
 
@@ -118,7 +122,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue deleting sandbox when located on a drive directly
 
 
-
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
 ### Added
@@ -128,7 +131,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed thread handle leak in SbieSvc and other components
 - msedge.exe is now categorized as a chromium derivate
 - fixed chrome 86+ compatybility bug with chroms own sandbox
-
 
 
 ## [0.4.1 / 5.43.5] - 2020-09-12

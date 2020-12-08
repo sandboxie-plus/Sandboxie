@@ -36,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - terminated boxed processes are now kept listed for a coupel of seconds
 - reworked sandbox dletion mechaism ofthe new UI
 - restructured sandbox options window
-- SbieDLL.dll can now be compiled with an up to date ntdll.lib (Thanks to @TechLord from Team-IRA for help)
+- SbieDLL.dll can now be compiled with an up to date ntdll.lib (Thanks to TechLord from Team-IRA for help)
 - improved automated driver self repair
 
 ### Fixed

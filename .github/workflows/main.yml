@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         platform: [Win32, x64]
-    runs-on: windows-2019
+    runs-on: windows-2016
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

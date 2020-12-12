@@ -12,6 +12,7 @@ public:
 	~CNetworkAccessManager();
 
 	void				Abort(QNetworkReply* pReply);
+	void				AbortAll();
 
 private slots:
 	void				finishedRequest(QNetworkReply *pReply);

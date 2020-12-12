@@ -1895,7 +1895,8 @@ __declspec(dllimport) NTSTATUS RtlQueryRegistryValues(
 //---------------------------------------------------------------------------
 
 typedef void *PINITIAL_TEB;
-typedef ULONG EVENT_TYPE;
+//typedef ULONG EVENT_TYPE;
+typedef enum _EVENT_TYPE { NotificationEvent, SynchronizationEvent } EVENT_TYPE;
 
 //---------------------------------------------------------------------------
 
@@ -2031,6 +2032,12 @@ __declspec(dllimport) NTSTATUS __stdcall NtCreateEvent(
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  EVENT_TYPE EventType,
     IN  BOOLEAN InitialState);
+
+__declspec(dllimport) NTSTATUS __stdcall NtWaitForSingleObject(
+    IN HANDLE Handle,
+    IN BOOLEAN Alertable,
+    IN PLARGE_INTEGER Timeout
+    );
 
 __declspec(dllimport) NTSTATUS __stdcall NtOpenEvent(
     OUT PHANDLE EventHandle,

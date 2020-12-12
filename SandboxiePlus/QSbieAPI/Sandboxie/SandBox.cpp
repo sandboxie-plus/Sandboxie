@@ -121,7 +121,7 @@ SB_STATUS CSandBox__DeleteFolder(const CSbieProgressPtr& pProgress, const QStrin
 
 	NtIo_WaitForFolder(&ntObject.attr);
 
-	if (pProgress->IsCancel())
+	if (pProgress->IsCanceled())
 		return STATUS_REQUEST_ABORTED; // or STATUS_TRANSACTION_ABORTED ?
 
 	pProgress->ShowMessage(CSandBox::tr("Deleting folder: %1").arg(Folder));
@@ -313,7 +313,7 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 	NtIo_WaitForFolder(&ntTarget.attr);
 
-	if (pProgress->IsCancel())
+	if (pProgress->IsCanceled())
 		return STATUS_REQUEST_ABORTED; // or STATUS_TRANSACTION_ABORTED ?
 
 	pProgress->ShowMessage(CSandBox::tr("Merging folders: %1 >> %2").arg(SourceFolder).arg(TargetFolder));

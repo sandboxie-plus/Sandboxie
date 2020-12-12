@@ -90,10 +90,10 @@ public:
 		m_Result = Result;
 		m_pProcess = pProcess;
 
-		QLabel* pLabel = new QLabel(Message);
-		pLabel->setToolTip(Message);
-		pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
-		m_pMainLayout->addWidget(pLabel, 0, 0, 1, 5);
+		m_pLabel = new QLabel(Message);
+		m_pLabel->setToolTip(Message);
+		m_pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		m_pMainLayout->addWidget(m_pLabel, 0, 0, 1, 5);
 
 		m_pRemember = new QCheckBox(tr("Remember for this process"));
 		m_pRemember->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
@@ -151,7 +151,14 @@ protected:
 		{
 			m_iTimeOutSec--;
 
-			repaint();
+			extern bool CPopUpWindow__DarkMode;
+			if (CPopUpWindow__DarkMode) {
+				QPalette palette = m_pLabel->palette();
+				palette.setColor(QPalette::Text, Qt::red);
+				m_pLabel->setPalette(palette);
+			}
+			else
+				repaint();
 		}
 
 		if (m_pProcess->IsTerminated()) {
@@ -172,7 +179,8 @@ protected:
 	{
 		QWidget::paintEvent(event);
 
-		if (m_iTimeOutSec % 2) 
+		extern bool CPopUpWindow__DarkMode;
+		if (!CPopUpWindow__DarkMode && (m_iTimeOutSec % 2) != 0) 
 		{
 			QPainter p(this);
 			p.fillRect(2, 1, width() - 4, height() - 2, QColor(0xFF, 0xCC, 0xCC));
@@ -183,6 +191,7 @@ protected:
 	QVariantMap			m_Result;
 	CBoxedProcessPtr	m_pProcess;
 
+	QLabel*				m_pLabel;
 	QCheckBox*			m_pRemember;
 	qint32				m_iTimeOutSec;
 	QLabel*				m_pTimeOut;
@@ -203,6 +212,12 @@ public:
 		QLabel* pLabel = new QLabel(Message);
 		pLabel->setToolTip(Message);
 		pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		extern bool CPopUpWindow__DarkMode;
+		if(CPopUpWindow__DarkMode) {
+			QPalette palette = pLabel->palette();
+			palette.setColor(QPalette::Text, Qt::green);
+			pLabel->setPalette(palette);
+		}
 		m_pMainLayout->addWidget(pLabel, 0, 0, 2, 1);
 
 		QToolButton* pRecover = new QToolButton();
@@ -249,8 +264,11 @@ protected:
 	{
 		QWidget::paintEvent(event);
 
-		QPainter p(this);
-		p.fillRect(2, 1, width() - 4, height() - 2, QColor(0xCC, 0xFF, 0xCC));
+		extern bool CPopUpWindow__DarkMode;
+		if (!CPopUpWindow__DarkMode) {
+			QPainter p(this);
+			p.fillRect(2, 1, width() - 4, height() - 2, QColor(0xCC, 0xFF, 0xCC));
+		}
 	}
 
 	QString				m_FilePath;
@@ -346,6 +364,8 @@ public:
 	virtual void		AddUserPrompt(quint32 RequestId, const QVariantMap& Data, quint32 ProcessId);
 	virtual void		AddFileToRecover(const QString& FilePath, const QString& BoxName, quint32 ProcessId);
 	virtual void		ShowProgress(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
+
+	static void			SetDarkMode(bool bDark) { extern bool CPopUpWindow__DarkMode;  CPopUpWindow__DarkMode = bDark; }
 
 signals:
 	void				RecoveryRequested(const QString& BoxName);

@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.1 / 5.45.0] - 2020-12-12
+
+### Added
+- Added simple view mode
+
+### Changed
+- Updated SandMan UI to use Qt5.15.1
+
+### Fixed
+- fixed crash issue with progress dialog
+- fixed progress dialog cancel button not wokong for update checker
+- fixed issue around NtQueryDirectoryFile when deleting sandbox content
+- fixed dark theme in the notification window
+- fixed issue with disable force pograms tray menu
+
+
+
 ## [0.5.0 / 5.45.0] - 2020-12-06
 
 ### Added

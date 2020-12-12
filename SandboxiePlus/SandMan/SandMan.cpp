@@ -14,6 +14,7 @@
 #include "Windows/SettingsWindow.h"
 #include "Windows/RecoveryWindow.h"
 #include <QtConcurrent>
+#include "../MiscHelpers/Common/SettingsWidgets.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -194,7 +195,8 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pTrayMenu = new QMenu();
 	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pTrayMenu->addAction(m_pDisableForce);
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pExit);
 
@@ -222,11 +224,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
 	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
 	m_pLogTabs->setCurrentIndex(theConf->GetInt("MainWindow/LogTab", 0));
-	
-	if (theConf->GetBool("Options/NoStatusBar", false))
-		statusBar()->hide();
-	//else if (theConf->GetBool("Options/NoSizeGrip", false))
-	//	statusBar()->setSizeGripEnabled(false);
+
+	bool bAdvanced = theConf->GetBool("Options/AdvancedView", true);
+	foreach(QAction * pAction, m_pViewMode->actions())
+		pAction->setChecked(pAction->data().toBool() == bAdvanced);
+	SetViewMode(bAdvanced);
 
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 
@@ -312,6 +314,14 @@ void CSandMan::CreateMenus()
 
 
 	m_pMenuView = menuBar()->addMenu(tr("&View"));
+
+		m_pViewMode = new QActionGroup(m_pMenuView);
+		MakeAction(m_pViewMode, m_pMenuView, tr("Simple View"), false);
+		MakeAction(m_pViewMode, m_pMenuView, tr("Advanced View"), true);
+		connect(m_pViewMode, SIGNAL(triggered(QAction*)), this, SLOT(OnViewMode(QAction*)));
+		m_iMenuViewPos = m_pMenuView->actions().count();
+		m_pMenuView->addSeparator();
+
 		m_pCleanUpMenu = m_pMenuView->addMenu(QIcon(":/Actions/Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
 			m_pCleanUpMenu->addSeparator();
@@ -503,6 +513,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
 
 		m_pDisableForce->setChecked(theAPI->AreForceProcessDisabled());
+		m_pDisableForce2->setChecked(theAPI->AreForceProcessDisabled());
 	}
 
 	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0))
@@ -548,6 +559,15 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			}
 		}
 	}
+
+	if (!m_pUpdateProgress.isNull() && m_RequestManager != NULL) {
+		if (m_pUpdateProgress->IsCanceled()) {
+			m_pUpdateProgress->Finish(SB_OK);
+			m_pUpdateProgress.clear();
+
+			m_RequestManager->AbortAll();
+		}
+	}
 }
 
 void CSandMan::OnBoxClosed(const QString& BoxName)
@@ -566,7 +586,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 		SB_PROGRESS Status = pBox->CleanBox();
 		if (Status.GetStatus() == OP_ASYNC)
-			theGUI->AddAsyncOp(Status.GetValue());
+			AddAsyncOp(Status.GetValue());
 	}
 }
 
@@ -813,6 +833,12 @@ void CSandMan::OnDisableForce()
 	theAPI->DisableForceProcess(Status, Seconds);
 }
 
+void CSandMan::OnDisableForce2()
+{
+	bool Status = m_pDisableForce2->isChecked();
+	theAPI->DisableForceProcess(Status);
+}
+
 SB_STATUS CSandMan::ConnectSbie()
 {
 	SB_STATUS Status;
@@ -933,6 +959,49 @@ void CSandMan::OnMaintenance()
 	}
 
 	CheckResults(QList<SB_STATUS>() << Status);
+}
+
+void CSandMan::OnViewMode(QAction* pAction)
+{
+	bool bAdvanced = pAction->data().toBool();
+	theConf->SetValue("Options/AdvancedView", bAdvanced);
+	SetViewMode(bAdvanced);
+}
+
+void CSandMan::SetViewMode(bool bAdvanced)
+{
+	if (bAdvanced)
+	{
+		for (int i = m_iMenuViewPos; i < m_pMenuView->actions().count(); i++)
+			m_pMenuView->actions().at(i)->setVisible(true);
+
+		if (m_pMenuHelp->actions().first() != m_pSupport) {
+			m_pMenuHelp->insertAction(m_pMenuHelp->actions().first(), m_pSupport);
+			menuBar()->removeAction(m_pSupport);
+		}
+
+		m_pToolBar->show();
+		m_pLogTabs->show();
+		if (theConf->GetBool("Options/NoStatusBar", false))
+			statusBar()->hide();
+		else {
+			statusBar()->show();
+			//if (theConf->GetBool("Options/NoSizeGrip", false))
+			//	statusBar()->setSizeGripEnabled(false);
+		}
+	}
+	else
+	{
+		for (int i = m_iMenuViewPos; i < m_pMenuView->actions().count(); i++)
+			m_pMenuView->actions().at(i)->setVisible(false);
+
+		m_pMenuHelp->removeAction(m_pSupport);
+		menuBar()->addAction(m_pSupport);
+
+		m_pToolBar->hide();
+		m_pLogTabs->hide();
+		statusBar()->hide();
+	}
 }
 
 void CSandMan::OnCleanUp()
@@ -1071,6 +1140,7 @@ void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)
 {
 	m_pAsyncProgress.insert(pProgress.data(), pProgress);
 	connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
+	connect(pProgress.data(), SIGNAL(Progress(int)), this, SLOT(OnAsyncProgress(int)));
 	connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
 
 	m_pProgressDialog->OnStatusMessage("");
@@ -1105,6 +1175,11 @@ void CSandMan::OnAsyncMessage(const QString& Text)
 	m_pProgressDialog->OnStatusMessage(Text);
 }
 
+void CSandMan::OnAsyncProgress(int Progress)
+{
+	m_pProgressDialog->OnProgressMessage("", Progress);
+}
+
 void CSandMan::OnCancelAsync()
 {
 	foreach(const CSbieProgressPtr& pProgress, m_pAsyncProgress)
@@ -1115,7 +1190,7 @@ void CSandMan::CheckResults(QList<SB_STATUS> Results)
 {
 	for (QList<SB_STATUS>::iterator I = Results.begin(); I != Results.end(); )
 	{
-		if (!I->IsError())
+		if (!I->IsError() || I->GetStatus() == OP_CANCELED)
 			I = Results.erase(I);
 		else
 			I++;
@@ -1189,11 +1264,16 @@ QString CSandMan::GetVersion()
 
 void CSandMan::CheckForUpdates(bool bManual)
 {
-	m_pProgressDialog->OnStatusMessage(tr("Checking for updates..."));
-	m_pProgressDialog->show();
+	if (!m_pUpdateProgress.isNull())
+		return;
 
-	if(m_RequestManager == NULL)
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Checking for updates..."));
+
+	if (m_RequestManager == NULL) 
 		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
+
 
 	QUrlQuery Query;
 	Query.addQueryItem("software", "sandboxie-plus");
@@ -1222,12 +1302,16 @@ void CSandMan::CheckForUpdates(bool bManual)
 
 void CSandMan::OnUpdateCheck()
 {
+	if (m_pUpdateProgress.isNull())
+		return;
+
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
 	QByteArray Reply = pReply->readAll();
 	bool bManual = pReply->property("manual").toBool();
 	pReply->deleteLater();
 
-	m_pProgressDialog->hide();
+	m_pUpdateProgress->Finish(SB_OK);
+	m_pUpdateProgress.clear();
 
 	QVariantMap Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
 	if (Data.isEmpty() || Data["error"].toBool())
@@ -1318,8 +1402,9 @@ void CSandMan::OnUpdateCheck()
 					connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateDownload()));
 					connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
 
-					m_pProgressDialog->OnStatusMessage(tr("Downloading new version..."));
-					m_pProgressDialog->show();
+					m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+					AddAsyncOp(m_pUpdateProgress);
+					m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
 				}
 				else
 					QDesktopServices::openUrl(UpdateUrl);
@@ -1338,17 +1423,20 @@ void CSandMan::OnUpdateCheck()
 
 void CSandMan::OnUpdateProgress(qint64 bytes, qint64 bytesTotal)
 {
-	if (bytesTotal != 0)
-		m_pProgressDialog->OnProgressMessage("", 100 * bytes / bytesTotal);
+	if (bytesTotal != 0 && !m_pUpdateProgress.isNull())
+		m_pUpdateProgress->Progress(100 * bytes / bytesTotal);
 }
 
 void CSandMan::OnUpdateDownload()
 {
+	if (m_pUpdateProgress.isNull())
+		return;
+
 	QString TempDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 	if (TempDir.right(1) != "/")
 		TempDir += "/";
 
-	m_pProgressDialog->OnProgressMessage("", -1);
+	m_pUpdateProgress->Progress(-1);
 
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
 	quint64 Size = pReply->bytesAvailable();
@@ -1367,7 +1455,8 @@ void CSandMan::OnUpdateDownload()
 
 	pReply->deleteLater();
 
-	m_pProgressDialog->hide();
+	m_pUpdateProgress->Finish(SB_OK);
+	m_pUpdateProgress.clear();
 
 	if (File.size() != Size) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to download update from: %1").arg(pReply->request().url().toString()));
@@ -1456,6 +1545,7 @@ void CSandMan::SetDarkTheme(bool bDark)
 
 	CTreeItemModel::SetDarkMode(bDark);
 	CListItemModel::SetDarkMode(bDark);
+	CPopUpWindow::SetDarkMode(bDark);
 }
 
 void CSandMan::LoadLanguage()

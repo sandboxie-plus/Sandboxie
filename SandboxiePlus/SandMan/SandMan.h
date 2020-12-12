@@ -14,7 +14,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
-#define VERSION_REV 	0
+#define VERSION_REV 	1
 #define VERSION_UPD 	0
 
 
@@ -69,6 +69,7 @@ protected:
 	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
 
 	CNetworkAccessManager*	m_RequestManager;
+	CSbieProgressPtr	m_pUpdateProgress;
 
 public slots:
 	void				OnMessage(const QString&);
@@ -90,6 +91,7 @@ public slots:
 	void				OnAsyncFinished();
 	void				OnAsyncFinished(CSbieProgress* pProgress);
 	void				OnAsyncMessage(const QString& Text);
+	void				OnAsyncProgress(int Progress);
 	void				OnCancelAsync();
 
 	void				OnBoxClosed(const QString& BoxName);
@@ -104,8 +106,10 @@ private slots:
 	void				OnNewBox();
 	void				OnEmptyAll();
 	void				OnDisableForce();
+	void				OnDisableForce2();
 	void				OnMaintenance();
 
+	void				OnViewMode(QAction* action);
 	void				OnCleanUp();
 	void				OnSetKeep();
 
@@ -128,6 +132,8 @@ private slots:
 private:
 	void				CreateMenus();
 	void				CreateToolBar();
+
+	void				SetViewMode(bool bAdvanced);
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;
@@ -154,6 +160,7 @@ private:
 	QAction*			m_pNew;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pDisableForce;
+	QAction*			m_pDisableForce2;
 	QMenu*				m_pMaintenance;
 	QAction*			m_pConnect;
 	QAction*			m_pDisconnect;
@@ -170,6 +177,8 @@ private:
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;
+	QActionGroup*		m_pViewMode;
+	int					m_iMenuViewPos;
 	QMenu*				m_pCleanUpMenu;
 	QAction*			m_pCleanUpProcesses;
 	QAction*			m_pCleanUpMsgLog;

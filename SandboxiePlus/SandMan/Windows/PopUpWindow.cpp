@@ -7,6 +7,8 @@
 #include "../MiscHelpers/Common/Settings.h"
 #include "../SbiePlusAPI.h"
 
+bool CPopUpWindow__DarkMode = false;
+
 CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 {
 	this->setWindowTitle(tr("Sandboxie-Plus Notifications"));

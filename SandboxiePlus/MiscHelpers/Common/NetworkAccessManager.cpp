@@ -48,6 +48,12 @@ void CNetworkAccessManager::Abort(QNetworkReply *pReply)
 	pReply->deleteLater();
 }
 
+void CNetworkAccessManager::AbortAll()
+{
+	foreach(QNetworkReply *pReply, m_Requests.keys())
+		Abort(pReply);
+}
+
 QNetworkReply* CNetworkAccessManager::createRequest ( Operation op, const QNetworkRequest & req, QIODevice * outgoingData )
 {
 	QNetworkReply* pReply = QNetworkAccessManager::createRequest(op, req, outgoingData);

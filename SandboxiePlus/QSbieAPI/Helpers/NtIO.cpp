@@ -111,7 +111,15 @@ NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs)
 
 		PFILE_BOTH_DIRECTORY_INFORMATION Info = (PFILE_BOTH_DIRECTORY_INFORMATION)malloc(PAGE_SIZE);
 
-		status = NtQueryDirectoryFile(Handle, 0, 0, 0, &Iosb, Info, PAGE_SIZE, FileBothDirectoryInformation, TRUE, NULL, FALSE);
+		HANDLE Event;
+		NtCreateEvent(&Event, GENERIC_ALL, 0, NotificationEvent, FALSE);
+		status = NtQueryDirectoryFile(Handle, Event, 0, 0, &Iosb, Info, PAGE_SIZE, FileBothDirectoryInformation, TRUE, NULL, FALSE);
+		if (status == STATUS_PENDING){
+			NtWaitForSingleObject(Event, TRUE, 0);
+			status = Iosb.Status;
+		}
+		NtClose(Event);
+
 		if (NT_SUCCESS(status))
 		{
 			FileName.assign(Info->FileName, Info->FileNameLength / sizeof(wchar_t));
@@ -274,7 +282,15 @@ NTSTATUS NtIo_MergeFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES de
 
 		PFILE_BOTH_DIRECTORY_INFORMATION Info = (PFILE_BOTH_DIRECTORY_INFORMATION)malloc(PAGE_SIZE);
 
-		status = NtQueryDirectoryFile(ScrHandle, 0, 0, 0, &Iosb, Info, PAGE_SIZE, FileBothDirectoryInformation, TRUE, NULL, FALSE);
+		HANDLE Event;
+		NtCreateEvent(&Event, GENERIC_ALL, 0, NotificationEvent, FALSE);
+		status = NtQueryDirectoryFile(ScrHandle, Event, 0, 0, &Iosb, Info, PAGE_SIZE, FileBothDirectoryInformation, TRUE, NULL, FALSE);
+		if (status == STATUS_PENDING){
+			NtWaitForSingleObject(Event, TRUE, 0);
+			status = Iosb.Status;
+		}
+		NtClose(Event);
+
 		if (NT_SUCCESS(status))
 		{
 			FileName.assign(Info->FileName, Info->FileNameLength / sizeof(wchar_t));

@@ -103,7 +103,6 @@ protected:
 	void closeEvent(QCloseEvent *e)
 	{
 		emit Cancel();
-		this->deleteLater();
 	}
 
 	int					m_TimerId;

@@ -82,7 +82,7 @@
           <item row="1" column="3">
            <widget class="QPushButton" name="btnSelect">
             <property name="text">
-             <string>Goto Snapshot</string>
+             <string>Go to Snapshot</string>
             </property>
            </widget>
           </item>

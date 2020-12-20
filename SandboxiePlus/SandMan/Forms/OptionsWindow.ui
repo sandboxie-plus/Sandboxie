@@ -302,7 +302,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>File Mrigration</string>
+                  <string>File Migration</string>
                  </property>
                 </widget>
                </item>
@@ -491,7 +491,7 @@
            <item row="1" column="0" colspan="2">
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>Programs enteres here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in an otehr sandbox.</string>
+              <string>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -504,7 +504,7 @@
        </widget>
        <widget class="QWidget" name="tabStop">
         <attribute name="title">
-         <string>Stop Behavioure</string>
+         <string>Stop Behaviour</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_17">
          <item row="0" column="0">
@@ -512,7 +512,7 @@
            <item row="5" column="1">
             <widget class="QPushButton" name="btnDelStopProg">
              <property name="text">
-              <string>Remove Progam</string>
+              <string>Remove Program</string>
              </property>
             </widget>
            </item>
@@ -570,9 +570,9 @@
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>Lingering programs will be automatically terminated is thay are still running after all other processes have terminated.
+              <string>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
-If leader processes are defined all others are threated as lingering processes.</string>
+If leader processes are defined, all others are treated as lingering processes.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -644,14 +644,14 @@ If leader processes are defined all others are threated as lingering processes.<
              <item row="2" column="0">
               <widget class="QRadioButton" name="radStartSelected">
                <property name="text">
-                <string>Allow only sellected programs to start in this sandbox. *</string>
+                <string>Allow only selected programs to start in this sandbox. *</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
               <widget class="QRadioButton" name="radStartExcept">
                <property name="text">
-                <string>Prevent sellected programs from starting in this sandbox.</string>
+                <string>Prevent selected programs from starting in this sandbox.</string>
                </property>
               </widget>
              </item>
@@ -665,7 +665,7 @@ If leader processes are defined all others are threated as lingering processes.<
              <item row="3" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
-                <string>* Note: Programs installed to this sandbox wont be able to start at all.</string>
+                <string>* Note: Programs installed to this sandbox won't be able to start at all.</string>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
@@ -714,7 +714,7 @@ If leader processes are defined all others are threated as lingering processes.<
            <item row="3" column="0">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>Note: Programs installed to this sandbox wont be able access the internet at all.</string>
+              <string>Note: Programs installed to this sandbox won't be able to access the internet at all.</string>
              </property>
             </widget>
            </item>
@@ -884,7 +884,7 @@ If leader processes are defined all others are threated as lingering processes.<
              <property name="text">
               <string>Configure which processes can access what resources. Double click on an entry to edit it.
 'Direct' File and Key access only applies to program binaries located outside the sandbox.
-Note that all Close...=!&lt;program&gt;,... excludes have the same limitations.
+Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use 'Direct All' instead to make it apply to all programs.</string>
              </property>
             </widget>
@@ -1072,14 +1072,14 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                     </font>
                    </property>
                    <property name="text">
-                    <string>Compatybility </string>
+                    <string>Compatibility</string>
                    </property>
                   </widget>
                  </item>
                  <item row="5" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkProtectSCM">
                    <property name="text">
-                    <string>Limit access to the emulated service controll manager to privileged processes</string>
+                    <string>Limit access to the emulated service control manager to privileged processes</string>
                    </property>
                   </widget>
                  </item>
@@ -1102,7 +1102,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="2" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkPreferExternalManifest">
                    <property name="text">
-                    <string>Force usage of custom dummy Manifest files (legacy behavioure)</string>
+                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
                    </property>
                   </widget>
                  </item>
@@ -1225,7 +1225,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                <item row="0" column="0">
                 <widget class="QCheckBox" name="chkHideOtherBoxes">
                  <property name="text">
-                  <string>Dont allow sandboxed processes to see processes running in other boxes</string>
+                  <string>Don't allow sandboxed processes to see processes running in other boxes</string>
                  </property>
                 </widget>
                </item>
@@ -1325,10 +1325,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    <property name="text">
                     <string>Log all access events as seen by the driver to the resource access log.
 
-This options set the event amsk to &quot;*&quot; - All access events
+This options set the event mask to &quot;*&quot; - All access events
 You can customize the logging using the ini by specifying
 &quot;A&quot; - Allowed accesses
-&quot;D&quot; - Denidec accesses
+&quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</string>
                    </property>
@@ -1466,7 +1466,7 @@ instead of &quot;*&quot;.</string>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_17">
                  <property name="text">
-                  <string>These options are intended for debugging compatybility issues, please do not use them in productive use. </string>
+                  <string>These options are intended for debugging compatibility issues, please do not use them in production use. </string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1531,7 +1531,7 @@ instead of &quot;*&quot;.</string>
            <item row="0" column="0" colspan="4">
             <widget class="QLabel" name="label_13">
              <property name="text">
-              <string>This list contains a large amount of sandbox comatybility enchancing templates</string>
+              <string>This list contains a large amount of sandbox compatibility enhancing templates</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>

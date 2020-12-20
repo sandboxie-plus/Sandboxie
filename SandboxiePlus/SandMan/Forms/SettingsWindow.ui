@@ -180,7 +180,7 @@
            <item row="3" column="1" colspan="2">
             <widget class="QCheckBox" name="chkAutoUpdate">
              <property name="text">
-              <string>Check periodicaly for updates of Sandboxie-Plus</string>
+              <string>Check periodically for updates of Sandboxie-Plus</string>
              </property>
             </widget>
            </item>
@@ -409,7 +409,7 @@
            <item row="1" column="0" colspan="2">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>When any of following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</string>
+              <string>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -443,7 +443,7 @@
        </widget>
        <widget class="QWidget" name="tabCompat">
         <attribute name="title">
-         <string>Software Compatybility</string>
+         <string>Software Compatibility</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
@@ -494,7 +494,7 @@
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</string>
+              <string>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>

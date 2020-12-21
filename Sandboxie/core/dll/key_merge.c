@@ -160,7 +160,7 @@ _FX NTSTATUS Key_Merge(
             /*
         if (1) {
             WCHAR txt[512];
-            Sbie_swprintf(txt, L"Merge at %08X Handle %08X Name (%d) %s Cmp => %d\n",
+            Sbie_snwprintf(txt, 512, L"Merge at %08X Handle %08X Name (%d) %s Cmp => %d\n",
                 merge, merge->handle, merge->name_len, merge->name,
                 merge->name_len == TruePath_len ?
                     RtlEqualMemory(merge->name, TruePath, TruePath_len)
@@ -1005,10 +1005,10 @@ TrueHandleFinish:
         ++index;
     }
 
-        /*{WCHAR txt[128]; Sbie_swprintf(txt, L"Merge %s has %d subkeys: \n", wcsrchr(merge->name, L'\\'), List_Count(&merge->subkeys)); OutputDebugString(txt);
+        /*{WCHAR txt[128]; Sbie_snwprintf(txt, 128, L"Merge %s has %d subkeys: \n", wcsrchr(merge->name, L'\\'), List_Count(&merge->subkeys)); OutputDebugString(txt);
         subkey2 = List_Head(&merge->subkeys);
         while (subkey2) {
-            Sbie_swprintf(txt, L"  ==>  %s\n", subkey2->name);  OutputDebugString(txt);
+            Sbie_snwprintf(txt, 128, L"  ==>  %s\n", subkey2->name);  OutputDebugString(txt);
             subkey2 = List_Next(subkey2);
         }}*/
 
@@ -1169,10 +1169,10 @@ TrueHandleFinish:
         ++index;
     }
 
-        /*{WCHAR txt[128]; Sbie_swprintf(txt, L"Merge %s has %d values: \n", wcsrchr(merge->name, L'\\'), List_Count(&merge->values)); OutputDebugString(txt);
+        /*{WCHAR txt[128]; Sbie_snwprintf(txt, 128, L"Merge %s has %d values: \n", wcsrchr(merge->name, L'\\'), List_Count(&merge->values)); OutputDebugString(txt);
         value2 = List_Head(&merge->values);
         while (value2) {
-            Sbie_swprintf(txt, L"  ==>  %s\n", value2->name);  OutputDebugString(txt);
+            Sbie_snwprintf(txt, 128, L"  ==>  %s\n", value2->name);  OutputDebugString(txt);
             value2 = List_Next(value2);
         }}*/
 

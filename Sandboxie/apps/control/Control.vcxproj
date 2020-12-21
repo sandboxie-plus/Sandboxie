@@ -22,7 +22,7 @@
     <ProjectGuid>{D16E291A-1F8A-4B19-AE07-0AF8CB7CCBD0}</ProjectGuid>
     <RootNamespace>Control</RootNamespace>
     <ProjectName>SbieControl</ProjectName>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="Configuration">
@@ -32,7 +32,7 @@
     <UseOfMfc>Static</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
     <WholeProgramOptimization>false</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -41,7 +41,7 @@
     <UseOfMfc>Static</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
     <WholeProgramOptimization>false</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -50,7 +50,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -59,7 +59,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -108,7 +108,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib;winhttp.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
@@ -126,7 +126,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib;winhttp.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
@@ -143,7 +143,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib;winhttp.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
@@ -158,7 +158,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib</AdditionalDependencies>
+      <AdditionalDependencies>uafxcw.lib;common.lib;SbieDll.lib;ntdll.lib;psapi.lib;wininet.lib;winhttp.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>uafxcw.lib</IgnoreSpecificDefaultLibraries>
@@ -167,6 +167,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\json\JSON.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\common\json\JSONValue.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\common\BoxOrder.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
@@ -271,11 +283,16 @@
     <ClCompile Include="ThirdPartyDialog.cpp" />
     <ClCompile Include="ToolTipButton.cpp" />
     <ClCompile Include="TreePropSheet.cpp" />
+    <ClCompile Include="UpdateDialog.cpp" />
+    <ClCompile Include="Updater.cpp" />
     <ClCompile Include="UserSettings.cpp" />
     <ClCompile Include="ViewTemplateDialog.cpp" />
     <ClCompile Include="WindowTitleMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\json\JSON.h" />
+    <ClInclude Include="..\..\common\json\JSONValue.h" />
+    <ClInclude Include="..\..\common\my_version.h" />
     <ClInclude Include="..\common\BoxOrder.h" />
     <ClInclude Include="..\common\FontStore.h" />
     <ClInclude Include="..\common\Layout.h" />
@@ -331,6 +348,8 @@
     <ClInclude Include="ThirdPartyDialog.h" />
     <ClInclude Include="ToolTipButton.h" />
     <ClInclude Include="TreePropSheet.h" />
+    <ClInclude Include="UpdateDialog.h" />
+    <ClInclude Include="Updater.h" />
     <ClInclude Include="UserSettings.h" />
     <ClInclude Include="ViewTemplateDialog.h" />
     <ClInclude Include="WindowTitleMap.h" />
@@ -339,7 +358,6 @@
     <ResourceCompile Include="SbieControl.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\sbieweb\web\img\FrontPage\FrontPageAnimation.gif" />
     <None Include="..\res\background.png" />
     <None Include="..\res\bigex.ico" />
     <None Include="..\res\checkmark.png" />

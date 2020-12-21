@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -194,7 +195,7 @@ _FX BOOLEAN Ipc_Init(void)
     Api_SetFunction(API_CREATE_DIR_OR_LINK,     Ipc_Api_CreateDirOrLink);
     Api_SetFunction(API_OPEN_DEVICE_MAP,        Ipc_Api_OpenDeviceMap);
     Api_SetFunction(API_QUERY_SYMBOLIC_LINK,    Ipc_Api_QuerySymbolicLink);
-    Api_SetFunction(API_ALLOW_SPOOLER_PRINT_TO_FILE, Ipc_Api_AllowSpoolerPrintToFile);
+    //Api_SetFunction(API_ALLOW_SPOOLER_PRINT_TO_FILE, Ipc_Api_AllowSpoolerPrintToFile);
 
 #ifndef _WIN64
     Api_SetFunction(API_SET_LSA_AUTH_PKG,       Ipc_Api_SetLsaAuthPkg);
@@ -351,8 +352,7 @@ _FX BOOLEAN Ipc_CreateBoxPath(PROCESS *proc)
         status = STATUS_UNSUCCESSFUL;
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(
-            MSG_IPC_CREATE_BOX_PATH, 0, status, proc->box->ipc_path);
+		Log_Status_Ex_Process(MSG_IPC_CREATE_BOX_PATH, 0, status, proc->box->ipc_path, -1, proc->pid);
     }
 
     return (NT_SUCCESS(status));
@@ -632,7 +632,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPath);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
         return FALSE;
     }
 
@@ -642,7 +642,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
 
     ok = Process_GetPaths(proc, &proc->closed_ipc_paths, _ClosedPath, FALSE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 
@@ -702,7 +702,7 @@ _FX BOOLEAN Ipc_IsComServer(PROCESS *proc)
     //   or kmplayer.exe    (from outside the sandbox)
     //
 
-    if (proc->image_copy)
+    if (proc->image_from_box)
         return FALSE;
 
     if (_wcsicmp(proc->image_name, L"iexplore.exe") != 0 &&
@@ -750,36 +750,44 @@ _FX BOOLEAN Ipc_InitProcess(PROCESS *proc)
     BOOLEAN ok = Ipc_InitPaths(proc);
 
     //
-    // check Start/Run restrictions
-    // issue message SBIE1308 when Start/Run restrictions apply
-    //
-
-    if (ok) {
-
-        PATTERN *pattern = List_Head(&proc->closed_ipc_paths);
-        while (pattern) {
-
-            const WCHAR *source = Pattern_Source(pattern);
-            if (source[0] == L'*' && source[1] == L'\0') {
-
-                if (proc->ipc_warn_startrun) {
-
-                    Process_LogMessage(proc, MSG_STARTRUN_ACCESS_DENIED);
-                    proc->ipc_warn_startrun = FALSE;
-                }
-
-                return FALSE;
-            }
-
-            pattern = List_Next(pattern);
-        }
-    }
-
-    //
     // finish
     //
 
     return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_IsRunRestricted
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Ipc_IsRunRestricted(PROCESS *proc)
+{
+    //
+    // check Start/Run restrictions
+    // issue message SBIE1308 when Start/Run restrictions apply
+    //
+
+    PATTERN *pattern = List_Head(&proc->closed_ipc_paths);
+    while (pattern) {
+
+        const WCHAR *source = Pattern_Source(pattern);
+        if (source[0] == L'*' && source[1] == L'\0') {
+
+            if (proc->ipc_warn_startrun) {
+
+                Process_LogMessage(proc, MSG_STARTRUN_ACCESS_DENIED);
+                proc->ipc_warn_startrun = FALSE;
+            }
+
+            return TRUE;
+        }
+
+        pattern = List_Next(pattern);
+    }
+
+    return FALSE;
 }
 
 
@@ -926,7 +934,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
         if (letter) {
             swprintf(access_str, L"(I%c) %08X", letter, GrantedAccess);
-            Log_Debug_Msg(access_str, Name->Buffer);
+            Log_Debug_Msg(MONITOR_IPC, access_str, Name->Buffer);
         }
     }
 
@@ -940,7 +948,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
             mon_type |= MONITOR_OPEN;
         else
             mon_type |= MONITOR_DENY;
-        Session_MonitorPut(mon_type, mon_name);
+        Session_MonitorPut(mon_type, mon_name, proc->pid);
     }
 
     // DbgPrint("Process <%06d> Status <%08X> Object <%S>\n", proc->pid, status, Name->Name.Buffer);
@@ -1315,7 +1323,7 @@ _FX NTSTATUS Ipc_Api_CreateDirOrLink(PROCESS *proc, ULONG64 *parms)
     NTSTATUS status;
     HANDLE handle;
     UNICODE_STRING64 *user_uni;
-    WCHAR *user_buf, *objname_buf, *target_buf;
+    WCHAR *user_buf, *objname_buf = NULL, *target_buf;
     ULONG user_len,  objname_len,  target_len;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname, target;

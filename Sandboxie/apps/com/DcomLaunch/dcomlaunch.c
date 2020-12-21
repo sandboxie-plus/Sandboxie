@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -143,8 +144,10 @@ int __stdcall WinMain(
     // start dcom launcher service
     wcscpy(ServiceName, L"DCOMLAUNCH");
     ok = Service_Start_ServiceMain( ServiceName, L"rpcss.dll", "ServiceMain", TRUE);
+	if (ok)
+		WaitForSingleObject(hThreadEvent, INFINITE);
+	CloseHandle(hThreadEvent);
     if (! ok)
         return EXIT_FAILURE;
-    WaitForSingleObject(hThreadEvent, INFINITE);
     return 0;
 }

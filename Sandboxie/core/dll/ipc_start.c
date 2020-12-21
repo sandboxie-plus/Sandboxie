@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -40,7 +41,7 @@ _FX HANDLE Ipc_GetServerEvent(const WCHAR *service, BOOLEAN *create_flag)
     WCHAR event_name[64];
     HANDLE hEvent;
 
-    Sbie_swprintf(event_name, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
+    Sbie_snwprintf(event_name, 64, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
     if (create_flag) {
         *create_flag = FALSE;
         hEvent = CreateEvent(NULL, TRUE, FALSE, event_name);
@@ -169,10 +170,18 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                 else {
 
                     WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
-                    Sbie_swprintf(fullpath, L"\"%s\\%s\"", homedir, program);
+                    Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
 
-                    if (! SbieDll_RunSandboxed(
-                            L"*THREAD*", fullpath, homedir, 0, &si, &pi))
+					//
+					// Note: many proesses started by DcomLaunch must be started as user this is currently a bit broken,
+					// see Proc_CreateProcessInternalW_RS5 so for successfull operation in most cases we can't run RpcSs with a system token
+					// Fix-Me: fix Proc_CreateProcessInternalW_RS5 and make prtected RpcSs and subsequently DcomLaunch the deault
+					//
+					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
+					//
+					const WCHAR* box_name = SbieApi_QueryConfBool(NULL, L"ProtectRpcSs", FALSE) ? L"*SYSTEM*" : L"*THREAD*";
+
+                    if (! SbieDll_RunSandboxed(box_name, fullpath, homedir, 0, &si, &pi))
                         errnum = GetLastError();
                     else
                         errnum = -1;

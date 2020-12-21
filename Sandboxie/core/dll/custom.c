@@ -155,7 +155,7 @@ _FX UCHAR GetSetCustomLevel(UCHAR SetLevel)
 
         if (! NT_SUCCESS(status)) {
             value_info.Data[0] = 0;
-            Sbie_swprintf(path, L"%d [%08X]", -2, status);
+            Sbie_snwprintf(path, 256, L"%d [%08X]", -2, status);
             SbieApi_Log(2206, path);
         }
 
@@ -174,7 +174,7 @@ _FX UCHAR GetSetCustomLevel(UCHAR SetLevel)
 
         if (! NT_SUCCESS(status)) {
 
-            Sbie_swprintf(path, L"%d [%08X]", -3, status);
+            Sbie_snwprintf(path, 256, L"%d [%08X]", -3, status);
             SbieApi_Log(2206, path);
         }
     }
@@ -231,7 +231,7 @@ _FX BOOLEAN Custom_CreateRegLinks(void)
     }
 
     if (! NT_SUCCESS(status)) {
-        Sbie_swprintf(err, L"[11 / %08X]", status);
+        Sbie_snwprintf(err, 64, L"[11 / %08X]", status);
         SbieApi_Log(2326, err);
         return FALSE;
     }
@@ -255,7 +255,7 @@ _FX BOOLEAN Custom_CreateRegLinks(void)
 
     } else if (status != STATUS_OBJECT_NAME_COLLISION) {
 
-        Sbie_swprintf(err, L"[22 / %08X]", status);
+		Sbie_snwprintf(err, 64, L"[22 / %08X]", status);
         SbieApi_Log(2326, err);
         NtClose(hkey1);
         return FALSE;
@@ -273,7 +273,7 @@ _FX BOOLEAN Custom_CreateRegLinks(void)
     NtClose(hkey1);
 
     if (! NT_SUCCESS(status)) {
-        Sbie_swprintf(err, L"[33 / %08X]", status);
+		Sbie_snwprintf(err, 64, L"[33 / %08X]", status);
         SbieApi_Log(2326, err);
     }
 
@@ -312,7 +312,7 @@ _FX BOOLEAN DisableDCOM(void)
         if (status != STATUS_BAD_INITIAL_PC &&
             status != STATUS_OBJECT_NAME_NOT_FOUND) {
 
-            Sbie_swprintf(err, L"[21 / %08X]", status);
+			Sbie_snwprintf(err, 64, L"[21 / %08X]", status);
             SbieApi_Log(2309, err);
         }
 
@@ -322,7 +322,7 @@ _FX BOOLEAN DisableDCOM(void)
         RtlInitUnicodeString(&objname, L"EnableDCOM");
         status = NtSetValueKey(handle, &objname, 0, REG_SZ, &no, sizeof(no));
         if (! NT_SUCCESS(status)) {
-            Sbie_swprintf(err, L"[22 / %08X]", status);
+			Sbie_snwprintf(err, 64, L"[22 / %08X]", status);
             SbieApi_Log(2309, err);
         }
 
@@ -853,7 +853,7 @@ _FX void AutoExec(void)
 
     status = SbieApi_EnumProcess(Dll_BoxName, (ULONG *)buf1);
     if (status != 0) {
-        Sbie_swprintf(error_str, L"%d [%08X]", -1, status);
+        Sbie_snwprintf(error_str, 16, L"%d [%08X]", -1, status);
         SbieApi_Log(2206, error_str);
         Dll_Free(buf1);
         return;
@@ -906,7 +906,7 @@ _FX void AutoExec(void)
                 SbieDll_ExpandAndRunProgram(buf2);
 
             } else {
-                Sbie_swprintf(error_str, L"%d [%08X]", index, status);
+                Sbie_snwprintf(error_str, 16, L"%d [%08X]", index, status);
                 SbieApi_Log(2206, error_str);
             }
         }

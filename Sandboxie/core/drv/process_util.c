@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -352,7 +353,7 @@ _FX BOOLEAN Process_GetPaths(
             if (closed_ipc && proc->image_sbie)
                 continue;
 
-            if (proc->image_copy) {
+            if (proc->image_from_box) {
 
                 value = wcschr(value, L',');
                 if (! value)
@@ -914,7 +915,7 @@ _FX NTSTATUS Process_GetSidStringAndSessionId(
     UNICODE_STRING *SidString, ULONG *SessionId)
 {
     NTSTATUS status;
-    PEPROCESS ProcessObject;
+    PEPROCESS ProcessObject = NULL;
     PACCESS_TOKEN TokenObject;
 
     if (ProcessHandle == NtCurrentProcess()) {
@@ -972,9 +973,9 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
     ULONG len = proc->image_name_len + box->name_len + 8 * sizeof(WCHAR);
     WCHAR *text = Mem_Alloc(proc->pool, len);
     swprintf(text, L"%s [%s]", proc->image_name, box->name);
-    if (proc->image_copy)
+    if (proc->image_from_box)
         wcscat(text, L" *");
-    Log_Msg1(msgid, text);
+    Log_MsgP1(msgid, text, proc->pid);
     Mem_Free(text, len);
 }
 

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -174,7 +175,7 @@ EXTERN_C const CLSID CLSID_EnumerableObjectCollection;*/
 _FX BOOLEAN Taskbar_Init(HMODULE module)
 {
     static const WCHAR *Sandbox = L"Sandbox";
-    WCHAR Version[16];
+    //WCHAR Version[16];
     ULONG len;
 
     P_SHGetPropertyStoreForWindow SHGetPropertyStoreForWindow;
@@ -186,15 +187,15 @@ _FX BOOLEAN Taskbar_Init(HMODULE module)
     // initialize BoxPrefix variables
     //
 
-    if (SbieApi_GetVersion(Version) == 0) {
-        while (1) {
-            WCHAR *ptr = wcschr(Version, L'.');
-            if (! ptr)
-                break;
-            *ptr = L'x';
-        }
-    } else
-        *Version = L'\0';
+    //if (SbieApi_GetVersion(Version) == 0) {
+    //    while (1) {
+    //        WCHAR *ptr = wcschr(Version, L'.');
+    //        if (! ptr)
+    //            break;
+    //        *ptr = L'x';
+    //    }
+    //} else
+    //    *Version = L'\0';
 
 #ifdef CUSTOM_APPUSERMODELID
     SbieApi_QueryConf(
@@ -203,8 +204,9 @@ _FX BOOLEAN Taskbar_Init(HMODULE module)
 
     len = (wcslen(Sandbox) + wcslen(Dll_BoxName) + 32) * sizeof(WCHAR);
     Taskbar_BoxPrefix = Dll_Alloc(len);
-    Sbie_swprintf(Taskbar_BoxPrefix, L"%s%s.%s.", Sandbox, Version, Dll_BoxName);
-    /*Sbie_swprintf(Taskbar_BoxPrefix, L"%s.%s.%08X.",
+    //Sbie_snwprintf(Taskbar_BoxPrefix, len / sizeof(WCHAR), L"%s%s.%s.", Sandbox, Version, Dll_BoxName);
+	Sbie_snwprintf(Taskbar_BoxPrefix, len / sizeof(WCHAR), L"%s.%s.", Sandbox, Dll_BoxName);
+    /*Sbie_snwprintf(Taskbar_BoxPrefix, len / sizeof(WCHAR), L"%s.%s.%08X.",
                                 Sandbox, Dll_BoxName, GetTickCount());*/
     Taskbar_BoxPrefix_Len = wcslen(Taskbar_BoxPrefix);
 
@@ -759,7 +761,7 @@ _FX WCHAR *Taskbar_GetNameWithBoxPrefix(const WCHAR *name)
 #else ! CUSTOM_APPUSERMODELID
     ULONG len = wcslen(Dll_BoxName) + wcslen(name) + 8;
     WCHAR *out = Dll_AllocTemp(len * sizeof(WCHAR));
-    Sbie_swprintf(out, L"[%s] %s", Dll_BoxName, name);
+    Sbie_snwprintf(out, len, L"[%s] %s", Dll_BoxName, name);
 #endif CUSTOM_APPUSERMODELID
 
     return out;

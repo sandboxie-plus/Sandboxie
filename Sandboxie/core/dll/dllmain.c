@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,6 +23,7 @@
 
 #include "dll.h"
 #include "obj.h"
+#include "trace.h"
 #include "debug.h"
 #include "core/low/lowdata.h"
 #include "common/my_version.h"
@@ -30,7 +32,6 @@
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
-
 
 static void Dll_InitGeneric(HINSTANCE hInstance);
 
@@ -87,7 +88,7 @@ ULONG Dll_Windows = 0;
 CRITICAL_SECTION  VT_CriticalSection;
 #endif
 
-const UCHAR *SbieDll_Version = MY_VERSION_STRING;
+const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
 
 //extern ULONG64 __security_cookie = 0;
 
@@ -186,6 +187,12 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
     Dll_Kernel32 = GetModuleHandle(DllName_kernel32);
     Dll_KernelBase = GetModuleHandle(DllName_kernelbase);
 
+	extern void InitMyNtDll(HMODULE Ntdll);
+	InitMyNtDll(Dll_Ntdll);
+
+	extern FARPROC __sys_GetModuleInformation;
+	__sys_GetModuleInformation = GetProcAddress(LoadLibraryW(L"psapi.dll"), "GetModuleInformation");
+
     if (! Dll_InitMem()) {
         SbieApi_Log(2305, NULL);
         ExitProcess(-1);
@@ -200,16 +207,23 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
 
 _FX void Dll_InitInjected(void)
 {
-    //
-    // Dll_InitInjected is executed by Dll_Ordinal1 in the context
-    // of a program that is running in the sandbox
-    //
+	//
+	// Dll_InitInjected is executed by Dll_Ordinal1 in the context
+	// of a program that is running in the sandbox
+	//
 
-    LONG status;
-    BOOLEAN ok;
-    ULONG BoxFilePathLen;
-    ULONG BoxKeyPathLen;
-    ULONG BoxIpcPathLen;
+	LONG status;
+	BOOLEAN ok;
+	ULONG BoxFilePathLen;
+	ULONG BoxKeyPathLen;
+	ULONG BoxIpcPathLen;
+
+	if (SbieApi_QueryConfBool(NULL, L"DebugTrace", FALSE)) {
+
+		Trace_Init();
+
+		OutputDebugString(L"SbieDll injected...");
+	}
 
     //
     // confirm the process is sandboxed before going further
@@ -385,11 +399,11 @@ _FX void Dll_InitInjected(void)
     if (! Dll_RestrictedToken)
         CustomizeSandbox();
 
-            /*while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();*/
+    /*while (! IsDebuggerPresent()) {
+        OutputDebugString(L"BREAK\n");
+        Sleep(500);
+    }
+    __debugbreak();*/
 
     /*if (_wcsicmp(Dll_ImageName, L"iexplore.exe") == 0) {
         WCHAR *cmd = GetCommandLine();
@@ -520,6 +534,7 @@ _FX void Dll_SelectImageType(void)
         L"neon.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
+		L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // modern edge is chromium based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,
@@ -627,7 +642,7 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
-    bHostInject = data->bHostInject;
+    bHostInject = data->bHostInject == 1;
 
     //
     // the SbieLow data area includes values that are useful to us
@@ -690,7 +705,7 @@ _FX ULONG_PTR Dll_Ordinal1(
     {
         Ldr_Inject_Init(bHostInject);
     }
-
+	
     //
     // conclude the detour by passing control back to the original
     // RtlFindActivationContextSectionString.  the detour code used

@@ -250,7 +250,7 @@ skip_padding_bytes:
 
 _FX ULONG Hook_Find_ZwRoutine_2(ULONG ServiceNum, void **out_routine)
 {
-    UCHAR *addr;
+    UCHAR *addr = NULL;
     BOOLEAN found = FALSE;
     ULONG subcode = 0;
     int i;

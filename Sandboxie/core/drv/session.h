@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -41,7 +42,9 @@ void Session_Cancel(HANDLE ProcessId);
 
 BOOLEAN Session_IsForceDisabled(ULONG SessionId);
 
-void Session_MonitorPut(USHORT type, const WCHAR *name);
+void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid);
+
+void Session_MonitorPutEx(USHORT type, const WCHAR** strings, HANDLE pid);
 
 
 //---------------------------------------------------------------------------

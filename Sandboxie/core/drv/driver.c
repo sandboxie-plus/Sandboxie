@@ -1,5 +1,6 @@
 ﻿/*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -46,8 +47,8 @@
 
 
 NTSTATUS DriverEntry(
-    DRIVER_OBJECT  *DriverObject,
-    UNICODE_STRING *RegistryPath);
+    IN DRIVER_OBJECT  *DriverObject,
+    IN UNICODE_STRING *RegistryPath);
 
 static BOOLEAN Driver_CheckOsVersion(void);
 
@@ -55,7 +56,9 @@ static BOOLEAN Driver_InitPublicSecurity(void);
 
 static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
+#ifdef OLD_DDK
 static BOOLEAN Driver_FindMissingServices(void);
+#endif // OLD_DDK
 
 static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
@@ -67,7 +70,9 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #pragma alloc_text (INIT, DriverEntry)
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
 #pragma alloc_text (INIT, Driver_FindHomePath)
+#ifdef OLD_DDK
 #pragma alloc_text (INIT, Driver_FindMissingServices)
+#endif // OLD_DDK
 #endif // ALLOC_PRAGMA
 
 
@@ -78,13 +83,13 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
 const ULONG tzuk = 'xobs';
 
-const WCHAR *Driver_S_1_5_18 = L"S-1-5-18";
-const WCHAR *Driver_S_1_5_19 = L"S-1-5-19";
-const WCHAR *Driver_S_1_5_20 = L"S-1-5-20";
+const WCHAR *Driver_S_1_5_18 = L"S-1-5-18"; //	System
+const WCHAR *Driver_S_1_5_19 = L"S-1-5-19"; //	Local Service
+const WCHAR *Driver_S_1_5_20 = L"S-1-5-20"; //	Network Service
 
 DRIVER_OBJECT *Driver_Object;
 
-WCHAR *Driver_Version = TEXT(MY_VERSION_STRING);
+WCHAR *Driver_Version = TEXT(MY_VERSION_COMPAT);
 
 ULONG Driver_OsVersion = 0;
 ULONG Driver_OsBuild = 0;
@@ -121,7 +126,9 @@ ULONG Process_Flags3 = 0;
 //---------------------------------------------------------------------------
 
 
+#ifdef OLD_DDK
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
+#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------
@@ -134,6 +141,8 @@ _FX NTSTATUS DriverEntry(
     IN  UNICODE_STRING *RegistryPath)
 {
     BOOLEAN ok = TRUE;
+
+	ExInitializeDriverRuntime(DrvRtPoolNxOptIn);
 
     //
     // initialize global driver variables
@@ -187,8 +196,10 @@ _FX NTSTATUS DriverEntry(
     if (ok)
         ok = Session_Init();
 
+#ifdef OLD_DDK
     if (ok)
         ok = Driver_FindMissingServices();
+#endif // OLD_DDK
 
     if (ok)
         ok = Token_Init();
@@ -256,12 +267,12 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
 
     //
     // make sure we're running on Windows XP (v5.1) or later (32-bit)
-    // or Windows Vista (v6.0) or later (64-bit)
+    // or Windows 7 (v6.1) or later (64-bit)
     //
 
 #ifdef _WIN64
     const ULONG MajorVersionMin = 6;
-    const ULONG MinorVersionMin = 0;
+    const ULONG MinorVersionMin = 1;
 #else
     const ULONG MajorVersionMin = 5;
     const ULONG MinorVersionMin = 1;
@@ -584,6 +595,8 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 //---------------------------------------------------------------------------
 
 
+#ifdef OLD_DDK
+
 #define FIND_SERVICE(svc,prmcnt)                                \
     {                                                           \
     static const char *ProcName = #svc;                         \
@@ -601,28 +614,30 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
-    void *ptr;
-    WCHAR err_txt[128];
     UNICODE_STRING uni;
 
     //
     // Windows 7 kernel exports ZwSetInformationToken
     // on earlier versions of Windows, we search for it
     //
+#ifndef _WIN64
+    if (Driver_OsVersion < DRIVER_WINDOWS_7) {
+		
+		void *ptr;
+		WCHAR err_txt[128];
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+		FIND_SERVICE(ZwSetInformationToken, 4);
 
-        RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
-        ZwSetInformationToken = (P_NtSetInformationToken)
-            MmGetSystemRoutineAddress(&uni);
-        if (! ZwSetInformationToken) {
-            Log_Msg1(MSG_1108, uni.Buffer);
-            return FALSE;
-        }
-
-    } else {
-
-        FIND_SERVICE(ZwSetInformationToken, 4);
+    } else 
+#endif
+	{
+		RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
+		ZwSetInformationToken = (P_NtSetInformationToken)
+			MmGetSystemRoutineAddress(&uni);
+		if (!ZwSetInformationToken) {
+			Log_Msg1(MSG_1108, uni.Buffer);
+			return FALSE;
+		}
     }
 
     return TRUE;
@@ -630,6 +645,8 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 
 
 #undef FIND_SERVICE
+
+#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------
@@ -709,7 +726,7 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         Process_ReadyToSandbox = ReadyToSandbox;
-        Log_Msg0(MSG_CANNOT_UNLOAD_DRIVER);
+        Log_MsgP0(MSG_CANNOT_UNLOAD_DRIVER, proc->pid);
         return STATUS_CONNECTION_IN_USE;
     }
 

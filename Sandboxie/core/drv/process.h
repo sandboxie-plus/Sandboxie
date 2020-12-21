@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -73,7 +74,7 @@ struct _PROCESS {
     WCHAR  *image_name;
     ULONG   image_name_len;             // in bytes, including NULL
 
-    BOOLEAN image_copy;
+    BOOLEAN image_from_box;
     BOOLEAN image_sbie;
 
     // process creation time and integrity level
@@ -132,6 +133,7 @@ struct _PROCESS {
     ULONG pipe_trace;
     BOOLEAN file_warn_internet;
     BOOLEAN file_warn_direct_access;
+	BOOLEAN AllowInternetAccess;
 
     // key-related
 

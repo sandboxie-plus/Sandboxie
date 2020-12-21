@@ -1,0 +1,254 @@
+INSTALLATION INSTRUCTIONS
+
+These instructions refer to the package you are installing as
+some-package.tar.gz or some-package.zip. The .zip file is intended for use
+on Windows.
+
+The directory you choose for the installation will be referred to as
+your-install-dir.
+
+Note to Qt Visual Studio Integration users: In the instructions below,
+instead of building from command line with nmake, you can use the menu
+command 'Qt->Open Solution from .pro file' on the .pro files in the
+example and plugin directories, and then build from within Visual
+Studio.
+
+Unpacking and installation
+--------------------------
+
+1.  Unpacking the archive (if you have not done so already).
+
+    On Unix and Mac OS X (in a terminal window):
+
+	cd your-install-dir
+	gunzip some-package.tar.gz
+	tar xvf some-package.tar
+
+    This creates the subdirectory some-package containing the files.
+
+    On Windows:
+
+    Unpack the .zip archive by right-clicking it in explorer and
+    choosing "Extract All...". If your version of Windows does not
+    have zip support, you can use the infozip tools available
+    from www.info-zip.org.
+
+    If you are using the infozip tools (in a command prompt window):
+	cd your-install-dir
+	unzip some-package.zip
+
+2.  Configuring the package.
+
+    The configure script is called "configure" on unix/mac and
+    "configure.bat" on Windows. It should be run from a command line
+    after cd'ing to the package directory. 
+
+    You can choose whether you want to use the component by including
+    its source code directly into your project, or build the component
+    as a dynamic shared library (DLL) that is loaded into the
+    application at run-time. The latter may be preferable for
+    technical or licensing (LGPL) reasons. If you want to build a DLL,
+    run the configure script with the argument "-library". Also see
+    the note about usage below.
+
+    (Components that are Qt plugins, e.g. styles and image formats,
+    are by default built as a plugin DLL.)
+
+    The configure script will prompt you in some cases for further
+    information. Answer these questions and carefully read the license text
+    before accepting the license conditions. The package cannot be used if
+    you do not accept the license conditions.
+
+3.  Building the component and examples (when required).
+
+    If a DLL is to be built, or if you would like to build the
+    examples, next give the commands
+
+        qmake
+        make          [or nmake if your are using Microsoft Visual C++]
+
+    The example program(s) can be found in the directory called
+    "examples" or "example".
+
+    Components that are Qt plugins, e.g. styles and image formats, are
+    ready to be used as soon as they are built, so the rest of this
+    installation instruction can be skipped.
+
+4.  Building the Qt Designer plugin (optional).
+
+    Some of the widget components are provided with plugins for Qt
+    Designer. To build and install the plugin, cd into the
+    some-package/plugin directory and give the commands
+
+	qmake
+	make           [or nmake if your are using Microsoft Visual C++]
+
+    Restart Qt Designer to make it load the new widget plugin.
+
+    Note: If you are using the built-in Qt Designer from the Qt Visual
+    Studio Integration, you will need to manually copy the plugin DLL
+    file, i.e. copy
+	%QTDIR%\plugins\designer\some-component.dll 
+    to the Qt Visual Studio Integration plugin path, typically:
+	C:\Program Files\Trolltech\Qt VS Integration\plugins
+
+    Note: If you for some reason are using a Qt Designer that is built
+    in debug mode, you will need to build the plugin in debug mode
+    also. Edit the file plugin.pro in the plugin directory, changing
+    'release' to 'debug' in the CONFIG line, before running qmake.
+
+
+
+Solutions components are intended to be used directly from the package
+directory during development, so there is no 'make install' procedure.
+
+
+Using a component in your project
+---------------------------------
+
+To use this component in your project, add the following line to the
+project's .pro file (or do the equivalent in your IDE):
+
+    include(your-install-dir/some-package/src/some-package.pri)
+
+This adds the package's sources and headers to the SOURCES and HEADERS
+project variables respectively (or, if the component has been
+configured as a DLL, it adds that library to the LIBS variable), and
+updates INCLUDEPATH to contain the package's src
+directory. Additionally, the .pri file may include some dependencies
+needed by the package.
+
+To include a header file from the package in your sources, you can now
+simply use:
+
+    #include <SomeClass>
+
+or alternatively, in pre-Qt 4 style:
+
+    #include <some-class.h>
+
+Refer to the documentation to see the classes and headers this
+components provides.
+
+
+
+Install documentation (optional)
+--------------------------------
+
+The HTML documentation for the package's classes is located in the
+your-install-dir/some-package/doc/html/index.html. You can open this
+file and read the documentation with any web browser.
+
+To install the documentation into Qt Assistant (for Qt version 4.4 and
+later):
+
+1.  In Assistant, open the Edit->Preferences dialog and choose the
+    Documentation tab. Click the Add... button and select the file
+       your-install-dir/some-package/doc/html/some-package.qch
+    
+For Qt versions prior to 4.4, do instead the following:
+
+1.  The directory your-install-dir/some-package/doc/html contains a
+    file called some-package.dcf. Execute the following commands in a
+    shell, command prompt or terminal window:
+
+	cd your-install-dir/some-package/doc/html/
+	assistant -addContentFile some-package.dcf
+
+The next time you start Qt Assistant, you can access the package's
+documentation.
+
+
+Removing the documentation from assistant
+-----------------------------------------
+
+If you have installed the documentation into Qt Assistant, and want to uninstall it, do as follows, for Qt version 4.4 and later:
+
+1.  In Assistant, open the Edit->Preferences dialog and choose the
+    Documentation tab. In the list of Registered Documentation, select
+    the item com.nokia.qtsolutions.some-package_version, and click
+    the Remove button.
+
+For Qt versions prior to 4.4, do instead the following:
+
+1.  The directory your-install-dir/some-package/doc/html contains a
+    file called some-package.dcf. Execute the following commands in a
+    shell, command prompt or terminal window:
+
+	cd your-install-dir/some-package/doc/html/
+	assistant -removeContentFile some-package.dcf
+
+
+
+Using the component as a DLL
+----------------------------
+
+1. Normal components
+
+    The shared library (DLL) is built and placed in the
+    some-package/lib directory. It is intended to be used directly
+    from there during development. When appropriate, both debug and
+    release versions are built, since the run-time linker will in some
+    cases refuse to load a debug-built DLL into a release-built
+    application or vice versa.
+
+    The following steps are taken by default to help the dynamic
+    linker to locate the DLL at run-time (during development):
+
+    Unix: The some-package.pri file will add linker instructions to
+    add the some-package/lib directory to the rpath of the
+    executable. (When distributing, or if your system does not support
+    rpath, you can copy the shared library to another place that is
+    searched by the dynamic linker, e.g. the "lib" directory of your
+    Qt installation.)
+
+    Mac: The full path to the library is hardcoded into the library
+    itself, from where it is copied into the executable at link time,
+    and ready by the dynamic linker at run-time. (When distributing,
+    you will want to edit these hardcoded paths in the same way as for
+    the Qt DLLs. Refer to the document "Deploying an Application on
+    Mac OS X" in the Qt Reference Documentation.)
+
+    Windows: the .dll file(s) are copied into the "bin" directory of
+    your Qt installation. The Qt installation will already have set up
+    that directory to be searched by the dynamic linker.
+
+
+2. Plugins
+
+    For Qt Solutions plugins (e.g. image formats), both debug and
+    release versions of the plugin are built by default when
+    appropriate, since in some cases the release Qt library will not
+    load a debug plugin, and vice versa. The plugins are automatically
+    copied into the plugins directory of your Qt installation when
+    built, so no further setup is required.
+
+    Plugins may also be built statically, i.e. as a library that will be
+    linked into your application executable, and so will not need to
+    be redistributed as a separate plugin DLL to end users. Static
+    building is required if Qt itself is built statically. To do it,
+    just add "static" to the CONFIG variable in the plugin/plugin.pro
+    file before building. Refer to the "Static Plugins" section in the
+    chapter "How to Create Qt Plugins" for explanation of how to use a
+    static plugin in your application. The source code of the example
+    program(s) will also typically contain the relevant instructions
+    as comments.
+
+
+
+Uninstalling
+------------
+
+    The following command will remove any fils that have been
+    automatically placed outside the package directory itself during
+    installation and building
+
+	make distclean [or nmake if your are using Microsoft Visual C++]
+
+    If Qt Assistant documentation or Qt Designer plugins have been
+    installed, they can be uninstalled manually, ref. above.
+
+
+Enjoy! :)
+
+- The Qt Solutions Team.

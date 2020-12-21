@@ -22,7 +22,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectName>SboxDll</ProjectName>
     <ProjectGuid>{8E0EAA5B-6F5B-E0E2-338A-453EF2B548E4}</ProjectGuid>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="Configuration">
@@ -30,28 +30,28 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -71,22 +71,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\i386</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\amd64</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\i386</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <TargetExt>.dll</TargetExt>
     <TargetName>SbieDll</TargetName>
-    <LibraryPath>C:\WinDDK\7600.16385.1\lib\wnet\amd64</LibraryPath>
+    <LibraryPath>$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>
@@ -96,7 +96,7 @@
       <OmitFramePointers />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
@@ -104,6 +104,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <ClCompile>
@@ -112,7 +115,7 @@
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
@@ -120,16 +123,19 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_WIN64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <ClCompile>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>Default</CompileAs>
       <OmitFramePointers />
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <ModuleDefinitionFile>SboxDll32.def</ModuleDefinitionFile>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
@@ -137,6 +143,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <ClCompile>
@@ -144,7 +153,7 @@
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
       <BaseAddress>0x7D220000</BaseAddress>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ModuleDefinitionFile>SboxDll64.def</ModuleDefinitionFile>
@@ -152,8 +161,15 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_WIN64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\my_ntdll.c">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Disabled</Optimization>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">Disabled</Optimization>
+    </ClCompile>
     <ClCompile Include="..\..\common\pattern.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
@@ -227,6 +243,8 @@
     <ClCompile Include="guimsg.c" />
     <ClCompile Include="guiprop.c" />
     <ClCompile Include="guititle.c" />
+    <ClCompile Include="hook_inst.c" />
+    <ClCompile Include="hook_tramp.c" />
     <ClCompile Include="includes.c" />
     <ClCompile Include="ipc.c" />
     <ClCompile Include="ipc_start.c">
@@ -258,6 +276,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="lowlevel_inject.c" />
     <ClCompile Include="lsa.c" />
     <ClCompile Include="mscoree.c" />
     <ClCompile Include="net.c" />
@@ -314,6 +333,7 @@
     </ClCompile>
     <ClCompile Include="taskbar.c" />
     <ClCompile Include="terminal.c" />
+    <ClCompile Include="trace.c" />
     <ClCompile Include="userenv.c" />
   </ItemGroup>
   <ItemGroup>
@@ -336,6 +356,7 @@
     <ClInclude Include="dll.h" />
     <ClInclude Include="guidlg.h" />
     <ClInclude Include="gui_p.h" />
+    <ClInclude Include="hook.h" />
     <ClInclude Include="ipstore_enum.h" />
     <ClInclude Include="ipstore_impl.h" />
     <ClInclude Include="obj.h" />
@@ -344,14 +365,41 @@
     <ClInclude Include="sbieapi.h" />
     <ClInclude Include="sbiedll.h" />
     <ClInclude Include="taskbar.h" />
+    <ClInclude Include="trace.h" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="lowlevel.rc" />
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="pstore.idl" />
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="..\..\common\NtCRT\x86\except_handler3.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">ml -c  -Cx -nologo -Zi -Zm -Fo$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">%(ProjectDir)$(Configuration)\%(Filename).obj</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">ml -c  -Cx -nologo -Zi -Zm -Fo$(Configuration)\%(Filename).obj %(FullPath)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">%(ProjectDir)$(Configuration)\%(Filename).obj</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x64\ntdll.def">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x64</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x64</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x86\ntdll.def">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x86</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x86</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib</Outputs>
+    </CustomBuild>
     <None Include="SboxDll32.def" />
     <None Include="SboxDll64.def" />
     <None Include="util_32.asm">

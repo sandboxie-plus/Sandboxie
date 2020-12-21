@@ -30,6 +30,7 @@ class CMonitorDialog : public CBaseDialog
 
     WCHAR m_username[256];
     ULONG m_username_len;
+	ULONG m_last_entry_seq_num;
 
     virtual BOOL OnInitDialog();
 

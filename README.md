@@ -15,3 +15,6 @@ In September 2019, Sophos switched to a new license.
 
 In 2020 Sophos has released Sandboxie as Open Source under the GPLv3 licence to the community for further developement and maintanance.
 
+## Support
+
+If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos

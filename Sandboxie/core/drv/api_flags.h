@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -52,6 +53,7 @@
 #define MONITOR_OTHER				0x099B
 #define MONITOR_OPEN                0x1000
 #define MONITOR_DENY                0x2000
+#define MONITOR_TRACE               0x8000
 
 
 #define DISABLE_JUST_THIS_PROCESS   0x0123ABC0

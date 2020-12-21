@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -107,6 +108,8 @@ static void File_AdjustDrives(
 
 static void File_InitCopyLimit(void);
 
+static void File_InitSnapshots(void);
+
 
 //---------------------------------------------------------------------------
 // Variables
@@ -144,8 +147,12 @@ _FX BOOLEAN File_Init(void)
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
 
-    if (! File_InitUsers())
-        return FALSE;
+	if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+		if (!File_InitUsers())
+			return FALSE;
+	}
+
+	File_InitSnapshots();
 
     File_InitRecoverFolders();
 
@@ -424,7 +431,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
         path_len = 16;
         path = Dll_Alloc(path_len);
-        Sbie_swprintf(path, L"\\??\\%c:", L'A' + drive);
+        Sbie_snwprintf(path, 8, L"\\??\\%c:", L'A' + drive);
 
         RtlInitUnicodeString(&objname, path);
 
@@ -477,7 +484,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
                 status != STATUS_OBJECT_TYPE_MISMATCH &&
                 status != STATUS_ACCESS_DENIED) {
 
-                Sbie_swprintf(error_str, L"%c [%08X]", L'A' + drive, status);
+                Sbie_snwprintf(error_str, 16, L"%c [%08X]", L'A' + drive, status);
                 SbieApi_Log(2307, error_str);
             }
 
@@ -572,7 +579,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
         if (! NT_SUCCESS(status)) {
 
-            Sbie_swprintf(error_str, L"%c [%08X]", L'A' + drive, status);
+            Sbie_snwprintf(error_str, 16, L"%c [%08X]", L'A' + drive, status);
             SbieApi_Log(2307, error_str);
         }
     }
@@ -1009,7 +1016,7 @@ _FX BOOLEAN File_InitUsers(void)
 
     if (errlvl) {
         WCHAR error_str[16];
-        Sbie_swprintf(error_str, L"[%08X / %02X]", status, errlvl);
+        Sbie_snwprintf(error_str, 16, L"[%08X / %02X]", status, errlvl);
         SbieApi_Log(2306, error_str);
         return FALSE;
     }
@@ -1511,7 +1518,7 @@ _FX void File_InitCopyLimit(void)
 
     if (SetMaxCopyLimit) {
 
-        File_CopyLimitKb     = 99999999;
+        File_CopyLimitKb     = -1;
         File_CopyLimitSilent = FALSE;
         return;
     }
@@ -1523,9 +1530,9 @@ _FX void File_InitCopyLimit(void)
     status = SbieApi_QueryConfAsIs(
         NULL, _CopyLimitKb, 0, str, sizeof(str) - sizeof(WCHAR));
     if (NT_SUCCESS(status)) {
-        ULONG num = _wtoi(str);
+        ULONGLONG num = _wtoi64(str);
         if (num)
-            File_CopyLimitKb = num;
+            File_CopyLimitKb = (num > 0x000000007fffffff) ? -1 : (ULONG)num;
         else
             SbieApi_Log(2207, _CopyLimitKb);
     }
@@ -1730,7 +1737,7 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
             } else {
 
                 UNICODE_STRING *uni =
-                    &((OBJECT_NAME_INFORMATION *)dirname)->ObjectName;
+                    &((OBJECT_NAME_INFORMATION *)dirname)->Name;
                 length = uni->Length / sizeof(WCHAR);
                 if (length > 95)
                     length = 95;
@@ -1739,4 +1746,59 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
             }
         }
     }
+}
+
+
+//---------------------------------------------------------------------------
+// File_InitCopyLimit
+//---------------------------------------------------------------------------
+
+/* CRC */
+
+#define CRC_WITH_ADLERTZUK64
+#include "common/crc.c"
+
+_FX void File_InitSnapshots(void)
+{
+	WCHAR ShapshotsIni[MAX_PATH] = { 0 };
+	wcscpy(ShapshotsIni, Dll_BoxFilePath);
+	wcscat(ShapshotsIni, L"\\Snapshots.ini");
+	SbieDll_TranslateNtToDosPath(ShapshotsIni);
+
+	WCHAR Shapshot[16] = { 0 };
+	GetPrivateProfileStringW(L"Current", L"Snapshot", L"", Shapshot, 16, ShapshotsIni);
+
+	if (*Shapshot == 0)
+		return; // not using snapshots
+
+	File_Snapshot = Dll_Alloc(sizeof(FILE_SNAPSHOT));
+	memzero(File_Snapshot, sizeof(FILE_SNAPSHOT));
+	wcscpy(File_Snapshot->ID, Shapshot);
+	File_Snapshot->IDlen = wcslen(Shapshot);
+	FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot;
+	File_Snapshot_Count = 1;
+
+	for (;;)
+	{
+		Cur_Snapshot->ScramKey = CRC32(Cur_Snapshot->ID, Cur_Snapshot->IDlen * sizeof(WCHAR));
+
+		WCHAR ShapshotId[26] = L"Snapshot_";
+		wcscat(ShapshotId, Shapshot);
+		
+		//WCHAR ShapshotName[34] = { 0 };
+		//GetPrivateProfileStringW(ShapshotId, L"Name", L"", ShapshotName, 34, ShapshotsIni);
+		//wcscpy(Cur_Snapshot->Name, ShapshotName);
+
+		GetPrivateProfileStringW(ShapshotId, L"Parent", L"", Shapshot, 16, ShapshotsIni);
+
+		if (*Shapshot == 0)
+			break; // no more snapshots
+
+		Cur_Snapshot->Parent = Dll_Alloc(sizeof(FILE_SNAPSHOT));
+		memzero(Cur_Snapshot->Parent, sizeof(FILE_SNAPSHOT));
+		wcscpy(Cur_Snapshot->Parent->ID, Shapshot);
+		Cur_Snapshot->Parent->IDlen = wcslen(Shapshot);
+		Cur_Snapshot = Cur_Snapshot->Parent;
+		File_Snapshot_Count++;
+	}
 }

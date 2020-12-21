@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -402,7 +403,7 @@ _FX void Ipc_CreateObjects(void)
     // the last path component (the dummy name itself)
     //
 
-    Sbie_swprintf(str, SBIE_BOXED_ L"DummyEvent_%d", Dll_ProcessId);
+    Sbie_snwprintf(str, 64, SBIE_BOXED_ L"DummyEvent_%d", Dll_ProcessId);
     handle = CreateEvent(NULL, FALSE, FALSE, str);
     if (! handle) {
         errlvl = 11;
@@ -575,7 +576,7 @@ _FX NTSTATUS Ipc_GetName(
         if (! NT_SUCCESS(status))
             return status;
 
-        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->ObjectName.Buffer;
+        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->Name.Buffer;
 
         if (! *OutTruePath) {
 
@@ -588,7 +589,7 @@ _FX NTSTATUS Ipc_GetName(
         }
 
         name = (*OutTruePath)
-             + ((OBJECT_NAME_INFORMATION *)name)->ObjectName.Length
+             + ((OBJECT_NAME_INFORMATION *)name)->Name.Length
                     / sizeof(WCHAR);
 
         if (objname_len) {
@@ -972,10 +973,10 @@ _FX void Ipc_AdjustPortPath(UNICODE_STRING *ObjectName)
         status = Obj_GetObjectName(handle, name, &length);
 
         if (NT_SUCCESS(status) &&
-                name->ObjectName.Length >= ParentLength * sizeof(WCHAR) &&
-            0 == _wcsnicmp(name->ObjectName.Buffer, Buffer, ParentLength)) {
+                name->Name.Length >= ParentLength * sizeof(WCHAR) &&
+            0 == _wcsnicmp(name->Name.Buffer, Buffer, ParentLength)) {
 
-            wmemcpy(Buffer, name->ObjectName.Buffer, ParentLength);
+            wmemcpy(Buffer, name->Name.Buffer, ParentLength);
         }
 
         Dll_Free(name);

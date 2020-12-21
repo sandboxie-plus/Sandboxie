@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -485,7 +486,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
             }
 
             HANDLE PrimaryTokenHandle = RunSandboxedGetToken(
-                        CallerProcessHandle, CallerInSandbox, req->boxname);
+                        CallerProcessHandle, CallerInSandbox, req->boxname, CallerPid);
 
             if (PrimaryTokenHandle) {
 
@@ -659,7 +660,7 @@ WCHAR *ProcessServer::RunSandboxedCopyString(
 
 
 HANDLE ProcessServer::RunSandboxedGetToken(
-    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *BoxName)
+    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *BoxName, ULONG idProcess)
 {
     const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
                              | TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID
@@ -719,6 +720,27 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             CloseHandle(ThreadHandle);
 
+			// OriginalToken BEGIN
+			if (!ok)
+			{
+				WCHAR boxname[48];
+				ULONG status = SbieApi_QueryProcessEx2((HANDLE)PipeServer::GetCallerProcessId(), 0,
+					boxname, NULL, NULL, NULL, NULL);
+
+				if (status == 0 && SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+				{
+
+					ThreadHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE,
+						PipeServer::GetCallerProcessId());
+
+					ok = OpenProcessToken(
+						ThreadHandle, TOKEN_RIGHTS, &OldTokenHandle);
+
+					CloseHandle(ThreadHandle);
+				}
+			}
+			// OriginalToken END
+
             if (! ok) {
                 SetLastError(LastError);
                 return NULL;
@@ -769,7 +791,15 @@ HANDLE ProcessServer::RunSandboxedGetToken(
         // then we want to adjust the dacl in the new token
         //
 
-        ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle);
+		WCHAR boxname[48] = { 0 };
+		if (CallerInSandbox)
+			SbieApi_QueryProcess((HANDLE)(ULONG_PTR)idProcess, boxname, NULL, NULL, NULL);
+		else
+			wcscpy(boxname, BoxName);
+		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
+			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
+		else
+			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_READ, FALSE);
     }
 
     if (! ok) {
@@ -795,9 +825,11 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
 
 BOOL ProcessServer::RunSandboxedSetDacl(
-    HANDLE CallerProcessHandle, HANDLE NewTokenHandle)
+    HANDLE CallerProcessHandle, HANDLE NewTokenHandle, DWORD AccessMask, bool useUserSID)
 {
     ULONG LastError;
+	HANDLE hToken;
+	ULONG len;
     BOOL ok;
 
     //
@@ -812,26 +844,39 @@ BOOL ProcessServer::RunSandboxedSetDacl(
     if (! WorkSpace)
         return FALSE;
 
+	TOKEN_GROUPS	   *pLogOn = (TOKEN_GROUPS *)WorkSpace;
     TOKEN_USER         *pUser = (TOKEN_USER *)WorkSpace;
     TOKEN_DEFAULT_DACL *pDacl = (TOKEN_DEFAULT_DACL *)(WorkSpace + 512);
+	PSID pSid;
 
     //
     // get the token for the calling process, extract the user SID
     //
 
-    HANDLE OldTokenHandle;
+    
 
-    ok = OpenProcessToken(CallerProcessHandle, TOKEN_QUERY, &OldTokenHandle);
+    ok = OpenProcessToken(CallerProcessHandle, TOKEN_QUERY, &hToken);
     LastError = GetLastError();
 
     if (! ok)
         goto finish;
 
-    ULONG len;
-    ok = GetTokenInformation(OldTokenHandle, TokenUser, pUser, 512, &len);
-    LastError = GetLastError();
+	if (useUserSID)
+	{
+		ok = GetTokenInformation(hToken, TokenUser, pUser, 512, &len);
+		LastError = GetLastError();
 
-    CloseHandle(OldTokenHandle);
+		pSid = pUser->User.Sid;
+	}
+	else
+	{
+		ok = GetTokenInformation(hToken, TokenLogonSid, pLogOn, 512, &len);
+		LastError = GetLastError();
+
+		pSid = pLogOn->Groups[0].Sid; // use the LogonSessionId token
+	}
+
+    CloseHandle(hToken);
 
     if (! ok)
         goto finish;
@@ -851,9 +896,9 @@ BOOL ProcessServer::RunSandboxedSetDacl(
 
     pAcl->AclSize += sizeof(ACCESS_ALLOWED_ACE)
                    - sizeof(DWORD)              // minus SidStart member
-                   + (WORD)GetLengthSid(pUser->User.Sid);
+                   + (WORD)GetLengthSid(pSid);
 
-    AddAccessAllowedAce(pAcl, ACL_REVISION, GENERIC_ALL, pUser->User.Sid);
+    AddAccessAllowedAce(pAcl, ACL_REVISION, AccessMask, pSid);
 
     ok = SetTokenInformation(
             NewTokenHandle, TokenDefaultDacl, pDacl, (8192 - 512));

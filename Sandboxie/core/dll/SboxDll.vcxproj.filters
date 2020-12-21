@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="advapi.c" />
+    <ClCompile Include="crypt.c" />
+    <ClCompile Include="custom.c" />
+    <ClCompile Include="debug.c" />
+    <ClCompile Include="dllmem.c" />
+    <ClCompile Include="dllpath.c" />
+    <ClCompile Include="event.c" />
+    <ClCompile Include="includes.c" />
+    <ClCompile Include="iphlp.c" />
+    <ClCompile Include="lsa.c" />
+    <ClCompile Include="mscoree.c" />
+    <ClCompile Include="net.c" />
+    <ClCompile Include="netapi.c" />
+    <ClCompile Include="obj.c" />
+    <ClCompile Include="pdh.c" />
+    <ClCompile Include="proc.c" />
+    <ClCompile Include="rpcrt.c" />
+    <ClCompile Include="secure.c" />
+    <ClCompile Include="setup.c" />
+    <ClCompile Include="sfc.c" />
+    <ClCompile Include="sh.c" />
+    <ClCompile Include="support.c" />
+    <ClCompile Include="sxs.c" />
+    <ClCompile Include="sysinfo.c" />
+    <ClCompile Include="terminal.c" />
+    <ClCompile Include="userenv.c" />
+    <ClCompile Include="scm.c">
+      <Filter>scm</Filter>
+    </ClCompile>
+    <ClCompile Include="scm_create.c">
+      <Filter>scm</Filter>
+    </ClCompile>
+    <ClCompile Include="scm_event.c">
+      <Filter>scm</Filter>
+    </ClCompile>
+    <ClCompile Include="scm_misc.c">
+      <Filter>scm</Filter>
+    </ClCompile>
+    <ClCompile Include="scm_notify.c">
+      <Filter>scm</Filter>
+    </ClCompile>
+    <ClCompile Include="scm_query.c">
+      <Filter>scm</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_inst.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_tramp.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="lowlevel_inject.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="ldr.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="ldr_init.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_dir.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_init.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_link.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_misc.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_pipe.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="gdi.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guiclass.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guicon.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guidde.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guidlg.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guienum.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guihook.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guimisc.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guimsg.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guiprop.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="guititle.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pattern.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pool.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="taskbar.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="acscmonitor.c" />
+    <ClCompile Include="pst.cpp">
+      <Filter>pst</Filter>
+    </ClCompile>
+    <ClCompile Include="ipstore_impl.cpp">
+      <Filter>pst</Filter>
+    </ClCompile>
+    <ClCompile Include="ipstore_enum.cpp">
+      <Filter>pst</Filter>
+    </ClCompile>
+    <ClCompile Include="cred.c" />
+    <ClCompile Include="sbieapi.c">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="key.c">
+      <Filter>key</Filter>
+    </ClCompile>
+    <ClCompile Include="key_merge.c">
+      <Filter>key</Filter>
+    </ClCompile>
+    <ClCompile Include="key_util.c">
+      <Filter>key</Filter>
+    </ClCompile>
+    <ClCompile Include="dllhook.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc_start.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ole.cpp">
+      <Filter>com</Filter>
+    </ClCompile>
+    <ClCompile Include="com.c">
+      <Filter>com</Filter>
+    </ClCompile>
+    <ClCompile Include="callsvc.c">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="trace.c" />
+    <ClCompile Include="..\..\common\my_ntdll.c">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="advapi.h" />
+    <ClInclude Include="debug.h" />
+    <ClInclude Include="dll.h" />
+    <ClInclude Include="hook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
+    <ClInclude Include="gui_p.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="guidlg.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pool.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="propsys.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="taskbar.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="pstore.h">
+      <Filter>pst</Filter>
+    </ClInclude>
+    <ClInclude Include="ipstore_impl.h">
+      <Filter>pst</Filter>
+    </ClInclude>
+    <ClInclude Include="ipstore_enum.h">
+      <Filter>pst</Filter>
+    </ClInclude>
+    <ClInclude Include="sbieapi.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="sbiedll.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="obj.h">
+      <Filter>com</Filter>
+    </ClInclude>
+    <ClInclude Include="trace.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+    <ResourceCompile Include="lowlevel.rc">
+      <Filter>hook</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SboxDll32.def">
+      <Filter>api</Filter>
+    </None>
+    <None Include="SboxDll64.def">
+      <Filter>api</Filter>
+    </None>
+    <None Include="util_64.asm">
+      <Filter>hook</Filter>
+    </None>
+    <None Include="util_32.asm">
+      <Filter>hook</Filter>
+    </None>
+    <None Include="..\..\common\NtCRT\x64\ntdll.def">
+      <Filter>common</Filter>
+    </None>
+    <None Include="..\..\common\NtCRT\x86\ntdll.def">
+      <Filter>common</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="scm">
+      <UniqueIdentifier>{6da9a76f-4d0f-47ee-b825-7c1e546a0d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hook">
+      <UniqueIdentifier>{5f7e4efc-f1a0-402a-bdc9-b2b89d6b7dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{881ad2c8-b8c4-4ca8-aecd-5c4796ad46b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gui">
+      <UniqueIdentifier>{8ee84c6a-ed91-4765-b5c9-d8d65a4d605a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{aebace4d-7063-460f-a875-1dacf59a4ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pst">
+      <UniqueIdentifier>{5d69d34a-4b02-40d2-a27e-ae16165b5933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="key">
+      <UniqueIdentifier>{d6a7a70a-5bfe-4598-b4e6-516442cd97e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ipc">
+      <UniqueIdentifier>{66c7aa3a-4c74-4ccc-8d57-ddb65c59cd58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="com">
+      <UniqueIdentifier>{fde0ce5f-2daf-4dfc-9512-731510cffabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="api">
+      <UniqueIdentifier>{1903d308-e235-4da0-a117-0dfaa6eb24eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="pstore.idl">
+      <Filter>pst</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="util_asm.asm">
+      <Filter>hook</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x86\except_handler3.asm">
+      <Filter>common</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

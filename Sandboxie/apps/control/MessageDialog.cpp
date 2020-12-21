@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -29,6 +30,7 @@
 #include "common/win32_ntddk.h"
 #include "common/my_version.h"
 #include "core/drv/api_defs.h"
+#include "core/svc/InteractiveWire.h"
 
 
 //---------------------------------------------------------------------------
@@ -93,6 +95,8 @@ CMessageDialog::CMessageDialog(CWnd *pParentWnd, int mode)
 
     m_buf_len = (8 * 1024);
     m_buf = malloc_WCHAR(m_buf_len);
+
+	m_last_message_number = 0;
 
     if (mode == MSGDLG_NORMAL)
         ReloadConf();
@@ -250,22 +254,38 @@ void CMessageDialog::OnTimer()
     while (1) {
 
         ULONG len = m_buf_len;
-        LONG status = SbieApi_GetWork(CMyApp::m_session_id, m_buf, &len);
-        if (status != 0)
-            break;
+		ULONG message_number = m_last_message_number;
+		ULONG code = -1;
+		ULONG pid = 0;
+        ULONG status = SbieApi_GetMessage(&message_number, CMyApp::m_session_id, &code, &pid, m_buf, len);
+		if (status != 0)
+			break; // error or no more entries
+		m_last_message_number = message_number;
 
-        ULONG *type = (ULONG *)m_buf;
-        if (*type != API_LOG_MESSAGE)
+        if (/*code == MSG_2199 &&*/ m_firsttime)
             continue;
 
-        ULONG code = type[1];
-        if (code == MSG_2199 && m_firsttime)
-            continue;
+		//
+		// ignore file migration progress notifications
+		if (code == MSG_2198)
+			continue;
 
-        WCHAR *str1 = (WCHAR *)&type[2];
+		//
+		// ignore boxed process start notification
+		if (code == MSG_1399)
+			continue;
+
+
+
+        WCHAR *str1 = m_buf;
         ULONG str1_len = wcslen(str1);
         WCHAR *str2 = str1 + str1_len + 1;
         ULONG str2_len = wcslen(str2);
+
+		//
+		// ignore MANPROXY errors the legacy UI does not support interactive prompts
+		if (code == MSG_2203 && wcsncmp(str1, L"*" INTERACTIVE_QUEUE_NAME L"_", 10) == 0)
+			continue;
 
         if (IsHiddenMessage(code, str1, str2))
             continue;
@@ -688,7 +708,8 @@ void CMessageDialog::OnListDoubleClick()
                 DWORD process_id = _wtoi(sPid.GetString());
 
                 // tell driver to allow spooler print to file for this process
-                LONG rc = SbieApi_CallOne(API_ALLOW_SPOOLER_PRINT_TO_FILE, (ULONG_PTR)(process_id));
+				ULONG NewState = TRUE;
+				LONG rc = SbieApi_ProcessExemptionControl((HANDLE)process_id, 'splr', &NewState, NULL);
                 sbie.Format(SBIE_IN_MSGS L"%04d", 1319);
                 DiscardMessages(sbie, detail);
                 sbie.Format(SBIE_IN_MSGS L"%04d", 1320);
@@ -870,14 +891,6 @@ void CMessageDialog::DoRecovery()
 
         msg = (MsgEntry *)m_queue.RemoveHead();
 
-        WCHAR *space = wcschr(msg->str1, L' ');
-        if (! space) {
-            delete msg;
-            return;
-        }
-        *space = L'\0';
-        ++space;
-
         CBox &box = CBoxes::GetInstance().GetBox(msg->str1);
 
         if (box.GetName().IsEmpty()) {
@@ -885,8 +898,8 @@ void CMessageDialog::DoRecovery()
             return;
         }
 
-        if (wcsncmp(space, L"*AUTOPLAY*", 10) == 0) {
-            DoAutoPlay(box, space[10]);
+        if (wcsncmp(msg->str2, L"*AUTOPLAY*", 10) == 0) {
+            DoAutoPlay(box, msg->str2[10]);
             delete msg;
             return;
         }
@@ -897,7 +910,7 @@ void CMessageDialog::DoRecovery()
         }
 
         m_qr_box = box.GetName();
-        m_qr = new CQuickRecover(m_pParentWnd, m_qr_box, space, QR_AUTO);
+        m_qr = new CQuickRecover(m_pParentWnd, m_qr_box, msg->str2, QR_AUTO);
         MyDoModal(m_qr);
 
         delete m_qr;

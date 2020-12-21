@@ -668,14 +668,14 @@ _FX NTSTATUS Secure_NtSetSecurityObject(
         OBJECT_NAME_INFORMATION *name =
             (OBJECT_NAME_INFORMATION *)name_space;
         status = Obj_GetObjectName(Handle, name, &name_len);
-        if (NT_SUCCESS(status) && name->ObjectName.Length == 0) {
+        if (NT_SUCCESS(status) && name->Name.Length == 0) {
 
             IsUnnamedObject = TRUE;
         }
     }
 
     //WCHAR txt[256];
-    //Sbie_swprintf(txt, L"NtSetSecurityObject Open=%d Handle=%08X Type=%d Info=%08X\n", IsOpenPath, Handle, type, SecurityInformation);
+    //Sbie_snwprintf(txt, 256, L"NtSetSecurityObject Open=%d Handle=%08X Type=%d Info=%08X\n", IsOpenPath, Handle, type, SecurityInformation);
     //OutputDebugString(txt);
     //while (! IsDebuggerPresent()) Sleep(500); __debugbreak();
 

@@ -352,7 +352,7 @@ _FX BOOLEAN Gui_DDE_COPYDATA_Received(
     if (cds->dwData != tzuk)
         return FALSE;
 
-    Sbie_swprintf(prop_name, SBIE L"_DDE_%08p", (void*)hWnd);
+    Sbie_snwprintf(prop_name, 64, SBIE L"_DDE_%08p", (void*)hWnd);
     hClientWnd = Gui_GetPropCommon((HWND)wParam, prop_name, TRUE, 0);
     if (TlsData->gui_dde_client_hwnd != (HWND)-1) {
         if ((! hClientWnd) || (hClientWnd != TlsData->gui_dde_client_hwnd))
@@ -492,7 +492,7 @@ _FX BOOLEAN Gui_DDE_Post_In_Box(
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     WCHAR prop_name[64];
-    Sbie_swprintf(prop_name, SBIE L"_DDE_%08p", (void*)hWnd);
+    Sbie_snwprintf(prop_name, 64, SBIE L"_DDE_%08p", (void*)hWnd);
     __sys_SetPropW((HWND)wParam, prop_name, (HWND)wParam);
 
     cds.dwData = tzuk;

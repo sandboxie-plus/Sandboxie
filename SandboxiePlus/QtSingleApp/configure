@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ "x$1" != "x" -a "x$1" != "x-library" ]; then
+    echo "Usage: $0 [-library]"
+    echo 
+    echo "-library: Build the component as a dynamic library (DLL). Default is to"
+    echo "          include the component source code directly in the application."
+    echo 
+    exit 0
+fi
+
+rm -f config.pri
+if [ "x$1" = "x-library" ]; then
+    echo "Configuring to build this component as a dynamic library."
+    echo "SOLUTIONS_LIBRARY = yes" > config.pri
+fi
+
+echo
+echo "This component is now configured."
+echo
+echo "To build the component library (if requested) and example(s),"
+echo "run qmake and your make command."
+echo
+echo "To remove or reconfigure, run make distclean."
+echo

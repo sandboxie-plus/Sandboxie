@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 #include "process.h"
 #include "conf.h"
 #include "api.h"
+#include "util.h"
 #include "common/my_version.h"
 
 
@@ -60,7 +62,7 @@ static void *Token_RestrictHelper1(
     void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc);
 
 static NTSTATUS Token_RestrictHelper2(
-    void *TokenObject, ULONG *OutIntegrityLevel, ULONG SessionId);
+    void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc);
 
 static void *Token_RestrictHelper3(
     void *TokenObject, TOKEN_GROUPS *Groups, TOKEN_PRIVILEGES *Privileges,
@@ -142,6 +144,15 @@ static UCHAR AnonymousLogonSid[12] = {
     SECURITY_ANONYMOUS_LOGON_RID,0,0,0      // SubAuthority
 };
 
+static UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
+
+static UCHAR SystemLogonSid[12] = {
+	1,                                      // Revision
+	1,                                      // SubAuthorityCount
+	0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+	SECURITY_LOCAL_SYSTEM_RID,0,0,0         // SubAuthority
+};
+
 UCHAR Sbie_Token_SourceName[5] = { 's', 'b', 'o', 'x', 0 };
 
 #define ProcessMitigationPolicy 52
@@ -203,6 +214,32 @@ _FX BOOLEAN Token_Init(void)
     MySetGroup(1) = Token_PowerUsersSid;
 
 #undef MySetGroup
+
+	//
+	// find the sid of the sandboxie user if present
+	//
+
+	// SbieLogin BEGIN
+	if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE))
+	{
+		WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
+		UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
+		if (GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName) && AccountName.Length < 64)
+		{
+			wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
+			AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
+			//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
+
+			SID_NAME_USE use;
+			ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
+			WCHAR DomainBuff[20]; // doesn't work without this
+			UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
+
+			SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
+			//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
+		}
+	}
+	// SbieLogin END
 
     //
     // find SepFilterToken for Token_RestrictHelper1
@@ -428,10 +465,15 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
     PrimaryToken = PsReferencePrimaryToken(ProcessObject);
     if (!PrimaryToken) {
 
-        Log_Status_Ex_Session(
-            MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id, proc->pid);
         return NULL;
     }
+
+	// OpenToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)) {
+		return PrimaryToken;
+	}
+	// OpenToken END
 
     // DbgPrint("   Process Token %08X - %d <%S>\n", PrimaryToken, proc->pid, proc->image_name);
 
@@ -459,7 +501,7 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
 _FX void *Token_Filter(void *TokenObject, ULONG DropRights, ULONG SessionId)
 {
     TOKEN_GROUPS *groups;
-    void *ReturnToken;
+    void *ReturnToken = NULL;
     NTSTATUS status;
     ULONG i, j;
     BOOLEAN ShouldFilterToken = FALSE;
@@ -775,6 +817,15 @@ _FX void *Token_Restrict(
     TOKEN_PRIVILEGES *privs;
     TOKEN_USER *user;
     void *NewTokenObject;
+	
+	// OpenToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
+		SeFilterToken(TokenObject, 0, NULL, NULL, NULL, &NewTokenObject);
+		return NewTokenObject;
+		//ObReferenceObject(TokenObject);
+		//return TokenObject;
+	}
+	// OpenToken END
 
     groups = Token_Query(TokenObject, TokenGroups, proc->box->session_id);
     privs = Token_Query(TokenObject, TokenPrivileges, proc->box->session_id);
@@ -822,6 +873,9 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
     BOOLEAN ok = FALSE;
     ULONG UserAndGroups_offset = 0;
 
+	if (!proc->primary_token)
+		return TRUE;
+
 #ifdef _WIN64
 
     if (Driver_OsVersion <= DRIVER_WINDOWS_7) {
@@ -865,8 +919,7 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
     status = PsLookupProcessByProcessId(proc->pid, &ProcessObject);
     if (!NT_SUCCESS(status)) {
 
-        Log_Status_Ex_Session(
-            MSG_1222, 0x37, status, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x37, status, NULL, proc->box->session_id, proc->pid);
 
     }
     else {
@@ -874,8 +927,7 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
         void *TokenObject = PsReferencePrimaryToken(ProcessObject);
         if (!TokenObject) {
 
-            Log_Status_Ex_Session(
-                MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id);
+			Log_Status_Ex_Process(MSG_1222, 0x31, STATUS_NO_TOKEN, NULL, proc->box->session_id, proc->pid);
 
         }
         else
@@ -889,17 +941,19 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
                     ((ULONG_PTR)TokenObject + UserAndGroups_offset);
 
                 // Windows 8.1 update
-                if (SidAndAttrsInToken->Sid == (PSID)AnonymousLogonSid)
+                if (SidAndAttrsInToken->Sid == (PSID)AnonymousLogonSid || SidAndAttrsInToken->Sid == (PSID)SandboxieLogonSid)
                 {
+					//DbgPrint("Sbie, restore token pointer\n");
+
                     SidAndAttrsInTokenOrig = *(SID_AND_ATTRIBUTES **)
                         ((ULONG_PTR)(proc->primary_token) + UserAndGroups_offset);
 
                     SidAndAttrsInToken->Sid = SidAndAttrsInTokenOrig->Sid;
-                    ok = TRUE;
                 }
             }
 
             PsDereferencePrimaryToken(TokenObject);
+			ok = TRUE;
         }
 
         ObDereferenceObject(ProcessObject);
@@ -961,7 +1015,7 @@ _FX BOOLEAN Token_IsSharedSid_W8(void *TokenObject)
 _FX void *Token_RestrictHelper1(
     void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc)
 {
-    void *NewTokenObject;
+    void *NewTokenObject = NULL;
     SID_AND_ATTRIBUTES *SidAndAttrsInToken = NULL;
     ULONG RestrictedSidCount_offset = 0;
     ULONG RestrictedSids_offset = 0;
@@ -1148,29 +1202,52 @@ _FX void *Token_RestrictHelper1(
             UCHAR *SidInToken = (UCHAR *)SidAndAttrsInToken->Sid;
             if (SidInToken && SidInToken[1] >= 1) { // SubAuthorityCount >= 1
 
-                //  In windows 8.1 Sid can be in two difference places. One is relative to SidAndAttrsInToken. 
-                //  By debugger, the offset is 0xf0 after SidAndAttrsInToken. The other one is with KB2919355, 
-                //  Sid is not relative to SidAndAttrsInToken, it is shared with other processes and it doesn't 
-                //  have its own memory inside the token. We can't call memcpy on this shared memory. Workaround is
-                //  to assign Sandbox's AnonymousLogonSid to it.
+				PSID NewSid = NULL;
 
-                // If user sid points to the end of token's UserAndGroups, the sid is not shared. 
+				// SbieLogin BEGIN
+				if (Conf_Get_Boolean(proc->box->name, L"SandboxieLogon", 0, FALSE))
+				{
+					if (SandboxieLogonSid[0] != 0)
+						NewSid = (PSID)SandboxieLogonSid;
+					else
+						status = STATUS_UNSUCCESSFUL;
+				}
+				else
+				// SbieLogin END
 
                 // debug tip. To disable anonymous logon, set AnonymousLogon=n
 
                 if (Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
                 {
-                    if (Driver_OsVersion >= DRIVER_WINDOWS_8
-                        &&  Driver_OsVersion <= DRIVER_WINDOWS_10
-                        &&  Token_IsSharedSid_W8(NewTokenObject)) {
-
-                        SidAndAttrsInToken->Sid = (PSID)AnonymousLogonSid;
-                    }
-                    else {
-                        memcpy(SidInToken, AnonymousLogonSid, sizeof(AnonymousLogonSid));
-                    }
+					NewSid = (PSID)AnonymousLogonSid;
                 }
 
+				if (NewSid != NULL)
+				{
+					//  In windows 8.1 Sid can be in two difference places. One is relative to SidAndAttrsInToken. 
+					//  By debugger, the offset is 0xf0 after SidAndAttrsInToken. The other one is with KB2919355, 
+					//  Sid is not relative to SidAndAttrsInToken, it is shared with other processes and it doesn't 
+					//  have its own memory inside the token. We can't call memcpy on this shared memory. Workaround is
+					//  to assign Sandbox's AnonymousLogonSid to it.
+
+					// If user sid points to the end of token's UserAndGroups, the sid is not shared. 
+
+					if ((Driver_OsVersion >= DRIVER_WINDOWS_8
+						&& Driver_OsVersion <= DRIVER_WINDOWS_10
+						&& Token_IsSharedSid_W8(NewTokenObject))
+					
+					// When trying apply the SbieLogin token to a system process there is not enough space in the SID
+					// so we need to use a workaround not unlike the one for win 8
+						|| (RtlLengthSid(SidInToken) < RtlLengthSid(NewSid))
+						) {
+
+						//DbgPrint("Sbie, hack token pointer\n");
+						SidAndAttrsInToken->Sid = (PSID)NewSid;
+					}
+					else {
+						memcpy(SidInToken, NewSid, RtlLengthSid(NewSid));
+					}
+				}
             }
             else
                 status = STATUS_UNKNOWN_REVISION;
@@ -1188,7 +1265,7 @@ _FX void *Token_RestrictHelper1(
         if (NT_SUCCESS(status)) {
 
             status = Token_RestrictHelper2(
-                NewTokenObject, OutIntegrityLevel, proc->box->session_id);
+                NewTokenObject, OutIntegrityLevel, proc);
         }
 
         if (!NT_SUCCESS(status)) {
@@ -1203,7 +1280,7 @@ _FX void *Token_RestrictHelper1(
     //
 
     if (!NT_SUCCESS(status))
-        Log_Status_Ex_Session(MSG_1222, 0x32, status, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x32, status, NULL, proc->box->session_id, proc->pid);
 
     return NewTokenObject;
 }
@@ -1215,7 +1292,7 @@ _FX void *Token_RestrictHelper1(
 
 
 _FX NTSTATUS Token_RestrictHelper2(
-    void *TokenObject, ULONG *OutIntegrityLevel, ULONG SessionId)
+    void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc)
 {
     NTSTATUS status;
     ULONG label;
@@ -1224,10 +1301,15 @@ _FX NTSTATUS Token_RestrictHelper2(
         return STATUS_SUCCESS;
 
     label = (ULONG)(ULONG_PTR)Token_Query(
-        TokenObject, TokenIntegrityLevel, SessionId);
+        TokenObject, TokenIntegrityLevel, proc->box->session_id);
 
     if (OutIntegrityLevel)
         *OutIntegrityLevel = label;
+
+	// OpenToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"KeepTokenIntegrity", 0, FALSE))
+		return STATUS_SUCCESS;
+	// OpenToken END
 
     if (label & 0xFFFF00FF)
         status = STATUS_INVALID_LEVEL;
@@ -1318,6 +1400,7 @@ _FX void *Token_RestrictHelper3(
 
         BOOLEAN UserSidAlreadyInGroups = FALSE;
         BOOLEAN AnonymousLogonSidAlreadyInGroups = FALSE;
+		// todo: should we do somethign with SandboxieLogonSid here?
 
         n = 0;
 
@@ -1422,7 +1505,7 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
 {
     NTSTATUS status;
     HANDLE ProcessHandle;
-    ULONG *PtrPrimaryTokenFrozen;
+    ULONG *PtrPrimaryTokenFrozen = NULL;
     ULONG SavePrimaryTokenFrozen;
 
     //
@@ -1648,6 +1731,11 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
     NTSTATUS status;
     BOOLEAN ok = FALSE;
 
+	// OriginalToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+		return TRUE;
+	// OriginalToken END
+
     //
     // lookup the process object to get the old primary token
     //
@@ -1655,8 +1743,7 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
     status = PsLookupProcessByProcessId(proc->pid, &ProcessObject);
     if (!NT_SUCCESS(status)) {
 
-        Log_Status_Ex_Session(
-            MSG_1222, 0x37, status, NULL, proc->box->session_id);
+		Log_Status_Ex_Process(MSG_1222, 0x37, status, NULL, proc->box->session_id, proc->pid);
 
     }
     else {
@@ -1898,8 +1985,8 @@ ULONG GetThreadTokenOwnerPid()
     ULONG ulResult = 0;
     PVOID impToken = NULL;
 
-    if (NT_SUCCESS(ZwOpenThreadToken(NtCurrentThread(), TOKEN_ALL_ACCESS, FALSE, &hHandle)) &&
-        NT_SUCCESS(ObReferenceObjectByHandle(hHandle, TOKEN_ALL_ACCESS, *SeTokenObjectType, KernelMode, &impToken, NULL)))
+	if (NT_SUCCESS(ZwOpenThreadToken(NtCurrentThread(), TOKEN_ALL_ACCESS, FALSE, &hHandle)) &&
+		NT_SUCCESS(ObReferenceObjectByHandle(hHandle, TOKEN_ALL_ACCESS, *SeTokenObjectType, UserMode, &impToken, NULL)))
     {
         // first field is token source
         TOKEN_SOURCE* tokenName = (TOKEN_SOURCE*)impToken;
@@ -1910,7 +1997,7 @@ ULONG GetThreadTokenOwnerPid()
         }
     }
     if (hHandle)
-        ZwClose(hHandle);
+        NtClose(hHandle);
     if (impToken)
         ObDereferenceObject(impToken);
     return ulResult;

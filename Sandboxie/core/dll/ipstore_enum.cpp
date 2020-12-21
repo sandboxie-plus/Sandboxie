@@ -296,7 +296,7 @@ void IEnumPStoreTypesImpl::StringFromGUID(const GUID *guid, WCHAR *str)
         UCHAR y5;
         UCHAR y6;
     } *s = (_s *)guid;
-    Sbie_swprintf(str, L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
+    Sbie_snwprintf(str, 48, L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
         s->a, s->b, s->c,
         s->x1, s->x2,
         s->y1, s->y2, s->y3, s->y4, s->y5, s->y6);

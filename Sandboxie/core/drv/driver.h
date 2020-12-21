@@ -83,7 +83,9 @@ typedef struct _KEY_MOUNT           KEY_MOUNT;
 //---------------------------------------------------------------------------
 
 
+#ifdef OLD_DDK
 extern P_NtSetInformationToken          ZwSetInformationToken;
+#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- index.qdoc -->
+<head>
+  <title>Single Application</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">Single Application<br /><span class="subtitle"></span>
+</h1>
+<a name="description"></a>
+<h2>Description</h2>
+<p>The <a href="qtsingleapplication.html">QtSingleApplication</a> component provides support for applications that can be only started once per user.</p>
+<p>For some applications it is useful or even critical that they are started only once by any user. Future attempts to start the application should activate any already running instance, and possibly perform requested actions, e.g&#x2e; loading a file, in that instance.</p>
+<p>The <a href="qtsingleapplication.html">QtSingleApplication</a> class provides an interface to detect a running instance, and to send command strings to that instance. For console (non-GUI) applications, the <a href="qtsinglecoreapplication.html">QtSingleCoreApplication</a> variant is provided, which avoids dependency on <a href="http://qt.nokia.com/doc/4.6/qtgui.html">QtGui</a>.</p>
+<a name="classes"></a>
+<h2>Classes</h2>
+<ul>
+<li><a href="qtsingleapplication.html">QtSingleApplication</a></li>
+<li><a href="qtsinglecoreapplication.html">QtSingleCoreApplication</a></li>
+</ul>
+<a name="examples"></a>
+<h2>Examples</h2>
+<ul>
+<li><a href="qtsingleapplication-example-trivial.html">A Trivial Example</a></li>
+<li><a href="qtsingleapplication-example-loader.html">Loading Documents</a></li>
+<li><a href="qtsinglecoreapplication-example-console.html">A Non-GUI Example</a></li>
+</ul>
+<a name="tested-platforms"></a>
+<h2>Tested platforms</h2>
+<ul>
+<li>Qt 4.4, 4.5 / Windows XP / MSVC.NET 2005</li>
+<li>Qt 4.4, 4.5 / Linux / gcc</li>
+<li>Qt 4.4, 4.5 / MacOS X 10.5 / gcc</li>
+</ul>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2010 Nokia Corporation and/or its subsidiary(-ies)</td>
+<td width="40%" align="center"><a href="http://qt.nokia.com/doc/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

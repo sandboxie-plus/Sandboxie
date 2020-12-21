@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,8 +36,8 @@ typedef long NTSTATUS;
 #include "common/defines.h"
 #include "common/list.h"
 
-extern __declspec(dllexport) int __CRTDECL Sbie_swprintf(wchar_t *_Buffer, const wchar_t * const _Format, ...);
-extern __declspec(dllexport) int __CRTDECL Sbie_sprintf(char *_Buffer, const char * const _Format, ...);
+extern __declspec(dllexport) int __CRTDECL Sbie_snwprintf(wchar_t *_Buffer, size_t Count, const wchar_t * const _Format, ...);
+extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t Count, const char * const _Format, ...);
 
 
 //---------------------------------------------------------------------------
@@ -46,6 +47,8 @@ extern __declspec(dllexport) int __CRTDECL Sbie_sprintf(char *_Buffer, const cha
 
 #define TRUE_NAME_BUFFER        0
 #define COPY_NAME_BUFFER        1
+#define TMPL_NAME_BUFFER        2
+#define NAME_BUFFER_COUNT       3
 #define NAME_BUFFER_DEPTH       12
 
 
@@ -151,8 +154,8 @@ typedef struct _THREAD_DATA {
     // name buffers:  first index is for true name, second for copy name
     //
 
-    WCHAR *name_buffer[2][NAME_BUFFER_DEPTH];
-    ULONG name_buffer_len[2][NAME_BUFFER_DEPTH];
+    WCHAR *name_buffer[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
+    ULONG name_buffer_len[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
     int depth;
 
     //

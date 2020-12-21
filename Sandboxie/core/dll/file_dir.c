@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -48,11 +49,13 @@ typedef struct _FILE_MERGE_FILE {
     ULONG name_max_len;
     UNICODE_STRING name_uni;
     BOOLEAN have_entry;
+	BOOLEAN saved_have_entry;
     BOOLEAN more_files;
     BOOLEAN RestartScan;
     BOOLEAN no_file_ids;
     POOL *cache_pool;
     LIST cache_list;
+	ULONG scram_key;
 
 } FILE_MERGE_FILE;
 
@@ -66,8 +69,9 @@ typedef struct _FILE_MERGE {
     BOOLEAN first_request;
 
     UNICODE_STRING file_mask;
-    FILE_MERGE_FILE true_file;
-    FILE_MERGE_FILE copy_file;
+	FILE_MERGE_FILE* files; // copy file, snapshot_1 file, snapshot_2 file, ..., true file
+	ULONG files_count;
+	FILE_MERGE_FILE* true_ptr;
 
     ULONG name_len;     // in bytes, excluding NULL
     WCHAR name[0];
@@ -516,6 +520,9 @@ _FX NTSTATUS File_Merge(
         merge = Dll_Alloc(sizeof(FILE_MERGE) + TruePath_len + sizeof(WCHAR));
         memzero(merge, sizeof(FILE_MERGE));
 
+		merge->files = Dll_Alloc(sizeof(FILE_MERGE_FILE) * (2 + File_Snapshot_Count));
+		memzero(merge->files, sizeof(FILE_MERGE_FILE) * (2 + File_Snapshot_Count));
+
         merge->handle = FileHandle;
         merge->cant_merge = FALSE;
         merge->first_request = TRUE;
@@ -533,7 +540,7 @@ _FX NTSTATUS File_Merge(
             //
             // shares provided by Remote Desktop can't provide file IDs
             //
-            merge->true_file.no_file_ids = TRUE;
+			merge->files[0].no_file_ids = TRUE;
         }
 
         if (File_Windows2000) {
@@ -542,8 +549,8 @@ _FX NTSTATUS File_Merge(
             // FileIdBothDirectoryInformation, although according to
             // documentation it is only supported on Windows XP and later
             //
-            merge->true_file.no_file_ids = TRUE;
-            merge->copy_file.no_file_ids = TRUE;
+			for(ULONG i = 0; i < 2 + File_Snapshot_Count; i++)
+				merge->files[i].no_file_ids = TRUE;
         }
 
         List_Insert_After(&File_DirHandles, NULL, merge);
@@ -562,7 +569,7 @@ _FX NTSTATUS File_Merge(
 
         status = STATUS_BAD_INITIAL_PC;
 
-    } else if (! merge->copy_file.handle) {
+    } else if (!merge->files[0].handle) {
 
         //
         // open the true and copy directories, if we haven't already.
@@ -597,195 +604,309 @@ _FX NTSTATUS File_Merge(
 
 
 _FX NTSTATUS File_OpenForMerge(
-    FILE_MERGE *merge, WCHAR *TruePath, WCHAR *CopyPath)
+	FILE_MERGE *merge, WCHAR *TruePath, WCHAR *CopyPath)
 {
-    NTSTATUS status;
-    OBJECT_ATTRIBUTES objattrs;
-    UNICODE_STRING objname;
-    IO_STATUS_BLOCK IoStatusBlock;
-    union {
-        FILE_BASIC_INFORMATION basic;
-    } info;
-    ULONG len;
-    WCHAR *ptr;
-    // BOOLEAN TruePathIsRoot;
+	NTSTATUS status;
+	OBJECT_ATTRIBUTES objattrs;
+	UNICODE_STRING objname;
+	IO_STATUS_BLOCK IoStatusBlock;
+	union {
+		FILE_BASIC_INFORMATION basic;
+	} info;
+	ULONG len;
+	WCHAR *ptr;
+	// BOOLEAN TruePathIsRoot;
+	BOOLEAN TruePathDeleted = FALSE; // indicates that one of the parent snapshots deleted the true directory
+	BOOLEAN NoCopyPath = FALSE;
 
-    InitializeObjectAttributes(
-        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+	InitializeObjectAttributes(
+		&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    //
-    // open the copy file
-    //
+	//
+	// open the copy file
+	//
 
-    if (File_CheckDeletedParent(CopyPath))
-        return STATUS_OBJECT_PATH_NOT_FOUND;
+	if (File_CheckDeletedParent(CopyPath))
+		return STATUS_OBJECT_PATH_NOT_FOUND;
 
-    RtlInitUnicodeString(&objname, CopyPath);
+	RtlInitUnicodeString(&objname, CopyPath);
 
-    status = __sys_NtCreateFile(
-        &merge->copy_file.handle,
-        FILE_GENERIC_READ,              // DesiredAccess
-        &objattrs,
-        &IoStatusBlock,
-        NULL,                           // AllocationSize
-        0,                              // FileAttributes
-        FILE_SHARE_VALID_FLAGS,         // ShareAccess
-        FILE_OPEN,                      // CreateDisposition
-        FILE_SYNCHRONOUS_IO_NONALERT,   // CreateOptions
-        NULL,                           // EaBuffer
-        0);                             // EaLength
+	status = __sys_NtCreateFile(
+		&merge->files[0].handle,
+		FILE_GENERIC_READ,              // DesiredAccess
+		&objattrs,
+		&IoStatusBlock,
+		NULL,                           // AllocationSize
+		0,                              // FileAttributes
+		FILE_SHARE_VALID_FLAGS,         // ShareAccess
+		FILE_OPEN,                      // CreateDisposition
+		FILE_SYNCHRONOUS_IO_NONALERT,   // CreateOptions
+		NULL,                           // EaBuffer
+		0);                             // EaLength
 
-    if (NT_SUCCESS(status)) {
+	if (NT_SUCCESS(status)) {
 
-        //
-        // if the copy file exists, check if it is marked as deleted,
-        // and if so, close it and pretend it doesn't exist;  otherwise
-        // make sure it is a directory file
-        //
+		//
+		// if the copy file exists, check if it is marked as deleted,
+		// and if so, close it and pretend it doesn't exist;  otherwise
+		// make sure it is a directory file
+		//
 
-        status = __sys_NtQueryInformationFile(
-            merge->copy_file.handle, &IoStatusBlock, &info,
-            sizeof(FILE_BASIC_INFORMATION), FileBasicInformation);
+		status = __sys_NtQueryInformationFile(
+			merge->files[0].handle, &IoStatusBlock, &info,
+			sizeof(FILE_BASIC_INFORMATION), FileBasicInformation);
 
-        if (NT_SUCCESS(status)) {
+		if (NT_SUCCESS(status)) {
 
-            if (IS_DELETE_MARK(&info.basic.CreationTime)) {
+			if (IS_DELETE_MARK(&info.basic.CreationTime)) {
 
-                status = STATUS_OBJECT_NAME_NOT_FOUND;
+				status = STATUS_OBJECT_NAME_NOT_FOUND;
 
-            } else if ((info.basic.FileAttributes &
-                                    FILE_ATTRIBUTE_DIRECTORY) == 0) {
+			}
+			else if ((info.basic.FileAttributes &
+				FILE_ATTRIBUTE_DIRECTORY) == 0) {
 
-                status = STATUS_INVALID_PARAMETER;
-            }
-        }
+				status = STATUS_INVALID_PARAMETER;
+			}
+		}
 
-        if (! NT_SUCCESS(status)) {
+		if (!NT_SUCCESS(status)) {
 
-            __sys_NtClose(merge->copy_file.handle);
-            merge->copy_file.handle = NULL;
-            return status;
-        }
+			__sys_NtClose(merge->files[0].handle);
+			merge->files[0].handle = NULL;
+			return status;
+		}
 
-        //
-        // copy file passed all checks;  indicate it is ready for use
-        //
+		//
+		// copy file passed all checks;  indicate it is ready for use
+		//
 
-        merge->copy_file.more_files = TRUE;
-        merge->copy_file.RestartScan = TRUE;
+		merge->files[0].more_files = TRUE;
+		merge->files[0].RestartScan = TRUE;
+		merge->files_count++;
+	}
+	else {
 
-    } else {
+		//
+		// if there is no copy file, we don't need to merge anything,
+		// and can let the system work directly on the true file
+		//
 
-        //
-        // if there is no copy file, we don't need to merge anything,
-        // and can let the system work directly on the true file
-        //
+		if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
+			status == STATUS_OBJECT_PATH_NOT_FOUND ||
+			status == STATUS_ACCESS_DENIED) {
 
-        if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
-            status == STATUS_OBJECT_PATH_NOT_FOUND ||
-            status == STATUS_ACCESS_DENIED) {
+			NoCopyPath = TRUE;
+		}
+		else
+			return status;
+	}
 
-            status = STATUS_BAD_INITIAL_PC;
-        }
+	//
+	// Now open the parent snapshots if present, and it's aprent and so on....
+	//
 
-        return status;
-    }
+	if (File_Snapshot != NULL)
+	{
+		for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != NULL; Cur_Snapshot = Cur_Snapshot->Parent)
+		{
+			WCHAR* TmplName = File_MakeSnapshotPath(Cur_Snapshot, CopyPath);
+			if (!TmplName)
+				break;
 
-    //
-    // true path must end with a backslash, so that we are able to
-    // open the root directory of the volume device
-    //
+			RtlInitUnicodeString(&objname, TmplName);
 
-    // TruePathIsRoot = FALSE;
+			status = __sys_NtCreateFile(
+				&merge->files[merge->files_count].handle,
+				FILE_GENERIC_READ,              // DesiredAccess
+				&objattrs,
+				&IoStatusBlock,
+				NULL,                           // AllocationSize
+				0,                              // FileAttributes
+				FILE_SHARE_VALID_FLAGS,         // ShareAccess
+				FILE_OPEN,                      // CreateDisposition
+				FILE_SYNCHRONOUS_IO_NONALERT,   // CreateOptions
+				NULL,                           // EaBuffer
+				0);                             // EaLength
 
-    len = wcslen(TruePath) * sizeof(WCHAR);
-    if (len > sizeof(WCHAR)) {
-        ptr = &TruePath[len / sizeof(WCHAR) - 1];
-        if (*ptr != L'\\') {
-            ptr[1] = L'\\';
-            ptr[2] = L'\0';
-            len += sizeof(WCHAR);
-        } else {
-            ptr = NULL;
-            // TruePathIsRoot = TRUE;
-        }
-    } else
-        ptr = NULL;
+			if (NT_SUCCESS(status)) {
 
-    objname.Length = (USHORT)len;
-    objname.MaximumLength = objname.Length + sizeof(WCHAR);
-    objname.Buffer = TruePath;
+				//
+				// if the copy file exists, check if it is marked as deleted,
+				// and if so, close it and pretend it doesn't exist;  otherwise
+				// make sure it is a directory file
+				//
 
-    //
-    // open the true file
-    //
+				// todo reduce redundant code, combine with the code for the copy_file
 
-    status = __sys_NtCreateFile(
-        &merge->true_file.handle,
-        FILE_GENERIC_READ,              // DesiredAccess
-        &objattrs,
-        &IoStatusBlock,
-        NULL,                           // AllocationSize
-        0,                              // FileAttributes
-        FILE_SHARE_VALID_FLAGS,         // ShareAccess
-        FILE_OPEN,                      // CreateDisposition
-        FILE_SYNCHRONOUS_IO_NONALERT |  // CreateOptions
-        FILE_DIRECTORY_FILE,
-        NULL,                           // EaBuffer
-        0);                             // EaLength
+				status = __sys_NtQueryInformationFile(
+					merge->files[merge->files_count].handle, &IoStatusBlock, &info,
+					sizeof(FILE_BASIC_INFORMATION), FileBasicInformation);
 
-    if (ptr)
-        ptr[1] = L'\0';
+				if (NT_SUCCESS(status)) {
 
-    //
-    // even if the true directory could not be opened because it isn't
-    // there, or because it is a file rather than a directory, we still
-    // go ahead, and will use only the copy path for the "merge".
-    // for any other error opening the true directory, we abort.
-    //
+					if (IS_DELETE_MARK(&info.basic.CreationTime)) {
 
-    if (! NT_SUCCESS(status)) {
+						status = STATUS_OBJECT_NAME_NOT_FOUND;
 
-        merge->true_file.handle = NULL;
+					}
+					else if ((info.basic.FileAttributes &
+						FILE_ATTRIBUTE_DIRECTORY) == 0) {
 
-        if (status != STATUS_NOT_A_DIRECTORY &&
-            status != STATUS_OBJECT_NAME_NOT_FOUND &&
-            status != STATUS_OBJECT_PATH_NOT_FOUND) {
+						status = STATUS_INVALID_PARAMETER;
+					}
+				}
 
-            __sys_NtClose(merge->copy_file.handle);
-            merge->copy_file.handle = NULL;
+				if (!NT_SUCCESS(status)) {
 
-            if (status == STATUS_ACCESS_DENIED)
-                status = STATUS_BAD_INITIAL_PC;
+					__sys_NtClose(merge->files[merge->files_count].handle);
+					merge->files[merge->files_count].handle = NULL;
 
-            return status;
-        }
+					TruePathDeleted = TRUE;
+					break; // dont look any further
+				}
 
-        status = STATUS_SUCCESS;
+				//
+				// copy file passed all checks;  indicate it is ready for use
+				//
 
-    } else {
+				merge->files[merge->files_count].more_files = TRUE;
+				merge->files[merge->files_count].RestartScan = TRUE;
+				merge->files[merge->files_count].scram_key = Cur_Snapshot->ScramKey;
+				merge->files_count++;
 
-        //
-        // true file passed all checks;  indicate it is ready for use
-        //
+			}
+			else {
 
-        merge->true_file.more_files = TRUE;
-        merge->true_file.RestartScan = TRUE;
-    }
+				//
+				// Ignroe errors here for now // todo
+				//
 
-    //
-    // now that both copy and true directories were opened, we will need to
-    // merge them.  for this to work, we need a sorted directory listing.
-    // NTFS is always sorted, but FAT isn't, so cache the listing if needed.
-    //
-    // note that if we don't have a true handle, we won't merge anything,
-    // so do not have to cache in advance.  on the other hand, if the
-    // true path is cached, we also have to cache the copy path, to make
-    // sure the files will be ordered in the same sequence.  and vice
-    // versa: if the copy path is cached, make sure the true path is cached
-    //
+			}
+		}
+	}
 
-    if (merge->true_file.handle) {
+	//
+	// if there is no copy file, we don't need to merge anything,
+	// and can let the system work directly on the true file
+	//
+
+	if (merge->files_count == 0) {
+
+		status = STATUS_BAD_INITIAL_PC;
+
+		return status;
+	}
+
+	if (TruePathDeleted)
+		goto skip_true_file;
+
+	//
+	// true path must end with a backslash, so that we are able to
+	// open the root directory of the volume device
+	//
+
+	// TruePathIsRoot = FALSE;
+
+	len = wcslen(TruePath) * sizeof(WCHAR);
+	if (len > sizeof(WCHAR)) {
+		ptr = &TruePath[len / sizeof(WCHAR) - 1];
+		if (*ptr != L'\\') {
+			ptr[1] = L'\\';
+			ptr[2] = L'\0';
+			len += sizeof(WCHAR);
+		}
+		else {
+			ptr = NULL;
+			// TruePathIsRoot = TRUE;
+		}
+	}
+	else
+		ptr = NULL;
+
+	objname.Length = (USHORT)len;
+	objname.MaximumLength = objname.Length + sizeof(WCHAR);
+	objname.Buffer = TruePath;
+
+	//
+	// open the true file
+	//
+
+	merge->true_ptr = &merge->files[merge->files_count];
+
+	status = __sys_NtCreateFile(
+		&merge->true_ptr->handle,
+		FILE_GENERIC_READ,              // DesiredAccess
+		&objattrs,
+		&IoStatusBlock,
+		NULL,                           // AllocationSize
+		0,                              // FileAttributes
+		FILE_SHARE_VALID_FLAGS,         // ShareAccess
+		FILE_OPEN,                      // CreateDisposition
+		FILE_SYNCHRONOUS_IO_NONALERT |  // CreateOptions
+		FILE_DIRECTORY_FILE,
+		NULL,                           // EaBuffer
+		0);                             // EaLength
+
+	if (ptr)
+		ptr[1] = L'\0';
+
+	//
+	// even if the true directory could not be opened because it isn't
+	// there, or because it is a file rather than a directory, we still
+	// go ahead, and will use only the copy path for the "merge".
+	// for any other error opening the true directory, we abort.
+	//
+
+	if (!NT_SUCCESS(status)) {
+
+		merge->true_ptr->handle = NULL;
+		merge->true_ptr = NULL;
+
+		if (status != STATUS_NOT_A_DIRECTORY &&
+			status != STATUS_OBJECT_NAME_NOT_FOUND &&
+			status != STATUS_OBJECT_PATH_NOT_FOUND) {
+
+			for (ULONG i = 0; i < merge->files_count; i++) {
+				__sys_NtClose(merge->files[i].handle);
+				merge->files[i].handle = NULL;
+			}
+
+			if (status == STATUS_ACCESS_DENIED)
+				status = STATUS_BAD_INITIAL_PC;
+
+			return status;
+		}
+
+		status = STATUS_SUCCESS;
+
+	}
+	else {
+
+		//
+		// true file passed all checks;  indicate it is ready for use
+		//
+
+		merge->true_ptr->more_files = TRUE;
+		merge->true_ptr->RestartScan = TRUE;
+		merge->files_count++;
+	}
+
+skip_true_file:
+
+	//
+	// now that both copy and true directories were opened, we will need to
+	// merge them.  for this to work, we need a sorted directory listing.
+	// NTFS is always sorted, but FAT isn't, so cache the listing if needed.
+	//
+	// note that if we don't have a true handle, we won't merge anything,
+	// so do not have to cache in advance.  on the other hand, if the
+	// true path is cached, we also have to cache the copy path, to make
+	// sure the files will be ordered in the same sequence.  and vice
+	// versa: if the copy path is cached, make sure the true path is cached
+	//
+
+	if (merge->true_ptr) {
 
         BOOLEAN ForceCache = FALSE;
         if (merge->name_len >= File_MupLen * sizeof(WCHAR)
@@ -801,38 +922,41 @@ _FX NTSTATUS File_OpenForMerge(
         }
 
         status = File_MergeCache(
-                    &merge->true_file, &merge->file_mask, ForceCache);
+                    merge->true_ptr, &merge->file_mask, ForceCache);
 
         if (NT_SUCCESS(status)) {
 
-            BOOLEAN HaveTrueCache = (merge->true_file.cache_pool != NULL);
+            BOOLEAN HaveTrueCache = (merge->true_ptr->cache_pool != NULL);
+			BOOLEAN HaveCopyCache = FALSE;
 
-            status = File_MergeCache(
-                        &merge->copy_file, &merge->file_mask, HaveTrueCache);
+			for (ULONG i = 0; i < merge->files_count - 1; i++) {
 
-            if (NT_SUCCESS(status) && (! HaveTrueCache) &&
-                                    (merge->copy_file.cache_pool != NULL)) {
+				status = File_MergeCache(
+					&merge->files[i], &merge->file_mask, HaveTrueCache);
+
+				if (NT_SUCCESS(status) && merge->files[i].cache_pool != NULL)
+					HaveCopyCache = TRUE;
+			}
+
+            if (!HaveTrueCache && HaveCopyCache) {
 
                 status = File_MergeCache(
-                            &merge->true_file, &merge->file_mask, TRUE);
+                            merge->true_ptr, &merge->file_mask, TRUE);
             }
         }
 
         if (! NT_SUCCESS(status)) {
 
-            if (merge->copy_file.handle) {
-                __sys_NtClose(merge->copy_file.handle);
-                merge->copy_file.handle = NULL;
-            }
-
-            if (merge->true_file.handle) {
-                __sys_NtClose(merge->true_file.handle);
-                merge->true_file.handle = NULL;
-            }
+			for (ULONG i = 0; i < merge->files_count; i++) {
+				if (merge->files[i].handle) {
+					__sys_NtClose(merge->files[i].handle);
+					merge->files[i].handle = NULL;
+				}
+			}
         }
     }
 
-    return status;
+	return status;
 }
 
 
@@ -1145,23 +1269,22 @@ _FX NTSTATUS File_MergeCacheWin2000(
 
 _FX void File_MergeFree(FILE_MERGE *merge)
 {
-    if (merge->true_file.handle)
-        __sys_NtClose(merge->true_file.handle);
-    if (merge->true_file.info)
-        Dll_Free(merge->true_file.info);
-    if (merge->true_file.name)
-        Dll_Free(merge->true_file.name);
-    if (merge->true_file.cache_pool)
-        Pool_Delete(merge->true_file.cache_pool);
+	if (merge->files)
+	{
+		for (ULONG i = 0; i < merge->files_count; i++)
+		{
+			if (merge->files[i].handle)
+				__sys_NtClose(merge->files[i].handle);
+			if (merge->files[i].info)
+				Dll_Free(merge->files[i].info);
+			if (merge->files[i].name)
+				Dll_Free(merge->files[i].name);
+			if (merge->files[i].cache_pool)
+				Pool_Delete(merge->files[i].cache_pool);
+		}
 
-    if (merge->copy_file.handle)
-        __sys_NtClose(merge->copy_file.handle);
-    if (merge->copy_file.info)
-        Dll_Free(merge->copy_file.info);
-    if (merge->copy_file.name)
-        Dll_Free(merge->copy_file.name);
-    if (merge->copy_file.cache_pool)
-        Pool_Delete(merge->copy_file.cache_pool);
+		Dll_Free(merge->files);
+	}
 
     if (merge->file_mask.Buffer)
         Dll_Free(merge->file_mask.Buffer);
@@ -1182,11 +1305,9 @@ _FX NTSTATUS File_GetMergedInformation(
     FILE_INFORMATION_CLASS FileInformationClass,
     BOOLEAN ReturnSingleEntry)
 {
-    NTSTATUS status;
+	NTSTATUS status = STATUS_SUCCESS;
     ULONG info_entry_length;
     FILE_ID_BOTH_DIR_INFORMATION *ptr_info;
-    BOOLEAN save_true_file_have_entry;
-    BOOLEAN save_copy_file_have_entry;
     PVOID prev_entry;
     PVOID next_entry;
     WCHAR *name_ptr;
@@ -1220,13 +1341,11 @@ _FX NTSTATUS File_GetMergedInformation(
 
         // get directory entries from both directories
 
-        status = File_GetFullInformation(
-            &merge->copy_file, &merge->file_mask, TRUE);
-        if (! NT_SUCCESS(status))
-            break;
-
-        status = File_GetFullInformation(
-            &merge->true_file, &merge->file_mask, FALSE);
+		for (ULONG i = 0; i < merge->files_count && NT_SUCCESS(status); i++)
+		{
+			status = File_GetFullInformation(
+				&merge->files[i], &merge->file_mask, TRUE);
+		}
         if (! NT_SUCCESS(status))
             break;
 
@@ -1235,44 +1354,69 @@ _FX NTSTATUS File_GetMergedInformation(
         // take info from the copy directory if a file exists in both
 
         ptr_info = NULL;
-        save_true_file_have_entry = merge->true_file.have_entry;
-        save_copy_file_have_entry = merge->copy_file.have_entry;
+		for (ULONG i = 0; i < merge->files_count; i++)
+			merge->files[i].saved_have_entry = merge->files[i].have_entry;
 
-        if (merge->copy_file.have_entry &&      // both directories
-            merge->true_file.have_entry) {      // have an entry
+        /*if (merge->files[0].have_entry &&      // both directories
+			merge->true_ptr && merge->true_ptr->have_entry) {      // have an entry
 
             int cmp = RtlCompareUnicodeString(
-                      &merge->true_file.name_uni,
-                      &merge->copy_file.name_uni,
+                      &merge->true_ptr->name_uni,
+                      &merge->files[0].name_uni,
                       TRUE);                    // CaseInSensitive
 
             if (cmp < 0) {  // true name sorts before copy name
-                ptr_info = merge->true_file.info;
-                merge->true_file.have_entry = FALSE;
+                ptr_info = merge->true_ptr->info;
+                merge->true_ptr->have_entry = FALSE;
             } else {        // true name equal to or after copy name
-                ptr_info = merge->copy_file.info;
-                merge->copy_file.have_entry = FALSE;
+                ptr_info = merge->files[0].info;
+                merge->files[0].have_entry = FALSE;
                 if (cmp == 0)   // equal
-                    merge->true_file.have_entry = FALSE;
+                    merge->true_ptr->have_entry = FALSE;
             }
 
-        } else if (merge->copy_file.have_entry) {   // only copy
-            merge->copy_file.have_entry = FALSE;
-            ptr_info = merge->copy_file.info;
+        } else if (merge->files[0].have_entry) {   // only copy
+            merge->files[0].have_entry = FALSE;
+            ptr_info = merge->files[0].info;
 
-        } else if (merge->true_file.have_entry) {   // only true
-            ptr_info = merge->true_file.info;
-            merge->true_file.have_entry = FALSE;
+        } else if (merge->true_ptr && merge->true_ptr->have_entry) {   // only true
+            ptr_info = merge->true_ptr->info;
+			merge->true_ptr->have_entry = FALSE;
+        }*/
+
+		FILE_MERGE_FILE* best = &merge->files[0];
+
+		for (ULONG i = 1; i < merge->files_count; i++) {
+
+			FILE_MERGE_FILE* cur = &merge->files[i];
+
+			if (!best->have_entry) {
+				best = cur;
+			}
+			else if (cur->have_entry) {
+
+				int cmp = RtlCompareUnicodeString(&best->name_uni, &cur->name_uni, TRUE); // CaseInSensitive
+
+				if (cmp == 0) // equal - same file in booth, use newer (best)
+					cur->have_entry = FALSE;
+				else if (cmp > 0)
+					best = cur;
+			}
+		}
+
+		if (best->have_entry) {
+            ptr_info = best->info;
+			best->have_entry = FALSE;
         }
 
-        // if the entry found was in the copy directory, then the file
-        // may be marked deleted (see Filesys_Mark_File_Deleted for
-        // details).  if it is marked so, we pretend this entry does
-        // not exist by fetching the following one
+		// if the entry found was in the copy directory, then the file
+		// may be marked deleted (see Filesys_Mark_File_Deleted for
+		// details).  if it is marked so, we pretend this entry does
+		// not exist by fetching the following one
 
-        if (ptr_info == merge->copy_file.info &&
-            IS_DELETE_MARK(&ptr_info->CreationTime))
-                continue;
+		if (ptr_info && (!merge->true_ptr || ptr_info != merge->true_ptr->info) &&
+			IS_DELETE_MARK(&ptr_info->CreationTime))
+			continue;
 
         // if both directories are exhausted, reset the
         // NextEntryOffset field of FILE_*_INFORMATION to
@@ -1306,9 +1450,8 @@ _FX NTSTATUS File_GetMergedInformation(
 
             // current entries have not been used yet,
             // reset flags so they are used again next time
-
-            merge->true_file.have_entry = save_true_file_have_entry;
-            merge->copy_file.have_entry = save_copy_file_have_entry;
+			for (ULONG i = 0; i < merge->files_count; i++)
+				merge->files[i].have_entry = merge->files[i].saved_have_entry;
 
             *(ULONG *)prev_entry = 0;   // reset NextEntryOffset
 
@@ -1357,8 +1500,8 @@ _FX NTSTATUS File_GetMergedInformation(
 
             // current entries have not gotten used yet,
             // reset flags so they are used again next time
-            merge->true_file.have_entry = save_true_file_have_entry;
-            merge->copy_file.have_entry = save_copy_file_have_entry;
+			for (ULONG i = 0; i < merge->files_count; i++)
+				merge->files[i].have_entry = merge->files[i].saved_have_entry;
 
             *(ULONG *)prev_entry = 0;   // reset NextEntryOffset
 
@@ -1490,6 +1633,13 @@ _FX NTSTATUS File_GetFullInformation(
                         continue;
                 }
             }
+
+			//
+			// Scramble the short file name to ensure each snapshot has unique short names
+			//
+
+			if (NT_SUCCESS(status) && qfile->scram_key && qfile->info->ShortNameLength > 0)
+				File_ScrambleShortName(qfile->info->ShortName, &qfile->info->ShortNameLength, qfile->scram_key);
 
             if (status == STATUS_BUFFER_OVERFLOW) {
 
@@ -2074,7 +2224,8 @@ _FX NTSTATUS File_MarkChildrenDeleted(const WCHAR *ParentTruePath)
 
     while (NT_SUCCESS(status)) {
 
-        status = __sys_NtQueryDirectoryFile(
+        //status = __sys_NtQueryDirectoryFile(
+		status = NtQueryDirectoryFile(
             handle, NULL, NULL, NULL, &IoStatusBlock,
             info, info_len, FileDirectoryInformation,
             TRUE, NULL, RestartScan);
@@ -3179,6 +3330,9 @@ _FX NTSTATUS File_SetReparsePoint(
             __leave;
         }
 
+		if (File_Snapshot != NULL)
+			File_FindSnapshotPath(&CopyPath);
+
         SourcePath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
         wcscpy(SourcePath, CopyPath);
 
@@ -3381,8 +3535,10 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
 
         if (send2199) {
             WCHAR *colon = wcschr(rec->path, L':');
-            if (! colon)
-                SbieApi_Log2199(rec->path);
+			if (!colon) {
+				const WCHAR* strings[] = { Dll_BoxName, rec->path, NULL };
+				SbieApi_LogMsgExt(2199, strings);
+			}
             List_Remove(&File_RecPaths, rec);
         }
 
@@ -3545,4 +3701,116 @@ _FX BOOLEAN File_MsoDll(HMODULE module)
 
     File_MsoDllLoaded = TRUE;
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_Scramble_Char
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR File_Scramble_Char(WCHAR wValue, int Key, BOOLEAN scram)
+{
+	//
+	// This function allows to scramble file name charakters properly, 
+	// i.e. no invalid cahacters can result fron this operation.
+	// It does not scramble invalid charakters like: " * / : < > ? \ |
+	// And it does not scramble ~
+	// The entropy of the scrambler is 25,5bit (i.e. 52 million values)
+	//
+
+	char reserved_ch[] = { '\"', '*', '/', ':', '<', '>', '?', '\\', '|' };
+	const int reserved_count = 9;
+	const int max_ch = 0x7E - reserved_count - 0x20;
+
+	int uValue = (wValue & 0x7F);
+	if (uValue < 0x20 || uValue >= 0x7E) // < space || >= ~
+		return wValue;
+	for (int i = 0; i < reserved_count; i++)
+		if (uValue == reserved_ch[i]) return wValue;
+
+	Key &= 0x7f;
+	while (Key >= max_ch)
+		Key -= max_ch;
+	if (!scram)
+		Key = -Key;
+
+	for (int i = 1; i <= reserved_count; i++)
+		if (uValue > reserved_ch[reserved_count - i])	uValue -= 1;
+	uValue -= 0x20;
+
+	uValue += Key;
+
+	if (uValue >= max_ch)
+		uValue -= max_ch;
+	else if (uValue < 0)
+		uValue += max_ch;
+
+	uValue += 0x20;
+	for (int i = 0; i < reserved_count; i++)
+		if (uValue >= reserved_ch[i])	uValue += 1;
+
+	return uValue;
+}
+
+
+//---------------------------------------------------------------------------
+// File_ScrambleShortName
+//---------------------------------------------------------------------------
+
+
+_FX void File_ScrambleShortName(WCHAR* ShortName, CCHAR* ShortNameBytes, ULONG ScramKey)
+{
+	CCHAR ShortNameLength = *ShortNameBytes / sizeof(WCHAR);
+
+	CCHAR dot_pos;
+	WCHAR *dot = wcsrchr(ShortName, L'.');
+	if (dot == NULL) {
+		dot_pos = ShortNameLength;
+		if (ShortNameLength >= 12)
+			return; // this should never not happen!
+		ShortName[ShortNameLength++] = L'.';
+	}
+	else
+		dot_pos = (CCHAR)(dot - ShortName);
+
+	while (ShortNameLength - dot_pos < 4)
+	{
+		if (ShortNameLength >= 12)
+			return; // this should never not happen!
+		ShortName[ShortNameLength++] = L' ';
+	}
+
+	*ShortNameBytes = ShortNameLength * sizeof(WCHAR);
+
+	if (dot_pos > 0)
+		ShortName[dot_pos - 1] = File_Scramble_Char(ShortName[dot_pos - 1], ((char*)&ScramKey)[0], TRUE);
+	for (int i = 1; i <= 3; i++)
+		ShortName[dot_pos + i] = File_Scramble_Char(ShortName[dot_pos + i], ((char*)&ScramKey)[i], TRUE);
+}
+
+
+//---------------------------------------------------------------------------
+// File_UnScrambleShortName
+//---------------------------------------------------------------------------
+
+
+_FX void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey)
+{
+	CCHAR ShortNameLength = (CCHAR)wcslen(ShortName);
+
+	WCHAR *dot = wcsrchr(ShortName, L'.');
+	if (dot == NULL)
+		return; // not a scrambled short name.
+	CCHAR dot_pos = (CCHAR)(dot - ShortName);
+
+	if (dot_pos > 0)
+		ShortName[dot_pos - 1] = File_Scramble_Char(ShortName[dot_pos - 1], ((char*)&ScramKey)[0], FALSE);
+	for (int i = 1; i <= 3; i++)
+		ShortName[dot_pos + i] = File_Scramble_Char(ShortName[dot_pos + i], ((char*)&ScramKey)[i], FALSE);
+
+	while (ShortName[ShortNameLength - 1] == L' ')
+		ShortName[ShortNameLength-- - 1] = 0;
+	if (ShortName[ShortNameLength - 1] == L'.')
+		ShortName[ShortNameLength-- - 1] = 0;
 }

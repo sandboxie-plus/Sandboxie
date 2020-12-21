@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -364,8 +365,7 @@ _FX BOOLEAN File_CreateBoxPath(PROCESS *proc)
         status = STATUS_UNSUCCESSFUL;
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(
-            MSG_FILE_CREATE_BOX_PATH, 0, status, proc->box->file_path);
+		Log_Status_Ex_Process(MSG_FILE_CREATE_BOX_PATH, 0, status, proc->box->file_path, -1, proc->pid);
     }
 
     return (NT_SUCCESS(status));
@@ -630,16 +630,16 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
     ok = Process_GetPaths(proc, open_file_paths, _OpenPipe, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPipe);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
     }
 
-    if (! proc->image_copy) {
+    if (! proc->image_from_box) {
 
         ok = Process_GetPaths(proc, open_file_paths, _OpenFile, TRUE);
 
         if (! ok) {
-            Log_Msg1(MSG_INIT_PATHS, _OpenFile);
+            Log_MsgP1(MSG_INIT_PATHS, _OpenFile, proc->pid);
             return FALSE;
         }
     }
@@ -656,7 +656,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPipe);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
     }
 
@@ -681,7 +681,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 
@@ -693,7 +693,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     if (ok)
         ok = Process_GetPaths(proc, read_file_paths, _ReadPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ReadPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
     }
 
@@ -709,7 +709,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
                 proc, closed_file_paths, _WritePath, TRUE);
     }
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _WritePath);
+        Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
         return FALSE;
     }
 
@@ -750,6 +750,13 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
 {
     BOOLEAN is_open, is_closed;
     BOOLEAN ok;
+
+    //
+    // is this process excempted from the blocade
+    //
+
+	if (proc->AllowInternetAccess)
+		return TRUE;
 
     //
     // should we warn on access to internet resources
@@ -985,11 +992,11 @@ _FX NTSTATUS File_Generic_MyParseProc(
                     L"(FI) %08X %s", device_type, device_name_ptr);
 
                 if (proc->file_trace & TRACE_IGNORE)
-                    Log_Debug_Msg(ignore_str, Driver_Empty);
+                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
                 if (Session_MonitorCount &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
-                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4);
+                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
                 Mem_Free(ignore_str, ignore_str_len);
             }
@@ -1488,7 +1495,7 @@ skip_due_to_home_folder:
             swprintf(access_str, L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
-            Log_Debug_Msg(access_str, Name->Name.Buffer);
+            Log_Debug_Msg(IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE_OR_KEY, access_str, Name->Name.Buffer);
         }
     }
 
@@ -1504,12 +1511,11 @@ skip_due_to_home_folder:
             mon_type |= MONITOR_OPEN;
         else
             mon_type |= MONITOR_DENY;
-        Session_MonitorPut(mon_type, mon_name);
+        Session_MonitorPut(mon_type, mon_name, proc->pid);
 
     } else if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(
-            MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer);
+        Session_MonitorPut(MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
     } else if (msg1313 && status == STATUS_ACCESS_DENIED
                        && device_type == FILE_DEVICE_DISK
@@ -1521,7 +1527,7 @@ skip_due_to_home_folder:
 
         if (proc->file_warn_direct_access) {
 
-            //Log_Msg1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name);
+            //Log_MsgP1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name, proc->pid);
             Process_LogMessage(proc, MSG_BLOCKED_DIRECT_DISK_ACCESS);
         }
     }
@@ -1835,9 +1841,27 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         info->FileNameLength = name_len;
         memcpy(info->FileName, name, name_len);
 
-        status = ZwSetInformationFile(
-            args->file_handle.val, &IoStatusBlock,
-            info, info_len, FileRenameInformation);
+
+		FILE_OBJECT *object;
+		status = ObReferenceObjectByHandle(args->file_handle.val, 0L, *IoFileObjectType, UserMode, (PVOID)&object, NULL);
+
+		if (NT_SUCCESS(status)) {
+
+			HANDLE handle;
+			status = ObOpenObjectByPointer((PVOID)object, OBJ_FORCE_ACCESS_CHECK |
+				OBJ_KERNEL_HANDLE, NULL, GENERIC_ALL, *IoFileObjectType, KernelMode, &handle);
+
+			if (NT_SUCCESS(status)) {
+
+				status = ZwSetInformationFile(
+					handle, &IoStatusBlock, //args->file_handle.val, &IoStatusBlock,
+					info, info_len, FileRenameInformation);
+
+				ZwClose(handle);
+			}
+
+			ObDereferenceObject(object);
+		}
 
         // FIXME, we may get STATUS_NOT_SAME_DEVICE, however, in most cases,
         // this API call is used to rename a file inside a folder, rather
@@ -1846,7 +1870,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         Mem_Free(info, info_len);
     }
 
-    ZwClose(dir_handle);
+    NtClose(dir_handle);
     Mem_Free(path, path_len);
     return status;
 }
@@ -2082,6 +2106,16 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
         memcpy(&proc->closed_file_paths,  &closed_paths,    sizeof(LIST));
         memcpy(&proc->read_file_paths,    &read_paths,      sizeof(LIST));
         memcpy(&proc->write_file_paths,   &write_paths,     sizeof(LIST));
+	}
+
+	//
+	// now we need to re block the internet access
+	//
+
+	if (ok)
+		ok = File_BlockInternetAccess(proc);
+
+	if (ok) {
 
         status = STATUS_SUCCESS;
 

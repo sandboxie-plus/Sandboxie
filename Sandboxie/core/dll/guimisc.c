@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -164,6 +165,11 @@ _FX BOOLEAN Gui_InitMisc(void)
             SBIEDLL_HOOK_GUI(SendInput);
         }
     }
+
+	// NoSbieDesk BEGIN
+	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+		return TRUE;
+	// NoSbieDesk END
 
     SBIEDLL_HOOK_GUI(OpenClipboard);
     SBIEDLL_HOOK_GUI(CloseClipboard);

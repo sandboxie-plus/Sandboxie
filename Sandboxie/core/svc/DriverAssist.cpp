@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -58,6 +59,8 @@ DriverAssist::DriverAssist()
     m_Threads = NULL;
     m_DriverReady = false;
 
+	m_last_message_number = 0;
+
     InitializeCriticalSection(&m_LogMessage_CritSec);
     InitializeCriticalSection(&m_critSecHostInjectedSvcs);
 }
@@ -87,6 +90,7 @@ bool DriverAssist::Initialize()
 
     hThread = CreateThread(NULL, 0,
         (LPTHREAD_START_ROUTINE)StartDriverAsync, m_instance, 0, &tid);
+	CloseHandle(hThread);
 
     return true;
 }
@@ -307,6 +311,7 @@ DWORD DriverAssist::MsgWorkerThreadStub(void *MyMsg)
 void DriverAssist::Thread()
 {
     NTSTATUS status;
+	HANDLE hThread;
     DWORD threadId;
     MSG_DATA *MsgData;
 
@@ -327,7 +332,11 @@ void DriverAssist::Thread()
         }
 
         MsgData->ClassContext = this;
-        CreateThread(NULL, 0, MsgWorkerThreadStub, (void *)MsgData, 0, &threadId);
+		hThread = CreateThread(NULL, 0, MsgWorkerThreadStub, (void *)MsgData, 0, &threadId);
+		if (hThread)
+			CloseHandle(hThread);
+		else
+			VirtualFree(MsgData, 0, MEM_RELEASE);
     }
 }
 
@@ -447,10 +456,10 @@ void DriverAssist::CancelProcess(void *_msg)
         CloseHandle(hProcess);
     }
 
-    if (msg->reason != 0)
-        SbieApi_LogEx(msg->session_id, 2314, L"%S [%d / %d]", msg->process_name, msg->process_id, msg->reason);
-    else
+    if (msg->reason == 0)
         SbieApi_LogEx(msg->session_id, 2314, msg->process_name);
+	else if (msg->reason != -1) // in this case we have SBIE1308 and dont want any other messages
+		SbieApi_LogEx(msg->session_id, 2314, L"%S [%d / %d]", msg->process_name, msg->process_id, msg->reason);
 }
 
 

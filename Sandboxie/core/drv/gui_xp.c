@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -410,7 +411,7 @@ _FX NTSTATUS Gui_Api_Init_XpHook(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         InterlockedExchange(&Gui_HookCount, Gui_HookCount | GUI_HOOK_FAILED);
-        Log_Msg0(MSG_GUI_INIT_FAILED);
+        Log_MsgP0(MSG_GUI_INIT_FAILED, proc->pid);
         return STATUS_UNSUCCESSFUL;
     }
 
@@ -437,7 +438,7 @@ _FX NTSTATUS Gui_Api_Init_XpHook(PROCESS *proc, ULONG64 *parms)
 
     if (! ok) {
         InterlockedExchange(&Gui_HookCount, Gui_HookCount | GUI_HOOK_FAILED);
-        Log_Msg0(MSG_GUI_INIT_FAILED);
+        Log_MsgP0(MSG_GUI_INIT_FAILED, proc->pid);
         return STATUS_UNSUCCESSFUL;
     }
 
@@ -1334,7 +1335,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
                 --nptr; *nptr = L':';
                 --nptr; *nptr = L'$';
 
-                Session_MonitorPut(mon_type, nptr);
+                Session_MonitorPut(mon_type, nptr, proc->pid);
 
                 Mem_Free(nbuf, nlen);
             }
@@ -1348,7 +1349,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
                 swprintf(access_str,
                     L"(GD) ThrdMessage %05d (%04X) to tid=%06d    pid=%06d",
                     Msg, Msg, idThread, idProcess);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
 
             return 0;
@@ -1441,7 +1442,7 @@ _FX ULONG_PTR Gui_NtUserSendInput(
             if (letter) {
 
                 swprintf(access_str, L"(G%c) SendInput", letter);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
         }
 
@@ -1537,7 +1538,7 @@ _FX ULONG_PTR Gui_NtUserSetWindowsHookEx(
                 swprintf(access_str,
                          L"(G%c) WinHook %04d on tid=%06d pid=%06d",
                          letter, HookType, idThread, idProcess);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
         }
 
@@ -1594,7 +1595,7 @@ _FX ULONG_PTR Gui_NtUserSetWinEventHook(
 
                 swprintf(access_str, L"(G%c) AccHook on tid=%06d pid=%06d",
                          letter, idThread, idProcess);
-                Log_Debug_Msg(access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
             }
         }
 

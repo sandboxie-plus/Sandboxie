@@ -111,6 +111,9 @@ P_RpcStringFreeW __sys_RpcStringFreeW = NULL;
 extern WCHAR    *g_Ipc_DynamicPortNames[NUM_DYNAMIC_PORTS];
 
 
+typedef BOOL (WINAPI *P_GetModuleInformation)(_In_ HANDLE hProcess, _In_ HMODULE hModule, _Out_ LPMODULEINFO lpmodinfo, _In_ DWORD cb);
+P_GetModuleInformation __sys_GetModuleInformation = NULL;
+
 //---------------------------------------------------------------------------
 // RpcRt_Init
 //---------------------------------------------------------------------------
@@ -328,7 +331,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         {
             MODULEINFO modinfo;
 
-            if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hWinHttp, &modinfo, sizeof(MODULEINFO)))
+            if (__sys_GetModuleInformation(GetCurrentProcess(), (HANDLE)hWinHttp, &modinfo, sizeof(MODULEINFO)))
             {
                 // return address within WinHttp?
                 if (pRetAddr < hWinHttp + modinfo.SizeOfImage)
@@ -364,7 +367,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS)
     {
         WCHAR msg[512];
-        Sbie_swprintf(msg, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
             StringBinding,
             OutBinding,
             status);
@@ -445,7 +448,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         {
             MODULEINFO modinfo;
 
-            if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hWinSCard, &modinfo, sizeof(MODULEINFO)))
+            if (__sys_GetModuleInformation(GetCurrentProcess(), (HANDLE)hWinSCard, &modinfo, sizeof(MODULEINFO)))
             {
                 // return address within WinSCard?
                 if (pRetAddr < hWinSCard + modinfo.SizeOfImage)
@@ -458,7 +461,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         {
             MODULEINFO modinfo;
 
-            if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hResourcePolicyClient, &modinfo, sizeof(MODULEINFO)))
+            if (__sys_GetModuleInformation(GetCurrentProcess(), (HANDLE)hResourcePolicyClient, &modinfo, sizeof(MODULEINFO)))
             {
                 // return address within ResourcePolicyClient?
                 if (pRetAddr < hResourcePolicyClient + modinfo.SizeOfImage)
@@ -511,7 +514,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         RPC_CSTR   StringUuid;
 
         __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);
-        Sbie_swprintf(msg, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
             Template && Template->StringEndpoint ? Template->StringEndpoint : L"null",
             StringUuid,
             status);
@@ -531,7 +534,7 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
 
     if (hSppc && (pRetAddr > hSppc) && EndPoint == NULL && ObjUuid == NULL) {
         MODULEINFO modinfo;
-        if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hSppc, &modinfo, sizeof(MODULEINFO))) {
+        if (__sys_GetModuleInformation(GetCurrentProcess(), (HANDLE)hSppc, &modinfo, sizeof(MODULEINFO))) {
             if (pRetAddr < hSppc + modinfo.SizeOfImage) {
                 EndPoint =  L"SPPCTransportEndpoint-00001";
                 Scm_Start_Sppsvc();

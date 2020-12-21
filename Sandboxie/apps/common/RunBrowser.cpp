@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -134,7 +135,7 @@ void CRunBrowser::OnNo()
 
 CString CRunBrowser::GetTopicUrl(const CString &topic)
 {
-    return L"https://www.sandboxie.com/index.php?" + topic;
+    return L"https://xanasoft.com/Sandboxie/" + topic;
 }
 
 
@@ -155,5 +156,5 @@ void CRunBrowser::OpenHelp(CWnd *pParentWnd, const CString &topic)
 
 void CRunBrowser::OpenForum(CWnd *pParentWnd)
 {
-    CRunBrowser x(pParentWnd, L"http://forums.sandboxie.com/phpBB3/");
+    CRunBrowser x(pParentWnd, L"https://forum.xanasoft.com/");
 }

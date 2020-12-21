@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -48,22 +49,22 @@ static const WCHAR *_rpc_control = L"\\RPC Control";
 // Ipc_Api_AllowSpoolerPrintToFile
 //---------------------------------------------------------------------------
 
-_FX NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms)
-{
-    API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *pArgs = (API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *)parms;
-
-    if (Process_Find(NULL, NULL)) {     // is caller sandboxed?
-        return STATUS_ACCESS_DENIED;
-    }
-
-    if (pArgs->process_id.val > 0)
-    {
-        PROCESS *proc = Process_Find(pArgs->process_id.val, NULL);
-        if (proc && proc != PROCESS_TERMINATED)
-            proc->m_boolAllowSpoolerPrintToFile = TRUE;
-    }
-    return 0;
-}
+//_FX NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms)
+//{
+//    API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *pArgs = (API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *)parms;
+//
+//    if (Process_Find(NULL, NULL)) {     // is caller sandboxed?
+//        return STATUS_ACCESS_DENIED;
+//    }
+//
+//    if (pArgs->process_id.val > 0)
+//    {
+//        PROCESS *proc = Process_Find(pArgs->process_id.val, NULL);
+//        if (proc && proc != PROCESS_TERMINATED)
+//            proc->m_boolAllowSpoolerPrintToFile = TRUE;
+//    }
+//    return 0;
+//}
 
 
 _FX NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms)
@@ -295,7 +296,7 @@ _FX NTSTATUS Ipc_Api_CopyRpcPortName(enum ENUM_DYNAMIC_PORT_TYPE ePortType, WCHA
     if (Ipc_Dynamic_Ports[ePortType].pPortLock) {
 
         KeEnterCriticalRegion();
-        ExAcquireResourceExclusive(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
+        ExAcquireResourceExclusiveLite(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
 
         if (pSrcPortName && (*pSrcPortName))
         {

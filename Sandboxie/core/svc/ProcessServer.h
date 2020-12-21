@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -60,9 +61,9 @@ protected:
     WCHAR *RunSandboxedCopyString(MSG_HEADER *msg, ULONG ofs, ULONG len);
     HANDLE RunSandboxedGetToken(
             HANDLE CallerProcessHandle, bool CallerInSandbox,
-            const WCHAR *BoxName);
+            const WCHAR *BoxName, ULONG idProcess);
     BOOL RunSandboxedSetDacl(
-            HANDLE CallerProcessHandle, HANDLE NewTokenHandle);
+            HANDLE CallerProcessHandle, HANDLE NewTokenHandle, DWORD AccessMask, bool useUserSID);
     BOOL RunSandboxedStartProcess(
             HANDLE PrimaryTokenHandle, LONG_PTR BoxNameOrModelPid,
             ULONG CallerProcessId,

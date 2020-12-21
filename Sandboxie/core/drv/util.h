@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -88,6 +89,7 @@ WCHAR *SearchUnicodeString(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEAN b
 BOOLEAN UnicodeStringStartsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEAN boolCaseInSensitive);
 BOOLEAN UnicodeStringEndsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEAN boolCaseInSensitive);
 BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName);
+BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_STRING* pData);
 void *memmem(const void *pSearchBuf, size_t nBufSize, const void *pPattern, size_t nPatternSize);
 
 //---------------------------------------------------------------------------

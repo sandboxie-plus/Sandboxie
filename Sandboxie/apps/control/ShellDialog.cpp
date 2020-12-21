@@ -142,7 +142,7 @@ BOOL CShellDialog::OnInitDialog()
 
     CUserSettings &user = CUserSettings::GetInstance();
     user.GetBool(_EnableLogonStart,     logonstart,     TRUE);
-    user.GetBool(_EnableAutoStart,      autostart,      TRUE);
+    user.GetBool(_EnableAutoStart,      autostart,      FALSE);
     user.GetBool(_AddDesktopIcon,       desktop,        TRUE);
     user.GetBool(_AddQuickLaunchIcon,   quicklaunch,    TRUE);
     user.GetBool(_AddContextMenu,       contextmenu,    TRUE);

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -255,6 +256,27 @@ BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName)
         RelativeTo, Path, qrt, NULL, NULL);
 
     return (status == STATUS_SUCCESS);
+}
+
+
+BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_STRING* pData)
+{
+	NTSTATUS status;
+	RTL_QUERY_REGISTRY_TABLE qrt[2];
+
+	memzero(qrt, sizeof(qrt));
+	qrt[0].Flags = RTL_QUERY_REGISTRY_REQUIRED |
+		RTL_QUERY_REGISTRY_DIRECT |
+		RTL_QUERY_REGISTRY_NOVALUE |
+		RTL_QUERY_REGISTRY_NOEXPAND;
+	qrt[0].Name = ValueName;
+	qrt[0].EntryContext = pData;
+	qrt[0].DefaultType = REG_NONE;
+
+	status = RtlQueryRegistryValues(
+		RelativeTo, Path, qrt, NULL, NULL);
+
+	return (status == STATUS_SUCCESS);
 }
 
 void *memmem(const void *pSearchBuf,

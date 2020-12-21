@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="api.c" />
+    <ClCompile Include="box.c" />
+    <ClCompile Include="conf.c" />
+    <ClCompile Include="conf_expand.c" />
+    <ClCompile Include="conf_user.c" />
+    <ClCompile Include="dll.c" />
+    <ClCompile Include="driver.c" />
+    <ClCompile Include="file.c" />
+    <ClCompile Include="file_flt.c" />
+    <ClCompile Include="file_xlat.c" />
+    <ClCompile Include="gui.c" />
+    <ClCompile Include="includes.c" />
+    <ClCompile Include="ipc.c" />
+    <ClCompile Include="ipc_port.c" />
+    <ClCompile Include="ipc_spl.c" />
+    <ClCompile Include="key.c" />
+    <ClCompile Include="log.c" />
+    <ClCompile Include="mem.c" />
+    <ClCompile Include="obj.c" />
+    <ClCompile Include="process.c" />
+    <ClCompile Include="process_api.c" />
+    <ClCompile Include="process_force.c" />
+    <ClCompile Include="process_low.c" />
+    <ClCompile Include="process_util.c" />
+    <ClCompile Include="log_buff.c" />
+    <ClCompile Include="session.c" />
+    <ClCompile Include="syscall.c" />
+    <ClCompile Include="syscall_32.c" />
+    <ClCompile Include="syscall_64.c" />
+    <ClCompile Include="syscall_open.c" />
+    <ClCompile Include="thread.c" />
+    <ClCompile Include="token.c" />
+    <ClCompile Include="util.c" />
+    <ClCompile Include="file_xp.c">
+      <Filter>xp</Filter>
+    </ClCompile>
+    <ClCompile Include="gui_xp.c">
+      <Filter>xp</Filter>
+    </ClCompile>
+    <ClCompile Include="key_xp.c">
+      <Filter>xp</Filter>
+    </ClCompile>
+    <ClCompile Include="obj_xp.c">
+      <Filter>xp</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_64.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_32.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="hook.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_token.c" />
+    <ClCompile Include="process_hook.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pattern.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dll\hook_inst.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dll\hook_tramp.c">
+      <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\list.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="key_flt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="alpc.h" />
+    <ClInclude Include="api.h" />
+    <ClInclude Include="api_defs.h" />
+    <ClInclude Include="api_flags.h" />
+    <ClInclude Include="box.h" />
+    <ClInclude Include="conf.h" />
+    <ClInclude Include="dll.h" />
+    <ClInclude Include="driver.h" />
+    <ClInclude Include="file.h" />
+    <ClInclude Include="gui.h" />
+    <ClInclude Include="ipc.h" />
+    <ClInclude Include="key.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="mem.h" />
+    <ClInclude Include="my_fltkernel.h" />
+    <ClInclude Include="my_winnt.h" />
+    <ClInclude Include="obj.h" />
+    <ClInclude Include="process.h" />
+    <ClInclude Include="log_buff.h" />
+    <ClInclude Include="session.h" />
+    <ClInclude Include="syscall.h" />
+    <ClInclude Include="thread.h" />
+    <ClInclude Include="token.h" />
+    <ClInclude Include="util.h" />
+    <ClInclude Include="hook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pattern.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dll\hook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\list.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_version.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="aulldvrm.asm" />
+    <CustomBuild Include="util_asm.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="xp">
+      <UniqueIdentifier>{7b01653b-c8d7-4ad8-90f8-46b5893113dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hook">
+      <UniqueIdentifier>{863722d1-e0f8-4c06-892f-40ea71ab98f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{73d2a54c-a013-4184-b5e6-74b565ecc048}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

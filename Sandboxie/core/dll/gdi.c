@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -210,6 +211,9 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     // Gui_ConnectToWindowStationAndDesktop
     //
 
+	// NoSbieDesk BEGIN
+	if(!SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	// NoSbieDesk END
     if (! _Initialized) {
 
         if (! Gui_ConnectToWindowStationAndDesktop(User32))
@@ -252,7 +256,7 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     if (rc != 0) {
 
         WCHAR errtxt[48];
-        Sbie_swprintf(errtxt, L"GdiInit.%08p", (void*)rc);
+        Sbie_snwprintf(errtxt, 48, L"GdiInit.%08p", (void*)rc);
         SbieApi_Log(2205, errtxt);
     }
 
@@ -755,95 +759,117 @@ _FX BOOLEAN Gdi_InitZero(void)
 
 
 //---------------------------------------------------------------------------
-// Gdi_Full_Init
+// Gdi_Full_Init_impl
 //---------------------------------------------------------------------------
 
-_FX BOOLEAN Gdi_Full_Init(HMODULE module) {
-    P_CreateDCW CreateDCW;
-    P_GdiAddFontResourceW GdiAddFontResourceW;
-    P_RemoveFontResourceExW RemoveFontResourceExW;
-    P_GetFontResourceInfoW GetFontResourceInfoW;
-    P_CreateScalableFontResourceW CreateScalableFontResourceW;
 
-    P_EnumFontFamiliesEx EnumFontFamiliesExA;
-    P_EnumFontFamiliesEx EnumFontFamiliesExW;
-    P_GetStockObject GetStockObject;
+_FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
+{
+	P_CreateDCW CreateDCW;
+	P_GdiAddFontResourceW GdiAddFontResourceW;
+	P_RemoveFontResourceExW RemoveFontResourceExW;
+	P_GetFontResourceInfoW GetFontResourceInfoW;
+	P_CreateScalableFontResourceW CreateScalableFontResourceW;
 
-    if (Dll_OsBuild < 14291) {
-        return TRUE;
-    }
+	P_EnumFontFamiliesEx EnumFontFamiliesExA;
+	P_EnumFontFamiliesEx EnumFontFamiliesExW;
+	P_GetStockObject GetStockObject;
 
-    InitializeCriticalSection(&Gdi_CritSec);
+	InitializeCriticalSection(&Gdi_CritSec);
 
-    if (! Gdi_InitZero())
-        return FALSE;
+	if (!Gdi_InitZero())
+		return FALSE;
 
-    //
-    // add, remove, get, create fonts
-    //
-    CreateDCW = (P_CreateDCW)
-        GetProcAddress(module, "CreateDCW");
+	//
+	// add, remove, get, create fonts
+	//
+	CreateDCW = (P_CreateDCW)
+		GetProcAddress(module, "CreateDCW");
 
-    GdiAddFontResourceW = (P_GdiAddFontResourceW)
-        GetProcAddress(module, "GdiAddFontResourceW");
+	GdiAddFontResourceW = (P_GdiAddFontResourceW)
+		GetProcAddress(module, "GdiAddFontResourceW");
 
-    RemoveFontResourceExW = (P_RemoveFontResourceExW)
-        GetProcAddress(module, "RemoveFontResourceExW");
+	RemoveFontResourceExW = (P_RemoveFontResourceExW)
+		GetProcAddress(module, "RemoveFontResourceExW");
 
-    GetFontResourceInfoW = (P_GetFontResourceInfoW)
-        GetProcAddress(module, "GetFontResourceInfoW");
+	GetFontResourceInfoW = (P_GetFontResourceInfoW)
+		GetProcAddress(module, "GetFontResourceInfoW");
 
-    CreateScalableFontResourceW = (P_CreateScalableFontResourceW)
-        GetProcAddress(module, "CreateScalableFontResourceWImpl");
+	if (full) {
+		CreateScalableFontResourceW = (P_CreateScalableFontResourceW)
+			GetProcAddress(module, "CreateScalableFontResourceWImpl");
+	}
+	else {
+		CreateScalableFontResourceW = (P_CreateScalableFontResourceW)
+			GetProcAddress(module, "CreateScalableFontResourceW");
+	}
 
 #ifndef _WIN64
 
-    if (Dll_OsBuild >= 8400) {
-        SBIEDLL_HOOK(Gdi_,CreateDCW);
-    }
+	if (Dll_OsBuild >= 8400) {
+		SBIEDLL_HOOK(Gdi_, CreateDCW);
+	}
 
 #endif ! _WIN64
 
-    SBIEDLL_HOOK(Gdi_,GdiAddFontResourceW);
+	SBIEDLL_HOOK(Gdi_, GdiAddFontResourceW);
 
-    SBIEDLL_HOOK(Gdi_,RemoveFontResourceExW);
+	SBIEDLL_HOOK(Gdi_, RemoveFontResourceExW);
 
-    if (GetFontResourceInfoW) {
-        SBIEDLL_HOOK(Gdi_,GetFontResourceInfoW);
-    }
+	if (GetFontResourceInfoW) {
+		SBIEDLL_HOOK(Gdi_, GetFontResourceInfoW);
+	}
 
-    SBIEDLL_HOOK(Gdi_,CreateScalableFontResourceW);
+	SBIEDLL_HOOK(Gdi_, CreateScalableFontResourceW);
 
-    //
-    // enumerate
-    //
+	//
+	// enumerate
+	//
 
-    EnumFontFamiliesExA = (P_EnumFontFamiliesEx)
-        GetProcAddress(module, "EnumFontFamiliesExA");
+	EnumFontFamiliesExA = (P_EnumFontFamiliesEx)
+		GetProcAddress(module, "EnumFontFamiliesExA");
 
-    EnumFontFamiliesExW = (P_EnumFontFamiliesEx)
-        GetProcAddress(module, "EnumFontFamiliesExW");
+	EnumFontFamiliesExW = (P_EnumFontFamiliesEx)
+		GetProcAddress(module, "EnumFontFamiliesExW");
 
-    GetStockObject = (P_GetStockObject)
-        GetProcAddress(module, "GetStockObject");
+	if (full) {
+		GetStockObject = (P_GetStockObject)
+			GetProcAddress(module, "GetStockObject");
+	}
 
-    SBIEDLL_HOOK(Gdi_, EnumFontFamiliesExA);
-    SBIEDLL_HOOK(Gdi_, EnumFontFamiliesExW);
-    SBIEDLL_HOOK(Gdi_, GetStockObject);
+	SBIEDLL_HOOK(Gdi_, EnumFontFamiliesExA);
+	SBIEDLL_HOOK(Gdi_, EnumFontFamiliesExW);
+	if (full) {
+		SBIEDLL_HOOK(Gdi_, GetStockObject);
+	}
 
-    __sys_GetEnhMetaFileBits = (P_GetEnhMetaFileBits)
-        GetProcAddress(module, "GetEnhMetaFileBits");
+	__sys_GetEnhMetaFileBits = (P_GetEnhMetaFileBits)
+		GetProcAddress(module, "GetEnhMetaFileBits");
 
-    __sys_GetBitmapBits = (P_GetBitmapBits)
-        GetProcAddress(module, "GetBitmapBits");
+	__sys_GetBitmapBits = (P_GetBitmapBits)
+		GetProcAddress(module, "GetBitmapBits");
 
-    __sys_DeleteObject = (P_DeleteObject)
-        GetProcAddress(module, "DeleteObject");
+	__sys_DeleteObject = (P_DeleteObject)
+		GetProcAddress(module, "DeleteObject");
 
-    __sys_DeleteEnhMetaFile = (P_DeleteEnhMetaFile)
-        GetProcAddress(module, "DeleteEnhMetaFile");
+	__sys_DeleteEnhMetaFile = (P_DeleteEnhMetaFile)
+		GetProcAddress(module, "DeleteEnhMetaFile");
 
-    return TRUE;
+	return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Gdi_Full_Init
+//---------------------------------------------------------------------------
+
+_FX BOOLEAN Gdi_Full_Init(HMODULE module) 
+{
+	if (Dll_OsBuild < 14291) {
+		return TRUE;
+	}
+
+    return Gdi_Full_Init_impl(module, TRUE);
 }
 
 
@@ -875,87 +901,11 @@ _FX BOOLEAN Gdi_Init_Spool(HMODULE module)
 
 _FX BOOLEAN Gdi_Init(HMODULE module)
 {
-    P_CreateDCW CreateDCW;
-    P_GdiAddFontResourceW GdiAddFontResourceW;
-    P_RemoveFontResourceExW RemoveFontResourceExW;
-    P_GetFontResourceInfoW GetFontResourceInfoW;
-    P_CreateScalableFontResourceW CreateScalableFontResourceW;
+	if (Dll_OsBuild >= 14291) {
+		return TRUE;
+	}
 
-    P_EnumFontFamiliesEx EnumFontFamiliesExA;
-    P_EnumFontFamiliesEx EnumFontFamiliesExW;
-
-    if (Dll_OsBuild >= 14291) {
-        return TRUE;
-    }
-
-    InitializeCriticalSection(&Gdi_CritSec);
-
-    if (! Gdi_InitZero())
-        return FALSE;
-
-    //
-    // add, remove, get, create fonts
-    //
-
-    CreateDCW = (P_CreateDCW)
-        GetProcAddress(module, "CreateDCW");
-
-    GdiAddFontResourceW = (P_GdiAddFontResourceW)
-        GetProcAddress(module, "GdiAddFontResourceW");
-
-    RemoveFontResourceExW = (P_RemoveFontResourceExW)
-        GetProcAddress(module, "RemoveFontResourceExW");
-
-    GetFontResourceInfoW = (P_GetFontResourceInfoW)
-        GetProcAddress(module, "GetFontResourceInfoW");
-
-    CreateScalableFontResourceW = (P_CreateScalableFontResourceW)
-        GetProcAddress(module, "CreateScalableFontResourceW");
-
-#ifndef _WIN64
-
-    if (Dll_OsBuild >= 8400) {
-        SBIEDLL_HOOK(Gdi_,CreateDCW);
-    }
-
-#endif ! _WIN64
-
-    SBIEDLL_HOOK(Gdi_,GdiAddFontResourceW);
-
-    SBIEDLL_HOOK(Gdi_,RemoveFontResourceExW);
-
-    if (GetFontResourceInfoW) {
-        SBIEDLL_HOOK(Gdi_,GetFontResourceInfoW);
-    }
-
-    SBIEDLL_HOOK(Gdi_,CreateScalableFontResourceW);
-
-    //
-    // enumerate
-    //
-
-    EnumFontFamiliesExA = (P_EnumFontFamiliesEx)
-        GetProcAddress(module, "EnumFontFamiliesExA");
-
-    EnumFontFamiliesExW = (P_EnumFontFamiliesEx)
-        GetProcAddress(module, "EnumFontFamiliesExW");
-
-    SBIEDLL_HOOK(Gdi_,EnumFontFamiliesExA);
-    SBIEDLL_HOOK(Gdi_,EnumFontFamiliesExW);
-
-    __sys_GetEnhMetaFileBits = (P_GetEnhMetaFileBits)
-        GetProcAddress(module, "GetEnhMetaFileBits");
-
-    __sys_GetBitmapBits = (P_GetBitmapBits)
-        GetProcAddress(module, "GetBitmapBits");
-
-    __sys_DeleteObject = (P_DeleteObject)
-        GetProcAddress(module, "DeleteObject");
-
-    __sys_DeleteEnhMetaFile = (P_DeleteEnhMetaFile)
-        GetProcAddress(module, "DeleteEnhMetaFile");
-
-    return TRUE;
+	return Gdi_Full_Init_impl(module, FALSE);
 }
 
 //Workaround for a rare chrome crash in a non-vm environment.  There is a chance for gdi32full!GetStockObject to cause a crash 

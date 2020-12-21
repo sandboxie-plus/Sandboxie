@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -42,6 +43,7 @@ typedef struct _FORCE_BOX {
     BOX *box;
     LIST ForceFolder;
     LIST ForceProcess;
+	LIST AlertFolder;
     LIST AlertProcess;
     LIST HostInjectProcess;
 
@@ -116,6 +118,9 @@ static BOX *Process_CheckForceFolder(
 static BOX *Process_CheckForceProcess(
     LIST *boxes, const WCHAR *name, BOOLEAN alert, ULONG *IsAlert);
 
+static void Process_CheckAlertFolder(
+	LIST *boxes, const WCHAR *path, ULONG *IsAlert);
+
 static void Process_CheckAlertProcess(
     LIST *boxes, const WCHAR *name, ULONG *IsAlert);
 
@@ -133,9 +138,9 @@ _FX BOX *Process_GetForcedStartBox(
     NTSTATUS status;
     ULONG SessionId;
     UNICODE_STRING SidString;
-    WCHAR *ImagePath2;
+    WCHAR *ImagePath2 = L"";
     ULONG ImagePath2_len;
-    const WCHAR *ImageName;
+    const WCHAR *ImageName = L"";
 
     PEPROCESS ProcessObject;
     WCHAR *CurDir, *DocArg;
@@ -259,6 +264,16 @@ _FX BOX *Process_GetForcedStartBox(
                 Process_DfpInsert(PROCESS_TERMINATED, ProcessId);
         }
 
+		if (alert != 1)
+			force_alert = FALSE;
+
+		if ((! box) && (alert != 1))
+			Process_CheckAlertFolder(&boxes, ImagePath2, &alert);
+
+		//
+		// for alerting we only care about the process path not about the working dir or command line
+		//
+
         if ((! box) && (alert != 1))
             Process_CheckAlertProcess(&boxes, ImageName, &alert);
     }
@@ -271,16 +286,26 @@ _FX BOX *Process_GetForcedStartBox(
     // sss
     //
 
-    if ((alert == 1) && (! same_image_name)) {
-
-        Log_Msg_Session(MSG_1301, ImageName, NULL, SessionId);
-    }
-
     if (box) {
 
         box = Box_Clone(Driver_Pool, box);
         if (!box)
             box = (BOX *)-1;
+    }
+
+    if ((alert == 1) && (! same_image_name)) {
+
+		if ((force_alert == 0) && Conf_Get_Boolean(NULL, L"StartRunAlertDenied", 0, FALSE))
+		{
+			if(Conf_Get_Boolean(NULL, L"NotifyStartRunAccessDenied", 0, TRUE))
+				Log_Msg_Process(MSG_1308, ImageName, NULL, SessionId, ProcessId);
+
+			box = (BOX *)-1;
+		}
+		else
+		{
+			Log_Msg_Process(MSG_1301, ImageName, NULL, SessionId, ProcessId);
+		}
     }
 
     //
@@ -854,6 +879,7 @@ _FX void Process_CreateForceData(
 
         List_Init(&box->ForceFolder);
         List_Init(&box->ForceProcess);
+		List_Init(&box->AlertFolder);
         List_Init(&box->AlertProcess);
         List_Init(&box->HostInjectProcess);
 
@@ -987,6 +1013,107 @@ _FX void Process_CreateForceData(
             List_Insert_After(&box->ForceProcess, NULL, process);
         }
 
+		//
+        // scan list of AlertFolder settings for the box
+        //
+
+        index2 = 0;
+
+        while (1) {
+
+            static const WCHAR *_AlertFolder = L"AlertFolder";
+            WCHAR *expnd, *buf;
+            ULONG buf_len;
+
+            value = Conf_Get(section, _AlertFolder, index2);
+            if (! value)
+                break;
+            ++index2;
+
+            expnd = Conf_Expand(box->box->expand_args, value, _AlertFolder);
+
+            buf = NULL;
+
+            if (expnd) {
+
+                //
+                // remove duplicate backslashes and translate reparse points
+                //
+
+                WCHAR *tmp1, *tmp2;
+                buf_len = (wcslen(expnd) + 1) * sizeof(WCHAR);
+                tmp1 = Mem_Alloc(Driver_Pool, buf_len);
+
+                if (tmp1) {
+
+                    WCHAR *src_ptr = expnd;
+                    WCHAR *dst_ptr = tmp1;
+                    while (*src_ptr) {
+                        if (src_ptr[0] == L'\\' && src_ptr[1] == L'\\') {
+                            ++src_ptr;
+                            continue;
+                        }
+                        *dst_ptr = *src_ptr;
+                        ++src_ptr;
+                        ++dst_ptr;
+                    }
+                    *dst_ptr = L'\0';
+
+                    tmp2 = File_TranslateReparsePoints(tmp1, Driver_Pool);
+                    if (tmp2) {
+
+                        Mem_Free(tmp1, buf_len);
+                        buf = tmp2;
+                        buf_len = (wcslen(buf) + 1) * sizeof(WCHAR);
+
+                    } else
+                        buf = tmp1;
+                }
+
+                Mem_FreeString(expnd);
+            }
+
+            if (! buf)
+                continue;
+
+            folder = Mem_Alloc(Driver_Pool, sizeof(FORCE_FOLDER));
+            if (! folder) {
+                Mem_Free(buf, buf_len);
+                break;
+            }
+
+            if (wcschr(buf, L'*')) {
+
+                folder->pat =
+                    Pattern_Create(box->box->expand_args->pool, buf, TRUE);
+
+                Mem_Free(buf, buf_len);
+
+                if (! folder->pat) {
+                    Mem_Free(folder, sizeof(FORCE_FOLDER));
+                    break;
+                }
+
+                folder->buf_len = 0;
+                folder->len = 0;
+                folder->buf = NULL;
+
+            } else {
+
+                ULONG len = wcslen(buf);
+                while (len && buf[len - 1] == L'\\')
+                    --len;
+
+                folder->buf_len = buf_len;
+                folder->len = len;
+                folder->buf = buf;
+
+                folder->pat = NULL;
+            }
+
+            List_Insert_After(&box->AlertFolder, NULL, folder);
+        }
+
         //
         // scan list of AlertProcess settings for the box
         //
@@ -1092,6 +1219,22 @@ _FX void Process_DeleteForceData(LIST *boxes)
 
             Mem_Free(process, sizeof(FORCE_PROCESS));
         }
+
+		while (1) {
+
+			folder = List_Head(&box->AlertFolder);
+			if (!folder)
+				break;
+
+			List_Remove(&box->AlertFolder, folder);
+
+			if (folder->pat)
+				Pattern_Free(folder->pat);
+			else
+				Mem_Free(folder->buf, folder->buf_len);
+
+			Mem_Free(folder, sizeof(FORCE_FOLDER));
+		}
 
         while (1) {
 
@@ -1299,6 +1442,114 @@ _FX BOX *Process_CheckForceProcess(
     }
 
     return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_CheckAlertFolder
+//---------------------------------------------------------------------------
+
+
+_FX void Process_CheckAlertFolder(
+    LIST *boxes, const WCHAR *path, ULONG *IsAlert)
+{
+    const WCHAR *ptr;
+    ULONG prefix_len, path_lwr_len;
+    WCHAR *path_lwr;
+    FORCE_BOX *box;
+
+    //
+    // make sure we have a proper path
+    //
+
+    ptr = wcsrchr(path, L'\\');
+    if (ptr && ptr[1])
+        prefix_len = (ULONG)(ptr - path);
+    else
+        prefix_len = 0;
+
+    if (! prefix_len)
+        return;
+
+    //
+    // never alert a program from the Sandboxie home directory
+    //
+
+    if (wcslen(path) > Driver_HomePathNt_Len + 1
+        && _wcsnicmp(path, Driver_HomePathNt, Driver_HomePathNt_Len) == 0
+        && path[Driver_HomePathNt_Len] == L'\\') {
+
+        *IsAlert = 2;
+        return;
+    }
+
+    //
+    // check if the folder is alerted to any box
+    //
+
+    path_lwr = NULL;
+    path_lwr_len = 0;
+
+    box = List_Head(boxes);
+    while (box) {
+
+        FORCE_FOLDER *folder = List_Head(&box->AlertFolder);
+        while (folder) {
+
+            BOOLEAN match = FALSE;
+
+            if (folder->pat) {
+
+                //
+                // wildcards in AlertFolder:  match using pattern
+                //
+
+                if (! path_lwr) {
+                    path_lwr = Mem_AllocString(Driver_Pool, path);
+                    if (path_lwr) {
+                        path_lwr[prefix_len] = L'\0';
+                        _wcslwr(path_lwr);
+                        path_lwr_len = wcslen(path_lwr);
+                    }
+                }
+
+                if (path_lwr) {
+                    match = Pattern_Match(
+                                        folder->pat, path_lwr, path_lwr_len);
+                }
+
+            } else {
+
+                //
+                // no wildcards:  match using nls-aware string comparison
+                //
+
+                ULONG folder_len = folder->len;
+                if (folder_len && prefix_len >= folder_len &&
+                        path[folder_len] == L'\\' &&
+                        Box_NlsStrCmp(path, folder->buf, folder_len) == 0) {
+
+                    match = TRUE;
+                }
+            }
+
+            if (match) {
+
+                if (path_lwr)
+                    Mem_FreeString(path_lwr);
+
+                *IsAlert = 1;
+				return;
+            }
+
+            folder = List_Next(folder);
+        }
+
+        box = List_Next(box);
+    }
+
+    if (path_lwr)
+        Mem_FreeString(path_lwr);
 }
 
 

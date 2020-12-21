@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -924,6 +925,17 @@ int Program_Start(void)
 
         expanded = MyHeapAlloc(8192 * sizeof(WCHAR));
         ExpandEnvironmentStrings(cmdline, expanded, 8192);
+
+		//
+		// If the comman contains a space but no ", try to fix it
+		//
+
+		if (wcsstr(expanded, L" ") && !wcsstr(expanded, L"\"") && _waccess(expanded, 0) != -1)
+		{
+			wmemmove(expanded + 1, expanded, wcslen(expanded) + 1);
+			expanded[0] = L'\"';
+			wcscat(expanded, L"\"");
+		}
 
         ok = CreateProcess(
             NULL, expanded, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);

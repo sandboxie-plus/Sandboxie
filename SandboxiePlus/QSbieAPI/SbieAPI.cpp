@@ -1051,7 +1051,7 @@ SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 	if (DeviceNames.contains(BoxName, Qt::CaseInsensitive))
 		return SB_ERR(tr("The sandbox name can not be a device name."));
 
-	if (BoxName.contains(QRegExp("[A-Za-z0-9_]")))
+	if (BoxName.contains(QRegExp("[^A-Za-z0-9_]")))
 		return SB_ERR(tr("The sandbox name can contain only letters, digits and underscores which are displayed as spaces."));
 
 	return SB_OK;

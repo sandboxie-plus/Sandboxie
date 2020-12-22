@@ -80,7 +80,8 @@ void CNewBoxWindow::CreateBox()
 		}
 	}
 
-	CSandMan::CheckResults(QList<SB_STATUS>() << Status);
-
-	accept();
+	if(Status.IsError())
+		CSandMan::CheckResults(QList<SB_STATUS>() << Status);
+	else
+		accept();
 }

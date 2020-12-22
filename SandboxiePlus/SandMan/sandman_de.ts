@@ -1598,7 +1598,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="507"/>
         <source>Stop Behaviour</source>
-        <translation>Stoppe Verhalten</translation>
+        <translation>Stopp Verhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="515"/>

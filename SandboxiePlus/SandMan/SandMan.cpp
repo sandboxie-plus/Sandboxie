@@ -1082,7 +1082,7 @@ void CSandMan::OnEditIni()
 	if (theConf->GetBool("Options/NoEditInfo", true))
 	{
 		bool State = false;
-		CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The changes will be applyed automatically as soon as the editor is closed.")
+		CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The changes will be applied automatically as soon as the editor is closed.")
 			, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
 
 		if (State)

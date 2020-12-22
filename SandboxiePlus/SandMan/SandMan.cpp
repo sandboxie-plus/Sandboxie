@@ -1082,7 +1082,7 @@ void CSandMan::OnEditIni()
 	if (theConf->GetBool("Options/NoEditInfo", true))
 	{
 		bool State = false;
-		CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The changes will be applyed automatically as soon as the editor is closed.")
+		CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The changes will be applied automatically as soon as the editor is closed.")
 			, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
 
 		if (State)
@@ -1424,7 +1424,7 @@ void CSandMan::OnUpdateCheck()
 			mb.setIconPixmap(ico.pixmap(64, 64));
 			//mb.setTextFormat(Qt::RichText);
 			mb.setText(FullMessage);
-			mb.setCheckBoxText(tr("Ignore this update, notify me anout the next one."));
+			mb.setCheckBoxText(tr("Ignore this update, notify me about the next one."));
 			mb.setCheckBoxVisible(!bManual);
 
 			if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {

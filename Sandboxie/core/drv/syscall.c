@@ -268,6 +268,7 @@ _FX BOOLEAN Syscall_Init_List(void)
 #define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
 
         if (    IS_PROC_NAME(8,  "Continue")
+            ||  IS_PROC_NAME(10, "ContinueEx")
             ||  IS_PROC_NAME(14, "CallbackReturn")
             ||  IS_PROC_NAME(14, "RaiseException")
             ||  IS_PROC_NAME(18, "TerminateJobObject")
@@ -689,7 +690,6 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     volatile PETHREAD pThread = PsGetCurrentThread();
     volatile PKTRAP_FRAME pTrapFrame = NULL;
 #endif
-    BOOLEAN bContinueEx = FALSE;
     //int exception;
 
     //
@@ -718,21 +718,13 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     // then impersonate the full access token for the thread or process
     //
 
-    if ((strcmp(entry->name, "ContinueEx")) == 0)
-    {
-        bContinueEx = TRUE;
+    if (!Thread_AdjustGrantedAccess()) {
+
+        Process_SetTerminated(proc, 5);
     }
     else {
 
-        if (!Thread_AdjustGrantedAccess()) {
-
-            Process_SetTerminated(proc, 5);
-
-        }
-        else {
-
-            Thread_SetThreadToken(proc);        // may set proc->terminated
-        }
+        Thread_SetThreadToken(proc);        // may set proc->terminated
     }
 
     if (proc->terminated) {
@@ -902,9 +894,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     } else {
 
-        if (!bContinueEx) {
-            Thread_ClearThreadToken();
-        }
+        Thread_ClearThreadToken();
     }
 
     /*if (! NT_SUCCESS(status)) {
@@ -931,7 +921,7 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     // caller must be our service process
     //
 
-    if (proc || (PsGetCurrentProcessId() != Api_ServiceProcessId))
+    if (proc)// || (PsGetCurrentProcessId() != Api_ServiceProcessId))
         return STATUS_ACCESS_DENIED;
 
     //

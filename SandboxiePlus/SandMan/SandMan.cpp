@@ -15,6 +15,7 @@
 #include "Windows/RecoveryWindow.h"
 #include <QtConcurrent>
 #include "../MiscHelpers/Common/SettingsWidgets.h"
+#include "Windows/NewBoxWindow.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -192,8 +193,14 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = false;
+	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
+	QAction* pShowHide = m_pTrayMenu->addAction(tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QFont f = pShowHide->font();
+	f.setBold(true);
+	pShowHide->setFont(f);
+	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
@@ -207,23 +214,7 @@ CSandMan::CSandMan(QWidget *parent)
 		m_pTrayIcon->hide();
 	//
 
-
-	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
-	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
-	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
-	QByteArray Columns = theConf->GetBlob("MainWindow/ResMonList_Columns");
-	if (!Columns.isEmpty())
-		((QTreeViewEx*)m_pResourceLog->GetView())->OnResetColumns();
-	else
-		((QTreeViewEx*)m_pResourceLog->GetView())->restoreState(Columns);
-	Columns = theConf->GetBlob("MainWindow/ApiLogList_Columns");
-	if (!Columns.isEmpty())
-		((QTreeViewEx*)m_pApiCallLog->GetView())->OnResetColumns();
-	else
-		((QTreeViewEx*)m_pApiCallLog->GetView())->restoreState(Columns);
-	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
-	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
-	m_pLogTabs->setCurrentIndex(theConf->GetInt("MainWindow/LogTab", 0));
+	LoadState();
 
 	bool bAdvanced = theConf->GetBool("Options/AdvancedView", true);
 	foreach(QAction * pAction, m_pViewMode->actions())
@@ -267,6 +258,35 @@ CSandMan::~CSandMan()
 
 	m_pTrayIcon->hide();
 
+	StoreState();
+
+	theAPI = NULL;
+
+	theGUI = NULL;
+}
+
+void CSandMan::LoadState()
+{
+	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
+	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
+	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
+	QByteArray Columns = theConf->GetBlob("MainWindow/ResMonList_Columns");
+	if (!Columns.isEmpty())
+		((QTreeViewEx*)m_pResourceLog->GetView())->OnResetColumns();
+	else
+		((QTreeViewEx*)m_pResourceLog->GetView())->restoreState(Columns);
+	Columns = theConf->GetBlob("MainWindow/ApiLogList_Columns");
+	if (!Columns.isEmpty())
+		((QTreeViewEx*)m_pApiCallLog->GetView())->OnResetColumns();
+	else
+		((QTreeViewEx*)m_pApiCallLog->GetView())->restoreState(Columns);
+	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
+	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
+	m_pLogTabs->setCurrentIndex(theConf->GetInt("MainWindow/LogTab", 0));
+}
+
+void CSandMan::StoreState()
+{
 	theConf->SetBlob("MainWindow/Window_Geometry", saveGeometry());
 	//theConf->SetBlob("MainWindow/BoxTree_Columns", m_pBoxTree->saveState());
 	theConf->SetBlob("MainWindow/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
@@ -275,10 +295,14 @@ CSandMan::~CSandMan()
 	theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
 	theConf->SetBlob("MainWindow/Panel_Splitter", m_pPanelSplitter->saveState());
 	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
+}
 
-	theAPI = NULL;
-
-	theGUI = NULL;
+QIcon CSandMan::GetIcon(const QString& Name)
+{
+	QString Path = QApplication::applicationDirPath() + "/Icons/" + Name + ".png";
+	if(QFile::exists(Path))
+		return QIcon(Path);
+	return QIcon(":/Actions/" + Name + ".png");
 }
 
 void CSandMan::CreateMenus()
@@ -286,19 +310,19 @@ void CSandMan::CreateMenus()
 	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
 
 	m_pMenuFile = menuBar()->addMenu(tr("&Sandbox"));
-		m_pNew = m_pMenuFile->addAction(QIcon(":/Actions/NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
+		m_pNew = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
 		m_pMenuFile->addSeparator();
-		m_pEmptyAll = m_pMenuFile->addAction(QIcon(":/Actions/EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
+		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pDisableForce = m_pMenuFile->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
-		m_pMaintenance = m_pMenuFile->addMenu(QIcon(":/Actions/Maintenance"), tr("&Maintenance"));
-			m_pConnect = m_pMaintenance->addAction(QIcon(":/Actions/Connect"), tr("Connect"), this, SLOT(OnMaintenance()));
-			m_pDisconnect = m_pMaintenance->addAction(QIcon(":/Actions/Disconnect"), tr("Disconnect"), this, SLOT(OnMaintenance()));
+		m_pMaintenance = m_pMenuFile->addMenu(CSandMan::GetIcon("Maintenance"), tr("&Maintenance"));
+			m_pConnect = m_pMaintenance->addAction(CSandMan::GetIcon("Connect"), tr("Connect"), this, SLOT(OnMaintenance()));
+			m_pDisconnect = m_pMaintenance->addAction(CSandMan::GetIcon("Disconnect"), tr("Disconnect"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
-			m_pStopAll = m_pMaintenance->addAction(QIcon(":/Actions/Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
+			m_pStopAll = m_pMaintenance->addAction(CSandMan::GetIcon("Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
-			m_pMaintenanceItems = m_pMaintenance->addMenu(QIcon(":/Actions/ManMaintenance"), tr("&Advanced"));
+			m_pMaintenanceItems = m_pMaintenance->addMenu(CSandMan::GetIcon("ManMaintenance"), tr("&Advanced"));
 				m_pInstallDrv = m_pMaintenanceItems->addAction(tr("Install Driver"), this, SLOT(OnMaintenance()));
 				m_pStartDrv = m_pMaintenanceItems->addAction(tr("Start Driver"), this, SLOT(OnMaintenance()));
 				m_pStopDrv = m_pMaintenanceItems->addAction(tr("Stop Driver"), this, SLOT(OnMaintenance()));
@@ -310,7 +334,7 @@ void CSandMan::CreateMenus()
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
 				
 		m_pMenuFile->addSeparator();
-		m_pExit = m_pMenuFile->addAction(QIcon(":/Actions/Exit"), tr("Exit"), this, SLOT(OnExit()));
+		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
 	m_pMenuView = menuBar()->addMenu(tr("&View"));
@@ -322,26 +346,26 @@ void CSandMan::CreateMenus()
 		m_iMenuViewPos = m_pMenuView->actions().count();
 		m_pMenuView->addSeparator();
 
-		m_pCleanUpMenu = m_pMenuView->addMenu(QIcon(":/Actions/Clean"), tr("Clean Up"));
+		m_pCleanUpMenu = m_pMenuView->addMenu(CSandMan::GetIcon("Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
 			m_pCleanUpMenu->addSeparator();
 			m_pCleanUpMsgLog = m_pCleanUpMenu->addAction(tr("Cleanup Message Log"), this, SLOT(OnCleanUp()));
 			m_pCleanUpResLog = m_pCleanUpMenu->addAction(tr("Cleanup Resource Log"), this, SLOT(OnCleanUp()));
 			m_pCleanUpApiLog = m_pCleanUpMenu->addAction(tr("Cleanup Api Call Log"), this, SLOT(OnCleanUp()));
 
-		m_pKeepTerminated = m_pMenuView->addAction(QIcon(":/Actions/Keep"), tr("Keep terminated"), this, SLOT(OnSetKeep()));
+		m_pKeepTerminated = m_pMenuView->addAction(CSandMan::GetIcon("Keep"), tr("Keep terminated"), this, SLOT(OnSetKeep()));
 		m_pKeepTerminated->setCheckable(true);
 
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
-		m_pMenuSettings = m_pMenuOptions->addAction(MakeActionIcon(":/Actions/Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
+		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuOptions->addSeparator();
-		m_pEditIni = m_pMenuOptions->addAction(QIcon(":/Actions/EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
-		m_pReloadIni = m_pMenuOptions->addAction(QIcon(":/Actions/ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
+		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
+		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
 		m_pMenuOptions->addSeparator();
-		m_pEnableMonitoring = m_pMenuOptions->addAction(QIcon(":/Actions/SetLogging"), tr("Resource Logging"), this, SLOT(OnSetMonitoring()));
+		m_pEnableMonitoring = m_pMenuOptions->addAction(CSandMan::GetIcon("SetLogging"), tr("Resource Logging"), this, SLOT(OnSetMonitoring()));
 		m_pEnableMonitoring->setCheckable(true);
 		m_pMenuOptions->addSeparator();
-		m_pEnableLogging = m_pMenuOptions->addAction(QIcon(":/Actions/LogAPI"), tr("API Call Logging"), this, SLOT(OnSetLogging()));
+		m_pEnableLogging = m_pMenuOptions->addAction(CSandMan::GetIcon("LogAPI"), tr("API Call Logging"), this, SLOT(OnSetLogging()));
 		m_pEnableLogging->setCheckable(true);
 		
 
@@ -372,7 +396,7 @@ void CSandMan::CreateToolBar()
 	//m_pToolBar->addAction(m_pCleanUp);
 
 	m_pCleanUpButton = new QToolButton();
-	m_pCleanUpButton->setIcon(MakeActionIcon(":/Actions/Clean"));
+	m_pCleanUpButton->setIcon(CSandMan::GetIcon("Clean"));
 	m_pCleanUpButton->setToolTip(tr("Cleanup"));
 	m_pCleanUpButton->setPopupMode(QToolButton::MenuButtonPopup);
 	m_pCleanUpButton->setMenu(m_pCleanUpMenu);
@@ -417,6 +441,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		QString OnClose = theConf->GetString("Options/OnClose", "ToTray");
 		if (m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0)
 		{
+			StoreState();
 			hide();
 
 			if (theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false))
@@ -516,11 +541,19 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		m_pDisableForce2->setChecked(theAPI->AreForceProcessDisabled());
 	}
 
-	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0))
+	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != theAPI->AreForceProcessDisabled())
 	{
 		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+		m_bIconDisabled = theAPI->AreForceProcessDisabled();
+
+		QString IconFile = ":/SandMan";
+		if (m_bIconEmpty)
+			IconFile += "2";
+		if(m_bIconDisabled)
+			IconFile += "N";
+
 		QIcon Icon;
-		Icon.addFile(m_bIconEmpty ? ":/SandMan2.png" : ":/SandMan.png");
+		Icon.addFile(IconFile + ".png");
 		m_pTrayIcon->setIcon(Icon);
 	}
 
@@ -618,9 +651,9 @@ void CSandMan::OnStatusChanged()
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	if (theAPI->IsConnected())
 	{
-		appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
-		//appTitle.append(tr(" - %1").arg(theAPI->GetIniPath()));
+		statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
+		//appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
 		if(IsFullyPortable())
 			appTitle.append(tr("   -   Portable"));
 
@@ -691,11 +724,11 @@ void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
-	
-	statusBar()->showMessage(Message);
 
-	if (bNotify)
+	if (bNotify) {
+		statusBar()->showMessage(Message);
 		m_pTrayIcon->showMessage("Sandboxie-Plus", Message);
+	}
 }
 
 void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
@@ -808,10 +841,8 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnNewBox()
 {
-	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a name for the new Sandbox."), QLineEdit::Normal, tr("NewBox"));
-	if (Value.isEmpty())
-		return;
-	theAPI->CreateBox(Value);
+	CNewBoxWindow NewBoxWindow;
+	NewBoxWindow.exec();
 }
 
 void CSandMan::OnEmptyAll()
@@ -1101,6 +1132,10 @@ void CSandMan::OnIniReloaded()
 void CSandMan::OnSetMonitoring()
 {
 	theAPI->EnableMonitor(m_pEnableMonitoring->isChecked());
+
+	if(m_pEnableMonitoring->isChecked() && !m_pToolBar->isVisible())
+		m_pLogTabs->show();
+
 	m_pResourceLog->setEnabled(m_pEnableMonitoring->isChecked());
 }
 
@@ -1120,6 +1155,9 @@ void CSandMan::OnSetLogging()
 			if (State)
 				theConf->SetValue("Options/ApiLogInfo", false);
 		}
+
+		if (!m_pToolBar->isVisible())
+			m_pLogTabs->show();
 
 		if (!m_ApiLog) {
 			m_ApiLog = new CApiLog();
@@ -1205,6 +1243,15 @@ void CSandMan::CheckResults(QList<SB_STATUS> Results)
 	}
 }
 
+void CSandMan::OnShowHide()
+{
+	if (isVisible()) {
+		StoreState();
+		hide();
+	} else
+		show();
+}
+
 void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 {
 	static bool TriggerSet = false;
@@ -1220,6 +1267,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				if(TriggerSet)
 					NullifyTrigger = true;
 				
+				StoreState();
 				hide();
 				
 				if (theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false))
@@ -1488,13 +1536,12 @@ void CSandMan::OnAbout()
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
 			"<p>Version %1</p>"
-			"<p>by DavidXanatos</p>"
-			"<p>Copyright (c) 2020</p>"
+			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
 		).arg(GetVersion());
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is a powerfull sandboxing and application virtualization tool. Based on the well known <a href=\"https://www.sandboxie.com\">Sandboxie</a>.</p>"
+			"<p>Sandboxie-Plus is an open source continuation of the well known Sandboxie.</p>"
 			"<p></p>"
-			"<p>Visit <a href=\"https://github.com/Sandboxie-Plus\">Sandboxie-Plus on github</a> for more information.</p>"
+			"<p>Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.</p>"
 			"<p></p>"
 			"<p></p>"
 			"<p></p>"

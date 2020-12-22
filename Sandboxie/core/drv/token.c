@@ -101,7 +101,7 @@ typedef NTSTATUS(__fastcall *P_SepFilterToken_W81)(
     ULONG_PTR VariableLengthIncrease,
     void **NewTokenObject);
 
-static P_SepFilterToken Token_SepFilterToken = NULL;
+P_SepFilterToken Token_SepFilterToken = NULL;
 //---------------------------------------------------------------------------
 
 
@@ -1953,6 +1953,8 @@ _FX NTSTATUS Sbie_SepFilterToken_KernelMode(
     return statusRet;
 }
 
+_FX NTSTATUS Sbie_SepFilterTokenHandler_asm(void* TokenObject, ULONG_PTR   SidCount, ULONG_PTR   SidPtr, ULONG_PTR   LengthIncrease, void** NewToken);
+
 _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
     ULONG_PTR   SidCount,
     ULONG_PTR   SidPtr,
@@ -1961,6 +1963,15 @@ _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
 {
     NTSTATUS status = 0;
 
+#ifdef _WIN64
+    //
+    // When built with VS2019 on systems with enabled "Core Isolation" we get a BSOD pointing to _chkstk,
+    // this is a function added by the compiler under certain conditions.
+    // We work around this issue by providing a hand crafter wrapper function that performs the call.
+    //
+
+    status = Sbie_SepFilterTokenHandler_asm(TokenObject, SidCount, SidPtr, LengthIncrease, NewToken);
+#else
     if (Driver_OsVersion >= DRIVER_WINDOWS_81) {
 
         status = ((P_SepFilterToken_W81)Token_SepFilterToken)(
@@ -1974,10 +1985,10 @@ _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
             TokenObject, 0, 0, 0, 0, 0, 0, SidCount, SidPtr, LengthIncrease,
             NewToken);
     }
+#endif
 
     return status;
 }
-
 
 ULONG GetThreadTokenOwnerPid()
 {

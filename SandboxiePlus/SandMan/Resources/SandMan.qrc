@@ -7,43 +7,44 @@
         <file alias="exeIcon32">exe32.png</file>
         <file>close.png</file>
         <file>SandMan2.png</file>
-    </qresource>
-    <qresource prefix="/Actions">
-        <file alias="SetLogging">Actions/SetLogging.png</file>
-        <file alias="Exit">Actions/exit.png</file>
-        <file alias="Keep">Actions/keep.png</file>
-        <file alias="Clean">Actions/clean.png</file>
-        <file alias="EmptyAll">Actions/empty_all.png</file>
-        <file alias="NewBox">Actions/new_box.png</file>
-        <file alias="ReloadIni">Actions/reload_ini.png</file>
-        <file alias="EditIni">Actions/edit_ini.png</file>
-        <file alias="LogAPI">Actions/log_api.png</file>
-        <file alias="Maintenance">Actions/Maintenance.png</file>
-        <file alias="Connect">Actions/Connect.png</file>
-        <file alias="Disconnect">Actions/Disconnect.png</file>
-        <file alias="Start">Actions/Start.png</file>
-        <file alias="Stop">Actions/Stop.png</file>
-        <file alias="Advanced">Actions/Advanced.png</file>
-        <file alias="Service">Actions/Service.png</file>
-        <file alias="Settings">Actions/config.png</file>
-        <file alias="Explore">Actions/explore.png</file>
-        <file alias="Presets">Actions/presets.png</file>
-        <file alias="Options">Actions/options.png</file>
-        <file alias="Erase">Actions/erase.png</file>
-        <file alias="Remove">Actions/remove.png</file>
-        <file alias="Recover">Actions/recover.png</file>
-        <file alias="Snapshots">Actions/snapshots.png</file>
-        <file alias="Rename">Actions/rename.png</file>
-        <file alias="Run">Actions/run.png</file>
-        <file alias="MkLink">Actions/mkLink.png</file>
-        <file alias="Registry">Actions/registry.png</file>
-        <file alias="Template">Actions/template.png</file>
-        <file alias="ManMaintenance">Actions/ManMaintenance.png</file>
-        <file alias="Wall">Actions/wall.png</file>
-        <file alias="Internet">Actions/internet.png</file>
-        <file alias="Force">Actions/force.png</file>
-        <file alias="Group">Actions/grouping.png</file>
-        <file alias="Box">Actions/box.png</file>
+        <file>Actions/Internet.png</file>
+        <file>Actions/Keep.png</file>
+        <file>Actions/ReloadIni.png</file>
+        <file>Actions/Presets.png</file>
+        <file>Actions/Settings.png</file>
+        <file>Actions/ManMaintenance.png</file>
+        <file>Actions/StartMenu.png</file>
+        <file>Actions/Snapshots.png</file>
+        <file>Actions/Options.png</file>
+        <file>Actions/MkLink.png</file>
+        <file>Actions/Recover.png</file>
+        <file>Actions/Advanced.png</file>
+        <file>Actions/Maintenance.png</file>
+        <file>Actions/EditIni.png</file>
+        <file>Actions/Email.png</file>
+        <file>Actions/Remove.png</file>
+        <file>Actions/Group.png</file>
+        <file>Actions/Erase.png</file>
+        <file>Actions/Disconnect.png</file>
+        <file>Actions/Connect.png</file>
+        <file>Actions/LogAPI.png</file>
+        <file>Actions/EmptyAll.png</file>
+        <file>Actions/Clean.png</file>
+        <file>Actions/NewBox.png</file>
+        <file>Actions/Force.png</file>
+        <file>Actions/Explore.png</file>
+        <file>Actions/Wall.png</file>
+        <file>Actions/Run.png</file>
+        <file>Actions/Exit.png</file>
+        <file>Actions/Cmd.png</file>
+        <file>Actions/SetLogging.png</file>
+        <file>Actions/Rename.png</file>
+        <file>Actions/Start.png</file>
+        <file>Actions/Box.png</file>
+        <file>Actions/Template.png</file>
+        <file>Actions/Stop.png</file>
+        <file>SandMan2N.png</file>
+        <file>SandManN.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

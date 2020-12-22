@@ -5,7 +5,6 @@
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
-
 }
 
 CSbiePlusAPI::~CSbiePlusAPI()
@@ -22,6 +21,15 @@ CBoxedProcess* CSbiePlusAPI::NewBoxedProcess(quint32 ProcessId, class CSandBox* 
 	return new CSbieProcess(ProcessId, pBox);
 }
 
+CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId)
+{
+	CBoxedProcessPtr pProcess = CSbieAPI::OnProcessBoxed(ProcessId, Path, Box, ParentId);
+	if (!pProcess.isNull() && pProcess->GetFileName().indexOf(theAPI->GetSbiePath(), 0, Qt::CaseInsensitive) != 0) {
+		CSandBoxPlus* pBox = pProcess.objectCast<CSbieProcess>()->GetBox();
+		pBox->m_RecentPrograms.insert(pProcess->GetProcessName());
+	}
+	return pProcess;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // CSandBox

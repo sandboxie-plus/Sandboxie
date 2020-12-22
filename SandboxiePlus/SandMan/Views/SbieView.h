@@ -51,6 +51,7 @@ private:
 	CSbieModel*				m_pSbieModel;
 	QSortFilterProxyModel*	m_pSortProxy;
 
+	QAction*				m_pNewBox;
 	QAction*				m_pAddGroupe;
 	QAction*				m_pDelGroupe;
 	int						m_iMenuTop;

@@ -343,10 +343,10 @@ void CSettingsWindow::OnAddWarnProg()
 
 void CSettingsWindow::OnAddWarnFolder()
 {
-	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory"));
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
-	AddWarnEntry(Value.replace("/", "\\"), 2);
+	AddWarnEntry(Value, 2);
 	m_WarnProgsChanged = true;
 }
 

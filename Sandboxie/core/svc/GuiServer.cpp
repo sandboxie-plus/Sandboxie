@@ -748,6 +748,7 @@ bool GuiServer::CreateQueueSlave(const WCHAR *cmdline)
     m_SlaveFuncs[GUI_CHANGE_DISPLAY_SETTINGS]   = &GuiServer::ChangeDisplaySettingsSlave;
     m_SlaveFuncs[GUI_SET_CURSOR_POS]        = &GuiServer::SetCursorPosSlave;
     m_SlaveFuncs[GUI_REMOVE_HOST_WINDOW]    = &GuiServer::RemoveHostWindow;
+    m_SlaveFuncs[GUI_GET_RAW_INPUT_DEVICE_INFO] = &GuiServer::GetRawInputDeviceInfoSlave;
 
     //
     // register a worker thread to process incoming queue requests
@@ -2994,8 +2995,8 @@ ULONG GuiServer::ClipCursorSlave(SlaveArgs *args)
     if (req->have_rect)
         rect = &req->rect;
 
-    if (! ClipCursor(rect))
-        return STATUS_ACCESS_DENIED;
+    ClipCursor(rect); //if (! ) // as this seam to randomly fail don't issue errors
+    //    return STATUS_ACCESS_DENIED; // todo: add reply and return ret value
 
     return STATUS_SUCCESS;
 }
@@ -3393,6 +3394,51 @@ ULONG GuiServer::RemoveHostWindow(SlaveArgs *args)
 
     return STATUS_SUCCESS;
 }
+
+//---------------------------------------------------------------------------
+// GetRawInputDeviceInfoSlave
+//---------------------------------------------------------------------------
+
+ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
+{
+    GUI_GET_RAW_INPUT_DEVICE_INFO_REQ *req = (GUI_GET_RAW_INPUT_DEVICE_INFO_REQ *)args->req_buf;
+    GUI_GET_RAW_INPUT_DEVICE_INFO_RPL *rpl = (GUI_GET_RAW_INPUT_DEVICE_INFO_RPL *)args->rpl_buf;
+
+    if (args->req_len < sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ))
+        return STATUS_INFO_LENGTH_MISMATCH;
+
+    LPVOID reqData = req->hasData ? (BYTE*)req + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) : NULL;
+    PUINT pcbSize = NULL;
+    if (req->cbSize != -1)
+        pcbSize = &req->cbSize;
+
+    SetLastError(ERROR_SUCCESS);
+    if (req->unicode) {
+        rpl->retval = GetRawInputDeviceInfoW(req->hDevice, req->uiCommand, reqData, pcbSize);
+    }
+    else {
+        rpl->retval = GetRawInputDeviceInfoA(req->hDevice, req->uiCommand, reqData, pcbSize);
+    }
+    rpl->error = GetLastError();
+
+    rpl->cbSize = req->cbSize;
+    if (pcbSize && req->hasData)
+    {
+        // Note: pcbSize seams to be in tchars not in bytes!
+        ULONG lenData = (*pcbSize) * (req->unicode ? sizeof(WCHAR) : 1);
+
+        rpl->hasData = TRUE;
+        LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+        memcpy(rplData, reqData, lenData);
+    }
+    else
+        rpl->hasData = FALSE;
+
+    args->rpl_len = args->req_len;
+
+    return STATUS_SUCCESS;
+}
+
 
 //---------------------------------------------------------------------------
 // GetProcessPathList

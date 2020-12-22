@@ -16,7 +16,10 @@ public:
 		QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
 		if (type == QStyle::CT_TabBarTab) {
 			s.transpose();
-			s.setHeight(s.height() * 15 / 10);
+			if(theConf->GetBool("Options/DarkTheme", false))
+				s.setHeight(s.height() * 13 / 10);
+			else
+				s.setHeight(s.height() * 15 / 10);
 			s.setWidth(s.width() * 11 / 10); // for the the icon
 		}
 		return s;
@@ -46,6 +49,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	m_Template = pBox->GetName().left(9).compare("Template_", Qt::CaseInsensitive) == 0;
 	bool ReadOnly = /*pBox->GetAPI()->IsConfigLocked() ||*/ (m_Template && pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) != 0);
 	
+	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
+	if (!pBoxPlus.isNull())
+		m_Programs = pBoxPlus->GetRecentPrograms();
 
 	QWidget* centralWidget = new QWidget();
 	ui.setupUi(centralWidget);
@@ -105,17 +111,17 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		//ui.chkWithTemplates->setEnabled(false);
 	}
 
-	ui.tabs->setTabIcon(0, QIcon(":/Actions/Box"));
-	ui.tabs->setTabIcon(1, QIcon(":/Actions/Group"));
-	ui.tabs->setTabIcon(2, QIcon(":/Actions/Force"));
-	ui.tabs->setTabIcon(3, QIcon(":/Actions/Stop"));
-	ui.tabs->setTabIcon(4, QIcon(":/Actions/Start"));
-	ui.tabs->setTabIcon(5, QIcon(":/Actions/Internet"));
-	ui.tabs->setTabIcon(6, QIcon(":/Actions/Wall"));
-	ui.tabs->setTabIcon(7, QIcon(":/Actions/Recover"));
-	ui.tabs->setTabIcon(8, QIcon(":/Actions/Advanced"));
-	ui.tabs->setTabIcon(9, QIcon(":/Actions/Template"));
-	ui.tabs->setTabIcon(10, QIcon(":/Actions/EditIni"));
+	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Box"));
+	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Group"));
+	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Force"));
+	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Stop"));
+	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Start"));
+	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Internet"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Wall"));
+	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Recover"));
+	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(9, CSandMan::GetIcon("Template"));
+	ui.tabs->setTabIcon(10, CSandMan::GetIcon("EditIni"));
 
 	ui.tabs->setCurrentIndex(0);
 
@@ -191,6 +197,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	// Access
 	connect(ui.btnAddFile, SIGNAL(pressed()), this, SLOT(OnAddFile()));
+	QMenu* pFileBtnMenu = new QMenu(ui.btnAddFile);
+	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnBrowseFile()));
+	pFileBtnMenu->addAction(tr("Browse for Folder"), this, SLOT(OnBrowseFolder()));
+	ui.btnAddFile->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnAddFile->setMenu(pFileBtnMenu);
 	connect(ui.btnAddKey, SIGNAL(pressed()), this, SLOT(OnAddKey()));
 	connect(ui.btnAddIPC, SIGNAL(pressed()), this, SLOT(OnAddIPC()));
 	connect(ui.btnAddClsId, SIGNAL(pressed()), this, SLOT(OnAddClsId()));
@@ -220,7 +231,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
 
-	connect(ui.chkNoDefaultCOM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	//connect(ui.chkNoDefaultCOM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectRpcSs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -228,6 +239,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 		
+	connect(ui.chkAddToJob, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkFileTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkPipeTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -276,11 +288,41 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.treeAccess->viewport()->installEventFilter(this);
 
 	restoreGeometry(theConf->GetBlob("OptionsWindow/Window_Geometry"));
+
+	QByteArray
+	Columns = theConf->GetBlob("OptionsWindow/Run_Columns");
+	if (!Columns.isEmpty()) ui.treeRun->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Groups_Columns");
+	if (!Columns.isEmpty()) ui.treeGroups->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Forced_Columns");
+	if (!Columns.isEmpty()) ui.treeForced->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Stop_Columns");
+	if (!Columns.isEmpty()) ui.treeStop->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Start_Columns");
+	if (!Columns.isEmpty()) ui.treeStart->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/INet_Columns");
+	if (!Columns.isEmpty()) ui.treeINet->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Access_Columns");
+	if (!Columns.isEmpty()) ui.treeAccess->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Recovery_Columns");
+	if (!Columns.isEmpty()) ui.treeRecovery->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Templates_Columns");
+	if (!Columns.isEmpty()) ui.treeTemplates->header()->restoreState(Columns);
 }
 
 COptionsWindow::~COptionsWindow()
 {
 	theConf->SetBlob("OptionsWindow/Window_Geometry",saveGeometry());
+
+	theConf->SetBlob("OptionsWindow/Run_Columns", ui.treeRun->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Groups_Columns", ui.treeGroups->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Forced_Columns", ui.treeForced->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Stop_Columns", ui.treeStop->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Start_Columns", ui.treeStart->header()->saveState());
+	theConf->SetBlob("OptionsWindow/INet_Columns", ui.treeINet->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Access_Columns", ui.treeAccess->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Recovery_Columns", ui.treeRecovery->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Templates_Columns", ui.treeTemplates->header()->saveState());
 }
 
 void COptionsWindow::closeEvent(QCloseEvent *e)
@@ -290,9 +332,10 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
-	if (//(source == ui.treeAccess && event->type() == QEvent::KeyPress && static_cast<QKeyEvent*>(event)->key() == Qt::Key_Escape && static_cast<QKeyEvent*>(event)->modifiers() == Qt::NoModifier) ||
-		(source == ui.treeAccess->viewport() && event->type() == QEvent::MouseButtonPress))
-		OnAccessSelectionChanged(); //ui.treeAccess->selectionModel()->clear();
+	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape && ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		CloseAccessEdit(false);
+	if (source == ui.treeAccess->viewport() && event->type() == QEvent::MouseButtonPress)
+		CloseAccessEdit();
 	return QMainWindow::eventFilter(source, event);
 }
 
@@ -379,7 +422,7 @@ void COptionsWindow::LoadConfig()
 	{
 		ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
 
-		ui.chkNoDefaultCOM->setChecked(!m_pBox->GetBool("OpenDefaultClsid", true));
+		//ui.chkNoDefaultCOM->setChecked(!m_pBox->GetBool("OpenDefaultClsid", true));
 		ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 		ui.chkProtectRpcSs->setChecked(m_pBox->GetBool("ProtectRpcSs", false));
 		ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
@@ -387,6 +430,8 @@ void COptionsWindow::LoadConfig()
 		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 		ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 		ui.chkOpenCredentials->setChecked(m_pBox->GetBool("OpenCredentials", false));
+
+		ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 
 		ReadAdvancedCheck("FileTrace", ui.chkFileTrace, "*");
 		ReadAdvancedCheck("PipeTrace", ui.chkPipeTrace, "*");
@@ -427,6 +472,27 @@ void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, 
 {
 	if (pCheck->checkState() == Qt::Checked)		m_pBox->SetText(Name, Value);
 	else if (pCheck->checkState() == Qt::Unchecked) m_pBox->DelValue(Name);
+}
+
+void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue)
+{
+	//if (pCheck->checkState() == Qt::PartiallyChecked)
+	//	return;
+
+	if (pCheck->checkState() == Qt::Checked)
+	{
+		if(!OnValue.isEmpty())
+			m_pBox->SetText(Name, OnValue);
+		else
+			m_pBox->DelValue(Name);
+	}
+	else if (pCheck->checkState() == Qt::Unchecked)
+	{
+		if (!OffValue.isEmpty())
+			m_pBox->SetText(Name, OffValue);
+		else
+			m_pBox->DelValue(Name);
+	}
 }
 
 void COptionsWindow::SaveConfig()
@@ -496,13 +562,15 @@ void COptionsWindow::SaveConfig()
 		if (ui.chkPreferExternalManifest->isChecked()) m_pBox->SetBool("PreferExternalManifest", true);
 		else m_pBox->DelValue("PreferExternalManifest");
 
-		m_pBox->SetBool("OpenDefaultClsid", !ui.chkNoDefaultCOM->isChecked());
-		m_pBox->SetBool("UnrestrictedSCM", !ui.chkProtectSCM->isChecked());
-		m_pBox->SetBool("ProtectRpcSs", ui.chkProtectRpcSs->isChecked());
-		m_pBox->SetBool("ExposeBoxedSystem", !ui.chkProtectSystem->isChecked());
+		//WriteAdvancedCheck(ui.chkNoDefaultCOM, "OpenDefaultClsid", "n", "");
+		WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
+		WriteAdvancedCheck(ui.chkProtectRpcSs, "ProtectRpcSs", "y", "");
+		WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
+		
+		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
+		WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
 
-		m_pBox->SetBool("OpenProtectedStorage", ui.chkOpenProtectedStorage->isChecked());
-		m_pBox->SetBool("OpenCredentials", ui.chkOpenCredentials->isChecked());
+		WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 
 		WriteAdvancedCheck(ui.chkFileTrace, "FileTrace", "*");
 		WriteAdvancedCheck(ui.chkPipeTrace, "PipeTrace", "*");
@@ -570,7 +638,7 @@ void COptionsWindow::OnGeneralChanged()
 
 	ui.lblCopyLimit->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.txtCopyLimit->setEnabled(ui.chkCopyLimit->isChecked());
-	ui.lblCopyLimit->setText(tr("kilobytes (%1)").arg(FormatSize(ui.txtCopyLimit->text().toInt() * 1024)));
+	ui.lblCopyLimit->setText(tr("kilobytes (%1)").arg(FormatSize(ui.txtCopyLimit->text().toULongLong() * 1024)));
 	ui.chkNoCopyWarn->setEnabled(ui.chkCopyLimit->isChecked());
 
 	ui.chkAutoEmpty->setEnabled(!ui.chkProtectBox->isChecked());
@@ -588,7 +656,7 @@ void COptionsWindow::OnPickColor()
 
 void COptionsWindow::OnBrowsePath()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", QString("Executables (*.exe|*.cmd)"));
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe|*.cmd)")).replace("/", "\\");;
 	if (Value.isEmpty())
 		return;
 
@@ -638,6 +706,8 @@ void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int
 	pItem->setData(Column, Qt::UserRole, Program);
 	if (Program.left(1) == "<")
 		Program = tr("Group: %1").arg(Program.mid(1, Program.length() - 2));
+	else
+		m_Programs.insert(Program);
 	pItem->setText(Column, Program);
 }
 
@@ -747,6 +817,9 @@ QString COptionsWindow::SelectProgram(bool bOrGroup)
 			progDialog.addItem(tr("Group: %1").arg(pItem->text(0)), pItem->data(0, Qt::UserRole).toString());
 		}
 	}
+
+	foreach(const QString & Name, m_Programs)
+		progDialog.addItem(Name, Name);
 
 	progDialog.setValue("");
 
@@ -885,10 +958,10 @@ void COptionsWindow::OnForceProg()
 
 void COptionsWindow::OnForceDir()
 {
-	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory"));
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
-	AddForcedEntry(Value.replace("/","\\"), 2);
+	AddForcedEntry(Value, 2);
 	m_ForcedChanged = true;
 }
 
@@ -936,9 +1009,9 @@ void COptionsWindow::SaveStop()
 {
 	QStringList LingerProcess;
 	QStringList LeaderProcess;
-	for (int i = 0; i < ui.treeForced->topLevelItemCount(); i++)
+	for (int i = 0; i < ui.treeStop->topLevelItemCount(); i++)
 	{
-		QTreeWidgetItem* pItem = ui.treeForced->topLevelItem(i);
+		QTreeWidgetItem* pItem = ui.treeStop->topLevelItem(i);
 		int Type = pItem->data(0, Qt::UserRole).toInt();
 		if (Type == -1)
 			continue; // entry from template
@@ -1256,6 +1329,24 @@ QString COptionsWindow::GetAccessTypeStr(EAccessType Type)
 	return "Unknown";
 }
 
+void COptionsWindow::OnBrowseFile()
+{
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select File"), "", tr("All Files (*.*)")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	AddAccessEntry(eFile, eDirect, "", Value);
+}
+
+void COptionsWindow::OnBrowseFolder()
+{
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	AddAccessEntry(eFile, eDirect, "", Value);
+}
+
 void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
@@ -1264,13 +1355,16 @@ void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString 
 	pItem->setData(0, Qt::UserRole, !Template.isEmpty() ? -1 : (int)Type);
 
 	pItem->setData(1, Qt::UserRole, Program);
-	if (Program.isEmpty())
+	bool bAll = Program.isEmpty();
+	if (bAll)
 		Program = tr("All Programs");
 	bool Not = Program.left(1) == "!";
 	if (Not)
 		Program.remove(0, 1);
 	if (Program.left(1) == "<")
 		Program = tr("Group: %1").arg(Program.mid(1, Program.length() - 2));
+	else if(!bAll)
+		m_Programs.insert(Program);
 	pItem->setText(1, (Not ? "NOT " : "") + Program);
 	
 	pItem->setText(2, GetAccessModeStr(Mode));
@@ -1333,6 +1427,20 @@ void COptionsWindow::OnAccessItemClicked(QTreeWidgetItem* pItem, int Column)
 	if (Column != 0)
 		return;
 
+	CloseAccessEdit(pItem);
+}
+
+void COptionsWindow::CloseAccessEdit(bool bSave)
+{
+	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
+		CloseAccessEdit(pItem, bSave);
+	}
+}
+
+void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
+{
 	QWidget* pProgram = ui.treeAccess->itemWidget(pItem, 1);
 	if (!pProgram)
 		return;
@@ -1346,30 +1454,26 @@ void COptionsWindow::OnAccessItemClicked(QTreeWidgetItem* pItem, int Column)
 
 	QString Program = pCombo->currentText();
 	int Index = pCombo->findText(Program);
-	if(Index != -1)
+	if (Index != -1)
 		Program = pCombo->itemData(Index, Qt::UserRole).toString();
+	if (!Program.isEmpty() && Program.left(1) != "<")
+		m_Programs.insert(Program);
 
-	pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
-	pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
-	pItem->setText(2, GetAccessModeStr((EAccessMode)pMode->currentData().toInt()));
-	pItem->setData(2, Qt::UserRole, pMode->currentData());
-	pItem->setText(3, pPath->text());
-	pItem->setData(3, Qt::UserRole, pPath->text());
+	if (bSave)
+	{
+		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
+		pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
+		pItem->setText(2, GetAccessModeStr((EAccessMode)pMode->currentData().toInt()));
+		pItem->setData(2, Qt::UserRole, pMode->currentData());
+		pItem->setText(3, pPath->text());
+		pItem->setData(3, Qt::UserRole, pPath->text());
+	}
 
 	ui.treeAccess->setItemWidget(pItem, 1, NULL);
 	ui.treeAccess->setItemWidget(pItem, 2, NULL);
 	ui.treeAccess->setItemWidget(pItem, 3, NULL);
 
 	m_AccessChanged = true;
-}
-
-void COptionsWindow::OnAccessSelectionChanged()
-{
-	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
-	{
-		QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
-		OnAccessItemClicked(pItem, 0);
-	}
 }
 
 QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Type)
@@ -1385,8 +1489,8 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 
 void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
 {
-	if (Column == 0)
-		return;
+	//if (Column == 0)
+	//	return;
 
 	int Type = pItem->data(0, Qt::UserRole).toInt();
 	if (Type == -1) {
@@ -1412,13 +1516,14 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 	pLayout->addWidget(pNot);
 	QComboBox* pCombo = new QComboBox(pProgram);
 	pCombo->addItem(tr("All Programs"), "");
-	
-	// todo: add recently ran programs or programs from other configs
 
 	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
-		pCombo->addItem(tr("Group: %1").arg(pItem->text(0)), "<" + pItem->text(0) + ">");
+		pCombo->addItem(tr("Group: %1").arg(pItem->text(0)), pItem->data(0, Qt::UserRole).toString());
 	}
+
+	foreach(const QString & Name, m_Programs)
+		pCombo->addItem(Name, Name);
 
 	pCombo->setEditable(true);
 	int Index = pCombo->findData(Program);
@@ -1521,7 +1626,8 @@ void COptionsWindow::AddRecoveryEntry(const QString& Name, int type, const QStri
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setText(0, (type == 1 ? tr("Folder") : tr("Exclusion")) + (Template.isEmpty() ? "" : (" (" + Template + ")")));
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : -1);
-	SetProgramItem(Name, pItem, 1);
+	pItem->setText(1, Name);
+	pItem->setData(1, Qt::UserRole, Name);
 	ui.treeRecovery->addTopLevelItem(pItem);
 }
 
@@ -1550,7 +1656,7 @@ void COptionsWindow::SaveRecoveryList()
 
 void COptionsWindow::OnAddRecFolder()
 {
-	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory"));
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
 
@@ -1560,7 +1666,7 @@ void COptionsWindow::OnAddRecFolder()
 
 void COptionsWindow::OnAddRecIgnore()
 {
-	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory"));
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
 
@@ -1621,12 +1727,16 @@ void COptionsWindow::OnAddProcess()
 		return;
 
 	ui.lstProcesses->addItem(Process);
+
+	m_AdvancedChanged = true;
 }
 
 void COptionsWindow::OnDelProcess()
 {
 	foreach(QListWidgetItem* pItem, ui.lstProcesses->selectedItems())
 		delete pItem;
+
+	m_AdvancedChanged = true;
 }
 
 #include <wtypes.h>

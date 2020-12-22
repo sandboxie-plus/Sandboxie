@@ -44,6 +44,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	//connect(ui.treeFiles, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnSelectSnapshot()));
 
 	connect(ui.btnAddFolder, SIGNAL(pressed()), this, SLOT(OnAddFolder()));
+	connect(ui.btnRefresh, SIGNAL(pressed()), this, SLOT(FindFiles()));
 	connect(ui.btnRecover, SIGNAL(pressed()), this, SLOT(OnRecover()));
 	connect(ui.btnRecoverTo, SIGNAL(pressed()), this, SLOT(OnRecoverTo()));
 	connect(ui.btnDeleteAll, SIGNAL(pressed()), this, SLOT(OnDeleteAll()));
@@ -86,7 +87,7 @@ void CRecoveryWindow::closeEvent(QCloseEvent *e)
 
 void CRecoveryWindow::OnAddFolder()
 {
-	QString Folder = QFileDialog::getExistingDirectory(this, tr("Select Directory"));
+	QString Folder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");;
 	if (Folder.isEmpty())
 		return;
 
@@ -96,7 +97,7 @@ void CRecoveryWindow::OnAddFolder()
 	m_RecoveryFolders.insert(theAPI->GetBoxedPath(m_pBox, Folder), Folder);
 	m_pBox->AppendText("RecoverFolder", Folder);
 
-	FindFiles(Folder);
+	FindFiles(theAPI->GetBoxedPath(m_pBox, Folder));
 
 	m_pFileModel->Sync(m_FileMap);
 	ui.treeFiles->expandAll();

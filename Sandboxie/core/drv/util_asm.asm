@@ -228,4 +228,41 @@ endif
 
 ;----------------------------------------------------------------------------
 
+ifdef _WIN64
+EXTERN Token_SepFilterToken : QWORD
+
+Sbie_SepFilterTokenHandler_asm PROC
+
+     mov         qword ptr [rsp+20h],r9  
+     mov         qword ptr [rsp+18h],r8  
+     mov         qword ptr [rsp+10h],rdx  
+     mov         qword ptr [rsp+8],rcx  
+     sub         rsp,78h  
+     mov         dword ptr [rsp+60h],0  
+     mov         rax,qword ptr [rsp+00000000000000A0h]  
+     mov         qword ptr [rsp+50h],rax  
+     mov         rax,qword ptr [rsp+0000000000000098h]  
+     mov         qword ptr [rsp+48h],rax  
+     mov         rax,qword ptr [rsp+0000000000000090h]  
+     mov         qword ptr [rsp+40h],rax  
+     mov         rax,qword ptr [rsp+0000000000000088h]  
+     mov         qword ptr [rsp+38h],rax  
+     mov         qword ptr [rsp+30h],0  
+     mov         qword ptr [rsp+28h],0  
+     mov         qword ptr [rsp+20h],0  
+     xor         r9d,r9d  
+     xor         r8d,r8d  
+     xor         edx,edx  
+     mov         rcx,qword ptr [rsp+0000000000000080h]  
+     call        Token_SepFilterToken
+     mov         dword ptr [rsp+60h],eax  
+     mov         eax,dword ptr [rsp+60h]  
+     add         rsp,78h  
+     ret  
+
+Sbie_SepFilterTokenHandler_asm ENDP
+endif
+
+;----------------------------------------------------------------------------
+
 end

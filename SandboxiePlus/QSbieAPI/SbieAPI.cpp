@@ -1039,9 +1039,37 @@ QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, qui
 	return QString::fromWCharArray(out_buffer);
 }
 
+SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
+{
+	if (BoxName.length() > 32)
+		return SB_ERR(tr("The sandbox name can not be longer than 32 charakters."));
+
+	QStringList DeviceNames = QStringList() <<
+		"aux" << "clock$" << "con" << "nul" << "prn" <<
+		"com1" << "com2" << "com3" << "com4" << "com5" << "com6" << "com7" << "com8" << "com9" << "com0" <<
+		"lpt1" << "lpt2" << "lpt3" << "lpt4" << "lpt5" << "lpt6" << "lpt7" << "lpt8" << "lpt9" << "lpt0";
+	if (DeviceNames.contains(BoxName, Qt::CaseInsensitive))
+		return SB_ERR(tr("The sandbox name can not be a device name."));
+
+	if (BoxName.contains(QRegExp("[A-Za-z0-9_]")))
+		return SB_ERR(tr("The sandbox name can contain only letters, digits and underscores which are displayed as spaces."));
+
+	return SB_OK;
+}
+
 SB_STATUS CSbieAPI::CreateBox(const QString& BoxName)
 {
-	return SbieIniSet(BoxName, "Enabled", "y");
+	SB_STATUS Status = ValidateName(BoxName);
+	if(Status.IsError())
+		return Status;
+
+	Status = SbieIniSet(BoxName, "Enabled", "y");
+	if (Status.IsError()) 
+		return Status;
+
+	ReloadConfig();
+	ReloadBoxes();
+	return Status;
 }
 
 SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
@@ -1708,7 +1736,7 @@ bool CSbieAPI::GetLog()
 
 	if ((MsgCode & 0xFFFF) == 1399) // Process Start Notification
 	{
-		emit ProcessBoxed(ProcessId, Nt2DosPath(MsgData[2]), MsgData[1], MsgData.length() < 4 ? 0 : MsgData[3].toUInt());
+		emit ProcessBoxed(ProcessId, Nt2DosPath(MsgData[1]), MsgData[2], MsgData.length() < 4 ? 0 : MsgData[3].toUInt());
 		return true;
 	}
 	
@@ -1730,14 +1758,14 @@ bool CSbieAPI::GetLog()
 	return true;
 }
 
-void CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId)
+CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId)
 {
 	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
 	if (!pProcess)
 	{
 		CSandBoxPtr pBox = GetBoxByName(Box);
 		if (!pBox)
-			return;
+			return CBoxedProcessPtr();
 		
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
@@ -1750,6 +1778,8 @@ void CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path, const QStr
 	}
 	if(pProcess->m_ImageName.isEmpty())
 		pProcess->m_ImageName = Path.mid(Path.lastIndexOf("\\") + 1);
+
+	return pProcess;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

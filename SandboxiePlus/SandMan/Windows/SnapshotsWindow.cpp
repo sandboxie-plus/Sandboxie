@@ -156,7 +156,7 @@ void CSnapshotsWindow::OnRemoveSnapshot()
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want delete the selected snapshot?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected snapshot?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
 		return;
 
 	HandleResult(m_pBox->RemoveSnapshot(ID.toString()));

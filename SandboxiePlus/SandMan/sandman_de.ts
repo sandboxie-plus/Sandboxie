@@ -153,7 +153,7 @@
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="803"/>
-        <source>Please sellect group first.</source>
+        <source>Please select group first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="228"/>
-        <source>Recover file to sellected folder</source>
+        <source>Recover file to selected folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -893,7 +893,7 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1076"/>
-        <source>The changes will be applyed automatically as soon as the editor is closed.</source>
+        <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1344,7 +1344,7 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="159"/>
-        <source>Do you really want delete the sellected snapshot?</source>
+        <source>Do you really want delete the selected snapshot?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

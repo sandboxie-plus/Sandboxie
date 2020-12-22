@@ -842,7 +842,7 @@ void COptionsWindow::OnAddProg()
 
 	if (!pItem)
 	{
-		QMessageBox::warning(this, "SandboxiePlus", tr("Please sellect group first."));
+		QMessageBox::warning(this, "SandboxiePlus", tr("Please select group first."));
 		return;
 	}
 
@@ -1054,14 +1054,14 @@ void COptionsWindow::OnDelStopProg()
 
 void COptionsWindow::OnRestrictStart()
 {
-	// only sellected
+	// only selected
 	bool Enable = ui.radStartSelected->isChecked();
 	if (Enable)
 		SetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*");
 	else
 		DelAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*");
 
-	// all except sellected
+	// all except selected
 	Enable = ui.radStartExcept->isChecked();
 	if (Enable)
 		SetAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*");
@@ -1291,7 +1291,7 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	// Mind this special cases
 	// OpenIpcPath=$:program.exe <- full access into the address space of a target process running outside the sandbox. 
 	// OpenWinClass=$:program.exe <- permits to use the PostThreadMessage API to send a message directly to a thread running outside the sandbox. 
-	// This forms of the setting does not support wildcards.
+	// This form of the setting does not support wildcards.
 	//
 
 	QStringList Values = Value.split(",");
@@ -1904,7 +1904,7 @@ void COptionsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
 {
 	QString Name = pItem->data(1, Qt::UserRole).toString().mid(9);
 	if (m_GlobalTemplates.contains(Name)) {
-		QMessageBox::warning(this, "SandboxiePlus", tr("This template is enabled globally to configure it use the global options."));
+		QMessageBox::warning(this, "SandboxiePlus", tr("This template is enabled globally. To configure it, use the global options."));
 		pItem->setCheckState(1, Qt::PartiallyChecked);
 		return;
 	}
@@ -2026,8 +2026,8 @@ void COptionsWindow::SaveIniSection()
 {
 	m_ConfigDirty = true;
 
-	// Note: an incremental update would be more elegat but it would change the entry order in the ini,
-	//			hence its better for the user to fully rebuild the section each time.
+	// Note: an incremental update would be more elegant but it would change the entry order in the ini,
+	//			hence it's better for the user to fully rebuild the section each time.
 	//
 	for (QList<QPair<QString, QString>>::const_iterator I = m_Settings.begin(); I != m_Settings.end(); ++I)
 		m_pBox->DelValue(I->first, I->second);

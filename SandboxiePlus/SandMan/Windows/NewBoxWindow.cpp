@@ -17,7 +17,7 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	ui.cmbTemplates->addItem(tr("Hardened"));
 	ui.cmbTemplates->addItem(tr("Default"));
 	ui.cmbTemplates->setCurrentIndex(eDefault);
-	ui.cmbTemplates->addItem(tr("Legacy (old sbie behavioure)"));
+	ui.cmbTemplates->addItem(tr("Legacy (old sbie behaviour)"));
 
 	ui.cmbBoxes->addItems(theAPI->GetAllBoxes().keys());
 

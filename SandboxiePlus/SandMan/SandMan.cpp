@@ -1424,7 +1424,7 @@ void CSandMan::OnUpdateCheck()
 			mb.setIconPixmap(ico.pixmap(64, 64));
 			//mb.setTextFormat(Qt::RichText);
 			mb.setText(FullMessage);
-			mb.setCheckBoxText(tr("Ignore this update, notify me anout the next one."));
+			mb.setCheckBoxText(tr("Ignore this update, notify me about the next one."));
 			mb.setCheckBoxVisible(!bManual);
 
 			if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {

@@ -5929,6 +5929,7 @@ _FX NTSTATUS File_SetAttributes(
     if (! CopyPath) {
 
         WCHAR *TruePath;
+        ULONG FileFlags;
         OBJECT_ATTRIBUTES objattrs;
         UNICODE_STRING objname;
 
@@ -5939,10 +5940,13 @@ _FX NTSTATUS File_SetAttributes(
         RtlInitUnicodeString(&objname, L"");
 
         status = File_GetName(
-            FileHandle, &objname, &TruePath, (WCHAR **)&CopyPath, NULL);
+            FileHandle, &objname, &TruePath, (WCHAR **)&CopyPath, &FileFlags);
 
         if (! NT_SUCCESS(status))
             __leave;
+
+        if (FileFlags & FGN_IS_BOXED_PATH)
+            goto has_copy_path;
 
         //
         // migrate the file into the sandbox.  because access mask of
@@ -6000,6 +6004,8 @@ _FX NTSTATUS File_SetAttributes(
         if (status != STATUS_ACCESS_DENIED)
             __leave;
     }
+
+has_copy_path:
 
     //
     // ask the FileServer proxy in SbieSvc to do the job.  this is needed

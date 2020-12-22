@@ -114,6 +114,16 @@ typedef UINT (*P_RegisterClipboardFormat)(
 typedef LRESULT (*P_CallWindowProc)(
     WNDPROC lpWndProc, HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+typedef LONG(*P_GetRawInputDeviceInfoA)(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_updates_bytes_to_opt_(*pcbSize, *pcbSize) LPVOID pData,
+    _Inout_ PUINT pcbSize);
+
+typedef LONG(*P_GetRawInputDeviceInfoW)(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_updates_bytes_to_opt_(*pcbSize, *pcbSize) LPVOID pData,
+    _Inout_ PUINT pcbSize);
+
 //---------------------------------------------------------------------------
 
 typedef BOOL (*P_ExitWindowsEx)(UINT uFlags, DWORD dwReason);
@@ -567,6 +577,9 @@ GUI_SYS_VAR(GetClipboardData);
 GUI_SYS_VAR(GetClipboardOwner);
 GUI_SYS_VAR(GetOpenClipboardWindow);
 GUI_SYS_VAR(GetClipboardSequenceNumber);
+
+GUI_SYS_VAR(GetRawInputDeviceInfoA);
+GUI_SYS_VAR(GetRawInputDeviceInfoW);
 
 GUI_SYS_VAR_2(OpenDesktop)
 GUI_SYS_VAR_2(CreateDesktop)

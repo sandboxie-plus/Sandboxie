@@ -28,6 +28,11 @@
     <Filter Include="Helpers">
       <UniqueIdentifier>{de0b69a3-8110-4776-abb6-e1930c0f8385}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -102,5 +107,10 @@
     <QtMoc Include="Sandboxie\SbieTemplates.h">
       <Filter>Sandboxie</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qsbieapi_de.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

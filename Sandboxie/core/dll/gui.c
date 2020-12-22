@@ -392,6 +392,9 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT_AW(RegisterClipboardFormat);
     GUI_IMPORT___(GetClipboardData);
 
+    GUI_IMPORT___(GetRawInputDeviceInfoA);
+    GUI_IMPORT___(GetRawInputDeviceInfoW);
+    
     GUI_IMPORT___(ExitWindowsEx);
     GUI_IMPORT___(EndTask);
     if (Dll_OsBuild >= 8400) {

@@ -14,7 +14,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
-#define VERSION_REV 	1
+#define VERSION_REV 	2
 #define VERSION_UPD 	0
 
 
@@ -43,8 +43,7 @@ public:
 	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
-	QAction*			GetNewAction() { return m_pNew; }
-	QAction*			GetEmptyAllAction() { return m_pEmptyAll; }
+	static QIcon		GetIcon(const QString& Name);
 
 protected:
 	SB_STATUS			ConnectSbie();
@@ -123,6 +122,7 @@ private slots:
 	void				OnHelp();
 	void				OnAbout();
 
+	void				OnShowHide();
 	void				OnSysTray(QSystemTrayIcon::ActivationReason Reason);
 
 	void				OnUpdateCheck();
@@ -134,6 +134,9 @@ private:
 	void				CreateToolBar();
 
 	void				SetViewMode(bool bAdvanced);
+
+	void				LoadState();
+	void				StoreState();
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;
@@ -205,6 +208,7 @@ private:
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
 	bool				m_bIconEmpty;
+	bool				m_bIconDisabled;
 
 	bool				m_bExit;
 

@@ -3,6 +3,47 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [0.5.2 / 5.45.1] - 2020-12-22
+
+### Added
+- added advanced new box creation dialog to sandman ui
+- added show/hide tray context menu entry
+- added refresh button to file recovery dialog
+- added mechanism to load icons from {install-dir}/Icons/{icon}.png for UI customization
+- added tray indicator to show disabled forced program status in the sandman ui
+- added program name suggestions to box options in sandman ui
+- added saving of column sizes in the options window
+
+### Changed
+- reorganized the advanced box options a bit
+- changed icons (thanks Valinwolf for picking the new once)
+- updated Template.ini (thanks isaak654)
+
+### Fixed
+- fixed BSOD introduced in 5.45.0 when using windows 10 "Core isolation" 
+- fixed minor issue with lingering/leader processes
+- fixed menu issue in sandman ui
+- fixed issue with stop behavioure page in sandman ui
+- fixed issue with Plus installer not displaying kmdutil window
+- fixed sandman UI saving ui settings on windows shutdown
+- fixed issue with Plus installer autorun
+- fixed issue with legacy installer not removing all files
+- fixed a driver compatybility issue with windows 20H1 and later
+-- this solves "stop pending", line messager hanging and other issues...
+- fixed quick recovery issue in SbieCtrl.exe introduced in 5.45.0
+- fixed issue advanced hide process settings, not saving
+- fixed some typos in the UI (thanks isaak654)
+- fixed issue with GetRawInputDeviceInfo failing when boxed processes are put in a job object
+-- this fix resolves isses with CP2077 andother PC Games not getting keyboard input (thanks Rostok)
+- fixed failing ClipCursor wont longer span the message log
+- fixed issue with adding recovery folders in sandman ui
+- fixed issue with office 2019 template when using a non default sbie install location
+- fixed issue settign last access atribute on sandboxed folders
+- fixed issue with process start signal
+
+
+
 ## [0.5.1 / 5.45.0] - 2020-12-12
 
 ### Added

@@ -791,14 +791,38 @@ If leader processes are defined, all others are treated as lingering processes.<
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QPushButton" name="btnAddKey">
+            <widget class="QToolButton" name="btnAddKey">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
              <property name="text">
               <string>Add Reg Key</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QPushButton" name="btnAddFile">
+            <widget class="QToolButton" name="btnAddFile">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
              <property name="text">
               <string>Add File/Folder</string>
              </property>
@@ -812,21 +836,57 @@ If leader processes are defined, all others are treated as lingering processes.<
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QPushButton" name="btnAddClsId">
+            <widget class="QToolButton" name="btnAddClsId">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
              <property name="text">
               <string>Add Wnd Class</string>
              </property>
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QPushButton" name="btnAddCOM">
+            <widget class="QToolButton" name="btnAddCOM">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
              <property name="text">
               <string>Add COM Object</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QPushButton" name="btnAddIPC">
+            <widget class="QToolButton" name="btnAddIPC">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
              <property name="text">
               <string>Add IPC Path</string>
              </property>
@@ -1040,14 +1100,68 @@ For files access you can use 'Direct All' instead to make it apply to all progra
               <layout class="QGridLayout" name="gridLayout_26">
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_2">
-                 <item row="3" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkNoWindowRename">
+                 <item row="2" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkPreferExternalManifest">
                    <property name="text">
-                    <string>Don't alter window class names created by sandboxed programs</string>
+                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="0" colspan="2">
+                 <item row="6" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkProtectRpcSs">
+                   <property name="text">
+                    <string>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatybility)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="14" column="2">
+                  <spacer name="horizontalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="9" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkAddToJob">
+                   <property name="text">
+                    <string>Add sandboxed processes to job objects (recommended)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkProtectSCM">
+                   <property name="text">
+                    <string>Limit access to the emulated service control manager to privileged processes</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkOpenProtectedStorage">
+                   <property name="text">
+                    <string>Open System Protected Storage</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="14" column="1">
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="10" column="0" colspan="2">
                   <widget class="QLabel" name="label_18">
                    <property name="font">
                     <font>
@@ -1059,27 +1173,21 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                     <string>Protect the system from sandboxed processes</string>
                    </property>
                    <property name="text">
-                    <string>Other restrictions</string>
+                    <string>Lift restrictions</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_5">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
+                 <item row="12" column="2">
+                  <widget class="QCheckBox" name="chkOpenCredentials">
                    <property name="text">
-                    <string>Compatibility</string>
+                    <string>Open Windows Credentials Store</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkProtectSCM">
+                 <item row="3" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkNoWindowRename">
                    <property name="text">
-                    <string>Limit access to the emulated service control manager to privileged processes</string>
+                    <string>Don't alter window class names created by sandboxed programs</string>
                    </property>
                   </widget>
                  </item>
@@ -1099,50 +1207,16 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkPreferExternalManifest">
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_5">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
                    <property name="text">
-                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="12" column="1">
-                  <spacer name="verticalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="6" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkProtectRpcSs">
-                   <property name="text">
-                    <string>Start the sandboxed RpcSs as a SYSTEM process</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="12" column="2">
-                  <spacer name="horizontalSpacer_6">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="9" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkNoDefaultCOM">
-                   <property name="text">
-                    <string>Don't open default COM objects</string>
+                    <string>Compatibility</string>
                    </property>
                   </widget>
                  </item>
@@ -1153,17 +1227,19 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkOpenProtectedStorage">
-                   <property name="text">
-                    <string>Open System Protected Storage</string>
+                 <item row="8" column="0" colspan="2">
+                  <widget class="QLabel" name="label_22">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
                    </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="2">
-                  <widget class="QCheckBox" name="chkOpenCredentials">
+                   <property name="toolTip">
+                    <string>Protect the sandbox integrity itself</string>
+                   </property>
                    <property name="text">
-                    <string>Open Windows Credentials Store</string>
+                    <string>Sandbox Isolation</string>
                    </property>
                   </widget>
                  </item>

@@ -207,6 +207,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp" />
+    <ClCompile Include="Windows\NewBoxWindow.cpp" />
     <ClCompile Include="Windows\OptionsWindow.cpp" />
     <ClCompile Include="Windows\PopUpWindow.cpp" />
     <ClCompile Include="Windows\RecoveryWindow.cpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\NewBoxWindow.h" />
     <QtMoc Include="Windows\RecoveryWindow.h" />
     <QtMoc Include="Windows\PopUpWindow.h" />
     <QtMoc Include="Windows\SnapshotsWindow.h" />
@@ -241,11 +243,15 @@
     <Image Include="Resources\SandMan.ico" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Forms\NewBoxWindow.ui" />
     <QtUic Include="Forms\OptionsWindow.ui" />
     <QtUic Include="Forms\PopUpWindow.ui" />
     <QtUic Include="Forms\RecoveryWindow.ui" />
     <QtUic Include="Forms\SettingsWindow.ui" />
     <QtUic Include="Forms\SnapshotsWindow.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sandman_de.ts" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

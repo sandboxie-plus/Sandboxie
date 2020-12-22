@@ -15,6 +15,7 @@ protected:
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
 
+	virtual CBoxedProcessPtr OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,10 +56,13 @@ public:
 	virtual void			SetLeaderProgram(const QString& ProgName, bool bSet);
 	virtual int				IsLeaderProgram(const QString& ProgName);
 
-	virtual bool			IsRecoverySuspended() const { return m_SuspendRecovery; }
+	virtual bool			IsRecoverySuspended() const			{ return m_SuspendRecovery; }
 	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
 
+	const QSet<QString>&	GetRecentPrograms()					{ return m_RecentPrograms; }
+
 protected:
+	friend class CSbiePlusAPI;
 	virtual bool			CheckOpenToken() const;
 
 	bool					m_bLogApiFound;
@@ -70,6 +74,8 @@ protected:
 	int						m_iUnsecureDebugging;
 
 	bool					m_SuspendRecovery;
+
+	QSet<QString>			m_RecentPrograms;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

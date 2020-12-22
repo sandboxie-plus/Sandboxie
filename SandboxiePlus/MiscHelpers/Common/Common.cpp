@@ -262,6 +262,15 @@ void GrayScale (QImage& Image)
 	}
 }
 
+QIcon MakeNormalAndGrayIcon(QIcon Icon)
+{
+	QImage Image = Icon.pixmap(Icon.availableSizes().first()).toImage();
+	Icon.addPixmap(QPixmap::fromImage(Image), QIcon::Normal);
+	GrayScale(Image);
+	Icon.addPixmap(QPixmap::fromImage(Image), QIcon::Disabled);
+	return Icon;
+}
+
 QIcon MakeActionIcon(const QString& IconFile)
 {
 	QImage Image(IconFile);

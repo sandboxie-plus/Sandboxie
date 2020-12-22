@@ -54,9 +54,11 @@ private slots:
 
 	void OnAccessItemClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
-	void OnAccessSelectionChanged();
+	void OnAccessSelectionChanged() { CloseAccessEdit(); }
 
 	void OnAddFile()				{ AddAccessEntry(eFile, eDirect, "", ""); }
+	void OnBrowseFile();
+	void OnBrowseFolder();
 	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); }
 	void OnAddIPC()					{ AddAccessEntry(eIPC, eDirect, "", ""); }
 	void OnAddClsId()				{ AddAccessEntry(eWndCls, eDirect, "", ""); }
@@ -182,6 +184,9 @@ protected:
 	QList<EAccessMode> GetAccessModes(EAccessType Type);
 	void DeleteAccessEntry(QTreeWidgetItem* pItem);
 
+	void CloseAccessEdit(bool bSave = true);
+	void CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave = true);
+
 	void LoadRecoveryList();
 	void AddRecoveryEntry(const QString& Name, int type, const QString& Template = QString());
 	void SaveRecoveryList();
@@ -220,9 +225,12 @@ protected:
 
 	QSharedPointer<CSbieIni> m_pBox;
 
+	QSet<QString> m_Programs;
+
 private:
 	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");
+	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
 
 	Ui::OptionsWindow ui;
 

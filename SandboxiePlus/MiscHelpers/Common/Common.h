@@ -84,6 +84,7 @@ MISCHELPERS_EXPORT bool ReadFromDevice(QIODevice* dev, char* data, int len, int 
 
 MISCHELPERS_EXPORT void GrayScale (QImage& Image);
 
+MISCHELPERS_EXPORT QIcon MakeNormalAndGrayIcon(QIcon Icon);
 MISCHELPERS_EXPORT QIcon MakeActionIcon(const QString& IconFile);
 MISCHELPERS_EXPORT QAction* MakeAction(QToolBar* pParent, const QString& IconFile, const QString& Text = "");
 MISCHELPERS_EXPORT QMenu* MakeMenu(QMenu* pParent, const QString& Text, const QString& IconFile = "");

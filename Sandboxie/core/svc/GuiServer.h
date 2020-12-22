@@ -157,6 +157,8 @@ protected:
 
     ULONG RemoveHostWindow(SlaveArgs *args);
 
+    ULONG GetRawInputDeviceInfoSlave(SlaveArgs* args);
+
     //
     // window access check utilities
     //

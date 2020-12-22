@@ -81,7 +81,7 @@ SB_STATUS CSandBox::RunStart(const QString& Command)
 	return m_pAPI->RunStart(m_Name, Command);
 }
 
-SB_STATUS CSandBox::RunCommand(const QString& Command)
+SB_STATUS CSandBox::RunSandboxed(const QString& Command)
 {
 	return m_pAPI->RunSandboxed(m_Name, Command);
 }
@@ -150,10 +150,13 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
 	if (QDir(m_FilePath).exists())
 		return SB_ERR(tr("A sandbox must be emptied before it can be renamed."));
-	if(NewName.length() > 32)
-		return SB_ERR(tr("The sandbox name can not be longer than 32 charakters."));
+
+
+	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
+	if (Status.IsError())
+		return Status;
 	
-	return RenameSection(QString(NewName).replace(" ", "_"));
+	return RenameSection(NewName);
 }
 
 SB_STATUS CSandBox::RemoveBox()

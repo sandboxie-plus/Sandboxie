@@ -51,7 +51,7 @@ public:
 	virtual int						GetActiveProcessCount() const { return m_ActiveProcessCount; }
 
 	virtual SB_STATUS				RunStart(const QString& Command);
-	virtual SB_STATUS				RunCommand(const QString& Command);
+	virtual SB_STATUS				RunSandboxed(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
 
 	virtual void					CloseBox() {}

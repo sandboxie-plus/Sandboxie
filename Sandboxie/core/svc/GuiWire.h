@@ -60,6 +60,7 @@ enum {
     GUI_SET_CURSOR_POS,
     GUI_GET_CLIPBOARD_METAFILE,
     GUI_REMOVE_HOST_WINDOW,
+    GUI_GET_RAW_INPUT_DEVICE_INFO,
     GUI_MAX_REQUEST_CODE
 };
 
@@ -675,6 +676,35 @@ struct tagGUI_REMOVE_HOST_WINDOW_RPL
 
 typedef struct tagGUI_REMOVE_HOST_WINDOW_REQ GUI_REMOVE_HOST_WINDOW_REQ;
 typedef struct tagGUI_REMOVE_HOST_WINDOW_RPL GUI_REMOVE_HOST_WINDOW_RPL;
+
+
+//---------------------------------------------------------------------------
+// Get Raw Input Device Info
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ
+{
+    ULONG msgid;
+    HANDLE hDevice;
+    UINT uiCommand;
+    BOOLEAN unicode;
+    BOOLEAN hasData;
+    UINT cbSize;
+};
+
+struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL
+{
+    ULONG status;
+    ULONG error;
+    ULONG retval;
+    BOOLEAN hasData;
+    UINT cbSize;
+};
+
+
+typedef struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ GUI_GET_RAW_INPUT_DEVICE_INFO_REQ;
+typedef struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL GUI_GET_RAW_INPUT_DEVICE_INFO_RPL;
 
 //---------------------------------------------------------------------------
 

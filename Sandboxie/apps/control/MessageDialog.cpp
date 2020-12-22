@@ -938,23 +938,14 @@ void CMessageDialog::DoRecovery()
 
         while (msg->code == MSG_2199) {
 
-            WCHAR *space = wcschr(msg->str1, L' ');
-            if (! space) {
-                m_queue.RemoveHead();
-                delete msg;
-                break;
-            }
-            *space = L'\0';
-
             CBox &box = CBoxes::GetInstance().GetBox(msg->str1);
 
             if (box.GetName() != m_qr_box) {
-                *space = L' ';
                 break;
             }
 
             if (box.GetImmediateRecoveryState())
-                m_qr->AddAutoRecoverItem(space + 1);
+                m_qr->AddAutoRecoverItem(msg->str2);
 
             m_queue.RemoveAt(lastpos);
             delete msg;

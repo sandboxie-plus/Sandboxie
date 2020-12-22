@@ -41,6 +41,11 @@
     <Filter Include="Windows">
       <UniqueIdentifier>{d0068730-c9fb-49ef-90ec-8ecd2131ae47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,6 +94,9 @@
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\RecoveryWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\NewBoxWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,6 +151,9 @@
     <QtMoc Include="Windows\RecoveryWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\NewBoxWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -175,5 +186,13 @@
     <QtUic Include="Forms\RecoveryWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="Forms\NewBoxWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sandman_de.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

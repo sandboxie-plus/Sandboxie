@@ -96,6 +96,7 @@ public:
 	virtual QString			Nt2DosPath(QString NtPath) const;
 
 	virtual SB_STATUS		ReloadBoxes();
+	static  SB_STATUS		ValidateName(const QString& BoxName);
 	virtual SB_STATUS		CreateBox(const QString& BoxName);
 
 	virtual SB_STATUS		UpdateProcesses(bool bKeep);
@@ -176,11 +177,11 @@ signals:
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 	void					QueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 
-private slots:
+protected slots:
 	//virtual void			OnMonitorEntry(quint32 ProcessId, quint32 Type, const QString& Value);
 	virtual void			OnIniChanged(const QString &path);
 	virtual void			OnReloadConfig();
-	virtual void			OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
+	virtual CBoxedProcessPtr OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
 
 protected:
 	friend class CSandBox;

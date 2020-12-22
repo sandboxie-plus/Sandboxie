@@ -209,7 +209,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
-	m_pTrayIcon->show(); // Note: qt bug; without a first show hide does not work :/
+	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
 	if(!bAutoRun && !theConf->GetBool("Options/ShowSysTray", true))
 		m_pTrayIcon->hide();
 	//
@@ -467,7 +467,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		if (PortableStop == -1)
 		{
 			bool State = false;
-			PortableStop = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services, this will prompt for administrative privileges.")
+			PortableStop = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.")
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Ok, QMessageBox::Information) == QDialogButtonBox::Ok ? 1 : 0;
 
 			if (!PortableStop)
@@ -744,7 +744,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 	for (int i = 1; i < MsgData.size(); i++)
 		Message = Message.arg(MsgData[i]);
 
-	if (ProcessId != 4) // if its not from the driver add the pid
+	if (ProcessId != 4) // if it's not from the driver, add the pid
 	{
 		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 		if(pProcess.isNull())
@@ -807,7 +807,7 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 	}
 
 	if (!Unrecovered.isEmpty())
-		Status = SB_ERR(tr("Failed to recovery some files: \n") + Unrecovered.join("\n"));
+		Status = SB_ERR(tr("Failed to recover some files: \n") + Unrecovered.join("\n"));
 
 	pProgress->Finish(Status);
 }
@@ -857,7 +857,7 @@ void CSandMan::OnDisableForce()
 	if (Status)
 	{
 		bool bOK = false;
-		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for which disable forced programs."), 10, 0, 3600, 1, &bOK);
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), 10, 0, 3600, 1, &bOK);
 		if (!bOK)
 			return;
 	}
@@ -882,7 +882,7 @@ SB_STATUS CSandMan::ConnectSbie()
 			if (PortableStart == -1)
 			{
 				bool State = false;
-				PortableStart = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode and it needs to create nececery services, this will prompt for administrative privileges.")
+				PortableStart = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.")
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Ok, QMessageBox::Information) == QDialogButtonBox::Ok ? 1 : 0;
 
 				if (State)
@@ -944,7 +944,7 @@ SB_STATUS CSandMan::StopSbie(bool andRemove)
 	}
 	if (!Status.IsError()) {
 		if(andRemove)
-			Status = CSbieUtils::Uninstall(CSbieUtils::eAll); // it stops it first ofcause
+			Status = CSbieUtils::Uninstall(CSbieUtils::eAll); // it stops it first of course
 		else
 			Status = CSbieUtils::Stop(CSbieUtils::eAll);
 		if (Status.GetStatus() == OP_ASYNC)
@@ -1106,7 +1106,7 @@ void CSandMan::OnEditIni()
 	//CloseHandle(si.hProcess);
 
 	if (theConf->GetBool("Options/WatchIni", true))
-		return; // if the ini s watched dont double reload
+		return; // if the ini is watched don't double reload
 	
 	QWinEventNotifier* processFinishedNotifier = new QWinEventNotifier(si.hProcess);
 	processFinishedNotifier->setEnabled(true);
@@ -1184,7 +1184,7 @@ void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)
 	m_pProgressDialog->OnStatusMessage("");
 	m_pProgressDialog->show();
 
-	if (pProgress->IsFinished()) // Note: the operation runs asynchroniusly it may have already finished so we need to test for that
+	if (pProgress->IsFinished()) // Note: since the operation runs asynchronously, it may have already finished, so we need to test for that
 		OnAsyncFinished(pProgress.data());
 }
 
@@ -1386,7 +1386,7 @@ void CSandMan::OnUpdateCheck()
 			QIcon ico(QLatin1String(":/SandMan.png"));
 			mb.setIconPixmap(ico.pixmap(64, 64));
 			mb.setText(UserMsg);
-			mb.setCheckBoxText(tr("Don't show this announcement in future."));
+			mb.setCheckBoxText(tr("Don't show this announcement in the future."));
 			mb.setStandardButtons(QDialogButtonBox::Close);
 			mb.exec();
 
@@ -1511,7 +1511,7 @@ void CSandMan::OnUpdateDownload()
 		return;
 	}
 
-	QString Message = tr("<p>New Sandboxie-Plus has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation. If any programs are running sandboxed, they will be terminated.</p>")
+	QString Message = tr("<p>New Sandboxie-Plus has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
 		.arg(FilePath).arg("File:///" + TempDir);
 	if (QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton).exec() == QMessageBox::Yes)
 		QProcess::startDetached(FilePath);

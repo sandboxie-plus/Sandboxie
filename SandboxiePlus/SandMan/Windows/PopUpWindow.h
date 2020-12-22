@@ -44,7 +44,7 @@ public:
 		{
 			QToolButton* pHelp = new QToolButton();
 			pHelp->setText(tr("?"));
-			pHelp->setToolTip(tr("Visit %1 for a detailes explenation.").arg(QString("https://xanasoft.com/sandboxie/sbie%1/").arg(GetMsgId())));
+			pHelp->setToolTip(tr("Visit %1 for a detailed explanation.").arg(QString("https://xanasoft.com/sandboxie/sbie%1/").arg(GetMsgId())));
 			pHelp->setMaximumWidth(16);
 			QObject::connect(pHelp, SIGNAL(pressed()), this, SLOT(OnHelp()));
 			m_pMainLayout->addWidget(pHelp, 0, 1);
@@ -225,7 +225,7 @@ public:
 		pRecover->setToolTip(tr("Recover the file to original location"));
 		pRecover->setPopupMode(QToolButton::MenuButtonPopup);
 		QMenu* pRecMenu = new QMenu();
-		pRecMenu->addAction(tr("Recover file to sellected folder"), this, SLOT(OnRecoverTo()));
+		pRecMenu->addAction(tr("Recover file to selected folder"), this, SLOT(OnRecoverTo()));
 		pRecMenu->addAction(tr("Open file recovery for this box"), this, SIGNAL(OpenRecovery()));
 		pRecover->setMenu(pRecMenu);
 		//QObject::connect(pRecover, SIGNAL(triggered(QAction*)), , SLOT());

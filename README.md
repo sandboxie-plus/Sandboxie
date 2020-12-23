@@ -5,24 +5,30 @@ Sandboxie is a sandbox-based isolation software for 32- and 64-bit Windows NT-ba
 
 ## Project maintenance
 2004 - 2013 Ronen Tzur
+
 2013 - 2017 Invincea Inc.
+
 2017 - 2020 Sophos Group plc
+
 Open Source release
+
 2020 onwards David Xanatos
 
+
 ## Helpful Contributors
-diversenok - Security analysis & PoC's
-stephtr - CI and Certification
-TechLord / Team-IRA - Reversing
-isaak654 - UI fixes and Templates
-Valinwolf - UI / Icons
+- diversenok - Security analysis & PoC's
+- stephtr - CI and Certification
+- TechLord / Team-IRA - Reversing
+- isaak654 - UI fixes and Templates
+- Valinwolf - UI / Icons
 
 ### Translators
-nkh0472 - German
-bastik-1001 - SimpChinese
+- nkh0472 - German
+- bastik-1001 - SimpChinese
 
 More volunteers welcome ;)
 
 ## Support the project
 If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos
+
 Or Donating directly via the PayPal button on my website: https://xanasoft.com

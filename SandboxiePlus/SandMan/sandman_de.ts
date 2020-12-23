@@ -1776,7 +1776,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1113"/>
-        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatybility)</source>
+        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

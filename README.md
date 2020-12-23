@@ -23,8 +23,8 @@ Open Source release
 - Valinwolf - UI / Icons
 
 ### Translators
-- nkh0472 - German
-- bastik-1001 - SimpChinese
+- nkh0472
+- bastik-1001
 
 More volunteers welcome ;)
 

@@ -857,7 +857,7 @@ void CSandMan::OnDisableForce()
 	if (Status)
 	{
 		bool bOK = false;
-		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), 10, 0, 3600, 1, &bOK);
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), 10, 0, INT_MAX, 1, &bOK);
 		if (!bOK)
 			return;
 	}

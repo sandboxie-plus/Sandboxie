@@ -2365,7 +2365,7 @@ void CBoxPage::FileMigrate_OnOK(CBox &box)
 
     int size;
     if (size64 < 1)
-        size = 1;
+        size = -1;
     else if (size64 > 999999999)
         size = 999999999;
     else

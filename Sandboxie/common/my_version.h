@@ -23,7 +23,7 @@
 
 #define MY_VERSION_BINARY       5,45,1
 #define MY_VERSION_STRING       "5.45.1"
-#define MY_VERSION_COMPAT		"5.45.0" // this reffers to the driver ABI compatybility
+#define MY_VERSION_COMPAT		"5.45.0" // this refers to the driver ABI compatibility
 
 // These #defines are used by either Resource Compiler, or by NSIC installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"
@@ -32,8 +32,8 @@
 
 #define MY_PRODUCT_NAME_STRING  "Sandboxie"
 #define MY_COMPANY_NAME_STRING  "xanasoft.com"
-#define MY_COPYRIGHT_STRING     "Copyright © 2020-2021 by David Xanatos (xanasoft.com)"
-#define MY_COPYRIGHT_STRING_OLD "Copyright © 2004-2020 by Sandboxie Holdings, LLC"
+#define MY_COPYRIGHT_STRING     "Copyright Â© 2020-2021 by David Xanatos (xanasoft.com)"
+#define MY_COPYRIGHT_STRING_OLD "Copyright Â© 2004-2020 by Sandboxie Holdings, LLC"
 
 #define SANDBOXIE               L"Sandboxie"
 #define SBIE                    L"SBIE"

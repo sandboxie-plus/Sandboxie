@@ -1110,7 +1110,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="6" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkProtectRpcSs">
                    <property name="text">
-                    <string>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatybility)</string>
+                    <string>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</string>
                    </property>
                   </widget>
                  </item>

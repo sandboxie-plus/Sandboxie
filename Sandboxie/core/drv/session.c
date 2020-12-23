@@ -750,7 +750,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 	log_data = args->log_ptr.val;
     ProbeForRead(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
 
-    name = Mem_Alloc(proc->pool, 260 * sizeof(WCHAR)); // todo: should we increate this ?
+    name = Mem_Alloc(proc->pool, 260 * sizeof(WCHAR)); // todo: should we increase this ?
     if (! name)
         return STATUS_INSUFFICIENT_RESOURCES;
 
@@ -972,7 +972,7 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
 		CHAR* read_ptr = NULL;
 		if (seq_num != NULL)
 			read_ptr = log_buffer_get_next(*seq_num, session->monitor_log);
-		else if (session->monitor_log->buffer_size > 0) // for compatybility with older versions we return the oldest entry
+		else if (session->monitor_log->buffer_size > 0) // for compatibility with older versions we return the oldest entry
 			read_ptr = session->monitor_log->buffer_start_ptr;
 
 		if (!read_ptr) {
@@ -999,17 +999,17 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
 		if (log_pid != NULL)
 			*log_pid = pid64;
 
-		log_len -= sizeof(WCHAR); // reserve room for the termination charakter
+		log_len -= sizeof(WCHAR); // reserve room for the termination character
 		if (log_len > entry_size - (2 + 8))
 			log_len = entry_size - (2 + 8);
 		log_buffer_get_bytes((CHAR*)log_data, log_len, &read_ptr, session->monitor_log);
 
-		// add required termination charakter
+		// add required termination character
 		*(WCHAR*)(((CHAR*)log_data) + log_len) = L'\0';
 
 		if (seq_num != NULL)
 			*seq_num = seq_number;
-		else // for compatybility with older versions we fall back to clearing the returned entry
+		else // for compatibility with older versions we fall back to clearing the returned entry
 			log_buffer_pop_entry(session->monitor_log);
         
 

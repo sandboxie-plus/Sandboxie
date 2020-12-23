@@ -32,7 +32,7 @@ CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// CSandBox
+// CSandBoxPlus
 //
 
 CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSandBox(BoxName, pAPI)
@@ -273,3 +273,15 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// CSbieProcess
+//
+
+QString CSbieProcess::GetStatusStr() const
+{
+	if (m_uTerminated != 0)
+		return tr("Terminated");
+	if (m_bSuspended)
+		return tr("Suspended");
+	return tr("Running");
+}

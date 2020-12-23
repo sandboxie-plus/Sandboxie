@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.2a / 5.45.1] - 2020-12-23
+
+### Fixed
+- fixed translation support in the sandman ui
+- fixed sandboxed explorer issue
+
+
 
 ## [0.5.2 / 5.45.1] - 2020-12-23
 

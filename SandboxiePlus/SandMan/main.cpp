@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
 
 	SB_STATUS Status = CSbieUtils::DoAssist();
 	if (Status.GetStatus()) {
-		app.sendMessage("Status:" + Status.GetText());
+		if(Status.GetStatus() == ERROR_OK) app.sendMessage("Status:OK");
+		else app.sendMessage("Status:" + CSandMan::FormatError(Status)); // todo: localization
 		return 0;
 	}
 	

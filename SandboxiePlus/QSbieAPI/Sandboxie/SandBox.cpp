@@ -94,7 +94,7 @@ SB_STATUS CSandBox::TerminateAll()
 SB_PROGRESS CSandBox::CleanBox()
 {
 	if (GetBool("NeverDelete", false))
-		return SB_ERR(tr("Delete protection is enabled for the sandbox"));
+		return SB_ERR(SB_DeleteProtect);
 
 	SB_STATUS Status = TerminateAll();
 	if (Status.IsError())
@@ -128,7 +128,7 @@ SB_STATUS CSandBox__DeleteFolder(const CSbieProgressPtr& pProgress, const QStrin
 
 	NTSTATUS status = NtIo_DeleteFolderRecursively(&ntObject.attr);
 	if (!NT_SUCCESS(status))
-		return SB_ERR(CSandBox::tr("Error deleting sandbox folder: %1").arg(Folder), status);
+		return SB_ERR(SB_DeleteError, QVariantList() << Folder, status);
 	return SB_OK;
 }
 
@@ -149,7 +149,7 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
 	if (QDir(m_FilePath).exists())
-		return SB_ERR(tr("A sandbox must be emptied before it can be renamed."));
+		return SB_ERR(SB_RemNotEmpty);
 
 
 	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
@@ -162,7 +162,7 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 SB_STATUS CSandBox::RemoveBox()
 {
 	if (QDir(m_FilePath).exists())
-		return SB_ERR(tr("A sandbox must be emptied before it can be deleted."));
+		return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
 }
@@ -203,7 +203,7 @@ SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentF
 	SNtObject dest_dir(L"\\??\\" + ParentFolder.toStdWString());
 	NTSTATUS status = NtIo_RenameFolder(&src_dir.attr, &dest_dir.attr, TargetName.toStdWString().c_str());
 	if (!NT_SUCCESS(status) && status != STATUS_OBJECT_NAME_NOT_FOUND && status != STATUS_OBJECT_PATH_NOT_FOUND)
-		return SB_ERR(CSandBox::tr("Failed to move directory '%1' to '%2'").arg(SourcePath).arg(ParentFolder + "\\" + TargetName), status);
+		return SB_ERR(SB_FailedMoveDir, QVariantList() <<SourcePath << (ParentFolder + "\\" + TargetName), status);
 	return SB_OK;
 }
 
@@ -212,7 +212,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(tr("Can't take a snapshot while processes are running in the box."), OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
 
 	QStringList Snapshots = ini.childGroups();
 
@@ -225,9 +225,9 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	}
 
 	if (!QDir().mkdir(m_FilePath + "\\snapshot-" + ID))
-		return SB_ERR(tr("Failed to create directory for new snapshot"));
+		return SB_ERR(SB_SnapMkDirFail);
 	if (!QFile::copy(m_FilePath + "\\RegHive", m_FilePath + "\\snapshot-" + ID + "\\RegHive"))
-		return SB_ERR(tr("Failed to copy RegHive to snapshot"));
+		return SB_ERR(SB_SnapCopyRegFail);
 
 	ini.setValue("Snapshot_" + ID + "/Name", Name);
 	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime().toTime_t());
@@ -252,10 +252,10 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
 	if (!ini.childGroups().contains("Snapshot_" + ID))
-		return SB_ERR(tr("Snapshot not found"));
+		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(tr("Can't remove a snapshots while processes are running in the box."), OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
 	
 	QStringList ChildIDs;
 	foreach(const QString& Snapshot, ini.childGroups())
@@ -271,7 +271,7 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 	bool IsCurrent = Current == ID;
 
 	if (ChildIDs.count() >= 2 || (ChildIDs.count() == 1 && IsCurrent))
-		return SB_ERR(tr("Can't remove a snapshots that is shared by multiple later snapshots"));
+		return SB_ERR(SB_SnapIsShared);
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
 	if (ChildIDs.count() == 1 || IsCurrent)
@@ -323,7 +323,7 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 	NTSTATUS status = NtIo_MergeFolder(&ntSource.attr, &ntTarget.attr);
 	if (!NT_SUCCESS(status))
-		return SB_ERR(CSandBox::tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged.").arg(TargetFolder).arg(SourceFolder), status);
+		return SB_ERR(SB_SnapMergeFail, QVariantList() << TargetFolder << SourceFolder, status);
 	return SB_OK;
 }
 
@@ -336,7 +336,7 @@ SB_STATUS CSandBox__CleanupSnapshot(const QString& Folder)
 		status = NtDeleteFile(&ntSnapshotFile.attr);
 	}
 	if (!NT_SUCCESS(status))
-		return SB_ERR(CSandBox::tr("Failed to remove old snapshot directory '%1'").arg(Folder), status);
+		return SB_ERR(SB_SnapRmDirFail, QVariantList() << Folder, status);
 	return SB_OK;
 }
 
@@ -415,15 +415,15 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
 	if (!ini.childGroups().contains("Snapshot_" + ID))
-		return SB_ERR(tr("Snapshot not found"));
+		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(tr("Can't switch snapshots while processes are running in the box."), OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
 
 	if (!QFile::remove(m_FilePath + "\\RegHive"))
-		return SB_ERR(tr("Failed to remove old RegHive"));
+		return SB_ERR(SB_SnapDelRegFail);
 	if (!QFile::copy(m_FilePath + "\\snapshot-" + ID + "\\RegHive", m_FilePath + "\\RegHive"))
-		return SB_ERR(tr("Failed to copy RegHive from snapshot"));
+		return SB_ERR(SB_SnapCopyRegFail);
 
 	ini.setValue("Current/Snapshot", ID);
 	ini.sync();
@@ -439,7 +439,7 @@ SB_STATUS CSandBox::SetSnapshotInfo(const QString& ID, const QString& Name, cons
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
 	if (!ini.childGroups().contains("Snapshot_" + ID))
-		return SB_ERR(tr("Snapshot not found"));
+		return SB_ERR(SB_SnapNotFound);
 
 	if (!Name.isNull())
 		ini.setValue("Snapshot_" + ID + "/Name", Name);

@@ -269,7 +269,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 
 	if (status != STATUS_SUCCESS) {
 		m->SbieApiHandle = INVALID_HANDLE_VALUE;
-		return SB_ERR(tr("Failed to connect to driver"), status);
+		return SB_ERR(SB_DriverFail, status);
 	}
 
 	UpdateDriveLetters();
@@ -287,7 +287,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	{
 		NtClose(m->SbieApiHandle);
 		m->SbieApiHandle = INVALID_HANDLE_VALUE;	
-		return SB_ERR(tr("Incompatible Version, found Sandboxie %1, compatible versions: %2").arg(CurVersion).arg(CompatVersions.join(", ")));
+		return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
 	}
 #endif
 
@@ -441,18 +441,18 @@ SB_STATUS CSbieAPI__CallServer(SSbieAPI* m, MSG_HEADER* req, MSG_HEADER** prpl)
 		{
 			NtClose(m->PortHandle);
 			m->PortHandle = NULL;
-			return SB_ERR(CSbieAPI::tr("request %1").arg(status, 8, 16), status); // 2203
+			return SB_ERR(SB_ServiceFail, QVariantList() << QString("request %1").arg(status, 8, 16), status); // 2203
 		}
 
 		if (BuffLen && ResHeader->u1.s1.DataLength)
-			return SB_ERR(CSbieAPI::tr("early reply")); // 2203
+			return SB_ERR(SB_ServiceFail, QVariantList() << QString("early reply")); // 2203
 	}
 
 	// the last call to NtRequestWaitReplyPort should return the first chunk of the reply
 	if (ResHeader->u1.s1.DataLength >= sizeof(MSG_HEADER))
 	{
 		if (ResData[3] != CurSeqNumber)
-			return SB_ERR(CSbieAPI::tr("mismatched reply")); // 2203
+			return SB_ERR(SB_ServiceFail, QVariantList() << QString("mismatched reply")); // 2203
 
 		// clear highest byte of the size filed
 		ResData[3] = 0;
@@ -461,7 +461,7 @@ SB_STATUS CSbieAPI__CallServer(SSbieAPI* m, MSG_HEADER* req, MSG_HEADER** prpl)
 	else
 		BuffLen = 0;
 	if (BuffLen == 0)
-		return SB_ERR(CSbieAPI::tr("null reply (msg %1 len %2)").arg(req->msgid, 8, 16).arg(req->length)); // 2203
+		return SB_ERR(SB_ServiceFail, QVariantList() << QString("null reply (msg %1 len %2)").arg(req->msgid, 8, 16).arg(req->length)); // 2203
 
 	// read remining chunks
 	MSG_HEADER*& rpl = *prpl;
@@ -499,7 +499,7 @@ SB_STATUS CSbieAPI__CallServer(SSbieAPI* m, MSG_HEADER* req, MSG_HEADER** prpl)
 
 			NtClose(m->PortHandle);
 			m->PortHandle = NULL;
-			return SB_ERR(CSbieAPI::tr("reply %1").arg(status, 8, 16), status); // 2203
+			return SB_ERR(SB_ServiceFail, QVariantList() << QString("reply %1").arg(status, 8, 16), status); // 2203
 		}
 	}
 
@@ -903,15 +903,13 @@ QString CSbieAPI::GetUserSection() const
 SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
-		return SB_ERR(tr("Can't find Sandboxie instal path."));
+		return SB_ERR(SB_PathFail);
 
-	QStringList Arguments;
-	Arguments.append("/box:" + BoxName);
-	Arguments.append(Command);
+	QString StartCmd = "\"" + GetStartPath() + "\" /box:" + BoxName + " " + Command;
 	if (pProcess)
-		pProcess->start(GetStartPath(), Arguments);
+		pProcess->start(StartCmd);
 	else
-		QProcess::startDetached(GetStartPath(), Arguments);
+		QProcess::startDetached(StartCmd);
 	return SB_OK;
 }
 
@@ -974,9 +972,9 @@ retry:
 			if (bRetry)
 				goto retry;
 		}
-		return SB_ERR(CSbieAPI::tr("You are not authorized to update configuration in section '%1'").arg(SectionName), status);
+		return SB_ERR(SB_NotAuthorized, QVariantList() << SectionName, status);
 	}
-	return SB_ERR(CSbieAPI::tr("Failed to set configuration setting %1 in section %2: %3").arg(SettingName).arg(SectionName).arg(status, 8, 16), status);
+	return SB_ERR(SB_ConfigFailed, QVariantList() << SettingName << SectionName << (quint32)status, status);
 }
 
 SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode)
@@ -1008,8 +1006,8 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 	req->h.length = sizeof(SBIE_INI_SETTING_REQ) + req->value_len * sizeof(WCHAR);
 
 	SB_STATUS Status = SbieIniSet(req, req->password, Section, Setting);
-	if (!Status)
-		emit LogSbieMessage(2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
+	//if (!Status) 
+	//	emit LogSbieMessage(2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	free(req);
 	return Status;
 }
@@ -1042,17 +1040,17 @@ QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, qui
 SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 {
 	if (BoxName.length() > 32)
-		return SB_ERR(tr("The sandbox name can not be longer than 32 charakters."));
+		return SB_ERR(SB_NameLenLimit);
 
 	QStringList DeviceNames = QStringList() <<
 		"aux" << "clock$" << "con" << "nul" << "prn" <<
 		"com1" << "com2" << "com3" << "com4" << "com5" << "com6" << "com7" << "com8" << "com9" << "com0" <<
 		"lpt1" << "lpt2" << "lpt3" << "lpt4" << "lpt5" << "lpt6" << "lpt7" << "lpt8" << "lpt9" << "lpt0";
 	if (DeviceNames.contains(BoxName, Qt::CaseInsensitive))
-		return SB_ERR(tr("The sandbox name can not be a device name."));
+		return SB_ERR(SB_BadNameDev);
 
 	if (BoxName.contains(QRegExp("[^A-Za-z0-9_]")))
-		return SB_ERR(tr("The sandbox name can contain only letters, digits and underscores which are displayed as spaces."));
+		return SB_ERR(SB_BadNameChar);
 
 	return SB_OK;
 }
@@ -1264,8 +1262,6 @@ SB_STATUS CSbieAPI::TerminateAll(const QString& BoxName)
 
 	MSG_HEADER *rpl = NULL;
 	SB_STATUS Status = CSbieAPI::CallServer(&req.h, &rpl);
-	if (!Status)
-		emit LogSbieMessage(2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	if (!Status || !rpl)
 		return Status;
 	if(rpl->status != 0) 
@@ -1279,7 +1275,7 @@ SB_STATUS CSbieAPI::TerminateAll()
 	SB_STATUS Status = SB_OK;
 	foreach(const CSandBoxPtr& pBox, m_SandBoxes) {
 		if (!pBox->TerminateAll())
-			Status = SB_ERR(tr("Failed to terminate all processes"));
+			Status = SB_ERR(SB_FailedKillAll);
 	}
 	return Status;
 }
@@ -1293,8 +1289,6 @@ SB_STATUS CSbieAPI::Terminate(quint32 ProcessId)
 
 	MSG_HEADER *rpl = NULL;
 	SB_STATUS Status = CSbieAPI::CallServer(&req.h, &rpl);
-	if (!Status)
-		emit LogSbieMessage(2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	if (!Status || !rpl)
 		return Status;
 	if (rpl->status != 0)
@@ -1459,8 +1453,6 @@ SB_STATUS CSbieAPI::RunSandboxed(const QString& BoxName, const QString& Command,
 	PROCESS_RUN_SANDBOXED_RPL *rpl;
 	SB_STATUS Status = CSbieAPI::CallServer(&req->h, &rpl);
 	free(req);
-	if (!Status)
-		emit LogSbieMessage(2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	if (!Status)
 		return Status;
 	if (!rpl) 

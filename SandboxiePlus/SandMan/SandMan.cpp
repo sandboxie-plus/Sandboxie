@@ -513,7 +513,7 @@ void CSandMan::OnMessage(const QString& Message)
 				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required sandboxie components"));
 
 			OnLogMessage(tr("Maintenance operation %1").arg(Status));
-			CheckResults(QList<SB_STATUS>() << SB_ERR(Status));
+			CheckResults(QList<SB_STATUS>() << SB_ERR(SB_Message, QVariantList() << Status));
 		}
 		else
 		{
@@ -807,7 +807,7 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 	}
 
 	if (!Unrecovered.isEmpty())
-		Status = SB_ERR(tr("Failed to recover some files: \n") + Unrecovered.join("\n"));
+		Status = SB_ERR(SB_Message, QVariantList () << (tr("Failed to recover some files: \n") + Unrecovered.join("\n")));
 
 	pProgress->Finish(Status);
 }
@@ -834,7 +834,7 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 			bRetry = true;
 			break;
 		}
-		QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed: %1").arg(Status.GetText()));
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("Login Failed: %1").arg(FormatError(Status)));
 	}
 	LoginOpen = false;
 }
@@ -1224,21 +1224,67 @@ void CSandMan::OnCancelAsync()
 		pProgress->Cancel();
 }
 
-void CSandMan::CheckResults(QList<SB_STATUS> Results)
+QString CSandMan::FormatError(const SB_STATUS& Error)
 {
-	for (QList<SB_STATUS>::iterator I = Results.begin(); I != Results.end(); )
+	//QString Text = Error.GetText();
+	//if (!Text.isEmpty())
+	//	return Text;
+
+	QString Message;
+	switch (Error.GetMsgCode())
 	{
-		if (!I->IsError() || I->GetStatus() == OP_CANCELED)
-			I = Results.erase(I);
-		else
-			I++;
+	case SB_Generic:		return tr("Error Status: %1").arg(Error.GetStatus());
+	case SB_Message:		Message = "%1"; break;
+	case SB_NeedAdmin:		Message = tr("Admin rights required."); break;
+	case SB_ExecFail:		Message = tr("Failed to execute: %1"); break;
+	case SB_DriverFail:		Message = tr("Failed to connect to driver"); break;
+	case SB_ServiceFail:	Message = tr("Failed to communicate with Sandboxie Service: %1"); break;
+	case SB_Incompatible:	Message = tr("Can't find Sandboxie instal path."); break;
+	case SB_PathFail:		Message = tr("Incompatible Version, found Sandboxie %1, compatible versions: %2"); break;
+	case SB_FailedCopyConf:	Message = tr("Failed to copy configuration from sandbox %1: %2"); break;
+	case SB_AlreadyExists:  Message = tr("A sandbox of the name %1 already exists"); break;
+	case SB_DeleteFailed:	Message = tr("Failed to delete sandbox %1: %2"); break;
+	case SB_NameLenLimit:	Message = tr("The sandbox name can not be longer than 32 charakters."); break;
+	case SB_BadNameDev:		Message = tr("The sandbox name can not be a device name."); break;
+	case SB_BadNameChar:	Message = tr("The sandbox name can contain only letters, digits and underscores which are displayed as spaces."); break;
+	case SB_FailedKillAll:	Message = tr("Failed to terminate all processes"); break;
+	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
+	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
+	case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
+	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
+	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
+	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
+	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
+	case SB_SnapCopyRegFail:Message = tr("Failed to copy RegHive"); break;
+	case SB_SnapNotFound:	Message = tr("Snapshot not found"); break;
+	case SB_SnapMergeFail:	Message = tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged."); break;
+	case SB_SnapRmDirFail:	Message = tr("Failed to remove old snapshot directory '%1'"); break;
+	case SB_SnapIsShared:	Message = tr("Can't remove a snapshots that is shared by multiple later snapshots"); break;
+	case SB_SnapDelRegFail:	Message = tr("Failed to remove old RegHive"); break;
+	case SB_NotAuthorized:	Message = tr("You are not authorized to update configuration in section '%1'"); break;
+	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
+
+	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
 	}
 
-	if (Results.count() == 1)
-		QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), Results[0].GetText());
-	else if (Results.count() > 1)
-	{
-		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Results.size()), Results);
+	foreach(const QVariant& Arg, Error.GetArgs())
+		Message.arg(Arg.toString()); // todo: make quint32 hex and so on
+
+	return Message;
+}
+
+void CSandMan::CheckResults(QList<SB_STATUS> Results)
+{
+	QStringList Errors;
+	for (QList<SB_STATUS>::iterator I = Results.begin(); I != Results.end(); ++I) {
+		if (I->IsError() && I->GetStatus() != OP_CANCELED)
+			Errors.append(FormatError(*I));
+	}
+
+	if (Errors.count() == 1)
+		QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), Errors.first());
+	else if (Errors.count() > 1) {
+		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors);
 		Dialog.exec();
 	}
 }

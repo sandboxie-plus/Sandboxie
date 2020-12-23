@@ -17,9 +17,9 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.uiLang->addItem("International English", "");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
-	foreach(const QString& langFile, langDir.entryList(QStringList("taskexplorer_*.qm"), QDir::Files))
+	foreach(const QString& langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{
-		QString Code = langFile.mid(13, langFile.length() - 13 - 3);
+		QString Code = langFile.mid(8, langFile.length() - 8 - 3);
 		QLocale Locale(Code);
 		QString Lang = Locale.nativeLanguageName();
 		ui.uiLang->addItem(Lang, Code);

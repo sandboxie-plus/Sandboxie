@@ -88,6 +88,8 @@ class CSbieProcess : public CBoxedProcess
 public:
 	CSbieProcess(quint32 ProcessId, class CSandBox* pBox) : CBoxedProcess(ProcessId, pBox) {}
 
+	virtual QString	GetStatusStr() const;
+
 	virtual void BlockProgram()									{ GetBox()->BlockProgram(m_ImageName); }
 	virtual void SetLingeringProgram(bool bSet)					{ GetBox()->SetLingeringProgram(m_ImageName, bSet); }
 	virtual int	 IsLingeringProgram()							{ return GetBox()->IsLingeringProgram(m_ImageName); }

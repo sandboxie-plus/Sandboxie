@@ -1802,8 +1802,8 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1113"/>
-        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatybility)</source>
-        <translation>Starte den gesandboxeten RpcSs als SYSTEM-Prozess (zerstört etwas Kompalitbilität)</translation>
+        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1133"/>

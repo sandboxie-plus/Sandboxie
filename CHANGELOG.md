@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.5.2 / 5.45.1] - 2020-12-22
+## [0.5.2 / 5.45.1] - 2020-12-23
 
 ### Added
 - added advanced new box creation dialog to sandman ui
@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reorganized the advanced box options a bit
 - changed icons (thanks Valinwolf for picking the new once)
 - updated Template.ini (thanks isaak654)
+- increates max value for disable forced process time in sandman ui
 
 ### Fixed
 - fixed BSOD introduced in 5.45.0 when using windows 10 "Core isolation" 

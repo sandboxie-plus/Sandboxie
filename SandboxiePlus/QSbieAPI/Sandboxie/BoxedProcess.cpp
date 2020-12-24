@@ -72,15 +72,6 @@ bool CBoxedProcess::InitProcessInfo()
 	return true;
 }
 
-QString CBoxedProcess::GetStatusStr() const
-{
-	if (m_uTerminated != 0)
-		return tr("Terminated");
-	if (m_bSuspended)
-		return tr("Suspended");
-	return tr("Running");
-}
-
 extern "C"
 {
 	NTSYSCALLAPI NTSTATUS NTAPI NtTerminateProcess(_In_opt_ HANDLE ProcessHandle, _In_ NTSTATUS ExitStatus);

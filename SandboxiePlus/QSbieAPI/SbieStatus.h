@@ -5,6 +5,41 @@
 #define OP_CONFIRM (3)
 #define OP_CANCELED (4)
 
+enum ESbieMsgCodes
+{
+	SB_Generic = 0,
+	SB_Message,
+	SB_NeedAdmin,
+	SB_ExecFail,
+	SB_DriverFail,
+	SB_ServiceFail,
+	SB_Incompatible,
+	SB_PathFail,
+	SB_FailedCopyConf,
+	SB_AlreadyExists,
+	SB_DeleteFailed,
+	SB_NameLenLimit,
+	SB_BadNameDev,
+	SB_BadNameChar,
+	SB_FailedKillAll,
+	SB_DeleteProtect,
+	SB_DeleteError,
+	SB_RemNotEmpty,
+	SB_DelNotEmpty,
+	SB_FailedMoveDir,
+	SB_SnapMkDirFail,
+	SB_SnapCopyRegFail,
+	SB_SnapNotFound,
+	SB_SnapMergeFail,
+	SB_SnapRmDirFail,
+	SB_SnapIsShared,
+	SB_SnapIsRunning,
+	SB_SnapDelRegFail,
+	SB_NotAuthorized,
+	SB_ConfigFailed,
+
+};
+
 class CSbieStatus
 {
 public:
@@ -12,14 +47,18 @@ public:
 	{
 		m = NULL;
 	}
-	CSbieStatus(const QString& Error, long Status = 0xC0000001 /*STATUS_UNSUCCESSFUL*/) : CSbieStatus()
+	CSbieStatus(ESbieMsgCodes MsgCode, const QVariantList& Args = QVariantList(), long Status = 0xC0000001 /*STATUS_UNSUCCESSFUL*/) : CSbieStatus()
 	{
 		SFlexError* p = new SFlexError();
-		p->Error = Error;
+		p->MsgCode = MsgCode;
+		p->Args = Args;
 		p->Status = Status;
 		Attach(p);
 	}
-	CSbieStatus(long Status) : CSbieStatus(QObject::tr("Error Code: %1").arg(Status), Status)
+	CSbieStatus(ESbieMsgCodes MsgCode, long Status) : CSbieStatus(MsgCode, QVariantList(), Status)
+	{
+	}
+	CSbieStatus(long Status) : CSbieStatus(SB_Generic, QVariantList(), Status)
 	{
 	}
 	CSbieStatus(const CSbieStatus& other) : CSbieStatus()
@@ -40,14 +79,17 @@ public:
 
 	__inline bool IsError() const { return m != NULL; }
 	__inline long GetStatus() const { return m ? m->Status : 0; }
-	__inline QString GetText() const { return m ? m->Error: ""; }
+	__inline long GetMsgCode() const { return m ? m->MsgCode : 0; }
+	__inline QVariantList GetArgs() const { return m ? m->Args : QVariantList(); }
+	//__inline QString GetText() const { return m ? m->Text: ""; }
 
 	operator bool() const				{return !IsError();}
 
 protected:
 	struct SFlexError
 	{
-		QString Error;
+		ESbieMsgCodes MsgCode;
+		QVariantList Args;
 		long Status;
 
 		mutable atomic<int> aRefCnt;
@@ -79,6 +121,7 @@ protected:
 		}
 	}
 };
+
 
 typedef CSbieStatus SB_STATUS;
 #define SB_OK SB_STATUS()

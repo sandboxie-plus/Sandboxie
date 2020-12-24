@@ -8,7 +8,7 @@ class CMultiErrorDialog : public QDialog
 	Q_OBJECT
 
 public:
-	CMultiErrorDialog(const QString& Message, QList<SB_STATUS> Errors, QWidget* parent = 0);
+	CMultiErrorDialog(const QString& Message, const QStringList& Errors, QWidget* parent = 0);
 	virtual ~CMultiErrorDialog();
 
 private:

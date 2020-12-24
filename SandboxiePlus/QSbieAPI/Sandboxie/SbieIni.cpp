@@ -227,14 +227,14 @@ SB_STATUS CSbieIni::RenameSection( const QString& NewName, bool deleteOld) // No
 	// Get all Settigns
 	QList<QPair<QString, QString>> Settings = GetIniSection(&status);
 	if (status != STATUS_SUCCESS)
-		return SB_ERR(CSbieAPI::tr("Failed to copy configuration from sandbox %1: %2").arg(m_Name).arg(status, 8, 16), status);
+		return SB_ERR(SB_FailedCopyConf, QVariantList() << m_Name << (quint32)status, status);
 
 	// check if such a box already exists
 	if (!SameName)
 	{
 		m_pAPI->SbieIniGet(NewName, "", CONF_GET_NO_EXPAND, &status);
 		if (status != STATUS_RESOURCE_NAME_NOT_FOUND)
-			return SB_ERR(CSbieAPI::tr("A sandbox of the name %1 already exists").arg(NewName));
+			return SB_ERR(SB_AlreadyExists, QVariantList() << NewName);
 	}
 
 	// if the name is the same we first delete than write, 
@@ -257,7 +257,7 @@ do_delete:
 	{
 		SB_STATUS Status = m_pAPI->SbieIniSet(m_Name, "*", "");
 		if (Status.IsError())
-			return SB_ERR(CSbieAPI::tr("Failed to delete sandbox %1: %2").arg(m_Name).arg(Status.GetStatus(), 8, 16), Status.GetStatus());
+			return SB_ERR(SB_DeleteFailed, QVariantList() << m_Name << (quint32)Status.GetStatus(), Status.GetStatus());
 		deleteOld = false;
 
 		if (SameName)

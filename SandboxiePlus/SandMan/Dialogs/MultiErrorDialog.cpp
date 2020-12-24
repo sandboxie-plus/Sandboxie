@@ -3,7 +3,7 @@
 #include "MultiErrorDialog.h"
 
 
-CMultiErrorDialog::CMultiErrorDialog(const QString& Message, QList<SB_STATUS> Errors, QWidget* parent)
+CMultiErrorDialog::CMultiErrorDialog(const QString& Message, const QStringList& Errors, QWidget* parent)
 	: QDialog(parent)
 {
 	this->setWindowTitle(tr("Sandboxie-Plus - Error"));
@@ -14,7 +14,6 @@ CMultiErrorDialog::CMultiErrorDialog(const QString& Message, QList<SB_STATUS> Er
 
 	m_pErrors = new CPanelWidgetEx();
 	
-	//m_pErrors->GetTree()->setHeaderLabels(tr("Message|Status|Error").split("|"));
 	m_pErrors->GetTree()->setHeaderLabels(tr("Message").split("|"));
 
 	m_pErrors->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -33,11 +32,10 @@ CMultiErrorDialog::CMultiErrorDialog(const QString& Message, QList<SB_STATUS> Er
 	restoreGeometry(theConf->GetBlob("ErrorWindow/Window_Geometry"));
 	
 
-	foreach(const SB_STATUS& Error, Errors)
+	foreach(const QString& Error, Errors)
 	{
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		pItem->setText(eMessage, Error.GetText());
-		//pItem->setText(eErrorCode, tr("0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0')));
+		pItem->setText(eMessage, Error);
 		m_pErrors->GetTree()->addTopLevelItem(pItem);
 	}
 

@@ -17,7 +17,7 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	ui.cmbTemplates->addItem(tr("Hardened"));
 	ui.cmbTemplates->addItem(tr("Default"));
 	ui.cmbTemplates->setCurrentIndex(eDefault);
-	ui.cmbTemplates->addItem(tr("Legacy (old sbie behavioure)"));
+	ui.cmbTemplates->addItem(tr("Legacy (old sbie behaviour)"));
 
 	ui.cmbBoxes->addItems(theAPI->GetAllBoxes().keys());
 
@@ -54,9 +54,10 @@ void CNewBoxWindow::CreateBox()
 		{
 			QList<QPair<QString, QString>> Settings;
 			CSandBoxPtr pSrcBox = theAPI->GetBoxByName(ui.cmbBoxes->currentText());			
-			if(!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection();
+			qint32 status = 0;
+			if(!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection(&status);
 			if (Settings.isEmpty())
-				Status = SB_ERR(CSbieAPI::tr("Failed to copy configuration from sandbox %1").arg(ui.cmbBoxes->currentText()));
+				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << ui.cmbBoxes->currentText() << (quint32)status);
 			else
 			{
 				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)

@@ -58,7 +58,7 @@ SB_STATUS CSbieUtils::DoAssist()
 	SB_STATUS Status = ExecOps(Args.mid(AssistPos + 1));
 	if (Status.IsError())
 		return Status;
-	return SB_ERR("OK", ERROR_OK);
+	return SB_ERR(ERROR_OK);
 }
 
 SB_STATUS CSbieUtils::Start(EComponent Component)
@@ -168,7 +168,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 	shex.lpVerb = L"runas";
 
 	if (!ShellExecuteEx(&shex))
-		return SB_ERR("Admin rights required");
+		return SB_ERR(SB_NeedAdmin);
 	return SB_ERR(OP_ASYNC);
 }
 
@@ -184,7 +184,7 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 		Proc.waitForFinished();
 		int ret = Proc.exitCode();
 		if (ret != 0)
-			return SB_ERR("Failed to execute: " + Args.join(" "));
+			return SB_ERR(SB_ExecFail, QVariantList() << Args.join(" "));
 	}
 	return SB_OK;
 }
@@ -310,7 +310,7 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, const QString &LinkPath, const Q
 		if (!workdir.isEmpty())
 			pShellLink->SetWorkingDirectory(workdir.toStdWString().c_str());
 		if (!LinkName.isEmpty()) {
-			QString desc = QObject::tr("Open %1 in sandbox %2").arg(LinkName).arg(boxname);
+			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname);
 			pShellLink->SetDescription(desc.toStdWString().c_str());
 		}
 

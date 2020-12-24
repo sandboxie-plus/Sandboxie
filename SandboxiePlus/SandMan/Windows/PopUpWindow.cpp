@@ -135,11 +135,11 @@ void CPopUpWindow::AddLogMessage(const QString& Message, quint32 MsgCode, const 
 		AddEntry(pEntry);
 	}
 
-	// 2219 // elvation is disabled
+	// 2219 // elevation is disabled
 
-	// 1307 // internet denided
+	// 1307 // internet denied
 
-	// 1308 // start/run denided
+	// 1308 // start/run denied
 }
 
 void CPopUpWindow::ReloadHiddenMessages()
@@ -277,7 +277,7 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, const QString& BoxN
 
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 
-	QString Message = tr("The file %1 is eligible for quick recovery from %2.\r\nFull path: %3\r\nWriten by: %4")
+	QString Message = tr("The file %1 is eligible for quick recovery from %2.\r\nFull path: %3\r\nWritten by: %4")
 		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(BoxName).replace("_", " ")).arg(FilePath)
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
@@ -302,7 +302,7 @@ void CPopUpWindow::OnDismiss(int iFlag)
 			pBox.objectCast<CSandBoxPlus>()->SetSuspendRecovery();
 	}
 	
-	if ((iFlag & 0x01) != 0) // dismiss all fromt his box
+	if ((iFlag & 0x01) != 0) // dismiss all from this box
 	{
 		for (int i = 0; i < ui.table->rowCount(); i++)
 		{
@@ -348,7 +348,7 @@ void CPopUpWindow::OnOpenRecovery()
 
 	emit RecoveryRequested(pEntry->m_BoxName);
 
-	// since we opened the recvery dialog we can dismiss all the notification for this box
+	// since we opened the recovery dialog, we can dismiss all the notifications for this box
 	OnDismiss(0x01);
 }
 

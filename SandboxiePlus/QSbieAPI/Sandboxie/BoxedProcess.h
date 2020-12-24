@@ -36,7 +36,6 @@ public:
 	virtual QString			GetProcessName() const  { return m_ImageName; }
 	virtual QString			GetFileName() const { return m_ImagePath; }
 	virtual QDateTime		GetTimeStamp() const { return m_StartTime; }
-	virtual QString			GetStatusStr() const;
 
 	virtual SB_STATUS		Terminate();
 	virtual bool			IsTerminated(quint64 forMs = 0) const;

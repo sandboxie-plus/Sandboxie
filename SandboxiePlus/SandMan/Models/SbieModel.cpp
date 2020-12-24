@@ -227,8 +227,9 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 	int ActiveCount = 0;
 
-	foreach(const CBoxedProcessPtr& pProcess, ProcessList)
+	foreach(const CBoxedProcessPtr& pProc, ProcessList)
 	{
+		QSharedPointer<CSbieProcess> pProcess = pProc.objectCast<CSbieProcess>();
 		QVariant ID = pProcess->GetProcessId();
 
 		QModelIndex Index;

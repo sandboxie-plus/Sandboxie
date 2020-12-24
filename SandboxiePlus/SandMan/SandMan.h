@@ -41,6 +41,7 @@ public:
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList);
 
 	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
+	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
 	static QIcon		GetIcon(const QString& Name);

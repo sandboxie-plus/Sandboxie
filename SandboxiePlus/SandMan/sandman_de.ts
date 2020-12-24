@@ -394,7 +394,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -403,7 +403,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -414,7 +414,7 @@ Written by: %4</source>
         <oldsource>The file %1 is eligible for quick recovery from %2.
 Full path: %3
 Written by: %4</oldsource>
-        <translation type="unfinished">Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Vollständiger Pfad: %3
 Gechrieben durch: %4</translation>
     </message>
@@ -446,7 +446,7 @@ Gechrieben durch: %4</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
 </context>
@@ -833,12 +833,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1238"/>
         <source>Admin rights required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Administrativerechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1239"/>
         <source>Failed to execute: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlschlag beim Ausführen von: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1240"/>
@@ -848,7 +848,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1241"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Kommunizieren mit Sandbox-Dienst: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1242"/>
@@ -923,7 +923,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1256"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Schnappschussvorgang kann nicht durchgeführt werden, während Prozesse in dieser Box laufen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1257"/>
@@ -933,7 +933,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1258"/>
         <source>Failed to copy RegHive</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte RegHive nicht kopieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1259"/>
@@ -973,7 +973,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1267"/>
         <source>Unknown Error Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Fehlerstatus: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1435"/>
@@ -1882,7 +1882,7 @@ Falls primäre Programme/Prozessse definiert wurden, werden alle anderen als ver
     <message>
         <location filename="Forms/OptionsWindow.ui" line="661"/>
         <source>Allow all programs to start in this sandbox.</source>
-        <translation>Erlube allen Programmen in dieser Sandbox zu starten.</translation>
+        <translation>Erlaube allen Programmen in dieser Sandbox zu starten.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="668"/>
@@ -2029,7 +2029,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1113"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte den sandgeboxted RpcSs als DIENST-Prozess (beinträchtigt etwas Kompatibilität)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1133"/>
@@ -2340,7 +2340,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="90"/>
         <source>Use Dark Theme</source>
-        <translation>Benutze dunkles Farbschma</translation>
+        <translation>Dunkles Farbschema benutzen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="110"/>
@@ -2496,12 +2496,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="461"/>
         <source>Enable</source>
-        <translation>Aktivere</translation>
+        <translation>Aktiveren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="468"/>
         <source>Disable</source>
-        <translation>Deaktivere</translation>
+        <translation>Deaktiveren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="497"/>

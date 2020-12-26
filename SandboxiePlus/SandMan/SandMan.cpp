@@ -1235,16 +1235,16 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	{
 	case SB_Generic:		return tr("Error Status: %1").arg(Error.GetStatus());
 	case SB_Message:		Message = "%1"; break;
-	case SB_NeedAdmin:		Message = tr("Admin rights required."); break;
+	case SB_NeedAdmin:		Message = tr("Administrator rights are required for this operation."); break;
 	case SB_ExecFail:		Message = tr("Failed to execute: %1"); break;
-	case SB_DriverFail:		Message = tr("Failed to connect to driver"); break;
+	case SB_DriverFail:		Message = tr("Failed to connect to the driver"); break;
 	case SB_ServiceFail:	Message = tr("Failed to communicate with Sandboxie Service: %1"); break;
-	case SB_Incompatible:	Message = tr("Can't find Sandboxie instal path."); break;
-	case SB_PathFail:		Message = tr("Incompatible Version, found Sandboxie %1, compatible versions: %2"); break;
+	case SB_Incompatible:	Message = tr("An incompatible Sandboxie %1 was found. Compatible versions: %2"); break;
+	case SB_PathFail:		Message = tr("Can't find Sandboxie installation path."); break;
 	case SB_FailedCopyConf:	Message = tr("Failed to copy configuration from sandbox %1: %2"); break;
 	case SB_AlreadyExists:  Message = tr("A sandbox of the name %1 already exists"); break;
 	case SB_DeleteFailed:	Message = tr("Failed to delete sandbox %1: %2"); break;
-	case SB_NameLenLimit:	Message = tr("The sandbox name can not be longer than 32 charakters."); break;
+	case SB_NameLenLimit:	Message = tr("The sandbox name can not be longer than 32 characters."); break;
 	case SB_BadNameDev:		Message = tr("The sandbox name can not be a device name."); break;
 	case SB_BadNameChar:	Message = tr("The sandbox name can contain only letters, digits and underscores which are displayed as spaces."); break;
 	case SB_FailedKillAll:	Message = tr("Failed to terminate all processes"); break;
@@ -1259,7 +1259,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_SnapNotFound:	Message = tr("Snapshot not found"); break;
 	case SB_SnapMergeFail:	Message = tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged."); break;
 	case SB_SnapRmDirFail:	Message = tr("Failed to remove old snapshot directory '%1'"); break;
-	case SB_SnapIsShared:	Message = tr("Can't remove a snapshots that is shared by multiple later snapshots"); break;
+	case SB_SnapIsShared:	Message = tr("Can't remove a snapshot that is shared by multiple later snapshots"); break;
 	case SB_SnapDelRegFail:	Message = tr("Failed to remove old RegHive"); break;
 	case SB_NotAuthorized:	Message = tr("You are not authorized to update configuration in section '%1'"); break;
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;

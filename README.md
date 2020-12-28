@@ -25,8 +25,10 @@ Open Source release
 - mpheath - help with inno setup
 
 ### Translators
-- nkh0472
-- bastik-1001
+- nkh0472 - CN
+- bastik-1001 - DE
+- JNylson - PT
+- lufog - RU
 
 More volunteers welcome ;)
 

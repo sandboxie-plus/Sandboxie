@@ -159,17 +159,17 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="848"/>
         <source>Please select group first.</source>
-        <translation>Bitte zuvor eine Gruppe asuswählen.</translation>
+        <translation>Bitte zuvor eine Gruppe auswählen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1482"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation type="unfinished"></translation>
+        <translation>COM-Objekte müssen durch ihre GUID, z.B. {00000000-0000-0000-0000-000000000000}, benannt werden</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1488"/>
         <source>RT interfaces must be specified by their name.</source>
-        <translation type="unfinished"></translation>
+        <translation>RT-Schnittstellen müssen durch ihren Namen benannt werden.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1942"/>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>Please sellect group first.</source>
-        <translation type="vanished">Bitte zuvor eine Gruppe asuswählen.</translation>
+        <translation type="vanished">Bitte zuvor eine Gruppe auswählen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="924"/>
@@ -361,7 +361,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="224"/>
         <source>Recover to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen zu:</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="229"/>
@@ -371,17 +371,17 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="230"/>
         <source>Clear folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Leere die Ordnerliste</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="242"/>
         <source>Recover &amp;&amp; Explore</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen &amp;&amp; Anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="243"/>
         <source>Recover &amp;&amp; Open/Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen &amp;&amp; Öffnen/Starten</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="245"/>
@@ -433,7 +433,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -442,7 +442,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -451,8 +451,8 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
-Gechrieben durch: %3</translation>
+        <translation>Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+Geschrieben durch: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="282"/>
@@ -471,7 +471,7 @@ Gechrieben durch: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
     <message>
@@ -769,7 +769,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="386"/>
         <source>Reset all hidden messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle ausgeblendeten Nachrichten zurücksetzen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="388"/>
@@ -846,7 +846,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="716"/>
         <source>   -   NOT connected</source>
-        <translation type="unfinished"></translation>
+        <translation>   -   NICHT verbunden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="846"/>
@@ -868,12 +868,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1134"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie auch die ausgeblendeten Mitteilungsboxen zurücksetzen (Ja) oder nur alle Protokollnachrichten (Nein)?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1163"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Änderungen werden automatisch angewendet, sobald die Datei gespeichert wird.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1164"/>
@@ -1176,32 +1176,32 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="SandMan.cpp" line="1317"/>
         <source>Administrator rights are required for this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Für dieen Vorgang werden administrative Rechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1319"/>
         <source>Failed to connect to the driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Verbinden mit dem Treiber</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1321"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine inkompatible Version von Sandboxie %1 wurde gefunden. Kompatible Versionen: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1322"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann Installationspfad von Sandboxie nicht finden.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1326"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Name der Sandbox darf nicht länger als 32 Zeichen sein.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1341"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Es kann kein Schnappschuss gelöscht werden der von mehreren späteren Schnappschüssen geteilt wird</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1366"/>
@@ -1211,12 +1211,12 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="SandMan.cpp" line="1434"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie %1 in einem sandgeboxten (Ja) oder in einem nicht gesandboxten (Nein) Browser öffnen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1435"/>
         <source>Remember choice for later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Auswahl für später merken.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1466"/>
@@ -1496,12 +1496,12 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Views/SbieView.cpp" line="111"/>
         <source>Allow internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Internetzugriff</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="113"/>
         <source>Force into this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>In dieser Sandbox erzwingen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="115"/>
@@ -1516,7 +1516,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Views/SbieView.cpp" line="615"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sandbox hat keine Internetschränkungen, möchten Sie diese aktivieren?</translation>
     </message>
     <message>
         <source>Suspend</source>
@@ -1786,7 +1786,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="182"/>
         <source>Prevent change to network and firewall parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhindere Änderungen an den Netzwerk- und Firewalleinstellungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="192"/>
@@ -2311,12 +2311,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1490"/>
         <source>COM Class Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>COM-Klassenrückverfolgung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1497"/>
         <source>&lt;- for this one the above does not apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;- für dieses findet das Obrige keine Anwendung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1513"/>
@@ -2498,7 +2498,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="183"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne URLs aus diesem Fenter in einer Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
@@ -2550,17 +2550,17 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="310"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;Dateisystemquelle&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="323"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC-Quelle&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="339"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;Registy-Quelle&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="352"/>

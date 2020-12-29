@@ -9,38 +9,38 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.3a / 5.45.2] - 2020-12-29
 
 ### Added
-- added prompt to choose if links in the sandman ui should be open in a sandboxed or unsandboxed browser
-- added more recovery options, "recovery & ..." and more recver to options
-- added "ClosedClsid=" to block com objects from being used when thay cause compatybility issues
+- added prompt to choose if links in the Sandman UI should be opened in a sandboxed or unsandboxed browser
+- added more recovery options
+- added "ClosedClsid=" to block com objects from being used when they cause compatibility issues
 - added "ClsidTrace=*" option to trace COM usage
 - added "ClosedRT=" option to block access to problematic Windows RT interfaces
-- added option to make a link for any selected process to sandman ui
+- added option to make a link for any selected process to SandMan UI
 - added option to reset all hidden messages
-- added more process presets "Force program" and "allow internet access"
+- added more process presets "force program" and "allow internet access"
 - added "SpecialImage=chrome,some_electron_app.exe" option to sandboxie.ini, valid image types "chrome", "firefox"
 -- with this option you can enable special hardcoded workarounds to new obscure forks of those browsers
-- added german translation (thanks bastik-1001) to the sandman UI
-- added russian translation (thanks lufog) to the sandman UI
-- added portuguese translation (thanks JNylson ) to the sandman UI
+- added German translation (thanks bastik-1001) to the SandMan UI
+- added Russian translation (thanks lufog) to the SandMan UI
+- added Portuguese translation (thanks JNylson ) to the SandMan UI
 
 ### Changed
-- changed docs and update urls to the new sandboxie-plus.com domain
-- greately improved the innos etup script (thanks mpheath)
-- "OpenClsid=" and "ClosedClsid=" now support specifyed a program or group name
-- by default when started in portable mode the sandbox folder will be located to the parent directory of the sandboxie instance
+- changed docs and update URLs to the new sandboxie-plus.com domain
+- greately improved the setup script (thanks mpheath)
+- "OpenClsid=" and "ClosedClsid=" now support specifying a program or group name
+- by default, when started in portable mode, the sandbox folder will be located in the parent directory of the sandboxie instance
 
 ### Fixed
-- grouping menu not fully working in the new sandman ui
-- fixed can't set quick recovery in sandman ui
-- fixed resource leak when loading process icons in sandman ui
+- grouping menu not fully working in the new SandMan UI
+- fixed not being able to set quick recovery in SandMan UI
+- fixed resource leak when loading process icons in SandMan UI
 - fixed issue with OpenToken debug options
-- fixed chrome crashing on websites that cause the invocation of "FindAppUriHandlersAsync"
+- fixed Chrome crashing on websites that cause the invocation of "FindAppUriHandlersAsync"
 - fixed issue connecting to the driver when starting in portable mode
 - fixed missing template setup when creating new boxes
 
 ### removed
-- removed obsolete "OpenDefaultClsid=n" use "ClosedClsid=" with the aproproate values instead
-- removed suspend/resume menu entry, pooling that state wasts substantial cpu cycles, use task explorer for that functionality
+- removed obsolete "OpenDefaultClsid=n" use "ClosedClsid=" with the apropriate values instead
+- removed suspend/resume menu entry, pooling that state wastes substantial CPU cycles; use task explorer for that functionality
 
 
 
@@ -48,7 +48,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.2a / 5.45.1] - 2020-12-23
 
 ### Fixed
-- fixed translation support in the sandman ui
+- fixed translation support in the SandMan UI
 - fixed sandboxed explorer issue
 - fixed simplified Chinese localization
 
@@ -57,39 +57,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.2 / 5.45.1] - 2020-12-23
 
 ### Added
-- added advanced new box creation dialog to sandman ui
+- added advanced new box creation dialog to SandMan UI
 - added show/hide tray context menu entry
 - added refresh button to file recovery dialog
 - added mechanism to load icons from {install-dir}/Icons/{icon}.png for UI customization
-- added tray indicator to show disabled forced program status in the sandman ui
-- added program name suggestions to box options in sandman ui
+- added tray indicator to show disabled forced program status in the SandMan UI
+- added program name suggestions to box options in SandMan UI
 - added saving of column sizes in the options window
 
 ### Changed
 - reorganized the advanced box options a bit
-- changed icons (thanks Valinwolf for picking the new once)
+- changed icons (thanks Valinwolf for picking the new ones)
 - updated Template.ini (thanks isaak654)
-- increates max value for disable forced process time in sandman ui
+- increates max value for disable forced process time in SandMan UI
 
 ### Fixed
-- fixed BSOD introduced in 5.45.0 when using windows 10 "Core isolation" 
+- fixed BSOD introduced in 5.45.0 when using Windows 10 "core isolation" 
 - fixed minor issue with lingering/leader processes
-- fixed menu issue in sandman ui
-- fixed issue with stop behaviour page in sandman ui
+- fixed menu issue in SandMan UI
+- fixed issue with stop behaviour page in SandMan UI
 - fixed issue with Plus installer not displaying kmdutil window
-- fixed sandman UI saving ui settings on windows shutdown
+- fixed SandMan UI saving UI settings on windows shutdown
 - fixed issue with Plus installer autorun
 - fixed issue with legacy installer not removing all files
-- fixed a driver compatibility issue with windows 20H1 and later
--- this solves "stop pending", line messager hanging and other issues...
+- fixed a driver compatibility issue with Windows 20H1 and later
+-- this solves "stop pending", LINE messenger hanging and other issues...
 - fixed quick recovery issue in SbieCtrl.exe introduced in 5.45.0
-- fixed issue advanced hide process settings, not saving
+- fixed issue advanced hide process settings not saving
 - fixed some typos in the UI (thanks isaak654)
 - fixed issue with GetRawInputDeviceInfo failing when boxed processes are put in a job object
--- this fix resolves issues with CP2077 and other PC Games not getting keyboard input (thanks Rostok)
+-- this fix resolves issues with CP2077 and other games not getting keyboard input (thanks Rostok)
 - fixed failing ClipCursor won't longer span the message log
-- fixed issue with adding recovery folders in sandman ui
-- fixed issue with office 2019 template when using a non-default sbie install location
+- fixed issue with adding recovery folders in SandMan UI
+- fixed issue with Office 2019 template when using a non-default Sbie install location
 - fixed issue setting last access attribute on sandboxed folders
 - fixed issue with process start signal
 
@@ -98,10 +98,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.1 / 5.45.0] - 2020-12-12
 
 ### Added
-- Added simple view mode
+- added simple view mode
 
 ### Changed
-- Updated SandMan UI to use Qt5.15.1
+- updated SandMan UI to use Qt5.15.1
 
 ### Fixed
 - fixed crash issue with progress dialog

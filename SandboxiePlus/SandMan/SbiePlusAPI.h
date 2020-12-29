@@ -51,6 +51,10 @@ public:
 	virtual bool			IsUnsecureDebugging() const			{ return m_iUnsecureDebugging != 0; }
 
 	virtual void			BlockProgram(const QString& ProgName);
+	virtual void			SetInternetAccess(const QString& ProgName, bool bSet);
+	virtual bool			HasInternetAccess(const QString& ProgName);
+	virtual void			SetForcedProgram(const QString& ProgName, bool bSet);
+	virtual bool			IsForcedProgram(const QString& ProgName);
 	virtual void			SetLingeringProgram(const QString& ProgName, bool bSet);
 	virtual int				IsLingeringProgram(const QString& ProgName);
 	virtual void			SetLeaderProgram(const QString& ProgName, bool bSet);
@@ -64,6 +68,9 @@ public:
 protected:
 	friend class CSbiePlusAPI;
 	virtual bool			CheckOpenToken() const;
+
+	virtual bool			TestProgramGroup(const QString& Group, const QString& ProgName);
+	virtual void			EditProgramGroup(const QString& Group, const QString& ProgName, bool bSet);
 
 	bool					m_bLogApiFound;
 	bool					m_bINetBlocked;
@@ -91,6 +98,10 @@ public:
 	virtual QString	GetStatusStr() const;
 
 	virtual void BlockProgram()									{ GetBox()->BlockProgram(m_ImageName); }
+	virtual void SetInternetAccess(bool bSet)					{ GetBox()->SetInternetAccess(m_ImageName, bSet); }
+	virtual bool HasInternetAccess()							{ return GetBox()->HasInternetAccess(m_ImageName); }
+	virtual void SetForcedProgram(bool bSet)					{ GetBox()->SetForcedProgram(m_ImageName, bSet); }
+	virtual bool IsForcedProgram()								{ return GetBox()->IsForcedProgram(m_ImageName); }
 	virtual void SetLingeringProgram(bool bSet)					{ GetBox()->SetLingeringProgram(m_ImageName, bSet); }
 	virtual int	 IsLingeringProgram()							{ return GetBox()->IsLingeringProgram(m_ImageName); }
 	virtual void SetLeaderProgram(bool bSet)					{ GetBox()->SetLeaderProgram(m_ImageName, bSet); }

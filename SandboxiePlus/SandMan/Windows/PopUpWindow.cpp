@@ -277,13 +277,17 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, const QString& BoxN
 
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 
-	QString Message = tr("The file %1 is eligible for quick recovery from %2.\r\nFull path: %3\r\nWritten by: %4")
-		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(BoxName).replace("_", " ")).arg(FilePath)
+	QString Message = tr("%1 is eligible for quick recovery from %2.\r\nThe file was written by: %3")
+		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(BoxName).replace("_", " "))
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
 	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxName, this);
+
+	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
+	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);
+
 	connect(pEntry, SIGNAL(Dismiss(int)), this, SLOT(OnDismiss(int)));
-	connect(pEntry, SIGNAL(RecoverFile(bool)), this, SLOT(OnRecoverFile(bool)));
+	connect(pEntry, SIGNAL(RecoverFile(int)), this, SLOT(OnRecoverFile(int)));
 	connect(pEntry, SIGNAL(OpenRecovery()), this, SLOT(OnOpenRecovery()));
 	AddEntry(pEntry);
 }
@@ -316,18 +320,18 @@ void CPopUpWindow::OnDismiss(int iFlag)
 	}
 }
 
-void CPopUpWindow::OnRecoverFile(bool bBrowse)
+void CPopUpWindow::OnRecoverFile(int Action)
 {
 	CPopUpRecovery* pEntry = qobject_cast<CPopUpRecovery*>(sender());
 
-	QString RecoveryFolder;
-	if (bBrowse)
-		RecoveryFolder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
-	else
-		RecoveryFolder = pEntry->m_FilePath.left(pEntry->m_FilePath.lastIndexOf("\\"));
+	QString RecoveryFolder = pEntry->m_pTarget->currentText();
 
-	if (RecoveryFolder.isEmpty())
-		return;
+	if (pEntry->m_pTarget->currentIndex() != 0 || pEntry->m_ListCleared) {
+		QStringList RecoverTargets;
+		for (int i = 2; i < pEntry->m_pTarget->count() - 1; i++)
+			RecoverTargets.append(pEntry->m_pTarget->itemText(i));
+		theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_RecoverTarget", RecoverTargets, true);
+	}
 
 	QString FileName = pEntry->m_FilePath.mid(pEntry->m_FilePath.lastIndexOf("\\") + 1);
 	QString BoxedFilePath = theAPI->GetBoxedPath(pEntry->m_BoxName, pEntry->m_FilePath);
@@ -335,7 +339,7 @@ void CPopUpWindow::OnRecoverFile(bool bBrowse)
 	QList<QPair<QString, QString>> FileList;
 	FileList.append(qMakePair(BoxedFilePath, RecoveryFolder + "\\" + FileName));
 
-	SB_PROGRESS Status = theGUI->RecoverFiles(FileList);
+	SB_PROGRESS Status = theGUI->RecoverFiles(FileList, Action);
 	if (Status.GetStatus() == OP_ASYNC)
 		theGUI->AddAsyncOp(Status.GetValue());
 		

@@ -61,8 +61,8 @@ private slots:
 	void OnBrowseFolder();
 	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); }
 	void OnAddIPC()					{ AddAccessEntry(eIPC, eDirect, "", ""); }
-	void OnAddClsId()				{ AddAccessEntry(eWndCls, eDirect, "", ""); }
-	void OnAddCOM()					{ AddAccessEntry(eClsId, eDirect, "", ""); }
+	void OnAddWnd()					{ AddAccessEntry(eWnd, eDirect, "", ""); }
+	void OnAddCOM()					{ AddAccessEntry(eCOM, eDirect, "", ""); }
 	void OnDelAccess();
 	void OnShowAccessTmpl()			{ LoadAccessList(); }
 
@@ -122,7 +122,9 @@ protected:
 
 		eOpenWinClass,
 
-		eOpenClsid,
+		eOpenCOM,
+		eClosedCOM,
+		eClosedCOM_RT,
 
 		eMaxAccessType
 	};
@@ -132,8 +134,8 @@ protected:
 		eFile,
 		eKey,
 		eIPC,
-		eWndCls,
-		eClsId
+		eWnd,
+		eCOM
 	};
 
 	enum EAccessMode
@@ -141,6 +143,7 @@ protected:
 		eDirect,
 		eDirectAll,
 		eClosed,
+		eClosedRT,
 		eReadOnly,
 		eWriteOnly
 	};

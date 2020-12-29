@@ -16,6 +16,9 @@
 #include <QtConcurrent>
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Windows/NewBoxWindow.h"
+#include "Windows/OptionsWindow.h"
+#include <QProxyStyle>
+
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -86,6 +89,10 @@ CSandMan::CSandMan(QWidget *parent)
 #endif
 
 	theGUI = this;
+
+	QDesktopServices::setUrlHandler("http", this, "OpenUrl");
+	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
+	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
 
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
@@ -205,6 +212,24 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
+
+	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
+
+	QWidget* pWidget = new QWidget();
+	pWidget->setMaximumHeight(200);
+	QGridLayout* pLayout = new QGridLayout();
+	pLayout->addWidget(pBar, 0, 0);
+	pWidget->setLayout(pLayout);
+	pBoxWidget->setDefaultWidget(pWidget);*/
+
+	/*QLabel* pLabel = new QLabel("test");
+	pLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	pLabel->setAlignment(Qt::AlignCenter);
+	pBoxWidget->setDefaultWidget(pLabel);*/
+
+	//m_pTrayMenu->addAction(pBoxWidget);
+	//m_pTrayMenu->addSeparator();
+
 	m_pTrayMenu->addAction(m_pExit);
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
@@ -358,6 +383,7 @@ void CSandMan::CreateMenus()
 
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
+		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
@@ -421,7 +447,7 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupport = new QLabel("<a href=\"https://www.patreon.com/DavidXanatos\">Support Sandboxie-Plus on Patreon</a>");
+	QLabel* pSupport = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
 	pSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	connect(pSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
 	m_pToolBar->addWidget(pSupport);
@@ -489,8 +515,10 @@ void CSandMan::closeEvent(QCloseEvent *e)
 bool CSandMan::IsFullyPortable()
 {
 	QString SbiePath = theAPI->GetSbiePath();
-	QString AppPath = QApplication::applicationDirPath().replace("/", "\\");
-	return (theConf->IsPortable() && SbiePath.compare(AppPath, Qt::CaseInsensitive) == 0);
+	QString IniPath = theAPI->GetIniPath();
+	if (IniPath.indexOf(SbiePath, 0, Qt::CaseInsensitive) == 0)
+		return true;
+	return false;
 }
 
 void CSandMan::OnMessage(const QString& Message)
@@ -651,14 +679,22 @@ void CSandMan::OnStatusChanged()
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	if (theAPI->IsConnected())
 	{
+		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
+		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+
 		statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
 		//appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
-		if(IsFullyPortable())
+		if (IsFullyPortable())
+		{
 			appTitle.append(tr("   -   Portable"));
 
-		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
-		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+			if (theConf->GetBool("Options/PortableRootDir", true)) 
+			{
+				QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../SandBoxes").replace("/", "\\");
+				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath);
+			}
+		}
 
 		if (theConf->GetBool("Options/AutoRunSoftCompat", true))
 		{
@@ -677,7 +713,7 @@ void CSandMan::OnStatusChanged()
 	}
 	else
 	{
-		appTitle.append(tr("   -   Driver NOT connected").arg(theAPI->GetVersion()));
+		appTitle.append(tr("   -   NOT connected").arg(theAPI->GetVersion()));
 
 		theAPI->WatchIni(false);
 	}
@@ -780,14 +816,14 @@ void CSandMan::OpenRecovery(const QString& BoxName)
 	pRecoveryWindow->show();
 }
 
-SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList)
+SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action)
 {
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandMan::RecoverFilesAsync, pProgress, FileList);
+	QtConcurrent::run(CSandMan::RecoverFilesAsync, pProgress, FileList, Action);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
-void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList)
+void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action)
 {
 	SB_STATUS Status = SB_OK;
 
@@ -808,6 +844,20 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 
 	if (!Unrecovered.isEmpty())
 		Status = SB_ERR(SB_Message, QVariantList () << (tr("Failed to recover some files: \n") + Unrecovered.join("\n")));
+	else if(FileList.count() == 1 && Action != 0)
+	{
+		std::wstring path = FileList.first().second.toStdWString();
+		switch (Action)
+		{
+		case 1: // open
+			ShellExecute(NULL, NULL, path.c_str(), NULL, NULL, SW_SHOWNORMAL);
+			break;
+		case 2: // explore
+			ShellExecute(NULL, NULL, L"explorer.exe", (L"/select,\"" + path + L"\"").c_str(), NULL, SW_SHOWNORMAL);
+			break;
+		}
+	}
+
 
 	pProgress->Finish(Status);
 }
@@ -896,8 +946,10 @@ SB_STATUS CSandMan::ConnectSbie()
 		Status = CSbieUtils::Start(CSbieUtils::eAll);
 	}
 
-	if (Status.GetStatus() == OP_ASYNC)
+	if (Status.GetStatus() == OP_ASYNC) {
 		m_bConnectPending = true;
+		return SB_OK;
+	}
 	else if (!Status.IsError())
 		Status = ConnectSbieImpl();
 
@@ -1077,12 +1129,39 @@ void CSandMan::UpdateSettings()
 		m_pTrayIcon->hide();
 }
 
+void CSandMan::OnResetMsgs()
+{
+	auto Ret = QMessageBox("Sandboxie-Plus", tr("Do you also want to reset hidden message boxes (yes), or only all log messages (no)?"),
+		QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape).exec();
+	if (Ret == QMessageBox::Cancel)
+		return;
+
+	if (Ret == QMessageBox::Yes)
+	{
+		theConf->SetValue("Options/PortableStop", -1);
+		theConf->SetValue("Options/PortableStart", -1);
+
+		theConf->SetValue("Options/CheckForUpdates", 2);
+
+		theConf->SetValue("Options/NoEditInfo", true);
+		theConf->SetValue("Options/ApiLogInfo", true);
+
+		theConf->SetValue("Options/OpenUrlsSandboxed", 2);
+	}
+
+	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
+	m_pPopUpWindow->ReloadHiddenMessages();
+}
+
 void CSandMan::OnEditIni()
 {
 	if (theConf->GetBool("Options/NoEditInfo", true))
 	{
 		bool State = false;
-		CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The changes will be applied automatically as soon as the editor is closed.")
+		CCheckableMessageBox::question(this, "Sandboxie-Plus", 
+			theConf->GetBool("Options/WatchIni", true)
+			? tr("The changes will be applied automatically whenever the file gets saved.")
+			: tr("The changes will be applied automatically as soon as the editor is closed.")
 			, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
 
 		if (State)
@@ -1268,7 +1347,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	}
 
 	foreach(const QVariant& Arg, Error.GetArgs())
-		Message.arg(Arg.toString()); // todo: make quint32 hex and so on
+		Message = Message.arg(Arg.toString()); // todo: make quint32 hex and so on
 
 	return Message;
 }
@@ -1342,6 +1421,27 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 	}
 }
 
+void CSandMan::OpenUrl(const QUrl& url)
+{
+	if (url.scheme() == "sbie")
+		return OpenUrl("https://sandboxie-plus.com/sandboxie" + url.path());
+
+	int iSandboxed = theConf->GetInt("Options/OpenUrlsSandboxed", 2);
+
+	if (iSandboxed == 2)
+	{
+		bool bCheck = false;
+		QString Message = tr("Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?").arg(url.toString());
+		QDialogButtonBox::StandardButton Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", Message , tr("Remember choice for later."), 
+			&bCheck, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
+		if (Ret == QDialogButtonBox::Cancel) return;
+		iSandboxed = Ret == QDialogButtonBox::Yes ? 1 : 0;
+		if(bCheck) theConf->SetValue("Options/OpenUrlsSandboxed", iSandboxed);
+	}
+
+	if (iSandboxed) theAPI->RunStart("__ask__", url.toString());
+	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
+}
 
 QString CSandMan::GetVersion()
 {
@@ -1383,7 +1483,7 @@ void CSandMan::CheckForUpdates(bool bManual)
 		Query.addQueryItem("update_key", UpdateKey);
 	Query.addQueryItem("auto", bManual ? "0" : "1");
 
-	QUrl Url("https://xanasoft.com/update.php");
+	QUrl Url("https://sandboxie-plus.com/update.php");
 	Url.setQuery(Query);
 
 	QNetworkRequest Request = QNetworkRequest(Url);
@@ -1566,13 +1666,13 @@ void CSandMan::OnUpdateDownload()
 void CSandMan::OnHelp()
 {
 	if (sender() == m_pSupport)
-		QDesktopServices::openUrl(QUrl("https://xanasoft.com/go.php?to=donate"));
+		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=donate"));
 	else if (sender() == m_pForum)
-		QDesktopServices::openUrl(QUrl("https://xanasoft.com/go.php?to=forum"));
+		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-forum"));
 	else if (sender() == m_pManual)
-		QDesktopServices::openUrl(QUrl("https://xanasoft.com/go.php?to=sbie-docs"));
+		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-docs"));
 	else
-		QDesktopServices::openUrl(QUrl("https://www.patreon.com/DavidXanatos"));
+		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=patreon"));
 }
 
 void CSandMan::OnAbout()

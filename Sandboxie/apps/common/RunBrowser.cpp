@@ -135,7 +135,7 @@ void CRunBrowser::OnNo()
 
 CString CRunBrowser::GetTopicUrl(const CString &topic)
 {
-    return L"https://xanasoft.com/Sandboxie/" + topic;
+    return L"https://sandboxie-plus.com/go.php?to=sbie-" + topic;
 }
 
 
@@ -156,5 +156,5 @@ void CRunBrowser::OpenHelp(CWnd *pParentWnd, const CString &topic)
 
 void CRunBrowser::OpenForum(CWnd *pParentWnd)
 {
-    CRunBrowser x(pParentWnd, L"https://forum.xanasoft.com/");
+    CRunBrowser x(pParentWnd, L"https://sandboxie-plus.com/go.php?to=sbie-forum");
 }

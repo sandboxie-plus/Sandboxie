@@ -2,6 +2,199 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru">
 <context>
+    <name>CApiMonModel</name>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished">Сообщение</translation>
+    </message>
+    <message>
+        <source>Time Stamp</source>
+        <translation type="unfinished">Временная метка</translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished">Процесс</translation>
+    </message>
+</context>
+<context>
+    <name>CMultiErrorDialog</name>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished">Сообщение</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Error</source>
+        <translation type="unfinished">Sandboxie-Plus - Ошибка</translation>
+    </message>
+</context>
+<context>
+    <name>CNewBoxWindow</name>
+    <message>
+        <source>New Box</source>
+        <translation type="unfinished">Новая песочница</translation>
+    </message>
+    <message>
+        <source>Hardened</source>
+        <translation type="unfinished">Усиленный (hardened)</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">По умолчанию</translation>
+    </message>
+    <message>
+        <source>Legacy (old sbie behaviour)</source>
+        <translation type="unfinished">Устаревшее (старое поведение sbie)</translation>
+    </message>
+</context>
+<context>
+    <name>COptionsWindow</name>
+    <message>
+        <source>Always show</source>
+        <translation type="unfinished">Всегда показывать</translation>
+    </message>
+    <message>
+        <source>Template values can not be edited.</source>
+        <translation type="unfinished">Значения шаблона нельзя редактировать.</translation>
+    </message>
+    <message>
+        <source>Lingerer</source>
+        <translatorcomment>Не уверен как правильно перевести Lingerer</translatorcomment>
+        <translation type="unfinished">Отложено</translation>
+    </message>
+    <message>
+        <source>Browse for File</source>
+        <translation type="unfinished">Поиск файла</translation>
+    </message>
+    <message>
+        <source>Please enter a menu title</source>
+        <translation type="unfinished">Пожалуйста, введите заголовок меню</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished">Выбрать каталог</translation>
+    </message>
+    <message>
+        <source>Please enter a name for the new group</source>
+        <translation type="unfinished">Пожалуйста, введите имя для новой группы</translation>
+    </message>
+    <message>
+        <source>Please enter a program file name</source>
+        <translation type="unfinished">Пожалуйста, введите имя файла программы</translation>
+    </message>
+    <message>
+        <source>Template values can not be removed.</source>
+        <translation type="unfinished">Значения шаблона удалить нельзя.</translation>
+    </message>
+    <message>
+        <source>Display box name in title</source>
+        <translation type="unfinished">Отображать имя песочницы в заголовке</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished">Папка</translation>
+    </message>
+    <message>
+        <source>Sandboxie Plus - &apos;%1&apos; Options</source>
+        <translation type="unfinished">Sandboxie Plus - &apos;%1&apos; опции</translation>
+    </message>
+    <message>
+        <source>Leader</source>
+        <translation type="unfinished">Лидер</translation>
+    </message>
+    <message>
+        <source>Group: %1</source>
+        <translation type="unfinished">Группа: %1</translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished">Процесс</translation>
+    </message>
+    <message>
+        <source>Display [#] indicator only</source>
+        <translation type="unfinished">Отображать только индикатор [#]</translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished">%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Border disabled</source>
+        <translation type="unfinished">Граница отключена</translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished">Все категории</translation>
+    </message>
+    <message>
+        <source>Please enter a file extension to be excluded</source>
+        <translation type="unfinished">Пожалуйста, введите расширение файла, которое нужно исключить</translation>
+    </message>
+    <message>
+        <source>Exclusion</source>
+        <translation type="unfinished">Исключение</translation>
+    </message>
+    <message>
+        <source>Select File</source>
+        <translation type="unfinished">Выбрать файл</translation>
+    </message>
+    <message>
+        <source>This template is enabled globally. To configure it, use the global options.</source>
+        <translation type="unfinished">Этот шаблон включен глобально. Для его настройки используйте глобальные параметры.</translation>
+    </message>
+    <message>
+        <source>Please select group first.</source>
+        <translation type="unfinished">Пожалуйста, сначала выберите группу.</translation>
+    </message>
+    <message>
+        <source>All Files (*.*)</source>
+        <translation type="unfinished">Все файлы (*.*)</translation>
+    </message>
+    <message>
+        <source>Show only when title is in focus</source>
+        <translation type="unfinished">Показывать, только когда заголовок в фокусе</translation>
+    </message>
+    <message>
+        <source>Select Program</source>
+        <translation type="unfinished">Выбрать программу</translation>
+    </message>
+    <message>
+        <source>Please enter a command</source>
+        <translation type="unfinished">Пожалуйста, введите команду</translation>
+    </message>
+    <message>
+        <source>kilobytes (%1)</source>
+        <translation type="unfinished">килобайт (%1)</translation>
+    </message>
+    <message>
+        <source>Don&apos;t alter the window title</source>
+        <translation type="unfinished">Не менять заголовок окна</translation>
+    </message>
+    <message>
+        <source>All Programs</source>
+        <translation type="unfinished">Все программы</translation>
+    </message>
+    <message>
+        <source>Browse for Folder</source>
+        <translation type="unfinished">Найти папку</translation>
+    </message>
+    <message>
+        <source>Enter program:</source>
+        <translation type="unfinished">Введите программу:</translation>
+    </message>
+    <message>
+        <source>Executables (*.exe|*.cmd)</source>
+        <translation type="unfinished">Исполняемые файлы (*.exe|*.cmd)</translation>
+    </message>
+    <message>
+        <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RT interfaces must be specified by their name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CPopUpMessage</name>
     <message>
         <source>?</source>
@@ -22,6 +215,17 @@
     <message>
         <source>Visit %1 for a detailed explanation.</source>
         <translation type="unfinished">Посетите %1 для подробного объяснения.</translation>
+    </message>
+</context>
+<context>
+    <name>CPopUpProgress</name>
+    <message>
+        <source>Remove this progress indicator from the list</source>
+        <translation type="unfinished">Удалить этот индикатор прогресса из списка</translation>
+    </message>
+    <message>
+        <source>Dismiss</source>
+        <translation type="unfinished">Отклонить</translation>
     </message>
 </context>
 <context>
@@ -56,195 +260,216 @@
     </message>
 </context>
 <context>
-    <name>CSbieView</name>
+    <name>CPopUpRecovery</name>
     <message>
-        <source>Run</source>
-        <translation type="unfinished">Запустить</translation>
+        <source>Recover file to selected folder</source>
+        <translation type="obsolete">Восстановление файла в выбранную папку</translation>
     </message>
     <message>
-        <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Создать ярлык для песочницы %1</translation>
+        <source>Disable quick recovery until the box restarts</source>
+        <translation type="unfinished">Отключить быстрое восстановление до перезагрузки песочницы</translation>
     </message>
     <message>
-        <source>Options:
-    </source>
-        <translation type="unfinished">Опции:
-    </translation>
+        <source>Recover</source>
+        <translation type="unfinished">Восстановить</translation>
     </message>
     <message>
-        <source>Do you really want to delete the content of the selected sandbox(es)?</source>
-        <translation type="unfinished">Вы действительно хотите удалить содержимое выбранных песочниц?</translation>
+        <source>Recover the file to original location</source>
+        <translation type="unfinished">Восстановить файл в исходное место</translation>
     </message>
     <message>
-        <source>Drop Admin Rights</source>
-        <translation type="unfinished">Отбросить права администратора</translation>
+        <source>Dismiss</source>
+        <translation type="unfinished">Отклонить</translation>
     </message>
     <message>
-        <source>Run eMail Client</source>
-        <translation type="unfinished">Запустить email клиент</translation>
+        <source>Don&apos;t recover this file right now</source>
+        <translation type="unfinished">Не восстанавливать этот файл прямо сейчас</translation>
     </message>
     <message>
-        <source>Remove Group</source>
-        <translation type="unfinished">Удалить группу</translation>
+        <source>Open file recovery for this box</source>
+        <translation type="unfinished">Восстановление открытых файлов для этой песочницы</translation>
     </message>
     <message>
-        <source>Sandbox Options</source>
-        <translation type="unfinished">Опции песочницы</translation>
+        <source>Dismiss all from this box</source>
+        <translation type="unfinished">Отклонить все из этой песочницы</translation>
     </message>
     <message>
-        <source>Sandbox Presets</source>
-        <translation type="unfinished">Предустановки песочницы</translation>
+        <source>Recover to:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to %1 the selected process(es)</source>
-        <translation type="unfinished">Вы хотите %1 выбранных процессов</translation>
+        <source>Browse</source>
+        <translation type="unfinished">Обзор</translation>
     </message>
     <message>
-        <source>Move to Group</source>
-        <translation type="unfinished">Переместить в группу</translation>
+        <source>Clear folder list</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove Sandbox</source>
-        <translation type="unfinished">Удалить песочницу</translation>
+        <source>Recover &amp;&amp; Explore</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rename Sandbox</source>
-        <translation type="unfinished">Переименовать песочницу</translation>
+        <source>Recover &amp;&amp; Open/Run</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run from Start Menu</source>
-        <translation type="unfinished">Запуск из меню &apos;Пуск&apos;</translation>
+        <source>Select Directory</source>
+        <translation type="unfinished">Выбрать каталог</translation>
+    </message>
+</context>
+<context>
+    <name>CPopUpWindow</name>
+    <message>
+        <source>Select Directory</source>
+        <translation type="obsolete">Выбрать каталог</translation>
     </message>
     <message>
-        <source>Preset</source>
-        <translation type="unfinished">Предустановки</translation>
+        <source>an UNKNOWN process.</source>
+        <translation type="unfinished">НЕИЗВЕСТНЫЙ процесс.</translation>
     </message>
     <message>
-        <source>Resume</source>
-        <translation type="unfinished">Продолжить</translation>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="obsolete">Перенос большого файла %1 в песочницу %2, %3 осталось.
+Полный путь: %4</translation>
     </message>
     <message>
-        <source>Please enter a new group name</source>
-        <translation type="unfinished">Пожалуйста, введите новое имя группы</translation>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="obsolete">Вы хотите разрешить %4 (%5) скопировать %1 большой файл в песочницу: %2?
+Имя файла: %3</translation>
     </message>
     <message>
-        <source>Enable API Call logging</source>
-        <translation type="unfinished">Включить ведение журнала вызовов API</translation>
+        <source>Sandboxie-Plus Notifications</source>
+        <translation type="unfinished">Уведомления Sandboxie-Plus</translation>
     </message>
     <message>
-        <source>[None]</source>
-        <translation type="unfinished">[Нет]</translation>
+        <source>%1 (%2)</source>
+        <translation type="unfinished">%1 (%2)</translation>
     </message>
     <message>
-        <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished">Введите новое имя для песочницы.</translation>
+        <source>UNKNOWN</source>
+        <translation type="unfinished">НЕИЗВЕСТНО</translation>
     </message>
     <message>
-        <source>Add Group</source>
-        <translation type="unfinished">Добавить группу</translation>
+        <source>The file %1 is eligible for quick recovery from %2.
+Full path: %3
+Written by: %4</source>
+        <translation type="obsolete">Файл %1 имеет право на быстрое восстановление после %2.
+Полный путь: %3
+Записан: %4</translation>
     </message>
     <message>
-        <source>Delete Content</source>
-        <translation type="unfinished">Удалить содержимое</translation>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="obsolete">Вы хотите разрешить %1 (%2) доступ в Интернет?
+Полный путь: %3</translation>
     </message>
     <message>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation type="unfinished">Вы действительно хотите удалить выбранные песочницы?</translation>
+        <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
+        <translation type="unfinished">Вы хотите, чтобы диспетчер очереди печати мог писать вне песочницы для %1 (%2)?</translation>
     </message>
     <message>
-        <source>Create Desktop Shortcut</source>
-        <translation type="unfinished">Создать ярлык на рабочем столе</translation>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run Program</source>
-        <translation type="unfinished">Запустить программу</translation>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>    IPC root: %1
-</source>
-        <translation type="unfinished">    Корень IPC: %1
-</translation>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Block and Terminate</source>
-        <translation type="unfinished">Заблокировать и завершить</translation>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CRecoveryWindow</name>
+    <message>
+        <source>File Name</source>
+        <translation type="unfinished">Имя файла</translation>
     </message>
     <message>
-        <source>    Registry root: %1
-</source>
-        <translation type="unfinished">    Корень реестра: %1
-</translation>
+        <source>File Size</source>
+        <translation type="unfinished">Размер файла</translation>
     </message>
     <message>
-        <source>    File root: %1
-</source>
-        <translation type="unfinished">    Корень файла: %1
-</translation>
+        <source>Full Path</source>
+        <translation type="unfinished">Полный путь</translation>
     </message>
     <message>
-        <source>Terminate</source>
-        <translation type="unfinished">Завершить</translation>
+        <source>Select Directory</source>
+        <translation type="unfinished">Выбрать каталог</translation>
     </message>
     <message>
-        <source>Set Leader Process</source>
-        <translation type="unfinished">Установить лидерский процесс</translation>
+        <source>%1 - File Recovery</source>
+        <translation type="unfinished">%1 - Восстановление файла</translation>
+    </message>
+</context>
+<context>
+    <name>CResMonModel</name>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Тип</translation>
     </message>
     <message>
-        <source>Terminate All Programs</source>
-        <translation type="unfinished">Завершить все программы</translation>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
     </message>
     <message>
-        <source>Do you really want to remove the selected group(s)?</source>
-        <translation type="unfinished">Вы действительно хотите удалить выбранные группы?</translation>
+        <source>Status</source>
+        <translation type="unfinished">Статус</translation>
     </message>
     <message>
-        <source>Run Web Browser</source>
-        <translation type="unfinished">Запустить веб-браузер</translation>
+        <source>Time Stamp</source>
+        <translation type="unfinished">Временная метка</translation>
     </message>
     <message>
-        <source>Allow Network Shares</source>
-        <translation type="unfinished">Разрешить сетевые ресурсы</translation>
+        <source>Process</source>
+        <translation type="unfinished">Процесс</translation>
+    </message>
+</context>
+<context>
+    <name>CSandBoxPlus</name>
+    <message>
+        <source>No Admin</source>
+        <translation type="unfinished">Без прав администратора</translation>
     </message>
     <message>
-        <source>Run Cmd.exe</source>
-        <translation type="unfinished">Запустить Cmd.exe</translation>
+        <source>No INet</source>
+        <translation type="unfinished">Без интернета</translation>
     </message>
     <message>
-        <source>Snapshots Manager</source>
-        <translation type="unfinished">Менеджер снимков</translation>
+        <source>Normal</source>
+        <translation type="unfinished">Нормальный</translation>
     </message>
     <message>
-        <source>Suspend</source>
-        <translation type="unfinished">Приостановить</translation>
+        <source>API Log</source>
+        <translation type="unfinished">Журнал API</translation>
     </message>
     <message>
-        <source>Run Explorer</source>
-        <translation type="unfinished">Запустите проводник</translation>
+        <source>Net Share</source>
+        <translation type="unfinished">Общая сеть</translation>
     </message>
     <message>
-        <source>Block Internet Access</source>
-        <translation type="unfinished">Блокировать доступ в Интернет</translation>
+        <source>NOT SECURE (Debug Config)</source>
+        <translation type="unfinished">НЕ БЕЗОПАСНЫЙ (отладочная конфигурация)</translation>
     </message>
     <message>
-        <source>Set Linger Process</source>
-        <translatorcomment>Не уверен как правильно перевести Linger</translatorcomment>
-        <translation type="unfinished">Установить отложенный процесса</translation>
+        <source>Enhanced Isolation</source>
+        <translation type="unfinished">Улучшенная изоляция</translation>
     </message>
     <message>
-        <source>Create New Box</source>
-        <translation type="unfinished">Создать новую песочницу</translation>
-    </message>
-    <message>
-        <source>Pin to Run Menu</source>
-        <translation type="unfinished">Закрепить в меню &apos;Выполнить&apos;</translation>
-    </message>
-    <message>
-        <source>Recover Files</source>
-        <translation type="unfinished">Восстановить файлы</translation>
-    </message>
-    <message>
-        <source>Explore Content</source>
-        <translation type="unfinished">Посмотреть содержимое</translation>
+        <source>Reduced Isolation</source>
+        <translation type="unfinished">Сниженная изоляция</translation>
     </message>
 </context>
 <context>
@@ -421,7 +646,7 @@
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 charakters.</source>
-        <translation type="unfinished">Имя песочницы не может быть длиннее 32 символов.</translation>
+        <translation type="obsolete">Имя песочницы не может быть длиннее 32 символов.</translation>
     </message>
     <message>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
@@ -469,7 +694,7 @@
     </message>
     <message>
         <source>Can&apos;t find Sandboxie instal path.</source>
-        <translation type="unfinished">Не удается найти путь установки Sandboxie.</translation>
+        <translation type="obsolete">Не удается найти путь установки Sandboxie.</translation>
     </message>
     <message>
         <source>Show/Hide</source>
@@ -509,7 +734,7 @@
     </message>
     <message>
         <source>Incompatible Version, found Sandboxie %1, compatible versions: %2</source>
-        <translation type="unfinished">Несовместимая версия, обнаружена Sandboxie %1, совместимые версии: %2</translation>
+        <translation type="obsolete">Несовместимая версия, обнаружена Sandboxie %1, совместимые версии: %2</translation>
     </message>
     <message>
         <source>The sandbox name can not be a device name.</source>
@@ -599,7 +824,7 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Failed to connect to driver</source>
-        <translation type="unfinished">Не удалось подключиться к драйверу</translation>
+        <translation type="obsolete">Не удалось подключиться к драйверу</translation>
     </message>
     <message>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
@@ -671,7 +896,7 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Can&apos;t remove a snapshots that is shared by multiple later snapshots</source>
-        <translation type="unfinished">Невозможно удалить снимки, которые используются в нескольких более поздних снимках</translation>
+        <translation type="obsolete">Невозможно удалить снимки, которые используются в нескольких более поздних снимках</translation>
     </message>
     <message>
         <source>No sandboxes found; creating: %1</source>
@@ -699,11 +924,79 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>   -   Driver NOT connected</source>
-        <translation type="unfinished">   -   Драйвер не подключен</translation>
+        <translation type="obsolete">   -   Драйвер не подключен</translation>
     </message>
     <message>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation type="unfinished">Не удалось установить параметр конфигурации %1 в секции %2: %3</translation>
+    </message>
+    <message>
+        <source>Reset all hidden messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>   -   NOT connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The changes will be applied automatically whenever the file gets saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Administrator rights are required for this operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to execute: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to connect to the driver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to communicate with Sandboxie Service: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t find Sandboxie installation path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The sandbox name can not be longer than 32 characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to copy RegHive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Error Status: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remember choice for later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -731,6 +1024,330 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     <message>
         <source>Process ID</source>
         <translation type="unfinished">ID процесса</translation>
+    </message>
+</context>
+<context>
+    <name>CSbieProcess</name>
+    <message>
+        <source>Terminated</source>
+        <translation type="unfinished">Прекращено</translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation type="unfinished">Выполняется</translation>
+    </message>
+    <message>
+        <source>Suspended</source>
+        <translation type="obsolete">Приостановлено</translation>
+    </message>
+</context>
+<context>
+    <name>CSbieView</name>
+    <message>
+        <source>Run</source>
+        <translation type="unfinished">Запустить</translation>
+    </message>
+    <message>
+        <source>Create Shortcut to sandbox %1</source>
+        <translation type="unfinished">Создать ярлык для песочницы %1</translation>
+    </message>
+    <message>
+        <source>Options:
+    </source>
+        <translation type="unfinished">Опции:
+    </translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the content of the selected sandbox(es)?</source>
+        <translation type="unfinished">Вы действительно хотите удалить содержимое выбранных песочниц?</translation>
+    </message>
+    <message>
+        <source>Drop Admin Rights</source>
+        <translation type="unfinished">Отбросить права администратора</translation>
+    </message>
+    <message>
+        <source>Run eMail Client</source>
+        <translation type="unfinished">Запустить email клиент</translation>
+    </message>
+    <message>
+        <source>Remove Group</source>
+        <translation type="unfinished">Удалить группу</translation>
+    </message>
+    <message>
+        <source>Sandbox Options</source>
+        <translation type="unfinished">Опции песочницы</translation>
+    </message>
+    <message>
+        <source>Sandbox Presets</source>
+        <translation type="unfinished">Предустановки песочницы</translation>
+    </message>
+    <message>
+        <source>Do you want to %1 the selected process(es)</source>
+        <translation type="unfinished">Вы хотите %1 выбранных процессов</translation>
+    </message>
+    <message>
+        <source>Move to Group</source>
+        <translation type="unfinished">Переместить в группу</translation>
+    </message>
+    <message>
+        <source>Remove Sandbox</source>
+        <translation type="unfinished">Удалить песочницу</translation>
+    </message>
+    <message>
+        <source>Rename Sandbox</source>
+        <translation type="unfinished">Переименовать песочницу</translation>
+    </message>
+    <message>
+        <source>Run from Start Menu</source>
+        <translation type="unfinished">Запуск из меню &apos;Пуск&apos;</translation>
+    </message>
+    <message>
+        <source>Preset</source>
+        <translation type="unfinished">Предустановки</translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation type="obsolete">Продолжить</translation>
+    </message>
+    <message>
+        <source>Please enter a new group name</source>
+        <translation type="unfinished">Пожалуйста, введите новое имя группы</translation>
+    </message>
+    <message>
+        <source>Enable API Call logging</source>
+        <translation type="unfinished">Включить ведение журнала вызовов API</translation>
+    </message>
+    <message>
+        <source>[None]</source>
+        <translation type="unfinished">[Нет]</translation>
+    </message>
+    <message>
+        <source>Please enter a new name for the Sandbox.</source>
+        <translation type="unfinished">Введите новое имя для песочницы.</translation>
+    </message>
+    <message>
+        <source>Add Group</source>
+        <translation type="unfinished">Добавить группу</translation>
+    </message>
+    <message>
+        <source>Delete Content</source>
+        <translation type="unfinished">Удалить содержимое</translation>
+    </message>
+    <message>
+        <source>Do you really want to remove the selected sandbox(es)?</source>
+        <translation type="unfinished">Вы действительно хотите удалить выбранные песочницы?</translation>
+    </message>
+    <message>
+        <source>Create Desktop Shortcut</source>
+        <translation type="obsolete">Создать ярлык на рабочем столе</translation>
+    </message>
+    <message>
+        <source>Run Program</source>
+        <translation type="unfinished">Запустить программу</translation>
+    </message>
+    <message>
+        <source>    IPC root: %1
+</source>
+        <translation type="unfinished">    Корень IPC: %1
+</translation>
+    </message>
+    <message>
+        <source>Block and Terminate</source>
+        <translation type="unfinished">Заблокировать и завершить</translation>
+    </message>
+    <message>
+        <source>    Registry root: %1
+</source>
+        <translation type="unfinished">    Корень реестра: %1
+</translation>
+    </message>
+    <message>
+        <source>    File root: %1
+</source>
+        <translation type="unfinished">    Корень файла: %1
+</translation>
+    </message>
+    <message>
+        <source>Terminate</source>
+        <translation type="unfinished">Завершить</translation>
+    </message>
+    <message>
+        <source>Set Leader Process</source>
+        <translation type="unfinished">Установить лидерский процесс</translation>
+    </message>
+    <message>
+        <source>Terminate All Programs</source>
+        <translation type="unfinished">Завершить все программы</translation>
+    </message>
+    <message>
+        <source>Do you really want to remove the selected group(s)?</source>
+        <translation type="unfinished">Вы действительно хотите удалить выбранные группы?</translation>
+    </message>
+    <message>
+        <source>Run Web Browser</source>
+        <translation type="unfinished">Запустить веб-браузер</translation>
+    </message>
+    <message>
+        <source>Allow Network Shares</source>
+        <translation type="unfinished">Разрешить сетевые ресурсы</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe</source>
+        <translation type="unfinished">Запустить Cmd.exe</translation>
+    </message>
+    <message>
+        <source>Snapshots Manager</source>
+        <translation type="unfinished">Менеджер снимков</translation>
+    </message>
+    <message>
+        <source>Suspend</source>
+        <translation type="obsolete">Приостановить</translation>
+    </message>
+    <message>
+        <source>Run Explorer</source>
+        <translation type="unfinished">Запустите проводник</translation>
+    </message>
+    <message>
+        <source>Block Internet Access</source>
+        <translation type="unfinished">Блокировать доступ в Интернет</translation>
+    </message>
+    <message>
+        <source>Set Linger Process</source>
+        <translatorcomment>Не уверен как правильно перевести Linger</translatorcomment>
+        <translation type="unfinished">Установить отложенный процесса</translation>
+    </message>
+    <message>
+        <source>Create New Box</source>
+        <translation type="unfinished">Создать новую песочницу</translation>
+    </message>
+    <message>
+        <source>Pin to Run Menu</source>
+        <translation type="unfinished">Закрепить в меню &apos;Выполнить&apos;</translation>
+    </message>
+    <message>
+        <source>Recover Files</source>
+        <translation type="unfinished">Восстановить файлы</translation>
+    </message>
+    <message>
+        <source>Explore Content</source>
+        <translation type="unfinished">Посмотреть содержимое</translation>
+    </message>
+    <message>
+        <source>Create Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow internet access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force into this sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSettingsWindow</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Закрыть</translation>
+    </message>
+    <message>
+        <source>Please enter the new configuration password.</source>
+        <translation type="unfinished">Пожалуйста, введите новый пароль конфигурации.</translation>
+    </message>
+    <message>
+        <source>Close to Tray</source>
+        <translation type="unfinished">Свернуть в лоток</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished">Выбрать каталог</translation>
+    </message>
+    <message>
+        <source>Please enter a program file name</source>
+        <translation type="unfinished">Пожалуйста, введите имя файла программы</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished">Папка</translation>
+    </message>
+    <message>
+        <source>Prompt before Close</source>
+        <translation type="unfinished">Подсказка перед закрытием</translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished">Процесс</translation>
+    </message>
+    <message>
+        <source>Sandboxie Plus - Settings</source>
+        <translation type="unfinished">Sandboxie Plus - Настройки</translation>
+    </message>
+    <message>
+        <source>Please re-enter the new configuration password.</source>
+        <translation type="unfinished">Пожалуйста, повторно введите новый пароль конфигурации.</translation>
+    </message>
+    <message>
+        <source>Passwords did not match, please retry.</source>
+        <translation type="unfinished">Пароли не совпадают, повторите попытку.</translation>
+    </message>
+</context>
+<context>
+    <name>CSnapshotsWindow</name>
+    <message>
+        <source>Do you really want to delete the selected snapshot?</source>
+        <translation type="unfinished">Вы действительно хотите удалить выбранный снимок?</translation>
+    </message>
+    <message>
+        <source>New Snapshot</source>
+        <translation type="unfinished">Новый снимок</translation>
+    </message>
+    <message>
+        <source>Snapshot</source>
+        <translation type="unfinished">Снимок</translation>
+    </message>
+    <message>
+        <source>Snapshot: %1 taken: %2</source>
+        <translation type="unfinished">Снимок: %1 сделан: %2</translation>
+    </message>
+    <message>
+        <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
+        <translation type="unfinished">Вы действительно хотите переключить активный снимок? Это приведет к удалению текущего состояния!</translation>
+    </message>
+    <message>
+        <source>%1 - Snapshots</source>
+        <translation type="unfinished">%1 - Снимки</translation>
+    </message>
+    <message>
+        <source>Please enter a name for the new Snapshot.</source>
+        <translation type="unfinished">Пожалуйста, введите имя для нового снимка.</translation>
+    </message>
+</context>
+<context>
+    <name>NewBoxWindow</name>
+    <message>
+        <source>Copy options from an existing box:</source>
+        <translation type="unfinished">Копировать параметры из существующей песочницы:</translation>
+    </message>
+    <message>
+        <source>Initial sandbox configuration:</source>
+        <translation type="unfinished">Начальная конфигурация песочницы:</translation>
+    </message>
+    <message>
+        <source>Select restriction/isolation template:</source>
+        <translation type="unfinished">Выберите шаблон ограничения/изоляции:</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus new box</source>
+        <translation type="unfinished">Sandboxie-Plus новая песочница</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new box:</source>
+        <translation type="unfinished">Введите имя для новой песочницы:</translation>
     </message>
 </context>
 <context>
@@ -1228,6 +1845,67 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <source>Edit ini Section</source>
         <translation type="unfinished">Редактировать раздел ini</translation>
     </message>
+    <message>
+        <source>Prevent change to network and firewall parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COM Class Trace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;- for this one the above does not apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PopUpWindow</name>
+    <message>
+        <source>SandboxiePlus Notifications</source>
+        <translation type="unfinished">Уведомления SandboxiePlus</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Drive %1</source>
+        <translation type="unfinished">Диск %1</translation>
+    </message>
+</context>
+<context>
+    <name>RecoveryWindow</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Закрыть</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus Settings</source>
+        <translation type="unfinished">Настройки SandboxiePlus</translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
+        <translation type="unfinished">Добавить папку</translation>
+    </message>
+    <message>
+        <source>Recover to</source>
+        <translation type="unfinished">Восстановить в</translation>
+    </message>
+    <message>
+        <source>Recover</source>
+        <translation type="unfinished">Восстановить</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished">Обновить</translation>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation type="unfinished">Удалить все</translation>
+    </message>
 </context>
 <context>
     <name>SettingsWindow</name>
@@ -1257,7 +1935,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Sandbox file system root: </source>
-        <translation type="unfinished">Корень файловой системы песочницы: </translation>
+        <translation type="obsolete">Корень файловой системы песочницы: </translation>
     </message>
     <message>
         <source>Check periodically for updates of Sandboxie-Plus</source>
@@ -1269,7 +1947,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Sandbox registry root: </source>
-        <translation type="unfinished">Корень реестра песочницы: </translation>
+        <translation type="obsolete">Корень реестра песочницы: </translation>
     </message>
     <message>
         <source>Program Restrictions</source>
@@ -1293,7 +1971,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Sandbox ipc root: </source>
-        <translation type="unfinished">Корень ipc песочницы: </translation>
+        <translation type="obsolete">Корень ipc песочницы: </translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -1383,281 +2061,21 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <source>Start with Windows</source>
         <translation type="unfinished">Запускать с Windows</translation>
     </message>
-</context>
-<context>
-    <name>CResMonModel</name>
     <message>
-        <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <source>Open urls from this ui sandboxed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Time Stamp</source>
-        <translation type="unfinished">Временная метка</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="unfinished">Процесс</translation>
-    </message>
-</context>
-<context>
-    <name>CPopUpRecovery</name>
-    <message>
-        <source>Recover file to selected folder</source>
-        <translation type="unfinished">Восстановление файла в выбранную папку</translation>
-    </message>
-    <message>
-        <source>Disable quick recovery until the box restarts</source>
-        <translation type="unfinished">Отключить быстрое восстановление до перезагрузки песочницы</translation>
-    </message>
-    <message>
-        <source>Recover</source>
-        <translation type="unfinished">Восстановить</translation>
-    </message>
-    <message>
-        <source>Recover the file to original location</source>
-        <translation type="unfinished">Восстановить файл в исходное место</translation>
-    </message>
-    <message>
-        <source>Dismiss</source>
-        <translation type="unfinished">Отклонить</translation>
-    </message>
-    <message>
-        <source>Don&apos;t recover this file right now</source>
-        <translation type="unfinished">Не восстанавливать этот файл прямо сейчас</translation>
-    </message>
-    <message>
-        <source>Open file recovery for this box</source>
-        <translation type="unfinished">Восстановление открытых файлов для этой песочницы</translation>
-    </message>
-    <message>
-        <source>Dismiss all from this box</source>
-        <translation type="unfinished">Отклонить все из этой песочницы</translation>
-    </message>
-</context>
-<context>
-    <name>COptionsWindow</name>
-    <message>
-        <source>Always show</source>
-        <translation type="unfinished">Всегда показывать</translation>
-    </message>
-    <message>
-        <source>Template values can not be edited.</source>
-        <translation type="unfinished">Значения шаблона нельзя редактировать.</translation>
-    </message>
-    <message>
-        <source>Lingerer</source>
-        <translatorcomment>Не уверен как правильно перевести Lingerer</translatorcomment>
-        <translation type="unfinished">Отложено</translation>
-    </message>
-    <message>
-        <source>Browse for File</source>
-        <translation type="unfinished">Поиск файла</translation>
-    </message>
-    <message>
-        <source>Please enter a menu title</source>
-        <translation type="unfinished">Пожалуйста, введите заголовок меню</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
-    </message>
-    <message>
-        <source>Please enter a name for the new group</source>
-        <translation type="unfinished">Пожалуйста, введите имя для новой группы</translation>
-    </message>
-    <message>
-        <source>Please enter a program file name</source>
-        <translation type="unfinished">Пожалуйста, введите имя файла программы</translation>
-    </message>
-    <message>
-        <source>Template values can not be removed.</source>
-        <translation type="unfinished">Значения шаблона удалить нельзя.</translation>
-    </message>
-    <message>
-        <source>Display box name in title</source>
-        <translation type="unfinished">Отображать имя песочницы в заголовке</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation type="unfinished">Папка</translation>
-    </message>
-    <message>
-        <source>Sandboxie Plus - &apos;%1&apos; Options</source>
-        <translation type="unfinished">Sandboxie Plus - &apos;%1&apos; опции</translation>
-    </message>
-    <message>
-        <source>Leader</source>
-        <translation type="unfinished">Лидер</translation>
-    </message>
-    <message>
-        <source>Group: %1</source>
-        <translation type="unfinished">Группа: %1</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="unfinished">Процесс</translation>
-    </message>
-    <message>
-        <source>Display [#] indicator only</source>
-        <translation type="unfinished">Отображать только индикатор [#]</translation>
-    </message>
-    <message>
-        <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
-    </message>
-    <message>
-        <source>Border disabled</source>
-        <translation type="unfinished">Граница отключена</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="unfinished">Все категории</translation>
-    </message>
-    <message>
-        <source>Please enter a file extension to be excluded</source>
-        <translation type="unfinished">Пожалуйста, введите расширение файла, которое нужно исключить</translation>
-    </message>
-    <message>
-        <source>Exclusion</source>
-        <translation type="unfinished">Исключение</translation>
-    </message>
-    <message>
-        <source>Select File</source>
-        <translation type="unfinished">Выбрать файл</translation>
-    </message>
-    <message>
-        <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation type="unfinished">Этот шаблон включен глобально. Для его настройки используйте глобальные параметры.</translation>
-    </message>
-    <message>
-        <source>Please select group first.</source>
-        <translation type="unfinished">Пожалуйста, сначала выберите группу.</translation>
-    </message>
-    <message>
-        <source>All Files (*.*)</source>
-        <translation type="unfinished">Все файлы (*.*)</translation>
-    </message>
-    <message>
-        <source>Show only when title is in focus</source>
-        <translation type="unfinished">Показывать, только когда заголовок в фокусе</translation>
-    </message>
-    <message>
-        <source>Select Program</source>
-        <translation type="unfinished">Выбрать программу</translation>
-    </message>
-    <message>
-        <source>Please enter a command</source>
-        <translation type="unfinished">Пожалуйста, введите команду</translation>
-    </message>
-    <message>
-        <source>kilobytes (%1)</source>
-        <translation type="unfinished">килобайт (%1)</translation>
-    </message>
-    <message>
-        <source>Don&apos;t alter the window title</source>
-        <translation type="unfinished">Не менять заголовок окна</translation>
-    </message>
-    <message>
-        <source>All Programs</source>
-        <translation type="unfinished">Все программы</translation>
-    </message>
-    <message>
-        <source>Browse for Folder</source>
-        <translation type="unfinished">Найти папку</translation>
-    </message>
-    <message>
-        <source>Enter program:</source>
-        <translation type="unfinished">Введите программу:</translation>
-    </message>
-    <message>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation type="unfinished">Исполняемые файлы (*.exe|*.cmd)</translation>
-    </message>
-</context>
-<context>
-    <name>CSettingsWindow</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
-    </message>
-    <message>
-        <source>Please enter the new configuration password.</source>
-        <translation type="unfinished">Пожалуйста, введите новый пароль конфигурации.</translation>
-    </message>
-    <message>
-        <source>Close to Tray</source>
-        <translation type="unfinished">Свернуть в лоток</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
-    </message>
-    <message>
-        <source>Please enter a program file name</source>
-        <translation type="unfinished">Пожалуйста, введите имя файла программы</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation type="unfinished">Папка</translation>
-    </message>
-    <message>
-        <source>Prompt before Close</source>
-        <translation type="unfinished">Подсказка перед закрытием</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="unfinished">Процесс</translation>
-    </message>
-    <message>
-        <source>Sandboxie Plus - Settings</source>
-        <translation type="unfinished">Sandboxie Plus - Настройки</translation>
-    </message>
-    <message>
-        <source>Please re-enter the new configuration password.</source>
-        <translation type="unfinished">Пожалуйста, повторно введите новый пароль конфигурации.</translation>
-    </message>
-    <message>
-        <source>Passwords did not match, please retry.</source>
-        <translation type="unfinished">Пароли не совпадают, повторите попытку.</translation>
-    </message>
-</context>
-<context>
-    <name>RecoveryWindow</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="unfinished">Настройки SandboxiePlus</translation>
-    </message>
-    <message>
-        <source>Add Folder</source>
-        <translation type="unfinished">Добавить папку</translation>
-    </message>
-    <message>
-        <source>Recover to</source>
-        <translation type="unfinished">Восстановить в</translation>
-    </message>
-    <message>
-        <source>Recover</source>
-        <translation type="unfinished">Восстановить</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="unfinished">Обновить</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="unfinished">Удалить все</translation>
+        <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1689,256 +2107,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Take Snapshot</source>
         <translation type="unfinished">Сделать снимок</translation>
-    </message>
-</context>
-<context>
-    <name>CPopUpProgress</name>
-    <message>
-        <source>Remove this progress indicator from the list</source>
-        <translation type="unfinished">Удалить этот индикатор прогресса из списка</translation>
-    </message>
-    <message>
-        <source>Dismiss</source>
-        <translation type="unfinished">Отклонить</translation>
-    </message>
-</context>
-<context>
-    <name>CSandBoxPlus</name>
-    <message>
-        <source>No Admin</source>
-        <translation type="unfinished">Без прав администратора</translation>
-    </message>
-    <message>
-        <source>No INet</source>
-        <translation type="unfinished">Без интернета</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished">Нормальный</translation>
-    </message>
-    <message>
-        <source>API Log</source>
-        <translation type="unfinished">Журнал API</translation>
-    </message>
-    <message>
-        <source>Net Share</source>
-        <translation type="unfinished">Общая сеть</translation>
-    </message>
-    <message>
-        <source>NOT SECURE (Debug Config)</source>
-        <translation type="unfinished">НЕ БЕЗОПАСНЫЙ (отладочная конфигурация)</translation>
-    </message>
-    <message>
-        <source>Enhanced Isolation</source>
-        <translation type="unfinished">Улучшенная изоляция</translation>
-    </message>
-    <message>
-        <source>Reduced Isolation</source>
-        <translation type="unfinished">Сниженная изоляция</translation>
-    </message>
-</context>
-<context>
-    <name>CSnapshotsWindow</name>
-    <message>
-        <source>Do you really want to delete the selected snapshot?</source>
-        <translation type="unfinished">Вы действительно хотите удалить выбранный снимок?</translation>
-    </message>
-    <message>
-        <source>New Snapshot</source>
-        <translation type="unfinished">Новый снимок</translation>
-    </message>
-    <message>
-        <source>Snapshot</source>
-        <translation type="unfinished">Снимок</translation>
-    </message>
-    <message>
-        <source>Snapshot: %1 taken: %2</source>
-        <translation type="unfinished">Снимок: %1 сделан: %2</translation>
-    </message>
-    <message>
-        <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
-        <translation type="unfinished">Вы действительно хотите переключить активный снимок? Это приведет к удалению текущего состояния!</translation>
-    </message>
-    <message>
-        <source>%1 - Snapshots</source>
-        <translation type="unfinished">%1 - Снимки</translation>
-    </message>
-    <message>
-        <source>Please enter a name for the new Snapshot.</source>
-        <translation type="unfinished">Пожалуйста, введите имя для нового снимка.</translation>
-    </message>
-</context>
-<context>
-    <name>PopUpWindow</name>
-    <message>
-        <source>SandboxiePlus Notifications</source>
-        <translation type="unfinished">Уведомления SandboxiePlus</translation>
-    </message>
-</context>
-<context>
-    <name>CRecoveryWindow</name>
-    <message>
-        <source>File Name</source>
-        <translation type="unfinished">Имя файла</translation>
-    </message>
-    <message>
-        <source>File Size</source>
-        <translation type="unfinished">Размер файла</translation>
-    </message>
-    <message>
-        <source>Full Path</source>
-        <translation type="unfinished">Полный путь</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
-    </message>
-    <message>
-        <source>%1 - File Recovery</source>
-        <translation type="unfinished">%1 - Восстановление файла</translation>
-    </message>
-</context>
-<context>
-    <name>NewBoxWindow</name>
-    <message>
-        <source>Copy options from an existing box:</source>
-        <translation type="unfinished">Копировать параметры из существующей песочницы:</translation>
-    </message>
-    <message>
-        <source>Initial sandbox configuration:</source>
-        <translation type="unfinished">Начальная конфигурация песочницы:</translation>
-    </message>
-    <message>
-        <source>Select restriction/isolation template:</source>
-        <translation type="unfinished">Выберите шаблон ограничения/изоляции:</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus new box</source>
-        <translation type="unfinished">Sandboxie-Plus новая песочница</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new box:</source>
-        <translation type="unfinished">Введите имя для новой песочницы:</translation>
-    </message>
-</context>
-<context>
-    <name>CPopUpWindow</name>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
-    </message>
-    <message>
-        <source>an UNKNOWN process.</source>
-        <translation type="unfinished">НЕИЗВЕСТНЫЙ процесс.</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished">Перенос большого файла %1 в песочницу %2, %3 осталось.
-Полный путь: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished">Вы хотите разрешить %4 (%5) скопировать %1 большой файл в песочницу: %2?
-Имя файла: %3</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus Notifications</source>
-        <translation type="unfinished">Уведомления Sandboxie-Plus</translation>
-    </message>
-    <message>
-        <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
-    </message>
-    <message>
-        <source>UNKNOWN</source>
-        <translation type="unfinished">НЕИЗВЕСТНО</translation>
-    </message>
-    <message>
-        <source>The file %1 is eligible for quick recovery from %2.
-Full path: %3
-Written by: %4</source>
-        <translation type="unfinished">Файл %1 имеет право на быстрое восстановление после %2.
-Полный путь: %3
-Записан: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished">Вы хотите разрешить %1 (%2) доступ в Интернет?
-Полный путь: %3</translation>
-    </message>
-    <message>
-        <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation type="unfinished">Вы хотите, чтобы диспетчер очереди печати мог писать вне песочницы для %1 (%2)?</translation>
-    </message>
-</context>
-<context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Message</source>
-        <translation type="unfinished">Сообщение</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="unfinished">Временная метка</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="unfinished">Процесс</translation>
-    </message>
-</context>
-<context>
-    <name>CMultiErrorDialog</name>
-    <message>
-        <source>Message</source>
-        <translation type="unfinished">Сообщение</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus - Error</source>
-        <translation type="unfinished">Sandboxie-Plus - Ошибка</translation>
-    </message>
-</context>
-<context>
-    <name>CSbieProcess</name>
-    <message>
-        <source>Terminated</source>
-        <translation type="unfinished">Прекращено</translation>
-    </message>
-    <message>
-        <source>Running</source>
-        <translation type="unfinished">Выполняется</translation>
-    </message>
-    <message>
-        <source>Suspended</source>
-        <translation type="unfinished">Приостановлено</translation>
-    </message>
-</context>
-<context>
-    <name>CNewBoxWindow</name>
-    <message>
-        <source>New Box</source>
-        <translation type="unfinished">Новая песочница</translation>
-    </message>
-    <message>
-        <source>Hardened</source>
-        <translation type="unfinished">Усиленный (hardened)</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="unfinished">По умолчанию</translation>
-    </message>
-    <message>
-        <source>Legacy (old sbie behaviour)</source>
-        <translation type="unfinished">Устаревшее (старое поведение sbie)</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Drive %1</source>
-        <translation type="unfinished">Диск %1</translation>
     </message>
 </context>
 </TS>

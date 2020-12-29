@@ -143,7 +143,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnBorderColor, SIGNAL(pressed()), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 
-	connect(ui.chkBlockShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
@@ -204,7 +205,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.btnAddFile->setMenu(pFileBtnMenu);
 	connect(ui.btnAddKey, SIGNAL(pressed()), this, SLOT(OnAddKey()));
 	connect(ui.btnAddIPC, SIGNAL(pressed()), this, SLOT(OnAddIPC()));
-	connect(ui.btnAddClsId, SIGNAL(pressed()), this, SLOT(OnAddClsId()));
+	connect(ui.btnAddWnd, SIGNAL(pressed()), this, SLOT(OnAddWnd()));
 	connect(ui.btnAddCOM, SIGNAL(pressed()), this, SLOT(OnAddCOM()));
 	// todo: add priority by order 
 	ui.btnMoveUp->setVisible(false);
@@ -231,7 +232,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
 
-	//connect(ui.chkNoDefaultCOM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectRpcSs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -246,6 +246,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkKeyTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkIpcTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -370,7 +371,8 @@ void COptionsWindow::LoadConfig()
 		if (!BorderWidth) BorderWidth = 6;
 		ui.spinBorderWidth->setValue(BorderWidth);
 
-		ui.chkBlockShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
+		ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
+		ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 		ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 
 		ui.treeRun->clear();
@@ -422,7 +424,6 @@ void COptionsWindow::LoadConfig()
 	{
 		ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
 
-		//ui.chkNoDefaultCOM->setChecked(!m_pBox->GetBool("OpenDefaultClsid", true));
 		ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 		ui.chkProtectRpcSs->setChecked(m_pBox->GetBool("ProtectRpcSs", false));
 		ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
@@ -438,6 +439,7 @@ void COptionsWindow::LoadConfig()
 		ReadAdvancedCheck("KeyTrace", ui.chkKeyTrace, "*");
 		ReadAdvancedCheck("IpcTrace", ui.chkIpcTrace, "*");
 		ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
+		ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 		ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 
 		ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
@@ -507,7 +509,8 @@ void COptionsWindow::SaveConfig()
 		BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 		m_pBox->SetText("BorderColor", BorderCfg.join(","));
 
-		m_pBox->SetBool("BlockNetworkFiles", ui.chkBlockShare->isChecked());
+		m_pBox->SetBool("BlockNetworkFiles", ui.chkBlockNetShare->isChecked());
+		m_pBox->SetBool("BlockNetParam", ui.chkBlockNetParam->isChecked());
 		m_pBox->SetBool("DropAdminRights", ui.chkDropRights->isChecked());
 
 		QStringList RunCommands;
@@ -515,7 +518,7 @@ void COptionsWindow::SaveConfig()
 			QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
 			RunCommands.append(pItem->text(0) + "|" + pItem->text(1));
 		}
-		theAPI->GetGlobalSettings()->UpdateTextList("RunCommand", RunCommands, m_Template);
+		m_pBox->UpdateTextList("RunCommand", RunCommands, m_Template);
 
 
 		m_pBox->SetNum("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text().toInt() : -1);
@@ -562,7 +565,6 @@ void COptionsWindow::SaveConfig()
 		if (ui.chkPreferExternalManifest->isChecked()) m_pBox->SetBool("PreferExternalManifest", true);
 		else m_pBox->DelValue("PreferExternalManifest");
 
-		//WriteAdvancedCheck(ui.chkNoDefaultCOM, "OpenDefaultClsid", "n", "");
 		WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
 		WriteAdvancedCheck(ui.chkProtectRpcSs, "ProtectRpcSs", "y", "");
 		WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
@@ -577,6 +579,7 @@ void COptionsWindow::SaveConfig()
 		WriteAdvancedCheck(ui.chkKeyTrace, "KeyTrace", "*");
 		WriteAdvancedCheck(ui.chkIpcTrace, "IpcTrace", "*");
 		WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
+		WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 		WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 
 		WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
@@ -1230,7 +1233,9 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 
 	case eOpenWinClass:		return "OpenWinClass";
 
-	case eOpenClsid:		return "OpenClsid";
+	case eOpenCOM:			return "OpenClsid";
+	case eClosedCOM:		return "ClosedClsid";
+	case eClosedCOM_RT:		return "ClosedRT";
 	}
 	return "Unknown";
 }
@@ -1280,9 +1285,11 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	case eOpenIpcPath:		Type = eIPC;	Mode = eDirect;	break;
 	case eClosedIpcPath:	Type = eIPC;	Mode = eClosed;	break;
 
-	case eOpenWinClass:		Type = eWndCls;	Mode = eDirect;	break;
+	case eOpenWinClass:		Type = eWnd;	Mode = eDirect;	break;
 
-	case eOpenClsid:		Type = eClsId;	Mode = eDirect;	break;
+	case eOpenCOM:			Type = eCOM;	Mode = eDirect;	break;
+	case eClosedCOM:		Type = eCOM;	Mode = eClosed;	break;
+	case eClosedCOM_RT:		Type = eCOM;	Mode = eClosedRT; break;
 
 	default:				return;
 	}
@@ -1310,6 +1317,7 @@ QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
 	case eDirect:		return "Direct";
 	case eDirectAll:	return "Direct All";
 	case eClosed:		return "Closed";
+	case eClosedRT:		return "Closed RT";
 	case eReadOnly:		return "Read Only";
 	case eWriteOnly:	return "Write Only";
 	}
@@ -1323,8 +1331,8 @@ QString COptionsWindow::GetAccessTypeStr(EAccessType Type)
 	case eFile:			return "File/Folder";
 	case eKey:			return "Registry";
 	case eIPC:			return "IPC Path";
-	case eWndCls:		return "Wnd Class";
-	case eClsId:		return "COM Object";
+	case eWnd:			return "Wnd Class";
+	case eCOM:			return "COM Object";
 	}
 	return "Unknown";
 }
@@ -1406,16 +1414,18 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 		case eClosed:		return "ClosedIpcPath";
 		}
 		break;
-	case eWndCls:
+	case eWnd:
 		switch (Mode)
 		{
 		case eDirect:		return "OpenWinClass";
 		}
 		break;
-	case eClsId:
+	case eCOM:
 		switch (Mode)
 		{
 		case eDirect:		return "OpenClsid";
+		case eClosed:		return "ClosedClsid";
+		case eClosedRT:		return "ClosedRT";
 		}
 		break;
 	}
@@ -1461,6 +1471,27 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 
 	if (bSave)
 	{
+		if (pItem->data(0, Qt::UserRole).toInt() == eCOM)
+		{
+			bool isGUID = pPath->text().length() == 38 && pPath->text().left(1) == "{" && pPath->text().right(1) == "}";
+			switch (pMode->currentData().toInt())
+			{
+			case eDirect:
+			case eClosed:
+				if (!isGUID) {
+					QMessageBox::critical(this, "SandboxiePlus", tr("COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}"));
+					return;
+				}
+				break;
+			case eClosedRT:
+				if (isGUID) {
+					QMessageBox::critical(this, "SandboxiePlus", tr("RT interfaces must be specified by their name."));
+					return;
+				}
+				break;
+			}
+		}
+
 		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
 		pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
 		pItem->setText(2, GetAccessModeStr((EAccessMode)pMode->currentData().toInt()));
@@ -1483,8 +1514,10 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 	case eFile:			return QList<EAccessMode>() << eDirect << eDirectAll << eClosed << eReadOnly << eWriteOnly;
 	case eKey:			return QList<EAccessMode>() << eDirect << eClosed << eReadOnly << eWriteOnly;
 	case eIPC:			return QList<EAccessMode>() << eDirect << eClosed;
+	case eWnd:			return QList<EAccessMode>() << eDirect;
+	case eCOM:			return QList<EAccessMode>() << eDirect << eClosed << eClosedRT;
 	}
-	return QList<EAccessMode>() << eDirect;
+	return QList<EAccessMode>();
 }
 
 void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
@@ -1569,7 +1602,7 @@ void COptionsWindow::SaveAccessList()
 {
 	QStringList Keys = QStringList() << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "OpenKeyPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
-		<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid";
+		<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
 
 	QMap<QString, QList<QString>> AccessMap;
 	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
@@ -1651,6 +1684,8 @@ void COptionsWindow::SaveRecoveryList()
 	m_pBox->UpdateTextList("RecoverFolder", RecoverFolder, m_Template);
 	m_pBox->UpdateTextList("AutoRecoverIgnore", AutoRecoverIgnore, m_Template);
 
+	m_pBox->SetBool("AutoRecover", ui.chkAutoRecovery->isChecked());
+
 	m_RecoveryChanged = false;
 }
 
@@ -1708,9 +1743,9 @@ void COptionsWindow::OnAdvancedChanged()
 void COptionsWindow::OnNoWindowRename()
 {
 	if (ui.chkNoWindowRename->isChecked())
-		SetAccessEntry(eWndCls, "", eDirect, "#");
+		SetAccessEntry(eWnd, "", eDirect, "#");
 	else
-		DelAccessEntry(eWndCls, "", eDirect, "#");
+		DelAccessEntry(eWnd, "", eDirect, "#");
 	m_AdvancedChanged = true;
 }
 
@@ -1967,7 +2002,7 @@ void COptionsWindow::OnTab()
 		}
 		else if (ui.tabs->currentWidget() == ui.tabAdvanced)
 		{
-			if (GetAccessEntry(eWndCls, "", eDirect, "*") != NULL)
+			if (GetAccessEntry(eWnd, "", eDirect, "*") != NULL)
 			{
 				ui.chkNoWindowRename->setEnabled(false);
 				ui.chkNoWindowRename->setChecked(true);
@@ -1975,7 +2010,7 @@ void COptionsWindow::OnTab()
 			else
 			{
 				ui.chkNoWindowRename->setEnabled(true);
-				ui.chkNoWindowRename->setChecked(GetAccessEntry(eWndCls, "", eDirect, "#") != NULL);
+				ui.chkNoWindowRename->setChecked(GetAccessEntry(eWnd, "", eDirect, "#") != NULL);
 			}
 		}
 	}

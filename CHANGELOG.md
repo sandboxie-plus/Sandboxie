@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.5.3 / 5.45.2] - 2020-12-29
+## [0.5.3a / 5.45.2] - 2020-12-29
 
 ### Added
 - added prompt to choose if links in the sandman ui should be open in a sandboxed or unsandboxed browser

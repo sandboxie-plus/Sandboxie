@@ -359,6 +359,11 @@
         <translation type="vanished">Recuperar arquivo para pasta selecionada</translation>
     </message>
     <message>
+        <location filename="Windows/PopUpWindow.h" line="224"/>
+        <source>Recover to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/PopUpWindow.h" line="229"/>
         <source>Browse</source>
         <translation type="unfinished">Procurar</translation>
@@ -444,12 +449,10 @@ Caminho completo: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="280"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <oldsource>The file %1 is eligible for quick recovery from %2.
-Full path: %3
-Written by: %4</oldsource>
+        <oldsource>%1 is eligible for quick recovery from %2.
+The file was written by: %3</oldsource>
         <translation type="unfinished">O arquivo %1 está qualificado para recuperação rápida de %2.
-Caminho completo: %3
-Gravado por: %4</translation>
+Gravado por: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="282"/>
@@ -466,7 +469,10 @@ Gravado por: %4</translation>
         <location filename="Windows/PopUpWindow.cpp" line="368"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</oldsource>
+        <translation type="unfinished">Migrando um arquivo grande %1 para o sandboxie %2, %3 restante.
+Caminho completo: %4</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -477,14 +483,6 @@ Full path: %4</source>
         <location filename="Windows/PopUpWindow.cpp" line="362"/>
         <source>UNKNOWN</source>
         <translation>DESCONHECIDO</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</oldsource>
-        <translation type="vanished">Migrando um arquivo grande %1 para o sandboxie %2, %3 restante.
-Caminho completo: %4</translation>
     </message>
 </context>
 <context>

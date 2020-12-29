@@ -359,9 +359,14 @@
         <translation type="vanished">Datei in angegebenen Ordner wiederherstellen</translation>
     </message>
     <message>
+        <location filename="Windows/PopUpWindow.h" line="224"/>
+        <source>Recover to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/PopUpWindow.h" line="229"/>
         <source>Browse</source>
-        <translation type="unfinished">Navigieren</translation>
+        <translation>Navigieren</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="230"/>
@@ -406,7 +411,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="282"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Ordner auswählen</translation>
+        <translation>Ordner auswählen</translation>
     </message>
 </context>
 <context>
@@ -444,12 +449,10 @@ Vollständiger Pfad: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="280"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <oldsource>The file %1 is eligible for quick recovery from %2.
-Full path: %3
-Written by: %4</oldsource>
+        <oldsource>%1 is eligible for quick recovery from %2.
+The file was written by: %3</oldsource>
         <translation type="unfinished">Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
-Vollständiger Pfad: %3
-Gechrieben durch: %4</translation>
+Gechrieben durch: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="282"/>
@@ -466,7 +469,10 @@ Gechrieben durch: %4</translation>
         <location filename="Windows/PopUpWindow.cpp" line="368"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</oldsource>
+        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -477,14 +483,6 @@ Full path: %4</source>
         <location filename="Windows/PopUpWindow.cpp" line="362"/>
         <source>UNKNOWN</source>
         <translation>UNBEKANNT</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</oldsource>
-        <translation type="vanished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
-Vollständiger Pfad: %4</translation>
     </message>
 </context>
 <context>
@@ -1408,7 +1406,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <location filename="Views/SbieView.cpp" line="101"/>
         <source>Create Shortcut</source>
         <oldsource>Create Desktop Shortcut</oldsource>
-        <translation type="unfinished">Desktopverknüpfung erstellen</translation>
+        <translation>Verknüpfung erstellen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="76"/>

@@ -36,7 +36,6 @@
 
 
 #define REQUEST_LEN                 4096
-#define CONF_LINE_LEN               2000    // keep in sync with drv/conf.c
 
 
 //---------------------------------------------------------------------------

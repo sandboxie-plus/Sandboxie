@@ -41,8 +41,8 @@ public:
 	virtual bool			IsTerminated(quint64 forMs = 0) const;
 	virtual void			SetTerminated();
 
-	virtual SB_STATUS		SetSuspend(bool bSet);
-	virtual bool			IsSuspended() const;
+	//virtual SB_STATUS		SetSuspend(bool bSet);
+	//virtual bool			IsSuspended() const;
 
 	virtual QString			GetBoxName() const;
 
@@ -56,7 +56,7 @@ protected:
 	quint32			m_SessionId;
 	QDateTime		m_StartTime;
 	quint64			m_uTerminated;
-	bool			m_bSuspended;
+	//bool			m_bSuspended;
 
 	class CSandBox*	m_pBox;
 

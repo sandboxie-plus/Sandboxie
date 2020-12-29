@@ -79,7 +79,7 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false) || GetBool("ProtectRpcSs", false) || !GetBool("OpenDefaultClsid", true));
+	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false) || GetBool("ProtectRpcSs", false));
 
 	CSandBox::UpdateDetails();
 }
@@ -195,6 +195,46 @@ void SetInStrList(QStringList& list, const QString& str, bool bSet)
 	}
 }
 
+bool CSandBoxPlus::TestProgramGroup(const QString& Group, const QString& ProgName)
+{
+	QStringList ProcessGroups = GetTextList("ProcessGroup", false);
+	foreach(const QString & ProcessGroup, ProcessGroups)
+	{
+		StrPair GroupPaths = Split2(ProcessGroup, ",");
+		if (GroupPaths.first.compare(Group, Qt::CaseInsensitive) == 0)
+		{
+			QStringList Programs = SplitStr(GroupPaths.second, ",");
+			return FindInStrList(Programs, ProgName) != Programs.end();
+		}
+	}
+	return false;
+}
+
+void CSandBoxPlus::EditProgramGroup(const QString& Group, const QString& ProgName, bool bSet)
+{
+	QStringList ProcessGroups = GetTextList("ProcessGroup", false);
+
+	QStringList Programs;
+	QStringList::iterator I = ProcessGroups.begin();
+	for (; I != ProcessGroups.end(); ++I)
+	{
+		StrPair GroupPaths = Split2(*I, ",");
+		if (GroupPaths.first.compare(Group, Qt::CaseInsensitive) == 0)
+		{
+			Programs = SplitStr(GroupPaths.second, ",");
+			break;
+		}
+	}
+	if (I == ProcessGroups.end())
+		I = ProcessGroups.insert(I, "");
+
+	SetInStrList(Programs, ProgName, bSet);
+
+	*I = Group + "," + Programs.join(",");
+
+	UpdateTextList("ProcessGroup", ProcessGroups, false);
+}
+
 void CSandBoxPlus::BlockProgram(const QString& ProgName)
 {
 	bool WhiteList = false;
@@ -219,27 +259,30 @@ void CSandBoxPlus::BlockProgram(const QString& ProgName)
 		InsertText("ClosedIpcPath", "<StartRunAccess>,*");
 	}
 
-	QStringList ProcessGroups = GetTextList("ProcessGroup", false);
+	EditProgramGroup("<StartRunAccess>", ProgName, !WhiteList);
+}
 
-	QStringList Programs;
-	QStringList::iterator I = ProcessGroups.begin();
-	for (; I != ProcessGroups.end(); ++I)
-	{
-		StrPair GroupPaths = Split2(*I, ",");
-		if (GroupPaths.first == "<StartRunAccess>")
-		{
-			Programs = SplitStr(GroupPaths.second, ",");
-			break;
-		}
-	}
-	if (I == ProcessGroups.end())
-		I = ProcessGroups.insert(I, "");
+void CSandBoxPlus::SetInternetAccess(const QString& ProgName, bool bSet)
+{
+	EditProgramGroup("<InternetAccess>", ProgName, bSet);
+}
 
-	SetInStrList(Programs, ProgName, !WhiteList);
+bool CSandBoxPlus::HasInternetAccess(const QString& ProgName)
+{
+	return TestProgramGroup("<InternetAccess>", ProgName);
+}
 
-	*I = "<StartRunAccess>," + Programs.join(",");
+void CSandBoxPlus::SetForcedProgram(const QString& ProgName, bool bSet)
+{
+	QStringList Programs = GetTextList("ForceProcess", false);
+	SetInStrList(Programs, ProgName, bSet);
+	UpdateTextList("ForceProcess", Programs, false);
+}
 
-	UpdateTextList("ProcessGroup", ProcessGroups, false);
+bool CSandBoxPlus::IsForcedProgram(const QString& ProgName)
+{
+	QStringList Programs = GetTextList("ForceProcess", false);
+	return FindInStrList(Programs, ProgName) != Programs.end();
 }
 
 void CSandBoxPlus::SetLingeringProgram(const QString& ProgName, bool bSet)
@@ -281,7 +324,7 @@ QString CSbieProcess::GetStatusStr() const
 {
 	if (m_uTerminated != 0)
 		return tr("Terminated");
-	if (m_bSuspended)
-		return tr("Suspended");
+	//if (m_bSuspended)
+	//	return tr("Suspended");
 	return tr("Running");
 }

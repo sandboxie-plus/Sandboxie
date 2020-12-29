@@ -44,7 +44,7 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 	m_SessionId = 0;
 
 	m_uTerminated = 0;
-	m_bSuspended = IsSuspended();
+	//m_bSuspended = IsSuspended();
 }
 
 CBoxedProcess::~CBoxedProcess()
@@ -103,7 +103,7 @@ bool CBoxedProcess::IsTerminated(quint64 forMs) const
 	return ::GetTickCount64() - m_uTerminated > forMs;
 }
 
-SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
+/*SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
 {
 	HANDLE ProcessHandle = OpenProcess(PROCESS_SUSPEND_RESUME, FALSE, (DWORD)m_ProcessId);
 	if (ProcessHandle != INVALID_HANDLE_VALUE)
@@ -146,7 +146,7 @@ bool CBoxedProcess::IsSuspended() const
 			HANDLE hThread = OpenThread(THREAD_QUERY_INFORMATION, FALSE, te32.th32ThreadID);
 
 			ULONG SuspendCount = 0;
-			NTSTATUS status = NtQueryInformationThread(hThread, (THREADINFOCLASS)35/*ThreadSuspendCount*/, &SuspendCount, sizeof(ULONG), NULL);
+			NTSTATUS status = NtQueryInformationThread(hThread, (THREADINFOCLASS)35/ThreadSuspendCount/, &SuspendCount, sizeof(ULONG), NULL);
 
 			CloseHandle(hThread);
 
@@ -163,6 +163,7 @@ bool CBoxedProcess::IsSuspended() const
 
 	return isSuspended;
 }
+*/
 
 QString CBoxedProcess::GetBoxName() const 
 { 

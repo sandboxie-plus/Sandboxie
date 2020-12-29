@@ -230,7 +230,7 @@ CMyFrame::CMyFrame(BOOL ForceVisible, BOOL ForceSync)
     AdjustSizePosition(left, top, width, height);
 
     ULONG exStyle = (CMyApp::m_LayoutRTL) ? WS_EX_LAYOUTRTL : 0;
-	CString strTitle = CMyApp::m_appTitle + " - xanasoft.com";
+	CString strTitle = CMyApp::m_appTitle + " - " MY_COMPANY_NAME_STRING;
     CreateEx(   exStyle, (LPCTSTR)CMyApp::m_atom, strTitle,
                 WS_OVERLAPPEDWINDOW | WS_CAPTION | WS_SYSMENU,
                 left, top, width, height,
@@ -976,7 +976,7 @@ void CMyFrame::OnCmdConfReload()
 
 void CMyFrame::OnCmdHelpSupport()
 {
-	CRunBrowser x(this, L"https://xanasoft.com/go.php?to=donate");
+	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=donate");
 }
 
 

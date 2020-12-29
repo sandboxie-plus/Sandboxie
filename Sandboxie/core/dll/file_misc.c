@@ -514,6 +514,9 @@ BOOL File_WriteProcessMemory(
     SIZE_T nSize,
     SIZE_T * lpNumberOfBytesWritten)
 {
+    //
+    // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
+    //
 
     if (lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
     {

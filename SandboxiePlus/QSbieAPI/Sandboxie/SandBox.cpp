@@ -45,26 +45,27 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		return;
 	SetNum("ConfigLevel", 7);
 
-	if (cfglvl == 6) {
-		//SetDefaultTemplates7(*this);
-	}
-	else if (cfglvl >= 1) {
-		//UpdateTemplates(*this);
-	}
-	else
-	{
-		SetBool("AutoRecover", false);
-		SetBool("BlockNetworkFiles", true);
+	SetBool("AutoRecover", false);
+	SetBool("BlockNetworkFiles", true);
 
-		//SetDefaultTemplates6(*this); // why 6?
+	// templates L6
+	InsertText("Template", "AutoRecoverIgnore");
+	InsertText("Template", "Firefox_Phishing_DirectAccess");
+	InsertText("Template", "Chrome_Phishing_DirectAccess");
+	InsertText("Template", "LingerPrograms");
+	// templates L7
+	InsertText("Template", "BlockPorts");
+	InsertText("Template", "WindowsFontCache");
+	InsertText("Template", "qWave");
 
-		InsertText("RecoverFolder", "%Desktop%");
-		//InsertText("RecoverFolder", "%Favorites%"); // obsolete
-		InsertText("RecoverFolder", "%Personal%");
-		InsertText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
+	// recovery
+	InsertText("RecoverFolder", "%Desktop%");
+	//InsertText("RecoverFolder", "%Favorites%"); // obsolete
+	InsertText("RecoverFolder", "%Personal%");
+	InsertText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
 
-		SetText("BorderColor", "#00FFFF,ttl"); // "#00FFFF,off"
-	}
+	SetText("BorderColor", "#00FFFF,ttl"); // "#00FFFF,off"
+	
 }
 
 CSandBox::~CSandBox()

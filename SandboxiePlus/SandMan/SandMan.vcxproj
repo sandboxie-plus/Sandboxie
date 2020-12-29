@@ -252,6 +252,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="sandman_de.ts" />
+    <None Include="sandman_pt.ts" />
+    <None Include="sandman_ru.ts" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

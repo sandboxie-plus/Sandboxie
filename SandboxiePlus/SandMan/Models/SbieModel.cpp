@@ -2,7 +2,7 @@
 #include "SbieModel.h"
 #include "../../MiscHelpers/Common/Common.h"
 #include "../../MiscHelpers/Common/IconExtreactor.h"
-
+#include <QFileIconProvider>
 
 CSbieModel::CSbieModel(QObject *parent)
 :CTreeItemModel(parent)
@@ -227,6 +227,8 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 	int ActiveCount = 0;
 
+	QFileIconProvider IconProvider;
+
 	foreach(const CBoxedProcessPtr& pProc, ProcessList)
 	{
 		QSharedPointer<CSbieProcess> pProcess = pProc.objectCast<CSbieProcess>();
@@ -272,11 +274,15 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 		if (pNode->Icon.isNull())
 		{
-			PixmapEntryList icons = extractIcons(pProcess->GetFileName(), false);
-			if (icons.isEmpty())
+			//PixmapEntryList icons = extractIcons(pProcess->GetFileName(), false);
+			//if (icons.isEmpty())
+			//	pNode->Icon = m_ExeIcon;
+			//else
+			//	pNode->Icon = icons.first().pixmap;
+
+			pNode->Icon = IconProvider.icon(QFileInfo(pProcess->GetFileName()));
+			if (pNode->Icon.isNull() || !pNode->Icon.isValid())
 				pNode->Icon = m_ExeIcon;
-			else
-				pNode->Icon = icons.first().pixmap;
 		}
 
 		for (int section = 0; section < columnCount(); section++)

@@ -41,6 +41,12 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.chkNotifications->setChecked(theConf->GetBool("Options/ShowNotifications", true));
 
+	switch (theConf->GetInt("Options/OpenUrlsSandboxed", 2)) {
+	case 0: ui.chkSandboxUrls->setCheckState(Qt::Unchecked); break;
+	case 1: ui.chkSandboxUrls->setCheckState(Qt::Checked); break;
+	case 2: ui.chkSandboxUrls->setCheckState(Qt::PartiallyChecked); break;
+	}
+
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
 	ui.onClose->addItem(tr("Close to Tray"), "ToTray");
@@ -55,10 +61,15 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	if (theAPI->IsConnected())
 	{
-		ui.fileRoot->setText(theAPI->GetGlobalSettings()->GetText("FileRootPath"));
+		QString FileRootPath_Default = "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%";
+		QString KeyRootPath_Default  = "\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%";
+		QString IpcRootPath_Default  = "\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%";
+
+		ui.fileRoot->setText(theAPI->GetGlobalSettings()->GetText("FileRootPath", FileRootPath_Default));
 		ui.chkSeparateUserFolders->setChecked(theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
-		ui.regRoot->setText(theAPI->GetGlobalSettings()->GetText("KeyRootPath"));
-		ui.ipcRoot->setText(theAPI->GetGlobalSettings()->GetText("IpcRootPath"));
+		ui.regRoot->setText(theAPI->GetGlobalSettings()->GetText("KeyRootPath", KeyRootPath_Default));
+		ui.ipcRoot->setText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
+
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -162,6 +173,12 @@ void CSettingsWindow::apply()
 	}
 
 	theConf->SetValue("Options/ShowNotifications", ui.chkNotifications->isChecked());
+
+	switch (ui.chkSandboxUrls->checkState()) {
+	case Qt::Unchecked: theConf->SetValue("Options/OpenUrlsSandboxed", 0); break;
+	case Qt::PartiallyChecked: theConf->SetValue("Options/OpenUrlsSandboxed", 2); break;
+	case Qt::Checked: theConf->SetValue("Options/OpenUrlsSandboxed", 1); break;
+	}
 
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 

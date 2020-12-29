@@ -19,6 +19,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added more process presets "Force program" and "allow internet access"
 - added "SpecialImage=chrome,some_electron_app.exe" option to sandboxie.ini, valid image types "chrome", "firefox"
 -- with this option you can enable special hardcoded workarounds to new obscure forks of those browsers
+- added german translation (thanks bastik-1001) to the sandman UI
+- added russian translation (thanks lufog) to the sandman UI
+- added portuguese translation (thanks JNylson ) to the sandman UI
 
 ### Changed
 - changed docs and update urls to the new sandboxie-plus.com domain

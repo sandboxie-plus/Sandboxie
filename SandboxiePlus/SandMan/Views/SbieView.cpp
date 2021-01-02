@@ -135,6 +135,12 @@ CSbieView::~CSbieView()
 	theConf->SetBlob("MainWindow/BoxTree_Columns", m_pSbieTree->saveState());
 }
 
+void CSbieView::Clear()
+{
+	m_Groups.clear();
+	m_pSbieModel->Clear();
+}
+
 void CSbieView::Refresh()
 {
 	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes(), m_Groups);
@@ -295,7 +301,10 @@ int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m
 		if (pos == -1)
 			break;
 		if (Grouping.at(pos) == "(")
+		{
+			m_Groups[Name] = QStringList();
 			Index = CSbieView__ParseGroup(Grouping, m_Groups, Name, Index);
+		}
 		else if (Grouping.at(pos) == ")")
 			break;
 	}
@@ -355,8 +364,7 @@ void CSbieView::OnGroupAction()
 		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
 			Parent = m_pSbieModel->GetID(ModelIndex).toString();
 
-		if (!Parent.isEmpty())
-			m_Groups[Parent].append(Name);
+		m_Groups[Parent].append(Name);
 	}
 	else if (Action == m_pDelGroupe)
 	{

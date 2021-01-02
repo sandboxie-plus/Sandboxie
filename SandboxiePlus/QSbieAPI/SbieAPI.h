@@ -38,8 +38,14 @@ public:
 	QString				GetValue() const { return m_Name; }
 	QString				GetTypeStr() const;
 	QString				GetStautsStr() const;
-	void				IncrCounter() { m_Counter++; }
 	int					GetCount() const { return m_Counter; }
+
+	bool				Equals(const QSharedDataPointer<CResLogEntry>& pOther) const {
+							return pOther->m_ProcessId == this->m_ProcessId
+								//&& pOther->m_Type.Flags == this->m_Type.Flags
+								&& pOther->m_Name == this->m_Name;
+						}
+	void				Merge(const QSharedDataPointer<CResLogEntry>& pOther) { m_Counter++; this->m_Type.Flags |= pOther->m_Type.Flags; }
 
 	quint64				GetUID() const { return m_uid; }
 

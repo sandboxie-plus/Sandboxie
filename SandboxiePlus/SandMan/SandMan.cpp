@@ -689,9 +689,20 @@ void CSandMan::OnStatusChanged()
 		{
 			appTitle.append(tr("   -   Portable"));
 
-			if (theConf->GetBool("Options/PortableRootDir", true)) 
+			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
+			if (PortableRootDir == -1)
 			{
-				QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../SandBoxes").replace("/", "\\");
+				bool State = false;
+				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode, do you want to put the SandBoxes folder into it's parrent directory?")
+					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
+
+				if (State)
+					theConf->SetValue("Options/PortableRootDir", PortableRootDir);
+			}
+
+			if (PortableRootDir)
+			{
+				QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox/%SANDBOX%").replace("/", "\\");
 				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath);
 			}
 		}
@@ -706,6 +717,8 @@ void CSandMan::OnStatusChanged()
 			}
 		}
 
+		m_pBoxView->Clear();
+
 		OnIniReloaded();
 
 		if (theConf->GetBool("Options/WatchIni", true))
@@ -714,6 +727,8 @@ void CSandMan::OnStatusChanged()
 	else
 	{
 		appTitle.append(tr("   -   NOT connected").arg(theAPI->GetVersion()));
+
+		m_pBoxView->Clear();
 
 		theAPI->WatchIni(false);
 	}
@@ -1140,6 +1155,7 @@ void CSandMan::OnResetMsgs()
 	{
 		theConf->SetValue("Options/PortableStop", -1);
 		theConf->SetValue("Options/PortableStart", -1);
+		theConf->SetValue("Options/PortableRootDir", -1);
 
 		theConf->SetValue("Options/CheckForUpdates", 2);
 

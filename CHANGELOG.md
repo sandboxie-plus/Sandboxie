@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.3b / 5.45.2] - 2020-12-02
+
+### Added
+- added settings for the porteble boxed root folder option
+- added process name to resource log
+- added command line column to the process view in the sandman UI
+
+### Fixed
+- fixed a few issues wiht group handling
+- fixed issue with GetRawInputDeviceInfo when runnign a 32 bit program on a 64 bis system
+- fixed issue when pressing apply int he "Resource Access" tab the last edited value was not always applyed
+- fixed issue merging entries in resource access monitor
 
 
 

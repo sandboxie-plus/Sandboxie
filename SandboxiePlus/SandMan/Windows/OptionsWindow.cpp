@@ -1600,6 +1600,8 @@ void COptionsWindow::OnDelAccess()
 
 void COptionsWindow::SaveAccessList()
 {
+	CloseAccessEdit(true);
+
 	QStringList Keys = QStringList() << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "OpenKeyPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
 		<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";

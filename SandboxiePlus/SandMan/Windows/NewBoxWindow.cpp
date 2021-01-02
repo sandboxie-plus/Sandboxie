@@ -25,6 +25,8 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	connect(ui.radCopy, SIGNAL(toggled(bool)), this, SLOT(OnPreset()));
 	ui.radTemplate->setChecked(true);
 
+	ui.txtName->setFocus();
+
 	restoreGeometry(theConf->GetBlob("NewBoxWindow/Window_Geometry"));
 }
 

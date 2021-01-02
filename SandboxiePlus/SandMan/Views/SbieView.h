@@ -21,6 +21,7 @@ signals:
 	void						RecoveryRequested(const QString& BoxName);
 
 public slots:
+	void						Clear();
 	void						Refresh();
 	void						ReloadGroups();
 

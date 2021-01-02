@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ResMonModel.h"
 #include "../MiscHelpers/Common/Common.h"
+#include "../SbiePlusAPI.h"
 
 CResMonModel::CResMonModel(QObject *parent)
 :CListItemModel(parent)
@@ -93,7 +94,12 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 
 				switch (section)
 				{
-					case eProcess:			ColValue.Formated = QString::number(pEntry->GetProcessId()); break;
+					case eProcess:			
+					{
+						CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
+						ColValue.Formated = QString("%1 (%2)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId());
+						break;
+					}
 					case eTimeStamp:		ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;
 					//case eType:			ColValue.Formated = ; break;
 					//case eValue:			ColValue.Formated = ; break;

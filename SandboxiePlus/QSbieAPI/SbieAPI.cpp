@@ -1762,6 +1762,8 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
 		m_BoxedProxesses.insert(ProcessId, pProcess);
+
+		pProcess->InitProcessInfo();
 	}
 
 	if (pProcess->m_ParendPID == 0){
@@ -1891,9 +1893,8 @@ bool CSbieAPI::GetMonitor()
 	CResLogEntryPtr LogEntry = CResLogEntryPtr(new CResLogEntry(pid, type, Data));
 
 	QWriteLocker Lock(&m_ResLogMutex); 
-	if (!m_ResLogList.isEmpty() && m_ResLogList.last()->GetValue() == LogEntry->GetValue())
-	{
-		m_ResLogList.last()->IncrCounter();
+	if (!m_ResLogList.isEmpty() && m_ResLogList.last()->Equals(LogEntry)) {
+		m_ResLogList.last()->Merge(LogEntry);
 		return true; 
 	}
 	m_ResLogList.append(LogEntry);

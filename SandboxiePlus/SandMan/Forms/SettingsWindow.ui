@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -346,13 +346,6 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkSeparateUserFolders">
-             <property name="text">
-              <string>Separate user folders</string>
-             </property>
-            </widget>
-           </item>
            <item row="10" column="1">
             <spacer name="verticalSpacer_2">
              <property name="orientation">
@@ -370,6 +363,20 @@
             <widget class="QCheckBox" name="chkClearPass">
              <property name="text">
               <string>Clear password when main window becomes hidden</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="chkSeparateUserFolders">
+             <property name="text">
+              <string>Separate user folders</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QCheckBox" name="chkAutoRoot">
+             <property name="text">
+              <string>Portable root folder</string>
              </property>
             </widget>
            </item>

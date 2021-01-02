@@ -112,6 +112,13 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	}
 	m_WarnProgsChanged = false;
 
+	int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
+	if (PortableRootDir != -1 && theConf->IsPortable())
+		ui.chkAutoRoot->setChecked(PortableRootDir == 0 ? Qt::Unchecked : Qt::Checked);
+	else
+		ui.chkAutoRoot->setVisible(false);
+	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+
 	connect(ui.btnAddCompat, SIGNAL(pressed()), this, SLOT(OnAddCompat()));
 	connect(ui.btnDelCompat, SIGNAL(pressed()), this, SLOT(OnDelCompat()));
 
@@ -190,17 +197,20 @@ void CSettingsWindow::apply()
 	if (theAPI->IsConnected())
 	{
 		if (ui.fileRoot->text().isEmpty())
-			ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
-		theAPI->GetGlobalSettings()->SetText("FileRootPath", ui.fileRoot->text());
+			theAPI->GetGlobalSettings()->DelValue("FileRootPath"); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+		else
+			theAPI->GetGlobalSettings()->SetText("FileRootPath", ui.fileRoot->text());
 		theAPI->GetGlobalSettings()->SetBool("SeparateUserFolders", ui.chkSeparateUserFolders->isChecked());
 
 		if (ui.regRoot->text().isEmpty())
-			ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
-		theAPI->GetGlobalSettings()->SetText("KeyRootPath", ui.regRoot->text());
+			theAPI->GetGlobalSettings()->DelValue("KeyRootPath"); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
+		else
+			theAPI->GetGlobalSettings()->SetText("KeyRootPath", ui.regRoot->text());
 
 		if (ui.ipcRoot->text().isEmpty())
-			ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
-		theAPI->GetGlobalSettings()->SetText("IpcRootPath", ui.ipcRoot->text());
+			theAPI->GetGlobalSettings()->DelValue("IpcRootPath"); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+		else
+			theAPI->GetGlobalSettings()->SetText("IpcRootPath", ui.ipcRoot->text());
 
 
 		theAPI->GetGlobalSettings()->SetBool("EditAdminOnly", ui.chkAdminOnly->isChecked());
@@ -262,6 +272,9 @@ void CSettingsWindow::apply()
 		}
 	}
 
+	if (ui.chkAutoRoot->isVisible())
+		theConf->SetValue("Options/PortableRootDir", ui.chkAutoRoot->checkState() != Qt::Checked ? 1 : 0);
+
 	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
 
 	emit OptionsChanged();
@@ -286,6 +299,9 @@ void CSettingsWindow::OnChange()
 	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.onClose->model());
 	QStandardItem *item = model->item(0);
 	item->setFlags((!ui.chkShowTray->isChecked()) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
+
+	if (ui.chkAutoRoot->isVisible() && theGUI->IsFullyPortable())
+		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);
 
 	ui.btnSetPassword->setEnabled(ui.chkPassRequired->isChecked());
 }

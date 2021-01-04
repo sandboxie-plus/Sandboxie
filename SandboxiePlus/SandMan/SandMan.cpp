@@ -536,9 +536,9 @@ void CSandMan::OnMessage(const QString& Message)
 		if (Status != "OK")
 		{
 			if(m_bStopPending)
-				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all sandboxie components"));
+				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all Sandboxie components"));
 			else if(m_bConnectPending)
-				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required sandboxie components"));
+				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required Sandboxie components"));
 
 			OnLogMessage(tr("Maintenance operation %1").arg(Status));
 			CheckResults(QList<SB_STATUS>() << SB_ERR(SB_Message, QVariantList() << Status));
@@ -693,7 +693,7 @@ void CSandMan::OnStatusChanged()
 			if (PortableRootDir == -1)
 			{
 				bool State = false;
-				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode, do you want to put the SandBoxes folder into it's parrent directory?")
+				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?")
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
 				if (State)
@@ -1240,8 +1240,8 @@ void CSandMan::OnSetLogging()
 	{
 		if (theConf->GetBool("Options/ApiLogInfo", true))
 		{
-			QString Message = tr("To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.\n"
-				"Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.");
+			QString Message = tr("To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.\n"
+				"Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.");
 
 			bool State = false;
 			CCheckableMessageBox::question(this, "Sandboxie-Plus", Message
@@ -1627,7 +1627,7 @@ void CSandMan::OnUpdateCheck()
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toTime_t());
 
 		if (bManual)
-			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up to date."));
+			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date."));
 	}
 }
 
@@ -1701,7 +1701,7 @@ void CSandMan::OnAbout()
 			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
 		).arg(GetVersion());
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is an open source continuation of the well known Sandboxie.</p>"
+			"<p>Sandboxie-Plus is an open source continuation of Sandboxie.</p>"
 			"<p></p>"
 			"<p>Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.</p>"
 			"<p></p>"
@@ -1785,7 +1785,7 @@ void CSandMan::LoadLanguage()
 	}
 
 	if (!m_LanguageId) 
-		m_LanguageId = 1033; // default to englich
+		m_LanguageId = 1033; // default to English
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

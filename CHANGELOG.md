@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.5.3b / 5.45.2] - 2020-12-02
+## [0.5.3b / 5.45.2] - 2021-01-02
 
 ### Added
 - added settings for the porteble boxed root folder option

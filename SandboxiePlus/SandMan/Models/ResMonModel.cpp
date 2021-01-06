@@ -80,8 +80,8 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 				case eProcess:			Value = pEntry->GetProcessId(); break;
 				case eTimeStamp:		Value = pEntry->GetTimeStamp(); break;
 				case eType:				Value = pEntry->GetTypeStr(); break;
-				case eValue:			Value = pEntry->GetValue(); break;
 				case eStatus:			Value = pEntry->GetStautsStr(); break;
+				case eValue:			Value = pEntry->GetValue(); break;
 			}
 
 			SResLogNode::SValue& ColValue = pNode->Values[section];
@@ -147,8 +147,8 @@ QVariant CResMonModel::headerData(int section, Qt::Orientation orientation, int 
 			case eProcess:			return tr("Process");
 			case eTimeStamp:		return tr("Time Stamp");
 			case eType:				return tr("Type");
-			case eValue:			return tr("Value");
 			case eStatus:			return tr("Status");
+			case eValue:			return tr("Value");
 		}
 	}
     return QVariant();

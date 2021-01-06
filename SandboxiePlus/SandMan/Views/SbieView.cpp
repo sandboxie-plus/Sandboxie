@@ -183,6 +183,14 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 
 void CSbieView::OnMenu(const QPoint& Point)
 {
+	QList<QAction*> MenuActions = m_pMenu->actions();
+
+	bool isConnected = theAPI->IsConnected();
+	if (isConnected) {
+		foreach(QAction * pAction, MenuActions) 
+			pAction->setEnabled(true);
+	}
+
 	CSandBoxPtr pBox;
 	CBoxedProcessPtr pProcess;
 	int iProcessCount = 0;
@@ -207,7 +215,6 @@ void CSbieView::OnMenu(const QPoint& Point)
 		}
 	}
 
-	QList<QAction*> MenuActions = m_pMenu->actions();
 
 	for (int i = 0; i < m_iMenuTop; i++)
 		MenuActions[i]->setVisible(iSandBoxeCount == 0 && iProcessCount == 0);
@@ -277,6 +284,11 @@ void CSbieView::OnMenu(const QPoint& Point)
 
 	//m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
 	//m_pMenuResume->setEnabled(iSuspendedCount > 0);
+
+	if (!isConnected) {
+		foreach(QAction * pAction, MenuActions)
+			pAction->setEnabled(false);
+	}
 
 	CPanelView::OnMenu(Point);
 }

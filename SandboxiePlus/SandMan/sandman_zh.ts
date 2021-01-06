@@ -2,6 +2,237 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh">
 <context>
+    <name>CApiMonModel</name>
+    <message>
+        <source>Message</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <source>Time Stamp</source>
+        <translation>时间戳</translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation>进程</translation>
+    </message>
+</context>
+<context>
+    <name>CMultiErrorDialog</name>
+    <message>
+        <source>Message</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Error</source>
+        <translation>Sandboxie-Plus - 错误</translation>
+    </message>
+</context>
+<context>
+    <name>CNewBoxWindow</name>
+    <message>
+        <source>New Box</source>
+        <translation>新沙盒</translation>
+    </message>
+    <message>
+        <source>Hardened</source>
+        <translation>加强</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>默认</translation>
+    </message>
+    <message>
+        <source>Legacy (old sbie behaviour)</source>
+        <translation>遗留 (旧沙盒行为)</translation>
+    </message>
+</context>
+<context>
+    <name>COptionsWindow</name>
+    <message>
+        <source>Always show</source>
+        <translation>总是显示</translation>
+    </message>
+    <message>
+        <source>Template values can not be edited.</source>
+        <translation>模板值无法编辑.</translation>
+    </message>
+    <message>
+        <source>Lingerer</source>
+        <translation>驻留项</translation>
+    </message>
+    <message>
+        <source>Browse for File</source>
+        <translation>浏览文件</translation>
+    </message>
+    <message>
+        <source>Please enter a menu title</source>
+        <translation>请输入清单标题</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation>选择目录</translation>
+    </message>
+    <message>
+        <source>Please enter a name for the new group</source>
+        <translation>请输入新的组名称</translation>
+    </message>
+    <message>
+        <source>Please enter a program file name</source>
+        <translation>请输入程序文件名</translation>
+    </message>
+    <message>
+        <source>Template values can not be removed.</source>
+        <translation>模板值无法删除.</translation>
+    </message>
+    <message>
+        <source>Display box name in title</source>
+        <translation>标题显示沙盒名称</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation>文件夹</translation>
+    </message>
+    <message>
+        <source>Sandboxie Plus - &apos;%1&apos; Options</source>
+        <translation>Sandboxie Plus - &apos;%1&apos; 选项</translation>
+    </message>
+    <message>
+        <source>Leader</source>
+        <translation>引导</translation>
+    </message>
+    <message>
+        <source>Group: %1</source>
+        <translation>组: %1</translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation>进程</translation>
+    </message>
+    <message>
+        <source>Display [#] indicator only</source>
+        <translation>只显示 [#] 标记</translation>
+    </message>
+    <message>
+        <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
+        <translation>COM对象必须被它们的GUID制定,例如: {00000000-0000-0000-0000-000000000000}</translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Border disabled</source>
+        <translation>边框禁用</translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation>所有类别</translation>
+    </message>
+    <message>
+        <source>Please enter a file extension to be excluded</source>
+        <translation>请输入要排除的文件扩展名</translation>
+    </message>
+    <message>
+        <source>Exclusion</source>
+        <translation>排除</translation>
+    </message>
+    <message>
+        <source>Select File</source>
+        <translation>选择文件</translation>
+    </message>
+    <message>
+        <source>This template is enabled globally. To configure it, use the global options.</source>
+        <translation>此模板已全局启用.请使用全局选项配置.</translation>
+    </message>
+    <message>
+        <source>Please select group first.</source>
+        <translation>请先选择组.</translation>
+    </message>
+    <message>
+        <source>All Files (*.*)</source>
+        <translation>所有文件 (*.*)</translation>
+    </message>
+    <message>
+        <source>Show only when title is in focus</source>
+        <translation>仅在标题处在焦点时显示</translation>
+    </message>
+    <message>
+        <source>Select Program</source>
+        <translation>选择程序</translation>
+    </message>
+    <message>
+        <source>Please enter a command</source>
+        <translation>请输入命令</translation>
+    </message>
+    <message>
+        <source>kilobytes (%1)</source>
+        <translation>kb (%1)</translation>
+    </message>
+    <message>
+        <source>Don&apos;t alter the window title</source>
+        <translation>不要改变窗口标题</translation>
+    </message>
+    <message>
+        <source>All Programs</source>
+        <translation>所有程序</translation>
+    </message>
+    <message>
+        <source>Browse for Folder</source>
+        <translation>浏览文件夹</translation>
+    </message>
+    <message>
+        <source>Enter program:</source>
+        <translation>输入程序:</translation>
+    </message>
+    <message>
+        <source>Executables (*.exe|*.cmd)</source>
+        <translation>可执行文件 (*.exe|*.cmd)</translation>
+    </message>
+    <message>
+        <source>RT interfaces must be specified by their name.</source>
+        <translation>RT接口必须被它们名称制定.</translation>
+    </message>
+    <message>
+        <source>Browse for Program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a program path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a service identifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program</source>
+        <translation type="unfinished">程序</translation>
+    </message>
+    <message>
+        <source>Please enter an auto exec command</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPanelView</name>
+    <message>
+        <source>Copy Row</source>
+        <translation type="vanished">复制行</translation>
+    </message>
+    <message>
+        <source>Copy Cell</source>
+        <translation type="vanished">复制单元格</translation>
+    </message>
+    <message>
+        <source>Copy Panel</source>
+        <translation type="vanished">复制表格</translation>
+    </message>
+</context>
+<context>
     <name>CPopUpMessage</name>
     <message>
         <source>?</source>
@@ -22,6 +253,17 @@
     <message>
         <source>Visit %1 for a detailed explanation.</source>
         <translation>访问 %1 详细说明</translation>
+    </message>
+</context>
+<context>
+    <name>CPopUpProgress</name>
+    <message>
+        <source>Remove this progress indicator from the list</source>
+        <translation>在列表中删除此进程标记</translation>
+    </message>
+    <message>
+        <source>Dismiss</source>
+        <translation>忽略</translation>
     </message>
 </context>
 <context>
@@ -53,6 +295,837 @@
     <message>
         <source>Request timed out</source>
         <translation>请求超时</translation>
+    </message>
+</context>
+<context>
+    <name>CPopUpRecovery</name>
+    <message>
+        <source>Recover to:</source>
+        <translation type="unfinished">恢复到:</translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="unfinished">浏览</translation>
+    </message>
+    <message>
+        <source>Clear folder list</source>
+        <translation type="unfinished">清除文件夹列表</translation>
+    </message>
+    <message>
+        <source>Recover</source>
+        <translation type="unfinished">恢复</translation>
+    </message>
+    <message>
+        <source>Recover the file to original location</source>
+        <translation type="unfinished">恢复文件到原始路径</translation>
+    </message>
+    <message>
+        <source>Recover &amp;&amp; Explore</source>
+        <translation type="unfinished">恢复 &amp;&amp; 浏览</translation>
+    </message>
+    <message>
+        <source>Recover &amp;&amp; Open/Run</source>
+        <translation type="unfinished">恢复 &amp;&amp; 打开/运行</translation>
+    </message>
+    <message>
+        <source>Open file recovery for this box</source>
+        <translation type="unfinished">为此沙盒打开文件恢复</translation>
+    </message>
+    <message>
+        <source>Dismiss</source>
+        <translation type="unfinished">忽略</translation>
+    </message>
+    <message>
+        <source>Don&apos;t recover this file right now</source>
+        <translation type="unfinished">此时不恢复此文件</translation>
+    </message>
+    <message>
+        <source>Dismiss all from this box</source>
+        <translation type="unfinished">此沙盒全部忽略</translation>
+    </message>
+    <message>
+        <source>Disable quick recovery until the box restarts</source>
+        <translation type="unfinished">在沙盒重启前禁用快速恢复</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished">选择目录</translation>
+    </message>
+</context>
+<context>
+    <name>CPopUpWindow</name>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="vanished">%1 可以从 %2 快速恢复.
+文件写入自: %3</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="vanished">选择目录</translation>
+    </message>
+    <message>
+        <source>an UNKNOWN process.</source>
+        <translation>未知进程.</translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="vanished">浏览</translation>
+    </message>
+    <message>
+        <source>Recover &amp;&amp; Explore</source>
+        <translation type="vanished">恢复 &amp;&amp; 浏览</translation>
+    </message>
+    <message>
+        <source>Disable quick recovery until the box restarts</source>
+        <translation type="vanished">在沙盒重启前禁用快速恢复</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus Notifications</source>
+        <translation>Sandboxie-Plus通知</translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Clear folder list</source>
+        <translation type="vanished">清除文件夹列表</translation>
+    </message>
+    <message>
+        <source>Recover</source>
+        <translation type="vanished">恢复</translation>
+    </message>
+    <message>
+        <source>UNKNOWN</source>
+        <translation>未知</translation>
+    </message>
+    <message>
+        <source>Recover &amp;&amp; Open/Run</source>
+        <translation type="vanished">恢复 &amp;&amp; 打开/运行</translation>
+    </message>
+    <message>
+        <source>Recover the file to original location</source>
+        <translation type="vanished">恢复文件到原始路径</translation>
+    </message>
+    <message>
+        <source>Dismiss</source>
+        <translation type="vanished">忽略</translation>
+    </message>
+    <message>
+        <source>Recover to:</source>
+        <translation type="vanished">恢复到:</translation>
+    </message>
+    <message>
+        <source>Don&apos;t recover this file right now</source>
+        <translation type="vanished">此时不恢复此文件</translation>
+    </message>
+    <message>
+        <source>Open file recovery for this box</source>
+        <translation type="vanished">为此沙盒打开文件恢复</translation>
+    </message>
+    <message>
+        <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
+        <translation>确定要允许打印服务在沙盒外写入因 %1 (%2)?</translation>
+    </message>
+    <message>
+        <source>Dismiss all from this box</source>
+        <translation type="vanished">此沙盒全部忽略</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CRecoveryWindow</name>
+    <message>
+        <source>File Name</source>
+        <translation>文件名称</translation>
+    </message>
+    <message>
+        <source>File Size</source>
+        <translation>文件大小</translation>
+    </message>
+    <message>
+        <source>Full Path</source>
+        <translation>详细路径</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation>选择目录</translation>
+    </message>
+    <message>
+        <source>%1 - File Recovery</source>
+        <translation>%1 - 文件恢复</translation>
+    </message>
+</context>
+<context>
+    <name>CResMonModel</name>
+    <message>
+        <source>Type</source>
+        <translation>类型</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>值</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>状态</translation>
+    </message>
+    <message>
+        <source>Time Stamp</source>
+        <translation>时间戳</translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation>进程</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSandBoxPlus</name>
+    <message>
+        <source>No Admin</source>
+        <translation>无管理</translation>
+    </message>
+    <message>
+        <source>No INet</source>
+        <translation>无INet</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>标准</translation>
+    </message>
+    <message>
+        <source>API Log</source>
+        <translation>API日志</translation>
+    </message>
+    <message>
+        <source>Net Share</source>
+        <translation>网络共享</translation>
+    </message>
+    <message>
+        <source>NOT SECURE (Debug Config)</source>
+        <translation>不安全(调试配置)</translation>
+    </message>
+    <message>
+        <source>Enhanced Isolation</source>
+        <translation>增强隔离</translation>
+    </message>
+    <message>
+        <source>Reduced Isolation</source>
+        <translation>减弱隔离</translation>
+    </message>
+</context>
+<context>
+    <name>CSandMan</name>
+    <message>
+        <source>Exit</source>
+        <translation>退出</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;新版本Sandboxie-Plus 将被下载到:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;确定要开始安装吗? 正在沙盒运行的其他程序将会被终止.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
+        <translation>便携模式启动Sandboxie-Plus,需要创建必需的服务.将会提示管理员权限.</translation>
+    </message>
+    <message>
+        <source>Cleanup Processes</source>
+        <translation>清理所有操作</translation>
+    </message>
+    <message>
+        <source>Maintenance operation %1</source>
+        <translation>运行维护 %1</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;帮助</translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>&amp;视图</translation>
+    </message>
+    <message>
+        <source>Error deleting sandbox folder: %1</source>
+        <translation>删除沙盒文件夹错误: %1</translation>
+    </message>
+    <message>
+        <source>About Sandboxie-Plus</source>
+        <translation>关于Sandboxie-Plus</translation>
+    </message>
+    <message>
+        <source>Driver version: %1</source>
+        <translation>驱动版本: %1</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus v%1</source>
+        <translation>Sandboxie-Plus v%1</translation>
+    </message>
+    <message>
+        <source>Start Driver</source>
+        <translation>启动驱动</translation>
+    </message>
+    <message>
+        <source>Install Driver</source>
+        <translation>安装驱动</translation>
+    </message>
+    <message>
+        <source>Uninstall Driver</source>
+        <translation>卸载驱动</translation>
+    </message>
+    <message>
+        <source>Check for Updates</source>
+        <translation>检查更新</translation>
+    </message>
+    <message>
+        <source>Visit Support Forum</source>
+        <translation>支持论坛</translation>
+    </message>
+    <message>
+        <source>Failed to copy configuration from sandbox %1: %2</source>
+        <translation>复制沙盒配置 %1: %2 失败</translation>
+    </message>
+    <message>
+        <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
+        <translation>有Sandboxie-Plus新版本时确定检查更新吗?</translation>
+    </message>
+    <message>
+        <source>Cleanup Api Call Log</source>
+        <translation>清理Api调用日志</translation>
+    </message>
+    <message>
+        <source>Simple View</source>
+        <translation>简易视图</translation>
+    </message>
+    <message>
+        <source>No new updates found, your Sandboxie-Plus is up to date.</source>
+        <translation type="vanished">未发现更新,此Sandboxie-Plus版本为最新.</translation>
+    </message>
+    <message>
+        <source>%1 (%2): </source>
+        <translation>%1 (%2): </translation>
+    </message>
+    <message>
+        <source>Login Failed: %1</source>
+        <translation>登录失败: %1</translation>
+    </message>
+    <message>
+        <source>Clean Up</source>
+        <translation>清理</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this message again.</source>
+        <translation>不再显示此消息</translation>
+    </message>
+    <message>
+        <source>Uninstall Service</source>
+        <translation>卸载服务</translation>
+    </message>
+    <message>
+        <source>Start Service</source>
+        <translation>启动服务</translation>
+    </message>
+    <message>
+        <source>Install Service</source>
+        <translation>安装服务</translation>
+    </message>
+    <message>
+        <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
+        <translation>删除旧的快照目录 &apos;%1&apos; 失败</translation>
+    </message>
+    <message>
+        <source>The changes will be applied automatically as soon as the editor is closed.</source>
+        <translation>变更将在编辑器关闭后自动提交.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
+        <translation>无法删除由多个后续快照共享的快照</translation>
+    </message>
+    <message>
+        <source>Do you want to close Sandboxie Manager?</source>
+        <translation>确定要关闭Sandboxie管理器?</translation>
+    </message>
+    <message>
+        <source>Support Sandboxie-Plus with a Donation</source>
+        <translation>捐赠支持Sandboxie-Plus</translation>
+    </message>
+    <message>
+        <source>Unknown Error Status: %1</source>
+        <translation>未知错误代码: %1</translation>
+    </message>
+    <message>
+        <source>Failed to create directory for new snapshot</source>
+        <translation>创建新的快照目录失败</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
+        <translation>Sandboxie-Plus运行于便携模式,现在将清理所创建的服务.将会提示管理员权限</translation>
+    </message>
+    <message>
+        <source>   -   Portable</source>
+        <translation>   -   便携</translation>
+    </message>
+    <message>
+        <source>Failed to download update from: %1</source>
+        <translation>在: %1 下载更新失败</translation>
+    </message>
+    <message>
+        <source>Api Call Log</source>
+        <translation>Api调用日志</translation>
+    </message>
+    <message>
+        <source>The sandbox name can not be longer than 32 characters.</source>
+        <translation>沙盒名称不能超过32个字符.</translation>
+    </message>
+    <message>
+        <source>Stop Driver</source>
+        <translation>停止驱动</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this announcement in the future.</source>
+        <translation>此后不再显示此通告.</translation>
+    </message>
+    <message>
+        <source>Sbie Messages</source>
+        <translation>Sbie信息</translation>
+    </message>
+    <message>
+        <source>Failed to recover some files: 
+</source>
+        <translation>恢复某些文件失败: 
+</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of the well known Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
+        <translation type="vanished">&lt;p&gt;Sandboxie-Plus是著名开源程序Sandboxie的延续.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 获取更多信息.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;图标来自 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
+        <translation>移动目录 &apos;%1&apos; 到 &apos;%2&apos; 失败</translation>
+    </message>
+    <message>
+        <source>Recovering file %1 to %2</source>
+        <translation>恢复文件 %1 到 %2</translation>
+    </message>
+    <message>
+        <source>Resource Logging</source>
+        <translation>资源日志</translation>
+    </message>
+    <message>
+        <source>Online Documentation</source>
+        <translation>在线文档</translation>
+    </message>
+    <message>
+        <source>Ignore this update, notify me about the next one.</source>
+        <translation>忽略此升级,下一个再提示我.</translation>
+    </message>
+    <message>
+        <source>Please enter the duration for disabling forced programs.</source>
+        <translation>请输入禁用强制运行程序的时间.</translation>
+    </message>
+    <message>
+        <source>Sbie Directory: %1</source>
+        <translation>Sbie目录: %1</translation>
+    </message>
+    <message>
+        <source>   -   NOT connected</source>
+        <translation>   -   未连接</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
+        <translation>&lt;p&gt;确定要下载最新版?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Error</source>
+        <translation>Sandboxie-Plus - 错误</translation>
+    </message>
+    <message>
+        <source>The changes will be applied automatically whenever the file gets saved.</source>
+        <translation>每当文件保存后更改将自动应用.</translation>
+    </message>
+    <message>
+        <source>Time|Message</source>
+        <translation>时间|信息</translation>
+    </message>
+    <message>
+        <source>&amp;Options</source>
+        <translation>&amp;选项</translation>
+    </message>
+    <message>
+        <source>Show/Hide</source>
+        <translation>显示/隐藏</translation>
+    </message>
+    <message>
+        <source>Resource Monitor</source>
+        <translation>资源监控</translation>
+    </message>
+    <message>
+        <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
+        <translation>确定要打开 %1 在沙盒化 (是) 未沙盒化 (否) 的浏览器中?</translation>
+    </message>
+    <message>
+        <source>Reset all hidden messages</source>
+        <translation>重置所有隐藏消息</translation>
+    </message>
+    <message>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation>删除沙盒之前必须清空.</translation>
+    </message>
+    <message>
+        <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
+        <translation>沙盒名称不能为空格，只能包含字母,数字和下划线.</translation>
+    </message>
+    <message>
+        <source>A sandbox must be emptied before it can be renamed.</source>
+        <translation>重命名沙盒之前必须清空.</translation>
+    </message>
+    <message>
+        <source>API Call Logging</source>
+        <translation>API调用记录</translation>
+    </message>
+    <message>
+        <source>Loaded Config: %1</source>
+        <translation>加载的配置: %1</translation>
+    </message>
+    <message>
+        <source>Reload ini file</source>
+        <translation>重载ini文件</translation>
+    </message>
+    <message>
+        <source>Remember choice for later.</source>
+        <translation>以后记住选择.</translation>
+    </message>
+    <message>
+        <source>&amp;Maintenance</source>
+        <translation>&amp;维护</translation>
+    </message>
+    <message>
+        <source>The sandbox name can not be a device name.</source>
+        <translation>沙盒名称不能为设备名称.</translation>
+    </message>
+    <message>
+        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.
+Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.</source>
+        <translation type="vanished">要使用API日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
+请下载最新发布版，并用sandboxie.ini安装，详情请参考README.md里此项的说明.</translation>
+    </message>
+    <message>
+        <source>Operation failed for %1 item(s).</source>
+        <translation> %1 项操作失败.</translation>
+    </message>
+    <message>
+        <source>Global Settings</source>
+        <translation>全局设置</translation>
+    </message>
+    <message>
+        <source>Downloading new version...</source>
+        <translation>下载新版本...</translation>
+    </message>
+    <message>
+        <source>Failed to stop all sandboxie components</source>
+        <translation type="vanished">停止所有sandboxie组件失败</translation>
+    </message>
+    <message>
+        <source>&amp;Sandbox</source>
+        <translation>&amp;沙盒</translation>
+    </message>
+    <message>
+        <source>Failed to start required sandboxie components</source>
+        <translation type="vanished">启动所需的sandboxie组件失败</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;关于Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Cleanup</source>
+        <translation>清理</translation>
+    </message>
+    <message>
+        <source>Failed to check for updates, error: %1</source>
+        <translation>检查更新失败,错误: %1</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>断开</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>连接</translation>
+    </message>
+    <message>
+        <source>Only Administrators can change the config.</source>
+        <translation>仅限管理员可更改配置.</translation>
+    </message>
+    <message>
+        <source>Disable Forced Programs</source>
+        <translation>禁用强制运行程序</translation>
+    </message>
+    <message>
+        <source>Snapshot not found</source>
+        <translation>未发现快照</translation>
+    </message>
+    <message>
+        <source>Failed to remove old RegHive</source>
+        <translation>删除旧的注册表项失败</translation>
+    </message>
+    <message>
+        <source>Stop All</source>
+        <translation>停止所有</translation>
+    </message>
+    <message>
+        <source>Can&apos;t find Sandboxie installation path.</source>
+        <translation>未找到Sandboxie安装路径.</translation>
+    </message>
+    <message>
+        <source>Delete protection is enabled for the sandbox</source>
+        <translation>沙盒的删除保护被启用</translation>
+    </message>
+    <message>
+        <source>&amp;Advanced</source>
+        <translation>&amp;高级</translation>
+    </message>
+    <message>
+        <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
+        <translation>不兼容的Sandboxie %1 被发现.兼容版本为: %2</translation>
+    </message>
+    <message>
+        <source>Administrator rights are required for this operation.</source>
+        <translation>此操作需要管理员权限.</translation>
+    </message>
+    <message>
+        <source>Executing maintenance operation, please wait...</source>
+        <translation>执行操作维护,请稍等...</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
+        <translation>&lt;p&gt;有新版本Sandboxie-Plus可用.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Stop Service</source>
+        <translation>停止服务</translation>
+    </message>
+    <message>
+        <source>Create New Box</source>
+        <translation>创建新沙盒</translation>
+    </message>
+    <message>
+        <source>Failed to copy RegHive</source>
+        <translation>复制RegHive失败</translation>
+    </message>
+    <message>
+        <source>Failed to terminate all processes</source>
+        <translation>终止所有进程失败</translation>
+    </message>
+    <message>
+        <source>Advanced View</source>
+        <translation>高级视图</translation>
+    </message>
+    <message>
+        <source>Failed to delete sandbox %1: %2</source>
+        <translation>删除沙盒 %1: %2 失败</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
+        <translation>&lt;p&gt;确定要打开 &lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Maintenance operation Successful</source>
+        <translation>维护操作成功</translation>
+    </message>
+    <message>
+        <source>PID %1: </source>
+        <translation>进程ID %1: </translation>
+    </message>
+    <message>
+        <source>Error Status: %1</source>
+        <translation>错误代码: %1</translation>
+    </message>
+    <message>
+        <source>Terminate All Processes</source>
+        <translation>终止所有进程</translation>
+    </message>
+    <message>
+        <source>Please enter the configuration password.</source>
+        <translation>请输入配置密码.</translation>
+    </message>
+    <message>
+        <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
+        <translation>确定连隐藏信息窗口一起重置 (是) 或仅用于所有日志信息 (否)?</translation>
+    </message>
+    <message>
+        <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
+        <translation>您无权在此处更新配置 &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Failed to connect to the driver</source>
+        <translation>连接驱动失败</translation>
+    </message>
+    <message>
+        <source>Failed to communicate with Sandboxie Service: %1</source>
+        <translation>无法联系Sandboxie服务: %1</translation>
+    </message>
+    <message>
+        <source>Failed to execute: %1</source>
+        <translation>执行失败: %1</translation>
+    </message>
+    <message>
+        <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
+        <translation>因进程正在沙盒中运行，此快照操作无法完成.</translation>
+    </message>
+    <message>
+        <source>server not reachable</source>
+        <translation>服务器无法访问</translation>
+    </message>
+    <message>
+        <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
+        <translation>合并快照目录 &apos;%1&apos; 和 &apos;%2&apos; 错误,快照没有全部合并.</translation>
+    </message>
+    <message>
+        <source>Edit ini file</source>
+        <translation>编辑ini文件</translation>
+    </message>
+    <message>
+        <source>Checking for updates...</source>
+        <translation>检查更新...</translation>
+    </message>
+    <message>
+        <source>No sandboxes found; creating: %1</source>
+        <translation>没找到沙盒;创建: %1</translation>
+    </message>
+    <message>
+        <source>Cleanup Resource Log</source>
+        <translation>清理资源日志</translation>
+    </message>
+    <message>
+        <source>Cleanup Message Log</source>
+        <translation>清理消息日志</translation>
+    </message>
+    <message>
+        <source>About the Qt Framework</source>
+        <translation>关于Qt框架</translation>
+    </message>
+    <message>
+        <source>Keep terminated</source>
+        <translation>保持终止</translation>
+    </message>
+    <message>
+        <source>A sandbox of the name %1 already exists</source>
+        <translation>沙盒名称 %1 已存在</translation>
+    </message>
+    <message>
+        <source>Failed to set configuration setting %1 in section %2: %3</source>
+        <translation>配置设置 %1 失败于 %2: %3 </translation>
+    </message>
+    <message>
+        <source>Copy Cell</source>
+        <translation type="unfinished">复制单元格</translation>
+    </message>
+    <message>
+        <source>Copy Row</source>
+        <translation type="unfinished">复制行</translation>
+    </message>
+    <message>
+        <source>Copy Panel</source>
+        <translation type="unfinished">复制表格</translation>
+    </message>
+    <message>
+        <source>Failed to stop all Sandboxie components</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to start required Sandboxie components</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file %1 already exists, do you want to overwrite it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do this for all files!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
+Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSbieModel</name>
+    <message>
+        <source>Name</source>
+        <translation>名称</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="vanished">路径</translation>
+    </message>
+    <message>
+        <source>Box Groupe</source>
+        <translation>沙盒组</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>状态</translation>
+    </message>
+    <message>
+        <source>Path / Command Line</source>
+        <translation>路径 / 命令行</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation>开始时间</translation>
+    </message>
+    <message>
+        <source>Process ID</source>
+        <translation>进程ID</translation>
+    </message>
+</context>
+<context>
+    <name>CSbieProcess</name>
+    <message>
+        <source>Terminated</source>
+        <translation>终止</translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation>运行</translation>
     </message>
 </context>
 <context>
@@ -251,537 +1324,104 @@
     </message>
 </context>
 <context>
-    <name>CSandMan</name>
+    <name>CSettingsWindow</name>
     <message>
-        <source>Exit</source>
-        <translation>退出</translation>
+        <source>Close</source>
+        <translation>关闭</translation>
     </message>
     <message>
-        <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;新版本Sandboxie-Plus 将被下载到:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;确定要开始安装吗? 正在沙盒运行的其他程序将会被终止.&lt;/p&gt;</translation>
+        <source>Please enter the new configuration password.</source>
+        <translation>请输入新配置密码.</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
-        <translation>便携模式启动Sandboxie-Plus,需要创建必需的服务.将会提示管理员权限.</translation>
+        <source>Close to Tray</source>
+        <translation>关闭到托盘</translation>
     </message>
     <message>
-        <source>Cleanup Processes</source>
-        <translation>清理所有操作</translation>
+        <source>Select Directory</source>
+        <translation>选择目录</translation>
     </message>
     <message>
-        <source>Maintenance operation %1</source>
-        <translation>运行维护 %1</translation>
+        <source>Please enter a program file name</source>
+        <translation>请输入程序文件名</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;帮助</translation>
+        <source>Folder</source>
+        <translation>文件夹</translation>
     </message>
     <message>
-        <source>&amp;View</source>
-        <translation>&amp;视图</translation>
+        <source>Prompt before Close</source>
+        <translation>关闭前提示</translation>
     </message>
     <message>
-        <source>Error deleting sandbox folder: %1</source>
-        <translation>删除沙盒文件夹错误: %1</translation>
+        <source>Process</source>
+        <translation>进程</translation>
     </message>
     <message>
-        <source>About Sandboxie-Plus</source>
-        <translation>关于Sandboxie-Plus</translation>
+        <source>Sandboxie Plus - Settings</source>
+        <translation>Sandboxie Plus - 设置</translation>
     </message>
     <message>
-        <source>Driver version: %1</source>
-        <translation>驱动版本: %1</translation>
+        <source>Please re-enter the new configuration password.</source>
+        <translation>请再次输入新配置密码.</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus v%1</source>
-        <translation>Sandboxie-Plus v%1</translation>
-    </message>
-    <message>
-        <source>Start Driver</source>
-        <translation>启动驱动</translation>
-    </message>
-    <message>
-        <source>Install Driver</source>
-        <translation>安装驱动</translation>
-    </message>
-    <message>
-        <source>Uninstall Driver</source>
-        <translation>卸载驱动</translation>
-    </message>
-    <message>
-        <source>Check for Updates</source>
-        <translation>检查更新</translation>
-    </message>
-    <message>
-        <source>Visit Support Forum</source>
-        <translation>支持论坛</translation>
-    </message>
-    <message>
-        <source>Failed to copy configuration from sandbox %1: %2</source>
-        <translation>复制沙盒配置 %1: %2 失败</translation>
-    </message>
-    <message>
-        <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>有Sandboxie-Plus新版本时确定检查更新吗?</translation>
-    </message>
-    <message>
-        <source>Cleanup Api Call Log</source>
-        <translation>清理Api调用日志</translation>
-    </message>
-    <message>
-        <source>Simple View</source>
-        <translation>简易视图</translation>
-    </message>
-    <message>
-        <source>No new updates found, your Sandboxie-Plus is up to date.</source>
-        <translation>未发现更新,此Sandboxie-Plus版本为最新.</translation>
-    </message>
-    <message>
-        <source>%1 (%2): </source>
-        <translation>%1 (%2): </translation>
-    </message>
-    <message>
-        <source>Login Failed: %1</source>
-        <translation>登录失败: %1</translation>
-    </message>
-    <message>
-        <source>Clean Up</source>
-        <translation>清理</translation>
-    </message>
-    <message>
-        <source>Don&apos;t show this message again.</source>
-        <translation>不再显示此消息</translation>
-    </message>
-    <message>
-        <source>Uninstall Service</source>
-        <translation>卸载服务</translation>
-    </message>
-    <message>
-        <source>Start Service</source>
-        <translation>启动服务</translation>
-    </message>
-    <message>
-        <source>Install Service</source>
-        <translation>安装服务</translation>
-    </message>
-    <message>
-        <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
-        <translation>删除旧的快照目录 &apos;%1&apos; 失败</translation>
-    </message>
-    <message>
-        <source>The changes will be applied automatically as soon as the editor is closed.</source>
-        <translation>变更将在编辑器关闭后自动提交.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
-        <translation>无法删除由多个后续快照共享的快照</translation>
-    </message>
-    <message>
-        <source>Do you want to close Sandboxie Manager?</source>
-        <translation>确定要关闭Sandboxie管理器?</translation>
-    </message>
-    <message>
-        <source>Support Sandboxie-Plus with a Donation</source>
-        <translation>捐赠支持Sandboxie-Plus</translation>
-    </message>
-    <message>
-        <source>Unknown Error Status: %1</source>
-        <translation>未知错误代码: %1</translation>
-    </message>
-    <message>
-        <source>Failed to create directory for new snapshot</source>
-        <translation>创建新的快照目录失败</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus运行于便携模式,现在将清理所创建的服务.将会提示管理员权限</translation>
-    </message>
-    <message>
-        <source>   -   Portable</source>
-        <translation>   -   便携</translation>
-    </message>
-    <message>
-        <source>Failed to download update from: %1</source>
-        <translation>在: %1 下载更新失败</translation>
-    </message>
-    <message>
-        <source>Api Call Log</source>
-        <translation>Api调用日志</translation>
-    </message>
-    <message>
-        <source>The sandbox name can not be longer than 32 characters.</source>
-        <translation>沙盒名称不能超过32个字符.</translation>
-    </message>
-    <message>
-        <source>Stop Driver</source>
-        <translation>停止驱动</translation>
-    </message>
-    <message>
-        <source>Don&apos;t show this announcement in the future.</source>
-        <translation>此后不再显示此通告.</translation>
-    </message>
-    <message>
-        <source>Sbie Messages</source>
-        <translation>Sbie信息</translation>
-    </message>
-    <message>
-        <source>Failed to recover some files: 
-</source>
-        <translation>恢复某些文件失败: 
-</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of the well known Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Sandboxie-Plus是著名开源程序Sandboxie的延续.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 获取更多信息.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;图标来自 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>移动目录 &apos;%1&apos; 到 &apos;%2&apos; 失败</translation>
-    </message>
-    <message>
-        <source>Recovering file %1 to %2</source>
-        <translation>恢复文件 %1 到 %2</translation>
-    </message>
-    <message>
-        <source>Resource Logging</source>
-        <translation>资源日志</translation>
-    </message>
-    <message>
-        <source>Online Documentation</source>
-        <translation>在线文档</translation>
-    </message>
-    <message>
-        <source>Ignore this update, notify me about the next one.</source>
-        <translation>忽略此升级,下一个再提示我.</translation>
-    </message>
-    <message>
-        <source>Please enter the duration for disabling forced programs.</source>
-        <translation>请输入禁用强制运行程序的时间.</translation>
-    </message>
-    <message>
-        <source>Sbie Directory: %1</source>
-        <translation>Sbie目录: %1</translation>
-    </message>
-    <message>
-        <source>   -   NOT connected</source>
-        <translation>   -   未连接</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;确定要下载最新版?&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus - Error</source>
-        <translation>Sandboxie-Plus - 错误</translation>
-    </message>
-    <message>
-        <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>每当文件保存后更改将自动应用.</translation>
-    </message>
-    <message>
-        <source>Time|Message</source>
-        <translation>时间|信息</translation>
-    </message>
-    <message>
-        <source>&amp;Options</source>
-        <translation>&amp;选项</translation>
-    </message>
-    <message>
-        <source>Show/Hide</source>
-        <translation>显示/隐藏</translation>
-    </message>
-    <message>
-        <source>Resource Monitor</source>
-        <translation>资源监控</translation>
-    </message>
-    <message>
-        <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>确定要打开 %1 在沙盒化 (是) 未沙盒化 (否) 的浏览器中?</translation>
-    </message>
-    <message>
-        <source>Reset all hidden messages</source>
-        <translation>重置所有隐藏消息</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation>删除沙盒之前必须清空.</translation>
-    </message>
-    <message>
-        <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
-        <translation>沙盒名称不能为空格，只能包含字母,数字和下划线.</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation>重命名沙盒之前必须清空.</translation>
-    </message>
-    <message>
-        <source>API Call Logging</source>
-        <translation>API调用记录</translation>
-    </message>
-    <message>
-        <source>Loaded Config: %1</source>
-        <translation>加载的配置: %1</translation>
-    </message>
-    <message>
-        <source>Reload ini file</source>
-        <translation>重载ini文件</translation>
-    </message>
-    <message>
-        <source>Remember choice for later.</source>
-        <translation>以后记住选择.</translation>
-    </message>
-    <message>
-        <source>&amp;Maintenance</source>
-        <translation>&amp;维护</translation>
-    </message>
-    <message>
-        <source>The sandbox name can not be a device name.</source>
-        <translation>沙盒名称不能为设备名称.</translation>
-    </message>
-    <message>
-        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.
-Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>要使用API日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
-请下载最新发布版，并用sandboxie.ini安装，详情请参考README.md里此项的说明.</translation>
-    </message>
-    <message>
-        <source>Operation failed for %1 item(s).</source>
-        <translation> %1 项操作失败.</translation>
-    </message>
-    <message>
-        <source>Global Settings</source>
-        <translation>全局设置</translation>
-    </message>
-    <message>
-        <source>Downloading new version...</source>
-        <translation>下载新版本...</translation>
-    </message>
-    <message>
-        <source>Failed to stop all sandboxie components</source>
-        <translation>停止所有sandboxie组件失败</translation>
-    </message>
-    <message>
-        <source>&amp;Sandbox</source>
-        <translation>&amp;沙盒</translation>
-    </message>
-    <message>
-        <source>Failed to start required sandboxie components</source>
-        <translation>启动所需的sandboxie组件失败</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;关于Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Cleanup</source>
-        <translation>清理</translation>
-    </message>
-    <message>
-        <source>Failed to check for updates, error: %1</source>
-        <translation>检查更新失败,错误: %1</translation>
-    </message>
-    <message>
-        <source>Disconnect</source>
-        <translation>断开</translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation>连接</translation>
-    </message>
-    <message>
-        <source>Only Administrators can change the config.</source>
-        <translation>仅限管理员可更改配置.</translation>
-    </message>
-    <message>
-        <source>Disable Forced Programs</source>
-        <translation>禁用强制运行程序</translation>
-    </message>
-    <message>
-        <source>Snapshot not found</source>
-        <translation>未发现快照</translation>
-    </message>
-    <message>
-        <source>Failed to remove old RegHive</source>
-        <translation>删除旧的注册表项失败</translation>
-    </message>
-    <message>
-        <source>Stop All</source>
-        <translation>停止所有</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find Sandboxie installation path.</source>
-        <translation>未找到Sandboxie安装路径.</translation>
-    </message>
-    <message>
-        <source>Delete protection is enabled for the sandbox</source>
-        <translation>沙盒的删除保护被启用</translation>
-    </message>
-    <message>
-        <source>&amp;Advanced</source>
-        <translation>&amp;高级</translation>
-    </message>
-    <message>
-        <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation>不兼容的Sandboxie %1 被发现.兼容版本为: %2</translation>
-    </message>
-    <message>
-        <source>Administrator rights are required for this operation.</source>
-        <translation>此操作需要管理员权限.</translation>
-    </message>
-    <message>
-        <source>Executing maintenance operation, please wait...</source>
-        <translation>执行操作维护,请稍等...</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;有新版本Sandboxie-Plus可用.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Stop Service</source>
-        <translation>停止服务</translation>
-    </message>
-    <message>
-        <source>Create New Box</source>
-        <translation>创建新沙盒</translation>
-    </message>
-    <message>
-        <source>Failed to copy RegHive</source>
-        <translation>复制RegHive失败</translation>
-    </message>
-    <message>
-        <source>Failed to terminate all processes</source>
-        <translation>终止所有进程失败</translation>
-    </message>
-    <message>
-        <source>Advanced View</source>
-        <translation>高级视图</translation>
-    </message>
-    <message>
-        <source>Failed to delete sandbox %1: %2</source>
-        <translation>删除沙盒 %1: %2 失败</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;确定要打开 &lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;?&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Maintenance operation Successful</source>
-        <translation>维护操作成功</translation>
-    </message>
-    <message>
-        <source>PID %1: </source>
-        <translation>进程ID %1: </translation>
-    </message>
-    <message>
-        <source>Error Status: %1</source>
-        <translation>错误代码: %1</translation>
-    </message>
-    <message>
-        <source>Terminate All Processes</source>
-        <translation>终止所有进程</translation>
-    </message>
-    <message>
-        <source>Please enter the configuration password.</source>
-        <translation>请输入配置密码.</translation>
-    </message>
-    <message>
-        <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation>确定连隐藏信息窗口一起重置 (是) 或仅用于所有日志信息 (否)?</translation>
-    </message>
-    <message>
-        <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
-        <translation>您无权在此处更新配置 &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Failed to connect to the driver</source>
-        <translation>连接驱动失败</translation>
-    </message>
-    <message>
-        <source>Failed to communicate with Sandboxie Service: %1</source>
-        <translation>无法联系Sandboxie服务: %1</translation>
-    </message>
-    <message>
-        <source>Failed to execute: %1</source>
-        <translation>执行失败: %1</translation>
-    </message>
-    <message>
-        <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>因进程正在沙盒中运行，此快照操作无法完成.</translation>
-    </message>
-    <message>
-        <source>server not reachable</source>
-        <translation>服务器无法访问</translation>
-    </message>
-    <message>
-        <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
-        <translation>合并快照目录 &apos;%1&apos; 和 &apos;%2&apos; 错误,快照没有全部合并.</translation>
-    </message>
-    <message>
-        <source>Edit ini file</source>
-        <translation>编辑ini文件</translation>
-    </message>
-    <message>
-        <source>Checking for updates...</source>
-        <translation>检查更新...</translation>
-    </message>
-    <message>
-        <source>No sandboxes found; creating: %1</source>
-        <translation>没找到沙盒;创建: %1</translation>
-    </message>
-    <message>
-        <source>Cleanup Resource Log</source>
-        <translation>清理资源日志</translation>
-    </message>
-    <message>
-        <source>Cleanup Message Log</source>
-        <translation>清理消息日志</translation>
-    </message>
-    <message>
-        <source>About the Qt Framework</source>
-        <translation>关于Qt框架</translation>
-    </message>
-    <message>
-        <source>Keep terminated</source>
-        <translation>保持终止</translation>
-    </message>
-    <message>
-        <source>A sandbox of the name %1 already exists</source>
-        <translation>沙盒名称 %1 已存在</translation>
-    </message>
-    <message>
-        <source>Failed to set configuration setting %1 in section %2: %3</source>
-        <translation>配置设置 %1 失败于 %2: %3 </translation>
+        <source>Passwords did not match, please retry.</source>
+        <translation>密码不正确,请重新输入.</translation>
     </message>
 </context>
 <context>
-    <name>CSbieModel</name>
+    <name>CSnapshotsWindow</name>
     <message>
-        <source>Name</source>
-        <translation>名称</translation>
+        <source>Do you really want to delete the selected snapshot?</source>
+        <translation>确定要删除所选快照?</translation>
     </message>
     <message>
-        <source>Path</source>
-        <translation>路径</translation>
+        <source>New Snapshot</source>
+        <translation>新快照</translation>
     </message>
     <message>
-        <source>Box Groupe</source>
-        <translation>沙盒组</translation>
+        <source>Snapshot</source>
+        <translation>快照</translation>
     </message>
     <message>
-        <source>Status</source>
-        <translation>状态</translation>
+        <source>Snapshot: %1 taken: %2</source>
+        <translation>快照: %1 取自: %2</translation>
     </message>
     <message>
-        <source>Path / Command Line</source>
-        <translation>路径 / 命令行</translation>
+        <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
+        <translation>确定要切换正在使用的快照? 这样做会删除当前状态!</translation>
     </message>
     <message>
-        <source>Start Time</source>
-        <translation>开始时间</translation>
+        <source>%1 - Snapshots</source>
+        <translation>%1 - 快照</translation>
     </message>
     <message>
-        <source>Process ID</source>
-        <translation>进程ID</translation>
+        <source>Please enter a name for the new Snapshot.</source>
+        <translation>请输入新快照名称.</translation>
+    </message>
+</context>
+<context>
+    <name>NewBoxWindow</name>
+    <message>
+        <source>Copy options from an existing box:</source>
+        <translation>从已有沙盒复制选项:</translation>
+    </message>
+    <message>
+        <source>Initial sandbox configuration:</source>
+        <translation>初始沙盒配置:</translation>
+    </message>
+    <message>
+        <source>Select restriction/isolation template:</source>
+        <translation>选择限制/隔离模板:</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus new box</source>
+        <translation>SandboxiePlus新沙盒</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new box:</source>
+        <translation>输入新沙盒名称:</translation>
     </message>
 </context>
 <context>
@@ -934,7 +1574,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Browse</source>
-        <translation>浏览</translation>
+        <translation type="vanished">浏览</translation>
     </message>
     <message>
         <source>Restrict Resource Access monitor to administrators only</source>
@@ -1062,7 +1702,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Lift restrictions</source>
-        <translation>解除限制</translation>
+        <translation type="vanished">解除限制</translation>
     </message>
     <message>
         <source>Add Leader Program</source>
@@ -1170,7 +1810,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Remove Process</source>
-        <translation>删除进程</translation>
+        <translation type="vanished">删除进程</translation>
     </message>
     <message>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
@@ -1218,7 +1858,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Sandbox Isolation</source>
-        <translation>沙盒隔离</translation>
+        <translation type="vanished">沙盒隔离</translation>
     </message>
     <message>
         <source>Add Lingering Program</source>
@@ -1280,7 +1920,7 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>将驱动程序看到的所有访问事件记录到资源访问日志中.
+        <translation type="vanished">将驱动程序看到的所有访问事件记录到资源访问日志中.
 这些选项设置事件掩码到 &quot;*&quot; - 所有访问事件
 您可以通过ini来详细定制记录
 &quot;A&quot; - 允许访问
@@ -1291,6 +1931,118 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Edit ini Section</source>
         <translation>编辑ini部分</translation>
+    </message>
+    <message>
+        <source>Block access to the printer spooler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow the print spooler to print to files outside the sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not start sandboxed services using a system token (recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow access to Smart Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lift security restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandbox isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Exec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log all access events as seen by the driver to the resource access log.
+
+This options set the event mask to &quot;*&quot; - All access events
+You can customize the logging using the ini by specifying
+&quot;A&quot; - Allowed accesses
+&quot;D&quot; - Denied accesses
+&quot;I&quot; - Ignore access requests
+instead of &quot;*&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PopUpWindow</name>
+    <message>
+        <source>SandboxiePlus Notifications</source>
+        <translation>SandboxiePlus通知</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Drive %1</source>
+        <translation>磁盘 %1</translation>
+    </message>
+</context>
+<context>
+    <name>RecoveryWindow</name>
+    <message>
+        <source>Close</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus Settings</source>
+        <translation>SandboxiePlus设置</translation>
+    </message>
+    <message>
+        <source>Add Folder</source>
+        <translation>添加文件夹</translation>
+    </message>
+    <message>
+        <source>Recover to</source>
+        <translation>恢复到</translation>
+    </message>
+    <message>
+        <source>Recover</source>
+        <translation>恢复</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation>删除全部</translation>
     </message>
 </context>
 <context>
@@ -1451,253 +2203,9 @@ instead of &quot;*&quot;.</source>
         <source>Start with Windows</source>
         <translation>开机启动</translation>
     </message>
-</context>
-<context>
-    <name>CResMonModel</name>
     <message>
-        <source>Type</source>
-        <translation>类型</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation>值</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>状态</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation>时间戳</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation>进程</translation>
-    </message>
-</context>
-<context>
-    <name>COptionsWindow</name>
-    <message>
-        <source>Always show</source>
-        <translation>总是显示</translation>
-    </message>
-    <message>
-        <source>Template values can not be edited.</source>
-        <translation>模板值无法编辑.</translation>
-    </message>
-    <message>
-        <source>Lingerer</source>
-        <translation>驻留项</translation>
-    </message>
-    <message>
-        <source>Browse for File</source>
-        <translation>浏览文件</translation>
-    </message>
-    <message>
-        <source>Please enter a menu title</source>
-        <translation>请输入清单标题</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation>选择目录</translation>
-    </message>
-    <message>
-        <source>Please enter a name for the new group</source>
-        <translation>请输入新的组名称</translation>
-    </message>
-    <message>
-        <source>Please enter a program file name</source>
-        <translation>请输入程序文件名</translation>
-    </message>
-    <message>
-        <source>Template values can not be removed.</source>
-        <translation>模板值无法删除.</translation>
-    </message>
-    <message>
-        <source>Display box name in title</source>
-        <translation>标题显示沙盒名称</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation>文件夹</translation>
-    </message>
-    <message>
-        <source>Sandboxie Plus - &apos;%1&apos; Options</source>
-        <translation>Sandboxie Plus - &apos;%1&apos; 选项</translation>
-    </message>
-    <message>
-        <source>Leader</source>
-        <translation>引导</translation>
-    </message>
-    <message>
-        <source>Group: %1</source>
-        <translation>组: %1</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation>进程</translation>
-    </message>
-    <message>
-        <source>Display [#] indicator only</source>
-        <translation>只显示 [#] 标记</translation>
-    </message>
-    <message>
-        <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation>COM对象必须被它们的GUID制定,例如: {00000000-0000-0000-0000-000000000000}</translation>
-    </message>
-    <message>
-        <source>%1 (%2)</source>
-        <translation>%1 (%2)</translation>
-    </message>
-    <message>
-        <source>Border disabled</source>
-        <translation>边框禁用</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation>所有类别</translation>
-    </message>
-    <message>
-        <source>Please enter a file extension to be excluded</source>
-        <translation>请输入要排除的文件扩展名</translation>
-    </message>
-    <message>
-        <source>Exclusion</source>
-        <translation>排除</translation>
-    </message>
-    <message>
-        <source>Select File</source>
-        <translation>选择文件</translation>
-    </message>
-    <message>
-        <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation>此模板已全局启用.请使用全局选项配置.</translation>
-    </message>
-    <message>
-        <source>Please select group first.</source>
-        <translation>请先选择组.</translation>
-    </message>
-    <message>
-        <source>All Files (*.*)</source>
-        <translation>所有文件 (*.*)</translation>
-    </message>
-    <message>
-        <source>Show only when title is in focus</source>
-        <translation>仅在标题处在焦点时显示</translation>
-    </message>
-    <message>
-        <source>Select Program</source>
-        <translation>选择程序</translation>
-    </message>
-    <message>
-        <source>Please enter a command</source>
-        <translation>请输入命令</translation>
-    </message>
-    <message>
-        <source>kilobytes (%1)</source>
-        <translation>kb (%1)</translation>
-    </message>
-    <message>
-        <source>Don&apos;t alter the window title</source>
-        <translation>不要改变窗口标题</translation>
-    </message>
-    <message>
-        <source>All Programs</source>
-        <translation>所有程序</translation>
-    </message>
-    <message>
-        <source>Browse for Folder</source>
-        <translation>浏览文件夹</translation>
-    </message>
-    <message>
-        <source>Enter program:</source>
-        <translation>输入程序:</translation>
-    </message>
-    <message>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation>可执行文件 (*.exe|*.cmd)</translation>
-    </message>
-    <message>
-        <source>RT interfaces must be specified by their name.</source>
-        <translation>RT接口必须被它们名称制定.</translation>
-    </message>
-</context>
-<context>
-    <name>CSettingsWindow</name>
-    <message>
-        <source>Close</source>
-        <translation>关闭</translation>
-    </message>
-    <message>
-        <source>Please enter the new configuration password.</source>
-        <translation>请输入新配置密码.</translation>
-    </message>
-    <message>
-        <source>Close to Tray</source>
-        <translation>关闭到托盘</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation>选择目录</translation>
-    </message>
-    <message>
-        <source>Please enter a program file name</source>
-        <translation>请输入程序文件名</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation>文件夹</translation>
-    </message>
-    <message>
-        <source>Prompt before Close</source>
-        <translation>关闭前提示</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation>进程</translation>
-    </message>
-    <message>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - 设置</translation>
-    </message>
-    <message>
-        <source>Please re-enter the new configuration password.</source>
-        <translation>请再次输入新配置密码.</translation>
-    </message>
-    <message>
-        <source>Passwords did not match, please retry.</source>
-        <translation>密码不正确,请重新输入.</translation>
-    </message>
-</context>
-<context>
-    <name>RecoveryWindow</name>
-    <message>
-        <source>Close</source>
-        <translation>关闭</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus设置</translation>
-    </message>
-    <message>
-        <source>Add Folder</source>
-        <translation>添加文件夹</translation>
-    </message>
-    <message>
-        <source>Recover to</source>
-        <translation>恢复到</translation>
-    </message>
-    <message>
-        <source>Recover</source>
-        <translation>恢复</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation>刷新</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation>删除全部</translation>
+        <source>Portable root folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1729,295 +2237,6 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Take Snapshot</source>
         <translation>抓取快照</translation>
-    </message>
-</context>
-<context>
-    <name>CPopUpProgress</name>
-    <message>
-        <source>Remove this progress indicator from the list</source>
-        <translation>在列表中删除此进程标记</translation>
-    </message>
-    <message>
-        <source>Dismiss</source>
-        <translation>忽略</translation>
-    </message>
-</context>
-<context>
-    <name>CSandBoxPlus</name>
-    <message>
-        <source>No Admin</source>
-        <translation>无管理</translation>
-    </message>
-    <message>
-        <source>No INet</source>
-        <translation>无INet</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation>标准</translation>
-    </message>
-    <message>
-        <source>API Log</source>
-        <translation>API日志</translation>
-    </message>
-    <message>
-        <source>Net Share</source>
-        <translation>网络共享</translation>
-    </message>
-    <message>
-        <source>NOT SECURE (Debug Config)</source>
-        <translation>不安全(调试配置)</translation>
-    </message>
-    <message>
-        <source>Enhanced Isolation</source>
-        <translation>增强隔离</translation>
-    </message>
-    <message>
-        <source>Reduced Isolation</source>
-        <translation>减弱隔离</translation>
-    </message>
-</context>
-<context>
-    <name>CSnapshotsWindow</name>
-    <message>
-        <source>Do you really want to delete the selected snapshot?</source>
-        <translation>确定要删除所选快照?</translation>
-    </message>
-    <message>
-        <source>New Snapshot</source>
-        <translation>新快照</translation>
-    </message>
-    <message>
-        <source>Snapshot</source>
-        <translation>快照</translation>
-    </message>
-    <message>
-        <source>Snapshot: %1 taken: %2</source>
-        <translation>快照: %1 取自: %2</translation>
-    </message>
-    <message>
-        <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
-        <translation>确定要切换正在使用的快照? 这样做会删除当前状态!</translation>
-    </message>
-    <message>
-        <source>%1 - Snapshots</source>
-        <translation>%1 - 快照</translation>
-    </message>
-    <message>
-        <source>Please enter a name for the new Snapshot.</source>
-        <translation>请输入新快照名称.</translation>
-    </message>
-</context>
-<context>
-    <name>PopUpWindow</name>
-    <message>
-        <source>SandboxiePlus Notifications</source>
-        <translation>SandboxiePlus通知</translation>
-    </message>
-</context>
-<context>
-    <name>CRecoveryWindow</name>
-    <message>
-        <source>File Name</source>
-        <translation>文件名称</translation>
-    </message>
-    <message>
-        <source>File Size</source>
-        <translation>文件大小</translation>
-    </message>
-    <message>
-        <source>Full Path</source>
-        <translation>详细路径</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation>选择目录</translation>
-    </message>
-    <message>
-        <source>%1 - File Recovery</source>
-        <translation>%1 - 文件恢复</translation>
-    </message>
-</context>
-<context>
-    <name>CPopUpWindow</name>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation>%1 可以从 %2 快速恢复.
-文件写入自: %3</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation>选择目录</translation>
-    </message>
-    <message>
-        <source>an UNKNOWN process.</source>
-        <translation>未知进程.</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>浏览</translation>
-    </message>
-    <message>
-        <source>Recover &amp;&amp; Explore</source>
-        <translation>恢复 &amp;&amp; 浏览</translation>
-    </message>
-    <message>
-        <source>Disable quick recovery until the box restarts</source>
-        <translation>在沙盒重启前禁用快速恢复</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus Notifications</source>
-        <translation>Sandboxie-Plus通知</translation>
-    </message>
-    <message>
-        <source>%1 (%2)</source>
-        <translation>%1 (%2)</translation>
-    </message>
-    <message>
-        <source>Clear folder list</source>
-        <translation>清除文件夹列表</translation>
-    </message>
-    <message>
-        <source>Recover</source>
-        <translation>恢复</translation>
-    </message>
-    <message>
-        <source>UNKNOWN</source>
-        <translation>未知</translation>
-    </message>
-    <message>
-        <source>Recover &amp;&amp; Open/Run</source>
-        <translation>恢复 &amp;&amp; 打开/运行</translation>
-    </message>
-    <message>
-        <source>Recover the file to original location</source>
-        <translation>恢复文件到原始路径</translation>
-    </message>
-    <message>
-        <source>Dismiss</source>
-        <translation>忽略</translation>
-    </message>
-    <message>
-        <source>Recover to:</source>
-        <translation>恢复到:</translation>
-    </message>
-    <message>
-        <source>Don&apos;t recover this file right now</source>
-        <translation>此时不恢复此文件</translation>
-    </message>
-    <message>
-        <source>Open file recovery for this box</source>
-        <translation>为此沙盒打开文件恢复</translation>
-    </message>
-    <message>
-        <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation>确定要允许打印服务在沙盒外写入因 %1 (%2)?</translation>
-    </message>
-    <message>
-        <source>Dismiss all from this box</source>
-        <translation>此沙盒全部忽略</translation>
-    </message>
-</context>
-<context>
-    <name>NewBoxWindow</name>
-    <message>
-        <source>Copy options from an existing box:</source>
-        <translation>从已有沙盒复制选项:</translation>
-    </message>
-    <message>
-        <source>Initial sandbox configuration:</source>
-        <translation>初始沙盒配置:</translation>
-    </message>
-    <message>
-        <source>Select restriction/isolation template:</source>
-        <translation>选择限制/隔离模板:</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus new box</source>
-        <translation>SandboxiePlus新沙盒</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new box:</source>
-        <translation>输入新沙盒名称:</translation>
-    </message>
-</context>
-<context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Message</source>
-        <translation>信息</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation>时间戳</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation>进程</translation>
-    </message>
-</context>
-<context>
-    <name>CMultiErrorDialog</name>
-    <message>
-        <source>Message</source>
-        <translation>信息</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus - Error</source>
-        <translation>Sandboxie-Plus - 错误</translation>
-    </message>
-</context>
-<context>
-    <name>CSbieProcess</name>
-    <message>
-        <source>Terminated</source>
-        <translation>终止</translation>
-    </message>
-    <message>
-        <source>Running</source>
-        <translation>运行</translation>
-    </message>
-</context>
-<context>
-    <name>CNewBoxWindow</name>
-    <message>
-        <source>New Box</source>
-        <translation>新沙盒</translation>
-    </message>
-    <message>
-        <source>Hardened</source>
-        <translation>加强</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>默认</translation>
-    </message>
-    <message>
-        <source>Legacy (old sbie behaviour)</source>
-        <translation>遗留 (旧沙盒行为)</translation>
-    </message>
-</context>
-<context>
-    <name>CPanelView</name>
-    <message>
-        <source>Copy Row</source>
-        <translation>复制行</translation>
-    </message>
-    <message>
-        <source>Copy Cell</source>
-        <translation>复制单元格</translation>
-    </message>
-    <message>
-        <source>Copy Panel</source>
-        <translation>复制表格</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Drive %1</source>
-        <translation>磁盘 %1</translation>
     </message>
 </context>
 </TS>

@@ -281,7 +281,8 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m->lastRecordNum = 0;
 
 #ifndef _DEBUG
-	QStringList CompatVersions = QStringList () << "5.45.0";
+	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
+	QStringList CompatVersions = QStringList () << "5.45.0" << "5.46.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -1079,7 +1080,9 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
 
 SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* boxed_pids_512)
 {
-	wstring box_name = BoxName.toStdWString(); // WCHAR [34]
+	WCHAR box_name[34];
+	BoxName.toWCharArray(box_name); // fix-me: potential overflow
+	box_name[BoxName.size()] = L'\0';
 	BOOLEAN all_sessions = TRUE;
 	ULONG which_session = 0; // -1 for current session
 
@@ -1088,19 +1091,22 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* b
 	memset(parms, 0, sizeof(parms));
 	parms[0] = API_ENUM_PROCESSES;
 	parms[1] = (ULONG64)boxed_pids_512;
-	parms[2] = (ULONG64)box_name.c_str();
+	parms[2] = (ULONG64)box_name;
 	parms[3] = (ULONG64)all_sessions;
 	parms[4] = (ULONG64)which_session;
 
-	return m->IoControl(parms);
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(status);
+	return SB_OK;
 }
 
 SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 {
 	ULONG boxed_pids[512]; // ULONG [512]
-	NTSTATUS status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), boxed_pids);
-	if (!NT_SUCCESS(status))
-		return SB_ERR(status);
+	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), boxed_pids);
+	if (Status.IsError())
+		return Status;
 
 	QMap<quint32, CBoxedProcessPtr>	OldProcessList = pBox->m_ProcessList;
 
@@ -1955,12 +1961,11 @@ QString CResLogEntry::GetStautsStr() const
 	if (m_Type.Trace)
 		return "Trace";
 
-	QString Str;
 	if(m_Type.Open)
-		Str += "O ";
+		return "Open";
 	if(m_Type.Deny)
-		Str += "X ";
-	return Str;
+		return "Closed";
+	return "";
 }
 
 ///////////////////////////////////////////////////////////////////////////////

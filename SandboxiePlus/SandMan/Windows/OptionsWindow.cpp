@@ -146,6 +146,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkBlockSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkOpenSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkPrintToFile, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyLimit, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -154,9 +157,21 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkProtectBox, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoEmpty, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
-	connect(ui.btnAddExe, SIGNAL(clicked(bool)), this, SLOT(OnBrowsePath()));
 	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
+	QMenu* pRunBtnMenu = new QMenu(ui.btnAddFile);
+	pRunBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnBrowsePath()));
+	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnAddCmd->setMenu(pRunBtnMenu);
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
+
+	connect(ui.btnAddAutoExe, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoCmd()));
+	QMenu* pAutoBtnMenu = new QMenu(ui.btnAddFile);
+	pAutoBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnAddAutoExe()));
+	ui.btnAddAutoExe->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnAddAutoExe->setMenu(pAutoBtnMenu);
+	connect(ui.btnAddAutoExe, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExe()));
+	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnDelAutoSvc()));
+	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
 	//
 
 	// Groupes
@@ -233,11 +248,14 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
 
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkRestrictServices, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectRpcSs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	//connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 		
 	connect(ui.chkAddToJob, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -248,6 +266,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+	connect(ui.btnAddAutoExec, SIGNAL(pressed()), this, SLOT(OnAddAutoExec()));
+	connect(ui.btnDelAutoExec, SIGNAL(pressed()), this, SLOT(OnDelAutoExec()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnAddProcess, SIGNAL(pressed()), this, SLOT(OnAddProcess()));
@@ -293,6 +314,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	QByteArray
 	Columns = theConf->GetBlob("OptionsWindow/Run_Columns");
 	if (!Columns.isEmpty()) ui.treeRun->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/AutoRun_Columns");
+	if (!Columns.isEmpty()) ui.treeAutoStart->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Groups_Columns");
 	if (!Columns.isEmpty()) ui.treeGroups->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Forced_Columns");
@@ -316,6 +339,7 @@ COptionsWindow::~COptionsWindow()
 	theConf->SetBlob("OptionsWindow/Window_Geometry",saveGeometry());
 
 	theConf->SetBlob("OptionsWindow/Run_Columns", ui.treeRun->header()->saveState());
+	theConf->SetBlob("OptionsWindow/AutoRun_Columns", ui.treeAutoStart->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Groups_Columns", ui.treeGroups->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Forced_Columns", ui.treeForced->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Stop_Columns", ui.treeStop->header()->saveState());
@@ -374,6 +398,17 @@ void COptionsWindow::LoadConfig()
 		ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
 		ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 		ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
+		ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
+		ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
+		ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked());
+		ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
+		ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked());
+
+		ui.treeAutoStart->clear();
+		foreach(const QString & Value, m_pBox->GetTextList("StartProgram", m_Template))
+			AddAutoRunItem(Value, 0);
+		foreach(const QString & Value, m_pBox->GetTextList("StartService", m_Template))
+			AddAutoRunItem(Value, 1);
 
 		ui.treeRun->clear();
 		foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
@@ -425,14 +460,25 @@ void COptionsWindow::LoadConfig()
 		ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
 
 		ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
-		ui.chkProtectRpcSs->setChecked(m_pBox->GetBool("ProtectRpcSs", false));
+		ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
+		ui.chkProtectRpcSs->setEnabled(!ui.chkRestrictServices->isChecked());
+		ui.chkProtectRpcSs->setChecked(ui.chkProtectRpcSs->isEnabled() && m_pBox->GetBool("ProtectRpcSs", false));
 		ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 
 		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 		ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
-		ui.chkOpenCredentials->setChecked(m_pBox->GetBool("OpenCredentials", false));
+		ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
+		ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
+		//ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
+
 
 		ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
+
+
+		QStringList AutoExec = m_pBox->GetTextList("AutoExec", m_Template);
+		ui.lstAutoExec->clear();
+		ui.lstAutoExec->addItems(AutoExec);
+
 
 		ReadAdvancedCheck("FileTrace", ui.chkFileTrace, "*");
 		ReadAdvancedCheck("PipeTrace", ui.chkPipeTrace, "*");
@@ -443,7 +489,7 @@ void COptionsWindow::LoadConfig()
 		ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 
 		ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
-		QStringList Processes = m_pBox->GetTextList("HideHostProcess", false);
+		QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
 		ui.lstProcesses->clear();
 		ui.lstProcesses->addItems(Processes);
 
@@ -512,6 +558,22 @@ void COptionsWindow::SaveConfig()
 		m_pBox->SetBool("BlockNetworkFiles", ui.chkBlockNetShare->isChecked());
 		m_pBox->SetBool("BlockNetParam", ui.chkBlockNetParam->isChecked());
 		m_pBox->SetBool("DropAdminRights", ui.chkDropRights->isChecked());
+		m_pBox->SetBool("ClosePrintSpooler", ui.chkBlockSpooler->isChecked());
+		m_pBox->SetBool("OpenPrintSpooler", ui.chkOpenSpooler->isChecked());
+		m_pBox->SetBool("AllowSpoolerPrintToFile", ui.chkPrintToFile->isChecked());
+
+
+		QStringList StartProgram;
+		QStringList StartService;
+		for (int i = 0; i < ui.treeAutoStart->topLevelItemCount(); i++) {
+			QTreeWidgetItem* pItem = ui.treeAutoStart->topLevelItem(i);
+			if (pItem->data(0, Qt::UserRole).toInt())
+				StartService.append(pItem->text(1));
+			else
+				StartProgram.append(pItem->text(1));
+		}
+		m_pBox->UpdateTextList("StartProgram", StartProgram, m_Template);
+		m_pBox->UpdateTextList("StartService", StartService, m_Template);
 
 		QStringList RunCommands;
 		for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
@@ -566,13 +628,25 @@ void COptionsWindow::SaveConfig()
 		else m_pBox->DelValue("PreferExternalManifest");
 
 		WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
-		WriteAdvancedCheck(ui.chkProtectRpcSs, "ProtectRpcSs", "y", "");
+		WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
+		if(ui.chkProtectRpcSs->isEnabled())
+			WriteAdvancedCheck(ui.chkProtectRpcSs, "ProtectRpcSs", "y", "");
 		WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 		
 		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
-		WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
+		if(ui.chkOpenCredentials->isEnabled())
+			WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
+		WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
+		//WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
 
 		WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
+
+		QStringList AutoExec;
+		for (int i = 0; i < ui.lstAutoExec->count(); i++)
+			AutoExec.append(ui.lstAutoExec->item(i)->text());
+		m_pBox->UpdateTextList("AutoExec", AutoExec, m_Template);
+
+
 
 		WriteAdvancedCheck(ui.chkFileTrace, "FileTrace", "*");
 		WriteAdvancedCheck(ui.chkPipeTrace, "PipeTrace", "*");
@@ -587,7 +661,7 @@ void COptionsWindow::SaveConfig()
 		QStringList Processes;
 		for (int i = 0; i < ui.lstProcesses->count(); i++)
 			Processes.append(ui.lstProcesses->item(i)->text());
-		m_pBox->UpdateTextList("HideHostProcess", Processes, false);
+		m_pBox->UpdateTextList("HideHostProcess", Processes, m_Template);
 
 		QStringList Users;
 		for (int i = 0; i < ui.lstUsers->count(); i++)
@@ -645,6 +719,9 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkNoCopyWarn->setEnabled(ui.chkCopyLimit->isChecked());
 
 	ui.chkAutoEmpty->setEnabled(!ui.chkProtectBox->isChecked());
+
+	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked());
+	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked());
 }
 
 void COptionsWindow::OnPickColor()
@@ -655,6 +732,56 @@ void COptionsWindow::OnPickColor()
 	m_GeneralChanged = true;
 	m_BorderColor = color;
 	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
+}
+
+void COptionsWindow::OnAddAutoCmd()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program path"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	AddAutoRunItem(Value, 0);
+	m_GeneralChanged = true;
+}
+
+void COptionsWindow::OnAddAutoExe()
+{
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe|*.cmd)")).replace("/", "\\");;
+	if (Value.isEmpty())
+		return;
+
+	AddAutoRunItem(Value, 0);
+	m_GeneralChanged = true;
+}
+
+void COptionsWindow::OnDelAutoSvc()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a service identifier"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	AddAutoRunItem(Value, 1);
+	m_GeneralChanged = true;
+}
+
+void COptionsWindow::AddAutoRunItem(const QString& Value, int Type)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Type ? tr("Service") : tr("Program"));
+	pItem->setData(0, Qt::UserRole, Type);
+	pItem->setText(1, Value);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	ui.treeAutoStart->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::OnDelAuto()
+{
+	QTreeWidgetItem* pItem = ui.treeAutoStart->currentItem();
+	if (!pItem)
+		return;
+
+	delete pItem;
+	m_GeneralChanged = true;
 }
 
 void COptionsWindow::OnBrowsePath()
@@ -1738,7 +1865,12 @@ void COptionsWindow::OnDelRecEntry()
 
 void COptionsWindow::OnAdvancedChanged()
 {
+	ui.chkProtectRpcSs->setEnabled(!ui.chkRestrictServices->isChecked());
+	if (!ui.chkProtectRpcSs->isEnabled()) ui.chkProtectRpcSs->setChecked(false);
+
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
+	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
+
 	m_AdvancedChanged = true;
 }
 
@@ -1755,6 +1887,25 @@ void COptionsWindow::OnDebugChanged()
 {
 	QCheckBox* pCheck = qobject_cast<QCheckBox*>(sender());
 	m_DebugOptions[pCheck].Changed = true;
+}
+
+void COptionsWindow::OnAddAutoExec()
+{
+	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter an auto exec command"));
+	if (Process.isEmpty())
+		return;
+
+	ui.lstAutoExec->addItem(Process);
+
+	m_AdvancedChanged = true;
+}
+
+void COptionsWindow::OnDelAutoExec()
+{
+	foreach(QListWidgetItem * pItem, ui.lstAutoExec->selectedItems())
+		delete pItem;
+
+	m_AdvancedChanged = true;
 }
 
 void COptionsWindow::OnAddProcess()
@@ -1996,11 +2147,15 @@ void COptionsWindow::OnTab()
 			else
 				ui.radStartAll->setChecked(true);
 			CopyGroupToList("<StartRunAccess>", ui.treeStart);
+
+			OnRestrictStart();
 		}
 		else if (ui.tabs->currentWidget() == ui.tabInternet)
 		{
 			ui.chkBlockINet->setChecked(GetAccessEntry(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices") != NULL);
 			CopyGroupToList("<InternetAccess>", ui.treeINet);
+
+			OnBlockINet();
 		}
 		else if (ui.tabs->currentWidget() == ui.tabAdvanced)
 		{

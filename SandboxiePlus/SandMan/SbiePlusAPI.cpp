@@ -70,16 +70,16 @@ void CSandBoxPlus::UpdateDetails()
 
 	m_bDropRights = GetBool("DropAdminRights", false);
 
-	if (CheckOpenToken())
+	if (CheckOpenToken() || GetBool("StripSystemPrivileges", false))
 		m_iUnsecureDebugging = 1;
-	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false))
+	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) || GetBool("RunServicesAsSystem", false))
 		m_iUnsecureDebugging = 2;
 	else
 		m_iUnsecureDebugging = 0;
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false) || GetBool("ProtectRpcSs", false));
+	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false) /*|| GetBool("ProtectRpcSs", false)*/);
 
 	CSandBox::UpdateDetails();
 }

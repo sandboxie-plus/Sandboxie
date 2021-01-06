@@ -30,6 +30,11 @@ private slots:
 	void OnAddCommand();
 	void OnDelCommand();
 
+	void OnAddAutoCmd();
+	void OnAddAutoExe();
+	void OnDelAutoSvc();
+	void OnDelAuto();
+
 	void OnAddGroup();
 	void OnAddProg();
 	void OnDelProg();
@@ -71,6 +76,9 @@ private slots:
 	void OnAddRecIgnoreExt();
 	void OnDelRecEntry();
 	void OnShowRecoveryTmpl()		{ LoadRecoveryList(); }
+
+	void OnAddAutoExec();
+	void OnDelAutoExec();
 
 	void OnAddProcess();
 	void OnDelProcess();
@@ -162,6 +170,8 @@ protected:
 
 	void LoadConfig();
 	void SaveConfig();
+
+	void AddAutoRunItem(const QString& Value, int Type);
 
 	void AddRunItem(const QString& Name, const QString& Command);
 

@@ -14,8 +14,8 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
-#define VERSION_REV 	3
-#define VERSION_UPD 	2
+#define VERSION_REV 	4
+#define VERSION_UPD 	0
 
 
 //#include "../QSbieAPI/SbieAPI.h"
@@ -99,6 +99,8 @@ public slots:
 	void				CheckForUpdates(bool bManual = true);
 
 	void				OpenUrl(const QUrl& url);
+
+	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
 
 private slots:
 	void				OnSelectionChanged();

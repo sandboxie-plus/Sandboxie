@@ -122,6 +122,10 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bConnectPending = false;
 	m_bStopPending = false;
 
+	CPanelView::m_CopyCell = tr("Copy Cell");
+	CPanelView::m_CopyRow = tr("Copy Row");
+	CPanelView::m_CopyPanel = tr("Copy Panel");
+
 	CreateMenus();
 
 	m_pMainWidget = new QWidget();
@@ -676,8 +680,10 @@ void CSandMan::OnSelectionChanged()
 
 void CSandMan::OnStatusChanged()
 {
+	bool isConnected = theAPI->IsConnected();
+
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
-	if (theAPI->IsConnected())
+	if (isConnected)
 	{
 		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
@@ -733,6 +739,21 @@ void CSandMan::OnStatusChanged()
 		theAPI->WatchIni(false);
 	}
 	this->setWindowTitle(appTitle);
+
+
+	m_pNew->setEnabled(isConnected);
+	m_pEmptyAll->setEnabled(isConnected);
+	m_pDisableForce->setEnabled(isConnected);
+	m_pDisableForce2->setEnabled(isConnected);
+
+	//m_pCleanUpMenu->setEnabled(isConnected);
+	//m_pCleanUpButton->setEnabled(isConnected);
+	//m_pKeepTerminated->setEnabled(isConnected);
+
+	m_pEditIni->setEnabled(isConnected);
+	m_pReloadIni->setEnabled(isConnected);
+	m_pEnableMonitoring->setEnabled(isConnected);
+	m_pEnableLogging->setEnabled(isConnected);
 }
 
 void CSandMan::OnMenuHover(QAction* action)
@@ -842,6 +863,8 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 {
 	SB_STATUS Status = SB_OK;
 
+	int OverwriteOnExist = -1;
+
 	QStringList Unrecovered;
 	for (QList<QPair<QString, QString>>::const_iterator I = FileList.begin(); I != FileList.end(); ++I)
 	{
@@ -853,6 +876,30 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 		pProgress->ShowMessage(tr("Recovering file %1 to %2").arg(FileName).arg(RecoveryFolder));
 
 		QDir().mkpath(RecoveryFolder);
+		if (QFile::exists(RecoveryPath)) 
+		{
+			int Overwrite = OverwriteOnExist;
+			if (Overwrite == -1)
+			{
+				bool forAll = false;
+				int retVal = 0;
+				QMetaObject::invokeMethod(theGUI, "ShowQuestion", Qt::BlockingQueuedConnection, // show this question using the GUI thread
+					Q_RETURN_ARG(int, retVal),
+					Q_ARG(QString, tr("The file %1 already exists, do you want to overwrite it?").arg(RecoveryPath)),
+					Q_ARG(QString, tr("Do this for all files!")),
+					Q_ARG(bool*, &forAll),
+					Q_ARG(int, QDialogButtonBox::Yes | QDialogButtonBox::No),
+					Q_ARG(int, QDialogButtonBox::No)
+				);
+
+				Overwrite = retVal == QDialogButtonBox::Yes ? 1 : 0;
+				if (forAll)
+					OverwriteOnExist = Overwrite;
+			}
+			if (Overwrite == 1)
+				QFile::remove(RecoveryPath);
+		}
+
 		if (!QFile::rename(BoxPath, RecoveryPath))
 			Unrecovered.append(BoxPath);
 	}
@@ -875,6 +922,11 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 
 
 	pProgress->Finish(Status);
+}
+
+int CSandMan::ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton)
+{
+	return CCheckableMessageBox::question(this, "Sandboxie-Plus", question, checkBoxText, checkBoxSetting, (QDialogButtonBox::StandardButtons)buttons, (QDialogButtonBox::StandardButton)defaultButton, QMessageBox::Question);
 }
 
 void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)

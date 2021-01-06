@@ -6,14 +6,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.3b / 5.45.2] - 2021-01-02
 
 ### Added
-- added settings for the porteble boxed root folder option
+- added settings for the portable boxed root folder option
 - added process name to resource log
-- added command line column to the process view in the sandman UI
+- added command line column to the process view in the SandMan UI
 
 ### Fixed
-- fixed a few issues wiht group handling
-- fixed issue with GetRawInputDeviceInfo when runnign a 32 bit program on a 64 bis system
-- fixed issue when pressing apply int he "Resource Access" tab the last edited value was not always applyed
+- fixed a few issues with group handling
+- fixed issue with GetRawInputDeviceInfo when running a 32 bit program on a 64 bit system
+- fixed issue when pressing apply in the "Resource Access" tab; the last edited value was not always applied
 - fixed issue merging entries in resource access monitor
 
 
@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.3a / 5.45.2] - 2020-12-29
 
 ### Added
-- added prompt to choose if links in the Sandman UI should be opened in a sandboxed or unsandboxed browser
+- added prompt to choose if links in the SandMan UI should be opened in a sandboxed or unsandboxed browser
 - added more recovery options
 - added "ClosedClsid=" to block com objects from being used when they cause compatibility issues
 - added "ClsidTrace=*" option to trace COM usage
@@ -37,7 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - changed docs and update URLs to the new sandboxie-plus.com domain
-- greately improved the setup script (thanks mpheath)
+- greatly improved the setup script (thanks mpheath)
 - "OpenClsid=" and "ClosedClsid=" now support specifying a program or group name
 - by default, when started in portable mode, the sandbox folder will be located in the parent directory of the sandboxie instance
 

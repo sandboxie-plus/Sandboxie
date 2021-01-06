@@ -500,6 +500,39 @@ _FX void Dll_InitExeEntry(void)
 _FX void Dll_SelectImageType(void)
 {
     //
+    // check for custom configured special images
+    //
+
+    ULONG index;
+    NTSTATUS status;
+    WCHAR wbuf[96];
+    WCHAR* buf = wbuf;
+
+    for (index = 0; ; ++index) {
+        status = SbieApi_QueryConfAsIs(
+            NULL, L"SpecialImage", index, buf, 90 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        WCHAR* ptr = wcschr(buf, L',');
+        if (!ptr) continue;
+
+        *ptr++ = L'\0';
+
+        if (_wcsicmp(Dll_ImageName, ptr) == 0) {
+
+            if (_wcsicmp(L"chrome", buf) == 0)
+                Dll_ImageType = DLL_IMAGE_GOOGLE_CHROME;
+            else if (_wcsicmp(L"firefox", buf) == 0)
+                Dll_ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+            else
+                Dll_ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
+
+            break;
+        }
+    }
+
+    //
     // keep image names in sync with enum at top of dll.h
     //
 
@@ -521,12 +554,14 @@ _FX void Dll_SelectImageType(void)
 
         L"iexplore.exe",            (WCHAR *)DLL_IMAGE_INTERNET_EXPLORER,
         L"firefox.exe",             (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
         L"kmplayer.exe",            (WCHAR *)DLL_IMAGE_PANDORA_KMPLAYER,
         L"wlmail.exe",              (WCHAR *)DLL_IMAGE_WINDOWS_LIVE_MAIL,
         L"ServiceModelReg.exe",     (WCHAR *)DLL_IMAGE_SERVICE_MODEL_REG,
         L"wisptis.exe",             (WCHAR *)DLL_IMAGE_WISPTIS,
+
         L"iron.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"dragon.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"chrome.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
@@ -536,6 +571,7 @@ _FX void Dll_SelectImageType(void)
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
 		L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // modern edge is chromium based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
+
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"plugin-container.exe",    (WCHAR *)DLL_IMAGE_PLUGIN_CONTAINER,
@@ -544,12 +580,13 @@ _FX void Dll_SelectImageType(void)
         NULL,                       NULL
     };
 
-    int i;
+    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED) {
 
-    for (i = 0; _ImageNames[i]; i += 2) {
-        if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
-            Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
-            break;
+        for (int i = 0; _ImageNames[i]; i += 2) {
+            if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
+                Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
+                break;
+            }
         }
     }
 
@@ -577,6 +614,9 @@ _FX void Dll_SelectImageType(void)
 
         SbieApi_Log(2205, Dll_ImageName);
     }
+
+    if (Dll_ImageType == DLL_IMAGE_LAST)
+        Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
     //
     // we have some special cases for programs running under a restricted

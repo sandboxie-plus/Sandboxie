@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ResMonModel.h"
 #include "../MiscHelpers/Common/Common.h"
+#include "../SbiePlusAPI.h"
 
 CResMonModel::CResMonModel(QObject *parent)
 :CListItemModel(parent)
@@ -79,8 +80,8 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 				case eProcess:			Value = pEntry->GetProcessId(); break;
 				case eTimeStamp:		Value = pEntry->GetTimeStamp(); break;
 				case eType:				Value = pEntry->GetTypeStr(); break;
-				case eValue:			Value = pEntry->GetValue(); break;
 				case eStatus:			Value = pEntry->GetStautsStr(); break;
+				case eValue:			Value = pEntry->GetValue(); break;
 			}
 
 			SResLogNode::SValue& ColValue = pNode->Values[section];
@@ -93,7 +94,12 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 
 				switch (section)
 				{
-					case eProcess:			ColValue.Formated = QString::number(pEntry->GetProcessId()); break;
+					case eProcess:			
+					{
+						CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
+						ColValue.Formated = QString("%1 (%2)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId());
+						break;
+					}
 					case eTimeStamp:		ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;
 					//case eType:			ColValue.Formated = ; break;
 					//case eValue:			ColValue.Formated = ; break;
@@ -141,8 +147,8 @@ QVariant CResMonModel::headerData(int section, Qt::Orientation orientation, int 
 			case eProcess:			return tr("Process");
 			case eTimeStamp:		return tr("Time Stamp");
 			case eType:				return tr("Type");
-			case eValue:			return tr("Value");
 			case eStatus:			return tr("Status");
+			case eValue:			return tr("Value");
 		}
 	}
     return QVariant();

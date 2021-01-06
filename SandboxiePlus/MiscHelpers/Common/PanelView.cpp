@@ -5,6 +5,10 @@ bool CPanelView::m_SimpleFormat = false;
 int CPanelView::m_MaxCellWidth = 0;
 QString CPanelView::m_CellSeparator = "\t";
 
+QString CPanelView::m_CopyCell = "Copy Cell";
+QString CPanelView::m_CopyRow = "Copy Row";
+QString CPanelView::m_CopyPanel = "Copy Panel";
+
 CPanelView::CPanelView(QWidget *parent)
 	:QWidget(parent)
 {
@@ -21,12 +25,12 @@ void CPanelView::AddPanelItemsToMenu(bool bAddSeparator)
 {
 	if(bAddSeparator)
 		m_pMenu->addSeparator();
-	m_pCopyCell = m_pMenu->addAction(tr("Copy Cell"), this, SLOT(OnCopyCell()));
-	m_pCopyRow = m_pMenu->addAction(tr("Copy Row"), this, SLOT(OnCopyRow()));
+	m_pCopyCell = m_pMenu->addAction(m_CopyCell, this, SLOT(OnCopyCell()));
+	m_pCopyRow = m_pMenu->addAction(m_CopyRow, this, SLOT(OnCopyRow()));
 	m_pCopyRow->setShortcut(QKeySequence::Copy);
 	m_pCopyRow->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pCopyRow);
-	m_pCopyPanel = m_pMenu->addAction(tr("Copy Panel"), this, SLOT(OnCopyPanel()));
+	m_pCopyPanel = m_pMenu->addAction(m_CopyPanel, this, SLOT(OnCopyPanel()));
 }
 
 void CPanelView::OnMenu(const QPoint& Point)
@@ -35,6 +39,7 @@ void CPanelView::OnMenu(const QPoint& Point)
 	
 	m_pCopyCell->setEnabled(Index.isValid());
 	m_pCopyRow->setEnabled(Index.isValid());
+	m_pCopyPanel->setEnabled(true);
 
 	m_pMenu->popup(QCursor::pos());	
 }

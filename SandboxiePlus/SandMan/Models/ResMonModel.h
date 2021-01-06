@@ -23,8 +23,8 @@ public:
 		eProcess = 0,
 		eTimeStamp,
 		eType,
-		eValue,
 		eStatus,
+		eValue,
 		eCount
 	};
 

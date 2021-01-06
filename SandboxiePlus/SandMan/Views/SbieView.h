@@ -21,6 +21,7 @@ signals:
 	void						RecoveryRequested(const QString& BoxName);
 
 public slots:
+	void						Clear();
 	void						Refresh();
 	void						ReloadGroups();
 
@@ -44,6 +45,8 @@ protected:
 	QMap<QString, QStringList>	m_Groups;
 
 private:
+
+	void					UpdateGroupMenu();
 
 	QVBoxLayout*			m_pMainLayout;
 
@@ -81,13 +84,16 @@ private:
 	int						m_iMenuBox;
 
 	QAction*				m_pMenuTerminate;
+	QAction*				m_pMenuLinkTo;
 	QMenu*					m_pMenuPreset;
 	QAction*				m_pMenuBlackList;
+	QAction*				m_pMenuAllowInternet;
+	QAction*				m_pMenuMarkForced;
 	QAction*				m_pMenuMarkLinger;
 	QAction*				m_pMenuMarkLeader;
 	QAction*				m_pMenuPinToRun;
-	QAction*				m_pMenuSuspend;
-	QAction*				m_pMenuResume;
+	//QAction*				m_pMenuSuspend;
+	//QAction*				m_pMenuResume;
 	int						m_iMenuProc;
 
 	int						m_iMenuRun;

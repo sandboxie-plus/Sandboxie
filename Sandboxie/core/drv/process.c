@@ -1169,7 +1169,7 @@ _FX void Process_NotifyImage(
 {
     static const WCHAR *_Ntdll32 = L"\\syswow64\\ntdll.dll";    // 19 chars
     PROCESS *proc;
-    BOOLEAN ok;
+    ULONG fail = 0;
 
     //
     // the notify routine is invoked for any image mapped for any purpose.
@@ -1219,60 +1219,58 @@ _FX void Process_NotifyImage(
     // create the sandbox space
     //
 
-    ok = TRUE;
-
     if (!proc->bHostInject)
     {
-        if (ok)
-            ok = File_CreateBoxPath(proc);
+		if (!fail && !File_CreateBoxPath(proc))
+			fail = 0x01;
 
-        if (ok)
-            ok = Ipc_CreateBoxPath(proc);
+        if (!fail && !Ipc_CreateBoxPath(proc))
+			fail = 0x02;
 
-        if (ok)
-            ok = Key_MountHive(proc);
+        if (!fail && !Key_MountHive(proc))
+			fail = 0x03;
 
         //
         // initialize the filtering components
         //
 
-        if (ok)
-            ok = File_InitProcess(proc);
+        if (!fail && !File_InitProcess(proc))
+			fail = 0x04;
 
-        if (ok)
-            ok = Key_InitProcess(proc);
+        if (!fail && !Key_InitProcess(proc))
+			fail = 0x05;
 
-        if (ok)
-            ok = Ipc_InitProcess(proc);
+        if (!fail && !Ipc_InitProcess(proc))
+			fail = 0x06;
 
-        if (ok)
-            ok = Gui_InitProcess(proc);
+        if (!fail && !Gui_InitProcess(proc))
+			fail = 0x07;
 
-        if (ok)
-            ok = Process_Low_InitConsole(proc);
+        if (!fail && !Process_Low_InitConsole(proc))
+			fail = 0x08;
 
-        if (ok)
-            ok = Token_ReplacePrimary(proc);
+		if (!fail && !Token_ReplacePrimary(proc))
+			fail = 0x09;
 
-        if (ok)
-            ok = Thread_InitProcess(proc);
+        if (!fail && !Thread_InitProcess(proc))
+			fail = 0x0A;
     }
 
     //
     // terminate process if initialization failed
     //
 
-    if (ok && !Ipc_IsRunRestricted(proc)) {
+    if (!fail && !Ipc_IsRunRestricted(proc)) {
 
         proc->initialized = TRUE;
 
     } else {
 
-		if (!ok)
-			Log_Status_Ex_Process(MSG_1231, 0xA0, STATUS_UNSUCCESSFUL, NULL, proc->box->session_id, proc->pid);
+		if (fail)
+			Log_Status_Ex_Process(MSG_1231, 0xA0 + fail, STATUS_UNSUCCESSFUL, NULL, proc->box->session_id, proc->pid);
 
         proc->terminated = TRUE;
-		proc->reason = ok ? -1 : 0;
+		proc->reason = (!fail) ? -1 : 0;
         Process_CancelProcess(proc);
     }
 

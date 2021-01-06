@@ -14,7 +14,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
-#define VERSION_REV 	2
+#define VERSION_REV 	4
 #define VERSION_UPD 	0
 
 
@@ -38,7 +38,7 @@ public:
 
 	static QString		GetVersion();
 
-	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList);
+	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
 	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
 	static QString		FormatError(const SB_STATUS& Error);
@@ -46,15 +46,15 @@ public:
 
 	static QIcon		GetIcon(const QString& Name);
 
+	bool				IsFullyPortable();
+
 protected:
 	SB_STATUS			ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
 	SB_STATUS			StopSbie(bool andRemove = false);
 
-	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList);
-
-	bool				IsFullyPortable();
+	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
 	void				closeEvent(QCloseEvent *e);
 	void				timerEvent(QTimerEvent* pEvent);
@@ -98,6 +98,10 @@ public slots:
 
 	void				CheckForUpdates(bool bManual = true);
 
+	void				OpenUrl(const QUrl& url);
+
+	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
+
 private slots:
 	void				OnSelectionChanged();
 
@@ -114,6 +118,7 @@ private slots:
 	void				OnSetKeep();
 
 	void				OnSettings();
+	void				OnResetMsgs();
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
@@ -193,6 +198,7 @@ private:
 
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
+	QAction*			m_pMenuResetMsgs;
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;

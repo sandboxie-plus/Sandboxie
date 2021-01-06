@@ -71,7 +71,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuMkLink = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Desktop Shortcut"), this, SLOT(OnSandBoxAction()));
+	m_pMenuMkLink = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
 	m_pMenuExplore = m_pMenu->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuSnapshots = m_pMenu->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
@@ -98,6 +98,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	m_pMenuTerminate = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Terminate"), this, SLOT(OnProcessAction()));
 	m_pMenuTerminate->setShortcut(QKeySequence::Delete);
+	m_pMenuLinkTo = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnProcessAction()));
 	this->addAction(m_pMenuTerminate);
 	m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	m_pMenuPreset = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Preset"));
@@ -107,12 +108,16 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
 	m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pMenuBlackList);
+	m_pMenuAllowInternet = m_pMenuPreset->addAction(tr("Allow internet access"), this, SLOT(OnProcessAction()));
+	m_pMenuAllowInternet->setCheckable(true);
+	m_pMenuMarkForced = m_pMenuPreset->addAction(tr("Force into this sandbox"), this, SLOT(OnProcessAction()));
+	m_pMenuMarkForced->setCheckable(true);
 	m_pMenuMarkLinger = m_pMenuPreset->addAction(tr("Set Linger Process"), this, SLOT(OnProcessAction()));
 	m_pMenuMarkLinger->setCheckable(true);
 	m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Set Leader Process"), this, SLOT(OnProcessAction()));
 	m_pMenuMarkLeader->setCheckable(true);
-	m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
-	m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
+	//m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
+	//m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
@@ -128,6 +133,12 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 CSbieView::~CSbieView()
 {
 	theConf->SetBlob("MainWindow/BoxTree_Columns", m_pSbieTree->saveState());
+}
+
+void CSbieView::Clear()
+{
+	m_Groups.clear();
+	m_pSbieModel->Clear();
 }
 
 void CSbieView::Refresh()
@@ -172,11 +183,19 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 
 void CSbieView::OnMenu(const QPoint& Point)
 {
+	QList<QAction*> MenuActions = m_pMenu->actions();
+
+	bool isConnected = theAPI->IsConnected();
+	if (isConnected) {
+		foreach(QAction * pAction, MenuActions) 
+			pAction->setEnabled(true);
+	}
+
 	CSandBoxPtr pBox;
 	CBoxedProcessPtr pProcess;
 	int iProcessCount = 0;
 	int iSandBoxeCount = 0;
-	int iSuspendedCount = 0;
+	//int iSuspendedCount = 0;
 	QModelIndexList Rows = m_pSbieTree->selectedRows();
 	foreach(const QModelIndex& Index, Rows)
 	{
@@ -185,8 +204,8 @@ void CSbieView::OnMenu(const QPoint& Point)
 		if (pProcess)
 		{
 			iProcessCount++;
-			if (pProcess->IsSuspended())
-				iSuspendedCount++;
+			//if (pProcess->IsSuspended())
+			//	iSuspendedCount++;
 		}
 		else
 		{
@@ -196,7 +215,6 @@ void CSbieView::OnMenu(const QPoint& Point)
 		}
 	}
 
-	QList<QAction*> MenuActions = m_pMenu->actions();
 
 	for (int i = 0; i < m_iMenuTop; i++)
 		MenuActions[i]->setVisible(iSandBoxeCount == 0 && iProcessCount == 0);
@@ -227,6 +245,8 @@ void CSbieView::OnMenu(const QPoint& Point)
 	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
 		MenuActions[i]->setVisible(iProcessCount > 0 && iSandBoxeCount == 0);
 	
+	m_pMenuLinkTo->setEnabled(iProcessCount == 1);
+
 	if (!pProcess.isNull()) {
 		CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
 		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
@@ -252,13 +272,23 @@ void CSbieView::OnMenu(const QPoint& Point)
 		m_pMenuPinToRun->setChecked(!FoundPin.isEmpty());
 		m_pMenuPinToRun->setData(FoundPin);
 
+		m_pMenuAllowInternet->setChecked(pProcess.objectCast<CSbieProcess>()->HasInternetAccess());
+
+		m_pMenuMarkForced->setChecked(pProcess.objectCast<CSbieProcess>()->IsForcedProgram());
+
 		int isLingering = pProcess.objectCast<CSbieProcess>()->IsLingeringProgram();
 		m_pMenuMarkLinger->setChecked(isLingering != 0);
 		m_pMenuMarkLinger->setEnabled(isLingering != 2);
 		m_pMenuMarkLeader->setChecked(pProcess.objectCast<CSbieProcess>()->IsLeaderProgram());
 	}
-	m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
-	m_pMenuResume->setEnabled(iSuspendedCount > 0);
+
+	//m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
+	//m_pMenuResume->setEnabled(iSuspendedCount > 0);
+
+	if (!isConnected) {
+		foreach(QAction * pAction, MenuActions)
+			pAction->setEnabled(false);
+	}
 
 	CPanelView::OnMenu(Point);
 }
@@ -283,7 +313,10 @@ int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m
 		if (pos == -1)
 			break;
 		if (Grouping.at(pos) == "(")
+		{
+			m_Groups[Name] = QStringList();
 			Index = CSbieView__ParseGroup(Grouping, m_Groups, Name, Index);
+		}
 		else if (Grouping.at(pos) == ")")
 			break;
 	}
@@ -298,6 +331,11 @@ void CSbieView::ReloadGroups()
 
 	CSbieView__ParseGroup(Grouping, m_Groups);
 
+	UpdateGroupMenu();
+}
+
+void CSbieView::UpdateGroupMenu()
+{
 	// update move to menu
 	foreach(QAction* pAction, m_pMenuMoveTo->actions())
 		m_pMenuMoveTo->removeAction(pAction);
@@ -338,8 +376,7 @@ void CSbieView::OnGroupAction()
 		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
 			Parent = m_pSbieModel->GetID(ModelIndex).toString();
 
-		if (!Parent.isEmpty())
-			m_Groups[Parent].append(Name);
+		m_Groups[Parent].append(Name);
 	}
 	else if (Action == m_pDelGroupe)
 	{
@@ -390,6 +427,7 @@ void CSbieView::OnGroupAction()
 
 	QString Grouping = CSbieView__SerializeGroup(m_Groups);
 	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
+	UpdateGroupMenu();
 }
 
 void CSbieView::OnSandBoxAction()
@@ -546,6 +584,27 @@ void CSbieView::OnProcessAction()
 	{
 		if (Action == m_pMenuTerminate)
 			Results.append(pProcess->Terminate());
+		else if (Action == m_pMenuLinkTo)
+		{
+			QString BoxName = pProcess->GetBoxName();
+			QString LinkName = pProcess->GetProcessName();
+			QString LinkPath = pProcess->GetFileName();
+
+			QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
+			//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shorcut in"), Path).replace("/", "\\");
+			//if (Path.isEmpty())
+			//	return;
+
+			if (Path.right(1) != "\\")
+				Path.append("\\");
+			Path += "[" + BoxName + "] " + LinkName;
+
+			Path = QFileDialog::getSaveFileName(this, tr("Create Shortcut to sandbox %1").arg(BoxName), Path, QString("Shortcut files (*.lnk)")).replace("/", "\\");
+			if (Path.isEmpty())
+				return;
+
+			CSbieUtils::CreateShortcut(theAPI, Path, LinkName, BoxName, LinkPath, LinkPath);
+		}
 		else if (Action == m_pMenuPinToRun)
 		{
 			CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
@@ -569,14 +628,26 @@ void CSbieView::OnProcessAction()
 			Results.append(pProcess->Terminate());
 			pProcess.objectCast<CSbieProcess>()->BlockProgram();
 		}
+		else if (Action == m_pMenuAllowInternet)
+		{
+			if (!pProcess.objectCast<CSbieProcess>()->GetBox()->IsINetBlocked())
+			{
+				if (QMessageBox("Sandboxie-Plus", tr("This box does not have Internet restrictions in place, do you want to enable them?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+					return;
+				pProcess.objectCast<CSbieProcess>()->GetBox()->SetINetBlock(true);
+			}
+			pProcess.objectCast<CSbieProcess>()->SetInternetAccess(m_pMenuAllowInternet->isChecked());
+		}
+		else if (Action == m_pMenuMarkForced)
+			pProcess.objectCast<CSbieProcess>()->SetForcedProgram(m_pMenuMarkForced->isChecked());
 		else if (Action == m_pMenuMarkLinger)
 			pProcess.objectCast<CSbieProcess>()->SetLingeringProgram(m_pMenuMarkLinger->isChecked());
 		else if (Action == m_pMenuMarkLeader)
 			pProcess.objectCast<CSbieProcess>()->SetLeaderProgram(m_pMenuMarkLeader->isChecked());
-		else if (Action == m_pMenuSuspend)
+		/*else if (Action == m_pMenuSuspend)
 			Results.append(pProcess->SetSuspend(true));
 		else if (Action == m_pMenuResume)
-			Results.append(pProcess->SetSuspend(false));
+			Results.append(pProcess->SetSuspend(false));*/
 	}
 
 	CSandMan::CheckResults(Results);

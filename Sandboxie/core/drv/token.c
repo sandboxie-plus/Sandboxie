@@ -816,14 +816,42 @@ _FX void *Token_Restrict(
     TOKEN_GROUPS *groups;
     TOKEN_PRIVILEGES *privs;
     TOKEN_USER *user;
-    void *NewTokenObject;
+    void *NewTokenObject = NULL;
 	
 	// OpenToken BEGIN
 	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
-		SeFilterToken(TokenObject, 0, NULL, NULL, NULL, &NewTokenObject);
+
+		//NTSTATUS status = SeFilterToken(TokenObject, 0, NULL, NULL, NULL, &NewTokenObject);
+        //if(!NT_SUCCESS(status))
+        //    Log_Status_Ex_Process(MSG_1222, 0xA0, status, NULL, proc->box->session_id, proc->pid);
+
+        HANDLE OldTokenHandle;
+        NTSTATUS status = ObOpenObjectByPointer(
+            TokenObject, OBJ_KERNEL_HANDLE, NULL, TOKEN_ALL_ACCESS,
+            *SeTokenObjectType, KernelMode, &OldTokenHandle);
+        if (NT_SUCCESS(status)) {
+
+            HANDLE NewTokenHandle;
+            status = ZwDuplicateToken(OldTokenHandle, TOKEN_ALL_ACCESS, NULL,
+                FALSE, TokenPrimary, &NewTokenHandle);
+            if (NT_SUCCESS(status)) {
+
+                status = ObReferenceObjectByHandle(NewTokenHandle, 0, *SeTokenObjectType,
+                    UserMode, &NewTokenObject, NULL);
+                if (!NT_SUCCESS(status))
+                    Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
+
+                NtClose(NewTokenHandle);
+            }
+            else
+                Log_Status_Ex_Process(MSG_1222, 0xA2, status, NULL, proc->box->session_id, proc->pid);
+
+            ZwClose(OldTokenHandle);
+        }
+        else
+            Log_Status_Ex_Process(MSG_1222, 0xA1, status, NULL, proc->box->session_id, proc->pid);
+
 		return NewTokenObject;
-		//ObReferenceObject(TokenObject);
-		//return TokenObject;
 	}
 	// OpenToken END
 
@@ -1768,6 +1796,11 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
             if (RestrictedToken) {
 
 #ifdef _WIN64
+                // OpenToken BEGIN
+                if (!Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) 
+                 && !Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)
+                  && Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
+                // OpenToken END
                 if (Driver_OsVersion >= DRIVER_WINDOWS_8)
                 {
                     UCHAR* pTokenAuthId = (UCHAR*)RestrictedToken;

@@ -2,7 +2,7 @@
 #include "SbieModel.h"
 #include "../../MiscHelpers/Common/Common.h"
 #include "../../MiscHelpers/Common/IconExtreactor.h"
-
+#include <QFileIconProvider>
 
 CSbieModel::CSbieModel(QObject *parent)
 :CTreeItemModel(parent)
@@ -66,12 +66,22 @@ bool CSbieModel::TestProcPath(const QList<QVariant>& Path, const QString& BoxNam
 	return Path.size() == Index;
 }
 
+QString CSbieModel__AddGroupMark(const QString& Name)
+{
+	return Name.isEmpty() ? "" : ("!" + Name);
+}
+
+QString CSbieModel__RemoveGroupMark(const QString& Name)
+{
+	return Name.left(1) == "!" ? Name.mid(1) : Name;
+}
+
 QString CSbieModel::FindParent(const QVariant& Name, const QMap<QString, QStringList>& Groups)
 {
 	for(auto I = Groups.begin(); I != Groups.end(); ++I)
 	{
-		if (I.value().contains(Name.toString(), Qt::CaseInsensitive))
-			return I.key();
+		if (I.value().contains(CSbieModel__RemoveGroupMark(Name.toString()), Qt::CaseInsensitive))
+			return CSbieModel__AddGroupMark(I.key());
 	}
 	return QString();
 }
@@ -99,7 +109,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	{
 		if (Group.isEmpty())
 			continue;
-		QVariant ID = Group;
+		QVariant ID = CSbieModel__AddGroupMark(Group);
 
 		QHash<QVariant, STreeNode*>::iterator I = Old.find(ID);
 		SSandBoxNode* pNode = I != Old.end() ? static_cast<SSandBoxNode*>(I.value()) : NULL;
@@ -227,6 +237,8 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 	int ActiveCount = 0;
 
+	QFileIconProvider IconProvider;
+
 	foreach(const CBoxedProcessPtr& pProc, ProcessList)
 	{
 		QSharedPointer<CSbieProcess> pProcess = pProc.objectCast<CSbieProcess>();
@@ -272,11 +284,15 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 		if (pNode->Icon.isNull())
 		{
-			PixmapEntryList icons = extractIcons(pProcess->GetFileName(), false);
-			if (icons.isEmpty())
+			//PixmapEntryList icons = extractIcons(pProcess->GetFileName(), false);
+			//if (icons.isEmpty())
+			//	pNode->Icon = m_ExeIcon;
+			//else
+			//	pNode->Icon = icons.first().pixmap;
+
+			pNode->Icon = IconProvider.icon(QFileInfo(pProcess->GetFileName()));
+			if (pNode->Icon.isNull() || !pNode->Icon.isValid())
 				pNode->Icon = m_ExeIcon;
-			else
-				pNode->Icon = icons.first().pixmap;
 		}
 
 		for (int section = 0; section < columnCount(); section++)
@@ -293,7 +309,12 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			//case eTitle:			break; // todo
 			//case eLogCount:			break; // todo Value = pProcess->GetResourceLog().count(); break;
 			case eTimeStamp:		Value = pProcess->GetTimeStamp(); break;
-			case ePath:				Value = pProcess->GetFileName(); break;
+			//case ePath:				Value = pProcess->GetFileName(); break;
+			case ePath: {
+									QString CmdLine = pProcess->GetCommandLine(); 
+									Value = CmdLine.isEmpty() ? pProcess->GetFileName() : CmdLine;
+									break;
+						}
 			}
 
 			SSandBoxNode::SValue& ColValue = pNode->Values[section];
@@ -394,7 +415,7 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 			//case eTitle:			return tr("Title");
 			//case eLogCount:			return tr("Log Count");
 			case eTimeStamp:		return tr("Start Time");
-			case ePath:				return tr("Path");
+			case ePath:				return tr("Path / Command Line");
 		}
 	}
     return QVariant();

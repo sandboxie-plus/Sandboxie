@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -64,14 +64,10 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="1">
-            <widget class="QCheckBox" name="chkShowTray">
-             <property name="text">
-              <string>Show Sys-Tray</string>
-             </property>
-            </widget>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="uiLang"/>
            </item>
-           <item row="10" column="1">
+           <item row="11" column="1">
             <spacer name="verticalSpacer_4">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -84,47 +80,14 @@
              </property>
             </spacer>
            </item>
-           <item row="1" column="1">
-            <widget class="QCheckBox" name="chkDarkTheme">
+           <item row="3" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkAutoUpdate">
              <property name="text">
-              <string>Use Dark Theme</string>
+              <string>Check periodically for updates of Sandboxie-Plus</string>
              </property>
             </widget>
            </item>
            <item row="10" column="0">
-            <spacer name="horizontalSpacer_9">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="4" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkShellMenu">
-             <property name="text">
-              <string>Add 'Run Sandboxed' to the explorer context menu</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="2">
-            <spacer name="horizontalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="9" column="0">
             <widget class="QLabel" name="label_18">
              <property name="text">
               <string>On main window close:</string>
@@ -141,27 +104,44 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label">
+           <item row="10" column="1">
+            <widget class="QComboBox" name="onClose"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="chkDarkTheme">
              <property name="text">
-              <string>Restart required (!)</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>Use Dark Theme</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="uiLang"/>
-           </item>
-           <item row="6" column="1">
-            <widget class="QCheckBox" name="chkWatchConfig">
+           <item row="4" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkShellMenu">
              <property name="text">
-              <string>Watch Sandboxie.ini for changes</string>
+              <string>Add 'Run Sandboxed' to the explorer context menu</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="0">
+           <item row="9" column="1">
+            <widget class="QCheckBox" name="chkShowTray">
+             <property name="text">
+              <string>Show Sys-Tray</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="2">
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="8" column="0">
             <widget class="QLabel" name="label_5">
              <property name="font">
               <font>
@@ -174,13 +154,43 @@
              </property>
             </widget>
            </item>
-           <item row="9" column="1">
-            <widget class="QComboBox" name="onClose"/>
-           </item>
-           <item row="3" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkAutoUpdate">
+           <item row="0" column="2">
+            <widget class="QLabel" name="label">
              <property name="text">
-              <string>Check periodically for updates of Sandboxie-Plus</string>
+              <string>Restart required (!)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="0">
+            <spacer name="horizontalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="6" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkSandboxUrls">
+             <property name="text">
+              <string>Open urls from this ui sandboxed</string>
+             </property>
+             <property name="tristate">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QCheckBox" name="chkWatchConfig">
+             <property name="text">
+              <string>Watch Sandboxie.ini for changes</string>
              </property>
             </widget>
            </item>
@@ -297,20 +307,26 @@
            <item row="1" column="0">
             <widget class="QLabel" name="label_15">
              <property name="text">
-              <string>Sandbox file system root: </string>
+              <string>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_17">
              <property name="text">
-              <string>Sandbox ipc root: </string>
+              <string>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -320,17 +336,13 @@
            <item row="3" column="0">
             <widget class="QLabel" name="label_16">
              <property name="text">
-              <string>Sandbox registry root: </string>
+              <string>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkSeparateUserFolders">
-             <property name="text">
-              <string>Separate user folders</string>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -351,6 +363,20 @@
             <widget class="QCheckBox" name="chkClearPass">
              <property name="text">
               <string>Clear password when main window becomes hidden</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="chkSeparateUserFolders">
+             <property name="text">
+              <string>Separate user folders</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QCheckBox" name="chkAutoRoot">
+             <property name="text">
+              <string>Portable root folder</string>
              </property>
             </widget>
            </item>

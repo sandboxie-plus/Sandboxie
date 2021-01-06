@@ -30,6 +30,11 @@ private slots:
 	void OnAddCommand();
 	void OnDelCommand();
 
+	void OnAddAutoCmd();
+	void OnAddAutoExe();
+	void OnDelAutoSvc();
+	void OnDelAuto();
+
 	void OnAddGroup();
 	void OnAddProg();
 	void OnDelProg();
@@ -61,8 +66,8 @@ private slots:
 	void OnBrowseFolder();
 	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); }
 	void OnAddIPC()					{ AddAccessEntry(eIPC, eDirect, "", ""); }
-	void OnAddClsId()				{ AddAccessEntry(eWndCls, eDirect, "", ""); }
-	void OnAddCOM()					{ AddAccessEntry(eClsId, eDirect, "", ""); }
+	void OnAddWnd()					{ AddAccessEntry(eWnd, eDirect, "", ""); }
+	void OnAddCOM()					{ AddAccessEntry(eCOM, eDirect, "", ""); }
 	void OnDelAccess();
 	void OnShowAccessTmpl()			{ LoadAccessList(); }
 
@@ -71,6 +76,9 @@ private slots:
 	void OnAddRecIgnoreExt();
 	void OnDelRecEntry();
 	void OnShowRecoveryTmpl()		{ LoadRecoveryList(); }
+
+	void OnAddAutoExec();
+	void OnDelAutoExec();
 
 	void OnAddProcess();
 	void OnDelProcess();
@@ -122,7 +130,9 @@ protected:
 
 		eOpenWinClass,
 
-		eOpenClsid,
+		eOpenCOM,
+		eClosedCOM,
+		eClosedCOM_RT,
 
 		eMaxAccessType
 	};
@@ -132,8 +142,8 @@ protected:
 		eFile,
 		eKey,
 		eIPC,
-		eWndCls,
-		eClsId
+		eWnd,
+		eCOM
 	};
 
 	enum EAccessMode
@@ -141,6 +151,7 @@ protected:
 		eDirect,
 		eDirectAll,
 		eClosed,
+		eClosedRT,
 		eReadOnly,
 		eWriteOnly
 	};
@@ -159,6 +170,8 @@ protected:
 
 	void LoadConfig();
 	void SaveConfig();
+
+	void AddAutoRunItem(const QString& Value, int Type);
 
 	void AddRunItem(const QString& Name, const QString& Command);
 

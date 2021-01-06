@@ -22,6 +22,7 @@
 
 #include "dll.h"
 #include "common/my_version.h"
+#include "core/svc/SbieIniWire.h"
 #include <stdio.h>
 
 
@@ -1472,4 +1473,88 @@ _FX void Custom_Load_UxTheme(void)
             SystemParametersInfo(SPI_GETFONTSMOOTHING, 0, &v, 0);
         }
     }
+}
+
+
+
+//---------------------------------------------------------------------------
+// SbieDll_MatchImage
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_MatchImage_Impl(const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str, const WCHAR* BoxName, ULONG depth)
+{
+    if (*pat_str == L'<') {
+
+        ULONG index;
+        WCHAR buf[CONF_LINE_LEN];
+
+        if (depth >= 6)
+            return FALSE;
+
+        for (index = 0; ; ++index) {
+
+            //
+            // get next process group setting, compare to passed group name.
+            // if the setting is <passed_group_name>= then we accept it.
+            //
+
+            NTSTATUS status = SbieApi_QueryConfAsIs(
+                BoxName, L"ProcessGroup", index, buf, CONF_LINE_LEN * sizeof(WCHAR));
+            if (!NT_SUCCESS(status))
+                break;
+            WCHAR* value = buf;
+
+            ULONG value_len = wcslen(value);
+            if (value_len <= pat_len + 1)
+                continue;
+            if (_wcsnicmp(value, pat_str, pat_len) != 0)
+                continue;
+
+            value += pat_len;
+            if (*value != L',')
+                continue;
+            ++value;
+
+            //
+            // value now points at the comma-separated
+            // list of processes in this process group
+            //
+
+            while (*value) {
+                WCHAR* ptr = wcschr(value, L',');
+                if (ptr)
+                    value_len = (ULONG)(ULONG_PTR)(ptr - value);
+                else
+                    value_len = wcslen(value);
+
+                if (value_len) {
+
+                    if (SbieDll_MatchImage_Impl(value, value_len, test_str, BoxName, depth + 1))
+                        return TRUE;
+                }
+
+                value += value_len;
+                while (*value == L',')
+                    ++value;
+            }
+        }
+
+    }
+    else {
+
+        ULONG test_len = wcslen(test_str);
+        if (test_len == pat_len)
+            return (_wcsnicmp(test_str, pat_str, test_len) == 0);
+
+    }
+
+    return FALSE;
+}
+
+
+BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WCHAR* BoxName)
+{
+    ULONG pat_len = wcslen(pat_str);
+    return SbieDll_MatchImage_Impl(pat_str, pat_len, test_str, BoxName, 1);
 }

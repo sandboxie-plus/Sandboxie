@@ -250,7 +250,7 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 	if (!update_key.IsEmpty())
 		Path += L"&update_key=" + update_key;
 
-	if (!DownloadUpdateData(L"xanasoft.com", Path, &jsonString, NULL)) {
+	if (!DownloadUpdateData(L"sandboxie-plus.com", Path, &jsonString, NULL)) {
 		Context->ErrorCode = GetLastError();
 		goto CleanupExit;
 	}

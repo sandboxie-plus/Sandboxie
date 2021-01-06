@@ -194,5 +194,14 @@
     <None Include="sandman_de.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_pt.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_ru.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_zh.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

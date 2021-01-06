@@ -44,7 +44,7 @@ public:
 		{
 			QToolButton* pHelp = new QToolButton();
 			pHelp->setText(tr("?"));
-			pHelp->setToolTip(tr("Visit %1 for a detailed explanation.").arg(QString("https://xanasoft.com/sandboxie/sbie%1/").arg(GetMsgId())));
+			pHelp->setToolTip(tr("Visit %1 for a detailed explanation.").arg(QString("https://sandboxie-plus.com/go.php?to=sbie-sbie%1/").arg(GetMsgId())));
 			pHelp->setMaximumWidth(16);
 			QObject::connect(pHelp, SIGNAL(pressed()), this, SLOT(OnHelp()));
 			m_pMainLayout->addWidget(pHelp, 0, 1);
@@ -73,7 +73,7 @@ signals:
 	void				Hide();
 
 private slots:
-	void				OnHelp() { QDesktopServices::openUrl(QUrl(QString("https://xanasoft.com/sandboxie/sbie%1/").arg(GetMsgId()))); }
+	void				OnHelp() { QDesktopServices::openUrl(QUrl(QString("https://sandboxie-plus.com/go.php?to=sbie-sbie%1/").arg(GetMsgId()))); }
 
 protected:
 	quint32				m_MsgCode;
@@ -212,25 +212,41 @@ public:
 		QLabel* pLabel = new QLabel(Message);
 		pLabel->setToolTip(Message);
 		pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		//pLabel->setWordWrap(true);
 		extern bool CPopUpWindow__DarkMode;
 		if(CPopUpWindow__DarkMode) {
 			QPalette palette = pLabel->palette();
 			palette.setColor(QPalette::Text, Qt::green);
 			pLabel->setPalette(palette);
 		}
-		m_pMainLayout->addWidget(pLabel, 0, 0, 2, 1);
+		m_pMainLayout->addWidget(pLabel, 0, 0, 2, 4);
+
+		m_pMainLayout->addWidget(new QLabel(tr("Recover to:")), 2, 0);
+		m_pTarget = new QComboBox();
+
+		m_LastTargetIndex = 0;
+		m_pTarget->addItem(m_FilePath.left(m_FilePath.lastIndexOf("\\")));
+		m_pTarget->addItem(tr("Browse"), 1);
+		m_pTarget->addItem(tr("Clear folder list"), -1);
+		m_ListCleared = false;
+		connect(m_pTarget, SIGNAL(currentIndexChanged(int)), this, SLOT(OnTargetChanged()));
+
+		m_pTarget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+		m_pMainLayout->addWidget(m_pTarget, 2, 1);
 
 		QToolButton* pRecover = new QToolButton();
 		pRecover->setText(tr("Recover"));
 		pRecover->setToolTip(tr("Recover the file to original location"));
 		pRecover->setPopupMode(QToolButton::MenuButtonPopup);
 		QMenu* pRecMenu = new QMenu();
-		pRecMenu->addAction(tr("Recover file to selected folder"), this, SLOT(OnRecoverTo()));
+		pRecMenu->addAction(tr("Recover && Explore"), this, SLOT(OnRecoverExp()));
+		pRecMenu->addAction(tr("Recover && Open/Run"), this, SLOT(OnRecoverRun()));
+		pRecMenu->addSeparator();
 		pRecMenu->addAction(tr("Open file recovery for this box"), this, SIGNAL(OpenRecovery()));
 		pRecover->setMenu(pRecMenu);
 		//QObject::connect(pRecover, SIGNAL(triggered(QAction*)), , SLOT());
 		QObject::connect(pRecover, SIGNAL(pressed()), this, SLOT(OnRecover()));
-		m_pMainLayout->addWidget(pRecover, 1, 1);
+		m_pMainLayout->addWidget(pRecover, 2, 2);
 
 
 		QToolButton* pDismiss = new QToolButton();
@@ -243,19 +259,43 @@ public:
 		pDismiss->setMenu(pMenu);
 		//QObject::connect(pDismiss, SIGNAL(triggered(QAction*)), , SLOT());
 		QObject::connect(pDismiss, SIGNAL(pressed()), this, SIGNAL(Dismiss()));
-		m_pMainLayout->addWidget(pDismiss, 1, 2);
+		m_pMainLayout->addWidget(pDismiss, 2, 3);
 	}
 
 signals:
 	void		Dismiss(int iFlag = 0);
-	void		RecoverFile(bool bBrowse);
+	void		RecoverFile(int Action = 0);
 	void		OpenRecovery();
 
 private slots:
 	void		OnDisable()		{ emit Dismiss(0x03); }
 	void		OnDismissAll()	{ emit Dismiss(0x01); }
-	void		OnRecover()		{ emit RecoverFile(false); }
-	void		OnRecoverTo()	{ emit RecoverFile(true); }
+	void		OnRecover()		{ emit RecoverFile(); }
+	void		OnRecoverRun()	{ emit RecoverFile(1); }
+	void		OnRecoverExp()  { emit RecoverFile(2); }
+
+	void		OnTargetChanged()
+	{
+		int op = m_pTarget->currentData().toInt();
+		if (op == 1)
+		{
+			QString Folder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
+			if (Folder.isEmpty()) {
+				m_pTarget->setCurrentIndex(m_LastTargetIndex);
+				return;
+			}
+			m_LastTargetIndex = m_pTarget->count() - 1;
+			m_pTarget->insertItem(m_LastTargetIndex, Folder);
+			m_pTarget->setCurrentIndex(m_LastTargetIndex);
+		}
+		else if (op == -1)
+		{
+			while (m_pTarget->count() > 3)
+				m_pTarget->removeItem(2);
+			m_pTarget->setCurrentIndex(0);
+			m_ListCleared = true;
+		}
+	}
 
 protected:
 	friend class CPopUpWindow;
@@ -273,6 +313,9 @@ protected:
 
 	QString				m_FilePath;
 	QString				m_BoxName;
+	QComboBox*			m_pTarget;
+	int					m_LastTargetIndex;
+	bool				m_ListCleared;
 };
 
 class CPopUpProgress : public CPopUpEntry
@@ -381,7 +424,7 @@ private slots:
 	virtual void		OnPromptResult(int retval);
 
 	virtual void		OnDismiss(int iFlag);
-	virtual void		OnRecoverFile(bool bBrowse);
+	virtual void		OnRecoverFile(int Action);
 	virtual void		OnOpenRecovery();
 
 	virtual void		OnDismissProgress(bool bHide);

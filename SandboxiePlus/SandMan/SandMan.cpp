@@ -122,6 +122,10 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bConnectPending = false;
 	m_bStopPending = false;
 
+	CPanelView::m_CopyCell = tr("Copy Cell");
+	CPanelView::m_CopyRow = tr("Copy Row");
+	CPanelView::m_CopyPanel = tr("Copy Panel");
+
 	CreateMenus();
 
 	m_pMainWidget = new QWidget();
@@ -536,9 +540,9 @@ void CSandMan::OnMessage(const QString& Message)
 		if (Status != "OK")
 		{
 			if(m_bStopPending)
-				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all sandboxie components"));
+				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all Sandboxie components"));
 			else if(m_bConnectPending)
-				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required sandboxie components"));
+				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required Sandboxie components"));
 
 			OnLogMessage(tr("Maintenance operation %1").arg(Status));
 			CheckResults(QList<SB_STATUS>() << SB_ERR(SB_Message, QVariantList() << Status));
@@ -676,8 +680,10 @@ void CSandMan::OnSelectionChanged()
 
 void CSandMan::OnStatusChanged()
 {
+	bool isConnected = theAPI->IsConnected();
+
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
-	if (theAPI->IsConnected())
+	if (isConnected)
 	{
 		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
@@ -689,9 +695,20 @@ void CSandMan::OnStatusChanged()
 		{
 			appTitle.append(tr("   -   Portable"));
 
-			if (theConf->GetBool("Options/PortableRootDir", true)) 
+			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
+			if (PortableRootDir == -1)
 			{
-				QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../SandBoxes").replace("/", "\\");
+				bool State = false;
+				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?")
+					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
+
+				if (State)
+					theConf->SetValue("Options/PortableRootDir", PortableRootDir);
+			}
+
+			if (PortableRootDir)
+			{
+				QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox/%SANDBOX%").replace("/", "\\");
 				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath);
 			}
 		}
@@ -706,6 +723,8 @@ void CSandMan::OnStatusChanged()
 			}
 		}
 
+		m_pBoxView->Clear();
+
 		OnIniReloaded();
 
 		if (theConf->GetBool("Options/WatchIni", true))
@@ -715,9 +734,26 @@ void CSandMan::OnStatusChanged()
 	{
 		appTitle.append(tr("   -   NOT connected").arg(theAPI->GetVersion()));
 
+		m_pBoxView->Clear();
+
 		theAPI->WatchIni(false);
 	}
 	this->setWindowTitle(appTitle);
+
+
+	m_pNew->setEnabled(isConnected);
+	m_pEmptyAll->setEnabled(isConnected);
+	m_pDisableForce->setEnabled(isConnected);
+	m_pDisableForce2->setEnabled(isConnected);
+
+	//m_pCleanUpMenu->setEnabled(isConnected);
+	//m_pCleanUpButton->setEnabled(isConnected);
+	//m_pKeepTerminated->setEnabled(isConnected);
+
+	m_pEditIni->setEnabled(isConnected);
+	m_pReloadIni->setEnabled(isConnected);
+	m_pEnableMonitoring->setEnabled(isConnected);
+	m_pEnableLogging->setEnabled(isConnected);
 }
 
 void CSandMan::OnMenuHover(QAction* action)
@@ -827,6 +863,8 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 {
 	SB_STATUS Status = SB_OK;
 
+	int OverwriteOnExist = -1;
+
 	QStringList Unrecovered;
 	for (QList<QPair<QString, QString>>::const_iterator I = FileList.begin(); I != FileList.end(); ++I)
 	{
@@ -838,6 +876,30 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 		pProgress->ShowMessage(tr("Recovering file %1 to %2").arg(FileName).arg(RecoveryFolder));
 
 		QDir().mkpath(RecoveryFolder);
+		if (QFile::exists(RecoveryPath)) 
+		{
+			int Overwrite = OverwriteOnExist;
+			if (Overwrite == -1)
+			{
+				bool forAll = false;
+				int retVal = 0;
+				QMetaObject::invokeMethod(theGUI, "ShowQuestion", Qt::BlockingQueuedConnection, // show this question using the GUI thread
+					Q_RETURN_ARG(int, retVal),
+					Q_ARG(QString, tr("The file %1 already exists, do you want to overwrite it?").arg(RecoveryPath)),
+					Q_ARG(QString, tr("Do this for all files!")),
+					Q_ARG(bool*, &forAll),
+					Q_ARG(int, QDialogButtonBox::Yes | QDialogButtonBox::No),
+					Q_ARG(int, QDialogButtonBox::No)
+				);
+
+				Overwrite = retVal == QDialogButtonBox::Yes ? 1 : 0;
+				if (forAll)
+					OverwriteOnExist = Overwrite;
+			}
+			if (Overwrite == 1)
+				QFile::remove(RecoveryPath);
+		}
+
 		if (!QFile::rename(BoxPath, RecoveryPath))
 			Unrecovered.append(BoxPath);
 	}
@@ -860,6 +922,11 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 
 
 	pProgress->Finish(Status);
+}
+
+int CSandMan::ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton)
+{
+	return CCheckableMessageBox::question(this, "Sandboxie-Plus", question, checkBoxText, checkBoxSetting, (QDialogButtonBox::StandardButtons)buttons, (QDialogButtonBox::StandardButton)defaultButton, QMessageBox::Question);
 }
 
 void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
@@ -1140,6 +1207,7 @@ void CSandMan::OnResetMsgs()
 	{
 		theConf->SetValue("Options/PortableStop", -1);
 		theConf->SetValue("Options/PortableStart", -1);
+		theConf->SetValue("Options/PortableRootDir", -1);
 
 		theConf->SetValue("Options/CheckForUpdates", 2);
 
@@ -1224,8 +1292,8 @@ void CSandMan::OnSetLogging()
 	{
 		if (theConf->GetBool("Options/ApiLogInfo", true))
 		{
-			QString Message = tr("To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.\n"
-				"Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.");
+			QString Message = tr("To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.\n"
+				"Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.");
 
 			bool State = false;
 			CCheckableMessageBox::question(this, "Sandboxie-Plus", Message
@@ -1611,7 +1679,7 @@ void CSandMan::OnUpdateCheck()
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toTime_t());
 
 		if (bManual)
-			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up to date."));
+			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date."));
 	}
 }
 
@@ -1685,7 +1753,7 @@ void CSandMan::OnAbout()
 			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
 		).arg(GetVersion());
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is an open source continuation of the well known Sandboxie.</p>"
+			"<p>Sandboxie-Plus is an open source continuation of Sandboxie.</p>"
 			"<p></p>"
 			"<p>Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.</p>"
 			"<p></p>"
@@ -1769,7 +1837,7 @@ void CSandMan::LoadLanguage()
 	}
 
 	if (!m_LanguageId) 
-		m_LanguageId = 1033; // default to englich
+		m_LanguageId = 1033; // default to English
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

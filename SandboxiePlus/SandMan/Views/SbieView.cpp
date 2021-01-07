@@ -135,6 +135,12 @@ CSbieView::~CSbieView()
 	theConf->SetBlob("MainWindow/BoxTree_Columns", m_pSbieTree->saveState());
 }
 
+void CSbieView::Clear()
+{
+	m_Groups.clear();
+	m_pSbieModel->Clear();
+}
+
 void CSbieView::Refresh()
 {
 	QList<QVariant> Added = m_pSbieModel->Sync(theAPI->GetAllBoxes(), m_Groups);
@@ -177,6 +183,14 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 
 void CSbieView::OnMenu(const QPoint& Point)
 {
+	QList<QAction*> MenuActions = m_pMenu->actions();
+
+	bool isConnected = theAPI->IsConnected();
+	if (isConnected) {
+		foreach(QAction * pAction, MenuActions) 
+			pAction->setEnabled(true);
+	}
+
 	CSandBoxPtr pBox;
 	CBoxedProcessPtr pProcess;
 	int iProcessCount = 0;
@@ -201,7 +215,6 @@ void CSbieView::OnMenu(const QPoint& Point)
 		}
 	}
 
-	QList<QAction*> MenuActions = m_pMenu->actions();
 
 	for (int i = 0; i < m_iMenuTop; i++)
 		MenuActions[i]->setVisible(iSandBoxeCount == 0 && iProcessCount == 0);
@@ -272,6 +285,11 @@ void CSbieView::OnMenu(const QPoint& Point)
 	//m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
 	//m_pMenuResume->setEnabled(iSuspendedCount > 0);
 
+	if (!isConnected) {
+		foreach(QAction * pAction, MenuActions)
+			pAction->setEnabled(false);
+	}
+
 	CPanelView::OnMenu(Point);
 }
 
@@ -295,7 +313,10 @@ int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m
 		if (pos == -1)
 			break;
 		if (Grouping.at(pos) == "(")
+		{
+			m_Groups[Name] = QStringList();
 			Index = CSbieView__ParseGroup(Grouping, m_Groups, Name, Index);
+		}
 		else if (Grouping.at(pos) == ")")
 			break;
 	}
@@ -355,8 +376,7 @@ void CSbieView::OnGroupAction()
 		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
 			Parent = m_pSbieModel->GetID(ModelIndex).toString();
 
-		if (!Parent.isEmpty())
-			m_Groups[Parent].append(Name);
+		m_Groups[Parent].append(Name);
 	}
 	else if (Action == m_pDelGroupe)
 	{

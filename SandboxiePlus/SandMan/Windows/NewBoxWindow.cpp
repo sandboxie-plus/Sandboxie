@@ -25,6 +25,8 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	connect(ui.radCopy, SIGNAL(toggled(bool)), this, SLOT(OnPreset()));
 	ui.radTemplate->setChecked(true);
 
+	ui.txtName->setFocus();
+
 	restoreGeometry(theConf->GetBlob("NewBoxWindow/Window_Geometry"));
 }
 
@@ -72,11 +74,15 @@ void CNewBoxWindow::CreateBox()
 		{
 			case eHardened:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("DropAdminRights", true);
-				pBox.objectCast<CSandBoxPlus>()->SetBool("ProtectRpcSs", true);
+				//pBox.objectCast<CSandBoxPlus>()->SetBool("ProtectRpcSs", true); // not compatible with RunServicesAsSystem=n which is on by default
+				pBox.objectCast<CSandBoxPlus>()->SetBool("ClosePrintSpooler", true);
+				pBox.objectCast<CSandBoxPlus>()->SetBool("OpenSmartCard", false);
 				break;
 			case eLegacy:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("UnrestrictedSCM", true);
 				pBox.objectCast<CSandBoxPlus>()->SetBool("ExposeBoxedSystem", true);
+				//pBox.objectCast<CSandBoxPlus>()->SetBool("RunServicesAsSystem", true); // legacy behavioure but there should be no normal use cases which require this
+				pBox.objectCast<CSandBoxPlus>()->SetBool("OpenPrintSpooler", true);
 				break;
 		}
 	}

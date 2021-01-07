@@ -200,5 +200,8 @@
     <None Include="sandman_ru.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_zh.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

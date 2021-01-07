@@ -187,10 +187,34 @@
     </message>
     <message>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">COM-объекты должны быть указаны по их GUID, например: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
         <source>RT interfaces must be specified by their name.</source>
+        <translation type="unfinished">Интерфейсы RT должны быть указаны по их имени.</translation>
+    </message>
+    <message>
+        <source>Browse for Program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a program path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a service identifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program</source>
+        <translation type="unfinished">Программа</translation>
+    </message>
+    <message>
+        <source>Please enter an auto exec command</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -295,7 +319,7 @@
     </message>
     <message>
         <source>Recover to:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Восстановить в:</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -303,15 +327,15 @@
     </message>
     <message>
         <source>Clear folder list</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Очистить список папок</translation>
     </message>
     <message>
         <source>Recover &amp;&amp; Explore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Восстановить и исследовать</translation>
     </message>
     <message>
         <source>Recover &amp;&amp; Open/Run</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Восстановить и открыть/запустить</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -369,6 +393,12 @@ Full path: %3</source>
     <message>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation type="unfinished">Вы хотите, чтобы диспетчер очереди печати мог писать вне песочницы для %1 (%2)?</translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="obsolete">%1 имеет право на быстрое восстановление после %2.
+Файл записан: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
@@ -435,6 +465,10 @@ Full path: %4</source>
     <message>
         <source>Process</source>
         <translation type="unfinished">Процесс</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -556,7 +590,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No new updates found, your Sandboxie-Plus is up to date.</source>
-        <translation type="unfinished">Обновлений не обнаружено, у вас установлена последняя версия Sandboxie-Plus .</translation>
+        <translation type="obsolete">Обновлений не обнаружено, у вас установлена последняя версия Sandboxie-Plus .</translation>
     </message>
     <message>
         <source>%1 (%2): </source>
@@ -632,7 +666,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sbie Messages</source>
-        <translation type="unfinished">Sbie cообщения</translation>
+        <translation type="unfinished">Cообщения sbie</translation>
     </message>
     <message>
         <source>Failed to recover some files: 
@@ -642,7 +676,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of the well known Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Sandboxie-Plus - это продолжение хорошо известной Sandboxie с открытым исходным кодом.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Посетите &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; для дополнительной информации.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Иконки из &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;Sandboxie-Plus - это продолжение хорошо известной Sandboxie с открытым исходным кодом.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Посетите &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; для дополнительной информации.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Иконки из &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 charakters.</source>
@@ -674,7 +708,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sbie Directory: %1</source>
-        <translation type="unfinished">Sbie каталог: %1</translation>
+        <translation type="unfinished">Каталог sbie: %1</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
@@ -743,7 +777,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.
 Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="unfinished">Для использования API логирования вы должны сперва настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
+        <translation type="obsolete">Для использования API логирования вы должны сперва настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
 Загрузите последний выпуск и настройте его с помощью sandboxie.ini, как указано в README.md проекта.</translation>
     </message>
     <message>
@@ -760,7 +794,7 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Failed to stop all sandboxie components</source>
-        <translation type="unfinished">Не удалось остановить все компоненты песочницы</translation>
+        <translation type="obsolete">Не удалось остановить все компоненты песочницы</translation>
     </message>
     <message>
         <source>&amp;Sandbox</source>
@@ -768,7 +802,7 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Failed to start required sandboxie components</source>
-        <translation type="unfinished">Не удалось запустить необходимые компоненты песочницы</translation>
+        <translation type="obsolete">Не удалось запустить необходимые компоненты песочницы</translation>
     </message>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
@@ -932,70 +966,115 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Reset all hidden messages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сбросить все скрытые сообщения</translation>
     </message>
     <message>
         <source>   -   NOT connected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">   -   НЕ подключен</translation>
     </message>
     <message>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вы также хотите сбросить скрытые окна сообщений (да) или только все сообщения журнала (нет)?</translation>
     </message>
     <message>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменения будут применяться автоматически при сохранении файла.</translation>
     </message>
     <message>
         <source>Administrator rights are required for this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Для этой операции требуются права администратора.</translation>
     </message>
     <message>
         <source>Failed to execute: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не удалось выполнить: %1</translation>
     </message>
     <message>
         <source>Failed to connect to the driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не удалось подключиться к драйверу</translation>
     </message>
     <message>
         <source>Failed to communicate with Sandboxie Service: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не удалось связаться со службой Sandboxie: %1</translation>
     </message>
     <message>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Обнаружена несовместимая песочница %1. Совместимые версии: %2</translation>
     </message>
     <message>
         <source>Can&apos;t find Sandboxie installation path.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не удается найти путь установки Sandboxie.</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Имя песочницы не может быть длиннее 32 символов.</translation>
     </message>
     <message>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Операция снимка не может быть выполнена, пока в песочнице еще выполняются процессы.</translation>
     </message>
     <message>
         <source>Failed to copy RegHive</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не удалось скопировать RegHive</translation>
     </message>
     <message>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Невозможно удалить снимок, который используется несколькими более поздними снимками</translation>
     </message>
     <message>
         <source>Unknown Error Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неизвестный статус ошибки: %1</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вы хотите открыть %1 в изолированном (да) или не изолированном (нет) браузере?</translation>
     </message>
     <message>
         <source>Remember choice for later.</source>
+        <translation type="unfinished">Запомнить выбор.</translation>
+    </message>
+    <message>
+        <source>Copy Cell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to stop all Sandboxie components</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to start required Sandboxie components</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file %1 already exists, do you want to overwrite it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do this for all files!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
+Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1007,7 +1086,7 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Путь</translation>
+        <translation type="obsolete">Путь</translation>
     </message>
     <message>
         <source>Box Groupe</source>
@@ -1024,6 +1103,10 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     <message>
         <source>Process ID</source>
         <translation type="unfinished">ID процесса</translation>
+    </message>
+    <message>
+        <source>Path / Command Line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1234,19 +1317,19 @@ Please download the latest release and set it up with the sandboxie.ini as instr
     </message>
     <message>
         <source>Create Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Создать ярлык</translation>
     </message>
     <message>
         <source>Allow internet access</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Разрешить доступ в Интернет</translation>
     </message>
     <message>
         <source>Force into this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Принудительно в этой песочнице</translation>
     </message>
     <message>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">В этой песочнице нет ограничений на доступ к Интернет, вы хотите их включить?</translation>
     </message>
 </context>
 <context>
@@ -1492,7 +1575,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished">Обзор</translation>
+        <translation type="obsolete">Обзор</translation>
     </message>
     <message>
         <source>Restrict Resource Access monitor to administrators only</source>
@@ -1620,7 +1703,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Lift restrictions</source>
-        <translation type="unfinished">Ограничения на подъем</translation>
+        <translation type="obsolete">Ограничения на подъем</translation>
     </message>
     <message>
         <source>Add Leader Program</source>
@@ -1742,7 +1825,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Remove Process</source>
-        <translation type="unfinished">Удалить процесс</translation>
+        <translation type="obsolete">Удалить процесс</translation>
     </message>
     <message>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
@@ -1790,7 +1873,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Sandbox Isolation</source>
-        <translation type="unfinished">Изоляция песочницы</translation>
+        <translation type="obsolete">Изоляция песочницы</translation>
     </message>
     <message>
         <source>Add Lingering Program</source>
@@ -1847,18 +1930,74 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Prevent change to network and firewall parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запретить изменение параметров сети и брандмауэра</translation>
     </message>
     <message>
         <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запускать RpcSs в песочнице как СИСТЕМНЫЙ процесс (нарушает некоторую совместимость)</translation>
     </message>
     <message>
         <source>COM Class Trace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Трассировка COM класса</translation>
     </message>
     <message>
         <source>&lt;- for this one the above does not apply</source>
+        <translation type="unfinished">&lt;- для этого то что выше не применяется</translation>
+    </message>
+    <message>
+        <source>Block access to the printer spooler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow the print spooler to print to files outside the sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not start sandboxed services using a system token (recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow access to Smart Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lift security restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandbox isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Exec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2063,18 +2202,22 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Open urls from this ui sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Открывать URL-адреса из этого пользовательского интерфейса в песочнице</translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;корень файловой системы&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;корень ipc&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
+        <translation type="unfinished">Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;корень реестра&lt;/a&gt;: </translation>
+    </message>
+    <message>
+        <source>Portable root folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -14,8 +14,8 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
-#define VERSION_REV 	3
-#define VERSION_UPD 	1
+#define VERSION_REV 	4
+#define VERSION_UPD 	0
 
 
 //#include "../QSbieAPI/SbieAPI.h"
@@ -46,6 +46,8 @@ public:
 
 	static QIcon		GetIcon(const QString& Name);
 
+	bool				IsFullyPortable();
+
 protected:
 	SB_STATUS			ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
@@ -53,8 +55,6 @@ protected:
 	SB_STATUS			StopSbie(bool andRemove = false);
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
-
-	bool				IsFullyPortable();
 
 	void				closeEvent(QCloseEvent *e);
 	void				timerEvent(QTimerEvent* pEvent);
@@ -99,6 +99,8 @@ public slots:
 	void				CheckForUpdates(bool bManual = true);
 
 	void				OpenUrl(const QUrl& url);
+
+	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
 
 private slots:
 	void				OnSelectionChanged();

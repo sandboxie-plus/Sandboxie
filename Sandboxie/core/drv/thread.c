@@ -178,13 +178,13 @@ _FX BOOLEAN Thread_Init(void)
     if (! Syscall_Set1("OpenThreadTokenEx",     Thread_OpenThreadTokenEx))
         return FALSE;
 
-    if (! Syscall_Set1("SetInformationProcess",Thread_SetInformationProcess))
+    if (! Syscall_Set1("SetInformationProcess", Thread_SetInformationProcess))
         return FALSE;
     if (! Syscall_Set1("SetInformationThread",  Thread_SetInformationThread))
         return FALSE;
 
     if (! Syscall_Set1(
-            "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
+                    "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
         return FALSE;
 
     //
@@ -212,7 +212,7 @@ _FX BOOLEAN Thread_Init(void)
     // set API handlers
     //
 
-    Api_SetFunction(API_OPEN_PROCESS,       Thread_Api_OpenProcess);
+    Api_SetFunction(API_OPEN_PROCESS,           Thread_Api_OpenProcess);
 
     return TRUE;
 }

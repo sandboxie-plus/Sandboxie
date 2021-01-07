@@ -640,6 +640,16 @@ _FX void *Thread_SetInformationProcess_PrimaryToken_3(
     }
 
     //
+    // special allowance for MSIServer
+    //
+
+    if (!proc->image_from_box &&
+        _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
+
+        return TokenObject2;
+    }
+
+    //
     // otherwise, deny request to set an arbitrary token
     //
 

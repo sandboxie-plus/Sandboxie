@@ -153,7 +153,9 @@ struct _PROCESS {
     ULONG ipc_trace;
     BOOLEAN ipc_warn_startrun;
     BOOLEAN ipc_block_password;
-    BOOLEAN m_boolAllowSpoolerPrintToFile;
+    BOOLEAN ipc_open_lsa_endpoint;
+    BOOLEAN ipc_allowSpoolerPrintToFile;
+    BOOLEAN ipc_openPrintSpooler;
 
     // gui-related
 

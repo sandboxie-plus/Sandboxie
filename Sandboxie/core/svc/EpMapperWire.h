@@ -39,13 +39,13 @@
 struct tagEPMAPPER_GET_PORT_NAME_REQ
 {
     MSG_HEADER h;
-    RPC_IF_ID   ifidRequest;
+    ULONG portType;
 };
 
 struct tagEPMAPPER_GET_PORT_NAME_RPL
 {
     MSG_HEADER h;           // h.status is RPC_STATUS
-    HRESULT hr;
+    //HRESULT hr;
     WCHAR wszPortName[DYNAMIC_PORT_NAME_CHARS];
 };
 

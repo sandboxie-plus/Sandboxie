@@ -173,7 +173,7 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                     Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
 
 					//
-					// Note: many proesses started by DcomLaunch must be started as user this is currently a bit broken,
+					// Note: many processes started by DcomLaunch must be started as user this is currently a bit broken,
 					// see Proc_CreateProcessInternalW_RS5 so for successfull operation in most cases we can't run RpcSs with a system token
 					// Fix-Me: fix Proc_CreateProcessInternalW_RS5 and make prtected RpcSs and subsequently DcomLaunch the deault
 					//

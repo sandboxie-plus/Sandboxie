@@ -2592,7 +2592,7 @@ _FX void *Gui_CallProxyEx(
         }
     }
 
-    SbieApi_Log(2203, L"%S - %S [%08X]", _QueueName, Dll_ImageName, status);
+    SbieApi_Log(2203, L"%S; MsgId: %d - %S [%08X]", _QueueName, *(ULONG*)req, Dll_ImageName, status);
     SetLastError(ERROR_SERVER_DISABLED);
     return NULL;
 }

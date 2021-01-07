@@ -70,10 +70,7 @@ private:
     ULONG RunHandler2(
         HANDLE idProcess, ULONG idSession,
         const WCHAR *devmap, const WCHAR *svcname, const WCHAR *path);
-
-	void SetTokenCustomDacl(
-		HANDLE hNewToken, HANDLE idProcess, DWORD AccessMask, bool useUserSID);
-
+	
     MSG_HEADER *UacHandler(
         MSG_HEADER *msg, HANDLE idProcess, HANDLE idThread);
 

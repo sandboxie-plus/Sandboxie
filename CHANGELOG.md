@@ -3,6 +3,46 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.4 / 5.46.0] - 2021-01-06
+
+### Added
+- Sandboxie now strips particularly problematic privileges from sandboxed system tokens
+-- with those a process could atempt to bypass the sandbox isolation (thanks Diversenok)
+-- old legacy behavior can be enabled with "StripSystemPrivileges=n" (absolutely NOT Recommended) 
+- added new isolation options "ClosePrintSpooler=y" and "OpenSmartCard=n" 
+-- those resources are open by default but for a hardened box its desired to close them
+- added print spooler filter to prevent printers from being set up outside the sandbox
+-- the filter can be disabled with "OpenPrintSpooler=y"
+- added overwrite prompt when recovering an already existing file
+- added "StartProgram=", "StartService=" and "AutoExec=" options to the SandMan UI
+- added more compatybility templates (thanks isaak654)
+
+### Changed
+- Changed Emulated SCM behavior, boxed services are no longer by default started as boxed system
+-- use "RunServicesAsSystem=y" to enable the old legacy behavior
+-- Note: sandboxed services with a system token are still sandboxed and restricted 
+-- However not granting them a system token in the first place removes possible exploit vectors
+-- Note: this option is not compatible with "ProtectRpcSs=y" and takes precedence!
+- Reworked dynamic IPC port handling
+- Improved Resource Monitor status strings
+
+### Fixed
+- fixed a critical issue that allowed to create processes outside the sandbox (thanks Diversenok)
+- fixed issues with dynamic IPC port handling that allowed to bypass IPC isolation
+- fixed issue with ipc tracing
+- fixed CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
+-- this allowed some system options to be changed, to disable filtering use "OpenLsaEndpoint=y"
+- fixed hooking issues SBIE2303 with chrome, edge and possibly others
+- fixed failed check for running processes when performing snapshot operations
+- fixed some box option checkboxes were not properly initialized
+- fixed unavailable options are not properly disabled when sandman is not connected to the driver
+- fixed MSI instalelr issue, not being able to create "C:\Config.Msi" folder on windows 20H2
+- added missing localization to generic list commands
+- fixed issue with "iconcache_*" when runngin sandboxed explorer
+- fixed more issues with groups
+
+
+
 ## [0.5.3b / 5.45.2] - 2021-01-02
 
 ### Added
@@ -53,7 +93,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### removed
 - removed obsolete "OpenDefaultClsid=n" use "ClosedClsid=" with the apropriate values instead
 - removed suspend/resume menu entry, pooling that state wastes substantial CPU cycles; use task explorer for that functionality
-
 
 
 

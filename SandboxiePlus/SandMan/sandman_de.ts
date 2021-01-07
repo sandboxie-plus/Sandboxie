@@ -105,7 +105,7 @@
         <location filename="Windows/OptionsWindow.cpp" line="162"/>
         <location filename="Windows/OptionsWindow.cpp" line="169"/>
         <source>Browse for Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu Programm navigieren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="217"/>
@@ -126,7 +126,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="739"/>
         <source>Please enter a program path</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie einen Programmpfad ein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="749"/>
@@ -143,17 +143,17 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="759"/>
         <source>Please enter a service identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie eine Dienstbezeichnung ein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="770"/>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Dienst</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="770"/>
         <source>Program</source>
-        <translation type="unfinished">Programm</translation>
+        <translation>Programm</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="793"/>
@@ -202,7 +202,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1894"/>
         <source>Please enter an auto exec command</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie einen Autoausführen-Kommndo ein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2095"/>
@@ -466,7 +466,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -475,7 +475,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -484,7 +484,7 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Geschrieben durch: %3</translation>
     </message>
     <message>
@@ -504,7 +504,7 @@ Geschrieben durch: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
     <message>
@@ -552,7 +552,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Models/ResMonModel.cpp" line="100"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte</translation>
     </message>
     <message>
         <location filename="Models/ResMonModel.cpp" line="147"/>
@@ -635,17 +635,17 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="125"/>
         <source>Copy Cell</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelle kopieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="126"/>
         <source>Copy Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalte kopieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="127"/>
         <source>Copy Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Tafel kopieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="163"/>
@@ -899,17 +899,17 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="543"/>
         <source>Failed to stop all Sandboxie components</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht alle Sandboxiekomponenten stoppen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="545"/>
         <source>Failed to start required Sandboxie components</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht alle benötigten Sandboxiekomponenten starten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="702"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus wurde im portablen Modus gestartet, möchten Sie den Sandboxordner im übergeordneten Verzeichnis erstellen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="735"/>
@@ -919,12 +919,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="888"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei %1 existiert bereit, möchten Sie diese überschreiben?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="889"/>
         <source>Do this for all files!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tue dies für alle Dateien!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="908"/>
@@ -962,7 +962,8 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="1295"/>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingereichten werden.
+Bitte die neute Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts einrichten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1383"/>
@@ -972,7 +973,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <location filename="SandMan.cpp" line="1755"/>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>p&gt;Sandboxie-Plus ist eine OpenSource-Fortsetzung von Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Besuche &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; für weitere Informationen.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons von &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Admin rights required.</source>
@@ -1126,7 +1127,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <location filename="SandMan.cpp" line="1682"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Updates gefunden, Sandboxie-Plus ist aktuell.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1728"/>
@@ -1262,7 +1263,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.
 Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="vanished">Um die API Protokollierung zu nutze, muss die LogApiDll from https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingereichten werden.
+        <translation type="vanished">Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingereichten werden.
 Bitte die neute Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts einrichten.</translation>
     </message>
     <message>
@@ -1414,7 +1415,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Models/SbieModel.cpp" line="418"/>
         <source>Path / Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandozeile</translation>
     </message>
     <message>
         <source>Path</source>
@@ -1550,7 +1551,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
         <source>Sandbox Options</source>
-        <translation>Sandoxeinstellungen</translation>
+        <translation>Sandboxeinstellungen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="91"/>
@@ -2059,43 +2060,43 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="96"/>
         <source>Block access to the printer spooler</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugriff auf die Druckerwarteschlange blockieren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="221"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Druckerwarteschlange erlauben als Dateien außerhalb der Sandbox zu drucken (Print to file)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="250"/>
         <source>Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="257"/>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne Druckerwarteschlangenrestriktionen, Drucker können außerhalb der Sandbox installiert werden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="322"/>
         <location filename="Forms/OptionsWindow.ui" line="518"/>
         <source>Add program</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Programm hinzu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="444"/>
         <source>Auto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Autostart</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="450"/>
         <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier können Sie Programme und/oder Dienste angeben, welche automatisch in der Sandbox gestarted werden, wenn diese aktiviert wird</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="537"/>
         <source>Add service</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Dienst hinzu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="773"/>
@@ -2271,12 +2272,12 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1376"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxte Dienste nicht mit einem Systemtoken starten (empfohlen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1390"/>
         <source>Allow access to Smart Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugriff auf SmartCards erlauben</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1397"/>
@@ -2447,22 +2448,22 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1440"/>
         <source>Lift security restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheitsrestriktionen aufheben</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1456"/>
         <source>Sandbox isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxisolation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>Auto Exec</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoausführen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1499"/>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier können Sie eine Liste mit Kommandos angeben, welche jedes Mal ausgeführt werden, wenn die Sandbox initial geladen wird.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1663"/>
@@ -2741,7 +2742,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Portable root folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Portabler Quellordner</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="389"/>

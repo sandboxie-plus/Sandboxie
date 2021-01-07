@@ -16,12 +16,12 @@
         <translation>取消</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>是</translation>
+        <source>&amp;Yes</source>
+        <translation>&amp;是</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation>否</translation>
+        <source>&amp;No</source>
+        <translation>&amp;否</translation>
     </message>
 </context>
 <context>

@@ -672,18 +672,17 @@ HANDLE ProcessServer::RunSandboxedGetToken(
     ULONG LastError;
     BOOL ok;
     //bool ShouldAdjustSessionId = true;
-    bool ShouldAdjustDacl = false;
+    //bool ShouldAdjustDacl = false;
     WCHAR boxname[48] = { 0 };
 
     if (CallerInSandbox) {
 
         SbieApi_QueryProcess((HANDLE)(ULONG_PTR)idProcess, boxname, NULL, NULL, NULL);
 
-        if (wcscmp(BoxName, L"*SYSTEM*") == 0) {
+        /*if (wcscmp(BoxName, L"*SYSTEM*") == 0) {
 
             //
-            // RunServicesAsSystem=n is not compatible with ProtectRpcSs=y and takes precedence,
-            // fallbac to using the calling thread's token
+            // without RunServicesAsSystem=y fallback to using the calling thread's token
             //
 
             if (!SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE))
@@ -700,7 +699,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             ShouldAdjustDacl = true;
 
-        /*} else if (wcscmp(BoxName, L"*SESSION*") == 0) {
+        } else*/ /*if (wcscmp(BoxName, L"*SESSION*") == 0) {
 
             //
             // sandboxed caller specified *SESSION* so we use session token
@@ -713,11 +712,11 @@ HANDLE ProcessServer::RunSandboxedGetToken(
             if (! ok)
                 return NULL;
 
-            ShouldAdjustSessionId = false;*/
+            ShouldAdjustSessionId = false;
 
-        } else if (wcscmp(BoxName, L"*THREAD*") == 0) {
+        } else*/ if (wcscmp(BoxName, L"*THREAD*") == 0) {
             
-        DoThread:
+        //DoThread:
 
             //
             // sandboxed caller specified *THREAD* so we use its thread token
@@ -804,7 +803,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
                                  &SessionId, sizeof(ULONG));
     }*/
 
-    if (ok && ShouldAdjustDacl) {
+    /*if (ok && ShouldAdjustDacl) {
 
         //
         // if caller is sandboxed and asked for a system token,
@@ -820,7 +819,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             ok = RunSandboxedStripPrivileges(NewTokenHandle);
         }
-    }
+    }*/
 
 
     if (! ok) {

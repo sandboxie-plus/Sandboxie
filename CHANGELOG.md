@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [0.5.4b / 5.46.1] - 2021-01-08
+
+### Added
+- added "RunServiceAsSystem=..." allows specific named services to be ran as system
+
+### Changed
+- refactored some code around SCM access
+
+### Fixed
+- fixed a crash issue in SbieSvc.exe introduced with the last build
+- fixed issue with sandman ui update check
+
+### Removed
+- removed "ProtectRpcSs=y" due to incompatybility with new isolation defaults
+
+
+
 ## [0.5.4 / 5.46.0] - 2021-01-06
 
 ### Added

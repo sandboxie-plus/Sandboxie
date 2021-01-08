@@ -74,7 +74,6 @@ void CNewBoxWindow::CreateBox()
 		{
 			case eHardened:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("DropAdminRights", true);
-				//pBox.objectCast<CSandBoxPlus>()->SetBool("ProtectRpcSs", true); // not compatible with RunServicesAsSystem=n which is on by default
 				pBox.objectCast<CSandBoxPlus>()->SetBool("ClosePrintSpooler", true);
 				pBox.objectCast<CSandBoxPlus>()->SetBool("OpenSmartCard", false);
 				break;

@@ -79,7 +79,7 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false) /*|| GetBool("ProtectRpcSs", false)*/);
+	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
 
 	CSandBox::UpdateDetails();
 }

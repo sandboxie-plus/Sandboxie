@@ -53,24 +53,25 @@ bool ServiceServer::CanCallerDoElevation(
 
     bool DropRights = CheckDropRights(boxname);
 
-    if (DropRights && ServiceName) {
+    if (ServiceName) {
 
-        WCHAR buf[66];
-        ULONG index = 0;
-        while (1) {
-            NTSTATUS status = SbieApi_QueryConfAsIs(
-                boxname, L"StartService", index,
-                buf, 64 * sizeof(WCHAR));
-            ++index;
-            if (NT_SUCCESS(status)) {
-                if (_wcsicmp(buf, ServiceName) == 0) {
-                    DropRights = false;
-                    break;
-                }
-            } else if (status != STATUS_BUFFER_TOO_SMALL)
-                break;
+        if (!DropRights) {
+
+            if (!CanAccessSCM(idProcess))
+                DropRights = true;
+        }
+
+        if (DropRights) {
+
+            // 
+            // if this service is configured to be started on box initialization
+            // by SandboxieRpcSs.exe then allow it to be started
+            //
+            if (CheckStringInList(ServiceName, boxname, L"StartService"))
+                DropRights = false;
         }
     }
+                    
 
     if (DropRights) {
 
@@ -88,26 +89,24 @@ bool ServiceServer::CanCallerDoElevation(
 }
 
 //---------------------------------------------------------------------------
-// CanCallerDoElevation
+// CanAccessSCM
 //---------------------------------------------------------------------------
 
 
 bool ServiceServer::CanAccessSCM(HANDLE idProcess)
 {
 	WCHAR boxname[48] = { 0 };
-	WCHAR imagename[128] = { 0 };
-	SbieApi_QueryProcess(idProcess, boxname, imagename, NULL, NULL); // if this fail we take the global config if present
+	WCHAR exename[128] = { 0 };
+	SbieApi_QueryProcess(idProcess, boxname, exename, NULL, NULL); // if this fail we take the global config if present
 	if (SbieApi_QueryConfBool(boxname, L"UnrestrictedSCM", FALSE))
 		return true;
 
 	//
-	// Note: when RpcSs and DcomLaunch are not running as system, thay still are alowed to access the SCM
+	// DcomLaunch runs as user but needs to be able to access the SCM 
 	//
-	if (!SbieApi_QueryConfBool(boxname, L"ProtectRpcSs", FALSE))
-	{
-		if (_wcsicmp(imagename, SANDBOXIE L"DcomLaunch.exe") == 0)
-			return true;
-	}
+	if (_wcsicmp(exename, SANDBOXIE L"DcomLaunch.exe") == 0)
+		return true;
+
 
 	bool bRet = false;
 
@@ -253,17 +252,38 @@ MSG_HEADER *ServiceServer::RunHandler(MSG_HEADER *msg, HANDLE idProcess)
     ULONG error;
     ULONG idSession;
 
-    if (! CanCallerDoElevation(idProcess, req->name, &idSession) || !CanAccessSCM(idProcess))
+    if (! CanCallerDoElevation(idProcess, req->name, &idSession))
         error = ERROR_ACCESS_DENIED;
     else {
-        WCHAR *svcname = NULL;
-        if (req->type & SERVICE_WIN32_OWN_PROCESS)
-            svcname = req->name;
-        error = RunHandler2(idProcess, idSession, req->devmap,
-                            svcname, req->path);
+        
+        error = RunHandler2(idProcess, idSession, req->type, req->devmap, 
+                            req->name, req->path);
     }
 
     return SHORT_REPLY(error);
+}
+
+
+//---------------------------------------------------------------------------
+// ServiceServer__RunServiceAsSystem
+//---------------------------------------------------------------------------
+
+
+bool ServiceServer__RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname)
+{
+    // legacy behavioure option
+    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE) == TRUE) 
+        return true;
+    
+    if (!svcname)
+        return false;
+
+    // exception for MSIServer, see also core/drv/thread_token.c
+    if (_wcsicmp(svcname, L"MSIServer") == 0)
+        return true;
+
+    // check exception list
+    return CheckStringInList(svcname, boxname, L"RunServiceAsSystem");
 }
 
 
@@ -273,7 +293,7 @@ MSG_HEADER *ServiceServer::RunHandler(MSG_HEADER *msg, HANDLE idProcess)
 
 
 ULONG ServiceServer::RunHandler2(
-    HANDLE idProcess, ULONG idSession,
+    HANDLE idProcess, ULONG idSession, ULONG type,
     const WCHAR *devmap, const WCHAR *svcname, const WCHAR *path)
 {
     const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
@@ -294,8 +314,9 @@ ULONG ServiceServer::RunHandler2(
 
     if (ok) {
         errlvl = 0x21;
-        ExePath =
-            BuildPathForStartExe(idProcess, devmap, svcname, path, NULL);
+        ExePath = BuildPathForStartExe(idProcess, devmap, 
+                                        (type & SERVICE_WIN32_OWN_PROCESS) ? svcname : NULL, 
+                                        path, NULL);
         if (! ExePath) {
             ok = FALSE;
             SetLastError(ERROR_NOT_ENOUGH_MEMORY);
@@ -304,8 +325,7 @@ ULONG ServiceServer::RunHandler2(
 
     if (ok) {
         errlvl = 0x22;
-        if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE) 
-         || (_wcsicmp(svcname, L"MSIServer") == 0)) { // special exception for MSIServer, see also core/drv/thread_token.c
+        if (ServiceServer__RunServiceAsSystem(svcname, boxname)) {
             // use our system token
             ok = OpenProcessToken(GetCurrentProcess(), TOKEN_RIGHTS, &hOldToken);
         }

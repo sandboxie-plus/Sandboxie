@@ -190,7 +190,7 @@ _FX BOOLEAN Token_Init(void)
     MySetPrivilege(3) = SE_SHUTDOWN_PRIVILEGE;
     MySetPrivilege(4) = SE_DEBUG_PRIVILEGE;
     MySetPrivilege(5) = SE_SYSTEMTIME_PRIVILEGE;
-    MySetPrivilege(6) = SE_TIME_ZONE_PRIVILEGE;
+    MySetPrivilege(6) = SE_TIME_ZONE_PRIVILEGE; // vista
 
 #undef MySetPrivilege
 

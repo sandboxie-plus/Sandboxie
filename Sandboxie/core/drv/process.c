@@ -786,10 +786,14 @@ _FX void Process_NotifyProcess(
 
         if (Create) {
 
-            if (ParentId) {
+            //
+            // it is possible to specify the parrent process when calling RtlCreateUserProcess
+            // this is for example done by the appinfo service running under svchost.exe
+            // to start LocalBridge.exe with RuntimeBroker.exe as parent
+            // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
+            //
 
-                Process_NotifyProcess_Create(ProcessId, ParentId, NULL);
-            }
+            Process_NotifyProcess_Create(ProcessId, PsGetCurrentProcessId(), NULL);
 
         } else {
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.960
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SboxSvc", "core\svc\SboxSvc.vcxproj", "{2D3DBCAE-883E-54A6-F8F6-11228D989033}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -98,6 +98,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{666D2193-3
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "com", "com", "{7495BFF6-A576-4B96-9071-10CF956368FC}"
+	ProjectSection(SolutionItems) = preProject
+		apps\com\common.h = apps\com\common.h
+		apps\com\header.h = apps\com\header.h
+		apps\com\privs.h = apps\com\privs.h
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{E9D1318A-FAF0-4EF8-8561-FCB03862AC99}"
 EndProject

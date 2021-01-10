@@ -74,6 +74,11 @@ static BOOL Proc_UpdateProcThreadAttribute(
 	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
 	_In_opt_ PSIZE_T lpReturnSize);
 
+static BOOL Proc_SetProcessMitigationPolicy(
+    _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+    _In_reads_bytes_(dwLength) PVOID lpBuffer,
+    _In_ SIZE_T dwLength);
+
 static BOOL Proc_AlternateCreateProcess(
     const WCHAR *lpApplicationName, WCHAR *lpCommandLine,
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
@@ -264,6 +269,11 @@ typedef BOOL(*P_UpdateProcThreadAttribute)(
 	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
 	_In_opt_ PSIZE_T lpReturnSize);
 
+typedef BOOL (*P_SetProcessMitigationPolicy)(
+    _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+    _In_reads_bytes_(dwLength) PVOID lpBuffer,
+    _In_ SIZE_T dwLength);
+
 //---------------------------------------------------------------------------
 
 
@@ -295,6 +305,8 @@ static P_AddAccessAllowedAceEx      __sys_AddAccessAllowedAceEx		= NULL;
 static P_GetLengthSid				__sys_GetLengthSid				= NULL;*/
 
 static P_UpdateProcThreadAttribute	__sys_UpdateProcThreadAttribute = NULL;
+
+static P_SetProcessMitigationPolicy	__sys_SetProcessMitigationPolicy = NULL;
 
 //---------------------------------------------------------------------------
 // Variables
@@ -371,6 +383,17 @@ _FX BOOLEAN Proc_Init(void)
 		if (NT_SUCCESS(status))
 			SBIEDLL_HOOK(Proc_, UpdateProcThreadAttribute);
 	}
+
+    // fox for SBIE2303 Could not hook ... (33, 1655) due to mitigation policies
+    if (Dll_OsBuild >= 8400)    // win8
+    {
+        void* SetProcessMitigationPolicy = NULL;
+        RtlInitString(&ansi, "SetProcessMitigationPolicy");
+        status = LdrGetProcedureAddress(
+            Dll_KernelBase, &ansi, 0, (void**)&SetProcessMitigationPolicy);
+        if (NT_SUCCESS(status))
+            SBIEDLL_HOOK(Proc_, SetProcessMitigationPolicy);
+    }
 
 	// OriginalToken BEGIN
 	if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
@@ -970,6 +993,21 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 	}
 
 	return __sys_UpdateProcThreadAttribute(lpAttributeList, dwFlags, Attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize);
+}
+
+
+_FX BOOL Proc_SetProcessMitigationPolicy(
+    _In_ PROCESS_MITIGATION_POLICY MitigationPolicy,
+    _In_reads_bytes_(dwLength) PVOID lpBuffer,
+    _In_ SIZE_T dwLength)
+{
+    // fix for SBIE2303 Could not hook ... (33, 1655)
+    // This Mitigation Policy breaks our ability to hook functions once its enabled,
+    // As we need to be able to hook them we prevent the activation of this policy.
+    if (MitigationPolicy == ProcessDynamicCodePolicy)
+        return TRUE;
+
+    return __sys_SetProcessMitigationPolicy(MitigationPolicy, lpBuffer, dwLength);
 }
 
 void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)

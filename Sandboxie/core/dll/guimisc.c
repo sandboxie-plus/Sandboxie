@@ -1213,7 +1213,7 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     LPVOID reqData = (BYTE*)req + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ);
 
     req->msgid = GUI_GET_RAW_INPUT_DEVICE_INFO;
-    req->hDevice = hDevice;
+    req->hDevice = (ULONG64)hDevice;
     req->uiCommand = uiCommand;
     req->unicode = bUnicode;
     if (lenData) {

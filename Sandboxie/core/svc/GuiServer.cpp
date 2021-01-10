@@ -3414,10 +3414,10 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
 
     SetLastError(ERROR_SUCCESS);
     if (req->unicode) {
-        rpl->retval = GetRawInputDeviceInfoW(req->hDevice, req->uiCommand, reqData, pcbSize);
+        rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
     }
     else {
-        rpl->retval = GetRawInputDeviceInfoA(req->hDevice, req->uiCommand, reqData, pcbSize);
+        rpl->retval = GetRawInputDeviceInfoA((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
     }
     rpl->error = GetLastError();
 

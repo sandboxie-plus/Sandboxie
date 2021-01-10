@@ -35,6 +35,10 @@ public:
 
     ProcessServer(PipeServer *pipeServer);
 
+    static BOOL RunSandboxedSetDacl(HANDLE CallerProcessHandle, HANDLE NewTokenHandle, DWORD AccessMask, bool useUserSID, HANDLE idProcess = NULL);
+    static BOOL RunSandboxedStripPrivilege(HANDLE NewTokenHandle, LPCWSTR lpName);
+    static BOOL RunSandboxedStripPrivileges(HANDLE NewTokenHandle);
+
 protected:
 
     static MSG_HEADER *Handler(void *_this, MSG_HEADER *msg);
@@ -62,8 +66,6 @@ protected:
     HANDLE RunSandboxedGetToken(
             HANDLE CallerProcessHandle, bool CallerInSandbox,
             const WCHAR *BoxName, ULONG idProcess);
-    BOOL RunSandboxedSetDacl(
-            HANDLE CallerProcessHandle, HANDLE NewTokenHandle, DWORD AccessMask, bool useUserSID);
     BOOL RunSandboxedStartProcess(
             HANDLE PrimaryTokenHandle, LONG_PTR BoxNameOrModelPid,
             ULONG CallerProcessId,

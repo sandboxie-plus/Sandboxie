@@ -196,7 +196,6 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
         }
     }
 
-	//if (Conf_Get_Boolean(proc->box->name, L"OpenDefaultWinClass", 0, TRUE)) // ToDo: can we do that
     if (ok) {
         BOOLEAN AddMSTaskSwWClass = FALSE;
         if (Driver_OsVersion >= DRIVER_WINDOWS_7) {

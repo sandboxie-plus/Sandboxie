@@ -88,19 +88,11 @@ NTSTATUS Ipc_NtRequestWaitReplyPort(
 
 NTSTATUS Ipc_Api_SetLsaAuthPkg(PROCESS *proc, ULONG64 *parms);
 
-NTSTATUS Ipc_Api_GetSpoolerPort(PROCESS *proc, ULONG64 *parms);
-
-NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms);
-
 //NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms);
 
-NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_GetWpadPortFromPid(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_SetGameConfigStorePort(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_GetSmartCardPortFromPid(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_SetSmartCardPort(PROCESS *proc, ULONG64 *parms);
+NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms);
 
-NTSTATUS Ipc_Api_GetRpcPortFromPid(enum ENUM_DYNAMIC_PORT_TYPE ePortType, PROCESS *proc, ULONG64 *parms);
+NTSTATUS Ipc_Api_GetDynamicPortFromPid(PROCESS *proc, ULONG64 *parms);
 
 //---------------------------------------------------------------------------
 // Variables

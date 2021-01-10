@@ -37,6 +37,12 @@ SetCompressor /SOLID /FINAL lzma
 
 !define BIN_ROOT_BASE	"${SBIE_INSTALLER_PATH}"
 
+!if "${_BUILDARCH}" == "x64"
+    !define _W7DRV_COMPAT "$%SbieVer%.x64"
+!else
+    !define _W7DRV_COMPAT "$%SbieVer%.x86"
+!endif
+
 ;!define SBIEDRV_SYS4    "${SBIEDRV_SYS}.rc4"
 ;!define SBIEDRV_SYSX    "${SBIEDRV_SYS}.w10"
 
@@ -681,7 +687,7 @@ Function InstallTypePage
 
 w7_Drv_ask:
 
-    MessageBox MB_YESNO|MB_ICONQUESTION "Windows 7 requires a provisional driver package, you will have to download it from the GitHub release page https://github.com/sandboxie-plus/Sandboxie/releases/ \r\ndo you have it downloaded?" IDYES w7_Drv_ok
+    MessageBox MB_YESNO|MB_ICONQUESTION "Windows 7 requires a provisional driver package. You will have to download it from the GitHub release page https://github.com/sandboxie-plus/Sandboxie/releases/$\r$\nDo you have it downloaded?" IDYES w7_Drv_ok
 
     MessageBox MB_YESNO|MB_ICONQUESTION "Do you want to open the download page in your default web browser?" IDNO w7_Drv_cancel
     ExecShell "open" "https://github.com/sandboxie-plus/Sandboxie/releases/"
@@ -694,13 +700,7 @@ w7_Drv_cancel:
 
 w7_Drv_ok:
 
-!if "${_BUILDARCH}" == "x64"
-    !define w7_drv_compat "5.45.1.x64"
-!else
-    !define w7_drv_compat "5.45.1.x86"
-!endif
-
-    nsDialogs::SelectFileDialog open "" "Driver binary (*.${w7_drv_compat}.rc4)|*.${w7_drv_compat}.rc4|All Files|*.*"
+    nsDialogs::SelectFileDialog open "" "Driver binary (*.${_W7DRV_COMPAT}.rc4)|*.${_W7DRV_COMPAT}.rc4|All Files|*.*"
     
     Pop $0
     StrCmp $0 "" w7_Drv_cancel

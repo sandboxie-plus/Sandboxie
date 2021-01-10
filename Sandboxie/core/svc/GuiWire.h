@@ -686,7 +686,7 @@ typedef struct tagGUI_REMOVE_HOST_WINDOW_RPL GUI_REMOVE_HOST_WINDOW_RPL;
 struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ
 {
     ULONG msgid;
-    HANDLE hDevice;
+    ULONG64 hDevice;
     UINT uiCommand;
     BOOLEAN unicode;
     BOOLEAN hasData;

@@ -3,6 +3,64 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [0.5.4b / 5.46.1] - 2021-01-08
+
+### Added
+- added "RunServiceAsSystem=..." allows specific named services to be ran as system
+
+### Changed
+- refactored some code around SCM access
+
+### Fixed
+- fixed a crash issue in SbieSvc.exe introduced with the last build
+- fixed issue with sandman ui update check
+
+### Removed
+- removed "ProtectRpcSs=y" due to incompatybility with new isolation defaults
+
+
+
+## [0.5.4 / 5.46.0] - 2021-01-06
+
+### Added
+- Sandboxie now strips particularly problematic privileges from sandboxed system tokens
+-- with those a process could attempt to bypass the sandbox isolation (thanks Diversenok)
+-- old legacy behaviour can be enabled with "StripSystemPrivileges=n" (absolutely NOT Recommended) 
+- added new isolation options "ClosePrintSpooler=y" and "OpenSmartCard=n" 
+-- those resources are open by default but for a hardened box it’s desired to close them
+- added print spooler filter to prevent printers from being set up outside the sandbox
+-- the filter can be disabled with "OpenPrintSpooler=y"
+- added overwrite prompt when recovering an already existing file
+- added "StartProgram=", "StartService=" and "AutoExec=" options to the SandMan UI
+- added more compatibility templates (thanks isaak654)
+
+### Changed
+- Changed Emulated SCM behaviour, boxed services are no longer by default started as boxed system
+-- use "RunServicesAsSystem=y" to enable the old legacy behaviour
+-- Note: sandboxed services with a system token are still sandboxed and restricted 
+-- However not granting them a system token in the first place removes possible exploit vectors
+-- Note: this option is not compatible with "ProtectRpcSs=y" and takes precedence!
+- Reworked dynamic IPC port handling
+- Improved Resource Monitor status strings
+
+### Fixed
+- fixed a critical issue that allowed to create processes outside the sandbox (thanks Diversenok)
+- fixed issues with dynamic IPC port handling that allowed to bypass IPC isolation
+- fixed issue with IPC tracing
+- fixed CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
+-- this allowed some system options to be changed, to disable filtering use "OpenLsaEndpoint=y"
+- fixed hooking issues SBIE2303 with Chrome, Edge and possibly others
+- fixed failed check for running processes when performing snapshot operations
+- fixed some box option checkboxes were not properly initialized
+- fixed unavailable options are not properly disabled when SandMan is not connected to the driver
+- fixed MSI installer issue, not being able to create "C:\Config.msi" folder on Windows 20H2
+- added missing localization to generic list commands
+- fixed issue with "iconcache_*" when running sandboxed explorer
+- fixed more issues with groups
+
+
+
 ## [0.5.3b / 5.45.2] - 2021-01-02
 
 ### Added
@@ -39,7 +97,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed docs and update URLs to the new sandboxie-plus.com domain
 - greatly improved the setup script (thanks mpheath)
 - "OpenClsid=" and "ClosedClsid=" now support specifying a program or group name
-- by default, when started in portable mode, the sandbox folder will be located in the parent directory of the sandboxie instance
+- by default, when started in portable mode, the sandbox folder will be located in the parent directory of the Sandboxie instance
 
 ### Fixed
 - grouping menu not fully working in the new SandMan UI
@@ -53,7 +111,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### removed
 - removed obsolete "OpenDefaultClsid=n" use "ClosedClsid=" with the apropriate values instead
 - removed suspend/resume menu entry, pooling that state wastes substantial CPU cycles; use task explorer for that functionality
-
 
 
 
@@ -89,7 +146,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed menu issue in SandMan UI
 - fixed issue with stop behaviour page in SandMan UI
 - fixed issue with Plus installer not displaying kmdutil window
-- fixed SandMan UI saving UI settings on windows shutdown
+- fixed SandMan UI saving UI settings on Windows shutdown
 - fixed issue with Plus installer autorun
 - fixed issue with legacy installer not removing all files
 - fixed a driver compatibility issue with Windows 20H1 and later
@@ -133,7 +190,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- when internet access is blocked it now can be exempted in real time by the user
 - added missing file recovery and auto/quick recovery functionality
 - added silent MSG_1399 boxed process start notification to keep track of short lived boxed processes
-- added ability to prevent system wide process starts, sandboxie can now instead of just alerting also block processed on the alert list
+- added ability to prevent system wide process starts, Sandboxie can now instead of just alerting also block processed on the alert list
 -- set "StartRunAlertDenied=y" to enable process blocking
 - the process start alert/block mechanism can now also handle folders use "AlertFolder=..." 
 - added ability to merge snapshots
@@ -143,7 +200,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added more run commands and custom run commands per sandbox
 -- the box settings users can now specify programs to be available from the box run menu
 -- also processes can be pinned to that list from the presets menu
-- added more windows 10 specific template presets
+- added more Windows 10 specific template presets
 - added ability to create desktop shortcuts to sandboxed items
 - added icons to box option tabs
 - added box grouping
@@ -165,7 +222,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed an issue that would allow a malicious application to bypass the internet blockade
 - fixed issue when logging messages from a non-sandboxed process, added process_id parameter to API_LOG_MESSAGE_ARGS
 - fixed issues with localization
-- fixed issue using file recovery in legacy ui SbieCtrl.exe when "SeparateUserFolders=n" is set
+- fixed issue using file recovery in legacy UI SbieCtrl.exe when "SeparateUserFolders=n" is set
 - when a program is blocked from starting due to restrictions no redundant messages are issues anymore
 - fixed UI not properly displaying async errors
 - fixed issues when a snapshot operation failed
@@ -178,7 +235,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.4.5 / 5.44.1] - 2020-11-16
 
 ### Added
-- added "Terminate all processes" and "disable forced programs" commands to tray menu in SandMan ui
+- added "Terminate all processes" and "disable forced programs" commands to tray menu in SandMan UI
 - program start restrictions settings now can be switched between a white list and a black list
 -- programs can be terminated and blacklisted from the context menu
 - added additional process context menu options, lingering and leader process can be now set from menu
@@ -186,7 +243,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added text filter to template view
 - added new compatibility templates:
 -- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis
--- FireFox Quantum, access to windows FontCachePort for compatibility with Windows 7
+-- Firefox Quantum, access to Windows’ FontCachePort for compatibility with Windows 7
 - added experimental debug option "OriginalToken=y" which lets sandboxed processes retain their original unrestricted token
 -- This option is comparable with "OpenToken=y" and is intended only for testing and debugging, it BREAKS most SECURITY guarantees (!)
 - added debug option "NoSandboxieDesktop=y" it disables the desktop proxy mechanism
@@ -200,15 +257,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- use ini option DebugTrace=y to enable
 
 ### Changed
-- AppUserModelID sting no longer contains sandboxie version string
-- now by default sbie's application manifest hack is disabled, as it causes problems with version checking on windows 10
+- AppUserModelID sting no longer contains Sandboxie version string
+- now by default Sbie's application manifest hack is disabled, as it causes problems with version checking on Windows 10
 -- to enable old behaviour add "PreferExternalManifest=y" to the global or the box specific ini section
 - the resource log mechanism can now handle multiple strings to reduce on string copy operations
 
 ### Fixed
 - fixed issue with disabling some restriction settings failed
 - fixed disabling of internet block from the presets menu sometimes failed
-- the software compatibility list in the sandman UI now shows the proper template names
+- the software compatibility list in the SandMan UI now shows the proper template names
 - fixed use of freed memory in the driver
 - replaced swprintf with snwprintf to prevent potential buffer overflow in SbieDll.dll
 - fixed bad list performance with resource log and api log in SandMan UI
@@ -226,14 +283,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - introduced a new driverless method to resolve wow64 ntdll base address
 
 ### removed
-- removed support for windows vista x64
+- removed support for Windows Vista x64
 
 
 
 ## [0.4.3 / 5.43.7] - 2020-11-03
 
 ### Added
-- added disable forced programs menu command to the sandman ui
+- added disable forced programs menu command to the SandMan UI
 
 ### Fixed
 - fixed file rename bug introduced with an earlier driver verifier fix
@@ -251,13 +308,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed thread handle leak in SbieSvc and other components
 - msedge.exe is now categorized as a chromium derivate
-- fixed chrome 86+ compatibility bug with chrome's own sandbox
+- fixed Chrome 86+ compatibility bug with Chrome's own sandbox
 
 
 ## [0.4.1 / 5.43.5] - 2020-09-12
 
 ### Added
-- added core version compatibility check to sandman UI
+- added core version compatibility check to SandMan UI
 - added shell integration options to SbiePlus
 
 ### Changed
@@ -270,8 +327,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed wrong path separators when adding new forced folders
 - fixed directory listing bug introduced in 5.43
 - fixed issues with settings window when not being connected to driver
-- fixed issue when starting sandman ui as admin
-- fixed auto content delete not working with sandman ui
+- fixed issue when starting SandMan UI as admin
+- fixed auto content delete not working with SandMan UI
 
 
 
@@ -279,7 +336,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added a proper custom installer to the Plus release
-- added sandbox snapshot functionality to sbie core
+- added sandbox snapshot functionality to Sbie core
 -- filesystem is saved incrementally, the snapshots built upon each other
 -- each snapshot gets a full copy of the box registry for now
 -- each snapshot can have multiple children snapshots
@@ -287,7 +344,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added setting to change border width
 - added snapshot manager UI to SandMan
 - added template to enable authentication with an Yubikey or comparable 2FA device
-- added ui for program alert
+- added UI for program alert
 - added software compatibility options to the UI
 
 ### Changed
@@ -320,7 +377,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated homepage links
 
 ### Fixed
-- fixed ini issue with sandman.exe when renaming sandboxes
+- fixed ini issue with SandMan.exe when renaming sandboxes
 - fixed ini auto reload bug introduced in the last build
 - fixed issue when hooking delayed loaded libraries
 
@@ -331,8 +388,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - API_QUERY_PROCESS_INFO can be now used to get the original process token of sandboxed processes
 -- Note: this capability is used by TaskExplorer to allow inspecting sandbox internal tokens
-- Added option "KeepTokenIntegrity=y" to make the sbie token keep its initial integrity level (debug option)
--- Note: Do NOT USE Debug Options if you don't know their security implications (!) 
+- Added option "KeepTokenIntegrity=y" to make the Sbie token keep its initial integrity level (debug option)
+-- Note: Do NOT USE Debug Options if you don't know their security implications (!)
 - Added process id to log messages very useful for debugging
 - Added finder to resource log
 - Added option to hide host processes "HideHostProcess=[name]"
@@ -341,16 +398,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Built In Clsid whitelist can now be disabled with "OpenDefaultClsid=n"
 - Processes can be now terminated with the del key, and require a confirmation
 - Added sandboxed window border display to SandMan.exe
-- Added notification for sbie log messages
+- Added notification for Sbie log messages
 - Added Sandbox Presets sub menu allowing to quickly change some settings
--- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus 
+-- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus
 -- And other: Drop admin rights; Block/Allow internet access; Block/Allow access to files on the network
 - Added more info to the sandbox status column
 - Added path column to SbieModel
 - Added info tooltips in SbieView
 
 ### Changed
-- Reworked ApiLog, added pid and pid filter
+- Reworked ApiLog, added PID and PID filter
 - Auto config reload on in change is now delayed by 500ms to not reload multiple times on incremental changes
 - Sandbox names now replace "_" with " " for display allowing to use names that are made of separated words
 
@@ -391,7 +448,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added progress window for async operations that take time
 - added DPI awareness
 - the driver file is now obfuscated to avoid false positives
-- additional debug options to sandboxie.ini OpenToken=y that combines UnrestrictedToken=y and UnfilteredToken=y
+- additional debug options to Sandboxie.ini OpenToken=y that combines UnrestrictedToken=y and UnfilteredToken=y
 -- Note: using these options weakens the sandboxing, they are intended for debugging and may be used for better application virtualization later
 
 ### Changed
@@ -401,7 +458,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - IniWatcher did not work in portable mode
 - service path fix broke other services, now properly fixed, maybe
-- found workaround for the msi installer issue
+- found workaround for the MSI installer issue
 
 
 
@@ -409,12 +466,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - IniWatcher, no more clicking reload, the ini is now reloaded automatically every time it changes
-- Added Maintenance menu to the Sandbox menu, allowing to install/uninstall and start/stop sandboxie driver, service
-- SandMan.exe now is packed with Sbie files and when no sbie is installed acts as a portable installation
+- Added Maintenance menu to the Sandbox menu, allowing to install/uninstall and start/stop Sandboxie driver, service
+- SandMan.exe now is packed with Sbie files and when no Sbie is installed acts as a portable installation
 - Added option to clean up logs
 
 ### Changed
-- sbie driver now first checks the home path for the sbie ini before checking SystemRoot
+- Sbie driver now first checks the home path for the Sbie ini before checking SystemRoot
 
 ### Fixed
 - Fixed a resource leak when running sandboxed

@@ -8,31 +8,13 @@
     <ClCompile Include="conf_user.c" />
     <ClCompile Include="dll.c" />
     <ClCompile Include="driver.c" />
-    <ClCompile Include="file.c" />
-    <ClCompile Include="file_flt.c" />
-    <ClCompile Include="file_xlat.c" />
     <ClCompile Include="gui.c" />
     <ClCompile Include="includes.c" />
-    <ClCompile Include="ipc.c" />
-    <ClCompile Include="ipc_port.c" />
-    <ClCompile Include="ipc_spl.c" />
-    <ClCompile Include="key.c" />
     <ClCompile Include="log.c" />
     <ClCompile Include="mem.c" />
     <ClCompile Include="obj.c" />
-    <ClCompile Include="process.c" />
-    <ClCompile Include="process_api.c" />
-    <ClCompile Include="process_force.c" />
-    <ClCompile Include="process_low.c" />
-    <ClCompile Include="process_util.c" />
     <ClCompile Include="log_buff.c" />
     <ClCompile Include="session.c" />
-    <ClCompile Include="syscall.c" />
-    <ClCompile Include="syscall_32.c" />
-    <ClCompile Include="syscall_64.c" />
-    <ClCompile Include="syscall_open.c" />
-    <ClCompile Include="thread.c" />
-    <ClCompile Include="token.c" />
     <ClCompile Include="util.c" />
     <ClCompile Include="file_xp.c">
       <Filter>xp</Filter>
@@ -55,7 +37,6 @@
     <ClCompile Include="hook.c">
       <Filter>hook</Filter>
     </ClCompile>
-    <ClCompile Include="thread_token.c" />
     <ClCompile Include="process_hook.c">
       <Filter>hook</Filter>
     </ClCompile>
@@ -71,10 +52,71 @@
     <ClCompile Include="..\..\common\list.c">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="key_flt.c" />
+    <ClCompile Include="ipc.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc_port.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc_spl.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc_lsa.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_flt.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_xlat.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="key.c">
+      <Filter>key</Filter>
+    </ClCompile>
+    <ClCompile Include="key_flt.c">
+      <Filter>key</Filter>
+    </ClCompile>
+    <ClCompile Include="process.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="process_api.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="process_force.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="process_low.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="process_util.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="thread.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_token.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="token.c">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="syscall.c">
+      <Filter>syscall</Filter>
+    </ClCompile>
+    <ClCompile Include="syscall_32.c">
+      <Filter>syscall</Filter>
+    </ClCompile>
+    <ClCompile Include="syscall_64.c">
+      <Filter>syscall</Filter>
+    </ClCompile>
+    <ClCompile Include="syscall_open.c">
+      <Filter>syscall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="alpc.h" />
     <ClInclude Include="api.h" />
     <ClInclude Include="api_defs.h" />
     <ClInclude Include="api_flags.h" />
@@ -82,21 +124,14 @@
     <ClInclude Include="conf.h" />
     <ClInclude Include="dll.h" />
     <ClInclude Include="driver.h" />
-    <ClInclude Include="file.h" />
     <ClInclude Include="gui.h" />
-    <ClInclude Include="ipc.h" />
-    <ClInclude Include="key.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="my_fltkernel.h" />
     <ClInclude Include="my_winnt.h" />
     <ClInclude Include="obj.h" />
-    <ClInclude Include="process.h" />
     <ClInclude Include="log_buff.h" />
     <ClInclude Include="session.h" />
-    <ClInclude Include="syscall.h" />
-    <ClInclude Include="thread.h" />
-    <ClInclude Include="token.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="hook.h">
       <Filter>hook</Filter>
@@ -112,6 +147,30 @@
     </ClInclude>
     <ClInclude Include="..\..\common\my_version.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="alpc.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="key.h">
+      <Filter>key</Filter>
+    </ClInclude>
+    <ClInclude Include="process.h">
+      <Filter>process</Filter>
+    </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>process</Filter>
+    </ClInclude>
+    <ClInclude Include="token.h">
+      <Filter>process</Filter>
+    </ClInclude>
+    <ClInclude Include="syscall.h">
+      <Filter>syscall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +189,21 @@
     </Filter>
     <Filter Include="common">
       <UniqueIdentifier>{73d2a54c-a013-4184-b5e6-74b565ecc048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ipc">
+      <UniqueIdentifier>{0e28321b-be74-4113-b88c-d6492e618788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{dbb808f3-ff22-4a4d-b061-e34a4b28b75a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="key">
+      <UniqueIdentifier>{2a86be4e-fef5-4ad8-be88-39efde9761af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="process">
+      <UniqueIdentifier>{754e9503-8dd2-4b40-848c-590343d2ac39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="syscall">
+      <UniqueIdentifier>{0da98f76-24ea-4a59-9913-2bbeb0ea5e1e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

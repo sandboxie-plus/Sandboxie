@@ -389,11 +389,17 @@ void CSbieView::OnGroupAction()
 			if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
 			{
 				QString Group = m_pSbieModel->GetID(ModelIndex).toString();
-				m_Groups.remove(Group);
-				
+
+				QStringList Items = m_Groups.take(Group); // remove groupe
+		
 				// remove from parents
-				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
-					I.value().removeAll(Group);
+				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+					if (I.value().removeOne(Group)) {
+						// move items to grand parent
+						I.value().append(Items);
+						break;
+					}
+				}
 			}
 		}
 

@@ -249,7 +249,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkRestrictServices, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkProtectRpcSs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -461,8 +460,6 @@ void COptionsWindow::LoadConfig()
 
 		ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 		ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
-		ui.chkProtectRpcSs->setEnabled(!ui.chkRestrictServices->isChecked());
-		ui.chkProtectRpcSs->setChecked(ui.chkProtectRpcSs->isEnabled() && m_pBox->GetBool("ProtectRpcSs", false));
 		ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 
 		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
@@ -629,8 +626,6 @@ void COptionsWindow::SaveConfig()
 
 		WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
 		WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
-		if(ui.chkProtectRpcSs->isEnabled())
-			WriteAdvancedCheck(ui.chkProtectRpcSs, "ProtectRpcSs", "y", "");
 		WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 		
 		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
@@ -1865,9 +1860,6 @@ void COptionsWindow::OnDelRecEntry()
 
 void COptionsWindow::OnAdvancedChanged()
 {
-	ui.chkProtectRpcSs->setEnabled(!ui.chkRestrictServices->isChecked());
-	if (!ui.chkProtectRpcSs->isEnabled()) ui.chkProtectRpcSs->setChecked(false);
-
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 

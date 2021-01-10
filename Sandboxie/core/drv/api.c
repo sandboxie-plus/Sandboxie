@@ -1186,11 +1186,13 @@ _FX void Api_CopyStringToUser(
 
 
 //---------------------------------------------------------------------------
-// Ipc_Api_AllowSpoolerPrintToFile
+// Api_ProcessExemptionControl
 //---------------------------------------------------------------------------
 
 _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 {
+    NTSTATUS status = STATUS_SUCCESS;
+    //KIRQL irql;
 	API_PROCESS_EXEMPTION_CONTROL_ARGS *pArgs = (API_PROCESS_EXEMPTION_CONTROL_ARGS *)parms;
 	ULONG *in_flag;
 	ULONG *out_flag;
@@ -1200,10 +1202,6 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 
 	if (pArgs->process_id.val == 0)
 		return STATUS_INVALID_PARAMETER;
-	
-	proc = Process_Find(pArgs->process_id.val, NULL);
-	if (!proc || proc == PROCESS_TERMINATED)
-		return STATUS_NOT_FOUND;
 
 	in_flag = pArgs->set_flag.val;
 	if (in_flag) {
@@ -1218,22 +1216,31 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 	if(!in_flag && !out_flag)
 		return STATUS_INVALID_PARAMETER;
 
-	if (pArgs->action_id.val == 'splr')
-	{
-		if(in_flag)
-			proc->m_boolAllowSpoolerPrintToFile = *in_flag != 0;
-		if (out_flag)
-			*out_flag = proc->m_boolAllowSpoolerPrintToFile;
-	}
-	else if (pArgs->action_id.val == 'inet')
-	{
-		if(in_flag)
-			proc->AllowInternetAccess = *in_flag != 0;
-		if (out_flag)
-			*out_flag = proc->AllowInternetAccess;
-	}
-	else
-		return STATUS_INVALID_INFO_CLASS;
-	
-	return 0;
+    //proc = Process_Find(pArgs->process_id.val, &irql);
+    proc = Process_Find(pArgs->process_id.val, NULL);
+    if (proc && (proc != PROCESS_TERMINATED))
+    {
+        if (pArgs->action_id.val == 'splr')
+        {
+            if (in_flag)
+                proc->ipc_allowSpoolerPrintToFile = *in_flag != 0;
+            if (out_flag)
+                *out_flag = proc->ipc_allowSpoolerPrintToFile;
+        }
+        else if (pArgs->action_id.val == 'inet')
+        {
+            if (in_flag)
+                proc->AllowInternetAccess = *in_flag != 0;
+            if (out_flag)
+                *out_flag = proc->AllowInternetAccess;
+        }
+        else
+            status = STATUS_INVALID_INFO_CLASS;
+    }
+    else
+        status = STATUS_NOT_FOUND;
+    //ExReleaseResourceLite(Process_ListLock);
+    //KeLowerIrql(irql);
+
+	return status;
 }

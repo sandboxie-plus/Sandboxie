@@ -419,8 +419,6 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
     if (monflag) {
 
-        if (! monflag)
-            monflag = MONITOR_IPC;
         if (PATH_IS_CLOSED(mp_flags))
             monflag |= MONITOR_DENY;
         else if (PATH_IS_OPEN(mp_flags))

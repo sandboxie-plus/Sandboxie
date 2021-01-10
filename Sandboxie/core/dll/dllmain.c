@@ -545,6 +545,7 @@ _FX void Dll_SelectImageType(void)
         SANDBOXIE L"BITS.exe",      (WCHAR *)DLL_IMAGE_SANDBOXIE_BITS,
         SBIESVC_EXE,                (WCHAR *)DLL_IMAGE_SANDBOXIE_SBIESVC,
 
+        L"msiexec.exe",             (WCHAR *)DLL_IMAGE_MSI_INSTALLER,
         L"TrustedInstaller.exe",    (WCHAR *)DLL_IMAGE_TRUSTED_INSTALLER,
         L"TiWorker.exe",            (WCHAR *)DLL_IMAGE_TRUSTED_INSTALLER,
         L"wuauclt.exe",             (WCHAR *)DLL_IMAGE_WUAUCLT,

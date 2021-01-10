@@ -825,9 +825,9 @@ _FX BOOL SbieDll_StartBoxedService(const WCHAR *ServiceName, BOOLEAN WithAdd)
     SERVICE_QUERY_RPL *rpl;
     ULONG retries, error;
 
-	//WCHAR text[130];
-	//Sbie_snwprintf(text, 130, L"StartBoxedService; name: '%s'", ServiceName); 
-    //SbieApi_MonitorPut(MONITOR_OTHER, text);
+	WCHAR text[130];
+	Sbie_snwprintf(text, 130, L"StartBoxedService; name: '%s'", ServiceName); 
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
     // when invoked from SandboxieRpcSs to handle StartProcess,
@@ -1096,9 +1096,9 @@ _FX BOOL Scm_StartServiceW(
     if (! ServiceName)
         return FALSE;
 
-    //WCHAR text[130];
-	//Sbie_snwprintf(text, 130, L"StartService: %s", ServiceName);
-    //SbieApi_MonitorPut(MONITOR_OTHER, text);
+    WCHAR text[130];
+	Sbie_snwprintf(text, 130, L"StartService: %s", ServiceName);
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     if (Scm_IsBoxedService(ServiceName))
         return SbieDll_StartBoxedService(ServiceName, FALSE);
@@ -1263,9 +1263,9 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         }
     }
 
-    //WCHAR text[130];
-	//Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; name: '%s'", ServiceName);
-    //SbieApi_MonitorPut(MONITOR_OTHER, text);
+    WCHAR text[130];
+	Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; name: '%s'", ServiceName);
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
     // open the key for the service

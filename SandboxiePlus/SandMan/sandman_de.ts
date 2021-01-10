@@ -2030,7 +2030,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="707"/>
         <source>Stop Behaviour</source>
-        <translation>Stopp Verhalten</translation>
+        <translation>Stoppverhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="715"/>
@@ -2103,7 +2103,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>Verbelibende Programme werden automatisch beendet, wenn diese noch laufen, nachdem alle anderen Prozesse bereits beendet wurden.
+        <translation>Verweilende Programme werden automatisch beendet, wenn diese noch laufen, nachdem alle anderen Prozesse bereits beendet wurden.
 
 Falls primäre Programme/Prozessse definiert wurden, werden alle anderen als verweilende Prozesse behandelt.</translation>
     </message>

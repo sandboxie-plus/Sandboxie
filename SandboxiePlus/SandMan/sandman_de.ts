@@ -962,8 +962,8 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="1295"/>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingereichten werden.
-Bitte die neute Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts einrichten.</translation>
+        <translation>Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingerichtet werden.
+Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts in der Sandboxie.ini einrichten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1383"/>

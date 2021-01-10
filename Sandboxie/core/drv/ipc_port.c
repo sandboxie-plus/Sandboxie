@@ -131,11 +131,14 @@ static NTSTATUS Ipc_CheckPortRequest_WinApi(
 static NTSTATUS Ipc_CheckPortRequest_Lsa(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
+static NTSTATUS Ipc_CheckPortRequest_LsaEP(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg);
+
 static NTSTATUS Ipc_CheckPortRequest_PowerManagement(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
-//static NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
-//  PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
+static NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
+    PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
 
 
@@ -238,9 +241,11 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_Lsa(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
+        status = Ipc_CheckPortRequest_LsaEP(proc, Name, msg);
+    if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_PowerManagement(proc, Name, msg);
-    //if (status == STATUS_BAD_INITIAL_PC)
-        //status = Ipc_CheckPortRequest_SpoolerPort(proc, Name, msg);
+    if (status == STATUS_BAD_INITIAL_PC)
+        status = Ipc_CheckPortRequest_SpoolerPort(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
         status = STATUS_SUCCESS;
 
@@ -270,13 +275,17 @@ finish:
 
 // This routine is currently not used.  We chose to block spooler CreateFile in the minifilter instead.  But I (Curt) am keeping this code
 // around because it demonstrates how to examine & filter RPC requests going to the spooler.
-/*
+
+// todo: move this code to ipc_spl.c
+
+BOOLEAN Ipc_Filter_Spooler_Msg(UCHAR uMsg);
+
 _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg)
 {
     NTSTATUS status;
 
-    if (! proc->ipc_block_password)
+    if (proc->ipc_openPrintSpooler)        // see if we are not filtering spooler requests
         return STATUS_BAD_INITIAL_PC;
 
     //
@@ -284,13 +293,33 @@ _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
     //
 
     if (Driver_OsVersion >= DRIVER_WINDOWS_81) {
+
         if (Name->Name.Length < 13 * sizeof(WCHAR))
             return STATUS_BAD_INITIAL_PC;
 
-        if (_wcsicmp(Name->Name.Buffer + 13, Ipc_SpoolerPort) != 0)
+        BOOLEAN is_spooler = FALSE;
+
+        if (Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock)
+        {
+            KeEnterCriticalRegion();
+            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE);
+
+            if (_wcsicmp(Name->Name.Buffer, Ipc_Dynamic_Ports[SPOOLER_PORT].wstrPortName) == 0)
+            {
+                // dynamic version of RPC ports, see also ipc_spl.c
+                // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
+                is_spooler = TRUE;
+            }
+
+            ExReleaseResourceLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock);
+            KeLeaveCriticalRegion();
+        }
+
+        if(!is_spooler)
             return STATUS_BAD_INITIAL_PC;
     }
     else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+
         if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\spoolss") != 0)
             return STATUS_BAD_INITIAL_PC;
 
@@ -300,9 +329,6 @@ _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
     //
     // examine message
     //
-
-    if (proc->m_boolAllowSpoolerPrintToFile)        // see if we are allowing print to file
-        return STATUS_BAD_INITIAL_PC;
 
     status = STATUS_SUCCESS;
 
@@ -322,19 +348,32 @@ _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
 
             ProbeForRead(ptr, len, sizeof(WCHAR));
 
-            if (ptr[20] == 17) {        // RpcStartDocPrinter = Opnum 17
-                status = STATUS_ACCESS_DENIED;
-                //for (i = 20; i < len - 12; i++)
-                //{
-                //  rc = memcmp((void*)&(ptr[i]), "\4\0\0\0\0\0\0\0\4\0\0\0\0", 12);    // search for marshaled "RAW" field length bytes
-                //  if (rc == 0)
-                //  {
-                //      rc = _wcsnicmp((void*)&(ptr[i + 12]), L"raw", 3);       // search for case insensitive "RAW"
-                //      if (rc == 0)
-                //          status = STATUS_ACCESS_DENIED;
-                //  }
-                //}
+            /*if (ptr[20] == 17) {        // RpcStartDocPrinter = Opnum 17
+
+                if (!proc->ipc_allowSpoolerPrintToFile)
+                {
+                    status = STATUS_ACCESS_DENIED;
+                    //for (i = 20; i < len - 12; i++)
+                    //{
+                    //  rc = memcmp((void*)&(ptr[i]), "\4\0\0\0\0\0\0\0\4\0\0\0\0", 12);    // search for marshaled "RAW" field length bytes
+                    //  if (rc == 0)
+                    //  {
+                    //      rc = _wcsnicmp((void*)&(ptr[i + 12]), L"raw", 3);       // search for case insensitive "RAW"
+                    //      if (rc == 0)
+                    //          status = STATUS_ACCESS_DENIED;
+                    //  }
+                    //}
+                }
+
+                if (status == STATUS_ACCESS_DENIED)
+                    Log_MsgP0(MSG_1319, proc->pid);
             }
+            else*/ 
+
+            if (Ipc_Filter_Spooler_Msg(ptr[20]))
+                status = STATUS_ACCESS_DENIED;
+
+            //DbgPrint("Spooler IPC Port message ID: %d\n", (int)ptr[20]);
 
         }
 
@@ -342,12 +381,8 @@ _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
         status = GetExceptionCode();
     }
 
-    if (status == STATUS_ACCESS_DENIED)
-        Log_MsgP0(MSG_1319, proc->pid);
-
     return status;
 }
-*/
 
 //---------------------------------------------------------------------------
 // Ipc_DisplayPowerMsg
@@ -658,7 +693,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_Lsa(
                 --len;
             }
 
-        } else {
+        } else { // xp support
 
             //
             // prior to Windows Vista, we have a 'call package' api
@@ -694,6 +729,65 @@ _FX NTSTATUS Ipc_CheckPortRequest_Lsa(
 
     if (status == STATUS_ACCESS_DENIED)
 		Log_Msg_Process(MSG_PASSWORD_CHANGE_DENIED, NULL, NULL, -1, proc->pid);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_CheckPortRequest_LsaEP
+//---------------------------------------------------------------------------
+
+// todo: move the lsa code to code to ipc_lsa.c
+
+BOOLEAN Ipc_Filter_Lsa_Ep_Msg(UCHAR uMsg);
+
+_FX NTSTATUS Ipc_CheckPortRequest_LsaEP(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
+{
+    NTSTATUS status;
+
+    if (proc->ipc_open_lsa_endpoint)
+        return STATUS_BAD_INITIAL_PC;
+
+    if (Name->Name.Length == 28 * sizeof(WCHAR)) {
+
+        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\LSARPC_ENDPOINT") != 0)
+            return STATUS_BAD_INITIAL_PC;
+
+    }
+    else
+        return STATUS_BAD_INITIAL_PC;
+
+    //
+    // examine message
+    //
+
+    status = STATUS_SUCCESS;
+
+    __try {
+
+        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
+
+        if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+            ULONG  len = msg->u1.s1.DataLength;
+            UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
+            int i = 0;
+            int rc = -2;
+
+            ProbeForRead(ptr, len, sizeof(WCHAR));
+
+            if (Ipc_Filter_Lsa_Ep_Msg(ptr[20]))
+                status = STATUS_ACCESS_DENIED;
+
+            //DbgPrint("\\RPC Control\\LSARPC_ENDPOINT message ID: %d\n", (int)ptr[20]);
+        }
+
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
 
     return status;
 }

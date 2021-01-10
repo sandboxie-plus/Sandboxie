@@ -380,6 +380,9 @@ QVariant CSbieModel::GetID(const QModelIndex &index) const
 	SSandBoxNode* pNode = static_cast<SSandBoxNode*>(index.internalPointer());
 	ASSERT(pNode);
 
+	if (!pNode->pProcess && !pNode->pBox)
+		return CSbieModel__RemoveGroupMark(pNode->ID.toString());
+
 	return pNode->ID;
 }
 

@@ -1369,9 +1369,9 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
     }
 
     {
-        WCHAR buf[96];
-        NTSTATUS status = SbieApi_QueryConfAsIs(NULL, L"ClsidTrace", 0, buf, 90 * sizeof(WCHAR));
-        if (buf[0] == L'*')
+        // If there are any ClsidTrace options set, then output this debug string
+        WCHAR wsTraceOptions[4];
+        if (SbieApi_QueryConf(NULL, L"ClsidTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
             Com_TraceFlag = TRUE;
     }
 

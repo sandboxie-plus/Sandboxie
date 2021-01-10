@@ -3154,8 +3154,8 @@ ReparseLoop:
 
                         ptr = wcsstr(TempPath,
                                 L"\\microsoft\\windows\\explorer\\");
-                        if (ptr && (    wcscmp(ptr + 28, L"thumbcache_") == 0
-                                    ||  wcscmp(ptr + 28, L"iconcache_") == 0)) {
+                        if (ptr && (    wcsncmp(ptr + 28, L"thumbcache_", 11) == 0
+                                    ||  wcsncmp(ptr + 28, L"iconcache_", 10) == 0)) {
 
                             WithContents = FALSE;
                         }
@@ -4840,6 +4840,22 @@ _FX NTSTATUS File_NtQueryFullAttributesFile(
     FILE_NETWORK_OPEN_INFORMATION *FileInformation)
 {
     NTSTATUS status = File_NtQueryFullAttributesFileImpl(ObjectAttributes, FileInformation);
+
+    if (status == STATUS_OBJECT_NAME_NOT_FOUND && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER
+        && ObjectAttributes != NULL && ObjectAttributes->ObjectName != NULL 
+        // ObjectAttributes->ObjectName == "\\??\\C:\\Config.Msi" // or any other system drive
+        && ObjectAttributes->ObjectName->Buffer && ObjectAttributes->ObjectName->Length == 34
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer + 6, L"\\Config.Msi") == 0
+        ) {
+
+        //
+        // MSI bug: this must not fail, hence we create the directory and retry
+        //
+
+        CreateDirectory(ObjectAttributes->ObjectName->Buffer, NULL);
+
+        status = File_NtQueryFullAttributesFileImpl(ObjectAttributes, FileInformation);
+    }
 
     status = StopTailCallOptimization(status);
 

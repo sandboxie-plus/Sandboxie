@@ -309,6 +309,7 @@
     </ClCompile>
     <ClCompile Include="includes.c" />
     <ClCompile Include="ipc.c" />
+    <ClCompile Include="ipc_lsa.c" />
     <ClCompile Include="ipc_port.c" />
     <ClCompile Include="ipc_spl.c" />
     <ClCompile Include="key.c" />

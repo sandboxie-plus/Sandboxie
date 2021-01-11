@@ -1415,7 +1415,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Models/SbieModel.cpp" line="418"/>
         <source>Path / Command Line</source>
-        <translation>Kommandozeile</translation>
+        <translation>Pfad / Kommandozeile</translation>
     </message>
     <message>
         <source>Path</source>

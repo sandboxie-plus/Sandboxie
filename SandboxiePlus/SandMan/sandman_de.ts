@@ -202,15 +202,15 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1894"/>
         <source>Please enter an auto exec command</source>
-        <translation>Bitte geben Sie einen Autoausführen-Kommando ein</translation>
+        <translation>Bitte geben Sie einen Autoausführen-Kommndo ein</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2095"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation>Diese Vorlage ist global aktiv, um sie zu konfigurieren müssen die globalen Optionen genutzt werden.</translation>
+        <translation>Diese Vorlage ist global aktiv, um sie zu konfigueren müssen die globalen Optionen genutzt werden.</translation>
     </message>
     <message>
-        <source>Please select group first.</source>
+        <source>Please sellect group first.</source>
         <translation type="vanished">Bitte zuvor eine Gruppe auswählen.</translation>
     </message>
     <message>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>This template is enabled globally to configure it use the global options.</source>
-        <translation type="vanished">Diese Vorlage ist global aktiv, um sie zu konfigurieren müssen die globalen Optionen genutzt werden.</translation>
+        <translation type="vanished">Diese Vorlage ist global aktiv, um sie zu konfigueren müssen die globalen Optionen genutzt werden.</translation>
     </message>
 </context>
 <context>
@@ -305,7 +305,7 @@
         <location filename="Windows/PopUpWindow.h" line="47"/>
         <source>Visit %1 for a detailed explanation.</source>
         <oldsource>Visit %1 for a detailes explenation.</oldsource>
-        <translation>%1 besuchen für eine detaillierte Erklärung.</translation>
+        <translation>%1 besuchen für eine detailierte Erklärung.</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="54"/>
@@ -458,7 +458,7 @@
         <location filename="Windows/PopUpWindow.cpp" line="127"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translatorcomment>Kept &apos;print spooler&apos; in breakets to allow easier online lookup</translatorcomment>
-        <translation>Möchten Sie der Druckerwarteschlange (print spooler) erlauben außerhalb der Sandbox für %1 (%2) zu schreiben?</translation>
+        <translation>Möchten Sie der Druckewarteschlange (print spooler) erlauben außerhalb der Sandbox für %1 (%2) zu schreiben?</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="220"/>
@@ -611,7 +611,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SbiePlusAPI.cpp" line="110"/>
         <source>Net Share</source>
         <translatorcomment>Kept original for lack of good German wording</translatorcomment>
-        <translation>Netzwerkfreigabe (Net share)</translation>
+        <translation>Netzwerfreigabe (Net share)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="112"/>
@@ -677,7 +677,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="216"/>
         <location filename="SandMan.cpp" line="345"/>
         <source>Disable Forced Programs</source>
-        <translation>Deaktiviere erzwungene Programme</translation>
+        <translation>Deaktivere erzwungene Programme</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="341"/>
@@ -827,17 +827,18 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="392"/>
         <source>Edit ini file</source>
-        <translation>.ini-Datei bearbeiten</translation>
+        <translatorcomment>Freedom to ini being all caps</translatorcomment>
+        <translation>INI-Datei bearbeiten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="393"/>
         <source>Reload ini file</source>
-        <translation>.ini-Datei neu laden</translation>
+        <translation>INI-Datei neuladen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="395"/>
         <source>Resource Logging</source>
-        <translation>Ressourcenprotokollierung</translation>
+        <translation>Resourcenprotokollierung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="398"/>
@@ -893,7 +894,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="500"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus wurde im portablen Modus betrieben, nun müssen die erzeugten Dienste bereinigt werden, was Adminrechte benötigt.</translation>
+        <translation>Sandboxie-Plus wurde im portablen Modus betrieben, nun müssen die erzeugten Dienste bereinigt werden, was administrative Rechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="543"/>
@@ -940,7 +941,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1002"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus wurde im portablen Modus gestartet, nun müssen die benötigten Dienste erzeugt werden, was Adminrechte benötigt.</translation>
+        <translation>Sandboxie-Plus wurde im portablen Modus getartet, nun müssen die benötigten Dienste erzeugt werden, was administrative Rechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1201"/>
@@ -961,8 +962,8 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="1295"/>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingerichtet werden.
-Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts in der Sandboxie.ini einrichten.</translation>
+        <translation>Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingereichten werden.
+Bitte die neute Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts einrichten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1383"/>
@@ -972,11 +973,11 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1755"/>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Sandboxie-Plus ist eine OpenSource-Fortsetzung von Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Besuche &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; für weitere Informationen.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons von &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
+        <translation>p&gt;Sandboxie-Plus ist eine OpenSource-Fortsetzung von Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Besuche &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; für weitere Informationen.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons von &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Admin rights required.</source>
-        <translation type="vanished">Adminrechte benötigt.</translation>
+        <translation type="vanished">Administrativerechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1386"/>
@@ -1003,7 +1004,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1391"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
-        <translation>Fehler beim Kopieren der Konfiguration von Sandbox %1: %2</translation>
+        <translation>Fehler beim Kopieren der Konfiguartion von Sandbox %1: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1392"/>
@@ -1016,7 +1017,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <translation>Fehler beim Löschen der Sandbox %1: %2</translation>
     </message>
     <message>
-        <source>The sandbox name can not be longer than 32 characters.</source>
+        <source>The sandbox name can not be longer than 32 charakters.</source>
         <translation type="vanished">Der Name der Sandbox darf nicht länger als 32 Zeichen sein.</translation>
     </message>
     <message>
@@ -1062,7 +1063,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1403"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>Der Schnappschuss kann nicht erstellt werden, während Prozesse in dieser Box laufen.</translation>
+        <translation>Dieser Schnappschussvorgang kann nicht durchgeführt werden, während Prozesse in dieser Box laufen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1404"/>
@@ -1116,7 +1117,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1603"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation>Diese Ankündigung zukünftig nicht mehr zeigen.</translation>
+        <translation>Diese Ankündigung zukünfitg nicht mehr zeigen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1641"/>
@@ -1131,11 +1132,11 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1728"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Neue Version von Sandboxie-Plus wurde heruntergeladen zu:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Neue Verion von Sandboxie-Plus wurde heruntergeladen zu:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services, this will prompt for administrative privileges.</source>
-        <translation type="vanished">Sandboxie-Plus wurde im portablen Modus betrieben, nun müssen die erzeugten Dienste bereinigt werden, was Adminrechte benötigt.</translation>
+        <translation type="vanished">Sandboxie-Plus wurde im portablen Modus betrieben, nun müssen die erzeugten Dienste bereinigt werden, was administrative Rechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="501"/>
@@ -1160,7 +1161,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     </message>
     <message>
         <source>Failed to start required sandboxie components</source>
-        <translation type="vanished">Fehlschlag beim Starten der benötigten Sandboxiekomponenten</translation>
+        <translation type="vanished">Fehlschalg beim Starten der benötigten Sandboxiekomponenten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="547"/>
@@ -1195,7 +1196,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="689"/>
         <source>Loaded Config: %1</source>
-        <translation>Geladene Konfiguration: %1</translation>
+        <translation>Geladene Kofiguration: %1</translation>
     </message>
     <message>
         <source>   -   Driver NOT connected</source>
@@ -1225,7 +1226,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="936"/>
         <source>Only Administrators can change the config.</source>
-        <translation>Nur Administratoren können Änderungen an der Konfiguration vornehmen.</translation>
+        <translation>Nur Administratoren können Änderungen n der Kofiguration vornehmen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="946"/>
@@ -1242,8 +1243,8 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <translation type="vanished">Bitte Dauer eingeben, in der erzwungene Programme deaktiviert sind.</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services, this will prompt for administrative privileges.</source>
-        <translation type="vanished">Sandboxie-Plus wurde im portablen Modus gestartet, nun müssen die benötigten Dienste erzeugt werden, was Adminrechte benötigt.</translation>
+        <source>Sandboxie-Plus was started in portable mode and it needs to create nececery services, this will prompt for administrative privileges.</source>
+        <translation type="vanished">Sandboxie-Plus wurde im portablen Modus getartet, nun müssen die benötigten Dienste erzeugt werden, was administrative Rechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1040"/>
@@ -1256,7 +1257,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <translation>Führe Wartungsvorgang aus, bitte warten...</translation>
     </message>
     <message>
-        <source>The changes will be applied automatically as soon as the editor is closed.</source>
+        <source>The changes will be applyed automatically as soon as the editor is closed.</source>
         <translation type="vanished">Die Änderungen werden automatisch angewendet, sobald der Editor geschlossen wird.</translation>
     </message>
     <message>
@@ -1268,7 +1269,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="SandMan.cpp" line="1385"/>
         <source>Administrator rights are required for this operation.</source>
-        <translation>Für diesen Vorgang werden Adminrechte benötigt.</translation>
+        <translation>Für dieen Vorgang werden administrative Rechte benötigt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1387"/>
@@ -1328,7 +1329,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     </message>
     <message>
         <source>Don&apos;t show this announcement in future.</source>
-        <translation type="vanished">Diese Ankündigung zukünftig nicht mehr zeigen.</translation>
+        <translation type="vanished">Diese Ankündigung zukünfitg nicht mehr zeigen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1629"/>
@@ -1346,7 +1347,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <translation>&lt;p&gt;Möchten Sie die &lt;a href=&quot;%1&quot;&gt;Downloadseite&lt;/a&gt; besuchen?&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Ignore this update, notify me about the next one.</source>
+        <source>Ignore this update, notify me anout the next one.</source>
         <translation type="vanished">Dieses Update ignorieren, über das nächste Update benachrichtigen.</translation>
     </message>
     <message>
@@ -1365,7 +1366,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     </message>
     <message>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation. If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Neue Version von Sandboxie-Plus wurde heruntergeladen zu:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Neue Verion von Sandboxie-Plus wurde heruntergeladen zu:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1750"/>
@@ -1374,14 +1375,14 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     </message>
     <message>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of the well known Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation type="vanished">p&gt;Sandboxie-Plus ist eine OpenSource-Fortsetzung von Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; für weitere Informationen.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons von &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">p&gt;Sandboxie-Plus ist eine OpenSource-Fortsetzungde sehr bekannten Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; für weitere Informationen.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons von &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>CSbieAPI</name>
     <message>
         <source>Failed to copy configuration from sandbox %1</source>
-        <translation type="vanished">Fehler beim Kopieren der Konfiguration von Sandbox %1</translation>
+        <translation type="vanished">Fehler beim Kopieren der Konfiguartion von Sandbox %1</translation>
     </message>
 </context>
 <context>
@@ -1414,7 +1415,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Models/SbieModel.cpp" line="418"/>
         <source>Path / Command Line</source>
-        <translation>Pfad / Kommandozeile</translation>
+        <translation>Kommandozeile</translation>
     </message>
     <message>
         <source>Path</source>
@@ -1610,7 +1611,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Views/SbieView.cpp" line="635"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation>Diese Sandbox hat keine Internetbeschränkungen, möchten Sie diese aktivieren?</translation>
+        <translation>Diese Sandbox hat keine Internetschränkungen, möchten Sie diese aktivieren?</translation>
     </message>
     <message>
         <source>Suspend</source>
@@ -1631,7 +1632,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <location filename="Views/SbieView.cpp" line="172"/>
         <source>    Registry root: %1
 </source>
-        <translation>    Registry-Quelle: %1
+        <translation>    Registryquelle: %1
 </translation>
     </message>
     <message>
@@ -1718,13 +1719,13 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="341"/>
         <source>Please enter the new configuration password.</source>
-        <translation>Bitte ein Passwort für die neue Konfiguration eingeben.</translation>
+        <translation>Bitte ein Passwort für die neue Konfguration eingeben.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="345"/>
         <source>Please re-enter the new configuration password.</source>
         <oldsource>Please re enter the new configuration password.</oldsource>
-        <translation>Bitte das neue Konfigurationspasswort wiederholen.</translation>
+        <translation>Bitte das neue Konfiguartionspasswort wiederholen.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="350"/>
@@ -1806,7 +1807,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="60"/>
         <source>Select restriction/isolation template:</source>
-        <translation>Restriktions- oder Isolationsvorlage auswählen:</translation>
+        <translation>Restriktions-/Isolationsvorlage auswählen:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="67"/>
@@ -1876,12 +1877,12 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="110"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>Die Rechte der Administratoren und Hauptbenutzergruppe einschränken</translation>
+        <translation>Die Rechte der Administratoren und Hauptbenuztergruppe einschränken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="127"/>
         <source>Prevent change to network and firewall parameters</source>
-        <translation>Verhindere Änderungen an den Netzwerk- und Firewall-Einstellungen</translation>
+        <translation>Verhindere Änderungen an den Netzwerk- und Firewalleinstellungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="267"/>
@@ -2023,13 +2024,13 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="694"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
         <translation>Programme die hier gelistet sind oder von den angegeben Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="707"/>
         <source>Stop Behaviour</source>
-        <translation>Stopverhalten</translation>
+        <translation>Stopp Verhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="715"/>
@@ -2090,7 +2091,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="450"/>
         <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation>Hier können Sie Programme und/oder Dienste angeben, welche automatisch in der Sandbox gestartet werden, wenn diese aktiviert wird</translation>
+        <translation>Hier können Sie Programme und/oder Dienste angeben, welche automatisch in der Sandbox gestarted werden, wenn diese aktiviert wird</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="537"/>
@@ -2102,9 +2103,9 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>Verweilende Programme werden automatisch beendet, wenn diese noch laufen, nachdem alle anderen Prozesse bereits beendet wurden.
+        <translation>Verbelibende Programme werden automatisch beendet, wenn diese noch laufen, nachdem alle anderen Prozesse bereits beendet wurden.
 
-Falls primäre Programme/Prozesse definiert wurden, werden alle anderen als verweilende Prozesse behandelt.</translation>
+Falls primäre Programme/Prozessse definiert wurden, werden alle anderen als verweilende Prozesse behandelt.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="788"/>
@@ -2164,7 +2165,7 @@ Falls primäre Programme/Prozesse definiert wurden, werden alle anderen als verw
     <message>
         <location filename="Forms/OptionsWindow.ui" line="961"/>
         <source>Resource Access</source>
-        <translation>Ressourcenzugriff</translation>
+        <translation>Resourcenzugriff</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="978"/>
@@ -2218,7 +2219,7 @@ Falls primäre Programme/Prozesse definiert wurden, werden alle anderen als verw
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
         <translatorcomment>Translated close to what is written in the source</translatorcomment>
-        <translation>Konfigurieren, welche Prozesse auf welche Ressourcen zugreifen können. Doppelklick um einen Eintrag zu bearbeiten.
+        <translation>Konfigurieren, welche Prozesse auf welche Resourcen zugreifen können. Doppelklick um einen Eintrag zu bearbeiten.
 &apos;Direkter&apos; Datei und Schlüsselzugriff trifft nur auf Programmdateien zu, die sich außerhalb der Sandbox befinden.
 Beachte, dass alle Programme schließen...=!&lt;Programm&gt;,... Ausnahmen die gleichen Beschränkungen haben.
 Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Programme zu zu treffen.</translation>
@@ -2245,8 +2246,8 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1207"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation>Aktivere Sofortwiederherstellungsabfrage, um alle Dateien sofort wiederherstellen zu können sobald diese erzeugt werden.</translation>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <translation>Aktivere Sofortwiederhertellungsabfrage, um alle Dateien sofort wiederherstellen zu können sobald diese erzeugt werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1251"/>
@@ -2286,7 +2287,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1326"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
-        <translation>Starte den sandgeboxten RpcSs als DIENST-Prozess (beeinträchtigt die Kompatibilität)</translation>
+        <translation>Starte den sandgeboxted RpcSs als DIENST-Prozess (beinträchtigt etwas Kompatibilität)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1424"/>
@@ -2296,7 +2297,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1306"/>
         <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Beschränke Zugriff auf emulierte Dienstkontrollmanager auf privilegierte Prozesse</translation>
+        <translation>Beschränke Zugriff zu emulierten Dientkontrollmanagern auf priviligierte Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
@@ -2321,7 +2322,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
         <location filename="Forms/OptionsWindow.ui" line="1339"/>
         <location filename="Forms/OptionsWindow.ui" line="1453"/>
         <source>Protect the sandbox integrity itself</source>
-        <translation>Die Sandboxintegrität selbst schützen</translation>
+        <translation>Die Sandboxintegrität sebst schützen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1342"/>
@@ -2336,7 +2337,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1417"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</source>
-        <translation>Schütze sandgeboxte SYSTEM-Prozesse vor unprivilegierten nicht sandgeboxten Prozessen</translation>
+        <translation>Schütze sandgeboxte SYSTEM-Prozesse von unpriviligierten nicht sandgeboxten Prozessen</translation>
     </message>
     <message>
         <source>Sandbox Isolation</source>
@@ -2355,7 +2356,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1548"/>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation>Verstecke Host-Prozesse vor Prozessen in der Sandbox.</translation>
+        <translation>Verstecke Hostprozesse vor Prozessen in der Sandbox.</translation>
     </message>
     <message>
         <source>Remove Process</source>
@@ -2374,7 +2375,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation>Beschränke den Ressourcenzugriffsmonitor auf Administratoren</translation>
+        <translation>Beschränke den Resourcenzugriffsmonitor auf Administratoren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1592"/>
@@ -2391,9 +2392,9 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation>Füge Nutzerkonten und -gruppen der Liste hinzu, um die Benutzung der Sandbox auf diese Konten zu beschränken.Falls die Liste leer ist, kann die Sandbox von allen Konten genutzt werden.
+        <translation>Füge Nutzerkonten und Nuztergruppenzu der Liste hinzu, um die Benuztzung der Sandbox auf diese Konten zu beschränken.Falls die Liste leer ist, kann die Sandbox von allen Konten genutzt werden.
 
-Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung auf Konten, die diese Sandbox nicht nutzen können.</translation>
+Notiz: Erzwungene Programme und Ordnerfür eine Sandbox finden keine Anwendung auf Konten, die diese Sandbox nicht nuten können.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1635"/>
@@ -2415,7 +2416,7 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>Protokolliere jeden Zugriffsevent, wie er durch den Treiber gesehen wird, im Ressourcenzugriffsprotokoll.
+        <translation>Protokolliere jednen Zugriffsevent, wie er durhc den Treiber gesehen wird, im Resourcenzugriffsprotokoll.
 
 Diese Optionen setzen die Eventmaske auf &quot;*&quot; - Alle Zugriffsevents
 Sie können die Protokollierung in der INI anpassen in den Sie wie folgt wählen
@@ -2482,7 +2483,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1751"/>
         <source>&lt;- for this one the above does not apply</source>
-        <translation>&lt;- für dieses findet das Obige keine Anwendung</translation>
+        <translation>&lt;- für dieses findet das Obrige keine Anwendung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1767"/>
@@ -2492,7 +2493,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1810"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation>WARNUNG, diese Optionen können Kernsicherheitsgarantien deaktivieren und die Sandboxsicherheit zerstören!!!</translation>
+        <translation>WARNUNG, diese Optionen können Kernsicherheitsgarantien deaktivieren und die Sandboxsichheit zerstören!!!</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1820"/>
@@ -2522,7 +2523,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1885"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation>Diese Liste enthält eine große Menge an Vorlange, welche die Kompalität der Sandbox verbessern</translation>
+        <translation>Diese Liste enthält eine große Menge an Sandboxkompatibilitätsverbesserungsvorlagen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1898"/>
@@ -2576,7 +2577,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="54"/>
         <source>Refresh</source>
-        <translation>Aktualisieren</translation>
+        <translation>Aktualsieren</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="74"/>
@@ -2664,7 +2665,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="183"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation>Öffne URLs aus diesem Fenster in einer Sandbox</translation>
+        <translation>Öffne URLs aus diesem Fenter in einer Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
@@ -2711,7 +2712,7 @@ an Stelle von &quot;*&quot;.</translation>
     </message>
     <message>
         <source>Sandbox registry root: </source>
-        <translation type="vanished">Sandbox Registry-Quelle: </translation>
+        <translation type="vanished">Sandbox Registy-Quelle: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="310"/>
@@ -2772,7 +2773,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="438"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>Wenn eines der folgenden Programme außerhalb einer Sandbox gestartet wird, wird Sandboxie die Meldung SBIE1301 ausgeben.</translation>
+        <translation>Wenn eines der folgenden Programme außerhalb einer Sandbox gestarten wird,wird Sandboxie die Meldung SBIE1301 ausgeben.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="448"/>
@@ -2797,7 +2798,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="480"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation>Zukünftig nicht auf Softwarekompatibilität prüfen</translation>
+        <translation>Zukünfig nicht auf Softwarekompatibilität prüfen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="487"/>
@@ -2807,12 +2808,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="494"/>
         <source>Disable</source>
-        <translation>Deaktivieren</translation>
+        <translation>Deaktiveren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="523"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>Sandboxie hat die folgenden Anwendungen auf dem System gefunden. OK klicken zur Anwendung der Konfigurationseinstellungen, welche die Softwarekompatibilität mit diesen Anwendungen verbessert. Diese Konfigurationseinstellungen haben Auswirkungen auf alle existierenden und neuen Sandboxen.</translation>
+        <translation>Sandboxie hat die folgenden Anwendungen auf dem System gefunden. OK klicken zur Anwendung der Konfigurationseinstellungen, welche die Softwarekompatibilität mit diesen Anwendungen verbessert. Diese Konfigurationseinstellungen haben Auswirkungen auf alle exisitierenden und neuen Sandboxen.</translation>
     </message>
 </context>
 <context>

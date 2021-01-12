@@ -695,6 +695,7 @@ _FX PROCESS *Process_Create(
     // initialize trace flags
     //
 
+    proc->call_trace = Process_GetTraceFlag(proc, L"CallTrace");
     proc->file_trace = Process_GetTraceFlag(proc, L"FileTrace");
     proc->pipe_trace = Process_GetTraceFlag(proc, L"PipeTrace");
     proc->key_trace  = Process_GetTraceFlag(proc, L"KeyTrace");

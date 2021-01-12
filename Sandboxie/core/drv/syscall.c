@@ -27,6 +27,7 @@
 #include "obj.h"
 #include "api.h"
 #include "util.h"
+#include "session.h"
 
 
 
@@ -741,6 +742,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     __try {
 
+        BOOLEAN traced = FALSE;
         const ULONG args_len = entry->param_count * sizeof(ULONG_PTR);
 #ifdef _WIN64
         ProbeForRead(user_args, args_len, sizeof(ULONG_PTR));
@@ -774,20 +776,20 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         ProbeForRead(user_args, args_len, sizeof(UCHAR));
 #endif _WIN64
 
-        /*
-        if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))
-        {
-            if (strcmp(entry->name, "AlpcSendWaitReceivePort") == 0)
-            {
-                HANDLE  hConnection;
-                hConnection = (HANDLE*)user_args[0];
-                DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_ERROR_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, handle = %X >>>>>>\n",
-                    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
-                    entry->name,
-                    hConnection);
-            }
-        }
-        */
+        
+        //if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))
+        //{
+        //    if (strcmp(entry->name, "AlpcSendWaitReceivePort") == 0)
+        //    {
+        //        HANDLE  hConnection;
+        //        hConnection = (HANDLE*)user_args[0];
+        //        DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_ERROR_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, handle = %X >>>>>>\n",
+        //            PsGetCurrentProcessId(), PsGetCurrentThreadId(),
+        //            entry->name,
+        //            hConnection);
+        //    }
+        //}
+
 
         if (entry->handler1_func) {
 
@@ -802,17 +804,20 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
         if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))
         {
+            HANDLE  hConnection = NULL;
+            UNICODE_STRING* puStr = NULL;
+
             if ((strcmp(entry->name, "ConnectPort") == 0) ||
                 (strcmp(entry->name, "AlpcConnectPort") == 0) )
             {
-                HANDLE  hConnection = *(HANDLE*)user_args[0];
-                UNICODE_STRING  *puStr = (UNICODE_STRING*)user_args[1];
+                hConnection = *(HANDLE*)user_args[0];
+                puStr = (UNICODE_STRING*)user_args[1];
 
-                DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, '%.*S', status = 0x%X, handle = %X\n",
-                    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
-                    entry->name,
-                    (puStr->Length / 2), puStr->Buffer,
-                    status, hConnection);
+                //DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, '%.*S', status = 0x%X, handle = %X\n",
+                //    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
+                //    entry->name,
+                //    (puStr->Length / 2), puStr->Buffer,
+                //    status, hConnection);
                 //if (puStr && puStr->Buffer && wcsstr(puStr->Buffer, L"\\RPC Control\\LRPC-"))
                 //{
                     //int i = 0;          // place breakpoint here if you want to debug a particular port
@@ -821,17 +826,16 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             else if ( (strcmp(entry->name, "AlpcCreatePort") == 0) ||
                 (strcmp(entry->name, "AlpcConnectPortEx") == 0) )
             {
-                HANDLE  hConnection = *(HANDLE*)user_args[0];
+                hConnection = *(HANDLE*)user_args[0];
                 POBJECT_ATTRIBUTES  pObjectAttributes = (POBJECT_ATTRIBUTES)user_args[1];
-                UNICODE_STRING  *puStr = NULL;
                 if (pObjectAttributes)
                     puStr = (UNICODE_STRING*)pObjectAttributes->ObjectName;
 
-                DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, '%.*S', status = 0x%X, handle = %X\n",
-                    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
-                    entry->name,
-                    (puStr->Length / 2), puStr->Buffer,
-                    status, hConnection);
+                //DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, '%.*S', status = 0x%X, handle = %X\n",
+                //    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
+                //    entry->name,
+                //    (puStr->Length / 2), puStr->Buffer,
+                //    status, hConnection);
             }
             else if ((strcmp(entry->name, "ReplyWaitReceivePort") == 0) ||
                 (strcmp(entry->name, "ReceiveMessagePort") == 0) ||
@@ -841,12 +845,37 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 // these 2 APIs will generate a lot of output if we don't check status
                 ((status != STATUS_SUCCESS) && ((strcmp(entry->name, "AlpcSendWaitReceivePort") == 0) || (strcmp(entry->name, "RequestWaitReplyPort") == 0))) )
             {
-                HANDLE  hConnection = (HANDLE*)user_args[0];
-                DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, status = 0x%X, handle = %X\n",
-                    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
-                    entry->name,
-                    status, hConnection);
+                hConnection = (HANDLE*)user_args[0];
+
+                //DbgPrintEx(DPFLTR_DEFAULT_ID, DPFLTR_INFO_LEVEL, "SBIE [syscall] p=%06d t=%06d - %s, status = 0x%X, handle = %X\n",
+                //    PsGetCurrentProcessId(), PsGetCurrentThreadId(),
+                //    entry->name,
+                //    status, hConnection);
             }
+
+            if (hConnection)
+            {
+                WCHAR trace_str[128];
+                swprintf(trace_str, L"[syscall] t=%06d - %.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
+                    PsGetCurrentThreadId(),
+                    max(strlen(entry->name), 64), entry->name,
+                    status, hConnection);
+                const WCHAR* strings[3] = { trace_str, puStr ? puStr->Buffer : NULL, NULL };
+                ULONG lengths[3] = { wcslen(trace_str), puStr ? puStr->Length / 2 : 0, 0 };
+                Session_MonitorPutEx(MONITOR_IPC | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId());
+                traced = TRUE;
+            }
+        }
+
+        if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
+        {
+            WCHAR trace_str[128];
+            swprintf(trace_str, L"[syscall] t=%06d - %.*S, status = 0x%X", //59 chars + entry->name
+                PsGetCurrentThreadId(),
+                max(strlen(entry->name), 64), entry->name,
+                status);
+            const WCHAR* strings[2] = { trace_str, NULL };
+            Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId());
         }
 
 #ifdef _WIN64

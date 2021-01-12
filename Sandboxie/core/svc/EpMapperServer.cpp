@@ -93,6 +93,7 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
         return SHORT_REPLY(E_OUTOFMEMORY);
 
     rpl->h.status = STATUS_NOT_FOUND;
+    rpl->wszPortName[0] = L'\0';
 
     if (pwszServiceName != NULL) {
 
@@ -170,12 +171,18 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
 
     if (rpl->h.status == STATUS_SUCCESS)
     {
+        //
+        // Note: it seams that chrome.exe resolves GAME_CONFIG_STORE_PORT in one process and accesses from an other
+        // so since here we onlyonly a fre non critical ports we will use PID 0 to open it gloally
+        // instead of only for the one process. Todo: make it per sandbox instead
+        //
+
         // Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
-        // Param 2 is the process PID for which to open the port
+        // Param 2 is the process PID for which to open the port, can be 0 when port is special
         // Param 3 is the port type/identifier, can be -1 indicating non special port
         rpl->h.status = SbieApi_CallThree(API_OPEN_DYNAMIC_PORT,
             (ULONG_PTR)rpl->wszPortName,
-            (ULONG_PTR)idProcess,
+            (ULONG_PTR)0, 
             (ULONG_PTR)req->portType);
     }
 

@@ -4,6 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [0.5.4c / 5.46.2] - 2021-01-10
+
+### Added
+- added "CallTrace=*" to log all system calls to the access log
+
+### Changed
+- improved ipc logging code
+- improved MSG_2101 logging
+
+### Fixed
+- fixed more issues with ipc tracing
+- fixed SBIE2101 issue with crome and derivatives
+
+
+
 ## [0.5.4b / 5.46.1] - 2021-01-08
 
 ### Added

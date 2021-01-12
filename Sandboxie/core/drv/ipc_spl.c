@@ -71,7 +71,7 @@ static const WCHAR *_rpc_control = L"\\RPC Control";
 //---------------------------------------------------------------------------
 
 // Param 1 is dynamic port name (e.g. "\RPC Control\LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
-// Param 2 is the process PID for which to open the port
+// Param 2 is the process PID for which to open the port, can be 0 when port is special
 // Param 3 is the port type/identifier, can be -1 indicating non special port
 
 _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
@@ -109,43 +109,46 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
     if (!NT_SUCCESS(status))
         return status;
 
-    //proc = Process_Find(pArgs->process_id.val, &irql);
-    proc = Process_Find(pArgs->process_id.val, NULL);
-    if (proc && (proc != PROCESS_TERMINATED))
+    //
+    // When this is a special port save it our global Ipc_Dynamic_Ports structure
+    //
+
+    if (ePortType != NUM_DYNAMIC_PORTS && Ipc_Dynamic_Ports[ePortType].pPortLock)
     {
-        //
-        // When this is a special port save it our global Ipc_Dynamic_Ports structure
-        //
+        KeEnterCriticalRegion();
+        ExAcquireResourceExclusiveLite(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
 
-        if (ePortType != NUM_DYNAMIC_PORTS && Ipc_Dynamic_Ports[ePortType].pPortLock) 
-        {
-            KeEnterCriticalRegion();
-            ExAcquireResourceExclusiveLite(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
+        wmemcpy(Ipc_Dynamic_Ports[ePortType].wstrPortName, portName, DYNAMIC_PORT_NAME_CHARS);
 
-            wmemcpy(Ipc_Dynamic_Ports[ePortType].wstrPortName, portName, DYNAMIC_PORT_NAME_CHARS);
-
-            ExReleaseResourceLite(Ipc_Dynamic_Ports[ePortType].pPortLock);
-            KeLeaveCriticalRegion();
-        }
-
-        //
-        // Open the port for the selected process
-        //
-
-        KIRQL irql2;
-
-        KeRaiseIrql(APC_LEVEL, &irql2);
-        ExAcquireResourceExclusiveLite(proc->ipc_lock, TRUE);
-
-        Process_AddPath(proc, &proc->open_ipc_paths, NULL, FALSE, portName, FALSE);
-
-        ExReleaseResourceLite(proc->ipc_lock);
-        KeLowerIrql(irql2);
+        ExReleaseResourceLite(Ipc_Dynamic_Ports[ePortType].pPortLock);
+        KeLeaveCriticalRegion();
     }
-    else
-        status = STATUS_NOT_FOUND;
-    //ExReleaseResourceLite(Process_ListLock);
-    //KeLowerIrql(irql);
+
+    //
+    // Open the port for the selected process
+    //
+
+    if (pArgs->process_id.val != 0)
+    {
+        //proc = Process_Find(pArgs->process_id.val, &irql);
+        proc = Process_Find(pArgs->process_id.val, NULL);
+        if (proc && (proc != PROCESS_TERMINATED))
+        {
+            KIRQL irql2;
+
+            KeRaiseIrql(APC_LEVEL, &irql2);
+            ExAcquireResourceExclusiveLite(proc->ipc_lock, TRUE);
+
+            Process_AddPath(proc, &proc->open_ipc_paths, NULL, FALSE, portName, FALSE);
+
+            ExReleaseResourceLite(proc->ipc_lock);
+            KeLowerIrql(irql2);
+        }
+        else
+            status = STATUS_NOT_FOUND;
+        //ExReleaseResourceLite(Process_ListLock);
+        //KeLowerIrql(irql);
+    }
 
     return status;
 }
@@ -476,7 +479,7 @@ _FX BOOLEAN Ipc_Filter_Spooler_Msg(UCHAR uMsg)
         WCHAR access_str[24];
         swprintf(access_str, L" Msg: %02X", (ULONG)uMsg);
         const WCHAR* strings[3] = { L"\\RPC Control\\spoolss", access_str, NULL };
-        Session_MonitorPutEx(MONITOR_IPC | (filter ? MONITOR_DENY : MONITOR_OPEN), strings, PsGetCurrentProcessId());
+        Session_MonitorPutEx(MONITOR_IPC | (filter ? MONITOR_DENY : MONITOR_OPEN), strings, NULL, PsGetCurrentProcessId());
     }
 
     return filter;

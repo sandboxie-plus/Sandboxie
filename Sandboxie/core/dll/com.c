@@ -3314,7 +3314,7 @@ _FX void Com_Trace(
         return;
 
     text = Com_Alloc(1024 * sizeof(WCHAR));
-    ptr = text + Sbie_snwprintf(text, 1024, L"SBIE %s <%08X> ", TraceType, hr);
+    ptr = text + Sbie_snwprintf(text, 1024, L"COM %s <%08X> ", TraceType, hr);
 
     if (rclsid) {
         Com_Trace_Guid(ptr, rclsid, L"CLSID");

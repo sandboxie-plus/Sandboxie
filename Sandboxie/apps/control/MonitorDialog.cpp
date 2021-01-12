@@ -97,6 +97,7 @@ BOOL CMonitorDialog::OnInitDialog()
 void CMonitorDialog::OnIdle()
 {
     static const WCHAR *_Unknown    = L"(Unk)    ";
+    static const WCHAR *_SysCall    = L"SysCall  ";
     static const WCHAR *_Pipe       = L"Pipe     ";
     static const WCHAR *_Ipc        = L"Ipc      ";
     static const WCHAR *_WinClass   = L"WinCls   ";
@@ -146,7 +147,9 @@ void CMonitorDialog::OnIdle()
 		type &= 0x0FFF;
 
         const WCHAR *PrefixPtr = _Unknown;
-        if (type == MONITOR_PIPE)
+        if (type == MONITOR_SYSCALL)
+            PrefixPtr = _SysCall;
+        else if (type == MONITOR_PIPE)
             PrefixPtr = _Pipe;
         else if (type == MONITOR_IPC)
             PrefixPtr = _Ipc;

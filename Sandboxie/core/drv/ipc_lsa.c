@@ -125,7 +125,7 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(UCHAR uMsg)
         WCHAR access_str[24];
         swprintf(access_str, L" Msg: %02X", (ULONG)uMsg);
         const WCHAR* strings[3] = { L"\\RPC Control\\LSARPC_ENDPOINT", access_str, NULL };
-        Session_MonitorPutEx(MONITOR_IPC | (filter ? MONITOR_DENY : MONITOR_OPEN), strings, PsGetCurrentProcessId());
+        Session_MonitorPutEx(MONITOR_IPC | (filter ? MONITOR_DENY : MONITOR_OPEN), strings, NULL, PsGetCurrentProcessId());
     }
 
     return filter;

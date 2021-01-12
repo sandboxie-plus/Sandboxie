@@ -41,7 +41,7 @@
 #define DUPLICATE_INHERIT           0x00040000
 #define DUPLICATE_INTO_OTHER        0x00080000  // otherwise DUP_FROM_OTHER
 
-
+#define MONITOR_SYSCALL				0x000B
 #define MONITOR_PIPE                0x011B
 #define MONITOR_IPC                 0x022B
 #define MONITOR_WINCLASS            0x033B
@@ -51,6 +51,12 @@
 #define MONITOR_IMAGE               0x077B
 #define MONITOR_FILE_OR_KEY         0x088B
 #define MONITOR_OTHER				0x099B
+//#define MONITOR_					0x0AAB
+//#define MONITOR_					0x0BBB
+//#define MONITOR_					0x0CCB
+//#define MONITOR_					0x0DDB
+//#define MONITOR_					0x0EEB
+//#define MONITOR_					0x0FFB
 #define MONITOR_OPEN                0x1000
 #define MONITOR_DENY                0x2000
 #define MONITOR_TRACE               0x8000

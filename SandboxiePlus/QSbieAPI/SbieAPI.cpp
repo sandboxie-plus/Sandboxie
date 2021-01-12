@@ -1853,7 +1853,7 @@ bool CSbieAPI::IsMonitoring()
 
 bool CSbieAPI::GetMonitor()
 {
-	const int max_len = 256; // versions prioir to 5.44.1 check for max_len <= 256 increase this later
+	const int max_len = 1024;
 
 	USHORT type;
 	ULONG64 pid;
@@ -1943,6 +1943,7 @@ QString CResLogEntry::GetTypeStr() const
 {
 	switch (m_Type.Type)
 	{
+	case MONITOR_SYSCALL:		return "SysCall";
 	case MONITOR_PIPE:			return "Pipe"; 
 	case MONITOR_IPC:			return "Ipc"; 
 	case MONITOR_WINCLASS:		return "WinClass"; 

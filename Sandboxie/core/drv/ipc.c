@@ -210,14 +210,13 @@ _FX BOOLEAN Ipc_Init(void)
             return FALSE;
     }
 
-    // Note: those don't have a special treatment
-    //if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
-    //
-    //    if(!Mem_GetLockResource(&Ipc_Dynamic_Ports[WPAD_PORT].pPortLock, TRUE)
-    //    || !Mem_GetLockResource(&Ipc_Dynamic_Ports[GAME_CONFIG_STORE_PORT].pPortLock, TRUE)
-    //    || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SMART_CARD_PORT].pPortLock, TRUE)
-    //        ) return FALSE;    
-    //}
+    if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
+    
+        if(!Mem_GetLockResource(&Ipc_Dynamic_Ports[WPAD_PORT].pPortLock, TRUE)
+        || !Mem_GetLockResource(&Ipc_Dynamic_Ports[GAME_CONFIG_STORE_PORT].pPortLock, TRUE)
+        || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SMART_CARD_PORT].pPortLock, TRUE)
+            ) return FALSE;    
+    }
 
     //
     // finish
@@ -872,34 +871,34 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                 status = STATUS_ACCESS_DENIED;
         }
 
-        // Note: since version 5.46 these are open only per process
-        //else if (!is_open && !is_closed)
-        //{
-        //    int i;
-        //    for (i = 0; i < NUM_DYNAMIC_PORTS; i++)
-        //    {
-        //        if (Ipc_Dynamic_Ports[i].pPortLock)
-        //        {
-        //            KeEnterCriticalRegion();
-        //            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[i].pPortLock, TRUE);
-        //
-        //            if (*Ipc_Dynamic_Ports[i].wstrPortName
-        //                && (Name->Length >= 32 * sizeof(WCHAR))
-        //                && _wcsicmp(Name->Buffer, Ipc_Dynamic_Ports[i].wstrPortName) == 0)
-        //            {
-        //                // dynamic version of RPC ports, see also ipc_spl.c
-        //                // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
-        //                is_open = TRUE;
-        //            }
-        //
-        //            ExReleaseResourceLite(Ipc_Dynamic_Ports[i].pPortLock);
-        //            KeLeaveCriticalRegion();
-        //
-        //            if (is_open)
-        //                break;
-        //        }
-        //    }
-        //}
+
+        else if (!is_open && !is_closed)
+        {
+            int i;
+            for (i = 0; i < NUM_DYNAMIC_PORTS; i++)
+            {
+                if (Ipc_Dynamic_Ports[i].pPortLock)
+                {
+                    KeEnterCriticalRegion();
+                    ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[i].pPortLock, TRUE);
+        
+                    if (*Ipc_Dynamic_Ports[i].wstrPortName
+                        && (Name->Length >= 32 * sizeof(WCHAR))
+                        && _wcsicmp(Name->Buffer, Ipc_Dynamic_Ports[i].wstrPortName) == 0)
+                    {
+                        // dynamic version of RPC ports, see also ipc_spl.c
+                        // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
+                        is_open = TRUE;
+                    }
+        
+                    ExReleaseResourceLite(Ipc_Dynamic_Ports[i].pPortLock);
+                    KeLeaveCriticalRegion();
+        
+                    if (is_open)
+                        break;
+                }
+            }
+        }
 
         if (is_closed || (! is_open))
             status = STATUS_ACCESS_DENIED;

@@ -466,7 +466,7 @@ void CSandMan::OnExit()
 
 void CSandMan::closeEvent(QCloseEvent *e)
 {
-	if (!m_bExit)
+	if (!m_bExit)// && !theAPI->IsConnected())
 	{
 		QString OnClose = theConf->GetString("Options/OnClose", "ToTray");
 		if (m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0)

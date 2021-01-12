@@ -337,6 +337,6 @@ _FX void Log_Debug_Msg(USHORT type, const WCHAR *string1, const WCHAR *string2)
 	if (Session_MonitorCount) {
 	
 		const WCHAR* strings[4] = { string1, L" ", string2, NULL };
-		Session_MonitorPutEx(type | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId());
+		Session_MonitorPutEx(type, strings, NULL, PsGetCurrentProcessId());
 	}
 }

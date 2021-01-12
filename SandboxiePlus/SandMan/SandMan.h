@@ -15,7 +15,7 @@
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
 #define VERSION_REV 	4
-#define VERSION_UPD 	3
+#define VERSION_UPD 	4
 
 
 //#include "../QSbieAPI/SbieAPI.h"

@@ -28,12 +28,220 @@
 #include "session.h"
 
 
+
+//---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+
+typedef struct _LSA_MESSAGE_XP {
+
+    PORT_MESSAGE port_msg;
+    ULONG api_code;
+    ULONG status;
+    ULONG auth_pkg_code;
+    ULONG* buf;
+    ULONG buf_len;
+
+} LSA_MESSAGE_XP;
+
+
+//---------------------------------------------------------------------------
+// Variables
+//---------------------------------------------------------------------------
+
+
+#ifndef _WIN64
+
+static ULONG Ipc_MSV10_AuthPackageNumber = 0;
+
+#endif
+
+
+//---------------------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------------------
+
+BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg);
+
+
+//---------------------------------------------------------------------------
+// Ipc_CheckPortRequest_Lsa
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_CheckPortRequest_Lsa(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
+{
+    NTSTATUS status;
+
+    if (!proc->ipc_block_password)
+        return STATUS_BAD_INITIAL_PC;
+
+    //
+    // check that it is \LsaAuthenticationPort
+    // or that it is \RPC Control\lsasspirpc (Windows 7 variant)
+    //
+
+    if (Name->Name.Length == 22 * sizeof(WCHAR)) {
+
+        if (_wcsicmp(Name->Name.Buffer, L"\\LsaAuthenticationPort") != 0)
+            return STATUS_BAD_INITIAL_PC;
+
+    }
+    else if (Name->Name.Length == 23 * sizeof(WCHAR)) {
+
+        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\lsasspirpc") != 0)
+            return STATUS_BAD_INITIAL_PC;
+
+    }
+    else
+        return STATUS_BAD_INITIAL_PC;
+
+    //
+    // examine message
+    //
+
+    status = STATUS_SUCCESS;
+
+    __try {
+
+        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
+
+        if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+
+            //
+            // in Windows Vista and Windows 7, a password change request
+            // includes the WCHAR string Negotiate immediately followed
+            // by a non-zero WCHAR
+            //
+
+            WCHAR* ptr = (WCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
+            ULONG  len = msg->u1.s1.DataLength;
+
+            ProbeForRead(ptr, len, sizeof(WCHAR));
+            len /= sizeof(WCHAR);
+
+            while (len > 9 + 1) {
+
+                if (ptr[0] == L'N' && ptr[9] != 0
+                    && wmemcmp(ptr, L"Negotiate", 9) == 0) {
+
+                    status = STATUS_ACCESS_DENIED;
+                    break;
+                }
+
+                ++ptr;
+                --len;
+            }
+
+        }
+#ifndef _WIN64
+        else { // xp support
+
+         //
+         // prior to Windows Vista, we have a 'call package' api
+         // call (value 2), which identifies the MSV10 auth package,
+         // and a change password sub code (value 5)
+         //
+
+            if (msg->u1.s1.TotalLength >= sizeof(LSA_MESSAGE_XP)) {
+
+                LSA_MESSAGE_XP* msg2 = (LSA_MESSAGE_XP*)msg;
+
+                ProbeForRead(
+                    msg2, sizeof(LSA_MESSAGE_XP), sizeof(ULONG_PTR));
+
+                if (msg2->api_code == 2 &&  // LsaCallAuthenticationPackage
+                    msg2->auth_pkg_code == Ipc_MSV10_AuthPackageNumber &&
+                    msg2->buf_len >= sizeof(ULONG)) {
+
+                    ULONG* buf = msg2->buf;
+                    ProbeForRead(buf, sizeof(ULONG), sizeof(ULONG));
+
+                    if (*buf == 5) {            // change password
+
+                        status = STATUS_ACCESS_DENIED;
+                    }
+                }
+            }
+        }
+#endif
+
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    if (status == STATUS_ACCESS_DENIED)
+        Log_Msg_Process(MSG_PASSWORD_CHANGE_DENIED, NULL, NULL, -1, proc->pid);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_CheckPortRequest_LsaEP
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_CheckPortRequest_LsaEP(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
+{
+    NTSTATUS status;
+
+    if (proc->ipc_open_lsa_endpoint)
+        return STATUS_BAD_INITIAL_PC;
+
+    if (Name->Name.Length == 28 * sizeof(WCHAR)) {
+
+        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\LSARPC_ENDPOINT") != 0)
+            return STATUS_BAD_INITIAL_PC;
+
+    }
+    else
+        return STATUS_BAD_INITIAL_PC;
+
+    //
+    // examine message
+    //
+
+    status = STATUS_SUCCESS;
+
+    __try {
+
+        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
+
+        if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+            ULONG  len = msg->u1.s1.DataLength;
+            UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
+            int i = 0;
+            int rc = -2;
+
+            ProbeForRead(ptr, len, sizeof(WCHAR));
+
+            if (Ipc_Filter_Lsa_Ep_Msg(proc, ptr[20]))
+                status = STATUS_ACCESS_DENIED;
+
+            //DbgPrint("\\RPC Control\\LSARPC_ENDPOINT message ID: %d\n", (int)ptr[20]);
+        }
+
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    return status;
+}
+
+
 //---------------------------------------------------------------------------
 // Ipc_Filter_Lsa_Ep_Msg
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(UCHAR uMsg)
+_FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg)
 {
     BOOLEAN filter = FALSE;
 
@@ -120,14 +328,54 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(UCHAR uMsg)
         filter = TRUE;
     }
 
-    if (Session_MonitorCount) {
+    if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
 
-        WCHAR access_str[24];
-        swprintf(access_str, L" Msg: %02X", (ULONG)uMsg);
-        const WCHAR* strings[3] = { L"\\RPC Control\\LSARPC_ENDPOINT", access_str, NULL };
-        Session_MonitorPutEx(MONITOR_IPC | (filter ? MONITOR_DENY : MONITOR_OPEN), strings, NULL, PsGetCurrentProcessId());
+        USHORT mon_type = MONITOR_IPC;
+
+        if (filter && (proc->ipc_trace & TRACE_DENY))
+            mon_type |= MONITOR_DENY;
+        else if (!filter && (proc->ipc_trace & TRACE_ALLOW))
+            mon_type |= MONITOR_OPEN;
+        else
+            mon_type = 0;
+
+        if (mon_type) {
+            WCHAR msg_str[24];
+            swprintf(msg_str, L" Msg: %02X", (ULONG)uMsg);
+            const WCHAR* strings[3] = { L"\\RPC Control\\LSARPC_ENDPOINT", msg_str, NULL };
+            Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId());
+        }
     }
 
     return filter;
 }
 
+#ifndef _WIN64
+
+
+//---------------------------------------------------------------------------
+// Ipc_Api_SetLsaAuthPkg
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_Api_SetLsaAuthPkg(PROCESS* proc, ULONG64* parms) // xp support
+{
+    //
+    // caller must be our service process
+    //
+
+    if (proc || (PsGetCurrentProcessId() != Api_ServiceProcessId))
+        return STATUS_ACCESS_DENIED;
+
+    //
+    // collect msv10 auth package number
+    //
+
+    if (Ipc_MSV10_AuthPackageNumber)
+        return STATUS_ACCESS_DENIED;
+
+    Ipc_MSV10_AuthPackageNumber = (ULONG)parms[1];
+    return STATUS_SUCCESS;
+}
+
+#endif

@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.4d / 5.46.3] - 2021-01-11
+
+### Changed
+- improved access tracing, removed redundant entries
+- OpenIpcPath=\BaseNamedObjects\[CoreUI]-* is now hardcoded in the driver no need for the template entry 
+- WindowsFontCache is now open by default
+- refactored some IPC code in the driver
+
+### Fixed
+- fixed creation time not always being properly updated in the SandMan UI
+
 
 
 ## [0.5.4c / 5.46.2] - 2021-01-10

@@ -2,29 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh">
 <context>
-    <name>QPlatformTheme</name>
-    <message>
-        <source>OK</source>
-        <translation>确定</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>应用</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>取消</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation>&amp;是</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation>&amp;否</translation>
-    </message>
-</context>
-<context>
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
@@ -385,26 +362,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>您想允许 %4 (%5) 复制 %1 大文件到沙盒: %2 吗?
+        <translation type="vanished">您想允许 %4 (%5) 复制 %1 大文件到沙盒: %2 吗?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>您想允许 %1 (%2) 访问网络吗?
+        <translation type="vanished">您想允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 可以从 %2 快速恢复.
+        <translation type="vanished">%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>移动大文件 %1 到沙盒 %2, %3 遗留.
+        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 遗留.
 完整路径: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1783,7 +1780,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
-        <translation>启动沙盒化的RpcSs作为系统进程 (破坏一些兼容性)</translation>
+        <translation type="vanished">启动沙盒化的RpcSs作为系统进程 (破坏一些兼容性)</translation>
     </message>
     <message>
         <source>Issue message 1308 when a program fails to start</source>
@@ -1916,6 +1913,29 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Drive %1</source>
         <translation>磁盘 %1</translation>
+    </message>
+</context>
+<context>
+    <name>QPlatformTheme</name>
+    <message>
+        <source>OK</source>
+        <translation type="vanished">确定</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="vanished">应用</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">取消</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="vanished">&amp;是</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="vanished">&amp;否</translation>
     </message>
 </context>
 <context>

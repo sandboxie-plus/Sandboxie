@@ -994,7 +994,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
                 if (proc->file_trace & TRACE_IGNORE)
                     Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
-                if (Session_MonitorCount &&
+                else if (Session_MonitorCount &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
                     Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
@@ -1492,14 +1492,25 @@ skip_due_to_home_folder:
             letter = 0;
 
         if (letter) {
+
+            USHORT mon_type = IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE;
+            if (!IsBoxedPath) {
+                if (ShouldMonitorAccess == TRUE)
+                    mon_type |= MONITOR_DENY;
+                else
+                    mon_type |= MONITOR_OPEN;
+            }
+            if(!IsPipeDevice && !ShouldMonitorAccess)
+                mon_type |= MONITOR_TRACE;
+
             swprintf(access_str, L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
-            Log_Debug_Msg(IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE_OR_KEY, access_str, Name->Name.Buffer);
+            Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    if (IsPipeDevice && Session_MonitorCount) {
+    else if (IsPipeDevice && Session_MonitorCount) {
 
         USHORT mon_type = MONITOR_PIPE;
         WCHAR *mon_name = Name->Name.Buffer;
@@ -1515,9 +1526,12 @@ skip_due_to_home_folder:
 
     } else if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
+        Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
-    } else if (msg1313 && status == STATUS_ACCESS_DENIED
+    } 
+    
+    if (!ShouldMonitorAccess && msg1313 
+                       && status == STATUS_ACCESS_DENIED
                        && device_type == FILE_DEVICE_DISK
                        && RemainingName && RemainingName->Length == 0) {
 

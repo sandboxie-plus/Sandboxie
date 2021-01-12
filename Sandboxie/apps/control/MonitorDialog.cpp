@@ -104,7 +104,8 @@ void CMonitorDialog::OnIdle()
     static const WCHAR *_Drive      = L"(Drive)  ";
     static const WCHAR *_Clsid      = L"Clsid    ";
     static const WCHAR *_Image      = L"Image    ";
-    static const WCHAR *_FileOrKey  = L"File/Key ";
+    static const WCHAR *_File       = L"File     ";
+    static const WCHAR *_Key        = L"Key      ";
 	static const WCHAR *_Other      = L"Other    ";
     static const WCHAR *_Separator  = L"   -------------------------------";
 
@@ -161,8 +162,10 @@ void CMonitorDialog::OnIdle()
             PrefixPtr = _Clsid;
         else if (type == MONITOR_IMAGE)
             PrefixPtr = _Image;
-        else if (type == MONITOR_FILE_OR_KEY)
-            PrefixPtr = _FileOrKey;
+        else if (type == MONITOR_FILE)
+            PrefixPtr = _File;
+        else if (type == MONITOR_KEY)
+            PrefixPtr = _Key;
         else if (type == MONITOR_OTHER)
             PrefixPtr = _Other;
         wcsncpy(name, PrefixPtr, 9);
@@ -192,7 +195,11 @@ void CMonitorDialog::OnIdle()
             wcscat(name, _Separator);
             listbox->AddString(name);
 
-            wcscpy(name, _FileOrKey);
+            wcscpy(name, _File);
+            wcscat(name, _Separator);
+            listbox->AddString(name);
+
+            wcscpy(name, _Key);
             wcscat(name, _Separator);
             listbox->AddString(name);
 

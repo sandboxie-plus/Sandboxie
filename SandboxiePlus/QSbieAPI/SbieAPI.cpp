@@ -1769,6 +1769,7 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
 		m_BoxedProxesses.insert(ProcessId, pProcess);
 
+		UpdateProcessInfo(pProcess);
 		pProcess->InitProcessInfo();
 	}
 
@@ -1951,7 +1952,8 @@ QString CResLogEntry::GetTypeStr() const
 	case MONITOR_COMCLASS:		return "ComClass"; 
 	case MONITOR_IGNORE:		return "Ignore"; 
 	case MONITOR_IMAGE:			return "Image"; 
-	case MONITOR_FILE_OR_KEY:	return "File/Key"; 
+	case MONITOR_FILE:			return "File"; 
+	case MONITOR_KEY:			return "Key";
 	case MONITOR_OTHER:			return "Debug"; 
 	default:					return "Unknown: " + QString::number(m_Type.Type);
 	}

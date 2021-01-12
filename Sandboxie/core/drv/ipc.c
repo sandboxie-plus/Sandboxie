@@ -520,6 +520,8 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\RPC Control\\LSARPC_ENDPOINT",
         L"\\RPC Control\\umpo",
         L"*\\BaseNamedObjects*\\FlipEx*",
+        L"*\\BaseNamedObjects*\\FontCachePort",
+        L"*\\BaseNamedObjects*\\FntCache-*",
         NULL
     };
     static const WCHAR *openpaths_windows8[] = {
@@ -541,6 +543,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"*\\BaseNamedObjects*\\CoreMessagingRegistrar",
         L"\\RPC Control\\webcache_*",
         L"*\\BaseNamedObjects\\windows_webcache_counters_*",
+        L"*\\BaseNamedObjects\\[CoreUI]-*",
         NULL
     };
 
@@ -935,12 +938,21 @@ _FX NTSTATUS Ipc_CheckGenericObject(
         }
 
         if (letter) {
+
+            USHORT mon_type = MONITOR_IPC;
+            if (!IsBoxedPath) {
+                if (NT_SUCCESS(status))
+                    mon_type |= MONITOR_OPEN;
+                else
+                    mon_type |= MONITOR_DENY;
+            }
+
             swprintf(access_str, L"(I%c) %08X", letter, GrantedAccess);
-            Log_Debug_Msg(MONITOR_IPC, access_str, Name->Buffer);
+            Log_Debug_Msg(mon_type, access_str, Name->Buffer);
         }
     }
 
-    if (Session_MonitorCount) {
+    else if (Session_MonitorCount) {
 
         USHORT mon_type = MONITOR_IPC;
         WCHAR *mon_name = Name->Buffer;

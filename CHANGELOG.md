@@ -22,12 +22,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "CallTrace=*" to log all system calls to the access log
 
 ### Changed
-- improved ipc logging code
+- improved IPC logging code
 - improved MSG_2101 logging
 
 ### Fixed
-- fixed more issues with ipc tracing
-- fixed SBIE2101 issue with crome and derivatives
+- fixed more issues with IPC tracing
+- fixed SBIE2101 issue with Chrome and derivatives
 
 
 
@@ -108,13 +108,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added prompt to choose if links in the SandMan UI should be opened in a sandboxed or unsandboxed browser
 - added more recovery options
-- added "ClosedClsid=" to block com objects from being used when they cause compatibility issues
+- added "ClosedClsid=" to block COM objects from being used when they cause compatibility issues
 - added "ClsidTrace=*" option to trace COM usage
 - added "ClosedRT=" option to block access to problematic Windows RT interfaces
 - added option to make a link for any selected process to SandMan UI
 - added option to reset all hidden messages
 - added more process presets "force program" and "allow internet access"
-- added "SpecialImage=chrome,some_electron_app.exe" option to sandboxie.ini, valid image types "chrome", "firefox"
+- added "SpecialImage=chrome,some_electron_app.exe" option to Sandboxie.ini, valid image types "chrome", "firefox"
 -- with this option you can enable special hardcoded workarounds to new obscure forks of those browsers
 - added German translation (thanks bastik-1001) to the SandMan UI
 - added Russian translation (thanks lufog) to the SandMan UI
@@ -136,7 +136,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed missing template setup when creating new boxes
 
 ### removed
-- removed obsolete "OpenDefaultClsid=n" use "ClosedClsid=" with the apropriate values instead
+- removed obsolete "OpenDefaultClsid=n" use "ClosedClsid=" with the appropriate values instead
 - removed suspend/resume menu entry, pooling that state wastes substantial CPU cycles; use task explorer for that functionality
 
 
@@ -153,9 +153,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.2 / 5.45.1] - 2020-12-23
 
 ### Added
-- added advanced new box creation dialog to SandMan UI
+- added advanced new box creation dialogue to SandMan UI
 - added show/hide tray context menu entry
-- added refresh button to file recovery dialog
+- added refresh button to file recovery dialogue
 - added mechanism to load icons from {install-dir}/Icons/{icon}.png for UI customization
 - added tray indicator to show disabled forced program status in the SandMan UI
 - added program name suggestions to box options in SandMan UI
@@ -165,7 +165,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reorganized the advanced box options a bit
 - changed icons (thanks Valinwolf for picking the new ones)
 - updated Template.ini (thanks isaak654)
-- increates max value for disable forced process time in SandMan UI
+- increased max value for disable forced process time in SandMan UI
 
 ### Fixed
 - fixed BSOD introduced in 5.45.0 when using Windows 10 "core isolation" 
@@ -200,8 +200,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated SandMan UI to use Qt5.15.1
 
 ### Fixed
-- fixed crash issue with progress dialog
-- fixed progress dialog cancel button not working for update checker
+- fixed crash issue with progress dialogue
+- fixed progress dialogue cancel button not working for update checker
 - fixed issue around NtQueryDirectoryFile when deleting sandbox content
 - fixed dark theme in the notification window
 - fixed issue with disable force programs tray menu
@@ -350,7 +350,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- it caused issues with unity games, will be investigated and re enabled later
 
 ### Fixed
-- fixed color issue with vertical tabs in dark mode
+- fixed colour issue with vertical tabs in dark mode
 - fixed wrong path separators when adding new forced folders
 - fixed directory listing bug introduced in 5.43
 - fixed issues with settings window when not being connected to driver
@@ -384,7 +384,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with the new box settings editor
 
 ### Removed
-- removes deprecated workaround in the hooking mechanism for an obsolete antimalware product
+- removes deprecated workaround in the hooking mechanism for an obsolete anti-malware product
 
 
 
@@ -439,7 +439,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Sandbox names now replace "_" with " " for display allowing to use names that are made of separated words
 
 ### Fixed
-- added mising PreferExternalManifest itialization to portable mode
+- added missing PreferExternalManifest initialization to portable mode
 - fixed permission issues with sandboxed system processes
 -- Note: you can use "ExposeBoxedSystem=y" for the old behaviour (debug option)
 - fixed missing SCM access check for sandboxed services
@@ -479,7 +479,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: using these options weakens the sandboxing, they are intended for debugging and may be used for better application virtualization later
 
 ### Changed
-- SbieDll.dll when processing InjectDll now looks in the SbieHome folder for the Dll's if the entered path starts with a backslash
+- SbieDll.dll when processing InjectDll now looks in the SbieHome folder for the DLLs if the entered path starts with a backslash
 -- i.e. "InjectDll=\LogAPI\i386\logapi32v.dll" or "InjectDll64=\LogAPI\amd64\logapi64v.dll"
 
 ### Fixed
@@ -529,4 +529,3 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
-

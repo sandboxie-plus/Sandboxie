@@ -741,7 +741,7 @@ void COptionsWindow::OnAddAutoCmd()
 
 void COptionsWindow::OnAddAutoExe()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe|*.cmd)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");;
 	if (Value.isEmpty())
 		return;
 

@@ -55,7 +55,6 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	InsertText("Template", "LingerPrograms");
 	// templates L7
 	InsertText("Template", "BlockPorts");
-	InsertText("Template", "WindowsFontCache");
 	InsertText("Template", "qWave");
 
 	// recovery

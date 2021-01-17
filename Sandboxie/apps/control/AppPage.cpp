@@ -1557,6 +1557,5 @@ void CAppPage::SetDefaultTemplates6(CBox &box)
 void CAppPage::SetDefaultTemplates7(CBox &box)
 {
     box.EnableTemplate(L"BlockPorts", TRUE);
-    box.EnableTemplate(L"WindowsFontCache", TRUE);
     box.EnableTemplate(L"qWave", TRUE);
 }

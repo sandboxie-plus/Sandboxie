@@ -120,12 +120,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="687"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta caixa de areia foi excluída, portanto, a configuração não pode ser salva.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="722"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation type="unfinished"></translation>
+        <translation>Algumas alterações ainda não foram salvas, você realmente quer fechar essa janela de opções?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="736"/>
@@ -147,7 +147,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="767"/>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Executáveis (*.exe *.cmd);;Todos os arquivos (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="807"/>
@@ -375,7 +375,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="140"/>
         <source>Yes and add to allowed programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim e adicionar a programas permitidos</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="175"/>
@@ -483,49 +483,29 @@
         <location filename="Windows/PopUpWindow.cpp" line="229"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseja permitir que %4 (%5) copie um arquivo grande %1 para a caixa: %2?
+Nome do arquivo: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="235"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseja permitir o acesso de %1 (%2) à Internet?
+Caminho completo: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="298"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 está qualificado para recuperação rápida de %2.
+O arquivo foi gravado por: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="386"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</oldsource>
-        <translation type="obsolete">Deseja permitir que %4 (%5) copie um arquivo grande %1 para o sandboxie: %2?
-Nome do arquivo: %3</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <oldsource>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</oldsource>
-        <translation type="obsolete">Deseja permitir o acesso de %1 (%2) à Internet?
-Caminho completo: %3</translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <oldsource>%1 is eligible for quick recovery from %2.
-The file was written by: %3</oldsource>
-        <translation type="obsolete">O arquivo %1 está qualificado para recuperação rápida de %2.
-Gravado por: %3</translation>
+        <translation>Migrando um arquivo grande %1 para a caixa %2, %3 restante.
+Caminho completo: %4</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="300"/>
@@ -537,14 +517,6 @@ Gravado por: %3</translation>
         <source>%1 (%2)</source>
         <translatorcomment>same as source</translatorcomment>
         <translation>%1 (%2)</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</oldsource>
-        <translation type="obsolete">Migrando um arquivo grande %1 para o sandboxie %2, %3 restante.
-Caminho completo: %4</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -588,12 +560,12 @@ Caminho completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="257"/>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um ou mais arquivos selecionados estão localizados em um compartilhamento de rede e devem ser recuperados em uma unidade local, selecione uma pasta para recuperar todos os arquivos selecionados.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="288"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Existem arquivos %1 e pastas %2 na caixa de areia, ocupando %3 bytes de espaço em disco.</translation>
     </message>
 </context>
 <context>
@@ -831,7 +803,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="383"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Sempre Visível</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="389"/>
@@ -963,17 +935,17 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="587"/>
         <source>Sellect box:</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar caixa:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="692"/>
         <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Alguns modelos de compatibilidade (%1) estão faltando, provavelmente excluídos. Deseja removê-los de todas as caixas?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="709"/>
         <source>Cleaned up removed templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpei modelos removidos...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -1042,12 +1014,12 @@ Faça o download da versão mais recente e configure-o com o Sandboxie.ini confo
     <message>
         <location filename="SandMan.cpp" line="1517"/>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível criar instantâneo de uma caixa de areia vazia</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1518"/>
         <source>A sandbox with that name already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Uma caixa de areia com esse nome já existe</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1860"/>
@@ -1671,7 +1643,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Views/SbieView.cpp" line="114"/>
         <source>Allow internet access</source>
-        <translation>Permitir acesso à Internet</translation>
+        <translation>Permitir acesso à internet</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="116"/>
@@ -1692,22 +1664,22 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
         <location filename="Views/SbieView.cpp" line="477"/>
         <location filename="Views/SbieView.cpp" line="506"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Não mostrar essa mensagem novamente.</translation>
+        <translation>Não mostrar essa mensagem novamente.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="544"/>
         <source>This Sandbox is already empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta Caixa de Areia já está vazia.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="555"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseja excluir o conteúdo da caixa de areia selecionada?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="558"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Você realmente deseja excluir o conteúdo de várias caixas de areia?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="689"/>
@@ -1780,7 +1752,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <source>Do you really want to delete the content of the selected sandbox(es)?</source>
         <oldsource>Do you really want delete the content of the selected sandbox(es)?</oldsource>
-        <translation type="vanished">Tem certeza de que deseja excluir o conteúdo da(s) caixa(s) de areia?</translation>
+        <translation>Tem certeza de que deseja excluir o conteúdo da(s) caixa(s) de areia?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="605"/>
@@ -2557,7 +2529,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1459"/>
         <source>Auto Exec</source>
-        <translation type="unfinished">Auto Executar</translation>
+        <translation>Auto Executar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1492"/>
@@ -2681,7 +2653,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Show All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Todos os Arquivos</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
@@ -2748,7 +2720,7 @@ ao invés de &quot;*&quot;.</translation>
     </message>
     <message>
         <source>Start with Windows</source>
-        <translation type="vanished">Iniciar com Windows</translation>
+        <translation>Iniciar com Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>
@@ -2850,17 +2822,17 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="143"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar Interface do Usuário com windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="193"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar interface do usuário quando um processo do sandbox é iniciado</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="200"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a primeira janela de recuperação ao esvaziar caixas de areia</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="347"/>
@@ -2875,7 +2847,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>Other settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Outras configurações</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="429"/>
@@ -2963,7 +2935,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>
         <source>Selected Snapshot Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalhes de instantâneo selecionados</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="66"/>
@@ -2978,7 +2950,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="98"/>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ações de Instantâneo</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>

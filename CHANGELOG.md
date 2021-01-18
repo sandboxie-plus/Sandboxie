@@ -3,6 +3,42 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [0.5.5 / 5.46.4] - 2021-01-17
+
+### Added
+- added "SandboxService=..." to force selected services to be started in the sandbox
+- added template cleanup functionality to plus UI
+- allow internet prompt now also allow internet access pemanently
+- added browse button for box root folder in the SandMan UI
+- added explorer info message
+- added option to keep the sandman UI always on top
+- added drag and drop file on to sandman exe to open/run it sandboxed
+- added start SandMan UI when a sandboxed application starts
+- recovery window can now list all files
+- added file cunter to recovery window
+- when "NoAddProcessToJob=y" is specified chrome and alike now can fully use the job system
+-- Note: "NoAddProcessToJob=y" reduces the box isolation, but the affected functions are mostly covered by UIPI anyways
+- added obtimized default column widths to tha sbie view
+
+### Changed
+- updated templates (thanks isaak654)
+- when trying to take a snapshot of an empty sandbox a proper error message is displayed
+- new layout for the recovery window
+- sbie view sorting is now case insensitive
+
+### Fixed
+- fixed issue child window closing terminating application when main was hidden
+- fixed issues with non modal windows
+- fixed issues connecting in portable mode to driver
+- fixed minor issues with snapshot window
+- fixed missing error message when atempting to create an aleady existing sandbox
+- fixed issue allowing to save setting when a sandbox was alrady deleted
+- fixed issues with disabled items in dark mode
+- fixed some dialogs not closing on esc
+
+
+
 ## [0.5.4d / 5.46.3] - 2021-01-11
 
 ### Changed
@@ -12,6 +48,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - refactored some IPC code in the driver
 
 ### Fixed
+- fixed issue allowing to bypass the registry isolation, present since Windows 10 Creators Update 
 - fixed creation time not always being properly updated in the SandMan UI
 
 

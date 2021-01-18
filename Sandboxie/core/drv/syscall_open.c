@@ -272,6 +272,10 @@ _FX NTSTATUS Syscall_OpenHandle(
 
     if (! NewHandle) {
 
+        //WCHAR trace_str[128];
+        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
         Process_SetTerminated(proc, 6);
         status = STATUS_PROCESS_IS_TERMINATING;
     }
@@ -309,6 +313,9 @@ _FX NTSTATUS Syscall_OpenHandle(
 
         ObDereferenceObject(OpenedObject);
 
+        if (!NT_SUCCESS(status))
+            NtClose(NewHandle);
+
         if (status == STATUS_BAD_INITIAL_PC) {
 
             //
@@ -338,8 +345,14 @@ _FX NTSTATUS Syscall_OpenHandle(
         }
     }
 
-    if (! NT_SUCCESS(status))
+    if (!NT_SUCCESS(status)) {
+
+        //WCHAR trace_str[128];
+        //swprintf(trace_str, L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
         Process_SetTerminated(proc, 7);
+    }
 
     return status;
 }
@@ -458,6 +471,10 @@ _FX NTSTATUS Syscall_DuplicateHandle(
 
     if (! NewHandle) {
 
+        //WCHAR trace_str[128];
+        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
         Process_SetTerminated(proc, 8);
         status = STATUS_PROCESS_IS_TERMINATING;
     }
@@ -517,6 +534,11 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     //      if(!wcsicmp(proc->image_name,L"SandboxieBITS.exe") && status == STATUS_ACCESS_DENIED) { 
     //          return status;
     //  }
+    //
+    //    //WCHAR trace_str[128];
+    //    //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+    //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+    //
     //  Process_SetTerminated(proc, 9);
     //}
 

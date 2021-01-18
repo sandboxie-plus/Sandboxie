@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	//QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 
 	QtSingleApplication app(argc, argv);
+	app.setQuitOnLastWindowClosed(false);
 
 	//InitConsole(false);
 

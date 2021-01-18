@@ -216,6 +216,18 @@
         <source>Please enter an auto exec command</source>
         <translation>请输入自动运行命令</translation>
     </message>
+    <message>
+        <source>This sandbox has been deleted hence configuration can not be saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Executables (*.exe *.cmd);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -280,6 +292,10 @@
     <message>
         <source>Request timed out</source>
         <translation>请求超时</translation>
+    </message>
+    <message>
+        <source>Yes and add to allowed programs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -425,6 +441,14 @@ Full path: %4</source>
     <message>
         <source>%1 - File Recovery</source>
         <translation>%1 - 文件恢复</translation>
+    </message>
+    <message>
+        <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1015,6 +1039,30 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus是著名开源程序Sandboxie的延续.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 来获取更多信息.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;图标来自 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
+    <message>
+        <source>Always on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sellect box:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cleaned up removed templates...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can not create snapshot of an empty sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A sandbox with that name already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieModel</name>
@@ -1072,7 +1120,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Do you really want to delete the content of the selected sandbox(es)?</source>
-        <translation>确定要删除所选沙盒的所有内容吗?</translation>
+        <translation type="vanished">确定要删除所选沙盒的所有内容吗?</translation>
     </message>
     <message>
         <source>Drop Admin Rights</source>
@@ -1248,6 +1296,22 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>Allow internet access</source>
         <translation>允许网络访问</translation>
     </message>
+    <message>
+        <source>Don&apos;t show this message again.</source>
+        <translation type="unfinished">不再显示此消息</translation>
+    </message>
+    <message>
+        <source>This Sandbox is already empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete the content of the selected sandbox?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the content of multiple sandboxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1312,7 +1376,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Snapshot: %1 taken: %2</source>
-        <translation>快照: %1 取自: %2</translation>
+        <translation type="vanished">快照: %1 取自: %2</translation>
     </message>
     <message>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
@@ -1968,6 +2032,14 @@ instead of &quot;*&quot;.</source>
         <source>Delete all</source>
         <translation>删除全部</translation>
     </message>
+    <message>
+        <source>Show All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsWindow</name>
@@ -2125,11 +2197,31 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Start with Windows</source>
-        <translation>开机启动</translation>
+        <translation type="vanished">开机启动</translation>
     </message>
     <message>
         <source>Portable root folder</source>
         <translation>便携化根目录</translation>
+    </message>
+    <message>
+        <source>Start UI with Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start UI when a sandboxed process is started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show first recovery window when emptying sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2156,11 +2248,19 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Snapshot Details</source>
-        <translation>快照详情</translation>
+        <translation type="vanished">快照详情</translation>
     </message>
     <message>
         <source>Take Snapshot</source>
         <translation>抓取快照</translation>
+    </message>
+    <message>
+        <source>Selected Snapshot Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snapshot Actions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

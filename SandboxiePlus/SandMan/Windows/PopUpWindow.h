@@ -89,6 +89,7 @@ public:
 		m_RequestId = RequestId;
 		m_Result = Result;
 		m_pProcess = pProcess;
+		m_bAddToList = false;
 
 		m_pLabel = new QLabel(Message);
 		m_pLabel->setToolTip(Message);
@@ -132,10 +133,19 @@ public:
 			killTimer(m_uTimerID);
 	}
 
+	void AddAddToList()
+	{
+		m_pYes->setPopupMode(QToolButton::MenuButtonPopup);
+		QMenu* pMenu = new QMenu();
+		pMenu->addAction(tr("Yes and add to allowed programs"), this, SLOT(OnAcceptedAlways()));
+		m_pYes->setMenu(pMenu);
+	}
+
 signals:
 	void		PromptResult(int retval);
 
 private slots:
+	void		OnAcceptedAlways() { m_bAddToList = true; emit PromptResult(1); }
 	void		OnAccepted() { emit PromptResult(1); }
 	void		OnRejected() { emit PromptResult(0); }
 	void		OnTerminate() { emit PromptResult(-1); }
@@ -190,6 +200,7 @@ protected:
 	quint32				m_RequestId;
 	QVariantMap			m_Result;
 	CBoxedProcessPtr	m_pProcess;
+	bool				m_bAddToList;
 
 	QLabel*				m_pLabel;
 	QCheckBox*			m_pRemember;

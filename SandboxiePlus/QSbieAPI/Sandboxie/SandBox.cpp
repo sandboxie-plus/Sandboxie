@@ -91,6 +91,11 @@ SB_STATUS CSandBox::TerminateAll()
 	return m_pAPI->TerminateAll(m_Name);
 }
 
+bool CSandBox::IsEmpty()
+{
+	return !QDir(m_FilePath).exists();
+}
+
 SB_PROGRESS CSandBox::CleanBox()
 {
 	if (GetBool("NeverDelete", false))
@@ -148,9 +153,8 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
-	if (QDir(m_FilePath).exists())
+	if (!IsEmpty())
 		return SB_ERR(SB_RemNotEmpty);
-
 
 	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
 	if (Status.IsError())
@@ -161,7 +165,7 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 
 SB_STATUS CSandBox::RemoveBox()
 {
-	if (QDir(m_FilePath).exists())
+	if (!IsEmpty())
 		return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
@@ -213,6 +217,9 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 
 	if (m_pAPI->HasProcesses(m_Name))
 		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+
+	if (IsEmpty())
+		return SB_ERR(SB_SnapIsEmpty);
 
 	QStringList Snapshots = ini.childGroups();
 

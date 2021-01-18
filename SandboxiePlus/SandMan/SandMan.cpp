@@ -113,6 +113,8 @@ CSandMan::CSandMan(QWidget *parent)
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	this->setWindowTitle(appTitle);
 
+	setAcceptDrops(true);
+
 	m_pBoxBorder = new CBoxBorder(theAPI, this);
 
 	m_SbieTemplates = new CSbieTemplates(theAPI, this);
@@ -250,6 +252,10 @@ CSandMan::CSandMan(QWidget *parent)
 		pAction->setChecked(pAction->data().toBool() == bAdvanced);
 	SetViewMode(bAdvanced);
 
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	m_pWndTopMost->setChecked(bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 
 	m_pProgressDialog = new CProgressDialog("", this);
@@ -372,6 +378,11 @@ void CSandMan::CreateMenus()
 		MakeAction(m_pViewMode, m_pMenuView, tr("Simple View"), false);
 		MakeAction(m_pViewMode, m_pMenuView, tr("Advanced View"), true);
 		connect(m_pViewMode, SIGNAL(triggered(QAction*)), this, SLOT(OnViewMode(QAction*)));
+
+		m_pMenuView->addSeparator();
+		m_pWndTopMost = m_pMenuView->addAction(tr("Always on Top"), this, SLOT(OnAlwaysTop()));
+		m_pWndTopMost->setCheckable(true);
+
 		m_iMenuViewPos = m_pMenuView->actions().count();
 		m_pMenuView->addSeparator();
 
@@ -550,12 +561,39 @@ void CSandMan::OnMessage(const QString& Message)
 		else
 		{
 			OnLogMessage(tr("Maintenance operation Successful"));
-			if (m_bConnectPending)
-				ConnectSbieImpl();
+			if (m_bConnectPending) {
+
+				QTimer::singleShot(1000, [this]() {
+					this->ConnectSbieImpl();
+				});
+			}
 		}
 		m_pProgressDialog->hide();
 		m_bConnectPending = false;
 		m_bStopPending = false;
+	}
+}
+
+void CSandMan::dragEnterEvent(QDragEnterEvent* e)
+{
+	if (e->mimeData()->hasUrls()) {
+		e->acceptProposedAction();
+	}
+}
+
+void CSandMan::dropEvent(QDropEvent* e)
+{
+	bool ok;
+	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Sellect box:"), theAPI->GetAllBoxes().keys(), 0, false, &ok);
+	if (!ok || box.isEmpty())
+		return;
+
+	foreach(const QUrl & url, e->mimeData()->urls()) {
+		if (!url.isLocalFile())
+			continue;
+		QString FileName = url.toLocalFile().replace("/", "\\");
+		
+		theAPI->RunStart(box, FileName);
 	}
 }
 
@@ -566,7 +604,13 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	if (theAPI->IsConnected())
 	{
-		theAPI->ReloadBoxes();
+		SB_STATUS Status = theAPI->ReloadBoxes();
+
+		if (!Status.IsError() && theAPI->GetAllBoxes().count() == 0) {
+			OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));
+			theAPI->CreateBox("DefaultBox");
+		}
+
 		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
 
 		m_pDisableForce->setChecked(theAPI->AreForceProcessDisabled());
@@ -633,6 +677,41 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			m_RequestManager->AbortAll();
 		}
 	}
+
+	if (!m_MissingTemplates.isEmpty())
+	{
+		if (m_MissingTemplates[0] == "") {
+			m_MissingTemplates.clear();
+			return;
+		}
+
+		int CleanupTemplates = theConf->GetInt("Options/AutoCleanupTemplates", -1);
+		if (CleanupTemplates == -1)
+		{
+			bool State = false;
+			CleanupTemplates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?")
+				.arg(m_MissingTemplates.join(", "))
+				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
+
+			if (State)
+				theConf->SetValue("Options/AutoCleanupTemplates", CleanupTemplates);
+		}
+
+		if (CleanupTemplates)
+		{
+			foreach(const QString& Template, m_MissingTemplates)
+			{
+				theAPI->GetGlobalSettings()->DelValue("Template", Template);
+				foreach(const CSandBoxPtr& pBox, theAPI->GetAllBoxes())
+					pBox->DelValue("Template", Template);
+			}
+
+			OnLogMessage(tr("Cleaned up removed templates..."));
+		}
+		m_MissingTemplates.clear();
+
+		m_MissingTemplates.append("");
+	}
 }
 
 void CSandMan::OnBoxClosed(const QString& BoxName)
@@ -641,7 +720,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 	if (!pBox)
 		return;
 
-	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false))
+	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
 		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
 		if (pRecoveryWindow->FindFiles() == 0)
@@ -685,7 +764,8 @@ void CSandMan::OnStatusChanged()
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	if (isConnected)
 	{
-		OnLogMessage(tr("Sbie Directory: %1").arg(theAPI->GetSbiePath()));
+		QString SbiePath = theAPI->GetSbiePath();
+		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
 		statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
@@ -721,6 +801,12 @@ void CSandMan::OnStatusChanged()
 				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
 				pSettingsWindow->showCompat();
 			}
+		}
+
+		if (SbiePath.compare(QApplication::applicationDirPath().replace("/", "\\"), Qt::CaseInsensitive) == 0)
+		{
+			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent").isEmpty())
+				theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
 		}
 
 		m_pBoxView->Clear();
@@ -809,6 +895,12 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 	{
 		m_pPopUpWindow->ShowProgress(MsgCode, MsgData, ProcessId);
 		return;
+	}
+
+	if ((MsgCode & 0xFFFF) == 1411) // removed/missing template
+	{
+		if(MsgData.size() >= 3 && !m_MissingTemplates.contains(MsgData[2]))
+			m_MissingTemplates.append(MsgData[2]);
 	}
 
 	QString Message = MsgCode != 0 ? theAPI->GetSbieMsgStr(MsgCode, m_LanguageId) : (MsgData.size() > 0 ? MsgData[0] : QString());
@@ -1030,16 +1122,8 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 	if (Status && !CSbieAPI::IsSbieCtrlRunning()) // don't take over when SbieCtrl is up and running
 		Status = theAPI->TakeOver();
 
-	if (Status)
-		Status = theAPI->ReloadBoxes();
-
 	if (!Status)
 		return Status;
-
-	if (theAPI->GetAllBoxes().count() == 0) {
-		OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));
-		theAPI->CreateBox("DefaultBox");
-	}
 
 	bool bIsMonitoring = theAPI->IsMonitoring();
 	m_pResourceLog->setEnabled(bIsMonitoring);
@@ -1118,6 +1202,14 @@ void CSandMan::OnViewMode(QAction* pAction)
 	SetViewMode(bAdvanced);
 }
 
+void CSandMan::OnAlwaysTop()
+{
+	bool bAlwaysOnTop = m_pWndTopMost->isChecked();
+	theConf->SetValue("Options/AlwaysOnTop", bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->show(); // why is this needed?
+}
+
 void CSandMan::SetViewMode(bool bAdvanced)
 {
 	if (bAdvanced)
@@ -1179,9 +1271,16 @@ void CSandMan::OnSetKeep()
 
 void CSandMan::OnSettings()
 {
-	CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-	connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
-	pSettingsWindow->show();
+	static CSettingsWindow* pSettingsWindow = NULL;
+	if (pSettingsWindow == NULL)
+	{
+		pSettingsWindow = new CSettingsWindow(this);
+		connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
+		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
+			pSettingsWindow = NULL;
+		});
+		pSettingsWindow->show();
+	}
 }
 
 void CSandMan::UpdateSettings()
@@ -1214,7 +1313,12 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/NoEditInfo", true);
 		theConf->SetValue("Options/ApiLogInfo", true);
 
+		theConf->SetValue("Options/BoxedExplorerInfo", true);
+		theConf->SetValue("Options/ExplorerInfo", true);
+
 		theConf->SetValue("Options/OpenUrlsSandboxed", 2);
+
+		theConf->SetValue("Options/AutoCleanupTemplates", -1);
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
@@ -1410,7 +1514,8 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_SnapDelRegFail:	Message = tr("Failed to remove old RegHive"); break;
 	case SB_NotAuthorized:	Message = tr("You are not authorized to update configuration in section '%1'"); break;
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
-
+	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
+	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
 	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
 	}
 
@@ -1796,6 +1901,10 @@ void CSandMan::SetDarkTheme(bool bDark)
 		palette.setColor(QPalette::Link, QColor(218, 130, 42));
 		palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
 		palette.setColor(QPalette::HighlightedText, Qt::black);
+		palette.setColor(QPalette::Disabled, QPalette::WindowText, Qt::darkGray);
+		palette.setColor(QPalette::Disabled, QPalette::Text, Qt::darkGray);
+		palette.setColor(QPalette::Disabled, QPalette::Light, Qt::black);
+		palette.setColor(QPalette::Disabled, QPalette::ButtonText, Qt::darkGray);
 		QApplication::setPalette(palette);
 	}
 	else

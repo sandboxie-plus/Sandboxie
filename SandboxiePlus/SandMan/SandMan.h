@@ -14,8 +14,8 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	5
-#define VERSION_REV 	4
-#define VERSION_UPD 	4
+#define VERSION_REV 	5
+#define VERSION_UPD 	0
 
 
 //#include "../QSbieAPI/SbieAPI.h"
@@ -56,7 +56,11 @@ protected:
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	void				closeEvent(QCloseEvent *e);
+	void				closeEvent(QCloseEvent* e);
+
+	void				dragEnterEvent(QDragEnterEvent* e);
+	void				dropEvent(QDropEvent* e);
+
 	void				timerEvent(QTimerEvent* pEvent);
 	int					m_uTimerID;
 	bool				m_bConnectPending;
@@ -70,6 +74,8 @@ protected:
 
 	CNetworkAccessManager*	m_RequestManager;
 	CSbieProgressPtr	m_pUpdateProgress;
+
+	QStringList			m_MissingTemplates;
 
 public slots:
 	void				OnMessage(const QString&);
@@ -114,6 +120,7 @@ private slots:
 	void				OnMaintenance();
 
 	void				OnViewMode(QAction* action);
+	void				OnAlwaysTop();
 	void				OnCleanUp();
 	void				OnSetKeep();
 
@@ -187,6 +194,7 @@ private:
 
 	QMenu*				m_pMenuView;
 	QActionGroup*		m_pViewMode;
+	QAction*			m_pWndTopMost;
 	int					m_iMenuViewPos;
 	QMenu*				m_pCleanUpMenu;
 	QAction*			m_pCleanUpProcesses;

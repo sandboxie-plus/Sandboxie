@@ -1006,6 +1006,7 @@ _FX NTSTATUS Ipc_CheckJobObject(
     // is inside the sandbox
     //
 
+    if (!Conf_Get_Boolean(proc->box->name, L"NoAddProcessToJob", 0, FALSE))
     if (GrantedAccess & (JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE))
         return STATUS_ACCESS_DENIED;
 

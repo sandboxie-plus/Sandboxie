@@ -584,6 +584,42 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>uiLang</tabstop>
+  <tabstop>chkDarkTheme</tabstop>
+  <tabstop>chkAutoStart</tabstop>
+  <tabstop>chkSvcStart</tabstop>
+  <tabstop>chkAutoUpdate</tabstop>
+  <tabstop>chkShellMenu</tabstop>
+  <tabstop>chkNotifications</tabstop>
+  <tabstop>chkSandboxUrls</tabstop>
+  <tabstop>chkShowRecovery</tabstop>
+  <tabstop>chkShowTray</tabstop>
+  <tabstop>onClose</tabstop>
+  <tabstop>fileRoot</tabstop>
+  <tabstop>btnBrowse</tabstop>
+  <tabstop>chkSeparateUserFolders</tabstop>
+  <tabstop>chkAutoRoot</tabstop>
+  <tabstop>regRoot</tabstop>
+  <tabstop>ipcRoot</tabstop>
+  <tabstop>chkWatchConfig</tabstop>
+  <tabstop>chkAdminOnly</tabstop>
+  <tabstop>chkPassRequired</tabstop>
+  <tabstop>btnSetPassword</tabstop>
+  <tabstop>chkAdminOnlyFP</tabstop>
+  <tabstop>chkClearPass</tabstop>
+  <tabstop>chkStartBlock</tabstop>
+  <tabstop>treeWarnProgs</tabstop>
+  <tabstop>btnAddWarnProg</tabstop>
+  <tabstop>btnAddWarnFolder</tabstop>
+  <tabstop>btnDelWarnProg</tabstop>
+  <tabstop>chkStartBlockMsg</tabstop>
+  <tabstop>treeCompat</tabstop>
+  <tabstop>btnAddCompat</tabstop>
+  <tabstop>btnDelCompat</tabstop>
+  <tabstop>chkNoCompat</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

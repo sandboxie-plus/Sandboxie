@@ -45,7 +45,7 @@
         <enum>QTabWidget::West</enum>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1770,8 +1770,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>530</width>
+                    <height>312</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">
@@ -1960,6 +1960,112 @@ instead of &quot;*&quot;.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>cmbBoxIndicator</tabstop>
+  <tabstop>cmbBoxBorder</tabstop>
+  <tabstop>btnBorderColor</tabstop>
+  <tabstop>spinBorderWidth</tabstop>
+  <tabstop>chkBlockNetShare</tabstop>
+  <tabstop>chkBlockNetParam</tabstop>
+  <tabstop>chkDropRights</tabstop>
+  <tabstop>chkBlockSpooler</tabstop>
+  <tabstop>chkOpenSpooler</tabstop>
+  <tabstop>chkPrintToFile</tabstop>
+  <tabstop>treeRun</tabstop>
+  <tabstop>btnAddCmd</tabstop>
+  <tabstop>btnDelCmd</tabstop>
+  <tabstop>chkCopyLimit</tabstop>
+  <tabstop>txtCopyLimit</tabstop>
+  <tabstop>chkNoCopyWarn</tabstop>
+  <tabstop>chkAutoEmpty</tabstop>
+  <tabstop>chkProtectBox</tabstop>
+  <tabstop>treeAutoStart</tabstop>
+  <tabstop>btnAddAutoExe</tabstop>
+  <tabstop>btnAddAutoSvc</tabstop>
+  <tabstop>btnDelAuto</tabstop>
+  <tabstop>treeGroups</tabstop>
+  <tabstop>btnAddGroup</tabstop>
+  <tabstop>btnAddProg</tabstop>
+  <tabstop>btnDelProg</tabstop>
+  <tabstop>treeForced</tabstop>
+  <tabstop>btnForceProg</tabstop>
+  <tabstop>btnForceDir</tabstop>
+  <tabstop>chkShowForceTmpl</tabstop>
+  <tabstop>btnDelForce</tabstop>
+  <tabstop>treeStop</tabstop>
+  <tabstop>btnAddLingering</tabstop>
+  <tabstop>btnAddLeader</tabstop>
+  <tabstop>chkShowStopTmpl</tabstop>
+  <tabstop>btnDelStopProg</tabstop>
+  <tabstop>radStartAll</tabstop>
+  <tabstop>radStartExcept</tabstop>
+  <tabstop>radStartSelected</tabstop>
+  <tabstop>treeStart</tabstop>
+  <tabstop>btnAddStartProg</tabstop>
+  <tabstop>btnDelStartProg</tabstop>
+  <tabstop>chkStartBlockMsg</tabstop>
+  <tabstop>chkBlockINet</tabstop>
+  <tabstop>chkINetBlockPrompt</tabstop>
+  <tabstop>treeINet</tabstop>
+  <tabstop>btnAddINetProg</tabstop>
+  <tabstop>btnDelINetProg</tabstop>
+  <tabstop>chkINetBlockMsg</tabstop>
+  <tabstop>treeAccess</tabstop>
+  <tabstop>btnAddFile</tabstop>
+  <tabstop>btnAddKey</tabstop>
+  <tabstop>btnAddIPC</tabstop>
+  <tabstop>btnAddWnd</tabstop>
+  <tabstop>btnAddCOM</tabstop>
+  <tabstop>btnMoveUp</tabstop>
+  <tabstop>btnMoveDown</tabstop>
+  <tabstop>chkShowAccessTmpl</tabstop>
+  <tabstop>btnDelAccess</tabstop>
+  <tabstop>chkAutoRecovery</tabstop>
+  <tabstop>treeRecovery</tabstop>
+  <tabstop>btnAddRecovery</tabstop>
+  <tabstop>btnAddRecIgnore</tabstop>
+  <tabstop>btnAddRecIgnoreExt</tabstop>
+  <tabstop>chkShowRecoveryTmpl</tabstop>
+  <tabstop>btnDelRecovery</tabstop>
+  <tabstop>tabsAdvanced</tabstop>
+  <tabstop>chkPreferExternalManifest</tabstop>
+  <tabstop>chkNoWindowRename</tabstop>
+  <tabstop>chkAddToJob</tabstop>
+  <tabstop>chkRestrictServices</tabstop>
+  <tabstop>chkProtectSCM</tabstop>
+  <tabstop>chkProtectSystem</tabstop>
+  <tabstop>chkOpenProtectedStorage</tabstop>
+  <tabstop>chkOpenCredentials</tabstop>
+  <tabstop>chkOpenSmartCard</tabstop>
+  <tabstop>lstAutoExec</tabstop>
+  <tabstop>btnAddAutoExec</tabstop>
+  <tabstop>btnDelAutoExec</tabstop>
+  <tabstop>chkHideOtherBoxes</tabstop>
+  <tabstop>lstProcesses</tabstop>
+  <tabstop>btnAddProcess</tabstop>
+  <tabstop>btnDelProcess</tabstop>
+  <tabstop>lstUsers</tabstop>
+  <tabstop>btnAddUser</tabstop>
+  <tabstop>btnDelUser</tabstop>
+  <tabstop>chkMonitorAdminOnly</tabstop>
+  <tabstop>chkFileTrace</tabstop>
+  <tabstop>chkPipeTrace</tabstop>
+  <tabstop>chkKeyTrace</tabstop>
+  <tabstop>chkIpcTrace</tabstop>
+  <tabstop>chkGuiTrace</tabstop>
+  <tabstop>chkComTrace</tabstop>
+  <tabstop>chkDbgTrace</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>treeTemplates</tabstop>
+  <tabstop>cmbCategories</tabstop>
+  <tabstop>txtTemplates</tabstop>
+  <tabstop>btnEditIni</tabstop>
+  <tabstop>txtIniSection</tabstop>
+  <tabstop>btnSaveIni</tabstop>
+  <tabstop>btnCancelEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

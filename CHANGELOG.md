@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue allowing to save setting when a sandbox was alrady deleted
 - fixed issues with disabled items in dark mode
 - fixed some dialogs not closing on esc
+- fixed tab stops on many windows
 
 
 

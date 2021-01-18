@@ -1625,6 +1625,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
     BOOL ok = TRUE;
+    WCHAR ctrlName[64];
 
     //
     // get token from caller session or caller process.  note that on
@@ -1668,21 +1669,28 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
     if (ok && isSandboxed) {
 
         const WCHAR *_Setting = SBIECTRL_ L"EnableAutoStart";
+        const WCHAR* _Setting2 = SBIECTRL_ L"AutoStartAgent";
         WCHAR buf[10], ch = 0;
         bool ok2 = SetUserSettingsSectionName(hToken);
         if (ok2) {
             SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting, 0, buf, 8 * sizeof(WCHAR));
+                m_sectionname, _Setting, 0, buf, sizeof(buf) - 2);
             ch = towlower(buf[0]);
+
+            SbieApi_QueryConfAsIs(
+                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
         }
         if (! ch) {
             wcscpy(m_sectionname + 13, L"Default");   // UserSettings_Default
             SbieApi_QueryConfAsIs(
                 m_sectionname, _Setting, 0, buf, 8 * sizeof(WCHAR));
             ch = towlower(buf[0]);
+
+            SbieApi_QueryConfAsIs(
+                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
         }
 
-        if (ch != L'y') {
+        if (ch == L'n') {
             status = STATUS_LOGON_NOT_GRANTED;
             ok = FALSE;
         }
@@ -1699,11 +1707,11 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
 
         WCHAR *args;
         if (isSandboxed)
-            args = NULL;
+            args = L" -autorun";
         else
             args = L" /open /sync";
 
-        if (SbieDll_RunFromHome(SBIECTRL_EXE, args, &si, NULL)) {
+        if (SbieDll_RunFromHome(*ctrlName ? ctrlName : SBIECTRL_EXE, args, &si, NULL)) {
 
             WCHAR *CmdLine = (WCHAR *)si.lpReserved;
 

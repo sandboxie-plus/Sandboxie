@@ -976,8 +976,11 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 	// when the PROC_THREAD_ATTRIBUTE_JOB_LIST is set the call CreateProcessAsUserW -> CreateProcessInternalW -> NtCreateProcess 
 	// fals with an access denided error, so we need to block this attribute form being set
 	// if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
-	if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
-		return TRUE;
+    if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
+    {
+        if (!SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE))
+            return TRUE;
+    }
 
 	// some mitigation flags break SbieDll.dll Injection, so we disable them
 	if (Attribute == 0x00020007) //PROC_THREAD_ATTRIBUTE_MITIGATION_POLICY
@@ -1380,11 +1383,13 @@ _FX BOOL Proc_AlternateCreateProcess(
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
     BOOL *ReturnValue)
 {
+    if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", TRUE))
     if (Proc_IsSoftwareUpdateW(lpApplicationName)) {
 
         SetLastError(ERROR_ACCESS_DENIED);
         *ReturnValue = FALSE;
 
+        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of an updater");
         return TRUE;        // exit CreateProcessInternal
     }
 
@@ -1407,11 +1412,14 @@ _FX BOOL Proc_AlternateCreateProcess(
         // don't start Kaspersky Anti Virus klwtblfs.exe component
         // because Kaspersky protects the process and we can't put
         // it into a job or inject SbieLow and so on
+        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of klwtblfs.exe");
         return TRUE;        // exit CreateProcessInternal
     }
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH && lpCommandLine
         && wcsstr(lpCommandLine, L"smartscreen.exe")) {
-            return TRUE;        // exit CreateProcessInternal
+
+        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of smartscreen.exe");
+        return TRUE;        // exit CreateProcessInternal
     }
     return FALSE;           // continue with CreateProcessInternal
 }

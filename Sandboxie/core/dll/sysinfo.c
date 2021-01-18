@@ -122,9 +122,13 @@ _FX BOOLEAN SysInfo_Init(void)
         SBIEDLL_HOOK(SysInfo_,NtQuerySystemInformation);
     }
 
-    SBIEDLL_HOOK(SysInfo_,NtCreateJobObject);
-    SBIEDLL_HOOK(SysInfo_,NtAssignProcessToJobObject);
-    SBIEDLL_HOOK(SysInfo_,NtSetInformationJobObject);
+    SBIEDLL_HOOK(SysInfo_, NtCreateJobObject);
+    if (!SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE)) 
+    {
+        SBIEDLL_HOOK(SysInfo_, NtAssignProcessToJobObject);
+        SBIEDLL_HOOK(SysInfo_, NtSetInformationJobObject);
+    }
+
 
     SBIEDLL_HOOK(SysInfo_,SetLocaleInfoW);
     SBIEDLL_HOOK(SysInfo_,SetLocaleInfoA);
@@ -392,7 +396,8 @@ _FX NTSTATUS SysInfo_NtCreateJobObject(
     // job object, and to not request some specific rights
     //
 
-    DesiredAccess &= ~(JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE);
+    if (!SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE))
+        DesiredAccess &= ~(JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE);
 
     jobname_len = Dll_BoxIpcPathLen + wcslen(Dll_ImageName) + 64;
     jobname = Dll_AllocTemp(jobname_len * sizeof(WCHAR));

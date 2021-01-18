@@ -82,18 +82,6 @@ typedef struct _WINAPI_MESSAGE {
 
 } WINAPI_MESSAGE;
 
-
-typedef struct _LSA_MESSAGE_XP {
-
-    PORT_MESSAGE port_msg;
-    ULONG api_code;
-    ULONG status;
-    ULONG auth_pkg_code;
-    ULONG *buf;
-    ULONG buf_len;
-
-} LSA_MESSAGE_XP;
-
 typedef struct _POWER_API_MESSAGE
 {
     PORT_MESSAGE port_msg;
@@ -122,24 +110,27 @@ typedef struct _POWER_API_MESSAGE
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Ipc_CheckPortRequest(
+NTSTATUS Ipc_CheckPortRequest(
     PROCESS *proc, HANDLE PortHandle, PORT_MESSAGE *msg);
 
-static NTSTATUS Ipc_CheckPortRequest_WinApi(
+NTSTATUS Ipc_CheckPortRequest_WinApi(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
-static NTSTATUS Ipc_CheckPortRequest_Lsa(
+NTSTATUS Ipc_CheckPortRequest_Lsa(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
-static NTSTATUS Ipc_CheckPortRequest_LsaEP(
+NTSTATUS Ipc_CheckPortRequest_LsaEP(
     PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg);
 
-static NTSTATUS Ipc_CheckPortRequest_PowerManagement(
+NTSTATUS Ipc_CheckPortRequest_PowerManagement(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
-static NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
+NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
+
+static NTSTATUS Ipc_Api_GetRpcPortName_2(
+    PEPROCESS ProcessObject, WCHAR* pDstPortName);
 
 
 //---------------------------------------------------------------------------
@@ -147,7 +138,9 @@ static NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
 //---------------------------------------------------------------------------
 
 
-static ULONG Ipc_MSV10_AuthPackageNumber = 0;
+IPC_DYNAMIC_PORTS Ipc_Dynamic_Ports[NUM_DYNAMIC_PORTS];
+
+static const WCHAR* _rpc_control = L"\\RPC Control";
 
 
 //---------------------------------------------------------------------------
@@ -268,121 +261,6 @@ finish:
     return status;
 }
 
-
-//---------------------------------------------------------------------------
-// Ipc_CheckPortRequest_SpoolerPort
-//---------------------------------------------------------------------------
-
-// This routine is currently not used.  We chose to block spooler CreateFile in the minifilter instead.  But I (Curt) am keeping this code
-// around because it demonstrates how to examine & filter RPC requests going to the spooler.
-
-// todo: move this code to ipc_spl.c
-
-BOOLEAN Ipc_Filter_Spooler_Msg(UCHAR uMsg);
-
-_FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
-    PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg)
-{
-    NTSTATUS status;
-
-    if (proc->ipc_openPrintSpooler)        // see if we are not filtering spooler requests
-        return STATUS_BAD_INITIAL_PC;
-
-    //
-    // check that it is the spooler port
-    //
-
-    if (Driver_OsVersion >= DRIVER_WINDOWS_81) {
-
-        if (Name->Name.Length < 13 * sizeof(WCHAR))
-            return STATUS_BAD_INITIAL_PC;
-
-        BOOLEAN is_spooler = FALSE;
-
-        if (Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock)
-        {
-            KeEnterCriticalRegion();
-            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE);
-
-            if (_wcsicmp(Name->Name.Buffer, Ipc_Dynamic_Ports[SPOOLER_PORT].wstrPortName) == 0)
-            {
-                // dynamic version of RPC ports, see also ipc_spl.c
-                // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
-                is_spooler = TRUE;
-            }
-
-            ExReleaseResourceLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock);
-            KeLeaveCriticalRegion();
-        }
-
-        if(!is_spooler)
-            return STATUS_BAD_INITIAL_PC;
-    }
-    else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
-
-        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\spoolss") != 0)
-            return STATUS_BAD_INITIAL_PC;
-
-    } else
-        return STATUS_BAD_INITIAL_PC;
-
-    //
-    // examine message
-    //
-
-    status = STATUS_SUCCESS;
-
-    __try {
-
-        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
-
-        if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
-
-            //
-            //
-
-            ULONG  len = msg->u1.s1.DataLength;
-            UCHAR *ptr = (UCHAR *)((UCHAR *)msg + sizeof(PORT_MESSAGE));
-            int i = 0;
-            int rc = -2;
-
-            ProbeForRead(ptr, len, sizeof(WCHAR));
-
-            /*if (ptr[20] == 17) {        // RpcStartDocPrinter = Opnum 17
-
-                if (!proc->ipc_allowSpoolerPrintToFile)
-                {
-                    status = STATUS_ACCESS_DENIED;
-                    //for (i = 20; i < len - 12; i++)
-                    //{
-                    //  rc = memcmp((void*)&(ptr[i]), "\4\0\0\0\0\0\0\0\4\0\0\0\0", 12);    // search for marshaled "RAW" field length bytes
-                    //  if (rc == 0)
-                    //  {
-                    //      rc = _wcsnicmp((void*)&(ptr[i + 12]), L"raw", 3);       // search for case insensitive "RAW"
-                    //      if (rc == 0)
-                    //          status = STATUS_ACCESS_DENIED;
-                    //  }
-                    //}
-                }
-
-                if (status == STATUS_ACCESS_DENIED)
-                    Log_MsgP0(MSG_1319, proc->pid);
-            }
-            else*/ 
-
-            if (Ipc_Filter_Spooler_Msg(ptr[20]))
-                status = STATUS_ACCESS_DENIED;
-
-            //DbgPrint("Spooler IPC Port message ID: %d\n", (int)ptr[20]);
-
-        }
-
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    return status;
-}
 
 //---------------------------------------------------------------------------
 // Ipc_DisplayPowerMsg
@@ -543,6 +421,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_PowerManagement(
     return Status;
 }
 
+
 //---------------------------------------------------------------------------
 // Ipc_CheckPortRequest_WinApi
 //---------------------------------------------------------------------------
@@ -626,174 +505,6 @@ _FX NTSTATUS Ipc_CheckPortRequest_WinApi(
 
 
 //---------------------------------------------------------------------------
-// Ipc_CheckPortRequest_Lsa
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Ipc_CheckPortRequest_Lsa(
-    PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg)
-{
-    NTSTATUS status;
-
-    if (! proc->ipc_block_password)
-        return STATUS_BAD_INITIAL_PC;
-
-    //
-    // check that it is \LsaAuthenticationPort
-    // or that it is \RPC Control\lsasspirpc (Windows 7 variant)
-    //
-
-    if (Name->Name.Length == 22 * sizeof(WCHAR)) {
-
-        if (_wcsicmp(Name->Name.Buffer, L"\\LsaAuthenticationPort") != 0)
-            return STATUS_BAD_INITIAL_PC;
-
-    } else if (Name->Name.Length == 23 * sizeof(WCHAR)) {
-
-        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\lsasspirpc") != 0)
-            return STATUS_BAD_INITIAL_PC;
-
-    } else
-        return STATUS_BAD_INITIAL_PC;
-
-    //
-    // examine message
-    //
-
-    status = STATUS_SUCCESS;
-
-    __try {
-
-        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
-
-        if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
-
-            //
-            // in Windows Vista and Windows 7, a password change request
-            // includes the WCHAR string Negotiate immediately followed
-            // by a non-zero WCHAR
-            //
-
-            WCHAR *ptr = (WCHAR *)((UCHAR *)msg + sizeof(PORT_MESSAGE));
-            ULONG  len = msg->u1.s1.DataLength;
-
-            ProbeForRead(ptr, len, sizeof(WCHAR));
-            len /= sizeof(WCHAR);
-
-            while (len > 9 + 1) {
-
-                if (ptr[0] == L'N' && ptr[9] != 0
-                        && wmemcmp(ptr, L"Negotiate", 9) == 0) {
-
-                    status = STATUS_ACCESS_DENIED;
-                    break;
-                }
-
-                ++ptr;
-                --len;
-            }
-
-        } else { // xp support
-
-            //
-            // prior to Windows Vista, we have a 'call package' api
-            // call (value 2), which identifies the MSV10 auth package,
-            // and a change password sub code (value 5)
-            //
-
-            if (msg->u1.s1.TotalLength >= sizeof(LSA_MESSAGE_XP)) {
-
-                LSA_MESSAGE_XP *msg2 = (LSA_MESSAGE_XP *)msg;
-
-                ProbeForRead(
-                    msg2, sizeof(LSA_MESSAGE_XP), sizeof(ULONG_PTR));
-
-                if (msg2->api_code == 2 &&  // LsaCallAuthenticationPackage
-                    msg2->auth_pkg_code == Ipc_MSV10_AuthPackageNumber &&
-                    msg2->buf_len >= sizeof(ULONG)) {
-
-                    ULONG *buf = msg2->buf;
-                    ProbeForRead(buf, sizeof(ULONG), sizeof(ULONG));
-
-                    if (*buf == 5) {            // change password
-
-                        status = STATUS_ACCESS_DENIED;
-                    }
-                }
-            }
-        }
-
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    if (status == STATUS_ACCESS_DENIED)
-		Log_Msg_Process(MSG_PASSWORD_CHANGE_DENIED, NULL, NULL, -1, proc->pid);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// Ipc_CheckPortRequest_LsaEP
-//---------------------------------------------------------------------------
-
-// todo: move the lsa code to code to ipc_lsa.c
-
-BOOLEAN Ipc_Filter_Lsa_Ep_Msg(UCHAR uMsg);
-
-_FX NTSTATUS Ipc_CheckPortRequest_LsaEP(
-    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
-{
-    NTSTATUS status;
-
-    if (proc->ipc_open_lsa_endpoint)
-        return STATUS_BAD_INITIAL_PC;
-
-    if (Name->Name.Length == 28 * sizeof(WCHAR)) {
-
-        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\LSARPC_ENDPOINT") != 0)
-            return STATUS_BAD_INITIAL_PC;
-
-    }
-    else
-        return STATUS_BAD_INITIAL_PC;
-
-    //
-    // examine message
-    //
-
-    status = STATUS_SUCCESS;
-
-    __try {
-
-        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
-
-        if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
-
-            ULONG  len = msg->u1.s1.DataLength;
-            UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
-            int i = 0;
-            int rc = -2;
-
-            ProbeForRead(ptr, len, sizeof(WCHAR));
-
-            if (Ipc_Filter_Lsa_Ep_Msg(ptr[20]))
-                status = STATUS_ACCESS_DENIED;
-
-            //DbgPrint("\\RPC Control\\LSARPC_ENDPOINT message ID: %d\n", (int)ptr[20]);
-        }
-
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
 // Ipc_ImpersonatePort
 //---------------------------------------------------------------------------
 
@@ -857,6 +568,288 @@ _FX NTSTATUS Ipc_AlpcSendWaitReceivePort(
 
 
 //---------------------------------------------------------------------------
+// Ipc_Api_OpenDynamicPort
+//---------------------------------------------------------------------------
+
+// Param 1 is dynamic port name (e.g. "\RPC Control\LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
+// Param 2 is the process PID for which to open the port, can be 0 when port is special
+// Param 3 is the port type/identifier, can be -1 indicating non special port
+
+_FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    //KIRQL irql;
+    API_OPEN_DYNAMIC_PORT_ARGS* pArgs = (API_OPEN_DYNAMIC_PORT_ARGS*)parms;
+    WCHAR portName[DYNAMIC_PORT_NAME_CHARS];
+
+    if (proc) // is caller sandboxed?
+        return STATUS_ACCESS_DENIED;
+
+    //if (PsGetCurrentProcessId() != Api_ServiceProcessId)
+    //    return STATUS_ACCESS_DENIED;
+
+    ENUM_DYNAMIC_PORT_TYPE ePortType = NUM_DYNAMIC_PORTS;
+    //if (pArgs->port_type.val == -1)
+    //    ePortType = NUM_DYNAMIC_PORTS;
+    //else 
+    if (pArgs->port_type.val <= NUM_DYNAMIC_PORTS)
+        ePortType = (ENUM_DYNAMIC_PORT_TYPE)pArgs->port_type.val;
+    //else
+    //    return STATUS_INVALID_PARAMETER;
+
+    if (pArgs->port_name.val == NULL)
+        return STATUS_INVALID_PARAMETER;
+    try {
+        ProbeForRead(pArgs->port_name.val, sizeof(WCHAR) * DYNAMIC_PORT_NAME_CHARS, sizeof(WCHAR));
+        wmemcpy(portName, pArgs->port_name.val, DYNAMIC_PORT_NAME_CHARS - 1);
+        portName[DYNAMIC_PORT_NAME_CHARS - 1] = L'\0';
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+    if (!NT_SUCCESS(status))
+        return status;
+
+    //
+    // When this is a special port save it our global Ipc_Dynamic_Ports structure
+    //
+
+    if (ePortType != NUM_DYNAMIC_PORTS && Ipc_Dynamic_Ports[ePortType].pPortLock)
+    {
+        KeEnterCriticalRegion();
+        ExAcquireResourceExclusiveLite(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
+
+        wmemcpy(Ipc_Dynamic_Ports[ePortType].wstrPortName, portName, DYNAMIC_PORT_NAME_CHARS);
+
+        ExReleaseResourceLite(Ipc_Dynamic_Ports[ePortType].pPortLock);
+        KeLeaveCriticalRegion();
+    }
+
+    //
+    // Open the port for the selected process
+    //
+
+    if (pArgs->process_id.val != 0)
+    {
+        //proc = Process_Find(pArgs->process_id.val, &irql);
+        proc = Process_Find(pArgs->process_id.val, NULL);
+        if (proc && (proc != PROCESS_TERMINATED))
+        {
+            KIRQL irql2;
+
+            KeRaiseIrql(APC_LEVEL, &irql2);
+            ExAcquireResourceExclusiveLite(proc->ipc_lock, TRUE);
+
+            Process_AddPath(proc, &proc->open_ipc_paths, NULL, FALSE, portName, FALSE);
+
+            ExReleaseResourceLite(proc->ipc_lock);
+            KeLowerIrql(irql2);
+        }
+        else
+            status = STATUS_NOT_FOUND;
+        //ExReleaseResourceLite(Process_ListLock);
+        //KeLowerIrql(irql);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_Api_GetDynamicPortFromPid
+//---------------------------------------------------------------------------
+
+// Param 1 is the service PID
+// Param 2 will return the port name with "\RPC Control\" prepended
+
+_FX NTSTATUS Ipc_Api_GetDynamicPortFromPid(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status;
+    PEPROCESS ProcessObject;
+    //BOOLEAN done = FALSE;
+    API_GET_DYNAMIC_PORT_FROM_PID_ARGS* pArgs = (API_GET_DYNAMIC_PORT_FROM_PID_ARGS*)parms;
+
+    if (proc) // is caller sandboxed?
+        return STATUS_ACCESS_DENIED;
+
+    //
+    // this function determines the dynamic RPC endpoint that is used by a service/process
+    //
+
+    status = PsLookupProcessByProcessId(pArgs->process_id.val, &ProcessObject);
+
+    if (NT_SUCCESS(status)) {
+
+        //if (PsGetProcessSessionId(ProcessObject) == 0) {
+        //
+        //    void *nbuf;
+        //    ULONG nlen;
+        //    WCHAR *nptr;
+        //
+        //    Process_GetProcessName(
+        //        Driver_Pool, (ULONG_PTR)pArgs->process_id.val, &nbuf, &nlen, &nptr);
+        //
+        //    if (nbuf) {
+        //
+        //        if (_wcsicmp(nptr, pArgs->exe_name.val) == 0
+        //            && MyIsProcessRunningAsSystemAccount(pArgs->process_id.val)) {
+
+        status = Ipc_Api_GetRpcPortName_2(ProcessObject, pArgs->full_port_name.val);
+
+        //            done = TRUE;
+        //        }
+        //
+        //        Mem_Free(nbuf, nlen);
+        //    }
+        //}
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_Api_GetRpcPortName_2
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR* pDstPortName)
+{
+    NTSTATUS status;
+    ULONG len, dummy_len;
+    ULONG context;
+    HANDLE handle;
+    OBJECT_DIRECTORY_INFORMATION* info;
+    void* buf, * PortObject;
+    UNICODE_STRING objname;
+    OBJECT_ATTRIBUTES objattrs;
+    WCHAR name[DYNAMIC_PORT_NAME_CHARS];
+
+    InitializeObjectAttributes(&objattrs,
+        &objname, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+
+    RtlInitUnicodeString(&objname, _rpc_control);
+
+    status = ZwOpenDirectoryObject(&handle, 0, &objattrs);
+
+    if (!NT_SUCCESS(status))
+        return status;
+
+    //
+    // get a list of all objects in the system
+    //
+
+    len = 0;
+    while (1) {
+
+        len += PAGE_SIZE * 2;
+        buf = ExAllocatePoolWithTag(PagedPool, len, tzuk);
+        if (!buf) {
+            status = STATUS_INSUFFICIENT_RESOURCES;
+            break;
+        }
+
+        dummy_len = 0;
+        status = ZwQueryDirectoryObject(
+            handle, buf, len, FALSE, TRUE, &context, &dummy_len);
+
+        if (status == STATUS_MORE_ENTRIES || status == STATUS_INFO_LENGTH_MISMATCH)
+        {
+            ExFreePoolWithTag(buf, tzuk);
+            continue;
+        }
+
+        break;
+    }
+
+    if (!NT_SUCCESS(status))
+        return status;
+
+    //
+    // go through list looking for LRPC-* objects of type ALPC Port
+    //
+
+    info = (OBJECT_DIRECTORY_INFORMATION*)buf;
+    while (1) {
+
+        UNICODE_STRING* ObjName = &info->ObjectName;
+        UNICODE_STRING* TypeName = &info->ObjectTypeName;
+
+        if ((!ObjName->Buffer) && (!TypeName->Buffer))
+            break;
+
+        if (TypeName->Length == 9 * sizeof(WCHAR) && TypeName->Buffer
+            && _wcsicmp(TypeName->Buffer, L"ALPC Port") == 0) {
+
+            if ((ObjName->Length > 5 * sizeof(WCHAR)) &&
+                (ObjName->Length < 64 * sizeof(WCHAR)) &&
+                _wcsnicmp(ObjName->Buffer, L"LRPC-", 5) == 0) {
+
+                swprintf(name, L"%s\\%s", _rpc_control, ObjName->Buffer);
+
+                RtlInitUnicodeString(&objname, name);
+
+                status = ObReferenceObjectByName(
+                    &objname, OBJ_CASE_INSENSITIVE, NULL, 0,
+                    *LpcPortObjectType, KernelMode, NULL,
+                    &PortObject);
+
+                if (NT_SUCCESS(status)) {
+
+                    //
+                    // make sure the owner process for the LRPC-* port
+                    // is the process that was specified as a parameter
+                    //
+
+                    struct {
+                        LIST_ENTRY PortListEntry;
+                        void* CommunicationInfo;
+                        PEPROCESS OwnerProcess;
+                    } *AlpcPortObject = PortObject;
+
+                    if (AlpcPortObject->OwnerProcess == ProcessObject) {
+
+                        __try {
+
+                            if (pDstPortName)
+                            {
+                                ProbeForWrite(pDstPortName, sizeof(WCHAR) * DYNAMIC_PORT_NAME_CHARS, sizeof(WCHAR));
+                                wmemcpy(pDstPortName, name, DYNAMIC_PORT_NAME_CHARS - 1);
+                                pDstPortName[DYNAMIC_PORT_NAME_CHARS - 1] = L'\0';
+                            }
+
+                        }
+                        __except (EXCEPTION_EXECUTE_HANDLER) {
+                            status = GetExceptionCode();
+                        }
+
+                        ObDereferenceObject(PortObject);
+                        break;
+                    }
+
+                    ObDereferenceObject(PortObject);
+                }
+            }
+        }
+
+        ++info;
+    }
+
+    //
+    // release storage
+    //
+
+    ExFreePoolWithTag(buf, tzuk);
+
+    ZwClose(handle);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 //
 // 32-bit hooks for Windows XP
 //
@@ -869,32 +862,6 @@ _FX NTSTATUS Ipc_AlpcSendWaitReceivePort(
 
 
 #ifndef _WIN64
-
-
-//---------------------------------------------------------------------------
-// Ipc_Api_SetLsaAuthPkg
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Ipc_Api_SetLsaAuthPkg(PROCESS *proc, ULONG64 *parms)
-{
-    //
-    // caller must be our service process
-    //
-
-    if (proc || (PsGetCurrentProcessId() != Api_ServiceProcessId))
-        return STATUS_ACCESS_DENIED;
-
-    //
-    // collect msv10 auth package number
-    //
-
-    if (Ipc_MSV10_AuthPackageNumber)
-        return STATUS_ACCESS_DENIED;
-
-    Ipc_MSV10_AuthPackageNumber = (ULONG)parms[1];
-    return STATUS_SUCCESS;
-}
 
 
 //---------------------------------------------------------------------------

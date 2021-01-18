@@ -11,6 +11,8 @@ public:
 	{
 		m_bAlternate = bAlternate;
 		m_bHighLight = false;
+
+		this->setSortCaseSensitivity(Qt::CaseInsensitive);
 	}
 
 	bool filterAcceptsRow(int source_row, const QModelIndex & source_parent) const

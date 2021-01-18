@@ -11,6 +11,15 @@ bool CPopUpWindow__DarkMode = false;
 
 CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 {
+	Qt::WindowFlags flags = windowFlags();
+	flags |= Qt::CustomizeWindowHint;
+	//flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	flags &= ~Qt::WindowMinMaxButtonsHint;
+	//flags &= ~Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowCloseButtonHint;
+	setWindowFlags(flags);
+
 	this->setWindowTitle(tr("Sandboxie-Plus Notifications"));
 
 	QWidget* centralWidget = new QWidget();
@@ -232,7 +241,10 @@ void CPopUpWindow::AddUserPrompt(quint32 RequestId, const QVariantMap& Data, qui
 	CPopUpPrompt* pEntry = new CPopUpPrompt(Message, RequestId, Result, pProcess, this);
 	switch (pEntry->m_Result["id"].toInt())
 	{
-		case CSbieAPI::eInetBlockade: pEntry->m_pRemember->setChecked(true); break;
+		case CSbieAPI::eInetBlockade: 
+			pEntry->AddAddToList();
+			pEntry->m_pRemember->setChecked(true); 
+			break;
 	}
 	connect(pEntry, SIGNAL(PromptResult(int)), this, SLOT(OnPromptResult(int)));
 	AddEntry(pEntry);
@@ -254,8 +266,14 @@ void CPopUpWindow::SendPromptResult(CPopUpPrompt* pEntry, int retval)
 	{
 		switch (pEntry->m_Result["id"].toInt())
 		{
-			case CSbieAPI::ePrintSpooler: theAPI->SetProcessExemption(pEntry->m_pProcess->GetProcessId(), 'splr', true); break;
-			case CSbieAPI::eInetBlockade: theAPI->SetProcessExemption(pEntry->m_pProcess->GetProcessId(), 'inet', true); break;
+			case CSbieAPI::ePrintSpooler: 
+				theAPI->SetProcessExemption(pEntry->m_pProcess->GetProcessId(), 'splr', true); 
+				break;
+			case CSbieAPI::eInetBlockade: 
+				if (pEntry->m_bAddToList)
+					pEntry->m_pProcess.objectCast<CSbieProcess>()->SetInternetAccess(true);
+				theAPI->SetProcessExemption(pEntry->m_pProcess->GetProcessId(), 'inet', true);
+				break;
 		}
 	}
 

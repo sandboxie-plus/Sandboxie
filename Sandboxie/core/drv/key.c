@@ -463,15 +463,26 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             letter = 0;
 
         if (letter) {
+
+            USHORT mon_type = MONITOR_KEY;
+            if (!IsBoxedPath) {
+                if (ShouldMonitorAccess == TRUE)
+                    mon_type |= MONITOR_DENY;
+                else
+                    mon_type |= MONITOR_OPEN;
+            }
+            if (!ShouldMonitorAccess)
+                mon_type |= MONITOR_TRACE;
+
             swprintf(access_str, L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
-            Log_Debug_Msg(MONITOR_FILE_OR_KEY, access_str, Name->Name.Buffer);
+            Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    if (ShouldMonitorAccess) {
+    else if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
+        Session_MonitorPut(MONITOR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
     }
 
     Mem_Free(Name, NameLength);

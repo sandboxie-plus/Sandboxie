@@ -120,12 +120,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="687"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sandbox wurde gelöscht, daher can die Konfiguration nicht gespeichert werden.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="722"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Änderungen wurden bisher nicht gespeichert, möchten Sie dieses Einstellungsfenster wirklich schließen?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="736"/>
@@ -147,7 +147,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="767"/>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführbare Dateien (*.exe|*.cmd);;Alle Dateien(*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="807"/>
@@ -320,7 +320,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="54"/>
         <source>Dismiss</source>
-        <translation>Ablehnen</translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="55"/>
@@ -338,7 +338,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="355"/>
         <source>Dismiss</source>
-        <translation>Ablehnen</translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="356"/>
@@ -371,7 +371,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="140"/>
         <source>Yes and add to allowed programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja und zu den erlaubten Programmen hinzufügen</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="175"/>
@@ -439,7 +439,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="264"/>
         <source>Dismiss</source>
-        <translation>Ablehnen</translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="265"/>
@@ -479,49 +479,29 @@
         <location filename="Windows/PopUpWindow.cpp" line="229"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+Dateiname: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="235"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+Vollständiger Pfad: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="298"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+Die Datei wurde geschrieben durch: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="386"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</oldsource>
-        <translation type="obsolete">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
-Dateiname: %3</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <oldsource>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</oldsource>
-        <translation type="obsolete">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
-Vollständiger Pfad: %3</translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <oldsource>%1 is eligible for quick recovery from %2.
-The file was written by: %3</oldsource>
-        <translation type="obsolete">Die Datei %1 ist zur Schnellwiederherstellung aus %2 berechtigt.
-Geschrieben durch: %3</translation>
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="300"/>
@@ -533,14 +513,6 @@ Geschrieben durch: %3</translation>
         <source>%1 (%2)</source>
         <translatorcomment>same as source</translatorcomment>
         <translation>%1 (%2)</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</oldsource>
-        <translation type="obsolete">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
-Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -584,12 +556,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="257"/>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine oder mehrere ausgewählte Dateien befinden sich auf Netzwerkpfaden und müssen zur Wiederherstellung lokal gespeichert werden. Bitte einen Ordner auswählen, um die ausgewählten Dateien darin wiederherzustellen.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="288"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es befinden sich %1 Dateien und %2 Ordner in der Sandbox, welche %3 bytes an Speicherplatz belegen.</translation>
     </message>
 </context>
 <context>
@@ -705,7 +677,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="184"/>
         <source>Resource Monitor</source>
-        <translation>Resourcenmonitor</translation>
+        <translation>Ressourcenmonitor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="197"/>
@@ -827,7 +799,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="383"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Immer oben</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="389"/>
@@ -958,17 +930,17 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="587"/>
         <source>Sellect box:</source>
-        <translation type="unfinished"></translation>
+        <translation>Box auswählen:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="692"/>
         <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Kompalibilitätsvorlagen (%1) fehlen, möglicherweise wurden sie gelöscht. Möchten Sie diese aus allen Boxen entfernen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="709"/>
         <source>Cleaned up removed templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernte Vorlagen aufgeräumt...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -1037,12 +1009,12 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1517"/>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann keinen Schnappschuss von einer leeren Box erstellen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1518"/>
         <source>A sandbox with that name already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Es existiert bereits eine Sandbox mit diesem Namen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1860"/>
@@ -1675,22 +1647,22 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <location filename="Views/SbieView.cpp" line="477"/>
         <location filename="Views/SbieView.cpp" line="506"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Meldung nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="544"/>
         <source>This Sandbox is already empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sandbox ist bereits leer.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="555"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie den Inhalt der ausgewählten Sandbox löschen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="558"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich die Inhalte von mehreren Sandboxen löschen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="689"/>
@@ -2109,12 +2081,12 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <location filename="Forms/OptionsWindow.ui" line="694"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
         <oldsource>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</oldsource>
-        <translation type="unfinished">Programme die hier gelistet sind oder von den angegeben Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
+        <translation>Programme die hier gelistet sind oder von den angegeben Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="707"/>
         <source>Stop Behaviour</source>
-        <translation>Stopverhalten</translation>
+        <translation>Stoppverhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="715"/>
@@ -2332,7 +2304,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
         <location filename="Forms/OptionsWindow.ui" line="1207"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
         <oldsource>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</oldsource>
-        <translation type="unfinished">Aktivere Sofortwiederherstellungsabfrage, um alle Dateien sofort wiederherstellen zu können sobald diese erzeugt werden.</translation>
+        <translation>Aktivere Sofortwiederherstellungsabfrage, um alle Dateien sofort wiederherstellen zu können sobald diese erzeugt werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1251"/>
@@ -2666,12 +2638,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Show All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige alle Dateien</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschriftungstext</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="76"/>
@@ -2835,17 +2807,17 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="143"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Benutzeroberfläche mit Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="193"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Benutzeroberfläche, wenn ein Prozess in einer Sandbox gestartet wird</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="200"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Wiederherstellungsfenster, vor dem Leeren der Sandboxen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="347"/>
@@ -2855,12 +2827,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>Other settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Einstellungen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="429"/>
@@ -2948,7 +2920,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>
         <source>Selected Snapshot Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte Schnappschussdetails</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="66"/>
@@ -2963,7 +2935,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="98"/>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnappschussaktionen</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>

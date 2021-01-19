@@ -752,14 +752,13 @@ QString CSbieAPI::GetVersion()
 
 SB_STATUS CSbieAPI::TakeOver()
 {
-	__declspec(align(8)) ULONG64 ResultValue;
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_SESSION_LEADER_ARGS *args = (API_SESSION_LEADER_ARGS *)parms;
 
 	memset(parms, 0, sizeof(parms));
 	args->func_code = API_SESSION_LEADER;
-	args->token_handle.val64 = 0;
-	args->process_id.val64 = 0;
+	args->token_handle.val64 = 0; // (ULONG64)(ULONG_PTR)GetCurrentProcessToken();
+	args->process_id.val64   = 0; // (ULONG64)(ULONG_PTR)&ResultValue;
 	
 	NTSTATUS status = m->IoControl(parms);
 	if (!NT_SUCCESS(status))
@@ -1008,7 +1007,7 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 
 	SB_STATUS Status = SbieIniSet(req, req->password, Section, Setting);
 	//if (!Status) 
-	//	emit LogSbieMessage(2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
+	//	emit LogSbieMessage(0xC1020000 | 2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	free(req);
 	return Status;
 }
@@ -1061,6 +1060,9 @@ SB_STATUS CSbieAPI::CreateBox(const QString& BoxName)
 	SB_STATUS Status = ValidateName(BoxName);
 	if(Status.IsError())
 		return Status;
+
+	if(m_SandBoxes.contains(BoxName.toLower()))
+		return SB_ERR(SB_NameExists);
 
 	Status = SbieIniSet(BoxName, "Enabled", "y");
 	if (Status.IsError()) 
@@ -1334,7 +1336,7 @@ QString CSbieAPI::GetDeviceMap()
 		status = CSbieAPI__OpenDeviceMap(m, &handle);
 
 	if (!NT_SUCCESS(status)) {
-		emit LogSbieMessage(2321, QStringList() << "" << QString("%1").arg(status, 8, 16) << "", GetCurrentProcessId());
+		emit LogSbieMessage(0xC1020000 | 2321, QStringList() << "" << QString("%1").arg(status, 8, 16) << "", GetCurrentProcessId());
 	}
 	else 
 	{
@@ -1345,7 +1347,7 @@ QString CSbieAPI::GetDeviceMap()
 		NtClose(handle);
 
 		if (!NT_SUCCESS(status)) {
-			emit LogSbieMessage(2321, QStringList() << "" << QString("%1").arg(status, 8, 16) << "", GetCurrentProcessId());
+			emit LogSbieMessage(0xC1020000 | 2321, QStringList() << "" << QString("%1").arg(status, 8, 16) << "", GetCurrentProcessId());
 		}
 		else 
 		{
@@ -1542,6 +1544,36 @@ QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
 		return QString();
 	
 	return BoxRoot + "\\drive\\" + Path.at(0) + Path.mid(2);
+}
+
+QString CSbieAPI::GetRealPath(const CSandBoxPtr& pBox, const QString& Path)
+{
+	QString RealPath;
+	QString BoxRoot = pBox->m_FilePath;
+	if (BoxRoot.right(1) == "\\") BoxRoot.truncate(BoxRoot.length() - 1);
+
+	if (Path.length() < BoxRoot.length())
+		return RealPath;
+
+	RealPath = Path.mid(BoxRoot.length());
+
+	if (RealPath.left(6) == "\\share")
+		RealPath = "\\device\\mup" + RealPath.mid(6);
+
+	if (RealPath.left(5) == "\\user")
+	{
+		if (RealPath.mid(5, 8) == "\\current")
+			RealPath = m_UserDir + RealPath.mid(5 + 8);
+		else if (RealPath.mid(5, 4) == "\\all")
+			RealPath = m_ProgramDataDir + RealPath.mid(5 + 4);
+		else if (RealPath.mid(5, 7) == "\\public")
+			RealPath = m_PublicDir + RealPath.mid(5 + 7);
+	}
+
+	if (RealPath.left(6) == "\\drive")
+		RealPath = RealPath.mid(7, 1) + ":" + RealPath.mid(8);
+
+	return RealPath;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1769,6 +1801,7 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
 		m_BoxedProxesses.insert(ProcessId, pProcess);
 
+		UpdateProcessInfo(pProcess);
 		pProcess->InitProcessInfo();
 	}
 
@@ -1853,7 +1886,7 @@ bool CSbieAPI::IsMonitoring()
 
 bool CSbieAPI::GetMonitor()
 {
-	const int max_len = 256; // versions prioir to 5.44.1 check for max_len <= 256 increase this later
+	const int max_len = 1024;
 
 	USHORT type;
 	ULONG64 pid;
@@ -1879,7 +1912,7 @@ bool CSbieAPI::GetMonitor()
 		return false;
 
 	if (RecordNum != m->lastRecordNum + 1 && !m->clearingBuffers)
-		emit LogSbieMessage(1242, QStringList() << "" << "" << "", GetCurrentProcessId()); // Monitor buffer overflow
+		emit LogSbieMessage(0xC1020000 | 1242, QStringList() << "" << "" << "", GetCurrentProcessId()); // Monitor buffer overflow
 	m->lastRecordNum = RecordNum;
 
 	if (m->clearingBuffers)
@@ -1926,6 +1959,22 @@ QString CSbieAPI::GetSbieMsgStr(quint32 code, quint32 Lang)
 // 
 //
 
+QString ErrorString(qint32 err)
+{
+	QString Error;
+	HMODULE handle = NULL; //err < 0 ? GetModuleHandle(L"NTDLL.DLL") : NULL;
+	DWORD flags = 0; //err < 0 ? FORMAT_MESSAGE_FROM_HMODULE : 0;
+	LPTSTR s;
+	if (::FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | flags, handle, err, 0, (LPTSTR)&s, 0, NULL) > 0)
+	{
+		LPTSTR p = wcschr(s, L'\r');
+		if (p != NULL) *p = L'\0';
+		Error = QString::fromWCharArray(s);
+		::LocalFree(s);
+	} 
+	return Error;
+}
+
 CResLogEntry::CResLogEntry(quint32 ProcessId, quint32 Type, const QString& Value)
 {
 	m_ProcessId = ProcessId;
@@ -1935,6 +1984,19 @@ CResLogEntry::CResLogEntry(quint32 ProcessId, quint32 Type, const QString& Value
 	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
 	m_Counter = 0;
 
+	// if this is a set error, then get the actual error string
+	if (m_Type.Type == MONITOR_OTHER && Value.indexOf("SetError:") == 0)
+	{
+		auto tmp = Value.split(":");
+		if (tmp.length() >= 2)
+		{
+			qint32 errCode = tmp[1].trimmed().toInt();
+			QString Error = ErrorString(errCode);
+			if(!Error.isEmpty())
+			m_Name += " (" + Error + ")";
+		}
+	}
+
 	static atomic<quint64> uid = 0;
 	m_uid = uid.fetch_add(1);
 }
@@ -1943,6 +2005,7 @@ QString CResLogEntry::GetTypeStr() const
 {
 	switch (m_Type.Type)
 	{
+	case MONITOR_SYSCALL:		return "SysCall";
 	case MONITOR_PIPE:			return "Pipe"; 
 	case MONITOR_IPC:			return "Ipc"; 
 	case MONITOR_WINCLASS:		return "WinClass"; 
@@ -1950,7 +2013,8 @@ QString CResLogEntry::GetTypeStr() const
 	case MONITOR_COMCLASS:		return "ComClass"; 
 	case MONITOR_IGNORE:		return "Ignore"; 
 	case MONITOR_IMAGE:			return "Image"; 
-	case MONITOR_FILE_OR_KEY:	return "File/Key"; 
+	case MONITOR_FILE:			return "File"; 
+	case MONITOR_KEY:			return "Key";
 	case MONITOR_OTHER:			return "Debug"; 
 	default:					return "Unknown: " + QString::number(m_Type.Type);
 	}
@@ -1958,14 +2022,19 @@ QString CResLogEntry::GetTypeStr() const
 
 QString CResLogEntry::GetStautsStr() const
 {
-	if (m_Type.Trace)
-		return "Trace";
+	QString Status;
+	if (m_Type.Open)
+		Status.append("Open ");
+	if (m_Type.Deny)
+		Status.append("Closed ");
 
-	if(m_Type.Open)
-		return "Open";
-	if(m_Type.Deny)
-		return "Closed";
-	return "";
+	if (m_Type.Trace)
+		Status.append("Trace ");
+
+	if (m_Counter > 1)
+		Status.append(QString("(%1)").arg(m_Counter));
+
+	return Status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

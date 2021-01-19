@@ -154,6 +154,10 @@ static void Com_Trace(
     const WCHAR *TraceType, REFCLSID rclsid, REFIID riid,
     ULONG ProcNum, HRESULT hr);
 
+static void Com_Trace2(
+    const WCHAR* TraceType, REFCLSID rclsid, REFIID riid,
+    ULONG ProcNum, HRESULT hr, USHORT monflag);
+
 static void Com_Monitor(REFCLSID rclsid, USHORT monflag);
 
 #define HSTRING void*
@@ -596,8 +600,8 @@ _FX HRESULT Com_CoGetClassObject(
     }
 
     if (clsctx & CLSCTX_LOCAL_SERVER) {
-        Com_Trace(TraceType, rclsid, riid, 0, hr);
-        Com_Monitor(rclsid, monflag);
+        Com_Trace2(TraceType, rclsid, riid, 0, hr, monflag);
+        if(!Com_TraceFlag) Com_Monitor(rclsid, monflag);
     }
 
     return hr;
@@ -642,8 +646,8 @@ _FX HRESULT Com_CoGetObject(
         else
             monflag |= MONITOR_DENY;
 
-        Com_Trace(TraceType, &clsid, riid, 0, hr);
-        Com_Monitor(&clsid, monflag);
+        Com_Trace2(TraceType, &clsid, riid, 0, hr, monflag);
+        if (!Com_TraceFlag) Com_Monitor(&clsid, monflag);
 
     } else {
 
@@ -696,8 +700,8 @@ _FX HRESULT Com_CoCreateInstance(
     }
 
     if (clsctx & CLSCTX_LOCAL_SERVER) {
-        Com_Trace(TraceType, rclsid, riid, 0, hr);
-        Com_Monitor(rclsid, monflag);
+        Com_Trace2(TraceType, rclsid, riid, 0, hr, monflag);
+        if (!Com_TraceFlag) Com_Monitor(rclsid, monflag);
     }
 
     //
@@ -808,8 +812,8 @@ _FX HRESULT Com_CoCreateInstanceEx(
 
         for (i = 0; i < cmq; ++i) {
             MULTI_QI *mqi = &pmqs[i];
-            Com_Trace(TraceType, rclsid, mqi->pIID, 0, mqi->hr);
-            Com_Monitor(rclsid, monflag);
+            Com_Trace2(TraceType, rclsid, mqi->pIID, 0, mqi->hr, monflag);
+            if (!Com_TraceFlag) Com_Monitor(rclsid, monflag);
         }
     }
 
@@ -3304,8 +3308,15 @@ _FX void Com_Trace_Guid(
 
 
 _FX void Com_Trace(
-    const WCHAR *TraceType, REFCLSID rclsid, REFIID riid,
+    const WCHAR* TraceType, REFCLSID rclsid, REFIID riid,
     ULONG ProcNum, HRESULT hr)
+{
+    Com_Trace2(TraceType, rclsid, riid, ProcNum, hr, MONITOR_TRACE);
+}
+
+_FX void Com_Trace2(
+    const WCHAR* TraceType, REFCLSID rclsid, REFIID riid,
+    ULONG ProcNum, HRESULT hr, USHORT monflag)
 {
     WCHAR *text;
     WCHAR *ptr;
@@ -3314,7 +3325,7 @@ _FX void Com_Trace(
         return;
 
     text = Com_Alloc(1024 * sizeof(WCHAR));
-    ptr = text + Sbie_snwprintf(text, 1024, L"SBIE %s <%08X> ", TraceType, hr);
+    ptr = text + Sbie_snwprintf(text, 1024, L"COM %s <%08X> ", TraceType, hr);
 
     if (rclsid) {
         Com_Trace_Guid(ptr, rclsid, L"CLSID");
@@ -3341,7 +3352,7 @@ _FX void Com_Trace(
     //ptr[1] = L'\0';
     //OutputDebugString(text);
     *ptr = L'\0';
-    SbieApi_MonitorPut(MONITOR_COMCLASS | MONITOR_TRACE, text);
+    SbieApi_MonitorPut(MONITOR_COMCLASS | monflag, text);
 
     Com_Free(text);
 }

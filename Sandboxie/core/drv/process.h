@@ -121,6 +121,8 @@ struct _PROCESS {
 
     UCHAR   create_console_flag;
 
+    ULONG call_trace;
+
     // file-related
 
     PERESOURCE file_lock;

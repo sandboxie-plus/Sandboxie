@@ -4,7 +4,7 @@
 #include "ui_OptionsWindow.h"
 #include "SbiePlusAPI.h"
 
-class COptionsWindow : public QMainWindow
+class COptionsWindow : public QDialog
 {
 	Q_OBJECT
 
@@ -12,13 +12,16 @@ public:
 	COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QString& Name, QWidget *parent = Q_NULLPTR);
 	~COptionsWindow();
 
+	virtual void accept() {}
+	virtual void reject();
+
 signals:
 	void OptionsChanged();
+	void Closed();
 
 public slots:
+	void ok();
 	void apply();
-	void accept();
-	void reject();
 
 private slots:
 

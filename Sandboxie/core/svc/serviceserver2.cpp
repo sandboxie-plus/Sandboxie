@@ -67,7 +67,7 @@ bool ServiceServer::CanCallerDoElevation(
             // if this service is configured to be started on box initialization
             // by SandboxieRpcSs.exe then allow it to be started
             //
-            if (CheckStringInList(ServiceName, boxname, L"StartService"))
+            if (SbieDll_CheckStringInList(ServiceName, boxname, L"StartService"))
                 DropRights = false;
         }
     }
@@ -283,7 +283,7 @@ bool ServiceServer__RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxnam
         return true;
 
     // check exception list
-    return CheckStringInList(svcname, boxname, L"RunServiceAsSystem");
+    return SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem");
 }
 
 

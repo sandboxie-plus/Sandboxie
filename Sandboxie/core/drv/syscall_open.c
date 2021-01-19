@@ -37,7 +37,7 @@ static HANDLE Syscall_RestoreTargetHandle(
 
 static NTSTATUS Syscall_CheckObject(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry,
-    void *OpenedObject, OBJECT_HANDLE_INFORMATION *HandleInfo);
+    void *OpenedObject, OBJECT_HANDLE_INFORMATION *HandleInfo, PUNICODE_STRING puName);
 
 static NTSTATUS Syscall_DuplicateHandle_2(
     HANDLE TargetProcessHandle, HANDLE TargetHandle,
@@ -178,7 +178,7 @@ _FX HANDLE Syscall_RestoreTargetHandle(
 
 _FX NTSTATUS Syscall_CheckObject(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry,
-    void *OpenedObject, OBJECT_HANDLE_INFORMATION *HandleInfo)
+    void *OpenedObject, OBJECT_HANDLE_INFORMATION *HandleInfo, PUNICODE_STRING puName)
 {
     OBJECT_NAME_INFORMATION *Name;
     ULONG NameLength;
@@ -194,9 +194,12 @@ _FX NTSTATUS Syscall_CheckObject(
         if ((status != STATUS_SUCCESS)
                             && (status != STATUS_BAD_INITIAL_PC)) {
 
+            if (puName == NULL && Name != NULL && Name->Name.Length != 0)
+                puName = &Name->Name;
+
             WCHAR msg[256];
             swprintf(msg, L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
-			Log_Msg_Process(MSG_2101, msg, Name != NULL ? Name->Name.Buffer : L"Unnamed object", -1, proc->pid);
+			Log_Msg_Process(MSG_2101, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
         }
 
         if (Name != &Obj_Unnamed)
@@ -269,6 +272,10 @@ _FX NTSTATUS Syscall_OpenHandle(
 
     if (! NewHandle) {
 
+        //WCHAR trace_str[128];
+        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
         Process_SetTerminated(proc, 6);
         status = STATUS_PROCESS_IS_TERMINATING;
     }
@@ -289,14 +296,25 @@ _FX NTSTATUS Syscall_OpenHandle(
 
     if (NT_SUCCESS(status)) {
 
+        PUNICODE_STRING puName = NULL;
+
+        if ((strcmp(syscall_entry->name, "ConnectPort") == 0) ||
+            (strcmp(syscall_entry->name, "AlpcConnectPort") == 0))
+        {
+            puName = (UNICODE_STRING*)user_args[1];
+        }
+
         //
         // check the access that was granted to the object
         //
 
         status = Syscall_CheckObject(
-                    proc, syscall_entry, OpenedObject, &HandleInfo);
+                    proc, syscall_entry, OpenedObject, &HandleInfo, puName);
 
         ObDereferenceObject(OpenedObject);
+
+        if (!NT_SUCCESS(status))
+            NtClose(NewHandle);
 
         if (status == STATUS_BAD_INITIAL_PC) {
 
@@ -327,8 +345,14 @@ _FX NTSTATUS Syscall_OpenHandle(
         }
     }
 
-    if (! NT_SUCCESS(status))
+    if (!NT_SUCCESS(status)) {
+
+        //WCHAR trace_str[128];
+        //swprintf(trace_str, L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
         Process_SetTerminated(proc, 7);
+    }
 
     return status;
 }
@@ -447,6 +471,10 @@ _FX NTSTATUS Syscall_DuplicateHandle(
 
     if (! NewHandle) {
 
+        //WCHAR trace_str[128];
+        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
         Process_SetTerminated(proc, 8);
         status = STATUS_PROCESS_IS_TERMINATING;
     }
@@ -506,6 +534,11 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     //      if(!wcsicmp(proc->image_name,L"SandboxieBITS.exe") && status == STATUS_ACCESS_DENIED) { 
     //          return status;
     //  }
+    //
+    //    //WCHAR trace_str[128];
+    //    //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+    //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+    //
     //  Process_SetTerminated(proc, 9);
     //}
 
@@ -633,7 +666,7 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
         //
 
         status = Syscall_CheckObject(
-                    proc, syscall_entry, OpenedObject, &HandleInfo);
+                    proc, syscall_entry, OpenedObject, &HandleInfo, NULL);
 
     } else if (    TypeLength == 5 * sizeof(WCHAR)
                 && wmemcmp(TypeBuffer, L"Token", 5) == 0) {

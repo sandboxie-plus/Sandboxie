@@ -491,27 +491,3 @@ bool CheckDropRights(const WCHAR *BoxName)
         return true;
     return false;
 }
-
-
-//---------------------------------------------------------------------------
-// CheckStringInList
-//---------------------------------------------------------------------------
-
-
-bool CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting)
-{
-    WCHAR buf[66];
-    ULONG index = 0;
-    while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
-        ++index;
-        if (NT_SUCCESS(status)) {
-            if (_wcsicmp(buf, string) == 0) {
-                return true;
-            }
-        }
-        else if (status != STATUS_BUFFER_TOO_SMALL)
-            break;
-    }
-    return false;
-}

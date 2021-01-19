@@ -33,16 +33,8 @@
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR *pDstPortName);
+BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg);
 
-
-//---------------------------------------------------------------------------
-// Variables
-//---------------------------------------------------------------------------
-
-IPC_DYNAMIC_PORTS Ipc_Dynamic_Ports[NUM_DYNAMIC_PORTS];
-
-static const WCHAR *_rpc_control = L"\\RPC Control";
 
 //---------------------------------------------------------------------------
 // Ipc_Api_AllowSpoolerPrintToFile
@@ -67,278 +59,112 @@ static const WCHAR *_rpc_control = L"\\RPC Control";
 
 
 //---------------------------------------------------------------------------
-// Ipc_Api_OpenDynamicPort
+// Ipc_CheckPortRequest_SpoolerPort
 //---------------------------------------------------------------------------
 
-// Param 1 is dynamic port name (e.g. "\RPC Control\LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
-// Param 2 is the process PID for which to open the port
-// Param 3 is the port type/identifier, can be -1 indicating non special port
 
-_FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
+_FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
 {
-    NTSTATUS status = STATUS_SUCCESS;
-    //KIRQL irql;
-    API_OPEN_DYNAMIC_PORT_ARGS* pArgs = (API_OPEN_DYNAMIC_PORT_ARGS*)parms;
-    WCHAR portName[DYNAMIC_PORT_NAME_CHARS];
+    NTSTATUS status;
 
-    if (proc) // is caller sandboxed?
-        return STATUS_ACCESS_DENIED;
+    if (proc->ipc_openPrintSpooler)        // see if we are not filtering spooler requests
+        return STATUS_BAD_INITIAL_PC;
 
-    //if (PsGetCurrentProcessId() != Api_ServiceProcessId)
-    //    return STATUS_ACCESS_DENIED;
+    //
+    // check that it is the spooler port
+    //
 
-    ENUM_DYNAMIC_PORT_TYPE ePortType = NUM_DYNAMIC_PORTS;
-    //if (pArgs->port_type.val == -1)
-    //    ePortType = NUM_DYNAMIC_PORTS;
-    //else 
-    if (pArgs->port_type.val <= NUM_DYNAMIC_PORTS)
-        ePortType = (ENUM_DYNAMIC_PORT_TYPE)pArgs->port_type.val;
-    //else
-    //    return STATUS_INVALID_PARAMETER;
+    if (Driver_OsVersion >= DRIVER_WINDOWS_81) {
 
-    if(pArgs->port_name.val == NULL)
-        return STATUS_INVALID_PARAMETER;
-    try {
-        ProbeForRead(pArgs->port_name.val, sizeof(WCHAR) * DYNAMIC_PORT_NAME_CHARS, sizeof(WCHAR));
-        wmemcpy(portName, pArgs->port_name.val, DYNAMIC_PORT_NAME_CHARS - 1);
-        portName[DYNAMIC_PORT_NAME_CHARS - 1] = L'\0';
+        if (Name->Name.Length < 13 * sizeof(WCHAR))
+            return STATUS_BAD_INITIAL_PC;
+
+        BOOLEAN is_spooler = FALSE;
+
+        if (Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock)
+        {
+            KeEnterCriticalRegion();
+            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE);
+
+            if (_wcsicmp(Name->Name.Buffer, Ipc_Dynamic_Ports[SPOOLER_PORT].wstrPortName) == 0)
+            {
+                // dynamic version of RPC ports, see also ipc_spl.c
+                // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
+                is_spooler = TRUE;
+            }
+
+            ExReleaseResourceLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock);
+            KeLeaveCriticalRegion();
+        }
+
+        if (!is_spooler)
+            return STATUS_BAD_INITIAL_PC;
+    }
+    else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+
+        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\spoolss") != 0)
+            return STATUS_BAD_INITIAL_PC;
+
+    }
+    else
+        return STATUS_BAD_INITIAL_PC;
+
+    //
+    // examine message
+    //
+
+    status = STATUS_SUCCESS;
+
+    __try {
+
+        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
+
+        if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+
+            //
+            //
+
+            ULONG  len = msg->u1.s1.DataLength;
+            UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
+            int i = 0;
+            int rc = -2;
+
+            ProbeForRead(ptr, len, sizeof(WCHAR));
+
+            /*if (ptr[20] == 17) {        // RpcStartDocPrinter = Opnum 17
+
+                if (!proc->ipc_allowSpoolerPrintToFile)
+                {
+                    status = STATUS_ACCESS_DENIED;
+                    //for (i = 20; i < len - 12; i++)
+                    //{
+                    //  rc = memcmp((void*)&(ptr[i]), "\4\0\0\0\0\0\0\0\4\0\0\0\0", 12);    // search for marshaled "RAW" field length bytes
+                    //  if (rc == 0)
+                    //  {
+                    //      rc = _wcsnicmp((void*)&(ptr[i + 12]), L"raw", 3);       // search for case insensitive "RAW"
+                    //      if (rc == 0)
+                    //          status = STATUS_ACCESS_DENIED;
+                    //  }
+                    //}
+                }
+
+                if (status == STATUS_ACCESS_DENIED)
+                    Log_MsgP0(MSG_1319, proc->pid);
+            }
+            else*/
+
+            if (Ipc_Filter_Spooler_Msg(proc, ptr[20]))
+                status = STATUS_ACCESS_DENIED;
+
+            //DbgPrint("Spooler IPC Port message ID: %d\n", (int)ptr[20]);
+
+        }
+
     }
     __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
     }
-    if (!NT_SUCCESS(status))
-        return status;
-
-    //proc = Process_Find(pArgs->process_id.val, &irql);
-    proc = Process_Find(pArgs->process_id.val, NULL);
-    if (proc && (proc != PROCESS_TERMINATED))
-    {
-        //
-        // When this is a special port save it our global Ipc_Dynamic_Ports structure
-        //
-
-        if (ePortType != NUM_DYNAMIC_PORTS && Ipc_Dynamic_Ports[ePortType].pPortLock) 
-        {
-            KeEnterCriticalRegion();
-            ExAcquireResourceExclusiveLite(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
-
-            wmemcpy(Ipc_Dynamic_Ports[ePortType].wstrPortName, portName, DYNAMIC_PORT_NAME_CHARS);
-
-            ExReleaseResourceLite(Ipc_Dynamic_Ports[ePortType].pPortLock);
-            KeLeaveCriticalRegion();
-        }
-
-        //
-        // Open the port for the selected process
-        //
-
-        KIRQL irql2;
-
-        KeRaiseIrql(APC_LEVEL, &irql2);
-        ExAcquireResourceExclusiveLite(proc->ipc_lock, TRUE);
-
-        Process_AddPath(proc, &proc->open_ipc_paths, NULL, FALSE, portName, FALSE);
-
-        ExReleaseResourceLite(proc->ipc_lock);
-        KeLowerIrql(irql2);
-    }
-    else
-        status = STATUS_NOT_FOUND;
-    //ExReleaseResourceLite(Process_ListLock);
-    //KeLowerIrql(irql);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// Ipc_Api_GetDynamicPortFromPid
-//---------------------------------------------------------------------------
-
-// Param 1 is the service PID
-// Param 2 will return the port name with "\RPC Control\" prepended
-
-_FX NTSTATUS Ipc_Api_GetDynamicPortFromPid(PROCESS *proc, ULONG64 *parms)
-{
-    NTSTATUS status;
-    PEPROCESS ProcessObject;
-    //BOOLEAN done = FALSE;
-    API_GET_DYNAMIC_PORT_FROM_PID_ARGS *pArgs = (API_GET_DYNAMIC_PORT_FROM_PID_ARGS *)parms;
-
-    if (proc) // is caller sandboxed?
-        return STATUS_ACCESS_DENIED;
-
-    //
-    // this function determines the dynamic RPC endpoint that is used by a service/process
-    //
-
-    status = PsLookupProcessByProcessId(pArgs->process_id.val, &ProcessObject);
-
-    if (NT_SUCCESS(status)) {
-
-        //if (PsGetProcessSessionId(ProcessObject) == 0) {
-        //
-        //    void *nbuf;
-        //    ULONG nlen;
-        //    WCHAR *nptr;
-        //
-        //    Process_GetProcessName(
-        //        Driver_Pool, (ULONG_PTR)pArgs->process_id.val, &nbuf, &nlen, &nptr);
-        //
-        //    if (nbuf) {
-        //
-        //        if (_wcsicmp(nptr, pArgs->exe_name.val) == 0
-        //            && MyIsProcessRunningAsSystemAccount(pArgs->process_id.val)) {
-
-                    status = Ipc_Api_GetRpcPortName_2(ProcessObject, pArgs->full_port_name.val);
-
-        //            done = TRUE;
-        //        }
-        //
-        //        Mem_Free(nbuf, nlen);
-        //    }
-        //}
-
-        ObDereferenceObject(ProcessObject);
-    }
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// Ipc_Api_GetRpcPortName_2
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR *pDstPortName)
-{
-    NTSTATUS status;
-    ULONG len, dummy_len;
-    ULONG context;
-    HANDLE handle;
-    OBJECT_DIRECTORY_INFORMATION *info;
-    void *buf, *PortObject;
-    UNICODE_STRING objname;
-    OBJECT_ATTRIBUTES objattrs;
-    WCHAR name[DYNAMIC_PORT_NAME_CHARS];
-
-    InitializeObjectAttributes(&objattrs,
-        &objname, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
-
-    RtlInitUnicodeString(&objname, _rpc_control);
-
-    status = ZwOpenDirectoryObject(&handle, 0, &objattrs);
-
-    if (!NT_SUCCESS(status))
-        return status;
-
-    //
-    // get a list of all objects in the system
-    //
-
-    len = 0;
-    while (1) {
-
-        len += PAGE_SIZE * 2;
-        buf = ExAllocatePoolWithTag(PagedPool, len, tzuk);
-        if (!buf) {
-            status = STATUS_INSUFFICIENT_RESOURCES;
-            break;
-        }
-
-        dummy_len = 0;
-        status = ZwQueryDirectoryObject(
-            handle, buf, len, FALSE, TRUE, &context, &dummy_len);
-
-        if (status == STATUS_MORE_ENTRIES || status == STATUS_INFO_LENGTH_MISMATCH)
-        {
-            ExFreePoolWithTag(buf, tzuk);
-            continue;
-        }
-
-        break;
-    }
-
-    if (!NT_SUCCESS(status))
-        return status;
-
-    //
-    // go through list looking for LRPC-* objects of type ALPC Port
-    //
-
-    info = (OBJECT_DIRECTORY_INFORMATION *)buf;
-    while (1) {
-
-        UNICODE_STRING *ObjName = &info->ObjectName;
-        UNICODE_STRING *TypeName = &info->ObjectTypeName;
-
-        if ((!ObjName->Buffer) && (!TypeName->Buffer))
-            break;
-
-        if (TypeName->Length == 9 * sizeof(WCHAR) && TypeName->Buffer
-            && _wcsicmp(TypeName->Buffer, L"ALPC Port") == 0) {
-
-            if ((ObjName->Length > 5 * sizeof(WCHAR)) &&
-                (ObjName->Length < 64 * sizeof(WCHAR)) &&
-                _wcsnicmp(ObjName->Buffer, L"LRPC-", 5) == 0) {
-
-                swprintf(name, L"%s\\%s", _rpc_control, ObjName->Buffer);
-
-                RtlInitUnicodeString(&objname, name);
-
-                status = ObReferenceObjectByName(
-                    &objname, OBJ_CASE_INSENSITIVE, NULL, 0,
-                    *LpcPortObjectType, KernelMode, NULL,
-                    &PortObject);
-
-                if (NT_SUCCESS(status)) {
-
-                    //
-                    // make sure the owner process for the LRPC-* port
-                    // is the process that was specified as a parameter
-                    //
-
-                    struct {
-                        LIST_ENTRY PortListEntry;
-                        void *CommunicationInfo;
-                        PEPROCESS OwnerProcess;
-                    } *AlpcPortObject = PortObject;
-
-                    if (AlpcPortObject->OwnerProcess == ProcessObject) {
-
-                        __try {
-
-                            if (pDstPortName)
-                            {
-                                ProbeForWrite(pDstPortName, sizeof(WCHAR) * DYNAMIC_PORT_NAME_CHARS, sizeof(WCHAR));
-                                wmemcpy(pDstPortName, name, DYNAMIC_PORT_NAME_CHARS - 1);
-                                pDstPortName[DYNAMIC_PORT_NAME_CHARS - 1] = L'\0';
-                            }
-
-                        } __except (EXCEPTION_EXECUTE_HANDLER) {
-                            status = GetExceptionCode();
-                        }
-
-                        ObDereferenceObject(PortObject);
-                        break;
-                    }
-
-                    ObDereferenceObject(PortObject);
-                }
-            }
-        }
-
-        ++info;
-    }
-
-    //
-    // release storage
-    //
-
-    ExFreePoolWithTag(buf, tzuk);
-
-    ZwClose(handle);
 
     return status;
 }
@@ -349,7 +175,7 @@ _FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR *pDstPortNa
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Ipc_Filter_Spooler_Msg(UCHAR uMsg)
+_FX BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg)
 {
     BOOLEAN filter = FALSE;
 
@@ -471,12 +297,23 @@ _FX BOOLEAN Ipc_Filter_Spooler_Msg(UCHAR uMsg)
         filter = TRUE;
     }
     
-    if (Session_MonitorCount) {
+    if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
 
-        WCHAR access_str[24];
-        swprintf(access_str, L" Msg: %02X", (ULONG)uMsg);
-        const WCHAR* strings[3] = { L"\\RPC Control\\spoolss", access_str, NULL };
-        Session_MonitorPutEx(MONITOR_IPC | (filter ? MONITOR_DENY : MONITOR_OPEN), strings, PsGetCurrentProcessId());
+        USHORT mon_type = MONITOR_IPC;
+
+        if (filter && (proc->ipc_trace & TRACE_DENY))
+            mon_type |= MONITOR_DENY;
+        else if (!filter && (proc->ipc_trace & TRACE_ALLOW))
+            mon_type |= MONITOR_OPEN;
+        else
+            mon_type = 0;
+
+        if (mon_type) {
+            WCHAR msg_str[24];
+            swprintf(msg_str, L" Msg: %02X", (ULONG)uMsg);
+            const WCHAR* strings[3] = { L"\\RPC Control\\spoolss", msg_str, NULL };
+            Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId());
+        }
     }
 
     return filter;

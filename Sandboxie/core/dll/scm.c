@@ -888,6 +888,9 @@ _FX BOOLEAN Scm_IsBoxedService(const WCHAR *ServiceName)
 
     Dll_Free(names);
 
+    if (SbieDll_CheckStringInList(ServiceName, NULL, L"SandboxService"))
+        found = TRUE;
+
     /*
     if (_wcsicmp(ServiceName, _eventsystem) == 0) {
         //

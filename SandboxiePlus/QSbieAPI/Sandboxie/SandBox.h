@@ -56,6 +56,7 @@ public:
 
 	virtual void					CloseBox() {}
 
+	virtual bool					IsEmpty();
 	virtual SB_PROGRESS				CleanBox();
 	virtual SB_STATUS				RenameBox(const QString& NewName);
 	virtual SB_STATUS				RemoveBox();

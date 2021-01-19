@@ -202,6 +202,9 @@ SBIEDLL_EXPORT  ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLE
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WCHAR* BoxName);
 
+SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
+
+
 //---------------------------------------------------------------------------
 
 

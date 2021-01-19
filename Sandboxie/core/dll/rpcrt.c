@@ -269,6 +269,19 @@ WCHAR* GetDynamicLpcPortName(ENUM_DYNAMIC_PORT_TYPE portType)
 
     rpl = (EPMAPPER_GET_PORT_NAME_RPL*)SbieDll_CallServer(&req.h);
 
+    WCHAR   wsTraceOptions[4];
+    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
+    {
+        WCHAR text[130];
+
+        if (rpl && NT_SUCCESS(rpl->h.status))
+            Sbie_snwprintf(text, 130, L"Resolved dynamic port: %d; endpoint: %s", req.portType, rpl->wszPortName);
+        else
+            Sbie_snwprintf(text, 130, L"Failed to resolve dynamic port: %d; status: %08X", req.portType, rpl ? rpl->h.status : 0);
+
+        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, text, FALSE);
+    }
+
     if (rpl && NT_SUCCESS(rpl->h.status))
     {
         wcsncpy(g_Ipc_DynamicPortNames[portType], rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
@@ -377,15 +390,16 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     status = __sys_RpcBindingFromStringBindingW(StringBinding, OutBinding);
     // If there are any IpcTrace options set, then output this debug string
     WCHAR   wsTraceOptions[4];
-    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions != L'\0')
+    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
     {
         WCHAR msg[512];
-        Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
-            StringBinding,
-            OutBinding,
-            status);
+
+        //Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"StringBinding = '%s', BindingHandle = 0x%X, status = 0x%08X",
+            StringBinding, OutBinding, status);
+
         //OutputDebugString(msg);
-        SbieApi_MonitorPut(MONITOR_IPC | MONITOR_TRACE, msg);
+        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
     __sys_RpcMgmtSetComTimeout(*OutBinding, RPC_C_BINDING_TIMEOUT);
     return status;
@@ -442,14 +456,14 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         RPC_CSTR   StringUuid;
 
         __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);
-        Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        //Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"Endpoint = '%s', UUID = %s, status = 0x%08X", 
             Template && Template->StringEndpoint ? Template->StringEndpoint : L"null",
-            StringUuid,
-            status);
+            StringUuid, status);
         __sys_RpcStringFreeW(&StringUuid);
 
         //OutputDebugString(msg);
-        SbieApi_MonitorPut(MONITOR_IPC | MONITOR_TRACE, msg);
+        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
     __sys_RpcMgmtSetComTimeout(*Binding, RPC_C_BINDING_TIMEOUT);
     return status;

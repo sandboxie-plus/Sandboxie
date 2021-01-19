@@ -3,7 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_SettingsWindow.h"
 
-class CSettingsWindow : public QMainWindow
+class CSettingsWindow : public QDialog
 {
 	Q_OBJECT
 
@@ -11,13 +11,16 @@ public:
 	CSettingsWindow(QWidget *parent = Q_NULLPTR);
 	~CSettingsWindow();
 
+	virtual void accept() {}
+	virtual void reject();
+
 signals:
 	void OptionsChanged();
+	void Closed();
 
 public slots:
+	void ok();
 	void apply();
-	void accept();
-	void reject();
 
 	void showCompat();
 
@@ -25,6 +28,8 @@ private slots:
 	void OnChange();
 
 	void OnTab();
+
+	void OnBrowse();
 
 	void OnSetPassword();
 

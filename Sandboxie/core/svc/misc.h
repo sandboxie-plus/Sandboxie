@@ -24,7 +24,6 @@ void LogEvent(ULONG msgid, ULONG level, ULONG detail);
 void AbortServer(void);
 bool RestrictToken(void);
 bool CheckDropRights(const WCHAR *BoxName);
-bool CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
 
 SECURITY_ATTRIBUTES *GetSecurityAttributes(ACCESS_MASK EveryoneAccess);
 

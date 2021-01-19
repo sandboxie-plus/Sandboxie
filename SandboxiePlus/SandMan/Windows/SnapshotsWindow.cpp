@@ -6,11 +6,9 @@
 
 
 CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
-	: QMainWindow(parent)
+	: QDialog(parent)
 {
-	QWidget* centralWidget = new QWidget();
-	ui.setupUi(centralWidget);
-	this->setCentralWidget(centralWidget);
+	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - Snapshots").arg(pBox->GetName()));
 
 	m_pBox = pBox;
@@ -20,6 +18,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	QStyle* pStyle = QStyleFactory::create("windows");
 	ui.treeSnapshots->setStyle(pStyle);
 #endif
+	ui.treeSnapshots->setExpandsOnDoubleClick(false);
 
 	m_pSnapshotModel = new CSimpleTreeModel();
 	m_pSnapshotModel->AddColumn(tr("Snapshot"), "Name");
@@ -45,7 +44,11 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.txtName, SIGNAL(textEdited(const QString&)), this, SLOT(SaveInfo()));
 	connect(ui.txtInfo, SIGNAL(textChanged()), this, SLOT(SaveInfo()));
 
-	statusBar();
+	ui.groupBox->setEnabled(false);
+	ui.btnSelect->setEnabled(false);
+	ui.btnRemove->setEnabled(false);
+
+	//statusBar();
 
 	restoreGeometry(theConf->GetBlob("SnapshotsWindow/Window_Geometry"));
 
@@ -91,6 +94,10 @@ void CSnapshotsWindow::UpdateSnapshots()
 
 void CSnapshotsWindow::UpdateSnapshot(const QModelIndex& Index)
 {
+	ui.groupBox->setEnabled(true);
+	ui.btnSelect->setEnabled(true);
+	ui.btnRemove->setEnabled(true);
+
 	//QModelIndex Index = ui.treeSnapshots->currentIndex();
 	//QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
@@ -106,7 +113,7 @@ void CSnapshotsWindow::UpdateSnapshot(const QModelIndex& Index)
 	ui.txtInfo->setPlainText(BoxSnapshot["Info"].toString());
 	m_SaveInfoPending = 0;
 
-	statusBar()->showMessage(tr("Snapshot: %1 taken: %2").arg(BoxSnapshot["Name"].toString()).arg(BoxSnapshot["Date"].toDateTime().toString()));
+	//statusBar()->showMessage(tr("Snapshot: %1 taken: %2").arg(BoxSnapshot["Name"].toString()).arg(BoxSnapshot["Date"].toDateTime().toString()));
 }
 
 void CSnapshotsWindow::SaveInfo()
@@ -143,7 +150,7 @@ void CSnapshotsWindow::OnSelectSnapshot()
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to switch the active snapshot? Doing so will delete the current state!"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to switch the active snapshot? Doing so will delete the current state!"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
 		return;
 
 	HandleResult(m_pBox->SelectSnapshot(ID.toString()));
@@ -156,7 +163,7 @@ void CSnapshotsWindow::OnRemoveSnapshot()
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected snapshot?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected snapshot?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
 		return;
 
 	HandleResult(m_pBox->RemoveSnapshot(ID.toString()));

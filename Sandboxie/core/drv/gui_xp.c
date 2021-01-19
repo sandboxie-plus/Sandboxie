@@ -1442,7 +1442,7 @@ _FX ULONG_PTR Gui_NtUserSendInput(
             if (letter) {
 
                 swprintf(access_str, L"(G%c) SendInput", letter);
-                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS | MONITOR_TRACE, access_str, Driver_Empty);
             }
         }
 
@@ -1538,7 +1538,7 @@ _FX ULONG_PTR Gui_NtUserSetWindowsHookEx(
                 swprintf(access_str,
                          L"(G%c) WinHook %04d on tid=%06d pid=%06d",
                          letter, HookType, idThread, idProcess);
-                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS | MONITOR_TRACE, access_str, Driver_Empty);
             }
         }
 
@@ -1595,7 +1595,7 @@ _FX ULONG_PTR Gui_NtUserSetWinEventHook(
 
                 swprintf(access_str, L"(G%c) AccHook on tid=%06d pid=%06d",
                          letter, idThread, idProcess);
-                Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
+                Log_Debug_Msg(MONITOR_WINCLASS | MONITOR_TRACE, access_str, Driver_Empty);
             }
         }
 

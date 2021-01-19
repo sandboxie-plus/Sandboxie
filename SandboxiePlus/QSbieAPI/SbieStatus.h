@@ -37,7 +37,8 @@ enum ESbieMsgCodes
 	SB_SnapDelRegFail,
 	SB_NotAuthorized,
 	SB_ConfigFailed,
-
+	SB_SnapIsEmpty,
+	SB_NameExists,
 };
 
 class CSbieStatus

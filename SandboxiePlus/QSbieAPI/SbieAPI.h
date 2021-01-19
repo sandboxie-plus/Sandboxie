@@ -123,6 +123,7 @@ public:
 
 	virtual QString			GetBoxedPath(const QString& BoxName, const QString& Path);
 	virtual QString			GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path);
+	virtual QString			GetRealPath(const CSandBoxPtr& pBox, const QString& Path);
 
 	enum ESetMode
 	{

@@ -8,12 +8,12 @@
 
 
 CSettingsWindow::CSettingsWindow(QWidget *parent)
-	: QMainWindow(parent)
+	: QDialog(parent)
 {
-	QWidget* centralWidget = new QWidget();
-	ui.setupUi(centralWidget);
-	this->setCentralWidget(centralWidget);
+	ui.setupUi(this);
 	this->setWindowTitle(tr("Sandboxie Plus - Settings"));
+
+	ui.tabs->setCurrentIndex(0);
 
 	ui.uiLang->addItem("International English", "");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
@@ -27,6 +27,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/Language")));
 
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
+	ui.chkSvcStart->setChecked(theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true));
 
 	switch (theConf->GetInt("Options/CheckForUpdates", 2)) {
 	case 0: ui.chkAutoUpdate->setCheckState(Qt::Unchecked); break;
@@ -46,6 +47,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	case 1: ui.chkSandboxUrls->setCheckState(Qt::Checked); break;
 	case 2: ui.chkSandboxUrls->setCheckState(Qt::PartiallyChecked); break;
 	}
+
+	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
@@ -112,6 +115,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	}
 	m_WarnProgsChanged = false;
 
+	connect(ui.btnBrowse, SIGNAL(pressed()), this, SLOT(OnBrowse()));
+
 	int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
 	if (PortableRootDir != -1 && theConf->IsPortable())
 		ui.chkAutoRoot->setChecked(PortableRootDir == 0 ? Qt::Unchecked : Qt::Checked);
@@ -131,7 +136,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
-	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(accept()));
+	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(ok()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(pressed()), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
@@ -154,6 +159,7 @@ void CSettingsWindow::showCompat()
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
 {
+	emit Closed();
 	this->deleteLater();
 }
 
@@ -164,6 +170,7 @@ void CSettingsWindow::apply()
 	theConf->SetValue("Options/DarkTheme", ui.chkDarkTheme->isChecked());
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
+	theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", ui.chkSvcStart->isChecked());
 
 	switch (ui.chkAutoUpdate->checkState()) {
 	case Qt::Unchecked: theConf->SetValue("Options/CheckForUpdates", 0); break;
@@ -186,6 +193,8 @@ void CSettingsWindow::apply()
 	case Qt::PartiallyChecked: theConf->SetValue("Options/OpenUrlsSandboxed", 2); break;
 	case Qt::Checked: theConf->SetValue("Options/OpenUrlsSandboxed", 1); break;
 	}
+
+	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
 
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
@@ -280,7 +289,7 @@ void CSettingsWindow::apply()
 	emit OptionsChanged();
 }
 
-void CSettingsWindow::accept()
+void CSettingsWindow::ok()
 {
 	apply();
 
@@ -290,6 +299,15 @@ void CSettingsWindow::accept()
 void CSettingsWindow::reject()
 {
 	this->close();
+}
+
+void CSettingsWindow::OnBrowse()
+{
+	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	ui.fileRoot->setText(Value + "\\%SANDBOX%");
 }
 
 void CSettingsWindow::OnChange()

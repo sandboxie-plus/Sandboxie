@@ -42,7 +42,7 @@ public:
 
 
 COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QString& Name, QWidget *parent)
-	: QMainWindow(parent)
+	: QDialog(parent)
 {
 	m_pBox = pBox;
 
@@ -53,9 +53,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (!pBoxPlus.isNull())
 		m_Programs = pBoxPlus->GetRecentPrograms();
 
-	QWidget* centralWidget = new QWidget();
-	ui.setupUi(centralWidget);
-	this->setCentralWidget(centralWidget);
+	ui.setupUi(this);
 	this->setWindowTitle(tr("Sandboxie Plus - '%1' Options").arg(Name));
 
 	ui.tabs->setTabPosition(QTabWidget::West);
@@ -294,9 +292,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnCancelEdit, SIGNAL(pressed()), this, SLOT(OnCancelEdit()));
 	//
 
-	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(accept()));
+	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(ok()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(pressed()), this, SLOT(apply()));
-	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(close()));
 
 	if (ReadOnly) {
 		ui.btnEditIni->setEnabled(false);
@@ -351,6 +349,7 @@ COptionsWindow::~COptionsWindow()
 
 void COptionsWindow::closeEvent(QCloseEvent *e)
 {
+	emit Closed();
 	this->deleteLater();
 }
 
@@ -358,9 +357,11 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape && ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
 		CloseAccessEdit(false);
-	if (source == ui.treeAccess->viewport() && event->type() == QEvent::MouseButtonPress)
+	else if (source == ui.treeAccess->viewport() && event->type() == QEvent::MouseButtonPress)
 		CloseAccessEdit();
-	return QMainWindow::eventFilter(source, event);
+	else
+		return QDialog::eventFilter(source, event);
+	return true;
 }
 
 //void COptionsWindow::OnWithTemplates()
@@ -682,6 +683,11 @@ void COptionsWindow::SaveConfig()
 
 void COptionsWindow::apply()
 {
+	if (m_pBox->GetText("Enabled").isEmpty()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("This sandbox has been deleted hence configuration can not be saved."));
+		return;
+	}
+
 	if (!ui.btnEditIni->isEnabled())
 		SaveIniSection();
 	else
@@ -692,7 +698,7 @@ void COptionsWindow::apply()
 	emit OptionsChanged();
 }
 
-void COptionsWindow::accept()
+void COptionsWindow::ok()
 {
 	apply();
 
@@ -701,6 +707,23 @@ void COptionsWindow::accept()
 
 void COptionsWindow::reject()
 {
+	if (m_GeneralChanged
+	 || m_GroupsChanged
+	 || m_ForcedChanged
+	 || m_StopChanged
+	 || m_StartChanged
+	// ||  m_RestrictionChanged
+	 || m_INetBlockChanged
+	 || m_AccessChanged
+	 || m_TemplatesChanged
+	 || m_RecoveryChanged
+	 || m_AdvancedChanged)
+	{
+		if (QMessageBox("Sandboxie-Plus", tr("Some changes haven't been saved yet, do you really want to close this options window?")
+		, QMessageBox::Warning, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+			return;
+	}
+
 	this->close();
 }
 
@@ -741,7 +764,7 @@ void COptionsWindow::OnAddAutoCmd()
 
 void COptionsWindow::OnAddAutoExe()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe|*.cmd)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");;
 	if (Value.isEmpty())
 		return;
 

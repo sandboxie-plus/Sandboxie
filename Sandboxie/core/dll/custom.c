@@ -1558,3 +1558,27 @@ BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WC
     ULONG pat_len = wcslen(pat_str);
     return SbieDll_MatchImage_Impl(pat_str, pat_len, test_str, BoxName, 1);
 }
+
+
+//---------------------------------------------------------------------------
+// CheckStringInList
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting)
+{
+    WCHAR buf[66];
+    ULONG index = 0;
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        ++index;
+        if (NT_SUCCESS(status)) {
+            if (_wcsicmp(buf, string) == 0) {
+                return TRUE;
+            }
+        }
+        else if (status != STATUS_BUFFER_TOO_SMALL)
+            break;
+    }
+    return FALSE;
+}

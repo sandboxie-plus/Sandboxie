@@ -579,7 +579,7 @@ _FX BOOLEAN Session_IsForceDisabled(ULONG SessionId)
 _FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 {
 	const WCHAR* strings[2] = { name, NULL };
-	Session_MonitorPutEx(type, strings, pid);
+	Session_MonitorPutEx(type, strings, NULL, pid);
 }
 
 
@@ -588,7 +588,7 @@ _FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 //---------------------------------------------------------------------------
 
 
-_FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, HANDLE pid)
+_FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, ULONG* lengths, HANDLE pid)
 {
     SESSION *session;
     KIRQL irql;
@@ -601,8 +601,8 @@ _FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, HANDLE pid)
 
 		ULONG64 pid64 = (ULONG64)pid;
 		SIZE_T data_len = 0;
-		for(const WCHAR** string = strings; *string != NULL; string++)
-			data_len += wcslen(*string) * sizeof(WCHAR);
+		for(int i=0; strings[i] != NULL; i++)
+			data_len += (lengths ? lengths [i] : wcslen(strings[i])) * sizeof(WCHAR);
 
 		//[Type 2][PID 8][Data n*2]
 		SIZE_T entry_size = 2 + 8 + data_len;
@@ -613,8 +613,8 @@ _FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, HANDLE pid)
 			log_buffer_push_bytes((CHAR*)&pid64, 8, &write_ptr, session->monitor_log);
 
 			// join strings seamlessly
-			for (const WCHAR** string = strings; *string != NULL; string++)
-				log_buffer_push_bytes((CHAR*)*string, wcslen(*string) * sizeof(WCHAR), &write_ptr, session->monitor_log);
+            for (int i = 0; strings[i] != NULL; i++)
+				log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
 		}
 		else // this can only happen when the entire buffer is to small to hold this one entry
 			Log_Msg0(MSG_MONITOR_OVERFLOW);
@@ -721,8 +721,6 @@ _FX NTSTATUS Session_Api_MonitorPut(PROCESS *proc, ULONG64 *parms)
 _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 {
     API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
-    UNICODE_STRING objname;
-    void *object;
     USHORT *log_type;
     WCHAR *log_data;
     WCHAR *name;
@@ -745,12 +743,12 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 	log_len = args->log_len.val / sizeof(WCHAR);
     if (!log_len)
         return STATUS_INVALID_PARAMETER;
-	if (log_len > 256) // truncate as we only have 260 in buffer
-		log_len = 256;
+	if (log_len > 1024) // truncate as we only have 1028 in buffer
+		log_len = 1024;
 	log_data = args->log_ptr.val;
     ProbeForRead(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
 
-    name = Mem_Alloc(proc->pool, 260 * sizeof(WCHAR)); // todo: should we increase this ?
+    name = Mem_Alloc(proc->pool, 1028 * sizeof(WCHAR)); // todo: should we increase this ?
     if (! name)
         return STATUS_INSUFFICIENT_RESOURCES;
 
@@ -765,46 +763,48 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
         name[log_len] = L'\0';
 
         status = STATUS_SUCCESS;
-        object = NULL;
 
-        //
-        // if type is MONITOR_IPC we try to open the object
-        // to get the name assigned to it at time of creation
-        //
+        if (args->check_object_exists.val64 && ((type & MONITOR_TRACE) == 0)) { // do not check objects if this is a trace entry
 
-        if ((type & 0xFFF) == MONITOR_IPC) {
+            UNICODE_STRING objname;
+            void* object = NULL;
 
-            ULONG i;
+            //
+            // if type is MONITOR_IPC we try to open the object
+            // to get the name assigned to it at time of creation
+            //
 
-            RtlInitUnicodeString(&objname, name);
+            if ((type & 0xFFF) == MONITOR_IPC) {
 
-            for (i = 0; Session_ObjectTypes[i]; ++i) {
+                ULONG i;
 
-                // ObReferenceObjectByName needs a non-zero ObjectType
-                // so we have to keep going through all possible object
-                // types as long as we get STATUS_OBJECT_TYPE_MISMATCH
+                RtlInitUnicodeString(&objname, name);
 
-                status = ObReferenceObjectByName(
-                            &objname, OBJ_CASE_INSENSITIVE, NULL, 0,
-                            Session_ObjectTypes[i], KernelMode, NULL,
-                            &object);
+                for (i = 0; Session_ObjectTypes[i]; ++i) {
 
-                if (status != STATUS_OBJECT_TYPE_MISMATCH)
-                    break;
+                    // ObReferenceObjectByName needs a non-zero ObjectType
+                    // so we have to keep going through all possible object
+                    // types as long as we get STATUS_OBJECT_TYPE_MISMATCH
+
+                    status = ObReferenceObjectByName(
+                                &objname, OBJ_CASE_INSENSITIVE, NULL, 0,
+                                Session_ObjectTypes[i], KernelMode, NULL,
+                                &object);
+
+                    if (status != STATUS_OBJECT_TYPE_MISMATCH)
+                        break;
+                }
+
+                // DbgPrint("IPC  Status = %08X Object = %08X for Open <%S>\n", status, object, name);
             }
 
-            // DbgPrint("IPC  Status = %08X Object = %08X for Open <%S>\n", status, object, name);
-        }
+            //
+            // if type is MONITOR_PIPE we try to open the pipe
+            // to get the name assigned to it at time of creation
+            //
 
-        //
-        // if type is MONITOR_PIPE we try to open the pipe
-        // to get the name assigned to it at time of creation
-        //
+            if ((type & 0xFFF) == MONITOR_PIPE) {
 
-        if ((type & 0xFFF) == MONITOR_PIPE) {
-
-            if (args->check_object_exists.val64)
-            {
                 OBJECT_ATTRIBUTES objattrs;
                 IO_STATUS_BLOCK IoStatusBlock;
                 HANDLE handle;
@@ -844,35 +844,36 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 
                 //DbgPrint("PIPE Status3 = %08X Object = %08X for Open <%S>\n", status, object, name);
             }
-        }
 
-        //
-        // if we have an object, get its name from the kernel object
-        //
+            //
+            // if we have an object, get its name from the kernel object
+            //
 
-        if (NT_SUCCESS(status) && object) {
+            if (NT_SUCCESS(status) && object) {
 
-            OBJECT_NAME_INFORMATION *Name;
-            ULONG NameLength;
+                OBJECT_NAME_INFORMATION *Name;
+                ULONG NameLength;
 
-            status = Obj_GetNameOrFileName(
-                                    proc->pool, object, &Name, &NameLength);
+                status = Obj_GetNameOrFileName(
+                                        proc->pool, object, &Name, &NameLength);
 
-            if (NT_SUCCESS(status)) {
+                if (NT_SUCCESS(status)) {
 
-				log_len = Name->Name.Length / sizeof(WCHAR);
-                if (log_len > 256) // truncate as we only have 260 in buffer
-					log_len = 256;
-                wmemcpy(name, Name->Name.Buffer, log_len);
-                name[log_len] = L'\0';
+				    log_len = Name->Name.Length / sizeof(WCHAR);
+                    if (log_len > 1024) // truncate as we only have 1028 in buffer
+					    log_len = 1024;
+                    wmemcpy(name, Name->Name.Buffer, log_len);
+                    name[log_len] = L'\0';
 
-                if (Name != &Obj_Unnamed)
-                    Mem_Free(Name, NameLength);
+                    if (Name != &Obj_Unnamed)
+                        Mem_Free(Name, NameLength);
 
-                // DbgPrint("Determined Object Name <%S>\n", name);
+                    // DbgPrint("Determined Object Name <%S>\n", name);
+                }
+
+                ObDereferenceObject(object);
             }
 
-            ObDereferenceObject(object);
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {

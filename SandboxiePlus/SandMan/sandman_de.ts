@@ -51,8 +51,7 @@
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="20"/>
-        <source>Legacy (old sbie behaviour)</source>
-        <oldsource>Legacy (old sbie behavioure)</oldsource>
+        <source>Legacy (old Sbie behaviour)</source>
         <translation>Veraltet (Altes Sbie-Verhalten)</translation>
     </message>
 </context>
@@ -60,8 +59,8 @@
     <name>COptionsWindow</name>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="57"/>
-        <source>Sandboxie Plus - &apos;%1&apos; Options</source>
-        <translation>Sandboxie Plus - &apos;%1&apos; Optionen</translation>
+        <source>Sandboxie-Plus - &apos;%1&apos; Options</source>
+        <translation>Sandboxie-Plus - &apos;%1&apos; Optionen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="79"/>
@@ -314,7 +313,6 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="47"/>
         <source>Visit %1 for a detailed explanation.</source>
-        <oldsource>Visit %1 for a detailes explenation.</oldsource>
         <translation>%1 besuchen für eine detaillierte Erklärung.</translation>
     </message>
     <message>
@@ -403,7 +401,6 @@
     </message>
     <message>
         <source>Recover file to selected folder</source>
-        <oldsource>Recover file to sellected folder</oldsource>
         <translation type="vanished">Datei in angegebenen Ordner wiederherstellen</translation>
     </message>
     <message>
@@ -472,7 +469,7 @@
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="136"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translatorcomment>Kept &apos;print spooler&apos; in breakets to allow easier online lookup</translatorcomment>
+        <translatorcomment>Kept &apos;print spooler&apos; in brackets to allow easier online lookup</translatorcomment>
         <translation>Möchten Sie der Druckerwarteschlange (print spooler) erlauben außerhalb der Sandbox für %1 (%2) zu schreiben?</translation>
     </message>
     <message>
@@ -681,7 +678,7 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="197"/>
-        <source>Api Call Log</source>
+        <source>API Call Log</source>
         <translatorcomment>Took the freedom of Api being all caps</translatorcomment>
         <translation>API Aufrufprotokoll</translation>
     </message>
@@ -808,22 +805,22 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="390"/>
-        <source>Cleanup Processes</source>
+        <source>Clean-up Processes</source>
         <translation>Prozesse aufräumen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="392"/>
-        <source>Cleanup Message Log</source>
+        <source>Clean-up Message Log</source>
         <translation>Nachrichtenprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="393"/>
-        <source>Cleanup Resource Log</source>
+        <source>Clean-up Resource Log</source>
         <translation>Ressourcenprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="394"/>
-        <source>Cleanup Api Call Log</source>
+        <source>Clean-up API Call Log</source>
         <translation>API Aufrufprotokoll aufräumen</translation>
     </message>
     <message>
@@ -904,7 +901,7 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="441"/>
-        <source>Cleanup</source>
+        <source>Clean-up</source>
         <translation>Aufräumen</translation>
     </message>
     <message>
@@ -934,8 +931,8 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="692"/>
-        <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation>Einige Kompalibilitätsvorlagen (%1) fehlen, möglicherweise wurden sie gelöscht. Möchten Sie diese aus allen Boxen entfernen?</translation>
+        <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
+        <translation>Einige Kompatibilitätsvorlagen (%1) fehlen, möglicherweise wurden sie gelöscht. Möchten Sie diese aus allen Boxen entfernen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="709"/>
@@ -1204,11 +1201,11 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <translation>Sandboxie-Plus - Fehler</translation>
     </message>
     <message>
-        <source>Failed to stop all sandboxie components</source>
+        <source>Failed to stop all Sandboxie components</source>
         <translation type="vanished">Fehlschlag beim Stoppen aller Sandboxiekomponenten</translation>
     </message>
     <message>
-        <source>Failed to start required sandboxie components</source>
+        <source>Failed to start required Sandboxie components</source>
         <translation type="vanished">Fehlschlag beim Starten der benötigten Sandboxiekomponenten</translation>
     </message>
     <message>
@@ -1274,7 +1271,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1028"/>
         <source>Only Administrators can change the config.</source>
-        <translation>Nur Administratoren können Änderungen an der Konfiguration vornehmen.</translation>
+        <translation>Nur Administratoren können die Konfiguration editieren.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1038"/>
@@ -1306,9 +1303,9 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     </message>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sand boxes.
-Please download the latest release and set it up with the sandboxie.ini as instructed in the README.md of the project.</source>
+Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
         <translation type="vanished">Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingereichten werden.
-Bitte die neute Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts einrichten.</translation>
+Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der README.md einrichten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1489"/>
@@ -1424,7 +1421,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <name>CSbieModel</name>
     <message>
         <location filename="Models/SbieModel.cpp" line="130"/>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Boxgruppe</translation>
     </message>
     <message>
@@ -1535,7 +1532,6 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
         <location filename="Views/SbieView.cpp" line="77"/>
         <location filename="Views/SbieView.cpp" line="104"/>
         <source>Create Shortcut</source>
-        <oldsource>Create Desktop Shortcut</oldsource>
         <translation>Verknüpfung erstellen</translation>
     </message>
     <message>
@@ -1718,7 +1714,6 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Views/SbieView.cpp" line="392"/>
         <source>Do you really want to remove the selected group(s)?</source>
-        <oldsource>Do you really want remove the selected group(s)?</oldsource>
         <translation>Möchten Sie wirklich die ausgewählte(n) Gruppe(n) entfernen?</translation>
     </message>
     <message>
@@ -1729,12 +1724,10 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Views/SbieView.cpp" line="529"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
-        <oldsource>Do you really want remove the selected sandbox(es)?</oldsource>
         <translation>Möchten Sie wirklich die ausgewählte(n) Sandbox(en) entfernen?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of the selected sandbox(es)?</source>
-        <oldsource>Do you really want delete the content of the selected sandbox(es)?</oldsource>
         <translation type="vanished">Möchten Sie wirklich den Inhalt der ausgewählten Sandbox(en) löschen?</translation>
     </message>
     <message>
@@ -1753,8 +1746,8 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="14"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - Einstellungen</translation>
+        <source>Sandboxie-Plus - Settings</source>
+        <translation>Sandboxie-Plus - Einstellungen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="55"/>
@@ -1779,7 +1772,6 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="363"/>
         <source>Please re-enter the new configuration password.</source>
-        <oldsource>Please re enter the new configuration password.</oldsource>
         <translation>Bitte das neue Konfigurationspasswort wiederholen.</translation>
     </message>
     <message>
@@ -1843,7 +1835,6 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="166"/>
         <source>Do you really want to delete the selected snapshot?</source>
-        <oldsource>Do you really want delete the sellected snapshot?</oldsource>
         <translation>Möchten Sie wirklich die ausgewählten Schnappschüsse entfernen?</translation>
     </message>
 </context>
@@ -1851,7 +1842,7 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <name>NewBoxWindow</name>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="32"/>
-        <source>SandboxiePlus new box</source>
+        <source>Sandboxie-Plus new box</source>
         <translation>Sandboxie-Plus Neue Box</translation>
     </message>
     <message>
@@ -1879,8 +1870,8 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <name>OptionsWindow</name>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="32"/>
-        <source>SandboxiePlus Options</source>
-        <translation>SandboxiePlus Optionen</translation>
+        <source>Sandboxie-Plus Options</source>
+        <translation>Sandboxie-Plus Optionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="52"/>
@@ -2080,13 +2071,12 @@ Bitte die neute Version herunterladen und entsprechend der Anweisungen in der RE
     <message>
         <location filename="Forms/OptionsWindow.ui" line="694"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
-        <oldsource>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</oldsource>
         <translation>Programme die hier gelistet sind oder von den angegeben Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="707"/>
         <source>Stop Behaviour</source>
-        <translation>Stoppverhalten</translation>
+        <translation>Stopverhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="715"/>
@@ -2302,9 +2292,8 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1207"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
-        <oldsource>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</oldsource>
-        <translation>Aktivere Sofortwiederherstellungsabfrage, um alle Dateien sofort wiederherstellen zu können sobald diese erzeugt werden.</translation>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
+        <translation>Aktivere Sofortwiederherstellungsabfrage, um alle Dateien sofort wiederherzustellen, sobald sie erzeugt werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1251"/>
@@ -2579,7 +2568,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1878"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation>Diese Liste enthält eine große Menge an Vorlange, welche die Kompalität der Sandbox verbessern</translation>
+        <translation>Diese Liste enthält eine große Menge an Vorlagen, welche die Kompatibilität der Sandbox verbessern</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1891"/>
@@ -2606,7 +2595,7 @@ an Stelle von &quot;*&quot;.</translation>
     <name>PopUpWindow</name>
     <message>
         <location filename="Forms/PopUpWindow.ui" line="32"/>
-        <source>SandboxiePlus Notifications</source>
+        <source>Sandboxie-Plus Notifications</source>
         <translation>Sandboxie-Plus Benachrichtigungen</translation>
     </message>
 </context>
@@ -2622,8 +2611,8 @@ an Stelle von &quot;*&quot;.</translation>
     <name>RecoveryWindow</name>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
-        <source>SandboxiePlus Settings</source>
-        <translation>Sandboxie Plus Einstellungen</translation>
+        <source>Sandboxie-Plus Settings</source>
+        <translation>Sandboxie-Plus-Einstellungen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="69"/>
@@ -2670,8 +2659,8 @@ an Stelle von &quot;*&quot;.</translation>
     <name>SettingsWindow</name>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
-        <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus Einstellungen</translation>
+        <source>Sandboxie-Plus Settings</source>
+        <translation>Sandboxie-Plus Einstellungen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
@@ -2729,7 +2718,7 @@ an Stelle von &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="100"/>
-        <source>Open urls from this ui sandboxed</source>
+        <source>Open URLs from this UI sandboxed</source>
         <translation>Öffne URLs aus diesem Fenster in einer Sandbox</translation>
     </message>
     <message>
@@ -2910,8 +2899,8 @@ an Stelle von &quot;*&quot;.</translation>
     <name>SnapshotsWindow</name>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
-        <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus Einstellungen</translation>
+        <source>Sandboxie-Plus Settings</source>
+        <translation>Sandboxie-Plus Einstellungen</translation>
     </message>
     <message>
         <source>Snapshot Details</source>

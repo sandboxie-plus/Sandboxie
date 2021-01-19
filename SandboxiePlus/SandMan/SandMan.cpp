@@ -584,7 +584,7 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 void CSandMan::dropEvent(QDropEvent* e)
 {
 	bool ok;
-	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Sellect box:"), theAPI->GetAllBoxes().keys(), 0, false, &ok);
+	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Select box:"), theAPI->GetAllBoxes().keys(), 0, false, &ok);
 	if (!ok || box.isEmpty())
 		return;
 
@@ -689,7 +689,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (CleanupTemplates == -1)
 		{
 			bool State = false;
-			CleanupTemplates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?")
+			CleanupTemplates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?")
 				.arg(m_MissingTemplates.join(", "))
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 

@@ -4,38 +4,38 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.5.5 / 5.46.4] - 2021-01-17
+## [0.5.5 / 5.46.4] - 2021-01-19
 
 ### Added
 - added "SandboxService=..." to force selected services to be started in the sandbox
-- added template cleanup functionality to plus UI
-- allow internet prompt now also allow internet access pemanently
+- added template clean-up functionality to plus UI
+- added internet prompt to now also allow internet access permanently
 - added browse button for box root folder in the SandMan UI
 - added explorer info message
 - added option to keep the sandman UI always on top
-- added drag and drop file on to sandman exe to open/run it sandboxed
+- allow drag and drop file onto Sandman.exe to run it sandboxed
 - added start SandMan UI when a sandboxed application starts
 - recovery window can now list all files
-- added file cunter to recovery window
-- when "NoAddProcessToJob=y" is specified chrome and alike now can fully use the job system
--- Note: "NoAddProcessToJob=y" reduces the box isolation, but the affected functions are mostly covered by UIPI anyways
-- added obtimized default column widths to tha sbie view
+- added file counter to recovery window
+- when "NoAddProcessToJob=y" is specified, Chrome and related browsers now can fully use the job system
+-- Note: "NoAddProcessToJob=y" reduces the box isolation, but the affected functions are mostly covered by UIPI anyway
+- added optimized default column widths to Sbie view
 
 ### Changed
 - updated templates (thanks isaak654)
 - when trying to take a snapshot of an empty sandbox a proper error message is displayed
 - new layout for the recovery window
-- sbie view sorting is now case insensitive
+- Sbie view sorting is now case insensitive
 
 ### Fixed
 - fixed issue child window closing terminating application when main was hidden
 - fixed issues with non modal windows
-- fixed issues connecting in portable mode to driver
+- fixed issues connecting to driver in portable mode
 - fixed minor issues with snapshot window
-- fixed missing error message when atempting to create an aleady existing sandbox
-- fixed issue allowing to save setting when a sandbox was alrady deleted
+- fixed missing error message when attempting to create an already existing sandbox
+- fixed issue allowing to save setting when a sandbox was already deleted
 - fixed issues with disabled items in dark mode
-- fixed some dialogs not closing on esc
+- fixed some dialogues not closing when pressing Esc
 - fixed tab stops on many windows
 
 
@@ -333,7 +333,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - the software compatibility list in the SandMan UI now shows the proper template names
 - fixed use of freed memory in the driver
 - replaced swprintf with snwprintf to prevent potential buffer overflow in SbieDll.dll
-- fixed bad list performance with resource log and api log in SandMan UI
+- fixed bad list performance with resource log and API log in SandMan UI
 
 
 
@@ -372,7 +372,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed thread handle leak in SbieSvc and other components
-- msedge.exe is now categorized as a chromium derivate
+- msedge.exe is now categorized as a Chromium derivate
 - fixed Chrome 86+ compatibility bug with Chrome's own sandbox
 
 

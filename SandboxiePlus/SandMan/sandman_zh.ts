@@ -1951,23 +1951,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation>确定</translation>
+        <translation type="vanished">确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>应用</translation>
+        <translation type="vanished">应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation type="vanished">取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;是</translation>
+        <translation type="vanished">&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;否</translation>
+        <translation type="vanished">&amp;否</translation>
     </message>
 </context>
 <context>

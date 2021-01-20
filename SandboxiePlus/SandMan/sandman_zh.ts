@@ -218,15 +218,15 @@
     </message>
     <message>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒已删除，故配置没有被保存</translation>
     </message>
     <message>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation type="unfinished"></translation>
+        <translation>一些变更还未保存, 您确定关闭此选项窗口吗?</translation>
     </message>
     <message>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>可执行文件 (*.exe *.cmd);;所有文件 (*.*)</translation>
     </message>
 </context>
 <context>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Yes and add to allowed programs</source>
-        <translation type="unfinished"></translation>
+        <translation>确定并添加到允许的程序中</translation>
     </message>
 </context>
 <context>
@@ -378,46 +378,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">您想允许 %4 (%5) 复制 %1 大文件到沙盒: %2 吗?
+        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">您想允许 %1 (%2) 访问网络吗?
+        <translation>您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 可以从 %2 快速恢复.
+        <translation>%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 遗留.
+        <translation>移动大文件 %1 到沙盒 %2, %3 遗留.
 完整路径: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -444,11 +424,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="unfinished"></translation>
+        <translation>一个或多个被选择的文件位于网络共享, 并必须恢复到本地磁盘, 请选择要将所选文件恢复到的文件夹.</translation>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>有 %1 文件和 %2 文件夹在沙盒中, 占用磁盘 %3 字节.</translation>
     </message>
 </context>
 <context>
@@ -1041,27 +1021,27 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>总在最前</translation>
     </message>
     <message>
         <source>Sellect box:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择沙盒</translation>
     </message>
     <message>
         <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>一些兼容性模板 (%1) 丢失, 可能被删除, 您确定在所有沙盒中删除它们?</translation>
     </message>
     <message>
         <source>Cleaned up removed templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>清理已删除的模板...</translation>
     </message>
     <message>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>无法为空沙盒创建快照</translation>
     </message>
     <message>
         <source>A sandbox with that name already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>已存在同名沙盒</translation>
     </message>
 </context>
 <context>
@@ -1117,10 +1097,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </source>
         <translation>选项:
     </translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of the selected sandbox(es)?</source>
-        <translation type="vanished">确定要删除所选沙盒的所有内容吗?</translation>
     </message>
     <message>
         <source>Drop Admin Rights</source>
@@ -1298,19 +1274,19 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">不再显示此消息</translation>
+        <translation >不再显示此消息</translation>
     </message>
     <message>
         <source>This Sandbox is already empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>此沙盒已空.</translation>
     </message>
     <message>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定要删除所选沙盒的内容?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定要删除多个沙盒的内容?</translation>
     </message>
 </context>
 <context>
@@ -1373,10 +1349,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Snapshot</source>
         <translation>快照</translation>
-    </message>
-    <message>
-        <source>Snapshot: %1 taken: %2</source>
-        <translation type="vanished">快照: %1 取自: %2</translation>
     </message>
     <message>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
@@ -1843,10 +1815,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>程序组</translation>
     </message>
     <message>
-        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
-        <translation type="vanished">启动沙盒化的RpcSs作为系统进程 (破坏一些兼容性)</translation>
-    </message>
-    <message>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>错误代码1308,程序启动失败</translation>
     </message>
@@ -1983,23 +1951,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="vanished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">应用</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;是</translation>
+        <translation>&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;否</translation>
+        <translation>&amp;否</translation>
     </message>
 </context>
 <context>
@@ -2034,11 +2002,11 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Show All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>显示所有文件</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>文本标签</translation>
     </message>
 </context>
 <context>
@@ -2196,32 +2164,28 @@ instead of &quot;*&quot;.</source>
         <translation>沙盒 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;文件系统根目录&lt;/a&gt;: </translation>
     </message>
     <message>
-        <source>Start with Windows</source>
-        <translation type="vanished">开机启动</translation>
-    </message>
-    <message>
         <source>Portable root folder</source>
         <translation>便携化根目录</translation>
     </message>
     <message>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>开机启动UI</translation>
     </message>
     <message>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"></translation>
+        <translation>当沙盒进程启动时启动UI</translation>
     </message>
     <message>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>当清空沙盒时显示第一个恢复窗口</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Other settings</source>
-        <translation type="unfinished"></translation>
+        <translation>其他设置</translation>
     </message>
 </context>
 <context>
@@ -2247,20 +2211,16 @@ instead of &quot;*&quot;.</source>
         <translation>进入快照</translation>
     </message>
     <message>
-        <source>Snapshot Details</source>
-        <translation type="vanished">快照详情</translation>
-    </message>
-    <message>
         <source>Take Snapshot</source>
         <translation>抓取快照</translation>
     </message>
     <message>
         <source>Selected Snapshot Details</source>
-        <translation type="unfinished"></translation>
+        <translation>所选快照详情</translation>
     </message>
     <message>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>快照行为</translation>
     </message>
 </context>
 </TS>

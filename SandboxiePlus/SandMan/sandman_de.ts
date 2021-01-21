@@ -829,7 +829,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="396"/>
         <source>Keep terminated</source>
-        <translation>Beendet lassen</translation>
+        <translation>Beendete behalten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="399"/>

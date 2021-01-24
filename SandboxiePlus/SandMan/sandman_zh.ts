@@ -1021,7 +1021,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Always on Top</source>
-        <translation>总在最前</translation>
+        <translation>保持窗口最前</translation>
     </message>
     <message>
         <source>Sellect box:</source>

@@ -680,7 +680,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
-        <translation>Programların zorunlu kapatılma süresini girin.</translation>
+        <translation>Zorlanmış programların devre dışı bırakma süresini girin.</translation>
     </message>
     <message>
         <source>Sbie Directory: %1</source>
@@ -856,7 +856,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Please enter the configuration password.</source>
-        <translation>Lütfen yapılandırma şifresini girin.</translation>
+        <translation>Lütfen yapılandırma parolasını girin.</translation>
     </message>
     <message>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
@@ -1439,7 +1439,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Komut Satırı</translation>
     </message>
     <message>
-        <source>Don&apos;t alter window class5 names created by sandboxed programs</source>
+        <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>Korumalı alandaki programlar tarafından oluşturulan pencere sınıfı adlarını değiştirme</translation>
     </message>
     <message>
@@ -1494,7 +1494,7 @@ Dosyalara erişim için tek tek tüm programlara uygulamak yerine &apos;Tümün�
 If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>Kalan programlar, diğer tüm işlemler sonlandırıldıktan sonra hala çalışıyorsa otomatik olarak sonlandırılacaktır.
 
-        Lider işlemler tanımlanırsa, diğer tüm süreçler kalıcı süreçler olarak değerlendirilir.</translation>
+        Lider işlemler tanımlanırsa, diğer tüm süreçler oyalayıcı süreçler olarak değerlendirilir.</translation>
     </message>
     <message>
         <source>Allow all programs to start in this sandbox.</source>
@@ -1804,7 +1804,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
         <translation>Korumalı kutunun kullanımını yalnızca bu hesaplarla sınırlamak için aşağıdaki listeye kullanıcı hesaplarını ve kullanıcı gruplarını ekleyin. Liste boşsa, korumalı alan tüm kullanıcı hesapları tarafından kullanılabilir.
 
-Not: Bir korumalı kutuya ilişkin Zorunlu Programlar ve Zorunlu Dizinler ayarları, korumalı kutuyu kullanamayan kullanıcı hesapları için geçerli değildir.</translation>
+Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinler ayarları, korumalı kutuyu kullanamayan kullanıcı hesapları için geçerli değildir.</translation>
     </message>
     <message>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
@@ -1845,7 +1845,7 @@ Not: Bir korumalı kutuya ilişkin Zorunlu Programlar ve Zorunlu Dizinler ayarla
     </message>
     <message>
         <source>Auto delete content when last sandboxed process terminates</source>
-        <translation>Korumalı kutudaki son işlem sona erdiğinde içeriği otomatik olarak sil</translation>
+        <translation>Korumalı kutudaki son işlem sonlandırıldığında içeriği otomatik olarak sil</translation>
     </message>
     <message>
         <source>Add COM Object</source>
@@ -2024,11 +2024,11 @@ Not: Bir korumalı kutuya ilişkin Zorunlu Programlar ve Zorunlu Dizinler ayarla
     </message>
     <message>
         <source>Change Password</source>
-        <translation>Şifre değiştir</translation>
+        <translation>Parola değiştir</translation>
     </message>
     <message>
         <source>Clear password when main window becomes hidden</source>
-        <translation>Ana pencere gizlendiğinde şifreyi temizle</translation>
+        <translation>Ana pencere gizlendiğinde parolayı temizle</translation>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
@@ -2144,7 +2144,7 @@ Not: Bir korumalı kutuya ilişkin Zorunlu Programlar ve Zorunlu Dizinler ayarla
     </message>
     <message>
         <source>Only Administrator user accounts can use Disable Forced Programs command</source>
-        <translation>Yalnızca Yönetici hesapları Zorunlu Programları Devre Dışı Bırak komutunu kullanabilir &apos;Zorunlu programları devre dışı bırakın&apos;</translation>
+        <translation>Yalnızca Yönetici hesapları Zorlanmış Programları Devre Dışı Bırak komutunu kullanabilir &apos;Zorunlu programları devre dışı bırakın&apos;</translation>
     </message>
     <message>
         <source>Show Notifications for relevant log Messages</source>

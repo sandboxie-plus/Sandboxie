@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SbiePlusAPI.h"
 #include "..\MiscHelpers\Common\Common.h"
-
+#include <windows.h>
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
@@ -29,6 +29,40 @@ CBoxedProcessPtr CSbiePlusAPI::OnProcessBoxed(quint32 ProcessId, const QString& 
 		pBox->m_RecentPrograms.insert(pProcess->GetProcessName());
 	}
 	return pProcess;
+}
+
+BOOL CALLBACK CSbiePlusAPI__WindowEnum(HWND hwnd, LPARAM lParam)
+{
+	if (GetParent(hwnd) || GetWindow(hwnd, GW_OWNER))
+		return TRUE;
+	ULONG style = GetWindowLong(hwnd, GWL_STYLE);
+	if ((style & (WS_CAPTION | WS_SYSMENU)) != (WS_CAPTION | WS_SYSMENU))
+		return TRUE;
+	if (!IsWindowVisible(hwnd))
+		return TRUE;
+	/*
+	if ((style & WS_OVERLAPPEDWINDOW) != WS_OVERLAPPEDWINDOW &&
+		(style & WS_POPUPWINDOW)      != WS_POPUPWINDOW)
+		return TRUE;
+	*/
+
+	ULONG pid;
+	GetWindowThreadProcessId(hwnd, &pid);
+
+	QMultiMap<quint32, QString>& m_WindowMap = *((QMultiMap<quint32, QString>*)(lParam));
+
+	WCHAR title[256];
+	GetWindowTextW(hwnd, title, 256);
+
+	m_WindowMap.insert(pid, QString::fromWCharArray(title));
+
+	return TRUE;
+}
+
+void CSbiePlusAPI::UpdateWindowMap()
+{
+	m_WindowMap.clear();
+	EnumWindows(CSbiePlusAPI__WindowEnum, (LPARAM)&m_WindowMap);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -93,6 +127,9 @@ void CSandBoxPlus::CloseBox()
 
 QString CSandBoxPlus::GetStatusStr() const
 {
+	if (!m_IsEnabled)
+		return tr("Disabled");
+
 	QStringList Status;
 
 	if (m_iUnsecureDebugging == 1)

@@ -17,7 +17,7 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    ".\\Resources\\SandMan.ico"
+IDI_ICON1               ICON                    "./resources/SandMan.ico"
 
 
 #ifdef APSTUDIO_INVOKED
@@ -43,6 +43,23 @@ BEGIN
 END
 
 #endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+FINDER_FULL             BITMAP                  "./resources/finder-full.bmp"
+
+FINDER_EMPTY            BITMAP                  "./resources/finder-empty.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+FINDER_CURSOR           CURSOR                  "./resources/finder.cur"
 
 
 /////////////////////////////////////////////////////////////////////////////

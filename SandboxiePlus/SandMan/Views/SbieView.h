@@ -17,6 +17,8 @@ public:
 
 	//virtual void				UpdateRunMenu();
 
+	virtual void				SelectBox(const QString& Name);
+
 signals:
 	void						RecoveryRequested(const QString& BoxName);
 

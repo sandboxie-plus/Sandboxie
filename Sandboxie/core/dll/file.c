@@ -2339,7 +2339,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
     BOOLEAN IsEmptyCopyFile;
     BOOLEAN AlreadyReparsed;
     UCHAR HaveTrueFile;
-	BOOLEAN HaveSnapshotFile;
+	BOOLEAN HaveSnapshotFile, HaveSnapshotParent;
     //char *pPtr = NULL;
 
     //if (wcsstr(Dll_ImageName, L"chrome.exe") != 0) {
@@ -2607,6 +2607,7 @@ ReparseLoop:
         __leave;
 
 	HaveSnapshotFile = FALSE;
+    HaveSnapshotParent = FALSE;
 
 	if (File_Snapshot != NULL) {
 
@@ -2739,6 +2740,27 @@ ReparseLoop:
             HaveCopyParent = FALSE;
 
         //
+        // check if the parent folder exists in a snapshot
+        //
+
+        if (! HaveCopyParent) {
+
+            WCHAR* TargetName = wcsrchr(CopyPath, L'\\');
+            *TargetName = L'\0';
+
+            WCHAR* TmplPath = CopyPath;
+
+            File_FindSnapshotPath(&TmplPath);
+
+            if (TmplPath != CopyPath) {
+
+                HaveSnapshotParent = TRUE;
+            }
+
+            *TargetName = L'\\';
+        }
+
+        //
         // we need to check if the true path exists
         //
 
@@ -2763,7 +2785,7 @@ ReparseLoop:
                     status = STATUS_ACCESS_DENIED;
             } else {
                 FileType = 0;
-                if (depth == 1 || HaveCopyParent)
+                if (depth == 1 || HaveCopyParent || HaveSnapshotParent)
                     status = STATUS_OBJECT_NAME_NOT_FOUND;
                 else
                     status = STATUS_OBJECT_PATH_NOT_FOUND;
@@ -2986,7 +3008,7 @@ ReparseLoop:
         DesiredAccess, CreateDisposition, CreateOptions, FileType);
 
     if (status == STATUS_OBJECT_NAME_NOT_FOUND &&
-            (! HaveCopyParent) && (! HaveTrueParent)) {
+            (! HaveCopyParent) && (! HaveSnapshotParent) && (! HaveTrueParent)) {
 
         //
         // special case:  File_CheckCreateParameters returns
@@ -3072,7 +3094,7 @@ ReparseLoop:
 
     if (! HaveCopyParent) {
 
-        if (HaveTrueParent) {
+        if (HaveTrueParent || HaveSnapshotParent) {
 
             status = File_CreatePath(TruePath, CopyPath);
 

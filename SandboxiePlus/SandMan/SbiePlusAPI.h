@@ -10,12 +10,17 @@ public:
 	CSbiePlusAPI(QObject* parent);
 	virtual ~CSbiePlusAPI();
 
+	virtual void			UpdateWindowMap();
+
+	virtual QString			GetProcessTitle(quint32 pid) { return m_WindowMap.value(pid); }
 
 protected:
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
 
 	virtual CBoxedProcessPtr OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
+
+	QMultiMap<quint32, QString> m_WindowMap;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

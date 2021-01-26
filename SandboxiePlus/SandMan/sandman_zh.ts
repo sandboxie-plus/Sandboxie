@@ -43,7 +43,15 @@
     </message>
     <message>
         <source>Legacy (old sbie behaviour)</source>
-        <translation>遗留 (旧沙盒行为)</translation>
+        <translation type="vanished">遗留 (旧沙盒行为)</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Create New Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legacy Sandboxie Behaviour</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -378,26 +386,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
+        <translation type="vanished">您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>您确定允许 %1 (%2) 访问网络吗?
+        <translation type="vanished">您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 可以从 %2 快速恢复.
+        <translation type="vanished">%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>移动大文件 %1 到沙盒 %2, %3 遗留.
+        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 遗留.
 完整路径: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -491,6 +519,10 @@ Full path: %4</source>
     <message>
         <source>Reduced Isolation</source>
         <translation>减弱隔离</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1025,11 +1057,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Sellect box:</source>
-        <translation>选择沙盒</translation>
+        <translation type="vanished">选择沙盒</translation>
     </message>
     <message>
         <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation>一些兼容性模板 (%1) 丢失, 可能被删除, 您确定在所有沙盒中删除它们?</translation>
+        <translation type="vanished">一些兼容性模板 (%1) 丢失, 可能被删除, 您确定在所有沙盒中删除它们?</translation>
     </message>
     <message>
         <source>Cleaned up removed templates...</source>
@@ -1042,6 +1074,50 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>A sandbox with that name already exists</source>
         <translation>已存在同名沙盒</translation>
+    </message>
+    <message>
+        <source>Reset Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Hidden Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select box:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to terminate all processes in all sandboxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terminate all without asking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected window is running as part of program %1 in sandbox %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected window is not running as part of any sandboxed program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Window Finder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1069,6 +1145,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Process ID</source>
         <translation>进程ID</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1274,7 +1354,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Don&apos;t show this message again.</source>
-        <translation >不再显示此消息</translation>
+        <translation>不再显示此消息</translation>
     </message>
     <message>
         <source>This Sandbox is already empty.</source>
@@ -1287,6 +1367,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
         <translation>您确定要删除多个沙盒的内容?</translation>
+    </message>
+    <message>
+        <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This sandbox is disabled, do you want to enable it?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1383,7 +1471,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Enter a name for the new box:</source>
-        <translation>输入新沙盒名称:</translation>
+        <translation type="vanished">输入新沙盒名称:</translation>
+    </message>
+    <message>
+        <source>Sandbox Name:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

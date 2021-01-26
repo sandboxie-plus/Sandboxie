@@ -4,7 +4,32 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.5.5 / 5.46.4] - 2021-01-19
+
+
+
+## [0.6.0 / 5.46.5] - 2021-01-25
+
+### Added
+- added comfirmation prompts to terminate all commands
+- added window title to boxed process info
+- added winspy based sandboxed window finder
+- added option to view disabled boxes and double click on box to enable it
+
+### Changed
+- reset columns now resized them to fit the content, also "Reset Columns" can now be localized
+- modal windows are now centered to the parent
+- improved new box window
+
+### Fixed
+- fixed issues with window modality
+- fixed issues when main window was set to be always on top
+- fixed an driver issue with windows 10 insider build 21286
+- fixed issues with snapshot dialog
+- fixed an issue when writing to a path that aready exist in the napshot but not outside
+
+
+
+## [0.5.5 / 5.46.4] - 2021-01-17
 
 ### Added
 - added "SandboxService=..." to force selected services to be started in the sandbox

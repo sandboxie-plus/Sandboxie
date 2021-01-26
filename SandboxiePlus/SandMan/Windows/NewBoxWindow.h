@@ -12,6 +12,8 @@ public:
 	CNewBoxWindow(QWidget *parent = Q_NULLPTR);
 	~CNewBoxWindow();
 
+	QString m_Name;
+
 private slots:
 	void CreateBox();
 

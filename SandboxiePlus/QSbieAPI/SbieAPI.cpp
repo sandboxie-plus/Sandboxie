@@ -927,7 +927,8 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		QString BoxName = SbieIniGet(QString(), QString(), (i | CONF_GET_NO_EXPAND));
 		if (BoxName.isNull())
 			break;
-		if (!IsBoxEnabled(BoxName))
+		bool bIsEnabled;
+		if (!IsBox(BoxName, bIsEnabled))
 			continue;
 
 		CSandBoxPtr pBox = OldSandBoxes.take(BoxName.toLower());
@@ -938,6 +939,7 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		}
 			
 		UpdateBoxPaths(pBox);
+		pBox->m_IsEnabled = bIsEnabled;
 
 		pBox->UpdateDetails();
 	}
@@ -1602,7 +1604,7 @@ SB_STATUS CSbieAPI::ReloadConfig(quint32 SessionId)
 	return SB_OK;
 }
 
-bool CSbieAPI::IsBoxEnabled(const QString& BoxName)
+bool CSbieAPI::IsBox(const QString& BoxName, bool& bIsEnabled)
 {
 	wstring box_name = BoxName.toStdWString();
 
@@ -1613,7 +1615,9 @@ bool CSbieAPI::IsBoxEnabled(const QString& BoxName)
 	args->func_code = API_IS_BOX_ENABLED;
 	args->box_name.val = (WCHAR*)box_name.c_str();
 
-	return NT_SUCCESS(m->IoControl(parms));
+	NTSTATUS status = m->IoControl(parms);
+	bIsEnabled = NT_SUCCESS(status);
+	return bIsEnabled || status == STATUS_ACCOUNT_RESTRICTION;
 }
 
 bool CSbieAPI::IsConfigLocked()

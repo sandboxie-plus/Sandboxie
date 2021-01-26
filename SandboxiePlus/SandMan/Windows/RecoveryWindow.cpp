@@ -10,6 +10,18 @@
 CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	: QDialog(parent)
 {
+	Qt::WindowFlags flags = windowFlags();
+	flags |= Qt::CustomizeWindowHint;
+	//flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	flags |= Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowCloseButtonHint;
+	setWindowFlags(flags);
+
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - File Recovery").arg(pBox->GetName()));
 

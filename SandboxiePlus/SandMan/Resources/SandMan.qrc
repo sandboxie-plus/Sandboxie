@@ -45,6 +45,7 @@
         <file>Actions/Stop.png</file>
         <file>SandMan2N.png</file>
         <file>SandManN.png</file>
+        <file>Actions/finder.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

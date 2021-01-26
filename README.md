@@ -31,6 +31,7 @@ Open Source release
 - bastik-1001 - DE
 - JNylson - PT
 - lufog - RU
+- xorcan -RT
 
 More volunteers welcome ;)
 

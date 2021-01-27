@@ -124,6 +124,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bConnectPending = false;
 	m_bStopPending = false;
 
+	QTreeViewEx::m_ResetColumns = tr("Reset Columns");
 	CPanelView::m_CopyCell = tr("Copy Cell");
 	CPanelView::m_CopyRow = tr("Copy Row");
 	CPanelView::m_CopyPanel = tr("Copy Panel");
@@ -252,9 +253,6 @@ CSandMan::CSandMan(QWidget *parent)
 		pAction->setChecked(pAction->data().toBool() == bAdvanced);
 	SetViewMode(bAdvanced);
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	m_pWndTopMost->setChecked(bAlwaysOnTop);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 
@@ -262,8 +260,13 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 
-	m_pPopUpWindow = new CPopUpWindow(this);
+	m_pPopUpWindow = new CPopUpWindow();
 	connect(m_pPopUpWindow, SIGNAL(RecoveryRequested(const QString&)), this, SLOT(OpenRecovery(const QString&)));
+
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	m_pWndTopMost->setChecked(bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	if (!bAutoRun)
 		show();
@@ -286,6 +289,9 @@ CSandMan::CSandMan(QWidget *parent)
 
 CSandMan::~CSandMan()
 {
+	m_pPopUpWindow->close();
+	delete m_pPopUpWindow;
+
 	if(m_pEnableMonitoring->isChecked())
 		theAPI->EnableMonitor(false);
 
@@ -348,6 +354,7 @@ void CSandMan::CreateMenus()
 		m_pNew = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
+		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
 		m_pDisableForce = m_pMenuFile->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
@@ -385,6 +392,9 @@ void CSandMan::CreateMenus()
 
 		m_iMenuViewPos = m_pMenuView->actions().count();
 		m_pMenuView->addSeparator();
+
+		m_pShowHidden = m_pMenuView->addAction(tr("Show Hidden Boxes"));
+		m_pShowHidden->setCheckable(true);
 
 		m_pCleanUpMenu = m_pMenuView->addMenu(CSandMan::GetIcon("Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
@@ -584,7 +594,7 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 void CSandMan::dropEvent(QDropEvent* e)
 {
 	bool ok;
-	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Sellect box:"), theAPI->GetAllBoxes().keys(), 0, false, &ok);
+	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Select box:"), theAPI->GetAllBoxes().keys(), 0, false, &ok);
 	if (!ok || box.isEmpty())
 		return;
 
@@ -635,6 +645,8 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	if (!isVisible() || windowState().testFlag(Qt::WindowMinimized))
 		return;
+
+	theAPI->UpdateWindowMap();
 
 	m_pBoxView->Refresh();
 
@@ -689,7 +701,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (CleanupTemplates == -1)
 		{
 			bool State = false;
-			CleanupTemplates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?")
+			CleanupTemplates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?")
 				.arg(m_MissingTemplates.join(", "))
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
@@ -722,7 +734,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
-		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
+		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox);
 		if (pRecoveryWindow->FindFiles() == 0)
 			delete pRecoveryWindow;
 		else if (pRecoveryWindow->exec() != 1)
@@ -797,7 +809,7 @@ void CSandMan::OnStatusChanged()
 		{
 			if (m_SbieTemplates->RunCheck())
 			{
-				CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow();
 				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
 				pSettingsWindow->showCompat();
 			}
@@ -939,7 +951,7 @@ void CSandMan::OpenRecovery(const QString& BoxName)
 	if (!pBox)
 		return;
 
-	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
+	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox);
 	pRecoveryWindow->FindFiles();
 	pRecoveryWindow->show();
 }
@@ -1050,12 +1062,30 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnNewBox()
 {
-	CNewBoxWindow NewBoxWindow;
-	NewBoxWindow.exec();
+	CNewBoxWindow NewBoxWindow(this);
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	NewBoxWindow.setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	if (NewBoxWindow.exec() == 1) 
+	{
+		theAPI->ReloadBoxes();
+		m_pBoxView->Refresh();
+		m_pBoxView->SelectBox(NewBoxWindow.m_Name);
+	}
 }
 
 void CSandMan::OnEmptyAll()
 {
+	if (theConf->GetInt("Options/TerminateAll", -1) == -1)
+	{
+		bool State = false;
+		if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to terminate all processes in all sandboxes?")
+			, tr("Terminate all without asking"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes);
+			return;
+
+		if (State)
+			theConf->SetValue("Options/TerminateAll", 1);
+	}
+
 	theAPI->TerminateAll();
 }
 
@@ -1208,6 +1238,7 @@ void CSandMan::OnAlwaysTop()
 	theConf->SetValue("Options/AlwaysOnTop", bAlwaysOnTop);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	this->show(); // why is this needed?
+	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 }
 
 void CSandMan::SetViewMode(bool bAdvanced)
@@ -1274,7 +1305,7 @@ void CSandMan::OnSettings()
 	static CSettingsWindow* pSettingsWindow = NULL;
 	if (pSettingsWindow == NULL)
 	{
-		pSettingsWindow = new CSettingsWindow(this);
+		pSettingsWindow = new CSettingsWindow();
 		connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 			pSettingsWindow = NULL;
@@ -1298,7 +1329,7 @@ void CSandMan::UpdateSettings()
 void CSandMan::OnResetMsgs()
 {
 	auto Ret = QMessageBox("Sandboxie-Plus", tr("Do you also want to reset hidden message boxes (yes), or only all log messages (no)?"),
-		QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape).exec();
+		QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape, this).exec();
 	if (Ret == QMessageBox::Cancel)
 		return;
 
@@ -1319,6 +1350,7 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/OpenUrlsSandboxed", 2);
 
 		theConf->SetValue("Options/AutoCleanupTemplates", -1);
+		theConf->SetValue("Options/TerminateAll", -1);
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
@@ -1832,7 +1864,7 @@ void CSandMan::OnUpdateDownload()
 
 	QString Message = tr("<p>New Sandboxie-Plus has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
 		.arg(FilePath).arg("File:///" + TempDir);
-	if (QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton).exec() == QMessageBox::Yes)
+	if (QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
 		QProcess::startDetached(FilePath);
 }
 
@@ -1947,6 +1979,173 @@ void CSandMan::LoadLanguage()
 
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// WinSpy based window finder
+//
+
+#include <windows.h>
+#include "Helpers/FindTool.h"
+
+#define IDD_FINDER_TOOL                 111
+#define ID_FINDER_TARGET                112
+#define ID_FINDER_EXPLAIN               113
+#define ID_FINDER_RESULT                114
+
+UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
+{
+	ULONG pid;
+	if (uCode == WFN_END)
+		GetWindowThreadProcessId(hwnd, &pid);
+	else
+		pid = 0;
+
+	hwndTool = GetParent(hwndTool);
+
+	if (pid && pid != GetCurrentProcessId())
+	{
+		RECT rc;
+		GetWindowRect(hwndTool, &rc);
+		if (rc.bottom - rc.top <= 150) 
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+
+		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
+		if (!pProcess.isNull()) 
+		{
+			wstring result = CSandMan::tr("The selected window is running as part of program %1 in sandbox %2").arg(pProcess->GetProcessName()).arg(pProcess->GetBoxName()).toStdWString();
+
+			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
+			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_SHOW);
+		}
+		else
+		{
+			wstring result = CSandMan::tr("The selected window is not running as part of any sandboxed program.").toStdWString();
+
+			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
+			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_SHOW);
+		}
+		::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_RESULT), SW_SHOW);
+	}
+	else
+	{
+		RECT rc;
+		GetWindowRect(hwndTool, &rc);
+		if (rc.bottom - rc.top > 150)
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+
+		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_HIDE);
+		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_HIDE);
+		::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_RESULT), SW_HIDE);
+	}
+
+	return 0;
+}
+
+// hwnd:    All window processes are passed the handle of the window
+//         that they belong to in hwnd.
+// msg:     Current message (e.g., WM_*) from the OS.
+// wParam:  First message parameter, note that these are more or less
+//          integers, but they are really just "data chunks" that
+//          you are expected to memcpy as raw data to float, etc.
+// lParam:  Second message parameter, same deal as above.
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+		case WM_CREATE:
+		{
+			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
+
+			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, 10, 10, 32, 32, hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
+			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, 60, 10, 180, 50, hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
+			CreateWindow(L"Static", L"", WS_CHILD, 60, 70, 180, 50, hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+
+			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
+
+			break;
+		}
+
+		case WM_CLOSE:
+			//DestroyWindow(hwnd);
+			PostQuitMessage(0);
+			break;
+	}
+
+	return DefWindowProc(hwnd, msg, wParam, lParam);
+}
+
+DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
+{
+	MSG  msg;
+	WNDCLASS mainWindowClass = { 0 };
+
+	HINSTANCE hInstance = NULL;
+
+	// You can set the main window name to anything, but
+	// typically you should prefix custom window classes
+	// with something that makes it unique.
+	mainWindowClass.lpszClassName = TEXT("SBp.WndFinder");
+
+	mainWindowClass.hInstance = hInstance;
+	mainWindowClass.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
+	mainWindowClass.lpfnWndProc = WndProc;
+	mainWindowClass.hCursor = LoadCursor(0, IDC_ARROW);
+
+	RegisterClass(&mainWindowClass);
+
+	// Notes:
+	// - The classname identifies the TYPE of the window. Not a C type.
+	//   This is a (TCHAR*) ID that Windows uses internally.
+	// - The window name is really just the window text, this is
+	//   commonly used for captions, including the title
+	//   bar of the window itself.
+	// - parentHandle is considered the "owner" of this
+	//   window. MessageBoxes can use HWND_MESSAGE to
+	//   free them of any window.
+	// - menuHandle: hMenu specifies the child-window identifier,
+	//               an integer value used by a dialog box
+	//               control to notify its parent about events.
+	//               The application determines the child-window
+	//               identifier; it must be unique for all
+	//               child windows with the same parent window.
+
+	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
+		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 275, 100, NULL, 0, hInstance, NULL);
+
+	HFONT hFont = CreateFont(13, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
+	
+	SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)hFont, TRUE);
+	SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)hFont, TRUE);
+
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	DeleteObject(hFont);
+
+	return (int)msg.wParam;
+}
+
+void CSandMan::OnWndFinder()
+{
+	m_pWndFinder->setEnabled(false);
+
+	HANDLE hThread = CreateThread(NULL, 0, FinderThreadFunc, NULL, 0, NULL);
+
+	QWinEventNotifier* finishedNotifier = new QWinEventNotifier(hThread);
+	finishedNotifier->setEnabled(true);
+	connect(finishedNotifier, &QWinEventNotifier::activated, this, [finishedNotifier, this, hThread]() {
+		CloseHandle(hThread);
+
+		m_pWndFinder->setEnabled(true);
+
+		finishedNotifier->setEnabled(false);
+		finishedNotifier->deleteLater();
+	});
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

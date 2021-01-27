@@ -56,6 +56,8 @@ public:
 
 	virtual void					CloseBox() {}
 
+	virtual bool					IsEnabled() { return m_IsEnabled; }
+
 	virtual bool					IsEmpty();
 	virtual SB_PROGRESS				CleanBox();
 	virtual SB_STATUS				RenameBox(const QString& NewName);
@@ -81,7 +83,9 @@ protected:
 	QString							m_FilePath;
 	QString							m_RegPath;
 	QString							m_IpcPath;
-
+	
+	bool							m_IsEnabled;
+	
 	QMap<quint32, CBoxedProcessPtr>	m_ProcessList;
 	int								m_ActiveProcessCount;
 

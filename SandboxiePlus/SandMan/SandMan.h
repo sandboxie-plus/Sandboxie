@@ -13,8 +13,8 @@
 #include "Windows/PopUpWindow.h"
 
 #define VERSION_MJR		0
-#define VERSION_MIN 	5
-#define VERSION_REV 	5
+#define VERSION_MIN 	6
+#define VERSION_REV 	0
 #define VERSION_UPD 	0
 
 
@@ -47,6 +47,8 @@ public:
 	static QIcon		GetIcon(const QString& Name);
 
 	bool				IsFullyPortable();
+
+	bool				IsShowHidden() { return m_pShowHidden->isChecked(); }
 
 protected:
 	SB_STATUS			ConnectSbie();
@@ -115,6 +117,7 @@ private slots:
 
 	void				OnNewBox();
 	void				OnEmptyAll();
+	void				OnWndFinder();
 	void				OnDisableForce();
 	void				OnDisableForce2();
 	void				OnMaintenance();
@@ -175,6 +178,7 @@ private:
 	QMenu*				m_pMenuFile;
 	QAction*			m_pNew;
 	QAction*			m_pEmptyAll;
+	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
 	QAction*			m_pDisableForce2;
 	QMenu*				m_pMaintenance;
@@ -194,6 +198,7 @@ private:
 
 	QMenu*				m_pMenuView;
 	QActionGroup*		m_pViewMode;
+	QAction*			m_pShowHidden;
 	QAction*			m_pWndTopMost;
 	int					m_iMenuViewPos;
 	QMenu*				m_pCleanUpMenu;

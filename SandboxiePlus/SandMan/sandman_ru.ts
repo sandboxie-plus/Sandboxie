@@ -43,7 +43,15 @@
     </message>
     <message>
         <source>Legacy (old sbie behaviour)</source>
-        <translation>Устаревшее (старое поведение sbie)</translation>
+        <translation type="vanished">Устаревшее (старое поведение sbie)</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Create New Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legacy Sandboxie Behaviour</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -219,15 +227,15 @@
     </message>
     <message>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта песочница была удалена, поэтому сохранить конфигурацию невозможно.</translation>
     </message>
     <message>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation type="unfinished"></translation>
+        <translation>Некоторые изменения еще не были сохранены, вы действительно хотите закрыть окно параметров?</translation>
     </message>
     <message>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполняемые файлы (*.exe *.cmd);;Все файлы (*.*)</translation>
     </message>
 </context>
 <context>
@@ -296,7 +304,7 @@
     </message>
     <message>
         <source>Yes and add to allowed programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Да и добавить в разрешенные программы</translation>
     </message>
 </context>
 <context>
@@ -445,11 +453,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Один или несколько выбранных файлов находятся в общей сетевой папке и должны быть восстановлены на локальный диск. Выберите папку для восстановления всех выбранных файлов.</translation>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 байт дискового пространства.</translation>
     </message>
 </context>
 <context>
@@ -512,6 +520,10 @@ Full path: %4</source>
     <message>
         <source>Reduced Isolation</source>
         <translation>Сниженная изоляция</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1042,26 +1054,70 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Поверх всех окон</translation>
     </message>
     <message>
         <source>Sellect box:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Выберите песочницу:</translation>
     </message>
     <message>
         <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех песочниц?</translation>
     </message>
     <message>
         <source>Cleaned up removed templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Убраны удаленные шаблоны...</translation>
     </message>
     <message>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать снимок пустой песочницы</translation>
     </message>
     <message>
         <source>A sandbox with that name already exists</source>
+        <translation>Песочница с таким именем уже существует</translation>
+    </message>
+    <message>
+        <source>Reset Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Hidden Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select box:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to terminate all processes in all sandboxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terminate all without asking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected window is running as part of program %1 in sandbox %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected window is not running as part of any sandboxed program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus - Window Finder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1091,6 +1147,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>Path / Command Line</source>
         <translation>Путь / Командная строка</translation>
     </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieProcess</name>
@@ -1118,10 +1178,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </source>
         <translation>Опции:
     </translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of the selected sandbox(es)?</source>
-        <translation type="vanished">Вы действительно хотите удалить содержимое выбранных песочниц?</translation>
     </message>
     <message>
         <source>Drop Admin Rights</source>
@@ -1300,18 +1356,26 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Больше не показывать это сообщение.</translation>
+        <translation>Больше не показывать это сообщение.</translation>
     </message>
     <message>
         <source>This Sandbox is already empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта песочница уже пуста.</translation>
     </message>
     <message>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите удалить содержимое выбранной песочницы?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
+        <translation>Вы действительно хотите удалить содержимое нескольких песочниц?</translation>
+    </message>
+    <message>
+        <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This sandbox is disabled, do you want to enable it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1377,10 +1441,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Снимок</translation>
     </message>
     <message>
-        <source>Snapshot: %1 taken: %2</source>
-        <translation type="vanished">Снимок: %1 сделан: %2</translation>
-    </message>
-    <message>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
         <translation>Вы действительно хотите переключить активный снимок? Это приведет к удалению текущего состояния!</translation>
     </message>
@@ -1413,7 +1473,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Enter a name for the new box:</source>
-        <translation>Введите имя для новой песочницы:</translation>
+        <translation type="vanished">Введите имя для новой песочницы:</translation>
+    </message>
+    <message>
+        <source>Sandbox Name:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1900,10 +1964,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Запретить изменение параметров сети и брандмауэра</translation>
     </message>
     <message>
-        <source>Start the sandboxed RpcSs as a SYSTEM process (breaks some compatibility)</source>
-        <translation type="vanished">Запускать RpcSs в песочнице как СИСТЕМНЫЙ процесс (нарушает некоторую совместимость)</translation>
-    </message>
-    <message>
         <source>COM Class Trace</source>
         <translation>Трассировка COM класса</translation>
     </message>
@@ -2037,11 +2097,11 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Show All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать все файлы</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Текстовая метка</translation>
     </message>
 </context>
 <context>
@@ -2183,24 +2243,20 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Показать уведомления для соответствующих сообщений журнала</translation>
     </message>
     <message>
-        <source>Start with Windows</source>
-        <translation type="vanished">Запускать с Windows</translation>
-    </message>
-    <message>
         <source>Open urls from this ui sandboxed</source>
         <translation>Открывать URL-адреса из этого пользовательского интерфейса в песочнице</translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;корень файловой системы&lt;/a&gt;: </translation>
+        <translation>Песочница &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;корень файловой системы&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;корень ipc&lt;/a&gt;: </translation>
+        <translation>Песочница &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;корень ipc&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;корень реестра&lt;/a&gt;: </translation>
+        <translation>Песочница &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;корень реестра&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Portable root folder</source>
@@ -2208,23 +2264,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск пользовательского интерфейса с Windows</translation>
     </message>
     <message>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск пользовательского интерфейса при запуске изолированного процесса</translation>
     </message>
     <message>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать первое окно восстановления при очистке песочницы</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Other settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Другие настройки</translation>
     </message>
 </context>
 <context>
@@ -2250,20 +2306,16 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Перейти к снимку</translation>
     </message>
     <message>
-        <source>Snapshot Details</source>
-        <translation type="vanished">Детали снимка</translation>
-    </message>
-    <message>
         <source>Take Snapshot</source>
         <translation>Сделать снимок</translation>
     </message>
     <message>
         <source>Selected Snapshot Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Сведения о выбранном снимке</translation>
     </message>
     <message>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Действия со снимками</translation>
     </message>
 </context>
 </TS>

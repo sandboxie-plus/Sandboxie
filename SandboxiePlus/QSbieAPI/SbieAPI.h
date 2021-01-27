@@ -137,7 +137,7 @@ public:
 	virtual SB_STATUS		ReloadConfig(quint32 SessionId = -1);
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
 	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
-	virtual bool			IsBoxEnabled(const QString& BoxName);
+	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
 	virtual bool			IsConfigLocked();

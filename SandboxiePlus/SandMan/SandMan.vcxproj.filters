@@ -99,6 +99,12 @@
     <ClCompile Include="Windows\NewBoxWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\FindTool.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\WindowFromPointEx.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -108,6 +114,9 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="Helpers\WinAdmin.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\FindTool.h">
       <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -169,6 +178,12 @@
     <Image Include="Resources\SandMan.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\finder-empty.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\finder-full.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Forms\SettingsWindow.ui">
@@ -201,6 +216,12 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_zh.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="Resources\finder.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="sandman_tr.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

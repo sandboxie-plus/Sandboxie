@@ -20,6 +20,7 @@ Open Source release
 - stephtr - CI and Certification
 - TechLord / Team-IRA - Reversing
 - isaak654 - UI fixes and Templates
+- typpos - UI improvement sugestions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - mpheath - help with inno setup
@@ -30,6 +31,7 @@ Open Source release
 - bastik-1001 - DE
 - JNylson - PT
 - lufog - RU
+- xorcan -RT
 
 More volunteers welcome ;)
 

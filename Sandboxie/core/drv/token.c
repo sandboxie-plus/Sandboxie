@@ -27,6 +27,7 @@
 #include "api.h"
 #include "util.h"
 #include "common/my_version.h"
+#include "session.h"
 
 
 //---------------------------------------------------------------------------
@@ -818,6 +819,11 @@ _FX void *Token_Restrict(
     TOKEN_USER *user;
     void *NewTokenObject = NULL;
 	
+    /*if (Conf_Get_Boolean(proc->box->name, L"CreateToken", 0, FALSE))
+    {
+        
+    }*/
+
 	// OpenToken BEGIN
 	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
 

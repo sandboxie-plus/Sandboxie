@@ -340,6 +340,9 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         return RPC_S_INVALID_ARG;
     }
 
+    WCHAR wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+    memset(wstrPortName, 0, sizeof(wstrPortName));
+
     if (_wcsicmp(StringBinding, _old) == 0) {
 
         ULONG_PTR pWinSpool = (ULONG_PTR)GetModuleHandle(L"winspool.drv");
@@ -351,13 +354,9 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
 
             if (pwszTempPortName) {
 
-                WCHAR wstrPortName[DYNAMIC_PORT_NAME_CHARS];
-                memset(wstrPortName, 0, sizeof(wstrPortName));
-
                 wcscpy(wstrPortName, L"ncalrpc:[");
                 wcscpy(wstrPortName + 9, pwszTempPortName);
                 wcscat(wstrPortName, _old + 9);
-                return __sys_RpcBindingFromStringBindingW(wstrPortName, OutBinding);
             }
         }
     }
@@ -373,21 +372,17 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
 
             WCHAR* pwszTempPortName = GetDynamicLpcPortName(WPAD_PORT);
 
-            if (pwszTempPortName)
-            {
-                WCHAR wstrPortName[DYNAMIC_PORT_NAME_CHARS];
-                memset(wstrPortName, 0, sizeof(wstrPortName));
+            if (pwszTempPortName) {
 
                 wcscpy(wstrPortName, L"ncalrpc:[");
                 wcscpy(wstrPortName + 9, pwszTempPortName);
                 wcscat(wstrPortName, L"]");
-                return __sys_RpcBindingFromStringBindingW(wstrPortName, OutBinding);
             }
         }
     }
 
     RPC_STATUS  status;
-    status = __sys_RpcBindingFromStringBindingW(StringBinding, OutBinding);
+    status = __sys_RpcBindingFromStringBindingW(*wstrPortName ? wstrPortName : StringBinding, OutBinding);
     // If there are any IpcTrace options set, then output this debug string
     WCHAR   wsTraceOptions[4];
     if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
@@ -395,8 +390,8 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         WCHAR msg[512];
 
         //Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
-        Sbie_snwprintf(msg, 512, L"StringBinding = '%s', BindingHandle = 0x%X, status = 0x%08X",
-            StringBinding, OutBinding, status);
+        Sbie_snwprintf(msg, 512, L"StringBinding = '%s', wstrPortName = '%s', BindingHandle = 0x%X, status = 0x%08X",
+            StringBinding, wstrPortName, OutBinding, status);
 
         //OutputDebugString(msg);
         SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);

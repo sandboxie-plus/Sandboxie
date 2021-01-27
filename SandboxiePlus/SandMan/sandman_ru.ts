@@ -42,16 +42,12 @@
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <source>Legacy (old sbie behaviour)</source>
-        <translation type="vanished">Устаревшее (старое поведение sbie)</translation>
-    </message>
-    <message>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Создать новую песочницу</translation>
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Устаревшее поведение Sandboxie</translation>
     </message>
 </context>
 <context>
@@ -387,46 +383,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
+        <translation>Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
 Имя файла:%3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 имеет право на быстрое восстановление с %2.
+        <translation>%1 имеет право на быстрое восстановление с %2.
 Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -523,7 +499,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключено</translation>
     </message>
 </context>
 <context>
@@ -1057,14 +1033,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Поверх всех окон</translation>
     </message>
     <message>
-        <source>Sellect box:</source>
-        <translation type="vanished">Выберите песочницу:</translation>
-    </message>
-    <message>
-        <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех песочниц?</translation>
-    </message>
-    <message>
         <source>Cleaned up removed templates...</source>
         <translation>Убраны удаленные шаблоны...</translation>
     </message>
@@ -1078,47 +1046,47 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Reset Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить столбцы</translation>
     </message>
     <message>
         <source>Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск окон</translation>
     </message>
     <message>
         <source>Show Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать скрытые песочницы</translation>
     </message>
     <message>
         <source>Select box:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите песочницу:</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех ящиков?</translation>
     </message>
     <message>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите завершить все процессы во всех песочницах?</translation>
     </message>
     <message>
         <source>Terminate all without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершить все, не спрашивая</translation>
     </message>
     <message>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное окно работает как часть программы %1 в изолированной программной среде %2</translation>
     </message>
     <message>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное окно не запущено как часть какой-либо изолированной программы.</translation>
     </message>
     <message>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетащите инструмент поиска на окно, чтобы выбрать его, затем отпустите кнопку мыши, чтобы проверить, является ли окно изолированным.</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Поиск окон</translation>
     </message>
 </context>
 <context>
@@ -1149,7 +1117,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок</translation>
     </message>
 </context>
 <context>
@@ -1372,11 +1340,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите завершить все процессы в выбранных песочницах?</translation>
     </message>
     <message>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта песочница отключена, вы хотите ее включить?</translation>
     </message>
 </context>
 <context>
@@ -1472,12 +1440,8 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Sandboxie-Plus новая песочница</translation>
     </message>
     <message>
-        <source>Enter a name for the new box:</source>
-        <translation type="vanished">Введите имя для новой песочницы:</translation>
-    </message>
-    <message>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя песочницы:</translation>
     </message>
 </context>
 <context>
@@ -2046,23 +2010,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Применить</translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
 </context>
 <context>

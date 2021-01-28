@@ -540,12 +540,18 @@ void CAppPage::Template_Filter()
         BOOL ie = (name.Find(L"IExplore_") != -1);
         BOOL ff = (name.Find(L"Firefox_") != -1)
                || (name.Find(L"Waterfox_") != -1)
-               || (name.Find(L"PaleMoon_") != -1);
+               || (name.Find(L"PaleMoon_") != -1)
+			   || (name.Find(L"SeaMonkey_") != -1);
         BOOL ch = (name.Find(L"Chrome_") != -1)
-               || (name.Find(L"Iron_") != -1)
+			   || (name.Find(L"Edge_") != -1)               
                || (name.Find(L"Dragon_") != -1)
-               || (name.Find(L"Vivaldi_") != -1)
-               || (name.Find(L"Neon_") != -1);
+			   || (name.Find(L"Iron_") != -1)
+			   || (name.Find(L"Ungoogled_") != -1)
+			   || (name.Find(L"Vivaldi_") != -1)
+               || (name.Find(L"Brave_") != -1)
+               || (name.Find(L"Maxthon_6_") != -1)
+			   || (name.Find(L"Opera_") != -1)
+			   || (name.Find(L"Yandex_") != -1);
 
         BOOL keep = FALSE;
 
@@ -1162,19 +1168,19 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     // replace with:    Template=SeaMonkey_Bookmarks_DirectAccess
     //
 
-    const CString &SeaMonkeyTemplate(L"SeaMonkey_Bookmarks_DirectAccess");
-    const CString &SeaMonkeyPath1(
-        L"%AppData%\\Mozilla\\Profiles\\*\\bookmark*");
-    const CString &SeaMonkeyPath2(
-        L"%AppData%\\Mozilla\\Profiles\\*\\places*");
+    //const CString &SeaMonkeyTemplate(L"SeaMonkey_Bookmarks_DirectAccess");
+    //const CString &SeaMonkeyPath1(
+    //    L"%AppData%\\Mozilla\\Profiles\\*\\bookmark*");
+    //const CString &SeaMonkeyPath2(
+    //    L"%AppData%\\Mozilla\\Profiles\\*\\places*");
 
-    UpdateTemplates2(
-        box, L"seamonkey.exe", SeaMonkeyTemplate,
-        SeaMonkeyPath1, SeaMonkeyPath2);
+    //UpdateTemplates2(
+    //    box, L"seamonkey.exe", SeaMonkeyTemplate,
+    //    SeaMonkeyPath1, SeaMonkeyPath2);
 
-    UpdateTemplates2(
-        box, L"seamon~1.exe", SeaMonkeyTemplate,
-        SeaMonkeyPath1, SeaMonkeyPath2);
+    //UpdateTemplates2(
+    //    box, L"seamon~1.exe", SeaMonkeyTemplate,
+    //    SeaMonkeyPath1, SeaMonkeyPath2);
 
     //
     // find and remove:
@@ -1184,10 +1190,10 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     // replace with:    Template=SeaMonkey_Bookmarks_DirectAccess
     //
 
-    UpdateTemplates2(
-        box, L"opera.exe", L"Opera_Bookmarks_DirectAccess",
-        L"%AppData%\\Opera\\Opera\\Profile\\opera6.adr",
-        L"%AppData%\\Opera\\Opera\\Profile\\notes.adr");
+    //UpdateTemplates2(
+    //    box, L"opera.exe", L"Opera_Bookmarks_DirectAccess",
+    //    L"%AppData%\\Opera\\Opera\\Profile\\opera6.adr",
+    //    L"%AppData%\\Opera\\Opera\\Profile\\notes.adr");
 }
 
 
@@ -1220,28 +1226,28 @@ void CAppPage::UpdateEmailTemplates(CBox &box)
     //          Outlook Express
     //
 
-    CStringList _OutlookExpressFiles;
-    CStringList _OutlookExpressKeys;
+    //CStringList _OutlookExpressFiles;
+    //CStringList _OutlookExpressKeys;
 
-    _OutlookExpressFiles.AddTail(L"%AppData%\\Identities");
-    _OutlookExpressFiles.AddTail(L"%Local AppData%\\Identities");
-    _OutlookExpressFiles.AddTail(L"%AppData%\\Microsoft\\Address Book");
-    _OutlookExpressFiles.AddTail(L"*.eml");
+    //_OutlookExpressFiles.AddTail(L"%AppData%\\Identities");
+    //_OutlookExpressFiles.AddTail(L"%Local AppData%\\Identities");
+    //_OutlookExpressFiles.AddTail(L"%AppData%\\Microsoft\\Address Book");
+    //_OutlookExpressFiles.AddTail(L"*.eml");
 
-    _OutlookExpressKeys.AddTail(L"HKEY_CURRENT_USER\\Identities");
-    _OutlookExpressKeys.AddTail(
-        L"HKEY_CURRENT_USER\\Software\\Microsoft\\Outlook Express");
-    _OutlookExpressKeys.AddTail(
-        L"HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Account Manager");
-    _OutlookExpressKeys.AddTail(
-        L"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Outlook Express");
-    _OutlookExpressKeys.AddTail(
-        L"HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\"
-        L"Microsoft\\Outlook Express");
+    //_OutlookExpressKeys.AddTail(L"HKEY_CURRENT_USER\\Identities");
+    //_OutlookExpressKeys.AddTail(
+    //    L"HKEY_CURRENT_USER\\Software\\Microsoft\\Outlook Express");
+    //_OutlookExpressKeys.AddTail(
+    //    L"HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Account Manager");
+    //_OutlookExpressKeys.AddTail(
+    //    L"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Outlook Express");
+    //_OutlookExpressKeys.AddTail(
+    //    L"HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\"
+    //    L"Microsoft\\Outlook Express");
 
-    UpdateTemplates3(
-        box, L"msimn.exe", L"Outlook_Express",
-        _OutlookExpressFiles, _OutlookExpressKeys);
+    //UpdateTemplates3(
+    //    box, L"msimn.exe", L"Outlook_Express",
+    //    _OutlookExpressFiles, _OutlookExpressKeys);
 
     //
     // find and remove:
@@ -1370,9 +1376,9 @@ void CAppPage::UpdateEmailTemplates(CBox &box)
         box, L"thunderbird.exe", _Thunderbird,
         _ThunderbirdFiles, _ThunderbirdKeys);
 
-    UpdateTemplates3(
-        box, L"thunde~1.exe", _Thunderbird,
-        _ThunderbirdFiles, _ThunderbirdKeys);
+    //UpdateTemplates3(
+    //    box, L"thunde~1.exe", _Thunderbird,
+    //    _ThunderbirdFiles, _ThunderbirdKeys);
 
     //
     // find and remove:
@@ -1410,9 +1416,9 @@ void CAppPage::UpdateEmailTemplates(CBox &box)
         box, L"seamonkey.exe", _SeaMonkey,
         _SeaMonkeyFiles, _SeaMonkeyKeys);
 
-    UpdateTemplates3(
-        box, L"seamon~1.exe", _SeaMonkey,
-        _SeaMonkeyFiles, _SeaMonkeyKeys);
+    //UpdateTemplates3(
+    //    box, L"seamon~1.exe", _SeaMonkey,
+    //    _SeaMonkeyFiles, _SeaMonkeyKeys);
 
     //
     // find and remove:

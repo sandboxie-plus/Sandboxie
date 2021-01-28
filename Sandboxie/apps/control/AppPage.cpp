@@ -46,13 +46,14 @@ enum {
 #define MODIF_IEXPLORE  0x0001
 #define MODIF_FIREFOX   0x0002
 #define MODIF_CHROME    0x0004
+#define MODIF_EDGE      0x0006
 #define MODIF_OTHERWB   0x0080
 
 #define MODIF_NONLOCAL  0x2000
 #define MODIF_ADDONS    0x4000
 
 #define MODIF_BROWSER   \
-    (MODIF_IEXPLORE | MODIF_FIREFOX | MODIF_CHROME | MODIF_OTHERWB)
+    (MODIF_IEXPLORE | MODIF_EDGE | MODIF_FIREFOX | MODIF_CHROME | MODIF_OTHERWB)
 
 
 //---------------------------------------------------------------------------
@@ -145,6 +146,8 @@ CAppPage::CAppPage(TMPL_INFO *info, const CString &BoxName)
 
         if (m_tmpl_info.ClassModifier & MODIF_IEXPLORE)
             m_titleForPage = L"Internet Explorer";
+		if (m_tmpl_info.ClassModifier & MODIF_EDGE)
+            m_titleForPage = "Microsoft Edge";
         if (m_tmpl_info.ClassModifier & MODIF_FIREFOX)
             m_titleForPage = L"Firefox";
         if (m_tmpl_info.ClassModifier & MODIF_CHROME)
@@ -538,30 +541,32 @@ void CAppPage::Template_Filter()
         POSITION old_pos = pos;
         CString name = m_tmpl_sections.GetNext(pos);
         BOOL ie = (name.Find(L"IExplore_") != -1);
+		BOOL edge = (name.Find(L"Edge_") != -1);
         BOOL ff = (name.Find(L"Firefox_") != -1)
                || (name.Find(L"Waterfox_") != -1)
                || (name.Find(L"PaleMoon_") != -1)
 			   || (name.Find(L"SeaMonkey_") != -1);
-        BOOL ch = (name.Find(L"Chrome_") != -1)
-			   || (name.Find(L"Edge_") != -1)               
-               || (name.Find(L"Dragon_") != -1)
-			   || (name.Find(L"Iron_") != -1)
-			   || (name.Find(L"Ungoogled_") != -1)
-			   || (name.Find(L"Vivaldi_") != -1)
-               || (name.Find(L"Brave_") != -1)
-               || (name.Find(L"Maxthon_6_") != -1)
-			   || (name.Find(L"Opera_") != -1)
-			   || (name.Find(L"Yandex_") != -1);
+        BOOL ch = (name.Find(L"Chrome_") != -1);
+		BOOL other = (name.Find(L"Dragon_") != -1)
+				  || (name.Find(L"Iron_") != -1)
+			      || (name.Find(L"Ungoogled_") != -1)
+			      || (name.Find(L"Vivaldi_") != -1)
+                  || (name.Find(L"Brave_") != -1)
+                  || (name.Find(L"Maxthon_6_") != -1)
+			      || (name.Find(L"Opera_") != -1)
+			      || (name.Find(L"Yandex_") != -1);
 
         BOOL keep = FALSE;
 
         if ((modif & MODIF_IEXPLORE) && ie)
             keep = TRUE;
+		else if ((modif & MODIF_EDGE) && edge)
+            keep = TRUE;
         else if ((modif & MODIF_FIREFOX) && ff)
             keep = TRUE;
         else if ((modif & MODIF_CHROME) && ch)
             keep = TRUE;
-        else if ((modif & MODIF_OTHERWB) && (! ie) && (! ff) && (! ch))
+        else if ((modif & MODIF_OTHERWB) && other)
             keep = TRUE;
 
         if (modif & MODIF_NONLOCAL) {
@@ -994,6 +999,8 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     info.WithLink = FALSE;
     info.WithCreate = FALSE;
     info.ClassModifier = MODIF_IEXPLORE;                // IExplore
+    m_app_pages.AddTail(new CAppPage(&info, BoxName));
+	info.ClassModifier = MODIF_EDGE;                    // Microsoft Edge
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
     info.ClassModifier = MODIF_FIREFOX;                 // Firefox
     m_app_pages.AddTail(new CAppPage(&info, BoxName));

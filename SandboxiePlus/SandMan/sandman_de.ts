@@ -71,7 +71,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="143"/>
         <source>Don&apos;t alter the window title</source>
-        <translation>Den Fenstertext nicht ändern</translation>
+        <translation>Den Fenstertitel nicht ändern</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="144"/>
@@ -119,7 +119,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>Diese Sandbox wurde gelöscht, daher can die Konfiguration nicht gespeichert werden.</translation>
+        <translation>Diese Sandbox wurde gelöscht, daher kann die Konfiguration nicht gespeichert werden.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="734"/>
@@ -275,13 +275,13 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1687"/>
         <source>Template values can not be edited.</source>
-        <translation>Musterwerte können nicht bearbeitet werden.</translation>
+        <translation>Vorlagenwerte können nicht bearbeitet werden.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1744"/>
         <location filename="Windows/OptionsWindow.cpp" line="1888"/>
         <source>Template values can not be removed.</source>
-        <translation>Musterwerte können nicht gelöscht werden.</translation>
+        <translation>Vorlagenwerte können nicht gelöscht werden.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1819"/>
@@ -403,7 +403,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="235"/>
         <source>Recover to:</source>
-        <translation>Wiederherstellen zu:</translation>
+        <translation>Wiederherstellen nach:</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="240"/>
@@ -886,7 +886,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="425"/>
         <source>Support Sandboxie-Plus with a Donation</source>
-        <translation>Sandboxie-Plus mit einer  Spende unterstützen</translation>
+        <translation>Sandboxie-Plus mit einer Spende unterstützen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="426"/>
@@ -957,7 +957,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="992"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
-        <translation>Die Datei %1 existiert bereit, möchten Sie diese überschreiben?</translation>
+        <translation>Die Datei %1 existiert bereits, möchten Sie diese überschreiben?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="993"/>
@@ -1036,7 +1036,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1522"/>
         <source>Failed to execute: %1</source>
-        <translation>Fehlschlag beim Ausführen von: %1</translation>
+        <translation>Fehler beim Ausführen von: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1524"/>
@@ -1066,7 +1066,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="SandMan.cpp" line="1531"/>
         <source>The sandbox name can not be a device name.</source>
-        <translation>Der Name der Sandbox darf kein Gerätename (device name) sein.</translation>
+        <translation>Der Name der Sandbox darf kein reservierter Gerätename (device name) sein.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1532"/>
@@ -1561,7 +1561,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="Views/SbieView.cpp" line="96"/>
         <source>Move to Group</source>
-        <translation>Zu Gruppe bewegen</translation>
+        <translation>Zu Gruppe zuordnen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
@@ -2163,7 +2163,7 @@ Falls primäre Programme/Prozesse definiert wurden, werden alle anderen als verw
     <message>
         <location filename="Forms/OptionsWindow.ui" line="917"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
-        <translation>Notiz: Programme, welche in dieser Sandbox installiert werden, werden nicht in der Lage sein auf das Internet zu zu greifen.</translation>
+        <translation>Hinweis: Programme, welche in dieser Sandbox installiert werden, werden nicht in der Lage sein auf das Internet zuzugreifen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="951"/>
@@ -2591,7 +2591,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="62"/>
         <source>Recover to</source>
-        <translation>Wiederherstellen zu</translation>
+        <translation>Wiederherstellen nach</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="103"/>

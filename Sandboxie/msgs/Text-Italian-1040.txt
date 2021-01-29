@@ -1856,7 +1856,7 @@ Impossibile chiudere alcuni programmi nell'area virtuale.  L'area virtuale non v
 .
 
 3732;txt;01
-Al momento, non ci sono file è che possibile recuperare.
+Al momento, non ci sono file che è possibile recuperare.
 .
 
 3733;txt;01

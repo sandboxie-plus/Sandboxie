@@ -27,6 +27,8 @@ echo current folder: %cd%
 
 dir
 
+dir %my_dir%..\..\Qt\Tools\QtCreator\bin\
+
 %my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 mkdir %my_dir%\Build_MiscHelpers

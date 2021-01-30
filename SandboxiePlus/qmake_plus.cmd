@@ -30,6 +30,7 @@ dir
 
 dir %my_dir%..\..\
 dir %my_dir%..\..\Qt\
+dir %my_dir%..\..\Qt\5.15.1\
 dir %my_dir%..\..\Qt\Tools\
 dir %my_dir%..\..\Qt\Tools\QtCreator\bin\
 

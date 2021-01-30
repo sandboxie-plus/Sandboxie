@@ -27,26 +27,26 @@ echo current folder: %cd%
 
 dir
 
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 mkdir %my_dir%\Build_MiscHelpers
 cd %my_dir%\Build_MiscHelpers
 
 %qt_path%\bin\qmake.exe %~dp0\MiscHelpers\MiscHelpers.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 
 mkdir %my_dir%\Build_QSbieAPI
 cd %my_dir%\Build_QSbieAPI
 
 %qt_path%\bin\qmake.exe %~dp0\QSbieAPI\QSbieAPI.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 mkdir %my_dir%\Build_SandMan
 cd %my_dir%\Build_SandMan
 
 %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 cd %my_dir%
 

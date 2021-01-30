@@ -93,24 +93,9 @@ jobs:
         with:
           name: Sandboxie
           path: |
-            Sandboxie/Bin/Win32/SbieRelease
-            Sandboxie/Bin/Win64/SbieRelease
-            !**/*.pdb
-            !**/*.ipdb
-            !**/*.exp
-            !**/*.iobj
-            !**/*.ilk
-            !**/*.lib
-            !**/*.cer
-            Sandboxie/Bin/Win32/SbieRelease/SbieDrv.pdb
-            Sandboxie/Bin/x64/SbieRelease/SbieDrv.pdb
-            SandboxiePlus/Bin/Win32/Release/MiscHelpers.dll
-            SandboxiePlus/Bin/Win32/Release/QSbieAPI.dll
-            SandboxiePlus/Bin/Win32/Release/qtsingleapp.dll
-            SandboxiePlus/Bin/Win32/Release/SandMan.exe
-            SandboxiePlus/Bin/x64/Release/MiscHelpers.dll
-            SandboxiePlus/Bin/x64/Release/QSbieAPI.dll
-            SandboxiePlus/Bin/x64/Release/qtsingleapp.dll
-            SandboxiePlus/Bin/x64/Release/SandMan.exe
-        
-        
+            Sandboxie/Bin/Win32/SbieRelease/*.*
+            Sandboxie/Bin/x64/SbieRelease/*.*
+            Sandboxie/Bin/Win32/SbieRelease/*.*
+            Sandboxie/Bin/x64/SbieRelease/*.*
+            
+

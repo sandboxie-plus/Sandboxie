@@ -38,7 +38,7 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
       - name: Build Sandboxie-Plus
-        run: dir c:\
+        run: dir ..\
 #        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
 
         

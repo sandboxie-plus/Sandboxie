@@ -12,7 +12,7 @@ PRECOMPILED_HEADER = stdafx.h
 #OBJECTS_DIR += debug
 #UI_DIR += ./GeneratedFiles
 #RCC_DIR += ./GeneratedFiles
-!win32:LIBS += -lUser32 -lShell32
+win32:LIBS += -lUser32 -lShell32
 
 !mac:unix:QMAKE_LFLAGS += -Wl,-rpath,'\$\$ORIGIN'
 mac:QMAKE_CXXFLAGS += -std=c++11

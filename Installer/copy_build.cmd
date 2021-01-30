@@ -75,10 +75,7 @@ ECHO Copying Sandboxie
 copy /y %sbiePath%\SbieSvc.exe %instPath%\
 copy /y %sbiePath%\SbieDll.dll %instPath%\
 
-copy /y %~dp0Drivers\%SbieVer%\%archPath%\SbieDrv.sys %instPath%\
-rem copy /y %~dp0Drivers\%SbieVer%\%archPath%\SbieDrv.sys %instPath%\SbieDrv.sys.w10
-rem copy /y %sbiePath%\SbieDrv.sys.rc4 %instPath%\
-rem copy /y %sbiePath%\SbieDrv.sys %instPath%\
+copy /y %sbiePath%\SbieDrv.sys %instPath%\
 
 copy /y %sbiePath%\SbieCtrl.exe %instPath%\
 copy /y %sbiePath%\Start.exe %instPath%\

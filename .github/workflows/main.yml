@@ -28,21 +28,21 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
 
-      - name: Build Sandboxie
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+      #- name: Build Sandboxie
+      #  run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
-      - name: Upload Sandboxie
-        uses: actions/upload-artifact@v2
-        with:
-          name: Sandboxie (${{ matrix.platform }})
-          path: |
-            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
-            !**/*.pdb
-            !**/*.ipdb
-            !**/*.exp
-            !**/*.lib
-            !**/*.cer
-            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
+      #- name: Upload Sandboxie
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: Sandboxie (${{ matrix.platform }})
+      #    path: |
+      #      Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
+      #      !**/*.pdb
+      #      !**/*.ipdb
+      #      !**/*.exp
+      #      !**/*.lib
+      #      !**/*.cer
+      #      Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
 
       - name: Cache Qt
         id: cache-qt

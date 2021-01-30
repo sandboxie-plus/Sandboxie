@@ -28,28 +28,15 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
 
-      #- name: Build Sandboxie
-      #  run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+      - name: Build Sandboxie
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
-      #- name: Upload Sandboxie
-      #  uses: actions/upload-artifact@v2
+      #- name: Cache Qt
+      #  id: cache-qt
+      #  uses: actions/cache@v1
       #  with:
-      #    name: Sandboxie (${{ matrix.platform }})
-      #    path: |
-      #      Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
-      #      !**/*.pdb
-      #      !**/*.ipdb
-      #      !**/*.exp
-      #      !**/*.lib
-      #      !**/*.cer
-      #      Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
-
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v1
-        with:
-          path: ../Qt
-          key: ${{ matrix.qt-target }}-QtCache
+      #    path: ../Qt
+      #    key: ${{ matrix.qt-target }}-QtCache
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
@@ -63,14 +50,22 @@ jobs:
       - name: Build Sandboxie-Plus
         run: SandboxiePlus\qmake_plus.cmd ${{ matrix.platform }}
 
-      - name: Upload SandboxiePlus
+
+      - name: Upload Sandboxie
         uses: actions/upload-artifact@v2
         with:
-          name: Sandboxie Plus (${{ matrix.platform }})
+          name: Sandboxie (${{ matrix.platform }})
           path: |
-            SandboxiePlus/Release
+            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
             !**/*.pdb
+            !**/*.ipdb
             !**/*.exp
             !**/*.lib
+            !**/*.cer
+            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
+            SandboxiePlus/Release/MiscHelpers.dll
+            SandboxiePlus/Release/QSbieAPI.dll
+            SandboxiePlus/Release/qtsingleapp.dll
+            SandboxiePlus/Release/SandMan.exe
         
         

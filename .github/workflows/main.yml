@@ -13,6 +13,13 @@ jobs:
     strategy:
       matrix:
         platform: [Win32, x64]
+        qt-target: [win32_msvc2019, win64_msvc2019_64]
+        include:
+          - platform: Win32
+            qt-target: win32_msvc2019
+          - platform: x64
+            qt-target: win64_msvc2019_64
+          
     runs-on: windows-2019
     steps:
       - name: Checkout code
@@ -35,6 +42,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: '5.15.1'
+          arch:  ${{ qt-target }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
       - name: Build Sandboxie-Plus

@@ -59,3 +59,7 @@ cd %my_dir%
 dir
 
 dir .\Release
+
+dir C:\
+
+dir D:\

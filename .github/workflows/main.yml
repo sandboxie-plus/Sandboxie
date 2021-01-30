@@ -83,8 +83,8 @@ jobs:
 
 
 
-      #- name: Merging Builds
-      #  run: merge_builds.cmd
+      - name: Merging Builds
+        run: Installer\merge_builds.cmd
 
 
 
@@ -93,9 +93,8 @@ jobs:
         with:
           name: Sandboxie
           path: |
-            Sandboxie/Bin/Win32/SbieRelease/*.*
-            Sandboxie/Bin/x64/SbieRelease/*.*
-            Sandboxie/Bin/Win32/SbieRelease/*.*
-            Sandboxie/Bin/x64/SbieRelease/*.*
+            Installer/SbiePlus32/*
+            Installer/SbiePlus64/*
+
             
 

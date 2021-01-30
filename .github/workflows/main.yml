@@ -86,8 +86,6 @@ jobs:
       - name: Merging Builds
         run: Installer\merge_builds.cmd
 
-
-
       - name: Upload Sandboxie
         uses: actions/upload-artifact@v2
         with:

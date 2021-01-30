@@ -10,15 +10,15 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        #platform: [Win32, x64]
-        #qt-target: [win32_msvc2019, win64_msvc2019_64]
-        include:
-          - platform: Win32
-            qt-target: win32_msvc2019
-          - platform: x64
-            qt-target: win64_msvc2019_64
+    #strategy:
+    #  matrix:
+    #    #platform: [Win32, x64]
+    #    #qt-target: [win32_msvc2019, win64_msvc2019_64]
+    #    include:
+    #      - platform: Win32
+    #        qt-target: win32_msvc2019
+    #      - platform: x64
+    #        qt-target: win64_msvc2019_64
           
     runs-on: windows-2019
     steps:
@@ -28,8 +28,16 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
 
-      - name: Build Sandboxie
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+    #  - name: Build Sandboxie
+    #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+
+      - name: Build Sandboxie 32 bit
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32
+        
+      - name: Build Sandboxie 64 bit
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64
+
+
 
       #- name: Cache Qt
       #  id: cache-qt
@@ -38,34 +46,67 @@ jobs:
       #    path: ../Qt
       #    key: ${{ matrix.qt-target }}-QtCache
 
-      - name: Install Qt
+
+
+      - name: Install Qt 32 bit
         uses: jurplel/install-qt-action@v2
         with:
           version: '5.15.1'
           dir: ..
-          arch:  ${{ matrix.qt-target }}
+      #    arch:  ${{ matrix.qt-target }}
+          arch:  'win32_msvc2019'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
-      - name: Build Sandboxie-Plus
-        run: SandboxiePlus\qmake_plus.cmd ${{ matrix.platform }}
+      - name: Build Sandboxie-Plus 32 bit
+      #  run: SandboxiePlus\qmake_plus.cmd ${{ matrix.platform }}
+        run: SandboxiePlus\qmake_plus.cmd Win32
+
+
+
+      - name: Install Qt 64 bit
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.1'
+          dir: ..
+      #    arch:  ${{ matrix.qt-target }}
+          arch:  'win64_msvc2019_64' 
+      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - name: Build Sandboxie-Plus 64 bit
+      #  run: SandboxiePlus\qmake_plus.cmd ${{ matrix.platform }}
+        run: SandboxiePlus\qmake_plus.cmd x64
+
+
+      #- name: Merging Builds
+      #  run: merge_builds.cmd
+
 
 
       - name: Upload Sandboxie
         uses: actions/upload-artifact@v2
         with:
-          name: Sandboxie (${{ matrix.platform }})
+          name: Sandboxie
           path: |
-            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease
+            Sandboxie/Bin/Win32/SbieRelease
+            Sandboxie/Bin/Win64/SbieRelease
             !**/*.pdb
             !**/*.ipdb
             !**/*.exp
+            !**/*.iobj
+            !**/*.ilk
             !**/*.lib
             !**/*.cer
-            Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
-            SandboxiePlus/Bin/${{ matrix.platform }}/Release/MiscHelpers.dll
-            SandboxiePlus/Bin/${{ matrix.platform }}/Release/QSbieAPI.dll
-            SandboxiePlus/Bin/${{ matrix.platform }}/Release/qtsingleapp.dll
-            SandboxiePlus/Bin/${{ matrix.platform }}/Release/SandMan.exe
+            Sandboxie/Bin/Win32/SbieRelease/SbieDrv.pdb
+            Sandboxie/Bin/x64/SbieRelease/SbieDrv.pdb
+            SandboxiePlus/Bin/Win32/Release/MiscHelpers.dll
+            SandboxiePlus/Bin/Win32/Release/QSbieAPI.dll
+            SandboxiePlus/Bin/Win32/Release/qtsingleapp.dll
+            SandboxiePlus/Bin/Win32/Release/SandMan.exe
+            SandboxiePlus/Bin/x64/Release/MiscHelpers.dll
+            SandboxiePlus/Bin/x64/Release/QSbieAPI.dll
+            SandboxiePlus/Bin/x64/Release/qtsingleapp.dll
+            SandboxiePlus/Bin/x64/Release/SandMan.exe
         
         

@@ -27,6 +27,9 @@ echo current folder: %cd%
 
 dir
 
+
+dir %my_dir%..\..\
+dir %my_dir%..\..\Qt\
 dir %my_dir%..\..\Qt\Tools\
 dir %my_dir%..\..\Qt\Tools\QtCreator\bin\
 

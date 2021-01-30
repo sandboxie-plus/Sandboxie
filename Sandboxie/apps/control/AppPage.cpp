@@ -46,7 +46,7 @@ enum {
 #define MODIF_IEXPLORE  0x0001
 #define MODIF_FIREFOX   0x0002
 #define MODIF_CHROME    0x0004
-#define MODIF_EDGE      0x0006
+#define MODIF_EDGE      0x0008
 #define MODIF_OTHERWB   0x0080
 
 #define MODIF_NONLOCAL  0x2000

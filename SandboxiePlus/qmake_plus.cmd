@@ -21,28 +21,28 @@ mkdir %my_dir%\Build_qtsingleapp_%build_arch%
 cd %my_dir%\Build_qtsingleapp_%build_arch%
 
 %qt_path%\bin\qmake.exe %my_dir%\QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 
 
 mkdir %my_dir%\Build_MiscHelpers_%build_arch%
 cd %my_dir%\Build_MiscHelpers_%build_arch%
 
 %qt_path%\bin\qmake.exe %my_dir%\MiscHelpers\MiscHelpers.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 
 
 mkdir %my_dir%\Build_QSbieAPI_%build_arch%
 cd %my_dir%\Build_QSbieAPI_%build_arch%
 
 %qt_path%\bin\qmake.exe %my_dir%\QSbieAPI\QSbieAPI.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 
 
 mkdir %my_dir%\Build_SandMan_%build_arch%
 cd %my_dir%\Build_SandMan_%build_arch%
 
 %qt_path%\bin\qmake.exe %my_dir%\SandMan\SandMan.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
-%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
+%my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 
 
 cd %my_dir%

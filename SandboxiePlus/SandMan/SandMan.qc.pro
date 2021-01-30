@@ -5,13 +5,12 @@ PRECOMPILED_HEADER = stdafx.h
 
 QT += core gui network widgets winextras concurrent
 
-win32:{
-CONFIG(debug, debug|release):LIBS += -L../Debug/
-CONFIG(release, debug|release):LIBS += -L../Release/
-}
+CONFIG(debug, debug|release):contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/x64/Debug
+CONFIG(release, debug|release):contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/x64/Release
+CONFIG(debug, debug|release):!contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/Win32/Debug
+CONFIG(release, debug|release):!contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/Win32/Release
 
 LIBS += -lNtdll -lAdvapi32 -lOle32 -lUser32 -lShell32 -lGdi32 -lQSbieAPI -lMiscHelpers -lqtsingleapp
-
 
 CONFIG(release, debug|release):{
 QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO

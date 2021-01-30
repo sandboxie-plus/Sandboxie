@@ -16,8 +16,12 @@ IF %1 == x64 (
 	set qt_path=%my_dir%..\..\Qt\5.15.1\msvc2019_64
 )
 
+echo on
+
 mkdir %my_dir%\Build_qtsingleapp
 cd %my_dir%\Build_qtsingleapp
+
+echo current folder: %cd%
 
 %qt_path%\bin\qmake.exe ..\QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 %my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe

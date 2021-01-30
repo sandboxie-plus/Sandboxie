@@ -43,6 +43,7 @@ jobs:
         with:
           version: '5.15.1'
           arch:  ${{ matrix.qt-target }}
+          tools: 'tools_qtcreator,4.13.1-0,qt.tools.qtcreator'
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
       - name: Build Sandboxie-Plus

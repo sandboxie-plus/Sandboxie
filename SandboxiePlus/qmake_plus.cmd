@@ -1,4 +1,4 @@
-@echo off
+rem @echo off
 REM echo Current dir: %cd%
 echo folder: %~dp0
 echo arch: %1

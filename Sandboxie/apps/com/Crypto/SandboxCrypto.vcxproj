@@ -79,6 +79,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -87,6 +88,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -97,12 +99,18 @@
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <ClCompile />
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="crypto.c" />

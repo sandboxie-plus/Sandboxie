@@ -75,6 +75,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;ole32.lib;wtsapi32.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -83,6 +84,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;ole32.lib;wtsapi32.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -93,12 +95,18 @@
     <Link>
       <AdditionalDependencies>advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;ole32.lib;wtsapi32.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <ClCompile />
     <Link>
       <AdditionalDependencies>advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;ole32.lib;wtsapi32.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bits.c" />

@@ -109,6 +109,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Native</SubSystem>
@@ -140,6 +141,7 @@
       </DisableSpecificWarnings>
       <AdditionalOptions>/Wv:18 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Native</SubSystem>
@@ -179,6 +181,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Native</SubSystem>
@@ -208,6 +211,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <PreprocessorDefinitions>POOL_NX_OPTIN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Native</SubSystem>

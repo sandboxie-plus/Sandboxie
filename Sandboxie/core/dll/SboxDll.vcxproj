@@ -94,6 +94,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>Default</CompileAs>
       <OmitFramePointers />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
@@ -113,6 +114,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>Default</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
@@ -133,6 +135,7 @@
       <CompileAs>Default</CompileAs>
       <OmitFramePointers />
       <Optimization>MaxSpeed</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
@@ -151,6 +154,7 @@
     <ClCompile>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>Default</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>

@@ -46,7 +46,7 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
       - name: Build Sandboxie-Plus
-        run: qmake_plus.cmd ${{ matrix.platform }}
+        run: SandboxiePlus\qmake_plus.cmd ${{ matrix.platform }}
 #        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
 
         

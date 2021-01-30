@@ -177,7 +177,7 @@ CBoxedProcess* CSbieAPI::NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox
 	return new CBoxedProcess(ProcessId, pBox);
 }
 
-QString CSbieAPI__GetRegValue(HANDLE hKey, WCHAR* pName)
+QString CSbieAPI__GetRegValue(HANDLE hKey, const WCHAR* pName)
 {
 	char buf[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + MAX_PATH];
 	KEY_VALUE_PARTIAL_INFORMATION *value = (KEY_VALUE_PARTIAL_INFORMATION *)buf;
@@ -918,7 +918,7 @@ QString CSbieAPI::GetStartPath() const
 	return m_SbiePath + "//" + QString::fromWCharArray(SBIESTART_EXE);
 }
 
-SB_STATUS CSbieAPI::ReloadBoxes()
+SB_STATUS CSbieAPI::ReloadBoxes(bool bFullUpdate)
 {
 	QMap<QString, CSandBoxPtr> OldSandBoxes = m_SandBoxes;
 
@@ -927,6 +927,7 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		QString BoxName = SbieIniGet(QString(), QString(), (i | CONF_GET_NO_EXPAND));
 		if (BoxName.isNull())
 			break;
+
 		bool bIsEnabled;
 		if (!IsBox(BoxName, bIsEnabled))
 			continue;
@@ -936,9 +937,11 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		{
 			pBox = CSandBoxPtr(NewSandBox(BoxName, this));
 			m_SandBoxes.insert(BoxName.toLower(), pBox);
+			UpdateBoxPaths(pBox);
 		}
-			
-		UpdateBoxPaths(pBox);
+		else if(bFullUpdate)
+			UpdateBoxPaths(pBox);
+
 		pBox->m_IsEnabled = bIsEnabled;
 
 		pBox->UpdateDetails();
@@ -1599,7 +1602,7 @@ SB_STATUS CSbieAPI::ReloadConfig(quint32 SessionId)
 	//emit LogMessage("Sandboxie config has been reloaded.", false);
 	emit LogSbieMessage(0, QStringList() << "Sandboxie config has been reloaded" << "" << "", 4);
 
-	ReloadBoxes();
+	ReloadBoxes(true);
 
 	return SB_OK;
 }

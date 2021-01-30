@@ -452,7 +452,7 @@ void CSandMan::CreateToolBar()
 	m_pCleanUpButton->setPopupMode(QToolButton::MenuButtonPopup);
 	m_pCleanUpButton->setMenu(m_pCleanUpMenu);
 	//QObject::connect(m_pCleanUpButton, SIGNAL(triggered(QAction*)), , SLOT());
-	QObject::connect(m_pCleanUpButton, SIGNAL(pressed()), this, SLOT(OnCleanUp()));
+	QObject::connect(m_pCleanUpButton, SIGNAL(clicked(bool)), this, SLOT(OnCleanUp()));
 	m_pToolBar->addWidget(m_pCleanUpButton);
 
 
@@ -616,8 +616,8 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	{
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
-		if (!Status.IsError() && theAPI->GetAllBoxes().count() == 0) {
-			OnLogMessage(tr("No sandboxes found; creating: %1").arg("DefaultBox"));
+		if (!Status.IsError() && !theAPI->GetAllBoxes().contains("defaultbox")) {
+			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
 			theAPI->CreateBox("DefaultBox");
 		}
 

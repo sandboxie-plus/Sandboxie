@@ -170,11 +170,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\SandMan.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Resources\SandMan.ico">
       <Filter>Resource Files</Filter>
     </Image>
@@ -224,5 +219,13 @@
     <None Include="sandman_tr.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_zh-TW.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SandMan.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

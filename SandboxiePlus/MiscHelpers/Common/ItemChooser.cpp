@@ -27,11 +27,11 @@ CItemChooser::CItemChooser(const QString& Prompt, QWidget *parent)
     m_pMidleLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
     m_pBtnAdd = new QPushButton(tr("Add >"), this);
-	connect(m_pBtnAdd, SIGNAL(pressed()), this, SLOT(OnAdd()));
+	connect(m_pBtnAdd, SIGNAL(clicked(bool)), this, SLOT(OnAdd()));
     m_pMidleLayout->addWidget(m_pBtnAdd);
 
     m_pBtnRemove = new QPushButton(tr("< Remove"), this);
-	connect(m_pBtnRemove, SIGNAL(pressed()), this, SLOT(OnRemove()));
+	connect(m_pBtnRemove, SIGNAL(clicked(bool)), this, SLOT(OnRemove()));
     m_pMidleLayout->addWidget(m_pBtnRemove);
 
     m_pMidleLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
@@ -45,11 +45,11 @@ CItemChooser::CItemChooser(const QString& Prompt, QWidget *parent)
     m_pCenterLayout->addLayout(m_pRightLayout);
 
     m_pBtnUp = new QPushButton(tr("Move Up"), this);
-	connect(m_pBtnUp, SIGNAL(pressed()), this, SLOT(OnUp()));
+	connect(m_pBtnUp, SIGNAL(clicked(bool)), this, SLOT(OnUp()));
     m_pRightLayout->addWidget(m_pBtnUp);
 
     m_pBtnDown = new QPushButton(tr("Move Down"), this);
-	connect(m_pBtnDown, SIGNAL(pressed()), this, SLOT(OnDown()));
+	connect(m_pBtnDown, SIGNAL(clicked(bool)), this, SLOT(OnDown()));
     m_pRightLayout->addWidget(m_pBtnDown);
 
     m_pRightLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));

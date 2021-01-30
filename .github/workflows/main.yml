@@ -31,11 +31,11 @@ jobs:
           path: ../Qt
           key: ${{ runner.os }}-QtCache
 
-      #- name: Install Qt
-      #  uses: jurplel/install-qt-action@v2
-      #  with:
-      #    version: '5.15.1'
-      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.1'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
       - name: Build Sandboxie-Plus
         run: dir c:\

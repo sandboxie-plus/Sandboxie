@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SandMan.h"
-#include <QtWidgets/QApplication>
+#include <QApplication>
 #include "../QSbieAPI/SbieAPI.h"
 #include "../QtSingleApp/src/qtsingleapplication.h"
 #include "../QSbieAPI/SbieUtils.h"

@@ -22,21 +22,21 @@ jobs:
       - name: Build Sandboxie
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v1
-        with:
-          path: ../Qt
-          key: ${{ runner.os }}-QtCache
+#      - name: Cache Qt
+#        id: cache-qt
+#        uses: actions/cache@v1
+#        with:
+#          path: ../Qt
+#          key: ${{ runner.os }}-QtCache
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: '5.15.1'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+#      - name: Install Qt
+#        uses: jurplel/install-qt-action@v2
+#        with:
+#          version: '5.15.1'
+#          cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
-      - name: Build Sandboxie-Plus
-        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
+#      - name: Build Sandboxie-Plus
+#        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
         
       - name: Upload Sandboxie
         uses: actions/upload-artifact@v2

@@ -63,9 +63,9 @@ jobs:
             !**/*.lib
             !**/*.cer
             Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
-            SandboxiePlus/Release/MiscHelpers.dll
-            SandboxiePlus/Release/QSbieAPI.dll
-            SandboxiePlus/Release/qtsingleapp.dll
-            SandboxiePlus/Release/SandMan.exe
+            SandboxiePlus/Bin/${{ matrix.platform }}/Release/MiscHelpers.dll
+            SandboxiePlus/Bin/${{ matrix.platform }}/Release/QSbieAPI.dll
+            SandboxiePlus/Bin/${{ matrix.platform }}/Release/qtsingleapp.dll
+            SandboxiePlus/Bin/${{ matrix.platform }}/Release/SandMan.exe
         
         

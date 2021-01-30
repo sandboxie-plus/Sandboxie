@@ -1,8 +1,8 @@
 REM @ECHO OFF
 
-call copy_build.cmd x64
+call %~dp0copy_build.cmd x64
 
-call copy_build.cmd x86
+call %~dp0copy_build.cmd x86
 
 
 REM mkdir %rootPath%\SbiePlus64\LogAPI

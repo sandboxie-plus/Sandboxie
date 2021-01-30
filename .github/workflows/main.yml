@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  create:
+  workflow_dispatch:
     branches: [ master ]
 #  push:
 #    branches: [ master ]

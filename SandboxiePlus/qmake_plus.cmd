@@ -6,12 +6,12 @@ echo arch: %1
 set my_dir=%~dp0
 
 IF %1 == Win32 (
-  "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+  call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
 
 	set qt_path=%my_dir%..\..\Qt\5.15.1\msvc2019
 )
 IF %1 == x64 (
-  "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+  call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
 
 	set qt_path=%my_dir%..\..\Qt\5.15.1\msvc2019_64
 )

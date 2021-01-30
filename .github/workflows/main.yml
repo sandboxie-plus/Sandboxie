@@ -21,8 +21,8 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1
 
-      - name: Build Sandboxie
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+      #- name: Build Sandboxie
+      #  run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
       - name: Cache Qt
         id: cache-qt
@@ -31,14 +31,16 @@ jobs:
           path: ../Qt
           key: ${{ runner.os }}-QtCache
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: '5.15.1'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      #- name: Install Qt
+      #  uses: jurplel/install-qt-action@v2
+      #  with:
+      #    version: '5.15.1'
+      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
-#      - name: Build Sandboxie-Plus
+      - name: Build Sandboxie-Plus
+        run: dir c:\
 #        run: msbuild /t:build SandboxiePlus\SandboxiePlus.sln /p:Configuration="Release" /p:Platform=${{ matrix.platform }}
+
         
       - name: Upload Sandboxie
         uses: actions/upload-artifact@v2
@@ -54,3 +56,20 @@ jobs:
             !**/*.lib
             !**/*.cer
             Sandboxie/Bin/${{ matrix.platform }}/SbieRelease/SbieDrv.pdb
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            

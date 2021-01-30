@@ -5,10 +5,10 @@ echo arch: %1
 
 set my_dir=%~dp0
 
-IF %archPath% == Win32 (
+IF %1 == Win32 (
 	set qt_path=%my_dir%..\..\Qt\5.15.1\msvc2019
 )
-IF %archPath% == x64 (
+IF %1 == x64 (
 	set qt_path=%my_dir%..\..\Qt\5.15.1\msvc2019_64
 )
 

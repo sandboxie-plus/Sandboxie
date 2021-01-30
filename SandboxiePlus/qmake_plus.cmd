@@ -24,6 +24,9 @@ cd %my_dir%\Build_qtsingleapp
 echo current folder: %cd%
 
 %qt_path%\bin\qmake.exe %~dp0\QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
+
+dir
+
 %my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe
 
 mkdir %my_dir%\Build_MiscHelpers
@@ -45,6 +48,8 @@ cd %my_dir%\Build_SandMan
 %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 %my_dir%..\..\Qt\Tools\QtCreator\bin\jom.exe
 
-dir %my_dir%
+cd %my_dir%
 
-dir %my_dir%\Release
+dir
+
+dir .\Release

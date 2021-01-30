@@ -42,7 +42,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: '5.15.1'
-          arch:  ${{ qt-target }}
+          arch:  ${{ matrix.qt-target }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
         
       - name: Build Sandboxie-Plus

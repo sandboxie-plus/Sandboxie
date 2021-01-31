@@ -259,12 +259,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1484"/>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>Direkt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1485"/>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>Direkt alle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1486"/>
@@ -279,43 +279,43 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1488"/>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur lesen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1489"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1491"/>
         <location filename="Windows/OptionsWindow.cpp" line="1504"/>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannte</translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1498"/>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei/Ordner</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1499"/>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Registry</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1500"/>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>IPC Pfad</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1501"/>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Fensterklasse</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1502"/>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM-Objekt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1509"/>
@@ -536,7 +536,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -545,7 +545,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -554,7 +554,7 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Die Datei wurde geschrieben durch: %3</translation>
     </message>
     <message>
@@ -563,7 +563,7 @@ Die Datei wurde geschrieben durch: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
     <message>
@@ -882,17 +882,17 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="621"/>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Sandbox nicht gefunden; erstelle: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1741"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Möchten Sie zur&lt;a href=&quot;%1&quot;&gt;Infoseite gehen&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1808"/>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Meldung nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2047"/>
@@ -1691,7 +1691,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="Views/SbieView.cpp" line="509"/>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sandbox ist leer.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="566"/>
@@ -2529,7 +2529,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1456"/>
         <source>Allow access to Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugriff auf Bluetooth erlauben</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>

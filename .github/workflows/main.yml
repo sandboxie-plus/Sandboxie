@@ -46,7 +46,6 @@ jobs:
           path: ../Qt
           key: Qt-5.15.1-QtCache
 
-
       - name: Install Qt 64 bit
         uses: jurplel/install-qt-action@v2
         with:

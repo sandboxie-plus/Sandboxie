@@ -559,6 +559,7 @@ _FX void Dll_SelectImageType(void)
         L"waterfox.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+	L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
@@ -575,7 +576,8 @@ _FX void Dll_SelectImageType(void)
         L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
 	L"brave.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-	L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // modern edge is chromium based
+	L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Yandex browser
+	L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is chromium based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
 
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,

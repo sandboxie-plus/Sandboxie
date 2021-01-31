@@ -11,7 +11,7 @@ IF %archPath% == x86 (
 	set sysPath=%windir%\SysWOW64
   set qtPath=%~dp0..\..\Qt\5.15.1\msvc2019
 )
-set srcPath=%~dp0..\SandboxiePlus\%archPath%\Release
+set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release
 set sbiePath=%~dp0..\Sandboxie\Bin\%archPath%\SbieRelease
 
 echo inst: %instPath%
@@ -46,18 +46,19 @@ copy %qtPath%\plugins\platforms\qwindows.dll %instPath%\platforms\
 mkdir %instPath%\styles
 copy %qtPath%\plugins\styles\qwindowsvistastyle.dll %instPath%\styles\
 
+ECHO Copying OpenSSL libs
 rem copy /y %~dp0OpenSSL\%archPath%\libeay32.dll %instPath%\
 rem copy /y %~dp0OpenSSL\%archPath%\ssleay32.dll %instPath%\
-REM IF %archPath% == Win32 (
-REM   copy /y %~dp0OpenSSL\Win32\libssl-1_1.dll %instPath%\
-REM   copy /y %~dp0OpenSSL\Win32\libcrypto-1_1.dll %instPath%\
-REM )
-REM IF %archPath% == x64 (
-REM   copy /y %~dp0OpenSSL\x64\libssl-1_1-x64.dll %instPath%\
-REM   copy /y %~dp0OpenSSL\x64\libcrypto-1_1-x64.dll %instPath%\
-REM )
+IF %archPath% == Win32 (
+  copy /y %~dp0OpenSSL\openssl-1.1.0h-x32-VC2017\libssl-1_1.dll %instPath%\
+  copy /y %~dp0OpenSSL\openssl-1.1.0h-x32-VC2017\libcrypto-1_1.dll %instPath%\
+)
+IF %archPath% == x64 (
+  copy /y %~dp0OpenSSL\openssl-1.1.0h-x64-VC2017\libssl-1_1-x64.dll %instPath%\
+  copy /y %~dp0OpenSSL\openssl-1.1.0h-x64-VC2017\libcrypto-1_1-x64.dll %instPath%\
+)
 rem for openssl
-rem copy %sysPath%\msvcr100.dll %instPath%\
+copy %sysPath%\msvcr100.dll %instPath%\
 
 ECHO Copying Project and Librarys
 copy %srcPath%\MiscHelpers.dll %instPath%\

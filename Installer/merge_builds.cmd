@@ -1,5 +1,7 @@
 REM @ECHO OFF
 
+call %~dp0get_openssl.cmd
+
 call %~dp0copy_build.cmd x64
 
 call %~dp0copy_build.cmd x86

@@ -1068,6 +1068,10 @@ Menu &contestuale%2Maiusc+F10
 R&egistro di recupero
 .
 
+3426;txt;01
+&Sempre in primo piano
+.
+
 3431;txt;01
 Area &virtuale
 .
@@ -1158,6 +1162,14 @@ Controlla a&ggiornamenti
 
 3456;txt;01
 &Informazioni su Sandboxie
+.
+
+3457;txt;01
+&Forum Sandboxie (Web)
+.
+
+3459;txt;01
+Consenti accesso diretto al driver qWave (Google Hangouts)
 .
 
 3461;txt;01
@@ -1258,6 +1270,10 @@ Ri&muovi cartella
 
 3495;txt;01
 Crea collegamento sul desktop
+.
+
+3504;txt;01
+&Supporta Sandboxie
 .
 
 #----------------------------------------------------------------------------
@@ -2201,6 +2217,26 @@ Accettare questo comando di eliminazione?
 
 3857;txt;01
 Cercare e selezionare il programma - %2
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
+
+3955;txt;01
+File di rete
+.
+
+3956;txt;01
+I file e le cartelle di rete sono normalmente visibili alle applicazioni presenti nell'area virtuale.
+.
+
+3957;txt;01
+Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa impostazione. I file e le cartelle di rete possono essere aperti singolarmente alle applicazioni dell'area virtuale, aggiungendoli sotto la sezione Accesso alle risorse -> Accesso ai file.
+.
+
+3958;txt;01
+Blocca i file e le cartelle di rete, a meno che non vengano aperti singolarmente.
 .
 
 #----------------------------------------------------------------------------

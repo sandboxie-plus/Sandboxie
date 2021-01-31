@@ -50,12 +50,12 @@ ECHO Copying OpenSSL libs
 rem copy /y %~dp0OpenSSL\%archPath%\libeay32.dll %instPath%\
 rem copy /y %~dp0OpenSSL\%archPath%\ssleay32.dll %instPath%\
 IF %archPath% == Win32 (
-  copy /y %~dp0OpenSSL\openssl-1.1.0h-x32-VC2017\libssl-1_1.dll %instPath%\
-  copy /y %~dp0OpenSSL\openssl-1.1.0h-x32-VC2017\libcrypto-1_1.dll %instPath%\
+  copy /y %~dp0OpenSSL\Win32\libssl-1_1.dll %instPath%\
+  copy /y %~dp0OpenSSL\Win32\libcrypto-1_1.dll %instPath%\
 )
 IF %archPath% == x64 (
-  copy /y %~dp0OpenSSL\openssl-1.1.0h-x64-VC2017\libssl-1_1-x64.dll %instPath%\
-  copy /y %~dp0OpenSSL\openssl-1.1.0h-x64-VC2017\libcrypto-1_1-x64.dll %instPath%\
+  copy /y %~dp0OpenSSL\x64\libssl-1_1-x64.dll %instPath%\
+  copy /y %~dp0OpenSSL\x64\libcrypto-1_1-x64.dll %instPath%\
 )
 rem for openssl
 copy %sysPath%\msvcr100.dll %instPath%\

@@ -43,30 +43,48 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 	// when loading a sandbox that is not initialized, initialize it
 	int cfglvl = GetNum("ConfigLevel");
-	if (cfglvl >= 7)
+	if (cfglvl >= 8)
 		return;
-	SetNum("ConfigLevel", 7);
+	SetNum("ConfigLevel", 8);
 
-	SetBool("AutoRecover", false);
-	SetBool("BlockNetworkFiles", true);
+	if (cfglvl == 0)
+	{
+		SetBool("AutoRecover", false);
+		SetBool("BlockNetworkFiles", true);
 
-	// templates L6
-	InsertText("Template", "AutoRecoverIgnore");
-	InsertText("Template", "Firefox_Phishing_DirectAccess");
-	InsertText("Template", "Chrome_Phishing_DirectAccess");
-	InsertText("Template", "LingerPrograms");
-	// templates L7
-	InsertText("Template", "BlockPorts");
-	InsertText("Template", "qWave");
+		// recovery
+		InsertText("RecoverFolder", "%Desktop%");
+		//InsertText("RecoverFolder", "%Favorites%"); // obsolete
+		InsertText("RecoverFolder", "%Personal%");
+		InsertText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
 
-	// recovery
-	InsertText("RecoverFolder", "%Desktop%");
-	//InsertText("RecoverFolder", "%Favorites%"); // obsolete
-	InsertText("RecoverFolder", "%Personal%");
-	InsertText("RecoverFolder", "%{374DE290-123F-4565-9164-39C4925E467B}%"); // %USERPROFILE%\Downloads
+		SetText("BorderColor", "#00FFFF,ttl"); // "#00FFFF,off"
+	}
 
-	SetText("BorderColor", "#00FFFF,ttl"); // "#00FFFF,off"
-	
+	if (cfglvl < 6)
+	{
+		// templates L6
+		InsertText("Template", "AutoRecoverIgnore");
+		InsertText("Template", "Firefox_Phishing_DirectAccess");
+		InsertText("Template", "Chrome_Phishing_DirectAccess");
+		InsertText("Template", "LingerPrograms");
+	}
+
+	if (cfglvl < 7)
+	{
+		// templates L7
+		InsertText("Template", "BlockPorts");
+		//InsertText("Template", "WindowsFontCache"); // since 5.46.3 open by driver
+		InsertText("Template", "qWave");
+	}
+
+	if (cfglvl < 8)
+	{
+		// templates L8
+		InsertText("Template", "FileCppy");
+		InsertText("Template", "SkipHook");
+	}
+
 }
 
 CSandBox::~CSandBox()

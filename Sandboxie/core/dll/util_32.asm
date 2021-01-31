@@ -222,3 +222,31 @@ l04:    dec esp
 Gui_MsgWaitForMultipleObjects@20    ENDP
 
 PUBLIC C Gui_MsgWaitForMultipleObjects@20
+
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall2
+;----------------------------------------------------------------------------
+
+
+EXTERN C RpcRt_NdrClientCall2_x86    : PROC
+;EXTERN C RpcRt_NdrClientCall2_...   : PROC
+EXTERN C __sys_NdrClientCall2 : DWORD
+
+RpcRt_NdrClientCall2   PROC C PUBLIC
+
+        call RpcRt_NdrClientCall2_x86
+        test al,al
+        jnz CancelCall
+    
+        jmp dword ptr [__sys_NdrClientCall2]
+
+CancelCall:
+
+;        jmp RpcRt_NdrClientCall2_...
+		ret
+
+RpcRt_NdrClientCall2   ENDP
+
+PUBLIC C RpcRt_NdrClientCall2
+

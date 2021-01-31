@@ -83,6 +83,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -92,6 +93,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -102,6 +104,7 @@
       <FunctionLevelLinking>
       </FunctionLevelLinking>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -112,6 +115,7 @@
       <FunctionLevelLinking>
       </FunctionLevelLinking>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;secur32.lib;ntdll.lib;psapi.lib;AdvApi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>

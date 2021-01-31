@@ -45,7 +45,7 @@
         <enum>QTabWidget::West</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1323,26 +1323,18 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkRestrictServices">
-                   <property name="text">
-                    <string>Do not start sandboxed services using a system token (recommended)</string>
+                 <item row="15" column="1">
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                  </widget>
-                 </item>
-                 <item row="13" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkOpenSmartCard">
-                   <property name="text">
-                    <string>Allow access to Smart Cards</string>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
                    </property>
-                  </widget>
-                 </item>
-                 <item row="9" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkProtectSystem">
-                   <property name="text">
-                    <string>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</string>
-                   </property>
-                  </widget>
+                  </spacer>
                  </item>
                  <item row="7" column="0" colspan="3">
                   <widget class="QLabel" name="label_12">
@@ -1360,6 +1352,22 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_22">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Protect the sandbox integrity itself</string>
+                   </property>
+                   <property name="text">
+                    <string>Sandbox isolation</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="3" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkNoWindowRename">
                    <property name="text">
@@ -1367,10 +1375,10 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
-                 <item row="12" column="2">
-                  <widget class="QCheckBox" name="chkOpenCredentials">
+                 <item row="6" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkRestrictServices">
                    <property name="text">
-                    <string>Open Windows Credentials Store</string>
+                    <string>Do not start sandboxed services using a system token (recommended)</string>
                    </property>
                   </widget>
                  </item>
@@ -1381,7 +1389,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
-                 <item row="14" column="2">
+                 <item row="15" column="2">
                   <spacer name="horizontalSpacer_6">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1393,6 +1401,34 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item row="13" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkOpenSmartCard">
+                   <property name="text">
+                    <string>Allow access to Smart Cards</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkAddToJob">
+                   <property name="text">
+                    <string>Add sandboxed processes to job objects (recommended)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkPreferExternalManifest">
+                   <property name="text">
+                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkProtectSystem">
+                   <property name="text">
+                    <string>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</string>
+                   </property>
+                  </widget>
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_5">
@@ -1407,46 +1443,17 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkPreferExternalManifest">
+                 <item row="12" column="2">
+                  <widget class="QCheckBox" name="chkOpenCredentials">
                    <property name="text">
-                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
+                    <string>Open Windows Credentials Store</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="14" column="1">
-                  <spacer name="verticalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="5" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkAddToJob">
+                 <item row="14" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkOpenBluetooth">
                    <property name="text">
-                    <string>Add sandboxed processes to job objects (recommended)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_22">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="toolTip">
-                    <string>Protect the sandbox integrity itself</string>
-                   </property>
-                   <property name="text">
-                    <string>Sandbox isolation</string>
+                    <string>Allow access to Bluetooth</string>
                    </property>
                   </widget>
                  </item>
@@ -1770,8 +1777,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>530</width>
-                    <height>312</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">

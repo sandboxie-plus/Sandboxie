@@ -115,6 +115,9 @@
     <ClCompile Include="syscall_open.c">
       <Filter>syscall</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\stream.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />
@@ -171,6 +174,9 @@
     </ClInclude>
     <ClInclude Include="syscall.h">
       <Filter>syscall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stream.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

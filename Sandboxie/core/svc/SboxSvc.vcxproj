@@ -97,6 +97,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;user32.lib;Advapi32.lib;psapi.lib;Ole32.lib;crypt32.lib;Secur32.lib;Userenv.lib;Gdi32.lib;Netapi32.lib;wtsapi32.lib;rpcrt4.lib</AdditionalDependencies>
@@ -112,6 +113,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;user32.lib;Advapi32.lib;psapi.lib;Ole32.lib;crypt32.lib;Secur32.lib;Userenv.lib;Gdi32.lib;Netapi32.lib;wtsapi32.lib;rpcrt4.lib</AdditionalDependencies>
@@ -126,6 +128,7 @@
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;user32.lib;Advapi32.lib;psapi.lib;Ole32.lib;crypt32.lib;Secur32.lib;Userenv.lib;Gdi32.lib;Netapi32.lib;wtsapi32.lib;rpcrt4.lib</AdditionalDependencies>
@@ -140,6 +143,7 @@
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;user32.lib;Advapi32.lib;psapi.lib;Ole32.lib;crypt32.lib;Secur32.lib;Userenv.lib;Gdi32.lib;Netapi32.lib;wtsapi32.lib;rpcrt4.lib</AdditionalDependencies>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1022
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SboxDrv", "core\drv\SboxDrv.vcxproj", "{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}"
 	ProjectSection(ProjectDependencies) = postProject

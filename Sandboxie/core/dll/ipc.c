@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -370,11 +370,12 @@ _FX BOOLEAN Ipc_Init(void)
 
     Ipc_CreateObjects();
 
-    if (Dll_OsBuild >= 9600)
-        g_Ipc_DynamicPortNames[SPOOLER_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
+    g_Ipc_DynamicPortNames[SPOOLER_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
 
     g_Ipc_DynamicPortNames[WPAD_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
     g_Ipc_DynamicPortNames[SMART_CARD_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
+    g_Ipc_DynamicPortNames[BT_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
+
     g_Ipc_DynamicPortNames[GAME_CONFIG_STORE_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
 
     return TRUE;

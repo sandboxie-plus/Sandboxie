@@ -209,6 +209,7 @@ void CSbieView::OnMenu(const QPoint& Point)
 	foreach(const QModelIndex& Index, Rows)
 	{
 		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
+		
 		pProcess = m_pSbieModel->GetProcess(ModelIndex);
 		if (pProcess)
 		{
@@ -219,10 +220,13 @@ void CSbieView::OnMenu(const QPoint& Point)
 		else
 		{
 			pBox = m_pSbieModel->GetSandBox(ModelIndex);
-			if (!pBox->IsEnabled())
-				iSandBoxeCount = -1;
-			if (pBox && iSandBoxeCount != -1)
-				iSandBoxeCount++;
+			if (pBox)
+			{
+				if (!pBox->IsEnabled())
+					iSandBoxeCount = -1;
+				else if (iSandBoxeCount != -1)
+					iSandBoxeCount++;
+			}
 		}
 	}
 
@@ -501,6 +505,11 @@ void CSbieView::OnSandBoxAction()
 	}
 	else if (Action == m_pMenuExplore)
 	{
+		if (SandBoxes.first()->IsEmpty()) {
+			QMessageBox("Sandboxie-Plus", tr("This Sandbox is empty."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
+			return;
+		}
+
 		if (theConf->GetBool("Options/AdvancedView", true) == false && theConf->GetBool("Options/ExplorerInfo", true))
 		{
 			bool State = false;

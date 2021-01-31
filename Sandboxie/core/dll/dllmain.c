@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -554,7 +554,12 @@ _FX void Dll_SelectImageType(void)
         L"dllhost.exe",             (WCHAR *)DLL_IMAGE_DLLHOST,
 
         L"iexplore.exe",            (WCHAR *)DLL_IMAGE_INTERNET_EXPLORER,
+
         L"firefox.exe",             (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"waterfox.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"brave.exe",               (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,

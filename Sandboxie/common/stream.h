@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -82,6 +83,14 @@ NTSTATUS Stream_Read_Long(
 NTSTATUS Stream_Write_Long(
     IN  STREAM *stream,
     IN  ULONG v);
+
+NTSTATUS Stream_Read_BOM(
+    IN  STREAM* stream, 
+    ULONG* encoding);
+
+NTSTATUS Stream_Read_Wchar(
+    IN  STREAM* stream,
+    OUT USHORT* v);
 
 //---------------------------------------------------------------------------
 

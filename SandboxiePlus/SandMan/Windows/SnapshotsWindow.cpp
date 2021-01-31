@@ -49,9 +49,9 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.treeSnapshots->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(UpdateSnapshot(const QModelIndex&)));
 	connect(ui.treeSnapshots, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnSelectSnapshot()));
 
-	connect(ui.btnTake, SIGNAL(pressed()), this, SLOT(OnTakeSnapshot()));
-	connect(ui.btnSelect, SIGNAL(pressed()), this, SLOT(OnSelectSnapshot()));
-	connect(ui.btnRemove, SIGNAL(pressed()), this, SLOT(OnRemoveSnapshot()));
+	connect(ui.btnTake, SIGNAL(clicked(bool)), this, SLOT(OnTakeSnapshot()));
+	connect(ui.btnSelect, SIGNAL(clicked(bool)), this, SLOT(OnSelectSnapshot()));
+	connect(ui.btnRemove, SIGNAL(clicked(bool)), this, SLOT(OnRemoveSnapshot()));
 	
 	connect(ui.txtName, SIGNAL(textEdited(const QString&)), this, SLOT(SaveInfo()));
 	connect(ui.txtInfo, SIGNAL(textChanged()), this, SLOT(SaveInfo()));

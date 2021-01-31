@@ -82,6 +82,7 @@
       <Filter>common\json</Filter>
     </ClCompile>
     <ClCompile Include="UpdateDialog.cpp" />
+    <ClCompile Include="Updater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutDialog.h" />
@@ -164,6 +165,7 @@
       <Filter>common\json</Filter>
     </ClInclude>
     <ClInclude Include="UpdateDialog.h" />
+    <ClInclude Include="Updater.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SbieControl.rc" />

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -90,6 +91,7 @@ typedef enum {
     WPAD_PORT,
     GAME_CONFIG_STORE_PORT,
     SMART_CARD_PORT,
+    BT_PORT,
     NUM_DYNAMIC_PORTS
 } ENUM_DYNAMIC_PORT_TYPE;
 

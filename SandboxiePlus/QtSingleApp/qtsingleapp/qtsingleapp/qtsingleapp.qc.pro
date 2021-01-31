@@ -17,8 +17,12 @@ CONFIG(release, debug|release):{
 QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
 QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
 }
-CONFIG(debug, debug|release):DESTDIR = ../../../Debug
-CONFIG(release, debug|release):DESTDIR = ../../../Release
+
+CONFIG(debug, debug|release):contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/x64/Debug
+CONFIG(release, debug|release):contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/x64/Release
+CONFIG(debug, debug|release):!contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/Win32/Debug
+CONFIG(release, debug|release):!contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/Win32/Release
+
 INCLUDEPATH += .
 DEPENDPATH += .
 #MOC_DIR += ./GeneratedFiles

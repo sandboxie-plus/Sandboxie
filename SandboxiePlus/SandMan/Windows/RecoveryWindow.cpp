@@ -58,13 +58,13 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	//connect(ui.treeFiles->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(UpdateSnapshot(const QModelIndex&)));
 	//connect(ui.treeFiles, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnSelectSnapshot()));
 
-	connect(ui.btnAddFolder, SIGNAL(pressed()), this, SLOT(OnAddFolder()));
+	connect(ui.btnAddFolder, SIGNAL(clicked(bool)), this, SLOT(OnAddFolder()));
 	connect(ui.chkShowAll, SIGNAL(clicked(bool)), this, SLOT(FindFiles()));
-	connect(ui.btnRefresh, SIGNAL(pressed()), this, SLOT(FindFiles()));
-	connect(ui.btnRecover, SIGNAL(pressed()), this, SLOT(OnRecover()));
-	connect(ui.btnRecoverTo, SIGNAL(pressed()), this, SLOT(OnRecoverTo()));
-	connect(ui.btnDeleteAll, SIGNAL(pressed()), this, SLOT(OnDeleteAll()));
-	connect(ui.btnClose, SIGNAL(pressed()), this, SLOT(close()));
+	connect(ui.btnRefresh, SIGNAL(clicked(bool)), this, SLOT(FindFiles()));
+	connect(ui.btnRecover, SIGNAL(clicked(bool)), this, SLOT(OnRecover()));
+	connect(ui.btnRecoverTo, SIGNAL(clicked(bool)), this, SLOT(OnRecoverTo()));
+	connect(ui.btnDeleteAll, SIGNAL(clicked(bool)), this, SLOT(OnDeleteAll()));
+	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 
 	restoreGeometry(theConf->GetBlob("RecoveryWindow/Window_Geometry"));
 
@@ -226,7 +226,6 @@ int CRecoveryWindow::FindFiles(const QString& RecParent, const QString& BoxedFol
 void CRecoveryWindow::RecoverFiles(bool bBrowse)
 {
 	bool HasShare = false;
-
 	QMap<QString, QString> FileMap;
 	foreach(const QModelIndex& Index, ui.treeFiles->selectionModel()->selectedIndexes())
 	{
@@ -262,16 +261,20 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 		}
 	}
 
-	QString RecoveryFolder;
-	if (HasShare && !bBrowse)
-	{
-		if (!bBrowse)
-			QMessageBox::warning(this, "Sandboxie-Plus", tr("One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to."));
 
+	if (HasShare && !bBrowse) {
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to."));
+		bBrowse = true;
+	}
+
+
+	QString RecoveryFolder;
+	if (bBrowse) {
 		RecoveryFolder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 		if (RecoveryFolder.isEmpty())
 			return;
 	}
+
 
 	QList<QPair<QString, QString>> FileList;
 	for(QMap<QString, QString>::const_iterator I = FileMap.begin(); I != FileMap.end(); ++I)
@@ -286,6 +289,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 
 		FileList.append(qMakePair(BoxedFilePath, RecoveryPath));
 	}
+
 
 	SB_PROGRESS Status = theGUI->RecoverFiles(FileList);
 	if (Status.GetStatus() == OP_ASYNC)

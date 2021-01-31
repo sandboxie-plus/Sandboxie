@@ -42,16 +42,12 @@
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <source>Legacy (old sbie behaviour)</source>
-        <translation type="vanished">Устаревшее (старое поведение sbie)</translation>
-    </message>
-    <message>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Создать новую песочницу</translation>
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Устаревшее поведение Sandboxie</translation>
     </message>
 </context>
 <context>
@@ -236,6 +232,54 @@
     <message>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
         <translation>Исполняемые файлы (*.exe *.cmd);;Все файлы (*.*)</translation>
+    </message>
+    <message>
+        <source>Direct</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direct All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed RT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Неизвестно</translation>
+    </message>
+    <message>
+        <source>File/Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IPC Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wnd Class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COM Object</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -523,7 +567,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключено</translation>
     </message>
 </context>
 <context>
@@ -708,7 +752,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Ignore this update, notify me about the next one.</source>
-        <translation>Игнорировать это обновление, сообщить мне о следующем.</translation>
+        <translation type="vanished">Игнорировать это обновление, сообщить мне о следующем.</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -912,7 +956,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No sandboxes found; creating: %1</source>
-        <translation>Песочниц не найдено; создание: %1</translation>
+        <translation type="vanished">Песочниц не найдено; создание: %1</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
@@ -1057,14 +1101,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Поверх всех окон</translation>
     </message>
     <message>
-        <source>Sellect box:</source>
-        <translation type="vanished">Выберите песочницу:</translation>
-    </message>
-    <message>
-        <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех песочниц?</translation>
-    </message>
-    <message>
         <source>Cleaned up removed templates...</source>
         <translation>Убраны удаленные шаблоны...</translation>
     </message>
@@ -1078,46 +1114,58 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Reset Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить столбцы</translation>
     </message>
     <message>
         <source>Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск окон</translation>
     </message>
     <message>
         <source>Show Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать скрытые песочницы</translation>
     </message>
     <message>
         <source>Select box:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите песочницу:</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех ящиков?</translation>
     </message>
     <message>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите завершить все процессы во всех песочницах?</translation>
     </message>
     <message>
         <source>Terminate all without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершить все, не спрашивая</translation>
     </message>
     <message>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное окно работает как часть программы %1 в изолированной программной среде %2</translation>
     </message>
     <message>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное окно не запущено как часть какой-либо изолированной программы.</translation>
     </message>
     <message>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетащите инструмент поиска на окно, чтобы выбрать его, затем отпустите кнопку мыши, чтобы проверить, является ли окно изолированным.</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
+        <translation>Sandboxie-Plus - Поиск окон</translation>
+    </message>
+    <message>
+        <source>Default sandbox not found; creating: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this message anymore.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1149,7 +1197,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок</translation>
     </message>
 </context>
 <context>
@@ -1372,10 +1420,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите завершить все процессы в выбранных песочницах?</translation>
     </message>
     <message>
         <source>This sandbox is disabled, do you want to enable it?</source>
+        <translation>Эта песочница отключена, вы хотите ее включить?</translation>
+    </message>
+    <message>
+        <source>This Sandbox is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1472,12 +1524,8 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Sandboxie-Plus новая песочница</translation>
     </message>
     <message>
-        <source>Enter a name for the new box:</source>
-        <translation type="vanished">Введите имя для новой песочницы:</translation>
-    </message>
-    <message>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя песочницы:</translation>
     </message>
 </context>
 <context>
@@ -2026,6 +2074,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
         <translation>Здесь вы можете указать список команд, которые будут выполняться каждый раз при первоначальном заполнении песочницы.</translation>
+    </message>
+    <message>
+        <source>Allow access to Bluetooth</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

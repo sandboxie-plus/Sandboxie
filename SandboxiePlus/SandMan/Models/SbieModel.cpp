@@ -137,6 +137,9 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 
 	foreach (const CSandBoxPtr& pBox, BoxList)
 	{
+		if (!ShowHidden && !pBox->IsEnabled())
+			continue;
+
 		QVariant ID = pBox->GetName();
 
 		QModelIndex Index;
@@ -160,9 +163,6 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		}
 
 		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
-
-		if (!ShowHidden && !pBoxEx->IsEnabled())
-			continue;
 
 		int Col = 0;
 		bool State = false;

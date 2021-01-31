@@ -106,8 +106,6 @@ static WCHAR *File_AllocAndInitEnvironment_2(
 static void File_AdjustDrives(
     ULONG path_drive_index, BOOLEAN subst, const WCHAR *path);
 
-static void File_InitCopyLimit(void);
-
 static void File_InitSnapshots(void);
 
 
@@ -156,7 +154,7 @@ _FX BOOLEAN File_Init(void)
 
     File_InitRecoverFolders();
 
-    File_InitCopyLimit();
+    File_InitFileMigration();
 
     //
     // intercept NTDLL entry points
@@ -1490,59 +1488,6 @@ _FX WCHAR *File_AllocAndInitEnvironment_2(
 
 
 //---------------------------------------------------------------------------
-// File_InitCopyLimit
-//---------------------------------------------------------------------------
-
-
-_FX void File_InitCopyLimit(void)
-{
-    static const WCHAR *_CopyLimitKb = L"CopyLimitKb";
-    static const WCHAR *_CopyLimitSilent = L"CopyLimitSilent";
-    NTSTATUS status;
-    WCHAR str[32];
-
-    //
-    // if this is one of SandboxieCrypto, SandboxieWUAU or WUAUCLT,
-    // or TrustedInstaller, then we don't impose a CopyLimit
-    //
-
-    BOOLEAN SetMaxCopyLimit = FALSE;
-
-    if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_CRYPTO     ||
-        Dll_ImageType == DLL_IMAGE_SANDBOXIE_WUAU       ||
-        Dll_ImageType == DLL_IMAGE_WUAUCLT              ||
-        Dll_ImageType == DLL_IMAGE_TRUSTED_INSTALLER)   {
-
-        SetMaxCopyLimit = TRUE;
-    }
-
-    if (SetMaxCopyLimit) {
-
-        File_CopyLimitKb     = -1;
-        File_CopyLimitSilent = FALSE;
-        return;
-    }
-
-    //
-    // get configuration settings for CopyLimitKb and CopyLimitSilent
-    //
-
-    status = SbieApi_QueryConfAsIs(
-        NULL, _CopyLimitKb, 0, str, sizeof(str) - sizeof(WCHAR));
-    if (NT_SUCCESS(status)) {
-        ULONGLONG num = _wtoi64(str);
-        if (num)
-            File_CopyLimitKb = (num > 0x000000007fffffff) ? -1 : (ULONG)num;
-        else
-            SbieApi_Log(2207, _CopyLimitKb);
-    }
-
-    File_CopyLimitSilent =
-        SbieApi_QueryConfBool(NULL, _CopyLimitSilent, FALSE);
-}
-
-
-//---------------------------------------------------------------------------
 // File_TranslateDosToNtPath
 //---------------------------------------------------------------------------
 
@@ -1750,11 +1695,10 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
 
 
 //---------------------------------------------------------------------------
-// File_InitCopyLimit
+// File_InitSnapshots
 //---------------------------------------------------------------------------
 
-/* CRC */
-
+// CRC
 #define CRC_WITH_ADLERTZUK64
 #include "common/crc.c"
 

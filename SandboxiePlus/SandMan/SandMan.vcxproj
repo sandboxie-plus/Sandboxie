@@ -244,9 +244,6 @@
     <QtRcc Include="Resources\SandMan.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\SandMan.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Resources\finder-empty.bmp" />
     <Image Include="Resources\finder-full.bmp" />
     <Image Include="Resources\SandMan.ico" />
@@ -265,7 +262,11 @@
     <None Include="sandman_pt.ts" />
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
+    <None Include="sandman_zh-TW.ts" />
     <None Include="sandman_zh.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SandMan.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -37,9 +37,6 @@
 
 static void *SbieDll_Hook_CheckChromeHook(void *SourceFunc);
 
-static WCHAR *Dll_GetSettingsForImageName(
-    const WCHAR *setting, const WCHAR *deftext);
-
 ULONG_PTR  DLL_FindWow64Target(ULONG_PTR address);
 
 //---------------------------------------------------------------------------
@@ -585,13 +582,14 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR *Dll_GetSettingsForImageName(
-    const WCHAR *setting, const WCHAR *deftext)
+_FX NTSTATUS Dll_GetSettingsForImageName(
+    const WCHAR *setting, WCHAR* value, ULONG value_size, const WCHAR *deftext)
 {
     POOL *pool;
     WCHAR *text, *image_lwr, *buf;
     ULONG text_len, image_len;
     ULONG index;
+    BOOLEAN match = FALSE;
 
     //
     //
@@ -648,8 +646,10 @@ _FX WCHAR *Dll_GetSettingsForImageName(
         ++index;
 
         ptr = wcschr(buf, L',');
-        if (! ptr)
-            continue;
+        if (!ptr) {
+            ptr = buf;
+            goto skip_match; // if there is no L',' it means any image
+        }
         *ptr = L'\0';
 
         if (buf[0] == L'/' && buf[1] == L'/' &&
@@ -663,42 +663,51 @@ _FX WCHAR *Dll_GetSettingsForImageName(
         image_pat = Pattern_Create(pool, buf_ptr, TRUE);
         if (Pattern_Match(image_pat, image_lwr, image_len)) {
 
+            match = TRUE;
+        }
+
+        Pattern_Free(image_pat);
+
+        if (!match)
+            continue;
+
+        if (text_len)
+            *ptr = L',';    // restore comma if text is not empty
+        else
+            ++ptr;          // or skip comma if text is empty
+
+        skip_match:
+        {
             ULONG ptr_len;
-            WCHAR *new_text;
-            if (text_len)
-                *ptr = L',';    // restore comma if text is not empty
-            else
-                ++ptr;          // or skip comma if text is empty
+            WCHAR* new_text;
             ptr_len = wcslen(ptr);
             new_text = Pool_Alloc(pool,
-                            (text_len + ptr_len + 1) * sizeof(WCHAR));
-            if (! new_text)
+                (text_len + ptr_len + 1) * sizeof(WCHAR));
+            if (!new_text)
                 goto outofmem;
             wmemcpy(new_text, text, text_len);
             wmemcpy(new_text + text_len, ptr, ptr_len + 1);
             text = new_text;
             text_len = text_len + ptr_len;
         }
-
-        Pattern_Free(image_pat);
+        break;
     }
 
     //
     // finish
     //
 
-    buf = Dll_Alloc((text_len + 1) * sizeof(WCHAR));
-    wmemcpy(buf, text, text_len + 1);
+    wcscpy_s(value, value_size / sizeof(WCHAR), text);
 
     Pool_Delete(pool);
 
-    return buf;
+    return STATUS_SUCCESS;
 
 outofmem:
 
     SbieApi_Log(2305, NULL);
     ExitProcess(-1);
-    return NULL;
+    return STATUS_INSUFFICIENT_RESOURCES;
 }
 
 
@@ -709,37 +718,26 @@ outofmem:
 
 _FX BOOLEAN Dll_SkipHook(const WCHAR *HookName)
 {
-    static WCHAR *HookText = NULL;
+    static WCHAR HookText[256];
+    static BOOLEAN HookTextInit = TRUE;
     BOOLEAN found = FALSE;
 
     //
     // initialize hook text based on image name
     //
 
-    if (! HookName) {
+    if (HookTextInit) {
 
-        const WCHAR *deftext = NULL;
+        HookTextInit = FALSE;
 
-        if (_wcsicmp(Dll_ImageName, L"DragonSaga.exe") == 0)
-            deftext = L"ntqsi,enumwin,findwin";
-
-        if (_wcsicmp(Dll_ImageName, L"BatmanAC.exe") == 0)
-            deftext = L"enumwin,findwin";
-
-        if (_wcsicmp(Dll_ImageName, L"PotPlayer64.exe") == 0 ||
-            _wcsicmp(Dll_ImageName, L"PotPlayerMini64.exe") == 0 ||
-            _wcsicmp(Dll_ImageName, L"mpc-hc64.exe") == 0) {
-
-            deftext = L"cocreate";
-        }
-
-        HookText = Dll_GetSettingsForImageName(L"SkipHook", deftext);
-
+        Dll_GetSettingsForImageName(L"SkipHook", HookText, sizeof(HookText), NULL);
+    } 
+    
     //
     // query for a specific hook
     //
 
-    } else if (HookText) {
+    if (HookName && *HookText) {
 
         ULONG len = wcslen(HookName);
         WCHAR *ptr = HookText;

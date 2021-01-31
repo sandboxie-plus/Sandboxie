@@ -402,8 +402,19 @@ ULONG CUpdater::UpdaterServiceThread(void *lpParameter)
 
 		}
 
-		if (!pContext->version.IsEmpty() && pContext->version.Compare(_T(MY_VERSION_STRING)) != 0)
+
+		if (!pContext->version.IsEmpty()) // && pContext->version.Compare(_T(MY_VERSION_STRING)) != 0)
 		{
+			UCHAR myVersion[4] = { MY_VERSION_BINARY, 0 };
+			ULONG MyVersion = ntohl(*(ULONG*)&myVersion);
+
+			ULONG Version = 0;
+			for (int Position = 0, Bits = 24; Position < pContext->version.GetLength() && Bits >= 0; Bits -= 8) {
+				CString Num = pContext->version.Tokenize(L".", Position);
+				Version |= (_wtoi(Num) & 0xFF) << Bits;
+			}
+
+			if (Version > MyVersion)
 			if (pContext->Manual || IgnoredUpdates.Find(pContext->version) == NULL)
 			{
 				bNothing = false;

@@ -5,6 +5,8 @@ PRECOMPILED_HEADER = stdafx.h
 
 QT += core gui network widgets winextras concurrent
 
+CONFIG += lrelease
+
 CONFIG(debug, debug|release):contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/x64/Debug
 CONFIG(release, debug|release):contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/x64/Release
 CONFIG(debug, debug|release):!contains(QMAKE_HOST.arch, x86_64):LIBS += -L../Bin/Win32/Debug

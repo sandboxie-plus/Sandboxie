@@ -1682,8 +1682,8 @@ void CSandMan::CheckForUpdates(bool bManual)
 	//QString Branche = theConf->GetString("Options/ReleaseBranche");
 	//if (!Branche.isEmpty())
 	//	Query.addQueryItem("branche", Branche);
-	Query.addQueryItem("version", GetVersion());
-	//Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
+	//Query.addQueryItem("version", GetVersion());
+	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QString::number(m_LanguageId));
 	QString UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
@@ -1735,26 +1735,53 @@ void CSandMan::OnUpdateCheck()
 		QString MsgHash = QCryptographicHash::hash(Data["userMsg"].toByteArray(), QCryptographicHash::Md5).toHex().left(8);
 		if (!IgnoredUpdates.contains(MsgHash))
 		{
+			QString FullMessage = UserMsg;
+			QString InfoUrl = Data["infoUrl"].toString();
+			if (!InfoUrl.isEmpty())
+				FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">info page</a>?</p>").arg(InfoUrl);
+
 			CCheckableMessageBox mb(this);
 			mb.setWindowTitle("Sandboxie-Plus");
 			QIcon ico(QLatin1String(":/SandMan.png"));
 			mb.setIconPixmap(ico.pixmap(64, 64));
+			//mb.setTextFormat(Qt::RichText);
 			mb.setText(UserMsg);
 			mb.setCheckBoxText(tr("Don't show this announcement in the future."));
-			mb.setStandardButtons(QDialogButtonBox::Close);
+			
+			if (!InfoUrl.isEmpty()) {
+				mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
+				mb.setDefaultButton(QDialogButtonBox::Yes);
+			}
+			else
+				mb.setStandardButtons(QDialogButtonBox::Ok);
+
 			mb.exec();
 
 			if (mb.isChecked())
 				theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << MsgHash);
 
+			if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
+			{
+				QDesktopServices::openUrl(InfoUrl);
+			}
+
 			bNothing = false;
 		}
 	}
 
-	QString Version = Data["version"].toString();
-	if (!Version.isEmpty() && Version != GetVersion())
+	QString VersionStr = Data["version"].toString();
+	if (!VersionStr.isEmpty()) //&& VersionStr != GetVersion())
 	{
-		if (bManual || !IgnoredUpdates.contains(Version)) // when checked manually always show result
+		UCHAR myVersion[4] = { VERSION_UPD, VERSION_REV, VERSION_MIN, VERSION_MJR }; // ntohl
+		ULONG MyVersion = *(ULONG*)&myVersion;
+
+		ULONG Version = 0;
+		QStringList Nums = VersionStr.split(".");
+		for (int i = 0, Bits = 24; i < Nums.count() && Bits >= 0; i++, Bits -= 8)
+			Version |= (Nums[i].toInt() & 0xFF) << Bits;
+
+		if (Version > MyVersion)
+		if (bManual || !IgnoredUpdates.contains(VersionStr)) // when checked manually always show result
 		{
 			bNothing = false;
 			//QDateTime Updated = QDateTime::fromTime_t(Data["updated"].toULongLong());
@@ -1778,7 +1805,7 @@ void CSandMan::OnUpdateCheck()
 			mb.setIconPixmap(ico.pixmap(64, 64));
 			//mb.setTextFormat(Qt::RichText);
 			mb.setText(FullMessage);
-			mb.setCheckBoxText(tr("Ignore this update, notify me about the next one."));
+			mb.setCheckBoxText(tr("Don't show this message anymore."));
 			mb.setCheckBoxVisible(!bManual);
 
 			if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {
@@ -1791,7 +1818,7 @@ void CSandMan::OnUpdateCheck()
 			mb.exec();
 
 			if (mb.isChecked())
-				theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << Version);
+				theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
 
 			if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
 			{

@@ -48,7 +48,8 @@ cd %~dp0\Build_SandMan_%build_arch%
 IF %ERRORLEVEL% NEQ 0 goto end
 
 
-rem cd %~dp0
+cd %~dp0
+
 rem dir .\bin
 rem dir .\bin\%build_arch%
 rem dir .\bin\%build_arch%\Release

@@ -236,6 +236,54 @@
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
         <translation>可執行檔案 (*.exe *.cmd);;所有檔案 (*.*)</translation>
     </message>
+    <message>
+        <source>Direct</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direct All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed RT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">未知</translation>
+    </message>
+    <message>
+        <source>File/Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IPC Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wnd Class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COM Object</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -410,26 +458,22 @@ Full path: %4</source>
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>您確定允許 %4 (%5) 複製大型檔案 %1 至沙盒: %2？
-檔案名稱: %3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>您確定允許 %1 (%2) 訪問網路嗎？
-完整位址: %3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 可以從 %2 快速恢復。
-檔案寫入自: %3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>移動大檔案 %1 至沙盒 %2，%3 遺留。
-完整位址: %4</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -723,7 +767,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Ignore this update, notify me about the next one.</source>
-        <translation>忽略此升級，下一個再提示我。</translation>
+        <translation type="vanished">忽略此升級，下一個再提示我。</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -983,7 +1027,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No sandboxes found; creating: %1</source>
-        <translation>沒找到沙盒；建立: %1</translation>
+        <translation type="vanished">沒找到沙盒；建立: %1</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
@@ -1122,6 +1166,18 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - 尋找視窗</translation>
+    </message>
+    <message>
+        <source>Default sandbox not found; creating: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this message anymore.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1379,6 +1435,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>此沙盒已禁用，是否啟用？</translation>
+    </message>
+    <message>
+        <source>This Sandbox is empty.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2027,6 +2087,10 @@ instead of &quot;*&quot;.</source>
 &quot;D&quot; - 拒絕訪問
 &quot;I&quot; - 忽略拒絕請求
 代替 &quot;*&quot;.</translation>
+    </message>
+    <message>
+        <source>Allow access to Bluetooth</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

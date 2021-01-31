@@ -69,7 +69,8 @@ copy %srcPath%\SandMan.exe %instPath%\
 ECHO Copying SandMan translations
 
 mkdir %instPath%\translations\
-copy /y %~dp0..\SandboxiePlus\SandMan\sandman_*.qm %instPath%\translations\
+rem copy /y %~dp0..\SandboxiePlus\SandMan\sandman_*.qm %instPath%\translations\
+copy /y %~dp0..\SandboxiePlus\Build_SandMan_%archPath%\release\sandman_*.qm %instPath%\translations\
 
 ECHO Copying Sandboxie
 
@@ -77,6 +78,7 @@ copy /y %sbiePath%\SbieSvc.exe %instPath%\
 copy /y %sbiePath%\SbieDll.dll %instPath%\
 
 copy /y %sbiePath%\SbieDrv.sys %instPath%\
+copy /y %sbiePath%\SbieDrv.pdb %instPath%\
 
 copy /y %sbiePath%\SbieCtrl.exe %instPath%\
 copy /y %sbiePath%\Start.exe %instPath%\

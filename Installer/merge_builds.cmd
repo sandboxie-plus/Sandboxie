@@ -1,4 +1,4 @@
-REM @ECHO OFF
+@ECHO OFF
 
 call %~dp0get_openssl.cmd
 

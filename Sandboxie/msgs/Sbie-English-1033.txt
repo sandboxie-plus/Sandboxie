@@ -491,6 +491,11 @@ SBIE2224 Sandboxed program has crashed: %2
 SBIE2301 %2
 .
 
+2302;pop;err;01
+SBIE2302 Process image configuration conflict: %2
+.
+
+
 2303;pop;err;01
 SBIE2303 Could not hook %2
 .
@@ -3018,6 +3023,10 @@ Default list of blocked TCP/IP ports
 
 4294;txt;01
 Permit programs to update jump lists in the Windows 7 taskbar
+.
+
+4295;txt;01
+Default exclusions File Migration presets
 .
 
 #----------------------------------------------------------------------------

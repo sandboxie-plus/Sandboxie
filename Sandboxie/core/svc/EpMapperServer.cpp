@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -72,8 +73,10 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
 
     const WCHAR* wstrSpooler = L"Spooler";
     const WCHAR* wstrWPAD = L"WinHttpAutoProxySvc";
+    //const WCHAR* wstrBT = L"bthserv";
     RPC_IF_ID ifidGCS = { {0x88abcbc3, 0x34EA, 0x76AE, { 0x82, 0x15, 0x76, 0x75, 0x20, 0x65, 0x5A, 0x23 }}, 0, 0 };
     RPC_IF_ID ifidSmartCard = { {0xC6B5235A, 0xE413, 0x481D, { 0x9A, 0xC8, 0x31, 0x68, 0x1B, 0x1F, 0xAA, 0xF5 }}, 1, 1 };
+    RPC_IF_ID ifidBluetooth = { {0x2ACB9D68, 0xB434, 0x4B3E, { 0xB9, 0x66, 0xE0, 0x6B, 0x4B, 0x3A, 0x84, 0xCB }}, 1, 0 }; 
 
     RPC_IF_ID ifidRequest;
     const WCHAR* pwszServiceName = NULL;
@@ -81,10 +84,18 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
     {
     case SPOOLER_PORT:              if (SbieApi_QueryConfBool(boxname, L"ClosePrintSpooler", FALSE)) return SHORT_REPLY(E_ACCESSDENIED);
                                     pwszServiceName = wstrSpooler; break;
+
     case WPAD_PORT:                 pwszServiceName = wstrWPAD; break;
+
+    case BT_PORT:                   if (!SbieApi_QueryConfBool(boxname, L"OpenBluetooth", FALSE)) return SHORT_REPLY(E_ACCESSDENIED);
+                                    //pwszServiceName = wstrBT; break;
+                                    memcpy(&ifidRequest, &ifidBluetooth, sizeof(RPC_IF_ID)); break;
+
     case GAME_CONFIG_STORE_PORT:    memcpy(&ifidRequest, &ifidGCS, sizeof(RPC_IF_ID)); break;
+
     case SMART_CARD_PORT:           if (!SbieApi_QueryConfBool(boxname, L"OpenSmartCard", TRUE)) return SHORT_REPLY(E_ACCESSDENIED);
                                     memcpy(&ifidRequest, &ifidSmartCard, sizeof(RPC_IF_ID)); break;
+
     default:                        return SHORT_REPLY(E_INVALIDARG);
     }
 

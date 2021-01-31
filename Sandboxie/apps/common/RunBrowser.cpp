@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -123,7 +123,7 @@ void CRunBrowser::OnYes()
 void CRunBrowser::OnNo()
 {
     ShellExecute(
-        m_pParentWnd->m_hWnd, NULL, m_url, NULL, NULL, SW_SHOWNORMAL);
+        m_pParentWnd ? m_pParentWnd->m_hWnd : NULL , NULL, m_url, NULL, NULL, SW_SHOWNORMAL);
     EndDialog(0);
 }
 

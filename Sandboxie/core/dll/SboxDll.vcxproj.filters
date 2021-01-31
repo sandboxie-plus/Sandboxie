@@ -173,6 +173,13 @@
     <ClCompile Include="rpcrt.c">
       <Filter>ipc</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\stream.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="config.c" />
+    <ClCompile Include="file_copy.c">
+      <Filter>file</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
@@ -215,6 +222,12 @@
       <Filter>com</Filter>
     </ClInclude>
     <ClInclude Include="trace.h" />
+    <ClInclude Include="..\..\common\stream.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pattern.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

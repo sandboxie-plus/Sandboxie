@@ -7,6 +7,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.6.5 / 5.47.0] - 2021-01-31
+
+### Added
+- added detection for waterfox.exe, Palemoon.exe, basilisk.exe and brave.exe firefox forks
+- added bluetooth API support, IPC port can be opened with "OpenBluetooth=y"
+-- this should resolve issues with many unity games hanging on startup for a long time
+- added enchanced RPC/IPC interface tracing
+- when DefaultBox is not found its by the SandMan UI its now recreated
+- added Disable Forces Process time is now savedand reloaded
+
+### Changed
+- reduced sandman cpu usage
+- sandboxie.ini and templates.ini can now be UTF8 encoded
+-- this feature is experimental, files without a UTF-8 Signature should be recognized also
+-- "ByteOrderMark=yes" is obsolete sandboxie.ini is now always saved with a BOM/Signature
+- legacy language files can now be UTF8 encoded
+- reworked file migration behavioure, removed hard coded lists in favoure of templates
+-- you can now use "CopyAlways=", "DontCopy=" and "CopyEmpty=" that suppores teh same syntax as "OpenFilePath="
+-- "CopyBlockDenyWrite=program.exe,y" makes an write open call to a file that wont't be copied fail instead of turing it read only
+- removed hardcoded ShipHook list in favoure of templates
+
+### Fixed
+- fixed old memory pool leak in the sbie drvier
+- fixed issue with item selection in the access restrictions ui
+- fixed updater crash in sbiectrl.exe
+- fixed issues wih RPC calls introduced in sbie 5.33.1
+- fixed recently broken terminate all command
+- fixed a coupel minor UI issues with Sandman UI
+- fixed IPC issue with windows 7 and 8 resulting in process termination
+- fixed "recover to" functionality
+
+
+
 ## [0.6.0 / 5.46.5] - 2021-01-25
 
 ### Added

@@ -280,6 +280,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_uTimerID = startTimer(250);
 
+	OnStatusChanged();
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 	{
 		SB_STATUS Status = ConnectSbie();
@@ -1075,7 +1076,7 @@ void CSandMan::OnNewBox()
 
 void CSandMan::OnEmptyAll()
 {
-	if (theConf->GetInt("Options/TerminateAll", -1) == -1)
+ 	if (theConf->GetInt("Options/TerminateAll", -1) == -1)
 	{
 		bool State = false;
 		if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to terminate all processes in all sandboxes?")
@@ -1095,8 +1096,10 @@ void CSandMan::OnDisableForce()
 	int Seconds = 0;
 	if (Status)
 	{
+		int LastValue = theAPI->GetGlobalSettings()->GetNum("ForceDisableSeconds", 60);
+
 		bool bOK = false;
-		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), 10, 0, INT_MAX, 1, &bOK);
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), LastValue, 0, INT_MAX, 1, &bOK);
 		if (!bOK)
 			return;
 	}

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -146,7 +147,7 @@ CAppPage::CAppPage(TMPL_INFO *info, const CString &BoxName)
 
         if (m_tmpl_info.ClassModifier & MODIF_IEXPLORE)
             m_titleForPage = L"Internet Explorer";
-	if (m_tmpl_info.ClassModifier & MODIF_EDGE)
+        if (m_tmpl_info.ClassModifier & MODIF_EDGE)
             m_titleForPage = "Microsoft Edge";
         if (m_tmpl_info.ClassModifier & MODIF_FIREFOX)
             m_titleForPage = L"Firefox";
@@ -540,26 +541,26 @@ void CAppPage::Template_Filter()
         POSITION old_pos = pos;
         CString name = m_tmpl_sections.GetNext(pos);
         BOOL ie = (name.Find(L"IExplore_") != -1);
-	BOOL edge = (name.Find(L"Edge_") != -1);
+        BOOL edge = (name.Find(L"Edge_") != -1);
         BOOL ff = (name.Find(L"Firefox_") != -1)
                || (name.Find(L"Waterfox_") != -1)
                || (name.Find(L"PaleMoon_") != -1)
-	       || (name.Find(L"SeaMonkey_") != -1);
+               || (name.Find(L"SeaMonkey_") != -1);
         BOOL ch = (name.Find(L"Chrome_") != -1);
-	BOOL other = (name.Find(L"Dragon_") != -1)
-		  || (name.Find(L"Iron_") != -1)
-		  || (name.Find(L"Ungoogled_") != -1)
-		  || (name.Find(L"Vivaldi_") != -1)
+        BOOL other = (name.Find(L"Dragon_") != -1)
+                  || (name.Find(L"Iron_") != -1)
+                  || (name.Find(L"Ungoogled_") != -1)
+                  || (name.Find(L"Vivaldi_") != -1)
                   || (name.Find(L"Brave_") != -1)
                   || (name.Find(L"Maxthon_6_") != -1)
-		  || (name.Find(L"Opera_") != -1)
-		  || (name.Find(L"Yandex_") != -1);
+                  || (name.Find(L"Opera_") != -1)
+                  || (name.Find(L"Yandex_") != -1);
 
         BOOL keep = FALSE;
 
         if ((modif & MODIF_IEXPLORE) && ie)
             keep = TRUE;
-	else if ((modif & MODIF_EDGE) && edge)
+        else if ((modif & MODIF_EDGE) && edge)
             keep = TRUE;
         else if ((modif & MODIF_FIREFOX) && ff)
             keep = TRUE;
@@ -1569,5 +1570,18 @@ void CAppPage::SetDefaultTemplates6(CBox &box)
 void CAppPage::SetDefaultTemplates7(CBox &box)
 {
     box.EnableTemplate(L"BlockPorts", TRUE);
+    //box.EnableTemplate(L"WindowsFontCache", TRUE); // since 5.46.3 open by driver
     box.EnableTemplate(L"qWave", TRUE);
+    SetDefaultTemplates8(box);
+}
+
+//---------------------------------------------------------------------------
+// SetDefaultTemplates8
+//---------------------------------------------------------------------------
+
+
+void CAppPage::SetDefaultTemplates8(CBox& box)
+{
+    box.EnableTemplate(L"FileCppy", TRUE);
+    box.EnableTemplate(L"SkipHook", TRUE);
 }

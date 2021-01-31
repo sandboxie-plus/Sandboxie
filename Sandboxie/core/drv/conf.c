@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -51,6 +51,7 @@ typedef struct _CONF_DATA {
     POOL *pool;
     LIST sections;      // CONF_SECTION
     BOOLEAN home;       // TRUE if configuration read from Driver_Home_Path
+    ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swaped)
     volatile ULONG use_count;
 
 } CONF_DATA;
@@ -139,6 +140,9 @@ static const WCHAR *Conf_Template = L"Template";
 
 static const WCHAR *Conf_H = L"H";
 static const WCHAR *Conf_W = L"W";
+
+static const WCHAR* Conf_Unicode = L"U";
+static const WCHAR* Conf_UTF8 = L"8";
 
 
 //---------------------------------------------------------------------------
@@ -249,6 +253,8 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
         data.home = path_home;
         data.use_count = 0;
 
+        status = Stream_Read_BOM(stream, &data.encoding);
+
         linenum = 1;
         while (NT_SUCCESS(status))
             status = Conf_Read_Sections(stream, &data, &linenum);
@@ -276,6 +282,8 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
                 MSG_CONF_NO_TMPL_FILE, 0, status, NULL, session_id);
 
         } else {
+
+            status = Stream_Read_BOM(stream, NULL);
 
             linenum = 1 + CONF_TMPL_LINE_BASE;
 
@@ -581,7 +589,7 @@ _FX NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum)
 
         // skip leading control and whitespace characters
         while (1) {
-            status = Stream_Read_Short(stream, &ch);
+            status = Stream_Read_Wchar(stream, &ch);
             if ((! NT_SUCCESS(status)) || (ch > 32 && ch < 0xFE00))
                 break;
             if (ch == L'\r')
@@ -609,7 +617,7 @@ _FX NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum)
             if (ptr - line == CONF_LINE_LEN)
                 status = STATUS_BUFFER_OVERFLOW;
             else
-                status = Stream_Read_Short(stream, &ch);
+                status = Stream_Read_Wchar(stream, &ch);
             if ((! NT_SUCCESS(status)) || ch == L'\n' || ch == L'\r')
                 break;
         }
@@ -1060,11 +1068,20 @@ _FX const WCHAR *Conf_Get(
             _wcsicmp(setting, L"IniLocation") == 0) {
 
         // return "H" if configuration file was found in the Sandboxie
-        // home directory, or "S" if it was found in Windows directory
+        // home directory, or "W" if it was found in Windows directory
 
         value = (Conf_Data.home) ? Conf_H : Conf_W;
 
-    } else if (have_setting) {
+    } else if ((!have_section) && have_setting &&
+        _wcsicmp(setting, L"IniEncoding") == 0) {
+
+        // return "U" if configuration file was Unicode encoded,
+        // or "8" if it was UTF-8 encoded
+
+        value = (Conf_Data.encoding == 1) ? Conf_UTF8 : Conf_Unicode;
+
+    }
+    else if (have_setting) {
 
         check_global = ((index & CONF_GET_NO_GLOBAL) == 0);
         index &= 0xFFFF;
@@ -1232,6 +1249,7 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         Conf_Data.pool = NULL;
         List_Init(&Conf_Data.sections);
 		Conf_Data.home = FALSE;
+        Conf_Data.encoding = 0;
 
         ExReleaseResourceLite(Conf_Lock);
         KeLowerIrql(irql);
@@ -1373,6 +1391,7 @@ _FX BOOLEAN Conf_Init(void)
     Conf_Data.pool = NULL;
     List_Init(&Conf_Data.sections);
     Conf_Data.home = FALSE;
+    Conf_Data.encoding = 0;
 
     if (! Mem_GetLockResource(&Conf_Lock, TRUE))
         return FALSE;

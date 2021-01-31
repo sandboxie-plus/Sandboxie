@@ -21,6 +21,7 @@ cd %~dp0\Build_qtsingleapp_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+IF %ERRORLEVEL% NEQ 0 goto end
 
 
 mkdir %~dp0\Build_MiscHelpers_%build_arch%
@@ -28,6 +29,7 @@ cd %~dp0\Build_MiscHelpers_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\MiscHelpers\MiscHelpers.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+IF %ERRORLEVEL% NEQ 0 goto end
 
 
 mkdir %~dp0\Build_QSbieAPI_%build_arch%
@@ -35,6 +37,7 @@ cd %~dp0\Build_QSbieAPI_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\QSbieAPI\QSbieAPI.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+IF %ERRORLEVEL% NEQ 0 goto end
 
 
 mkdir %~dp0\Build_SandMan_%build_arch%
@@ -42,9 +45,12 @@ cd %~dp0\Build_SandMan_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+IF %ERRORLEVEL% NEQ 0 goto end
 
 
-cd %~dp0
-dir .\bin
-dir .\bin\%build_arch%
-dir .\bin\%build_arch%\Release
+rem cd %~dp0
+rem dir .\bin
+rem dir .\bin\%build_arch%
+rem dir .\bin\%build_arch%\Release
+
+:end

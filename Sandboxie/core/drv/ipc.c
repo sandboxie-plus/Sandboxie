@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -204,20 +204,16 @@ _FX BOOLEAN Ipc_Init(void)
     Api_SetFunction(API_GET_DYNAMIC_PORT_FROM_PID, Ipc_Api_GetDynamicPortFromPid);
     Api_SetFunction(API_OPEN_DYNAMIC_PORT, Ipc_Api_OpenDynamicPort);
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_81) {
-
-        if (!Mem_GetLockResource(&Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE))
-            return FALSE;
-    }
-
-    if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
+    // prepare dynamic ports
+    if (!Mem_GetLockResource(&Ipc_Dynamic_Ports[WPAD_PORT].pPortLock, TRUE)
+     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SMART_CARD_PORT].pPortLock, TRUE)
+     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[BT_PORT].pPortLock, TRUE)
+     // since Windows 8
+     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE)
+     // since Windows 10
+     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[GAME_CONFIG_STORE_PORT].pPortLock, TRUE)
+        ) return FALSE;
     
-        if(!Mem_GetLockResource(&Ipc_Dynamic_Ports[WPAD_PORT].pPortLock, TRUE)
-        || !Mem_GetLockResource(&Ipc_Dynamic_Ports[GAME_CONFIG_STORE_PORT].pPortLock, TRUE)
-        || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SMART_CARD_PORT].pPortLock, TRUE)
-            ) return FALSE;    
-    }
-
     //
     // finish
     //

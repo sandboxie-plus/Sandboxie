@@ -577,7 +577,7 @@ _FX void Dll_SelectImageType(void)
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
 	L"brave.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
 	L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Yandex Browser
-	L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // modern Edge is chromium based
+	L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is Chromium-based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
 
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,

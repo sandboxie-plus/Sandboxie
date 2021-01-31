@@ -1,10 +1,8 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "./resources/resource.h"
+#include "resource.h"
 /////////////////////////////////////////////////////////////////////////////
 // German (Austria) resources
-
-#include "winres.h"
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
@@ -44,6 +42,7 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
@@ -68,8 +67,8 @@ FINDER_CURSOR           CURSOR                  "./resources/finder.cur"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 0,6,5,0
+ PRODUCTVERSION 0,6,5,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -86,12 +85,12 @@ BEGIN
         BEGIN
             //VALUE "CompanyName", "xanasoft.net"
             VALUE "FileDescription", "SandBox Manager"
-            VALUE "FileVersion", "1.0.0.1"
+            VALUE "FileVersion", "0.6.5.0"
             VALUE "InternalName", "SandMan.exe"
-            VALUE "LegalCopyright", "Copyright (C) 2020 by DavidXanatos"
+            VALUE "LegalCopyright", "Copyright (C) 2020-2021 by David Xanatos (xanasoft.com)"
             VALUE "OriginalFilename", "SandMan.exe"
             VALUE "ProductName", "SandBox Manager"
-            VALUE "ProductVersion", "1.0.0.1"
+            VALUE "ProductVersion", "0.6.5.0"
         END
     END
     BLOCK "VarFileInfo"

@@ -236,6 +236,7 @@
     <QtMoc Include="Models\ApiMonModel.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
     <ClInclude Include="stdafx.h" />

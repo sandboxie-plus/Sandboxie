@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- this should resolve issues with many unity games hanging on startup for a long time
 - added enhanced RPC/IPC interface tracing
 - when DefaultBox is not found by the SandMan UI, it will be recreated
-- added Disable Forced Process time is now saved and reloaded
+- "Disable Forced Programs" time is now saved and reloaded
 
 ### Changed
 - reduced sandman cpu usage

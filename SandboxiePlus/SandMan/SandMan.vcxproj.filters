@@ -110,9 +110,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\resource.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="Helpers\WinAdmin.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -120,7 +117,7 @@
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

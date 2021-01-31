@@ -1,7 +1,9 @@
-﻿//{{NO_DEPENDENCIES}}
+//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by SandMan.rc
 //
+#define VS_VERSION_INFO                 1
+#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 
@@ -13,4 +15,3 @@
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
-

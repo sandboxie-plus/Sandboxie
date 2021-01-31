@@ -4,6 +4,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // German (Austria) resources
 
+#include "winres.h"
+
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
 #pragma code_page(1252)

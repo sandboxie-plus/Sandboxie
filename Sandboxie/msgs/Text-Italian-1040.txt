@@ -458,6 +458,10 @@ SBIE2223 Per aumentare il limite delle dimensioni dei file copiabili, fare doppi
 SBIE2301 %2
 .
 
+2302;pop;err;01
+SBIE2302 Conflitto di configurazione per l'elaborazione dell'immagine: %2
+.
+
 2303;pop;err;01
 SBIE2303 Impossibile eseguire l'hook di %2
 .
@@ -2823,6 +2827,10 @@ Elenco predefinito delle porte TCP/IP bloccate
 
 4294;txt;01
 Consenti ai programmi di aggiornare le jump list della barra delle applicazioni di Windows 7
+.
+
+4295;txt;01
+Esclusioni predefinite per la Copia dei file
 .
 
 #----------------------------------------------------------------------------

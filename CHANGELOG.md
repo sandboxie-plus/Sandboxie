@@ -13,28 +13,28 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added detection for waterfox.exe, Palemoon.exe, basilisk.exe and brave.exe firefox forks
 - added bluetooth API support, IPC port can be opened with "OpenBluetooth=y"
 -- this should resolve issues with many unity games hanging on startup for a long time
-- added enchanced RPC/IPC interface tracing
-- when DefaultBox is not found its by the SandMan UI its now recreated
-- added Disable Forces Process time is now savedand reloaded
+- added enhanced RPC/IPC interface tracing
+- when DefaultBox is not found by the SandMan UI, it will be recreated
+- "Disable Forced Programs" time is now saved and reloaded
 
 ### Changed
 - reduced sandman cpu usage
 - sandboxie.ini and templates.ini can now be UTF8 encoded
 -- this feature is experimental, files without a UTF-8 Signature should be recognized also
--- "ByteOrderMark=yes" is obsolete sandboxie.ini is now always saved with a BOM/Signature
+-- "ByteOrderMark=yes" is obsolete, sandboxie.ini is now always saved with a BOM/Signature
 - legacy language files can now be UTF8 encoded
-- reworked file migration behavioure, removed hard coded lists in favoure of templates
--- you can now use "CopyAlways=", "DontCopy=" and "CopyEmpty=" that suppores teh same syntax as "OpenFilePath="
--- "CopyBlockDenyWrite=program.exe,y" makes an write open call to a file that wont't be copied fail instead of turing it read only
-- removed hardcoded ShipHook list in favoure of templates
+- reworked file migration behaviour, removed hardcoded lists in favour of templates
+-- you can now use "CopyAlways=", "DontCopy=" and "CopyEmpty=" that support the same syntax as "OpenFilePath="
+-- "CopyBlockDenyWrite=program.exe,y" makes a write open call to a file that won't be copied fail instead of turning it read only
+- removed hardcoded SkipHook list in favour of templates
 
 ### Fixed
-- fixed old memory pool leak in the sbie drvier
+- fixed old memory pool leak in the sbie driver
 - fixed issue with item selection in the access restrictions ui
 - fixed updater crash in sbiectrl.exe
 - fixed issues wih RPC calls introduced in sbie 5.33.1
 - fixed recently broken terminate all command
-- fixed a coupel minor UI issues with Sandman UI
+- fixed a couple minor UI issues with Sandman UI
 - fixed IPC issue with windows 7 and 8 resulting in process termination
 - fixed "recover to" functionality
 
@@ -43,22 +43,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.6.0 / 5.46.5] - 2021-01-25
 
 ### Added
-- added comfirmation prompts to terminate all commands
+- added confirmation prompts to terminate all commands
 - added window title to boxed process info
 - added winspy based sandboxed window finder
 - added option to view disabled boxes and double click on box to enable it
 
 ### Changed
-- reset columns now resized them to fit the content, also "Reset Columns" can now be localized
+- "Reset Columns" now resizes them to fit the content, and it can now be localized
 - modal windows are now centered to the parent
 - improved new box window
 
 ### Fixed
 - fixed issues with window modality
 - fixed issues when main window was set to be always on top
-- fixed an driver issue with windows 10 insider build 21286
+- fixed a driver issue with windows 10 insider build 21286
 - fixed issues with snapshot dialog
-- fixed an issue when writing to a path that aready exist in the napshot but not outside
+- fixed an issue when writing to a path that already exist in the snapshot but not outside
 
 
 

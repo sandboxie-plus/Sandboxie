@@ -42,16 +42,12 @@
         <translation>默认</translation>
     </message>
     <message>
-        <source>Legacy (old sbie behaviour)</source>
-        <translation type="vanished">遗留 (旧沙盒行为)</translation>
-    </message>
-    <message>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 创建新沙盒</translation>
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>保留沙盒行为</translation>
     </message>
 </context>
 <context>
@@ -386,46 +382,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
+        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">您确定允许 %1 (%2) 访问网络吗?
+        <translation>您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 可以从 %2 快速恢复.
+        <translation>%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 遗留.
+        <translation>移动大文件 %1 到沙盒 %2, %3 剩余.
 完整路径: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -522,7 +498,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用</translation>
     </message>
 </context>
 <context>
@@ -1056,14 +1032,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>保持窗口最前</translation>
     </message>
     <message>
-        <source>Sellect box:</source>
-        <translation type="vanished">选择沙盒</translation>
-    </message>
-    <message>
-        <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">一些兼容性模板 (%1) 丢失, 可能被删除, 您确定在所有沙盒中删除它们?</translation>
-    </message>
-    <message>
         <source>Cleaned up removed templates...</source>
         <translation>清理已删除的模板...</translation>
     </message>
@@ -1077,47 +1045,47 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Reset Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>重置菜单</translation>
     </message>
     <message>
         <source>Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口查找器</translation>
     </message>
     <message>
         <source>Show Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>显示隐藏沙盒</translation>
     </message>
     <message>
         <source>Select box:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择沙盒</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>一些兼容性模板 (%1) 丢失, 可能被删除, 您确定在所有沙盒中删除它们?</translation>
     </message>
     <message>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定要终止所有沙盒中的所有进程吗?</translation>
     </message>
     <message>
         <source>Terminate all without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>不询问终止所有</translation>
     </message>
     <message>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation type="unfinished"></translation>
+        <translation>选择的窗口正作为程序 %1 一部分运行在 %2 中</translation>
     </message>
     <message>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择的窗口没有作为任何沙盒化程序的一部分运行</translation>
     </message>
     <message>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>拖动查找工具到一个窗口上去选择，然后松开鼠标检查窗口是否沙盒化</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 窗口查找器</translation>
     </message>
 </context>
 <context>
@@ -1148,7 +1116,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>标题</translation>
     </message>
 </context>
 <context>
@@ -1370,11 +1338,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定终止所选沙盒中的所有进程吗?</translation>
     </message>
     <message>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation type="unfinished"></translation>
+        <translation>此沙盒被禁用，您确定启用吗?</translation>
     </message>
 </context>
 <context>
@@ -1470,12 +1438,8 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>SandboxiePlus新沙盒</translation>
     </message>
     <message>
-        <source>Enter a name for the new box:</source>
-        <translation type="vanished">输入新沙盒名称:</translation>
-    </message>
-    <message>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒名称:</translation>
     </message>
 </context>
 <context>
@@ -2043,23 +2007,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="vanished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">应用</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;是</translation>
+        <translation>&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;否</translation>
+        <translation>&amp;否</translation>
     </message>
 </context>
 <context>

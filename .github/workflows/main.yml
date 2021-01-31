@@ -39,12 +39,12 @@ jobs:
 
 
 
-      #- name: Cache Qt
-      #  id: cache-qt
-      #  uses: actions/cache@v1
-      #  with:
-      #    path: ../Qt
-      #    key: ${{ matrix.qt-target }}-QtCache
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: Qt-5.15.1-QtCache
 
 
       - name: Install Qt 64 bit
@@ -68,6 +68,7 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
     
       - name: Installing Jom
+        if: steps.cache.outputs.cache-hit != 'true'
         run: SandboxiePlus\install_jom.cmd
 
 

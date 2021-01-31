@@ -83,13 +83,17 @@ jobs:
       - name: Merging Builds
         run: Installer\merge_builds.cmd
 
-      - name: Upload Sandboxie
+      - name: Upload Sandboxie 32
         uses: actions/upload-artifact@v2
         with:
-          name: Sandboxie
+          name: Sandboxie_x86
           path: |
             Installer/SbiePlus32/*
-            Installer/SbiePlus64/*
-
             
+      - name: Upload Sandboxie 64
+        uses: actions/upload-artifact@v2
+        with:
+          name: Sandboxie_x64
+          path: |
+            Installer/SbiePlus64/*
 

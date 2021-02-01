@@ -12,14 +12,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.6.7 / 5.47.1] - 2021-02-01
 
 ### Added
-- added UI Language auto detection
+- added UI language auto-detection
 
 ### Fixed
-- fixed brave.exe is now properly recognized as chrome based not firefox based
-- fixed issue introduced in 0.6.5 with recent edge builds
--- the 0.6.5 behavioure can be set ona per process basis using "RpcMgmtSetComTimeout=POPPeeper.exe,n"
+- fixed Brave.exe now being properly recognized as Chrome-, not Firefox-based
+- fixed issue introduced in 0.6.5 with recent Edge builds
+-- the 0.6.5 behaviour can be set on a per-process basis using "RpcMgmtSetComTimeout=POPPeeper.exe,n"
 - fixed grouping issues
-- fixed main windows restore state from tray
+- fixed main window restore state from tray
 
 
 

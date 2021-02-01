@@ -31,7 +31,7 @@
     <name>CNewBoxWindow</name>
     <message>
         <source>New Box</source>
-        <translation>新沙盒</translation>
+        <translation>新沙盤</translation>
     </message>
     <message>
         <source>Hardened</source>
@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Legacy (old sbie behaviour)</source>
-        <translation type="vanished">遺留 (舊沙盒行為)</translation>
+        <translation type="vanished">遺留 (舊 Sbie 行為)</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation>Sandboxie-Plus - 建立新沙盒</translation>
+        <translation>Sandboxie-Plus - 建立新沙盤</translation>
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Display box name in title</source>
-        <translation>標題顯示沙盒名稱</translation>
+        <translation>標題顯示沙盤名稱</translation>
     </message>
     <message>
         <source>Folder</source>
@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation>COM 物件必須被它們的 GUID 所限定，例如: {00000000-0000-0000-0000-000000000000}</translation>
+        <translation>COM 物件必須被它們的 GUID 所指定，例如: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>RT interfaces must be specified by their name.</source>
-        <translation>RT 介面必須被它們名稱所限定。</translation>
+        <translation>RT 介面必須被它們名稱所指定。</translation>
     </message>
     <message>
         <source>Browse for Program</source>
@@ -206,7 +206,7 @@
     </message>
     <message>
         <source>Please enter a program path</source>
-        <translation>請輸入程式路徑</translation>
+        <translation>請輸入程式位址</translation>
     </message>
     <message>
         <source>Please enter a service identifier</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>沙盒已刪除，故配置沒有被儲存</translation>
+        <translation>沙盤已刪除，故配置沒有被儲存</translation>
     </message>
     <message>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
@@ -238,43 +238,43 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>管理</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>管理全部</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>已關閉</translation>
     </message>
     <message>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>已關閉 RT</translation>
     </message>
     <message>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>唯讀</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>隱藏</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案和資料夾</translation>
     </message>
     <message>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>登錄</translation>
     </message>
     <message>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>IPC 位址</translation>
     </message>
     <message>
         <source>Wnd Class</source>
@@ -282,7 +282,7 @@
     </message>
     <message>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM 物件</translation>
     </message>
 </context>
 <context>
@@ -358,7 +358,7 @@
     <name>CPopUpRecovery</name>
     <message>
         <source>Recover to:</source>
-        <translation>恢復到:</translation>
+        <translation>恢復至:</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -386,7 +386,7 @@
     </message>
     <message>
         <source>Open file recovery for this box</source>
-        <translation>為此沙盒開啟檔案恢復</translation>
+        <translation>為此沙盤開啟檔案恢復</translation>
     </message>
     <message>
         <source>Dismiss</source>
@@ -398,11 +398,11 @@
     </message>
     <message>
         <source>Dismiss all from this box</source>
-        <translation>此沙盒忽略全部</translation>
+        <translation>為此沙盤全部忽略</translation>
     </message>
     <message>
         <source>Disable quick recovery until the box restarts</source>
-        <translation>在沙盒重新啟動前禁用快速恢復</translation>
+        <translation>在沙盤重新啟動前禁用快速恢復</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -429,12 +429,12 @@
     </message>
     <message>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation>您想允許列印服務在沙盒外寫入，因為 %1 (%2) 嗎？</translation>
+        <translation>您想允許列印服務在沙盤外寫入，因 %1 (%2) 嗎？</translation>
     </message>
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">您確定允許 %4 (%5) 複製大型檔案 %1 至沙盒: %2？
+        <translation type="vanished">您確定允許 %4 (%5) 複製大型檔案 %1 至沙盤: %2？
 檔案名稱: %3</translation>
     </message>
     <message>
@@ -452,7 +452,7 @@ The file was written by: %3</source>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">移動大檔案 %1 至沙盒 %2，%3 遺留。
+        <translation type="vanished">移動大檔案 %1 至沙盤 %2，%3 遺留。
 完整位址: %4</translation>
     </message>
     <message>
@@ -504,7 +504,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation>有 %1 檔案和 %2 資料夾位於沙盒中，佔用磁碟 %3 位元組。</translation>
+        <translation>有 %1 檔案和 %2 資料夾位於沙盤中，佔用磁碟 %3 位元組。</translation>
     </message>
 </context>
 <context>
@@ -581,7 +581,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;新版本 Sandboxie-Plus 將被下載到:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;您想要開始安裝嗎？正在沙盒運作的其他程式將會被終止。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;新版本 Sandboxie-Plus 將被下載到:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;您想要開始安裝嗎？正在沙盤化運作的其他程式將會被終止。&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
@@ -605,7 +605,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Error deleting sandbox folder: %1</source>
-        <translation>刪除沙盒資料夾錯誤: %1</translation>
+        <translation>刪除沙盤資料夾錯誤: %1</translation>
     </message>
     <message>
         <source>About Sandboxie-Plus</source>
@@ -641,7 +641,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Failed to copy configuration from sandbox %1: %2</source>
-        <translation>複製沙盒配置 %1: %2 失敗</translation>
+        <translation>複製沙盤配置 %1: %2 失敗</translation>
     </message>
     <message>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
@@ -729,7 +729,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
-        <translation>沙盒名稱不能超過32個字元。</translation>
+        <translation>沙盤名稱不能超過32個字元。</translation>
     </message>
     <message>
         <source>Stop Driver</source>
@@ -811,7 +811,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>確定要在沙盒化 (是) 未沙盒化 (否) 的瀏覽器中開啟  %1 嗎？</translation>
+        <translation>確定要在沙盤化 (是) 未沙盤化 (否) 的瀏覽器中開啟  %1 嗎？</translation>
     </message>
     <message>
         <source>Reset all hidden messages</source>
@@ -819,15 +819,15 @@ Full path: %4</source>
     </message>
     <message>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation>刪除沙盒之前必須清空。</translation>
+        <translation>刪除沙盤之前必須清空。</translation>
     </message>
     <message>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
-        <translation>沙盒名稱不能為空白，只能包含字母、數字和下劃線。</translation>
+        <translation>沙盤名稱不能為空白，只能包含字母、數字和下劃線。</translation>
     </message>
     <message>
         <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation>重新命名沙盒之前必須清空。</translation>
+        <translation>重新命名沙盤之前必須將其清空。</translation>
     </message>
     <message>
         <source>API Call Logging</source>
@@ -851,7 +851,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>The sandbox name can not be a device name.</source>
-        <translation>沙盒名稱不能為裝置名稱。</translation>
+        <translation>沙盤名稱不能為裝置名稱。</translation>
     </message>
     <message>
         <source>Operation failed for %1 item(s).</source>
@@ -867,7 +867,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Sandbox</source>
-        <translation>&amp;沙盒</translation>
+        <translation>&amp;沙盤</translation>
     </message>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
@@ -915,7 +915,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Delete protection is enabled for the sandbox</source>
-        <translation>沙盒的刪除保護被已啟用</translation>
+        <translation>沙盤的刪除保護被已啟用</translation>
     </message>
     <message>
         <source>&amp;Advanced</source>
@@ -943,7 +943,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Create New Box</source>
-        <translation>建立新沙盒</translation>
+        <translation>建立新沙盤</translation>
     </message>
     <message>
         <source>Failed to copy RegHive</source>
@@ -959,7 +959,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Failed to delete sandbox %1: %2</source>
-        <translation>刪除沙盒 %1: %2 失敗</translation>
+        <translation>刪除沙盤 %1: %2 失敗</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
@@ -1007,7 +1007,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>因處理程序正在沙盒中運作，此快照操作無法完成。</translation>
+        <translation>因處理程序正在沙盤中運作，此快照操作無法完成。</translation>
     </message>
     <message>
         <source>server not reachable</source>
@@ -1027,7 +1027,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No sandboxes found; creating: %1</source>
-        <translation type="vanished">沒找到沙盒；建立: %1</translation>
+        <translation type="vanished">未找到沙盤；建立: %1</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
@@ -1047,7 +1047,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>A sandbox of the name %1 already exists</source>
-        <translation>沙盒名稱 %1 已存在</translation>
+        <translation>沙盤名稱 %1 已存在</translation>
     </message>
     <message>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
@@ -1075,7 +1075,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
-        <translation>Sandboxie-Plus 於便攜模式中啟動，您想將沙盒目錄放到它的上級目錄嗎？</translation>
+        <translation>Sandboxie-Plus 於便攜模式中啟動，您想將沙盤目錄放到它的上級目錄嗎？</translation>
     </message>
     <message>
         <source>The file %1 already exists, do you want to overwrite it?</source>
@@ -1088,8 +1088,8 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>要使用API記錄日誌首先必須從 https://github.com/sandboxie-plus/LogApiDll 下載 LogApiDll，並使用沙盒建立。
-請下載最新發布版本，並使用 sandboxie.ini 安裝，詳情請參考 README.md 中此項目的說明。</translation>
+        <translation>要使用 API 記錄日誌首先必須從 https://github.com/sandboxie-plus/LogApiDll 下載 LogApiDll，並為一個或更多沙盤設定。
+請下載最新發布版本，並使用 sandboxie.ini 安裝，更多內容請參考 README.md 中此項目的說明。</translation>
     </message>
     <message>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
@@ -1105,11 +1105,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Sellect box:</source>
-        <translation type="vanished">選取沙盒:</translation>
+        <translation type="vanished">選取沙盤:</translation>
     </message>
     <message>
         <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">一些相容性模板 (%1) 丟失，可能已被刪除，您確定要從所有沙盒中刪除它們嗎？</translation>
+        <translation type="vanished">一些相容性模板 (%1) 丟失，可能已被刪除，您確定要從所有沙盤中刪除它們嗎？</translation>
     </message>
     <message>
         <source>Cleaned up removed templates...</source>
@@ -1117,11 +1117,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation>無法為空白沙盒建立快照</translation>
+        <translation>無法為空白沙盤建立快照</translation>
     </message>
     <message>
         <source>A sandbox with that name already exists</source>
-        <translation>已存在同名沙盒</translation>
+        <translation>已存在同名沙盤</translation>
     </message>
     <message>
         <source>Reset Columns</source>
@@ -1133,19 +1133,19 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Show Hidden Boxes</source>
-        <translation>顯示隱藏沙盒</translation>
+        <translation>顯示隱藏沙盤</translation>
     </message>
     <message>
         <source>Select box:</source>
-        <translation>選取沙盒:</translation>
+        <translation>選取沙盤:</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation>一些相容性模板已丟失，可能是已被刪除，是否從所有沙盒中移除它們？</translation>
+        <translation>一些相容性模板已丟失，可能是已被刪除，是否從所有沙盤中移除它們？</translation>
     </message>
     <message>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation>是否終止所有沙盒中的所有處理程式？</translation>
+        <translation>是否終止所有沙盤中的所有處理程式？</translation>
     </message>
     <message>
         <source>Terminate all without asking</source>
@@ -1153,15 +1153,15 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation>所選取的視窗正作為沙盒 %2 中的程式 %1 運作</translation>
+        <translation>所選取的視窗正作為沙盤 %2 中的程式 %1 運作</translation>
     </message>
     <message>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation>所選取的視窗並不屬於任何沙盒化程式。</translation>
+        <translation>所選取的視窗並不屬於任何沙盤化程式。</translation>
     </message>
     <message>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>托拽尋找工具至一個視窗上以選取它，然後釋放滑鼠以檢查其是否已被沙盒化。</translation>
+        <translation>托拽尋找工具至一個視窗上以選取它，然後釋放滑鼠以檢查其是否已被沙盤化。</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
@@ -1188,7 +1188,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Box Groupe</source>
-        <translation>沙盒群組</translation>
+        <translation>沙盤群組</translation>
     </message>
     <message>
         <source>Status</source>
@@ -1230,7 +1230,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Create Shortcut to sandbox %1</source>
-        <translation>為沙盒 %1 建立捷徑</translation>
+        <translation>為沙盤 %1 建立捷徑</translation>
     </message>
     <message>
         <source>Options:
@@ -1252,11 +1252,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Sandbox Options</source>
-        <translation>沙盒選項</translation>
+        <translation>沙盤選項</translation>
     </message>
     <message>
         <source>Sandbox Presets</source>
-        <translation>沙盒預設</translation>
+        <translation>沙盤預設</translation>
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)</source>
@@ -1268,11 +1268,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Remove Sandbox</source>
-        <translation>刪除沙盒</translation>
+        <translation>刪除沙盤</translation>
     </message>
     <message>
         <source>Rename Sandbox</source>
-        <translation>重新命名沙盒</translation>
+        <translation>重新命名沙盤</translation>
     </message>
     <message>
         <source>Run from Start Menu</source>
@@ -1296,7 +1296,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation>請為沙盒輸入新名稱</translation>
+        <translation>請為沙盤輸入新名稱</translation>
     </message>
     <message>
         <source>Add Group</source>
@@ -1312,7 +1312,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>確定要刪除所選沙盒嗎？</translation>
+        <translation>確定要刪除所選沙盤嗎？</translation>
     </message>
     <message>
         <source>Run Program</source>
@@ -1362,7 +1362,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Force into this sandbox</source>
-        <translation>強制加入此沙盒</translation>
+        <translation>強制加入此沙盤</translation>
     </message>
     <message>
         <source>Allow Network Shares</source>
@@ -1390,7 +1390,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Create New Box</source>
-        <translation>建立新沙盒</translation>
+        <translation>建立新沙盤</translation>
     </message>
     <message>
         <source>Pin to Run Menu</source>
@@ -1402,7 +1402,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation>此沙盒無網際網路限制，確定要啟用它們嗎？</translation>
+        <translation>此沙盤無網際網路限制，確定要啟用它們嗎？</translation>
     </message>
     <message>
         <source>Explore Content</source>
@@ -1418,23 +1418,23 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>This Sandbox is already empty.</source>
-        <translation>此沙盒為空。</translation>
+        <translation>此沙盤為空。</translation>
     </message>
     <message>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation>您確定要刪除所選沙盒的內容？</translation>
+        <translation>您確定要刪除所選沙盤的內容？</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation>您確定要刪除多個沙盒的內容？</translation>
+        <translation>您確定要刪除多個沙盤的內容？</translation>
     </message>
     <message>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation>您確定要終止選定沙盒中的所有處理程序？</translation>
+        <translation>您確定要終止選定沙盤中的所有處理程序？</translation>
     </message>
     <message>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>此沙盒已禁用，是否啟用？</translation>
+        <translation>此沙盤已禁用，是否啟用？</translation>
     </message>
     <message>
         <source>This Sandbox is empty.</source>
@@ -1519,11 +1519,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <name>NewBoxWindow</name>
     <message>
         <source>Copy options from an existing box:</source>
-        <translation>從已有沙盒複製選項:</translation>
+        <translation>從已有沙盤複製選項:</translation>
     </message>
     <message>
         <source>Initial sandbox configuration:</source>
-        <translation>初始沙盒配置:</translation>
+        <translation>初始沙盤配置:</translation>
     </message>
     <message>
         <source>Select restriction/isolation template:</source>
@@ -1531,15 +1531,15 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>SandboxiePlus new box</source>
-        <translation>SandboxiePlus 新沙盒</translation>
+        <translation>SandboxiePlus 新沙盤</translation>
     </message>
     <message>
         <source>Enter a name for the new box:</source>
-        <translation type="vanished">輸入新沙盒名稱:</translation>
+        <translation type="vanished">輸入新沙盤名稱:</translation>
     </message>
     <message>
         <source>Sandbox Name:</source>
-        <translation>沙盒名稱:</translation>
+        <translation>沙盤名稱:</translation>
     </message>
 </context>
 <context>
@@ -1562,7 +1562,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Allow only selected programs to start in this sandbox. *</source>
-        <translation>僅允許被選取的程式在此沙盒中啟動。 *</translation>
+        <translation>僅允許被選取的程式在此沙盤中啟動。 *</translation>
     </message>
     <message>
         <source>Force Folder</source>
@@ -1574,7 +1574,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Sandbox Indicator in title:</source>
-        <translation>在標題顯示沙盒標記:</translation>
+        <translation>在標題顯示沙盤標記:</translation>
     </message>
     <message>
         <source>Debug</source>
@@ -1586,7 +1586,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>&lt;- for this one the above does not apply</source>
-        <translation>&lt;- 因為此原因，以上不套用</translation>
+        <translation>&lt;- 啟用此選項後以上內容將不套用</translation>
     </message>
     <message>
         <source>Block network files and folders, unless specifically opened.</source>
@@ -1598,7 +1598,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
-        <translation>不要改變由沙盒程式建立的視窗類名</translation>
+        <translation>不要改變由沙盤程式建立的視窗類名</translation>
     </message>
     <message>
         <source>Prevent change to network and firewall parameters</source>
@@ -1614,13 +1614,13 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
         <translation>配置處理程序所訪問的資源。雙擊進入編輯。
-&apos;管理&apos; 檔案和機碼僅適用於沙盒外的程式二進位制檔案。
+&apos;管理&apos; 檔案和機碼僅適用於沙盤外的程式二進位制檔案。
 注意所有關閉的...=!&lt;程式&gt;,... 例外也有相同限制。
 想要管理檔案訪問可使用 &apos;管理全部&apos; 使其套用至至全部程式。</translation>
     </message>
     <message>
         <source>Log Debug Output to the Trace Log</source>
-        <translation>日誌除錯輸出到追蹤日誌</translation>
+        <translation>記錄除錯輸出至追蹤日誌</translation>
     </message>
     <message>
         <source>Forced Programs</source>
@@ -1660,7 +1660,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Allow all programs to start in this sandbox.</source>
-        <translation>允許所有程式在此沙盒中啟動。</translation>
+        <translation>允許所有程式在此沙盤中啟動。</translation>
     </message>
     <message>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
@@ -1696,7 +1696,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Protect the sandbox integrity itself</source>
-        <translation>沙盒完整性保護</translation>
+        <translation>沙盤完整性保護</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -1728,7 +1728,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>錯誤程式碼1307，程式被拒絕訪問網路</translation>
+        <translation>當程式被拒絕訪問網路時提示 1307 訊息</translation>
     </message>
     <message>
         <source>Compatibility</source>
@@ -1740,15 +1740,15 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
-        <translation>注意: 安裝在此沙盒裡的程式將完全無法訪問網路。</translation>
+        <translation>注意: 安裝在此沙盤裡的程式將完全無法訪問網路。</translation>
     </message>
     <message>
         <source>Box Options</source>
-        <translation>沙盒選項</translation>
+        <translation>沙盤選項</translation>
     </message>
     <message>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation>不允許沙盒化的處理程序檢視其他沙盒裡處理程序的運作</translation>
+        <translation>不允許沙盤化的處理程序檢視其他沙盤裡處理程序的運作</translation>
     </message>
     <message>
         <source>Add Group</source>
@@ -1756,11 +1756,11 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Sandboxed window border:</source>
-        <translation>沙盒化視窗邊框:</translation>
+        <translation>沙盤化視窗邊框:</translation>
     </message>
     <message>
         <source>Prevent selected programs from starting in this sandbox.</source>
-        <translation>阻止所選程式在此沙盒中啟動。</translation>
+        <translation>阻止所選程式在此沙盤中啟動。</translation>
     </message>
     <message>
         <source>Miscellaneous</source>
@@ -1768,7 +1768,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>問題程式碼 2102，檔案過大</translation>
+        <translation>當檔案過大時提示 2102 訊息</translation>
     </message>
     <message>
         <source>File Recovery</source>
@@ -1776,7 +1776,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Box Delete options</source>
-        <translation>沙盒刪除選項</translation>
+        <translation>沙盤刪除選項</translation>
     </message>
     <message>
         <source>Pipe Trace</source>
@@ -1812,7 +1812,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Protect the system from sandboxed processes</source>
-        <translation>保護系統免受來自沙盒化處理程序的訪問</translation>
+        <translation>保護系統免受來自沙盤化處理程序的訪問</translation>
     </message>
     <message>
         <source>Add Leader Program</source>
@@ -1836,7 +1836,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Sandbox protection</source>
-        <translation>沙盒保護</translation>
+        <translation>沙盤保護</translation>
     </message>
     <message>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
@@ -1844,7 +1844,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</source>
-        <translation>保護沙盒化系統處理程序免受來自未授權的未沙盒化處理程序訪問</translation>
+        <translation>保護沙盤化系統處理程序免受來自未授權的未沙盤化處理程序訪問</translation>
     </message>
     <message>
         <source>COM Class Trace</source>
@@ -1860,11 +1860,11 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>當快速恢復功能被啟用，將檢查下列資料夾沙盒化內容。</translation>
+        <translation>當快速恢復功能被啟用，將檢查下列資料夾沙盤化內容。</translation>
     </message>
     <message>
         <source>px Width</source>
-        <translation>px 寬度</translation>
+        <translation>寬度像素</translation>
     </message>
     <message>
         <source>Add User</source>
@@ -1872,7 +1872,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
-        <translation>此處輸入的程式，或指定位置啟動的程式，將自動加入此沙盒，除非它們被確定已在其他沙盒啟動。</translation>
+        <translation>此處輸入的程式，或指定位置啟動的程式，將自動加入此沙盤，除非它們被確定已在其他沙盤啟動。</translation>
     </message>
     <message>
         <source>Force Program</source>
@@ -1880,7 +1880,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation>警告，這些選項可以使核心安全保障失效並且破壞沙盒安全!!!</translation>
+        <translation>警告，這些選項可以使核心安全保障失效並且破壞沙盤安全!!!</translation>
     </message>
     <message>
         <source>Edit ini</source>
@@ -1912,7 +1912,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation>新增沙盒化處理程序到工作物件(建議)</translation>
+        <translation>新增沙盤化處理程序至工作物件(建議)</translation>
     </message>
     <message>
         <source>Remove Program</source>
@@ -1944,23 +1944,23 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Protect this sandbox from deletion or emptying</source>
-        <translation>保護此沙盒刪除或清空</translation>
+        <translation>保護此沙盤以防止被刪除或清空</translation>
     </message>
     <message>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation>新增使用者賬戶和使用者群組到下面清單中來僅限這些賬戶使用沙盒。如果清單內容為空，所有賬戶都將可以使用沙盒。
+        <translation>新增使用者賬戶和使用者群組至下列清單中來僅限這些賬戶使用沙盤。如果清單內容為空，所有賬戶都將可以使用沙盤。
 
-注意: 沙盒的強制執行程式和強制執行資料夾設定不接受不能執行沙盒的賬戶。</translation>
+注意: 沙盤的強制執行程式和強制執行資料夾設定不接受不能執行沙盤的賬戶。</translation>
     </message>
     <message>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
-        <translation>* 注意: 安裝在此沙盒裡的程式將完全無法啟動。</translation>
+        <translation>* 注意: 安裝至此沙盤裡的程式將完全無法啟動。</translation>
     </message>
     <message>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation>此清單包含大量沙盒相容性增強模板</translation>
+        <translation>此清單包含大量沙盤相容性增強模板</translation>
     </message>
     <message>
         <source>Add Lingering Program</source>
@@ -1972,7 +1972,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>錯誤程式碼 1308，程式啟動失敗</translation>
+        <translation>當程式啟動失敗時提示 1308 訊息</translation>
     </message>
     <message>
         <source>Resource Access</source>
@@ -1984,7 +1984,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation>隱藏沙盒中執行中處理程序的主處理程序。</translation>
+        <translation>隱藏沙盤中執行中處理程序的主處理程序。</translation>
     </message>
     <message>
         <source>File Migration</source>
@@ -1992,7 +1992,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Auto delete content when last sandboxed process terminates</source>
-        <translation>當最後的沙盒化的處理程序終止後自動刪除內容</translation>
+        <translation>當最後的沙盤化的處理程序終止後自動刪除內容</translation>
     </message>
     <message>
         <source>Add COM Object</source>
@@ -2000,7 +2000,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation>您可為沙盒執行選單配置自訂條目。</translation>
+        <translation>您可為沙盤執行選單配置自訂條目。</translation>
     </message>
     <message>
         <source>Start Restrictions</source>
@@ -2012,7 +2012,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Edit ini Section</source>
-        <translation>編輯 ini 部分</translation>
+        <translation>編輯 ini 選項</translation>
     </message>
     <message>
         <source>Block access to the printer spooler</source>
@@ -2020,7 +2020,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Allow the print spooler to print to files outside the sandbox</source>
-        <translation>允許列印服務在沙盒外列印檔案</translation>
+        <translation>允許列印服務在沙盤外列印檔案</translation>
     </message>
     <message>
         <source>Printing</source>
@@ -2028,7 +2028,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
-        <translation>移除列印限制，印表機可安裝至沙盒外</translation>
+        <translation>移除列印限制，印表機可安裝至沙盤外</translation>
     </message>
     <message>
         <source>Add program</source>
@@ -2040,7 +2040,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation>這裡您可以指定將在沙盒啟用時自動啟動的程式或服務</translation>
+        <translation>這裡您可以指定將在沙盤啟用時自動啟動的程式或服務</translation>
     </message>
     <message>
         <source>Add service</source>
@@ -2048,7 +2048,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation>不啟動使用系統令牌的沙盒化服務 (建議)</translation>
+        <translation>不啟動使用系統令牌的沙盤化服務 (建議)</translation>
     </message>
     <message>
         <source>Allow access to Smart Cards</source>
@@ -2060,7 +2060,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Sandbox isolation</source>
-        <translation>沙盒隔離</translation>
+        <translation>沙盤隔離</translation>
     </message>
     <message>
         <source>Auto Exec</source>
@@ -2068,7 +2068,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation>這裡您可以指定每次沙盒啟動被執行的命令清單。</translation>
+        <translation>這裡您可以指定每次沙盤啟動被執行的命令清單。</translation>
     </message>
     <message>
         <source>Log all access events as seen by the driver to the resource access log.
@@ -2079,18 +2079,18 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>將驅動程式所見所有訪問事件記錄到資源訪問日誌中。
+        <translation>將驅動程式所見所有訪問事件記錄至資源訪問日誌中。
 
-這些選項設定事件標記到 &quot;*&quot; - 所有訪問事件
-您可以通過 ini 來詳細訂製記錄
-&quot;A&quot; - 允許訪問
-&quot;D&quot; - 拒絕訪問
-&quot;I&quot; - 忽略拒絕請求
-代替 &quot;*&quot;.</translation>
+這些選項將設定事件標記至 &quot;*&quot; - 所有訪問事件
+您可在 ini 中自訂日誌，通過指定
+&quot;A&quot; - 已允許的訪問
+&quot;D&quot; - 已拒絕的訪問
+&quot;I&quot; - 已忽略的訪問請求
+替代 &quot;*&quot;.</translation>
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>允許訪問藍牙</translation>
     </message>
 </context>
 <context>
@@ -2177,7 +2177,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Path</source>
-        <translation>路徑</translation>
+        <translation>位址</translation>
     </message>
     <message>
         <source>Change Password</source>
@@ -2237,7 +2237,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation>沙盒 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;登錄檔根目錄&lt;/a&gt;: </translation>
+        <translation>沙盤 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;登錄檔根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Add Program</source>
@@ -2245,19 +2245,19 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>Sandboxie 在您系統中檢測到下列軟體程式. 點選 確定 接受配置設定，將增強這些軟體程式的相容性。這些配置設定將影響所有已存在的沙盒和之後的新沙盒。</translation>
+        <translation>Sandboxie 在您系統中檢測到下列軟體程式. 點選 OK 接受配置設定，將增強這些軟體程式的相容性。這些配置設定將影響所有已存在的沙盤和之後建立的新沙盤。</translation>
     </message>
     <message>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation>檢視 Sandboxie.ini 變更</translation>
+        <translation>追蹤 Sandboxie.ini 變更</translation>
     </message>
     <message>
         <source>Show Sys-Tray</source>
-        <translation>系統工具列顯示</translation>
+        <translation>在系統工具列顯示</translation>
     </message>
     <message>
         <source>Open urls from this ui sandboxed</source>
-        <translation>在此使用者介面開啟的連結都將沙盒化</translation>
+        <translation>沙盤化在此 UI 開啟的連結</translation>
     </message>
     <message>
         <source>In the future, don&apos;t check software compatibility</source>
@@ -2269,7 +2269,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>當下列程式在任意沙盒之外啟動時，Sandboxie 將出現錯誤程式碼 SBIE1301。</translation>
+        <translation>當下列程式在任意沙盤之外啟動時，Sandboxie 將提示 SBIE1301 訊息。</translation>
     </message>
     <message>
         <source>Remove Program</source>
@@ -2285,15 +2285,15 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>在檔案總管新增&apos;在沙盒中執行&apos; </translation>
+        <translation>在檔案總管新增&apos;在沙盤中執行&apos; </translation>
     </message>
     <message>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>錯誤程式碼 1308，程式啟動失敗</translation>
+        <translation>當程式啟動失敗時提示 1308 訊息</translation>
     </message>
     <message>
         <source>Sandbox default</source>
-        <translation>沙盒預設</translation>
+        <translation>沙盤預設</translation>
     </message>
     <message>
         <source>Separate user folders</source>
@@ -2313,7 +2313,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation>沙盒 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC 根目錄&lt;/a&gt;: </translation>
+        <translation>沙盤 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC 根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Show Notifications for relevant log Messages</source>
@@ -2321,7 +2321,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation>沙盒 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;檔案系統根目錄&lt;/a&gt;: </translation>
+        <translation>沙盤 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;檔案系統根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Portable root folder</source>
@@ -2333,11 +2333,11 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Start UI when a sandboxed process is started</source>
-        <translation>當沙盒化處理程序啟動時啟動 UI</translation>
+        <translation>當沙盤化處理程序啟動時啟動 UI</translation>
     </message>
     <message>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation>當清空沙盒時顯示第一個恢復視窗</translation>
+        <translation>當清空沙盤時顯示第一個恢復視窗</translation>
     </message>
     <message>
         <source>...</source>

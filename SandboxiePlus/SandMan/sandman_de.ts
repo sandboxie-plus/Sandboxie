@@ -269,12 +269,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1486"/>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesperrt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1487"/>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesperrt RT</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1488"/>

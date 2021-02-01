@@ -16,7 +16,7 @@ public:
 		QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
 		if (type == QStyle::CT_TabBarTab) {
 			s.transpose();
-			if(theConf->GetBool("Options/DarkTheme", false))
+			if(theGUI->m_DarkTheme)
 				s.setHeight(s.height() * 13 / 10);
 			else
 				s.setHeight(s.height() * 15 / 10);
@@ -368,9 +368,17 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
-	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape && ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
 	{
 		CloseAccessEdit(false);
+		return true; // cancel event
+	}
+
+	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	{
+		CloseAccessEdit(true);
 		return true; // cancel event
 	}
 	
@@ -996,9 +1004,10 @@ QString COptionsWindow::SelectProgram(bool bOrGroup)
 	if (!progDialog.exec())
 		return QString();
 
-	QString Program = progDialog.value();
+	// Note: pressing enter adds the value to the combo list !
+	QString Program = progDialog.value(); 
 	int Index = progDialog.findValue(Program);
-	if (Index != -1)
+	if (Index != -1 && progDialog.data().isValid())
 		Program = progDialog.data().toString();
 
 	return Program;

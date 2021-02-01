@@ -209,18 +209,8 @@ _FX BOOLEAN Config_MatchImageGroup(
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value)
+_FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value, ULONG* pMode)
 {
-    ULONG image_len = (wcslen(Dll_ImageName) + 1) * sizeof(WCHAR);
-    WCHAR* image_lwr = Dll_AllocTemp(image_len);
-    if (!image_lwr) {
-        SbieApi_Log(2305, NULL);
-        return NULL;
-    }
-    memcpy(image_lwr, Dll_ImageName, image_len);
-    _wcslwr(image_lwr);
-    //image_len = wcslen(image_lwr);
-
     //
     // if the setting indicates an image name followed by a comma,
     // then match the image name against the executing process.
@@ -242,9 +232,11 @@ _FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value)
         else
             inv = FALSE;
 
+        if (pMode) *pMode = inv ? 1 : 0; // 1 - match by negation, 0 - exact match
+
         ULONG len = (ULONG)(tmp - value);
         if (len) {
-            match = Config_MatchImage(value, len, image_lwr, 1);
+            match = Config_MatchImage(value, len, Dll_ImageName, 1);
             if (inv)
                 match = !match;
             if (!match)
@@ -253,10 +245,29 @@ _FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value)
 
         value = tmp ? tmp + 1 : NULL;
     }
+    else {
 
-    Dll_Free(image_lwr);
+        if (pMode) *pMode = 2; // 2 - global default
+    }
 
     return value;
+}
+
+
+//---------------------------------------------------------------------------
+// Config_GetSettingsForImageName_bool
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval)
+{
+    WCHAR value[16];
+    Config_GetSettingsForImageName(setting, value, sizeof(value), NULL);
+    if (*value == L'y' || *value == L'Y')
+        return TRUE;
+    if (*value == L'n' || *value == L'N')
+        return FALSE;
+    return defval;
 }
 
 
@@ -280,7 +291,7 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
             break;
         ++index;
 
-        WCHAR* value = Config_MatchImageAndGetValue(conf_buf);
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, NULL);
         if (value)
         {
             pat = Pattern_Create(Dll_Pool, value, TRUE);
@@ -302,7 +313,7 @@ _FX NTSTATUS Config_GetSettingsForImageName(
     const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext)
 {
     WCHAR conf_buf[2048];
-    WCHAR* found_value = NULL;
+    ULONG found_mode = -1;
 
     ULONG index = 0;
     while (1) {
@@ -313,19 +324,22 @@ _FX NTSTATUS Config_GetSettingsForImageName(
             break;
         ++index;
 
-        WCHAR* value = Config_MatchImageAndGetValue(conf_buf);
-        if (!value)
+        ULONG mode = -1;
+        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, &mode);
+        if (!found_value || mode > found_mode)
             continue;
-        if (found_value) {
-            SbieApi_Log(2302, L"%S - %S [%S]", setting, Dll_ImageName, Dll_BoxName);
-            break;
-        }
-        found_value = value;
+        //if (found_value) {
+        //    SbieApi_Log(2302, L"%S - %S [%S]", setting, Dll_ImageName, Dll_BoxName);
+        //    break;
+        //}
+        wcscpy_s(value, value_size / sizeof(WCHAR), found_value);
+        found_mode = mode;
     }
 
-    if (found_value)  wcscpy_s(value, value_size / sizeof(WCHAR), found_value);
-    else if (deftext) wcscpy_s(value, value_size / sizeof(WCHAR), deftext);
-    else value[0] = L'\0';
+    if (found_mode == -1) {
+        if (deftext) wcscpy_s(value, value_size / sizeof(WCHAR), deftext);
+        else value[0] = L'\0';
+    }
 
     return STATUS_SUCCESS;
 }

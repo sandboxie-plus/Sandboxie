@@ -741,13 +741,12 @@ BOOLEAN ComDlg32_Init(HMODULE);
 //---------------------------------------------------------------------------
 
 
-WCHAR* Config_MatchImageAndGetValue(WCHAR* value);
-
 BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
 
 NTSTATUS Config_GetSettingsForImageName(
     const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
 
+BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);
 
 //---------------------------------------------------------------------------
 

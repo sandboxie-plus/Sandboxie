@@ -91,7 +91,8 @@ QList<QVariant>	CSbieModel::MakeBoxPath(const QVariant& Name, const QMap<QString
 	QString ParentID = FindParent(Name, Groups);
 
 	QList<QVariant> Path;
-	if (!ParentID.isEmpty() && ParentID != Name)
+	if (!ParentID.isEmpty() && ParentID != Name 
+	 && !Groups.value(CSbieModel__RemoveGroupMark(Name.toString())).contains(CSbieModel__RemoveGroupMark(ParentID)))
 	{
 		Path = MakeBoxPath(ParentID, Groups);
 		Path.append(ParentID);

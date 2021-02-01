@@ -7,6 +7,26 @@
 #include "../QSbieAPI/SbieUtils.h"
 
 
+int CSettingsWindow__Chk2Int(Qt::CheckState state)
+{
+	switch (state) {
+	case Qt::Unchecked: return 0;
+	case Qt::Checked: return 1;
+	default:
+	case Qt::PartiallyChecked: return 2;
+	}
+}
+
+Qt::CheckState CSettingsWindow__Int2Chk(int state)
+{
+	switch (state) {
+	case 0: return Qt::Unchecked;
+	case 1: return Qt::Checked;
+	default:
+	case 2: return Qt::PartiallyChecked;
+	}
+}
+
 CSettingsWindow::CSettingsWindow(QWidget *parent)
 	: QDialog(parent)
 {
@@ -27,7 +47,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.tabs->setCurrentIndex(0);
 
-	ui.uiLang->addItem("International English", "");
+	ui.uiLang->addItem(tr("Auto Detection"), "");
+	ui.uiLang->addItem("International English", "en");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
 	foreach(const QString& langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{
@@ -36,29 +57,20 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		QString Lang = Locale.nativeLanguageName();
 		ui.uiLang->addItem(Lang, Code);
 	}
-	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/Language")));
+	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
 	ui.chkSvcStart->setChecked(theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true));
 
-	switch (theConf->GetInt("Options/CheckForUpdates", 2)) {
-	case 0: ui.chkAutoUpdate->setCheckState(Qt::Unchecked); break;
-	case 1: ui.chkAutoUpdate->setCheckState(Qt::Checked); break;
-	case 2: ui.chkAutoUpdate->setCheckState(Qt::PartiallyChecked); break;
-	}
-
+	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
 
 	ui.chkShellMenu->setCheckState((Qt::CheckState)CSbieUtils::IsContextMenu());
 
-	ui.chkDarkTheme->setChecked(theConf->GetBool("Options/DarkTheme", false));
+	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
 
 	ui.chkNotifications->setChecked(theConf->GetBool("Options/ShowNotifications", true));
 
-	switch (theConf->GetInt("Options/OpenUrlsSandboxed", 2)) {
-	case 0: ui.chkSandboxUrls->setCheckState(Qt::Unchecked); break;
-	case 1: ui.chkSandboxUrls->setCheckState(Qt::Checked); break;
-	case 2: ui.chkSandboxUrls->setCheckState(Qt::PartiallyChecked); break;
-	}
+	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 
@@ -177,18 +189,14 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 
 void CSettingsWindow::apply()
 {
-	theConf->SetValue("Options/Language", ui.uiLang->currentData());
+	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
 
-	theConf->SetValue("Options/DarkTheme", ui.chkDarkTheme->isChecked());
+	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 	theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", ui.chkSvcStart->isChecked());
 
-	switch (ui.chkAutoUpdate->checkState()) {
-	case Qt::Unchecked: theConf->SetValue("Options/CheckForUpdates", 0); break;
-	case Qt::PartiallyChecked: theConf->SetValue("Options/CheckForUpdates", 2); break;
-	case Qt::Checked: theConf->SetValue("Options/CheckForUpdates", 1); break;
-	}
+	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
 
 	if (ui.chkShellMenu->checkState() != CSbieUtils::IsContextMenu())
 	{
@@ -200,11 +208,7 @@ void CSettingsWindow::apply()
 
 	theConf->SetValue("Options/ShowNotifications", ui.chkNotifications->isChecked());
 
-	switch (ui.chkSandboxUrls->checkState()) {
-	case Qt::Unchecked: theConf->SetValue("Options/OpenUrlsSandboxed", 0); break;
-	case Qt::PartiallyChecked: theConf->SetValue("Options/OpenUrlsSandboxed", 2); break;
-	case Qt::Checked: theConf->SetValue("Options/OpenUrlsSandboxed", 1); break;
-	}
+	theConf->SetValue("Options/OpenUrlsSandboxed", CSettingsWindow__Chk2Int(ui.chkSandboxUrls->checkState()));
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
 

@@ -1440,6 +1440,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>This Sandbox is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A group can not be its own parent.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1486,6 +1490,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Passwords did not match, please retry.</source>
         <translation>密碼不正確，請重新輸入。</translation>
+    </message>
+    <message>
+        <source>Auto Detection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2138,7 +2146,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus 設定</translation>
+        <translation type="vanished">SandboxiePlus 設定</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2167,6 +2175,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>TextLabel</source>
         <translation>文字標籤</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Recovery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2360,7 +2372,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus 設定</translation>
+        <translation type="vanished">SandboxiePlus 設定</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2381,6 +2393,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Snapshot Actions</source>
         <translation>快照行為</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Snapshots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>SandboxiePlus Settings</string>
+   <string>SandboxiePlus - Snapshots</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>

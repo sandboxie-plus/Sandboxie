@@ -2232,11 +2232,11 @@ I file e le cartelle di rete sono normalmente visibili alle applicazioni present
 .
 
 3957;txt;01
-Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa impostazione. I file e le cartelle di rete possono essere aperti singolarmente alle applicazioni dell'area virtuale, aggiungendoli sotto la sezione Accesso alle risorse -> Accesso ai file.
+Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa impostazione. I file e le cartelle di rete possono essere aperti per le applicazioni dell'area virtuale, aggiungendoli sotto Accesso alle risorse -> Accesso ai file.
 .
 
 3958;txt;01
-Blocca i file e le cartelle di rete, a meno che non vengano aperti singolarmente.
+Blocca i file e le cartelle di rete, a meno che non siano aperti individualmente.
 .
 
 #----------------------------------------------------------------------------

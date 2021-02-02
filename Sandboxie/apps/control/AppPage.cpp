@@ -148,11 +148,11 @@ CAppPage::CAppPage(TMPL_INFO *info, const CString &BoxName)
         if (m_tmpl_info.ClassModifier & MODIF_IEXPLORE)
             m_titleForPage = L"Internet Explorer";
         if (m_tmpl_info.ClassModifier & MODIF_EDGE)
-            m_titleForPage = "Microsoft Edge";
+            m_titleForPage = L"Microsoft Edge";
         if (m_tmpl_info.ClassModifier & MODIF_FIREFOX)
-            m_titleForPage = L"Firefox";
+            m_titleForPage = L"Mozilla Firefox";
         if (m_tmpl_info.ClassModifier & MODIF_CHROME)
-            m_titleForPage = "Google Chrome";
+            m_titleForPage = L"Google Chrome";
         if (m_tmpl_info.ClassModifier & MODIF_OTHERWB)
             m_titleForPage = CMyMsg(MSG_4357);
 
@@ -1002,7 +1002,7 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
     info.ClassModifier = MODIF_EDGE;                    // Microsoft Edge
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
-    info.ClassModifier = MODIF_FIREFOX;                 // Firefox
+    info.ClassModifier = MODIF_FIREFOX;                 // Mozilla Firefox
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
     info.WithLink = TRUE;
     info.ClassModifier |= MODIF_ADDONS;                 // Firefox Add-ons

@@ -264,7 +264,7 @@
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
     <None Include="sandman_zh-TW.ts" />
-    <None Include="sandman_zh.ts" />
+    <None Include="sandman_zh-CN.ts" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SandMan.rc" />

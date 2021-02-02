@@ -1462,8 +1462,9 @@ ULONG SbieIniServer::RefreshConf()
     char* text_utf8 = NULL;
     if (IsUTF8)
     {
-        text_utf8 = (char*)HeapAlloc(GetProcessHeap(), 0, lenToWrite + 16);
-        lenToWrite = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), text_utf8, lenToWrite + 16, NULL, NULL);
+        ULONG utf8_len = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), NULL, 0, NULL, NULL);
+        text_utf8 = (char*)HeapAlloc(GetProcessHeap(), 0, utf8_len);
+        lenToWrite = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), text_utf8, utf8_len, NULL, NULL);
     }
 
     ULONG lenWritten = 0;

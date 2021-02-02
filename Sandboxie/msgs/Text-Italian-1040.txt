@@ -2232,7 +2232,7 @@ I file e le cartelle di rete sono normalmente visibili alle applicazioni present
 .
 
 3957;txt;01
-Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa funzione. I file e le cartelle di rete possono comunque accedere alle applicazioni dell'area virtuale nella sezione Accesso alle risorse -> Accesso ai file.
+Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa funzione. I file e le cartelle di rete possono essere aperti alle applicazioni dell'area virtuale nella sezione Accesso alle risorse -> Accesso ai file.
 .
 
 3958;txt;01

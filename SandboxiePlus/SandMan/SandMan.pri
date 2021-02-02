@@ -48,11 +48,12 @@ FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui
 
-TRANSLATIONS += ./sandman_de.ts \
-    ./sandman_pt.ts \
-    ./sandman_ru.ts \
-    ./sandman_tr.ts \
-    ./sandman_zh.ts \
-    ./sandman_zh-TW.ts
+TRANSLATIONS += sandman_de.ts \
+    sandman_pt.ts \
+    sandman_ru.ts \
+    sandman_pl.ts \
+    sandman_tr.ts \
+    sandman_zh-CN.ts \
+    sandman_zh-TW.ts
 
 RESOURCES += Resources/SandMan.qrc

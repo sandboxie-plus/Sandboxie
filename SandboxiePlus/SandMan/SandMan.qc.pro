@@ -34,12 +34,7 @@ RCC_DIR += .
 
 
 include(SandMan.pri)
+
 win32:RC_FILE = SandMan.rc
 
-TRANSLATIONS += sandman_de.ts \
-    sandman_pt.ts \
-    sandman_ru.ts \
-    sandman_pl.ts \
-    sandman_tr.ts \
-    sandman_zh-CN.ts \
-    sandman_zh-TW.ts
+

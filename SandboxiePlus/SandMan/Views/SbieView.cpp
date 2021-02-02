@@ -11,6 +11,7 @@
 #include <QFileIconProvider>
 #include "../../MiscHelpers/Common/CheckableMessageBox.h"
 #include "../Windows/RecoveryWindow.h"
+#include "../Windows/NewBoxWindow.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -57,7 +58,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	connect(m_pSbieModel, SIGNAL(ToolTipCallback(const QVariant&, QString&)), this, SLOT(OnToolTipCallback(const QVariant&, QString&)), Qt::DirectConnection);
 
-	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), theGUI, SLOT(OnNewBox()));
+	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Add Group"), this, SLOT(OnGroupAction()));
 	m_pDelGroupe = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Group"), this, SLOT(OnGroupAction()));
 	m_iMenuTop = m_pMenu->actions().count();
@@ -380,7 +381,22 @@ void CSbieView::OnGroupAction()
 {
 	QAction* Action = qobject_cast<QAction*>(sender());
 
-	if (Action == m_pAddGroupe)
+	if (Action == m_pNewBox)
+	{
+		QString Name = AddNewBox();
+		if (Name.isEmpty())
+			return;
+
+		QModelIndex ModelIndex = m_pSortProxy->mapToSource(m_pSbieTree->currentIndex());
+		QString Parent;
+		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+			Parent = m_pSbieModel->GetID(ModelIndex).toString();
+
+		m_Groups[Parent].append(Name);
+
+		m_pSbieModel->Clear(); //todo improve that
+	}
+	else if (Action == m_pAddGroupe)
 	{
 		QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new group name"), QLineEdit::Normal);
 		if (Name.isEmpty() || m_Groups.contains(Name))
@@ -433,8 +449,14 @@ void CSbieView::OnGroupAction()
 				Name = m_pSbieModel->GetID(ModelIndex).toString();
 			else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
 				Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
-			if (Name.isEmpty() || Name == Group)
+			
+			if (Name.isEmpty())
 				continue;
+
+			if (Name == Group || m_Groups.value(Name).contains(Group)) {
+				QMessageBox("Sandboxie-Plus", tr("A group can not be its own parent."), QMessageBox::Critical, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
+				continue;
+			}
 
 			// remove from old
 			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
@@ -450,6 +472,21 @@ void CSbieView::OnGroupAction()
 	QString Grouping = CSbieView__SerializeGroup(m_Groups);
 	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
 	UpdateGroupMenu();
+}
+
+QString CSbieView::AddNewBox()
+{
+	CNewBoxWindow NewBoxWindow(this);
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	NewBoxWindow.setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	if (NewBoxWindow.exec() == 1)
+	{
+		theAPI->ReloadBoxes();
+		Refresh();
+		SelectBox(NewBoxWindow.m_Name);
+		return NewBoxWindow.m_Name;
+	}
+	return QString();
 }
 
 void CSbieView::OnSandBoxAction()

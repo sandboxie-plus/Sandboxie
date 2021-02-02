@@ -14,7 +14,7 @@
 
 #define VERSION_MJR		0
 #define VERSION_MIN 	6
-#define VERSION_REV 	5
+#define VERSION_REV 	7
 #define VERSION_UPD 	0
 
 
@@ -235,7 +235,7 @@ private:
 	CProgressDialog*	m_pProgressDialog;
 	CPopUpWindow*		m_pPopUpWindow;
 
-	void				SetDarkTheme(bool bDark);
+	void				SetUITheme();
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
 
@@ -244,6 +244,7 @@ private:
 	QByteArray			m_Translation;
 public:
 	quint32				m_LanguageId;
+	bool				m_DarkTheme;
 };
 
 extern CSandMan* theGUI;

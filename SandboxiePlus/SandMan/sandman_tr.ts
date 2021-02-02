@@ -1446,6 +1446,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A group can not be its own parent.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1492,6 +1496,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
+    </message>
+    <message>
+        <source>Auto Detection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2145,7 +2153,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus Ayarları</translation>
+        <translation type="vanished">SandboxiePlus Ayarları</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2174,6 +2182,10 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <message>
         <source>TextLabel</source>
         <translation>Metin Etiketi</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Recovery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2367,7 +2379,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus Ayarları</translation>
+        <translation type="vanished">SandboxiePlus Ayarları</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2388,6 +2400,10 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <message>
         <source>Snapshot Actions</source>
         <translation>Anlık Görüntü Eylemleri</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Snapshots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

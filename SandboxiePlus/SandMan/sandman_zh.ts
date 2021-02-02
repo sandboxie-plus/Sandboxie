@@ -232,6 +232,54 @@
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
         <translation>可执行文件 (*.exe *.cmd);;所有文件 (*.*)</translation>
     </message>
+    <message>
+        <source>Direct</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direct All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed RT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">未知</translation>
+    </message>
+    <message>
+        <source>File/Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IPC Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wnd Class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COM Object</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -382,26 +430,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
+        <translation type="vanished">您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>您确定允许 %1 (%2) 访问网络吗?
+        <translation type="vanished">您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 可以从 %2 快速恢复.
+        <translation type="vanished">%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>移动大文件 %1 到沙盒 %2, %3 剩余.
+        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 剩余.
 完整路径: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -695,7 +763,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Ignore this update, notify me about the next one.</source>
-        <translation>忽略此升级,下一个再提示我.</translation>
+        <translation type="vanished">忽略此升级,下一个再提示我.</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -955,7 +1023,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No sandboxes found; creating: %1</source>
-        <translation>没找到沙盒;创建: %1</translation>
+        <translation type="vanished">没找到沙盒;创建: %1</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
@@ -1086,6 +1154,18 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - 窗口查找器</translation>
+    </message>
+    <message>
+        <source>Default sandbox not found; creating: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this message anymore.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1344,6 +1424,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>此沙盒被禁用，您确定启用吗?</translation>
     </message>
+    <message>
+        <source>A group can not be its own parent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This Sandbox is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1390,6 +1478,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Passwords did not match, please retry.</source>
         <translation>密码不正确,请重新输入.</translation>
+    </message>
+    <message>
+        <source>Auto Detection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1988,6 +2080,10 @@ instead of &quot;*&quot;.</source>
 &quot;I&quot; - 忽略拒绝请求
 代替 &quot;*&quot;.</translation>
     </message>
+    <message>
+        <source>Allow access to Bluetooth</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -2007,23 +2103,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation>确定</translation>
+        <translation type="vanished">确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>应用</translation>
+        <translation type="vanished">应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation type="vanished">取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;是</translation>
+        <translation type="vanished">&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;否</translation>
+        <translation type="vanished">&amp;否</translation>
     </message>
 </context>
 <context>
@@ -2034,7 +2130,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus设置</translation>
+        <translation type="vanished">SandboxiePlus设置</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2063,6 +2159,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>TextLabel</source>
         <translation>文本标签</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Recovery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2256,7 +2356,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus设置</translation>
+        <translation type="vanished">SandboxiePlus设置</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2277,6 +2377,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Snapshot Actions</source>
         <translation>快照行为</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Snapshots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

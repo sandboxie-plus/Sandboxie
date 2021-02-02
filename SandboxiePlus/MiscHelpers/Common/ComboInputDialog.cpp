@@ -70,6 +70,7 @@ CComboInputDialog::CComboInputDialog(QWidget *parent) :
 {
     setModal(true);
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    d->combo->setFocus();
     connect(d->buttonBox, SIGNAL(accepted()), SLOT(accept()));
     connect(d->buttonBox, SIGNAL(rejected()), SLOT(reject()));
     connect(d->buttonBox, SIGNAL(clicked(QAbstractButton*)),

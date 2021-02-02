@@ -188,11 +188,13 @@ _FX BOOLEAN RpcRt_Init(HMODULE module)
 
         SBIEDLL_HOOK(RpcRt_, RpcBindingCreateW);
 
-        __sys_RpcMgmtSetComTimeout = (P_RpcMgmtSetComTimeout)Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcMgmtSetComTimeout", "RpcMgmtSetComTimeout");
+        if(Config_GetSettingsForImageName_bool(L"RpcMgmtSetComTimeout", TRUE))
+            __sys_RpcMgmtSetComTimeout = (P_RpcMgmtSetComTimeout)Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcMgmtSetComTimeout", "RpcMgmtSetComTimeout");
     }
 
     WCHAR   wsTraceOptions[4];
-    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
+    if ((Dll_OsBuild >= 8400) // win8 and above
+    && SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
     {
 #ifdef _WIN64
 
@@ -461,7 +463,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         //OutputDebugString(msg);
         SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
-    //__sys_RpcMgmtSetComTimeout(*OutBinding, RPC_C_BINDING_TIMEOUT); // this breaks things
+    if(__sys_RpcMgmtSetComTimeout) __sys_RpcMgmtSetComTimeout(*OutBinding, RPC_C_BINDING_TIMEOUT); 
     return status;
 }
 
@@ -525,7 +527,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         //OutputDebugString(msg);
         SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
-    //__sys_RpcMgmtSetComTimeout(*Binding, RPC_C_BINDING_TIMEOUT); // this breaks things
+    if (__sys_RpcMgmtSetComTimeout) __sys_RpcMgmtSetComTimeout(*Binding, RPC_C_BINDING_TIMEOUT);
     return status;
 }
 

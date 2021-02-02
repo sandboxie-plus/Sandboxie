@@ -1430,6 +1430,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>This Sandbox is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>A group can not be its own parent.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1476,6 +1480,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Passwords did not match, please retry.</source>
         <translation>Пароли не совпадают, повторите попытку.</translation>
+    </message>
+    <message>
+        <source>Auto Detection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2125,7 +2133,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>Настройки SandboxiePlus</translation>
+        <translation type="vanished">Настройки SandboxiePlus</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2154,6 +2162,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>TextLabel</source>
         <translation>Текстовая метка</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Recovery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2347,7 +2359,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>Настройки SandboxiePlus</translation>
+        <translation type="vanished">Настройки SandboxiePlus</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2368,6 +2380,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Snapshot Actions</source>
         <translation>Действия со снимками</translation>
+    </message>
+    <message>
+        <source>SandboxiePlus - Snapshots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

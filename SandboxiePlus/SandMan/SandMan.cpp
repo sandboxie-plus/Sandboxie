@@ -15,7 +15,6 @@
 #include "Windows/RecoveryWindow.h"
 #include <QtConcurrent>
 #include "../MiscHelpers/Common/SettingsWidgets.h"
-#include "Windows/NewBoxWindow.h"
 #include "Windows/OptionsWindow.h"
 #include <QProxyStyle>
 
@@ -99,8 +98,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_LanguageId = 1033; // lang en_us
 	LoadLanguage();
-	if (theConf->GetBool("Options/DarkTheme", false))
-		SetDarkTheme(true);
+	SetUITheme();
 
 	m_bExit = false;
 
@@ -1063,15 +1061,7 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnNewBox()
 {
-	CNewBoxWindow NewBoxWindow(this);
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	NewBoxWindow.setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
-	if (NewBoxWindow.exec() == 1) 
-	{
-		theAPI->ReloadBoxes();
-		m_pBoxView->Refresh();
-		m_pBoxView->SelectBox(NewBoxWindow.m_Name);
-	}
+	m_pBoxView->AddNewBox();
 }
 
 void CSandMan::OnEmptyAll()
@@ -1319,7 +1309,7 @@ void CSandMan::OnSettings()
 
 void CSandMan::UpdateSettings()
 {
-	SetDarkTheme(theConf->GetBool("Options/DarkTheme", false));
+	SetUITheme();
 
 	//m_pBoxView->UpdateRunMenu();
 
@@ -1620,7 +1610,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 						NullifyTrigger = false;
 						return;
 					}
-					setWindowState(Qt::WindowActive);
+					this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 					SetForegroundWindow(MainWndHandle);
 				} );
 			}
@@ -1944,8 +1934,16 @@ void CSandMan::OnAbout()
 		QMessageBox::aboutQt(this);
 }
 
-void CSandMan::SetDarkTheme(bool bDark)
+void CSandMan::SetUITheme()
 {
+	bool bDark;
+	int iDark = theConf->GetInt("Options/UseDarkTheme", 2);
+	if (iDark == 2) {
+		QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+		bDark = (settings.value("AppsUseLightTheme") == 0);
+	} else
+		bDark = (iDark == 1);
+
 	if (bDark)
 	{
 		QApplication::setStyle(QStyleFactory::create("Fusion"));
@@ -1986,7 +1984,10 @@ void CSandMan::LoadLanguage()
 	m_Translation.clear();
 	m_LanguageId = 0;
 
-	QString Lang = theConf->GetString("Options/Language");
+	QString Lang = theConf->GetString("Options/UiLanguage");
+	if(Lang.isEmpty())
+		Lang = QLocale::system().name();
+
 	if (!Lang.isEmpty())
 	{
 		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);

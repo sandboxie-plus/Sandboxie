@@ -72,10 +72,7 @@ _FX BOOLEAN File_InitFileMigration(void)
     Config_InitPatternList(L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT]);
     Config_InitPatternList(L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY]);
 
-    WCHAR conf[16];
-    Config_GetSettingsForImageName(L"CopyBlockDenyWrite", conf, sizeof(conf), NULL);
-    if (*conf == L'y' || *conf == L'Y')
-        File_MigrationDenyWrite = TRUE;
+    File_MigrationDenyWrite = Config_GetSettingsForImageName_bool(L"CopyBlockDenyWrite", FALSE);
 
     File_InitCopyLimit();
 

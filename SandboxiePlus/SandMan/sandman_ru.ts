@@ -235,51 +235,51 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой для всех</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрытый</translation>
     </message>
     <message>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрытый RT</translation>
     </message>
     <message>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только чтение</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрытый</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл/Папка</translation>
     </message>
     <message>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Реестр</translation>
     </message>
     <message>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь IPC</translation>
     </message>
     <message>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Wnd класс</translation>
     </message>
     <message>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM объект</translation>
     </message>
 </context>
 <context>
@@ -431,46 +431,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
+        <translation>Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
 Имя файла:%3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 имеет право на быстрое восстановление с %2.
+        <translation>%1 имеет право на быстрое восстановление с %2.
 Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1158,15 +1138,15 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница по умолчанию не найдена; создание: %1</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу с информацией&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Больше не показывать это сообщение.</translation>
     </message>
 </context>
 <context>
@@ -1428,11 +1408,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта песочница пуста.</translation>
     </message>
     <message>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа не может быть собственным родителем.</translation>
     </message>
 </context>
 <context>
@@ -1483,7 +1463,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоопределение</translation>
     </message>
 </context>
 <context>
@@ -2085,7 +2065,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить доступ к Bluetooth</translation>
     </message>
 </context>
 <context>
@@ -2106,23 +2086,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Применить</translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
 </context>
 <context>
@@ -2165,7 +2145,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Восстановление</translation>
     </message>
 </context>
 <context>
@@ -2383,7 +2363,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Снимки</translation>
     </message>
 </context>
 </TS>

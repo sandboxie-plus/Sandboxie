@@ -269,12 +269,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1495"/>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiert</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1496"/>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiert RT</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1497"/>
@@ -536,7 +536,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -545,7 +545,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -554,7 +554,7 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Die Datei wurde geschrieben durch: %3</translation>
     </message>
     <message>
@@ -563,7 +563,7 @@ Die Datei wurde geschrieben durch: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
     <message>
@@ -1685,7 +1685,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="Views/SbieView.cpp" line="457"/>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Gruppe kann nicht seine eigene Quelle sein.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="521"/>
@@ -1804,7 +1804,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="50"/>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoerkennung</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="79"/>
@@ -2655,7 +2655,7 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
         <oldsource>SandboxiePlus Settings</oldsource>
-        <translation type="unfinished">SandboxiePlus-Einstellungen</translation>
+        <translation>SandboxiePlus-Wiederherstellung</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="69"/>
@@ -2930,7 +2930,7 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
         <oldsource>SandboxiePlus Settings</oldsource>
-        <translation type="unfinished">SandboxiePlus Einstellungen</translation>
+        <translation>SandboxiePlus Schnappschüsse</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>

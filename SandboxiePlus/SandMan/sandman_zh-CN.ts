@@ -234,51 +234,51 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>直接访问</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>直接访问全部</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭RT</translation>
     </message>
     <message>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>只读</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>文件/文件夹</translation>
     </message>
     <message>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>注册表</translation>
     </message>
     <message>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>IPC路径</translation>
     </message>
     <message>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口类</translation>
     </message>
     <message>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM组件</translation>
     </message>
 </context>
 <context>
@@ -430,25 +430,25 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
+        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">您确定允许 %1 (%2) 访问网络吗?
+        <translation>您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 可以从 %2 快速恢复.
+        <translation>%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 剩余.
+        <translation>移动大文件 %1 到沙盒 %2, %3 剩余.
 完整路径: %4</translation>
     </message>
     <message>
@@ -1157,15 +1157,15 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>默认沙盒未发现，正在创建: %1</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;您确定前往 &lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>不再显示此信息</translation>
     </message>
 </context>
 <context>
@@ -1426,11 +1426,11 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>组不能是自己的父级</translation>
     </message>
     <message>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>此沙盒是空的</translation>
     </message>
 </context>
 <context>
@@ -1481,7 +1481,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>自动检测</translation>
     </message>
 </context>
 <context>
@@ -2082,7 +2082,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>允许访问蓝牙</translation>
     </message>
 </context>
 <context>
@@ -2103,23 +2103,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="vanished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">应用</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;是</translation>
+        <translation>&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;否</translation>
+        <translation>&amp;否</translation>
     </message>
 </context>
 <context>
@@ -2130,7 +2130,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation type="vanished">SandboxiePlus设置</translation>
+        <translation>SandboxiePlus设置</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2162,7 +2162,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - 恢复</translation>
     </message>
 </context>
 <context>
@@ -2380,7 +2380,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - 快照</translation>
     </message>
 </context>
 </TS>

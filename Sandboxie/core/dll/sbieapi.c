@@ -1285,9 +1285,9 @@ _FX BOOLEAN SbieApi_QueryConfBool(
     *value = L'\0';
     SbieApi_QueryConfAsIs(
                     section_name, setting_name, 0, value, sizeof(value));
-    if (*value == 'y' || *value == 'Y')
+    if (*value == L'y' || *value == L'Y')
         return TRUE;
-    if (*value == 'n' || *value == 'N')
+    if (*value == L'n' || *value == L'N')
         return FALSE;
     return def;
 }

@@ -78,6 +78,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -87,6 +88,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -95,6 +97,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
     <ClCompile>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>
@@ -103,6 +106,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
     <ClCompile>
       <MinimalRebuild />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;kernel32.lib;secur32.lib;Advapi32.lib;Ntdll.lib;User32.lib</AdditionalDependencies>

@@ -8,6 +8,18 @@
 CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	: QDialog(parent)
 {
+	Qt::WindowFlags flags = windowFlags();
+	flags |= Qt::CustomizeWindowHint;
+	//flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	flags |= Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowCloseButtonHint;
+	setWindowFlags(flags);
+
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - Snapshots").arg(pBox->GetName()));
 
@@ -37,9 +49,9 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.treeSnapshots->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(UpdateSnapshot(const QModelIndex&)));
 	connect(ui.treeSnapshots, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnSelectSnapshot()));
 
-	connect(ui.btnTake, SIGNAL(pressed()), this, SLOT(OnTakeSnapshot()));
-	connect(ui.btnSelect, SIGNAL(pressed()), this, SLOT(OnSelectSnapshot()));
-	connect(ui.btnRemove, SIGNAL(pressed()), this, SLOT(OnRemoveSnapshot()));
+	connect(ui.btnTake, SIGNAL(clicked(bool)), this, SLOT(OnTakeSnapshot()));
+	connect(ui.btnSelect, SIGNAL(clicked(bool)), this, SLOT(OnSelectSnapshot()));
+	connect(ui.btnRemove, SIGNAL(clicked(bool)), this, SLOT(OnRemoveSnapshot()));
 	
 	connect(ui.txtName, SIGNAL(textEdited(const QString&)), this, SLOT(SaveInfo()));
 	connect(ui.txtInfo, SIGNAL(textChanged()), this, SLOT(SaveInfo()));
@@ -55,11 +67,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	for (int i = 0; i < m_pSnapshotModel->columnCount(); i++)
 		m_pSnapshotModel->SetColumnEnabled(i, true);
 
-	UpdateSnapshots();
-	QModelIndex CurIndex = m_pSnapshotModel->FindIndex(m_CurSnapshot);
-	if (CurIndex.isValid()) {
-		ui.treeSnapshots->selectionModel()->select(CurIndex, QItemSelectionModel::ClearAndSelect);
-	}
+	UpdateSnapshots(true);
 }
 
 CSnapshotsWindow::~CSnapshotsWindow()
@@ -69,10 +77,11 @@ CSnapshotsWindow::~CSnapshotsWindow()
 
 void CSnapshotsWindow::closeEvent(QCloseEvent *e)
 {
+	emit Closed();
 	this->deleteLater();
 }
 
-void CSnapshotsWindow::UpdateSnapshots()
+void CSnapshotsWindow::UpdateSnapshots(bool AndSelect)
 {
 	m_SnapshotMap.clear();
 	QList<SBoxSnapshot> SnapshotList = m_pBox->GetSnapshots(&m_CurSnapshot);
@@ -90,13 +99,25 @@ void CSnapshotsWindow::UpdateSnapshots()
 	}
 	m_pSnapshotModel->Sync(m_SnapshotMap);
 	ui.treeSnapshots->expandAll();
+
+	if (AndSelect)
+	{
+		QModelIndex CurIndex = m_pSnapshotModel->FindIndex(m_CurSnapshot);
+		if (CurIndex.isValid()) {
+			ui.treeSnapshots->selectionModel()->select(CurIndex, QItemSelectionModel::ClearAndSelect);
+			UpdateSnapshot(CurIndex);
+		}
+	}
 }
 
 void CSnapshotsWindow::UpdateSnapshot(const QModelIndex& Index)
 {
-	ui.groupBox->setEnabled(true);
-	ui.btnSelect->setEnabled(true);
-	ui.btnRemove->setEnabled(true);
+	if (Index.isValid())
+	{
+		ui.groupBox->setEnabled(true);
+		ui.btnSelect->setEnabled(true);
+		ui.btnRemove->setEnabled(true);
+	}
 
 	//QModelIndex Index = ui.treeSnapshots->currentIndex();
 	//QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
@@ -141,6 +162,8 @@ void CSnapshotsWindow::OnTakeSnapshot()
 		return;
 
 	HandleResult(m_pBox->TakeSnapshot(Value));
+
+	UpdateSnapshots(true);
 }
 
 void CSnapshotsWindow::OnSelectSnapshot()
@@ -150,7 +173,7 @@ void CSnapshotsWindow::OnSelectSnapshot()
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to switch the active snapshot? Doing so will delete the current state!"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to switch the active snapshot? Doing so will delete the current state!"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 		return;
 
 	HandleResult(m_pBox->SelectSnapshot(ID.toString()));
@@ -163,8 +186,12 @@ void CSnapshotsWindow::OnRemoveSnapshot()
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected snapshot?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton).exec() != QMessageBox::Yes)
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected snapshot?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 		return;
+
+	ui.groupBox->setEnabled(false);
+	ui.btnSelect->setEnabled(false);
+	ui.btnRemove->setEnabled(false);
 
 	HandleResult(m_pBox->RemoveSnapshot(ID.toString()));
 }

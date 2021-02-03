@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -223,9 +224,11 @@ void ReadTextFile(const UCHAR *path, LIST *msgs)
 {
     HANDLE hFile;
     ULONG ByteSize, ReadSize;
-    WCHAR *Buffer, *BufPtr;
+    UCHAR* Buffer;
+    WCHAR *BufPtr;
     ULONG LineNum;
     ULONG i;
+    BOOLEAN isUTF8 = TRUE;
 
     //
     // read entire contents of text file
@@ -252,7 +255,7 @@ void ReadTextFile(const UCHAR *path, LIST *msgs)
 
     CloseHandle(hFile);
 
-    memset(&Buffer[ReadSize / sizeof(WCHAR)], 0, 16);
+    memset(&Buffer[ReadSize], 0, 16);
 
     //
     // build list of messages
@@ -262,9 +265,32 @@ void ReadTextFile(const UCHAR *path, LIST *msgs)
 
     LineNum = 1;
 
-    BufPtr = Buffer;
-    if (*BufPtr == 0xFEFF)
-        ++BufPtr;
+
+    if (Buffer[0] == 0xFF && Buffer[1] == 0xFE) // Unicode BOM
+    {
+        BufPtr = &Buffer[2];
+        ReadSize -= 2;
+        isUTF8 = FALSE;
+    }
+    else if (Buffer[0] == 0xEF && Buffer[1] == 0xBB && Buffer[2] == 0xBF)  // UTF8 BOM
+    {
+        BufPtr = &Buffer[3];
+        ReadSize -= 3;
+        isUTF8 = TRUE;
+    }
+    else
+        BufPtr = Buffer;
+
+    if (isUTF8)
+    {
+        char* utf8 = BufPtr;
+
+        ByteSize *= 2;
+        Buffer = Alloc(ByteSize + 16);
+        BufPtr = Buffer;
+
+        MultiByteToWideChar(CP_UTF8, 0, utf8, ReadSize, BufPtr, ByteSize);
+    }
 
     while (1) {
 

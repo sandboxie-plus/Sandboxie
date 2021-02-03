@@ -109,7 +109,7 @@ using namespace std;
 
 // other includes
 
-#define _T(x)      L ## x
+//#define _T(x)      L ## x
 
 #define STR2(X) #X
 #define STR(X) STR2(X)

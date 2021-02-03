@@ -197,7 +197,9 @@
   <ItemGroup>
     <ClCompile Include="ApiLog.cpp" />
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
+    <ClCompile Include="Helpers\FindTool.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
+    <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models\ApiMonModel.cpp" />
     <ClCompile Include="Models\ResMonModel.cpp" />
@@ -232,8 +234,9 @@
     <QtMoc Include="ApiLog.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
     <QtMoc Include="Models\ApiMonModel.h" />
+    <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
-    <ClInclude Include="Resources\resource.h" />
+    <ClInclude Include="resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -241,9 +244,8 @@
     <QtRcc Include="Resources\SandMan.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\SandMan.rc" />
-  </ItemGroup>
-  <ItemGroup>
+    <Image Include="Resources\finder-empty.bmp" />
+    <Image Include="Resources\finder-full.bmp" />
     <Image Include="Resources\SandMan.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -255,10 +257,17 @@
     <QtUic Include="Forms\SnapshotsWindow.ui" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\finder.cur" />
     <None Include="sandman_de.ts" />
+    <None Include="sandman_pl.ts" />
     <None Include="sandman_pt.ts" />
     <None Include="sandman_ru.ts" />
-    <None Include="sandman_zh.ts" />
+    <None Include="sandman_tr.ts" />
+    <None Include="sandman_zh-TW.ts" />
+    <None Include="sandman_zh-CN.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SandMan.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

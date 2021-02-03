@@ -47,9 +47,9 @@ static void *Dll_AllocFromPool(POOL *pool, ULONG size);
 //---------------------------------------------------------------------------
 
 
-static POOL *Dll_Pool = NULL;
-static POOL *Dll_PoolTemp = NULL;
-static POOL *Dll_PoolCode = NULL;
+POOL *Dll_Pool = NULL;
+POOL *Dll_PoolTemp = NULL;
+POOL *Dll_PoolCode = NULL;
 
 static ULONG Dll_TlsIndex = TLS_OUT_OF_INDEXES;
 

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -600,19 +601,22 @@ _FX NTSTATUS Thread_MyImpersonateClient(
         else if (Driver_OsVersion == DRIVER_WINDOWS_81)
             ImpersonationInfo_offset = 0x650;
 
-        else if (Driver_OsBuild < 14316)
-            ImpersonationInfo_offset = 0x658;
-        else if (Driver_OsBuild < 15031)
-            ImpersonationInfo_offset = 0x660;
-        else if (Driver_OsBuild < 18312)
-            ImpersonationInfo_offset = 0x668;
-        else if (Driver_OsBuild <= 18363)
-            ImpersonationInfo_offset = 0x678;
-        else if (Driver_OsBuild < 18980)
-            ImpersonationInfo_offset = 0x688;
-        else if (Driver_OsBuild >= 18980)
-            ImpersonationInfo_offset = 0x4a8;
-
+        else if (Driver_OsVersion == DRIVER_WINDOWS_10) {
+            if (Driver_OsBuild < 14316)
+                ImpersonationInfo_offset = 0x658;
+            else if (Driver_OsBuild < 15031)
+                ImpersonationInfo_offset = 0x660;
+            else if (Driver_OsBuild < 18312)
+                ImpersonationInfo_offset = 0x668;
+            else if (Driver_OsBuild <= 18363)
+                ImpersonationInfo_offset = 0x678;
+            else if (Driver_OsBuild < 18980)
+                ImpersonationInfo_offset = 0x688;
+            else if (Driver_OsBuild < 21286)
+                ImpersonationInfo_offset = 0x4a8;
+            else
+                ImpersonationInfo_offset = 0x4f8;
+        }
 #else ! _WIN64
 
         if (Driver_OsVersion == DRIVER_WINDOWS_XP)
@@ -634,18 +638,16 @@ _FX NTSTATUS Thread_MyImpersonateClient(
             ImpersonationInfo_offset = 0x380;
 
         else if (Driver_OsVersion == DRIVER_WINDOWS_10) {
-            if (Driver_OsBuild < 14965) {
+            if (Driver_OsBuild < 14965)
                 ImpersonationInfo_offset = 0x390;
-            }
-            else if (Driver_OsBuild <= 18309) {
+            else if (Driver_OsBuild <= 18309) 
                 ImpersonationInfo_offset = 0x398;
-            }
-            else  if (Driver_OsBuild < 18980) {
+            else  if (Driver_OsBuild < 18980) 
                 ImpersonationInfo_offset = 0x3A0;
-            }
-            else {
+            else if (Driver_OsBuild < 21286)
                 ImpersonationInfo_offset = 0x2c8;
-            }
+            else
+                ImpersonationInfo_offset = 0x2f0;
         }
         //
         // on Windows XP (which is supported only in a 32-bit)
@@ -709,9 +711,23 @@ _FX NTSTATUS Thread_MyImpersonateClient(
             }
         }
 
-        if (! ImpersonationInfo_offset) {
+        if (!ImpersonationInfo_offset) {
             status = STATUS_ACCESS_DENIED;
             Log_Status(MSG_1222, 0x62, STATUS_UNKNOWN_REVISION);
+
+            /*__try {
+                for (int i = 0; i < 0x0a00; i++)
+                {
+                    ULONG_PTR* ImpersonationInfo = (ULONG_PTR*)((ULONG_PTR)ThreadObject + i);
+
+                    if ((*ImpersonationInfo & ~7) == (ULONG_PTR)TokenObject)
+                    {
+                        WCHAR str[64];
+                        swprintf(str, L"BAM! found: %d", i);
+                        Session_MonitorPut(MONITOR_OTHER, str, PsGetCurrentProcessId());
+                    }
+                }
+            } __except (EXCEPTION_EXECUTE_HANDLER) {}*/
         }
     }
 

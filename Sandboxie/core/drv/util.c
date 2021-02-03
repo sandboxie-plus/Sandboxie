@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -231,33 +231,12 @@ BOOLEAN UnicodeStringEndsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEA
     return (RtlCompareUnicodeString(&usStr, &usSearch, boolCaseInSensitive) == 0);
 }
 
-
 BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName)
 {
-    NTSTATUS status;
-    RTL_QUERY_REGISTRY_TABLE qrt[2];
-    UNICODE_STRING uni;
-
-    // we don't care about the value, but we have to give it a NULL object
-    uni.Length = 0;
-    uni.MaximumLength = 0;
-    uni.Buffer = NULL;
-
-    memzero(qrt, sizeof(qrt));
-    qrt[0].Flags = RTL_QUERY_REGISTRY_REQUIRED |
-        RTL_QUERY_REGISTRY_DIRECT |
-        RTL_QUERY_REGISTRY_NOVALUE |
-        RTL_QUERY_REGISTRY_NOEXPAND;
-    qrt[0].Name = ValueName;
-    qrt[0].EntryContext = &uni;
-    qrt[0].DefaultType = REG_NONE;
-
-    status = RtlQueryRegistryValues(
-        RelativeTo, Path, qrt, NULL, NULL);
-
-    return (status == STATUS_SUCCESS);
+    WCHAR DummyBuffer[1] = {0}; // if we provide a NULL buffer this wil cause a memory pool leak someware in the kernel
+    UNICODE_STRING Dummy = { 0, sizeof(DummyBuffer), DummyBuffer };
+    return GetRegString(RelativeTo, Path, ValueName, &Dummy);
 }
-
 
 BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_STRING* pData)
 {

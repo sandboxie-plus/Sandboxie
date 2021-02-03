@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include "api.h"
 #include "util.h"
 #include "common/my_version.h"
+#include "session.h"
 
 
 //---------------------------------------------------------------------------
@@ -818,6 +819,11 @@ _FX void *Token_Restrict(
     TOKEN_USER *user;
     void *NewTokenObject = NULL;
 	
+    /*if (Conf_Get_Boolean(proc->box->name, L"CreateToken", 0, FALSE))
+    {
+        
+    }*/
+
 	// OpenToken BEGIN
 	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
 

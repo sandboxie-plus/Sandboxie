@@ -16,8 +16,11 @@ public:
 	virtual void accept() {}
 	virtual void reject() { this->close(); }
 
+signals:
+	void Closed();
+
 private slots:
-	void UpdateSnapshots();
+	void UpdateSnapshots(bool AndSelect = false);
 	void UpdateSnapshot(const QModelIndex& Index);
 
 	void SaveInfo();

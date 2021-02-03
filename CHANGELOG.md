@@ -4,7 +4,81 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.5.5 / 5.46.4] - 2021-01-19
+
+
+
+
+
+## [0.6.7 / 5.47.1] - 2021-02-01
+
+### Added
+- added UI language auto-detection
+
+### Fixed
+- fixed Brave.exe now being properly recognized as Chrome-, not Firefox-based
+- fixed issue introduced in 0.6.5 with recent Edge builds
+-- the 0.6.5 behaviour can be set on a per-process basis using "RpcMgmtSetComTimeout=POPPeeper.exe,n"
+- fixed grouping issues
+- fixed main window restore state from tray
+
+
+
+## [0.6.5 / 5.47.0] - 2021-01-31
+
+### Added
+- added detection for Waterfox.exe, Palemoon.exe and Basilisk.exe Firefox forks as well as Brave.exe
+- added Bluetooth API support, IPC port can be opened with "OpenBluetooth=y"
+-- this should resolve issues with many Unity games hanging on startup for a long time
+- added enhanced RPC/IPC interface tracing
+- when DefaultBox is not found by the SandMan UI, it will be recreated
+- "Disable Forced Programs" time is now saved and reloaded
+
+### Changed
+- reduced SandMan CPU usage
+- Sandboxie.ini and Templates.ini can now be UTF8 encoded
+-- this feature is experimental, files without a UTF-8 Signature should be recognized also
+-- "ByteOrderMark=yes" is obsolete, Sandboxie.ini is now always saved with a BOM/Signature
+- legacy language files can now be UTF8 encoded
+- reworked file migration behaviour, removed hardcoded lists in favour of templates
+-- you can now use "CopyAlways=", "DontCopy=" and "CopyEmpty=" that support the same syntax as "OpenFilePath="
+-- "CopyBlockDenyWrite=program.exe,y" makes a write open call to a file that won't be copied fail instead of turning it read-only
+- removed hardcoded SkipHook list in favour of templates
+
+### Fixed
+- fixed old memory pool leak in the Sbie driver
+- fixed issue with item selection in the access restrictions UI
+- fixed updater crash in Sbiectrl.exe
+- fixed issues with RPC calls introduced in Sbie 5.33.1
+- fixed recently broken 'terminate all' command
+- fixed a couple minor UI issues with SandMan UI
+- fixed IPC issue with Windows 7 and 8 resulting in process termination
+- fixed "recover to" functionality
+
+
+
+## [0.6.0 / 5.46.5] - 2021-01-25
+
+### Added
+- added confirmation prompts to terminate all commands
+- added window title to boxed process info
+- added WinSpy based sandboxed window finder
+- added option to view disabled boxes and double click on box to enable it
+
+### Changed
+- "Reset Columns" now resizes them to fit the content, and it can now be localized
+- modal windows are now centered to the parent
+- improved new box window
+
+### Fixed
+- fixed issues with window modality
+- fixed issues when main window was set to be always on top
+- fixed a driver issue with Windows 10 insider build 21286
+- fixed issues with snapshot dialog
+- fixed an issue when writing to a path that already exists in the snapshot but not outside
+
+
+
+## [0.5.5 / 5.46.4] - 2021-01-17
 
 ### Added
 - added "SandboxService=..." to force selected services to be started in the sandbox
@@ -12,7 +86,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added internet prompt to now also allow internet access permanently
 - added browse button for box root folder in the SandMan UI
 - added explorer info message
-- added option to keep the sandman UI always on top
+- added option to keep the SandMan UI always on top
 - allow drag and drop file onto Sandman.exe to run it sandboxed
 - added start SandMan UI when a sandboxed application starts
 - recovery window can now list all files

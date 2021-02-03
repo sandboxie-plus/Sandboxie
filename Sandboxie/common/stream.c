@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,6 +36,7 @@ struct STREAM {
     HANDLE handle;
     UCHAR *data_ptr;
     ULONG data_len;
+    ULONG encoding;
     __declspec(align(8)) UCHAR data[0];
 };
 
@@ -71,6 +73,7 @@ __declspec(align(16)) NTSTATUS Stream_Open(
 
     stream->data_len = 0;
     stream->data_ptr = &stream->data[0];
+    stream->encoding = 0;
     *out_stream = stream;
 
     return STATUS_SUCCESS;
@@ -145,6 +148,7 @@ __declspec(align(16)) NTSTATUS Stream_Open(
 
     stream->data_len = 0;
     stream->data_ptr = &stream->data[0];
+    stream->encoding = 0;
     *out_stream = stream;
 
     return status;
@@ -349,5 +353,205 @@ NTSTATUS Stream_Write_Long(
     STREAM_PUT_BYTE(b[1]);
     STREAM_PUT_BYTE(b[2]);
     STREAM_PUT_BYTE(b[3]);
+    return STATUS_SUCCESS;
+}
+
+//---------------------------------------------------------------------------
+// Stream_Read_BOM
+//---------------------------------------------------------------------------
+
+NTSTATUS Stream_Read_BOM(
+    IN  STREAM* stream, 
+    ULONG* encoding)
+{
+    if (stream->data_len == 0) 
+    {
+        NTSTATUS status = Stream_Read_More(stream);
+        if (!NT_SUCCESS(status))
+            return status;
+    }
+
+    if (stream->data_len >= 3 && stream->data[0] == 0xEF && stream->data[1] == 0xBB && stream->data[2] == 0xBF) 
+    {
+        stream->data_ptr += 3;
+        stream->data_len -= 3;
+
+        stream->encoding = 1;
+        //DbgPrint("sbie read ini, found UTF-8 Signature\n");
+    }
+    else if (stream->data_len >= 2 && stream->data[0] == 0xFF && stream->data[1] == 0xFE)
+    {
+        stream->data_ptr += 2;
+        stream->data_len -= 2;
+
+        stream->encoding = 0;
+        //DbgPrint("sbie read ini, found Unicode (UTF-16 LE) BOM\n");
+    }
+    else if (stream->data_len >= 2 && stream->data[0] == 0xFE && stream->data[1] == 0xFF)
+    {
+        stream->data_ptr += 2;
+        stream->data_len -= 2;
+
+        stream->encoding = 2;
+        //DbgPrint("sbie read ini, found Unicode (UTF-16 BE) BOM\n");
+    }
+    else
+    {
+        // If there is no BOM/Signature try to detect the file type
+        // Unicode Litle Endian (windows wchar_t) will have the n*2+1 bytes 0 as long, as no higher unicode chrakters are used
+        BOOLEAN LooksUnicodeLE = TRUE;
+        // similrly Unicode Big Endian (byte swaped) will have the n*2 bytes 0 as long
+        BOOLEAN LooksUnicodeBE = TRUE;
+        // UTF-8 shouldn't have null bytes
+        for (ULONG pos = 0; (pos + 1) < min(stream->data_len, 16); pos += 2) // check first 8 char16's
+        {
+            if (stream->data[pos] != 0)
+                LooksUnicodeBE = FALSE;
+            if (stream->data[pos + 1] != 0)
+                LooksUnicodeLE = FALSE;
+        }
+
+        if (!LooksUnicodeLE && !LooksUnicodeBE)
+        {
+            stream->encoding = 1;
+            //DbgPrint("sbie read ini, looks UTF-8 encoded\n");
+        }
+        else if (!LooksUnicodeLE && LooksUnicodeBE)
+        {
+            stream->encoding = 2;
+            //DbgPrint("sbie read ini, looks Unicode (UTF-16 BE) encoded\n");
+        }
+        else
+        {
+            stream->encoding = 0;
+            //if (LooksUnicodeLE && !LooksUnicodeBE)
+            //  DbgPrint("sbie read ini, looks Unicode (UTF-16 LE) encoded\n");
+            //else
+            //  DbgPrint("sbie read ini, encoding looks broken, assuming (UTF-16 LE)\n");
+        }
+    }
+
+    if (encoding) *encoding = stream->encoding;
+
+    return STATUS_SUCCESS;
+}
+
+//---------------------------------------------------------------------------
+// Stream_Read_Wchar
+//---------------------------------------------------------------------------
+
+NTSTATUS Stream_Read_Wchar(
+    IN  STREAM* stream,
+    OUT USHORT* v)
+{
+    if (stream->encoding == 0) // Unicode Litle Endian
+    {
+        UCHAR* b = (UCHAR*)v;
+        STREAM_GET_BYTE(b[0]);
+        STREAM_GET_BYTE(b[1]);
+    }
+    else if (stream->encoding == 2) // Unicode Big Endian
+    {
+        UCHAR* b = (UCHAR*)v;
+        STREAM_GET_BYTE(b[1]);
+        STREAM_GET_BYTE(b[0]);
+    }
+    else if (stream->encoding == 1) // utf 8
+    {
+        UCHAR cur_byte;
+
+    read_next:
+        STREAM_GET_BYTE(cur_byte);
+
+        //Figure out the current code unit to determine the range. It is split into 6 main groups, each of which handles the data
+        //differently from one another.
+        if (cur_byte < 0x80) {
+            //0..127, the ASCII range.
+
+            //We directly plug in the values to the UTF-16 code unit.
+            *v = (wchar_t)(cur_byte);
+        }
+        else if (cur_byte < 0xC0) {
+            //0x80..0xBF, we ignore. These are reserved for UTF-8 encoding.
+            goto read_next;
+        }
+        else if (cur_byte < 0xE0) {
+            //128..2047, the extended ASCII range, and into the Basic Multilingual Plane.
+
+            //Work on the first code unit.
+            wchar_t highShort = (wchar_t)(cur_byte & 0x1F);
+            //Increment the current code unit pointer to the next code unit
+            STREAM_GET_BYTE(cur_byte);
+            //Work on the second code unit.
+            wchar_t lowShort = (wchar_t)(cur_byte & 0x3F);
+
+            //Create the UTF-16 code unit, then increment the iterator
+            int unicode = (highShort << 8) | lowShort;
+
+            //Check to make sure the "unicode" is in the range [0..D7FF] and [E000..FFFF].
+            if ((0 <= unicode && unicode <= 0xD7FF) || (0xE000 <= unicode && unicode <= 0xFFFF)) {
+                //Directly set the value to the UTF-16 code unit.
+                *v = (wchar_t)unicode;
+            }
+        }
+        else if (cur_byte < 0xF0) {
+            //2048..65535, the remaining Basic Multilingual Plane.
+
+            //Work on the UTF-8 code units one by one.
+            //If drawn out, it would be 1110aaaa 10bbbbcc 10ccdddd
+            //Where a is 4th byte, b is 3rd byte, c is 2nd byte, and d is 1st byte.
+            wchar_t fourthChar = (wchar_t)(cur_byte & 0xF);
+            STREAM_GET_BYTE(cur_byte);
+            wchar_t thirdChar = (wchar_t)(cur_byte & 0x3C) >> 2;
+            wchar_t secondCharHigh = (wchar_t)(cur_byte & 0x3);
+            STREAM_GET_BYTE(cur_byte);
+            wchar_t secondCharLow = (wchar_t)(cur_byte & 0x30) >> 4;
+            wchar_t firstChar = (wchar_t)(cur_byte & 0xF);
+
+            //Create the resulting UTF-16 code unit, then increment the iterator.
+            int unicode = (fourthChar << 12) | (thirdChar << 8) | (secondCharHigh << 6) | (secondCharLow << 4) | firstChar;
+
+            //Check to make sure the "unicode" is in the range [0..D7FF] and [E000..FFFF].
+            //According to math, UTF-8 encoded "unicode" should always fall within these two ranges.
+            if ((0 <= unicode && unicode <= 0xD7FF) || (0xE000 <= unicode && unicode <= 0xFFFF)) {
+                //Directly set the value to the UTF-16 code unit.
+                *v = (wchar_t)unicode;
+            }
+        }
+        else if (cur_byte < 0xF8) {
+            //65536..10FFFF, the Unicode UTF range
+
+            //Work on the UTF-8 code units one by one.
+            //If drawn out, it would be 11110abb 10bbcccc 10ddddee 10eeffff
+            //Where a is 6th byte, b is 5th byte, c is 4th byte, and so on.
+            wchar_t sixthChar = (wchar_t)(cur_byte & 0x4) >> 2;
+            wchar_t fifthCharHigh = (wchar_t)(cur_byte & 0x3);
+            STREAM_GET_BYTE(cur_byte);
+            wchar_t fifthCharLow = (wchar_t)(cur_byte & 0x30) >> 4;
+            wchar_t fourthChar = (wchar_t)(cur_byte & 0xF);
+            STREAM_GET_BYTE(cur_byte);
+            wchar_t thirdChar = (wchar_t)(cur_byte & 0x3C) >> 2;
+            wchar_t secondCharHigh = (wchar_t)(cur_byte & 0x3);
+            STREAM_GET_BYTE(cur_byte);
+            wchar_t secondCharLow = (wchar_t)(cur_byte & 0x30) >> 4;
+            wchar_t firstChar = (wchar_t)(cur_byte & 0xF);
+
+            int unicode = (sixthChar << 4) | (fifthCharHigh << 2) | fifthCharLow | (fourthChar << 12) | (thirdChar << 8) | (secondCharHigh << 6) | (secondCharLow << 4) | firstChar;
+            wchar_t highSurrogate = (unicode - 0x10000) / 0x400 + 0xD800;
+            wchar_t lowSurrogate = (unicode - 0x10000) % 0x400 + 0xDC00;
+
+            //Set the UTF-16 code units
+            //*v1 = lowSurrogate;
+            //*v2 = highSurrogate;
+
+            *v = L'_';
+        }
+        else {
+            goto read_next;
+        }
+    }
+    else
+        return STATUS_INVALID_PARAMETER;
+
     return STATUS_SUCCESS;
 }

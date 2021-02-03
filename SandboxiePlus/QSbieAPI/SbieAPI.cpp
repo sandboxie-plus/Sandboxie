@@ -177,7 +177,7 @@ CBoxedProcess* CSbieAPI::NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox
 	return new CBoxedProcess(ProcessId, pBox);
 }
 
-QString CSbieAPI__GetRegValue(HANDLE hKey, WCHAR* pName)
+QString CSbieAPI__GetRegValue(HANDLE hKey, const WCHAR* pName)
 {
 	char buf[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + MAX_PATH];
 	KEY_VALUE_PARTIAL_INFORMATION *value = (KEY_VALUE_PARTIAL_INFORMATION *)buf;
@@ -918,7 +918,7 @@ QString CSbieAPI::GetStartPath() const
 	return m_SbiePath + "//" + QString::fromWCharArray(SBIESTART_EXE);
 }
 
-SB_STATUS CSbieAPI::ReloadBoxes()
+SB_STATUS CSbieAPI::ReloadBoxes(bool bFullUpdate)
 {
 	QMap<QString, CSandBoxPtr> OldSandBoxes = m_SandBoxes;
 
@@ -927,7 +927,9 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		QString BoxName = SbieIniGet(QString(), QString(), (i | CONF_GET_NO_EXPAND));
 		if (BoxName.isNull())
 			break;
-		if (!IsBoxEnabled(BoxName))
+
+		bool bIsEnabled;
+		if (!IsBox(BoxName, bIsEnabled))
 			continue;
 
 		CSandBoxPtr pBox = OldSandBoxes.take(BoxName.toLower());
@@ -935,9 +937,12 @@ SB_STATUS CSbieAPI::ReloadBoxes()
 		{
 			pBox = CSandBoxPtr(NewSandBox(BoxName, this));
 			m_SandBoxes.insert(BoxName.toLower(), pBox);
+			UpdateBoxPaths(pBox);
 		}
-			
-		UpdateBoxPaths(pBox);
+		else if(bFullUpdate)
+			UpdateBoxPaths(pBox);
+
+		pBox->m_IsEnabled = bIsEnabled;
 
 		pBox->UpdateDetails();
 	}
@@ -1597,12 +1602,12 @@ SB_STATUS CSbieAPI::ReloadConfig(quint32 SessionId)
 	//emit LogMessage("Sandboxie config has been reloaded.", false);
 	emit LogSbieMessage(0, QStringList() << "Sandboxie config has been reloaded" << "" << "", 4);
 
-	ReloadBoxes();
+	ReloadBoxes(true);
 
 	return SB_OK;
 }
 
-bool CSbieAPI::IsBoxEnabled(const QString& BoxName)
+bool CSbieAPI::IsBox(const QString& BoxName, bool& bIsEnabled)
 {
 	wstring box_name = BoxName.toStdWString();
 
@@ -1613,7 +1618,9 @@ bool CSbieAPI::IsBoxEnabled(const QString& BoxName)
 	args->func_code = API_IS_BOX_ENABLED;
 	args->box_name.val = (WCHAR*)box_name.c_str();
 
-	return NT_SUCCESS(m->IoControl(parms));
+	NTSTATUS status = m->IoControl(parms);
+	bIsEnabled = NT_SUCCESS(status);
+	return bIsEnabled || status == STATUS_ACCOUNT_RESTRICTION;
 }
 
 bool CSbieAPI::IsConfigLocked()

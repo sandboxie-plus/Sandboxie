@@ -223,6 +223,8 @@ public:
 		emit ColumnChanged(column, !hide);
 	}
 
+	static QString m_ResetColumns;
+
 signals:
 	void ColumnChanged(int column, bool visible);
 	void ResetColumns();
@@ -240,8 +242,10 @@ public slots:
 	void OnResetColumns()
 	{
 		QAbstractItemModel* pModel = model();
-		for (int i = 0; i < pModel->columnCount(); i++)
+		for (int i = 0; i < pModel->columnCount(); i++) {
 			SetColumnHidden(i, false);
+			QTreeView::resizeColumnToContents(i);
+		}
 	}
 
 private slots:
@@ -267,7 +271,7 @@ private slots:
 			if (m_ColumnReset)
 			{
 				m_pMenu->addSeparator();
-				QAction* pAction = m_pMenu->addAction(tr("Reset columns"));
+				QAction* pAction = m_pMenu->addAction(m_ResetColumns);
 				if(m_ColumnReset == 1)
 					connect(pAction, SIGNAL(triggered()), this, SLOT(OnResetColumns()));
 				else

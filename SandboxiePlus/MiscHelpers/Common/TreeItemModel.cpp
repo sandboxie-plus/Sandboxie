@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TreeItemModel.h"
 
+QString QTreeViewEx::m_ResetColumns = "Reset Columns";
+
 #define FIRST_COLUMN 0
 
 bool CTreeItemModel::m_DarkMode = false;

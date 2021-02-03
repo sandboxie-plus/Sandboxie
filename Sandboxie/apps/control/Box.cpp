@@ -226,18 +226,23 @@ void CBox::SetDefaultSettings()
     int cfglvl;
     ini.GetNum(m_name, _ConfigLevel, cfglvl);
 
-    if (cfglvl >= 7)
+    if (cfglvl >= 8)
         return;
 
     BOOL ok = TRUE;
 
     if (cfglvl >= 1) {
 
-        ok = ini.SetNum(m_name, _ConfigLevel, 7);
+        ok = ini.SetNum(m_name, _ConfigLevel, 8);
 
         if (ok) {
 
-            if (cfglvl == 6) {
+            if (cfglvl == 7) {
+
+                CAppPage::SetDefaultTemplates8(*this);
+
+            }
+            else if (cfglvl == 6) {
 
                 CAppPage::SetDefaultTemplates7(*this);
 
@@ -250,7 +255,7 @@ void CBox::SetDefaultSettings()
         goto done;
     }
 
-    ok = ini.SetNum(m_name, _ConfigLevel, 7);
+    ok = ini.SetNum(m_name, _ConfigLevel, 8);
 
     if (ok)
     {

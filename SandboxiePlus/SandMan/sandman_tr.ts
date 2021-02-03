@@ -42,16 +42,12 @@
         <translation>Öntanımlı</translation>
     </message>
     <message>
-        <source>Legacy (old sbie behaviour)</source>
-        <translation type="vanished">Eski (eski sbie davranışı)</translation>
-    </message>
-    <message>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Yeni KumKutusu</translation>
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Eski Sandboxie Davranışı</translation>
     </message>
 </context>
 <context>
@@ -239,51 +235,51 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>Yönlendir</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tümünü Yönlendir</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapalı</translation>
     </message>
     <message>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapalı RT</translation>
     </message>
     <message>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Salt Okunur</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizli</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Bilinmeyen</translation>
+        <translation>Bilinmeyen</translation>
     </message>
     <message>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya/Dizin</translation>
     </message>
     <message>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Kayıt</translation>
     </message>
     <message>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>IPC Yolu</translation>
     </message>
     <message>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Wnd Sınıfı</translation>
     </message>
     <message>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM Objesi</translation>
     </message>
 </context>
 <context>
@@ -435,46 +431,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
+        <translation>%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
 Dosya adı: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
+        <translation>%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
 Tam yol: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1, %2&apos;den hızlı kurtarma için uygun.
+        <translation>%1, %2&apos;den hızlı kurtarma için uygun.
 Dosyayı yazan: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
+        <translation>Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -571,7 +547,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Devre dışı</translation>
     </message>
 </context>
 <context>
@@ -610,7 +586,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>About Sandboxie-Plus</source>
-        <translation>Sandboxie-Plus Hakkında</translation>
+        <translation>Sandboxie-Plus hakkında</translation>
     </message>
     <message>
         <source>Driver version: %1</source>
@@ -638,7 +614,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Visit Support Forum</source>
-        <translation>Destek Forumu&apos;tnu ziyaret et</translation>
+        <translation>Destek Forumu&apos;nu ziyaret et</translation>
     </message>
     <message>
         <source>Failed to copy configuration from sandbox %1: %2</source>
@@ -840,7 +816,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Sandboxie-Plus Hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2021 DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2021 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Cleanup</source>
@@ -915,8 +891,8 @@ Full path: %4</source>
         <translation>%1: %2 korumalı kutusu silinemedi</translation>
     </message>
     <message>
-        <source>&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу загрузки&lt;/a&gt;?&lt;/p&gt;</translation>
+        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
+        <translation>&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Maintenance operation Successful</source>
@@ -988,7 +964,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Reset all hidden messages</source>
-        <translation>Tüm gizli mesajları sıfırla</translation>
+        <translation>Tüm gizlenmiş mesajları sıfırla</translation>
     </message>
     <message>
         <source>   -   NOT connected</source>
@@ -1105,14 +1081,6 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Her zaman üstte</translation>
     </message>
     <message>
-        <source>Sellect box:</source>
-        <translation type="vanished">Kutu Seç:</translation>
-    </message>
-    <message>
-        <source>Some compatybility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="vanished">Bazı uyumluluk şablonları (%1) eksik, büyük olasılıkla silinmiş, bunları tüm kutulardan kaldırmak istiyor musunuz?</translation>
-    </message>
-    <message>
         <source>Cleaned up removed templates...</source>
         <translation>Kaldırılan şablonlar temizlendi...</translation>
     </message>
@@ -1126,63 +1094,59 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Reset Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Sütunları Sıfırla</translation>
     </message>
     <message>
         <source>Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencere Bulucu</translation>
     </message>
     <message>
         <source>Show Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizli Kutuları Göster</translation>
     </message>
     <message>
         <source>Select box:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutu seç:</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bazı uyumluluk şablonları (%1) eksik, büyük olasılıkla silinmiş, bunları tüm kutulardan kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm korumalı kutulardaki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
         <source>Terminate all without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Hepsini sormadan sonlandır</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation type="unfinished"></translation>
+    <source>The selected window is running as part of program %1 in sandbox %2</source>
+        <translation>Seçilen pencere %2 kutusunda %1 programının bir parçası olarak çalışıyor</translation>
     </message>
     <message>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen pencere, herhangi bir kutudaki programın parçası olarak çalışmıyor.</translation>
     </message>
     <message>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulucu Aracını seçmek için bir pencerenin üzerine sürükleyin, ardından pencerenin kumkutusunda olup olmadığını kontrol etmek için fareyi bırakın.</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Pencere Bulucu</translation>
+    </message>
+    <message>
+        <source>Default sandbox not found; creating: %1</source>
+        <translation>Öntanımlı kumkutusu bulunamadı; oluşturuluyor: %1</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this message anymore.</source>
+        <translation>Artık bu mesajı gösterme.</translation>
     </message>
 </context>
 <context>
@@ -1213,7 +1177,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Başlık</translation>
     </message>
 </context>
 <context>
@@ -1245,7 +1209,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Drop Admin Rights</source>
-        <translation>Yönetici haklarını bırak</translation>
+        <translation>Yönetici haklarını kaldır</translation>
     </message>
     <message>
         <source>Run eMail Client</source>
@@ -1435,20 +1399,20 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Birden çok korumalı kutunun içeriğini gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçili kutu(lar)daki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu kutu devre dışı, etkinleştirmek istiyor musunuz?</translation>
+    </message>
+    <message>
+        <source>This Sandbox is empty.</source>
+        <translation>Bu kumkutusu boş.</translation>
     </message>
     <message>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir grup kendi ebeveyni olamaz.</translation>
     </message>
 </context>
 <context>
@@ -1499,7 +1463,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Otomatik Algıla</translation>
     </message>
 </context>
 <context>
@@ -1548,12 +1512,8 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>SandboxiePlus yeni kutu</translation>
     </message>
     <message>
-        <source>Enter a name for the new box:</source>
-        <translation type="vanished">Yeni kutu için bir ad girin:</translation>
-    </message>
-    <message>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>KumKutusu Adı:</translation>
     </message>
 </context>
 <context>
@@ -1932,7 +1892,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
     </message>
     <message>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation>İş nesnelerine KumKutu&apos;lu süreçler ekleyin (önerilir)</translation>
+        <translation>İş nesnelerine KumKutu&apos;lu (korumalı kutu) süreçler ekle (önerilir)</translation>
     </message>
     <message>
         <source>Remove Program</source>
@@ -2037,7 +1997,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Prevent change to network and firewall parameters</source>
-        <translation>Ağ ve güvenlik duvarı parametrelerinde değişikliği önleyin</translation>
+        <translation>Ağ ve güvenlik duvarı parametrelerinde değişikliği önle</translation>
     </message>
     <message>
         <source>COM Class Trace</source>
@@ -2045,7 +2005,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>&lt;- for this one the above does not apply</source>
-        <translation>&lt;- bunun için yukarıdakiler geçerli değildir</translation>
+        <translation>&lt;- yukarıdakiler bunun için geçerli değildir</translation>
     </message>
     <message>
         <source>Block access to the printer spooler</source>
@@ -2105,7 +2065,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth erişimine izin ver</translation>
     </message>
 </context>
 <context>
@@ -2126,23 +2086,23 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">İptal</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Uygula</translation>
+        <translation>Uygula</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">TAMAM</translation>
+        <translation>TAMAM</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Evet</translation>
+        <translation>&amp;Evet</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Hayır</translation>
+        <translation>&amp;Hayır</translation>
     </message>
 </context>
 <context>
@@ -2185,7 +2145,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Kurtarma</translation>
     </message>
 </context>
 <context>
@@ -2316,7 +2276,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Prevent the listed programs from starting on this system</source>
-        <translation>Listelenen programların bu sistemde başlamasını önleyin</translation>
+        <translation>Listelenen programların bu sistemde başlamasını önle</translation>
     </message>
     <message>
         <source>Only Administrator user accounts can use Disable Forced Programs command</source>
@@ -2328,7 +2288,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Open urls from this ui sandboxed</source>
-        <translation>Bu kullanıcı arayüzündeki linkleri korumalı kutuda aç</translation>
+        <translation>Bu kullanıcı arayüzündeki (ui) linkleri korumalı kutuda aç</translation>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
@@ -2348,11 +2308,11 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Start UI with Windows</source>
-        <translation>Windows başlangıcında kullanıcı arayüzünü başlat</translation>
+        <translation>Windows başlangıcında kullanıcı arayüzünü (ui) başlat</translation>
     </message>
     <message>
         <source>Start UI when a sandboxed process is started</source>
-        <translation>Korumalı kutuda bir işlem başladığında kullanıcı arayüzünü başlat</translation>
+        <translation>Korumalı kutuda bir işlem başladığında kullanıcı arayüzünü (ui) başlat</translation>
     </message>
     <message>
         <source>Show first recovery window when emptying sandboxes</source>
@@ -2403,7 +2363,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Anlık Görüntüler</translation>
     </message>
 </context>
 </TS>

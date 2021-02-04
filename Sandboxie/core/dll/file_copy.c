@@ -125,7 +125,7 @@ found_match:
         return mode;
 
     //
-    // if tere is no configuration for this file type/path decide based on the file size
+    // if there is no configuration for this file type/path, then decide based on the file size
     //
     
     if (File_CopyLimitKb == -1 || file_size < ((ULONGLONG)File_CopyLimitKb * 1024))

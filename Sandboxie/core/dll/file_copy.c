@@ -128,7 +128,7 @@ found_match:
     // if tere is no configuration for this file type/path decide based on the file size
     //
     
-    if (File_CopyLimitKb == -1 || file_size < (File_CopyLimitKb * 1024))
+    if (File_CopyLimitKb == -1 || file_size < ((ULONGLONG)File_CopyLimitKb * 1024))
         return FILE_COPY_CONTENT;
 
     //

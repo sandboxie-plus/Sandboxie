@@ -37,7 +37,7 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="10"/>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Criar Nova Caixa</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="31"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="42"/>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamento herdado de Sandboxie</translation>
     </message>
     <message>
         <source>Legacy (old sbie behaviour)</source>
@@ -268,48 +268,48 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1493"/>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>Direto</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1494"/>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Direto Todos</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1495"/>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechado</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1496"/>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>RT fechado</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1497"/>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Somente Leitura</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1498"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Oculto</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1500"/>
         <location filename="Windows/OptionsWindow.cpp" line="1513"/>
         <source>Unknown</source>
-        <translation type="unfinished">Desconhecido</translation>
+        <translation>Desconhecido</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1507"/>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo/Pasta</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1508"/>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Registro</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1509"/>
@@ -319,12 +319,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1510"/>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1511"/>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Objeto COM</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1518"/>
@@ -555,7 +555,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Deseja permitir que %4 (%5) copie um arquivo grande %1 para a caixa: %2?
+        <translation>Deseja permitir que %4 (%5) copie um arquivo grande %1 para a caixa: %2?
 Nome do arquivo: %3</translation>
     </message>
     <message>
@@ -564,7 +564,7 @@ Nome do arquivo: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Deseja permitir o acesso de %1 (%2) à Internet?
+        <translation>Deseja permitir o acesso de %1 (%2) à Internet?
 Caminho completo: %3</translation>
     </message>
     <message>
@@ -573,7 +573,7 @@ Caminho completo: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 está qualificado para recuperação rápida de %2.
+        <translation>%1 está qualificado para recuperação rápida de %2.
 O arquivo foi gravado por: %3</translation>
     </message>
     <message>
@@ -582,7 +582,7 @@ O arquivo foi gravado por: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Migrando um arquivo grande %1 para a caixa %2, %3 restante.
+        <translation>Migrando um arquivo grande %1 para a caixa %2, %3 restante.
 Caminho completo: %4</translation>
     </message>
     <message>
@@ -684,7 +684,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="131"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Desativado</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="136"/>
@@ -739,7 +739,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="125"/>
         <source>Reset Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir Colunas</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="126"/>
@@ -806,7 +806,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="356"/>
         <source>Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Localizador de Janelas</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="360"/>
@@ -901,7 +901,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="395"/>
         <source>Show Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Caixas Ocultas</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="398"/>
@@ -1033,37 +1033,37 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="619"/>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Caixa de areia padrão não encontrada; Criando: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1731"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Você quer ir para a &lt;a href=&quot;%1&quot;&gt;página de informações&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1798"/>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não mostre mais essa mensagem.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2048"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation type="unfinished"></translation>
+        <translation>A janela selecionada está sendo executado como parte do programa %1 na caixa de areia %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2055"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation type="unfinished"></translation>
+        <translation>A janela selecionada não está sendo executado como parte de nenhum programa de caixa de areia.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2090"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arraste o Localizador sobre uma janela para selecioná-la, em seguida, solte para verificar se a janela está em uma caixa.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2145"/>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Localizador de Janela</translation>
     </message>
     <message>
         <source>Sellect box:</source>
@@ -1108,12 +1108,12 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1072"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Você deseja encerrar todos os processos em todas as caixas?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1073"/>
         <source>Terminate all without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizar tudo sem perguntar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1092"/>
@@ -1368,7 +1368,7 @@ Faça o download da versão mais recente e configure-o com o Sandboxie.ini confo
     <message>
         <location filename="SandMan.cpp" line="596"/>
         <source>Select box:</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar caixa:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="665"/>
@@ -1378,7 +1378,7 @@ Faça o download da versão mais recente e configure-o com o Sandboxie.ini confo
     <message>
         <location filename="SandMan.cpp" line="703"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Alguns modelos de compatibilidade (%1) estão faltando, provavelmente excluídos. Deseja removê-los de todas as caixas?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -1611,7 +1611,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Models/SbieModel.cpp" line="428"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="430"/>
@@ -1817,7 +1817,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Views/SbieView.cpp" line="457"/>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Um grupo não pode ser seu próprio pai.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="521"/>
@@ -1828,7 +1828,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Views/SbieView.cpp" line="546"/>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Essa caixa está vazia.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="603"/>
@@ -1848,7 +1848,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Views/SbieView.cpp" line="631"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Você deseja encerrar todos os processos na (s) caixa (s) selecionada (s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="751"/>
@@ -1858,7 +1858,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Views/SbieView.cpp" line="781"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Essa caixa está desativada, deseja ativá-la?</translation>
     </message>
     <message>
         <source>Suspend</source>
@@ -1950,7 +1950,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="50"/>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Detecção Automática</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="79"/>
@@ -2067,7 +2067,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="110"/>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da Caixa:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
@@ -2712,7 +2712,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1456"/>
         <source>Allow access to Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir acesso ao Bluetooth</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
@@ -2827,7 +2827,7 @@ ao invés de &quot;*&quot;.</translation>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
         <oldsource>SandboxiePlus Settings</oldsource>
-        <translation type="unfinished">Configurações Sandboxie Plus</translation>
+        <translation>Sandboxie Plus - Recuperar</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="69"/>
@@ -2847,7 +2847,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="76"/>
@@ -3031,7 +3031,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="363"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="415"/>
@@ -3116,7 +3116,7 @@ ao invés de &quot;*&quot;.</translation>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
         <oldsource>SandboxiePlus Settings</oldsource>
-        <translation type="unfinished">Configurações do SandboxiePlus</translation>
+        <translation>SandboxiePlus - Instântaneos</translation>
     </message>
     <message>
         <source>Snapshot Details</source>

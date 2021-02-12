@@ -1164,11 +1164,10 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
         status = NtDuplicateObject(
                         SourceProcessHandle, SourceHandle,
-                        TargetProcessHandle, TargetHandle,
+                        TargetProcessHandle, &TargetHandleValue,
                         DesiredAccess, HandleAttributes,
                         Options & ~DUPLICATE_CLOSE_SOURCE);
 
-        TargetHandleValue = *TargetHandle;
         *TargetHandle = NULL;
 
         if (NT_SUCCESS(status)) {

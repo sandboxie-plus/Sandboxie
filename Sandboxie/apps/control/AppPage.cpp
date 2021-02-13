@@ -1192,25 +1192,26 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     // replace with:    Template=Opera_Bookmarks_DirectAccess
     //
     
-    const CString &OperaBookmarksTemplate(L"Opera_Bookmarks_DirectAccess");
+    const CString &OperaBookmarksTmpl(L"Opera_Bookmarks_DirectAccess");
     const CString &OperaBookmarks1(L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks");
     const CString &OperaBookmarks2(L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks.bak");
     const CString &OperaBookmarks3(L"%AppData%\\Opera Software\\Opera Stable\\BookmarksExtras");
 
     UpdateTemplates2(
-        box, L"opera.exe", OperaBookmarksTemplate, OperaBookmarks1, OperaBookmarks2);
+        box, L"opera.exe", OperaBookmarksTmpl, OperaBookmarks1, OperaBookmarks2);
 
     UpdateTemplates2(
-        box, L"opera.exe", OperaBookmarksTemplate, OperaBookmarks3, OperaBookmarks3);
+        box, L"opera.exe", OperaBookmarksTmpl, OperaBookmarks3, OperaBookmarks3);
 
     //
     // find and remove invalid OpenFilePath reference:
     //      OpenFilePath=bookmarks.exe,bookmarks*
     //
     
+    const CString &InvalidEntry1(L"bookmarks*");
+
     UpdateTemplates2(
-        box, L"bookmarks.exe", L'\0',
-        L"bookmarks*");
+        box, L"bookmarks.exe", L'\0', InvalidEntry1, InvalidEntry1);
 }
 
 

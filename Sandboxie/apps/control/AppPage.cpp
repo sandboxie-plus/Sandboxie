@@ -1135,7 +1135,7 @@ void CAppPage::UpdateTemplates(CBox &box)
     UpdateEmailTemplates(box);
 
     //
-    // finaly, enable default templates
+    // finally, enable default templates
     //
 
     SetDefaultTemplates6(box);

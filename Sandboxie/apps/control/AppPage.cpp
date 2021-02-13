@@ -1209,7 +1209,7 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     //
     
     UpdateTemplates2(
-        box, L"bookmarks.exe", L"\0",
+        box, L"bookmarks.exe", L'\0',
         L"bookmarks*");
 }
 

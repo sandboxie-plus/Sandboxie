@@ -1169,38 +1169,43 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     // find and remove:
     //      OpenFilePath=seamonkey.exe,%AppData%\Mozilla\Profiles\*\bookmark*
     //      OpenFilePath=seamonkey.exe,%AppData%\Mozilla\Profiles\*\places*
-    //      OpenFilePath=seamon~1.exe,%AppData%\Mozilla\Profiles\*\bookmark*
-    //      OpenFilePath=seamon~1.exe,%AppData%\Mozilla\Profiles\*\places*
     //
     // replace with:    Template=SeaMonkey_Bookmarks_DirectAccess
     //
 
-    //const CString &SeaMonkeyTemplate(L"SeaMonkey_Bookmarks_DirectAccess");
-    //const CString &SeaMonkeyPath1(
-    //    L"%AppData%\\Mozilla\\Profiles\\*\\bookmark*");
-    //const CString &SeaMonkeyPath2(
-    //    L"%AppData%\\Mozilla\\Profiles\\*\\places*");
+    const CString &SeaMonkeyTemplate(L"SeaMonkey_Bookmarks_DirectAccess");
+    const CString &SeaMonkeyPath1(
+        L"%AppData%\\Mozilla\\Profiles\\*\\bookmark*");
+    const CString &SeaMonkeyPath2(
+        L"%AppData%\\Mozilla\\Profiles\\*\\places*");
 
-    //UpdateTemplates2(
-    //    box, L"seamonkey.exe", SeaMonkeyTemplate,
-    //    SeaMonkeyPath1, SeaMonkeyPath2);
-
-    //UpdateTemplates2(
-    //    box, L"seamon~1.exe", SeaMonkeyTemplate,
-    //    SeaMonkeyPath1, SeaMonkeyPath2);
+    UpdateTemplates2(
+        box, L"seamonkey.exe", SeaMonkeyTemplate,
+        SeaMonkeyPath1, SeaMonkeyPath2);
 
     //
     // find and remove:
-    //      OpenFilePath=opera.exe,%AppData%\Opera\Opera\Profile\opera6.adr
-    //      OpenFilePath=opera.exe,%AppData%\Opera\Opera\Profile\notes.adr
+    //      OpenFilePath=opera.exe,%AppData%\Opera Software\Opera Stable\Bookmarks
+    //      OpenFilePath=opera.exe,%AppData%\Opera Software\Opera Stable\Bookmarks.bak
+    //      OpenFilePath=opera.exe,%AppData%\Opera Software\Opera Stable\BookmarksExtras
     //
-    // replace with:    Template=SeaMonkey_Bookmarks_DirectAccess
+    // replace with:    Template=Opera_Bookmarks_DirectAccess
     //
 
-    //UpdateTemplates2(
-    //    box, L"opera.exe", L"Opera_Bookmarks_DirectAccess",
-    //    L"%AppData%\\Opera\\Opera\\Profile\\opera6.adr",
-    //    L"%AppData%\\Opera\\Opera\\Profile\\notes.adr");
+    UpdateTemplates2(
+        box, L"opera.exe", L"Opera_Bookmarks_DirectAccess",
+        L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks",
+        L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks.bak",
+        L"%AppData%\\Opera Software\\Opera Stable\\BookmarksExtras");
+
+    //
+    // find and remove invalid OpenFilePath reference:
+    //      OpenFilePath=bookmarks.exe,bookmarks*
+    //
+    
+    UpdateTemplates2(
+        box, L"bookmarks.exe", L"",
+        L"bookmarks*");
 }
 
 
@@ -1211,51 +1216,6 @@ void CAppPage::UpdateWebTemplates(CBox &box)
 
 void CAppPage::UpdateEmailTemplates(CBox &box)
 {
-    //
-    // find and remove:
-    //      OpenFilePath=msimn.exe,%AppData%\Identities
-    //      OpenFilePath=msimn.exe,%Local AppData%\Identities
-    //      OpenFilePath=msimn.exe,%AppData%\Microsoft\Address Book
-    //      OpenFilePath=msimn.exe,*.eml
-    //
-    // replace with:    Template=Outlook_Express
-    //
-    // discard:
-    //      OpenKeyPath=msimn.exe,HKEY_CURRENT_USER\Identities
-    //      OpenKeyPath=msimn.exe,
-    //          HKEY_CURRENT_USER\Software\Microsoft\Outlook Express
-    //      OpenKeyPath=msimn.exe,
-    //          HKEY_CURRENT_USER\Software\Microsoft\Internet Account Manager
-    //      OpenKeyPath=msimn.exe,
-    //          HKEY_LOCAL_MACHINE\Software\Microsoft\Outlook Express
-    //      OpenKeyPath=msimn.exe,
-    //          HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\
-    //          Outlook Express
-    //
-
-    //CStringList _OutlookExpressFiles;
-    //CStringList _OutlookExpressKeys;
-
-    //_OutlookExpressFiles.AddTail(L"%AppData%\\Identities");
-    //_OutlookExpressFiles.AddTail(L"%Local AppData%\\Identities");
-    //_OutlookExpressFiles.AddTail(L"%AppData%\\Microsoft\\Address Book");
-    //_OutlookExpressFiles.AddTail(L"*.eml");
-
-    //_OutlookExpressKeys.AddTail(L"HKEY_CURRENT_USER\\Identities");
-    //_OutlookExpressKeys.AddTail(
-    //    L"HKEY_CURRENT_USER\\Software\\Microsoft\\Outlook Express");
-    //_OutlookExpressKeys.AddTail(
-    //    L"HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Account Manager");
-    //_OutlookExpressKeys.AddTail(
-    //    L"HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Outlook Express");
-    //_OutlookExpressKeys.AddTail(
-    //    L"HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\"
-    //    L"Microsoft\\Outlook Express");
-
-    //UpdateTemplates3(
-    //    box, L"msimn.exe", L"Outlook_Express",
-    //    _OutlookExpressFiles, _OutlookExpressKeys);
-
     //
     // find and remove:
     //      OpenFilePath=outlook.exe,%AppData%\Microsoft\Outlook
@@ -1383,15 +1343,10 @@ void CAppPage::UpdateEmailTemplates(CBox &box)
         box, L"thunderbird.exe", _Thunderbird,
         _ThunderbirdFiles, _ThunderbirdKeys);
 
-    //UpdateTemplates3(
-    //    box, L"thunde~1.exe", _Thunderbird,
-    //    _ThunderbirdFiles, _ThunderbirdKeys);
-
     //
     // find and remove:
     //      OpenFilePath=seamonkey.exe,%AppData%\Mozilla\Profiles\*\Mail*
-    //      OpenFilePath=seamonkey.exe,
-    //          %Local AppData%\Mozilla\Profiles\*\Mail*
+    //      OpenFilePath=seamonkey.exe,%Local AppData%\Mozilla\Profiles\*\Mail*
     //
     // replace with:    Template=SeaMonkey
     //
@@ -1422,10 +1377,6 @@ void CAppPage::UpdateEmailTemplates(CBox &box)
     UpdateTemplates3(
         box, L"seamonkey.exe", _SeaMonkey,
         _SeaMonkeyFiles, _SeaMonkeyKeys);
-
-    //UpdateTemplates3(
-    //    box, L"seamon~1.exe", _SeaMonkey,
-    //    _SeaMonkeyFiles, _SeaMonkeyKeys);
 
     //
     // find and remove:

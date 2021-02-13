@@ -1191,12 +1191,17 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     //
     // replace with:    Template=Opera_Bookmarks_DirectAccess
     //
+    
+    const CString &OperaBookmarksTemplate(L"Opera_Bookmarks_DirectAccess");
+    const CString &OperaBookmarks1(L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks");
+    const CString &OperaBookmarks2(L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks.bak");
+    const CString &OperaBookmarks3(L"%AppData%\\Opera Software\\Opera Stable\\BookmarksExtras");
 
     UpdateTemplates2(
-        box, L"opera.exe", L"Opera_Bookmarks_DirectAccess",
-        L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks",
-        L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks.bak",
-        L"%AppData%\\Opera Software\\Opera Stable\\BookmarksExtras");
+        box, L"opera.exe", OperaBookmarksTemplate, OperaBookmarks1, OperaBookmarks2);
+
+    UpdateTemplates2(
+        box, L"opera.exe", OperaBookmarksTemplate, OperaBookmarks3, OperaBookmarks3);
 
     //
     // find and remove invalid OpenFilePath reference:
@@ -1204,7 +1209,7 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     //
     
     UpdateTemplates2(
-        box, L"bookmarks.exe", L"",
+        box, L"bookmarks.exe", L"\0",
         L"bookmarks*");
 }
 
@@ -1385,10 +1390,10 @@ void CAppPage::UpdateEmailTemplates(CBox &box)
     // replace with:    Template=Opera_Mail
     //
 
-    CString _OperaPath1(L"%AppData%\\Opera\\Opera\\mail");
+    CString _OperaMailPath1(L"%AppData%\\Opera\\Opera\\mail");
 
     UpdateTemplates2(
-        box, L"opera.exe", L"Opera_Mail", _OperaPath1, _OperaPath1);
+        box, L"opera.exe", L"Opera_Mail", _OperaMailPath1, _OperaMailPath1);
 }
 
 

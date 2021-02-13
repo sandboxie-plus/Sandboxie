@@ -1175,9 +1175,9 @@ void CAppPage::UpdateWebTemplates(CBox &box)
 
     const CString &SeaMonkeyTemplate(L"SeaMonkey_Bookmarks_DirectAccess");
     const CString &SeaMonkeyPath1(
-        L"%AppData%\\Mozilla\\Profiles\\*\\bookmark*");
+        L"%AppData%\\Mozilla\\SeaMonkey\\Profiles\\*\\bookmark*");
     const CString &SeaMonkeyPath2(
-        L"%AppData%\\Mozilla\\Profiles\\*\\places*");
+        L"%AppData%\\Mozilla\\SeaMonkey\\Profiles\\*\\places*");
 
     UpdateTemplates2(
         box, L"seamonkey.exe", SeaMonkeyTemplate,

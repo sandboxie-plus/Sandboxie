@@ -12,7 +12,7 @@
 #include <QTranslator>
 #include "Windows/PopUpWindow.h"
 
-#include "version.h"
+#include "../version.h"
 
 
 //#include "../QSbieAPI/SbieAPI.h"

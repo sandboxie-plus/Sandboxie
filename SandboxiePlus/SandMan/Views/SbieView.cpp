@@ -39,6 +39,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pSbieTree->setItemDelegate(theGUI->GetItemDelegate());
 
 	m_pSbieTree->setModel(m_pSortProxy);
+	((CSortFilterProxyModel*)m_pSortProxy)->setView(m_pSbieTree);
 
 	m_pSbieTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	m_pSbieTree->setSortingEnabled(true);
@@ -71,6 +72,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Run eMail Client"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunExplorer = m_pMenuRun->addAction(CSandMan::GetIcon("Explore"), tr("Run Explorer"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Run Cmd.exe"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunCmdAdmin = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Run Cmd.exe as Admin"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRun->addSeparator();
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
@@ -377,6 +379,26 @@ QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QS
 	return Grouping.join(",");
 }
 
+QString CSbieView::FindParent(const QString& Name)
+{
+	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+	{
+		if (I.value().contains(Name, Qt::CaseInsensitive))
+			return I.key();
+	}
+	return QString();
+}
+
+bool CSbieView::IsParentOf(const QString& Name, const QString& Group)
+{
+	QString Parent = FindParent(Group);
+	if (Parent == Name)
+		return true;
+	if (Parent.isEmpty())
+		return false;
+	return IsParentOf(Name, Parent);
+}
+
 void CSbieView::OnGroupAction()
 {
 	QAction* Action = qobject_cast<QAction*>(sender());
@@ -453,7 +475,7 @@ void CSbieView::OnGroupAction()
 			if (Name.isEmpty())
 				continue;
 
-			if (Name == Group || m_Groups.value(Name).contains(Group)) {
+			if (Name == Group || IsParentOf(Name, Group)) {
 				QMessageBox("Sandboxie-Plus", tr("A group can not be its own parent."), QMessageBox::Critical, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
 				continue;
 			}
@@ -528,6 +550,8 @@ void CSbieView::OnSandBoxAction()
 	}
 	else if (Action == m_pMenuRunCmd)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe"));
+	else if (Action == m_pMenuRunCmdAdmin)
+		Results.append(SandBoxes.first()->RunStart("cmd.exe", true));
 	else if (Action == m_pMenuPresetsLogApi)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetLogApi(m_pMenuPresetsLogApi->isChecked());
 	else if (Action == m_pMenuPresetsINet)

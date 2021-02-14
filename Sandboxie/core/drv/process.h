@@ -136,6 +136,7 @@ struct _PROCESS {
     BOOLEAN file_warn_internet;
     BOOLEAN file_warn_direct_access;
 	BOOLEAN AllowInternetAccess;
+    BOOLEAN file_open_devapi_cmapi;
 
     // key-related
 
@@ -156,6 +157,7 @@ struct _PROCESS {
     BOOLEAN ipc_warn_startrun;
     BOOLEAN ipc_block_password;
     BOOLEAN ipc_open_lsa_endpoint;
+    BOOLEAN ipc_open_sam_endpoint;
     BOOLEAN ipc_allowSpoolerPrintToFile;
     BOOLEAN ipc_openPrintSpooler;
 

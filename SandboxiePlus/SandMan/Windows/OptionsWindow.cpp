@@ -276,6 +276,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.btnAddAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExec()));
 	connect(ui.btnDelAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnDelAutoExec()));
@@ -512,6 +513,7 @@ void COptionsWindow::LoadConfig()
 		ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
 		ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 		ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
+		ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
 
 		ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
 		QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
@@ -679,6 +681,7 @@ void COptionsWindow::SaveConfig()
 		WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
 		WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 		WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
+		WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
 
 		WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
 

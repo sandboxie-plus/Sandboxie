@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>信息</translation>
+        <translation type="vanished">信息</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>时间戳</translation>
+        <translation type="vanished">时间戳</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>进程</translation>
+        <translation type="vanished">进程</translation>
     </message>
 </context>
 <context>
@@ -430,25 +430,25 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
+        <translation type="vanished">您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>您确定允许 %1 (%2) 访问网络吗?
+        <translation type="vanished">您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 可以从 %2 快速恢复.
+        <translation type="vanished">%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>移动大文件 %1 到沙盒 %2, %3 剩余.
+        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 剩余.
 完整路径: %4</translation>
     </message>
     <message>
@@ -568,6 +568,10 @@ Full path: %4</source>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -645,7 +649,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>清理Api调用日志</translation>
+        <translation type="vanished">清理Api调用日志</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -721,7 +725,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>Api调用日志</translation>
+        <translation type="vanished">Api调用日志</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
@@ -827,7 +831,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>API调用记录</translation>
+        <translation type="vanished">API调用记录</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -1027,7 +1031,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>清理资源日志</translation>
+        <translation type="vanished">清理资源日志</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1084,7 +1088,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>要使用API记录日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
+        <translation type="vanished">要使用API记录日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
 请下载最新发布版，并用sandboxie.ini安装，详情请参考README.md里此项的说明.</translation>
     </message>
     <message>
@@ -1166,6 +1170,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Don&apos;t show this message anymore.</source>
         <translation>不再显示此信息</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1431,6 +1439,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>This Sandbox is empty.</source>
         <translation>此沙盒是空的</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2084,6 +2096,10 @@ instead of &quot;*&quot;.</source>
         <source>Allow access to Bluetooth</source>
         <translation>允许访问蓝牙</translation>
     </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -2103,23 +2119,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation>确定</translation>
+        <translation type="vanished">确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>应用</translation>
+        <translation type="vanished">应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation type="vanished">取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;是</translation>
+        <translation type="vanished">&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;否</translation>
+        <translation type="vanished">&amp;否</translation>
     </message>
 </context>
 <context>
@@ -2130,7 +2146,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus设置</translation>
+        <translation type="vanished">SandboxiePlus设置</translation>
     </message>
     <message>
         <source>Add Folder</source>

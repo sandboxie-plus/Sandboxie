@@ -343,3 +343,59 @@ _FX NTSTATUS Config_GetSettingsForImageName(
 
     return STATUS_SUCCESS;
 }
+
+
+//---------------------------------------------------------------------------
+// SbieDll_GetBorderColor
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width)
+{
+#ifndef RGB
+#define RGB(r,g,b)          ((COLORREF)(((BYTE)(r)|((WORD)((BYTE)(g))<<8))|(((DWORD)(BYTE)(b))<<16)))
+#endif //RGB
+
+    *color = RGB(255, 255, 0);
+    if (title) *title = FALSE;
+    if (width) *width = 6;
+
+    NTSTATUS status;
+    WCHAR str[32];
+    status = SbieApi_QueryConfAsIs(box_name, L"BorderColor", 0, str, sizeof(str) - sizeof(WCHAR)); // BorderColor=#00ffff,ttl,6
+
+    if (!NT_SUCCESS(status) || wcslen(str) < 7 || str[0] != L'#')
+        return FALSE;
+
+    WCHAR* ptr = str;
+    WCHAR* tmp = wcschr(ptr, L',');
+    if (tmp != NULL) *tmp = L'\0';
+
+    WCHAR* endptr;
+    *color = wcstol(ptr + 1, &endptr, 16);
+    if (*endptr != L'\0') {
+        *color = RGB(255, 255, 0);
+        return FALSE;
+    }
+
+    if (tmp == NULL) return TRUE;
+    ptr = tmp + 1;
+    tmp = wcschr(ptr, L',');
+    if (tmp != NULL) *tmp = L'\0';
+
+    if (_wcsicmp(ptr, L"ttl") == 0)
+    {
+        if (title) *title = TRUE;
+    }
+    else if (_wcsicmp(ptr, L"off") == 0)
+        return FALSE;
+
+    if (tmp == NULL) return TRUE;
+    ptr = tmp + 1;
+    tmp = wcschr(ptr, L',');
+    if (tmp != NULL) *tmp = L'\0';
+
+    if (width) *width = _wtoi(ptr);
+
+    return TRUE;
+}

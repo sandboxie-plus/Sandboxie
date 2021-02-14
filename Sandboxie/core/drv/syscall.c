@@ -857,13 +857,12 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             if (hConnection)
             {
                 WCHAR trace_str[128];
-                swprintf(trace_str, L"[syscall] t=%06d - %.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
-                    PsGetCurrentThreadId(),
+                swprintf(trace_str, L"[syscall] %.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
                     max(strlen(entry->name), 64), entry->name,
                     status, hConnection);
                 const WCHAR* strings[3] = { trace_str, puStr ? puStr->Buffer : NULL, NULL };
                 ULONG lengths[3] = { wcslen(trace_str), puStr ? puStr->Length / 2 : 0, 0 };
-                Session_MonitorPutEx(MONITOR_IPC | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId());
+                Session_MonitorPutEx(MONITOR_IPC | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
                 traced = TRUE;
             }
         }
@@ -871,12 +870,11 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
         {
             WCHAR trace_str[128];
-            swprintf(trace_str, L"[syscall] t=%06d - %.*S, status = 0x%X", //59 chars + entry->name
-                PsGetCurrentThreadId(),
+            swprintf(trace_str, L"[syscall] %.*S, status = 0x%X", //59 chars + entry->name
                 max(strlen(entry->name), 64), entry->name,
                 status);
             const WCHAR* strings[2] = { trace_str, NULL };
-            Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId());
+            Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
         }
 
 #ifdef _WIN64

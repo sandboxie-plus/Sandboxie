@@ -196,6 +196,7 @@
     <ClCompile Include="Sandboxie\SbieIni.cpp" />
     <ClCompile Include="Sandboxie\SbieTemplates.cpp" />
     <ClCompile Include="SbieAPI.cpp" />
+    <ClCompile Include="SbieTrace.cpp" />
     <ClCompile Include="SbieUtils.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -217,6 +218,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SbieDefs.h" />
     <QtMoc Include="SbieStatus.h" />
+    <ClInclude Include="SbieTrace.h" />
     <ClInclude Include="SbieUtils.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -117,7 +117,8 @@ void CMonitorDialog::OnIdle()
 		ULONG seq_num = m_last_entry_seq_num;
         USHORT type;
 		ULONG64 pid;
-        ULONG status = SbieApi_MonitorGetEx(&seq_num, &type, &pid, &name[12]);
+        ULONG64 tid;
+        ULONG status = SbieApi_MonitorGetEx(&seq_num, &type, &pid, &tid, &name[12]);
 		if (status != 0)
 			break; // error or no more entries
 

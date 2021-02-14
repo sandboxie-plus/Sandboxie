@@ -18,11 +18,19 @@ public:
 
 signals:
 	void				SetFilter(const QRegExp& Exp, bool bHighLight = false, int Column = -1);
+	void				SelectNext();
 
 public slots:
 	void				Open();
-	void				OnUpdate();
 	void				Close();
+
+private slots:
+	void				OnUpdate();
+	void				OnText();
+	void				OnReturn();
+
+protected:
+	bool				eventFilter(QObject* source, QEvent* event);
 
 private:
 
@@ -35,4 +43,6 @@ private:
 	QCheckBox*			m_pHighLight;
 
 	QSortFilterProxyModel* m_pSortProxy;
+
+	QTimer*				m_pTimer;
 };

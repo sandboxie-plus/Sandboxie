@@ -1539,6 +1539,6 @@ void CAppPage::SetDefaultTemplates7(CBox &box)
 
 void CAppPage::SetDefaultTemplates8(CBox& box)
 {
-    box.EnableTemplate(L"FileCppy", TRUE);
+    box.EnableTemplate(L"FileCopy", TRUE);
     box.EnableTemplate(L"SkipHook", TRUE);
 }

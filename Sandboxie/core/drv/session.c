@@ -579,7 +579,7 @@ _FX BOOLEAN Session_IsForceDisabled(ULONG SessionId)
 _FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 {
 	const WCHAR* strings[2] = { name, NULL };
-	Session_MonitorPutEx(type, strings, NULL, pid);
+	Session_MonitorPutEx(type, strings, NULL, pid, PsGetCurrentThreadId());
 }
 
 
@@ -588,7 +588,7 @@ _FX void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid)
 //---------------------------------------------------------------------------
 
 
-_FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, ULONG* lengths, HANDLE pid)
+_FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, ULONG* lengths, HANDLE pid, HANDLE tid)
 {
     SESSION *session;
     KIRQL irql;
@@ -600,17 +600,20 @@ _FX void Session_MonitorPutEx(USHORT type, const WCHAR** strings, ULONG* lengths
     if (session->monitor_log && *strings[0]) {
 
 		ULONG64 pid64 = (ULONG64)pid;
+        ULONG64 tid64 = (ULONG64)tid;
+
 		SIZE_T data_len = 0;
 		for(int i=0; strings[i] != NULL; i++)
 			data_len += (lengths ? lengths [i] : wcslen(strings[i])) * sizeof(WCHAR);
 
-		//[Type 2][PID 8][Data n*2]
-		SIZE_T entry_size = 2 + 8 + data_len;
+		//[Type 2][PID 8][TID 8][Data n*2]
+		SIZE_T entry_size = 2 + 8 + 8 + data_len;
 
 		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log);
 		if (write_ptr) {
 			log_buffer_push_bytes((CHAR*)&type, 2, &write_ptr, session->monitor_log);
 			log_buffer_push_bytes((CHAR*)&pid64, 8, &write_ptr, session->monitor_log);
+            log_buffer_push_bytes((CHAR*)&tid64, 8, &write_ptr, session->monitor_log);
 
 			// join strings seamlessly
             for (int i = 0; strings[i] != NULL; i++)
@@ -634,6 +637,7 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
     API_MONITOR_CONTROL_ARGS *args = (API_MONITOR_CONTROL_ARGS *)parms;
     ULONG *in_flag;
     ULONG *out_flag;
+    ULONG *out_used;
     SESSION *session;
     KIRQL irql;
     BOOLEAN EnableMonitor;
@@ -657,6 +661,18 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
         }
     }
 
+    //out_used = args->get_used.val;
+    //if (out_used) {
+    //    ProbeForWrite(out_used, sizeof(ULONG), sizeof(ULONG));
+    //    *out_used = 0;
+    //    session = Session_Get(FALSE, -1, &irql);
+    //    if (session) {
+    //        if (session->monitor_log)
+    //            *out_used = (ULONG)session->monitor_log->buffer_used;
+    //        Session_Unlock(irql);
+    //    }
+    //}
+
     //
     // set status
     //
@@ -679,7 +695,14 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
 
             if (EnableMonitor && (! session->monitor_log)) {
 
-				session->monitor_log = log_buffer_init(SESSION_MONITOR_BUF_SIZE * sizeof(WCHAR));
+                ULONG BuffSize = Conf_Get_Number(NULL, L"TraceBufferPages", 0, 256) * PAGE_SIZE;
+
+				session->monitor_log = log_buffer_init(BuffSize * sizeof(WCHAR));
+                if (!session->monitor_log) {
+                    Log_Msg0(MSG_1201);
+                    session->monitor_log = log_buffer_init(SESSION_MONITOR_BUF_SIZE * sizeof(WCHAR));
+                }
+
                 if (session->monitor_log) {
                     InterlockedIncrement(&Session_MonitorCount);
                 } else
@@ -925,6 +948,7 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
 	ULONG *seq_num;
     USHORT *log_type;
 	ULONG64 *log_pid;
+    ULONG64* log_tid;
     ULONG log_len;
     WCHAR *log_data;
     SESSION *session;
@@ -945,6 +969,10 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
 	log_pid = args->log_pid.val;
 	if (log_pid != NULL)
 		ProbeForWrite(log_pid, sizeof(ULONG64), sizeof(ULONG64));
+
+    log_tid = args->log_tid.val;
+    if (log_tid != NULL)
+        ProbeForWrite(log_tid, sizeof(ULONG64), sizeof(ULONG64));
 
 	log_len = args->log_len.val / sizeof(WCHAR);
     if (!log_len)
@@ -992,17 +1020,23 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
 		//	__leave;
 		//}
 
-		//[Type 2][PID 8][Data n*2]
+		//[Type 2][PID 8][PID 8][Data n*2]
 
 		log_buffer_get_bytes((CHAR*)log_type, 2, &read_ptr, session->monitor_log);
+
 		ULONG64 pid64;
 		log_buffer_get_bytes((CHAR*)&pid64, 8, &read_ptr, session->monitor_log);
 		if (log_pid != NULL)
 			*log_pid = pid64;
 
+        ULONG64 tid64;
+        log_buffer_get_bytes((CHAR*)&tid64, 8, &read_ptr, session->monitor_log);
+        if (log_tid != NULL)
+            *log_tid = tid64;
+
 		log_len -= sizeof(WCHAR); // reserve room for the termination character
-		if (log_len > entry_size - (2 + 8))
-			log_len = entry_size - (2 + 8);
+		if (log_len > entry_size - (2 + 8 + 8))
+			log_len = entry_size - (2 + 8 + 8);
 		log_buffer_get_bytes((CHAR*)log_data, log_len, &read_ptr, session->monitor_log);
 
 		// add required termination character

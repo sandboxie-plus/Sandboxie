@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
+    <width>682</width>
     <height>473</height>
    </rect>
   </property>
@@ -45,7 +45,7 @@
         <enum>QTabWidget::West</enum>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1637,40 +1637,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
               <layout class="QGridLayout" name="gridLayout_34">
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_32">
-                 <item row="10" column="2">
-                  <spacer name="horizontalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="7" column="1">
-                  <widget class="QCheckBox" name="chkGuiTrace">
-                   <property name="text">
-                    <string>GUI Trace</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="1">
-                  <widget class="QCheckBox" name="chkIpcTrace">
-                   <property name="text">
-                    <string>IPC Trace</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QCheckBox" name="chkPipeTrace">
-                   <property name="text">
-                    <string>Pipe Trace</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="label_19">
                    <property name="font">
@@ -1684,14 +1650,14 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkDbgTrace">
+                 <item row="10" column="2" colspan="2">
+                  <widget class="QCheckBox" name="chkErrTrace">
                    <property name="text">
-                    <string>Log Debug Output to the Trace Log</string>
+                    <string>Log all SetError's to Trace log</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1">
+                 <item row="11" column="1">
                   <spacer name="verticalSpacer_2">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -1704,21 +1670,35 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </spacer>
                  </item>
-                 <item row="3" column="1">
+                 <item row="8" column="3">
+                  <widget class="QLabel" name="label_28">
+                   <property name="text">
+                    <string>&lt;- for this one the above does not apply</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="3">
+                  <widget class="QCheckBox" name="chkDbgTrace">
+                   <property name="text">
+                    <string>Log Debug Output to the Trace Log</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkFileTrace">
                    <property name="text">
                     <string>File Trace</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="1">
+                 <item row="5" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkKeyTrace">
                    <property name="text">
                     <string>Key Trace</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="2" rowspan="5">
+                 <item row="3" column="3" rowspan="5">
                   <widget class="QLabel" name="label_26">
                    <property name="text">
                     <string>Log all access events as seen by the driver to the resource access log.
@@ -1738,19 +1718,59 @@ instead of &quot;*&quot;.</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1">
+                 <item row="7" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkGuiTrace">
+                   <property name="text">
+                    <string>GUI Trace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkIpcTrace">
+                   <property name="text">
+                    <string>IPC Trace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkComTrace">
                    <property name="text">
                     <string>COM Class Trace</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="2">
-                  <widget class="QLabel" name="label_28">
+                 <item row="4" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkPipeTrace">
                    <property name="text">
-                    <string>&lt;- for this one the above does not apply</string>
+                    <string>Pipe Trace</string>
                    </property>
                   </widget>
+                 </item>
+                 <item row="11" column="4">
+                  <spacer name="horizontalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="11" column="2" colspan="2">
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </item>

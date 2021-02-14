@@ -25,6 +25,7 @@
 #include "obj.h"
 #include "api.h"
 #include "thread.h"
+#include "session.h"
 
 
 //---------------------------------------------------------------------------
@@ -120,6 +121,9 @@ NTSTATUS Ipc_CheckPortRequest_Lsa(
     PROCESS *proc, OBJECT_NAME_INFORMATION *Name, PORT_MESSAGE *msg);
 
 NTSTATUS Ipc_CheckPortRequest_LsaEP(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg);
+
+NTSTATUS Ipc_CheckPortRequest_Sam(
     PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg);
 
 NTSTATUS Ipc_CheckPortRequest_PowerManagement(
@@ -236,6 +240,8 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_LsaEP(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
+        status = Ipc_CheckPortRequest_Sam(proc, Name, msg);
+    if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_PowerManagement(proc, Name, msg);
     if (status == STATUS_BAD_INITIAL_PC)
         status = Ipc_CheckPortRequest_SpoolerPort(proc, Name, msg);
@@ -246,6 +252,14 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     //if (SearchUnicodeString(Name, L"spool", FALSE))
         //DbgPrint("Status <%08X> on Port <%*.*S>\n", status, Name->Name.Length/sizeof(WCHAR), Name->Name.Length/sizeof(WCHAR), Name->Name.Buffer);
     //}
+
+    /*if (Session_MonitorCount)// && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) 
+    {
+        WCHAR msg_str[256];
+        swprintf(msg_str, L"CheckPortRequest, Status <%08X> on Port <%*.*s>\n", status, Name->Name.Length / sizeof(WCHAR), Name->Name.Length / sizeof(WCHAR), Name->Name.Buffer);
+        const WCHAR* strings[2] = { msg_str, NULL };
+        Session_MonitorPutEx(MONITOR_IPC, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+    }*/
 
     //
     // finish

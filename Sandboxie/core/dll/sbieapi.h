@@ -215,6 +215,7 @@ LONG SbieApi_MonitorGetEx(
 	ULONG *SeqNum,
 	USHORT *Type,
 	ULONG64 *Pid,
+    ULONG64 *Tid,
 	WCHAR *Name);                   // WCHAR [256]
 
 

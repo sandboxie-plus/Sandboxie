@@ -38,6 +38,7 @@ struct BoxBorderParms {
     WCHAR boxname[48];
     COLORREF color;
     BOOL title;
+    int width;
 };
 
 
@@ -468,12 +469,13 @@ void CBorderGuard::RefreshBorder(
     else
         ah += desktop->bottom;
 
-    int bb = 6;
-    if (rect->left   <= desktop->left &&
-        rect->top    <= desktop->top  &&
-        rect->right  >= desktop->right &&
-        rect->bottom >= desktop->bottom)
-        bb = 4;
+    //int bb = 6;
+    //if (rect->left   <= desktop->left &&
+    //    rect->top    <= desktop->top  &&
+    //    rect->right  >= desktop->right &&
+    //    rect->bottom >= desktop->bottom)
+    //    bb = 4;
+    int bb = boxparm->width;
 
     //
     // don't display the border if any of it would be obscured by
@@ -594,12 +596,14 @@ void CBorderGuard::RefreshConf2()
         if (! box.GetName().IsEmpty()) {
             COLORREF color;
             BOOL title;
-            BOOL enabled = box.GetBorder(&color, &title);
+            int width;
+            BOOL enabled = box.GetBorder(&color, &title, &width);
             if (enabled) {
                 boxparm = new BoxBorderParms;
                 wcscpy(boxparm->boxname, box.GetName());
                 boxparm->color = color;
                 boxparm->title = title;
+                boxparm->width = width;
                 m_boxes.Add(boxparm);
             }
         }

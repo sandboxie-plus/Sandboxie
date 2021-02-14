@@ -8,21 +8,18 @@
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include "Models/ResMonModel.h"
-#include "Models/ApiMonModel.h"
+//#include "Models/ApiMonModel.h"
 #include <QTranslator>
 #include "Windows/PopUpWindow.h"
 
-#define VERSION_MJR		0
-#define VERSION_MIN 	6
-#define VERSION_REV 	7
-#define VERSION_UPD 	0
+#include "version.h"
 
 
 //#include "../QSbieAPI/SbieAPI.h"
 #include "SbiePlusAPI.h"
 
 class CSbieView;
-class CApiLog;
+//class CApiLog;
 class CBoxBorder;
 class CSbieTemplates;
 
@@ -70,7 +67,7 @@ protected:
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplates*		m_SbieTemplates;
 
-	CApiLog*			m_ApiLog;
+	//CApiLog*			m_ApiLog;
 	
 	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
 
@@ -132,7 +129,7 @@ private slots:
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
-	void				OnSetLogging();
+	//void				OnSetLogging();
 
 	void				OnExit();
 	void				OnHelp();
@@ -171,8 +168,8 @@ private:
 	CPanelWidgetEx*		m_pMessageLog;
 	CPanelViewEx*		m_pResourceLog;
 	CResMonModel*		m_pResMonModel;
-	CPanelViewEx*		m_pApiCallLog;
-	CApiMonModel*		m_pApiMonModel;
+	//CPanelViewEx*		m_pApiCallLog;
+	//CApiMonModel*		m_pApiMonModel;
 
 
 	QMenu*				m_pMenuFile;
@@ -204,8 +201,8 @@ private:
 	QMenu*				m_pCleanUpMenu;
 	QAction*			m_pCleanUpProcesses;
 	QAction*			m_pCleanUpMsgLog;
-	QAction*			m_pCleanUpResLog;
-	QAction*			m_pCleanUpApiLog;
+	QAction*			m_pCleanUpTrace;
+	//QAction*			m_pCleanUpApiLog;
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
 
@@ -215,7 +212,7 @@ private:
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
-	QAction*			m_pEnableLogging;
+	//QAction*			m_pEnableLogging;
 
 	QMenu*				m_pMenuHelp;
 	QAction*			m_pSupport;

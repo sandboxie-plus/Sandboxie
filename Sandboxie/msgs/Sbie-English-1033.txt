@@ -1223,6 +1223,10 @@ Allow direct access to Windows Font Cache
 Allow direct access to qWave driver (Google Hangouts)
 .
 
+3460;txt;01
+Function hooking customizations
+.
+
 3461;txt;01
 &Run Sandboxed
 .

@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>Сообщение</translation>
+        <translation type="vanished">Сообщение</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>Временная метка</translation>
+        <translation type="vanished">Временная метка</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>Процесс</translation>
+        <translation type="vanished">Процесс</translation>
     </message>
 </context>
 <context>
@@ -431,26 +431,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
+        <translation type="vanished">Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
 Имя файла:%3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 имеет право на быстрое восстановление с %2.
+        <translation type="vanished">%1 имеет право на быстрое восстановление с %2.
 Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -549,6 +569,10 @@ Full path: %4</source>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -626,7 +650,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>Очистить журнал вызовов API</translation>
+        <translation type="vanished">Очистить журнал вызовов API</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -694,7 +718,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>Журнал вызовов API</translation>
+        <translation type="vanished">Журнал вызовов API</translation>
     </message>
     <message>
         <source>Stop Driver</source>
@@ -780,7 +804,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>Ведение журнала вызовов API</translation>
+        <translation type="vanished">Ведение журнала вызовов API</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -940,7 +964,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>Очистить журнал ресурсов</translation>
+        <translation type="vanished">Очистить журнал ресурсов</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1065,7 +1089,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>Чтобы использовать ведение журнала API, вы должны сначала настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
+        <translation type="vanished">Чтобы использовать ведение журнала API, вы должны сначала настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
 Загрузите последний выпуск и настройте его с помощью Sandboxie.ini, как указано в README.md проекта.</translation>
     </message>
     <message>
@@ -1147,6 +1171,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Don&apos;t show this message anymore.</source>
         <translation>Больше не показывать это сообщение.</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1413,6 +1441,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>A group can not be its own parent.</source>
         <translation>Группа не может быть собственным родителем.</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2067,6 +2099,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <source>Allow access to Bluetooth</source>
         <translation>Разрешить доступ к Bluetooth</translation>
     </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -2086,23 +2122,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation type="vanished">Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>ОК</translation>
+        <translation type="vanished">ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Да</translation>
+        <translation type="vanished">&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Нет</translation>
+        <translation type="vanished">&amp;Нет</translation>
     </message>
 </context>
 <context>

@@ -57,6 +57,9 @@
     <ClCompile Include="Helpers\NtIO.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="SbieTrace.cpp">
+      <Filter>SbieAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SbieTrace.h">
+      <Filter>SbieAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

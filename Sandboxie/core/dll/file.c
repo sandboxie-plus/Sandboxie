@@ -2306,6 +2306,37 @@ _FX NTSTATUS File_NtCreateFile(
 // File_NtCreateFileImpl
 //---------------------------------------------------------------------------
 
+/*static P_NtCreateFile               __sys_NtCreateFile_ = NULL;
+
+_FX NTSTATUS File_MyCreateFile(
+    HANDLE* FileHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES* ObjectAttributes,
+    IO_STATUS_BLOCK* IoStatusBlock,
+    LARGE_INTEGER* AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    void* EaBuffer,
+    ULONG EaLength)
+{
+    NTSTATUS status = __sys_NtCreateFile_(
+        FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+        AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+        CreateOptions, EaBuffer, EaLength);
+
+    if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\C:") == 0)
+    {
+        DebugBreak();
+    }
+
+    status = StopTailCallOptimization(status);
+
+    return status;
+}*/
+
 
 _FX NTSTATUS File_NtCreateFileImpl(
     HANDLE *FileHandle,
@@ -2343,6 +2374,12 @@ _FX NTSTATUS File_NtCreateFileImpl(
     //  *pPtr = 34;
     //  //while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
     //  //   __debugbreak();
+    //}
+
+    //if (__sys_NtCreateFile_ == NULL)
+    //{
+    //    __sys_NtCreateFile_ = __sys_NtCreateFile;
+    //    __sys_NtCreateFile = File_MyCreateFile;
     //}
 
     //
@@ -2470,6 +2507,22 @@ ReparseLoop:
                     CreateDisposition = FILE_OPEN;
                     CreateOptions &= ~FILE_DELETE_ON_CLOSE;
                     DesiredAccess &= ~FILE_DENIED_ACCESS;
+
+                    //
+                    // If this is an access on a raw disk device, adapt the requested permissions to what the drivers permits
+                    //
+
+                    if (ObjectAttributes->ObjectName && &ObjectAttributes->ObjectName->Buffer != NULL && ObjectAttributes->ObjectName->Length > (4 * sizeof(WCHAR))
+                        && wcsncmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\", 4) == 0
+                        && (DesiredAccess & ~(SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES)) != 0)
+                    {
+                        if ((ObjectAttributes->ObjectName->Length == (6 * sizeof(WCHAR)) && ObjectAttributes->ObjectName->Buffer[5] == L':') // \??\C:
+                            || wcsncmp(&ObjectAttributes->ObjectName->Buffer[4], L"PhysicalDrive", 13) == 0 // \??\PhysicalDrive1
+                            || wcsncmp(&ObjectAttributes->ObjectName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}
+                        {
+                            DesiredAccess &= (SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES);
+                        }
+                    }
 
                     status = __sys_NtCreateFile(
                         FileHandle, DesiredAccess, ObjectAttributes,

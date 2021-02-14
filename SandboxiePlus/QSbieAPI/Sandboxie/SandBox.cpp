@@ -81,7 +81,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	if (cfglvl < 8)
 	{
 		// templates L8
-		InsertText("Template", "FileCppy");
+		InsertText("Template", "FileCopy");
 		InsertText("Template", "SkipHook");
 	}
 
@@ -96,9 +96,9 @@ void CSandBox::UpdateDetails()
 {
 }
 
-SB_STATUS CSandBox::RunStart(const QString& Command)
+SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
-	return m_pAPI->RunStart(m_Name, Command);
+	return m_pAPI->RunStart(m_Name, Command, NULL, Elevated);
 }
 
 SB_STATUS CSandBox::RunSandboxed(const QString& Command)
@@ -111,7 +111,7 @@ SB_STATUS CSandBox::TerminateAll()
 	return m_pAPI->TerminateAll(m_Name);
 }
 
-bool CSandBox::IsEmpty()
+bool CSandBox::IsEmpty() const
 {
 	return !QDir(m_FilePath).exists();
 }

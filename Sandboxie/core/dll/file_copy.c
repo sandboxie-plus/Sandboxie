@@ -49,7 +49,7 @@ static LIST File_MigrationOptions[NUM_COPY_MODES];
 
 static BOOLEAN File_MigrationDenyWrite = FALSE;
 
-static ULONG File_CopyLimitKb = (80 * 1024);        // 80 MB
+static ULONGLONG File_CopyLimitKb = (80 * 1024);        // 80 MB
 static BOOLEAN File_CopyLimitSilent = FALSE;
 
 //---------------------------------------------------------------------------
@@ -125,7 +125,7 @@ found_match:
         return mode;
 
     //
-    // if there is no configuration for this file type/path, then decide based on the file size
+    // if tere is no configuration for this file type/path decide based on the file size
     //
     
     if (File_CopyLimitKb == -1 || file_size < ((ULONGLONG)File_CopyLimitKb * 1024))
@@ -223,7 +223,7 @@ _FX void File_InitCopyLimit(void)
     if (NT_SUCCESS(status)) {
         ULONGLONG num = _wtoi64(str);
         if (num)
-            File_CopyLimitKb = (num > 0x000000007fffffff) ? -1 : (ULONG)num;
+            File_CopyLimitKb = (num > 0x000000007fffffff) ? -1 : num;
         else
             SbieApi_Log(2207, _CopyLimitKb);
     }

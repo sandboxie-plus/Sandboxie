@@ -1736,6 +1736,8 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
 
         WCHAR *args;
         if (isSandboxed)
+            args = NULL;
+        else if (*ctrlName)
             args = L" -autorun";
         else
             args = L" /open /sync";

@@ -44,7 +44,7 @@ BOOLEAN Session_IsForceDisabled(ULONG SessionId);
 
 void Session_MonitorPut(USHORT type, const WCHAR *name, HANDLE pid);
 
-void Session_MonitorPutEx(USHORT type, const WCHAR** strings, ULONG* lengths, HANDLE pid);
+void Session_MonitorPutEx(USHORT type, const WCHAR** strings, ULONG* lengths, HANDLE pid, HANDLE tid);
 
 
 //---------------------------------------------------------------------------

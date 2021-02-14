@@ -377,6 +377,24 @@ _FX BOOLEAN Taskbar_ShouldOverrideAppUserModelId(void)
 // Taskbar_SetCurrentProcessExplicitAppUserModelID
 //---------------------------------------------------------------------------
 
+_FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID_hack(
+    const WCHAR* AppId)
+{
+
+    // ToDo
+    // Fix-Me: BUG when ProcessParms->WindowTitle is already set LocalFree 
+    // performed by SetCurrentProcessExplicitAppUserModelID crashes, WTF why?!
+    //
+    // To work around this issue, we clear the flag that indicates this value being set
+    // this way we trade a memory leak for an crash
+    //
+
+    // HACK ALERT! if we clear 0x5000 the WindowTitle buffer will not be freed
+    RTL_USER_PROCESS_PARAMETERS* ProcessParms = Proc_GetRtlUserProcessParameters();
+    ProcessParms->WindowFlags &= ~0x5000;
+    
+    return __sys_SetCurrentProcessExplicitAppUserModelID(AppId);
+}
 
 _FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID(
     const WCHAR *AppId)
@@ -385,7 +403,9 @@ _FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID(
     WCHAR *NewId;
 
     if (! Taskbar_ShouldOverrideAppUserModelId())
-        return __sys_SetCurrentProcessExplicitAppUserModelID(AppId);
+        return Taskbar_SetCurrentProcessExplicitAppUserModelID_hack(AppId);
+
+    hr = E_FAIL;
 
     if (Taskbar_SavedAppUserModelId) {
         Dll_Free(Taskbar_SavedAppUserModelId);
@@ -399,14 +419,14 @@ _FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID(
         wmemcpy(Taskbar_SavedAppUserModelId, AppId, len + 1);
 
         NewId = Taskbar_CreateAppUserModelId(AppId);
+        if (NewId == NULL)
+            return hr;
 
-    } else
-        NewId = NULL;
+        hr = Taskbar_SetCurrentProcessExplicitAppUserModelID_hack(NewId);
 
-    hr = __sys_SetCurrentProcessExplicitAppUserModelID(NewId);
-
-    if (NewId && NewId != AppId)
-        Dll_Free(NewId);
+        if (NewId != AppId)
+            Dll_Free(NewId);
+    }   
 
     return hr;
 }

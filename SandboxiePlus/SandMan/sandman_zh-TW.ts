@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>訊息</translation>
+        <translation type="vanished">訊息</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>時間標記</translation>
+        <translation type="vanished">時間標記</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>處理程序</translation>
+        <translation type="vanished">處理程序</translation>
     </message>
 </context>
 <context>
@@ -572,6 +572,10 @@ Full path: %4</source>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -649,7 +653,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>清理 API 呼叫日誌</translation>
+        <translation type="vanished">清理 API 呼叫日誌</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -725,7 +729,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>API 呼叫日誌</translation>
+        <translation type="vanished">API 呼叫日誌</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
@@ -831,7 +835,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>API 呼叫日誌</translation>
+        <translation type="vanished">API 呼叫日誌</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -1031,7 +1035,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>清理資源日誌</translation>
+        <translation type="vanished">清理資源日誌</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1088,7 +1092,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>要使用 API 記錄日誌首先必須從 https://github.com/sandboxie-plus/LogApiDll 下載 LogApiDll，並為一個或更多沙盤設定。
+        <translation type="vanished">要使用 API 記錄日誌首先必須從 https://github.com/sandboxie-plus/LogApiDll 下載 LogApiDll，並為一個或更多沙盤設定。
 請下載最新發布版本，並使用 sandboxie.ini 安裝，更多內容請參考 README.md 中此項目的說明。</translation>
     </message>
     <message>
@@ -1178,6 +1182,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Don&apos;t show this message anymore.</source>
         <translation>不再顯示此訊息。</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1443,6 +1451,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>A group can not be its own parent.</source>
         <translation>群組不能作為其本身的上級群組。</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2099,6 +2111,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Allow access to Bluetooth</source>
         <translation>允許訪問藍牙</translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

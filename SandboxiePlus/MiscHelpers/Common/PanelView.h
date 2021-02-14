@@ -152,6 +152,8 @@ public:
 		m_pSortProxy->setDynamicSortFilter(true);
 
 		m_pTreeList->setModel(m_pSortProxy);
+		((CSortFilterProxyModel*)m_pSortProxy)->setView(m_pTreeList);
+		
 
 		m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 #ifdef WIN32

@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>Mesaj</translation>
+        <translation type="vanished">Mesaj</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>Zaman Damgası</translation>
+        <translation type="vanished">Zaman Damgası</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>İşlem</translation>
+        <translation type="vanished">İşlem</translation>
     </message>
 </context>
 <context>
@@ -431,26 +431,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
+        <translation type="vanished">%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
 Dosya adı: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
+        <translation type="vanished">%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
 Tam yol: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1, %2&apos;den hızlı kurtarma için uygun.
+        <translation type="vanished">%1, %2&apos;den hızlı kurtarma için uygun.
 Dosyayı yazan: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
+        <translation type="vanished">Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -549,6 +569,10 @@ Tam yol: %4</translation>
         <source>Disabled</source>
         <translation>Devre dışı</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -626,7 +650,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>Api Çağrı Günlüğünü Temizle</translation>
+        <translation type="vanished">Api Çağrı Günlüğünü Temizle</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -694,7 +718,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>Api Çağrı Günlüğü</translation>
+        <translation type="vanished">Api Çağrı Günlüğü</translation>
     </message>
     <message>
         <source>Stop Driver</source>
@@ -780,7 +804,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>API Çağrı Günlüğü</translation>
+        <translation type="vanished">API Çağrı Günlüğü</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -940,7 +964,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>Kaynak Günlüğünü Temizle</translation>
+        <translation type="vanished">Kaynak Günlüğünü Temizle</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1065,7 +1089,7 @@ Tam yol: %4</translation>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>API günlüğünü kullanmak için önce https://github.com/sandboxie-plus/LogApiDll adresinden bir veya daha fazla korumalı kutu ile LogApiDll&apos;yi kurmanız gerekir.
+        <translation type="vanished">API günlüğünü kullanmak için önce https://github.com/sandboxie-plus/LogApiDll adresinden bir veya daha fazla korumalı kutu ile LogApiDll&apos;yi kurmanız gerekir.
         Lütfen en son sürümü indirin ve projenin README.md dosyasında belirtildiği gibi Sandboxie.ini ile kurun.</translation>
     </message>
     <message>
@@ -1121,7 +1145,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <translation>Hepsini sormadan sonlandır</translation>
     </message>
     <message>
-    <source>The selected window is running as part of program %1 in sandbox %2</source>
+        <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>Seçilen pencere %2 kutusunda %1 programının bir parçası olarak çalışıyor</translation>
     </message>
     <message>
@@ -1147,6 +1171,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Don&apos;t show this message anymore.</source>
         <translation>Artık bu mesajı gösterme.</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1413,6 +1441,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>A group can not be its own parent.</source>
         <translation>Bir grup kendi ebeveyni olamaz.</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2067,6 +2099,10 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
         <source>Allow access to Bluetooth</source>
         <translation>Bluetooth erişimine izin ver</translation>
     </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -2086,23 +2122,23 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation type="vanished">İptal</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Uygula</translation>
+        <translation type="vanished">Uygula</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation type="vanished">TAMAM</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Evet</translation>
+        <translation type="vanished">&amp;Evet</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Hayır</translation>
+        <translation type="vanished">&amp;Hayır</translation>
     </message>
 </context>
 <context>

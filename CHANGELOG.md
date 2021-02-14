@@ -9,6 +9,34 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [0.7.0 / 5.48.0] - 2021-02-14
+
+### Added
+- sandboxed indicator for tray icons, the tooltip now contains [#] if enabled
+- the trace log buffer can now be adjusted with "TraceBufferPages=2560"
+-- the value denotes the count of 4k large pages to be used, here for a total of 10 MB
+- new functionality to the list finder
+
+### Changed
+- improved RPC debugging
+- improved IPC handling around RpcMgmtSetComTimeout, "RpcMgmtSetComTimeout=n" is now the default behavioure
+-- required exceptions have been hard coded for specific calling dll's
+- the LogApi dll is now using Sbies tracing facility to logg events instead of an own pipe server
+
+### Fixed
+- FIXED SECURITY ISSUE: elevated sandboxed processes could access volumes/disks for reading (thanks hg421)
+- fixed crash issue around SetCurrentProcessExplicitAppUserModelID observed with GoogleUpdate.exe
+- fixed issue with resource monitor sort by timestamp
+- FIXED SECURITY ISSUE: a race condition in the driver allowed to obtain a elevated rights handle to a process (thanks typpos)
+- FIXED SECURITY ISSUE: "\RPC Control\samss lpc" is now filtered by the driver (thanks hg421)
+-- this allowed elevated processes to change passwords, delete users and alike, to disable filtering use "OpenSamEndpoint=y"
+- FIXED SECURITY ISSUE: "\Device\DeviceApi\CMApi" is now filtered by the driver (thanks hg421)
+-- this allowed elevated processes to change hardware configuration, to disable filtering use "OpenDevCMApi=y"
+
+
+
 ## [0.6.7 / 5.47.1] - 2021-02-01
 
 ### Added
@@ -123,7 +151,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - refactored some IPC code in the driver
 
 ### Fixed
-- fixed issue allowing to bypass the registry isolation, present since Windows 10 Creators Update 
+- FIXED SECURITY ISSUE: the registry isolation could be bypassed, present since Windows 10 Creators Update
 - fixed creation time not always being properly updated in the SandMan UI
 
 
@@ -163,12 +191,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.4 / 5.46.0] - 2021-01-06
 
 ### Added
-- Sandboxie now strips particularly problematic privileges from sandboxed system tokens
+- FIXED SECURITY ISSUE: Sandboxie now strips particularly problematic privileges from sandboxed system tokens
 -- with those a process could attempt to bypass the sandbox isolation (thanks Diversenok)
 -- old legacy behaviour can be enabled with "StripSystemPrivileges=n" (absolutely NOT Recommended) 
 - added new isolation options "ClosePrintSpooler=y" and "OpenSmartCard=n" 
 -- those resources are open by default but for a hardened box it’s desired to close them
-- added print spooler filter to prevent printers from being set up outside the sandbox
+- FIXED SECURITY ISSUE: added print spooler filter to prevent printers from being set up outside the sandbox
 -- the filter can be disabled with "OpenPrintSpooler=y"
 - added overwrite prompt when recovering an already existing file
 - added "StartProgram=", "StartService=" and "AutoExec=" options to the SandMan UI
@@ -184,10 +212,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Improved Resource Monitor status strings
 
 ### Fixed
-- fixed a critical issue that allowed to create processes outside the sandbox (thanks Diversenok)
-- fixed issues with dynamic IPC port handling that allowed to bypass IPC isolation
+- FIXED SECURITY ISSUE: processes could spawn processes outside the sandbox (thanks Diversenok)
+- FIXED SECURITY ISSUE: bug in the dynamic IPC port handling allowed to bypass IPC isolation
 - fixed issue with IPC tracing
-- fixed CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
+- FIXED SECURITY ISSUE: CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
 -- this allowed some system options to be changed, to disable filtering use "OpenLsaEndpoint=y"
 - fixed hooking issues SBIE2303 with Chrome, Edge and possibly others
 - fixed failed check for running processes when performing snapshot operations
@@ -552,9 +580,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - added missing PreferExternalManifest initialization to portable mode
-- fixed permission issues with sandboxed system processes
+- FIXED SECURITY ISSUE: fixed permission issues with sandboxed system processes
 -- Note: you can use "ExposeBoxedSystem=y" for the old behaviour (debug option)
-- fixed missing SCM access check for sandboxed services
+- FIXED SECURITY ISSUE: fixed missing SCM access check for sandboxed services (thanks Diversenok)
 -- Note: to disable the access check use "UnrestrictedSCM=y" (debug option)
 - fixed missing initialization in service server that caused sandboxed programs to crash when querying service status
 - fixed many bugs that caused the SbieDrv.sys to BSOD when run with MSFT Driver Verifier active
@@ -613,7 +641,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Sbie driver now first checks the home path for the Sbie ini before checking SystemRoot
 
 ### Fixed
-- Fixed a resource leak when running sandboxed
+- FIXED SECURITY ISSUE: sandboxed processes could obtain a write handle on non sandboxed processes (thanks Diversenok)
+-- this allowed to inject code in non sandboxed processes
 - Fixed issue boxed services not starting when the path contained a space
 - NtQueryInformationProcess now returns the proper sandboxed path for sandboxed processes
 
@@ -641,3 +670,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
+

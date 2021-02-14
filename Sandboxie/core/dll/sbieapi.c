@@ -1430,9 +1430,9 @@ _FX LONG SbieApi_MonitorPut2(
     API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
 
     args->func_code                 = API_MONITOR_PUT2;
-    args->log_type.val64           = (ULONG64)(ULONG_PTR)&Type;
-    args->log_len.val64            = wcslen(Name) * sizeof(WCHAR);
-    args->log_ptr.val64            = (ULONG64)(ULONG_PTR)Name;
+    args->log_type.val64            = (ULONG64)(ULONG_PTR)&Type;
+    args->log_len.val64             = wcslen(Name) * sizeof(WCHAR);
+    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Name;
     args->check_object_exists.val64 = bCheckObjectExists;
     status = SbieApi_Ioctl(parms);
 
@@ -1479,6 +1479,7 @@ _FX LONG SbieApi_MonitorGetEx(
 	ULONG *SeqNum,
 	USHORT *Type,
 	ULONG64 *Pid,
+    ULONG64 *Tid,
 	WCHAR *Name)                    // WCHAR [256]
 {
 	NTSTATUS status;
@@ -1489,6 +1490,7 @@ _FX LONG SbieApi_MonitorGetEx(
 	args->log_seq.val64 = (ULONG64)(ULONG_PTR)SeqNum;
 	args->log_type.val64 = (ULONG64)(ULONG_PTR)Type;
 	args->log_pid.val64 = (ULONG64)(ULONG_PTR)Pid;
+    args->log_tid.val64 = (ULONG64)(ULONG_PTR)Tid;
 	args->log_len.val64 = 256 * sizeof(WCHAR);
 	args->log_ptr.val64 = (ULONG64)(ULONG_PTR)Name;
 	status = SbieApi_Ioctl(parms);

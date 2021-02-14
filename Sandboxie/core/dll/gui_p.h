@@ -454,6 +454,8 @@ extern BOOLEAN Gui_RenameClasses;
 extern BOOLEAN Gui_OpenAllWinClasses;   // not running in a restricted job
 
 extern BOOLEAN Gui_DisableTitle;
+extern ULONG Gui_BoxNameTitleLen;
+extern WCHAR* Gui_BoxNameTitleW;
 
 extern ATOM Gui_DropTargetProp_Atom;
 extern ATOM Gui_WindowProcOldW_Atom;

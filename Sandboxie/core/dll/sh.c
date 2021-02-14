@@ -31,7 +31,7 @@
 #include "common/win32_ntddk.h"
 #include "common/my_shlwapi.h"
 #include "msgs/msgs.h"
-
+#include "gui_p.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -45,6 +45,9 @@ static WCHAR *SH32_AdjustPath(WCHAR *src, WCHAR **pArgs);
 static HKEY SbieDll_AssocQueryKeyWow64(const WCHAR *subj);
 
 static BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo);
+
+static BOOL SH32_Shell_NotifyIconW(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData);
 
 static WCHAR *SbieDll_AssocQueryCommandInternal(
     const WCHAR *subj, const WCHAR *verb);
@@ -80,6 +83,9 @@ static ULONG SH_WindowMonitorThread(void *lpParameter);
 typedef BOOL (*P_ShellExecuteEx)(
     void *lpExecInfo);
 
+typedef BOOL (*P_Shell_NotifyIconW)(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData);
+
 typedef ULONG (*P_SHChangeNotifyRegister)(
     HWND hwnd, int fSources, LONG fEvents, UINT wMsg,
     int cEntries, SHChangeNotifyEntry *pfsne);
@@ -103,6 +109,8 @@ typedef HRESULT (*P_SHGetFolderLocation)(
 
 
 static P_ShellExecuteEx         __sys_ShellExecuteExW               = NULL;
+
+static P_Shell_NotifyIconW      __sys_Shell_NotifyIconW             = NULL;
 
 static P_SHChangeNotifyRegister __sys_SHChangeNotifyRegister        = NULL;
 
@@ -400,6 +408,159 @@ _FX BOOL SH32_ShellExecuteExW(SHELLEXECUTEINFOW *lpExecInfo)
     SetLastError(err);
     return b;
 
+}
+
+
+//---------------------------------------------------------------------------
+// SH32_BornderToIcon
+//---------------------------------------------------------------------------
+
+
+HICON SH32_BorderToIcon(HICON hIcon, COLORREF color)
+{
+    typedef HDC(*P_GetDC)(HWND hWnd);
+    typedef int(*P_ReleaseDC)(HWND hWnd, HDC hDC);
+    typedef BOOL(*P_GetIconInfo)(HICON hIcon, PICONINFO piconinfo);
+    typedef HICON(*P_CreateIconIndirect)(PICONINFO piconinfo);
+
+    typedef HDC(*P_CreateCompatibleDC)(HDC hdc);
+    typedef HGDIOBJ(*P_SelectObject)(HDC hdc, HGDIOBJ h);
+    typedef COLORREF(*P_GetPixel)(HDC hdc, int x, int y);
+    typedef COLORREF(*P_SetPixel)(HDC hdc, int x, int y, COLORREF color);
+    typedef BOOL(*P_DeleteObject)(HGDIOBJ ho);
+    typedef BOOL(*P_DeleteDC)(HDC hdc);
+
+#define GET_WIN_API(name, lib) \
+    P_##name name = Ldr_GetProcAddrNew(lib, #name, #name); \
+    if(!name) return NULL;
+
+    GET_WIN_API(GetDC, DllName_user32);
+    GET_WIN_API(ReleaseDC, DllName_user32);
+    GET_WIN_API(GetIconInfo, DllName_user32);
+    GET_WIN_API(CreateIconIndirect, DllName_user32);
+
+    GET_WIN_API(CreateCompatibleDC, DllName_gdi32);
+    GET_WIN_API(SelectObject, DllName_gdi32);
+    GET_WIN_API(GetPixel, DllName_gdi32);
+    GET_WIN_API(SetPixel, DllName_gdi32);
+    GET_WIN_API(DeleteObject, DllName_gdi32);
+    GET_WIN_API(DeleteDC, DllName_gdi32);
+
+
+    HICON       hNewIcon = NULL;
+    HDC         hMainDC = NULL, hMemDC1 = NULL, hMemDC3 = NULL;
+    HBITMAP     hOldBmp1 = NULL, hOldBmp3 = NULL;
+    ICONINFO    csII;
+
+    if (!GetIconInfo(hIcon, &csII)) return NULL;
+
+    hMainDC = GetDC(NULL);
+    hMemDC1 = CreateCompatibleDC(hMainDC);
+    hMemDC3 = CreateCompatibleDC(hMainDC);
+    if (hMainDC == NULL || hMemDC1 == NULL || hMemDC3 == NULL) return NULL;
+
+
+    DWORD   dwWidth = csII.xHotspot * 2;
+    DWORD   dwHeight = csII.yHotspot * 2;
+
+    hOldBmp1 = (HBITMAP)SelectObject(hMemDC1, csII.hbmColor);
+    hOldBmp3 = (HBITMAP)SelectObject(hMemDC3, csII.hbmMask);
+
+    DWORD    dwLoopY = 0, dwLoopX = 0;
+    COLORREF crPixel = 0;
+
+    for (dwLoopY = 0; dwLoopY < dwHeight; dwLoopY++)
+    {
+        for (dwLoopX = 0; dwLoopX < dwWidth; dwLoopX++)
+        {
+            crPixel = GetPixel(hMemDC1, dwLoopX, dwLoopY);
+            if (dwLoopY == 0 || dwLoopX == 0 || dwLoopY + 1 == dwHeight || dwLoopX + 1 == dwWidth)
+                crPixel = color; // RGB(255, 255, 0);
+            SetPixel(hMemDC1, dwLoopX, dwLoopY, crPixel);
+
+            crPixel = GetPixel(hMemDC3, dwLoopX, dwLoopY);
+            if (dwLoopY == 0 || dwLoopX == 0 || dwLoopY + 1 == dwHeight || dwLoopX + 1 == dwWidth)
+                crPixel = 0;
+            SetPixel(hMemDC3, dwLoopX, dwLoopY, crPixel);
+        }
+    }
+
+    SelectObject(hMemDC1, hOldBmp1);
+    SelectObject(hMemDC3, hOldBmp3);
+
+    hNewIcon = CreateIconIndirect(&csII);
+
+
+    DeleteObject(csII.hbmColor);
+    DeleteObject(csII.hbmMask);
+    DeleteDC(hMemDC1);
+    DeleteDC(hMemDC3);
+    ReleaseDC(NULL, hMainDC);
+
+    return hNewIcon;
+}
+
+
+//---------------------------------------------------------------------------
+// SH32_Shell_NotifyIconW
+//---------------------------------------------------------------------------
+
+
+_FX BOOL SH32_Shell_NotifyIconW(
+    DWORD dwMessage, PNOTIFYICONDATAW lpData)
+{
+    BOOL ret;
+    HICON icon = NULL;
+
+    if (dwMessage == NIM_ADD || dwMessage == NIM_MODIFY)
+    {
+        if (!Gui_DisableTitle && lpData && lpData->cbSize >= sizeof(PNOTIFYICONDATAW))
+        {
+            ULONG len = wcslen(lpData->szTip);
+
+            if (Gui_BoxNameTitleLen != 0 && (len + Gui_BoxNameTitleLen + 2) <= 127)
+            {
+                wmemmove(lpData->szTip + Gui_BoxNameTitleLen + 2, lpData->szTip, len + 1);
+                wmemcpy(lpData->szTip, Gui_BoxNameTitleW, Gui_BoxNameTitleLen);
+                wmemcpy(lpData->szTip + Gui_BoxNameTitleLen, L"\r\n", 2);
+            }
+            else
+            {
+                if (len + 8 > 127) {
+                    lpData->szTip[127 - 8 - 3] = L'\0';
+                    wcscat(lpData->szTip, L"...");
+                    len = 127 - 8;
+                }
+
+                wmemmove(lpData->szTip + 4, lpData->szTip, len + 1);
+                wmemcpy(lpData->szTip, L"[#] ", 4);
+                wcscat(lpData->szTip, L" [#]");
+            }
+        }
+
+        COLORREF color;
+        if (SbieDll_GetBorderColor(NULL, &color, NULL, NULL))
+        {
+            HICON newIcon = SH32_BorderToIcon(lpData->hIcon, color);
+            if (newIcon) {
+                icon = lpData->hIcon;
+                lpData->hIcon = newIcon;
+            }
+        }
+    }
+
+    ret = __sys_Shell_NotifyIconW(dwMessage, lpData);
+
+    if (icon) 
+    {
+        typedef BOOL(*P_DestroyIcon)(HICON hIcon);
+        P_DestroyIcon DestroyIcon = Ldr_GetProcAddrNew(DllName_user32, L"DestroyIcon", "DestroyIcon");
+
+        DestroyIcon(lpData->hIcon);
+        lpData->hIcon = icon;
+    }
+
+    return ret;
 }
 
 
@@ -789,6 +950,7 @@ _FX NTSTATUS SH32_LdrGetDllHandleEx(
 _FX BOOLEAN SH32_Init(HMODULE module)
 {
     P_ShellExecuteEx ShellExecuteExW;
+    P_Shell_NotifyIconW Shell_NotifyIconW;
     P_SHChangeNotifyRegister SHChangeNotifyRegister;
     void *SHGetItemFromObject;
     P_SHOpenFolderAndSelectItems SHOpenFolderAndSelectItems;
@@ -806,6 +968,9 @@ _FX BOOLEAN SH32_Init(HMODULE module)
     ShellExecuteExW = (P_ShellExecuteEx)
         GetProcAddress(module, "ShellExecuteExW");
 
+    Shell_NotifyIconW = (P_Shell_NotifyIconW)
+        GetProcAddress(module, "Shell_NotifyIconW");
+
     SHChangeNotifyRegister = (P_SHChangeNotifyRegister)
         GetProcAddress(module, "SHChangeNotifyRegister");
 
@@ -815,6 +980,8 @@ _FX BOOLEAN SH32_Init(HMODULE module)
         GetProcAddress(module, "SHOpenFolderAndSelectItems");
 
     SBIEDLL_HOOK(SH32_,ShellExecuteExW);
+
+    SBIEDLL_HOOK(SH32_,Shell_NotifyIconW);
 
     if (SHChangeNotifyRegister && SHGetItemFromObject) {
 

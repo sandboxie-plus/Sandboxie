@@ -9,6 +9,7 @@ HEADERS += ./qsbieapi_global.h \
     ./SbieDefs.h \
     ./SbieUtils.h \
     ./SbieAPI.h \
+    ./SbieTrace.h \
     ./SbieStatus.h \
     ./Sandboxie/BoxedProcess.h \
     ./Sandboxie/SandBox.h \
@@ -19,6 +20,7 @@ HEADERS += ./qsbieapi_global.h \
     
 SOURCES += ./stdafx.cpp \
     ./SbieAPI.cpp \
+    ./SbieTrace.cpp \
     ./SbieUtils.cpp \
     ./Sandboxie/BoxBorder.cpp \
     ./Sandboxie/BoxedProcess.cpp \

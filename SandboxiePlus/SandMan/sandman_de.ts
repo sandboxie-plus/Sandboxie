@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Prozess</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Zeitstempel</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation type="vanished">Nachricht</translation>
-    </message>
-</context>
-<context>
     <name>CMultiErrorDialog</name>
     <message>
         <location filename="Dialogs/MultiErrorDialog.cpp" line="9"/>
@@ -533,7 +518,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -542,7 +527,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -551,7 +536,7 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Die Datei wurde geschrieben durch: %3</translation>
     </message>
     <message>
@@ -560,7 +545,7 @@ Die Datei wurde geschrieben durch: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
     <message>
@@ -663,7 +648,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="145"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Leer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="148"/>
@@ -884,7 +869,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückverfolgungsprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="626"/>
@@ -955,10 +940,6 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="420"/>
         <source>Resource Logging</source>
         <translation>Ressourcenprotokollierung</translation>
-    </message>
-    <message>
-        <source>API Call Logging</source>
-        <translation type="vanished">API Aufrufprotokollierung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="427"/>
@@ -1087,12 +1068,6 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="1371"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Die Änderungen werden automatisch angewendet, sobald der Editor geschlossen wird.</translation>
-    </message>
-    <message>
-        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
-Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="vanished">Um die API Protokollierung zu nutzen, muss die LogApiDll von https://github.com/sandboxie-plus/LogApiDll mit einer oder mehrerer Box(en) eingerichtet werden.
-Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der README.md des Projekts in der Sandboxie.ini einrichten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1522"/>
@@ -1240,10 +1215,6 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <translation>Diese Ankündigung zukünftig nicht mehr zeigen.</translation>
     </message>
     <message>
-        <source>Ignore this update, notify me about the next one.</source>
-        <translation type="vanished">Dieses Update ignorieren, über das nächste Update benachrichtigen.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1849"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
         <translation>Keine Updates gefunden, Sandboxie-Plus ist aktuell.</translation>
@@ -1301,10 +1272,6 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <translation>Sbie Ordner: %1</translation>
     </message>
     <message>
-        <source>Api Call Log</source>
-        <translation type="vanished">API Aufrufprotokoll</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="403"/>
         <source>Cleanup Processes</source>
         <translation>Prozesse aufräumen</translation>
@@ -1313,16 +1280,6 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <location filename="SandMan.cpp" line="405"/>
         <source>Cleanup Message Log</source>
         <translation>Nachrichtenprotokoll aufräumen</translation>
-    </message>
-    <message>
-        <source>Cleanup Resource Log</source>
-        <translation type="vanished">Ressourcenprotokoll aufräumen</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="403"/>
-        <source>Cleanup Processes</source>
-        <oldsource>Cleanup Api Call Log</oldsource>
-        <translation type="unfinished">API Aufrufprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="455"/>
@@ -1368,10 +1325,6 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
         <location filename="SandMan.cpp" line="1071"/>
         <source>Login Failed: %1</source>
         <translation>Login fehlgeschlagen: %1</translation>
-    </message>
-    <message>
-        <source>No sandboxes found; creating: %1</source>
-        <translation type="vanished">Keine Sandbox(en) gefunden; erstelle: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1223"/>
@@ -1572,7 +1525,7 @@ Bitte die neuste Version herunterladen und entsprechend der Anweisungen in der R
     <message>
         <location filename="Views/SbieView.cpp" line="75"/>
         <source>Run Cmd.exe as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Cmd.exe als Administrator starten</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="78"/>
@@ -2582,7 +2535,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1656"/>
         <source>Log all SetError&apos;s to Trace log</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokolliere alle SetError ins Rückverfolgungsprotokoll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1787"/>

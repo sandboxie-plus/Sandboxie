@@ -282,7 +282,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 
 #ifndef _DEBUG
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.45.0" << "5.46.0";
+	QStringList CompatVersions = QStringList () << "5.48.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{

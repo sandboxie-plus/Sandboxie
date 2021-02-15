@@ -16,24 +16,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - sandboxed indicator for tray icons, the tooltip now contains [#] if enabled
 - the trace log buffer can now be adjusted with "TraceBufferPages=2560"
--- the value denotes the count of 4k large pages to be used, here for a total of 10 MB
-- new functionality to the list finder
+-- the value denotes the count of 4K large pages to be used; here for a total of 10 MB
+- new functionality for the list finder
 
 ### Changed
 - improved RPC debugging
-- improved IPC handling around RpcMgmtSetComTimeout, "RpcMgmtSetComTimeout=n" is now the default behavioure
--- required exceptions have been hard coded for specific calling dll's
-- the LogApi dll is now using Sbies tracing facility to logg events instead of an own pipe server
+- improved IPC handling around RpcMgmtSetComTimeout; "RpcMgmtSetComTimeout=n" is now the default behaviour
+-- required exceptions have been hard-coded for specific calling DLLs
+- the LogApi dll is now using Sbie's tracing facility to log events instead of its own pipe server
 
 ### Fixed
 - FIXED SECURITY ISSUE: elevated sandboxed processes could access volumes/disks for reading (thanks hg421)
 - fixed crash issue around SetCurrentProcessExplicitAppUserModelID observed with GoogleUpdate.exe
 - fixed issue with resource monitor sort by timestamp
-- FIXED SECURITY ISSUE: a race condition in the driver allowed to obtain a elevated rights handle to a process (thanks typpos)
+- FIXED SECURITY ISSUE: a race condition in the driver allowed to obtain an elevated rights handle to a process (thanks typpos)
 - FIXED SECURITY ISSUE: "\RPC Control\samss lpc" is now filtered by the driver (thanks hg421)
--- this allowed elevated processes to change passwords, delete users and alike, to disable filtering use "OpenSamEndpoint=y"
+-- this allowed elevated processes to change passwords, delete users and alike; to disable filtering use "OpenSamEndpoint=y"
 - FIXED SECURITY ISSUE: "\Device\DeviceApi\CMApi" is now filtered by the driver (thanks hg421)
--- this allowed elevated processes to change hardware configuration, to disable filtering use "OpenDevCMApi=y"
+-- this allowed elevated processes to change hardware configuration; to disable filtering use "OpenDevCMApi=y"
 
 
 

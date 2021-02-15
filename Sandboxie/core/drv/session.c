@@ -974,11 +974,11 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
     if (log_tid != NULL)
         ProbeForWrite(log_tid, sizeof(ULONG64), sizeof(ULONG64));
 
-	log_len = args->log_len.val / sizeof(WCHAR);
+	log_len = args->log_len.val / sizeof(WCHAR) * sizeof(WCHAR);
     if (!log_len)
         return STATUS_INVALID_PARAMETER;
 	log_data = args->log_ptr.val;
-    ProbeForWrite(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
+    ProbeForWrite(log_data, log_len, sizeof(WCHAR));
 
     *log_type = 0;
 	if (log_pid != NULL)

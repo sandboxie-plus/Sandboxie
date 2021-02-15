@@ -50,15 +50,15 @@ public:
 
 	virtual int						GetActiveProcessCount() const { return m_ActiveProcessCount; }
 
-	virtual SB_STATUS				RunStart(const QString& Command);
+	virtual SB_STATUS				RunStart(const QString& Command, bool Elevated = false);
 	virtual SB_STATUS				RunSandboxed(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
 
 	virtual void					CloseBox() {}
 
-	virtual bool					IsEnabled() { return m_IsEnabled; }
+	virtual bool					IsEnabled() const  { return m_IsEnabled; }
 
-	virtual bool					IsEmpty();
+	virtual bool					IsEmpty() const;
 	virtual SB_PROGRESS				CleanBox();
 	virtual SB_STATUS				RenameBox(const QString& NewName);
 	virtual SB_STATUS				RemoveBox();

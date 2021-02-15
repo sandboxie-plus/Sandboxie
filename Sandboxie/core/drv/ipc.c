@@ -652,6 +652,9 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
     proc->ipc_open_lsa_endpoint =
         Conf_Get_Boolean(proc->box->name, L"OpenLsaEndpoint", 0, FALSE);
 
+    proc->ipc_open_sam_endpoint =
+        Conf_Get_Boolean(proc->box->name, L"OpenSamEndpoint", 0, FALSE);
+
     proc->ipc_allowSpoolerPrintToFile =
         Conf_Get_Boolean(proc->box->name, L"AllowSpoolerPrintToFile", 0, FALSE);
 
@@ -1164,12 +1167,9 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
         status = NtDuplicateObject(
                         SourceProcessHandle, SourceHandle,
-                        TargetProcessHandle, TargetHandle,
+                        TargetProcessHandle, &TargetHandleValue,
                         DesiredAccess, HandleAttributes,
                         Options & ~DUPLICATE_CLOSE_SOURCE);
-
-        TargetHandleValue = *TargetHandle;
-        *TargetHandle = NULL;
 
         if (NT_SUCCESS(status)) {
 
@@ -1185,12 +1185,11 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
             status = NtDuplicateObject(
                 SourceProcessHandle, SourceHandle,
-                TargetProcessHandle, TargetHandle,
+                TargetProcessHandle, &TargetHandleValue,
                 DesiredAccess, HandleAttributes, Options);
-
-            TargetHandleValue = *TargetHandle;
         }
 
+        *TargetHandle = NULL;
         if (NT_SUCCESS(status))
             *TargetHandle = TargetHandleValue;
 

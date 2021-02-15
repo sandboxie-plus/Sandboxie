@@ -33,3 +33,6 @@ DEPENDPATH += .
 
 
 include(QSbieAPI.pri)
+
+win32:RC_FILE = QSbieAPI.rc
+

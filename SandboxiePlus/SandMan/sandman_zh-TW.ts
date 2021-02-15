@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>訊息</translation>
+        <translation type="vanished">訊息</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>時間標記</translation>
+        <translation type="vanished">時間標記</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>處理程序</translation>
+        <translation type="vanished">處理程序</translation>
     </message>
 </context>
 <context>
@@ -278,7 +278,7 @@
     </message>
     <message>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Wnd 元件</translation>
     </message>
     <message>
         <source>COM Object</source>
@@ -374,7 +374,7 @@
     </message>
     <message>
         <source>Recover the file to original location</source>
-        <translation>恢復檔案到原始位址</translation>
+        <translation>恢復檔案到原始路徑</translation>
     </message>
     <message>
         <source>Recover &amp;&amp; Explore</source>
@@ -441,7 +441,7 @@ File name: %3</source>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation type="vanished">您確定允許 %1 (%2) 訪問網路嗎？
-完整位址: %3</translation>
+完整路徑: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
@@ -453,7 +453,7 @@ The file was written by: %3</source>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation type="vanished">移動大檔案 %1 至沙盤 %2，%3 遺留。
-完整位址: %4</translation>
+完整路徑: %4</translation>
     </message>
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
@@ -488,7 +488,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Full Path</source>
-        <translation>詳細位址</translation>
+        <translation>詳細路徑</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -572,6 +572,10 @@ Full path: %4</source>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -649,7 +653,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>清理 API 呼叫日誌</translation>
+        <translation type="vanished">清理 API 呼叫日誌</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -725,7 +729,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>API 呼叫日誌</translation>
+        <translation type="vanished">API 呼叫日誌</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
@@ -811,7 +815,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>確定要在沙盤化 (是) 未沙盤化 (否) 的瀏覽器中開啟  %1 嗎？</translation>
+        <translation>確定要在沙盤化 (是) 未沙盤化 (否) 的瀏覽器中開啟 %1 嗎？</translation>
     </message>
     <message>
         <source>Reset all hidden messages</source>
@@ -831,7 +835,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>API 呼叫日誌</translation>
+        <translation type="vanished">API 呼叫日誌</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -911,7 +915,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Can&apos;t find Sandboxie installation path.</source>
-        <translation>無法找到 Sandboxie 安裝位址。</translation>
+        <translation>無法找到 Sandboxie 安裝路徑。</translation>
     </message>
     <message>
         <source>Delete protection is enabled for the sandbox</source>
@@ -987,7 +991,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation>確定連隱藏訊息視窗一起重置 (是) 或僅用於所有日誌訊息 (否)？</translation>
+        <translation>你是否要重置已隱藏訊息視窗 (是) ，或僅用於所有日誌訊息 (否)？</translation>
     </message>
     <message>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
@@ -1015,7 +1019,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
-        <translation>合併快照目錄 &apos;%1&apos; 和 &apos;%2&apos; 錯誤，快照沒有全部合併。</translation>
+        <translation>合併快照目錄 &apos;%1&apos; 和 &apos;%2&apos; 錯誤，快照沒有被完全合併。</translation>
     </message>
     <message>
         <source>Edit ini file</source>
@@ -1031,7 +1035,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>清理資源日誌</translation>
+        <translation type="vanished">清理資源日誌</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1088,7 +1092,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>要使用 API 記錄日誌首先必須從 https://github.com/sandboxie-plus/LogApiDll 下載 LogApiDll，並為一個或更多沙盤設定。
+        <translation type="vanished">要使用 API 記錄日誌首先必須從 https://github.com/sandboxie-plus/LogApiDll 下載 LogApiDll，並為一個或更多沙盤設定。
 請下載最新發布版本，並使用 sandboxie.ini 安裝，更多內容請參考 README.md 中此項目的說明。</translation>
     </message>
     <message>
@@ -1169,14 +1173,18 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到預設沙盤; 建立中: %1</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;你是否想要前往 &lt;a href=&quot;%1&quot;&gt;資訊頁面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Don&apos;t show this message anymore.</source>
+        <translation>不再顯示此訊息。</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1196,7 +1204,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Path / Command Line</source>
-        <translation>位址 / 命令列</translation>
+        <translation>路徑 / 命令列</translation>
     </message>
     <message>
         <source>Start Time</source>
@@ -1438,10 +1446,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>此沙盤為空。</translation>
     </message>
     <message>
         <source>A group can not be its own parent.</source>
+        <translation>群組不能作為其本身的上級群組。</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1493,7 +1505,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>自動偵測</translation>
     </message>
 </context>
 <context>
@@ -1558,7 +1570,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Path</source>
-        <translation>位址</translation>
+        <translation>路徑</translation>
     </message>
     <message>
         <source>Save</source>
@@ -1624,7 +1636,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
         <translation>配置處理程序所訪問的資源。雙擊進入編輯。
 &apos;管理&apos; 檔案和機碼僅適用於沙盤外的程式二進位制檔案。
 注意所有關閉的...=!&lt;程式&gt;,... 例外也有相同限制。
-想要管理檔案訪問可使用 &apos;管理全部&apos; 使其套用至至全部程式。</translation>
+想要管理檔案訪問可使用 &apos;管理全部&apos; 使其套用至全部程式。</translation>
     </message>
     <message>
         <source>Log Debug Output to the Trace Log</source>
@@ -1688,7 +1700,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation>這些選項是計劃除錯裝置而設計的，在日常使用時請不要使用。</translation>
+        <translation>這些選項是為除錯相容性問題而設計的，在日常使用時請不要開啟。</translation>
     </message>
     <message>
         <source>Text Filter</source>
@@ -1700,7 +1712,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation>限制資源訪問監視器僅限管理員使用</translation>
+        <translation>限制資源訪問監視器使其僅限管理員使用</translation>
     </message>
     <message>
         <source>Protect the sandbox integrity itself</source>
@@ -1720,7 +1732,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>限制訪問模擬服務控制管理員來提權處理程序</translation>
+        <translation>限制訪問模擬服務控制管理員以提權處理程序</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -1732,11 +1744,11 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Block internet access for all programs except those added to the list.</source>
-        <translation>禁止所有程式訪問網路，除了這些新增至清單中的。</translation>
+        <translation>禁止所有程式訪問網路，除了已新增至清單中的。</translation>
     </message>
     <message>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>當程式被拒絕訪問網路時提示 1307 訊息</translation>
+        <translation>當程式被拒絕訪問網路時提示錯誤代碼 1307</translation>
     </message>
     <message>
         <source>Compatibility</source>
@@ -1776,7 +1788,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>當檔案過大時提示 2102 訊息</translation>
+        <translation>當檔案過大時提示錯誤代碼 2102</translation>
     </message>
     <message>
         <source>File Recovery</source>
@@ -1980,7 +1992,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>當程式啟動失敗時提示 1308 訊息</translation>
+        <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
     </message>
     <message>
         <source>Resource Access</source>
@@ -2076,7 +2088,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation>這裡您可以指定每次沙盤啟動被執行的命令清單。</translation>
+        <translation>此處您可以指定每次沙盤啟動時將被執行的命令清單。</translation>
     </message>
     <message>
         <source>Log all access events as seen by the driver to the resource access log.
@@ -2099,6 +2111,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Allow access to Bluetooth</source>
         <translation>允許訪問藍牙</translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2178,7 +2194,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - 恢復</translation>
     </message>
 </context>
 <context>
@@ -2189,7 +2205,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Path</source>
-        <translation>位址</translation>
+        <translation>路徑</translation>
     </message>
     <message>
         <source>Change Password</source>
@@ -2225,7 +2241,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Tray options</source>
-        <translation>磁碟選項</translation>
+        <translation>工作列選項</translation>
     </message>
     <message>
         <source>Use Dark Theme</source>
@@ -2269,7 +2285,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Open urls from this ui sandboxed</source>
-        <translation>沙盤化在此 UI 開啟的連結</translation>
+        <translation>沙盤化從此 UI 開啟的連結</translation>
     </message>
     <message>
         <source>In the future, don&apos;t check software compatibility</source>
@@ -2281,7 +2297,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>當下列程式在任意沙盤之外啟動時，Sandboxie 將提示 SBIE1301 訊息。</translation>
+        <translation>當下列程式在任意沙盤之外啟動時，Sandboxie 將提示錯誤代碼 SBIE1301。</translation>
     </message>
     <message>
         <source>Remove Program</source>
@@ -2301,7 +2317,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>當程式啟動失敗時提示 1308 訊息</translation>
+        <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
     </message>
     <message>
         <source>Sandbox default</source>
@@ -2345,7 +2361,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Start UI when a sandboxed process is started</source>
-        <translation>當沙盤化處理程序啟動時啟動 UI</translation>
+        <translation>當有沙盤化處理程序啟動時開啟 UI</translation>
     </message>
     <message>
         <source>Show first recovery window when emptying sandboxes</source>
@@ -2396,7 +2412,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - 快照</translation>
     </message>
 </context>
 </TS>

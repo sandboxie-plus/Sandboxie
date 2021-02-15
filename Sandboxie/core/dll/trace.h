@@ -29,6 +29,8 @@
 
 int Trace_Init(void);
 
+WCHAR* Trace_FindModuleByAddress(void* address);
+
 
 //---------------------------------------------------------------------------
 

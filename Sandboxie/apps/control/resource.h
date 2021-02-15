@@ -15,6 +15,7 @@
 #define ID_SANDBOX_RUN_MENU             11
 #define ID_SANDBOX_RUN_EXPLORER         13
 #define ID_SANDBOX_MENU_SIZE            15
+#define ID_BORDER_WIDTH                 1001
 #define ID_SANDBOX_REVEAL               9990
 #define ID_SANDBOX_SET_LAYOUT           9997
 #define ID_SANDBOX_SET_FOLDER           9998
@@ -249,9 +250,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        104
+#define _APS_NEXT_RESOURCE_VALUE        105
 #define _APS_NEXT_COMMAND_VALUE         40013
-#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           103
 #endif
 #endif

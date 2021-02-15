@@ -196,6 +196,7 @@
     <ClCompile Include="Sandboxie\SbieIni.cpp" />
     <ClCompile Include="Sandboxie\SbieTemplates.cpp" />
     <ClCompile Include="SbieAPI.cpp" />
+    <ClCompile Include="SbieTrace.cpp" />
     <ClCompile Include="SbieUtils.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -214,10 +215,15 @@
     <QtMoc Include="Sandboxie\SbieIni.h" />
     <QtMoc Include="Sandboxie\BoxBorder.h" />
     <QtMoc Include="Sandboxie\SbieTemplates.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SbieDefs.h" />
     <QtMoc Include="SbieStatus.h" />
+    <ClInclude Include="SbieTrace.h" />
     <ClInclude Include="SbieUtils.h" />
     <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QSbieAPI.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

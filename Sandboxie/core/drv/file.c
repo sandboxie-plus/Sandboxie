@@ -879,6 +879,8 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
                     proc->box->name, L"NotifyDirectDiskAccess", 0, FALSE);
     }
 
+    proc->file_open_devapi_cmapi = Conf_Get_Boolean(proc->box->name, L"OpenDevCMApi", 0, FALSE);
+
     if (ok && proc->image_path && (! proc->image_sbie)) {
 
         //

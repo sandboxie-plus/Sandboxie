@@ -66,17 +66,11 @@
     <ClCompile Include="Models\ResMonModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="ApiLog.cpp">
-      <Filter>SandMan</Filter>
-    </ClCompile>
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp">
       <Filter>Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="SbiePlusAPI.cpp">
       <Filter>SandMan</Filter>
-    </ClCompile>
-    <ClCompile Include="Models\ApiMonModel.cpp">
-      <Filter>Models</Filter>
     </ClCompile>
     <ClCompile Include="Helpers\WinAdmin.cpp">
       <Filter>Helpers</Filter>
@@ -133,17 +127,11 @@
     <QtMoc Include="Models\ResMonModel.h">
       <Filter>Models</Filter>
     </QtMoc>
-    <QtMoc Include="ApiLog.h">
-      <Filter>SandMan</Filter>
-    </QtMoc>
     <QtMoc Include="Dialogs\MultiErrorDialog.h">
       <Filter>Dialogs</Filter>
     </QtMoc>
     <QtMoc Include="SbiePlusAPI.h">
       <Filter>SandMan</Filter>
-    </QtMoc>
-    <QtMoc Include="Models\ApiMonModel.h">
-      <Filter>Models</Filter>
     </QtMoc>
     <QtMoc Include="Windows\OptionsWindow.h">
       <Filter>Windows</Filter>
@@ -210,9 +198,6 @@
     <None Include="sandman_ru.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh.ts">
-      <Filter>Translation Files</Filter>
-    </None>
     <None Include="Resources\finder.cur">
       <Filter>Resource Files</Filter>
     </None>
@@ -223,6 +208,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_pl.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_zh-CN.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

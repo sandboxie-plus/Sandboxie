@@ -11,9 +11,10 @@ public:
     CResMonModel(QObject *parent = 0);
 	~CResMonModel();
 
-	void			Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs);
+	//void			Sync(const QList<CTraceEntryPtr>& List, QSet<quint64> PIDs);
+	void			Sync(const QList<CTraceEntryPtr>& List);
 	
-	CResLogEntryPtr	GetEntry(const QModelIndex &index) const;
+	CTraceEntryPtr	GetEntry(const QModelIndex &index) const;
 
     int				columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -29,14 +30,14 @@ public:
 	};
 
 protected:
-	struct SResLogNode: SListNode
+	struct STraceNode: SListNode
 	{
-		SResLogNode(const QVariant& Id) : SListNode(Id), iColor(0) {}
+		STraceNode(const QVariant& Id) : SListNode(Id), iColor(0) {}
 
-		CResLogEntryPtr		pEntry;
+		CTraceEntryPtr		pEntry;
 
 		int					iColor;
 	};
 
-	virtual SListNode* MkNode(const QVariant& Id) { return new SResLogNode(Id); }
+	virtual SListNode* MkNode(const QVariant& Id) { return new STraceNode(Id); }
 };

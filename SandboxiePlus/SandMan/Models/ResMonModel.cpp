@@ -12,7 +12,8 @@ CResMonModel::~CResMonModel()
 {
 }
 
-void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
+//void CResMonModel::Sync(const QList<CTraceEntryPtr>& List, QSet<quint64> PIDs)
+void CResMonModel::Sync(const QList<CTraceEntryPtr>& List)
 {
 	QList<SListNode*> New;
 	QHash<QVariant, SListNode*> Old = m_Map;
@@ -32,19 +33,19 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 	
 	for(; i < List.count(); i++)
 	{
-		CResLogEntryPtr pEntry = List.at(i);
+		CTraceEntryPtr pEntry = List.at(i);
 
 		QVariant ID = pEntry->GetUID();
 
-		if (!PIDs.isEmpty() && !PIDs.contains(pEntry->GetProcessId()))
-			continue;
+		//if (!PIDs.isEmpty() && !PIDs.contains(pEntry->GetProcessId()))
+		//	continue;
 
 		int Row = -1;
 		QHash<QVariant, SListNode*>::iterator I = Old.find(ID);
-		SResLogNode* pNode = I != Old.end() ? static_cast<SResLogNode*>(I.value()) : NULL;
+		STraceNode* pNode = I != Old.end() ? static_cast<STraceNode*>(I.value()) : NULL;
 		if(!pNode)
 		{
-			pNode = static_cast<SResLogNode*>(MkNode(ID));
+			pNode = static_cast<STraceNode*>(MkNode(ID));
 			pNode->Values.resize(columnCount());
 			pNode->pEntry = pEntry;
 			New.append(pNode);
@@ -78,13 +79,13 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 			switch(section)
 			{
 				case eProcess:			Value = pEntry->GetProcessId(); break;
-				case eTimeStamp:		Value = pEntry->GetTimeStamp(); break;
+				case eTimeStamp:		Value = pEntry->GetUID(); break;
 				case eType:				Value = pEntry->GetTypeStr(); break;
 				case eStatus:			Value = pEntry->GetStautsStr(); break;
-				case eValue:			Value = pEntry->GetValue(); break;
+				case eValue:			Value = pEntry->GetMessage(); break;
 			}
 
-			SResLogNode::SValue& ColValue = pNode->Values[section];
+			STraceNode::SValue& ColValue = pNode->Values[section];
 
 			if (ColValue.Raw != Value)
 			{
@@ -97,7 +98,7 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 					case eProcess:			
 					{
 						CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
-						ColValue.Formated = QString("%1 (%2)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId());
+						ColValue.Formated = QString("%1 (%2, %3)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId());
 						break;
 					}
 					case eTimeStamp:		ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;
@@ -124,12 +125,12 @@ void CResMonModel::Sync(const QList<CResLogEntryPtr>& List, QSet<quint64> PIDs)
 	CListItemModel::Sync(New, Old);
 }
 
-CResLogEntryPtr CResMonModel::GetEntry(const QModelIndex &index) const
+CTraceEntryPtr CResMonModel::GetEntry(const QModelIndex &index) const
 {
 	if (!index.isValid())
-        return CResLogEntryPtr();
+        return CTraceEntryPtr();
 
-	SResLogNode* pNode = static_cast<SResLogNode*>(index.internalPointer());
+	STraceNode* pNode = static_cast<STraceNode*>(index.internalPointer());
 	return pNode->pEntry;
 }
 

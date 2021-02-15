@@ -282,7 +282,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 
 #ifndef _DEBUG
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.45.0" << "5.46.0";
+	QStringList CompatVersions = QStringList () << "5.48.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -900,12 +900,12 @@ QString CSbieAPI::GetUserSection() const
 	return UserSection;
 }
 
-SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess)
+SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess, bool Elevated)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
 
-	QString StartCmd = "\"" + GetStartPath() + "\" /box:" + BoxName + " " + Command;
+	QString StartCmd = "\"" + GetStartPath() + "\"" + (Elevated ? " /elevated" : "" ) + " /box:" + BoxName + " " + Command;
 	if (pProcess)
 		pProcess->start(StartCmd);
 	else
@@ -1864,6 +1864,8 @@ bool CSbieAPI::AreForceProcessDisabled()
 
 SB_STATUS CSbieAPI__MonitorControl(SSbieAPI* m, ULONG *NewState, ULONG *OldState)
 {
+	//ULONG Used = 0;
+
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
     API_MONITOR_CONTROL_ARGS* args	= (API_MONITOR_CONTROL_ARGS*)parms;
 
@@ -1871,10 +1873,14 @@ SB_STATUS CSbieAPI__MonitorControl(SSbieAPI* m, ULONG *NewState, ULONG *OldState
     args->func_code = API_MONITOR_CONTROL;
     args->set_flag.val = NewState;
     args->get_flag.val = OldState;
+	//args->get_used.val = &Used;
     
 	NTSTATUS status = m->IoControl(parms);
 	if (!NT_SUCCESS(status))
 		return SB_ERR(status);
+
+	//qDebug() << "used bytes" << (quint32)Used;
+
 	return SB_OK;
 }
 
@@ -1896,7 +1902,8 @@ bool CSbieAPI::GetMonitor()
 	const int max_len = 1024;
 
 	USHORT type;
-	ULONG64 pid;
+	ULONG64 pid = 0;
+	ULONG64 tid = 0;
 	WCHAR data[max_len + 1] = { 0 };
 
 	ULONG RecordNum = m->lastRecordNum;
@@ -1906,9 +1913,10 @@ bool CSbieAPI::GetMonitor()
 
 	memset(parms, 0, sizeof(parms));
     args->func_code	= API_MONITOR_GET_EX;
-	args->log_seq.val = &RecordNum;
+	args->log_seq.val = &RecordNum; // set this to NULL for record clearing
     args->log_type.val = &type;
 	args->log_pid.val = &pid;
+	args->log_tid.val = &tid;
     args->log_len.val = max_len * sizeof(WCHAR);
     args->log_ptr.val = data;
     
@@ -1936,15 +1944,22 @@ bool CSbieAPI::GetMonitor()
 			return true;
 	}
 
-	CResLogEntryPtr LogEntry = CResLogEntryPtr(new CResLogEntry(pid, type, Data));
+	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, Data));
+	AddTraceEntry(LogEntry, true);
 
-	QWriteLocker Lock(&m_ResLogMutex); 
-	if (!m_ResLogList.isEmpty() && m_ResLogList.last()->Equals(LogEntry)) {
-		m_ResLogList.last()->Merge(LogEntry);
-		return true; 
-	}
-	m_ResLogList.append(LogEntry);
 	return true;
+}
+
+void CSbieAPI::AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge)
+{
+	QWriteLocker Lock(&m_TraceMutex);
+
+	if (bCanMerge && !m_TraceList.isEmpty() && m_TraceList.last()->Equals(LogEntry)) {
+		m_TraceList.last()->Merge(LogEntry);
+		return;
+	}
+
+	m_TraceList.append(LogEntry);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1961,105 +1976,3 @@ QString CSbieAPI::GetSbieMsgStr(quint32 code, quint32 Lang)
 	LocalFree(ret_str);
 	return qStr.trimmed(); // note messages may have \r\n at the end
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// 
-//
-
-QString ErrorString(qint32 err)
-{
-	QString Error;
-	HMODULE handle = NULL; //err < 0 ? GetModuleHandle(L"NTDLL.DLL") : NULL;
-	DWORD flags = 0; //err < 0 ? FORMAT_MESSAGE_FROM_HMODULE : 0;
-	LPTSTR s;
-	if (::FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | flags, handle, err, 0, (LPTSTR)&s, 0, NULL) > 0)
-	{
-		LPTSTR p = wcschr(s, L'\r');
-		if (p != NULL) *p = L'\0';
-		Error = QString::fromWCharArray(s);
-		::LocalFree(s);
-	} 
-	return Error;
-}
-
-CResLogEntry::CResLogEntry(quint32 ProcessId, quint32 Type, const QString& Value)
-{
-	m_ProcessId = ProcessId;
-	m_Name = Value;
-	m_Type.Flags = Type;
-
-	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
-	m_Counter = 0;
-
-	// if this is a set error, then get the actual error string
-	if (m_Type.Type == MONITOR_OTHER && Value.indexOf("SetError:") == 0)
-	{
-		auto tmp = Value.split(":");
-		if (tmp.length() >= 2)
-		{
-			qint32 errCode = tmp[1].trimmed().toInt();
-			QString Error = ErrorString(errCode);
-			if(!Error.isEmpty())
-			m_Name += " (" + Error + ")";
-		}
-	}
-
-	static atomic<quint64> uid = 0;
-	m_uid = uid.fetch_add(1);
-}
-
-QString CResLogEntry::GetTypeStr() const
-{
-	switch (m_Type.Type)
-	{
-	case MONITOR_SYSCALL:		return "SysCall";
-	case MONITOR_PIPE:			return "Pipe"; 
-	case MONITOR_IPC:			return "Ipc"; 
-	case MONITOR_WINCLASS:		return "WinClass"; 
-	case MONITOR_DRIVE:			return "Drive"; 
-	case MONITOR_COMCLASS:		return "ComClass"; 
-	case MONITOR_IGNORE:		return "Ignore"; 
-	case MONITOR_IMAGE:			return "Image"; 
-	case MONITOR_FILE:			return "File"; 
-	case MONITOR_KEY:			return "Key";
-	case MONITOR_OTHER:			return "Debug"; 
-	default:					return "Unknown: " + QString::number(m_Type.Type);
-	}
-}
-
-QString CResLogEntry::GetStautsStr() const
-{
-	QString Status;
-	if (m_Type.Open)
-		Status.append("Open ");
-	if (m_Type.Deny)
-		Status.append("Closed ");
-
-	if (m_Type.Trace)
-		Status.append("Trace ");
-
-	if (m_Counter > 1)
-		Status.append(QString("(%1)").arg(m_Counter));
-
-	return Status;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// 
-//
-
-QString GetLastErrorAsString()
-{
-	DWORD errorMessageID = ::GetLastError();
-	if (errorMessageID == 0)
-		return QString();
-
-	char* messageBuffer = NULL;
-	FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-		NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
-
-	QString message(messageBuffer);
-	LocalFree(messageBuffer);
-	return message;
-}
-

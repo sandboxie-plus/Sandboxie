@@ -244,6 +244,51 @@ _FX NTSTATUS Syscall_OpenHandle(
         }
     }
 
+    PUNICODE_STRING puName = NULL;
+    __try {
+
+        if ((strcmp(syscall_entry->name, "ConnectPort") == 0) ||
+            (strcmp(syscall_entry->name, "AlpcConnectPort") == 0))
+        {
+            puName = (UNICODE_STRING*)user_args[1];
+        }
+        else if ((strcmp(syscall_entry->name, "CreateFile") == 0) ||
+            (strcmp(syscall_entry->name, "OpenFile") == 0))
+        {
+            POBJECT_ATTRIBUTES pObj = (POBJECT_ATTRIBUTES)user_args[2];
+            if (pObj && pObj->ObjectName)
+            {
+                puName = pObj->ObjectName;
+
+                ACCESS_MASK DesiredAccess = (ACCESS_MASK)user_args[1];
+                if(!Conf_Get_Boolean(proc->box->name, L"AllowRawDiskRead", 0, FALSE))
+                if (puName->Buffer != NULL && puName->Length > (4 * sizeof(WCHAR)) && wcsncmp(puName->Buffer, L"\\??\\", 4) == 0
+                    && (DesiredAccess & ~(SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES)) != 0)
+                {
+                    if ((puName->Length == (6 * sizeof(WCHAR)) && puName->Buffer[5] == L':') // \??\C:
+                        || wcsncmp(&puName->Buffer[4], L"PhysicalDrive", 13) == 0 // \??\PhysicalDrive1
+                        || wcsncmp(&puName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}
+                    {
+                        WCHAR access_str[24];
+                        swprintf(access_str, L"(DD) %08X", DesiredAccess);
+                        Log_Debug_Msg(MONITOR_DRIVE | MONITOR_DENY, access_str, puName->Buffer);
+
+                        if (proc->file_warn_direct_access) {
+
+                            //Log_MsgP1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name, proc->pid);
+                            Process_LogMessage(proc, MSG_BLOCKED_DIRECT_DISK_ACCESS);
+                        }
+
+                        return STATUS_ACCESS_DENIED;
+                    }
+                }
+            }
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {}
+
+
+
     //
     // replace the address of the handle in the user stack
     //
@@ -294,15 +339,7 @@ _FX NTSTATUS Syscall_OpenHandle(
     status = ObReferenceObjectByHandle(
                 NewHandle, 0, NULL, UserMode, &OpenedObject, &HandleInfo);
 
-    if (NT_SUCCESS(status)) {
-
-        PUNICODE_STRING puName = NULL;
-
-        if ((strcmp(syscall_entry->name, "ConnectPort") == 0) ||
-            (strcmp(syscall_entry->name, "AlpcConnectPort") == 0))
-        {
-            puName = (UNICODE_STRING*)user_args[1];
-        }
+    if (NT_SUCCESS(status)) {        
 
         //
         // check the access that was granted to the object
@@ -373,39 +410,9 @@ _FX NTSTATUS Syscall_GetNextProcess(
 // Syscall_DeviceIoControlFile
 //---------------------------------------------------------------------------
 
-#define FUNCTION_FROM_CTL_CODE(ctrlCode)     (((ULONG)(ctrlCode & 0x3f)) >> 2)
 
-_FX NTSTATUS Syscall_DeviceIoControlFile(
-    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
-{
-    // filter out dangerous driver calls
+#include "file_ctrl.c"
 
-    if (DEVICE_TYPE_FROM_CTL_CODE(user_args[5]) == 0x6d)    //MOUNTMGRCONTROLTYPE 'm'   \Device\MountPointManager
-    {
-        ULONG function;
-        function = FUNCTION_FROM_CTL_CODE(user_args[5]);
-        //DbgPrint("DeviceIoContoleFile, func = %d, p=%06d t=%06d, %S\n", function, PsGetCurrentProcessId(), PsGetCurrentThreadId(), proc->image_name);
-        if (function == 0 ||        // IOCTL_MOUNTMGR_CREATE_POINT
-            function == 1 ||        // IOCTL_MOUNTMGR_DELETE_POINTS (DeleteVolumeMountPoint())
-            function == 3 ||        // IOCTL_MOUNTMGR_DELETE_POINTS_DBONLY
-            function == 6 ||        // IOCTL_MOUNTMGR_VOLUME_MOUNT_POINT_CREATED
-            function == 7 ||        // IOCTL_MOUNTMGR_VOLUME_MOUNT_POINT_DELETED
-            function == 9)          // IOCTL_MOUNTMGR_KEEP_LINKS_WHEN_OFFLINE
-            return STATUS_ACCESS_DENIED;
-    }
-
-    return NtDeviceIoControlFile(
-        (HANDLE)user_args[0],       // FileHandle
-        (HANDLE)user_args[1],       // Event
-        (PIO_APC_ROUTINE)user_args[2],  // ApcRoutine
-        (PVOID)user_args[3],        // ApcContext
-        (PIO_STATUS_BLOCK)user_args[4], // IoStatusBlock
-        (ULONG)user_args[5],        // IoControlCode
-        (PVOID)user_args[6],        // InputBuffer
-        (ULONG)user_args[7],        // InputBufferLength
-        (PVOID)user_args[8],        // OutBuffer
-        (ULONG)user_args[9]);       // OutputBufferLength
-}
 
 //---------------------------------------------------------------------------
 // Syscall_DuplicateHandle
@@ -422,7 +429,6 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     HANDLE TlsValue;
     HANDLE NewHandle;
     void *TargetProcessObject;
-
 
     //
     // if there is a target process handle, keep a record of the

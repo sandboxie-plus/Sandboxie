@@ -19,9 +19,8 @@
 // Trace Helper
 //---------------------------------------------------------------------------
 
-
-#include "trace.h"
 #include "dll.h"
+#include "trace.h"
 
 
 //---------------------------------------------------------------------------
@@ -70,9 +69,11 @@ _FX int Trace_Init(void)
     // intercept NTDLL entry points
     //
 
-    RtlSetLastWin32Error = (P_RtlSetLastWin32Error)
-        GetProcAddress(Dll_Ntdll, "RtlSetLastWin32Error");
-    SBIEDLL_HOOK(Trace_,RtlSetLastWin32Error);
+    if (SbieApi_QueryConfBool(NULL, L"ErrorTrace", FALSE)) {
+        RtlSetLastWin32Error = (P_RtlSetLastWin32Error)
+            GetProcAddress(Dll_Ntdll, "RtlSetLastWin32Error");
+        SBIEDLL_HOOK(Trace_, RtlSetLastWin32Error);
+    }
 
     //
     // intercept KERNEL32 entry points
@@ -131,4 +132,41 @@ ALIGNED void Trace_OutputDebugStringA(const UCHAR *strA)
 	SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, strW, FALSE);
 
     __sys_OutputDebugStringA(strA);
+}
+
+
+//---------------------------------------------------------------------------
+// Trace_FindModuleByAddress
+//---------------------------------------------------------------------------
+
+#include "../../common/my_xeb.h"
+
+WCHAR* Trace_FindModuleByAddress(void* address)
+{
+    WCHAR* found = NULL;
+
+    PLIST_ENTRY Head, Next;
+    PLDR_DATA_TABLE_ENTRY Entry;
+    PPEB peb = (PPEB)NtCurrentPeb();
+
+    EnterCriticalSection((PRTL_CRITICAL_SECTION)peb->LoaderLock);
+
+    Head = &peb->Ldr->InLoadOrderModuleList;
+    Next = Head->Flink;
+
+    while (Next != Head)
+    {
+        Entry = CONTAINING_RECORD(Next, LDR_DATA_TABLE_ENTRY, InLoadOrderLinks);
+
+        if (Entry->DllBase < address && (UINT_PTR)Entry->DllBase + Entry->SizeOfImage > (UINT_PTR)address)
+        {
+            found = Entry->BaseDllName.Buffer;
+            break;
+        }
+        Next = Next->Flink;
+    }
+
+    LeaveCriticalSection((PRTL_CRITICAL_SECTION)peb->LoaderLock);
+
+    return found;
 }

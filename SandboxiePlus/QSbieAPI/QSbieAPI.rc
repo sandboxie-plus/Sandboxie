@@ -12,58 +12,6 @@
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
 #pragma code_page(1252)
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_ICON1               ICON                    "./resources/SandMan.ico"
-
-
-#ifdef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// TEXTINCLUDE
-//
-
-1 TEXTINCLUDE 
-BEGIN
-    "resource.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
-    "\0"
-END
-
-3 TEXTINCLUDE 
-BEGIN
-    "\r\n"
-    "\0"
-END
-
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-FINDER_FULL             BITMAP                  "./resources/finder-full.bmp"
-
-FINDER_EMPTY            BITMAP                  "./resources/finder-empty.bmp"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Cursor
-//
-
-FINDER_CURSOR           CURSOR                  "./resources/finder.cur"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -88,11 +36,11 @@ BEGIN
         BLOCK "0c0704b0"
         BEGIN
             VALUE "CompanyName", MY_COMPANY_NAME_STRING
-            VALUE "FileDescription", "SandBox Manager"
+            VALUE "FileDescription", "Sandboxie API for Qt"
             VALUE "FileVersion", VERSION_STR
-            VALUE "InternalName", "SandMan.exe"
+            VALUE "InternalName", "QSbieAPI.dll"
             VALUE "LegalCopyright", MY_COPYRIGHT_STRING
-            VALUE "OriginalFilename", "SandMan.exe"
+            VALUE "OriginalFilename", "QSbieAPI.dll"
             VALUE "ProductName", MY_PRODUCT_NAME_STRING
             VALUE "ProductVersion", VERSION_STR
         END

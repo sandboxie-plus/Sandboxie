@@ -5,11 +5,9 @@
 
 HEADERS += ./stdafx.h \
     ./SandMan.h \
-    ./ApiLog.h \
     ./SbiePlusAPI.h \
     ./Models/SbieModel.h \
     ./Models/ResMonModel.h \
-    ./Models/ApiMonModel.h \
     ./Views/SbieView.h \
     ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
@@ -23,10 +21,8 @@ HEADERS += ./stdafx.h \
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
-    ./ApiLog.cpp \
     ./SandMan.cpp \
     ./SbiePlusAPI.cpp \
-    ./Models/ApiMonModel.cpp \
     ./Models/ResMonModel.cpp \
     ./Models/SbieModel.cpp \
     ./Views/SbieView.cpp \
@@ -48,11 +44,12 @@ FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui
 
-TRANSLATIONS += ./sandman_de.ts \
-    ./sandman_pt.ts \
-    ./sandman_ru.ts \
-    ./sandman_tr.ts \
-    ./sandman_zh.ts \
-    ./sandman_zh-TW.ts
+TRANSLATIONS += sandman_de.ts \
+    sandman_pt.ts \
+    sandman_ru.ts \
+    sandman_pl.ts \
+    sandman_tr.ts \
+    sandman_zh-CN.ts \
+    sandman_zh-TW.ts
 
 RESOURCES += Resources/SandMan.qrc

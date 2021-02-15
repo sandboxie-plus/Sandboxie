@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>信息</translation>
+        <translation type="vanished">信息</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>时间戳</translation>
+        <translation type="vanished">时间戳</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>进程</translation>
+        <translation type="vanished">进程</translation>
     </message>
 </context>
 <context>
@@ -234,51 +234,51 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>直接访问</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>直接访问全部</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭RT</translation>
     </message>
     <message>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>只读</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>文件/文件夹</translation>
     </message>
     <message>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>注册表</translation>
     </message>
     <message>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>IPC路径</translation>
     </message>
     <message>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口类</translation>
     </message>
     <message>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM组件</translation>
     </message>
 </context>
 <context>
@@ -568,6 +568,10 @@ Full path: %4</source>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -645,7 +649,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>清理Api调用日志</translation>
+        <translation type="vanished">清理Api调用日志</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -721,7 +725,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>Api调用日志</translation>
+        <translation type="vanished">Api调用日志</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
@@ -827,7 +831,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>API调用记录</translation>
+        <translation type="vanished">API调用记录</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -1027,7 +1031,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>清理资源日志</translation>
+        <translation type="vanished">清理资源日志</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1084,7 +1088,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>要使用API记录日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
+        <translation type="vanished">要使用API记录日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
 请下载最新发布版，并用sandboxie.ini安装，详情请参考README.md里此项的说明.</translation>
     </message>
     <message>
@@ -1157,14 +1161,18 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>默认沙盒未发现，正在创建: %1</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;您确定前往 &lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Don&apos;t show this message anymore.</source>
+        <translation>不再显示此信息</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1426,10 +1434,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>组不能是自己的父级</translation>
     </message>
     <message>
         <source>This Sandbox is empty.</source>
+        <translation>此沙盒是空的</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1481,7 +1493,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>自动检测</translation>
     </message>
 </context>
 <context>
@@ -2082,6 +2094,10 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
+        <translation>允许访问蓝牙</translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2162,7 +2178,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - 恢复</translation>
     </message>
 </context>
 <context>
@@ -2380,7 +2396,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - 快照</translation>
     </message>
 </context>
 </TS>

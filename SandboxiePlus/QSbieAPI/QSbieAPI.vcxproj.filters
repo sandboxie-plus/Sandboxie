@@ -57,6 +57,9 @@
     <ClCompile Include="Helpers\NtIO.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="SbieTrace.cpp">
+      <Filter>SbieAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -73,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="Helpers\NtIO.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SbieTrace.h">
+      <Filter>SbieAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,5 +111,10 @@
     <QtMoc Include="Sandboxie\SbieTemplates.h">
       <Filter>Sandboxie</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QSbieAPI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -343,7 +343,7 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg)
             WCHAR msg_str[24];
             swprintf(msg_str, L" Msg: %02X", (ULONG)uMsg);
             const WCHAR* strings[3] = { L"\\RPC Control\\LSARPC_ENDPOINT", msg_str, NULL };
-            Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId());
+            Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
         }
     }
 

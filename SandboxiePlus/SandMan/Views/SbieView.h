@@ -51,6 +51,9 @@ private:
 
 	void					UpdateGroupMenu();
 
+	QString					FindParent(const QString& Name);
+	bool					IsParentOf(const QString& Name, const QString& Group);
+
 	QVBoxLayout*			m_pMainLayout;
 
 	QTreeViewEx*			m_pSbieTree;
@@ -68,6 +71,7 @@ private:
 	QAction*				m_pMenuRunMailer;
 	QAction*				m_pMenuRunExplorer;
 	QAction*				m_pMenuRunCmd;
+	QAction*				m_pMenuRunCmdAdmin;
 	QAction*				m_pMenuMkLink;
 	QMenu*					m_pMenuPresets;
 	QAction*				m_pMenuPresetsLogApi;

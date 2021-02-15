@@ -184,7 +184,7 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
     {
         //
         // Note: it seams that chrome.exe resolves GAME_CONFIG_STORE_PORT in one process and accesses from an other
-        // so since here we onlyonly a fre non critical ports we will use PID 0 to open it gloally
+        // so since here we only open non critical ports we will use PID 0 to open them globally
         // instead of only for the one process. Todo: make it per sandbox instead
         //
 

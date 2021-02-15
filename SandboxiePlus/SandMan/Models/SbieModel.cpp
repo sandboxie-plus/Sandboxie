@@ -86,17 +86,21 @@ QString CSbieModel::FindParent(const QVariant& Name, const QMap<QString, QString
 	return QString();
 }
 
-QList<QVariant>	CSbieModel::MakeBoxPath(const QVariant& Name, const QMap<QString, QStringList>& Groups)
+void CSbieModel::MakeBoxPath(const QVariant& Name, const QMap<QString, QStringList>& Groups, QList<QVariant>& Path)
 {
 	QString ParentID = FindParent(Name, Groups);
 
-	QList<QVariant> Path;
-	if (!ParentID.isEmpty() && ParentID != Name 
-	 && !Groups.value(CSbieModel__RemoveGroupMark(Name.toString())).contains(CSbieModel__RemoveGroupMark(ParentID)))
+	if (!ParentID.isEmpty() && ParentID != Name && !Path.contains(ParentID))
 	{
-		Path = MakeBoxPath(ParentID, Groups);
-		Path.append(ParentID);
+		Path.prepend(ParentID);
+		MakeBoxPath(ParentID, Groups, Path);
 	}
+}
+
+QList<QVariant>	CSbieModel::MakeBoxPath(const QVariant& Name, const QMap<QString, QStringList>& Groups)
+{
+	QList<QVariant> Path;
+	MakeBoxPath(Name, Groups, Path);
 	return Path;
 }
 
@@ -118,8 +122,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		{
 			pNode = static_cast<SSandBoxNode*>(MkNode(ID));
 			pNode->Values.resize(columnCount());
-			if (m_bTree)
-				pNode->Path = MakeBoxPath(ID, Groups);
+			if (m_bTree) 
+				pNode->Path = MakeBoxPath(ID, Groups); 
 			pNode->pBox = NULL;
 			New[pNode->Path].append(pNode);
 			Added.append(ID);

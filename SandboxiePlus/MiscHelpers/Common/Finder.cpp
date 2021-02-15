@@ -21,7 +21,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 :QWidget(parent)
 {
 	m_pSearchLayout = new QHBoxLayout();
-	m_pSearchLayout->setMargin(3);
+	m_pSearchLayout->setMargin(0);
 	m_pSearchLayout->setSpacing(3);
 	m_pSearchLayout->setAlignment(Qt::AlignLeft);
 
@@ -29,8 +29,8 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	m_pSearch->setMinimumWidth(150);
 	m_pSearch->setMaximumWidth(350);
 	m_pSearchLayout->addWidget(m_pSearch);
-	QObject::connect(m_pSearch, SIGNAL(textChanged(QString)), this, SLOT(OnUpdate()));
-    //QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(_q_next()));
+	QObject::connect(m_pSearch, SIGNAL(textChanged(QString)), this, SLOT(OnText()));
+    QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(OnReturn()));
 
 	m_pCaseSensitive = new QCheckBox(tr("Case Sensitive"));
 	m_pSearchLayout->addWidget(m_pCaseSensitive);
@@ -48,6 +48,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	if (HighLightOption)
 	{
 		m_pHighLight = new QCheckBox(tr("Highlight"));
+		m_pHighLight->setChecked(true);
 		m_pSearchLayout->addWidget(m_pHighLight);
 		connect(m_pHighLight, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
 	}
@@ -67,7 +68,9 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 
 	setLayout(m_pSearchLayout);
 
-	setMaximumHeight(30);
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+	//setMaximumHeight(30);
 
 	hide();
 
@@ -81,14 +84,34 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	}
 
 	m_pSortProxy = qobject_cast<QSortFilterProxyModel*>(pFilterTarget);
-	if (pFilterTarget)
+	if (pFilterTarget) {
 		QObject::connect(this, SIGNAL(SetFilter(const QRegExp&, bool, int)), pFilterTarget, SLOT(SetFilter(const QRegExp&, bool, int)));
+		QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));
+	}
+
+	m_pTimer = new QTimer(this);
+	m_pTimer->setSingleShot(true);
+	m_pTimer->setInterval(500);
+	connect(m_pTimer, SIGNAL(timeout()), SLOT(OnUpdate()));
+
+	this->installEventFilter(this);
 }
 
 CFinder::~CFinder()
 {
 }
 
+bool CFinder::eventFilter(QObject* source, QEvent* event)
+{
+	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	{
+		Close();
+		return true; // cancel event
+	}
+
+	return QWidget::eventFilter(source, event);
+}
 
 void CFinder::Open()
 {
@@ -115,7 +138,21 @@ QRegExp CFinder::GetRegExp() const
 
 void CFinder::OnUpdate()
 {
+	m_pTimer->stop();
 	emit SetFilter(GetRegExp(), GetHighLight(), GetColumn());
+}
+
+void CFinder::OnText()
+{
+	m_pTimer->stop();
+	m_pTimer->start();
+}
+
+void CFinder::OnReturn()
+{
+	OnUpdate();
+	if (m_pHighLight->isChecked())
+		emit SelectNext();
 }
 
 void CFinder::Close()

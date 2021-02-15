@@ -89,7 +89,16 @@ CSandBoxPlus::~CSandBoxPlus()
 
 void CSandBoxPlus::UpdateDetails()
 {
-	m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
+	//m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
+	m_bLogApiFound = false;
+	QStringList InjectDlls = GetTextList("InjectDll", false);
+	foreach(const QString & InjectDll, InjectDlls)
+	{
+		if (InjectDll.contains("logapi", Qt::CaseInsensitive)) {
+			m_bLogApiFound = true;
+			break;
+		}
+	}
 
 	m_bINetBlocked = false;
 	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
@@ -132,6 +141,9 @@ QString CSandBoxPlus::GetStatusStr() const
 
 	QStringList Status;
 
+	if (IsEmpty())
+		Status.append(tr("Empty"));
+
 	if (m_iUnsecureDebugging == 1)
 		Status.append(tr("NOT SECURE (Debug Config)"));
 	else if (m_iUnsecureDebugging == 2)
@@ -168,13 +180,13 @@ void CSandBoxPlus::SetLogApi(bool bEnable)
 {
 	if (bEnable)
 	{
-		InsertText("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
+		//InsertText("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
 		InsertText("InjectDll", "\\LogAPI\\logapi32.dll");
 		InsertText("InjectDll64", "\\LogAPI\\logapi64.dll");
 	}
 	else
 	{
-		DelValue("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
+		//DelValue("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
 		DelValue("InjectDll", "\\LogAPI\\logapi32.dll");
 		DelValue("InjectDll64", "\\LogAPI\\logapi64.dll");
 	}

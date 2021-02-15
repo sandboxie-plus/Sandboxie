@@ -395,9 +395,6 @@ _FX BOOLEAN Proc_Init(void)
             SBIEDLL_HOOK(Proc_, SetProcessMitigationPolicy);
     }
 
-	// OriginalToken BEGIN
-	if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
-	// OriginalToken END
     if(Dll_OsBuild < 17677) {
     
         SBIEDLL_HOOK(Proc_,CreateProcessInternalW);
@@ -751,6 +748,21 @@ _FX BOOL Proc_CreateProcessInternalW(
             }
         }
     }
+
+    // OriginalToken BEGIN
+    if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    {
+        ok = __sys_CreateProcessInternalW(
+            hToken, lpApplicationName, lpCommandLine,
+            lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags,
+            lpEnvironment, lpCurrentDirectory,
+            lpStartupInfo, lpProcessInformation, hNewToken);
+
+        err = GetLastError();
+
+        goto finish;
+    }
+    // OriginalToken END
 
     //
     // create the new process
@@ -1208,6 +1220,21 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
         }
     }
 
+    // OriginalToken BEGIN
+    if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    {
+        ok = __sys_CreateProcessInternalW_RS5(
+            hToken, lpApplicationName, lpCommandLine,
+            lpProcessAttributes, lpThreadAttributes, bInheritHandles,
+            dwCreationFlags, lpEnvironment, lpCurrentDirectory,
+            lpStartupInfo, lpProcessInformation, hNewToken);
+
+        err = GetLastError();
+
+        goto finish;
+    }
+    // OriginalToken END
+
     if (!(dwCreationFlags & CREATE_SUSPENDED))
         resume_thread = TRUE;
     dwCreationFlags |= CREATE_SUSPENDED;
@@ -1337,6 +1364,8 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
     //
     // handle CreateProcessInternal returning ERROR_ELEVATION_REQUIRED
     //
+
+finish:
 
     --TlsData->proc_create_process;
 

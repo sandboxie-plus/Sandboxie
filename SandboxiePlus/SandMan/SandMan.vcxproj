@@ -195,13 +195,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ApiLog.cpp" />
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
     <ClCompile Include="Helpers\FindTool.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Models\ApiMonModel.cpp" />
     <ClCompile Include="Models\ResMonModel.cpp" />
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="SandMan.cpp" />
@@ -231,9 +229,7 @@
     <QtMoc Include="SandMan.h" />
     <QtMoc Include="Models\SbieModel.h" />
     <QtMoc Include="Models\ResMonModel.h" />
-    <QtMoc Include="ApiLog.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
-    <QtMoc Include="Models\ApiMonModel.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
     <ClInclude Include="resource.h" />
@@ -264,7 +260,7 @@
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
     <None Include="sandman_zh-TW.ts" />
-    <None Include="sandman_zh.ts" />
+    <None Include="sandman_zh-CN.ts" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SandMan.rc" />

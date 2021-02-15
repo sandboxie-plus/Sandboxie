@@ -118,6 +118,12 @@
     <ClCompile Include="..\..\common\stream.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="ipc_sam.c">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="file_ctrl.c">
+      <Filter>file</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />

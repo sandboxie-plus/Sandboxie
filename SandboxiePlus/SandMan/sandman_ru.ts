@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation>Сообщение</translation>
+        <translation type="vanished">Сообщение</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>Временная метка</translation>
+        <translation type="vanished">Временная метка</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>Процесс</translation>
+        <translation type="vanished">Процесс</translation>
     </message>
 </context>
 <context>
@@ -235,51 +235,51 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой для всех</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрытый</translation>
     </message>
     <message>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрытый RT</translation>
     </message>
     <message>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только чтение</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрытый</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл/Папка</translation>
     </message>
     <message>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Реестр</translation>
     </message>
     <message>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь IPC</translation>
     </message>
     <message>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Wnd класс</translation>
     </message>
     <message>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>COM объект</translation>
     </message>
 </context>
 <context>
@@ -569,6 +569,10 @@ Full path: %4</source>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
+    <message>
+        <source>Empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSandMan</name>
@@ -646,7 +650,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation>Очистить журнал вызовов API</translation>
+        <translation type="vanished">Очистить журнал вызовов API</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -714,7 +718,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation>Журнал вызовов API</translation>
+        <translation type="vanished">Журнал вызовов API</translation>
     </message>
     <message>
         <source>Stop Driver</source>
@@ -800,7 +804,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation>Ведение журнала вызовов API</translation>
+        <translation type="vanished">Ведение журнала вызовов API</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -960,7 +964,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation>Очистить журнал ресурсов</translation>
+        <translation type="vanished">Очистить журнал ресурсов</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1085,7 +1089,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation>Чтобы использовать ведение журнала API, вы должны сначала настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
+        <translation type="vanished">Чтобы использовать ведение журнала API, вы должны сначала настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
 Загрузите последний выпуск и настройте его с помощью Sandboxie.ini, как указано в README.md проекта.</translation>
     </message>
     <message>
@@ -1158,14 +1162,18 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница по умолчанию не найдена; создание: %1</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу с информацией&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Don&apos;t show this message anymore.</source>
+        <translation>Больше не показывать это сообщение.</translation>
+    </message>
+    <message>
+        <source>Cleanup Trace Log</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1428,10 +1436,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта песочница пуста.</translation>
     </message>
     <message>
         <source>A group can not be its own parent.</source>
+        <translation>Группа не может быть собственным родителем.</translation>
+    </message>
+    <message>
+        <source>Run Cmd.exe as Admin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1483,7 +1495,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоопределение</translation>
     </message>
 </context>
 <context>
@@ -2085,6 +2097,10 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
+        <translation>Разрешить доступ к Bluetooth</translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2165,7 +2181,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Восстановление</translation>
     </message>
 </context>
 <context>
@@ -2383,7 +2399,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Снимки</translation>
     </message>
 </context>
 </TS>

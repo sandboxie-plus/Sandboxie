@@ -63,6 +63,7 @@ protected:
 
 	QString					FindParent(const QVariant& Name, const QMap<QString, QStringList>& Groups);
 	QList<QVariant>			MakeBoxPath(const QVariant& Name, const QMap<QString, QStringList>& Groups);
+	void					MakeBoxPath(const QVariant& Name, const QMap<QString, QStringList>& Groups, QList<QVariant>& Path);
 
 	//virtual QVariant		GetDefaultIcon() const;
 

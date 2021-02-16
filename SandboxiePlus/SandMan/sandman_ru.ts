@@ -434,7 +434,7 @@ The file was written by: %3</source>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>Перенос большого файла %1 в песочницу %2 осталось %3.
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
     </message>
 </context>

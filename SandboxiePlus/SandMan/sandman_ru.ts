@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru">
 <context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Message</source>
-        <translation type="vanished">Сообщение</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Временная метка</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Процесс</translation>
-    </message>
-</context>
-<context>
     <name>CMultiErrorDialog</name>
     <message>
         <source>Message</source>
@@ -431,46 +416,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
-Имя файла:%3</translation>
+        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 имеет право на быстрое восстановление с %2.
+        <translation>%1 имеет право на быстрое восстановление с %2.
 Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -571,7 +536,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Пусто</translation>
     </message>
 </context>
 <context>
@@ -649,10 +614,6 @@ Full path: %4</source>
         <translation>Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
-        <source>Cleanup Api Call Log</source>
-        <translation type="vanished">Очистить журнал вызовов API</translation>
-    </message>
-    <message>
         <source>Simple View</source>
         <translation>Простой вид</translation>
     </message>
@@ -717,10 +678,6 @@ Full path: %4</source>
         <translation>Не удалось загрузить обновление с: %1</translation>
     </message>
     <message>
-        <source>Api Call Log</source>
-        <translation type="vanished">Журнал вызовов API</translation>
-    </message>
-    <message>
         <source>Stop Driver</source>
         <translation>Остановить драйвер</translation>
     </message>
@@ -753,10 +710,6 @@ Full path: %4</source>
     <message>
         <source>Online Documentation</source>
         <translation>Онлайн-документация</translation>
-    </message>
-    <message>
-        <source>Ignore this update, notify me about the next one.</source>
-        <translation type="vanished">Игнорировать это обновление, сообщить мне о следующем.</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -801,10 +754,6 @@ Full path: %4</source>
     <message>
         <source>A sandbox must be emptied before it can be renamed.</source>
         <translation>Перед переименованием песочницу необходимо очистить.</translation>
-    </message>
-    <message>
-        <source>API Call Logging</source>
-        <translation type="vanished">Ведение журнала вызовов API</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -959,14 +908,6 @@ Full path: %4</source>
         <translation>Проверка обновлений...</translation>
     </message>
     <message>
-        <source>No sandboxes found; creating: %1</source>
-        <translation type="vanished">Песочниц не найдено; создание: %1</translation>
-    </message>
-    <message>
-        <source>Cleanup Resource Log</source>
-        <translation type="vanished">Очистить журнал ресурсов</translation>
-    </message>
-    <message>
         <source>Cleanup Message Log</source>
         <translation>Очистить журнал сообщений</translation>
     </message>
@@ -1087,12 +1028,6 @@ Full path: %4</source>
         <translation>Сделать это для всех файлов!</translation>
     </message>
     <message>
-        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
-Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="vanished">Чтобы использовать ведение журнала API, вы должны сначала настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
-Загрузите последний выпуск и настройте его с помощью Sandboxie.ini, как указано в README.md проекта.</translation>
-    </message>
-    <message>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
         <translation>Новых обновлений не обнаружено, ваша Sandboxie-Plus актуальна.</translation>
     </message>
@@ -1174,7 +1109,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистка журнала трассировки</translation>
     </message>
 </context>
 <context>
@@ -1444,7 +1379,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск Cmd.exe от имени администратора</translation>
     </message>
 </context>
 <context>
@@ -2101,7 +2036,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log</source>
-        <translation type="unfinished"></translation>
+        <translation>Записывать все SetError в журнал трассировки</translation>
     </message>
 </context>
 <context>
@@ -2122,23 +2057,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Применить</translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
 </context>
 <context>
@@ -2146,10 +2081,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Close</source>
         <translation>Закрыть</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="vanished">Настройки SandboxiePlus</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2372,10 +2303,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Remove Snapshot</source>
         <translation>Удалить снимок</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="vanished">Настройки SandboxiePlus</translation>
     </message>
     <message>
         <source>Description:</source>

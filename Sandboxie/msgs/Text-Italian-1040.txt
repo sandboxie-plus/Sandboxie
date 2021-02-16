@@ -1172,6 +1172,10 @@ Controlla a&ggiornamenti
 Consenti accesso diretto al driver qWave (Google Hangouts)
 .
 
+3460;txt;01
+Esclusioni predefinite per le funzioni di hook
+.
+
 3461;txt;01
 &Avvia nell'area virtuale
 .

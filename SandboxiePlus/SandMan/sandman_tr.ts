@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr">
 <context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Message</source>
-        <translation type="vanished">Mesaj</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Zaman Damgası</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">İşlem</translation>
-    </message>
-</context>
-<context>
     <name>CMultiErrorDialog</name>
     <message>
         <source>Message</source>
@@ -431,46 +416,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
+        <translation>%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
 Dosya adı: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
+        <translation>%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
 Tam yol: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1, %2&apos;den hızlı kurtarma için uygun.
+        <translation>%1, %2&apos;den hızlı kurtarma için uygun.
 Dosyayı yazan: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
+        <translation>Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -571,7 +536,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Boş</translation>
     </message>
 </context>
 <context>
@@ -649,10 +614,6 @@ Full path: %4</source>
         <translation>Sandboxie-Plus&apos;ın yeni sürümünü kontrol etmek ister misiniz?</translation>
     </message>
     <message>
-        <source>Cleanup Api Call Log</source>
-        <translation type="vanished">Api Çağrı Günlüğünü Temizle</translation>
-    </message>
-    <message>
         <source>Simple View</source>
         <translation>Basit Görünüm</translation>
     </message>
@@ -717,10 +678,6 @@ Full path: %4</source>
         <translation>%1&apos;den güncelleme indirilemedi</translation>
     </message>
     <message>
-        <source>Api Call Log</source>
-        <translation type="vanished">Api Çağrı Günlüğü</translation>
-    </message>
-    <message>
         <source>Stop Driver</source>
         <translation>Sürücüyü Durdur</translation>
     </message>
@@ -753,10 +710,6 @@ Full path: %4</source>
     <message>
         <source>Online Documentation</source>
         <translation>Çevrimiçi Belgeler</translation>
-    </message>
-    <message>
-        <source>Ignore this update, notify me about the next one.</source>
-        <translation type="vanished">Bu güncellemeyi yoksay, bir sonrakini bana bildir.</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -801,10 +754,6 @@ Full path: %4</source>
     <message>
         <source>A sandbox must be emptied before it can be renamed.</source>
         <translation>Bir korumalı kutu, yeniden adlandırılmadan önce boşaltılmalıdır.</translation>
-    </message>
-    <message>
-        <source>API Call Logging</source>
-        <translation type="vanished">API Çağrı Günlüğü</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -959,14 +908,6 @@ Full path: %4</source>
         <translation>Güncellemeler kontrol ediliyor...</translation>
     </message>
     <message>
-        <source>No sandboxes found; creating: %1</source>
-        <translation type="vanished">Korumalı kutu bulunamadı; oluşturuluyor: %1</translation>
-    </message>
-    <message>
-        <source>Cleanup Resource Log</source>
-        <translation type="vanished">Kaynak Günlüğünü Temizle</translation>
-    </message>
-    <message>
         <source>Cleanup Message Log</source>
         <translation>Mesaj Günlüğünü Temizle</translation>
     </message>
@@ -1087,12 +1028,6 @@ Full path: %4</source>
         <translation>Bunu tüm dosyalar için yap!</translation>
     </message>
     <message>
-        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
-Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="vanished">API günlüğünü kullanmak için önce https://github.com/sandboxie-plus/LogApiDll adresinden bir veya daha fazla korumalı kutu ile LogApiDll&apos;yi kurmanız gerekir.
-        Lütfen en son sürümü indirin ve projenin README.md dosyasında belirtildiği gibi Sandboxie.ini ile kurun.</translation>
-    </message>
-    <message>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
         <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.</translation>
     </message>
@@ -1174,7 +1109,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>İzleme Günlüğünü Temizle</translation>
     </message>
 </context>
 <context>
@@ -1444,7 +1379,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Cmd.exe yi yönetici olarak çalıştır</translation>
     </message>
 </context>
 <context>
@@ -2101,7 +2036,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm SetError ları logla</translation>
     </message>
 </context>
 <context>
@@ -2122,23 +2057,23 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">İptal</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Uygula</translation>
+        <translation>Uygula</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">TAMAM</translation>
+        <translation>TAMAM</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Evet</translation>
+        <translation>&amp;Evet</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Hayır</translation>
+        <translation>&amp;Hayır</translation>
     </message>
 </context>
 <context>
@@ -2146,10 +2081,6 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <message>
         <source>Close</source>
         <translation>Kapat</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="vanished">SandboxiePlus Ayarları</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2372,10 +2303,6 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <message>
         <source>Remove Snapshot</source>
         <translation>Anlık Görüntüyü Kaldır</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="vanished">SandboxiePlus Ayarları</translation>
     </message>
     <message>
         <source>Description:</source>

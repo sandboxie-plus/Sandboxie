@@ -35,7 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issues with webcam access when the DevCMApi filtering is in place
-- fixed issue with free download manager for 'AppXDeploymentClient.dll', so RpcMgmtSetComTimeout=y is used by default for this program
+- fixed issue with free download manager for 'AppXDeploymentClient.dll', so RpcMgmtSetComTimeout=y will be used by default for this one
 - fixed not all WinRM files were blocked by the driver, with "BlockWinRM=n" this file block can be disabled
 
 

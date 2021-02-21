@@ -11,6 +11,36 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [0.7.1 / 5.48.5] - 2021-02-21
+
+### Added
+- Enchanced RpcMgmtSetComTimeout handing with "UseRpcMgmtSetComTimeout=some.dll,n"
+-- this option allows to specify for each individual dll if RpcMgmtSetComTimeout should be used or not
+-- this setting takes precedence over hard coded and per process presets
+-- "UseRpcMgmtSetComTimeout=some.dll" and "UseRpcMgmtSetComTimeout=some.dll,y" are equivalent
+- Added "FakeAdminRights=y" option that makes processes in a given box think thay have admin permissions
+-- this option is recomended to be used in combination with "DropAdminRights=y" to improve securits
+-- With "FakeAdminRights=y" and "DropAdminRights=y" installers should still work
+- added RPC support for SSDP API (the Simple Service Discovery Protocol), Enable with "OpenUPnP=y"
+
+
+### Changed
+- SbieCrypto no longer triggers message 1313
+- changed enum process API now more (no limit) than 511 proceses per box can be enumerated
+- Reorganized box settings a bit
+- Made COM tracing more verbose
+- "RpcMgmtSetComTimeout=y" is now again the default behavioure, seams to cause less issues overall
+
+### Fixed
+- fixed issues with webcam access when the DevCMApi filtering is in place
+- fixed issue with free download manager for 'AppXDeploymentClient.dll' RpcMgmtSetComTimeout=y is used
+- fixed not all WinRM files were blocked by the driver, with "BlockWinRM=n" this file block can be disabled
+
+
+
+
 ## [0.7.0 / 5.48.0] - 2021-02-14
 
 ### Added
@@ -27,6 +57,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - FIXED SECURITY ISSUE: elevated sandboxed processes could access volumes/disks for reading (thanks hg421)
+-- this protection option can be disabled by using "AllowRawDiskRead=y"
 - fixed crash issue around SetCurrentProcessExplicitAppUserModelID observed with GoogleUpdate.exe
 - fixed issue with resource monitor sort by timestamp
 - FIXED SECURITY ISSUE: a race condition in the driver allowed to obtain an elevated rights handle to a process (thanks typpos)

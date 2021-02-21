@@ -135,6 +135,12 @@ ULONG64 SbieApi_QueryProcessInfo(
     ULONG info_type);
 
 SBIEAPI_EXPORT
+ULONG64 SbieApi_QueryProcessInfoEx(
+    HANDLE ProcessId,
+    ULONG info_type,
+    ULONG64 ext_data);
+
+SBIEAPI_EXPORT
 LONG SbieApi_QueryBoxPath(
     const WCHAR *box_name,              // WCHAR [34]
     WCHAR *out_file_path,
@@ -163,13 +169,14 @@ LONG SbieApi_QueryPathList(
 
 SBIEAPI_EXPORT
 LONG SbieApi_EnumProcessEx(
-    const WCHAR *box_name,          // WCHAR [34]
+    const WCHAR* box_name,          // WCHAR [34]
     BOOLEAN all_sessions,
     ULONG which_session,            // -1 for current session
-    ULONG *boxed_pids);             // ULONG [512]
+    ULONG* boxed_pids,             // ULONG [512]
+    ULONG* boxed_count);
 
 #define SbieApi_EnumProcess(box_name,boxed_pids) \
-    SbieApi_EnumProcessEx(box_name,FALSE,-1,boxed_pids)
+    SbieApi_EnumProcessEx(box_name,FALSE,-1,boxed_pids, NULL)
 
 
 //---------------------------------------------------------------------------

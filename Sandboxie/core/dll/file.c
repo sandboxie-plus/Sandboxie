@@ -2306,7 +2306,8 @@ _FX NTSTATUS File_NtCreateFile(
 // File_NtCreateFileImpl
 //---------------------------------------------------------------------------
 
-/*static P_NtCreateFile               __sys_NtCreateFile_ = NULL;
+/*
+static P_NtCreateFile               __sys_NtCreateFile_ = NULL;
 
 _FX NTSTATUS File_MyCreateFile(
     HANDLE* FileHandle,
@@ -2327,9 +2328,11 @@ _FX NTSTATUS File_MyCreateFile(
         CreateOptions, EaBuffer, EaLength);
 
     if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
-        && _wcsicmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\C:") == 0)
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\PhysicalDrive0") == 0)
     {
-        DebugBreak();
+        WCHAR text[1024];
+        Sbie_snwprintf(text, 1024, L"%s <%08X>", ObjectAttributes->ObjectName->Buffer, status);
+        SbieApi_MonitorPut(MONITOR_OTHER, text);
     }
 
     status = StopTailCallOptimization(status);
@@ -2376,11 +2379,20 @@ _FX NTSTATUS File_NtCreateFileImpl(
     //  //   __debugbreak();
     //}
 
-    //if (__sys_NtCreateFile_ == NULL)
-    //{
-    //    __sys_NtCreateFile_ = __sys_NtCreateFile;
-    //    __sys_NtCreateFile = File_MyCreateFile;
-    //}
+    /*if (__sys_NtCreateFile_ == NULL)
+    {
+        __sys_NtCreateFile_ = __sys_NtCreateFile;
+        __sys_NtCreateFile = File_MyCreateFile;
+    }
+
+    if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\PhysicalDrive0") == 0)
+    {
+        return __sys_NtCreateFile(
+            FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+            AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+            CreateOptions, EaBuffer, EaLength);
+    }*/
 
     //
     // if this is a recursive invocation of NtCreateFile,
@@ -2516,6 +2528,7 @@ ReparseLoop:
                         && wcsncmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\", 4) == 0
                         && (DesiredAccess & ~(SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES)) != 0)
                     {
+                        if (!SbieApi_QueryConfBool(NULL, L"AllowRawDiskRead", FALSE))
                         if ((ObjectAttributes->ObjectName->Length == (6 * sizeof(WCHAR)) && ObjectAttributes->ObjectName->Buffer[5] == L':') // \??\C:
                             || wcsncmp(&ObjectAttributes->ObjectName->Buffer[4], L"PhysicalDrive", 13) == 0 // \??\PhysicalDrive1
                             || wcsncmp(&ObjectAttributes->ObjectName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}

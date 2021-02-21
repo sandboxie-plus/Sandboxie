@@ -280,9 +280,8 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m->lastMessageNum = 0;
 	m->lastRecordNum = 0;
 
-#ifndef _DEBUG
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.48.0";
+	QStringList CompatVersions = QStringList () << "5.48.5";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -290,7 +289,6 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 		m->SbieApiHandle = INVALID_HANDLE_VALUE;	
 		return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
 	}
-#endif
 
 	m_bWithQueue = withQueue;
 	m_bTerminate = false;
@@ -1085,7 +1083,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* boxed_pids_512)
+SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* pids, ULONG* count)
 {
 	WCHAR box_name[34];
 	BoxName.toWCharArray(box_name); // fix-me: potential overflow
@@ -1097,10 +1095,11 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* b
 
 	memset(parms, 0, sizeof(parms));
 	parms[0] = API_ENUM_PROCESSES;
-	parms[1] = (ULONG64)boxed_pids_512;
+	parms[1] = (ULONG64)pids;
 	parms[2] = (ULONG64)box_name;
 	parms[3] = (ULONG64)all_sessions;
 	parms[4] = (ULONG64)which_session;
+	parms[5] = (ULONG64)count;
 
 	NTSTATUS status = m->IoControl(parms);
 	if (!NT_SUCCESS(status))
@@ -1110,14 +1109,15 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* b
 
 SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 {
-	ULONG boxed_pids[512]; // ULONG [512]
-	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), boxed_pids);
+	ULONG count = 1024;
+	ULONG boxed_pids[1024]; // ULONG [512]
+	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), boxed_pids, &count);
 	if (Status.IsError())
 		return Status;
 
 	QMap<quint32, CBoxedProcessPtr>	OldProcessList = pBox->m_ProcessList;
 
-	for (int i=1; i < boxed_pids[0] + 1; i++)
+	for (int i=0; i < count; i++)
 	{
 		quint32 ProcessId = boxed_pids[i];
 
@@ -1157,8 +1157,8 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 
 bool CSbieAPI::HasProcesses(const QString& BoxName)
 {
-	ULONG boxed_pids[512]; // ULONG [512]
-	return CSbieAPI__GetProcessPIDs(m, BoxName, boxed_pids) && (boxed_pids[0] > 0);
+	ULONG count;
+	return CSbieAPI__GetProcessPIDs(m, BoxName, NULL, &count) && (count > 0);
 }
 
 SB_STATUS CSbieAPI__QueryBoxPath(SSbieAPI* m, const WCHAR *box_name, WCHAR *out_file_path, WCHAR *out_key_path, WCHAR *out_ipc_path,

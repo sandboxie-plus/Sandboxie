@@ -20,7 +20,7 @@ SbieApi_CheckInternetAccess=_SbieApi_CheckInternetAccess@12
 SbieApi_DisableForceProcess=_SbieApi_DisableForceProcess@8
 
 SbieApi_EnumBoxes=_SbieApi_EnumBoxes@8
-SbieApi_EnumProcessEx=_SbieApi_EnumProcessEx@16
+SbieApi_EnumProcessEx=_SbieApi_EnumProcessEx@20
 
 SbieApi_GetFileName=_SbieApi_GetFileName@12
 SbieApi_GetHomePath=_SbieApi_GetHomePath@16

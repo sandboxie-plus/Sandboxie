@@ -269,7 +269,7 @@ NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId)
 
     for (retries = 0; retries < 10; ++retries) {
 
-        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids);
+        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids, NULL);
         if (status != STATUS_SUCCESS)
             break;
         if (! pids[0])

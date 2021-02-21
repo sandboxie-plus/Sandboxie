@@ -985,49 +985,49 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
 //---------------------------------------------------------------------------
 
 
-_FX void Process_TrackProcessLimit(PROCESS *proc)
-{
-    ULONG v;
-    ULONG ProcessLimit1;
-    ULONG ProcessLimit2;
-
-    //
-    // get the process limits in this sandbox
-    //
-
-    ProcessLimit1 = 100;
-    ProcessLimit2 = 200;
-
-    v = Conf_Get_Number(proc->box->name, L"ProcessLimit1", 0, 0);
-    if (v >= 1 && v <= 999999)
-        ProcessLimit1 = v;
-
-    v = Conf_Get_Number(proc->box->name, L"ProcessLimit2", 0, 0);
-    if (v >= 1 && v <= 999999)
-        ProcessLimit2 = v;
-
-    if (ProcessLimit2 <= ProcessLimit1)
-        ProcessLimit2 = ProcessLimit1 + 1;
-
-    //
-    // count number of processes in this sandbox
-    //
-
-    Process_Enumerate(proc->box->name, FALSE, proc->box->session_id,
-                      NULL, &v);
-
-    if (v > ProcessLimit2) {
-
-        Process_SetTerminated(proc, 4);
-
-    } else if (v > ProcessLimit1) {
-
-        LARGE_INTEGER time;
-
-        time.QuadPart = -SECONDS(10);
-        KeDelayExecutionThread(KernelMode, FALSE, &time);
-    }
-}
+//_FX void Process_TrackProcessLimit(PROCESS *proc)
+//{
+//    ULONG v;
+//    ULONG ProcessLimit1;
+//    ULONG ProcessLimit2;
+//
+//    //
+//    // get the process limits in this sandbox
+//    //
+//
+//    ProcessLimit1 = 100;
+//    ProcessLimit2 = 200;
+//
+//    v = Conf_Get_Number(proc->box->name, L"ProcessLimit1", 0, 0);
+//    if (v >= 1 && v <= 999999)
+//        ProcessLimit1 = v;
+//
+//    v = Conf_Get_Number(proc->box->name, L"ProcessLimit2", 0, 0);
+//    if (v >= 1 && v <= 999999)
+//        ProcessLimit2 = v;
+//
+//    if (ProcessLimit2 <= ProcessLimit1)
+//        ProcessLimit2 = ProcessLimit1 + 1;
+//
+//    //
+//    // count number of processes in this sandbox
+//    //
+//
+//    Process_Enumerate(proc->box->name, FALSE, proc->box->session_id,
+//                      NULL, &v);
+//
+//    if (v > ProcessLimit2) {
+//
+//        Process_SetTerminated(proc, 4);
+//
+//    } else if (v > ProcessLimit1) {
+//
+//        LARGE_INTEGER time;
+//
+//        time.QuadPart = -SECONDS(10);
+//        KeDelayExecutionThread(KernelMode, FALSE, &time);
+//    }
+//}
 
 
 //---------------------------------------------------------------------------

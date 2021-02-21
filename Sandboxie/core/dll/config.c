@@ -24,6 +24,7 @@
 #include "dll.h"
 #include "common/pool.h"
 #include "common\pattern.h"
+#include "core/svc/SbieIniWire.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -398,4 +399,143 @@ BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* tit
     if (width) *width = _wtoi(ptr);
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_MatchImage
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_MatchImage_Impl(const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str, const WCHAR* BoxName, ULONG depth)
+{
+    if (*pat_str == L'<') {
+
+        ULONG index;
+        WCHAR buf[CONF_LINE_LEN];
+
+        if (depth >= 6)
+            return FALSE;
+
+        for (index = 0; ; ++index) {
+
+            //
+            // get next process group setting, compare to passed group name.
+            // if the setting is <passed_group_name>= then we accept it.
+            //
+
+            NTSTATUS status = SbieApi_QueryConfAsIs(
+                BoxName, L"ProcessGroup", index, buf, CONF_LINE_LEN * sizeof(WCHAR));
+            if (!NT_SUCCESS(status))
+                break;
+            WCHAR* value = buf;
+
+            ULONG value_len = wcslen(value);
+            if (value_len <= pat_len + 1)
+                continue;
+            if (_wcsnicmp(value, pat_str, pat_len) != 0)
+                continue;
+
+            value += pat_len;
+            if (*value != L',')
+                continue;
+            ++value;
+
+            //
+            // value now points at the comma-separated
+            // list of processes in this process group
+            //
+
+            while (*value) {
+                WCHAR* ptr = wcschr(value, L',');
+                if (ptr)
+                    value_len = (ULONG)(ULONG_PTR)(ptr - value);
+                else
+                    value_len = wcslen(value);
+
+                if (value_len) {
+
+                    if (SbieDll_MatchImage_Impl(value, value_len, test_str, BoxName, depth + 1))
+                        return TRUE;
+                }
+
+                value += value_len;
+                while (*value == L',')
+                    ++value;
+            }
+        }
+
+    }
+    else {
+
+        ULONG test_len = wcslen(test_str);
+        if (test_len == pat_len)
+            return (_wcsnicmp(test_str, pat_str, test_len) == 0);
+
+    }
+
+    return FALSE;
+}
+
+
+BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WCHAR* BoxName)
+{
+    ULONG pat_len = wcslen(pat_str);
+    return SbieDll_MatchImage_Impl(pat_str, pat_len, test_str, BoxName, 1);
+}
+
+
+//---------------------------------------------------------------------------
+// CheckStringInList
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting)
+{
+    WCHAR buf[66];
+    ULONG index = 0;
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        ++index;
+        if (NT_SUCCESS(status)) {
+            if (_wcsicmp(buf, string) == 0) {
+                return TRUE;
+            }
+        }
+        else if (status != STATUS_BUFFER_TOO_SMALL)
+            break;
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// CheckStringInList
+//---------------------------------------------------------------------------
+
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+{
+    WCHAR buf[128];
+    ULONG index = 0;
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        ++index;
+        if (NT_SUCCESS(status)) {
+            WCHAR* ptr = wcschr(buf, L',');
+            if (ptr) *ptr = L'\0';
+            if (_wcsicmp(buf, string) == 0) {
+                if (ptr++) {
+                    if (*ptr == L'y' || *ptr == L'Y')
+                        return TRUE;
+                    if (*ptr == L'n' || *ptr == L'N')
+                        return FALSE;
+                }
+                return def_found;
+            }
+        }
+        else if (status != STATUS_BUFFER_TOO_SMALL)
+            break;
+    }
+    return not_found;
 }

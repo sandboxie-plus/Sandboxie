@@ -416,26 +416,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
+        <translation type="vanished">%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
 Dosya adı: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
+        <translation type="vanished">%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
 Tam yol: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1, %2&apos;den hızlı kurtarma için uygun.
+        <translation type="vanished">%1, %2&apos;den hızlı kurtarma için uygun.
 Dosyayı yazan: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
+        <translation type="vanished">Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1220,7 +1240,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Enable API Call logging</source>
-        <translation>API Çağrısı günlük kaydını etkinleştir</translation>
+        <translation type="vanished">API Çağrısı günlük kaydını etkinleştir</translation>
     </message>
     <message>
         <source>[None]</source>
@@ -1380,6 +1400,14 @@ Tam yol: %4</translation>
     <message>
         <source>Run Cmd.exe as Admin</source>
         <translation>Cmd.exe yi yönetici olarak çalıştır</translation>
+    </message>
+    <message>
+        <source>Ask for UAC Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emulate Admin Rights</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1601,7 +1629,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>General restrictions</source>
-        <translation>Genel kısıtlamalar</translation>
+        <translation type="vanished">Genel kısıtlamalar</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -1984,7 +2012,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Printing</source>
-        <translation>Yazdırma</translation>
+        <translation type="vanished">Yazdırma</translation>
     </message>
     <message>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
@@ -2016,7 +2044,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Lift security restrictions</source>
-        <translation>Güvenlik kısıtlamalarını kaldır</translation>
+        <translation type="vanished">Güvenlik kısıtlamalarını kaldır</translation>
     </message>
     <message>
         <source>Sandbox isolation</source>
@@ -2036,7 +2064,63 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log</source>
-        <translation>Tüm SetError ları logla</translation>
+        <translation type="vanished">Tüm SetError ları logla</translation>
+    </message>
+    <message>
+        <source>Elevation restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw Disk access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow elevated sandboxed applications to read the harddrive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warn when an application opens a harddrive handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ntdll syscall Trace (creates a lot of output)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2057,23 +2141,23 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation type="vanished">İptal</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Uygula</translation>
+        <translation type="vanished">Uygula</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation type="vanished">TAMAM</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Evet</translation>
+        <translation type="vanished">&amp;Evet</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Hayır</translation>
+        <translation type="vanished">&amp;Hayır</translation>
     </message>
 </context>
 <context>

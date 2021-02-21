@@ -917,7 +917,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
             name[1] = L'\0';
         }
 
-        Session_MonitorPut(type, name, proc->pid);
+        Session_MonitorPut(type | MONITOR_USER, name, proc->pid);
     }
 
     Mem_Free(name, 260 * sizeof(WCHAR));
@@ -975,11 +975,11 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
     if (log_tid != NULL)
         ProbeForWrite(log_tid, sizeof(ULONG64), sizeof(ULONG64));
 
-	log_len = args->log_len.val / sizeof(WCHAR) * sizeof(WCHAR);
+	log_len = args->log_len.val / sizeof(WCHAR);
     if (!log_len)
         return STATUS_INVALID_PARAMETER;
 	log_data = args->log_ptr.val;
-    ProbeForWrite(log_data, log_len, sizeof(WCHAR));
+    ProbeForWrite(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
 
     *log_type = 0;
 	if (log_pid != NULL)
@@ -1035,13 +1035,14 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
         if (log_tid != NULL)
             *log_tid = tid64;
 
-		log_len -= sizeof(WCHAR); // reserve room for the termination character
-		if (log_len > entry_size - (2 + 8 + 8))
-			log_len = entry_size - (2 + 8 + 8);
-		log_buffer_get_bytes((CHAR*)log_data, log_len, &read_ptr, session->monitor_log);
+        ULONG data_len = (entry_size - (2 + 8 + 8)) / sizeof(WCHAR);
+		log_len -= 1; // reserve room for the termination character
+		if (log_len > data_len)
+			log_len = data_len;
+		log_buffer_get_bytes((CHAR*)log_data, log_len * sizeof(WCHAR), &read_ptr, session->monitor_log);
 
 		// add required termination character
-		*(WCHAR*)(((CHAR*)log_data) + log_len) = L'\0';
+        log_data[log_len] = L'\0';
 
 		if (seq_num != NULL)
 			*seq_num = seq_number;

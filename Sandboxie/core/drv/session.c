@@ -504,7 +504,8 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
     in_flag = args->set_flag.val;
     if (in_flag) {
         ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
-        if (*in_flag) {
+        ULONG in_flag_value = *in_flag;
+        if (in_flag_value) {
 
             if (! Session_CheckAdminAccess(L"ForceDisableAdminOnly"))
                     return STATUS_ACCESS_DENIED;
@@ -513,7 +514,7 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
         } else
             time.QuadPart = 0;
 
-        if (*in_flag == DISABLE_JUST_THIS_PROCESS) {
+        if (in_flag_value == DISABLE_JUST_THIS_PROCESS) {
 
             Process_DfpInsert(PROCESS_TERMINATED, PsGetCurrentProcessId());
 
@@ -974,11 +975,11 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
     if (log_tid != NULL)
         ProbeForWrite(log_tid, sizeof(ULONG64), sizeof(ULONG64));
 
-	log_len = args->log_len.val / sizeof(WCHAR);
+	log_len = args->log_len.val / sizeof(WCHAR) * sizeof(WCHAR);
     if (!log_len)
         return STATUS_INVALID_PARAMETER;
 	log_data = args->log_ptr.val;
-    ProbeForWrite(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
+    ProbeForWrite(log_data, log_len, sizeof(WCHAR));
 
     *log_type = 0;
 	if (log_pid != NULL)

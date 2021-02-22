@@ -1117,7 +1117,6 @@ void CAppPage::UpdateTemplates(CBox &box)
     //
     // replace with:    Template=AutoRecoverIgnore
     //
-
     box.GetAutoRecoveryIgnores(list, TRUE);
     while (! list.IsEmpty()) {
         CString item = list.RemoveHead();
@@ -1126,7 +1125,19 @@ void CAppPage::UpdateTemplates(CBox &box)
         if (cmp1 == 0 || cmp2 == 0)
             box.AddOrRemoveAutoRecoveryIgnores(item, FALSE);
     }
+    
+    //
+    // find and remove:
+    //
+    //      Template=FileCppy
+    //
 
+    BOOL enabled = box.IsTemplateEnabled(Template_FileCppy);
+    if (enabled) {
+        CString tmp1 = CTemplateListBox::GetTemplateTitle(L"FileCppy");        
+        box.AddOrRemoveFileCppy(tmp1, FALSE);
+    }
+    
     //
     // find and replace other templates
     //

@@ -433,7 +433,7 @@ SBIE2219 La richiesta è stata emanata dal programma %2
 .
 
 2220;pop;wrn;01
-SBIE2220 Per consentire l'utilizzo dei privileggi di amministratore, fare doppio clic su questo messaggio
+SBIE2220 Per consentire l'utilizzo dei privilegi di amministratore, fare doppio clic su questo messaggio
 .
 
 2221;pop;wrn;01

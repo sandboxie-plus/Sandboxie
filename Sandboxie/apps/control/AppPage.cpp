@@ -1117,6 +1117,7 @@ void CAppPage::UpdateTemplates(CBox &box)
     //
     // replace with:    Template=AutoRecoverIgnore
     //
+    
     box.GetAutoRecoveryIgnores(list, TRUE);
     while (! list.IsEmpty()) {
         CString item = list.RemoveHead();

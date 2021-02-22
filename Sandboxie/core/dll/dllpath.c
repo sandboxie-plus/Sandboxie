@@ -228,13 +228,20 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
             return 0;
     }
 
-    if (path_code == L'p') {
+    if (path_code == L'f') {
+        monflag = MONITOR_FILE;
+    } else if (path_code == L'k') {
+        monflag = MONITOR_KEY;
+    } else if (path_code == L'p') {
         path_code = L'f';
         monflag = MONITOR_PIPE;
-    } else if (path_code == L'i')
+    } else if (path_code == L'i') {
         monflag = MONITOR_IPC;
-    else
-        monflag = 0;
+        if (path && path[0] == L'\\' && path[1] == L'K'
+          && (wcsncmp(path, L"\\KnownDlls", 10) == 0)) // this will be traced by the driver
+            monflag = 0;
+    } else
+        monflag = MONITOR_OTHER;
 
     //
     // select path list
@@ -417,16 +424,20 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     // log access request in the resource access monitor
     //
 
-    if (monflag) {
+    if (path && monflag) {
 
         if (PATH_IS_CLOSED(mp_flags))
             monflag |= MONITOR_DENY;
+        // If hts file or key it will be logged by the driver's trace facility
+        // we only have to log closed events as those never reach the driver
+        else if (monflag == MONITOR_FILE || monflag == MONITOR_KEY)
+            bMonitorLog = FALSE;
         else if (PATH_IS_OPEN(mp_flags))
             monflag |= MONITOR_OPEN;
 
         if (bMonitorLog)
         {
-            SbieApi_MonitorPut2(monflag, path_lwr, bCheckObjectExists);
+            SbieApi_MonitorPut2(monflag, path, bCheckObjectExists);
         }
     }
 

@@ -59,7 +59,7 @@
 //#define MONITOR_					0x0FFB
 #define MONITOR_OPEN                0x1000
 #define MONITOR_DENY                0x2000
-//#define MONITOR_					0x4000
+#define MONITOR_USER				0x4000
 #define MONITOR_TRACE               0x8000
 
 

@@ -1296,7 +1296,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Enable API Call logging</source>
-        <translation>啟用 API 呼叫日誌</translation>
+        <translation type="vanished">啟用 API 呼叫日誌</translation>
     </message>
     <message>
         <source>[None]</source>
@@ -1454,6 +1454,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask for UAC Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emulate Admin Rights</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1688,7 +1696,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>General restrictions</source>
-        <translation>通用限制</translation>
+        <translation type="vanished">通用限制</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -2044,7 +2052,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Printing</source>
-        <translation>列印</translation>
+        <translation type="vanished">列印</translation>
     </message>
     <message>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
@@ -2076,7 +2084,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Lift security restrictions</source>
-        <translation>提升安全限制</translation>
+        <translation type="vanished">提升安全限制</translation>
     </message>
     <message>
         <source>Sandbox isolation</source>
@@ -2113,7 +2121,59 @@ instead of &quot;*&quot;.</source>
         <translation>允許訪問藍牙</translation>
     </message>
     <message>
-        <source>Log all SetError&apos;s to Trace log</source>
+        <source>Elevation restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw Disk access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow elevated sandboxed applications to read the harddrive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warn when an application opens a harddrive handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ntdll syscall Trace (creates a lot of output)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

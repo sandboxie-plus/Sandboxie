@@ -217,6 +217,11 @@ typedef struct _THREAD_DATA {
     ULONG           SizeofPortMsg;
     BOOLEAN         bOperaFileDlgThread;
 
+    //
+    // rpc module
+    //
+
+    ULONG_PTR       rpc_caller;
 
 } THREAD_DATA;
 
@@ -643,6 +648,7 @@ BOOLEAN Ole_Init(HMODULE);
 BOOLEAN Pst_Init(HMODULE);
 
 BOOLEAN Lsa_Init_Secur32(HMODULE);
+
 BOOLEAN Lsa_Init_SspiCli(HMODULE);
 
 BOOLEAN Setup_Init_SetupApi(HMODULE);

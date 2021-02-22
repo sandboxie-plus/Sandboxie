@@ -533,7 +533,7 @@ void DriverAssist::UnmountHive(void *_msg)
         for (retries = 0; retries < 20; ++retries) {
 
             rc = SbieApi_EnumProcessEx(
-                                msg->boxname, FALSE, msg->session_id, pids);
+                                msg->boxname, FALSE, msg->session_id, pids, NULL);
             if (rc == 0 && *pids == 0) {
 
                 ShouldUnmount = true;

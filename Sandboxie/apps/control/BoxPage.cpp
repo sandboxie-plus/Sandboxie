@@ -966,7 +966,7 @@ void CBoxPage::Appearance_OnOK(CBox &box)
         BOOL enable = (pCheckBox3->GetCheck() == BST_CHECKED ? TRUE : FALSE);
         BOOL title  = (pCheckBox4->GetCheck() == BST_CHECKED ? TRUE : FALSE);
         CString str;
-        GetDlgItem(ID_MIGRATE_KB)->GetWindowText(str);
+        GetDlgItem(ID_BORDER_WIDTH)->GetWindowText(str);
         int width = _wtoi(str);
         ok = box.SetBorder(enable, Appearance_BorderColor, title, width);
     }

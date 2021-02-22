@@ -375,6 +375,7 @@ _FX BOOLEAN Ipc_Init(void)
     g_Ipc_DynamicPortNames[WPAD_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
     g_Ipc_DynamicPortNames[SMART_CARD_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
     g_Ipc_DynamicPortNames[BT_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
+    g_Ipc_DynamicPortNames[SSDP_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
 
     g_Ipc_DynamicPortNames[GAME_CONFIG_STORE_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
 

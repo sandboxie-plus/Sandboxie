@@ -355,7 +355,7 @@ void Process_LogMessage(PROCESS *proc, ULONG msgid);
 
 // Track process limit
 
-void Process_TrackProcessLimit(PROCESS *proc);
+//void Process_TrackProcessLimit(PROCESS *proc);
 
 
 // Cancel process through SbieSvc

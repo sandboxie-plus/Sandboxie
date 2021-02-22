@@ -208,6 +208,7 @@ _FX BOOLEAN Ipc_Init(void)
     if (!Mem_GetLockResource(&Ipc_Dynamic_Ports[WPAD_PORT].pPortLock, TRUE)
      || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SMART_CARD_PORT].pPortLock, TRUE)
      || !Mem_GetLockResource(&Ipc_Dynamic_Ports[BT_PORT].pPortLock, TRUE)
+     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SSDP_PORT].pPortLock, TRUE)
      // since Windows 8
      || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE)
      // since Windows 10
@@ -647,7 +648,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
     //
 
     proc->ipc_block_password =
-        Conf_Get_Boolean(proc->box->name, L"BlockPassword", 0, TRUE);
+        Conf_Get_Boolean(proc->box->name, L"BlockPassword", 0, TRUE); // OpenLsaSSPI (Security Support Provider Interface)
 
     proc->ipc_open_lsa_endpoint =
         Conf_Get_Boolean(proc->box->name, L"OpenLsaEndpoint", 0, FALSE);
@@ -867,7 +868,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
         //
 
         if (is_open && pattern[0] == L'\\' && pattern[1] == L'K'
-                    && (wcscmp(pattern, L"\\KnownDlls\\*") == 0)) {
+                    && (wcsncmp(pattern, L"\\KnownDlls", 10) == 0)) { // L"\\KnownDlls\\*", L"\\KnownDlls32\\*",
 
             if (GrantedAccess & (DELETE | SECTION_EXTEND_SIZE))
                 status = STATUS_ACCESS_DENIED;

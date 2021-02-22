@@ -96,22 +96,28 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 
 QString CTraceEntry::GetTypeStr() const
 {
+	QString Type;
 	switch (m_Type.Type)
 	{
-	case MONITOR_APICALL:		return "ApiCall";
-	case MONITOR_SYSCALL:		return "SysCall";
-	case MONITOR_PIPE:			return "Pipe";
-	case MONITOR_IPC:			return "Ipc";
-	case MONITOR_WINCLASS:		return "WinClass";
-	case MONITOR_DRIVE:			return "Drive";
-	case MONITOR_COMCLASS:		return "ComClass";
-	case MONITOR_IGNORE:		return "Ignore";
-	case MONITOR_IMAGE:			return "Image";
-	case MONITOR_FILE:			return "File";
-	case MONITOR_KEY:			return "Key";
-	case MONITOR_OTHER:			return "Debug";
-	default:					return "Unknown: " + QString::number(m_Type.Type);
+	case MONITOR_APICALL:		Type = "ApiCall"; break;
+	case MONITOR_SYSCALL:		Type = "SysCall"; break;
+	case MONITOR_PIPE:			Type = "Pipe"; break;
+	case MONITOR_IPC:			Type = "Ipc"; break;
+	case MONITOR_WINCLASS:		Type = "WinClass"; break;
+	case MONITOR_DRIVE:			Type = "Drive"; break;
+	case MONITOR_COMCLASS:		Type = "ComClass"; break;
+	case MONITOR_IGNORE:		Type = "Ignore"; break;
+	case MONITOR_IMAGE:			Type = "Image"; break;
+	case MONITOR_FILE:			Type = "File"; break;
+	case MONITOR_KEY:			Type = "Key"; break;
+	case MONITOR_OTHER:			Type = "Debug"; break;
+	default:					Type = "Unknown: " + QString::number(m_Type.Type);
 	}
+
+	//if (!m_Type.User)
+	//	Type.append(" (drv)");
+
+	return Type;
 }
 
 QString CTraceEntry::GetStautsStr() const
@@ -126,7 +132,10 @@ QString CTraceEntry::GetStautsStr() const
 		Status.append("Trace ");
 
 	if (m_Counter > 1)
-		Status.append(QString("(%1)").arg(m_Counter));
+		Status.append(QString("(%1) ").arg(m_Counter));
+
+	if (m_Type.User)
+		Status = Status.toLower();
 
 	return Status;
 }

@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru">
 <context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Message</source>
-        <translation type="vanished">Сообщение</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Временная метка</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Процесс</translation>
-    </message>
-</context>
-<context>
     <name>CMultiErrorDialog</name>
     <message>
         <source>Message</source>
@@ -431,8 +416,8 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">Разрешить%4 (%5) копировать большой файл %1 в песочницу:%2?
-Имя файла:%3</translation>
+        <translation type="vanished">Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
@@ -571,7 +556,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Пусто</translation>
     </message>
 </context>
 <context>
@@ -649,10 +634,6 @@ Full path: %4</source>
         <translation>Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
-        <source>Cleanup Api Call Log</source>
-        <translation type="vanished">Очистить журнал вызовов API</translation>
-    </message>
-    <message>
         <source>Simple View</source>
         <translation>Простой вид</translation>
     </message>
@@ -717,10 +698,6 @@ Full path: %4</source>
         <translation>Не удалось загрузить обновление с: %1</translation>
     </message>
     <message>
-        <source>Api Call Log</source>
-        <translation type="vanished">Журнал вызовов API</translation>
-    </message>
-    <message>
         <source>Stop Driver</source>
         <translation>Остановить драйвер</translation>
     </message>
@@ -753,10 +730,6 @@ Full path: %4</source>
     <message>
         <source>Online Documentation</source>
         <translation>Онлайн-документация</translation>
-    </message>
-    <message>
-        <source>Ignore this update, notify me about the next one.</source>
-        <translation type="vanished">Игнорировать это обновление, сообщить мне о следующем.</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -801,10 +774,6 @@ Full path: %4</source>
     <message>
         <source>A sandbox must be emptied before it can be renamed.</source>
         <translation>Перед переименованием песочницу необходимо очистить.</translation>
-    </message>
-    <message>
-        <source>API Call Logging</source>
-        <translation type="vanished">Ведение журнала вызовов API</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -959,14 +928,6 @@ Full path: %4</source>
         <translation>Проверка обновлений...</translation>
     </message>
     <message>
-        <source>No sandboxes found; creating: %1</source>
-        <translation type="vanished">Песочниц не найдено; создание: %1</translation>
-    </message>
-    <message>
-        <source>Cleanup Resource Log</source>
-        <translation type="vanished">Очистить журнал ресурсов</translation>
-    </message>
-    <message>
         <source>Cleanup Message Log</source>
         <translation>Очистить журнал сообщений</translation>
     </message>
@@ -1087,12 +1048,6 @@ Full path: %4</source>
         <translation>Сделать это для всех файлов!</translation>
     </message>
     <message>
-        <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
-Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="vanished">Чтобы использовать ведение журнала API, вы должны сначала настроить LogApiDll из https://github.com/sandboxie-plus/LogApiDll с одной или несколькими песочницами.
-Загрузите последний выпуск и настройте его с помощью Sandboxie.ini, как указано в README.md проекта.</translation>
-    </message>
-    <message>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
         <translation>Новых обновлений не обнаружено, ваша Sandboxie-Plus актуальна.</translation>
     </message>
@@ -1174,7 +1129,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистка журнала трассировки</translation>
     </message>
 </context>
 <context>
@@ -1285,7 +1240,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Enable API Call logging</source>
-        <translation>Включить ведение журнала вызовов API</translation>
+        <translation type="vanished">Включить ведение журнала вызовов API</translation>
     </message>
     <message>
         <source>[None]</source>
@@ -1444,6 +1399,14 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
+        <translation>Запуск Cmd.exe от имени администратора</translation>
+    </message>
+    <message>
+        <source>Ask for UAC Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emulate Admin Rights</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1666,7 +1629,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>General restrictions</source>
-        <translation>Общие ограничения</translation>
+        <translation type="vanished">Общие ограничения</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -2049,7 +2012,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Printing</source>
-        <translation>Печать</translation>
+        <translation type="vanished">Печать</translation>
     </message>
     <message>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
@@ -2081,7 +2044,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Lift security restrictions</source>
-        <translation>Снять ограничения безопасности</translation>
+        <translation type="vanished">Снять ограничения безопасности</translation>
     </message>
     <message>
         <source>Sandbox isolation</source>
@@ -2101,6 +2064,62 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log</source>
+        <translation type="vanished">Записывать все SetError в журнал трассировки</translation>
+    </message>
+    <message>
+        <source>Elevation restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw Disk access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow elevated sandboxed applications to read the harddrive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warn when an application opens a harddrive handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ntdll syscall Trace (creates a lot of output)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2146,10 +2165,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Close</source>
         <translation>Закрыть</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="vanished">Настройки SandboxiePlus</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2372,10 +2387,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Remove Snapshot</source>
         <translation>Удалить снимок</translation>
-    </message>
-    <message>
-        <source>SandboxiePlus Settings</source>
-        <translation type="vanished">Настройки SandboxiePlus</translation>
     </message>
     <message>
         <source>Description:</source>

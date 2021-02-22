@@ -504,7 +504,8 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
     in_flag = args->set_flag.val;
     if (in_flag) {
         ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
-        if (*in_flag) {
+        ULONG in_flag_value = *in_flag;
+        if (in_flag_value) {
 
             if (! Session_CheckAdminAccess(L"ForceDisableAdminOnly"))
                     return STATUS_ACCESS_DENIED;
@@ -513,7 +514,7 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
         } else
             time.QuadPart = 0;
 
-        if (*in_flag == DISABLE_JUST_THIS_PROCESS) {
+        if (in_flag_value == DISABLE_JUST_THIS_PROCESS) {
 
             Process_DfpInsert(PROCESS_TERMINATED, PsGetCurrentProcessId());
 
@@ -916,7 +917,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
             name[1] = L'\0';
         }
 
-        Session_MonitorPut(type, name, proc->pid);
+        Session_MonitorPut(type | MONITOR_USER, name, proc->pid);
     }
 
     Mem_Free(name, 260 * sizeof(WCHAR));
@@ -1034,13 +1035,14 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms)
         if (log_tid != NULL)
             *log_tid = tid64;
 
-		log_len -= sizeof(WCHAR); // reserve room for the termination character
-		if (log_len > entry_size - (2 + 8 + 8))
-			log_len = entry_size - (2 + 8 + 8);
-		log_buffer_get_bytes((CHAR*)log_data, log_len, &read_ptr, session->monitor_log);
+        ULONG data_len = (entry_size - (2 + 8 + 8)) / sizeof(WCHAR);
+		log_len -= 1; // reserve room for the termination character
+		if (log_len > data_len)
+			log_len = data_len;
+		log_buffer_get_bytes((CHAR*)log_data, log_len * sizeof(WCHAR), &read_ptr, session->monitor_log);
 
 		// add required termination character
-		*(WCHAR*)(((CHAR*)log_data) + log_len) = L'\0';
+        log_data[log_len] = L'\0';
 
 		if (seq_num != NULL)
 			*seq_num = seq_number;

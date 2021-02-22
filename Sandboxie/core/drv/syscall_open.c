@@ -261,10 +261,10 @@ _FX NTSTATUS Syscall_OpenHandle(
                 puName = pObj->ObjectName;
 
                 ACCESS_MASK DesiredAccess = (ACCESS_MASK)user_args[1];
-                if(!Conf_Get_Boolean(proc->box->name, L"AllowRawDiskRead", 0, FALSE))
                 if (puName->Buffer != NULL && puName->Length > (4 * sizeof(WCHAR)) && wcsncmp(puName->Buffer, L"\\??\\", 4) == 0
                     && (DesiredAccess & ~(SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES)) != 0)
                 {
+                    if (!Conf_Get_Boolean(proc->box->name, L"AllowRawDiskRead", 0, FALSE))
                     if ((puName->Length == (6 * sizeof(WCHAR)) && puName->Buffer[5] == L':') // \??\C:
                         || wcsncmp(&puName->Buffer[4], L"PhysicalDrive", 13) == 0 // \??\PhysicalDrive1
                         || wcsncmp(&puName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}

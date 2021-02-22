@@ -412,8 +412,21 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 				else
 					status = STATUS_NOT_FOUND;
 			}
-		}
-		else
+
+		} else if (args->info_type.val == 'ippt') { // is primary process token
+
+            HANDLE handle = (HANDLE)(args->ext_data.val);
+
+            OBJECT_TYPE* object;
+            status = ObReferenceObjectByHandle(handle, 0, NULL, UserMode, &object, NULL);
+            if (NT_SUCCESS(status))
+            {
+                *data = (object == proc->primary_token);
+
+                ObDereferenceObject(object);
+            }
+
+        } else
             status = STATUS_INVALID_INFO_CLASS;
 
     //
@@ -785,6 +798,9 @@ _FX NTSTATUS Process_Enumerate(
     ULONG num;
     KIRQL irql;
 
+    if (count == NULL)
+        return STATUS_INVALID_PARAMETER;
+
     //
     // return only processes of the caller user in their logon session
     //
@@ -812,22 +828,19 @@ _FX NTSTATUS Process_Enumerate(
                 BOOLEAN same_session =
                     (all_sessions || box1->session_id == session_id);
                 if (same_box && same_session) {
-                    ++num;
                     if (pids) {
-                        if (num == API_MAX_PIDS)
-                            break;
+						if(num >= *count)
+							break;
                         pids[num] = (ULONG)(ULONG_PTR)proc1->pid;
                     }
+                    ++num;
                 }
             }
 
             proc1 = (PROCESS *)List_Next(proc1);
         }
 
-        if (pids)
-            *(ULONG *)pids = num;
-        if (count)
-            *count = num;
+        *count = num;
 
         status = STATUS_SUCCESS;
 
@@ -850,11 +863,13 @@ _FX NTSTATUS Process_Enumerate(
 _FX NTSTATUS Process_Api_Enum(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status;
+    ULONG count;
     ULONG *user_pids;                   // user mode ULONG [512]
     WCHAR *user_boxname;                // user mode WCHAR [34]
     BOOLEAN all_sessions;
     ULONG session_id;
     WCHAR boxname[48];
+    ULONG *user_count;
 
     // get boxname from second parameter
 
@@ -878,15 +893,33 @@ _FX NTSTATUS Process_Api_Enum(PROCESS *proc, ULONG64 *parms)
 
     // get user pid buffer from first parameter
 
+    user_count = (ULONG *)parms[5];
     user_pids = (ULONG *)parms[1];
-    if (! user_pids)
-        return STATUS_INVALID_PARAMETER;
-    ProbeForWrite(user_pids, sizeof(ULONG) * 512, sizeof(ULONG));
+    
+    if (user_count) {
+        ProbeForRead(user_count, sizeof(ULONG), sizeof(ULONG));
+        count = user_pids ? *user_count : 0;
+    }
+    else // legacy case
+    {
+        if (!user_pids)
+            return STATUS_INVALID_PARAMETER;
+        count = API_MAX_PIDS - 1;
+        user_count = user_pids;
+        user_pids += 1;
+    }
+
+    ProbeForWrite(user_count, sizeof(ULONG), sizeof(ULONG));
+    if (user_pids) {
+        ProbeForWrite(user_pids, sizeof(ULONG) * count, sizeof(ULONG));
+    }
 
     status = Process_Enumerate(boxname, all_sessions, session_id,
-                               user_pids, NULL);
+                               user_pids, &count);
     if (! NT_SUCCESS(status))
         return status;
+
+    *user_count = count;
 
     return status;
 }

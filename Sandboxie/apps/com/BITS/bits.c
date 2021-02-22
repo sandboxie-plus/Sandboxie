@@ -125,6 +125,8 @@ int __stdcall WinMain(
     BOOL hook_success = TRUE;
     BOOL ok;
 
+    Check_Windows_7();
+
     SetupExceptionHandler();
 
     HOOK_WIN32(CoImpersonateClient);

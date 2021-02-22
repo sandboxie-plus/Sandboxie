@@ -190,11 +190,16 @@ static P_NtLoadDriver           __sys_NtLoadDriver = NULL;
 P_LdrGetDllHandleEx      __sys_LdrGetDllHandleEx = NULL;
 
 static P_Ldr_CallOneDllCallback __my_Ldr_CallOneDllCallback = NULL;
+
 static P_NtOpenThreadToken  __sys_NtOpenThreadToken = NULL;
-static P_RtlEqualSid __sys_RtlEqualSid = NULL;
+
+P_RtlEqualSid __sys_RtlEqualSid = NULL;
 
 extern ULONG Dll_Windows;
+
 extern BOOLEAN Secure_Is_IE_NtQueryInformationToken;
+
+extern BOOLEAN Secure_FakeAdmin;
 
 //---------------------------------------------------------------------------
 // Variables
@@ -487,7 +492,7 @@ _FX BOOLEAN Ldr_Init()
     Ldr_Callbacks = Dll_Alloc(sizeof(ULONG_PTR) * LDR_NUM_CALLBACKS);
     memzero(Ldr_Callbacks, sizeof(ULONG_PTR) * LDR_NUM_CALLBACKS);
 
-    if (Dll_OsBuild >= 6000) {
+    if (Dll_OsBuild >= 6000) { // Windows Vista
         SbieDll_RegisterDllCallback(Ldr_MyDllCallbackA);
         __my_Ldr_CallOneDllCallback = Ldr_CallOneDllCallback;
     }
@@ -499,16 +504,31 @@ _FX BOOLEAN Ldr_Init()
     //
     // hook entrypoints
     //
-    if (Dll_OsBuild >= 9600) {
+
+    void* RtlEqualSid = (P_RtlEqualSid)GetProcAddress(Dll_Ntdll, "RtlEqualSid");
+
+    SBIEDLL_HOOK(Ldr_, RtlEqualSid);
+
+    if (Secure_FakeAdmin || Dll_OsBuild >= 9600) {
+
+        void* NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");
+        void* NtAccessCheck = GetProcAddress(Dll_Ntdll, "NtAccessCheck");
+        void* NtQuerySecurityAttributesToken = GetProcAddress(Dll_Ntdll, "NtQuerySecurityAttributesToken");
+        void* NtQueryInformationToken = GetProcAddress(Dll_Ntdll, "NtQueryInformationToken");
+        void* NtAccessCheckByTypeResultList = GetProcAddress(Dll_Ntdll, "NtAccessCheckByTypeResultList");
+        
+
+        SBIEDLL_HOOK(Ldr_, NtQuerySecurityAttributesToken);
+        SBIEDLL_HOOK(Ldr_, NtAccessCheckByType);
+        SBIEDLL_HOOK(Ldr_, NtAccessCheck);
+        SBIEDLL_HOOK(Ldr_, NtAccessCheckByTypeResultList);
+        SBIEDLL_HOOK(Ldr_, NtQueryInformationToken);
+    }
+
+    if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
         NTSTATUS rc = 0;
 
-        void *NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");
-        void *NtAccessCheck = GetProcAddress(Dll_Ntdll, "NtAccessCheck");
-        void *NtQuerySecurityAttributesToken = GetProcAddress(Dll_Ntdll, "NtQuerySecurityAttributesToken");
-        void *NtQueryInformationToken = GetProcAddress(Dll_Ntdll, "NtQueryInformationToken");
-        void *NtAccessCheckByTypeResultList = GetProcAddress(Dll_Ntdll, "NtAccessCheckByTypeResultList");
         void *NtTerminateProcess = (P_NtTerminateProcess)GetProcAddress(Dll_Ntdll, "NtTerminateProcess");
-        void *RtlEqualSid = (P_RtlEqualSid)GetProcAddress(Dll_Ntdll, "RtlEqualSid");
         __sys_LdrRegisterDllNotification = (P_LdrRegisterDllNotification)GetProcAddress(Dll_Ntdll, "LdrRegisterDllNotification");
         __sys_LdrUnregisterDllNotification = (P_LdrUnregisterDllNotification)GetProcAddress(Dll_Ntdll, "LdrUnregisterDllNotification");
 
@@ -525,19 +545,13 @@ _FX BOOLEAN Ldr_Init()
         }
 
         SBIEDLL_HOOK(Ldr_, NtTerminateProcess);
-        SBIEDLL_HOOK(Ldr_, NtQueryInformationToken);
-        SBIEDLL_HOOK(Ldr_, NtQuerySecurityAttributesToken);
-        SBIEDLL_HOOK(Ldr_, NtAccessCheckByType);
-        SBIEDLL_HOOK(Ldr_, NtAccessCheck);
-        SBIEDLL_HOOK(Ldr_, NtAccessCheckByTypeResultList);
         SBIEDLL_HOOK(Ldr_Win10_, LdrLoadDll);
         SBIEDLL_HOOK(Ldr_, NtLoadDriver);
         if (DLL_IMAGE_GOOGLE_CHROME == Dll_ImageType) {
             SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
         }
-        SBIEDLL_HOOK(Ldr_, RtlEqualSid);
     }
-    else {
+    else { // Windows 8 and before
         SBIEDLL_HOOK(Ldr_, LdrLoadDll);
         SBIEDLL_HOOK(Ldr_, LdrUnloadDll);
         SBIEDLL_HOOK(Ldr_, LdrQueryImageFileExecutionOptions);
@@ -564,7 +578,7 @@ _FX BOOLEAN Ldr_Init()
     // on Windows 8, we use a hook on NtApphelpCacheControl instead
     //
 
-    if (Dll_OsBuild < 8400) {
+    if (Dll_OsBuild < 8400) { // Windows 7 and older
 
         ReadImageFileExecOptions = (UCHAR *)(NtCurrentPeb() + 1);
 
@@ -589,8 +603,8 @@ _FX BOOLEAN Ldr_Init()
     // Ldr_LoadInjectDlls();
 
     //
-   // initialize manifest
-   //
+    // initialize manifest
+    //
 
     Ldr_Inject_Init(FALSE);
     Sxs_ActivateDefaultManifest((void *)Ldr_ImageBase);
@@ -1367,6 +1381,9 @@ _FX NTSTATUS Ldr_NtLoadDriver(UNICODE_STRING *RegistryPath)
 
 _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal)
 {
+    if (Dll_OsBuild < 9600) // this magic values are available only from windows 8.1 onwards
+        return;
+
     if ((LONG_PTR)token == LDR_TOKEN_PRIMARY) {
         NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY, hTokenReal);
     }
@@ -1392,8 +1409,10 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
     NTSTATUS status = 0;
     THREAD_DATA *TlsData = NULL;
     HANDLE hTokenReal = NULL;
+    BOOLEAN FakeAdmin = FALSE;
 
     Ldr_TestToken(TokenHandle, &hTokenReal);
+
     status = __sys_NtQueryInformationToken(
         hTokenReal ? hTokenReal : TokenHandle, TokenInformationClass,
         TokenInformation, TokenInformationLength, ReturnLength);
@@ -1403,15 +1422,18 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
         NtClose(hTokenReal);
     }
 
-    if (!Secure_Is_IE_NtQueryInformationToken)
+    //
+    // To make the process think we need to chage here a fe values
+    // we also ensure that tha token belongs to the current process
+    //
+
+    if (Secure_FakeAdmin && (SbieApi_QueryProcessInfoEx(0, 'ippt', (LONG_PTR)hTokenReal))) 
     {
-        return status;
+        FakeAdmin = TRUE;
     }
 
-    TlsData = Dll_GetTlsData(NULL);
-
     //
-    // NtQueryInformationToken is hooked only for Internet Explorer.
+    // NtQueryInformationToken is hooked for Internet Explorer.
     //
     // if the check occurs during CreateProcess, then return the real
     // information, so UAC elevation may occur for the new process.
@@ -1420,9 +1442,21 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
     // we are running as Administrator
     //
 
-    if (NT_SUCCESS(status) && (!TlsData->proc_create_process)) {
+    TlsData = Dll_GetTlsData(NULL);
 
-        if (TokenInformationClass == TokenElevationType) {
+    if (Secure_Is_IE_NtQueryInformationToken && !TlsData->proc_create_process)
+    {
+        FakeAdmin = TRUE;
+    }
+
+    if (NT_SUCCESS(status) && FakeAdmin) {
+
+        if (TokenInformationClass == TokenElevation) {
+
+            *(BOOLEAN *)TokenInformation = TRUE;
+        }
+
+        else if (TokenInformationClass == TokenElevationType) {
 
             //
             // on Vista, fake a return value for a full token
@@ -1431,7 +1465,7 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
             *(ULONG *)TokenInformation = TokenElevationTypeFull;
         }
 
-        if (TokenInformationClass == TokenIntegrityLevel) {
+        else if (TokenInformationClass == TokenIntegrityLevel) {
 
             //
             // on Vista, fake a high integrity level
@@ -1519,7 +1553,9 @@ _FX NTSTATUS Ldr_NtAccessCheck(PSECURITY_DESCRIPTOR SecurityDescriptor, HANDLE C
     HANDLE hTokenReal = NULL;
 
     Ldr_TestToken(ClientToken, &hTokenReal);
+
     status = __sys_NtAccessCheck(SecurityDescriptor, hTokenReal ? hTokenReal : ClientToken, DesiredAccess, GenericMapping, RequiredPrivilegesBuffer, BufferLength, GrantedAccess, AccessStatus);
+    
     if (hTokenReal) {
         NtClose(hTokenReal);
     }

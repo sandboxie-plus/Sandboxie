@@ -88,6 +88,12 @@ static NTSTATUS Secure_NtAdjustPrivilegesToken(
 
 static NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags);
 
+static NTSTATUS Secure_RtlCheckTokenMembershipEx(
+    HANDLE tokenHandle,
+    PSID sidToCheck,
+    DWORD flags,
+    PUCHAR isMember);
+
 static BOOLEAN Secure_IsSameBox(HANDLE idProcess);
 
 
@@ -103,6 +109,7 @@ static P_NtQueryInformationToken    __sys_NtQueryInformationToken   = NULL;
 static P_NtSetInformationToken      __sys_NtSetInformationToken     = NULL;
 static P_NtAdjustPrivilegesToken    __sys_NtAdjustPrivilegesToken   = NULL;
 static P_RtlQueryElevationFlags     __sys_RtlQueryElevationFlags    = NULL;
+static P_RtlCheckTokenMembershipEx  __sys_RtlCheckTokenMembershipEx = NULL;
 static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
 
 
@@ -118,6 +125,7 @@ PSECURITY_DESCRIPTOR Secure_EveryoneSD = NULL;
 BOOLEAN Secure_IsInternetExplorerTabProcess = FALSE;
 BOOLEAN Secure_Is_IE_NtQueryInformationToken = FALSE;
 
+BOOLEAN Secure_FakeAdmin = FALSE;
 
 //---------------------------------------------------------------------------
 // Secure_InitSecurityDescriptors
@@ -242,6 +250,7 @@ void Secure_InitSecurityDescriptors(void)
 _FX BOOLEAN Secure_Init(void)
 {
     void *RtlQueryElevationFlags;
+    void *RtlCheckTokenMembershipEx;
 
     //
     // intercept NTDLL entry points
@@ -274,13 +283,15 @@ _FX BOOLEAN Secure_Init(void)
     // install hooks to fake administrator privileges
     //
 
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", FALSE);
+
     RtlQueryElevationFlags =
         GetProcAddress(Dll_Ntdll, "RtlQueryElevationFlags");
 
     if (RtlQueryElevationFlags) {
 
-        BOOLEAN ShouldFakeRunningAsAdmin =
-                    Dll_ImageType == DLL_IMAGE_SANDBOXIE_SBIESVC
+        BOOLEAN ShouldFakeRunningAsAdmin = Secure_FakeAdmin
+                ||  Dll_ImageType == DLL_IMAGE_SANDBOXIE_SBIESVC
                 ||  Dll_ImageType == DLL_IMAGE_SANDBOXIE_RPCSS
                 ||  Dll_ImageType == DLL_IMAGE_INTERNET_EXPLORER
                 ||  (_wcsicmp(Dll_ImageName, L"SynTPEnh.exe") == 0)
@@ -320,6 +331,18 @@ _FX BOOLEAN Secure_Init(void)
                 }
             }
         }
+    }
+
+    RtlCheckTokenMembershipEx =
+        GetProcAddress(Dll_Ntdll, "RtlCheckTokenMembershipEx");
+
+    if (RtlCheckTokenMembershipEx) {
+
+        if (Secure_FakeAdmin) {
+
+            SBIEDLL_HOOK(Secure_, RtlCheckTokenMembershipEx);
+        }
+
     }
 
     return TRUE;
@@ -876,7 +899,7 @@ _FX NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags)
     // - InstallerDetectEnabled (0x04) - Detection of installers
     //
 
-    BOOLEAN fake = FALSE;
+    BOOLEAN fake = Secure_FakeAdmin; // FALSE;
 
     if (Dll_ImageType == DLL_IMAGE_INTERNET_EXPLORER) {
 
@@ -949,6 +972,39 @@ _FX NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags)
 
         status = __sys_RtlQueryElevationFlags(Flags);
     }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_IsRestrictedToken
+//---------------------------------------------------------------------------
+
+NTSTATUS Secure_RtlCheckTokenMembershipEx(
+    HANDLE tokenHandle,
+    PSID sidToCheck,
+    DWORD flags,
+    PUCHAR isMember)
+{
+
+    static UCHAR AdministratorsSid[16] = {
+        1,                                      // Revision
+        2,                                      // SubAuthorityCount
+        0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+        0x20, 0, 0, 0,   // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
+        0x20, 2, 0, 0    // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
+    };
+
+    typedef BOOL (*P_EqualSid)(PSID pSid1, PSID pSid2);
+    extern P_EqualSid __sys_RtlEqualSid;
+
+    if (Secure_FakeAdmin && __sys_RtlEqualSid && __sys_RtlEqualSid(sidToCheck, AdministratorsSid)) {
+        if (isMember) *isMember = TRUE;
+        return STATUS_SUCCESS;
+    }
+
+    NTSTATUS status = __sys_RtlCheckTokenMembershipEx(tokenHandle, sidToCheck, flags, isMember);
 
     return status;
 }

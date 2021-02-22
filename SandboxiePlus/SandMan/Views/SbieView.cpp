@@ -85,14 +85,18 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
 	m_pMenuPresets = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Sandbox Presets"));
-		m_pMenuPresetsLogApi = m_pMenuPresets->addAction(tr("Enable API Call logging"), this, SLOT(OnSandBoxAction()));
-		m_pMenuPresetsLogApi->setCheckable(true);
+		
+		m_pMenuPresetsAdmin = new QActionGroup(m_pMenuPresets);
+		m_pMenuPresetsShowUAC = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Ask for UAC Elevation"), 0);
+		m_pMenuPresetsNoAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Drop Admin Rights"), 1);
+		m_pMenuPresetsFakeAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Emulate Admin Rights"), 1 | 2);
+		connect(m_pMenuPresetsAdmin, SIGNAL(triggered(QAction*)), this, SLOT(OnSandBoxAction(QAction*)));
+
+		m_pMenuPresets->addSeparator();
 		m_pMenuPresetsINet = m_pMenuPresets->addAction(tr("Block Internet Access"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsINet->setCheckable(true);
 		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsShares->setCheckable(true);
-		m_pMenuPresetsNoAdmin = m_pMenuPresets->addAction(tr("Drop Admin Rights"), this, SLOT(OnSandBoxAction()));
-		m_pMenuPresetsNoAdmin->setCheckable(true);
 	m_pMenuOptions = m_pMenu->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMoveTo = m_pMenu->actions().count();
@@ -252,10 +256,11 @@ void CSbieView::OnMenu(const QPoint& Point)
 	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
 
 	m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
-	m_pMenuPresetsLogApi->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasLogApi());
+	m_pMenuPresetsShowUAC->setChecked(pBox && !pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
+	m_pMenuPresetsNoAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
+	m_pMenuPresetsFakeAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && pBox->GetBool("FakeAdminRights", false));
 	m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
 	m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
-	m_pMenuPresetsNoAdmin->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsDropRights());
 
 	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
 	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
@@ -513,9 +518,13 @@ QString CSbieView::AddNewBox()
 
 void CSbieView::OnSandBoxAction()
 {
+	OnSandBoxAction(qobject_cast<QAction*>(sender()));
+}
+
+void CSbieView::OnSandBoxAction(QAction* Action)
+{
 	QList<SB_STATUS> Results;
 
-	QAction* Action = qobject_cast<QAction*>(sender());
 	QList<CSandBoxPtr> SandBoxes = CSbieView::GetSelectedBoxes();
 	if (SandBoxes.isEmpty())
 		return;
@@ -552,14 +561,25 @@ void CSbieView::OnSandBoxAction()
 		Results.append(SandBoxes.first()->RunStart("cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe", true));
-	else if (Action == m_pMenuPresetsLogApi)
-		SandBoxes.first().objectCast<CSandBoxPlus>()->SetLogApi(m_pMenuPresetsLogApi->isChecked());
+	else if (Action == m_pMenuPresetsShowUAC)
+	{
+		SandBoxes.first()->SetBool("DropAdminRights", false);
+		SandBoxes.first()->SetBool("FakeAdminRights", false);
+	}
+	else if (Action == m_pMenuPresetsNoAdmin)
+	{
+		SandBoxes.first()->SetBool("DropAdminRights", true);
+		SandBoxes.first()->SetBool("FakeAdminRights", false);
+	}
+	else if (Action == m_pMenuPresetsFakeAdmin)
+	{
+		SandBoxes.first()->SetBool("DropAdminRights", true);
+		SandBoxes.first()->SetBool("FakeAdminRights", true);
+	}
 	else if (Action == m_pMenuPresetsINet)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetINetBlock(m_pMenuPresetsINet->isChecked());
 	else if (Action == m_pMenuPresetsShares)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetAllowShares(m_pMenuPresetsShares->isChecked());
-	else if (Action == m_pMenuPresetsNoAdmin)
-		SandBoxes.first().objectCast<CSandBoxPlus>()->SetDropRights(m_pMenuPresetsNoAdmin->isChecked());
 	else if (Action == m_pMenuOptions)
 	{
 		OnDoubleClicked(m_pSbieTree->selectedRows().first());

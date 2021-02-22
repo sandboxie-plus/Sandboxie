@@ -115,7 +115,7 @@ void CSandBoxPlus::UpdateDetails()
 
 	if (CheckOpenToken() || GetBool("StripSystemPrivileges", false))
 		m_iUnsecureDebugging = 1;
-	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) || GetBool("RunServicesAsSystem", false))
+	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) /*|| GetBool("RunServicesAsSystem", false)*/)
 		m_iUnsecureDebugging = 2;
 	else
 		m_iUnsecureDebugging = 0;

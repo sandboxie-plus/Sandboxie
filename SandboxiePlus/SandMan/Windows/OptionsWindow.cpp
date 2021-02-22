@@ -156,9 +156,15 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	
 	connect(ui.chkBlockSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkOpenSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPrintToFile, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+
+	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyLimit, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -166,6 +172,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.chkProtectBox, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoEmpty, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+
+	connect(ui.chkRawDiskRead, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkRawDiskNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
 	QMenu* pRunBtnMenu = new QMenu(ui.btnAddFile);
@@ -261,20 +270,18 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.chkRestrictServices, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
-	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 		
 	connect(ui.chkAddToJob, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	connect(ui.chkCallTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkFileTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkPipeTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkKeyTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkIpcTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkApiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -425,11 +432,19 @@ void COptionsWindow::LoadConfig()
 		ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
 		ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 		ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
+		ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
+		
 		ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
 		ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
 		ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked());
 		ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
 		ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked());
+
+		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
+		ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
+		ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
+		ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
+		ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
 
 		ui.treeAutoStart->clear();
 		foreach(const QString & Value, m_pBox->GetTextList("StartProgram", m_Template))
@@ -453,6 +468,9 @@ void COptionsWindow::LoadConfig()
 	
 		ui.chkProtectBox->setChecked(m_pBox->GetBool("NeverDelete", false));
 		ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
+
+		ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
+		ui.chkRawDiskNotify->setChecked(m_pBox->GetBool("NotifyDirectDiskAccess", false));
 
 		m_GeneralChanged = false;
 	}
@@ -490,11 +508,10 @@ void COptionsWindow::LoadConfig()
 		ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
 		ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 
-		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
-		ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
-		ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
-		ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
-		ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
+
+		//ui.chkOpenDevCMApi->setChecked(m_pBox->GetBool("OpenDevCMApi", false));
+		//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
+		//ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 		//ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
 
 
@@ -505,15 +522,20 @@ void COptionsWindow::LoadConfig()
 		ui.lstAutoExec->clear();
 		ui.lstAutoExec->addItems(AutoExec);
 
-
-		ReadAdvancedCheck("FileTrace", ui.chkFileTrace, "*");
-		ReadAdvancedCheck("PipeTrace", ui.chkPipeTrace, "*");
-		ReadAdvancedCheck("KeyTrace", ui.chkKeyTrace, "*");
-		ReadAdvancedCheck("IpcTrace", ui.chkIpcTrace, "*");
-		ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
-		ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
-		ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
-		ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
+		QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
+		if (pBoxPlus)
+		{
+			ReadAdvancedCheck("CallTrace", ui.chkFileTrace, "*");
+			ReadAdvancedCheck("FileTrace", ui.chkFileTrace, "*");
+			ReadAdvancedCheck("PipeTrace", ui.chkPipeTrace, "*");
+			ReadAdvancedCheck("KeyTrace", ui.chkKeyTrace, "*");
+			ReadAdvancedCheck("IpcTrace", ui.chkIpcTrace, "*");
+			ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
+			ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
+			ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
+			ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
+			ui.chkApiTrace->setChecked(pBoxPlus->HasLogApi());
+		}
 
 		ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
 		QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
@@ -585,9 +607,17 @@ void COptionsWindow::SaveConfig()
 		m_pBox->SetBool("BlockNetworkFiles", ui.chkBlockNetShare->isChecked());
 		m_pBox->SetBool("BlockNetParam", ui.chkBlockNetParam->isChecked());
 		m_pBox->SetBool("DropAdminRights", ui.chkDropRights->isChecked());
+		m_pBox->SetBool("FakeAdminRights", ui.chkFakeElevation->isChecked());
+		
 		m_pBox->SetBool("ClosePrintSpooler", ui.chkBlockSpooler->isChecked());
 		m_pBox->SetBool("OpenPrintSpooler", ui.chkOpenSpooler->isChecked());
 		m_pBox->SetBool("AllowSpoolerPrintToFile", ui.chkPrintToFile->isChecked());
+
+		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
+		if (ui.chkOpenCredentials->isEnabled())
+			WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
+		WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
+		WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
 
 
 		QStringList StartProgram;
@@ -615,6 +645,10 @@ void COptionsWindow::SaveConfig()
 
 		m_pBox->SetBool("NeverDelete", ui.chkProtectBox->isChecked());
 		m_pBox->SetBool("AutoDelete", ui.chkAutoEmpty->isChecked());
+
+		m_pBox->SetBool("AllowRawDiskRead", ui.chkRawDiskRead->isChecked());
+		m_pBox->SetBool("NotifyDirectDiskAccess", ui.chkRawDiskNotify->isChecked());
+
 
 		m_GeneralChanged = false;
 	}
@@ -658,12 +692,10 @@ void COptionsWindow::SaveConfig()
 		WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
 		WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 		
-		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
-		if(ui.chkOpenCredentials->isEnabled())
-			WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
-		WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
-		WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
-		//WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
+		//WriteAdvancedCheck(ui.chkOpenDevCMApi, "OpenDevCMApi", "n", "");
+		//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "", "n"); // OpenLsaSSPI
+		//WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "n", "");
+		//WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "n", "");
 
 		WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 
@@ -673,15 +705,19 @@ void COptionsWindow::SaveConfig()
 		m_pBox->UpdateTextList("AutoExec", AutoExec, m_Template);
 
 
-
-		WriteAdvancedCheck(ui.chkFileTrace, "FileTrace", "*");
-		WriteAdvancedCheck(ui.chkPipeTrace, "PipeTrace", "*");
-		WriteAdvancedCheck(ui.chkKeyTrace, "KeyTrace", "*");
-		WriteAdvancedCheck(ui.chkIpcTrace, "IpcTrace", "*");
-		WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
-		WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
-		WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
-		WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
+		QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
+		if (pBoxPlus)
+		{
+			WriteAdvancedCheck(ui.chkFileTrace, "FileTrace", "*");
+			WriteAdvancedCheck(ui.chkPipeTrace, "PipeTrace", "*");
+			WriteAdvancedCheck(ui.chkKeyTrace, "KeyTrace", "*");
+			WriteAdvancedCheck(ui.chkIpcTrace, "IpcTrace", "*");
+			WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
+			WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
+			WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
+			WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
+			pBoxPlus->SetLogApi(ui.chkApiTrace->isChecked());
+		}
 
 		WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
 

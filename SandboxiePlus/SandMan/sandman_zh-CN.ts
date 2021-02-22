@@ -5,15 +5,15 @@
     <name>CApiMonModel</name>
     <message>
         <source>Message</source>
-        <translation type="vanished">信息</translation>
+        <translation>信息</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation type="vanished">时间戳</translation>
+        <translation>时间戳</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="vanished">进程</translation>
+        <translation>进程</translation>
     </message>
 </context>
 <context>
@@ -430,46 +430,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
+        <translation>您确定允许 %4 (%5) 复制大文件 %1 到沙盒: %2?
 文件名称: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">您确定允许 %1 (%2) 访问网络吗?
+        <translation>您确定允许 %1 (%2) 访问网络吗?
 完整路径: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 可以从 %2 快速恢复.
+        <translation>%1 可以从 %2 快速恢复.
 文件写入自: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">移动大文件 %1 到沙盒 %2, %3 剩余.
+        <translation>移动大文件 %1 到沙盒 %2, %3 剩余.
 完整路径: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -570,7 +550,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>空</translation>
     </message>
 </context>
 <context>
@@ -649,7 +629,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Cleanup Api Call Log</source>
-        <translation type="vanished">清理Api调用日志</translation>
+        <translation>清理Api调用日志</translation>
     </message>
     <message>
         <source>Simple View</source>
@@ -725,7 +705,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Api Call Log</source>
-        <translation type="vanished">Api调用日志</translation>
+        <translation>Api调用日志</translation>
     </message>
     <message>
         <source>The sandbox name can not be longer than 32 characters.</source>
@@ -741,7 +721,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sbie Messages</source>
-        <translation>Sbie信息</translation>
+        <translation>沙盘信息</translation>
     </message>
     <message>
         <source>Failed to recover some files: 
@@ -767,7 +747,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Ignore this update, notify me about the next one.</source>
-        <translation type="vanished">忽略此升级,下一个再提示我.</translation>
+        <translation>忽略此升级,下一个再提示我.</translation>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
@@ -775,7 +755,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sbie Directory: %1</source>
-        <translation>Sbie目录: %1</translation>
+        <translation>沙盘目录: %1</translation>
     </message>
     <message>
         <source>   -   NOT connected</source>
@@ -831,7 +811,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>API Call Logging</source>
-        <translation type="vanished">API调用记录</translation>
+        <translation>API调用记录</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -1027,11 +1007,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>No sandboxes found; creating: %1</source>
-        <translation type="vanished">没找到沙盒;创建: %1</translation>
+        <translation>没找到沙盒;创建: %1</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
-        <translation type="vanished">清理资源日志</translation>
+        <translation>清理资源日志</translation>
     </message>
     <message>
         <source>Cleanup Message Log</source>
@@ -1088,7 +1068,7 @@ Full path: %4</source>
     <message>
         <source>To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.
 Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.</source>
-        <translation type="vanished">要使用API记录日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
+        <translation>要使用API记录日志首先必须从 https://github.com/sandboxie-plus/LogApiDll 下载LogApiDll，并用沙盒来建立.
 请下载最新发布版，并用sandboxie.ini安装，详情请参考README.md里此项的说明.</translation>
     </message>
     <message>
@@ -1173,7 +1153,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>清理跟踪日志</translation>
     </message>
 </context>
 <context>
@@ -1284,7 +1264,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Enable API Call logging</source>
-        <translation type="vanished">启用API调用日志</translation>
+        <translation>启用API调用日志</translation>
     </message>
     <message>
         <source>[None]</source>
@@ -1442,15 +1422,15 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>以管理员身份运行Cmd.exe</translation>
     </message>
     <message>
         <source>Ask for UAC Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>询问UAC提权</translation>
     </message>
     <message>
         <source>Emulate Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>模拟管理员权限</translation>
     </message>
 </context>
 <context>
@@ -1680,7 +1660,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>General restrictions</source>
-        <translation type="vanished">通用限制</translation>
+        <translation>通用限制</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -2036,7 +2016,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Printing</source>
-        <translation type="vanished">打印</translation>
+        <translation>打印</translation>
     </message>
     <message>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
@@ -2068,7 +2048,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Lift security restrictions</source>
-        <translation type="vanished">提升安全限制</translation>
+        <translation>提升安全限制</translation>
     </message>
     <message>
         <source>Sandbox isolation</source>
@@ -2106,59 +2086,59 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>提权限制</translation>
     </message>
     <message>
         <source>Make applications think thay are running elevated (allows to run installers safely)</source>
-        <translation type="unfinished"></translation>
+        <translation>使应用程序自身认为被提权运行 (允许安全的运行安装程序)</translation>
     </message>
     <message>
         <source>Network restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>网络限制</translation>
     </message>
     <message>
         <source>(Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>(建议)</translation>
     </message>
     <message>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>安全提示: 提权的应用程序在沙盒的监督下运行, 伴随管理员令牌, 有更多的机会绕过隔离和在沙盒外更改系统.</translation>
     </message>
     <message>
         <source>Raw Disk access</source>
-        <translation type="unfinished"></translation>
+        <translation>未格式化磁盘访问</translation>
     </message>
     <message>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation type="unfinished"></translation>
+        <translation>允许提权的沙盒化程序读取硬盘</translation>
     </message>
     <message>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
+        <translation>当程序打开硬盘句柄时警示</translation>
     </message>
     <message>
         <source>Access Options</source>
-        <translation type="unfinished"></translation>
+        <translation>访问选项</translation>
     </message>
     <message>
         <source>Other restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>其他限制</translation>
     </message>
     <message>
         <source>Printing restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>打印限制</translation>
     </message>
     <message>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"></translation>
+        <translation>API调用跟踪 (需要logapi安装到沙盘目录)</translation>
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>记录所有设置错误到跟踪日志 (会创建大量输出)</translation>
     </message>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ntdll驱动跟踪 (会创建大量输出)</translation>
     </message>
 </context>
 <context>
@@ -2179,23 +2159,23 @@ instead of &quot;*&quot;.</source>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="vanished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">应用</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;是</translation>
+        <translation>&amp;是</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;否</translation>
+        <translation>&amp;否</translation>
     </message>
 </context>
 <context>
@@ -2206,7 +2186,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation type="vanished">SandboxiePlus设置</translation>
+        <translation>SandboxiePlus设置</translation>
     </message>
     <message>
         <source>Add Folder</source>
@@ -2309,7 +2289,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation>沙盒 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;注册表根目录&lt;/a&gt;: </translation>
+        <translation>沙盒 &lt;a href=&quot;沙盘://docs/keyrootpath&quot;&gt;注册表根目录&lt;/a&gt;: </translation>
     </message>
     <message>
         <source>Add Program</source>
@@ -2432,7 +2412,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>SandboxiePlus Settings</source>
-        <translation type="vanished">SandboxiePlus设置</translation>
+        <translation>SandboxiePlus设置</translation>
     </message>
     <message>
         <source>Description:</source>

@@ -518,7 +518,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -527,7 +527,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -536,7 +536,7 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Die Datei wurde geschrieben durch: %3</translation>
     </message>
     <message>
@@ -545,7 +545,7 @@ Die Datei wurde geschrieben durch: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
 Vollständiger Pfad: %4</translation>
     </message>
     <message>
@@ -1585,12 +1585,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
         <source>Ask for UAC Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach UAC-Erhöhung fragen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="92"/>
         <source>Emulate Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Emuliere Adminrechte</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="100"/>
@@ -2040,47 +2040,47 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="165"/>
         <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Erhöhungsbeschränkungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
         <source>Make applications think thay are running elevated (allows to run installers safely)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lässt Programme denken, sie würden mit erhöhten Rechten laufen (Erlaubt das sichere Ausführen von Installern)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="230"/>
         <source>Network restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkbeschränkungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="250"/>
         <source>(Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Empfohlen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="263"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheitsnotiz: Programme mit erhöhten Rechten, welche unter der Aufsicht von Sandboxie laufen, und ein Admintoken haben, haben mehr Möglichkeiten die Isolation zu umgehen und das System außerhalb der Sandbox zu verändern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="337"/>
         <source>Raw Disk access</source>
-        <translation type="unfinished"></translation>
+        <translation>Direkter Festplattenzugriff</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="357"/>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Programmen mit erhöhten Rechten von der Festplatte zu lesen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="364"/>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnen, wenn ein Programm eine Festplattenidentifikator öffnet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="424"/>
         <source>Access Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugriffsoptionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="754"/>
@@ -2191,12 +2191,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="487"/>
         <source>Other restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Beschränkungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="516"/>
         <source>Printing restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckerbeschränkungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="622"/>
@@ -2399,7 +2399,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1946"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ntdll Systemaufrufsrückverfolgung (Erzeugt große Ausgabemenge)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="557"/>
@@ -2514,12 +2514,12 @@ Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1858"/>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"></translation>
+        <translation>API Aufrufsrückverfolgung (benötigt, dass logapi in den Sbie Ordner installiert wird)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1865"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokolliere alle SetError ins Rückverfolgungsprotokoll (Erzeugt große Ausgabemenge)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1879"/>

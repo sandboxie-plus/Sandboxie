@@ -19,6 +19,7 @@ Open Source release
 - diversenok - Security analysis & PoC's
 - stephtr - CI and Certification
 - TechLord / Team-IRA - Reversing
+- hg421 - Security analysis
 - isaak654 - UI fixes and Templates
 - typpos - UI improvement sugestions
 - cricri-pingouin - UI fixes
@@ -29,6 +30,7 @@ Open Source release
 - yuhao2348732 - Chinese Simplified
 - nkh0472 - Chinese Simplified
 - bastik-1001 - German
+- isaak654 - Italian
 - JNylson - Portuguese
 - lufog - Russian
 - xorcan - Turkish

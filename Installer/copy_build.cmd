@@ -62,9 +62,12 @@ copy %sysPath%\msvcr100.dll %instPath%\
 
 ECHO Copying Project and Librarys
 copy %srcPath%\MiscHelpers.dll %instPath%\
+copy %srcPath%\MiscHelpers.pdb %instPath%\
 copy %srcPath%\QSbieAPI.dll %instPath%\
+copy %srcPath%\QSbieAPI.pdb %instPath%\
 copy %srcPath%\QtSingleApp.dll %instPath%\
 copy %srcPath%\SandMan.exe %instPath%\
+copy %srcPath%\SandMan.pdb %instPath%\
 
 ECHO Copying SandMan translations
 
@@ -75,23 +78,35 @@ copy /y %~dp0..\SandboxiePlus\Build_SandMan_%archPath%\release\sandman_*.qm %ins
 ECHO Copying Sandboxie
 
 copy /y %sbiePath%\SbieSvc.exe %instPath%\
+copy /y %sbiePath%\SbieSvc.pdb %instPath%\
 copy /y %sbiePath%\SbieDll.dll %instPath%\
+copy /y %sbiePath%\SbieDll.pdb %instPath%\
 
 copy /y %sbiePath%\SbieDrv.sys %instPath%\
 copy /y %sbiePath%\SbieDrv.pdb %instPath%\
 
 copy /y %sbiePath%\SbieCtrl.exe %instPath%\
+copy /y %sbiePath%\SbieCtrl.pdb %instPath%\
 copy /y %sbiePath%\Start.exe %instPath%\
+copy /y %sbiePath%\Start.pdb %instPath%\
 copy /y %sbiePath%\kmdutil.exe %instPath%\
+copy /y %sbiePath%\kmdutil.pdb %instPath%\
 copy /y %sbiePath%\SbieIni.exe %instPath%\
+copy /y %sbiePath%\SbieIni.pdb %instPath%\
 copy /y %sbiePath%\SbieMsg.dll %instPath%\
 copy /y %sbiePath%\SboxHostDll.dll %instPath%\
+copy /y %sbiePath%\SboxHostDll.pdb %instPath%\
 
 copy /y %sbiePath%\SandboxieBITS.exe %instPath%\
+copy /y %sbiePath%\SandboxieBITS.pdb %instPath%\
 copy /y %sbiePath%\SandboxieCrypto.exe %instPath%\
+copy /y %sbiePath%\SandboxieCrypto.pdb %instPath%\
 copy /y %sbiePath%\SandboxieDcomLaunch.exe %instPath%\
+copy /y %sbiePath%\SandboxieDcomLaunch.pdb %instPath%\
 copy /y %sbiePath%\SandboxieRpcSs.exe %instPath%\
+copy /y %sbiePath%\SandboxieRpcSs.pdb %instPath%\
 copy /y %sbiePath%\SandboxieWUAU.exe %instPath%\
+copy /y %sbiePath%\SandboxieWUAU.pdb %instPath%\
 
 IF %archPath% == x64 (
   mkdir %instPath%\32\

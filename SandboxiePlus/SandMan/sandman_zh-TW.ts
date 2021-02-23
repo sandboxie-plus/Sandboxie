@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation type="unfinished">遺留 Sandboxie 行為</translation>
+        <translation>遺留 Sandboxie 行為</translation>
     </message>
 </context>
 <context>
@@ -488,11 +488,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>Full Path</source>
-        <translation>詳細路徑</translation>
+        <translation>完整路徑</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation>選取取目錄</translation>
+        <translation>選取目錄</translation>
     </message>
     <message>
         <source>%1 - File Recovery</source>
@@ -574,7 +574,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>空白</translation>
     </message>
 </context>
 <context>
@@ -1185,7 +1185,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>清除追蹤日誌</translation>
     </message>
 </context>
 <context>
@@ -1454,15 +1454,15 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>以管理員權限執行 Cmd.exe</translation>
     </message>
     <message>
         <source>Ask for UAC Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>詢問 UAC 權限提升</translation>
     </message>
     <message>
         <source>Emulate Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>模擬管理員權限</translation>
     </message>
 </context>
 <context>
@@ -2122,59 +2122,59 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>權限提升限制</translation>
     </message>
     <message>
         <source>Make applications think thay are running elevated (allows to run installers safely)</source>
-        <translation type="unfinished"></translation>
+        <translation>使應用程式認為其已在權限提升狀態下運作（允許安全地執行安裝程式）</translation>
     </message>
     <message>
         <source>Network restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>網路限制</translation>
     </message>
     <message>
         <source>(Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>（推薦）</translation>
     </message>
     <message>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>安全性提示：在 Sandboxie 的限制下運行、且具有管理員令牌的權限提升應用程式，有更多機會繞過隔離並在沙盤外修改系統。</translation>
     </message>
     <message>
         <source>Raw Disk access</source>
-        <translation type="unfinished"></translation>
+        <translation>原始磁碟訪問</translation>
     </message>
     <message>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation type="unfinished"></translation>
+        <translation>允許權限提升的沙盤化應用程式存取磁碟機</translation>
     </message>
     <message>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
+        <translation>當應用程式開啟磁碟機控制代碼時發出警告</translation>
     </message>
     <message>
         <source>Access Options</source>
-        <translation type="unfinished"></translation>
+        <translation>訪問選項</translation>
     </message>
     <message>
         <source>Other restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>其它限制</translation>
     </message>
     <message>
         <source>Printing restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>列印限制</translation>
     </message>
     <message>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"></translation>
+        <translation>API 呼叫追踪（需要在 sbie 資料夾中安裝所需的 logapi）</translation>
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>記錄所有 SetError 至追蹤日誌（產生大量輸出）</translation>
     </message>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ntdll syscall 追蹤（產生大量輸出）</translation>
     </message>
 </context>
 <context>

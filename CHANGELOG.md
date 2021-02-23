@@ -16,14 +16,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.7.1 / 5.48.5] - 2021-02-21
 
 ### Added
-- enhanced RpcMgmtSetComTimeout handing with "UseRpcMgmtSetComTimeout=some.dll,n"
+- enhanced RpcMgmtSetComTimeout handling with "UseRpcMgmtSetComTimeout=some.dll,n"
 -- this option allows to specify if RpcMgmtSetComTimeout should be used or not for each individual dll
 -- this setting takes precedence over hard-coded and per-process presets
 -- "UseRpcMgmtSetComTimeout=some.dll" and "UseRpcMgmtSetComTimeout=some.dll,y" are equivalent
-- added "FakeAdminRights=y" option that makes processes in a given box think they have admin permissions
+- added "FakeAdminRights=y" option that makes processes think they have admin permissions in a given box
 -- this option is recommended to be used in combination with "DropAdminRights=y" to improve security
 -- with "FakeAdminRights=y" and "DropAdminRights=y" installers should still work
-- added RPC support for SSDP API (the Simple Service Discovery Protocol), Enable with "OpenUPnP=y"
+- added RPC support for SSDP API (the Simple Service Discovery Protocol), you can enable it with "OpenUPnP=y"
 
 
 ### Changed
@@ -31,11 +31,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed enum process API; now more than 511 processes per box can be enumerated (no limit)
 - reorganized box settings a bit
 - made COM tracing more verbose
-- "RpcMgmtSetComTimeout=y" is now again the default behaviour, seams to cause less issues overall
+- "RpcMgmtSetComTimeout=y" is now again the default behaviour, it seems to cause less issues overall
 
 ### Fixed
 - fixed issues with webcam access when the DevCMApi filtering is in place
-- fixed issue with free download manager for 'AppXDeploymentClient.dll' RpcMgmtSetComTimeout=y is used
+- fixed issue with free download manager for 'AppXDeploymentClient.dll', so RpcMgmtSetComTimeout=y will be used by default for this one
 - fixed not all WinRM files were blocked by the driver, with "BlockWinRM=n" this file block can be disabled
 
 

@@ -19,7 +19,8 @@ Open Source release
 - diversenok - Security analysis & PoC's
 - stephtr - CI and Certification
 - TechLord / Team-IRA - Reversing
-- hg421 - Security analysis
+- hg421 - Security analysis 
+- typpos - Documentation
 - isaak654 - UI fixes and Templates
 - typpos - UI improvement sugestions
 - cricri-pingouin - UI fixes

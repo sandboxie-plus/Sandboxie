@@ -1,7 +1,8 @@
 #----------------------------------------------------------------------------
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons  Van de Meutter - Belgium on may-10-2012*
-#  Complete rework by Thomas De Rocker and Alex Dewaegemaeker (september 2016)
+#  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
+#  Latest update by RockyTDR on 2021-02-26
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -60,7 +61,7 @@ SBIE1113 Kan Nt-systeemservice niet vinden, reden %2
 .
 
 1114;evt;err;01
-SBIE1114 Kan ZW-systeemservice niet vinden, reden %2
+SBIE1114 Kan Zw-systeemservice niet vinden, reden %2
 .
 
 1116;evt;err;01
@@ -218,15 +219,15 @@ SBIE1309 Poging om account-wachtwoord te wijzigen geweigerd
 .
 
 1310;pop;inf;01
-SBIE1310 Extra mogelijkheden zijn uitgeschakeld tot de licentie opnieuw geactiveerd is
+SBIE1310 Extra functies zijn uitgeschakeld tot de licentie opnieuw geactiveerd is
 .
 
-1311;pop;inf;01
-SBIE1311 Aanvraag van proces '%2' geblokkeerd om bureaubladachtergrond te wijzigen
-.
+#1311;pop;inf;01
+#SBIE1311 Aanvraag van proces '%2' geblokkeerd om bureaubladachtergrond te wijzigen
+#.
 
 1312;pop;inf;01
-SBIE1312 Aanvraag geblokkeerd om 16-bit DOS-programma te starten in de sandbox
+SBIE1312 Aanvraag om 16-bit DOS-programma te starten in de sandbox geblokkeerd
 .
 
 1313;pop;inf;01
@@ -240,6 +241,22 @@ SBIE1314 Aanvraag van proces '%2' geblokkeerd om netwerk/firewall-instellingen t
 # 1315;pop;inf;01
 # SBIE1315 Possibly due to conflict with software: %2
 # .
+
+1316;pop;inf;01
+SBIE1316 Aanvraag geblokkeerd om apparaatgebeurtenis in de sandbox te genereren
+.
+
+1319;pop;inf;01
+SBIE1319 Afdruk naar bestand door spooler geblokkeerd, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 Dubbelklik op deze berichtregel om print spooler toe te staan buiten de sandbox te schrijven voor dit proces
+.
+
+1399;pop;inf;01
+%0
+.
 
 #----------------------------------------------------------------------------
 # SbieDrv
@@ -302,7 +319,7 @@ SBIE1412 In tekst: %2
 #----------------------------------------------------------------------------
 
 2101;pop;inf;01
-SBIE2101 %2
+SBIE2101 Objectnaam niet gevonden: %3, fout %2
 .
 
 2102;pop;inf;01
@@ -343,7 +360,7 @@ SBIE2108 Succesvolle voltooiing van programma nabootsen '%2'
 
 # %2 = Mozilla Firefox
 2191;pop;inf;01
-SBIE2191 %2 wordt best niet bijgewerkt terwijl het onder Sandboxie uitgevoerd wordt.
+SBIE2191 %2 mag niet bijgewerkt worden terwijl het onder Sandboxie uitgevoerd wordt.
 .
 
 2192;pop;inf;01
@@ -352,6 +369,14 @@ SBIE2192 Voer het programma uit buiten het toezicht van Sandboxie om het bij te 
 
 2193;pop;inf;01
 SBIE2193 Verwijder zeker de sandbox na voltooiing van het update-proces.
+.
+
+2194;pop;inf;01
+SBIE2194 MSI-installer vereist dat optie %2 optie in de ini ingesteld wordt, wat echter de isolatie verzwakt.
+.
+
+2198;pop;inf;01
+%0
 .
 
 2199;pop;inf;01
@@ -377,7 +402,7 @@ SBIE2203 Communiceren met Sandboxie-service mislukt: %2
 .
 
 2204;pop;wrn;01
-SBIE2204 Kan gesandboxte service %2 niet starten 
+SBIE2204 Kan gesandboxte service %2 niet starten
 .
 
 2205;pop;wrn;01
@@ -441,19 +466,23 @@ SBIE2219 Aanvraag werd ingediend door programma %2
 .
 
 2220;pop;wrn;01
-SBIE2220 Om gebruik van administratorrechten toe te staan, dubbelklik op deze berichtregel
+SBIE2220 Dubbelkliken op deze berichtregel om gebruik van administratorrechten toe te staan
 .
 
 2221;pop;wrn;01
-SBIE2221 Om een programma toe te voegen aan beperking van internettoegang, dubbelklik op dit bericht
+SBIE2221 Dubbelklikken op deze berichtregel om een programma toe te voegen aan beperking van internettoegang
 .
 
 2222;pop;wrn;01
-SBIE2222 Om het programma toe te voegen aan toegangsbeperking voor starten/uitvoeren, dubbelklik op dit bericht
+SBIE2222 Dubbelklikken op deze berichtregel om het programma toe te voegen aan toegangsbeperking voor starten/uitvoeren
 .
 
 2223;pop;wrn;01
-SBIE2223 Om het bestandsgrootte-limiet voor het kopiëren van bestanden te vergroten, dubbeklik op dit bericht
+SBIE2223 Dubbelklikken op deze berichtregel om de bestandsgrootte-limiet voor het kopiëren van bestanden te vergroten
+.
+
+2224;pop;wrn;01
+SBIE2224 Gesandboxt programma is gecrasht: %2
 .
 
 #----------------------------------------------------------------------------
@@ -465,6 +494,11 @@ SBIE2223 Om het bestandsgrootte-limiet voor het kopiëren van bestanden te vergr
 2301;pop;err;01
 SBIE2301 %2
 .
+
+2302;pop;err;01
+SBIE2302 Configuratieconflict procesimage: %2
+.
+
 
 2303;pop;err;01
 SBIE2303 Kon %2 niet hooken
@@ -570,9 +604,9 @@ SBIE2332 Kan geen toegang krijgen tot SbiePst.dat
 # SBIE2333 Incompatible software DLL found: %2
 # .
 
-2334;pop;err;01
-SBIE2334 Kan DLL-bestand niet laden: %2
-.
+#2334;pop;err;01
+#SBIE2334 Kan DLL-bestand niet laden: %2
+#.
 
 2335;pop;err;01
 SBIE2335 Initialisatie mislukt voor proces %2
@@ -687,7 +721,7 @@ K&nippen
 .
 
 3051;txt;01
-Beveiliging-verwijdering is ingeschakeld voor de sandbox
+Beveiliging tegen verwijdering is ingeschakeld voor de sandbox
 .
 
 3052;txt;01
@@ -711,7 +745,7 @@ Typ . (het punt-teken) om uw bureaublad te verkennen met Sandboxie.
 .
 
 3105;txt;01
-Verwijder opdracht van opdracht-geschiedenis
+Opdracht verwijderen uit opdracht-geschiedenis
 .
 
 3106;txt;01
@@ -719,7 +753,7 @@ Selecteer de sandbox waarin het progamma of document moet starten.
 .
 
 3111;txt;01
- Sandboxie-startmenu - %2 %0
+      Sandboxie-startmenu - %2  %0
 .
 
 3112;txt;01
@@ -787,7 +821,7 @@ Kon Sandboxie COM-services niet starten
 .
 
 3214;txt;01
-Verwijder sandbox %2: %0
+Sandbox %2 verwijderen: %0
 .
 
 3215;txt;01
@@ -837,7 +871,7 @@ De gratis versie zal nu echter voor enkele seconden pauzeren.
 .
 
 3234;txt;01
-De gratis versie laat echter toe om 1 sandbox tegelijk te gebruiken. 
+De gratis versie laat echter toe om 1 sandbox tegelijk te gebruiken.
 .
 
 3235;txt;01
@@ -870,8 +904,8 @@ in verband met een programma dat draait in een sandbox.
 .
 
 3242;txt;01
-Om de aanvraag te accepteren of te annuleren, activeer de
-Pop-upvenster gebruikersaccountbeheer.
+Schakel het pop-upvenster gebruikersaccountbeheer in om
+de aanvraag te accepteren of te annuleren.
 .
 
 3243;txt;01
@@ -886,10 +920,10 @@ Buiten sandbox uitvoeren
 3252;txt;01
 Start het programma uitdrukkelijk buiten het toezicht van
 Sandboxie, zelfs als het programma gedwongen werd om te werken onder
-Sandboxie. Deze vrijstelling van sandboxing breidt ook uit 
+Sandboxie. Deze vrijstelling van sandboxing breidt ook uit
 tot alle programma's die gestart worden door dit programma.
 
-U kunt deze optie ook selecteren door Ctrl en 
+U kunt deze optie ook selecteren door Ctrl en
 Shift in te houden wanneer u op "gesandboxt uitvoeren" klikt.
 .
 
@@ -903,7 +937,7 @@ wanneer u klikt op "gesandboxt uitvoeren"
 .
 
 3255;txt;01
-Opties zijn uitgeschakeld omdat de "rechten intrekken"-instelling toegepast is voor deze sandbox
+Opties zijn uitgeschakeld omdat de instelling "rechten ontnemen" toegepast is voor deze sandbox
 .
 
 3256;txt;01
@@ -911,7 +945,7 @@ Optie is uitgeschakeld omdat dit programma reeds werkt met administratorprivileg
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control Algemeen
+# Sandboxie Control Common
 #----------------------------------------------------------------------------
 
 3301;txt;01
@@ -923,7 +957,7 @@ Versie %2
 .
 
 3303;txt;01
- - initialiseren
+  -  Initialiseren
 .
 
 3304;txt;01
@@ -956,7 +990,7 @@ Programma's#*.EXE#Alle bestanden#*.*##
 .
 
 3309;txt;01
- - Sandbox verwijderen
+  -  Sandbox verwijderen
 .
 
 3311;txt;01
@@ -1081,6 +1115,10 @@ A&fsluiten
 Herstel-logboek
 .
 
+3426;txt;01
+&Altijd boven
+.
+
 3431;txt;01
 Sand&box
 .
@@ -1149,6 +1187,10 @@ Alle tip&s weergeven
 Alle tips verber&gen
 .
 
+3504;txt;01
+Sandboxie onder&steunen
+.
+
 3451;txt;01
 &Help
 .
@@ -1171,6 +1213,22 @@ Sandboxie &registreren
 
 3456;txt;01
 &Over Sandboxie
+.
+
+3457;txt;01
+&Sandboxie forum (Web)
+.
+
+3458;txt;01
+Directe toegang toestaan tot Windows lettertypecache
+.
+
+3459;txt;01
+Directe toegang toestaan tot qWave-driver (Google Hangouts)
+.
+
+3460;txt;01
+Functie-hooking aanpassingen
 .
 
 3461;txt;01
@@ -1279,8 +1337,8 @@ Snelkoppeling op bureaublad aanmaken
 
 3511;txt;01
 Sandboxie Control zal nu zijn venster verbergen, maar zal
-verder worden uitgevoerd. Om het scherm weer te geven, dubbelklik op het 
-gele Sandboxie-pictogram in het systeemvak.
+verder worden uitgevoerd. Dubbelklik op het gele Sandboxie-pictogram in het systeemvak
+om het venster weer te geven.
 .
 
 3512;txt;01
@@ -1291,11 +1349,11 @@ De herziene instelling zal alleen toegepast worden nadat
 de "instellingen herladen"-functie werd toegepast.
 
 In de meeste gevallen wordt "instellingen herladen"-functie
-automatisch toegepast van zodra u het 
+automatisch toegepast van zodra u het
 tekstverwerkingsvenster sluit.
 
-U kunt Sandboxie Control ook op elk moment uitdrukkelijk de opdracht geven om de 
- "instellingen herladen"-functie uit te voeren.
+U kunt Sandboxie Control ook op elk moment uitdrukkelijk de opdracht geven om de
+"instellingen herladen"-functie uit te voeren.
 .
 
 3513;txt;01
@@ -1438,29 +1496,29 @@ vergrendelingsconfiguratie om wachtwoordbeveiliging uit te schakelen.
 Openbaar
 .
 
-3542;txt;01
-De modus 'experimentele bescherming' verbetert de bescherming
-die geboden wordt door 64-bit Sandboxie, en brengt ze op hetzelfde
-niveau als de bescherming die geboden wordt door 32-bit Sandboxie.
+# 3542;txt;01
+# The Experimental Protection mode enhances the protection
+# offered by 64-bit Sandboxie, and brings it to the same
+# level as the protection offered by 32-bit Sandboxie.
+# 
+# IMPORTANT:  Experimental Protection uses undocumented
+# features of the Windows kernel.  Future updates to
+# Windows might interfere with the Experimental Protection
+# mode, and might cause system instability.
+# 
+# USE AT YOUR OWN RISK.
+# 
+# To activate the Experimental Protection mode, you must
+# restart your computer now.
+# .
 
-BELANGRIJK: experimentele bescherming gebruikt niet-gedocumenteerde
-functies van de Windows-kernel. Toekomstige updates van
-Windows zouden kunnen interfereren met de experimentele bescherming
-en kunnen systeem-instabiliteit veroorzaken.
-
-GEBRUIKEN OP EIGEN RISICO.
-
-Om de modus 'experimentele bescherming' te activeren, moet u
-uw computer nu opnieuw opstarten.
-.
-
-3543;txt;01
-Om de modus 'experimentele bescherming' uit te schakelen, moet u
-uw computer nu opnieuw opstarten.
-
-Merk op dat de instelling 'rechten ontnemen' ingeschakeld zal worden
-in alle sandboxen.
-.
+# 3543;txt;01
+# To disable the Experimental Protection mode, you must
+# restart your computer now.
+# 
+# Please note that the Drop Rights setting will be enabled
+# in all sandboxes.
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control Dialogs: About
@@ -1880,7 +1938,7 @@ Selecteer een map om toe te voegen aan de lijst van "snel herstel"-mappen.
 3727;txt;01
 De map werd toegevoegd aan de lijst van "snel herstel"-mappen.
 
-Op dit moment zijn er echter geen gesandboxte items die 
+Op dit moment zijn er echter geen gesandboxte items die
 hersteld kunnen worden uit de map.
 .
 
@@ -1918,11 +1976,11 @@ Alle bestanden vervangen zonder bijkomende meldingen
 .
 
 3736;txt;01
-&Herstellen && verkennen
+&Herstellen en verkennen
 .
 
 3737;txt;01
-&Herstellen && uitvoeren
+&Herstellen en uitvoeren
 .
 
 3981;txt;01
@@ -2499,7 +2557,7 @@ Om starten/uitvoeren-beperkingen te beheren, opent u de het instellingenvenster 
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control: Sandbox Settings: Low Level Access / Hardware Access
+# Sandboxie Control:  Sandbox Settings:  Low Level Access / Hardware Access
 #----------------------------------------------------------------------------
 
 # 3931;txt;01
@@ -2511,7 +2569,7 @@ Om starten/uitvoeren-beperkingen te beheren, opent u de het instellingenvenster 
 # .
 
 # 3933;txt;01
-# The following settings weaken the protection afforded by Sandboxie. Enabling any or all of these settings is not recommended.
+# The following settings weaken the protection afforded by Sandboxie.  Enabling any or all of these settings is not recommended.
 # .
 
 # 3934;txt;01
@@ -2551,7 +2609,7 @@ Om starten/uitvoeren-beperkingen te beheren, opent u de het instellingenvenster 
 # .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control: Sandbox Settings: Drop Rights
+# Sandboxie Control:  Sandbox Settings:  Drop Rights
 #----------------------------------------------------------------------------
 
 # 3941;txt;01
@@ -2591,7 +2649,47 @@ U kunt de "rechten ontnemen"-instelling altijd wijzigen door het instellingvenst
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control: Sandbox Settings: Resource Access
+# Sandboxie Control:  Sandbox Settings:  Print Spooler
+#----------------------------------------------------------------------------
+
+3950;txt;01
+Printspooler
+.
+
+3951;txt;01
+De Windows printspooler draait buiten het toezicht van Sandboxie. Een gesandboxte applicatie die de printspooler vraagt om naar een bestand af te drukken zal worden geblokkeerd, omdat dit bestand buiten de sandbox zal worden geschreven.
+.
+
+3952;txt;01
+Als u de printspooler wilt toestaan af te drukken naar een bestand, kunt u deze instelling inschakelen. Het wordt aanbevolen deze optie alleen in te schakelen wanneer dat nodig is.
+.
+
+3953;txt;01
+De Windows printspooler toestaan om naar een bestand af te drukken.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
+
+3955;txt;01
+Netwerkbestanden
+.
+
+3956;txt;01
+Netwerkbestanden en -mappen zijn normaal zichtbaar voor gesandboxte applicaties.
+.
+
+3957;txt;01
+Als u gesandboxte applicaties de toegang tot bestanden en mappen op uw netwerk wilt ontzeggen, kunt u deze instelling inschakelen. Afzonderlijke bestanden en mappen kunnen worden geopend voor gesandboxte applicaties door ze toe te voegen onder Brontoegang -> Bestandstoegang.
+.
+
+3958;txt;01
+Netwerkbestanden en -mappen blokkeren, tenzij ze specifiek worden geopend.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Resource Access
 #----------------------------------------------------------------------------
 
 4001;txt;01
@@ -2935,6 +3033,10 @@ Standaard lijst van geblokkeerde TCP/IP-poorten
 Programma's toestaan om jumplists in de taakbalk van Windows 7 bij te werken
 .
 
+4295;txt;01
+Voorinstellingen voor standaard-uitsluitingen van bestandsmigratie
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3119,7 +3221,7 @@ De volgende uitsluitingen laten webbrowsers die in deze sandbox uitgevoerd worde
 .
 
 4324;txt;02
-Directe toegang toestaan tot synchronisatiedata van %2 
+Directe toegang toestaan tot synchronisatiedata van %2
 .
 
 4325;txt;02
@@ -3211,7 +3313,7 @@ Opmerking: instellingen voor geforceerde programma's en geforceerde mappen van e
 # .
 
 5107;txt;01
-Uw gebruikersaccount werd nu beperkt om deze sandbox te gebruiken, en 
+Uw gebruikersaccount werd nu beperkt om deze sandbox te gebruiken, en
 de sandbox zal uit de weergave in het hoofdvenster verwijderd worden.
 
 Om de sandbox zichtbaar en bruikbaar te maken, gebruik de opdracht "verborgen sandbox zichtbaar maken"
@@ -3358,9 +3460,9 @@ Bedankt om de tijd te nemen om door deze handleiding te gaan. U kunt de Sandboxi
 De standaardinstellingen in Sandboxie voorzien volledige bescherming, maar het is mogelijk dat u de sandbox-configuratie-opdrachten wilt nakijken in het sandbox-menu in het programmavenster van Sandboxie Control.
 .
 
-7866;txt;01
-Op een 64-bit Windows-systeem, schakelt u best experimentele bescherming in. Zie het configuratiemenu in Sandboxie Control
-.
+# 7866;txt;01
+# Op een 64-bit Windows-systeem, schakelt u best experimentele bescherming in. Zie het configuratiemenu in Sandboxie Control
+# .
 
 #----------------------------------------------------------------------------
 # License Manager
@@ -3424,7 +3526,7 @@ Uw registratiesleutel wordt niet herkend door de licentieserver.
 .
 
 7934;txt;01
-Als u een geldige registratiesleutel gebruikt hebt, waarvoor u betaald heeft, of die u als geschenk gegeven werd, of als deel van een promotie, zend dan een e-mail naar:
+Contacteer support@sandboxie.com voor vragen in verband met licenties
 .
 
 7935;txt;01
@@ -3592,7 +3694,7 @@ Driver-installatie
 .
 
 8011;ins;01
-Bekijk onderstaande informatie.
+Controleer onderstaande informatie.
 .
 
 8012;ins;01
@@ -3644,7 +3746,7 @@ Windows Verkenner gesandboxt uitvoeren.lnk
 .
 
 8028;ins;01
-Lokale desktop en computer verkennen onder toezicht van Sandboxie 
+Lokale desktop en computer verkennen onder toezicht van Sandboxie
 .
 
 8029;ins;01
@@ -3672,7 +3774,7 @@ Sandboxie kan alleen op de volgende versies van Microsoft Windows geïnstalleerd
 .
 
 8042;ins;01
-Sandboxie moet geïnstalleerd worden via een gebruikersaccount die 
+Sandboxie moet geïnstalleerd worden via een gebruikersaccount die
 administratorprivileges heeft in het systeem.
 
 Als u Windows gebruikt met User Accounts Control (UAC) ingeschakeld,
@@ -3681,11 +3783,11 @@ door de opdracht 'uitvoeren als administrator' te gebruiken
 .
 
 8043;ins;01
-De 32-bit-versie van Sandboxie kan niet geïnstalleerd worden op een 64-bit-besturingssysteem. 
+De 32-bit-versie van Sandboxie kan niet geïnstalleerd worden op een 64-bit-besturingssysteem.
 .
 
 8044;ins;01
-De 64-bit-versie van Sandboxie kan niet geïnstalleerd worden op een 32-bit-besturingssysteem. 
+De 64-bit-versie van Sandboxie kan niet geïnstalleerd worden op een 32-bit-besturingssysteem.
 .
 
 8051;ins;01
@@ -3699,7 +3801,7 @@ Klik op annuleren om de installatie af te breken.
 8052;ins;01
 Kan Sandboxie-programmabestanden niet aanmaken of bijwerken.
 
-Verzeker u ervan dat Sandboxie Control niet uitgevoerd wordt 
+Verzeker u ervan dat Sandboxie Control niet uitgevoerd wordt
 en dat er geen programma's gesandboxt uitgevoerd worden.
 
 Klik dan op ok om de installatie opnieuw te proberen.

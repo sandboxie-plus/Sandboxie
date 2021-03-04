@@ -156,9 +156,9 @@ static void Com_Trace(
 
 static void Com_Trace2(
     const WCHAR* TraceType, REFCLSID rclsid, REFIID riid,
-    ULONG ProcNum, ULONG clsctx, HRESULT hr, USHORT monflag);
+    ULONG ProcNum, ULONG clsctx, HRESULT hr, ULONG monflag);
 
-static void Com_Monitor(REFCLSID rclsid, USHORT monflag);
+static void Com_Monitor(REFCLSID rclsid, ULONG monflag);
 
 #define HSTRING void*
 static HRESULT Com_RoGetActivationFactory(HSTRING activatableClassId, REFIID  iid, void** factory);
@@ -569,7 +569,7 @@ _FX HRESULT Com_CoGetClassObject(
 {
     static const WCHAR *TraceType = L"GETCLS";
     HRESULT hr;
-    USHORT monflag = 0;
+    ULONG monflag = 0;
 
     // debug tip. You can stop the debugger on a COM object load (instantiation) by uncommenting lines below.
 
@@ -620,7 +620,7 @@ _FX HRESULT Com_CoGetObject(
     GUID clsid;
     HRESULT hr;
     IClassFactory *pFactory;
-    USHORT monflag = 0;
+    ULONG monflag = 0;
     BOOLEAN IsOpenClsid = FALSE;
 
     if (_wcsnicmp(pszName, L"Elevation:Administrator!new:", 28) == 0) {
@@ -669,7 +669,7 @@ _FX HRESULT Com_CoCreateInstance(
     static const WCHAR *TraceType = L"CRE-IN";
     HRESULT hr;
     IClassFactory *pFactory;
-    USHORT monflag = 0;
+    ULONG monflag = 0;
 
     if (Com_IsClosedClsid(rclsid)) {
         *ppv = NULL;
@@ -739,7 +739,7 @@ _FX HRESULT Com_CoCreateInstanceEx(
     HRESULT hr;
     IClassFactory *pFactory;
     ULONG i;
-    USHORT monflag = 0;
+    ULONG monflag = 0;
 
     //
     // special cases
@@ -3316,7 +3316,7 @@ _FX void Com_Trace(
 
 _FX void Com_Trace2(
     const WCHAR* TraceType, REFCLSID rclsid, REFIID riid,
-    ULONG ProcNum, ULONG clsctx, HRESULT hr, USHORT monflag)
+    ULONG ProcNum, ULONG clsctx, HRESULT hr, ULONG monflag)
 {
     WCHAR *text;
     WCHAR *ptr;
@@ -3363,7 +3363,7 @@ _FX void Com_Trace2(
 //---------------------------------------------------------------------------
 
 
-_FX void Com_Monitor(REFCLSID rclsid, USHORT monflag)
+_FX void Com_Monitor(REFCLSID rclsid, ULONG monflag)
 {
     if (Dll_BoxName) {
 
@@ -3465,12 +3465,17 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
             return TRUE;
     }
 
+    //
+    // this seams to be broken as well
+    //if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)
+    //    return TRUE;
+
     static const WCHAR* setting = L"ClosedRT";
     Com_LoadRTList(setting, &Com_ClosedRT);
 
     for (const WCHAR* pName = Com_ClosedRT; pName && *pName; pName += wcslen(pName) + 1) {
 
-        if (wcscmp(strClassId, pName) == 0) 
+        if (wcscmp(strClassId, pName) == 0 || wcscmp(pName, L"*") == 0)
             return TRUE; 
     }
 

@@ -85,6 +85,8 @@ public:
 	virtual QTreeView*			GetView()	{ return m_pTreeList; }
 	virtual QAbstractItemModel* GetModel()	{ return m_pTreeList->model(); }
 
+	virtual QVBoxLayout*		GetLayout()	{ return m_pMainLayout; }
+
 protected:
 	QVBoxLayout*			m_pMainLayout;
 

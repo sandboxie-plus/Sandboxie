@@ -697,6 +697,8 @@ BOOLEAN Secure_Init_Elevation(HMODULE);
 
 BOOLEAN UserEnv_Init(HMODULE);
 
+BOOLEAN UserEnv_InitVer(HMODULE);
+
 BOOLEAN Scm_OsppcDll(HMODULE);
 
 BOOLEAN Scm_DWriteDll(HMODULE);
@@ -746,6 +748,15 @@ BOOLEAN ComDlg32_Init(HMODULE);
 // Functions (Config)
 //---------------------------------------------------------------------------
 
+BOOLEAN Config_MatchImageGroup(
+    const WCHAR* group, ULONG group_len, const WCHAR* test_str,
+    ULONG depth);
+
+BOOLEAN Config_MatchImage(
+    const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
+    ULONG depth);
+
+WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
 
 BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
 
@@ -753,6 +764,10 @@ NTSTATUS Config_GetSettingsForImageName(
     const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
 
 BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);
+
+WCHAR* Config_GetTagValue(WCHAR* str, WCHAR** value, ULONG* len, WCHAR sep);
+
+BOOLEAN Config_FindTagValue(WCHAR* string, const WCHAR* name, WCHAR* value, ULONG value_size, const WCHAR* deftext, WCHAR sep);
 
 //---------------------------------------------------------------------------
 

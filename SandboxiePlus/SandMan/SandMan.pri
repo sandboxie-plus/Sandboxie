@@ -7,8 +7,9 @@ HEADERS += ./stdafx.h \
     ./SandMan.h \
     ./SbiePlusAPI.h \
     ./Models/SbieModel.h \
-    ./Models/ResMonModel.h \
+    ./Models/TraceModel.h \
     ./Views/SbieView.h \
+    ./Views/TraceView.h \
     ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
     ./Helpers/WinAdmin.h \
@@ -23,9 +24,10 @@ SOURCES += ./main.cpp \
     ./stdafx.cpp \
     ./SandMan.cpp \
     ./SbiePlusAPI.cpp \
-    ./Models/ResMonModel.cpp \
+    ./Models/TraceModel.cpp \
     ./Models/SbieModel.cpp \
     ./Views/SbieView.cpp \
+    ./Views/TraceView.cpp \
     ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/WinAdmin.cpp \
@@ -45,6 +47,8 @@ FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/SnapshotsWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
+    sandman_es.ts \
+    sandman_it.ts \
     sandman_pt.ts \
     sandman_ru.ts \
     sandman_pl.ts \

@@ -464,7 +464,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
         if (letter) {
 
-            USHORT mon_type = MONITOR_KEY;
+            ULONG mon_type = MONITOR_KEY;
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;

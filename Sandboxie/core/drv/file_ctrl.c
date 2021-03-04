@@ -108,12 +108,11 @@ _FX NTSTATUS Syscall_DeviceIoControlFile(
             WCHAR msg_str[240];
             swprintf(msg_str, L"DeviceIoContoleFile, CMApi, func = 0x%X, filter=%d, p=%06d t=%06d, %s\n",
                 function, filter, PsGetCurrentProcessId(), PsGetCurrentThreadId(), proc->image_name);
-            const WCHAR* strings[2] = { msg_str, NULL };
-            Session_MonitorPutEx(MONITOR_OTHER | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());*/
+            Log_Debug_Msg(MONITOR_OTHER | MONITOR_TRACE, msg_str, NULL);*/
 
             if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
 
-                USHORT mon_type = MONITOR_IPC;
+                ULONG mon_type = MONITOR_IPC;
 
                 if (filter && (proc->ipc_trace & TRACE_DENY))
                     mon_type |= MONITOR_DENY;
@@ -124,9 +123,8 @@ _FX NTSTATUS Syscall_DeviceIoControlFile(
 
                 if (mon_type) {
                     WCHAR msg_str[24];
-                    swprintf(msg_str, L" Func: %02X", (ULONG)function);
-                    const WCHAR* strings[3] = { L"\\Device\\DeviceApi\\CMApi", msg_str, NULL };
-                    Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+                    swprintf(msg_str, L"Func: %02X", (ULONG)function);
+                    Log_Debug_Msg(mon_type, L"\\Device\\DeviceApi\\CMApi", msg_str);
                 }
             }
 

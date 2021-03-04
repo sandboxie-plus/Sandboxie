@@ -175,6 +175,26 @@ void CCreateDialog::OnOK()
             errmsg = MSG_3668;
     }
 
+    if (!errmsg && len <= 8) {
+        static const WCHAR* deviceNames[] = {
+            L"aux", L"clock$", L"con", L"nul", L"prn",
+            L"com1", L"com2", L"com3", L"com4", L"com5",
+            L"com6", L"com7", L"com8", L"com9",
+            L"lpt1", L"lpt2", L"lpt3", L"lpt4", L"lpt5",
+            L"lpt6", L"lpt7", L"lpt8", L"lpt9",
+            NULL
+        };
+
+        for (ULONG devNum = 0; deviceNames[devNum]; ++devNum) {
+            const WCHAR* devName = deviceNames[devNum];
+            ULONG devNameLen = wcslen(devName);
+            if (_wcsnicmp(name, devName, devNameLen) == 0) {
+                errmsg = MSG_3667;
+                break;
+            }
+        }
+    }
+
     if (errmsg) {
 
         GetDlgItem(ID_CREATE_ERROR)->SetWindowText(CMyMsg(errmsg));

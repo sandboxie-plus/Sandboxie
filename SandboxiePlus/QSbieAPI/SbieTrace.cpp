@@ -123,9 +123,9 @@ QString CTraceEntry::GetTypeStr() const
 QString CTraceEntry::GetStautsStr() const
 {
 	QString Status;
-	if (m_Type.Open)
+	if ((m_Type.Flags & MONITOR_DISPOSITION_MASK) == MONITOR_OPEN)
 		Status.append("Open ");
-	if (m_Type.Deny)
+	if ((m_Type.Flags & MONITOR_DISPOSITION_MASK) == MONITOR_DENY)
 		Status.append("Closed ");
 
 	if (m_Type.Trace)

@@ -215,7 +215,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     WCHAR *path_lwr;
     ULONG path_len;
     ULONG mp_flags;
-    USHORT monflag;
+    ULONG monflag;
 
     mp_flags = 0;
 
@@ -240,6 +240,8 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
         if (path && path[0] == L'\\' && path[1] == L'K'
           && (wcsncmp(path, L"\\KnownDlls", 10) == 0)) // this will be traced by the driver
             monflag = 0;
+    } else if (path_code == L'w') {
+        monflag = MONITOR_WINCLASS;
     } else
         monflag = MONITOR_OTHER;
 

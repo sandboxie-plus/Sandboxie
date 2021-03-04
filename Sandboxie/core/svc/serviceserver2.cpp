@@ -47,27 +47,40 @@ bool ServiceServer::CanCallerDoElevation(
     WCHAR boxname[48];
     WCHAR exename[99];
 
-    if (0 != SbieApi_QueryProcess(
-                        idProcess, boxname, exename, NULL, pSessionId))
+    if (0 != SbieApi_QueryProcess(idProcess, boxname, exename, NULL, pSessionId))
         return false;
 
     bool DropRights = CheckDropRights(boxname);
 
     if (ServiceName) {
 
-        if (!DropRights) {
+        bool SvcAsSystem = RunServiceAsSystem(ServiceName, boxname) == 1; // false for special case MSIServer, ret value 2
+        if (SvcAsSystem)
+        {
+            //
+            // If this service is to be started with a SYSTEM token, 
+            // we check if the caller has the right to do so
+            //
 
-            if (!CanAccessSCM(idProcess))
+            if (!DropRights && !CanAccessSCM(idProcess))
                 DropRights = true;
         }
+        else 
+        {
+            //
+            // If admin permission emulation is active and this service will 
+            // not be started with a system token allow it to be start
+            //
 
-        if (DropRights) {
+            if (DropRights && SbieApi_QueryConfBool(boxname, L"FakeAdminRights", FALSE))
+                DropRights = false;
 
             // 
             // if this service is configured to be started on box initialization
-            // by SandboxieRpcSs.exe then allow it to be started
+            // by SandboxieRpcSs.exe allow it to be started
             //
-            if (SbieDll_CheckStringInList(ServiceName, boxname, L"StartService"))
+
+            if (DropRights && SbieDll_CheckStringInList(ServiceName, boxname, L"StartService"))
                 DropRights = false;
         }
     }
@@ -265,25 +278,25 @@ MSG_HEADER *ServiceServer::RunHandler(MSG_HEADER *msg, HANDLE idProcess)
 
 
 //---------------------------------------------------------------------------
-// ServiceServer__RunServiceAsSystem
+// RunServiceAsSystem
 //---------------------------------------------------------------------------
 
 
-bool ServiceServer__RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname)
+int ServiceServer::RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname)
 {
+    // exception for MSIServer, see also core/drv/thread_token.c
+    if (svcname && _wcsicmp(svcname, L"MSIServer") == 0 && SbieApi_QueryConfBool(boxname, L"MsiInstallerExemptions", TRUE))
+        return 2;
+
     // legacy behavioure option
-    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE) == TRUE) 
-        return true;
+    if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE)) 
+        return 1;
     
     if (!svcname)
-        return false;
-
-    // exception for MSIServer, see also core/drv/thread_token.c
-    if (_wcsicmp(svcname, L"MSIServer") == 0)
-        return true;
+        return 0;
 
     // check exception list
-    return SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem");
+    return SbieDll_CheckStringInList(svcname, boxname, L"RunServiceAsSystem") ? 1 : 0;
 }
 
 
@@ -325,7 +338,7 @@ ULONG ServiceServer::RunHandler2(
 
     if (ok) {
         errlvl = 0x22;
-        if (ServiceServer__RunServiceAsSystem(svcname, boxname)) {
+        if (RunServiceAsSystem(svcname, boxname)) {
             // use our system token
             ok = OpenProcessToken(GetCurrentProcess(), TOKEN_RIGHTS, &hOldToken);
         }

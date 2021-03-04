@@ -39,7 +39,7 @@
 struct tagEPMAPPER_GET_PORT_NAME_REQ
 {
     MSG_HEADER h;
-    ULONG portType;
+    WCHAR wszPortId[DYNAMIC_PORT_ID_CHARS];
 };
 
 struct tagEPMAPPER_GET_PORT_NAME_RPL

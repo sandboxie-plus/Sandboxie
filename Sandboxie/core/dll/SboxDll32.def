@@ -34,7 +34,7 @@ SbieApi_HookTramp=_SbieApi_HookTramp@8
 SbieApi_IsBoxEnabled=_SbieApi_IsBoxEnabled@4
 
 SbieApi_MonitorControl=_SbieApi_MonitorControl@8
-SbieApi_MonitorGet=_SbieApi_MonitorGet@8
+;;; SbieApi_MonitorGet=_SbieApi_MonitorGet@8
 SbieApi_MonitorGetEx=_SbieApi_MonitorGetEx@20
 SbieApi_MonitorPut=_SbieApi_MonitorPut@8
 SbieApi_MonitorPut2=_SbieApi_MonitorPut2@12

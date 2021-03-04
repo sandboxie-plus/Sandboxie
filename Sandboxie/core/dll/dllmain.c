@@ -477,6 +477,8 @@ _FX void Dll_InitExeEntry(void)
 
     Custom_Load_UxTheme();
 
+    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since win 7
+
     //
     // Windows 8.1:  hook UserEnv-related entrypoint in KernelBase
     //

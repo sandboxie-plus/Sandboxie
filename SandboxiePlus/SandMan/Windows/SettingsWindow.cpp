@@ -360,7 +360,7 @@ void CSettingsWindow::OnTab()
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
 			pItem->setText(0, pTemplate->GetText("Tmpl.Title"));
 			pItem->setData(0, Qt::UserRole, I.key());
-			pItem->setCheckState(0, (I.value() & CSbieTemplates::eEnabled) ? Qt::Checked : Qt::Unchecked);
+			pItem->setCheckState(0, (I.value() & CSbieTemplates::eDisabled) == 0 ? Qt::Checked : Qt::Unchecked);
 			ui.treeCompat->addTopLevelItem(pItem);
 		}
 

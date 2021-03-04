@@ -1040,7 +1040,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
         Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
         if (nbuf) {
 
-            USHORT mon_type = MONITOR_IPC;
+            ULONG mon_type = MONITOR_IPC;
             if (NT_SUCCESS(status))
                 mon_type |= MONITOR_OPEN;
             else

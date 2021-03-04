@@ -1423,21 +1423,23 @@ _FX LONG SbieApi_MonitorControl(
 
 
 _FX LONG SbieApi_MonitorPut(
-    USHORT Type,
+    ULONG Type,
     const WCHAR *Name)
 {
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    API_MONITOR_GET_PUT_ARGS *args = (API_MONITOR_GET_PUT_ARGS *)parms;
+    //NTSTATUS status;
+    //__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    //API_MONITOR_GET_PUT_ARGS *args = (API_MONITOR_GET_PUT_ARGS *)parms;
 
-    memset(parms, 0, sizeof(parms));
-    args->func_code               = API_MONITOR_PUT;
-    args->log_type.val64         = (ULONG64)(ULONG_PTR)&Type;
-    args->log_len.val64          = wcslen(Name) * sizeof(WCHAR);
-    args->log_ptr.val64          = (ULONG64)(ULONG_PTR)Name;
-    status = SbieApi_Ioctl(parms);
+    //memset(parms, 0, sizeof(parms));
+    //args->func_code               = API_MONITOR_PUT;
+    //args->log_type.val           = Type;
+    //args->log_len.val64          = wcslen(Name) * sizeof(WCHAR);
+    //args->log_ptr.val64          = (ULONG64)(ULONG_PTR)Name;
+    //status = SbieApi_Ioctl(parms);
 
-    return status;
+    //return status;
+
+    return SbieApi_MonitorPut2(Type, Name, TRUE);
 }
 
 //---------------------------------------------------------------------------
@@ -1446,7 +1448,7 @@ _FX LONG SbieApi_MonitorPut(
 
 
 _FX LONG SbieApi_MonitorPut2(
-    USHORT Type,
+    ULONG Type,
     const WCHAR *Name,
     BOOLEAN bCheckObjectExists)
 {
@@ -1456,7 +1458,7 @@ _FX LONG SbieApi_MonitorPut2(
 
     memset(parms, 0, sizeof(parms));
     args->func_code                 = API_MONITOR_PUT2;
-    args->log_type.val64            = (ULONG64)(ULONG_PTR)&Type;
+    args->log_type.val              = Type;
     args->log_len.val64             = wcslen(Name) * sizeof(WCHAR);
     args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Name;
     args->check_object_exists.val64 = bCheckObjectExists;
@@ -1471,30 +1473,30 @@ _FX LONG SbieApi_MonitorPut2(
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_MonitorGet(
-    USHORT *Type,
-    WCHAR *Name)                    // WCHAR [256]
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    API_MONITOR_GET_PUT_ARGS *args = (API_MONITOR_GET_PUT_ARGS *)parms;
-
-    memset(parms, 0, sizeof(parms));
-    args->func_code               = API_MONITOR_GET;
-    args->log_type.val64         = (ULONG64)(ULONG_PTR)Type;
-    args->log_len.val64          = 256 * sizeof(WCHAR);
-    args->log_ptr.val64          = (ULONG64)(ULONG_PTR)Name;
-    status = SbieApi_Ioctl(parms);
-
-    if (! NT_SUCCESS(status)) {
-        if (Type)
-            *Type = 0;
-        if (Name)
-            *Name = L'\0';
-    }
-
-    return status;
-}
+//_FX LONG SbieApi_MonitorGet(
+//    ULONG *Type,
+//    WCHAR *Name)                    // WCHAR [256]
+//{
+//    NTSTATUS status;
+//    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+//    API_MONITOR_GET_PUT_ARGS *args = (API_MONITOR_GET_PUT_ARGS *)parms;
+//
+//    memset(parms, 0, sizeof(parms));
+//    args->func_code               = API_MONITOR_GET;
+//    args->log_type.val64         = (ULONG64)(ULONG_PTR)Type;
+//    args->log_len.val64          = 256 * sizeof(WCHAR);
+//    args->log_ptr.val64          = (ULONG64)(ULONG_PTR)Name;
+//    status = SbieApi_Ioctl(parms);
+//
+//    if (! NT_SUCCESS(status)) {
+//        if (Type)
+//            *Type = 0;
+//        if (Name)
+//            *Name = L'\0';
+//    }
+//
+//    return status;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -1504,23 +1506,23 @@ _FX LONG SbieApi_MonitorGet(
 
 _FX LONG SbieApi_MonitorGetEx(
 	ULONG *SeqNum,
-	USHORT *Type,
-	ULONG64 *Pid,
-    ULONG64 *Tid,
+	ULONG *Type,
+	ULONG *Pid,
+    ULONG *Tid,
 	WCHAR *Name)                    // WCHAR [256]
 {
 	NTSTATUS status;
+    __declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)(256 * sizeof(WCHAR)), (ULONG64)Name };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_MONITOR_GET_EX_ARGS *args = (API_MONITOR_GET_EX_ARGS *)parms;
 
     memset(parms, 0, sizeof(parms));
 	args->func_code = API_MONITOR_GET_EX;
-	args->log_seq.val64 = (ULONG64)(ULONG_PTR)SeqNum;
-	args->log_type.val64 = (ULONG64)(ULONG_PTR)Type;
-	args->log_pid.val64 = (ULONG64)(ULONG_PTR)Pid;
-    args->log_tid.val64 = (ULONG64)(ULONG_PTR)Tid;
-	args->log_len.val64 = 256 * sizeof(WCHAR);
-	args->log_ptr.val64 = (ULONG64)(ULONG_PTR)Name;
+	args->log_seq.val = SeqNum;
+	args->log_type.val = Type;
+	args->log_pid.val = Pid;
+    args->log_tid.val = Tid;
+    args->log_data.val = &log_buffer;
 	status = SbieApi_Ioctl(parms);
 
 	if (!NT_SUCCESS(status)) {

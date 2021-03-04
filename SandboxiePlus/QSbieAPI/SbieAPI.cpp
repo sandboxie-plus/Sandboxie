@@ -281,7 +281,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.48.5";
+	QStringList CompatVersions = QStringList () << "5.49.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -1899,15 +1899,15 @@ bool CSbieAPI::IsMonitoring()
 
 bool CSbieAPI::GetMonitor()
 {
-	const int max_len = 1024;
-
-	USHORT type;
-	ULONG64 pid = 0;
-	ULONG64 tid = 0;
-	WCHAR data[max_len + 1] = { 0 };
+	ULONG type;
+	ULONG pid = 0;
+	ULONG tid = 0;
+	wchar_t* Buffer[4 * 1024];
+	ULONG Length = ARRAYSIZE(Buffer);
 
 	ULONG RecordNum = m->lastRecordNum;
 
+	__declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)Length, (ULONG64)Buffer };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
     API_MONITOR_GET_EX_ARGS* args	= (API_MONITOR_GET_EX_ARGS*)parms;
 
@@ -1917,8 +1917,7 @@ bool CSbieAPI::GetMonitor()
     args->log_type.val = &type;
 	args->log_pid.val = &pid;
 	args->log_tid.val = &tid;
-    args->log_len.val = max_len * sizeof(WCHAR);
-    args->log_ptr.val = data;
+	args->log_data.val = &log_buffer;
     
 	if (!NT_SUCCESS(m->IoControl(parms)))
 		return false; // error or no more entries
@@ -1933,8 +1932,8 @@ bool CSbieAPI::GetMonitor()
 	if (m->clearingBuffers)
 		return true; 
 
-	QString Data = QString::fromWCharArray(data);
-	if (Data.length() == max_len - 1) // if we got exactly the max length assume data were truncated and indicate accordingly...
+	QString Data = QString::fromWCharArray((wchar_t*)log_buffer.Buffer, log_buffer.Length / sizeof(wchar_t));
+	if (Data.length() == Length - 1) // if we got exactly the max length assume data were truncated and indicate accordingly...
 		Data += "..."; 
 
 	// cleanup debug output strings and drop empty once.

@@ -1501,7 +1501,7 @@ skip_due_to_home_folder:
 
         if (letter) {
 
-            USHORT mon_type = IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE;
+            ULONG mon_type = IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE;
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;
@@ -1520,7 +1520,7 @@ skip_due_to_home_folder:
 
     else if (IsPipeDevice && Session_MonitorCount) {
 
-        USHORT mon_type = MONITOR_PIPE;
+        ULONG mon_type = MONITOR_PIPE;
         WCHAR *mon_name = Name->Name.Buffer;
 
         if (MonitorPrefixLen && MonitorSuffixPtr) {
@@ -2244,7 +2244,7 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
 
         if (letter) {
 
-            USHORT mon_type = MONITOR_FILE;
+            ULONG mon_type = MONITOR_FILE;
             mon_type |= MONITOR_TRACE;
 
             swprintf(access_str, L"(F%c) %08X.%02X.%08X",

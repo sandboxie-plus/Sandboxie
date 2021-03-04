@@ -63,7 +63,7 @@ static NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms);
 
-static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
+//static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_GetHomePath(PROCESS *proc, ULONG64 *parms);
 
@@ -179,7 +179,7 @@ _FX BOOLEAN Api_Init(void)
     //
 
     Api_SetFunction(API_GET_VERSION,        Api_GetVersion);
-    Api_SetFunction(API_GET_WORK,           Api_GetWork);
+    //Api_SetFunction(API_GET_WORK,           Api_GetWork);
     Api_SetFunction(API_LOG_MESSAGE,        Api_LogMessage);
 	Api_SetFunction(API_GET_MESSAGE,        Api_GetMessage);
     Api_SetFunction(API_GET_HOME_PATH,      Api_GetHomePath);
@@ -933,89 +933,89 @@ _FX BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data)
 // Api_GetWork
 //---------------------------------------------------------------------------
 
-
-_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
-{
-	return STATUS_NOT_IMPLEMENTED;
-
-    /*API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
-    NTSTATUS status;
-    void *buffer_ptr;
-    ULONG buffer_len;
-    ULONG *result_len;
-    ULONG length;
-    API_WORK_ITEM *work_item;
-    KIRQL irql;
-
-    //
-    // caller must not be sandboxed, and caller has to be SbieSvc
-    // if session parameter is -1
-    //
-
-    if (proc)
-        return STATUS_NOT_IMPLEMENTED;
-
-    if (args->session_id.val == -1 &&
-            PsGetCurrentProcessId() != Api_ServiceProcessId)
-        return STATUS_ACCESS_DENIED;
-
-    //
-    // find next work/log item for the session
-    //
-
-    buffer_ptr = args->buffer.val;
-    buffer_len = args->buffer_len.val;
-    result_len = args->result_len_ptr.val;
-
-    irql = Api_EnterCriticalSection();
-
-    work_item = List_Head(&Api_WorkList);
-    while (work_item) {
-        if (work_item->session_id == args->session_id.val)
-            break;
-        work_item = List_Next(work_item);
-    }
-
-    __try {
-
-    if (! work_item) {
-
-        status = STATUS_NO_MORE_ENTRIES;
-
-    } else {
-
-        if (work_item->length <= buffer_len) {
-
-            length = work_item->length
-                   - FIELD_OFFSET(API_WORK_ITEM, type);
-            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
-            memcpy(buffer_ptr, &work_item->type, length);
-
-            status = STATUS_SUCCESS;
-
-        } else {
-
-            length = work_item->length;
-            status = STATUS_BUFFER_TOO_SMALL;
-        }
-
-        if (result_len) {
-            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
-            *result_len = length;
-        }
-
-        if (status == STATUS_SUCCESS)
-            Api_DelWork(work_item);
-    }
-
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    Api_LeaveCriticalSection(irql);
-
-    return status;*/
-}
+//
+//_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
+//{
+//	return STATUS_NOT_IMPLEMENTED;
+//
+//    /*API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
+//    NTSTATUS status;
+//    void *buffer_ptr;
+//    ULONG buffer_len;
+//    ULONG *result_len;
+//    ULONG length;
+//    API_WORK_ITEM *work_item;
+//    KIRQL irql;
+//
+//    //
+//    // caller must not be sandboxed, and caller has to be SbieSvc
+//    // if session parameter is -1
+//    //
+//
+//    if (proc)
+//        return STATUS_NOT_IMPLEMENTED;
+//
+//    if (args->session_id.val == -1 &&
+//            PsGetCurrentProcessId() != Api_ServiceProcessId)
+//        return STATUS_ACCESS_DENIED;
+//
+//    //
+//    // find next work/log item for the session
+//    //
+//
+//    buffer_ptr = args->buffer.val;
+//    buffer_len = args->buffer_len.val;
+//    result_len = args->result_len_ptr.val;
+//
+//    irql = Api_EnterCriticalSection();
+//
+//    work_item = List_Head(&Api_WorkList);
+//    while (work_item) {
+//        if (work_item->session_id == args->session_id.val)
+//            break;
+//        work_item = List_Next(work_item);
+//    }
+//
+//    __try {
+//
+//    if (! work_item) {
+//
+//        status = STATUS_NO_MORE_ENTRIES;
+//
+//    } else {
+//
+//        if (work_item->length <= buffer_len) {
+//
+//            length = work_item->length
+//                   - FIELD_OFFSET(API_WORK_ITEM, type);
+//            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
+//            memcpy(buffer_ptr, &work_item->type, length);
+//
+//            status = STATUS_SUCCESS;
+//
+//        } else {
+//
+//            length = work_item->length;
+//            status = STATUS_BUFFER_TOO_SMALL;
+//        }
+//
+//        if (result_len) {
+//            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
+//            *result_len = length;
+//        }
+//
+//        if (status == STATUS_SUCCESS)
+//            Api_DelWork(work_item);
+//    }
+//
+//    } __except (EXCEPTION_EXECUTE_HANDLER) {
+//        status = GetExceptionCode();
+//    }
+//
+//    Api_LeaveCriticalSection(irql);
+//
+//    return status;*/
+//}
 
 
 //---------------------------------------------------------------------------

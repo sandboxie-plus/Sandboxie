@@ -200,7 +200,7 @@
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Models\ResMonModel.cpp" />
+    <ClCompile Include="Models\TraceModel.cpp" />
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="SandMan.cpp" />
     <ClCompile Include="SbiePlusAPI.cpp" />
@@ -211,6 +211,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp" />
+    <ClCompile Include="Views\TraceView.cpp" />
     <ClCompile Include="Windows\NewBoxWindow.cpp" />
     <ClCompile Include="Windows\OptionsWindow.cpp" />
     <ClCompile Include="Windows\PopUpWindow.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Views\TraceView.h" />
     <QtMoc Include="Windows\NewBoxWindow.h" />
     <QtMoc Include="Windows\RecoveryWindow.h" />
     <QtMoc Include="Windows\PopUpWindow.h" />
@@ -228,7 +230,7 @@
     <QtMoc Include="Views\SbieView.h" />
     <QtMoc Include="SandMan.h" />
     <QtMoc Include="Models\SbieModel.h" />
-    <QtMoc Include="Models\ResMonModel.h" />
+    <QtMoc Include="Models\TraceModel.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
@@ -256,6 +258,7 @@
     <None Include="Resources\finder.cur" />
     <None Include="sandman_de.ts" />
     <None Include="sandman_es.ts" />
+    <None Include="sandman_it.ts" />
     <None Include="sandman_pl.ts" />
     <None Include="sandman_pt.ts" />
     <None Include="sandman_ru.ts" />

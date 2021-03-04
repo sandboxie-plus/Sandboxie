@@ -1,3 +1,4 @@
+#pragma once
 
 #include "../../MiscHelpers/Common/PanelView.h"
 #include "../../MiscHelpers/Common/TreeviewEx.h"

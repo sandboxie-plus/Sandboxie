@@ -82,19 +82,20 @@ _FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
 
         BOOLEAN is_spooler = FALSE;
 
-        if (Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock)
+        if (Ipc_Dynamic_Ports.pPortLock)
         {
             KeEnterCriticalRegion();
-            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE);
+            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports.pPortLock, TRUE);
 
-            if (_wcsicmp(Name->Name.Buffer, Ipc_Dynamic_Ports[SPOOLER_PORT].wstrPortName) == 0)
+            if (Ipc_Dynamic_Ports.pSpoolerPort 
+                && _wcsicmp(Name->Name.Buffer, Ipc_Dynamic_Ports.pSpoolerPort->wstrPortName) == 0)
             {
                 // dynamic version of RPC ports, see also ipc_spl.c
                 // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
                 is_spooler = TRUE;
             }
 
-            ExReleaseResourceLite(Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock);
+            ExReleaseResourceLite(Ipc_Dynamic_Ports.pPortLock);
             KeLeaveCriticalRegion();
         }
 
@@ -299,7 +300,7 @@ _FX BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg)
     
     if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
 
-        USHORT mon_type = MONITOR_IPC;
+        ULONG mon_type = MONITOR_IPC;
 
         if (filter && (proc->ipc_trace & TRACE_DENY))
             mon_type |= MONITOR_DENY;
@@ -310,9 +311,8 @@ _FX BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg)
 
         if (mon_type) {
             WCHAR msg_str[24];
-            swprintf(msg_str, L" Msg: %02X", (ULONG)uMsg);
-            const WCHAR* strings[3] = { L"\\RPC Control\\spoolss", msg_str, NULL };
-            Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            swprintf(msg_str, L"Msg: %02X", (ULONG)uMsg);
+            Log_Debug_Msg(mon_type, L"\\RPC Control\\spoolss", msg_str);
         }
     }
 

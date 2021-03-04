@@ -63,9 +63,6 @@
     <ClCompile Include="Views\SbieView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
-    <ClCompile Include="Models\ResMonModel.cpp">
-      <Filter>Models</Filter>
-    </ClCompile>
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp">
       <Filter>Dialogs</Filter>
     </ClCompile>
@@ -99,6 +96,12 @@
     <ClCompile Include="Helpers\WindowFromPointEx.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Models\TraceModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\TraceView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -124,9 +127,6 @@
     <QtMoc Include="Views\SbieView.h">
       <Filter>Views</Filter>
     </QtMoc>
-    <QtMoc Include="Models\ResMonModel.h">
-      <Filter>Models</Filter>
-    </QtMoc>
     <QtMoc Include="Dialogs\MultiErrorDialog.h">
       <Filter>Dialogs</Filter>
     </QtMoc>
@@ -150,6 +150,12 @@
     </QtMoc>
     <QtMoc Include="Windows\NewBoxWindow.h">
       <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\TraceModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Views\TraceView.h">
+      <Filter>Views</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +220,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_es.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_it.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

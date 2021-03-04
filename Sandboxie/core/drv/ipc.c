@@ -61,7 +61,7 @@ static NTSTATUS Ipc_CheckJobObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess);
 
-static NTSTATUS Ipc_CheckObjectName(HANDLE handle);
+static NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode);
 
 
 //---------------------------------------------------------------------------
@@ -204,17 +204,14 @@ _FX BOOLEAN Ipc_Init(void)
     Api_SetFunction(API_GET_DYNAMIC_PORT_FROM_PID, Ipc_Api_GetDynamicPortFromPid);
     Api_SetFunction(API_OPEN_DYNAMIC_PORT, Ipc_Api_OpenDynamicPort);
 
+    //
     // prepare dynamic ports
-    if (!Mem_GetLockResource(&Ipc_Dynamic_Ports[WPAD_PORT].pPortLock, TRUE)
-     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SMART_CARD_PORT].pPortLock, TRUE)
-     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[BT_PORT].pPortLock, TRUE)
-     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SSDP_PORT].pPortLock, TRUE)
-     // since Windows 8
-     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[SPOOLER_PORT].pPortLock, TRUE)
-     // since Windows 10
-     || !Mem_GetLockResource(&Ipc_Dynamic_Ports[GAME_CONFIG_STORE_PORT].pPortLock, TRUE)
-        ) return FALSE;
+    //
     
+    if (!Mem_GetLockResource(&Ipc_Dynamic_Ports.pPortLock, TRUE))
+        return FALSE;
+    List_Init(&Ipc_Dynamic_Ports.Ports);
+
     //
     // finish
     //
@@ -877,29 +874,27 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
         else if (!is_open && !is_closed)
         {
-            int i;
-            for (i = 0; i < NUM_DYNAMIC_PORTS; i++)
+            if (Ipc_Dynamic_Ports.pPortLock)
             {
-                if (Ipc_Dynamic_Ports[i].pPortLock)
-                {
-                    KeEnterCriticalRegion();
-                    ExAcquireResourceSharedLite(Ipc_Dynamic_Ports[i].pPortLock, TRUE);
+                KeEnterCriticalRegion();
+                ExAcquireResourceSharedLite(Ipc_Dynamic_Ports.pPortLock, TRUE);
         
-                    if (*Ipc_Dynamic_Ports[i].wstrPortName
-                        && (Name->Length >= 32 * sizeof(WCHAR))
-                        && _wcsicmp(Name->Buffer, Ipc_Dynamic_Ports[i].wstrPortName) == 0)
+                IPC_DYNAMIC_PORT* port = List_Head(&Ipc_Dynamic_Ports.Ports);
+                while (port) 
+                {    
+                    if (_wcsicmp(Name->Buffer, port->wstrPortName) == 0)
                     {
                         // dynamic version of RPC ports, see also ipc_spl.c
                         // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
                         is_open = TRUE;
-                    }
-        
-                    ExReleaseResourceLite(Ipc_Dynamic_Ports[i].pPortLock);
-                    KeLeaveCriticalRegion();
-        
-                    if (is_open)
                         break;
+                    }
+
+                    port = List_Next(port);
                 }
+        
+                ExReleaseResourceLite(Ipc_Dynamic_Ports.pPortLock);
+                KeLeaveCriticalRegion();
             }
         }
 
@@ -939,7 +934,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
         if (letter) {
 
-            USHORT mon_type = MONITOR_IPC;
+            ULONG mon_type = MONITOR_IPC;
             if (!IsBoxedPath) {
                 if (NT_SUCCESS(status))
                     mon_type |= MONITOR_OPEN;
@@ -954,7 +949,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
     else if (Session_MonitorCount) {
 
-        USHORT mon_type = MONITOR_IPC;
+        ULONG mon_type = MONITOR_IPC;
         WCHAR *mon_name = Name->Buffer;
         if (IsBoxedPath)
             mon_name += proc->box->ipc_path_len / sizeof(WCHAR) - 1;
@@ -1031,7 +1026,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
     HANDLE SourceHandle;
     HANDLE TargetProcessHandle;
     HANDLE *TargetHandle;
-    HANDLE TargetHandleValue;
+    HANDLE TestHandle;
     ULONG DesiredAccess;
     ULONG HandleAttributes;
     ULONG Options;
@@ -1148,15 +1143,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (IS_ARG_CURRENT_PROCESS(SourceProcessHandle)) {
 
-        status = Ipc_CheckObjectName(SourceHandle);
-
-        if (NT_SUCCESS(status)) {
-
-            status = NtDuplicateObject(
-                SourceProcessHandle, SourceHandle,
-                TargetProcessHandle, TargetHandle,
-                DesiredAccess, HandleAttributes, Options);
-        }
+        status = Ipc_CheckObjectName(SourceHandle, UserMode);
 
     //
     // if the source handle is in another process, we have to duplicate
@@ -1166,36 +1153,38 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     } else if (IS_ARG_CURRENT_PROCESS(TargetProcessHandle)) {
 
-        status = NtDuplicateObject(
+        //
+        // we duplicate the handle into kernel space such that that user 
+        // wont be able to grab it while we are evaluaiting it
+        //
+
+        status = ZwDuplicateObject(
                         SourceProcessHandle, SourceHandle,
-                        TargetProcessHandle, &TargetHandleValue,
+                        TargetProcessHandle, &TestHandle,
                         DesiredAccess, HandleAttributes,
                         Options & ~DUPLICATE_CLOSE_SOURCE);
 
         if (NT_SUCCESS(status)) {
 
-            status = Ipc_CheckObjectName(TargetHandleValue);
+            status = Ipc_CheckObjectName(TestHandle, KernelMode);
 
-            if (! NT_SUCCESS(status))
-                NtClose(TargetHandleValue);
+            ZwClose(TestHandle);
         }
-
-        if (NT_SUCCESS(status) && (Options & DUPLICATE_CLOSE_SOURCE)) {
-
-            NtClose(TargetHandleValue);
-
-            status = NtDuplicateObject(
-                SourceProcessHandle, SourceHandle,
-                TargetProcessHandle, &TargetHandleValue,
-                DesiredAccess, HandleAttributes, Options);
-        }
-
-        *TargetHandle = NULL;
-        if (NT_SUCCESS(status))
-            *TargetHandle = TargetHandleValue;
 
     } else
         status = STATUS_INVALID_HANDLE;
+
+    //
+    // if all checks were passed duplicate the handle
+    //
+
+    if (NT_SUCCESS(status)) {
+
+        status = NtDuplicateObject(
+            SourceProcessHandle, SourceHandle,
+            TargetProcessHandle, TargetHandle,
+            DesiredAccess, HandleAttributes, Options);
+    }
 
     //
     // end exception block and close OtherProcessHandle
@@ -1216,7 +1205,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Ipc_CheckObjectName(HANDLE handle)
+_FX NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode)
 {
     NTSTATUS status;
     OBJECT_TYPE *object;
@@ -1224,7 +1213,7 @@ _FX NTSTATUS Ipc_CheckObjectName(HANDLE handle)
     WCHAR *TypeBuffer;
 
     status = ObReferenceObjectByHandle(
-                    handle, 0, NULL, UserMode, &object, NULL);
+                    handle, 0, NULL, mode, &object, NULL);
 
     if (! NT_SUCCESS(status))
         return status;
@@ -1646,11 +1635,6 @@ _FX NTSTATUS Ipc_Api_QuerySymbolicLink(PROCESS *proc, ULONG64 *parms)
 
 _FX void Ipc_Unload(void)
 {
-    int i;
-
-    for (i = 0; i < NUM_DYNAMIC_PORTS; i++)
-    {
-        if (Ipc_Dynamic_Ports[i].pPortLock)
-            Mem_FreeLockResource(&Ipc_Dynamic_Ports[i].pPortLock);
-    }
+    if (Ipc_Dynamic_Ports.pPortLock)
+        Mem_FreeLockResource(&Ipc_Dynamic_Ports.pPortLock);
 }

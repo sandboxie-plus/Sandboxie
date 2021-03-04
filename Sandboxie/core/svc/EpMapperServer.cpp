@@ -75,35 +75,44 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
     const WCHAR* wstrWPAD = L"WinHttpAutoProxySvc";
     //const WCHAR* wstrBT = L"bthserv";
     //const WCHAR* wstrSSDP = L"ssdpsrv";
-    RPC_IF_ID ifidGCS = { {0x88abcbc3, 0x34EA, 0x76AE, { 0x82, 0x15, 0x76, 0x75, 0x20, 0x65, 0x5A, 0x23 }}, 0, 0 };
-    RPC_IF_ID ifidSmartCard = { {0xC6B5235A, 0xE413, 0x481D, { 0x9A, 0xC8, 0x31, 0x68, 0x1B, 0x1F, 0xAA, 0xF5 }}, 1, 1 };
-    RPC_IF_ID ifidBluetooth = { {0x2ACB9D68, 0xB434, 0x4B3E, { 0xB9, 0x66, 0xE0, 0x6B, 0x4B, 0x3A, 0x84, 0xCB }}, 1, 0 }; 
-    RPC_IF_ID ifidSSDP = { {0x4B112204, 0x0E19, 0x11D3, { 0xB4, 0x2B, 0x00, 0x00, 0xF8, 0x1F, 0xEB, 0x9F }}, 1, 0 };
+    RPC_IF_ID ifidGCS       = { {0x88abcbc3, 0x34EA, 0x76AE, { 0x82, 0x15, 0x76, 0x75, 0x20, 0x65, 0x5A, 0x23 }}, 0, 0 };   // {88ABCBC3-34EA-76AE-8215-767520655A23}
+    RPC_IF_ID ifidSmartCard = { {0xC6B5235A, 0xE413, 0x481D, { 0x9A, 0xC8, 0x31, 0x68, 0x1B, 0x1F, 0xAA, 0xF5 }}, 1, 1 };   // {C6B5235A-E413-481D-9AC8-31681B1FAAF5}
+    RPC_IF_ID ifidBluetooth = { {0x2ACB9D68, 0xB434, 0x4B3E, { 0xB9, 0x66, 0xE0, 0x6B, 0x4B, 0x3A, 0x84, 0xCB }}, 1, 0 };   // {2ACB9D68-B434-4B3E-B966-E06B4B3A84CB}
+    RPC_IF_ID ifidSSDP      = { {0x4B112204, 0x0E19, 0x11D3, { 0xB4, 0x2B, 0x00, 0x00, 0xF8, 0x1F, 0xEB, 0x9F }}, 1, 0 };   // {4B112204-0E19-11D3-B42B-0000F81FEB9F}
 
     RPC_IF_ID ifidRequest;
     const WCHAR* pwszServiceName = NULL;
-    switch (req->portType)
-    {
-    case SPOOLER_PORT:              if (SbieApi_QueryConfBool(boxname, L"ClosePrintSpooler", FALSE)) return SHORT_REPLY(E_ACCESSDENIED);
-                                    pwszServiceName = wstrSpooler; break;
 
-    case WPAD_PORT:                 pwszServiceName = wstrWPAD; break;
-
-    case BT_PORT:                   if (!SbieApi_QueryConfBool(boxname, L"OpenBluetooth", FALSE)) return SHORT_REPLY(E_ACCESSDENIED);
-                                    //pwszServiceName = wstrBT; break;
-                                    memcpy(&ifidRequest, &ifidBluetooth, sizeof(RPC_IF_ID)); break;
-
-    case SSDP_PORT:                 if (!SbieApi_QueryConfBool(boxname, L"OpenUPnP", FALSE)) return SHORT_REPLY(E_ACCESSDENIED);
-                                    //pwszServiceName = wstrSSDP; break;
-                                    memcpy(&ifidRequest, &ifidSSDP, sizeof(RPC_IF_ID)); break;
-
-    case GAME_CONFIG_STORE_PORT:    memcpy(&ifidRequest, &ifidGCS, sizeof(RPC_IF_ID)); break;
-
-    case SMART_CARD_PORT:           if (!SbieApi_QueryConfBool(boxname, L"OpenSmartCard", TRUE)) return SHORT_REPLY(E_ACCESSDENIED);
-                                    memcpy(&ifidRequest, &ifidSmartCard, sizeof(RPC_IF_ID)); break;
-
-    default:                        return SHORT_REPLY(E_INVALIDARG);
+    if (_wcsicmp(req->wszPortId, SPOOLER_PORT_ID) == 0) {
+        if (SbieApi_QueryConfBool(boxname, L"ClosePrintSpooler", FALSE)) 
+            return SHORT_REPLY(E_ACCESSDENIED);
+        pwszServiceName = wstrSpooler;
     }
+    else if (_wcsicmp(req->wszPortId, WPAD_PORT_ID) == 0) {
+        pwszServiceName = wstrWPAD;
+    }
+    else if (_wcsicmp(req->wszPortId, BT_PORT_ID) == 0) {
+        if (!SbieApi_QueryConfBool(boxname, L"OpenBluetooth", FALSE)) 
+            return SHORT_REPLY(E_ACCESSDENIED);
+        //pwszServiceName = wstrBT;
+        memcpy(&ifidRequest, &ifidBluetooth, sizeof(RPC_IF_ID)); 
+    }
+    else if (_wcsicmp(req->wszPortId, SSDP_PORT_ID) == 0) {
+        if (!SbieApi_QueryConfBool(boxname, L"OpenUPnP", FALSE)) 
+            return SHORT_REPLY(E_ACCESSDENIED);
+        //pwszServiceName = wstrSSDP;
+        memcpy(&ifidRequest, &ifidSSDP, sizeof(RPC_IF_ID));
+    }
+    else if (_wcsicmp(req->wszPortId, GAME_CONFIG_STORE_PORT_ID) == 0) {
+        memcpy(&ifidRequest, &ifidGCS, sizeof(RPC_IF_ID));
+    }
+    else if (_wcsicmp(req->wszPortId, SMART_CARD_PORT_ID) == 0) {
+        if (!SbieApi_QueryConfBool(boxname, L"OpenSmartCard", TRUE)) 
+            return SHORT_REPLY(E_ACCESSDENIED);
+        memcpy(&ifidRequest, &ifidSmartCard, sizeof(RPC_IF_ID));
+    }
+    else 
+        return SHORT_REPLY(E_INVALIDARG);
 
     EPMAPPER_GET_PORT_NAME_RPL *rpl = (EPMAPPER_GET_PORT_NAME_RPL *)LONG_REPLY(sizeof(EPMAPPER_GET_PORT_NAME_RPL));
     if (rpl == NULL)
@@ -196,11 +205,11 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
 
         // Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
         // Param 2 is the process PID for which to open the port, can be 0 when port is special
-        // Param 3 is the port type/identifier, can be -1 indicating non special port
+        // Param 3 is the port type/identifier
         rpl->h.status = SbieApi_CallThree(API_OPEN_DYNAMIC_PORT,
             (ULONG_PTR)rpl->wszPortName,
             (ULONG_PTR)0, 
-            (ULONG_PTR)req->portType);
+            (ULONG_PTR)req->wszPortId);
     }
 
     return (MSG_HEADER *)rpl;

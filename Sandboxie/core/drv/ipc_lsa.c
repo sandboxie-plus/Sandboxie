@@ -330,7 +330,7 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg)
 
     if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
 
-        USHORT mon_type = MONITOR_IPC;
+        ULONG mon_type = MONITOR_IPC;
 
         if (filter && (proc->ipc_trace & TRACE_DENY))
             mon_type |= MONITOR_DENY;
@@ -341,9 +341,8 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg)
 
         if (mon_type) {
             WCHAR msg_str[24];
-            swprintf(msg_str, L" Msg: %02X", (ULONG)uMsg);
-            const WCHAR* strings[3] = { L"\\RPC Control\\LSARPC_ENDPOINT", msg_str, NULL };
-            Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            swprintf(msg_str, L"Msg: %02X", (ULONG)uMsg);
+            Log_Debug_Msg(mon_type, L"\\RPC Control\\LSARPC_ENDPOINT", msg_str);
         }
     }
 

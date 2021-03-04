@@ -7,7 +7,7 @@
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
-#include "Models/ResMonModel.h"
+#include "Models/TraceModel.h"
 //#include "Models/ApiMonModel.h"
 #include <QTranslator>
 #include "Windows/PopUpWindow.h"
@@ -19,9 +19,9 @@
 #include "SbiePlusAPI.h"
 
 class CSbieView;
-//class CApiLog;
 class CBoxBorder;
 class CSbieTemplates;
+class CTraceView;
 
 class CSandMan : public QMainWindow
 {
@@ -66,8 +66,6 @@ protected:
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplates*		m_SbieTemplates;
-
-	//CApiLog*			m_ApiLog;
 	
 	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
 
@@ -129,7 +127,6 @@ private slots:
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
-	//void				OnSetLogging();
 
 	void				OnExit();
 	void				OnHelp();
@@ -166,10 +163,7 @@ private:
 	QTabWidget*			m_pLogTabs;
 
 	CPanelWidgetEx*		m_pMessageLog;
-	CPanelViewEx*		m_pResourceLog;
-	CResMonModel*		m_pResMonModel;
-	//CPanelViewEx*		m_pApiCallLog;
-	//CApiMonModel*		m_pApiMonModel;
+	CTraceView*			m_pTraceView;
 
 
 	QMenu*				m_pMenuFile;
@@ -202,7 +196,6 @@ private:
 	QAction*			m_pCleanUpProcesses;
 	QAction*			m_pCleanUpMsgLog;
 	QAction*			m_pCleanUpTrace;
-	//QAction*			m_pCleanUpApiLog;
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
 
@@ -212,7 +205,6 @@ private:
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
-	//QAction*			m_pEnableLogging;
 
 	QMenu*				m_pMenuHelp;
 	QAction*			m_pSupport;

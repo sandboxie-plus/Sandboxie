@@ -203,26 +203,26 @@ LONG SbieApi_MonitorControl(
 
 SBIEAPI_EXPORT
     LONG SbieApi_MonitorPut(
-    USHORT Type,
+    ULONG Type,
     const WCHAR *Name);
 
 SBIEAPI_EXPORT
 LONG SbieApi_MonitorPut2(
-    USHORT Type,
+    ULONG Type,
     const WCHAR *Name,
     BOOLEAN bCheckObjectExists);
 
-SBIEAPI_EXPORT
-LONG SbieApi_MonitorGet(
-    USHORT *Type,
-    WCHAR *Name);                   // WCHAR [256]
+//SBIEAPI_EXPORT
+//LONG SbieApi_MonitorGet(
+//    ULONG *Type,
+//    WCHAR *Name);                   // WCHAR [256]
 
 SBIEAPI_EXPORT
 LONG SbieApi_MonitorGetEx(
 	ULONG *SeqNum,
-	USHORT *Type,
-	ULONG64 *Pid,
-    ULONG64 *Tid,
+	ULONG *Type,
+    ULONG *Pid,
+    ULONG *Tid,
 	WCHAR *Name);                   // WCHAR [256]
 
 

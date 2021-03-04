@@ -493,7 +493,41 @@ BOOL my_QueryServiceStatusEx(
             // expect the service to NOT be stopped or stop-pending.
             // without this, MSI server gets CO_E_WRONG_SERVER_IDENTITY.
 
-            buf->dwProcessId = FindProcessId(_msiexec, TRUE);
+            //buf->dwProcessId = FindProcessId(_msiexec, TRUE);
+
+            WCHAR keyname[128];
+            wcscpy(keyname, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\");
+            wcscat(keyname, L"MSIServer");
+
+            UNICODE_STRING objname;
+            RtlInitUnicodeString(&objname, keyname);
+
+            HANDLE hkey;
+            OBJECT_ATTRIBUTES objattrs;
+            InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+            if (NT_SUCCESS(NtOpenKey(&hkey, KEY_QUERY_VALUE, &objattrs))) {
+
+                NTSTATUS status;
+                ULONG len;
+                UNICODE_STRING uni;
+                union {
+                    KEY_VALUE_PARTIAL_INFORMATION info;
+                    WCHAR info_space[256];
+                } u;
+
+                RtlInitUnicodeString(&uni, SBIE L"_ProcessId");
+                status = NtQueryValueKey(hkey, &uni, KeyValuePartialInformation, &u.info, sizeof(u), &len);
+
+                if (NT_SUCCESS(status) && u.info.Type == REG_DWORD && u.info.DataLength == 4) {
+
+                    ULONG pid;
+                    pid = *(ULONG*)u.info.Data;
+
+                    buf->dwProcessId = pid;
+                }
+
+                NtClose(hkey);
+            }
 
         }
         else if (hService == SC_HANDLE_EVENTSYSTEM) {

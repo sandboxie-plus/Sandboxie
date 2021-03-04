@@ -1326,7 +1326,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
                 proc->pool, idProcess, &nbuf, &nlen, &nptr);
             if (nbuf) {
 
-                USHORT mon_type = MONITOR_WINCLASS;
+                ULONG mon_type = MONITOR_WINCLASS;
                 if (NT_SUCCESS(status))
                     mon_type |= MONITOR_OPEN;
                 else

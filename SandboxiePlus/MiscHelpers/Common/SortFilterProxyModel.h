@@ -83,12 +83,12 @@ public slots:
 	void SetFilter(const QRegExp& Exp, bool bHighLight = false, int Col = -1) // -1 = any
 	{
 		QModelIndex idx;
-		if (m_pView) idx = m_pView->currentIndex();
+		//if (m_pView) idx = m_pView->currentIndex();
 		m_iColumn = Col;
 		m_bHighLight = bHighLight;
 		setFilterKeyColumn(Col); 
 		setFilterRegExp(Exp);
-		if (m_pView) m_pView->setCurrentIndex(idx);
+		//if (m_pView) m_pView->setCurrentIndex(idx);
 		if (m_bHighLight)
 			emit layoutChanged();
 	}

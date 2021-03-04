@@ -190,6 +190,7 @@ void CSandBoxPlus::SetLogApi(bool bEnable)
 		DelValue("InjectDll", "\\LogAPI\\logapi32.dll");
 		DelValue("InjectDll64", "\\LogAPI\\logapi64.dll");
 	}
+	m_bLogApiFound = bEnable;
 }
 
 void CSandBoxPlus::SetINetBlock(bool bEnable)

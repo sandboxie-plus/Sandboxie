@@ -36,6 +36,7 @@ static ULONG UserEnv_GetAppliedGPOList(
     ULONG dwFlags, const WCHAR *pMachineName, PSID pSidUser,
     GUID *pGuidExtension, void *ppGPOList);
 
+static NTSTATUS UserEnv_RtlGetVersion(LPOSVERSIONINFOEXW lpVersionInfo);
 static BOOL UserEnv_GetVersionExW(LPOSVERSIONINFOEXW lpVersionInfo);
 static BOOL UserEnv_GetVersionExA(LPOSVERSIONINFOEXA lpVersionInfo);
 
@@ -50,8 +51,10 @@ typedef ULONG (*P_GetAppliedGPOList)(
     ULONG dwFlags, const WCHAR *pMachineName, PSID pSidUser,
     GUID *pGuidExtension, void *ppGPOList);
 
+typedef NTSTATUS(*P_RtlGetVersion)(LPOSVERSIONINFOEXW);
 typedef BOOL (*P_GetVersionExW)(LPOSVERSIONINFOEXW lpVersionInfo);
 typedef BOOL (*P_GetVersionExA)(LPOSVERSIONINFOEXA lpVersionInfo);
+
 
 //---------------------------------------------------------------------------
 
@@ -59,8 +62,42 @@ typedef BOOL (*P_GetVersionExA)(LPOSVERSIONINFOEXA lpVersionInfo);
 static P_RegisterGPNotification     __sys_RegisterGPNotification    = NULL;
 static P_UnregisterGPNotification   __sys_UnregisterGPNotification  = NULL;
 static P_GetAppliedGPOList          __sys_GetAppliedGPOList         = NULL;
+
+static P_RtlGetVersion              __sys_RtlGetVersion = NULL;
 static P_GetVersionExW              __sys_GetVersionExW             = NULL;
 static P_GetVersionExA              __sys_GetVersionExA             = NULL;
+
+static DWORD UserEnv_dwBuildNumber = 0;
+
+//---------------------------------------------------------------------------
+// UserEnv_Init
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN UserEnv_InitVer(HMODULE module)
+{
+    void* RtlGetVersion;
+    void* GetVersionExW;
+    void* GetVersionExA;
+
+    WCHAR str[32];
+    NTSTATUS status = Config_GetSettingsForImageName("OverrideOsBuild", str, sizeof(str), NULL);
+    if (NT_SUCCESS(status))
+        UserEnv_dwBuildNumber = _wtoi(str);
+
+    if (UserEnv_dwBuildNumber == 0 && Dll_OsBuild < 9600)
+        return TRUE; // don't hook if not needed or its windows 8 or earlier
+
+    
+    RtlGetVersion = GetProcAddress(GetModuleHandleW(L"ntdll"), "RtlGetVersion");
+    GetVersionExW = (P_GetVersionExW)GetProcAddress(module, "GetVersionExW");
+    GetVersionExA = (P_GetVersionExA)GetProcAddress(module, "GetVersionExA");
+    SBIEDLL_HOOK(UserEnv_, RtlGetVersion);
+    SBIEDLL_HOOK(UserEnv_, GetVersionExW);
+    SBIEDLL_HOOK(UserEnv_, GetVersionExA);
+
+    return TRUE;
+}
 
 
 //---------------------------------------------------------------------------
@@ -75,8 +112,6 @@ _FX BOOLEAN UserEnv_Init(HMODULE module)
     void *GetAppliedGPOList;
 
     if (module == Dll_KernelBase) {
-        void *GetVersionExW;
-        void *GetVersionExA;
 
         //
         // on Windows 8.1, UserEnv!GetAppliedGPOList calls
@@ -87,11 +122,6 @@ _FX BOOLEAN UserEnv_Init(HMODULE module)
             GetProcAddress(module, "GetAppliedGPOListInternalW");
 
         SBIEDLL_HOOK(UserEnv_,GetAppliedGPOList);
-
-        GetVersionExW = (P_GetVersionExW) GetProcAddress(module, "GetVersionExW");
-        GetVersionExA = (P_GetVersionExA) GetProcAddress(module, "GetVersionExA");
-        SBIEDLL_HOOK(UserEnv_,GetVersionExW);
-        SBIEDLL_HOOK(UserEnv_,GetVersionExA);
 
     } else {
 
@@ -152,18 +182,83 @@ ULONG UserEnv_GetAppliedGPOList(
 }
 
 //---------------------------------------------------------------------------
+// UserEnv_RtlGetVersion
+//---------------------------------------------------------------------------
+
+_FX void UserEnv_MkVersionEx(DWORD* dwBuildNumber, DWORD* dwMajorVersion, DWORD* dwMinorVersion, WORD* wServicePackMajor, WORD* wServicePackMinor)
+{
+    *dwBuildNumber = UserEnv_dwBuildNumber;
+    *wServicePackMajor = 0;
+    *wServicePackMinor = 0;
+
+    if (UserEnv_dwBuildNumber <= 2600) { // xp sp3
+        *dwMajorVersion = 5;
+        *dwMinorVersion = 1;
+        *wServicePackMajor = 3;
+    }
+    else if (UserEnv_dwBuildNumber <= 3790) { // 2003 sp2
+        *dwMajorVersion = 5;
+        *dwMinorVersion = 2;
+        *wServicePackMajor = 2;
+    }
+    else if (UserEnv_dwBuildNumber <= 6000) { // vista
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 0;
+    }
+    else if (UserEnv_dwBuildNumber <= 6001) { // vista sp1
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 0;
+        *wServicePackMajor = 1;
+    }
+    else if (UserEnv_dwBuildNumber <= 6002) { // vista sp2
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 0;
+        *wServicePackMajor = 2;
+    }
+    else if (UserEnv_dwBuildNumber <= 7600) { // 7
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 1;
+    }
+    else if (UserEnv_dwBuildNumber <= 7601) { // 7 sp1
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 1;
+        *wServicePackMajor = 1;
+    }
+    else if (UserEnv_dwBuildNumber <= 9200) { // 8
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 2;
+    }
+    else if (UserEnv_dwBuildNumber <= 9600) { // 8.1
+        *dwMajorVersion = 6;
+        *dwMinorVersion = 3;
+    }
+    else { // windows 10
+        *dwMajorVersion = 10;
+        *dwMinorVersion = 0;
+    }
+}
+
+_FX NTSTATUS UserEnv_RtlGetVersion(LPOSVERSIONINFOEXW lpVersionInfo)
+{
+    NTSTATUS status = __sys_RtlGetVersion(lpVersionInfo);
+    if (UserEnv_dwBuildNumber) {
+        UserEnv_MkVersionEx(&lpVersionInfo->dwBuildNumber,
+            &lpVersionInfo->dwMajorVersion, &lpVersionInfo->dwMinorVersion,
+            &lpVersionInfo->wServicePackMajor, &lpVersionInfo->wServicePackMinor);
+    }
+
+    return status;
+}
+
+//---------------------------------------------------------------------------
 // UserEnv_GetVersionExW
 //---------------------------------------------------------------------------
 
 _FX BOOL UserEnv_GetVersionExW(LPOSVERSIONINFOEXW lpVersionInfo)
 {
     // Get the version from the kernel
-    NTSTATUS (WINAPI *RtlGetVersion)(LPOSVERSIONINFOEXW);
-    *(FARPROC*)&RtlGetVersion = GetProcAddress(GetModuleHandleW(L"ntdll"), "RtlGetVersion");
-
-    if (RtlGetVersion != NULL)
-    {
-        RtlGetVersion(lpVersionInfo);
+    if (__sys_RtlGetVersion != NULL) {
+        __sys_RtlGetVersion(lpVersionInfo);
 
         // RtlGetVersion always returns STATUS_SUCCESS
         return TRUE;
@@ -179,5 +274,12 @@ _FX BOOL UserEnv_GetVersionExA(LPOSVERSIONINFOEXA lpVersionInfo)
     rc = __sys_GetVersionExA(lpVersionInfo);
     lpVersionInfo->dwMajorVersion = GET_PEB_MAJOR_VERSION;
     lpVersionInfo->dwMinorVersion = GET_PEB_MINOR_VERSION;
+
+    if (UserEnv_dwBuildNumber) {
+        UserEnv_MkVersionEx(&lpVersionInfo->dwBuildNumber, 
+            &lpVersionInfo->dwMajorVersion, &lpVersionInfo->dwMinorVersion,
+            &lpVersionInfo->wServicePackMajor, &lpVersionInfo->wServicePackMinor);
+    }
+
     return rc;
 }

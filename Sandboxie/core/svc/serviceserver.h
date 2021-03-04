@@ -59,6 +59,8 @@ private:
 
     static bool CanAccessSCM(HANDLE idProcess);
 
+    static int RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname);
+
     static void ReportError2218(HANDLE idProcess, ULONG errlvl);
 
     static WCHAR *BuildPathForStartExe(

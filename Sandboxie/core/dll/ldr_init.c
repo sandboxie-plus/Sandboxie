@@ -205,11 +205,19 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
 		// starting with \ in that case the DLL is looked for in %SbieHome%
 		//
 
-		if (dllname[0] == L'\\' && wcslen(path) + wcslen(dllname) + 1 < MAX_PATH  * 2)
-		{
-			wmemmove(dllname + wcslen(path), dllname, wcslen(dllname) + 1);
-			wmemcpy(dllname, path, wcslen(path));
-		}
+        if (dllname[0] == L'\\' && wcslen(path) + wcslen(dllname) + 1 < MAX_PATH * 2)
+        {
+            wmemmove(dllname + wcslen(path), dllname, wcslen(dllname) + 1);
+            wmemcpy(dllname, path, wcslen(path));
+        }
+
+        //
+        // For security reasons we don't allow HostInjectDll to use an absolute path
+        // Dll's to be injected into host processes must be located in sbies install dir
+        //
+
+        else if (bHostInject)
+            continue; 
 
 
         //

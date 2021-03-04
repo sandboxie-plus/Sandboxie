@@ -6,7 +6,6 @@
 #include "Views/SbieView.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include <QWinEventNotifier>
-//#include "ApiLog.h"
 #include "./Dialogs/MultiErrorDialog.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "../QSbieAPI/Sandboxie/BoxBorder.h"
@@ -17,7 +16,9 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Windows/OptionsWindow.h"
 #include <QProxyStyle>
-
+#include "../MiscHelpers/Common/TreeItemModel.h"
+#include "../MiscHelpers/Common/ListItemModel.h"
+#include "Views/TraceView.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -121,7 +122,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_SbieTemplates = new CSbieTemplates(theAPI, this);
 
-	//m_ApiLog = NULL;
 
 	m_bConnectPending = false;
 	m_bStopPending = false;
@@ -174,32 +174,8 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
 	//
 
-	// Res Log
-	m_pResMonModel = new CResMonModel();
-	//m_pResMonModel->SetUseIcons(true);
-
-	m_pResourceLog = new CPanelViewEx(m_pResMonModel);
-
-	//m_pResourceLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-
-	m_pResourceLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-
-	m_pLogTabs->addTab(m_pResourceLog, tr("Resource Monitor"));
-	//
-
-	// Api Log
-	//m_pApiMonModel = new CApiMonModel();
-	////m_pApiMonModel->SetUseIcons(true);
-	//
-	//m_pApiCallLog = new CPanelViewEx(m_pApiMonModel);
-	//
-	////m_pApiCallLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-	//
-	//m_pApiCallLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	//
-	//m_pLogTabs->addTab(m_pApiCallLog, tr("Api Call Log"));
-	//m_pApiCallLog->setEnabled(false);
-	//
+	m_pTraceView = new CTraceView(this);
+	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
 
 
 	// Tray
@@ -314,16 +290,6 @@ void CSandMan::LoadState()
 	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
 	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
 	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
-	QByteArray Columns = theConf->GetBlob("MainWindow/ResMonList_Columns");
-	if (!Columns.isEmpty())
-		((QTreeViewEx*)m_pResourceLog->GetView())->OnResetColumns();
-	else
-		((QTreeViewEx*)m_pResourceLog->GetView())->restoreState(Columns);
-	//Columns = theConf->GetBlob("MainWindow/ApiLogList_Columns");
-	//if (!Columns.isEmpty())
-	//	((QTreeViewEx*)m_pApiCallLog->GetView())->OnResetColumns();
-	//else
-	//	((QTreeViewEx*)m_pApiCallLog->GetView())->restoreState(Columns);
 	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
 	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
 	m_pLogTabs->setCurrentIndex(theConf->GetInt("MainWindow/LogTab", 0));
@@ -334,8 +300,6 @@ void CSandMan::StoreState()
 	theConf->SetBlob("MainWindow/Window_Geometry", saveGeometry());
 	//theConf->SetBlob("MainWindow/BoxTree_Columns", m_pBoxTree->saveState());
 	theConf->SetBlob("MainWindow/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
-	theConf->SetBlob("MainWindow/ResMonList_Columns", m_pResourceLog->GetView()->header()->saveState());
-	//theConf->SetBlob("MainWindow/ApiLogList_Columns", m_pApiCallLog->GetView()->header()->saveState());
 	theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
 	theConf->SetBlob("MainWindow/Panel_Splitter", m_pPanelSplitter->saveState());
 	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
@@ -404,8 +368,6 @@ void CSandMan::CreateMenus()
 			m_pCleanUpMenu->addSeparator();
 			m_pCleanUpMsgLog = m_pCleanUpMenu->addAction(tr("Cleanup Message Log"), this, SLOT(OnCleanUp()));
 			m_pCleanUpTrace = m_pCleanUpMenu->addAction(tr("Cleanup Trace Log"), this, SLOT(OnCleanUp()));
-			//m_pCleanUpTrace = m_pCleanUpMenu->addAction(tr("Cleanup Resource Log"), this, SLOT(OnCleanUp()));
-			//m_pCleanUpApiLog = m_pCleanUpMenu->addAction(tr("Cleanup Api Call Log"), this, SLOT(OnCleanUp()));
 
 		m_pKeepTerminated = m_pMenuView->addAction(CSandMan::GetIcon("Keep"), tr("Keep terminated"), this, SLOT(OnSetKeep()));
 		m_pKeepTerminated->setCheckable(true);
@@ -417,11 +379,8 @@ void CSandMan::CreateMenus()
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
 		m_pMenuOptions->addSeparator();
-		m_pEnableMonitoring = m_pMenuOptions->addAction(CSandMan::GetIcon("SetLogging"), tr("Resource Logging"), this, SLOT(OnSetMonitoring()));
+		m_pEnableMonitoring = m_pMenuOptions->addAction(CSandMan::GetIcon("SetLogging"), tr("Trace Logging"), this, SLOT(OnSetMonitoring()));
 		m_pEnableMonitoring->setCheckable(true);
-		m_pMenuOptions->addSeparator();
-		//m_pEnableLogging = m_pMenuOptions->addAction(CSandMan::GetIcon("LogAPI"), tr("API Call Logging"), this, SLOT(OnSetLogging()));
-		//m_pEnableLogging->setCheckable(true);
 		
 
 	m_pMenuHelp = menuBar()->addMenu(tr("&Help"));
@@ -464,7 +423,6 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEnableMonitoring);
-	//m_pToolBar->addAction(m_pEnableLogging);
 	m_pToolBar->addSeparator();
 	
 
@@ -635,7 +593,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 
 		bool bIsMonitoring = theAPI->IsMonitoring();
-		m_pResourceLog->setEnabled(bIsMonitoring);
+		m_pTraceView->setEnabled(bIsMonitoring);
 		m_pEnableMonitoring->setChecked(bIsMonitoring);
 	}
 
@@ -661,6 +619,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	theAPI->UpdateWindowMap();
 
 	m_pBoxView->Refresh();
+	m_pTraceView->Refresh();
 
 	OnSelectionChanged();
 
@@ -760,7 +719,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 void CSandMan::OnSelectionChanged()
 {
-	QList<CBoxedProcessPtr>	Processes = m_pBoxView->GetSelectedProcesses();
+	//QList<CBoxedProcessPtr>	Processes = m_pBoxView->GetSelectedProcesses();
 	/*if (Processes.isEmpty())
 	{
 		QList<CSandBoxPtr>Boxes = m_pBoxView->GetSelectedBoxes();
@@ -771,15 +730,6 @@ void CSandMan::OnSelectionChanged()
 	//QSet<quint64> Pids;
 	//foreach(const CBoxedProcessPtr& pProcess, Processes)
 	//	Pids.insert(pProcess->GetProcessId());
-
-	QList<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
-	//m_pResMonModel->Sync(ResourceLog, Pids);
-	m_pResMonModel->Sync(ResourceLog);
-
-	//if (m_ApiLog) {
-	//	QList<CApiLogEntryPtr> ApiCallLog = m_ApiLog->GetApiLog();
-	//	m_pApiMonModel->Sync(ApiCallLog, Pids);
-	//}
 }
 
 void CSandMan::OnStatusChanged()
@@ -864,7 +814,6 @@ void CSandMan::OnStatusChanged()
 	m_pEditIni->setEnabled(isConnected);
 	m_pReloadIni->setEnabled(isConnected);
 	m_pEnableMonitoring->setEnabled(isConnected);
-	//m_pEnableLogging->setEnabled(isConnected);
 }
 
 void CSandMan::OnMenuHover(QAction* action)
@@ -1286,10 +1235,7 @@ void CSandMan::OnCleanUp()
 		m_pMessageLog->GetTree()->clear();
 	
 	if (sender() == m_pCleanUpTrace || sender() == m_pCleanUpButton)
-		theAPI->ClearTrace();
-	
-	//if (sender() == m_pCleanUpApiLog || sender() == m_pCleanUpButton)
-	//	if(m_ApiLog) m_ApiLog->ClearApiLog();
+		m_pTraceView->Clear();
 	
 	if (sender() == m_pCleanUpProcesses || sender() == m_pCleanUpButton)
 		theAPI->UpdateProcesses(false);
@@ -1345,7 +1291,6 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/CheckForUpdates", 2);
 
 		theConf->SetValue("Options/NoEditInfo", true);
-		//theConf->SetValue("Options/ApiLogInfo", true);
 
 		theConf->SetValue("Options/BoxedExplorerInfo", true);
 		theConf->SetValue("Options/ExplorerInfo", true);
@@ -1422,43 +1367,8 @@ void CSandMan::OnSetMonitoring()
 	if(m_pEnableMonitoring->isChecked() && !m_pToolBar->isVisible())
 		m_pLogTabs->show();
 
-	m_pResourceLog->setEnabled(m_pEnableMonitoring->isChecked());
+	m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
 }
-
-//void CSandMan::OnSetLogging()
-//{
-//	if (m_pEnableLogging->isChecked())
-//	{
-//		if (theConf->GetBool("Options/ApiLogInfo", true))
-//		{
-//			QString Message = tr("To use API logging you must first set up the LogApiDll from https://github.com/sandboxie-plus/LogApiDll with one or more sandboxes.\n"
-//				"Please download the latest release and set it up with the Sandboxie.ini as instructed in the README.md of the project.");
-//
-//			bool State = false;
-//			CCheckableMessageBox::question(this, "Sandboxie-Plus", Message
-//				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
-//
-//			if (State)
-//				theConf->SetValue("Options/ApiLogInfo", false);
-//		}
-//
-//		if (!m_pToolBar->isVisible())
-//			m_pLogTabs->show();
-//
-//		if (!m_ApiLog) {
-//			m_ApiLog = new CApiLog();
-//			//m_pApiCallLog->setEnabled(true);
-//		}
-//	}
-//	else
-//	{
-//		if (m_ApiLog) {
-//			//m_pApiCallLog->setEnabled(false);
-//			m_ApiLog->deleteLater();
-//			m_ApiLog = NULL;
-//		}
-//	}
-//}
 
 void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)
 {

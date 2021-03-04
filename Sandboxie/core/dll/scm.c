@@ -336,9 +336,6 @@ static P_CloseEventLog          __sys_CloseEventLog             = NULL;
 static const WCHAR *Scm_ServicesKeyPath =
     L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\";
 
-static const WCHAR *_MsiServerInUseEventName =
-    SBIE L"_WindowsInstallerInUse";
-
 static const WCHAR *Scm_MsiServer     = L"MSIServer";
        const WCHAR *Scm_CryptSvc      = L"cryptsvc";
 
@@ -394,6 +391,7 @@ static const WCHAR *_TrustedInstaller = L"TrustedInstaller";
 
 
 #include "scm_query.c"
+#include "scm_msi.c"
 #include "scm_create.c"
 #include "scm_event.c"
 #include "scm_notify.c"

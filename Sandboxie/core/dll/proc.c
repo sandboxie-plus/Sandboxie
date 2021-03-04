@@ -970,6 +970,12 @@ finish:
         TlsData->proc_command_line = NULL;
     }
 
+    {
+        WCHAR msg[512];
+        Sbie_snwprintf(msg, 512, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
+        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, msg, FALSE);
+    }
+
     SetLastError(err);
     return ok;
 }
@@ -1395,6 +1401,12 @@ finish:
     if (TlsData->proc_command_line) {
         Dll_Free(TlsData->proc_command_line);
         TlsData->proc_command_line = NULL;
+    }
+
+    {
+        WCHAR msg[512];
+        Sbie_snwprintf(msg, 512, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
+        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, msg, FALSE);
     }
 
     SetLastError(err);

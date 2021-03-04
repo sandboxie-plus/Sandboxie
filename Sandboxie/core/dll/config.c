@@ -39,15 +39,6 @@
 extern POOL* Dll_Pool;
 extern POOL* Dll_PoolTemp;
 
-static BOOLEAN Config_MatchImageGroup(
-    const WCHAR* group, ULONG group_len, const WCHAR* test_str,
-    ULONG depth);
-
-static BOOLEAN Config_MatchImage(
-    const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
-    ULONG depth);
-
-
 //---------------------------------------------------------------------------
 // Config_MatchImage
 //---------------------------------------------------------------------------
@@ -210,7 +201,7 @@ _FX BOOLEAN Config_MatchImageGroup(
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value, ULONG* pMode)
+_FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode)
 {
     //
     // if the setting indicates an image name followed by a comma,
@@ -233,15 +224,19 @@ _FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value, ULONG* pMode)
         else
             inv = FALSE;
 
-        if (pMode) *pMode = inv ? 1 : 0; // 1 - match by negation, 0 - exact match
-
         ULONG len = (ULONG)(tmp - value);
         if (len) {
-            match = Config_MatchImage(value, len, Dll_ImageName, 1);
+            match = Config_MatchImage(value, len, ImageName, 1);
             if (inv)
                 match = !match;
             if (!match)
                 tmp = NULL;
+            else if (pMode) {
+                if (len == 1 && *value == L'*')
+                    *pMode = 2; // 2 - match all 
+                else
+                    *pMode = inv ? 1 : 0; // 1 - match by negation, 0 - exact match
+            }
         }
 
         value = tmp ? tmp + 1 : NULL;
@@ -292,7 +287,7 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
             break;
         ++index;
 
-        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, NULL);
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, NULL);
         if (value)
         {
             pat = Pattern_Create(Dll_Pool, value, TRUE);
@@ -326,7 +321,7 @@ _FX NTSTATUS Config_GetSettingsForImageName(
         ++index;
 
         ULONG mode = -1;
-        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, &mode);
+        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &mode);
         if (!found_value || mode > found_mode)
             continue;
         //if (found_value) {
@@ -514,7 +509,7 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 //---------------------------------------------------------------------------
 
 
-SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+SBIEDLL_EXPORT BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
 {
     WCHAR buf[128];
     ULONG index = 0;
@@ -538,4 +533,80 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, co
             break;
     }
     return not_found;
+}
+
+
+//---------------------------------------------------------------------------
+// Config_GetTagValue
+//---------------------------------------------------------------------------
+
+
+WCHAR* Config_GetTagValue(WCHAR* str, WCHAR** value, ULONG* len, WCHAR sep)
+{
+    *value = NULL;
+    *len = 0;
+
+    // skip whitespace
+    //while (*str == L' ' || *str == L'\t') str++;
+
+    WCHAR* tmp;
+    BOOLEAN alt;
+    // check if tag contains a string in quotations
+    if ((alt = (*str == L'\"')) || (*str == L'\''))
+    {
+        WCHAR* end = wcschr(str + 1, alt ? L'\"' : L'\'');
+        if (!end)
+            return NULL; // error invalid string
+        *value = str + 1;
+        *len = (ULONG)(end - *value);
+        end++;
+        tmp = wcschr(end, sep);
+        if (!tmp) tmp = wcschr(end, L'\0');
+    }
+    // else just look for separator
+    else
+    {
+        tmp = wcschr(str, sep);
+        if (!tmp) tmp = wcschr(str, L'\0');
+        *value = str;
+        *len = (ULONG)(tmp - *value);
+    }
+
+    if (tmp && *tmp) tmp++; // skip separator
+    return tmp;
+}
+
+
+//---------------------------------------------------------------------------
+// Config_FindTagValue
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Config_FindTagValue(WCHAR* string, const WCHAR* tag_name, WCHAR* value, ULONG value_size, const WCHAR* deftext, WCHAR sep)
+{
+    ULONG tag_len = wcslen(tag_name);
+    WCHAR* temp = string;
+    WCHAR* tmp;
+    WCHAR* name;
+    ULONG len;
+    WCHAR* found_value;
+    ULONG found_len;
+    while(*temp)
+    {
+        tmp = wcschr(temp, L'=');
+        if (!tmp)
+            break;
+        name = temp;
+        len = (ULONG)(tmp - temp);
+
+        temp = Config_GetTagValue(tmp + 1, &found_value, &found_len, sep);
+     
+        if (tag_len == len && _wcsnicmp(tag_name, name, len) == 0)
+        {
+            wcsncpy_s(value, value_size / sizeof(WCHAR), found_value, found_len);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }

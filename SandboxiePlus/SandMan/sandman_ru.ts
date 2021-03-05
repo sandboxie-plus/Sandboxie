@@ -416,46 +416,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
 Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 имеет право на быстрое восстановление с %2.
+        <translation>%1 может быть быстро восстановлен из %2.
 Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1239,10 +1219,6 @@ Full path: %4</source>
         <translation>Пожалуйста, введите новое имя группы</translation>
     </message>
     <message>
-        <source>Enable API Call logging</source>
-        <translation type="vanished">Включить ведение журнала вызовов API</translation>
-    </message>
-    <message>
         <source>[None]</source>
         <translation>[Нет]</translation>
     </message>
@@ -1403,11 +1379,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>Ask for UAC Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>Запросить повышение уровня UAC</translation>
     </message>
     <message>
         <source>Emulate Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Эмуляция прав администратора</translation>
     </message>
 </context>
 <context>
@@ -1626,10 +1602,6 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
         <translation>Включить запрос немедленного восстановления, чтобы иметь возможность восстанавливать файлы сразу после их создания.</translation>
-    </message>
-    <message>
-        <source>General restrictions</source>
-        <translation type="vanished">Общие ограничения</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -2011,10 +1983,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Разрешить диспетчеру печати печатать файлы вне песочницы</translation>
     </message>
     <message>
-        <source>Printing</source>
-        <translation type="vanished">Печать</translation>
-    </message>
-    <message>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
         <translation>Сниять ограничение диспетчера печати, принтеры можно устанавливать вне песочницы</translation>
     </message>
@@ -2043,10 +2011,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Разрешить доступ к смарт-картам</translation>
     </message>
     <message>
-        <source>Lift security restrictions</source>
-        <translation type="vanished">Снять ограничения безопасности</translation>
-    </message>
-    <message>
         <source>Sandbox isolation</source>
         <translation>Изоляция песочницы</translation>
     </message>
@@ -2063,64 +2027,60 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Разрешить доступ к Bluetooth</translation>
     </message>
     <message>
-        <source>Log all SetError&apos;s to Trace log</source>
-        <translation type="vanished">Записывать все SetError в журнал трассировки</translation>
-    </message>
-    <message>
         <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничения повышение уровня</translation>
     </message>
     <message>
         <source>Make applications think thay are running elevated (allows to run installers safely)</source>
-        <translation type="unfinished"></translation>
+        <translation>Заставить приложения думать, что они работают с повышенными правами (позволяет безопасно запускать установщики)</translation>
     </message>
     <message>
         <source>Network restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Сетевые ограничения</translation>
     </message>
     <message>
         <source>(Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Рекомендуемые)</translation>
     </message>
     <message>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечание по безопасности: приложения с повышенными правами, работающие под контролем Sandboxie, с токеном администратора, имеют больше возможностей для обхода изоляции и изменения системы за пределами песочницы.</translation>
     </message>
     <message>
         <source>Raw Disk access</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямой доступ к диску</translation>
     </message>
     <message>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить изолированным приложениям с повышенными правами читать жесткий диск</translation>
     </message>
     <message>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждать, когда приложение открывает дескриптор жесткого диска</translation>
     </message>
     <message>
         <source>Access Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции доступа</translation>
     </message>
     <message>
         <source>Other restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочие ограничения</translation>
     </message>
     <message>
         <source>Printing restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничения печати</translation>
     </message>
     <message>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"></translation>
+        <translation>Трассировка вызовов API (требуется установка logapi в каталог sbie)</translation>
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Записывать все SetError в журнал трассировки (создает много выходных данных)</translation>
     </message>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Трассировка системных вызовов Ntdll (создает много выходных данных)</translation>
     </message>
 </context>
 <context>
@@ -2141,23 +2101,23 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Применить</translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
 </context>
 <context>

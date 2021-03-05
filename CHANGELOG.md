@@ -14,27 +14,27 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.7.2 / 5.49.0] - 2021-03-04
+## [0.7.2 / 5.49.0] - 2021-03-05
 
 ### Added
-- added option to alter reported windows version "OverrideOsBuild=7601" for window s7 sp1
-- the trace log can now be structures like a tree with process es as root items and threads as brnaches
+- added option to alter reported Windows version "OverrideOsBuild=7601" for Windows 7 SP1
+- the trace log can now be structured like a tree with processes as root items and threads as branches
 
 ### Changed
-- SandboxieCrypto how always migrates the CatRoot2 files in order to prevent locking of real files
-- greately improved trace log performance
+- SandboxieCrypto now always migrates the CatRoot2 files in order to prevent locking of real files
+- greatly improved trace log performance
 - MSI Server can now run with the "FakeAdminRights=y" and "DropAdminRights=y" options
--- Special service allowance for the MSI Server can be disabled with "MsiInstallerExemptions=n"
-- Changed SCM access check behavioure non elevated users can now start services with a user token
--- Elevation now is only required to start services with a system token
-- Reworked the trace log mechanism to be more verbose
-- Reworked RPC mechanism to be more flexible
+-- special service allowance for the MSI Server can be disabled with "MsiInstallerExemptions=n"
+- changed SCM access check behaviour; non elevated users can now start services with a user token
+-- elevation is now only required to start services with a system token
+- reworked the trace log mechanism to be more verbose
+- reworked RPC mechanism to be more flexible
 
 ### Fixed
-- fixed issues with some intallers introduced in 5.48.0
-- fixed add user to sandbox in the plus ui
+- fixed issues with some installers introduced in 5.48.0
+- fixed "add user to sandbox" in the Plus UI
 - FIXED SECURITY ISSUE: the HostInjectDll mechanism allowed for local privilege escalation (thanks hg421)
-- classic ui no longer allows to create a sandbox with an invalid or reserved device name
+- Classic UI no longer allows to create a sandbox with an invalid or reserved device name
 
 
 

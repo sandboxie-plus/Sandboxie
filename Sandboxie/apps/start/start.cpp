@@ -927,7 +927,7 @@ int Program_Start(void)
         ExpandEnvironmentStrings(cmdline, expanded, 8192);
 
 		//
-		// If the comman contains a space but no ", try to fix it
+		// If the command contains a space but no ", try to fix it
 		//
 
 		if (wcsstr(expanded, L" ") && !wcsstr(expanded, L"\"") && _waccess(expanded, 0) != -1)

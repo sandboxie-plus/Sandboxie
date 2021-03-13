@@ -16,13 +16,13 @@ Open Source release
 
 
 ## Helpful Contributors
+- DavidBerdik - Author of Sandboxie Website Archive
 - diversenok - Security analysis & PoC's
-- stephtr - CI and Certification
-- TechLord / Team-IRA - Reversing
+- stephtr - CI / Certification
+- TechLord - Team-IRA / Reversing
 - hg421 - Security analysis 
-- typpos - Documentation
-- isaak654 - UI fixes and Templates
-- typpos - UI improvement sugestions
+- typpos - UI suggestions / Documentation / Code reviews
+- isaak654 - UI fixes / Templates / Documentation
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - mpheath - help with inno setup
@@ -37,10 +37,15 @@ Open Source release
 - xorcan - Turkish
 - TragicLifeHu - Chinese Traditional
 
-
 More volunteers welcome ;)
 
-## Support the project
-If you like the tool please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos
+## Documentation
+A github version of the Sandboxie Documentation is maintained at https://davidxanatos.github.io/sandboxie-docs
 
-Or Donating directly via the PayPal button on my website: https://xanasoft.com
+## Sandboxie Forum Archive
+A full archive of the old Sandboxie forum is available at https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums
+
+## Support the project
+If you like the tool, please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos
+
+Or donating directly via the PayPal button on my website: https://xanasoft.com

@@ -592,36 +592,48 @@ Percorso completo: %4</translation>
     </message>
 </context>
 <context>
-    <name>CResMonModel</name>
+    <name>CTraceModel</name>
     <message>
-        <location filename="Models/ResMonModel.cpp" line="101"/>
+        <location filename="Models/TraceModel.cpp" line="101"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="Models/ResMonModel.cpp" line="148"/>
+        <location filename="Models/TraceModel.cpp" line="277"/>
         <source>Process</source>
         <translation>Processo</translation>
     </message>
     <message>
-        <location filename="Models/ResMonModel.cpp" line="149"/>
+        <location filename="Models/TraceModel.cpp" line="278"/>
         <source>Time Stamp</source>
         <translation>Ora di avvio</translation>
     </message>
     <message>
-        <location filename="Models/ResMonModel.cpp" line="150"/>
+        <location filename="Models/TraceModel.cpp" line="279"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="Models/ResMonModel.cpp" line="151"/>
+        <location filename="Models/TraceModel.cpp" line="280"/>
         <source>Status</source>
         <translation>Stato</translation>
     </message>
     <message>
-        <location filename="Models/ResMonModel.cpp" line="152"/>
+        <location filename="Models/TraceModel.cpp" line="281"/>
         <source>Value</source>
         <translation>Valore</translation>
+    </message>
+</context>
+<context>
+    <name>CTraceView</name>
+    <message>
+        <location filename="Views/TraceView.cpp" line="61"/>
+        <location filename="Views/TraceView.cpp" line="140"/>
+        <location filename="Views/TraceView.cpp" line="68"/>
+        <location filename="Views/TraceView.cpp" line="143"/>
+        <location filename="Views/TraceView.cpp" line="185"/>
+        <source>[All]</source>
+        <translation>[Tutti]</translation>
     </message>
 </context>
 <context>
@@ -713,12 +725,12 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="174"/>
         <source>Sbie Messages</source>
-        <translation>Messaggi Sandboxie</translation>
+        <translation>Messaggi di Sandboxie</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="187"/>
-        <source>Resource Monitor</source>
-        <translation>Monitoraggio risorse</translation>
+        <source>Trace Log</source>
+        <translation>Registro di accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="215"/>
@@ -854,17 +866,17 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="403"/>
         <source>Cleanup Processes</source>
-        <translation>Pulisci processi</translation>
+        <translation>Chiudi tutti i processi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="405"/>
         <source>Cleanup Message Log</source>
-        <translation>Pulisci log dei messaggi</translation>
+        <translation>Pulisci registro dei messaggi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Cleanup Trace Log</source>
-        <translation>Pulisci log di monitoraggio</translation>
+        <translation>Pulisci registro di accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -899,8 +911,8 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="420"/>
-        <source>Resource Logging</source>
-        <translation>Attiva Monitoraggio risorse</translation>
+        <source>Trace Logging</source>
+        <translation>Attiva Registro di accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="427"/>
@@ -2493,7 +2505,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1796"/>
         <source>Tracing</source>
-        <translation>Tracciamento</translation>
+        <translation>Tracing</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
@@ -2523,7 +2535,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1865"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation>Registra tutti i SetError nel registro di tracciamento (genera molto output)</translation>
+        <translation>Registra tutti i SetError nel registro di accesso (genera molto output)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1872"/>
@@ -2538,7 +2550,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1892"/>
         <source>Access Tracing</source>
-        <translation>Tracciamento accessi</translation>
+        <translation>Registro di accesso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1912"/>
@@ -2548,7 +2560,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1919"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation>Registra output di debug nel registro di tracciamento</translation>
+        <translation>Registra output di debug nel registro di accesso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
@@ -2560,14 +2572,13 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>Registra tutti gli eventi di accesso visti dal driver nel registro di accesso risorse.
+        <translation>Registra tutti gli eventi di accesso visti dal driver nel registro di accesso.
 
-Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - Tutti gli eventi di accesso
+Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli eventi di accesso
 È possibile personalizzare la registrazione specificando nel file ini:
 &quot;A&quot; - Accessi consentiti
 &quot;D&quot; - Accessi negati
-&quot;I&quot; - Ignora richieste di accesso
-invece di &quot;*&quot;.</translation>
+&quot;I&quot;  - Ignora richieste di accesso al posto di &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1946"/>
@@ -2652,6 +2663,29 @@ invece di &quot;*&quot;.</translation>
     </message>
 </context>
 <context>
+    <name>QPlatformTheme</name>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Applica</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Sì</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;No</translation>
+    </message>
+</context>
+<context>
     <name>RecoveryWindow</name>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
@@ -2717,8 +2751,8 @@ invece di &quot;*&quot;.</translation>
         <translation>Mostra notifiche per messaggi di log rilevanti</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="86"/>
-        <source>Use Dark Theme</source>
+        <location filename="Forms/SettingsWindow.ui" line="210"/>
+        <source>Use Dark Theme (fully applied after a restart)</source>
         <translation>Utilizza tema scuro (richiede riavvio)</translation>
     </message>
     <message>

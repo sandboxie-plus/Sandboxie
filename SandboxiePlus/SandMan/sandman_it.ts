@@ -866,7 +866,8 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="403"/>
         <source>Cleanup Processes</source>
-        <translation>Chiudi tutti i processi</translation>
+        <translatorcomment>Entra in funzione solo se viene attivata l&apos;opzione &apos;Mantieni lo stato terminato dei processi&apos;</translatorcomment>
+        <translation>Rimuovi i processi dallo stato terminato</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="405"/>

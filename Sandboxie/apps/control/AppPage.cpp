@@ -1020,13 +1020,6 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     info.WithLink = FALSE;
     info.WithCreate = FALSE;
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
-    
-    info.ClassName = L"MediaPlayer";
-    info.TitleId = MSG_4391;
-    info.LabelId = MSG_4392;
-    info.WithLink = FALSE;
-    info.WithCreate = FALSE;
-    m_app_pages.AddTail(new CAppPage(&info, BoxName));
 
     info.ClassName = L"Print";
     info.TitleId = MSG_4224;
@@ -1046,6 +1039,13 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     info.TitleId = MSG_4228;
     info.LabelId = MSG_4207;
     info.WithLink = TRUE;
+    info.WithCreate = FALSE;
+    m_app_pages.AddTail(new CAppPage(&info, BoxName));
+    
+    info.ClassName = L"MediaPlayer";
+    info.TitleId = MSG_4393;
+    info.LabelId = MSG_4394;
+    info.WithLink = FALSE;
     info.WithCreate = FALSE;
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
 

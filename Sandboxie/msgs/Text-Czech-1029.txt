@@ -3045,7 +3045,7 @@ Následující změny umožní Webovému prohlížeči běžet v Sandboxu a děl
 .
 
 4323;txt;01
-Přimět %2 spustit se v tomto Sandboxu (lze pouze v registrované verzi)
+Přimět %2 spustit se v tomto Sandboxu
 .
 
 4324;txt;02

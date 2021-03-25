@@ -3297,7 +3297,7 @@ The following exclusions allow Media players running in this sandbox to access f
 .
 
 4395;txt;01
-Allow VLC access to the Photo folder for easier screenshotting.
+Allow VLC direct access to the Photo folder for easier screenshotting.
 .
 
 #----------------------------------------------------------------------------

@@ -3308,7 +3308,6 @@ Allow VLC Media Player access to the VLC AppData folder.
 Allow VLC Media Player access to the Photo folder for easier screenshotting.
 .
 
-
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------

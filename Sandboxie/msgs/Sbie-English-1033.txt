@@ -3297,14 +3297,15 @@ The following exclusions allow Media players running in this sandbox to access f
 .
 
 4395;txt;01
-Force VLC Media Player to run in the Sandbox
+Force VLC Media Player to run in this Sandbox.
 .
 
 4396;txt;01
-Allow VLC Media Player access to the VLC AppData folder
+Allow VLC Media Player access to the VLC AppData folder.
 .
+
 4397;txt;01
-Allow VLC Media Player access to the Photo folder for easier screenshotting
+Allow VLC Media Player access to the Photo folder for easier screenshotting.
 .
 
 

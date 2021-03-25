@@ -3288,6 +3288,18 @@ Email Reader
 The following exclusions allow Email readers running in this sandbox to access mailbox files outside the sandbox.
 .
 
+4393;txt;01
+Force VLC Media Player to run in the Sandbox
+.
+
+4394;txt;01
+Allow VLC Media Player access to the VLC AppData folder
+.
+4395;txt;01
+Allow VLC Media Player access to the photo folder for easier screenshotting
+.
+
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------

@@ -816,7 +816,8 @@ void CThirdPartyDialog::CollectTemplates()
     ini.GetTemplateNames(L"Desktop", names);
     ini.GetTemplateNames(L"Download", names);
     ini.GetTemplateNames(L"Misc", names);
-	ini.GetTemplateNames(L"WebBrowser", names);
+    ini.GetTemplateNames(L"WebBrowser", names);
+    ini.GetTemplateNames(L"MediaPlayer", names);
 
     m_templates.RemoveAll();
     while (! names.IsEmpty()) {

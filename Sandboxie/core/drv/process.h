@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -73,7 +74,7 @@ struct _PROCESS {
     WCHAR  *image_name;
     ULONG   image_name_len;             // in bytes, including NULL
 
-    BOOLEAN image_copy;
+    BOOLEAN image_from_box;
     BOOLEAN image_sbie;
 
     // process creation time and integrity level
@@ -120,6 +121,8 @@ struct _PROCESS {
 
     UCHAR   create_console_flag;
 
+    ULONG call_trace;
+
     // file-related
 
     PERESOURCE file_lock;
@@ -132,6 +135,8 @@ struct _PROCESS {
     ULONG pipe_trace;
     BOOLEAN file_warn_internet;
     BOOLEAN file_warn_direct_access;
+	BOOLEAN AllowInternetAccess;
+    BOOLEAN file_open_devapi_cmapi;
 
     // key-related
 
@@ -151,7 +156,10 @@ struct _PROCESS {
     ULONG ipc_trace;
     BOOLEAN ipc_warn_startrun;
     BOOLEAN ipc_block_password;
-    BOOLEAN m_boolAllowSpoolerPrintToFile;
+    BOOLEAN ipc_open_lsa_endpoint;
+    BOOLEAN ipc_open_sam_endpoint;
+    BOOLEAN ipc_allowSpoolerPrintToFile;
+    BOOLEAN ipc_openPrintSpooler;
 
     // gui-related
 
@@ -347,7 +355,7 @@ void Process_LogMessage(PROCESS *proc, ULONG msgid);
 
 // Track process limit
 
-void Process_TrackProcessLimit(PROCESS *proc);
+//void Process_TrackProcessLimit(PROCESS *proc);
 
 
 // Cancel process through SbieSvc

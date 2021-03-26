@@ -51,7 +51,7 @@ const UCHAR *Gui_TitleSuffixA = TITLE_SUFFIX_A;
 static ULONG Gui_TitleSuffixA_len = 0;
 
 ULONG Gui_BoxNameTitleLen = 0;
-static WCHAR *Gui_BoxNameTitleW = NULL;
+WCHAR *Gui_BoxNameTitleW = NULL;
 static ANSI_STRING Gui_BoxNameTitleA;
 
 

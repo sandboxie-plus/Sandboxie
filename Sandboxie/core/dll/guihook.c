@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -288,7 +289,10 @@ _FX HHOOK Gui_SetWindowsHookEx(
 
     threads = Dll_Alloc((MAX_THREADS + 4) * sizeof(LONG_PTR));
     threads[0] = 0;
-    Gui_EnumWindows(Gui_HookCollectThreads, (LPARAM)threads);
+	if(Gui_OpenAllWinClasses && __sys_EnumWindows)
+		__sys_EnumWindows(Gui_HookCollectThreads, (LPARAM)threads);
+	else
+	    Gui_EnumWindows(Gui_HookCollectThreads, (LPARAM)threads);
 
     ok = FALSE;
     err = 0;
@@ -412,7 +416,7 @@ _FX BOOLEAN Gui_HookThread(GUI_HOOK *ghk, ULONG_PTR idThread)
 
 #ifdef DEBUG_HOOKS
     {   WCHAR msg[256];
-        Sbie_swprintf(msg, L"2 SetWindowsHookEx%c idHook=%d lpfn=%08X hMod=%08X dwThreadId=%d ; hhook=%08X error=%d\n",
+        Sbie_snwprintf(msg, 256, L"2 SetWindowsHookEx%c idHook=%d lpfn=%08X hMod=%08X dwThreadId=%d ; hhook=%08X error=%d\n",
         ghk->IsUnicode ? L'W' : L'A',
         ghk->idHook, ghk->lpfn, ghk->hMod, idThread, thd->hhk, GetLastError());
         OutputDebugString(msg);

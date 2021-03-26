@@ -1,0 +1,40 @@
+<!DOCTYPE DCF>
+<DCF ref="index.html" icon="qtsingleapplication.png" imagedir="../../gif" title="Qt Solutions: Single Application Documentation">
+<section ref="classes.html" title="Classes">
+    <section ref="qtsingleapplication.html" title="QtSingleApplication Class Reference">
+        <keyword ref="qtsingleapplication.html">QtSingleApplication</keyword>
+        <keyword ref="qtsingleapplication.html#activateWindow">activateWindow</keyword>
+        <keyword ref="qtsingleapplication.html#activationWindow">activationWindow</keyword>
+        <keyword ref="qtsingleapplication.html#id">id</keyword>
+        <keyword ref="qtsingleapplication.html#isRunning">isRunning</keyword>
+        <keyword ref="qtsingleapplication.html#messageReceived">messageReceived</keyword>
+        <keyword ref="qtsingleapplication.html#sendMessage">sendMessage</keyword>
+        <keyword ref="qtsingleapplication.html#setActivationWindow">setActivationWindow</keyword>
+        <section ref="qtsingleapplication-members.html" title="List of all members"/>
+        <section ref="qtsingleapplication-obsolete.html" title="Obsolete members"/>
+    </section>
+    <section ref="qtsinglecoreapplication.html" title="QtSingleCoreApplication Class Reference">
+        <keyword ref="qtsinglecoreapplication.html">QtSingleCoreApplication</keyword>
+        <keyword ref="qtsinglecoreapplication.html#id">id</keyword>
+        <keyword ref="qtsinglecoreapplication.html#isRunning">isRunning</keyword>
+        <keyword ref="qtsinglecoreapplication.html#messageReceived">messageReceived</keyword>
+        <keyword ref="qtsinglecoreapplication.html#sendMessage">sendMessage</keyword>
+        <section ref="qtsinglecoreapplication-members.html" title="List of all members"/>
+    </section>
+</section>
+<section ref="overviews.html" title="Overviews">
+    <section ref="qtsinglecoreapplication-example-console.html" title="A non-GUI example">
+        <keyword ref="qtsinglecoreapplication-example-console.html">A non-GUI example</keyword>
+    </section>
+    <section ref="qtsingleapplication-example-trivial.html" title="A Trivial Example">
+        <keyword ref="qtsingleapplication-example-trivial.html">A Trivial Example</keyword>
+    </section>
+    <section ref="qtsingleapplication-example-loader.html" title="Loading Documents">
+        <keyword ref="qtsingleapplication-example-loader.html">Loading Documents</keyword>
+    </section>
+    <section ref="index.html" title="Single Application">
+        <keyword ref="index.html">Single Application</keyword>
+    </section>
+</section>
+<section ref="examples.html" title="Tutorial &amp; Examples"/>
+</DCF>

@@ -196,20 +196,7 @@ _FX ULONG FindProcessId(
     return ret_pid;
 }
 
-
-//---------------------------------------------------------------------------
-// Service Control Manager handles
-//---------------------------------------------------------------------------
-
-
-#define SC_HANDLE_MIN           ((SC_HANDLE)0x12345670)
-#define SC_HANDLE_BITS          ((SC_HANDLE)0x12345671)
-#define SC_HANDLE_RPCSS         ((SC_HANDLE)0x12345672)
-#define SC_HANDLE_MSISERVER     ((SC_HANDLE)0x12345673)
-#define SC_HANDLE_EVENTSYSTEM   ((SC_HANDLE)0x12345674)
-#define SC_HANDLE_MAX           ((SC_HANDLE)0x12345679)
-
-#define SC_HANDLE_IS_FAKE(h)    ((h) > SC_HANDLE_MIN && (h) < SC_HANDLE_MAX)
+#include "header.h"
 
 
 //---------------------------------------------------------------------------
@@ -506,7 +493,41 @@ BOOL my_QueryServiceStatusEx(
             // expect the service to NOT be stopped or stop-pending.
             // without this, MSI server gets CO_E_WRONG_SERVER_IDENTITY.
 
-            buf->dwProcessId = FindProcessId(_msiexec, TRUE);
+            //buf->dwProcessId = FindProcessId(_msiexec, TRUE);
+
+            WCHAR keyname[128];
+            wcscpy(keyname, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Services\\");
+            wcscat(keyname, L"MSIServer");
+
+            UNICODE_STRING objname;
+            RtlInitUnicodeString(&objname, keyname);
+
+            HANDLE hkey;
+            OBJECT_ATTRIBUTES objattrs;
+            InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+            if (NT_SUCCESS(NtOpenKey(&hkey, KEY_QUERY_VALUE, &objattrs))) {
+
+                NTSTATUS status;
+                ULONG len;
+                UNICODE_STRING uni;
+                union {
+                    KEY_VALUE_PARTIAL_INFORMATION info;
+                    WCHAR info_space[256];
+                } u;
+
+                RtlInitUnicodeString(&uni, SBIE L"_ProcessId");
+                status = NtQueryValueKey(hkey, &uni, KeyValuePartialInformation, &u.info, sizeof(u), &len);
+
+                if (NT_SUCCESS(status) && u.info.Type == REG_DWORD && u.info.DataLength == 4) {
+
+                    ULONG pid;
+                    pid = *(ULONG*)u.info.Data;
+
+                    buf->dwProcessId = pid;
+                }
+
+                NtClose(hkey);
+            }
 
         }
         else if (hService == SC_HANDLE_EVENTSYSTEM) {

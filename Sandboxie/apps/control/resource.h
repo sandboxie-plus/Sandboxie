@@ -1,20 +1,3 @@
-/*
-* Copyright 2004-2020 Sandboxie Holdings, LLC
-*
-* This program is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by SbieControl.rc
@@ -32,6 +15,7 @@
 #define ID_SANDBOX_RUN_MENU             11
 #define ID_SANDBOX_RUN_EXPLORER         13
 #define ID_SANDBOX_MENU_SIZE            15
+#define ID_BORDER_WIDTH                 1001
 #define ID_SANDBOX_REVEAL               9990
 #define ID_SANDBOX_SET_LAYOUT           9997
 #define ID_SANDBOX_SET_FOLDER           9998
@@ -63,9 +47,11 @@
 #define ID_CONF_RELOAD                  40037
 #define ID_CONF_THIRD_PARTY             40038
 #define ID_CONF_LOCK                    40039
+#define ID_HELP_SUPPORT                 40040
 #define ID_HELP_TOPICS                  40041
 #define ID_HELP_TUTORIAL                40042
 #define ID_HELP_FORUM                   40043
+#define ID_HELP_UPDATE                  40044
 #define ID_HELP_ABOUT                   40045
 #define ID_PROCESS_TERMINATE            40051
 #define ID_PROCESS_SETTINGS             40052
@@ -264,9 +250,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        103
+#define _APS_NEXT_RESOURCE_VALUE        105
 #define _APS_NEXT_COMMAND_VALUE         40013
-#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           103
 #endif
 #endif

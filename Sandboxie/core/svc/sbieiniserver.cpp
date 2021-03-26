@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -65,7 +66,7 @@ MSG_HEADER *SbieIniServer::Handler(void *_this, MSG_HEADER *msg)
     pThis->m_text = NULL;
     pThis->m_text_base = NULL;
     pThis->m_text_max_len = 0;
-    pThis->m_insertbom = FALSE;
+    //pThis->m_insertbom = FALSE;
 
     MSG_HEADER *rpl = pThis->Handler2(msg);
 
@@ -233,7 +234,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
 MSG_HEADER *SbieIniServer::GetVersion(MSG_HEADER *msg)
 {
     WCHAR ver_str[16];
-    wsprintf(ver_str, L"%S", MY_VERSION_STRING);
+    wsprintf(ver_str, L"%S", MY_VERSION_COMPAT);
 
     ULONG ver_len = wcslen(ver_str);
     ULONG rpl_len = sizeof(SBIE_INI_GET_USER_RPL)
@@ -1277,8 +1278,8 @@ ULONG SbieIniServer::CallSetSetting(WCHAR *text, MSG_HEADER *msg)
 
 bool SbieIniServer::AddText(const WCHAR *line)
 {
-    static const WCHAR *_ByteOrderMark = L"ByteOrderMark=";
-    static ULONG _ByteOrderMarkLen = 0;
+    //static const WCHAR *_ByteOrderMark = L"ByteOrderMark=";
+    //static ULONG _ByteOrderMarkLen = 0;
 
     ULONG line_len = wcslen(line);
 
@@ -1308,13 +1309,13 @@ bool SbieIniServer::AddText(const WCHAR *line)
     m_text[2] = L'\0';
     m_text += 2;
 
-    if (! _ByteOrderMarkLen)
-        _ByteOrderMarkLen = wcslen(_ByteOrderMark);
-    if (_wcsnicmp(line, _ByteOrderMark, _ByteOrderMarkLen) == 0) {
-        const WCHAR ch = line[_ByteOrderMarkLen];
-        if (ch == L'y' || ch == L'Y')
-            m_insertbom = TRUE;
-    }
+    //if (! _ByteOrderMarkLen)
+    //    _ByteOrderMarkLen = wcslen(_ByteOrderMark);
+    //if (_wcsnicmp(line, _ByteOrderMark, _ByteOrderMarkLen) == 0) {
+    //    const WCHAR ch = line[_ByteOrderMarkLen];
+    //    if (ch == L'y' || ch == L'Y')
+    //        m_insertbom = TRUE;
+    //}
 
     return true;
 }
@@ -1365,7 +1366,8 @@ bool SbieIniServer::AddCallerText(WCHAR *setting, WCHAR *value)
 ULONG SbieIniServer::RefreshConf()
 {
     WCHAR *IniPath, *TmpPath;
-    if (! GetIniPath(&IniPath, &TmpPath))
+    BOOLEAN IsUTF8 = FALSE;
+    if (! GetIniPath(&IniPath, &TmpPath, NULL, &IsUTF8))
         return STATUS_INSUFFICIENT_RESOURCES;
 
     HANDLE hFile = INVALID_HANDLE_VALUE;
@@ -1439,7 +1441,16 @@ ULONG SbieIniServer::RefreshConf()
         goto finish;
     }
 
-    if (m_insertbom) {
+    if (IsUTF8)
+    {
+        // UTF-8 Signature
+        static const UCHAR bom[3] = { 0xEF, 0xBB, 0xBF };
+        ULONG lenDummy;
+        WriteFile(hFile, bom, sizeof(bom), &lenDummy, NULL);
+    }
+    else
+    //if (m_insertbom) 
+    {
         // UNICODE Byte Order Mark (little endian)
         static const UCHAR bom[2] = { 0xFF, 0xFE };
         ULONG lenDummy;
@@ -1447,9 +1458,22 @@ ULONG SbieIniServer::RefreshConf()
     }
 
     ULONG lenToWrite = wcslen(m_text_base) * sizeof(WCHAR);
+    
+    char* text_utf8 = NULL;
+    if (IsUTF8)
+    {
+        ULONG utf8_len = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), NULL, 0, NULL, NULL);
+        text_utf8 = (char*)HeapAlloc(GetProcessHeap(), 0, utf8_len);
+        lenToWrite = WideCharToMultiByte(CP_UTF8, 0, m_text_base, lenToWrite / sizeof(WCHAR), text_utf8, utf8_len, NULL, NULL);
+    }
+
     ULONG lenWritten = 0;
-    if (! WriteFile(hFile, m_text_base, lenToWrite, &lenWritten, NULL))
+    if (! WriteFile(hFile, text_utf8 ? (void*)text_utf8 : (void*)m_text_base, lenToWrite, &lenWritten, NULL))
         lenWritten = -1;
+
+    if(text_utf8)
+        HeapFree(GetProcessHeap(), 0, text_utf8);
+
     if (lenWritten != lenToWrite)
         SbieApi_LogEx(m_session_id, 2322, L"[16 / %d]", GetLastError());
     else {
@@ -1499,7 +1523,7 @@ finish:
 
 
 bool SbieIniServer::GetIniPath(WCHAR **IniPath, WCHAR **TmpPath,
-                               BOOLEAN *IsHomePath)
+                               BOOLEAN *IsHomePath, BOOLEAN* IsUTF8)
 {
     static const WCHAR *_ini = SANDBOXIE_INI;
     WCHAR *path = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, 2048);
@@ -1514,6 +1538,12 @@ bool SbieIniServer::GetIniPath(WCHAR **IniPath, WCHAR **TmpPath,
     // the Sandbox driver tells us if the ini file comes from the
     // program home directory or from the Windows directory, and
     // we use that information to select the output path
+
+    if (IsUTF8 != NULL) {
+        LONG rc = SbieApi_QueryConfAsIs(NULL, L"IniEncoding", 0, path, 8);
+        if (rc == 0 && *path == L'8')
+            *IsUTF8 = TRUE;
+    }
 
     LONG rc = SbieApi_QueryConfAsIs(NULL, L"IniLocation", 0, path, 8);
     if (rc == 0 && *path == L'H') {
@@ -1624,6 +1654,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
     BOOL ok = TRUE;
+    WCHAR ctrlName[64];
 
     //
     // get token from caller session or caller process.  note that on
@@ -1667,18 +1698,25 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
     if (ok && isSandboxed) {
 
         const WCHAR *_Setting = SBIECTRL_ L"EnableAutoStart";
+        const WCHAR* _Setting2 = SBIECTRL_ L"AutoStartAgent";
         WCHAR buf[10], ch = 0;
         bool ok2 = SetUserSettingsSectionName(hToken);
         if (ok2) {
             SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting, 0, buf, 8 * sizeof(WCHAR));
+                m_sectionname, _Setting, 0, buf, sizeof(buf) - 2);
             ch = towlower(buf[0]);
+
+            SbieApi_QueryConfAsIs(
+                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
         }
         if (! ch) {
             wcscpy(m_sectionname + 13, L"Default");   // UserSettings_Default
             SbieApi_QueryConfAsIs(
                 m_sectionname, _Setting, 0, buf, 8 * sizeof(WCHAR));
             ch = towlower(buf[0]);
+
+            SbieApi_QueryConfAsIs(
+                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
         }
 
         if (ch == L'n') {
@@ -1699,10 +1737,12 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
         WCHAR *args;
         if (isSandboxed)
             args = NULL;
+        else if (*ctrlName)
+            args = L" -autorun";
         else
             args = L" /open /sync";
 
-        if (SbieDll_RunFromHome(SBIECTRL_EXE, args, &si, NULL)) {
+        if (SbieDll_RunFromHome(*ctrlName ? ctrlName : SBIECTRL_EXE, args, &si, NULL)) {
 
             WCHAR *CmdLine = (WCHAR *)si.lpReserved;
 

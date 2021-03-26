@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@
 #include "util.h"
 #include "hook.h"
 #include "common/my_version.h"
+#include "log_buff.h"
 
 
 //---------------------------------------------------------------------------
@@ -49,7 +51,7 @@ static BOOLEAN Api_FastIo_DEVICE_CONTROL(
     ULONG IoControlCode, IO_STATUS_BLOCK *IoStatus,
     DEVICE_OBJECT *DeviceObject);
 
-static void Api_DelWork(API_WORK_ITEM *work_item);
+//static void Api_DelWork(API_WORK_ITEM *work_item);
 
 
 //---------------------------------------------------------------------------
@@ -59,11 +61,15 @@ static NTSTATUS Api_GetVersion(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms);
 
-static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
+static NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms);
+
+//static NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_GetHomePath(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms);
+
+static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
 
 //---------------------------------------------------------------------------
@@ -92,8 +98,10 @@ volatile HANDLE Api_ServiceProcessId = NULL;
 
 static PERESOURCE Api_LockResource = NULL;
 
-static LIST Api_WorkList;
+//static LIST Api_WorkList;
 static BOOLEAN Api_WorkListInitialized = FALSE;
+
+static LOG_BUFFER* Api_LogBuffer = NULL;
 
 static volatile LONG Api_UseCount = -1;
 
@@ -108,11 +116,17 @@ _FX BOOLEAN Api_Init(void)
     NTSTATUS status;
     UNICODE_STRING uni;
 
+	//
+	// initialize log buffer
+	//
+
+	Api_LogBuffer = log_buffer_init(8 * 8 * 1024);
+
     //
     // initialize work list
     //
 
-    List_Init(&Api_WorkList);
+    //List_Init(&Api_WorkList);
 
     if (! Mem_GetLockResource(&Api_LockResource, TRUE))
         return FALSE;
@@ -123,8 +137,7 @@ _FX BOOLEAN Api_Init(void)
     // initialize Fast IO dispatch pointers
     //
 
-    Api_FastIoDispatch = ExAllocatePoolWithTag(
-                            NonPagedPool, sizeof(FAST_IO_DISPATCH), tzuk);
+    Api_FastIoDispatch = ExAllocatePoolWithTag(NonPagedPool, sizeof(FAST_IO_DISPATCH), tzuk);
     if (! Api_FastIoDispatch) {
         Log_Status(MSG_API_DEVICE, 0, STATUS_INSUFFICIENT_RESOURCES);
         return FALSE;
@@ -166,14 +179,17 @@ _FX BOOLEAN Api_Init(void)
     //
 
     Api_SetFunction(API_GET_VERSION,        Api_GetVersion);
-    Api_SetFunction(API_GET_WORK,           Api_GetWork);
+    //Api_SetFunction(API_GET_WORK,           Api_GetWork);
     Api_SetFunction(API_LOG_MESSAGE,        Api_LogMessage);
+	Api_SetFunction(API_GET_MESSAGE,        Api_GetMessage);
     Api_SetFunction(API_GET_HOME_PATH,      Api_GetHomePath);
     Api_SetFunction(API_SET_SERVICE_PORT,   Api_SetServicePort);
 
     Api_SetFunction(API_UNLOAD_DRIVER,      Driver_Api_Unload);
 
-    Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
+    //Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
+
+	Api_SetFunction(API_PROCESS_EXEMPTION_CONTROL, Api_ProcessExemptionControl);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;
@@ -195,8 +211,6 @@ _FX BOOLEAN Api_Init(void)
 
 _FX void Api_Unload(void)
 {
-    API_WORK_ITEM *work_item;
-
     if (Api_DeviceObject) {
         IoDeleteDevice(Api_DeviceObject);
         Api_DeviceObject = NULL;
@@ -209,12 +223,18 @@ _FX void Api_Unload(void)
 
     if (Api_WorkListInitialized) {
 
-        while (1) {
+		if (Api_LogBuffer) {
+			log_buffer_free(Api_LogBuffer);
+			Api_LogBuffer = NULL;
+		}
+
+        /*API_WORK_ITEM *work_item;
+		while (1) {
             work_item = List_Head(&Api_WorkList);
             if (! work_item)
                 break;
             Api_DelWork(work_item);
-        }
+        }*/
 
         Mem_FreeLockResource(&Api_LockResource);
 
@@ -559,6 +579,7 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
     WCHAR *msgtext_buffer;
     POOL *pool;
     WCHAR *text;
+	HANDLE pid;
 
     msgid = args->msgid.val;
     if (msgid >= 2101 && msgid <= 2199)
@@ -586,10 +607,16 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
         return STATUS_INVALID_PARAMETER;
     ProbeForRead(msgtext_buffer, msgtext_length, sizeof(WCHAR));
 
-    if (proc)
-        pool = proc->pool;
-    else
-        pool = Driver_Pool;
+	pid = (HANDLE)args->process_id.val;
+	if (proc) {
+		pool = proc->pool;
+		if (!pid) pid = proc->pid;
+	}
+	else {
+		pool = Driver_Pool;
+		if (!pid) pid = PsGetCurrentProcessId();
+	}
+
     text = Mem_Alloc(pool, msgtext_length + 8);
     if (! text)
         return STATUS_INSUFFICIENT_RESOURCES;
@@ -603,12 +630,163 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
 
     if (status == STATUS_SUCCESS) {
         text[msgtext_length / sizeof(WCHAR)] = L'\0';
-        Log_Popup_Msg(msgid, text, NULL, args->session_id.val);
+		Log_Popup_MsgEx(msgid, text, msgtext_length / sizeof(WCHAR), NULL, 0, args->session_id.val, pid);
     }
 
     Mem_Free(text, msgtext_length + 8);
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Api_AddMessage
+//---------------------------------------------------------------------------
+
+
+_FX void Api_AddMessage(
+	NTSTATUS error_code,
+	const WCHAR *string1, ULONG string1_len,
+	const WCHAR *string2, ULONG string2_len,
+	ULONG session_id,
+	ULONG process_id)
+{
+	KIRQL irql;
+
+	if (!Api_WorkListInitialized) // if (!Api_LogBuffer)
+		return;
+
+	//
+	// add work at the end of the work list
+	//
+
+	irql = Api_EnterCriticalSection();
+
+	ULONG entry_size = sizeof(ULONG)	// session_id
+		+ sizeof(ULONG)					// process_id
+		+ sizeof(ULONG)					// error_code
+		+ (string1_len + 1) * sizeof(WCHAR)
+		+ (string2_len + 1) * sizeof(WCHAR);
+
+	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer);
+	if (write_ptr) {
+		//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
+		WCHAR null_char = L'\0';
+		log_buffer_push_bytes((CHAR*)&session_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&process_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&error_code, sizeof(ULONG), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)string1, string1_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)string2, string2_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+	}
+	// else // this can only happen when the entire buffer is to small to hold this entire entry
+		// if loging fails we can't log this error :/
+
+	Api_LeaveCriticalSection(irql);
+}
+
+
+//---------------------------------------------------------------------------
+// Api_GetMessage
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
+{
+	API_GET_MESSAGE_ARGS *args = (API_GET_MESSAGE_ARGS *)parms;
+	NTSTATUS status = STATUS_SUCCESS;
+	UNICODE_STRING64 *msgtext;
+	WCHAR *msgtext_buffer;
+	KIRQL irql;
+
+	if (proc) // sandboxed processes can't read the log
+		return STATUS_NOT_IMPLEMENTED;
+
+	ProbeForRead(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
+	ProbeForWrite(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
+
+	ProbeForWrite(args->msgid.val, sizeof(ULONG), sizeof(ULONG));
+
+	msgtext = args->msgtext.val;
+	if (!msgtext)
+		return STATUS_INVALID_PARAMETER;
+	ProbeForRead(msgtext, sizeof(UNICODE_STRING64), sizeof(ULONG));
+	ProbeForWrite(msgtext, sizeof(UNICODE_STRING64), sizeof(ULONG));
+
+	msgtext_buffer = (WCHAR *)msgtext->Buffer;
+	if (!msgtext_buffer)
+		return STATUS_INVALID_PARAMETER;
+
+	irql = Api_EnterCriticalSection();
+
+	__try {
+
+		LOG_BUFFER_SEQ_T seq_number = *args->msg_num.val;
+		for (;;) {
+
+			CHAR* read_ptr = log_buffer_get_next(seq_number, Api_LogBuffer);
+			if (!read_ptr) {
+
+				status = STATUS_NO_MORE_ENTRIES;
+				break;
+			}
+
+			LOG_BUFFER_SIZE_T entry_size = log_buffer_get_size(&read_ptr, Api_LogBuffer);
+			seq_number = log_buffer_get_seq_num(&read_ptr, Api_LogBuffer);
+
+			//if (seq_number != *args->msg_num.val + 1) {
+			//
+			//	status = STATUS_REQUEST_OUT_OF_SEQUENCE;
+			//	*args->msg_num.val = seq_number - 1;
+			//	break;
+			//}
+
+			//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]...[stringN n*2][\0 2][\0 2]
+
+			ULONG session_id;
+			log_buffer_get_bytes((CHAR*)&session_id, 4, &read_ptr, Api_LogBuffer);
+			entry_size -= 4;
+
+			if (args->session_id.val != -1 && session_id != args->session_id.val) // Note: the service (session_id == -1) gets all the entries
+				continue;
+
+			ULONG process_id;
+			log_buffer_get_bytes((CHAR*)&process_id, 4, &read_ptr, Api_LogBuffer);
+			entry_size -= 4;
+
+			log_buffer_get_bytes((CHAR*)args->msgid.val, 4, &read_ptr, Api_LogBuffer);
+			entry_size -= 4;
+
+			if (args->process_id.val != NULL)
+			{
+				ProbeForWrite(args->process_id.val, sizeof(ULONG), sizeof(ULONG));
+				*args->process_id.val = process_id;
+			}
+
+			// we return all strings in one
+			if (entry_size <= msgtext->MaximumLength)
+			{
+				msgtext->Length = (USHORT)entry_size;
+				ProbeForWrite(msgtext_buffer, entry_size, sizeof(WCHAR));
+				memcpy(msgtext_buffer, read_ptr, entry_size);
+			}
+			else
+			{
+				status = STATUS_BUFFER_TOO_SMALL;
+			}
+
+			*args->msg_num.val = seq_number; // update when everything went fine
+			break;
+		}
+
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+		status = GetExceptionCode();
+	}
+
+	Api_LeaveCriticalSection(irql);
+
+	return status;
 }
 
 
@@ -709,7 +887,7 @@ _FX BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
+/*_FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
 {
     KIRQL irql;
 
@@ -734,7 +912,7 @@ _FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
         return TRUE;
 
     return TRUE;
-}
+}*/
 
 
 //---------------------------------------------------------------------------
@@ -742,100 +920,102 @@ _FX BOOLEAN Api_AddWork(API_WORK_ITEM *work_item)
 //---------------------------------------------------------------------------
 
 
-_FX void Api_DelWork(API_WORK_ITEM *work_item)
+/*_FX void Api_DelWork(API_WORK_ITEM *work_item)
 {
     // this assumes Api_WorkList is already locked using Api_Lock
 
     List_Remove(&Api_WorkList, work_item);
     Mem_Free(work_item, work_item->length);
-}
+}*/
 
 
 //---------------------------------------------------------------------------
 // Api_GetWork
 //---------------------------------------------------------------------------
 
-
-_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
-{
-    API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
-    NTSTATUS status;
-    void *buffer_ptr;
-    ULONG buffer_len;
-    ULONG *result_len;
-    ULONG length;
-    API_WORK_ITEM *work_item;
-    KIRQL irql;
-
-    //
-    // caller must not be sandboxed, and caller has to be SbieSvc
-    // if session parameter is -1
-    //
-
-    if (proc)
-        return STATUS_NOT_IMPLEMENTED;
-
-    if (args->session_id.val == -1 &&
-            PsGetCurrentProcessId() != Api_ServiceProcessId)
-        return STATUS_ACCESS_DENIED;
-
-    //
-    // find next work/log item for the session
-    //
-
-    buffer_ptr = args->buffer.val;
-    buffer_len = args->buffer_len.val;
-    result_len = args->result_len_ptr.val;
-
-    irql = Api_EnterCriticalSection();
-
-    work_item = List_Head(&Api_WorkList);
-    while (work_item) {
-        if (work_item->session_id == args->session_id.val)
-            break;
-        work_item = List_Next(work_item);
-    }
-
-    __try {
-
-    if (! work_item) {
-
-        status = STATUS_NO_MORE_ENTRIES;
-
-    } else {
-
-        if (work_item->length <= buffer_len) {
-
-            length = work_item->length
-                   - FIELD_OFFSET(API_WORK_ITEM, type);
-            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
-            memcpy(buffer_ptr, &work_item->type, length);
-
-            status = STATUS_SUCCESS;
-
-        } else {
-
-            length = work_item->length;
-            status = STATUS_BUFFER_TOO_SMALL;
-        }
-
-        if (result_len) {
-            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
-            *result_len = length;
-        }
-
-        if (status == STATUS_SUCCESS)
-            Api_DelWork(work_item);
-    }
-
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    Api_LeaveCriticalSection(irql);
-
-    return status;
-}
+//
+//_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
+//{
+//	return STATUS_NOT_IMPLEMENTED;
+//
+//    /*API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
+//    NTSTATUS status;
+//    void *buffer_ptr;
+//    ULONG buffer_len;
+//    ULONG *result_len;
+//    ULONG length;
+//    API_WORK_ITEM *work_item;
+//    KIRQL irql;
+//
+//    //
+//    // caller must not be sandboxed, and caller has to be SbieSvc
+//    // if session parameter is -1
+//    //
+//
+//    if (proc)
+//        return STATUS_NOT_IMPLEMENTED;
+//
+//    if (args->session_id.val == -1 &&
+//            PsGetCurrentProcessId() != Api_ServiceProcessId)
+//        return STATUS_ACCESS_DENIED;
+//
+//    //
+//    // find next work/log item for the session
+//    //
+//
+//    buffer_ptr = args->buffer.val;
+//    buffer_len = args->buffer_len.val;
+//    result_len = args->result_len_ptr.val;
+//
+//    irql = Api_EnterCriticalSection();
+//
+//    work_item = List_Head(&Api_WorkList);
+//    while (work_item) {
+//        if (work_item->session_id == args->session_id.val)
+//            break;
+//        work_item = List_Next(work_item);
+//    }
+//
+//    __try {
+//
+//    if (! work_item) {
+//
+//        status = STATUS_NO_MORE_ENTRIES;
+//
+//    } else {
+//
+//        if (work_item->length <= buffer_len) {
+//
+//            length = work_item->length
+//                   - FIELD_OFFSET(API_WORK_ITEM, type);
+//            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
+//            memcpy(buffer_ptr, &work_item->type, length);
+//
+//            status = STATUS_SUCCESS;
+//
+//        } else {
+//
+//            length = work_item->length;
+//            status = STATUS_BUFFER_TOO_SMALL;
+//        }
+//
+//        if (result_len) {
+//            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
+//            *result_len = length;
+//        }
+//
+//        if (status == STATUS_SUCCESS)
+//            Api_DelWork(work_item);
+//    }
+//
+//    } __except (EXCEPTION_EXECUTE_HANDLER) {
+//        status = GetExceptionCode();
+//    }
+//
+//    Api_LeaveCriticalSection(irql);
+//
+//    return status;*/
+//}
 
 
 //---------------------------------------------------------------------------
@@ -1002,4 +1182,65 @@ _FX void Api_CopyStringToUser(
                 uni->Length = 0;
         }
     }
+}
+
+
+//---------------------------------------------------------------------------
+// Api_ProcessExemptionControl
+//---------------------------------------------------------------------------
+
+_FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    //KIRQL irql;
+	API_PROCESS_EXEMPTION_CONTROL_ARGS *pArgs = (API_PROCESS_EXEMPTION_CONTROL_ARGS *)parms;
+	ULONG *in_flag;
+	ULONG *out_flag;
+
+	if (proc) // is caller sandboxed?
+		return STATUS_ACCESS_DENIED;
+
+	if (pArgs->process_id.val == 0)
+		return STATUS_INVALID_PARAMETER;
+
+	in_flag = pArgs->set_flag.val;
+	if (in_flag) {
+		ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
+	}
+
+	out_flag = pArgs->get_flag.val;
+	if (out_flag) {
+		ProbeForWrite(out_flag, sizeof(ULONG), sizeof(ULONG));
+	}
+
+	if(!in_flag && !out_flag)
+		return STATUS_INVALID_PARAMETER;
+
+    //proc = Process_Find(pArgs->process_id.val, &irql);
+    proc = Process_Find(pArgs->process_id.val, NULL);
+    if (proc && (proc != PROCESS_TERMINATED))
+    {
+        if (pArgs->action_id.val == 'splr')
+        {
+            if (in_flag)
+                proc->ipc_allowSpoolerPrintToFile = *in_flag != 0;
+            if (out_flag)
+                *out_flag = proc->ipc_allowSpoolerPrintToFile;
+        }
+        else if (pArgs->action_id.val == 'inet')
+        {
+            if (in_flag)
+                proc->AllowInternetAccess = *in_flag != 0;
+            if (out_flag)
+                *out_flag = proc->AllowInternetAccess;
+        }
+        else
+            status = STATUS_INVALID_INFO_CLASS;
+    }
+    else
+        status = STATUS_NOT_FOUND;
+    //ExReleaseResourceLite(Process_ListLock);
+    //KeLowerIrql(irql);
+
+	return status;
 }

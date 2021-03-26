@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -174,7 +175,7 @@ EXTERN_C const CLSID CLSID_EnumerableObjectCollection;*/
 _FX BOOLEAN Taskbar_Init(HMODULE module)
 {
     static const WCHAR *Sandbox = L"Sandbox";
-    WCHAR Version[16];
+    //WCHAR Version[16];
     ULONG len;
 
     P_SHGetPropertyStoreForWindow SHGetPropertyStoreForWindow;
@@ -186,15 +187,15 @@ _FX BOOLEAN Taskbar_Init(HMODULE module)
     // initialize BoxPrefix variables
     //
 
-    if (SbieApi_GetVersion(Version) == 0) {
-        while (1) {
-            WCHAR *ptr = wcschr(Version, L'.');
-            if (! ptr)
-                break;
-            *ptr = L'x';
-        }
-    } else
-        *Version = L'\0';
+    //if (SbieApi_GetVersion(Version) == 0) {
+    //    while (1) {
+    //        WCHAR *ptr = wcschr(Version, L'.');
+    //        if (! ptr)
+    //            break;
+    //        *ptr = L'x';
+    //    }
+    //} else
+    //    *Version = L'\0';
 
 #ifdef CUSTOM_APPUSERMODELID
     SbieApi_QueryConf(
@@ -203,8 +204,9 @@ _FX BOOLEAN Taskbar_Init(HMODULE module)
 
     len = (wcslen(Sandbox) + wcslen(Dll_BoxName) + 32) * sizeof(WCHAR);
     Taskbar_BoxPrefix = Dll_Alloc(len);
-    Sbie_swprintf(Taskbar_BoxPrefix, L"%s%s.%s.", Sandbox, Version, Dll_BoxName);
-    /*Sbie_swprintf(Taskbar_BoxPrefix, L"%s.%s.%08X.",
+    //Sbie_snwprintf(Taskbar_BoxPrefix, len / sizeof(WCHAR), L"%s%s.%s.", Sandbox, Version, Dll_BoxName);
+	Sbie_snwprintf(Taskbar_BoxPrefix, len / sizeof(WCHAR), L"%s.%s.", Sandbox, Dll_BoxName);
+    /*Sbie_snwprintf(Taskbar_BoxPrefix, len / sizeof(WCHAR), L"%s.%s.%08X.",
                                 Sandbox, Dll_BoxName, GetTickCount());*/
     Taskbar_BoxPrefix_Len = wcslen(Taskbar_BoxPrefix);
 
@@ -375,6 +377,24 @@ _FX BOOLEAN Taskbar_ShouldOverrideAppUserModelId(void)
 // Taskbar_SetCurrentProcessExplicitAppUserModelID
 //---------------------------------------------------------------------------
 
+_FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID_hack(
+    const WCHAR* AppId)
+{
+
+    // ToDo
+    // Fix-Me: BUG when ProcessParms->WindowTitle is already set LocalFree 
+    // performed by SetCurrentProcessExplicitAppUserModelID crashes, WTF why?!
+    //
+    // To work around this issue, we clear the flag that indicates this value being set
+    // this way we trade a memory leak for an crash
+    //
+
+    // HACK ALERT! if we clear 0x5000 the WindowTitle buffer will not be freed
+    RTL_USER_PROCESS_PARAMETERS* ProcessParms = Proc_GetRtlUserProcessParameters();
+    ProcessParms->WindowFlags &= ~0x5000;
+    
+    return __sys_SetCurrentProcessExplicitAppUserModelID(AppId);
+}
 
 _FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID(
     const WCHAR *AppId)
@@ -383,7 +403,9 @@ _FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID(
     WCHAR *NewId;
 
     if (! Taskbar_ShouldOverrideAppUserModelId())
-        return __sys_SetCurrentProcessExplicitAppUserModelID(AppId);
+        return Taskbar_SetCurrentProcessExplicitAppUserModelID_hack(AppId);
+
+    hr = E_FAIL;
 
     if (Taskbar_SavedAppUserModelId) {
         Dll_Free(Taskbar_SavedAppUserModelId);
@@ -397,14 +419,14 @@ _FX HRESULT Taskbar_SetCurrentProcessExplicitAppUserModelID(
         wmemcpy(Taskbar_SavedAppUserModelId, AppId, len + 1);
 
         NewId = Taskbar_CreateAppUserModelId(AppId);
+        if (NewId == NULL)
+            return hr;
 
-    } else
-        NewId = NULL;
+        hr = Taskbar_SetCurrentProcessExplicitAppUserModelID_hack(NewId);
 
-    hr = __sys_SetCurrentProcessExplicitAppUserModelID(NewId);
-
-    if (NewId && NewId != AppId)
-        Dll_Free(NewId);
+        if (NewId != AppId)
+            Dll_Free(NewId);
+    }   
 
     return hr;
 }
@@ -759,7 +781,7 @@ _FX WCHAR *Taskbar_GetNameWithBoxPrefix(const WCHAR *name)
 #else ! CUSTOM_APPUSERMODELID
     ULONG len = wcslen(Dll_BoxName) + wcslen(name) + 8;
     WCHAR *out = Dll_AllocTemp(len * sizeof(WCHAR));
-    Sbie_swprintf(out, L"[%s] %s", Dll_BoxName, name);
+    Sbie_snwprintf(out, len, L"[%s] %s", Dll_BoxName, name);
 #endif CUSTOM_APPUSERMODELID
 
     return out;

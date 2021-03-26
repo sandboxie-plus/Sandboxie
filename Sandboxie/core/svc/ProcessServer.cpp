@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@
 #include "common/my_version.h"
 #include "core/dll/sbiedll.h"
 #include "core/drv/api_defs.h"
+#include <sddl.h>
 
 #define SECONDS(n64)            (((LONGLONG)n64) * 10000000L)
 #define MINUTES(n64)            (SECONDS(n64) * 60)
@@ -267,7 +269,7 @@ NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId)
 
     for (retries = 0; retries < 10; ++retries) {
 
-        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids);
+        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids, NULL);
         if (status != STATUS_SUCCESS)
             break;
         if (! pids[0])
@@ -485,7 +487,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
             }
 
             HANDLE PrimaryTokenHandle = RunSandboxedGetToken(
-                        CallerProcessHandle, CallerInSandbox, req->boxname);
+                        CallerProcessHandle, CallerInSandbox, req->boxname, CallerPid);
 
             if (PrimaryTokenHandle) {
 
@@ -659,7 +661,7 @@ WCHAR *ProcessServer::RunSandboxedCopyString(
 
 
 HANDLE ProcessServer::RunSandboxedGetToken(
-    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *BoxName)
+    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *BoxName, ULONG idProcess)
 {
     const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
                              | TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID
@@ -669,12 +671,22 @@ HANDLE ProcessServer::RunSandboxedGetToken(
     HANDLE NewTokenHandle;
     ULONG LastError;
     BOOL ok;
-    bool ShouldAdjustSessionId = true;
-    bool ShouldAdjustDacl = false;
+    //bool ShouldAdjustSessionId = true;
+    //bool ShouldAdjustDacl = false;
+    WCHAR boxname[48] = { 0 };
 
     if (CallerInSandbox) {
 
-        if (wcscmp(BoxName, L"*SYSTEM*") == 0) {
+        SbieApi_QueryProcess((HANDLE)(ULONG_PTR)idProcess, boxname, NULL, NULL, NULL);
+
+        /*if (wcscmp(BoxName, L"*SYSTEM*") == 0) {
+
+            //
+            // without RunServicesAsSystem=y fallback to using the calling thread's token
+            //
+
+            if (!SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE))
+                goto DoThread;
 
             //
             // sandboxed caller specified *SYSTEM* so we use our system token
@@ -687,7 +699,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             ShouldAdjustDacl = true;
 
-        /*} else if (wcscmp(BoxName, L"*SESSION*") == 0) {
+        } else*/ /*if (wcscmp(BoxName, L"*SESSION*") == 0) {
 
             //
             // sandboxed caller specified *SESSION* so we use session token
@@ -700,9 +712,11 @@ HANDLE ProcessServer::RunSandboxedGetToken(
             if (! ok)
                 return NULL;
 
-            ShouldAdjustSessionId = false;*/
+            ShouldAdjustSessionId = false;
 
-        } else if (wcscmp(BoxName, L"*THREAD*") == 0) {
+        } else*/ if (wcscmp(BoxName, L"*THREAD*") == 0) {
+            
+        //DoThread:
 
             //
             // sandboxed caller specified *THREAD* so we use its thread token
@@ -719,6 +733,22 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             CloseHandle(ThreadHandle);
 
+			// OriginalToken BEGIN
+			if (!ok) {
+
+				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+
+                    HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE,
+						PipeServer::GetCallerProcessId());
+
+					ok = OpenProcessToken(
+                        ProcessHandle, TOKEN_RIGHTS, &OldTokenHandle);
+
+					CloseHandle(ProcessHandle);
+				}
+			}
+			// OriginalToken END
+
             if (! ok) {
                 SetLastError(LastError);
                 return NULL;
@@ -729,6 +759,17 @@ HANDLE ProcessServer::RunSandboxedGetToken(
             SetLastError(ERROR_INVALID_PARAMETER);
             return NULL;
         }
+
+    }
+    else
+    {
+        if (*BoxName == L'-')
+        {
+            LONG_PTR Pid = _wtoi(BoxName + 1);
+            SbieApi_QueryProcess((HANDLE)(ULONG_PTR)Pid, boxname, NULL, NULL, NULL);
+        }
+        else
+            wcscpy(boxname, BoxName);
     }
 
     if (! OldTokenHandle) {
@@ -749,28 +790,37 @@ HANDLE ProcessServer::RunSandboxedGetToken(
     // then adjust session and default dacl
     //
 
-    ok = DuplicateTokenEx(OldTokenHandle, TOKEN_RIGHTS, NULL,
+    ok = DuplicateTokenEx(OldTokenHandle, TOKEN_ADJUST_PRIVILEGES | TOKEN_RIGHTS, NULL,
                           SecurityIdentification, TokenPrimary,
                           &NewTokenHandle);
     if (! ok)
         NewTokenHandle = NULL;
 
-    if (ok && ShouldAdjustSessionId) {
+    /*if (ok && ShouldAdjustSessionId) {
 
         ULONG SessionId = PipeServer::GetCallerSessionId();
         ok = SetTokenInformation(NewTokenHandle, TokenSessionId,
                                  &SessionId, sizeof(ULONG));
-    }
+    }*/
 
-    if (ok && ShouldAdjustDacl) {
+    /*if (ok && ShouldAdjustDacl) {
 
         //
         // if caller is sandboxed and asked for a system token,
         // then we want to adjust the dacl in the new token
         //
 
-        ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle);
-    }
+		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
+			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
+		else
+			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_READ, FALSE);
+
+        if (ok && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
+
+            ok = RunSandboxedStripPrivileges(NewTokenHandle);
+        }
+    }*/
+
 
     if (! ok) {
         LastError = GetLastError();
@@ -795,9 +845,18 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
 
 BOOL ProcessServer::RunSandboxedSetDacl(
-    HANDLE CallerProcessHandle, HANDLE NewTokenHandle)
+    HANDLE CallerProcessHandle, HANDLE NewTokenHandle, DWORD AccessMask, bool useUserSID, HANDLE idProcess)
 {
+    static UCHAR AnonymousLogonSid[12] = {
+        1,                                      // Revision
+        1,                                      // SubAuthorityCount
+        0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+        SECURITY_ANONYMOUS_LOGON_RID,0,0,0      // SubAuthority
+    };
+
     ULONG LastError;
+	HANDLE hToken;
+	ULONG len;
     BOOL ok;
 
     //
@@ -812,26 +871,63 @@ BOOL ProcessServer::RunSandboxedSetDacl(
     if (! WorkSpace)
         return FALSE;
 
+	TOKEN_GROUPS	   *pLogOn = (TOKEN_GROUPS *)WorkSpace;
     TOKEN_USER         *pUser = (TOKEN_USER *)WorkSpace;
     TOKEN_DEFAULT_DACL *pDacl = (TOKEN_DEFAULT_DACL *)(WorkSpace + 512);
+	PSID pSid;
 
     //
     // get the token for the calling process, extract the user SID
     //
 
-    HANDLE OldTokenHandle;
+    
 
-    ok = OpenProcessToken(CallerProcessHandle, TOKEN_QUERY, &OldTokenHandle);
+    ok = OpenProcessToken(CallerProcessHandle, TOKEN_QUERY, &hToken);
     LastError = GetLastError();
 
     if (! ok)
         goto finish;
 
-    ULONG len;
-    ok = GetTokenInformation(OldTokenHandle, TokenUser, pUser, 512, &len);
-    LastError = GetLastError();
+	if (useUserSID)
+	{
+		ok = GetTokenInformation(hToken, TokenUser, pUser, 512, &len);
+		LastError = GetLastError();
 
-    CloseHandle(OldTokenHandle);
+        if (idProcess != NULL) // this is used when starting a service
+        {
+            //
+            // in Sandboxie version 4, the primary process token is going to be
+            // the anonymous token which isn't very useful here, so get the
+            // textual SID string and convert it into a SID value
+            //
+
+            if (ok && memcmp(pUser->User.Sid, AnonymousLogonSid,
+                sizeof(AnonymousLogonSid)) == 0) {
+
+                PSID TempSid;
+                WCHAR SidString[96];
+                SbieApi_QueryProcess(idProcess, NULL, NULL, SidString, NULL);
+                if (SidString[0]) {
+                    if (ConvertStringSidToSid(SidString, &TempSid)) {
+                        memcpy(pUser + 1, TempSid, GetLengthSid(TempSid));
+                        pUser->User.Sid = (PSID)(pUser + 1);
+                        LocalFree(TempSid);
+                    }
+                }
+            }
+        }
+
+		pSid = pUser->User.Sid;
+	}
+	else
+	{
+		ok = GetTokenInformation(hToken, TokenLogonSid, pLogOn, 512, &len);
+		LastError = GetLastError();
+
+		pSid = pLogOn->Groups[0].Sid; // use the LogonSessionId token
+	}
+
+    CloseHandle(hToken);
 
     if (! ok)
         goto finish;
@@ -851,9 +947,9 @@ BOOL ProcessServer::RunSandboxedSetDacl(
 
     pAcl->AclSize += sizeof(ACCESS_ALLOWED_ACE)
                    - sizeof(DWORD)              // minus SidStart member
-                   + (WORD)GetLengthSid(pUser->User.Sid);
+                   + (WORD)GetLengthSid(pSid);
 
-    AddAccessAllowedAce(pAcl, ACL_REVISION, GENERIC_ALL, pUser->User.Sid);
+    AddAccessAllowedAce(pAcl, ACL_REVISION, AccessMask, pSid);
 
     ok = SetTokenInformation(
             NewTokenHandle, TokenDefaultDacl, pDacl, (8192 - 512));
@@ -869,6 +965,43 @@ finish:
 
     if (! ok)
         SetLastError(LastError);
+    return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// RunSandboxedStripPrivilege
+//---------------------------------------------------------------------------
+
+
+BOOL ProcessServer::RunSandboxedStripPrivilege(HANDLE NewTokenHandle, LPCWSTR lpName)
+{
+    LUID luid;
+
+    if (!LookupPrivilegeValue(NULL, lpName, &luid))
+        return FALSE;
+
+    TOKEN_PRIVILEGES NewState;
+    NewState.PrivilegeCount = 1;
+    NewState.Privileges[0].Luid = luid;
+    NewState.Privileges[0].Attributes = SE_PRIVILEGE_REMOVED; // Note: A once removed pivilege can not be re added!
+
+    NTSTATUS status = NtAdjustPrivilegesToken(NewTokenHandle, FALSE, &NewState, sizeof(NewState), (PTOKEN_PRIVILEGES)NULL, 0);
+
+    return NT_SUCCESS(status); // STATUS_SUCCESS or STATUS_NOT_ALL_ASSIGNED when the privilege wasnt there in the first palce, which is also passes NT_SUCCESS
+}
+
+
+//---------------------------------------------------------------------------
+// RunSandboxedStripPrivilege
+//---------------------------------------------------------------------------
+
+
+BOOL ProcessServer::RunSandboxedStripPrivileges(HANDLE NewTokenHandle)
+{
+    BOOLEAN ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_TCB_NAME);
+    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);
+    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_ASSIGNPRIMARYTOKEN_NAME);
     return ok;
 }
 

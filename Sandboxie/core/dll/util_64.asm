@@ -81,7 +81,7 @@ ProtectCall4            ENDP
 ; Secure_Ndr64AsyncClientCall
 ;----------------------------------------------------------------------------
 
-EXTERN Secure_CheckElevation      : PROC
+EXTERN Secure_CheckElevation64    : PROC
 EXTERN Secure_HandleElevation     : PROC
 EXTERN __sys_Ndr64AsyncClientCall : QWORD
 
@@ -94,11 +94,12 @@ Secure_Ndr64AsyncClientCall PROC
     mov [rax+4*8],r9    ; spill first variadic parameter
     sub rsp,8+(4*8)
 
-    xor rcx,rcx     ; clear ReturnAddressFromNdrAsyncClientCall
-    xor rdx,rdx     ; clear pStubDescriptor
-    xor r8,r8       ; clear pFormat
+;;    xor rcx,rcx     ; clear pProxyInfo
+;;    xor rdx,rdx     ; clear nProcNum
+;;    xor r8,r8       ; clear pReturnValue
+;	mov r8,[rsp + 8+(4*8)]			; return poitner
     lea r9,[rsp + 8+(4*8) + 4*8]    ; setup Args -> SECURE_UAC_ARGS
-    call Secure_CheckElevation
+    call Secure_CheckElevation64
         test al,al
         jnz WeHandleElevation
         
@@ -189,3 +190,105 @@ l01:    mov     eax,dword ptr [rdx]
 l02:    ret
 
 Gui_FixupCallbackPointers   ENDP
+
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall2
+;----------------------------------------------------------------------------
+
+
+EXTERN RpcRt_NdrClientCall2_x64      : PROC
+;EXTERN Secure_HandleElevation     : PROC
+EXTERN __sys_NdrClientCall2 : QWORD
+
+RpcRt_NdrClientCall2 PROC
+
+    mov rax,rsp
+    mov [rax+1*8],rcx   ; spill pStubDescriptor
+    mov [rax+2*8],rdx   ; spill pFormat
+    mov [rax+3*8],r8    ; spill first variadic parameter
+    mov [rax+4*8],r9    ; spill second variadic parameter
+    sub rsp,8+(4*8)
+
+;;    xor rcx,rcx     ; clear pStubDescriptor
+;;    xor rdx,rdx     ; clear pFormat
+;	mov r8,[rsp + 8+(4*8)]			; return poitner
+    lea r8,[rsp + 8+(4*8) + 3*8]    ; Args
+    call RpcRt_NdrClientCall2_x64
+    test al,al
+    jnz CancelCall2
+        
+    lea rax,[rsp+8+(4*8)]
+    mov rcx,[rax+1*8]   ; restore pStubDescriptor
+    mov rdx,[rax+2*8]   ; restore pFormat
+    mov r8,[rax+3*8]    ; restore first variadic parameter
+    mov r9,[rax+4*8]    ; restore second variadic parameter
+
+    add rsp,8+(4*8)
+    jmp [__sys_NdrClientCall2]
+    
+CancelCall2:
+
+;;;    xor rcx,rcx     ; clear pProxyInfo
+;;;    xor rdx,rdx     ; clear nProcNum
+;;;    xor r8,r8       ; clear pReturnValue
+;;	 mov r8,[rsp + 8+(4*8)]			 ; return poitner
+;    lea r8,[rsp + 8+(4*8) + 3*8]    ; Args
+;    call RpcRt_NdrClientCall2_...
+
+    add rsp,8+(4*8)
+    ret
+
+RpcRt_NdrClientCall2 ENDP
+
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall3
+;----------------------------------------------------------------------------
+
+
+EXTERN RpcRt_NdrClientCall3_x64      : PROC
+;EXTERN RpcRt_NdrClientCall3_...     : PROC
+EXTERN __sys_NdrClientCall3 : QWORD
+
+RpcRt_NdrClientCall3 PROC
+
+    mov rax,rsp
+    mov [rax+1*8],rcx   ; spill pProxyInfo
+    mov [rax+2*8],rdx   ; spill nProcNum
+    mov [rax+3*8],r8    ; spill pReturnValue
+    mov [rax+4*8],r9    ; spill first variadic parameter
+    sub rsp,8+(4*8)
+
+;;    xor rcx,rcx     ; clear pProxyInfo
+;;    xor rdx,rdx     ; clear nProcNum
+;;    xor r8,r8       ; clear pReturnValue
+;	mov r8,[rsp + 8+(4*8)]			; return poitner
+    lea r9,[rsp + 8+(4*8) + 4*8]    ; Args
+    call RpcRt_NdrClientCall3_x64
+    test al,al
+    jnz CancelCall3
+        
+    lea rax,[rsp+8+(4*8)]
+    mov rcx,[rax+1*8]   ; restore pProxyInfo
+    mov rdx,[rax+2*8]   ; restore nProcNum
+    mov r8,[rax+3*8]    ; restore pReturnValue
+    mov r9,[rax+4*8]    ; restore first variadic parameter
+
+    add rsp,8+(4*8)
+    jmp [__sys_NdrClientCall3]
+    
+CancelCall3:
+
+;;;    xor rcx,rcx     ; clear pProxyInfo
+;;;    xor rdx,rdx     ; clear nProcNum
+;;;    xor r8,r8       ; clear pReturnValue
+;;	 mov r8,[rsp + 8+(4*8)]			 ; return poitner
+;    lea r9,[rsp + 8+(4*8) + 4*8]    ; Args
+;    call RpcRt_NdrClientCall3_...
+
+    add rsp,8+(4*8)
+    ret
+
+RpcRt_NdrClientCall3 ENDP
+

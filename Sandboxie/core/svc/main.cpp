@@ -83,6 +83,7 @@ const  ULONG                 tzuk = 'xobs';
 //---------------------------------------------------------------------------
 
 ULONG Dll_Windows = 0;
+
 int WinMain(
     HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
@@ -99,6 +100,7 @@ int WinMain(
     if (GetProcAddress(_Ntdll, "LdrFastFailInLoaderCallout")) {
         Dll_Windows = 10;
     }
+
     WCHAR *cmdline = GetCommandLine();
     if (cmdline) {
 
@@ -125,7 +127,6 @@ int WinMain(
             GuiServer::RunSlave(cmdline5);
             return NO_ERROR;
         }
-
 
     }
 

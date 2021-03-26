@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@
 #include <psapi.h>
 #define INITGUID
 #include <guiddef.h>
-
+#include "trace.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -42,6 +43,9 @@ static ULONG RpcRt_RpcBindingInqAuthClientEx(
 static ULONG RpcRt_RpcBindingFromStringBindingW(
     const WCHAR *StringBinding, void **OutBinding);
 
+static ULONG RpcRt_RpcBindingFromStringBindingA(
+    const CHAR* StringBinding, void** OutBinding);
+
 static RPC_STATUS NsiRpc_NsiRpcRegisterChangeNotification(
     LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7);
 
@@ -51,11 +55,41 @@ static RPC_STATUS RpcRt_RpcBindingCreateW(
     RPC_BINDING_HANDLE_OPTIONS_V1 * Options,
     RPC_BINDING_HANDLE * Binding);
 
+static RPC_STATUS RpcRt_RpcBindingCreateA(
+    RPC_BINDING_HANDLE_TEMPLATE_V1_A* Template,
+    RPC_BINDING_HANDLE_SECURITY_V1_A* Security,
+    RPC_BINDING_HANDLE_OPTIONS_V1* Options,
+    RPC_BINDING_HANDLE* Binding);
+
 void *Scm_QueryServiceByName(
     const WCHAR *ServiceNm,
     ULONG with_service_status, ULONG with_service_config);
 
 int Scm_Start_Sppsvc();
+
+
+#ifdef _WIN64
+
+extern ULONG_PTR __cdecl RpcRt_NdrClientCall2(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING  pFormat, ...);
+
+extern ULONG_PTR __cdecl RpcRt_NdrClientCall3(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, ...);
+
+#else
+
+extern ULONG_PTR __cdecl RpcRt_NdrClientCall(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING  pFormat, ULONG_PTR* Args);
+
+extern ULONG_PTR __cdecl RpcRt_NdrClientCall2(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING  pFormat, ULONG_PTR* Args);
+
+extern ULONG_PTR __cdecl RpcRt_NdrClientCall4(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING  pFormat, ULONG_PTR* Args);
+
+#endif _WIN64
+
+
 //---------------------------------------------------------------------------
 
 
@@ -66,6 +100,9 @@ typedef ULONG (*P_RpcBindingInqAuthClientEx)(
 typedef ULONG (*P_RpcBindingFromStringBindingW)(
     const WCHAR *StringBinding, void **OutBinding);
 
+typedef ULONG(*P_RpcBindingFromStringBindingA)(
+    const CHAR* StringBinding, void** OutBinding);
+
 typedef RPC_STATUS (*P_NsiRpcRegisterChangeNotification)(
     LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7);
 
@@ -74,6 +111,12 @@ typedef RPC_STATUS (*P_RpcBindingCreateW)(
     RPC_BINDING_HANDLE_SECURITY_V1_W * Security,
     RPC_BINDING_HANDLE_OPTIONS_V1 * Options,
     RPC_BINDING_HANDLE * Binding);
+
+typedef RPC_STATUS(*P_RpcBindingCreateA)(
+    RPC_BINDING_HANDLE_TEMPLATE_V1_A* Template,
+    RPC_BINDING_HANDLE_SECURITY_V1_A* Security,
+    RPC_BINDING_HANDLE_OPTIONS_V1* Options,
+    RPC_BINDING_HANDLE* Binding);
 
 typedef RPC_STATUS (RPC_ENTRY *P_RpcStringBindingComposeW)( TCHAR *ObjUuid, TCHAR *ProtSeq, TCHAR *NetworkAddr, TCHAR *EndPoint, TCHAR *Options, TCHAR **StringBinding);
 RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(
@@ -91,25 +134,59 @@ typedef RPC_STATUS(RPC_ENTRY *P_RpcStringFreeW)(RPC_WSTR *String);
 
 typedef RPC_STATUS (*P_RpcMgmtSetComTimeout)(RPC_BINDING_HANDLE Binding, unsigned int __RPC_FAR Timeout);
 
+typedef BOOL(WINAPI* P_GetModuleInformation)(_In_ HANDLE hProcess, _In_ HMODULE hModule, _Out_ LPMODULEINFO lpmodinfo, _In_ DWORD cb);
+
+typedef ULONG_PTR(__cdecl* P_NdrClientCallX)(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING  pFormat, ...);
+
+typedef ULONG_PTR(__cdecl* P_NdrClientCall3)(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, ...);
+
+//---------------------------------------------------------------------------
+
+
 P_RpcStringBindingComposeW  __sys_RpcStringBindingComposeW = NULL;
 
 P_RpcBindingInqAuthClientEx __sys_RpcBindingInqAuthClientEx = NULL;
 
 P_RpcBindingFromStringBindingW __sys_RpcBindingFromStringBindingW = NULL;
 
+P_RpcBindingFromStringBindingA __sys_RpcBindingFromStringBindingA = NULL;
+
 P_NsiRpcRegisterChangeNotification __sys_NsiRpcRegisterChangeNotification = NULL;
 
 P_RpcBindingCreateW __sys_RpcBindingCreateW = NULL;
+P_RpcBindingCreateA __sys_RpcBindingCreateA = NULL;
 
 P_RpcMgmtSetComTimeout __sys_RpcMgmtSetComTimeout = NULL;
 #define RPC_C_BINDING_TIMEOUT   4
+BOOLEAN __use_RpcMgmtSetComTimeout = FALSE;
 
 P_UuidToStringW __sys_UuidToStringW = NULL;
 
 P_RpcStringFreeW __sys_RpcStringFreeW = NULL;
 
-extern WCHAR    *g_Ipc_DynamicPortNames[NUM_DYNAMIC_PORTS];
+P_GetModuleInformation __sys_GetModuleInformation = NULL;
 
+#ifdef _WIN64
+P_NdrClientCallX  __sys_NdrClientCall2 = NULL;
+P_NdrClientCall3  __sys_NdrClientCall3 = NULL;
+#else
+P_NdrClientCallX  __sys_NdrClientCall = NULL;
+P_NdrClientCallX  __sys_NdrClientCall2 = NULL;
+P_NdrClientCallX  __sys_NdrClientCall4 = NULL;
+#endif
+
+extern LIST Ipc_DynamicPortNames;
+
+typedef struct _IPC_DYNAMIC_PORT {
+    LIST_ELEM list_elem;
+
+    WCHAR       wstrPortId[DYNAMIC_PORT_ID_CHARS];
+    WCHAR       wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+} IPC_DYNAMIC_PORT;
+
+BOOLEAN g_rpc_client_hooks = FALSE;
 
 //---------------------------------------------------------------------------
 // RpcRt_Init
@@ -132,7 +209,9 @@ _FX BOOLEAN RpcRt_Init(HMODULE module)
     if (Dll_OsBuild >= 6000)        // Vista
     {
         P_RpcBindingFromStringBindingW  RpcBindingFromStringBindingW;
+        P_RpcBindingFromStringBindingA  RpcBindingFromStringBindingA;
         P_RpcBindingCreateW     RpcBindingCreateW;
+        P_RpcBindingCreateA     RpcBindingCreateA;
 
         if ( Dll_OsBuild >= 15063) {
             void *RpcStringBindingComposeW;
@@ -145,12 +224,67 @@ _FX BOOLEAN RpcRt_Init(HMODULE module)
 
         SBIEDLL_HOOK(RpcRt_, RpcBindingFromStringBindingW);
 
+        RpcBindingFromStringBindingA = (P_RpcBindingFromStringBindingA)
+            Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcBindingFromStringBindingA", "RpcBindingFromStringBindingA");
+
+        SBIEDLL_HOOK(RpcRt_, RpcBindingFromStringBindingA);
+
         RpcBindingCreateW = (P_RpcBindingCreateW)
             Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcBindingCreateW", "RpcBindingCreateW");
 
         SBIEDLL_HOOK(RpcRt_, RpcBindingCreateW);
 
+        RpcBindingCreateA = (P_RpcBindingCreateA)
+            Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcBindingCreateA", "RpcBindingCreateA");
+
+        SBIEDLL_HOOK(RpcRt_, RpcBindingCreateA);
+
         __sys_RpcMgmtSetComTimeout = (P_RpcMgmtSetComTimeout)Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcMgmtSetComTimeout", "RpcMgmtSetComTimeout");
+        __use_RpcMgmtSetComTimeout = Config_GetSettingsForImageName_bool(L"RpcMgmtSetComTimeout", TRUE);
+    }
+
+    WCHAR   wsTraceOptions[4];
+    if ((Dll_OsBuild >= 8400) // win8 and above
+    && SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
+    {
+        g_rpc_client_hooks = TRUE;
+
+#ifdef _WIN64
+
+        P_NdrClientCallX NdrClientCall2;
+        NdrClientCall2 = (P_NdrClientCallX)Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrClientCall2", "NdrClientCall2");
+        SBIEDLL_HOOK(RpcRt_, NdrClientCall2);
+
+        P_NdrClientCall3 NdrClientCall3;
+        NdrClientCall3 = (P_NdrClientCall3)Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrClientCall3", "NdrClientCall3");
+        SBIEDLL_HOOK(RpcRt_, NdrClientCall3);
+
+        //Ndr64AsyncServerCall64(PRPC_MESSAGE pRpcMsg)
+        //Ndr64AsyncServerCallAll(PRPC_MESSAGE pRpcMsg)
+        //NdrAsyncServerCall(PRPC_MESSAGE pRpcMsg)
+        //NdrServerCall2(PRPC_MESSAGE pRpcMsg)
+        //NdrServerCallAll(PRPC_MESSAGE pRpcMsg)
+        //NdrServerCallNdr64(PRPC_MESSAGE pRpcMsg)
+
+#else
+        
+        P_NdrClientCallX NdrClientCall;
+        NdrClientCall = (P_NdrClientCallX)Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrClientCall", "NdrClientCall");
+        SBIEDLL_HOOK(RpcRt_, NdrClientCall);
+
+        P_NdrClientCallX NdrClientCall2;
+        NdrClientCall2 = (P_NdrClientCallX)Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrClientCall2", "NdrClientCall2");
+        SBIEDLL_HOOK(RpcRt_, NdrClientCall2);
+
+        P_NdrClientCallX NdrClientCall4;
+        NdrClientCall4 = (P_NdrClientCallX)Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrClientCall4", "NdrClientCall4");
+        SBIEDLL_HOOK(RpcRt_, NdrClientCall4);
+
+        //NdrAsyncServerCall(PRPC_MESSAGE pRpcMsg)
+        //NdrServerCall2(PRPC_MESSAGE pRpcMsg)
+        //NdrServerCall(PRPC_MESSAGE pRpcMsg)
+
+#endif
     }
 
     return Secure_Init_Elevation(module);
@@ -226,18 +360,196 @@ _FX ULONG RpcRt_RpcBindingInqAuthClientEx(
     return rc;
 }
 
-HANDLE FindServicePidByName(WCHAR *pSvcName)
-{
-    HANDLE hPidRet = NULL;
 
-    SERVICE_QUERY_RPL *rpl = (SERVICE_QUERY_RPL *)
-        Scm_QueryServiceByName(pSvcName, TRUE, FALSE);
-    if (rpl) {
-        hPidRet  = (HANDLE)rpl->service_status.dwProcessId;
-        Dll_Free(rpl);
+//---------------------------------------------------------------------------
+// RpcRt_TestCallingModule
+//---------------------------------------------------------------------------
+
+
+BOOLEAN RpcRt_TestCallingModule(ULONG_PTR pRetAddr, ULONG_PTR hModule)
+{
+    if (hModule && (pRetAddr > hModule))
+    {
+        MODULEINFO modinfo;
+
+        if (__sys_GetModuleInformation(GetCurrentProcess(), (HANDLE)hModule, &modinfo, sizeof(MODULEINFO)))
+        {
+            // return address within the module?
+            if (pRetAddr < hModule + modinfo.SizeOfImage)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// RpcRt_FindModulePreset
+//---------------------------------------------------------------------------
+
+/*
+_FX NTSTATUS RpcRt_FindModulePreset(
+    const WCHAR* CallingModule, const WCHAR* Identifier, WCHAR* value, ULONG value_size)
+{
+    WCHAR conf_buf[2048];
+    ULONG found_mode = -1;
+
+    ULONG index = 0;
+    while (1) {
+
+        NTSTATUS status = SbieApi_QueryConf(
+            NULL, L"RpcPortBinding", index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+        ++index;
+
+        //
+        // examples:
+        //
+        // RpcPortBinding=winspool.drv,'ncalrpc:[,Security=Impersonation Dynamic False]',Resolve=Spooler
+        // RpcPortBinding=WinHttp.dll,ncalrpc:,Resolve=WinHttpAutoProxySvc,TimeOut=y
+        //
+        // RpcPortBinding=WinSCard.dll,{00000000-0000-0000-0000-000000000000},Resolve=SCard
+        // RpcPortBindingIfId=SCard,{C6B5235A-E413-481D-9AC8-31681B1FAAF5}
+        //
+
+        ULONG mode = -1;
+        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, CallingModule, &mode);
+        if (!found_value || mode > found_mode)
+            continue;
+
+        WCHAR* test_value = NULL;
+        ULONG test_len = 0;
+        found_value = Config_GetTagValue(found_value, &test_value, &test_len, L',');
+
+        if (!test_value || !found_value || !*found_value) {
+            SbieApi_Log(2207, L"RpcPortBinding");
+            continue;
+        }
+        //test_value[test_len] = L'\0';
+
+        if (!Config_MatchImage(test_value, test_len, Identifier, 1))
+            continue;
+
+        wcscpy_s(value, value_size / sizeof(WCHAR), found_value);
+        found_mode = mode;
     }
 
-    return hPidRet;
+    if (found_mode == -1)
+        return STATUS_NO_MORE_ENTRIES;
+    return STATUS_SUCCESS;
+}*/
+
+
+//---------------------------------------------------------------------------
+// GetDynamicLpcPortName
+//---------------------------------------------------------------------------
+
+
+WCHAR* GetDynamicLpcPortName(const WCHAR* wszPortId)
+{
+    EPMAPPER_GET_PORT_NAME_REQ req;
+    EPMAPPER_GET_PORT_NAME_RPL* rpl;
+
+    memset(&req, 0, sizeof(req));
+    req.h.length = sizeof(EPMAPPER_GET_PORT_NAME_REQ);
+    req.h.msgid = MSGID_EPMAPPER_GET_PORT_NAME;
+    wcscpy(req.wszPortId, wszPortId);
+
+    rpl = (EPMAPPER_GET_PORT_NAME_RPL*)SbieDll_CallServer(&req.h);
+
+    WCHAR   wsTraceOptions[4];
+    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
+    {
+        WCHAR text[130];
+
+        if (rpl && NT_SUCCESS(rpl->h.status))
+            Sbie_snwprintf(text, 130, L"Resolved dynamic port: %s; endpoint: %s", req.wszPortId, rpl->wszPortName);
+        else
+            Sbie_snwprintf(text, 130, L"Failed to resolve dynamic port: %s; status: %08X", req.wszPortId, rpl ? rpl->h.status : 0);
+
+        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, text, FALSE);
+    }
+
+    if (rpl && NT_SUCCESS(rpl->h.status))
+    {
+        IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
+        while (port) 
+        {    
+            if (_wcsicmp(req.wszPortId, port->wstrPortId) == 0)
+            {
+                wmemcpy(port->wstrPortName, rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
+                break;
+            }
+
+            port = List_Next(port);
+        }
+
+        if (port == NULL) 
+        {
+            port = (IPC_DYNAMIC_PORT*)Dll_Alloc(sizeof(IPC_DYNAMIC_PORT));
+            if (port)
+            {
+                wmemcpy(port->wstrPortId, req.wszPortId, DYNAMIC_PORT_ID_CHARS);
+                wmemcpy(port->wstrPortName, rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
+
+                List_Insert_After(&Ipc_DynamicPortNames, NULL, port);
+            }
+        }
+
+        Dll_Free(rpl);
+        if(port)
+            return port->wstrPortName + 13; // skip "\\RPC Control\\"
+    }
+
+    return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// RpcRt_IsDynamicPortOpen
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN RpcRt_IsDynamicPortOpen(const WCHAR* wszPortName)
+{
+    IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
+    while (port) 
+    {    
+        if (_wcsicmp(wszPortName, port->wstrPortName) == 0)
+        {
+            // see also RpcBindingFromStringBindingW in core/dll/rpcrt.c
+            // and core/drv/ipc_spl.c
+            return TRUE;
+        }
+
+        port = List_Next(port);
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// RpcRt_RpcBindingFromStringBindingA
+//---------------------------------------------------------------------------
+
+
+_FX ULONG RpcRt_RpcBindingFromStringBindingA(
+    const CHAR* StringBinding, void** OutBinding)
+{
+    NTSTATUS status = 0;
+    THREAD_DATA* TlsData = NULL;
+
+    TlsData = Dll_GetTlsData(NULL);
+
+    TlsData->rpc_caller = (ULONG_PTR)_ReturnAddress();
+
+    status = __sys_RpcBindingFromStringBindingA(StringBinding, OutBinding);
+
+    TlsData->rpc_caller = 0;
+
+    return status;
 }
 
 
@@ -249,9 +561,6 @@ HANDLE FindServicePidByName(WCHAR *pSvcName)
 _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     const WCHAR *StringBinding, void **OutBinding)
 {
-    static const WCHAR *_old =
-        L"ncalrpc:[,Security=Impersonation Dynamic False]";
-
     //
     // printing functions in winspool.drv talk to the Spooler service
     // (process spoolsv.exe).  prior to Windows 8.1, the service was
@@ -287,129 +596,173 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         return RPC_S_INVALID_ARG;
     }
 
-    if (_wcsicmp(StringBinding, _old) == 0) {
+    BOOLEAN use_RpcMgmtSetComTimeout = __use_RpcMgmtSetComTimeout;
 
-        ULONG_PTR WinSpool = (ULONG_PTR)GetModuleHandle(L"winspool.drv");
-        ULONG_PTR RetAddr = (ULONG_PTR)_ReturnAddress();
-        if (WinSpool && (RetAddr > WinSpool)
-                     && (RetAddr < WinSpool + 0x1FFFF)) {
+    THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
 
-            HANDLE hPidSpooler = FindServicePidByName(L"Spooler");
+    ULONG_PTR pRetAddr = TlsData->rpc_caller ? TlsData->rpc_caller : (ULONG_PTR)_ReturnAddress();
 
-            if (hPidSpooler) {
+    WCHAR wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+    memset(wstrPortName, 0, sizeof(wstrPortName));
 
-                WCHAR pwszPortName[DYNAMIC_PORT_NAME_CHARS];
-                memset(pwszPortName, 0, sizeof(pwszPortName));
+    static const WCHAR* dynamicFalse = L"ncalrpc:[,Security=Impersonation Dynamic False]";
+    static const WCHAR* dynamicTrue = L"ncalrpc:[,Security=Impersonation Dynamic True]";
 
-                if (SbieApi_CallThree(
-                    API_GET_SPOOLER_PORT,
-                    (ULONG_PTR)hPidSpooler,
-                    (ULONG_PTR)L"spoolsv.exe",
-                    (ULONG_PTR)g_Ipc_DynamicPortNames[SPOOLER_PORT]) == STATUS_SUCCESS)
-                {
-                    wcscpy(pwszPortName, L"ncalrpc:[");
-                    wcscpy(pwszPortName + 9, g_Ipc_DynamicPortNames[SPOOLER_PORT] + 13);
-                    wcscat(pwszPortName, _old + 9);
-                    return __sys_RpcBindingFromStringBindingW(pwszPortName, OutBinding);
-                }
-            }
+    if (_wcsicmp(StringBinding, dynamicFalse) == 0) {
+
+        ULONG_PTR pWinSpool = (ULONG_PTR)GetModuleHandle(L"winspool.drv");
+
+        if (RpcRt_TestCallingModule(pRetAddr, pWinSpool)) {
+
+            WCHAR* pwszTempPortName = GetDynamicLpcPortName(SPOOLER_PORT_ID);
+
+            if (pwszTempPortName == NULL)
+                return RPC_S_ACCESS_DENIED;
+
+            wcscpy(wstrPortName, L"ncalrpc:[");
+            wcscpy(wstrPortName + 9, pwszTempPortName);
+            wcscat(wstrPortName, dynamicFalse + 9);
         }
     }
-
-    // WPAD (Windows Proxy Auto Discovery) uses dynamic RPC endpoints starting in Win 10 Anniv.
-
     else if (_wcsicmp(StringBinding, L"ncalrpc:") == 0) {
-
-        // are we being called from WinHttp?
+    
+        WCHAR pwszEmpty[] = L"";
+        WCHAR* pwszTempPortName = pwszEmpty;
+    
         ULONG_PTR hWinHttp = (ULONG_PTR)GetModuleHandle(L"WinHttp.dll");
-        ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
+        ULONG_PTR hBtApi = (ULONG_PTR)GetModuleHandle(L"BluetoothApis.dll");
+        ULONG_PTR hSsdpApi = (ULONG_PTR)GetModuleHandle(L"SSDPAPI.dll"); // A
 
-        if (hWinHttp && (pRetAddr > hWinHttp))
+        if (RpcRt_TestCallingModule(pRetAddr, hWinHttp))
         {
-            MODULEINFO modinfo;
+            // WPAD (Windows Proxy Auto Discovery) uses dynamic RPC endpoints starting in Win 10 Anniv.
+            pwszTempPortName = GetDynamicLpcPortName(WPAD_PORT_ID);
+        }
+        else if (RpcRt_TestCallingModule(pRetAddr, hBtApi))
+        {
+            // Bluetooth support service
+            pwszTempPortName = GetDynamicLpcPortName(BT_PORT_ID);
+        }
+        else if (RpcRt_TestCallingModule(pRetAddr, hSsdpApi))
+        {
+            // Simple Service Discovery Protocol API
+            pwszTempPortName = GetDynamicLpcPortName(SSDP_PORT_ID);
+        }
+        
+        if (pwszTempPortName != pwszEmpty) {
 
-            if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hWinHttp, &modinfo, sizeof(MODULEINFO)))
-            {
-                // return address within WinHttp?
-                if (pRetAddr < hWinHttp + modinfo.SizeOfImage)
-                {
-                    HANDLE hPidWpad = FindServicePidByName(L"WinHttpAutoProxySvc");
-                    if (hPidWpad)
-                    {
-                        WCHAR wstrPortName[DYNAMIC_PORT_NAME_CHARS];
-                        memset(wstrPortName, 0, sizeof(wstrPortName));
+            if (pwszTempPortName == NULL)
+                return RPC_S_ACCESS_DENIED;
 
-                        wmemcpy(wstrPortName, L"ncalrpc:[", 9);
+            wcscpy(wstrPortName, L"ncalrpc:[");
+            wcscpy(wstrPortName + 9, pwszTempPortName);
+            wcscat(wstrPortName, L"]");
+        }
+    } 
+    else if (_wcsicmp(StringBinding, dynamicTrue) == 0) {
 
-                        if (SbieApi_CallThree(
-                            API_GET_WPAD_PORT,
-                            (ULONG_PTR)hPidWpad,
-                            (ULONG_PTR)L"svchost.exe",
-                            (ULONG_PTR)g_Ipc_DynamicPortNames[WPAD_PORT]) == STATUS_SUCCESS)
-                        {
-                            wcscpy(wstrPortName + 9, g_Ipc_DynamicPortNames[WPAD_PORT] + 13);
-                            wcscat(wstrPortName, L"]");
-                            return __sys_RpcBindingFromStringBindingW(wstrPortName, OutBinding);
-                        }
-                    }
-                }
-            }
+        ULONG_PTR pWINNSI = (ULONG_PTR)GetModuleHandle(L"WINNSI.DLL");
+
+        if (RpcRt_TestCallingModule(pRetAddr, pWINNSI)) {
+            use_RpcMgmtSetComTimeout = FALSE;
         }
     }
+    else if (_wcsicmp(StringBinding, L"0497b57d-2e66-424f-a0c6-157cd5d41700@ncalrpc:") == 0) {
+
+        ULONG_PTR pkernel32 = (ULONG_PTR)GetModuleHandle(L"kernel32.dll");
+        // kernel32.dll!AicpCreateBindingHandle
+        // kernel32.dll!AicGetPackageActivationTokenForSxS
+        // KernelBase.dll!CreateProcessInternalW
+        // SbieDll.dll!Proc_CreateProcessInternalW_RS5
+
+        if (RpcRt_TestCallingModule(pRetAddr, pkernel32)) {
+            use_RpcMgmtSetComTimeout = TRUE;
+        }
+    }
+
+    WCHAR* CallingModule = Trace_FindModuleByAddress((void*)pRetAddr);
+    if (CallingModule)
+    {
+        /*WCHAR ModulePreset[256];
+        if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringBinding, ModulePreset, sizeof(ModulePreset)))) {
+            
+            WCHAR tagValue[96];
+            if (Config_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), NULL, L','))
+            {
+                WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
+
+                if (pwszTempPortName == NULL)
+                    return RPC_S_ACCESS_DENIED;
+
+                wcscpy(wstrPortName, L"ncalrpc:[");
+                wcscpy(wstrPortName + 9, pwszTempPortName);
+                wcscat(wstrPortName, L"]");
+                //wcscat(wstrPortName, dynamicFalse + 9);
+            }
+
+            if (Config_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), NULL, L','))
+            {
+                if (*tagValue == L'y' || *tagValue == L'Y')
+                    use_RpcMgmtSetComTimeout = TRUE;
+                else if (*tagValue == L'n' || *tagValue == L'N')
+                    use_RpcMgmtSetComTimeout = FALSE;
+            }
+        }*/
+
+        use_RpcMgmtSetComTimeout = SbieDll_GetBoolForStringFromList(CallingModule, NULL, L"UseRpcMgmtSetComTimeout", TRUE, use_RpcMgmtSetComTimeout);
+    }
+
 
     RPC_STATUS  status;
-    status = __sys_RpcBindingFromStringBindingW(StringBinding, OutBinding);
+    status = __sys_RpcBindingFromStringBindingW(*wstrPortName ? wstrPortName : StringBinding, OutBinding);
+
     // If there are any IpcTrace options set, then output this debug string
     WCHAR   wsTraceOptions[4];
-    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS)
+    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
     {
         WCHAR msg[512];
-        Sbie_swprintf(msg, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
-            StringBinding,
-            OutBinding,
-            status);
-        OutputDebugString(msg);
+
+        //Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingFromStringBindingW StringBinding = '%s', BindingHandle = 0x%X, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"StringBinding = '%s', wstrPortName = '%s', BindingHandle = 0x%X, status = 0x%08X, timeout = %d, caller = '%s'",
+            StringBinding, wstrPortName, OutBinding, status, use_RpcMgmtSetComTimeout,
+            CallingModule ? CallingModule : L"unknown");
+
+        //OutputDebugString(msg);
+        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
-    __sys_RpcMgmtSetComTimeout(*OutBinding, RPC_C_BINDING_TIMEOUT);
+
+    if(use_RpcMgmtSetComTimeout) __sys_RpcMgmtSetComTimeout(*OutBinding, RPC_C_BINDING_TIMEOUT);
     return status;
 }
 
 
-WCHAR *GetSCardLpcPortName()
+//---------------------------------------------------------------------------
+// RpcRt_RpcBindingCreateW
+//---------------------------------------------------------------------------
+
+_FX RPC_STATUS RpcRt_RpcBindingCreateA(
+    __in RPC_BINDING_HANDLE_TEMPLATE_V1_A* Template,
+    __in_opt RPC_BINDING_HANDLE_SECURITY_V1_A* Security,
+    __in_opt RPC_BINDING_HANDLE_OPTIONS_V1* Options,
+    __out RPC_BINDING_HANDLE* Binding)
 {
-    EPMAPPER_GET_PORT_NAME_REQ req;
-    EPMAPPER_GET_PORT_NAME_RPL *rpl;
-    // smart card interface {C6B5235A-E413-481D-9AC8-31681B1FAAF5}  
-    RPC_IF_ID   ifidRequest = { {0xC6B5235A, 0xE413, 0x481D, { 0x9A, 0xC8, 0x31, 0x68, 0x1B, 0x1F, 0xAA, 0xF5 }}, 1, 1};
+    NTSTATUS status = 0;
+    THREAD_DATA* TlsData = NULL;
 
-    memset(&req, 0, sizeof(req));
-    req.h.length = sizeof(EPMAPPER_GET_PORT_NAME_REQ);
-    req.h.msgid = MSGID_EPMAPPER_GET_PORT_NAME;
-    memcpy(&req.ifidRequest, &ifidRequest, sizeof(RPC_IF_ID));
+    TlsData = Dll_GetTlsData(NULL);
 
-    rpl = (EPMAPPER_GET_PORT_NAME_RPL *)SbieDll_CallServer(&req.h);
+    TlsData->rpc_caller = (ULONG_PTR)_ReturnAddress();
 
-    if (rpl)
-    {
-        static WCHAR wstrTempPortName[DYNAMIC_PORT_NAME_CHARS];
-        memset(wstrTempPortName, 0, sizeof(wstrTempPortName));
+    status = __sys_RpcBindingCreateA(Template, Security, Options, Binding);
 
-        wcscpy(wstrTempPortName, rpl->wszPortName + 9); // format is "ncalrpc:[LRPC-f760d5b40689a98168]" We only want actual port name
-        wstrTempPortName[23] = 0;                       // Take off the ']'
+    TlsData->rpc_caller = 0;
 
-        // Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168")
-        // Param 2 will return the port name with "\RPC Control\" prepended
-        SbieApi_CallTwo(
-            API_SET_SMART_CARD_PORT,
-            (ULONG_PTR)wstrTempPortName,
-            (ULONG_PTR)g_Ipc_DynamicPortNames[SMART_CARD_PORT]);
-
-        Dll_Free(rpl);
-        return wstrTempPortName;
-    }
-
-    return NULL;
+    return status;
 }
+
+//---------------------------------------------------------------------------
+// RpcRt_RpcBindingCreateW
+//---------------------------------------------------------------------------
 
 
 DEFINE_GUID(
@@ -420,6 +773,7 @@ DEFINE_GUID(
 DEFINE_GUID(
     MSDTC_UUID,
     0x906B0CE0, 0xC70B, 0x1067, 0xB3, 0x17, 0x00, 0xDD, 0x01, 0x06, 0x62, 0xDA);
+    
 
 _FX RPC_STATUS RpcRt_RpcBindingCreateW(
     __in RPC_BINDING_HANDLE_TEMPLATE_V1_W * Template,
@@ -427,6 +781,12 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
     __in_opt RPC_BINDING_HANDLE_OPTIONS_V1 * Options,
     __out RPC_BINDING_HANDLE * Binding)
 {
+    BOOLEAN use_RpcMgmtSetComTimeout = __use_RpcMgmtSetComTimeout;
+
+    THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
+
+    ULONG_PTR pRetAddr = TlsData->rpc_caller ? TlsData->rpc_caller : (ULONG_PTR)_ReturnAddress();
+
     if ( (memcmp(&Template->ObjectUuid, &MSDTC_UUID, sizeof(GUID)) == 0) && RPC_PROTSEQ_LRPC == Template->ProtocolSequence && !Template->StringEndpoint)
     {
         Template->StringEndpoint = (unsigned short*)L"samss lpc";
@@ -436,91 +796,91 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         RPC_PROTSEQ_LRPC == Template->ProtocolSequence &&
         !Template->StringEndpoint)
     {
-        ULONG_PTR hResourcePolicyClient = (ULONG_PTR)GetModuleHandle(L"resourcepolicyclient.dll");
-        ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
-
         ULONG_PTR hWinSCard = (ULONG_PTR)GetModuleHandle(L"WinSCard.dll");
+        ULONG_PTR hResourcePolicyClient = (ULONG_PTR)GetModuleHandle(L"resourcepolicyclient.dll");
 
-        if (hWinSCard && (pRetAddr > hWinSCard))
+        if (RpcRt_TestCallingModule(pRetAddr, hWinSCard))
         {
-            MODULEINFO modinfo;
+            // smart card interface {C6B5235A-E413-481D-9AC8-31681B1FAAF5}  
+            Template->StringEndpoint = GetDynamicLpcPortName(SMART_CARD_PORT_ID);
+        }
+        else if (RpcRt_TestCallingModule(pRetAddr, hResourcePolicyClient))
+        {
+            // Win 10 AU WinRT interface - {88ABCBC3-34EA-76AE-8215-767520655A23}
+            Template->StringEndpoint = GetDynamicLpcPortName(GAME_CONFIG_STORE_PORT_ID);
+        }
+        else
+        {
+            ULONG_PTR pAppXDeploymentClient = (ULONG_PTR)GetModuleHandle(L"AppXDeploymentClient.dll");
 
-            if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hWinSCard, &modinfo, sizeof(MODULEINFO)))
-            {
-                // return address within WinSCard?
-                if (pRetAddr < hWinSCard + modinfo.SizeOfImage)
-                {
-                    Template->StringEndpoint = GetSCardLpcPortName();
-                }
+            if (RpcRt_TestCallingModule(pRetAddr, pAppXDeploymentClient)) {
+                use_RpcMgmtSetComTimeout = TRUE;
             }
         }
-        else if (hResourcePolicyClient && (pRetAddr > hResourcePolicyClient))
-        {
-            MODULEINFO modinfo;
+    }
 
-            if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hResourcePolicyClient, &modinfo, sizeof(MODULEINFO)))
+    WCHAR* CallingModule = Trace_FindModuleByAddress((void*)pRetAddr);
+    if (CallingModule)
+    {
+        /*WCHAR ModulePreset[256];
+        if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringUuid, ModulePreset, sizeof(ModulePreset)))) {
+            
+            WCHAR tagValue[96];
+
+            if (RPC_PROTSEQ_LRPC == Template->ProtocolSequence && !Template->StringEndpoint)
             {
-                // return address within ResourcePolicyClient?
-                if (pRetAddr < hResourcePolicyClient + modinfo.SizeOfImage)
+                if (Config_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), NULL, L','))
                 {
-                    EPMAPPER_GET_PORT_NAME_REQ req;
-                    EPMAPPER_GET_PORT_NAME_RPL *rpl;
-                    // Win 10 AU WinRT interface
-                    RPC_IF_ID   ifidRequest = { {0x88abcbc3, 0x34EA, 0x76AE, { 0x82, 0x15, 0x76, 0x75, 0x20, 0x65, 0x5A, 0x23 }}, 0, 0};
-
-                    memset(&req, 0, sizeof(req));
-                    req.h.length = sizeof(EPMAPPER_GET_PORT_NAME_REQ);
-                    req.h.msgid = MSGID_EPMAPPER_GET_PORT_NAME;
-                    memcpy(&req.ifidRequest, &ifidRequest, sizeof(RPC_IF_ID));
-
-                    rpl = (EPMAPPER_GET_PORT_NAME_RPL *)SbieDll_CallServer(&req.h);
-
-                    if (rpl) {
-
-                        ULONG rpl_status = rpl->h.status;
-                        if (rpl_status == 0)
-                        {
-                            static WCHAR    wstrTempPortName[DYNAMIC_PORT_NAME_CHARS];
-                            memset(wstrTempPortName, 0, sizeof(wstrTempPortName));
-
-                            wcscpy(wstrTempPortName, rpl->wszPortName + 9); // format is "ncalrpc:[LRPC-f760d5b40689a98168]" We only want actual port name
-                            wstrTempPortName[23] = 0;                       // Take off the ']'
-                            Template->StringEndpoint = wstrTempPortName;
-
-                            // Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168")
-                            // Param 2 will return the port name with "\RPC Control\" prepended
-                            SbieApi_CallTwo(
-                                API_SET_GAME_CONFIG_STORE_PORT,
-                                (ULONG_PTR)wstrTempPortName,
-                                (ULONG_PTR)g_Ipc_DynamicPortNames[GAME_CONFIG_STORE_PORT]);
-                        }
-                        Dll_Free(rpl);
-                    }
+                    Template->StringEndpoint = GetDynamicLpcPortName(tagValue);
+                }
+                else if (Config_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), NULL, L','))
+                {
+                    Template->StringEndpoint = (unsigned short*)...;
                 }
             }
-        }
+
+            if (Config_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), NULL, L','))
+            {
+                if (*tagValue == L'y' || *tagValue == L'Y')
+                    use_RpcMgmtSetComTimeout = TRUE;
+                else if (*tagValue == L'n' || *tagValue == L'N')
+                    use_RpcMgmtSetComTimeout = FALSE;
+            }
+        }*/
+
+        use_RpcMgmtSetComTimeout = SbieDll_GetBoolForStringFromList(CallingModule, NULL, L"UseRpcMgmtSetComTimeout", TRUE, use_RpcMgmtSetComTimeout);
     }
 
     RPC_STATUS  status;
     status = __sys_RpcBindingCreateW(Template, Security, Options, Binding);
+
     // If there are any IpcTrace options set, then output this debug string
     WCHAR   wsTraceOptions[4];
-    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS)
+    if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
     {
         WCHAR msg[512];
-        RPC_CSTR   StringUuid;
+        RPC_WSTR   StringUuid;
 
         __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);
-        Sbie_swprintf(msg, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        //Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
+        Sbie_snwprintf(msg, 512, L"Endpoint = '%s', UUID = %s, status = 0x%08X, timeout = %d, caller = '%s'", 
             Template && Template->StringEndpoint ? Template->StringEndpoint : L"null",
-            StringUuid,
-            status);
-        OutputDebugString(msg);
+            StringUuid, status, use_RpcMgmtSetComTimeout,
+            CallingModule ? CallingModule : L"unknown");
         __sys_RpcStringFreeW(&StringUuid);
+
+        //OutputDebugString(msg);
+        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
-    __sys_RpcMgmtSetComTimeout(*Binding, RPC_C_BINDING_TIMEOUT);
+
+    if (use_RpcMgmtSetComTimeout) __sys_RpcMgmtSetComTimeout(*Binding, RPC_C_BINDING_TIMEOUT);
     return status;
 }
+
+
+//---------------------------------------------------------------------------
+// RpcRt_RpcStringBindingComposeW
+//---------------------------------------------------------------------------
 
 
 #define UUID_UserMgrCli L"B18FBAB6-56F8-4702-84E0-41053293A869"
@@ -529,14 +889,10 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
     ULONG_PTR hSppc =  (ULONG_PTR)GetModuleHandle(L"sppc.dll");
     ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
 
-    if (hSppc && (pRetAddr > hSppc) && EndPoint == NULL && ObjUuid == NULL) {
-        MODULEINFO modinfo;
-        if (GetModuleInformation(GetCurrentProcess(), (HANDLE)hSppc, &modinfo, sizeof(MODULEINFO))) {
-            if (pRetAddr < hSppc + modinfo.SizeOfImage) {
-                EndPoint =  L"SPPCTransportEndpoint-00001";
-                Scm_Start_Sppsvc();
-            }
-        }
+    if (RpcRt_TestCallingModule(pRetAddr, hSppc))
+    {
+        EndPoint = L"SPPCTransportEndpoint-00001";
+        Scm_Start_Sppsvc();
     }
     // we must block this in Win 10 to prevent r-click context menu hang in Explorer
     else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
@@ -545,3 +901,108 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
     }
     return __sys_RpcStringBindingComposeW(ObjUuid,ProtSeq,NetworkAddr,EndPoint,Options,StringBinding);
 }
+
+
+//---------------------------------------------------------------------------
+// RpcRt_NdrClientCallX
+//---------------------------------------------------------------------------
+
+void Sbie_StringFromGUID(const GUID* guid, WCHAR* str);
+
+void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress,PMIDL_STUB_DESC pStubDescriptor)
+{
+    WCHAR text[512] = L"RpcRt_NdrClientCallX";
+    __try
+    {
+        const WCHAR* CallingModule = Trace_FindModuleByAddress(ReturnAddress);
+        if (!CallingModule)
+            CallingModule = L"unknown";
+
+        PRPC_CLIENT_INTERFACE rpcInterface = (PRPC_CLIENT_INTERFACE)pStubDescriptor->RpcInterfaceInformation;
+        if (rpcInterface)
+        {
+            WCHAR interfaceID[48];
+            Sbie_StringFromGUID(&rpcInterface->InterfaceId.SyntaxGUID, interfaceID);
+
+            Sbie_snwprintf(text, 512, L"Calling %s UUID = %s}, %d.%d, caller = '%s'", Function, interfaceID,
+                rpcInterface->InterfaceId.SyntaxVersion.MajorVersion, rpcInterface->InterfaceId.SyntaxVersion.MinorVersion, CallingModule);
+        }
+        else
+        {
+            Sbie_snwprintf(text, 512, L"Calling %s caller = '%s'", Function, CallingModule);
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {}
+    SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, text, FALSE);
+}
+
+
+#ifdef _WIN64
+
+ULONG_PTR RpcRt_NdrClientCall2_x64(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, va_list vl)
+{
+    void* ReturnAddress = (void*)*(__int64*)(vl - (3 * 8));
+
+    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+ULONG_PTR RpcRt_NdrClientCall3_x64(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, va_list vl)
+{
+    void* ReturnAddress = (void*)*(__int64*)(vl - (4 * 8));
+
+    __try {
+        RpcRt_NdrClientCallX(L"NdrClientCall3", ReturnAddress, pProxyInfo->pStubDesc);
+    }__except (EXCEPTION_EXECUTE_HANDLER) {}
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+#else
+
+ULONG_PTR __cdecl RpcRt_NdrClientCall_x86(
+    void* ReturnAddress,
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
+{
+    //va_list vl;
+    //va_start(vl, pFormat);
+
+    RpcRt_NdrClientCallX(L"NdrClientCall", ReturnAddress, pStubDescriptor);
+
+    //va_end(vl);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+ULONG_PTR __cdecl RpcRt_NdrClientCall2_x86(
+    void* ReturnAddress,
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
+{
+    //va_list vl;
+    //va_start(vl, pFormat);
+
+    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor);
+
+    //va_end(vl);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+ULONG_PTR __cdecl RpcRt_NdrClientCall4_x86(
+    void* ReturnAddress,
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
+{
+    //va_list vl;
+    //va_start(vl, pFormat);
+
+    RpcRt_NdrClientCallX(L"NdrClientCall4", ReturnAddress, pStubDescriptor);
+
+    //va_end(vl);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+#endif _WIN64

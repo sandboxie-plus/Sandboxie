@@ -308,7 +308,7 @@ static const WCHAR *Key_Wow6432Node = L"\\Wow6432Node\\";
 #if 0
 #define PRINT_STATUS(x) if (Key_Trace) { \
     WCHAR status_txt[64];                                   \
-    Sbie_swprintf(status_txt, L#x L" - %08X\n", status);         \
+    Sbie_snwprintf(status_txt, 64, L#x L" - %08X\n", status);         \
     OutputDebugString(status_txt);                          \
     }
 #else
@@ -319,7 +319,7 @@ static const WCHAR *Key_Wow6432Node = L"\\Wow6432Node\\";
 #if 0
 #define PRINT_PATH(title,ptrstr) if (Key_Trace) { \
     WCHAR path_txt[256];                                    \
-    Sbie_swprintf(path_txt, title L"%-200.200s\n", *ptrstr);     \
+    Sbie_snwprintf(path_txt, 256, title L"%-200.200s\n", *ptrstr);     \
     OutputDebugString(path_txt);                            \
     }
 #else

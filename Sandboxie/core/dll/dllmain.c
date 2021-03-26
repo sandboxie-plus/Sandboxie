@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,6 +23,7 @@
 
 #include "dll.h"
 #include "obj.h"
+#include "trace.h"
 #include "debug.h"
 #include "core/low/lowdata.h"
 #include "common/my_version.h"
@@ -30,7 +32,6 @@
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
-
 
 static void Dll_InitGeneric(HINSTANCE hInstance);
 
@@ -87,7 +88,7 @@ ULONG Dll_Windows = 0;
 CRITICAL_SECTION  VT_CriticalSection;
 #endif
 
-const UCHAR *SbieDll_Version = MY_VERSION_STRING;
+const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
 
 //extern ULONG64 __security_cookie = 0;
 
@@ -186,6 +187,12 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
     Dll_Kernel32 = GetModuleHandle(DllName_kernel32);
     Dll_KernelBase = GetModuleHandle(DllName_kernelbase);
 
+	extern void InitMyNtDll(HMODULE Ntdll);
+	InitMyNtDll(Dll_Ntdll);
+
+	extern FARPROC __sys_GetModuleInformation;
+	__sys_GetModuleInformation = GetProcAddress(LoadLibraryW(L"psapi.dll"), "GetModuleInformation");
+
     if (! Dll_InitMem()) {
         SbieApi_Log(2305, NULL);
         ExitProcess(-1);
@@ -200,16 +207,23 @@ _FX void Dll_InitGeneric(HINSTANCE hInstance)
 
 _FX void Dll_InitInjected(void)
 {
-    //
-    // Dll_InitInjected is executed by Dll_Ordinal1 in the context
-    // of a program that is running in the sandbox
-    //
+	//
+	// Dll_InitInjected is executed by Dll_Ordinal1 in the context
+	// of a program that is running in the sandbox
+	//
 
-    LONG status;
-    BOOLEAN ok;
-    ULONG BoxFilePathLen;
-    ULONG BoxKeyPathLen;
-    ULONG BoxIpcPathLen;
+	LONG status;
+	BOOLEAN ok;
+	ULONG BoxFilePathLen;
+	ULONG BoxKeyPathLen;
+	ULONG BoxIpcPathLen;
+
+	if (SbieApi_QueryConfBool(NULL, L"DebugTrace", FALSE)) {
+
+		Trace_Init();
+
+		OutputDebugString(L"SbieDll injected...");
+	}
 
     //
     // confirm the process is sandboxed before going further
@@ -385,11 +399,11 @@ _FX void Dll_InitInjected(void)
     if (! Dll_RestrictedToken)
         CustomizeSandbox();
 
-            /*while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();*/
+    /*while (! IsDebuggerPresent()) {
+        OutputDebugString(L"BREAK\n");
+        Sleep(500);
+    }
+    __debugbreak();*/
 
     /*if (_wcsicmp(Dll_ImageName, L"iexplore.exe") == 0) {
         WCHAR *cmd = GetCommandLine();
@@ -463,6 +477,8 @@ _FX void Dll_InitExeEntry(void)
 
     Custom_Load_UxTheme();
 
+    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since win 7
+
     //
     // Windows 8.1:  hook UserEnv-related entrypoint in KernelBase
     //
@@ -486,6 +502,39 @@ _FX void Dll_InitExeEntry(void)
 _FX void Dll_SelectImageType(void)
 {
     //
+    // check for custom configured special images
+    //
+
+    ULONG index;
+    NTSTATUS status;
+    WCHAR wbuf[96];
+    WCHAR* buf = wbuf;
+
+    for (index = 0; ; ++index) {
+        status = SbieApi_QueryConfAsIs(
+            NULL, L"SpecialImage", index, buf, 90 * sizeof(WCHAR));
+        if (!NT_SUCCESS(status))
+            break;
+
+        WCHAR* ptr = wcschr(buf, L',');
+        if (!ptr) continue;
+
+        *ptr++ = L'\0';
+
+        if (_wcsicmp(Dll_ImageName, ptr) == 0) {
+
+            if (_wcsicmp(L"chrome", buf) == 0)
+                Dll_ImageType = DLL_IMAGE_GOOGLE_CHROME;
+            else if (_wcsicmp(L"firefox", buf) == 0)
+                Dll_ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+            else
+                Dll_ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
+
+            break;
+        }
+    }
+
+    //
     // keep image names in sync with enum at top of dll.h
     //
 
@@ -498,6 +547,7 @@ _FX void Dll_SelectImageType(void)
         SANDBOXIE L"BITS.exe",      (WCHAR *)DLL_IMAGE_SANDBOXIE_BITS,
         SBIESVC_EXE,                (WCHAR *)DLL_IMAGE_SANDBOXIE_SBIESVC,
 
+        L"msiexec.exe",             (WCHAR *)DLL_IMAGE_MSI_INSTALLER,
         L"TrustedInstaller.exe",    (WCHAR *)DLL_IMAGE_TRUSTED_INSTALLER,
         L"TiWorker.exe",            (WCHAR *)DLL_IMAGE_TRUSTED_INSTALLER,
         L"wuauclt.exe",             (WCHAR *)DLL_IMAGE_WUAUCLT,
@@ -506,13 +556,20 @@ _FX void Dll_SelectImageType(void)
         L"dllhost.exe",             (WCHAR *)DLL_IMAGE_DLLHOST,
 
         L"iexplore.exe",            (WCHAR *)DLL_IMAGE_INTERNET_EXPLORER,
+
         L"firefox.exe",             (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"waterfox.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
         L"kmplayer.exe",            (WCHAR *)DLL_IMAGE_PANDORA_KMPLAYER,
         L"wlmail.exe",              (WCHAR *)DLL_IMAGE_WINDOWS_LIVE_MAIL,
         L"ServiceModelReg.exe",     (WCHAR *)DLL_IMAGE_SERVICE_MODEL_REG,
         L"wisptis.exe",             (WCHAR *)DLL_IMAGE_WISPTIS,
+
         L"iron.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"dragon.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"chrome.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
@@ -520,7 +577,11 @@ _FX void Dll_SelectImageType(void)
         L"neon.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
+        L"brave.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
+        L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Yandex Browser
+        L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is Chromium-based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
+
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"plugin-container.exe",    (WCHAR *)DLL_IMAGE_PLUGIN_CONTAINER,
@@ -529,12 +590,13 @@ _FX void Dll_SelectImageType(void)
         NULL,                       NULL
     };
 
-    int i;
+    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED) {
 
-    for (i = 0; _ImageNames[i]; i += 2) {
-        if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
-            Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
-            break;
+        for (int i = 0; _ImageNames[i]; i += 2) {
+            if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
+                Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
+                break;
+            }
         }
     }
 
@@ -562,6 +624,9 @@ _FX void Dll_SelectImageType(void)
 
         SbieApi_Log(2205, Dll_ImageName);
     }
+
+    if (Dll_ImageType == DLL_IMAGE_LAST)
+        Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
     //
     // we have some special cases for programs running under a restricted
@@ -627,7 +692,7 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
-    bHostInject = data->bHostInject;
+    bHostInject = data->bHostInject == 1;
 
     //
     // the SbieLow data area includes values that are useful to us
@@ -690,7 +755,7 @@ _FX ULONG_PTR Dll_Ordinal1(
     {
         Ldr_Inject_Init(bHostInject);
     }
-
+	
     //
     // conclude the detour by passing control back to the original
     // RtlFindActivationContextSectionString.  the detour code used

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -512,7 +513,8 @@ _FX void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId)
     if (pid_str.Buffer) {
 
         RtlIntPtrToUnicodeString((ULONG_PTR)ProcessId, 10, &pid_str);
-        Log_Msg_Session(MSG_1211, pid_str.Buffer, NULL, SessionId);
+		if (SessionId != -1) // for StartRunAlertDenied
+			Log_Msg_Process(MSG_1211, pid_str.Buffer, NULL, SessionId, ProcessId);
 
         Mem_Free(pid_str.Buffer, pid_str.MaximumLength);
     }
@@ -558,7 +560,7 @@ _FX PROCESS *Process_Create(
 
     pool = Pool_Create();
     if (! pool) {
-        Log_Msg_Session(MSG_1201, NULL, NULL, box->session_id);
+		Log_Msg_Process(MSG_1201, NULL, NULL, box->session_id, ProcessId);
         Process_CreateTerminated(ProcessId, box->session_id);
         return NULL;
     }
@@ -566,7 +568,7 @@ _FX PROCESS *Process_Create(
     proc = Mem_Alloc(pool, sizeof(PROCESS));
     if (! proc) {
         // first allocation from a new pool should never fail
-        Log_Msg_Session(MSG_1201, NULL, NULL, box->session_id);
+		Log_Msg_Process(MSG_1201, NULL, NULL, box->session_id, ProcessId);
         Pool_Delete(pool);
         Process_CreateTerminated(ProcessId, box->session_id);
         return NULL;
@@ -591,8 +593,7 @@ _FX PROCESS *Process_Create(
     status = PsLookupProcessByProcessId(proc->pid, &ProcessObject);
     if (! NT_SUCCESS(status)) {
 
-        Log_Status_Ex_Session(
-                        MSG_1231, 0x33, status, L"???", box->session_id);
+		Log_Status_Ex_Process(MSG_1231, 0x33, status, L"???", box->session_id, ProcessId);
 
         Pool_Delete(pool);
         Process_CreateTerminated(ProcessId, box->session_id);
@@ -630,7 +631,7 @@ _FX PROCESS *Process_Create(
             RtlInitUnicodeString(&image_uni, image_path);
             if (Box_IsBoxedPath(proc->box, file, &image_uni)) {
 
-                proc->image_copy = TRUE;
+                proc->image_from_box = TRUE;
             }
 
             ++image_name;
@@ -645,7 +646,7 @@ _FX PROCESS *Process_Create(
                     memcpy(proc->image_name, image_name,
                            proc->image_name_len);
                 } else
-                    Log_Msg_Session(MSG_1201, NULL, NULL, box->session_id);
+					Log_Msg_Process(MSG_1201, NULL, NULL, box->session_id, proc->pid);
             }
         }
 
@@ -655,8 +656,7 @@ _FX PROCESS *Process_Create(
     if ((! proc->image_name) || (! proc->image_path)) {
 
         const ULONG status = STATUS_INVALID_IMAGE_FORMAT;
-        Log_Status_Ex_Session(
-                        MSG_1231, 0x11, status, L"???", box->session_id);
+		Log_Status_Ex_Process(MSG_1231, 0x11, status, L"???", box->session_id, proc->pid);
 
         Pool_Delete(pool);
         Process_CreateTerminated(ProcessId, box->session_id);
@@ -685,7 +685,7 @@ _FX PROCESS *Process_Create(
         if (proc->gui_lock)
             Mem_FreeLockResource(&proc->gui_lock);
 
-        Log_Msg_Session(MSG_1201, NULL, NULL, box->session_id);
+		Log_Msg_Process(MSG_1201, NULL, NULL, box->session_id, ProcessId);
         Pool_Delete(pool);
         Process_CreateTerminated(ProcessId, box->session_id);
         return NULL;
@@ -695,6 +695,7 @@ _FX PROCESS *Process_Create(
     // initialize trace flags
     //
 
+    proc->call_trace = Process_GetTraceFlag(proc, L"CallTrace");
     proc->file_trace = Process_GetTraceFlag(proc, L"FileTrace");
     proc->pipe_trace = Process_GetTraceFlag(proc, L"PipeTrace");
     proc->key_trace  = Process_GetTraceFlag(proc, L"KeyTrace");
@@ -786,10 +787,14 @@ _FX void Process_NotifyProcess(
 
         if (Create) {
 
-            if (ParentId) {
+            //
+            // it is possible to specify the parrent process when calling RtlCreateUserProcess
+            // this is for example done by the appinfo service running under svchost.exe
+            // to start LocalBridge.exe with RuntimeBroker.exe as parent
+            // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
+            //
 
-                Process_NotifyProcess_Create(ProcessId, ParentId, NULL);
-            }
+            Process_NotifyProcess_Create(ProcessId, PsGetCurrentProcessId(), NULL);
 
         } else {
 
@@ -1019,6 +1024,10 @@ _FX void Process_NotifyProcess_Create(
 
             if (! bHostInject)
             {
+				WCHAR msg[48], *buf = msg;
+				buf += swprintf(buf, L"%s%c%d", new_proc->box->name, L'\0', (ULONG)ParentId) + 1;
+				Log_Popup_MsgEx(MSG_1399, new_proc->image_path, wcslen(new_proc->image_path), msg, (ULONG)(buf - msg), new_proc->box->session_id, ProcessId);
+
                 if (! add_process_to_job)
                     new_proc->parent_was_sandboxed = TRUE;
 
@@ -1026,10 +1035,10 @@ _FX void Process_NotifyProcess_Create(
                 // don't put the process into a job if OpenWinClass=*
                 //
 
-                if (new_proc->open_all_win_classes) {
+				if (new_proc->open_all_win_classes || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
 
-                    add_process_to_job = FALSE;
-                }
+					add_process_to_job = FALSE;
+				}
 
                 //
                 // on Windows Vista, a forced process may start inside a
@@ -1064,7 +1073,6 @@ _FX void Process_NotifyProcess_Create(
 
             Process_Low_Inject(
                 pid, session_id, create_time, nptr1, add_process_to_job, bHostInject);
-
         }
     }
 
@@ -1143,7 +1151,7 @@ _FX void Process_Delete(HANDLE ProcessId)
             if (proc->gui_lock)
                 Mem_FreeLockResource(&proc->gui_lock);
 
-            Token_ResetPrimary(proc);
+			Token_ResetPrimary(proc);
 
             Thread_ReleaseProcess(proc);
 
@@ -1166,7 +1174,7 @@ _FX void Process_NotifyImage(
 {
     static const WCHAR *_Ntdll32 = L"\\syswow64\\ntdll.dll";    // 19 chars
     PROCESS *proc;
-    BOOLEAN ok;
+    ULONG fail = 0;
 
     //
     // the notify routine is invoked for any image mapped for any purpose.
@@ -1216,56 +1224,58 @@ _FX void Process_NotifyImage(
     // create the sandbox space
     //
 
-    ok = TRUE;
-
     if (!proc->bHostInject)
     {
-        if (ok)
-            ok = File_CreateBoxPath(proc);
+		if (!fail && !File_CreateBoxPath(proc))
+			fail = 0x01;
 
-        if (ok)
-            ok = Ipc_CreateBoxPath(proc);
+        if (!fail && !Ipc_CreateBoxPath(proc))
+			fail = 0x02;
 
-        if (ok)
-            ok = Key_MountHive(proc);
+        if (!fail && !Key_MountHive(proc))
+			fail = 0x03;
 
         //
         // initialize the filtering components
         //
 
-        if (ok)
-            ok = File_InitProcess(proc);
+        if (!fail && !File_InitProcess(proc))
+			fail = 0x04;
 
-        if (ok)
-            ok = Key_InitProcess(proc);
+        if (!fail && !Key_InitProcess(proc))
+			fail = 0x05;
 
-        if (ok)
-            ok = Ipc_InitProcess(proc);
+        if (!fail && !Ipc_InitProcess(proc))
+			fail = 0x06;
 
-        if (ok)
-            ok = Gui_InitProcess(proc);
+        if (!fail && !Gui_InitProcess(proc))
+			fail = 0x07;
 
-        if (ok)
-            ok = Process_Low_InitConsole(proc);
+        if (!fail && !Process_Low_InitConsole(proc))
+			fail = 0x08;
 
-        if (ok)
-            ok = Token_ReplacePrimary(proc);
+		if (!fail && !Token_ReplacePrimary(proc))
+			fail = 0x09;
 
-        if (ok)
-            ok = Thread_InitProcess(proc);
+        if (!fail && !Thread_InitProcess(proc))
+			fail = 0x0A;
     }
 
     //
     // terminate process if initialization failed
     //
 
-    if (ok) {
+    if (!fail && !Ipc_IsRunRestricted(proc)) {
 
         proc->initialized = TRUE;
 
     } else {
 
+		if (fail)
+			Log_Status_Ex_Process(MSG_1231, 0xA0 + fail, STATUS_UNSUCCESSFUL, NULL, proc->box->session_id, proc->pid);
+
         proc->terminated = TRUE;
+		proc->reason = (!fail) ? -1 : 0;
         Process_CancelProcess(proc);
     }
 

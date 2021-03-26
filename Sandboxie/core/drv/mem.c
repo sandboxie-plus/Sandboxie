@@ -130,8 +130,7 @@ _FX void Mem_FreeString(WCHAR *string)
 
 _FX BOOLEAN Mem_GetLockResource(PERESOURCE *ppResource, BOOLEAN InitMsg)
 {
-    *ppResource = ExAllocatePoolWithTag(
-                                    NonPagedPool, sizeof(ERESOURCE), tzuk);
+    *ppResource = ExAllocatePoolWithTag(NonPagedPool, sizeof(ERESOURCE), tzuk);
     if (*ppResource) {
         ExInitializeResourceLite(*ppResource);
         return TRUE;
@@ -155,3 +154,20 @@ _FX void Mem_FreeLockResource(PERESOURCE *ppResource)
         *ppResource = NULL;
     }
 }
+
+//---------------------------------------------------------------------------
+//
+// Fix for the WindowsKernelModeDriver10.0 not creating Win 7 32bit compatible code
+//
+//---------------------------------------------------------------------------
+
+#ifndef _WIN64
+int __cdecl memcmp(
+	_In_reads_bytes_(_Size) void const* _Buf1,
+	_In_reads_bytes_(_Size) void const* _Buf2,
+	_In_                    size_t      _Size
+)
+{
+	return (RtlCompareMemory(_Buf1, _Buf2, _Size) == _Size) ? 0 : 1;
+}
+#endif

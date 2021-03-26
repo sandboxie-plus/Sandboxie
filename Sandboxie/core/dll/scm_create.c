@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -135,16 +136,14 @@ static void Scm_DeletePermissions(const WCHAR *AppIdGuid);
 
 static HANDLE   Scm_ServiceKey = NULL;
 
-static HANDLE   Msi_ServerInUseEvent = NULL;
-
 static LPHANDLER_FUNCTION       Scm_Handler = NULL;
 static LPHANDLER_FUNCTION_EX    Scm_HandlerEx = NULL;
 
 static void *Scm_HandlerContext = NULL;
 
+//static volatile WCHAR*  Scm_ServiceName = NULL;
 static volatile BOOLEAN Scm_Started = FALSE;
 static volatile BOOLEAN Scm_Stopped = FALSE;
-static volatile BOOLEAN Scm_IsMsiServer = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -824,9 +823,9 @@ _FX BOOL SbieDll_StartBoxedService(const WCHAR *ServiceName, BOOLEAN WithAdd)
     SERVICE_QUERY_RPL *rpl;
     ULONG retries, error;
 
-	//WCHAR text[130];
-	//Sbie_swprintf(text, L"StartBoxedService; name: '%s'; pid: %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
-    //SbieApi_MonitorPut(MONITOR_OTHER, text);
+	WCHAR text[130];
+	Sbie_snwprintf(text, 130, L"StartBoxedService; name: '%s'", ServiceName); 
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
     // when invoked from SandboxieRpcSs to handle StartProcess,
@@ -1096,7 +1095,7 @@ _FX BOOL Scm_StartServiceW(
         return FALSE;
 
     WCHAR text[130];
-	Sbie_swprintf(text, L"StartService; name: '%s'; pid: %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
+	Sbie_snwprintf(text, 130, L"StartService: %s", ServiceName);
     SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     if (Scm_IsBoxedService(ServiceName))
@@ -1145,41 +1144,22 @@ _FX BOOL Scm_StartServiceA(
 
 _FX ULONG Scm_ServiceMainThread(ULONG_PTR *args)
 {
+    WCHAR text[130];
+    Sbie_snwprintf(text, 130, L"ServiceMainThread; begin");
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
+
     typedef void (*P_Main)(ULONG argc, void **argv);
     ((P_Main)args[0])(1, (void **)&args[1]);
+
+    Sbie_snwprintf(text, 130, L"ServiceMainThread; end");
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
     // if this is the MSI Server, then wait for all our callers to end
     //
 
-    if (! Scm_IsMsiServer)
-        return 0;
-
-    //
-    // release our hold on the MSI Server in-use flag
-    //
-
-    if (Msi_ServerInUseEvent) {
-        CloseHandle(Msi_ServerInUseEvent);
-        Msi_ServerInUseEvent = NULL;
-    }
-
-    //
-    // end the service as soon as the in-use flag is gone
-    //
-
-    while (1) {
-
-        HANDLE hEvent = OpenEvent(
-            EVENT_MODIFY_STATE, FALSE, _MsiServerInUseEventName);
-
-        if (! hEvent) {
-            ExitProcess(0);
-            break;
-        }
-
-        CloseHandle(hEvent);
-        Sleep(2000);
+    if (Scm_IsMsiServer) {
+        Scm_SetupMsiWaiter();
     }
 
     return 0;
@@ -1198,7 +1178,7 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         L"00000000_" SBIE L"_SERVICE_NAME";
     WCHAR *ServiceName;
     WCHAR *Buffer;
-    UNICODE_STRING uni; // fix-me: this mustbe freed !
+    UNICODE_STRING uni;
     void *args[3];
     ULONG ThreadId;
     HANDLE hEvent;
@@ -1262,9 +1242,9 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         }
     }
 
-    //WCHAR text[130];
-	//Sbie_swprintf(text, L"StartServiceCtrlDispatcher; name: '%s'; pid %d", ServiceName, GetCurrentProcessId()); // fix-me: pottential buffer overflow
-    //SbieApi_MonitorPut(MONITOR_OTHER, text);
+    WCHAR text[130];
+	Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; name: '%s'", ServiceName);
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     //
     // open the key for the service
@@ -1304,11 +1284,17 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         args[2] = NULL;
     }
 
-    if (_wcsicmp(ServiceName, Scm_MsiServer) == 0)
-        Scm_IsMsiServer = TRUE;
+	if (_wcsicmp(ServiceName, Scm_MsiServer) == 0) {
 
-    if (! CreateThread(NULL, 0, Scm_ServiceMainThread, args, 0, &ThreadId))
-        Scm_Stopped = TRUE;
+		Scm_IsMsiServer = TRUE;
+        Scm_SetupMsiHooks();
+	}
+
+	HANDLE ThreadHandle = CreateThread(NULL, 0, Scm_ServiceMainThread, args, 0, &ThreadId);
+	if (ThreadHandle)
+		CloseHandle(ThreadHandle);
+	else
+		Scm_Stopped = TRUE;
 
     //
     // main loop:  wait for changes on the service key
@@ -1374,6 +1360,9 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
     //
     // if the service never started, report error
     //
+
+    Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; result: %s", Scm_Started ? L"sucess" : L"failure");
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
     if (! Scm_Started) {
         SbieApi_Log(2211, ServiceName);
@@ -1507,6 +1496,10 @@ _FX BOOL Scm_SetServiceStatus_Internal(
         SetLastError(ERROR_INVALID_HANDLE);
         return FALSE;
     }
+
+    WCHAR text[130];
+    Sbie_snwprintf(text, 130, L"SetServiceStatus; status: <%08X>", lpServiceStatus->dwCurrentState);
+    SbieApi_MonitorPut(MONITOR_OTHER, text);
 
 #define MySetValueKey()                         \
     NtSetValueKey(ServiceKeyHandle, &uni,       \

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 #include "obj.h"
 #include "api.h"
 #include "util.h"
+#include "session.h"
 
 
 //---------------------------------------------------------------------------
@@ -31,298 +33,288 @@
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Ipc_Api_GetRpcPortName_2(enum ENUM_DYNAMIC_PORT_TYPE ePortType, PEPROCESS ProcessObject, WCHAR *pDstPortName);
+BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg);
 
-static NTSTATUS Ipc_Api_CopyRpcPortName(enum ENUM_DYNAMIC_PORT_TYPE ePortType, WCHAR *pDstPortName, WCHAR *pSrcPortName);
-
-
-//---------------------------------------------------------------------------
-// Variables
-//---------------------------------------------------------------------------
-
-IPC_DYNAMIC_PORTS Ipc_Dynamic_Ports[NUM_DYNAMIC_PORTS];
-
-static const WCHAR *_rpc_control = L"\\RPC Control";
 
 //---------------------------------------------------------------------------
 // Ipc_Api_AllowSpoolerPrintToFile
 //---------------------------------------------------------------------------
 
-_FX NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms)
-{
-    API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *pArgs = (API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *)parms;
-
-    if (Process_Find(NULL, NULL)) {     // is caller sandboxed?
-        return STATUS_ACCESS_DENIED;
-    }
-
-    if (pArgs->process_id.val > 0)
-    {
-        PROCESS *proc = Process_Find(pArgs->process_id.val, NULL);
-        if (proc && proc != PROCESS_TERMINATED)
-            proc->m_boolAllowSpoolerPrintToFile = TRUE;
-    }
-    return 0;
-}
-
-
-_FX NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms)
-{
-    return Ipc_Api_GetRpcPortFromPid(SPOOLER_PORT, proc, parms);
-}
-
-
-_FX NTSTATUS Ipc_Api_GetWpadPortFromPid(PROCESS *proc, ULONG64 *parms)
-{
-    return Ipc_Api_GetRpcPortFromPid(WPAD_PORT, proc, parms);
-}
-
-_FX NTSTATUS Ipc_Api_GetSmartCardPortFromPid(PROCESS *proc, ULONG64 *parms)
-{
-    return Ipc_Api_GetRpcPortFromPid(SMART_CARD_PORT, proc, parms);
-}
-
-
-// Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168")
-// Param 2 will return the port name with "\RPC Control\" prepended
-
-_FX NTSTATUS Ipc_Api_SetGameConfigStorePort(PROCESS *proc, ULONG64 *parms)
-{
-    WCHAR name[DYNAMIC_PORT_NAME_CHARS];
-    API_SET_GAME_CONFIG_STORE_PORT_ARGS *pArgs = (API_SET_GAME_CONFIG_STORE_PORT_ARGS *)parms;
-
-    swprintf(name, L"%s\\%s", _rpc_control, pArgs->port_name);
-
-    return Ipc_Api_CopyRpcPortName(GAME_CONFIG_STORE_PORT, pArgs->full_port_name.val, name);
-}
-
-
-_FX NTSTATUS Ipc_Api_SetSmartCardPort(PROCESS *proc, ULONG64 *parms)
-{
-    WCHAR name[DYNAMIC_PORT_NAME_CHARS];
-    API_SET_SMART_CARD_PORT_ARGS *pArgs = (API_SET_SMART_CARD_PORT_ARGS *)parms;
-
-    swprintf(name, L"%s\\%s", _rpc_control, pArgs->port_name);
-
-    return Ipc_Api_CopyRpcPortName(SMART_CARD_PORT, pArgs->full_port_name.val, name);
-}
-
+//_FX NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms)
+//{
+//    API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *pArgs = (API_ALLOW_SPOOLER_PRINT_TO_FILE_ARGS *)parms;
+//
+//    if (Process_Find(NULL, NULL)) {     // is caller sandboxed?
+//        return STATUS_ACCESS_DENIED;
+//    }
+//
+//    if (pArgs->process_id.val > 0)
+//    {
+//        PROCESS *proc = Process_Find(pArgs->process_id.val, NULL);
+//        if (proc && proc != PROCESS_TERMINATED)
+//            proc->ipc_allowSpoolerPrintToFile = TRUE;
+//    }
+//    return 0;
+//}
 
 
 //---------------------------------------------------------------------------
-// Ipc_Api_GetRpcPortNameFromPid
+// Ipc_CheckPortRequest_SpoolerPort
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Ipc_Api_GetRpcPortFromPid(enum ENUM_DYNAMIC_PORT_TYPE ePortType, PROCESS *proc, ULONG64 *parms)
+_FX NTSTATUS Ipc_CheckPortRequest_SpoolerPort(
+    PROCESS* proc, OBJECT_NAME_INFORMATION* Name, PORT_MESSAGE* msg)
 {
     NTSTATUS status;
-    PEPROCESS ProcessObject;
-    BOOLEAN done = FALSE;
-    API_GET_DYNAMIC_PORT_FROM_PID_ARGS *pArgs = (API_GET_DYNAMIC_PORT_FROM_PID_ARGS *)parms;
+
+    if (proc->ipc_openPrintSpooler)        // see if we are not filtering spooler requests
+        return STATUS_BAD_INITIAL_PC;
 
     //
-    // this function determines the dynamic RPC endpoint that is used by a service/process
+    // check that it is the spooler port
     //
 
-    status = PsLookupProcessByProcessId(pArgs->process_id.val, &ProcessObject);
+    if (Driver_OsVersion >= DRIVER_WINDOWS_81) {
 
-    if (NT_SUCCESS(status)) {
+        if (Name->Name.Length < 13 * sizeof(WCHAR))
+            return STATUS_BAD_INITIAL_PC;
 
-        if (PsGetProcessSessionId(ProcessObject) == 0) {
+        BOOLEAN is_spooler = FALSE;
 
-            void *nbuf;
-            ULONG nlen;
-            WCHAR *nptr;
-
-            Process_GetProcessName(
-                Driver_Pool, (ULONG_PTR)pArgs->process_id.val, &nbuf, &nlen, &nptr);
-
-            if (nbuf) {
-
-                if (_wcsicmp(nptr, pArgs->exe_name.val) == 0
-                    && MyIsProcessRunningAsSystemAccount(pArgs->process_id.val)) {
-
-                    status = Ipc_Api_GetRpcPortName_2(ePortType, ProcessObject, pArgs->port_name.val);
-
-                    done = TRUE;
-                }
-
-                Mem_Free(nbuf, nlen);
-            }
-        }
-
-        ObDereferenceObject(ProcessObject);
-    }
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// Ipc_Api_GetRpcPortName_2
-//---------------------------------------------------------------------------
-
-_FX NTSTATUS Ipc_Api_GetRpcPortName_2(enum ENUM_DYNAMIC_PORT_TYPE ePortType, PEPROCESS ProcessObject, WCHAR *pDstPortName)
-{
-    NTSTATUS status;
-    ULONG len, dummy_len;
-    ULONG context;
-    HANDLE handle;
-    OBJECT_DIRECTORY_INFORMATION *info;
-    void *buf, *PortObject;
-    UNICODE_STRING objname;
-    OBJECT_ATTRIBUTES objattrs;
-    WCHAR name[DYNAMIC_PORT_NAME_CHARS];
-
-    InitializeObjectAttributes(&objattrs,
-        &objname, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
-
-    RtlInitUnicodeString(&objname, _rpc_control);
-
-    status = ZwOpenDirectoryObject(&handle, 0, &objattrs);
-
-    if (!NT_SUCCESS(status))
-        return status;
-
-    //
-    // get a list of all processes in the system
-    //
-
-    len = 0;
-    while (1) {
-
-        len += PAGE_SIZE * 2;
-        buf = ExAllocatePoolWithTag(PagedPool, len, tzuk);
-        if (!buf) {
-            status = STATUS_INSUFFICIENT_RESOURCES;
-            break;
-        }
-
-        dummy_len = 0;
-        status = ZwQueryDirectoryObject(
-            handle, buf, len, FALSE, TRUE, &context, &dummy_len);
-
-        if (status == STATUS_MORE_ENTRIES || status == STATUS_INFO_LENGTH_MISMATCH)
+        if (Ipc_Dynamic_Ports.pPortLock)
         {
-            ExFreePoolWithTag(buf, tzuk);
-            continue;
-        }
+            KeEnterCriticalRegion();
+            ExAcquireResourceSharedLite(Ipc_Dynamic_Ports.pPortLock, TRUE);
 
-        break;
-    }
-
-    if (!NT_SUCCESS(status))
-        return status;
-
-    //
-    // go through list looking for LRPC-* objects of type ALPC Port
-    //
-
-    info = (OBJECT_DIRECTORY_INFORMATION *)buf;
-    while (1) {
-
-        UNICODE_STRING *ObjName = &info->ObjectName;
-        UNICODE_STRING *TypeName = &info->ObjectTypeName;
-
-        if ((!ObjName->Buffer) && (!TypeName->Buffer))
-            break;
-
-        if (TypeName->Length == 9 * sizeof(WCHAR) && TypeName->Buffer
-            && _wcsicmp(TypeName->Buffer, L"ALPC Port") == 0) {
-
-            if ((ObjName->Length > 5 * sizeof(WCHAR)) &&
-                (ObjName->Length < 64 * sizeof(WCHAR)) &&
-                _wcsnicmp(ObjName->Buffer, L"LRPC-", 5) == 0) {
-
-                swprintf(name, L"%s\\%s", _rpc_control, ObjName->Buffer);
-
-                RtlInitUnicodeString(&objname, name);
-
-                status = ObReferenceObjectByName(
-                    &objname, OBJ_CASE_INSENSITIVE, NULL, 0,
-                    *LpcPortObjectType, KernelMode, NULL,
-                    &PortObject);
-
-                if (NT_SUCCESS(status)) {
-
-                    //
-                    // make sure the owner process for the LRPC-* port
-                    // is the process that was specified as a parameter
-                    //
-
-                    struct {
-                        LIST_ENTRY PortListEntry;
-                        void *CommunicationInfo;
-                        PEPROCESS OwnerProcess;
-                    } *AlpcPortObject = PortObject;
-
-                    if (AlpcPortObject->OwnerProcess == ProcessObject) {
-                        Ipc_Api_CopyRpcPortName(ePortType, pDstPortName, name);
-                        ObDereferenceObject(PortObject);
-                        break;
-                    }
-
-                    ObDereferenceObject(PortObject);
-                }
+            if (Ipc_Dynamic_Ports.pSpoolerPort 
+                && _wcsicmp(Name->Name.Buffer, Ipc_Dynamic_Ports.pSpoolerPort->wstrPortName) == 0)
+            {
+                // dynamic version of RPC ports, see also ipc_spl.c
+                // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
+                is_spooler = TRUE;
             }
+
+            ExReleaseResourceLite(Ipc_Dynamic_Ports.pPortLock);
+            KeLeaveCriticalRegion();
         }
 
-        ++info;
+        if (!is_spooler)
+            return STATUS_BAD_INITIAL_PC;
     }
+    else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+
+        if (_wcsicmp(Name->Name.Buffer, L"\\RPC Control\\spoolss") != 0)
+            return STATUS_BAD_INITIAL_PC;
+
+    }
+    else
+        return STATUS_BAD_INITIAL_PC;
 
     //
-    // release storage
+    // examine message
     //
 
-    ExFreePoolWithTag(buf, tzuk);
+    status = STATUS_SUCCESS;
 
-    ZwClose(handle);
+    __try {
 
-    return status;
-}
+        ProbeForRead(msg, sizeof(PORT_MESSAGE), sizeof(ULONG_PTR));
 
+        if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
 
-//---------------------------------------------------------------------------
-// Ipc_Api_CopyRpcPortName
-//---------------------------------------------------------------------------
+            //
+            //
 
+            ULONG  len = msg->u1.s1.DataLength;
+            UCHAR* ptr = (UCHAR*)((UCHAR*)msg + sizeof(PORT_MESSAGE));
+            int i = 0;
+            int rc = -2;
 
-_FX NTSTATUS Ipc_Api_CopyRpcPortName(enum ENUM_DYNAMIC_PORT_TYPE ePortType, WCHAR *pDstPortName, WCHAR *pSrcPortName)
-{
-    NTSTATUS status;
+            ProbeForRead(ptr, len, sizeof(WCHAR));
 
-    if (Ipc_Dynamic_Ports[ePortType].pPortLock) {
+            /*if (ptr[20] == 17) {        // RpcStartDocPrinter = Opnum 17
 
-        KeEnterCriticalRegion();
-        ExAcquireResourceExclusive(Ipc_Dynamic_Ports[ePortType].pPortLock, TRUE);
-
-        if (pSrcPortName && (*pSrcPortName))
-        {
-            __try {
-
-                if (pDstPortName)
+                if (!proc->ipc_allowSpoolerPrintToFile)
                 {
-                    ProbeForWrite(pDstPortName, sizeof(WCHAR) * DYNAMIC_PORT_NAME_CHARS, sizeof(WCHAR));
-                    wmemcpy(pDstPortName, pSrcPortName, DYNAMIC_PORT_NAME_CHARS - 1);
-                    pDstPortName[DYNAMIC_PORT_NAME_CHARS - 1] = L'\0';
+                    status = STATUS_ACCESS_DENIED;
+                    //for (i = 20; i < len - 12; i++)
+                    //{
+                    //  rc = memcmp((void*)&(ptr[i]), "\4\0\0\0\0\0\0\0\4\0\0\0\0", 12);    // search for marshaled "RAW" field length bytes
+                    //  if (rc == 0)
+                    //  {
+                    //      rc = _wcsnicmp((void*)&(ptr[i + 12]), L"raw", 3);       // search for case insensitive "RAW"
+                    //      if (rc == 0)
+                    //          status = STATUS_ACCESS_DENIED;
+                    //  }
+                    //}
                 }
 
-                // save port name in our global Ipc_Dynamic_Ports structure
-                wmemcpy(Ipc_Dynamic_Ports[ePortType].wstrPortName, pSrcPortName, DYNAMIC_PORT_NAME_CHARS - 1);
-                Ipc_Dynamic_Ports[ePortType].wstrPortName[DYNAMIC_PORT_NAME_CHARS - 1] = L'\0';
-
-                status = STATUS_SUCCESS;
-
+                if (status == STATUS_ACCESS_DENIED)
+                    Log_MsgP0(MSG_1319, proc->pid);
             }
-            __except (EXCEPTION_EXECUTE_HANDLER) {
-                status = GetExceptionCode();
-            }
+            else*/
+
+            if (Ipc_Filter_Spooler_Msg(proc, ptr[20]))
+                status = STATUS_ACCESS_DENIED;
+
+            //DbgPrint("Spooler IPC Port message ID: %d\n", (int)ptr[20]);
+
         }
 
-        ExReleaseResourceLite(Ipc_Dynamic_Ports[ePortType].pPortLock);
-        KeLeaveCriticalRegion();
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
     }
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_Filter_Spooler_Msg
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg)
+{
+    BOOLEAN filter = FALSE;
+
+    switch (uMsg)
+    {
+    //case 0x00:	//EnumPrinters
+    
+    //case 0x02:	//SetJob
+    //case 0x03:	//GetJob
+    //case 0x04:	//EnumJobs
+    case 0x05:		//AddPrinter
+    case 0x06:		//DeletePrinter
+    //case 0x07:	//SetPrinter
+    //case 0x08:	//GetPrinter
+    
+    //case 0x0A:	//EnumPrinterDrivers
+    //case 0x0B:	//CallDrvDocumentEventThunk
+    //case 0x0C:	//GetPrinterDriverDirectory
+    case 0x0D:		//DeletePrinterDriver
+    case 0x0E:		//AddPrintProcessor
+    //case 0x0F:	//EnumPrintProcessors
+    //case 0x10:	//GetPrintProcessorDirectory
+    //case 0x11:	//StartDocPrinter
+    //case 0x12:	//StartPagePrinter
+    //case 0x13:	//FlushBuffer
+    //case 0x14:	//EndPagePrinter
+    //case 0x15:	//AbortPrinter
+    //case 0x16:	//ReadPrinter
+    //case 0x17:	//EndDocPrinter
+    //case 0x18:	//AddJob
+    //case 0x19:	//ScheduleJobWorker
+    //case 0x1A:	//GetPrinterData
+    case 0x1B:		//SetPrinterData
+    //case 0x1C:	//WaitForPrinterChange
+    //case 0x1D:	//ClosePrinterContextHandle
+    case 0x1E:		//AddForm
+    case 0x1F:		//DeleteForm
+    //case 0x20:	//GetForm
+    case 0x21:		//SetForm
+    //case 0x22:	//EnumForms
+    //case 0x23:	//EnumPorts
+    //case 0x24:	//EnumMonitors
+    case 0x25:		//AddPort
+    case 0x26:		//ConfigurePort
+    case 0x27:		//DeletePort
+    case 0x28:		//CreatePrinterIC
+    case 0x29:		//PlayGdiScriptOnPrinterIC
+    case 0x2A:		//DeletePrinterIC
+    
+    //case 0x2C:	//DeletePrinterConnection
+    
+    case 0x2E:		//AddMonitor
+    case 0x2F:		//DeleteMonitor
+    case 0x30:		//DeletePrintProcessor
+    case 0x31:		//AddPrintProvidor
+    case 0x32:		//DeletePrintProvidor
+    //case 0x33:	//EnumPrintProcessorDatatypes
+    
+    //case 0x35:	//GetPrinterDriver
+    //case 0x36:	//FindFirstPrinterChangeNotificationWorker
+    //case 0x37:	//FindNextPrinterChangeNotification
+    //case 0x38:	//FindClosePrinterChangeNotificationWorker
+    
+
+    case 0x3D: 		//AddPortEx
+    
+
+    //case 0x40: 	//ResetPrinter
+
+
+    case 0x47: 	    //SetPort
+    //case 0x48: 	//EnumPrinterData
+    case 0x49: 	    //DeletePrinterData
+
+
+    case 0x4D: 	    //SetPrinterDataEx
+    //case 0x4E: 	//GetPrinterDataEx
+    //case 0x4F: 	//EnumPrinterDataEx
+    //case 0x50: 	//EnumPrinterKey
+    case 0x51: 		//DeletePrinterDataEx
+    case 0x52: 		//DeletePrinterKey
+    //case 0x53: 	//SeekPrinter
+    case 0x54: 		//DeletePrinterDriverEx
+    case 0x55: 		//AddPerMachineConnection
+    case 0x56: 		//DeletePerMachineConnection
+    //case 0x57: 	//EnumPerMachineConnections
+    //case 0x58: 	//GetMonitorUI
+    case 0x59: 		//AddPrinterDriverEx
+    //case 0x5A: 	//OpenPrinterRPC
+
+
+    //case 0x5D: 	//GetSpoolFileHandle
+    //case 0x5E: 	//CommitSpoolData
+    //case 0x5F: 	//CloseSpoolFileHandle
+    //case 0x60: 	//FlushPrinter
+    //case 0x61: 	//SendRecvBidiData
+    
+    case 0x63: 		//AddPrinterConnection
+    case 0x64: 		//InstallPrinterDriverFromPackage
+    case 0x65: 		//UploadPrinterDriverPackage
+    //case 0x66: 	//GetCorePrinterDrivers
+    //case 0x67: 	//CorePrinterDriverInstalled
+    //case 0x68: 	//GetPrinterDriverPackagePath
+    case 0x69: 		//DeletePrinterDriverPackage
+    //case 0x6A: 	//FindCompatibleDriver
+    //case 0x6B: 	//ReportJobProcessingProgress
+    case 0x6C: 		//SpoolerSetPolicy
+    //case 0x6D: 	//GetPrinterDriver
+    //case 0x6E: 	//GetJobNamedPropertyValue
+    //case 0x6F: 	//SetJobNamedProperty
+    //case 0x70: 	//DeleteJobNamedProperty
+    //case 0x71: 	//EnumJobNamedProperties
+    //case 0x72: 	//ConnectToLd64In32ServerWorker
+    //case 0x73: 	//GetUserPropertyBag
+    //case 0x74: 	//LogJobInfoForBranchOffice
+    //case 0x75: 	//RegeneratePrintDeviceCapabilities
+
+    //case 0xEF:    //Unknown
+        filter = TRUE;
+    }
+    
+    if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
+
+        ULONG mon_type = MONITOR_IPC;
+
+        if (filter && (proc->ipc_trace & TRACE_DENY))
+            mon_type |= MONITOR_DENY;
+        else if (!filter && (proc->ipc_trace & TRACE_ALLOW))
+            mon_type |= MONITOR_OPEN;
+        else
+            mon_type = 0;
+
+        if (mon_type) {
+            WCHAR msg_str[24];
+            swprintf(msg_str, L"Msg: %02X", (ULONG)uMsg);
+            Log_Debug_Msg(mon_type, L"\\RPC Control\\spoolss", msg_str);
+        }
+    }
+
+    return filter;
 }

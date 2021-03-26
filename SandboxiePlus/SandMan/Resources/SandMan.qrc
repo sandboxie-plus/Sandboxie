@@ -1,0 +1,67 @@
+<RCC>
+    <qresource prefix="/">
+        <file>SandMan.png</file>
+        <file alias="BoxEmpty">sandbox-empty.png</file>
+        <file alias="BoxInUse">sandbox-full.png</file>
+        <file alias="dllIcon32">dll32.png</file>
+        <file alias="exeIcon32">exe32.png</file>
+        <file>close.png</file>
+        <file>SandMan2.png</file>
+        <file>Actions/Internet.png</file>
+        <file>Actions/Keep.png</file>
+        <file>Actions/ReloadIni.png</file>
+        <file>Actions/Presets.png</file>
+        <file>Actions/Settings.png</file>
+        <file>Actions/ManMaintenance.png</file>
+        <file>Actions/StartMenu.png</file>
+        <file>Actions/Snapshots.png</file>
+        <file>Actions/Options.png</file>
+        <file>Actions/MkLink.png</file>
+        <file>Actions/Recover.png</file>
+        <file>Actions/Advanced.png</file>
+        <file>Actions/Maintenance.png</file>
+        <file>Actions/EditIni.png</file>
+        <file>Actions/Email.png</file>
+        <file>Actions/Remove.png</file>
+        <file>Actions/Group.png</file>
+        <file>Actions/Erase.png</file>
+        <file>Actions/Disconnect.png</file>
+        <file>Actions/Connect.png</file>
+        <file>Actions/LogAPI.png</file>
+        <file>Actions/EmptyAll.png</file>
+        <file>Actions/Clean.png</file>
+        <file>Actions/NewBox.png</file>
+        <file>Actions/Force.png</file>
+        <file>Actions/Explore.png</file>
+        <file>Actions/Wall.png</file>
+        <file>Actions/Run.png</file>
+        <file>Actions/Exit.png</file>
+        <file>Actions/Cmd.png</file>
+        <file>Actions/SetLogging.png</file>
+        <file>Actions/Rename.png</file>
+        <file>Actions/Start.png</file>
+        <file>Actions/Box.png</file>
+        <file>Actions/Template.png</file>
+        <file>Actions/Stop.png</file>
+        <file>SandMan2N.png</file>
+        <file>SandManN.png</file>
+        <file>Actions/finder.png</file>
+        <file>Actions/Tree.png</file>
+    </qresource>
+    <qresource prefix="/Boxes">
+        <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
+        <file alias="Full3">Boxes/sandbox-b-full.png</file>
+        <file alias="Empty4">Boxes/sandbox-c-empty.png</file>
+        <file alias="Full4">Boxes/sandbox-c-full.png</file>
+        <file alias="Empty2">Boxes/sandbox-g-empty.png</file>
+        <file alias="Full2">Boxes/sandbox-g-full.png</file>
+        <file alias="Empty5">Boxes/sandbox-m-empty.png</file>
+        <file alias="Full5">Boxes/sandbox-m-full.png</file>
+        <file alias="Empty1">Boxes/sandbox-r-empty.png</file>
+        <file alias="Full1">Boxes/sandbox-r-full.png</file>
+        <file alias="Empty0">Boxes/sandbox-y-empty.png</file>
+        <file alias="Full0">Boxes/sandbox-y-full.png</file>
+        <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
+        <file alias="Full6">Boxes/sandbox-o-full.png</file>
+    </qresource>
+</RCC>

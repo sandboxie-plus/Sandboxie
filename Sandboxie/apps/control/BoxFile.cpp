@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -358,17 +359,19 @@ CString CBoxFile::GetCopyPathForTruePath(const WCHAR *TruePath) const
 {
     ULONG TruePath_len = wcslen(TruePath);
 
-    for (int index = -4; index < 26; ++index) {
+	BOOLEAN SeparateUserFolders = SbieApi_QueryConfBool(m_name, L"SeparateUserFolders", TRUE);
+
+    for (int index = SeparateUserFolders ? -4 : -1; index < 26; ++index) {
 
         const WCHAR *prefix = NULL;
         if (index == -4)
-            prefix = L"\\device\\mup";
+			prefix = SbieDll_GetUserPathEx(L'p');
         else if (index == -3)
             prefix = SbieDll_GetUserPathEx(L'a');
         else if (index == -2)
             prefix = SbieDll_GetUserPathEx(L'c');
         else if (index == -1)
-            prefix = SbieDll_GetUserPathEx(L'p');
+			prefix = L"\\device\\mup"; 
         else
             prefix = SbieDll_GetDrivePath(index);
         if (! prefix)
@@ -381,13 +384,13 @@ CString CBoxFile::GetCopyPathForTruePath(const WCHAR *TruePath) const
 
             CString CopyPath(m_FilePath);
             if (index == -4)
-                CopyPath += L"\\share";
+				CopyPath += L"\\user\\public";
             else if (index == -3)
                 CopyPath += L"\\user\\all";
             else if (index == -2)
                 CopyPath += L"\\user\\current";
             else if (index == -1)
-                CopyPath += L"\\user\\public";
+				CopyPath += L"\\share"; 
             else {
                 WCHAR letter = L'a' + index;
                 CopyPath += L"\\drive\\";

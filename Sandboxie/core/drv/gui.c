@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -202,7 +203,7 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
                     proc, &proc->open_win_classes, NULL,
                     TRUE, L"Sandbox:*:ConsoleWindowClass", FALSE);
             AddMSTaskSwWClass = TRUE;
-        } else if ((! proc->image_copy) &&
+        } else if ((! proc->image_from_box) &&
                 (  _wcsicmp(proc->image_name, L"excel.exe")    == 0
                 || _wcsicmp(proc->image_name, L"powerpnt.exe") == 0))
             AddMSTaskSwWClass = TRUE;
@@ -220,7 +221,7 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
     }*/
 
     if (! ok)
-        Log_Msg1(MSG_INIT_PATHS, Gui_OpenClass_Name);
+        Log_MsgP1(MSG_INIT_PATHS, Gui_OpenClass_Name, proc->pid);
 
     return ok;
 }

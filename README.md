@@ -1,17 +1,58 @@
 # Sandboxie
+Sandboxie is a sandbox-based isolation software for 32- and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.
 
-Sandboxie is sandbox-based isolation software for 32- and 64-bit Windows NT-based operating systems. It was developed by Sophos (which acquired it from Invincea, which acquired it earlier from the original author Ronen Tzur). It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying the local or mapped drive. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.
+## Downloads
+Get the latest release here: https://github.com/sandboxie-plus/Sandboxie/releases
+
+Sandboxie is available in two flavors, Plus and Classic. Both have the same core components, this means they have the same level of security and compatibility.
+What's different is the availability of features in the user interface.
+
+The Plus build has a modern Qt based UI, which supports all new features that have been added since the project went open source.
+The Classic build has the old no longer developed MFC based UI, hence it lacks support for modern features. However, most of them can still be used when manually configured in the Sandboxie.ini configuration file.
+
+## Project maintenance
+2004 - 2013 Ronen Tzur
+
+2013 - 2017 Invincea Inc.
+
+2017 - 2020 Sophos Group plc
+
+Open Source release
+
+2020 onwards David Xanatos
 
 
-## History
+## Helpful Contributors
+- DavidBerdik - Author of Sandboxie Website Archive
+- diversenok - Security analysis & PoC's
+- stephtr - CI / Certification
+- TechLord - Team-IRA / Reversing
+- hg421 - Security analysis 
+- typpos - UI suggestions / Documentation / Code reviews
+- isaak654 - UI fixes / Templates / Documentation
+- cricri-pingouin - UI fixes
+- Valinwolf - UI / Icons
+- mpheath - Help with Inno Setup installer
 
-Sandboxie was initially released in 2004 as a tool for sandboxing Internet Explorer. Over time, the program was expanded to support other browsers and arbitrary Win32 applications.
+### Translators
+- yuhao2348732 - Chinese Simplified
+- nkh0472 - Chinese Simplified
+- bastik-1001 - German
+- isaak654 - Italian
+- JNylson - Portuguese
+- lufog - Russian
+- xorcan - Turkish
+- TragicLifeHu - Chinese Traditional
 
-In December 2013, Invincea announced the acquisition of Sandboxie. 
+More volunteers welcome ;)
 
-In February 2017, Sophos announced the acquisition of Invincea. Invincea posted an assurance in Sandboxie's website that for the time being Sandboxie's development and support would continue as normal.
+## Documentation
+A Github copy of the Sandboxie documentation is maintained at https://davidxanatos.github.io/sandboxie-docs
 
-In September 2019, Sophos switched to a new license. 
+## Sandboxie Forum Archive
+A full archive of the old Sandboxie forum is available at https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums
 
-In 2020 Sophos has released Sandboxie as Open Source under the GPLv3 licence to the community for further developement and maintanance.
+## Support the project
+If you like the tool, please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos
 
+Or donating directly via the PayPal button on my website: https://xanasoft.com

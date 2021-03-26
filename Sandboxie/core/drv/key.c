@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -233,13 +234,13 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // open paths
     //
 
-    if (proc->image_copy)
+    if (proc->image_from_box)
         ok = TRUE;
     else
         ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenPath, TRUE);
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPath);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
         return FALSE;
     }
 
@@ -249,7 +250,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 
     ok = Process_GetPaths(proc, &proc->closed_key_paths, _ClosedPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 
@@ -261,7 +262,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     if (ok)
         ok = Process_GetPaths(proc, &proc->read_key_paths, _ReadPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ReadPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
     }
 
@@ -279,7 +280,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
                     proc, &proc->closed_key_paths, _WritePath, TRUE);
         }
         if (! ok) {
-            Log_Msg1(MSG_INIT_PATHS, _WritePath);
+            Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
             return FALSE;
         }
     }
@@ -462,16 +463,26 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             letter = 0;
 
         if (letter) {
+
+            ULONG mon_type = MONITOR_KEY;
+            if (!IsBoxedPath) {
+                if (ShouldMonitorAccess == TRUE)
+                    mon_type |= MONITOR_DENY;
+                else
+                    mon_type |= MONITOR_OPEN;
+            }
+            if (!ShouldMonitorAccess)
+                mon_type |= MONITOR_TRACE;
+
             swprintf(access_str, L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
-            Log_Debug_Msg(access_str, Name->Name.Buffer);
+            Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    if (ShouldMonitorAccess) {
+    else if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(
-            MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer);
+        Session_MonitorPut(MONITOR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
     }
 
     Mem_Free(Name, NameLength);

@@ -1,0 +1,68 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+/////////////////////////////////////////////////////////////////////////////
+// German (Austria) resources
+
+#include "winres.h"
+
+#include "../version.h"
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
+#pragma code_page(1252)
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION VERSION_BIN
+ PRODUCTVERSION VERSION_BIN
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "0c0704b0"
+        BEGIN
+            VALUE "CompanyName", MY_COMPANY_NAME_STRING
+            VALUE "FileDescription", "Sandboxie API for Qt"
+            VALUE "FileVersion", VERSION_STR
+            VALUE "InternalName", "QSbieAPI.dll"
+            VALUE "LegalCopyright", MY_COPYRIGHT_STRING
+            VALUE "OriginalFilename", "QSbieAPI.dll"
+            VALUE "ProductName", MY_PRODUCT_NAME_STRING
+            VALUE "ProductVersion", VERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0xc07, 1200
+    END
+END
+
+#endif    // German (Austria) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

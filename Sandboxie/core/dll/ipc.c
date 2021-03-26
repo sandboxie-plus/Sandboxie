@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -288,8 +289,9 @@ const WCHAR *Ipc_actkernel = L"\\RPC Control\\actkernel";
 
 extern const WCHAR *File_BQQB;
 
-WCHAR   *g_Ipc_DynamicPortNames[NUM_DYNAMIC_PORTS];
+LIST Ipc_DynamicPortNames;
 
+BOOLEAN RpcRt_IsDynamicPortOpen(const WCHAR* wszPortName);
 
 
 //---------------------------------------------------------------------------
@@ -369,12 +371,7 @@ _FX BOOLEAN Ipc_Init(void)
 
     Ipc_CreateObjects();
 
-    if (Dll_OsBuild >= 9600)
-        g_Ipc_DynamicPortNames[SPOOLER_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
-
-    g_Ipc_DynamicPortNames[WPAD_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
-    g_Ipc_DynamicPortNames[SMART_CARD_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
-    g_Ipc_DynamicPortNames[GAME_CONFIG_STORE_PORT] = Dll_Alloc(DYNAMIC_PORT_NAME_CHARS * sizeof(WCHAR));
+    List_Init(&Ipc_DynamicPortNames);
 
     return TRUE;
 }
@@ -402,7 +399,7 @@ _FX void Ipc_CreateObjects(void)
     // the last path component (the dummy name itself)
     //
 
-    Sbie_swprintf(str, SBIE_BOXED_ L"DummyEvent_%d", Dll_ProcessId);
+    Sbie_snwprintf(str, 64, SBIE_BOXED_ L"DummyEvent_%d", Dll_ProcessId);
     handle = CreateEvent(NULL, FALSE, FALSE, str);
     if (! handle) {
         errlvl = 11;
@@ -575,7 +572,7 @@ _FX NTSTATUS Ipc_GetName(
         if (! NT_SUCCESS(status))
             return status;
 
-        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->ObjectName.Buffer;
+        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->Name.Buffer;
 
         if (! *OutTruePath) {
 
@@ -588,7 +585,7 @@ _FX NTSTATUS Ipc_GetName(
         }
 
         name = (*OutTruePath)
-             + ((OBJECT_NAME_INFORMATION *)name)->ObjectName.Length
+             + ((OBJECT_NAME_INFORMATION *)name)->Name.Length
                     / sizeof(WCHAR);
 
         if (objname_len) {
@@ -972,10 +969,10 @@ _FX void Ipc_AdjustPortPath(UNICODE_STRING *ObjectName)
         status = Obj_GetObjectName(handle, name, &length);
 
         if (NT_SUCCESS(status) &&
-                name->ObjectName.Length >= ParentLength * sizeof(WCHAR) &&
-            0 == _wcsnicmp(name->ObjectName.Buffer, Buffer, ParentLength)) {
+                name->Name.Length >= ParentLength * sizeof(WCHAR) &&
+            0 == _wcsnicmp(name->Name.Buffer, Buffer, ParentLength)) {
 
-            wmemcpy(Buffer, name->ObjectName.Buffer, ParentLength);
+            wmemcpy(Buffer, name->Name.Buffer, ParentLength);
         }
 
         Dll_Free(name);
@@ -1475,7 +1472,6 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
     WCHAR *TruePath;
     WCHAR *CopyPath;
     ULONG mp_flags;
-    int i;
 
     Dll_PushTlsNameBuffer(TlsData);
 
@@ -1504,14 +1500,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
         goto OpenTruePath;
 
     // Is this a dynamic RPC port that we need to open?
-    for (i = 0; i < NUM_DYNAMIC_PORTS; i++)
-    {
-        if ( g_Ipc_DynamicPortNames[i] && *g_Ipc_DynamicPortNames[i]
-        && (_wcsicmp(TruePath, g_Ipc_DynamicPortNames[i]) == 0) )
-            // see also RpcBindingFromStringBindingW in core/dll/rpcrt.c
-            // and core/drv/ipc_spl.c
-            goto OpenTruePath;
-    }
+    if(RpcRt_IsDynamicPortOpen(TruePath))
+        goto OpenTruePath;
 
     //
     // check for proxy LPC port
@@ -1648,7 +1638,6 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
     WCHAR *TruePath;
     WCHAR *CopyPath;
     ULONG mp_flags;
-    int i;
 
     Dll_PushTlsNameBuffer(TlsData);
 
@@ -1685,14 +1674,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
     // and Ipc_NtAlpcConnectPort can be merged to eliminate code duplication.
 
     // Is this a dynamic RPC port that we need to open?
-    for (i = 0; i < NUM_DYNAMIC_PORTS; i++)
-    {
-        if ( g_Ipc_DynamicPortNames[i] && *g_Ipc_DynamicPortNames[i]
-        && (_wcsicmp(TruePath, g_Ipc_DynamicPortNames[i]) == 0) )
-            // see also RpcBindingFromStringBindingW in core/dll/rpcrt.c
-            // and core/drv/ipc_spl.c
-            goto OpenTruePath;
-    }
+    if(RpcRt_IsDynamicPortOpen(TruePath))
+        goto OpenTruePath;
 
     //
     // check for proxy LPC port

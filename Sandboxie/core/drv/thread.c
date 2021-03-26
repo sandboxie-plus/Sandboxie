@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -178,13 +179,13 @@ _FX BOOLEAN Thread_Init(void)
     if (! Syscall_Set1("OpenThreadTokenEx",     Thread_OpenThreadTokenEx))
         return FALSE;
 
-    if (! Syscall_Set1("SetInformationProcess",Thread_SetInformationProcess))
+    if (! Syscall_Set1("SetInformationProcess", Thread_SetInformationProcess))
         return FALSE;
     if (! Syscall_Set1("SetInformationThread",  Thread_SetInformationThread))
         return FALSE;
 
     if (! Syscall_Set1(
-            "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
+                    "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
         return FALSE;
 
     //
@@ -212,7 +213,7 @@ _FX BOOLEAN Thread_Init(void)
     // set API handlers
     //
 
-    Api_SetFunction(API_OPEN_PROCESS,       Thread_Api_OpenProcess);
+    Api_SetFunction(API_OPEN_PROCESS,           Thread_Api_OpenProcess);
 
     return TRUE;
 }
@@ -328,8 +329,7 @@ _FX BOOLEAN Thread_InitProcess(PROCESS *proc)
 
         if (! NT_SUCCESS(status)) {
 
-            Log_Status_Ex_Session(
-                MSG_1231, 0x44, status, NULL, proc->box->session_id);
+			Log_Status_Ex_Process( MSG_1231, 0x44, status, NULL, proc->box->session_id, proc->pid);
             return FALSE;
         }
     }
@@ -601,19 +601,22 @@ _FX NTSTATUS Thread_MyImpersonateClient(
         else if (Driver_OsVersion == DRIVER_WINDOWS_81)
             ImpersonationInfo_offset = 0x650;
 
-        else if (Driver_OsBuild < 14316)
-            ImpersonationInfo_offset = 0x658;
-        else if (Driver_OsBuild < 15031)
-            ImpersonationInfo_offset = 0x660;
-        else if (Driver_OsBuild < 18312)
-            ImpersonationInfo_offset = 0x668;
-        else if (Driver_OsBuild <= 18363)
-            ImpersonationInfo_offset = 0x678;
-        else if (Driver_OsBuild < 18980)
-            ImpersonationInfo_offset = 0x688;
-        else if (Driver_OsBuild >= 18980)
-            ImpersonationInfo_offset = 0x4a8;
-
+        else if (Driver_OsVersion == DRIVER_WINDOWS_10) {
+            if (Driver_OsBuild < 14316)
+                ImpersonationInfo_offset = 0x658;
+            else if (Driver_OsBuild < 15031)
+                ImpersonationInfo_offset = 0x660;
+            else if (Driver_OsBuild < 18312)
+                ImpersonationInfo_offset = 0x668;
+            else if (Driver_OsBuild <= 18363)
+                ImpersonationInfo_offset = 0x678;
+            else if (Driver_OsBuild < 18980)
+                ImpersonationInfo_offset = 0x688;
+            else if (Driver_OsBuild < 21286)
+                ImpersonationInfo_offset = 0x4a8;
+            else
+                ImpersonationInfo_offset = 0x4f8;
+        }
 #else ! _WIN64
 
         if (Driver_OsVersion == DRIVER_WINDOWS_XP)
@@ -635,18 +638,16 @@ _FX NTSTATUS Thread_MyImpersonateClient(
             ImpersonationInfo_offset = 0x380;
 
         else if (Driver_OsVersion == DRIVER_WINDOWS_10) {
-            if (Driver_OsBuild < 14965) {
+            if (Driver_OsBuild < 14965)
                 ImpersonationInfo_offset = 0x390;
-            }
-            else if (Driver_OsBuild <= 18309) {
+            else if (Driver_OsBuild <= 18309) 
                 ImpersonationInfo_offset = 0x398;
-            }
-            else  if (Driver_OsBuild < 18980) {
+            else  if (Driver_OsBuild < 18980) 
                 ImpersonationInfo_offset = 0x3A0;
-            }
-            else {
+            else if (Driver_OsBuild < 21286)
                 ImpersonationInfo_offset = 0x2c8;
-            }
+            else
+                ImpersonationInfo_offset = 0x2f0;
         }
         //
         // on Windows XP (which is supported only in a 32-bit)
@@ -710,9 +711,23 @@ _FX NTSTATUS Thread_MyImpersonateClient(
             }
         }
 
-        if (! ImpersonationInfo_offset) {
+        if (!ImpersonationInfo_offset) {
             status = STATUS_ACCESS_DENIED;
             Log_Status(MSG_1222, 0x62, STATUS_UNKNOWN_REVISION);
+
+            /*__try {
+                for (int i = 0; i < 0x0a00; i++)
+                {
+                    ULONG_PTR* ImpersonationInfo = (ULONG_PTR*)((ULONG_PTR)ThreadObject + i);
+
+                    if ((*ImpersonationInfo & ~7) == (ULONG_PTR)TokenObject)
+                    {
+                        WCHAR str[64];
+                        swprintf(str, L"BAM! found: %d", i);
+                        Session_MonitorPut(MONITOR_OTHER, str, PsGetCurrentProcessId());
+                    }
+                }
+            } __except (EXCEPTION_EXECUTE_HANDLER) {}*/
         }
     }
 
@@ -1025,7 +1040,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
         Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
         if (nbuf) {
 
-            USHORT mon_type = MONITOR_IPC;
+            ULONG mon_type = MONITOR_IPC;
             if (NT_SUCCESS(status))
                 mon_type |= MONITOR_OPEN;
             else
@@ -1034,7 +1049,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
             --nptr; *nptr = L':';
             --nptr; *nptr = L'$';
 
-            Session_MonitorPut(mon_type, nptr);
+            Session_MonitorPut(mon_type, nptr, proc->pid);
 
             Mem_Free(nbuf, nlen);
         }
@@ -1061,7 +1076,7 @@ trace:
         if (Letter2) {
             swprintf(str, L"(%c%c) %08X %06d",
                                 Letter1, Letter2, GrantedAccess, (int)pid);
-            Log_Debug_Msg(str, Driver_Empty);
+            Log_Debug_Msg(MONITOR_IPC | MONITOR_TRACE, str, Driver_Empty);
         }
     }
 

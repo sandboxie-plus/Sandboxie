@@ -246,11 +246,11 @@ void CLockConfigDialog::OnOK()
     ini.SetRestrictions(
         isEditAdminOnly, isForceDisableAdminOnly, isForgetPassword);
 
-    if ((*m_NewPassword) || isEditAdminOnly) {
-        int rv = CMyApp::MsgBox(this, MSG_4269, MB_YESNO);
-        if (rv == IDYES)
-            CRunBrowser::OpenHelp(this, L"ConfigurationProtection");
-    }
+    //if ((*m_NewPassword) || isEditAdminOnly) {
+    //    int rv = CMyApp::MsgBox(this, MSG_4269, MB_YESNO);
+    //    if (rv == IDYES)
+    //        CRunBrowser::OpenHelp(this, L"ConfigurationProtection");
+    //}
 
     EndDialog(0);
 }

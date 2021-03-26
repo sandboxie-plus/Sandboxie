@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -550,25 +551,16 @@ _FX ULONG_PTR EntrypointC(SBIELOW_DATA *data,void *ActivationContext, void *Syst
 
         // WaitForDebugger(data);
 
+		if(!data->bHostInject)
+			InitSyscalls(data, SystemService);
+#ifdef _WIN64
+		InitInject(data, ActivationContext, ActivationContext64);
+		if (!data->bHostInject)
+			InitConsole(data);
+#else
+		InitInject(data, ActivationContext);
+#endif
 
-        if (!data->bHostInject)
-        {
-            InitSyscalls(data,SystemService);
-#ifdef _WIN64
-            InitInject(data, ActivationContext, ActivationContext64);
-            InitConsole(data);
-#else
-            InitInject(data, ActivationContext);
-#endif
-        }
-        else
-        {
-#ifdef _WIN64
-        InitInject(data, ActivationContext,ActivationContext64);
-#else
-        InitInject(data, ActivationContext);
-#endif
-        }
     } else if (OldProcessHeap == -1) {
 
         //

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -40,7 +41,7 @@ _FX HANDLE Ipc_GetServerEvent(const WCHAR *service, BOOLEAN *create_flag)
     WCHAR event_name[64];
     HANDLE hEvent;
 
-    Sbie_swprintf(event_name, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
+    Sbie_snwprintf(event_name, 64, SBIE_BOXED_ L"ServiceInitComplete_%s", service);
     if (create_flag) {
         *create_flag = FALSE;
         hEvent = CreateEvent(NULL, TRUE, FALSE, event_name);
@@ -169,7 +170,7 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                 else {
 
                     WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
-                    Sbie_swprintf(fullpath, L"\"%s\\%s\"", homedir, program);
+                    Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
 
                     if (! SbieDll_RunSandboxed(
                             L"*THREAD*", fullpath, homedir, 0, &si, &pi))

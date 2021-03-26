@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,8 +36,8 @@ typedef long NTSTATUS;
 #include "common/defines.h"
 #include "common/list.h"
 
-extern __declspec(dllexport) int __CRTDECL Sbie_swprintf(wchar_t *_Buffer, const wchar_t * const _Format, ...);
-extern __declspec(dllexport) int __CRTDECL Sbie_sprintf(char *_Buffer, const char * const _Format, ...);
+extern __declspec(dllexport) int __CRTDECL Sbie_snwprintf(wchar_t *_Buffer, size_t Count, const wchar_t * const _Format, ...);
+extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t Count, const char * const _Format, ...);
 
 
 //---------------------------------------------------------------------------
@@ -46,6 +47,8 @@ extern __declspec(dllexport) int __CRTDECL Sbie_sprintf(char *_Buffer, const cha
 
 #define TRUE_NAME_BUFFER        0
 #define COPY_NAME_BUFFER        1
+#define TMPL_NAME_BUFFER        2
+#define NAME_BUFFER_COUNT       3
 #define NAME_BUFFER_DEPTH       12
 
 
@@ -85,6 +88,7 @@ enum {
     DLL_IMAGE_SANDBOXIE_WUAU,
     DLL_IMAGE_SANDBOXIE_BITS,
     DLL_IMAGE_SANDBOXIE_SBIESVC,
+    DLL_IMAGE_MSI_INSTALLER,
     DLL_IMAGE_TRUSTED_INSTALLER,
     DLL_IMAGE_WUAUCLT,
     DLL_IMAGE_SHELL_EXPLORER,
@@ -151,8 +155,8 @@ typedef struct _THREAD_DATA {
     // name buffers:  first index is for true name, second for copy name
     //
 
-    WCHAR *name_buffer[2][NAME_BUFFER_DEPTH];
-    ULONG name_buffer_len[2][NAME_BUFFER_DEPTH];
+    WCHAR *name_buffer[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
+    ULONG name_buffer_len[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
     int depth;
 
     //
@@ -213,6 +217,11 @@ typedef struct _THREAD_DATA {
     ULONG           SizeofPortMsg;
     BOOLEAN         bOperaFileDlgThread;
 
+    //
+    // rpc module
+    //
+
+    ULONG_PTR       rpc_caller;
 
 } THREAD_DATA;
 
@@ -367,6 +376,8 @@ NTSTATUS Dll_GetCurrentSidString(UNICODE_STRING *SidString);
 // Functions (dllhook)
 //---------------------------------------------------------------------------
 
+NTSTATUS Dll_GetSettingsForImageName(
+    const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
 
 BOOLEAN Dll_SkipHook(const WCHAR *HookName);
 
@@ -637,6 +648,7 @@ BOOLEAN Ole_Init(HMODULE);
 BOOLEAN Pst_Init(HMODULE);
 
 BOOLEAN Lsa_Init_Secur32(HMODULE);
+
 BOOLEAN Lsa_Init_SspiCli(HMODULE);
 
 BOOLEAN Setup_Init_SetupApi(HMODULE);
@@ -685,6 +697,8 @@ BOOLEAN Secure_Init_Elevation(HMODULE);
 
 BOOLEAN UserEnv_Init(HMODULE);
 
+BOOLEAN UserEnv_InitVer(HMODULE);
+
 BOOLEAN Scm_OsppcDll(HMODULE);
 
 BOOLEAN Scm_DWriteDll(HMODULE);
@@ -728,6 +742,32 @@ BOOLEAN Acscmonitor_Init(HMODULE);
 BOOLEAN DigitalGuardian_Init(HMODULE);
 
 BOOLEAN ComDlg32_Init(HMODULE);
+
+
+//---------------------------------------------------------------------------
+// Functions (Config)
+//---------------------------------------------------------------------------
+
+BOOLEAN Config_MatchImageGroup(
+    const WCHAR* group, ULONG group_len, const WCHAR* test_str,
+    ULONG depth);
+
+BOOLEAN Config_MatchImage(
+    const WCHAR* pat_str, ULONG pat_len, const WCHAR* test_str,
+    ULONG depth);
+
+WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
+
+BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
+
+NTSTATUS Config_GetSettingsForImageName(
+    const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
+
+BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);
+
+WCHAR* Config_GetTagValue(WCHAR* str, WCHAR** value, ULONG* len, WCHAR sep);
+
+BOOLEAN Config_FindTagValue(WCHAR* string, const WCHAR* name, WCHAR* value, ULONG value_size, const WCHAR* deftext, WCHAR sep);
 
 //---------------------------------------------------------------------------
 

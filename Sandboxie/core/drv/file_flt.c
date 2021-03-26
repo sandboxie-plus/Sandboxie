@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -55,17 +56,6 @@ static NTSTATUS File_QueryTeardown(
 static NTSTATUS File_CheckFileObject(
     PROCESS *proc, void *Object, UNICODE_STRING *NameString,
     ACCESS_MASK GrantedAccess);
-
-static void File_CheckFontAccess(
-    PFLT_CALLBACK_DATA Data,
-    FLT_IO_PARAMETER_BLOCK *Iopb,
-    NTSTATUS *out_status);
-
-static PFLT_FILTER File_Get_Trusteer_Filter(void);
-
-static BOOLEAN g_bTrusteerLoaded = FALSE;
-
-BOOLEAN File_TrusteerLoaded(void);
 
 
 //---------------------------------------------------------------------------
@@ -250,16 +240,6 @@ _FX BOOLEAN File_Init_Filter(void)
     // successful initialization
     //
 
-    {
-        PFLT_FILTER pFltTrusteer = File_Get_Trusteer_Filter();
-
-        if (pFltTrusteer)
-        {
-            g_bTrusteerLoaded = TRUE;
-            FltObjectDereference(pFltTrusteer);
-        }
-    }
-
     return TRUE;
 }
 
@@ -383,14 +363,14 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                 {
                     proc = Process_Find((HANDLE)ulOwnerPid, NULL);  // is this a sandboxed process?
                     if (proc && proc != PROCESS_TERMINATED &&
-                        !proc->m_boolAllowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
+                        !proc->ipc_allowSpoolerPrintToFile)   // if process specifically allowed to use spooler print to file, we can skip everything below
                     {
                         FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
                         BOOLEAN     result = FALSE;
 
                         // Get normalized full path to target file.
                         // Occasionally, certain PDF apps will send in a short name (containing '~'). That will break all of our folder name checking below.
-                        if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED, &pTargetFileNameInfo) != STATUS_SUCCESS)
+                        if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) != STATUS_SUCCESS)
                         {
                             status = STATUS_ACCESS_DENIED;      // if we can't get the name, just disallow the call
                         }
@@ -431,7 +411,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                                 pStr2 += pTargetFileNameInfo->Name.Length;
                                 memset(pStr2, 0, 2);    // add a wchar NULL
 
-                                Log_Msg_Session(MSG_1319, wcPid, (PWCHAR)pStr, proc->box->session_id);
+								Log_Msg_Process(MSG_1319, wcPid, (PWCHAR)pStr, proc->box->session_id, proc->pid);
                                 Mem_Free(pStr, len);
                             }
                             FltReleaseFileNameInformation(pTargetFileNameInfo);
@@ -488,7 +468,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
             {
                 // Get normalized path to target file.
                 FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
-                if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED, &pTargetFileNameInfo) == STATUS_SUCCESS)
+                if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) == STATUS_SUCCESS)
                 {
                     if (pTargetFileNameInfo)
                     {
@@ -774,78 +754,4 @@ _FX NTSTATUS File_CheckFileObject(
     return File_Generic_MyParseProc(
                 proc, FileObject, FileObject->DeviceObject->DeviceType,
                 &FileName, &MyContext, FALSE);
-}
-
-_FX PFLT_FILTER File_Get_Trusteer_Filter(void)
-{
-    PFLT_FILTER pRet = NULL;
-    NTSTATUS status;
-    ULONG NumberFiltersReturned = 0;
-    PFLT_FILTER *FilterList = NULL;
-    UNICODE_STRING usRapportCerberus;
-
-    RtlInitUnicodeString(&usRapportCerberus, L"RapportCerberus");
-
-    status = FltEnumerateFilters(NULL, 0, &NumberFiltersReturned);
-    if ((status == STATUS_BUFFER_TOO_SMALL) && (NumberFiltersReturned > 0))
-    {
-        int len = sizeof(PFLT_FILTER) * NumberFiltersReturned;
-
-        FilterList = Mem_AllocEx(Driver_Pool, len, TRUE);
-
-        if (FilterList != NULL)
-        {
-            ULONG i;
-            status = FltEnumerateFilters(FilterList, sizeof(PFLT_FILTER) * NumberFiltersReturned, &NumberFiltersReturned);
-            for (i = 0; (i < NumberFiltersReturned) && NT_SUCCESS(status); i++)
-            {
-
-                if (!pRet)
-                {
-                    ULONG BytesReturned = 0;
-
-                    status = FltGetFilterInformation(FilterList[i], FilterFullInformation, NULL, 0, &BytesReturned);
-
-                    if ((status == STATUS_BUFFER_TOO_SMALL) && (BytesReturned > 0))
-                    {
-                        ULONG nBytesNeeded = BytesReturned;
-
-                        PFILTER_FULL_INFORMATION myFilterFullInformation = Mem_AllocEx(Driver_Pool, nBytesNeeded, TRUE);
-                        if (myFilterFullInformation != NULL)
-                        {
-                            status = FltGetFilterInformation(FilterList[i], FilterFullInformation, myFilterFullInformation, BytesReturned, &BytesReturned);
-
-                            if (NT_SUCCESS(status) && myFilterFullInformation->FilterNameLength > usRapportCerberus.Length)
-                            {
-                                UNICODE_STRING usFilterName;
-
-                                usFilterName.Buffer = myFilterFullInformation->FilterNameBuffer;
-                                usFilterName.MaximumLength = usFilterName.Length = usRapportCerberus.Length;
-
-                                if (0 == RtlCompareUnicodeString(&usFilterName, &usRapportCerberus, TRUE))
-                                {
-                                    // DbgPrint("filter found %wZ\n", &usFilterName);
-                                    pRet = FilterList[i];
-                                    FltObjectReference(pRet);
-                                }
-                            }
-
-                            Mem_Free(myFilterFullInformation, nBytesNeeded);
-                        }
-                    }
-                }
-
-                FltObjectDereference(FilterList[i]);
-            }
-
-            Mem_Free(FilterList, len);
-        }
-    }
-
-    return pRet;
-}
-
-_FX BOOLEAN File_TrusteerLoaded(void)
-{
-    return  g_bTrusteerLoaded;
 }

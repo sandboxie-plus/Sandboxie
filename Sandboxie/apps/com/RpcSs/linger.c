@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -303,7 +304,9 @@ int DoLingerLeader(void)
 
     InitializeCriticalSection(&ProcessCritSec);
     heventRpcSs = CreateEvent(0, FALSE, FALSE, NULL);
-    CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ProcessStartMonitor, NULL, 0, NULL);
+	HANDLE ThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ProcessStartMonitor, NULL, 0, NULL);
+	if (ThreadHandle)
+		CloseHandle(ThreadHandle);
 
     if (1) {
         //

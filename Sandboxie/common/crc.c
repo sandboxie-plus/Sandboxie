@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,7 +36,7 @@ extern "C" {
 
 ULONG CRC_Adler32(const UCHAR *data, int len);
 ULONG CRC_Tzuk32(const UCHAR *data, int len);
-ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len);
+//ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len);
 
 
 #ifdef __cplusplus
@@ -147,18 +148,56 @@ _FX ULONG CRC_Tzuk32(const UCHAR *data, int len)
 #ifdef CRC_WITH_ADLERTZUK64
 
 
-_FX ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len)
+/*_FX ULONG64 CRC_AdlerTzuk64(const UCHAR *data, int len)
 {
     ULONG a = CRC_Adler32(data, len);
     ULONG b = CRC_Tzuk32(data, len);
     ULONG64 ab = (ULONG64)a;
     ab = (ab << 32) | b;
     return ab;
-}
+}*/
 
 
 #endif CRC_WITH_ADLERTZUK64
 
+
+
+ULONG CRC32(const char *buf, size_t len)
+{
+	ULONG crc = 0;
+	static ULONG table[256];
+	static int have_table = 0;
+	ULONG rem;
+	ULONG octet;
+	int i, j;
+	const char *p, *q;
+
+	/* This check is not thread safe; there is no mutex. */
+	if (have_table == 0) {
+		/* Calculate CRC table. */
+		for (i = 0; i < 256; i++) {
+			rem = i;  /* remainder from polynomial division */
+			for (j = 0; j < 8; j++) {
+				if (rem & 1) {
+					rem >>= 1;
+					rem ^= 0xedb88320;
+				}
+				else
+					rem >>= 1;
+			}
+			table[i] = rem;
+		}
+		have_table = 1;
+	}
+
+	crc = ~crc;
+	q = buf + len;
+	for (p = buf; p < q; p++) {
+		octet = *p;  /* Cast to unsigned octet. */
+		crc = (crc >> 8) ^ table[(crc & 0xff) ^ octet];
+	}
+	return ~crc;
+}
 
 //---------------------------------------------------------------------------
 // End

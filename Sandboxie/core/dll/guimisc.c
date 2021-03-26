@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -86,6 +87,14 @@ static LONG Gui_ChangeDisplaySettingsExW(
     DWORD dwflags, void *lParam);
 
 
+static LONG Gui_GetRawInputDeviceInfoA(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_ LPVOID pData, _Inout_ PUINT pcbSize);
+
+static LONG Gui_GetRawInputDeviceInfoW(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_ LPVOID pData, _Inout_ PUINT pcbSize);
+
 //---------------------------------------------------------------------------
 
 
@@ -165,6 +174,11 @@ _FX BOOLEAN Gui_InitMisc(void)
         }
     }
 
+	// NoSbieDesk BEGIN
+	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+		return TRUE;
+	// NoSbieDesk END
+
     SBIEDLL_HOOK_GUI(OpenClipboard);
     SBIEDLL_HOOK_GUI(CloseClipboard);
     SBIEDLL_HOOK_GUI(GetClipboardData);
@@ -211,6 +225,9 @@ _FX BOOLEAN Gui_InitMisc(void)
         SBIEDLL_HOOK_GUI(ChangeDisplaySettingsExA);
         SBIEDLL_HOOK_GUI(ChangeDisplaySettingsExW);
     }
+
+    SBIEDLL_HOOK_GUI(GetRawInputDeviceInfoA);
+    SBIEDLL_HOOK_GUI(GetRawInputDeviceInfoW);
 
     return TRUE;
 }
@@ -1083,48 +1100,60 @@ _FX void Gui_GetClipboardData_MF(void *buf, ULONG sz, ULONG fmt)
 
 
 //---------------------------------------------------------------------------
-// Gui_ChangeDisplaySettingsExA
+// Gui_ChangeDisplaySettingsEx_impl
 //---------------------------------------------------------------------------
 
 
-_FX LONG Gui_ChangeDisplaySettingsExA(
-    void *lpszDeviceName, void *lpDevMode, HWND hwnd,
-    DWORD dwflags, void *lParam)
+_FX LONG Gui_ChangeDisplaySettingsEx_impl(
+    void* lpszDeviceName, void* lpDevMode, HWND hwnd,
+    DWORD dwflags, void* lParam, BOOLEAN bUnicode)
 {
     GUI_CHANGE_DISPLAY_SETTINGS_REQ req;
-    GUI_CHANGE_DISPLAY_SETTINGS_RPL *rpl;
+    GUI_CHANGE_DISPLAY_SETTINGS_RPL* rpl;
 
     if ((dwflags & ~(CDS_UNKNOWNFLAG | CDS_RESET | CDS_FULLSCREEN | CDS_TEST)) || lParam || hwnd) {
-        SbieApi_Log(2205, L"ChangeDisplaySettingsExA %08X", dwflags);
+        SbieApi_Log(2205, L"ChangeDisplaySettingsEx %08X", dwflags);
         SetLastError(ERROR_ACCESS_DENIED);
         return DISP_CHANGE_FAILED;
     }
 
     req.msgid = GUI_CHANGE_DISPLAY_SETTINGS;
     req.flags = dwflags;
-    req.unicode = FALSE;
+    req.unicode = bUnicode;
 
     if (lpszDeviceName) {
-        UCHAR *name = (UCHAR *)req.devname;
-        ULONG len = strlen(lpszDeviceName);
-        if (len > 62)
-            len = 62;
-        memcpy(name, lpszDeviceName, len);
-        name[len] = L'\0';
+        if (bUnicode) {
+            WCHAR* name = (WCHAR*)req.devname;
+            ULONG len = wcslen(lpszDeviceName);
+            if (len > 62)
+                len = 62;
+            wmemcpy(name, lpszDeviceName, len);
+            name[len] = L'\0';
+        }
+        else {
+            UCHAR* name = (UCHAR*)req.devname;
+            ULONG len = strlen(lpszDeviceName);
+            if (len > 62)
+                len = 62;
+            memcpy(name, lpszDeviceName, len);
+            name[len] = L'\0';
+        }
         req.have_devname = TRUE;
-    } else {
+    }
+    else {
         memzero(req.devname, sizeof(req.devname));
         req.have_devname = FALSE;
     }
 
     if (lpDevMode) {
-        memcpy(&req.devmode, lpDevMode, sizeof(DEVMODEA));
+        memcpy(&req.devmode, lpDevMode, bUnicode ? sizeof(DEVMODEW) : sizeof(DEVMODEA));
         req.have_devmode = TRUE;
-    } else
+    }
+    else
         req.have_devmode = FALSE;
 
     rpl = Gui_CallProxy(&req, sizeof(req), sizeof(*rpl));
-    if (! rpl)
+    if (!rpl)
         return DISP_CHANGE_FAILED;
     else {
         ULONG error = rpl->error;
@@ -1133,6 +1162,18 @@ _FX LONG Gui_ChangeDisplaySettingsExA(
         SetLastError(error);
         return retval;
     }
+}
+
+//---------------------------------------------------------------------------
+// Gui_ChangeDisplaySettingsExA
+//---------------------------------------------------------------------------
+
+
+_FX LONG Gui_ChangeDisplaySettingsExA(
+    void *lpszDeviceName, void *lpDevMode, HWND hwnd,
+    DWORD dwflags, void *lParam)
+{
+    return Gui_ChangeDisplaySettingsEx_impl(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam, FALSE);
 }
 
 
@@ -1145,48 +1186,90 @@ _FX LONG Gui_ChangeDisplaySettingsExW(
     void *lpszDeviceName, void *lpDevMode, HWND hwnd,
     DWORD dwflags, void *lParam)
 {
-    GUI_CHANGE_DISPLAY_SETTINGS_REQ req;
-    GUI_CHANGE_DISPLAY_SETTINGS_RPL *rpl;
+    return Gui_ChangeDisplaySettingsEx_impl(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam, TRUE);
+}
 
-    if ((dwflags & ~(CDS_UNKNOWNFLAG | CDS_RESET | CDS_FULLSCREEN | CDS_TEST)) || lParam || hwnd) {
-        SbieApi_Log(2205, L"ChangeDisplaySettingsExW %08X", dwflags);
-        SetLastError(ERROR_ACCESS_DENIED);
-        return DISP_CHANGE_FAILED;
-    }
 
-    req.msgid = GUI_CHANGE_DISPLAY_SETTINGS;
-    req.flags = dwflags;
-    req.unicode = TRUE;
+//---------------------------------------------------------------------------
+// Gui_GetRawInputDeviceInfo_impl
+//---------------------------------------------------------------------------
 
-    if (lpszDeviceName) {
-        WCHAR *name = (WCHAR *)req.devname;
-        ULONG len = wcslen(lpszDeviceName);
-        if (len > 62)
-            len = 62;
-        wmemcpy(name, lpszDeviceName, len);
-        name[len] = L'\0';
-        req.have_devname = TRUE;
-    } else {
-        memzero(req.devname, sizeof(req.devname));
-        req.have_devname = FALSE;
-    }
 
-    if (lpDevMode) {
-        memcpy(&req.devmode, lpDevMode, sizeof(DEVMODEW));
-        req.have_devmode = TRUE;
+_FX LONG Gui_GetRawInputDeviceInfo_impl(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_ LPVOID pData, _Inout_ PUINT pcbSize, BOOLEAN bUnicode)
+{
+    GUI_GET_RAW_INPUT_DEVICE_INFO_REQ* req;
+    GUI_GET_RAW_INPUT_DEVICE_INFO_RPL* rpl;
+
+    // Note: pcbSize seams to be in tchars not in bytes!
+    ULONG lenData = 0;
+    if (pData && pcbSize)
+        lenData = (*pcbSize) * (bUnicode ? sizeof(WCHAR) : 1);
+
+    ULONG reqSize = sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) + lenData + 10;
+    req = Dll_Alloc(reqSize);
+
+    LPVOID reqData = (BYTE*)req + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ);
+
+    req->msgid = GUI_GET_RAW_INPUT_DEVICE_INFO;
+    req->hDevice = (ULONG64)hDevice;
+    req->uiCommand = uiCommand;
+    req->unicode = bUnicode;
+    if (lenData) {
+        memcpy(reqData, pData, lenData);
+        req->hasData = TRUE;
     } else
-        req.have_devmode = FALSE;
+        req->hasData = FALSE;
+    req->cbSize = pcbSize ? *pcbSize : -1;
 
-    rpl = Gui_CallProxy(&req, sizeof(req), sizeof(*rpl));
-    if (! rpl)
-        return DISP_CHANGE_FAILED;
+    rpl = Gui_CallProxy(req, reqSize, sizeof(*rpl));
+
+    Dll_Free(req);
+
+    if (!rpl)
+        return -1;
     else {
         ULONG error = rpl->error;
         ULONG retval = rpl->retval;
+
+        if (pcbSize)
+            *pcbSize = rpl->cbSize;
+        if (lenData) {
+            LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+            memcpy(pData, rplData, lenData);
+        }
+
         Dll_Free(rpl);
         SetLastError(error);
         return retval;
     }
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_GetRawInputDeviceInfoA
+//---------------------------------------------------------------------------
+
+
+_FX LONG Gui_GetRawInputDeviceInfoA(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_ LPVOID pData, _Inout_ PUINT pcbSize)
+{
+    return Gui_GetRawInputDeviceInfo_impl(hDevice, uiCommand, pData, pcbSize, FALSE);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_GetRawInputDeviceInfoW
+//---------------------------------------------------------------------------
+
+
+_FX LONG Gui_GetRawInputDeviceInfoW(
+    _In_opt_ HANDLE hDevice, _In_ UINT uiCommand,
+    _Inout_ LPVOID pData, _Inout_ PUINT pcbSize)
+{
+    return Gui_GetRawInputDeviceInfo_impl(hDevice, uiCommand, pData, pcbSize, TRUE);
 }
 
 

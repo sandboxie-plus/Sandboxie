@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -50,7 +51,10 @@ void DriverAssist::LogMessage()
             break;
 
         ULONG len = m_workItemLen;
-        ULONG status = SbieApi_GetWork(-1, m_workItemBuf, &len);
+		ULONG message_number = m_last_message_number;
+		ULONG code = -1;
+		ULONG pid = 0;
+		ULONG status = SbieApi_GetMessage(&message_number, -1, &code, &pid, (wchar_t*)m_workItemBuf, len);
 
         if (status == STATUS_BUFFER_TOO_SMALL) {
             HeapFree(GetProcessHeap(), 0, m_workItemBuf);
@@ -60,11 +64,10 @@ void DriverAssist::LogMessage()
         }
 
         if (status != 0)
-            break;
+            break; // error or no more entries
+		m_last_message_number = message_number;
 
-        WORK_ITEM *work = (WORK_ITEM *)m_workItemBuf;
-        if (work->type == API_LOG_MESSAGE)
-            LogMessage_Single(work->data);
+		LogMessage_Single(code, (wchar_t*)m_workItemBuf);
     }
 
     if (m_workItemBuf)
@@ -79,7 +82,7 @@ void DriverAssist::LogMessage()
 //---------------------------------------------------------------------------
 
 
-void DriverAssist::LogMessage_Single(void *data)
+void DriverAssist::LogMessage_Single(ULONG code, wchar_t* data)
 {
     //
     // check if logging is enabled
@@ -108,16 +111,19 @@ void DriverAssist::LogMessage_Single(void *data)
     // get log message
     //
 
-    ULONG *msgidptr = (ULONG *)data;
-    if (*msgidptr == MSG_2199)
+    if (code == MSG_2199)
         return;
+	if (code == MSG_2198)
+		return;
+	if (code == MSG_1399)
+		return;
 
-    WCHAR *str1 = (WCHAR *)(msgidptr + 1);
+    WCHAR *str1 = data;
     ULONG str1_len = wcslen(str1);
     WCHAR *str2 = str1 + str1_len + 1;
     ULONG str2_len = wcslen(str2);
 
-    WCHAR *text = SbieDll_FormatMessage2(*msgidptr, str1, str2);
+    WCHAR *text = SbieDll_FormatMessage2(code, str1, str2);
     if (! text)
         return;
 
@@ -152,7 +158,7 @@ void DriverAssist::LogMessage_Single(void *data)
 
     LogMessage_Write(path, text);
 
-    LogMessage_Multi(*msgidptr, path, text);
+    LogMessage_Multi(code, path, text);
 
     LocalFree(text);
 }

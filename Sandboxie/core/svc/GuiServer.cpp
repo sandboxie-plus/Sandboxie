@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@
 #include <sddl.h>
 #include <aclapi.h>
 #include <dde.h>
+#include "misc.h"
 
 #define PATTERN XPATTERN
 extern "C" {
@@ -87,9 +89,14 @@ GuiServer::GuiServer()
     m_ParentPid = 0;
     m_SessionId = 0;
 
-    OSVERSIONINFO osvi = { 0 };
-    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-    GetVersionEx(&osvi);
+    OSVERSIONINFOW osvi = { 0 };
+    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
+	/*NTSTATUS(WINAPI *RtlGetVersion)(LPOSVERSIONINFOW);
+	*(FARPROC*)&RtlGetVersion = GetProcAddress(_Ntdll, "RtlGetVersion");
+	if (RtlGetVersion != NULL)
+		RtlGetVersion(&osvi);
+	else*/
+	GetVersionExW(&osvi); // since windows 10 this one is lying
     m_nOSVersion = osvi.dwMajorVersion * 10 + osvi.dwMinorVersion;
 }
 
@@ -741,6 +748,7 @@ bool GuiServer::CreateQueueSlave(const WCHAR *cmdline)
     m_SlaveFuncs[GUI_CHANGE_DISPLAY_SETTINGS]   = &GuiServer::ChangeDisplaySettingsSlave;
     m_SlaveFuncs[GUI_SET_CURSOR_POS]        = &GuiServer::SetCursorPosSlave;
     m_SlaveFuncs[GUI_REMOVE_HOST_WINDOW]    = &GuiServer::RemoveHostWindow;
+    m_SlaveFuncs[GUI_GET_RAW_INPUT_DEVICE_INFO] = &GuiServer::GetRawInputDeviceInfoSlave;
 
     //
     // register a worker thread to process incoming queue requests
@@ -999,6 +1007,16 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
                                          | JOB_OBJECT_UILIMIT_READCLIPBOARD;
 
                 BOOL ok = FALSE;        // set TRUE to skip UIRestrictions
+
+				// OpenToken BEGIN
+				if ((SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) || SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE)))
+					ok = TRUE;
+				// OpenToken END
+				// OriginalToken BEGIN
+				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+					ok = TRUE;
+				// OriginalToken END
+
                 if (! ok) {
                     ok = SetInformationJobObject(
                                 hJobObject, JobObjectBasicUIRestrictions,
@@ -2977,8 +2995,8 @@ ULONG GuiServer::ClipCursorSlave(SlaveArgs *args)
     if (req->have_rect)
         rect = &req->rect;
 
-    if (! ClipCursor(rect))
-        return STATUS_ACCESS_DENIED;
+    ClipCursor(rect); //if (! ) // as this seam to randomly fail don't issue errors
+    //    return STATUS_ACCESS_DENIED; // todo: add reply and return ret value
 
     return STATUS_SUCCESS;
 }
@@ -3376,6 +3394,51 @@ ULONG GuiServer::RemoveHostWindow(SlaveArgs *args)
 
     return STATUS_SUCCESS;
 }
+
+//---------------------------------------------------------------------------
+// GetRawInputDeviceInfoSlave
+//---------------------------------------------------------------------------
+
+ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
+{
+    GUI_GET_RAW_INPUT_DEVICE_INFO_REQ *req = (GUI_GET_RAW_INPUT_DEVICE_INFO_REQ *)args->req_buf;
+    GUI_GET_RAW_INPUT_DEVICE_INFO_RPL *rpl = (GUI_GET_RAW_INPUT_DEVICE_INFO_RPL *)args->rpl_buf;
+
+    if (args->req_len < sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ))
+        return STATUS_INFO_LENGTH_MISMATCH;
+
+    LPVOID reqData = req->hasData ? (BYTE*)req + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_REQ) : NULL;
+    PUINT pcbSize = NULL;
+    if (req->cbSize != -1)
+        pcbSize = &req->cbSize;
+
+    SetLastError(ERROR_SUCCESS);
+    if (req->unicode) {
+        rpl->retval = GetRawInputDeviceInfoW((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
+    }
+    else {
+        rpl->retval = GetRawInputDeviceInfoA((HANDLE)req->hDevice, req->uiCommand, reqData, pcbSize);
+    }
+    rpl->error = GetLastError();
+
+    rpl->cbSize = req->cbSize;
+    if (pcbSize && req->hasData)
+    {
+        // Note: pcbSize seams to be in tchars not in bytes!
+        ULONG lenData = (*pcbSize) * (req->unicode ? sizeof(WCHAR) : 1);
+
+        rpl->hasData = TRUE;
+        LPVOID rplData = (BYTE*)rpl + sizeof(GUI_GET_RAW_INPUT_DEVICE_INFO_RPL);
+        memcpy(rplData, reqData, lenData);
+    }
+    else
+        rpl->hasData = FALSE;
+
+    args->rpl_len = args->req_len;
+
+    return STATUS_SUCCESS;
+}
+
 
 //---------------------------------------------------------------------------
 // GetProcessPathList

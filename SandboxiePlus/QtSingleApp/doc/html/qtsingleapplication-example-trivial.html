@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- trivial.qdoc -->
+<head>
+  <title>A Trivial Example</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">A Trivial Example<br /><span class="subtitle"></span>
+</h1>
+<p>The application in this example has a log-view that displays messages sent by further instances of the same application.</p>
+<p>The example demonstrates the use of the <a href="qtsingleapplication.html">QtSingleApplication</a> class to detect and communicate with a running instance of the application using the sendMessage() API. The messageReceived() signal is used to display received messages in a <a href="http://qt.nokia.com/doc/4.6/qtextedit.html">QTextEdit</a> log.</p>
+<pre><span class="comment"> /****************************************************************************
+ **
+ ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+ ** This file is part of the Qt Solutions component.
+ **
+ ** You may use this file under the terms of the BSD license as follows:
+ **
+ ** &quot;Redistribution and use in source and binary forms, with or without
+ ** modification, are permitted provided that the following conditions are
+ ** met:
+ **   * Redistributions of source code must retain the above copyright
+ **     notice, this list of conditions and the following disclaimer.
+ **   * Redistributions in binary form must reproduce the above copyright
+ **     notice, this list of conditions and the following disclaimer in
+ **     the documentation and/or other materials provided with the
+ **     distribution.
+ **   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
+ **     the names of its contributors may be used to endorse or promote
+ **     products derived from this software without specific prior written
+ **     permission.
+ **
+ ** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ ** &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ ** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ ** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ ** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ ** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ ** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ ** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ ** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ ** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;
+ **
+ ****************************************************************************/</span>
+
+ #include &lt;qtsingleapplication.h&gt;
+ #include &lt;QtGui/QTextEdit&gt;
+
+ class TextEdit : public QTextEdit
+ {
+     Q_OBJECT
+ public:
+     TextEdit(QWidget *parent = 0)
+         : QTextEdit(parent)
+     {}
+ public slots:
+     void append(const QString &amp;str)
+     {
+         QTextEdit::append(str);
+     }
+ };
+
+ #include &quot;main.moc&quot;
+
+ int main(int argc, char **argv)
+ {
+     QtSingleApplication instance(argc, argv);</pre>
+<p>The example has only the <tt>main</tt> entry point function. A <a href="qtsingleapplication.html">QtSingleApplication</a> object is created immediately.</p>
+<pre>     if (instance.sendMessage(&quot;Wake up!&quot;))
+         return 0;</pre>
+<p>If another instance of this application is already running, sendMessage() will succeed, and this instance just exits immediately.</p>
+<pre>     TextEdit logview;
+     logview.setReadOnly(true);
+     logview.show();</pre>
+<p>Otherwise the instance continues as normal and creates the user interface.</p>
+<pre>     instance.setActivationWindow(&amp;logview);
+
+     QObject::connect(&amp;instance, SIGNAL(messageReceived(const QString&amp;)),
+                      &amp;logview, SLOT(append(const QString&amp;)));
+
+     return instance.exec();</pre>
+<p>The <tt>logview</tt> object is also set as the application's activation window. Every time a message is received, the window will be raised and activated automatically.</p>
+<p>The messageReceived() signal is also connected to the <a href="http://qt.nokia.com/doc/4.6/qtextedit.html">QTextEdit</a>'s append() slot. Every message received from further instances of this application will be displayed in the log.</p>
+<p>Finally the event loop is entered.</p>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2010 Nokia Corporation and/or its subsidiary(-ies)</td>
+<td width="40%" align="center"><a href="http://qt.nokia.com/doc/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

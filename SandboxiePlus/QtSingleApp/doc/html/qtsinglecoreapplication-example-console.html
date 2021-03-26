@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- console.qdoc -->
+<head>
+  <title>A non-GUI example</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">A non-GUI example<br /><span class="subtitle"></span>
+</h1>
+<p>This example shows how to use the single-application functionality in a console application. It does not require the <tt>QtGui</tt> library at all.</p>
+<p>The only differences from the GUI application usage demonstrated in the other examples are:</p>
+<p>1) The <tt>.pro</tt> file should include <tt>qtsinglecoreapplication.pri</tt> instead of <tt>qtsingleapplication.pri</tt></p>
+<p>2) The class name is <tt>QtSingleCoreApplication</tt> instead of <tt>QtSingleApplication</tt>.</p>
+<p>3) No calls are made regarding window activation, for obvious reasons.</p>
+<p>console.pro:</p>
+<pre> TEMPLATE   = app
+ CONFIG    += console
+ SOURCES   += main.cpp
+ include(../../src/qtsinglecoreapplication.pri)
+ QT -= gui</pre>
+<p>main.cpp:</p>
+<pre><span class="comment"> /****************************************************************************
+ **
+ ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+ ** This file is part of the Qt Solutions component.
+ **
+ ** You may use this file under the terms of the BSD license as follows:
+ **
+ ** &quot;Redistribution and use in source and binary forms, with or without
+ ** modification, are permitted provided that the following conditions are
+ ** met:
+ **   * Redistributions of source code must retain the above copyright
+ **     notice, this list of conditions and the following disclaimer.
+ **   * Redistributions in binary form must reproduce the above copyright
+ **     notice, this list of conditions and the following disclaimer in
+ **     the documentation and/or other materials provided with the
+ **     distribution.
+ **   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
+ **     the names of its contributors may be used to endorse or promote
+ **     products derived from this software without specific prior written
+ **     permission.
+ **
+ ** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ ** &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ ** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ ** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ ** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ ** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ ** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ ** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ ** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ ** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;
+ **
+ ****************************************************************************/</span>
+
+ #include &quot;qtsinglecoreapplication.h&quot;
+ #include &lt;QtCore/QDebug&gt;
+
+ void report(const QString&amp; msg)
+ {
+     qDebug(&quot;[%i] %s&quot;, (int)QCoreApplication::applicationPid(), qPrintable(msg));
+ }
+
+ class MainClass : public QObject
+ {
+     Q_OBJECT
+ public:
+     MainClass()
+         : QObject()
+         {}
+
+ public slots:
+     void handleMessage(const QString&amp; message)
+         {
+             report( &quot;Message received: \&quot;&quot; + message + &quot;\&quot;&quot;);
+         }
+ };
+
+ int main(int argc, char **argv)
+ {
+     report(&quot;Starting up&quot;);
+
+     QtSingleCoreApplication app(argc, argv);
+
+     if (app.isRunning()) {
+         QString msg(QString(&quot;Hi master, I am %1.&quot;).arg(QCoreApplication::applicationPid()));
+         bool sentok = app.sendMessage(msg, 2000);
+         QString rep(&quot;Another instance is running, so I will exit.&quot;);
+         rep += sentok ? &quot; Message sent ok.&quot; : &quot; Message sending failed; the other instance may be frozen.&quot;;
+         report(rep);
+         return 0;
+     } else {
+         report(&quot;No other instance is running; so I will.&quot;);
+         MainClass mainObj;
+         QObject::connect(&amp;app, SIGNAL(messageReceived(const QString&amp;)),
+                          &amp;mainObj, SLOT(handleMessage(const QString&amp;)));
+         return app.exec();
+     }
+ }
+
+ #include &quot;main.moc&quot;</pre>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2010 Nokia Corporation and/or its subsidiary(-ies)</td>
+<td width="40%" align="center"><a href="http://qt.nokia.com/doc/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

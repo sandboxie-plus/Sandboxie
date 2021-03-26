@@ -196,6 +196,8 @@ int __stdcall WinMain(
     OSVERSIONINFO osvi;
     //BOOL ok;
 
+    Check_Windows_7();
+
     SetupExceptionHandler();
 
     HOOK_WIN32(CreateProcessW);

@@ -26,6 +26,7 @@
 
 #include "msgids.h"
 
+#define CONF_LINE_LEN               2000    // keep in sync with drv/conf.c
 
 //---------------------------------------------------------------------------
 // Get Version

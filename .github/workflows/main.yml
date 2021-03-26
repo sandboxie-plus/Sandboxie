@@ -1,0 +1,99 @@
+name: CI
+
+on:
+#  workflow_dispatch:
+#    branches: [ master ]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    #strategy:
+    #  matrix:
+    #    #platform: [Win32, x64]
+    #    #qt-target: [win32_msvc2019, win64_msvc2019_64]
+    #    include:
+    #      - platform: Win32
+    #        qt-target: win32_msvc2019
+    #      - platform: x64
+    #        qt-target: win64_msvc2019_64
+          
+    runs-on: windows-2019
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup msbuild
+        uses: microsoft/setup-msbuild@v1
+
+    #  - name: Build Sandboxie
+    #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
+
+      - name: Build Sandboxie 32 bit
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+        
+      - name: Build Sandboxie 64 bit
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+
+
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: Qt-5.15.1-QtCache
+
+      - name: Install Qt 64 bit
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.1'
+          dir: ..
+      #    arch:  ${{ matrix.qt-target }}
+          arch:  'win64_msvc2019_64' 
+      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - name: Install Qt 32 bit
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.1'
+          dir: ..
+      #    arch:  ${{ matrix.qt-target }}
+          arch:  'win32_msvc2019'
+      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+    
+      - name: Installing Jom
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: SandboxiePlus\install_jom.cmd
+
+
+
+      - name: Build Sandboxie-Plus 64 bit
+        run: SandboxiePlus\qmake_plus.cmd x64
+        
+      - name: Build Sandboxie-Plus 32 bit
+        run: SandboxiePlus\qmake_plus.cmd Win32
+
+
+
+      - name: Merging Builds
+        run: Installer\merge_builds.cmd
+
+      - name: Upload Sandboxie 32
+        uses: actions/upload-artifact@v2
+        with:
+          name: Sandboxie_x86
+          path: |
+            Installer/SbiePlus32/*
+            
+      - name: Upload Sandboxie 64
+        uses: actions/upload-artifact@v2
+        with:
+          name: Sandboxie_x64
+          path: |
+            Installer/SbiePlus64/*
+

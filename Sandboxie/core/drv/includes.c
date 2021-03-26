@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -56,8 +57,8 @@ extern const ULONG tzuk;
 
 /* CRC */
 
-#define CRC_WITH_ADLERTZUK64
-#include "common/crc.c"
+//#define CRC_WITH_ADLERTZUK64
+//#include "common/crc.c"
 
 /* BigNum */
 

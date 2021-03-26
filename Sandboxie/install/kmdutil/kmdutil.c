@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@
 #include <stdlib.h>
 #include "common/defines.h"
 #include "common/my_version.h"
+#include "rc4.h"
 
 extern void Kmd_ScanDll(BOOLEAN silent);
 
@@ -40,7 +42,8 @@ typedef enum _COMMAND {
     CMD_START,
     CMD_STOP,
     CMD_SCANDLL,
-    CMD_SCANDLL_SILENT
+    CMD_SCANDLL_SILENT,
+	CMD_RC4
 } COMMAND;
 
 typedef enum _OPTIONS {
@@ -217,7 +220,11 @@ BOOL Parse_Command_Line(
         *Command = CMD_STOP;
         num_args_needed = 1;
 
-    } else {
+	} else if (_wcsicmp(args[1], L"rc4") == 0) {
+		*Command = CMD_RC4;
+		num_args_needed = 1;
+
+	} else {
         *Command = CMD_ERROR;
         MessageBox(NULL, L"Invalid command", L"KmdUtil",
                    MB_ICONEXCLAMATION | MB_OK);
@@ -235,6 +242,11 @@ BOOL Parse_Command_Line(
         *Driver_Name = args[2];
     if (num_args_needed >= 2)
         *Driver_Path = args[3];
+
+	if (*Command == CMD_RC4) {
+		*Driver_Path = *Driver_Name;
+		*Driver_Name = NULL;
+	}
 
     *Options = OPT_NONE;
     next_arg = num_args_needed + 2;
@@ -714,6 +726,48 @@ int __stdcall WinMain(
             &Options))
         return EXIT_FAILURE;
 
+	if (Command == CMD_RC4)
+	{
+		int path_len = wcslen(Driver_Path);
+		BOOLEAN has_rc4 = path_len > 8 && wcscmp(Driver_Path + path_len - 8, L".sys.rc4") == 0;
+
+		PWSTR Driver_Path_tmp = Driver_Path; // strip \??\ if present
+		if (Driver_Path_tmp[0] == L'\\' && Driver_Path_tmp[1] == L'?' && Driver_Path_tmp[2] == L'?' && Driver_Path_tmp[3] == L'\\')
+			Driver_Path_tmp += 4;
+
+		FILE* inFile = _wfopen(Driver_Path_tmp, L"rb");
+		if (inFile)
+		{
+			if (has_rc4)
+				Driver_Path_tmp[path_len - 4] = L'\0'; // strip .rc4
+			else
+				wcscat(Driver_Path_tmp, L".rc4"); // add .rc4
+			FILE* outFile = _wfopen(Driver_Path_tmp, L"wb");
+			if (outFile)
+			{
+				fseek(inFile, 0, SEEK_END);
+				DWORD fileSize = ftell(inFile);
+				fseek(inFile, 0, SEEK_SET);
+
+				void* buffer = HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, fileSize);
+				fread(buffer, 1, fileSize, inFile);
+					
+				char key[] = "default_key";
+				rc4_sbox_t sbox;
+				rc4_init(&sbox, key, strlen(key));
+				rc4_transform(&sbox, buffer, fileSize);
+
+				if(fwrite(buffer, 1, fileSize, outFile) == fileSize)
+					ok = TRUE;
+
+				fclose(outFile);
+			}
+			fclose(inFile);
+		}
+
+		goto exit;
+	}
+
     ScMgr = OpenSCManager(
         NULL, SERVICES_ACTIVE_DATABASE, SC_MANAGER_CREATE_SERVICE);
 
@@ -756,6 +810,7 @@ int __stdcall WinMain(
     if (Command == CMD_STOP)
         ok = Kmd_Stop_Service(Driver_Name);
 
+exit:
     if (! ok)
         return EXIT_FAILURE;
 

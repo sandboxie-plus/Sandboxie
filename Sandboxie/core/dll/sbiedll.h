@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -111,7 +112,6 @@ SBIEDLL_EXPORT  BOOL SbieDll_RunSandboxed(
     const WCHAR *box_name, const WCHAR *cmd, const WCHAR *dir,
     ULONG creation_flags, STARTUPINFO *si, PROCESS_INFORMATION *pi);
 
-
 //---------------------------------------------------------------------------
 // Functions (CallSvc)
 //---------------------------------------------------------------------------
@@ -121,6 +121,9 @@ SBIEDLL_EXPORT  const WCHAR *SbieDll_PortName(void);
 
 SBIEDLL_EXPORT  struct _MSG_HEADER *SbieDll_CallServer(
     struct _MSG_HEADER *req);
+
+SBIEDLL_EXPORT  void *SbieDll_CallServerQueue(
+	const WCHAR* queue, void *req, ULONG req_len, ULONG rpl_min_len);
 
 SBIEDLL_EXPORT  void SbieDll_FreeMem(void *data);
 
@@ -190,6 +193,19 @@ SBIEDLL_EXPORT  void SbieDll_DisableElevationHook(void);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_RegisterDllCallback(void *Callback);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command);
+
+
+SBIEDLL_EXPORT  ULONG SbieDll_InjectLow_InitHelper();
+SBIEDLL_EXPORT  ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init);
+SBIEDLL_EXPORT  ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInject, BOOLEAN dup_drv_handle);
+
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WCHAR* BoxName);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
 
 
 //---------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -41,17 +42,40 @@
 #define DUPLICATE_INTO_OTHER        0x00080000  // otherwise DUP_FROM_OTHER
 
 
-#define MONITOR_PIPE                0x011B
-#define MONITOR_IPC                 0x022B
-#define MONITOR_WINCLASS            0x033B
-#define MONITOR_DRIVE               0x044B
-#define MONITOR_COMCLASS            0x055B
-#define MONITOR_IGNORE              0x066B
-#define MONITOR_IMAGE               0x077B
-#define MONITOR_FILE_OR_KEY         0x088B
-#define MONITOR_OTHER				0x099B
-#define MONITOR_OPEN                0x1000
-#define MONITOR_DENY                0x2000
+#define MONITOR_SYSCALL				0x00000001
+#define MONITOR_PIPE				0x00000002
+#define MONITOR_IPC					0x00000003
+#define MONITOR_WINCLASS			0x00000004
+#define MONITOR_DRIVE				0x00000005
+#define MONITOR_COMCLASS			0x00000006
+#define MONITOR_RTCLASS				0x00000007
+#define MONITOR_IGNORE				0x00000008
+#define MONITOR_IMAGE				0x00000009
+#define MONITOR_FILE				0x0000000A
+#define MONITOR_KEY					0x0000000B
+#define MONITOR_OTHER				0x0000000C
+#define MONITOR_OTHER1				0x0000000D
+#define MONITOR_OTHER2				0x0000000E
+#define MONITOR_APICALL				0x0000000F // needs the logapi.dll
+#define MONITOR_TYPE_MASK			0x000000FF
+
+#define MONITOR_RESERVED			0x0000FF00
+
+#define MONITOR_OPEN				0x00010000
+#define MONITOR_DENY				0x00020000 // CLOSED
+#define MONITOR_DISPOSITION_MASK	0x000F0000
+
+#define MONITOR_ALLOWED				0x00100000
+#define MONITOR_DENIDED				0x00200000
+#define MONITOR_SUCCESS				0x00400000
+#define MONITOR_FAILURE				0x00800000
+#define MONITOR_RESULT_MASK			0x00F00000
+
+#define MONITOR_UNUSED				0x3F000000
+
+#define MONITOR_TRACE				0x40000000
+#define MONITOR_USER				0x80000000
+
 
 
 #define DISABLE_JUST_THIS_PROCESS   0x0123ABC0

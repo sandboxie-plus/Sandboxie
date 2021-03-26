@@ -699,11 +699,11 @@ _FX void XDataObject::PrintFormat(
 {
     const ULONG fmt = (ULONG)pFormatetc->cfFormat;
     WCHAR text[128];
-    Sbie_swprintf(text, L"%-32.32s - <", FuncName);
+    Sbie_snwprintf(text, 128, L"%-32.32s - <", FuncName);
     if (fmt >= 0xC000 && fmt <= 0xFFFF)
         __sys_GetClipboardFormatNameW(fmt, text + 36, 60);
     else
-        Sbie_swprintf(text + 36, L"%08X", fmt);
+        Sbie_snwprintf(text + 36, 128 - 36, L"%08X", fmt);
     wcscat(text, L">\n");
     OutputDebugString(text);
 }

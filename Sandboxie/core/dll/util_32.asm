@@ -222,3 +222,84 @@ l04:    dec esp
 Gui_MsgWaitForMultipleObjects@20    ENDP
 
 PUBLIC C Gui_MsgWaitForMultipleObjects@20
+
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall
+;----------------------------------------------------------------------------
+
+
+EXTERN C RpcRt_NdrClientCall_x86    : PROC
+;EXTERN C RpcRt_NdrClientCall_...   : PROC
+EXTERN C __sys_NdrClientCall : DWORD
+
+RpcRt_NdrClientCall   PROC C PUBLIC
+
+        call RpcRt_NdrClientCall_x86
+        test al,al
+        jnz CancelCall
+    
+        jmp dword ptr [__sys_NdrClientCall]
+
+CancelCall:
+
+;        jmp RpcRt_NdrClientCall_...
+		ret
+
+RpcRt_NdrClientCall   ENDP
+
+PUBLIC C RpcRt_NdrClientCall
+
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall2
+;----------------------------------------------------------------------------
+
+
+EXTERN C RpcRt_NdrClientCall2_x86    : PROC
+;EXTERN C RpcRt_NdrClientCall2_...   : PROC
+EXTERN C __sys_NdrClientCall2 : DWORD
+
+RpcRt_NdrClientCall2   PROC C PUBLIC
+
+        call RpcRt_NdrClientCall2_x86
+        test al,al
+        jnz CancelCall2
+    
+        jmp dword ptr [__sys_NdrClientCall2]
+
+CancelCall2:
+
+;        jmp RpcRt_NdrClientCall2_...
+		ret
+
+RpcRt_NdrClientCall2   ENDP
+
+PUBLIC C RpcRt_NdrClientCall2
+
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall4
+;----------------------------------------------------------------------------
+
+
+EXTERN C RpcRt_NdrClientCall4_x86    : PROC
+;EXTERN C RpcRt_NdrClientCall4_...   : PROC
+EXTERN C __sys_NdrClientCall4 : DWORD
+
+RpcRt_NdrClientCall4   PROC C PUBLIC
+
+        call RpcRt_NdrClientCall4_x86
+        test al,al
+        jnz CancelCall4
+    
+        jmp dword ptr [__sys_NdrClientCall4]
+
+CancelCall4:
+
+;        jmp RpcRt_NdrClientCall4_...
+		ret
+
+RpcRt_NdrClientCall4   ENDP
+
+PUBLIC C RpcRt_NdrClientCall4

@@ -1,5 +1,6 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
+ * Copyright 2020 David Xanatos, xanasoft.com 
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -28,13 +29,22 @@
 #include "syscall.h"
 
 
+typedef struct _IPC_DYNAMIC_PORT {
+    LIST_ELEM list_elem;
+
+    WCHAR       wstrPortId[DYNAMIC_PORT_ID_CHARS];
+    WCHAR       wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+} IPC_DYNAMIC_PORT;
 
 typedef struct _IPC_DYNAMIC_PORTS {
     PERESOURCE  pPortLock;
-    WCHAR       wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+    
+    LIST        Ports;
+
+    IPC_DYNAMIC_PORT*  pSpoolerPort;
 } IPC_DYNAMIC_PORTS;
 
-extern IPC_DYNAMIC_PORTS Ipc_Dynamic_Ports[];
+extern IPC_DYNAMIC_PORTS Ipc_Dynamic_Ports;
 
 
 //---------------------------------------------------------------------------
@@ -64,6 +74,8 @@ void *Ipc_GetServerPort(void *Object);
 
 BOOLEAN Ipc_InitProcess(PROCESS *proc);
 
+BOOLEAN Ipc_IsRunRestricted(PROCESS *proc);
+
 
 //---------------------------------------------------------------------------
 
@@ -85,19 +97,11 @@ NTSTATUS Ipc_NtRequestWaitReplyPort(
 
 NTSTATUS Ipc_Api_SetLsaAuthPkg(PROCESS *proc, ULONG64 *parms);
 
-NTSTATUS Ipc_Api_GetSpoolerPort(PROCESS *proc, ULONG64 *parms);
+//NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms);
 
-NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms);
+NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms);
 
-NTSTATUS Ipc_Api_AllowSpoolerPrintToFile(PROCESS *proc, ULONG64 *parms);
-
-NTSTATUS Ipc_Api_GetSpoolerPortFromPid(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_GetWpadPortFromPid(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_SetGameConfigStorePort(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_GetSmartCardPortFromPid(PROCESS *proc, ULONG64 *parms);
-NTSTATUS Ipc_Api_SetSmartCardPort(PROCESS *proc, ULONG64 *parms);
-
-NTSTATUS Ipc_Api_GetRpcPortFromPid(enum ENUM_DYNAMIC_PORT_TYPE ePortType, PROCESS *proc, ULONG64 *parms);
+NTSTATUS Ipc_Api_GetDynamicPortFromPid(PROCESS *proc, ULONG64 *parms);
 
 //---------------------------------------------------------------------------
 // Variables

@@ -47,6 +47,7 @@ const WCHAR *ServiceTitle = SANDBOXIE L" Crypto";
 
 
 static ULONG_PTR __sys_DuplicateHandle                          = 0;
+static ULONG_PTR __sys_CreateFileW                              = 0;
 
 
 //---------------------------------------------------------------------------
@@ -127,6 +128,58 @@ ALIGNED BOOL my_DuplicateHandle(
 
 
 //---------------------------------------------------------------------------
+// my_CreateFileW
+//---------------------------------------------------------------------------
+
+ALIGNED HANDLE my_CreateFileW(
+    LPCWSTR               lpFileName,
+    DWORD                 dwDesiredAccess,
+    DWORD                 dwShareMode,
+    LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    DWORD                 dwCreationDisposition,
+    DWORD                 dwFlagsAndAttributes,
+    HANDLE                hTemplateFile)
+{
+    typedef HANDLE(*P_CreateFileW)(
+        LPCWSTR               lpFileName,
+        DWORD                 dwDesiredAccess,
+        DWORD                 dwShareMode,
+        LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+        DWORD                 dwCreationDisposition,
+        DWORD                 dwFlagsAndAttributes,
+        HANDLE                hTemplateFile);
+
+    //
+    // prevent SBIE1313, dont even try to access the block devcie for raw reading
+    //
+
+    if (_wcsnicmp(lpFileName, L"\\\\.\\PhysicalDrive", 17) == 0 && wcschr(lpFileName + 17, L'\\') == NULL) {
+        if (dwDesiredAccess == GENERIC_READ)
+            dwDesiredAccess = 0;
+    }
+
+    //
+    // issue #561 Sandbox with some apps directly uses catdb than blocks access to it
+    // to prevent our instance form locking the real file we request write access
+    // that forces the file to be migrated and our sandboxed copy opened
+    //
+    
+    WCHAR* CatRoot = wcsstr(lpFileName, L"\\system32\\CatRoot2\\");
+    if (CatRoot) { // L"C:\\WINDOWS\\system32\\CatRoot2\\{00000000-0000-0000-0000-000000000000}\\catdb"
+        WCHAR win_dir[MAX_PATH + 64];
+        GetWindowsDirectory(win_dir, MAX_PATH);
+        if (_wcsnicmp(win_dir, lpFileName, CatRoot - lpFileName) == 0) {
+            if (dwDesiredAccess == GENERIC_READ)
+                dwDesiredAccess |= GENERIC_WRITE;
+        }
+    }
+
+
+    return ((P_CreateFileW)__sys_CreateFileW)(lpFileName, dwDesiredAccess, dwShareMode,
+        lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+}
+
+//---------------------------------------------------------------------------
 // WinMain
 //---------------------------------------------------------------------------
 
@@ -148,9 +201,13 @@ int __stdcall WinMain(
         return STATUS_LICENSE_QUOTA_EXCEEDED;
     }
 
+    Check_Windows_7();
+
     SetupExceptionHandler();
 
     HOOK_WIN32(DuplicateHandle);
+
+    HOOK_WIN32(CreateFileW);
 
     // hook privilege-related functions
     if (! Hook_Privilege())

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- loader.qdoc -->
+<head>
+  <title>Loading Documents</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">Loading Documents<br /><span class="subtitle"></span>
+</h1>
+<p>The application in this example loads or prints the documents passed as commandline parameters to further instances of this application.</p>
+<pre><span class="comment"> /****************************************************************************
+ **
+ ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+ ** This file is part of the Qt Solutions component.
+ **
+ ** You may use this file under the terms of the BSD license as follows:
+ **
+ ** &quot;Redistribution and use in source and binary forms, with or without
+ ** modification, are permitted provided that the following conditions are
+ ** met:
+ **   * Redistributions of source code must retain the above copyright
+ **     notice, this list of conditions and the following disclaimer.
+ **   * Redistributions in binary form must reproduce the above copyright
+ **     notice, this list of conditions and the following disclaimer in
+ **     the documentation and/or other materials provided with the
+ **     distribution.
+ **   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
+ **     the names of its contributors may be used to endorse or promote
+ **     products derived from this software without specific prior written
+ **     permission.
+ **
+ ** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ ** &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ ** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ ** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ ** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ ** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ ** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ ** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ ** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ ** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;
+ **
+ ****************************************************************************/</span>
+
+ #include &lt;qtsingleapplication.h&gt;
+ #include &lt;QtCore/QFile&gt;
+ #include &lt;QtGui/QMainWindow&gt;
+ #include &lt;QtGui/QPrinter&gt;
+ #include &lt;QtGui/QPainter&gt;
+ #include &lt;QtGui/QTextEdit&gt;
+ #include &lt;QtGui/QMdiArea&gt;
+ #include &lt;QtCore/QTextStream&gt;
+
+ class MainWindow : public QMainWindow
+ {
+     Q_OBJECT
+ public:
+     MainWindow();
+
+ public slots:
+     void handleMessage(const QString&amp; message);
+
+ signals:
+     void needToShow();
+
+ private:
+     QMdiArea *workspace;
+ };</pre>
+<p>The user interface in this application is a <a href="http://qt.nokia.com/doc/4.6/qmainwindow.html">QMainWindow</a> subclass with a <a href="http://qt.nokia.com/doc/4.6/qmdiarea.html">QMdiArea</a> as the central widget. It implements a slot <tt>handleMessage()</tt> that will be connected to the messageReceived() signal of the <a href="qtsingleapplication.html">QtSingleApplication</a> class.</p>
+<pre> MainWindow::MainWindow()
+ {
+     workspace = new QMdiArea(this);
+
+     setCentralWidget(workspace);
+ }</pre>
+<p>The <a href="http://qt.nokia.com/doc/4.6/designer-to-know.html">MainWindow</a> constructor creates a minimal user interface.</p>
+<pre> void MainWindow::handleMessage(const QString&amp; message)
+ {
+     enum Action {
+         Nothing,
+         Open,
+         Print
+     } action;
+
+     action = Nothing;
+     QString filename = message;
+     if (message.toLower().startsWith(&quot;/print &quot;)) {
+         filename = filename.mid(7);
+         action = Print;
+     } else if (!message.isEmpty()) {
+         action = Open;
+     }
+     if (action == Nothing) {
+         emit needToShow();
+         return;
+     }
+
+     QFile file(filename);
+     QString contents;
+     if (file.open(QIODevice::ReadOnly))
+         contents = file.readAll();
+     else
+         contents = &quot;[[Error: Could not load file &quot; + filename + &quot;]]&quot;;
+
+     QTextEdit *view = new QTextEdit;
+     view-&gt;setPlainText(contents);
+
+     switch(action) {</pre>
+<p>The handleMessage() slot interprets the message passed in as a filename that can be prepended with <i>/print</i> to indicate that the file should just be printed rather than loaded.</p>
+<pre>     case Print:
+         {
+             QPrinter printer;
+             view-&gt;print(&amp;printer);
+             delete view;
+         }
+         break;
+
+     case Open:
+         {
+             workspace-&gt;addSubWindow(view);
+             view-&gt;setWindowTitle(message);
+             view-&gt;show();
+             emit needToShow();
+         }
+         break;
+     default:
+         break;
+     };
+ }</pre>
+<p>Loading the file will also activate the window.</p>
+<pre> #include &quot;main.moc&quot;
+
+ int main(int argc, char **argv)
+ {
+     QtSingleApplication instance(&quot;File loader QtSingleApplication example&quot;, argc, argv);
+     QString message;
+     for (int a = 1; a &lt; argc; ++a) {
+         message += argv[a];
+         if (a &lt; argc-1)
+             message += &quot; &quot;;
+     }
+
+     if (instance.sendMessage(message))
+         return 0;</pre>
+<p>The <tt>main</tt> entry point function creates a <a href="qtsingleapplication.html">QtSingleApplication</a> object, and creates a message to send to a running instance of the application. If the message was sent successfully the process exits immediately.</p>
+<pre>     MainWindow mw;
+     mw.handleMessage(message);
+     mw.show();
+
+     QObject::connect(&amp;instance, SIGNAL(messageReceived(const QString&amp;)),
+                      &amp;mw, SLOT(handleMessage(const QString&amp;)));
+
+     instance.setActivationWindow(&amp;mw, false);
+     QObject::connect(&amp;mw, SIGNAL(needToShow()), &amp;instance, SLOT(activateWindow()));
+
+     return instance.exec();
+ }</pre>
+<p>If the message could not be sent the application starts up. Note that <tt>false</tt> is passed to the call to setActivationWindow() to prevent automatic activation for every message received, e.g&#x2e; when the application should just print a file. Instead, the message handling function determines whether activation is requested, and signals that by emitting the needToShow() signal. This is then simply connected directly to <a href="qtsingleapplication.html">QtSingleApplication</a>'s activateWindow() slot.</p>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2010 Nokia Corporation and/or its subsidiary(-ies)</td>
+<td width="40%" align="center"><a href="http://qt.nokia.com/doc/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

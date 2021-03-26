@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -280,8 +281,9 @@ IEnumPStoreTypesImpl::~IEnumPStoreTypesImpl(void)
 // IEnumPStoreTypesImpl::StringFromGUID
 //---------------------------------------------------------------------------
 
-
-void IEnumPStoreTypesImpl::StringFromGUID(const GUID *guid, WCHAR *str)
+extern "C"
+{
+void Sbie_StringFromGUID(const GUID* guid, WCHAR* str)
 {
     struct _s {
         ULONG a;
@@ -296,12 +298,12 @@ void IEnumPStoreTypesImpl::StringFromGUID(const GUID *guid, WCHAR *str)
         UCHAR y5;
         UCHAR y6;
     } *s = (_s *)guid;
-    Sbie_swprintf(str, L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
+    Sbie_snwprintf(str, 48, L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
         s->a, s->b, s->c,
         s->x1, s->x2,
         s->y1, s->y2, s->y3, s->y4, s->y5, s->y6);
 }
-
+}
 
 //---------------------------------------------------------------------------
 // IEnumPStoreTypesImpl::InsertSorted
@@ -312,11 +314,11 @@ void IEnumPStoreTypesImpl::InsertSorted(GUID *guid)
 {
     WCHAR guidL[48], guidR[48];
 
-    StringFromGUID(guid, guidR);
+    Sbie_StringFromGUID(guid, guidR);
     IEnumPStoreListElem *elem =
         (IEnumPStoreListElem *)List_Head(&m_list->list);
     while (elem) {
-        StringFromGUID(&elem->v.guid, guidL);
+        Sbie_StringFromGUID(&elem->v.guid, guidL);
         int c = wcscmp(guidL, guidR);
         if (c == 0)
             return;

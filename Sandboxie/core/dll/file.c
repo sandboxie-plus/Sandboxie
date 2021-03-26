@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,12 +20,13 @@
 // File
 //---------------------------------------------------------------------------
 
-
+#define NOGDI
 #include "dll.h"
 #include "obj.h"
 #include <stdio.h>
 #include <dbt.h>
 #include "core/svc/FileWire.h"
+#include "core/svc/InteractiveWire.h"
 
 
 //---------------------------------------------------------------------------
@@ -95,6 +97,15 @@ typedef struct _FILE_LINK FILE_LINK;
 typedef struct _FILE_DRIVE FILE_DRIVE;
 
 
+typedef struct _FILE_SNAPSHOT {
+	WCHAR					ID[17];
+	ULONG					IDlen;
+	ULONG					ScramKey;
+	//WCHAR					Name[34];
+	struct _FILE_SNAPSHOT*	Parent;
+} FILE_SNAPSHOT, *PFILE_SNAPSHOT;
+
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -127,6 +138,10 @@ static ULONG File_GetName_SkipWow64Link(const WCHAR *name);
 static NTSTATUS File_GetName_FromFileId(
     OBJECT_ATTRIBUTES *ObjectAttributes,
     WCHAR **OutTruePath, WCHAR **OutCopyPath);
+
+static WCHAR* File_MakeSnapshotPath(FILE_SNAPSHOT* Cur_Snapshot, WCHAR* CopyPath);
+
+static BOOLEAN File_FindSnapshotPath(WCHAR** CopyPath);
 
 static ULONG File_MatchPath(const WCHAR *path, ULONG *FileFlags);
 
@@ -186,7 +201,8 @@ static NTSTATUS File_MigrateFile(
     const WCHAR *TruePath, const WCHAR *CopyPath,
     BOOLEAN IsWritePath, BOOLEAN WithContents);
 
-static const WCHAR *File_MigrateFile_ShouldBypass(const WCHAR *TruePath);
+static const BOOLEAN File_MigrateFile_ManualBypass(
+    const WCHAR *TruePath, ULONGLONG file_size);
 
 static NTSTATUS File_CopyShortName(
     const WCHAR *TruePath, const WCHAR *CopyPath);
@@ -258,6 +274,9 @@ static BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath);
 static NTSTATUS File_SetReparsePoint(
     HANDLE FileHandle, UCHAR *Data, ULONG DataLen);
 
+static void File_ScrambleShortName(WCHAR* ShortName, CCHAR* ShortNameLength, ULONG ScramKey);
+
+static void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey);
 
 //---------------------------------------------------------------------------
 
@@ -332,13 +351,14 @@ static ULONG File_PublicUserLen = 0;
 static WCHAR *File_HomeNtPath = NULL;
 static ULONG File_HomeNtPathLen = 0;
 
-static ULONG File_CopyLimitKb = (80 * 1024);        // 80 MB
-static BOOLEAN File_CopyLimitSilent = FALSE;
-
 static BOOLEAN File_Windows2000 = FALSE;
 
 static WCHAR *File_AltBoxPath = NULL;
 static ULONG File_AltBoxPathLen = 0;
+
+
+static FILE_SNAPSHOT *File_Snapshot = NULL;
+static ULONG File_Snapshot_Count = 0;
 
 
 //---------------------------------------------------------------------------
@@ -351,6 +371,7 @@ static ULONG File_AltBoxPathLen = 0;
 #include "file_pipe.c"
 #include "file_dir.c"
 #include "file_misc.c"
+#include "file_copy.c"
 #include "file_init.c"
 
 
@@ -368,6 +389,7 @@ _FX NTSTATUS File_GetName(
     static const ULONG _ShareLen = 7;
     static const WCHAR *_Drive = L"\\drive\\";
     static const ULONG _DriveLen = 7;
+
     static const WCHAR *_User = L"\\user";
     static const ULONG _UserLen = 5;
     static const WCHAR *_UserAll = L"\\user\\all";
@@ -376,7 +398,7 @@ _FX NTSTATUS File_GetName(
     static const ULONG _UserCurrentLen = 13;
     static const WCHAR *_UserPublic = L"\\user\\public";
     static const ULONG _UserPublicLen = 12;
-
+	
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     NTSTATUS status;
@@ -461,7 +483,7 @@ _FX NTSTATUS File_GetName(
         if (! NT_SUCCESS(status))
             return status;
 
-        uni = &((OBJECT_NAME_INFORMATION *)name)->ObjectName;
+        uni = &((OBJECT_NAME_INFORMATION *)name)->Name;
 
 #ifdef WOW64_FS_REDIR
         //
@@ -741,6 +763,31 @@ check_sandbox_prefix:
         is_boxed_path = TRUE;
     }
 
+	//
+	// If its a sandboxed file, check if its in the current image or in a snapshot
+	// If its in a snapshot remove teh snapshot prefix
+	//
+
+	if (is_boxed_path) {
+		if (length >= 10 &&
+			0 == Dll_NlsStrCmp(
+				*OutTruePath, L"\\snapshot-", 10))
+		{
+			WCHAR* path = wcschr(*OutTruePath + 10, L'\\');
+
+			if (path == NULL) {
+				//
+				// caller specified just the sandbox snapshot prefix
+				//
+				*OutTruePath = TruePath;
+				return STATUS_BAD_INITIAL_PC;
+			}
+
+			length -= (ULONG)(path - *OutTruePath);
+			*OutTruePath = path;
+		}
+	}
+
     //
     // the true path may now begin with "\drive\x", for instance,
     // if the process specified a RootDirectory handle that leads
@@ -791,7 +838,8 @@ check_sandbox_prefix:
     // that's ok because it hasn't been initialized yet
     //
 
-    else if (length >= _UserLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && // if we disable File_InitUsers we dont need to do it here and below
+			 length >= _UserLen &&
                 _wcsnicmp(*OutTruePath, _User, _UserLen) == 0) {
 
         if (File_AllUsersLen && length >= _UserAllLen &&
@@ -1045,7 +1093,8 @@ check_sandbox_prefix:
     // "\user\current", respectively
     //
 
-    else if (File_AllUsersLen && length >= File_AllUsersLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
+			 File_AllUsersLen && length >= File_AllUsersLen &&
                 0 == Dll_NlsStrCmp(
                         TruePath, File_AllUsers, File_AllUsersLen))
     {
@@ -1057,7 +1106,8 @@ check_sandbox_prefix:
 
     }
 
-    else if (File_CurrentUserLen && length >= File_CurrentUserLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
+			 File_CurrentUserLen && length >= File_CurrentUserLen &&
                 0 == Dll_NlsStrCmp(
                         TruePath, File_CurrentUser, File_CurrentUserLen))
     {
@@ -1069,7 +1119,8 @@ check_sandbox_prefix:
 
     }
 
-    else if (File_PublicUserLen && length >= File_PublicUserLen &&
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
+			 File_PublicUserLen && length >= File_PublicUserLen &&
                 0 == Dll_NlsStrCmp(
                         TruePath, File_PublicUser, File_PublicUserLen))
     {
@@ -1386,6 +1437,136 @@ copy_suffix:
 
 
 //---------------------------------------------------------------------------
+// File_MakeSnapshotPath
+//---------------------------------------------------------------------------
+
+
+_FX WCHAR* File_MakeSnapshotPath(FILE_SNAPSHOT* Cur_Snapshot, WCHAR* CopyPath)
+{
+	if (!Cur_Snapshot)
+		return NULL;
+
+	ULONG length = wcslen(CopyPath);
+	ULONG prefixLen = 0;
+	if (length >= Dll_BoxFilePathLen && 0 == Dll_NlsStrCmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen))
+		prefixLen = Dll_BoxFilePathLen;
+	if (File_AltBoxPath && length >= File_AltBoxPathLen && 0 == Dll_NlsStrCmp(CopyPath, File_AltBoxPath, File_AltBoxPathLen))
+		prefixLen = File_AltBoxPathLen;
+
+	if (prefixLen == 0)
+		return NULL;
+
+
+	THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+	WCHAR* TmplName = Dll_GetTlsNameBuffer(TlsData, TMPL_NAME_BUFFER, (wcslen(CopyPath) + 9 + 17 + 1) * sizeof(WCHAR));
+
+	wcsncpy(TmplName, CopyPath, prefixLen + 1);
+	wcscpy(TmplName + prefixLen + 1, L"snapshot-");
+	wcscpy(TmplName + prefixLen + 1 + 9, Cur_Snapshot->ID);
+	wcscpy(TmplName + prefixLen + 1 + 9 + Cur_Snapshot->IDlen, CopyPath + prefixLen);
+
+	return TmplName;
+}
+
+
+//---------------------------------------------------------------------------
+// File_GetName_ExpandShortNames2
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_GetName_ExpandShortNames2(
+	WCHAR *Path, ULONG index, ULONG backslash_index, PFILE_BOTH_DIRECTORY_INFORMATION info, const ULONG info_size, FILE_SNAPSHOT* Cur_Snapshot)
+{
+	NTSTATUS status;
+
+	UNICODE_STRING uni;
+	OBJECT_ATTRIBUTES ObjAttrs;
+	HANDLE handle;
+	IO_STATUS_BLOCK IoStatusBlock;
+
+	WCHAR* TmplName;
+
+	WCHAR save_char;
+
+	save_char = Path[backslash_index + 1];
+	Path[backslash_index + 1] = L'\0';
+
+	TmplName = File_MakeSnapshotPath(Cur_Snapshot, Path);
+	if(TmplName != NULL)
+		uni.Buffer = TmplName;
+	else
+		uni.Buffer = Path;
+	uni.Length = wcslen(uni.Buffer) * sizeof(WCHAR);
+	uni.MaximumLength = uni.Length + sizeof(WCHAR);
+
+	InitializeObjectAttributes(
+		&ObjAttrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+	status = __sys_NtCreateFile(
+		&handle,
+		GENERIC_READ | SYNCHRONIZE,     // DesiredAccess
+		&ObjAttrs,
+		&IoStatusBlock,
+		NULL,                           // AllocationSize
+		0,                              // FileAttributes
+		FILE_SHARE_VALID_FLAGS,         // ShareAccess
+		FILE_OPEN,                      // CreateDisposition
+		FILE_DIRECTORY_FILE |           // CreateOptions
+		FILE_SYNCHRONOUS_IO_NONALERT,
+		NULL,                           // EaBuffer
+		0);                             // EaLength
+
+	//
+	// restore original path
+	//
+
+	Path[backslash_index + 1] = save_char;
+
+	if (!NT_SUCCESS(status)) 
+		return status;
+
+
+	// query long name for short name.  if the short name is not
+	// found with a status of NO_SUCH_FILE, then possibly it was
+	// already deleted or does not even exist yet.  in this case
+	// we leave the short name as is instead of failing.
+
+	save_char = Path[index];
+	Path[index] = L'\0';
+
+	WCHAR ShortName[12 + 1];
+	if (Cur_Snapshot && Cur_Snapshot->ScramKey && wcslen(&Path[backslash_index + 1]) <= 12)
+	{
+		//
+		// If we are checking in a snapshot we ned to unscramble the short name
+		//
+
+		wcscpy(ShortName, &Path[backslash_index + 1]);
+		File_UnScrambleShortName(ShortName, Cur_Snapshot->ScramKey);
+		uni.Buffer = ShortName;
+	}
+	else
+		uni.Buffer = &Path[backslash_index + 1];
+	uni.Length = wcslen(uni.Buffer) * sizeof(WCHAR);
+	uni.MaximumLength = uni.Length + sizeof(WCHAR);
+
+	status = __sys_NtQueryDirectoryFile(
+		handle,
+		NULL, NULL, NULL,   // Event, ApcRoutine, ApcContext
+		&IoStatusBlock,
+		info, info_size, FileBothDirectoryInformation,
+		TRUE, &uni, FALSE);
+
+	NtClose(handle);
+
+	Path[index] = save_char;        // restore original path
+
+	return status;
+}
+
+
+//---------------------------------------------------------------------------
 // File_GetName_ExpandShortNames
 //---------------------------------------------------------------------------
 
@@ -1404,21 +1585,16 @@ _FX WCHAR *File_GetName_ExpandShortNames(
     // it can only translate short names to long names outside the box.
     //
 
+	info = Dll_AllocTemp(info_size);
     status = STATUS_SUCCESS;
 
     for (index = 0; Path[index] != 0; ) {
-
-        UNICODE_STRING uni;
-        OBJECT_ATTRIBUTES ObjAttrs;
-        HANDLE handle;
-        IO_STATUS_BLOCK IoStatusBlock;
 
         // scan path string until a tilde (~) is found, but also keep
         // the position of the last backslash character before the tilde.
 
         ULONG backslash_index;
         ULONG dot_count;
-        WCHAR save_char;
         ULONG len;
         WCHAR *copy;
 
@@ -1451,78 +1627,35 @@ _FX WCHAR *File_GetName_ExpandShortNames(
 
         // otherwise open the directory containing the short name component
 
-        save_char = Path[backslash_index + 1];
-        Path[backslash_index + 1] = L'\0';
+		status = File_GetName_ExpandShortNames2(Path, index, backslash_index, info, info_size, NULL);
 
-        uni.Buffer = Path;
-        uni.Length = wcslen(uni.Buffer) * sizeof(WCHAR);
-        uni.MaximumLength = uni.Length + sizeof(WCHAR);
+		if (!NT_SUCCESS(status) && File_Snapshot != NULL)
+		{
+			for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != NULL; Cur_Snapshot = Cur_Snapshot->Parent)
+			{
+				status = File_GetName_ExpandShortNames2(Path, index, backslash_index, info, info_size, Cur_Snapshot);
+				if (NT_SUCCESS(status))
+					break;
+			}
+		}
 
-        InitializeObjectAttributes(
-            &ObjAttrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+		/*
+		// stop if we can't open the directory, but file-not-found
+		// or file-not-a-directory errors may occur because the caller is
+		// trying to access a directory that exists only in the copy system,
+		// while we're looking at the true system.   so we shouldn't fail.
 
-        status = __sys_NtCreateFile(
-            &handle,
-            GENERIC_READ | SYNCHRONIZE,     // DesiredAccess
-            &ObjAttrs,
-            &IoStatusBlock,
-            NULL,                           // AllocationSize
-            0,                              // FileAttributes
-            FILE_SHARE_VALID_FLAGS,         // ShareAccess
-            FILE_OPEN,                      // CreateDisposition
-            FILE_DIRECTORY_FILE |           // CreateOptions
-            FILE_SYNCHRONOUS_IO_NONALERT,
-            NULL,                           // EaBuffer
-            0);                             // EaLength
+		if (!NT_SUCCESS(status)) {
 
-        //
-        // restore original path
-        //
+			if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
+				status == STATUS_OBJECT_PATH_NOT_FOUND ||
+				status == STATUS_NOT_A_DIRECTORY) {
 
-        Path[backslash_index + 1] = save_char;
+				status = STATUS_SUCCESS;
+			}
 
-        // stop if we can't open the directory, but file-not-found
-        // or file-not-a-directory errors may occur because the caller is
-        // trying to access a directory that exists only in the copy system,
-        // while we're looking at the true system.   so we shouldn't fail.
-
-        if (! NT_SUCCESS(status)) {
-
-            if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
-                status == STATUS_OBJECT_PATH_NOT_FOUND ||
-                status == STATUS_NOT_A_DIRECTORY) {
-
-                status = STATUS_SUCCESS;
-            }
-
-            break;
-        }
-
-        // query long name for short name.  if the short name is not
-        // found with a status of NO_SUCH_FILE, then possibly it was
-        // already deleted or does not even exist yet.  in this case
-        // we leave the short name as is instead of failing.
-
-        if (! info)
-            info = Dll_AllocTemp(info_size);
-
-        save_char = Path[index];
-        Path[index] = L'\0';
-
-        uni.Buffer = &Path[backslash_index + 1];
-        uni.Length = wcslen(uni.Buffer) * sizeof(WCHAR);
-        uni.MaximumLength = uni.Length + sizeof(WCHAR);
-
-        status = __sys_NtQueryDirectoryFile(
-            handle,
-            NULL, NULL, NULL,   // Event, ApcRoutine, ApcContext
-            &IoStatusBlock,
-            info, info_size, FileBothDirectoryInformation,
-            TRUE, &uni, FALSE);
-
-        NtClose(handle);
-
-        Path[index] = save_char;        // restore original path
+			break;
+		}
 
         if (status == STATUS_NO_SUCH_FILE) {    // short name not found,
             status = STATUS_SUCCESS;            // so don't replace it
@@ -1531,6 +1664,10 @@ _FX WCHAR *File_GetName_ExpandShortNames(
 
         if (! NT_SUCCESS(status))       // could not query long name?
             break;
+		*/
+
+		if (!NT_SUCCESS(status))
+			continue;
 
         //
         // expand the path with the short name into the copy name buffer,
@@ -2070,6 +2207,50 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// File_FindSnapshotPath
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_FindSnapshotPath(WCHAR** CopyPath)
+{
+	NTSTATUS status;
+	OBJECT_ATTRIBUTES objattrs;
+	UNICODE_STRING objname;
+	ULONG FileType;
+
+	InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+	//
+	// When working with snapshots the actual "CopyFile" may be located in a snapshot directory.
+	// To deal with that when the file is not in the active box directory we look through the snapshots,
+	// When we find it we update the path to point to the snapshot containing the file.
+	//
+
+	RtlInitUnicodeString(&objname, *CopyPath);
+	status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+	if (!(status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND))
+		return TRUE; // file is present directly in copy path
+
+	for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != NULL; Cur_Snapshot = Cur_Snapshot->Parent)
+	{
+		WCHAR* TmplName = File_MakeSnapshotPath(Cur_Snapshot, *CopyPath);
+		if (!TmplName)
+			break;
+		
+		RtlInitUnicodeString(&objname, TmplName);
+		status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+		if (!(status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND))
+		{
+			*CopyPath = TmplName;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // File_NtOpenFile
 //---------------------------------------------------------------------------
 
@@ -2125,6 +2306,40 @@ _FX NTSTATUS File_NtCreateFile(
 // File_NtCreateFileImpl
 //---------------------------------------------------------------------------
 
+/*
+static P_NtCreateFile               __sys_NtCreateFile_ = NULL;
+
+_FX NTSTATUS File_MyCreateFile(
+    HANDLE* FileHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES* ObjectAttributes,
+    IO_STATUS_BLOCK* IoStatusBlock,
+    LARGE_INTEGER* AllocationSize,
+    ULONG FileAttributes,
+    ULONG ShareAccess,
+    ULONG CreateDisposition,
+    ULONG CreateOptions,
+    void* EaBuffer,
+    ULONG EaLength)
+{
+    NTSTATUS status = __sys_NtCreateFile_(
+        FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+        AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+        CreateOptions, EaBuffer, EaLength);
+
+    if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\PhysicalDrive0") == 0)
+    {
+        WCHAR text[1024];
+        Sbie_snwprintf(text, 1024, L"%s <%08X>", ObjectAttributes->ObjectName->Buffer, status);
+        SbieApi_MonitorPut(MONITOR_OTHER, text);
+    }
+
+    status = StopTailCallOptimization(status);
+
+    return status;
+}*/
+
 
 _FX NTSTATUS File_NtCreateFileImpl(
     HANDLE *FileHandle,
@@ -2155,6 +2370,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
     BOOLEAN IsEmptyCopyFile;
     BOOLEAN AlreadyReparsed;
     UCHAR HaveTrueFile;
+	BOOLEAN HaveSnapshotFile, HaveSnapshotParent;
     //char *pPtr = NULL;
 
     //if (wcsstr(Dll_ImageName, L"chrome.exe") != 0) {
@@ -2162,6 +2378,21 @@ _FX NTSTATUS File_NtCreateFileImpl(
     //  //while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
     //  //   __debugbreak();
     //}
+
+    /*if (__sys_NtCreateFile_ == NULL)
+    {
+        __sys_NtCreateFile_ = __sys_NtCreateFile;
+        __sys_NtCreateFile = File_MyCreateFile;
+    }
+
+    if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\PhysicalDrive0") == 0)
+    {
+        return __sys_NtCreateFile(
+            FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+            AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+            CreateOptions, EaBuffer, EaLength);
+    }*/
 
     //
     // if this is a recursive invocation of NtCreateFile,
@@ -2288,6 +2519,23 @@ ReparseLoop:
                     CreateDisposition = FILE_OPEN;
                     CreateOptions &= ~FILE_DELETE_ON_CLOSE;
                     DesiredAccess &= ~FILE_DENIED_ACCESS;
+
+                    //
+                    // If this is an access on a raw disk device, adapt the requested permissions to what the drivers permits
+                    //
+
+                    if (ObjectAttributes->ObjectName && &ObjectAttributes->ObjectName->Buffer != NULL && ObjectAttributes->ObjectName->Length > (4 * sizeof(WCHAR))
+                        && wcsncmp(ObjectAttributes->ObjectName->Buffer, L"\\??\\", 4) == 0
+                        && (DesiredAccess & ~(SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES)) != 0)
+                    {
+                        if (!SbieApi_QueryConfBool(NULL, L"AllowRawDiskRead", FALSE))
+                        if ((ObjectAttributes->ObjectName->Length == (6 * sizeof(WCHAR)) && ObjectAttributes->ObjectName->Buffer[5] == L':') // \??\C:
+                            || wcsncmp(&ObjectAttributes->ObjectName->Buffer[4], L"PhysicalDrive", 13) == 0 // \??\PhysicalDrive1
+                            || wcsncmp(&ObjectAttributes->ObjectName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}
+                        {
+                            DesiredAccess &= (SYNCHRONIZE | READ_CONTROL | FILE_READ_EA | FILE_READ_ATTRIBUTES);
+                        }
+                    }
 
                     status = __sys_NtCreateFile(
                         FileHandle, DesiredAccess, ObjectAttributes,
@@ -2421,6 +2669,25 @@ ReparseLoop:
     if (! NT_SUCCESS(status))
         __leave;
 
+	HaveSnapshotFile = FALSE;
+    HaveSnapshotParent = FALSE;
+
+	if (File_Snapshot != NULL) {
+
+		WCHAR* TmplPath = CopyPath;
+
+		File_FindSnapshotPath(&TmplPath);
+
+		if (TmplPath != CopyPath) {
+
+			HaveSnapshotFile = TRUE;
+
+			TruePath = Dll_GetTlsNameBuffer(TlsData, TRUE_NAME_BUFFER, (wcslen(TmplPath) + 1) * sizeof(WCHAR));
+			wcscpy(TruePath, TmplPath);
+		}
+	}
+
+
     //
     // if TruePath and CopyPath contain colons that indicate an NTFS
     // alternate data stream, we remove these for now
@@ -2536,6 +2803,27 @@ ReparseLoop:
             HaveCopyParent = FALSE;
 
         //
+        // check if the parent folder exists in a snapshot
+        //
+
+        if (! HaveCopyParent) {
+
+            WCHAR* TargetName = wcsrchr(CopyPath, L'\\');
+            *TargetName = L'\0';
+
+            WCHAR* TmplPath = CopyPath;
+
+            File_FindSnapshotPath(&TmplPath);
+
+            if (TmplPath != CopyPath) {
+
+                HaveSnapshotParent = TRUE;
+            }
+
+            *TargetName = L'\\';
+        }
+
+        //
         // we need to check if the true path exists
         //
 
@@ -2560,7 +2848,7 @@ ReparseLoop:
                     status = STATUS_ACCESS_DENIED;
             } else {
                 FileType = 0;
-                if (depth == 1 || HaveCopyParent)
+                if (depth == 1 || HaveCopyParent || HaveSnapshotParent)
                     status = STATUS_OBJECT_NAME_NOT_FOUND;
                 else
                     status = STATUS_OBJECT_PATH_NOT_FOUND;
@@ -2574,6 +2862,19 @@ ReparseLoop:
 
             status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
         }
+
+		//
+		// If the "true" file is in an snapshot it can be a deleted one, 
+		// check for this and act acrodingly.
+		//
+
+		if (HaveSnapshotFile) {
+
+			if (FileType & TYPE_DELETED) {
+
+				status = STATUS_OBJECT_NAME_NOT_FOUND;
+			}
+		}
 
         if ((FileType & TYPE_REPARSE_POINT)
                 && (CreateOptions & FILE_OPEN_REPARSE_POINT) == 0
@@ -2624,39 +2925,6 @@ ReparseLoop:
             }
 
             status = STATUS_SUCCESS;
-        }
-
-        //
-        // Internet Shortcuts (.url files) are consistently overwritten
-        // as part of their usage.  If the shortcut exists only as a
-        // TruePath, then we pretend it's a read-only file
-        //
-        // apply similar handling to media files
-        //
-
-        if (FileType & TYPE_FILE) {
-
-            WCHAR *dot = wcsrchr(TruePath, L'.');
-            if (dot) {
-
-                static const WCHAR *_ReadOnlyFileTypes =
-                    L".url.avi.wma.wmv.mpg.mp3.mp4";
-                const WCHAR *ptr = _ReadOnlyFileTypes;
-
-                WCHAR dot1 = towlower(dot[1]);
-                WCHAR dot2 = towlower(dot[2]);
-                WCHAR dot3 = towlower(dot[3]);
-
-                while (*ptr) {
-
-                    if (dot1 == ptr[1] && dot2 == ptr[2] && dot3 == ptr[3]) {
-                        FileType |= TYPE_READ_ONLY | TYPE_SYSTEM;
-                        break;
-                    }
-
-                    ptr += 4;
-                }
-            }
         }
 
         //
@@ -2770,7 +3038,7 @@ ReparseLoop:
         DesiredAccess, CreateDisposition, CreateOptions, FileType);
 
     if (status == STATUS_OBJECT_NAME_NOT_FOUND &&
-            (! HaveCopyParent) && (! HaveTrueParent)) {
+            (! HaveCopyParent) && (! HaveSnapshotParent) && (! HaveTrueParent)) {
 
         //
         // special case:  File_CheckCreateParameters returns
@@ -2856,7 +3124,7 @@ ReparseLoop:
 
     if (! HaveCopyParent) {
 
-        if (HaveTrueParent) {
+        if (HaveTrueParent || HaveSnapshotParent) {
 
             status = File_CreatePath(TruePath, CopyPath);
 
@@ -2917,34 +3185,6 @@ ReparseLoop:
                     if (dot && _wcsicmp(dot + 1, L"wmdb") == 0) {
 
                         WithContents = FALSE;
-                    }
-                }
-
-                if (WithContents) {
-
-                    //
-                    // don't copy contents of Windows Explorer thumbcache
-                    // (note that name was chaged to iconcache on Windows 8)
-                    //
-
-                    WCHAR *dot = wcsrchr(TruePath, L'.');
-                    if (dot && _wcsicmp(dot + 1, L"db") == 0) {
-
-                        WCHAR *ptr;
-                        ULONG len = wcslen(TruePath) + 1;
-                        WCHAR *TempPath = Dll_AllocTemp(len * sizeof(WCHAR));
-                        wmemcpy(TempPath, TruePath, len);
-                        _wcslwr(TempPath);
-
-                        ptr = wcsstr(TempPath,
-                                L"\\microsoft\\windows\\explorer\\");
-                        if (ptr && (    wcscmp(ptr + 28, L"thumbcache_") == 0
-                                    ||  wcscmp(ptr + 28, L"iconcache_") == 0)) {
-
-                            WithContents = FALSE;
-                        }
-
-                        Dll_Free(TempPath);
                     }
                 }
 
@@ -3514,6 +3754,7 @@ _FX BOOLEAN File_CheckDeletedParent(WCHAR *CopyPath)
     UNICODE_STRING objname;
     ULONG FileType;
     WCHAR *ptr = NULL;
+	NTSTATUS status;
 
     //
     // remove the last path component so we can open the parent directory
@@ -3541,12 +3782,39 @@ _FX BOOLEAN File_CheckDeletedParent(WCHAR *CopyPath)
             return FALSE;
         }
 
-        File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+		status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+		if (status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND)
+			continue;
 
         if (FileType & TYPE_DELETED) {
             *ptr = L'\\';
             return TRUE;
         }
+
+		//
+		// If we have snapshots check thair status, if we have a entry in the most recent snapshot
+		// than older delete markings are not relevant
+		//
+
+		for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != NULL; Cur_Snapshot = Cur_Snapshot->Parent)
+		{
+			WCHAR* TmplName = File_MakeSnapshotPath(Cur_Snapshot, CopyPath);
+			if (!TmplName)
+				break;
+
+			RtlInitUnicodeString(&objname, TmplName);
+			status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+			if (status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND)
+				continue;
+
+			if (FileType & TYPE_DELETED) {
+				*ptr = L'\\';
+				return TRUE;
+			}
+
+			if (NT_SUCCESS(status))
+				break;
+		}
     }
 }
 
@@ -3721,258 +3989,6 @@ _FX NTSTATUS File_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     }
 
     return status;
-}
-
-
-//---------------------------------------------------------------------------
-// File_MigrateFile
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS File_MigrateFile(
-    const WCHAR *TruePath, const WCHAR *CopyPath,
-    BOOLEAN IsWritePath, BOOLEAN WithContents)
-{
-    NTSTATUS status;
-    HANDLE TrueHandle, CopyHandle;
-    OBJECT_ATTRIBUTES objattrs;
-    UNICODE_STRING objname;
-    IO_STATUS_BLOCK IoStatusBlock;
-    FILE_NETWORK_OPEN_INFORMATION open_info;
-    ULONG file_size;
-    ACCESS_MASK DesiredAccess;
-    ULONG CreateOptions;
-
-    InitializeObjectAttributes(
-        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
-
-    //
-    // open TruePath.  if we get a sharing violation trying to open it,
-    // try to get the driver to open it bypassing share access.  if even
-    // this fails, then we can't copy the data, but can still create an
-    // empty file
-    //
-
-    RtlInitUnicodeString(&objname, TruePath);
-
-    status = __sys_NtCreateFile(
-        &TrueHandle, FILE_GENERIC_READ, &objattrs, &IoStatusBlock,
-        NULL, 0, FILE_SHARE_VALID_FLAGS,
-        FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
-
-    if (IsWritePath && status == STATUS_ACCESS_DENIED)
-        status = STATUS_SHARING_VIOLATION;
-
-    if (status == STATUS_SHARING_VIOLATION) {
-
-        status = SbieApi_OpenFile(&TrueHandle, TruePath);
-
-        if (! NT_SUCCESS(status)) {
-
-            WithContents = FALSE;
-
-            status = __sys_NtCreateFile(
-                &TrueHandle, FILE_READ_ATTRIBUTES | SYNCHRONIZE,
-                &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-                FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
-        }
-    }
-
-    if (! NT_SUCCESS(status))
-        return status;
-
-    //
-    // query attributes and size of the TruePath file
-    //
-
-    status = __sys_NtQueryInformationFile(
-        TrueHandle, &IoStatusBlock, &open_info,
-        sizeof(FILE_NETWORK_OPEN_INFORMATION), FileNetworkOpenInformation);
-
-    if (! NT_SUCCESS(status)) {
-        NtClose(TrueHandle);
-        return status;
-    }
-
-    if (WithContents) {
-
-        static BOOLEAN _ReinitCopyLimit = FALSE;
-        if (_ReinitCopyLimit) {
-            _ReinitCopyLimit = FALSE;
-            File_InitCopyLimit();
-        }
-
-        file_size = open_info.EndOfFile.LowPart;
-
-        if (open_info.EndOfFile.HighPart != 0 ||
-            file_size > (File_CopyLimitKb * 1024)) {
-
-            const WCHAR *TruePathName =
-                File_MigrateFile_ShouldBypass(TruePath);
-
-            if (TruePathName) {
-
-                NtClose(TrueHandle);
-
-                if (! File_CopyLimitSilent) {
-
-                    ULONG TruePathNameLen = wcslen(TruePathName);
-                    WCHAR *text = Dll_AllocTemp(
-                            (TruePathNameLen + 64) * sizeof(WCHAR));
-                    Sbie_swprintf(text, L"%s [%s / %d]",
-                        TruePathName, Dll_BoxName, file_size);
-
-                    SbieApi_Log(2102, text);
-
-                    Dll_Free(text);
-
-                    _ReinitCopyLimit = TRUE;
-                }
-
-                return STATUS_BAD_INITIAL_PC;
-            }
-        }
-
-    } else
-
-        file_size = 0;
-
-    //
-    // create the CopyPath file
-    //
-
-    RtlInitUnicodeString(&objname, CopyPath);
-
-    if (open_info.FileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-        DesiredAccess = FILE_GENERIC_READ;
-        CreateOptions = FILE_DIRECTORY_FILE;
-    } else {
-        DesiredAccess = FILE_GENERIC_WRITE;
-        CreateOptions = FILE_NON_DIRECTORY_FILE;
-    }
-
-    status = __sys_NtCreateFile(
-        &CopyHandle, DesiredAccess, &objattrs, &IoStatusBlock,
-        NULL, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_VALID_FLAGS,
-        FILE_CREATE, FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions,
-        NULL, 0);
-
-    if (! NT_SUCCESS(status)) {
-        NtClose(TrueHandle);
-        return status;
-    }
-
-    //
-    // copy the file, if so desired
-    //
-
-    if (file_size) {
-
-        void *buffer = Dll_AllocTemp(PAGE_SIZE);
-        if (! buffer) {
-            status = STATUS_INSUFFICIENT_RESOURCES;
-            file_size = 0;
-        }
-
-        while (file_size > 0) {
-
-            ULONG buffer_size =
-                (file_size > PAGE_SIZE) ? PAGE_SIZE : file_size;
-
-            status = NtReadFile(
-                TrueHandle, NULL, NULL, NULL, &IoStatusBlock,
-                buffer, buffer_size, NULL, NULL);
-
-            if (NT_SUCCESS(status)) {
-
-                buffer_size = (ULONG)IoStatusBlock.Information;
-                file_size -= buffer_size;
-
-                status = NtWriteFile(
-                    CopyHandle, NULL, NULL, NULL, &IoStatusBlock,
-                    buffer, buffer_size, NULL, NULL);
-            }
-
-            if (! NT_SUCCESS(status))
-                break;
-        }
-
-        if (buffer)
-            Dll_Free(buffer);
-    }
-
-    //
-    // set the short name on the file.  we must do this before we copy
-    // its attributes, as this may make the file read-only
-    //
-
-    if (NT_SUCCESS(status)) {
-
-        status = File_CopyShortName(TruePath, CopyPath);
-
-        if (IsWritePath && status == STATUS_ACCESS_DENIED)
-            status = STATUS_SUCCESS;
-    }
-
-    //
-    // set information on the CopyPath file
-    //
-
-    if (NT_SUCCESS(status)) {
-
-        FILE_BASIC_INFORMATION info;
-
-        info.CreationTime.QuadPart = open_info.CreationTime.QuadPart;
-        info.LastAccessTime.QuadPart = open_info.LastAccessTime.QuadPart;
-        info.LastWriteTime.QuadPart = open_info.LastWriteTime.QuadPart;
-        info.ChangeTime.QuadPart = open_info.ChangeTime.QuadPart;
-        info.FileAttributes = open_info.FileAttributes;
-
-        status = File_SetAttributes(CopyHandle, CopyPath, &info);
-    }
-
-    NtClose(TrueHandle);
-    NtClose(CopyHandle);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// File_MigrateFile_ShouldBypass
-//---------------------------------------------------------------------------
-
-
-_FX const WCHAR *File_MigrateFile_ShouldBypass(const WCHAR *TruePath)
-{
-    static const WCHAR *_names[] = {
-        // firefox
-        L"places.sqlite", L"xul.mfl",
-        // windows installer etc
-        L"qmgr0.dat", L"qmgr1.dat", L"infcache.1", L"cbs.log",
-        // explorer
-        L"thumbcache_32.db",   L"thumbcache_96.db",  L"thumbcache_256.db",
-        L"thumbcache_1024.db", L"thumbcache_idx.db", L"thumbcache_sr.db",
-        // internet explorer 10 web cache
-        L"webcachev01.dat", L"webcachev01.tmp",
-        L"webcachev24.dat", L"webcachev24.tmp",
-        // end of list
-        NULL
-    };
-
-    const WCHAR **nameptr;
-
-    const WCHAR *name = wcsrchr(TruePath, L'\\');
-    if (name)
-        ++name;
-    else
-        name = TruePath;
-
-    for (nameptr = _names; *nameptr; ++nameptr)
-        if (_wcsicmp(name, *nameptr) == 0)
-            return NULL;
-
-    return name;
 }
 
 
@@ -4300,7 +4316,7 @@ _FX BOOLEAN File_AdjustShortName(
             req->h.msgid = MSGID_FILE_SET_SHORT_NAME;
 
             memzero(&req->info, sizeof(req->info));
-            Sbie_swprintf(req->info.FileName,
+            Sbie_snwprintf(req->info.FileName, 12,
                      L"SB~%05X.%03X", ticks >> 12, ticks & 0xFFF);
             req->info.FileNameLength = (8 + 1 + 3) * sizeof(WCHAR);
 
@@ -4559,6 +4575,22 @@ _FX NTSTATUS File_NtQueryFullAttributesFile(
 {
     NTSTATUS status = File_NtQueryFullAttributesFileImpl(ObjectAttributes, FileInformation);
 
+    if (status == STATUS_OBJECT_NAME_NOT_FOUND && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER
+        && ObjectAttributes != NULL && ObjectAttributes->ObjectName != NULL 
+        // ObjectAttributes->ObjectName == "\\??\\C:\\Config.Msi" // or any other system drive
+        && ObjectAttributes->ObjectName->Buffer && ObjectAttributes->ObjectName->Length == 34
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer + 6, L"\\Config.Msi") == 0
+        ) {
+
+        //
+        // MSI bug: this must not fail, hence we create the directory and retry
+        //
+
+        CreateDirectory(ObjectAttributes->ObjectName->Buffer, NULL);
+
+        status = File_NtQueryFullAttributesFileImpl(ObjectAttributes, FileInformation);
+    }
+
     status = StopTailCallOptimization(status);
 
     return status;
@@ -4690,6 +4722,9 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
         status = STATUS_OBJECT_PATH_NOT_FOUND;
         __leave;
     }
+
+	if (File_Snapshot != NULL)
+		File_FindSnapshotPath(&CopyPath);
 
     RtlInitUnicodeString(&objname, CopyPath);
 
@@ -5644,6 +5679,7 @@ _FX NTSTATUS File_SetAttributes(
     if (! CopyPath) {
 
         WCHAR *TruePath;
+        ULONG FileFlags;
         OBJECT_ATTRIBUTES objattrs;
         UNICODE_STRING objname;
 
@@ -5654,10 +5690,13 @@ _FX NTSTATUS File_SetAttributes(
         RtlInitUnicodeString(&objname, L"");
 
         status = File_GetName(
-            FileHandle, &objname, &TruePath, (WCHAR **)&CopyPath, NULL);
+            FileHandle, &objname, &TruePath, (WCHAR **)&CopyPath, &FileFlags);
 
         if (! NT_SUCCESS(status))
             __leave;
+
+        if (FileFlags & FGN_IS_BOXED_PATH)
+            goto has_copy_path;
 
         //
         // migrate the file into the sandbox.  because access mask of
@@ -5715,6 +5754,8 @@ _FX NTSTATUS File_SetAttributes(
         if (status != STATUS_ACCESS_DENIED)
             __leave;
     }
+
+has_copy_path:
 
     //
     // ask the FileServer proxy in SbieSvc to do the job.  this is needed
@@ -6050,6 +6091,9 @@ _FX NTSTATUS File_RenameFile(
     len = (wcslen(TruePath) + 1) * sizeof(WCHAR);
     SourceTruePath = Dll_AllocTemp(len);
     memcpy(SourceTruePath, TruePath, len);
+
+	if (File_Snapshot != NULL)
+		File_FindSnapshotPath(&CopyPath);
 
     len = (wcslen(CopyPath) + 1) * sizeof(WCHAR);
     SourceCopyPath = Dll_AllocTemp(len);
@@ -6537,6 +6581,10 @@ _FX ULONG SbieDll_GetHandlePath(
         WCHAR *src = TruePath;
         if (Dll_BoxName &&              // sandboxed process
                 IsBoxedPath && *IsBoxedPath) {
+
+			if (File_Snapshot != NULL)
+				File_FindSnapshotPath(&CopyPath);
+
             src = CopyPath;
         }
         len = wcslen(src);

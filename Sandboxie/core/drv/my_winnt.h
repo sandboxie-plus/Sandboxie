@@ -45,7 +45,7 @@
 #define SE_GROUP_LOGON_ID               (0xC0000000L)
 #define SE_GROUP_RESOURCE               (0x20000000L)
 
-
+#ifdef OLD_DDK
 typedef enum _TOKEN_INFORMATION_CLASS2 {
     TokenIsAppContainer = 29,
     TokenCapabilities,
@@ -63,6 +63,7 @@ typedef enum _TOKEN_INFORMATION_CLASS2 {
     TokenPrivateNameSpace//,
     //MaxTokenInfoClass  // MaxTokenInfoClass should always be the last enum
 } TOKEN_INFORMATION_CLASS2;
+#endif // OLD_DDK
 
 NTOS_NTSTATUS   ZwOpenThreadToken(
     IN HANDLE       ThreadHandle,
@@ -253,8 +254,14 @@ typedef void(*P_KeRevertToUserAffinityThreadEx)(KAFFINITY Affinity);
 #define PROCESS_QUERY_INFORMATION (0x0400)
 #define PROCESS_SUSPEND_RESUME    (0x0800)
 #define PROCESS_QUERY_LIMITED_INFORMATION  (0x1000)     // vista
+#define PROCESS_SET_LIMITED_INFORMATION    (0x2000)
+#if (NTDDI_VERSION >= NTDDI_VISTA)
 #define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
-    0xFFF)
+                                   0xFFFF)
+#else
+#define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
+                                   0xFFF)
+#endif
 
 
 extern POBJECT_TYPE *PsProcessType;
@@ -304,8 +311,13 @@ NTOS_NTSTATUS   ZwSetInformationProcess(
 #define THREAD_DIRECT_IMPERSONATION    (0x0200)
 #define THREAD_SET_LIMITED_INFORMATION   (0x0400)       // vista
 #define THREAD_QUERY_LIMITED_INFORMATION (0x0800)       // vista
+#if (NTDDI_VERSION >= NTDDI_VISTA)
 #define THREAD_ALL_ACCESS         (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
-    0x3FF)
+                                   0xFFFF)
+#else
+#define THREAD_ALL_ACCESS         (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
+                                   0x3FF)
+#endif
 
 
 NTOS_NTSTATUS  PsSetThreadHardErrorsAreDisabled(
@@ -618,6 +630,7 @@ typedef ULONG OB_OPERATION;
 #define OB_OPERATION_HANDLE_CREATE              0x00000001
 #define OB_OPERATION_HANDLE_DUPLICATE           0x00000002
 
+#if (NTDDI_VERSION < NTDDI_VISTASP1)
 NTOS_NTSTATUS   ObRegisterCallbacks(
     __in POB_CALLBACK_REGISTRATION CallbackRegistration,
     __deref_out PVOID *RegistrationHandle);
@@ -625,6 +638,7 @@ NTOS_NTSTATUS   ObRegisterCallbacks(
 
 NTOS_NTSTATUS   ObUnRegisterCallbacks(
     __in PVOID RegistrationHandle);
+#endif
 
 
 // ------------------------------------------------------------------

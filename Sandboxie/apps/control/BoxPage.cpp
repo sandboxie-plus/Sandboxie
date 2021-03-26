@@ -96,6 +96,7 @@ BEGIN_MESSAGE_MAP(CBoxPage, CPropertyPage)
     ON_COMMAND(ID_SHOW_BORDER,                  Appearance_OnShowBorder)
     ON_COMMAND(ID_BORDER_COLOR,                 Appearance_OnBorderColor)
     ON_COMMAND(ID_BORDER_TITLE,                 Appearance_OnBorderTitle)
+    ON_CONTROL(EN_CHANGE, ID_BORDER_WIDTH,      OnModified)
 
     ON_COMMAND(ID_DELETE_AUTO,                  AutoDelete_OnAuto)
     ON_COMMAND(ID_DELETE_NEVER,                 AutoDelete_OnNever)
@@ -920,9 +921,17 @@ void CBoxPage::Appearance_OnInitDialog(CBox &box)
     }
 
     BOOL title;
-    BOOL enabled = box.GetBorder(&Appearance_BorderColor, &title);
+    int width;
+    BOOL enabled = box.GetBorder(&Appearance_BorderColor, &title, &width);
     if (! enabled)
         GetDlgItem(ID_BORDER_COLOR)->ShowWindow(SW_HIDE);
+
+    CEdit* edit = (CEdit*)GetDlgItem(ID_BORDER_WIDTH);
+    edit->SetLimitText(3);
+    CString str;
+    str.Format(L"%d", width);
+    edit->SetWindowText(str);
+
     Appearance_SetBorderColor();
 
     CButton *pCheckBox3 = (CButton *)GetDlgItem(ID_SHOW_BORDER);
@@ -956,7 +965,10 @@ void CBoxPage::Appearance_OnOK(CBox &box)
         CButton *pCheckBox4 = (CButton *)GetDlgItem(ID_BORDER_TITLE);
         BOOL enable = (pCheckBox3->GetCheck() == BST_CHECKED ? TRUE : FALSE);
         BOOL title  = (pCheckBox4->GetCheck() == BST_CHECKED ? TRUE : FALSE);
-        ok = box.SetBorder(enable, Appearance_BorderColor, title);
+        CString str;
+        GetDlgItem(ID_BORDER_WIDTH)->GetWindowText(str);
+        int width = _wtoi(str);
+        ok = box.SetBorder(enable, Appearance_BorderColor, title, width);
     }
 
     if (ok)
@@ -2365,7 +2377,7 @@ void CBoxPage::FileMigrate_OnOK(CBox &box)
 
     int size;
     if (size64 < 1)
-        size = 1;
+        size = -1;
     else if (size64 > 999999999)
         size = 999999999;
     else

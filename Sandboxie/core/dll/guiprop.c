@@ -240,7 +240,7 @@ _FX void Gui_InitPropAtoms(void)
             GlobalAddAtomW(_OleDropTargetInterface);
 
         if (Gui_OleDropTargetInterface_Atom) {
-            Sbie_swprintf(name, _format, Dll_BoxName, _OleDropTargetInterface);
+            Sbie_snwprintf(name, 128, _format, Dll_BoxName, _OleDropTargetInterface);
             Gui_Sandbox_OleDropTargetInterface_Atom = GlobalAddAtomW(name);
         }
     }
@@ -251,7 +251,7 @@ _FX void Gui_InitPropAtoms(void)
             GlobalAddAtomW(_OleDropTargetMarshalHwnd);
 
         if (Gui_OleDropTargetMarshalHwnd_Atom) {
-            Sbie_swprintf(name, _format, Dll_BoxName, _OleDropTargetMarshalHwnd);
+			Sbie_snwprintf(name, 128, _format, Dll_BoxName, _OleDropTargetMarshalHwnd);
             Gui_Sandbox_OleDropTargetMarshalHwnd_Atom = GlobalAddAtomW(name);
         }
     }
@@ -262,7 +262,7 @@ _FX void Gui_InitPropAtoms(void)
             GlobalAddAtomW(_OleEndPointID);
 
         if (Gui_OleEndPointID_Atom) {
-            Sbie_swprintf(name, _format, Dll_BoxName, _OleEndPointID);
+			Sbie_snwprintf(name, 128, _format, Dll_BoxName, _OleEndPointID);
             Gui_Sandbox_OleEndPointID_Atom = GlobalAddAtomW(name);
         }
     }

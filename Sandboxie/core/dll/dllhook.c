@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,6 +23,7 @@
 
 #define NOGDI
 #include "dll.h"
+#include "hook.h"
 #include "common/pool.h"
 #include "common/pattern.h"
 
@@ -34,9 +36,6 @@
 
 
 static void *SbieDll_Hook_CheckChromeHook(void *SourceFunc);
-
-static WCHAR *Dll_GetSettingsForImageName(
-    const WCHAR *setting, const WCHAR *deftext);
 
 ULONG_PTR  DLL_FindWow64Target(ULONG_PTR address);
 
@@ -67,6 +66,28 @@ VECTOR_TABLE SbieDllVectorTable[NUM_VTABLES] = {
 extern CRITICAL_SECTION VT_CriticalSection;
 #endif _WIN64
 extern ULONG Dll_Windows;
+
+//---------------------------------------------------------------------------
+// SbieApi_HookTramp
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
+{
+	NTSTATUS status;
+#ifdef _WIN64
+	BOOLEAN is64 = TRUE;
+#else
+	BOOLEAN is64 = FALSE;
+#endif _WIN64
+
+	if (Hook_BuildTramp(Source, Trampoline, is64, TRUE))
+		status = STATUS_SUCCESS;
+	else
+		status = STATUS_UNSUCCESSFUL;
+
+	return status;
+}
 
 
 //---------------------------------------------------------------------------
@@ -178,6 +199,12 @@ skip_e9_rewrite: ;
             SourceFunc = (void *)target;
     }
 
+	//
+	// this simplification fails for delay loaded libraries, see coments about SetSecurityInfo,
+	// resulting in an endless loop, so just dont do that 
+	//
+
+#if 0
     //
     // 64-bit only:  if the function begins with 'jmp qword ptr [x]'
     // (6 bytes) then replace the value at x, rather than overwrite
@@ -216,6 +243,7 @@ skip_e9_rewrite: ;
 
         return orig_addr;
     }
+#endif
 
 #endif _WIN64
 
@@ -284,6 +312,9 @@ skip_e9_rewrite: ;
         return NULL;
     }
 
+	ULONG ByteCount = *(ULONG*)(tramp + 80);
+	ULONG UsedCount = 0;
+	
     //
     // create the detour
     //
@@ -323,10 +354,12 @@ skip_e9_rewrite: ;
             func[0] = 0x48;             // 32bit relative JMP DetourFunc
             func[1] = 0xE9;             // 32bit relative JMP DetourFunc
             *(ULONG *)(&func[2]) = (ULONG)diff;
+			UsedCount = 1 + 1 + 4;
         }
         else {
             func[0] = 0xE9;             // 32bit relative JMP DetourFunc
             *(ULONG *)(&func[1]) = (ULONG)diff;
+			UsedCount = 1 + 4;
         }
     }
 
@@ -393,6 +426,7 @@ skip_e9_rewrite: ;
                         ((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index] = (ULONG_PTR)DetourFunc;
                         *(USHORT *)&func[0] = 0x25ff;
                         *(ULONG *)&func[2] = (ULONG)diff;
+						UsedCount = 2 + 4;
                         ptrVTable->index++;
                         hookset = TRUE;
                     }
@@ -418,9 +452,15 @@ skip_e9_rewrite: ;
     diff = (UCHAR *)DetourFunc - (func + 5);
     func[0] = 0xE9;             // JMP DetourFunc
     *(ULONG *)(&func[1]) = (ULONG)diff;
+	UsedCount = 1 + 4;
 #endif
 
-    VirtualProtect(&func[-8], 20, prot, &dummy_prot);
+	// just in case nop out the rest of the code we moved to the trampoline
+	// ToDo: why does this break unity games
+	//for(; UsedCount < ByteCount; UsedCount++)
+	//	func[UsedCount] = 0x90; // nop
+
+	VirtualProtect(&func[-8], 20, prot, &dummy_prot);
 
     // the trampoline code begins at trampoline + 16 bytes
     func = (UCHAR *)(ULONG_PTR)(tramp + 16);
@@ -542,13 +582,14 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
 //---------------------------------------------------------------------------
 
 
-_FX WCHAR *Dll_GetSettingsForImageName(
-    const WCHAR *setting, const WCHAR *deftext)
+_FX NTSTATUS Dll_GetSettingsForImageName(
+    const WCHAR *setting, WCHAR* value, ULONG value_size, const WCHAR *deftext)
 {
     POOL *pool;
     WCHAR *text, *image_lwr, *buf;
     ULONG text_len, image_len;
     ULONG index;
+    BOOLEAN match = FALSE;
 
     //
     //
@@ -605,8 +646,10 @@ _FX WCHAR *Dll_GetSettingsForImageName(
         ++index;
 
         ptr = wcschr(buf, L',');
-        if (! ptr)
-            continue;
+        if (!ptr) {
+            ptr = buf;
+            goto skip_match; // if there is no L',' it means any image
+        }
         *ptr = L'\0';
 
         if (buf[0] == L'/' && buf[1] == L'/' &&
@@ -620,42 +663,51 @@ _FX WCHAR *Dll_GetSettingsForImageName(
         image_pat = Pattern_Create(pool, buf_ptr, TRUE);
         if (Pattern_Match(image_pat, image_lwr, image_len)) {
 
+            match = TRUE;
+        }
+
+        Pattern_Free(image_pat);
+
+        if (!match)
+            continue;
+
+        if (text_len)
+            *ptr = L',';    // restore comma if text is not empty
+        else
+            ++ptr;          // or skip comma if text is empty
+
+        skip_match:
+        {
             ULONG ptr_len;
-            WCHAR *new_text;
-            if (text_len)
-                *ptr = L',';    // restore comma if text is not empty
-            else
-                ++ptr;          // or skip comma if text is empty
+            WCHAR* new_text;
             ptr_len = wcslen(ptr);
             new_text = Pool_Alloc(pool,
-                            (text_len + ptr_len + 1) * sizeof(WCHAR));
-            if (! new_text)
+                (text_len + ptr_len + 1) * sizeof(WCHAR));
+            if (!new_text)
                 goto outofmem;
             wmemcpy(new_text, text, text_len);
             wmemcpy(new_text + text_len, ptr, ptr_len + 1);
             text = new_text;
             text_len = text_len + ptr_len;
         }
-
-        Pattern_Free(image_pat);
+        break;
     }
 
     //
     // finish
     //
 
-    buf = Dll_Alloc((text_len + 1) * sizeof(WCHAR));
-    wmemcpy(buf, text, text_len + 1);
+    wcscpy_s(value, value_size / sizeof(WCHAR), text);
 
     Pool_Delete(pool);
 
-    return buf;
+    return STATUS_SUCCESS;
 
 outofmem:
 
     SbieApi_Log(2305, NULL);
     ExitProcess(-1);
-    return NULL;
+    return STATUS_INSUFFICIENT_RESOURCES;
 }
 
 
@@ -666,37 +718,26 @@ outofmem:
 
 _FX BOOLEAN Dll_SkipHook(const WCHAR *HookName)
 {
-    static WCHAR *HookText = NULL;
+    static WCHAR HookText[256];
+    static BOOLEAN HookTextInit = TRUE;
     BOOLEAN found = FALSE;
 
     //
     // initialize hook text based on image name
     //
 
-    if (! HookName) {
+    if (HookTextInit) {
 
-        const WCHAR *deftext = NULL;
+        HookTextInit = FALSE;
 
-        if (_wcsicmp(Dll_ImageName, L"DragonSaga.exe") == 0)
-            deftext = L"ntqsi,enumwin,findwin";
-
-        if (_wcsicmp(Dll_ImageName, L"BatmanAC.exe") == 0)
-            deftext = L"enumwin,findwin";
-
-        if (_wcsicmp(Dll_ImageName, L"PotPlayer64.exe") == 0 ||
-            _wcsicmp(Dll_ImageName, L"PotPlayerMini64.exe") == 0 ||
-            _wcsicmp(Dll_ImageName, L"mpc-hc64.exe") == 0) {
-
-            deftext = L"cocreate";
-        }
-
-        HookText = Dll_GetSettingsForImageName(L"SkipHook", deftext);
-
+        Dll_GetSettingsForImageName(L"SkipHook", HookText, sizeof(HookText), NULL);
+    } 
+    
     //
     // query for a specific hook
     //
 
-    } else if (HookText) {
+    if (HookName && *HookText) {
 
         ULONG len = wcslen(HookName);
         WCHAR *ptr = HookText;

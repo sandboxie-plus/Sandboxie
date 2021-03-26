@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -247,12 +248,20 @@ _FX void InitInject(SBIELOW_DATA *data, void * RtlFindActivationContextSectionSt
 
     if (data->is_wow64) {
 
-        extern ULONG64 SbieApi_QueryProcessInfo(
-                                    SBIELOW_DATA *data, ULONG info_type);
+		//
+		// Instead of requiering the driver for this task, we can simplify it
+		// and use NtQueryVirtualMemory to find the mapped image directly.
+		// We do that in the injector, but we could also have done it here ourselves.
+		//
 
-        ULONG ntdll32_base = (ULONG)SbieApi_QueryProcessInfo(data, 'nt32');
+		ntdll_base = (void *)data->ntdll_wow64_base;
 
-        ntdll_base = (void *)(ULONG_PTR)ntdll32_base;
+        //extern ULONG64 SbieApi_QueryProcessInfo(
+        //                            SBIELOW_DATA *data, ULONG info_type);
+		//
+        //ULONG ntdll32_base = (ULONG)SbieApi_QueryProcessInfo(data, 'nt32');
+		//
+        //ntdll_base = (void *)(ULONG_PTR)ntdll32_base;
 
         //
         // (prior to Windows 8, the base address of ntdll32 is recorded

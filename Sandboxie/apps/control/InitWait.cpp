@@ -73,7 +73,7 @@ CInitWait::CInitWait(CWinApp *myApp)
 
     m_pMenu = NULL;
 
-    m_app_ver.Format(L"%S", MY_VERSION_STRING);
+    m_app_ver.Format(L"%S", MY_VERSION_COMPAT);
     m_svc_ver = L"?";
     m_drv_ver = L"?";
 

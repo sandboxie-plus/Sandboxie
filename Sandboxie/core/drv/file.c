@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -364,8 +365,7 @@ _FX BOOLEAN File_CreateBoxPath(PROCESS *proc)
         status = STATUS_UNSUCCESSFUL;
 
     if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(
-            MSG_FILE_CREATE_BOX_PATH, 0, status, proc->box->file_path);
+		Log_Status_Ex_Process(MSG_FILE_CREATE_BOX_PATH, 0, status, proc->box->file_path, -1, proc->pid);
     }
 
     return (NT_SUCCESS(status));
@@ -610,7 +610,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\NamedPipe\\XTIERRPCPIPE",       // Novell NetIdentity
         NULL
     };
-    static const WCHAR *strClosedFiles[] = {
+    static const WCHAR *strWinRMFiles[] = {
         // Windows Remote Management (WinRM) is a large security hole.  A sandboxed app running in an elevated cmd shell can send any admin command to the host.
         // Block the WinRS.exe and the automation dlls to make it very difficult for someone to use.
         // See ICD-10136 "Sandboxie security hole allows guest to run any command in host as admin"
@@ -618,6 +618,11 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"%SystemRoot%\\System32\\wsmsvc.dll",
         L"%SystemRoot%\\System32\\wsmauto.dll",
         L"%SystemRoot%\\System32\\winrs.exe",
+        // Don't forget the WoW64 files
+        L"%SystemRoot%\\SysWoW64\\wsmsvc.dll",
+        L"%SystemRoot%\\SysWoW64\\wsmauto.dll",
+        L"%SystemRoot%\\SysWoW64\\winrs.exe",
+        // Note: This is not a proper fix its just a cheap mitidation!!! 
         NULL
     };
 
@@ -630,16 +635,16 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
     ok = Process_GetPaths(proc, open_file_paths, _OpenPipe, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPipe);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
     }
 
-    if (! proc->image_copy) {
+    if (! proc->image_from_box) {
 
         ok = Process_GetPaths(proc, open_file_paths, _OpenFile, TRUE);
 
         if (! ok) {
-            Log_Msg1(MSG_INIT_PATHS, _OpenFile);
+            Log_MsgP1(MSG_INIT_PATHS, _OpenFile, proc->pid);
             return FALSE;
         }
     }
@@ -656,7 +661,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _OpenPipe);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
     }
 
@@ -676,12 +681,13 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         }
     }
 
-    for (i = 0; strClosedFiles[i] && ok; ++i) {
-        ok = Process_AddPath(proc, closed_file_paths, _ClosedPath, TRUE, strClosedFiles[i], FALSE);
+    if(Conf_Get_Boolean(proc->box->name, L"BlockWinRM", 0, TRUE))
+    for (i = 0; strWinRMFiles[i] && ok; ++i) {
+        ok = Process_AddPath(proc, closed_file_paths, _ClosedPath, TRUE, strWinRMFiles[i], FALSE);
     }
 
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ClosedPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
 
@@ -693,7 +699,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     if (ok)
         ok = Process_GetPaths(proc, read_file_paths, _ReadPath, TRUE);
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _ReadPath);
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
     }
 
@@ -709,7 +715,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
                 proc, closed_file_paths, _WritePath, TRUE);
     }
     if (! ok) {
-        Log_Msg1(MSG_INIT_PATHS, _WritePath);
+        Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
         return FALSE;
     }
 
@@ -750,6 +756,13 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
 {
     BOOLEAN is_open, is_closed;
     BOOLEAN ok;
+
+    //
+    // is this process excempted from the blocade
+    //
+
+	if (proc->AllowInternetAccess)
+		return TRUE;
 
     //
     // should we warn on access to internet resources
@@ -872,6 +885,8 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
                     proc->box->name, L"NotifyDirectDiskAccess", 0, FALSE);
     }
 
+    proc->file_open_devapi_cmapi = Conf_Get_Boolean(proc->box->name, L"OpenDevCMApi", 0, FALSE);
+
     if (ok && proc->image_path && (! proc->image_sbie)) {
 
         //
@@ -985,11 +1000,11 @@ _FX NTSTATUS File_Generic_MyParseProc(
                     L"(FI) %08X %s", device_type, device_name_ptr);
 
                 if (proc->file_trace & TRACE_IGNORE)
-                    Log_Debug_Msg(ignore_str, Driver_Empty);
+                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
-                if (Session_MonitorCount &&
+                else if (Session_MonitorCount &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
-                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4);
+                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
                 Mem_Free(ignore_str, ignore_str_len);
             }
@@ -1485,16 +1500,27 @@ skip_due_to_home_folder:
             letter = 0;
 
         if (letter) {
+
+            ULONG mon_type = IsPipeDevice ? MONITOR_PIPE : MONITOR_FILE;
+            if (!IsBoxedPath) {
+                if (ShouldMonitorAccess == TRUE)
+                    mon_type |= MONITOR_DENY;
+                else
+                    mon_type |= MONITOR_OPEN;
+            }
+            if(!IsPipeDevice && !ShouldMonitorAccess)
+                mon_type |= MONITOR_TRACE;
+
             swprintf(access_str, L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
-            Log_Debug_Msg(access_str, Name->Name.Buffer);
+            Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    if (IsPipeDevice && Session_MonitorCount) {
+    else if (IsPipeDevice && Session_MonitorCount) {
 
-        USHORT mon_type = MONITOR_PIPE;
+        ULONG mon_type = MONITOR_PIPE;
         WCHAR *mon_name = Name->Name.Buffer;
 
         if (MonitorPrefixLen && MonitorSuffixPtr) {
@@ -1504,14 +1530,16 @@ skip_due_to_home_folder:
             mon_type |= MONITOR_OPEN;
         else
             mon_type |= MONITOR_DENY;
-        Session_MonitorPut(mon_type, mon_name);
+        Session_MonitorPut(mon_type, mon_name, proc->pid);
 
     } else if (ShouldMonitorAccess) {
 
-        Session_MonitorPut(
-            MONITOR_FILE_OR_KEY | MONITOR_DENY, Name->Name.Buffer);
+        Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
-    } else if (msg1313 && status == STATUS_ACCESS_DENIED
+    } 
+    
+    if (!ShouldMonitorAccess && msg1313 
+                       && status == STATUS_ACCESS_DENIED
                        && device_type == FILE_DEVICE_DISK
                        && RemainingName && RemainingName->Length == 0) {
 
@@ -1521,7 +1549,7 @@ skip_due_to_home_folder:
 
         if (proc->file_warn_direct_access) {
 
-            //Log_Msg1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name);
+            //Log_MsgP1(MSG_BLOCKED_DIRECT_DISK_ACCESS, proc->image_name, proc->pid);
             Process_LogMessage(proc, MSG_BLOCKED_DIRECT_DISK_ACCESS);
         }
     }
@@ -1835,9 +1863,27 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         info->FileNameLength = name_len;
         memcpy(info->FileName, name, name_len);
 
-        status = ZwSetInformationFile(
-            args->file_handle.val, &IoStatusBlock,
-            info, info_len, FileRenameInformation);
+
+		FILE_OBJECT *object;
+		status = ObReferenceObjectByHandle(args->file_handle.val, 0L, *IoFileObjectType, UserMode, (PVOID)&object, NULL);
+
+		if (NT_SUCCESS(status)) {
+
+			HANDLE handle;
+			status = ObOpenObjectByPointer((PVOID)object, OBJ_FORCE_ACCESS_CHECK |
+				OBJ_KERNEL_HANDLE, NULL, GENERIC_ALL, *IoFileObjectType, KernelMode, &handle);
+
+			if (NT_SUCCESS(status)) {
+
+				status = ZwSetInformationFile(
+					handle, &IoStatusBlock, //args->file_handle.val, &IoStatusBlock,
+					info, info_len, FileRenameInformation);
+
+				ZwClose(handle);
+			}
+
+			ObDereferenceObject(object);
+		}
 
         // FIXME, we may get STATUS_NOT_SAME_DEVICE, however, in most cases,
         // this API call is used to rename a file inside a folder, rather
@@ -1846,7 +1892,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         Mem_Free(info, info_len);
     }
 
-    ZwClose(dir_handle);
+    NtClose(dir_handle);
     Mem_Free(path, path_len);
     return status;
 }
@@ -2082,6 +2128,16 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
         memcpy(&proc->closed_file_paths,  &closed_paths,    sizeof(LIST));
         memcpy(&proc->read_file_paths,    &read_paths,      sizeof(LIST));
         memcpy(&proc->write_file_paths,   &write_paths,     sizeof(LIST));
+	}
+
+	//
+	// now we need to re block the internet access
+	//
+
+	if (ok)
+		ok = File_BlockInternetAccess(proc);
+
+	if (ok) {
 
         status = STATUS_SUCCESS;
 
@@ -2173,6 +2229,35 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
         DesiredAccess  = FILE_READ_ATTRIBUTES | SYNCHRONIZE;
         CreateOptions |= FILE_DIRECTORY_FILE;
     }
+
+    if (proc->file_trace & (TRACE_ALLOW | TRACE_DENY)) {
+
+        WCHAR access_str[48];
+        WCHAR letter;
+
+        if (is_closed && (proc->file_trace & TRACE_DENY))
+            letter = L'D';
+        else if (proc->file_trace & TRACE_ALLOW)
+            letter = L'A';
+        else
+            letter = 0;
+
+        if (letter) {
+
+            ULONG mon_type = MONITOR_FILE;
+            mon_type |= MONITOR_TRACE;
+
+            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+                letter, DesiredAccess,
+                0 & 0x0F, CreateOptions);
+            Log_Debug_Msg(mon_type, access_str, path);
+        }
+    }
+    else if (is_closed) {
+
+        Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, path, proc->pid);
+    }
+
 
     //
     // for a named pipe in the sandbox, use other parameters for the

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -75,7 +76,7 @@ protected:
     ULONG RefreshConf();
 
     bool GetIniPath(WCHAR **IniPath, WCHAR **TmpPath,
-                    BOOLEAN *IsHomePath = NULL);
+                    BOOLEAN *IsHomePath = NULL, BOOLEAN* IsUTF8 = NULL);
 
     bool TokenIsAdmin(HANDLE hToken);
 
@@ -97,7 +98,7 @@ protected:
     WCHAR *m_text, *m_text_base;
     ULONG m_text_max_len;
     WCHAR m_line[1500];
-    BOOLEAN m_insertbom;
+    //BOOLEAN m_insertbom;
     BOOLEAN m_admin;
     HANDLE m_hLockFile;
     ULONG m_session_id;

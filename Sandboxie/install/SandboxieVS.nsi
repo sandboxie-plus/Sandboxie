@@ -27,14 +27,24 @@ SetCompressor /SOLID /FINAL lzma
 ;----------------------------------------------------------------------------
 ; these are the build-time config settings.  Need to be cmd line args or something better.
 ; pick either 32 or 64 bit
-!define _BUILDARCH		Win32
+;!define _BUILDARCH		Win32
 ;!define _BUILDARCH		x64
+!define _BUILDARCH		"$%SBIE_BUILDARCH%"
+
 
 ; uncomment this line if you want to make the special versions that download VC Redist
 ;!define INCLUDE_VCREDIST_DNLD
 
 !define BIN_ROOT_BASE	"${SBIE_INSTALLER_PATH}"
 
+!if "${_BUILDARCH}" == "x64"
+    !define _W7DRV_COMPAT "$%SbieVer%.x64"
+!else
+    !define _W7DRV_COMPAT "$%SbieVer%.x86"
+!endif
+
+;!define SBIEDRV_SYS4    "${SBIEDRV_SYS}.rc4"
+;!define SBIEDRV_SYSX    "${SBIEDRV_SYS}.w10"
 
 !define OUTFILE_BOTH    "${PRODUCT_NAME}Install.exe"
 !define NAME_Win32      "${PRODUCT_FULL_NAME} ${VERSION} (32-bit)"
@@ -213,6 +223,7 @@ Var LaunchControl
 Var MustReboot
 Var BundledInstall
 Var DeleteSandboxieIni
+Var Win7Driver
 
 ;----------------------------------------------------------------------------
 ; macro InstallSystemDll
@@ -665,6 +676,40 @@ FunctionEnd
 
 Function InstallTypePage
 
+;
+; Provisional windows 7 support
+;
+    !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "'Software\Microsoft\Windows NT\CurrentVersion'" "CurrentVersion"
+    Pop $0
+    StrCmp $0 "6.0" w7_Drv_ask
+    StrCmp $0 "6.1" w7_Drv_ask
+    Goto w7_Skip
+
+w7_Drv_ask:
+
+    MessageBox MB_YESNO|MB_ICONQUESTION "Windows 7 requires a provisional driver package. You will have to download it from the GitHub release page https://github.com/sandboxie-plus/Sandboxie/releases/$\r$\nDo you have it downloaded?" IDYES w7_Drv_ok
+
+    MessageBox MB_YESNO|MB_ICONQUESTION "Do you want to open the download page in your default web browser?" IDNO w7_Drv_cancel
+    ExecShell "open" "https://github.com/sandboxie-plus/Sandboxie/releases/"
+    Goto w7_Drv_ok
+
+w7_Drv_cancel:
+    MessageBox MB_OK|MB_ICONSTOP "On windows 7 the install can not continue without the provisional driver package"
+
+    Quit
+
+w7_Drv_ok:
+
+    nsDialogs::SelectFileDialog open "" "Driver binary (*.${_W7DRV_COMPAT}.rc4)|*.${_W7DRV_COMPAT}.rc4|All Files|*.*"
+    
+    Pop $0
+    StrCmp $0 "" w7_Drv_cancel
+    StrCpy $Win7Driver $0
+
+;    MessageBox MB_OK $Win7Driver
+
+w7_Skip:
+
     StrCmp $InstallType "Install" InstallType_Done
     
     StrCmp $InstallType "Upgrade" InstallType_SetFolder
@@ -764,21 +809,21 @@ FunctionEnd
 ; We download various files during install just to keep stats on activity
 
 Function DownloadStatPng
-
-	Pop $0	; Get the parameter (file name to download)
-	${If} ${RunningX64}
-	SetRegView 64
-	${EndIf}
-	ReadRegStr $1 HKLM "SOFTWARE\Microsoft\Cryptography" "MachineGuid"
-	StrCpy $2 "https://www.sandboxie.com/img/$0?SessionId=$1"
-	
-	;NSISdl::download_quiet /TIMEOUT=3000 $2 $TEMP\$0
-	inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $2 $TEMP\$0 /END
-	Pop $0 ;Get the return value
-	;MessageBox MB_OK|MB_ICONSTOP "DownloadStatPng:  $2$\n$0"
-	${If} ${RunningX64}
-	SetRegView 32
-	${EndIf}
+;
+;	Pop $0	; Get the parameter (file name to download)
+;	${If} ${RunningX64}
+;	SetRegView 64
+;	${EndIf}
+;	ReadRegStr $1 HKLM "SOFTWARE\Microsoft\Cryptography" "MachineGuid"
+;	StrCpy $2 "https://www.sandboxie.com/img/$0?SessionId=$1"
+;	
+;	;NSISdl::download_quiet /TIMEOUT=3000 $2 $TEMP\$0
+;	inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $2 $TEMP\$0 /END
+;	Pop $0 ;Get the return value
+;	;MessageBox MB_OK|MB_ICONSTOP "DownloadStatPng:  $2$\n$0"
+;	${If} ${RunningX64}
+;	SetRegView 32
+;	${EndIf}
 FunctionEnd
 
 
@@ -968,6 +1013,10 @@ WriteLoop:
     File /oname=${SBIEMSG_DLL} "${BIN_ROOT}\SbieMsg.dll"
 
     File /oname=${SBIEDRV_SYS} "${BIN_ROOT}\SbieDrv.sys"
+;    File /oname=${SBIEDRV_SYS4} "${BIN_ROOT}\SbieDrv.sys.rc4"
+;    File /oname=${SBIEDRV_SYSX} "${BIN_ROOT}\SbieDrv.sys.w10"
+
+    File /oname=KmdUtil.exe "${BIN_ROOT}\KmdUtil.Exe"
 
     File /oname=SboxHostDll.dll			   "${BIN_ROOT}\SboxHostDll.dll"
     
@@ -1073,6 +1122,12 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SBIEMSG_DLL}"
 
     Delete "$INSTDIR\${SBIEDRV_SYS}"
+;    Delete "$INSTDIR\${SBIEDRV_SYS4}"
+;    Delete "$INSTDIR\${SBIEDRV_SYSX}"
+
+    Delete "$INSTDIR\KmdUtil.exe"
+
+    Delete "$INSTDIR\boxHostDll.dll"
 
     Delete "$INSTDIR\${SANDBOXIE}WUAU.exe"
     Delete "$INSTDIR\${SANDBOXIE}EventSys.exe"
@@ -1464,6 +1519,15 @@ Driver_Upgrade:
 ;
 
 Driver_Install:
+
+  StrCmp $Win7Driver "" now_w7_Drv
+
+;  MessageBox MB_OK $Win7Driver
+  Delete "$INSTDIR\SbieDrv.sys.w10"
+  Rename "$INSTDIR\SbieDrv.sys" "$INSTDIR\SbieDrv.sys.w10"
+  CopyFiles $Win7Driver "$INSTDIR\SbieDrv.sys.rc4"
+
+now_w7_Drv:
 
     Push "start ${SBIESVC}"
     Call KmdUtil

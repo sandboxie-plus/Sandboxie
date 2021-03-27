@@ -2799,7 +2799,7 @@ De følgende undtagelser tillader Web browsere, som kører i denne sandbox at la
 .
 
 4323;txt;01
-Tving %2 til at køre i denne sandbox (Kun i den registrerede version)
+Tving %2 til at køre i denne sandbox
 .
 
 4325;txt;02

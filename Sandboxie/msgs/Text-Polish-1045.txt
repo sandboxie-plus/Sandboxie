@@ -3027,7 +3027,7 @@ Następujące wykluczenia pozwalają przeglądarkom uruchomionym w piaskownicy w
 .
 
 4323;txt;01
-Wymuś uruchomienie %2 w tej piaskownicy (tylko wersja zarejestrowane)
+Wymuś uruchomienie %2 w tej piaskownicy
 .
 
 4324;txt;02

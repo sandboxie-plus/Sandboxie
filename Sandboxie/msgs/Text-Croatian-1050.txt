@@ -3084,7 +3084,7 @@ Sljedeće iznimke dozvoljavaju Web preglednicima pokrenutim u sandboxu da učine
 .
 
 4323;txt;01
-Forsiraj %2 da se pokreće u ovom sandboxu (samo u registriranoj verziji)
+Forsiraj %2 da se pokreće u ovom sandboxu
 .
 
 4324;txt;02

@@ -3065,7 +3065,7 @@ Les exclusions suivantes permettent au Navigateur Internet s'éxécutant dans ce
 .
 
 4323;txt;01
-Forcer %2 à s'executer dans cette sandbox (La version enregistrée seulement)
+Forcer %2 à s'executer dans cette sandbox
 .
 
 4324;txt;02

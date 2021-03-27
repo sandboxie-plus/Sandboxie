@@ -3040,7 +3040,7 @@ Aşağıdaki hariçlemeler sandbox içerisinde çalışan Web tarayıcılarına 
 .
 
 4323;txt;01
-%2 için sandbox'ta çalışmasını zorla (Sadece kayıtlı sürüm)
+%2 için sandbox'ta çalışmasını zorla
 .
 
 4324;txt;02

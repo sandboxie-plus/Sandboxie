@@ -3217,7 +3217,7 @@ De volgende uitsluitingen laten webbrowsers die in deze sandbox uitgevoerd worde
 .
 
 4323;txt;01
-%2 forceren om binnen deze sandbox uit te voeren (alleen geregistreerde versie)
+%2 forceren om binnen deze sandbox uit te voeren
 .
 
 4324;txt;02

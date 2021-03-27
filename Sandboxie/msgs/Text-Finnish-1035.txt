@@ -3093,7 +3093,7 @@ Seuraavat poikkeukset sallivat web-selaimen tehdä muutoksia tämän hiekkalaati
 .
 
 4323;txt;01
-Pakota %2 tähän hiekkalaatikkoon (vain rajoitettu versio)
+Pakota %2 tähän hiekkalaatikkoon
 .
 
 4324;txt;02

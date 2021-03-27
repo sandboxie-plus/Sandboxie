@@ -1041,6 +1041,20 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     info.WithLink = TRUE;
     info.WithCreate = FALSE;
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
+    
+    info.ClassName = L"MediaPlayer";
+    info.TitleId = MSG_4393;
+    info.LabelId = MSG_4394;
+    info.WithLink = FALSE;
+    info.WithCreate = FALSE;
+    m_app_pages.AddTail(new CAppPage(&info, BoxName));
+    
+    info.ClassName = L"TorrentClient";
+    info.TitleId = MSG_4396;
+    info.LabelId = MSG_4397;
+    info.WithLink = FALSE;
+    info.WithCreate = FALSE;
+    m_app_pages.AddTail(new CAppPage(&info, BoxName));
 
     info.ClassName = L"Download";
     info.TitleId = MSG_4230;

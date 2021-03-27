@@ -3288,6 +3288,22 @@ Email Reader
 The following exclusions allow Email readers running in this sandbox to access mailbox files outside the sandbox.
 .
 
+4393;txt;01
+Media Players
+.
+
+4394;txt;01
+The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+The following exclusions allow Torrent clients running in this sandbox access to files outside the sandbox.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------

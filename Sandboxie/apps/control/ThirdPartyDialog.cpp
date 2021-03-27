@@ -817,6 +817,7 @@ void CThirdPartyDialog::CollectTemplates()
     ini.GetTemplateNames(L"Download", names);
     ini.GetTemplateNames(L"Misc", names);
 	ini.GetTemplateNames(L"WebBrowser", names);
+    ini.GetTemplateNames(L"TorrentClient", names);
 
     m_templates.RemoveAll();
     while (! names.IsEmpty()) {

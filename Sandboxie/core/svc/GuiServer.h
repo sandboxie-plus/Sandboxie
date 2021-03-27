@@ -57,6 +57,8 @@ protected:
 
     static void ConsoleCallbackSlave(void *arg, BOOLEAN timeout);
 
+    static void DropConsoleIntegrity();
+
     static void AdjustConsoleTaskbarButton();
 
     static ULONG DdeProxyThreadSlave(void *xDdeArgs);
@@ -159,6 +161,10 @@ protected:
 
     ULONG GetRawInputDeviceInfoSlave(SlaveArgs* args);
 
+    ULONG WndHookNotifySlave(SlaveArgs* args);
+
+    ULONG WndHookRegisterSlave(SlaveArgs* args);
+
     //
     // window access check utilities
     //
@@ -196,6 +202,7 @@ protected:
     ULONG m_SessionId;
     ULONG m_nOSVersion;
 
+    LIST m_WndHooks;
 };
 
 

@@ -81,7 +81,7 @@ _FX BOOLEAN UserEnv_InitVer(HMODULE module)
     void* GetVersionExA;
 
     WCHAR str[32];
-    NTSTATUS status = Config_GetSettingsForImageName("OverrideOsBuild", str, sizeof(str), NULL);
+    NTSTATUS status = Config_GetSettingsForImageName(L"OverrideOsBuild", str, sizeof(str), NULL);
     if (NT_SUCCESS(status))
         UserEnv_dwBuildNumber = _wtoi(str);
 

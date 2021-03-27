@@ -2382,6 +2382,19 @@ RtlNtStatusToDosError(NTSTATUS Status);
 
 __declspec(dllimport) void __stdcall RtlRaiseStatus(NTSTATUS Status);
 
+__declspec(dllimport) PULONG __stdcall
+RtlSubAuthoritySid(
+    _In_ PSID Sid,
+    _In_ ULONG SubAuthority
+    );
+
+__declspec(dllimport) NTSTATUS __stdcall
+RtlInitializeSid(
+    _Out_ PSID Sid,
+    _In_ PSID_IDENTIFIER_AUTHORITY IdentifierAuthority,
+    _In_ UCHAR SubAuthorityCount
+    );
+
 //---------------------------------------------------------------------------
 
 //__declspec(dllimport) USHORT RtlCaptureStackBackTrace(

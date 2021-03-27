@@ -794,7 +794,9 @@ _FX void Process_NotifyProcess(
             // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
             //
 
-            Process_NotifyProcess_Create(ProcessId, PsGetCurrentProcessId(), NULL);
+            //DbgPrint("Process_NotifyProcess_Create pid=%d parent=%d current=%d\n", ProcessId, ParentId, PsGetCurrentProcessId());
+            
+            Process_NotifyProcess_Create(ProcessId, ParentId, PsGetCurrentProcessId(), NULL);
 
         } else {
 
@@ -810,7 +812,7 @@ _FX void Process_NotifyProcess(
 
 
 _FX void Process_NotifyProcess_Create(
-    HANDLE ProcessId, HANDLE ParentId, BOX *box)
+    HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, BOX *box)
 {
     void *nbuf1, *nbuf2;
     ULONG nlen1, nlen2;
@@ -873,7 +875,34 @@ _FX void Process_NotifyProcess_Create(
         BOOLEAN added_to_dfp_list = FALSE;
         BOOLEAN check_forced_program = FALSE;
 
-        PROCESS *parent_proc = Process_Find(ParentId, &irql);
+        //
+        // there are a couple of scenarios here
+        // a. CallerId == ParentId boring, all's fine
+        // b. Caller is sandboxed designated Parent is NOT sandboxed, 
+        //      possible sandbox escape atempt
+        // c. Caller is not sandboxed, designated Parent IS sandboxed, 
+        //      service trying to start something on the behalf of a sandboxed process 
+        //      eg. seclogon reacting to a runas request 
+        //      in which case the created process must be sandboxed to
+        //
+
+        PROCESS *parent_proc = Process_Find(CallerId, &irql);
+        if (!(parent_proc && !parent_proc->bHostInject) && CallerId != ParentId) {
+            
+            //
+            // release lock on process list
+            //
+
+            ExReleaseResourceLite(Process_ListLock);
+            KeLowerIrql(irql);
+
+            //
+            // Process_Find will lock process list again
+            //
+
+            parent_proc = Process_Find(ParentId, &irql);
+        }
+
         if (parent_proc && !parent_proc->bHostInject) {
 
             //

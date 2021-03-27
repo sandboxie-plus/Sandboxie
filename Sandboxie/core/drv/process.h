@@ -199,7 +199,7 @@ PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
 // Start supervising a new process
 
 void Process_NotifyProcess_Create(
-    HANDLE ProcessId, HANDLE ParentId, BOX *box);
+    HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, BOX *box);
 
 
 // Process_IsSameBox returns TRUE if the other process identified by

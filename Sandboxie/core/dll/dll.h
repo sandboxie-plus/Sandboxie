@@ -206,6 +206,8 @@ typedef struct _THREAD_DATA {
 
     ULONG           gui_create_window;
 
+    BOOLEAN         gui_hooks_installed;
+
     BOOL            gui_should_suppress_msgbox;
 
     //
@@ -762,6 +764,8 @@ BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
 
 NTSTATUS Config_GetSettingsForImageName(
     const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
+
+BOOLEAN Config_String2Bool(const WCHAR* value, BOOLEAN defval);
 
 BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);
 

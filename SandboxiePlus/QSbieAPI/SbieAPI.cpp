@@ -1052,6 +1052,11 @@ SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 	if (DeviceNames.contains(BoxName, Qt::CaseInsensitive))
 		return SB_ERR(SB_BadNameDev);
 
+	if(BoxName.compare("GlobalSettings", Qt::CaseInsensitive) == 0)
+		return SB_ERR(SB_BadNameDev);
+	if(BoxName.left(13).compare("UserSettings_", Qt::CaseInsensitive) == 0)
+		return SB_ERR(SB_BadNameDev);
+
 	if (BoxName.contains(QRegExp("[^A-Za-z0-9_]")))
 		return SB_ERR(SB_BadNameChar);
 
@@ -1145,8 +1150,8 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 		}
 	}
 
-	bool WasBoxClosed = pBox->m_ActiveProcessCount > 0 && boxed_pids[0] == 0;
-	pBox->m_ActiveProcessCount = boxed_pids[0];
+	bool WasBoxClosed = pBox->m_ActiveProcessCount > 0 && count == 0;
+	pBox->m_ActiveProcessCount = count;
 	if (WasBoxClosed) {
 		pBox->CloseBox();
 		emit BoxClosed(pBox->GetName());
@@ -1969,7 +1974,8 @@ QString CSbieAPI::GetSbieMsgStr(quint32 code, quint32 Lang)
 {
 	ULONG FormatFlags = FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER;
 	WCHAR* ret_str = NULL;
-	if (!m->SbieMsgDll || FormatMessage(FormatFlags, m->SbieMsgDll, code, Lang, (LPWSTR)&ret_str, 4, NULL) == 0)
+	if (!m->SbieMsgDll || (FormatMessage(FormatFlags, m->SbieMsgDll, code, Lang, (LPWSTR)&ret_str, 4, NULL) == 0
+						&& FormatMessage(FormatFlags, m->SbieMsgDll, code, 1033, (LPWSTR)&ret_str, 4, NULL) == 0))
 		return QString("SBIE%0: %1; %2").arg(code, 4, 10);
 	QString qStr = QString::fromWCharArray(ret_str);
 	LocalFree(ret_str);

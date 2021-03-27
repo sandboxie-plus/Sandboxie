@@ -94,6 +94,8 @@ private slots:
 	void OnFilterTemplates()		{ ShowTemplates(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
+	void OnAddTemplates();
+	void OnDelTemplates();
 
 	void OnTab();
 

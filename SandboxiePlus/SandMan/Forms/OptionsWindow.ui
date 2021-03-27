@@ -45,7 +45,7 @@
         <enum>QTabWidget::West</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>9</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -55,7 +55,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tab_3">
             <attribute name="title">
@@ -433,62 +433,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <widget class="QCheckBox" name="chkPrintToFile">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Allow the print spooler to print to files outside the sandbox</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="label_39">
-                 <property name="minimumSize">
-                  <size>
-                   <width>20</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockSpooler">
-                 <property name="text">
-                  <string>Block access to the printer spooler</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QLabel" name="label_18">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the system from sandboxed processes</string>
-                 </property>
-                 <property name="text">
-                  <string>Other restrictions</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="0">
+               <item row="7" column="0">
                 <spacer name="verticalSpacer_12">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -517,7 +462,41 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="2">
+               <item row="6" column="2">
+                <widget class="QCheckBox" name="chkOpenCredentials">
+                 <property name="text">
+                  <string>Open Windows Credentials Store</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkOpenProtectedStorage">
+                 <property name="text">
+                  <string>Open System Protected Storage</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QCheckBox" name="chkPrintToFile">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Allow the print spooler to print to files outside the sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockSpooler">
+                 <property name="text">
+                  <string>Block access to the printer spooler</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="2">
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -530,31 +509,38 @@
                  </property>
                 </spacer>
                </item>
-               <item row="5" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenProtectedStorage">
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_39">
+                 <property name="minimumSize">
+                  <size>
+                   <width>20</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>20</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>Open System Protected Storage</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="2">
-                <widget class="QCheckBox" name="chkOpenCredentials">
-                 <property name="text">
-                  <string>Open Windows Credentials Store</string>
+               <item row="4" column="0" colspan="2">
+                <widget class="QLabel" name="label_18">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
                  </property>
-                </widget>
-               </item>
-               <item row="8" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenBluetooth">
-                 <property name="text">
-                  <string>Allow access to Bluetooth</string>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
                  </property>
-                </widget>
-               </item>
-               <item row="7" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenSmartCard">
                  <property name="text">
-                  <string>Allow access to Smart Cards</string>
+                  <string>Other restrictions</string>
                  </property>
                 </widget>
                </item>
@@ -2047,9 +2033,6 @@ instead of &quot;*&quot;.</string>
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="2" column="0">
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="1" column="1">
-            <widget class="QComboBox" name="cmbCategories"/>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_6">
              <property name="text">
@@ -2060,6 +2043,9 @@ instead of &quot;*&quot;.</string>
              </property>
             </widget>
            </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="cmbCategories"/>
+           </item>
            <item row="1" column="2">
             <widget class="QLabel" name="label_15">
              <property name="text">
@@ -2067,10 +2053,47 @@ instead of &quot;*&quot;.</string>
              </property>
             </widget>
            </item>
+           <item row="2" column="4">
+            <widget class="QPushButton" name="btnAddTemplate">
+             <property name="text">
+              <string>Add Template</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="4">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>This list contains a large amount of sandbox compatibility enhancing templates</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="3">
             <widget class="QLineEdit" name="txtTemplates"/>
            </item>
-           <item row="2" column="0" colspan="4">
+           <item row="4" column="4">
+            <widget class="QPushButton" name="btnDelTemplate">
+             <property name="text">
+              <string>Remove Template</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <spacer name="verticalSpacer_20">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="0" rowspan="3" colspan="4">
             <widget class="QTreeWidget" name="treeTemplates">
              <property name="sortingEnabled">
               <bool>true</bool>
@@ -2085,16 +2108,6 @@ instead of &quot;*&quot;.</string>
                <string>Name</string>
               </property>
              </column>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="4">
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>This list contains a large amount of sandbox compatibility enhancing templates</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
             </widget>
            </item>
           </layout>

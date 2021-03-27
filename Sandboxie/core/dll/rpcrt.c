@@ -387,7 +387,7 @@ BOOLEAN RpcRt_TestCallingModule(ULONG_PTR pRetAddr, ULONG_PTR hModule)
 // RpcRt_FindModulePreset
 //---------------------------------------------------------------------------
 
-/*
+
 _FX NTSTATUS RpcRt_FindModulePreset(
     const WCHAR* CallingModule, const WCHAR* Identifier, WCHAR* value, ULONG value_size)
 {
@@ -428,8 +428,16 @@ _FX NTSTATUS RpcRt_FindModulePreset(
         }
         //test_value[test_len] = L'\0';
 
-        if (!Config_MatchImage(test_value, test_len, Identifier, 1))
-            continue;
+        if (*test_value == L'{') // is it a uuid?
+        {
+            if(_wcsnicmp(test_value + 1, Identifier, 36) != 0) // skip { and }
+                continue;
+        }
+        else if(*test_value && !(test_value[0] == L'*' && test_value[1] == L'\0')) // test only for non wildcards and non empty strings
+        {
+            if (!Config_MatchImage(test_value, test_len, Identifier, 1))
+                continue;
+        }
 
         wcscpy_s(value, value_size / sizeof(WCHAR), found_value);
         found_mode = mode;
@@ -438,7 +446,7 @@ _FX NTSTATUS RpcRt_FindModulePreset(
     if (found_mode == -1)
         return STATUS_NO_MORE_ENTRIES;
     return STATUS_SUCCESS;
-}*/
+}
 
 
 //---------------------------------------------------------------------------
@@ -602,11 +610,11 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
 
     ULONG_PTR pRetAddr = TlsData->rpc_caller ? TlsData->rpc_caller : (ULONG_PTR)_ReturnAddress();
 
-    WCHAR wstrPortName[DYNAMIC_PORT_NAME_CHARS];
+    WCHAR wstrPortName[MAX_PATH];
     memset(wstrPortName, 0, sizeof(wstrPortName));
 
     static const WCHAR* dynamicFalse = L"ncalrpc:[,Security=Impersonation Dynamic False]";
-    static const WCHAR* dynamicTrue = L"ncalrpc:[,Security=Impersonation Dynamic True]";
+    //static const WCHAR* dynamicTrue = L"ncalrpc:[,Security=Impersonation Dynamic True]";
 
     if (_wcsicmp(StringBinding, dynamicFalse) == 0) {
 
@@ -624,7 +632,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
             wcscat(wstrPortName, dynamicFalse + 9);
         }
     }
-    else if (_wcsicmp(StringBinding, L"ncalrpc:") == 0) {
+    /*else if (_wcsicmp(StringBinding, L"ncalrpc:") == 0) {
     
         WCHAR pwszEmpty[] = L"";
         WCHAR* pwszTempPortName = pwszEmpty;
@@ -666,7 +674,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         if (RpcRt_TestCallingModule(pRetAddr, pWINNSI)) {
             use_RpcMgmtSetComTimeout = FALSE;
         }
-    }
+    }*/
     else if (_wcsicmp(StringBinding, L"0497b57d-2e66-424f-a0c6-157cd5d41700@ncalrpc:") == 0) {
 
         ULONG_PTR pkernel32 = (ULONG_PTR)GetModuleHandle(L"kernel32.dll");
@@ -683,7 +691,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     WCHAR* CallingModule = Trace_FindModuleByAddress((void*)pRetAddr);
     if (CallingModule)
     {
-        /*WCHAR ModulePreset[256];
+        WCHAR ModulePreset[256];
         if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringBinding, ModulePreset, sizeof(ModulePreset)))) {
             
             WCHAR tagValue[96];
@@ -694,22 +702,24 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
                 if (pwszTempPortName == NULL)
                     return RPC_S_ACCESS_DENIED;
 
-                wcscpy(wstrPortName, L"ncalrpc:[");
-                wcscpy(wstrPortName + 9, pwszTempPortName);
-                wcscat(wstrPortName, L"]");
-                //wcscat(wstrPortName, dynamicFalse + 9);
+	            WCHAR* ptr = wcsstr(StringBinding, L":");
+	            if(ptr)
+	            {
+		            size_t len = ptr - StringBinding;
+		            wcsncpy(wstrPortName, StringBinding, len);
+		            wcscat(wstrPortName, L":[");
+		            wcscat(wstrPortName, pwszTempPortName);
+		            if(ptr[1] == L'[')
+			            wcscat(wstrPortName, ptr + 2);
+		            else
+			            wcscat(wstrPortName, L"]");
+	            }
+                // else error let it fail
             }
 
             if (Config_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), NULL, L','))
-            {
-                if (*tagValue == L'y' || *tagValue == L'Y')
-                    use_RpcMgmtSetComTimeout = TRUE;
-                else if (*tagValue == L'n' || *tagValue == L'N')
-                    use_RpcMgmtSetComTimeout = FALSE;
-            }
-        }*/
-
-        use_RpcMgmtSetComTimeout = SbieDll_GetBoolForStringFromList(CallingModule, NULL, L"UseRpcMgmtSetComTimeout", TRUE, use_RpcMgmtSetComTimeout);
+                use_RpcMgmtSetComTimeout = Config_String2Bool(tagValue, use_RpcMgmtSetComTimeout);
+        }
     }
 
 
@@ -792,7 +802,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
         Template->StringEndpoint = (unsigned short*)L"samss lpc";
     }
 
-    else if ( (memcmp(&Template->ObjectUuid, &EMPTY_UUID, sizeof(GUID)) == 0) &&
+    /*else if ( (memcmp(&Template->ObjectUuid, &EMPTY_UUID, sizeof(GUID)) == 0) &&
         RPC_PROTSEQ_LRPC == Template->ProtocolSequence &&
         !Template->StringEndpoint)
     {
@@ -817,38 +827,33 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
                 use_RpcMgmtSetComTimeout = TRUE;
             }
         }
-    }
+    }*/
+
+    RPC_WSTR   StringUuid;
+    __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);
 
     WCHAR* CallingModule = Trace_FindModuleByAddress((void*)pRetAddr);
     if (CallingModule)
     {
-        /*WCHAR ModulePreset[256];
+        WCHAR ModulePreset[256];
         if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringUuid, ModulePreset, sizeof(ModulePreset)))) {
             
             WCHAR tagValue[96];
-
             if (RPC_PROTSEQ_LRPC == Template->ProtocolSequence && !Template->StringEndpoint)
             {
                 if (Config_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), NULL, L','))
                 {
                     Template->StringEndpoint = GetDynamicLpcPortName(tagValue);
                 }
-                else if (Config_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), NULL, L','))
+                /*else if (Config_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), NULL, L','))
                 {
                     Template->StringEndpoint = (unsigned short*)...;
-                }
+                }*/
             }
 
             if (Config_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), NULL, L','))
-            {
-                if (*tagValue == L'y' || *tagValue == L'Y')
-                    use_RpcMgmtSetComTimeout = TRUE;
-                else if (*tagValue == L'n' || *tagValue == L'N')
-                    use_RpcMgmtSetComTimeout = FALSE;
-            }
-        }*/
-
-        use_RpcMgmtSetComTimeout = SbieDll_GetBoolForStringFromList(CallingModule, NULL, L"UseRpcMgmtSetComTimeout", TRUE, use_RpcMgmtSetComTimeout);
+                use_RpcMgmtSetComTimeout = Config_String2Bool(tagValue, use_RpcMgmtSetComTimeout);
+        }
     }
 
     RPC_STATUS  status;
@@ -859,19 +864,18 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
     if (SbieApi_QueryConf(NULL, L"IpcTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
     {
         WCHAR msg[512];
-        RPC_WSTR   StringUuid;
 
-        __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);
         //Sbie_snwprintf(msg, 512, L"SBIE p=%06d t=%06d RpcBindingCreateW Endpoint = '%s', UUID = %s, status = 0x%X\n", GetCurrentProcessId(), GetCurrentThreadId(),
         Sbie_snwprintf(msg, 512, L"Endpoint = '%s', UUID = %s, status = 0x%08X, timeout = %d, caller = '%s'", 
             Template && Template->StringEndpoint ? Template->StringEndpoint : L"null",
             StringUuid, status, use_RpcMgmtSetComTimeout,
             CallingModule ? CallingModule : L"unknown");
-        __sys_RpcStringFreeW(&StringUuid);
 
         //OutputDebugString(msg);
         SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
     }
+
+    __sys_RpcStringFreeW(&StringUuid);
 
     if (use_RpcMgmtSetComTimeout) __sys_RpcMgmtSetComTimeout(*Binding, RPC_C_BINDING_TIMEOUT);
     return status;

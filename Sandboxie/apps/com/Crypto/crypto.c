@@ -153,7 +153,7 @@ ALIGNED HANDLE my_CreateFileW(
     // prevent SBIE1313, dont even try to access the block devcie for raw reading
     //
 
-    if (_wcsnicmp(lpFileName, L"\\\\.\\PhysicalDrive", 17) == 0 && wcschr(lpFileName + 17, L'\\') == NULL) {
+    if (wcsnicmp(lpFileName, L"\\\\.\\PhysicalDrive", 17) == 0 && wcschr(lpFileName + 17, L'\\') == NULL) {
         if (dwDesiredAccess == GENERIC_READ)
             dwDesiredAccess = 0;
     }
@@ -168,7 +168,7 @@ ALIGNED HANDLE my_CreateFileW(
     if (CatRoot) { // L"C:\\WINDOWS\\system32\\CatRoot2\\{00000000-0000-0000-0000-000000000000}\\catdb"
         WCHAR win_dir[MAX_PATH + 64];
         GetWindowsDirectory(win_dir, MAX_PATH);
-        if (_wcsnicmp(win_dir, lpFileName, CatRoot - lpFileName) == 0) {
+        if (wcsnicmp(win_dir, lpFileName, CatRoot - lpFileName) == 0) {
             if (dwDesiredAccess == GENERIC_READ)
                 dwDesiredAccess |= GENERIC_WRITE;
         }

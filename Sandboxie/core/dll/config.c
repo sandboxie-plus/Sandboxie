@@ -251,6 +251,21 @@ _FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, UL
 
 
 //---------------------------------------------------------------------------
+// Config_String2Bool
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Config_String2Bool(const WCHAR* value, BOOLEAN defval)
+{
+    if (*value == L'y' || *value == L'Y')
+        return TRUE;
+    if (*value == L'n' || *value == L'N')
+        return FALSE;
+    return defval;
+}
+
+
+//---------------------------------------------------------------------------
 // Config_GetSettingsForImageName_bool
 //---------------------------------------------------------------------------
 
@@ -259,11 +274,7 @@ BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval
 {
     WCHAR value[16];
     Config_GetSettingsForImageName(setting, value, sizeof(value), NULL);
-    if (*value == L'y' || *value == L'Y')
-        return TRUE;
-    if (*value == L'n' || *value == L'N')
-        return FALSE;
-    return defval;
+    return Config_String2Bool(value, defval);
 }
 
 
@@ -481,7 +492,37 @@ BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WC
 
 
 //---------------------------------------------------------------------------
-// CheckStringInList
+// SbieDll_GetStringForStringList
+//---------------------------------------------------------------------------
+
+
+SBIEDLL_EXPORT BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size)
+{
+    WCHAR buf[CONF_LINE_LEN];
+    ULONG index = 0;
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        ++index;
+        if (NT_SUCCESS(status)) {
+            WCHAR* ptr = wcschr(buf, L',');
+            if (ptr) *ptr = L'\0';
+            if (_wcsicmp(buf, string) == 0) {
+                if (ptr++)
+                    wcscpy_s(value, value_size / sizeof(WCHAR), ptr);
+                else
+                    *value = L'\0';
+                return TRUE;
+            }
+        }
+        else if (status != STATUS_BUFFER_TOO_SMALL)
+            break;
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_CheckStringInList
 //---------------------------------------------------------------------------
 
 
@@ -505,35 +546,17 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 
 
 //---------------------------------------------------------------------------
-// CheckStringInList
+// SbieDll_GetBoolForStringFromList
 //---------------------------------------------------------------------------
 
 
-SBIEDLL_EXPORT BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+/*SBIEDLL_EXPORT BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
 {
-    WCHAR buf[128];
-    ULONG index = 0;
-    while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
-        ++index;
-        if (NT_SUCCESS(status)) {
-            WCHAR* ptr = wcschr(buf, L',');
-            if (ptr) *ptr = L'\0';
-            if (_wcsicmp(buf, string) == 0) {
-                if (ptr++) {
-                    if (*ptr == L'y' || *ptr == L'Y')
-                        return TRUE;
-                    if (*ptr == L'n' || *ptr == L'N')
-                        return FALSE;
-                }
-                return def_found;
-            }
-        }
-        else if (status != STATUS_BUFFER_TOO_SMALL)
-            break;
-    }
+    WCHAR buf[32];
+    if (SbieDll_GetStringForStringList(string, boxname, setting, buf, sizeof(buf)))
+        return Config_String2Bool(buf, def_found);
     return not_found;
-}
+}*/
 
 
 //---------------------------------------------------------------------------

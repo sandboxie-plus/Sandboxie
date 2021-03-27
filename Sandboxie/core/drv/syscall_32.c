@@ -162,8 +162,20 @@ _FX void *Syscall_GetServiceTable(void)
     if (ShadowTable)
         return ShadowTable;
 
+    // Hard Offset Dependency
+
     //Set flags2 offset
-    if (Driver_OsVersion > DRIVER_WINDOWS_XP) {
+    if (Driver_OsBuild > 21286) { // 21H2
+        
+        //
+        // on windows 21337 MSFT changed MmMapViewInSessionSpaceEx 
+        // so lets go with a known good value from 21286
+        // Flags2_Offset=248 MitigationFlags_Offset=1168 SignatureLevel_Offset=932 
+        //
+
+        Process_Flags2 = 0xF8;
+    }
+    else if (Driver_OsVersion > DRIVER_WINDOWS_XP) {
         Process_Flags1 = Syscall_GetProcessFlagsOffset();
         if (Process_Flags1 > 0x80 && Process_Flags1 < 0x500) {
             Process_Flags2 = Process_Flags1 - 4;

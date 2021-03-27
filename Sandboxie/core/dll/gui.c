@@ -248,7 +248,7 @@ static HWND Gui_CreateWindowExW(
     LPVOID lpParam);
 
 static BOOLEAN Gui_CanForwardMsg(
-    HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam/*, LRESULT* plResult*/);
 
 static LRESULT Gui_DefWindowProcA(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -559,7 +559,8 @@ _FX BOOLEAN Gui_Init2(void)
         SBIEDLL_HOOK_GUI(ConsoleControl);
     }
 
-    if (Gui_RenameClasses) {
+    //if (Gui_RenameClasses) {
+    if (! Dll_SkipHook(L"createwin")) {
 
         SBIEDLL_HOOK_GUI(CreateWindowExA);
         SBIEDLL_HOOK_GUI(CreateWindowExW);
@@ -1238,17 +1239,7 @@ _FX HWND Gui_CreateWindowExW(
     // note:  the desktop window was made accessible in early v4 builds
     // but this code is still here to handle any other parent windows
     //
-    /*//debug code
-    _asm {
-        nop
-        nop
-//HERE1:
-//      jmp HERE1
-        //int 3
-        nop
-        nop
-    }
-*/
+    
     if (Dll_ChromeSandbox) {
         dwStyle |= WS_CHILD;
         hWndParent = HWND_MESSAGE;
@@ -1267,7 +1258,10 @@ _FX HWND Gui_CreateWindowExW(
     else
         new_WindowName = lpWindowName;
 
-    clsnm = Gui_CreateClassNameW(lpClassName);
+    if (! Gui_RenameClasses)
+        clsnm = lpClassName;
+    else
+        clsnm = Gui_CreateClassNameW(lpClassName);
 
     if (hWndParent && (hWndParent != HWND_MESSAGE)
                             && (! __sys_IsWindow(hWndParent))) {
@@ -1284,7 +1278,10 @@ _FX HWND Gui_CreateWindowExW(
     ++TlsData->gui_create_window;
     if (TlsData->gui_create_window == 1) {
 
-        Gui_ApplyWinHooks(0);
+        if (!TlsData->gui_hooks_installed) {
+            Gui_NotifyWinHooks();
+            TlsData->gui_hooks_installed = TRUE;
+        }
 
         Taskbar_SetProcessAppUserModelId();
     }
@@ -1369,7 +1366,10 @@ _FX HWND Gui_CreateWindowExA(
     else
         new_WindowName = lpWindowName;
 
-    clsnm = Gui_CreateClassNameA(lpClassName);
+    if (! Gui_RenameClasses)
+        clsnm = lpClassName;
+    else
+        clsnm = Gui_CreateClassNameA(lpClassName);
 
     if (hWndParent && (hWndParent != HWND_MESSAGE)
                             && (! __sys_IsWindow(hWndParent))) {
@@ -1385,8 +1385,11 @@ _FX HWND Gui_CreateWindowExA(
 
     ++TlsData->gui_create_window;
     if (TlsData->gui_create_window == 1) {
-
-        Gui_ApplyWinHooks(0);
+        
+        if (!TlsData->gui_hooks_installed) {
+            Gui_NotifyWinHooks();
+            TlsData->gui_hooks_installed = TRUE;
+        }
 
         Taskbar_SetProcessAppUserModelId();
     }
@@ -1440,16 +1443,10 @@ _FX HWND Gui_CreateWindowExA(
 
 
 _FX BOOLEAN Gui_CanForwardMsg(
-    HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+    HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam/*, LRESULT* plResult*/)
 {
-    if (uMsg == WM_NULL) {
-
-        if (wParam == tzuk) {
-            Gui_ApplyWinHooks(lParam);
-            return FALSE;
-        }
-
-    } else if (uMsg == WM_DROPFILES) {
+    //*plResult = 0;
+    if (uMsg == WM_DROPFILES) {
 
         if (Ole_DoDragDrop(hWnd, wParam, lParam))
             return FALSE;
@@ -1486,8 +1483,8 @@ _FX LRESULT Gui_WindowProcW(
     THREAD_DATA * TlsData = Dll_GetTlsData(NULL);
     BOOLEAN bIgnore = FALSE;
 
-    if (! Gui_CanForwardMsg(hWnd, uMsg, wParam, lParam))
-        return 0;
+    if (! Gui_CanForwardMsg(hWnd, uMsg, wParam, lParam/*, &lResult*/))
+        return 0; //lResult;
 
     if (uMsg == WM_DDE_INITIATE)
         wParam = Gui_DDE_INITIATE_Received(hWnd, wParam);
@@ -1499,6 +1496,7 @@ _FX LRESULT Gui_WindowProcW(
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
     if (DLL_IMAGE_OFFICE_EXCEL == Dll_ImageType) {
+
         if (WM_RENDERFORMAT == uMsg)
         {
             TlsData = Dll_GetTlsData(NULL);
@@ -1513,7 +1511,6 @@ _FX LRESULT Gui_WindowProcW(
         if (!bIgnore)
         {
             lResult = __sys_CallWindowProcW(wndproc, hWnd, uMsg, wParam, new_lParam);
-
         }
         else
         {
@@ -1542,8 +1539,8 @@ _FX LRESULT Gui_WindowProcA(
     LRESULT lResult;
     LPARAM new_lParam;
 
-    if (! Gui_CanForwardMsg(hWnd, uMsg, wParam, lParam))
-        return 0;
+    if (! Gui_CanForwardMsg(hWnd, uMsg, wParam, lParam/*, &lResult*/))
+        return 0; //lResult;
 
     if (uMsg == WM_DDE_INITIATE)
         wParam = Gui_DDE_INITIATE_Received(hWnd, wParam);

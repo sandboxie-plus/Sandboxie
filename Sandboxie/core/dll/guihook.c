@@ -24,6 +24,7 @@
 
 #include "gui_p.h"
 #include "core/drv/api_flags.h"
+#include "core/svc/GuiWire.h"
 
 
 //---------------------------------------------------------------------------
@@ -85,8 +86,6 @@ static BOOLEAN Gui_HookThread(GUI_HOOK *ghk, ULONG_PTR idThread);
 
 static BOOL Gui_UnhookWindowsHookEx(HHOOK hhk);
 
-static BOOL Gui_HookNotifyThreads(HWND hwnd, LPARAM lParam);
-
 
 //---------------------------------------------------------------------------
 // Variables
@@ -95,7 +94,8 @@ static BOOL Gui_HookNotifyThreads(HWND hwnd, LPARAM lParam);
 
 static CRITICAL_SECTION Gui_HooksCritSec;
 static LIST Gui_Hooks;
-
+static DWORD Gui_HookHelperThreadId = 0;
+static int Gui_HookCount = 0;
 
 //---------------------------------------------------------------------------
 // Gui_InitWinHooks
@@ -176,7 +176,9 @@ _FX HHOOK Gui_SetWindowsHookExA(
 
     if (    idHook == WH_JOURNALRECORD || idHook == WH_JOURNALPLAYBACK ||
             idHook == WH_KEYBOARD_LL   || idHook == WH_MOUSE_LL        ||
-            Gui_IsThreadInThisProcess(dwThreadId)) {
+            //Gui_IsThreadInThisProcess(dwThreadId)
+            dwThreadId != 0 || hMod == NULL
+        ) {
 
         //
         // if this is a non-injecting hook, or if an injecting hook
@@ -225,11 +227,23 @@ _FX HHOOK Gui_SetWindowsHookExW(
     // hooked to block hooks which would inject dlls outside the sandbox.
     //
 
+    //
+    // the boxed "global" hook mechanism should only be used for global hooks
+    // using it for hooks that specify a thread ID like done in sbie 5.33.6 
+    // and earlier results in a non standard conform behavioure:
+    // the hook in handled as a global one and injectted into all processes.
+    //
+    // so we let the system handle hooks on a specified thread or once without 
+    // a dll module handle always as those are not global
+    //
+
     HHOOK hhook;
 
     if (    idHook == WH_JOURNALRECORD || idHook == WH_JOURNALPLAYBACK ||
             idHook == WH_KEYBOARD_LL   || idHook == WH_MOUSE_LL        ||
-            Gui_IsThreadInThisProcess(dwThreadId)) {
+            //Gui_IsThreadInThisProcess(dwThreadId)
+            dwThreadId != 0 || hMod == NULL
+        ) {
 
         if (idHook == WH_MOUSE_LL && Dll_ImageType == DLL_IMAGE_WISPTIS) {
 
@@ -257,6 +271,52 @@ _FX HHOOK Gui_SetWindowsHookExW(
     }
 
     return hhook;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_HookHelperProc
+//---------------------------------------------------------------------------
+
+
+ULONG CALLBACK Gui_HookHelperProc(LPVOID lpParam)
+{
+    //
+    // global hooks are turned into thread specific hooks and managed 
+    // by the service worker for each session, see GuiServer::WndHookNotifySlave
+    //
+    // whenever a window is created the service gets notified and instructs
+    // the hooking pocess to hook the window's thread this is done using QueueUserAPC
+    // targeting this helper thread, whenever a APC is scheduled the thread 
+    // will resume and execute it, it being Gui_NotifyWinHooksAPC
+    //
+
+    DWORD MyThreadId = Gui_HookHelperThreadId;
+    while (MyThreadId == Gui_HookHelperThreadId)
+        SleepEx(10, TRUE); // be in a waitable state for he APC's
+
+    return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_NotifyWinHooksAPC
+//---------------------------------------------------------------------------
+
+
+_FX VOID Gui_NotifyWinHooksAPC(ULONG_PTR idThread)
+{
+    GUI_HOOK *ghk;
+
+    EnterCriticalSection(&Gui_HooksCritSec);
+
+    ghk = List_Head(&Gui_Hooks);
+    while (ghk) {
+        Gui_HookThread(ghk, idThread);
+        ghk = List_Next(ghk);
+    }
+
+    LeaveCriticalSection(&Gui_HooksCritSec);
 }
 
 
@@ -313,10 +373,41 @@ _FX HHOOK Gui_SetWindowsHookEx(
 
     EnterCriticalSection(&Gui_HooksCritSec);
     List_Insert_After(&Gui_Hooks, NULL, ghk);
+    Gui_HookCount++;
+    if (Gui_HookHelperThreadId == 0) {
+        HANDLE HookHelperThread = CreateThread(NULL, 0, Gui_HookHelperProc, (LPVOID)0, CREATE_SUSPENDED, &Gui_HookHelperThreadId);
+        ResumeThread(HookHelperThread);
+        CloseHandle(HookHelperThread);
+    }
     LeaveCriticalSection(&Gui_HooksCritSec);
+
+    Gui_RegisterWinHook(Gui_HookHelperThreadId, (ULONG64)ghk);
 
     SetLastError(0);
     return (HHOOK)ghk;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_RegisterWinHook
+//---------------------------------------------------------------------------
+
+
+_FX LRESULT Gui_RegisterWinHook(DWORD dwThreadId, ULONG64 ghk)
+{
+    GUI_WND_HOOK_REGISTER_REQ req;
+    GUI_WND_HOOK_REGISTER_RPL* rpl;
+
+    req.msgid = GUI_WND_HOOK_REGISTER;
+    req.hthread = dwThreadId;
+    req.hproc = dwThreadId ? (ULONG64)&Gui_NotifyWinHooksAPC : 0ull;
+    req.hhook = ghk;
+
+    rpl = Gui_CallProxy(&req, sizeof(req), sizeof(*rpl));
+    if (rpl)
+        Dll_Free(rpl);
+
+    return 0;
 }
 
 
@@ -495,7 +586,12 @@ _FX BOOL Gui_UnhookWindowsHookEx(HHOOK hhk)
 
     EnterCriticalSection(&Gui_HooksCritSec);
     List_Remove(&Gui_Hooks, ghk);
+    Gui_HookCount--;
+    if (Gui_HookCount <= 0)
+        Gui_HookHelperThreadId = 0;
     LeaveCriticalSection(&Gui_HooksCritSec);
+
+    Gui_RegisterWinHook(0, (ULONG64)ghk);
 
     EnterCriticalSection(&ghk->crit);
 
@@ -516,68 +612,22 @@ _FX BOOL Gui_UnhookWindowsHookEx(HHOOK hhk)
 
 
 //---------------------------------------------------------------------------
-// Gui_ApplyWinHooks
+// Gui_NotifyWinHooks
 //---------------------------------------------------------------------------
 
 
-_FX LRESULT Gui_ApplyWinHooks(ULONG_PTR idThread)
+_FX LRESULT Gui_NotifyWinHooks()
 {
-    if (idThread) {
+    GUI_WND_HOOK_NOTIFY_REQ req;
+    GUI_WND_HOOK_NOTIFY_RPL *rpl;
 
-        //
-        // receive side
-        //
-
-        GUI_HOOK *ghk;
-
-        EnterCriticalSection(&Gui_HooksCritSec);
-
-        ghk = List_Head(&Gui_Hooks);
-        while (ghk) {
-            Gui_HookThread(ghk, idThread);
-            ghk = List_Next(ghk);
-        }
-
-        LeaveCriticalSection(&Gui_HooksCritSec);
-
-    } else {
-
-        //
-        // sending side
-        //
-
-        if (__sys_EnumWindows) {
-            __sys_EnumWindows(
-                    Gui_HookNotifyThreads, (LPARAM)GetCurrentThreadId());
-        } else
-            Gui_EnumWindows(Gui_HookNotifyThreads, (LPARAM)GetCurrentThreadId());
-    }
+    req.msgid = GUI_WND_HOOK_NOTIFY;
+    req.threadid = GetCurrentThreadId();
+        
+    rpl = Gui_CallProxy(&req, sizeof(req), sizeof(*rpl));
+    if (rpl)
+        Dll_Free(rpl);
 
     return 0;
 }
 
-
-//---------------------------------------------------------------------------
-// Gui_HookNotifyThreads
-//---------------------------------------------------------------------------
-
-
-_FX BOOL Gui_HookNotifyThreads(HWND hwnd, LPARAM lParam)
-{
-    LONG_PTR idProcess, idThread;
-
-    if (Gui_IsSameBox(hwnd, &idProcess, &idThread)) {
-
-        //
-        // we don't post to ourselves because it isn't necessary
-        // (any psuedo-global hooks set up by our own thread, would have
-        // already hooked our own thread at the time of SetWindowsHook),
-        // and also because it causes some programs to go into a loop
-        //
-
-        if (idThread != lParam)
-            __sys_PostMessageW(hwnd, WM_NULL, tzuk, lParam);
-    }
-
-    return TRUE;
-}

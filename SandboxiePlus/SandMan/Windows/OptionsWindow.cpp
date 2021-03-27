@@ -164,8 +164,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
-	connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
-	connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	//connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	//connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyLimit, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -304,6 +304,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.txtTemplates, SIGNAL(textChanged(const QString&)), this, SLOT(OnFilterTemplates()));
 	connect(ui.treeTemplates, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeTemplates, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
+	connect(ui.btnAddTemplate, SIGNAL(clicked(bool)), this, SLOT(OnAddTemplates()));
+	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
 	//
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
@@ -444,8 +446,8 @@ void COptionsWindow::LoadConfig()
 		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 		ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 		ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
-		ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
-		ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
+		//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
+		//ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
 
 		ui.treeAutoStart->clear();
 		foreach(const QString & Value, m_pBox->GetTextList("StartProgram", m_Template))
@@ -617,8 +619,8 @@ void COptionsWindow::SaveConfig()
 		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
 		if (ui.chkOpenCredentials->isEnabled())
 			WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
-		WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
-		WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
+		//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
+		//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
 
 
 		QStringList StartProgram;
@@ -751,7 +753,7 @@ void COptionsWindow::SaveConfig()
 
 void COptionsWindow::apply()
 {
-	if (m_pBox->GetText("Enabled").isEmpty()) {
+	if (m_pBox->GetText("Enabled").isEmpty() && !(m_Template && m_pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) == 0)) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("This sandbox has been deleted hence configuration can not be saved."));
 		return;
 	}
@@ -2092,7 +2094,7 @@ void COptionsWindow::OnDelUser()
 void COptionsWindow::LoadTemplates()
 {
 	m_AllTemplates.clear();
-	ui.cmbCategories->clear();
+	//ui.cmbCategories->clear();
 
 	QStringList Templates;
 	for (int index = 0; ; index++)
@@ -2119,7 +2121,7 @@ void COptionsWindow::LoadTemplates()
 			int End = Title.mid(1).indexOf(",");
 			if (End == -1) End = Title.length() - 1;
 			int MsgNum = Title.mid(1, End).toInt();
-			Title = theAPI->GetSbieMsgStr(MsgNum, theGUI->m_LanguageId).arg(Title.mid(End + 2)).arg("");
+			Title = m_pBox->GetAPI()->GetSbieMsgStr(MsgNum, theGUI->m_LanguageId).arg(Title.mid(End + 2)).arg("");
 		}
 		if (Title.isEmpty()) Title = Name;
 		//else Title += " (" + Name + ")";
@@ -2129,13 +2131,16 @@ void COptionsWindow::LoadTemplates()
 		m_AllTemplates.insertMulti(Category, qMakePair(Name, Title));
 	}
 	
-	ui.cmbCategories->addItem(tr("All Categories"), "");
-	ui.cmbCategories->setCurrentIndex(0);
-	foreach(const QString& Category, m_AllTemplates.uniqueKeys())
+	if (ui.cmbCategories->count() == 0)
 	{
-		if (Category.isEmpty()) 
-			continue;
-		ui.cmbCategories->addItem(Category, Category);
+		ui.cmbCategories->addItem(tr("All Categories"), "");
+		ui.cmbCategories->setCurrentIndex(0);
+		foreach(const QString & Category, m_AllTemplates.uniqueKeys())
+		{
+			if (Category.isEmpty())
+				continue;
+			ui.cmbCategories->addItem(Category, Category);
+		}
 	}
 
 	m_GlobalTemplates = m_pBox->GetAPI()->GetGlobalSettings()->GetTextList("Template", false);
@@ -2203,8 +2208,54 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 {
 	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni(pItem->data(1, Qt::UserRole).toString(), m_pBox->GetAPI()));
 
-	COptionsWindow* pOptionsWindow = new COptionsWindow(pTemplate, pItem->text(1));
-	pOptionsWindow->show();
+	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
+	OptionsWindow.exec();
+
+	if(pItem->text(0) == "Local")
+		LoadTemplates();
+}
+
+void COptionsWindow::OnAddTemplates()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the template identifier"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	QString Name = QString(Value).replace(" ", "_");
+
+	SB_STATUS Status = m_pBox->GetAPI()->ValidateName(Name);
+	if (Status.IsError()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Error: %1").arg(CSandMan::FormatError(Status)));
+		return;
+	}
+
+	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_Local_" + Name, m_pBox->GetAPI()));
+
+	pTemplate->SetText("Tmpl.Title", Value);
+	pTemplate->SetText("Tmpl.Class", "Local");
+
+	COptionsWindow OptionsWindow(pTemplate, Value);
+	OptionsWindow.exec();
+
+	LoadTemplates();
+}
+
+void COptionsWindow::OnDelTemplates()
+{
+	QTreeWidgetItem* pItem = ui.treeTemplates->currentItem();
+	if (!pItem || pItem->text(0) != "Local")
+	{
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Only local templates can be removed!"));
+		return;
+	}
+
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected local template?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		return;
+
+	// delete section
+	m_pBox->GetAPI()->SbieIniSet(pItem->data(1, Qt::UserRole).toString(), "*", "");
+
+	LoadTemplates();
 }
 
 void COptionsWindow::SaveTemplates()

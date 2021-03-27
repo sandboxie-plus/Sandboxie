@@ -61,6 +61,8 @@ enum {
     GUI_GET_CLIPBOARD_METAFILE,
     GUI_REMOVE_HOST_WINDOW,
     GUI_GET_RAW_INPUT_DEVICE_INFO,
+    GUI_WND_HOOK_NOTIFY,
+    GUI_WND_HOOK_REGISTER,
     GUI_MAX_REQUEST_CODE
 };
 
@@ -705,6 +707,48 @@ struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL
 
 typedef struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ GUI_GET_RAW_INPUT_DEVICE_INFO_REQ;
 typedef struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL GUI_GET_RAW_INPUT_DEVICE_INFO_RPL;
+
+
+//---------------------------------------------------------------------------
+// Notify the service of a window creation and set global hooks
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_WND_HOOK_NOTIFY_REQ
+{
+    ULONG msgid;
+    DWORD threadid;
+};
+
+struct tagGUI_WND_HOOK_NOTIFY_RPL
+{
+    ULONG status;
+};
+
+typedef struct tagGUI_WND_HOOK_NOTIFY_REQ GUI_WND_HOOK_NOTIFY_REQ;
+typedef struct tagGUI_WND_HOOK_NOTIFY_RPL GUI_WND_HOOK_NOTIFY_RPL;
+
+
+//---------------------------------------------------------------------------
+// Register and unregister global hooks
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_WND_HOOK_REGISTER_REQ
+{
+    ULONG msgid;
+    DWORD hthread;
+    ULONG64 hproc;
+    ULONG64 hhook;
+};
+
+struct tagGUI_WND_HOOK_REGISTER_RPL
+{
+    ULONG status;
+};
+
+typedef struct tagGUI_WND_HOOK_REGISTER_REQ GUI_WND_HOOK_REGISTER_REQ;
+typedef struct tagGUI_WND_HOOK_REGISTER_RPL GUI_WND_HOOK_REGISTER_RPL;
 
 //---------------------------------------------------------------------------
 

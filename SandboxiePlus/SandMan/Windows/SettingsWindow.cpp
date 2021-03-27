@@ -365,7 +365,7 @@ void CSettingsWindow::OnTab()
 		}
 
 		m_CompatLoaded = 1;
-		m_CompatChanged = false;
+		m_CompatChanged = true;
 	}
 }
 

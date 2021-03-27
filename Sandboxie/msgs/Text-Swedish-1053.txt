@@ -2919,7 +2919,7 @@ Följande undantag tillåter webbläsare i sandlådan att göra ändringar utanf
 .
 
 4323;txt;01
-Tvinga %2 att köra i denna sandlåda (bara i betalversionen av Sandboxie)
+Tvinga %2 att köra i denna sandlåda
 .
 
 4325;txt;02

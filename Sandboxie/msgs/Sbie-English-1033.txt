@@ -3296,12 +3296,16 @@ Media Players
 The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
 .
 
+4395;txt;01
+Allow %2 direct access to the Photo folder for easier screen capture.
+.
+
 4396;txt;01
 Torrent Clients
 .
 
 4397;txt;01
-The following exclusions allow Torrent clients running in this sandbox access to files outside the sandbox.
+The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
 .
 
 #----------------------------------------------------------------------------

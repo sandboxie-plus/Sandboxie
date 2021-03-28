@@ -30,6 +30,7 @@ Open Source release
 - hg421 - Security analysis 
 - typpos - UI suggestions / Documentation / Code reviews
 - isaak654 - UI fixes / Templates / Documentation
+- Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - mpheath - Help with Inno Setup installer

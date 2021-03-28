@@ -2375,7 +2375,7 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>Quando viene richiamata la funzione di Recupero veloce, verrà analizzato il contenuto dell&apos;area virtuale delle seguenti cartelle. </translation>
+        <translation>Quando viene richiamata la funzione di Recupero veloce, verrà analizzato il contenuto delle seguenti cartelle nell&apos;area virtuale. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1479"/>

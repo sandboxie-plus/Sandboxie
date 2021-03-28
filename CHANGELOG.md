@@ -36,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed process-specific hooks being applied to all processes in a given sandbox
-- fixed issue with messages and templates sometimes not being properly displayed in the sandman ui
+- fixed issue with messages and templates sometimes not being properly displayed in the SandMan UI
 - fixed issue with compatibility settings not being applied properly
 - fixed auto delete issue that got introduced with 0.7.1
 - fixed issue with NtSetInformationFile, FileDispositionInformation resulting in Opera installer failing

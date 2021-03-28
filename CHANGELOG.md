@@ -20,34 +20,34 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
 ### Added
-- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only for firefox and chrome
-- added option to drop the console host process integrity use "DropConHostIntegrity=y"
+- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only for Firefox and Chrome
+- added option to drop the console host process integrity, now you can use "DropConHostIntegrity=y"
 - added option to easily add local templates
 
 ### Changed
-- reworked wnd hookign mechanism to improve performance
+- reworked window hooking mechanism to improve performance
 -- resolves issues with file save dialogs taking 30+ sec to open
--- this fix  grately improves the win32 GUI proformance of sandboxes processes
+-- this fix greatly improves the win32 GUI performance of sandboxed processes
 - reworked RPC resolver to be ini configurable
--- the folowing options are now deprecated:
---- "UseRpcMgmtSetComTimeout=some.dll,n", use "RpcPortBinding=some.dll,*,TimeOut=y"
+-- the following options are now deprecated:
+--- "UseRpcMgmtSetComTimeout=some.dll,n", so use "RpcPortBinding=some.dll,*,TimeOut=y"
 --- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n" use the new templates instead
 -- See the Templates.ini for usage examples
 
 ### Fixed
-- fixed process specific hooks being applyed to all processes in a given sandbox
+- fixed process-specific hooks being applied to all processes in a given sandbox
 - fixed issue with messages and templates sometimes not being properly displayed in the sandman ui
-- fixed issue with compatybility settings not being applyed properly
+- fixed issue with compatibility settings not being applied properly
 - fixed auto delete issue that got introduced with 0.7.1
-- fixed issue with NtSetInformationFile, FileDispositionInformation resulting in opera instaler failing
-- fixed issue with mac type introduced in the 0.7.2 build
-- fixed global sandboxed windows hooks dont work when window rename is disabled
-- fixed issue saving local templates
-- fixed when using runas to start a process it was created outside fo the supervision of sandboxie
+- fixed issue with NtSetInformationFile, FileDispositionInformation resulting in Opera installer failing
+- fixed issue with MacType introduced in the 0.7.2 build
+- fixed global sandboxed windows hooks not working when window rename option is disabled
+- fixed issue with saving local templates
+- fixed issue when using runas to start a process that was created outside of the Sandboxie supervision
 -- since the runas facility is not accessible by default, this did not constitute a security issue
--- to enable runas functionality add "OpenIpcPath=\RPC Control\SECLOGON" to your sandboxie ini
--- please take note that doing so may open other yet unknown issus
-- fixed driver compatybility issue with windows 10 32 bit insider build 21337
+-- to enable runas functionality, add "OpenIpcPath=\RPC Control\SECLOGON" to your Sandboxie.ini
+-- please take note that doing so may open other yet unknown issues
+- fixed a driver compatibility issue with Windows 10 32 bit Insider Preview Build 21337
 
 
 

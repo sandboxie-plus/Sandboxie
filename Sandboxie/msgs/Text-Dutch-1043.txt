@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons  Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-02-26
+#  Latest update by RockyTDR on 2021-03-29
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -3290,6 +3290,26 @@ E-mailprogramma
 
 4392;txt;01
 De volgende uitsluitingen laten e-mailprogramma's die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot mailboxbestanden buiten de sandbox.
+.
+
+4393;txt;01
+Mediaspelers
+.
+
+4394;txt;01
+De volgende uitsluitingen laten mediaspelers die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot bestanden buiten de sandbox.
+.
+
+4395;txt;01
+%2 directe toegang toestaan tot de foto-map voor eenvoudigere schermopname.
+.
+
+4396;txt;01
+Torrent-clients
+.
+
+4397;txt;01
+De volgende uitsluitingen laten torrent-clients die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot bestanden buiten de sandbox.
 .
 
 #----------------------------------------------------------------------------

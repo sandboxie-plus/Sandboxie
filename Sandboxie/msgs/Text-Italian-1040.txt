@@ -3124,6 +3124,26 @@ Programmi di posta elettronica
 Le seguenti esclusioni consentiranno ai programmi di posta elettronica in esecuzione in questa area virtuale di accedere ai file della casella di posta elettronica all'esterno dell'area virtuale.
 .
 
+4393;txt;01
+Lettori multimediali
+.
+
+4394;txt;01
+Le seguenti esclusioni consentiranno ai lettori multimediali in esecuzione in questa area virtuale di accedere ai file all'esterno dell'area virtuale.
+.
+
+4395;txt;01
+Consenti l'accesso diretto di %2 alla cartella Immagini per la funzione di cattura dello schermo.
+.
+
+4396;txt;01
+Client Torrent
+.
+
+4397;txt;01
+Le seguenti esclusioni consentiranno ai client Torrent in esecuzione in questa area virtuale di accedere ai file all'esterno dell'area virtuale.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------

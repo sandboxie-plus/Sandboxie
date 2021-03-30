@@ -1703,7 +1703,7 @@ void CSandMan::OnUpdateCheck()
 			//	'sha256'
 			//	'signature'
 
-			QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(Version) : UpdateMsg;
+			QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
 			if (!DownloadUrl.isEmpty())
 				FullMessage += tr("<p>Do you want to download the latest version?</p>");
 			else if (!UpdateUrl.isEmpty())

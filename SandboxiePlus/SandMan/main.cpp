@@ -4,7 +4,7 @@
 #include "../QSbieAPI/SbieAPI.h"
 #include "../QtSingleApp/src/qtsingleapplication.h"
 #include "../QSbieAPI/SbieUtils.h"
-#include "../MiscHelpers/Common/qRC4.h"
+//#include "../MiscHelpers/Common/qRC4.h"
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
 

@@ -49,23 +49,10 @@ ULONG DriverAssist::StartDriverAsync(void *arg)
     // get windows version
     //
 
-    OSVERSIONINFOW osvi;
+    OSVERSIONINFO osvi;
     memzero(&osvi, sizeof(osvi));
-    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
-	NTSTATUS(WINAPI *RtlGetVersion)(LPOSVERSIONINFOW);
-	*(FARPROC*)&RtlGetVersion = GetProcAddress(GetModuleHandleA("ntdll.dll"), "RtlGetVersion");
-	if (RtlGetVersion == NULL || !NT_SUCCESS(RtlGetVersion(&osvi)))
-		GetVersionExW(&osvi);
-
-    //
-    // get own path
-    //
-
-	WCHAR svcPath[MAX_PATH] = { 0 };
-	GetModuleFileName(NULL, svcPath, MAX_PATH);
-	WCHAR* pathPtr = wcsrchr(svcPath, L'\\');
-	if (pathPtr++)
-		*pathPtr = L'\0';
+    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+    GetVersionEx(&osvi);
 
     //
     // start the driver, but only if it isn't already active
@@ -89,132 +76,46 @@ ULONG DriverAssist::StartDriverAsync(void *arg)
         L"\\Registry\\Machine\\System\\CurrentControlSet"
         L"\\Services\\" SBIEDRV);
 
-	//while (!IsDebuggerPresent())
-	//	Sleep(100);
+    rc = NtLoadDriver(&uni);
+    if (rc == 0 || rc == STATUS_IMAGE_ALREADY_LOADED) {
+        ok = true;
+        goto driver_started;
+    }
 
-	m_instance->LogMessage_Single(MSG_2201, L"Starting Driver...");
+    if (rc != STATUS_PRIVILEGE_NOT_HELD || rc == STATUS_ACCESS_DENIED) {
+        LogEvent(MSG_9234, 0x9153, rc);
+        goto driver_started;
+    }
 
-	bool PrivilegeSet = false;
-	bool CopyDriver = false;
-	bool DriverUnPacked = false;
-	for (; ; ) //for (int i = 0; i < 10; i++) 
-	{
-		m_instance->LogMessage_Single(MSG_2201, L"Attempting to Load Driver...");
+    //
+    // we have to enable a privilege to load the driver
+    //
 
-		rc = NtLoadDriver(&uni);
-		if (rc == 0 || rc == STATUS_IMAGE_ALREADY_LOADED) {
-			ok = true;
-			break;
-		}
+    WCHAR priv_space[64];
+    TOKEN_PRIVILEGES *privs = (TOKEN_PRIVILEGES *)priv_space;
+    HANDLE hToken;
 
-		if (rc == STATUS_PRIVILEGE_NOT_HELD && !PrivilegeSet)
-		{
-			m_instance->LogMessage_Single(MSG_2201, L"Acquiring necessary privileges...");
+    BOOL b = LookupPrivilegeValue(
+                L"", SE_LOAD_DRIVER_NAME, &privs->Privileges[0].Luid);
+    if (b) {
 
-			//
-			// we have to enable a privilege to load the driver
-			//
+        privs->Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+        privs->PrivilegeCount = 1;
 
-			WCHAR priv_space[64];
-			TOKEN_PRIVILEGES *privs = (TOKEN_PRIVILEGES *)priv_space;
-			HANDLE hToken;
+        b = OpenProcessToken(
+                GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES, &hToken);
+        if (b) {
 
-			BOOL b = LookupPrivilegeValue(
-				L"", SE_LOAD_DRIVER_NAME, &privs->Privileges[0].Luid);
-			if (b) {
+            b = AdjustTokenPrivileges(hToken, FALSE, privs, 0, NULL, NULL);
+            CloseHandle(hToken);
+        }
+    }
 
-				privs->Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-				privs->PrivilegeCount = 1;
-
-				b = OpenProcessToken(
-					GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES, &hToken);
-				if (b) {
-
-					b = AdjustTokenPrivileges(hToken, FALSE, privs, 0, NULL, NULL);
-					CloseHandle(hToken);
-				}
-			}
-
-			PrivilegeSet = true;
-			continue;
-		}
-
-		/*if (rc == STATUS_OBJECT_NAME_NOT_FOUND && DriverUnPacked)
-		{
-			m_instance->LogMessage_Single(MSG_2201, L"The provisionally driver got deleted...");
-
-			//
-			// The provisionally signed driver got deleted, try to restore it
-			//
-
-			DriverUnPacked = false;
-			rc == STATUS_INVALID_IMAGE_HASH;
-		}*/
-
-		if (rc == STATUS_OBJECT_NAME_NOT_FOUND && !CopyDriver)
-		{
-			m_instance->LogMessage_Single(MSG_2201, L"Preparing the windows 10 signed driver...");
-
-			//
-			// there is no driver file we have to prepare one
-			//
-
-			WCHAR srcPath[MAX_PATH];
-			wcscpy(srcPath, svcPath);
-			wcscat(srcPath, SBIEDRV_SYS L".w10");
-
-			WCHAR destPath[MAX_PATH];
-			wcscpy(destPath, svcPath);
-			wcscat(destPath, SBIEDRV_SYS);
-
-			CopyFile(srcPath, destPath, FALSE);
-
-			CopyDriver = true;
-			continue;
-		}
-
-		if (rc == STATUS_INVALID_IMAGE_HASH && !DriverUnPacked)
-		{
-			m_instance->LogMessage_Single(MSG_2201, L"Preparing the provisionally signed driver...");
-
-			//
-			// the driver signature was not accepted, try the provisionally signed driver
-			//
-
-			WCHAR cmd[512];
-			wcscpy(cmd, L"\"");
-			wcscat(cmd, svcPath);
-			wcscat(cmd, L"KmdUtil.exe");
-			wcscat(cmd, L"\" rc4 \"");
-			wcscat(cmd, svcPath);
-			wcscat(cmd, SBIEDRV_SYS L".rc4");
-			wcscat(cmd, L"\"");
-
-			STARTUPINFO si;
-			ZeroMemory(&si, sizeof(STARTUPINFO));
-			si.cb = sizeof(STARTUPINFO);
-			si.dwFlags = STARTF_FORCEOFFFEEDBACK;
-
-			PROCESS_INFORMATION pi;
-			if (CreateProcess(NULL, cmd, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
-
-				WaitForSingleObject(pi.hProcess, 10 * 1000);
-
-				CloseHandle(pi.hThread);
-				CloseHandle(pi.hProcess);
-			}
-
-			DriverUnPacked = true;
-			continue;
-		}
-
-		//
-		// we tryed all we could, log an error and break
-		//
-
-		LogEvent(MSG_9234, 0x9153, rc);
-		break;
-	}
+    rc = NtLoadDriver(&uni);
+    if (rc == 0 || rc == STATUS_IMAGE_ALREADY_LOADED)
+        ok = true;
+    else
+        LogEvent(MSG_9234, 0x9153, rc);
 
     //
     // the driver has been started (or was started already), check

@@ -48,6 +48,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- to enable runas functionality, add "OpenIpcPath=\RPC Control\SECLOGON" to your Sandboxie.ini
 -- please take note that doing so may open other yet unknown issues
 - fixed a driver compatibility issue with Windows 10 32 bit Insider Preview Build 21337
+- fixed issues with driver signature for windows 7
 
 
 

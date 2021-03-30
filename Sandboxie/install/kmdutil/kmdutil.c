@@ -757,7 +757,6 @@ int __stdcall WinMain(
     if (Command == CMD_STOP)
         ok = Kmd_Stop_Service(Driver_Name);
 
-exit:
     if (! ok)
         return EXIT_FAILURE;
 

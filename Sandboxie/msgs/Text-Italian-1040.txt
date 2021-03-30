@@ -3144,6 +3144,10 @@ Client Torrent
 Le seguenti esclusioni consentiranno ai client Torrent in esecuzione in questa area virtuale di accedere ai file all'esterno dell'area virtuale.
 .
 
+4398;txt;01
+Consenti l'accesso diretto di %2 alla cartella Musica per la gestione della libreria musicale.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------

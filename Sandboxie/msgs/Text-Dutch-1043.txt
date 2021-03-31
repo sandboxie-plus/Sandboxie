@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons  Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-02-26
+#  Latest update by RockyTDR on 2021-03-30
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -1559,7 +1559,7 @@ Controleren op updates
 .
 
 3622;txt;01
-Met de Sandboxie-website verbinden om te controleren of er een nieuwere versie van het programma beschikbaar is?
+Verbinden met de Sandboxie-website om te controleren of er een nieuwere versie beschikbaar is?
 .
 
 3623;txt;01
@@ -3292,6 +3292,26 @@ E-mailprogramma
 De volgende uitsluitingen laten e-mailprogramma's die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot mailboxbestanden buiten de sandbox.
 .
 
+4393;txt;01
+Mediaspelers
+.
+
+4394;txt;01
+De volgende uitsluitingen laten mediaspelers die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot bestanden buiten de sandbox.
+.
+
+4395;txt;01
+%2 directe toegang toestaan tot de foto-map voor eenvoudigere schermopname.
+.
+
+4396;txt;01
+Torrent-clients
+.
+
+4397;txt;01
+De volgende uitsluitingen laten torrent-clients die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot bestanden buiten de sandbox.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control: Sandbox Settings: User Accounts
 #----------------------------------------------------------------------------
@@ -3658,7 +3678,7 @@ Installatietype selecteren
 .
 
 8002;ins;01
-Overschrijven- of deïnstallatiemodus selecteren.
+Modus voor overschrijven of verwijderen selecteren.
 .
 
 8003;ins;01
@@ -3678,15 +3698,15 @@ Bestaande installatie overschrijven (upgraden)
 .
 
 8007;ins;01
-Bestaande installatie en instellingen deïnstalleren (verwijderen)
+Bestaande installatie en instellingen verwijderen
 .
 
 8008;ins;01
-Klik op Starten wanneer klaar om verder te gaan.
+Klik op Starten wanneer u klaar bent om verder te gaan.
 .
 
 8009;ins;01
-Voor deïnstallatie, gebruik Sandboxie Control om de inhoud van de sandbox te verwijderen.
+Gebruik Sandboxie Control om de inhoud van de sandbox te verwijderen voor deïnstallatie.
 .
 
 8010;ins;01
@@ -3694,27 +3714,27 @@ Driver-installatie
 .
 
 8011;ins;01
-Controleer onderstaande informatie.
+Controleer de onderstaande informatie.
 .
 
 8012;ins;01
-Klik op volgende om de systeemniveau-driver van Sandboxie te installeren en activeren. Deze driver is de kern van de Sandboxie-toepassing.
+Klik op volgende om de systeemniveau-driver van Sandboxie te installeren en in te schakelen. Deze driver is de kern van de Sandboxie-toepassing.
 .
 
 8013;ins;01
-Het is mogelijk dat tools voor systeembescherming die uitgevoerd worden, moeten uitgeschakeld worden, omdat ze de installatie van een systeemniveau-driver kunnen voorkomen.
+Het is mogelijk dat u tijdelijk systeembeveiligingstools moet uitschakelen, die de installatie van een driver op systeemniveau kunnen verhinderen.
 .
 
 8014;ins;02
-Als deze stap mislukt en uw computer vergrendelt of herstart, start dan uw computer op in veilige modus, en start dit installatieprogramma om Sandboxie te verwijderen.
+Als deze stap mislukt en uw computer vergrendelt of herstart, start dan uw computer op in veilige modus, en voer dan dit installatieprogramma uit om Sandboxie te verwijderen.
 .
 
 8015;ins;01
-De driver installeert succesvol op de meeste systemen.
+De driver installeert zich met succes op de meeste systemen.
 .
 
 8016;ins;01
-Wacht terwijl Sandboxie gedeïnstalleerd wordt.
+Even geduld terwijl Sandboxie verwijderd wordt.
 .
 
 8021;ins;01
@@ -3746,7 +3766,7 @@ Windows Verkenner gesandboxt uitvoeren.lnk
 .
 
 8028;ins;01
-Lokale desktop en computer verkennen onder toezicht van Sandboxie
+Lokaal bureaublad en computer verkennen onder toezicht van Sandboxie
 .
 
 8029;ins;01
@@ -3758,11 +3778,11 @@ Het Sandboxie-bedieningspaneel openen
 .
 
 8031;ins;01
-Sandboxie deïnstalleren.lnk
+Sandboxie verwijderen.lnk
 .
 
 8032;ins;01
-Sandboxie deïnstalleren
+Sandboxie verwijderen
 .
 
 8033;ins;01

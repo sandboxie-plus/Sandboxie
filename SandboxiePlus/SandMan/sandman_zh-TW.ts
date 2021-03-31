@@ -601,11 +601,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;幫助</translation>
+        <translation>幫助(&amp;H)</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;檢視</translation>
+        <translation>檢視(&amp;V)</translation>
     </message>
     <message>
         <source>Error deleting sandbox folder: %1</source>
@@ -803,7 +803,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation>&amp;選項</translation>
+        <translation>選項(&amp;O)</translation>
     </message>
     <message>
         <source>Show/Hide</source>
@@ -871,7 +871,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Sandbox</source>
-        <translation>&amp;沙盤</translation>
+        <translation>沙盤(&amp;S)</translation>
     </message>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>

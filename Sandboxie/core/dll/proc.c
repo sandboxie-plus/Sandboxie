@@ -2167,13 +2167,18 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     //
 
     if (_wcsicmp(imgName, L"thunderbird.exe") == 0      ||
-        _wcsicmp(imgName, L"msimn.exe") == 0            ||
         _wcsicmp(imgName, L"outlook.exe") == 0          ||
         _wcsicmp(imgName, L"winmail.exe") == 0          ||
         _wcsicmp(imgName, L"wlmail.exe") == 0           ||
         _wcsicmp(imgName, L"IncMail.exe") == 0          ||
         _wcsicmp(imgName, L"eudora.exe") == 0           ||
-        _wcsicmp(imgName, L"thebat.exe") == 0           ||
+        _wcsicmp(imgName, L"thebat32.exe") == 0         ||
+	_wcsicmp(imgName, L"thebat64.exe") == 0         ||
+	_wcsicmp(imgName, L"Foxmail.exe") == 0          ||
+	_wcsicmp(imgName, L"Mailbird.exe") == 0         ||
+	_wcsicmp(imgName, L"MailClient.exe") == 0       ||
+	_wcsicmp(imgName, L"postbox.exe") == 0          ||
+	_wcsicmp(imgName, L"Inky.exe") == 0             ||
         0)
     {
         should_check_openfilepath = TRUE;
@@ -2209,18 +2214,31 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     // ignore rundll32.exe, because Windows Live Mail sets
     // it as the default mail program.
     //
-    // ignore opera.exe, because Opera may only be used for
-    // browsing and not email
+    // ignore seamonkey.exe and vivaldi.exe, because they may
+    // only be used for browsing and not email
     //
     // ignore other common browsers
     //
 
-    if (_wcsicmp(imgName, L"rundll32.exe") == 0     ||
-        _wcsicmp(imgName, L"opera.exe") == 0        ||
-        _wcsicmp(imgName, L"iexplore.exe") == 0     ||
-        _wcsicmp(imgName, L"firefox.exe") == 0      ||
-        _wcsicmp(imgName, L"chrome.exe") == 0       ||
-        0                                           ) {
+    if (_wcsicmp(imgName, L"rundll32.exe") == 0                 ||
+        _wcsicmp(imgName, L"opera.exe") == 0                    ||
+        _wcsicmp(imgName, L"iexplore.exe") == 0                 ||
+	_wcsicmp(imgName, L"msedge.exe") == 0                   ||
+        _wcsicmp(imgName, L"firefox.exe") == 0                  ||
+	_wcsicmp(imgName, L"waterfox.exe") == 0                 ||
+	_wcsicmp(imgName, L"palemoon.exe") == 0                 ||
+	_wcsicmp(imgName, L"basilisk.exe") == 0                 ||
+	_wcsicmp(imgName, L"seamonkey.exe") == 0                ||
+	_wcsicmp(imgName, L"k-meleon.exe") == 0                 ||
+        _wcsicmp(imgName, L"chrome.exe") == 0                   ||
+	_wcsicmp(imgName, L"iron.exe") == 0                     ||
+	_wcsicmp(imgName, L"dragon.exe") == 0                   ||
+	_wcsicmp(imgName, L"maxthon.exe") == 0                  ||
+	_wcsicmp(imgName, L"vivaldi.exe") == 0                  ||
+	_wcsicmp(imgName, L"brave.exe") == 0                    ||
+	_wcsicmp(imgName, L"browser.exe") == 0                  ||
+	_wcsicmp(imgName, L"PuffinSecureBrowser.exe") == 0      ||
+        0                                                       ) {
 
         should_check_openfilepath = FALSE;
     }

@@ -1994,7 +1994,7 @@ Utseende
 .
 
 3812;txt;01
-Sandlådade program under översyn av Sandboxie kommer visa Sandboxie [#] märket i rutans titel.
+Sandlådade program under översyn av Sandboxie kommer visa Sandboxie [#]-märket i rutans titel.
 .
 
 3813;txt;01
@@ -2006,7 +2006,7 @@ Visa sandlådenamnet i rutans titel
 .
 
 3815;txt;01
-Visa inte sandlåde märket i rutans titel
+Visa inte Sandboxie-märket i rutans titel
 .
 
 3816;txt;01
@@ -2030,7 +2030,7 @@ Visa bara färg runt kanten på rutor när muspekaren är över sidnamnet
 #----------------------------------------------------------------------------
 
 # 3821;txt;01
-# Återskapning::Snabb Återskapning
+# Återskapning::Snabb återskapning
 # .
 
 3821;txt;02
@@ -2042,25 +2042,25 @@ Snabb återskapning
 .
 
 3823;txt;01
-Före sandlådan raderas, eller när du manuellt aktiverar Snabb Återställningsfunktionen kommer följande mappar sökas efter filer. 
+Före sandlådan raderas, eller när du manuellt aktiverar Snabb återställning kommer följande mappar sökas efter filer. 
 Om några filer hittas kommer 
 du få chansen att flytta ut dem ur sandlådan.
 .
 
 # 3831;txt;01
-# Recovery::Omedelbar Återskapning
+# Recovery::Omedelbar återskapning
 # .
 
 3832;txt;01
-Omedelbar Återskapning hjälper Snabb Återskapning genom att automatiskt fråga om du vill flytta ut filer när de skapas.
+Omedelbar återskapning hjälper Snabb återskapning genom att automatiskt fråga om du vill flytta ut filer när de skapas.
 .
 
 3833;txt;01
-Aktivera Omedelbar Återskapning
+Aktivera Omedelbar återskapning
 .
 
 3834;txt;01
-Följande filer och filtyper kommer inte vara med i Omedelbar Återskapning.
+Följande filer och filtyper kommer inte vara med i Omedelbar återskapning.
 .
 
 3835;txt;01
@@ -2068,11 +2068,11 @@ Lägg till &Typ
 .
 
 3836;txt;01
-Välj en mapp för att exkludera den från Omedelbar Återskapning
+Välj en mapp för att exkludera den från Omedelbar återskapning
 .
 
 3837;txt;01
-Skriv in en filtyp att exkludera från Omedelbar Återskapning
+Skriv in en filtyp att exkludera från Omedelbar återskapning
 .
 
 #----------------------------------------------------------------------------

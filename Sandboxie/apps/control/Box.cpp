@@ -259,7 +259,7 @@ void CBox::SetDefaultSettings()
 
     if (ok)
     {
-        ok = ini.SetBool(m_name, _AutoRecover, TRUE);
+        ok = ini.SetBool(m_name, _AutoRecover, FALSE);
         ok = ini.SetBool(m_name, L"BlockNetworkFiles", TRUE);
     }
 
@@ -269,7 +269,7 @@ void CBox::SetDefaultSettings()
     if (ok)
         ok = AddOrRemoveQuickRecoveryFolder(L"%Desktop%",    TRUE);
     if (ok)
-        ok = AddOrRemoveQuickRecoveryFolder(L"%Favorites%",  TRUE);
+        ok = AddOrRemoveQuickRecoveryFolder(L"%Favorites%",  FALSE);
     if (ok)
         ok = AddOrRemoveQuickRecoveryFolder(L"%Personal%",   TRUE);
     if (ok && CMyApp::m_WindowsVista) {

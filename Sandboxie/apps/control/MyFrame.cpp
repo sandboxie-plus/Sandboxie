@@ -1645,7 +1645,7 @@ void CMyFrame::InitSandboxMenu2(CMenu *model, CMenu *child, UINT BaseId)
 
         } else if (id == 0) {
 
-            child->AppendMenu(MF_SEPARATOR, 0, title);
+            child->AppendMenu(MF_SEPARATOR, 0, (LPCTSTR)nullptr);
 
         } else {
 

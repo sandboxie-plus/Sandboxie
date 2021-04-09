@@ -1086,7 +1086,7 @@ Eseg&ui come amministratore
 .
 
 3417;txt;01
-C&hiudi
+E&sci
 .
 
 3421;txt;01

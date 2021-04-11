@@ -239,7 +239,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 
 		if (!File["ParentID"].isNull())
 		{
-			if (File["DiskPath"].toString().indexOf("\\device\\mup") == 0)
+			if (File["DiskPath"].toString().indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
 				HasShare = true;
 			FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
 		}

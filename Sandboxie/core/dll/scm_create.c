@@ -853,7 +853,7 @@ _FX BOOL SbieDll_StartBoxedService(const WCHAR *ServiceName, BOOLEAN WithAdd)
 
     if (rpl->service_status.dwServiceType & SERVICE_DRIVER) {
 
-        SbieApi_Log(2103, L"%S [%S]", ServiceName, Dll_BoxName);
+        SbieApi_Log(2103, L"%S [%S] (StartService)", ServiceName, Dll_BoxName);
         Dll_Free(rpl);
         SetLastError(ERROR_ACCESS_DENIED);
         return FALSE;

@@ -1371,7 +1371,7 @@ _FX NTSTATUS Ldr_NtLoadDriver(UNICODE_STRING *RegistryPath)
         }
 
         if (DriverName)
-            SbieApi_Log(2103, L"%S [%S]", DriverName, Dll_BoxName);
+            SbieApi_Log(2103, L"%S [%S] (NtLoadDriver)", DriverName, Dll_BoxName);
     }
 
     return status;

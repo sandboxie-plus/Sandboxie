@@ -495,12 +495,14 @@ _FX void Dll_InitExeEntry(void)
 
 
 //---------------------------------------------------------------------------
-// Dll_SelectImageType
+// Dll_GetImageType
 //---------------------------------------------------------------------------
 
 
-_FX void Dll_SelectImageType(void)
+_FX ULONG Dll_GetImageType(const WCHAR *ImageName)
 {
+    ULONG ImageType = DLL_IMAGE_UNSPECIFIED;
+
     //
     // check for custom configured special images
     //
@@ -521,14 +523,18 @@ _FX void Dll_SelectImageType(void)
 
         *ptr++ = L'\0';
 
-        if (_wcsicmp(Dll_ImageName, ptr) == 0) {
+        if (_wcsicmp(ImageName, ptr) == 0) {
 
             if (_wcsicmp(L"chrome", buf) == 0)
-                Dll_ImageType = DLL_IMAGE_GOOGLE_CHROME;
+                ImageType = DLL_IMAGE_GOOGLE_CHROME;
             else if (_wcsicmp(L"firefox", buf) == 0)
-                Dll_ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+                ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+            else if (_wcsicmp(L"browser", buf) == 0)
+                ImageType = DLL_IMAGE_OTHER_WEB_BROWSER;
+            else if (_wcsicmp(L"mail", buf) == 0)
+                ImageType = DLL_IMAGE_OTHER_MAIL_CLIENT;
             else
-                Dll_ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
+                ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
 
             break;
         }
@@ -562,7 +568,7 @@ _FX void Dll_SelectImageType(void)
         L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-	L"k-meleon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"k-meleon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
@@ -575,30 +581,58 @@ _FX void Dll_SelectImageType(void)
         L"dragon.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"chrome.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"opera.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
+        L"neon.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
         L"brave.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
+        L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Yandex Browser
+        L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is Chromium-based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
+
+        L"PuffinSecureBrowser.exe", (WCHAR *)DLL_IMAGE_OTHER_WEB_BROWSER,
 
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"plugin-container.exe",    (WCHAR *)DLL_IMAGE_PLUGIN_CONTAINER,
         L"Outlook.exe",             (WCHAR *)DLL_IMAGE_OFFICE_OUTLOOK,
         L"Excel.exe",               (WCHAR *)DLL_IMAGE_OFFICE_EXCEL,
+
+        L"thunderbird.exe",         (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"winmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"IncMail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"eudora.exe",              (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"thebat32.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"thebat64.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"Foxmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"Mailbird.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"MailClient.exe",          (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"postbox.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"Inky.exe",                (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+
         NULL,                       NULL
     };
 
-    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED) {
+    if (ImageType == DLL_IMAGE_UNSPECIFIED) {
 
         for (int i = 0; _ImageNames[i]; i += 2) {
-            if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
-                Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
+            if (_wcsicmp(ImageName, _ImageNames[i]) == 0) {
+                ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
                 break;
             }
         }
     }
+
+    return ImageType;
+}
+
+//---------------------------------------------------------------------------
+// Dll_SelectImageType
+//---------------------------------------------------------------------------
+
+
+_FX void Dll_SelectImageType(void)
+{
+    Dll_ImageType = Dll_GetImageType(Dll_ImageName);
 
     if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
             _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)

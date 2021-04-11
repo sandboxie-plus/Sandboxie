@@ -94,6 +94,7 @@ public:
 	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
+	virtual QString			GetCurrentUserName() const { return m_UserName; }
 	virtual bool			IsConfigLocked();
 	virtual SB_STATUS		UnlockConfig(const QString& Password);
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
@@ -154,7 +155,7 @@ protected:
 
 	virtual QString			GetSbieHome() const;
 	virtual QString			GetIniPath(bool* IsHome) const;
-	virtual QString			GetUserSection() const;
+	virtual QString			GetUserSection(QString* pUserName = NULL, bool* pIsAdmin = NULL) const;
 
 	virtual bool			HasProcesses(const QString& BoxName);
 
@@ -197,6 +198,7 @@ protected:
 
 	CSbieIni*				m_pGlobalSection;
 	CSbieIni*				m_pUserSection;
+	QString					m_UserName;
 
 	QString					m_ProgramDataDir;
 	QString					m_PublicDir;

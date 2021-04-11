@@ -318,7 +318,7 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, const QString &LinkPath, const Q
 		hr = pUnknown->QueryInterface(IID_IPersistFile, (void **)&pPersistFile);
 		if (SUCCEEDED(hr)) 
 		{
-			pPersistFile->Save((LinkPath.toStdWString() + L".lnk").c_str(), FALSE);
+			pPersistFile->Save(LinkPath.toStdWString().c_str(), FALSE);
 
 			pPersistFile->Release();
 		}

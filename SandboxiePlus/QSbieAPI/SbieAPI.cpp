@@ -301,7 +301,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 
 	if (m_pUserSection == NULL)
 	{
-		QString UserSection = GetUserSection();
+		QString UserSection = GetUserSection(&m_UserName);
 		if(!UserSection.isEmpty())
 			m_pUserSection = new CSbieIni(UserSection, this, this);
 
@@ -875,7 +875,7 @@ QString CSbieAPI::GetIniPath(bool* IsHome) const
 	return IniPath;
 }
 
-QString CSbieAPI::GetUserSection() const
+QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 {
 	QString UserSection;
 
@@ -889,9 +889,9 @@ QString CSbieAPI::GetUserSection() const
 		return QString();
 
 	if (rpl->h.status == 0) {
-		//rpl->admin
+		if (pIsAdmin) *pIsAdmin = rpl->admin;
 		UserSection = QString::fromWCharArray(rpl->section);
-		//rpl->name;
+		if (pUserName) *pUserName = QString::fromWCharArray(rpl->name);
 	}
 	free(rpl);
 

@@ -26,8 +26,11 @@ void CPathEdit::Browse()
 	QString FilePath = m_bDirs
 		? QFileDialog::getExistingDirectory(this, tr("Select Directory"))
 		: QFileDialog::getOpenFileName(0, tr("Browse"), "", QString("Any File (*.*)"));
-	if(!FilePath.isEmpty())
-		SetText(FilePath);
+	if (FilePath.isEmpty())
+		return;
+	if (m_bWinPath)
+		FilePath.replace("/", "\\");
+	SetText(FilePath);
 }
 
 ///////////////////////////////////////////////////

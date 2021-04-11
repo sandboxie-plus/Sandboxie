@@ -36,7 +36,6 @@
 // Functions
 //---------------------------------------------------------------------------
 
-
 static BOOL Proc_CreateProcessInternalW(
     HANDLE hToken,
     const WCHAR *lpApplicationName,
@@ -2150,6 +2149,7 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     BOOLEAN ok;
     WCHAR *tmp;
     const WCHAR *imgName;
+    ULONG imgType;
 
     BOOLEAN should_check_openfilepath = FALSE;
 
@@ -2162,23 +2162,15 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     else
         imgName = ImagePath;
 
+    imgType = Dll_GetImageType(imgName);
+
     //
     // check if image name matches a well-known email program
     //
 
-    if (_wcsicmp(imgName, L"thunderbird.exe") == 0      ||
-        _wcsicmp(imgName, L"outlook.exe") == 0          ||
-        _wcsicmp(imgName, L"winmail.exe") == 0          ||
-        _wcsicmp(imgName, L"wlmail.exe") == 0           ||
-        _wcsicmp(imgName, L"IncMail.exe") == 0          ||
-        _wcsicmp(imgName, L"eudora.exe") == 0           ||
-        _wcsicmp(imgName, L"thebat32.exe") == 0         ||
-	_wcsicmp(imgName, L"thebat64.exe") == 0         ||
-	_wcsicmp(imgName, L"Foxmail.exe") == 0          ||
-	_wcsicmp(imgName, L"Mailbird.exe") == 0         ||
-	_wcsicmp(imgName, L"MailClient.exe") == 0       ||
-	_wcsicmp(imgName, L"postbox.exe") == 0          ||
-	_wcsicmp(imgName, L"Inky.exe") == 0             ||
+    if (imgType == DLL_IMAGE_OFFICE_OUTLOOK     ||
+        imgType == DLL_IMAGE_WINDOWS_LIVE_MAIL  ||
+        imgType == DLL_IMAGE_OTHER_MAIL_CLIENT  ||
         0)
     {
         should_check_openfilepath = TRUE;
@@ -2214,31 +2206,18 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     // ignore rundll32.exe, because Windows Live Mail sets
     // it as the default mail program.
     //
-    // ignore seamonkey.exe and vivaldi.exe, because they may
-    // only be used for browsing and not email
+    // ignore opera.exe, because Opera may only be used for
+    // browsing and not email
     //
     // ignore other common browsers
     //
 
-    if (_wcsicmp(imgName, L"rundll32.exe") == 0                 ||
-        _wcsicmp(imgName, L"opera.exe") == 0                    ||
-        _wcsicmp(imgName, L"iexplore.exe") == 0                 ||
-	_wcsicmp(imgName, L"msedge.exe") == 0                   ||
-        _wcsicmp(imgName, L"firefox.exe") == 0                  ||
-	_wcsicmp(imgName, L"waterfox.exe") == 0                 ||
-	_wcsicmp(imgName, L"palemoon.exe") == 0                 ||
-	_wcsicmp(imgName, L"basilisk.exe") == 0                 ||
-	_wcsicmp(imgName, L"seamonkey.exe") == 0                ||
-	_wcsicmp(imgName, L"k-meleon.exe") == 0                 ||
-        _wcsicmp(imgName, L"chrome.exe") == 0                   ||
-	_wcsicmp(imgName, L"iron.exe") == 0                     ||
-	_wcsicmp(imgName, L"dragon.exe") == 0                   ||
-	_wcsicmp(imgName, L"maxthon.exe") == 0                  ||
-	_wcsicmp(imgName, L"vivaldi.exe") == 0                  ||
-	_wcsicmp(imgName, L"brave.exe") == 0                    ||
-	_wcsicmp(imgName, L"browser.exe") == 0                  ||
-	_wcsicmp(imgName, L"PuffinSecureBrowser.exe") == 0      ||
-        0                                                       ) {
+    if (_wcsicmp(imgName, L"rundll32.exe") == 0  ||
+        imgType == DLL_IMAGE_INTERNET_EXPLORER   ||
+        imgType == DLL_IMAGE_MOZILLA_FIREFOX     ||
+        imgType == DLL_IMAGE_GOOGLE_CHROME       ||
+        imgType == DLL_IMAGE_OTHER_WEB_BROWSER   ||
+        0) {
 
         should_check_openfilepath = FALSE;
     }

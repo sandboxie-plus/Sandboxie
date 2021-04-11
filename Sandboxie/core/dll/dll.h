@@ -110,6 +110,8 @@ enum {
     DLL_IMAGE_OFFICE_EXCEL,
     DLL_IMAGE_FLASH_PLAYER_SANDBOX,
     DLL_IMAGE_PLUGIN_CONTAINER,
+    DLL_IMAGE_OTHER_WEB_BROWSER,
+    DLL_IMAGE_OTHER_MAIL_CLIENT,
     DLL_IMAGE_LAST
 };
 
@@ -366,6 +368,8 @@ ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckObjec
 
 
 void Dll_InitExeEntry(void);
+
+ULONG Dll_GetImageType(const WCHAR* ImageName);
 
 int Dll_NlsStrCmp(const WCHAR *s1, const WCHAR *s2, ULONG len);
 

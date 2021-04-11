@@ -96,6 +96,8 @@ private slots:
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddTemplates();
 	void OnDelTemplates();
+	void OnFolderChanged();
+	void OnScreenReaders();
 
 	void OnTab();
 
@@ -213,6 +215,10 @@ protected:
 	void ShowTemplates();
 	void SaveTemplates();
 
+	void LoadFolders();
+	void ShowFolders();
+	void SaveFolders();
+
 	void LoadIniSection();
 	void SaveIniSection();
 
@@ -228,6 +234,7 @@ protected:
 	bool m_INetBlockChanged;
 	bool m_AccessChanged;
 	bool m_TemplatesChanged;
+	bool m_FoldersChanged;
 	bool m_RecoveryChanged;
 	bool m_AdvancedChanged;
 
@@ -238,6 +245,7 @@ protected:
 	QMultiMap<QString, QPair<QString, QString>> m_AllTemplates;
 	QStringList m_GlobalTemplates;
 	QStringList m_BoxTemplates;
+	QStringList m_BoxFolders;
 
 	QList<QPair<QString, QString>> m_Settings;
 

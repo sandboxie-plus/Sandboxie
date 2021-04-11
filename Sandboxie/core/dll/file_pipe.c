@@ -292,7 +292,7 @@ _FX const BOOLEAN File_InternetBlockade_ManualBypass()
 		Dll_Free(rpl);
 	}
 	else if(SbieApi_QueryConfBool(NULL, L"NotifyInternetAccessDenied", TRUE))
-		SbieApi_Log(1307, L"%s [%s]", Dll_ImageName, Dll_BoxName);
+		SbieApi_Log(1307, L"%S [%S]", Dll_ImageName, Dll_BoxName);
 
 	//
 	// Note: the granting process must notify the driver about the exemption 

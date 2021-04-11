@@ -16,6 +16,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.7.4 / 5.49.7] - 2021-04-12
+
+### Added
+- added option to disable file migration prompt
+- added UI options for variouse security isolation features
+- added missing functionality to set template values in the plus UI
+
+### Changed
+- Align default settings of AutoRecover and Favorites to the Plus version (thanks isaak654)
+- list of email clients and browsers is now centralized on Dll_GetImageType
+
+### Fixed
+- fixed minor issue with logging internet blocks
+- fixed issue with file recovery when located on a network share
+- fixed ui issue with CallTrace
+- fixed crated sandbox links gettign double extension
+- fixed misplaced labels in the classic ui (thanks isaak654)
+- fixed separator line in Sbiectrl (thanks isaak654)
+
+
 
 ## [0.7.3 / 5.49.5] - 2021-03-27
 

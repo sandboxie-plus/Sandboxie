@@ -1034,7 +1034,7 @@ M&odif./Agg.
 .
 
 3355;txt;01
-Aggiungi &programma
+Agg. &programma
 .
 
 # 3356;txt;01

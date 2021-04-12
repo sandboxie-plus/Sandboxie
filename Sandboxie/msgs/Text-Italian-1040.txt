@@ -465,11 +465,11 @@ SBIE2220 Per consentire l'utilizzo dei privilegi di amministratore, fare doppio 
 .
 
 2221;pop;wrn;01
-SBIE2221 Per aggiungere il programma a Restrizioni Accesso a Internet, fare doppio clic su questo messaggio
+SBIE2221 Per aggiungere il programma all'elenco Restrizioni Accesso a Internet, fare doppio clic su questo messaggio
 .
 
 2222;pop;wrn;01
-SBIE2222 Per aggiungere il programma a Restrizioni Avvio/Esecuzione dei programmi, fare doppio clic su questo messaggio
+SBIE2222 Per aggiungere il programma all'elenco Restrizioni Accesso dei programmi, fare doppio clic su questo messaggio
 .
 
 2223;pop;wrn;01
@@ -1034,7 +1034,7 @@ M&odif./Agg.
 .
 
 3355;txt;01
-Aggiungi &programma
+Agg. &programma
 .
 
 # 3356;txt;01
@@ -1186,7 +1186,7 @@ Mo&stra tutti i suggerimenti
 .
 
 3452;txt;01
-&Documentazione
+&Documentazione online
 .
 
 3453;txt;02
@@ -1534,7 +1534,7 @@ Controlla aggiornamenti
 .
 
 3622;txt;01
-Connettersi al sito di Sandboxie per verificare la disponibilità di una nuova versione del programma?
+Verificare la disponibilità di una nuova versione del programma?
 .
 
 3623;txt;01
@@ -1643,7 +1643,7 @@ Disattiva temporaneamente i programmi automatici
 .
 
 3652;txt;01
-Disattiva temporaneamente i programmi automatici
+Disattiva l'impostazione dei programmi automatici per
 .
 
 3653;txt;01
@@ -1651,11 +1651,11 @@ secondi
 .
 
 3654;txt;01
-Dopo aver fatto clic su OK, la funzione Programmi automatici verrà disattivata temporaneamente per il numero di secondi specificato sopra o fino alla riattivazione della funzione.
+Dopo aver fatto clic su OK, la funzione Programmi automatici verrà disattivata temporaneamente per il numero di secondi specificato sopra, o fino alla sua riattivazione.
 .
 
 3599;txt;01
-È possibile disabilitare l'automatizzazione di un programma specifico tenendo premuti i tasti Ctrl e Maiusc mentre si utilizza l'opzione Avvia nell'area virtuale di quel programma.
+È possibile limitare la disattivazione a un programma specifico tenendo premuti i tasti Ctrl e Maiusc mentre si utilizza l'opzione Avvia nell'area virtuale per quel programma.
 .
 
 #----------------------------------------------------------------------------
@@ -2039,7 +2039,7 @@ Abilita le restrizioni e consenti a questo programma l'accesso a Internet.
 .
 
 3765;txt;01
-Restrizioni di avvio/esecuzione
+Restrizioni di accesso
 .
 
 3766;txt;01
@@ -2475,7 +2475,7 @@ Per gestire la funzionalità Restrizioni Accesso a Internet, recarsi nella sezio
 .
 
 3922;txt;01
-Avvio/Esecuzione dei programmi
+Accesso dei programmi
 .
 
 3923;txt;01
@@ -2491,11 +2491,11 @@ Tutti i programmi possono essere avviati ed eseguiti
 .
 
 3930;txt;01
-La funzionalità Restrizioni Avvio/Esecuzione dei programmi è abilitata nell'area virtuale '%2' e blocca l'accesso a Internet a questo programma.
+La funzionalità Restrizioni Accesso dei programmi è abilitata nell'area virtuale '%2' e blocca l'accesso a questo programma.
 
-Fare clic su OK per aggiungere il programma '%3' all'elenco Restrizioni Accesso a Internet nell'area virtuale '%2'.
+Fare clic su OK per aggiungere il programma '%3' all'elenco Restrizioni Accesso dei programmi nell'area virtuale '%2'.
 
-Per gestire la funzionalità Restrizioni Avvio/Esecuzione dei programmi, recarsi nella sezione Restrizioni della finestra Impostazioni dell'area virtuale.
+Per gestire la funzionalità Restrizioni Accesso dei programmi, recarsi nella sezione Restrizioni della finestra Impostazioni dell'area virtuale.
 .
 
 #----------------------------------------------------------------------------
@@ -2879,15 +2879,15 @@ PDF e stampa
 .
 
 4226;txt;02
-Sicurezza e privacy
+Sicurezza/privacy
 .
 
 4228;txt;01
-Programmi per il desktop
+Utilità desktop
 .
 
 4230;txt;01
-Programmi per la gestione dei download
+Gestione download
 .
 
 4288;txt;01
@@ -3078,7 +3078,7 @@ Per compensare alla disabilitazione delle misure di protezione, consultare la pa
 .
 
 4305;txt;03
-Screen Reader:  %2
+Screen reader:  %2
 .
 
 #----------------------------------------------------------------------------
@@ -3162,7 +3162,7 @@ Componenti aggiuntivi
 .
 
 4391;txt;01
-Programmi di posta elettronica
+Posta elettronica
 .
 
 4392;txt;01

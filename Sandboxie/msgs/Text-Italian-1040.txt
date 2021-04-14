@@ -3193,6 +3193,10 @@ Le seguenti esclusioni consentiranno ai client Torrent in esecuzione in questa a
 Consenti l'accesso diretto di %2 alla cartella Musica per la gestione della libreria musicale.
 .
 
+4399;txt;01
+Impedisci ai lettori multimediali di importare file multimediali nell'area virtuale.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------

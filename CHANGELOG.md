@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed minor issue with logging internet blocks
 - fixed issue with file recovery when located on a network share
 - fixed UI issue with CallTrace
-- fixed sandbox links receiving double extension
+- fixed sandbox shortcuts receiving double extension upon creation
 - fixed misplaced labels in the classic ui (thanks isaak654)
 - fixed separator line in SbieCtrl (thanks isaak654)
 

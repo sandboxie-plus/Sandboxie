@@ -65,8 +65,8 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	{
 		// templates L6
 		InsertText("Template", "AutoRecoverIgnore");
-		InsertText("Template", "Firefox_Phishing_DirectAccess");
-		InsertText("Template", "Chrome_Phishing_DirectAccess");
+		//InsertText("Template", "Firefox_Phishing_DirectAccess");
+		//InsertText("Template", "Chrome_Phishing_DirectAccess");
 		InsertText("Template", "LingerPrograms");
 	}
 

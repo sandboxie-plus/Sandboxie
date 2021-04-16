@@ -51,7 +51,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked RPC resolver to be ini-configurable
 -- the following options are now deprecated:
 --- "UseRpcMgmtSetComTimeout=some.dll,n", so use "RpcPortBinding=some.dll,*,TimeOut=y"
---- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n" use the new templates instead
+--- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n", so use the new RPC templates instead
 -- See Templates.ini for usage examples
 
 ### Fixed

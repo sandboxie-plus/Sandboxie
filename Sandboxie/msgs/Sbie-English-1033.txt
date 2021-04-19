@@ -3311,9 +3311,6 @@ The following exclusions allow Torrent clients running in this sandbox to access
 4398;txt;01
 Allow %2 direct access to the Music folder for easier music library management.
 .
-4399;txt;01
-Prevent Media players from importing media files to the sandbox.
-.
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts

@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.7.4 / 5.49.7] - 2021-04-12
 
 ### Added
-- added option to disable file migration prompt
+- added option to disable file migration prompt in the Plus UI by using "PromptForFileMigration=n"
 - added UI options for variouse security isolation features
 - added missing functionality to set template values in the plus UI
 

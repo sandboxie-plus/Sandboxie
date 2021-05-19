@@ -95,21 +95,23 @@ BOOL CMyApp::InitInstance()
     //
 
     WCHAR *InstanceMutexName = SANDBOXIE L"_SingleInstanceMutex_Control";
-    HANDLE hInstanceMutex =
-        OpenMutex(MUTEX_ALL_ACCESS, FALSE, InstanceMutexName);
-    if (hInstanceMutex) {
-        if (ForceVisible) {
-            HWND hwnd = FindWindow(WindowClassName, NULL);
-            if (hwnd) {
-                ShowWindow(hwnd, SW_SHOWNORMAL);
-                SetForegroundWindow(hwnd);
+
+    HANDLE hInstanceMutex = CreateMutex(NULL, FALSE, InstanceMutexName);
+    if (hInstanceMutex)
+    {
+        if (GetLastError() == ERROR_ALREADY_EXISTS)
+        {
+            if (ForceVisible) {
+                HWND hwnd = FindWindow(WindowClassName, NULL);
+                if (hwnd) {
+                    ShowWindow(hwnd, SW_SHOWNORMAL);
+                    SetForegroundWindow(hwnd);
+                }
             }
+
+            return FALSE;
         }
-        return FALSE;
     }
-    hInstanceMutex = CreateMutex(NULL, FALSE, InstanceMutexName);
-    if (! hInstanceMutex)
-        return FALSE;
 
     //
     // change to Sandboxie home directory

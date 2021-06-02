@@ -98,7 +98,7 @@ void CNewBoxWindow::CreateBox()
 			case eHardened:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("DropAdminRights", true);
 				pBox.objectCast<CSandBoxPlus>()->SetBool("ClosePrintSpooler", true);
-				pBox.objectCast<CSandBoxPlus>()->SetBool("OpenSmartCard", false);
+				//pBox.objectCast<CSandBoxPlus>()->SetBool("OpenSmartCard", false);
 				break;
 			case eLegacy:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("UnrestrictedSCM", true);

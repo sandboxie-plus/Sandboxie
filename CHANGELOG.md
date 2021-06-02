@@ -16,43 +16,43 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.7.4 / 5.49.7] - 2021-04-12
+## [0.7.4 / 5.49.7] - 2021-04-11
 
 ### Added
 - added option to disable file migration prompt
-- added UI options for variouse security isolation features
-- added missing functionality to set template values in the plus UI
+- added UI options for various security isolation features
+- added missing functionality to set template values in the Plus UI
 
 ### Changed
-- Align default settings of AutoRecover and Favorites to the Plus version (thanks isaak654)
-- list of email clients and browsers is now centralized on Dll_GetImageType
+- align default settings of AutoRecover and Favourites to the Plus version (thanks isaak654)
+- list of email clients and browsers is now centralized in Dll_GetImageType
 
 ### Fixed
 - fixed minor issue with logging internet blocks
 - fixed issue with file recovery when located on a network share
-- fixed ui issue with CallTrace
-- fixed crated sandbox links gettign double extension
+- fixed UI issue with CallTrace
+- fixed sandbox shortcuts receiving double extension upon creation
 - fixed misplaced labels in the classic ui (thanks isaak654)
-- fixed separator line in Sbiectrl (thanks isaak654)
+- fixed separator line in SbieCtrl (thanks isaak654)
 
 
 
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
 ### Added
-- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only for Firefox and Chrome
+- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only Firefox and Chrome
 - added option to drop the console host process integrity, now you can use "DropConHostIntegrity=y"
 - added option to easily add local templates
 
 ### Changed
 - reworked window hooking mechanism to improve performance
--- resolves issues with file save dialogs taking 30+ sec to open
+-- resolves issues with file save dialogues taking 30+ seconds to open
 -- this fix greatly improves the win32 GUI performance of sandboxed processes
-- reworked RPC resolver to be ini configurable
+- reworked RPC resolver to be ini-configurable
 -- the following options are now deprecated:
 --- "UseRpcMgmtSetComTimeout=some.dll,n", so use "RpcPortBinding=some.dll,*,TimeOut=y"
---- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n" use the new templates instead
--- See the Templates.ini for usage examples
+--- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n", so use the new RPC templates instead
+-- See Templates.ini for usage examples
 
 ### Fixed
 - fixed process-specific hooks being applied to all processes in a given sandbox
@@ -68,7 +68,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- to enable runas functionality, add "OpenIpcPath=\RPC Control\SECLOGON" to your Sandboxie.ini
 -- please take note that doing so may open other yet unknown issues
 - fixed a driver compatibility issue with Windows 10 32 bit Insider Preview Build 21337
-- fixed issues with driver signature for windows 7
+- fixed issues with driver signature for Windows 7
 
 
 

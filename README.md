@@ -47,6 +47,7 @@ Open Source release
 
 More volunteers welcome ;)
 
+
 ## Documentation
 A GitHub copy of the Sandboxie documentation is maintained at https://davidxanatos.github.io/sandboxie-docs
 

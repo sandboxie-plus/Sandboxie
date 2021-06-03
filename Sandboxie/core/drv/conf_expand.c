@@ -249,7 +249,7 @@ _FX NTSTATUS Conf_Expand_Template(
     varname2 = Mem_Alloc(args->pool, varname2_len);
     if (! varname2)
         return STATUS_INSUFFICIENT_RESOURCES;
-    swprintf(varname2, L"%s.%s", varname, varvalue);
+    RtlStringCbPrintfW(varname2, varname2_len, L"%s.%s", varname, varvalue);
 
     Conf_AdjustUseCount(TRUE);
 

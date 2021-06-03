@@ -284,6 +284,8 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
             (   MajorVersion == MajorVersionMin
              && MinorVersion >= MinorVersionMin)) {
 
+        // Hard Offset Dependency
+
         if (MajorVersion == 10) {
             Driver_OsVersion = DRIVER_WINDOWS_10;
 #ifdef _WIN64
@@ -332,7 +334,7 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
             return TRUE;
     }
 
-    swprintf(str, L"%d.%d (%d)", MajorVersion, MinorVersion, Driver_OsBuild);
+    RtlStringCbPrintfW(str, sizeof(str), L"%d.%d (%d)", MajorVersion, MinorVersion, Driver_OsBuild);
     Log_Msg(MSG_1105, str, NULL);
     return FALSE;
 }
@@ -605,7 +607,7 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
         return FALSE;                                           \
     if (! Hook_GetService(                                      \
             ptr, NULL, prmcnt, NULL, (void **)&svc)) {          \
-        swprintf(err_txt, L"%s.%S", Dll_NTDLL, ProcName);       \
+        RtlStringCbPrintfW(err_txt, szieof(err_txt), L"%s.%S", Dll_NTDLL, ProcName);       \
         Log_Msg1(MSG_1108, err_txt);                            \
         return FALSE;                                           \
     }                                                           \

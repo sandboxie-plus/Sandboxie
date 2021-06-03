@@ -942,7 +942,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                     mon_type |= MONITOR_DENY;
             }
 
-            swprintf(access_str, L"(I%c) %08X", letter, GrantedAccess);
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(I%c) %08X", letter, GrantedAccess);
             Log_Debug_Msg(mon_type, access_str, Name->Buffer);
         }
     }

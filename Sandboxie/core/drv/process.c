@@ -1054,7 +1054,8 @@ _FX void Process_NotifyProcess_Create(
             if (! bHostInject)
             {
 				WCHAR msg[48], *buf = msg;
-				buf += swprintf(buf, L"%s%c%d", new_proc->box->name, L'\0', (ULONG)ParentId) + 1;
+				RtlStringCbPrintfW(buf, sizeof(msg), L"%s%c%d", new_proc->box->name, L'\0', (ULONG)ParentId);
+                buf += wcslen(buf) + 1;
 				Log_Popup_MsgEx(MSG_1399, new_proc->image_path, wcslen(new_proc->image_path), msg, (ULONG)(buf - msg), new_proc->box->session_id, ProcessId);
 
                 if (! add_process_to_job)

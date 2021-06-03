@@ -141,7 +141,7 @@ _FX void *Hook_GetZwServiceInternal(ULONG ServiceIndex)
     subcode = Hook_Find_ZwRoutine(ServiceIndex, &routine);
     if (subcode != 0) {
         WCHAR err[8];
-        swprintf(err, L"%d", subcode);
+        RtlStringCbPrintfW(err, sizeof(err), L"%d", subcode);
         Log_Msg1(MSG_HOOK_ZW_SERVICE, err);
         routine = NULL;
     }

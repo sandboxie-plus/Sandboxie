@@ -474,7 +474,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             if (!ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(K%c) %08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }

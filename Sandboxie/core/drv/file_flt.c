@@ -397,7 +397,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                                 WCHAR   wcPid[32];
 
                                 status = STATUS_ACCESS_DENIED;  // disallow the call
-                                swprintf(wcPid, L"[%d]", ulOwnerPid);
+                                RtlStringCbPrintfW(wcPid, sizeof(wcPid), L"[%d]", ulOwnerPid);
 
                                 // create a string for the sandboxed proc name plus the blocked file name (plus a L", " plus NULL = 6)
                                 len = proc->image_name_len + pTargetFileNameInfo->Name.Length + 6;

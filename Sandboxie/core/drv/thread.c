@@ -579,6 +579,8 @@ _FX NTSTATUS Thread_MyImpersonateClient(
     NTSTATUS status = PsImpersonateClient(ThreadObject, TokenObject,
                         CopyOnOpen, EffectiveOnly, SecurityIdentification);
 
+    // Hard Offset Dependency
+
     // ***** ImpersonationInfo_offset is the offset of ClientSecurity field in nt!ETHREAD structure *****
 
     if (NT_SUCCESS(status) && TokenObject) {
@@ -1074,7 +1076,7 @@ trace:
             Letter2 = 0;
 
         if (Letter2) {
-            swprintf(str, L"(%c%c) %08X %06d",
+            RtlStringCbPrintfW(str, sizeof(str), L"(%c%c) %08X %06d",
                                 Letter1, Letter2, GrantedAccess, (int)pid);
             Log_Debug_Msg(MONITOR_IPC | MONITOR_TRACE, str, Driver_Empty);
         }

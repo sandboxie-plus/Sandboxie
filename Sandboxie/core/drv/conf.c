@@ -205,7 +205,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     //
 
 	path_home = TRUE; //  = FALSE;
-	swprintf(path, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
+	RtlStringCbPrintfW(path, path_len, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
 
     status = Stream_Open(
         &stream, path, FILE_GENERIC_READ, 0, FILE_SHARE_READ, FILE_OPEN, 0);
@@ -213,7 +213,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     if (status == STATUS_OBJECT_NAME_NOT_FOUND) {
 
 		path_home = FALSE; // = TRUE;
-		swprintf(path, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
+		RtlStringCbPrintfW(path, path_len, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -270,7 +270,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
 
     if (NT_SUCCESS(status)) {
 
-        swprintf(path, path_templates, Driver_HomePathDos);
+        RtlStringCbPrintfW(path, path_len, path_templates, Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -350,7 +350,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     //
 
     if (! NT_SUCCESS(status)) {
-        swprintf(linenum_str, L"%d", linenum);
+        RtlStringCbPrintfW(linenum_str, sizeof(linenum_str), L"%d", linenum);
         //DbgPrint("Conf error %X at line %d (%S)\n", status, linenum, linenum_str);
         if (status == STATUS_BUFFER_OVERFLOW) {
             Log_Msg_Session(

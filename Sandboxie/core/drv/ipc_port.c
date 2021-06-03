@@ -256,7 +256,7 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     /*if (Session_MonitorCount)// && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) 
     {
         WCHAR msg_str[256];
-        swprintf(msg_str, L"CheckPortRequest, Status <%08X> on Port <%*.*s>\n", status, Name->Name.Length / sizeof(WCHAR), Name->Name.Length / sizeof(WCHAR), Name->Name.Buffer);
+        RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"CheckPortRequest, Status <%08X> on Port <%*.*s>\n", status, Name->Name.Length / sizeof(WCHAR), Name->Name.Length / sizeof(WCHAR), Name->Name.Buffer);
         Log_Debug_Msg(MONITOR_IPC, msg_str, NULL);
     }*/
 
@@ -825,7 +825,7 @@ _FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR* pDstPortNa
                 (ObjName->Length < 64 * sizeof(WCHAR)) &&
                 _wcsnicmp(ObjName->Buffer, L"LRPC-", 5) == 0) {
 
-                swprintf(name, L"%s\\%s", _rpc_control, ObjName->Buffer);
+                RtlStringCbPrintfW(name, sizeof(name), L"%s\\%s", _rpc_control, ObjName->Buffer);
 
                 RtlInitUnicodeString(&objname, name);
 

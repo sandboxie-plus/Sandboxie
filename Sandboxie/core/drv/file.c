@@ -403,7 +403,7 @@ _FX void File_CreateBoxPath_2(HANDLE FileHandle)
         File_DesktopIniText = Mem_Alloc(Driver_Pool, 768);
         if (File_DesktopIniText) {
 
-            sprintf(File_DesktopIniText,
+            RtlStringCbPrintfA(File_DesktopIniText, 768, 
                         "[.ShellClassInfo]\r\n"
                         "IconFile=%S\\%S\r\n"
                         "IconIndex=9\r\n"
@@ -996,7 +996,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
             ignore_str = Mem_Alloc(proc->pool, ignore_str_len);
             if (ignore_str) {
 
-                swprintf(ignore_str,
+                RtlStringCbPrintfW(ignore_str, ignore_str_len,
                     L"(FI) %08X %s", device_type, device_name_ptr);
 
                 if (proc->file_trace & TRACE_IGNORE)
@@ -1511,7 +1511,7 @@ skip_due_to_home_folder:
             if(!IsPipeDevice && !ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
@@ -2247,7 +2247,7 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
             ULONG mon_type = MONITOR_FILE;
             mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 0 & 0x0F, CreateOptions);
             Log_Debug_Msg(mon_type, access_str, path);

@@ -37,7 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.7.4 / 5.49.7] - 2021-04-12
+## [0.7.4 / 5.49.7] - 2021-04-11
 
 ### Added
 - added option to disable file migration prompt in the Plus UI

@@ -33,7 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed some issues with box options in the Plus UI
 - fixed some issues with hardware acceleration in Chromium based browsers
 - the "Stop All" command now issues "kmdutill scandll" first to solve issues when the SbieDll.dll is in use
-- workaround for Electron apps, by forcing a additional command line argument on the gpu renderer process
+- workaround for Electron apps, by forcing an additional command line argument on the gpu renderer process
 
 
 

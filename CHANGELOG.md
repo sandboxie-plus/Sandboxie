@@ -21,26 +21,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.7.5 / 5.49.8] - 2021-06-05
 
 ### Added
-- with "OpenClipboard=n" clipboard access for a sandbox can be now disabled
+- clipboard access for a sandbox can now be disabled with "OpenClipboard=n"
 
 ### Changed
-- now by default the OpenBluetooth template is enabled to enable compatybility with unity games
-- "PreferExternalManifest=program.exe,y" can now be set on a per process basis
+- now the OpenBluetooth template is enabled by default for compatibility with Unity games
+- "PreferExternalManifest=program.exe,y" can now be set on a per-process basis
 
 ### Fixed
-- fixed compiled issues with the most recent vs2019 update
-- fixed issue with vivaldi browser
-- fixed some issues with box options in the plus ui
-- fixed some issues with hw acceleration in chromium based browsers
-- the stop all command now issues "kmdutill scandll" first to solve issues when the SbieDll.Dll is in use
-- workaround for electorn apps, by forcing a additional commandline argument on the gpu renderer process
+- fixed compiler issues with the most recent VS2019 update
+- fixed issue with Vivaldi browser
+- fixed some issues with box options in the Plus UI
+- fixed some issues with hardware acceleration in Chromium based browsers
+- the "Stop All" command now issues "kmdutill scandll" first to solve issues when the SbieDll.dll is in use
+- workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process
 
 
 
-## [0.7.4 / 5.49.7] - 2021-04-12
+## [0.7.4 / 5.49.7] - 2021-04-11
 
 ### Added
-- added option to disable file migration prompt
+- added option to disable file migration prompt in the Plus UI
 - added UI options for various security isolation features
 - added missing functionality to set template values in the Plus UI
 

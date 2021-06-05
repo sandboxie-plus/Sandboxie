@@ -258,7 +258,7 @@ void CSbieTemplates::CollectTemplates()
 
 	QStringList Templates;
 	Templates.append(GetTemplateNames("EmailReader"));
-	Templates.append(GetTemplateNames("Print"));
+	Templates.append("PDF/" + GetTemplateNames("Print"));
 	Templates.append(GetTemplateNames("Security"));
 	Templates.append(GetTemplateNames("Desktop"));
 	Templates.append(GetTemplateNames("Download"));

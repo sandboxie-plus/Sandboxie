@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - clipboard access for a sandbox can now be disabled with "OpenClipboard=n"
 
 ### Changed
-- now by default the OpenBluetooth template is enabled for compatibility with Unity games
+- now the OpenBluetooth template is enabled by default for compatibility with Unity games
 - "PreferExternalManifest=program.exe,y" can now be set on a per-process basis
 
 ### Fixed

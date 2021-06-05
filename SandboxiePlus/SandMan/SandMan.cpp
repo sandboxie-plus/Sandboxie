@@ -555,8 +555,15 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 
 void CSandMan::dropEvent(QDropEvent* e)
 {
+	QStringList Boxes;
+	foreach(const CSandBoxPtr &pBox, theAPI->GetAllBoxes())
+	{
+		if (pBox->IsEnabled())
+			Boxes.append(pBox->GetName().replace("_", " "));
+	}
+
 	bool ok;
-	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Select box:"), theAPI->GetAllBoxes().keys(), 0, false, &ok);
+	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Select box:"), Boxes, 0, false, &ok);
 	if (!ok || box.isEmpty())
 		return;
 
@@ -565,7 +572,7 @@ void CSandMan::dropEvent(QDropEvent* e)
 			continue;
 		QString FileName = url.toLocalFile().replace("/", "\\");
 		
-		theAPI->RunStart(box, FileName);
+		theAPI->RunStart(box.replace(" ", "_"), FileName);
 	}
 }
 

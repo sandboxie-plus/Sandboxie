@@ -2429,12 +2429,20 @@ ULONG GuiServer::GetClipboardDataSlave(SlaveArgs *args)
     GUI_GET_CLIPBOARD_DATA_RPL *rpl =
                                 (GUI_GET_CLIPBOARD_DATA_RPL *)args->rpl_buf;
 
-    //todo:  fail if the calling process should not have clipboard access
-
     if (args->req_len != sizeof(GUI_GET_CLIPBOARD_DATA_REQ))
         return STATUS_INFO_LENGTH_MISMATCH;
 
     rpl->result = 0;
+
+    // fail if the calling process should not have clipboard access
+    WCHAR boxname[48] = { 0 };
+    WCHAR exename[128] = { 0 };
+    SbieApi_QueryProcess((HANDLE)args->pid, boxname, exename, NULL, NULL);
+    if (!SbieApi_QueryConfBool(boxname, L"OpenClipboard", TRUE))
+    {
+        rpl->error = ERROR_ACCESS_DENIED;
+        goto finish;
+    }
 
     EnterCriticalSection(&m_SlavesLock);
 
@@ -2495,6 +2503,7 @@ ULONG GuiServer::GetClipboardDataSlave(SlaveArgs *args)
 
     LeaveCriticalSection(&m_SlavesLock);
 
+finish:
     args->rpl_len = sizeof(GUI_GET_CLIPBOARD_DATA_RPL);
     return STATUS_SUCCESS;
 }

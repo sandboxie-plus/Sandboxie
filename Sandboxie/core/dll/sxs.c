@@ -1981,8 +1981,8 @@ _FX BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle)
     // a pre-set value for PreferExternalManifest
     //
 
-	if (!SbieApi_QueryConfBool(NULL, L"PreferExternalManifest", FALSE))
-		return FALSE;
+    if (!Config_GetSettingsForImageName_bool(L"PreferExternalManifest", FALSE))
+        return FALSE;
 
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -2078,8 +2078,8 @@ _FX BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle)
     // our installation home directory
     //
 
-	if (!SbieApi_QueryConfBool(NULL, L"PreferExternalManifest", FALSE))
-		return FALSE;
+    if (!Config_GetSettingsForImageName_bool(L"PreferExternalManifest", FALSE))
+        return FALSE;
 
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 

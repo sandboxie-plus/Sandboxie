@@ -733,7 +733,7 @@ BOOLEAN MsCorEE_Init(HMODULE hmodule);
 
 void Custom_ComServer(void);
 
-void Custom_Load_UxTheme(void);
+//void Custom_Load_UxTheme(void);
 
 NTSTATUS StopTailCallOptimization(NTSTATUS status);
 

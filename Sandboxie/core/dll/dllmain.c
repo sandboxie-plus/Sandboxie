@@ -475,7 +475,9 @@ _FX void Dll_InitExeEntry(void)
     // force load of UxTheme in a Google Chrome sandbox process
     //
 
-    Custom_Load_UxTheme();
+    // Note: this does not seam to longer be needed for modern chrome builds, also it breaks the vivaldi browser
+
+    //Custom_Load_UxTheme(); 
 
     UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since win 7
 

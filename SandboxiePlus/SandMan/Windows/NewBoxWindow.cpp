@@ -40,6 +40,8 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	ui.cmbTemplates->addItem(tr("Default"));
 	ui.cmbTemplates->setCurrentIndex(eDefault);
 	ui.cmbTemplates->addItem(tr("Legacy Sandboxie Behaviour"));
+	// leniant
+	// open
 
 	foreach(const CSandBoxPtr& pBox, Boxes)
 		ui.cmbBoxes->addItem(pBox->GetName());
@@ -97,14 +99,17 @@ void CNewBoxWindow::CreateBox()
 		{
 			case eHardened:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("DropAdminRights", true);
+				//pBox.objectCast<CSandBoxPlus>()->SetBool("FakeAdminRights", true); // Note: making the app think its dmin has no security downsides,but can help with ompatybility
 				pBox.objectCast<CSandBoxPlus>()->SetBool("ClosePrintSpooler", true);
-				//pBox.objectCast<CSandBoxPlus>()->SetBool("OpenSmartCard", false);
 				break;
 			case eLegacy:
 				pBox.objectCast<CSandBoxPlus>()->SetBool("UnrestrictedSCM", true);
-				pBox.objectCast<CSandBoxPlus>()->SetBool("ExposeBoxedSystem", true);
+				//pBox.objectCast<CSandBoxPlus>()->SetBool("ExposeBoxedSystem", true); 
 				//pBox.objectCast<CSandBoxPlus>()->SetBool("RunServicesAsSystem", true); // legacy behavioure but there should be no normal use cases which require this
 				pBox.objectCast<CSandBoxPlus>()->SetBool("OpenPrintSpooler", true);
+				pBox.objectCast<CSandBoxPlus>()->InsertText("Template", "OpenSmartCard");
+			default:
+				pBox.objectCast<CSandBoxPlus>()->InsertText("Template", "OpenBluetooth"); // most unity games needs that an most modern gmes are unitybased
 				break;
 		}
 	}

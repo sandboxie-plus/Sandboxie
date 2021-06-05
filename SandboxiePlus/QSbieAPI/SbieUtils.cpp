@@ -88,6 +88,7 @@ SB_STATUS CSbieUtils::Stop(EComponent Component)
 
 void CSbieUtils::Stop(EComponent Component, QStringList& Ops)
 {
+	Ops.append(QString::fromWCharArray(L"kmdutil.exe|scandll"));
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) != SERVICE_STOPPED)
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|stop|" SBIESVC));
 	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) != SERVICE_STOPPED)

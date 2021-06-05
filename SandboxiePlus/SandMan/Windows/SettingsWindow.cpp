@@ -357,8 +357,18 @@ void CSettingsWindow::OnTab()
 
 			QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + I.key(), theAPI));
 
+			QString Title = pTemplate->GetText("Tmpl.Title");
+			if (Title.left(1) == "#")
+			{
+				int End = Title.mid(1).indexOf(",");
+				if (End == -1) End = Title.length() - 1;
+				int MsgNum = Title.mid(1, End).toInt();
+				Title = theAPI->GetSbieMsgStr(MsgNum, theGUI->m_LanguageId).arg(Title.mid(End + 2)).arg("");
+			}
+			//if (Title.isEmpty()) Title = Name;
+
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
-			pItem->setText(0, pTemplate->GetText("Tmpl.Title"));
+			pItem->setText(0, Title);
 			pItem->setData(0, Qt::UserRole, I.key());
 			pItem->setCheckState(0, (I.value() & CSbieTemplates::eDisabled) == 0 ? Qt::Checked : Qt::Unchecked);
 			ui.treeCompat->addTopLevelItem(pItem);

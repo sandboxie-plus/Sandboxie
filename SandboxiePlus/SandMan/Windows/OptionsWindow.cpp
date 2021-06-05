@@ -134,7 +134,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(9, CSandMan::GetIcon("Template"));
 	ui.tabs->setTabIcon(10, CSandMan::GetIcon("EditIni"));
 
-	ui.tabs->setCurrentIndex(0);
+	ui.tabs->setCurrentIndex(m_Template ? 10 : 0);
 
 	//connect(ui.chkWithTemplates, SIGNAL(clicked(bool)), this, SLOT(OnWithTemplates()));
 
@@ -165,6 +165,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkCloseClipBoard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
@@ -453,6 +454,7 @@ void COptionsWindow::LoadConfig()
 		ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 		ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 		ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
+		ui.chkCloseClipBoard->setChecked(!m_pBox->GetBool("OpenClipboard", true));
 		//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
 		//ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
 
@@ -619,18 +621,19 @@ void COptionsWindow::SaveConfig()
 		BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 		m_pBox->SetText("BorderColor", BorderCfg.join(","));
 
-		m_pBox->SetBool("BlockNetworkFiles", ui.chkBlockNetShare->isChecked());
-		m_pBox->SetBool("BlockNetParam", ui.chkBlockNetParam->isChecked());
-		m_pBox->SetBool("DropAdminRights", ui.chkDropRights->isChecked());
-		m_pBox->SetBool("FakeAdminRights", ui.chkFakeElevation->isChecked());
-		
-		m_pBox->SetBool("ClosePrintSpooler", ui.chkBlockSpooler->isChecked());
-		m_pBox->SetBool("OpenPrintSpooler", ui.chkOpenSpooler->isChecked());
-		m_pBox->SetBool("AllowSpoolerPrintToFile", ui.chkPrintToFile->isChecked());
+		WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "", "n");
+		WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
+		WriteAdvancedCheck(ui.chkDropRights, "DropAdminRights", "y", "");
+		WriteAdvancedCheck(ui.chkFakeElevation, "FakeAdminRights", "y", "");
+
+		WriteAdvancedCheck(ui.chkBlockSpooler, "ClosePrintSpooler", "y", "");
+		WriteAdvancedCheck(ui.chkOpenSpooler, "OpenPrintSpooler", "y", "");
+		WriteAdvancedCheck(ui.chkPrintToFile, "AllowSpoolerPrintToFile", "y", "");
 
 		WriteAdvancedCheck(ui.chkOpenProtectedStorage, "OpenProtectedStorage", "y", "");
 		if (ui.chkOpenCredentials->isEnabled())
 			WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
+		WriteAdvancedCheck(ui.chkCloseClipBoard, "OpenClipboard", "n", "");
 		//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
 		//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
 
@@ -656,15 +659,14 @@ void COptionsWindow::SaveConfig()
 
 
 		m_pBox->SetNum("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text().toInt() : -1);
-		m_pBox->SetBool("PromptForFileMigration", ui.chkCopyPrompt->isChecked());
-		m_pBox->SetBool("CopyLimitSilent", !ui.chkNoCopyWarn->isChecked());
+		WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
+		WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
 
-		m_pBox->SetBool("NeverDelete", ui.chkProtectBox->isChecked());
-		m_pBox->SetBool("AutoDelete", ui.chkAutoEmpty->isChecked());
+		WriteAdvancedCheck(ui.chkProtectBox, "NeverDelete", "y", "");
+		WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
 
-		m_pBox->SetBool("AllowRawDiskRead", ui.chkRawDiskRead->isChecked());
-		m_pBox->SetBool("NotifyDirectDiskAccess", ui.chkRawDiskNotify->isChecked());
-
+		WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
+		WriteAdvancedCheck(ui.chkRawDiskNotify, "NotifyDirectDiskAccess", "y", "");
 
 		m_GeneralChanged = false;
 	}
@@ -680,15 +682,15 @@ void COptionsWindow::SaveConfig()
 
 	if (m_StartChanged)
 	{
-		m_pBox->SetBool("NotifyStartRunAccessDenied", ui.chkStartBlockMsg->isChecked());
+		WriteAdvancedCheck(ui.chkStartBlockMsg, "NotifyStartRunAccessDenied", "", "n");
 
 		m_StartChanged = false;
 	}
 
 	if (m_INetBlockChanged)
 	{
-		m_pBox->SetBool("PromptForInternetAccess", ui.chkINetBlockPrompt->isChecked());
-		m_pBox->SetBool("NotifyInternetAccessDenied", ui.chkINetBlockMsg->isChecked());
+		WriteAdvancedCheck(ui.chkINetBlockPrompt, "PromptForInternetAccess", "y", "");
+		WriteAdvancedCheck(ui.chkINetBlockMsg, "NotifyInternetAccessDenied", "", "n");
 
 		m_INetBlockChanged = false;
 	}
@@ -701,15 +703,15 @@ void COptionsWindow::SaveConfig()
 
 	if (m_AdvancedChanged)
 	{
-		WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "", "y");
-		WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "", "y");
+		WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "y", "");
+		WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "y", "");
 
 		WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
 		WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
 		WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
 		
 		WriteAdvancedCheck(ui.chkOpenDevCMApi, "OpenDevCMApi", "n", "");
-		WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "", "n"); // OpenLsaSSPI
+		WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
 		WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "n", "");
 		WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "n", "");
 
@@ -1923,7 +1925,7 @@ void COptionsWindow::SaveRecoveryList()
 	m_pBox->UpdateTextList("RecoverFolder", RecoverFolder, m_Template);
 	m_pBox->UpdateTextList("AutoRecoverIgnore", AutoRecoverIgnore, m_Template);
 
-	m_pBox->SetBool("AutoRecover", ui.chkAutoRecovery->isChecked());
+	WriteAdvancedCheck(ui.chkAutoRecovery, "AutoRecover", "y", "");
 
 	m_RecoveryChanged = false;
 }
@@ -2134,9 +2136,9 @@ void COptionsWindow::LoadTemplates()
 		QString Name = *I++;
 		QString Category = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Class", 0x40000000L); // CONF_GET_NO_GLOBAL);
 		QString Title = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Title", 0x40000000L); // CONF_GET_NO_GLOBAL);
-		/*QString Hide = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Hide", 0x40000000L); // CONF_GET_NO_GLOBAL);
+		QString Hide = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Hide", 0x40000000L); // CONF_GET_NO_GLOBAL);
 		if (Hide == "y" || Hide == "Y")
-			continue;*/
+			continue;
 		if (Name == "Template_ScreenReader")
 			continue;
 

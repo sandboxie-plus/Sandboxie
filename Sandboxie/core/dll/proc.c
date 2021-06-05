@@ -357,6 +357,35 @@ _FX BOOLEAN Proc_Init(void)
     }
 
     //
+    // UpdateProcThreadAttribute
+    //
+
+	// fix for chrome 86+
+	if (Dll_OsBuild >= 7600) {
+		void* UpdateProcThreadAttribute = NULL;
+		RtlInitString(&ansi, "UpdateProcThreadAttribute");
+		status = LdrGetProcedureAddress(
+			Dll_KernelBase, &ansi, 0, (void **)&UpdateProcThreadAttribute);
+		if (NT_SUCCESS(status))
+			SBIEDLL_HOOK(Proc_, UpdateProcThreadAttribute);
+	}
+
+    //
+    // SetProcessMitigationPolicy
+    //
+
+    // fox for SBIE2303 Could not hook ... (33, 1655) due to mitigation policies
+    if (Dll_OsBuild >= 8400)    // win8
+    {
+        void* SetProcessMitigationPolicy = NULL;
+        RtlInitString(&ansi, "SetProcessMitigationPolicy");
+        status = LdrGetProcedureAddress(
+            Dll_KernelBase, &ansi, 0, (void**)&SetProcessMitigationPolicy);
+        if (NT_SUCCESS(status))
+            SBIEDLL_HOOK(Proc_, SetProcessMitigationPolicy);
+    }
+
+    //
     // CreateProcessInternal
     //
 
@@ -371,27 +400,6 @@ _FX BOOLEAN Proc_Init(void)
     if (! NT_SUCCESS(status)) {
         status = LdrGetProcedureAddress(
             Dll_Kernel32, &ansi, 0, (void **)&CreateProcessInternalW);
-    }
-
-	// fix for chrome 86+
-	if (Dll_OsBuild >= 7600) {
-		void* UpdateProcThreadAttribute = NULL;
-		RtlInitString(&ansi, "UpdateProcThreadAttribute");
-		status = LdrGetProcedureAddress(
-			Dll_KernelBase, &ansi, 0, (void **)&UpdateProcThreadAttribute);
-		if (NT_SUCCESS(status))
-			SBIEDLL_HOOK(Proc_, UpdateProcThreadAttribute);
-	}
-
-    // fox for SBIE2303 Could not hook ... (33, 1655) due to mitigation policies
-    if (Dll_OsBuild >= 8400)    // win8
-    {
-        void* SetProcessMitigationPolicy = NULL;
-        RtlInitString(&ansi, "SetProcessMitigationPolicy");
-        status = LdrGetProcedureAddress(
-            Dll_KernelBase, &ansi, 0, (void**)&SetProcessMitigationPolicy);
-        if (NT_SUCCESS(status))
-            SBIEDLL_HOOK(Proc_, SetProcessMitigationPolicy);
     }
 
     if(Dll_OsBuild < 17677) {
@@ -1104,6 +1112,7 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
     ULONG err;
     BOOL ok;
     BOOL resume_thread = FALSE;
+    WCHAR* lpAlteredCommandLine = NULL;
 
     Proc_LastCreatedProcessHandle = NULL;
 
@@ -1116,6 +1125,31 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
         lpProcessInformation, &ok)) {
 
         return ok;
+    }
+
+    //
+    // Electron based applications which work like chrome seam to fail with HW acceleration even when 
+    // thay get the same treatment as chrome and chromium derivatives.
+    // hack: by adding a parameter to the gpu renderer process we can fix the issue.
+    //
+
+    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED)
+    {
+        if(lpApplicationName && lpCommandLine)
+        {
+            WCHAR* backslash = wcsrchr(lpApplicationName, L'\\');
+            if ((backslash && _wcsicmp(backslash + 1, Dll_ImageName) == 0)
+                && wcsstr(lpCommandLine, L" --type=gpu-process")
+                && !wcsstr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+
+                lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
+
+                wcscpy(lpAlteredCommandLine, lpCommandLine);
+                wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
+
+                lpCommandLine = lpAlteredCommandLine;
+            }
+        }
     }
 
     //
@@ -1196,8 +1230,6 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
     if (lpCommandLine) {
         wcscat(buf, lpCommandLine);
     }
-    else
-        TlsData->proc_command_line = NULL;
 
     TlsData->proc_command_line = buf;
 
@@ -1391,6 +1423,9 @@ finish:
     if (lpCurrentDirectory && lpCurrentDirectory != SaveCurrentDirectory)
         Dll_Free(lpCurrentDirectory);
 
+    if(lpAlteredCommandLine)
+        Dll_Free(lpAlteredCommandLine);
+
     if (TlsData->proc_image_path) {
         Dll_Free(TlsData->proc_image_path);
         TlsData->proc_image_path = NULL;
@@ -1424,7 +1459,7 @@ _FX BOOL Proc_AlternateCreateProcess(
     BOOL *ReturnValue)
 {
     if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", TRUE))
-    if (Proc_IsSoftwareUpdateW(lpApplicationName)) {
+    if (Proc_IsSoftwareUpdateW(lpApplicationName ? lpApplicationName : lpCommandLine)) {
 
         SetLastError(ERROR_ACCESS_DENIED);
         *ReturnValue = FALSE;
@@ -2324,6 +2359,15 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
         MatchDir = L"\\google\\update\\";
         SoftName = L"Google Chrome";
 
+    } else if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH) {
+
+        if (! Proc_IsProcessRunning(L"msedge.exe"))
+            return FALSE;
+
+        MatchExe = L"microsoftedgeupdatebroker.exe";
+        MatchDir = L"\\microsoft\\edgeupdate";
+        SoftName = L"Microsoft Edge";
+
     } else
         return FALSE;
 
@@ -2334,7 +2378,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     IsUpdate = FALSE;
 
     backslash = wcsrchr(path, L'\\');
-    if (backslash && _wcsicmp(backslash + 1, MatchExe) == 0) {
+    if (backslash && _wcsnicmp(backslash + 1, MatchExe, wcslen(MatchExe)) == 0) {
 
         ULONG len = wcslen(path) + 1;
         WCHAR *path2 = Dll_AllocTemp(len * sizeof(WCHAR));

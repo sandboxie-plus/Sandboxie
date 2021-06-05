@@ -1239,11 +1239,13 @@ _FX HWND Gui_CreateWindowExW(
     // note:  the desktop window was made accessible in early v4 builds
     // but this code is still here to handle any other parent windows
     //
-    
-    if (Dll_ChromeSandbox) {
+    // note:  this code breaks chrome hw acceleration, so its no longer used
+    //
+
+    /*if (Dll_ChromeSandbox) { 
         dwStyle |= WS_CHILD;
         hWndParent = HWND_MESSAGE;
-    }
+    }*/
 
     //
     // replace title on windows that have no parent

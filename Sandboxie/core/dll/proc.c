@@ -1128,8 +1128,8 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
     }
 
     //
-    // Electron based applications which work like chrome seam to fail with HW acceleration even when 
-    // thay get the same treatment as chrome and chromium derivatives.
+    // Electron based applications which work like chrome seem to fail with HW acceleration even when 
+    // they get the same treatment as chrome and chromium derivatives.
     // hack: by adding a parameter to the gpu renderer process we can fix the issue.
     //
 

@@ -187,7 +187,7 @@ _FX BOOLEAN Gui_InitMisc(void)
     // Chinese instant messenger QQ.exe (aka TM.exe) uses OpenInputDesktop,
     // GetThreadDesktop and GetUserObjectInformation to determine if the
     // desktop is locked, and if OpenInputDesktop fails, it assumes lock.
-    // fortunately it is enough to hook just OpenInputDesktop to fix this
+    // Fortunately it is enough to hook just OpenInputDesktop to fix this
     //
     // Google Chrome also uses OpenInputDesktop and GetUserObjectInformation
     // to check if the desktop is locked, and other programs might as well

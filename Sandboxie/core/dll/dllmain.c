@@ -466,7 +466,7 @@ _FX void Dll_InitExeEntry(void)
 
     //
     // check if running as a forced COM server process
-    // note:  does not return if this is the case
+    // note:  it does not return if this is the case
     //
 
     Custom_ComServer();
@@ -475,7 +475,7 @@ _FX void Dll_InitExeEntry(void)
     // force load of UxTheme in a Google Chrome sandbox process
     //
 
-    // Note: this does not seam to longer be needed for modern chrome builds, also it breaks the vivaldi browser
+    // Note: this does not seem to be needed anymore for modern chrome builds, also it breaks the vivaldi browser
 
     //Custom_Load_UxTheme(); 
 

@@ -1202,7 +1202,7 @@ _FX LONG Gui_GetRawInputDeviceInfo_impl(
     GUI_GET_RAW_INPUT_DEVICE_INFO_REQ* req;
     GUI_GET_RAW_INPUT_DEVICE_INFO_RPL* rpl;
 
-    // Note: pcbSize seams to be in tchars not in bytes!
+    // Note: pcbSize seems to be in tchars not in bytes!
     ULONG lenData = 0;
     if (pData && pcbSize)
         lenData = (*pcbSize) * (bUnicode ? sizeof(WCHAR) : 1);

@@ -1691,7 +1691,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>允許所有程式在此沙盤中啟動。</translation>
     </message>
     <message>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>啟用快速恢復提示以便建立檔案時能儘快恢復。</translation>
     </message>
     <message>
@@ -1899,7 +1899,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>新增使用者</translation>
     </message>
     <message>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>此處輸入的程式，或指定位置啟動的程式，將自動加入此沙盤，除非它們被確定已在其他沙盤啟動。</translation>
     </message>
     <message>
@@ -2125,7 +2125,7 @@ instead of &quot;*&quot;.</source>
         <translation>權限提升限制</translation>
     </message>
     <message>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>使應用程式認為其已在權限提升狀態下運作（允許安全地執行安裝程式）</translation>
     </message>
     <message>

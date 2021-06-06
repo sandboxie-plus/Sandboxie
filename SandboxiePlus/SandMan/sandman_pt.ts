@@ -2243,7 +2243,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2335,7 +2335,7 @@ Faça o download da versão mais recente e configure-a em sandboxie.ini conforme
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>Programas inseridos aqui, ou iniciados a partir de locais inseridos, serão colocados nessa caixa automaticamente, a menos que seja explicitamente iniciado em outra caixa de areia.</translation>
     </message>
     <message>
@@ -2566,7 +2566,7 @@ Para acesso a arquivos, você pode usar o &apos;Direct All&apos; em vez de fazê
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1412"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Ativar mensagem de recuperação imediata para poder recuperar arquivos assim que for criado.</translation>
     </message>
     <message>

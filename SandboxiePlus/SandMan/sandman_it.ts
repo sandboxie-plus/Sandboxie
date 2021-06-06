@@ -2364,7 +2364,7 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1412"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Attiva notifica di Recupero immediato dei file, non appena questi vengono creati.</translation>
     </message>
     <message>

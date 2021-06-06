@@ -2077,7 +2077,7 @@ Full path: %4</oldsource>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2202,7 +2202,7 @@ Full path: %4</oldsource>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>To podane programy lob programy wystartowane z to podanych ścieżek będą automatycznie umieszczone w tej piaskownicy, chyba że są specjalnie umieszczone w innej.</translation>
     </message>
     <message>
@@ -2373,7 +2373,7 @@ Bezpośredni dostęp do plików i kluczy działa tylko z programami umieszczonyc
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1412"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Aktywuj bezzwłoczne odtwarzanie plików jak tylko zostaną zapisane.</translation>
     </message>
     <message>

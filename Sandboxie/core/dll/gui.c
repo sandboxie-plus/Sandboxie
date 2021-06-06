@@ -1232,14 +1232,14 @@ _FX HWND Gui_CreateWindowExW(
     //
     // under Sandboxie 4 the Chrome sandbox child process gets confused
     // (reason not known) and creates some top level windows, for which it
-    // does not process messages.  this causes DDE message broadcast to
-    // hang for several seconds.  to workaround this, we cause the windows
+    // does not process messages. This causes DDE message broadcast to
+    // hang for several seconds. To workaround this, we cause the windows
     // to be created as message-only windows
     //
     // note:  the desktop window was made accessible in early v4 builds
     // but this code is still here to handle any other parent windows
     //
-    // note:  this code breaks chrome hw acceleration, so its no longer used
+    // note:  this code breaks Chrome hw acceleration, so it's no longer used
     //
 
     /*if (Dll_ChromeSandbox) { 

@@ -1944,7 +1944,7 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>Fai credere alle applicazioni di avviarsi con privilegi elevati (esegue gli installer in modo sicuro)</translation>
     </message>
     <message>
@@ -2192,7 +2192,7 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>I seguenti programmi, o i programmi avviati dai seguenti percorsi, verranno avviati automaticamente in quest&apos;area virtuale.</translation>
     </message>
     <message>

@@ -1409,7 +1409,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
            <item row="2" column="0" colspan="2">
             <widget class="QCheckBox" name="chkAutoRecovery">
              <property name="text">
-              <string>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</string>
+              <string>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</string>
              </property>
             </widget>
            </item>

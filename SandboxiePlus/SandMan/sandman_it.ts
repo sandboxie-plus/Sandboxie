@@ -1944,7 +1944,7 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>Fai credere alle applicazioni di avviarsi con privilegi elevati (esegue gli installer in modo sicuro)</translation>
     </message>
     <message>
@@ -2192,7 +2192,7 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>I seguenti programmi, o i programmi avviati dai seguenti percorsi, verranno avviati automaticamente in quest&apos;area virtuale.</translation>
     </message>
     <message>
@@ -2364,7 +2364,7 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1412"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Attiva notifica di Recupero immediato dei file, non appena questi vengono creati.</translation>
     </message>
     <message>

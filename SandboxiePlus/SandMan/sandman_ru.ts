@@ -1600,7 +1600,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>Разрешить запуск всех программ в этой песочнице.</translation>
     </message>
     <message>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Включить запрос немедленного восстановления, чтобы иметь возможность восстанавливать файлы сразу после их создания.</translation>
     </message>
     <message>
@@ -1818,7 +1818,7 @@ instead of &quot;*&quot;.</source>
         <translation>Добавить пользователя</translation>
     </message>
     <message>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>Введенные здесь программы, или программы запущенные из указанных мест, будут автоматически помещены в эту песочницу, если они явно не запущены в другой песочнице.</translation>
     </message>
     <message>
@@ -2031,7 +2031,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Ограничения повышение уровня</translation>
     </message>
     <message>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>Заставить приложения думать, что они работают с повышенными правами (позволяет безопасно запускать установщики)</translation>
     </message>
     <message>

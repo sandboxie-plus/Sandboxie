@@ -484,7 +484,7 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
     DropRights = (proc->drop_rights ? -1 : 0);
 
     //
-    // special allowance for MSIServer - does not seam to be needed with the CreateWaitableTimerW hook
+    // special allowance for MSIServer - it does not seem to be needed with the CreateWaitableTimerW hook
     //
     //if (DropRights && !proc->image_from_box && _wcsicmp(proc->image_name, L"msiexec.exe") == 0
     //    && Conf_Get_Boolean(proc->box->name, L"MsiInstallerExemptions", 0, FALSE)) 

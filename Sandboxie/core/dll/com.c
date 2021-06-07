@@ -3455,9 +3455,9 @@ _FX void Com_LoadRTList(const WCHAR* setting, WCHAR** pNames)
 _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
 {
     //
-    // Chrome uses the FindAppUriHandlersAsync which when we dont have com open and more rights than we should have
-    // fails returning a NULl value, chrome does no check for thsi faulure mode and dereferences it resulting in a fatal crash.
-    // Since we don't support modern app features anyways the simplest workaround is to block this interface.
+    // Chrome uses the FindAppUriHandlersAsync, which fails returning a NULL value when we don't have com open and more rights
+    // than we should have. Chrome does not check for this failure mode and dereferences it, resulting in a fatal crash.
+    // Since we don't support modern app features anyways, the simplest workaround is to block this interface.
     //
     if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) {
 
@@ -3466,7 +3466,7 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
     }
 
     //
-    // this seams to be broken as well
+    // this seems to be broken as well
     //if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)
     //    return TRUE;
 

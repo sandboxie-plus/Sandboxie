@@ -997,9 +997,9 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
 	_In_opt_ PSIZE_T lpReturnSize)
 {
-	// fix for chreom 86+
-	// when the PROC_THREAD_ATTRIBUTE_JOB_LIST is set the call CreateProcessAsUserW -> CreateProcessInternalW -> NtCreateProcess 
-	// fals with an access denided error, so we need to block this attribute form being set
+	// fix for Chrome 86+
+	// when the PROC_THREAD_ATTRIBUTE_JOB_LIST is set, the call CreateProcessAsUserW -> CreateProcessInternalW -> NtCreateProcess 
+	// fails with an access denied error, so we need to block this attribute from being set
 	// if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
     if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
     {
@@ -1128,8 +1128,8 @@ _FX BOOL Proc_CreateProcessInternalW_RS5(
     }
 
     //
-    // Electron based applications which work like chrome seam to fail with HW acceleration even when 
-    // thay get the same treatment as chrome and chromium derivatives.
+    // Electron based applications which work like Chrome seem to fail with HW acceleration even when 
+    // they get the same treatment as Chrome and Chromium derivatives.
     // hack: by adding a parameter to the gpu renderer process we can fix the issue.
     //
 
@@ -1686,7 +1686,7 @@ _FX void Proc_QuoteCommandLine_XP(
 
     //
     // the system CreateProcessInternal may quote the first argument on
-    // the command line.  on Vista and later, we get the quoted string
+    // the command line. On Vista and later, we get the quoted string
     // through Proc_RtlCreateProcessParametersEx, but on Windows XP we
     // abort CreateProcessInternal during NtCreateSection, before it can
     // show us the quoted command line, so add the quotes here
@@ -1774,9 +1774,9 @@ _FX void Proc_FixBatchCommandLine(
     // lpApplication, the system CreateProcessInternalW will try to create
     // a process using the batch file path, and will fail with "not found"
     // instead of "not exe file" if the batch file exists only in the
-    // sandbox.  to prepare for this case, we adjust the command line if
+    // sandbox. To prepare for this case, we adjust the command line if
     // the batch file is inside the sandbox.
-    // see Proc_CreateProcessInternalW above.
+    // See Proc_CreateProcessInternalW above.
     //
 
     if (! CommandLine)
@@ -1923,7 +1923,7 @@ _FX NTSTATUS Proc_RtlCreateProcessParametersEx(
 {
     //
     // on Windows Vista and later we can extract the image path from
-    // the invocation of RtlCreateProcessParametersEx.  it is invoked
+    // the invocation of RtlCreateProcessParametersEx. It is invoked
     // before a new process object is created
     //
 
@@ -2241,8 +2241,6 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     // ignore rundll32.exe, because Windows Live Mail sets
     // it as the default mail program.
     //
-    // ignore opera.exe, because Opera may only be used for
-    // browsing and not email
     //
     // ignore other common browsers
     //
@@ -2485,7 +2483,7 @@ _FX BOOLEAN Proc_Init_AdvPack(HMODULE module)
     // the Protected Mode ActiveX Installation Broker
     // but this means that an ActiveX installation which involves running
     // an EXE file may not elevate correctly.
-    // so we hook RunSetupCommand to force elevation.
+    // So we hook RunSetupCommand to force elevation.
     //
 
     extern BOOLEAN Secure_IsInternetExplorerTabProcess;

@@ -3451,7 +3451,7 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
     rpl->cbSize = req->cbSize;
     if (pcbSize && req->hasData)
     {
-        // Note: pcbSize seams to be in tchars not in bytes!
+        // Note: pcbSize seems to be in tchars not in bytes!
         ULONG lenData = (*pcbSize) * (req->unicode ? sizeof(WCHAR) : 1);
 
         rpl->hasData = TRUE;

@@ -2044,7 +2044,7 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>Lässt Programme denken, sie würden mit erhöhten Rechten laufen (Erlaubt das sichere Ausführen von Installern)</translation>
     </message>
     <message>
@@ -2136,7 +2136,7 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>Programme die hier gelistet sind oder von den angegeben Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
     </message>
     <message>
@@ -2367,7 +2367,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1412"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <oldsource>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</oldsource>
         <translation>Aktivere Sofortwiederherstellungsabfrage, um alle Dateien sofort wiederherzustellen, sobald sie erzeugt werden.</translation>
     </message>

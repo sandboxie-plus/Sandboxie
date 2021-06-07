@@ -1624,7 +1624,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>Tüm programların bu kutuda başlamasına izin ver.</translation>
     </message>
     <message>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Dosyaları oluşturulur oluşturulmaz kurtarabilmek için Anında Kurtarma istemini etkinleştir.</translation>
     </message>
     <message>
@@ -1846,7 +1846,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
         <translation>Kullanıcı Ekle</translation>
     </message>
     <message>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>Buraya girilen programlar veya girilen konumlardan başlatılan programlar, başka bir korumalı kutuda açıkça belirtilmedikçe otomatik olarak bu kutuya yerleştirilecektir.</translation>
     </message>
     <message>
@@ -2071,7 +2071,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

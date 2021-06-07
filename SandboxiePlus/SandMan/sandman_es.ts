@@ -1929,7 +1929,7 @@ Full path: %4</oldsource>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2177,7 +2177,7 @@ Full path: %4</oldsource>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2344,7 +2344,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1412"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

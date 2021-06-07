@@ -2,7 +2,7 @@
 Sandboxie is a sandbox-based isolation software for 32- and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.
 
 ## Downloads
-Get the latest release here: https://github.com/sandboxie-plus/Sandboxie/releases
+Get the latest release here: https://github.com/sandboxie-plus/Sandboxie/releases/latest
 
 Sandboxie is available in two flavors, Plus and Classic. Both have the same core components, this means they have the same level of security and compatibility.
 What's different is the availability of features in the user interface.

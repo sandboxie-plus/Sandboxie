@@ -1,8 +1,8 @@
 #----------------------------------------------------------------------------
 #  Translation to DUTCH (Nederlands)                                  *
-#  Original translations by Alfons  Van de Meutter - Belgium on may-10-2012*
+#  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-03-30
+#  Latest update by RockyTDR on 2021-06-08
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -3037,6 +3037,22 @@ Programma's toestaan om jumplists in de taakbalk van Windows 7 bij te werken
 Voorinstellingen voor standaard-uitsluitingen van bestandsmigratie
 .
 
+4296;txt;01
+Standaard RPC-poort bindings
+.
+
+4297;txt;01
+Bluetooth RPC-poort openen
+.
+
+4298;txt;01
+Smart card RPC-poort openen
+.
+
+4299;txt;01
+Simple Service Discovery Protocol (SSDP, UPnP) RPC-poort openen
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3310,6 +3326,10 @@ Torrent-clients
 
 4397;txt;01
 De volgende uitsluitingen laten torrent-clients die uitgevoerd worden in deze sandbox toe om toegang te krijgen tot bestanden buiten de sandbox.
+.
+
+4398;txt;01
+%2 directe toegang toestaan tot de muziek-map voor eenvoudiger bibliotheekbeheer.
 .
 
 #----------------------------------------------------------------------------

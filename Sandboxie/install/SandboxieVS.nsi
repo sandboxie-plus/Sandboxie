@@ -37,11 +37,11 @@ SetCompressor /SOLID /FINAL lzma
 
 !define BIN_ROOT_BASE	"${SBIE_INSTALLER_PATH}"
 
-!if "${_BUILDARCH}" == "x64"
-    !define _W7DRV_COMPAT "$%SbieVer%.x64"
-!else
-    !define _W7DRV_COMPAT "$%SbieVer%.x86"
-!endif
+;!if "${_BUILDARCH}" == "x64"
+;    !define _W7DRV_COMPAT "$%SbieVer%.x64"
+;!else
+;    !define _W7DRV_COMPAT "$%SbieVer%.x86"
+;!endif
 
 ;!define SBIEDRV_SYS4    "${SBIEDRV_SYS}.rc4"
 ;!define SBIEDRV_SYSX    "${SBIEDRV_SYS}.w10"
@@ -224,7 +224,7 @@ Var LaunchControl
 Var MustReboot
 Var BundledInstall
 Var DeleteSandboxieIni
-Var Win7Driver
+;Var Win7Driver
 
 ;----------------------------------------------------------------------------
 ; macro InstallSystemDll
@@ -606,6 +606,15 @@ SystemCheck_Force_Remove:
 
 SystemCheck_Done:
 
+    !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "'Software\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie-Plus_is1'" "UninstallString"
+    Pop $0
+    StrCmp $0 "" PlusCheck_Done
+
+    MessageBox MB_OK|MB_ICONSTOP "Sandboxie Plus installation detected, you must uninstall it first before you can downgrade to Sandboxie Classic!"
+    Quit
+
+PlusCheck_Done:
+
 ;
 ; Confirm we are running as Administrator
 ;
@@ -680,36 +689,36 @@ Function InstallTypePage
 ;
 ; Provisional windows 7 support
 ;
-    !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "'Software\Microsoft\Windows NT\CurrentVersion'" "CurrentVersion"
-    Pop $0
-    StrCmp $0 "6.0" w7_Drv_ask
-    StrCmp $0 "6.1" w7_Drv_ask
-    Goto w7_Skip
-
-w7_Drv_ask:
-
-    MessageBox MB_YESNO|MB_ICONQUESTION "Windows 7 requires a provisional driver package. You will have to download it from the GitHub release page https://github.com/sandboxie-plus/Sandboxie/releases/$\r$\nDo you have it downloaded?" IDYES w7_Drv_ok
-
-    MessageBox MB_YESNO|MB_ICONQUESTION "Do you want to open the download page in your default web browser?" IDNO w7_Drv_cancel
-    ExecShell "open" "https://github.com/sandboxie-plus/Sandboxie/releases/"
-    Goto w7_Drv_ok
-
-w7_Drv_cancel:
-    MessageBox MB_OK|MB_ICONSTOP "On windows 7 the install can not continue without the provisional driver package"
-
-    Quit
-
-w7_Drv_ok:
-
-    nsDialogs::SelectFileDialog open "" "Driver binary (*.${_W7DRV_COMPAT}.rc4)|*.${_W7DRV_COMPAT}.rc4|All Files|*.*"
-    
-    Pop $0
-    StrCmp $0 "" w7_Drv_cancel
-    StrCpy $Win7Driver $0
-
-;    MessageBox MB_OK $Win7Driver
-
-w7_Skip:
+;    !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "'Software\Microsoft\Windows NT\CurrentVersion'" "CurrentVersion"
+;    Pop $0
+;    StrCmp $0 "6.0" w7_Drv_ask
+;    StrCmp $0 "6.1" w7_Drv_ask
+;    Goto w7_Skip
+;
+;w7_Drv_ask:
+;
+;    MessageBox MB_YESNO|MB_ICONQUESTION "Windows 7 requires a provisional driver package. You will have to download it from the GitHub release page https://github.com/sandboxie-plus/Sandboxie/releases/$\r$\nDo you have it downloaded?" IDYES w7_Drv_ok
+;
+;    MessageBox MB_YESNO|MB_ICONQUESTION "Do you want to open the download page in your default web browser?" IDNO w7_Drv_cancel
+;    ExecShell "open" "https://github.com/sandboxie-plus/Sandboxie/releases/"
+;    Goto w7_Drv_ok
+;
+;w7_Drv_cancel:
+;    MessageBox MB_OK|MB_ICONSTOP "On windows 7 the install can not continue without the provisional driver package"
+;
+;    Quit
+;
+;w7_Drv_ok:
+;
+;    nsDialogs::SelectFileDialog open "" "Driver binary (*.${_W7DRV_COMPAT}.rc4)|*.${_W7DRV_COMPAT}.rc4|All Files|*.*"
+;    
+;    Pop $0
+;    StrCmp $0 "" w7_Drv_cancel
+;    StrCpy $Win7Driver $0
+;
+;;    MessageBox MB_OK $Win7Driver
+;
+;w7_Skip:
 
     StrCmp $InstallType "Install" InstallType_Done
     
@@ -1521,14 +1530,14 @@ Driver_Upgrade:
 
 Driver_Install:
 
-  StrCmp $Win7Driver "" now_w7_Drv
-
-;  MessageBox MB_OK $Win7Driver
-  Delete "$INSTDIR\SbieDrv.sys.w10"
-  Rename "$INSTDIR\SbieDrv.sys" "$INSTDIR\SbieDrv.sys.w10"
-  CopyFiles $Win7Driver "$INSTDIR\SbieDrv.sys.rc4"
-
-now_w7_Drv:
+;  StrCmp $Win7Driver "" now_w7_Drv
+;
+;;  MessageBox MB_OK $Win7Driver
+;  Delete "$INSTDIR\SbieDrv.sys.w10"
+;  Rename "$INSTDIR\SbieDrv.sys" "$INSTDIR\SbieDrv.sys.w10"
+;  CopyFiles $Win7Driver "$INSTDIR\SbieDrv.sys.rc4"
+;
+;now_w7_Drv:
 
     Push "start ${SBIESVC}"
     Call KmdUtil

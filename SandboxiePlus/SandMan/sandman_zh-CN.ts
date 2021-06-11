@@ -126,12 +126,12 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="774"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>该沙盒已被删除，因此配置无法保存。</translation>
+        <translation>该沙盒已被删除，因此无法保存配置。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="812"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation>部分变更未保存，确定关闭这个选项窗口吗？</translation>
+        <translation>部分变更未保存，确定关闭这个窗口吗？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="826"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="848"/>
         <source>Please enter a program path</source>
-        <translation>请输入一个程序路径</translation>
+        <translation>请输入程序路径</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="858"/>
@@ -157,7 +157,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="868"/>
         <source>Please enter a service identifier</source>
-        <translation>请输入一个服务标识符</translation>
+        <translation>请输入服务标识符</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="879"/>
@@ -178,12 +178,12 @@
         <location filename="Windows/OptionsWindow.cpp" line="902"/>
         <location filename="Windows/OptionsWindow.cpp" line="916"/>
         <source>Please enter a menu title</source>
-        <translation>请输入一个菜单标题</translation>
+        <translation>请输入菜单标题</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="912"/>
         <source>Please enter a command</source>
-        <translation>请输入一则命令</translation>
+        <translation>请输入命令</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="947"/>
@@ -196,7 +196,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1028"/>
         <source>Please enter a name for the new group</source>
-        <translation>请输入新组的名称</translation>
+        <translation>请输入新的组名</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1049"/>
@@ -317,23 +317,23 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1719"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation>COM 对象必须用其 GUID 来指定，例如：{00000000-0000-0000-0000-000000000000}</translation>
+        <translation>COM 必须指定对象 GUID，例如：{00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1725"/>
         <source>RT interfaces must be specified by their name.</source>
-        <translation>RT 接口必须用其名称来指定。</translation>
+        <translation>RT 必须指定接口名称。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1767"/>
         <source>Template values can not be edited.</source>
-        <translation>模板值无法被编辑。</translation>
+        <translation>无法编辑模板值。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1824"/>
         <location filename="Windows/OptionsWindow.cpp" line="1968"/>
         <source>Template values can not be removed.</source>
-        <translation>模板值无法被移除。</translation>
+        <translation>无法移除模板值。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1899"/>
@@ -343,17 +343,17 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1953"/>
         <source>Please enter a file extension to be excluded</source>
-        <translation>请输入一个要排除的文件扩展名</translation>
+        <translation>请输入要排除的文件扩展名</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2001"/>
         <source>Please enter an auto exec command</source>
-        <translation>请输入一则自动运行命令</translation>
+        <translation>请输入自动运行命令</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2020"/>
         <source>Please enter a program file name</source>
-        <translation>请输入一个程序文件名称</translation>
+        <translation>请输入程序文件名称</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2160"/>
@@ -363,7 +363,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2227"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation>此模板已全局启用。如需配置，请前往全局选项。</translation>
+        <translation>此模板已全局启用，如需配置，请前往全局选项。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2259"/>
@@ -548,20 +548,20 @@
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="136"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation>要允许 %1 (%2) 利用打印处理服务在沙盒外写入吗？</translation>
+        <translation>允许 %1 (%2) 使用打印服务在沙盒外写入吗？</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="229"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <translation>要允许 %4 (%5) 复制大文件 %1 到 %2 沙盒吗？
+        <translation>允许 %4 (%5) 复制大文件 %1 到 %2 沙盒吗？
 文件名：%3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="235"/>
         <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
-        <translation>要允许 %1 (%2) 访问网络吗？
+        <translation>允许 %1 (%2) 访问网络吗？
 完整路径：%3</translation>
     </message>
     <message>
@@ -626,7 +626,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="266"/>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation>一个或多个被选择的文件位于网络共享，并必须恢复到一个本地磁盘，请选择要将所选文件恢复到哪个文件夹。</translation>
+        <translation>一个或多个被选中的文件位于网络共享，且必须恢复到本地磁盘，请选择要将所选文件恢复到哪个文件夹。</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="304"/>
@@ -982,12 +982,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="526"/>
         <source>Failed to stop all Sandboxie components</source>
-        <translation>停止全部的 Sandboxie 组件失败</translation>
+        <translation>无法停止全部的 Sandboxie 组件</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="528"/>
         <source>Failed to start required Sandboxie components</source>
-        <translation>启动所需的 Sandboxie 组件失败</translation>
+        <translation>无法启动所需的 Sandboxie 组件</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="530"/>
@@ -1012,7 +1012,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="637"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>您是否想检查有无 Sandboxie-Plus 新版本发布？</translation>
+        <translation>您是否想检查 Sandboxie-Plus 有无新版本发布？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="675"/>
@@ -1119,27 +1119,27 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1080"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus 正以便携模式启动，需要创建所需的服务，将会提示需要管理员权限。</translation>
+        <translation>Sandboxie-Plus 正以便携模式启动，将会提示需要管理员权限，以便创建所需的服务。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1172"/>
         <source>Executing maintenance operation, please wait...</source>
-        <translation>正在执行操作维护，请稍候...</translation>
+        <translation>正在维护，请稍候...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1280"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation>请确认是否要重置已隐藏的消息框（选“是”），或者仅重置所有日志消息（选“否”）。</translation>
+        <translation>请确认是否重置已隐藏的消息框（“是”），或者仅重置所有日志消息（“否”）。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1315"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>每次该文件被保存时更改将自动应用</translation>
+        <translation>文件保存时将自动应用</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1316"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
-        <translation>编辑器被关闭后更改将很快自动应用</translation>
+        <translation>编辑器关闭后将自动应用</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1432"/>
@@ -1159,7 +1159,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1436"/>
         <source>Failed to connect to the driver</source>
-        <translation>连接驱动程序失败</translation>
+        <translation>无法连接驱动程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1437"/>
@@ -1169,7 +1169,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1438"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation>发现不兼容的 Sandboxie %1。兼容的版本：%2</translation>
+        <translation>发现不兼容的 Sandboxie %1，兼容版本：%2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1439"/>
@@ -1179,17 +1179,17 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1440"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
-        <translation>复制沙盒配置 %1: %2 失败</translation>
+        <translation>无法复制沙盒配置 %1: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1441"/>
         <source>A sandbox of the name %1 already exists</source>
-        <translation>名为 %1 的沙盒已存在</translation>
+        <translation>%1 沙盒已存在</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Failed to delete sandbox %1: %2</source>
-        <translation>删除沙盒 %1: %2 失败</translation>
+        <translation>无法删除沙盒 %1: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1443"/>
@@ -1199,7 +1199,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1444"/>
         <source>The sandbox name can not be a device name.</source>
-        <translation>沙盒名称不能为设备名称。</translation>
+        <translation>沙盒不能以设备命名。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1445"/>
@@ -1224,12 +1224,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1449"/>
         <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation>沙盒被重命名前必须清空。</translation>
+        <translation>重命名沙盒前必须先清空。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1450"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation>沙盒被删除前必须清空。</translation>
+        <translation>删除沙盒前必须先清空。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1451"/>
@@ -1239,17 +1239,17 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1452"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>因有进程正在沙盒中运行，此快照操作无法完成。</translation>
+        <translation>沙盒中有进程正在运行，无法完成此快照。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1453"/>
         <source>Failed to create directory for new snapshot</source>
-        <translation>创建新快照的目录失败</translation>
+        <translation>无法创建新快照目录</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1454"/>
         <source>Failed to copy RegHive</source>
-        <translation>复制 RegHive 失败</translation>
+        <translation>无法复制 RegHive</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1455"/>
@@ -1309,7 +1309,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1552"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>关于打开 %1，如果您希望在沙盒化的浏览器中环境下打开，请选“是”，反之选“否”。</translation>
+        <translation>关于 %1，如果您希望在沙盒浏览器中打开，请选“是”，反之“否”。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1553"/>
@@ -1324,7 +1324,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1631"/>
         <source>server not reachable</source>
-        <translation>无法连通服务器</translation>
+        <translation>无法连接服务器</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1632"/>
@@ -1405,7 +1405,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="2010"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>拖拽探查工具放到一个窗口上来选择，松开鼠标即可检查窗口是否来自沙盒化的程序。</translation>
+        <translation>拖拽探查工具到窗口上，即可检查此程序是否来自沙盒。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2065"/>
@@ -1499,12 +1499,12 @@ Full path: %4</source>
     <message>
         <location filename="Views/SbieView.cpp" line="71"/>
         <source>Run Web Browser</source>
-        <translation>运行网页浏览器</translation>
+        <translation>打开浏览器</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Run eMail Client</source>
-        <translation>运行电子邮件客户端</translation>
+        <translation>打开电子邮件客户端</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
@@ -1565,7 +1565,7 @@ Full path: %4</source>
     <message>
         <location filename="Views/SbieView.cpp" line="91"/>
         <source>Drop Admin Rights</source>
-        <translation>解除管理员权限</translation>
+        <translation>移除管理员权限</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="92"/>
@@ -1683,7 +1683,7 @@ Full path: %4</source>
     <message>
         <location filename="Views/SbieView.cpp" line="442"/>
         <source>Do you really want to remove the selected group(s)?</source>
-        <translation>确定要移除选中的组吗？</translation>
+        <translation>确定要移除选中组吗？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="484"/>
@@ -2081,7 +2081,7 @@ Full path: %4</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="357"/>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation>允许提权的沙盒内程序读取硬盘</translation>
+        <translation>允许提权的沙盒程序读取硬盘</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="364"/>
@@ -2195,7 +2195,7 @@ Full path: %4</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="648"/>
         <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation>您可以指定在沙盒被激活时将在其中自动启动的程序或服务</translation>
+        <translation>可以指定沙盒激活时将自动启动的程序或服务</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="659"/>
@@ -2294,7 +2294,7 @@ Full path: %4</source>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>其他所有程序得到终止后，仍在运行的驻留程序将自动终止。
+        <translation>其他所有程序终止后，仍在运行的驻留程序将自动终止。
 
 如果定义了引导进程，其他进程将被视作驻留进程。</translation>
     </message>
@@ -2409,8 +2409,8 @@ If leader processes are defined, all others are treated as lingering processes.<
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation>配置各个进程所能访问的资源。双击开始编辑。
-“直接访问”文件和键值仅适用于沙盒外的二进制程序文件。
+        <translation>配置各个进程所能访问的资源；双击编辑；
+“直接访问”文件和键值仅适用于沙盒外的二进制程序文件；
 注意所有 关闭...=!&lt;program&gt;,... 例外具有相同的限制。
 可使用“全部直接访问”使所有程序都能完成指定的文件访问。</translation>
     </message>
@@ -2534,7 +2534,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1652"/>
         <source>Allow sandboxed programs to Managing Hardware/Devices</source>
-        <translation>允许沙盒化程序管理硬件/设备</translation>
+        <translation>允许沙盒程序管理硬件/设备</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1672"/>
@@ -2564,7 +2564,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1751"/>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation>您可以指定一系列每次沙盒启动时需执行的命令。</translation>
+        <translation>您可以指定每次沙盒启动时执行的命令。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1771"/>

@@ -870,8 +870,8 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
 {
 
     //
-    // by default Close[...]=!<program>,path includes all boxed images
-    // use AlwaysCloseInBox=n to disable this behavioure
+    // by default, Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseInBox=n to disable this behaviour
     //
 
     proc->always_close_for_boxed = Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 

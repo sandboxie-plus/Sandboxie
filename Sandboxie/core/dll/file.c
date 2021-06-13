@@ -823,7 +823,7 @@ check_sandbox_prefix:
 
         ULONG len = _DriveLen + 1; /* drive letter */
 
-        // skip any sufix after the drive letter
+        // skip any suffix after the drive letter
         if (File_DriveAddSN) {
             WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
             if (ptr)

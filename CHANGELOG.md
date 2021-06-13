@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
 - the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default
 -- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
-- trace log gets only disabled when it has no entries and the logging is stopped
+- trace log gets disabled only when it has no entries and the logging is stopped
 
 ### Fixed
 - fixed APC issue with the new global hook emulation mechanism and WoW64 processes

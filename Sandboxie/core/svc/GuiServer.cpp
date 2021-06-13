@@ -3024,7 +3024,7 @@ ULONG GuiServer::ClipCursorSlave(SlaveArgs *args)
     if (req->have_rect)
         rect = &req->rect;
 
-    ClipCursor(rect); //if (! ) // as this seam to randomly fail don't issue errors
+    ClipCursor(rect); //if (! ) // as this seems to randomly fail, don't issue errors
     //    return STATUS_ACCESS_DENIED; // todo: add reply and return ret value
 
     return STATUS_SUCCESS;

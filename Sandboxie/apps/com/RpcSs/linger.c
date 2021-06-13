@@ -489,7 +489,7 @@ int DoLingerLeader(void)
                     // is_local_system_sid would be TRUE and we would not
                     // reach this point.)
                     //
-                    // fix-me: services are no longer startes by default as system
+                    // fix-me: services are no longer started by default as system
                     //
 
                     ULONG64 ProcessFlags =

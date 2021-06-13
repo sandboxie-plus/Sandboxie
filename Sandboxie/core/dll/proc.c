@@ -493,9 +493,9 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 	_Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
 	_In_opt_ PSIZE_T lpReturnSize)
 {
-	// fix for chreom 86+
-	// when the PROC_THREAD_ATTRIBUTE_JOB_LIST is set the call CreateProcessAsUserW -> CreateProcessInternalW -> NtCreateProcess 
-	// fals with an access denided error, so we need to block this attribute form being set
+	// fix for Chrome 86+
+	// when the PROC_THREAD_ATTRIBUTE_JOB_LIST is set, the call CreateProcessAsUserW -> CreateProcessInternalW -> NtCreateProcess 
+	// fails with an access denied error, so we need to block this attribute from being set
 	// if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
     if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
     {
@@ -635,9 +635,9 @@ _FX BOOL Proc_CreateProcessInternalW(
     }
 
     //
-    // Electron based applications which work like chrome seam to fail with HW acceleration even when 
-    // thay get the same treatment as chrome and chromium derivatives.
-    // hack: by adding a parameter to the gpu renderer process we can fix the issue.
+    // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
+    // they get the same treatment as Chrome and Chromium derivatives.
+    // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
     //
 
     if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/)

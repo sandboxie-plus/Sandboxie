@@ -2020,7 +2020,7 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="214"/>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>使应用程序认为自己被提权运行（允许安全地运行安装程序）</translation>
     </message>
     <message>
@@ -2264,7 +2264,7 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="892"/>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>此处指定的程序或者指定位置中的程序，将自动进入此沙盒，除非已明确在其他沙盒中启动它。</translation>
     </message>
     <message>
@@ -2436,7 +2436,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1405"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>启用快速恢复提示以便快速恢复创建的文件。</translation>
     </message>
     <message>

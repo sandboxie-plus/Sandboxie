@@ -1417,7 +1417,7 @@ ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
         // real window station and desktop
         //
         // if OpenWinClass=* is in effect for the process,
-        // give increased access to the window stationn
+        // give increased access to the window station
         //
         //
 
@@ -1466,7 +1466,7 @@ ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
 #ifdef _WIN64
 
         //
-        // if caller is a 32-bit process on 64-bit Windows then it will
+        // if caller is a 32-bit process on 64-bit Windows, then it will
         // need the address of its 64-bit PEB.
         // see Gui_ConnectToWindowStationAndDesktop in core/dll/gui.c
         //

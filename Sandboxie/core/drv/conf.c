@@ -1340,13 +1340,33 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
         if (proc)
             value2 = Conf_Expand(proc->box->expand_args, value1, setting);
         else {
-            BOX *box = Box_Create(Driver_Pool, boxname, FALSE);
-            if (! box) {
+
+            CONF_EXPAND_ARGS *expand_args = Mem_Alloc(Driver_Pool, sizeof(CONF_EXPAND_ARGS));
+            if (! expand_args) {
                 status = STATUS_UNSUCCESSFUL;
                 goto release_and_return;
             }
-            value2 = Conf_Expand(box->expand_args, value1, setting);
-            Box_Free(box);
+
+            expand_args->pool = Driver_Pool;
+            expand_args->sandbox = boxname;
+
+            UNICODE_STRING SidString;
+            ULONG SessionId;
+            status = Process_GetSidStringAndSessionId(NtCurrentProcess(), NULL, &SidString, &SessionId);
+            if (!NT_SUCCESS(status)) {
+                Mem_Free(expand_args, sizeof(CONF_EXPAND_ARGS));
+                status = STATUS_UNSUCCESSFUL;
+                goto release_and_return;
+            }
+
+            expand_args->sid = SidString.Buffer;
+            expand_args->session = &SessionId;
+
+            value2 = Conf_Expand(expand_args, value1, setting);
+
+            RtlFreeUnicodeString(&SidString);
+
+            Mem_Free(expand_args, sizeof(CONF_EXPAND_ARGS));
         }
 
         if (! value2) {

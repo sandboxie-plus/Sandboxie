@@ -491,3 +491,44 @@ bool CheckDropRights(const WCHAR *BoxName)
         return true;
     return false;
 }
+
+
+//---------------------------------------------------------------------------
+// CheckDropRights
+//---------------------------------------------------------------------------
+
+
+bool IsProcessWoW64(HANDLE pid)
+{
+    typedef BOOL (*P_IsWow64Process)(HANDLE, BOOL *);
+    static P_IsWow64Process pIsWow64Process = NULL;
+    if(!pIsWow64Process)
+        pIsWow64Process = (P_IsWow64Process)GetProcAddress(_Kernel32, "IsWow64Process");
+
+    if (!pIsWow64Process)
+        return false;
+
+    bool IsWow64 = false;
+
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,
+                                    FALSE, (ULONG)(ULONG_PTR)pid);
+    if (hProcess) {
+
+        BOOL xwow64 = FALSE;
+        if (pIsWow64Process && pIsWow64Process(hProcess, &xwow64) && xwow64) {
+
+            IsWow64 = true;
+        }
+
+        CloseHandle(hProcess);
+    }
+#ifdef DEBUG_COMSERVER
+    else {
+
+        WCHAR txt[256]; wsprintf(txt, L"Cannot determine wow64ness for idProcess=%d\n", idProcess);
+        OutputDebugString(txt);
+    }
+#endif
+
+    return IsWow64;
+}

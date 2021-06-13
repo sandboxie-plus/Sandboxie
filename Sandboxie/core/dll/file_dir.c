@@ -3536,7 +3536,13 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
         if (send2199) {
             WCHAR *colon = wcschr(rec->path, L':');
 			if (!colon) {
-				const WCHAR* strings[] = { Dll_BoxName, rec->path, NULL };
+
+                UNICODE_STRING uni;
+                WCHAR *TruePath, *CopyPath;
+                RtlInitUnicodeString(&uni, rec->path);
+                status = File_GetName(NULL, &uni, &TruePath, &CopyPath, NULL);
+
+				const WCHAR* strings[] = { Dll_BoxName, rec->path, CopyPath, NULL };
 				SbieApi_LogMsgExt(2199, strings);
 			}
             List_Remove(&File_RecPaths, rec);

@@ -1316,7 +1316,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
                             proc, &proc->open_win_classes, idProcess, NULL);
         }
 
-        if (Session_MonitorCount) {
+        if (Session_MonitorCount && !proc->disable_monitor) {
 
             void *nbuf;
             ULONG nlen;

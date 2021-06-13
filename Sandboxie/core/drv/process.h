@@ -85,6 +85,8 @@ struct _PROCESS {
 
     ULONG ntdll32_base;
 
+    ULONG detected_image_type;
+
     // original process primary access token
 
     void *primary_token;
@@ -121,6 +123,8 @@ struct _PROCESS {
 
     UCHAR   create_console_flag;
 
+    BOOLEAN disable_monitor;
+
     ULONG call_trace;
 
     // file-related
@@ -130,6 +134,7 @@ struct _PROCESS {
     LIST closed_file_paths;             // PATTERN elements
     LIST read_file_paths;               // PATTERN elements
     LIST write_file_paths;              // PATTERN elements
+    BOOLEAN always_close_for_boxed;
     LIST blocked_dlls;
     ULONG file_trace;
     ULONG pipe_trace;

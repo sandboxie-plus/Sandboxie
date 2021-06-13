@@ -71,7 +71,7 @@ const WCHAR *Pattern_Source(PATTERN *pat);
 //
 
 BOOLEAN Pattern_Match(PATTERN *pat, const WCHAR *string, int string_len);
-
+int Pattern_MatchX(PATTERN *pat, const WCHAR *string, int string_len);
 
 //---------------------------------------------------------------------------
 

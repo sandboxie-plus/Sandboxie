@@ -4,17 +4,34 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.8.0 / 5.50.0] - 2021-06-13
 
+### Added
+- sandboxie by default applies "Close...=!<program>,..." directives to non excluded images if thay are located in a sandbox
+-- added 'AlwaysCloseForBoxed=n' to disable this behavioure as it may not be always desired, and it doesn't provide extra security
+- added process image informations to samdman UI
+- localized template categories in the plus ui
+- added "DisableResourceMonitor=y" to disable resource access monitor for selected boxes
+- added option to show trace entries only for the sellected sandbox
+- added "UseVolumeSerialNumbers=y" when set, in the \drive\ sandbox location the drive letters are sufixed with the volume SN
+-- helps to avoid mengling of files on multiple pendrives usign the same letter
+-- note: this option is not compatible with the recovery function of the classic UI, only SandMan ui is fully compatible
 
+### Changed
+- portable cleanup messge now has y/n/c options
+- consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
+- the ElevateCreateProcess fix as sometimes applyed by the PCA will no longer be emulated by default
+-- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
+- trace log gets only disabled when it has no entries and the logging is stopped
 
-
-
-
-
-
-
-
-
+### Fixed
+- fixed APC issue with the new global hook emulation mechanism and WoW64 processes
+- fixed ipv6 issues with BlockPort options
+- fixed an issue with cheet engine when "OpenWinClass=*" was specified
+- fixed memory corruption in SbieDrv
+- fixed crash issue with process elevation on Create Process Calls
+- fixed pocess elevation when running in the built in administrator account
+- fixed template preview reseting unsaved entries in box options window
 
 
 

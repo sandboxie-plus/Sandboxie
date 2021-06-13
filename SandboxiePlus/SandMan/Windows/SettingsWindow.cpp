@@ -285,10 +285,10 @@ void CSettingsWindow::apply()
 			QStringList Rejected;
 			for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
 				QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
-				if (pItem->checkState(0) == Qt::Checked)
-					Used.append(pItem->data(0, Qt::UserRole).toString());
-				else
+				if (pItem->checkState(0) == Qt::Unchecked)
 					Rejected.append(pItem->data(0, Qt::UserRole).toString());
+				else
+					Used.append(pItem->data(0, Qt::UserRole).toString());
 			}
 
 			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
@@ -370,7 +370,12 @@ void CSettingsWindow::OnTab()
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
 			pItem->setText(0, Title);
 			pItem->setData(0, Qt::UserRole, I.key());
-			pItem->setCheckState(0, (I.value() & CSbieTemplates::eDisabled) == 0 ? Qt::Checked : Qt::Unchecked);
+			if((I.value() & CSbieTemplates::eDisabled) != 0)
+				pItem->setCheckState(0, Qt::Unchecked);
+			else if((I.value() & CSbieTemplates::eEnabled) != 0)
+				pItem->setCheckState(0, Qt::Checked);
+			else
+				pItem->setCheckState(0, Qt::PartiallyChecked);
 			ui.treeCompat->addTopLevelItem(pItem);
 		}
 

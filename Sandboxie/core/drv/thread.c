@@ -1033,7 +1033,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
     // log the cross-sandbox access attempt, based on the status code
     //
 
-    if (Session_MonitorCount) {
+    if (Session_MonitorCount && !proc->disable_monitor) {
 
         void *nbuf;
         ULONG nlen;

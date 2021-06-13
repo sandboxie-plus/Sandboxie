@@ -493,6 +493,9 @@ void Sxs_ActivateDefaultManifest(void *ImageBase);
 
 ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath);
 
+ULONG Sxs_CheckManifestForElevation(const WCHAR* DosPath,
+    BOOLEAN* pAsInvoker, BOOLEAN* pRequireAdministrator, BOOLEAN* pHighestAvailable);
+
 BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle);
 
 BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle);

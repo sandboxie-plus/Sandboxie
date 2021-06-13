@@ -45,12 +45,12 @@ private slots:
 	void OnForceProg();
 	void OnForceDir();
 	void OnDelForce();
-	void OnShowForceTmpl()			{ LoadForced(); }
+	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
 
 	void OnAddLingering();
 	void OnAddLeader();
 	void OnDelStopProg();
-	void OnShowStopTmpl()			{ LoadStop(); }
+	void OnShowStopTmpl()			{ LoadStopTmpl(true); }
 
 	void OnRestrictStart();
 	void OnAddStartProg();
@@ -72,13 +72,13 @@ private slots:
 	void OnAddWnd()					{ AddAccessEntry(eWnd, eDirect, "", ""); }
 	void OnAddCOM()					{ AddAccessEntry(eCOM, eDirect, "", ""); }
 	void OnDelAccess();
-	void OnShowAccessTmpl()			{ LoadAccessList(); }
+	void OnShowAccessTmpl()			{ LoadAccessListTmpl(true); }
 
 	void OnAddRecFolder();
 	void OnAddRecIgnore();
 	void OnAddRecIgnoreExt();
 	void OnDelRecEntry();
-	void OnShowRecoveryTmpl()		{ LoadRecoveryList(); }
+	void OnShowRecoveryTmpl()		{ LoadRecoveryListTmpl(true); }
 
 	void OnAddAutoExec();
 	void OnDelAutoExec();
@@ -106,6 +106,7 @@ private slots:
 	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; }
 	void OnINetBlockChanged()		{ m_INetBlockChanged = true; }
 	void OnRecoveryChanged()		{ m_RecoveryChanged = true; }
+	void OnAccessChanged()			{ m_AccessChanged = true; }
 	void OnAdvancedChanged();
 	void OnDebugChanged();
 
@@ -186,15 +187,18 @@ protected:
 	void SaveGroups();
 
 	void LoadForced();
+	void LoadForcedTmpl(bool bUpdate = false);
 	void AddForcedEntry(const QString& Name, int type, const QString& Template = QString());
 	void SaveForced();
 
 	void LoadStop();
+	void LoadStopTmpl(bool bUpdate = false);
 	void AddStopEntry(const QString& Name, int type, const QString& Template = QString());
 	void SaveStop();
 
 	QString	AccessTypeToName(EAccessEntry Type);
 	void LoadAccessList();
+	void LoadAccessListTmpl(bool bUpdate = false);
 	QString	GetAccessTypeStr(EAccessType Type);
 	QString	GetAccessModeStr(EAccessMode Mode);
 	void ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, const QString& Template = QString());
@@ -208,6 +212,7 @@ protected:
 	void CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave = true);
 
 	void LoadRecoveryList();
+	void LoadRecoveryListTmpl(bool bUpdate = false);
 	void AddRecoveryEntry(const QString& Name, int type, const QString& Template = QString());
 	void SaveRecoveryList();
 
@@ -221,6 +226,8 @@ protected:
 
 	void LoadIniSection();
 	void SaveIniSection();
+
+	QString GetCategoryName(const QString& Category);
 
 	bool m_ConfigDirty;
 	QColor m_BorderColor;

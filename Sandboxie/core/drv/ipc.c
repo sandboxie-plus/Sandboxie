@@ -947,7 +947,7 @@ _FX NTSTATUS Ipc_CheckGenericObject(
         }
     }
 
-    else if (Session_MonitorCount) {
+    else if (Session_MonitorCount && !proc->disable_monitor) {
 
         ULONG mon_type = MONITOR_IPC;
         WCHAR *mon_name = Name->Buffer;

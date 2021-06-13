@@ -135,8 +135,6 @@ typedef struct _COM_OBJECT {
 //---------------------------------------------------------------------------
 
 
-typedef BOOL (*P_IsWow64Process)(HANDLE, BOOL *);
-
 
 //---------------------------------------------------------------------------
 // Variables
@@ -156,8 +154,6 @@ static const GUID IID_IWbemClassObject = {
     0xDC12A681, 0x737F, 0x11CF,
                     { 0x88, 0x4D, 0x00, 0xAA, 0x00, 0x4B, 0x2E, 0x24 } };
 
-P_IsWow64Process pIsWow64Process = NULL;
-
 
 //---------------------------------------------------------------------------
 // Constructor
@@ -170,13 +166,6 @@ ComServer::ComServer(PipeServer *pipeServer)
 
     InitializeCriticalSection(&m_SlavesLock);
     List_Init(&m_SlavesList);
-
-#ifdef _WIN64
-
-    pIsWow64Process = (P_IsWow64Process)
-                            GetProcAddress(_Kernel32, "IsWow64Process");
-
-#endif _WIN64
 
     pipeServer->Register(MSGID_COM, this, Handler);
 }
@@ -707,36 +696,12 @@ void *ComServer::LockSlave(HANDLE idProcess, ULONG msgid)
 
 #ifdef _WIN64
 
-    if (pIsWow64Process) {
-
-        HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,
-                                      FALSE, (ULONG)(ULONG_PTR)idProcess);
-        if (hProcess) {
-
-            BOOL xwow64 = FALSE;
-            if (pIsWow64Process(hProcess, &xwow64) && xwow64) {
-
-                IsWow64 = TRUE;
-            }
-
-            CloseHandle(hProcess);
+    IsWow64 = IsProcessWoW64(idProcess);
 
 #ifdef DEBUG_COMSERVER
-            WCHAR txt[256]; wsprintf(txt, L"LockSlave     idProcess=%d Wow64=%d msgid=%X\n", idProcess, IsWow64, msgid);
-            OutputDebugString(txt);
+    WCHAR txt[256]; wsprintf(txt, L"LockSlave     idProcess=%d Wow64=%d msgid=%X\n", idProcess, IsWow64, msgid);
+    OutputDebugString(txt);
 #endif
-        }
-
-#ifdef DEBUG_COMSERVER
-        else {
-
-            WCHAR txt[256]; wsprintf(txt, L"LockSlave     Cannot determine wow64ness for idProcess=%d\n", idProcess);
-            OutputDebugString(txt);
-        }
-#endif
-
-    }
-
 #endif _WIN64
 
     //

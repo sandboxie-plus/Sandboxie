@@ -215,10 +215,11 @@ class CPopUpRecovery : public CPopUpEntry
 {
 	Q_OBJECT
 public:
-	CPopUpRecovery(const QString& Message, const QString& FilePath, const QString& BoxName, QWidget* parent = 0) : CPopUpEntry(Message, parent)
+	CPopUpRecovery(const QString& Message, const QString& FilePath, const QString& BoxPath, const QString& BoxName, QWidget* parent = 0) : CPopUpEntry(Message, parent)
 	{
 		m_BoxName = BoxName;
 		m_FilePath = FilePath;
+		m_BoxPath = BoxPath;
 
 		QLabel* pLabel = new QLabel(Message);
 		pLabel->setToolTip(Message);
@@ -323,6 +324,7 @@ protected:
 	}
 
 	QString				m_FilePath;
+	QString				m_BoxPath;
 	QString				m_BoxName;
 	QComboBox*			m_pTarget;
 	int					m_LastTargetIndex;
@@ -416,7 +418,7 @@ public:
 
 	virtual void		AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	virtual void		AddUserPrompt(quint32 RequestId, const QVariantMap& Data, quint32 ProcessId);
-	virtual void		AddFileToRecover(const QString& FilePath, const QString& BoxName, quint32 ProcessId);
+	virtual void		AddFileToRecover(const QString& FilePath, QString BoxPath, const QString& BoxName, quint32 ProcessId);
 	virtual void		ShowProgress(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 
 	static void			SetDarkMode(bool bDark) { extern bool CPopUpWindow__DarkMode;  CPopUpWindow__DarkMode = bDark; }

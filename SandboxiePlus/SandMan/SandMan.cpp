@@ -253,7 +253,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
 	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
 	connect(theAPI, SIGNAL(QueuedRequest(quint32, quint32, quint32, const QVariantMap&)), this, SLOT(OnQueuedRequest(quint32, quint32, quint32, const QVariantMap&)), Qt::QueuedConnection);
-	connect(theAPI, SIGNAL(FileToRecover(const QString&, const QString&, quint32)), this, SLOT(OnFileToRecover(const QString&, const QString&, quint32)), Qt::QueuedConnection);
+	connect(theAPI, SIGNAL(FileToRecover(const QString&, const QString&, const QString&, quint32)), this, SLOT(OnFileToRecover(const QString&, const QString&, const QString&, quint32)), Qt::QueuedConnection);
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
 	m_uTimerID = startTimer(250);
@@ -480,20 +480,23 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		if (PortableStop == -1)
 		{
 			bool State = false;
-			PortableStop = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.")
-				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Ok, QMessageBox::Information) == QDialogButtonBox::Ok ? 1 : 0;
+			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\r\n\r\nDo you want to do the clean up?")
+				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
 
-			if (!PortableStop)
+			if (Ret == QDialogButtonBox::Cancel)
 			{
 				e->ignore();
 				return;
 			}
 
+			PortableStop = (Ret == QDialogButtonBox::Yes) ? 1 : 0;
+
 			if (State)
 				theConf->SetValue("Options/PortableStop", PortableStop);
 		}
 
-		StopSbie(true);
+		if(PortableStop == 1)
+			StopSbie(true);
 	}
 
 	QApplication::quit();
@@ -600,8 +603,10 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 
 		bool bIsMonitoring = theAPI->IsMonitoring();
-		m_pTraceView->setEnabled(bIsMonitoring);
 		m_pEnableMonitoring->setChecked(bIsMonitoring);
+		if (!bIsMonitoring) // don't disable the view as logn as there are entries shown
+			bIsMonitoring = !theAPI->GetTrace().isEmpty();
+		m_pTraceView->setEnabled(bIsMonitoring);
 	}
 
 	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
@@ -909,9 +914,9 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 	m_pPopUpWindow->AddUserPrompt(RequestId, Data, ClientPid);
 }
 
-void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId)
+void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId)
 {
-	m_pPopUpWindow->AddFileToRecover(FilePath, BoxName, ProcessId);
+	m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, BoxName, ProcessId);
 }
 
 void CSandMan::OpenRecovery(const QString& BoxName)
@@ -1374,7 +1379,7 @@ void CSandMan::OnSetMonitoring()
 	if(m_pEnableMonitoring->isChecked() && !m_pToolBar->isVisible())
 		m_pLogTabs->show();
 
-	m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
+	//m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
 }
 
 void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)

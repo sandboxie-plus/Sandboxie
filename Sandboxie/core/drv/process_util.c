@@ -350,10 +350,12 @@ _FX BOOLEAN Process_GetPaths(
 
         if (closed && (*value == L'!')) {
 
+            // dont close paths for sbie components
             if (closed_ipc && proc->image_sbie)
-                continue;
+                continue; 
 
-            if (proc->image_from_box) {
+            // for all other advance to the path and apply the block for all sandboxed images
+            if (proc->image_from_box && proc->always_close_for_boxed) {
 
                 value = wcschr(value, L',');
                 if (! value)

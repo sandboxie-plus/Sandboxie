@@ -47,6 +47,8 @@ public:
 
 	bool				IsShowHidden() { return m_pShowHidden->isChecked(); }
 
+	CSbieView*			GetBoxView() { return m_pBoxView; }
+
 protected:
 	SB_STATUS			ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
@@ -84,7 +86,7 @@ public slots:
 	void				OnNotAuthorized(bool bLoginRequired, bool& bRetry);
 
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
-	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
+	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
 	void				OpenRecovery(const QString& BoxName);
 

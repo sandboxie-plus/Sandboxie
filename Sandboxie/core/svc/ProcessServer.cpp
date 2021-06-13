@@ -1090,7 +1090,7 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
         if (ok && StartProgramInSandbox) {
 
-            LONG rc = SbieApi_CallTwo(API_START_PROCESS,
+            LONG rc = SbieApi_Call(API_START_PROCESS, 2,
                                       BoxNameOrModelPid, pi->dwProcessId);
             if (rc != 0) {
 

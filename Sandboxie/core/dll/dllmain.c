@@ -664,6 +664,8 @@ _FX void Dll_SelectImageType(void)
     if (Dll_ImageType == DLL_IMAGE_LAST)
         Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
+    SbieApi_QueryProcessInfoEx(0, 'spit', Dll_ImageType);
+
     //
     // we have some special cases for programs running under a restricted
     // token, such as a Chromium sandbox processes, or Microsoft Office 2010
@@ -780,7 +782,21 @@ _FX ULONG_PTR Dll_Ordinal1(
         // see also Proc_RestartProcessOutOfPcaJob
         //
 
-        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+        int MustRestartProcess = 0;
+        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
+            MustRestartProcess = 1;
+
+        else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
+            if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)
+             || SbieDll_CheckStringInList(Dll_ImageName, NULL, L"ForceRestart"))
+                MustRestartProcess = 2;
+        }
+
+        if (MustRestartProcess) {
+
+            WCHAR text[128];
+            Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
+            SbieApi_MonitorPut(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();

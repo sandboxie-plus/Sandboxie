@@ -38,6 +38,12 @@ public:
 	virtual QString		GetTypeStr() const;
 	virtual QString		GetStautsStr() const;
 
+	virtual void		SetProcessName(const QString& name) { m_ProcessName = name; }
+	virtual QString		GetProcessName() const { return m_ProcessName; }
+
+	virtual void		SetBoxPtr(void* ptr) { m_BoxPtr = ptr; }
+	virtual void*		GetBoxPtr() const { return m_BoxPtr; }
+
 	virtual int			GetCount() const { return m_Counter; }
 
 	virtual bool		Equals(const QSharedDataPointer<CTraceEntry>& pOther) const {
@@ -55,6 +61,8 @@ protected:
 	quint32 m_ProcessId;
 	quint32 m_ThreadId;
 	QDateTime m_TimeStamp;
+	QString m_ProcessName;
+	void* m_BoxPtr;
 
 	union
 	{

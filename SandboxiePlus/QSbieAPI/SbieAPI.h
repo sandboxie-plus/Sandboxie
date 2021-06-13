@@ -53,7 +53,7 @@ public:
 	virtual QString			GetIniPath() const { return m_IniPath; }
 
 	virtual void			UpdateDriveLetters();
-	virtual QString			Nt2DosPath(QString NtPath) const;
+	virtual QString			Nt2DosPath(QString NtPath, bool* pOk = NULL) const;
 
 	virtual SB_STATUS		ReloadBoxes(bool bFullUpdate = false);
 	static  SB_STATUS		ValidateName(const QString& BoxName);
@@ -95,6 +95,7 @@ public:
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
 	virtual QString			GetCurrentUserName() const { return m_UserName; }
+	virtual QString			GetCurrentUserSid() const { return m_UserSid; }
 	virtual bool			IsConfigLocked();
 	virtual SB_STATUS		UnlockConfig(const QString& Password);
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
@@ -109,8 +110,8 @@ public:
 	virtual bool			IsMonitoring();
 
 	virtual void			AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge = false);
-	virtual QList<CTraceEntryPtr> GetTrace() const { QReadLocker Lock(&m_TraceMutex); return m_TraceList; }
-	virtual void			ClearTrace() { QWriteLocker Lock(&m_TraceMutex); m_TraceList.clear(); }
+	virtual QList<CTraceEntryPtr> GetTrace() const;
+	virtual void			ClearTrace() { QWriteLocker Lock(&m_TraceMutex); m_TraceList.clear(); m_LastTraceEntry = 0; }
 
 	// Other
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
@@ -135,7 +136,7 @@ signals:
 	//void					LogMessage(const QString& Message, bool bNotify = true);
 	void					LogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	void					ProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
-	void					FileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
+	void					FileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 	void					BoxClosed(const QString& BoxName);
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 	void					QueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
@@ -163,6 +164,8 @@ protected:
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
 
+	virtual quint32			GetImageType(quint32 ProcessId);
+
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);
 
@@ -183,9 +186,21 @@ protected:
 
 	mutable QReadWriteLock	m_TraceMutex;
 	QList<CTraceEntryPtr>	m_TraceList;
+	int						m_LastTraceEntry;
 
 	mutable QReadWriteLock	m_DriveLettersMutex;
-	QMap<QString, QString>	m_DriveLetters;
+	struct SDrive
+	{
+		QString Letter;
+		QString NtPath;
+		enum EType
+		{
+			EVolume = 0,
+			EShare
+		} Type;
+		QString Aux;
+	};
+	QMap<QString, SDrive>	m_DriveLetters;
 
 	QString					m_SbiePath;
 	QString					m_IniPath;
@@ -199,6 +214,7 @@ protected:
 	CSbieIni*				m_pGlobalSection;
 	CSbieIni*				m_pUserSection;
 	QString					m_UserName;
+	QString					m_UserSid;
 
 	QString					m_ProgramDataDir;
 	QString					m_PublicDir;

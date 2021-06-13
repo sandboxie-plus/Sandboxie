@@ -69,6 +69,9 @@ typedef struct _WND_HOOK {
 
     LIST_ELEM list_elem;
     ULONG pid;
+#ifdef _WIN64
+    bool isWoW64;
+#endif _WIN64
     DWORD hthread;
     ULONG64 hproc;
     int HookCount;
@@ -2364,7 +2367,7 @@ ULONG GuiServer::CloseClipboardSlave(SlaveArgs *args)
                     ULONG fmt = 0;
 
                     while (1) {
-                        status = SbieApi_CallOne(API_GUI_CLIPBOARD, 0x4000);
+                        status = SbieApi_Call(API_GUI_CLIPBOARD, 1, 0x4000);
                         if (status != 0)
                             break;
                         fmt = EnumClipboardFormats(fmt);
@@ -2390,8 +2393,7 @@ ULONG GuiServer::CloseClipboardSlave(SlaveArgs *args)
                         // always fails.  so we want clip_il to stay 0x4000
                         //
 
-                        status = SbieApi_CallOne(
-                                        API_GUI_CLIPBOARD, caller_il);
+                        status = SbieApi_Call(API_GUI_CLIPBOARD, 1, caller_il);
                     }*/
 
                     CloseClipboard();
@@ -2458,7 +2460,7 @@ ULONG GuiServer::GetClipboardDataSlave(SlaveArgs *args)
             // then we can't get it, see more in CloseClipboardSlave above.
             // work around that by setting IL to 0x4000
             //
-            if (SbieApi_CallOne(API_GUI_CLIPBOARD, 0x4000) == 0) {
+            if (SbieApi_Call(API_GUI_CLIPBOARD, 1, 0x4000) == 0) {
                 mem_handle = GetClipboardData(req->format);
                 rpl->error = GetLastError();
             }
@@ -3471,6 +3473,7 @@ ULONG GuiServer::GetRawInputDeviceInfoSlave(SlaveArgs *args)
 // WndHookNotifySlave
 //---------------------------------------------------------------------------
 
+
 ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
 {
     GUI_WND_HOOK_NOTIFY_REQ *req = (GUI_WND_HOOK_NOTIFY_REQ *)args->req_buf;
@@ -3489,7 +3492,29 @@ ULONG GuiServer::WndHookNotifySlave(SlaveArgs *args)
         HANDLE hThread = OpenThread(THREAD_SET_CONTEXT, FALSE, (DWORD)whk->hthread);
 		if (hThread)
 		{
-			QueueUserAPC((PAPCFUNC)whk->hproc, hThread, (ULONG_PTR)req->threadid);
+#ifdef _WIN64
+            if (whk->isWoW64)
+            {
+                //
+                // Calling APC's in a 32 bit process from within a 64 bit process needs some trickery
+                // see: https://repnz.github.io/posts/apc/wow64-user-apc/ for details
+                //
+
+                #define EncodeWow64ApcRoutine(ApcRoutine) ((ULONG64)((-(INT64)ApcRoutine) << 2));
+
+                typedef VOID (NTAPI *PPS_APC_ROUTINE)(PVOID SystemArgument1, PVOID SystemArgument2, PVOID SystemArgument3);
+                PPS_APC_ROUTINE ApcRoutine = (PPS_APC_ROUTINE)EncodeWow64ApcRoutine((ULONG64)whk->hproc);
+
+                typedef NTSTATUS (NTAPI* PNT_QUEUE_APC_THREAD)(HANDLE ThreadHandle, PPS_APC_ROUTINE ApcRoutine, PVOID SystemArgument1, PVOID SystemArgument2, PVOID SystemArgument3);
+                static PNT_QUEUE_APC_THREAD pNtQueueApcThread = NULL;
+                if(!pNtQueueApcThread)
+                    pNtQueueApcThread = (PNT_QUEUE_APC_THREAD)GetProcAddress(_Ntdll, "NtQueueApcThread");
+
+		        pNtQueueApcThread(hThread, ApcRoutine, (PVOID)whk->hthread , NULL, NULL);
+            }
+            else
+#endif _WIN64
+			    QueueUserAPC((PAPCFUNC)whk->hproc, hThread, (ULONG_PTR)req->threadid);
 
 			CloseHandle(hThread);
 
@@ -3549,6 +3574,9 @@ ULONG GuiServer::WndHookRegisterSlave(SlaveArgs* args)
             whk->hthread = req->hthread;
             whk->hproc = req->hproc;
             whk->HookCount = 0;
+#ifdef _WIN64
+            whk->isWoW64 = IsProcessWoW64((HANDLE)whk->pid);
+#endif _WIN64
 
             List_Insert_After(&m_WndHooks, NULL, whk);
         }

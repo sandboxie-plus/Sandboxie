@@ -868,6 +868,14 @@ _FX BOOLEAN File_BlockInternetAccess2(
 
 _FX BOOLEAN File_InitProcess(PROCESS *proc)
 {
+
+    //
+    // by default Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseInBox=n to disable this behavioure
+    //
+
+    proc->always_close_for_boxed = Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 
+
     BOOLEAN ok = File_InitPaths(proc,   &proc->open_file_paths,
                                         &proc->closed_file_paths,
                                         &proc->read_file_paths,
@@ -1002,7 +1010,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
                 if (proc->file_trace & TRACE_IGNORE)
                     Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
-                else if (Session_MonitorCount &&
+                else if (Session_MonitorCount && !proc->disable_monitor &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
                     Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
@@ -1518,7 +1526,7 @@ skip_due_to_home_folder:
         }
     }
 
-    else if (IsPipeDevice && Session_MonitorCount) {
+    else if (IsPipeDevice && Session_MonitorCount && !proc->disable_monitor) {
 
         ULONG mon_type = MONITOR_PIPE;
         WCHAR *mon_name = Name->Name.Buffer;
@@ -1532,7 +1540,7 @@ skip_due_to_home_folder:
             mon_type |= MONITOR_DENY;
         Session_MonitorPut(mon_type, mon_name, proc->pid);
 
-    } else if (ShouldMonitorAccess) {
+    } else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
@@ -2253,7 +2261,7 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
             Log_Debug_Msg(mon_type, access_str, path);
         }
     }
-    else if (is_closed) {
+    else if (is_closed && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, path, proc->pid);
     }

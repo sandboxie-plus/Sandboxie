@@ -11,6 +11,7 @@ CTraceModel::CTraceModel(QObject* parent)
 	m_Root = MkNode(QVariant());
 
 	m_LastCount = 0;
+	m_LastBoxPtr = NULL;
 }
 
 CTraceModel::~CTraceModel()
@@ -47,7 +48,7 @@ bool CTraceModel::TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pE
 	return Path.size() == Index;
 }*/
 
-QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList)
+QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList, void* BoxPtr)
 {
 	QList<QVariant>	Added;
 	QMap<QList<QVariant>, QList<STreeNode*> > New;
@@ -56,7 +57,7 @@ QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList)
 	// Note: since this is a log and we ever always only add entries we save cpu time by always skipping the already know portion of the list
 
 	int i = 0;
-	if (EntryList.count() >= m_LastCount && m_LastCount > 0)
+	if (EntryList.count() >= m_LastCount && m_LastCount > 0 && m_LastBoxPtr == BoxPtr)
 	{
 		i = m_LastCount - 1;
 		if (m_LastID == EntryList.at(i)->GetUID())
@@ -67,10 +68,14 @@ QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList)
 		else
 			i = 0;
 	}
+	m_LastBoxPtr = BoxPtr;
 
 	for (; i < EntryList.count(); i++)
 	{
 		CTraceEntryPtr pEntry = EntryList.at(i);
+
+		if (BoxPtr && pEntry->GetBoxPtr() != BoxPtr)
+			continue;
 
 		quint64 ID = pEntry->GetUID();
 
@@ -90,6 +95,7 @@ QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList)
 			pNode->pEntry = pEntry;
 			New[pNode->Path].append(pNode);
 			//Added.append(ID);
+			SetProcessName(pEntry->GetProcessName(), pEntry->GetProcessId(), pEntry->GetThreadId());
 		}
 		else
 		{
@@ -149,7 +155,7 @@ QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList)
 					case eTimeStamp:		ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;*/
 					case eProcess:			
 						if(!m_bTree) {
-							QString Name = GetProcessName(pEntry->GetProcessId(), pEntry->GetThreadId());
+							QString Name = pEntry->GetProcessName();
 							ColValue.Formated = QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
 								.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId()).arg(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
 						} else 
@@ -194,18 +200,15 @@ void CTraceModel::Clear()
 		Info.Dirty = true;
 		Info.Threads.clear();
 	}
+	m_PidMap.clear();
 	CTreeItemModel::Clear();
 }
 
-QString CTraceModel::GetProcessName(quint32 pid, quint32 tid)
+void CTraceModel::SetProcessName(const QString& Name, quint32 pid, quint32 tid)
 {
 	SProgInfo& Info = m_PidMap[pid];
-	if (Info.Dirty) {
-		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
-		if(pProcess)
-			Info.Name = pProcess->GetProcessName();
-	}
-	if (tid && !Info.Threads.contains(tid)) {
+	Info.Name = Name;
+	if (!Info.Threads.contains(tid)) {
 		Info.Threads.insert(tid);
 		Info.Dirty = true;
 	}
@@ -213,6 +216,11 @@ QString CTraceModel::GetProcessName(quint32 pid, quint32 tid)
 		Info.Dirty = false;
 		emit NewBranche();
 	}
+}
+
+QString CTraceModel::GetProcessName(quint32 pid)
+{
+	SProgInfo& Info = m_PidMap[pid];
 	return Info.Name;
 }
 

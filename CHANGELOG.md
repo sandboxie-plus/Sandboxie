@@ -29,7 +29,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed IPv6 issues with BlockPort options
 - fixed an issue with CheatEngine when "OpenWinClass=*" was specified
 - fixed memory corruption in SbieDrv
-- fixed crash issue with process elevation on Create Process Calls
+- fixed crash issue with process elevation on CreateProcess calls
 - fixed process elevation when running in the built-in administrator account
 - fixed template preview resetting unsaved entries in box options window
 

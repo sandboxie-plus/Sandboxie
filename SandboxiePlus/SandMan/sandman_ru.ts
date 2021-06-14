@@ -472,26 +472,46 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+        <translation type="vanished">Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
 Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1 может быть быстро восстановлен из %2.
+        <translation type="vanished">%1 может быть быстро восстановлен из %2.
 Файл был написан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
+    </message>
+    <message>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
+File name: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
+Full path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
+The file was written by: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
+Full path: %4</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -518,11 +538,15 @@ Full path: %4</source>
     </message>
     <message>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation>Один или несколько выбранных файлов находятся в общей сетевой папке и должны быть восстановлены на локальный диск. Выберите папку для восстановления всех выбранных файлов.</translation>
+        <translation type="vanished">Один или несколько выбранных файлов находятся в общей сетевой папке и должны быть восстановлены на локальный диск. Выберите папку для восстановления всех выбранных файлов.</translation>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 байт дискового пространства.</translation>
+        <translation type="vanished">В песочнице %1 файлов и %2 папок, которые занимают %3 байт дискового пространства.</translation>
+    </message>
+    <message>
+        <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1140,9 +1164,15 @@ Full path: %4</source>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
+        <translation type="vanished">Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
 
 Вы хотите выполнить очистку?</translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
+Do you want to do the clean up?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1212,7 +1242,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Msi Installer</source>
-        <translation>Msi Installer</translation>
+        <translation type="vanished">Msi Installer</translation>
     </message>
     <message>
         <source>Trusted Installer</source>
@@ -1232,7 +1262,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>FireFox</source>
-        <translation>FireFox</translation>
+        <translation type="vanished">FireFox</translation>
     </message>
     <message>
         <source>Windows Media Player</source>
@@ -1240,7 +1270,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>WinAmp</source>
-        <translation>WinAmp</translation>
+        <translation type="vanished">WinAmp</translation>
     </message>
     <message>
         <source>KM Player</source>
@@ -1292,7 +1322,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>FireFox Plugin Container</source>
-        <translation>FireFox плагин-контейнер</translation>
+        <translation type="vanished">FireFox плагин-контейнер</translation>
     </message>
     <message>
         <source>Generic Web Browser</source>
@@ -1305,6 +1335,22 @@ Do you want to do the clean up?</source>
     <message>
         <source> (%1)</source>
         <translation> (%1)</translation>
+    </message>
+    <message>
+        <source>MSI Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firefox Plugin Container</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1345,7 +1391,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)</source>
-        <translation>Вы хотите %1 выбранных процессов</translation>
+        <translation type="vanished">Вы хотите %1 выбранных процессов</translation>
     </message>
     <message>
         <source>Move to Group</source>
@@ -1538,6 +1584,10 @@ Do you want to do the clean up?</source>
         <source>Emulate Admin Rights</source>
         <translation>Эмуляция прав администратора</translation>
     </message>
+    <message>
+        <source>Do you want to %1 the selected process(es)?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1677,6 +1727,10 @@ Do you want to do the clean up?</source>
     <message>
         <source>%1</source>
         <translation>%1</translation>
+    </message>
+    <message>
+        <source>Show only sellectes box</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2321,7 +2375,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <source>Open access to windows Security Account Manager</source>
-        <translation>Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
+        <translation type="vanished">Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
     </message>
     <message>
         <source>Open access to windows Local Security Authority</source>
@@ -2379,6 +2433,22 @@ Please note that this values are currently user specific and saved globally for 
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
         <translation>ВНИМАНИЕ: При запуске под встроенным администратором процессы не могут терять административные привилегии.</translation>
     </message>
+    <message>
+        <source>Program/Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to Windows Security Account Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Resource Access Monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource Access Monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -2398,23 +2468,23 @@ Please note that this values are currently user specific and saved globally for 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation type="vanished">Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>ОК</translation>
+        <translation type="vanished">ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Да</translation>
+        <translation type="vanished">&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Нет</translation>
+        <translation type="vanished">&amp;Нет</translation>
     </message>
 </context>
 <context>

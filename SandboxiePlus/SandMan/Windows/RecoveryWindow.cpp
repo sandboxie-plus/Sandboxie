@@ -320,7 +320,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 
 void CRecoveryWindow::OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize)
 {
-	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
+	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
 }
 
 void CRecoveryCounter::run()

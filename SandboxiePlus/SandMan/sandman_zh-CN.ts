@@ -656,7 +656,8 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="323"/>
-        <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
+        <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
+        <oldsource>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</oldsource>
         <translation>此沙盒中共有 %1 个文件和 %2 个文件夹，占用了 %3 磁盘空间。</translation>
     </message>
 </context>
@@ -1555,17 +1556,17 @@ Do you want to do the clean up?</source>
         <location filename="SbiePlusAPI.cpp" line="434"/>
         <source>Winamp</source>
         <oldsource>WinAmp</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Winamp</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="435"/>
         <source>KM Player</source>
-        <translation type="unfinished"></translation>
+        <translation>KM Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="436"/>
         <source>Windows Live Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Live Mail</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="437"/>
@@ -1575,13 +1576,13 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="438"/>
         <source>RunDll32</source>
-        <translation type="unfinished"></translation>
+        <translation>RunDll32</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="439"/>
         <location filename="SbiePlusAPI.cpp" line="440"/>
         <source>DllHost</source>
-        <translation type="unfinished"></translation>
+        <translation>DllHost</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="441"/>
@@ -1601,17 +1602,17 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="444"/>
         <source>Acrobat Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Acrobat Reader</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="445"/>
         <source>MS Outlook</source>
-        <translation type="unfinished"></translation>
+        <translation>微软 Outlook</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="446"/>
         <source>MS Excel</source>
-        <translation type="unfinished"></translation>
+        <translation>微软 Excel</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="447"/>
@@ -1925,8 +1926,9 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="742"/>
-        <source>Do you want to %1 the selected process(es)</source>
-        <translation>确定要 %1 选中的进程</translation>
+        <source>Do you want to %1 the selected process(es)?</source>
+        <oldsource>Do you want to %1 the selected process(es)</oldsource>
+        <translation>确定要 %1 选中的进程吗？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="799"/>
@@ -2758,7 +2760,8 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1701"/>
-        <source>Open access to windows Security Account Manager</source>
+        <source>Open access to Windows Security Account Manager</source>
+        <oldsource>Open access to windows Security Account Manager</oldsource>
         <translation>开放 Windows 安全帐户管理器（SAM）的访问权限</translation>
     </message>
     <message>

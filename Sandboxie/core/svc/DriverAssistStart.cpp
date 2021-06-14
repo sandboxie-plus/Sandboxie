@@ -204,7 +204,7 @@ driver_started:
                     LsaHandle, &AuthPkgName, &AuthPkgNum);
 
                 if (rc == 0)
-                    SbieApi_Call(API_SET_LSA_AUTH_PKG, 1, AuthPkgNum);
+                    SbieApi_Call(API_SET_LSA_AUTH_PKG, 1, (ULONG_PTR)AuthPkgNum);
 
                 LsaDeregisterLogonProcess(LsaHandle);
             }
@@ -285,7 +285,7 @@ void DriverAssist::InitClipboard()
                 SetClipboardData(0x333333, hGlobal2);
                 SetClipboardData(0x444444, hGlobal2);
 
-                SbieApi_Call(API_GUI_CLIPBOARD, 1, -1);
+                SbieApi_Call(API_GUI_CLIPBOARD, 1, (ULONG_PTR)-1);
 
                 EmptyClipboard();
                 CloseClipboard();

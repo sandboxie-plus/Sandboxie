@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed an issue with driver verifier and user handles
 - fixed driver memory leak of FLT_FILE_NAME_INFORMATION objects
 - fixed broken clipboard introduced in 5.50.0
-- fixed Dcomlaunch issue on Windows 7 32 bit introduced in 5.50.0
+- fixed DcomLaunch issue on Windows 7 32 bit introduced in 5.50.0
 
 
 

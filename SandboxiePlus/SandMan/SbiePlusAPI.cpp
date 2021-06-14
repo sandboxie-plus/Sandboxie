@@ -432,7 +432,7 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case MOZILLA_FIREFOX: return tr("Firefox");
 		case WINDOWS_MEDIA_PLAYER: return tr("Windows Media Player");
 		case NULLSOFT_WINAMP: return tr("Winamp");
-		case PANDORA_KMPLAYER: return tr("KM Player");
+		case PANDORA_KMPLAYER: return tr("KMPlayer");
 		case WINDOWS_LIVE_MAIL: return tr("Windows Live Mail");
 		case SERVICE_MODEL_REG: return tr("Service Model Reg");
 		case RUNDLL32: return tr("RunDll32");

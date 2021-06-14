@@ -6,10 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.1 / 5.50.1] - 2021-06-14
 
 ### Fixed
-- fixed an issue with driver verifyer and user handles
+- fixed an issue with driver verifier and user handles
 - fixed driver memory leak of FLT_FILE_NAME_INFORMATION objects
 - fixed broken clipboard introduced in 5.50.0
-- fixed dcom launch issue on windows 7 32 bit introduced in 5.50.0
+- fixed Dcomlaunch issue on Windows 7 32 bit introduced in 5.50.0
 
 
 

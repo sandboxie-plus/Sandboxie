@@ -1348,7 +1348,8 @@ Do you want to do the clean up?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>KM Player</source>
+        <source>KMPlayer</source>
+        <oldsource>KM Player</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

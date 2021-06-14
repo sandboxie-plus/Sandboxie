@@ -1560,8 +1560,9 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="435"/>
-        <source>KM Player</source>
-        <translation>KM Player</translation>
+        <source>KMPlayer</source>
+        <oldsource>KM Player</oldsource>
+        <translation>KMPlayer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="436"/>

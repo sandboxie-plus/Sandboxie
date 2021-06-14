@@ -1273,8 +1273,9 @@ Do you want to do the clean up?</source>
         <translation type="vanished">WinAmp</translation>
     </message>
     <message>
-        <source>KM Player</source>
-        <translation>KM Player</translation>
+        <source>KMPlayer</source>
+        <oldsource>KM Player</oldsource>
+        <translation>KMPlayer</translation>
     </message>
     <message>
         <source>Windows Live Mail</source>

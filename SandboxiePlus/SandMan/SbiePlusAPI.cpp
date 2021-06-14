@@ -424,14 +424,14 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case SANDBOXIE_WUAU: return tr("Sbie WuAu Svc");
 		case SANDBOXIE_BITS: return tr("Sbie BITS");
 		case SANDBOXIE_SBIESVC: return tr("Sbie Svc");
-		case MSI_INSTALLER: return tr("Msi Installer");
+		case MSI_INSTALLER: return tr("MSI Installer");
 		case TRUSTED_INSTALLER: return tr("Trusted Installer");
 		case WUAUCLT: return tr("Windows Update");
 		case SHELL_EXPLORER: return tr("Windows Explorer");
 		case INTERNET_EXPLORER: return tr("Internet Explorer");
-		case MOZILLA_FIREFOX: return tr("FireFox");
+		case MOZILLA_FIREFOX: return tr("Firefox");
 		case WINDOWS_MEDIA_PLAYER: return tr("Windows Media Player");
-		case NULLSOFT_WINAMP: return tr("WinAmp");
+		case NULLSOFT_WINAMP: return tr("Winamp");
 		case PANDORA_KMPLAYER: return tr("KM Player");
 		case WINDOWS_LIVE_MAIL: return tr("Windows Live Mail");
 		case SERVICE_MODEL_REG: return tr("Service Model Reg");
@@ -445,7 +445,7 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case OFFICE_OUTLOOK: return tr("MS Outlook");
 		case OFFICE_EXCEL: return tr("MS Excel");
 		case FLASH_PLAYER_SANDBOX: return tr("Flash Player");
-		case PLUGIN_CONTAINER: return tr("FireFox Plugin Container");
+		case PLUGIN_CONTAINER: return tr("Firefox Plugin Container");
 		case OTHER_WEB_BROWSER: return tr("Generic Web Browser");
 		case OTHER_MAIL_CLIENT: return tr("Generic Mail Client");
 		default: return tr("");

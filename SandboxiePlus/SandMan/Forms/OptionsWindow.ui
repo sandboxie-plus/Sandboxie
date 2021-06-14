@@ -684,7 +684,7 @@
                </column>
                <column>
                 <property name="text">
-                 <string notr="true">Program/Service</string>
+                 <string>Program/Service</string>
                 </property>
                </column>
               </widget>
@@ -872,7 +872,7 @@
              </property>
              <column>
               <property name="text">
-               <string notr="true">Type</string>
+               <string>Type</string>
               </property>
              </column>
              <column>

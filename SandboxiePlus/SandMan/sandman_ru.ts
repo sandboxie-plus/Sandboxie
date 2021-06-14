@@ -268,59 +268,59 @@
     </message>
     <message>
         <source>Custom Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательские шаблоны</translation>
     </message>
     <message>
         <source>Email Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Почтовый клиент</translation>
     </message>
     <message>
         <source>PDF/Print</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF/Печать</translation>
     </message>
     <message>
         <source>Security/Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Безопасность/Конфиденциальность</translation>
     </message>
     <message>
         <source>Desktop Utilities</source>
-        <translation type="unfinished"></translation>
+        <translation>Настольные утилиты</translation>
     </message>
     <message>
         <source>Download Managers</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджеры загрузок</translation>
     </message>
     <message>
         <source>Miscellaneous</source>
-        <translation type="unfinished">Разное</translation>
+        <translation>Разное</translation>
     </message>
     <message>
         <source>Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Веб-браузер</translation>
     </message>
     <message>
         <source>Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Медиа плеер</translation>
     </message>
     <message>
         <source>Torrent Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Торрент-клиент</translation>
     </message>
     <message>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, введите идентификатор шаблона</translation>
     </message>
     <message>
         <source>Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка: %1</translation>
     </message>
     <message>
         <source>Only local templates can be removed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалять можно только локальные шаблоны!</translation>
     </message>
     <message>
         <source>Do you really want to delete the selected local template?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить выбранный локальный шаблон?</translation>
     </message>
 </context>
 <context>
@@ -472,46 +472,26 @@
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="vanished">Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
 Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернету?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="vanished">%1 может быть быстро восстановлен из %2.
-Файл был записан: %3</translation>
+        <translation>%1 может быть быстро восстановлен из %2.
+Файл был написан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -543,33 +523,6 @@ Full path: %4</source>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
         <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 байт дискового пространства.</translation>
-    </message>
-</context>
-<context>
-    <name>CResMonModel</name>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">Тип</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Значение</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Статус</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Временная метка</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Процесс</translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation type="vanished">Неизвестно</translation>
     </message>
 </context>
 <context>
@@ -742,10 +695,6 @@ Full path: %4</source>
         <translation>Не удалось создать каталог для нового снимка</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
-        <translation type="vanished">Sandboxie-Plus работал в портативном режиме, теперь нужно очистить созданные службы. Это потребует административных привилегий.</translation>
-    </message>
-    <message>
         <source>   -   Portable</source>
         <translation>   -   Портативный</translation>
     </message>
@@ -780,10 +729,6 @@ Full path: %4</source>
         <translation>Восстановление файла %1 в %2</translation>
     </message>
     <message>
-        <source>Resource Logging</source>
-        <translation type="vanished">Ведение журнала ресурсов</translation>
-    </message>
-    <message>
         <source>Online Documentation</source>
         <translation>Онлайн-документация</translation>
     </message>
@@ -814,10 +759,6 @@ Full path: %4</source>
     <message>
         <source>Show/Hide</source>
         <translation>Показать/Скрыть</translation>
-    </message>
-    <message>
-        <source>Resource Monitor</source>
-        <translation type="vanished">Монитор ресурсов</translation>
     </message>
     <message>
         <source>A sandbox must be emptied before it can be deleted.</source>
@@ -1189,17 +1130,19 @@ Full path: %4</source>
     </message>
     <message>
         <source>Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Журнал трассировки</translation>
     </message>
     <message>
         <source>Trace Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Ведение журнала трассировки</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
+
+Вы хотите выполнить очистку?</translation>
     </message>
 </context>
 <context>
@@ -1245,123 +1188,123 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Sbie RpcSs</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie RpcSs (удаленный вызов процедур)</translation>
     </message>
     <message>
         <source>Sbie DcomLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie DcomLaunch (plug and play)</translation>
     </message>
     <message>
         <source>Sbie Crypto</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Crypto (CSP)</translation>
     </message>
     <message>
         <source>Sbie WuAu Svc</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie WuAu Svc</translation>
     </message>
     <message>
         <source>Sbie BITS</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie BITS (фоновая интеллектуальная служба передачи)</translation>
     </message>
     <message>
         <source>Sbie Svc</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Svc</translation>
     </message>
     <message>
         <source>Msi Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Msi Installer</translation>
     </message>
     <message>
         <source>Trusted Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trusted Installer</translation>
     </message>
     <message>
         <source>Windows Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Центр обновления Windows</translation>
     </message>
     <message>
         <source>Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Проводник</translation>
     </message>
     <message>
         <source>Internet Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Internet Explorer</translation>
     </message>
     <message>
         <source>FireFox</source>
-        <translation type="unfinished"></translation>
+        <translation>FireFox</translation>
     </message>
     <message>
         <source>Windows Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Проигрыватель Windows Media</translation>
     </message>
     <message>
         <source>WinAmp</source>
-        <translation type="unfinished"></translation>
+        <translation>WinAmp</translation>
     </message>
     <message>
         <source>KM Player</source>
-        <translation type="unfinished"></translation>
+        <translation>KM Player</translation>
     </message>
     <message>
         <source>Windows Live Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта Windows Live</translation>
     </message>
     <message>
         <source>Service Model Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Service Model Reg</translation>
     </message>
     <message>
         <source>RunDll32</source>
-        <translation type="unfinished"></translation>
+        <translation>RunDll32</translation>
     </message>
     <message>
         <source>DllHost</source>
-        <translation type="unfinished"></translation>
+        <translation>DllHost</translation>
     </message>
     <message>
         <source>Windows Ink Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервисы Windows Ink</translation>
     </message>
     <message>
         <source>Chromium Based</source>
-        <translation type="unfinished"></translation>
+        <translation>На основе Chromium</translation>
     </message>
     <message>
         <source>Google Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа обновлений Google</translation>
     </message>
     <message>
         <source>Acrobat Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Acrobat Reader</translation>
     </message>
     <message>
         <source>MS Outlook</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Outlook</translation>
     </message>
     <message>
         <source>MS Excel</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Excel</translation>
     </message>
     <message>
         <source>Flash Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Flash Player</translation>
     </message>
     <message>
         <source>FireFox Plugin Container</source>
-        <translation type="unfinished"></translation>
+        <translation>FireFox плагин-контейнер</translation>
     </message>
     <message>
         <source>Generic Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартный веб-браузер</translation>
     </message>
     <message>
         <source>Generic Mail Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартный почтовый клиент</translation>
     </message>
     <message>
         <source> (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -1678,62 +1621,62 @@ Do you want to do the clean up?</source>
     <name>CTraceModel</name>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>Process %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесс %1</translation>
     </message>
     <message>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Поток %1</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished">Процесс</translation>
+        <translation>Процесс</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
 </context>
 <context>
     <name>CTraceView</name>
     <message>
         <source>Show as task tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать как дерево задач</translation>
     </message>
     <message>
         <source>PID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID процесса:</translation>
     </message>
     <message>
         <source>[All]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Все]</translation>
     </message>
     <message>
         <source>TID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID потока:</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
 </context>
 <context>
@@ -1816,16 +1759,6 @@ Do you want to do the clean up?</source>
     <message>
         <source>Internet Restrictions</source>
         <translation>Интернет-ограничения</translation>
-    </message>
-    <message>
-        <source>Configure which processes can access what resources. Double click on an entry to edit it.
-&apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
-Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
-For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation type="vanished">Настройте, какие процессы могут получить доступ к каким ресурсам. Дважды щелкните запись, чтобы отредактировать ее.
-&apos;Direct&apos; доступ к файлам и ключам применяется только к двоичным файлам программ, расположенным за пределами песочницы.
-Обратите внимание, что все Close...=!&lt;program&gt;,... исключения имеют те же ограничения.
-Для доступа к файлам вы можете использовать &apos;Direct All&apos; вместо этого, чтобы применить его ко всем программам.</translation>
     </message>
     <message>
         <source>Log Debug Output to the Trace Log</source>
@@ -2279,10 +2212,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Не запускать изолированные службы с использованием системного токена (рекомендуется)</translation>
     </message>
     <message>
-        <source>Allow access to Smart Cards</source>
-        <translation type="vanished">Разрешить доступ к смарт-картам</translation>
-    </message>
-    <message>
         <source>Sandbox isolation</source>
         <translation>Изоляция песочницы</translation>
     </message>
@@ -2293,10 +2222,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
         <translation>Здесь вы можете указать список команд, которые будут выполняться каждый раз при первоначальном заполнении песочницы.</translation>
-    </message>
-    <message>
-        <source>Allow access to Bluetooth</source>
-        <translation type="vanished">Разрешить доступ к Bluetooth</translation>
     </message>
     <message>
         <source>Elevation restrictions</source>
@@ -2356,99 +2281,103 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Prompt user for large file migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрашивать пользователя о переносе больших файлов</translation>
     </message>
     <message>
         <source>Block read access to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокировать доступ на чтение буфера обмена</translation>
     </message>
     <message>
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройте, какие процессы могут получить доступ к каким ресурсам. Дважды кликните по записи, чтобы отредактировать ее.
+&apos;Прямой&apos; доступ к файлам и ключам применяется только к двоичным файлам программ, расположенным за пределами песочницы.
+Для доступа к файлам вы можете использовать &apos;Прямой для всех&apos; вместо этого, чтобы применить его ко всем программам.</translation>
     </message>
     <message>
         <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить Close...=!&lt;program&gt;,... директивы также для всех двоичных файлов, находящихся в песочнице.</translation>
     </message>
     <message>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Эмуляция оконной станции в песочнице для всех процессов</translation>
     </message>
     <message>
         <source>Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Изоляция</translation>
     </message>
     <message>
         <source>Allow sandboxed programs to Change User Passwords and alike</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить изолированным программам изменять пароли пользователей и тому подобное</translation>
     </message>
     <message>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Различные расширенные функции изоляции могут нарушить совместимость с некоторыми приложениями, если вы используете эту песочницу &lt;b&gt;НЕ для безопасности&lt;/b&gt;, но для простой переносимости приложений, изменив эти параметры, вы можете восстановить совместимость, пожертвовав некоторой безопасностью.&lt;br&gt;Эти параметры можно безопасно использовать, если вы не предоставляете никаких прав администратора изолированному процессу.</translation>
     </message>
     <message>
         <source>Allow sandboxed programs to Managing Hardware/Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить изолированным программам управлять оборудованием и устройствами</translation>
     </message>
     <message>
         <source>Open access to windows Security Account Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
     </message>
     <message>
         <source>Open access to windows Local Security Authority</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытый доступ к Windows Local Security Authority</translation>
     </message>
     <message>
         <source>Access isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Изоляция доступа</translation>
     </message>
     <message>
         <source>Compatibility Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблоны совместимости</translation>
     </message>
     <message>
         <source>Add Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить шаблон</translation>
     </message>
     <message>
         <source>Remove Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить шаблон</translation>
     </message>
     <message>
         <source>Template Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Папки шаблонов</translation>
     </message>
     <message>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройте расположение папок, используемых другими вашими приложениями.
+
+Обратите внимание, что эти значения в настоящее время специфичны для пользователя и сохраняются глобально для всех ящиков.</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <source>Accessibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступность</translation>
     </message>
     <message>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы компенсировать потерю защиты, обратитесь к странице настроек Сброс прав в группе настроек Ограничения.</translation>
     </message>
     <message>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтение экрана: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующие настройки позволяют использовать Sandboxie в сочетании с программным обеспечением специальных возможностей. Обратите внимание, что когда действуют эти настройки, определенная степень защиты Sandboxie обязательно теряется.</translation>
     </message>
     <message>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>ВНИМАНИЕ: При запуске под встроенным администратором процессы не могут терять административные привилегии.</translation>
     </message>
 </context>
 <context>
@@ -2469,23 +2398,23 @@ Please note that this values are currently user specific and saved globally for 
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Применить</translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
 </context>
 <context>
@@ -2572,10 +2501,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>Tray options</source>
         <translation>Опции лотка</translation>
-    </message>
-    <message>
-        <source>Use Dark Theme</source>
-        <translation type="vanished">Использовать темную тему</translation>
     </message>
     <message>
         <source>Enable</source>
@@ -2707,7 +2632,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать темную тему (полностью применяется после перезапуска)</translation>
     </message>
 </context>
 <context>

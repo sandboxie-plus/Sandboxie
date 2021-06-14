@@ -2367,7 +2367,7 @@ ULONG GuiServer::CloseClipboardSlave(SlaveArgs *args)
                     ULONG fmt = 0;
 
                     while (1) {
-                        status = SbieApi_Call(API_GUI_CLIPBOARD, 1, 0x4000);
+                        status = SbieApi_Call(API_GUI_CLIPBOARD, 1, (ULONG_PTR)0x4000);
                         if (status != 0)
                             break;
                         fmt = EnumClipboardFormats(fmt);
@@ -2393,7 +2393,7 @@ ULONG GuiServer::CloseClipboardSlave(SlaveArgs *args)
                         // always fails.  so we want clip_il to stay 0x4000
                         //
 
-                        status = SbieApi_Call(API_GUI_CLIPBOARD, 1, caller_il);
+                        status = SbieApi_Call(API_GUI_CLIPBOARD, 1, (ULONG_PTR)caller_il);
                     }*/
 
                     CloseClipboard();
@@ -2460,7 +2460,7 @@ ULONG GuiServer::GetClipboardDataSlave(SlaveArgs *args)
             // then we can't get it, see more in CloseClipboardSlave above.
             // work around that by setting IL to 0x4000
             //
-            if (SbieApi_Call(API_GUI_CLIPBOARD, 1, 0x4000) == 0) {
+            if (SbieApi_Call(API_GUI_CLIPBOARD, 1, (ULONG_PTR)0x4000) == 0) {
                 mem_handle = GetClipboardData(req->format);
                 rpl->error = GetLastError();
             }

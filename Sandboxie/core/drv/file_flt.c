@@ -491,6 +491,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
 
                         RtlInitUnicodeString(&usFileName, (PCWSTR)pTempFullPath);
                     }
+                    FltReleaseFileNameInformation(pTargetFileNameInfo);
                 }
             }
         }

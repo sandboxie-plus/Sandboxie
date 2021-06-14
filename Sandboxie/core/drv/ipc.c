@@ -79,6 +79,11 @@ static NTSTATUS Ipc_Api_QuerySymbolicLink(PROCESS *proc, ULONG64 *parms);
 //---------------------------------------------------------------------------
 
 
+NTSTATUS Thread_GetKernelHandleForUserHandle(
+    HANDLE *OutKernelHandle, HANDLE InUserHandle);
+
+//---------------------------------------------------------------------------
+
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Ipc_Init)
 #pragma alloc_text (INIT, Ipc_Init_Type)
@@ -1158,17 +1163,35 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
         // wont be able to grab it while we are evaluaiting it
         //
 
-        status = ZwDuplicateObject(
-                        SourceProcessHandle, SourceHandle,
-                        TargetProcessHandle, &TestHandle,
+        HANDLE SourceKernelHandle;
+        status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
+        if (NT_SUCCESS(status)) {
+
+            HANDLE SourceProcessKernelHandle;
+            status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
+            if (NT_SUCCESS(status)) {
+
+                HANDLE TargetProcessKernelHandle = ZwCurrentProcess();
+                //status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
+                //if (NT_SUCCESS(status)) {
+
+                    status = ZwDuplicateObject(
+                        SourceProcessKernelHandle, SourceKernelHandle,
+                        TargetProcessKernelHandle, &TestHandle,
                         DesiredAccess, HandleAttributes,
                         Options & ~DUPLICATE_CLOSE_SOURCE);
 
-        if (NT_SUCCESS(status)) {
+                    if (NT_SUCCESS(status)) {
 
-            status = Ipc_CheckObjectName(TestHandle, KernelMode);
+                        status = Ipc_CheckObjectName(TestHandle, UserMode);
 
-            ZwClose(TestHandle);
+                        ZwClose(TestHandle);
+                    }
+                //    ZwClose(TargetProcessKernelHandle);
+                //}
+                ZwClose(SourceProcessKernelHandle);
+            }
+            ZwClose(SourceKernelHandle);
         }
 
     } else

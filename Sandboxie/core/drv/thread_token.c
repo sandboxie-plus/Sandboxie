@@ -106,7 +106,7 @@ static NTSTATUS Thread_ImpersonateAnonymousToken(
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Thread_GetKernelHandleForUserHandle(
+NTSTATUS Thread_GetKernelHandleForUserHandle(
     HANDLE *OutKernelHandle, HANDLE InUserHandle);
 
 

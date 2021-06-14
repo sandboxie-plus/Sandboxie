@@ -1901,17 +1901,17 @@ _FX ULONG Sxs_CheckManifestForElevation(
 
         _strlwr(args.ManifestText);
 
-        if (strstr(args.ManifestText, "level='asinvoker'") 
-         || strstr(args.ManifestText, "level=\"asinvoker\""))
-            if (pAsInvoker) *pAsInvoker = TRUE;
+        if (pAsInvoker) *pAsInvoker = 
+            (strstr(args.ManifestText, "level='asinvoker'") 
+            || strstr(args.ManifestText, "level=\"asinvoker\""));
 
-        if (strstr(args.ManifestText, "level='requireadministrator'")
-         || strstr(args.ManifestText, "level=\"requireadministrator\""))
-            if (pRequireAdministrator) *pRequireAdministrator = TRUE;
+        if (pRequireAdministrator) *pRequireAdministrator = 
+            (strstr(args.ManifestText, "level='requireadministrator'")
+            || strstr(args.ManifestText, "level=\"requireadministrator\""));
 
-        if (strstr(args.ManifestText, "level='highestavailable'")
-         || strstr(args.ManifestText, "level=\"highestavailable\""))
-            if (pHighestAvailable) *pHighestAvailable = TRUE;
+        if (pHighestAvailable) *pHighestAvailable = 
+            (strstr(args.ManifestText, "level='highestavailable'")
+            || strstr(args.ManifestText, "level=\"highestavailable\""));
     }
 
     Sxs_AllocOrFreeBuffers(&args, FALSE);

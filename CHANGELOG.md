@@ -6,10 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.1 / 5.50.1] - 2021-06-14
 
 ### Fixed
-- fixed an issue with driver verifyer and user handles
+- fixed an issue with Driver Verifier and user handles
 - fixed driver memory leak of FLT_FILE_NAME_INFORMATION objects
 - fixed broken clipboard introduced in 5.50.0
-- fixed dcom launch issue on windows 7 32 bit introduced in 5.50.0
+- fixed DcomLaunch issue on Windows 7 32 bit introduced in 5.50.0
 
 
 
@@ -25,9 +25,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "UseVolumeSerialNumbers=y" that allows drive letters to be suffixed with the volume SN in the \drive\ sandbox location
 -- it helps to avoid files mixed together on multiple pendrives using the same letter
 -- note: this option is not compatible with the recovery function of the Classic UI, only SandMan UI is fully compatible
+- added "ForceRestart=PicoTorrent.exe" to the PicoTorrent template in order to fix a compatibility issue
 
 ### Changed
-- portable cleanup message now has y/n/c options
+- portable cleanup message now has yes/no/cancel options
 - consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
 - the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default
 -- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
@@ -621,7 +622,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added disable forced programs menu command to the SandMan UI
 
 ### Fixed
-- fixed file rename bug introduced with an earlier driver verifier fix
+- fixed file rename bug introduced with an earlier Driver Verifier fix
 - fixed issue saving access lists
 - fixed issue with program groups parsing in the SandMan UI 
 - fixed issue with internet access restriction options

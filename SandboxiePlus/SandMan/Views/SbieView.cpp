@@ -739,7 +739,7 @@ void CSbieView::OnProcessAction()
 	QAction* Action = qobject_cast<QAction*>(sender());
 	if (Action == m_pMenuTerminate || Action == m_pMenuBlackList)
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("Do you want to %1 the selected process(es)").arg(((QAction*)sender())->text().toLower())
+		if (QMessageBox("Sandboxie-Plus", tr("Do you want to %1 the selected process(es)?").arg(((QAction*)sender())->text().toLower())
 			, QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 	}

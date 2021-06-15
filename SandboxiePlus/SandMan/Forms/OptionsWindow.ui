@@ -1698,7 +1698,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="4" column="1">
                   <widget class="QCheckBox" name="chkOpenSamEndpoint">
                    <property name="text">
-                    <string>Open access to windows Security Account Manager</string>
+                    <string>Open access to Windows Security Account Manager</string>
                    </property>
                   </widget>
                  </item>

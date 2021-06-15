@@ -6,8 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.2 / 5.50.2] - 2021-06-15
 
 ### Fixed
-- properly fixed an issue with driver verifyer and user handles
-- fixed an issue with CreateWindow introduced with 0.8.0
+- properly fixed an issue with Driver Verifier and user handles
+- fixed an issue with CreateWindow function introduced with 0.8.0
 
 
 

@@ -27,6 +27,7 @@ signals:
 public slots:
 	void						Clear();
 	void						Refresh();
+	void						StoreGroups();
 	void						ReloadGroups();
 
 private slots:

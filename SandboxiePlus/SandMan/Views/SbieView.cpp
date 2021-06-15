@@ -500,9 +500,23 @@ void CSbieView::OnGroupAction()
 		m_pSbieModel->Clear(); //todo improve that
 	}
 
+	StoreGroups();
+	UpdateGroupMenu();
+}
+
+void CSbieView::StoreGroups()
+{
+	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+
+	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+		for (auto J = I->begin(); J != I->end(); ) {
+			if (!Boxes.take(J->toLower()).isNull() || m_Groups.contains(*J)) ++J;
+			else J = I->erase(J);
+		}
+	}
+
 	QString Grouping = CSbieView__SerializeGroup(m_Groups);
 	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
-	UpdateGroupMenu();
 }
 
 QString CSbieView::AddNewBox()
@@ -625,19 +639,44 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	}
 	else if (Action == m_pMenuRename)
 	{
-		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
+		QString OldName = SandBoxes.first()->GetName();
+		QString OldValue = OldName.replace("_", " ");
 		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
 		if (Value.isEmpty() || Value == OldValue)
 			return;
-		Results.append((SandBoxes.first()->RenameBox(Value.replace(" ", "_"))));
+		QString NewName = Value.replace(" ", "_");
+		Results.append((SandBoxes.first()->RenameBox(NewName)));
+
+		// update grouping
+		for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+			int pos = I->indexOf(OldName);
+			if (pos != -1)
+				I->replace(pos, NewName);
+		}
+
+		StoreGroups();
 	}
 	else if (Action == m_pMenuRemove)
 	{
 		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected sandbox(es)?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 
-		foreach(const CSandBoxPtr& pBox, SandBoxes)
-			Results.append(pBox->RemoveBox());
+		foreach(const CSandBoxPtr & pBox, SandBoxes)
+		{
+			QString Name = pBox->GetName();
+			SB_STATUS Status = pBox->RemoveBox();
+
+			// update grouping
+			if (!Status.IsError()) {
+				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+					I->removeAll(Name);
+				}
+			}
+
+			Results.append(Status);
+		}
+
+		StoreGroups();
 	}
 	else if (Action == m_pMenuRecover)
 	{

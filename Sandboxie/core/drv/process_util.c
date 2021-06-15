@@ -350,10 +350,12 @@ _FX BOOLEAN Process_GetPaths(
 
         if (closed && (*value == L'!')) {
 
+            // dont close paths for sbie components
             if (closed_ipc && proc->image_sbie)
-                continue;
+                continue; 
 
-            if (proc->image_from_box) {
+            // for all other advance to the path and apply the block for all sandboxed images
+            if (proc->image_from_box && proc->always_close_for_boxed) {
 
                 value = wcschr(value, L',');
                 if (! value)
@@ -972,7 +974,7 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
     BOX *box = proc->box;
     ULONG len = proc->image_name_len + box->name_len + 8 * sizeof(WCHAR);
     WCHAR *text = Mem_Alloc(proc->pool, len);
-    swprintf(text, L"%s [%s]", proc->image_name, box->name);
+    RtlStringCbPrintfW(text, len, L"%s [%s]", proc->image_name, box->name);
     if (proc->image_from_box)
         wcscat(text, L" *");
     Log_MsgP1(msgid, text, proc->pid);

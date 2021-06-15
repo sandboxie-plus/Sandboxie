@@ -127,6 +127,8 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 
 	m_bReloadPending = false;
 
+	m_LastTraceEntry = 0;
+
 	connect(&m_IniWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnIniChanged(const QString&)));
 	connect(this, SIGNAL(ProcessBoxed(quint32, const QString&, const QString&, quint32)), this, SLOT(OnProcessBoxed(quint32, const QString&, const QString&, quint32)));
 }
@@ -235,6 +237,8 @@ void CSbieAPI::GetUserPaths()
 
 		if (CSbieAPI__GetCurrentSidString(&objname))
 		{
+			m_UserSid = QString::fromWCharArray(objname.Buffer);
+
 			InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, hProfileKey, NULL);
 
 			HANDLE hSidKey;
@@ -281,7 +285,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.49.0";
+	QStringList CompatVersions = QStringList () << "5.50.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -788,6 +792,58 @@ void CSbieAPI::OnReloadConfig()
 	ReloadConfig();
 }
 
+typedef struct _FILE_FS_VOLUME_INFORMATION {
+  LARGE_INTEGER VolumeCreationTime;
+  ULONG         VolumeSerialNumber;
+  ULONG         VolumeLabelLength;
+  BOOLEAN       SupportsObjects;
+  WCHAR         VolumeLabel[1];
+} FILE_FS_VOLUME_INFORMATION, *PFILE_FS_VOLUME_INFORMATION;
+
+ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
+{
+    ULONG sn = 0;
+    HANDLE handle;
+    IO_STATUS_BLOCK iosb;
+
+    UNICODE_STRING objname;
+	size_t path_len = wcslen(path);
+	objname.Buffer = new wchar_t[path_len + 2];
+    wmemcpy(objname.Buffer, path, path_len);
+    objname.Buffer[path_len    ] = L'\\';
+    objname.Buffer[path_len + 1] = L'\0';
+    
+    objname.Length = (USHORT)(path_len + 1) * sizeof(WCHAR);
+    objname.MaximumLength = objname.Length + sizeof(WCHAR);
+
+    OBJECT_ATTRIBUTES objattrs;
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    
+    NTSTATUS status = NtCreateFile(
+        &handle, GENERIC_READ | SYNCHRONIZE, &objattrs,
+        &iosb, NULL, 0, FILE_SHARE_VALID_FLAGS,
+        FILE_OPEN,
+        FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
+        NULL, 0);
+
+    delete [] objname.Buffer;
+
+    if (NT_SUCCESS(status))
+    {
+        union {
+            FILE_FS_VOLUME_INFORMATION volumeInfo;
+            BYTE volumeInfoBuff[64];
+        } u;
+        if (NT_SUCCESS(NtQueryVolumeInformationFile(handle, &iosb, &u.volumeInfo, sizeof(u), FileFsVolumeInformation)))
+            sn = u.volumeInfo.VolumeSerialNumber;
+
+        NtClose(handle);
+    }
+
+    return sn;
+}
+
 void CSbieAPI::UpdateDriveLetters()
 {
 	QWriteLocker Lock(&m_DriveLettersMutex);
@@ -807,28 +863,45 @@ void CSbieAPI::UpdateDriveLetters()
 		uint size = QueryDosDevice(drv, lpTargetPath, MAX_PATH);
 		if (size > 0)
 		{
+			SDrive Drive;
 			QString Key = QString::fromWCharArray(lpTargetPath);
 			QStringList Chunks = Key.split("\\");
 			if (Chunks.count() >= 5 && Chunks[2].compare("LanmanRedirector", Qt::CaseInsensitive) == 0) {
+				Drive.Type = SDrive::EShare;
 				Chunks.removeAt(3);
 				Key = Chunks.join("\\");
+				Drive.Aux = Chunks.mid(3).join("\\");
+			}
+			else {
+				Drive.Type = SDrive::EVolume;
+				if (ULONG sn = CSbieAPI__GetVolumeSN(lpTargetPath))
+					Drive.Aux = QString("%1-%2").arg((ushort)HIWORD(sn), 4, 16, QChar('0')).arg((ushort)LOWORD(sn), 4, 16, QChar('0')).toUpper();
 			}
 			Key.append("\\");
-			m_DriveLetters.insert(Key, QString::fromWCharArray(drv) + "\\");
+			Drive.Letter = QString::fromWCharArray(drv) + "\\";
+			Drive.NtPath = Key;
+
+			m_DriveLetters.insert(Drive.Letter, Drive);
 		}
 	}
 }
 
-QString CSbieAPI::Nt2DosPath(QString NtPath) const
+QString CSbieAPI::Nt2DosPath(QString NtPath, bool* pOk) const
 {
 	QReadLocker Lock(&m_DriveLettersMutex);
 
-	for (QMap<QString, QString>::const_iterator I = m_DriveLetters.begin(); I != m_DriveLetters.end(); ++I)
+	if (NtPath.indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
+		NtPath = "\\Device\\LanmanRedirector" + NtPath.mid(11);
+
+	for (QMap<QString, SDrive>::const_iterator I = m_DriveLetters.begin(); I != m_DriveLetters.end(); ++I)
 	{
-		const QString& Key = I.key();
-		if (Key.compare(NtPath.left(Key.length()), Qt::CaseInsensitive) == 0)
-			return NtPath.replace(0, Key.length(), I.value());
+		const SDrive& Drive = I.value();
+		if (Drive.NtPath.compare(NtPath.left(Drive.NtPath.length()), Qt::CaseInsensitive) == 0) {
+			if(pOk) *pOk = true;
+			return NtPath.replace(0, Drive.NtPath.length(), Drive.Letter);
+		}
 	}
+	if(pOk) *pOk = false;
 	return NtPath;
 }
 
@@ -1137,7 +1210,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
 			pProcess->InitProcessInfo();
 		}
 
-		// todo:
+		pProcess->InitProcessInfoEx();
 	}
 
 	foreach(const CBoxedProcessPtr& pProcess, OldProcessList) 
@@ -1267,6 +1340,26 @@ CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 CBoxedProcessPtr CSbieAPI::GetProcessById(quint32 ProcessId) const
 {
 	return m_BoxedProxesses.value(ProcessId);
+}
+
+quint32 CSbieAPI::GetImageType(quint32 ProcessId)
+{
+	__declspec(align(8)) ULONG64 ResultValue;
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_QUERY_PROCESS_INFO_ARGS *args = (API_QUERY_PROCESS_INFO_ARGS *)parms;
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code             = API_QUERY_PROCESS_INFO;
+
+	args->process_id.val64      = (ULONG64)(ULONG_PTR)ProcessId;
+	args->info_type.val64       = (ULONG64)(ULONG_PTR)'gpit';
+	args->info_data.val64       = (ULONG64)(ULONG_PTR)&ResultValue;
+	args->ext_data.val64        = (ULONG64)(ULONG_PTR)0;
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return -1;
+	return ResultValue;
 }
 
 SB_STATUS CSbieAPI::TerminateAll(const QString& BoxName)
@@ -1533,12 +1626,20 @@ QString CSbieAPI::GetBoxedPath(const QString& BoxName, const QString& Path)
 	return GetBoxedPath(pBox, Path);
 }
 
+//#pragma comment(lib, "mpr.lib")
+
 QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
 {
 	QString BoxRoot = pBox->m_FilePath;
 
-	if (Path.indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
-		return BoxRoot + "\\share" + Path.mid(11);
+    //WCHAR Buffer[4096];
+    //DWORD dwBufferLength = sizeof(Buffer)/sizeof(WCHAR );
+    //UNIVERSAL_NAME_INFO * unameinfo = (UNIVERSAL_NAME_INFO *) &Buffer;
+	//if (WNetGetUniversalName(Path.toStdWString().c_str(), UNIVERSAL_NAME_INFO_LEVEL, (LPVOID)unameinfo, &dwBufferLength) == NO_ERROR)
+	//	return BoxRoot + "\\share" + QString::fromWCharArray(unameinfo->lpUniversalName).mid(1);
+
+	//if (Path.indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
+	//	return QStringList(BoxRoot + "\\share" + Path.mid(11));
 
 	if (pBox->GetBool("SeparateUserFolders", true))
 	{
@@ -1553,7 +1654,35 @@ QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
 	if (Path.length() < 3 || Path.at(1) != ':')
 		return QString();
 	
+	QReadLocker Lock(&m_DriveLettersMutex);
+	QMap<QString, SDrive>::const_iterator I = m_DriveLetters.find(Path.left(3).toUpper());
+	if (I != m_DriveLetters.end())
+	{
+		if (I->Type == SDrive::EShare)
+			return BoxRoot + "\\share\\" + I->Aux + Path.mid(2);
+		else if (pBox->GetBool("UseVolumeSerialNumbers", false) && !I->Aux.isEmpty())
+			return BoxRoot + "\\drive\\" + Path.at(0) + "~" + I->Aux + Path.mid(2);
+	}
+
 	return BoxRoot + "\\drive\\" + Path.at(0) + Path.mid(2);
+
+	/*QStringList Paths;
+
+	// todo: include snapshot locations
+
+	if (pBox->GetBool("UseVolumeSerialNumbers", false))
+	{
+		QDir Dir(BoxRoot + "\\drive\\");
+		foreach(const QFileInfo & Info, Dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
+		{
+			if (Info.fileName().left(1).compare(Path.at(0), Qt::CaseInsensitive) == 0)
+				Paths.append(BoxRoot + "\\drive\\" + Info.fileName() + Path.mid(2));
+		}
+	}
+
+	if(Paths.isEmpty())
+		Paths = QStringList(BoxRoot + "\\drive\\" + Path.at(0) + Path.mid(2));
+	return Paths;*/
 }
 
 QString CSbieAPI::GetRealPath(const CSandBoxPtr& pBox, const QString& Path)
@@ -1563,27 +1692,39 @@ QString CSbieAPI::GetRealPath(const CSandBoxPtr& pBox, const QString& Path)
 	if (BoxRoot.right(1) == "\\") BoxRoot.truncate(BoxRoot.length() - 1);
 
 	if (Path.length() < BoxRoot.length())
-		return RealPath;
+		return QString();;
 
 	RealPath = Path.mid(BoxRoot.length());
 
-	if (RealPath.left(6) == "\\share")
-		RealPath = "\\device\\mup" + RealPath.mid(6);
+	if (RealPath.left(6) == "\\share") 
+	{
+		QString Temp = RealPath.mid(6);
+		bool bBs = false;
+		if ((bBs = (Temp.count("\\") < 3))) Temp += "\\";
+		bool bOk;
+		Temp = Nt2DosPath("\\Device\\LanmanRedirector" + Temp, &bOk);
+		if (!bOk) return QString();
+		if (bBs) Temp.truncate(Temp.length() - 1);
+		return Temp;
+	}
 
 	if (RealPath.left(5) == "\\user")
 	{
 		if (RealPath.mid(5, 8) == "\\current")
-			RealPath = m_UserDir + RealPath.mid(5 + 8);
+			return m_UserDir + RealPath.mid(5 + 8);
 		else if (RealPath.mid(5, 4) == "\\all")
-			RealPath = m_ProgramDataDir + RealPath.mid(5 + 4);
+			return m_ProgramDataDir + RealPath.mid(5 + 4);
 		else if (RealPath.mid(5, 7) == "\\public")
-			RealPath = m_PublicDir + RealPath.mid(5 + 7);
+			return m_PublicDir + RealPath.mid(5 + 7);
 	}
 
-	if (RealPath.left(6) == "\\drive")
-		RealPath = RealPath.mid(7, 1) + ":" + RealPath.mid(8);
+	if (RealPath.left(6) == "\\drive") 
+	{
+		int pos = RealPath.indexOf("\\", 7);
+		return RealPath.mid(7, 1) + ":" + (pos != -1 ? RealPath.mid(pos) : "");
+	}
 
-	return RealPath;
+	return QString();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1784,7 +1925,9 @@ bool CSbieAPI::GetLog()
 	
 	if ((MsgCode & 0xFFFF) == 2199) // Auto Recovery notification
 	{
-		emit FileToRecover(MsgData[1], Nt2DosPath(MsgData[2]), ProcessId);
+		QString FilePath = Nt2DosPath(MsgData[2]);
+		QString BoxPath = MsgData.length() >= 4 ? Nt2DosPath(MsgData[3]) : QString();
+		emit FileToRecover(MsgData[1], FilePath, BoxPath, ProcessId);
 		return true;
 	}
 
@@ -1964,6 +2107,25 @@ void CSbieAPI::AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge)
 	}
 
 	m_TraceList.append(LogEntry);
+}
+
+QList<CTraceEntryPtr> CSbieAPI::GetTrace() const 
+{ 
+	QReadLocker Lock(&m_TraceMutex); 
+
+	if (m_TraceList.count() >= m_LastTraceEntry) {
+		for (int i = m_LastTraceEntry; i < m_TraceList.count(); i++) {
+			const CTraceEntryPtr& pEntry = m_TraceList[i];
+			if (CBoxedProcessPtr proc = m_BoxedProxesses.value(pEntry->GetProcessId())) {
+				((CTraceEntry*)pEntry.data())->SetProcessName(proc->GetProcessName());
+				((CTraceEntry*)pEntry.data())->SetBoxPtr(proc->GetBoxPtr());
+			}
+
+		}
+		((CSbieAPI*)this)->m_LastTraceEntry = m_TraceList.count();
+	}
+
+	return m_TraceList; 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -78,8 +78,10 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 
 	foreach(const QString& NtFolder, m_pBox->GetTextList("RecoverFolder", true, true)) 
 	{
-		QString Folder = theAPI->Nt2DosPath(NtFolder);
-		m_RecoveryFolders.append(Folder);
+		bool bOk;
+		QString Folder = theAPI->Nt2DosPath(NtFolder, &bOk);
+		if(bOk)
+			m_RecoveryFolders.append(Folder);
 	}
 }
 
@@ -137,14 +139,24 @@ int CRecoveryWindow::FindFiles()
 
 	if (ui.chkShowAll->isChecked())
 	{
-		for(char drive = 'A'; drive <= 'Z'; drive++)
-			Count += FindBoxFiles("\\drive\\" + QString(drive));
+		//for(char drive = 'A'; drive <= 'Z'; drive++)
+		QDir Dir(m_pBox->GetFileRoot() + "\\drive\\");
+		foreach(const QFileInfo & Info, Dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
+			Count += FindBoxFiles("\\drive\\" + Info.fileName());
+
 		if (m_pBox->GetBool("SeparateUserFolders", true)) {
 			Count += FindBoxFiles("\\user\\current");
 			Count += FindBoxFiles("\\user\\all");
 			Count += FindBoxFiles("\\user\\public");
 		}
-		Count += FindBoxFiles("\\share");
+
+		//Count += FindBoxFiles("\\share");
+		QDir DirSvr(m_pBox->GetFileRoot() + "\\share\\");
+		foreach(const QFileInfo & InfoSrv, DirSvr.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+			QDir DirPub(m_pBox->GetFileRoot() + "\\share\\" + InfoSrv.fileName());
+			foreach(const QFileInfo & InfoPub, DirPub.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
+				Count += FindBoxFiles("\\share\\" + InfoSrv.fileName() + "\\" + InfoPub.fileName());
+		}
 	}
 	else
 	{
@@ -159,12 +171,19 @@ int CRecoveryWindow::FindFiles()
 
 int CRecoveryWindow::FindFiles(const QString& Folder)
 {
+	//int Count = 0;
+	//foreach(const QString & Path, theAPI->GetBoxedPath(m_pBox, Folder))
+	//	Count += FindFiles(Folder, Path, Folder);
+	//return Count;
 	return FindFiles(Folder, theAPI->GetBoxedPath(m_pBox, Folder), Folder);
 }
 
 int CRecoveryWindow::FindBoxFiles(const QString& Folder)
 {
-	return FindFiles(Folder, m_pBox->GetFileRoot() + Folder, theAPI->GetRealPath(m_pBox, m_pBox->GetFileRoot() + Folder));
+	QString RealFolder = theAPI->GetRealPath(m_pBox, m_pBox->GetFileRoot() + Folder);
+	if (RealFolder.isEmpty())
+		return 0;
+	return FindFiles(Folder, m_pBox->GetFileRoot() + Folder, RealFolder);
 }
 
 int CRecoveryWindow::FindFiles(const QString& RecParent, const QString& BoxedFolder, const QString& RealFolder)
@@ -225,7 +244,7 @@ int CRecoveryWindow::FindFiles(const QString& RecParent, const QString& BoxedFol
 
 void CRecoveryWindow::RecoverFiles(bool bBrowse)
 {
-	bool HasShare = false;
+	//bool HasShare = false;
 	QMap<QString, QString> FileMap;
 	foreach(const QModelIndex& Index, ui.treeFiles->selectionModel()->selectedIndexes())
 	{
@@ -239,8 +258,8 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 
 		if (!File["ParentID"].isNull())
 		{
-			if (File["DiskPath"].toString().indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
-				HasShare = true;
+			//if (File["DiskPath"].toString().indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
+			//	HasShare = true;
 			FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
 		}
 		else
@@ -254,18 +273,18 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 				if (File.isEmpty())
 					continue;
 
-				if (File["DiskPath"].toString().indexOf("\\device\\mup") == 0)
-					HasShare = true;
+				//if (File["DiskPath"].toString().indexOf("\\device\\mup") == 0)
+				//	HasShare = true;
 				FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
 			}
 		}
 	}
 
 
-	if (HasShare && !bBrowse) {
+	/*if (HasShare && !bBrowse) {
 		QMessageBox::warning(this, "Sandboxie-Plus", tr("One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to."));
 		bBrowse = true;
-	}
+	}*/
 
 
 	QString RecoveryFolder;
@@ -301,7 +320,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse)
 
 void CRecoveryWindow::OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize)
 {
-	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
+	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
 }
 
 void CRecoveryCounter::run()

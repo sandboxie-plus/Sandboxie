@@ -461,7 +461,7 @@ _FX void Dll_RefreshPathList(void)
 
     EnterCriticalSection(&Dll_FilePathListCritSec);
 
-    if (SbieApi_CallZero(API_REFRESH_FILE_PATH_LIST) == STATUS_SUCCESS) {
+    if (SbieApi_Call(API_REFRESH_FILE_PATH_LIST, 0) == STATUS_SUCCESS) {
 
         LIST open_paths, closed_paths, write_paths;
 

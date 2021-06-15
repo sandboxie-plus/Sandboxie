@@ -84,9 +84,7 @@ NTOS_API(ULONG) SeTokenImpersonationLevel(
 // Misc
 // ------------------------------------------------------------------
 
-
-ULONG __cdecl sprintf(char *buffer, const char *format, ...);
-
+//ULONG __cdecl sprintf(char *buffer, const char *format, ...);
 //ULONG __cdecl swprintf(wchar_t *buffer, const wchar_t *format, ...);
 
 NTOS_NTSTATUS   ZwYieldExecution(void);

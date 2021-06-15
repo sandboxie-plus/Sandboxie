@@ -1090,8 +1090,8 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
         if (ok && StartProgramInSandbox) {
 
-            LONG rc = SbieApi_CallTwo(API_START_PROCESS,
-                                      BoxNameOrModelPid, pi->dwProcessId);
+            LONG rc = SbieApi_Call(API_START_PROCESS, 2,
+                                      (ULONG_PTR)BoxNameOrModelPid, (ULONG_PTR)pi->dwProcessId);
             if (rc != 0) {
 
                 LastError = RtlNtStatusToDosError(rc);

@@ -3,56 +3,104 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.8.1 / 5.50.1] - 2021-06-14
+
+### Fixed
+- fixed an issue with Driver Verifier and user handles
+- fixed driver memory leak of FLT_FILE_NAME_INFORMATION objects
+- fixed broken clipboard introduced in 5.50.0
+- fixed DcomLaunch issue on Windows 7 32 bit introduced in 5.50.0
 
 
 
-
-
-
-
-
-
-
-
-
-
-## [0.7.4 / 5.49.7] - 2021-04-12
+## [0.8.0 / 5.50.0] - 2021-06-13
 
 ### Added
-- added option to disable file migration prompt
-- added UI options for variouse security isolation features
-- added missing functionality to set template values in the plus UI
+- Sandboxie now applies by default "Close...=!<program>,..." directives to non-excluded images if they are located in a sandbox
+-- added 'AlwaysCloseForBoxed=n' to disable this behaviour as it may not be always desired, and it doesn't provide extra security
+- added process image information to Sandman UI
+- localized template categories in the Plus UI
+- added "DisableResourceMonitor=y" to disable resource access monitor for selected boxes
+- added option to show trace entries only for the selected sandbox
+- added "UseVolumeSerialNumbers=y" that allows drive letters to be suffixed with the volume SN in the \drive\ sandbox location
+-- it helps to avoid files mixed together on multiple pendrives using the same letter
+-- note: this option is not compatible with the recovery function of the Classic UI, only SandMan UI is fully compatible
+- added "ForceRestart=PicoTorrent.exe" to the PicoTorrent template in order to fix a compatibility issue
 
 ### Changed
-- Align default settings of AutoRecover and Favorites to the Plus version (thanks isaak654)
-- list of email clients and browsers is now centralized on Dll_GetImageType
+- portable cleanup message now has yes/no/cancel options
+- consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
+- the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default
+-- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
+- trace log gets disabled only when it has no entries and the logging is stopped
+
+### Fixed
+- fixed APC issue with the new global hook emulation mechanism and WoW64 processes
+- fixed IPv6 issues with BlockPort options
+- fixed an issue with CheatEngine when "OpenWinClass=*" was specified
+- fixed memory corruption in SbieDrv
+- fixed crash issue with process elevation on CreateProcess calls
+- fixed process elevation when running in the built-in administrator account
+- fixed template preview resetting unsaved entries in box options window
+
+
+
+## [0.7.5 / 5.49.8] - 2021-06-05
+
+### Added
+- clipboard access for a sandbox can now be disabled with "OpenClipboard=n"
+
+### Changed
+- now the OpenBluetooth template is enabled by default for compatibility with Unity games
+- "PreferExternalManifest=program.exe,y" can now be set on a per-process basis
+
+### Fixed
+- fixed compiler issues with the most recent VS2019 update
+- fixed issue with Vivaldi browser
+- fixed some issues with box options in the Plus UI
+- fixed some issues with hardware acceleration in Chromium based browsers
+- the "Stop All" command now issues "kmdutill scandll" first to solve issues when the SbieDll.dll is in use
+- workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process
+
+
+
+## [0.7.4 / 5.49.7] - 2021-04-11
+
+### Added
+- added option to disable file migration prompt in the Plus UI
+- added UI options for various security isolation features
+- added missing functionality to set template values in the Plus UI
+
+### Changed
+- align default settings of AutoRecover and Favourites to the Plus version (thanks isaak654)
+- list of email clients and browsers is now centralized in Dll_GetImageType
 
 ### Fixed
 - fixed minor issue with logging internet blocks
 - fixed issue with file recovery when located on a network share
-- fixed ui issue with CallTrace
-- fixed crated sandbox links gettign double extension
+- fixed UI issue with CallTrace
+- fixed sandbox shortcuts receiving double extension upon creation
 - fixed misplaced labels in the classic ui (thanks isaak654)
-- fixed separator line in Sbiectrl (thanks isaak654)
+- fixed separator line in SbieCtrl (thanks isaak654)
 
 
 
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
 ### Added
-- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only for Firefox and Chrome
+- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only Firefox and Chrome
 - added option to drop the console host process integrity, now you can use "DropConHostIntegrity=y"
 - added option to easily add local templates
 
 ### Changed
 - reworked window hooking mechanism to improve performance
--- resolves issues with file save dialogs taking 30+ sec to open
+-- resolves issues with file save dialogues taking 30+ seconds to open
 -- this fix greatly improves the win32 GUI performance of sandboxed processes
-- reworked RPC resolver to be ini configurable
+- reworked RPC resolver to be ini-configurable
 -- the following options are now deprecated:
 --- "UseRpcMgmtSetComTimeout=some.dll,n", so use "RpcPortBinding=some.dll,*,TimeOut=y"
---- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n" use the new templates instead
--- See the Templates.ini for usage examples
+--- "OpenUPnP=y", "OpenBluetooth=y", "OpenSmartCard=n", so use the new RPC templates instead
+-- See Templates.ini for usage examples
 
 ### Fixed
 - fixed process-specific hooks being applied to all processes in a given sandbox
@@ -68,7 +116,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- to enable runas functionality, add "OpenIpcPath=\RPC Control\SECLOGON" to your Sandboxie.ini
 -- please take note that doing so may open other yet unknown issues
 - fixed a driver compatibility issue with Windows 10 32 bit Insider Preview Build 21337
-- fixed issues with driver signature for windows 7
+- fixed issues with driver signature for Windows 7
 
 
 
@@ -574,7 +622,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added disable forced programs menu command to the SandMan UI
 
 ### Fixed
-- fixed file rename bug introduced with an earlier driver verifier fix
+- fixed file rename bug introduced with an earlier Driver Verifier fix
 - fixed issue saving access lists
 - fixed issue with program groups parsing in the SandMan UI 
 - fixed issue with internet access restriction options

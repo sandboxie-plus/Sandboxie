@@ -354,6 +354,8 @@ static ULONG File_PublicUserLen = 0;
 static WCHAR *File_HomeNtPath = NULL;
 static ULONG File_HomeNtPathLen = 0;
 
+static BOOLEAN File_DriveAddSN = FALSE;
+
 static BOOLEAN File_Windows2000 = FALSE;
 
 static WCHAR *File_AltBoxPath = NULL;
@@ -819,8 +821,17 @@ check_sandbox_prefix:
             return STATUS_BAD_INITIAL_PC;
         }
 
+        ULONG len = _DriveLen + 1; /* drive letter */
+
+        // skip any suffix after the drive letter
+        if (File_DriveAddSN) {
+            WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
+            if (ptr)
+                len = (ULONG)(ptr - *OutTruePath);
+        }
+
         File_GetName_FixTruePrefix(TlsData,
-            OutTruePath, &length, _DriveLen + 1 /* drive letter */,
+            OutTruePath, &length, len,
             drive->path, drive->len);
 
         convert_links_again = TRUE;
@@ -1160,6 +1171,15 @@ check_sandbox_prefix:
             name += _DriveLen;
             *name = drive_letter;
             ++name;
+
+            if (File_DriveAddSN && *drive->sn)
+            {
+                *name = L'~';
+                ++name;
+                wcscpy(name, drive->sn);
+                name += 9;
+            }
+
             *name = L'\0';
 
             if (length == drive_len) {

@@ -287,7 +287,7 @@ void CPopUpWindow::SendPromptResult(CPopUpPrompt* pEntry, int retval)
 		pEntry->m_pProcess.objectCast<CSbieProcess>()->SetRememberedAction(pEntry->m_Result["id"].toInt(), retval);
 }
 
-void CPopUpWindow::AddFileToRecover(const QString& FilePath, const QString& BoxName, quint32 ProcessId)
+void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, const QString& BoxName, quint32 ProcessId)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 	if (!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended())
@@ -299,7 +299,10 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, const QString& BoxN
 		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(BoxName).replace("_", " "))
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
-	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxName, this);
+	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
+		BoxPath = theAPI->GetBoxedPath(BoxName, FilePath);
+
+	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, BoxName, this);
 
 	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
 	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);
@@ -352,10 +355,10 @@ void CPopUpWindow::OnRecoverFile(int Action)
 	}
 
 	QString FileName = pEntry->m_FilePath.mid(pEntry->m_FilePath.lastIndexOf("\\") + 1);
-	QString BoxedFilePath = theAPI->GetBoxedPath(pEntry->m_BoxName, pEntry->m_FilePath);
+	//QString BoxedFilePath = theAPI->GetBoxedPath(pEntry->m_BoxName, pEntry->m_FilePath); // pEntry->m_BoxPath
 
 	QList<QPair<QString, QString>> FileList;
-	FileList.append(qMakePair(BoxedFilePath, RecoveryFolder + "\\" + FileName));
+	FileList.append(qMakePair(pEntry->m_BoxPath, RecoveryFolder + "\\" + FileName));
 
 	SB_PROGRESS Status = theGUI->RecoverFiles(FileList, Action);
 	if (Status.GetStatus() == OP_ASYNC)

@@ -166,6 +166,16 @@ ALIGNED BOOL my_SetThreadToken(PHANDLE Thread, HANDLE Token)
 
         if (Thread == NULL) {
 
+            //typedef BOOL(*P_OpenProcessToken)(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE TokenHandle);
+            //typedef BOOL(*P_DuplicateToken)(HANDLE ExistingTokenHandle, SECURITY_IMPERSONATION_LEVEL ImpersonationLevel, PHANDLE DuplicateTokenHandle);
+            //static P_OpenProcessToken _OpenProcessToken = NULL;
+            //static P_DuplicateToken _DuplicateToken = NULL;
+            //if (_OpenProcessToken == NULL || _DuplicateToken == NULL) {
+            //    HMODULE advapi_dll = LoadLibrary(L"advapi32.dll");
+            //    *(FARPROC*)&_OpenProcessToken = GetProcAddress(advapi_dll, "OpenProcessToken");
+            //    *(FARPROC*)&_DuplicateToken = GetProcAddress(advapi_dll, "DuplicateToken");
+            //}
+
             HANDLE PriToken;
             ok = OpenProcessToken(
                             NtCurrentProcess(), TOKEN_ALL_ACCESS, &PriToken);

@@ -5,15 +5,18 @@
 #include <QMap>
 #include <QMargins>
 #include <QPair>
+#include <QToolButton>
 
 class QResizeEvent;
 class CollapseExpandButton;
 class QSpacerItem;
 
-class CollapsibleGroupBox : public QGroupBox
+#include "../mischelpers_global.h"
+
+class MISCHELPERS_EXPORT CCollapsibleGroupBox : public QGroupBox
 {
 public:
-  explicit CollapsibleGroupBox(QWidget *parent = nullptr);
+  explicit CCollapsibleGroupBox(QWidget *parent = nullptr);
 
 protected:
   void resizeEvent(QResizeEvent *);
@@ -25,7 +28,7 @@ private:
   void expandLayout(QLayout *layout);
   void expandSpacer(QSpacerItem *spacer);
 
-  CollapseExpandButton *m_clExpButton;
+  QToolButton *m_clExpButton;
   QMap<const void *, QMargins> m_layoutMargins;
   QMap<const void *, QPair<QSize, QSizePolicy>> m_spacerSizes;
 

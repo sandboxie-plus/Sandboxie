@@ -11,7 +11,7 @@ public:
 	CTraceModel(QObject* parent = 0);
 	~CTraceModel();
 
-	QList<QVariant>	Sync(const QList<CTraceEntryPtr>& EntryList);
+	QList<QVariant>	Sync(const QList<CTraceEntryPtr>& EntryList, void* BoxPtr);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
 
@@ -52,6 +52,7 @@ protected:
 
 	QVariant				m_LastID;
 	int						m_LastCount;
+	void*					m_LastBoxPtr;
 
 	virtual STreeNode* MkNode(const QVariant& Id) { return new STraceNode(Id); }
 	virtual STreeNode* MkVirtualNode(const QVariant& Id, STreeNode* pParent);
@@ -59,7 +60,8 @@ protected:
 	/*QList<QVariant>			MakePath(const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList);
 	bool					TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList, int Index = 0);*/
 
-	QString					GetProcessName(quint32 pid, quint32 tid = 0);
+	void					SetProcessName(const QString& Name, quint32 pid, quint32 tid);
+	QString					GetProcessName(quint32 pid);
 	void					LogThreadId(quint32 pid, quint32 tid);
 	QMap<quint32, SProgInfo>m_PidMap;
 };

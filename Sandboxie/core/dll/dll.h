@@ -493,6 +493,9 @@ void Sxs_ActivateDefaultManifest(void *ImageBase);
 
 ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath);
 
+ULONG Sxs_CheckManifestForElevation(const WCHAR* DosPath,
+    BOOLEAN* pAsInvoker, BOOLEAN* pRequireAdministrator, BOOLEAN* pHighestAvailable);
+
 BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle);
 
 BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle);
@@ -733,7 +736,7 @@ BOOLEAN MsCorEE_Init(HMODULE hmodule);
 
 void Custom_ComServer(void);
 
-void Custom_Load_UxTheme(void);
+//void Custom_Load_UxTheme(void);
 
 NTSTATUS StopTailCallOptimization(NTSTATUS status);
 

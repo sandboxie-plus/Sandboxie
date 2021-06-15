@@ -756,7 +756,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
     if (! proc)
         return STATUS_NOT_IMPLEMENTED;
 
-    if (! Session_MonitorCount)
+    if (! Session_MonitorCount || proc->disable_monitor)
         return STATUS_SUCCESS;
 
     log_type = args->log_type.val;

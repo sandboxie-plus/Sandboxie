@@ -69,7 +69,7 @@ _FX BOOLEAN Gui_InitTitle(void)
     //
 
     SbieApi_QueryConfAsIs(NULL, L"BoxNameTitle", 0, buf, sizeof(buf));
-    if (*buf == L'y' || *buf == L'Y') {
+    if (*buf == L'y' || *buf == L'Y') { // indicator + box name
 
         UNICODE_STRING uni;
 
@@ -84,8 +84,9 @@ _FX BOOLEAN Gui_InitTitle(void)
         RtlInitUnicodeString(&uni, Gui_BoxNameTitleW);
         RtlUnicodeStringToAnsiString(&Gui_BoxNameTitleA, &uni, TRUE);
 
-    } else if (*buf == L'-')
+    } else if (*buf == L'-') // don't alter boxed window titles at all
         Gui_DisableTitle = TRUE;
+    //  else if(*buf == L'n' || *buf == L'N') means show indicator but not box name
 
     Gui_TitleSuffixW_len = wcslen(Gui_TitleSuffixW);
     Gui_TitleSuffixA_len = strlen(Gui_TitleSuffixA);

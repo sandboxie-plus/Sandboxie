@@ -18,11 +18,11 @@ public:
 	virtual int			GetTabCount() { return m_AllTabs.size(); }
 	virtual QString		GetTabLabel(int Index) { if (Index >= m_AllTabs.size()) return ""; return m_AllTabs[Index].Name; }
 	virtual void		ShowTab(int Index, bool bShow);
-	virtual bool		IsTabVisible(int Index) { if (Index >= m_AllTabs.size()) return ""; return m_AllTabs[Index].bVisible; }
+	virtual bool		IsTabVisible(int Index) { if (Index >= m_AllTabs.size()) return false; return m_AllTabs[Index].bVisible; }
 
 protected:
 	virtual void		InitializeTabs() = 0;
-	virtual void		AddTab(QWidget* pWidget, const QString& Name);
+	virtual int			AddTab(QWidget* pWidget, const QString& Name);
 	virtual void		RebuildTabs(const int ActiveTab, const QStringList& VisibleTabs);
 	virtual void		SaveTabs(int& ActiveTab, QStringList& VisibleTabs);
 

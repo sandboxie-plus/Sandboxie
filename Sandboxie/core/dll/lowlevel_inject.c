@@ -255,7 +255,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 		// Get a full sys call list from the driver
 		//
 
-		status = SbieApi_CallOne(API_QUERY_SYSCALLS, (ULONG_PTR)syscall_data);
+		status = SbieApi_Call(API_QUERY_SYSCALLS, 1, (ULONG_PTR)syscall_data);
 		if (status != 0)
 			return status;
 

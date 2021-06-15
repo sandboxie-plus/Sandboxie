@@ -150,7 +150,8 @@ ALIGNED HANDLE my_CreateFileW(
         HANDLE                hTemplateFile);
 
     //
-    // prevent SBIE1313, dont even try to access the block devcie for raw reading
+    // prevent SandboxieCrypto.exe from causing SBIE1313,
+    // don't even try to access to the device block for raw reading
     //
 
     if (wcsnicmp(lpFileName, L"\\\\.\\PhysicalDrive", 17) == 0 && wcschr(lpFileName + 17, L'\\') == NULL) {

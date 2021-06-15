@@ -138,84 +138,27 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
-// SbieApi_CallZero
+// SbieApi_CallFunc
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_CallZero(ULONG api_code)
+_FX LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...) 
 {
+    va_list valist;
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 
     memzero(parms, sizeof(parms));
     parms[0] = api_code;
-    status = SbieApi_Ioctl(parms);
 
-    if (NT_SUCCESS(status)) {
-        if (api_code == API_UNLOAD_DRIVER) {
-            NtClose(SbieApi_DeviceHandle);
-            SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
-        }
-    }
+    if (arg_num >= (API_NUM_ARGS - 1))
+        return STATUS_INVALID_PARAMETER;
 
-    return status;
-}
+    va_start(valist, arg_num);
+    for (LONG i = 1; i <= arg_num; i++)
+        parms[i] = (ULONG64)va_arg(valist, ULONG_PTR);
+    va_end(valist);
 
-
-//---------------------------------------------------------------------------
-// SbieApi_CallOne
-//---------------------------------------------------------------------------
-
-
-_FX LONG SbieApi_CallOne(ULONG api_code, ULONG_PTR arg)
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-
-    memzero(parms, sizeof(parms));
-    parms[0] = api_code;
-    parms[1] = (ULONG64)arg;
-    status = SbieApi_Ioctl(parms);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// SbieApi_CallTwo
-//---------------------------------------------------------------------------
-
-
-_FX LONG SbieApi_CallTwo(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2)
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-
-    memzero(parms, sizeof(parms));
-    parms[0] = api_code;
-    parms[1] = (ULONG64)arg1;
-    parms[2] = (ULONG64)arg2;
-    status = SbieApi_Ioctl(parms);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// SbieApi_CallThree
-//---------------------------------------------------------------------------
-
-
-_FX LONG SbieApi_CallThree(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3)
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-
-    memzero(parms, sizeof(parms));
-    parms[0] = api_code;
-    parms[1] = (ULONG64)arg1;
-    parms[2] = (ULONG64)arg2;
-    parms[3] = (ULONG64)arg3;
     status = SbieApi_Ioctl(parms);
 
     return status;

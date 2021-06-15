@@ -116,6 +116,7 @@ _FX BOOLEAN HNet_Init(HMODULE module)
 #define WSA_IO_PENDING          (ERROR_IO_PENDING)
 
 #define AF_INET         2               /* internetwork: UDP, TCP, etc. */
+#define AF_INET6        10              /* internetwork v6: UDP, TCP, etc. */
 #define SOCKET                  ULONG_PTR
 
 
@@ -224,7 +225,7 @@ _FX int WSA_WSANSPIoctl(
 
 _FX int WSA_IsBlockedPort(const short *addr, int addrlen)
 {
-    if (addrlen >= sizeof(USHORT) * 2 && addr && addr[0] == AF_INET) {
+    if (addrlen >= sizeof(USHORT) * 2 && addr && (addr[0] == AF_INET || addr[0] == AF_INET6)) {
 
         USHORT portnum = ((addr[1] & 0xFF) << 8) | ((addr[1] & 0xFF00) >> 8);
         ULONG  index = portnum / 512;

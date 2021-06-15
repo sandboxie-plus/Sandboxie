@@ -2918,6 +2918,22 @@ Consenti ai programmi di aggiornare le jump list della barra delle applicazioni
 Esclusioni predefinite per la Copia dei file
 .
 
+4296;txt;01
+Binding predefiniti delle porte RPC
+.
+
+4297;txt;01
+Consenti accesso al Bluetooth
+.
+
+4298;txt;01
+Consenti accesso alle smart card
+.
+
+4299;txt;01
+Consenti accesso alle porte SSDP e UPnP
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------

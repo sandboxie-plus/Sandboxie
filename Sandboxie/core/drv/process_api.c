@@ -426,6 +426,18 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                 ObDereferenceObject(object);
             }
 
+        } else if (args->info_type.val == 'spit') { // set process image type
+
+            if (ProcessId != 0)
+                status = STATUS_ACCESS_DENIED;
+            
+            proc->detected_image_type = (ULONG)(args->ext_data.val);
+            *data = 0;
+
+        } else if (args->info_type.val == 'gpit') { // get process image type
+            
+            *data = proc->detected_image_type;
+
         } else
             status = STATUS_INVALID_INFO_CLASS;
 
@@ -637,8 +649,8 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
 
     } else {
 
-        if (! MyIsCurrentProcessRunningAsLocalSystem())
-            return STATUS_NOT_IMPLEMENTED;
+        //if (! MyIsCurrentProcessRunningAsLocalSystem())
+        //    return STATUS_NOT_IMPLEMENTED;
 
         proc = Process_Find(args->process_id.val, &irql);
 

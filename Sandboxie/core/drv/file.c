@@ -403,7 +403,7 @@ _FX void File_CreateBoxPath_2(HANDLE FileHandle)
         File_DesktopIniText = Mem_Alloc(Driver_Pool, 768);
         if (File_DesktopIniText) {
 
-            sprintf(File_DesktopIniText,
+            RtlStringCbPrintfA(File_DesktopIniText, 768, 
                         "[.ShellClassInfo]\r\n"
                         "IconFile=%S\\%S\r\n"
                         "IconIndex=9\r\n"
@@ -868,6 +868,14 @@ _FX BOOLEAN File_BlockInternetAccess2(
 
 _FX BOOLEAN File_InitProcess(PROCESS *proc)
 {
+
+    //
+    // by default, Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseInBox=n to disable this behaviour
+    //
+
+    proc->always_close_for_boxed = Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 
+
     BOOLEAN ok = File_InitPaths(proc,   &proc->open_file_paths,
                                         &proc->closed_file_paths,
                                         &proc->read_file_paths,
@@ -996,13 +1004,13 @@ _FX NTSTATUS File_Generic_MyParseProc(
             ignore_str = Mem_Alloc(proc->pool, ignore_str_len);
             if (ignore_str) {
 
-                swprintf(ignore_str,
+                RtlStringCbPrintfW(ignore_str, ignore_str_len,
                     L"(FI) %08X %s", device_type, device_name_ptr);
 
                 if (proc->file_trace & TRACE_IGNORE)
                     Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
-                else if (Session_MonitorCount &&
+                else if (Session_MonitorCount && !proc->disable_monitor &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
                     Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
@@ -1511,14 +1519,14 @@ skip_due_to_home_folder:
             if(!IsPipeDevice && !ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    else if (IsPipeDevice && Session_MonitorCount) {
+    else if (IsPipeDevice && Session_MonitorCount && !proc->disable_monitor) {
 
         ULONG mon_type = MONITOR_PIPE;
         WCHAR *mon_name = Name->Name.Buffer;
@@ -1532,7 +1540,7 @@ skip_due_to_home_folder:
             mon_type |= MONITOR_DENY;
         Session_MonitorPut(mon_type, mon_name, proc->pid);
 
-    } else if (ShouldMonitorAccess) {
+    } else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
@@ -2247,13 +2255,13 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
             ULONG mon_type = MONITOR_FILE;
             mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 0 & 0x0F, CreateOptions);
             Log_Debug_Msg(mon_type, access_str, path);
         }
     }
-    else if (is_closed) {
+    else if (is_closed && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, path, proc->pid);
     }

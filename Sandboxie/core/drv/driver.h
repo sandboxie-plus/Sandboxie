@@ -42,6 +42,8 @@
 #include "log.h"
 #include "mem.h"
 
+#define NTSTRSAFE_LIB
+#include <ntstrsafe.h>
 
 //---------------------------------------------------------------------------
 // Defines

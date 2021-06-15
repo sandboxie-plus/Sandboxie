@@ -49,16 +49,7 @@ extern "C" {
 
 
 SBIEAPI_EXPORT
-LONG SbieApi_CallZero(ULONG api_code);
-
-SBIEAPI_EXPORT
-LONG SbieApi_CallOne(ULONG api_code, ULONG_PTR arg);
-
-SBIEAPI_EXPORT
-LONG SbieApi_CallTwo(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2);
-
-SBIEAPI_EXPORT
-LONG SbieApi_CallThree(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3);
+LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...);
 
 SBIEAPI_EXPORT LONG SbieApi_GetVersion(
     WCHAR *version_string);         // WCHAR [16]

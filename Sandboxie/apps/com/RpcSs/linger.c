@@ -489,6 +489,8 @@ int DoLingerLeader(void)
                     // is_local_system_sid would be TRUE and we would not
                     // reach this point.)
                     //
+                    // fix-me: services are no longer started by default as system
+                    //
 
                     ULONG64 ProcessFlags =
                                 SbieApi_QueryProcessInfo(pids_i, 0);

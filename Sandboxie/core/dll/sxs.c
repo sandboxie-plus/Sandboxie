@@ -1863,6 +1863,64 @@ _FX void Sxs_ActivateDefaultManifest(void *ImageBase)
 
 
 //---------------------------------------------------------------------------
+// Sxs_CheckManifestForElevation
+//---------------------------------------------------------------------------
+
+
+_FX ULONG Sxs_CheckManifestForElevation(
+    const WCHAR* DosPath, 
+    BOOLEAN *pAsInvoker, 
+    BOOLEAN *pRequireAdministrator, 
+    BOOLEAN *pHighestAvailable)
+{
+    ACTCTX ActCtx;
+    SXS_ARGS args;
+    ULONG rc;
+
+    if (Dll_OsBuild < 6000)
+        return STATUS_NOT_IMPLEMENTED;
+
+    //
+    // invoke Sxs_GetPathAndText to get the manifest text
+    //
+
+    memzero(&args, sizeof(args));
+
+    if (! Sxs_AllocOrFreeBuffers(&args, TRUE))
+        return STATUS_INSUFFICIENT_RESOURCES;
+
+    memzero(&ActCtx, sizeof(ACTCTX));
+    ActCtx.cbSize = sizeof(ACTCTX);
+    ActCtx.lpSource = DosPath;
+
+    rc = STATUS_UNSUCCESSFUL;
+
+    if (Sxs_GetPathAndText(&ActCtx, &args)) {
+
+        rc = STATUS_SUCCESS; // manifest found
+
+        _strlwr(args.ManifestText);
+
+        if (pAsInvoker) *pAsInvoker = 
+            (strstr(args.ManifestText, "level='asinvoker'") 
+            || strstr(args.ManifestText, "level=\"asinvoker\""));
+
+        if (pRequireAdministrator) *pRequireAdministrator = 
+            (strstr(args.ManifestText, "level='requireadministrator'")
+            || strstr(args.ManifestText, "level=\"requireadministrator\""));
+
+        if (pHighestAvailable) *pHighestAvailable = 
+            (strstr(args.ManifestText, "level='highestavailable'")
+            || strstr(args.ManifestText, "level=\"highestavailable\""));
+    }
+
+    Sxs_AllocOrFreeBuffers(&args, FALSE);
+
+    return rc;
+}
+
+
+//---------------------------------------------------------------------------
 // Sxs_CheckManifestForCreateProcess
 //---------------------------------------------------------------------------
 
@@ -1870,9 +1928,8 @@ _FX void Sxs_ActivateDefaultManifest(void *ImageBase)
 _FX ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath)
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
-    ACTCTX ActCtx;
-    SXS_ARGS args;
     ULONG rc, ElvType;
+    BOOLEAN AsInvoker, RequireAdministrator, HighestAvailable;
 
     //
     // Windows Vista UAC auto-elevates program names that includes words
@@ -1905,24 +1962,9 @@ _FX ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath)
         return 0;
     }
 
-    //
-    // invoke Sxs_GetPathAndText to get the manifest text
-    //
+    rc = Sxs_CheckManifestForElevation(DosPath, &AsInvoker, &RequireAdministrator, &HighestAvailable);
 
-    memzero(&args, sizeof(args));
-
-    if (! Sxs_AllocOrFreeBuffers(&args, TRUE))
-        return STATUS_INSUFFICIENT_RESOURCES;
-
-    memzero(&ActCtx, sizeof(ACTCTX));
-    ActCtx.cbSize = sizeof(ACTCTX);
-    ActCtx.lpSource = DosPath;
-
-    rc = 0;
-
-    if (Sxs_GetPathAndText(&ActCtx, &args)) {
-
-        UCHAR *RequireAdministrator, *HighestAvailable;
+    if (NT_SUCCESS(rc)) {
 
         //
         // asInvoker means to use alternate manifest files in
@@ -1932,15 +1974,8 @@ _FX ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath)
         // our Proc_CreateProcess caller to use SH32_DoRunAs
         //
 
-        _strlwr(args.ManifestText);
-
-        if (strstr(args.ManifestText, "level=\"asinvoker\""))
+        if (AsInvoker)
             TlsData->proc_create_process_as_invoker = TRUE;
-
-        RequireAdministrator =
-            strstr(args.ManifestText, "level=\"requireadministrator\"");
-        HighestAvailable =
-            strstr(args.ManifestText, "level=\"highestavailable\"");
 
         if (RequireAdministrator ||
                 (HighestAvailable && ElvType != TokenElevationTypeDefault)) {
@@ -1961,8 +1996,6 @@ _FX ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath)
         }
     }
 
-    Sxs_AllocOrFreeBuffers(&args, FALSE);
-
     return rc;
 }
 
@@ -1981,8 +2014,8 @@ _FX BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle)
     // a pre-set value for PreferExternalManifest
     //
 
-	if (!SbieApi_QueryConfBool(NULL, L"PreferExternalManifest", FALSE))
-		return FALSE;
+    if (!Config_GetSettingsForImageName_bool(L"PreferExternalManifest", FALSE))
+        return FALSE;
 
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -2078,8 +2111,8 @@ _FX BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle)
     // our installation home directory
     //
 
-	if (!SbieApi_QueryConfBool(NULL, L"PreferExternalManifest", FALSE))
-		return FALSE;
+    if (!Config_GetSettingsForImageName_bool(L"PreferExternalManifest", FALSE))
+        return FALSE;
 
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 

@@ -8,13 +8,10 @@ EXPORTS
 Dll_Ordinal1 @1 NONAME
 
 ;;;
-;;; SbieApi
+;;; SbieApiSbieApi_LogEx
 ;;;
 
 
-SbieApi_CallZero=_SbieApi_CallZero@4
-SbieApi_CallOne=_SbieApi_CallOne@8
-SbieApi_CallTwo=_SbieApi_CallTwo@12
 SbieApi_CheckInternetAccess=_SbieApi_CheckInternetAccess@12
 
 SbieApi_DisableForceProcess=_SbieApi_DisableForceProcess@8

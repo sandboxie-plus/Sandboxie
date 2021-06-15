@@ -205,7 +205,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     //
 
 	path_home = TRUE; //  = FALSE;
-	swprintf(path, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
+	RtlStringCbPrintfW(path, path_len, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
 
     status = Stream_Open(
         &stream, path, FILE_GENERIC_READ, 0, FILE_SHARE_READ, FILE_OPEN, 0);
@@ -213,7 +213,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     if (status == STATUS_OBJECT_NAME_NOT_FOUND) {
 
 		path_home = FALSE; // = TRUE;
-		swprintf(path, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
+		RtlStringCbPrintfW(path, path_len, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -270,7 +270,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
 
     if (NT_SUCCESS(status)) {
 
-        swprintf(path, path_templates, Driver_HomePathDos);
+        RtlStringCbPrintfW(path, path_len, path_templates, Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -350,7 +350,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     //
 
     if (! NT_SUCCESS(status)) {
-        swprintf(linenum_str, L"%d", linenum);
+        RtlStringCbPrintfW(linenum_str, sizeof(linenum_str), L"%d", linenum);
         //DbgPrint("Conf error %X at line %d (%S)\n", status, linenum, linenum_str);
         if (status == STATUS_BUFFER_OVERFLOW) {
             Log_Msg_Session(
@@ -1340,13 +1340,33 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
         if (proc)
             value2 = Conf_Expand(proc->box->expand_args, value1, setting);
         else {
-            BOX *box = Box_Create(Driver_Pool, boxname, FALSE);
-            if (! box) {
+
+            CONF_EXPAND_ARGS *expand_args = Mem_Alloc(Driver_Pool, sizeof(CONF_EXPAND_ARGS));
+            if (! expand_args) {
                 status = STATUS_UNSUCCESSFUL;
                 goto release_and_return;
             }
-            value2 = Conf_Expand(box->expand_args, value1, setting);
-            Box_Free(box);
+
+            expand_args->pool = Driver_Pool;
+            expand_args->sandbox = boxname;
+
+            UNICODE_STRING SidString;
+            ULONG SessionId;
+            status = Process_GetSidStringAndSessionId(NtCurrentProcess(), NULL, &SidString, &SessionId);
+            if (!NT_SUCCESS(status)) {
+                Mem_Free(expand_args, sizeof(CONF_EXPAND_ARGS));
+                status = STATUS_UNSUCCESSFUL;
+                goto release_and_return;
+            }
+
+            expand_args->sid = SidString.Buffer;
+            expand_args->session = &SessionId;
+
+            value2 = Conf_Expand(expand_args, value1, setting);
+
+            RtlFreeUnicodeString(&SidString);
+
+            Mem_Free(expand_args, sizeof(CONF_EXPAND_ARGS));
         }
 
         if (! value2) {

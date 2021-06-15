@@ -198,7 +198,7 @@ _FX NTSTATUS Syscall_CheckObject(
                 puName = &Name->Name;
 
             WCHAR msg[256];
-            swprintf(msg, L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
+            RtlStringCbPrintfW(msg, sizeof(msg), L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
 			Log_Msg_Process(MSG_2101, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
         }
 
@@ -270,7 +270,7 @@ _FX NTSTATUS Syscall_OpenHandle(
                         || wcsncmp(&puName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}
                     {
                         WCHAR access_str[24];
-                        swprintf(access_str, L"(DD) %08X", DesiredAccess);
+                        RtlStringCbPrintfW(access_str, sizeof(access_str), L"(DD) %08X", DesiredAccess);
                         Log_Debug_Msg(MONITOR_DRIVE | MONITOR_DENY, access_str, puName->Buffer);
 
                         if (proc->file_warn_direct_access) {
@@ -318,7 +318,7 @@ _FX NTSTATUS Syscall_OpenHandle(
     if (! NewHandle) {
 
         //WCHAR trace_str[128];
-        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
         //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
 
         Process_SetTerminated(proc, 6);
@@ -385,7 +385,7 @@ _FX NTSTATUS Syscall_OpenHandle(
     if (!NT_SUCCESS(status)) {
 
         //WCHAR trace_str[128];
-        //swprintf(trace_str, L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
+        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
         //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
 
         Process_SetTerminated(proc, 7);
@@ -478,7 +478,7 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     if (! NewHandle) {
 
         //WCHAR trace_str[128];
-        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
         //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
 
         Process_SetTerminated(proc, 8);
@@ -542,7 +542,7 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     //  }
     //
     //    //WCHAR trace_str[128];
-    //    //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+    //    //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
     //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
     //
     //  Process_SetTerminated(proc, 9);

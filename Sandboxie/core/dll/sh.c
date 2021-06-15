@@ -779,6 +779,9 @@ _FX BOOL SH32_DoRunAs(
     // remove any quotes around the program name.
     //
 
+    if (CmdLine == NULL)
+        return FALSE;
+
     if (CmdLine[0] == L'\"') {
         ++CmdLine;
         arg = wcschr(CmdLine, L'\"');

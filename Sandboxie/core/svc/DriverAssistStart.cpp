@@ -150,8 +150,7 @@ driver_started:
     //
 
     if (ok) {
-        rc = SbieApi_CallOne(
-                API_SET_SERVICE_PORT, (ULONG_PTR)m_instance->m_PortHandle);
+        rc = SbieApi_Call(API_SET_SERVICE_PORT, 1, (ULONG_PTR)m_instance->m_PortHandle);
         if (rc != 0) {
             LogEvent(MSG_9234, 0x9361, rc);
             ok = false;
@@ -173,7 +172,7 @@ driver_started:
             InitClipboard();
         }
 
-        rc = SbieApi_CallZero(API_INIT_GUI);
+        rc = SbieApi_Call(API_INIT_GUI, 0);
 
         if (rc != 0) {
             LogEvent(MSG_9234, 0x9156, rc);
@@ -205,7 +204,7 @@ driver_started:
                     LsaHandle, &AuthPkgName, &AuthPkgNum);
 
                 if (rc == 0)
-                    SbieApi_CallOne(API_SET_LSA_AUTH_PKG, AuthPkgNum);
+                    SbieApi_Call(API_SET_LSA_AUTH_PKG, 1, (ULONG_PTR)AuthPkgNum);
 
                 LsaDeregisterLogonProcess(LsaHandle);
             }
@@ -286,7 +285,7 @@ void DriverAssist::InitClipboard()
                 SetClipboardData(0x333333, hGlobal2);
                 SetClipboardData(0x444444, hGlobal2);
 
-                SbieApi_CallOne(API_GUI_CLIPBOARD, -1);
+                SbieApi_Call(API_GUI_CLIPBOARD, 1, (ULONG_PTR)-1);
 
                 EmptyClipboard();
                 CloseClipboard();

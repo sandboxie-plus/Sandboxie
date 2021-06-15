@@ -72,8 +72,6 @@ struct _KEY_MOUNT {
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Key_InitPaths(PROCESS *proc);
-
 static NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2);
 
 static BOOLEAN Key_MountHive2(PROCESS *proc, KEY_MOUNT *mount);
@@ -474,13 +472,13 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             if (!ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(K%c) %08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    else if (ShouldMonitorAccess) {
+    else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
     }

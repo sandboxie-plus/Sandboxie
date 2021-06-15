@@ -31,6 +31,7 @@ protected:
 
 	QToolBar*			m_pTraceToolBar;
 	QAction*			m_pTraceTree;
+	QCheckBox*			m_pOnlyCurrent;
 	QComboBox*			m_pTracePid;
 	QComboBox*			m_pTraceTid;
 

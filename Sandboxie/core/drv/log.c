@@ -317,9 +317,9 @@ _FX void Log_Status_Ex_Process(
     WCHAR str[100];
 
     if (error_subcode)
-        swprintf(str, L"[%08X / %02X]", nt_status, error_subcode);
+        RtlStringCbPrintfW(str, sizeof(str), L"[%08X / %02X]", nt_status, error_subcode);
     else
-        swprintf(str, L"[%08X]", nt_status);
+        RtlStringCbPrintfW(str, sizeof(str), L"[%08X]", nt_status);
 
     Log_Msg_Process(error_code, str, string2, session_id, process_id);
 }

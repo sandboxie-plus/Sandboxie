@@ -266,6 +266,62 @@
         <source>COM Object</source>
         <translation>COM Objesi</translation>
     </message>
+    <message>
+        <source>Custom Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email Reader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF/Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security/Privacy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Desktop Utilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Managers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Miscellaneous</source>
+        <translation type="unfinished">Çeşitli</translation>
+    </message>
+    <message>
+        <source>Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Torrent Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter the template identifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only local templates can be removed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the selected local template?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -438,22 +494,22 @@ Full path: %4</source>
 Tam yol: %4</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 is eligible for quick recovery from %2.
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -482,38 +538,42 @@ Full path: %4</source>
     </message>
     <message>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation>Bir veya daha fazla seçili dosya bir ağ paylaşımında bulunuyor ve yerel bir sürücüye kurtarılması gerekiyor, lütfen tüm seçili dosyaların kurtarılacağı bir dizin seçin.</translation>
+        <translation type="vanished">Bir veya daha fazla seçili dosya bir ağ paylaşımında bulunuyor ve yerel bir sürücüye kurtarılması gerekiyor, lütfen tüm seçili dosyaların kurtarılacağı bir dizin seçin.</translation>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation>Korumalı alanda %3 bayt disk alanı kaplayan %1 dosya ve %2 dizin var.</translation>
+        <translation type="vanished">Korumalı alanda %3 bayt disk alanı kaplayan %1 dosya ve %2 dizin var.</translation>
+    </message>
+    <message>
+        <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CResMonModel</name>
     <message>
         <source>Type</source>
-        <translation>Tür</translation>
+        <translation type="vanished">Tür</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Değer</translation>
+        <translation type="vanished">Değer</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Durum</translation>
+        <translation type="vanished">Durum</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>Zaman Damgası</translation>
+        <translation type="vanished">Zaman Damgası</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>İşlem</translation>
+        <translation type="vanished">İşlem</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Bilinmeyen</translation>
+        <translation type="vanished">Bilinmeyen</translation>
     </message>
 </context>
 <context>
@@ -687,7 +747,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus taşınabilir modda çalışıyordu, şimdi oluşturulan hizmetleri temizlemesi gerekiyor. Bu, yönetici ayrıcalıkları isteyecektir.</translation>
+        <translation type="vanished">Sandboxie-Plus taşınabilir modda çalışıyordu, şimdi oluşturulan hizmetleri temizlemesi gerekiyor. Bu, yönetici ayrıcalıkları isteyecektir.</translation>
     </message>
     <message>
         <source>   -   Portable</source>
@@ -725,7 +785,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Resource Logging</source>
-        <translation>Kaynak Günlüğü</translation>
+        <translation type="vanished">Kaynak Günlüğü</translation>
     </message>
     <message>
         <source>Online Documentation</source>
@@ -761,7 +821,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Resource Monitor</source>
-        <translation>Kaynak İzleme</translation>
+        <translation type="vanished">Kaynak İzleme</translation>
     </message>
     <message>
         <source>A sandbox must be emptied before it can be deleted.</source>
@@ -1131,6 +1191,20 @@ Full path: %4</source>
         <source>Cleanup Trace Log</source>
         <translation>İzleme Günlüğünü Temizle</translation>
     </message>
+    <message>
+        <source>Trace Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trace Logging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
+Do you want to do the clean up?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieModel</name>
@@ -1173,6 +1247,127 @@ Full path: %4</source>
         <source>Running</source>
         <translation>Çalışıyor</translation>
     </message>
+    <message>
+        <source>Sbie RpcSs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie DcomLaunch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie Crypto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie WuAu Svc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie BITS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie Svc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trusted Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internet Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Media Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KMPlayer</source>
+        <oldsource>KM Player</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Live Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service Model Reg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RunDll32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DllHost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Ink Services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chromium Based</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Google Updater</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acrobat Reader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MS Outlook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MS Excel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flash Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generic Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generic Mail Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MSI Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firefox Plugin Container</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieView</name>
@@ -1212,7 +1407,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)</source>
-        <translation>Seçili işlemleri %1 etmek istiyor musunuz?</translation>
+        <translation type="vanished">Seçili işlemleri %1 etmek istiyor musunuz?</translation>
     </message>
     <message>
         <source>Move to Group</source>
@@ -1409,6 +1604,10 @@ Full path: %4</source>
         <source>Emulate Admin Rights</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to %1 the selected process(es)?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1486,6 +1685,72 @@ Full path: %4</source>
     <message>
         <source>Please enter a name for the new Snapshot.</source>
         <translation>Lütfen yeni Anlık Görüntü için bir ad girin.</translation>
+    </message>
+</context>
+<context>
+    <name>CTraceModel</name>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Bilinmeyen</translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished">%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Process %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thread %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished">İşlem</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tür</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Durum</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Değer</translation>
+    </message>
+</context>
+<context>
+    <name>CTraceView</name>
+    <message>
+        <source>Show as task tree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[All]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished">%1 (%2)</translation>
+    </message>
+    <message>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only sellectes box</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1574,7 +1839,7 @@ Full path: %4</source>
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation>Hangi işlemlerin hangi kaynaklara erişebileceğini yapılandırın. Düzenlemek için bir girişi çift tıklayın.
+        <translation type="vanished">Hangi işlemlerin hangi kaynaklara erişebileceğini yapılandırın. Düzenlemek için bir girişi çift tıklayın.
 &apos;Doğrudan&apos; Dosya ve Anahtar erişimi, yalnızca sanal alanın dışında bulunan program ikili dosyaları için geçerlidir.
 Tüm...=!&lt;program&gt;,... kapat istisnalarının aynı sınırlamalara sahip olduğunu unutmayın.
 Dosyalara erişim için tek tek tüm programlara uygulamak yerine &apos;Tümünü Yönlendir&apos; kullanabilirsiniz.</translation>
@@ -1624,7 +1889,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>Tüm programların bu kutuda başlamasına izin ver.</translation>
     </message>
     <message>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Dosyaları oluşturulur oluşturulmaz kurtarabilmek için Anında Kurtarma istemini etkinleştir.</translation>
     </message>
     <message>
@@ -1846,7 +2111,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
         <translation>Kullanıcı Ekle</translation>
     </message>
     <message>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>Buraya girilen programlar veya girilen konumlardan başlatılan programlar, başka bir korumalı kutuda açıkça belirtilmedikçe otomatik olarak bu kutuya yerleştirilecektir.</translation>
     </message>
     <message>
@@ -2040,7 +2305,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Allow access to Smart Cards</source>
-        <translation>Akıllı Kartlara erişime izin ver</translation>
+        <translation type="vanished">Akıllı Kartlara erişime izin ver</translation>
     </message>
     <message>
         <source>Lift security restrictions</source>
@@ -2060,7 +2325,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
-        <translation>Bluetooth erişimine izin ver</translation>
+        <translation type="vanished">Bluetooth erişimine izin ver</translation>
     </message>
     <message>
         <source>Log all SetError&apos;s to Trace log</source>
@@ -2071,7 +2336,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2120,6 +2385,114 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prompt user for large file migration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block read access to the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure which processes can access what resources. Double click on an entry to edit it.
+&apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
+For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emulate sandboxed window station for all processes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow sandboxed programs to Change User Passwords and alike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to windows Local Security Authority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compatibility Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template Folders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the folder locations used by your other applications.
+
+Please note that this values are currently user specific and saved globally for all boxes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Değer</translation>
+    </message>
+    <message>
+        <source>Accessibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program/Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to Windows Security Account Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Resource Access Monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource Access Monitor</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2247,7 +2620,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Use Dark Theme</source>
-        <translation>Koyu Tema Kullan</translation>
+        <translation type="vanished">Koyu Tema Kullan</translation>
     </message>
     <message>
         <source>Enable</source>
@@ -2376,6 +2749,10 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     <message>
         <source>Other settings</source>
         <translation>Diğer ayarlar</translation>
+    </message>
+    <message>
+        <source>Use Dark Theme (fully applied after a restart)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

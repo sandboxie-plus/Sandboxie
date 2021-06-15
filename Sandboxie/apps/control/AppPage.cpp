@@ -770,7 +770,7 @@ void CAppPage::Folders_OnInitDialog(CBox &box)
 
     while (! tmpl_names.IsEmpty()) {
         CString tmpl_name = tmpl_names.RemoveHead();
-        CString varname = ini.GetTemplateVariable(tmpl_name);
+        CString varname = ini.GetTemplateVariable(tmpl_name); // fix-me: there may be more than one folder per template
         if (varname.IsEmpty())
             continue;
 
@@ -1555,4 +1555,31 @@ void CAppPage::SetDefaultTemplates8(CBox& box)
 {
     box.EnableTemplate(L"FileCopy", TRUE);
     box.EnableTemplate(L"SkipHook", TRUE);
+    SetDefaultTemplates9(box);
+}
+
+//---------------------------------------------------------------------------
+// SetDefaultTemplates9
+//---------------------------------------------------------------------------
+
+
+void CAppPage::SetDefaultTemplates9(CBox& box)
+{
+    CSbieIni &ini = CSbieIni::GetInstance();
+
+    // fix the unfortunate typo
+    if (box.IsTemplateEnabled(L"FileCppy")) {
+        box.EnableTemplate(L"FileCopy", TRUE);
+        box.EnableTemplate(L"FileCppy", FALSE);
+    }
+
+    box.EnableTemplate(L"WindowsFontCache", FALSE);
+
+    BOOL bHardened = FALSE;
+    ini.GetBool(box.GetName(), L"DropAdminRights", bHardened, FALSE);
+    if (!bHardened) {
+        // enable those templates only for non hardened boxes
+        box.EnableTemplate(L"OpenBluetooth", TRUE);
+        box.EnableTemplate(L"OpenSmartCard", TRUE);
+    }
 }

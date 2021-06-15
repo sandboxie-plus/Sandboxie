@@ -1449,7 +1449,7 @@ _FX BOOLEAN Custom_SYSFER_DLL(HMODULE hmodule)
 //---------------------------------------------------------------------------
 
 
-_FX void Custom_Load_UxTheme(void)
+/*_FX void Custom_Load_UxTheme(void)
 {
     //
     // Google Chrome sandbox process is started with limited privileges
@@ -1473,4 +1473,4 @@ _FX void Custom_Load_UxTheme(void)
             SystemParametersInfo(SPI_GETFONTSMOOTHING, 0, &v, 0);
         }
     }
-}
+}*/

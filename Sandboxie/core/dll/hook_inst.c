@@ -157,7 +157,7 @@ ALIGNED BOOLEAN Hook_Analyze(
         if (! addr) {
             addr = address;
 #ifdef KERNEL_MODE
-			swprintf(text,
+			RtlStringCbPrintfW(text, 64,
 #else
 			Sbie_snwprintf(text, 64, 
 #endif
@@ -173,7 +173,7 @@ ALIGNED BOOLEAN Hook_Analyze(
 
         addr = NULL;
 #ifdef KERNEL_MODE
-		swprintf(text,
+		RtlStringCbPrintfW(text, 64,
 #else
 		Sbie_snwprintf(text, 64,
 #endif

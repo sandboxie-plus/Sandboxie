@@ -173,8 +173,8 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
         {
             // Param 1 is the service PID
             // Param 2 will return the port name with "\RPC Control\" prepended
-            rpl->h.status = SbieApi_CallTwo(
-                API_GET_DYNAMIC_PORT_FROM_PID,
+            rpl->h.status = SbieApi_Call(
+                API_GET_DYNAMIC_PORT_FROM_PID, 2,
                 (ULONG_PTR)hPid,
                 (ULONG_PTR)rpl->wszPortName);
         }
@@ -219,15 +219,15 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
     if (rpl->h.status == STATUS_SUCCESS)
     {
         //
-        // Note: it seams that chrome.exe resolves GAME_CONFIG_STORE_PORT in one process and accesses from an other
-        // so since here we only open non critical ports we will use PID 0 to open them globally
+        // Note: it seems that chrome.exe resolves GAME_CONFIG_STORE_PORT in one process and accesses from another.
+        // So, since here we only open non critical ports, we will use PID 0 to open them globally
         // instead of only for the one process. Todo: make it per sandbox instead
         //
 
         // Param 1 is dynamic port name (e.g. "LRPC-f760d5b40689a98168"), WCHAR[DYNAMIC_PORT_NAME_CHARS]
         // Param 2 is the process PID for which to open the port, can be 0 when port is special
         // Param 3 is the port type/identifier
-        rpl->h.status = SbieApi_CallThree(API_OPEN_DYNAMIC_PORT,
+        rpl->h.status = SbieApi_Call(API_OPEN_DYNAMIC_PORT, 3,
             (ULONG_PTR)rpl->wszPortName,
             (ULONG_PTR)0, 
             (ULONG_PTR)req->wszPortId);

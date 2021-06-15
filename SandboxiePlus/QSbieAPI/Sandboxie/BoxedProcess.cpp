@@ -45,8 +45,12 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 	m_ParendPID = 0;
 	m_SessionId = 0;
 
+	m_ImageType = -1;
+
 	m_uTerminated = 0;
 	//m_bSuspended = IsSuspended();
+
+	m_bIsWoW64 = false;
 }
 
 CBoxedProcess::~CBoxedProcess()
@@ -172,6 +176,10 @@ bool CBoxedProcess::InitProcessInfo()
 	if (DWORD size = GetModuleFileNameEx(ProcessHandle, NULL, filename, MAX_PATH))
 		m_ImagePath = QString::fromWCharArray(filename);
 
+	BOOL isTargetWow64Process = FALSE;
+	IsWow64Process(ProcessHandle, &isTargetWow64Process);
+	m_bIsWoW64 = isTargetWow64Process;
+
 	if (1) // windows 8.1 and later // todo add os version check
 	{
 #define ProcessCommandLineInformation ((PROCESSINFOCLASS)60)
@@ -194,6 +202,15 @@ bool CBoxedProcess::InitProcessInfo()
 	}
 
 	NtClose(ProcessHandle);
+
+	return true;
+}
+
+bool CBoxedProcess::InitProcessInfoEx()
+{
+	if(m_ImageType == -1)
+		m_ImageType = m_pBox->Api()->GetImageType(m_ProcessId);
+
 	return true;
 }
 

@@ -142,6 +142,8 @@ _FX BOOLEAN File_Init(void)
 
     File_InitPathList();
 
+    File_DriveAddSN = SbieApi_QueryConfBool(NULL, L"UseVolumeSerialNumbers", FALSE);
+
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
 
@@ -307,6 +309,62 @@ _FX void File_InitPathList(void)
         wmemcpy(File_HomeNtPath, path, File_HomeNtPathLen + 1);
     }
     Dll_Free(path);
+}
+
+
+//---------------------------------------------------------------------------
+// File_GetVolumeSN
+//---------------------------------------------------------------------------
+
+typedef struct _FILE_FS_VOLUME_INFORMATION {
+  LARGE_INTEGER VolumeCreationTime;
+  ULONG         VolumeSerialNumber;
+  ULONG         VolumeLabelLength;
+  BOOLEAN       SupportsObjects;
+  WCHAR         VolumeLabel[1];
+} FILE_FS_VOLUME_INFORMATION, *PFILE_FS_VOLUME_INFORMATION;
+
+_FX ULONG File_GetVolumeSN(const FILE_DRIVE *drive)
+{
+    ULONG sn = 0;
+    HANDLE handle;
+    IO_STATUS_BLOCK iosb;
+
+    UNICODE_STRING objname;
+    objname.Buffer = Dll_Alloc((drive->len + 4) * sizeof(WCHAR));
+    wmemcpy(objname.Buffer, drive->path, drive->len);
+    objname.Buffer[drive->len    ] = L'\\';
+    objname.Buffer[drive->len + 1] = L'\0';
+    
+    objname.Length = (USHORT)(drive->len + 1) * sizeof(WCHAR);
+    objname.MaximumLength = objname.Length + sizeof(WCHAR);
+
+    OBJECT_ATTRIBUTES objattrs;
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    
+    NTSTATUS status = NtCreateFile(
+        &handle, GENERIC_READ | SYNCHRONIZE, &objattrs,
+        &iosb, NULL, 0, FILE_SHARE_VALID_FLAGS,
+        FILE_OPEN,
+        FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
+        NULL, 0);
+
+    Dll_Free(objname.Buffer);
+
+    if (NT_SUCCESS(status))
+    {
+        union {
+            FILE_FS_VOLUME_INFORMATION volumeInfo;
+            BYTE volumeInfoBuff[64];
+        } u;
+        if (NT_SUCCESS(NtQueryVolumeInformationFile(handle, &iosb, &u.volumeInfo, sizeof(u), FileFsVolumeInformation)))
+            sn = u.volumeInfo.VolumeSerialNumber;
+
+        NtClose(handle);
+    }
+
+    return sn;
 }
 
 
@@ -559,6 +617,12 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
                 file_drive->subst = subst;
                 file_drive->len = path_len;
                 wcscpy(file_drive->path, path);
+                *file_drive->sn = 0;
+                if (File_DriveAddSN) {
+                    ULONG sn = File_GetVolumeSN(file_drive);
+                    if(sn != 0)
+                        Sbie_snwprintf(file_drive->sn, 10, L"%04X-%04X", HIWORD(sn), LOWORD(sn));
+                }
 
                 File_Drives[drive] = file_drive;
 

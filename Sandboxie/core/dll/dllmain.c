@@ -466,7 +466,7 @@ _FX void Dll_InitExeEntry(void)
 
     //
     // check if running as a forced COM server process
-    // note:  does not return if this is the case
+    // note:  it does not return if this is the case
     //
 
     Custom_ComServer();
@@ -475,9 +475,11 @@ _FX void Dll_InitExeEntry(void)
     // force load of UxTheme in a Google Chrome sandbox process
     //
 
-    Custom_Load_UxTheme();
+    // Note: this does not seem to be needed anymore for modern Chrome builds, also it breaks Vivaldi browser
 
-    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since win 7
+    //Custom_Load_UxTheme(); 
+
+    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since Win 7
 
     //
     // Windows 8.1:  hook UserEnv-related entrypoint in KernelBase
@@ -662,6 +664,8 @@ _FX void Dll_SelectImageType(void)
     if (Dll_ImageType == DLL_IMAGE_LAST)
         Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
+    SbieApi_QueryProcessInfoEx(0, 'spit', Dll_ImageType);
+
     //
     // we have some special cases for programs running under a restricted
     // token, such as a Chromium sandbox processes, or Microsoft Office 2010
@@ -778,7 +782,21 @@ _FX ULONG_PTR Dll_Ordinal1(
         // see also Proc_RestartProcessOutOfPcaJob
         //
 
-        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+        int MustRestartProcess = 0;
+        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
+            MustRestartProcess = 1;
+
+        else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
+            if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)
+             || SbieDll_CheckStringInList(Dll_ImageName, NULL, L"ForceRestart"))
+                MustRestartProcess = 2;
+        }
+
+        if (MustRestartProcess) {
+
+            WCHAR text[128];
+            Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
+            SbieApi_MonitorPut(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();

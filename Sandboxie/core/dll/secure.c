@@ -96,6 +96,7 @@ static NTSTATUS Secure_RtlCheckTokenMembershipEx(
 
 static BOOLEAN Secure_IsSameBox(HANDLE idProcess);
 
+static BOOLEAN Secure_IsBuiltInAdmin();
 
 //---------------------------------------------------------------------------
 
@@ -281,9 +282,10 @@ _FX BOOLEAN Secure_Init(void)
 
     //
     // install hooks to fake administrator privileges
+    // note: when running as the built in administrator we should always act as if we have admin rights
     //
 
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", FALSE);
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin());
 
     RtlQueryElevationFlags =
         GetProcAddress(Dll_Ntdll, "RtlQueryElevationFlags");
@@ -1176,6 +1178,22 @@ _FX BOOLEAN Secure_IsSameBox(HANDLE idProcess)
     if (session_id != Dll_SessionId)
         return FALSE;
     if (_wcsicmp(boxname, Dll_BoxName) != 0)
+        return FALSE;
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_IsBuiltInAdmin
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Secure_IsBuiltInAdmin()
+{
+    // Check if this is the built in administrator account its SID is always: S-1-5-21-domain-500
+    if (_wcsnicmp(Dll_SidString, L"S-1-5-21-", 9) != 0)
+        return FALSE;
+    if (Dll_SidStringLen < 4 || _wcsnicmp(Dll_SidString + Dll_SidStringLen - 4, L"-500", 4) != 0)
         return FALSE;
     return TRUE;
 }

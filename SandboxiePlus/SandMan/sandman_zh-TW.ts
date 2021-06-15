@@ -284,6 +284,62 @@
         <source>COM Object</source>
         <translation>COM 物件</translation>
     </message>
+    <message>
+        <source>Custom Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email Reader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF/Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security/Privacy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Desktop Utilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Managers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Miscellaneous</source>
+        <translation type="unfinished">其他</translation>
+    </message>
+    <message>
+        <source>Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Torrent Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter the template identifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only local templates can be removed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete the selected local template?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -456,22 +512,22 @@ Full path: %4</source>
 完整路徑: %4</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 is eligible for quick recovery from %2.
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -500,38 +556,42 @@ Full path: %4</source>
     </message>
     <message>
         <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation>一個或多個被選取的檔案位於網路共享，並且必須恢復到本地磁碟，請選取用於恢復所選檔案的資料夾。</translation>
+        <translation type="vanished">一個或多個被選取的檔案位於網路共享，並且必須恢復到本地磁碟，請選取用於恢復所選檔案的資料夾。</translation>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation>有 %1 檔案和 %2 資料夾位於沙盤中，佔用磁碟 %3 位元組。</translation>
+        <translation type="vanished">有 %1 檔案和 %2 資料夾位於沙盤中，佔用磁碟 %3 位元組。</translation>
+    </message>
+    <message>
+        <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CResMonModel</name>
     <message>
         <source>Type</source>
-        <translation>類別</translation>
+        <translation type="vanished">類別</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>值</translation>
+        <translation type="vanished">值</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>狀態</translation>
+        <translation type="vanished">狀態</translation>
     </message>
     <message>
         <source>Time Stamp</source>
-        <translation>時間標記</translation>
+        <translation type="vanished">時間標記</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation>處理程序</translation>
+        <translation type="vanished">處理程序</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>未知</translation>
+        <translation type="vanished">未知</translation>
     </message>
 </context>
 <context>
@@ -717,7 +777,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plus 正運作於便攜模式中，現在將清理所建立的服務。將會提示管理員授權。</translation>
+        <translation type="vanished">Sandboxie-Plus 正運作於便攜模式中，現在將清理所建立的服務。將會提示管理員授權。</translation>
     </message>
     <message>
         <source>   -   Portable</source>
@@ -763,7 +823,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Resource Logging</source>
-        <translation>資源日誌</translation>
+        <translation type="vanished">資源日誌</translation>
     </message>
     <message>
         <source>Online Documentation</source>
@@ -811,7 +871,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Resource Monitor</source>
-        <translation>資源監控</translation>
+        <translation type="vanished">資源監控</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
@@ -1187,6 +1247,20 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>Cleanup Trace Log</source>
         <translation>清除追蹤日誌</translation>
     </message>
+    <message>
+        <source>Trace Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trace Logging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
+Do you want to do the clean up?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieModel</name>
@@ -1229,6 +1303,127 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>Running</source>
         <translation>運作中</translation>
     </message>
+    <message>
+        <source>Sbie RpcSs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie DcomLaunch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie Crypto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie WuAu Svc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie BITS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sbie Svc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trusted Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internet Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Media Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KMPlayer</source>
+        <oldsource>KM Player</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Live Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service Model Reg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RunDll32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DllHost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Ink Services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chromium Based</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Google Updater</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acrobat Reader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MS Outlook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MS Excel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flash Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generic Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generic Mail Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MSI Installer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firefox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firefox Plugin Container</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieView</name>
@@ -1268,7 +1463,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)</source>
-        <translation>確定要 %1 所選處理程序</translation>
+        <translation type="vanished">確定要 %1 所選處理程序</translation>
     </message>
     <message>
         <source>Move to Group</source>
@@ -1464,6 +1659,10 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
         <source>Emulate Admin Rights</source>
         <translation>模擬管理員權限</translation>
     </message>
+    <message>
+        <source>Do you want to %1 the selected process(es)?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSettingsWindow</name>
@@ -1541,6 +1740,72 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
     <message>
         <source>Please enter a name for the new Snapshot.</source>
         <translation>請輸入新快照名稱。</translation>
+    </message>
+</context>
+<context>
+    <name>CTraceModel</name>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">未知</translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished">%1 (%2)</translation>
+    </message>
+    <message>
+        <source>Process %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thread %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished">處理程序</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">類別</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">狀態</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">值</translation>
+    </message>
+</context>
+<context>
+    <name>CTraceView</name>
+    <message>
+        <source>Show as task tree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[All]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished">%1 (%2)</translation>
+    </message>
+    <message>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only sellectes box</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1641,7 +1906,7 @@ Please download the latest release and set it up with the Sandboxie.ini as instr
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation>配置處理程序所訪問的資源。雙擊進入編輯。
+        <translation type="vanished">配置處理程序所訪問的資源。雙擊進入編輯。
 &apos;管理&apos; 檔案和機碼僅適用於沙盤外的程式二進位制檔案。
 注意所有關閉的...=!&lt;程式&gt;,... 例外也有相同限制。
 想要管理檔案訪問可使用 &apos;管理全部&apos; 使其套用至全部程式。</translation>
@@ -1691,7 +1956,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>允許所有程式在此沙盤中啟動。</translation>
     </message>
     <message>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as thay are created.</source>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>啟用快速恢復提示以便建立檔案時能儘快恢復。</translation>
     </message>
     <message>
@@ -1899,7 +2164,7 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>新增使用者</translation>
     </message>
     <message>
-        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless thay are explicitly started in another sandbox.</source>
+        <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>此處輸入的程式，或指定位置啟動的程式，將自動加入此沙盤，除非它們被確定已在其他沙盤啟動。</translation>
     </message>
     <message>
@@ -2080,7 +2345,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Allow access to Smart Cards</source>
-        <translation>允許訪問智慧卡片</translation>
+        <translation type="vanished">允許訪問智慧卡片</translation>
     </message>
     <message>
         <source>Lift security restrictions</source>
@@ -2118,14 +2383,14 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Allow access to Bluetooth</source>
-        <translation>允許訪問藍牙</translation>
+        <translation type="vanished">允許訪問藍牙</translation>
     </message>
     <message>
         <source>Elevation restrictions</source>
         <translation>權限提升限制</translation>
     </message>
     <message>
-        <source>Make applications think thay are running elevated (allows to run installers safely)</source>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>使應用程式認為其已在權限提升狀態下運作（允許安全地執行安裝程式）</translation>
     </message>
     <message>
@@ -2175,6 +2440,114 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
         <translation>Ntdll syscall 追蹤（產生大量輸出）</translation>
+    </message>
+    <message>
+        <source>Prompt user for large file migration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block read access to the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure which processes can access what resources. Double click on an entry to edit it.
+&apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
+For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emulate sandboxed window station for all processes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow sandboxed programs to Change User Passwords and alike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to windows Local Security Authority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compatibility Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template Folders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure the folder locations used by your other applications.
+
+Please note that this values are currently user specific and saved globally for all boxes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">值</translation>
+    </message>
+    <message>
+        <source>Accessibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program/Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to Windows Security Account Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Resource Access Monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource Access Monitor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2305,7 +2678,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Use Dark Theme</source>
-        <translation>使用暗色主題</translation>
+        <translation type="vanished">使用暗色主題</translation>
     </message>
     <message>
         <source>Enable</source>
@@ -2434,6 +2807,10 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Other settings</source>
         <translation>其他設定</translation>
+    </message>
+    <message>
+        <source>Use Dark Theme (fully applied after a restart)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

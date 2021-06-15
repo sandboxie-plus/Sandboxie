@@ -71,7 +71,7 @@ CTraceView::CTraceView(QWidget* parent) : CPanelWidget<QTreeViewEx>(parent)
 	connect(m_pTraceTid, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetTidFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceTid);
 
-	m_pOnlyCurrent = new QCheckBox(tr("Show only sellectes box"));
+	m_pOnlyCurrent = new QCheckBox(tr("Filter selected box only"));
 	m_pTraceToolBar->addWidget(m_pOnlyCurrent);
 
 	m_pMainLayout->setSpacing(0);

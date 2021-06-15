@@ -1163,35 +1163,32 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
         // wont be able to grab it while we are evaluaiting it
         //
 
-        HANDLE SourceKernelHandle;
-        status = Thread_GetKernelHandleForUserHandle(&SourceKernelHandle, SourceHandle);
+        HANDLE SourceProcessKernelHandle;
+        status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
         if (NT_SUCCESS(status)) {
 
-            HANDLE SourceProcessKernelHandle;
-            status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
+            HANDLE TargetProcessKernelHandle = ZwCurrentProcess(); // TargetProcessHandle == NtCurrentProcess();
+            
+            //
+            // driver verifier wants us to provide a kernel handle as process handles
+            // but the source handle must be a user handle and the ZwDuplicateObject
+            // function creates an otehr user handle hence NtClose
+            //
+
+            status = ZwDuplicateObject(
+                SourceProcessKernelHandle, SourceHandle,
+                TargetProcessKernelHandle, &TestHandle,
+                DesiredAccess, HandleAttributes,
+                Options & ~DUPLICATE_CLOSE_SOURCE);
+
             if (NT_SUCCESS(status)) {
 
-                HANDLE TargetProcessKernelHandle = ZwCurrentProcess();
-                //status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
-                //if (NT_SUCCESS(status)) {
+                status = Ipc_CheckObjectName(TestHandle, UserMode);
 
-                    status = ZwDuplicateObject(
-                        SourceProcessKernelHandle, SourceKernelHandle,
-                        TargetProcessKernelHandle, &TestHandle,
-                        DesiredAccess, HandleAttributes,
-                        Options & ~DUPLICATE_CLOSE_SOURCE);
-
-                    if (NT_SUCCESS(status)) {
-
-                        status = Ipc_CheckObjectName(TestHandle, UserMode);
-
-                        ZwClose(TestHandle);
-                    }
-                //    ZwClose(TargetProcessKernelHandle);
-                //}
-                ZwClose(SourceProcessKernelHandle);
+                NtClose(TestHandle);
             }
-            ZwClose(SourceKernelHandle);
+
+            ZwClose(SourceProcessKernelHandle);
         }
 
     } else

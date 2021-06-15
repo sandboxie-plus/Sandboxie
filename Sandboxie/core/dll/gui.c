@@ -1310,7 +1310,7 @@ _FX HWND Gui_CreateWindowExW(
     // replace window procedure
     //
 
-    if (hwndResult && !Gui_RenameClasses) {
+    if (hwndResult && Gui_RenameClasses) {
 
         Gui_SetWindowProc(hwndResult, FALSE);
 
@@ -1418,7 +1418,7 @@ _FX HWND Gui_CreateWindowExA(
     // replace window procedure
     //
 
-    if (hwndResult && !Gui_RenameClasses) {
+    if (hwndResult && Gui_RenameClasses) {
 
         Gui_SetWindowProc(hwndResult, FALSE);
 

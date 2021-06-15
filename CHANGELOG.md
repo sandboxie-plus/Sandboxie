@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.8.2 / 5.50.2] - 2021-06-15
+
+### Fixed
+- properly fixed an issue with driver verifyer and user handles
+- fixed an issue with CreateWindow introduced with 0.8.0
+
+
+
 ## [0.8.1 / 5.50.1] - 2021-06-14
 
 ### Fixed
@@ -832,3 +840,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
+

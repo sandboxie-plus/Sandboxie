@@ -254,7 +254,7 @@ _FX ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server)
     // check if this is an Internet device matching a ClosedFilePath
     //
 
-    if (len >= 10 && _wcsnicmp(path, File_Mup, 8) == 0) {
+    if (len >= 10 && _wcsnicmp(path, File_Mup, 8) == 0) { // match \device\ only
 
 		BOOLEAN prompt = SbieApi_QueryConfBool(NULL, L"PromptForInternetAccess", FALSE);
 		if (SbieApi_CheckInternetAccess(NULL, path + 8, !prompt) == STATUS_ACCESS_DENIED

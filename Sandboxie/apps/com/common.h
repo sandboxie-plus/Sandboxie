@@ -313,7 +313,7 @@ _FX BOOL my_SetServiceStatus(SERVICE_STATUS_HANDLE hServiceStatus, LPSERVICE_STA
                     else
                         myData[i].checkpoint = lpServiceStatus->dwCheckPoint;
                     ServiceStatus_CheckPoint = lpServiceStatus->dwCheckPoint;
-                    myData->initFlag = 1;
+                    myData[i].initFlag = 1;
                     myData[i].state = lpServiceStatus->dwCurrentState;
                     InitComplete(&myData[i]);
                 }

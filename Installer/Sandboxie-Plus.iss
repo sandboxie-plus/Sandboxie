@@ -123,7 +123,6 @@ ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高�
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
 
-[CustomMessages]
 Italian.CustomPageLabel1=Seleziona tipo di installazione
 Italian.CustomPageLabel2=Come dovrebbe essere installato
 Italian.CustomPageLabel3=Scegli la modalità di installazione

@@ -3166,7 +3166,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>Aggiungi l&apos;opzione &apos;Avvia nell&apos;area virtuale&apos; nel menu contestuale</translation>
+        <translation>Aggiungi l&apos;opzione &apos;Avvia nell&apos;area virtuale&apos; al menu contestuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="137"/>

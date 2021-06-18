@@ -46,8 +46,8 @@ Source: ".\Sandboxie-Plus.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoe
 
 [Icons]
 Name: "{group}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; MinVersion: 0.0,5.0;
-Name: "{group}\{cm:ProgramOnTheWeb, {#MyAppName}}"; Filename: "http://sandboxie-plus.com/"; MinVersion: 0.0,5.0;
-Name: "{group}\{cm:UninstallProgram, {#MyAppName}}"; Filename: "{uninstallexe}"; MinVersion: 0.0,5.0;
+Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "http://sandboxie-plus.com/"; MinVersion: 0.0,5.0;
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; MinVersion: 0.0,5.0;
 Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0;
 ;Name: "{userstartup}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: AutoStartEntry;
 

@@ -30,14 +30,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added process image information to Sandman UI
 - localized template categories in the Plus UI
 - added "DisableResourceMonitor=y" to disable resource access monitor for selected boxes
-- added option to show trace entries only for the selected sandbox
+- added option to show trace entries only for the selected sandbox #886
 - added "UseVolumeSerialNumbers=y" that allows drive letters to be suffixed with the volume SN in the \drive\ sandbox location
 -- it helps to avoid files mixed together on multiple pendrives using the same letter
 -- note: this option is not compatible with the recovery function of the Classic UI, only SandMan UI is fully compatible
 - added "ForceRestart=PicoTorrent.exe" to the PicoTorrent template in order to fix a compatibility issue
 
 ### Changed
-- portable cleanup message now has yes/no/cancel options
+- portable cleanup message now has yes/no/cancel options #874
 - consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
 - the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default
 -- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
@@ -57,7 +57,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.7.5 / 5.49.8] - 2021-06-05
 
 ### Added
-- clipboard access for a sandbox can now be disabled with "OpenClipboard=n"
+- clipboard access for a sandbox can now be disabled with "OpenClipboard=n" #794
 
 ### Changed
 - now the OpenBluetooth template is enabled by default for compatibility with Unity games
@@ -97,7 +97,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
 ### Added
-- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only Firefox and Chrome
+- added "UseSbieWndStation=y" to emulate CreateDesktop for selected processes, not only Firefox and Chrome #635
 - added option to drop the console host process integrity, now you can use "DropConHostIntegrity=y"
 - added option to easily add local templates
 
@@ -234,11 +234,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reduced SandMan CPU usage
-- Sandboxie.ini and Templates.ini can now be UTF8 encoded
+- Sandboxie.ini and Templates.ini can now be UTF8 encoded #461 #197
 -- this feature is experimental, files without a UTF-8 Signature should be recognized also
 -- "ByteOrderMark=yes" is obsolete, Sandboxie.ini is now always saved with a BOM/Signature
 - legacy language files can now be UTF8 encoded
-- reworked file migration behaviour, removed hardcoded lists in favour of templates
+- reworked file migration behaviour, removed hardcoded lists in favour of templates #441
 -- you can now use "CopyAlways=", "DontCopy=" and "CopyEmpty=" that support the same syntax as "OpenFilePath="
 -- "CopyBlockDenyWrite=program.exe,y" makes a write open call to a file that won't be copied fail instead of turning it read-only
 - removed hardcoded SkipHook list in favour of templates
@@ -259,12 +259,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added confirmation prompts to terminate all commands
-- added window title to boxed process info
-- added WinSpy based sandboxed window finder
+- added window title to boxed process info #360
+- added WinSpy based sandboxed window finder #351
 - added option to view disabled boxes and double click on box to enable it
 
 ### Changed
-- "Reset Columns" now resizes them to fit the content, and it can now be localized
+- "Reset Columns" now resizes them to fit the content, and it can now be localized #426
 - modal windows are now centered to the parent
 - improved new box window
 
@@ -283,11 +283,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "SandboxService=..." to force selected services to be started in the sandbox
 - added template clean-up functionality to plus UI
 - added internet prompt to now also allow internet access permanently
-- added browse button for box root folder in the SandMan UI
-- added explorer info message
+- added browse button for box root folder in the SandMan UI #382
+- added explorer info message #352
 - added option to keep the SandMan UI always on top
-- allow drag and drop file onto Sandman.exe to run it sandboxed
-- added start SandMan UI when a sandboxed application starts
+- allow drag and drop file onto Sandman.exe to run it sandboxed #355
+- added start SandMan UI when a sandboxed application starts #367
 - recovery window can now list all files
 - added file counter to recovery window
 - when "NoAddProcessToJob=y" is specified, Chrome and related browsers now can fully use the job system
@@ -353,6 +353,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed a crash issue in SbieSvc.exe introduced with the last build
 - fixed issue with SandMan UI update check
+- FIXED SECURITY ISSUE: a Sandboxed process could start sandboxed as system even with DropAdminRights in place
 
 ### Removed
 - removed "ProtectRpcSs=y" due to incompatibility with new isolation defaults
@@ -526,12 +527,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added user interactive control mechanism when using the new SandMan UI
 -- when a file exceeds the copy limit instead of failing, the user is prompted if the file should be copied or not
 -- when internet access is blocked it now can be exempted in real time by the user
-- added missing file recovery and auto/quick recovery functionality
+- added missing file recovery and auto/quick recovery functionality #188 #178
 - added silent MSG_1399 boxed process start notification to keep track of short lived boxed processes
 - added ability to prevent system wide process starts, Sandboxie can now instead of just alerting also block processed on the alert list
 -- set "StartRunAlertDenied=y" to enable process blocking
 - the process start alert/block mechanism can now also handle folders use "AlertFolder=..." 
-- added ability to merge snapshots
+- added ability to merge snapshots #151
 - added icons to the sandbox context menu in the new UI
 - added more advanced options to the sandbox options window
 - added file migration progress indicator

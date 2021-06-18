@@ -89,7 +89,7 @@ english.AddSandboxedMenu=Add "Run Sandboxed" to context menu
 
 ChineseSimplified.AddSandboxedMenu=添加“在沙盘中运行”菜单
 
-Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" nel menu contestuale
+Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
 
 [Tasks]
 Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable 

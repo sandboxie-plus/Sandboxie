@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.2 / 5.50.2] - 2021-06-15
 
 ### Fixed
-- properly fixed an issue with Driver Verifier and user handles
+- properly fixed an issue with Driver Verifier and user handles #906
 - fixed an issue with CreateWindow function introduced with 0.8.0
 - fixed issue with outdated BoxDisplayOrder entries being retained
 
@@ -17,8 +17,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed an issue with Driver Verifier and user handles
 - fixed driver memory leak of FLT_FILE_NAME_INFORMATION objects
-- fixed broken clipboard introduced in 5.50.0
-- fixed DcomLaunch issue on Windows 7 32 bit introduced in 5.50.0
+- fixed broken clipboard introduced in 5.50.0 #899
+- fixed DcomLaunch issue on Windows 7 32 bit introduced in 5.50.0 #898
 
 
 
@@ -28,29 +28,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Sandboxie now applies by default "Close...=!<program>,..." directives to non-excluded images if they are located in a sandbox
 -- added 'AlwaysCloseForBoxed=n' to disable this behaviour as it may not be always desired, and it doesn't provide extra security
 - added process image information to Sandman UI
-- localized template categories in the Plus UI
+- localized template categories in the Plus UI #727
 - added "DisableResourceMonitor=y" to disable resource access monitor for selected boxes
 - added option to show trace entries only for the selected sandbox #886
 - added "UseVolumeSerialNumbers=y" that allows drive letters to be suffixed with the volume SN in the \drive\ sandbox location
 -- it helps to avoid files mixed together on multiple pendrives using the same letter
 -- note: this option is not compatible with the recovery function of the Classic UI, only SandMan UI is fully compatible
-- added "ForceRestart=PicoTorrent.exe" to the PicoTorrent template in order to fix a compatibility issue
+- added "ForceRestart=PicoTorrent.exe" to the PicoTorrent template in order to fix a compatibility issue #720
 
 ### Changed
 - portable cleanup message now has yes/no/cancel options #874
 - consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
-- the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default
+- the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default 
 -- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
 - trace log gets disabled only when it has no entries and the logging is stopped
 
 ### Fixed
-- fixed APC issue with the new global hook emulation mechanism and WoW64 processes
+- fixed APC issue with the new global hook emulation mechanism and WoW64 processes #780 #779
 - fixed IPv6 issues with BlockPort options
-- fixed an issue with CheatEngine when "OpenWinClass=*" was specified
-- fixed memory corruption in SbieDrv
-- fixed crash issue with process elevation on CreateProcess calls
-- fixed process elevation when running in the built-in administrator account
-- fixed template preview resetting unsaved entries in box options window
+- fixed an issue with CheatEngine when "OpenWinClass=*" was specified #786
+- fixed memory corruption in SbieDrv #838
+- fixed crash issue with process elevation on CreateProcess calls #858
+- fixed process elevation when running in the built-in administrator account #3
+- fixed template preview resetting unsaved entries in box options window #621
 
 
 
@@ -60,16 +60,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - clipboard access for a sandbox can now be disabled with "OpenClipboard=n" #794
 
 ### Changed
-- now the OpenBluetooth template is enabled by default for compatibility with Unity games
+- now the OpenBluetooth template is enabled by default for compatibility with Unity games #799
 - "PreferExternalManifest=program.exe,y" can now be set on a per-process basis
 
 ### Fixed
 - fixed compiler issues with the most recent VS2019 update
-- fixed issue with Vivaldi browser
-- fixed some issues with box options in the Plus UI
-- fixed some issues with hardware acceleration in Chromium based browsers
+- fixed issue with Vivaldi browser #821
+- fixed some issues with box options in the Plus UI #879
+- fixed some issues with hardware acceleration in Chromium based browsers #795
 - the "Stop All" command now issues "kmdutill scandll" first to solve issues when the SbieDll.dll is in use
-- workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process
+- workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process #547 #310 #215
 
 
 
@@ -86,7 +86,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed minor issue with logging internet blocks
-- fixed issue with file recovery when located on a network share
+- fixed issue with file recovery when located on a network share #711
 - fixed UI issue with CallTrace
 - fixed sandbox shortcuts receiving double extension upon creation
 - fixed misplaced labels in the classic ui (thanks isaak654)
@@ -102,7 +102,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to easily add local templates
 
 ### Changed
-- reworked window hooking mechanism to improve performance
+- reworked window hooking mechanism to improve performance #697 #519 #662 #69 #109 #193
 -- resolves issues with file save dialogues taking 30+ seconds to open
 -- this fix greatly improves the win32 GUI performance of sandboxed processes
 - reworked RPC resolver to be ini-configurable
@@ -115,12 +115,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed process-specific hooks being applied to all processes in a given sandbox
 - fixed issue with messages and templates sometimes not being properly displayed in the SandMan UI
 - fixed issue with compatibility settings not being applied properly
-- fixed auto delete issue that got introduced with 0.7.1
+- fixed auto delete issue that got introduced with 0.7.1 #637
 - fixed issue with NtSetInformationFile, FileDispositionInformation resulting in Opera installer failing
-- fixed issue with MacType introduced in the 0.7.2 build
+- fixed issue with MacType introduced in the 0.7.2 build #676
 - fixed global sandboxed windows hooks not working when window rename option is disabled
 - fixed issue with saving local templates
-- fixed issue when using runas to start a process that was created outside of the Sandboxie supervision
+- fixed issue when using runas to start a process that was created outside of the Sandboxie supervision #688
 -- since the runas facility is not accessible by default, this did not constitute a security issue
 -- to enable runas functionality, add "OpenIpcPath=\RPC Control\SECLOGON" to your Sandboxie.ini
 -- please take note that doing so may open other yet unknown issues
@@ -138,7 +138,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - SandboxieCrypto now always migrates the CatRoot2 files in order to prevent locking of real files
 - greatly improved trace log performance
-- MSI Server can now run with the "FakeAdminRights=y" and "DropAdminRights=y" options
+- MSI Server can now run with the "FakeAdminRights=y" and "DropAdminRights=y" options #600
 -- special service allowance for the MSI Server can be disabled with "MsiInstallerExemptions=n"
 - changed SCM access check behaviour; non elevated users can now start services with a user token
 -- elevation is now only required to start services with a system token
@@ -146,10 +146,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked RPC mechanism to be more flexible
 
 ### Fixed
-- fixed issues with some installers introduced in 5.48.0
-- fixed "add user to sandbox" in the Plus UI
+- fixed issues with some installers introduced in 5.48.0 #595
+- fixed "add user to sandbox" in the Plus UI #597
 - FIXED SECURITY ISSUE: the HostInjectDll mechanism allowed for local privilege escalation (thanks hg421)
-- Classic UI no longer allows to create a sandbox with an invalid or reserved device name
+- Classic UI no longer allows to create a sandbox with an invalid or reserved device name #649
 
 
 
@@ -175,7 +175,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issues with webcam access when the DevCMApi filtering is in place
-- fixed issue with free download manager for 'AppXDeploymentClient.dll', so RpcMgmtSetComTimeout=y will be used by default for this one
+- fixed issue with free download manager for 'AppXDeploymentClient.dll', so RpcMgmtSetComTimeout=y will be used by default for this one #573
 - fixed not all WinRM files were blocked by the driver, with "BlockWinRM=n" this file block can be disabled
 
 
@@ -201,9 +201,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed crash issue around SetCurrentProcessExplicitAppUserModelID observed with GoogleUpdate.exe
 - fixed issue with Resource Monitor sort by timestamp
 - FIXED SECURITY ISSUE: a race condition in the driver allowed to obtain an elevated rights handle to a process (thanks typpos)
-- FIXED SECURITY ISSUE: "\RPC Control\samss lpc" is now filtered by the driver (thanks hg421)
+- FIXED SECURITY ISSUE: "\RPC Control\samss lpc" is now filtered by the driver (thanks hg421) #553
 -- this allowed elevated processes to change passwords, delete users and alike; to disable filtering use "OpenSamEndpoint=y"
-- FIXED SECURITY ISSUE: "\Device\DeviceApi\CMApi" is now filtered by the driver (thanks hg421)
+- FIXED SECURITY ISSUE: "\Device\DeviceApi\CMApi" is now filtered by the driver (thanks hg421) #552
 -- this allowed elevated processes to change hardware configuration; to disable filtering use "OpenDevCMApi=y"
 
 
@@ -214,19 +214,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added UI language auto-detection
 
 ### Fixed
-- fixed Brave.exe now being properly recognized as Chrome-, not Firefox-based
+- fixed Brave.exe now being properly recognized as Chrome-, not Firefox-based 
 - fixed issue introduced in 0.6.5 with recent Edge builds
 -- the 0.6.5 behaviour can be set on a per-process basis using "RpcMgmtSetComTimeout=POPPeeper.exe,n"
-- fixed grouping issues
-- fixed main window restore state from tray
+- fixed grouping issues #445
+- fixed main window restore state from tray #288
 
 
 
 ## [0.6.5 / 5.47.0] - 2021-01-31
 
 ### Added
-- added detection for Waterfox.exe, Palemoon.exe and Basilisk.exe Firefox forks as well as Brave.exe
-- added Bluetooth API support, IPC port can be opened with "OpenBluetooth=y"
+- added detection for Waterfox.exe, Palemoon.exe and Basilisk.exe Firefox forks as well as Brave.exe #468
+- added Bluetooth API support, IPC port can be opened with "OpenBluetooth=y" #319
 -- this should resolve issues with many Unity games hanging on startup for a long time
 - added enhanced RPC/IPC interface tracing
 - when DefaultBox is not found by the SandMan UI, it will be recreated
@@ -244,7 +244,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - removed hardcoded SkipHook list in favour of templates
 
 ### Fixed
-- fixed old memory pool leak in the Sbie driver
+- fixed old memory pool leak in the Sbie driver #444
 - fixed issue with item selection in the access restrictions UI
 - fixed updater crash in Sbiectrl.exe
 - fixed issues with RPC calls introduced in Sbie 5.33.1
@@ -265,14 +265,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - "Reset Columns" now resizes them to fit the content, and it can now be localized #426
-- modal windows are now centered to the parent
-- improved new box window
+- modal windows are now centered to the parent #417
+- improved new box window #417
 
 ### Fixed
-- fixed issues with window modality
-- fixed issues when main window was set to be always on top
+- fixed issues with window modality #409
+- fixed issues when main window was set to be always on top #417
 - fixed a driver issue with Windows 10 insider build 21286
-- fixed issues with snapshot dialog
+- fixed issues with snapshot dialog #416
 - fixed an issue when writing to a path that already exists in the snapshot but not outside
 
 
@@ -296,7 +296,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - updated templates (thanks isaak654)
-- when trying to take a snapshot of an empty sandbox a proper error message is displayed
+- when trying to take a snapshot of an empty sandbox a proper error message is displayed #381
 - new layout for the recovery window
 - Sbie view sorting is now case insensitive
 
@@ -389,11 +389,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with IPC tracing
 - FIXED SECURITY ISSUE: CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
 -- this allowed some system options to be changed, to disable filtering use "OpenLsaEndpoint=y"
-- fixed hooking issues SBIE2303 with Chrome, Edge and possibly others
+- fixed hooking issues SBIE2303 with Chrome, Edge and possibly others  #68 #166
 - fixed failed check for running processes when performing snapshot operations
 - fixed some box option checkboxes were not properly initialized
 - fixed unavailable options are not properly disabled when SandMan is not connected to the driver
-- fixed MSI installer issue, not being able to create "C:\Config.msi" folder on Windows 20H2
+- fixed MSI installer issue, not being able to create "C:\Config.msi" folder on Windows 20H2 #219
 - added missing localization to generic list commands
 - fixed issue with "iconcache_*" when running sandboxed explorer
 - fixed more issues with groups
@@ -408,7 +408,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added command line column to the process view in the SandMan UI
 
 ### Fixed
-- fixed a few issues with group handling
+- fixed a few issues with group handling #262
 - fixed issue with GetRawInputDeviceInfo when running a 32 bit program on a 64 bit system
 - fixed issue when pressing apply in the "Resource Access" tab; the last edited value was not always applied
 - fixed issue merging entries in Resource Access Monitor
@@ -418,7 +418,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.3a / 5.45.2] - 2020-12-29
 
 ### Added
-- added prompt to choose if links in the SandMan UI should be opened in a sandboxed or unsandboxed browser
+- added prompt to choose if links in the SandMan UI should be opened in a sandboxed or unsandboxed browser #273
 - added more recovery options
 - added "ClosedClsid=" to block COM objects from being used when they cause compatibility issues
 - added "ClsidTrace=*" option to trace COM usage
@@ -439,11 +439,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - by default, when started in portable mode, the sandbox folder will be located in the parent directory of the Sandboxie instance
 
 ### Fixed
-- grouping menu not fully working in the new SandMan UI
+- grouping menu not fully working in the new SandMan UI #277
 - fixed not being able to set quick recovery in SandMan UI
 - fixed resource leak when loading process icons in SandMan UI
 - fixed issue with OpenToken debug options
-- fixed Chrome crashing on websites that cause the invocation of "FindAppUriHandlersAsync"
+- fixed Chrome crashing on websites that cause the invocation of "FindAppUriHandlersAsync" #198
 - fixed issue connecting to the driver when starting in portable mode
 - fixed missing template setup when creating new boxes
 
@@ -457,7 +457,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed translation support in the SandMan UI
-- fixed sandboxed explorer issue
+- fixed sandboxed explorer issue #289
 - fixed simplified Chinese localization
 
 
@@ -475,30 +475,30 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reorganized the advanced box options a bit
-- changed icons (thanks Valinwolf for picking the new ones)
+- changed icons (thanks Valinwolf for picking the new ones) #235
 - updated Template.ini (thanks isaak654)
 - increased max value for disable forced process time in SandMan UI
 
 ### Fixed
-- fixed BSOD introduced in 5.45.0 when using Windows 10 "core isolation" 
+- fixed BSOD introduced in 5.45.0 when using Windows 10 "core isolation" #221
 - fixed minor issue with lingering/leader processes
 - fixed menu issue in SandMan UI
 - fixed issue with stop behaviour page in SandMan UI
 - fixed issue with Plus installer not displaying kmdutil window
 - fixed SandMan UI saving UI settings on Windows shutdown
-- fixed issue with Plus installer autorun
+- fixed issue with Plus installer autorun #247
 - fixed issue with legacy installer not removing all files
-- fixed a driver compatibility issue with Windows 20H1 and later
+- fixed a driver compatibility issue with Windows 20H1 and later #228
 -- this solves "stop pending", LINE messenger hanging and other issues...
-- fixed quick recovery issue in SbieCtrl.exe introduced in 5.45.0
+- fixed quick recovery issue in SbieCtrl.exe introduced in 5.45.0 #224
 - fixed issue advanced hide process settings not saving
 - fixed some typos in the UI (thanks isaak654)
-- fixed issue with GetRawInputDeviceInfo failing when boxed processes are put in a job object
+- fixed issue with GetRawInputDeviceInfo failing when boxed processes are put in a job object #176 #233
 -- this fix resolves issues with CP2077 and other games not getting keyboard input (thanks Rostok)
 - fixed failing ClipCursor won't longer span the message log
 - fixed issue with adding recovery folders in SandMan UI
 - fixed issue with Office 2019 template when using a non-default Sbie install location
-- fixed issue setting last access attribute on sandboxed folders
+- fixed issue setting last access attribute on sandboxed folders #218
 - fixed issue with process start signal
 
 
@@ -548,7 +548,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added check for updates to the legacy SbieCtrl UI
 
 ### Changed
-- File migration limit can now be disabled by specifying "CopyLimitKb=-1"
+- File migration limit can now be disabled by specifying "CopyLimitKb=-1" #526
 - improved and refactored message logging mechanism, reducing memory usage by factor of 2
 - terminated boxed processes are now kept listed for a couple of seconds
 - reworked sandbox deletion mechanism of the new UI
@@ -581,7 +581,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to view template presets for any given box
 - added text filter to template view
 - added new compatibility templates:
--- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis
+-- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis #120 #88
 -- Firefox Quantum, access to Windows’ FontCachePort for compatibility with Windows 7
 - added experimental debug option "OriginalToken=y" which lets sandboxed processes retain their original unrestricted token
 -- This option is comparable with "OpenToken=y" and is intended only for testing and debugging, it BREAKS most SECURITY guarantees (!)
@@ -632,11 +632,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added disable forced programs menu command to the SandMan UI
 
 ### Fixed
-- fixed file rename bug introduced with an earlier Driver Verifier fix
+- fixed file rename bug introduced with an earlier Driver Verifier fix #174 #153
 - fixed issue saving access lists
 - fixed issue with program groups parsing in the SandMan UI 
-- fixed issue with internet access restriction options
-- fixed issue deleting sandbox when located on a drive directly
+- fixed issue with internet access restriction options #177 #185
+- fixed issue deleting sandbox when located on a drive directly #139
 
 
 ## [0.4.2 / 5.43.6] - 2020-10-10
@@ -645,7 +645,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added explore box content menu option
 
 ### Fixed
-- fixed thread handle leak in SbieSvc and other components
+- fixed thread handle leak in SbieSvc and other components #144
 - msedge.exe is now categorized as a Chromium derivate
 - fixed Chrome 86+ compatibility bug with Chrome's own sandbox
 

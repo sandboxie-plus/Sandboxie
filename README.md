@@ -49,7 +49,7 @@ More volunteers welcome ;)
 
 
 ## Documentation
-A GitHub copy of the Sandboxie documentation is maintained at https://davidxanatos.github.io/sandboxie-docs
+A GitHub copy of the Sandboxie documentation is maintained at https://sandboxie-plus.github.io/sandboxie-docs
 
 ## Sandboxie Forum Archive
 A full archive of the old Sandboxie forum is available at https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums

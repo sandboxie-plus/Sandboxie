@@ -3165,6 +3165,10 @@ Consenti l'accesso diretto alle preferenze di %2
 Consenti l'accesso diretto alla gestione della sessione %2
 .
 
+4341;txt;01
+Consenti l'accesso diretto alle note di %2
+.
+
 4356;txt;02
 Consenti l'accesso diretto ai segnalibri di %2
 .

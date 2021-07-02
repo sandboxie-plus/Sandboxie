@@ -5,6 +5,9 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 ## System requirements
 Windows 7 or higher, 32-bit or 64-bit.
 
+## Changelog
+https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md
+
 ## Download
 Get the latest release here: https://github.com/sandboxie-plus/Sandboxie/releases/latest
 
@@ -13,14 +16,14 @@ Sandboxie is available in two flavors, Plus and Classic. Both have the same core
 What's different is the availability of features in the user interface:
 
 1) Plus build has a modern Qt based UI, which supports all new features that have been added since the project went open source.
-If you need an accurate list, you can take a look at the [changelog](https://github.com/isaak654/Sandboxie/blob/master/CHANGELOG.md) notes.
+If you need an accurate list, you can take a look at the changelog above.
 
 2) Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
 
 ## Documentation
-A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the [documentation](https://github.com/sandboxie-plus/Sandboxie/labels/documentation) and [workaround](https://github.com/sandboxie-plus/Sandboxie/labels/workaround) references in this repository.
+A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation), [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) and [future development](https://github.com/sandboxie-plus/Sandboxie/labels/future%20development) labels in this repository.
 
-A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io). The same can be applied to this repository.
+A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
 
 ## Project maintenance
 2004 - 2013 Ronen Tzur
@@ -45,13 +48,14 @@ Open Source release
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - mpheath - Help with Inno Setup installer
-- yfdyh000 - Localization / Inno Setup
+- yfdyh000 - Localization fixes / Inno Setup
 
 ## Translators
 - yuhao2348732 - Chinese Simplified
 - nkh0472 - Chinese Simplified
 - yfdyh000 - Chinese Simplified
 - TragicLifeHu - Chinese Traditional
+- RockyTDR - Dutch
 - bastik-1001 - German
 - isaak654 - Italian
 - JNylson - Portuguese

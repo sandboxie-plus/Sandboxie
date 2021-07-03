@@ -3284,6 +3284,10 @@ Allow direct access to %2 preferences
 Allow direct access to %2 session management
 .
 
+4341;txt;01
+Allow direct access to %2 notes
+.
+
 4356;txt;02
 Allow direct access to %2 bookmarks
 .

@@ -410,7 +410,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2328"/>
         <source>Do you really want to delete the selected local template?</source>
-        <translation>Wilt u het geselecteerde lokale sjabloon echt  verwijderen?</translation>
+        <translation>Wilt u het geselecteerde lokale sjabloon echt verwijderen?</translation>
     </message>
 </context>
 <context>
@@ -2705,169 +2705,171 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1639"/>
         <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation type="unfinished"/>
+        <translation>Toegang beperken to de geëmuleerde service-control-manager voor geprivilegieerde processen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1646"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation type="unfinished"/>
+        <translation>Gesandboxt venster station emuleren voor alle processen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1656"/>
         <source>Isolation</source>
-        <translation type="unfinished"/>
+        <translation>Isolatie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1664"/>
         <source>Allow sandboxed programs to Change User Passwords and alike</source>
-        <translation type="unfinished"/>
+        <translation>Gesandboxte programma&apos;s toestaan om gebruikerswachtwoorden en dergelijke te wijzigen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1671"/>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation type="unfinished"/>
+        <translation>Verschillende geavanceerde isolatiefuncties kunnen de compatibiliteit van sommige toepassingen verbreken als u deze sandbox &lt;b&gt;NIET voor beveiliging&lt;/b&gt; gebruikt, maar voor eenvoudige portabiliteit van toepassingen door het veranderen van deze opties, kunt u de compatibiliteit herstellen door wat beveiliging op te offeren.&lt;br&gt;Deze opties kunnen veilig worden gebruikt als u geen van de processen in de sandbox admin-rechten geeft.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1681"/>
         <source>Allow sandboxed programs to Managing Hardware/Devices</source>
-        <translation type="unfinished"/>
+        <translation>Gesandboxte programma&apos;s toestaan om hardware/apparaten te beheren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1701"/>
         <source>Open access to windows Security Account Manager</source>
-        <translation type="unfinished"/>
+        <translation>Toegang tot Windows security-account-manager openen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1721"/>
         <source>Open access to windows Local Security Authority</source>
-        <translation type="unfinished"/>
+        <translation>Toegang tot Windows local-security-authority openen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1737"/>
         <source>Access isolation</source>
-        <translation type="unfinished"/>
+        <translation>Toegangsisolatie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1747"/>
         <source>Auto Exec</source>
-        <translation type="unfinished"/>
+        <translation>Automatisch uitvoeren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1753"/>
         <source>Add Command</source>
-        <translation type="unfinished"/>
+        <translation>Opdracht toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1780"/>
         <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation type="unfinished"/>
+        <translation>Hier kunt u een lijst van opdrachten opgeven die elke keer dat de zandbak voor het eerst wordt gevuld, worden uitgevoerd.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1800"/>
         <source>Hide Processes</source>
-        <translation type="unfinished"/>
+        <translation>Processen verbergen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1819"/>
         <source>Add Process</source>
-        <translation type="unfinished"/>
+        <translation>Processen toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1829"/>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation type="unfinished"/>
+        <translation>Host-processen verbergen van processen die in de sandbox worden uitgevoerd.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1846"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation type="unfinished"/>
+        <translation>Gesandboxte processen niet toestaan om processen te zien die in andere boxen worden uitgevoerd</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1860"/>
         <source>Users</source>
-        <translation type="unfinished"/>
+        <translation>Gebruikers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1866"/>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation type="unfinished"/>
+        <translation>Brontoegang-monitor beperken tot alleen administrators</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1873"/>
         <source>Add User</source>
-        <translation type="unfinished"/>
+        <translation>Gebruiker toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1896"/>
         <source>Remove User</source>
-        <translation type="unfinished"/>
+        <translation>Gebruiker verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1903"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation type="unfinished"/>
+        <translation>Gebruikersaccounts en gebruikersgroepen aan de lijst hieronder toevoegen om het gebruik van de zandbak tot alleen die accounts te beperken. Als de lijst leeg is, kan de zandbak door alle gebruikersaccounts worden gebruikt.
+
+Opmerking: Instellingen voor geforceerde programma&apos;s en geforceerde mappen voor een zandbak zijn niet van toepassing op gebruikersaccounts die de zandbak niet kunnen gebruiken.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1916"/>
         <source>Tracing</source>
-        <translation type="unfinished"/>
+        <translation>Traceren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1937"/>
         <source>COM Class Trace</source>
-        <translation type="unfinished"/>
+        <translation>COM Class trace</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1944"/>
         <source>IPC Trace</source>
-        <translation type="unfinished"/>
+        <translation>IPC-trace</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1951"/>
         <source>Key Trace</source>
-        <translation type="unfinished"/>
+        <translation>Key-trace</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1971"/>
         <source>GUI Trace</source>
-        <translation type="unfinished"/>
+        <translation>GUI-trace</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1978"/>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"/>
+        <translation>API call trace (logapi moet geïnstalleerd zijn in de sbie-map)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1985"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"/>
+        <translation>Alle SetErrors loggen naar trace-log (maakt veel uitvoer aan)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1992"/>
         <source>File Trace</source>
-        <translation type="unfinished"/>
+        <translation>Bestand-trace</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1999"/>
         <source>Pipe Trace</source>
-        <translation type="unfinished"/>
+        <translation>Pipe-trace</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2012"/>
         <source>Access Tracing</source>
-        <translation type="unfinished"/>
+        <translation>Toegang-tracing</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2032"/>
         <source>&lt;- for this one the above does not apply</source>
-        <translation type="unfinished"/>
+        <translation>&lt;- het bovenstaande is niet van toepassing voor deze</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2039"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation type="unfinished"/>
+        <translation>Debug-uitvoer naar de trace-log loggen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2046"/>
@@ -2879,124 +2881,133 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation type="unfinished"/>
+        <translation>Alle toegangsgebeurtenissen loggen naar de brontoegang-log zoals gezien door de driver.
+
+Deze opties stellen het gebeurtenismasker in op &quot;*&quot; - alle toegangsgebeurtenissen
+U kunt het loggen aanpassen via de ini door het volgende op te geven
+&quot;A&quot; - toegestane (allowed) toegangen
+&quot;D&quot; - geweigerde (denied) toegangen
+&quot;I&quot; - toegangsaanvragen negeren (ignore)
+in plaats van &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2066"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"/>
+        <translation>Ntdll syscall Trace (maakt veel uitvoer aan)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2095"/>
         <source>Debug</source>
-        <translation type="unfinished"/>
+        <translation>Debug</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2138"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation type="unfinished"/>
+        <translation>WAARSCHUWING, deze opties kunnen kernbeveiligingsgaranties uitschakelen en sandbox-beveiliging breken!</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2148"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation type="unfinished"/>
+        <translation>Deze opties zijn bedoeld voor het debuggen van compatibiliteitsproblemen, gebruik ze niet in productiegebruik. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2165"/>
         <source>App Templates</source>
-        <translation type="unfinished"/>
+        <translation>App-sjablonen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2177"/>
         <source>Compatibility Templates</source>
-        <translation type="unfinished"/>
+        <translation>Compatibiliteit-sjablonen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2185"/>
         <source>Filter Categories</source>
-        <translation type="unfinished"/>
+        <translation>Filter categorieën</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2198"/>
         <source>Text Filter</source>
-        <translation type="unfinished"/>
+        <translation>Tekstfilter</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2205"/>
         <source>Add Template</source>
-        <translation type="unfinished"/>
+        <translation>Sjabloon toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2212"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation type="unfinished"/>
+        <translation>Deze lijst bevat een groot aantal sjablonen om sandbox-compatibiliteit te verbeteren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2225"/>
         <source>Remove Template</source>
-        <translation type="unfinished"/>
+        <translation>Sjabloon verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2249"/>
         <source>Category</source>
-        <translation type="unfinished"/>
+        <translation>Categorie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2265"/>
         <source>Template Folders</source>
-        <translation type="unfinished"/>
+        <translation>Sjabloonmappen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2273"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
-        <translation type="unfinished"/>
+        <translation>De maplocaties configureren die door uw andere toepassingen worden gebruikt.
+
+Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden opgeslagen voor alle boxen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2301"/>
         <source>Value</source>
-        <translation type="unfinished"/>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2312"/>
         <source>Accessibility</source>
-        <translation type="unfinished"/>
+        <translation>Toegankelijkheid</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation type="unfinished"/>
+        <translation>Om te compenseren voor de verloren bescherming, raadpleeg de &quot;rechten ontnemen&quot;-instellingenpagina in de beperking-instellingen-groep.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2327"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
-        <translation type="unfinished"/>
+        <translation>Schermlezers: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2334"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation type="unfinished"/>
+        <translation>De volgende instellingen schakelen het gebruik van Sandboxie in combinatie met toegankelijkheidssoftware in. Merk op dat sommige beschermingsmaatregelen van Sandboxie noodzakelijk verloren gaan wanneer deze instellingen van toepassing zijn.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2360"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished"/>
+        <translation>Ini-sectie bewerken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2366"/>
         <source>Edit ini</source>
-        <translation type="unfinished"/>
+        <translation>Ini bewerken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2379"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2402"/>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>Opslaan</translation>
     </message>
 </context>
 <context>
@@ -3004,7 +3015,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/PopUpWindow.ui" line="32"/>
         <source>SandboxiePlus Notifications</source>
-        <translation type="unfinished"/>
+        <translation>SandboxiePlus meldingen</translation>
     </message>
 </context>
 <context>
@@ -3012,7 +3023,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Views/SbieView.cpp" line="698"/>
         <source>Drive %1</source>
-        <translation type="unfinished"/>
+        <translation>Schijf %1</translation>
     </message>
 </context>
 <context>
@@ -3020,47 +3031,47 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"/>
+        <translation>SandboxiePlus - Herstel</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="55"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Sluiten</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="62"/>
         <source>Recover to</source>
-        <translation type="unfinished"/>
+        <translation>Herstellen naar</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="69"/>
         <source>Add Folder</source>
-        <translation type="unfinished"/>
+        <translation>Map toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="76"/>
         <source>Recover</source>
-        <translation type="unfinished"/>
+        <translation>Herstellen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="96"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="103"/>
         <source>Delete all</source>
-        <translation type="unfinished"/>
+        <translation>Alles verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Show All Files</source>
-        <translation type="unfinished"/>
+        <translation>Alle bestanden weergeven</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"/>
+        <translation>Tekstlabel</translation>
     </message>
 </context>
 <context>
@@ -3068,223 +3079,223 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
         <source>SandboxiePlus Settings</source>
-        <translation type="unfinished"/>
+        <translation>Sandboxie Plus instellingen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
         <source>General Options</source>
-        <translation type="unfinished"/>
+        <translation>Algemene opties</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="73"/>
         <source>Show Notifications for relevant log Messages</source>
-        <translation type="unfinished"/>
+        <translation>Meldingen weergeven voor relevante logberichten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="86"/>
         <source>Show Sys-Tray</source>
-        <translation type="unfinished"/>
+        <translation>Systeemvak weergeven</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="93"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation type="unfinished"/>
+        <translation>URL&apos;s van deze UI gesandboxt openen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="103"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
-        <translation type="unfinished"/>
+        <translation>Regelmatig controleren op updates van Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="110"/>
         <source>Restart required (!)</source>
-        <translation type="unfinished"/>
+        <translation>Opnieuw starten vereist (!)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"/>
+        <translation>UI samen met Windows starten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished"/>
+        <translation>&apos;Gesandboxt uitvoeren&apos; toevoegen aan het contextmenu van verkenner</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="137"/>
         <source>On main window close:</source>
-        <translation type="unfinished"/>
+        <translation>Bij sluiten van hoofdvenster:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="166"/>
         <source>Tray options</source>
-        <translation type="unfinished"/>
+        <translation>Systeemvak-opties</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="173"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"/>
+        <translation>UI starten wanneer een gesandboxt proces wordt gestart</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="180"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"/>
+        <translation>Herstelvenster eerst weergeven bij het leegmaken van sandboxen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="187"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="unfinished"/>
+        <translation>Donker thema gebruiken (volledig toegepast na een herstart)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="200"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"/>
+        <translation>Geavanceerde opties</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="217"/>
         <source>Config protection</source>
-        <translation type="unfinished"/>
+        <translation>Config-bescherming</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="224"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation type="unfinished"/>
+        <translation>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc-root&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="253"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation type="unfinished"/>
+        <translation>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;register-root&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="269"/>
         <source>Clear password when main window becomes hidden</source>
-        <translation type="unfinished"/>
+        <translation>Wachtwoord wissen wanneer het hoofdvenster verborgen wordt</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Only Administrator user accounts can use Disable Forced Programs command</source>
-        <translation type="unfinished"/>
+        <translation>Alleen administrator-gebruikersaccounts kunnen de opdracht gebruiken om geforceerde programma&apos;s uit te schakelen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="283"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation type="unfinished"/>
+        <translation>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;bestandssysteem-root&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="296"/>
         <source>Separate user folders</source>
-        <translation type="unfinished"/>
+        <translation>Gescheiden gebruikersmappen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="316"/>
         <source>Only Administrator user accounts can make changes</source>
-        <translation type="unfinished"/>
+        <translation>Alleen administrator-gebruikersaccounts kunnen wijzigingen maken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="323"/>
         <source>Password must be entered in order to make changes</source>
-        <translation type="unfinished"/>
+        <translation>Wachtwoord moet opgegeven worden om wijzigingen te maken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="330"/>
         <source>Change Password</source>
-        <translation type="unfinished"/>
+        <translation>Wachtwoord wijzigen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="337"/>
         <source>Portable root folder</source>
-        <translation type="unfinished"/>
+        <translation>Draagbare root-map</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="350"/>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="389"/>
         <source>Sandbox default</source>
-        <translation type="unfinished"/>
+        <translation>Sandbox-standaard</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="402"/>
         <source>Other settings</source>
-        <translation type="unfinished"/>
+        <translation>Andere instellingen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="409"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation type="unfinished"/>
+        <translation>Wijzigingen in Sandboxie.ini opvolgen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Program Restrictions</source>
-        <translation type="unfinished"/>
+        <translation>Programma-beperkingen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="428"/>
         <location filename="Forms/SettingsWindow.ui" line="532"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="433"/>
         <source>Path</source>
-        <translation type="unfinished"/>
+        <translation>Pad</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="441"/>
         <source>Remove Program</source>
-        <translation type="unfinished"/>
+        <translation>Programma verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="461"/>
         <source>Add Program</source>
-        <translation type="unfinished"/>
+        <translation>Programma toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="468"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation type="unfinished"/>
+        <translation>Wanneer een van de volgende programma&apos;s gestart wordt buiten een sandbox, zal Sandboxie bericht SBIE1301 weergeven.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="478"/>
         <source>Add Folder</source>
-        <translation type="unfinished"/>
+        <translation>Map toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="485"/>
         <source>Prevent the listed programs from starting on this system</source>
-        <translation type="unfinished"/>
+        <translation>Voorkomen dat programma&apos;s in de lijst gestart worden op dit systeem</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="494"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation type="unfinished"/>
+        <translation>Bericht 1308 weergeven wanneer een programma niet kan worden gestart</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="502"/>
         <source>Software Compatibility</source>
-        <translation type="unfinished"/>
+        <translation>Software-compatibiliteit</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="510"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation type="unfinished"/>
+        <translation>Software-compatibiliteit in de toekomst niet controleren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="517"/>
         <source>Enable</source>
-        <translation type="unfinished"/>
+        <translation>Inschakelen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="524"/>
         <source>Disable</source>
-        <translation type="unfinished"/>
+        <translation>Uitschakelen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation type="unfinished"/>
+        <translation>Sandboxie heeft de volgende softwaretoepassingen op uw systeem gedetecteerd. Klik op OK om configuratie-instellingen toe te passen, die de compatibiliteit met deze toepassingen zullen verbeteren. Deze configuratie-instellingen zullen effect hebben in alle bestaande sandboxen en in alle nieuwe sandboxen.</translation>
     </message>
 </context>
 <context>
@@ -3292,42 +3303,42 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"/>
+        <translation>SandboxiePlus - Snapshots</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>
         <source>Selected Snapshot Details</source>
-        <translation type="unfinished"/>
+        <translation>Details van geselecteerde snapshot</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="66"/>
         <source>Name:</source>
-        <translation type="unfinished"/>
+        <translation>Naam:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="73"/>
         <source>Description:</source>
-        <translation type="unfinished"/>
+        <translation>Beschrijving:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="98"/>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"/>
+        <translation>Snapshot-acties</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>
         <source>Remove Snapshot</source>
-        <translation type="unfinished"/>
+        <translation>Snapshot verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="111"/>
         <source>Go to Snapshot</source>
-        <translation type="unfinished"/>
+        <translation>Naar snapshot gaan</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="118"/>
         <source>Take Snapshot</source>
-        <translation type="unfinished"/>
+        <translation>Snapshot nemen</translation>
     </message>
 </context>
 </TS>

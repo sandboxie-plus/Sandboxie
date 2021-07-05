@@ -1172,7 +1172,7 @@ SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::CreateBox(const QString& BoxName)
+SB_STATUS CSbieAPI::CreateBox(const QString& BoxName, bool bReLoad)
 {
 	SB_STATUS Status = ValidateName(BoxName);
 	if(Status.IsError())
@@ -1185,8 +1185,10 @@ SB_STATUS CSbieAPI::CreateBox(const QString& BoxName)
 	if (Status.IsError()) 
 		return Status;
 
-	ReloadConfig();
-	ReloadBoxes();
+	if (bReLoad) {
+		ReloadConfig();
+		ReloadBoxes();
+	}
 	return Status;
 }
 

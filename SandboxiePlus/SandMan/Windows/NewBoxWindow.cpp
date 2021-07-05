@@ -70,13 +70,15 @@ void CNewBoxWindow::CreateBox()
 	m_Name = ui.txtName->text();
 	m_Name.replace(" ", "_");
 
-	SB_STATUS Status = theAPI->CreateBox(m_Name);
+	bool bCopy = ui.radCopy->isChecked();
+
+	SB_STATUS Status = theAPI->CreateBox(m_Name, !bCopy);
 
 	if (!Status.IsError())
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(m_Name);
 
-		if (ui.radCopy->isChecked())
+		if (bCopy)
 		{
 			QList<QPair<QString, QString>> Settings;
 			CSandBoxPtr pSrcBox = theAPI->GetBoxByName(ui.cmbBoxes->currentText());			
@@ -93,6 +95,9 @@ void CNewBoxWindow::CreateBox()
 						break;
 				}
 			}
+
+			theAPI->ReloadConfig();
+			theAPI->ReloadBoxes();
 		}
 		else switch (ui.cmbTemplates->currentIndex())
 		{

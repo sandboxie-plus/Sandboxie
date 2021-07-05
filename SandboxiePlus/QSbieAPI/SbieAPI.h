@@ -57,7 +57,7 @@ public:
 
 	virtual SB_STATUS		ReloadBoxes(bool bFullUpdate = false);
 	static  SB_STATUS		ValidateName(const QString& BoxName);
-	virtual SB_STATUS		CreateBox(const QString& BoxName);
+	virtual SB_STATUS		CreateBox(const QString& BoxName, bool bReLoad = true);
 
 	virtual SB_STATUS		UpdateProcesses(bool bKeep);
 	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);

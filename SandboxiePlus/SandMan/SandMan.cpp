@@ -811,6 +811,12 @@ void CSandMan::OnStatusChanged()
 		{
 			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent").isEmpty())
 				theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+
+			QString cmd = CSbieUtils::GetContextMenuStartCmd();
+			if (!cmd.isEmpty() && !cmd.contains("sandman.exe", Qt::CaseInsensitive)) {
+				CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+					QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+			}
 		}
 
 		m_pBoxView->Clear();

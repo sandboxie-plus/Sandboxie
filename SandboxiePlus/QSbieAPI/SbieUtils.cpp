@@ -193,17 +193,9 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 //////////////////////////////////////////////////////////////////////////////
 // Shell integration
 
-int CSbieUtils::IsContextMenu()
+QString CSbieUtils::GetContextMenuStartCmd()
 {
-	if (!CheckRegValue(L"Software\\Classes\\*\\shell\\sandbox\\command"))
-		return 0;
-	if (!CheckRegValue(L"software\\classes\\folder\\shell\\sandbox\\command"))
-		return 1;
-	return 2;
-}
-
-bool CSbieUtils::CheckRegValue(const wchar_t* key)
-{
+	const wchar_t* key = L"Software\\Classes\\*\\shell\\sandbox\\command";
 	HKEY hkey;
 	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
@@ -215,9 +207,9 @@ bool CSbieUtils::CheckRegValue(const wchar_t* key)
 	rc = RegQueryValueEx(hkey, NULL, NULL, &type, (BYTE *)path, &path_len);
 	RegCloseKey(hkey);
 	if (rc != 0)
-		return false;
+		return QString();
 
-	return true;
+	return QString::fromWCharArray(path);
 }
 
 void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPath)

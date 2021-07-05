@@ -363,7 +363,11 @@ begin
   begin
     RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', '', 'Run &Sandboxed');
     RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', 'Icon', ExpandConstant('"{app}\start.exe"'));
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox\command', '', ExpandConstant('"{app}\start.exe"') +' /box:__ask__ "%1" %*');
+    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox\command', '', ExpandConstant('"{app}\SandMan.exe"') +' /box:__ask__ "%1" %*');
+
+    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', '', 'Run &Sandboxed');
+    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', 'Icon', ExpandConstant('"{app}\start.exe"'));
+    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox\command', '', ExpandConstant('"{app}\SandMan.exe"') +' /box:__ask__ C:\WINDOWS\Explorer.exe "%1"');
   end;
 
 end;

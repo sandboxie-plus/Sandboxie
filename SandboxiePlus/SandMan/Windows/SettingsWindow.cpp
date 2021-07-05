@@ -164,6 +164,16 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 	this->deleteLater();
 }
 
+Qt::CheckState CSettingsWindow__IsContextMenu()
+{
+	QString cmd = CSbieUtils::GetContextMenuStartCmd();
+	if (cmd.contains("sandman.exe", Qt::CaseInsensitive)) // set up
+		return Qt::PartiallyChecked; // checked
+	if (!cmd.isEmpty())
+		return Qt::PartiallyChecked; // partialy checked probably sbiectrl.exe
+	return Qt::Unchecked; // unchecked, not set up
+}
+
 void CSettingsWindow::LoadSettings()
 {
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
@@ -171,13 +181,13 @@ void CSettingsWindow::LoadSettings()
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
 	if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
 		if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
-			ui.chkSvcStart->setChecked(true);
-		else
 			ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
+		else
+			ui.chkSvcStart->setChecked(true);
 	} else
 		ui.chkSvcStart->setChecked(false);
 
-	ui.chkShellMenu->setCheckState((Qt::CheckState)CSbieUtils::IsContextMenu());
+	ui.chkShellMenu->setCheckState(CSettingsWindow__IsContextMenu());
 
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
 
@@ -273,7 +283,7 @@ void CSettingsWindow::SaveSettings()
 	} else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
 		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
 
-	if (ui.chkShellMenu->checkState() != CSbieUtils::IsContextMenu())
+	if (ui.chkShellMenu->checkState() != CSettingsWindow__IsContextMenu())
 	{
 		if (ui.chkShellMenu->isChecked()) {
 			CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",

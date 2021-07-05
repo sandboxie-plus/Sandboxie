@@ -75,8 +75,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 
-	/*ui.tabs->setTabPosition(QTabWidget::West);
-	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));*/
+	ui.tabs->setTabPosition(QTabWidget::West);
+	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Maintenance"));
@@ -167,11 +167,11 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 Qt::CheckState CSettingsWindow__IsContextMenu()
 {
 	QString cmd = CSbieUtils::GetContextMenuStartCmd();
-	if (cmd.contains("sandman.exe", Qt::CaseInsensitive)) // set up
-		return Qt::PartiallyChecked; // checked
-	if (!cmd.isEmpty())
-		return Qt::PartiallyChecked; // partialy checked probably sbiectrl.exe
-	return Qt::Unchecked; // unchecked, not set up
+	if (cmd.contains("sandman.exe", Qt::CaseInsensitive)) 
+		return Qt::Checked; // set up and sandman
+	if (!cmd.isEmpty()) // ... probably sbiectrl.exe
+		return Qt::PartiallyChecked; 
+	return Qt::Unchecked; // not set up
 }
 
 void CSettingsWindow::LoadSettings()

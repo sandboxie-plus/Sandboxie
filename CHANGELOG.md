@@ -6,50 +6,51 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.5 / 5.50.5] - 2021-07-05
 
 ### Added
-- added global hot key to terminate all boxed processes (by default Ctrl+Break)
-- the Run Sandboxed dialog can now handled by the Sandman UI.
-- added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on windows 8 and later
--- note: this allows Chrome and other programs to use the job system for additional isoaltion
-- added librewolf.exe to the list of firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)
+- added global hotkey to terminate all boxed processes (by default Ctrl+Break)
+- the Run Sandboxed dialog can now be handled by the Sandman UI.
+- added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on Windows 8 and later
+-- note: this allows Chrome and other programs to use the job system for additional isolation
+- added librewolf.exe to the list of Firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)
 - added run regedit sandboxed menu command
-- added new support settings tab to sandman UI for updates and stuff
-- added code integrity verification to sbie service and UI
+- added new support settings tab to Sandman UI for updates and stuff
+- added code integrity verification to Sbie service and UI
+- added template for Vivaldi Notes (by isaak654) [#948](https://github.com/sandboxie-plus/Sandboxie/issues/948)
 
 ### Changed
 - Replaced the Process List used by the driver with a much faster Hash Map implementation
--- Note: this change provides an almost static sys call speed of 1.2us irregardless of the running process count
+-- Note: this change provides an almost static system call speed of 1.2us irregardless of the running process count
 -- The old list, with 100 programs running required: 4.5µs; with 200: 12µs; and with 300: 18µs per syscall
--- Note: some of the slow down was affecting also non sandboxed applications due to how the driver handles certein callbacks
-- Replaced the per process Thread List used by the driver with a much faster Hash Map implementation
-- Replaced config section list with a hash map to improve conf performance, and increased line limit to 100000
--- not yet enabled in ptoduction build
+-- Note: some of the slowdown was affecting also non sandboxed applications due to how the driver handles certain callbacks
+- Replaced the per-process Thread List used by the driver with a much faster Hash Map implementation
+- Replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
+-- not yet enabled in production build
 - the presence of default box is only checked on connect
 - the portable dir dialog now shows the directory [#924](https://github.com/sandboxie-plus/Sandboxie/issues/924)
-- when terminated boxed processes we now first try doing that by terminating the job object
-- the driver now by default can terminate problematic processes withut the help of the service
-- box delete routine now retryed up to 10 times to fix [#954](https://github.com/sandboxie-plus/Sandboxie/issues/954)
+- when terminated boxed processes now we first try doing that by terminating the job object
+- the driver now by default can terminate problematic processes without the help of the service
+- box delete routine now retries up to 10 times to fix [#954](https://github.com/sandboxie-plus/Sandboxie/issues/954)
 - Replaced the Process List used by the service with a much faster Hash Map implementation
-- Replaced the per process Thread List used by the service with a much faster Hash Map implementation
+- Replaced the per-process Thread List used by the service with a much faster Hash Map implementation
 
 ### Fixed
-- fixed faulty initialization in SetServiceStatus [#921](https://github.com/sandboxie-plus/Sandboxie/issues/921)
-- fixed buttons position in Classic UI settings [#914](https://github.com/sandboxie-plus/Sandboxie/issues/914)
-- fixed missing password length check in the sandman ui [#925](https://github.com/sandboxie-plus/Sandboxie/issues/925)
+- fixed faulty initialization in SetServiceStatus (by flamencist) [#921](https://github.com/sandboxie-plus/Sandboxie/issues/921)
+- fixed buttons position in Classic UI settings (by isaak654) [#914](https://github.com/sandboxie-plus/Sandboxie/issues/914)
+- fixed missing password length check in the Sandman UI [#925](https://github.com/sandboxie-plus/Sandboxie/issues/925)
 - fixed issues opening job objects by name
-- fixed missing permission check when re opening job object handles (thanks Diversenok)
-- fixed issue with some chromium 90+ hooks affecting pdf plugin in derived browsers [#930](https://github.com/sandboxie-plus/Sandboxie/issues/930) [#817](https://github.com/sandboxie-plus/Sandboxie/issues/817)
-- fixed isues with reconnecting broken LPC ports used for communicationw with SbieSvc
+- fixed missing permission check when reopening job object handles (thanks Diversenok)
+- fixed issue with some Chromium 90+ hooks affecting PDF plugin in derived browsers [#930](https://github.com/sandboxie-plus/Sandboxie/issues/930) [#817](https://github.com/sandboxie-plus/Sandboxie/issues/817)
+- fixed isues with reconnecting broken LPC ports used for communication with SbieSvc
 - fixed minor setting issue [#957](https://github.com/sandboxie-plus/Sandboxie/issues/957)
-- fixed minor ui issue with resource access COM settigns [#958](https://github.com/sandboxie-plus/Sandboxie/issues/958)
+- fixed minor UI issue with resource access COM settings [#958](https://github.com/sandboxie-plus/Sandboxie/issues/958)
 - fixed an issue with NtQueryKey using NtQueryObject instead [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
 - fixed crash in key.c when failing to resolve key paths
-- added workaround for top most modality issue [#873](https://github.com/sandboxie-plus/Sandboxie/issues/873)
--- the notification window is not only top most for 5 seconds
-- fixed an issue deleteing directories introduced in 5.49.5
+- added workaround for topmost modality issue [#873](https://github.com/sandboxie-plus/Sandboxie/issues/873)
+-- the notification window is not only topmost for 5 seconds
+- fixed an issue deleting directories introduced in 5.49.5
 
 ### Removed
-- removed switch for "BlockPassword=n" as it does not seam to be working [#938](https://github.com/sandboxie-plus/Sandboxie/issues/938)
--- use "OpenSamEndpoint=y" to allow for password change in windows 10
+- removed switch for "BlockPassword=n" as it does not seem to be working [#938](https://github.com/sandboxie-plus/Sandboxie/issues/938)
+-- it's recommended to use "OpenSamEndpoint=y" to allow for password change in windows 10
 
 
 

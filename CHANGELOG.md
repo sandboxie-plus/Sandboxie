@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Replaced the Process List used by the driver with a much faster Hash Map implementation
 -- Note: this change provides an almost static system call speed of 1.2us irregardless of the running process count
--- The old list, with 100 programs running required: 4.5µs; with 200: 12µs; and with 300: 18µs per syscall
+-- The old list, with 100 programs running required: 4.5Âµs; with 200: 12Âµs; and with 300: 18Âµs per syscall
 -- Note: some of the slowdown was affecting also non sandboxed applications due to how the driver handles certain callbacks
 - Replaced the per-process Thread List used by the driver with a much faster Hash Map implementation
 - Replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
@@ -39,7 +39,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues opening job objects by name
 - fixed missing permission check when reopening job object handles (thanks Diversenok)
 - fixed issue with some Chromium 90+ hooks affecting PDF plugin in derived browsers [#930](https://github.com/sandboxie-plus/Sandboxie/issues/930) [#817](https://github.com/sandboxie-plus/Sandboxie/issues/817)
-- fixed isues with reconnecting broken LPC ports used for communication with SbieSvc
+- fixed issues with reconnecting broken LPC ports used for communication with SbieSvc
 - fixed minor setting issue [#957](https://github.com/sandboxie-plus/Sandboxie/issues/957)
 - fixed minor UI issue with resource access COM settings [#958](https://github.com/sandboxie-plus/Sandboxie/issues/958)
 - fixed an issue with NtQueryKey using NtQueryObject instead [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
@@ -47,7 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added workaround for topmost modality issue [#873](https://github.com/sandboxie-plus/Sandboxie/issues/873)
 -- the notification window is not only topmost for 5 seconds
 - fixed an issue deleting directories introduced in 5.49.5
-- fixed an issue ng box copies
+- fixed an issue with box copies
 
 ### Removed
 - removed switch for "BlockPassword=n" as it does not seem to be working [#938](https://github.com/sandboxie-plus/Sandboxie/issues/938)
@@ -429,7 +429,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- with those a process could attempt to bypass the sandbox isolation (thanks Diversenok)
 -- old legacy behaviour can be enabled with "StripSystemPrivileges=n" (absolutely NOT Recommended) 
 - added new isolation options "ClosePrintSpooler=y" and "OpenSmartCard=n" 
--- those resources are open by default but for a hardened box it’s desired to close them
+-- those resources are open by default, but for a hardened box it is desired to close them
 - FIXED SECURITY ISSUE: added print spooler filter to prevent printers from being set up outside the sandbox
 -- the filter can be disabled with "OpenPrintSpooler=y"
 - added overwrite prompt when recovering an already existing file
@@ -644,7 +644,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added text filter to template view
 - added new compatibility templates:
 -- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis [#120](https://github.com/sandboxie-plus/Sandboxie/issues/120) [#88](https://github.com/sandboxie-plus/Sandboxie/issues/88)
--- Firefox Quantum, access to Windows’ FontCachePort for compatibility with Windows 7
+-- Firefox Quantum, access to Windowsâ€™ FontCachePort for compatibility with Windows 7
 - added experimental debug option "OriginalToken=y" which lets sandboxed processes retain their original unrestricted token
 -- This option is comparable with "OpenToken=y" and is intended only for testing and debugging, it BREAKS most SECURITY guarantees (!)
 - added debug option "NoSandboxieDesktop=y" it disables the desktop proxy mechanism

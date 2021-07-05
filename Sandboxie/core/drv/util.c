@@ -295,7 +295,7 @@ _FX BOOLEAN MyIsCallerSigned(void)
 
     if (!NT_SUCCESS(status)) {
 
-        Log_Status(MSG_1330, 0, status);
+        //Log_Status(MSG_1330, 0, status);
 
         return FALSE;
     }

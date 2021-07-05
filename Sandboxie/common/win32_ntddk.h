@@ -2284,6 +2284,11 @@ __declspec(dllimport) NTSTATUS __stdcall NtCreateJobObject(
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL);
 
+__declspec(dllimport) NTSTATUS __stdcall NtOpenJobObject(
+    OUT PHANDLE JobHandle,
+    IN  ACCESS_MASK DesiredAccess,
+    IN  POBJECT_ATTRIBUTES ObjectAttributes);
+
 __declspec(dllimport) NTSTATUS __stdcall NtAssignProcessToJobObject(
     HANDLE hJob, HANDLE hProcess);
 

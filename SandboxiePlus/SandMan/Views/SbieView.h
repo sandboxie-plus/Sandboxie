@@ -27,7 +27,6 @@ signals:
 public slots:
 	void						Clear();
 	void						Refresh();
-	void						StoreGroups();
 	void						ReloadGroups();
 
 private slots:
@@ -73,6 +72,8 @@ private:
 	QAction*				m_pMenuRunBrowser;
 	QAction*				m_pMenuRunMailer;
 	QAction*				m_pMenuRunExplorer;
+	QAction*				m_pMenuRunRegEdit;
+	QAction*				m_pMenuRunAppWiz;
 	QAction*				m_pMenuRunCmd;
 	QAction*				m_pMenuRunCmdAdmin;
 	QAction*				m_pMenuMkLink;

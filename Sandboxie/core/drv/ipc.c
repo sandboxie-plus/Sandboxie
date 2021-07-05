@@ -995,7 +995,7 @@ _FX NTSTATUS Ipc_CheckPortObject(
 
 
 _FX NTSTATUS Ipc_CheckJobObject(
-    PROCESS *proc, void *Object, UNICODE_STRING *Name,
+    PROCESS* proc, void* Object, UNICODE_STRING* Name,
     ACCESS_MASK GrantedAccess)
 {
     //
@@ -1006,9 +1006,10 @@ _FX NTSTATUS Ipc_CheckJobObject(
     // is inside the sandbox
     //
 
-    if (!Conf_Get_Boolean(proc->box->name, L"NoAddProcessToJob", 0, FALSE))
-    if (GrantedAccess & (JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE))
-        return STATUS_ACCESS_DENIED;
+    if (!proc->can_use_jobs) {
+        if (GrantedAccess & (JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE))
+            return STATUS_ACCESS_DENIED;
+    }
 
     if (! Name->Length)
         return STATUS_ACCESS_DENIED;

@@ -7,6 +7,35 @@
 #include "../QSbieAPI/SbieUtils.h"
 
 
+QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
+	QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
+	if (type == QStyle::CT_TabBarTab) {
+		s.transpose();
+		if(theGUI->m_DarkTheme)
+			s.setHeight(s.height() * 13 / 10);
+		else
+			s.setHeight(s.height() * 15 / 10);
+		s.setWidth(s.width() * 11 / 10); // for the the icon
+	}
+	return s;
+}
+
+void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
+	if (element == CE_TabBarTabLabel) {
+		if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
+			QStyleOptionTab opt(*tab);
+			opt.shape = QTabBar::RoundedNorth;
+			//opt.iconSize = QSize(32, 32);
+			opt.iconSize = QSize(24, 24);
+			QProxyStyle::drawControl(element, &opt, painter, widget);
+			return;
+		}
+	}
+	QProxyStyle::drawControl(element, option, painter, widget);
+}
+
+
+
 int CSettingsWindow__Chk2Int(Qt::CheckState state)
 {
 	switch (state) {
@@ -45,6 +74,17 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
+
+	/*ui.tabs->setTabPosition(QTabWidget::West);
+	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));*/
+
+	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
+	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Maintenance"));
+	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Wall"));
+	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Support"));
+
+
 	ui.tabs->setCurrentIndex(0);
 
 	ui.uiLang->addItem(tr("Auto Detection"), "");
@@ -57,12 +97,85 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		QString Lang = Locale.nativeLanguageName();
 		ui.uiLang->addItem(Lang, Code);
 	}
+
+	LoadSettings();
+
+	connect(ui.chkShowTray, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+	//connect(ui.chkUseCycles, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+
+	
+	m_WarnProgsChanged = false;
+
+	connect(ui.chkPassRequired, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+	connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
+
+	connect(ui.chkStartBlock, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
+
+	connect(ui.chkStartBlockMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
+	connect(ui.btnAddWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnProg()));
+	connect(ui.btnAddWarnFolder, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnFolder()));
+	connect(ui.btnDelWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnDelWarnProg()));
+
+	connect(ui.btnBrowse, SIGNAL(clicked(bool)), this, SLOT(OnBrowse()));
+
+	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+
+
+	connect(ui.btnAddCompat, SIGNAL(clicked(bool)), this, SLOT(OnAddCompat()));
+	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
+	m_CompatLoaded = 0;
+	m_CompatChanged = false;
+	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
+
+	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
+
+	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnSupport(const QString&)));
+
+
+	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
+
+	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
+	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
+	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+	restoreGeometry(theConf->GetBlob("SettingsWindow/Window_Geometry"));
+}
+
+CSettingsWindow::~CSettingsWindow()
+{
+	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
+}
+
+void CSettingsWindow::OnSupport(const QString& url)
+{
+	QDesktopServices::openUrl(url);
+}
+
+void CSettingsWindow::showCompat()
+{
+	m_CompatLoaded = 2;
+	ui.tabs->setCurrentWidget(ui.tabCompat);
+	show();
+}
+
+void CSettingsWindow::closeEvent(QCloseEvent *e)
+{
+	emit Closed();
+	this->deleteLater();
+}
+
+void CSettingsWindow::LoadSettings()
+{
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
-	ui.chkSvcStart->setChecked(theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true));
-
-	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
+	if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
+		if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
+			ui.chkSvcStart->setChecked(true);
+		else
+			ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
+	} else
+		ui.chkSvcStart->setChecked(false);
 
 	ui.chkShellMenu->setCheckState((Qt::CheckState)CSbieUtils::IsContextMenu());
 
@@ -74,6 +187,9 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 
+	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
+	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Ctrl+Cancel")));
+
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
 	ui.onClose->addItem(tr("Close to Tray"), "ToTray");
@@ -83,8 +199,6 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.chkShowTray->setChecked(theConf->GetBool("Options/ShowSysTray", true));
 
-	connect(ui.chkShowTray, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
-	//connect(ui.chkUseCycles, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
 
 	if (theAPI->IsConnected())
 	{
@@ -100,19 +214,12 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
-		connect(ui.chkPassRequired, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
-		connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
 		ui.chkAdminOnlyFP->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceDisableAdminOnly", false));
 		ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
 
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
-		connect(ui.chkStartBlock, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
 		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyStartRunAccessDenied", true));
-		connect(ui.chkStartBlockMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
-		connect(ui.btnAddWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnProg()));
-		connect(ui.btnAddWarnFolder, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnFolder()));
-		connect(ui.btnDelWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnDelWarnProg()));
-
+		
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("AlertProcess", false))
 			AddWarnEntry(Value, 1);
 		
@@ -137,72 +244,41 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		ui.btnAddCompat->setEnabled(false);
 		ui.btnDelCompat->setEnabled(false);
 	}
-	m_WarnProgsChanged = false;
 
-	connect(ui.btnBrowse, SIGNAL(clicked(bool)), this, SLOT(OnBrowse()));
 
 	int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
 	if (PortableRootDir != -1 && theConf->IsPortable())
 		ui.chkAutoRoot->setChecked(PortableRootDir == 0 ? Qt::Unchecked : Qt::Checked);
 	else
 		ui.chkAutoRoot->setVisible(false);
-	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
 
-	connect(ui.btnAddCompat, SIGNAL(clicked(bool)), this, SLOT(OnAddCompat()));
-	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 
-	m_CompatLoaded = 0;
-	m_CompatChanged = false;
-
-	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
-
-	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
-
-	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
-
-	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
-	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
-	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-
-	restoreGeometry(theConf->GetBlob("SettingsWindow/Window_Geometry"));
+	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
+	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
 
 	OnChange();
 }
 
-CSettingsWindow::~CSettingsWindow()
-{
-	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
-}
-
-void CSettingsWindow::showCompat()
-{
-	m_CompatLoaded = 2;
-	ui.tabs->setCurrentWidget(ui.tabCompat);
-	show();
-}
-
-void CSettingsWindow::closeEvent(QCloseEvent *e)
-{
-	emit Closed();
-	this->deleteLater();
-}
-
-void CSettingsWindow::apply()
+void CSettingsWindow::SaveSettings()
 {
 	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
 
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
-	theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", ui.chkSvcStart->isChecked());
 
-	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
+	if (ui.chkSvcStart->checkState() == Qt::Checked) {
+		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
+		theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+	} else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
+		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
 
 	if (ui.chkShellMenu->checkState() != CSbieUtils::IsContextMenu())
 	{
-		if (ui.chkShellMenu->isChecked())
-			CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
-		else
+		if (ui.chkShellMenu->isChecked()) {
+			CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		} else
 			CSbieUtils::RemoveContextMenu();
 	}
 
@@ -212,6 +288,9 @@ void CSettingsWindow::apply()
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
 
+	theConf->SetValue("Options/EnablePanicKey", ui.chkPanic->isChecked());
+	theConf->SetValue("Options/PanicKeySequence", ui.keyPanic->keySequence().toString());
+	
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
 	theConf->SetValue("Options/OnClose", ui.onClose->currentData());
@@ -305,9 +384,15 @@ void CSettingsWindow::apply()
 	emit OptionsChanged();
 }
 
+void CSettingsWindow::apply()
+{
+	SaveSettings();
+	LoadSettings();
+}
+
 void CSettingsWindow::ok()
 {
-	apply();
+	SaveSettings();
 
 	this->close();
 }

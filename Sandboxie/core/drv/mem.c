@@ -171,3 +171,4 @@ int __cdecl memcmp(
 	return (RtlCompareMemory(_Buf1, _Buf2, _Size) == _Size) ? 0 : 1;
 }
 #endif
+

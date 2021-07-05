@@ -228,7 +228,7 @@ _FX BOOLEAN Process_Low_Inject(
             dummy_proc.create_time = create_time;
             dummy_proc.image_name = (WCHAR *)image_name;
 
-            Process_CancelProcess(&dummy_proc);
+            Process_TerminateProcess(&dummy_proc);
         }
 
 		Log_Status_Ex_Process(MSG_1231, 0x22, status, image_name, session_id, process_id);

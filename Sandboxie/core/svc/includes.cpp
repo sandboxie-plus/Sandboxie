@@ -34,11 +34,15 @@ extern "C" {
 
 #include "common/pool.c"
 
+#include "common/map.c"
+
 #define CRC_WITH_ADLER32
 #include "common/crc.c"
 
 #define PATTERN XPATTERN
 #include "common/pattern.c"
+
+#include "common/verify.c"
 
 #ifdef __cplusplus
 } // extern "C"

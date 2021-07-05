@@ -51,7 +51,9 @@ struct _PROCESS {
     // changes to the linked list of PROCESS blocks are synchronized by
     // an exclusive lock on Process_ListLock
 
+#ifndef USE_PROCESS_MAP
     LIST_ELEM list_elem;
+#endif
 
     // process id
 
@@ -95,7 +97,11 @@ struct _PROCESS {
 
     PERESOURCE threads_lock;
 
+#ifdef USE_PROCESS_MAP
+    HASH_MAP thread_map;
+#else
     LIST threads;
+#endif
 
     // flags
 
@@ -120,6 +126,7 @@ struct _PROCESS {
     BOOLEAN change_notify_token_flag;
 
     BOOLEAN in_pca_job;
+    BOOLEAN can_use_jobs;
 
     UCHAR   create_console_flag;
 
@@ -263,6 +270,18 @@ const WCHAR *Process_MatchPath(
     BOOLEAN *is_open, BOOLEAN *is_closed);
 
 
+// Process_GetConf:  retrives a configuration data value for a given process
+// use with Conf_AdjustUseCount to make sure the returned pointer is valid
+
+const WCHAR* Process_GetConf(PROCESS* proc, const WCHAR* setting);
+
+
+// Process_GetConf_bool:  parses a y/n setting.  this function does not
+// have to be protected with Conf_AdjustUseCount
+
+BOOLEAN Process_GetConf_bool(PROCESS* proc, const WCHAR* setting, BOOLEAN def);
+
+
 // Build a standard entry for hooks.  The standard entry calls
 // Process_Find(NULL, NULL).  If non-zero (this includes -1 for
 // PROCESS_TERMINATED), the entry jumps to NewProc, where
@@ -281,10 +300,6 @@ void Process_DisableHookEntry(ULONG_PTR HookEntry);
 
 PROCESS *Process_GetCurrent(void);
 
-
-// Check for use of multiple sandboxes at once
-
-BOOLEAN Process_CheckTooManyBoxes(const BOX *box);
 
 
 // Returns ProcessName.exe for idProcess, allocated from the specified pool.
@@ -362,11 +377,17 @@ void Process_LogMessage(PROCESS *proc, ULONG msgid);
 
 //void Process_TrackProcessLimit(PROCESS *proc);
 
+// Terminate process
+
+BOOLEAN Process_TerminateProcess(PROCESS *proc);
 
 // Cancel process through SbieSvc
 
-void Process_CancelProcess(PROCESS *proc);
+BOOLEAN Process_CancelProcess(PROCESS *proc);
 
+// Terminate a process using a helper thread
+
+BOOLEAN Process_ScheduleKill(PROCESS *proc);
 
 // Check if process is running within a
 // Program Compatibility Assistant (PCA) job
@@ -416,8 +437,13 @@ NTSTATUS Process_Api_Enum(PROCESS *proc, ULONG64 *parms);
 //---------------------------------------------------------------------------
 
 
+#ifdef USE_PROCESS_MAP
+extern HASH_MAP Process_Map;
+extern HASH_MAP Process_MapDfp;
+#else
 extern LIST Process_List;
 extern LIST Process_ListDfp;
+#endif
 extern PERESOURCE Process_ListLock;
 
 extern volatile BOOLEAN Process_ReadyToSandbox;

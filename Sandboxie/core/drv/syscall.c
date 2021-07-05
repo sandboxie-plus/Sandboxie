@@ -29,6 +29,7 @@
 #include "api.h"
 #include "util.h"
 #include "session.h"
+#include "conf.h"
 
 
 
@@ -733,7 +734,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     if (proc->terminated) {
 
-        Process_CancelProcess(proc);
+        Process_TerminateProcess(proc);
         return STATUS_PROCESS_IS_TERMINATING;
     }
 
@@ -902,9 +903,9 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         DbgPrint("[syscall] request p=%06d t=%06d - END   (%0X)  %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), status, entry->name);
     }*/
 
-    if (proc->terminated) {
+    if (proc->terminated || (proc && Conf_Get_Boolean(proc->box->name, L"screwUp", 0, FALSE))) {
 
-        Process_CancelProcess(proc);
+        Process_TerminateProcess(proc);
         return STATUS_PROCESS_IS_TERMINATING;
     }
 
@@ -951,7 +952,7 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     // caller must be our service process
     //
 
-    if (proc)// || (PsGetCurrentProcessId() != Api_ServiceProcessId))
+    if (proc || (PsGetCurrentProcessId() != Api_ServiceProcessId))
         return STATUS_ACCESS_DENIED;
 
     //

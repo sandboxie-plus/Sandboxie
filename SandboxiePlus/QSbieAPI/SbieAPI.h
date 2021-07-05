@@ -60,7 +60,7 @@ public:
 	virtual SB_STATUS		CreateBox(const QString& BoxName);
 
 	virtual SB_STATUS		UpdateProcesses(bool bKeep);
-	virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
+	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
 

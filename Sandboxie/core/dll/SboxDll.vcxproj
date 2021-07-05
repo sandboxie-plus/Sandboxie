@@ -375,6 +375,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\apps\com\common.h" />
     <ClInclude Include="..\..\common\pattern.h" />
     <ClInclude Include="..\..\common\pool.h" />
     <ClInclude Include="..\..\common\stream.h" />

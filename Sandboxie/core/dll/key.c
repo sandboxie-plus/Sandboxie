@@ -21,6 +21,7 @@
 
 
 #include "dll.h"
+#include "obj.h"
 #include "core/svc/FileWire.h"
 #include "core/drv/api_defs.h"
 #include <stdio.h>
@@ -447,25 +448,23 @@ _FX NTSTATUS Key_GetName(
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-        status = __sys_NtQueryKey(
-            RootDirectory, KeyNameInformation, name, length, &length);
+        status = Obj_GetObjectName(RootDirectory, name, &length);
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+        if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
             name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-            status = __sys_NtQueryKey(
-                RootDirectory, KeyNameInformation, name, length, &length);
+            status = Obj_GetObjectName(RootDirectory, name, &length);
         }
 
         if (! NT_SUCCESS(status))
             return status;
 
-        *OutTruePath = ((KEY_NAME_INFORMATION *)name)->Name;
+        *OutTruePath = ((OBJECT_NAME_INFORMATION *)name)->Name.Buffer;
 
         name = (*OutTruePath)
-             + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
+             + ((OBJECT_NAME_INFORMATION *)name)->Name.Length / sizeof(WCHAR);
 
         if (objname_len) {
 
@@ -821,13 +820,16 @@ _FX NTSTATUS Key_FixNameWow64(
         Dll_Free(NewPtr);
     File_NtCloseImpl(handle);
 
-    //
-    // the result might contain \Wow6432Node\Wow6432Node,
-    // so strip one of them away
-    //
+    if (NT_SUCCESS(status)) {
 
-    if (Key_FixNameWow64_3(OutTruePath))
-        Key_FixNameWow64_3(OutCopyPath);
+        //
+        // the result might contain \Wow6432Node\Wow6432Node,
+        // so strip one of them away
+        //
+
+        if (Key_FixNameWow64_3(OutTruePath))
+            Key_FixNameWow64_3(OutCopyPath);
+    }
 
     return status;
 }

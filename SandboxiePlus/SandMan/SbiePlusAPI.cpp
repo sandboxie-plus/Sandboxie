@@ -375,6 +375,17 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
+{
+	if (m_bLogApiFound)
+		return eHasLogApi;
+	if (m_iUnsecureDebugging != 0)
+		return eInsecure;
+	if (m_bSecurityRestricted)
+		return eHardened;
+	return eDefault;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // CSbieProcess
 //

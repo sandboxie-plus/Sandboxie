@@ -599,8 +599,8 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
     if (proc) // is caller sandboxed?
         return STATUS_ACCESS_DENIED;
 
-    //if (PsGetCurrentProcessId() != Api_ServiceProcessId)
-    //    return STATUS_ACCESS_DENIED;
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId)
+        return STATUS_ACCESS_DENIED;
 
     if (pArgs->port_name.val == NULL)
         return STATUS_INVALID_PARAMETER;

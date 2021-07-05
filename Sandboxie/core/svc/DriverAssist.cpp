@@ -526,25 +526,20 @@ void DriverAssist::UnmountHive(void *_msg)
 
     bool ShouldUnmount = false;
 
-    ULONG *pids = (ULONG *)HeapAlloc(GetProcessHeap(), 0, PAGE_SIZE);
+    for (retries = 0; retries < 20; ++retries) {
 
-    if (pids) {
+        ULONG count = 0;
+        rc = SbieApi_EnumProcessEx(
+                            msg->boxname, FALSE, msg->session_id, NULL, &count);
+        if (rc == 0 && count == 0) {
 
-        for (retries = 0; retries < 20; ++retries) {
-
-            rc = SbieApi_EnumProcessEx(
-                                msg->boxname, FALSE, msg->session_id, pids, NULL);
-            if (rc == 0 && *pids == 0) {
-
-                ShouldUnmount = true;
-                break;
-            }
-
-            Sleep(100);
+            ShouldUnmount = true;
+            break;
         }
 
-        HeapFree(GetProcessHeap(), 0, pids);
+        Sleep(100);
     }
+
 
     //
     // unmount.  on Windows 2000, the process may appear to disappear

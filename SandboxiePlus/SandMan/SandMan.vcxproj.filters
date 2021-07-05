@@ -102,6 +102,9 @@
     <ClCompile Include="Views\TraceView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\SelectBoxWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -157,6 +160,9 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\SelectBoxWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -191,6 +197,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\NewBoxWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\SelectBoxWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

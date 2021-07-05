@@ -463,6 +463,11 @@ typedef NTSTATUS (*P_NtOpenFile)(
     IN  ULONG ShareAccess,
     IN  ULONG OpenOptions);
 
+typedef NTSTATUS (*P_NtOpenJobObject)(
+	OUT PHANDLE JobHandle,
+	IN ACCESS_MASK DesiredAccess,
+	IN POBJECT_ATTRIBUTES ObjectAttributes);
+
 typedef NTSTATUS (*P_NtOpenKey)(
     OUT PHANDLE KeyHandle,
     IN  ACCESS_MASK DesiredAccess,

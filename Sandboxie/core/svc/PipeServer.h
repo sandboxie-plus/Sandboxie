@@ -27,9 +27,11 @@
 #include <windows.h>
 #include "common/win32_ntddk.h"
 #include "common/list.h"
+#include "common/map.h"
 #include "common/pool.h"
 #include "msgids.h"
 
+#define USE_PROCESS_MAP
 
 /* Recommended maximum length for any single element in a request packet. */
 
@@ -128,6 +130,12 @@ public:
 
     MSG_HEADER *Call(MSG_HEADER *msg);
 
+    /*
+     * Checks if the calling process has a valid signature
+     */
+
+    static bool IsCallerSigned();
+
 protected:
 
     /*
@@ -135,6 +143,12 @@ protected:
      */
 
     PipeServer();
+
+    /*
+     * Private initializator
+     */
+
+    bool Init();
 
     /*
      * Static wrapper for thread function
@@ -200,8 +214,16 @@ protected:
 
 protected:
 
+    void PortDisconnectHelper(struct tagCLIENT_PROCESS* clientProcess, struct tagCLIENT_THREAD* clientThread);
+
+    void PortFindClientUnsafe(const CLIENT_ID& ClientId, struct tagCLIENT_PROCESS *&clientProcess, struct tagCLIENT_THREAD *&clientThread);
+
     LIST m_targets;
+#ifdef USE_PROCESS_MAP
+    HASH_MAP m_client_map;
+#else
     LIST m_clients;
+#endif
     CRITICAL_SECTION m_lock;
     POOL *m_pool;
     ULONG m_TlsIndex;

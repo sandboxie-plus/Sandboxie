@@ -428,6 +428,7 @@ signals:
 
 public slots:
 	virtual void		Show();
+	virtual void		Poke();
 
 	virtual void		ReloadHiddenMessages();
 private slots:
@@ -447,6 +448,8 @@ private slots:
 protected:
 	virtual void		closeEvent(QCloseEvent *e);
 
+	void				timerEvent(QTimerEvent* pEvent);
+
 	virtual void		AddEntry(CPopUpEntry* pEntry);
 	virtual void		RemoveEntry(CPopUpEntry* pEntry);
 
@@ -459,5 +462,7 @@ protected:
 private:
 	bool				m_ResetPosition;
 	QAction*			m_pActionCopy;
+	int					m_uTimerID;
+	int					m_iTopMost;
 	Ui::PopUpWindow ui;
 };

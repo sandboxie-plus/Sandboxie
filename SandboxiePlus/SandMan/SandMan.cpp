@@ -19,6 +19,8 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/ListItemModel.h"
 #include "Views/TraceView.h"
+#include "Windows/SelectBoxWindow.h"
+#include "../UGlobalHotkey/uglobalhotkeys.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -26,6 +28,7 @@ CSbiePlusAPI* theAPI = NULL;
 #include <wtypes.h>
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
+
 
 //BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result);
 
@@ -177,6 +180,12 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTraceView = new CTraceView(this);
 	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
 
+	m_pHotkeyManager = new UGlobalHotkeys(this);
+	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
+	SetupHotKeys();
+
+	for (int i = 0; i < eMaxColor; i++)
+		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
 
 	// Tray
 	QIcon Icon;
@@ -502,6 +511,17 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	QApplication::quit();
 }
 
+QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
+{
+	EBoxColors color = eYelow;
+	switch (boxType) {
+	case CSandBoxPlus::eHardened:	color = eOrang; break;
+	case CSandBoxPlus::eHasLogApi:	color = eRed; break;
+	case CSandBoxPlus::eInsecure:	color = eMagenta; break;
+	}
+	return inUse ? m_BoxIcons[color].second : m_BoxIcons[color].first;
+}
+
 bool CSandMan::IsFullyPortable()
 {
 	QString SbiePath = theAPI->GetSbiePath();
@@ -519,6 +539,12 @@ void CSandMan::OnMessage(const QString& Message)
 			show();
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
+	}
+	else if (Message.left(3) == "Run")
+	{
+		QString CmdLine = Message.mid(4);
+
+		RunSandboxed(QStringList(CmdLine));
 	}
 	else if (Message.left(6) == "Status")
 	{
@@ -556,27 +582,21 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
+void CSandMan::RunSandboxed(const QStringList& Commands)
+{
+	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands);
+	pSelectBoxWindow->show();
+}
+
 void CSandMan::dropEvent(QDropEvent* e)
 {
-	QStringList Boxes;
-	foreach(const CSandBoxPtr &pBox, theAPI->GetAllBoxes())
-	{
-		if (pBox->IsEnabled())
-			Boxes.append(pBox->GetName().replace("_", " "));
-	}
-
-	bool ok;
-	QString box = QInputDialog::getItem(this, "Sandboxie-Plus", tr("Select box:"), Boxes, 0, false, &ok);
-	if (!ok || box.isEmpty())
-		return;
-
+	QStringList Commands;
 	foreach(const QUrl & url, e->mimeData()->urls()) {
-		if (!url.isLocalFile())
-			continue;
-		QString FileName = url.toLocalFile().replace("/", "\\");
-		
-		theAPI->RunStart(box.replace(" ", "_"), FileName);
+		if (url.isLocalFile())
+			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
+
+	RunSandboxed(Commands);
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)
@@ -589,11 +609,6 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	if (theAPI->IsConnected())
 	{
 		SB_STATUS Status = theAPI->ReloadBoxes();
-
-		if (!Status.IsError() && !theAPI->GetAllBoxes().contains("defaultbox")) {
-			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
-			theAPI->CreateBox("DefaultBox");
-		}
 
 		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
 
@@ -717,7 +732,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
-		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox);
+		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
 		if (pRecoveryWindow->FindFiles() == 0)
 			delete pRecoveryWindow;
 		else if (pRecoveryWindow->exec() != 1)
@@ -762,11 +777,16 @@ void CSandMan::OnStatusChanged()
 		{
 			appTitle.append(tr("   -   Portable"));
 
+			QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox").replace("/", "\\");
+
 			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
 			if (PortableRootDir == -1)
 			{
 				bool State = false;
-				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?")
+				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
+					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\r\nYes will choose: %1\r\nNo will choose: %2")
+					.arg(BoxPath)
+					.arg("C:\\Sandbox") // todo resolve os drive properly
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
 				if (State)
@@ -774,10 +794,7 @@ void CSandMan::OnStatusChanged()
 			}
 
 			if (PortableRootDir)
-			{
-				QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox/%SANDBOX%").replace("/", "\\");
-				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath);
-			}
+				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath + "\\%SANDBOX%");
 		}
 
 		if (theConf->GetBool("Options/AutoRunSoftCompat", true))
@@ -802,6 +819,14 @@ void CSandMan::OnStatusChanged()
 
 		if (theConf->GetBool("Options/WatchIni", true))
 			theAPI->WatchIni(true);
+
+
+		SB_STATUS Status = theAPI->ReloadBoxes();
+
+		if (!Status.IsError() && !theAPI->GetAllBoxes().contains("defaultbox")) {
+			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
+			theAPI->CreateBox("DefaultBox");
+		}
 	}
 	else
 	{
@@ -857,6 +882,26 @@ void CSandMan::OnMenuHover(QAction* action)
 		m_pUninstallSvc->setEnabled(SvcInstalled);
 
 		//m_pMenuStopAll - always enabled
+	}
+}
+
+#define HK_PANIC 1
+
+void CSandMan::SetupHotKeys()
+{
+	m_pHotkeyManager->unregisterAllHotkeys();
+
+	if (theConf->GetBool("Options/EnablePanicKey", false))
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Ctrl+Cancel"), HK_PANIC);
+}
+
+void CSandMan::OnHotKey(size_t id)
+{
+	switch (id)
+	{
+	case HK_PANIC: 
+		theAPI->TerminateAll();
+		break;
 	}
 }
 
@@ -1281,6 +1326,8 @@ void CSandMan::UpdateSettings()
 
 	//m_pBoxView->UpdateRunMenu();
 
+	SetupHotKeys();
+
 	if (theConf->GetBool("Options/ShowSysTray", true))
 		m_pTrayIcon->show();
 	else
@@ -1473,6 +1520,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
+	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 charakters"); break;
 	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
 	}
 
@@ -1532,7 +1580,6 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 			}
 			show();
 		case QSystemTrayIcon::Trigger:
-#ifdef WIN32
 			if (isVisible() && !TriggerSet)
 			{
 				TriggerSet = true;
@@ -1546,7 +1593,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					SetForegroundWindow(MainWndHandle);
 				} );
 			}
-#endif
+			m_pPopUpWindow->Poke();
 			break;
 	}
 }
@@ -1905,6 +1952,7 @@ void CSandMan::SetUITheme()
 		QApplication::setPalette(m_DefaultPalett);
 	}
 
+	m_DarkTheme = bDark;
 	CTreeItemModel::SetDarkMode(bDark);
 	CListItemModel::SetDarkMode(bDark);
 	CPopUpWindow::SetDarkMode(bDark);
@@ -2022,8 +2070,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
 
 			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, 10, 10, 32, 32, hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
-			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, 60, 10, 180, 50, hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
-			CreateWindow(L"Static", L"", WS_CHILD, 60, 70, 180, 50, hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, 60, 10, 180, 65, hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
+			CreateWindow(L"Static", L"", WS_CHILD, 60, 80, 180, 50, hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
 
 			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
 
@@ -2075,7 +2123,7 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	//               child windows with the same parent window.
 
 	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
-		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 275, 100, NULL, 0, hInstance, NULL);
+		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 275, 115, NULL, 0, hInstance, NULL);
 
 	HFONT hFont = CreateFont(13, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
 	

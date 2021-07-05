@@ -422,6 +422,8 @@ _FX NTSTATUS Session_Api_Leader(PROCESS *proc, ULONG64 *parms)
 
         if (proc)
             status = STATUS_NOT_IMPLEMENTED;
+        //else if (!MyIsCallerSigned()) 
+        //    status = STATUS_ACCESS_DENIED;
         else {
 
             session = Session_Get(TRUE, -1, &irql);

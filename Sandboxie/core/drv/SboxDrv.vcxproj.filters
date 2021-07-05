@@ -124,6 +124,13 @@
     <ClCompile Include="file_ctrl.c">
       <Filter>file</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\map.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pool.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="verify.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />
@@ -182,6 +189,12 @@
       <Filter>syscall</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\stream.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\map.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pool.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

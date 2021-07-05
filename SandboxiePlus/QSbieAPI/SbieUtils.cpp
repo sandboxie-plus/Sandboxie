@@ -220,11 +220,12 @@ bool CSbieUtils::CheckRegValue(const wchar_t* key)
 	return true;
 }
 
-void CSbieUtils::AddContextMenu(const QString& StartPath)
+void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPath)
 {
 	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
 
-	CreateShellEntry(L"*", L"Run &Sandboxed", start_path, start_path + L" /box:__ask__ \"%1\" %*");
+	CreateShellEntry(L"*", L"Run &Sandboxed", icon_path, start_path + L" /box:__ask__ \"%1\" %*");
 
 	wstring explorer_path(512, L'\0');
 
@@ -249,7 +250,7 @@ void CSbieUtils::AddContextMenu(const QString& StartPath)
 		explorer_path.append(L"\\explorer.exe");
 	}
 
-	CreateShellEntry(L"Folder", L"Explore &Sandboxed", start_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
+	CreateShellEntry(L"Folder", L"Explore &Sandboxed", icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
 }
 
 void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)

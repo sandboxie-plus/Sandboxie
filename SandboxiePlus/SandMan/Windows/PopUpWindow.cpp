@@ -39,14 +39,18 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 	m_pActionCopy->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pActionCopy);
 
-	// set always on top
-	SetWindowPos((HWND)this->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	m_iTopMost = 0;
+	SetWindowPos((HWND)this->winId(), 0, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	
+	m_uTimerID = startTimer(1000);
 
 	m_ResetPosition = !restoreGeometry(theConf->GetBlob("PopUpWindow/Window_Geometry"));
 }
 
 CPopUpWindow::~CPopUpWindow()
 {
+	killTimer(m_uTimerID);
+
 	theConf->SetBlob("PopUpWindow/Window_Geometry", saveGeometry());
 }
 
@@ -79,6 +83,8 @@ void CPopUpWindow::RemoveEntry(CPopUpEntry* pEntry)
 
 void CPopUpWindow::Show()
 {
+	Poke();
+
 	QScreen *screen = this->windowHandle()->screen();
 	QRect scrRect = screen->availableGeometry();
 
@@ -100,6 +106,14 @@ void CPopUpWindow::Show()
 	this->show();
 }
 
+void CPopUpWindow::Poke()
+{
+	if (!this->isVisible() || m_iTopMost <= -5) {
+		SetWindowPos((HWND)this->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		m_iTopMost = 5;
+	}
+}
+
 void CPopUpWindow::closeEvent(QCloseEvent *e)
 {
 	for (int i = 0; i < ui.table->rowCount(); i++)
@@ -115,6 +129,16 @@ void CPopUpWindow::closeEvent(QCloseEvent *e)
 	e->ignore();
 
 	this->hide();
+}
+
+void CPopUpWindow::timerEvent(QTimerEvent* pEvent)
+{
+	if (pEvent->timerId() != m_uTimerID)
+		return;
+
+	if (m_iTopMost > -5 && (--m_iTopMost == 0)) {
+		SetWindowPos((HWND)this->winId(), HWND_NOTOPMOST , 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	}
 }
 
 void CPopUpWindow::AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)

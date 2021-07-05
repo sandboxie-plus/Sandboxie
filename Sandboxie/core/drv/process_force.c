@@ -70,7 +70,9 @@ typedef struct _FORCE_PROCESS {
 
 typedef struct _FORCE_PROCESS_2 {
 
+#ifndef USE_PROCESS_MAP
     LIST_ELEM list_elem;
+#endif
     HANDLE pid;
     BOOLEAN silent;
 
@@ -1648,7 +1650,11 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
         proc->pid = ProcessId;
         proc->silent = FALSE;
 
+#ifdef USE_PROCESS_MAP
+        map_insert(&Process_MapDfp, ProcessId, proc, 0);
+#else
         List_Insert_After(&Process_ListDfp, NULL, proc);
+#endif
 
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
@@ -1665,23 +1671,34 @@ _FX BOOLEAN Process_DfpInsert(HANDLE ParentId, HANDLE ProcessId)
 
         added = FALSE;
 
+#ifdef USE_PROCESS_MAP
+        proc = map_get(&Process_MapDfp, ParentId);
+        if (proc) {
+#else
         proc = List_Head(&Process_ListDfp);
         while (proc) {
 
             if (proc->pid == ParentId) {
+#endif
 
                 proc = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS_2));
                 proc->pid = ProcessId;
                 proc->silent = FALSE;
 
+#ifdef USE_PROCESS_MAP
+                map_insert(&Process_MapDfp, ProcessId, proc, 0);
+#else
                 List_Insert_After(&Process_ListDfp, NULL, proc);
+#endif
 
                 added = TRUE;
 
+#ifndef USE_PROCESS_MAP
                 break;
             }
 
             proc = List_Next(proc);
+#endif
         }
     }
 
@@ -1698,6 +1715,11 @@ _FX void Process_DfpDelete(HANDLE ProcessId)
 {
     FORCE_PROCESS_2 *proc;
 
+#ifdef USE_PROCESS_MAP
+    proc = map_remove(&Process_MapDfp, ProcessId);
+    if(proc)
+        Mem_Free(proc, sizeof(FORCE_PROCESS_2));
+#else
     proc = List_Head(&Process_ListDfp);
     while (proc) {
 
@@ -1712,6 +1734,7 @@ _FX void Process_DfpDelete(HANDLE ProcessId)
 
         proc = List_Next(proc);
     }
+#endif
 }
 
 
@@ -1729,10 +1752,15 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+    proc = map_get(&Process_MapDfp, ProcessId);
+    if (proc) {
+#else
     proc = List_Head(&Process_ListDfp);
     while (proc) {
 
         if (proc->pid == ProcessId) {
+#endif
 
             if (*silent)
                 proc->silent = TRUE;
@@ -1740,10 +1768,12 @@ _FX BOOLEAN Process_DfpCheck(HANDLE ProcessId, BOOLEAN *silent)
                 *silent = proc->silent;
 
             found = TRUE;
+#ifndef USE_PROCESS_MAP
             break;
         }
 
         proc = List_Next(proc);
+#endif
     }
 
     ExReleaseResourceLite(Process_ListLock);

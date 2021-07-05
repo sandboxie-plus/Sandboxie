@@ -571,6 +571,7 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
         L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"k-meleon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"librewolf.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
@@ -776,6 +777,7 @@ _FX ULONG_PTR Dll_Ordinal1(
                 CloseHandle(heventProcessStart);
             }
         }
+
         //
         // workaround for Program Compatibility Assistant (PCA), we have
         // to start a second instance of this process outside the PCA job,

@@ -37,6 +37,7 @@
 
 #include "common/defines.h"
 #include "common/list.h"
+#include "common/map.h"
 #include "common/pool.h"
 #include "common/ntproto.h"
 #include "log.h"
@@ -65,6 +66,8 @@
 #define TRACE_ALLOW             1
 #define TRACE_DENY              2
 #define TRACE_IGNORE            4
+
+#define USE_PROCESS_MAP
 
 //new FILE_INFORMATION_CLASS type not defined in current wdm.h used in windows 10 FCU
 #define SB_FileRenameInformationEx 65

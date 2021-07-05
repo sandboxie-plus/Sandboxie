@@ -94,6 +94,7 @@ CRecoveryWindow::~CRecoveryWindow()
 
 int	CRecoveryWindow::exec()
 {
+	//QDialog::setWindowModality(Qt::WindowModal);
 	ui.btnDeleteAll->setVisible(true);
 	return QDialog::exec();
 }

@@ -72,6 +72,19 @@ public:
 
 	const QSet<QString>&	GetRecentPrograms()					{ return m_RecentPrograms; }
 
+	enum EBoxTypes
+	{
+		eDefault = 0,
+		eHardened,
+		eHasLogApi,
+		eInsecure,
+
+		eUnknown = -1
+	};
+
+	EBoxTypes				GetType() const;
+
+
 protected:
 	friend class CSbiePlusAPI;
 	virtual bool			CheckOpenToken() const;

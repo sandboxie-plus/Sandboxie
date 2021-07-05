@@ -7,8 +7,6 @@
 CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	: QDialog(parent)
 {
-	this->setWindowTitle(tr("Sandboxie-Plus - Create New Box"));
-
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
@@ -21,6 +19,7 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	setWindowFlags(flags);
 
 	ui.setupUi(this);
+	this->setWindowTitle(tr("Sandboxie-Plus - Create New Box"));
 
 	connect(ui.buttonBox, SIGNAL(accepted()), SLOT(CreateBox()));
 	connect(ui.buttonBox, SIGNAL(rejected()), SLOT(reject()));

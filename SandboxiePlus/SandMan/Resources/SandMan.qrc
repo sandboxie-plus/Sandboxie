@@ -47,6 +47,10 @@
         <file>SandManN.png</file>
         <file>Actions/finder.png</file>
         <file>Actions/Tree.png</file>
+        <file>Actions/Support.png</file>
+        <file>HelpingHand.png</file>
+        <file>Actions/RegEdit.png</file>
+        <file>Actions/Software.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

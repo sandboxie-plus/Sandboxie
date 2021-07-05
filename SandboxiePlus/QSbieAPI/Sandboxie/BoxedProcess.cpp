@@ -208,7 +208,7 @@ bool CBoxedProcess::InitProcessInfo()
 
 bool CBoxedProcess::InitProcessInfoEx()
 {
-	if(m_ImageType == -1)
+	if(m_ImageType == -1 && m_pBox)
 		m_ImageType = m_pBox->Api()->GetImageType(m_ProcessId);
 
 	return true;
@@ -306,8 +306,3 @@ bool CBoxedProcess::IsSuspended() const
 	return isSuspended;
 }
 */
-
-QString CBoxedProcess::GetBoxName() const 
-{ 
-	return m_pBox->GetName(); 
-}

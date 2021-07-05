@@ -46,10 +46,10 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = -1; boxType = -1; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; boxType = -1; }
 
 		CSandBoxPtr	pBox;
-		int			inUse;
+		bool		inUse;
 		int			boxType;
 
 		CBoxedProcessPtr pProcess;
@@ -68,19 +68,6 @@ protected:
 	//virtual QVariant		GetDefaultIcon() const;
 
 private:
-	enum EBoxColors
-	{
-		eYelow = 0,
-		eRed,
-		eGreen,
-		eBlue,
-		eCyan,
-		eMagenta,
-		eOrang,
-		eMaxColor
-	};
-
-	QMap<EBoxColors, QPair<QIcon, QIcon> > m_BoxIcons;
 
 	//QIcon m_BoxEmpty;
 	//QIcon m_BoxInUse;

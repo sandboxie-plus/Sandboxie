@@ -80,9 +80,6 @@
 #define FGN_REPARSED_CLOSED_PATH    0x0200
 #define FGN_REPARSED_WRITE_PATH     0x0400
 
-#define PATH_IS_BOXED(f)     (((f) & FGN_IS_BOXED_PATH) != 0)
-#define PATH_NOT_BOXED(f)    (((f) & FGN_IS_BOXED_PATH) == 0)
-
 
 #ifndef  _WIN64
 #define WOW64_FS_REDIR
@@ -477,7 +474,7 @@ _FX NTSTATUS File_GetName(
             }
         }
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+        if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
             name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
@@ -5845,7 +5842,6 @@ _FX NTSTATUS File_SetDisposition(
     WCHAR *DosPath;
     NTSTATUS status;
     ULONG mp_flags;
-    BOOLEAN is_direct_file;
 
     //
     // check if the specified path is an open or closed path
@@ -5855,7 +5851,6 @@ _FX NTSTATUS File_SetDisposition(
 
     mp_flags = 0;
     DosPath = NULL;
-    is_direct_file = FALSE;
 
     Dll_PushTlsNameBuffer(TlsData);
 
@@ -5867,6 +5862,12 @@ _FX NTSTATUS File_SetDisposition(
         status = File_GetName(
                     FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
 
+        //
+        // fix-me: this is broken, instead of deleting files on close it deletes them instantly
+        //          possible workarounds use __sys_NtSetInformationFile for files that reside only in the sandbox
+        //          or implement proper deletion on handle close in File_NtCloseImpl
+        //
+
         if (NT_SUCCESS(status)) {
 
             mp_flags = File_MatchPath(TruePath, &FileFlags);
@@ -5874,22 +5875,7 @@ _FX NTSTATUS File_SetDisposition(
             if (PATH_IS_CLOSED(mp_flags))
                 status = STATUS_ACCESS_DENIED;
 
-            else if (PATH_IS_OPEN(mp_flags)) {
-
-                is_direct_file = TRUE; // file is open
-            }
-            else {
-
-		        WCHAR* TmplPath = CopyPath;
-
-		        File_FindSnapshotPath(&TmplPath); // if file is in a snapshot this updates TmplPath to point to it
-
-		        if (PATH_IS_BOXED(FileFlags) && TmplPath == CopyPath)
-                    is_direct_file = TRUE; // file is boxed and not located in a snapshot
-            }
-             
-
-            if (!is_direct_file) {
+            else if (PATH_NOT_OPEN(mp_flags)) {
 
                 status = File_DeleteDirectory(CopyPath, TRUE);
 
@@ -5929,7 +5915,7 @@ _FX NTSTATUS File_SetDisposition(
     // handle the request appropriately
     //
 
-    if (is_direct_file) {
+    if (PATH_IS_OPEN(mp_flags)) {
 
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,

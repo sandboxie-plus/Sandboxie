@@ -81,8 +81,7 @@ _FX BOOLEAN UserEnv_InitVer(HMODULE module)
     void* GetVersionExA;
 
     WCHAR str[32];
-    NTSTATUS status = Config_GetSettingsForImageName(L"OverrideOsBuild", str, sizeof(str), NULL);
-    if (NT_SUCCESS(status))
+    if (SbieDll_GetSettingsForImageName(NULL, Dll_ImageName, L"OverrideOsBuild", str, sizeof(str), NULL))
         UserEnv_dwBuildNumber = _wtoi(str);
 
     if (UserEnv_dwBuildNumber == 0 && Dll_OsBuild < 9600)

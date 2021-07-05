@@ -499,7 +499,9 @@ _FX BOOL Proc_UpdateProcThreadAttribute(
 	// if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME)
     if (Attribute == 0x0002000d) //PROC_THREAD_ATTRIBUTE_JOB_LIST
     {
-        if (!SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE))
+        extern BOOLEAN SysInfo_CanUseJobs;
+        extern BOOLEAN SysInfo_UseSbieJob;
+        if (!SysInfo_CanUseJobs && SysInfo_UseSbieJob)
             return TRUE;
     }
 

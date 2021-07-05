@@ -278,3 +278,27 @@ void *memmem(const void *pSearchBuf,
 
     return NULL;
 }
+
+//---------------------------------------------------------------------------
+// MyIsCallerSigned
+//---------------------------------------------------------------------------
+
+NTSTATUS KphVerifyCurrentProcess();
+
+_FX BOOLEAN MyIsCallerSigned(void)
+{
+    NTSTATUS status;
+
+    status = KphVerifyCurrentProcess();
+
+    DbgPrint("Image Signature Verification result: 0x%08x\r\n", status);
+
+    if (!NT_SUCCESS(status)) {
+
+        //Log_Status(MSG_1330, 0, status);
+
+        return FALSE;
+    }
+
+    return TRUE;
+}

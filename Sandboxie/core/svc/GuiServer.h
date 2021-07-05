@@ -41,14 +41,13 @@ public:
 
     static void RunSlave(const WCHAR *cmdline);
 
+    ULONG StartSlave(ULONG session_id);
+
+    ULONG SendMessageToSlave(ULONG session_id, void* data, ULONG data_len);
+
 protected:
 
     GuiServer();
-
-    ULONG StartSlave(ULONG session_id);
-
-    ULONG SendMessageToSlave(ULONG session_id, ULONG process_id,
-                             BOOLEAN add_to_job);
 
     static void ReportError2336(
                         ULONG session_id, ULONG errlvl, ULONG status);
@@ -76,6 +75,8 @@ protected:
     HANDLE GetJobObjectForAssign(const WCHAR *boxname);
 
     HANDLE GetJobObjectForGrant(ULONG pid);
+
+    HANDLE GetJobObject(const WCHAR *boxname);
 
     bool GetWindowStationAndDesktopName(WCHAR *out_name);
 
@@ -165,6 +166,8 @@ protected:
 
     ULONG WndHookRegisterSlave(SlaveArgs* args);
 
+    ULONG KillJob(SlaveArgs *args);
+
     //
     // window access check utilities
     //
@@ -186,6 +189,9 @@ protected:
 
     bool AllowSendPostMessage(
         ULONG pid, ULONG msg, bool IsSendMsg, HWND hwnd);
+
+
+    
 
     //
     // data

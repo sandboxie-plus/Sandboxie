@@ -180,7 +180,12 @@ bool GuiServer::InitProcess(
 
     EnterCriticalSection(&m_SlavesLock);
 
-    status = SendMessageToSlave(session_id, process_id, add_to_job);
+    GUI_INIT_PROCESS_REQ data;
+    data.msgid = GUI_INIT_PROCESS;
+    data.process_id = process_id;
+    data.add_to_job = add_to_job;
+
+    status = SendMessageToSlave(session_id, &data, sizeof(data));
     if (status == STATUS_OBJECT_NAME_NOT_FOUND) {
 
         //
@@ -194,7 +199,7 @@ bool GuiServer::InitProcess(
             errlvl = 0x22;
         else {
 
-            status = SendMessageToSlave(session_id, process_id, add_to_job);
+            status = SendMessageToSlave(session_id, &data, sizeof(data));
             if (status != STATUS_SUCCESS)
                 errlvl = 0x33;
         }
@@ -248,28 +253,24 @@ finish:
 //---------------------------------------------------------------------------
 
 
-ULONG GuiServer::SendMessageToSlave(ULONG session_id, ULONG process_id,
-                                    BOOLEAN add_to_job)
+ULONG GuiServer::SendMessageToSlave(ULONG session_id, void* data, ULONG data_len)
 {
     //
     // prepare a QUEUE_PUTREQ_REQ message to send to the slave process
     //
 
-    const ULONG req_len =
-                    sizeof(QUEUE_PUTREQ_REQ) + sizeof(GUI_INIT_PROCESS_REQ);
-    ULONG64 req_space[(req_len + sizeof(ULONG64) - 1) / sizeof(ULONG64)];
-    QUEUE_PUTREQ_REQ *req1 = (QUEUE_PUTREQ_REQ *)req_space;
+    const ULONG req_len = sizeof(QUEUE_PUTREQ_REQ) + data_len;
+    //ULONG64 req_space[(req_len + sizeof(ULONG64) - 1) / sizeof(ULONG64)];
+    //QUEUE_PUTREQ_REQ *req1 = (QUEUE_PUTREQ_REQ *)req_space;
+    QUEUE_PUTREQ_REQ *req1 = (QUEUE_PUTREQ_REQ *)HeapAlloc(GetProcessHeap(), 0, req_len);
 
     req1->h.length = req_len;
     req1->h.msgid = MSGID_QUEUE_PUTREQ;
     wsprintf(req1->queue_name, L"*GUIPROXY_%08X", session_id);
     req1->event_handle = (ULONG64)(ULONG_PTR)m_QueueEvent;
     req1->data_len = sizeof(GUI_INIT_PROCESS_REQ);
-
-    GUI_INIT_PROCESS_REQ *data = (GUI_INIT_PROCESS_REQ *)req1->data;
-    data->msgid = process_id ? GUI_INIT_PROCESS : GUI_SHUTDOWN;
-    data->process_id = process_id;
-    data->add_to_job = add_to_job;
+    req1->data_len = data_len;
+    memcpy(req1->data, data, data_len);
 
     //
     // send the message through the queue service
@@ -325,6 +326,8 @@ ULONG GuiServer::SendMessageToSlave(ULONG session_id, ULONG process_id,
         } else
             status = STATUS_INSUFFICIENT_RESOURCES;
     }
+
+    HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, req1);
 
     return status;
 }
@@ -768,6 +771,7 @@ bool GuiServer::CreateQueueSlave(const WCHAR *cmdline)
     m_SlaveFuncs[GUI_GET_RAW_INPUT_DEVICE_INFO] = &GuiServer::GetRawInputDeviceInfoSlave;
     m_SlaveFuncs[GUI_WND_HOOK_NOTIFY]       = &GuiServer::WndHookNotifySlave;
     m_SlaveFuncs[GUI_WND_HOOK_REGISTER]     = &GuiServer::WndHookRegisterSlave;
+    m_SlaveFuncs[GUI_KILL_JOB]              = &GuiServer::KillJob;
 
 
     //
@@ -850,7 +854,7 @@ bool GuiServer::QueueCallbackSlave2(void)
             // (with the exception of the GUI_INIT_PROCESS message)
             //
 
-            if (msgid != GUI_INIT_PROCESS) {
+            if (msgid != GUI_INIT_PROCESS && msgid != GUI_KILL_JOB) {
 
                 ULONG session_id;
                 status = SbieApi_QueryProcess((HANDLE)(ULONG_PTR)args.pid,
@@ -1102,23 +1106,38 @@ HANDLE GuiServer::GetJobObjectForGrant(ULONG pid)
 
     if (status == 0 && SessionId == m_SessionId) {
 
-        EnterCriticalSection(&m_SlavesLock);
+        hJobObject = GetJobObject(BoxName);
+    }
 
-        GUI_JOB *job = (GUI_JOB *)List_Head(&m_SlavesList);
-        while (job) {
+    return hJobObject;
+}
 
-            if (_wcsicmp(job->boxname, BoxName) == 0) {
 
-                hJobObject = job->handle;
-                if (hJobObject)
-                    break;
-            }
+//---------------------------------------------------------------------------
+// GetJobObject
+//---------------------------------------------------------------------------
 
-            job = (GUI_JOB *)List_Next(job);
+
+HANDLE GuiServer::GetJobObject(const WCHAR *boxname)
+{
+    HANDLE hJobObject = NULL;
+
+    EnterCriticalSection(&m_SlavesLock);
+
+    GUI_JOB *job = (GUI_JOB *)List_Head(&m_SlavesList);
+    while (job) {
+
+        if (_wcsicmp(job->boxname, boxname) == 0) {
+
+            hJobObject = job->handle;
+            if (hJobObject)
+                break;
         }
 
-        LeaveCriticalSection(&m_SlavesLock);
+        job = (GUI_JOB *)List_Next(job);
     }
+
+    LeaveCriticalSection(&m_SlavesLock);
 
     return hJobObject;
 }
@@ -4256,6 +4275,8 @@ void GuiServer::RunConsoleSlave(const WCHAR *evtname)
                 }
             }
         }
+
+        //HeapFree(GetProcessHeap(), 0, pids); // dont bother we ExitProcess aynways
     }
 
     ExitProcess(0);
@@ -4540,4 +4561,35 @@ ULONG GuiServer::DdeProxyThreadSlave(void *xDdeArgs)
     DestroyWindow(hProxyWnd);
 
     return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// KillJob
+//---------------------------------------------------------------------------
+
+
+ULONG GuiServer::KillJob(SlaveArgs* args)
+{
+    GUI_KILL_JOB_REQ *req = (GUI_KILL_JOB_REQ *)args->req_buf;
+    HANDLE hJobObject;
+
+    //
+    // validate the request
+    //
+
+    if (args->pid != m_ParentPid)
+        return STATUS_ACCESS_DENIED;
+
+    if (args->req_len != sizeof(GUI_KILL_JOB_REQ))
+        return STATUS_INFO_LENGTH_MISMATCH;
+
+
+    hJobObject = GetJobObject(req->boxname);
+    if (hJobObject) {
+        if (!TerminateJobObject(hJobObject, 0))
+            return STATUS_UNSUCCESSFUL;
+    }
+      
+    return STATUS_SUCCESS;
 }

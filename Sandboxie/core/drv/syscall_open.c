@@ -703,6 +703,7 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
     USHORT TypeLength, WCHAR *TypeBuffer)
 {
     static const WCHAR *_Port = L"Port";
+    static const WCHAR *_Job = L"Job";
     SYSCALL_ENTRY *entry;
     ULONG name_len;
     UCHAR SyscallName[32];
@@ -722,6 +723,10 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
         (TypeLength == 9 && wmemcmp(TypeBuffer + 5, _Port, 4) == 0)) {
 
         strcpy(SyscallName, "ConnectPort");
+
+    } else if (TypeLength == 3 && wmemcmp(TypeBuffer, _Job, 3) == 0) {
+
+        strcpy(SyscallName, "OpenJobObject");
 
     } else if (TypeLength <= 24) {
 

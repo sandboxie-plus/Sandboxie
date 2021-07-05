@@ -231,6 +231,9 @@
     <ClInclude Include="..\..\common\pattern.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\apps\com\common.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

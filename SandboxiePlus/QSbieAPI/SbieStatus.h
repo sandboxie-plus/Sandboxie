@@ -39,6 +39,7 @@ enum ESbieMsgCodes
 	SB_ConfigFailed,
 	SB_SnapIsEmpty,
 	SB_NameExists,
+	SB_PasswordBad,
 };
 
 class CSbieStatus

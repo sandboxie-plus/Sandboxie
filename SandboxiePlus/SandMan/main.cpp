@@ -31,7 +31,15 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	
-	if (app.sendMessage("ShowWnd"))
+	QString CommandLine;
+	QStringList Args = QCoreApplication::arguments();
+	int BoxPos = Args.indexOf("/box:__ask__");
+	if (BoxPos != -1) {
+		CommandLine = Args[BoxPos + 1];
+		if(app.sendMessage("Run:" + CommandLine))
+			return 0;
+	}
+	else if (app.sendMessage("ShowWnd"))
 		return 0;
 
 	theConf = new CSettings("Sandboxie-Plus");
@@ -39,7 +47,10 @@ int main(int argc, char *argv[])
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 
 	CSandMan* pWnd = new CSandMan();
+
 	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));
+	if (!CommandLine.isEmpty())
+		QMetaObject::invokeMethod(pWnd, "OnMessage", Qt::QueuedConnection, Q_ARG(QString, "Run:" + CommandLine));
 
 	int ret =  app.exec();
 
@@ -50,3 +61,11 @@ int main(int argc, char *argv[])
 
 	return ret;
 }
+
+/*HANDLE hServerPipe = CreateFileW(L"\\\\.\\pipe\\qtsingleapp-sandma-ca4a-1", GENERIC_ALL, 0, NULL, OPEN_EXISTING, 0, NULL);
+if (hServerPipe != INVALID_HANDLE_VALUE) {
+	DWORD lenWritten;
+    WriteFile(hServerPipe, "test", 4, &lenWritten, NULL)
+
+    CloseHandle(hServerPipe);
+}*/

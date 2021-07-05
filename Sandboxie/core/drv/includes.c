@@ -55,6 +55,10 @@ extern const ULONG tzuk;
 #include "common/pattern.c"
 #undef  Pool_Alloc
 
+/* map */
+
+#include "common/map.c"
+
 /* CRC */
 
 //#define CRC_WITH_ADLERTZUK64

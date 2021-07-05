@@ -71,7 +71,10 @@ BOOLEAN Mem_GetLockResource(PERESOURCE *ppResource, BOOLEAN InitMsg);
 void Mem_FreeLockResource(PERESOURCE *ppResource);
 
 
+
 //---------------------------------------------------------------------------
+
+
 
 
 #endif // _MY_MEM_H

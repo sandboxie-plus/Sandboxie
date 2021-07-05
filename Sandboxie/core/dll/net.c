@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -142,6 +142,9 @@ static int WSA_WSANSPIoctl(
 
 static int WSA_IsBlockedPort(const short *addr, int addrlen);
 
+//static SOCKET WSA_WSASocketW(
+//  int af, int type, int protocol, void *lpProtocolInfo, unsigned int g, DWORD dwFlags);
+
 static int WSA_connect(SOCKET s, const void *name, int namelen);
 
 static int WSA_WSAConnect(
@@ -158,6 +161,9 @@ typedef int (*P_WSANSPIoctl)(
     void *lpvOutBuffer, DWORD cbOutBuffer,
     DWORD *lpcbBytesReturned, WSACOMPLETION *lpCompletion);
 
+//typedef int (*P_WSASocketW)(
+//    int af, int type, int protocol, void *lpProtocolInfo, unsigned int g, DWORD dwFlags);
+
 typedef int (*P_connect)(SOCKET s, const struct sockaddr *name, int namelen);
 
 typedef int (*P_WSAConnect)(
@@ -169,6 +175,7 @@ typedef int (*P_WSAConnect)(
 
 
 static P_WSANSPIoctl        __sys_WSANSPIoctl       = NULL;
+//static P_WSASocketW         __sys_WSASocketW        = NULL;
 static P_connect            __sys_connect           = NULL;
 static P_WSAConnect         __sys_WSAConnect        = NULL;
 
@@ -244,6 +251,21 @@ _FX int WSA_IsBlockedPort(const short *addr, int addrlen)
 
     return 0;
 }
+
+
+//---------------------------------------------------------------------------
+// WSA_WSASocketW
+//---------------------------------------------------------------------------
+
+//const BOOLEAN File_InternetBlockade_ManualBypass();
+//
+//static SOCKET WSA_WSASocketW(
+//    int af, int type, int protocol, void* lpProtocolInfo, unsigned int g, DWORD dwFlags)
+//{
+//    // Note: mswsock.dll!WSPSocket is not exported
+//
+//    return __sys_WSASocketW(af, type, protocol, lpProtocolInfo, g, dwFlags);
+//}
 
 
 //---------------------------------------------------------------------------
@@ -436,6 +458,7 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     P_WSANSPIoctl       WSANSPIoctl;
     P_connect           connect;
     P_WSAConnect        WSAConnect;
+//    P_WSASocketW        WSASocketW;
 
     WSANSPIoctl = (P_WSANSPIoctl)GetProcAddress(module, "WSANSPIoctl");
     if (WSANSPIoctl) {
@@ -449,6 +472,11 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     WSA_InitBlockedPorts();
 
     if (! Dll_SkipHook(L"wsaconn")) {
+
+//        WSASocketW = (P_WSASocketW)GetProcAddress(module, "WSASocketW");
+//        if (WSASocketW) {
+//            SBIEDLL_HOOK(WSA_,WSASocketW);
+//        }
 
         connect = (P_connect)GetProcAddress(module, "connect");
         if (connect) {

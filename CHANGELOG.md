@@ -3,34 +3,34 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.8.5 / 5.50.5] - 2021-07-05
+## [0.8.5 / 5.50.5] - 2021-07-06
 
 ### Added
-- added global hotkey to terminate all boxed processes (by default Ctrl+Break)
-- the Run Sandboxed dialog can now be handled by the Sandman UI.
+- added global hotkey to terminate all sandboxed processes (default: Ctrl+Pause)
+- the Run Sandboxed dialogue can now be handled by the Sandman UI
 - added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on Windows 8 and later
--- note: this allows Chrome and other programs to use the job system for additional isolation
+-- Note: this allows Chrome and other programs to use the job system for additional isolation
 - added librewolf.exe to the list of Firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)
 - added run regedit sandboxed menu command
-- added new support settings tab to Sandman UI for updates and stuff
+- added new support settings tab to Sandman UI for updates and news
 - added code integrity verification to Sbie service and UI
 - added template for Vivaldi Notes (by isaak654) [#948](https://github.com/sandboxie-plus/Sandboxie/issues/948)
 
 ### Changed
-- Replaced the Process List used by the driver with a much faster Hash Map implementation
--- Note: this change provides an almost static system call speed of 1.2us irregardless of the running process count
--- The old list, with 100 programs running required: 4.5µs; with 200: 12µs; and with 300: 18µs per syscall
--- Note: some of the slowdown was affecting also non sandboxed applications due to how the driver handles certain callbacks
-- Replaced the per-process Thread List used by the driver with a much faster Hash Map implementation
-- Replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
+- replaced the Process List used by the driver with a much faster Hash Map implementation
+-- Note: this change provides an almost static system call speed of 1.2µs regardless of the running process count
+-- The old list, with 100 programs running required 4.5µs; with 200: 12µs; and with 300: 18µs per syscall
+-- Note: some of the slowdown was also affecting non-sandboxed applications due to how the driver handles certain callbacks
+- replaced the per-process Thread List used by the driver with a much faster Hash Map implementation
+- replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
 -- not yet enabled in production build
-- the presence of default box is only checked on connect
-- the portable dir dialog now shows the directory [#924](https://github.com/sandboxie-plus/Sandboxie/issues/924)
-- when terminated boxed processes now we first try doing that by terminating the job object
-- the driver now by default can terminate problematic processes without the help of the service
-- box delete routine now retries up to 10 times to fix [#954](https://github.com/sandboxie-plus/Sandboxie/issues/954)
-- Replaced the Process List used by the service with a much faster Hash Map implementation
-- Replaced the per-process Thread List used by the service with a much faster Hash Map implementation
+- the presence of the default box is only checked on connect
+- the portable directory dialogue now shows the directory [#924](https://github.com/sandboxie-plus/Sandboxie/issues/924)
+- when terminated, boxed processes now first try doing that by terminating the job object
+- the driver now can terminate problematic processes by default without the help of the service
+- the box delete routine now retries up to 10 times, see [#954](https://github.com/sandboxie-plus/Sandboxie/issues/954)
+- replaced the Process List used by the service with a much faster Hash Map implementation
+- replaced the per-process Thread List used by the service with a much faster Hash Map implementation
 
 ### Fixed
 - fixed faulty initialization in SetServiceStatus (by flamencist) [#921](https://github.com/sandboxie-plus/Sandboxie/issues/921)
@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed missing password length check in the Sandman UI [#925](https://github.com/sandboxie-plus/Sandboxie/issues/925)
 - fixed issues opening job objects by name
 - fixed missing permission check when reopening job object handles (thanks Diversenok)
-- fixed issue with some Chromium 90+ hooks affecting PDF plugin in derived browsers [#930](https://github.com/sandboxie-plus/Sandboxie/issues/930) [#817](https://github.com/sandboxie-plus/Sandboxie/issues/817)
+- fixed issue with some Chromium 90+ hooks affecting the display of PDFs in derived browsers [#930](https://github.com/sandboxie-plus/Sandboxie/issues/930) [#817](https://github.com/sandboxie-plus/Sandboxie/issues/817)
 - fixed issues with reconnecting broken LPC ports used for communication with SbieSvc
 - fixed minor setting issue [#957](https://github.com/sandboxie-plus/Sandboxie/issues/957)
 - fixed minor UI issue with resource access COM settings [#958](https://github.com/sandboxie-plus/Sandboxie/issues/958)
@@ -51,14 +51,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - removed switch for "BlockPassword=n" as it does not seem to be working [#938](https://github.com/sandboxie-plus/Sandboxie/issues/938)
--- it's recommended to use "OpenSamEndpoint=y" to allow for password change in windows 10
+-- it's recommended to use "OpenSamEndpoint=y" to allow password changes in Windows 10
 
 
 
 ## [0.8.2 / 5.50.2] - 2021-06-15
 
 ### Changed
-- Split anti-phishing rules per browser (by isaak654) [#910](https://github.com/sandboxie-plus/Sandboxie/pull/910)
+- split anti-phishing rules per browser (by isaak654) [#910](https://github.com/sandboxie-plus/Sandboxie/pull/910)
 
 ### Fixed
 - properly fixed an issue with Driver Verifier and user handles [#906](https://github.com/sandboxie-plus/Sandboxie/issues/906)
@@ -88,7 +88,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to show trace entries only for the selected sandbox [#886](https://github.com/sandboxie-plus/Sandboxie/issues/886)
 - added "UseVolumeSerialNumbers=y" that allows drive letters to be suffixed with the volume SN in the \drive\ sandbox location
 -- it helps to avoid files mixed together on multiple pendrives using the same letter
--- note: this option is not compatible with the recovery function of the Classic UI, only SandMan UI is fully compatible
+-- Note: this option is not compatible with the recovery function of the Classic UI, only SandMan UI is fully compatible
 - added "ForceRestart=PicoTorrent.exe" to the PicoTorrent template in order to fix a compatibility issue [#720](https://github.com/sandboxie-plus/Sandboxie/issues/720)
 - added localization support for RPC templates (by isaak654) [#736](https://github.com/sandboxie-plus/Sandboxie/issues/736)
 
@@ -333,7 +333,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with window modality [#409](https://github.com/sandboxie-plus/Sandboxie/issues/409)
 - fixed issues when main window was set to be always on top [#417](https://github.com/sandboxie-plus/Sandboxie/issues/417)
 - fixed a driver issue with Windows 10 insider build 21286
-- fixed issues with snapshot dialog [#416](https://github.com/sandboxie-plus/Sandboxie/issues/416)
+- fixed issues with snapshot dialogue [#416](https://github.com/sandboxie-plus/Sandboxie/issues/416)
 - fixed an issue when writing to a path that already exists in the snapshot but not outside [#415](https://github.com/sandboxie-plus/Sandboxie/issues/415)
 
 
@@ -629,7 +629,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues when a snapshot operation failed
 - fixed some special cases of IpcPath and WinClass in the new UI
 - fixed driver issues with WHQL passing compatibility testing
-- fixed issues with classical installer
+- fixed issues with Classic installer
 
 
 

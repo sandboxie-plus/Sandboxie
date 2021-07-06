@@ -545,7 +545,8 @@ void CAppPage::Template_Filter()
         BOOL ff = (name.Find(L"Firefox_") != -1)
                || (name.Find(L"Waterfox_") != -1)
                || (name.Find(L"PaleMoon_") != -1)
-               || (name.Find(L"SeaMonkey_") != -1);
+               || (name.Find(L"SeaMonkey_") != -1)
+               || (name.Find(L"LibreWolf_") != -1);
         BOOL ch = (name.Find(L"Chrome_") != -1);
         BOOL other = (name.Find(L"Dragon_") != -1)
                   || (name.Find(L"Iron_") != -1)

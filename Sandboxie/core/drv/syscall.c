@@ -903,7 +903,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         DbgPrint("[syscall] request p=%06d t=%06d - END   (%0X)  %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), status, entry->name);
     }*/
 
-    if (proc->terminated || (proc && Conf_Get_Boolean(proc->box->name, L"screwUp", 0, FALSE))) {
+    if (proc->terminated) {
 
         Process_TerminateProcess(proc);
         return STATUS_PROCESS_IS_TERMINATING;

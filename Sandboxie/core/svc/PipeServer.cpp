@@ -819,6 +819,7 @@ void PipeServer::PortFindClientUnsafe(const CLIENT_ID& ClientId, CLIENT_PROCESS 
     clientThread = clientProcess ? (CLIENT_THREAD *)map_get(&clientProcess->thread_map, ClientId.UniqueThread) : NULL;
 #else
     clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
+    clientThread = NULL;
 
     while (clientProcess) {
 

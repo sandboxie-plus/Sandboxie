@@ -871,7 +871,9 @@ _FX NTSTATUS Process_Enumerate(
 #endif
         }
 
-done:
+#ifdef USE_PROCESS_MAP
+        done:
+#endif
         *count = num;
 
         status = STATUS_SUCCESS;

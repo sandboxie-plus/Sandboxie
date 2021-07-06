@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added global hotkey to terminate all sandboxed processes (default: Ctrl+Pause)
-- the Run Sandboxed dialogue can now be handled by the Sandman UI
+- the Run Sandboxed dialog can now be handled by the Sandman UI
 - added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on Windows 8 and later
 -- Note: this allows Chrome and other programs to use the job system for additional isolation
 - added librewolf.exe to the list of Firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)
@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
 -- not yet enabled in production build
 - the presence of the default box is only checked on connect
-- the portable directory dialogue now shows the directory [#924](https://github.com/sandboxie-plus/Sandboxie/issues/924)
+- the portable directory dialog now shows the directory [#924](https://github.com/sandboxie-plus/Sandboxie/issues/924)
 - when terminated, boxed processes now first try doing that by terminating the job object
 - the driver now can terminate problematic processes by default without the help of the service
 - the box delete routine now retries up to 10 times, see [#954](https://github.com/sandboxie-plus/Sandboxie/issues/954)
@@ -163,7 +163,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked window hooking mechanism to improve performance [#697](https://github.com/sandboxie-plus/Sandboxie/issues/697) [#519](https://github.com/sandboxie-plus/Sandboxie/issues/519) [#662](https://github.com/sandboxie-plus/Sandboxie/issues/662) [#69](https://github.com/sandboxie-plus/Sandboxie/issues/69) [#109](https://github.com/sandboxie-plus/Sandboxie/issues/109) [#193](https://github.com/sandboxie-plus/Sandboxie/issues/193)
--- resolves issues with file save dialogues taking 30+ seconds to open
+-- resolves issues with file save dialogs taking 30+ seconds to open
 -- this fix greatly improves the win32 GUI performance of sandboxed processes
 - reworked RPC resolver to be ini-configurable
 -- the following options are now deprecated:
@@ -333,7 +333,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with window modality [#409](https://github.com/sandboxie-plus/Sandboxie/issues/409)
 - fixed issues when main window was set to be always on top [#417](https://github.com/sandboxie-plus/Sandboxie/issues/417)
 - fixed a driver issue with Windows 10 insider build 21286
-- fixed issues with snapshot dialogue [#416](https://github.com/sandboxie-plus/Sandboxie/issues/416)
+- fixed issues with snapshot dialog [#416](https://github.com/sandboxie-plus/Sandboxie/issues/416)
 - fixed an issue when writing to a path that already exists in the snapshot but not outside [#415](https://github.com/sandboxie-plus/Sandboxie/issues/415)
 
 
@@ -370,7 +370,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed missing error message when attempting to create an already existing sandbox [#359](https://github.com/sandboxie-plus/Sandboxie/issues/359)
 - fixed issue allowing to save setting when a sandbox was already deleted [#359](https://github.com/sandboxie-plus/Sandboxie/issues/359)
 - fixed issues with disabled items in dark mode [#359](https://github.com/sandboxie-plus/Sandboxie/issues/359)
-- fixed some dialogues not closing when pressing Esc [#359](https://github.com/sandboxie-plus/Sandboxie/issues/359)
+- fixed some dialogs not closing when pressing Esc [#359](https://github.com/sandboxie-plus/Sandboxie/issues/359)
 - fixed tab stops on many windows
 
 
@@ -527,9 +527,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.2 / 5.45.1] - 2020-12-23
 
 ### Added
-- added advanced new box creation dialogue to SandMan UI
+- added advanced new box creation dialog to SandMan UI
 - added show/hide tray context menu entry
-- added refresh button to file recovery dialogue
+- added refresh button to file recovery dialog
 - added mechanism to load icons from {install-dir}/Icons/{icon}.png for UI customization
 - added tray indicator to show disabled forced program status in the SandMan UI
 - added program name suggestions to box options in SandMan UI
@@ -574,8 +574,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated SandMan UI to use Qt5.15.1
 
 ### Fixed
-- fixed crash issue with progress dialogue
-- fixed progress dialogue cancel button not working for update checker
+- fixed crash issue with progress dialog
+- fixed progress dialog cancel button not working for update checker
 - fixed issue around NtQueryDirectoryFile when deleting sandbox content
 - fixed dark theme in the notification window
 - fixed issue with disable force programs tray menu

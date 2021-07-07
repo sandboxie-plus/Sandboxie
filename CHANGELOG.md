@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.8.6 / 5.50.6] - 2021-07-07
+
+### Added
+- added LibreWolf template (by Dyras) [#929](https://github.com/sandboxie-plus/Sandboxie/pull/929)
+
+### Fixed
+- fixed performance bug introduced in 0.8.5
+
+
+
 ## [0.8.5 / 5.50.5] - 2021-07-06
 
 ### Added
@@ -47,7 +57,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added workaround for topmost modality issue [#873](https://github.com/sandboxie-plus/Sandboxie/issues/873)
 -- the notification window is not only topmost for 5 seconds
 - fixed an issue deleting directories introduced in 5.49.5
-- fixed an issue with box copies
+- fixed an issue when creating box copies
 
 ### Removed
 - removed switch for "BlockPassword=n" as it does not seem to be working [#938](https://github.com/sandboxie-plus/Sandboxie/issues/938)

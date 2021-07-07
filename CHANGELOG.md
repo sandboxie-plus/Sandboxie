@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.5 / 5.50.5] - 2021-07-06
 
 ### Added
-- added global hotkey to terminate all sandboxed processes (default: Ctrl+Pause)
+- added global hotkey to terminate all sandboxed processes (default: Ctrl+Cancel)
 - the Run Sandboxed dialog can now be handled by the Sandman UI
 - added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on Windows 8 and later
 -- Note: this allows Chrome and other programs to use the job system for additional isolation

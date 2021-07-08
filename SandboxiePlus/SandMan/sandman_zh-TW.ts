@@ -1950,7 +1950,7 @@ Do you want to do the clean up?</oldsource>
       <location filename="SbiePlusAPI.cpp" line="+437"/>
       <location filename="SbiePlusAPI.cpp" line="+437"/>
       <source>Service Model Reg</source>
-      <translation type="unfinished">服務模型註冊表</translation>
+      <translation type="unfinished">服務模型登錄</translation>
     </message>
     <message>
       <location filename="SbiePlusAPI.cpp" line="+438"/>
@@ -2539,7 +2539,7 @@ Do you want to do the clean up?</oldsource>
       <location filename="Models/TraceModel.cpp" line="+257"/>
       <location filename="Models/TraceModel.cpp" line="+257"/>
       <source>Thread %1</source>
-      <translation type="unfinished">執行序 %1</translation>
+      <translation type="unfinished">執行緒 %1</translation>
     </message>
     <message>
       <location filename="Models/TraceModel.cpp" line="+285"/>
@@ -2572,7 +2572,7 @@ Do you want to do the clean up?</oldsource>
       <location filename="Views/TraceView.cpp" line="+54"/>
       <location filename="Views/TraceView.cpp" line="+54"/>
       <source>Show as task tree</source>
-      <translation type="unfinished">顯示為任務樹</translation>
+      <translation type="unfinished">顯示為工作樹狀目錄</translation>
     </message>
     <message>
       <location filename="Views/TraceView.cpp" line="+59"/>
@@ -2598,13 +2598,13 @@ Do you want to do the clean up?</oldsource>
       <location filename="Views/TraceView.cpp" line="+66"/>
       <location filename="Views/TraceView.cpp" line="+66"/>
       <source>TID:</source>
-      <translation type="unfinished">執行序 ID:</translation>
+      <translation type="unfinished">執行緒 ID:</translation>
     </message>
     <message>
       <location filename="Views/TraceView.cpp" line="+74"/>
       <location filename="Views/TraceView.cpp" line="+74"/>
       <source>Show only sellectes box</source>
-      <translation type="unfinished">僅顯示選取的執行序</translation>
+      <translation type="unfinished">僅顯示選取的執行緒</translation>
     </message>
     <message>
       <location filename="Views/TraceView.cpp" line="+173"/>
@@ -3224,7 +3224,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
 'Direct' File and Key access only applies to program binaries located outside the sandbox.
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use 'Direct All' instead to make it apply to all programs.</oldsource>
-      <translation type="unfinished">設定各個處理程序可以存取哪些資源。按兩下特定行編輯它。
+      <translation type="unfinished">設定各個處理程序可以存取哪些資源。按兩下以編輯特定行。
 「直接存取」檔案和鍵值存取僅適用位於沙箱外的程式檔案。
 「全部直接存取」可使設定適用於所有程式。</translation>
     </message>
@@ -3306,7 +3306,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
       <location filename="Forms/OptionsWindow.ui" line="+1603"/>
       <location filename="Forms/OptionsWindow.ui" line="+1603"/>
       <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
-      <translation>強制使用自訂虛擬 Manifest 檔案 (傳統行為)</translation>
+      <translation>強制使用自訂虛擬 Manifest 檔案 (遺留行為)</translation>
     </message>
     <message>
       <location filename="Forms/OptionsWindow.ui" line="+1596"/>
@@ -3769,7 +3769,7 @@ Please note that this values are currently user specific and saved globally for 
       <location filename="Forms/PopUpWindow.ui" line="+32"/>
       <source>SandboxiePlus Notifications</source>
       <oldsource>Sandboxie-Plus Notifications</oldsource>
-      <translation>SandboxiePlus 通知</translation>
+      <translation>Sandboxie-Plus 通知</translation>
     </message>
   </context>
   <context>

@@ -982,7 +982,15 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QPr
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
 
-	QString StartCmd = "\"" + GetStartPath() + "\"" + (Elevated ? " /elevated" : "" ) + " /box:" + BoxName + " " + Command;
+	//bool bStart = (Command == "run_dialog" || Command == "default_browser" || Command == "mail_agent" || Command.left(10) == "start_menu");
+
+	QString StartCmd = "\"" + GetStartPath() + "\"" + (Elevated ? " /elevated" : "");
+	if (!BoxName.isEmpty())
+		StartCmd += " /box:" + BoxName + " ";
+	else
+		StartCmd += " /disable_force ";
+	StartCmd += Command;
+
 	if (pProcess)
 		pProcess->start(StartCmd);
 	else

@@ -35,8 +35,9 @@ int main(int argc, char *argv[])
 	QStringList Args = QCoreApplication::arguments();
 	int BoxPos = Args.indexOf("/box:__ask__");
 	if (BoxPos != -1) {
-		CommandLine = Args[BoxPos + 1];
-		if(app.sendMessage("Run:" + CommandLine))
+		for (int i = BoxPos + 1; i < Args.count(); i++)
+			CommandLine += "\"" + Args[i] + "\" ";
+		if(app.sendMessage("Run:" + CommandLine.trimmed()))
 			return 0;
 	}
 	else if (app.sendMessage("ShowWnd"))

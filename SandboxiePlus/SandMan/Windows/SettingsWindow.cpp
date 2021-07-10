@@ -188,6 +188,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSvcStart->setChecked(false);
 
 	ui.chkShellMenu->setCheckState(CSettingsWindow__IsContextMenu());
+	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
 
@@ -198,7 +199,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
-	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Ctrl+Cancel")));
+	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel")));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
@@ -291,6 +292,7 @@ void CSettingsWindow::SaveSettings()
 		} else
 			CSbieUtils::RemoveContextMenu();
 	}
+	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 
 	theConf->SetValue("Options/ShowNotifications", ui.chkNotifications->isChecked());
 

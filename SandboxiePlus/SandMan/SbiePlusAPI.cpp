@@ -377,8 +377,8 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 
 CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
 {
-	if (m_bLogApiFound)
-		return eHasLogApi;
+	//if (m_bLogApiFound)
+	//	return eHasLogApi;
 	if (m_iUnsecureDebugging != 0)
 		return eInsecure;
 	if (m_bSecurityRestricted)

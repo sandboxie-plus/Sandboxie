@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.8.7 / 5.50.7] - 2021-07-10
+
+### Added
+- added option to always auto pick the DefautlBox sandbox [959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
+-- when this option is enabled the normal behavioure with a box selection dialog can be achived holding down CTRL
+
+### Changed
+- changed default terminate all boxed processes key from Ctrl+Break to Ctrl+Alt+Break [#974](https://github.com/sandboxie-plus/Sandboxie/issues/974)
+- start.exe does no longer link in all that unused MFC code reduced file size form over 2.5MB to below 250KB
+- updated the main sandman and tray icon [#963](https://github.com/sandboxie-plus/Sandboxie/issues/963)
+
+### Fixed
+- added additional delay and retryes to kmdutill.exe to mitigate issues when unloading the driver [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968)
+- fixed issue with sbiectrl not being properly started after setup [#969](https://github.com/sandboxie-plus/Sandboxie/issues/969)
+- fixed issue with explore sandboxed shell option [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
+- fixed issue when running sandman elevated [#932](https://github.com/sandboxie-plus/Sandboxie/issues/932)
+
+### Removed
+- removed Online Armor support as this product is deprecated since 2016
+
+
+
 ## [0.8.6 / 5.50.6] - 2021-07-07
 
 ### Added

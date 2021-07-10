@@ -375,19 +375,6 @@ next_zwxxx:
         return FALSE;
     }
 
-    //
-    // workaround for Online Armor driver
-    //
-
-#ifndef _WIN64
-
-    if (1) {
-        extern void Syscall_HandleOADriver(void);
-        Syscall_HandleOADriver();
-    }
-
-#endif ! _WIN64
-
     return TRUE;
 }
 

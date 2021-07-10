@@ -96,15 +96,8 @@ void CSelectBoxWindow::OnRun()
 
 
 	//QList<SB_STATUS> Results;
-	foreach(const QString & Command, m_Commands) 
-	{
-		QString StartCmd = "\"" + theAPI->GetStartPath() + "\"" + (ui.chkAdmin->isChecked() ? " /elevated" : "");
-		if (!BoxName.isEmpty())
-			StartCmd += " /box:" + BoxName + " ";
-		else
-			StartCmd += " /disable_force ";
-		StartCmd += Command;
-		QProcess::startDetached(StartCmd);
+	foreach(const QString & Command, m_Commands) {
+		theAPI->RunStart(BoxName, Command, NULL, ui.chkAdmin->isChecked());
 	}
 	//CSandMan::CheckResults(Results);
 

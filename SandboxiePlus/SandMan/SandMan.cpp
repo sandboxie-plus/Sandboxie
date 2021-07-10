@@ -189,7 +189,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	// Tray
 	QIcon Icon;
-	Icon.addFile(":/SandMan.png");
+	Icon.addFile(":/IconEmpty.png");
 	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
@@ -516,7 +516,7 @@ QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
 	EBoxColors color = eYelow;
 	switch (boxType) {
 	case CSandBoxPlus::eHardened:	color = eOrang; break;
-	case CSandBoxPlus::eHasLogApi:	color = eRed; break;
+	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
 	case CSandBoxPlus::eInsecure:	color = eMagenta; break;
 	}
 	return inUse ? m_BoxIcons[color].second : m_BoxIcons[color].first;
@@ -544,7 +544,11 @@ void CSandMan::OnMessage(const QString& Message)
 	{
 		QString CmdLine = Message.mid(4);
 
-		RunSandboxed(QStringList(CmdLine));
+		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
+			theAPI->RunStart("DefaultBox", CmdLine);
+		}
+		else
+			RunSandboxed(QStringList(CmdLine));
 	}
 	else if (Message.left(6) == "Status")
 	{
@@ -629,11 +633,13 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
 		m_bIconDisabled = bForceProcessDisabled;
 
-		QString IconFile = ":/SandMan";
+		QString IconFile;
 		if (m_bIconEmpty)
-			IconFile += "2";
+			IconFile += ":/IconEmpty";
+		else
+			IconFile += ":/IconFull";
 		if(m_bIconDisabled)
-			IconFile += "N";
+			IconFile += "D";
 
 		QIcon Icon;
 		Icon.addFile(IconFile + ".png");
@@ -898,7 +904,7 @@ void CSandMan::SetupHotKeys()
 	m_pHotkeyManager->unregisterAllHotkeys();
 
 	if (theConf->GetBool("Options/EnablePanicKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Ctrl+Cancel"), HK_PANIC);
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel"), HK_PANIC);
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -1131,7 +1137,7 @@ void CSandMan::OnDisableForce2()
 SB_STATUS CSandMan::ConnectSbie()
 {
 	SB_STATUS Status;
-
+	bool bJustStarted = false;
 	if (!CSbieUtils::IsRunning(CSbieUtils::eAll)) 
 	{
 		if (!CSbieUtils::IsInstalled(CSbieUtils::eAll))
@@ -1151,6 +1157,7 @@ SB_STATUS CSandMan::ConnectSbie()
 				return SB_OK;
 		}
 
+		bJustStarted = true;
 		Status = CSbieUtils::Start(CSbieUtils::eAll);
 	}
 
@@ -1158,10 +1165,16 @@ SB_STATUS CSandMan::ConnectSbie()
 		m_bConnectPending = true;
 		return SB_OK;
 	}
-	else if (!Status.IsError())
-		Status = ConnectSbieImpl();
-
-	return Status;
+	if (Status.IsError())
+		return Status;
+	if (bJustStarted) {
+		QTimer::singleShot(1000, [this]() {
+			this->ConnectSbieImpl();
+		});
+		return SB_OK;
+	}
+	
+	return ConnectSbieImpl();
 }
 
 SB_STATUS CSandMan::ConnectSbieImpl()
@@ -1622,7 +1635,7 @@ void CSandMan::OpenUrl(const QUrl& url)
 		if(bCheck) theConf->SetValue("Options/OpenUrlsSandboxed", iSandboxed);
 	}
 
-	if (iSandboxed) theAPI->RunStart("__ask__", url.toString());
+	if (iSandboxed) RunSandboxed(QStringList(url.toString()));
 	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 

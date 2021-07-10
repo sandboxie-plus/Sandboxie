@@ -166,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="UpdateDialog.h" />
     <ClInclude Include="Updater.h" />
+    <ClInclude Include="..\common\CommonUtils.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\RunStartExe.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SbieControl.rc" />

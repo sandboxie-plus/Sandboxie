@@ -34,6 +34,7 @@
 #include "apps/common/MyMsgBox.h"
 #include "apps/common/MyGdi.h"
 #include "apps/common/CommonUtils.h"
+#include "apps/common/RunStartExe.h"
 #include "common/win32_ntddk.h"
 #include "common/my_version.h"
 #include "core/drv/api_defs.h"

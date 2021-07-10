@@ -114,10 +114,10 @@ SB_STATUS CSbieUtils::Install(EComponent Component)
 void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 {
 	QString HomePath = QCoreApplication::applicationDirPath().replace("/", "\\"); // "C:\\Program Files\\Sandboxie	"
-	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0) // todo: why when we are admin we need \??\ and else not and why knd util from console as admin also does not need that???
-		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + "\"\\??\\" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
+	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0) 
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "|type=kernel|start=demand|altitude=86900");
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) == 0) {
-		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "\"" + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
 		Ops.append("reg.exe|ADD|HKLM\\SYSTEM\\ControlSet001\\Services\\SbieSvc|/v|PreferExternalManifest|/t|REG_DWORD|/d|1|/f");
 	}
 }
@@ -156,7 +156,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 		return ExecOps(Ops);
 
 	wstring path = QCoreApplication::applicationFilePath().toStdWString();
-	wstring params = L"-assist " + Ops.join(" ").toStdWString();
+	wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";
 
 	SHELLEXECUTEINFO shex;
 	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));

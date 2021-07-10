@@ -32,6 +32,7 @@
 #include "common/my_version.h"
 #define INITGUID
 #include <guiddef.h>
+#include <commdlg.h>
 
 
 //---------------------------------------------------------------------------

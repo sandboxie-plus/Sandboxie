@@ -76,7 +76,7 @@ public:
 	{
 		eDefault = 0,
 		eHardened,
-		eHasLogApi,
+		//eHasLogApi,
 		eInsecure,
 
 		eUnknown = -1

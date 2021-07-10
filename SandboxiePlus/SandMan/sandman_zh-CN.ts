@@ -786,7 +786,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="324"/>
         <source>Window Finder</source>
-        <translation>探查窗口</translation>
+        <translation>检查窗口是否在沙盘中运行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="328"/>
@@ -1356,7 +1356,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="1643"/>
         <source>server not reachable</source>
-        <translation>无法连通服务器</translation>
+        <translation>无法连接到服务器</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1644"/>
@@ -1437,7 +1437,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="2022"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>拖拽探查工具放到一个窗口上来选择，松开鼠标即可检查窗口是否来自沙盒化的程序。</translation>
+        <translation>拖拽准星到被选窗口上，松开鼠标检查窗口是否来自沙盒化的程序。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2077"/>
@@ -1682,7 +1682,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="Views/SbieView.cpp" line="70"/>
         <source>Run from Start Menu</source>
-        <translation>从启动菜单运行</translation>
+        <translation>从开始菜单运行</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="71"/>
@@ -2872,7 +2872,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1985"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation>记录所有 SetError 到跟踪日志 (将有大量输出)</translation>
+        <translation>记录所有 SetError 到跟踪日志 (将产生大量输出)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1992"/>
@@ -2921,7 +2921,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2066"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation>Ntdll 系统调用跟踪 (将有大量输出)</translation>
+        <translation>Ntdll 系统调用跟踪 (将产生大量输出)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
@@ -2946,7 +2946,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2168"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation>这些选项是为调试兼容性问题而设计，日常使用者误碰。</translation>
+        <translation>这些选项是为调试兼容性问题设计的，日常使用者勿碰。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2185"/>
@@ -3015,7 +3015,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2340"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>要弥补保护性能的损失，请查阅有关“限制”设置的解除权限部分。</translation>
+        <translation>要弥补失去的保护，请参考“限制”设置组中的降低权限部分。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2347"/>
@@ -3025,7 +3025,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2354"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation>以下设置激活与沙盘相关联的辅助功能软件的使用。请注意当这些设置生效后，必然损失特定程度上的沙盘保护措施。</translation>
+        <translation>以下设置允许 Sandboxie 与辅助功能软件结合。请注意当这些设置生效时，部分 Sandboxie 保护措施肯定会失去。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2380"/>
@@ -3170,7 +3170,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="110"/>
         <source>Restart required (!)</source>
-        <translation>需要重启 (!)</translation>
+        <translation>需要重启本软件 (!)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
@@ -3356,7 +3356,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>沙盒在您系统中检测到下列软件程序。点击“确定”应用配置，将增强对这些软件程序的兼容性。这些配置将会影响已经以及尚不存在的所有沙盒。</translation>
+        <translation>沙盒已检测到您的系统中安装了以下软件。点击“确定”应用配置，将改进与这些软件的兼容性。这些配置作用于所有沙盘，包括现存的和未来新增的沙盘。</translation>
     </message>
 </context>
 <context>

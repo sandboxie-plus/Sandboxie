@@ -970,6 +970,21 @@ void CSbieView::SelectBox(const QString& Name)
 	QItemSelection SelectedItems;
 	SelectedItems.append(QItemSelectionRange(ModelL, ModelR));
 
+	m_pSbieTree->setCurrentIndex(ModelIndex);
 	m_pSbieTree->scrollTo(ModelL);
 	m_pSbieTree->selectionModel()->select(SelectedItems, QItemSelectionModel::ClearAndSelect);
+}
+
+void CSbieView::PopUpMenu(const QString& Name)
+{
+	SelectBox(Name);
+	OnMenu(QCursor::pos());
+}
+
+void CSbieView::ShowOptions(const QString& Name)
+{
+	QModelIndex Index = m_pSbieModel->FindIndex(Name);
+	QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
+
+	OnDoubleClicked(ModelIndex);
 }

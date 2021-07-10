@@ -197,10 +197,38 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/SandMan.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
+	m_pTrayMenu->addSeparator();
+
+	QWidgetAction* pTrayList = new QWidgetAction(m_pTrayMenu);
+
+	QWidget* pWidget = new CActionWidget();
+    QHBoxLayout* pLayout = new QHBoxLayout();
+	pLayout->setMargin(0);
+	pWidget->setLayout(pLayout);
+
+	m_pTrayBoxes = new QTreeWidget();
+
+	m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+	m_pTrayBoxes->setRootIsDecorated(false);
+	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
+	m_pTrayBoxes->setHeaderHidden(true);
+
+	pLayout->insertSpacing(0, 1);// 32);
+	pLayout->addWidget(m_pTrayBoxes);
+
+    pTrayList->setDefaultWidget(pWidget);
+	m_pTrayMenu->addAction(pTrayList);
+
+
+	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnBoxMenu(const QPoint &)));
+	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
+	//m_pBoxMenu
+
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
@@ -1091,6 +1119,22 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 	LoginOpen = false;
 }
 
+void CSandMan::OnBoxMenu(const QPoint & point)
+{
+	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
+	if (!pItem)
+		return;
+
+	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
+
+	//m_pBoxMenu->popup(QCursor::pos());	
+}
+
+void CSandMan::OnBoxDblClick(QTreeWidgetItem* pItem)
+{
+	m_pBoxView->ShowOptions(pItem->data(0, Qt::UserRole).toString());
+}
+
 void CSandMan::OnNewBox()
 {
 	m_pBoxView->AddNewBox();
@@ -1581,8 +1625,42 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 	switch(Reason)
 	{
 		case QSystemTrayIcon::Context:
+		{
+			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+
+			QMap<QString, QTreeWidgetItem*> OldBoxes;
+			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
+			{
+				QTreeWidgetItem* pItem = m_pTrayBoxes->topLevelItem(i);
+				QString Name = pItem->data(0, Qt::UserRole).toString();
+				OldBoxes.insert(Name,pItem);
+			}
+			
+			foreach(const CSandBoxPtr & pBox, Boxes) 
+			{
+				if (!pBox->IsEnabled())
+					continue;
+
+				CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+
+				QTreeWidgetItem* pItem = OldBoxes.take(pBox->GetName());
+				if(!pItem)
+				{
+					pItem = new QTreeWidgetItem();
+					pItem->setData(0, Qt::UserRole, pBox->GetName());
+					pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
+					m_pTrayBoxes->addTopLevelItem(pItem);
+				}
+
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount(), pBoxEx->GetType()));
+			}
+
+			foreach(QTreeWidgetItem* pItem, OldBoxes)
+				delete pItem;
+
 			m_pTrayMenu->popup(QCursor::pos());	
 			break;
+		}
 		case QSystemTrayIcon::DoubleClick:
 			if (isVisible())
 			{

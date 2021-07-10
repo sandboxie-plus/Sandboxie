@@ -41,9 +41,11 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, QWidget *parent)
 
 	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
-
 	foreach(const CSandBoxPtr & pBox, Boxes) 
 	{
+		if (!pBox->IsEnabled() || !pBox->GetBool("ShowForRunIn", true))
+			continue;
+
 		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();

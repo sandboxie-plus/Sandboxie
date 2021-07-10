@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option to always auto pick the DefautlBox sandbox [959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
 -- when this option is enabled the normal behavioure with a box selection dialog can be achived holding down CTRL
+- added option to hide boxed form the run in box dialog
+-- usefull to avoidl listing for example insecure compatybility test boxes
+- added box options to sys tray [#439](https://github.com/sandboxie-plus/Sandboxie/issues/439) [#272](https://github.com/sandboxie-plus/Sandboxie/issues/272)
 
 ### Changed
 - changed default terminate all boxed processes key from Ctrl+Break to Ctrl+Alt+Break [#974](https://github.com/sandboxie-plus/Sandboxie/issues/974)
@@ -19,6 +22,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with sbiectrl not being properly started after setup [#969](https://github.com/sandboxie-plus/Sandboxie/issues/969)
 - fixed issue with explore sandboxed shell option [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
 - fixed issue when running sandman elevated [#932](https://github.com/sandboxie-plus/Sandboxie/issues/932)
+- fixed new box selection dialog showing disabled boxes
+- fixed issue updating box active status
 
 ### Removed
 - removed Online Armor support as this product is deprecated since 2016

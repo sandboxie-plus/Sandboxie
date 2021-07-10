@@ -122,6 +122,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -423,6 +424,8 @@ void COptionsWindow::LoadConfig()
 		if (!BorderWidth) BorderWidth = 6;
 		ui.spinBorderWidth->setValue(BorderWidth);
 
+		ui.chkShowForRun->setChecked(m_pBox->GetBool("ShowForRunIn", true));
+
 		ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
 		ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 		ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
@@ -628,6 +631,8 @@ void COptionsWindow::SaveConfig()
 			BorderCfg.append(ui.cmbBoxBorder->currentData().toString());
 			BorderCfg.append(QString::number(ui.spinBorderWidth->value()));
 			WriteText("BorderColor", BorderCfg.join(","));
+
+			WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
 
 			WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "", "n");
 			WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");

@@ -1279,8 +1279,8 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
 
 	foreach(const CSandBoxPtr& pBox, m_SandBoxes)
 	{
-		bool WasBoxClosed = pBox->m_ActiveProcessCount > 0 && count == 0;
-		pBox->m_ActiveProcessCount = count;
+		bool WasBoxClosed = pBox->m_ActiveProcessCount > 0 && pBox->GetProcessList().count();
+		pBox->m_ActiveProcessCount = pBox->GetProcessList().count();
 		if (WasBoxClosed) {
 			pBox->CloseBox();
 			emit BoxClosed(pBox->GetName());

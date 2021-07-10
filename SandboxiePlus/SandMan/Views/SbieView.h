@@ -21,6 +21,9 @@ public:
 	virtual QString				AddNewBox();
 	virtual void				SelectBox(const QString& Name);
 
+	virtual void				PopUpMenu(const QString& Name);
+	virtual void				ShowOptions(const QString& Name);
+
 signals:
 	void						RecoveryRequested(const QString& BoxName);
 

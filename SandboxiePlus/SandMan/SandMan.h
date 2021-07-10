@@ -131,6 +131,9 @@ public slots:
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
 
+	void				OnBoxMenu(const QPoint &);
+	void				OnBoxDblClick(QTreeWidgetItem*);
+
 private slots:
 	void				OnSelectionChanged();
 
@@ -242,6 +245,8 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QTreeWidget*		m_pTrayBoxes;
+	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	bool				m_bIconDisabled;
 

@@ -32,6 +32,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSortProxy->setSourceModel(m_pSbieModel);
 	m_pSortProxy->setDynamicSortFilter(true);
 
+	QStyle* pStyle = QStyleFactory::create("windows");
 
 	// SbieTree
 	m_pSbieTree = new QTreeViewEx();
@@ -43,6 +44,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	m_pSbieTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	m_pSbieTree->setSortingEnabled(true);
+
+	m_pSbieTree->setStyle(pStyle);
 
 	m_pSbieTree->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pSbieTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint &)));

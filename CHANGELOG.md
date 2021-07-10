@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.7 / 5.50.7] - 2021-07-10
 
 ### Added
-- added option to always auto pick the DefautlBox sandbox [959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
+- added option to always auto pick the DefautlBox sandbox [#959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
 -- when this option is enabled the normal behavioure with a box selection dialog can be achived holding down CTRL
 - added option to hide boxed form the run in box dialog
 -- usefull to avoidl listing for example insecure compatybility test boxes
@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed default terminate all boxed processes key from Ctrl+Break to Ctrl+Alt+Break [#974](https://github.com/sandboxie-plus/Sandboxie/issues/974)
 - start.exe does no longer link in all that unused MFC code reduced file size form over 2.5MB to below 250KB
 - updated the main sandman and tray icon [#963](https://github.com/sandboxie-plus/Sandboxie/issues/963)
+- improved the bov view tree style
 
 ### Fixed
 - added additional delay and retryes to kmdutill.exe to mitigate issues when unloading the driver [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968)

@@ -6,9 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.7 / 5.50.7] - 2021-07-10
 
 ### Added
-- added option to always auto-pick the DefaultBox sandbox [#959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
+- added option to always auto-pick the DefaultBox [#959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
 -- when this option is enabled, the normal behaviour with a box selection dialog can be brought up by holding down CTRL
-- added option to hide boxed form the run in box dialog
+- added option to hide a sandbox from the "run in box" dialog
 -- useful to avoid listing insecure compatibility test boxes for example
 - added box options to system tray [#439](https://github.com/sandboxie-plus/Sandboxie/issues/439) [#272](https://github.com/sandboxie-plus/Sandboxie/issues/272)
 

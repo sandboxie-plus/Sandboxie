@@ -6,23 +6,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.7 / 5.50.7] - 2021-07-10
 
 ### Added
-- added option to always auto pick the DefautlBox sandbox [#959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
--- when this option is enabled the normal behavioure with a box selection dialog can be achived holding down CTRL
+- added option to always auto-pick the DefaultBox sandbox [#959](https://github.com/sandboxie-plus/Sandboxie/issues/959)
+-- when this option is enabled, the normal behaviour with a box selection dialog can be brought up by holding down CTRL
 - added option to hide boxed form the run in box dialog
--- usefull to avoidl listing for example insecure compatybility test boxes
-- added box options to sys tray [#439](https://github.com/sandboxie-plus/Sandboxie/issues/439) [#272](https://github.com/sandboxie-plus/Sandboxie/issues/272)
+-- useful to avoid listing insecure compatibility test boxes for example
+- added box options to system tray [#439](https://github.com/sandboxie-plus/Sandboxie/issues/439) [#272](https://github.com/sandboxie-plus/Sandboxie/issues/272)
 
 ### Changed
-- changed default terminate all boxed processes key from Ctrl+Break to Ctrl+Alt+Break [#974](https://github.com/sandboxie-plus/Sandboxie/issues/974)
-- start.exe does no longer link in all that unused MFC code reduced file size form over 2.5MB to below 250KB
-- updated the main sandman and tray icon [#963](https://github.com/sandboxie-plus/Sandboxie/issues/963)
-- improved the bov view tree style
+- changed default "terminate all boxed processes" key from Ctrl+Pause to Ctrl+Alt+Pause [#974](https://github.com/sandboxie-plus/Sandboxie/issues/974)
+- Start.exe no longer links in unused MFC code, which reduced its file size from over 2.5 MB to below 250 KB
+- updated the main SandMan and tray icon [#963](https://github.com/sandboxie-plus/Sandboxie/issues/963)
+- improved the box tree-style view
 
 ### Fixed
-- added additional delay and retryes to kmdutill.exe to mitigate issues when unloading the driver [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968)
-- fixed issue with sbiectrl not being properly started after setup [#969](https://github.com/sandboxie-plus/Sandboxie/issues/969)
-- fixed issue with explore sandboxed shell option [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
-- fixed issue when running sandman elevated [#932](https://github.com/sandboxie-plus/Sandboxie/issues/932)
+- added additional delay and retries to KmdUtil.exe to mitigate issues when unloading the driver [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968)
+- fixed issue with SbieCtrl not being properly started after setup [#969](https://github.com/sandboxie-plus/Sandboxie/issues/969)
+- fixed issue with "explore sandboxed" shell option [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
+- fixed issue when running SandMan elevated [#932](https://github.com/sandboxie-plus/Sandboxie/issues/932)
 - fixed new box selection dialog showing disabled boxes
 - fixed issue updating box active status
 
@@ -45,12 +45,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added global hotkey to terminate all sandboxed processes (default: Ctrl+Pause)
-- the Run Sandboxed dialog can now be handled by the Sandman UI
+- the Run Sandboxed dialog can now be handled by the SandMan UI
 - added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on Windows 8 and later
 -- Note: this allows Chrome and other programs to use the job system for additional isolation
-- added librewolf.exe to the list of Firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)
+- added Librewolf.exe to the list of Firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)
 - added run regedit sandboxed menu command
-- added new support settings tab to Sandman UI for updates and news
+- added new support settings tab to SandMan UI for updates and news
 - added code integrity verification to Sbie service and UI
 - added template for Vivaldi Notes (by isaak654) [#948](https://github.com/sandboxie-plus/Sandboxie/issues/948)
 
@@ -73,7 +73,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed faulty initialization in SetServiceStatus (by flamencist) [#921](https://github.com/sandboxie-plus/Sandboxie/issues/921)
 - fixed buttons position in Classic UI settings (by isaak654) [#914](https://github.com/sandboxie-plus/Sandboxie/issues/914)
-- fixed missing password length check in the Sandman UI [#925](https://github.com/sandboxie-plus/Sandboxie/issues/925)
+- fixed missing password length check in the SandMan UI [#925](https://github.com/sandboxie-plus/Sandboxie/issues/925)
 - fixed issues opening job objects by name
 - fixed missing permission check when reopening job object handles (thanks Diversenok)
 - fixed issue with some Chromium 90+ hooks affecting the display of PDFs in derived browsers [#930](https://github.com/sandboxie-plus/Sandboxie/issues/930) [#817](https://github.com/sandboxie-plus/Sandboxie/issues/817)
@@ -120,7 +120,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Sandboxie now applies by default "Close...=!<program>,..." directives to non-excluded images if they are located in a sandbox
 -- added 'AlwaysCloseForBoxed=n' to disable this behaviour as it may not be always desired, and it doesn't provide extra security
-- added process image information to Sandman UI
+- added process image information to SandMan UI
 - localized template categories in the Plus UI [#727](https://github.com/sandboxie-plus/Sandboxie/issues/727)
 - added "DisableResourceMonitor=y" to disable resource access monitor for selected boxes [#886](https://github.com/sandboxie-plus/Sandboxie/issues/886)
 - added option to show trace entries only for the selected sandbox [#886](https://github.com/sandboxie-plus/Sandboxie/issues/886)
@@ -162,7 +162,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Vivaldi browser [#821](https://github.com/sandboxie-plus/Sandboxie/issues/821)
 - fixed some issues with box options in the Plus UI [#879](https://github.com/sandboxie-plus/Sandboxie/issues/879)
 - fixed some issues with hardware acceleration in Chromium based browsers [#795](https://github.com/sandboxie-plus/Sandboxie/issues/795)
-- the "Stop All" command now issues "kmdutill scandll" first to solve issues when the SbieDll.dll is in use
+- the "Stop All" command now issues "KmdUtil scandll" first to solve issues when the SbieDll.dll is in use
 - workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process [#547](https://github.com/sandboxie-plus/Sandboxie/issues/547) [#310](https://github.com/sandboxie-plus/Sandboxie/issues/310) [#215](https://github.com/sandboxie-plus/Sandboxie/issues/215)
 - fixed issue with Software Compatibility tab that doesn't always show template names correctly [#774](https://github.com/sandboxie-plus/Sandboxie/issues/774)
 
@@ -345,7 +345,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed old memory pool leak in the Sbie driver [#444](https://github.com/sandboxie-plus/Sandboxie/issues/444)
 - fixed issue with item selection in the access restrictions UI
-- fixed updater crash in Sbiectrl.exe [#450](https://github.com/sandboxie-plus/Sandboxie/issues/450)
+- fixed updater crash in SbieCtrl.exe [#450](https://github.com/sandboxie-plus/Sandboxie/issues/450)
 - fixed issues with RPC calls introduced in Sbie 5.33.1
 - fixed recently broken 'terminate all' command
 - fixed a couple minor UI issues with SandMan UI
@@ -385,7 +385,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added browse button for box root folder in the SandMan UI [#382](https://github.com/sandboxie-plus/Sandboxie/issues/382)
 - added explorer info message [#352](https://github.com/sandboxie-plus/Sandboxie/issues/352)
 - added option to keep the SandMan UI always on top
-- allow drag and drop file onto Sandman.exe to run it sandboxed [#355](https://github.com/sandboxie-plus/Sandboxie/issues/355)
+- allow drag and drop file onto SandMan.exe to run it sandboxed [#355](https://github.com/sandboxie-plus/Sandboxie/issues/355)
 - added start SandMan UI when a sandboxed application starts [#367](https://github.com/sandboxie-plus/Sandboxie/issues/367)
 - recovery window can now list all files
 - added file counter to recovery window
@@ -584,7 +584,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed minor issue with lingering/leader processes
 - fixed menu issue in SandMan UI
 - fixed issue with stop behaviour page in SandMan UI
-- fixed issue with Plus installer not displaying kmdutil window
+- fixed issue with Plus installer not displaying KmdUtil window
 - fixed SandMan UI saving UI settings on Windows shutdown
 - fixed issue with Plus installer autorun [#247](https://github.com/sandboxie-plus/Sandboxie/issues/247)
 - fixed issue with legacy installer not removing all files

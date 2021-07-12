@@ -127,7 +127,7 @@ void CTraceView::Refresh()
 	if(m_pOnlyCurrent->isChecked())
 		Boxes = theGUI->GetBoxView()->GetSelectedBoxes();
 
-	QList<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
+	QVector<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
 	//m_pTraceModel->Sync(ResourceLog, Pids);
 	QList<QVariant> Added = m_pTraceModel->Sync(ResourceLog, Boxes.count() == 1 ? Boxes.first().data() : NULL);
 

@@ -982,19 +982,26 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QPr
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
 
-	//bool bStart = (Command == "run_dialog" || Command == "default_browser" || Command == "mail_agent" || Command.left(10) == "start_menu");
-
-	QString StartCmd = "\"" + GetStartPath() + "\"" + (Elevated ? " /elevated" : "");
+	QString StartArgs;
+	if(Elevated)
+		StartArgs += "/elevated ";
 	if (!BoxName.isEmpty())
-		StartCmd += " /box:" + BoxName + " ";
+		StartArgs += "/box:" + BoxName + " ";
 	else
-		StartCmd += " /disable_force ";
-	StartCmd += Command;
+		StartArgs += "/disable_force ";
+	StartArgs += Command;
 
-	if (pProcess)
-		pProcess->start(StartCmd);
-	else
-		QProcess::startDetached(StartCmd);
+	if (pProcess) {
+		pProcess->setProgram(GetStartPath());
+		pProcess->setNativeArguments(StartArgs);
+		pProcess->start();
+	} 
+	else {
+		QProcess process;
+		process.setProgram(GetStartPath());
+		process.setNativeArguments(StartArgs);
+		process.startDetached();
+	}
 	return SB_OK;
 }
 
@@ -2234,7 +2241,7 @@ void CSbieAPI::AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge)
 	m_TraceList.append(LogEntry);
 }
 
-QList<CTraceEntryPtr> CSbieAPI::GetTrace() const 
+QVector<CTraceEntryPtr> CSbieAPI::GetTrace() const 
 { 
 	QReadLocker Lock(&m_TraceMutex); 
 

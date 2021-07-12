@@ -103,7 +103,6 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\common\my_ntdll.c" />
     <ClCompile Include="BoxOrder.c" />
     <ClCompile Include="DlgTmplRtl.cpp" />
     <ClCompile Include="MyFileOp.c" />
@@ -111,14 +110,10 @@
     <ClCompile Include="MyMsgBox.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\common\my_shlwapi.h" />
-    <ClInclude Include="..\..\common\my_version.h" />
-    <ClInclude Include="..\..\common\my_xeb.h" />
     <ClInclude Include="BoxOrder.h" />
     <ClInclude Include="CommonUtils.h" />
     <ClInclude Include="MyGdi.h" />
     <ClInclude Include="MyMsgBox.h" />
-    <ClInclude Include="MyPool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

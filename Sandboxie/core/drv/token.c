@@ -1246,18 +1246,6 @@ _FX void *Token_RestrictHelper1(
             if (SidInToken && SidInToken[1] >= 1) { // SubAuthorityCount >= 1
 
 				PSID NewSid = NULL;
-
-                //
-                // Alternative (less secure) workaround for msi issue started with windows 17763
-                // the workaround in Proc_CreateProcessInternalW_RS5 makes solves thsi usse well
-                //
-                //if (!proc->image_from_box && _wcsicmp(proc->image_name, L"msiexec.exe") == 0
-                //    && RtlEqualSid(SidInToken, SystemLogonSid)
-                //    && Conf_Get_Boolean(proc->box->name, L"MsiInstallerExemptions", 0, FALSE))
-                //{
-                //    //DbgPrint("Sbie, MsiServer was allowed to keep its system token\n");
-                //}
-                //else
                 
                 // SbieLogin BEGIN
 				if (Conf_Get_Boolean(proc->box->name, L"SandboxieLogon", 0, FALSE))

@@ -11,7 +11,7 @@ public:
 	CTraceModel(QObject* parent = 0);
 	~CTraceModel();
 
-	QList<QVariant>	Sync(const QList<CTraceEntryPtr>& EntryList, void* BoxPtr);
+	QList<QVariant>	Sync(const QVector<CTraceEntryPtr>& EntryList, void* BoxPtr);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
 

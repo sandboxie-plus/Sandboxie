@@ -2,10 +2,27 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+
+## [0.8.8 / 5.50.8] - 2021-07-12
+
+### Changed
+- MSIServer no longer requirers being run as system completing the move to not using system tockens in a sandbox by default
+-- the security enhanced option "MsiInstallerExemptions=n" is now the default behavioure
+
+### Fixed
+- fixed issue with the "Explore Sandboxed" command [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
+- rolled back the switch from using NtQueryKey to NtQueryObject as it seams to bream soem older w10 versions liek 1803 [#984](https://github.com/sandboxie-plus/Sandboxie/issues/984)
+-- this change was introduced to fix [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
+-- to use NtQueryObject the option "UseObjectNameForKeys=y" can be added to sandboxie.ini
+
+
+
+
 ## [0.8.7b / 5.50.7] - 2021-07-11
 
 ### Fixed
-- fixed issue with boxes that had auto-delete activated introduced in the previous build
+- fixed issue with boxes that had auto-delete activated introduced in the previous build [#986](https://github.com/sandboxie-plus/Sandboxie/issues/986)
 
 ## [0.8.7 / 5.50.7] - 2021-07-10
 

@@ -182,6 +182,12 @@ typedef struct _THREAD_DATA {
     ULONG file_dont_strip_write_access;
 
     //
+    // misc modules
+    //
+
+    HANDLE  scm_last_own_token;
+
+    //
     // proc module:  image path for a child process being started
     //
 

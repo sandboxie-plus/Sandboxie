@@ -66,5 +66,5 @@ extern const ULONG tzuk;
 
 /* BigNum */
 
-#define BIGNUM_WITH_FROM_STRING
-#include "common/bignum.c"
+//#define BIGNUM_WITH_FROM_STRING
+//#include "common/bignum.c"

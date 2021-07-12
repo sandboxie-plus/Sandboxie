@@ -2447,8 +2447,8 @@ _FX NTSTATUS File_NtCreateFileImpl(
         ){
 
         //
-        // MSIServer when accessing \??\C:\WINDOWS\Installer\???????.msi files will get a PROGOLEGE_NOT_HELD error when requesting ACCESS_SYSTEM_SECURITY
-        // Howeever if we broadly clear this flag we will get error 1946 'System.AppUserModel.ID' could not be set on *.lnk files
+        // MSIServer when accessing \??\C:\WINDOWS\Installer\???????.msi files will get a PRIVILEGE_NOT_HELD error when requesting ACCESS_SYSTEM_SECURITY
+        // However, if we broadly clear this flag we will get Warning 1946 Property 'System.AppUserModel.ID' could not be set on *.lnk files
         //
 
         DesiredAccess &= ~ACCESS_SYSTEM_SECURITY;
@@ -3042,7 +3042,7 @@ ReparseLoop:
                     
                     //
                     // MSI must not fail accessing \??\C:\WINDOWS\Installer\Config.msi but this folder is readable only for system,
-                    // so we create a boxed copy copy instead and open it
+                    // so we create a boxed copy instead and open it
                     //
         
                     RtlInitUnicodeString(&objname, CopyPath);

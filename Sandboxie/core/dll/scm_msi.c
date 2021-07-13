@@ -98,6 +98,7 @@ static P_GetTokenInformation        __sys_GetTokenInformation = NULL;
 //---------------------------------------------------------------------------
 
 static volatile BOOLEAN Scm_IsMsiServer = FALSE;
+BOOLEAN Scm_MsiServer_Systemless = FALSE;
 
 static const WCHAR *_MsiServerInUseEventName = SBIE L"_WindowsInstallerInUse";
 
@@ -120,47 +121,51 @@ _FX BOOLEAN Scm_SetupMsiHooks()
     SBIEDLL_HOOK(Scm_, CreateWaitableTimerW);
 
 
-    //
-    // To run MSIServer without system privileges we need to make it think it is running as system
-    // we do that by hooking OpenProcessToken and if it opened the current process caching the resulting token handle
-    // than in GetTokenInformation when asked for TokenUser for this handle we return the system SID
-    // finally on NtClose we clear the cached token value in case it gets reused later
-    //
-
-    /*
-    msi.dll!RunningAsLocalSystem
-    v2 = GetCurrentProcess();
-    if ( OpenProcessToken(v2, 8u, &hObject) )
-    {
-        v3 = IsLocalSystemToken(hObject);
-    ...
-    
-    msi.dll!IsLocalSystemToken
-    if ( GetUserSID(a1, Sid) )
-        return 0;
-    StringSid = 0i64;
-    if ( !ConvertSidToStringSidW(Sid, &StringSid) )
-        return 0;
-    v2 = L"S-1-5-18";
-    wcscmp...
-    
-
-    msi.dll!GetUserSID
-    if ( GetTokenInformation(a1, TokenUser, TokenInformation, 0x58u, ReturnLength) )
-    {
-        if ( CopySid(0x48u, a2, TokenInformation[0]) )
-    ...
-    */
-
     // MSIServer without system - fake running as system
-    HMODULE hAdvapi32 = LoadLibrary(L"Advapi32.dll");
+    if (!SbieDll_CheckProcessLocalSystem(GetCurrentProcess()))
+    {
+        Scm_MsiServer_Systemless = TRUE;
 
-    void *OpenProcessToken = (P_OpenProcessToken)GetProcAddress(hAdvapi32, "OpenProcessToken");
-    SBIEDLL_HOOK(Scm_, OpenProcessToken);
+        //
+        // To run MSIServer without system privileges we need to make it think it is running as system
+        // we do that by hooking OpenProcessToken and if it opened the current process caching the resulting token handle
+        // than in GetTokenInformation when asked for TokenUser for this handle we return the system SID
+        // finally on NtClose we clear the cached token value in case it gets reused later
+        //
 
-    void *GetTokenInformation = (P_GetTokenInformation)GetProcAddress(hAdvapi32, "GetTokenInformation");
-    SBIEDLL_HOOK(Scm_, GetTokenInformation);
+        /*
+        msi.dll!RunningAsLocalSystem
+        v2 = GetCurrentProcess();
+        if ( OpenProcessToken(v2, 8u, &hObject) )
+        {
+            v3 = IsLocalSystemToken(hObject);
+        ...
+    
+        msi.dll!IsLocalSystemToken
+        if ( GetUserSID(a1, Sid) )
+            return 0;
+        StringSid = 0i64;
+        if ( !ConvertSidToStringSidW(Sid, &StringSid) )
+            return 0;
+        v2 = L"S-1-5-18";
+        wcscmp...
+    
 
+        msi.dll!GetUserSID
+        if ( GetTokenInformation(a1, TokenUser, TokenInformation, 0x58u, ReturnLength) )
+        {
+            if ( CopySid(0x48u, a2, TokenInformation[0]) )
+        ...
+        */
+
+        HMODULE hAdvapi32 = LoadLibrary(L"Advapi32.dll");
+
+        void* OpenProcessToken = (P_OpenProcessToken)GetProcAddress(hAdvapi32, "OpenProcessToken");
+        SBIEDLL_HOOK(Scm_, OpenProcessToken);
+
+        void* GetTokenInformation = (P_GetTokenInformation)GetProcAddress(hAdvapi32, "GetTokenInformation");
+        SBIEDLL_HOOK(Scm_, GetTokenInformation);
+    }
 
     return TRUE;
 }

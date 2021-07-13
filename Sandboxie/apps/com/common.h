@@ -93,44 +93,6 @@ void Check_Windows_7(void)
 
 
 //---------------------------------------------------------------------------
-// CheckProcessLocalSystem
-//---------------------------------------------------------------------------
-
-
-_FX BOOL CheckProcessLocalSystem(HANDLE ProcessHandle)
-{
-    BOOL IsLocalSystem = FALSE;
-
-    HANDLE TokenHandle;
-    BOOL b = OpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
-    if (b) {
-
-        union {
-            TOKEN_USER user;
-            UCHAR space[64];
-        } info;
-        ULONG len = sizeof(info);
-        WCHAR *sid;
-
-        b = GetTokenInformation(
-            TokenHandle, TokenUser, &info, len, &len);
-        if (b) {
-            b = ConvertSidToStringSid(info.user.User.Sid, &sid);
-            if (b) {
-                if (wcscmp(sid, L"S-1-5-18") == 0)
-                    IsLocalSystem = TRUE;
-                LocalFree(sid);
-            }
-        }
-
-        CloseHandle(TokenHandle);
-    }
-
-    return IsLocalSystem;
-}
-
-
-//---------------------------------------------------------------------------
 // FindProcessId
 //---------------------------------------------------------------------------
 
@@ -180,7 +142,7 @@ _FX ULONG FindProcessId(
             }
 
             if (process) {
-                if (CheckProcessLocalSystem(process))
+                if (SbieDll_CheckProcessLocalSystem(process))
                     found = TRUE;
                 CloseHandle(process);
             }

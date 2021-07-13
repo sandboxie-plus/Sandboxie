@@ -179,6 +179,8 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_IsBoxedService(HANDLE hService);
 SBIEDLL_EXPORT  BOOL SbieDll_StartBoxedService(
     const WCHAR *ServiceName, BOOLEAN WithAdd);
 
+SBIEDLL_EXPORT  BOOL SbieDll_CheckProcessLocalSystem(HANDLE ProcessHandle);
+
 SBIEDLL_EXPORT  HRESULT SbieDll_ComCreateProxy(
     REFIID riid, void *pUnkOuter, void *pChannel, void **ppUnknown);
 

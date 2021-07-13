@@ -1088,6 +1088,54 @@ _FX BOOLEAN Secure_IsRestrictedToken(BOOLEAN CheckThreadToken)
 
 
 //---------------------------------------------------------------------------
+// Secure_IsTokenLocalSystem
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Secure_IsTokenLocalSystem(HANDLE hToken)
+{
+    NTSTATUS status;
+    BOOLEAN return_value = FALSE;
+
+    ULONG64 user_space[88];
+    PTOKEN_USER user = (PTOKEN_USER)user_space;
+    ULONG len;
+
+    len = sizeof(user_space);
+    status = NtQueryInformationToken(
+                        hToken, TokenUser, user, len, &len);
+
+    if (status == STATUS_BUFFER_TOO_SMALL) {
+
+        user = Dll_AllocTemp(len);
+        status = NtQueryInformationToken(
+                        hToken, TokenUser, user, len, &len);
+    }
+
+    if (NT_SUCCESS(status)) {
+
+        UNICODE_STRING SidString;
+
+        status = RtlConvertSidToUnicodeString(
+            &SidString, user->User.Sid, TRUE);
+
+        if (NT_SUCCESS(status)) {
+
+            if (_wcsicmp(SidString.Buffer, L"S-1-5-18") == 0)
+                return_value = TRUE;
+
+            RtlFreeUnicodeString(&SidString);
+        }
+    }
+
+    if (user != (PTOKEN_USER)user_space)
+        Dll_Free(user);
+
+    return return_value;
+}
+
+
+//---------------------------------------------------------------------------
 // Secure_IsLocalSystemToken
 //---------------------------------------------------------------------------
 
@@ -1121,39 +1169,7 @@ _FX BOOLEAN Secure_IsLocalSystemToken(BOOLEAN CheckThreadToken)
 
     if (NT_SUCCESS(status)) {
 
-        ULONG64 user_space[8];
-        PTOKEN_USER user = (PTOKEN_USER)user_space;
-        ULONG len;
-
-        len = sizeof(user_space);
-        status = NtQueryInformationToken(
-                            hToken, TokenUser, user, len, &len);
-
-        if (status == STATUS_BUFFER_TOO_SMALL) {
-
-            user = Dll_AllocTemp(len);
-            status = NtQueryInformationToken(
-                            hToken, TokenUser, user, len, &len);
-        }
-
-        if (NT_SUCCESS(status)) {
-
-            UNICODE_STRING SidString;
-
-            status = RtlConvertSidToUnicodeString(
-                &SidString, user->User.Sid, TRUE);
-
-            if (NT_SUCCESS(status)) {
-
-                if (_wcsicmp(SidString.Buffer, L"S-1-5-18") == 0)
-                    return_value = TRUE;
-
-                RtlFreeUnicodeString(&SidString);
-            }
-        }
-
-        if (user != (PTOKEN_USER)user_space)
-            Dll_Free(user);
+        return_value = Secure_IsTokenLocalSystem(hToken);
 
         NtClose(hToken);
     }

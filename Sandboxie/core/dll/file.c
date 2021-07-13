@@ -2441,9 +2441,10 @@ _FX NTSTATUS File_NtCreateFileImpl(
         DesiredAccess &= ~ACCESS_SYSTEM_SECURITY;   // for TiWorker.exe (W8)
 
     // MSIServer without system
-    if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && (DesiredAccess & ACCESS_SYSTEM_SECURITY) != 0
+    extern BOOLEAN Scm_MsiServer_Systemless;
+    if ((DesiredAccess & ACCESS_SYSTEM_SECURITY) != 0 && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
         && ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
-        && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 3, L".msi") == 0
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 4, L".msi") == 0
         ){
 
         //
@@ -3035,7 +3036,7 @@ ReparseLoop:
                 //}
 
                 // MSIServer without system
-                if (status == STATUS_ACCESS_DENIED && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER 
+                if (status == STATUS_ACCESS_DENIED && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
                     && ObjectAttributes->ObjectName->Buffer && ObjectAttributes->ObjectName->Length >= 34
                     && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 11, L"\\Config.Msi") == 0
                     ) {

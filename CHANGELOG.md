@@ -4,17 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.8.8 / 5.50.8] - 2021-07-12
+## [0.8.8 / 5.50.8] - 2021-07-13
 
 ### Changed
-- MSIServer no longer requirers being run as system completing the move to not using system tockens in a sandbox by default
--- the security enhanced option "MsiInstallerExemptions=n" is now the default behavioure
+- MSIServer no longer requires being run as system; this completes the move to not use system tokens in a sandbox by default
+-- the security-enhanced option "MsiInstallerExemptions=n" is now the default behaviour
 
 ### Fixed
 - fixed issue with the "Explore Sandboxed" command [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
-- rolled back the switch from using NtQueryKey to NtQueryObject as it seams to bream soem older w10 versions liek 1803 [#984](https://github.com/sandboxie-plus/Sandboxie/issues/984)
+- rolled back the switch from using NtQueryKey to NtQueryObject as it seems to break some older Windows 10 versions like 1803 [#984](https://github.com/sandboxie-plus/Sandboxie/issues/984)
 -- this change was introduced to fix [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
--- to use NtQueryObject the option "UseObjectNameForKeys=y" can be added to sandboxie.ini
+-- to use NtQueryObject the option "UseObjectNameForKeys=y" can be added to Sandboxie.ini
 
 
 

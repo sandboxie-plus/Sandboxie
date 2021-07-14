@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.8.8b / 5.50.9] - 2021-07-14
+
+### Fixed
+- fixed issue with systemless MSI
+
+
+
 ## [0.8.8 / 5.50.8] - 2021-07-13
 
 ### Changed
@@ -15,7 +22,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - rolled back the switch from using NtQueryKey to NtQueryObject as it seems to break some older Windows 10 versions like 1803 [#984](https://github.com/sandboxie-plus/Sandboxie/issues/984)
 -- this change was introduced to fix [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
 -- to use NtQueryObject the option "UseObjectNameForKeys=y" can be added to Sandboxie.ini
-
 
 
 

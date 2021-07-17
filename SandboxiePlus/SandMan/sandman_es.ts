@@ -509,28 +509,22 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="229"/>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</oldsource>
         <translation>Queres permitir %4 (%5) copiar a %1 archivo grande dentro de la sandbox: %2
 Nombre de archivo: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="235"/>
-        <source>Do you want to allow %1 (%2) access to the internet?
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
-        <oldsource>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</oldsource>
         <translation>Queres permitir %1 (%2) acceder a internet?
 Ruta completa: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="298"/>
-        <source>%1 is eligible for quick recovery from %2.
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
-        <oldsource>%1 is eligible for quick recovery from %2.
-The file was written by: %3</oldsource>
         <translation>%1 es elegible para recuperacion rapida de %2.
 El archivo fue escrito por: %3</translation>
     </message>
@@ -552,10 +546,8 @@ El archivo fue escrito por: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="386"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
-        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</oldsource>
         <translation>Migrando un archivo grande %1 dentro de la sandbox %2, %3 restantes.
 Ruta completa: %4</translation>
     </message>
@@ -956,9 +948,13 @@ Ruta completa: %4</translation>
         <translation>Quiere cerrar el Administrador de Sandboxie?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="525"/>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.</source>
-        <translation>Sandboxie-Plue estaba siendo ejecutado en modo portable, en necesario limpiar los servicios creados.  Esto pedira permisos administrativos.</translation>
+        <location filename="SandMan.cpp" line="483"/>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
+Do you want to do the clean up?</source>
+        <translation type="unfinished">Sandboxie-Plus estaba siendo ejecutado en modo portable, en necesario limpiar los servicios creados. Esto pedira permisos administrativos.
+
+Do you want to do the clean up?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="526"/>

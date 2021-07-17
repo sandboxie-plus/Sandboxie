@@ -202,52 +202,52 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2285"/>
         <source>Custom Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigene Vorlagen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2286"/>
         <source>Email Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Emailprogramme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2287"/>
         <source>PDF/Print</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF/Druck</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2288"/>
         <source>Security/Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheit/Privatspähre</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2289"/>
         <source>Desktop Utilities</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop Werkzeuge</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2290"/>
         <source>Download Managers</source>
-        <translation type="unfinished"></translation>
+        <translation>Downloadmanager</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2291"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished">Diverses</translation>
+        <translation>Diverses</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2292"/>
         <source>Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Webbrowser</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2293"/>
         <source>Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediaplayer</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2294"/>
         <source>Torrent Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Torrentclients</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2339"/>
@@ -399,22 +399,22 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2371"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte Vorlagen-Identifikation eingeben</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2379"/>
         <source>Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2399"/>
         <source>Only local templates can be removed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur lokale Vorlagen können entfernt werden!</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="2403"/>
         <source>Do you really want to delete the selected local template?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich die ausgewählten lokalen Vorlagen löschen?</translation>
     </message>
 </context>
 <context>
@@ -588,7 +588,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
+        <translation>Möchten Sie %4 (%5) erlauben eine %1 große Datei in die Sandbox: %2 zu kopieren?
 Dateiname: %3</translation>
     </message>
     <message>
@@ -597,7 +597,7 @@ Dateiname: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
+        <translation>Möchten Sie %1 (%2) den Zugriff auf das Internet erlauben?
 Vollständiger Pfad: %3</translation>
     </message>
     <message>
@@ -606,14 +606,15 @@ Vollständiger Pfad: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
+        <translation>%1 ist zur Schnellwiederherstellung aus %2 berechtigt.
 Die Datei wurde geschrieben durch: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="389"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Übertrage große Datei %1 in die Sandbox %2, %3 verbleiben.
+Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
@@ -672,44 +673,9 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="323"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es befinden sich %1 Dateien und %2 Ordner in der Sandbox, welche %3 an Speicherplatz belegen.</translation>
     </message>
-    <message>
-        <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="vanished">Eine oder mehrere ausgewählte Dateien befinden sich auf Netzwerkpfaden und müssen zur Wiederherstellung lokal gespeichert werden. Bitte einen Ordner auswählen, um die ausgewählten Dateien darin wiederherzustellen.</translation>
-    </message>
-    <message>
-        <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="vanished">Es befinden sich %1 Dateien und %2 Ordner in der Sandbox, welche %3 bytes an Speicherplatz belegen.</translation>
-    </message>
-</context>
-<context>
-    <name>CResMonModel</name>
-    <message>
-        <source>Unknown</source>
-        <translation type="vanished">Unbekannte</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Prozess</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Zeitstempel</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">Typ</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Wert</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Status</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>CSandBoxPlus</name>
     <message>
@@ -801,10 +767,6 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="174"/>
         <source>Sbie Messages</source>
         <translation>Sbie Nachrichten</translation>
-    </message>
-    <message>
-        <source>Resource Monitor</source>
-        <translation type="vanished">Ressourcenmonitor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="191"/>
@@ -945,7 +907,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="382"/>
         <source>Trace Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Spurverfolgung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="594"/>
@@ -1013,10 +975,6 @@ Vollständiger Pfad: %4</translation>
         <translation>.ini-Datei neu laden</translation>
     </message>
     <message>
-        <source>Resource Logging</source>
-        <translation type="vanished">Ressourcenprotokollierung</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="386"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
@@ -1065,7 +1023,9 @@ Do you want to do the clean up?</source>
         <oldsource>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</oldsource>
-        <translation type="unfinished">Sandboxie-Plus wurde im portablen Modus betrieben, nun müssen die erzeugten Dienste bereinigt werden, was Adminrechte benötigt.</translation>
+        <translation>Sandboxie-Plus wurde im portablen Modus betrieben, nun müssen die erzeugten Dienste bereinigt werden, was Adminrechte benötigt.
+
+Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="529"/>
@@ -1354,7 +1314,7 @@ Do you want to do the clean up?</oldsource>
     <message>
         <location filename="SandMan.cpp" line="178"/>
         <source>Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Spurprotokoll</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="367"/>
@@ -1547,153 +1507,153 @@ Do you want to do the clean up?</oldsource>
     <message>
         <location filename="SbiePlusAPI.cpp" line="421"/>
         <source>Sbie RpcSs</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie RpcSs</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="422"/>
         <source>Sbie DcomLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie DcomLaunc</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="423"/>
         <source>Sbie Crypto</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Krypto</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="424"/>
         <source>Sbie WuAu Svc</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie WuAu Svc</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="425"/>
         <source>Sbie BITS</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie BITS</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="426"/>
         <source>Sbie Svc</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Svc</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="427"/>
         <source>MSI Installer</source>
         <oldsource>Msi Installer</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>MSI Installer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="428"/>
         <source>Trusted Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trusted Installer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="429"/>
         <source>Windows Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Update</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="430"/>
         <source>Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Explorer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="431"/>
         <source>Internet Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Internet Explorer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="432"/>
         <source>Firefox</source>
         <oldsource>FireFox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Firefox</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="433"/>
         <source>Windows Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Media Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="434"/>
         <source>Winamp</source>
         <oldsource>WinAmp</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Winamp</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="435"/>
         <source>KMPlayer</source>
         <oldsource>KM Player</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>KMPlayer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="436"/>
         <source>Windows Live Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Live Mail</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="437"/>
         <source>Service Model Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Service Model Reg</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="438"/>
         <source>RunDll32</source>
-        <translation type="unfinished"></translation>
+        <translation>RunDll32</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="439"/>
         <location filename="SbiePlusAPI.cpp" line="440"/>
         <source>DllHost</source>
-        <translation type="unfinished"></translation>
+        <translation>DllHost</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="441"/>
         <source>Windows Ink Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Ink Dienste</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="442"/>
         <source>Chromium Based</source>
-        <translation type="unfinished"></translation>
+        <translation>Chromium basierend</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="443"/>
         <source>Google Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Google Updater</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="444"/>
         <source>Acrobat Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Acrobat Reader</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="445"/>
         <source>MS Outlook</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Outlook</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="446"/>
         <source>MS Excel</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Excel</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="447"/>
         <source>Flash Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Flash Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="448"/>
         <source>Firefox Plugin Container</source>
         <oldsource>FireFox Plugin Container</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Firefox Plugin Container</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="449"/>
         <source>Generic Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberbergriff Webbrowser</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="450"/>
         <source>Generic Mail Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberbegriff EMailclient</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="459"/>
@@ -1708,7 +1668,7 @@ Do you want to do the clean up?</oldsource>
     <message>
         <location filename="SbiePlusAPI.cpp" line="472"/>
         <source> (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -1803,10 +1763,6 @@ Do you want to do the clean up?</oldsource>
         <location filename="Views/SbieView.cpp" line="87"/>
         <source>Sandbox Presets</source>
         <translation>Sandboxvorgaben</translation>
-    </message>
-    <message>
-        <source>Enable API Call logging</source>
-        <translation type="vanished">Aktiviere API-Aufrufprotokoll</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="100"/>
@@ -2002,7 +1958,7 @@ Do you want to do the clean up?</oldsource>
         <location filename="Views/SbieView.cpp" line="742"/>
         <source>Do you want to %1 the selected process(es)?</source>
         <oldsource>Do you want to %1 the selected process(es)</oldsource>
-        <translation type="unfinished">Möchten Sie die ausgewählten Prozesse %1</translation>
+        <translation>Möchten Sie die ausgewählten Prozesse %1?</translation>
     </message>
 </context>
 <context>
@@ -2108,42 +2064,42 @@ Do you want to do the clean up?</oldsource>
     <message>
         <location filename="Models/TraceModel.cpp" line="159"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="247"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="249"/>
         <source>Process %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozess %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="257"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Thread %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="285"/>
         <source>Process</source>
-        <translation type="unfinished">Prozess</translation>
+        <translation>Prozess</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="287"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="288"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="289"/>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
 </context>
 <context>
@@ -2151,12 +2107,12 @@ Do you want to do the clean up?</oldsource>
     <message>
         <location filename="Views/TraceView.cpp" line="54"/>
         <source>Show as task tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige als Aufgabenbaum</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="59"/>
         <source>PID:</source>
-        <translation type="unfinished"></translation>
+        <translation>PID:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="62"/>
@@ -2165,27 +2121,27 @@ Do you want to do the clean up?</oldsource>
         <location filename="Views/TraceView.cpp" line="151"/>
         <location filename="Views/TraceView.cpp" line="193"/>
         <source>[All]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Alle]</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="66"/>
         <source>TID:</source>
-        <translation type="unfinished"></translation>
+        <translation>TID:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="74"/>
         <source>Show only sellectes box</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige nur ausgewählte Boxen</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="173"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished">%1 (%2)</translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="180"/>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
 </context>
 <context>
@@ -2262,10 +2218,6 @@ Do you want to do the clean up?</oldsource>
         <location filename="Forms/OptionsWindow.ui" line="563"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>Schütze das System vor Prozessen in der Sandbox</translation>
-    </message>
-    <message>
-        <source>General restrictions</source>
-        <translation type="vanished">Generelle Restriktionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="119"/>
@@ -2408,7 +2360,7 @@ Do you want to do the clean up?</oldsource>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="437"/>
         <source>Prompt user for large file migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Frage Benutzer bei Migration von großen Dateien</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="447"/>
@@ -2512,10 +2464,6 @@ Do you want to do the clean up?</oldsource>
         <location filename="Forms/OptionsWindow.ui" line="468"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
         <translation>Der Druckerwarteschlange erlauben als Dateien außerhalb der Sandbox zu drucken (Print to file)</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="vanished">Drucken</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="475"/>
@@ -2676,11 +2624,9 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 Note that all Close...=!&lt;program&gt;,... exclusions have the same limitations.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</oldsource>
-        <translatorcomment>Translated close to what is written in the source</translatorcomment>
-        <translation type="unfinished">Konfigurieren, welche Prozesse auf welche Ressourcen zugreifen können. Doppelklick um einen Eintrag zu bearbeiten.
+        <translation>Konfigurieren, welche Prozesse auf welche Ressourcen zugreifen können. Doppelklick um einen Eintrag zu bearbeiten.
 &apos;Direkter&apos; Datei und Schlüsselzugriff trifft nur auf Programmdateien zu, die sich außerhalb der Sandbox befinden.
-Beachte, dass alle Programme schließen...=!&lt;Programm&gt;,... Ausnahmen die gleichen Beschränkungen haben.
-Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Programme zu zu treffen.</translation>
+Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Programme zu zutreffen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1385"/>
@@ -2742,7 +2688,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
         <location filename="Forms/OptionsWindow.ui" line="573"/>
         <source>Block read access to the clipboard</source>
         <oldsource>Allow access to Smart Cards</oldsource>
-        <translation type="unfinished">Zugriff auf SmartCards erlauben</translation>
+        <translation>Blockiere Lesezugriff auf die Zwischenablage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1603"/>
@@ -2794,17 +2740,17 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="279"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>ACHTUNG: Bei Ausführung unter dem eingebauten Administrator, können Prozessse ihre administrativen Rechten nicht abgeben.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="687"/>
         <source>Program/Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm/Dienst</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1375"/>
         <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wende Blockiert...=!&lt;program&gt;,...Anweisungen auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1576"/>
@@ -2814,43 +2760,43 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1646"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Emuliere sandgeboste &apos;Window Stations&apos; für alle Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1656"/>
         <source>Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1664"/>
         <source>Allow sandboxed programs to Change User Passwords and alike</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube sandgeboxten Programmen die Änderung von Nuzterkennwörtern und Ähnlichem</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1671"/>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiedene erweiterte Isolationsfeatures können die Kompatibilität mit einigen Programmen beieinträchtigen. Wenn Sie diese Sandbox &lt;b&gt;NICHT für Sicherheit&lt;/b&gt;, aber für einfache (Über-)Tragbarkeit von Anwendungen nutzen, können Sie mit diesen Optionen, unter Opferung von Sicherheit, die Kompatibilität wieder herstellen. &lt;br&gt; Diese Optionen können sicher genutzt werden, wenn Sie keinem sandgeboxten Prozess administrative Rechte gewähren.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1681"/>
         <source>Allow sandboxed programs to Managing Hardware/Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube sandbeboxten Programmen Hardware/Geräte zu verwalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1701"/>
         <source>Open access to Windows Security Account Manager</source>
         <oldsource>Open access to windows Security Account Manager</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Zugriff auf Windows Security Account Manager</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1721"/>
         <source>Open access to windows Local Security Authority</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Zugriff auf Windows Local Security Authority</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1737"/>
         <source>Access isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugriffsisolation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1800"/>
@@ -2961,17 +2907,9 @@ an Stelle von &quot;*&quot;.</translation>
         <translation>Dateirückverfolgung</translation>
     </message>
     <message>
-        <source>Lift security restrictions</source>
-        <translation type="vanished">Sicherheitsrestriktionen aufheben</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1569"/>
         <source>Sandbox isolation</source>
         <translation>Sandboxisolation</translation>
-    </message>
-    <message>
-        <source>Allow access to Bluetooth</source>
-        <translation type="vanished">Zugriff auf Bluetooth erlauben</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1747"/>
@@ -3004,10 +2942,6 @@ an Stelle von &quot;*&quot;.</translation>
         <translation>&lt;- für dieses findet das Obige keine Anwendung</translation>
     </message>
     <message>
-        <source>Log all SetError&apos;s to Trace log</source>
-        <translation type="vanished">Protokolliere alle SetError ins Rückverfolgungsprotokoll</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2115"/>
         <source>Debug</source>
         <translation>Debug</translation>
@@ -3030,7 +2964,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2197"/>
         <source>Compatibility Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompatibilitätsvorlagen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2205"/>
@@ -3045,12 +2979,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2225"/>
         <source>Add Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Vorlage hinzu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2245"/>
         <source>Remove Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne Vorlage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2269"/>
@@ -3065,49 +2999,51 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Disable Resource Access Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Ressourcenzugriffsmonitor</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2099"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ressourcenzugriffsmonitor</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2285"/>
         <source>Template Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlagenordner</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2293"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere die Ordnerspeicherorte, welche bei Ihren anderen Programmen genutzt werden.
+
+Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global für alle Boxen gepeichert werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2321"/>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2332"/>
         <source>Accessibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Barrierefreiheit</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2340"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zur Kompensation des verlorenen Schuztes, suchen Sie die Einstellungsseite der Rechteabgabe in der Gruppe der Beschränkungen auf.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2347"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Screenreader, JAWS, NVDA, Window-Eyes, Systemzugriff</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2354"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die folgenden Einstellungen ermöglichen die Verwendung von Sandboxie in Verbindung mit Barrierefreiheitssoftware. Bitte beachten Sie, dass ein gewisser Umfang des Schutzes von Sandboxie notwendigerweise verloren geht, wenn diese Einstellungen aktiv sind.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2380"/>
@@ -3218,10 +3154,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="86"/>
         <source>Show Sys-Tray</source>
         <translation>Zeige System-Tray</translation>
-    </message>
-    <message>
-        <source>Use Dark Theme</source>
-        <translation type="vanished">Dunkles Farbschema benutzen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>
@@ -3337,7 +3269,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="187"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Farbschema benutzen (vollständig angewandt nach einem Neustart)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="337"/>

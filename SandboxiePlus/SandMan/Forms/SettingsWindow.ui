@@ -189,7 +189,7 @@
              <item>
               <widget class="QCheckBox" name="chkPanic">
                <property name="text">
-                <string>Hot-Key for terminating all boxed processes:</string>
+                <string>Hotkey for terminating all boxed processes:</string>
                </property>
               </widget>
              </item>
@@ -635,7 +635,7 @@
            <item row="5" column="3">
             <widget class="QCheckBox" name="chkAutoInstall">
              <property name="text">
-              <string>Instal updates automatically</string>
+              <string>Install updates automatically</string>
              </property>
             </widget>
            </item>
@@ -668,7 +668,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Keeping Sandboxie up to date with the rolling releases of windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the developement with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</string>
+              <string>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</string>
              </property>
              <property name="textFormat">
               <enum>Qt::RichText</enum>

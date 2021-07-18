@@ -544,8 +544,8 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
 #include <in6addr.h>
 
 #ifdef KERNEL_MODE
-static int isdigit(int c) { return (c >= '0' && c <= '9'); }
-static int isxdigit(int c) { return (isdigit(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')); }
+static int isdigit_(int c) { return (c >= '0' && c <= '9'); }
+static int isxdigit_(int c) { return (isdigit_(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')); }
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -641,7 +641,7 @@ int _inet_aton(const wchar_t *from, struct in_addr *in)
 
 static int ipcharok(int c)
 {
-	return c == ':' || isascii(c) && isxdigit(c);
+	return c == ':' || isascii(c) && isxdigit_(c);
 }
 
 static int delimchar(int c)

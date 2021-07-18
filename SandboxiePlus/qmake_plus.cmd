@@ -6,12 +6,12 @@ REM echo arch: %1
 
 IF %1 == Win32 (
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
-  set qt_path=%~dp0..\..\Qt\5.15.1\msvc2019
+  set qt_path=%~dp0..\..\Qt\5.15.2\msvc2019
   set build_arch=Win32
 )
 IF %1 == x64 (
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-  set qt_path=%~dp0..\..\Qt\5.15.1\msvc2019_64
+  set qt_path=%~dp0..\..\Qt\5.15.2\msvc2019_64
   set build_arch=x64
 )
 

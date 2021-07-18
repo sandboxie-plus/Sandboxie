@@ -216,11 +216,6 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForImageName_bool(
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
 
-SBIEDLL_EXPORT  WCHAR* SbieDll_GetTagValue(WCHAR* str, WCHAR** value, ULONG* len, WCHAR sep);
-typedef BOOLEAN (*SbieDll_TagEnumProc)(WCHAR* name, ULONG name_len, WCHAR* value, ULONG value_len, void* param);
-SBIEDLL_EXPORT  VOID SbieDll_EnumTagValues(WCHAR* string, SbieDll_TagEnumProc enumProc, void* param, WCHAR eq, WCHAR sep);
-SBIEDLL_EXPORT  BOOLEAN SbieDll_FindTagValue(WCHAR* string, const WCHAR* name, WCHAR* value, ULONG value_size, WCHAR eq, WCHAR sep);
-
 
 //---------------------------------------------------------------------------
 

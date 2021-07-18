@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>660</width>
+    <width>658</width>
     <height>456</height>
    </rect>
   </property>
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -1111,76 +1111,264 @@ If leader processes are defined, all others are treated as lingering processes.<
          <string>Internet Restrictions</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_21">
-         <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_20">
-           <item row="7" column="0">
-            <widget class="QCheckBox" name="chkINetBlockMsg">
-             <property name="text">
-              <string>Issue message 1307 when a program is denied internet access</string>
+         <item row="1" column="0">
+          <widget class="QTabWidget" name="tabWidget_3">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="tabINet">
+            <attribute name="title">
+             <string>Process Restrictions</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_46">
+             <property name="leftMargin">
+              <number>3</number>
              </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="chkBlockINet">
-             <property name="text">
-              <string>Block internet access for all programs except those added to the list.</string>
+             <property name="topMargin">
+              <number>6</number>
              </property>
-            </widget>
-           </item>
-           <item row="4" column="0" rowspan="3">
-            <widget class="QTreeWidget" name="treeINet">
-             <property name="sortingEnabled">
-              <bool>true</bool>
+             <property name="rightMargin">
+              <number>3</number>
              </property>
-             <column>
-              <property name="text">
-               <string>Name</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>Note: Programs installed to this sandbox won't be able to access the internet at all.</string>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QPushButton" name="btnDelINetProg">
-             <property name="text">
-              <string>Remove Program</string>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_20">
+               <item row="6" column="0">
+                <widget class="QCheckBox" name="chkINetBlockMsg">
+                 <property name="text">
+                  <string>Issue message 1307 when a program is denied internet access</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QPushButton" name="btnAddINetProg">
+                 <property name="text">
+                  <string>Add Program</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="chkINetBlockPrompt">
+                 <property name="text">
+                  <string>Prompt user whether to allow an exemption from the blockade.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QPushButton" name="btnDelINetProg">
+                 <property name="text">
+                  <string>Remove Program</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>Note: Programs installed to this sandbox won't be able to access the internet at all.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <spacer name="verticalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="0" rowspan="3">
+                <widget class="QTreeWidget" name="treeINet">
+                 <property name="sortingEnabled">
+                  <bool>true</bool>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>Name</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Access</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QLabel" name="label_12">
+                   <property name="text">
+                    <string>Set network/internet access for unlisted processes:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="cmbBlockINet"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabNetFw">
+            <attribute name="title">
+             <string>Network Restrictions</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_48">
+             <property name="leftMargin">
+              <number>3</number>
              </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="btnAddINetProg">
-             <property name="text">
-              <string>Add Program</string>
+             <property name="rightMargin">
+              <number>3</number>
              </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <spacer name="verticalSpacer_9">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="0">
-            <widget class="QCheckBox" name="chkINetBlockPrompt">
-             <property name="text">
-              <string>Prompt user whether to allow an exemption from the blockade.</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_47">
+               <item row="2" column="1">
+                <spacer name="verticalSpacer_23">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QLabel" name="label_48">
+                   <property name="text">
+                    <string>Test Rules, Program:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="txtProgFwTest"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_49">
+                   <property name="text">
+                    <string>Port:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="txtPortFwTest"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_50">
+                   <property name="text">
+                    <string>IP:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="txtIPFwTest"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_51">
+                   <property name="text">
+                    <string>Protocol:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="cmbProtFwTest"/>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="btnClearFwTest">
+                   <property name="text">
+                    <string>X</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="4" column="1">
+                <widget class="QPushButton" name="btnDelFwRule">
+                 <property name="text">
+                  <string>Remove Rule</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QPushButton" name="btnAddFwRule">
+                 <property name="text">
+                  <string>Add Rule</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" rowspan="4">
+                <widget class="QTreeWidget" name="treeNetFw">
+                 <column>
+                  <property name="text">
+                   <string>Programm</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Action</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Port</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>IP</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Protocol</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QCheckBox" name="chkShowNetFwTmpl">
+                 <property name="text">
+                  <string>Show Templates</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="2">
+                <widget class="QLabel" name="lblNoWfp">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>CAUTION: Windows Filtering Platform is not enabled with the driver, therefor these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -1895,41 +2083,14 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
               <layout class="QGridLayout" name="gridLayout_34">
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_32">
-                 <item row="13" column="5">
-                  <spacer name="horizontalSpacer_3">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="9" column="1" colspan="3">
-                  <widget class="QCheckBox" name="chkComTrace">
+                 <item row="13" column="1" colspan="4">
+                  <widget class="QCheckBox" name="chkApiTrace">
                    <property name="text">
-                    <string>COM Class Trace</string>
+                    <string>API call trace (requirers logapi to be installed in the sbie dir)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkIpcTrace">
-                   <property name="text">
-                    <string>IPC Trace</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkKeyTrace">
-                   <property name="text">
-                    <string>Key Trace</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="13" column="4">
+                 <item row="14" column="4">
                   <spacer name="horizontalSpacer">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1942,34 +2103,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </spacer>
                  </item>
-                 <item row="8" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkGuiTrace">
-                   <property name="text">
-                    <string>GUI Trace</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="12" column="1" colspan="4">
-                  <widget class="QCheckBox" name="chkApiTrace">
-                   <property name="text">
-                    <string>API call trace (requirers logapi to be installed in the sbie dir)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="2" colspan="3">
-                  <widget class="QCheckBox" name="chkErrTrace">
-                   <property name="text">
-                    <string>Log all SetError's to Trace log (creates a lot of output)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkFileTrace">
-                   <property name="text">
-                    <string>File Trace</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="5" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkPipeTrace">
                    <property name="text">
@@ -1977,20 +2110,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_19">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Access Tracing</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="13" column="0">
+                 <item row="14" column="0">
                   <spacer name="verticalSpacer_19">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -2003,14 +2123,27 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                    </property>
                   </spacer>
                  </item>
-                 <item row="9" column="4">
-                  <widget class="QLabel" name="label_28">
+                 <item row="12" column="2" colspan="3">
+                  <widget class="QCheckBox" name="chkErrTrace">
                    <property name="text">
-                    <string>&lt;- for this one the above does not apply</string>
+                    <string>Log all SetError's to Trace log (creates a lot of output)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1" colspan="4">
+                 <item row="14" column="5">
+                  <spacer name="horizontalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="11" column="1" colspan="4">
                   <widget class="QCheckBox" name="chkDbgTrace">
                    <property name="text">
                     <string>Log Debug Output to the Trace Log</string>
@@ -2044,16 +2177,10 @@ instead of &quot;*&quot;.</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QLabel" name="label_38">
-                   <property name="maximumSize">
-                    <size>
-                     <width>20</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
+                 <item row="4" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkFileTrace">
                    <property name="text">
-                    <string/>
+                    <string>File Trace</string>
                    </property>
                   </widget>
                  </item>
@@ -2061,6 +2188,20 @@ instead of &quot;*&quot;.</string>
                   <widget class="QCheckBox" name="chkDisableMonitor">
                    <property name="text">
                     <string>Disable Resource Access Monitor</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkIpcTrace">
+                   <property name="text">
+                    <string>IPC Trace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkGuiTrace">
+                   <property name="text">
+                    <string>GUI Trace</string>
                    </property>
                   </widget>
                  </item>
@@ -2074,6 +2215,53 @@ instead of &quot;*&quot;.</string>
                    </property>
                    <property name="text">
                     <string>Resource Access Monitor</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="label_38">
+                   <property name="maximumSize">
+                    <size>
+                     <width>20</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_19">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Access Tracing</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="3">
+                  <widget class="QCheckBox" name="chkComTrace">
+                   <property name="text">
+                    <string>COM Class Trace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkKeyTrace">
+                   <property name="text">
+                    <string>Key Trace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1" colspan="3">
+                  <widget class="QCheckBox" name="chkNetFwTrace">
+                   <property name="text">
+                    <string>Network Firewall</string>
                    </property>
                   </widget>
                  </item>

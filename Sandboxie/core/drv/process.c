@@ -34,6 +34,7 @@
 #include "gui.h"
 #include "token.h"
 #include "thread.h"
+#include "wfp.h"
 #include "common/my_version.h"
 
 
@@ -49,7 +50,7 @@ static NTSTATUS Process_HookProcessNotify(
 
 #endif _WIN64
 
-static ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
+ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
 
 static void Process_NotifyProcess(
     HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create);
@@ -1205,6 +1206,8 @@ _FX void Process_Delete(HANDLE ProcessId)
             // from Process_List.  we have to do some process clean-up
             //
 
+            WFP_DeleteProcess(proc);
+
             Key_UnmountHive(proc);
 
             if (proc->file_lock)
@@ -1303,6 +1306,9 @@ _FX void Process_NotifyImage(
         //
         // initialize the filtering components
         //
+
+        if (!fail && !WFP_InitProcess(proc))
+			fail = 0x0B;
 
         if (!fail && !File_InitProcess(proc))
 			fail = 0x04;

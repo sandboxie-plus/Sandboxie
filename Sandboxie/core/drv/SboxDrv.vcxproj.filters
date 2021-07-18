@@ -124,6 +124,9 @@
     <ClCompile Include="file_ctrl.c">
       <Filter>file</Filter>
     </ClCompile>
+    <ClCompile Include="wfp.c">
+      <Filter>net</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\common\map.c">
       <Filter>common</Filter>
     </ClCompile>
@@ -131,6 +134,15 @@
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="verify.c" />
+    <ClCompile Include="..\..\common\rbtree.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\netfw.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\str_util.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />
@@ -191,10 +203,22 @@
     <ClInclude Include="..\..\common\stream.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="wfp.h">
+      <Filter>net</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\common\map.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\pool.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\rbtree.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\netfw.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\str_util.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -229,6 +253,9 @@
     </Filter>
     <Filter Include="syscall">
       <UniqueIdentifier>{0da98f76-24ea-4a59-9913-2bbeb0ea5e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{c32013cd-a792-4aaf-8640-629c8db3f0a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

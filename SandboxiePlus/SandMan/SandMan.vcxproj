@@ -213,6 +213,16 @@
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Views\TraceView.cpp" />
     <ClCompile Include="Windows\NewBoxWindow.cpp" />
+    <ClCompile Include="Windows\OptionsAccess.cpp" />
+    <ClCompile Include="Windows\OptionsAdvanced.cpp" />
+    <ClCompile Include="Windows\OptionsForce.cpp" />
+    <ClCompile Include="Windows\OptionsGeneral.cpp" />
+    <ClCompile Include="Windows\OptionsGrouping.cpp" />
+    <ClCompile Include="Windows\OptionsNetwork.cpp" />
+    <ClCompile Include="Windows\OptionsRecovery.cpp" />
+    <ClCompile Include="Windows\OptionsStart.cpp" />
+    <ClCompile Include="Windows\OptionsStop.cpp" />
+    <ClCompile Include="Windows\OptionsTemplates.cpp" />
     <ClCompile Include="Windows\OptionsWindow.cpp" />
     <ClCompile Include="Windows\PopUpWindow.cpp" />
     <ClCompile Include="Windows\RecoveryWindow.cpp" />
@@ -260,6 +270,7 @@
   <ItemGroup>
     <None Include="Resources\finder.cur" />
     <None Include="sandman_de.ts" />
+    <None Include="sandman_en.ts" />
     <None Include="sandman_es.ts" />
     <None Include="sandman_it.ts" />
     <None Include="sandman_nl.ts" />

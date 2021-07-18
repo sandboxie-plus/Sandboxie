@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021 David Xanatos, xanasoft.com 
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -16,32 +16,32 @@
  */
 
 //---------------------------------------------------------------------------
-// Includes
+// Windows Filtering Platform
 //---------------------------------------------------------------------------
 
-#include "dll.h"
 
-#include <windows.h>
-#include "common/win32_ntddk.h"
+#ifndef _MY_WFP_H
+#define _MY_WFP_H
 
-/* List */
 
-#include "common/list.c"
+#include "driver.h"
 
-/* Pool */
 
-extern const ULONG tzuk;
-#define POOL_TAG tzuk
-#include "common/pool.c"
+//---------------------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------------------
 
-/* Stream */
 
-#include "common/stream.c"
+BOOLEAN WFP_Init(void);
 
-/* NetFw */
+void WFP_Unload(void);
 
-#include "common/netfw.c"
+BOOLEAN WFP_InitProcess(PROCESS *proc);
+BOOLEAN WFP_UpdateProcess(PROCESS *proc);
+void WFP_DeleteProcess(PROCESS *proc);
 
-/* StrUtil */
 
-#include "common/str_util.c"
+//---------------------------------------------------------------------------
+
+
+#endif // _MY_WFP_H

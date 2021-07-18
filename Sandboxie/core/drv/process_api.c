@@ -29,6 +29,7 @@
 #include "file.h"
 #include "key.h"
 #include "ipc.h"
+#include "thread.h"
 #include "common/pattern.h"
 #include "common/my_version.h"
 
@@ -408,6 +409,55 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 					ObDereferenceObject(PrimaryTokenObject);
 
 					*data = (ULONG64)MyTokenHandle;
+				}
+				else
+					status = STATUS_NOT_FOUND;
+			}
+
+		} else if (args->info_type.val == 'itok' || args->info_type.val == 'ttok') {
+
+			if(is_caller_sandboxed)
+				status = STATUS_ACCESS_DENIED;
+			else
+			{
+                HANDLE tid = (HANDLE)(args->ext_data.val);
+
+                THREAD *thrd = Thread_GetByThreadId(proc, tid);
+				if (thrd)
+				{
+                    if (args->info_type.val == 'ttok')
+                    {
+                        *data = thrd->token_object ? TRUE : FALSE;
+                    }
+                    else
+                    {
+                        KIRQL irql2;
+                        void* ImpersonationTokenObject;
+
+                        KeRaiseIrql(APC_LEVEL, &irql2);
+                        ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
+
+                        ImpersonationTokenObject = thrd->token_object;
+
+                        if (ImpersonationTokenObject) {
+                            ObReferenceObject(ImpersonationTokenObject);
+                        }
+
+                        ExReleaseResourceLite(proc->threads_lock);
+                        KeLowerIrql(irql2);
+
+                        if (ImpersonationTokenObject)
+                        {
+                            HANDLE MyTokenHandle;
+                            status = ObOpenObjectByPointer(ImpersonationTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
+
+                            ObDereferenceObject(ImpersonationTokenObject);
+
+                            *data = (ULONG64)MyTokenHandle;
+                        }
+                        else
+                            status = STATUS_NO_IMPERSONATION_TOKEN;
+                    }
 				}
 				else
 					status = STATUS_NOT_FOUND;

@@ -79,7 +79,7 @@ static BOOLEAN File_IsPipeSuffix(const WCHAR *ptr);
 
 static ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server);
 
-static const BOOLEAN File_InternetBlockade_ManualBypass();
+const BOOLEAN File_InternetBlockade_ManualBypass();
 
 static NTSTATUS File_NtCreateFilePipe(
     HANDLE *FileHandle,
@@ -257,7 +257,7 @@ _FX ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server)
     if (len >= 10 && _wcsnicmp(path, File_Mup, 8) == 0) { // match \device\ only
 
 		BOOLEAN prompt = SbieApi_QueryConfBool(NULL, L"PromptForInternetAccess", FALSE);
-		if (SbieApi_CheckInternetAccess(NULL, path + 8, !prompt) == STATUS_ACCESS_DENIED
+		if (SbieApi_CheckInternetAccess(0, path + 8, !prompt) == STATUS_ACCESS_DENIED
 			&& (!prompt || !File_InternetBlockade_ManualBypass())) {
 
 			return TYPE_NET_DEVICE;

@@ -46,27 +46,6 @@
 
 
 //---------------------------------------------------------------------------
-// Structures and Types
-//---------------------------------------------------------------------------
-
-
-struct _THREAD {
-
-#ifndef USE_PROCESS_MAP
-    LIST_ELEM list_elem;
-#endif 
-
-    HANDLE tid;
-
-    void *token_object;
-    BOOLEAN token_CopyOnOpen;
-    BOOLEAN token_EffectiveOnly;
-    SECURITY_IMPERSONATION_LEVEL token_ImpersonationLevel;
-
-};
-
-
-//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -75,8 +54,6 @@ static void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create);
 
 static PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc1, void *ProcessObject2, KIRQL *out_irql);
-
-static THREAD *Thread_GetCurrent(PROCESS *proc);
 
 static THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create);
 
@@ -499,20 +476,21 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
 
 //---------------------------------------------------------------------------
-// Thread_GetCurrent
+// Thread_GetByThreadId
 //---------------------------------------------------------------------------
 
 
-_FX THREAD *Thread_GetCurrent(PROCESS *proc)
+_FX THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid)
 {
     THREAD *thrd;
-    HANDLE tid;
     KIRQL irql;
 
     if (! proc->threads_lock)
         return NULL;
+    
+    if (! tid)
+        tid = PsGetCurrentThreadId();
 
-    tid = PsGetCurrentThreadId();
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
@@ -809,7 +787,7 @@ _FX void Thread_SetThreadToken(PROCESS *proc)
 
     DerefToken = FALSE;
 
-    thrd = Thread_GetCurrent(proc);
+    thrd = Thread_GetByThreadId(proc, 0);
     if (thrd) {
 
         //
@@ -921,7 +899,7 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
-    thrd = Thread_GetCurrent(proc);
+    thrd = Thread_GetByThreadId(proc, 0);
     if (thrd) {
 
         //

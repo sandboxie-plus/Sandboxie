@@ -543,10 +543,8 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
 #include <inaddr.h>
 #include <in6addr.h>
 
-#ifdef KERNEL_MODE
 static int isdigit_(int c) { return (c >= '0' && c <= '9'); }
 static int isxdigit_(int c) { return (isdigit_(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')); }
-#endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // from BSD sources: http://code.google.com/p/plan9front/source/browse/sys/src/ape/lib/bsd/?r=320990f52487ae84e28961517a4fa0d02d473bac

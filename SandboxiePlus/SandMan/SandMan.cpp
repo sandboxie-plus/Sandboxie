@@ -1583,7 +1583,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
-	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 charakters"); break;
+	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
 	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
 	}
 

@@ -1381,7 +1381,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1586"/>
-        <source>The config password must not be longer than 64 charakters</source>
+        <source>The config password must not be longer than 64 characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1558,7 +1558,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="435"/>
-        <source>Sbie WuAu Svc</source>
+        <source>Sbie WuauServ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2007,7 +2007,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="87"/>
-        <source>Are you shure you want to run the program outside the sandbox?</source>
+        <source>Are you sure you want to run the program outside the sandbox?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2867,7 +2867,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1818"/>
-        <source>Allow use of nested job objects (experimental, works on windows 8 and later)</source>
+        <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2877,7 +2877,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1836"/>
-        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
+        <source>Allow sandboxed programs to managing Hardware/Devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2887,7 +2887,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1850"/>
-        <source>Open access to windows Local Security Authority</source>
+        <source>Open access to Windows Local Security Authority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3230,7 +3230,7 @@ Please note that this values are currently user specific and saved globally for 
     <name>SelectBoxWindow</name>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="32"/>
-        <source>SandboxiePlus sellect box</source>
+        <source>SandboxiePlus select box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3323,7 +3323,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="192"/>
-        <source>Hot-Key for terminating all boxed processes:</source>
+        <source>Hotkey for terminating all boxed processes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3504,7 +3504,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="638"/>
-        <source>Instal updates automatically</source>
+        <source>Install updates automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3514,7 +3514,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="671"/>
-        <source>Keeping Sandboxie up to date with the rolling releases of windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the developement with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
+        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

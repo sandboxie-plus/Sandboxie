@@ -1381,7 +1381,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1586"/>
-        <source>The config password must not be longer than 64 charakters</source>
+        <source>The config password must not be longer than 64 characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3230,7 +3230,7 @@ Please note that this values are currently user specific and saved globally for 
     <name>SelectBoxWindow</name>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="32"/>
-        <source>SandboxiePlus sellect box</source>
+        <source>SandboxiePlus select box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

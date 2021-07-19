@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-06-08
+#  Latest update by RockyTDR on 2021-07-19
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -851,7 +851,7 @@ De inhoud van de sandbox zal niet verwijderd worden.
 .
 
 3221;txt;01
-Sluit de programma's af die in de sandbox uitgevoerd worden alvorens de inhoud te wissen
+Beëindig de programma's die in de sandbox uitgevoerd worden alvorens de inhoud te wissen
 .
 
 3222;txt;01
@@ -1072,7 +1072,7 @@ Gebr&uiker toevoegen
 .
 
 3412;txt;01
-&Alle programma's afsluiten
+&Alle programma's beëindigen
 .
 
 3413;txt;01
@@ -1236,11 +1236,11 @@ Gesandboxt uitvoe&ren
 .
 
 3462;txt;01
-Web&browser starten
+Web&browser uitvoeren
 .
 
 3463;txt;01
-E-mai&lprogramma starten
+E-mai&lprogramma uitvoeren
 .
 
 3464;txt;01
@@ -1252,11 +1252,11 @@ Uitvoeren vanaf start&menu
 .
 
 3466;txt;01
-&Windows verkenner starten
+&Windows verkenner uitvoeren
 .
 
 3471;txt;01
-Programma's afslui&ten
+Programma's beëindigen
 .
 
 3472;txt;01
@@ -1284,7 +1284,7 @@ Sandbox &verwijderen
 .
 
 3481;txt;01
-Programma afslui&ten
+Programma beëindigen
 .
 
 3482;txt;01
@@ -1430,18 +1430,18 @@ Bent u zeker dat u sandbox %2 wilt verwijderen?
 .
 
 3530;txt;01
-Er zijn geen processen om af te sluiten.
+Er zijn geen processen om te beëindigen.
 .
 
 3531;txt;01
-WAARSCHUWING: de af te sluiten processen
+WAARSCHUWING: de te beëindigen processen
 zullen geen kans krijgen om status of data op te slaan.
 
 Bent u zeker dat u wilt doorgaan met het afsluiten van processen?
 .
 
 3532;txt;01
-Processen in de toekomst afsluiten zonder te vragen.
+Processen in de toekomst beëindigen zonder te vragen.
 .
 
 3533;txt;01
@@ -1612,7 +1612,7 @@ Sandboxie %2 werd naar de volgende map gedownload:
 %3
 
 Klik op "ok" om de installatie te starten. Programma's die
-gesandboxt uitgevoerd worden, zullen afgesloten worden.
+gesandboxt uitgevoerd worden, zullen beëindigd worden.
 .
 
 3634;txt;01
@@ -1628,7 +1628,7 @@ nieuwe versie downloaden
 #----------------------------------------------------------------------------
 
 3641;txt;01
-Webbrowser starten
+Webbrowser openen
 .
 
 3642;txt;01
@@ -1878,7 +1878,7 @@ Onderstaande bestanden komen in aanmerking voor snel herstel vanuit de sandbox. 
 .
 
 3713;txt;01
-Klik op "inhoud wissen" om eventuele processen die in de sandbox uitgevoerd worden, af te sluiten, en de inhoud te wissen.
+Klik op "inhoud wissen" om eventuele processen die in de sandbox uitgevoerd worden te beëindigen en de inhoud te wissen.
 .
 
 3714;txt;01
@@ -2419,7 +2419,7 @@ Achterblijvende programma's
 .
 
 3883;txt;01
-De volgende programma's zullen automatisch afgesloten worden als ze nog steeds in deze sandbox uitgevoerd worden nadat alle andere programma's gestopt zijn.
+De volgende programma's zullen automatisch beëindigd worden als ze nog steeds in deze sandbox uitgevoerd worden nadat alle andere programma's gestopt zijn.
 .
 
 # 3891;txt;01
@@ -3286,6 +3286,10 @@ Directe toegang toestaan tot voorkeuren van %2
 
 4340;txt;01
 Directe toegang toestaan tot sessiebeheer van %2
+.
+
+4341;txt;01
+Directe toegang tot %2-notities toestaan
 .
 
 4356;txt;02

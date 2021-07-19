@@ -1390,7 +1390,7 @@ Nee zal %2 kiezen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1586"/>
-        <source>The config password must not be longer than 64 charakters</source>
+        <source>The config password must not be longer than 64 characters</source>
         <translation>Het configuratiewachtwoord mag niet langer zijn dan 64 tekens</translation>
     </message>
     <message>
@@ -1567,8 +1567,8 @@ Nee zal %2 kiezen</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="435"/>
-        <source>Sbie WuAu Svc</source>
-        <translation>Sbie WuAu Svc</translation>
+        <source>Sbie WuauServ</source>
+        <translation>Sbie WuauServ</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="436"/>
@@ -2020,7 +2020,7 @@ Nee zal %2 kiezen</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="87"/>
-        <source>Are you shure you want to run the program outside the sandbox?</source>
+        <source>Are you sure you want to run the program outside the sandbox?</source>
         <translation>Weet u zeker dat u het programma buiten de sandbox wilt uitvoeren?</translation>
     </message>
     <message>
@@ -2198,7 +2198,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="74"/>
         <source>Filter selected box only</source>
-        <translation>Alleen geselecteerd box filteren</translation>
+        <translation>Alleen geselecteerde box filteren</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="173"/>
@@ -2884,7 +2884,7 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1818"/>
-        <source>Allow use of nested job objects (experimental, works on windows 8 and later)</source>
+        <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
         <translation>Gebruik van geneste job-objecten toestaan (experimenteel, wekt op Windows 8 en later)</translation>
     </message>
     <message>
@@ -2894,7 +2894,7 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1836"/>
-        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
+        <source>Allow sandboxed programs to managing Hardware/Devices</source>
         <translation>Gesandboxte programma&apos;s toestaan om hardware/apparaten te beheren</translation>
     </message>
     <message>
@@ -2904,7 +2904,7 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1850"/>
-        <source>Open access to windows Local Security Authority</source>
+        <source>Open access to Windows Local Security Authority</source>
         <translation>Toegang tot Windows local-security-authority openen</translation>
     </message>
     <message>
@@ -3258,7 +3258,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <name>SelectBoxWindow</name>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="32"/>
-        <source>SandboxiePlus sellect box</source>
+        <source>SandboxiePlus select box</source>
         <translation>SandboxiePlus box selecteren</translation>
     </message>
     <message>
@@ -3351,7 +3351,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="192"/>
-        <source>Hot-Key for terminating all boxed processes:</source>
+        <source>Hotkey for terminating all boxed processes:</source>
         <translation>Sneltoets voor het beëindigen van alle geboxte processen:</translation>
     </message>
     <message>
@@ -3532,7 +3532,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="638"/>
-        <source>Instal updates automatically</source>
+        <source>Install updates automatically</source>
         <translation>Updates automatisch installeren</translation>
     </message>
     <message>
@@ -3542,7 +3542,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="671"/>
-        <source>Keeping Sandboxie up to date with the rolling releases of windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the developement with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
+        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
         <translation>Sandboxie up-to-date houden met de voortschrijdende releases van Windows en compatibel houden met moderne web browsers is een nooit eindigende onderneming. Overweeg om dit werk te steunen met een donatie.&lt;br /&gt;U kunt de ontwikkeling steunen met een directe &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal-donatie&lt;/a&gt;, werkt ook met kredietkaarten.&lt;br /&gt;U kunt ook doorlopende ondersteuning bieden met een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon-abonnement&lt;/a&gt;.</translation>
     </message>
 </context>

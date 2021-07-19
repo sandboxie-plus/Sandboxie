@@ -434,7 +434,7 @@
            <item row="7" column="3" colspan="3">
             <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>* requires driver reload or system reeboot</string>
+              <string>* requires driver reload or system reboot</string>
              </property>
             </widget>
            </item>

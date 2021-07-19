@@ -2694,7 +2694,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
-        <source>Programm</source>
+        <source>Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2719,7 +2719,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1360"/>
-        <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefor these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
+        <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3418,7 +3418,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="437"/>
-        <source>* requires driver reload or system reeboot</source>
+        <source>* requires driver reload or system reboot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

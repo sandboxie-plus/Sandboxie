@@ -2709,7 +2709,7 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
-        <source>Programm</source>
+        <source>Program</source>
         <translation>Programma</translation>
     </message>
     <message>
@@ -2734,7 +2734,7 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1360"/>
-        <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefor these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
+        <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>WAARSCHUWING: Windows Filtering Platform is niet ingeschakeld met de driver. Daardoor zullen deze regels alleen toegepast worden in gebruikersmodus en kunnen ze niet geforceerd worden! Dit betekent dat kwaadaardige toepassingen ze kunnen omzeilen.</translation>
     </message>
     <message>
@@ -3446,7 +3446,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="437"/>
-        <source>* requires driver reload or system reeboot</source>
+        <source>* requires driver reload or system reboot</source>
         <translation>* opnieuw laden van stuurprogramma of herstart van systeem nodig</translation>
     </message>
     <message>

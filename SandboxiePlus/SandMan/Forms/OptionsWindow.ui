@@ -1316,7 +1316,7 @@ If leader processes are defined, all others are treated as lingering processes.<
                 <widget class="QTreeWidget" name="treeNetFw">
                  <column>
                   <property name="text">
-                   <string>Programm</string>
+                   <string>Program</string>
                   </property>
                  </column>
                  <column>
@@ -1357,7 +1357,7 @@ If leader processes are defined, all others are treated as lingering processes.<
                   </font>
                  </property>
                  <property name="text">
-                  <string>CAUTION: Windows Filtering Platform is not enabled with the driver, therefor these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</string>
+                  <string>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>

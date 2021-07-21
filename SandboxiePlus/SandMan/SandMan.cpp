@@ -2089,6 +2089,14 @@ void CSandMan::LoadLanguage()
 		m_LanguageId = 1033; // default to English
 }
 
+// Make sure that QPlatformTheme strings won't be marked as vanished in all .ts files, even after running lupdate
+@
+QT_TRANSLATE_NOOP("QPlatformTheme", "OK");
+QT_TRANSLATE_NOOP("QPlatformTheme", "Apply");
+QT_TRANSLATE_NOOP("QPlatformTheme", "Cancel");
+QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes");
+QT_TRANSLATE_NOOP("QPlatformTheme", "&No");
+@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // WinSpy based window finder

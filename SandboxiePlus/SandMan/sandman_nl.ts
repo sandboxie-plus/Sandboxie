@@ -2709,6 +2709,7 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
+        <location filename="Forms/OptionsWindow.ui" line="1497"/>
         <source>Program</source>
         <translation>Programma</translation>
     </message>
@@ -2766,11 +2767,6 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
         <location filename="Forms/OptionsWindow.ui" line="1481"/>
         <source>Add Reg Key</source>
         <translation>Reg Key toevoegen</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1497"/>
-        <source>Program</source>
-        <translation>Programma</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1534"/>

@@ -2694,6 +2694,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
+        <location filename="Forms/OptionsWindow.ui" line="1497"/>
         <source>Program</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2750,11 +2751,6 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1481"/>
         <source>Add Reg Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1497"/>
-        <source>Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

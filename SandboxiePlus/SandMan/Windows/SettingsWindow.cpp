@@ -79,9 +79,9 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
-	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Maintenance"));
-	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Wall"));
-	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Ampel"));
+	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Compatibility"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Support"));
 
 

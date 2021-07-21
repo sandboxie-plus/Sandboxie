@@ -212,7 +212,6 @@ Global
 		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieDebug|Win32.ActiveCfg = SbieDebug|Win32
 		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieDebug|Win32.Build.0 = SbieDebug|Win32
 		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieDebug|x64.ActiveCfg = SbieDebug|x64
-		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieDebug|x64.Build.0 = SbieDebug|x64
 		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieRelease|Win32.ActiveCfg = SbieRelease|Win32
 		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieRelease|Win32.Build.0 = SbieRelease|Win32
 		{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}.SbieRelease|x64.ActiveCfg = SbieRelease|x64

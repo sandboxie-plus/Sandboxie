@@ -51,6 +51,7 @@
         <file>IconFull.png</file>
         <file>IconFullD.png</file>
         <file>Actions/Ampel.png</file>
+        <file>Actions/Compatibility.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

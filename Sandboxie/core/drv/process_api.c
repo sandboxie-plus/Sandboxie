@@ -30,6 +30,7 @@
 #include "key.h"
 #include "ipc.h"
 #include "thread.h"
+#include "session.h"
 #include "common/pattern.h"
 #include "common/my_version.h"
 
@@ -174,8 +175,11 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
 
         } else {
 
-            Process_NotifyProcess_Create(
-                                user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, box);
+            if (!Process_NotifyProcess_Create(
+                                user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, box)) {
+
+                status = STATUS_INTERNAL_ERROR;
+            }
 
             box = NULL;         // freed by Process_NotifyProcess_Create
         }
@@ -392,9 +396,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
             *data = proc->ntdll32_base;
 
-        } else if (args->info_type.val == 'ptok') {
+        } else if (args->info_type.val == 'ptok') { // primary token
 
-			if(is_caller_sandboxed)
+			if(is_caller_sandboxed || !Session_CheckAdminAccess(TRUE))
 				status = STATUS_ACCESS_DENIED;
 			else
 			{
@@ -414,9 +418,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 					status = STATUS_NOT_FOUND;
 			}
 
-		} else if (args->info_type.val == 'itok' || args->info_type.val == 'ttok') {
+		} else if (args->info_type.val == 'itok' || args->info_type.val == 'ttok') { // impersonation token / test thread token
 
-			if(is_caller_sandboxed)
+			if(is_caller_sandboxed || (args->info_type.val == 'itok' && !Session_CheckAdminAccess(TRUE)))
 				status = STATUS_ACCESS_DENIED;
 			else
 			{

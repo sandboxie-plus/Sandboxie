@@ -330,13 +330,11 @@ void COptionsWindow::OnDebugChanged()
 
 void COptionsWindow::LoadDebug()
 {
-	foreach(QCheckBox * pCheck, m_DebugOptions.keys())
+	foreach(QCheckBox* pCheck, m_DebugOptions.keys()) 
 	{
 		SDbgOpt& DbgOption = m_DebugOptions[pCheck];
-		if (!DbgOption.Changed)
-			continue;
-		WriteAdvancedCheck(pCheck, DbgOption.Name, DbgOption.Value);
 		DbgOption.Changed = false;
+		ReadAdvancedCheck(DbgOption.Name, pCheck, DbgOption.Value);
 	}
 }
 

@@ -1085,10 +1085,11 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
 
 _FX BOOLEAN Process_TerminateProcess(PROCESS* proc)
 {
-    if (Conf_Get_Boolean(NULL, L"TerminateUsingService", 0, FALSE)) {
+    if (Conf_Get_Boolean(NULL, L"TerminateUsingService", 0, TRUE)) {
 
         if (Process_CancelProcess(proc))
             return TRUE;
+        // else fall back to the kernel method
     }
 
     return Process_ScheduleKill(proc);

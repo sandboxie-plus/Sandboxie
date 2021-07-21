@@ -86,6 +86,38 @@ static NTSTATUS Secure_NtAdjustPrivilegesToken(
     TOKEN_PRIVILEGES *PreviousState,
     ULONG *ReturnLength);
 
+static NTSTATUS Secure_NtDuplicateToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ACCESS_MASK DesiredAccess,
+    _In_opt_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _In_ BOOLEAN EffectiveOnly,
+    _In_ TOKEN_TYPE TokenType,
+    _Out_ PHANDLE NewTokenHandle);
+
+static NTSTATUS Secure_NtFilterToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _Out_ PHANDLE NewTokenHandle);
+
+static NTSTATUS Secure_NtFilterTokenEx(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _In_ ULONG DisableUserClaimsCount,
+    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
+    _In_ ULONG DisableDeviceClaimsCount,
+    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
+    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
+    _In_opt_ PVOID RestrictedUserAttributes,
+    _In_opt_ PVOID RestrictedDeviceAttributes,
+    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
+    _Out_ PHANDLE NewTokenHandle);
+
 static NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags);
 
 static NTSTATUS Secure_RtlCheckTokenMembershipEx(
@@ -109,6 +141,9 @@ static P_NtSetSecurityObject        __sys_NtSetSecurityObject       = NULL;
 static P_NtQueryInformationToken    __sys_NtQueryInformationToken   = NULL;
 static P_NtSetInformationToken      __sys_NtSetInformationToken     = NULL;
 static P_NtAdjustPrivilegesToken    __sys_NtAdjustPrivilegesToken   = NULL;
+static P_NtDuplicateToken           __sys_NtDuplicateToken          = NULL;
+static P_NtFilterToken              __sys_NtFilterToken             = NULL;
+static P_NtFilterTokenEx            __sys_NtFilterTokenEx           = NULL;
 static P_RtlQueryElevationFlags     __sys_RtlQueryElevationFlags    = NULL;
 static P_RtlCheckTokenMembershipEx  __sys_RtlCheckTokenMembershipEx = NULL;
 static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
@@ -264,6 +299,11 @@ _FX BOOLEAN Secure_Init(void)
     SBIEDLL_HOOK(Secure_,NtSetSecurityObject);
     SBIEDLL_HOOK(Secure_,NtSetInformationToken);
     SBIEDLL_HOOK(Secure_,NtAdjustPrivilegesToken);
+    if (Dll_OsBuild >= 21286) {    // Windows 11
+        SBIEDLL_HOOK(Secure_, NtDuplicateToken);
+        SBIEDLL_HOOK(Secure_, NtFilterToken);
+        SBIEDLL_HOOK(Secure_, NtFilterTokenEx);
+    }
     if (Dll_Windows < 10) {
         SBIEDLL_HOOK(Secure_, NtQueryInformationToken);
     }
@@ -875,6 +915,114 @@ _FX NTSTATUS Secure_NtAdjustPrivilegesToken(
         BufferLength, PreviousState, ReturnLength);
     if (status == STATUS_NOT_ALL_ASSIGNED)
         status = STATUS_SUCCESS;
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_NtDuplicateToken
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Secure_NtDuplicateToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ACCESS_MASK DesiredAccess,
+    _In_opt_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _In_ BOOLEAN EffectiveOnly,
+    _In_ TOKEN_TYPE TokenType,
+    _Out_ PHANDLE NewTokenHandle)
+{
+    //
+    // on windows 11 MSIServer fails to duplicte its impersonation token when using it
+    // so we drop the impersonation, do the duplication and re impersonate
+    //
+
+    HANDLE hToken = NULL;
+    NtOpenThreadToken(NtCurrentThread(), MAXIMUM_ALLOWED, TRUE, &hToken);
+    HANDLE hNull = NULL;
+    NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hNull, sizeof(HANDLE));
+
+    ULONG status = __sys_NtDuplicateToken(
+        ExistingTokenHandle, DesiredAccess, ObjectAttributes,
+        EffectiveOnly, TokenType, NewTokenHandle);
+    
+    if (hToken) {
+        NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));
+        NtClose(hToken);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_NtFilterToken
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Secure_NtFilterToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _Out_ PHANDLE NewTokenHandle)
+{
+    HANDLE hToken = NULL;
+    NtOpenThreadToken(NtCurrentThread(), MAXIMUM_ALLOWED, TRUE, &hToken);
+    HANDLE hNull = NULL;
+    NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hNull, sizeof(HANDLE));
+
+    ULONG status = __sys_NtFilterToken(
+        ExistingTokenHandle, Flags, SidsToDisable,
+        PrivilegesToDelete, RestrictedSids, NewTokenHandle);
+
+    if (hToken) {
+        NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));
+        NtClose(hToken);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_NtFilterTokenEx
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Secure_NtFilterTokenEx(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _In_ ULONG DisableUserClaimsCount,
+    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
+    _In_ ULONG DisableDeviceClaimsCount,
+    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
+    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
+    _In_opt_ PVOID RestrictedUserAttributes,
+    _In_opt_ PVOID RestrictedDeviceAttributes,
+    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
+    _Out_ PHANDLE NewTokenHandle)
+{
+    HANDLE hToken = NULL;
+    NtOpenThreadToken(NtCurrentThread(), MAXIMUM_ALLOWED, TRUE, &hToken);
+    HANDLE hNull = NULL;
+    NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hNull, sizeof(HANDLE));
+
+    ULONG status = __sys_NtFilterTokenEx(
+        ExistingTokenHandle, Flags, SidsToDisable, PrivilegesToDelete, RestrictedSids,
+        DisableUserClaimsCount, UserClaimsToDisable, DisableDeviceClaimsCount, DeviceClaimsToDisable,
+        DeviceGroupsToDisable, RestrictedUserAttributes, RestrictedDeviceAttributes, RestrictedDeviceGroups,
+        NewTokenHandle);
+
+    if (hToken) {
+        NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));
+        NtClose(hToken);
+    }
+
     return status;
 }
 

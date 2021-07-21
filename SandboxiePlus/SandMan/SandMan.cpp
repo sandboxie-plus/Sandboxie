@@ -597,7 +597,8 @@ void CSandMan::OnMessage(const QString& Message)
 			if (m_bConnectPending) {
 
 				QTimer::singleShot(1000, [this]() {
-					this->ConnectSbieImpl();
+					SB_STATUS Status = this->ConnectSbieImpl();
+					CheckResults(QList<SB_STATUS>() << Status);
 				});
 			}
 		}
@@ -1213,7 +1214,8 @@ SB_STATUS CSandMan::ConnectSbie()
 		return Status;
 	if (bJustStarted) {
 		QTimer::singleShot(1000, [this]() {
-			this->ConnectSbieImpl();
+			SB_STATUS Status = this->ConnectSbieImpl();
+			CheckResults(QList<SB_STATUS>() << Status);
 		});
 		return SB_OK;
 	}
@@ -1225,13 +1227,12 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 {
 	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
 
-	if (Status && !CSbieAPI::IsSbieCtrlRunning()) // don't take over when SbieCtrl is up and running
-		Status = theAPI->TakeOver();
+	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
+		OnLogMessage(tr("CAUTION: An other agent (probably SbieCtrl.exe) is already managing this sandboxie sesion, close it first and reconnect to take over."));
+		return SB_OK;
+	}
 
-	if (!Status)
-		return Status;
-
-	return SB_OK;
+	return Status;
 }
 
 SB_STATUS CSandMan::DisconnectSbie()

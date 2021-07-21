@@ -213,6 +213,7 @@ protected:
 
 	void LoadConfig();
 	void SaveConfig();
+	void UpdateCurrentTab();
 
 	void AddAutoRunItem(const QString& Value, int Type);
 

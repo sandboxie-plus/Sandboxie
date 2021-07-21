@@ -43,7 +43,7 @@ CMonitorDialog::CMonitorDialog(CWnd *pParentWnd)
     m_username[255] = L'\0';
     m_username_len = wcslen(m_username);
 
-	m_last_entry_seq_num = 0;
+	//m_last_entry_seq_num = 0;
 }
 
 
@@ -114,17 +114,18 @@ void CMonitorDialog::OnIdle()
 
     while (1) {
 
-		ULONG seq_num = m_last_entry_seq_num;
+		//ULONG seq_num = m_last_entry_seq_num;
         ULONG type;
         ULONG pid;
         ULONG tid;
-        ULONG status = SbieApi_MonitorGetEx(&seq_num, &type, &pid, &tid, &name[12]);
+        //ULONG status = SbieApi_MonitorGetEx(&seq_num, &type, &pid, &tid, &name[12]);
+        ULONG status = SbieApi_MonitorGetEx(&type, &pid, &tid, &name[12]);
 		if (status != 0)
 			break; // error or no more entries
 
-		if(seq_num != m_last_entry_seq_num + 1)
-			SbieApi_Log(MSG_1242, NULL); // MSG_MONITOR_OVERFLOW
-		m_last_entry_seq_num = seq_num;
+		//if(seq_num != m_last_entry_seq_num + 1)
+		//	SbieApi_Log(MSG_1242, NULL); // MSG_MONITOR_OVERFLOW
+		//m_last_entry_seq_num = seq_num;
 
 		if ((!type) || (!name[12]))
 			break;

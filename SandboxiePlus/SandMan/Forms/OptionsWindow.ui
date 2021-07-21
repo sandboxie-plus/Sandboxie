@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>658</width>
-    <height>456</height>
+    <width>659</width>
+    <height>479</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -64,74 +64,6 @@
             <layout class="QGridLayout" name="gridLayout_27">
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_8">
-               <item row="1" column="0" colspan="3">
-                <widget class="QLabel" name="label_20">
-                 <property name="text">
-                  <string>Sandbox Indicator in title:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="3">
-                <widget class="QLabel" name="label_21">
-                 <property name="text">
-                  <string>Sandboxed window border:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="2" colspan="5">
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="4" column="0" colspan="3">
-                <widget class="QLabel" name="label_10">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the system from sandboxed processes</string>
-                 </property>
-                 <property name="text">
-                  <string>Elevation restrictions</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1" colspan="6">
-                <widget class="QLabel" name="label_35">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QComboBox" name="cmbBoxIndicator"/>
-               </item>
                <item row="6" column="1" colspan="5">
                 <widget class="QCheckBox" name="chkDropRights">
                  <property name="text">
@@ -139,23 +71,19 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="7">
-                <widget class="QLabel" name="label_14">
-                 <property name="text">
-                  <string>px Width</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="3" colspan="2">
                 <widget class="QComboBox" name="cmbBoxBorder"/>
                </item>
-               <item row="7" column="2" colspan="6">
-                <widget class="QCheckBox" name="chkFakeElevation">
-                 <property name="text">
-                  <string>Make applications think they are running elevated (allows to run installers safely)</string>
+               <item row="2" column="6">
+                <widget class="QSpinBox" name="spinBorderWidth">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>
@@ -166,18 +94,29 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1">
-                <spacer name="verticalSpacer_17">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item row="1" column="0" colspan="3">
+                <widget class="QLabel" name="label_20">
+                 <property name="text">
+                  <string>Sandbox Indicator in title:</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                </spacer>
+                </widget>
+               </item>
+               <item row="6" column="6" colspan="2">
+                <widget class="QLabel" name="label_40">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(Recommended)</string>
+                 </property>
+                </widget>
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_30">
@@ -204,6 +143,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
@@ -214,12 +154,63 @@
                  </property>
                 </widget>
                </item>
+               <item row="4" column="0" colspan="3">
+                <widget class="QLabel" name="label_10">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
+                 <property name="text">
+                  <string>Elevation restrictions</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1">
+                <spacer name="verticalSpacer_17">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="1" colspan="7">
+                <widget class="QCheckBox" name="chkShowForRun">
+                 <property name="text">
+                  <string>Show this box in the 'run in box' selection prompt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="2" colspan="5">
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_7">
                  <property name="font">
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
@@ -227,36 +218,67 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="6" colspan="2">
-                <widget class="QLabel" name="label_40">
+               <item row="7" column="2" colspan="6">
+                <widget class="QCheckBox" name="chkFakeElevation">
+                 <property name="text">
+                  <string>Make applications think they are running elevated (allows to run installers safely)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="cmbBoxIndicator"/>
+               </item>
+               <item row="2" column="7">
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>px Width</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" colspan="6">
+                <widget class="QLabel" name="label_35">
                  <property name="font">
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
-                  <string>(Recommended)</string>
+                  <string>Security note: Elevated applications running under the supervision of Sandboxie, with an admin, or system, token, have more opportunities to bypass isolation and modify the system outside the sandbox.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="6">
-                <widget class="QSpinBox" name="spinBorderWidth">
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>10</number>
-                 </property>
-                 <property name="value">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="7">
-                <widget class="QCheckBox" name="chkShowForRun">
+               <item row="2" column="0" colspan="3">
+                <widget class="QLabel" name="label_21">
                  <property name="text">
-                  <string>Show this box in the 'run in box' selection prompt</string>
+                  <string>Sandboxed window border:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1" colspan="7">
+                <widget class="QCheckBox" name="chkMsiExemptions">
+                 <property name="text">
+                  <string>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="2" colspan="5">
+                <widget class="QLabel" name="label_28">
+                 <property name="text">
+                  <string>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -291,6 +313,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
@@ -324,6 +347,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
@@ -337,6 +361,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
@@ -493,6 +518,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="toolTip">
@@ -522,6 +548,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="toolTip">
@@ -557,6 +584,7 @@
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="toolTip">
@@ -1354,6 +1382,7 @@ If leader processes are defined, all others are treated as lingering processes.<
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">
@@ -1704,6 +1733,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
               <font>
                <weight>50</weight>
                <bold>false</bold>
+               <kerning>true</kerning>
               </font>
              </property>
              <property name="currentIndex">
@@ -1714,6 +1744,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                <font>
                 <weight>50</weight>
                 <bold>false</bold>
+                <kerning>true</kerning>
                </font>
               </property>
               <attribute name="title">
@@ -1755,6 +1786,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                     <font>
                      <weight>75</weight>
                      <bold>true</bold>
+                     <kerning>true</kerning>
                     </font>
                    </property>
                    <property name="toolTip">
@@ -1785,6 +1817,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                     <font>
                      <weight>75</weight>
                      <bold>true</bold>
+                     <kerning>true</kerning>
                     </font>
                    </property>
                    <property name="text">
@@ -1815,7 +1848,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="4" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkNestedJobs">
                    <property name="text">
-                    <string>Allow use of nested job objects (experimental, works on Windows 8 and later)</string>
+                    <string>Allow use of nested job objects (experimental, works on windows 8 and later)</string>
                    </property>
                   </widget>
                  </item>
@@ -1833,7 +1866,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="2" column="1">
                   <widget class="QCheckBox" name="chkOpenDevCMApi">
                    <property name="text">
-                    <string>Allow sandboxed programs to managing Hardware/Devices</string>
+                    <string>Allow sandboxed programs to Managing Hardware/Devices</string>
                    </property>
                   </widget>
                  </item>
@@ -1847,7 +1880,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="4" column="1">
                   <widget class="QCheckBox" name="chkOpenLsaEndpoint">
                    <property name="text">
-                    <string>Open access to Windows Local Security Authority</string>
+                    <string>Open access to windows Local Security Authority</string>
                    </property>
                   </widget>
                  </item>
@@ -1870,6 +1903,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                     <font>
                      <weight>75</weight>
                      <bold>true</bold>
+                     <kerning>true</kerning>
                     </font>
                    </property>
                    <property name="toolTip">
@@ -1959,6 +1993,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                <font>
                 <weight>50</weight>
                 <bold>false</bold>
+                <kerning>true</kerning>
                </font>
               </property>
               <attribute name="title">
@@ -2019,6 +2054,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                <font>
                 <weight>50</weight>
                 <bold>false</bold>
+                <kerning>true</kerning>
                </font>
               </property>
               <attribute name="title">
@@ -2211,6 +2247,7 @@ instead of &quot;*&quot;.</string>
                     <font>
                      <weight>75</weight>
                      <bold>true</bold>
+                     <kerning>true</kerning>
                     </font>
                    </property>
                    <property name="text">
@@ -2237,6 +2274,7 @@ instead of &quot;*&quot;.</string>
                     <font>
                      <weight>75</weight>
                      <bold>true</bold>
+                     <kerning>true</kerning>
                     </font>
                    </property>
                    <property name="text">
@@ -2274,6 +2312,7 @@ instead of &quot;*&quot;.</string>
                <font>
                 <weight>50</weight>
                 <bold>false</bold>
+                <kerning>true</kerning>
                </font>
               </property>
               <attribute name="title">
@@ -2290,8 +2329,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>63</width>
-                    <height>16</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">
@@ -2317,6 +2356,7 @@ instead of &quot;*&quot;.</string>
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
+                   <kerning>true</kerning>
                   </font>
                  </property>
                  <property name="text">

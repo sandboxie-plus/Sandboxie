@@ -671,6 +671,7 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
     // unload just the hooks, in case this is a partial unload
     //
 
+    Obj_Unload();
     Gui_Unload();
     Key_Unload();
     File_Unload();

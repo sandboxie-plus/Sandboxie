@@ -39,7 +39,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
-	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Box"));
+	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Group"));
 	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Force"));
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Stop"));
@@ -169,7 +169,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	else
 		ui.lblAdmin->setVisible(false);
 
-	OnTab(); // -> LoadConfig();
+	LoadConfig();
 
 	ui.treeAccess->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
@@ -421,7 +421,9 @@ void COptionsWindow::apply()
 	else
 		SaveConfig();
 
-	OnTab(); // -> LoadConfig();
+	LoadConfig();
+
+	UpdateCurrentTab();
 
 	emit OptionsChanged();
 }
@@ -509,38 +511,43 @@ void COptionsWindow::OnTab()
 		if (m_ConfigDirty)
 			LoadConfig();
 
-		if (ui.tabs->currentWidget() == ui.tabStart)
-		{
-			if(GetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*") != NULL)
-				ui.radStartSelected->setChecked(true);
-			else if (GetAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*") != NULL)
-				ui.radStartExcept->setChecked(true);
-			else
-				ui.radStartAll->setChecked(true);
-			CopyGroupToList("<StartRunAccess>", ui.treeStart);
+		UpdateCurrentTab();
+	}
+}
 
-			OnRestrictStart();
+void COptionsWindow::UpdateCurrentTab()
+{
+	if (ui.tabs->currentWidget() == ui.tabStart)
+	{
+		if (GetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*") != NULL)
+			ui.radStartSelected->setChecked(true);
+		else if (GetAccessEntry(eIPC, "<StartRunAccess>", eClosed, "*") != NULL)
+			ui.radStartExcept->setChecked(true);
+		else
+			ui.radStartAll->setChecked(true);
+		CopyGroupToList("<StartRunAccess>", ui.treeStart);
+
+		OnRestrictStart();
+	}
+	else if (ui.tabs->currentWidget() == ui.tabInternet)
+	{
+		CheckINetBlock();
+
+		LoadBlockINet();
+
+		OnBlockINet();
+	}
+	else if (ui.tabs->currentWidget() == ui.tabAdvanced)
+	{
+		if (GetAccessEntry(eWnd, "", eDirect, "*") != NULL)
+		{
+			ui.chkNoWindowRename->setEnabled(false);
+			ui.chkNoWindowRename->setChecked(true);
 		}
-		else if (ui.tabs->currentWidget() == ui.tabInternet)
+		else
 		{
-			CheckINetBlock();
-
-			LoadBlockINet();
-
-			OnBlockINet();
-		}
-		else if (ui.tabs->currentWidget() == ui.tabAdvanced)
-		{
-			if (GetAccessEntry(eWnd, "", eDirect, "*") != NULL)
-			{
-				ui.chkNoWindowRename->setEnabled(false);
-				ui.chkNoWindowRename->setChecked(true);
-			}
-			else
-			{
-				ui.chkNoWindowRename->setEnabled(true);
-				ui.chkNoWindowRename->setChecked(GetAccessEntry(eWnd, "", eDirect, "#") != NULL);
-			}
+			ui.chkNoWindowRename->setEnabled(true);
+			ui.chkNoWindowRename->setChecked(GetAccessEntry(eWnd, "", eDirect, "#") != NULL);
 		}
 	}
 }

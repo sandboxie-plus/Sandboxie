@@ -2709,6 +2709,7 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
+        <location filename="Forms/OptionsWindow.ui" line="1497"/>
         <source>Program</source>
         <translation>Programma</translation>
     </message>
@@ -2766,11 +2767,6 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
         <location filename="Forms/OptionsWindow.ui" line="1481"/>
         <source>Add Reg Key</source>
         <translation>Reg Key toevoegen</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1497"/>
-        <source>Program</source>
-        <translation>Programma</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1534"/>
@@ -3204,6 +3200,29 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Views/SbieView.cpp" line="707"/>
         <source>Drive %1</source>
         <translation>Schijf %1</translation>
+    </message>
+</context>
+<context>
+    <name>QPlatformTheme</name>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

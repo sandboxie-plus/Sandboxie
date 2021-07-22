@@ -683,7 +683,7 @@ The file was written by: %3</source>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="413"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
         <translation>移動大檔案 %1 至沙箱 %2，%3 遺留。
 完整路徑: %4</translation>

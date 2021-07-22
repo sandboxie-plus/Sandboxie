@@ -248,7 +248,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Security note: Elevated applications running under the supervision of Sandboxie, with an admin, or system, token, have more opportunities to bypass isolation and modify the system outside the sandbox.</string>
+                  <string>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>

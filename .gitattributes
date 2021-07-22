@@ -1,0 +1,3 @@
+# We'll let Git's auto-detection algorithm infer if a file is text. If it is,
+# enforce CRLF line endings regardless of OS or git configurations.
+* text=auto eol=crlf

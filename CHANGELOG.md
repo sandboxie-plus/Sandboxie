@@ -13,15 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved full tray icon to be more distringuishable from the empty one
 
 ### Fixed
+- fixed issue with systemless MSI mode introduced in the last build
 - fixed MSI installer not being able to create action server on windows 11
 - fixed MSI instalelr not workign in systemless mode on windows 11
-
-
-
-## [0.8.8b / 5.50.9] - 2021-07-14
-
-### Fixed
-- fixed issue with systemless MSI
 
 
 

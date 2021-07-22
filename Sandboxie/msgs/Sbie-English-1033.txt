@@ -1200,7 +1200,7 @@ Getting Started &Tutorial
 .
 
 3454;txt;01
-Check For &Updates
+Check for &Updates
 .
 
 3455;txt;01
@@ -1249,6 +1249,10 @@ Run From Start &Menu
 
 3466;txt;01
 Run &Windows Explorer
+.
+
+3467;txt;01
+Upgrade to Sandboxie-Plus
 .
 
 3471;txt;01

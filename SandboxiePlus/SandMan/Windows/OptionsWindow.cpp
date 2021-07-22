@@ -39,13 +39,13 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
-	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Box"));
+	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Group"));
 	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Force"));
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Stop"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Start"));
-	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Internet"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Wall"));
+	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Wall"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Ampel"));
 	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Recover"));
 	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Advanced"));
 	ui.tabs->setTabIcon(9, CSandMan::GetIcon("Template"));

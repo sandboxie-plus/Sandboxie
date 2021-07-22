@@ -4,6 +4,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [0.8.9 / 5.50.9] - 2021-07-22
+
+### Changed
+- updated a few icons
+- updated github build action to use qt 5.15.2
+- improved full tray icon to be more distringuishable from the empty one
+
+### Fixed
+- fixed MSI installer not being able to create action server on windows 11
+- fixed MSI instalelr not workign in systemless mode on windows 11
+
+
+
 ## [0.8.8b / 5.50.9] - 2021-07-14
 
 ### Fixed

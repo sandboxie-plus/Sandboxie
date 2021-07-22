@@ -29,9 +29,6 @@ CSbiePlusAPI* theAPI = NULL;
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
 
-
-//BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result);
-
 class CNativeEventFilter : public QAbstractNativeEventFilter
 {
 public:
@@ -46,9 +43,6 @@ public:
 
 			if (msg->message == WM_NOTIFY)
 			{
-				//LRESULT ret;
-				//if (OnWM_Notify((NMHDR*)msg->lParam, &ret))
-				//	*result = ret;
 				return true;
 			}
 			else if (msg->message == WM_DEVICECHANGE)
@@ -193,11 +187,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
-	m_bIconEmpty = false;
+	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/SandMan.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/IconFull.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -429,7 +423,7 @@ void CSandMan::CreateMenus()
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(QIcon(":/SandMan.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(QIcon(":/IconFull.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateToolBar()
@@ -597,7 +591,8 @@ void CSandMan::OnMessage(const QString& Message)
 			if (m_bConnectPending) {
 
 				QTimer::singleShot(1000, [this]() {
-					this->ConnectSbieImpl();
+					SB_STATUS Status = this->ConnectSbieImpl();
+					CheckResults(QList<SB_STATUS>() << Status);
 				});
 			}
 		}
@@ -1213,7 +1208,8 @@ SB_STATUS CSandMan::ConnectSbie()
 		return Status;
 	if (bJustStarted) {
 		QTimer::singleShot(1000, [this]() {
-			this->ConnectSbieImpl();
+			SB_STATUS Status = this->ConnectSbieImpl();
+			CheckResults(QList<SB_STATUS>() << Status);
 		});
 		return SB_OK;
 	}
@@ -1225,13 +1221,12 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 {
 	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
 
-	if (Status && !CSbieAPI::IsSbieCtrlRunning()) // don't take over when SbieCtrl is up and running
-		Status = theAPI->TakeOver();
+	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
+		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
+		return SB_OK;
+	}
 
-	if (!Status)
-		return Status;
-
-	return SB_OK;
+	return Status;
 }
 
 SB_STATUS CSandMan::DisconnectSbie()
@@ -1583,7 +1578,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
-	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 charakters"); break;
+	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
 	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
 	}
 
@@ -2089,6 +2084,16 @@ void CSandMan::LoadLanguage()
 		m_LanguageId = 1033; // default to English
 }
 
+// Make sure that QPlatformTheme strings won't be marked as vanished in all .ts files, even after running lupdate
+
+static const char* platform_strings[] = {
+QT_TRANSLATE_NOOP("QPlatformTheme", "OK"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "Apply"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "Cancel"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
+};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // WinSpy based window finder
@@ -2255,83 +2260,3 @@ void CSandMan::OnWndFinder()
 		finishedNotifier->deleteLater();
 	});
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-/*
-#include <windows.h>
-#include <shellapi.h>
-
-#define RFF_NOBROWSE 0x0001
-#define RFF_NODEFAULT 0x0002
-#define RFF_CALCDIRECTORY 0x0004
-#define RFF_NOLABEL 0x0008
-#define RFF_NOSEPARATEMEM 0x0020
-#define RFF_OPTRUNAS 0x0040
-
-#define RFN_VALIDATE (-510)
-#define RFN_LIMITEDRUNAS (-511)
-
-#define RF_OK 0x0000
-#define RF_CANCEL 0x0001
-#define RF_RETRY 0x0002
-
-typedef struct _NMRUNFILEDLGW
-{
-	NMHDR hdr;
-	PWSTR lpszFile;
-	PWSTR lpszDirectory;
-	UINT ShowCmd;
-} NMRUNFILEDLGW, *LPNMRUNFILEDLGW, *PNMRUNFILEDLGW;
-
-QString g_RunDialogCommand;
-
-BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result)
-{
-	LPNMRUNFILEDLGW runFileDlg = (LPNMRUNFILEDLGW)Header;
-	if (Header->code == RFN_VALIDATE)
-	{
-		g_RunDialogCommand = QString::fromWCharArray(runFileDlg->lpszFile);
-
-		*Result = RF_CANCEL;
-		return TRUE;
-	}
-	//else if (Header->code == RFN_LIMITEDRUNAS)
-	//{
-	//
-	//}
-	return FALSE;
-}
-
-extern "C"
-{
-	NTSYSCALLAPI NTSTATUS NTAPI LdrGetProcedureAddress(IN PVOID DllHandle, IN VOID* ProcedureName OPTIONAL, IN ULONG ProcedureNumber OPTIONAL, OUT PVOID *ProcedureAddress, IN BOOLEAN RunInitRoutines);
-	//NTSTATUS(NTAPI *LdrGetProcedureAddress)(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Oridinal, PVOID *FunctionAddress);
-}
-
-BOOLEAN NTAPI ShowRunFileDialog(HWND WindowHandle, HICON WindowIcon, LPCWSTR WorkingDirectory, LPCWSTR WindowTitle, LPCWSTR WindowDescription, ULONG Flags)
-{
-	typedef BOOL(WINAPI *RunFileDlg_I)(HWND hwndOwner, HICON hIcon, LPCWSTR lpszDirectory, LPCWSTR lpszTitle, LPCWSTR lpszDescription, ULONG uFlags);
-
-	BOOLEAN result = FALSE;
-
-	if (HMODULE shell32Handle = LoadLibrary(L"shell32.dll"))
-	{
-		RunFileDlg_I dialog = NULL;
-		if (LdrGetProcedureAddress(shell32Handle, NULL, 61, (void**)&dialog, TRUE) == 0)
-			result = !!dialog(WindowHandle, WindowIcon, WorkingDirectory, WindowTitle, WindowDescription, Flags);
-
-		FreeLibrary(shell32Handle);
-	}
-
-	return result;
-}
-
-QString ShowRunDialog(const QString& BoxName)
-{
-	g_RunDialogCommand.clear();
-	wstring boxName = BoxName.toStdWString();
-	ShowRunFileDialog(MainWndHandle, NULL, NULL, boxName.c_str(), L"Enter the path of a program that will be created in a sandbox.", 0); // RFF_OPTRUNAS);
-	return g_RunDialogCommand;
-}
-*/

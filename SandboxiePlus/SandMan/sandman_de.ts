@@ -675,7 +675,7 @@ Vollst√§ndiger Pfad: %4</translation>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Es befinden sich %1 Dateien und %2 Ordner in der Sandbox, welche %3 an Speicherplatz belegen.</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>CSandBoxPlus</name>
     <message>
@@ -3081,6 +3081,29 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <location filename="Views/SbieView.cpp" line="698"/>
         <source>Drive %1</source>
         <translation>Laufwerk %1</translation>
+    </message>
+</context>
+<context>
+    <name>QPlatformTheme</name>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Anwenden</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Ja</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Nein</translation>
     </message>
 </context>
 <context>

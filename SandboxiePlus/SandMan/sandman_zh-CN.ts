@@ -3068,23 +3068,23 @@ Please note that this values are currently user specific and saved globally for 
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="vanished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">应用</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">是(&amp;Y)</translation>
+        <translation>是(&amp;Y)</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">否(&amp;N)</translation>
+        <translation>否(&amp;N)</translation>
     </message>
 </context>
 <context>

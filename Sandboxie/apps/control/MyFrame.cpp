@@ -143,6 +143,7 @@ BEGIN_MESSAGE_MAP(CMyFrame, CFrameWnd)
     ON_COMMAND(ID_HELP_TUTORIAL,                OnCmdHelpTutorial)
     ON_COMMAND(ID_HELP_FORUM,                   OnCmdHelpForum)
 	ON_COMMAND(ID_HELP_UPDATE,                  OnCmdHelpUpdate)
+    ON_COMMAND(ID_HELP_UPGRADE,                 OnCmdHelpUpgrade)
     ON_COMMAND(ID_HELP_ABOUT,                   OnCmdHelpAbout)
 
 	//ON_MESSAGE(WM_UPDATERESULT,					OnUpdateResult)
@@ -1024,6 +1025,16 @@ void CMyFrame::OnCmdHelpUpdate()
 {
 	CUpdateDialog dlg(this);
 	dlg.DoModal();
+}
+
+//---------------------------------------------------------------------------
+// OnCmdHelpUpgrade
+//---------------------------------------------------------------------------
+
+
+void CMyFrame::OnCmdHelpUpgrade()
+{
+	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-plus&tip=upgrade");
 }
 
 //---------------------------------------------------------------------------

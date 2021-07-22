@@ -2512,25 +2512,25 @@ Please note that this values are currently user specific and saved globally for 
 </context>
 <context>
     <name>QPlatformTheme</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">İptal</translation>
+	<message>
+        <source>OK</source>
+        <translation>TAMAM</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Uygula</translation>
+        <translation>Uygula</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation type="vanished">TAMAM</translation>
+        <source>Cancel</source>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Evet</translation>
+        <translation>&amp;Evet</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Hayır</translation>
+        <translation>&amp;Hayır</translation>
     </message>
 </context>
 <context>

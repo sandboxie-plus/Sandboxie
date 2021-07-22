@@ -129,6 +129,7 @@ BEGIN
         MENUITEM "3457",                        ID_HELP_FORUM
         MENUITEM SEPARATOR
         MENUITEM "3454",                        ID_HELP_UPDATE
+        MENUITEM "3467",                        ID_HELP_UPGRADE
         MENUITEM SEPARATOR
         MENUITEM "3456",                        ID_HELP_ABOUT
     END

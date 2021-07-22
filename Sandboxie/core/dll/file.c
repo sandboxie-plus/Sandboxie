@@ -3180,6 +3180,17 @@ ReparseLoop:
 
     if (! HaveCopyParent) {
 
+        if (!HaveTrueParent && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+            && wcsstr(CopyPath, L"\\system32\\config\\systemprofile\\") != NULL) {
+
+            //
+            // MSI must not fail accessing \??\C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\ 
+            // but this folder is readable only for system, so we create a boxed copy instead and open it
+            //
+
+            HaveTrueParent = TRUE;
+        }
+
         if (HaveTrueParent || HaveSnapshotParent) {
 
             status = File_CreatePath(TruePath, CopyPath);

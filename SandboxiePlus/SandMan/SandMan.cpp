@@ -193,11 +193,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
-	m_bIconEmpty = false;
+	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/SandMan.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/IconFull.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -429,7 +429,7 @@ void CSandMan::CreateMenus()
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(QIcon(":/SandMan.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(QIcon(":/IconFull.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateToolBar()
@@ -2091,13 +2091,15 @@ void CSandMan::LoadLanguage()
 }
 
 // Make sure that QPlatformTheme strings won't be marked as vanished in all .ts files, even after running lupdate
-@
-QT_TRANSLATE_NOOP("QPlatformTheme", "OK");
-QT_TRANSLATE_NOOP("QPlatformTheme", "Apply");
-QT_TRANSLATE_NOOP("QPlatformTheme", "Cancel");
-QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes");
-QT_TRANSLATE_NOOP("QPlatformTheme", "&No");
-@
+
+static const char* platform_strings[] = {
+QT_TRANSLATE_NOOP("QPlatformTheme", "OK"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "Apply"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "Cancel"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
+};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // WinSpy based window finder

@@ -43,6 +43,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- code signature is no longer required to change config, to protect presets use the the existing "EditAdminOnly=y" option
 -- code signature validation of user mode components is disabled when windows is booted in test signing mode
 - reworked process creation code to use PsSetCreateProcessNotifyRoutineEx and improved process termination
+- improved full tray icon to be more distringuishable from the empty one
 
 ### Fixed
 - added missing hook for ConnectEx

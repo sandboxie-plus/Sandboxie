@@ -952,9 +952,9 @@ Ruta completa: %4</translation>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
 <byte value="xd"/>
 Do you want to do the clean up?</source>
-        <translation type="unfinished">Sandboxie-Plus estaba siendo ejecutado en modo portable, en necesario limpiar los servicios creados. Esto pedira permisos administrativos.
+        <translation>Sandboxie-Plus estaba siendo ejecutado en modo portable, en necesario limpiar los servicios creados. Esto pedira permisos administrativos.
 
-Do you want to do the clean up?</translation>
+Desea hacer la limpieza?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="526"/>
@@ -1783,7 +1783,7 @@ Do you want to do the clean up?</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="375"/>
         <source>Please enter the new configuration password.</source>
-        <translation>Por favor ingrese una nueva clave de configuracion.</translation>
+        <translation>Por favor ingrese la nueva clave de configuracion.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="379"/>

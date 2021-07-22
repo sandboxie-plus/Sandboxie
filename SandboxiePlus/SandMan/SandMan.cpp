@@ -1228,7 +1228,7 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
 
 	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
-		OnLogMessage(tr("CAUTION: An other agent (probably SbieCtrl.exe) is already managing this sandboxie sesion, close it first and reconnect to take over."));
+		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
 		return SB_OK;
 	}
 

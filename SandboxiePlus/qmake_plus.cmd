@@ -77,4 +77,4 @@ goto :eof
 
 :error
 echo Build failed
-rem exit 1
+exit 1

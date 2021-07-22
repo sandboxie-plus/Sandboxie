@@ -2665,7 +2665,7 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1208"/>
         <source>Set network/internet access for unlisted processes:</source>
-        <translation>Netwerk-/internettoegang instellen voor niet-opgelijste processen:</translation>
+        <translation>Netwerk-/internettoegang instellen processen die niet in de lijst zitten:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1223"/>
@@ -3206,23 +3206,23 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
 </context>
 <context>

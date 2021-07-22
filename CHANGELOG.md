@@ -36,29 +36,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ### Changed
-- updated a few icons
-- updated github build action to use qt 5.15.2
 - greately improved the performanceof the trace log, but its no longer possible to log to booth sandman and sbiectrl at the same time
 - changed code integrity verification policies
--- code signature is no longer required to change config, to protect presets use the the existing "EditAdminOnly=y" option
 -- code signature validation of user mode components is disabled when windows is booted in test signing mode
 - reworked process creation code to use PsSetCreateProcessNotifyRoutineEx and improved process termination
-- improved full tray icon to be more distringuishable from the empty one
 
 ### Fixed
 - added missing hook for ConnectEx
-- fixed MSI installer not being able to create action server on windows 11
-- fixed MSI instalelr not workign in systemless mode on windows 11
-
-### Removed
 
 
 
+## [0.8.9 / 5.50.9] - 2021-07-22
 
-## [0.8.8b / 5.50.9] - 2021-07-14
+### Changed
+- updated a few icons
+- updated github build action to use qt 5.15.2
+- improved full tray icon to be more distringuishable from the empty one
+- changed code integrity verification policies
+-- code signature is no longer required to change config, to protect presets use the the existing "EditAdmin
 
 ### Fixed
-- fixed issue with systemless MSI
+- fixed issue with systemless MSI mode introduced in the last build
+- fixed MSI installer not being able to create action server on windows 11
+- fixed MSI instalelr not workign in systemless mode on windows 11
 
 
 

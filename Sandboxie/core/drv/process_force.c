@@ -352,14 +352,17 @@ _FX PEPROCESS Process_OpenAndQuery(
 
         *SessionId = PsGetProcessSessionId(ProcessObject);
 
-        TokenObject = PsReferencePrimaryToken(ProcessObject);
-        status = Token_QuerySidString(TokenObject, SidString);
-        PsDereferencePrimaryToken(TokenObject);
+        if (SidString) {
 
-        if (! NT_SUCCESS(status)) {
+            TokenObject = PsReferencePrimaryToken(ProcessObject);
+            status = Token_QuerySidString(TokenObject, SidString);
+            PsDereferencePrimaryToken(TokenObject);
 
-            ObDereferenceObject(ProcessObject);
-            ProcessObject = NULL;
+            if (! NT_SUCCESS(status)) {
+
+                ObDereferenceObject(ProcessObject);
+                ProcessObject = NULL;
+            }
         }
     }
 

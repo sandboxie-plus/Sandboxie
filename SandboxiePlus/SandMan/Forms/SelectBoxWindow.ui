@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>SandboxiePlus sellect box</string>
+   <string>SandboxiePlus select box</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>

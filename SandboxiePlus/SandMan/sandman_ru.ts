@@ -2468,24 +2468,24 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="vanished">Применить</translation>
-    </message>
-    <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
+    </message>
+	<message>
+        <source>Apply</source>
+        <translation>Применить</translation>
+    </message>
+	<message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Нет</translation>
+        <translation>&amp;Нет</translation>
     </message>
 </context>
 <context>

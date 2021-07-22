@@ -210,7 +210,7 @@ PROCESS *Process_FindSandboxed(HANDLE ProcessId, KIRQL *out_irql);
 
 // Start supervising a new process
 
-void Process_NotifyProcess_Create(
+BOOLEAN Process_NotifyProcess_Create(
     HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, BOX *box);
 
 

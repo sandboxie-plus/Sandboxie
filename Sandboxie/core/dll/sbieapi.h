@@ -210,7 +210,6 @@ LONG SbieApi_MonitorPut2(
 
 SBIEAPI_EXPORT
 LONG SbieApi_MonitorGetEx(
-	ULONG *SeqNum,
 	ULONG *Type,
     ULONG *Pid,
     ULONG *Tid,

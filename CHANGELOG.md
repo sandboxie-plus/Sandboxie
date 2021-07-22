@@ -4,6 +4,57 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [0.9.0 / 5.51.0] - 2021-07-??
+
+### Added
+- added support for Windows Filtering Platform (WFP) to be used instead of the device based network blocking scheme
+-- to enable this support add 'NetworkEnableWFP=y' to the global section and reload the driver, or reboot
+-- to use WFP for a specified sandbox add 'AllowNetworkAccess=n' to said box
+-- you can excempt certain processes from a block by using 'AllowNetworkAccess=program.exe,y'
+-- you can also enable this policy globally by adding 'AllowNetworkAccess=n' to the global section
+-- in which case you can excempt entire boxes by adding 'AllowNetworkAccess=n' to said box
+-- specifying 'AllowNetworkAccess=program.exe,n' will block the access only for the named process
+-- note: WFP is less absolute than the old approche, using WFP will filter only TCP/UDP communication
+--	restricted boxed processes will still be able to resolve domain names using the system service
+--  thay will not be howeever able to send or receive data packets directly
+-- the advantages of WFP is that filter rules can be implemented restricting communication only to
+--  specified addresses or selected ports using "NetworkAccess=..."
+- added fully functional  rule based packet filter in user mode for the case when "NetworkEnableWFP=y" is not set
+-- the mechanism replaces the old "BlockPort=..." functionality
+-- note: this filter applies only to outgoing connections/traffic for incomming eider the WFP mode or a 3rd party firewall is needed
+-- like the old user mode based mechanism maliciouse applications can bypass it by unhooking certein functions
+-- hence its recomended to use kernel mode WFP based mechanism when reliable isolation is required
+-- note: the main reason this mechanism was added also in user mode is to make it easier to debug
+- added new trace option "NetFwTrace=*" to trace the actions of the firewall components
+-- please note that the driver trace logs only to the kernel debug output, use DbgView.exe to log it
+- API_QUERY_PROCESS_INFO can be now used to get the impersonation token of sandboxed thread
+-- Note: this capability is used by TaskExplorer to allow inspecting sandbox internal tokens
+-- Note: a process must have administrative privileges to be able to use this API
+- added a UI option to switch "MsiInstallerExemptions=y" on and off
+-- just in case a future windows build breaks something for the systemless mode
+
+
+### Changed
+- updated a few icons
+- updated github build action to use qt 5.15.2
+- greately improved the performanceof the trace log, but its no longer possible to log to booth sandman and sbiectrl at the same time
+- changed code integrity verification policies
+-- code signature is no longer required to change config, to protect presets use the the existing "EditAdminOnly=y" option
+-- code signature validation of user mode components is disabled when windows is booted in test signing mode
+- reworked process creation code to use PsSetCreateProcessNotifyRoutineEx and improved process termination
+- improved full tray icon to be more distringuishable from the empty one
+
+### Fixed
+- added missing hook for ConnectEx
+- fixed MSI installer not being able to create action server on windows 11
+- fixed MSI instalelr not workign in systemless mode on windows 11
+
+### Removed
+
+
+
+
 ## [0.8.8b / 5.50.9] - 2021-07-14
 
 ### Fixed

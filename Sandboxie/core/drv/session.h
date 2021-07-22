@@ -42,6 +42,10 @@ void Session_Cancel(HANDLE ProcessId);
 
 BOOLEAN Session_IsForceDisabled(ULONG SessionId);
 
+BOOLEAN Session_CheckAdminAccess(BOOLEAN OnlyFull);
+
+ULONG Session_GetLeadSession(HANDLE pid);
+
 void Session_MonitorPut(ULONG type, const WCHAR *name, HANDLE pid);
 
 void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths, HANDLE pid, HANDLE tid);

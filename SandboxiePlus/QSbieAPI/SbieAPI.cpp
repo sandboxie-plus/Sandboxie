@@ -56,7 +56,7 @@ struct SSbieAPI
 		wsprintf(QueueName, L"*%s_%08X", INTERACTIVE_QUEUE_NAME, sessionId);
 
 		lastMessageNum = 0;
-		lastRecordNum = 0;
+		//lastRecordNum = 0;
 
 		SbieMsgDll = NULL;
 
@@ -87,7 +87,7 @@ struct SSbieAPI
 
 	bool clearingBuffers;
 	ULONG lastMessageNum;
-	ULONG lastRecordNum;
+	//ULONG lastRecordNum;
 
 	HMODULE SbieMsgDll;
 
@@ -122,8 +122,7 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 	m = new SSbieAPI();
 
 	m_pGlobalSection = new CSbieIni("GlobalSettings", this, this);
-
-	m_pUserSection = NULL;
+	m_pUserSection = new CSbieIni("UserSettings", this, this); // dummy
 
 	m_bReloadPending = false;
 
@@ -282,10 +281,10 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m->SbieMsgDll = LoadLibraryEx((m_SbiePath.toStdWString() + L"\\" SBIEMSG_DLL).c_str(), NULL, LOAD_LIBRARY_AS_DATAFILE);
 
 	m->lastMessageNum = 0;
-	m->lastRecordNum = 0;
+	//m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.50.0";
+	QStringList CompatVersions = QStringList () << "5.51.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -293,6 +292,10 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 		m->SbieApiHandle = INVALID_HANDLE_VALUE;	
 		return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
 	}
+
+	SB_STATUS Status = TakeOver();
+	if (!Status) // only the session leader manages the interactive queue
+		withQueue = false;
 
 	m_bWithQueue = withQueue;
 	m_bTerminate = false;
@@ -313,7 +316,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	}
 
 	emit StatusChanged();
-	return SB_OK;
+	return Status;
 }
 
 SB_STATUS CSbieAPI::Disconnect()
@@ -2185,7 +2188,7 @@ bool CSbieAPI::GetMonitor()
 	wchar_t* Buffer[4 * 1024];
 	ULONG Length = ARRAYSIZE(Buffer);
 
-	ULONG RecordNum = m->lastRecordNum;
+	//ULONG RecordNum = m->lastRecordNum;
 
 	__declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)Length, (ULONG64)Buffer };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -2193,7 +2196,7 @@ bool CSbieAPI::GetMonitor()
 
 	memset(parms, 0, sizeof(parms));
     args->func_code	= API_MONITOR_GET_EX;
-	args->log_seq.val = &RecordNum; // set this to NULL for record clearing
+	//args->log_seq.val = &RecordNum; // set this to NULL for record clearing
     args->log_type.val = &type;
 	args->log_pid.val = &pid;
 	args->log_tid.val = &tid;
@@ -2205,9 +2208,9 @@ bool CSbieAPI::GetMonitor()
 	if (type == 0) // versions prioir to 5.45.0 return success and type 0 when there are no more entries
 		return false;
 
-	if (RecordNum != m->lastRecordNum + 1 && !m->clearingBuffers)
-		emit LogSbieMessage(0xC1020000 | 1242, QStringList() << "" << "" << "", GetCurrentProcessId()); // Monitor buffer overflow
-	m->lastRecordNum = RecordNum;
+	//if (RecordNum != m->lastRecordNum + 1 && !m->clearingBuffers)
+	//	emit LogSbieMessage(0xC1020000 | 1242, QStringList() << "" << "" << "", GetCurrentProcessId()); // Monitor buffer overflow
+	//m->lastRecordNum = RecordNum;
 
 	if (m->clearingBuffers)
 		return true; 

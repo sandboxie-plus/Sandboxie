@@ -193,11 +193,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
-	m_bIconEmpty = false;
+	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/SandMan.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/IconFull.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -429,7 +429,7 @@ void CSandMan::CreateMenus()
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(QIcon(":/SandMan.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(QIcon(":/IconFull.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateToolBar()
@@ -597,7 +597,8 @@ void CSandMan::OnMessage(const QString& Message)
 			if (m_bConnectPending) {
 
 				QTimer::singleShot(1000, [this]() {
-					this->ConnectSbieImpl();
+					SB_STATUS Status = this->ConnectSbieImpl();
+					CheckResults(QList<SB_STATUS>() << Status);
 				});
 			}
 		}
@@ -1213,7 +1214,8 @@ SB_STATUS CSandMan::ConnectSbie()
 		return Status;
 	if (bJustStarted) {
 		QTimer::singleShot(1000, [this]() {
-			this->ConnectSbieImpl();
+			SB_STATUS Status = this->ConnectSbieImpl();
+			CheckResults(QList<SB_STATUS>() << Status);
 		});
 		return SB_OK;
 	}
@@ -1225,13 +1227,12 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 {
 	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
 
-	if (Status && !CSbieAPI::IsSbieCtrlRunning()) // don't take over when SbieCtrl is up and running
-		Status = theAPI->TakeOver();
+	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
+		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
+		return SB_OK;
+	}
 
-	if (!Status)
-		return Status;
-
-	return SB_OK;
+	return Status;
 }
 
 SB_STATUS CSandMan::DisconnectSbie()
@@ -1583,7 +1584,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
-	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 charakters"); break;
+	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
 	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
 	}
 
@@ -2088,6 +2089,16 @@ void CSandMan::LoadLanguage()
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
 }
+
+// Make sure that QPlatformTheme strings won't be marked as vanished in all .ts files, even after running lupdate
+
+static const char* platform_strings[] = {
+QT_TRANSLATE_NOOP("QPlatformTheme", "OK"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "Apply"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "Cancel"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes"),
+QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

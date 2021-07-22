@@ -432,7 +432,7 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case SANDBOXIE_RPCSS: return tr("Sbie RpcSs");
 		case SANDBOXIE_DCOMLAUNCH: return tr("Sbie DcomLaunch");
 		case SANDBOXIE_CRYPTO: return tr("Sbie Crypto");
-		case SANDBOXIE_WUAU: return tr("Sbie WuAu Svc");
+		case SANDBOXIE_WUAU: return tr("Sbie WuauServ");
 		case SANDBOXIE_BITS: return tr("Sbie BITS");
 		case SANDBOXIE_SBIESVC: return tr("Sbie Svc");
 		case MSI_INSTALLER: return tr("MSI Installer");

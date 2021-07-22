@@ -30,6 +30,7 @@
 #define INITGUID
 #include <guiddef.h>
 #include "trace.h"
+#include "common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -414,13 +415,13 @@ _FX NTSTATUS RpcRt_FindModulePreset(
         //
 
         ULONG mode = -1;
-        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, CallingModule, &mode);
+        const WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, CallingModule, &mode);
         if (!found_value || mode > found_mode)
             continue;
 
         WCHAR* test_value = NULL;
         ULONG test_len = 0;
-        found_value = SbieDll_GetTagValue(found_value, &test_value, &test_len, L',');
+        found_value = SbieDll_GetTagValue(found_value, NULL, &test_value, &test_len, L',');
 
         if (!test_value || !found_value || !*found_value) {
             SbieApi_Log(2207, L"RpcPortBinding");

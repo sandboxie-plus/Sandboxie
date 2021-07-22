@@ -655,15 +655,6 @@ ULONG SbieIniServer::IsCallerAuthorized(HANDLE hToken, const WCHAR *Password)
     WCHAR buf[42], buf2[42];
 
     //
-    // check for valid image signature
-    //
-
-    if (!PipeServer::IsCallerSigned()) {
-        CloseHandle(hToken);
-        return STATUS_INVALID_SIGNATURE;
-    }
-
-    //
     // check for Administrator-only access
     //
 

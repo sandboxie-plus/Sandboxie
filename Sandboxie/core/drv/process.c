@@ -34,6 +34,7 @@
 #include "gui.h"
 #include "token.h"
 #include "thread.h"
+#include "wfp.h"
 #include "common/my_version.h"
 
 
@@ -49,12 +50,13 @@ static NTSTATUS Process_HookProcessNotify(
 
 #endif _WIN64
 
-static ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
+ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
 
 static void Process_NotifyProcess(
     HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create);
 
-static void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId);
+static void Process_NotifyProcessEx(
+    HANDLE ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo);
 
 static PROCESS *Process_Create(
     HANDLE ProcessId, const BOX *box, const WCHAR *image_path,
@@ -136,7 +138,14 @@ _FX BOOLEAN Process_Init(void)
     // install process notify routines
     //
 
-    status = PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, FALSE);
+    if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+        status = PsSetCreateProcessNotifyRoutineEx(Process_NotifyProcessEx, FALSE);
+    }
+    else {
+
+        status = PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, FALSE);
+    }
 
 #ifndef _WIN64
 
@@ -202,7 +211,15 @@ _FX void Process_Unload(BOOLEAN FreeLock)
 
     if (Process_NotifyProcessInstalled) {
 
-        PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, TRUE);
+        if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+            PsSetCreateProcessNotifyRoutineEx(Process_NotifyProcessEx, TRUE);
+        }
+        else { 
+
+            PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, TRUE);
+        }
+
         Process_NotifyProcessInstalled = FALSE;
 
 #ifndef _WIN64
@@ -514,17 +531,19 @@ _FX void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId)
     PROCESS *proc;
     KIRQL irql;
 
-    pid_str.Length = 10 * sizeof(WCHAR);
-    pid_str.MaximumLength = pid_str.Length + sizeof(WCHAR);
+    if (SessionId != -1) { // for StartRunAlertDenied, dont log in this case
+    
+        pid_str.Length = 10 * sizeof(WCHAR);
+        pid_str.MaximumLength = pid_str.Length + sizeof(WCHAR);
 
-    pid_str.Buffer = Mem_Alloc(Driver_Pool, pid_str.MaximumLength);
-    if (pid_str.Buffer) {
+        pid_str.Buffer = Mem_Alloc(Driver_Pool, pid_str.MaximumLength);
+        if (pid_str.Buffer) {
 
-        RtlIntPtrToUnicodeString((ULONG_PTR)ProcessId, 10, &pid_str);
-		if (SessionId != -1) // for StartRunAlertDenied
-			Log_Msg_Process(MSG_1211, pid_str.Buffer, NULL, SessionId, ProcessId);
+            RtlIntPtrToUnicodeString((ULONG_PTR)ProcessId, 10, &pid_str);
+            Log_Msg_Process(MSG_1211, pid_str.Buffer, NULL, SessionId, ProcessId);
 
-        Mem_Free(pid_str.Buffer, pid_str.MaximumLength);
+            Mem_Free(pid_str.Buffer, pid_str.MaximumLength);
+        }
     }
 
     proc = Mem_Alloc(Driver_Pool, sizeof(PROCESS));
@@ -773,30 +792,19 @@ _FX ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting)
 
 
 //---------------------------------------------------------------------------
-// Process_NotifyProcess
+// Process_NotifyProcess_Impl
 //---------------------------------------------------------------------------
 
 
-_FX void Process_NotifyProcess(
+_FX BOOLEAN Process_NotifyProcess_Impl(
     HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create)
 {
-    //
-    // if we replaced an existing notify routine, call it first
-    //
-
-#ifndef _WIN64
-
-    if (Process_pOldNotifyProcess && (*Process_pOldNotifyProcess))
-        (*Process_pOldNotifyProcess)(ParentId, ProcessId, Create);
-
-#endif _WIN64
-
     //
     // don't do anything before the main driver init says it's ok
     //
 
     if (! Process_ReadyToSandbox)
-        return;
+        return TRUE;
 
     //
     // handle process creation and deletion.  note that we are running
@@ -816,12 +824,102 @@ _FX void Process_NotifyProcess(
 
             //DbgPrint("Process_NotifyProcess_Create pid=%d parent=%d current=%d\n", ProcessId, ParentId, PsGetCurrentProcessId());
             
-            Process_NotifyProcess_Create(ProcessId, ParentId, PsGetCurrentProcessId(), NULL);
+            if (!Process_NotifyProcess_Create(ProcessId, ParentId, PsGetCurrentProcessId(), NULL)) {
+
+                return FALSE; // prevent creation
+            }
 
         } else {
 
             Process_NotifyProcess_Delete(ProcessId);
         }
+    }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_NotifyProcess
+//---------------------------------------------------------------------------
+
+
+_FX void Process_NotifyProcess(
+    HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create)
+{
+    //
+    // if we replaced an existing notify routine, call it first
+    //
+
+#ifndef _WIN64
+
+    if (Process_pOldNotifyProcess && (*Process_pOldNotifyProcess))
+        (*Process_pOldNotifyProcess)(ParentId, ProcessId, Create);
+
+#endif _WIN64
+
+    // Windows XP and Vista
+
+    if (!Process_NotifyProcess_Impl(ParentId, ProcessId, Create)) {
+
+        //
+        // Note: the process is already marked for termination so we don't need to do anything
+        //          in case one would want to schedule an explicit termination, the code below can be used
+        //
+
+        /*
+        PEPROCESS ProcessObject;
+        ULONG session_id;
+        ULONG64 create_time;
+
+        ProcessObject = Process_OpenAndQuery(ProcessId, NULL, &session_id);
+        if (ProcessObject) {
+    
+            create_time = PsGetProcessCreateTimeQuadPart(ProcessObject);
+            ObDereferenceObject(ProcessObject);
+        }
+                
+        void *nbuf1;
+        ULONG nlen1;
+        WCHAR *nptr1;
+
+        Process_GetProcessName(
+                    Driver_Pool, (ULONG_PTR)ProcessId, &nbuf1, &nlen1, &nptr1);
+
+        if (1) {
+
+            BOX dummy_box;
+            PROCESS dummy_proc;
+            memzero(&dummy_box, sizeof(dummy_box));
+            memzero(&dummy_proc, sizeof(dummy_proc));
+            dummy_box.session_id = session_id;
+            dummy_proc.box = &dummy_box;
+            dummy_proc.pid = ProcessId;
+            dummy_proc.create_time = create_time;
+            dummy_proc.image_name = (WCHAR*)nptr1;
+
+            Process_TerminateProcess(&dummy_proc);
+        }
+
+        Mem_Free(nbuf1, nlen1);
+        */
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// Process_NotifyProcessEx
+//---------------------------------------------------------------------------
+
+
+_FX void Process_NotifyProcessEx(
+    HANDLE ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo)
+{
+    // Windows 7 and later
+
+    if (!Process_NotifyProcess_Impl(ParentId, ProcessId, CreateInfo != NULL)) {
+
+        if(CreateInfo) CreateInfo->CreationStatus = STATUS_ACCESS_DENIED;
     }
 }
 
@@ -831,7 +929,7 @@ _FX void Process_NotifyProcess(
 //---------------------------------------------------------------------------
 
 
-_FX void Process_NotifyProcess_Create(
+_FX BOOLEAN Process_NotifyProcess_Create(
     HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, BOX *box)
 {
     void *nbuf1, *nbuf2;
@@ -842,6 +940,7 @@ _FX void Process_NotifyProcess_Create(
     BOOLEAN parent_had_rights_dropped = FALSE;
     BOOLEAN process_is_forced = FALSE;
     BOOLEAN add_process_to_job = FALSE;
+	BOOLEAN create_terminated = FALSE;
     BOOLEAN bHostInject = FALSE;
     KIRQL irql;
 
@@ -854,7 +953,7 @@ _FX void Process_NotifyProcess_Create(
     if (! nbuf1) {
 
         Process_CreateTerminated(ProcessId, -1);
-        return;
+        return FALSE;
     }
 
     ImagePath = ((UNICODE_STRING *)nbuf1)->Buffer;
@@ -891,7 +990,6 @@ _FX void Process_NotifyProcess_Create(
         // 2.  check if parent is sandboxed
         //
 
-        BOOLEAN create_terminated = FALSE;
         BOOLEAN added_to_dfp_list = FALSE;
         BOOLEAN check_forced_program = FALSE;
 
@@ -1058,6 +1156,10 @@ _FX void Process_NotifyProcess_Create(
     if (box) {
 
         PROCESS *new_proc = Process_Create(ProcessId, box, ImagePath, &irql);
+        if (!new_proc) {
+		
+            create_terminated = TRUE;
+		}
         Box_Free(box);
 
         if (new_proc) {
@@ -1132,12 +1234,29 @@ _FX void Process_NotifyProcess_Create(
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
 
-            Process_Low_Inject(
-                pid, session_id, create_time, nptr1, add_process_to_job, bHostInject);
+            if (!Process_Low_Inject(
+                pid, session_id, create_time, nptr1, add_process_to_job, bHostInject)) {
+
+                create_terminated = TRUE;
+
+                //
+                // re acquire the process object, and mark it terminated
+                //
+
+                new_proc = Process_Find(ProcessId, &irql);
+
+                if (new_proc)
+                    Process_SetTerminated(new_proc, 2);
+
+                ExReleaseResourceLite(Process_ListLock);
+                KeLowerIrql(irql);
+            }
         }
     }
 
     Mem_Free(nbuf1, nlen1);
+
+    return create_terminated == FALSE;
 }
 
 
@@ -1204,6 +1323,8 @@ _FX void Process_Delete(HANDLE ProcessId)
             // process was found to be sandboxed:  it was already unlinked
             // from Process_List.  we have to do some process clean-up
             //
+
+            WFP_DeleteProcess(proc);
 
             Key_UnmountHive(proc);
 
@@ -1304,6 +1425,9 @@ _FX void Process_NotifyImage(
         // initialize the filtering components
         //
 
+        if (!fail && !WFP_InitProcess(proc))
+			fail = 0x0B;
+
         if (!fail && !File_InitProcess(proc))
 			fail = 0x04;
 
@@ -1350,6 +1474,14 @@ _FX void Process_NotifyImage(
 
 void Process_SetTerminated(PROCESS *proc, ULONG reason)
 {
+    //
+    // This function markes a process for termination, this causes File_PreOperation 
+    // and Key_Callback to return STATUS_PROCESS_IS_TERMINATING which prevents 
+    // the process form accessing the file system and the registry
+    // 
+    // Note: if this is set during process creation the process wont be able to start at all
+    //
+
     if (!proc->terminated)
     {
         proc->terminated = TRUE;

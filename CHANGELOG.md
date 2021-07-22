@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated a few icons
 - updated github build action to use qt 5.15.2
 - improved full tray icon to be more distringuishable from the empty one
+- changed code integrity verification policies
+-- code signature is no longer required to change config, to protect presets use the the existing "EditAdmin
 
 ### Fixed
 - fixed issue with systemless MSI mode introduced in the last build

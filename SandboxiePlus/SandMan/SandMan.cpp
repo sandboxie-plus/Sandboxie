@@ -29,9 +29,6 @@ CSbiePlusAPI* theAPI = NULL;
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
 
-
-//BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result);
-
 class CNativeEventFilter : public QAbstractNativeEventFilter
 {
 public:
@@ -46,9 +43,6 @@ public:
 
 			if (msg->message == WM_NOTIFY)
 			{
-				//LRESULT ret;
-				//if (OnWM_Notify((NMHDR*)msg->lParam, &ret))
-				//	*result = ret;
 				return true;
 			}
 			else if (msg->message == WM_DEVICECHANGE)
@@ -2266,83 +2260,3 @@ void CSandMan::OnWndFinder()
 		finishedNotifier->deleteLater();
 	});
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-/*
-#include <windows.h>
-#include <shellapi.h>
-
-#define RFF_NOBROWSE 0x0001
-#define RFF_NODEFAULT 0x0002
-#define RFF_CALCDIRECTORY 0x0004
-#define RFF_NOLABEL 0x0008
-#define RFF_NOSEPARATEMEM 0x0020
-#define RFF_OPTRUNAS 0x0040
-
-#define RFN_VALIDATE (-510)
-#define RFN_LIMITEDRUNAS (-511)
-
-#define RF_OK 0x0000
-#define RF_CANCEL 0x0001
-#define RF_RETRY 0x0002
-
-typedef struct _NMRUNFILEDLGW
-{
-	NMHDR hdr;
-	PWSTR lpszFile;
-	PWSTR lpszDirectory;
-	UINT ShowCmd;
-} NMRUNFILEDLGW, *LPNMRUNFILEDLGW, *PNMRUNFILEDLGW;
-
-QString g_RunDialogCommand;
-
-BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result)
-{
-	LPNMRUNFILEDLGW runFileDlg = (LPNMRUNFILEDLGW)Header;
-	if (Header->code == RFN_VALIDATE)
-	{
-		g_RunDialogCommand = QString::fromWCharArray(runFileDlg->lpszFile);
-
-		*Result = RF_CANCEL;
-		return TRUE;
-	}
-	//else if (Header->code == RFN_LIMITEDRUNAS)
-	//{
-	//
-	//}
-	return FALSE;
-}
-
-extern "C"
-{
-	NTSYSCALLAPI NTSTATUS NTAPI LdrGetProcedureAddress(IN PVOID DllHandle, IN VOID* ProcedureName OPTIONAL, IN ULONG ProcedureNumber OPTIONAL, OUT PVOID *ProcedureAddress, IN BOOLEAN RunInitRoutines);
-	//NTSTATUS(NTAPI *LdrGetProcedureAddress)(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Oridinal, PVOID *FunctionAddress);
-}
-
-BOOLEAN NTAPI ShowRunFileDialog(HWND WindowHandle, HICON WindowIcon, LPCWSTR WorkingDirectory, LPCWSTR WindowTitle, LPCWSTR WindowDescription, ULONG Flags)
-{
-	typedef BOOL(WINAPI *RunFileDlg_I)(HWND hwndOwner, HICON hIcon, LPCWSTR lpszDirectory, LPCWSTR lpszTitle, LPCWSTR lpszDescription, ULONG uFlags);
-
-	BOOLEAN result = FALSE;
-
-	if (HMODULE shell32Handle = LoadLibrary(L"shell32.dll"))
-	{
-		RunFileDlg_I dialog = NULL;
-		if (LdrGetProcedureAddress(shell32Handle, NULL, 61, (void**)&dialog, TRUE) == 0)
-			result = !!dialog(WindowHandle, WindowIcon, WorkingDirectory, WindowTitle, WindowDescription, Flags);
-
-		FreeLibrary(shell32Handle);
-	}
-
-	return result;
-}
-
-QString ShowRunDialog(const QString& BoxName)
-{
-	g_RunDialogCommand.clear();
-	wstring boxName = BoxName.toStdWString();
-	ShowRunFileDialog(MainWndHandle, NULL, NULL, boxName.c_str(), L"Enter the path of a program that will be created in a sandbox.", 0); // RFF_OPTRUNAS);
-	return g_RunDialogCommand;
-}
-*/

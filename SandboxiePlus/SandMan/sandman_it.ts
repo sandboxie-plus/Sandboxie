@@ -2898,7 +2898,8 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1869"/>
-        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
+        <source>Allow sandboxed programs to managing Hardware/Devices</source>
+        <oldsource>Allow sandboxed programs to Managing Hardware/Devices</oldsource>
         <translation>Consenti ai programmi nell&apos;area virtuale di gestire dispositivi hardware</translation>
     </message>
     <message>
@@ -2984,7 +2985,8 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1883"/>
-        <source>Open access to windows Local Security Authority</source>
+        <source>Open access to Windows Local Security Authority</source>
+        <oldsource>Open access to windows Local Security Authority</oldsource>
         <translation>Consenti accesso al sottosistema dell&apos;autorità di protezione locale (LSASS)</translation>
     </message>
     <message>

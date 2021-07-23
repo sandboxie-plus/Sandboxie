@@ -1295,6 +1295,10 @@ Program &Settings
 &Resource Access
 .
 
+3484;txt;01
+Resource Access
+.
+
 3485;txt;01
 Show Window
 .

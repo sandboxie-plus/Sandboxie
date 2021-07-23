@@ -3661,7 +3661,7 @@ void CBoxPage::DoPropertySheet(
         BoxPageNetworkFiles,    BoxName,    MSG_3911,   MSG_3955);
 
     //CBoxPage pageResourceAccess(
-    //    BoxPageResourceAccess,  BoxName,    0,          MSG_3483);
+    //    BoxPageResourceAccess,  BoxName,    0,          MSG_3484);
 
     CBoxPage pageOpenFile(
         BoxPageOpenFile,        BoxName,    0,          MSG_4001);

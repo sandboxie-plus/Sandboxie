@@ -87,7 +87,7 @@ public:
 
 protected:
 	friend class CSbiePlusAPI;
-	virtual bool			CheckOpenToken() const;
+	virtual bool			CheckUnsecureConfig() const;
 
 	virtual bool			TestProgramGroup(const QString& Group, const QString& ProgName);
 	virtual void			EditProgramGroup(const QString& Group, const QString& ProgName, bool bSet);

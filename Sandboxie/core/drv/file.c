@@ -983,13 +983,13 @@ _FX NTSTATUS File_Generic_MyParseProc(
     // skip requests dealing with devices we don't care about
     //
 
-    if (device_type != FILE_DEVICE_DISK &&
+    if ((device_type != FILE_DEVICE_DISK &&
         device_type != FILE_DEVICE_NAMED_PIPE &&
         device_type != FILE_DEVICE_MAILSLOT &&
         device_type != FILE_DEVICE_NETWORK &&
         device_type != FILE_DEVICE_MULTI_UNC_PROVIDER &&
         device_type != FILE_DEVICE_NETWORK_FILE_SYSTEM &&
-        device_type != FILE_DEVICE_DFS)
+        device_type != FILE_DEVICE_DFS) || proc->disable_file_flt)
     {
         if ((proc->file_trace & TRACE_IGNORE) || Session_MonitorCount) {
 

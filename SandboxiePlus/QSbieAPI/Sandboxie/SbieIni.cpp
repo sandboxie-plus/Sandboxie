@@ -152,7 +152,7 @@ QStringList CSbieIni::GetTextListTmpl(const QString &Setting, const QString& Tem
 
 	for (int index = 0; ; index++)
 	{
-		QString Value = m_pAPI->SbieIniGet("Template_" + Template, Setting, index | CONF_GET_NO_GLOBAL);
+		QString Value = m_pAPI->SbieIniGet("Template_" + Template, Setting, index | CONF_GET_NO_GLOBAL | CONF_GET_NO_EXPAND);
 		if (Value.isNull())
 			break;
 		TextList.append(Value);

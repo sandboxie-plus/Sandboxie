@@ -562,7 +562,7 @@ void CSandMan::OnMessage(const QString& Message)
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
 	}
-	else if (Message.left(3) == "Run")
+	else if (Message.left(4) == "Run:")
 	{
 		QString CmdLine = Message.mid(4);
 
@@ -571,6 +571,23 @@ void CSandMan::OnMessage(const QString& Message)
 		}
 		else
 			RunSandboxed(QStringList(CmdLine));
+	}
+	else if (Message.left(3) == "Op:")
+	{
+		QString Op = Message.mid(3);
+
+		SB_STATUS Status;
+		if (Op == "Connect")
+			Status = ConnectSbie();
+		else if (Op == "Disconnect")
+			Status = DisconnectSbie();
+		else if (Op == "Shutdown")
+			Status = StopSbie();
+		else if (Op == "EmptyAll")
+			Status = theAPI->TerminateAll();
+		else
+			Status = SB_ERR(SB_Message, QVariantList () << (tr("Unknown operation '%1' requested via command line").arg(Op)));
+		CheckResults(QList<SB_STATUS>() << Status);
 	}
 	else if (Message.left(6) == "Status")
 	{

@@ -33,7 +33,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: a process must have administrative privileges to be able to use this API
 - added a UI option to switch "MsiInstallerExemptions=y" on and off
 -- just in case a future windows build breaks something for the systemless mode
-
+- added sample code for ObRegisterCallbacks to the driver
+- added new debug options "DisableFileFilter=y" and "DisableKeyFilter=y" allowing to disable file and registry filtering
+-- Note: this options are for testing only and disable core parts of the sandbox isolation
+- added a few CommandLone options to sandman.exe
 
 ### Changed
 - greately improved the performanceof the trace log, but its no longer possible to log to booth sandman and sbiectrl at the same time

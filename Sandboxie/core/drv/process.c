@@ -727,6 +727,13 @@ _FX PROCESS *Process_Create(
     proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
 
     //
+    // initialize debug options
+    //
+
+    proc->disable_file_flt = Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
+    proc->disable_key_flt = Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
+
+    //
     // initialize trace flags
     //
 

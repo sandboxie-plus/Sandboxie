@@ -3441,12 +3441,12 @@ Move &To
 #----------------------------------------------------------------------------
 
 6001;txt;01
-The classic Sandboxie UI (SbieCtrl.exe)has very limited
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
 resource monitoring and event tracing capabilities.
 
 For optimal troubleshooting it is highly advisable 
-to install Sandboxie-Plus the new UI (SandMan.exe),
-provides excellent and tracing and monitoring capabilities.
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
 
 Do you want to download Sandboxie-Plus now?
 .
@@ -3462,11 +3462,11 @@ The legacy UI of Sandboxie classic does not implement support for the network fi
 You can though configure the feature supported by the core components using the ini file, rules are structured like following:
 NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
 
-If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
 .
 
 6005;txt;01
-Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges, you can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
 .
 
 6006;txt;01

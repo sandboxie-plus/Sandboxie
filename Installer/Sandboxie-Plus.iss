@@ -404,8 +404,8 @@ begin
   RegDeleteValue(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Run', 'SandboxiePlus_AutoRun');
   
   // remove shell integration
-  RegDeleteValue(HKEY_CURRENT_USER, 'software\classes\*\shell', 'sandbox');
-  RegDeleteValue(HKEY_CURRENT_USER, 'software\classes\folder\shell', 'sandbox');
+  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox');
+  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'software\classes\folder\shell\sandbox');
 
   // delete other left overs
   DeleteFile(ExpandConstant('{app}\SbieDrv.sys.w10'));

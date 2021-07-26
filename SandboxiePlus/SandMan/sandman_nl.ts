@@ -648,7 +648,7 @@
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox: %2?
+        <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox %2?
 Bestandsnaam: %3</translation>
     </message>
     <message>

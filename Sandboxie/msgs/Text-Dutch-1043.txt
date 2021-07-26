@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-07-19
+#  Latest update by RockyTDR on 2021-07-24
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -1255,6 +1255,10 @@ Uitvoeren vanaf start&menu
 &Windows verkenner uitvoeren
 .
 
+3467;txt;01
+Upgraden naar Sandboxie-Plus
+.
+
 3471;txt;01
 Programma's beëindigen
 .
@@ -1293,6 +1297,10 @@ Programma-in&stellingen
 
 3483;txt;01
 B&rontoegang
+.
+
+3484;txt;01
+Brontoegang
 .
 
 3485;txt;01
@@ -2882,6 +2890,14 @@ COM-toegang (OpenCisid)
 Gesandboxte programma's kunnen niet communiceren met COM-objecten die horen bij programma's die uitgevoerd worden buiten de sandbox, tenzij de COM-klasse-ID overeenkomt met een van de volgende klasse-ID's.
 .
 
+4104;txt;01
+Brontoegang::Netwerktoegang
+.
+
+4105;txt;01
+Netwerktoegang (firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -3423,6 +3439,55 @@ Om&laag verplaatsen
 5154;txt;01
 Verplaa&tsen naar
 .
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+De klassieke Sandboxie UI (SbieCtrl.exe) heeft beperkte
+mogelijkheden voor bronmonitoring en gebeurtenistracering.
+
+Voor optimale probleemoplossing is het sterk aanbevolen
+om de nieuwe UI, Sandboxie-Plus (SandMan.exe), te installeren,
+die uitstekende tracering- en monitoring-mogelijkheden heeft.
+
+Wilt u Sandboxie-Plus nu downloaden?
+.
+
+6002;txt;01
+Bezoek <a ID="whats_new">sandboxie-plus.com</a> voor meer informatie over de nieuwe functies van Sanboxie-Plus,
+of klik <a ID="upgrade">hier</a> om de laatste versie van het Sandboxie-Plus-installatiebestand te downloaden.
+.
+
+6003;txt;01
+De oude UI van Sandboxie classic implementeert geen ondersteuning voor de netwerk-firewall-functies.
+
+U kunt de de functie configureren, ondersteund door de kernonderdelen, via het ini-bestand. Regels worden zo gestructureerd:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Als u een UI verkiest om deze opties te bedienen, upgrade dan naar Sandboxie-Plus, dat volledige UI-ondersteuning biedt voor alle nieuwe functies.
+.
+
+6005;txt;01
+Opmerking: zonder beheerdersrechten zullen installatieprogramma's niet starten in de sandbox. Sandboxie-Plus biedt een optie om veel installatieprogramma's te laten slagen zonder die privileges. U kunt deze optie ook handmatig inschakelen in de klassieke build, door "FakeAdminRights=y" toe te voegen aan de ini-sectie voor deze box.
+.
+
+6006;txt;01
+De oude UI van Sandboxie classic implementeert slechts ondersteuning voor een aantal beperkingsopties.
+
+Aanvullende opties zoals "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" en veel meer kunnen worden ingesteld in de ini-sectie voor deze box.
+De moderne UI (SandMan.exe) biedt ook meer aanpassingsopties voor starten/uitvoeren en beperkingen voor internettoegang.
+
+Als u een UI zou verkiezen om deze opties te bedienen, upgrade dan naar Sandboxie-Plus, dat volledige UI-ondersteuning biedt voor alle nieuwe functies.
+.
+
+6007;txt;01
+...
+
+Als u een UI zou verkiezen om deze opties te bedienen, upgrade dan naar Sandboxie-Plus, dat volledige UI-ondersteuning biedt voor alle nieuwe functies.
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

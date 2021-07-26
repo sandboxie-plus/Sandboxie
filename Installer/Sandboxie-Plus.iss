@@ -131,7 +131,7 @@ Italian.CustomPageUpgradeMode=Aggiorna l'installazione esistente di {#MyAppName}
 Italian.CustomPagePortableMode=Estrai tutti i file in una directory per uso portabile
 Italian.RequiresWin7OrLater=Sandboxie-Plus richiede Windows 7 o superiore.
 Italian.ClassicFound=È stata rilevata una installazione di Sandboxie Classic che potrebbe causare incompatibilità. Rimuoverla ora?
-Italian.RunSandboxedMenu=Avvia nell'area virtuale
+Italian.RunSandboxedMenu=Avvia nell'&area virtuale
 
 [Code]
 var

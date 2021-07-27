@@ -102,21 +102,6 @@ static NTSTATUS Secure_NtFilterToken(
     _In_opt_ PTOKEN_GROUPS RestrictedSids,
     _Out_ PHANDLE NewTokenHandle);
 
-static NTSTATUS Secure_NtFilterTokenEx(
-    _In_ HANDLE ExistingTokenHandle,
-    _In_ ULONG Flags,
-    _In_opt_ PTOKEN_GROUPS SidsToDisable,
-    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
-    _In_opt_ PTOKEN_GROUPS RestrictedSids,
-    _In_ ULONG DisableUserClaimsCount,
-    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
-    _In_ ULONG DisableDeviceClaimsCount,
-    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
-    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
-    _In_opt_ PVOID RestrictedUserAttributes,
-    _In_opt_ PVOID RestrictedDeviceAttributes,
-    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
-    _Out_ PHANDLE NewTokenHandle);
 
 static NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags);
 
@@ -143,7 +128,6 @@ static P_NtSetInformationToken      __sys_NtSetInformationToken     = NULL;
 static P_NtAdjustPrivilegesToken    __sys_NtAdjustPrivilegesToken   = NULL;
 static P_NtDuplicateToken           __sys_NtDuplicateToken          = NULL;
 static P_NtFilterToken              __sys_NtFilterToken             = NULL;
-static P_NtFilterTokenEx            __sys_NtFilterTokenEx           = NULL;
 static P_RtlQueryElevationFlags     __sys_RtlQueryElevationFlags    = NULL;
 static P_RtlCheckTokenMembershipEx  __sys_RtlCheckTokenMembershipEx = NULL;
 static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
@@ -285,7 +269,6 @@ void Secure_InitSecurityDescriptors(void)
 
 _FX BOOLEAN Secure_Init(void)
 {
-    void *NtFilterTokenEx;
     void *RtlQueryElevationFlags;
     void *RtlCheckTokenMembershipEx;
 
@@ -303,10 +286,6 @@ _FX BOOLEAN Secure_Init(void)
     if (Dll_OsBuild >= 21286) {    // Windows 11
         SBIEDLL_HOOK(Secure_, NtDuplicateToken);
         SBIEDLL_HOOK(Secure_, NtFilterToken);
-        NtFilterTokenEx = GetProcAddress(Dll_Ntdll, "NtFilterTokenEx");
-        if (NtFilterTokenEx) {
-            SBIEDLL_HOOK(Secure_, NtFilterTokenEx);
-        }
     }
     if (Dll_Windows < 10) {
         SBIEDLL_HOOK(Secure_, NtQueryInformationToken);
@@ -980,47 +959,6 @@ _FX NTSTATUS Secure_NtFilterToken(
     ULONG status = __sys_NtFilterToken(
         ExistingTokenHandle, Flags, SidsToDisable,
         PrivilegesToDelete, RestrictedSids, NewTokenHandle);
-
-    if (hToken) {
-        NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));
-        NtClose(hToken);
-    }
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// Secure_NtFilterTokenEx
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Secure_NtFilterTokenEx(
-    _In_ HANDLE ExistingTokenHandle,
-    _In_ ULONG Flags,
-    _In_opt_ PTOKEN_GROUPS SidsToDisable,
-    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
-    _In_opt_ PTOKEN_GROUPS RestrictedSids,
-    _In_ ULONG DisableUserClaimsCount,
-    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
-    _In_ ULONG DisableDeviceClaimsCount,
-    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
-    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
-    _In_opt_ PVOID RestrictedUserAttributes,
-    _In_opt_ PVOID RestrictedDeviceAttributes,
-    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
-    _Out_ PHANDLE NewTokenHandle)
-{
-    HANDLE hToken = NULL;
-    NtOpenThreadToken(NtCurrentThread(), MAXIMUM_ALLOWED, TRUE, &hToken);
-    HANDLE hNull = NULL;
-    NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hNull, sizeof(HANDLE));
-
-    ULONG status = __sys_NtFilterTokenEx(
-        ExistingTokenHandle, Flags, SidsToDisable, PrivilegesToDelete, RestrictedSids,
-        DisableUserClaimsCount, UserClaimsToDisable, DisableDeviceClaimsCount, DeviceClaimsToDisable,
-        DeviceGroupsToDisable, RestrictedUserAttributes, RestrictedDeviceAttributes, RestrictedDeviceGroups,
-        NewTokenHandle);
 
     if (hToken) {
         NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));

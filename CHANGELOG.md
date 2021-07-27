@@ -50,7 +50,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.8.9 / 5.50.9] - 2021-07-27
 
-## :warning: If you use Windows 7, see the crash issue: [#1040](https://github.com/sandboxie-plus/Sandboxie/issues/1040) 
+### :warning: If you use Windows 7, see the installation issues [#1040](https://github.com/sandboxie-plus/Sandboxie/issues/1040) and [#1044](https://github.com/sandboxie-plus/Sandboxie/issues/1044)
 
 ### Changed
 - updated a few icons

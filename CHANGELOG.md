@@ -61,6 +61,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with systemless MSI mode introduced in the last build
 - fixed MSI installer not being able to create the action server mechanism on Windows 11
 - fixed MSI installer not working in systemless mode on Windows 11
+- fixed Inno Setup script not being able to remove shell integration keys during Sandboxie Plus uninstall (by mpheath) [#1037](https://github.com/sandboxie-plus/Sandboxie/pull/1037)
 
 
 

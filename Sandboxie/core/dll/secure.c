@@ -285,6 +285,7 @@ void Secure_InitSecurityDescriptors(void)
 
 _FX BOOLEAN Secure_Init(void)
 {
+    void *NtFilterTokenEx;
     void *RtlQueryElevationFlags;
     void *RtlCheckTokenMembershipEx;
 
@@ -302,7 +303,10 @@ _FX BOOLEAN Secure_Init(void)
     if (Dll_OsBuild >= 21286) {    // Windows 11
         SBIEDLL_HOOK(Secure_, NtDuplicateToken);
         SBIEDLL_HOOK(Secure_, NtFilterToken);
-        SBIEDLL_HOOK(Secure_, NtFilterTokenEx);
+        NtFilterTokenEx = GetProcAddress(Dll_Ntdll, "NtFilterTokenEx");
+        if (NtFilterTokenEx) {
+            SBIEDLL_HOOK(Secure_, NtFilterTokenEx);
+        }
     }
     if (Dll_Windows < 10) {
         SBIEDLL_HOOK(Secure_, NtQueryInformationToken);

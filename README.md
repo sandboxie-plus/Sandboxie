@@ -5,20 +5,28 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 ## System requirements
 Windows 7 or higher, 32-bit or 64-bit.
 
-## Changelog
+## Changelog updates
 https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md
 
 ## Download
 Get the latest release here: https://github.com/sandboxie-plus/Sandboxie/releases/latest
 
 ## Features
-Sandboxie is available in two flavors, Plus and Classic. Both have the same core components, this means they have the same level of security and compatibility.
-What's different is the availability of features in the user interface:
+Sandboxie is available in two flavors, Plus and Classic. They both share the same core components, this means they have the same level of security and compatibility.
+What's different is the availability of features in the user interface.
 
-1) Plus build has a modern Qt based UI, which supports all new features that have been added since the project went open source.
-If you need an accurate list, you can take a look at the changelog above.
+Plus build has a modern Qt based UI, which supports all new features that have been added since the project went open source:
 
-2) Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
+  * Snapshot Manager - this feature takes a copy of any box in order to be restored when needed
+  * Maintenance mode - it allows to install/uninstall/start/stop Sandboxie driver and service when needed
+  * Portable mode - you can run the installer and choose to extract all files to a directory
+  * Additional UI options to block access for Windows components like printer spooler and clipboard
+  * More customization options for Start/Run and Internet access restrictions
+  * Global hotkey to terminate all boxed processes since 0.8.5
+
+Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
+
+If you need an accurate list of the changes, you can take a look at the [changelog](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md).
 
 ## Documentation
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation), [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) and [future development](https://github.com/sandboxie-plus/Sandboxie/labels/future%20development) labels in this repository.
@@ -55,11 +63,14 @@ Open Source release
 - nkh0472 - Chinese Simplified
 - yfdyh000 - Chinese Simplified
 - TragicLifeHu - Chinese Traditional
+- Hulen - Chinese Traditional
 - RockyTDR - Dutch
 - bastik-1001 - German
 - isaak654 - Italian
+- 7zip (member of Xanasoft forum) - Poland
 - JNylson - Portuguese
 - lufog - Russian
+- sebadamus - Spanish
 - xorcan - Turkish
 
 More volunteers are welcome! ;)

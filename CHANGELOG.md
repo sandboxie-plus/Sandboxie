@@ -48,7 +48,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.8.9 / 5.50.9] - 2021-07-??
+## [0.8.9 / 5.50.9] - 2021-07-27
 
 ### Changed
 - updated a few icons

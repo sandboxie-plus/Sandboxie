@@ -50,6 +50,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.8.9 / 5.50.9] - 2021-07-27
 
+## :warning: If you use Windows 7, see the crash issue: [#1040](https://github.com/sandboxie-plus/Sandboxie/issues/1040) 
+
 ### Changed
 - updated a few icons
 - updated GitHub build action to use Qt 5.15.2

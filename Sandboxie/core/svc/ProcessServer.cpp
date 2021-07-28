@@ -26,6 +26,8 @@
 #include "ProcessServer.h"
 #include "Processwire.h"
 #include "DriverAssist.h"
+#include "GuiServer.h"
+#include "GuiWire.h"
 #include "misc.h"
 #include "common/defines.h"
 #include "common/my_version.h"
@@ -203,6 +205,7 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     WCHAR TargetBoxName[48];
     ULONG CallerSessionId;
     WCHAR CallerBoxName[48];
+    BOOLEAN TerminateJob;
     NTSTATUS status;
 
     //
@@ -234,6 +237,11 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     } else if (status != STATUS_SUCCESS)
         return SHORT_REPLY(status);
 
+    if (status != STATUS_INVALID_CID) // if this is true the caller is boxed, should be rpcss
+        TerminateJob = FALSE; // if rpcss requests box termination, don't use the job method, fix-me: we get some stuck request in the queue
+    else
+        TerminateJob = !SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE);
+
     //
     // match session id and box name
     //
@@ -250,7 +258,7 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     // kill target processes
     //
 
-    status = KillAllHelper(TargetBoxName, TargetSessionId);
+    status = KillAllHelper(TargetBoxName, TargetSessionId, TerminateJob);
 
     return SHORT_REPLY(status);
 }
@@ -261,19 +269,44 @@ MSG_HEADER *ProcessServer::KillAllHandler(
 //---------------------------------------------------------------------------
 
 
-NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId)
+NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId, BOOLEAN TerminateJob)
 {
     NTSTATUS status;
     ULONG retries, i;
-    ULONG pids[512];
+    const ULONG pids_len = 512;
+    ULONG pids[pids_len];
+    ULONG count;
 
-    for (retries = 0; retries < 10; ++retries) {
+    if (TerminateJob) {
 
-        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids, NULL);
+        //
+        // try killing the entire job in one go first
+        //
+
+        GUI_KILL_JOB_REQ data;
+        data.msgid = GUI_KILL_JOB;
+        if (BoxName) wcscpy(data.boxname, BoxName);
+        else data.boxname[0] = L'\0';
+
+        GuiServer::GetInstance()->SendMessageToSlave(SessionId, &data, sizeof(data));
+
+        //
+        // as fallback and for the case where jobs are not used run the manual termination
+        // 
+    }
+
+    
+    for (retries = 0; retries < 10; ) {
+
+        count = pids_len;
+        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids, &count);
         if (status != STATUS_SUCCESS)
             break;
-        if (! pids[0])
+        if (count == 0)
             break;
+
+        if (count < pids_len)
+            retries++;
 
         if (retries) {
             if (retries >= 10 - 1) {
@@ -283,7 +316,7 @@ NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId)
             Sleep(100);
         }
 
-        for (i = 1; i <= pids[0]; ++i)
+        for (i = 0; i <= count; ++i)
             KillProcess(pids[i]);
     }
 
@@ -999,9 +1032,9 @@ BOOL ProcessServer::RunSandboxedStripPrivilege(HANDLE NewTokenHandle, LPCWSTR lp
 
 BOOL ProcessServer::RunSandboxedStripPrivileges(HANDLE NewTokenHandle)
 {
-    BOOLEAN ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_TCB_NAME);
-    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);
-    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_ASSIGNPRIMARYTOKEN_NAME);
+    BOOLEAN ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_TCB_NAME);           // security critical
+    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);  // usualyl not held, but in case
+    //if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_ASSIGNPRIMARYTOKEN_NAME);
     return ok;
 }
 

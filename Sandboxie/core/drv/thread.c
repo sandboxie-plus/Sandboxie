@@ -46,25 +46,6 @@
 
 
 //---------------------------------------------------------------------------
-// Structures and Types
-//---------------------------------------------------------------------------
-
-
-struct _THREAD {
-
-    LIST_ELEM list_elem;
-
-    HANDLE tid;
-
-    void *token_object;
-    BOOLEAN token_CopyOnOpen;
-    BOOLEAN token_EffectiveOnly;
-    SECURITY_IMPERSONATION_LEVEL token_ImpersonationLevel;
-
-};
-
-
-//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -73,8 +54,6 @@ static void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create);
 
 static PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc1, void *ProcessObject2, KIRQL *out_irql);
-
-static THREAD *Thread_GetCurrent(PROCESS *proc);
 
 static THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create);
 
@@ -274,12 +253,19 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
 
         ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+        if (Create)
+            thrd = map_get(&proc->thread_map, ThreadId);
+        else // remove
+            thrd = map_remove(&proc->thread_map, ThreadId);
+#else
         thrd = List_Head(&proc->threads);
         while (thrd) {
             if (thrd->tid == ThreadId)
                 break;
             thrd = List_Next(thrd);
         }
+#endif
 
         if (thrd) {
 
@@ -293,7 +279,9 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
 
+#ifndef USE_PROCESS_MAP
                 List_Remove(&proc->threads, thrd);
+#endif
                 Mem_Free(thrd, sizeof(THREAD));
             }
         }
@@ -321,7 +309,12 @@ _FX BOOLEAN Thread_InitProcess(PROCESS *proc)
 
     if (! proc->threads_lock) {
 
+#ifdef USE_PROCESS_MAP
+        map_init(&proc->thread_map, proc->pool);
+	    map_resize(&proc->thread_map, 32); // prepare some buckets for better performance
+#else
         List_Init(&proc->threads);
+#endif
 
         ok = Mem_GetLockResource(&proc->threads_lock, FALSE);
         if (! ok)
@@ -357,15 +350,23 @@ _FX void Thread_ReleaseProcess(PROCESS *proc)
             KeRaiseIrql(APC_LEVEL, &irql);
             ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+	        map_iter_t iter = map_iter();
+	        while (map_next(&proc->thread_map, &iter)) {
+                thrd = iter.value;
+#else
             thrd = List_Head(&proc->threads);
             while (thrd) {
+#endif
 
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
                 if (TokenObject)
                     break;
 
+#ifndef USE_PROCESS_MAP
                 thrd = List_Next(thrd);
+#endif
             }
 
             ExReleaseResourceLite(proc->threads_lock);
@@ -475,29 +476,34 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
 
 //---------------------------------------------------------------------------
-// Thread_GetCurrent
+// Thread_GetByThreadId
 //---------------------------------------------------------------------------
 
 
-_FX THREAD *Thread_GetCurrent(PROCESS *proc)
+_FX THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid)
 {
     THREAD *thrd;
-    HANDLE tid;
     KIRQL irql;
 
     if (! proc->threads_lock)
         return NULL;
+    
+    if (! tid)
+        tid = PsGetCurrentThreadId();
 
-    tid = PsGetCurrentThreadId();
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+    thrd = map_get(&proc->thread_map, tid);
+#else
     thrd = List_Head(&proc->threads);
     while (thrd) {
         if (thrd->tid == tid)
             break;
         thrd = List_Next(thrd);
     }
+#endif
 
     ExReleaseResourceLite(proc->threads_lock);
     KeLowerIrql(irql);
@@ -517,19 +523,27 @@ _FX THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create)
     if (! tid)
         tid = PsGetCurrentThreadId();
 
+#ifdef USE_PROCESS_MAP
+    thrd = map_get(&proc->thread_map, tid);
+#else
     thrd = List_Head(&proc->threads);
     while (thrd) {
         if (thrd->tid == tid)
             break;
         thrd = List_Next(thrd);
     }
+#endif
 
     if ((! thrd) && create) {
         thrd = Mem_Alloc(proc->pool, sizeof(THREAD));
         if (thrd) {
             memzero(thrd, sizeof(THREAD));
             thrd->tid = tid;
+#ifdef USE_PROCESS_MAP
+            map_insert(&proc->thread_map, tid, thrd, 0);
+#else
             List_Insert_After(&proc->threads, NULL, thrd);
+#endif
         }
     }
 
@@ -773,7 +787,7 @@ _FX void Thread_SetThreadToken(PROCESS *proc)
 
     DerefToken = FALSE;
 
-    thrd = Thread_GetCurrent(proc);
+    thrd = Thread_GetByThreadId(proc, 0);
     if (thrd) {
 
         //
@@ -885,7 +899,7 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
-    thrd = Thread_GetCurrent(proc);
+    thrd = Thread_GetByThreadId(proc, 0);
     if (thrd) {
 
         //

@@ -54,16 +54,10 @@
     <ClCompile Include="UserSettings.cpp" />
     <ClCompile Include="ViewTemplateDialog.cpp" />
     <ClCompile Include="WindowTitleMap.cpp" />
-    <ClCompile Include="..\common\BoxOrder.c">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\FontStore.cpp">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\common\Layout.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\common\MyGdi.c">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\common\MyMsg.cpp">
@@ -137,16 +131,10 @@
     <ClInclude Include="UserSettings.h" />
     <ClInclude Include="ViewTemplateDialog.h" />
     <ClInclude Include="WindowTitleMap.h" />
-    <ClInclude Include="..\common\BoxOrder.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="..\common\FontStore.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\common\Layout.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\MyGdi.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\common\MyMsg.h">
@@ -166,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="UpdateDialog.h" />
     <ClInclude Include="Updater.h" />
+    <ClInclude Include="..\common\RunStartExe.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SbieControl.rc" />

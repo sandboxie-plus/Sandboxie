@@ -172,9 +172,27 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\str_util.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\list.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\common\my_ntdll.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">Disabled</Optimization>
+    </ClCompile>
+    <ClCompile Include="..\..\common\netfw.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\common\pattern.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
@@ -188,6 +206,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\common\rbtree.c" />
     <ClCompile Include="..\..\common\stream.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
@@ -375,8 +394,14 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\apps\com\common.h" />
+    <ClInclude Include="..\..\common\str_util.h" />
+    <ClInclude Include="..\..\common\my_wsa.h" />
+    <ClInclude Include="..\..\common\list.h" />
+    <ClInclude Include="..\..\common\netfw.h" />
     <ClInclude Include="..\..\common\pattern.h" />
     <ClInclude Include="..\..\common\pool.h" />
+    <ClInclude Include="..\..\common\rbtree.h" />
     <ClInclude Include="..\..\common\stream.h" />
     <ClInclude Include="advapi.h" />
     <ClInclude Include="debug.h" />

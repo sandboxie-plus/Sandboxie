@@ -21,6 +21,7 @@
 
 
 #include "dll.h"
+#include "obj.h"
 #include "core/svc/FileWire.h"
 #include "core/drv/api_defs.h"
 #include <stdio.h>
@@ -300,6 +301,9 @@ static const ULONG Key_ClickToRunLen_v16 = 63;
 
 static const WCHAR *Key_Wow6432Node = L"\\Wow6432Node\\";
 
+
+static BOOLEAN Key_UseObjectNames = FALSE;
+
 //---------------------------------------------------------------------------
 // Debug Prints
 //---------------------------------------------------------------------------
@@ -349,6 +353,8 @@ _FX BOOLEAN Key_Init(void)
     InitializeCriticalSection(&Key_Handles_CritSec);
 
     SbieDll_MatchPath(L'k', (const WCHAR *)-1);
+
+    Key_UseObjectNames = SbieApi_QueryConfBool(NULL, L"UseObjectNameForKeys", FALSE);
 
     List_Init(&Key_Handles);
     List_Init(&Key_MergeCacheList);
@@ -447,25 +453,55 @@ _FX NTSTATUS Key_GetName(
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-        status = __sys_NtQueryKey(
-            RootDirectory, KeyNameInformation, name, length, &length);
+        if (Key_UseObjectNames)
+        {
+            //
+            // Note: some keys like L"\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Perflib\\007"
+            // do not return valid results when querying using NtQueryKey and returns a STATUS_INVALID_HANDLE
+            // using Obj_GetObjectName seams to break sbie on 1803, strangely on w7 its fine
+            // hence this alternative access mode is made optional
+            //
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+            status = Obj_GetObjectName(RootDirectory, name, &length);
 
-            name = Dll_GetTlsNameBuffer(
-                        TlsData, TRUE_NAME_BUFFER, length + objname_len);
+            if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
+                name = Dll_GetTlsNameBuffer(
+                    TlsData, TRUE_NAME_BUFFER, length + objname_len);
+
+                status = Obj_GetObjectName(RootDirectory, name, &length);
+            }
+
+            if (!NT_SUCCESS(status))
+                return status;
+
+            *OutTruePath = ((OBJECT_NAME_INFORMATION*)name)->Name.Buffer;
+
+            name = (*OutTruePath)
+                + ((OBJECT_NAME_INFORMATION*)name)->Name.Length / sizeof(WCHAR);
+        }
+        else
+        {
             status = __sys_NtQueryKey(
                 RootDirectory, KeyNameInformation, name, length, &length);
+
+            if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
+
+                name = Dll_GetTlsNameBuffer(
+                            TlsData, TRUE_NAME_BUFFER, length + objname_len);
+
+                status = __sys_NtQueryKey(
+                    RootDirectory, KeyNameInformation, name, length, &length);
+            }
+
+            if (! NT_SUCCESS(status))
+                return status;
+
+            *OutTruePath = ((KEY_NAME_INFORMATION *)name)->Name;
+
+            name = (*OutTruePath)
+                 + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
         }
-
-        if (! NT_SUCCESS(status))
-            return status;
-
-        *OutTruePath = ((KEY_NAME_INFORMATION *)name)->Name;
-
-        name = (*OutTruePath)
-             + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
 
         if (objname_len) {
 
@@ -821,13 +857,16 @@ _FX NTSTATUS Key_FixNameWow64(
         Dll_Free(NewPtr);
     File_NtCloseImpl(handle);
 
-    //
-    // the result might contain \Wow6432Node\Wow6432Node,
-    // so strip one of them away
-    //
+    if (NT_SUCCESS(status)) {
 
-    if (Key_FixNameWow64_3(OutTruePath))
-        Key_FixNameWow64_3(OutCopyPath);
+        //
+        // the result might contain \Wow6432Node\Wow6432Node,
+        // so strip one of them away
+        //
+
+        if (Key_FixNameWow64_3(OutTruePath))
+            Key_FixNameWow64_3(OutCopyPath);
+    }
 
     return status;
 }

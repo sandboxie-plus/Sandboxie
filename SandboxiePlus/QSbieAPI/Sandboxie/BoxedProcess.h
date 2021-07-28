@@ -49,13 +49,14 @@ public:
 
 	virtual bool			IsWoW64() const { return m_bIsWoW64; }
 
-	virtual QString			GetBoxName() const;
+	virtual QString			GetBoxName() const { return m_BoxName; }
 	virtual class CSandBox* GetBoxPtr() const { return m_pBox; }
 
 protected:
 	friend class CSbieAPI;
 
 	quint32			m_ProcessId;
+	QString			m_BoxName;
 	quint32			m_ParendPID;
 	QString			m_ImageName;
 	QString			m_ImagePath;

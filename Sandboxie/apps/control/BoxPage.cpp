@@ -33,6 +33,7 @@
 #include "common/win32_ntddk.h"
 #include "apps/common/MyGdi.h"
 #include "apps/common/CommonUtils.h"
+#include "apps/common/RunBrowser.h"
 #include <objsel.h>
 
 
@@ -78,7 +79,10 @@ enum {
     BoxPageClosedIpc,
     BoxPageWinClass,
     BoxPageComClass,
-    BoxPageUserAccounts
+    BoxPageUserAccounts,
+    BoxPageRestrictions,
+    BoxPageResourceAccess,
+    BoxPageNetworkFirewall,
 };
 
 
@@ -139,6 +143,9 @@ BEGIN_MESSAGE_MAP(CBoxPage, CPropertyPage)
     ON_COMMAND(ID_FILE_ADD,                     FileAccess_OnAddEntry)
     ON_COMMAND(ID_FILE_EDIT,                    FileAccess_OnEditEntry)
     ON_COMMAND(ID_FILE_REMOVE,                  FileAccess_OnRemoveEntry)
+
+    ON_NOTIFY(NM_CLICK, ID_PAGE_LABEL_2,        OnLinkLabel) 
+    ON_NOTIFY(NM_CLICK, ID_PAGE_LABEL_4,        OnLinkLabel) 
 
     ON_CONTROL(CBN_SELENDOK, ID_GROUP_COMBO,    ProgramGroups_OnSelectGrp)
     ON_COMMAND(ID_GROUP_ADD,                    ProgramGroups_OnCmdAddGrp)
@@ -228,6 +235,10 @@ CBoxPage::CBoxPage(ULONG type, const CString &BoxName,
         m_type == BoxPageWinClass ||
         m_type == BoxPageComClass)
         template_base = L"RESOURCE_ACCESS_PAGE";
+    if (m_type  == BoxPageRestrictions || 
+        m_type  == BoxPageResourceAccess || 
+        m_type == BoxPageNetworkFirewall)
+        template_base = L"NOT_IMPLEMENTED_PAGE";
     if (m_type == BoxPageUserAccounts) {
         template_base = L"USERACCOUNTS_PAGE";
         UserAccounts_restricted = false;
@@ -726,6 +737,11 @@ BOOL CBoxPage::OnInitDialog()
         m_type == BoxPageWinClass ||
         m_type == BoxPageComClass)
         FileAccess_OnInitDialog(box);
+
+    if (m_type == BoxPageRestrictions ||
+        m_type == BoxPageResourceAccess ||
+        m_type == BoxPageNetworkFirewall)
+        NotImplemented_OnInitDialog(box);
 
     if (m_type == BoxPageUserAccounts)
         UserAccounts_OnInitDialog(box);
@@ -2610,6 +2626,10 @@ void CBoxPage::DropRights_OnInitDialog(CBox &box)
     GetDlgItem(ID_PAGE_LABEL_2)->SetWindowText(CMyMsg(MSG_3944));
     GetDlgItem(ID_DROPRIGHTS)->SetWindowText(CMyMsg(MSG_3945));
 
+    GetDlgItem(ID_PAGE_LABEL_3)->SetWindowText(CMyMsg(MSG_6005));
+
+    GetDlgItem(ID_PAGE_LABEL_4)->SetWindowText(CMyMsg(MSG_6002));
+
     CenterControl(ID_DROPRIGHTS);
 
     BOOL enabled = box.GetSetDropAdminRights(FALSE);
@@ -2670,6 +2690,62 @@ void CBoxPage::PrintSpooler_OnOK(CBox &box)
     box.GetSetAllowSpoolerPrintToFile(TRUE, enabled);
 }
 
+
+
+//---------------------------------------------------------------------------
+// NotImplemented_OnInitDialog
+//---------------------------------------------------------------------------
+
+
+void CBoxPage::NotImplemented_OnInitDialog(CBox &box)
+{
+    //
+    // set up dialog text
+    //
+
+    ULONG msgTitle, msgLabel1, msgLabel2 = 0;
+
+    msgLabel2 = MSG_6002;
+
+    if (m_type == BoxPageRestrictions) {
+        msgTitle = MSG_3911;
+        msgLabel1 = MSG_6006;
+    }
+    
+    if (m_type == BoxPageResourceAccess) {
+        msgTitle = MSG_3911;
+        msgLabel1 = MSG_6007;
+    }
+
+    if (m_type == BoxPageNetworkFirewall) {
+        msgTitle = MSG_4105;
+        msgLabel1 = MSG_6003;
+    }
+
+    m_titleForPage = CMyMsg(msgTitle);
+
+    GetDlgItem(ID_PAGE_LABEL_1)->SetWindowText(CMyMsg(msgLabel1));
+    if (msgLabel2) {
+        GetDlgItem(ID_PAGE_LABEL_2)->SetWindowText(CMyMsg(msgLabel2));
+        //GetDlgItem(ID_PAGE_LABEL_2)->SetFont(GetFont());
+    }
+}
+
+
+
+//---------------------------------------------------------------------------
+// OnLinkLabel
+//---------------------------------------------------------------------------
+
+
+afx_msg void CBoxPage::OnLinkLabel(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	PNMLINK pNMLink = (PNMLINK) pNMHDR;
+
+	CRunBrowser x(this, CString(L"https://sandboxie-plus.com/go.php?to=sbie-plus&tip=") + pNMLink->item.szID);
+
+	*pResult = 0;
+}
 
 
 //---------------------------------------------------------------------------
@@ -3572,6 +3648,9 @@ void CBoxPage::DoPropertySheet(
     CBoxPage pageFileMigrate(
         BoxPageFileMigrate,     BoxName,    0,          MSG_3901);
 
+    CBoxPage pageRestrictions(
+        BoxPageRestrictions,    BoxName,    0,          MSG_3911);
+
     CBoxPage pageInternetPgm(
         BoxPageInternetPgm,     BoxName,    MSG_3911,   MSG_3912);
     CBoxPage pageStartRunPgm(
@@ -3579,7 +3658,10 @@ void CBoxPage::DoPropertySheet(
     CBoxPage pageDropRights(
         BoxPageDropRights,      BoxName,    MSG_3911,   MSG_3942);
     CBoxPage pageBlockNetworkFiles(
-        BoxPageNetworkFiles, BoxName, MSG_3911, MSG_3955);
+        BoxPageNetworkFiles,    BoxName,    MSG_3911,   MSG_3955);
+
+    //CBoxPage pageResourceAccess(
+    //    BoxPageResourceAccess,  BoxName,    0,          MSG_3484);
 
     CBoxPage pageOpenFile(
         BoxPageOpenFile,        BoxName,    0,          MSG_4001);
@@ -3607,6 +3689,8 @@ void CBoxPage::DoPropertySheet(
         BoxPageWinClass,        BoxName,    0,          MSG_4091);
     CBoxPage pageComClass(
         BoxPageComClass,        BoxName,    0,          MSG_4101);
+    CBoxPage pageNetFw(
+        BoxPageNetworkFirewall, BoxName,    0,          MSG_4104);
 
     CBoxPage pageUserAccounts(
         BoxPageUserAccounts,    BoxName,    0,          MSG_5101);
@@ -3630,12 +3714,14 @@ void CBoxPage::DoPropertySheet(
 
         sheet.AddPage(&pageFileMigrate);
 
+        sheet.AddPage(&pageRestrictions);
         sheet.AddPage(&pageInternetPgm);
         sheet.AddPage(&pageStartRunPgm);
         sheet.AddPage(&pageDropRights);
         sheet.AddPage(&pageBlockNetworkFiles);
     }
 
+    //sheet.AddPage(&pageResourceAccess);
     sheet.AddPage(&pageOpenFile);
     sheet.AddPage(&pageOpenPipe);
     sheet.AddPage(&pageReadFile);
@@ -3657,6 +3743,8 @@ void CBoxPage::DoPropertySheet(
 
         sheet.AddPage(&pageUserAccounts);
     }
+
+    sheet.AddPage(&pageNetFw);
 
     INT_PTR retval = sheet.DoModal();
 

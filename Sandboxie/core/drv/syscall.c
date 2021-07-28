@@ -29,6 +29,7 @@
 #include "api.h"
 #include "util.h"
 #include "session.h"
+#include "conf.h"
 
 
 
@@ -373,19 +374,6 @@ next_zwxxx:
         Log_Msg1(MSG_1113, L"500");
         return FALSE;
     }
-
-    //
-    // workaround for Online Armor driver
-    //
-
-#ifndef _WIN64
-
-    if (1) {
-        extern void Syscall_HandleOADriver(void);
-        Syscall_HandleOADriver();
-    }
-
-#endif ! _WIN64
 
     return TRUE;
 }
@@ -733,7 +721,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     if (proc->terminated) {
 
-        Process_CancelProcess(proc);
+        Process_TerminateProcess(proc);
         return STATUS_PROCESS_IS_TERMINATING;
     }
 
@@ -904,7 +892,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     if (proc->terminated) {
 
-        Process_CancelProcess(proc);
+        Process_TerminateProcess(proc);
         return STATUS_PROCESS_IS_TERMINATING;
     }
 
@@ -951,7 +939,7 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     // caller must be our service process
     //
 
-    if (proc)// || (PsGetCurrentProcessId() != Api_ServiceProcessId))
+    if (proc || (PsGetCurrentProcessId() != Api_ServiceProcessId))
         return STATUS_ACCESS_DENIED;
 
     //

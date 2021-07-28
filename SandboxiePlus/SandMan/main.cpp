@@ -31,7 +31,30 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	
-	if (app.sendMessage("ShowWnd"))
+	QString PendingMessage;
+
+	QStringList Args = QCoreApplication::arguments();
+	int CmdPos = Args.indexOf("-op");
+	if (CmdPos != -1) {
+		QString Op;
+		if (Args.count() > CmdPos)
+			Op = Args.at(CmdPos + 1);
+		PendingMessage = "Op:" + Op;
+	}
+
+	CmdPos = Args.indexOf("/box:__ask__");
+	if (CmdPos != -1) {
+		QString CommandLine;
+		for (int i = CmdPos + 1; i < Args.count(); i++)
+			CommandLine += "\"" + Args[i] + "\" ";
+		PendingMessage = "Run:" + CommandLine.trimmed();
+	}
+
+	if (!PendingMessage.isEmpty()) {
+		if(app.sendMessage(PendingMessage))
+			return 0;
+	}
+	else if (app.sendMessage("ShowWnd"))
 		return 0;
 
 	theConf = new CSettings("Sandboxie-Plus");
@@ -39,7 +62,10 @@ int main(int argc, char *argv[])
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 
 	CSandMan* pWnd = new CSandMan();
+
 	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));
+	if (!PendingMessage.isEmpty())
+		QMetaObject::invokeMethod(pWnd, "OnMessage", Qt::QueuedConnection, Q_ARG(QString, PendingMessage));
 
 	int ret =  app.exec();
 
@@ -50,3 +76,11 @@ int main(int argc, char *argv[])
 
 	return ret;
 }
+
+/*HANDLE hServerPipe = CreateFileW(L"\\\\.\\pipe\\qtsingleapp-sandma-ca4a-1", GENERIC_ALL, 0, NULL, OPEN_EXISTING, 0, NULL);
+if (hServerPipe != INVALID_HANDLE_VALUE) {
+	DWORD lenWritten;
+    WriteFile(hServerPipe, "test", 4, &lenWritten, NULL)
+
+    CloseHandle(hServerPipe);
+}*/

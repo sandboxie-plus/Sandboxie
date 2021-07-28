@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-06-08
+#  Latest update by RockyTDR on 2021-07-24
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -851,7 +851,7 @@ De inhoud van de sandbox zal niet verwijderd worden.
 .
 
 3221;txt;01
-Sluit de programma's af die in de sandbox uitgevoerd worden alvorens de inhoud te wissen
+Beëindig de programma's die in de sandbox uitgevoerd worden alvorens de inhoud te wissen
 .
 
 3222;txt;01
@@ -1072,7 +1072,7 @@ Gebr&uiker toevoegen
 .
 
 3412;txt;01
-&Alle programma's afsluiten
+&Alle programma's beëindigen
 .
 
 3413;txt;01
@@ -1236,11 +1236,11 @@ Gesandboxt uitvoe&ren
 .
 
 3462;txt;01
-Web&browser starten
+Web&browser uitvoeren
 .
 
 3463;txt;01
-E-mai&lprogramma starten
+E-mai&lprogramma uitvoeren
 .
 
 3464;txt;01
@@ -1252,11 +1252,15 @@ Uitvoeren vanaf start&menu
 .
 
 3466;txt;01
-&Windows verkenner starten
+&Windows verkenner uitvoeren
+.
+
+3467;txt;01
+Upgraden naar Sandboxie-Plus
 .
 
 3471;txt;01
-Programma's afslui&ten
+Programma's beëindigen
 .
 
 3472;txt;01
@@ -1284,7 +1288,7 @@ Sandbox &verwijderen
 .
 
 3481;txt;01
-Programma afslui&ten
+Programma beëindigen
 .
 
 3482;txt;01
@@ -1293,6 +1297,10 @@ Programma-in&stellingen
 
 3483;txt;01
 B&rontoegang
+.
+
+3484;txt;01
+Brontoegang
 .
 
 3485;txt;01
@@ -1430,18 +1438,18 @@ Bent u zeker dat u sandbox %2 wilt verwijderen?
 .
 
 3530;txt;01
-Er zijn geen processen om af te sluiten.
+Er zijn geen processen om te beëindigen.
 .
 
 3531;txt;01
-WAARSCHUWING: de af te sluiten processen
+WAARSCHUWING: de te beëindigen processen
 zullen geen kans krijgen om status of data op te slaan.
 
 Bent u zeker dat u wilt doorgaan met het afsluiten van processen?
 .
 
 3532;txt;01
-Processen in de toekomst afsluiten zonder te vragen.
+Processen in de toekomst beëindigen zonder te vragen.
 .
 
 3533;txt;01
@@ -1612,7 +1620,7 @@ Sandboxie %2 werd naar de volgende map gedownload:
 %3
 
 Klik op "ok" om de installatie te starten. Programma's die
-gesandboxt uitgevoerd worden, zullen afgesloten worden.
+gesandboxt uitgevoerd worden, zullen beëindigd worden.
 .
 
 3634;txt;01
@@ -1628,7 +1636,7 @@ nieuwe versie downloaden
 #----------------------------------------------------------------------------
 
 3641;txt;01
-Webbrowser starten
+Webbrowser openen
 .
 
 3642;txt;01
@@ -1878,7 +1886,7 @@ Onderstaande bestanden komen in aanmerking voor snel herstel vanuit de sandbox. 
 .
 
 3713;txt;01
-Klik op "inhoud wissen" om eventuele processen die in de sandbox uitgevoerd worden, af te sluiten, en de inhoud te wissen.
+Klik op "inhoud wissen" om eventuele processen die in de sandbox uitgevoerd worden te beëindigen en de inhoud te wissen.
 .
 
 3714;txt;01
@@ -2419,7 +2427,7 @@ Achterblijvende programma's
 .
 
 3883;txt;01
-De volgende programma's zullen automatisch afgesloten worden als ze nog steeds in deze sandbox uitgevoerd worden nadat alle andere programma's gestopt zijn.
+De volgende programma's zullen automatisch beëindigd worden als ze nog steeds in deze sandbox uitgevoerd worden nadat alle andere programma's gestopt zijn.
 .
 
 # 3891;txt;01
@@ -2882,6 +2890,14 @@ COM-toegang (OpenCisid)
 Gesandboxte programma's kunnen niet communiceren met COM-objecten die horen bij programma's die uitgevoerd worden buiten de sandbox, tenzij de COM-klasse-ID overeenkomt met een van de volgende klasse-ID's.
 .
 
+4104;txt;01
+Brontoegang::Netwerktoegang
+.
+
+4105;txt;01
+Netwerktoegang (firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -3288,6 +3304,10 @@ Directe toegang toestaan tot voorkeuren van %2
 Directe toegang toestaan tot sessiebeheer van %2
 .
 
+4341;txt;01
+Directe toegang tot %2-notities toestaan
+.
+
 4356;txt;02
 Directe toegang toestaan tot bladwijzers van %2
 .
@@ -3419,6 +3439,55 @@ Om&laag verplaatsen
 5154;txt;01
 Verplaa&tsen naar
 .
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+De klassieke Sandboxie UI (SbieCtrl.exe) heeft beperkte
+mogelijkheden voor bronmonitoring en gebeurtenistracering.
+
+Voor optimale probleemoplossing is het sterk aanbevolen
+om de nieuwe UI, Sandboxie-Plus (SandMan.exe), te installeren,
+die uitstekende tracering- en monitoring-mogelijkheden heeft.
+
+Wilt u Sandboxie-Plus nu downloaden?
+.
+
+6002;txt;01
+Bezoek <a ID="whats_new">sandboxie-plus.com</a> voor meer informatie over de nieuwe functies van Sanboxie-Plus,
+of klik <a ID="upgrade">hier</a> om de laatste versie van het Sandboxie-Plus-installatiebestand te downloaden.
+.
+
+6003;txt;01
+De oude UI van Sandboxie classic implementeert geen ondersteuning voor de netwerk-firewall-functies.
+
+U kunt de de functie configureren, ondersteund door de kernonderdelen, via het ini-bestand. Regels worden zo gestructureerd:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Als u een UI verkiest om deze opties te bedienen, upgrade dan naar Sandboxie-Plus, dat volledige UI-ondersteuning biedt voor alle nieuwe functies.
+.
+
+6005;txt;01
+Opmerking: zonder beheerdersrechten zullen installatieprogramma's niet starten in de sandbox. Sandboxie-Plus biedt een optie om veel installatieprogramma's te laten slagen zonder die privileges. U kunt deze optie ook handmatig inschakelen in de klassieke build, door "FakeAdminRights=y" toe te voegen aan de ini-sectie voor deze box.
+.
+
+6006;txt;01
+De oude UI van Sandboxie classic implementeert slechts ondersteuning voor een aantal beperkingsopties.
+
+Aanvullende opties zoals "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" en veel meer kunnen worden ingesteld in de ini-sectie voor deze box.
+De moderne UI (SandMan.exe) biedt ook meer aanpassingsopties voor starten/uitvoeren en beperkingen voor internettoegang.
+
+Als u een UI zou verkiezen om deze opties te bedienen, upgrade dan naar Sandboxie-Plus, dat volledige UI-ondersteuning biedt voor alle nieuwe functies.
+.
+
+6007;txt;01
+...
+
+Als u een UI zou verkiezen om deze opties te bedienen, upgrade dan naar Sandboxie-Plus, dat volledige UI-ondersteuning biedt voor alle nieuwe functies.
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

@@ -29,6 +29,8 @@
 #include "file.h"
 #include "key.h"
 #include "ipc.h"
+#include "thread.h"
+#include "session.h"
 #include "common/pattern.h"
 #include "common/my_version.h"
 
@@ -173,8 +175,11 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
 
         } else {
 
-            Process_NotifyProcess_Create(
-                                user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, box);
+            if (!Process_NotifyProcess_Create(
+                                user_pid_parm, Api_ServiceProcessId, Api_ServiceProcessId, box)) {
+
+                status = STATUS_INTERNAL_ERROR;
+            }
 
             box = NULL;         // freed by Process_NotifyProcess_Create
         }
@@ -391,9 +396,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
             *data = proc->ntdll32_base;
 
-        } else if (args->info_type.val == 'ptok') {
+        } else if (args->info_type.val == 'ptok') { // primary token
 
-			if(is_caller_sandboxed)
+			if(is_caller_sandboxed || !Session_CheckAdminAccess(TRUE))
 				status = STATUS_ACCESS_DENIED;
 			else
 			{
@@ -408,6 +413,55 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 					ObDereferenceObject(PrimaryTokenObject);
 
 					*data = (ULONG64)MyTokenHandle;
+				}
+				else
+					status = STATUS_NOT_FOUND;
+			}
+
+		} else if (args->info_type.val == 'itok' || args->info_type.val == 'ttok') { // impersonation token / test thread token
+
+			if(is_caller_sandboxed || (args->info_type.val == 'itok' && !Session_CheckAdminAccess(TRUE)))
+				status = STATUS_ACCESS_DENIED;
+			else
+			{
+                HANDLE tid = (HANDLE)(args->ext_data.val);
+
+                THREAD *thrd = Thread_GetByThreadId(proc, tid);
+				if (thrd)
+				{
+                    if (args->info_type.val == 'ttok')
+                    {
+                        *data = thrd->token_object ? TRUE : FALSE;
+                    }
+                    else
+                    {
+                        KIRQL irql2;
+                        void* ImpersonationTokenObject;
+
+                        KeRaiseIrql(APC_LEVEL, &irql2);
+                        ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
+
+                        ImpersonationTokenObject = thrd->token_object;
+
+                        if (ImpersonationTokenObject) {
+                            ObReferenceObject(ImpersonationTokenObject);
+                        }
+
+                        ExReleaseResourceLite(proc->threads_lock);
+                        KeLowerIrql(irql2);
+
+                        if (ImpersonationTokenObject)
+                        {
+                            HANDLE MyTokenHandle;
+                            status = ObOpenObjectByPointer(ImpersonationTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
+
+                            ObDereferenceObject(ImpersonationTokenObject);
+
+                            *data = (ULONG64)MyTokenHandle;
+                        }
+                        else
+                            status = STATUS_NO_IMPERSONATION_TOKEN;
+                    }
 				}
 				else
 					status = STATUS_NOT_FOUND;
@@ -830,9 +884,26 @@ _FX NTSTATUS Process_Enumerate(
     __try {
 
         num = 0;
+
+#ifdef USE_PROCESS_MAP
+
+        //
+        // quick shortcut for global count retrival
+        //
+
+        if (pids == NULL && (! boxname[0]) && all_sessions) { // no pids, all boxes, all sessions
+
+            num = Process_Map.nnodes;
+            goto done;
+        }
+
+	    map_iter_t iter = map_iter();
+	    while (map_next(&Process_Map, &iter)) {
+            proc1 = iter.value;
+#else
         proc1 = List_Head(&Process_List);
         while (proc1) {
-
+#endif
             BOX *box1 = proc1->box;
             if (box1 && !proc1->bHostInject) {
                 BOOLEAN same_box =
@@ -849,9 +920,14 @@ _FX NTSTATUS Process_Enumerate(
                 }
             }
 
+#ifndef USE_PROCESS_MAP
             proc1 = (PROCESS *)List_Next(proc1);
+#endif
         }
 
+#ifdef USE_PROCESS_MAP
+        done:
+#endif
         *count = num;
 
         status = STATUS_SUCCESS;

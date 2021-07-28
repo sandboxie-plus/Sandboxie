@@ -102,6 +102,39 @@
     <ClCompile Include="Views\TraceView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\SelectBoxWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsAccess.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsAdvanced.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsForce.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsGeneral.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsGrouping.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsNetwork.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsRecovery.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsStart.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsStop.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsTemplates.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -157,6 +190,9 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\SelectBoxWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -193,6 +229,9 @@
     <QtUic Include="Forms\NewBoxWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="Forms\SelectBoxWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="sandman_de.ts">
@@ -226,6 +265,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_nl.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_en.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

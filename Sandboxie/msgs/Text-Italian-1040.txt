@@ -1245,6 +1245,10 @@ Avvia dal menu &Start
 Avvia &Esplora risorse
 .
 
+3467;txt;01
+Aggiorna a Sandboxie Plus
+.
+
 3471;txt;01
 C&hiudi tutti i programmi
 .
@@ -1283,6 +1287,10 @@ Impo&stazioni del programma
 
 3483;txt;01
 Accesso alle &risorse
+.
+
+3484;txt;01
+Accesso alle risorse
 .
 
 3485;txt;01
@@ -2770,6 +2778,14 @@ Accesso al COM (OpenClsid)
 I seguenti programmi nell'area virtuale non potranno comunicare con gli oggetti COM che appartengono a programmi in esecuzione all'esterno dell'area virtuale, a meno che l'ID della classe COM non corrisponda a uno dei seguenti ID di classi.
 .
 
+4104;txt;01
+Accesso alle risorse::Accesso alla rete
+.
+
+4105;txt;01
+Accesso alla rete (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -3165,6 +3181,10 @@ Consenti l'accesso diretto alle preferenze di %2
 Consenti l'accesso diretto alla gestione della sessione %2
 .
 
+4341;txt;01
+Consenti l'accesso diretto alle note di %2
+.
+
 4356;txt;02
 Consenti l'accesso diretto ai segnalibri di %2
 .
@@ -3296,6 +3316,59 @@ Eli&mina
 5154;txt;01
 &Sposta in...
 .
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+L'interfaccia classica di Sandboxie (SbieCtrl.exe) ha delle limitate
+funzionalità di monitoraggio delle risorse e di tracciamento degli eventi.
+
+Per una risoluzione ottimale dei problemi, si consiglia di
+installare Sandboxie Plus, la nuova interfaccia (SandMan.exe)
+che fornisce eccellenti capacità di monitoraggio e tracciamento.
+
+Si desidera scaricare Sandboxie Plus adesso?
+.
+
+6002;txt;01
+Visita <a ID="whats_new">sandboxie-plus.com</a> per saperne di più sulle funzionalità di Sandboxie Plus
+o clicca <a ID="upgrade">qui</a> per scaricare l'ultima versione di Sandboxie Plus.
+.
+
+6003;txt;01
+L'interfaccia legacy di Sandboxie Classic non implementa il supporto per la funzionalità del firewall di rete.
+
+È comunque possibile configurare la funzione utilizzando il file ini, le regole sono strutturate nel modo seguente:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Se si preferisce utilizzare un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce
+pieno supporto visivo per tutte le nuove funzionalità.
+.
+
+6005;txt;01
+Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la
+maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
+.
+
+6006;txt;01
+L'interfaccia legacy di Sandboxie Classic supporta soltanto alcune opzioni di restrizione.
+
+Le opzioni aggiuntive come "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" e molte altre ancora possono essere impostate nella sezione ini dell'area virtuale.
+L'interfaccia di Sandboxie Plus (SandMan.exe) fornisce ulteriori opzioni di personalizzazione per le restrizioni di accesso.
+
+Se si preferisce utilizzare un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce
+pieno supporto visivo per tutte le nuove funzionalità.
+.
+
+6007;txt;01
+...
+
+Se si preferisce utilizzare un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce
+pieno supporto visivo per tutte le nuove funzionalità.
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

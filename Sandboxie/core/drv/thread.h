@@ -28,6 +28,26 @@
 
 
 //---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+
+struct _THREAD {
+
+#ifndef USE_PROCESS_MAP
+    LIST_ELEM list_elem;
+#endif 
+
+    HANDLE tid;
+
+    void *token_object;
+    BOOLEAN token_CopyOnOpen;
+    BOOLEAN token_EffectiveOnly;
+    SECURITY_IMPERSONATION_LEVEL token_ImpersonationLevel;
+
+};
+
+//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -53,6 +73,7 @@ NTSTATUS Thread_StoreThreadToken(PROCESS *proc);
 NTSTATUS Thread_CheckTokenObject(
     PROCESS *proc, void *Object, ACCESS_MASK GrantedAccess);
 
+THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid);
 
 //---------------------------------------------------------------------------
 

@@ -54,6 +54,18 @@
     <ClCompile Include="serviceserver.cpp" />
     <ClCompile Include="serviceserver2.cpp" />
     <ClCompile Include="terminalserver.cpp" />
+    <ClCompile Include="..\..\common\verify.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\list.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\map.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pattern.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />
@@ -102,6 +114,18 @@
     <ClInclude Include="servicewire.h" />
     <ClInclude Include="terminalserver.h" />
     <ClInclude Include="InteractiveWire.h" />
+    <ClInclude Include="..\..\common\list.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\map.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pattern.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\pool.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

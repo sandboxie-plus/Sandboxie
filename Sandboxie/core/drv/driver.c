@@ -39,7 +39,7 @@
 #include "gui.h"
 #include "util.h"
 #include "token.h"
-
+#include "wfp.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -234,6 +234,13 @@ _FX NTSTATUS DriverEntry(
 
     if (ok)
         ok = Api_Init();
+
+    //
+    // initializing Windows Filtering Platform callouts
+    //
+    
+    if (ok)
+        ok = WFP_Init();
 
     //
     // finalize of driver initialization
@@ -664,6 +671,7 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
     // unload just the hooks, in case this is a partial unload
     //
 
+    Obj_Unload();
     Gui_Unload();
     Key_Unload();
     File_Unload();
@@ -680,6 +688,7 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
         time.QuadPart = -SECONDS(5);
         KeDelayExecutionThread(KernelMode, FALSE, &time);
 
+        WFP_Unload();
         Session_Unload();
         Dll_Unload();
         Conf_Unload();
@@ -718,7 +727,11 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
     ok = FALSE;
+#ifdef USE_PROCESS_MAP
+    if (Process_Map.nnodes == 0) {
+#else
     if (! List_Count(&Process_List)) {
+#endif
         if (Api_Disable())
             ok = TRUE;
     }

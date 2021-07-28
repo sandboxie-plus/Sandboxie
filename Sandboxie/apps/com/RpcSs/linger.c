@@ -471,8 +471,7 @@ int DoLingerLeader(void)
                 HANDLE ProcessHandle = 0;
                 SbieApi_OpenProcess(&ProcessHandle, pids_i);
                 if (ProcessHandle) {
-                    extern BOOL CheckProcessLocalSystem(HANDLE); // common.h
-                    if (CheckProcessLocalSystem(ProcessHandle))
+                    if (SbieDll_CheckProcessLocalSystem(ProcessHandle))
                         is_local_system_sid = TRUE;
                     CloseHandle(ProcessHandle);
                 }

@@ -1200,7 +1200,7 @@ Getting Started &Tutorial
 .
 
 3454;txt;01
-Check For &Updates
+Check for &Updates
 .
 
 3455;txt;01
@@ -1251,6 +1251,10 @@ Run From Start &Menu
 Run &Windows Explorer
 .
 
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
 3471;txt;01
 &Terminate Programs
 .
@@ -1289,6 +1293,10 @@ Program &Settings
 
 3483;txt;01
 &Resource Access
+.
+
+3484;txt;01
+Resource Access
 .
 
 3485;txt;01
@@ -2878,6 +2886,14 @@ COM Access (OpenClsid)
 Sandboxed programs cannot communicate with COM objects that belong to programs running outside the sandbox, unless the COM class ID matches one of the following class IDs.
 .
 
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -3284,6 +3300,10 @@ Allow direct access to %2 preferences
 Allow direct access to %2 session management
 .
 
+4341;txt;01
+Allow direct access to %2 notes
+.
+
 4356;txt;02
 Allow direct access to %2 bookmarks
 .
@@ -3415,6 +3435,55 @@ Move &Down
 5154;txt;01
 Move &To
 .
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+...
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

@@ -216,27 +216,12 @@ _FX BOOLEAN Process_Low_Inject(
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
 
-        if (1) {
-
-            BOX dummy_box;
-            PROCESS dummy_proc;
-            memzero(&dummy_box, sizeof(dummy_box));
-            memzero(&dummy_proc, sizeof(dummy_proc));
-            dummy_box.session_id = session_id;
-            dummy_proc.box = &dummy_box;
-            dummy_proc.pid = process_id;
-            dummy_proc.create_time = create_time;
-            dummy_proc.image_name = (WCHAR *)image_name;
-
-            Process_CancelProcess(&dummy_proc);
-        }
-
-		Log_Status_Ex_Process(MSG_1231, 0x22, status, image_name, session_id, process_id);
+        Log_Status_Ex_Process(MSG_1231, 0x22, status, image_name, session_id, process_id);
 
         return FALSE;
     }
 
-    return sbielow_loaded;
+    return TRUE; // sbielow_loaded;
 }
 
 

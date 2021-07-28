@@ -122,7 +122,7 @@ void CSandBoxPlus::UpdateDetails()
 
 	m_bDropRights = GetBool("DropAdminRights", false);
 
-	if (CheckOpenToken() || GetBool("StripSystemPrivileges", false))
+	if (CheckUnsecureConfig())
 		m_iUnsecureDebugging = 1;
 	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) /*|| GetBool("RunServicesAsSystem", false)*/)
 		m_iUnsecureDebugging = 2;
@@ -174,7 +174,7 @@ QString CSandBoxPlus::GetStatusStr() const
 	return Status.join(", ");
 }
 
-bool CSandBoxPlus::CheckOpenToken() const
+bool CSandBoxPlus::CheckUnsecureConfig() const
 {
 	if (GetBool("OriginalToken", false)) return true;
 	if (GetBool("OpenToken", false)) return true;
@@ -182,6 +182,9 @@ bool CSandBoxPlus::CheckOpenToken() const
 			if (!GetBool("AnonymousLogon", true)) return true;
 			if (GetBool("KeepTokenIntegrity", false)) return true;
 		if(GetBool("UnfilteredToken", false)) return true;
+	if (GetBool("DisableFileFilter", false)) return true;
+	if (GetBool("DisableKeyFilter", false)) return true;
+	if (GetBool("StripSystemPrivileges", false)) return true;
 	return false;
 }
 
@@ -375,6 +378,17 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
+{
+	//if (m_bLogApiFound)
+	//	return eHasLogApi;
+	if (m_iUnsecureDebugging != 0)
+		return eInsecure;
+	if (m_bSecurityRestricted)
+		return eHardened;
+	return eDefault;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // CSbieProcess
 //
@@ -421,7 +435,7 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case SANDBOXIE_RPCSS: return tr("Sbie RpcSs");
 		case SANDBOXIE_DCOMLAUNCH: return tr("Sbie DcomLaunch");
 		case SANDBOXIE_CRYPTO: return tr("Sbie Crypto");
-		case SANDBOXIE_WUAU: return tr("Sbie WuAu Svc");
+		case SANDBOXIE_WUAU: return tr("Sbie WuauServ");
 		case SANDBOXIE_BITS: return tr("Sbie BITS");
 		case SANDBOXIE_SBIESVC: return tr("Sbie Svc");
 		case MSI_INSTALLER: return tr("MSI Installer");

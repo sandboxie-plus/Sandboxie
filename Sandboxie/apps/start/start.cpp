@@ -46,7 +46,6 @@
 
 void List_Process_Ids(void);
 int Terminate_All_Processes(BOOL all_boxes);
-BOOLEAN Register_Process(void);
 
 extern WCHAR *DoRunDialog(HINSTANCE hInstance);
 extern WCHAR *DoBoxDialog(void);
@@ -74,7 +73,6 @@ BOOL auto_select_default_box = FALSE;
 WCHAR *StartMenuSectionName = NULL;
 BOOL run_silent = FALSE;
 BOOL dont_start_sbie_ctrl = FALSE;
-BOOL process_was_registered = FALSE;
 BOOL hide_window = FALSE;
 BOOL wait_for_process = FALSE;
 BOOLEAN layout_rtl = FALSE;
@@ -607,7 +605,7 @@ BOOL Parse_Command_Line(void)
             disable_force_on_this_program = TRUE;
 
         //
-        // Command line switch /elevate
+        // Command line switch /hide_window
         //
 
         } else if (_wcsnicmp(cmd, L"hide_window", 11) == 0) {
@@ -991,22 +989,6 @@ int Program_Start(void)
         }
 
         //
-        // if Online Armor is part of the process, then invoke Start.exe
-        // recursively, that somehow fixes the problem
-        //
-
-        if (process_was_registered && GetModuleHandle(L"oawatch.dll")) {
-
-            if (SbieDll_RunFromHome(START_EXE, cmdline, &si, &pi)) {
-
-                ok = TRUE;
-                err = 0;
-
-                break;
-            }
-        }
-
-        //
         // make sure AppHelp.dll is loaded, so third party software like
         // EMET which relies on injection through ShimEng/AppHelp can work.
         // note:  don't use a full path to load AppHelp.dll or otherwise
@@ -1045,8 +1027,7 @@ int Program_Start(void)
         // Start.exe which will then open the document normally
         //
 
-        if ((! ok) && (err == ERROR_NO_ASSOCIATION) &&
-            process_was_registered && run_elevated_2) {
+        /*if ((! ok) && (err == ERROR_NO_ASSOCIATION) && run_elevated_2) {
 
             WCHAR *start_exe = MyHeapAlloc((MAX_PATH + 8) * sizeof(WCHAR));
 
@@ -1060,7 +1041,7 @@ int Program_Start(void)
 
             shExecInfo.lpFile = cmdline;
             shExecInfo.lpParameters = NULL;
-        }
+        }*/
 
         //
         // handle a possible DDE error by retrying without the DDE option

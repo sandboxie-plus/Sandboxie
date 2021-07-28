@@ -114,46 +114,6 @@ _FX BOOLEAN Process_IsSameBox(
 
 
 //---------------------------------------------------------------------------
-// Process_CheckTooManyBoxes
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN Process_CheckTooManyBoxes(const BOX *box)
-{
-    PROCESS *proc;
-    BOOLEAN ok;
-    KIRQL irql;
-
-    // if the user account of the caller has an active sandbox,
-    // then a new process must be started in that same sandbox.
-    // note that we intentionally don't look at logon sessions here.
-
-    ok = TRUE;
-
-    KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceSharedLite(Process_ListLock, TRUE);
-
-    proc = List_Head(&Process_List);
-    while (proc) {
-        if (! proc->terminated) {
-            if (wcscmp(proc->box->sid, box->sid) == 0) {
-                if (_wcsicmp(proc->box->name, box->name) != 0) {
-                    ok = FALSE;
-                    break;
-                }
-            }
-        }
-        proc = (PROCESS *)List_Next(proc);
-    }
-
-    ExReleaseResourceLite(Process_ListLock);
-    KeLowerIrql(irql);
-
-    return (! ok);
-}
-
-
-//---------------------------------------------------------------------------
 // Process_MatchImage
 //---------------------------------------------------------------------------
 
@@ -316,6 +276,123 @@ _FX BOOLEAN Process_MatchImageGroup(
     Conf_AdjustUseCount(FALSE);
 
     return match;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_MatchImageAndGetValue
+//---------------------------------------------------------------------------
+
+
+_FX const WCHAR* Process_MatchImageAndGetValue(BOX *box, const WCHAR* value, const WCHAR* ImageName, ULONG* pLevel)
+{
+    WCHAR* tmp;
+    ULONG len;
+
+    //
+    // if the setting indicates an image name followed by a comma,
+    // then match the image name against the executing process.
+    //
+
+    tmp = wcschr(value, L',');
+    if (tmp) {
+
+        BOOLEAN inv, match;
+
+        //
+        // exclamation marks negates the matching
+        //
+
+        if (*value == L'!') {
+            inv = TRUE;
+            ++value;
+        } else
+            inv = FALSE;
+
+        len = (ULONG)(tmp - value);
+        if (len) {
+            match = Process_MatchImage(box, value, len, ImageName, 1);
+            if (inv)
+                match = !match;
+            if (!match)
+                return NULL;
+            else if (pLevel) {
+                if (len == 1 && *value == L'*')
+                    *pLevel = 2; // 2 - match all 
+                else
+                    *pLevel = inv ? 1 : 0; // 1 - match by negation, 0 - exact match
+            }
+        }
+
+        value = tmp + 1;
+    }
+    else {
+
+        if (pLevel) *pLevel = 2; // 2 - global default
+    }
+
+    if (! *value)
+        return NULL;
+
+    return value;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_GetConf
+//---------------------------------------------------------------------------
+
+
+_FX const WCHAR* Process_GetConf(PROCESS *proc, const WCHAR* setting)
+{
+    ULONG index = 0;
+    const WCHAR *value;
+    const WCHAR *found_value = NULL;
+    ULONG found_level = -1;
+
+    for (index = 0; ; ++index) {
+
+        value = Conf_Get(proc->box->name, setting, index);
+        if (! value)
+            break;
+
+        ULONG level = -1;
+        value = Process_MatchImageAndGetValue(proc->box, value, proc->image_name, &level);
+        if (!value || level > found_level)
+            continue;
+        found_value = value;
+        found_level = level;
+    }
+
+    return found_value;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_GetConf_bool
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_GetConf_bool(PROCESS *proc, const WCHAR* setting, BOOLEAN def)
+{
+    const WCHAR *value;
+    BOOLEAN retval;
+
+    Conf_AdjustUseCount(TRUE);
+
+    value = Process_GetConf(proc, setting);
+
+    retval = def;
+    if (value) {
+        if (*value == 'y' || *value == 'Y')
+            retval = TRUE;
+        else if (*value == 'n' || *value == 'N')
+            retval = FALSE;
+    }
+
+    Conf_AdjustUseCount(FALSE);
+
+    return retval;
 }
 
 
@@ -486,40 +563,9 @@ _FX BOOLEAN Process_AddPath(
         }
     }
 
-    //
-    // if the setting indicates an image name followed by a comma,
-    // then match the image name against the executing process.
-    //
+    value = Process_MatchImageAndGetValue(proc->box, value, proc->image_name, NULL);
 
-    tmp = wcschr(value, L',');
-    if (tmp) {
-
-        BOOLEAN inv, match;
-
-        //
-        // exclamation marks negates the matching
-        //
-
-        if (*value == L'!') {
-            inv = TRUE;
-            ++value;
-        } else
-            inv = FALSE;
-
-        len = (ULONG)(tmp - value);
-        if (len) {
-            match = Process_MatchImage(
-                                proc->box, value, len, proc->image_name, 1);
-            if (inv)
-                match = ! match;
-            if (! match)
-                return TRUE;
-        }
-
-        value = tmp + 1;
-    }
-
-    if (! *value)
+    if (!value)
         return TRUE;
 
     //
@@ -1033,11 +1079,29 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
 
 
 //---------------------------------------------------------------------------
+// Process_TerminateProcess
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_TerminateProcess(PROCESS* proc)
+{
+    if (Conf_Get_Boolean(NULL, L"TerminateUsingService", 0, TRUE)) {
+
+        if (Process_CancelProcess(proc))
+            return TRUE;
+        // else fall back to the kernel method
+    }
+
+    return Process_ScheduleKill(proc);
+}
+
+
+//---------------------------------------------------------------------------
 // Process_CancelProcess
 //---------------------------------------------------------------------------
 
 
-_FX void Process_CancelProcess(PROCESS *proc)
+_FX BOOLEAN Process_CancelProcess(PROCESS *proc)
 {
     SVC_PROCESS_MSG msg;
 
@@ -1055,7 +1119,7 @@ _FX void Process_CancelProcess(PROCESS *proc)
     msg.add_to_job = FALSE;
     msg.reason = proc->reason;
 
-    Api_SendServiceMessage(SVC_CANCEL_PROCESS, sizeof(msg), &msg);
+    return Api_SendServiceMessage(SVC_CANCEL_PROCESS, sizeof(msg), &msg);
 }
 
 
@@ -1106,4 +1170,78 @@ _FX BOOLEAN Process_IsInPcaJob(HANDLE ProcessId)
     }
 
     return IsInPcaJob;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_ScheduleKillProc
+//---------------------------------------------------------------------------
+
+
+_FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
+{
+    NTSTATUS status;
+    HANDLE process_id = (HANDLE)StartContext;
+    HANDLE handle = NULL;
+    PEPROCESS ProcessObject;
+
+    __try {
+
+        status = PsLookupProcessByProcessId(process_id, &ProcessObject);
+        if (NT_SUCCESS(status)) {
+
+            status = ObOpenObjectByPointer(ProcessObject, OBJ_KERNEL_HANDLE, NULL, PROCESS_ALL_ACCESS, NULL, KernelMode, &handle);
+            ObDereferenceObject(ProcessObject);
+            if (NT_SUCCESS(status)) {
+
+                ZwTerminateProcess(handle, STATUS_PROCESS_IS_TERMINATING);
+                ZwClose(handle);
+            }
+        }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    PsTerminateSystemThread(status);
+}
+
+
+//---------------------------------------------------------------------------
+// Process_ScheduleKill
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_ScheduleKill(PROCESS *proc)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    HANDLE handle;
+
+    InitializeObjectAttributes(&objattrs, NULL, OBJ_KERNEL_HANDLE, NULL, NULL);
+    status = PsCreateSystemThread(&handle, THREAD_ALL_ACCESS, &objattrs, NULL, NULL, Process_ScheduleKillProc, proc->pid);
+    if (NT_SUCCESS(status)) {
+
+        ZwClose(handle);
+
+        ULONG len = proc->image_name_len + 32 * sizeof(WCHAR);
+        WCHAR *text = Mem_Alloc(Driver_Pool, len);
+        if (text) {
+
+            if (proc->reason == 0)
+                RtlStringCbPrintfW(text, len, L"%s", proc->image_name);
+            else if (proc->reason != -1) // in this case we have SBIE1308 and dont want any other messages
+                RtlStringCbPrintfW(text, len, L"%s [%d]", proc->image_name, proc->reason);
+            else
+                *text = 0;
+            proc->reason = -1; // avoid repeated messages if this gets re triggered
+
+            if (*text)
+                Log_MsgP1(MSG_2314, text, proc->pid);
+            Mem_Free(text, len);
+        }
+
+        return TRUE;
+    }
+    return FALSE;
 }

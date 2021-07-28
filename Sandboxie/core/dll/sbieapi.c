@@ -1448,7 +1448,6 @@ _FX LONG SbieApi_MonitorPut2(
 
 
 _FX LONG SbieApi_MonitorGetEx(
-	ULONG *SeqNum,
 	ULONG *Type,
 	ULONG *Pid,
     ULONG *Tid,
@@ -1461,7 +1460,7 @@ _FX LONG SbieApi_MonitorGetEx(
 
     memset(parms, 0, sizeof(parms));
 	args->func_code = API_MONITOR_GET_EX;
-	args->log_seq.val = SeqNum;
+	//args->log_seq.val = SeqNum;
 	args->log_type.val = Type;
 	args->log_pid.val = Pid;
     args->log_tid.val = Tid;

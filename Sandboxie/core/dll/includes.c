@@ -37,3 +37,11 @@ extern const ULONG tzuk;
 /* Stream */
 
 #include "common/stream.c"
+
+/* NetFw */
+
+#include "common/netfw.c"
+
+/* StrUtil */
+
+#include "common/str_util.c"

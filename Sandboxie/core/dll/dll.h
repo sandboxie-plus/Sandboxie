@@ -182,6 +182,12 @@ typedef struct _THREAD_DATA {
     ULONG file_dont_strip_write_access;
 
     //
+    // misc modules
+    //
+
+    HANDLE  scm_last_own_token;
+
+    //
     // proc module:  image path for a child process being started
     //
 
@@ -769,16 +775,9 @@ WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG*
 
 BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
 
-NTSTATUS Config_GetSettingsForImageName(
-    const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
-
 BOOLEAN Config_String2Bool(const WCHAR* value, BOOLEAN defval);
 
 BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);
-
-WCHAR* Config_GetTagValue(WCHAR* str, WCHAR** value, ULONG* len, WCHAR sep);
-
-BOOLEAN Config_FindTagValue(WCHAR* string, const WCHAR* name, WCHAR* value, ULONG value_size, const WCHAR* deftext, WCHAR sep);
 
 //---------------------------------------------------------------------------
 

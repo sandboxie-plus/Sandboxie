@@ -179,6 +179,8 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_IsBoxedService(HANDLE hService);
 SBIEDLL_EXPORT  BOOL SbieDll_StartBoxedService(
     const WCHAR *ServiceName, BOOLEAN WithAdd);
 
+SBIEDLL_EXPORT  BOOL SbieDll_CheckProcessLocalSystem(HANDLE ProcessHandle);
+
 SBIEDLL_EXPORT  HRESULT SbieDll_ComCreateProxy(
     REFIID riid, void *pUnkOuter, void *pChannel, void **ppUnknown);
 
@@ -205,6 +207,12 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* te
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
 //SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForImageName(
+    const WCHAR* boxname, const WCHAR* image_name, const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForImageName_bool(
+    const WCHAR* boxname, const WCHAR* image_name, const WCHAR* setting, BOOLEAN defval);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
 

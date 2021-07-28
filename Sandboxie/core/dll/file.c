@@ -80,9 +80,6 @@
 #define FGN_REPARSED_CLOSED_PATH    0x0200
 #define FGN_REPARSED_WRITE_PATH     0x0400
 
-#define PATH_IS_BOXED(f)     (((f) & FGN_IS_BOXED_PATH) != 0)
-#define PATH_NOT_BOXED(f)    (((f) & FGN_IS_BOXED_PATH) == 0)
-
 
 #ifndef  _WIN64
 #define WOW64_FS_REDIR
@@ -477,7 +474,7 @@ _FX NTSTATUS File_GetName(
             }
         }
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+        if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
             name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
@@ -2443,6 +2440,23 @@ _FX NTSTATUS File_NtCreateFileImpl(
     if (Dll_OsBuild >= 8400 && Dll_ImageType == DLL_IMAGE_TRUSTED_INSTALLER)
         DesiredAccess &= ~ACCESS_SYSTEM_SECURITY;   // for TiWorker.exe (W8)
 
+    // MSIServer without system
+    extern BOOLEAN Scm_MsiServer_Systemless;
+    if ((DesiredAccess & ACCESS_SYSTEM_SECURITY) != 0 && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+        && ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 4, L".msi") == 0
+        ){
+
+        //
+        // MSIServer when accessing \??\C:\WINDOWS\Installer\???????.msi files will get a PRIVILEGE_NOT_HELD error when requesting ACCESS_SYSTEM_SECURITY
+        // However, if we broadly clear this flag we will get Warning 1946 Property 'System.AppUserModel.ID' could not be set on *.lnk files
+        //
+
+        DesiredAccess &= ~ACCESS_SYSTEM_SECURITY;
+    }
+
+
+
     __try {
 
     IoStatusBlock->Information = FILE_DOES_NOT_EXIST;
@@ -3021,6 +3035,25 @@ ReparseLoop:
                 //  while(!IsDebuggerPresent()) Sleep(50); __debugbreak();
                 //}
 
+                // MSIServer without system
+                if (status == STATUS_ACCESS_DENIED && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+                    && ObjectAttributes->ObjectName->Buffer && ObjectAttributes->ObjectName->Length >= 34
+                    && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 11, L"\\Config.Msi") == 0
+                    ) {
+                    
+                    //
+                    // MSI must not fail accessing \??\C:\WINDOWS\Installer\Config.msi but this folder is readable only for system,
+                    // so we create a boxed copy instead and open it
+                    //
+        
+                    RtlInitUnicodeString(&objname, CopyPath);
+                    status = __sys_NtCreateFile(
+                        FileHandle, DesiredAccess, &objattrs,
+                        IoStatusBlock, AllocationSize, FileAttributes,
+                        ShareAccess, FILE_OPEN_IF, FILE_DIRECTORY_FILE,
+                        EaBuffer, EaLength);
+                }
+
                 //
                 // special case for SandboxieCrypto on Windows Vista,
                 // which tries to open catdb that are locked by
@@ -3146,6 +3179,17 @@ ReparseLoop:
     //
 
     if (! HaveCopyParent) {
+
+        if (!HaveTrueParent && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+            && wcsstr(CopyPath, L"\\system32\\config\\systemprofile\\") != NULL) {
+
+            //
+            // MSI must not fail accessing \??\C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\ 
+            // but this folder is readable only for system, so we create a boxed copy instead and open it
+            //
+
+            HaveTrueParent = TRUE;
+        }
 
         if (HaveTrueParent || HaveSnapshotParent) {
 
@@ -5845,7 +5889,6 @@ _FX NTSTATUS File_SetDisposition(
     WCHAR *DosPath;
     NTSTATUS status;
     ULONG mp_flags;
-    BOOLEAN is_direct_file;
 
     //
     // check if the specified path is an open or closed path
@@ -5855,7 +5898,6 @@ _FX NTSTATUS File_SetDisposition(
 
     mp_flags = 0;
     DosPath = NULL;
-    is_direct_file = FALSE;
 
     Dll_PushTlsNameBuffer(TlsData);
 
@@ -5867,6 +5909,12 @@ _FX NTSTATUS File_SetDisposition(
         status = File_GetName(
                     FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
 
+        //
+        // fix-me: this is broken, instead of deleting files on close it deletes them instantly
+        //          possible workarounds use __sys_NtSetInformationFile for files that reside only in the sandbox
+        //          or implement proper deletion on handle close in File_NtCloseImpl
+        //
+
         if (NT_SUCCESS(status)) {
 
             mp_flags = File_MatchPath(TruePath, &FileFlags);
@@ -5874,22 +5922,7 @@ _FX NTSTATUS File_SetDisposition(
             if (PATH_IS_CLOSED(mp_flags))
                 status = STATUS_ACCESS_DENIED;
 
-            else if (PATH_IS_OPEN(mp_flags)) {
-
-                is_direct_file = TRUE; // file is open
-            }
-            else {
-
-		        WCHAR* TmplPath = CopyPath;
-
-		        File_FindSnapshotPath(&TmplPath); // if file is in a snapshot this updates TmplPath to point to it
-
-		        if (PATH_IS_BOXED(FileFlags) && TmplPath == CopyPath)
-                    is_direct_file = TRUE; // file is boxed and not located in a snapshot
-            }
-             
-
-            if (!is_direct_file) {
+            else if (PATH_NOT_OPEN(mp_flags)) {
 
                 status = File_DeleteDirectory(CopyPath, TRUE);
 
@@ -5929,7 +5962,7 @@ _FX NTSTATUS File_SetDisposition(
     // handle the request appropriately
     //
 
-    if (is_direct_file) {
+    if (PATH_IS_OPEN(mp_flags)) {
 
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,

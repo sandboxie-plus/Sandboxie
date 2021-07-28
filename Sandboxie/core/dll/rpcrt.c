@@ -30,6 +30,7 @@
 #define INITGUID
 #include <guiddef.h>
 #include "trace.h"
+#include "common/str_util.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -414,13 +415,13 @@ _FX NTSTATUS RpcRt_FindModulePreset(
         //
 
         ULONG mode = -1;
-        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, CallingModule, &mode);
+        const WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, CallingModule, &mode);
         if (!found_value || mode > found_mode)
             continue;
 
         WCHAR* test_value = NULL;
         ULONG test_len = 0;
-        found_value = Config_GetTagValue(found_value, &test_value, &test_len, L',');
+        found_value = SbieDll_GetTagValue(found_value, NULL, &test_value, &test_len, L',');
 
         if (!test_value || !found_value || !*found_value) {
             SbieApi_Log(2207, L"RpcPortBinding");
@@ -695,7 +696,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringBinding, ModulePreset, sizeof(ModulePreset)))) {
             
             WCHAR tagValue[96];
-            if (Config_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), NULL, L','))
+            if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
             {
                 WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
 
@@ -717,7 +718,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
                 // else error let it fail
             }
 
-            if (Config_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), NULL, L','))
+            if (SbieDll_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), L'=', L','))
                 use_RpcMgmtSetComTimeout = Config_String2Bool(tagValue, use_RpcMgmtSetComTimeout);
         }
     }
@@ -841,17 +842,17 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
             WCHAR tagValue[96];
             if (RPC_PROTSEQ_LRPC == Template->ProtocolSequence && !Template->StringEndpoint)
             {
-                if (Config_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), NULL, L','))
+                if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
                 {
                     Template->StringEndpoint = GetDynamicLpcPortName(tagValue);
                 }
-                /*else if (Config_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), NULL, L','))
+                /*else if (SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L','))
                 {
                     Template->StringEndpoint = (unsigned short*)...;
                 }*/
             }
 
-            if (Config_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), NULL, L','))
+            if (SbieDll_FindTagValue(ModulePreset, L"TimeOut", tagValue, sizeof(tagValue), L'=', L','))
                 use_RpcMgmtSetComTimeout = Config_String2Bool(tagValue, use_RpcMgmtSetComTimeout);
         }
     }

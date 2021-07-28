@@ -1654,7 +1654,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
     BOOL ok = TRUE;
-    WCHAR ctrlName[64];
+    WCHAR ctrlName[64] = { 0 };
 
     //
     // get token from caller session or caller process.  note that on

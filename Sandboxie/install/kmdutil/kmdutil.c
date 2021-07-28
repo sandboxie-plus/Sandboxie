@@ -660,8 +660,10 @@ BOOL Kmd_Stop_Service(
                 return TRUE;
 
             if ((GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
-                 GetLastError() == ERROR_PIPE_BUSY) && retries < 3)
-                    continue;
+                GetLastError() == ERROR_PIPE_BUSY) && retries < 5) {
+                Sleep(2500);
+                continue;
+            }
 
             Display_Error(L"ControlService Interrogate", 0);
             return FALSE;
@@ -674,8 +676,10 @@ BOOL Kmd_Stop_Service(
                     SERVICE_CONTROL_STOP, &service_status)) {
 
                 if ((GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
-                     GetLastError() == ERROR_PIPE_BUSY) && retries < 3)
-                        continue;
+                    GetLastError() == ERROR_PIPE_BUSY) && retries < 5) {
+                    Sleep(2500);
+                    continue;
+                }
 
                 Display_Error(L"ControlService Stop", 0);
                 return FALSE;

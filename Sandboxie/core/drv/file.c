@@ -28,6 +28,7 @@
 #include "util.h"
 #include "session.h"
 #include "syscall.h"
+#include "wfp.h"
 #include "common/pattern.h"
 #include "common/my_version.h"
 
@@ -883,6 +884,9 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
     if (ok)
         ok = File_BlockInternetAccess(proc);
 
+    if (ok)
+        ok = WFP_UpdateProcess(proc);
+
     if (ok) {
 
         //
@@ -979,13 +983,13 @@ _FX NTSTATUS File_Generic_MyParseProc(
     // skip requests dealing with devices we don't care about
     //
 
-    if (device_type != FILE_DEVICE_DISK &&
+    if ((device_type != FILE_DEVICE_DISK &&
         device_type != FILE_DEVICE_NAMED_PIPE &&
         device_type != FILE_DEVICE_MAILSLOT &&
         device_type != FILE_DEVICE_NETWORK &&
         device_type != FILE_DEVICE_MULTI_UNC_PROVIDER &&
         device_type != FILE_DEVICE_NETWORK_FILE_SYSTEM &&
-        device_type != FILE_DEVICE_DFS)
+        device_type != FILE_DEVICE_DFS) || proc->disable_file_flt)
     {
         if ((proc->file_trace & TRACE_IGNORE) || Session_MonitorCount) {
 
@@ -2145,6 +2149,9 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
 	if (ok)
 		ok = File_BlockInternetAccess(proc);
 
+    if (ok)
+        ok = WFP_UpdateProcess(proc);
+
 	if (ok) {
 
         status = STATUS_SUCCESS;
@@ -2333,8 +2340,8 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     //
 
     user_devname = args->device_name.val;
-    if (! user_devname)
-        return STATUS_INVALID_PARAMETER;
+    if (!user_devname)
+        goto get_program; //return STATUS_INVALID_PARAMETER;
     ProbeForRead(user_devname, sizeof(WCHAR) * 32, sizeof(WCHAR));
     wmemcpy(device_name,        File_Mup,     8);   // \Device\ prefix
     wmemcpy(device_name + 8,    user_devname, 32);
@@ -2402,10 +2409,13 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     if (! chk)
         return STATUS_OBJECT_NAME_INVALID;
 
+
     //
     // if a ProcessId was specified, then locate and lock the matching
     // process. ProcessId must be specified if the caller is not sandboxed
     //
+
+get_program:
 
     ProcessId = args->process_id.val;
     if (proc) {
@@ -2430,7 +2440,7 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     // check file access restrictions
     //
 
-    if (1) {
+    if (user_devname) {
 
         BOOLEAN is_open, is_closed;
         KIRQL irql2;
@@ -2464,6 +2474,18 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
 
             status = STATUS_SUCCESS;
         }
+    }
+    else { // check for WFP state
+
+        status = STATUS_SUCCESS;
+
+        if (!proc->AllowInternetAccess) { // if the process isn't exempted check the config
+
+            if (!Process_GetConf_bool(proc, L"AllowNetworkAccess", TRUE)) {
+
+                status = STATUS_ACCESS_DENIED;
+            }
+	    }
     }
 
     //

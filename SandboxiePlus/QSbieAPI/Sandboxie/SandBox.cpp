@@ -182,7 +182,13 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 
 	foreach(const QString& Folder, BoxFolders)
 	{
-		Status = CSandBox__DeleteFolder(pProgress, Folder);
+		for (int i = 0; i < 10; i++) {
+			Status = CSandBox__DeleteFolder(pProgress, Folder);
+			if (!Status.IsError())
+				break;
+			QThread::sleep(1); // wait a second
+		}
+
 		if (Status.IsError())
 			break;
 	}

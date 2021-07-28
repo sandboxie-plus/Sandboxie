@@ -114,10 +114,10 @@ SB_STATUS CSbieUtils::Install(EComponent Component)
 void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 {
 	QString HomePath = QCoreApplication::applicationDirPath().replace("/", "\\"); // "C:\\Program Files\\Sandboxie	"
-	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0) // todo: why when we are admin we need \??\ and else not and why knd util from console as admin also does not need that???
-		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + "\"\\??\\" + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "\"" + "|type=kernel|start=demand|altitude=86900");
+	if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) == 0) 
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIEDRV L"|") + HomePath + "\\" + QString::fromWCharArray(SBIEDRV_SYS) + "|type=kernel|start=demand|altitude=86900");
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) == 0) {
-		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + "\"" + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "\"" + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
+		Ops.append(QString::fromWCharArray(L"kmdutil.exe|install|" SBIESVC L"|") + HomePath + "\\" + QString::fromWCharArray(SBIESVC_EXE) + "|type=own|start=auto|display=\"Sandboxie Service\"|group=UIGroup");
 		Ops.append("reg.exe|ADD|HKLM\\SYSTEM\\ControlSet001\\Services\\SbieSvc|/v|PreferExternalManifest|/t|REG_DWORD|/d|1|/f");
 	}
 }
@@ -156,7 +156,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 		return ExecOps(Ops);
 
 	wstring path = QCoreApplication::applicationFilePath().toStdWString();
-	wstring params = L"-assist " + Ops.join(" ").toStdWString();
+	wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";
 
 	SHELLEXECUTEINFO shex;
 	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
@@ -193,17 +193,9 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 //////////////////////////////////////////////////////////////////////////////
 // Shell integration
 
-int CSbieUtils::IsContextMenu()
+QString CSbieUtils::GetContextMenuStartCmd()
 {
-	if (!CheckRegValue(L"Software\\Classes\\*\\shell\\sandbox\\command"))
-		return 0;
-	if (!CheckRegValue(L"software\\classes\\folder\\shell\\sandbox\\command"))
-		return 1;
-	return 2;
-}
-
-bool CSbieUtils::CheckRegValue(const wchar_t* key)
-{
+	const wchar_t* key = L"Software\\Classes\\*\\shell\\sandbox\\command";
 	HKEY hkey;
 	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
@@ -215,16 +207,17 @@ bool CSbieUtils::CheckRegValue(const wchar_t* key)
 	rc = RegQueryValueEx(hkey, NULL, NULL, &type, (BYTE *)path, &path_len);
 	RegCloseKey(hkey);
 	if (rc != 0)
-		return false;
+		return QString();
 
-	return true;
+	return QString::fromWCharArray(path);
 }
 
-void CSbieUtils::AddContextMenu(const QString& StartPath)
+void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPath)
 {
 	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
 
-	CreateShellEntry(L"*", L"Run &Sandboxed", start_path, start_path + L" /box:__ask__ \"%1\" %*");
+	CreateShellEntry(L"*", L"Run &Sandboxed", icon_path, start_path + L" /box:__ask__ \"%1\" %*");
 
 	wstring explorer_path(512, L'\0');
 
@@ -249,7 +242,7 @@ void CSbieUtils::AddContextMenu(const QString& StartPath)
 		explorer_path.append(L"\\explorer.exe");
 	}
 
-	CreateShellEntry(L"Folder", L"Explore &Sandboxed", start_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
+	CreateShellEntry(L"Folder", L"Explore &Sandboxed", icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
 }
 
 void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)

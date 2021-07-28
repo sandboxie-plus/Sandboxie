@@ -25,6 +25,7 @@
 #include "process.h"
 #include "util.h"
 #include "hook.h"
+#include "session.h"
 #include "common/my_version.h"
 #include "log_buff.h"
 
@@ -88,7 +89,7 @@ static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
 static P_Api_Function *Api_Functions = NULL;
 
-static DEVICE_OBJECT *Api_DeviceObject = NULL;
+DEVICE_OBJECT *Api_DeviceObject = NULL;
 
 static FAST_IO_DISPATCH *Api_FastIoDispatch = NULL;
 
@@ -670,7 +671,7 @@ _FX void Api_AddMessage(
 		+ (string1_len + 1) * sizeof(WCHAR)
 		+ (string2_len + 1) * sizeof(WCHAR);
 
-	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer);
+	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer, TRUE);
 	if (write_ptr) {
 		//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
 		WCHAR null_char = L'\0';
@@ -704,6 +705,12 @@ _FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
 
 	if (proc) // sandboxed processes can't read the log
 		return STATUS_NOT_IMPLEMENTED;
+
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId) {
+        // non service queries can be only performed for the own session
+        if (Session_GetLeadSession(PsGetCurrentProcessId()) != args->session_id.val)
+            return STATUS_ACCESS_DENIED;
+    }
 
 	ProbeForRead(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
 	ProbeForWrite(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
@@ -1070,6 +1077,11 @@ _FX NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms)
     if ((! proc) && MyIsCallerMyServiceProcess()) {
 
         status = STATUS_SUCCESS;
+    }
+
+    if (NT_SUCCESS(status) && !MyIsCallerSigned()) {
+    
+        status = STATUS_INVALID_SIGNATURE;
     }
 
     //

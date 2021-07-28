@@ -15,6 +15,8 @@
 #define SBIESVC         L"SbieSvc"
 #define SBIESVC_EXE     L"SbieSvc.exe"
 
+#define SBIELDR_EXE     L"SbieLdr.exe"
+
 #define SBIESTART_EXE   L"Start.exe"
 
 #define SBIEMSG_DLL     L"SbieMsg.dll"

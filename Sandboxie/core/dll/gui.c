@@ -527,9 +527,6 @@ import_fail:
         ok = Gui_InitMsg();
 
     if (ok)
-        ok = Gui_InitWinHooks();
-
-    if (ok)
         ok = Gui_InitDlgTmpl();
 
     if (ok)
@@ -539,6 +536,9 @@ import_fail:
 	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 		return ok;
 	// NoSbieDesk END
+
+    if (ok)
+        ok = Gui_InitWinHooks();
 
     SBIEDLL_HOOK_GUI(AttachThreadInput);
 

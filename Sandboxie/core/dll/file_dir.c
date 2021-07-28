@@ -170,7 +170,7 @@ static void File_InitRecoverList(
     const WCHAR *setting, LIST *list, BOOLEAN MustBeValidPath,
     WCHAR *buf, ULONG buf_len);
 
-static void File_NotifyRecover(HANDLE FileHandle, MSG_HEADER **out_req);
+static void File_NotifyRecover(HANDLE FileHandle);
 
 static BOOLEAN File_IsRecoverable(const WCHAR *TruePath);
 
@@ -1917,7 +1917,6 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     NTSTATUS status;
     ULONG type;
     FILE_MERGE *merge;
-    MSG_HEADER *req;
 
     P_NtClose pSysNtClose = __sys_NtClose;
 
@@ -1962,6 +1961,13 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     }
 
     //
+    // special handling for scm_msi.c
+    //
+
+    if (TlsData->scm_last_own_token == FileHandle)
+        TlsData->scm_last_own_token = NULL;
+
+    //
     // if not closing a file handle, stop here
     //
 
@@ -1977,8 +1983,6 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     //
     // close for a real handle
     //
-
-    req = NULL;
 
     EnterCriticalSection(&File_DirHandles_CritSec);
 
@@ -1998,16 +2002,9 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     // close and recover file
     //
 
-    File_NotifyRecover(FileHandle, &req);
+    File_NotifyRecover(FileHandle);
 
     status = pSysNtClose ? pSysNtClose(FileHandle) : NtClose(FileHandle);
-
-    if (req) {
-        MSG_HEADER *rpl = SbieDll_CallServer(req);
-        Dll_Free(req);
-        if (rpl)
-            Dll_Free(rpl);
-    }
 
     TlsData->file_NtClose_lock = FALSE;
 
@@ -2672,8 +2669,7 @@ _FX void File_DuplicateRecover(
 //---------------------------------------------------------------------------
 
 
-_FX void File_NotifyRecover(
-    HANDLE FileHandle, MSG_HEADER **out_req)
+_FX void File_NotifyRecover(HANDLE FileHandle)
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 

@@ -48,7 +48,7 @@ bool CTraceModel::TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pE
 	return Path.size() == Index;
 }*/
 
-QList<QVariant>	CTraceModel::Sync(const QList<CTraceEntryPtr>& EntryList, void* BoxPtr)
+QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, void* BoxPtr)
 {
 	QList<QVariant>	Added;
 	QMap<QList<QVariant>, QList<STreeNode*> > New;

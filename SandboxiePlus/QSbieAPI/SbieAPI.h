@@ -57,10 +57,10 @@ public:
 
 	virtual SB_STATUS		ReloadBoxes(bool bFullUpdate = false);
 	static  SB_STATUS		ValidateName(const QString& BoxName);
-	virtual SB_STATUS		CreateBox(const QString& BoxName);
+	virtual SB_STATUS		CreateBox(const QString& BoxName, bool bReLoad = true);
 
 	virtual SB_STATUS		UpdateProcesses(bool bKeep);
-	virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
+	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
 
@@ -110,7 +110,7 @@ public:
 	virtual bool			IsMonitoring();
 
 	virtual void			AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge = false);
-	virtual QList<CTraceEntryPtr> GetTrace() const;
+	virtual QVector<CTraceEntryPtr> GetTrace() const;
 	virtual void			ClearTrace() { QWriteLocker Lock(&m_TraceMutex); m_TraceList.clear(); m_LastTraceEntry = 0; }
 
 	// Other
@@ -185,7 +185,7 @@ protected:
 	QMap<quint32, CBoxedProcessPtr> m_BoxedProxesses;
 
 	mutable QReadWriteLock	m_TraceMutex;
-	QList<CTraceEntryPtr>	m_TraceList;
+	QVector<CTraceEntryPtr>	m_TraceList;
 	int						m_LastTraceEntry;
 
 	mutable QReadWriteLock	m_DriveLettersMutex;

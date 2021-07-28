@@ -849,21 +849,12 @@ _FX void AutoExec(void)
     if (! Dll_FirstProcessInBox)
         return;
 
-    buf_len = 4096 * sizeof(WCHAR);
-    buf1 = Dll_AllocTemp(buf_len);
-
-    status = SbieApi_EnumProcess(Dll_BoxName, (ULONG *)buf1);
-    if (status != 0) {
-        Sbie_snwprintf(error_str, 16, L"%d [%08X]", -1, status);
-        SbieApi_Log(2206, error_str);
-        Dll_Free(buf1);
-        return;
-    }
-
     //
     // query the values in the AutoExec setting
     //
 
+    buf_len = 4096 * sizeof(WCHAR);
+    buf1 = Dll_AllocTemp(buf_len);
     memzero(buf1, buf_len);
     buf2 = Dll_AllocTemp(buf_len);
     memzero(buf2, buf_len);

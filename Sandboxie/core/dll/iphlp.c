@@ -24,38 +24,7 @@
 #include <windows.h>
 #include "core/svc/IpHlpWire.h"
 #include "dll.h"
-
-
-//---------------------------------------------------------------------------
-// Structures and Types
-//---------------------------------------------------------------------------
-
-
-typedef USHORT ADDRESS_FAMILY;
-
-typedef struct {
-    union {
-        struct {
-            ULONG Zone : 28;
-            ULONG Level : 4;
-        };
-        ULONG Value;
-    };
-} SCOPE_ID, *PSCOPE_ID;
-
-typedef struct sockaddr_in6 {
-    ADDRESS_FAMILY sin6_family; // AF_INET6.
-    USHORT sin6_port;           // Transport level port number.
-    ULONG  sin6_flowinfo;       // IPv6 flow information.
-    IN6_ADDR sin6_addr;         // IPv6 address.
-    union {
-        ULONG sin6_scope_id;     // Set of interfaces for a scope.
-        SCOPE_ID sin6_scope_struct;
-    };
-} SOCKADDR_IN6_LH, *PSOCKADDR_IN6_LH, FAR *LPSOCKADDR_IN6_LH;
-
-typedef void (*PIPFORWARD_CHANGE_CALLBACK)
-    (void *CallerContext, void *Row, ULONG NotificationType);
+#include "common/my_wsa.h"
 
 
 //---------------------------------------------------------------------------

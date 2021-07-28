@@ -46,11 +46,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - added missing hook for ConnectEx function
 
+## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 1
 
+### Fixed
+Fixed issue with Windows 7
 
 ## [0.8.9 / 5.50.9] - 2021-07-27
 
-### :warning: If you use Windows 7, see the installation issues [#1040](https://github.com/sandboxie-plus/Sandboxie/issues/1040) and [#1044](https://github.com/sandboxie-plus/Sandboxie/issues/1044)
+### :warning: If you use Windows 7, please download the fixed installers: [0.8.9 / 5.50.9 HotFix 1](https://github.com/sandboxie-plus/Sandboxie/releases/tag/0.8.9b)
 
 ### Changed
 - updated a few icons

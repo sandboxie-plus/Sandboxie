@@ -5,7 +5,7 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 ## System requirements
 Windows 7 or higher, 32-bit or 64-bit.
 
-## Changelog updates
+## Detailed changelog
 https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md
 
 ## Download
@@ -31,7 +31,7 @@ If you need an accurate list of the changes, you can take a look at the [changel
 ## Documentation
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
 
-[future development](https://github.com/sandboxie-plus/Sandboxie/labels/future%20development) | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22+is%3Aissue) |
+[future development](https://github.com/sandboxie-plus/Sandboxie/labels/future%20development) | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22+is%3Aissue)
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
 

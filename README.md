@@ -57,8 +57,8 @@ Open Source release
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
-- mpheath - Help with Inno Setup installer
-- yfdyh000 - Localization fixes / Inno Setup
+- mpheath - Author of Plus installer based on Inno Setup
+- yfdyh000 - Localization support of Plus installer
 
 ## Translators
 - yuhao2348732 - Chinese Simplified

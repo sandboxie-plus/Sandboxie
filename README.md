@@ -26,7 +26,7 @@ Plus build has a modern Qt based UI, which supports all new features that have b
 
 Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
 
-If you need an accurate list of the changes, you can take a look at the [changelog](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md).
+If you need to check all new features at once, a good way to highlight them quickly is to search the equal sign in the [detailed changelog](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md).
 
 ## Documentation
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:

@@ -74,7 +74,7 @@ Open Source release
 - JNylson - Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- xorcan - Turkish
+- xorcan - Turkish (currently unmaintained)
 
 More volunteers are welcome! ;)
 

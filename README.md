@@ -22,7 +22,7 @@ Plus build has a modern Qt based UI, which supports all new features that have b
   * Portable mode - you can run the installer and choose to extract all files to a directory
   * Additional UI options to block access for Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions
-  * Global hotkey to terminate all boxed processes since 0.8.5
+  * Global hotkey to terminate all boxed processes
 
 Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
 

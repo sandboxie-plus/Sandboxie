@@ -59,6 +59,7 @@ Open Source release
 - Valinwolf - UI / Icons
 - mpheath - Author of Plus installer based on Inno Setup
 - yfdyh000 - Localization support of Plus installer
+- daveout - UI / Icons
 
 ## Translators
 - yuhao2348732 - Chinese Simplified

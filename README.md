@@ -24,7 +24,7 @@ Plus build has a modern Qt based UI, which supports all new features that have b
   * More customization options for Start/Run and Internet access restrictions
   * Global hotkey to terminate all boxed processes
 
-Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
+Classic build has the old no longer developed MFC based UI, hence it lacks native interface support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
 
 If you need to check all new features at once, a good way to highlight them quickly is to search the equal sign in the [detailed changelog](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md).
 

@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with fake admin and some nsi installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
 - fixed more issued with FileDispositionInformation behavioure, which resulted in bogus file deletion handling
 - fixed issue with checking WFP status
+- fixed issue WFP failing to initialize at boot
 
 
 

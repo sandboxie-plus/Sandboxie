@@ -653,7 +653,7 @@ typedef NTSTATUS (*P_NtAccessCheck)(
   OUT PACCESS_MASK        GrantedAccess,
   OUT PNTSTATUS           AccessStatus );
 
-typedef NTSTATUS  (*P_NtAccessCheckByTypeResultList) (
+typedef NTSTATUS (*P_NtAccessCheckByTypeResultList) (
     PSECURITY_DESCRIPTOR SecurityDescriptor,
     PSID PrincipalSelfSid,
     HANDLE ClientToken,
@@ -667,7 +667,7 @@ typedef NTSTATUS  (*P_NtAccessCheckByTypeResultList) (
     PNTSTATUS   AccessStatus 
     );
 
-typedef  NTSTATUS(WINAPI *P_NtAccessCheckByType) (
+typedef NTSTATUS (*P_NtAccessCheckByType) (
     PSECURITY_DESCRIPTOR SecurityDescriptor,
     PSID PrincipalSelfSid,
     HANDLE ClientToken,
@@ -680,7 +680,7 @@ typedef  NTSTATUS(WINAPI *P_NtAccessCheckByType) (
     PACCESS_MASK GrantedAccess,
     PNTSTATUS AccessStatus);
 
-typedef BOOL(*P_RtlEqualSid) (void * sid1, void * sid2);
+typedef BOOL (*P_RtlEqualSid) (void * sid1, void * sid2);
 
 typedef NTSTATUS (*P_NtQuerySystemInformation)(
     IN SYSTEM_INFORMATION_CLASS SystemInformationClass,

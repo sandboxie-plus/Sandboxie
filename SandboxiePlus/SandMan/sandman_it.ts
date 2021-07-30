@@ -1530,7 +1530,7 @@ Scegliere No per selezionare: %2</translation>
     <name>CSbieModel</name>
     <message>
         <location filename="Models/SbieModel.cpp" line="133"/>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Gruppo area virtuale</translation>
     </message>
     <message>

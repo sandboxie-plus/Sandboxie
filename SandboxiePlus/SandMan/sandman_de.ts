@@ -1466,9 +1466,8 @@ Möchten Sie die Bereinigung durchführen?</translation>
 <context>
     <name>CSbieModel</name>
     <message>
-        <location filename="Models/SbieModel.cpp" line="135"/>
-        <source>Box Groupe</source>
-        <oldsource>Box Group</oldsource>
+        <location filename="Models/SbieModel.cpp" line="133"/>
+        <source>Box Group</source>
         <translation>Boxgruppe</translation>
     </message>
     <message>

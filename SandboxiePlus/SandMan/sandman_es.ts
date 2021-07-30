@@ -1410,8 +1410,8 @@ Desea hacer la limpieza?</translation>
 <context>
     <name>CSbieModel</name>
     <message>
-        <location filename="Models/SbieModel.cpp" line="135"/>
-        <source>Box Groupe</source>
+        <location filename="Models/SbieModel.cpp" line="133"/>
+        <source>Box Group</source>
         <translation>Grupo de Sandbox</translation>
     </message>
     <message>

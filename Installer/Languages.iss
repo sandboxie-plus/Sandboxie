@@ -77,6 +77,18 @@ Italian.RequiresWin7OrLater=Sandboxie-Plus richiede Windows 7 o superiore.
 Italian.ClassicFound=È stata rilevata una installazione di Sandboxie Classic che potrebbe causare incompatibilità. Rimuoverla ora?
 Italian.RunSandboxedMenu=Avvia nell'&area virtuale
 
+; Portuguese
+portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
+portuguese.CustomPageLabel1=Selecione Tipo de Instalação
+portuguese.CustomPageLabel2=Como deve ser instalado
+portuguese.CustomPageLabel3=Escolha o modo de instalação
+portuguese.CustomPageInstallMode=Instalar {#MyAppName} neste computador
+portuguese.CustomPageUpgradeMode=Atualizar instalação existente do {#MyAppName}
+portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório para uso portable
+portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
+portuguese.ClassicFound=Instalação Classic Sandboxie detectada, deve ser desinstalada primeiro, você quer desinstalá-la agora?
+portuguese.RunSandboxedMenu=Rodar &Caixa de Areia
+
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
 russian.CustomPageLabel1=Выберите тип установки

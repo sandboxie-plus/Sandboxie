@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+
 ## [0.9.1 / 5.51.1] - 2021-07-??
 
 ### Added
@@ -61,6 +63,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added missing hook for ConnectEx function
 
 
+
 ## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 2
 
 ### Fixed
@@ -110,6 +113,8 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed issue with boxes that had auto-delete activated introduced in the previous build [#986](https://github.com/sandboxie-plus/Sandboxie/issues/986)
+
+
 
 ## [0.8.7 / 5.50.7] - 2021-07-10
 
@@ -274,6 +279,7 @@ Fixed issue with Windows 7
 - workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process [#547](https://github.com/sandboxie-plus/Sandboxie/issues/547) [#310](https://github.com/sandboxie-plus/Sandboxie/issues/310) [#215](https://github.com/sandboxie-plus/Sandboxie/issues/215)
 - fixed issue with Software Compatibility tab that doesn't always show template names correctly [#774](https://github.com/sandboxie-plus/Sandboxie/issues/774)
 
+ 
 
 ## [0.7.4 / 5.49.7] - 2021-04-11
 
@@ -298,6 +304,7 @@ Fixed issue with Windows 7
 - fixed broken paths in The Bat! template (by isaak654) [#756](https://github.com/sandboxie-plus/Sandboxie/pull/756)
 - fixed issue about media players that attempt to write unneeded media files inside the box (by Dyras) [#743](https://github.com/sandboxie-plus/Sandboxie/pull/743) [#536](https://github.com/sandboxie-plus/Sandboxie/issues/536)
 
+ 
 
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
@@ -846,6 +853,7 @@ Fixed issue with Windows 7
 - fixed issue with internet access restriction options [#177](https://github.com/sandboxie-plus/Sandboxie/issues/177) [#185](https://github.com/sandboxie-plus/Sandboxie/issues/185)
 - fixed issue deleting sandbox when located on a drive directly [#139](https://github.com/sandboxie-plus/Sandboxie/issues/139)
 
+ 
 
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
@@ -858,6 +866,7 @@ Fixed issue with Windows 7
 - fixed Chrome 86+ compatibility bug with Chrome's own sandbox [#149](https://github.com/sandboxie-plus/Sandboxie/issues/149)
 
 
+ 
 ## [0.4.1 / 5.43.5] - 2020-09-12
 
 ### Added

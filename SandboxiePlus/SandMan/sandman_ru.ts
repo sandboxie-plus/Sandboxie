@@ -494,24 +494,28 @@ Full path: %4</source>
 Полный путь: %4</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+Имя файла: %3</translation>
     </message>
     <message>
-        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
+        <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернет?
+Полный путь: %3</translation>
     </message>
     <message>
-        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
+        <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 может быть быстро восстановлен из %2.
+Файл был записан: %3</translation>
     </message>
     <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
+Полный путь: %4</translation>
     </message>
 </context>
 <context>
@@ -546,7 +550,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 дискового пространства.</translation>
     </message>
 </context>
 <context>
@@ -1169,10 +1173,12 @@ Do you want to do the clean up?</source>
 Вы хотите выполнить очистку?</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
+
 Do you want to do the clean up?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
+
+Вы хотите выполнить очистку?</translation>
     </message>
 </context>
 <context>
@@ -1339,19 +1345,19 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>MSI Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>MSI Installer</translation>
     </message>
     <message>
         <source>Firefox</source>
-        <translation type="unfinished"></translation>
+        <translation>Firefox</translation>
     </message>
     <message>
         <source>Winamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Winamp</translation>
     </message>
     <message>
         <source>Firefox Plugin Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Firefox контейнер плагина</translation>
     </message>
 </context>
 <context>
@@ -1587,7 +1593,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите %1 выбранных процессов?</translation>
     </message>
 </context>
 <context>
@@ -1731,7 +1737,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Show only sellectes box</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать только выбранную песочницу</translation>
     </message>
 </context>
 <context>
@@ -2436,19 +2442,19 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Program/Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа/Служба</translation>
     </message>
     <message>
         <source>Open access to Windows Security Account Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
     </message>
     <message>
         <source>Disable Resource Access Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить монитор доступа к ресурсам</translation>
     </message>
     <message>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Монитор доступа к ресурсам</translation>
     </message>
 </context>
 <context>
@@ -2471,11 +2477,11 @@ Please note that this values are currently user specific and saved globally for 
         <source>OK</source>
         <translation>ОК</translation>
     </message>
-	<message>
+    <message>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
-	<message>
+    <message>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>

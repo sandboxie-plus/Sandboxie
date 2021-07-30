@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked NtClose handling for better performance and extendibility
 
 ### Fixed
-- fixed issue with fake admin and some nsi installers
+- fixed issue with fake admin and some nsi installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
 - fixed more issued with FileDispositionInformation behavioure, which resulted in bogus file deletion handling
 - fixed issue with checking WFP status
 
@@ -51,9 +51,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a few command line options to SandMan.exe
 
 ### Changed
-- greatly improved the performance of the trace log, but it's no longer possible to log both SandMan and SbieCtrl at the same time
-- changed code integrity verification policies
--- code signature validation of user mode components is disabled when Windows is booted in test-signing mode
+- greatly improved the performance of the trace log, but it's no longer possible to log to both SandMan and SbieCtrl at the same time
 - reworked process creation code to use PsSetCreateProcessNotifyRoutineEx and improved process termination
 
 ### Fixed
@@ -66,20 +64,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 Fixed issue with registering session leader
 
+
+
 ## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 1
 
 ### Fixed
 Fixed issue with Windows 7
 
-## [0.8.9 / 5.50.9] - 2021-07-27
 
-### :warning: If you use Windows 7 or the "Disable Forced Programs" feature in Plus UI, please download the fixed installers: [0.8.9 / 5.50.9 HotFix 2](https://github.com/sandboxie-plus/Sandboxie/releases/tag/0.8.9c)
+
+## [0.8.9 / 5.50.9] - 2021-07-27
 
 ### Changed
 - updated a few icons
 - updated GitHub build action to use Qt 5.15.2
 - improved the "full" tray icon to be more distinguishable from the "empty" one
-- changed code integrity verification policies
+- changed code integrity verification policies [#1003](https://github.com/sandboxie-plus/Sandboxie/issues/1003)
 -- code signature is no longer required to change config, to protect presets use the existing "EditAdminOnly=y"
 
 ### Fixed

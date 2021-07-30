@@ -60,6 +60,10 @@ Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0;
 Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable 
 Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable 
 
+[UninstallDelete]
+Type: dirifempty; Name: "{app}"
+Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
+
 [Messages]
 ; Include with commandline /? message.
 HelpTextNote=/PORTABLE=1%nEnable portable mode.%n
@@ -371,6 +375,41 @@ begin
   Result := True;
 end;
 
+procedure PostUninstall_Cleanup();
+var
+  i: Integer;
+  Text: String;
+  Paths: TStringList;
+begin
+  Paths := TStringList.Create;
+
+  // file paths to remove
+  Paths.Append('{localappdata}\{#MyAppName}\{#MyAppName}.ini');
+  Paths.Append('{win}\Sandboxie.ini');
+
+  // expand and append paths to make text for the msgbox
+  for i := 0 to Paths.Count - 1 do begin
+    Paths[i] := ExpandConstant(Paths[i]);
+
+    if FileExists(Paths[i]) then
+      Text := Text + '"' + Paths[i] + '"' + #13#10#13#10;
+  end;
+
+  Text := Trim(Text);
+
+  // delete the files
+  if Text <> '' then begin
+    Text := CustomMessage('UninstallRemoveFiles') + #13#10#13#10 + Text;
+
+    if MsgBox(Text, mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+      for i := 0 to Paths.Count - 1 do
+        if FileExists(Paths[i]) then
+          DeleteFile(Paths[i]);
+  end;
+
+  Paths.Free;
+end;
+
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
   ExecRet: Integer;
@@ -401,5 +440,8 @@ begin
   DeleteFile(ExpandConstant('{app}\SbieDrv.sys.w10'));
   DeleteFile(ExpandConstant('{app}\SbieDrv.sys.rc4'));
 
+  // user to confirm extra files to remove
+  if not UninstallSilent then
+    PostUninstall_Cleanup();
 end;
 

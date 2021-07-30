@@ -2,10 +2,24 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.1 / 5.51.1] - 2021-07-??
+
+### Added
+- added tray icon indicating no connection to the driver if it happens
+- added option to customize the tray icon
+- added "DllSkipHook=some.dll" option to disable instalation of hooks into selected dll's
+
+### Changed
+- reworked NtClose handling for better performance and extendibility
+
+### Fixed
+- fixed issue with fake admin and some nsi installers
+- fixed more issued with FileDispositionInformation behavioure, which resulted in bogus file deletion handling
+- fixed issue with checking WFP status
 
 
 
-## [0.9.0 / 5.51.0] - 2021-07-??
+## [0.9.0 / 5.51.0] - 2021-07-29
 
 ### Added
 - added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme
@@ -13,7 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- to use WFP for a specified sandbox, add 'AllowNetworkAccess=n' to said box
 -- you can exempt certain processes from blocking by using 'AllowNetworkAccess=program.exe,y'
 -- you can also enable this policy globally by adding 'AllowNetworkAccess=n' to the global section
--- in this case you can exempt entire boxes by adding 'AllowNetworkAccess=n' to said boxes
+-- in this case you can exempt entire boxes by adding 'AllowNetworkAccess=y' to said boxes
 -- specifying 'AllowNetworkAccess=program.exe,n' will block the access only for the named process
 -- Note: WFP is less absolute than the old approach, using WFP will filter only TCP/UDP communication
 --	restricted boxed processes will still be able to resolve domain names using the system service
@@ -24,7 +38,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: this filter applies only to outgoing connections/traffic, for incoming traffic either the WFP mode or a third-party firewall is needed
 -- like the old user mode based mechanism, malicious applications can bypass it by unhooking certain functions
 -- hence it's recommended to use the kernel mode WFP-based mechanism when reliable isolation is required
--- Note: the main reason this mechanism was added in user mode is to allow for easier debugging
 - added new trace option "NetFwTrace=*" to trace the actions of the firewall components
 -- please note that the driver only trace logs the kernel debug output, use DbgView.exe to log
 - API_QUERY_PROCESS_INFO can now be used to get the impersonation token of a sandboxed thread
@@ -45,6 +58,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - added missing hook for ConnectEx function
+
+
 
 ## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 2
 

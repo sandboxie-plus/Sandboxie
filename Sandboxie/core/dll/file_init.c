@@ -123,6 +123,20 @@ static const WCHAR *File_DeviceMap_EnvVar   = ENV_VAR_PFX L"DEVICE_MAP";
 
 
 //---------------------------------------------------------------------------
+// File_InitHandles
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_InitHandles(void)
+{
+    InitializeCriticalSection(&File_HandleOnClose_CritSec);
+    map_init(&File_HandleOnClose, Dll_Pool);
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // File_Init
 //---------------------------------------------------------------------------
 

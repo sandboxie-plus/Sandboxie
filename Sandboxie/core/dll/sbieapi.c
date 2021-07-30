@@ -962,16 +962,18 @@ _FX LONG SbieApi_CheckInternetAccess(
     WCHAR MyDeviceName[34];
     ULONG len;
 
-    len = wcslen(DeviceName32);
-    if (len > 32)
-        len = 32;
-    memzero(MyDeviceName, sizeof(MyDeviceName));
-    wmemcpy(MyDeviceName, DeviceName32, len);
+    if (DeviceName32) {
+        len = wcslen(DeviceName32);
+        if (len > 32)
+            len = 32;
+        memzero(MyDeviceName, sizeof(MyDeviceName));
+        wmemcpy(MyDeviceName, DeviceName32, len);
+    }
 
     memzero(parms, sizeof(parms));
     args->func_code               = API_CHECK_INTERNET_ACCESS;
     args->process_id.val64        = (ULONG64)(ULONG_PTR)ProcessId;
-    args->device_name.val64       = (ULONG64)(ULONG_PTR)MyDeviceName;
+    args->device_name.val64       = (ULONG64)(ULONG_PTR)(DeviceName32 ? MyDeviceName : NULL);
     args->issue_message.val64     = (ULONG64)(ULONG_PTR)IssueMessage;
 
     status = SbieApi_Ioctl(parms);

@@ -79,6 +79,7 @@ private:
 	QAction*				m_pMenuRunAppWiz;
 	QAction*				m_pMenuRunCmd;
 	QAction*				m_pMenuRunCmdAdmin;
+	QAction*				m_pMenuRunCmd32;
 	QAction*				m_pMenuMkLink;
 	QMenu*					m_pMenuPresets;
 	QActionGroup*			m_pMenuPresetsAdmin;

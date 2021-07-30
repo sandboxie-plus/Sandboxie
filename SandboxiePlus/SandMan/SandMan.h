@@ -42,7 +42,7 @@ public:
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
-	static QIcon		GetIcon(const QString& Name);
+	static QIcon		GetIcon(const QString& Name, bool bAction = true);
 
 	bool				IsFullyPortable();
 
@@ -83,7 +83,7 @@ protected:
 
 	enum EBoxColors
 	{
-		eYelow = 0,
+		eYellow = 0,
 		eRed,
 		eGreen,
 		eBlue,

@@ -182,16 +182,14 @@ CSandMan::CSandMan(QWidget *parent)
 		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
 
 	// Tray
-	QIcon Icon;
-	Icon.addFile(":/IconEmpty.png");
-	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
+	m_pTrayIcon = new QSystemTrayIcon(GetIcon("IconEmpty", false), this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/IconFull.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -336,12 +334,12 @@ void CSandMan::StoreState()
 	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
 }
 
-QIcon CSandMan::GetIcon(const QString& Name)
+QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
 {
 	QString Path = QApplication::applicationDirPath() + "/Icons/" + Name + ".png";
 	if(QFile::exists(Path))
 		return QIcon(Path);
-	return QIcon(":/Actions/" + Name + ".png");
+	return QIcon((bAction ? ":/Actions/" : ":/") + Name + ".png");
 }
 
 void CSandMan::CreateMenus()
@@ -423,7 +421,7 @@ void CSandMan::CreateMenus()
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(QIcon(":/IconFull.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(GetIcon("IconFull", false), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateToolBar()
@@ -535,7 +533,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
 {
-	EBoxColors color = eYelow;
+	EBoxColors color = eYellow;
 	switch (boxType) {
 	case CSandBoxPlus::eHardened:	color = eOrang; break;
 	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
@@ -649,6 +647,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		return;
 
 	bool bForceProcessDisabled = false;
+	bool bConnected = false;
 
 	if (theAPI->IsConnected())
 	{
@@ -666,24 +665,23 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (!bIsMonitoring) // don't disable the view as logn as there are entries shown
 			bIsMonitoring = !theAPI->GetTrace().isEmpty();
 		m_pTraceView->setEnabled(bIsMonitoring);
-	}
 
-	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
-	{
-		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
-		m_bIconDisabled = bForceProcessDisabled;
 
-		QString IconFile;
-		if (m_bIconEmpty)
-			IconFile += ":/IconEmpty";
-		else
-			IconFile += ":/IconFull";
-		if(m_bIconDisabled)
-			IconFile += "D";
+		if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
+		{
+			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+			m_bIconDisabled = bForceProcessDisabled;
 
-		QIcon Icon;
-		Icon.addFile(IconFile + ".png");
-		m_pTrayIcon->setIcon(Icon);
+			QString IconFile;
+			if (m_bIconEmpty)
+				IconFile = "IconEmpty";
+			else
+				IconFile = "IconFull";
+			if (m_bIconDisabled)
+				IconFile += "D";
+
+			m_pTrayIcon->setIcon(GetIcon(IconFile, false));
+		}
 	}
 
 	if (!isVisible() || windowState().testFlag(Qt::WindowMinimized))
@@ -890,6 +888,9 @@ void CSandMan::OnStatusChanged()
 	}
 	this->setWindowTitle(appTitle);
 
+	m_pTrayIcon->setIcon(GetIcon(isConnected ? "IconEmpty" : "IconOff", false));
+	m_bIconEmpty = true;
+	m_bIconDisabled = false;
 
 	m_pNew->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
@@ -1664,7 +1665,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					m_pTrayBoxes->addTopLevelItem(pItem);
 				}
 
-				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount(), pBoxEx->GetType()));
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
 			}
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)

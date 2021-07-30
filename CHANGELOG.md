@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added tray icon indicating no connection to the driver if it happens
 - added option to customize the tray icon
 - added "DllSkipHook=some.dll" option to disable instalation of hooks into selected dll's
+- added localization support for Plus installer (by yfdyh000 and mpheath) [#923](https://github.com/sandboxie-plus/Sandboxie/pull/923)
 
 ### Changed
 - reworked NtClose handling for better performance and extendibility

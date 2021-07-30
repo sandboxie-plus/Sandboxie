@@ -1332,9 +1332,6 @@ NTSTATUS Secure_RtlCheckTokenMembershipEx(
         0x20, 2, 0, 0    // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
     };
 
-    typedef BOOL (*P_EqualSid)(PSID pSid1, PSID pSid2);
-    extern P_EqualSid __sys_RtlEqualSid;
-
     if (Secure_FakeAdmin && __sys_RtlEqualSid && __sys_RtlEqualSid(sidToCheck, AdministratorsSid)) {
         if (isMember) *isMember = TRUE;
         return STATUS_SUCCESS;

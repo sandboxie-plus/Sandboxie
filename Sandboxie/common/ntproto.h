@@ -680,7 +680,7 @@ typedef NTSTATUS (*P_NtAccessCheckByType) (
     PACCESS_MASK GrantedAccess,
     PNTSTATUS AccessStatus);
 
-typedef BOOL (*P_RtlEqualSid) (void * sid1, void * sid2);
+typedef BOOLEAN (*P_RtlEqualSid) (void * sid1, void * sid2);
 
 typedef NTSTATUS (*P_NtQuerySystemInformation)(
     IN SYSTEM_INFORMATION_CLASS SystemInformationClass,

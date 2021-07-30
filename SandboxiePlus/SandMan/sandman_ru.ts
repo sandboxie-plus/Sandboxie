@@ -496,25 +496,25 @@ Full path: %4</source>
     <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?<byte value="xd"/>
+        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
 Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
-        <translation>Вы хотите разрешить %1 (%2) доступ к Интернет?<byte value="xd"/>
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернет?
 Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
-        <translation>%1 может быть быстро восстановлен из %2.<byte value="xd"/>
+        <translation>%1 может быть быстро восстановлен из %2.
 Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
-        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.<byte value="xd"/>
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
 Полный путь: %4</translation>
     </message>
 </context>
@@ -1177,8 +1177,7 @@ Do you want to do the clean up?</source>
 <byte value="xd"/>
 
 Do you want to do the clean up?</source>
-        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.<byte value="xd"/>
-<byte value="xd"/>
+        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
 
 Вы хотите выполнить очистку?</translation>
     </message>

@@ -39,7 +39,7 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation>Comportamento herdado do Sandboxie</translation>
+        <translation>Comportamento Herdado do Sandboxie</translation>
     </message>
 </context>
 <context>
@@ -205,7 +205,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="13"/>
         <source>Don&apos;t alter the window title</source>
-        <translation>Não altere o título da janela</translation>
+        <translation>Não alterar título da janela</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="14"/>
@@ -249,7 +249,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="225"/>
         <source>Please enter a program path</source>
-        <translation>Insira um caminho do programa</translation>
+        <translation>Insira o caminho do programa</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="235"/>
@@ -286,7 +286,7 @@
         <location filename="Windows/OptionsGeneral.cpp" line="279"/>
         <location filename="Windows/OptionsGeneral.cpp" line="293"/>
         <source>Please enter a menu title</source>
-        <translation>Por favor insira um título de menu</translation>
+        <translation>Por favor insira o título do menu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="289"/>
@@ -335,7 +335,7 @@
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="52"/>
         <source>Block using Windows Filtering Platform</source>
-        <translation>Bloquear usando a plataforma de filtragem do Windows</translation>
+        <translation>Bloquear usando a Plataforma de Filtragem do Windows</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="53"/>
@@ -376,7 +376,7 @@
     <message>
         <location filename="Windows/OptionsStop.cpp" line="58"/>
         <source>Lingerer</source>
-        <translation>Lingerer</translation>
+        <translation>Líderes</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="58"/>
@@ -441,7 +441,7 @@
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="146"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation>Este modelo é habilitado globalmente para configura-lo usando as opções globais.</translation>
+        <translation>Este modelo está ativado globalmente para configura-lo usando as opções globais.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="178"/>
@@ -594,7 +594,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="251"/>
         <source>Recover the file to original location</source>
-        <translation>Recuperar arquivo para local original</translation>
+        <translation>Recuperar arquivo para o local original</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="254"/>
@@ -731,7 +731,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="324"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
-        <translation>Existem%1 arquivos e%2 pastas na caixa de areia, ocupando%3 do espaço em disco.</translation>
+        <translation>Existem %1 arquivos e %2 pastas na caixa de areia, ocupando %3 de espaço em disco.</translation>
     </message>
 </context>
 <context>
@@ -845,7 +845,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="357"/>
         <source>&amp;Sandbox</source>
-        <translation>&amp;Sandbox</translation>
+        <translation>&amp;Caixa</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="358"/>
@@ -940,12 +940,12 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="389"/>
         <source>Simple View</source>
-        <translation>Simples</translation>
+        <translation>Exibição Simples</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="390"/>
         <source>Advanced View</source>
-        <translation>Avançada</translation>
+        <translation>Exibição Avançada</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="394"/>
@@ -1118,7 +1118,7 @@ Você quer fazer a limpeza?</translation>
     <message>
         <location filename="SandMan.cpp" line="753"/>
         <source>Cleaned up removed templates...</source>
-        <translation>Limpei modelos removidos...</translation>
+        <translation>Limpar modelos removidos...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="804"/>
@@ -1650,7 +1650,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="448"/>
         <source>Service Model Reg</source>
-        <translation>Modelo de serviço Reg</translation>
+        <translation>Modelo de Serviço Reg</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="449"/>
@@ -1837,7 +1837,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="95"/>
         <source>Ask for UAC Elevation</source>
-        <translation>Pedir por elevação UAC</translation>
+        <translation>Solicitar Elevação UAC</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="96"/>
@@ -2008,7 +2008,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="688"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation>Você deseja encerrar todos os processos na (s) caixa (s) selecionada (s)?</translation>
+        <translation>Você deseja encerrar todos os processos na(s) caixa(s) selecionada(s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="724"/>
@@ -2406,7 +2406,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="424"/>
         <source>Access Restrictions</source>
-        <translation>Restrições de acesso</translation>
+        <translation>Restrições de Acesso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="432"/>
@@ -2472,7 +2472,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation>Você pode configurar entradas personalizadas para o menu de execução do sandbox.</translation>
+        <translation>Você pode configurar entradas personalizadas para o menu de execução da caixa de areia.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="620"/>
@@ -2622,9 +2622,9 @@ Não vou escolher: %2</translation>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>Os programas remanescentes serão encerrados automaticamente se ainda estiverem em execução após o encerramento de todos os outros processos.
+        <translation>Os programas persistentes serão encerrados automaticamente se ainda estiverem em execução após o encerramento de todos os outros processos.
 
-Se os processos do líder são definidos, todos os outros são tratados como processos remanescentes.</translation>
+Se os processos líderes forem definidos, todos os outros serão tratados como processos persistentes.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1016"/>
@@ -2674,7 +2674,7 @@ Se os processos do líder são definidos, todos os outros são tratados como pro
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1119"/>
         <source>Block internet access for all programs except those added to the list.</source>
-        <translation>Bloquear acesso à Internet para todos os programas, exceto aqueles adicionados à lista.</translation>
+        <translation>Bloquear acesso à internet para todos os programas, exceto aqueles adicionados à lista.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1155"/>
@@ -2820,7 +2820,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
         <translatorcomment>Translated close to what is written in the source</translatorcomment>
         <translation>Configurar quais processos podem acessar os recursos. Clique duas vezes em uma entrada para edita-la.
 Acesso &apos;Direto&apos; a Arquivo e Chave só se aplica aos binários de programa localizados fora da caixa de areia.
-Para acesso a arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fazê-lo se aplicar a todos os programas.</translation>
+Para acessar arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fazê-lo se aplicar a todos os programas.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1570"/>
@@ -3413,7 +3413,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="192"/>
         <source>Hotkey for terminating all boxed processes:</source>
-        <translation type="unfinished">Tecla de atalho para terminar todos os processos da caixa:</translation>
+        <translation>Tecla de atalho para terminar todos os processos da caixa:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
@@ -3604,7 +3604,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="671"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished">Mantenha o Sandboxie atualizado com as versões masi recentes do Windows e compatíveis com navegadores web modernos é um esforço sem fim. Por favor, considere apoiar este trabalho com uma doação.&lt;br /&gt;Você pode apoiar o desenvolvimento com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;Doação do PayPal&lt;/a&gt;, Trabalha também com cartões de crédito.&lt;br /&gt;Você também pode fornecer suporte contínuo com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Assinatura do Patreon&lt;/a&gt;.</translation>
+        <translation>Mantenha o Sandboxie atualizado com as versões masi recentes do Windows e compatíveis com navegadores web modernos é um esforço sem fim. Por favor, considere apoiar este trabalho com uma doação.&lt;br /&gt;Você pode apoiar o desenvolvimento com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;Doação do PayPal&lt;/a&gt;, Trabalha também com cartões de crédito.&lt;br /&gt;Você também pode fornecer suporte contínuo com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Assinatura do Patreon&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -3618,7 +3618,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>
         <source>Selected Snapshot Details</source>
-        <translation>Detalhes de instantâneo selecionados</translation>
+        <translation>Detalhes do Instantâneo Selecionado</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="66"/>

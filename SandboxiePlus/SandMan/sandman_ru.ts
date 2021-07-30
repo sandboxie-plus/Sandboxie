@@ -1182,7 +1182,7 @@ Do you want to do the clean up?</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Группа песочницы</translation>
     </message>
     <message>

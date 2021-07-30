@@ -2,23 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+
 ## [0.9.1 / 5.51.1] - 2021-07-??
 
 ### Added
 - added tray icon indicating no connection to the driver if it happens
 - added option to customize the tray icon
-- added "DllSkipHook=some.dll" option to disable instalation of hooks into selected dll's
+- added "DllSkipHook=some.dll" option to disable installation of hooks into selected DLLs
 - added localization support for Plus installer (by yfdyh000 and mpheath) [#923](https://github.com/sandboxie-plus/Sandboxie/pull/923)
 
 ### Changed
 - reworked NtClose handling for better performance and extendibility
 
 ### Fixed
-- fixed issue with fake admin and some nsi installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
-- fixed more issued with FileDispositionInformation behavioure, which resulted in bogus file deletion handling
+- fixed issue with fake admin and some NSIS installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
+- fixed more issued with FileDispositionInformation behaviour, which resulted in bogus file deletion handling
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot
-- fixed issue with sys tray box options not being available just after boot
+- fixed issue with tray sandbox options not being available just after boot
 
 
 
@@ -27,12 +29,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme
 -- to enable this support, add 'NetworkEnableWFP=y' to the global section and reboot or reload the driver
--- to use WFP for a specified sandbox, add 'AllowNetworkAccess=n' to said box
--- you can exempt certain processes from blocking by using 'AllowNetworkAccess=program.exe,y'
+-- to use WFP for a specific sandbox, add 'AllowNetworkAccess=n'
+-- you can allow certain processes by using 'AllowNetworkAccess=program.exe,y'
 -- you can also enable this policy globally by adding 'AllowNetworkAccess=n' to the global section
--- in this case you can exempt entire boxes by adding 'AllowNetworkAccess=y' to said boxes
--- specifying 'AllowNetworkAccess=program.exe,n' will block the access only for the named process
--- Note: WFP is less absolute than the old approach, using WFP will filter only TCP/UDP communication
+-- in this case you can exempt entire sandboxes by adding 'AllowNetworkAccess=y' to specific boxes
+ -- you can block certain processes by using 'AllowNetworkAccess=program.exe,n'
+ -- Note: WFP is less absolute than the old approach, using WFP will filter only TCP/UDP communication
 --	restricted boxed processes will still be able to resolve domain names using the system service
 --  however, they will not be able to send or receive data packets directly
 -- the advantages of WFP is that filter rules can be implemented by restricting communication only to specified addresses or selected ports using "NetworkAccess=..."
@@ -47,7 +49,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: this capability is used by TaskExplorer to allow inspecting sandbox-internal tokens
 -- Note: a process must have administrative privileges to be able to use this API
 - added a UI option to switch "MsiInstallerExemptions=y" on and off
--- just in case, if a future Windows build breaks something in the systemless mode
+-- just in case a future Windows build breaks something in the systemless mode
 - added sample code for ObRegisterCallbacks to the driver
 - added new debug options "DisableFileFilter=y" and "DisableKeyFilter=y" that allow to disable file and registry filtering
 -- Note: these options are for testing only and disable core parts of the sandbox isolation
@@ -111,6 +113,8 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed issue with boxes that had auto-delete activated introduced in the previous build [#986](https://github.com/sandboxie-plus/Sandboxie/issues/986)
+
+
 
 ## [0.8.7 / 5.50.7] - 2021-07-10
 
@@ -275,6 +279,7 @@ Fixed issue with Windows 7
 - workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process [#547](https://github.com/sandboxie-plus/Sandboxie/issues/547) [#310](https://github.com/sandboxie-plus/Sandboxie/issues/310) [#215](https://github.com/sandboxie-plus/Sandboxie/issues/215)
 - fixed issue with Software Compatibility tab that doesn't always show template names correctly [#774](https://github.com/sandboxie-plus/Sandboxie/issues/774)
 
+ 
 
 ## [0.7.4 / 5.49.7] - 2021-04-11
 
@@ -299,6 +304,7 @@ Fixed issue with Windows 7
 - fixed broken paths in The Bat! template (by isaak654) [#756](https://github.com/sandboxie-plus/Sandboxie/pull/756)
 - fixed issue about media players that attempt to write unneeded media files inside the box (by Dyras) [#743](https://github.com/sandboxie-plus/Sandboxie/pull/743) [#536](https://github.com/sandboxie-plus/Sandboxie/issues/536)
 
+ 
 
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
@@ -847,6 +853,7 @@ Fixed issue with Windows 7
 - fixed issue with internet access restriction options [#177](https://github.com/sandboxie-plus/Sandboxie/issues/177) [#185](https://github.com/sandboxie-plus/Sandboxie/issues/185)
 - fixed issue deleting sandbox when located on a drive directly [#139](https://github.com/sandboxie-plus/Sandboxie/issues/139)
 
+ 
 
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
@@ -859,6 +866,7 @@ Fixed issue with Windows 7
 - fixed Chrome 86+ compatibility bug with Chrome's own sandbox [#149](https://github.com/sandboxie-plus/Sandboxie/issues/149)
 
 
+ 
 ## [0.4.1 / 5.43.5] - 2020-09-12
 
 ### Added

@@ -1,24 +1,20 @@
-# Changelog
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
-
 ## [0.9.1 / 5.51.1] - 2021-07-??
 
 ### Added
 - added tray icon indicating no connection to the driver if it happens
 - added option to customize the tray icon
-- added "DllSkipHook=some.dll" option to disable instalation of hooks into selected dll's
+- added "DllSkipHook=some.dll" option to disable installation of hooks into selected DLLs
 - added localization support for Plus installer (by yfdyh000 and mpheath) [#923](https://github.com/sandboxie-plus/Sandboxie/pull/923)
 
 ### Changed
 - reworked NtClose handling for better performance and extendibility
 
 ### Fixed
-- fixed issue with fake admin and some nsi installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
-- fixed more issued with FileDispositionInformation behavioure, which resulted in bogus file deletion handling
+- fixed issue with fake admin and some MSI installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
+- fixed more issued with FileDispositionInformation behaviour, which resulted in bogus file deletion handling
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot
-- fixed issue with sys tray box options not being available just after boot
+- fixed issue with tray sandbox options not being available just after boot
 
 
 
@@ -27,7 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme
 -- to enable this support, add 'NetworkEnableWFP=y' to the global section and reboot or reload the driver
--- to use WFP for a specified sandbox, add 'AllowNetworkAccess=n' to said box
+-- to use WFP for a specific sandbox, add 'AllowNetworkAccess=n'
 -- you can exempt certain processes from blocking by using 'AllowNetworkAccess=program.exe,y'
 -- you can also enable this policy globally by adding 'AllowNetworkAccess=n' to the global section
 -- in this case you can exempt entire boxes by adding 'AllowNetworkAccess=y' to said boxes
@@ -59,7 +55,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - added missing hook for ConnectEx function
-
 
 
 ## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 2

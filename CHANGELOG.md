@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed more issued with FileDispositionInformation behavioure, which resulted in bogus file deletion handling
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot
+- fixed issue with sys tray box options not being available just after boot
 
 
 

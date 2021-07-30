@@ -967,6 +967,9 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 
 void CSbieView::SelectBox(const QString& Name)
 {
+	if(m_pSbieModel->Count() == 0)
+		Refresh();
+
 	QModelIndex Index = m_pSbieModel->FindIndex(Name);
 	QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
 

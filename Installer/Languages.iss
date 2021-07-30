@@ -88,3 +88,15 @@ portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório p
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
 portuguese.ClassicFound=Instalação Classic Sandboxie detectada, deve ser desinstalada primeiro, você quer desinstalá-la agora?
 portuguese.RunSandboxedMenu=Rodar &Caixa de Areia
+
+; Russian
+russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
+russian.CustomPageLabel1=Выберите тип установки
+russian.CustomPageLabel2=Как следует установить
+russian.CustomPageLabel3=Выберите режим установки
+russian.CustomPageInstallMode=Установить {#MyAppName} на этом компьютере
+russian.CustomPageUpgradeMode=Обновить существующую установку {#MyAppName}
+russian.CustomPagePortableMode=Извлечь все файлы в каталог для портативного использования
+russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
+russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
+russian.RunSandboxedMenu=Запустить в песочнице (&S)

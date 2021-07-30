@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked NtClose handling for better performance and extendibility
 
 ### Fixed
-- fixed issue with fake admin and some MSI installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
+- fixed issue with fake admin and some NSIS installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
 - fixed more issued with FileDispositionInformation behaviour, which resulted in bogus file deletion handling
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot

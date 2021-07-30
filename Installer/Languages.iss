@@ -76,3 +76,15 @@ Italian.CustomPagePortableMode=Estrai tutti i file in una directory per uso port
 Italian.RequiresWin7OrLater=Sandboxie-Plus richiede Windows 7 o superiore.
 Italian.ClassicFound=È stata rilevata una installazione di Sandboxie Classic che potrebbe causare incompatibilità. Rimuoverla ora?
 Italian.RunSandboxedMenu=Avvia nell'&area virtuale
+
+; Russian
+russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
+russian.CustomPageLabel1=Выберите тип установки
+russian.CustomPageLabel2=Как следует установить
+russian.CustomPageLabel3=Выберите режим установки
+russian.CustomPageInstallMode=Установить {#MyAppName} на этом компьютере
+russian.CustomPageUpgradeMode=Обновить существующую установку {#MyAppName}
+russian.CustomPagePortableMode=Извлечь все файлы в каталог для портативного использования
+russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
+russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
+russian.RunSandboxedMenu=Запустить в песочнице (&S)

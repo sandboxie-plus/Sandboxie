@@ -24,11 +24,11 @@
 - added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme
 -- to enable this support, add 'NetworkEnableWFP=y' to the global section and reboot or reload the driver
 -- to use WFP for a specific sandbox, add 'AllowNetworkAccess=n'
--- you can exempt certain processes from blocking by using 'AllowNetworkAccess=program.exe,y'
+-- you can allow certain processes by using 'AllowNetworkAccess=program.exe,y'
 -- you can also enable this policy globally by adding 'AllowNetworkAccess=n' to the global section
--- in this case you can exempt entire boxes by adding 'AllowNetworkAccess=y' to said boxes
--- specifying 'AllowNetworkAccess=program.exe,n' will block the access only for the named process
--- Note: WFP is less absolute than the old approach, using WFP will filter only TCP/UDP communication
+-- in this case you can exempt entire sandboxes by adding 'AllowNetworkAccess=y' to specific boxes
+ -- you can block certain processes by using 'AllowNetworkAccess=program.exe,n'
+ -- Note: WFP is less absolute than the old approach, using WFP will filter only TCP/UDP communication
 --	restricted boxed processes will still be able to resolve domain names using the system service
 --  however, they will not be able to send or receive data packets directly
 -- the advantages of WFP is that filter rules can be implemented by restricting communication only to specified addresses or selected ports using "NetworkAccess=..."
@@ -43,7 +43,7 @@
 -- Note: this capability is used by TaskExplorer to allow inspecting sandbox-internal tokens
 -- Note: a process must have administrative privileges to be able to use this API
 - added a UI option to switch "MsiInstallerExemptions=y" on and off
--- just in case, if a future Windows build breaks something in the systemless mode
+-- just in case a future Windows build breaks something in the systemless mode
 - added sample code for ObRegisterCallbacks to the driver
 - added new debug options "DisableFileFilter=y" and "DisableKeyFilter=y" that allow to disable file and registry filtering
 -- Note: these options are for testing only and disable core parts of the sandbox isolation

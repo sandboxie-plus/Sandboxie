@@ -162,8 +162,11 @@ static map_node_t* map_new_node(map_base_t* m, const void* _key, void* vdata, si
     memcpy(node->key, key, ksize);
     node->next = NULL;
     if (vsize) {
-        node->value = vsize ? node->key + voffset : NULL;
-        memcpy(node->value, vdata, vsize);
+        node->value = node->key + voffset;
+        if (vdata) 
+            memcpy(node->value, vdata, vsize);
+        else
+            memset(node->value, 0, vsize);
     }
     else
         node->value = vdata;
@@ -171,7 +174,7 @@ static map_node_t* map_new_node(map_base_t* m, const void* _key, void* vdata, si
 }
 
 
-BOOLEAN map_insert(map_base_t* m, const void* key, void* vdata, size_t vsize)
+void* map_insert(map_base_t* m, const void* key, void* vdata, size_t vsize)
 {
     // create a new node and fill inn all the blanks
     map_node_t* node = map_new_node(m, key, vdata, vsize);
@@ -192,10 +195,10 @@ BOOLEAN map_insert(map_base_t* m, const void* key, void* vdata, size_t vsize)
     map_add_node(m, node);
     m->nnodes++;
 
-    return TRUE;
+    return node->value;
 fail:
     if (node) m->func_free(m->mem_pool, node);
-    return FALSE;
+    return NULL;
 }
 
 
@@ -247,7 +250,7 @@ void* map_remove(map_base_t* m, const void* key)
         m->func_free(m->mem_pool, node);
         m->nnodes--;
     }
-    return value;
+    return value; // WARNING: this valus is only pointer when the map was storring an externaly allocated value!!!
 }
 
 

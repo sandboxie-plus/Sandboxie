@@ -1448,8 +1448,8 @@ Do you want to do the clean up?</source>
 <context>
     <name>CSbieModel</name>
     <message>
-        <location filename="Models/SbieModel.cpp" line="135"/>
-        <source>Box Groupe</source>
+        <location filename="Models/SbieModel.cpp" line="133"/>
+        <source>Box Group</source>
         <translation>沙盒组</translation>
     </message>
     <message>

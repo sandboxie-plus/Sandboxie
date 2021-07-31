@@ -514,7 +514,7 @@ BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WC
 //---------------------------------------------------------------------------
 
 
-SBIEDLL_EXPORT BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size)
+BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size)
 {
     WCHAR buf[CONF_LINE_LEN];
     ULONG index = 0;
@@ -568,7 +568,7 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 //---------------------------------------------------------------------------
 
 
-/*SBIEDLL_EXPORT BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+/*BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
 {
     WCHAR buf[32];
     if (SbieDll_GetStringForStringList(string, boxname, setting, buf, sizeof(buf)))

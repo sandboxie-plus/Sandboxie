@@ -1514,7 +1514,7 @@ Nee zal %2 kiezen</translation>
     <name>CSbieModel</name>
     <message>
         <location filename="Models/SbieModel.cpp" line="133"/>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Box-groep</translation>
     </message>
     <message>

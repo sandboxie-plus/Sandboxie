@@ -34,6 +34,10 @@ extern const ULONG tzuk;
 #define POOL_TAG tzuk
 #include "common/pool.c"
 
+/* Map */
+
+#include "common/map.c"
+
 /* Stream */
 
 #include "common/stream.c"

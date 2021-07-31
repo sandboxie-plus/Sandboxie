@@ -149,12 +149,12 @@ _FX BOOLEAN Gui_InitClass(void)
     Gui_BoxPrefixA[len - 1] = '\0';
 
 	// NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE)) {
-
-		Gui_OpenAllWinClasses = TRUE;
-		Gui_RenameClasses = FALSE;
-	}
-	else
+	//if (SbieApi_QueryConfBool(NULL, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE)) {
+    //
+	//	Gui_OpenAllWinClasses = TRUE;
+	//	Gui_RenameClasses = FALSE;
+	//}
+	//else
 	// NoSbieDesk END
 
     //

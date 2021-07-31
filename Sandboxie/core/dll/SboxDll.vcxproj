@@ -395,6 +395,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\apps\com\common.h" />
+    <ClInclude Include="..\..\common\ntproto.h" />
     <ClInclude Include="..\..\common\str_util.h" />
     <ClInclude Include="..\..\common\my_wsa.h" />
     <ClInclude Include="..\..\common\list.h" />

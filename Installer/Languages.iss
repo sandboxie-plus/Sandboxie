@@ -1,4 +1,4 @@
-﻿; English is default language and can be translated to any
+; English is default language and can be translated to any
 ; of the languages listed in the languages section.
 ; The translations can be added to the CustomMessages section.
 ; The content of this script will be included by Sandboxie-Plus.iss,
@@ -103,5 +103,6 @@ russian.CustomPageUpgradeMode=Обновить существующую уста
 russian.CustomPagePortableMode=Извлечь все файлы в каталог для портативного использования
 russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
 russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
+russian.RunSandboxedMenu=Запустить в песочнице (&S)
 russian.RunSandboxedMenu=Запустить в песочнице (&S)
 ;russian.UninstallRemoveFiles=

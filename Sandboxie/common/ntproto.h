@@ -653,7 +653,7 @@ typedef NTSTATUS (*P_NtAccessCheck)(
   OUT PACCESS_MASK        GrantedAccess,
   OUT PNTSTATUS           AccessStatus );
 
-typedef NTSTATUS  (*P_NtAccessCheckByTypeResultList) (
+typedef NTSTATUS (*P_NtAccessCheckByTypeResultList) (
     PSECURITY_DESCRIPTOR SecurityDescriptor,
     PSID PrincipalSelfSid,
     HANDLE ClientToken,
@@ -666,6 +666,21 @@ typedef NTSTATUS  (*P_NtAccessCheckByTypeResultList) (
     PACCESS_MASK    GrantedAccess,
     PNTSTATUS   AccessStatus 
     );
+
+typedef NTSTATUS (*P_NtAccessCheckByType) (
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID PrincipalSelfSid,
+    HANDLE ClientToken,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_TYPE_LIST ObjectTypeList,
+    ULONG ObjectTypeListLength,
+    PGENERIC_MAPPING GenericMapping,
+    PPRIVILEGE_SET PrivilegeSet,
+    PULONG PrivilegeSetLength,
+    PACCESS_MASK GrantedAccess,
+    PNTSTATUS AccessStatus);
+
+typedef BOOLEAN (*P_RtlEqualSid) (void * sid1, void * sid2);
 
 typedef NTSTATUS (*P_NtQuerySystemInformation)(
     IN SYSTEM_INFORMATION_CLASS SystemInformationClass,

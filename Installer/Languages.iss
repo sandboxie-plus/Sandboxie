@@ -1,4 +1,4 @@
-; English is default language and can be translated to any
+﻿; English is default language and can be translated to any
 ; of the languages listed in the languages section.
 ; The translations can be added to the CustomMessages section.
 ; The content of this script will be included by Sandboxie-Plus.iss,

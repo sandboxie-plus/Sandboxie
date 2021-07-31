@@ -208,6 +208,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayBoxes->setRootIsDecorated(false);
 	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
 	m_pTrayBoxes->setHeaderHidden(true);
+	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
 
 	pLayout->insertSpacing(0, 1);// 32);
 

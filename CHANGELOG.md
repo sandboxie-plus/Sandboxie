@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot
 - fixed issue with tray sandbox options not being available just after boot
+- fixed issue access changed flag not being proeprly set in box options [#1065](https://github.com/sandboxie-plus/Sandboxie/issues/1065)
 
 
 

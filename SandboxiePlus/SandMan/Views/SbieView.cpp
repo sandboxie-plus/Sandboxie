@@ -140,6 +140,19 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
 
+
+	// menu for the tray
+	m_pMenu2 = new QMenu();
+	m_pMenu2->addMenu(m_pMenuRun);
+	m_pMenu2->addAction(m_pMenuEmptyBox);
+	m_pMenu2->addSeparator();
+	m_pMenu2->addAction(m_pMenuExplore);
+	m_pMenu2->addAction(m_pMenuSnapshots);
+	m_pMenu2->addAction(m_pMenuRecover);
+	m_pMenu2->addAction(m_pMenuCleanUp);
+	m_pMenu2->addSeparator();
+	m_pMenu2->addAction(m_pMenuOptions);
+
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty())
 	{
@@ -207,7 +220,7 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 	}
 }
 
-void CSbieView::OnMenu(const QPoint& Point)
+void CSbieView::UpdateMenu()
 {
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
@@ -323,7 +336,12 @@ void CSbieView::OnMenu(const QPoint& Point)
 		foreach(QAction * pAction, MenuActions)
 			pAction->setEnabled(false);
 	}
+}
 
+void CSbieView::OnMenu(const QPoint& Point)
+{
+	UpdateMenu();
+	
 	CPanelView::OnMenu(Point);
 }
 

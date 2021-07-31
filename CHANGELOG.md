@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.1 / 5.51.1] - 2021-07-??
+## [0.9.1 / 5.51.1] - 2021-07-31
 
 ### Added
 - added tray icon indicating no connection to the driver if it happens
@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked NtClose handling for better performance and extendibility
+- improved tray box menu and list
 
 ### Fixed
 - fixed issue with fake admin and some NSIS installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)

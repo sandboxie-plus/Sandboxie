@@ -210,6 +210,13 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayBoxes->setHeaderHidden(true);
 
 	pLayout->insertSpacing(0, 1);// 32);
+
+	/*QFrame* vFrame = new QFrame;
+	vFrame->setFixedWidth(1);
+	vFrame->setFrameShape(QFrame::VLine);
+	vFrame->setFrameShadow(QFrame::Raised);
+	pLayout->addWidget(vFrame);*/
+	
 	pLayout->addWidget(m_pTrayBoxes);
 
     pTrayList->setDefaultWidget(pWidget);
@@ -1641,6 +1648,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 		{
 			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
+			bool bAdded = false;
+
 			QMap<QString, QTreeWidgetItem*> OldBoxes;
 			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
 			{
@@ -1663,6 +1672,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
 					pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
 					m_pTrayBoxes->addTopLevelItem(pItem);
+
+					bAdded = true;
 				}
 
 				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
@@ -1670,6 +1681,30 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)
 				delete pItem;
+
+			if (!OldBoxes.isEmpty() || bAdded) 
+			{
+				auto palette = m_pTrayBoxes->palette();
+				palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(QPalette::Window));
+				m_pTrayBoxes->setPalette(palette);
+				m_pTrayBoxes->setFrameShape(QFrame::NoFrame);
+
+				//const int FrameWidth = m_pTrayBoxes->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+				int Height = 0; //m_pTrayBoxes->header()->height() + (2 * FrameWidth);
+
+				for (QTreeWidgetItemIterator AllIterator(m_pTrayBoxes, QTreeWidgetItemIterator::All); *AllIterator; ++AllIterator)
+					Height += m_pTrayBoxes->visualItemRect(*AllIterator).height();
+
+				QRect scrRect = this->screen()->availableGeometry();
+				int MaxHeight = scrRect.height() / 2;
+				if (Height > MaxHeight) {
+					Height = MaxHeight;
+					if (Height < 64)
+						Height = 64;
+				}
+
+				m_pTrayBoxes->setFixedHeight(Height);
+			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
 			break;

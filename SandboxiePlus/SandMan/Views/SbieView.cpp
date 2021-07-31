@@ -1005,7 +1005,9 @@ void CSbieView::SelectBox(const QString& Name)
 void CSbieView::PopUpMenu(const QString& Name)
 {
 	SelectBox(Name);
-	OnMenu(QCursor::pos());
+	UpdateMenu();
+	m_pMenu2->popup(QCursor::pos());
+	//OnMenu(QCursor::pos());
 }
 
 void CSbieView::ShowOptions(const QString& Name)

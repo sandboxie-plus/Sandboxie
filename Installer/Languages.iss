@@ -52,7 +52,9 @@ english.CustomPagePortableMode=Extract all files to a directory for portable use
 english.RequiresWin7OrLater=Sandboxie-Plus requires Windows 7 or later.
 english.ClassicFound=Sandboxie Classic installation detected, it must be uninstalled first, do you want to uninstall it now?
 english.RunSandboxedMenu=Run &Sandboxed
-english.UninstallRemoveFiles=Remove these files?
+english.UninstallRemoveSandboxes=Would you like to delete your configuration files and sandboxes?%n%n \
+Select YES to delete configuration files, sandboxes and the sandbox root location.%n%n \
+Select NO to keep configuration files and sandboxes.
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙盘中运行”菜单
@@ -65,7 +67,7 @@ ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
-;ChineseSimplified.UninstallRemoveFiles=
+;ChineseSimplified.UninstallRemoveSandboxes=
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
@@ -78,7 +80,7 @@ Italian.CustomPagePortableMode=Estrai tutti i file in una directory per uso port
 Italian.RequiresWin7OrLater=Sandboxie-Plus richiede Windows 7 o superiore.
 Italian.ClassicFound=È stata rilevata una installazione di Sandboxie Classic che potrebbe causare incompatibilità. Rimuoverla ora?
 Italian.RunSandboxedMenu=Avvia nell'&area virtuale
-;Italian.UninstallRemoveFiles=
+;Italian.UninstallRemoveSandboxes=
 
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
@@ -91,7 +93,7 @@ portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório p
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
 portuguese.ClassicFound=Instalação Classic Sandboxie detectada, deve ser desinstalada primeiro, você quer desinstalá-la agora?
 portuguese.RunSandboxedMenu=Rodar &Caixa de Areia
-;portuguese.UninstallRemoveFiles=
+;portuguese.UninstallRemoveSandboxes=
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
@@ -104,4 +106,4 @@ russian.CustomPagePortableMode=Извлечь все файлы в катало�
 russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
 russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
 russian.RunSandboxedMenu=Запустить в песочнице (&S)
-;russian.UninstallRemoveFiles=
+;russian.UninstallRemoveSandboxes=

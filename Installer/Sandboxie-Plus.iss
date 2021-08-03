@@ -375,38 +375,45 @@ begin
   Result := True;
 end;
 
-procedure PostUninstall_Cleanup();
+procedure UninstallCleanup();
 var
   i: Integer;
-  Text: String;
+  ExecRet: Integer;
   Paths: TStringList;
+  ShowMsgbox: Boolean;
 begin
+
+  // require Sandman.exe to continue
+  if not FileExists(ExpandConstant('{app}\Sandman.exe')) then
+    exit;
+
+  // make a list
   Paths := TStringList.Create;
 
-  // file paths to remove
+  // append file paths to the list for removal
   Paths.Append('{localappdata}\{#MyAppName}\{#MyAppName}.ini');
   Paths.Append('{win}\Sandboxie.ini');
 
-  // expand and append paths to make text for the msgbox
+  // expand paths and detect if any file exist
   for i := 0 to Paths.Count - 1 do begin
     Paths[i] := ExpandConstant(Paths[i]);
 
     if FileExists(Paths[i]) then
-      Text := Text + '"' + Paths[i] + '"' + #13#10#13#10;
+      ShowMsgbox := true;
   end;
 
-  Text := Trim(Text);
+  // delete the config files and the sandboxes
+  if ShowMsgbox then begin
+    if MsgBox(CustomMessage('UninstallRemoveSandboxes'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then begin
+      Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
 
-  // delete the files
-  if Text <> '' then begin
-    Text := CustomMessage('UninstallRemoveFiles') + #13#10#13#10 + Text;
-
-    if MsgBox(Text, mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
       for i := 0 to Paths.Count - 1 do
         if FileExists(Paths[i]) then
           DeleteFile(Paths[i]);
+    end;
   end;
 
+  // release the list
   Paths.Free;
 end;
 
@@ -442,6 +449,6 @@ begin
 
   // user to confirm extra files to remove
   if not UninstallSilent then
-    PostUninstall_Cleanup();
+    UninstallCleanup();
 end;
 

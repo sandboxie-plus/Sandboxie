@@ -381,6 +381,7 @@ var
   ExecRet: Integer;
   Paths: TStringList;
   ShowMsgbox: Boolean;
+  TaskRet: Integer;
 begin
 
   // require Sandman.exe to continue
@@ -404,9 +405,22 @@ begin
 
   // delete the config files and the sandboxes
   if ShowMsgbox then begin
-    if MsgBox(CustomMessage('UninstallRemoveSandboxes'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then begin
-      Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+    case TaskDialogMsgBox(CustomMessage('UninstallTaskLabel1'),
+                          CustomMessage('UninstallTaskLabel2'),
+                          mbConfirmation,
+                          MB_ABORTRETRYIGNORE, [CustomMessage('UninstallTaskLabel3'),
+                                                CustomMessage('UninstallTaskLabel4'),
+                                                CustomMessage('UninstallTaskLabel5')], 0) of
+      IDRETRY: TaskRet := 1;
+      IDIGNORE: TaskRet := 2;
+      IDABORT: TaskRet := 3;
+    end;
 
+    if TaskRet > 2 then begin
+      Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+    end;
+
+    if TaskRet > 1 then begin
       for i := 0 to Paths.Count - 1 do
         if FileExists(Paths[i]) then
           DeleteFile(Paths[i]);
@@ -426,6 +440,11 @@ begin
   if (CurUninstallStep <> usUninstall) then
     exit;
 
+  // user to confirm extra files to remove
+  if not UninstallSilent then
+    UninstallCleanup();
+
+  // shutdown service, driver and processes
   if (ShutdownSbie() = False) then
   begin
     Abort();
@@ -446,9 +465,5 @@ begin
   // delete other left overs
   DeleteFile(ExpandConstant('{app}\SbieDrv.sys.w10'));
   DeleteFile(ExpandConstant('{app}\SbieDrv.sys.rc4'));
-
-  // user to confirm extra files to remove
-  if not UninstallSilent then
-    UninstallCleanup();
 end;
 

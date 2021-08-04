@@ -394,6 +394,8 @@ begin
   // append file paths to the list for removal
   Paths.Append('{localappdata}\{#MyAppName}\{#MyAppName}.ini');
   Paths.Append('{win}\Sandboxie.ini');
+  Paths.Append('{app}\{#MyAppName}.ini');
+  Paths.Append('{app}\Sandboxie.ini');
 
   // expand paths and detect if any file exist
   for i := 0 to Paths.Count - 1 do begin

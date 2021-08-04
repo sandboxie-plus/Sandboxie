@@ -55,7 +55,7 @@ english.RunSandboxedMenu=Run &Sandboxed
 english.UninstallTaskLabel1=Select Uninstall Type
 english.UninstallTaskLabel2=How would you like to uninstall Sandboxie-Plus?
 english.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the most recommended option if you plan to reinstall Sandboxie-Plus while keeping your configuration files and sandboxes.
-english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the configuration files in Sandboxie.ini and Sandboxie-Plus.ini while keeping the sandboxes unchanged.
+english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged.
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 
 ; Chinese Simplified

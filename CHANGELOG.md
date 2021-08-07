@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.9.2 / 5.51.2] - 2021-08-07
+
+### Added
+- added ability to reconfigure teh driver, allowing to enable/disable WFP and otehr features without a reload/reboot
+
+### Fixed
+- fixed issue with process start handling introduced in 5.51.0 [#1063](https://github.com/sandboxie-plus/Sandboxie/issues/1063)
+- fixed issue with quick recovery introduced in 5.51.0
+- fixed incompatybility with CET Hardware-enforced Stack Protection on intel 11th gen and AMD 5xxxX cpu's [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
+
+### removed
+- commented out all windows xp specific support code
+
+
 
 ## [0.9.1 / 5.51.1] - 2021-07-31
 

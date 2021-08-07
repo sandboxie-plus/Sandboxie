@@ -6,22 +6,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.2 / 5.51.2] - 2021-08-07
 
 ### Added
-- added ability to reconfigure teh driver, allowing to enable/disable WFP and otehr features without a reload/reboot
+- added ability to reconfigure the driver, which allows enabling/disabling WFP and other features without a reload/reboot
 
 ### Fixed
 - fixed issue with process start handling introduced in 5.51.0 [#1063](https://github.com/sandboxie-plus/Sandboxie/issues/1063)
 - fixed issue with quick recovery introduced in 5.51.0
-- fixed incompatybility with CET Hardware-enforced Stack Protection on intel 11th gen and AMD 5xxxX cpu's [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
+- fixed incompatibility with CET Hardware-enforced Stack Protection on Intel 11th gen and AMD Ryzen 5XXX CPUs [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
 
 ### removed
-- commented out all windows xp specific support code
+- commented out all Windows XP-specific support code
 
 
 
 ## [0.9.1 / 5.51.1] - 2021-07-31
 
 ### Added
-- added tray icon indicating no connection to the driver if it happens
+- added tray icon indicating broken connection to the driver if it happens
 - added option to customize the tray icon
 - added "DllSkipHook=some.dll" option to disable installation of hooks into selected DLLs
 - added localization support for Plus installer (by yfdyh000 and mpheath) [#923](https://github.com/sandboxie-plus/Sandboxie/pull/923)
@@ -36,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot
 - fixed issue with tray sandbox options not being available just after boot
-- fixed issue access changed flag not being proeprly set in box options [#1065](https://github.com/sandboxie-plus/Sandboxie/issues/1065)
+- fixed issue access changed flag not being properly set in box options [#1065](https://github.com/sandboxie-plus/Sandboxie/issues/1065)
 
 
 

@@ -35,7 +35,6 @@ void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* opt
 }
 
 
-
 int CSettingsWindow__Chk2Int(Qt::CheckState state)
 {
 	switch (state) {
@@ -55,6 +54,9 @@ Qt::CheckState CSettingsWindow__Int2Chk(int state)
 	case 2: return Qt::PartiallyChecked;
 	}
 }
+
+QByteArray g_Certificate;
+quint32 g_FeatureFlags = 0;
 
 CSettingsWindow::CSettingsWindow(QWidget *parent)
 	: QDialog(parent)
@@ -79,10 +81,12 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
-	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Ampel"));
-	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
+	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Ampel"));
+	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Lock"));
+	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Support"));
 
 
 	ui.tabs->setCurrentIndex(0);
@@ -103,6 +107,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.chkShowTray, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
 	//connect(ui.chkUseCycles, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
 
+	m_FeaturesChanged = false;
+	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	
 	m_WarnProgsChanged = false;
 
@@ -130,6 +136,10 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnSupport(const QString&)));
+	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnSupport(const QString&)));
+
+	m_CertChanged = false;
+	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
 
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
@@ -232,6 +242,8 @@ void CSettingsWindow::LoadSettings()
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
 		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyStartRunAccessDenied", true));
 		
+		ui.treeWarnProgs->clear();
+
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("AlertProcess", false))
 			AddWarnEntry(Value, 1);
 		
@@ -265,6 +277,17 @@ void CSettingsWindow::LoadSettings()
 	else
 		ui.chkAutoRoot->setVisible(false);
 
+	if (!g_Certificate.isEmpty()) 
+	{
+		ui.txtCertificate->setPlainText(g_Certificate);
+		//ui.lblSupport->setVisible(false);
+
+		QPalette palette = QApplication::palette();
+		if (theGUI->m_DarkTheme)
+			palette.setColor(QPalette::Text, Qt::black);
+		palette.setColor(QPalette::Base, QColor(192, 255, 192));
+		ui.txtCertificate->setPalette(palette);
+	}
 
 	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
 	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
@@ -333,6 +356,11 @@ void CSettingsWindow::SaveSettings()
 
 		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
 
+		if (m_FeaturesChanged) {
+			m_FeaturesChanged = false;
+			theAPI->ReloadConfig(true);
+		}
+
 		theAPI->GetGlobalSettings()->SetBool("EditAdminOnly", ui.chkAdminOnly->isChecked());
 
 		bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
@@ -396,6 +424,62 @@ void CSettingsWindow::SaveSettings()
 		theConf->SetValue("Options/PortableRootDir", ui.chkAutoRoot->checkState() == Qt::Checked ? 1 : 0);
 
 	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
+
+	
+	if (m_CertChanged)
+	{
+		QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
+		if (g_Certificate != Certificate) {
+			
+			QPalette palette = QApplication::palette();
+
+			QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+			if (!Certificate.isEmpty()) {
+				QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+				QFile CertFile(TempPath);
+				if (CertFile.open(QFile::WriteOnly)) {
+					CertFile.write(Certificate);
+					CertFile.close();
+				}
+
+				WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+			}
+			else if(!g_Certificate.isEmpty()){
+				WindowsMoveFile(CertPath.replace("/", "\\"), "");
+			}
+
+			if (theGUI->m_DarkTheme)
+				palette.setColor(QPalette::Text, Qt::black);
+
+			if (Certificate.isEmpty())
+			{
+				palette.setColor(QPalette::Base, Qt::white);
+			}
+			else if (!theAPI->ReloadCert().IsError())
+			{
+				g_FeatureFlags = theAPI->GetFeatureFlags();
+
+				QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the developement of Sandboxie-Plus."));
+
+				palette.setColor(QPalette::Base, QColor(192, 255, 192));
+			}
+			else
+			{
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("This support certificate is not valid."));
+
+				palette.setColor(QPalette::Base, QColor(255, 192, 192));
+				Certificate.clear();
+			}
+
+			g_Certificate = Certificate;
+
+			ui.txtCertificate->setPalette(palette);
+		}
+
+		m_CertChanged = false;
+	}
+
+	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
 
 	emit OptionsChanged();
 }
@@ -567,4 +651,48 @@ void CSettingsWindow::OnDelCompat()
 
 	pItem->setCheckState(0, Qt::Unchecked);
 	m_CompatChanged = true;
+}
+
+void CSettingsWindow::CertChanged() 
+{ 
+	m_CertChanged = true; 
+	QPalette palette = QApplication::palette();
+	ui.txtCertificate->setPalette(palette);
+}
+
+void CSettingsWindow::LoadCertificate()
+{
+	QString CertPath;
+	if (theAPI->IsConnected())
+		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+	else
+		CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
+		
+	QFile CertFile(CertPath);
+	if (CertFile.open(QFile::ReadOnly)) {
+		g_Certificate = CertFile.readAll();
+		CertFile.close();
+	}
+}
+
+#include <windows.h>
+#include <shellapi.h>
+
+void WindowsMoveFile(const QString& From, const QString& To)
+{
+	wstring from = From.toStdWString();
+	from.append(L"\0", 1);
+	wstring to = To.toStdWString();
+	to.append(L"\0", 1);
+
+	SHFILEOPSTRUCT SHFileOp;
+    memset(&SHFileOp, 0, sizeof(SHFILEOPSTRUCT));
+    SHFileOp.hwnd = NULL;
+    SHFileOp.wFunc = To.isEmpty() ? FO_DELETE : FO_MOVE;
+	SHFileOp.pFrom = from.c_str();
+    SHFileOp.pTo = to.c_str();
+    SHFileOp.fFlags = NULL;    
+
+    //The Copying Function
+    SHFileOperation(&SHFileOp);
 }

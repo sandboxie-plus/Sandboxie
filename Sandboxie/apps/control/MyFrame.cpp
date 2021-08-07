@@ -87,6 +87,7 @@ static const WCHAR *_HideWindowNotify           = L"HideWindowNotify";
        const WCHAR *_ShortcutNotify             = L"ShortcutNotify";
        const WCHAR *_UpdateCheckNotify          = L"UpdateCheckNotify";
 static const WCHAR *_ShouldDeleteNotify         = L"ShouldDeleteNotify";
+static const WCHAR *_ResMonNotify               = L"ResMonNotify";
 
 	   const WCHAR *_NextUpdateCheck            = L"NextUpdateCheck";
 
@@ -143,6 +144,7 @@ BEGIN_MESSAGE_MAP(CMyFrame, CFrameWnd)
     ON_COMMAND(ID_HELP_TUTORIAL,                OnCmdHelpTutorial)
     ON_COMMAND(ID_HELP_FORUM,                   OnCmdHelpForum)
 	ON_COMMAND(ID_HELP_UPDATE,                  OnCmdHelpUpdate)
+    ON_COMMAND(ID_HELP_UPGRADE,                 OnCmdHelpUpgrade)
     ON_COMMAND(ID_HELP_ABOUT,                   OnCmdHelpAbout)
 
 	//ON_MESSAGE(WM_UPDATERESULT,					OnUpdateResult)
@@ -920,7 +922,7 @@ UINT AFX_CDECL CMyFrame::OnCmdConfEditThread(LPVOID parm)
 
 void CMyFrame::OnCmdConfReload()
 {
-    if (SbieApi_ReloadConf(-1) == 0) {
+    if (SbieApi_ReloadConf(-1, 0) == 0) {
 
         CBoxes::GetInstance().ReloadBoxes();
         CBoxes::GetInstance().RefreshProcesses();
@@ -1027,6 +1029,16 @@ void CMyFrame::OnCmdHelpUpdate()
 }
 
 //---------------------------------------------------------------------------
+// OnCmdHelpUpgrade
+//---------------------------------------------------------------------------
+
+
+void CMyFrame::OnCmdHelpUpgrade()
+{
+	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-plus&tip=upgrade");
+}
+
+//---------------------------------------------------------------------------
 // OnCmdHelpAbout
 //---------------------------------------------------------------------------
 
@@ -1090,6 +1102,22 @@ void CMyFrame::OnCmdResourceMonitor()
 {
     if (m_mondlg)
         return;
+
+    CUserSettings &settings = CUserSettings::GetInstance();
+    BOOL tip;
+    settings.GetBool(_ResMonNotify, tip, TRUE);
+    if (tip) {
+        int rv = CMyApp::MsgCheckBox(this, MSG_6001, 0, MB_YESNO);
+        if (rv < 0) {
+            rv = -rv;
+            settings.SetBool(_ResMonNotify, FALSE);
+        }
+        if (rv == IDYES) {
+            CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-plus&tip=res_mon");
+            return;
+        }
+    }
+
     m_mondlg = new CMonitorDialog(this);
 
     m_mondlg->DoModal();

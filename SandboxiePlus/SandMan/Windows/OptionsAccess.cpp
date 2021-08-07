@@ -214,6 +214,8 @@ void COptionsWindow::OnBrowseFile()
 		return;
 
 	AddAccessEntry(eFile, eDirect, "", Value);
+
+	m_AccessChanged = true;
 }
 
 void COptionsWindow::OnBrowseFolder()
@@ -223,6 +225,8 @@ void COptionsWindow::OnBrowseFolder()
 		return;
 
 	AddAccessEntry(eFile, eDirect, "", Value);
+
+	m_AccessChanged = true;
 }
 
 void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, const QString& Template)

@@ -228,7 +228,7 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
     if (status != STATUS_SUCCESS)
         return status;
 
-    if (!proc || proc->bHostInject)
+    if (!proc || proc->bHostInject || proc->disable_key_flt)
         return STATUS_SUCCESS;
 
     //

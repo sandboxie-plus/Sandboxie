@@ -122,7 +122,7 @@ void CSandBoxPlus::UpdateDetails()
 
 	m_bDropRights = GetBool("DropAdminRights", false);
 
-	if (CheckOpenToken() || GetBool("StripSystemPrivileges", false))
+	if (CheckUnsecureConfig())
 		m_iUnsecureDebugging = 1;
 	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) /*|| GetBool("RunServicesAsSystem", false)*/)
 		m_iUnsecureDebugging = 2;
@@ -174,7 +174,7 @@ QString CSandBoxPlus::GetStatusStr() const
 	return Status.join(", ");
 }
 
-bool CSandBoxPlus::CheckOpenToken() const
+bool CSandBoxPlus::CheckUnsecureConfig() const
 {
 	if (GetBool("OriginalToken", false)) return true;
 	if (GetBool("OpenToken", false)) return true;
@@ -182,6 +182,9 @@ bool CSandBoxPlus::CheckOpenToken() const
 			if (!GetBool("AnonymousLogon", true)) return true;
 			if (GetBool("KeepTokenIntegrity", false)) return true;
 		if(GetBool("UnfilteredToken", false)) return true;
+	if (GetBool("DisableFileFilter", false)) return true;
+	if (GetBool("DisableKeyFilter", false)) return true;
+	if (GetBool("StripSystemPrivileges", false)) return true;
 	return false;
 }
 

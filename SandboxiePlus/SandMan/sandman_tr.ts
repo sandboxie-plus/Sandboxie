@@ -1213,7 +1213,7 @@ Do you want to do the clean up?</source>
         <translation>Ad</translation>
     </message>
     <message>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Kutu Grubu</translation>
     </message>
     <message>

@@ -3,62 +3,111 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-
-
-## [0.9.0 / 5.51.0] - 2021-07-??
+## [0.9.2 / 5.51.2] - 2021-08-07
 
 ### Added
-- added support for Windows Filtering Platform (WFP) to be used instead of the device based network blocking scheme
--- to enable this support add 'NetworkEnableWFP=y' to the global section and reload the driver, or reboot
--- to use WFP for a specified sandbox add 'AllowNetworkAccess=n' to said box
--- you can excempt certain processes from a block by using 'AllowNetworkAccess=program.exe,y'
+- added ability to reconfigure teh driver, allowing to enable/disable WFP and otehr features without a reload/reboot
+
+### Fixed
+- fixed issue with process start handling introduced in 5.51.0 [#1063](https://github.com/sandboxie-plus/Sandboxie/issues/1063)
+- fixed issue with quick recovery introduced in 5.51.0
+- fixed incompatybility with CET Hardware-enforced Stack Protection on intel 11th gen and AMD 5xxxX cpu's [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
+
+### removed
+- commented out all windows xp specific support code
+
+
+
+## [0.9.1 / 5.51.1] - 2021-07-31
+
+### Added
+- added tray icon indicating no connection to the driver if it happens
+- added option to customize the tray icon
+- added "DllSkipHook=some.dll" option to disable installation of hooks into selected DLLs
+- added localization support for Plus installer (by yfdyh000 and mpheath) [#923](https://github.com/sandboxie-plus/Sandboxie/pull/923)
+
+### Changed
+- reworked NtClose handling for better performance and extendibility
+- improved tray box menu and list
+
+### Fixed
+- fixed issue with fake admin and some NSIS installers [#1052](https://github.com/sandboxie-plus/Sandboxie/issues/1052)
+- fixed more issued with FileDispositionInformation behaviour, which resulted in bogus file deletion handling
+- fixed issue with checking WFP status
+- fixed issue WFP failing to initialize at boot
+- fixed issue with tray sandbox options not being available just after boot
+- fixed issue access changed flag not being proeprly set in box options [#1065](https://github.com/sandboxie-plus/Sandboxie/issues/1065)
+
+
+
+## [0.9.0 / 5.51.0] - 2021-07-29
+
+### Added
+- added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme
+-- to enable this support, add 'NetworkEnableWFP=y' to the global section and reboot or reload the driver
+-- to use WFP for a specific sandbox, add 'AllowNetworkAccess=n'
+-- you can allow certain processes by using 'AllowNetworkAccess=program.exe,y'
 -- you can also enable this policy globally by adding 'AllowNetworkAccess=n' to the global section
--- in which case you can excempt entire boxes by adding 'AllowNetworkAccess=n' to said box
--- specifying 'AllowNetworkAccess=program.exe,n' will block the access only for the named process
--- note: WFP is less absolute than the old approche, using WFP will filter only TCP/UDP communication
+-- in this case you can exempt entire sandboxes by adding 'AllowNetworkAccess=y' to specific boxes
+ -- you can block certain processes by using 'AllowNetworkAccess=program.exe,n'
+ -- Note: WFP is less absolute than the old approach, using WFP will filter only TCP/UDP communication
 --	restricted boxed processes will still be able to resolve domain names using the system service
---  thay will not be howeever able to send or receive data packets directly
--- the advantages of WFP is that filter rules can be implemented restricting communication only to
---  specified addresses or selected ports using "NetworkAccess=..."
-- added fully functional  rule based packet filter in user mode for the case when "NetworkEnableWFP=y" is not set
+--  however, they will not be able to send or receive data packets directly
+-- the advantages of WFP is that filter rules can be implemented by restricting communication only to specified addresses or selected ports using "NetworkAccess=..."
+- added fully functional rule-based packet filter in user mode for the case when "NetworkEnableWFP=y" is not set
 -- the mechanism replaces the old "BlockPort=..." functionality
--- note: this filter applies only to outgoing connections/traffic for incomming eider the WFP mode or a 3rd party firewall is needed
--- like the old user mode based mechanism maliciouse applications can bypass it by unhooking certein functions
--- hence its recomended to use kernel mode WFP based mechanism when reliable isolation is required
--- note: the main reason this mechanism was added also in user mode is to make it easier to debug
+-- Note: this filter applies only to outgoing connections/traffic, for incoming traffic either the WFP mode or a third-party firewall is needed
+-- like the old user mode based mechanism, malicious applications can bypass it by unhooking certain functions
+-- hence it's recommended to use the kernel mode WFP-based mechanism when reliable isolation is required
 - added new trace option "NetFwTrace=*" to trace the actions of the firewall components
--- please note that the driver trace logs only to the kernel debug output, use DbgView.exe to log it
-- API_QUERY_PROCESS_INFO can be now used to get the impersonation token of sandboxed thread
--- Note: this capability is used by TaskExplorer to allow inspecting sandbox internal tokens
+-- please note that the driver only trace logs the kernel debug output, use DbgView.exe to log
+- API_QUERY_PROCESS_INFO can now be used to get the impersonation token of a sandboxed thread
+-- Note: this capability is used by TaskExplorer to allow inspecting sandbox-internal tokens
 -- Note: a process must have administrative privileges to be able to use this API
 - added a UI option to switch "MsiInstallerExemptions=y" on and off
--- just in case a future windows build breaks something for the systemless mode
+-- just in case a future Windows build breaks something in the systemless mode
+- added sample code for ObRegisterCallbacks to the driver
+- added new debug options "DisableFileFilter=y" and "DisableKeyFilter=y" that allow to disable file and registry filtering
+-- Note: these options are for testing only and disable core parts of the sandbox isolation
+- added a few command line options to SandMan.exe
 
+### Changed
+- greatly improved the performance of the trace log, but it's no longer possible to log to both SandMan and SbieCtrl at the same time
+- reworked process creation code to use PsSetCreateProcessNotifyRoutineEx and improved process termination
+
+### Fixed
+- added missing hook for ConnectEx function
+
+
+
+## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 2
+
+### Fixed
+Fixed issue with registering session leader
+
+
+
+## [0.8.9 / 5.50.9] - 2021-07-28 HotFix 1
+
+### Fixed
+Fixed issue with Windows 7
+
+
+
+## [0.8.9 / 5.50.9] - 2021-07-27
 
 ### Changed
 - updated a few icons
-- updated github build action to use qt 5.15.2
-- greately improved the performanceof the trace log, but its no longer possible to log to booth sandman and sbiectrl at the same time
-- changed code integrity verification policies
--- code signature is no longer required to change config, to protect presets use the the existing "EditAdminOnly=y" option
--- code signature validation of user mode components is disabled when windows is booted in test signing mode
-- reworked process creation code to use PsSetCreateProcessNotifyRoutineEx and improved process termination
-- improved full tray icon to be more distringuishable from the empty one
+- updated GitHub build action to use Qt 5.15.2
+- improved the "full" tray icon to be more distinguishable from the "empty" one
+- changed code integrity verification policies [#1003](https://github.com/sandboxie-plus/Sandboxie/issues/1003)
+-- code signature is no longer required to change config, to protect presets use the existing "EditAdminOnly=y"
 
 ### Fixed
-- added missing hook for ConnectEx
-- fixed MSI installer not being able to create action server on windows 11
-- fixed MSI instalelr not workign in systemless mode on windows 11
-
-### Removed
-
-
-
-
-## [0.8.8b / 5.50.9] - 2021-07-14
-
-### Fixed
-- fixed issue with systemless MSI
+- fixed issue with systemless MSI mode introduced in the last build
+- fixed MSI installer not being able to create the action server mechanism on Windows 11
+- fixed MSI installer not working in systemless mode on Windows 11
+- fixed Inno Setup script not being able to remove shell integration keys during Sandboxie Plus uninstall (by mpheath) [#1037](https://github.com/sandboxie-plus/Sandboxie/pull/1037)
 
 
 
@@ -80,6 +129,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with boxes that had auto-delete activated introduced in the previous build [#986](https://github.com/sandboxie-plus/Sandboxie/issues/986)
+
+
 
 ## [0.8.7 / 5.50.7] - 2021-07-10
 
@@ -244,6 +295,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - workaround for Electron apps, by forcing an additional command line argument on the GPU renderer process [#547](https://github.com/sandboxie-plus/Sandboxie/issues/547) [#310](https://github.com/sandboxie-plus/Sandboxie/issues/310) [#215](https://github.com/sandboxie-plus/Sandboxie/issues/215)
 - fixed issue with Software Compatibility tab that doesn't always show template names correctly [#774](https://github.com/sandboxie-plus/Sandboxie/issues/774)
 
+ 
 
 ## [0.7.4 / 5.49.7] - 2021-04-11
 
@@ -268,6 +320,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed broken paths in The Bat! template (by isaak654) [#756](https://github.com/sandboxie-plus/Sandboxie/pull/756)
 - fixed issue about media players that attempt to write unneeded media files inside the box (by Dyras) [#743](https://github.com/sandboxie-plus/Sandboxie/pull/743) [#536](https://github.com/sandboxie-plus/Sandboxie/issues/536)
 
+ 
 
 ## [0.7.3 / 5.49.5] - 2021-03-27
 
@@ -816,6 +869,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with internet access restriction options [#177](https://github.com/sandboxie-plus/Sandboxie/issues/177) [#185](https://github.com/sandboxie-plus/Sandboxie/issues/185)
 - fixed issue deleting sandbox when located on a drive directly [#139](https://github.com/sandboxie-plus/Sandboxie/issues/139)
 
+ 
 
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
@@ -828,6 +882,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Chrome 86+ compatibility bug with Chrome's own sandbox [#149](https://github.com/sandboxie-plus/Sandboxie/issues/149)
 
 
+ 
 ## [0.4.1 / 5.43.5] - 2020-09-12
 
 ### Added

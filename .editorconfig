@@ -1,0 +1,10 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = crlf
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{cmd,txt,md,ts}]
+charset = utf-8

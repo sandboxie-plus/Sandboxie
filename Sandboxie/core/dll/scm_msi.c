@@ -192,6 +192,20 @@ _FX HANDLE Scm_CreateWaitableTimerW(
 
 
 //---------------------------------------------------------------------------
+// Scm_TokenCloseHandler
+//---------------------------------------------------------------------------
+
+
+_FX VOID Scm_TokenCloseHandler(HANDLE Handle) 
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    if (TlsData->scm_last_own_token == Handle)
+        TlsData->scm_last_own_token = NULL;
+}
+
+
+//---------------------------------------------------------------------------
 // Scm_OpenProcessToken
 //---------------------------------------------------------------------------
 
@@ -203,6 +217,8 @@ _FX BOOL Scm_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE
     NTSTATUS status = __sys_OpenProcessToken(ProcessHandle, DesiredAccess, phTokenOut);
 
     if (NT_SUCCESS(status) && ProcessHandle == GetCurrentProcess()) {
+
+        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 

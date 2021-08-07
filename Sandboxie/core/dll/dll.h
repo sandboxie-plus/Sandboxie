@@ -463,6 +463,9 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
+typedef void(*P_CloseHandler)(HANDLE handle);
+BOOLEAN File_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+BOOLEAN File_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
 
 //---------------------------------------------------------------------------
 // Functions (key)
@@ -591,6 +594,7 @@ BOOLEAN Taskbar_SHCore_Init(HMODULE hmodule);
 // Functions (init for DllMain)
 //---------------------------------------------------------------------------
 
+BOOLEAN File_InitHandles(void);
 
 BOOLEAN Key_Init(void);
 

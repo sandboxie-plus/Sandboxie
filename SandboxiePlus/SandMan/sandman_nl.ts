@@ -646,21 +646,21 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox: %2?
+        <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox %2?
 Bestandsnaam: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
-        <source>Do you want to allow %1 (%2) access to the internet?
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
         <translation>Wilt u toestaan dat %1 (%2) toegang tot het internet heeft?
 Volledig pad: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="322"/>
-        <source>%1 is eligible for quick recovery from %2.
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
         <translation>%1 komt in aanmerking voor snel herstel van %2.
 Het bestand is geschreven door: %3</translation>
@@ -683,7 +683,7 @@ Het bestand is geschreven door: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="413"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
         <translation>Een groot bestand %1 migreren naar sandbox %2, %3 resterend.
 Volledig pad: %4</translation>
@@ -1048,8 +1048,8 @@ Volledig pad: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="520"/>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
-
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
 Do you want to do the clean up?</source>
         <translation>Sandboxie-Plus werkte in portable modus, nu moet het de aangemaakte services opruimen. Dit zal om administratieve rechten vragen.
 
@@ -1129,8 +1129,8 @@ Wilt u het opruimen uitvoeren?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="821"/>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
-Yes will choose: %1
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
+Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
         <translation>Sandboxie-Plus is in portable modus gestart. Wilt u de Sandbox-map in zijn bovenliggende map plaatsen?
 Ja zal %1 kiezen
@@ -1514,7 +1514,7 @@ Nee zal %2 kiezen</translation>
     <name>CSbieModel</name>
     <message>
         <location filename="Models/SbieModel.cpp" line="133"/>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Box-groep</translation>
     </message>
     <message>

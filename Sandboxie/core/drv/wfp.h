@@ -33,7 +33,7 @@
 
 
 BOOLEAN WFP_Init(void);
-
+BOOLEAN WFP_Load(void);
 void WFP_Unload(void);
 
 BOOLEAN WFP_InitProcess(PROCESS *proc);

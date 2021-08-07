@@ -1,6 +1,6 @@
-#include <windows.h>
+/*#include <windows.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h>*/
 
 size_t b64_encoded_size(size_t inlen)
 {
@@ -17,20 +17,14 @@ size_t b64_encoded_size(size_t inlen)
 
 const wchar_t b64_chars[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-wchar_t* b64_encode(const unsigned char *in, size_t inlen)
+int b64_encode(const unsigned char *in, size_t inlen, wchar_t *out, size_t outlen)
 {
-	wchar_t* out;
-	size_t  elen;
 	size_t  i;
 	size_t  j;
 	size_t  v;
 
 	if (in == NULL || inlen == 0)
-		return NULL;
-
-	elen = b64_encoded_size(inlen);
-	out  = malloc((elen+1) * sizeof(wchar_t));
-	out[elen] = L'\0';
+		return 0;
 
 	for (i=0, j=0; i<inlen; i+=3, j+=4) {
 		v = in[i];
@@ -51,7 +45,7 @@ wchar_t* b64_encode(const unsigned char *in, size_t inlen)
 		}
 	}
 
-	return out;
+	return 1;
 }
 
 size_t b64_decoded_size(const wchar_t *in)

@@ -1355,14 +1355,14 @@ _FX NTSTATUS Thread_CheckTokenForImpersonation(
 {
     NTSTATUS status;
 
+    // OriginalToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+		return STATUS_SUCCESS;
+	// OriginalToken END
 	// OpenToken BEGIN
 	if ((Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
 		return STATUS_SUCCESS;
 	// OpenToken END
-	// OriginalToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
-		return STATUS_SUCCESS;
-	// OriginalToken END
 
 	BOOLEAN DropRights = proc->drop_rights;
 	ULONG SessionId = proc->box->session_id;

@@ -267,6 +267,9 @@
     <ClInclude Include="..\..\common\str_util.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\ntproto.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

@@ -216,9 +216,6 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForImageName_bool(
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
 
-
-//---------------------------------------------------------------------------
-
 SBIEDLL_EXPORT  BOOLEAN SbieDll_IsReservedFileName(const WCHAR* name);
 
 //---------------------------------------------------------------------------

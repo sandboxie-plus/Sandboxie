@@ -60,12 +60,13 @@ FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/SelectBoxWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
+    sandman_en.ts \
     sandman_es.ts \
     sandman_it.ts \
     sandman_nl.ts \
+    sandman_pl.ts \
     sandman_pt.ts \
     sandman_ru.ts \
-    sandman_pl.ts \
     sandman_tr.ts \
     sandman_zh-CN.ts \
     sandman_zh-TW.ts

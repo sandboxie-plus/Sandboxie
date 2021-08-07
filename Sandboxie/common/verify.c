@@ -1,3 +1,21 @@
+/*
+ * Copyright 2021 David Xanatos, xanasoft.com
+ * 
+ * Based on the processhacker's CustomSignTool, Copyright 2016 wj32
+ *
+ * This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -36,7 +54,7 @@ static UCHAR KphpTrustedPublicKey[] =
 #define FILE_BUFFER_SIZE 4096
 
 
-NTSTATUS PhCreateFileWin32(_Out_ PHANDLE FileHandle, _In_ PCWSTR FileName, _In_ ACCESS_MASK DesiredAccess,
+static NTSTATUS MyCreateFile(_Out_ PHANDLE FileHandle, _In_ PCWSTR FileName, _In_ ACCESS_MASK DesiredAccess,
     _In_opt_ ULONG FileAttributes, _In_ ULONG ShareAccess, _In_ ULONG CreateDisposition, _In_ ULONG CreateOptions)
 {
     UNICODE_STRING uni;
@@ -49,14 +67,6 @@ NTSTATUS PhCreateFileWin32(_Out_ PHANDLE FileHandle, _In_ PCWSTR FileName, _In_ 
 	IO_STATUS_BLOCK Iosb;
 	return NtCreateFile(FileHandle, DesiredAccess, &attr, &Iosb, NULL, FileAttributes, ShareAccess, CreateDisposition, CreateOptions, NULL, 0);
 }
-
-NTSTATUS PhGetFileSize(_In_ HANDLE FileHandle, _Out_ PLARGE_INTEGER Size)
-{
-    if (GetFileSizeEx(FileHandle, Size))
-        return STATUS_SUCCESS;
-    return STATUS_UNSUCCESSFUL;
-}
-
 
 static NTSTATUS CstReadFile(
     _In_ PWSTR FileName,
@@ -71,13 +81,10 @@ static NTSTATUS CstReadFile(
     PVOID buffer;
     IO_STATUS_BLOCK iosb;
 
-    if (!NT_SUCCESS(status = PhCreateFileWin32(&fileHandle, FileName, FILE_GENERIC_READ, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE)))
+    if (!NT_SUCCESS(status = MyCreateFile(&fileHandle, FileName, FILE_GENERIC_READ, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE)))
         goto CleanupExit;
 
-    if (!NT_SUCCESS(status = PhGetFileSize(fileHandle, &fileSize)))
-        goto CleanupExit;
-
-    if (fileSize.QuadPart > FileSizeLimit)
+    if (!GetFileSizeEx(fileHandle, &fileSize) || fileSize.QuadPart > FileSizeLimit)
         goto CleanupExit;
 
     buffer = malloc((ULONG)fileSize.QuadPart);
@@ -95,89 +102,79 @@ CleanupExit:
 }
 
 typedef struct {
-    BCRYPT_ALG_HANDLE hashAlgHandle;
-    ULONG hashObjectSize;
-    ULONG hashSize;
-    PVOID hashObject;
-    BCRYPT_HASH_HANDLE hashHandle;
-    
-} CST_HASH_OBJ;
+    BCRYPT_ALG_HANDLE algHandle;
+    BCRYPT_HASH_HANDLE handle;
+    PVOID object;
+} MY_HASH_OBJ;
 
-static VOID CstFreeHash(CST_HASH_OBJ* pHashObj)
+static VOID MyFreeHash(MY_HASH_OBJ* pHashObj)
 {
-    if (pHashObj->hashHandle)
-        BCryptDestroyHash(pHashObj->hashHandle);
-    if (pHashObj->hashObject)
-        free(pHashObj->hashObject); // must be freed after destroying hash object
-    if (pHashObj->hashAlgHandle)
-        BCryptCloseAlgorithmProvider(pHashObj->hashAlgHandle, 0);
+    if (pHashObj->handle)
+        BCryptDestroyHash(pHashObj->handle);
+    if (pHashObj->object)
+        free(pHashObj->object);
+    if (pHashObj->algHandle)
+        BCryptCloseAlgorithmProvider(pHashObj->algHandle, 0);
 }
 
-static NTSTATUS CstInitHash(CST_HASH_OBJ* pHashObj)
+static NTSTATUS MyInitHash(MY_HASH_OBJ* pHashObj)
 {
     NTSTATUS status;
+    ULONG hashObjectSize;
     ULONG querySize;
-    memset(pHashObj, 0, sizeof(CST_HASH_OBJ));
+    memset(pHashObj, 0, sizeof(MY_HASH_OBJ));
 
-    if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&pHashObj->hashAlgHandle, CST_HASH_ALGORITHM, NULL, 0)))
+    if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&pHashObj->algHandle, CST_HASH_ALGORITHM, NULL, 0)))
         goto CleanupExit;
 
-    if (!NT_SUCCESS(status = BCryptGetProperty(pHashObj->hashAlgHandle, BCRYPT_OBJECT_LENGTH, (PUCHAR)&pHashObj->hashObjectSize, sizeof(ULONG), &querySize, 0)))
+    if (!NT_SUCCESS(status = BCryptGetProperty(pHashObj->algHandle, BCRYPT_OBJECT_LENGTH, (PUCHAR)&hashObjectSize, sizeof(ULONG), &querySize, 0)))
         goto CleanupExit;
 
-    if (!NT_SUCCESS(status = BCryptGetProperty(pHashObj->hashAlgHandle, BCRYPT_HASH_LENGTH, (PUCHAR)&pHashObj->hashSize, sizeof(ULONG), &querySize, 0)))
-        goto CleanupExit;
-
-    pHashObj->hashObject = malloc(pHashObj->hashObjectSize);
-    if (!pHashObj->hashObject) {
+    pHashObj->object = malloc(hashObjectSize);
+    if (!pHashObj->object) {
         status = STATUS_INSUFFICIENT_RESOURCES;
         goto CleanupExit;
     }
 
-    if (!NT_SUCCESS(status = BCryptCreateHash(pHashObj->hashAlgHandle, &pHashObj->hashHandle, (PUCHAR)pHashObj->hashObject, pHashObj->hashObjectSize, NULL, 0, 0)))
+    if (!NT_SUCCESS(status = BCryptCreateHash(pHashObj->algHandle, &pHashObj->handle, (PUCHAR)pHashObj->object, hashObjectSize, NULL, 0, 0)))
         goto CleanupExit;
 
 CleanupExit:
     if (!NT_SUCCESS(status))
-        CstFreeHash(pHashObj);
+        MyFreeHash(pHashObj);
 
     return status;
 }
 
-static NTSTATUS CstHashData(
-    CST_HASH_OBJ* pHashObj,
-    _Out_ PVOID Data,
-    _Out_ ULONG DataSize
-    )
+static NTSTATUS MyHashData(MY_HASH_OBJ* pHashObj, PVOID Data, ULONG DataSize)
 {
-    return BCryptHashData(pHashObj->hashHandle, (PUCHAR)Data, DataSize, 0);
+    return BCryptHashData(pHashObj->handle, (PUCHAR)Data, DataSize, 0);
 }
 
-static NTSTATUS CstFinishHash(
-    CST_HASH_OBJ* pHashObj,
-    _Out_ PVOID* Hash,
-    _Out_ PULONG HashSize
-    )
+static NTSTATUS MyFinishHash(MY_HASH_OBJ* pHashObj, PVOID* Hash, PULONG HashSize)
 {
     NTSTATUS status;
-    PVOID hash;
+    ULONG querySize;
 
-    hash = malloc(pHashObj->hashSize);
-    if (!hash) {
+    if (!NT_SUCCESS(status = BCryptGetProperty(pHashObj->algHandle, BCRYPT_HASH_LENGTH, (PUCHAR)HashSize, sizeof(ULONG), &querySize, 0)))
+        goto CleanupExit;
+
+    *Hash = malloc(*HashSize);
+    if (!*Hash) {
         status = STATUS_INSUFFICIENT_RESOURCES;
         goto CleanupExit;
     }
 
-    if (!NT_SUCCESS(status = BCryptFinishHash(pHashObj->hashHandle, (PUCHAR)hash, pHashObj->hashSize, 0)))
+    if (!NT_SUCCESS(status = BCryptFinishHash(pHashObj->handle, (PUCHAR)*Hash, *HashSize, 0)))
         goto CleanupExit;
 
-    *HashSize = pHashObj->hashSize;
-    *Hash = hash;
     return STATUS_SUCCESS;
 
 CleanupExit:
-    if (hash)
-        free(hash);
+    if (*Hash) {
+        free(*Hash);
+        *Hash = NULL;
+    }
 
     return status;
 }
@@ -193,12 +190,12 @@ static NTSTATUS CstHashFile(
     HANDLE fileHandle = INVALID_HANDLE_VALUE;
     PVOID buffer = NULL;
     IO_STATUS_BLOCK iosb;
-    CST_HASH_OBJ hashObj;
+    MY_HASH_OBJ hashObj;
 
-    if (!NT_SUCCESS(status = CstInitHash(&hashObj)))
+    if (!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
 
-    if (!NT_SUCCESS(status = PhCreateFileWin32(&fileHandle, FileName, FILE_GENERIC_READ, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE)))
+    if (!NT_SUCCESS(status = MyCreateFile(&fileHandle, FileName, FILE_GENERIC_READ, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE)))
         goto CleanupExit;
 
     buffer = malloc(FILE_BUFFER_SIZE);
@@ -217,11 +214,11 @@ static NTSTATUS CstHashFile(
             goto CleanupExit;
         }
 
-        if (!NT_SUCCESS(status = CstHashData(&hashObj, buffer, (ULONG)iosb.Information)))
+        if (!NT_SUCCESS(status = MyHashData(&hashObj, buffer, (ULONG)iosb.Information)))
             goto CleanupExit;
     }
 
-    if (!NT_SUCCESS(status = CstFinishHash(&hashObj, Hash, HashSize)))
+    if (!NT_SUCCESS(status = MyFinishHash(&hashObj, Hash, HashSize)))
         goto CleanupExit;
 
 CleanupExit:
@@ -229,39 +226,26 @@ CleanupExit:
         free(buffer);
     if(fileHandle != INVALID_HANDLE_VALUE)
         NtClose(fileHandle);
-    CstFreeHash(&hashObj);
+    MyFreeHash(&hashObj);
 
     return status;
 }
 
-static NTSTATUS VerifyHashSignature(
-    _In_ PVOID Hash,
-    _In_ ULONG HashSize,
-    _In_ PVOID Signature,
-    _In_ ULONG SignatureSize
-    )
+static NTSTATUS VerifyHashSignature(PVOID Hash, ULONG HashSize, PVOID Signature, ULONG SignatureSize)
 {
     NTSTATUS status;
     BCRYPT_ALG_HANDLE signAlgHandle = NULL;
     BCRYPT_KEY_HANDLE keyHandle = NULL;
     
-    // Import the trusted public key.
-
     if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&signAlgHandle, CST_SIGN_ALGORITHM, NULL, 0)))
         goto CleanupExit;
-    if (!NT_SUCCESS(status = BCryptImportKeyPair(signAlgHandle, NULL, CST_BLOB_PUBLIC, &keyHandle,
-        KphpTrustedPublicKey, sizeof(KphpTrustedPublicKey), 0)))
-    {
-        goto CleanupExit;
-    }
 
-    // Verify the hash.
-
-    if (!NT_SUCCESS(status = BCryptVerifySignature(keyHandle, NULL, (PUCHAR)Hash, HashSize, (PUCHAR)Signature,
-        SignatureSize, 0)))
-    {
+    if (!NT_SUCCESS(status = BCryptImportKeyPair(signAlgHandle, NULL, CST_BLOB_PUBLIC, &keyHandle, KphpTrustedPublicKey, sizeof(KphpTrustedPublicKey), 0)))
         goto CleanupExit;
-    }
+
+
+    if (!NT_SUCCESS(status = BCryptVerifySignature(keyHandle, NULL, (PUCHAR)Hash, HashSize, (PUCHAR)Signature, SignatureSize, 0)))
+        goto CleanupExit;
 
 CleanupExit:
     if (keyHandle != NULL)

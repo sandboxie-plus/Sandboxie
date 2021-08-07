@@ -31,13 +31,27 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	
-	QString CommandLine;
+	QString PendingMessage;
+
 	QStringList Args = QCoreApplication::arguments();
-	int BoxPos = Args.indexOf("/box:__ask__");
-	if (BoxPos != -1) {
-		for (int i = BoxPos + 1; i < Args.count(); i++)
+	int CmdPos = Args.indexOf("-op");
+	if (CmdPos != -1) {
+		QString Op;
+		if (Args.count() > CmdPos)
+			Op = Args.at(CmdPos + 1);
+		PendingMessage = "Op:" + Op;
+	}
+
+	CmdPos = Args.indexOf("/box:__ask__");
+	if (CmdPos != -1) {
+		QString CommandLine;
+		for (int i = CmdPos + 1; i < Args.count(); i++)
 			CommandLine += "\"" + Args[i] + "\" ";
-		if(app.sendMessage("Run:" + CommandLine.trimmed()))
+		PendingMessage = "Run:" + CommandLine.trimmed();
+	}
+
+	if (!PendingMessage.isEmpty()) {
+		if(app.sendMessage(PendingMessage))
 			return 0;
 	}
 	else if (app.sendMessage("ShowWnd"))
@@ -50,8 +64,8 @@ int main(int argc, char *argv[])
 	CSandMan* pWnd = new CSandMan();
 
 	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));
-	if (!CommandLine.isEmpty())
-		QMetaObject::invokeMethod(pWnd, "OnMessage", Qt::QueuedConnection, Q_ARG(QString, "Run:" + CommandLine));
+	if (!PendingMessage.isEmpty())
+		QMetaObject::invokeMethod(pWnd, "OnMessage", Qt::QueuedConnection, Q_ARG(QString, PendingMessage));
 
 	int ret =  app.exec();
 

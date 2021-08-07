@@ -1491,7 +1491,7 @@ ULONG SbieIniServer::RefreshConf()
     // apply new Sandboxie.ini into the driver
     //
 
-    status = SbieApi_ReloadConf(m_session_id);
+    status = SbieApi_ReloadConf(m_session_id, 0);
 
 finish:
 

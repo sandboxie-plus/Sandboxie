@@ -24,6 +24,8 @@ public:
 	virtual void accept() {}
 	virtual void reject();
 
+	static void LoadCertificate();
+
 signals:
 	void OptionsChanged();
 	void Closed();
@@ -39,6 +41,8 @@ private slots:
 
 	void OnTab();
 
+	void OnFeaturesChanged() { m_FeaturesChanged = true; }
+
 	void OnBrowse();
 
 	void OnSetPassword();
@@ -53,6 +57,7 @@ private slots:
 	void OnDelCompat();
 
 	void OnSupport(const QString& url);
+	void CertChanged();
 
 protected:
 	void closeEvent(QCloseEvent *e);
@@ -66,6 +71,13 @@ protected:
 	QString m_NewPassword;
 	bool	m_WarnProgsChanged;
 	bool	m_CompatChanged;
+	bool	m_FeaturesChanged;
+	bool	m_CertChanged;
 private:
 	Ui::SettingsWindow ui;
 };
+
+void WindowsMoveFile(const QString& from, const QString& to);
+
+extern QByteArray g_Certificate;
+extern quint32 g_FeatureFlags;

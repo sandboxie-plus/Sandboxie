@@ -98,10 +98,7 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_ErrorForAsciiName)
 #pragma alloc_text (INIT, Syscall_GetIndexFromNtdll)
 #pragma alloc_text (INIT, Syscall_GetKernelAddr)
-#ifdef _WIN64
-// only needed for 32-bit gui_xp code
 #pragma alloc_text (INIT, Syscall_GetServiceTable)
-#endif _WIN64
 #endif // ALLOC_PRAGMA
 
 
@@ -705,6 +702,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     // DbgPrint("[syscall] request p=%06d t=%06d - BEGIN %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), entry->name);
 
+#ifdef XP_SUPPORT
     //
     // make sure the thread has sufficient access rights to itself
     // then impersonate the full access token for the thread or process
@@ -714,10 +712,10 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
         Process_SetTerminated(proc, 5);
     }
-    else {
+    else
+#endif
 
         Thread_SetThreadToken(proc);        // may set proc->terminated
-    }
 
     if (proc->terminated) {
 

@@ -145,6 +145,7 @@ struct _PROCESS {
     LIST blocked_dlls;
     ULONG file_trace;
     ULONG pipe_trace;
+    BOOLEAN disable_file_flt;
     BOOLEAN file_warn_internet;
     BOOLEAN file_warn_direct_access;
 	BOOLEAN AllowInternetAccess;
@@ -159,6 +160,7 @@ struct _PROCESS {
     LIST read_key_paths;                // PATTERN elements
     LIST write_key_paths;               // PATTERN elements
     ULONG key_trace;
+    BOOLEAN disable_key_flt;
 
     // ipc-related
 

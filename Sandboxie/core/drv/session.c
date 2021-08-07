@@ -174,10 +174,13 @@ _FX BOOLEAN Session_Init(void)
         return FALSE;
     if (! Session_AddObjectType(L"Section"))
         return FALSE;
+#ifdef XP_SUPPORT
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
         if (! Session_AddObjectType(L"Port"))
             return FALSE;
-    } else {
+    } else 
+#endif
+    {
         if (! Session_AddObjectType(L"ALPC Port"))
             return FALSE;
     }

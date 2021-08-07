@@ -167,9 +167,11 @@ static const WCHAR *File_Nsi   = L"nsi";
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "file_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -188,6 +190,7 @@ _FX BOOLEAN File_Init(void)
 
     P_File_Init_2 p_File_Init_2 = File_Init_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -196,6 +199,7 @@ _FX BOOLEAN File_Init(void)
     }
 
 #endif ! _WIN64
+#endif
 
     if (! p_File_Init_2())
         return FALSE;
@@ -244,6 +248,7 @@ _FX void File_Unload(void)
 
     P_File_Unload_2 p_File_Unload_2 = File_Unload_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -252,6 +257,7 @@ _FX void File_Unload(void)
     }
 
 #endif ! _WIn64
+#endif 
 
     p_File_Unload_2();
 
@@ -983,13 +989,13 @@ _FX NTSTATUS File_Generic_MyParseProc(
     // skip requests dealing with devices we don't care about
     //
 
-    if (device_type != FILE_DEVICE_DISK &&
+    if ((device_type != FILE_DEVICE_DISK &&
         device_type != FILE_DEVICE_NAMED_PIPE &&
         device_type != FILE_DEVICE_MAILSLOT &&
         device_type != FILE_DEVICE_NETWORK &&
         device_type != FILE_DEVICE_MULTI_UNC_PROVIDER &&
         device_type != FILE_DEVICE_NETWORK_FILE_SYSTEM &&
-        device_type != FILE_DEVICE_DFS)
+        device_type != FILE_DEVICE_DFS) || proc->disable_file_flt)
     {
         if ((proc->file_trace & TRACE_IGNORE) || Session_MonitorCount) {
 

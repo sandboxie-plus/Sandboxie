@@ -43,6 +43,9 @@
 //---------------------------------------------------------------------------
 
 
+ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
+
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
 static NTSTATUS Process_HookProcessNotify(
@@ -50,10 +53,9 @@ static NTSTATUS Process_HookProcessNotify(
 
 #endif _WIN64
 
-ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
-
 static void Process_NotifyProcess(
     HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create);
+#endif
 
 static void Process_NotifyProcessEx(
     HANDLE ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo);
@@ -76,9 +78,11 @@ static void Process_NotifyImage(
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Process_Init)
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #pragma alloc_text (INIT, Process_HookProcessNotify)
 #endif _WIN64
+#endif
 #endif // ALLOC_PRAGMA
 
 
@@ -101,11 +105,13 @@ static BOOLEAN Process_NotifyProcessInstalled = FALSE;
 
 volatile BOOLEAN Process_ReadyToSandbox = FALSE;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
 static PCREATE_PROCESS_NOTIFY_ROUTINE *Process_pOldNotifyProcess = NULL;
 
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -115,7 +121,7 @@ static PCREATE_PROCESS_NOTIFY_ROUTINE *Process_pOldNotifyProcess = NULL;
 
 _FX BOOLEAN Process_Init(void)
 {
-    NTSTATUS status;
+    NTSTATUS status = STATUS_UNSUCCESSFUL;
 
 #ifdef USE_PROCESS_MAP
     map_init(&Process_Map, Driver_Pool);
@@ -142,7 +148,8 @@ _FX BOOLEAN Process_Init(void)
 
         status = PsSetCreateProcessNotifyRoutineEx(Process_NotifyProcessEx, FALSE);
     }
-    else {
+#ifdef XP_SUPPORT
+    else { // XP, Vista
 
         status = PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, FALSE);
     }
@@ -156,6 +163,7 @@ _FX BOOLEAN Process_Init(void)
     }
 
 #endif _WIN64
+#endif
 
     if (NT_SUCCESS(status)) {
 
@@ -215,12 +223,11 @@ _FX void Process_Unload(BOOLEAN FreeLock)
 
             PsSetCreateProcessNotifyRoutineEx(Process_NotifyProcessEx, TRUE);
         }
-        else { 
+#ifdef XP_SUPPORT
+        else { // XP, Vista
 
             PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, TRUE);
         }
-
-        Process_NotifyProcessInstalled = FALSE;
 
 #ifndef _WIN64
 
@@ -234,6 +241,9 @@ _FX void Process_Unload(BOOLEAN FreeLock)
         }
 
 #endif _WIN64
+#endif
+
+        Process_NotifyProcessInstalled = FALSE;
 
     }
 
@@ -244,6 +254,7 @@ _FX void Process_Unload(BOOLEAN FreeLock)
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
 // Process_HookProcessNotify
 //---------------------------------------------------------------------------
@@ -403,6 +414,7 @@ _FX NTSTATUS Process_HookProcessNotify(
 }
 
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -727,6 +739,14 @@ _FX PROCESS *Process_Create(
     proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
 
     //
+    // initialize debug options
+    //
+
+    proc->disable_file_flt = Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
+    proc->disable_key_flt = Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
+    //proc->disable_object_flt = Conf_Get_Boolean(proc->box->name, L"DisableObjectFilter", 0, FALSE);
+
+    //
     // initialize trace flags
     //
 
@@ -791,14 +811,26 @@ _FX ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting)
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
-// Process_NotifyProcess_Impl
+// Process_NotifyProcess
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Process_NotifyProcess_Impl(
+_FX void Process_NotifyProcess(
     HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create)
 {
+    //
+    // if we replaced an existing notify routine, call it first
+    //
+
+#ifndef _WIN64
+
+    if (Process_pOldNotifyProcess && (*Process_pOldNotifyProcess))
+        (*Process_pOldNotifyProcess)(ParentId, ProcessId, Create);
+
+#endif _WIN64
+
     //
     // don't do anything before the main driver init says it's ok
     //
@@ -826,7 +858,47 @@ _FX BOOLEAN Process_NotifyProcess_Impl(
             
             if (!Process_NotifyProcess_Create(ProcessId, ParentId, PsGetCurrentProcessId(), NULL)) {
 
-                return FALSE; // prevent creation
+                //
+                // Note: the process is already marked for termination so we don't need to do anything
+                //          in case one would want to schedule an explicit termination, the code below can be used
+                //
+
+                /*
+                PEPROCESS ProcessObject;
+                ULONG session_id;
+                ULONG64 create_time;
+
+                ProcessObject = Process_OpenAndQuery(ProcessId, NULL, &session_id);
+                if (ProcessObject) {
+    
+                    create_time = PsGetProcessCreateTimeQuadPart(ProcessObject);
+                    ObDereferenceObject(ProcessObject);
+                }
+                
+                void *nbuf1;
+                ULONG nlen1;
+                WCHAR *nptr1;
+
+                Process_GetProcessName(
+                            Driver_Pool, (ULONG_PTR)ProcessId, &nbuf1, &nlen1, &nptr1);
+
+                if (1) {
+
+                    BOX dummy_box;
+                    PROCESS dummy_proc;
+                    memzero(&dummy_box, sizeof(dummy_box));
+                    memzero(&dummy_proc, sizeof(dummy_proc));
+                    dummy_box.session_id = session_id;
+                    dummy_proc.box = &dummy_box;
+                    dummy_proc.pid = ProcessId;
+                    dummy_proc.create_time = create_time;
+                    dummy_proc.image_name = (WCHAR*)nptr1;
+
+                    Process_TerminateProcess(&dummy_proc);
+                }
+
+                Mem_Free(nbuf1, nlen1);
+                */
             }
 
         } else {
@@ -834,77 +906,8 @@ _FX BOOLEAN Process_NotifyProcess_Impl(
             Process_NotifyProcess_Delete(ProcessId);
         }
     }
-
-    return TRUE;
 }
-
-
-//---------------------------------------------------------------------------
-// Process_NotifyProcess
-//---------------------------------------------------------------------------
-
-
-_FX void Process_NotifyProcess(
-    HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create)
-{
-    //
-    // if we replaced an existing notify routine, call it first
-    //
-
-#ifndef _WIN64
-
-    if (Process_pOldNotifyProcess && (*Process_pOldNotifyProcess))
-        (*Process_pOldNotifyProcess)(ParentId, ProcessId, Create);
-
-#endif _WIN64
-
-    // Windows XP and Vista
-
-    if (!Process_NotifyProcess_Impl(ParentId, ProcessId, Create)) {
-
-        //
-        // Note: the process is already marked for termination so we don't need to do anything
-        //          in case one would want to schedule an explicit termination, the code below can be used
-        //
-
-        /*
-        PEPROCESS ProcessObject;
-        ULONG session_id;
-        ULONG64 create_time;
-
-        ProcessObject = Process_OpenAndQuery(ProcessId, NULL, &session_id);
-        if (ProcessObject) {
-    
-            create_time = PsGetProcessCreateTimeQuadPart(ProcessObject);
-            ObDereferenceObject(ProcessObject);
-        }
-                
-        void *nbuf1;
-        ULONG nlen1;
-        WCHAR *nptr1;
-
-        Process_GetProcessName(
-                    Driver_Pool, (ULONG_PTR)ProcessId, &nbuf1, &nlen1, &nptr1);
-
-        if (1) {
-
-            BOX dummy_box;
-            PROCESS dummy_proc;
-            memzero(&dummy_box, sizeof(dummy_box));
-            memzero(&dummy_proc, sizeof(dummy_proc));
-            dummy_box.session_id = session_id;
-            dummy_proc.box = &dummy_box;
-            dummy_proc.pid = ProcessId;
-            dummy_proc.create_time = create_time;
-            dummy_proc.image_name = (WCHAR*)nptr1;
-
-            Process_TerminateProcess(&dummy_proc);
-        }
-
-        Mem_Free(nbuf1, nlen1);
-        */
-    }
-}
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -913,13 +916,42 @@ _FX void Process_NotifyProcess(
 
 
 _FX void Process_NotifyProcessEx(
-    HANDLE ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo)
+    PEPROCESS Process, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo)
 {
-    // Windows 7 and later
+    //
+    // don't do anything before the main driver init says it's ok
+    //
 
-    if (!Process_NotifyProcess_Impl(ParentId, ProcessId, CreateInfo != NULL)) {
+    if (! Process_ReadyToSandbox)
+        return;
 
-        if(CreateInfo) CreateInfo->CreationStatus = STATUS_ACCESS_DENIED;
+    //
+    // handle process creation and deletion.  note that we are running
+    // in an arbitrary thread context
+    //
+
+    if (ProcessId) {
+
+        if (CreateInfo != NULL) {
+
+            //
+            // it is possible to specify the parrent process when calling RtlCreateUserProcess
+            // this is for example done by the appinfo service running under svchost.exe
+            // to start LocalBridge.exe with RuntimeBroker.exe as parent
+            // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
+            //
+
+            //DbgPrint("Process_NotifyProcess_Create pid=%d parent=%d current=%d\n", ProcessId, CreateInfo->ParentProcessId, PsGetCurrentProcessId());
+            
+            if (!Process_NotifyProcess_Create(ProcessId, CreateInfo->ParentProcessId, PsGetCurrentProcessId(), NULL)) {
+
+                CreateInfo->CreationStatus = STATUS_ACCESS_DENIED;
+            }
+
+        } else {
+
+            Process_NotifyProcess_Delete(ProcessId);
+        }
     }
 }
 

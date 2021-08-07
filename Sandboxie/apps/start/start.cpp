@@ -546,7 +546,7 @@ BOOL Parse_Command_Line(void)
 
         } else if (_wcsnicmp(cmd, L"reload", 6) == 0) {
 
-            SbieApi_ReloadConf(-1);
+            SbieApi_ReloadConf(-1, 0);
             ExitProcess(0);
 
         //

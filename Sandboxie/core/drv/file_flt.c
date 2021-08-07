@@ -432,7 +432,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
         status = STATUS_PROCESS_IS_TERMINATING;
         goto finish;
     }
-    if (!proc || proc->bHostInject)
+    if (!proc || proc->bHostInject || proc->disable_file_flt)
         goto finish;
 
     //

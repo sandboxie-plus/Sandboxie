@@ -646,19 +646,19 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
-        <source>Do you want to allow %1 (%2) access to the internet?
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="322"/>
-        <source>%1 is eligible for quick recovery from %2.
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -680,7 +680,7 @@ The file was written by: %3</source>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="413"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1044,8 +1044,8 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="520"/>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
-
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
 Do you want to do the clean up?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1123,8 +1123,8 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="821"/>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
-Yes will choose: %1
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
+Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1505,7 +1505,7 @@ No will choose: %2</source>
     <name>CSbieModel</name>
     <message>
         <location filename="Models/SbieModel.cpp" line="133"/>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

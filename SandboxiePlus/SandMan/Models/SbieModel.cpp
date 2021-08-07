@@ -130,7 +130,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			pNode->IsBold = true;
 
 			pNode->Values[eName].Raw = Group;
-			pNode->Values[eStatus].Raw = tr("Box Groupe");
+			pNode->Values[eStatus].Raw = tr("Box Group");
 		}
 		else
 		{

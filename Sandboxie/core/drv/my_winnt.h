@@ -275,6 +275,7 @@ typedef void(*P_KeRevertToUserAffinityThreadEx)(KAFFINITY Affinity);
 
 
 extern POBJECT_TYPE *PsProcessType;
+extern POBJECT_TYPE *MmSectionObjectType;
 extern POBJECT_TYPE *ExWindowStationObjectType;
 
 NTOS_API(ULONG_PTR) PsGetThreadWin32Thread(PETHREAD Thread);

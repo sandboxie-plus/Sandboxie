@@ -98,6 +98,10 @@ typedef struct _WFP_PROCESS {
 // Functions
 //---------------------------------------------------------------------------
 
+BOOLEAN WFP_Install_Callbacks(void);
+
+void WFP_Uninstall_Callbacks(void);
+
 NTSTATUS WFP_RegisterSubLayer();
 
 NTSTATUS WFP_RegisterCallout(const GUID* calloutKey, const GUID* applicableLayer, UINT32* callout_id, UINT64* filter_id);
@@ -106,10 +110,15 @@ const WCHAR* Process_MatchImageAndGetValue(BOX* box, const WCHAR* value, const W
 
 ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);;
 
+void WFP_FreeRules(LIST* NetFwRules);
+
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, WFP_Init)
 #endif // ALLOC_PRAGMA
 
+void WFP_state_changed(
+	_Inout_ void* context,
+	_In_ FWPM_SERVICE_STATE newState);
 
 /*	The "classifyFn" callout function for this Callout.
 For more information about a Callout's classifyFn, see:
@@ -156,6 +165,12 @@ void GetNetwork5TupleIndexesForLayer(
 // Variables
 //---------------------------------------------------------------------------
 
+
+BOOLEAN WFP_Enabled = FALSE;
+static PERESOURCE WFP_InitLock = NULL;
+
+static HANDLE WFP_state_handle = NULL;
+
 // Global handle to the WFP Base Filter Engine
 static HANDLE WFP_engine_handle = NULL;
 
@@ -173,8 +188,9 @@ static UINT64 WFP_send_filter_id_v6 = 0;
 static UINT64 WFP_recv_filter_id_v4 = 0;
 static UINT64 WFP_recv_filter_id_v6 = 0;
 
-map_base_t WFP_Processes;
-KSPIN_LOCK WFP_MapLock;
+static BOOLEAN WPF_MapInitialized = FALSE;
+static map_base_t WFP_Processes;
+static KSPIN_LOCK WFP_MapLock;
 
 
 //---------------------------------------------------------------------------
@@ -206,81 +222,59 @@ _FX VOID WFP_Free(void* pool, void* ptr)
 
 _FX BOOLEAN WFP_Init(void)
 {
-	if (!Conf_Get_Boolean(NULL, L"NetworkEnableWFP", 0, FALSE))
-		return TRUE;
-
 	map_init(&WFP_Processes, NULL);
 	WFP_Processes.func_malloc = &WFP_Alloc;
 	WFP_Processes.func_free = &WFP_Free;
-	map_resize(&WFP_Processes, 128); // prepare some buckets for better performance
 
 	KeInitializeSpinLock(&WFP_MapLock);
 
-	NTSTATUS status = STATUS_SUCCESS;
-	
-	FWPM_SESSION wdf_session = { 0 };
-	BOOLEAN in_transaction = FALSE;
-	BOOLEAN callout_registered = FALSE;
-	
-	// Begin a transaction to the FilterEngine. You must register objects (filter, callouts, sublayers)
-	//to the filter engine in the context of a 'transaction'
-	wdf_session.flags = FWPM_SESSION_FLAG_DYNAMIC;	// <-- Automatically destroys all filters and removes all callouts after this wdf_session ends
-	status = FwpmEngineOpen(NULL, RPC_C_AUTHN_WINNT, NULL, &wdf_session, &WFP_engine_handle);
-	if (!NT_SUCCESS(status)) goto Exit;
-	status = FwpmTransactionBegin(WFP_engine_handle, 0);
-	if (!NT_SUCCESS(status)) goto Exit;
-	in_transaction = TRUE;
+	WPF_MapInitialized = TRUE;
 
-	// Register a new sublayer to the filter engine
-	status = WFP_RegisterSubLayer();
-	if (!NT_SUCCESS(status)) goto Exit;
+	if (!Conf_Get_Boolean(NULL, L"NetworkEnableWFP", 0, FALSE))
+		return TRUE;
 
-	//status = WFP_RegisterCallout(&WPF_CALLOUT_GUID_V4, &FWPM_LAYER_ALE_RESOURCE_ASSIGNMENT_V4, &WFP_callout_id_v4, &WFP_filter_id_v4);
-	//if (!NT_SUCCESS(status)) goto Exit;
-	//status = WFP_RegisterCallout(&WPF_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_RESOURCE_ASSIGNMENT_V6, &WFP_callout_id_v6, &WFP_filter_id_v6);
-	//if (!NT_SUCCESS(status)) goto Exit;
-	status = WFP_RegisterCallout(&WPF_SEND_CALLOUT_GUID_V4, &FWPM_LAYER_ALE_AUTH_CONNECT_V4, &WFP_send_callout_id_v4, &WFP_send_filter_id_v4);
-	if (!NT_SUCCESS(status)) goto Exit;
-	callout_registered = TRUE;
-	status = WFP_RegisterCallout(&WPF_SEND_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_AUTH_CONNECT_V6, &WFP_send_callout_id_v6, &WFP_send_filter_id_v6);
-	if (!NT_SUCCESS(status)) goto Exit;
-	status = WFP_RegisterCallout(&WPF_RECV_CALLOUT_GUID_V4, &FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4, &WFP_recv_callout_id_v4, &WFP_recv_filter_id_v4);
-	if (!NT_SUCCESS(status)) goto Exit;
-	status = WFP_RegisterCallout(&WPF_RECV_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6, &WFP_recv_callout_id_v6, &WFP_recv_filter_id_v6);
-	if (!NT_SUCCESS(status)) goto Exit;
-
-	// note: we could also setup FWPM_LAYER_ALE_AUTH_LISTEN_V4 but since we block all accepts we dont have to
+	return WFP_Load();
+}
 
 
-	// Commit transaction to the Filter Engine
-	status = FwpmTransactionCommit(WFP_engine_handle);
-	if (!NT_SUCCESS(status)) goto Exit;
-	in_transaction = FALSE;
+//---------------------------------------------------------------------------
+// WFP_Load
+//---------------------------------------------------------------------------
 
-	// Cleanup and handle any errors
-Exit:
-	if (!NT_SUCCESS(status)){
-		//DbgPrint("WFP initialization failed, status 0x%08x\r\n", status);
 
-		if (in_transaction == TRUE){
-			FwpmTransactionAbort(WFP_engine_handle);
-			_Analysis_assume_lock_not_held_(WFP_engine_handle); // Potential leak if "FwpmTransactionAbort" fails
-		}
-		if (WFP_engine_handle){
-			FwpmEngineClose(WFP_engine_handle);
-			WFP_engine_handle = NULL;
-		}
-		if (callout_registered) {
-			FwpsCalloutUnregisterById(WFP_send_callout_id_v4);
-			FwpsCalloutUnregisterById(WFP_send_callout_id_v6);
-			FwpsCalloutUnregisterById(WFP_recv_callout_id_v4);
-			FwpsCalloutUnregisterById(WFP_recv_callout_id_v6);
-		}
+_FX BOOLEAN WFP_Load(void)
+{
+	if (WFP_Enabled)
+		return TRUE;
 
+	WFP_Enabled = TRUE;
+
+	map_resize(&WFP_Processes, 128); // prepare some buckets for better performance
+
+	DbgPrint("Sbie WFP enabled\r\n");
+
+	if (!Mem_GetLockResource(&WFP_InitLock, TRUE))
+		return FALSE;
+
+	NTSTATUS status = FwpmBfeStateSubscribeChanges((void*)Api_DeviceObject, WFP_state_changed, NULL, &WFP_state_handle);
+	if (!NT_SUCCESS(status)) {
+		DbgPrint("Sbie WFP failed to install state change callback\r\n");
+		Mem_FreeLockResource(&WFP_InitLock);
+		WFP_InitLock = NULL;
 		return FALSE;
 	}
-	
-	//DbgPrint("--- WFP initialized successfully ---\r\n");
+
+	if (FwpmBfeStateGet() == FWPM_SERVICE_RUNNING) {
+
+		ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
+
+		WFP_Install_Callbacks();
+
+		ExReleaseResourceLite(WFP_InitLock);
+	}
+	else
+		DbgPrint("Sbie WFP is not ready\r\n");
+
 	return TRUE;
 }
 
@@ -292,16 +286,167 @@ Exit:
 
 _FX void WFP_Unload(void)
 {
+	WFP_Enabled = FALSE;
+
+	if (WFP_state_handle != NULL) {
+
+		FwpmBfeStateUnsubscribeChanges(WFP_state_handle);
+		WFP_state_handle = NULL;
+	}
+
+	if (WFP_InitLock) {
+
+		ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
+
+		WFP_Uninstall_Callbacks();
+
+		ExReleaseResourceLite(WFP_InitLock);
+
+		Mem_FreeLockResource(&WFP_InitLock);
+		WFP_InitLock = NULL;
+	}
+
+	if (WPF_MapInitialized) {
+
+		KIRQL irql; 
+
+#ifdef _WIN64
+		irql = KeAcquireSpinLockRaiseToDpc(&WFP_MapLock);
+#else
+		KeAcquireSpinLock(&WFP_MapLock, &irql);
+#endif
+
+		map_iter_t iter = map_iter();
+		while (map_next(&WFP_Processes, &iter)) {
+			WFP_PROCESS* wfp_proc = iter.value;
+			
+			WFP_FreeRules(&wfp_proc->NetFwRules);
+			WFP_Free(NULL, wfp_proc);
+		}
+
+		map_clear(&WFP_Processes);
+
+		KeReleaseSpinLock(&WFP_MapLock, irql);
+	}
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_state_changed
+//---------------------------------------------------------------------------
+
+
+_FX void WFP_state_changed(_Inout_ void* context, _In_ FWPM_SERVICE_STATE newState)
+{
+	ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
+
+	if (newState == FWPM_SERVICE_STOP_PENDING)
+		WFP_Uninstall_Callbacks();
+	else if (newState == FWPM_SERVICE_RUNNING)
+		WFP_Install_Callbacks();
+
+	ExReleaseResourceLite(WFP_InitLock);
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_Install_Callbacks
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WFP_Install_Callbacks(void)
+{
+	if (WFP_engine_handle != NULL)
+		return TRUE; // already initialized
+
+	NTSTATUS status = STATUS_SUCCESS;
+	DWORD stage = 0;
+
+	FWPM_SESSION wdf_session = { 0 };
+	BOOLEAN in_transaction = FALSE;
+	BOOLEAN callout_registered = FALSE;
+
+
+	// Begin a transaction to the FilterEngine. You must register objects (filter, callouts, sublayers)
+	//to the filter engine in the context of a 'transaction'
+	wdf_session.flags = FWPM_SESSION_FLAG_DYNAMIC;	// <-- Automatically destroys all filters and removes all callouts after this wdf_session ends
+	status = FwpmEngineOpen(NULL, RPC_C_AUTHN_WINNT, NULL, &wdf_session, &WFP_engine_handle);
+	stage = 0x10; if (!NT_SUCCESS(status)) goto Exit;
+	status = FwpmTransactionBegin(WFP_engine_handle, 0);
+	stage = 0x20; if (!NT_SUCCESS(status)) goto Exit;
+	in_transaction = TRUE;
+
+	// Register a new sublayer to the filter engine
+	status = WFP_RegisterSubLayer();
+	stage = 0x30; if (!NT_SUCCESS(status)) goto Exit;
+
+	//status = WFP_RegisterCallout(&WPF_CALLOUT_GUID_V4, &FWPM_LAYER_ALE_RESOURCE_ASSIGNMENT_V4, &WFP_callout_id_v4, &WFP_filter_id_v4);
+	//if (!NT_SUCCESS(status)) goto Exit;
+	//status = WFP_RegisterCallout(&WPF_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_RESOURCE_ASSIGNMENT_V6, &WFP_callout_id_v6, &WFP_filter_id_v6);
+	//if (!NT_SUCCESS(status)) goto Exit;
+	status = WFP_RegisterCallout(&WPF_SEND_CALLOUT_GUID_V4, &FWPM_LAYER_ALE_AUTH_CONNECT_V4, &WFP_send_callout_id_v4, &WFP_send_filter_id_v4);
+	stage = 0x41; if (!NT_SUCCESS(status)) goto Exit;
+	callout_registered = TRUE;
+	status = WFP_RegisterCallout(&WPF_SEND_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_AUTH_CONNECT_V6, &WFP_send_callout_id_v6, &WFP_send_filter_id_v6);
+	stage = 0x42; if (!NT_SUCCESS(status)) goto Exit;
+	status = WFP_RegisterCallout(&WPF_RECV_CALLOUT_GUID_V4, &FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4, &WFP_recv_callout_id_v4, &WFP_recv_filter_id_v4);
+	stage = 0x43; if (!NT_SUCCESS(status)) goto Exit;
+	status = WFP_RegisterCallout(&WPF_RECV_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6, &WFP_recv_callout_id_v6, &WFP_recv_filter_id_v6);
+	stage = 0x44; if (!NT_SUCCESS(status)) goto Exit;
+
+	// note: we could also setup FWPM_LAYER_ALE_AUTH_LISTEN_V4 but since we block all accepts we dont have to
+
+
+	// Commit transaction to the Filter Engine
+	status = FwpmTransactionCommit(WFP_engine_handle);
+	stage = 0x50; if (!NT_SUCCESS(status)) goto Exit;
+	in_transaction = FALSE;
+
+	// Cleanup and handle any errors
+Exit:
+	if (!NT_SUCCESS(status)) {
+		DbgPrint("Sbie WFP initialization failed, stage %02x, status 0x%08x\r\n", stage, status);
+
+		if (in_transaction == TRUE) {
+			FwpmTransactionAbort(WFP_engine_handle);
+			_Analysis_assume_lock_not_held_(WFP_engine_handle); // Potential leak if "FwpmTransactionAbort" fails
+		}
+		if (callout_registered) {
+			FwpsCalloutUnregisterById(WFP_send_callout_id_v4);
+			FwpsCalloutUnregisterById(WFP_send_callout_id_v6);
+			FwpsCalloutUnregisterById(WFP_recv_callout_id_v4);
+			FwpsCalloutUnregisterById(WFP_recv_callout_id_v6);
+		}
+		if (WFP_engine_handle) {
+			FwpmEngineClose(WFP_engine_handle);
+			WFP_engine_handle = NULL;
+		}
+
+		return FALSE;
+	}
+
+	DbgPrint("Sbie WFP initialized successfully\r\n");
+	return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_Uninstall_Callbacks
+//---------------------------------------------------------------------------
+
+
+_FX void WFP_Uninstall_Callbacks(void)
+{
+	if (WFP_engine_handle == NULL)
+		return; // not initialized
+
 	NTSTATUS status = STATUS_SUCCESS;
 	UNICODE_STRING symlink = { 0 };
-
-	if (WFP_engine_handle == NULL)
-		return;
 
 	//status = FwpsCalloutUnregisterById(WFP_callout_id_v4);
 	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 	//status = FwpsCalloutUnregisterById(WFP_callout_id_v6);
-	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);*/
+	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 	status = FwpsCalloutUnregisterById(WFP_send_callout_id_v4);
 	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 	status = FwpsCalloutUnregisterById(WFP_send_callout_id_v6);
@@ -312,14 +457,12 @@ _FX void WFP_Unload(void)
 	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 
 	// Close handle to the WFP Filter Engine
-	if (WFP_engine_handle){
+	if (WFP_engine_handle) {
 		FwpmEngineClose(WFP_engine_handle);
 		WFP_engine_handle = NULL;
 	}
 
-	//DbgPrint("--- WFP uninitialized ---\r\n");
-
-	map_deinit(&WFP_Processes);
+	DbgPrint("Sbie WFP uninitialized\r\n");
 }
 
 
@@ -468,8 +611,11 @@ BOOLEAN WFP_LoadRules(LIST* NetFwRules, PROCESS* proc)
 
 BOOLEAN WFP_InitProcess(PROCESS* proc)
 {
-	if (WFP_engine_handle == NULL)
+	if (!WFP_Enabled)
 		return TRUE; // nothing to do
+
+	if (WFP_engine_handle == NULL)
+		return FALSE; // WFP was not ready report failure, cancel process creation
 
 	BOOLEAN ok = TRUE;
 	KIRQL irql; 
@@ -512,8 +658,8 @@ finish:
 
 BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 {
-	if (WFP_engine_handle == NULL)
-		return TRUE; // feature disabled all ok
+	if (!WFP_Enabled)
+		return TRUE; // nothing to do
 
 	BOOLEAN ok = FALSE;
 	KIRQL irql;
@@ -581,8 +727,8 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 
 void WFP_DeleteProcess(PROCESS* proc)
 {
-	if (WFP_engine_handle == NULL)
-		return; // nothing to go
+	if (!WFP_Enabled)
+		return; // nothing to do
 
 	KIRQL irql; 
 	WFP_PROCESS* wfp_proc;

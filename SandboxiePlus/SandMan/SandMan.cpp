@@ -29,9 +29,6 @@ CSbiePlusAPI* theAPI = NULL;
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
 
-
-//BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result);
-
 class CNativeEventFilter : public QAbstractNativeEventFilter
 {
 public:
@@ -46,9 +43,6 @@ public:
 
 			if (msg->message == WM_NOTIFY)
 			{
-				//LRESULT ret;
-				//if (OnWM_Notify((NMHDR*)msg->lParam, &ret))
-				//	*result = ret;
 				return true;
 			}
 			else if (msg->message == WM_DEVICECHANGE)
@@ -93,10 +87,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theGUI = this;
 
-
-	const char version[] = VERSION_STR;
-
-
 	QDesktopServices::setUrlHandler("http", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
@@ -117,6 +107,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_RequestManager = NULL;
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
+
+	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
+		CSettingsWindow::LoadCertificate();
+	}
+
 	this->setWindowTitle(appTitle);
 
 	setAcceptDrops(true);
@@ -188,16 +183,14 @@ CSandMan::CSandMan(QWidget *parent)
 		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
 
 	// Tray
-	QIcon Icon;
-	Icon.addFile(":/IconEmpty.png");
-	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
+	m_pTrayIcon = new QSystemTrayIcon(GetIcon("IconEmpty", false), this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/IconFull.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -216,8 +209,16 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayBoxes->setRootIsDecorated(false);
 	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
 	m_pTrayBoxes->setHeaderHidden(true);
+	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
 
 	pLayout->insertSpacing(0, 1);// 32);
+
+	/*QFrame* vFrame = new QFrame;
+	vFrame->setFixedWidth(1);
+	vFrame->setFrameShape(QFrame::VLine);
+	vFrame->setFrameShadow(QFrame::Raised);
+	pLayout->addWidget(vFrame);*/
+	
 	pLayout->addWidget(m_pTrayBoxes);
 
     pTrayList->setDefaultWidget(pWidget);
@@ -342,12 +343,12 @@ void CSandMan::StoreState()
 	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
 }
 
-QIcon CSandMan::GetIcon(const QString& Name)
+QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
 {
 	QString Path = QApplication::applicationDirPath() + "/Icons/" + Name + ".png";
 	if(QFile::exists(Path))
 		return QIcon(Path);
-	return QIcon(":/Actions/" + Name + ".png");
+	return QIcon((bAction ? ":/Actions/" : ":/") + Name + ".png");
 }
 
 void CSandMan::CreateMenus()
@@ -429,7 +430,7 @@ void CSandMan::CreateMenus()
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(QIcon(":/IconFull.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(GetIcon("IconFull", false), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateToolBar()
@@ -460,8 +461,11 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEnableMonitoring);
-	m_pToolBar->addSeparator();
+	//m_pToolBar->addSeparator();
 	
+
+	if (!g_Certificate.isEmpty())
+		return;
 
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -471,10 +475,10 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupport = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
-	pSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	connect(pSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
-	m_pToolBar->addWidget(pSupport);
+	QLabel* pSupportLbl = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
+	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
+	m_pToolBar->addWidget(pSupportLbl);
 	m_pToolBar->addWidget(new QLabel("        "));
 }
 
@@ -541,7 +545,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
 {
-	EBoxColors color = eYelow;
+	EBoxColors color = eYellow;
 	switch (boxType) {
 	case CSandBoxPlus::eHardened:	color = eOrang; break;
 	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
@@ -568,7 +572,7 @@ void CSandMan::OnMessage(const QString& Message)
 		setWindowState(Qt::WindowActive);
 		SetForegroundWindow(MainWndHandle);
 	}
-	else if (Message.left(3) == "Run")
+	else if (Message.left(4) == "Run:")
 	{
 		QString CmdLine = Message.mid(4);
 
@@ -577,6 +581,23 @@ void CSandMan::OnMessage(const QString& Message)
 		}
 		else
 			RunSandboxed(QStringList(CmdLine));
+	}
+	else if (Message.left(3) == "Op:")
+	{
+		QString Op = Message.mid(3);
+
+		SB_STATUS Status;
+		if (Op == "Connect")
+			Status = ConnectSbie();
+		else if (Op == "Disconnect")
+			Status = DisconnectSbie();
+		else if (Op == "Shutdown")
+			Status = StopSbie();
+		else if (Op == "EmptyAll")
+			Status = theAPI->TerminateAll();
+		else
+			Status = SB_ERR(SB_Message, QVariantList () << (tr("Unknown operation '%1' requested via command line").arg(Op)));
+		CheckResults(QList<SB_STATUS>() << Status);
 	}
 	else if (Message.left(6) == "Status")
 	{
@@ -638,6 +659,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		return;
 
 	bool bForceProcessDisabled = false;
+	bool bConnected = false;
 
 	if (theAPI->IsConnected())
 	{
@@ -655,24 +677,23 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (!bIsMonitoring) // don't disable the view as logn as there are entries shown
 			bIsMonitoring = !theAPI->GetTrace().isEmpty();
 		m_pTraceView->setEnabled(bIsMonitoring);
-	}
 
-	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
-	{
-		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
-		m_bIconDisabled = bForceProcessDisabled;
 
-		QString IconFile;
-		if (m_bIconEmpty)
-			IconFile += ":/IconEmpty";
-		else
-			IconFile += ":/IconFull";
-		if(m_bIconDisabled)
-			IconFile += "D";
+		if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
+		{
+			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+			m_bIconDisabled = bForceProcessDisabled;
 
-		QIcon Icon;
-		Icon.addFile(IconFile + ".png");
-		m_pTrayIcon->setIcon(Icon);
+			QString IconFile;
+			if (m_bIconEmpty)
+				IconFile = "IconEmpty";
+			else
+				IconFile = "IconFull";
+			if (m_bIconDisabled)
+				IconFile += "D";
+
+			m_pTrayIcon->setIcon(GetIcon(IconFile, false));
+		}
 	}
 
 	if (!isVisible() || windowState().testFlag(Qt::WindowMinimized))
@@ -805,7 +826,7 @@ void CSandMan::OnStatusChanged()
 		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
-		statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
+		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
 		//appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
 		if (IsFullyPortable())
@@ -861,6 +882,15 @@ void CSandMan::OnStatusChanged()
 		if (theConf->GetBool("Options/WatchIni", true))
 			theAPI->WatchIni(true);
 
+		if (!theAPI->ReloadCert().IsError()) {
+			CSettingsWindow::LoadCertificate();
+		}
+		else {
+			g_Certificate.clear();
+		}
+
+		g_FeatureFlags = theAPI->GetFeatureFlags();
+
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -877,8 +907,14 @@ void CSandMan::OnStatusChanged()
 
 		theAPI->WatchIni(false);
 	}
+
+	m_pSupport->setVisible(g_Certificate.isEmpty());
+
 	this->setWindowTitle(appTitle);
 
+	m_pTrayIcon->setIcon(GetIcon(isConnected ? "IconEmpty" : "IconOff", false));
+	m_bIconEmpty = true;
+	m_bIconDisabled = false;
 
 	m_pNew->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
@@ -1629,6 +1665,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 		{
 			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
+			bool bAdded = false;
+
 			QMap<QString, QTreeWidgetItem*> OldBoxes;
 			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
 			{
@@ -1651,13 +1689,39 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
 					pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
 					m_pTrayBoxes->addTopLevelItem(pItem);
+
+					bAdded = true;
 				}
 
-				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount(), pBoxEx->GetType()));
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
 			}
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)
 				delete pItem;
+
+			if (!OldBoxes.isEmpty() || bAdded) 
+			{
+				auto palette = m_pTrayBoxes->palette();
+				palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(QPalette::Window));
+				m_pTrayBoxes->setPalette(palette);
+				m_pTrayBoxes->setFrameShape(QFrame::NoFrame);
+
+				//const int FrameWidth = m_pTrayBoxes->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+				int Height = 0; //m_pTrayBoxes->header()->height() + (2 * FrameWidth);
+
+				for (QTreeWidgetItemIterator AllIterator(m_pTrayBoxes, QTreeWidgetItemIterator::All); *AllIterator; ++AllIterator)
+					Height += m_pTrayBoxes->visualItemRect(*AllIterator).height();
+
+				QRect scrRect = this->screen()->availableGeometry();
+				int MaxHeight = scrRect.height() / 2;
+				if (Height > MaxHeight) {
+					Height = MaxHeight;
+					if (Height < 64)
+						Height = 64;
+				}
+
+				m_pTrayBoxes->setFixedHeight(Height);
+			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
 			break;
@@ -2266,83 +2330,3 @@ void CSandMan::OnWndFinder()
 		finishedNotifier->deleteLater();
 	});
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-/*
-#include <windows.h>
-#include <shellapi.h>
-
-#define RFF_NOBROWSE 0x0001
-#define RFF_NODEFAULT 0x0002
-#define RFF_CALCDIRECTORY 0x0004
-#define RFF_NOLABEL 0x0008
-#define RFF_NOSEPARATEMEM 0x0020
-#define RFF_OPTRUNAS 0x0040
-
-#define RFN_VALIDATE (-510)
-#define RFN_LIMITEDRUNAS (-511)
-
-#define RF_OK 0x0000
-#define RF_CANCEL 0x0001
-#define RF_RETRY 0x0002
-
-typedef struct _NMRUNFILEDLGW
-{
-	NMHDR hdr;
-	PWSTR lpszFile;
-	PWSTR lpszDirectory;
-	UINT ShowCmd;
-} NMRUNFILEDLGW, *LPNMRUNFILEDLGW, *PNMRUNFILEDLGW;
-
-QString g_RunDialogCommand;
-
-BOOLEAN OnWM_Notify(NMHDR *Header, LRESULT *Result)
-{
-	LPNMRUNFILEDLGW runFileDlg = (LPNMRUNFILEDLGW)Header;
-	if (Header->code == RFN_VALIDATE)
-	{
-		g_RunDialogCommand = QString::fromWCharArray(runFileDlg->lpszFile);
-
-		*Result = RF_CANCEL;
-		return TRUE;
-	}
-	//else if (Header->code == RFN_LIMITEDRUNAS)
-	//{
-	//
-	//}
-	return FALSE;
-}
-
-extern "C"
-{
-	NTSYSCALLAPI NTSTATUS NTAPI LdrGetProcedureAddress(IN PVOID DllHandle, IN VOID* ProcedureName OPTIONAL, IN ULONG ProcedureNumber OPTIONAL, OUT PVOID *ProcedureAddress, IN BOOLEAN RunInitRoutines);
-	//NTSTATUS(NTAPI *LdrGetProcedureAddress)(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Oridinal, PVOID *FunctionAddress);
-}
-
-BOOLEAN NTAPI ShowRunFileDialog(HWND WindowHandle, HICON WindowIcon, LPCWSTR WorkingDirectory, LPCWSTR WindowTitle, LPCWSTR WindowDescription, ULONG Flags)
-{
-	typedef BOOL(WINAPI *RunFileDlg_I)(HWND hwndOwner, HICON hIcon, LPCWSTR lpszDirectory, LPCWSTR lpszTitle, LPCWSTR lpszDescription, ULONG uFlags);
-
-	BOOLEAN result = FALSE;
-
-	if (HMODULE shell32Handle = LoadLibrary(L"shell32.dll"))
-	{
-		RunFileDlg_I dialog = NULL;
-		if (LdrGetProcedureAddress(shell32Handle, NULL, 61, (void**)&dialog, TRUE) == 0)
-			result = !!dialog(WindowHandle, WindowIcon, WorkingDirectory, WindowTitle, WindowDescription, Flags);
-
-		FreeLibrary(shell32Handle);
-	}
-
-	return result;
-}
-
-QString ShowRunDialog(const QString& BoxName)
-{
-	g_RunDialogCommand.clear();
-	wstring boxName = BoxName.toStdWString();
-	ShowRunFileDialog(MainWndHandle, NULL, NULL, boxName.c_str(), L"Enter the path of a program that will be created in a sandbox.", 0); // RFF_OPTRUNAS);
-	return g_RunDialogCommand;
-}
-*/

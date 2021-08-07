@@ -100,3 +100,15 @@ russian.CustomPagePortableMode=Извлечь все файлы в катало�
 russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
 russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
 russian.RunSandboxedMenu=Запустить в песочнице (&S)
+
+; German
+german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
+german.CustomPageLabel1=Wählen Sie die Installationsart aus
+german.CustomPageLabel2=Wie soll installiert werden
+german.CustomPageLabel3=Wählen Sie die Installationsmethode
+german.CustomPageInstallMode=Installiere {#MyAppName} auf diesem Computer
+german.CustomPageUpgradeMode=Update der bestehenden {#MyAppName} Installation
+german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragbaren Verwendung
+german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
+german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
+german.RunSandboxedMenu=In &Sandbox ausführen

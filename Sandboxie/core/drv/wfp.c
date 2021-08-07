@@ -110,6 +110,8 @@ const WCHAR* Process_MatchImageAndGetValue(BOX* box, const WCHAR* value, const W
 
 ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);;
 
+void WFP_FreeRules(LIST* NetFwRules);
+
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, WFP_Init)
 #endif // ALLOC_PRAGMA
@@ -165,7 +167,7 @@ void GetNetwork5TupleIndexesForLayer(
 
 
 BOOLEAN WFP_Enabled = FALSE;
-PERESOURCE WFP_InitLock = NULL;
+static PERESOURCE WFP_InitLock = NULL;
 
 static HANDLE WFP_state_handle = NULL;
 
@@ -186,8 +188,9 @@ static UINT64 WFP_send_filter_id_v6 = 0;
 static UINT64 WFP_recv_filter_id_v4 = 0;
 static UINT64 WFP_recv_filter_id_v6 = 0;
 
-map_base_t WFP_Processes;
-KSPIN_LOCK WFP_MapLock;
+static BOOLEAN WPF_MapInitialized = FALSE;
+static map_base_t WFP_Processes;
+static KSPIN_LOCK WFP_MapLock;
 
 
 //---------------------------------------------------------------------------
@@ -219,18 +222,36 @@ _FX VOID WFP_Free(void* pool, void* ptr)
 
 _FX BOOLEAN WFP_Init(void)
 {
-	WFP_Enabled = Conf_Get_Boolean(NULL, L"NetworkEnableWFP", 0, FALSE);
-	if (!WFP_Enabled)
-		return TRUE;
-
-	DbgPrint("Sbie WFP enabled\r\n");
-
 	map_init(&WFP_Processes, NULL);
 	WFP_Processes.func_malloc = &WFP_Alloc;
 	WFP_Processes.func_free = &WFP_Free;
-	map_resize(&WFP_Processes, 128); // prepare some buckets for better performance
 
 	KeInitializeSpinLock(&WFP_MapLock);
+
+	WPF_MapInitialized = TRUE;
+
+	if (!Conf_Get_Boolean(NULL, L"NetworkEnableWFP", 0, FALSE))
+		return TRUE;
+
+	return WFP_Load();
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_Load
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WFP_Load(void)
+{
+	if (WFP_Enabled)
+		return TRUE;
+
+	WFP_Enabled = TRUE;
+
+	map_resize(&WFP_Processes, 128); // prepare some buckets for better performance
+
+	DbgPrint("Sbie WFP enabled\r\n");
 
 	if (!Mem_GetLockResource(&WFP_InitLock, TRUE))
 		return FALSE;
@@ -238,15 +259,75 @@ _FX BOOLEAN WFP_Init(void)
 	NTSTATUS status = FwpmBfeStateSubscribeChanges((void*)Api_DeviceObject, WFP_state_changed, NULL, &WFP_state_handle);
 	if (!NT_SUCCESS(status)) {
 		DbgPrint("Sbie WFP failed to install state change callback\r\n");
+		Mem_FreeLockResource(&WFP_InitLock);
+		WFP_InitLock = NULL;
 		return FALSE;
 	}
 
-	if (FwpmBfeStateGet() == FWPM_SERVICE_RUNNING)
+	if (FwpmBfeStateGet() == FWPM_SERVICE_RUNNING) {
+
+		ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
+
 		WFP_Install_Callbacks();
+
+		ExReleaseResourceLite(WFP_InitLock);
+	}
 	else
 		DbgPrint("Sbie WFP is not ready\r\n");
 
 	return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// WFP_Unload
+//---------------------------------------------------------------------------
+
+
+_FX void WFP_Unload(void)
+{
+	WFP_Enabled = FALSE;
+
+	if (WFP_state_handle != NULL) {
+
+		FwpmBfeStateUnsubscribeChanges(WFP_state_handle);
+		WFP_state_handle = NULL;
+	}
+
+	if (WFP_InitLock) {
+
+		ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
+
+		WFP_Uninstall_Callbacks();
+
+		ExReleaseResourceLite(WFP_InitLock);
+
+		Mem_FreeLockResource(&WFP_InitLock);
+		WFP_InitLock = NULL;
+	}
+
+	if (WPF_MapInitialized) {
+
+		KIRQL irql; 
+
+#ifdef _WIN64
+		irql = KeAcquireSpinLockRaiseToDpc(&WFP_MapLock);
+#else
+		KeAcquireSpinLock(&WFP_MapLock, &irql);
+#endif
+
+		map_iter_t iter = map_iter();
+		while (map_next(&WFP_Processes, &iter)) {
+			WFP_PROCESS* wfp_proc = iter.value;
+			
+			WFP_FreeRules(&wfp_proc->NetFwRules);
+			WFP_Free(NULL, wfp_proc);
+		}
+
+		map_clear(&WFP_Processes);
+
+		KeReleaseSpinLock(&WFP_MapLock, irql);
+	}
 }
 
 
@@ -257,10 +338,14 @@ _FX BOOLEAN WFP_Init(void)
 
 _FX void WFP_state_changed(_Inout_ void* context, _In_ FWPM_SERVICE_STATE newState)
 {
+	ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
+
 	if (newState == FWPM_SERVICE_STOP_PENDING)
 		WFP_Uninstall_Callbacks();
 	else if (newState == FWPM_SERVICE_RUNNING)
 		WFP_Install_Callbacks();
+
+	ExReleaseResourceLite(WFP_InitLock);
 }
 
 
@@ -271,12 +356,8 @@ _FX void WFP_state_changed(_Inout_ void* context, _In_ FWPM_SERVICE_STATE newSta
 
 _FX BOOLEAN WFP_Install_Callbacks(void)
 {
-	ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
-
-	if (WFP_engine_handle != NULL) {
-		ExReleaseResourceLite(WFP_InitLock);
+	if (WFP_engine_handle != NULL)
 		return TRUE; // already initialized
-	}
 
 	NTSTATUS status = STATUS_SUCCESS;
 	DWORD stage = 0;
@@ -341,12 +422,10 @@ Exit:
 			WFP_engine_handle = NULL;
 		}
 
-		ExReleaseResourceLite(WFP_InitLock);
 		return FALSE;
 	}
 
 	DbgPrint("Sbie WFP initialized successfully\r\n");
-	ExReleaseResourceLite(WFP_InitLock);
 	return TRUE;
 }
 
@@ -358,12 +437,8 @@ Exit:
 
 _FX void WFP_Uninstall_Callbacks(void)
 {
-	ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
-
-	if (WFP_engine_handle == NULL) {
-		ExReleaseResourceLite(WFP_InitLock);
+	if (WFP_engine_handle == NULL)
 		return; // not initialized
-	}
 
 	NTSTATUS status = STATUS_SUCCESS;
 	UNICODE_STRING symlink = { 0 };
@@ -371,7 +446,7 @@ _FX void WFP_Uninstall_Callbacks(void)
 	//status = FwpsCalloutUnregisterById(WFP_callout_id_v4);
 	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 	//status = FwpsCalloutUnregisterById(WFP_callout_id_v6);
-	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);*/
+	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 	status = FwpsCalloutUnregisterById(WFP_send_callout_id_v4);
 	//if (!NT_SUCCESS(status)) DbgPrint("Failed to unregister callout, status: 0x%08x\r\n", status);
 	status = FwpsCalloutUnregisterById(WFP_send_callout_id_v6);
@@ -388,26 +463,6 @@ _FX void WFP_Uninstall_Callbacks(void)
 	}
 
 	DbgPrint("Sbie WFP uninitialized\r\n");
-	ExReleaseResourceLite(WFP_InitLock);
-}
-
-
-//---------------------------------------------------------------------------
-// WFP_Unload
-//---------------------------------------------------------------------------
-
-
-_FX void WFP_Unload(void)
-{
-	if (!WFP_Enabled)
-		return; // nothing to do
-
-	map_deinit(&WFP_Processes);
-
-	if (WFP_state_handle != NULL)
-		FwpmBfeStateUnsubscribeChanges(WFP_state_handle);
-
-	WFP_Uninstall_Callbacks();
 }
 
 

@@ -1179,7 +1179,7 @@ _FX LONG SbieApi_QuerySymbolicLink(
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_ReloadConf(ULONG session_id)
+_FX LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -1187,6 +1187,7 @@ _FX LONG SbieApi_ReloadConf(ULONG session_id)
     memset(parms, 0, sizeof(parms));
     parms[0] = API_RELOAD_CONF;
     parms[1] = session_id;
+    parms[2] = flags;
     status = SbieApi_Ioctl(parms);
 
     return status;

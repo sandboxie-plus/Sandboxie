@@ -87,10 +87,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theGUI = this;
 
-
-	const char version[] = VERSION_STR;
-
-
 	QDesktopServices::setUrlHandler("http", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
@@ -111,6 +107,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_RequestManager = NULL;
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
+
+	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
+		CSettingsWindow::LoadCertificate();
+	}
+
 	this->setWindowTitle(appTitle);
 
 	setAcceptDrops(true);
@@ -460,8 +461,11 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEnableMonitoring);
-	m_pToolBar->addSeparator();
+	//m_pToolBar->addSeparator();
 	
+
+	if (!g_Certificate.isEmpty())
+		return;
 
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -471,10 +475,10 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupport = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
-	pSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	connect(pSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
-	m_pToolBar->addWidget(pSupport);
+	QLabel* pSupportLbl = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
+	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
+	m_pToolBar->addWidget(pSupportLbl);
 	m_pToolBar->addWidget(new QLabel("        "));
 }
 
@@ -822,7 +826,7 @@ void CSandMan::OnStatusChanged()
 		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
-		statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
+		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
 		//appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
 		if (IsFullyPortable())
@@ -878,6 +882,15 @@ void CSandMan::OnStatusChanged()
 		if (theConf->GetBool("Options/WatchIni", true))
 			theAPI->WatchIni(true);
 
+		if (!theAPI->ReloadCert().IsError()) {
+			CSettingsWindow::LoadCertificate();
+		}
+		else {
+			g_Certificate.clear();
+		}
+
+		g_FeatureFlags = theAPI->GetFeatureFlags();
+
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -894,6 +907,9 @@ void CSandMan::OnStatusChanged()
 
 		theAPI->WatchIni(false);
 	}
+
+	m_pSupport->setVisible(g_Certificate.isEmpty());
+
 	this->setWindowTitle(appTitle);
 
 	m_pTrayIcon->setIcon(GetIcon(isConnected ? "IconEmpty" : "IconOff", false));

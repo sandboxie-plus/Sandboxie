@@ -305,7 +305,7 @@ LONG SbieApi_QuerySymbolicLink(
 
 
 SBIEAPI_EXPORT
-LONG SbieApi_ReloadConf(ULONG session_id);
+LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);
 
 
 SBIEAPI_EXPORT

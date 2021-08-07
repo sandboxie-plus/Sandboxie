@@ -1379,6 +1379,7 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
                 }
             }
 
+            File_UnRegisterCloseHandler(merge->handle, Key_NtClose);
             List_Remove(&Key_Handles, merge);
             Key_MergeFree(merge, TRUE);
         }
@@ -1446,7 +1447,7 @@ _FX void Key_NtClose(HANDLE KeyHandle)
             merge->ticks = 0;
             break;
         }
-        merge = List_Next(merge);;
+        merge = List_Next(merge);
     }
 
     LeaveCriticalSection(&Key_Handles_CritSec);

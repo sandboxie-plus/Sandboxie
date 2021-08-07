@@ -1032,14 +1032,14 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 
                 BOOL ok = FALSE;        // set TRUE to skip UIRestrictions
 
-				// OpenToken BEGIN
-				if ((SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) || SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE)))
-					ok = TRUE;
-				// OpenToken END
 				// OriginalToken BEGIN
 				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
 					ok = TRUE;
 				// OriginalToken END
+				// OpenToken BEGIN
+				if ((SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) || SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE)))
+					ok = TRUE;
+				// OpenToken END
 
                 if (! ok) {
                     ok = SetInformationJobObject(

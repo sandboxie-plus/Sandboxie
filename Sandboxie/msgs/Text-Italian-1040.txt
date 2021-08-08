@@ -3343,8 +3343,7 @@ L'interfaccia legacy di Sandboxie Classic non implementa il supporto per la funz
 È comunque possibile configurare la funzione utilizzando il file ini, le regole sono strutturate nel modo seguente:
 NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
 
-Se si preferisce utilizzare un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce
-pieno supporto visivo per tutte le nuove funzionalità.
+Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
 .
 
 6005;txt;01
@@ -3358,15 +3357,13 @@ L'interfaccia legacy di Sandboxie Classic supporta soltanto alcune opzioni di re
 Le opzioni aggiuntive come "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" e molte altre ancora possono essere impostate nella sezione ini dell'area virtuale.
 L'interfaccia di Sandboxie Plus (SandMan.exe) fornisce ulteriori opzioni di personalizzazione per le restrizioni di accesso.
 
-Se si preferisce utilizzare un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce
-pieno supporto visivo per tutte le nuove funzionalità.
+Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
 .
 
 6007;txt;01
 ...
 
-Se si preferisce utilizzare un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce
-pieno supporto visivo per tutte le nuove funzionalità.
+Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
 .
 
 

@@ -574,13 +574,23 @@ void CSandMan::OnMessage(const QString& Message)
 	}
 	else if (Message.left(4) == "Run:")
 	{
+		QString BoxName = "DefaultBox";
 		QString CmdLine = Message.mid(4);
+
+		if (CmdLine.contains("\\start.exe", Qt::CaseInsensitive)) {
+			int pos = CmdLine.indexOf("/box:", 0, Qt::CaseInsensitive);
+			int pos2 = CmdLine.indexOf(" ", pos);
+			if (pos != -1 && pos2 != -1) {
+				BoxName = CmdLine.mid(pos + 5, pos2 - (pos + 5));
+				CmdLine = CmdLine.mid(pos2 + 1);
+			}
+		}
 
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
 			theAPI->RunStart("DefaultBox", CmdLine);
 		}
 		else
-			RunSandboxed(QStringList(CmdLine));
+			RunSandboxed(QStringList(CmdLine), BoxName);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -636,9 +646,9 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-void CSandMan::RunSandboxed(const QStringList& Commands)
+void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName)
 {
-	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands);
+	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName);
 	pSelectBoxWindow->show();
 }
 
@@ -650,7 +660,7 @@ void CSandMan::dropEvent(QDropEvent* e)
 			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
 
-	RunSandboxed(Commands);
+	RunSandboxed(Commands, "DefaultBox");
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)
@@ -1778,7 +1788,7 @@ void CSandMan::OpenUrl(const QUrl& url)
 		if(bCheck) theConf->SetValue("Options/OpenUrlsSandboxed", iSandboxed);
 	}
 
-	if (iSandboxed) RunSandboxed(QStringList(url.toString()));
+	if (iSandboxed) RunSandboxed(QStringList(url.toString()), "DefaultBox");
 	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
@@ -2135,7 +2145,7 @@ void CSandMan::LoadLanguage()
 		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 
 		QString LangAux = Lang; // Short version as fallback
-		LangAux.truncate(LangAux.lastIndexOf('-'));
+		LangAux.truncate(LangAux.lastIndexOf('_'));
 
 		QString LangPath = QApplication::applicationDirPath() + "/translations/sandman_";
 		bool bAux = false;

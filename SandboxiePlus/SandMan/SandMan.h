@@ -50,7 +50,7 @@ public:
 
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 
-	void				RunSandboxed(const QStringList& Commands);
+	void				RunSandboxed(const QStringList& Commands, const QString& BoxName);
 
 	QIcon				GetBoxIcon(bool inUse, int boxType = 0);
 

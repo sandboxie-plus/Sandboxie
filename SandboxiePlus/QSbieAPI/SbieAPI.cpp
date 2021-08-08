@@ -995,15 +995,21 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QPr
 		StartArgs += "/box:" + BoxName + " ";
 	else
 		StartArgs += "/disable_force ";
+
 	StartArgs += Command;
 
+	wchar_t sysPath[MAX_PATH];
+	GetSystemDirectoryW(sysPath, MAX_PATH);
+
 	if (pProcess) {
+		pProcess->setWorkingDirectory(QString::fromWCharArray(sysPath));
 		pProcess->setProgram(GetStartPath());
 		pProcess->setNativeArguments(StartArgs);
 		pProcess->start();
 	} 
 	else {
 		QProcess process;
+		process.setWorkingDirectory(QString::fromWCharArray(sysPath));
 		process.setProgram(GetStartPath());
 		process.setNativeArguments(StartArgs);
 		process.startDetached();

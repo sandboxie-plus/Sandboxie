@@ -795,6 +795,19 @@ BOOL Parse_Command_Line(void)
         return FALSE;
     }
 
+    //
+    // if this is a link to start.exe with a box, extract the target command line
+    //
+
+    if (StrStrIW(cmd, L"\\start.exe") != 0) {
+        wchar_t* tmp = StrStrIW(cmd, L"/box:");
+        if (tmp) {
+            tmp = StrStrIW(tmp, L" ");
+            if (tmp)
+                cmd = tmp + 1;
+        }
+    }
+
     ChildCmdLine = (WCHAR *)MyHeapAlloc(10240 * sizeof(WCHAR));
     wcscpy(ChildCmdLine, cmd);
 

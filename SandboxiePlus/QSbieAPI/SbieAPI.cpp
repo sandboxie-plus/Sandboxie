@@ -307,8 +307,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m_IniPath = GetIniPath(&bHome);
 	qDebug() << "Config file:" << m_IniPath << (bHome ? "(home)" : "(system)");
 
-	if (m_pUserSection == NULL)
-	{
+	if (m_UserName.isEmpty()) {
 		QString UserSection = GetUserSection(&m_UserName);
 		if(!UserSection.isEmpty())
 			m_pUserSection = new CSbieIni(UserSection, this, this);

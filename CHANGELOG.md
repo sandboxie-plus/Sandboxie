@@ -7,17 +7,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.3 / 5.51.3] - 2021-08-08
 
 ### added
-- ability to us the "run unsandboxed" option with Sandboxie links [#614](https://github.com/sandboxie-plus/Sandboxie/issues/614)
+- ability to use the "run unsandboxed" option with Sandboxie links [#614](https://github.com/sandboxie-plus/Sandboxie/issues/614)
 
 ### Fixed
-- fixed open template does not load the edit tab [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
+- fixed open template does not load the edit tab [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054#issuecomment-893001316)
 - fixed issue with "explore sandboxed" [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
 - fixed start directory for sandboxed processes [#1071](https://github.com/sandboxie-plus/Sandboxie/issues/1071)
 - fixed issue with language auto-detection [#1018](https://github.com/sandboxie-plus/Sandboxie/issues/1018)
 - fixed issue with multiple files with the same name, by always showing the extension [#1041](https://github.com/sandboxie-plus/Sandboxie/issues/1041)
 - fixed multiple program grouping issues with the SandMan UI [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
 - fixed "no disk" error [#966](https://github.com/sandboxie-plus/Sandboxie/issues/966)
-- fixed issue with 32bit build using qMake, the /O2 option resulted in a crash in the QSbieDll.dll [#995](https://github.com/sandboxie-plus/Sandboxie/issues/995)
+- fixed issue with 32bit build using qMake, the /O2 option resulted in a crash in the QSbieAPI.dll [#995](https://github.com/sandboxie-plus/Sandboxie/issues/995)
 
 
 

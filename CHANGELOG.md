@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with language auto detection [#1018](https://github.com/sandboxie-plus/Sandboxie/issues/1018)
 - fixed issue with multiple files with same name, by always showing the extension [#1041](https://github.com/sandboxie-plus/Sandboxie/issues/1041)
 - fixed multiple program grouping issues with the sandman ui [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
-
+- fixed no disk error [#966](https://github.com/sandboxie-plus/Sandboxie/issues/966)
 
 
 ## [0.9.2 / 5.51.2] - 2021-08-07

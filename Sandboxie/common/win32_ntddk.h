@@ -2419,6 +2419,8 @@ RtlNtStatusToDosError(NTSTATUS Status);
 
 __declspec(dllimport) void __stdcall RtlRaiseStatus(NTSTATUS Status);
 
+NTSTATUS NTAPI RtlSetThreadErrorMode(IN ULONG NewMode, OUT PULONG OldMode);
+
 __declspec(dllimport) PULONG __stdcall
 RtlSubAuthoritySid(
     _In_ PSID Sid,

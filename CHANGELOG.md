@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed multiple program grouping issues with the sandman ui [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
 - fixed no disk error [#966](https://github.com/sandboxie-plus/Sandboxie/issues/966)
 - fixed issue with 32bit build using qMake, the /O2 option resulted in a crash in teh QSbieDll.dll [#995](https://github.com/sandboxie-plus/Sandboxie/issues/995)
-
+- fixed issue with UserSettings introduced in a recent build [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
 
 
 ## [0.9.2 / 5.51.2] - 2021-08-07

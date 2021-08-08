@@ -814,20 +814,6 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="btnAddProg">
-             <property name="text">
-              <string>Add Program</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="btnDelProg">
-             <property name="text">
-              <string>Remove</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="1">
             <spacer name="verticalSpacer_7">
              <property name="orientation">
@@ -841,7 +827,7 @@
              </property>
             </spacer>
            </item>
-           <item row="1" column="0" rowspan="4">
+           <item row="1" column="0" rowspan="5">
             <widget class="QTreeWidget" name="treeGroups">
              <property name="sortingEnabled">
               <bool>true</bool>
@@ -853,13 +839,34 @@
              </column>
             </widget>
            </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="btnAddProg">
+             <property name="text">
+              <string>Add Program</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</string>
+              <string>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="btnDelProg">
+             <property name="text">
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QCheckBox" name="chkShowGroupTmpl">
+             <property name="text">
+              <string>Show Templates</string>
              </property>
             </widget>
            </item>

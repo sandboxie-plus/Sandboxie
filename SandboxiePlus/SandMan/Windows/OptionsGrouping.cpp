@@ -14,35 +14,12 @@ void COptionsWindow::LoadGroups()
 	m_TemplateGroups.clear();
 	ui.treeGroups->clear();
 
-	QMultiMap<QString, QStringList> GroupMap; // if we have a duplicate we want to know it
-	QSet<QString> LocalGroups;
-
 	QStringList ProcessGroups = m_pBox->GetTextList("ProcessGroup", m_Template);
 	foreach(const QString& Group, ProcessGroups)
 	{
 		QStringList Entries = Group.split(",");
 		QString GroupName = Entries.takeFirst();
-		GroupMap.insertMulti(GroupName, Entries);
-		LocalGroups.insert(GroupName);
-	}
 
-	foreach(const QString& Template, m_pBox->GetTemplates())
-	{
-		foreach(const QString& Group, m_pBox->GetTextListTmpl("ProcessGroup", Template))
-		{
-			m_TemplateGroups.insert(Group);
-			QStringList Entries = Group.split(",");
-			QString GroupName = Entries.takeFirst();
-			if (LocalGroups.contains(GroupName))
-				continue; // local group definitions overwrite template once
-			GroupMap.insertMulti(GroupName, Entries);
-		}
-	}
-
-	for(QMultiMap<QString, QStringList>::iterator I = GroupMap.begin(); I != GroupMap.end(); ++I)
-	{
-		QString GroupName = I.key();
-		QStringList Entries = I.value();
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setData(0, Qt::UserRole, GroupName);
 		if (GroupName.length() > 2)
@@ -58,9 +35,59 @@ void COptionsWindow::LoadGroups()
 		}
 		ui.treeGroups->addTopLevelItem(pItem);
 	}
+	
+	LoadGroupsTmpl();
+
 	ui.treeGroups->expandAll();
 
 	m_GroupsChanged = false;
+}
+
+void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
+{
+	if (ui.chkShowGroupTmpl->isChecked())
+	{
+		foreach(const QString& Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString& Group, m_pBox->GetTextListTmpl("ProcessGroup", Template))
+			{
+				m_TemplateGroups.insert(Group);
+				QStringList Entries = Group.split(",");
+				QString GroupName = Entries.takeFirst();
+				
+
+				QTreeWidgetItem* pItem = new QTreeWidgetItem();
+				if (GroupName.length() > 2)
+					GroupName = GroupName.mid(1, GroupName.length() - 2);
+				pItem->setText(0, GroupName + " (" + Template + ")");
+				for (int i = 0; i < Entries.count(); i++) 
+				{
+					if (Entries[i].isEmpty())
+						continue;
+					QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
+					SetProgramItem(Entries[i], pSubItem, 0);
+					pItem->addChild(pSubItem);
+				}
+				ui.treeGroups->addTopLevelItem(pItem);
+			}
+		}
+
+		if (bUpdate)
+			ui.treeGroups->expandAll();
+	}
+	else if (bUpdate)
+	{
+		for (int i = 0; i < ui.treeGroups->topLevelItemCount(); )
+		{
+			QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
+			QString GroupName = pItem->data(0, Qt::UserRole).toString();
+			if (GroupName.isEmpty()) {
+				delete pItem;
+				continue; // entry from template
+			}
+			i++;
+		}
+	}
 }
 
 void COptionsWindow::SaveGroups()
@@ -70,6 +97,8 @@ void COptionsWindow::SaveGroups()
 	{
 		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
 		QString GroupName = pItem->data(0, Qt::UserRole).toString();
+		if (GroupName.isEmpty())
+			continue; // this is a template entry, dont save
 		QStringList Programs;
 		for (int j = 0; j < pItem->childCount(); j++)
 			Programs.append(pItem->child(j)->data(0, Qt::UserRole).toString());
@@ -237,6 +266,11 @@ void COptionsWindow::OnAddProg()
 		return;
 	}
 
+	if (pItem->data(0, Qt::UserRole).toString().isEmpty()) {
+		QMessageBox::warning(this, "SandboxiePlus", tr("Template values can not be edited."));
+		return;
+	}
+
 	QString Value = SelectProgram();
 	if (Value.isEmpty())
 		return;
@@ -253,6 +287,11 @@ void COptionsWindow::OnDelProg()
 	QTreeWidgetItem* pItem = ui.treeGroups->currentItem();
 	if (!pItem)
 		return;
+
+	if ((pItem->parent() ? pItem->parent() : pItem)->data(0, Qt::UserRole).toString().isEmpty()) {
+		QMessageBox::warning(this, "SandboxiePlus", tr("Template values can not be edited."));
+		return;
+	}
 
 	delete pItem;
 

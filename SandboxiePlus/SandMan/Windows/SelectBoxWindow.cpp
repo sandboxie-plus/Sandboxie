@@ -10,7 +10,7 @@
 #include <dbt.h>
 #endif
 
-CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, QWidget *parent)
+CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& BoxName, QWidget *parent)
 	: QDialog(parent)
 {
 	m_Commands = Commands;
@@ -54,7 +54,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, QWidget *parent)
 		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount(), pBoxEx->GetType()));
 		ui.treeBoxes->addTopLevelItem(pItem);
 
-		if (pBox->GetName().toLower() == "defaultbox")
+		if (pBox->GetName().compare(BoxName, Qt::CaseInsensitive) == 0)
 			ui.treeBoxes->setCurrentItem(pItem);
 	}
 

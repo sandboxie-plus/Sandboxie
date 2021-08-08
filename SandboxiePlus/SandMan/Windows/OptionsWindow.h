@@ -41,6 +41,7 @@ private slots:
 	void OnAddGroup();
 	void OnAddProg();
 	void OnDelProg();
+	void OnShowGroupTmpl()			{ LoadGroupsTmpl(true); }
 
 	void OnForceProg();
 	void OnForceDir();
@@ -224,6 +225,7 @@ protected:
 	void SaveGeneral();
 
 	void LoadGroups();
+	void LoadGroupsTmpl(bool bUpdate = false);
 	void SaveGroups();
 
 	void LoadForced();

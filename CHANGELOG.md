@@ -3,25 +3,47 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+## [0.9.3 / 5.51.3] - 2021-08-08
+
+### added
+- ability to us theh run unsandboxed option with sandboxie links [#614](https://github.com/sandboxie-plus/Sandboxie/issues/614)
+
+### Fixed
+- fixed open template does not load the edit tab [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
+- fixed issue with explore sandboxed [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
+- fixed start directory for sandboxed processes [#1071](https://github.com/sandboxie-plus/Sandboxie/issues/1071)
+- fixed issue with language auto detection [#1018](https://github.com/sandboxie-plus/Sandboxie/issues/1018)
+- fixed issue with multiple files with same name, by always showing the extension [#1041](https://github.com/sandboxie-plus/Sandboxie/issues/1041)
+- fixed multiple program grouping issues with the sandman ui [#1054](https://github.com/sandboxie-plus/Sandboxie/issues/1054)
+- fixed no disk error [#966](https://github.com/sandboxie-plus/Sandboxie/issues/966)
+- fixed issue with 32bit build using qMake, the /O2 option resulted in a crash in teh QSbieDll.dll [#995](https://github.com/sandboxie-plus/Sandboxie/issues/995)
+
+
+
 ## [0.9.2 / 5.51.2] - 2021-08-07
 
 ### Added
-- added ability to reconfigure teh driver, allowing to enable/disable WFP and otehr features without a reload/reboot
+- added ability to reconfigure the driver, which allows enabling/disabling WFP and other features without a reload/reboot
+
+### Changed
+- reorganized and improved the settings window
+- improved the tray icon a bit, the sand is now more yellow
 
 ### Fixed
 - fixed issue with process start handling introduced in 5.51.0 [#1063](https://github.com/sandboxie-plus/Sandboxie/issues/1063)
 - fixed issue with quick recovery introduced in 5.51.0
-- fixed incompatybility with CET Hardware-enforced Stack Protection on intel 11th gen and AMD 5xxxX cpu's [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
+- fixed incompatibility with CET Hardware-enforced Stack Protection on Intel 11th gen and AMD Ryzen 5XXX CPUs [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
 
 ### removed
-- commented out all windows xp specific support code
+- commented out all Windows XP-specific support code from the driver
 
 
 
 ## [0.9.1 / 5.51.1] - 2021-07-31
 
 ### Added
-- added tray icon indicating no connection to the driver if it happens
+- added tray icon indicating broken connection to the driver if it happens
 - added option to customize the tray icon
 - added "DllSkipHook=some.dll" option to disable installation of hooks into selected DLLs
 - added localization support for Plus installer (by yfdyh000 and mpheath) [#923](https://github.com/sandboxie-plus/Sandboxie/pull/923)
@@ -36,7 +58,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with checking WFP status
 - fixed issue WFP failing to initialize at boot
 - fixed issue with tray sandbox options not being available just after boot
-- fixed issue access changed flag not being proeprly set in box options [#1065](https://github.com/sandboxie-plus/Sandboxie/issues/1065)
+- fixed issue access changed flag not being properly set in box options [#1065](https://github.com/sandboxie-plus/Sandboxie/issues/1065)
 
 
 

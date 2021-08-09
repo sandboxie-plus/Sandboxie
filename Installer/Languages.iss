@@ -66,16 +66,16 @@ ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安�
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
 
 ; Chinese Traditional
-ChineseSimplified.AddSandboxedMenu=加入「在沙盒中執行」選單
-ChineseSimplified.CustomPageLabel1=選擇安裝方式
-ChineseSimplified.CustomPageLabel2=應該如何安裝
-ChineseSimplified.CustomPageLabel3=選擇安裝模式
-ChineseSimplified.CustomPageInstallMode=在這台電腦上安裝 {#MyAppName}
-ChineseSimplified.CustomPageUpgradeMode=更新目前已安裝的 {#MyAppName}
-ChineseSimplified.CustomPagePortableMode=提取全部檔案到指定目錄供便攜化使用
-ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
-ChineseSimplified.ClassicFound=偵測到已安裝 Sandboxie 原版，繼續安裝必須先將其移除，是否開始移除？
-ChineseSimplified.RunSandboxedMenu=在沙盒中執行(&S)
+ChineseTraditional.AddSandboxedMenu=加入「在沙盒中執行」選單
+ChineseTraditional.CustomPageLabel1=選擇安裝方式
+ChineseTraditional.CustomPageLabel2=應該如何安裝
+ChineseTraditional.CustomPageLabel3=選擇安裝模式
+ChineseTraditional.CustomPageInstallMode=在這台電腦上安裝 {#MyAppName}
+ChineseTraditional.CustomPageUpgradeMode=更新目前已安裝的 {#MyAppName}
+ChineseTraditional.CustomPagePortableMode=提取全部檔案到指定目錄供便攜化使用
+ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
+ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，繼續安裝必須先將其移除，是否開始移除？
+ChineseTraditional.RunSandboxedMenu=在沙盒中執行(&S)
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale

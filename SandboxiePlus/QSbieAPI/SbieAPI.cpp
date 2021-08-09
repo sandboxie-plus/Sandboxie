@@ -307,8 +307,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	m_IniPath = GetIniPath(&bHome);
 	qDebug() << "Config file:" << m_IniPath << (bHome ? "(home)" : "(system)");
 
-	if (m_pUserSection == NULL)
-	{
+	if (m_UserName.isEmpty()) {
 		QString UserSection = GetUserSection(&m_UserName);
 		if(!UserSection.isEmpty())
 			m_pUserSection = new CSbieIni(UserSection, this, this);
@@ -812,6 +811,10 @@ typedef struct _FILE_FS_VOLUME_INFORMATION {
   WCHAR         VolumeLabel[1];
 } FILE_FS_VOLUME_INFORMATION, *PFILE_FS_VOLUME_INFORMATION;
 
+extern "C" {
+	NTSTATUS NTAPI RtlSetThreadErrorMode(IN ULONG NewMode, OUT PULONG OldMode);
+}
+
 ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
 {
     ULONG sn = 0;
@@ -831,13 +834,16 @@ ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
     OBJECT_ATTRIBUTES objattrs;
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-    
+
+	ULONG OldMode;
+	RtlSetThreadErrorMode(0x10u, &OldMode);
     NTSTATUS status = NtCreateFile(
         &handle, GENERIC_READ | SYNCHRONIZE, &objattrs,
         &iosb, NULL, 0, FILE_SHARE_VALID_FLAGS,
         FILE_OPEN,
         FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
         NULL, 0);
+	RtlSetThreadErrorMode(OldMode, 0i64);
 
     delete [] objname.Buffer;
 
@@ -995,15 +1001,21 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QPr
 		StartArgs += "/box:" + BoxName + " ";
 	else
 		StartArgs += "/disable_force ";
+
 	StartArgs += Command;
 
+	wchar_t sysPath[MAX_PATH];
+	GetSystemDirectoryW(sysPath, MAX_PATH);
+
 	if (pProcess) {
+		pProcess->setWorkingDirectory(QString::fromWCharArray(sysPath));
 		pProcess->setProgram(GetStartPath());
 		pProcess->setNativeArguments(StartArgs);
 		pProcess->start();
 	} 
 	else {
 		QProcess process;
+		process.setWorkingDirectory(QString::fromWCharArray(sysPath));
 		process.setProgram(GetStartPath());
 		process.setNativeArguments(StartArgs);
 		process.startDetached();

@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	QString PendingMessage;
 
 	QStringList Args = QCoreApplication::arguments();
-	int CmdPos = Args.indexOf("-op");
+	int CmdPos = Args.indexOf("-op", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		QString Op;
 		if (Args.count() > CmdPos)
@@ -42,12 +42,15 @@ int main(int argc, char *argv[])
 		PendingMessage = "Op:" + Op;
 	}
 
-	CmdPos = Args.indexOf("/box:__ask__");
+	CmdPos = Args.indexOf("/box:__ask__", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
-		QString CommandLine;
-		for (int i = CmdPos + 1; i < Args.count(); i++)
-			CommandLine += "\"" + Args[i] + "\" ";
-		PendingMessage = "Run:" + CommandLine.trimmed();
+		// Note: a escaped command ending with \" will fail and unescape "
+		//QString CommandLine;
+		//for (int i = CmdPos + 1; i < Args.count(); i++)
+		//	CommandLine += "\"" + Args[i] + "\" ";
+		//PendingMessage = "Run:" + CommandLine.trimmed();
+		LPWSTR ChildCmdLine = wcsstr(GetCommandLineW(), L"/box:__ask__") + 13;
+		PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
 	}
 
 	if (!PendingMessage.isEmpty()) {

@@ -38,9 +38,6 @@ Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 
 [CustomMessages]
 
-; If you are going to provide a new translation in your language,
-; please add it after the last one in this section.
-
 ; English
 english.AddSandboxedMenu=Add "Run Sandboxed" to context menu
 english.CustomPageLabel1=Select Installation Type
@@ -76,6 +73,30 @@ ChineseTraditional.CustomPagePortableMode=提取全部檔案到指定目錄供�
 ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，繼續安裝必須先將其移除，是否開始移除？
 ChineseTraditional.RunSandboxedMenu=在沙盒中執行(&S)
+
+; Dutch
+dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
+dutch.CustomPageLabel1=Installatietype selecteren
+dutch.CustomPageLabel2=Hoe moet er geïnstalleerd worden
+dutch.CustomPageLabel3=Installatiemodus kiezen
+dutch.CustomPageInstallMode={#MyAppName} op deze computer installeren
+dutch.CustomPageUpgradeMode=Bestaande installatie van {#MyAppName} bijwerken
+dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaar gebruik
+dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
+dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd, die eerst moet verwijderd worden. Wilt u deze nu verwijderen?
+dutch.RunSandboxedMenu=In &sandbox uitvoeren
+
+; German
+german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
+german.CustomPageLabel1=Wählen Sie die Installationsart aus
+german.CustomPageLabel2=Wie soll installiert werden
+german.CustomPageLabel3=Wählen Sie die Installationsmethode
+german.CustomPageInstallMode=Installiere {#MyAppName} auf diesem Computer
+german.CustomPageUpgradeMode=Update der bestehenden {#MyAppName} Installation
+german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragbaren Verwendung
+german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
+german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
+german.RunSandboxedMenu=In &Sandbox ausführen
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale

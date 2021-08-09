@@ -30,22 +30,6 @@
 
 
 //---------------------------------------------------------------------------
-// Defines
-//---------------------------------------------------------------------------
-
-
-#define PROCESS_DENIED_ACCESS_MASK                              \
-        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
-            PROCESS_VM_READ | PROCESS_QUERY_INFORMATION |       \
-            PROCESS_QUERY_LIMITED_INFORMATION )
-
-#define THREAD_DENIED_ACCESS_MASK                               \
-        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
-            THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION |     \
-            THREAD_QUERY_LIMITED_INFORMATION )
-
-
-//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -73,10 +57,6 @@ static NTSTATUS Thread_CheckProcessObject(
 static NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess);
-
-static NTSTATUS Thread_CheckObject_Common(
-    PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1);
 
 
 //---------------------------------------------------------------------------
@@ -230,6 +210,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
     THREAD *thrd;
     KIRQL irql;
 
+#ifdef XP_SUPPORT
     //
     // implement Gui_ThreadModifyCount watchdog hook for gui_xp module
     //
@@ -243,6 +224,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
     }
 
 #endif _WIN64
+#endif
 
     //
     //
@@ -410,6 +392,7 @@ _FX PROCESS *Thread_FindAndInitProcess(
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
 // Thread_AdjustGrantedAccess
 //---------------------------------------------------------------------------
@@ -473,6 +456,7 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
     return TRUE;
 }
+#endif
 
 
 //---------------------------------------------------------------------------

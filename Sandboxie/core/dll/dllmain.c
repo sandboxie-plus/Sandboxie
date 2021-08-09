@@ -321,6 +321,9 @@ _FX void Dll_InitInjected(void)
         Dll_FixWow64Syscall();
 
     if (ok)
+        ok = File_InitHandles();
+
+    if (ok)
         ok = Obj_Init();
 
     if (ok) {

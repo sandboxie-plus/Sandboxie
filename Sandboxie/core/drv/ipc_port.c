@@ -168,13 +168,16 @@ _FX void *Ipc_GetServerPort(void *Object)
     //    (in ConnectionPort) disappearing while we're working with it.
     //
 
+#ifdef XP_SUPPORT
     if (Driver_OsVersion == DRIVER_WINDOWS_XP ||
         Driver_OsVersion == DRIVER_WINDOWS_2003) {
 
         port_object =
             ((struct LPC_PORT_OBJECT_XP_2003 *)Object)->ConnectionPort;
 
-    } else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+    } else 
+#endif
+    if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
 
         port_object =
             *(((struct ALPC_PORT_OBJECT_VISTA *)Object)->ConnectionPortPtr);
@@ -501,7 +504,10 @@ _FX NTSTATUS Ipc_CheckPortRequest_WinApi(
             }
 
             // MS11-063
-            if ( ((Driver_OsVersion == DRIVER_WINDOWS_XP || Driver_OsVersion == DRIVER_WINDOWS_VISTA) && msg2->api_code == WINAPI_SRVDEVICEEVENT) ||
+            if ( 
+#ifdef XP_SUPPORT
+                ((Driver_OsVersion == DRIVER_WINDOWS_XP || Driver_OsVersion == DRIVER_WINDOWS_VISTA) && msg2->api_code == WINAPI_SRVDEVICEEVENT) ||
+#endif
                  (Driver_OsVersion == DRIVER_WINDOWS_7 && msg2->api_code == WINAPI_SRVDEVICEEVENT_WIN7) ) {
 
                 Log_MsgP0(MSG_1316, proc->pid);
@@ -597,7 +603,7 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
     WCHAR portId[DYNAMIC_PORT_ID_CHARS];
 
     if (proc) // is caller sandboxed?
-        return STATUS_ACCESS_DENIED;
+        return STATUS_NOT_IMPLEMENTED;
 
     if (PsGetCurrentProcessId() != Api_ServiceProcessId)
         return STATUS_ACCESS_DENIED;
@@ -882,6 +888,8 @@ _FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR* pDstPortNa
 }
 
 
+#ifdef XP_SUPPORT
+
 //---------------------------------------------------------------------------
 //
 // 32-bit hooks for Windows XP
@@ -943,3 +951,4 @@ _FX NTSTATUS Ipc_NtRequestWaitReplyPort(
 
 
 #endif _WIN64
+#endif

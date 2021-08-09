@@ -200,7 +200,7 @@ skip_e9_rewrite: ;
     }
 
 	//
-	// this simplification fails for delay loaded libraries, see coments about SetSecurityInfo,
+	// DX: this simplification fails for delay loaded libraries, see coments about SetSecurityInfo,
 	// resulting in an endless loop, so just dont do that 
 	//
 
@@ -508,6 +508,7 @@ ULONGLONG * SbieDll_findChromeTarget(unsigned char* addr)
         if (addr[i] == 0xB8 && addr[i + 5] == 0xC3 && addr[i + 6] == 0xCC)
             return NULL;
         if ((*(USHORT *)&addr[i] == 0x8b48)) {
+            //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
             if ((addr[i + 2] == 0x0d || addr[i + 2] == 0x05)) {
                 LONG delta;
                 target = (ULONG_PTR)(addr + i + 7);
@@ -555,14 +556,18 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
     if (!SourceFunc)
         return NULL;
 
-    if (func[0] == 0x50 && func[1] == 0x48 && func[2] == 0xb8) {
+    if (func[0] == 0x50 &&	//push rax
+        func[1] == 0x48 &&	//mov rax,?
+        func[2] == 0xb8) {
         ULONGLONG *longlongs = *(ULONGLONG **)&func[3];
         chrome64Target = SbieDll_findChromeTarget((unsigned char *)longlongs);
     }
     // Chrome 49+ 64bit hook
     // mov rax, <target> 
     // jmp rax 
-    else if (func[0] == 0x48 && func[1] == 0xb8 && *(USHORT *)&func[10] == 0xe0ff) {
+    else if (func[0] == 0x48 && //mov rax,<target>
+        func[1] == 0xb8 &&
+        *(USHORT *)&func[10] == 0xe0ff) /* jmp rax */ {
         ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
         chrome64Target = SbieDll_findChromeTarget((unsigned char *)longlongs);
     }

@@ -123,6 +123,20 @@ static const WCHAR *File_DeviceMap_EnvVar   = ENV_VAR_PFX L"DEVICE_MAP";
 
 
 //---------------------------------------------------------------------------
+// File_InitHandles
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_InitHandles(void)
+{
+    InitializeCriticalSection(&File_HandleOnClose_CritSec);
+    map_init(&File_HandleOnClose, Dll_Pool);
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // File_Init
 //---------------------------------------------------------------------------
 
@@ -343,12 +357,15 @@ _FX ULONG File_GetVolumeSN(const FILE_DRIVE *drive)
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
     
+    ULONG OldMode;
+    RtlSetThreadErrorMode(0x10u, &OldMode);
     NTSTATUS status = NtCreateFile(
         &handle, GENERIC_READ | SYNCHRONIZE, &objattrs,
         &iosb, NULL, 0, FILE_SHARE_VALID_FLAGS,
         FILE_OPEN,
         FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
         NULL, 0);
+    RtlSetThreadErrorMode(OldMode, 0i64);
 
     Dll_Free(objname.Buffer);
 

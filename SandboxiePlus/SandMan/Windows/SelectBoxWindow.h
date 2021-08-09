@@ -9,7 +9,7 @@ class CSelectBoxWindow : public QDialog
 	Q_OBJECT
 
 public:
-	CSelectBoxWindow(const QStringList& Commands, QWidget *parent = Q_NULLPTR);
+	CSelectBoxWindow(const QStringList& Commands, const QString& BoxName, QWidget *parent = Q_NULLPTR);
 	~CSelectBoxWindow();
 
 private slots:

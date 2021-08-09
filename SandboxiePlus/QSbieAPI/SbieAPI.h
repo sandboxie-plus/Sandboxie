@@ -88,7 +88,8 @@ public:
 	};
 
 	// Config
-	virtual SB_STATUS		ReloadConfig(quint32 SessionId = -1);
+	virtual SB_STATUS		ReloadConfig(bool ReconfigureDrv = false);
+	virtual SB_STATUS		ReloadCert();
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
 	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
 	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
@@ -100,6 +101,9 @@ public:
 	virtual SB_STATUS		UnlockConfig(const QString& Password);
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
+
+	virtual quint32			GetFeatureFlags();
+	virtual QString			GetFeatureStr();
 
 	// Forced Processes
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);
@@ -150,6 +154,8 @@ protected slots:
 protected:
 	friend class CSandBox;
 	friend class CBoxedProcess;
+
+	virtual SB_STATUS		ReloadConf(quint32 flags, quint32 SessionId = -1);
 
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);

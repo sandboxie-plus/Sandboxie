@@ -78,6 +78,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuRunAppWiz = m_pMenuRun->addAction(CSandMan::GetIcon("Software"), tr("Programs and Features"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Terminal"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmdAdmin = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Terminal (as Admin)"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunCmd32 = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Terminal (32-bit)"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRun->addSeparator();
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
@@ -138,6 +139,19 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
 	//m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
+
+
+	// menu for the tray
+	m_pMenu2 = new QMenu();
+	m_pMenu2->addMenu(m_pMenuRun);
+	m_pMenu2->addAction(m_pMenuEmptyBox);
+	m_pMenu2->addSeparator();
+	m_pMenu2->addAction(m_pMenuExplore);
+	m_pMenu2->addAction(m_pMenuSnapshots);
+	m_pMenu2->addAction(m_pMenuRecover);
+	m_pMenu2->addAction(m_pMenuCleanUp);
+	m_pMenu2->addSeparator();
+	m_pMenu2->addAction(m_pMenuOptions);
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty())
@@ -206,7 +220,7 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 	}
 }
 
-void CSbieView::OnMenu(const QPoint& Point)
+void CSbieView::UpdateMenu()
 {
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
@@ -322,7 +336,12 @@ void CSbieView::OnMenu(const QPoint& Point)
 		foreach(QAction * pAction, MenuActions)
 			pAction->setEnabled(false);
 	}
+}
 
+void CSbieView::OnMenu(const QPoint& Point)
+{
+	UpdateMenu();
+	
 	CPanelView::OnMenu(Point);
 }
 
@@ -574,6 +593,8 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe", true));
+	else if (Action == m_pMenuRunCmd32)
+		Results.append(SandBoxes.first()->RunStart("C:\\WINDOWS\\SysWOW64\\cmd.exe"));
 	else if (Action == m_pMenuPresetsShowUAC)
 	{
 		SandBoxes.first()->SetBool("DropAdminRights", false);
@@ -964,6 +985,9 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 
 void CSbieView::SelectBox(const QString& Name)
 {
+	if(m_pSbieModel->Count() == 0)
+		Refresh();
+
 	QModelIndex Index = m_pSbieModel->FindIndex(Name);
 	QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
 
@@ -981,7 +1005,9 @@ void CSbieView::SelectBox(const QString& Name)
 void CSbieView::PopUpMenu(const QString& Name)
 {
 	SelectBox(Name);
-	OnMenu(QCursor::pos());
+	UpdateMenu();
+	m_pMenu2->popup(QCursor::pos());
+	//OnMenu(QCursor::pos());
 }
 
 void CSbieView::ShowOptions(const QString& Name)

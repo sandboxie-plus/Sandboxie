@@ -87,10 +87,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theGUI = this;
 
-
-	const char version[] = VERSION_STR;
-
-
 	QDesktopServices::setUrlHandler("http", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
@@ -111,6 +107,11 @@ CSandMan::CSandMan(QWidget *parent)
 	m_RequestManager = NULL;
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
+
+	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
+		CSettingsWindow::LoadCertificate();
+	}
+
 	this->setWindowTitle(appTitle);
 
 	setAcceptDrops(true);
@@ -182,16 +183,14 @@ CSandMan::CSandMan(QWidget *parent)
 		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
 
 	// Tray
-	QIcon Icon;
-	Icon.addFile(":/IconEmpty.png");
-	m_pTrayIcon = new QSystemTrayIcon(Icon, this);
+	m_pTrayIcon = new QSystemTrayIcon(GetIcon("IconEmpty", false), this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(QIcon(":/IconFull.png"), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -210,8 +209,16 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayBoxes->setRootIsDecorated(false);
 	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
 	m_pTrayBoxes->setHeaderHidden(true);
+	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
 
 	pLayout->insertSpacing(0, 1);// 32);
+
+	/*QFrame* vFrame = new QFrame;
+	vFrame->setFixedWidth(1);
+	vFrame->setFrameShape(QFrame::VLine);
+	vFrame->setFrameShadow(QFrame::Raised);
+	pLayout->addWidget(vFrame);*/
+	
 	pLayout->addWidget(m_pTrayBoxes);
 
     pTrayList->setDefaultWidget(pWidget);
@@ -336,12 +343,12 @@ void CSandMan::StoreState()
 	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
 }
 
-QIcon CSandMan::GetIcon(const QString& Name)
+QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
 {
 	QString Path = QApplication::applicationDirPath() + "/Icons/" + Name + ".png";
 	if(QFile::exists(Path))
 		return QIcon(Path);
-	return QIcon(":/Actions/" + Name + ".png");
+	return QIcon((bAction ? ":/Actions/" : ":/") + Name + ".png");
 }
 
 void CSandMan::CreateMenus()
@@ -423,7 +430,7 @@ void CSandMan::CreateMenus()
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(QIcon(":/IconFull.png"), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(GetIcon("IconFull", false), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateToolBar()
@@ -454,8 +461,11 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEnableMonitoring);
-	m_pToolBar->addSeparator();
+	//m_pToolBar->addSeparator();
 	
+
+	if (!g_Certificate.isEmpty())
+		return;
 
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -465,10 +475,10 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupport = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
-	pSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	connect(pSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
-	m_pToolBar->addWidget(pSupport);
+	QLabel* pSupportLbl = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
+	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
+	m_pToolBar->addWidget(pSupportLbl);
 	m_pToolBar->addWidget(new QLabel("        "));
 }
 
@@ -535,7 +545,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
 {
-	EBoxColors color = eYelow;
+	EBoxColors color = eYellow;
 	switch (boxType) {
 	case CSandBoxPlus::eHardened:	color = eOrang; break;
 	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
@@ -564,13 +574,23 @@ void CSandMan::OnMessage(const QString& Message)
 	}
 	else if (Message.left(4) == "Run:")
 	{
+		QString BoxName = "DefaultBox";
 		QString CmdLine = Message.mid(4);
+
+		if (CmdLine.contains("\\start.exe", Qt::CaseInsensitive)) {
+			int pos = CmdLine.indexOf("/box:", 0, Qt::CaseInsensitive);
+			int pos2 = CmdLine.indexOf(" ", pos);
+			if (pos != -1 && pos2 != -1) {
+				BoxName = CmdLine.mid(pos + 5, pos2 - (pos + 5));
+				CmdLine = CmdLine.mid(pos2 + 1);
+			}
+		}
 
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
 			theAPI->RunStart("DefaultBox", CmdLine);
 		}
 		else
-			RunSandboxed(QStringList(CmdLine));
+			RunSandboxed(QStringList(CmdLine), BoxName);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -626,9 +646,9 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-void CSandMan::RunSandboxed(const QStringList& Commands)
+void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName)
 {
-	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands);
+	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName);
 	pSelectBoxWindow->show();
 }
 
@@ -640,7 +660,7 @@ void CSandMan::dropEvent(QDropEvent* e)
 			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
 
-	RunSandboxed(Commands);
+	RunSandboxed(Commands, "DefaultBox");
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)
@@ -649,6 +669,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		return;
 
 	bool bForceProcessDisabled = false;
+	bool bConnected = false;
 
 	if (theAPI->IsConnected())
 	{
@@ -666,24 +687,23 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (!bIsMonitoring) // don't disable the view as logn as there are entries shown
 			bIsMonitoring = !theAPI->GetTrace().isEmpty();
 		m_pTraceView->setEnabled(bIsMonitoring);
-	}
 
-	if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
-	{
-		m_bIconEmpty = (theAPI->TotalProcesses() == 0);
-		m_bIconDisabled = bForceProcessDisabled;
 
-		QString IconFile;
-		if (m_bIconEmpty)
-			IconFile += ":/IconEmpty";
-		else
-			IconFile += ":/IconFull";
-		if(m_bIconDisabled)
-			IconFile += "D";
+		if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
+		{
+			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+			m_bIconDisabled = bForceProcessDisabled;
 
-		QIcon Icon;
-		Icon.addFile(IconFile + ".png");
-		m_pTrayIcon->setIcon(Icon);
+			QString IconFile;
+			if (m_bIconEmpty)
+				IconFile = "IconEmpty";
+			else
+				IconFile = "IconFull";
+			if (m_bIconDisabled)
+				IconFile += "D";
+
+			m_pTrayIcon->setIcon(GetIcon(IconFile, false));
+		}
 	}
 
 	if (!isVisible() || windowState().testFlag(Qt::WindowMinimized))
@@ -816,7 +836,7 @@ void CSandMan::OnStatusChanged()
 		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
-		statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
+		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
 		//appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
 		if (IsFullyPortable())
@@ -872,6 +892,15 @@ void CSandMan::OnStatusChanged()
 		if (theConf->GetBool("Options/WatchIni", true))
 			theAPI->WatchIni(true);
 
+		if (!theAPI->ReloadCert().IsError()) {
+			CSettingsWindow::LoadCertificate();
+		}
+		else {
+			g_Certificate.clear();
+		}
+
+		g_FeatureFlags = theAPI->GetFeatureFlags();
+
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -888,8 +917,14 @@ void CSandMan::OnStatusChanged()
 
 		theAPI->WatchIni(false);
 	}
+
+	m_pSupport->setVisible(g_Certificate.isEmpty());
+
 	this->setWindowTitle(appTitle);
 
+	m_pTrayIcon->setIcon(GetIcon(isConnected ? "IconEmpty" : "IconOff", false));
+	m_bIconEmpty = true;
+	m_bIconDisabled = false;
 
 	m_pNew->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
@@ -1640,6 +1675,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 		{
 			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
+			bool bAdded = false;
+
 			QMap<QString, QTreeWidgetItem*> OldBoxes;
 			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
 			{
@@ -1662,13 +1699,39 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
 					pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
 					m_pTrayBoxes->addTopLevelItem(pItem);
+
+					bAdded = true;
 				}
 
-				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount(), pBoxEx->GetType()));
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
 			}
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)
 				delete pItem;
+
+			if (!OldBoxes.isEmpty() || bAdded) 
+			{
+				auto palette = m_pTrayBoxes->palette();
+				palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(QPalette::Window));
+				m_pTrayBoxes->setPalette(palette);
+				m_pTrayBoxes->setFrameShape(QFrame::NoFrame);
+
+				//const int FrameWidth = m_pTrayBoxes->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+				int Height = 0; //m_pTrayBoxes->header()->height() + (2 * FrameWidth);
+
+				for (QTreeWidgetItemIterator AllIterator(m_pTrayBoxes, QTreeWidgetItemIterator::All); *AllIterator; ++AllIterator)
+					Height += m_pTrayBoxes->visualItemRect(*AllIterator).height();
+
+				QRect scrRect = this->screen()->availableGeometry();
+				int MaxHeight = scrRect.height() / 2;
+				if (Height > MaxHeight) {
+					Height = MaxHeight;
+					if (Height < 64)
+						Height = 64;
+				}
+
+				m_pTrayBoxes->setFixedHeight(Height);
+			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
 			break;
@@ -1725,7 +1788,7 @@ void CSandMan::OpenUrl(const QUrl& url)
 		if(bCheck) theConf->SetValue("Options/OpenUrlsSandboxed", iSandboxed);
 	}
 
-	if (iSandboxed) RunSandboxed(QStringList(url.toString()));
+	if (iSandboxed) RunSandboxed(QStringList(url.toString()), "DefaultBox");
 	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
@@ -2082,7 +2145,7 @@ void CSandMan::LoadLanguage()
 		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 
 		QString LangAux = Lang; // Short version as fallback
-		LangAux.truncate(LangAux.lastIndexOf('-'));
+		LangAux.truncate(LangAux.lastIndexOf('_'));
 
 		QString LangPath = QApplication::applicationDirPath() + "/translations/sandman_";
 		bool bAux = false;

@@ -546,7 +546,7 @@ BOOL Parse_Command_Line(void)
 
         } else if (_wcsnicmp(cmd, L"reload", 6) == 0) {
 
-            SbieApi_ReloadConf(-1);
+            SbieApi_ReloadConf(-1, 0);
             ExitProcess(0);
 
         //
@@ -793,6 +793,19 @@ BOOL Parse_Command_Line(void)
         SetLastError(0);
         Show_Error(SbieDll_FormatMessage0(MSG_3203));
         return FALSE;
+    }
+
+    //
+    // if this is a link to start.exe with a box, extract the target command line
+    //
+
+    if (StrStrIW(cmd, L"\\start.exe") != 0) {
+        wchar_t* tmp = StrStrIW(cmd, L"/box:");
+        if (tmp) {
+            tmp = StrStrIW(tmp, L" ");
+            if (tmp)
+                cmd = tmp + 1;
+        }
     }
 
     ChildCmdLine = (WCHAR *)MyHeapAlloc(10240 * sizeof(WCHAR));

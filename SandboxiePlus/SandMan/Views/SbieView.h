@@ -54,6 +54,7 @@ protected:
 
 private:
 
+	void					UpdateMenu();
 	void					UpdateGroupMenu();
 
 	QString					FindParent(const QString& Name);
@@ -64,6 +65,8 @@ private:
 	QTreeViewEx*			m_pSbieTree;
 	CSbieModel*				m_pSbieModel;
 	QSortFilterProxyModel*	m_pSortProxy;
+
+	QMenu*					m_pMenu2;
 
 	QAction*				m_pNewBox;
 	QAction*				m_pAddGroupe;
@@ -79,6 +82,7 @@ private:
 	QAction*				m_pMenuRunAppWiz;
 	QAction*				m_pMenuRunCmd;
 	QAction*				m_pMenuRunCmdAdmin;
+	QAction*				m_pMenuRunCmd32;
 	QAction*				m_pMenuMkLink;
 	QMenu*					m_pMenuPresets;
 	QActionGroup*			m_pMenuPresetsAdmin;

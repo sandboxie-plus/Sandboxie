@@ -180,6 +180,7 @@ driver_started:
         }
     }
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (ok) {
@@ -213,6 +214,7 @@ driver_started:
 
 
 #endif ! _WIN64
+#endif
 
     if (ok) {
 

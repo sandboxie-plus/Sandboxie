@@ -1,4 +1,5 @@
 ﻿#define MyAppName "Sandboxie-Plus"
+#include "Languages.iss"
 ;
 ; use commandline to populate:
 ; ISCC.exe /ORelease Sandboxie-Plus.iss /DMyAppVersion=%SbiePlusVer% /DMyDrvVersion=%SbieVer% /DMyAppArch=x64 /DMyAppSrc=SbiePlus64
@@ -46,8 +47,8 @@ Source: ".\Sandboxie-Plus.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoe
 
 [Icons]
 Name: "{group}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; MinVersion: 0.0,5.0;
-Name: "{group}\Sandboxie-Plus Website"; Filename: "http://sandboxie-plus.com/"; MinVersion: 0.0,5.0;
-Name: "{group}\Uninstall Sandboxie-Plus"; Filename: "{uninstallexe}"; MinVersion: 0.0,5.0;
+Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "http://sandboxie-plus.com/"; MinVersion: 0.0,5.0;
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; MinVersion: 0.0,5.0;
 Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0;
 ;Name: "{userstartup}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: AutoStartEntry;
 
@@ -55,24 +56,13 @@ Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: Desk
 ;Root: HKCU; Subkey: "Software\{#MyAppName}"; ValueName: "{#MyAppName}_Autorun"; ValueType: string; ValueData: "1"; Flags: uninsdeletekey; Tasks: AutoStartEntry
 
 [Tasks]
-Name: "DesktopIcon"; Description: "Create a &desktop icon"; MinVersion: 0.0,5.0; Check: not IsPortable 
-Name: "AutoStartEntry"; Description: "Start when Windows starts"; MinVersion: 0.0,5.0; Check: not IsPortable 
-Name: "AddRunSandboxed"; Description: "Add Run Sandboxed"; MinVersion: 0.0,5.0; Check: not IsPortable 
+Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable 
+Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable 
+Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable 
 
 [Messages]
 ; Include with commandline /? message.
 HelpTextNote=/PORTABLE=1%nEnable portable mode.%n
-
-;[Languages]
-
-[CustomMessages]
-CustomPageLabel1=Select Installation Type
-CustomPageLabel2=How should be installed
-CustomPageLabel3=Choose the installation mode
-CustomPageInstallMode=Install {#MyAppName} on this computer
-CustomPageUpgradeMode=Update existing {#MyAppName} installation
-CustomPagePortableMode=Extract all files to a directory for portable use
-
 
 [Code]
 var
@@ -218,7 +208,7 @@ begin
 
   if (Version.NTPlatform = False) or (Version.Major < 6) then
   begin
-    SuppressibleMsgBox('Sandboxie-Plus requires Windows 7 or later.', mbError, MB_OK, MB_OK);
+    SuppressibleMsgBox(CustomMessage('RequiresWin7OrLater'), mbError, MB_OK, MB_OK);
     Result := False;
     exit;
   end;
@@ -229,7 +219,7 @@ begin
   
       if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie', 'UninstallString', UninstallString) then begin
         
-        ExecRet := MsgBox('Sandboxie Classic installation detected, it must be uninstalled first, do you want to uninstall it now?', mbConfirmation, MB_YESNOCANCEL);
+        ExecRet := MsgBox(CustomMessage('ClassicFound'), mbConfirmation, MB_YESNOCANCEL);
         if ExecRet = IDCANCEL then
         begin
           Result := False;
@@ -361,11 +351,11 @@ begin
 
   if WizardIsTaskSelected('AddRunSandboxed') then
   begin
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', '', 'Run &Sandboxed');
+    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', '', CustomMessage('RunSandboxedMenu'));
     RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', 'Icon', ExpandConstant('"{app}\start.exe"'));
     RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox\command', '', ExpandConstant('"{app}\SandMan.exe"') +' /box:__ask__ "%1" %*');
 
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', '', 'Run &Sandboxed');
+    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', '', CustomMessage('RunSandboxedMenu'));
     RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', 'Icon', ExpandConstant('"{app}\start.exe"'));
     RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox\command', '', ExpandConstant('"{app}\SandMan.exe"') +' /box:__ask__ C:\WINDOWS\Explorer.exe "%1"');
   end;

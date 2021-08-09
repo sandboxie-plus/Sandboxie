@@ -3036,7 +3036,7 @@ ReparseLoop:
                 //}
 
                 // MSIServer without system
-                if (status == STATUS_ACCESS_DENIED && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+                if (status == STATUS_ACCESS_DENIED && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER //&& Scm_MsiServer_Systemless
                     && ObjectAttributes->ObjectName->Buffer && ObjectAttributes->ObjectName->Length >= 34
                     && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 11, L"\\Config.Msi") == 0
                     ) {
@@ -3448,8 +3448,7 @@ ReparseLoop:
                         // or was deleted, then record it for recovery
                         //
 
-                        IsRecover =
-                            File_RecordRecover(*FileHandle, TruePath);
+                        IsRecover = File_RecordRecover(*FileHandle, TruePath);
                     }
                 }
 
@@ -5886,34 +5885,26 @@ _FX NTSTATUS File_SetDisposition(
     THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
     UNICODE_STRING uni;
-    WCHAR *DosPath;
     NTSTATUS status;
     ULONG mp_flags;
+    ULONG FileFlags;
 
     //
     // check if the specified path is an open or closed path
     //
 
-    RtlInitUnicodeString(&uni, L"");
-
     mp_flags = 0;
-    DosPath = NULL;
+    FileFlags = 0;
 
     Dll_PushTlsNameBuffer(TlsData);
 
     __try {
 
         WCHAR *TruePath, *CopyPath;
-        ULONG FileFlags;
 
+        RtlInitUnicodeString(&uni, L"");
         status = File_GetName(
                     FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
-
-        //
-        // fix-me: this is broken, instead of deleting files on close it deletes them instantly
-        //          possible workarounds use __sys_NtSetInformationFile for files that reside only in the sandbox
-        //          or implement proper deletion on handle close in File_NtCloseImpl
-        //
 
         if (NT_SUCCESS(status)) {
 
@@ -5921,35 +5912,6 @@ _FX NTSTATUS File_SetDisposition(
 
             if (PATH_IS_CLOSED(mp_flags))
                 status = STATUS_ACCESS_DENIED;
-
-            else if (PATH_NOT_OPEN(mp_flags)) {
-
-                status = File_DeleteDirectory(CopyPath, TRUE);
-
-                if (status != STATUS_DIRECTORY_NOT_EMPTY)
-                    status = STATUS_SUCCESS;
-
-                if (NT_SUCCESS(status) && Dll_ChromeSandbox) {
-
-                    //
-                    // if this is a Chrome sandbox process, we have
-                    // to pass a DOS path to NtDeleteFile rather
-                    // than a file handle
-                    //
-
-                    ULONG len = wcslen(TruePath);
-                    DosPath = Dll_AllocTemp((len + 8) * sizeof(WCHAR));
-                    wmemcpy(DosPath, TruePath, len + 1);
-                    if (SbieDll_TranslateNtToDosPath(DosPath)) {
-                        len = wcslen(DosPath);
-                        wmemmove(DosPath + 4, DosPath, len + 1);
-                        wmemcpy(DosPath, File_BQQB, 4);
-                    } else {
-                        Dll_Free(DosPath);
-                        DosPath = NULL;
-                    }
-                }
-            }
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
@@ -5961,33 +5923,49 @@ _FX NTSTATUS File_SetDisposition(
     //
     // handle the request appropriately
     //
-
-    if (PATH_IS_OPEN(mp_flags)) {
+  
+    if (PATH_IS_OPEN(mp_flags) || (FileFlags & FGN_IS_BOXED_PATH) != 0) {
 
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,
-            FileInformation, Length, FileInformationClass); // FileDispositionInformation
+            FileInformation, Length, FileInformationClass);
 
     } else if (NT_SUCCESS(status)) {
-
-        OBJECT_ATTRIBUTES objattrs;
-
-        InitializeObjectAttributes(
-            &objattrs, &uni, OBJ_CASE_INSENSITIVE, FileHandle, NULL);
-
-        if (DosPath) {
-            objattrs.RootDirectory = NULL;
-            RtlInitUnicodeString(&uni, DosPath);
-        }
-
-        status = File_NtDeleteFileImpl(&objattrs);
 
         IoStatusBlock->Status = 0;
         IoStatusBlock->Information = 8;
     }
 
-    if (DosPath)
-        Dll_Free(DosPath);
+    if (NT_SUCCESS(status) && !PATH_IS_OPEN(mp_flags)) {
+
+        BOOLEAN DeleteOnClose;
+
+        if (FileInformationClass == FileDispositionInformation) {
+
+            DeleteOnClose = ((FILE_DISPOSITION_INFORMATION*)FileInformation)->DeleteFileOnClose;
+
+        } else if (FileInformationClass == FileDispositionInformationEx) { // Win 10 RS1 and later
+
+            ULONG Flags = ((FILE_DISPOSITION_INFORMATION_EX*)FileInformation)->Flags;
+
+            if ((Flags & FILE_DISPOSITION_DELETE) != 0)
+                DeleteOnClose = TRUE;
+            else if((Flags & FILE_DISPOSITION_ON_CLOSE) != 0) // FILE_DISPOSITION_ON_CLOSE with no FILE_DISPOSITION_DELETE means clear flag
+                DeleteOnClose = FALSE;
+        }
+
+
+        EnterCriticalSection(&File_HandleOnClose_CritSec);
+
+        FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, FileHandle);
+        if (!on_close) {
+            on_close = map_insert(&File_HandleOnClose, FileHandle, NULL, sizeof(FILE_ON_CLOSE));
+        }
+
+        on_close->DeleteOnClose = DeleteOnClose;
+
+        LeaveCriticalSection(&File_HandleOnClose_CritSec);
+    }
 
     SetLastError(LastError);
     return status;

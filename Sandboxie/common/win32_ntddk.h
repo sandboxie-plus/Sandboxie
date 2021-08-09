@@ -554,8 +554,24 @@ typedef struct _FILE_SHORT_NAME_INFORMATION {
 
 // FileDispositionInformation
 typedef struct _FILE_DISPOSITION_INFORMATION {
-    BOOLEAN DeleteFile;
+    BOOLEAN DeleteFileOnClose;
 } FILE_DISPOSITION_INFORMATION, *PFILE_DISPOSITION_INFORMATION;
+
+// // FileDispositionInformationEx
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS1)
+#define FILE_DISPOSITION_DO_NOT_DELETE              0x00000000
+#define FILE_DISPOSITION_DELETE                     0x00000001
+#define FILE_DISPOSITION_POSIX_SEMANTICS            0x00000002
+#define FILE_DISPOSITION_FORCE_IMAGE_SECTION_CHECK  0x00000004
+#define FILE_DISPOSITION_ON_CLOSE                   0x00000008
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#define FILE_DISPOSITION_IGNORE_READONLY_ATTRIBUTE  0x00000010
+#endif
+
+typedef struct _FILE_DISPOSITION_INFORMATION_EX {
+    ULONG Flags;
+} FILE_DISPOSITION_INFORMATION_EX, *PFILE_DISPOSITION_INFORMATION_EX;
+#endif
 
 // FilePositionInformation
 typedef struct _FILE_POSITION_INFORMATION {
@@ -2402,6 +2418,8 @@ __declspec(dllimport) ULONG __stdcall
 RtlNtStatusToDosError(NTSTATUS Status);
 
 __declspec(dllimport) void __stdcall RtlRaiseStatus(NTSTATUS Status);
+
+NTSTATUS NTAPI RtlSetThreadErrorMode(IN ULONG NewMode, OUT PULONG OldMode);
 
 __declspec(dllimport) PULONG __stdcall
 RtlSubAuthoritySid(

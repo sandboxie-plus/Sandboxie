@@ -68,9 +68,11 @@ P_ObQueryNameInfo pObQueryNameInfo = NULL;
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "obj_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------

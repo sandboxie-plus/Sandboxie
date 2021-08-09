@@ -922,7 +922,7 @@ UINT AFX_CDECL CMyFrame::OnCmdConfEditThread(LPVOID parm)
 
 void CMyFrame::OnCmdConfReload()
 {
-    if (SbieApi_ReloadConf(-1) == 0) {
+    if (SbieApi_ReloadConf(-1, 0) == 0) {
 
         CBoxes::GetInstance().ReloadBoxes();
         CBoxes::GetInstance().RefreshProcesses();

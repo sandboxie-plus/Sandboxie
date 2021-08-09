@@ -335,3 +335,21 @@ _FX BOOLEAN MyIsCallerSigned(void)
 
     return TRUE;
 }
+
+
+//---------------------------------------------------------------------------
+// MyValidateCertificate
+//---------------------------------------------------------------------------
+
+BOOLEAN Driver_Certified = FALSE;
+
+NTSTATUS KphValidateCertificate();
+
+_FX NTSTATUS MyValidateCertificate(void)
+{
+    NTSTATUS status = KphValidateCertificate();
+
+    Driver_Certified = NT_SUCCESS(status);
+
+    return status;
+}

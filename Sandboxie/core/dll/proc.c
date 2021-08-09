@@ -894,6 +894,14 @@ _FX BOOL Proc_CreateProcessInternalW(
     // OriginalToken BEGIN
     if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     {
+        extern BOOLEAN Scm_MsiServer_Systemless;
+        if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless 
+            && !SbieApi_QueryConfBool(NULL, L"RunServicesAsSystem", FALSE) && !SbieApi_QueryConfBool(NULL, L"MsiInstallerExemptions", FALSE)) {
+            // this is a simple workaround for the MSI installer to work properly
+            hToken = NULL;
+		    lpProcessAttributes = NULL;
+        }
+
         ok = __sys_CreateProcessInternalW(
             hToken, lpApplicationName, lpCommandLine,
             lpProcessAttributes, lpThreadAttributes, bInheritHandles,

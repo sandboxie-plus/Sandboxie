@@ -167,9 +167,11 @@ static const WCHAR *File_Nsi   = L"nsi";
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "file_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -188,6 +190,7 @@ _FX BOOLEAN File_Init(void)
 
     P_File_Init_2 p_File_Init_2 = File_Init_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -196,6 +199,7 @@ _FX BOOLEAN File_Init(void)
     }
 
 #endif ! _WIN64
+#endif
 
     if (! p_File_Init_2())
         return FALSE;
@@ -244,6 +248,7 @@ _FX void File_Unload(void)
 
     P_File_Unload_2 p_File_Unload_2 = File_Unload_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -252,6 +257,7 @@ _FX void File_Unload(void)
     }
 
 #endif ! _WIn64
+#endif 
 
     p_File_Unload_2();
 

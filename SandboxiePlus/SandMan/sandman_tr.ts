@@ -322,6 +322,50 @@
         <source>Do you really want to delete the selected local template?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TCP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UDP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ICMP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block using Windows Filtering Platform</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block by denying access to Network devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block (WFP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block (NDev)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -659,7 +703,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Driver version: %1</source>
-        <translation>Sürücü sürümü: %1</translation>
+        <translation type="vanished">Sürücü sürümü: %1</translation>
     </message>
     <message>
         <source>Sandboxie-Plus v%1</source>
@@ -1097,7 +1141,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
-        <translation>Sandboxie-Plus taşınabilir modda başlatıldı, SandBox klasörünü kendi ana dizinine koymak ister misiniz?</translation>
+        <translation type="vanished">Sandboxie-Plus taşınabilir modda başlatıldı, SandBox klasörünü kendi ana dizinine koymak ister misiniz?</translation>
     </message>
     <message>
         <source>The file %1 already exists, do you want to overwrite it?</source>
@@ -1145,7 +1189,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Select box:</source>
-        <translation>Kutu seç:</translation>
+        <translation type="vanished">Kutu seç:</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
@@ -1205,6 +1249,24 @@ Full path: %4</source>
 Do you want to do the clean up?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unknown operation &apos;%1&apos; requested via command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
+Yes will choose: %1<byte value="xd"/>
+No will choose: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The config password must not be longer than 64 characters</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieModel</name>
@@ -1213,7 +1275,7 @@ Do you want to do the clean up?</source>
         <translation>Ad</translation>
     </message>
     <message>
-        <source>Box Groupe</source>
+        <source>Box Group</source>
         <translation>Kutu Grubu</translation>
     </message>
     <message>
@@ -1257,10 +1319,6 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Sbie Crypto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sbie WuAu Svc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1368,6 +1426,10 @@ Do you want to do the clean up?</source>
         <source>Firefox Plugin Container</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sbie WuauServ</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieView</name>
@@ -1391,7 +1453,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Run eMail Client</source>
-        <translation>ePosta istemcisini çalıştır</translation>
+        <translation type="vanished">ePosta istemcisini çalıştır</translation>
     </message>
     <message>
         <source>Remove Group</source>
@@ -1501,7 +1563,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Run Web Browser</source>
-        <translation>Web Tarayıcı Çalıştır</translation>
+        <translation type="vanished">Web Tarayıcı Çalıştır</translation>
     </message>
     <message>
         <source>Allow Network Shares</source>
@@ -1509,7 +1571,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Run Cmd.exe</source>
-        <translation>Cmd.exe&apos;yi çalıştır</translation>
+        <translation type="vanished">Cmd.exe&apos;yi çalıştır</translation>
     </message>
     <message>
         <source>Snapshots Manager</source>
@@ -1517,7 +1579,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Run Explorer</source>
-        <translation>Dosya Gezginini Çalıştır</translation>
+        <translation type="vanished">Dosya Gezginini Çalıştır</translation>
     </message>
     <message>
         <source>Block Internet Access</source>
@@ -1594,7 +1656,7 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Run Cmd.exe as Admin</source>
-        <translation>Cmd.exe yi yönetici olarak çalıştır</translation>
+        <translation type="vanished">Cmd.exe yi yönetici olarak çalıştır</translation>
     </message>
     <message>
         <source>Ask for UAC Elevation</source>
@@ -1606,6 +1668,53 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default eMail Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Windows Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Registry Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Programs and Features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terminal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terminal (as Admin)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terminal (32-bit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSelectBoxWindow</name>
+    <message>
+        <source>Sandboxie-Plus - Run Sandboxed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to run the program outside the sandbox?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1658,6 +1767,14 @@ Do you want to do the clean up?</source>
     <message>
         <source>Auto Detection</source>
         <translation>Otomatik Algıla</translation>
+    </message>
+    <message>
+        <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This support certificate is not valid.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1749,7 +1866,7 @@ Do you want to do the clean up?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show only sellectes box</source>
+        <source>Filter selected box only</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1950,7 +2067,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Block internet access for all programs except those added to the list.</source>
-        <translation>Listeye eklenenler dışındaki tüm programlar için internet erişimini engelle.</translation>
+        <translation type="vanished">Listeye eklenenler dışındaki tüm programlar için internet erişimini engelle.</translation>
     </message>
     <message>
         <source>Issue message 1307 when a program is denied internet access</source>
@@ -2062,15 +2179,15 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Sandbox protection</source>
-        <translation>KumKutusu koruması</translation>
+        <translation type="vanished">KumKutusu koruması</translation>
     </message>
     <message>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
-        <translation>Programları birlikte gruplayabilir ve onlara bir grup adı verebilirsiniz. Program grupları, program adları yerine bazı ayarlarla kullanılabilir.</translation>
+        <translation type="vanished">Programları birlikte gruplayabilir ve onlara bir grup adı verebilirsiniz. Program grupları, program adları yerine bazı ayarlarla kullanılabilir.</translation>
     </message>
     <message>
         <source>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</source>
-        <translation>Korumalı kutuya alınmış SİSTEM işlemlerini ayrıcalıksız korumalı kutuda olmayan işlemlerden koruyun</translation>
+        <translation type="vanished">Korumalı kutuya alınmış SİSTEM işlemlerini ayrıcalıksız korumalı kutuda olmayan işlemlerden koruyun</translation>
     </message>
     <message>
         <source>Add Command</source>
@@ -2152,7 +2269,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
     </message>
     <message>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation>İş nesnelerine KumKutu&apos;lu (korumalı kutu) süreçler ekle (önerilir)</translation>
+        <translation type="vanished">İş nesnelerine KumKutu&apos;lu (korumalı kutu) süreçler ekle (önerilir)</translation>
     </message>
     <message>
         <source>Remove Program</source>
@@ -2265,7 +2382,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>&lt;- for this one the above does not apply</source>
-        <translation>&lt;- yukarıdakiler bunun için geçerli değildir</translation>
+        <translation type="vanished">&lt;- yukarıdakiler bunun için geçerli değildir</translation>
     </message>
     <message>
         <source>Block access to the printer spooler</source>
@@ -2348,10 +2465,6 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Raw Disk access</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2361,10 +2474,6 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Access Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2414,19 +2523,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Allow sandboxed programs to Change User Passwords and alike</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open access to windows Local Security Authority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2495,6 +2592,106 @@ Please note that this values are currently user specific and saved globally for 
         <source>Resource Access Monitor</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show this box in the &apos;run in box&apos; selection prompt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access Restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process Restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set network/internet access for unlisted processes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network Restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Rules, Program:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Rule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Rule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow sandboxed programs to managing Hardware/Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to Windows Local Security Authority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network Firewall</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -2512,7 +2709,7 @@ Please note that this values are currently user specific and saved globally for 
 </context>
 <context>
     <name>QPlatformTheme</name>
-	<message>
+    <message>
         <source>OK</source>
         <translation>TAMAM</translation>
     </message>
@@ -2573,6 +2770,29 @@ Please note that this values are currently user specific and saved globally for 
     </message>
 </context>
 <context>
+    <name>SelectBoxWindow</name>
+    <message>
+        <source>SandboxiePlus select box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the sandbox in which to start the program, installer or document.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run As UAC Administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run Sandboxed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run Outside the Sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsWindow</name>
     <message>
         <source>Name</source>
@@ -2604,11 +2824,11 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>General Options</source>
-        <translation>Genel Ayarlar</translation>
+        <translation type="vanished">Genel Ayarlar</translation>
     </message>
     <message>
         <source>Program Restrictions</source>
-        <translation>Program Kısıtlamaları</translation>
+        <translation type="vanished">Program Kısıtlamaları</translation>
     </message>
     <message>
         <source>Restart required (!)</source>
@@ -2616,7 +2836,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Tray options</source>
-        <translation>Tepsi ayarları</translation>
+        <translation type="vanished">Tepsi ayarları</translation>
     </message>
     <message>
         <source>Use Dark Theme</source>
@@ -2672,7 +2892,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Software Compatibility</source>
-        <translation>Yazılım Uyumluluğu</translation>
+        <translation type="vanished">Yazılım Uyumluluğu</translation>
     </message>
     <message>
         <source>On main window close:</source>
@@ -2696,7 +2916,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Advanced Options</source>
-        <translation>Gelişmiş Ayarlar</translation>
+        <translation type="vanished">Gelişmiş Ayarlar</translation>
     </message>
     <message>
         <source>Prevent the listed programs from starting on this system</source>
@@ -2748,10 +2968,90 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Other settings</source>
-        <translation>Diğer ayarlar</translation>
+        <translation type="vanished">Diğer ayarlar</translation>
     </message>
     <message>
         <source>Use Dark Theme (fully applied after a restart)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hotkey for terminating all boxed processes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Systray options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UI Language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shell Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run Sandboxed - Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always use DefaultBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Sandbox Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxing features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compatibility</source>
+        <translation type="unfinished">Uyumluluk</translation>
+    </message>
+    <message>
+        <source>Support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install updates automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the support certificate here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Support Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

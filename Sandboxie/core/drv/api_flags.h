@@ -100,6 +100,14 @@
 #define SBIE_FLAG_HOST_INJECT_PROCESS   0x80000000
 
 
+#define SBIE_CONF_FLAG_RECONFIGURE		0x00000001
+#define SBIE_CONF_FLAG_RELOAD_CERT		0x80000000
+
+
+#define SBIE_FEATURE_FLAG_WFP   		0x00000001
+#define SBIE_FEATURE_FLAG_SBIE_LOGIN    0x00000010
+#define SBIE_FEATURE_FLAG_CERTIFIED		0x80000000
+
 //---------------------------------------------------------------------------
 
 

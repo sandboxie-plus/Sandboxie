@@ -38,9 +38,6 @@ Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 
 [CustomMessages]
 
-; If you are going to provide a new translation in your language,
-; please add it after the last one in this section.
-
 ; English
 english.AddSandboxedMenu=Add "Run Sandboxed" to context menu
 english.CustomPageLabel1=Select Installation Type
@@ -64,6 +61,42 @@ ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
+
+; Chinese Traditional
+ChineseTraditional.AddSandboxedMenu=加入「在沙盒中執行」選單
+ChineseTraditional.CustomPageLabel1=選擇安裝方式
+ChineseTraditional.CustomPageLabel2=應該如何安裝
+ChineseTraditional.CustomPageLabel3=選擇安裝模式
+ChineseTraditional.CustomPageInstallMode=在這台電腦上安裝 {#MyAppName}
+ChineseTraditional.CustomPageUpgradeMode=更新目前已安裝的 {#MyAppName}
+ChineseTraditional.CustomPagePortableMode=提取全部檔案到指定目錄供便攜化使用
+ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
+ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，繼續安裝必須先將其移除，是否開始移除？
+ChineseTraditional.RunSandboxedMenu=在沙盒中執行(&S)
+
+; Dutch
+dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
+dutch.CustomPageLabel1=Installatietype selecteren
+dutch.CustomPageLabel2=Hoe moet er geïnstalleerd worden
+dutch.CustomPageLabel3=Installatiemodus kiezen
+dutch.CustomPageInstallMode={#MyAppName} op deze computer installeren
+dutch.CustomPageUpgradeMode=Bestaande installatie van {#MyAppName} bijwerken
+dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaar gebruik
+dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
+dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd, die eerst moet verwijderd worden. Wilt u deze nu verwijderen?
+dutch.RunSandboxedMenu=In &sandbox uitvoeren
+
+; German
+german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
+german.CustomPageLabel1=Wählen Sie die Installationsart aus
+german.CustomPageLabel2=Wie soll installiert werden
+german.CustomPageLabel3=Wählen Sie die Installationsmethode
+german.CustomPageInstallMode=Installiere {#MyAppName} auf diesem Computer
+german.CustomPageUpgradeMode=Update der bestehenden {#MyAppName} Installation
+german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragbaren Verwendung
+german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
+german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
+german.RunSandboxedMenu=In &Sandbox ausführen
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
@@ -100,27 +133,3 @@ russian.CustomPagePortableMode=Извлечь все файлы в катало�
 russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
 russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
 russian.RunSandboxedMenu=Запустить в песочнице (&S)
-
-; German
-german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
-german.CustomPageLabel1=Wählen Sie die Installationsart aus
-german.CustomPageLabel2=Wie soll installiert werden
-german.CustomPageLabel3=Wählen Sie die Installationsmethode
-german.CustomPageInstallMode=Installiere {#MyAppName} auf diesem Computer
-german.CustomPageUpgradeMode=Update der bestehenden {#MyAppName} Installation
-german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragbaren Verwendung
-german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
-german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
-german.RunSandboxedMenu=In &Sandbox ausführen
-
-; Dutch
-dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
-dutch.CustomPageLabel1=Installatietype selecteren
-dutch.CustomPageLabel2=Hoe moet er geïnstalleerd worden
-dutch.CustomPageLabel3=Installatiemodus kiezen
-dutch.CustomPageInstallMode={#MyAppName} op deze computer installeren
-dutch.CustomPageUpgradeMode=Bestaande installatie van {#MyAppName} bijwerken
-dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaar gebruik
-dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
-dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd, die eerst moet verwijderd worden. Wilt u deze nu verwijderen?
-dutch.RunSandboxedMenu=In &sandbox uitvoeren

@@ -1070,7 +1070,7 @@ Wilt u het opruimen uitvoeren?</translation>
     <message>
         <location filename="SandMan.cpp" line="609"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende bewerking &apos;%1&apos; gevraagd via opdrachtregel</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="618"/>
@@ -1123,10 +1123,6 @@ Wilt u het opruimen uitvoeren?</translation>
         <location filename="SandMan.cpp" line="837"/>
         <source>Loaded Config: %1</source>
         <translation>Geladen config: %1</translation>
-    </message>
-    <message>
-        <source>Driver version: %1</source>
-        <translation type="vanished">Driver-versie: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
@@ -1222,7 +1218,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="1277"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation type="unfinished"></translation>
+        <translation>LET OP: een andere agent (waarschijnlijk SbieCtrl.exe) beheert deze Sandboxie-sessie al. Sluit deze eerst en maak opnieuw verbinding om over te nemen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1339"/>
@@ -1793,7 +1789,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Terminal (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
@@ -2075,12 +2071,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dank u voor uw steun aan de ontwikkeling van Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit ondersteuningscertificaat is niet geldig.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="507"/>
@@ -2304,10 +2300,6 @@ Nee zal %2 kiezen</translation>
         <location filename="Forms/OptionsWindow.ui" line="170"/>
         <source>Elevation restrictions</source>
         <translation>Verheffing-beperkingen</translation>
-    </message>
-    <message>
-        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="vanished">Beveiligingsopmerking: &quot;verheven&quot; toepassingen die onder toezicht van Sandboxie uitgevoerd worden met een admin-token, hebben meer mogelijkheden om isolatie te omzeilen en het systeem buiten de sandbox te wijzigen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="70"/>
@@ -2555,10 +2547,6 @@ Nee zal %2 kiezen</translation>
         <translation>Programma toevoegen</translation>
     </message>
     <message>
-        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
-        <translation type="vanished">U kunt programma&apos;s samen groeperen en ze een groepnaam geven. Programmagroepen kunnen gebruikt worden met een aantal instellingen in plaats van programma-namen.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="879"/>
         <source>Forced Programs</source>
         <translation>Geforceerde programma&apos;s</translation>
@@ -2593,22 +2581,22 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveiligingsopmerking: &quot;verheven&quot; toepassingen die onder toezicht van Sandboxie uitgevoerd worden met een admin- of systeemtoken, hebben meer mogelijkheden om isolatie te omzeilen en het systeem buiten de sandbox te wijzigen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="271"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation type="unfinished"></translation>
+        <translation>MSIServer toestaan om te draaien met een gesandboxt systeemtoken en andere uitzonderingen toepassen indien nodig</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="278"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opmerking: Msi Installer Exemptions zou niet nodig moeten zijn, maar als u problemen ondervindt bij de installatie van een msi-pakket dat u vertrouwt, kan deze optie helpen de installatie tot een goed einde te brengen. U kunt ook proberen het laten vallen van administratorrechten uit te schakelen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="852"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>U kunt programma&apos;s samen groeperen en ze een groepsnaam geven. Programmagroepen kunnen gebruikt worden met een aantal instellingen in plaats van programma-namen. Groepen die gedefinieerd zijn voor de box overschrijven groepen die gedefinieerd zijn in sjablonen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="957"/>
@@ -3376,27 +3364,27 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>Systeemvak-opties</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>UI-taal:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Shell-integratie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="232"/>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesandboxt uitvoeren - acties</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="273"/>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox Manager starten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="280"/>
@@ -3417,10 +3405,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Show Sys-Tray</source>
         <translation>Systeemvak weergeven</translation>
-    </message>
-    <message>
-        <source>Tray options</source>
-        <translation type="vanished">Systeemvak-opties</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="81"/>
@@ -3456,10 +3440,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="297"/>
         <source>Advanced Config</source>
         <translation>Geavanceerde configuratie</translation>
-    </message>
-    <message>
-        <source>Use Windows Filtering Platform to restrict network access (experimental)*</source>
-        <translation type="vanished">Windows Filtering Platform gebruiken om netwerktoegang te beperken (experimenteel)*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
@@ -3504,12 +3484,12 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="372"/>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxing-functies</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Filtering Platform gebruiken om netwerktoegang te beperken (experimenteel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="603"/>
@@ -3537,17 +3517,9 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <translation>Alleen administrator-gebruikersaccounts kunnen de opdracht gebruiken om geforceerde programma&apos;s uit te schakelen.</translation>
     </message>
     <message>
-        <source>Other settings</source>
-        <translation type="vanished">Andere instellingen</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="358"/>
         <source>Portable root folder</source>
         <translation>Draagbare root-map</translation>
-    </message>
-    <message>
-        <source>* requires driver reload or system reboot</source>
-        <translation type="vanished">* opnieuw laden van stuurprogramma of herstart van systeem nodig</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="470"/>
@@ -3598,7 +3570,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuratiebescherming</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
@@ -3633,12 +3605,12 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="734"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie up-to-date houden met de voortschrijdende releases van Windows en compatibel houden met alle webbrowsers is een nooit eindigende onderneming. Overweeg om dit werk te steunen met een donatie.&lt;br /&gt;U kunt de ontwikkeling steunen met een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal-donatie&lt;/a&gt;, die ook met kredietkaarten werkt.&lt;br /&gt;U kunt ook doorlopende ondersteuning bieden met een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon-abonnement&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="766"/>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer het ondersteuningscertificaat hier in</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="780"/>
@@ -3648,7 +3620,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="787"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ondersteuners van het Sandboxie-Plus project ontvangen een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;ondersteunerscertificaat&lt;/a&gt;. Het is als een licentiesleutel, maar dan voor geweldige mensen die vrije software gebruiken :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
@@ -3659,10 +3631,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="721"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
         <translation>Regelmatig controleren op updates van Sandboxie-Plus</translation>
-    </message>
-    <message>
-        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">Sandboxie up-to-date houden met de voortschrijdende releases van Windows en compatibel houden met moderne web browsers is een nooit eindigende onderneming. Overweeg om dit werk te steunen met een donatie.&lt;br /&gt;U kunt de ontwikkeling steunen met een directe &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal-donatie&lt;/a&gt;, werkt ook met kredietkaarten.&lt;br /&gt;U kunt ook doorlopende ondersteuning bieden met een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon-abonnement&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>

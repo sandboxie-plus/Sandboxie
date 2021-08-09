@@ -112,3 +112,15 @@ german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragba
 german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
 german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
 german.RunSandboxedMenu=In &Sandbox ausführen
+
+; Dutch
+dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
+dutch.CustomPageLabel1=Installatietype selecteren
+dutch.CustomPageLabel2=Hoe moet er geïnstalleerd worden
+dutch.CustomPageLabel3=Installatiemodus kiezen
+dutch.CustomPageInstallMode={#MyAppName} op deze computer installeren
+dutch.CustomPageUpgradeMode=Bestaande installatie van {#MyAppName} bijwerken
+dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaar gebruik
+dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
+dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd, die eerst moet verwijderd worden. Wilt u deze nu verwijderen?
+dutch.RunSandboxedMenu=In &sandbox uitvoeren

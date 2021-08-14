@@ -1070,7 +1070,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="609"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation type="unfinished"></translation>
+        <translation>通過命令行請求的未知操作 &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="618"/>
@@ -1222,7 +1222,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1277"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation type="unfinished"></translation>
+        <translation>注意：另一個代理（可能是 SbieCtrl.exe）已在管理此 Sandboxie 會話，請先關閉它並重新連結以進行接管。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1339"/>
@@ -1793,7 +1793,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Terminal (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>終端機（32 位元）</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
@@ -2075,12 +2075,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>感謝您對 Sandboxie-Plus 開發的支持。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>此支援證書無效。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="507"/>
@@ -3376,27 +3376,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>工具列選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>UI 語言：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Shell 整合</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="232"/>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱化執行 - 操作</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="273"/>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟沙箱管理員</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="280"/>
@@ -3504,12 +3504,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="372"/>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱功能</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 Windows 過濾平台限制網路訪問（實驗性）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="603"/>
@@ -3598,7 +3598,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>設定保護</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
@@ -3638,7 +3638,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="766"/>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>在此處輸入支援證書</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="780"/>

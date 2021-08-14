@@ -29,7 +29,7 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
         <source>Hardened</source>
-        <translation>Endurecido</translation>
+        <translation>Rigoroso</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
@@ -373,7 +373,7 @@
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="114"/>
         <source>Please enter a file extension to be excluded</source>
-        <translation>Insira uma extensão de arquivo a ser excluída</translation>
+        <translation>Insira uma extensão de arquivo a ser ignorada</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="58"/>
@@ -658,7 +658,7 @@
 File name: %3</source>
         <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</oldsource>
-        <translation type="unfinished">Permitir que %4 (%5) copie um arquivo grande %1 na caixa de areia: %2?
+        <translation>Você que permitir que %4 (%5) copie um arquivo grande %1 na caixa de areia: %2?
 Nome do arquivo: %3</translation>
     </message>
     <message>
@@ -667,7 +667,7 @@ Nome do arquivo: %3</translation>
 Full path: %3</source>
         <oldsource>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</oldsource>
-        <translation type="unfinished">Permitir que %1 (%2) acesse à Internet?
+        <translation>Você que permitir que %1 (%2) acesse à Internet?
 Caminho completo: %3</translation>
     </message>
     <message>
@@ -676,7 +676,7 @@ Caminho completo: %3</translation>
 The file was written by: %3</source>
         <oldsource>%1 is eligible for quick recovery from %2.
 The file was written by: %3</oldsource>
-        <translation type="unfinished">%1 está qualificado para recuperação rápida de %2.
+        <translation>%1 está qualificado para recuperação rápida de %2.
 O arquivo foi gravado por: %3</translation>
     </message>
     <message>
@@ -702,7 +702,7 @@ O arquivo foi gravado por: %3</translation>
 Full path: %4</source>
         <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</oldsource>
-        <translation type="unfinished">Migrando um arquivo grande %1 para a caixa %2, %3 restante.
+        <translation>Migrando um arquivo grande %1 para a caixa %2, %3 restante.
 Caminho completo: %4</translation>
     </message>
 </context>
@@ -1157,19 +1157,23 @@ Não vou escolher: %2</translation>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
 <byte value="xd"/>
 Do you want to do the clean up?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus estava em execução no modo portable, agora ele tem que limpar os serviços criados. Isso irá solicitar privilégios administrativos.
+
+Você quer fazer a limpeza?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="609"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Operação desconhecida &apos;%1&apos; solicitada via linha de comando</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="853"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
 Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus foi iniciado no modo portable, você deseja colocar a pasta Sandbox em seu diretório pai?
+Sim vou escolher: %1
+Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="908"/>
@@ -1251,7 +1255,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1277"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation type="unfinished"></translation>
+        <translation>CUIDADO: Outro agente (provavelmente SbieCtrl.exe) já está gerenciando esta sessão de sandboxie, por favor, feche-o primeiro e reconecte para assumir o controle.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1339"/>
@@ -1827,7 +1831,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Terminal (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
@@ -1864,7 +1868,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="93"/>
         <source>Sandbox Presets</source>
-        <translation>Predefinições do Sandbox</translation>
+        <translation>Predefinições da Caixa</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="96"/>
@@ -1894,12 +1898,12 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="110"/>
         <source>Sandbox Options</source>
-        <translation>Opções da Caixa de Areia</translation>
+        <translation>Opções da Caixa</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="111"/>
         <source>Rename Sandbox</source>
-        <translation>Renomear Caixa de Areia</translation>
+        <translation>Renomear Caixa</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="113"/>
@@ -1909,7 +1913,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="114"/>
         <source>Remove Sandbox</source>
-        <translation>Remover Caixa de Areia</translation>
+        <translation>Remover Caixa(s)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="119"/>
@@ -2020,7 +2024,7 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="666"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
         <oldsource>Do you really want remove the selected sandbox(es)?</oldsource>
-        <translation>Tem certeza de que deseja remover as caixas de areia selecionadas?</translation>
+        <translation>Tem certeza de que deseja remover a(s) caixa(s) de areia selecionada(s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="681"/>
@@ -2035,7 +2039,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="695"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation>Você realmente deseja excluir o conteúdo de várias caixas de areia?</translation>
+        <translation>Tem certeza que deseja excluir o conteúdo de várias caixas de areia?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="709"/>
@@ -2113,12 +2117,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrigado por apoiar o desenvolvimento do Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este certificado de suporte não é válido.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="507"/>
@@ -2292,12 +2296,12 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
         <source>Initial sandbox configuration:</source>
-        <translation>Configuração inicial do sandbox:</translation>
+        <translation>Configuração inicial da caixa:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="90"/>
         <source>Copy options from an existing box:</source>
-        <translation>Opções de cópia de uma caixa existente:</translation>
+        <translation>Copiar opções de uma caixa existente:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="110"/>
@@ -2347,7 +2351,7 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="vanished">Nota de segurança: Aplicativos elevados em execução sob a supervisão do Sandboxie, com um token de administrador, têm mais oportunidades para ignorar o isolamento e modificar o sistema fora da caixa de areia.</translation>
+        <translation type="vanished">Nota de segurança: Aplicativos em execução elevado sob a supervisão do Sandboxie, com um token de administrador, têm mais oportunidades para ignorar o isolamento e modificar o sistema fora da caixa de areia.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="70"/>
@@ -2382,22 +2386,22 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="190"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation type="unfinished">Mostrar esta caixa no diálogo de seleção &apos;rodar na caixa&apos;</translation>
+        <translation>Mostrar esta caixa no diálogo de seleção &apos;rodar na caixa&apos;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota de segurança: Aplicativos em execução elevada sob a supervisão do Sandboxie, com um token de administrador ou sistema, têm mais oportunidades para ignorar o isolamento e modificar o sistema fora da caixa de areia.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="271"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir que o MSIServer seja executado com um token do sistema na caixa de areia e aplique outras exceções, se necessário</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="278"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota: As isenções do Instalador do MSI não devem ser necessárias, mas se você encontrar problemas para instalar um pacote MSI que você confia, essa opção pode ajudar a instalação completa com êxito. Você também pode tentar desativar os direitos de administrador.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="291"/>
@@ -2442,7 +2446,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="382"/>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished">Avisar quando uma aplicativo abrir uma alça do disco rígido</translation>
+        <translation>Avisar quando uma aplicativo abrir uma alça do disco rígido</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="389"/>
@@ -2649,7 +2653,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="852"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Você pode agrupar programas juntos e dar-lhes um nome de grupo. Grupos de programas podem ser usados ​​com algumas das configurações em vez de nomes de programas. Grupos definidos para a caixa sobrescrever grupos definidos em modelos.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="957"/>
@@ -2765,7 +2769,7 @@ Se os processos líderes forem definidos, todos os outros serão tratados como p
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1290"/>
         <source>Test Rules, Program:</source>
-        <translation type="unfinished">Regras de Teste, Programa:</translation>
+        <translation>Testar Regras, Programa:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1300"/>
@@ -2961,7 +2965,7 @@ Para acessar arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
         <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Limitar acesso ao gerenciador de controle de serviço emulado para processos privilegiados</translation>
+        <translation>Limitar acesso ao gerenciador de controle de serviços emulados a processos privilegiados</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1831"/>
@@ -2971,17 +2975,17 @@ Para acessar arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1838"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation type="unfinished">Emular estação de janela da caixa de areia para todos os processos</translation>
+        <translation>Emular estação de janela da caixa de areia para todos os processos</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1858"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir o uso de objetos de trabalho aninhados (experimental, funciona no Windows 8 e posterior)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1876"/>
         <source>Allow sandboxed programs to managing Hardware/Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir que programas na caixa de areia gerenciem Hardware/Dispositivos</translation>
     </message>
     <message>
         <source>Allow use of nested job objects (experimental, works on windows 8 and later)</source>
@@ -3002,15 +3006,9 @@ Para acessar arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fa
         <translation>Abrir acesso ao Gerenciador de Conta de Segurança do Windows</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1883"/>
-        <source>Open access to Windows Security Account Manager</source>
-        <oldsource>Open access to windows Local Security Authority</oldsource>
-        <translation type="unfinished">Abrir o acesso ao Gerenciador de Conta de Segurança do Windows</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1890"/>
         <source>Open access to Windows Local Security Authority</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir acesso à Autoridade de Segurança Local do Windows</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1920"/>
@@ -3133,7 +3131,7 @@ ao invés de &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2219"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished">Rastreamento Ntdll syscall (cria muita saída)</translation>
+        <translation>Rastreamento Ntdll syscall (cria muita saída)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2226"/>
@@ -3397,7 +3395,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="32"/>
         <source>SandboxiePlus select box</source>
-        <translation type="unfinished">Caixa de seleção do SandboxiePlus</translation>
+        <translation>Caixa de seleção do SandboxiePlus</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="40"/>
@@ -3445,27 +3443,27 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções da bandeja do sistema</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma da Interface do Usuário:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Integração com o Shell</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="232"/>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodar na Caixa de Areia - Ações</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="273"/>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar o Sandbox Manager</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="280"/>
@@ -3573,12 +3571,12 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="372"/>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>Recursos do Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar a Plataforma de Filtragem do Windows para restringir o acesso à rede (experimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="603"/>
@@ -3667,7 +3665,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Proteção de Configuração</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
@@ -3702,12 +3700,12 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="734"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Manter o Sandboxie atualizado com as versões mais recentes do Windows e compatibilidade com todos os navegadores web é um esforço interminável. Por favor, considere apoiar este trabalho com uma doação.&lt;br /&gt;Você pode apoiar o desenvolvimento com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;doação no PayPal&lt;/a&gt;, trabalhando também com cartões de crédito.&lt;br /&gt;Ou você pode fornecer suporte contínuo com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;assinatura do Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="766"/>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>Insira o certificado de suporte aqui</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="780"/>
@@ -3717,7 +3715,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="787"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Os apoiadores do projeto Sandboxie-Plus receberam um &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificado de suporte&lt;/a&gt;. É como uma chave de licença, mas para pessoas incríveis usando software livre. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
@@ -3731,7 +3729,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">Mantenha o Sandboxie atualizado com as versões masi recentes do Windows e compatíveis com navegadores web modernos é um esforço sem fim. Por favor, considere apoiar este trabalho com uma doação.&lt;br /&gt;Você pode apoiar o desenvolvimento com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;Doação do PayPal&lt;/a&gt;, Trabalha também com cartões de crédito.&lt;br /&gt;Você também pode fornecer suporte contínuo com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Assinatura do Patreon&lt;/a&gt;.</translation>
+        <translation type="vanished">Manter o Sandboxie atualizado com as versões mais recentes do Windows e compatibilidade com navegadores web modernos é um esforço interminável. Por favor, considere apoiar este trabalho com uma doação.&lt;br /&gt;Você pode apoiar o desenvolvimento com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;Doação do PayPal&lt;/a&gt;, Trabalha também com cartões de crédito.&lt;br /&gt;Você também pode fornecer suporte contínuo com uma &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Assinatura do Patreon&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -3740,7 +3738,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
         <oldsource>SandboxiePlus Settings</oldsource>
-        <translation>SandboxiePlus - Instântaneos</translation>
+        <translation>SandboxiePlus - Instantâneos</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>

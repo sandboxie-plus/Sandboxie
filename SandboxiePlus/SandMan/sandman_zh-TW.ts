@@ -469,7 +469,7 @@
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="414"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation>沙箱已刪除，故配置沒有被儲存</translation>
+        <translation>沙箱已刪除，故配置沒有被儲存。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="456"/>
@@ -1070,7 +1070,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="609"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation>通過命令行請求的未知操作 &apos;%1&apos;</translation>
+        <translation>透過命令列請求的未知操作 &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="618"/>
@@ -1123,10 +1123,6 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="837"/>
         <source>Loaded Config: %1</source>
         <translation>載入的配置: %1</translation>
-    </message>
-    <message>
-        <source>Driver version: %1</source>
-        <translation type="vanished">驅動程式版本: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
@@ -1222,12 +1218,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1277"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation>注意：另一個代理（可能是 SbieCtrl.exe）已在管理此 Sandboxie 會話，請先關閉它並重新連結以進行接管。</translation>
+        <translation>注意：另一個代理 (可能是 SbieCtrl.exe) 已經在管理這個 Sandboxie 工作階段，請先關閉其他代理並重新連線進行接管控制。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1339"/>
         <source>Executing maintenance operation, please wait...</source>
-        <translation>執行維護作業，請稍等...</translation>
+        <translation>正在執行維護作業，請稍候...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1449"/>
@@ -1252,7 +1248,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1603"/>
         <source>Administrator rights are required for this operation.</source>
-        <translation>此作業需要管理員授權。</translation>
+        <translation>此操作需要管理員權限。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1604"/>
@@ -1342,7 +1338,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1621"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>因處理程序正在沙箱中運作，此快照操作無法完成。</translation>
+        <translation>因處理程序正在沙箱中執行，此快照操作無法完成。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1622"/>
@@ -1478,7 +1474,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1990"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
-        <translation>無可用更新，您的 Sandboxie-Plus 已為最新</translation>
+        <translation>無可用更新，您的 Sandboxie-Plus 已為最新版。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2032"/>
@@ -1783,17 +1779,17 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="79"/>
         <source>Terminal</source>
-        <translation>命令提示字元</translation>
+        <translation>終端機</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="80"/>
         <source>Terminal (as Admin)</source>
-        <translation>命令提示字元 (管理員)</translation>
+        <translation>終端機 (管理員)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Terminal (32-bit)</source>
-        <translation>終端機（32 位元）</translation>
+        <translation>終端機 (32 位元)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
@@ -1978,7 +1974,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="659"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation>請為沙箱輸入新名稱</translation>
+        <translation>請為沙箱輸入新名稱。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="666"/>
@@ -2080,7 +2076,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <source>This support certificate is not valid.</source>
-        <translation>此支援證書無效。</translation>
+        <translation>這個支援證書無效。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="507"/>
@@ -2101,7 +2097,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="584"/>
         <source>Passwords did not match, please retry.</source>
-        <translation>密碼不正確，請重新輸入。</translation>
+        <translation>密碼不相符，請再試一次。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="594"/>
@@ -2304,10 +2300,6 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="170"/>
         <source>Elevation restrictions</source>
         <translation>權限提升限制</translation>
-    </message>
-    <message>
-        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="vanished">安全性提示: 在 Sandboxie 的限制下運行、且具有管理員令牌的權限提升應用程式，有更多機會繞過隔離並在沙箱外修改系統。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="70"/>
@@ -2555,10 +2547,6 @@ No will choose: %2</source>
         <translation>新增程式</translation>
     </message>
     <message>
-        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
-        <translation type="vanished">您可將程式分組並且為它們設定群組名稱。程式群組可以代替程式名稱被用於一些設定。</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="879"/>
         <source>Forced Programs</source>
         <translation>強制執行程式</translation>
@@ -2593,22 +2581,22 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>安全性提示: 在 Sandboxie 的限制下運行、且具有管理員或系統令牌的權限提升應用程式，有更多機會繞過隔離並在沙箱外修改系統。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="271"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation type="unfinished"></translation>
+        <translation>允許 MSIServer 使用沙箱系統令牌執行並在需要時套用至其他例外</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="278"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>注意：不應要求 Msi 安裝程式豁免，但如果您在安裝您信任的 msi 軟體時遇到問題，此選項可能有助於成功完成安裝。您也可以嘗試停用刪除管理員權限。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="852"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>您可將程式分組並且為它們設定群組名稱。程式群組可以代替程式名稱被用於一些設定。為沙箱定義的群組覆蓋範本中定義的群組。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="957"/>
@@ -3376,7 +3364,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Systray options</source>
-        <translation>工具列選項</translation>
+        <translation>系統匣選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
@@ -3386,12 +3374,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Shell Integration</source>
-        <translation>Shell 整合</translation>
+        <translation>滑鼠右鍵整合</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="232"/>
         <source>Run Sandboxed - Actions</source>
-        <translation>沙箱化執行 - 操作</translation>
+        <translation>在沙箱內執行 - 操作</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="273"/>
@@ -3417,10 +3405,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Show Sys-Tray</source>
         <translation>在系統工具列顯示</translation>
-    </message>
-    <message>
-        <source>Tray options</source>
-        <translation type="vanished">工作列選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="81"/>
@@ -3458,10 +3442,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>進階設定</translation>
     </message>
     <message>
-        <source>Use Windows Filtering Platform to restrict network access (experimental)*</source>
-        <translation type="vanished">使用 Windows 過濾平台限製網路存取 (實驗性)*</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;檔案系統根目錄&lt;/a&gt;: </translation>
@@ -3489,7 +3469,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="568"/>
         <source>Config protection</source>
-        <translation>配置保護</translation>
+        <translation>設定保護</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="434"/>
@@ -3509,7 +3489,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation>使用 Windows 過濾平台限制網路訪問（實驗性）</translation>
+        <translation>使用 Windows 過濾平台限制網路存取 (實驗性)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="603"/>
@@ -3537,17 +3517,9 @@ Please note that this values are currently user specific and saved globally for 
         <translation>僅管理員帳戶可使用停用強制執行程式命令</translation>
     </message>
     <message>
-        <source>Other settings</source>
-        <translation type="vanished">其他設定</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="358"/>
         <source>Portable root folder</source>
         <translation>可攜式化根目錄</translation>
-    </message>
-    <message>
-        <source>* requires driver reload or system reboot</source>
-        <translation type="vanished">* 需要重新載入驅動程式或重新啟動系統</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="470"/>
@@ -3633,7 +3605,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="734"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>使 Sandboxie 與 Windows 的累積版本保持同步並與現代網頁瀏覽器相容是一項永無止境的努力。請考慮透過捐贈來支持這項工作。&lt;br&gt;您可以透過直接&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐贈&lt;/a&gt;;來支持開發，也適用於信用卡。&lt;br&gt;您還可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 訂閱&lt;/a&gt;提供持續的支持。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="766"/>
@@ -3648,7 +3620,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="787"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 項目的支持者會收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;支持者憑證&lt;/a&gt;。它就像一個授權金鑰，但適用於使用免費軟體的優秀人士。 :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
@@ -3659,10 +3631,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="721"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
         <translation>定期檢查 Sandboxie-Plus 的更新</translation>
-    </message>
-    <message>
-        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">使 Sandboxie 與 Windows 的累積版本保持同步並與現代網頁瀏覽器相容是一項永無止境的努力。請考慮透過捐贈來支持這項工作。&lt;br /&gt;您可以透過直接&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐贈&lt;/a&gt;來支持開發，也適用於信用卡。&lt;br /&gt;您還可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 訂閱&lt;/a&gt;提供持續的支持。</translation>
     </message>
 </context>
 <context>

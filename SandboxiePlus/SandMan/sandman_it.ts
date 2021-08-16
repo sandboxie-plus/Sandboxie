@@ -2072,7 +2072,7 @@ Scegliere No per selezionare: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
-        <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
+        <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Grazie per aver sostenuto lo sviluppo di Sandboxie Plus.</translation>
     </message>
     <message>

@@ -2070,7 +2070,7 @@ Nee zal %2 kiezen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
-        <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
+        <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Dank u voor uw steun aan de ontwikkeling van Sandboxie-Plus.</translation>
     </message>
     <message>

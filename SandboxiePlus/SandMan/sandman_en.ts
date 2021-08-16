@@ -2057,7 +2057,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
-        <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
+        <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

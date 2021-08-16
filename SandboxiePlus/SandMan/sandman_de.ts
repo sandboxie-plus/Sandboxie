@@ -2137,7 +2137,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
-        <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
+        <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Danke Ihnen für die Unterstützung der Entwicklung von Sandboxie-Plus.</translation>
     </message>
     <message>

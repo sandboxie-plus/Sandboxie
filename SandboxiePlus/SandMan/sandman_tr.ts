@@ -1769,7 +1769,7 @@ No will choose: %2</source>
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
+        <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

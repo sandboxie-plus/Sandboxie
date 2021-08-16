@@ -1220,7 +1220,6 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1277"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <oldsource>CAUTION: An other agent (probably SbieCtrl.exe) is already managing this sandboxie sesion, close it first and reconnect to take over.</oldsource>
         <translation>ATTENZIONE: Un altro processo (probabilmente SbieCtrl.exe) sta attualmente gestendo questa sessione Sandboxie, si prega di chiuderla e di riconnettersi.</translation>
     </message>
     <message>
@@ -1628,13 +1627,11 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="448"/>
         <source>Winamp</source>
-        <oldsource>WinAmp</oldsource>
         <translation>Winamp</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="449"/>
         <source>KMPlayer</source>
-        <oldsource>KM Player</oldsource>
         <translation></translation>
     </message>
     <message>
@@ -2225,7 +2222,6 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="74"/>
         <source>Filter selected box only</source>
-        <oldsource>Show only sellectes box</oldsource>
         <translation>Mostra solo per l&apos;area virtuale selezionata</translation>
     </message>
     <message>
@@ -2440,7 +2436,6 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <oldsource>Security note: Elevated applications running under the supervision of Sandboxie, with an admin, or system, token, have more opportunities to bypass isolation and modify the system outside the sandbox.</oldsource>
         <translation>Avviso di sicurezza: Le applicazioni elevate sotto la supervisione di Sandboxie, con token amministrativo o di sistema, hanno maggiori possibilità di superare l&apos;isolamento e di modificare il sistema all&apos;esterno dell&apos;area virtuale.</translation>
     </message>
     <message>
@@ -2857,7 +2852,6 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1876"/>
         <source>Allow sandboxed programs to managing Hardware/Devices</source>
-        <oldsource>Allow sandboxed programs to Managing Hardware/Devices</oldsource>
         <translation>Consenti ai programmi nell&apos;area virtuale di gestire dispositivi hardware</translation>
     </message>
     <message>
@@ -2938,7 +2932,6 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1858"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <oldsource>Allow use of nested job objects (experimental, works on windows 8 and later)</oldsource>
         <translation>Consenti l&apos;uso dei processi nidificati (sperimentale, per Windows 8 e versioni successive)</translation>
     </message>
     <message>
@@ -2949,7 +2942,6 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1890"/>
         <source>Open access to Windows Local Security Authority</source>
-        <oldsource>Open access to windows Local Security Authority</oldsource>
         <translation>Consenti accesso al sottosistema dell&apos;autorità di protezione locale (LSASS)</translation>
     </message>
     <message>
@@ -3359,7 +3351,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
         <source>General Config</source>
-        <oldsource>General Options</oldsource>
         <translation>Opzioni generali</translation>
     </message>
     <message>

@@ -1072,7 +1072,7 @@ Effettuare la pulizia?</translation>
     <message>
         <location filename="SandMan.cpp" line="609"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Operazione sconosciuta &apos;%1&apos; richiesta tramite riga di comando</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="618"/>
@@ -1100,10 +1100,6 @@ Effettuare la pulizia?</translation>
         <location filename="SandMan.cpp" line="627"/>
         <source>Maintenance operation Successful</source>
         <translation>Operazione di manutenzione eseguita con successo</translation>
-    </message>
-    <message>
-        <source>Select box:</source>
-        <translation type="vanished">Seleziona area virtuale:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="908"/>
@@ -1136,17 +1132,9 @@ Effettuare la pulizia?</translation>
         <translation>Configurazione caricata: %1</translation>
     </message>
     <message>
-        <source>Driver version: %1</source>
-        <translation type="vanished">Versione driver: %1</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="844"/>
         <source>   -   Portable</source>
         <translation>   -   Portatile</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
-        <translation type="vanished">Sandboxie Plus è stato avviato in modalità portatile, vuoi posizionare la cartella Sandbox nella directory principale?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="853"/>
@@ -1567,7 +1555,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Models/SbieModel.cpp" line="426"/>
         <source>Path / Command Line</source>
-        <translation>Percorso / Linea di comando</translation>
+        <translation>Percorso / Riga di comando</translation>
     </message>
 </context>
 <context>
@@ -1769,26 +1757,6 @@ Scegliere No per selezionare: %2</translation>
         <translation>Avvia dal menu Start</translation>
     </message>
     <message>
-        <source>Run Web Browser</source>
-        <translation type="vanished">Avvia browser Web</translation>
-    </message>
-    <message>
-        <source>Run eMail Client</source>
-        <translation type="vanished">Avvia programma di posta</translation>
-    </message>
-    <message>
-        <source>Run Explorer</source>
-        <translation type="vanished">Avvia Esplora risorse</translation>
-    </message>
-    <message>
-        <source>Run Cmd.exe</source>
-        <translation type="vanished">Avvia Cmd.exe</translation>
-    </message>
-    <message>
-        <source>Run Cmd.exe as Admin</source>
-        <translation type="vanished">Avvia Cmd.exe come amministratore</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="74"/>
         <source>Default Web Browser</source>
         <translation>Browser Web predefinito</translation>
@@ -1826,7 +1794,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Terminal (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Prompt dei comandi (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
@@ -2088,7 +2056,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="94"/>
         <source>Auto Detection</source>
-        <translation>Autorilevamento</translation>
+        <translation>Rilevamento automatico</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="216"/>
@@ -2108,12 +2076,12 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>Thank you for supporting the developement of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grazie per aver sostenuto lo sviluppo di Sandboxie Plus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Certificato di supporto non valido.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="507"/>
@@ -2380,10 +2348,6 @@ Scegliere No per selezionare: %2</translation>
         <translation>(Raccomandato)</translation>
     </message>
     <message>
-        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="vanished">Avviso di sicurezza: Le applicazioni elevate sotto la supervisione di Sandboxie, con chiave admin, hanno maggiori possibilità di superare l&apos;isolamento e di modificare il sistema all&apos;esterno dell&apos;area virtuale.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="291"/>
         <source>File Options</source>
         <translation>Opzioni file</translation>
@@ -2439,10 +2403,6 @@ Scegliere No per selezionare: %2</translation>
         <translation>Mostra messaggio 2102 quando la dimensione di un file è troppo grande</translation>
     </message>
     <message>
-        <source>Access Options</source>
-        <translation type="vanished">Opzioni di accesso</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="477"/>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
         <translation>Rimuovi il blocco allo spooler di stampa, i driver di stampa possono essere installati all&apos;esterno dell&apos;area virtuale</translation>
@@ -2481,7 +2441,7 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
         <oldsource>Security note: Elevated applications running under the supervision of Sandboxie, with an admin, or system, token, have more opportunities to bypass isolation and modify the system outside the sandbox.</oldsource>
-        <translation type="unfinished">Avviso di sicurezza: Le applicazioni elevate sotto la supervisione di Sandboxie, con token amministrativo o di sistema, hanno maggiori possibilità di superare l&apos;isolamento e di modificare il sistema all&apos;esterno dell&apos;area virtuale.</translation>
+        <translation>Avviso di sicurezza: Le applicazioni elevate sotto la supervisione di Sandboxie, con token amministrativo o di sistema, hanno maggiori possibilità di superare l&apos;isolamento e di modificare il sistema all&apos;esterno dell&apos;area virtuale.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="271"/>
@@ -2532,7 +2492,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="653"/>
         <source>Command Line</source>
-        <translation>Linea di comando</translation>
+        <translation>Riga di comando</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="673"/>
@@ -2592,10 +2552,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Forms/OptionsWindow.ui" line="1183"/>
         <source>Add Program</source>
         <translation>Aggiungi programma</translation>
-    </message>
-    <message>
-        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
-        <translation type="vanished">È possibile riunire più programmi in un unico nome di gruppo. I gruppi dei programmi possono interagire con alcune opzioni al posto dei nomi dei programmi.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="879"/>
@@ -2709,10 +2665,6 @@ Nel caso in cui siano definiti i processi principali, tutti gli altri verranno t
         <location filename="Forms/OptionsWindow.ui" line="1176"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>Mostra messaggio 1307 quando è negato l&apos;accesso a internet</translation>
-    </message>
-    <message>
-        <source>Block internet access for all programs except those added to the list.</source>
-        <translation type="vanished">Blocca l&apos;accesso a internet a tutti i programmi, eccetto quelli presenti nell&apos;elenco.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1204"/>
@@ -2847,14 +2799,6 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
         <translation>Non avviare servizi nell&apos;area virtuale tramite token di sistema (raccomandato)</translation>
     </message>
     <message>
-        <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation type="vanished">Aggiungi i processi dell&apos;area virtuale agli oggetti job (raccomandato)</translation>
-    </message>
-    <message>
-        <source>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</source>
-        <translation type="vanished">Proteggi i processi di sistema avviati nell&apos;area virtuale dai processi esterni senza privilegi</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1831"/>
         <source>Compatibility</source>
         <translation>Compatibilità</translation>
@@ -2874,10 +2818,6 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
         <source>Limit access to the emulated service control manager to privileged processes</source>
         <translation>Limita l&apos;accesso nel Service Control Manager emulato da parte dei processi con privilegi</translation>
-    </message>
-    <message>
-        <source>Sandbox protection</source>
-        <translation type="vanished">Protezione area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="150"/>
@@ -2910,10 +2850,6 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
         <translation>Isolamento</translation>
     </message>
     <message>
-        <source>Allow sandboxed programs to Change User Passwords and alike</source>
-        <translation type="vanished">Consenti ai programmi nell&apos;area virtuale di modificare le password dell&apos;account utente e simili</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
         <translation>Diverse funzioni di isolamento possono interrompere la compatibilità con alcune applicazioni se &lt;b&gt;NON&lt;/b&gt; utilizzi quest&apos;area virtuale &lt;b&gt;per ragioni di sicurezza&lt;/b&gt;, tuttavia, modificando queste impostazioni, è possibile ripristinare la compatibilità abbassando le misure di sicurezza.&lt;br&gt;Queste opzioni possono essere usate in sicurezza nel momento in cui non si concedono privilegi amministrativi ai processi in esecuzione nell&apos;area virtuale.</translation>
@@ -2927,7 +2863,7 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="852"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>È possibile riunire più programmi in un unico nome di gruppo. I gruppi dei programmi possono essere usati per interagire con alcune impostazioni al posto dei nomi dei programmi. I gruppi definiti nell&apos;area virtuale sovrascrivono i gruppi definiti nei modelli.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1243"/>
@@ -3134,10 +3070,6 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
         <location filename="Forms/OptionsWindow.ui" line="2288"/>
         <source>Access Tracing</source>
         <translation>Registro di accesso</translation>
-    </message>
-    <message>
-        <source>&lt;- for this one the above does not apply</source>
-        <translation type="vanished">&lt;- per questo elemento non si applica quanto scritto sopra</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2192"/>
@@ -3443,7 +3375,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni area di notifica</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="164"/>
@@ -3454,10 +3386,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/SettingsWindow.ui" line="91"/>
         <source>Open urls from this ui sandboxed</source>
         <translation>Apri gli URL di questo programma nell&apos;area virtuale</translation>
-    </message>
-    <message>
-        <source>* requires driver reload or system reboot</source>
-        <translation type="vanished">* richiede il riavvio di sistema o del driver Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="470"/>
@@ -3477,12 +3405,12 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="734"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenere Sandboxie aggiornato con i rilasci continui di Windows e garantire la compatibilità con i browser moderni è uno sforzo senza fine. Si prega di supportare questo lavoro con una donazione.&lt;br /&gt;È possibile supportare lo sviluppo con una &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;donazione PayPal&lt;/a&gt;, che consente anche la donazione tramite carta di credito.&lt;br /&gt;È inoltre possibile fornire un supporto costante tramite  &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;abbonamento Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="766"/>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserire il certificato di supporto</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="780"/>
@@ -3500,10 +3428,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Controlla periodicamente gli aggiornamenti di Sandboxie Plus</translation>
     </message>
     <message>
-        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with modern web browsers is a never ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a direct &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, works also with credit cards.&lt;br /&gt;You can also provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">Mantenere Sandboxie aggiornato con i rilasci continui di Windows e garantire la compatibilità con i browser moderni è uno sforzo senza fine. Si prega di supportare questo lavoro con una donazione.&lt;br /&gt;È possibile supportare lo sviluppo con una &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;donazione PayPal&lt;/a&gt;, che consente anche la donazione tramite carta di credito.&lt;br /&gt;È inoltre possibile fornire supporto continuo con un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;abbonamento Patreon&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="81"/>
         <source>Restart required (!)</source>
         <translation>Riavvio richiesto (!)</translation>
@@ -3511,7 +3435,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="239"/>
         <source>Start UI with Windows</source>
-        <translation>Esegui all&apos;avvio di Windows</translation>
+        <translation>Esegui Sandboxie Plus all&apos;avvio di Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="287"/>
@@ -3521,25 +3445,17 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="154"/>
         <source>On main window close:</source>
-        <translation>Alla chiusura della finestra:</translation>
-    </message>
-    <message>
-        <source>Tray options</source>
-        <translation type="vanished">Area di notifica</translation>
+        <translation>Alla chiusura della &lt;br /&gt;finestra principale:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="280"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation>Esegui all&apos;avvio di un programma nell&apos;area virtuale</translation>
+        <translation>Esegui Sandboxie Plus all&apos;avvio di un programma nell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="74"/>
         <source>Show first recovery window when emptying sandboxes</source>
         <translation>Mostra finestra di recupero prima di svuotare le aree virtuali</translation>
-    </message>
-    <message>
-        <source>Advanced Options</source>
-        <translation type="vanished">Opzioni avanzate</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="568"/>
@@ -3554,22 +3470,22 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrazione sistema</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="232"/>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni di avvio &lt;br /&gt;nell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="273"/>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvio del programma</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="318"/>
@@ -3579,17 +3495,17 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="372"/>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>Funzionalità di isolamento</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa la piattaforma di filtraggio di Windows per limitare l&apos;accesso di rete (sperimentale)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocco configurazione</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="575"/>
@@ -3604,7 +3520,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="787"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>I sostenitori del progetto Sandboxie Plus riceveranno un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificato di sostenitore&lt;/a&gt;. È come un codice di licenza, ma riservato a persone straordinarie che usano software free. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
@@ -3625,10 +3541,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/SettingsWindow.ui" line="297"/>
         <source>Advanced Config</source>
         <translation>Opzioni avanzate</translation>
-    </message>
-    <message>
-        <source>Use Windows Filtering Platform to restrict network access (experimental)*</source>
-        <translation type="vanished">Usa la piattaforma di filtraggio di Windows per limitare l&apos;accesso di rete (sperimentale)*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
@@ -3666,17 +3578,9 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Impostazioni globali</translation>
     </message>
     <message>
-        <source>Other settings</source>
-        <translation type="vanished">Altre impostazioni</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="184"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation>Tieni d&apos;occhio Sandboxie.ini per eventuali modifiche</translation>
-    </message>
-    <message>
-        <source>Program Restrictions</source>
-        <translation type="vanished">Restrizioni programmi</translation>
+        <translation>Monitora Sandboxie.ini per eventuali modifiche</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="479"/>
@@ -3718,10 +3622,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/SettingsWindow.ui" line="545"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Mostra messaggio 1308 quando un programma non viene avviato</translation>
-    </message>
-    <message>
-        <source>Software Compatibility</source>
-        <translation type="vanished">Compatibilità programmi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="634"/>

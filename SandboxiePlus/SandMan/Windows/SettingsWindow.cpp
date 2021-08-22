@@ -109,7 +109,6 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
-	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	
 	m_WarnProgsChanged = false;
 

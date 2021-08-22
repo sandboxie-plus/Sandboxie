@@ -196,22 +196,34 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 	pProgress->Finish(Status);
 }
 
+SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentFolder, const QString& TargetName);
+
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
-	if (!IsEmpty())
-		return SB_ERR(SB_RemNotEmpty);
-
 	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
 	if (Status.IsError())
 		return Status;
+
+	if (QDir(m_FilePath).exists()) 
+	{	
+		QStringList FilePath = m_FilePath.split("\\");
+		if (FilePath.last().isEmpty()) FilePath.removeLast();
+		QString Name = FilePath.takeLast();
+		if (Name.compare(m_Name, Qt::CaseInsensitive) == 0) 
+		{
+			Status = CSandBox__MoveFolder(m_FilePath, FilePath.join("\\"), NewName);
+			if (Status.IsError())
+				return Status;
+		}
+	}
 	
 	return RenameSection(NewName);
 }
 
 SB_STATUS CSandBox::RemoveBox()
 {
-	if (!IsEmpty())
-		return SB_ERR(SB_DelNotEmpty);
+	//if (!IsEmpty())
+	//	return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
 }

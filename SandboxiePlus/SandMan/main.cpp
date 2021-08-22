@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
 
 	//InitConsole(false);
 
+	bool IsBoxed = GetModuleHandle(L"SbieDll.dll") != NULL;
+
 	SB_STATUS Status = CSbieUtils::DoAssist();
 	if (Status.GetStatus()) {
 		if(Status.GetStatus() == ERROR_OK) app.sendMessage("Status:OK");
@@ -50,7 +52,18 @@ int main(int argc, char *argv[])
 		//	CommandLine += "\"" + Args[i] + "\" ";
 		//PendingMessage = "Run:" + CommandLine.trimmed();
 		LPWSTR ChildCmdLine = wcsstr(GetCommandLineW(), L"/box:__ask__") + 13;
+
+		if (IsBoxed) {
+			ShellExecute(NULL, L"open", ChildCmdLine, NULL, NULL, SW_SHOWNORMAL);
+			return 0;
+		}
+
 		PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+	}
+
+	if (IsBoxed) {
+		QMessageBox::critical(NULL, "Sandboxie-Plus", CSandMan::tr("Sandboxie Manager can not be run sandboxed!"));
+		return -1;
 	}
 
 	if (!PendingMessage.isEmpty()) {

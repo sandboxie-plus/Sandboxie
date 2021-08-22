@@ -135,6 +135,9 @@
     <ClCompile Include="Windows\OptionsTemplates.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\FileBrowserWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -193,6 +196,9 @@
     <QtMoc Include="Windows\SelectBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\FileBrowserWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -230,6 +236,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\SelectBoxWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\FileBrowserWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

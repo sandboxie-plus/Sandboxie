@@ -24,9 +24,6 @@ public:
 	virtual void				PopUpMenu(const QString& Name);
 	virtual void				ShowOptions(const QString& Name);
 
-signals:
-	void						RecoveryRequested(const QString& BoxName);
-
 public slots:
 	void						Clear();
 	void						Refresh();
@@ -95,6 +92,7 @@ private:
 	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;
 	QAction*				m_pMenuExplore;
+	QAction*				m_pMenuBrowse;
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;

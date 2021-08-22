@@ -109,6 +109,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	
 	m_WarnProgsChanged = false;
 
@@ -207,6 +208,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
+	ui.chkInstantRecovery->setChecked(theConf->GetBool("Options/InstantRecovery", false));
 
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
 	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel")));
@@ -324,6 +326,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OpenUrlsSandboxed", CSettingsWindow__Chk2Int(ui.chkSandboxUrls->checkState()));
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
+	theConf->SetValue("Options/InstantRecovery", ui.chkInstantRecovery->isChecked());
 
 	theConf->SetValue("Options/EnablePanicKey", ui.chkPanic->isChecked());
 	theConf->SetValue("Options/PanicKeySequence", ui.keyPanic->keySequence().toString());

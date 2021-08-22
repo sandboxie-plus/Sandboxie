@@ -174,7 +174,7 @@ MSG_HEADER *ProcessServer::KillOneHandler(
     // match session id and box name
     //
 
-    if (CallerSessionId != TargetSessionId)
+    if (CallerSessionId != TargetSessionId && !PipeServer::IsCallerAdmin())
         return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
     if (CallerBoxName[0] && _wcsicmp(CallerBoxName, TargetBoxName) != 0)
@@ -248,7 +248,7 @@ MSG_HEADER *ProcessServer::KillAllHandler(
 
     if (TargetSessionId == -1)
         TargetSessionId = CallerSessionId;
-    else if (CallerSessionId != TargetSessionId)
+    else if (CallerSessionId != TargetSessionId && !PipeServer::IsCallerAdmin())
         return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
     if (CallerBoxName[0] && _wcsicmp(CallerBoxName, TargetBoxName) != 0)

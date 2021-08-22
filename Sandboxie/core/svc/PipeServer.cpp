@@ -27,7 +27,7 @@
 #include "core/dll/sbiedll.h"
 #include "common/defines.h"
 #include "common/my_version.h"
-#include <psapi.h> // For access to GetModuleFileNameEx
+#include "sbieiniserver.h"
 
 //---------------------------------------------------------------------------
 // Defines
@@ -1128,6 +1128,34 @@ MSG_HEADER *PipeServer::Call(MSG_HEADER *msg)
     TlsSetValue(m_TlsIndex, OldTlsData);
 
     return msg_out;
+}
+
+
+//---------------------------------------------------------------------------
+// IsCallerAdmin
+//---------------------------------------------------------------------------
+
+
+bool PipeServer::IsCallerAdmin()
+{
+    CLIENT_TLS_DATA *TlsData =
+               (CLIENT_TLS_DATA *)TlsGetValue(m_instance->m_TlsIndex);
+
+    bool IsAdmin = false;
+
+    ULONG processId = (ULONG)(ULONG_PTR)TlsData->PortMessage->ClientId.UniqueProcess;
+    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
+    if (processHandle != NULL) {
+        HANDLE hToken;
+        if (OpenProcessToken(processHandle, TOKEN_QUERY, &hToken)) {
+            IsAdmin = SbieIniServer::TokenIsAdmin(hToken, true);
+
+            CloseHandle(hToken);
+        }
+        CloseHandle(processHandle);
+    }
+
+    return IsAdmin;
 }
 
 

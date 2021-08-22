@@ -1028,6 +1028,11 @@ QString CSbieAPI::GetStartPath() const
 	return m_SbiePath + "\\" + QString::fromWCharArray(SBIESTART_EXE);
 }
 
+quint32 CSbieAPI::GetSessionID() const
+{
+	return m->sessionId;
+}
+
 SB_STATUS CSbieAPI::ReloadBoxes(bool bFullUpdate)
 {
 	QMap<QString, CSandBoxPtr> OldSandBoxes = m_SandBoxes;
@@ -1063,20 +1068,20 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bFullUpdate)
 	return SB_OK;
 }
 
-QString CSbieAPI__FormatNtStatus(NTSTATUS nsCode) 
+QString CSbieAPI__FormatNtStatus(long nsCode) 
 {
 	static HMODULE hNtDll = NULL;
 	if(!hNtDll)
 		hNtDll = GetModuleHandle(L"ntdll.dll");
-    if (hNtDll == NULL) 
-		return "???";
+	if (hNtDll == NULL)
+		return QString();
 
 	WCHAR* ret_str = NULL;
     DWORD dwRes = FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_FROM_HMODULE,
         hNtDll, RtlNtStatusToDosError(nsCode), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
         (LPTSTR)&ret_str, 0, NULL);
 
-	QString qStr = QString::fromWCharArray(ret_str);
+	QString qStr = dwRes > 0 ? QString::fromWCharArray(ret_str) : QString();
     LocalFree(ret_str);
 	return qStr;
 }
@@ -1225,13 +1230,13 @@ SB_STATUS CSbieAPI::CreateBox(const QString& BoxName, bool bReLoad)
 	return Status;
 }
 
-SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* pids, ULONG* count)
+SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, bool bAllSessions, ULONG* pids, ULONG* count)
 {
 	WCHAR box_name[34];
 	BoxName.toWCharArray(box_name); // fix-me: potential overflow
 	box_name[BoxName.size()] = L'\0';
-	BOOLEAN all_sessions = TRUE;
-	ULONG which_session = 0; // -1 for current session
+	BOOLEAN all_sessions = bAllSessions ? TRUE : false;
+	ULONG which_session = -1; // -1 means current session, ignoreewd when all_sessions == true
 
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 
@@ -1249,16 +1254,16 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, ULONG* p
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
+SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 {
 	ULONG count = 0;
-	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", NULL, &count); // query the count
+	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, NULL, &count); // query the count
 	if (Status.IsError())
 
 	count += 128; // add some extra space
 	ULONG* boxed_pids = new ULONG[count]; 
 
-	Status = CSbieAPI__GetProcessPIDs(m, "", boxed_pids, &count); // query the count
+	Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, boxed_pids, &count); // query the count
 	if (Status.IsError()) {
 		delete[] boxed_pids;
 		return Status;
@@ -1382,7 +1387,7 @@ finish:
 bool CSbieAPI::HasProcesses(const QString& BoxName)
 {
 	ULONG count;
-	return CSbieAPI__GetProcessPIDs(m, BoxName, NULL, &count) && (count > 0);
+	return CSbieAPI__GetProcessPIDs(m, BoxName, false, NULL, &count) && (count > 0);
 }
 
 SB_STATUS CSbieAPI__QueryBoxPath(SSbieAPI* m, const WCHAR *box_name, WCHAR *out_file_path, WCHAR *out_key_path, WCHAR *out_ipc_path,

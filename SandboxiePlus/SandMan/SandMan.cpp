@@ -43,7 +43,7 @@ public:
 
 			if (msg->message == WM_NOTIFY)
 			{
-				return true;
+				//return true;
 			}
 			else if (msg->message == WM_DEVICECHANGE)
 			{
@@ -152,7 +152,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pPanelSplitter->addWidget(m_pBoxView);
 
 	connect(m_pBoxView->GetTree()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnSelectionChanged()));
-	connect(m_pBoxView, SIGNAL(RecoveryRequested(const QString&)), this, SLOT(OpenRecovery(const QString&)));
 
 	//m_pPanelSplitter->addWidget();
 
@@ -165,14 +164,20 @@ CSandMan::CSandMan(QWidget *parent)
 	//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 	((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
 
+	m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
+	m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
+
 	m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	m_pMessageLog->GetView()->setSortingEnabled(false);
 
-	
 	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
 	//
 
 	m_pTraceView = new CTraceView(this);
+
+	m_pTraceView->GetMenu()->insertAction(m_pTraceView->GetMenu()->actions()[0], m_pCleanUpTrace);
+	m_pTraceView->GetMenu()->insertSeparator(m_pTraceView->GetMenu()->actions()[0]);
+
 	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
 
 	m_pHotkeyManager = new UGlobalHotkeys(this);
@@ -210,6 +215,7 @@ CSandMan::CSandMan(QWidget *parent)
 	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
 	m_pTrayBoxes->setHeaderHidden(true);
 	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
+	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	pLayout->insertSpacing(0, 1);// 32);
 
@@ -271,13 +277,14 @@ CSandMan::CSandMan(QWidget *parent)
 
 
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
+	m_pShowAllSessions->setChecked(theConf->GetBool("Options/ShowAllSessions"));
 
 	m_pProgressDialog = new CProgressDialog("", this);
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
+	m_pProgressModal = false;
 
 	m_pPopUpWindow = new CPopUpWindow();
-	connect(m_pPopUpWindow, SIGNAL(RecoveryRequested(const QString&)), this, SLOT(OpenRecovery(const QString&)));
 
 	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
 	m_pWndTopMost->setChecked(bAlwaysOnTop);
@@ -400,6 +407,10 @@ void CSandMan::CreateMenus()
 
 		m_pShowHidden = m_pMenuView->addAction(tr("Show Hidden Boxes"));
 		m_pShowHidden->setCheckable(true);
+		m_pShowAllSessions = m_pMenuView->addAction(tr("Show All Sessions"), this, SLOT(OnProcView()));
+		m_pShowAllSessions->setCheckable(true);
+
+		m_pMenuView->addSeparator();
 
 		m_pCleanUpMenu = m_pMenuView->addMenu(CSandMan::GetIcon("Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
@@ -407,8 +418,9 @@ void CSandMan::CreateMenus()
 			m_pCleanUpMsgLog = m_pCleanUpMenu->addAction(tr("Cleanup Message Log"), this, SLOT(OnCleanUp()));
 			m_pCleanUpTrace = m_pCleanUpMenu->addAction(tr("Cleanup Trace Log"), this, SLOT(OnCleanUp()));
 
-		m_pKeepTerminated = m_pMenuView->addAction(CSandMan::GetIcon("Keep"), tr("Keep terminated"), this, SLOT(OnSetKeep()));
+		m_pKeepTerminated = m_pMenuView->addAction(CSandMan::GetIcon("Keep"), tr("Keep terminated"), this, SLOT(OnProcView()));
 		m_pKeepTerminated->setCheckable(true);
+
 
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
@@ -634,6 +646,7 @@ void CSandMan::OnMessage(const QString& Message)
 			}
 		}
 		m_pProgressDialog->hide();
+		//statusBar()->showMessage(tr("Maintenance operation completed"), 3000);
 		m_bConnectPending = false;
 		m_bStopPending = false;
 	}
@@ -675,7 +688,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	{
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
-		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked());
+		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked(), m_pShowAllSessions->isChecked());
 
 		bForceProcessDisabled = theAPI->AreForceProcessDisabled();
 		m_pDisableForce->setChecked(bForceProcessDisabled);
@@ -798,10 +811,8 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
-		CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
-		if (pRecoveryWindow->FindFiles() == 0)
-			delete pRecoveryWindow;
-		else if (pRecoveryWindow->exec() != 1)
+		// if this box auto deletes first show the recovry dialog with the option to abort deletion
+		if(!theGUI->OpenRecovery(pBox, true)) // unless no files are found than continue silently
 			return;
 
 		SB_PROGRESS Status = pBox->CleanBox();
@@ -1048,18 +1059,48 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 
 void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId)
 {
-	m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, BoxName, ProcessId);
+	if (theConf->GetBool("Options/InstantRecovery", false))
+	{
+		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+		if (pBox)
+			ShowRecovery(pBox);
+	}
+	else
+		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, BoxName, ProcessId);
 }
 
-void CSandMan::OpenRecovery(const QString& BoxName)
+bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
 {
-	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	if (!pBox)
-		return;
+	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	if (pBoxEx->m_pRecoveryWnd != NULL) {
+		pBoxEx->m_pRecoveryWnd->close();
+		// todo: resuse window?
+	}
 
-	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox);
-	pRecoveryWindow->FindFiles();
-	pRecoveryWindow->show();
+	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
+	if (pRecoveryWindow->FindFiles() == 0 && bCloseEmpty) {
+		delete pRecoveryWindow;
+	}
+	else if (pRecoveryWindow->exec() != 1)
+		return false;
+	return true;
+}
+
+void CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
+{
+	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	if (pBoxEx->m_pRecoveryWnd == NULL) {
+		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
+		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
+			pBoxEx->m_pRecoveryWnd = NULL;
+		});
+		pBoxEx->m_pRecoveryWnd->show();
+	}
+	else {
+		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
+	}
+	pBoxEx->m_pRecoveryWnd->FindFiles();
 }
 
 SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action)
@@ -1189,7 +1230,7 @@ void CSandMan::OnNewBox()
 
 void CSandMan::OnEmptyAll()
 {
- 	if (theConf->GetInt("Options/TerminateAll", -1) == -1)
+ 	if (theConf->GetInt("Options/WarnTerminateAll", -1) == -1)
 	{
 		bool State = false;
 		if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to terminate all processes in all sandboxes?")
@@ -1197,7 +1238,7 @@ void CSandMan::OnEmptyAll()
 			return;
 
 		if (State)
-			theConf->SetValue("Options/TerminateAll", 1);
+			theConf->SetValue("Options/WarnTerminateAll", 1);
 	}
 
 	theAPI->TerminateAll();
@@ -1336,7 +1377,8 @@ void CSandMan::OnMaintenance()
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
 
 	if (Status.GetStatus() == OP_ASYNC) {
-		statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
+		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
+		m_pProgressDialog->OnStatusMessage(tr("Executing maintenance operation, please wait..."));
 		m_pProgressDialog->show();
 		return;
 	}
@@ -1405,15 +1447,13 @@ void CSandMan::OnCleanUp()
 		m_pTraceView->Clear();
 	
 	if (sender() == m_pCleanUpProcesses || sender() == m_pCleanUpButton)
-		theAPI->UpdateProcesses(false);
+		theAPI->UpdateProcesses(false, m_pShowAllSessions->isChecked());
 }
 
-void CSandMan::OnSetKeep()
+void CSandMan::OnProcView()
 {
 	theConf->SetValue("Options/KeepTerminated", m_pKeepTerminated->isChecked());
-
-	if(!m_pKeepTerminated->isChecked()) // clear on disable
-		theAPI->UpdateProcesses(false);
+	theConf->SetValue("Options/ShowAllSessions", m_pShowAllSessions->isChecked());
 }
 
 void CSandMan::OnSettings()
@@ -1467,7 +1507,8 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/OpenUrlsSandboxed", 2);
 
 		theConf->SetValue("Options/AutoCleanupTemplates", -1);
-		theConf->SetValue("Options/TerminateAll", -1);
+		theConf->SetValue("Options/WarnTerminateAll", -1);
+		theConf->SetValue("Options/WarnTerminate", -1);
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
@@ -1539,7 +1580,7 @@ void CSandMan::OnSetMonitoring()
 	//m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
 }
 
-void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)
+bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
 {
 	m_pAsyncProgress.insert(pProgress.data(), pProgress);
 	connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
@@ -1547,10 +1588,18 @@ void CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress)
 	connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
 
 	m_pProgressDialog->OnStatusMessage("");
-	m_pProgressDialog->show();
+	if (bWait) {
+		m_pProgressModal = true;
+		m_pProgressDialog->exec();
+		m_pProgressModal = false;
+	}
+	else
+		m_pProgressDialog->show();
 
 	if (pProgress->IsFinished()) // Note: since the operation runs asynchronously, it may have already finished, so we need to test for that
 		OnAsyncFinished(pProgress.data());
+
+	return !pProgress->IsCanceled();
 }
 
 void CSandMan::OnAsyncFinished()
@@ -1569,8 +1618,12 @@ void CSandMan::OnAsyncFinished(CSbieProgress* pSender)
 	if(Status.IsError())
 		CSandMan::CheckResults(QList<SB_STATUS>() << Status);
 
-	if(m_pAsyncProgress.isEmpty())
-		m_pProgressDialog->hide();
+	if (m_pAsyncProgress.isEmpty()) {
+		if(m_pProgressModal)
+			m_pProgressDialog->close();
+		else
+			m_pProgressDialog->hide();
+	}
 }
 
 void CSandMan::OnAsyncMessage(const QString& Text)
@@ -1598,7 +1651,8 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	QString Message;
 	switch (Error.GetMsgCode())
 	{
-	case SB_Generic:		return tr("Error Status: %1").arg(Error.GetStatus());
+	case SB_Generic:		return tr("Error Status: 0x%1 (%2)").arg((quint32)Error.GetStatus(), 8, 16, QChar('0')).arg(
+		(Error.GetArgs().isEmpty() || Error.GetArgs().first().toString().isEmpty()) ? tr("Unknown") : Error.GetArgs().first().toString().trimmed());
 	case SB_Message:		Message = "%1"; break;
 	case SB_NeedAdmin:		Message = tr("Administrator rights are required for this operation."); break;
 	case SB_ExecFail:		Message = tr("Failed to execute: %1"); break;
@@ -1615,8 +1669,8 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_FailedKillAll:	Message = tr("Failed to terminate all processes"); break;
 	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
 	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
-	case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
-	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
+	//case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
+	//case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
 	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
 	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
@@ -1631,7 +1685,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
 	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
-	default:				return tr("Unknown Error Status: %1").arg(Error.GetStatus());
+	default:				return tr("Unknown Error Status: 0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0'));
 	}
 
 	foreach(const QVariant& Arg, Error.GetArgs())

@@ -538,9 +538,6 @@ _FX BOOL Proc_SetProcessMitigationPolicy(
     if (MitigationPolicy == ProcessDynamicCodePolicy)
         return TRUE;
 
-    //if (MitigationPolicy == ProcessUserShadowStackPolicy)
-    //    return TRUE;
-
     return __sys_SetProcessMitigationPolicy(MitigationPolicy, lpBuffer, dwLength);
 }
 

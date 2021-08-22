@@ -90,6 +90,9 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_iUnsecureDebugging = 0;
 
 	m_SuspendRecovery = false;
+
+	m_pOptionsWnd = NULL;
+	m_pRecoveryWnd = NULL;
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -475,6 +478,9 @@ QString CSbieProcess::GetStatusStr() const
 	//	Status = tr("Suspended");
 	else
 		Status = tr("Running");
+
+	if(m_SessionId != theAPI->GetSessionID())
+		Status += tr(" in session %1").arg(m_SessionId);
 
 	if (m_bIsWoW64)
 		Status += " *32";

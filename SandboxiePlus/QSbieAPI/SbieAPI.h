@@ -59,7 +59,7 @@ public:
 	static  SB_STATUS		ValidateName(const QString& BoxName);
 	virtual SB_STATUS		CreateBox(const QString& BoxName, bool bReLoad = true);
 
-	virtual SB_STATUS		UpdateProcesses(bool bKeep);
+	virtual SB_STATUS		UpdateProcesses(bool bKeep, bool bAllSessions);
 	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
@@ -122,6 +122,9 @@ public:
 
 	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL, bool Elevated = false);
 	virtual QString			GetStartPath() const;
+
+	virtual quint32			GetSessionID() const;
+
 
 	enum ESbieQueuedRequests
 	{

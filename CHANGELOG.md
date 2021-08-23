@@ -7,20 +7,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.4 / 5.51.4] - 2021-08-22
 
 ### added
-- added clear commands to log sub menus [#391](https://github.com/sandboxie-plus/Sandboxie/issues/391)
-- added option to disable prompt to confirm process termination [#514](https://github.com/sandboxie-plus/Sandboxie/issues/514)
-- added settings to sandboxie-plus.ini "Options/InstantRecovery" to use the recovery window instad of the notification popUp [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
-- added ability to rename a non empty sandbox [#1100](https://github.com/sandboxie-plus/Sandboxie/issues/1100)
-- added ability to remove a non empty sandbox 
-- added file browser window to sandman ui to cover the files view functionality of sbie ctrl [#578](https://github.com/sandboxie-plus/Sandboxie/issues/578)
+- added clear commands to log submenus [#391](https://github.com/sandboxie-plus/Sandboxie/issues/391)
+- added option to disable process termination prompt [#514](https://github.com/sandboxie-plus/Sandboxie/issues/514)
+- added new setting for Sandboxie Plus "Options/InstantRecovery" to use the recovery window instead of the notification pop-up [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- added ability to rename a non-empty sandbox [#1100](https://github.com/sandboxie-plus/Sandboxie/issues/1100)
+- added ability to remove a non-empty sandbox 
+- added file browser window to SandMan UI to cover the file-view functionality of SbieCtrl [#578](https://github.com/sandboxie-plus/Sandboxie/issues/578)
 
 ### Changed
-- generic error in sbie ui now show the status code as hex and provide a string description when available
+- generic errors in Sbie UI now show the status code as hex and provide a string description when available
 
 ### fixed
-- "del" shortcut to terminate a process did not always work
+- fixed "del" shortcut to terminate a process not always working
 - fixed group display issue [#1094](https://github.com/sandboxie-plus/Sandboxie/issues/1094)
-- fixed issue when using run sandboxed on a file located already in a sandbox [#1099](https://github.com/sandboxie-plus/Sandboxie/issues/1099)
+- fixed issue when using "run sandboxed" on a file that is already located in a sandbox [#1099](https://github.com/sandboxie-plus/Sandboxie/issues/1099)
 
 
 

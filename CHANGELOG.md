@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### added
 - added clear commands to log submenus [#391](https://github.com/sandboxie-plus/Sandboxie/issues/391)
 - added option to disable process termination prompt [#514](https://github.com/sandboxie-plus/Sandboxie/issues/514)
-- added new setting for Sandboxie Plus "Options/InstantRecovery" to use the recovery window instead of the notification pop-up [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- added "Options/InstantRecovery" setting to sandboxie-plus.ini to use the recovery window instead of the notification pop-up [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
 - added ability to rename a non-empty sandbox [#1100](https://github.com/sandboxie-plus/Sandboxie/issues/1100)
 - added ability to remove a non-empty sandbox 
 - added file browser window to SandMan UI to cover the file-view functionality of SbieCtrl [#578](https://github.com/sandboxie-plus/Sandboxie/issues/578)

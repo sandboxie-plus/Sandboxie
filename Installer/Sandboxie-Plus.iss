@@ -267,6 +267,10 @@ begin
   Exec(ExpandConstant('{app}\kmdutil.exe'), 'stop SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
   Exec(ExpandConstant('{app}\kmdutil.exe'), 'stop SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
 
+  // uninstall the driver
+  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
   Result := True;
 end;
 
@@ -385,10 +389,6 @@ begin
     Abort();
     exit;
   end;
-
-  // uninstall the driver
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
 
   // remove from autostart
   RegDeleteValue(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Run', 'SandboxiePlus_AutoRun');

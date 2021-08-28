@@ -363,7 +363,8 @@ void CSandMan::CreateMenus()
 	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
 
 	m_pMenuFile = menuBar()->addMenu(tr("&Sandbox"));
-		m_pNew = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
+		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
+		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnNewGroupe()));
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
@@ -949,7 +950,8 @@ void CSandMan::OnStatusChanged()
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
-	m_pNew->setEnabled(isConnected);
+	m_pNewBox->setEnabled(isConnected);
+	m_pNewGroup->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
 	m_pDisableForce->setEnabled(isConnected);
 	m_pDisableForce2->setEnabled(isConnected);
@@ -1238,6 +1240,11 @@ void CSandMan::OnBoxDblClick(QTreeWidgetItem* pItem)
 void CSandMan::OnNewBox()
 {
 	m_pBoxView->AddNewBox();
+}
+
+void CSandMan::OnNewGroupe()
+{
+	m_pBoxView->AddNewGroup();
 }
 
 void CSandMan::OnEmptyAll()

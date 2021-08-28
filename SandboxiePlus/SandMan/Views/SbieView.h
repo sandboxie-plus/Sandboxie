@@ -19,6 +19,7 @@ public:
 	//virtual void				UpdateRunMenu();
 
 	virtual QString				AddNewBox();
+	virtual QString				AddNewGroup();
 	virtual void				SelectBox(const QString& Name);
 
 	virtual void				PopUpMenu(const QString& Name);

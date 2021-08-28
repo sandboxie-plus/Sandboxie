@@ -464,17 +464,7 @@ void CSbieView::OnGroupAction()
 	}
 	else if (Action == m_pAddGroupe)
 	{
-		QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new group name"), QLineEdit::Normal);
-		if (Name.isEmpty() || m_Groups.contains(Name))
-			return;
-		m_Groups[Name] = QStringList();
-
-		QModelIndex ModelIndex = m_pSortProxy->mapToSource(m_pSbieTree->currentIndex());
-		QString Parent;
-		if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
-			Parent = m_pSbieModel->GetID(ModelIndex).toString();
-
-		m_Groups[Parent].append(Name);
+		AddNewGroup();
 	}
 	else if (Action == m_pDelGroupe)
 	{
@@ -553,6 +543,23 @@ QString CSbieView::AddNewBox()
 		return NewBoxWindow.m_Name;
 	}
 	return QString();
+}
+
+QString CSbieView::AddNewGroup()
+{
+	QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new group name"), QLineEdit::Normal);
+	if (Name.isEmpty() || m_Groups.contains(Name))
+		return "";
+	m_Groups[Name] = QStringList();
+
+	QModelIndex ModelIndex = m_pSortProxy->mapToSource(m_pSbieTree->currentIndex());
+	QString Parent;
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+		Parent = m_pSbieModel->GetID(ModelIndex).toString();
+
+	m_Groups[Parent].append(Name);
+
+	return Name;
 }
 
 void CSbieView::OnSandBoxAction()
@@ -968,8 +975,10 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)
 {
-	if (selected.empty())
+	if (selected.empty()) {
+		UpdateMenu();
 		return;
+	}
 
 	QItemSelectionModel* selectionModel = m_pSbieTree->selectionModel();
 	QItemSelection selection = selectionModel->selection();

@@ -143,6 +143,7 @@ private slots:
 	void				OnMenuHover(QAction* action);
 
 	void				OnNewBox();
+	void				OnNewGroupe();
 	void				OnEmptyAll();
 	void				OnWndFinder();
 	void				OnDisableForce();
@@ -199,7 +200,8 @@ private:
 
 
 	QMenu*				m_pMenuFile;
-	QAction*			m_pNew;
+	QAction*			m_pNewBox;
+	QAction*			m_pNewGroup;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;

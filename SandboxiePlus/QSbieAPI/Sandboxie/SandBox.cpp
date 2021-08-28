@@ -19,6 +19,9 @@
 #include <QtConcurrent>
 #include "SandBox.h"
 #include "../SbieAPI.h"
+#ifdef _DEBUG
+#include <QGuiApplication>
+#endif
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -117,6 +120,10 @@ void CSandBox::UpdateDetails()
 
 SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
+#ifdef _DEBUG
+	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
+		return RunSandboxed(Command);
+#endif
 	return m_pAPI->RunStart(m_Name, Command, NULL, Elevated);
 }
 

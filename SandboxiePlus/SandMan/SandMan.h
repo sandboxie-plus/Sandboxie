@@ -62,6 +62,8 @@ protected:
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
+	QIcon				GetTrayIconName(bool isConnected = true);
+
 	void				closeEvent(QCloseEvent* e);
 
 	void				dragEnterEvent(QDragEnterEvent* e);

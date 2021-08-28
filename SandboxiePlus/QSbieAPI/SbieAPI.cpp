@@ -18,6 +18,9 @@
 #include "stdafx.h"
 #include <QDebug>
 #include <QStandardPaths>
+#ifdef _DEBUG
+#include <QGuiApplication>
+#endif
 #include "SbieAPI.h"
 
 #include <ntstatus.h>
@@ -1682,6 +1685,10 @@ SB_STATUS CSbieAPI::RunSandboxed(const QString& BoxName, const QString& Command,
 	BoxName.toWCharArray(req->boxname); // fix-me: potential overflow
 	req->boxname[BoxName.length()] = L'\0';
 	req->si_flags = STARTF_FORCEOFFFEEDBACK;
+#ifdef _DEBUG
+	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ShiftModifier) != 0)
+		req->si_flags |= 0x80000000;
+#endif
 	req->si_show_window = wShowWindow;
 	if (req->si_show_window != SW_SHOWNORMAL)
 		req->si_flags |= STARTF_USESHOWWINDOW;

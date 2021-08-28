@@ -1644,3 +1644,57 @@ _FX LONG SbieApi_ProcessExemptionControl(
 
 	return status;
 }
+
+
+//---------------------------------------------------------------------------
+// SbieDll_GetSysFunction
+//---------------------------------------------------------------------------
+
+extern P_NtCreateFile               __sys_NtCreateFile;
+extern P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile;
+extern P_NtOpenKey                  __sys_NtOpenKey;
+extern P_NtEnumerateValueKey        __sys_NtEnumerateValueKey;
+
+void* SbieDll_GetSysFunction(const WCHAR* name)
+{
+    if (_wcsicmp(name, L"NtCreateFile") == 0)               return __sys_NtCreateFile;
+    if (_wcsicmp(name, L"NtQueryDirectoryFile") == 0)       return __sys_NtQueryDirectoryFile;
+    if (_wcsicmp(name, L"NtOpenKey") == 0)                  return __sys_NtOpenKey;
+    if (_wcsicmp(name, L"NtEnumerateValueKey") == 0)        return __sys_NtEnumerateValueKey;
+    return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_RunStartExe
+//---------------------------------------------------------------------------
+
+
+BOOL SbieDll_RunStartExe(const WCHAR* cmd, const wchar_t* boxname)
+{
+    WCHAR cmdline[MAX_PATH] = L"";
+
+    if (boxname) {
+        wcscat(cmdline, L"/box:");
+        wcscat(cmdline, boxname);
+        wcscat(cmdline, L" ");
+    }
+    wcscat(cmdline, cmd);
+
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    memzero(&si, sizeof(si));
+    si.cb = sizeof(STARTUPINFO);
+    //if (inherit) si.lpReserved = (LPTSTR)1;
+    BOOL ret = FALSE;
+
+    if ( SbieDll_RunFromHome(START_EXE, cmdline, &si, &pi)) {
+
+        ret = TRUE;
+
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+    }
+
+    return ret;
+}

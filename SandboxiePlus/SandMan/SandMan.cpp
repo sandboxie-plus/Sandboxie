@@ -188,7 +188,7 @@ CSandMan::CSandMan(QWidget *parent)
 		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
 
 	// Tray
-	m_pTrayIcon = new QSystemTrayIcon(GetIcon("IconEmpty", false), this);
+	m_pTrayIcon = new QSystemTrayIcon(GetTrayIconName(), this);
 	m_pTrayIcon->setToolTip("Sandboxie-Plus");
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = true;
@@ -264,7 +264,7 @@ CSandMan::CSandMan(QWidget *parent)
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
 	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
-	if(!bAutoRun && !theConf->GetBool("Options/ShowSysTray", true))
+	if(!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
 		m_pTrayIcon->hide();
 	//
 
@@ -676,6 +676,26 @@ void CSandMan::dropEvent(QDropEvent* e)
 	RunSandboxed(Commands, "DefaultBox");
 }
 
+QIcon CSandMan::GetTrayIconName(bool isConnected)
+{
+	QString IconFile;
+	if (isConnected) {
+		if (m_bIconEmpty)
+			IconFile = "IconEmpty";
+		else
+			IconFile = "IconFull";
+
+		if (m_bIconDisabled)
+			IconFile += "D";
+	} else 
+		IconFile = "IconOff";
+
+	if (theConf->GetInt("Options/SysTrayIcon", 1) == 2)
+		IconFile += "C";
+
+	return GetIcon(IconFile, false);
+}
+
 void CSandMan::timerEvent(QTimerEvent* pEvent)
 {
 	if (pEvent->timerId() != m_uTimerID)
@@ -707,15 +727,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
 			m_bIconDisabled = bForceProcessDisabled;
 
-			QString IconFile;
-			if (m_bIconEmpty)
-				IconFile = "IconEmpty";
-			else
-				IconFile = "IconFull";
-			if (m_bIconDisabled)
-				IconFile += "D";
-
-			m_pTrayIcon->setIcon(GetIcon(IconFile, false));
+			m_pTrayIcon->setIcon(GetTrayIconName());
 		}
 	}
 
@@ -933,7 +945,7 @@ void CSandMan::OnStatusChanged()
 
 	this->setWindowTitle(appTitle);
 
-	m_pTrayIcon->setIcon(GetIcon(isConnected ? "IconEmpty" : "IconOff", false));
+	m_pTrayIcon->setIcon(GetTrayIconName(isConnected));
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
 
@@ -1478,7 +1490,7 @@ void CSandMan::UpdateSettings()
 
 	SetupHotKeys();
 
-	if (theConf->GetBool("Options/ShowSysTray", true))
+	if (theConf->GetInt("Options/SysTrayIcon", 1))
 		m_pTrayIcon->show();
 	else
 		m_pTrayIcon->hide();

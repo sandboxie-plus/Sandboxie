@@ -55,6 +55,11 @@
         <file>IconOff.png</file>
         <file>Actions/Lock.png</file>
         <file>Actions/Shell.png</file>
+        <file>IconFullDC.png</file>
+        <file>IconEmptyDC.png</file>
+        <file>IconOffC.png</file>
+        <file>IconFullC.png</file>
+        <file>IconEmptyC.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

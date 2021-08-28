@@ -364,6 +364,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\SharedSection",
+        L"\\Windows\\SharedSection", // bSession0
         L"\\Sessions\\*\\BaseNamedObjects\\CrSharedMem_*",      // now required by Chromium browsers
         L"\\ThemeApiPort",
         L"\\KnownDlls\\*",              // see Ipc_Generic_MyOpenProc_2

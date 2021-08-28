@@ -612,7 +612,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                 ImpersonationInfo_offset = 0x678;
             else if (Driver_OsBuild < 18980)
                 ImpersonationInfo_offset = 0x688;
-            else if (Driver_OsBuild < 21286)
+            else if (Driver_OsBuild < 20348)
                 ImpersonationInfo_offset = 0x4a8;
             else
                 ImpersonationInfo_offset = 0x4f8;
@@ -644,7 +644,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                 ImpersonationInfo_offset = 0x398;
             else  if (Driver_OsBuild < 18980) 
                 ImpersonationInfo_offset = 0x3A0;
-            else if (Driver_OsBuild < 21286)
+            else if (Driver_OsBuild < 20348)
                 ImpersonationInfo_offset = 0x2c8;
             else
                 ImpersonationInfo_offset = 0x2f0;
@@ -723,7 +723,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                     if ((*ImpersonationInfo & ~7) == (ULONG_PTR)TokenObject)
                     {
                         WCHAR str[64];
-                        swprintf(str, L"BAM! found: %d", i);
+                        RtlStringCbPrintfW(str, 64, L"BAM! found: %d", i);
                         Session_MonitorPut(MONITOR_OTHER, str, PsGetCurrentProcessId());
                     }
                 }

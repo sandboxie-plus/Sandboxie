@@ -74,26 +74,33 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunBrowser = m_pMenuRun->addAction(CSandMan::GetIcon("Internet"), tr("Default Web Browser"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Default eMail Client"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunExplorer = m_pMenuRun->addAction(CSandMan::GetIcon("Explore"), tr("Windows Explorer"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunRegEdit = m_pMenuRun->addAction(CSandMan::GetIcon("RegEdit"), tr("Registry Editor"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunAppWiz = m_pMenuRun->addAction(CSandMan::GetIcon("Software"), tr("Programs and Features"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Terminal"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunCmdAdmin = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Terminal (as Admin)"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunCmd32 = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Terminal (32-bit)"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunTools = m_pMenuRun->addMenu(CSandMan::GetIcon("Maintenance"), tr("Boxed Tools"));
+			m_pMenuRunCmdAdmin = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (as Admin)"), this, SLOT(OnSandBoxAction()));
+#ifdef _WIN64
+			m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
+#endif
+			m_pMenuRunExplorer = m_pMenuRunTools->addAction(CSandMan::GetIcon("Explore"), tr("Windows Explorer"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunRegEdit = m_pMenuRunTools->addAction(CSandMan::GetIcon("RegEdit"), tr("Registry Editor"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunAppWiz = m_pMenuRunTools->addAction(CSandMan::GetIcon("Software"), tr("Programs and Features"), this, SLOT(OnSandBoxAction()));
+			m_pMenuAutoRun = m_pMenuRunTools->addAction(CSandMan::GetIcon("ReloadIni"), tr("Execute Autorun Entries"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRun->addSeparator();
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuMkLink = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
-	m_pMenu->addSeparator();
-	m_pMenuExplore = m_pMenu->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBrowse = m_pMenu->addAction(CSandMan::GetIcon("Tree"), tr("Browse Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenuContent = m_pMenu->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
+		m_pMenuMkLink = m_pMenuContent->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
+		m_pMenuContent->addSeparator();
+		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
 	m_pMenuSnapshots = m_pMenu->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenu->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
+	m_pMenuOptions = m_pMenu->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
+
 	m_pMenuPresets = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Sandbox Presets"));
-		
 		m_pMenuPresetsAdmin = new QActionGroup(m_pMenuPresets);
 		m_pMenuPresetsShowUAC = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Ask for UAC Elevation"), 0);
 		m_pMenuPresetsNoAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Drop Admin Rights"), 1);
@@ -109,7 +116,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsINet->setCheckable(true);
 		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsShares->setCheckable(true);
-	m_pMenuOptions = m_pMenu->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
+	
 	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMoveTo = m_pMenu->actions().count();
 	m_pMenuMoveTo = m_pMenu->addMenu(CSandMan::GetIcon("Group"), tr("Move to Group"));
@@ -148,8 +155,9 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMenu2->addMenu(m_pMenuRun);
 	m_pMenu2->addAction(m_pMenuEmptyBox);
 	m_pMenu2->addSeparator();
-	m_pMenu2->addAction(m_pMenuExplore);
 	m_pMenu2->addAction(m_pMenuBrowse);
+	m_pMenu2->addAction(m_pMenuExplore);
+	m_pMenu2->addAction(m_pMenuRegEdit);
 	m_pMenu2->addAction(m_pMenuSnapshots);
 	m_pMenu2->addAction(m_pMenuRecover);
 	m_pMenu2->addAction(m_pMenuCleanUp);
@@ -290,6 +298,7 @@ void CSbieView::UpdateMenu()
 
 	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
 	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
+	m_pMenuRegEdit->setEnabled(iSandBoxeCount == 1);
 	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 	m_pMenuSnapshots->setEnabled(iSandBoxeCount == 1);
 
@@ -591,12 +600,16 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		Results.append(SandBoxes.first()->RunStart("regedit.exe"));
 	else if (Action == m_pMenuRunAppWiz)
 		Results.append(SandBoxes.first()->RunStart("\"C:\\WINDOWS\\System32\\control.exe\" \"C:\\Windows\\System32\\appwiz.cpl\""));
+	else if (Action == m_pMenuAutoRun)
+		Results.append(SandBoxes.first()->RunStart("auto_run"));
 	else if (Action == m_pMenuRunCmd)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe", true));
+#ifdef _WIN64
 	else if (Action == m_pMenuRunCmd32)
 		Results.append(SandBoxes.first()->RunStart("C:\\WINDOWS\\SysWOW64\\cmd.exe"));
+#endif
 	else if (Action == m_pMenuPresetsShowUAC)
 	{
 		SandBoxes.first()->SetBool("DropAdminRights", false);
@@ -620,6 +633,21 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	{
 		OnDoubleClicked(m_pSbieTree->selectedRows().first());
 	}
+	else if (Action == m_pMenuBrowse)
+	{
+		CSandBoxPtr pBox = SandBoxes.first();
+		
+		static QMap<void*, CFileBrowserWindow*> FileBrowserWindows;
+		if (!FileBrowserWindows.contains(pBox.data()))
+		{
+			CFileBrowserWindow* pFileBrowserWindow = new CFileBrowserWindow(SandBoxes.first());
+			FileBrowserWindows.insert(pBox.data(), pFileBrowserWindow);
+			connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
+				FileBrowserWindows.remove(pBox.data());
+			});
+			pFileBrowserWindow->show();
+		}
+	}
 	else if (Action == m_pMenuExplore)
 	{
 		if (SandBoxes.first()->IsEmpty()) {
@@ -640,20 +668,38 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 		::ShellExecute(NULL, NULL, SandBoxes.first()->GetFileRoot().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 	}
-	else if (Action == m_pMenuBrowse)
+	else if (Action == m_pMenuRegEdit)
 	{
-		CSandBoxPtr pBox = SandBoxes.first();
-		
-		static QMap<void*, CFileBrowserWindow*> FileBrowserWindows;
-		if (!FileBrowserWindows.contains(pBox.data()))
-		{
-			CFileBrowserWindow* pFileBrowserWindow = new CFileBrowserWindow(SandBoxes.first());
-			FileBrowserWindows.insert(pBox.data(), pFileBrowserWindow);
-			connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
-				FileBrowserWindows.remove(pBox.data());
-			});
-			pFileBrowserWindow->show();
+		if (SandBoxes.first()->IsEmpty()) {
+			QMessageBox("Sandboxie-Plus", tr("This Sandbox is empty."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
+			return;
 		}
+
+		wstring path = QCoreApplication::applicationFilePath().toStdWString();
+
+		QStringList RegRoot = SandBoxes.first()->GetRegRoot().split("\\");
+		while (RegRoot.first().isEmpty())
+			RegRoot.removeFirst();
+		RegRoot[0] = QString("Computer");
+		if(RegRoot[1] == "USER")
+			RegRoot[1] = QString("HKEY_USERS");
+		else if(RegRoot[1] == "MACHINE")
+			RegRoot[1] = QString("HKEY_LOCAL_MACHINE");
+		wstring params = L"-open_reg \"" + RegRoot.join("\\").toStdWString() + L"\"";
+		if (SandBoxes.first()->GetActiveProcessCount() == 0)
+			params += L" \"" + theAPI->GetStartPath().toStdWString() + L" /box:" + SandBoxes.first()->GetName().toStdWString() + L" mount_hive\"";
+
+		SHELLEXECUTEINFO shex;
+		memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
+		shex.cbSize = sizeof(SHELLEXECUTEINFO);
+		shex.fMask = SEE_MASK_FLAG_NO_UI;
+		shex.hwnd = NULL;
+		shex.lpFile = path.c_str();
+		shex.lpParameters = params.c_str();
+		shex.nShow = SW_SHOWNORMAL;
+		shex.lpVerb = L"runas";
+
+		ShellExecuteEx(&shex);
 	}
 	else if (Action == m_pMenuSnapshots)
 	{
@@ -857,7 +903,7 @@ void CSbieView::OnProcessAction()
 						FileName.prepend("\\");
 				}
 
-				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|" + pProcess->GetFileName());
+				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pProcess->GetFileName()+"\"");
 			}
 			else if(!m_pMenuPinToRun->data().toString().isEmpty())
 				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());

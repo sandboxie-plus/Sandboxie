@@ -365,6 +365,16 @@ LONG SbieApi_ProcessExemptionControl(
 
 //---------------------------------------------------------------------------
 
+
+SBIEAPI_EXPORT 
+void* SbieDll_GetSysFunction(
+    const WCHAR* name);
+
+SBIEAPI_EXPORT 
+BOOL SbieDll_RunStartExe(
+    const WCHAR* cmd, 
+    const wchar_t* boxname);
+
 #ifdef __cplusplus
 }
 #endif

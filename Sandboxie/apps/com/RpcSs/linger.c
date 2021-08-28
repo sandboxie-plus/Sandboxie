@@ -416,6 +416,17 @@ int DoLingerLeader(void)
 
             SbieDll_ExpandAndRunProgram(image);
         }
+
+        WCHAR Cmd[8191];
+        for (i = 0; ; ++i) {
+
+            rc = SbieApi_QueryConfAsIs(
+                NULL, L"StartCommand", i, Cmd, sizeof(Cmd));
+            if (rc != 0)
+                break;
+
+            SbieDll_RunStartExe(Cmd, NULL);
+        }
     }
 
     //

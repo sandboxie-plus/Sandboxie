@@ -111,7 +111,7 @@ typedef struct _FILE_SNAPSHOT {
 //---------------------------------------------------------------------------
 
 
-NTSTATUS File_GetName(
+SBIEDLL_EXPORT NTSTATUS File_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, ULONG *OutFlags);
 
@@ -282,12 +282,12 @@ static void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey);
 
 
 static P_NtOpenFile                 __sys_NtOpenFile                = NULL;
-static P_NtCreateFile               __sys_NtCreateFile              = NULL;
+       P_NtCreateFile               __sys_NtCreateFile              = NULL;
 static P_NtQueryAttributesFile      __sys_NtQueryAttributesFile     = NULL;
 static P_NtQueryFullAttributesFile  __sys_NtQueryFullAttributesFile = NULL;
 static P_NtQueryInformationFile     __sys_NtQueryInformationFile    = NULL;
 static P_GetFinalPathNameByHandle   __sys_GetFinalPathNameByHandleW = NULL;
-static P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile      = NULL;
+       P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile      = NULL;
 static P_NtQueryDirectoryFileEx     __sys_NtQueryDirectoryFileEx    = NULL;
 static P_NtSetInformationFile       __sys_NtSetInformationFile      = NULL;
 static P_NtDeleteFile               __sys_NtDeleteFile              = NULL;

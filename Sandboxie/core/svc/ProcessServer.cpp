@@ -511,6 +511,10 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
             if (SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerPid, 0)) {
                 CallerInSandbox = true;
                 BoxNameOrModelPid = -(LONG_PTR)(LONG)CallerPid;
+                if ((req->si_flags & 0x80000000) != 0) { // bsession0 - this is only allowed for unsandboxed processes
+                    lvl = 0xFF;
+                    goto bail_out;
+                }
             } else {
                 CallerInSandbox = false;
                 if (*req->boxname == L'-')
@@ -573,6 +577,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 lvl = 0x33;
             }
 
+            bail_out:
             CloseHandle(CallerProcessHandle);
 
         } else {
@@ -1085,11 +1090,26 @@ BOOL ProcessServer::RunSandboxedStartProcess(
             (*crflags) |= CREATE_BREAKAWAY_FROM_JOB;
         }
 
+        // for certain usecases it may be desirable to run a sandbox in session 0
+        // to start a process in that session we use a unused flag bit in STARTUPINFOW::dwFlags
+        // if this bit is set we start a process based on our SYSTEM own token, security whise this is
+        // similar to running boxed services with "RunServicesAsSystem=y" hence to mitigate potential
+        // issues it is recommended to activate "DropAdminRights=y" for boxed using this feature
+        bool bSession0 = (si->dwFlags & 0x80000000) != 0;
+        if (bSession0) {
+            OpenProcessToken(GetCurrentProcess(), TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &PrimaryTokenHandle);
+        }
+
         // impersonate caller in case they have a different device map
         // with different drive mappings
         ok = DuplicateToken(PrimaryTokenHandle,
                             SecurityImpersonation,
                             &ImpersonationTokenHandle);
+
+        if (bSession0) {
+            CloseHandle(PrimaryTokenHandle);
+            PrimaryTokenHandle = NULL;
+        }
 
         if (ok)
             ok = SetThreadToken(NULL, ImpersonationTokenHandle);

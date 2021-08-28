@@ -32,11 +32,22 @@ int main(int argc, char *argv[])
 		else app.sendMessage("Status:" + CSandMan::FormatError(Status)); // todo: localization
 		return 0;
 	}
-	
-	QString PendingMessage;
 
 	QStringList Args = QCoreApplication::arguments();
-	int CmdPos = Args.indexOf("-op", Qt::CaseInsensitive);
+	
+	int CmdPos = Args.indexOf("-open_reg", Qt::CaseInsensitive);
+	if (CmdPos != -1) {
+		if (Args.count() > CmdPos + 2) {
+			QProcess::startDetached(Args.at(CmdPos + 2));
+			QThread::msleep(1000);
+		}
+		ShellOpenRegKey(Args.at(CmdPos + 1));
+		return 0;
+	}
+
+	QString PendingMessage;
+
+	CmdPos = Args.indexOf("-op", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		QString Op;
 		if (Args.count() > CmdPos)

@@ -102,10 +102,21 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		ui.uiLang->addItem(Lang, Code);
 	}
 
-	LoadSettings();
+	ui.cmbSysTray->addItem(tr("Don't show any icon"));
+	ui.cmbSysTray->addItem(tr("Show Plus icon"));
+	ui.cmbSysTray->addItem(tr("Show Classic icon"));
 
-	connect(ui.chkShowTray, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
-	//connect(ui.chkUseCycles, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
+	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
+	ui.cmbOnClose->addItem(tr("Close"), "Close");
+
+
+	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
+
+	LoadSettings();
+	
+	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
+	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
@@ -214,12 +225,9 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
-	ui.onClose->addItem(tr("Close to Tray"), "ToTray");
-	ui.onClose->addItem(tr("Prompt before Close"), "Prompt");
-	ui.onClose->addItem(tr("Close"), "Close");
-	ui.onClose->setCurrentIndex(ui.onClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
-
-	ui.chkShowTray->setChecked(theConf->GetBool("Options/ShowSysTray", true));
+	
+	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
+	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 
 
 	if (theAPI->IsConnected())
@@ -332,9 +340,8 @@ void CSettingsWindow::SaveSettings()
 	
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
-	theConf->SetValue("Options/OnClose", ui.onClose->currentData());
-
-	theConf->SetValue("Options/ShowSysTray", ui.chkShowTray->isChecked());
+	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
+	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 
 
 	if (theAPI->IsConnected())
@@ -515,11 +522,9 @@ void CSettingsWindow::OnBrowse()
 
 void CSettingsWindow::OnChange()
 {
-	//ui.chkLinuxStyle->setEnabled(!ui.chkUseCycles->isChecked());
-
-	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.onClose->model());
+	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.cmbOnClose->model());
 	QStandardItem *item = model->item(0);
-	item->setFlags((!ui.chkShowTray->isChecked()) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
+	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 
 	if (ui.chkAutoRoot->isVisible() && theGUI->IsFullyPortable())
 		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);

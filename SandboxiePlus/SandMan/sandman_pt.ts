@@ -656,8 +656,7 @@
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <oldsource>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</oldsource>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Você que permitir que %4 (%5) copie um arquivo grande %1 na caixa de areia: %2?
 Nome do arquivo: %3</translation>
     </message>
@@ -665,8 +664,7 @@ Nome do arquivo: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
         <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
-        <oldsource>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</oldsource>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Você que permitir que %1 (%2) acesse à Internet?
 Caminho completo: %3</translation>
     </message>
@@ -674,8 +672,7 @@ Caminho completo: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="322"/>
         <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
-        <oldsource>%1 is eligible for quick recovery from %2.
-The file was written by: %3</oldsource>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>%1 está qualificado para recuperação rápida de %2.
 O arquivo foi gravado por: %3</translation>
     </message>
@@ -700,8 +697,7 @@ O arquivo foi gravado por: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="413"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
-        <oldsource>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</oldsource>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Migrando um arquivo grande %1 para a caixa %2, %3 restante.
 Caminho completo: %4</translation>
     </message>
@@ -1157,6 +1153,7 @@ Não vou escolher: %2</translation>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
 <byte value="xd"/>
 Do you want to do the clean up?</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus estava em execução no modo portable, agora ele tem que limpar os serviços criados. Isso irá solicitar privilégios administrativos.
 
 Você quer fazer a limpeza?</translation>
@@ -1171,6 +1168,7 @@ Você quer fazer a limpeza?</translation>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
 Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus foi iniciado no modo portable, você deseja colocar a pasta Sandbox em seu diretório pai?
 Sim vou escolher: %1
 Não vou escolher: %2</translation>

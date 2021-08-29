@@ -650,6 +650,7 @@
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>您確定允許 %4 (%5) 複製大型檔案 %1 至沙箱: %2？
 檔案名稱: %3</translation>
     </message>
@@ -657,6 +658,7 @@ File name: %3</source>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
         <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>您確定允許 %1 (%2) 存取網路嗎？
 完整路徑: %3</translation>
     </message>
@@ -664,6 +666,7 @@ Full path: %3</source>
         <location filename="Windows/PopUpWindow.cpp" line="322"/>
         <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>%1 可以從 %2 快速恢復。
 檔案寫入自: %3</translation>
     </message>
@@ -687,6 +690,7 @@ The file was written by: %3</source>
         <location filename="Windows/PopUpWindow.cpp" line="413"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>移動大檔案 %1 至沙箱 %2，%3 遺留。
 完整路徑: %4</translation>
     </message>
@@ -1053,6 +1057,7 @@ Full path: %4</source>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
 <byte value="xd"/>
 Do you want to do the clean up?</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus 正執行於可攜式模式，現在將清理所建立的服務，這將尋求管理員權限。
 
 是否確認清理？</translation>
@@ -1134,6 +1139,7 @@ Do you want to do the clean up?</source>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
 Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus 以便攜模式啟動，您要將沙箱資料夾放入其父目錄嗎？
 [是] 將選擇: %1
 [否] 將選擇: %2</translation>

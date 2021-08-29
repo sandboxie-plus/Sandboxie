@@ -514,48 +514,32 @@
         <translation>Yazdırma biriktiricisinin %1 (%2) için korumalı kutunun dışına yazmasına izin vermek istiyor musunuz?</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="vanished">%4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
-Dosya adı: %3</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="vanished">%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
-Tam yol: %3</translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="vanished">%1, %2&apos;den hızlı kurtarma için uygun.
-Dosyayı yazan: %3</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="vanished">Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
-Tam yol: %4</translation>
-    </message>
-    <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
+        <translation>4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
+Dosya adı: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
+        <translation>%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
+Tam yol: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
+        <translation>%1, %2&apos;den hızlı kurtarma için uygun.
+Dosyayı yazan: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
+        <translation>Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
+Tam yol: %4</translation>
     </message>
 </context>
 <context>
@@ -1247,6 +1231,7 @@ Full path: %4</source>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
 <byte value="xd"/>
 Do you want to do the clean up?</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1257,6 +1242,7 @@ Do you want to do the clean up?</source>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
 Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
+        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>

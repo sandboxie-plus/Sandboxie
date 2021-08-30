@@ -35,7 +35,7 @@ If you need to check all new features at once, a good way to highlight them quic
 ## Documentation
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
 
-[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [known issue](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22)
+[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22)
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
 
@@ -75,7 +75,7 @@ Open Source release
 - RockyTDR - Dutch
 - bastik-1001 - German
 - isaak654 - Italian
-- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?p=54#p54) - Polish (out of sync than the source tree)
+- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?p=54#p54) - Polish
 - JNylson - Portuguese
 - lufog - Russian
 - sebadamus - Spanish

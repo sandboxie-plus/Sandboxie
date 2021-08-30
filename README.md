@@ -75,7 +75,7 @@ Open Source release
 - RockyTDR - Dutch
 - bastik-1001 - German
 - isaak654 - Italian
-- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?p=54#p54) - Polish
+- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?p=54) - Polish
 - JNylson - Portuguese
 - lufog - Russian
 - sebadamus - Spanish

@@ -4,34 +4,36 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-## [0.9.5 / 5.51.5] - 2021-08-29
+## [0.9.5 / 5.51.5] - 2021-08-30
 
 ### Added
-- added option to run a sandbox in session 0
+- added option to run a sandbox in [session 0](https://techcommunity.microsoft.com/t5/ask-the-performance-team/application-compatibility-session-0-isolation/ba-p/372361)
 -- Note: the processes then have a system token, hence its recommended to enable "DropAdminRights=y"
-- when the UI is run with admin privileges it now can terminate sandboxed processes in other sessions
-- added "StartSystemBox=" option to auto run a box on sbie start/system boot in session 0
--- Note: box start is done through issuing start.exe /box:[name] auto_run
-- add start.exe auto_run command to start all sandboxed auto start locations
-- add start.exe /keep_alive command line switch it keeps a process running in the box untill it gracefully terminates
-- added "StartCommand=" it starts a complex command through start.exe on box startup
-- added menu option to start regedit and load the box reg key
+- if the UI is run with admin privileges, it can terminate sandboxed processes in other sessions now
+- added "StartSystemBox=" option to auto-run a box on Sbie start/system boot in session 0
+-- Note: box start is done by issuing Start.exe /box:[name] auto_run
+- add Start.exe auto_run command to start all sandboxed auto-start locations
+- add Start.exe /keep_alive command line switch which keeps a process running in the box until it gracefully terminates
+- added "StartCommand=" which starts a complex command through Start.exe on box startup
+- added menu option to start regedit and load the box's registry key
+- added system tray option in the Plus UI to show Classic icon [#963](https://github.com/sandboxie-plus/Sandboxie/issues/963#issuecomment-903933535)
 
 ### Changed
-- changed command prompt icon and string from "terminal" to "command prompt" [#1135](https://github.com/sandboxie-plus/Sandboxie/issues/1135)
-- sys tray can now also use the classic icon [#963](https://github.com/sandboxie-plus/Sandboxie/issues/963)
+- changed command prompt icon and string from "Terminal" to "Command Prompt" [#1135](https://github.com/sandboxie-plus/Sandboxie/issues/1135)
 - reworked box menu layout a bit
 
-### fixed
-- fixed driver compatybility with windows server 2022 (build 20348) [#1143](https://github.com/sandboxie-plus/Sandboxie/issues/1143)
+### Fixed
+- fixed driver compatibility with Windows Server 2022 (build 20348) [#1143](https://github.com/sandboxie-plus/Sandboxie/issues/1143)
 - fixed issue with creating shortcuts [#1134](https://github.com/sandboxie-plus/Sandboxie/issues/1134)
+
+### Installers re-released on 2021-08-31 with the following fix:
+- fixed KmdUtil warning 1061 after Plus upgrade (by mpheath) [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968) [#1139](https://github.com/sandboxie-plus/Sandboxie/issues/1139)
 
 
 
 ## [0.9.4 / 5.51.4] - 2021-08-22
 
-### added
+### Added
 - added clear commands to log submenus [#391](https://github.com/sandboxie-plus/Sandboxie/issues/391)
 - added option to disable process termination prompt [#514](https://github.com/sandboxie-plus/Sandboxie/issues/514)
 - added "Options/InstantRecovery" setting to sandboxie-plus.ini to use the recovery window instead of the notification pop-up [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
@@ -42,7 +44,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - generic errors in Sbie UI now show the status code as hex and provide a string description when available
 
-### fixed
+### Fixed
 - fixed "del" shortcut to terminate a process not always working
 - fixed group display issue [#1094](https://github.com/sandboxie-plus/Sandboxie/issues/1094)
 - fixed issue when using "run sandboxed" on a file that is already located in a sandbox [#1099](https://github.com/sandboxie-plus/Sandboxie/issues/1099)
@@ -51,7 +53,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.9.3 / 5.51.3] - 2021-08-08
 
-### added
+> Read the developer's notes about the new [WFP functionality](https://github.com/sandboxie-plus/Sandboxie/releases/tag/0.9.3).
+
+### Added
 - ability to use the "run unsandboxed" option with Sandboxie links [#614](https://github.com/sandboxie-plus/Sandboxie/issues/614)
 
 ### Fixed
@@ -68,7 +72,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.2 / 5.51.2] - 2021-08-07
+## [0.9.2 / 5.51.2] - 2021-08-07 (pre-release)
 
 ### Added
 - added ability to reconfigure the driver, which allows enabling/disabling WFP and other features without a reload/reboot
@@ -82,12 +86,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with quick recovery introduced in 5.51.0
 - fixed incompatibility with CET Hardware-enforced Stack Protection on Intel 11th gen and AMD Ryzen 5XXX CPUs [#1067](https://github.com/sandboxie-plus/Sandboxie/issues/1067) [#1012](https://github.com/sandboxie-plus/Sandboxie/issues/1012)
 
-### removed
+### Removed
 - commented out all Windows XP-specific support code from the driver
 
 
 
-## [0.9.1 / 5.51.1] - 2021-07-31
+## [0.9.1 / 5.51.1] - 2021-07-31 (pre-release)
 
 ### Added
 - added tray icon indicating broken connection to the driver if it happens
@@ -109,7 +113,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.0 / 5.51.0] - 2021-07-29
+## [0.9.0 / 5.51.0] - 2021-07-29 (pre-release)
 
 ### Added
 - added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme

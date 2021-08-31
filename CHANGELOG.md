@@ -4,13 +4,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.x / 5.51.x] - 2021-xx-xx
-
-### Fixed
-- fixed KmdUtil error 1061 after Plus upgrade (by mpheath) [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968) [#1139](https://github.com/sandboxie-plus/Sandboxie/issues/1139)
-
-
-
 ## [0.9.5 / 5.51.5] - 2021-08-30
 
 ### Added
@@ -32,6 +25,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed driver compatibility with Windows Server 2022 (build 20348) [#1143](https://github.com/sandboxie-plus/Sandboxie/issues/1143)
 - fixed issue with creating shortcuts [#1134](https://github.com/sandboxie-plus/Sandboxie/issues/1134)
+
+### Installers re-released on 2021-08-31 with the following fix:
+- fixed KmdUtil error 1061 after Plus upgrade (by mpheath) [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968) [#1139](https://github.com/sandboxie-plus/Sandboxie/issues/1139)
 
 
 

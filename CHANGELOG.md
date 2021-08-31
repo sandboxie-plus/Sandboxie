@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.5 / 5.51.5] - 2021-08-30
 
 ### Added
-- added option to run a sandbox in session 0
+- added option to run a sandbox in [session 0](https://techcommunity.microsoft.com/t5/ask-the-performance-team/application-compatibility-session-0-isolation/ba-p/372361)
 -- Note: the processes then have a system token, hence its recommended to enable "DropAdminRights=y"
 - if the UI is run with admin privileges, it can terminate sandboxed processes in other sessions now
 - added "StartSystemBox=" option to auto-run a box on Sbie start/system boot in session 0

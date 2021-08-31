@@ -27,7 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with creating shortcuts [#1134](https://github.com/sandboxie-plus/Sandboxie/issues/1134)
 
 ### Installers re-released on 2021-08-31 with the following fix:
-- fixed KmdUtil error 1061 after Plus upgrade (by mpheath) [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968) [#1139](https://github.com/sandboxie-plus/Sandboxie/issues/1139)
+- fixed KmdUtil warning 1061 after Plus upgrade (by mpheath) [#968](https://github.com/sandboxie-plus/Sandboxie/issues/968) [#1139](https://github.com/sandboxie-plus/Sandboxie/issues/1139)
 
 
 

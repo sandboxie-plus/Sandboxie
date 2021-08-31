@@ -53,6 +53,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.9.3 / 5.51.3] - 2021-08-08
 
+> Read the developer's notes about the new [WFP functionality](https://github.com/sandboxie-plus/Sandboxie/releases/tag/0.9.3).
+
 ### Added
 - ability to use the "run unsandboxed" option with Sandboxie links [#614](https://github.com/sandboxie-plus/Sandboxie/issues/614)
 
@@ -70,7 +72,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.2 / 5.51.2] - 2021-08-07
+## [0.9.2 / 5.51.2] - 2021-08-07 (pre-release)
 
 ### Added
 - added ability to reconfigure the driver, which allows enabling/disabling WFP and other features without a reload/reboot
@@ -89,7 +91,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.1 / 5.51.1] - 2021-07-31
+## [0.9.1 / 5.51.1] - 2021-07-31 (pre-release)
 
 ### Added
 - added tray icon indicating broken connection to the driver if it happens
@@ -111,7 +113,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.0 / 5.51.0] - 2021-07-29
+## [0.9.0 / 5.51.0] - 2021-07-29 (pre-release)
 
 ### Added
 - added support for Windows Filtering Platform (WFP) to be used instead of the device-based network blocking scheme

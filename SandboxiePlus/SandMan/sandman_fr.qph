@@ -1,0 +1,13 @@
+<!DOCTYPE QPH>
+<QPH language="fr_FR">
+<phrase>
+    <source>sandbox</source>
+    <target>bac à sable</target>
+    <definition>Un bac à sable (de l&apos;anglais sandbox) est un mécanisme de sécurité informatique se basant sur l&apos;isolation de composants logiciels, de logiciels ou de groupes de logiciels par rapport à leur logiciel ou système d&apos;exploitation hôte.</definition>
+</phrase>
+<phrase>
+    <source>UAC</source>
+    <target>UAC</target>
+    <definition>User Account Control (UAC, « contrôle du compte de l&apos;utilisateur ») est un mécanisme de protection des données introduit dans les systèmes d&apos;exploitation Windows Vista et 7.</definition>
+</phrase>
+</QPH>

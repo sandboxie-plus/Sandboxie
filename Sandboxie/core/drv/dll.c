@@ -86,9 +86,9 @@ _FX BOOLEAN Dll_Init(void)
     List_Init(&Dll_List);
     Dll_List_Initialized = TRUE;
 
-    if (! Dll_Load(Dll_NTDLL))
+    if (! Dll_Load(Dll_NTDLL)) // ntoskrnl.exe - ntdll.dll
         return FALSE;
-    if (! Dll_Load(Dll_USER))
+    if (! Dll_Load(Dll_USER)) // win32k.sys - w10: win32u.dll - w7: user32.dll & gdi32.dll
         return FALSE;
 
     return TRUE;
@@ -174,7 +174,7 @@ _FX DLL_ENTRY *Dll_Load(const WCHAR *DllBaseName)
     // open the dll file and query its on-disk size
     //
 
-    swprintf(path, L"\\SystemRoot\\System32\\%s%s", DllBaseName, _DotDll);
+    RtlStringCbPrintfW(path, sizeof(path), L"\\SystemRoot\\System32\\%s%s", DllBaseName, _DotDll);
 
 #ifdef _WIN64
 
@@ -358,7 +358,7 @@ _FX void *Dll_GetProc(
 
     if (! proc) {
         WCHAR dll_proc_name[96];
-        swprintf(dll_proc_name, L"%s.%S", DllName, ProcName);
+        RtlStringCbPrintfW(dll_proc_name, sizeof(dll_proc_name), L"%s.%S", DllName, ProcName);
         Log_Msg1(MSG_DLL_GET_PROC, dll_proc_name);
     }
 
@@ -400,7 +400,7 @@ _FX ULONG Dll_GetNextProc(
             if (! dll_offset) {
 
                 WCHAR dll_proc_name[96];
-                swprintf(dll_proc_name, L"%s.%S", dll->name, SearchName);
+                RtlStringCbPrintfW(dll_proc_name, sizeof(dll_proc_name), L"%s.%S", dll->name, SearchName);
                 Log_Msg1(MSG_1112, dll_proc_name);
             }
 

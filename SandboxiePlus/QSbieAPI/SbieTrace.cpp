@@ -68,6 +68,8 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 
 	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
 
+	m_BoxPtr = 0;
+
 	static atomic<quint64> uid = 0;
 	m_uid = uid.fetch_add(1);
 	

@@ -3063,7 +3063,7 @@ As seguintes exclusões permitem que os navegadores Web rodando nesta caixa faç
 .
 
 4323;txt;01
-Forçar o %2 a rodar nesta caixa (Apenas versão registrada)
+Forçar o %2 a rodar nesta caixa
 .
 
 4324;txt;02

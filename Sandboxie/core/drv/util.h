@@ -92,7 +92,21 @@ BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName);
 BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_STRING* pData);
 void *memmem(const void *pSearchBuf, size_t nBufSize, const void *pPattern, size_t nPatternSize);
 
+
+
+//
+// return TRUE if current process has a valid custom signature
+//
+
+BOOLEAN MyIsCallerSigned(void);
+
+
+NTSTATUS MyValidateCertificate(void);
+
+
 //---------------------------------------------------------------------------
 
+
+extern BOOLEAN Driver_Certified;
 
 #endif // _MY_UTIL_H

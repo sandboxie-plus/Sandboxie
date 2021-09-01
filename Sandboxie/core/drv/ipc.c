@@ -79,6 +79,11 @@ static NTSTATUS Ipc_Api_QuerySymbolicLink(PROCESS *proc, ULONG64 *parms);
 //---------------------------------------------------------------------------
 
 
+NTSTATUS Thread_GetKernelHandleForUserHandle(
+    HANDLE *OutKernelHandle, HANDLE InUserHandle);
+
+//---------------------------------------------------------------------------
+
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Ipc_Init)
 #pragma alloc_text (INIT, Ipc_Init_Type)
@@ -197,9 +202,11 @@ _FX BOOLEAN Ipc_Init(void)
     Api_SetFunction(API_QUERY_SYMBOLIC_LINK,    Ipc_Api_QuerySymbolicLink);
     //Api_SetFunction(API_ALLOW_SPOOLER_PRINT_TO_FILE, Ipc_Api_AllowSpoolerPrintToFile);
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
     Api_SetFunction(API_SET_LSA_AUTH_PKG,       Ipc_Api_SetLsaAuthPkg);
 #endif ! _WIN64
+#endif
 
     Api_SetFunction(API_GET_DYNAMIC_PORT_FROM_PID, Ipc_Api_GetDynamicPortFromPid);
     Api_SetFunction(API_OPEN_DYNAMIC_PORT, Ipc_Api_OpenDynamicPort);
@@ -357,6 +364,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\SharedSection",
+        L"\\Windows\\SharedSection", // bSession0
         L"\\Sessions\\*\\BaseNamedObjects\\CrSharedMem_*",      // now required by Chromium browsers
         L"\\ThemeApiPort",
         L"\\KnownDlls\\*",              // see Ipc_Generic_MyOpenProc_2
@@ -942,12 +950,12 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                     mon_type |= MONITOR_DENY;
             }
 
-            swprintf(access_str, L"(I%c) %08X", letter, GrantedAccess);
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(I%c) %08X", letter, GrantedAccess);
             Log_Debug_Msg(mon_type, access_str, Name->Buffer);
         }
     }
 
-    else if (Session_MonitorCount) {
+    else if (Session_MonitorCount && !proc->disable_monitor) {
 
         ULONG mon_type = MONITOR_IPC;
         WCHAR *mon_name = Name->Buffer;
@@ -990,7 +998,7 @@ _FX NTSTATUS Ipc_CheckPortObject(
 
 
 _FX NTSTATUS Ipc_CheckJobObject(
-    PROCESS *proc, void *Object, UNICODE_STRING *Name,
+    PROCESS* proc, void* Object, UNICODE_STRING* Name,
     ACCESS_MASK GrantedAccess)
 {
     //
@@ -1001,9 +1009,10 @@ _FX NTSTATUS Ipc_CheckJobObject(
     // is inside the sandbox
     //
 
-    if (!Conf_Get_Boolean(proc->box->name, L"NoAddProcessToJob", 0, FALSE))
-    if (GrantedAccess & (JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE))
-        return STATUS_ACCESS_DENIED;
+    if (!proc->can_use_jobs) {
+        if (GrantedAccess & (JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE))
+            return STATUS_ACCESS_DENIED;
+    }
 
     if (! Name->Length)
         return STATUS_ACCESS_DENIED;
@@ -1158,17 +1167,32 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
         // wont be able to grab it while we are evaluaiting it
         //
 
-        status = ZwDuplicateObject(
-                        SourceProcessHandle, SourceHandle,
-                        TargetProcessHandle, &TestHandle,
-                        DesiredAccess, HandleAttributes,
-                        Options & ~DUPLICATE_CLOSE_SOURCE);
-
+        HANDLE SourceProcessKernelHandle;
+        status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
         if (NT_SUCCESS(status)) {
 
-            status = Ipc_CheckObjectName(TestHandle, KernelMode);
+            HANDLE TargetProcessKernelHandle = ZwCurrentProcess(); // TargetProcessHandle == NtCurrentProcess();
+            
+            //
+            // driver verifier wants us to provide a kernel handle as process handles
+            // but the source handle must be a user handle and the ZwDuplicateObject
+            // function creates an otehr user handle hence NtClose
+            //
 
-            ZwClose(TestHandle);
+            status = ZwDuplicateObject(
+                SourceProcessKernelHandle, SourceHandle,
+                TargetProcessKernelHandle, &TestHandle,
+                DesiredAccess, HandleAttributes,
+                Options & ~DUPLICATE_CLOSE_SOURCE);
+
+            if (NT_SUCCESS(status)) {
+
+                status = Ipc_CheckObjectName(TestHandle, UserMode);
+
+                NtClose(TestHandle);
+            }
+
+            ZwClose(SourceProcessKernelHandle);
         }
 
     } else
@@ -1241,7 +1265,9 @@ _FX NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode)
             TypeBuffer = ObjectType->Name.Buffer;
         }
 
-    } else {
+    }
+#ifdef XP_SUPPORT
+    else {
 
         //
         // on earlier versions of Windows, the object header precedes the
@@ -1274,6 +1300,7 @@ _FX NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode)
 
         //DbgPrint("Object %08X Has NameInfo %08X TypeBuffer %*.*S\n", object, NameInfo, TypeLength/sizeof(WCHAR), TypeLength/sizeof(WCHAR), TypeBuffer);
     }
+#endif
 
     //
     // if we have the type name here, it means the object is unnamed,

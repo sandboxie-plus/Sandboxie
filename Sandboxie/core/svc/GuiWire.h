@@ -31,8 +31,7 @@
 
 enum {
 
-    GUI_SHUTDOWN = 1,
-    GUI_INIT_PROCESS,
+    GUI_INIT_PROCESS = 1,
     GUI_GET_WINDOW_STATION,
     GUI_CREATE_CONSOLE,
     GUI_QUERY_WINDOW,
@@ -61,6 +60,9 @@ enum {
     GUI_GET_CLIPBOARD_METAFILE,
     GUI_REMOVE_HOST_WINDOW,
     GUI_GET_RAW_INPUT_DEVICE_INFO,
+    GUI_WND_HOOK_NOTIFY,
+    GUI_WND_HOOK_REGISTER,
+    GUI_KILL_JOB,
     GUI_MAX_REQUEST_CODE
 };
 
@@ -705,6 +707,63 @@ struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL
 
 typedef struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_REQ GUI_GET_RAW_INPUT_DEVICE_INFO_REQ;
 typedef struct tagGUI_GET_RAW_INPUT_DEVICE_INFO_RPL GUI_GET_RAW_INPUT_DEVICE_INFO_RPL;
+
+
+//---------------------------------------------------------------------------
+// Notify the service of a window creation and set global hooks
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_WND_HOOK_NOTIFY_REQ
+{
+    ULONG msgid;
+    DWORD threadid;
+};
+
+struct tagGUI_WND_HOOK_NOTIFY_RPL
+{
+    ULONG status;
+};
+
+typedef struct tagGUI_WND_HOOK_NOTIFY_REQ GUI_WND_HOOK_NOTIFY_REQ;
+typedef struct tagGUI_WND_HOOK_NOTIFY_RPL GUI_WND_HOOK_NOTIFY_RPL;
+
+
+//---------------------------------------------------------------------------
+// Register and unregister global hooks
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_WND_HOOK_REGISTER_REQ
+{
+    ULONG msgid;
+    DWORD hthread;
+    ULONG64 hproc;
+    ULONG64 hhook;
+};
+
+struct tagGUI_WND_HOOK_REGISTER_RPL
+{
+    ULONG status;
+};
+
+typedef struct tagGUI_WND_HOOK_REGISTER_REQ GUI_WND_HOOK_REGISTER_REQ;
+typedef struct tagGUI_WND_HOOK_REGISTER_RPL GUI_WND_HOOK_REGISTER_RPL;
+
+
+
+//---------------------------------------------------------------------------
+// Terminate Job
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_KILL_JOB_REQ
+{
+    ULONG msgid;
+    WCHAR boxname[34];
+};
+
+typedef struct tagGUI_KILL_JOB_REQ GUI_KILL_JOB_REQ;
 
 //---------------------------------------------------------------------------
 

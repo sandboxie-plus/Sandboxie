@@ -3091,7 +3091,7 @@ A következő kizárások lehetővé teszik a webböngészők futtatását a san
 .
 
 4323;txt;01
-A(z) %2 futtatásának kényszerítése a jelenlegi sandboxban (Csak a regisztrált verzióban)
+A(z) %2 futtatásának kényszerítése a jelenlegi sandboxban
 .
 
 4324;txt;02

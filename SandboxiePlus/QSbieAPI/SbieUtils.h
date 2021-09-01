@@ -26,11 +26,11 @@ public:
 	static SB_STATUS		Uninstall(EComponent Component);
 	static bool				IsInstalled(EComponent Component);
 
-	static int				IsContextMenu();
-	static void				AddContextMenu(const QString& StartPath);
+	static QString			GetContextMenuStartCmd();
+	static void				AddContextMenu(const QString& StartPath, const QString& IconPath = QString());
 	static void				RemoveContextMenu();
 
-	static bool				CreateShortcut(class CSbieAPI* pApi, const QString &LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath = QString(), int iconIndex = 0, const QString &workdir = QString(), bool bRunElevated = false);
+	static bool				CreateShortcut(class CSbieAPI* pApi, QString LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath = QString(), int iconIndex = 0, const QString &workdir = QString(), bool bRunElevated = false);
 	static bool				GetStartMenuShortcut(class CSbieAPI* pApi, QString &BoxName, QString &LinkPath, QString &IconPath, quint32& IconIndex, QString &WorkDir);
 
 private:
@@ -43,7 +43,8 @@ private:
 	static void				Install(EComponent Component, QStringList& Ops);
 	static void				Uninstall(EComponent Component, QStringList& Ops);
 
-	static bool				CheckRegValue(const wchar_t* key);
 	static void				CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd);
 };
 
+
+bool QSBIEAPI_EXPORT ShellOpenRegKey(const QString& KeyName);

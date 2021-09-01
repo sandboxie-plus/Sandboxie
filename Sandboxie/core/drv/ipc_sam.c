@@ -101,7 +101,7 @@ _FX BOOLEAN Ipc_Filter_Sam_Msg(PROCESS* proc, UCHAR uMsg)
     {
     //case 0x00: //SamConnect
     //case 0x01: //SamCloseHandle
-    case 0x02: //SamSetSecurityObject
+    case 0x02: //SamSetSecurityObject // fixme: SandboxieCrypto.exe needs this some times #740 //if(proc->image_sbie) break;
     //case 0x03: //SamQuerySecurityObject
     //case 0x05: //SamLookupDomainInSamServer
     //case 0x06: //SamEnumerateDomainsInSamServer
@@ -180,7 +180,7 @@ _FX BOOLEAN Ipc_Filter_Sam_Msg(PROCESS* proc, UCHAR uMsg)
 
         if (mon_type) {
             WCHAR msg_str[24];
-            swprintf(msg_str, L"Msg: %02X", (ULONG)uMsg);
+            RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Msg: %02X", (ULONG)uMsg);
             Log_Debug_Msg(mon_type, L"\\RPC Control\\samss lpc", msg_str);
         }
     }

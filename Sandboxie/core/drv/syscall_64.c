@@ -298,6 +298,8 @@ _FX void *Syscall_GetServiceTable(void)
     if (ShadowTable)
         return ShadowTable;
 
+    // Hard Offset Dependency
+
     //
     // the shadow table should be 0x40 bytes before the master table,
     // on Windows XP (64-bit),

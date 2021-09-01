@@ -22,7 +22,7 @@
 
 
 #include "common/pool.h"
-
+#include "common/map.h"
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -93,6 +93,14 @@ typedef struct _FILE_FS_DEVICE_INFORMATION {
     ULONG Characteristics;
 } FILE_FS_DEVICE_INFORMATION, *PFILE_FS_DEVICE_INFORMATION;
 
+#define MAX_CLOSE_HANDLERS 4
+
+typedef struct _FILE_ON_CLOSE {
+
+    BOOLEAN DeleteOnClose;
+    P_CloseHandler CloseHandlers[MAX_CLOSE_HANDLERS];
+
+} FILE_ON_CLOSE;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -170,7 +178,7 @@ static void File_InitRecoverList(
     const WCHAR *setting, LIST *list, BOOLEAN MustBeValidPath,
     WCHAR *buf, ULONG buf_len);
 
-static void File_NotifyRecover(HANDLE FileHandle, MSG_HEADER **out_req);
+static void File_NotifyRecover(HANDLE FileHandle);
 
 static BOOLEAN File_IsRecoverable(const WCHAR *TruePath);
 
@@ -208,6 +216,8 @@ static ULONG File_DoAutoRecover_4(
 
 NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 
+VOID File_NtCloseDir(HANDLE FileHandle);
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -216,7 +226,6 @@ NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 static LIST File_RecoverFolders;
 static LIST File_RecoverIgnores;
 
-static HANDLE *File_RecHandles = NULL;
 static LIST File_RecPaths;
 static CRITICAL_SECTION File_RecHandles_CritSec;
 
@@ -226,6 +235,9 @@ static WCHAR *File_CurDir_LastOutput = NULL;
 
 static LIST File_DirHandles;
 static CRITICAL_SECTION File_DirHandles_CritSec;
+
+static HASH_MAP File_HandleOnClose;
+static CRITICAL_SECTION File_HandleOnClose_CritSec;
 
 static BOOLEAN File_MsoDllLoaded = FALSE;
 
@@ -501,6 +513,7 @@ _FX NTSTATUS File_Merge(
 
             } else {
 
+                File_UnRegisterCloseHandler(merge->handle, File_NtCloseDir);
                 List_Remove(&File_DirHandles, merge);
                 File_MergeFree(merge);
             }
@@ -554,6 +567,7 @@ _FX NTSTATUS File_Merge(
         }
 
         List_Insert_After(&File_DirHandles, NULL, merge);
+        File_RegisterCloseHandler(merge->handle, File_NtCloseDir);
     }
 
     //
@@ -1905,6 +1919,73 @@ _FX NTSTATUS File_NtClose(HANDLE FileHandle)
 
 
 //---------------------------------------------------------------------------
+// File_RegisterCloseHandler
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler)
+{
+    if (!FileHandle || FileHandle == (HANDLE)-1)
+        return FALSE;
+
+    ULONG i;
+
+    EnterCriticalSection(&File_HandleOnClose_CritSec);
+
+    FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, FileHandle);
+    if (!on_close) {
+        on_close = map_insert(&File_HandleOnClose, FileHandle, NULL, sizeof(FILE_ON_CLOSE));
+    }
+
+    for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
+        if (on_close->CloseHandlers[i] == CloseHandler)
+            break; // already registered
+        if (on_close->CloseHandlers[i] == NULL) {
+            on_close->CloseHandlers[i] = CloseHandler; // set to empty slot
+            break;
+        }
+    }
+
+    LeaveCriticalSection(&File_HandleOnClose_CritSec);
+
+    if (i == MAX_CLOSE_HANDLERS) {
+        SbieApi_Log(2301, L"No free CloseHandlers slot available");
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_UnRegisterCloseHandler
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN File_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler)
+{
+    ULONG i = MAX_CLOSE_HANDLERS;
+
+    EnterCriticalSection(&File_HandleOnClose_CritSec);
+
+    FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, FileHandle);
+    if (on_close) {
+
+        for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
+            if (on_close->CloseHandlers[i] == CloseHandler) {
+                on_close->CloseHandlers[i] = NULL; // clear slot
+                break;
+            }
+        }
+    }
+
+    LeaveCriticalSection(&File_HandleOnClose_CritSec);
+
+    return i != MAX_CLOSE_HANDLERS;
+}
+
+
+//---------------------------------------------------------------------------
 // File_NtCloseImpl
 //---------------------------------------------------------------------------
 
@@ -1915,9 +1996,12 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
     NTSTATUS status;
-    ULONG type;
-    FILE_MERGE *merge;
-    MSG_HEADER *req;
+    ULONG i;
+    BOOLEAN HasCloseHandlers = FALSE;
+    P_CloseHandler CloseHandlers[MAX_CLOSE_HANDLERS];
+    BOOLEAN DeleteOnClose = FALSE;
+    UNICODE_STRING uni;
+    WCHAR *DeletePath = NULL;
 
     P_NtClose pSysNtClose = __sys_NtClose;
 
@@ -1950,35 +2034,128 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     }
 
     //
-    // determine the type of handle we are closing.
-    // if we are closing a key handle, call Key_NtClose
+    // check the handle map and execute the close handlers if there is are any
+    // and prepare the DeleteOnClose if its set
     //
 
-    type = Obj_GetObjectType(FileHandle);
+    EnterCriticalSection(&File_HandleOnClose_CritSec);
 
-    if (type == OBJ_TYPE_KEY) {
+    FILE_ON_CLOSE* on_close = (FILE_ON_CLOSE*)map_get(&File_HandleOnClose, FileHandle);
+    if (on_close) {
 
-        Key_NtClose(FileHandle);
+        HasCloseHandlers = TRUE;
+        memcpy(CloseHandlers, on_close->CloseHandlers, sizeof(CloseHandlers));
+        DeleteOnClose = on_close->DeleteOnClose;
+    }
+
+    map_remove(&File_HandleOnClose, FileHandle);
+
+    LeaveCriticalSection(&File_HandleOnClose_CritSec);
+
+    //
+    // execute close handlers
+    //
+
+    if (HasCloseHandlers) {
+
+        for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
+            if(CloseHandlers[i] != NULL)
+                CloseHandlers[i](FileHandle);
+        }
     }
 
     //
-    // if not closing a file handle, stop here
+    // preapre delete disposition if set
     //
 
-    if (type != OBJ_TYPE_FILE) {
+    if (DeleteOnClose) {
 
-        TlsData->file_NtClose_lock = FALSE;
+        Dll_PushTlsNameBuffer(TlsData);
 
-        SetLastError(LastError);
+        __try {
 
-        return pSysNtClose ? pSysNtClose(FileHandle) : NtClose(FileHandle);
+            WCHAR *TruePath, *CopyPath;
+            ULONG FileFlags;
+
+            RtlInitUnicodeString(&uni, L"");
+            status = File_GetName(
+                FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
+
+            status = File_DeleteDirectory(CopyPath, TRUE);
+
+            if (status != STATUS_DIRECTORY_NOT_EMPTY)
+                status = STATUS_SUCCESS;
+
+            if (NT_SUCCESS(status)) {
+
+                ULONG len = wcslen(TruePath);
+                DeletePath = Dll_AllocTemp((len + 8) * sizeof(WCHAR));
+                wmemcpy(DeletePath, TruePath, len + 1);
+
+                if (Dll_ChromeSandbox) {
+
+                    //
+                    // if this is a Chrome sandbox process, we have
+                    // to pass a DOS path to NtDeleteFile rather
+                    // than a file handle
+                    //
+
+                    if (SbieDll_TranslateNtToDosPath(DeletePath)) {
+                        len = wcslen(DeletePath);
+                        wmemmove(DeletePath + 4, DeletePath, len + 1);
+                        wmemcpy(DeletePath, File_BQQB, 4);
+                    }
+                }
+            }
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            status = GetExceptionCode();
+        }
+
+        Dll_PopTlsNameBuffer(TlsData);
     }
 
     //
-    // close for a real handle
+    // close the handle
     //
 
-    req = NULL;
+    status = pSysNtClose ? pSysNtClose(FileHandle) : NtClose(FileHandle);
+
+    //
+    // execute pending delete disposition
+    //
+
+    if (DeletePath) {
+            
+        OBJECT_ATTRIBUTES objattrs;
+        RtlInitUnicodeString(&uni, DeletePath);
+        InitializeObjectAttributes(
+            &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+            
+        status = File_NtDeleteFileImpl(&objattrs);
+    
+        Dll_Free(DeletePath);
+    }
+
+    //
+    // finish
+    //
+
+    TlsData->file_NtClose_lock = FALSE;
+
+    SetLastError(LastError);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_NtCloseDir
+//---------------------------------------------------------------------------
+
+
+_FX VOID File_NtCloseDir(HANDLE FileHandle)
+{
+    FILE_MERGE *merge;
 
     EnterCriticalSection(&File_DirHandles_CritSec);
 
@@ -1986,6 +2163,7 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     while (merge) {
         FILE_MERGE *next = List_Next(merge);
         if (merge->handle == FileHandle) {
+            File_UnRegisterCloseHandler(merge->handle, File_NtCloseDir);
             List_Remove(&File_DirHandles, merge);
             File_MergeFree(merge);
         }
@@ -1993,26 +2171,6 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     }
 
     LeaveCriticalSection(&File_DirHandles_CritSec);
-
-    //
-    // close and recover file
-    //
-
-    File_NotifyRecover(FileHandle, &req);
-
-    status = pSysNtClose ? pSysNtClose(FileHandle) : NtClose(FileHandle);
-
-    if (req) {
-        MSG_HEADER *rpl = SbieDll_CallServer(req);
-        Dll_Free(req);
-        if (rpl)
-            Dll_Free(rpl);
-    }
-
-    TlsData->file_NtClose_lock = FALSE;
-
-    SetLastError(LastError);
-    return status;
 }
 
 
@@ -2351,10 +2509,6 @@ _FX void File_InitRecoverFolders(void)
 
     List_Init(&File_RecPaths);
 
-    File_RecHandles = Dll_Alloc(sizeof(HANDLE) * 128);
-    memzero(File_RecHandles, sizeof(HANDLE) * 128);
-    File_RecHandles[127] = (HANDLE)-1;
-
     //
     // init list of recover folders
     //
@@ -2583,36 +2737,35 @@ finish:
 
 _FX BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath)
 {
-    ULONG i;
+    BOOLEAN IsRecoverable;
 
-    if (! File_RecHandles)
-        return FALSE;
+    IsRecoverable = File_IsRecoverable(TruePath);
 
-    if (! File_IsRecoverable(TruePath))
-        return FALSE;
+    //
+    // in a Chrome sandbox process, handles are opened by the broker,
+    // so skip checking against the list of recorded file handles
+    //
+    
+    // Note: this does not seam to be required anymore 
+    
+    //if ((! IsRecoverable) && Dll_ChromeSandbox) {
+    //
+    //    FILE_ACCESS_INFORMATION info;
+    //
+    //    status = __sys_NtQueryInformationFile(
+    //        FileHandle, &IoStatusBlock, &info,
+    //        sizeof(FILE_ACCESS_INFORMATION), FileAccessInformation);
+    //
+    //    if (NT_SUCCESS(status) && (info.AccessFlags & FILE_WRITE_DATA))
+    //        IsRecoverable = 2; //TRUE; // we still want to return false when called from File_NtCreateFileImpl
+    //    else
+    //        IsRecoverable = FALSE;
+    //}
 
-    EnterCriticalSection(&File_RecHandles_CritSec);
+    if (IsRecoverable != FALSE)
+        File_RegisterCloseHandler(FileHandle, File_NotifyRecover);
 
-    if (FileHandle) {
-        for (i = 0; File_RecHandles[i] != (HANDLE)-1; ++i)
-            if (File_RecHandles[i] == FileHandle) {
-                FileHandle = NULL;
-                break;
-            }
-    }
-
-    if (FileHandle) {
-        for (i = 0; File_RecHandles[i] != (HANDLE)-1; ++i)
-            if (! File_RecHandles[i]) {
-                File_RecHandles[i] = FileHandle;
-                FileHandle = NULL;
-                break;
-            }
-    }
-
-    LeaveCriticalSection(&File_RecHandles_CritSec);
-
-    return TRUE;
+    return IsRecoverable == TRUE;
 }
 
 
@@ -2627,9 +2780,6 @@ _FX void File_DuplicateRecover(
     ULONG i;
     BOOLEAN dup;
 
-    if (! File_RecHandles)
-        return;
-
     //
     // called from NtDuplicateObject to duplicate the "recoverability"
     // of the old handle to the new handle.  needed in particular for
@@ -2638,32 +2788,20 @@ _FX void File_DuplicateRecover(
 
     dup = FALSE;
 
-    EnterCriticalSection(&File_RecHandles_CritSec);
+    EnterCriticalSection(&File_HandleOnClose_CritSec);
 
-    for (i = 0; File_RecHandles[i] != (HANDLE)-1; ++i)
-        if (File_RecHandles[i] == OldFileHandle) {
-            dup = TRUE;
-            break;
+    FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, OldFileHandle);
+    if (on_close) {
+        for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
+            if(on_close->CloseHandlers[i] == File_NotifyRecover)
+                dup = TRUE;
         }
-
-    if (dup && NewFileHandle) {
-        for (i = 0; File_RecHandles[i] != (HANDLE)-1; ++i)
-            if (File_RecHandles[i] == NewFileHandle) {
-                NewFileHandle = NULL;
-                break;
-            }
     }
 
-    if (dup && NewFileHandle) {
-        for (i = 0; File_RecHandles[i] != (HANDLE)-1; ++i)
-            if (! File_RecHandles[i]) {
-                File_RecHandles[i] = NewFileHandle;
-                NewFileHandle = NULL;
-                break;
-            }
-    }
+    LeaveCriticalSection(&File_HandleOnClose_CritSec);
 
-    LeaveCriticalSection(&File_RecHandles_CritSec);
+    if (dup && NewFileHandle)
+        File_RegisterCloseHandler(NewFileHandle, File_NotifyRecover);
 }
 
 
@@ -2672,8 +2810,7 @@ _FX void File_DuplicateRecover(
 //---------------------------------------------------------------------------
 
 
-_FX void File_NotifyRecover(
-    HANDLE FileHandle, MSG_HEADER **out_req)
+_FX void File_NotifyRecover(HANDLE FileHandle)
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -2683,56 +2820,11 @@ _FX void File_NotifyRecover(
         ULONG space[16];
     } info;
     ULONG length;
-    ULONG i;
     ULONG FileFlags;
     UNICODE_STRING uni;
     WCHAR *TruePath, *CopyPath;
     IO_STATUS_BLOCK IoStatusBlock;
-    BOOLEAN IsRecoverable;
-
-    //
-    // check input handle against list of recorded handles
-    //
-
-    if (! File_RecHandles)
-        return;
-
-    IsRecoverable = FALSE;
-    EnterCriticalSection(&File_RecHandles_CritSec);
-
-    for (i = 0; File_RecHandles[i] != (HANDLE)-1; ++i) {
-        if (File_RecHandles[i] == FileHandle)
-        {
-            File_RecHandles[i] = NULL;
-            IsRecoverable = TRUE;
-            break;
-        }
-    }
-
-    LeaveCriticalSection(&File_RecHandles_CritSec);
-
-    //
-    // in a Chrome sandbox process, handles are opened by the broker,
-    // so skip checking against the list of recorded file handles
-    //
-
-    if ((! IsRecoverable) && Dll_ChromeSandbox) {
-
-        FILE_ACCESS_INFORMATION info;
-
-        status = __sys_NtQueryInformationFile(
-            FileHandle, &IoStatusBlock, &info,
-            sizeof(FILE_ACCESS_INFORMATION), FileAccessInformation);
-
-        if (NT_SUCCESS(status) && (info.AccessFlags & FILE_WRITE_DATA))
-            IsRecoverable = TRUE;
-        else
-            IsRecoverable = FALSE;
-    }
-
-    if (! IsRecoverable)
-        return;
-
+   
     //
     // send request to SbieCtrl (if recoverable file)
     //
@@ -2754,8 +2846,7 @@ _FX void File_NotifyRecover(
         // Immediate Recovery
         //
 
-        IsRecoverable = File_IsRecoverable(TruePath);
-        if (! IsRecoverable)
+        if (!File_IsRecoverable(TruePath))
             break;
 
         status = __sys_NtQueryInformationFile(
@@ -2772,42 +2863,39 @@ _FX void File_NotifyRecover(
         // queue immediate recovery elements for later processing
         //
 
-        if (IsRecoverable) {
+        FILE_RECOVER_FOLDER *rec;
+        ULONG TruePath_len;
 
-            FILE_RECOVER_FOLDER *rec;
-            ULONG TruePath_len;
+        EnterCriticalSection(&File_RecHandles_CritSec);
 
-            EnterCriticalSection(&File_RecHandles_CritSec);
+        TruePath_len = wcslen(TruePath);
 
-            TruePath_len = wcslen(TruePath);
-
-            rec = List_Head(&File_RecPaths);
-            while (rec) {
-                if (rec->path_len == TruePath_len)
-                    if (_wcsicmp(rec->path, TruePath) == 0)
-                        break;
-                rec = List_Next(rec);
-            }
-
-            if (! rec) {
-
-                length = sizeof(FILE_RECOVER_FOLDER)
-                       + (TruePath_len + 1) * sizeof(WCHAR);
-                rec = Dll_Alloc(length);
-
-                rec->ticks = GetTickCount();
-
-                wcscpy(rec->path, TruePath);
-                rec->path_len = TruePath_len;
-
-                List_Insert_After(&File_RecPaths, NULL, rec);
-            }
-
-            LeaveCriticalSection(&File_RecHandles_CritSec);
-            if (rec)
-                File_DoAutoRecover(TRUE);
+        rec = List_Head(&File_RecPaths);
+        while (rec) {
+            if (rec->path_len == TruePath_len)
+                if (_wcsicmp(rec->path, TruePath) == 0)
+                    break;
+            rec = List_Next(rec);
         }
 
+        if (! rec) {
+
+            length = sizeof(FILE_RECOVER_FOLDER)
+                    + (TruePath_len + 1) * sizeof(WCHAR);
+            rec = Dll_Alloc(length);
+
+            rec->ticks = GetTickCount();
+
+            wcscpy(rec->path, TruePath);
+            rec->path_len = TruePath_len;
+
+            List_Insert_After(&File_RecPaths, NULL, rec);
+        }
+
+        LeaveCriticalSection(&File_RecHandles_CritSec);
+        if (rec)
+            File_DoAutoRecover(TRUE);
+        
     } while (0);
 
     Dll_PopTlsNameBuffer(TlsData);
@@ -3536,7 +3624,13 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
         if (send2199) {
             WCHAR *colon = wcschr(rec->path, L':');
 			if (!colon) {
-				const WCHAR* strings[] = { Dll_BoxName, rec->path, NULL };
+
+                UNICODE_STRING uni;
+                WCHAR *TruePath, *CopyPath;
+                RtlInitUnicodeString(&uni, rec->path);
+                status = File_GetName(NULL, &uni, &TruePath, &CopyPath, NULL);
+
+				const WCHAR* strings[] = { Dll_BoxName, rec->path, CopyPath, NULL };
 				SbieApi_LogMsgExt(2199, strings);
 			}
             List_Remove(&File_RecPaths, rec);

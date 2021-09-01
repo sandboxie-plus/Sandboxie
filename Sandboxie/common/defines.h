@@ -88,7 +88,7 @@
 //#define wmemchr(mem,c, len)   memchr((mem), (c), (len)*sizeof(WCHAR))
 
 
-#define SPOOLER_PORT_ID				L"Spooler"
+#define SPOOLER_PORT_ID				L"PrintSpooler"
 #define WPAD_PORT_ID				L"WPAD"
 #define GAME_CONFIG_STORE_PORT_ID	L"GamePort"
 #define SMART_CARD_PORT_ID			L"SmartCard"

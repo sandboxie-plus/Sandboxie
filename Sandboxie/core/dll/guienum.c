@@ -236,7 +236,8 @@ _FX BOOLEAN Gui_InitEnum(void)
     // raises an error when CreateDesktop is call.  This hook
     // is removed for chrome.  See advapi.c: AdvApi_GetSecurityInfo
 
-    if ((Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) &&
+    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", FALSE) && 
+        (Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) &&
         (Dll_ImageType != DLL_IMAGE_MOZILLA_FIREFOX)) {
         SBIEDLL_HOOK_GUI(CreateDesktopW);
         SBIEDLL_HOOK_GUI(CreateDesktopA);
@@ -245,7 +246,8 @@ _FX BOOLEAN Gui_InitEnum(void)
         SBIEDLL_HOOK_GUI(CreateWindowStationW);
         SBIEDLL_HOOK_GUI(CreateWindowStationA);
     }    
-return TRUE;
+
+    return TRUE;
 }
 
 

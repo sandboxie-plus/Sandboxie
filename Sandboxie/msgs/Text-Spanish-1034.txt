@@ -3180,7 +3180,7 @@ Las siguientes exclusiones permiten a los navegadores web en ejecución en esta 
 .
 
 4323;txt;01
-Forzar a %2 a ejecutarse en esta sandbox (Sólo versión registrada)
+Forzar a %2 a ejecutarse en esta sandbox
 .
 
 4324;txt;02

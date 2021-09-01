@@ -264,6 +264,8 @@ void CSbieTemplates::CollectTemplates()
 	Templates.append(GetTemplateNames("Download"));
 	Templates.append(GetTemplateNames("Misc"));
 	Templates.append(GetTemplateNames("WebBrowser"));
+	Templates.append(GetTemplateNames("MediaPlayer"));
+	Templates.append(GetTemplateNames("TorrentClient"));
 
 	foreach(const QString& Template, Templates)
 		m_Templates.insert(Template, 0);

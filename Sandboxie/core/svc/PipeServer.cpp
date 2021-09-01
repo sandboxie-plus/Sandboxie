@@ -27,7 +27,7 @@
 #include "core/dll/sbiedll.h"
 #include "common/defines.h"
 #include "common/my_version.h"
-
+#include "sbieiniserver.h"
 
 //---------------------------------------------------------------------------
 // Defines
@@ -54,16 +54,24 @@ typedef struct tagTARGET
 
 typedef struct tagCLIENT_PROCESS
 {
+#ifndef USE_PROCESS_MAP
     LIST_ELEM list_elem;
+#endif
     HANDLE idProcess;
     LARGE_INTEGER CreateTime;
+#ifdef USE_PROCESS_MAP
+    HASH_MAP thread_map;
+#else
     LIST threads;
+#endif
 } CLIENT_PROCESS;
 
 
 typedef struct tagCLIENT_THREAD
 {
+#ifndef USE_PROCESS_MAP
     LIST_ELEM list_elem;
+#endif
     HANDLE idThread;
     BOOLEAN replying;
     volatile BOOLEAN in_use;
@@ -106,8 +114,7 @@ PipeServer *PipeServer::GetPipeServer()
 
         m_instance->m_TlsIndex = TlsIndex;
 
-        m_instance->m_pool = Pool_Create();
-        if (! m_instance->m_pool) {
+        if (! m_instance->Init()) {
             delete m_instance;
             m_instance = NULL;
             SetLastError(ERROR_NOT_ENOUGH_MEMORY);
@@ -128,7 +135,11 @@ PipeServer::PipeServer()
 {
     InitializeCriticalSectionAndSpinCount(&m_lock, 1000);
     List_Init(&m_targets);
+#ifdef USE_PROCESS_MAP
+    map_init(&m_client_map, NULL);
+#else
     List_Init(&m_clients);
+#endif
 
     m_hServerPort = NULL;
 
@@ -138,6 +149,26 @@ PipeServer::PipeServer()
         memzero(m_Threads, len_threads);
     else
         LogEvent(MSG_9234, 0x9251, GetLastError());
+}
+
+
+//---------------------------------------------------------------------------
+// Initializator
+//---------------------------------------------------------------------------
+
+
+bool PipeServer::Init()
+{
+    m_instance->m_pool = Pool_Create();
+    if (!m_instance->m_pool)
+        return false;
+
+#ifdef USE_PROCESS_MAP
+    m_client_map.mem_pool = m_pool;
+	map_resize(&m_client_map, 128); // prepare some buckets for better performance
+#endif
+
+    return true;
 }
 
 
@@ -392,27 +423,7 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
 
     EnterCriticalSection(&m_lock);
 
-    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
-    clientThread = NULL;
-
-    while (clientProcess) {
-
-        if (clientProcess->idProcess == msg->ClientId.UniqueProcess) {
-
-            clientThread =
-                (CLIENT_THREAD *)List_Head(&clientProcess->threads);
-            while (clientThread) {
-
-                if (clientThread->idThread == msg->ClientId.UniqueThread)
-                    break;
-                clientThread = (CLIENT_THREAD *)List_Next(clientThread);
-            }
-
-            break;
-        }
-
-        clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
-    }
+    PortFindClientUnsafe(msg->ClientId, clientProcess, clientThread);
 
     //
     // create new process and thread structures where needed
@@ -425,8 +436,15 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
         if (clientProcess) {
 
             clientProcess->idProcess = msg->ClientId.UniqueProcess;
+#ifdef USE_PROCESS_MAP
+            map_init(&clientProcess->thread_map, m_pool);
+	        map_resize(&clientProcess->thread_map, 16); // prepare some buckets for better performance
+
+            map_insert(&m_client_map, msg->ClientId.UniqueProcess, clientProcess, 0);
+#else
             List_Init(&clientProcess->threads);
             List_Insert_After(&m_clients, NULL, clientProcess);
+#endif
 
             //
             // prepare for the case where a disconnect message only
@@ -465,17 +483,20 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
 
             memset(clientThread, 0, sizeof(CLIENT_THREAD));
             clientThread->idThread = msg->ClientId.UniqueThread;
+#ifdef USE_PROCESS_MAP
+            map_insert(&clientProcess->thread_map, msg->ClientId.UniqueThread, clientThread, 0);
+#else
             List_Insert_After(&clientProcess->threads, NULL, clientThread);
+#endif
         }
     }
 
     //
     // if we couldn't create a new connection (not enough memory)
-    // or if a previous connection was found,
-    // then reject the new connection
+    // reject the new connection
     //
 
-    if ((! clientThread) || clientThread->hPort) {
+    if (! clientThread) {
 
         HANDLE hPort;
         NtAcceptConnectPort(&hPort, NULL, msg, FALSE, NULL, NULL);
@@ -483,6 +504,27 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
         LeaveCriticalSection(&m_lock);
 
         return;
+    }
+
+    //
+    // if a previous connection was found, close it
+    //
+
+    if (clientThread->hPort) {
+
+        while (clientThread->in_use)
+            Sleep(3);
+
+        NtClose(clientThread->hPort);
+        if (clientThread->buf_hdr)
+            FreeMsg(clientThread->buf_hdr);
+
+        clientThread->replying = FALSE;
+        clientThread->in_use = FALSE;
+        clientThread->sequence = 0;
+        clientThread->hPort = NULL;
+        clientThread->buf_hdr = NULL;
+        clientThread->buf_ptr = NULL;
     }
 
     //
@@ -498,6 +540,49 @@ void PipeServer::PortConnect(PORT_MESSAGE *msg)
     LeaveCriticalSection(&m_lock);
 }
 
+
+//---------------------------------------------------------------------------
+// PortDisconnectHelper
+//---------------------------------------------------------------------------
+
+void PipeServer::PortDisconnectHelper(CLIENT_PROCESS *clientProcess, CLIENT_THREAD *clientThread)
+{
+    if (!clientProcess)
+        return;
+
+    if (clientThread) {
+
+        while (clientThread->in_use)
+            Sleep(3);
+
+#ifdef USE_PROCESS_MAP
+        map_remove(&clientProcess->thread_map, clientThread->idThread);
+#else
+        List_Remove(&clientProcess->threads, clientThread);
+#endif
+        NtClose(clientThread->hPort);
+        if (clientThread->buf_hdr)
+            FreeMsg(clientThread->buf_hdr);
+        Pool_Free(clientThread, sizeof(CLIENT_THREAD));
+    }
+
+    
+#ifdef USE_PROCESS_MAP
+    if (clientProcess->thread_map.nnodes == 0) {
+#else
+    if (! List_Head(&clientProcess->threads)) {
+#endif
+
+        NotifyTargets(clientProcess->idProcess);
+
+#ifdef USE_PROCESS_MAP
+        map_remove(&m_client_map, clientProcess->idProcess);
+#else
+        List_Remove(&m_clients, clientProcess);
+#endif
+        Pool_Free(clientProcess, sizeof(CLIENT_PROCESS));
+    }
+}
 
 //---------------------------------------------------------------------------
 // PortDisconnect
@@ -530,46 +615,9 @@ void PipeServer::PortDisconnect(PORT_MESSAGE *msg)
 
     EnterCriticalSection(&m_lock);
 
-    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
-    clientThread = NULL;
+    PortFindClientUnsafe(msg->ClientId, clientProcess, clientThread);
 
-    while (clientProcess) {
-
-        if (clientProcess->idProcess == msg->ClientId.UniqueProcess) {
-
-            clientThread =
-                (CLIENT_THREAD *)List_Head(&clientProcess->threads);
-            while (clientThread) {
-
-                if (clientThread->idThread == msg->ClientId.UniqueThread) {
-
-                    while (clientThread->in_use)
-                        Sleep(3);
-
-                    List_Remove(&clientProcess->threads, clientThread);
-                    NtClose(clientThread->hPort);
-                    if (clientThread->buf_hdr)
-                        FreeMsg(clientThread->buf_hdr);
-                    Pool_Free(clientThread, sizeof(CLIENT_THREAD));
-                    break;
-                }
-
-                clientThread = (CLIENT_THREAD *)List_Next(clientThread);
-            }
-
-            if (! List_Head(&clientProcess->threads)) {
-
-                NotifyTargets(clientProcess->idProcess);
-
-                List_Remove(&m_clients, clientProcess);
-                Pool_Free(clientProcess, sizeof(CLIENT_PROCESS));
-            }
-
-            break;
-        }
-
-        clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
-    }
+    PortDisconnectHelper(clientProcess, clientThread);
 
     LeaveCriticalSection(&m_lock);
 }
@@ -613,17 +661,31 @@ void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
 
     EnterCriticalSection(&m_lock);
 
-    CLIENT_PROCESS *clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
+    CLIENT_PROCESS *clientProcess = NULL;
+    CLIENT_THREAD *clientThread = NULL;
+#ifdef USE_PROCESS_MAP
+    map_iter_t iter = map_iter();
+	while (map_next(&m_client_map, &iter)) {
+
+        clientProcess = (CLIENT_PROCESS *)iter.value;
+#else
+    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
 
     while (clientProcess) {
-
+#endif
         if (clientProcess->CreateTime.HighPart == CreateTime->HighPart &&
             clientProcess->CreateTime.LowPart  == CreateTime->LowPart) {
 
-            CLIENT_THREAD *clientThread =
-                (CLIENT_THREAD *)List_Head(&clientProcess->threads);
-            while (clientThread) {
+#ifdef USE_PROCESS_MAP
+            map_iter_t sub_iter = map_iter();
+	        while (map_next(&clientProcess->thread_map, &sub_iter)) {
 
+                clientThread = (CLIENT_THREAD *)sub_iter.value;
+#else
+            clientThread = (CLIENT_THREAD *)List_Head(&clientProcess->threads);
+
+            while (clientThread) {
+#endif
                 //
                 // for each thread in the process, assume it is stale,
                 // unless we can open it, and it still has the same
@@ -642,35 +704,34 @@ void PipeServer::PortDisconnectByCreateTime(LARGE_INTEGER *CreateTime)
                     CloseHandle(hThread);
                 }
 
+                //
+                // fix-me: when closing the port without waiting some ms after the 
+                //          thread terminated this fails and the client object is not cleared
+                //
+
                 if (DeleteThread) {
 
-                    while (clientThread->in_use)
-                        Sleep(3);
-
-                    List_Remove(&clientProcess->threads, clientThread);
-                    NtClose(clientThread->hPort);
-                    if (clientThread->buf_hdr)
-                        FreeMsg(clientThread->buf_hdr);
-                    Pool_Free(clientThread, sizeof(CLIENT_THREAD));
                     break;
                 }
 
+#ifndef USE_PROCESS_MAP
                 clientThread = (CLIENT_THREAD *)List_Next(clientThread);
-            }
-
-            if (! List_Head(&clientProcess->threads)) {
-
-                NotifyTargets(clientProcess->idProcess);
-
-                List_Remove(&m_clients, clientProcess);
-                Pool_Free(clientProcess, sizeof(CLIENT_PROCESS));
+#else
+                clientThread = NULL;
+#endif
             }
 
             break;
         }
 
+#ifndef USE_PROCESS_MAP
         clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
+#else
+        clientProcess = NULL;
+#endif
     }
+
+    PortDisconnectHelper(clientProcess, clientThread);
 
     LeaveCriticalSection(&m_lock);
 }
@@ -743,6 +804,46 @@ finish:
 
 
 //---------------------------------------------------------------------------
+// PortFindClientUnsafe
+//---------------------------------------------------------------------------
+
+
+void PipeServer::PortFindClientUnsafe(const CLIENT_ID& ClientId, CLIENT_PROCESS *&clientProcess, CLIENT_THREAD *&clientThread)
+{
+    //
+    // Note: this is not thread safe, you must lock m_lock before calling this function
+    //
+
+#ifdef USE_PROCESS_MAP
+    clientProcess = (CLIENT_PROCESS *)map_get(&m_client_map, ClientId.UniqueProcess);
+    clientThread = clientProcess ? (CLIENT_THREAD *)map_get(&clientProcess->thread_map, ClientId.UniqueThread) : NULL;
+#else
+    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
+    clientThread = NULL;
+
+    while (clientProcess) {
+
+        if (clientProcess->idProcess == ClientId.UniqueProcess) {
+
+            clientThread =
+                (CLIENT_THREAD *)List_Head(&clientProcess->threads);
+            while (clientThread) {
+
+                if (clientThread->idThread == ClientId.UniqueThread)
+                    break;
+                clientThread = (CLIENT_THREAD *)List_Next(clientThread);
+            }
+
+            break;
+        }
+
+        clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
+    }
+#endif
+}
+
+
+//---------------------------------------------------------------------------
 // PortFindClient
 //---------------------------------------------------------------------------
 
@@ -754,27 +855,7 @@ void *PipeServer::PortFindClient(PORT_MESSAGE *msg)
 
     EnterCriticalSection(&m_lock);
 
-    clientProcess = (CLIENT_PROCESS *)List_Head(&m_clients);
-    clientThread = NULL;
-
-    while (clientProcess) {
-
-        if (clientProcess->idProcess == msg->ClientId.UniqueProcess) {
-
-            clientThread =
-                (CLIENT_THREAD *)List_Head(&clientProcess->threads);
-            while (clientThread) {
-
-                if (clientThread->idThread == msg->ClientId.UniqueThread)
-                    break;
-                clientThread = (CLIENT_THREAD *)List_Next(clientThread);
-            }
-
-            break;
-        }
-
-        clientProcess = (CLIENT_PROCESS *)List_Next(clientProcess);
-    }
+    PortFindClientUnsafe(msg->ClientId, clientProcess, clientThread);
 
     if (clientThread)
         clientThread->in_use = TRUE;
@@ -1048,3 +1129,61 @@ MSG_HEADER *PipeServer::Call(MSG_HEADER *msg)
 
     return msg_out;
 }
+
+
+//---------------------------------------------------------------------------
+// IsCallerAdmin
+//---------------------------------------------------------------------------
+
+
+bool PipeServer::IsCallerAdmin()
+{
+    CLIENT_TLS_DATA *TlsData =
+               (CLIENT_TLS_DATA *)TlsGetValue(m_instance->m_TlsIndex);
+
+    bool IsAdmin = false;
+
+    ULONG processId = (ULONG)(ULONG_PTR)TlsData->PortMessage->ClientId.UniqueProcess;
+    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
+    if (processHandle != NULL) {
+        HANDLE hToken;
+        if (OpenProcessToken(processHandle, TOKEN_QUERY, &hToken)) {
+            IsAdmin = SbieIniServer::TokenIsAdmin(hToken, true);
+
+            CloseHandle(hToken);
+        }
+        CloseHandle(processHandle);
+    }
+
+    return IsAdmin;
+}
+
+
+//---------------------------------------------------------------------------
+// IsCallerSigned
+//---------------------------------------------------------------------------
+
+//extern "C" {
+//    NTSTATUS VerifyFileSignature(const wchar_t* FilePath);
+//}
+//
+//bool PipeServer::IsCallerSigned()
+//{
+//    CLIENT_TLS_DATA *TlsData =
+//                (CLIENT_TLS_DATA *)TlsGetValue(m_instance->m_TlsIndex);
+//
+//    NTSTATUS status = STATUS_UNSUCCESSFUL;
+//
+//    ULONG processId = (ULONG)(ULONG_PTR)TlsData->PortMessage->ClientId.UniqueProcess;
+//    HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
+//    if (processHandle != NULL) {
+//        TCHAR fileName[MAX_PATH];
+//        if (GetModuleFileNameEx(processHandle, NULL, fileName, MAX_PATH)) {
+//
+//            status = VerifyFileSignature(fileName);
+//        }
+//        CloseHandle(processHandle);
+//    }
+//
+//    return NT_SUCCESS(status);
+//}

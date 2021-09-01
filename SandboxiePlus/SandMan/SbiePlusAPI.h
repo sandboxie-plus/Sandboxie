@@ -14,6 +14,8 @@ public:
 
 	virtual QString			GetProcessTitle(quint32 pid) { return m_WindowMap.value(pid); }
 
+	virtual bool			IsRunningAsAdmin();
+
 protected:
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
@@ -70,9 +72,24 @@ public:
 
 	const QSet<QString>&	GetRecentPrograms()					{ return m_RecentPrograms; }
 
+	enum EBoxTypes
+	{
+		eDefault = 0,
+		eHardened,
+		//eHasLogApi,
+		eInsecure,
+
+		eUnknown = -1
+	};
+
+	EBoxTypes				GetType() const;
+	
+	class COptionsWindow*	m_pOptionsWnd;
+	class CRecoveryWindow*	m_pRecoveryWnd;
+
 protected:
 	friend class CSbiePlusAPI;
-	virtual bool			CheckOpenToken() const;
+	virtual bool			CheckUnsecureConfig() const;
 
 	virtual bool			TestProgramGroup(const QString& Group, const QString& ProgName);
 	virtual void			EditProgramGroup(const QString& Group, const QString& ProgName, bool bSet);
@@ -116,6 +133,8 @@ public:
 
 	virtual int GetRememberedAction(int Action)					{ return m_RememberedActions.value(Action, -1); }
 	virtual void SetRememberedAction(int Action, int retval)	{ m_RememberedActions.insert(Action, retval); }
+
+	static QString ImageTypeToStr(quint32 type);
 
 protected:
 	QMap<int, int>			m_RememberedActions;

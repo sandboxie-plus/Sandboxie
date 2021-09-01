@@ -49,16 +49,7 @@ extern "C" {
 
 
 SBIEAPI_EXPORT
-LONG SbieApi_CallZero(ULONG api_code);
-
-SBIEAPI_EXPORT
-LONG SbieApi_CallOne(ULONG api_code, ULONG_PTR arg);
-
-SBIEAPI_EXPORT
-LONG SbieApi_CallTwo(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2);
-
-SBIEAPI_EXPORT
-LONG SbieApi_CallThree(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3);
+LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...);
 
 SBIEAPI_EXPORT LONG SbieApi_GetVersion(
     WCHAR *version_string);         // WCHAR [16]
@@ -219,7 +210,6 @@ LONG SbieApi_MonitorPut2(
 
 SBIEAPI_EXPORT
 LONG SbieApi_MonitorGetEx(
-	ULONG *SeqNum,
 	ULONG *Type,
     ULONG *Pid,
     ULONG *Tid,
@@ -315,7 +305,7 @@ LONG SbieApi_QuerySymbolicLink(
 
 
 SBIEAPI_EXPORT
-LONG SbieApi_ReloadConf(ULONG session_id);
+LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);
 
 
 SBIEAPI_EXPORT
@@ -374,6 +364,16 @@ LONG SbieApi_ProcessExemptionControl(
 	ULONG *OldState);
 
 //---------------------------------------------------------------------------
+
+
+SBIEAPI_EXPORT 
+void* SbieDll_GetSysFunction(
+    const WCHAR* name);
+
+SBIEAPI_EXPORT 
+BOOL SbieDll_RunStartExe(
+    const WCHAR* cmd, 
+    const wchar_t* boxname);
 
 #ifdef __cplusplus
 }

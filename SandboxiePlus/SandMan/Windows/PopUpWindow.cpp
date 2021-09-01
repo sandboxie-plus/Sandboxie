@@ -39,14 +39,18 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 	m_pActionCopy->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pActionCopy);
 
-	// set always on top
-	SetWindowPos((HWND)this->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	m_iTopMost = 0;
+	SetWindowPos((HWND)this->winId(), 0, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	
+	m_uTimerID = startTimer(1000);
 
 	m_ResetPosition = !restoreGeometry(theConf->GetBlob("PopUpWindow/Window_Geometry"));
 }
 
 CPopUpWindow::~CPopUpWindow()
 {
+	killTimer(m_uTimerID);
+
 	theConf->SetBlob("PopUpWindow/Window_Geometry", saveGeometry());
 }
 
@@ -79,6 +83,8 @@ void CPopUpWindow::RemoveEntry(CPopUpEntry* pEntry)
 
 void CPopUpWindow::Show()
 {
+	Poke();
+
 	QScreen *screen = this->windowHandle()->screen();
 	QRect scrRect = screen->availableGeometry();
 
@@ -100,6 +106,14 @@ void CPopUpWindow::Show()
 	this->show();
 }
 
+void CPopUpWindow::Poke()
+{
+	if (!this->isVisible() || m_iTopMost <= -5) {
+		SetWindowPos((HWND)this->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		m_iTopMost = 5;
+	}
+}
+
 void CPopUpWindow::closeEvent(QCloseEvent *e)
 {
 	for (int i = 0; i < ui.table->rowCount(); i++)
@@ -115,6 +129,16 @@ void CPopUpWindow::closeEvent(QCloseEvent *e)
 	e->ignore();
 
 	this->hide();
+}
+
+void CPopUpWindow::timerEvent(QTimerEvent* pEvent)
+{
+	if (pEvent->timerId() != m_uTimerID)
+		return;
+
+	if (m_iTopMost > -5 && (--m_iTopMost == 0)) {
+		SetWindowPos((HWND)this->winId(), HWND_NOTOPMOST , 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+	}
 }
 
 void CPopUpWindow::AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
@@ -287,7 +311,7 @@ void CPopUpWindow::SendPromptResult(CPopUpPrompt* pEntry, int retval)
 		pEntry->m_pProcess.objectCast<CSbieProcess>()->SetRememberedAction(pEntry->m_Result["id"].toInt(), retval);
 }
 
-void CPopUpWindow::AddFileToRecover(const QString& FilePath, const QString& BoxName, quint32 ProcessId)
+void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, const QString& BoxName, quint32 ProcessId)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 	if (!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended())
@@ -299,7 +323,10 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, const QString& BoxN
 		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(BoxName).replace("_", " "))
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
-	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxName, this);
+	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
+		BoxPath = theAPI->GetBoxedPath(BoxName, FilePath);
+
+	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, BoxName, this);
 
 	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
 	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);
@@ -352,10 +379,10 @@ void CPopUpWindow::OnRecoverFile(int Action)
 	}
 
 	QString FileName = pEntry->m_FilePath.mid(pEntry->m_FilePath.lastIndexOf("\\") + 1);
-	QString BoxedFilePath = theAPI->GetBoxedPath(pEntry->m_BoxName, pEntry->m_FilePath);
+	//QString BoxedFilePath = theAPI->GetBoxedPath(pEntry->m_BoxName, pEntry->m_FilePath); // pEntry->m_BoxPath
 
 	QList<QPair<QString, QString>> FileList;
-	FileList.append(qMakePair(BoxedFilePath, RecoveryFolder + "\\" + FileName));
+	FileList.append(qMakePair(pEntry->m_BoxPath, RecoveryFolder + "\\" + FileName));
 
 	SB_PROGRESS Status = theGUI->RecoverFiles(FileList, Action);
 	if (Status.GetStatus() == OP_ASYNC)

@@ -51,6 +51,8 @@ NTSTATUS Sbie_SepFilterToken_KernelMode(
     void        **NewToken
 );
 
+BOOLEAN Token_Init_SbieLogin(void);
+
 static BOOLEAN Token_Init_SepFilterToken(void);
 
 static void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject);
@@ -145,7 +147,7 @@ static UCHAR AnonymousLogonSid[12] = {
     SECURITY_ANONYMOUS_LOGON_RID,0,0,0      // SubAuthority
 };
 
-static UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
+UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
 
 static UCHAR SystemLogonSid[12] = {
 	1,                                      // Revision
@@ -222,24 +224,7 @@ _FX BOOLEAN Token_Init(void)
 
 	// SbieLogin BEGIN
 	if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE))
-	{
-		WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
-		UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
-		if (GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName) && AccountName.Length < 64)
-		{
-			wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
-			AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
-			//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
-
-			SID_NAME_USE use;
-			ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
-			WCHAR DomainBuff[20]; // doesn't work without this
-			UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
-
-			SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
-			//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
-		}
-	}
+        Token_Init_SbieLogin();
 	// SbieLogin END
 
     //
@@ -252,6 +237,34 @@ _FX BOOLEAN Token_Init(void)
     //
     // finish
     //
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Token_Init_SbieLogin
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Token_Init_SbieLogin(void)
+{
+    WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
+	UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
+	if (GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName) && AccountName.Length < 64)
+	{
+		wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
+		AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
+		//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
+
+		SID_NAME_USE use;
+		ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
+		WCHAR DomainBuff[20]; // doesn't work without this
+		UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
+
+		SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
+		//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
+	}
 
     return TRUE;
 }
@@ -482,6 +495,15 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
         Conf_Get_Boolean(proc->box->name, L"DropAdminRights", 0, FALSE);
 
     DropRights = (proc->drop_rights ? -1 : 0);
+
+    //
+    // special allowance for MSIServer - it does not seem to be needed with the CreateWaitableTimerW hook
+    //
+    //if (DropRights && !proc->image_from_box && _wcsicmp(proc->image_name, L"msiexec.exe") == 0
+    //    && Conf_Get_Boolean(proc->box->name, L"MsiInstallerExemptions", 0, FALSE)) 
+    //{
+    //    DropRights = 0;
+    //}
 
     // DbgPrint("   Drop rights %d - %d <%S>\n", proc->drop_rights, proc->pid, proc->image_name);
 
@@ -1237,8 +1259,8 @@ _FX void *Token_RestrictHelper1(
             if (SidInToken && SidInToken[1] >= 1) { // SubAuthorityCount >= 1
 
 				PSID NewSid = NULL;
-
-				// SbieLogin BEGIN
+                
+                // SbieLogin BEGIN
 				if (Conf_Get_Boolean(proc->box->name, L"SandboxieLogon", 0, FALSE))
 				{
 					if (SandboxieLogonSid[0] != 0)
@@ -1558,6 +1580,8 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
     // on Windows Vista and later, we need to clear the PrimaryTokenFrozen
     // bit in the EPROCESS structure before we can replace the primary token
 
+    // Hard Offset Dependency
+
     // dt nt!_eprocess
 
     if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
@@ -1646,6 +1670,10 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
             }
 
         }
+
+        /*WCHAR msg[256];
+		swprintf(msg, L"BAM: Flags2_Offset=%d MitigationFlags_Offset=%d SignatureLevel_Offset=%d\n", Flags2_Offset, MitigationFlags_Offset, SignatureLevel_Offset);
+		Session_MonitorPut(MONITOR_OTHER, msg, PsGetCurrentProcessId());*/
 
 #endif _WIN64
 

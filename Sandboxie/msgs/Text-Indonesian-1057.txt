@@ -3075,7 +3075,7 @@ Pengecualian berikut ini mengizinkan peramban Web yang berjalan dalam sandbox in
 .
 
 4323;txt;01
-Paksa %2 agar berjalan dalam sandbox ini (Khusus versi terdaftar)
+Paksa %2 agar berjalan dalam sandbox ini
 .
 
 4324;txt;02

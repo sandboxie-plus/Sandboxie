@@ -111,7 +111,7 @@ typedef struct _FILE_SNAPSHOT {
 //---------------------------------------------------------------------------
 
 
-NTSTATUS File_GetName(
+SBIEDLL_EXPORT NTSTATUS File_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, ULONG *OutFlags);
 
@@ -260,7 +260,7 @@ static NTSTATUS File_SetAttributes(
 
 static NTSTATUS File_SetDisposition(
     HANDLE FileHandle, IO_STATUS_BLOCK *IoStatusBlock,
-    void *FileInformation, ULONG Length);
+    void *FileInformation, ULONG Length, FILE_INFORMATION_CLASS FileInformationClass);
 
 static NTSTATUS File_NtDeleteFile(OBJECT_ATTRIBUTES *ObjectAttributes);
 
@@ -282,12 +282,12 @@ static void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey);
 
 
 static P_NtOpenFile                 __sys_NtOpenFile                = NULL;
-static P_NtCreateFile               __sys_NtCreateFile              = NULL;
+       P_NtCreateFile               __sys_NtCreateFile              = NULL;
 static P_NtQueryAttributesFile      __sys_NtQueryAttributesFile     = NULL;
 static P_NtQueryFullAttributesFile  __sys_NtQueryFullAttributesFile = NULL;
 static P_NtQueryInformationFile     __sys_NtQueryInformationFile    = NULL;
 static P_GetFinalPathNameByHandle   __sys_GetFinalPathNameByHandleW = NULL;
-static P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile      = NULL;
+       P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile      = NULL;
 static P_NtQueryDirectoryFileEx     __sys_NtQueryDirectoryFileEx    = NULL;
 static P_NtSetInformationFile       __sys_NtSetInformationFile      = NULL;
 static P_NtDeleteFile               __sys_NtDeleteFile              = NULL;
@@ -350,6 +350,8 @@ static ULONG File_PublicUserLen = 0;
 
 static WCHAR *File_HomeNtPath = NULL;
 static ULONG File_HomeNtPathLen = 0;
+
+static BOOLEAN File_DriveAddSN = FALSE;
 
 static BOOLEAN File_Windows2000 = FALSE;
 
@@ -472,7 +474,7 @@ _FX NTSTATUS File_GetName(
             }
         }
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+        if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
             name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
@@ -816,8 +818,17 @@ check_sandbox_prefix:
             return STATUS_BAD_INITIAL_PC;
         }
 
+        ULONG len = _DriveLen + 1; /* drive letter */
+
+        // skip any suffix after the drive letter
+        if (File_DriveAddSN) {
+            WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
+            if (ptr)
+                len = (ULONG)(ptr - *OutTruePath);
+        }
+
         File_GetName_FixTruePrefix(TlsData,
-            OutTruePath, &length, _DriveLen + 1 /* drive letter */,
+            OutTruePath, &length, len,
             drive->path, drive->len);
 
         convert_links_again = TRUE;
@@ -1157,6 +1168,15 @@ check_sandbox_prefix:
             name += _DriveLen;
             *name = drive_letter;
             ++name;
+
+            if (File_DriveAddSN && *drive->sn)
+            {
+                *name = L'~';
+                ++name;
+                wcscpy(name, drive->sn);
+                name += 9;
+            }
+
             *name = L'\0';
 
             if (length == drive_len) {
@@ -2229,7 +2249,7 @@ _FX BOOLEAN File_FindSnapshotPath(WCHAR** CopyPath)
 	RtlInitUnicodeString(&objname, *CopyPath);
 	status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
 	if (!(status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND))
-		return TRUE; // file is present directly in copy path
+		return FALSE; // file is present directly in copy path
 
 	for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != NULL; Cur_Snapshot = Cur_Snapshot->Parent)
 	{
@@ -2246,7 +2266,7 @@ _FX BOOLEAN File_FindSnapshotPath(WCHAR** CopyPath)
 		}
 	}
 
-	return FALSE;
+	return FALSE; // this file is not sandboxed
 }
 
 
@@ -2419,6 +2439,23 @@ _FX NTSTATUS File_NtCreateFileImpl(
 
     if (Dll_OsBuild >= 8400 && Dll_ImageType == DLL_IMAGE_TRUSTED_INSTALLER)
         DesiredAccess &= ~ACCESS_SYSTEM_SECURITY;   // for TiWorker.exe (W8)
+
+    // MSIServer without system
+    extern BOOLEAN Scm_MsiServer_Systemless;
+    if ((DesiredAccess & ACCESS_SYSTEM_SECURITY) != 0 && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+        && ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 4, L".msi") == 0
+        ){
+
+        //
+        // MSIServer when accessing \??\C:\WINDOWS\Installer\???????.msi files will get a PRIVILEGE_NOT_HELD error when requesting ACCESS_SYSTEM_SECURITY
+        // However, if we broadly clear this flag we will get Warning 1946 Property 'System.AppUserModel.ID' could not be set on *.lnk files
+        //
+
+        DesiredAccess &= ~ACCESS_SYSTEM_SECURITY;
+    }
+
+
 
     __try {
 
@@ -2998,6 +3035,25 @@ ReparseLoop:
                 //  while(!IsDebuggerPresent()) Sleep(50); __debugbreak();
                 //}
 
+                // MSIServer without system
+                if (status == STATUS_ACCESS_DENIED && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER //&& Scm_MsiServer_Systemless
+                    && ObjectAttributes->ObjectName->Buffer && ObjectAttributes->ObjectName->Length >= 34
+                    && _wcsicmp(ObjectAttributes->ObjectName->Buffer + (ObjectAttributes->ObjectName->Length / sizeof(WCHAR)) - 11, L"\\Config.Msi") == 0
+                    ) {
+                    
+                    //
+                    // MSI must not fail accessing \??\C:\WINDOWS\Installer\Config.msi but this folder is readable only for system,
+                    // so we create a boxed copy instead and open it
+                    //
+        
+                    RtlInitUnicodeString(&objname, CopyPath);
+                    status = __sys_NtCreateFile(
+                        FileHandle, DesiredAccess, &objattrs,
+                        IoStatusBlock, AllocationSize, FileAttributes,
+                        ShareAccess, FILE_OPEN_IF, FILE_DIRECTORY_FILE,
+                        EaBuffer, EaLength);
+                }
+
                 //
                 // special case for SandboxieCrypto on Windows Vista,
                 // which tries to open catdb that are locked by
@@ -3123,6 +3179,17 @@ ReparseLoop:
     //
 
     if (! HaveCopyParent) {
+
+        if (!HaveTrueParent && Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless
+            && wcsstr(CopyPath, L"\\system32\\config\\systemprofile\\") != NULL) {
+
+            //
+            // MSI must not fail accessing \??\C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\ 
+            // but this folder is readable only for system, so we create a boxed copy instead and open it
+            //
+
+            HaveTrueParent = TRUE;
+        }
 
         if (HaveTrueParent || HaveSnapshotParent) {
 
@@ -3381,8 +3448,7 @@ ReparseLoop:
                         // or was deleted, then record it for recovery
                         //
 
-                        IsRecover =
-                            File_RecordRecover(*FileHandle, TruePath);
+                        IsRecover = File_RecordRecover(*FileHandle, TruePath);
                     }
                 }
 
@@ -5532,7 +5598,7 @@ _FX NTSTATUS File_NtSetInformationFile(
             status = STATUS_INFO_LENGTH_MISMATCH;
         else
             status = File_SetDisposition(
-                FileHandle, IoStatusBlock, FileInformation, Length);
+                FileHandle, IoStatusBlock, FileInformation, Length, FileInformationClass);
 
     //
     // rename request
@@ -5813,32 +5879,30 @@ has_copy_path:
 
 _FX NTSTATUS File_SetDisposition(
     HANDLE FileHandle, IO_STATUS_BLOCK *IoStatusBlock,
-    void *FileInformation, ULONG Length)
+    void *FileInformation, ULONG Length, FILE_INFORMATION_CLASS FileInformationClass)
 {
     ULONG LastError;
     THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
     UNICODE_STRING uni;
-    WCHAR *DosPath;
     NTSTATUS status;
     ULONG mp_flags;
+    ULONG FileFlags;
 
     //
     // check if the specified path is an open or closed path
     //
 
-    RtlInitUnicodeString(&uni, L"");
-
     mp_flags = 0;
-    DosPath = NULL;
+    FileFlags = 0;
 
     Dll_PushTlsNameBuffer(TlsData);
 
     __try {
 
         WCHAR *TruePath, *CopyPath;
-        ULONG FileFlags;
 
+        RtlInitUnicodeString(&uni, L"");
         status = File_GetName(
                     FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
 
@@ -5848,35 +5912,6 @@ _FX NTSTATUS File_SetDisposition(
 
             if (PATH_IS_CLOSED(mp_flags))
                 status = STATUS_ACCESS_DENIED;
-
-            else if (PATH_NOT_OPEN(mp_flags)) {
-
-                status = File_DeleteDirectory(CopyPath, TRUE);
-
-                if (status != STATUS_DIRECTORY_NOT_EMPTY)
-                    status = STATUS_SUCCESS;
-
-                if (NT_SUCCESS(status) && Dll_ChromeSandbox) {
-
-                    //
-                    // if this is a Chrome sandbox process, we have
-                    // to pass a DOS path to NtDeleteFile rather
-                    // than a file handle
-                    //
-
-                    ULONG len = wcslen(TruePath);
-                    DosPath = Dll_AllocTemp((len + 8) * sizeof(WCHAR));
-                    wmemcpy(DosPath, TruePath, len + 1);
-                    if (SbieDll_TranslateNtToDosPath(DosPath)) {
-                        len = wcslen(DosPath);
-                        wmemmove(DosPath + 4, DosPath, len + 1);
-                        wmemcpy(DosPath, File_BQQB, 4);
-                    } else {
-                        Dll_Free(DosPath);
-                        DosPath = NULL;
-                    }
-                }
-            }
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
@@ -5888,33 +5923,49 @@ _FX NTSTATUS File_SetDisposition(
     //
     // handle the request appropriately
     //
-
-    if (PATH_IS_OPEN(mp_flags)) {
+  
+    if (PATH_IS_OPEN(mp_flags) || (FileFlags & FGN_IS_BOXED_PATH) != 0) {
 
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,
-            FileInformation, Length, FileDispositionInformation);
+            FileInformation, Length, FileInformationClass);
 
     } else if (NT_SUCCESS(status)) {
-
-        OBJECT_ATTRIBUTES objattrs;
-
-        InitializeObjectAttributes(
-            &objattrs, &uni, OBJ_CASE_INSENSITIVE, FileHandle, NULL);
-
-        if (DosPath) {
-            objattrs.RootDirectory = NULL;
-            RtlInitUnicodeString(&uni, DosPath);
-        }
-
-        status = File_NtDeleteFileImpl(&objattrs);
 
         IoStatusBlock->Status = 0;
         IoStatusBlock->Information = 8;
     }
 
-    if (DosPath)
-        Dll_Free(DosPath);
+    if (NT_SUCCESS(status) && !PATH_IS_OPEN(mp_flags)) {
+
+        BOOLEAN DeleteOnClose;
+
+        if (FileInformationClass == FileDispositionInformation) {
+
+            DeleteOnClose = ((FILE_DISPOSITION_INFORMATION*)FileInformation)->DeleteFileOnClose;
+
+        } else if (FileInformationClass == FileDispositionInformationEx) { // Win 10 RS1 and later
+
+            ULONG Flags = ((FILE_DISPOSITION_INFORMATION_EX*)FileInformation)->Flags;
+
+            if ((Flags & FILE_DISPOSITION_DELETE) != 0)
+                DeleteOnClose = TRUE;
+            else if((Flags & FILE_DISPOSITION_ON_CLOSE) != 0) // FILE_DISPOSITION_ON_CLOSE with no FILE_DISPOSITION_DELETE means clear flag
+                DeleteOnClose = FALSE;
+        }
+
+
+        EnterCriticalSection(&File_HandleOnClose_CritSec);
+
+        FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, FileHandle);
+        if (!on_close) {
+            on_close = map_insert(&File_HandleOnClose, FileHandle, NULL, sizeof(FILE_ON_CLOSE));
+        }
+
+        on_close->DeleteOnClose = DeleteOnClose;
+
+        LeaveCriticalSection(&File_HandleOnClose_CritSec);
+    }
 
     SetLastError(LastError);
     return status;

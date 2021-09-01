@@ -27,6 +27,43 @@
 #include "process.h"
 
 
+
+//---------------------------------------------------------------------------
+// Defines
+//---------------------------------------------------------------------------
+
+
+#define PROCESS_DENIED_ACCESS_MASK                              \
+        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
+            PROCESS_VM_READ | PROCESS_QUERY_INFORMATION |       \
+            PROCESS_QUERY_LIMITED_INFORMATION )
+
+#define THREAD_DENIED_ACCESS_MASK                               \
+        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
+            THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION |     \
+            THREAD_QUERY_LIMITED_INFORMATION )
+
+
+//---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+
+struct _THREAD {
+
+#ifndef USE_PROCESS_MAP
+    LIST_ELEM list_elem;
+#endif 
+
+    HANDLE tid;
+
+    void *token_object;
+    BOOLEAN token_CopyOnOpen;
+    BOOLEAN token_EffectiveOnly;
+    SECURITY_IMPERSONATION_LEVEL token_ImpersonationLevel;
+
+};
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -40,7 +77,9 @@ BOOLEAN Thread_InitProcess(PROCESS *proc);
 
 void Thread_ReleaseProcess(PROCESS *proc);
 
+#ifdef XP_SUPPORT
 BOOLEAN Thread_AdjustGrantedAccess(void);
+#endif
 
 void Thread_SetThreadToken(PROCESS *proc);
 
@@ -53,6 +92,11 @@ NTSTATUS Thread_StoreThreadToken(PROCESS *proc);
 NTSTATUS Thread_CheckTokenObject(
     PROCESS *proc, void *Object, ACCESS_MASK GrantedAccess);
 
+THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid);
+
+NTSTATUS Thread_CheckObject_Common(
+    PROCESS *proc, PEPROCESS ProcessObject,
+    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1);
 
 //---------------------------------------------------------------------------
 

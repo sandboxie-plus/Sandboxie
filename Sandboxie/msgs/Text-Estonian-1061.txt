@@ -2763,7 +2763,7 @@ Järgnevad erandid lubavad selles sandboxis töötavatel veebibrauseritel teha m
 .
 
 4323;txt;01
-Sunni %2 töötama selles sandboxis (ainult registreeritud versioon)
+Sunni %2 töötama selles sandboxis
 .
 
 4325;txt;02

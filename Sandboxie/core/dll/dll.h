@@ -110,6 +110,8 @@ enum {
     DLL_IMAGE_OFFICE_EXCEL,
     DLL_IMAGE_FLASH_PLAYER_SANDBOX,
     DLL_IMAGE_PLUGIN_CONTAINER,
+    DLL_IMAGE_OTHER_WEB_BROWSER,
+    DLL_IMAGE_OTHER_MAIL_CLIENT,
     DLL_IMAGE_LAST
 };
 
@@ -180,6 +182,12 @@ typedef struct _THREAD_DATA {
     ULONG file_dont_strip_write_access;
 
     //
+    // misc modules
+    //
+
+    HANDLE  scm_last_own_token;
+
+    //
     // proc module:  image path for a child process being started
     //
 
@@ -205,6 +213,8 @@ typedef struct _THREAD_DATA {
     LPARAM          gui_dde_post_lparam;
 
     ULONG           gui_create_window;
+
+    BOOLEAN         gui_hooks_installed;
 
     BOOL            gui_should_suppress_msgbox;
 
@@ -365,6 +375,8 @@ ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckObjec
 
 void Dll_InitExeEntry(void);
 
+ULONG Dll_GetImageType(const WCHAR* ImageName);
+
 int Dll_NlsStrCmp(const WCHAR *s1, const WCHAR *s2, ULONG len);
 
 void *Dll_SidStringToSid(const WCHAR *SidString);
@@ -451,6 +463,9 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
+typedef void(*P_CloseHandler)(HANDLE handle);
+BOOLEAN File_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+BOOLEAN File_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
 
 //---------------------------------------------------------------------------
 // Functions (key)
@@ -486,6 +501,9 @@ void Key_DeleteValueFromCLSID(
 void Sxs_ActivateDefaultManifest(void *ImageBase);
 
 ULONG Sxs_CheckManifestForCreateProcess(const WCHAR *DosPath);
+
+ULONG Sxs_CheckManifestForElevation(const WCHAR* DosPath,
+    BOOLEAN* pAsInvoker, BOOLEAN* pRequireAdministrator, BOOLEAN* pHighestAvailable);
 
 BOOLEAN Sxs_KeyCallback(const WCHAR *path, HANDLE *out_handle);
 
@@ -576,6 +594,7 @@ BOOLEAN Taskbar_SHCore_Init(HMODULE hmodule);
 // Functions (init for DllMain)
 //---------------------------------------------------------------------------
 
+BOOLEAN File_InitHandles(void);
 
 BOOLEAN Key_Init(void);
 
@@ -727,7 +746,7 @@ BOOLEAN MsCorEE_Init(HMODULE hmodule);
 
 void Custom_ComServer(void);
 
-void Custom_Load_UxTheme(void);
+//void Custom_Load_UxTheme(void);
 
 NTSTATUS StopTailCallOptimization(NTSTATUS status);
 
@@ -760,14 +779,9 @@ WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG*
 
 BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
 
-NTSTATUS Config_GetSettingsForImageName(
-    const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
+BOOLEAN Config_String2Bool(const WCHAR* value, BOOLEAN defval);
 
 BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);
-
-WCHAR* Config_GetTagValue(WCHAR* str, WCHAR** value, ULONG* len, WCHAR sep);
-
-BOOLEAN Config_FindTagValue(WCHAR* string, const WCHAR* name, WCHAR* value, ULONG value_size, const WCHAR* deftext, WCHAR sep);
 
 //---------------------------------------------------------------------------
 

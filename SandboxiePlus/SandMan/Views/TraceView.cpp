@@ -4,6 +4,7 @@
 #include "../QSbieAPI/SbieAPI.h"
 #include "..\Models\TraceModel.h"
 #include "..\..\MiscHelpers\Common\Common.h"
+#include "SbieView.h"
 
 class CTraceFilterProxyModel : public CSortFilterProxyModel
 {
@@ -70,6 +71,9 @@ CTraceView::CTraceView(QWidget* parent) : CPanelWidget<QTreeViewEx>(parent)
 	connect(m_pTraceTid, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetTidFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceTid);
 
+	m_pOnlyCurrent = new QCheckBox(tr("Filter selected box only"));
+	m_pTraceToolBar->addWidget(m_pOnlyCurrent);
+
 	m_pMainLayout->setSpacing(0);
 
 	m_pMainLayout->insertWidget(0, m_pTraceToolBar);
@@ -119,9 +123,13 @@ CTraceView::~CTraceView()
 
 void CTraceView::Refresh()
 {
-	QList<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
+	QList<CSandBoxPtr>Boxes;
+	if(m_pOnlyCurrent->isChecked())
+		Boxes = theGUI->GetBoxView()->GetSelectedBoxes();
+
+	QVector<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
 	//m_pTraceModel->Sync(ResourceLog, Pids);
-	QList<QVariant> Added = m_pTraceModel->Sync(ResourceLog);
+	QList<QVariant> Added = m_pTraceModel->Sync(ResourceLog, Boxes.count() == 1 ? Boxes.first().data() : NULL);
 
 	if (m_pTraceModel->IsTree())
 	{

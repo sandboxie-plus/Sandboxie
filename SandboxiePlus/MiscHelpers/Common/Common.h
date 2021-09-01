@@ -19,6 +19,9 @@ MISCHELPERS_EXPORT typedef QPair<QString,QString> StrPair;
 MISCHELPERS_EXPORT StrPair Split2(const QString& String, QString Separator = "=", bool Back = false);
 MISCHELPERS_EXPORT QStringList SplitStr(const QString& String, QString Separator);
 
+typedef MISCHELPERS_EXPORT QMap<QString,QString> TArguments;
+TArguments MISCHELPERS_EXPORT GetArguments(const QString& Arguments, QChar Separator = L';', QChar Assigner = L'=', QString* First = NULL, bool bLowerKeys = true, bool bReadEsc = false);
+
 MISCHELPERS_EXPORT QString UnEscape(QString Text);
 
 MISCHELPERS_EXPORT QString FormatSize(quint64 Size, int Precision = 2);

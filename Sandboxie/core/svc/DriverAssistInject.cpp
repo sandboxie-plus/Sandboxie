@@ -107,7 +107,7 @@ void DriverAssist::InjectLow(void *_msg)
     // notify driver that we successfully injected the lowlevel code
     //
 
-    if (SbieApi_CallOne(API_INJECT_COMPLETE, msg->process_id) == 0)
+    if (SbieApi_Call(API_INJECT_COMPLETE, 1, (ULONG_PTR)msg->process_id) == 0)
         errlvl = 0;
     else
         errlvl = 0x99;

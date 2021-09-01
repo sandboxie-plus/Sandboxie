@@ -45,6 +45,8 @@ typedef ULONG (*P_ObQueryNameInfo)(void *Object);
 
 BOOLEAN Obj_Init(void);
 
+void Obj_Unload(void);
+
 NTSTATUS Obj_GetName(
     POOL *pool, void *Object,
     OBJECT_NAME_INFORMATION **Name, ULONG *NameLength);

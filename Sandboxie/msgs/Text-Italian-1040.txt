@@ -17,7 +17,7 @@ SBIE1103 Avvio del driver di Sandboxie (SbieDrv) versione %2 fallito
 .
 
 1104;evt;err;01
-SBIE1104 Risorse del sistema non sufficenti per completare l'avvio
+SBIE1104 Risorse del sistema non sufficienti per completare l'avvio
 .
 
 1105;evt;err;01
@@ -36,9 +36,9 @@ SBIE1106 Errore: %2, dettagli: %3
 SBIE1108 Impossibile analizzare la procedura %2
 .
 
-1109;evt;err;01
-SBIE1109 Informazioni di licenza non valide:  %2
-.
+# 1109;evt;err;01
+# SBIE1109 Informazioni di licenza non valide:  %2
+# .
 
 1110;evt;err;01
 SBIE1110 Impossibile intercettare il tipo %3, errore: %2
@@ -105,12 +105,12 @@ SBIE1153 Avvio di Sandboxie fallito. Chiudere tutti i programmi e reinstallare S
 #----------------------------------------------------------------------------
 
 1201;pop;err;01
-SBIE1201 Memoria non sufficente
+SBIE1201 Memoria non sufficiente
 .
 
-1202;pop;err;01
-SBIE1202 Impossibile aggiornare le informazioni di licenza: %2
-.
+# 1202;pop;err;01
+# SBIE1202 Impossibile aggiornare le informazioni di licenza: %2
+# .
 
 1203;pop;err;01
 SBIE1203 Impossibile creare l'elenco dei percorsi (errore in %2)
@@ -132,17 +132,17 @@ SBIE1212 Impossibile creare la cartella '%3' %2
 SBIE1213 Impossibile creare la cartella oggetto '%3' %2
 .
 
-1214;pop;err;01
-SBIE1214 Impossibile inserire SbieDll %2
-.
+# 1214;pop;err;01
+# SBIE1214 Impossibile inserire SbieDll %2
+# .
 
-1215;pop;err;01
-SBIE1215 Impossibile risolvere il percorso per l'elaborazione dell'immagine %2
-.
+# 1215;pop;err;01
+# SBIE1215 Impossibile risolvere il percorso per l'elaborazione dell'immagine %2
+# .
 
-1216;pop;err;01
-SBIE1216 Impossibile richiedere l'ID di sicurezza %2
-.
+# 1216;pop;err;01
+# SBIE1216 Impossibile richiedere l'ID di sicurezza %2
+# .
 
 # 1217;pop;err;01
 # SBIE1217 Impossibile trovare il processo principale
@@ -156,12 +156,16 @@ SBIE1216 Impossibile richiedere l'ID di sicurezza %2
 SBIE1222 Impossibile restringere il token: %2
 .
 
-1223;pop;err;01
-SBIE1223 Impossibile sostituire il token: %2
-.
+# 1223;pop;err;01
+# SBIE1223 Impossibile sostituire il token: %2
+# .
 
-1224;pop;err;01
-SBIE1224 Impossibile richiedere il token: %2
+# 1224;pop;err;01
+# SBIE1224 Impossibile richiedere il token: %2
+# .
+
+1231;pop;err;01
+SBIE1231 Avvio fallito per il processo %3 %2
 .
 
 1241;pop;err;01
@@ -169,7 +173,7 @@ SBIE1241 Impossibile montare la chiave di registro: %2
 .
 
 1242;pop;err;01
-SBIE1242 Svuotamento del buffer di monitoraggio
+SBIE1242 Overflow del buffer di controllo
 .
 
 #----------------------------------------------------------------------------
@@ -186,13 +190,13 @@ SBIE1301 Il programma '%2' non è stato avviato nell'area virtuale
 # SBIE1302 L'area virtuale '%2' non è definita o non è abilitata
 # .
 
-1303;pop;inf;01
-SBIE1303 È possibile utilizzare solo un'area virtuale per volta
-.
+# 1303;pop;inf;01
+# SBIE1303 È possibile utilizzare solo un'area virtuale per volta
+# .
 
-1304;pop;inf;01
-SBIE1304 Simulazione di input di tastiera o mouse da parte del processo '%2' bloccata
-.
+# 1304;pop;inf;01
+# SBIE1304 Simulazione di input di tastiera o mouse da parte del processo '%2' bloccata
+# .
 
 1306;pop;inf;01
 SBIE1306 Impossibile scaricare il driver di Sandboxie (SbieDrv) in questo momento
@@ -210,28 +214,44 @@ SBIE1308 A causa di restrizioni, non è consentito l'avvio del programma - %2
 SBIE1309 Tentativo di modifica della password dell'account negato
 .
 
-1310;pop;inf;01
-SBIE1310 Le funzionalità avanzate sono state disabilitate. Per riattivarle è necessario riattivare la licenza.
-.
+# 1310;pop;inf;01
+# SBIE1310 Le funzionalità avanzate sono state disabilitate. Per riattivarle è necessario riattivare la licenza.
+# .
 
-1311;pop;inf;01
-SBIE1311 Richiesta di modifica dello sfondo del desktop da parte del processo '%2' bloccata
-.
+# 1311;pop;inf;01
+# SBIE1311 Richiesta di modifica dello sfondo del desktop da parte del processo '%2' bloccata
+# .
 
-1312;pop;inf;01
-SBIE1312 Richiesta di esecuzione nell'area virtuale di un programma DOS a 16 bit bloccata
-.
+# 1312;pop;inf;01
+# SBIE1312 Richiesta di esecuzione nell'area virtuale di un programma DOS a 16 bit bloccata
+# .
 
-1313;pop;inf;01
-SBIE1313 Accesso diretto al disco da parte del processo '%2' bloccato
-.
+# 1313;pop;inf;01
+# SBIE1313 Accesso diretto al disco da parte del processo '%2' bloccato
+# .
 
 1314;pop;inf;01
 SBIE1314 Richiesta di modifica delle impostazioni di rete/del firewall da parte del processo '%2' bloccata
 .
 
-1315;pop;inf;01
-SBIE1315 Probabilmente la causa è il conflitto con il programma: %2
+# 1315;pop;inf;01
+# SBIE1315 Probabilmente la causa è il conflitto con il programma: %2
+# .
+
+1316;pop;inf;01
+SBIE1316 Richiesta di creazione dell'evento del dispositivo nell'area virtuale bloccata
+.
+
+1319;pop;inf;01
+SBIE1319 Spooler di stampa su file bloccato, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 Per consentire allo spooler di stampa di scrivere all'esterno dell'area virtuale per questo processo, fare doppio clic su questo messaggio
+.
+
+1399;pop;inf;01
+%0
 .
 
 #----------------------------------------------------------------------------
@@ -295,7 +315,7 @@ SBIE1412 Nel testo: %2
 #----------------------------------------------------------------------------
 
 2101;pop;inf;01
-SBIE2101 %2
+SBIE2101 Nome oggetto non trovato: %3, errore %2
 .
 
 2102;pop;inf;01
@@ -311,7 +331,7 @@ SBIE2104 Tentativo di chiudere la sessione corrente di Windows negato - %2
 .
 
 # 2105;pop;inf;01
-# SBIE2105 Servizio di Sandboxed avviato correttamente:  %2
+# SBIE2105 Servizio avviato correttamente nell'area virtuale:  %2
 # .
 
 # 2106;pop;inf;01
@@ -323,11 +343,11 @@ SBIE2104 Tentativo di chiudere la sessione corrente di Windows negato - %2
 # .
 
 2108;pop;inf;01
-SBIE2108 Completamento apparente del '%2' eseguito correttamente
+SBIE2108 Completamento apparente del programma '%2' eseguito correttamente
 .
 
 # 2109;pop;inf;01
-# SBIE2109 Fare clic su OK al termine del dell'installazione o alla chiusura del programma.
+# SBIE2109 Fare clic su OK al termine dell'installazione o alla chiusura del programma.
 # .
 
 # 2110;pop;inf;01
@@ -344,6 +364,14 @@ SBIE2192 Per aggiornare il programma, avviarlo all'esterno dell'area virtuale.
 
 2193;pop;inf;01
 SBIE2193 Assicurarsi di eliminare l'area virtuale dopo il completamento del processo di aggiornamento.
+.
+
+2194;pop;inf;01
+SBIE2194 Windows Installer ha richiesto l'impostazione dell'opzione %2 nel file ini, ma con un livello di isolamento inferiore.
+.
+
+2198;pop;inf;01
+%0
 .
 
 2199;pop;inf;01
@@ -417,7 +445,7 @@ SBIE2214 La richiesta di avvio del servizio '%2' è stata ignorata a causa della
 # .
 
 # 2216;pop;wrn;01
-# SBIE2216 Errore nella rpeparazione dell'assembly di WinSxS:  %2
+# SBIE2216 Errore nella preparazione dell'assembly di WinSxS:  %2
 # .
 
 2217;pop;wrn;02
@@ -437,15 +465,19 @@ SBIE2220 Per consentire l'utilizzo dei privilegi di amministratore, fare doppio 
 .
 
 2221;pop;wrn;01
-SBIE2221 Per aggiungere il programma a Restrizioni Accesso a Internet, fare doppio clic su questo messaggio
+SBIE2221 Per aggiungere il programma all'elenco Restrizioni Accesso a Internet, fare doppio clic su questo messaggio
 .
 
 2222;pop;wrn;01
-SBIE2222 Per aggiungere il programma a Restrizioni Avvio/Esecuzione dei programmi, fare doppio clic su questo messaggio
+SBIE2222 Per aggiungere il programma all'elenco Restrizioni Accesso dei programmi, fare doppio clic su questo messaggio
 .
 
 2223;pop;wrn;01
-SBIE2223 Per aumentare il limite delle dimensioni dei file copiabili, fare doppio clic su questo messaggio
+SBIE2223 Per aumentare il limite della dimensione dei file copiabili, fare doppio clic su questo messaggio
+.
+
+2224;pop;wrn;01
+SBIE2224 Si è verificato un errore durante l'esecuzione nell'area virtuale del programma: %2
 .
 
 #----------------------------------------------------------------------------
@@ -471,7 +503,7 @@ SBIE2304 Avvio del processo %2 fallito
 .
 
 2305;pop;err;01
-SBIE2305 Memoria piena
+SBIE2305 Memoria esaurita
 .
 
 2306;pop;err;01
@@ -491,7 +523,7 @@ SBIE2309 Impossibile disabilitare COM+/DCOM:  %2
 .
 
 2310;pop;err;01
-SBIE2310 Il buffer del nome sta per svuotarsi (%2)
+SBIE2310 Il buffer del nome è vicino all'overflow (%2)
 .
 
 2311;pop;err;01
@@ -510,9 +542,9 @@ SBIE2313 Impossibile eseguire %2
 SBIE2314 Chiusura del processo %2 in corso...
 .
 
-2315;pop;err;01
-SBIE2315 Impossibile correggere l'immagine eseguibile
-.
+# 2315;pop;err;01
+# SBIE2315 Impossibile correggere l'immagine eseguibile
+# .
 
 2316;pop;err;01
 SBIE2316 Memoria corrotta
@@ -566,8 +598,20 @@ SBIE2332 Impossibile accedere al file SbiePst.dat
 # SBIE2333 Il programma non è compatibile con la libreria DLL: %2
 # .
 
-2334;pop;err;01
-SBIE2334 Impossibile caricare la libreria DLL: %2
+# 2334;pop;err;01
+# SBIE2334 Impossibile caricare la libreria DLL: %2
+# .
+
+2335;pop;err;01
+SBIE2335 Avvio fallito per il processo %2
+.
+
+2336;pop;err;01
+SBIE2336 Errore nel server GUI:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Avvio del programma fallito:  %2
 .
 
 # 2398;txt;01
@@ -598,60 +642,52 @@ SBIE9154 Il driver (SbieDrv) e il servizio (SbieSvc) hanno versioni differenti
 SBIE9156 Avvio del driver non completato
 .
 
-9201;evt;err;01
-SBIE9201 Errore token
+9234;evt;err;01
+SBIE9234 Errore nell'avvio del servizio %2
 .
 
-9202;evt;err;01
-SBIE9202 Errore token
-.
-
-9203;evt;err;01
-SBIE9203 Errore token
-.
-
-9204;evt;err;01
-SBIE9204 Errore strumento di descrizione della sicurezza
-.
-
-9205;evt;err;01
-SBIE9205 Errore strumento di descrizione della sicurezza
-.
-
-9206;evt;err;01
-SBIE9206 Errore strumento di descrizione della sicurezza
-.
-
-9207;evt;err;01
-SBIE9207 Errore strumento di descrizione della sicurezza
-.
-
-9208;evt;err;01
-SBIE9208 Impossibile abilitare SeRestorePrivilege
-.
-
-9251;evt;err;01
-SBIE9251 Creazione dell'evento della porta fallita
-.
-
-9252;evt;err;01
-SBIE9252 Creazione della porta fallita
-.
-
-9253;evt;err;01
-SBIE9253 Creazione del motore della porta fallita
-.
-
-# 9302;evt;err;01
-# SBIE9302 Creazione della sezione fallita (classi di configurazione del dispositivo)
+# 9201;evt;err;01
+# SBIE9201 Errore token
 # .
 
-# 9304;evt;err;01
-# SBIE9304 Creazione della sezione fallita (elenco degli ID del dispositivo)
+# 9202;evt;err;01
+# SBIE9202 Errore token
 # .
 
-# 9305;evt;err;01
-# SBIE9305 Terminare eventuali programmi in esecuzione nell'area virtuale
+# 9203;evt;err;01
+# SBIE9203 Errore token
+# .
+
+# 9204;evt;err;01
+# SBIE9204 Errore del descrittore della sicurezza
+# .
+
+# 9205;evt;err;01
+# SBIE9205 Errore del descrittore della sicurezza
+# .
+
+# 9206;evt;err;01
+# SBIE9206 Errore del descrittore della sicurezza
+# .
+
+# 9207;evt;err;01
+# SBIE9207 Errore del descrittore della sicurezza
+# .
+
+# 9208;evt;err;01
+# SBIE9208 Impossibile abilitare SeRestorePrivilege
+# .
+
+# 9251;evt;err;01
+# SBIE9251 Creazione dell'evento della porta fallito
+# .
+
+# 9252;evt;err;01
+# SBIE9252 Creazione della porta fallita
+# .
+
+# 9253;evt;err;01
+# SBIE9253 Creazione del thread della porta fallito
 # .
 
 #----------------------------------------------------------------------------
@@ -764,9 +800,9 @@ Impossibile trovare il file eseguibile del programma di posta elettronica predef
 Impossibile avviare Sandboxie Control
 .
 
-3211;txt;01
-Incongruenza nella versione di Sandboxie. Provare a reinstallare il programma.
-.
+# 3211;txt;01
+# Incongruenza nella versione di Sandboxie. Provare a reinstallare il programma.
+# .
 
 3212;txt;01
 Il driver di Sandboxie (SbieDrv) non è disponibile ai programmi in esecuzione nell'area virtuale.
@@ -774,7 +810,7 @@ Assicurarsi che il driver e il servizio di Sandboxie (SbieSvc) siano in esecuzio
 .
 
 3213;txt;01
-Impossibile avviare i servizi Sandboxie COM
+Impossibile avviare i servizi COM di Sandboxie
 .
 
 3214;txt;01
@@ -804,7 +840,7 @@ Impossibile spostare la cartella dell'area virtuale in un altro percorso
 
 3220;txt;01
 Errore nella ridenominazione del nome lungo di un file nell'area virtuale.
-L'area virtuale non verrà eliminata.
+Il contenuto dell'area virtuale non verrà eliminato.
 .
 
 3221;txt;01
@@ -815,45 +851,45 @@ Chiudere i programmi in esecuzione nell'area virtuale prima di eliminare il suo 
 Comando di eliminazione fallito: %0
 .
 
-3231;txt;01
-Sandboxie è stato installato più di 30 fa.
-.
+# 3231;txt;01
+# Sandboxie è stato installato più di 30 giorni fa.
+# .
 
 3232;txt;01
-È possibile utilizzare Sandboxie gratuitamente solo per uso personale.
+È possibile utilizzare Sandboxie gratuitamente per tutto il tempo che vuoi.
 .
 
-3233;txt;01
-Tuttavia, il caricamento iniziale della versione gratuita durerà alcuni secondi in più.
-.
+# 3233;txt;01
+# Tuttavia, il caricamento iniziale della versione gratuita durerà alcuni secondi in più.
+# .
 
-3234;txt;01
-Tuttavia, nella versione gratuita è possibile utilizzare solo un'area virtuale per volta.
-.
+# 3234;txt;01
+# Tuttavia, nella versione gratuita è possibile utilizzare solo un'area virtuale per volta.
+# .
 
-3235;txt;01
-La versione a pagamento di Sandboxie non ha questa limitazione.
-.
+# 3235;txt;01
+# La versione a pagamento di Sandboxie non ha questa limitazione.
+# .
 
-3236;txt;01
-Inoltre, con la versione a pagamento è possibile avviare automaticamente nell'area virtuale alcuni programmi selezionati.
-.
+# 3236;txt;01
+# Inoltre, con la versione a pagamento è possibile avviare automaticamente nell'area virtuale alcuni programmi selezionati.
+# .
 
-3237;txt;01
-Per maggiori informazioni e per acquistare il programma, fare clic sul seguente indirizzo:
-.
+# 3237;txt;01
+# Per maggiori informazioni e per acquistare il programma, fare clic sul seguente indirizzo:
+# .
 
-3238;txt;01
-Attendere %2 secondi...
-.
+# 3238;txt;01
+# Attendere %2 secondi...
+# .
 
-3239;txt;01
-Fare clic qui per chiudere questa finestra e continuare
-.
+# 3239;txt;01
+# Fare clic qui per chiudere questa finestra e continuare
+# .
 
-3240;txt;01
-Fare clic qui per chiudere il programma
-.
+# 3240;txt;01
+# Fare clic qui per chiudere il programma
+# .
 
 3241;txt;01
 Sandboxie sta richiedendo i privilegi di amministratore su
@@ -875,9 +911,14 @@ Avvia all'esterno dell'area virtuale
 .
 
 3252;txt;01
-Avvia espressamente il programma senza la supervisione di Sandboxie, anche se è impostato per l'avvio automatico in un'area virtuale. Anche altri programmi avviati da questo programma verranno avviati all'esterno dell'area virtuale.
+Avvia espressamente il programma senza la supervisione di
+Sandboxie, anche se è impostato per l'avvio automatico in
+un'area virtuale. Anche altri programmi avviati da questo
+programma verranno avviati all'esterno dell'area virtuale.
 
-È possibile selezionare questa opzione anche tenendo premuti i tasti Ctrl e Maiusc quando si fa clic su Avvia nell'area virtuale.
+Inoltre è possibile selezionare questa opzione tenendo
+premuti i tasti Ctrl e Maiusc quando si fa clic su
+Avvia nell'area virtuale.
 .
 
 3253;txt;01
@@ -993,7 +1034,7 @@ M&odif./Agg.
 .
 
 3355;txt;01
-A&ggiungi
+Agg. &programma
 .
 
 # 3356;txt;01
@@ -1045,7 +1086,7 @@ Eseg&ui come amministratore
 .
 
 3417;txt;01
-C&hiudi
+E&sci
 .
 
 3421;txt;01
@@ -1108,9 +1149,9 @@ Avvisi dei &programmi
 &Compatibilità con i programmi
 .
 
-3503;txt;01
-Protezione sperimentale (64 bit)
-.
+# 3503;txt;01
+# Protezione sperimentale (64 bit)
+# .
 
 3444;txt;01
 Riattiva i &messaggi nascosti
@@ -1141,11 +1182,11 @@ Mo&stra tutti i suggerimenti
 .
 
 3451;txt;01
-&?
+&Aiuto
 .
 
 3452;txt;01
-&Guida (on-line)
+&Documentazione online
 .
 
 3453;txt;02
@@ -1156,17 +1197,21 @@ Guida introdu&ttiva
 Controlla a&ggiornamenti
 .
 
-3455;txt;01
-&Registra Sandboxie
-.
+# 3455;txt;01
+# &Registra Sandboxie
+# .
 
 3456;txt;01
 &Informazioni su Sandboxie
 .
 
 3457;txt;01
-&Forum Sandboxie (Web)
+&Forum di Sandboxie
 .
+
+# 3458;txt;01
+# Consenti accesso diretto al Servizio cache tipi di carattere Windows
+# .
 
 3459;txt;01
 Consenti accesso diretto al driver qWave (Google Hangouts)
@@ -1198,6 +1243,10 @@ Avvia dal menu &Start
 
 3466;txt;01
 Avvia &Esplora risorse
+.
+
+3467;txt;01
+Aggiorna a Sandboxie Plus
 .
 
 3471;txt;01
@@ -1238,6 +1287,10 @@ Impo&stazioni del programma
 
 3483;txt;01
 Accesso alle &risorse
+.
+
+3484;txt;01
+Accesso alle risorse
 .
 
 3485;txt;01
@@ -1413,7 +1466,7 @@ Sono stati nascosti tutti i suggerimenti.
 
 3539;txt;01
 L'area virtuale '%2' è stata creata %3 giorni fa.
-Ricordarsi di eliminare l'area virtuale dopo ogni utilizzo.
+Ricordarsi di eliminare il contenuto dell'area virtuale di tanto in tanto.
 
 Per configurare l'eliminazione automatica, utilizzare l'apposito comando presente nelle Impostazioni dell'area virtuale, accessibile dal menu Area virtuale in Sandboxie Control.
 .
@@ -1426,30 +1479,30 @@ Non è possibile modificare il file di configurazione Sandboxie.ini poichè è p
 Pubblico
 .
 
-3542;txt;01
-La modalità Protezione sperimentale migliora la protezione
-offerta dalla versione a 64 bit di Sandboxie portandola allo
-stesso livello di quella offerta dalla versione a 32 bit.
+# 3542;txt;01
+# La modalità Protezione sperimentale migliora la protezione
+# offerta dalla versione a 64 bit di Sandboxie portandola allo
+# stesso livello di quella offerta dalla versione a 32 bit.
+#
+# ATTENZIONE: la modalità Protezione sperimentale utilizza
+# funzionalità non documentate del kernel di Windows.
+# Eventuali aggiornamenti futuri di Windows potrebbero
+# interferire con la modalità Protezione sperimentale e
+# causare instabilità del sistema.
+#
+# UTILIZZARE QUESTA FUNZIONALITÀ A PROPRIO RISCHIO.
+#
+# Per attivare la modalità Protezione sperimentale è necessario
+# riavviare il computer ora.
+# .
 
-ATTENZIONE: la modalità Protezione sperimentale utilizza
-funzionalità non documentate del kernel di Windows.
-Eventuali aggiornamenti futuri di Windows potrebbero
-interferire con la modalità Protezione sperimentale e
-causare instabilità del sistema.
-
-UTILIZZARE QUESTA FUNZIONALITÀ A PROPRIO RISCHIO.
-
-Per attivare la modalità Protezione sperimentale è necessario
-riavviare il computer ora.
-.
-
-3543;txt;01
-Per disattivare la modalità Protezione sperimentale è necessario
-riavviare il computer ora.
-
-Nota: l'impostazione Limitazione dei diritti verrà attivata in
-tutte le aree virtuali.
-.
+# 3543;txt;01
+# Per disattivare la modalità Protezione sperimentale è necessario
+# riavviare il computer ora.
+#
+# Nota: l'impostazione Limitazione dei diritti verrà attivata in
+# tutte le aree virtuali.
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control Dialogs: About/Welcome
@@ -1489,11 +1542,11 @@ Controlla aggiornamenti
 .
 
 3622;txt;01
-Quando connettersi al sito di Sandboxie per verificare la disponibilità di una nuova versione del programma?
+Verificare la disponibilità di una nuova versione del programma?
 .
 
 3623;txt;01
-&Ora
+&Adesso
 .
 
 3624;txt;01
@@ -1598,7 +1651,7 @@ Disattiva temporaneamente i programmi automatici
 .
 
 3652;txt;01
-Disattiva temporaneamente i programmi automatici
+Disattiva l'impostazione dei programmi automatici per
 .
 
 3653;txt;01
@@ -1606,11 +1659,11 @@ secondi
 .
 
 3654;txt;01
-Dopo aver fatto clic su OK, la funzione Programmi automatici verrà disattivata temporaneamente per il numero di secondi specificato sopra o fino alla riattivazione della funzione.
+Dopo aver fatto clic su OK, la funzione Programmi automatici verrà disattivata temporaneamente per il numero di secondi specificato sopra, o fino alla sua riattivazione.
 .
 
 3599;txt;01
-È possibile disabilitare l'automatizzazione di un programma specifico tenendo premuti i tasti Ctrl e Maiusc mentre si utilizza l'opzione Avvia nell'area virtuale di quel programma.
+È possibile limitare la disattivazione a un programma specifico tenendo premuti i tasti Ctrl e Maiusc mentre si utilizza l'opzione Avvia nell'area virtuale per quel programma.
 .
 
 #----------------------------------------------------------------------------
@@ -1994,7 +2047,7 @@ Abilita le restrizioni e consenti a questo programma l'accesso a Internet.
 .
 
 3765;txt;01
-Restrizioni di avvio/esecuzione
+Restrizioni di accesso
 .
 
 3766;txt;01
@@ -2017,9 +2070,9 @@ Abilita le restrizioni e consenti l'avvio di questo programma.
 Se il programma è già in esecuzione nell'area virtuale, le nuove impostazioni verranno applicate al suo avvio successivo.
 .
 
-3771;txt;01
-(Questa funzione è disponibile solo nella versione registrata di Sandboxie)
-.
+# 3771;txt;01
+# (Questa funzione è disponibile solo nella versione registrata di Sandboxie)
+# .
 
 3772;txt;02
 Impostare %2 come programma automatico?
@@ -2162,7 +2215,7 @@ Selezionare una cartella che dovrà essere ignorata da Recupero immediato.
 .
 
 3837;txt;01
-Inserire un tipo di file (o estensione di file) che dovrà essere ignorata da Recupero immediato
+Inserire un tipo di file (o estensione di file) che dovrà essere ignorato da Recupero immediato
 .
 
 #----------------------------------------------------------------------------
@@ -2430,7 +2483,7 @@ Per gestire la funzionalità Restrizioni Accesso a Internet, recarsi nella sezio
 .
 
 3922;txt;01
-Avvio/Esecuzione dei programmi
+Accesso dei programmi
 .
 
 3923;txt;01
@@ -2446,11 +2499,11 @@ Tutti i programmi possono essere avviati ed eseguiti
 .
 
 3930;txt;01
-La funzionalità Restrizioni Avvio/Esecuzione dei programmi è abilitata nell'area virtuale '%2' e blocca l'accesso a Internet a questo programma.
+La funzionalità Restrizioni Accesso dei programmi è abilitata nell'area virtuale '%2' e blocca l'accesso a questo programma.
 
-Fare clic su OK per aggiungere il programma '%3' all'elenco Restrizioni Accesso a Internet nell'area virtuale '%2'.
+Fare clic su OK per aggiungere il programma '%3' all'elenco Restrizioni Accesso dei programmi nell'area virtuale '%2'.
 
-Per gestire la funzionalità Restrizioni Avvio/Esecuzione dei programmi, recarsi nella sezione Restrizioni della finestra Impostazioni dell'area virtuale.
+Per gestire la funzionalità Restrizioni Accesso dei programmi, recarsi nella sezione Restrizioni della finestra Impostazioni dell'area virtuale.
 .
 
 #----------------------------------------------------------------------------
@@ -2678,7 +2731,7 @@ Accesso diretto alle IPC (OpenIpcPath)
 .
 
 4073;txt;01
-I seguenti oggetti NT IPC saranno direttamente accessibili ai programmi in esecuzione in questa area virtuale, senza essere copiati nell'area virtuale
+I seguenti oggetti NT IPC saranno direttamente accessibili ai programmi in esecuzione in questa area virtuale, senza essere copiati nell'area virtuale.
 .
 
 4074;txt;01
@@ -2725,6 +2778,14 @@ Accesso al COM (OpenClsid)
 I seguenti programmi nell'area virtuale non potranno comunicare con gli oggetti COM che appartengono a programmi in esecuzione all'esterno dell'area virtuale, a meno che l'ID della classe COM non corrisponda a uno dei seguenti ID di classi.
 .
 
+4104;txt;01
+Accesso alle risorse::Accesso alla rete
+.
+
+4105;txt;01
+Accesso alla rete (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -2742,7 +2803,7 @@ Apri il sito &Web
 .
 
 4204;txt;01
-Crea &nuova
+&Nuova config.
 .
 
 4205;txt;01
@@ -2834,15 +2895,15 @@ PDF e stampa
 .
 
 4226;txt;02
-Sicurezza e privacy
+Sicurezza/privacy
 .
 
 4228;txt;01
-Programmi per il desktop
+Utilità desktop
 .
 
 4230;txt;01
-Programmi per la gestione dei download
+Gestione download
 .
 
 4288;txt;01
@@ -2866,11 +2927,27 @@ Elenco predefinito delle porte TCP/IP bloccate
 .
 
 4294;txt;01
-Consenti ai programmi di aggiornare le jump list della barra delle applicazioni di Windows 7
+Consenti ai programmi di aggiornare le jump list della barra delle applicazioni
 .
 
 4295;txt;01
 Esclusioni predefinite per la Copia dei file
+.
+
+4296;txt;01
+Binding predefiniti delle porte RPC
+.
+
+4297;txt;01
+Consenti accesso al Bluetooth
+.
+
+4298;txt;01
+Consenti accesso alle smart card
+.
+
+4299;txt;01
+Consenti accesso alle porte SSDP e UPnP
 .
 
 #----------------------------------------------------------------------------
@@ -3033,7 +3110,7 @@ Per compensare alla disabilitazione delle misure di protezione, consultare la pa
 .
 
 4305;txt;03
-Screen Reader:  %2
+Screen reader:  %2
 .
 
 #----------------------------------------------------------------------------
@@ -3045,7 +3122,7 @@ Browser Web
 .
 
 4322;txt;01
-Le seguenti esclusioni consentiranno ai browser Web in esecuzione in questa area virtuale di apportare delle modifiche all'esterno dell'area virtuale. In questo modo si abbasseranno le misure di sicurezza e privacy, ma si velocizzerà l'accesso alle risorse.
+Le seguenti esclusioni consentiranno ai browser in esecuzione in questa area virtuale di apportare modifiche all'esterno dell'area virtuale, abbassando le misure di sicurezza in cambio di una maggiore praticità di utilizzo.
 .
 
 4323;txt;01
@@ -3104,6 +3181,10 @@ Consenti l'accesso diretto alle preferenze di %2
 Consenti l'accesso diretto alla gestione della sessione %2
 .
 
+4341;txt;01
+Consenti l'accesso diretto alle note di %2
+.
+
 4356;txt;02
 Consenti l'accesso diretto ai segnalibri di %2
 .
@@ -3117,11 +3198,35 @@ Componenti aggiuntivi
 .
 
 4391;txt;01
-Programmi di posta elettronica
+Posta elettronica
 .
 
 4392;txt;01
 Le seguenti esclusioni consentiranno ai programmi di posta elettronica in esecuzione in questa area virtuale di accedere ai file della casella di posta elettronica all'esterno dell'area virtuale.
+.
+
+4393;txt;01
+Lettori multimediali
+.
+
+4394;txt;01
+Le seguenti esclusioni consentiranno ai lettori multimediali in esecuzione in questa area virtuale di accedere ai file all'esterno dell'area virtuale.
+.
+
+4395;txt;01
+Consenti l'accesso diretto di %2 alla cartella Immagini per la funzione di cattura dello schermo.
+.
+
+4396;txt;01
+Client Torrent
+.
+
+4397;txt;01
+Le seguenti esclusioni consentiranno ai client Torrent in esecuzione in questa area virtuale di accedere ai file all'esterno dell'area virtuale.
+.
+
+4398;txt;01
+Consenti l'accesso diretto di %2 alla cartella Musica per la gestione della libreria musicale.
 .
 
 #----------------------------------------------------------------------------
@@ -3213,6 +3318,56 @@ Eli&mina
 .
 
 #----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+L'interfaccia classica di Sandboxie (SbieCtrl.exe) ha delle limitate
+funzionalità di monitoraggio delle risorse e di tracciamento degli eventi.
+
+Per una risoluzione ottimale dei problemi, si consiglia di
+installare Sandboxie Plus, la nuova interfaccia (SandMan.exe)
+che fornisce eccellenti capacità di monitoraggio e tracciamento.
+
+Si desidera scaricare Sandboxie Plus adesso?
+.
+
+6002;txt;01
+Visita <a ID="whats_new">sandboxie-plus.com</a> per saperne di più sulle funzionalità di Sandboxie Plus
+o clicca <a ID="upgrade">qui</a> per scaricare l'ultima versione di Sandboxie Plus.
+.
+
+6003;txt;01
+L'interfaccia legacy di Sandboxie Classic non implementa il supporto per la funzionalità del firewall di rete.
+
+È comunque possibile configurare la funzione utilizzando il file ini, le regole sono strutturate nel modo seguente:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
+.
+
+6005;txt;01
+Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la
+maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
+.
+
+6006;txt;01
+L'interfaccia legacy di Sandboxie Classic supporta soltanto alcune opzioni di restrizione.
+
+Le opzioni aggiuntive come "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" e molte altre ancora possono essere impostate nella sezione ini dell'area virtuale.
+L'interfaccia di Sandboxie Plus (SandMan.exe) fornisce ulteriori opzioni di personalizzazione per le restrizioni di accesso.
+
+Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
+.
+
+6007;txt;01
+...
+
+Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
+.
+
+
+#----------------------------------------------------------------------------
 # Getting Started Wizard
 #----------------------------------------------------------------------------
 
@@ -3225,7 +3380,7 @@ Guida introduttiva a Sandboxie
 .
 
 7852;txt;01
-Benvenuti in Sandboxie!
+Ti diamo il benvenuto in Sandboxie!
 
 Sandboxie esegue i programmi in uno spazio isolato che impedisce loro di apportare modifiche permanenti ad altri programmi e dati presenti nel computer.
 
@@ -3277,9 +3432,7 @@ Per esercitarsi: Eliminare il contenuto dell'area virtuale DefaultBox. Cercare l
 .
 
 7863;txt;01
-Fare clic con il pulsante destro del mouse sull'icona gialla di Sandboxie,
-
-quindi selezionare DefaultBox e fare clic su Elimina contenuto.
+Fare clic con il pulsante destro del mouse sull'icona gialla di Sandboxie, quindi selezionare DefaultBox e fare clic su Elimina contenuto.
 .
 
 7864;txt;01
@@ -3287,195 +3440,195 @@ Ora è possibile utilizzare Sandboxie!
 .
 
 7865;txt;01
-Vi ringraziamo di aver dedicato dedicato del tempo alla visione di questa guida. Per altre guide e altri suggerimenti, visitare il sito Web di Sandboxie.
+Grazie di aver dedicato del tempo alla visione di questa guida. Per ulteriori guide e suggerimenti, visitare il sito Web di Sandboxie.
 
 Le impostazioni predefinite di Sandboxie garantiscono una protezione completa; è possibile, comunque, rivedere la configurazione dell'area virtuale nel menu Area virtuale della finestra Sandboxie Control.
 .
 
-7866;txt;01
-Sui sistemi Windows a 64 bit è necessario abilitare la Protezione sperimentale. Vedere il menu Impostazioni in Sandboxie Control.
-.
+# 7866;txt;01
+# Sui sistemi Windows a 64 bit è necessario abilitare la Protezione sperimentale. Vedere il menu Impostazioni in Sandboxie Control.
+# .
 
 #----------------------------------------------------------------------------
 # License Manager
 #----------------------------------------------------------------------------
 
-7901;txt;01
-Gestione licenze di Sandboxie
-.
+# 7901;txt;01
+# Gestione licenze di Sandboxie
+# .
 
-7902;txt;01
-Codice di sistema %2
-.
+# 7902;txt;01
+# Codice di sistema %2
+# .
 
-7903;txt;01
-In futuro, attiva la licenza senza chiedere
-.
-
-#----------------------------------------------------------------------------
-
-7921;txt;01
-Sandboxie è registrato e la licenza è attivata.
-.
-
-7922;txt;01
-Sandboxie è registrato ma è necessario riattivare la licenza.
-.
-
-7923;txt;01
-Copia non registrata. Registra Sandboxie!
-.
-
-7924;txt;01
-Sarà necessario riattivare la licenza di Sandboxie tra %2 giorni.
-.
-
-7925;txt;01
-La licenza di Sandboxie è stata attivata.
-.
-
-7926;txt;01
-Il codice Product Key in uso scade il %2.
-.
-
-7927;txt;01
-Il codice Product Key non ha una data di scadenza.
-.
+# 7903;txt;01
+# In futuro, attiva la licenza senza chiedere
+# .
 
 #----------------------------------------------------------------------------
 
-7931;txt;01
-Questa copia di Sandboxie è registrata con un codice di registrazione di vecchia generazione.
-.
+# 7921;txt;01
+# Sandboxie è registrato e la licenza è attivata.
+# .
 
-7932;txt;01
-Consentire a Gestione licenze di Sandboxie di connettersi al server licenze e aggiornare il codice di registrazione di vecchia generazione in uso con un nuovo codice Product Key. Questo aggiornamento è assolutamente gratuito.
-.
+# 7922;txt;01
+# Sandboxie è registrato ma è necessario riattivare la licenza.
+# .
 
-7933;txt;01
-Il codice di registrazione in uso non è stato riconosciuto dal server licenze.
-.
+# 7923;txt;01
+# Copia non registrata. Registra Sandboxie!
+# .
 
-7934;txt;01
-Se si stava utilizzando un codice di registrazione legittimo, che si è acquistato oppure che è stato fornito come regalo o parte di una promozione, inviare un'e-mail all'indirizzo:
-.
+# 7924;txt;01
+# Sarà necessario riattivare la licenza di Sandboxie tra %2 giorni.
+# .
 
-7935;txt;01
-Il nuovo codice Product Key è:
-.
+# 7925;txt;01
+# La licenza di Sandboxie è stata attivata.
+# .
 
-7936;txt;01
-Assicurarsi di conservare questo codice Product Key in un posto sicuro per una consultazione futura. Fare clic sul seguente pulsante per copiare il codice Product Key negli Appunti. In questo modo potrà essere incollato in un documento e stampato.
-.
+# 7926;txt;01
+# Il codice Product Key in uso scade il %2.
+# .
 
-7937;txt;01
-Aggiorna codice di registrazione in codice Product &Key
-.
-
-#----------------------------------------------------------------------------
-
-7941;txt;01
-La registrazione di Sandboxie viene effettuata tramite un motore di pagamento di terze parti. Per iniziare la registrazione, fare clic sul seguente indirizzo per visitare il sito Web di Sandboxie.
-.
-
-7942;txt;01
-Per attivare la propria licenza di Sandboxie, inserire il codice Product Key contenuto nella ricevuta di pagamento, quindi fare clic su Attiva licenza per attivare la licenza.
-.
-
-7943;txt;01
-Inserire un nuovo codice Product Key?
-.
-
-7944;txt;01
-&Attiva licenza
-.
-
-7945;txt;01
-Questa copia di Sandboxie è stata registrata correttamente.
-.
-
-7946;txt;01
-Ti ringraziamo di aver sostenuto Sandboxie!
-.
+# 7927;txt;01
+# Il codice Product Key non ha una data di scadenza.
+# .
 
 #----------------------------------------------------------------------------
 
-7951;txt;01
-Attivare la licenza?
-.
+# 7931;txt;01
+# Questa copia di Sandboxie è registrata con un codice di registrazione di vecchia generazione.
+# .
 
-7952;txt;01
-Per ordinare un nuovo codice Product Key, visitare il sito Web di Sandboxie al seguente indirizzo.
-.
+# 7932;txt;01
+# Consentire a Gestione licenze di Sandboxie di connettersi al server licenze e aggiornare il codice di registrazione di vecchia generazione in uso con un nuovo codice Product Key. Questo aggiornamento è assolutamente gratuito.
+# .
 
-7961;txt;01
-El&imina informazioni di licenza
-.
+# 7933;txt;01
+# Il codice di registrazione in uso non è stato riconosciuto dal server licenze.
+# .
 
-7962;txt;01
-Eliminare le informazioni di licenza di Sandboxie?
+# 7934;txt;01
+# Se si stava utilizzando un codice di registrazione legittimo, che si è acquistato oppure che è stato fornito come regalo o parte di una promozione, inviare un'e-mail all'indirizzo:
+# .
 
-Sarà possibile attivare la propria licenza in qualsiasi momento inserendo un codice Product Key.
-.
+# 7935;txt;01
+# Il nuovo codice Product Key è:
+# .
+
+# 7936;txt;01
+# Assicurarsi di conservare questo codice Product Key in un posto sicuro per una consultazione futura. Fare clic sul seguente pulsante per copiare il codice Product Key negli Appunti. In questo modo potrà essere incollato in un documento e stampato.
+# .
+
+# 7937;txt;01
+# Aggiorna codice di registrazione in codice Product &Key
+# .
 
 #----------------------------------------------------------------------------
 
-7971;txt;01
-Questo non è un codice Product Key valido.
-.
+# 7941;txt;01
+# La registrazione di Sandboxie viene effettuata tramite un motore di pagamento di terze parti. Per iniziare la registrazione, fare clic sul seguente indirizzo per visitare il sito Web di Sandboxie.
+# .
 
-7972;txt;01
-Questo non è un Codice di sistema valido.
-.
+# 7942;txt;01
+# Per attivare la propria licenza di Sandboxie, inserire il codice Product Key contenuto nella ricevuta di pagamento, quindi fare clic su Attiva licenza per attivare la licenza.
+# .
 
-7973;txt;01
-Questo non è un Codice di attivazione valido. [%2]
-.
+# 7943;txt;01
+# Inserire un nuovo codice Product Key?
+# .
 
-7974;txt;01
-Risposta non valida dal server licenze.
-.
+# 7944;txt;01
+# &Attiva licenza
+# .
 
-7975;txt;01
-Attivazione del prodotto non riuscita:
-.
+# 7945;txt;01
+# Questa copia di Sandboxie è stata registrata correttamente.
+# .
 
-7976;txt;01
-Riprovare?
-.
+# 7946;txt;01
+# Grazie di aver sostenuto Sandboxie!
+# .
 
-7977;txt;01
-Se si desidera attivare Sandboxie su un computer che non dispone di accesso a Internet,
-consultare le Domandi frequenti sulle licenze di Sandboxie per informazioni sull'Attivazione non in linea.
-.
+#----------------------------------------------------------------------------
 
-7978;txt;01
-La data attuale (%2) è futura alla data inviata dal Server delle licenze (%3).
-.
+# 7951;txt;01
+# Attivare la licenza?
+# .
 
-7982;txt;01
-Il server licenze non ha specificato alcun motivo per la non riuscita dell'attivazione.
-.
+# 7952;txt;01
+# Per ordinare un nuovo codice Product Key, visitare il sito Web di Sandboxie al seguente indirizzo.
+# .
 
-7983;txt;01
-Il codice Product Key non è stato riconosciuto dal server licenze.
-.
+# 7961;txt;01
+# El&imina informazioni di licenza
+# .
 
-7984;txt;01
-Non è possibile utilizzare il codice Product Key oltre la sua data di scadenza del %2.
-.
+# 7962;txt;01
+# Eliminare le informazioni di licenza di Sandboxie?
+#
+# Sarà possibile attivare la propria licenza in qualsiasi momento inserendo un codice Product Key.
+# .
 
-7985;txt;01
-Il codice Product Key è stato attivato su troppi computer.
-.
+#----------------------------------------------------------------------------
 
-7986;txt;01
-Il codice Product Key è stato annullato perché è stato reso pubblico su Internet.
-.
+# 7971;txt;01
+# Questo non è un codice Product Key valido.
+# .
 
-7987;txt;01
-Il codice Product Key è stato annullato perché l'ordine è stato rimborsato.
-.
+# 7972;txt;01
+# Questo non è un Codice di sistema valido.
+# .
+
+# 7973;txt;01
+# Questo non è un Codice di attivazione valido. [%2]
+# .
+
+# 7974;txt;01
+# Risposta non valida dal server licenze.
+# .
+
+# 7975;txt;01
+# Attivazione del prodotto non riuscita:
+# .
+
+# 7976;txt;01
+# Riprovare?
+# .
+
+# 7977;txt;01
+# Se si desidera attivare Sandboxie su un computer che non dispone di accesso a Internet,
+# consultare le Domandi frequenti sulle licenze di Sandboxie per informazioni sull'Attivazione non in linea.
+# .
+
+# 7978;txt;01
+# La data attuale (%2) è futura alla data inviata dal Server delle licenze (%3).
+# .
+
+# 7982;txt;01
+# Il server licenze non ha specificato alcun motivo per la non riuscita dell'attivazione.
+# .
+
+# 7983;txt;01
+# Il codice Product Key non è stato riconosciuto dal server licenze.
+# .
+
+# 7984;txt;01
+# Non è possibile utilizzare il codice Product Key oltre la sua data di scadenza del %2.
+# .
+
+# 7985;txt;01
+# Il codice Product Key è stato attivato su troppi computer.
+# .
+
+# 7986;txt;01
+# Il codice Product Key è stato annullato perché è stato reso pubblico su Internet.
+# .
+
+# 7987;txt;01
+# Il codice Product Key è stato annullato perché l'ordine è stato rimborsato.
+# .
 
 #----------------------------------------------------------------------------
 # SandboxieInstall
@@ -3518,7 +3671,7 @@ Prima di disinstallare Sandboxie, utilizzare Sandboxie Control per eliminare il 
 .
 
 8010;ins;01
-Installazione dei driver
+Installazione driver
 .
 
 8011;ins;01

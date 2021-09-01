@@ -45,6 +45,20 @@ static HANDLE Scm_CreateWaitableTimerW(
     LPSECURITY_ATTRIBUTES lpTimerAttributes,
     BOOL bManualReset, LPCWSTR lpTimerName);
 
+static BOOL Scm_OpenProcessToken(
+    _In_ HANDLE ProcessHandle,
+    _In_ DWORD DesiredAccess,
+    _Outptr_ PHANDLE TokenHandle
+    );
+
+static BOOL Scm_GetTokenInformation(
+    _In_ HANDLE TokenHandle,
+    _In_ TOKEN_INFORMATION_CLASS TokenInformationClass,
+    _Out_writes_bytes_to_opt_(TokenInformationLength,*ReturnLength) LPVOID TokenInformation,
+    _In_ DWORD TokenInformationLength,
+    _Out_ PDWORD ReturnLength
+    );
+
 //---------------------------------------------------------------------------
 // Prototypes
 //---------------------------------------------------------------------------
@@ -54,6 +68,19 @@ typedef HANDLE (*P_CreateWaitableTimerW)(
     LPSECURITY_ATTRIBUTES lpTimerAttributes,
     BOOL bManualReset, LPCWSTR lpTimerName);
 
+typedef BOOL (*P_OpenProcessToken)(
+    _In_ HANDLE ProcessHandle,
+    _In_ DWORD DesiredAccess,
+    _Outptr_ PHANDLE TokenHandle
+    );
+
+typedef BOOL (*P_GetTokenInformation)(
+    _In_ HANDLE TokenHandle,
+    _In_ TOKEN_INFORMATION_CLASS TokenInformationClass,
+    _Out_writes_bytes_to_opt_(TokenInformationLength,*ReturnLength) LPVOID TokenInformation,
+    _In_ DWORD TokenInformationLength,
+    _Out_ PDWORD ReturnLength
+    );
 
 //---------------------------------------------------------------------------
 // Pointers
@@ -62,12 +89,16 @@ typedef HANDLE (*P_CreateWaitableTimerW)(
 
 static P_CreateWaitableTimerW       __sys_CreateWaitableTimerW = NULL;
 
+static P_OpenProcessToken           __sys_OpenProcessToken = NULL;
+
+static P_GetTokenInformation        __sys_GetTokenInformation = NULL;
 
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
 
 static volatile BOOLEAN Scm_IsMsiServer = FALSE;
+BOOLEAN Scm_MsiServer_Systemless = FALSE;
 
 static const WCHAR *_MsiServerInUseEventName = SBIE L"_WindowsInstallerInUse";
 
@@ -87,12 +118,54 @@ _FX BOOLEAN Scm_SetupMsiHooks()
     //__debugbreak();
 
     P_CreateWaitableTimerW CreateWaitableTimerW = (P_CreateWaitableTimerW)GetProcAddress(Dll_Kernel32, "CreateWaitableTimerW");
-    
     SBIEDLL_HOOK(Scm_, CreateWaitableTimerW);
 
-    //// hook privilege-related functions
-    //if (!Hook_Privilege())
-    //    return FALSE;
+
+    // MSIServer without system - fake running as system
+    if (!SbieDll_CheckProcessLocalSystem(GetCurrentProcess()))
+    {
+        Scm_MsiServer_Systemless = TRUE;
+
+        //
+        // To run MSIServer without system privileges we need to make it think it is running as system
+        // we do that by hooking OpenProcessToken and if it opened the current process caching the resulting token handle
+        // than in GetTokenInformation when asked for TokenUser for this handle we return the system SID
+        // finally on NtClose we clear the cached token value in case it gets reused later
+        //
+
+        /*
+        msi.dll!RunningAsLocalSystem
+        v2 = GetCurrentProcess();
+        if ( OpenProcessToken(v2, 8u, &hObject) )
+        {
+            v3 = IsLocalSystemToken(hObject);
+        ...
+    
+        msi.dll!IsLocalSystemToken
+        if ( GetUserSID(a1, Sid) )
+            return 0;
+        StringSid = 0i64;
+        if ( !ConvertSidToStringSidW(Sid, &StringSid) )
+            return 0;
+        v2 = L"S-1-5-18";
+        wcscmp...
+    
+
+        msi.dll!GetUserSID
+        if ( GetTokenInformation(a1, TokenUser, TokenInformation, 0x58u, ReturnLength) )
+        {
+            if ( CopySid(0x48u, a2, TokenInformation[0]) )
+        ...
+        */
+
+        HMODULE hAdvapi32 = LoadLibrary(L"Advapi32.dll");
+
+        void* OpenProcessToken = (P_OpenProcessToken)GetProcAddress(hAdvapi32, "OpenProcessToken");
+        SBIEDLL_HOOK(Scm_, OpenProcessToken);
+
+        void* GetTokenInformation = (P_GetTokenInformation)GetProcAddress(hAdvapi32, "GetTokenInformation");
+        SBIEDLL_HOOK(Scm_, GetTokenInformation);
+    }
 
     return TRUE;
 }
@@ -115,6 +188,73 @@ _FX HANDLE Scm_CreateWaitableTimerW(
     lpTimerAttributes = NULL;
 
     return __sys_CreateWaitableTimerW(lpTimerAttributes, bManualReset, lpTimerName);
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_TokenCloseHandler
+//---------------------------------------------------------------------------
+
+
+_FX VOID Scm_TokenCloseHandler(HANDLE Handle) 
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    if (TlsData->scm_last_own_token == Handle)
+        TlsData->scm_last_own_token = NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_OpenProcessToken
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE phTokenOut)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    NTSTATUS status = __sys_OpenProcessToken(ProcessHandle, DesiredAccess, phTokenOut);
+
+    if (NT_SUCCESS(status) && ProcessHandle == GetCurrentProcess()) {
+
+        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        TlsData->scm_last_own_token = *phTokenOut;
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_GetTokenInformation
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_GetTokenInformation(HANDLE TokenHandle, TOKEN_INFORMATION_CLASS TokenInformationClass,
+    LPVOID TokenInformation, DWORD TokenInformationLength, PDWORD ReturnLength)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    static const UCHAR sid[12] = {
+    1,                                      // Revision
+    1,                                      // SubAuthorityCount
+    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+    SECURITY_LOCAL_SYSTEM_RID               // SubAuthority
+    };
+
+    if (TokenInformationClass == TokenUser && TlsData->scm_last_own_token == TokenHandle 
+        && TokenInformationLength >= sizeof(TOKEN_USER) + sizeof(sid))
+    {
+        PTOKEN_USER token_user = (PTOKEN_USER)TokenInformation;
+        token_user->User.Sid = (PSID)(((UCHAR*)TokenInformation) + sizeof(TOKEN_USER));
+        memcpy(token_user->User.Sid, sid, sizeof(sid));
+
+        *ReturnLength = sizeof(TOKEN_USER) + sizeof(sid);
+        return TRUE;
+    }
+
+    return __sys_GetTokenInformation(TokenHandle, TokenInformationClass, TokenInformation, TokenInformationLength, ReturnLength);
 }
 
 

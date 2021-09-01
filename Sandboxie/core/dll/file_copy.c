@@ -139,11 +139,15 @@ found_match:
     MAN_FILE_MIGRATION_RPL* rpl = NULL;
     BOOLEAN ok = FALSE;
 
-    req.msgid = MAN_FILE_MIGRATION;
-    req.file_size = file_size;
-    wcscpy(req.file_path, TruePath);
+    if (SbieApi_QueryConfBool(NULL, L"PromptForFileMigration", TRUE))
+    {
+        req.msgid = MAN_FILE_MIGRATION;
+        req.file_size = file_size;
+        wcscpy(req.file_path, TruePath);
 
-    rpl = SbieDll_CallServerQueue(INTERACTIVE_QUEUE_NAME, &req, sizeof(req), sizeof(*rpl));
+        rpl = SbieDll_CallServerQueue(INTERACTIVE_QUEUE_NAME, &req, sizeof(req), sizeof(*rpl));
+    }
+
     if (rpl)
     {
         ok = rpl->retval != 0;

@@ -39,7 +39,7 @@
 #include "gui.h"
 #include "util.h"
 #include "token.h"
-
+#include "wfp.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -118,6 +118,7 @@ volatile BOOLEAN Driver_Unloading = FALSE;
 static BOOLEAN Driver_FullUnload = TRUE;
 
 UNICODE_STRING Driver_Altitude;
+const WCHAR* Altitude_Str = FILTER_ALTITUDE;
 
 ULONG Process_Flags1 = 0;
 ULONG Process_Flags2 = 0;
@@ -151,7 +152,7 @@ _FX NTSTATUS DriverEntry(
     Driver_Object = DriverObject;
     Driver_Object->DriverUnload = NULL;
 
-    RtlInitUnicodeString(&Driver_Altitude, FILTER_ALTITUDE);
+    RtlInitUnicodeString(&Driver_Altitude, Altitude_Str);
 
     if (ok)
         ok = Driver_CheckOsVersion();
@@ -176,6 +177,8 @@ _FX NTSTATUS DriverEntry(
 
     if (ok)
         ok = Driver_FindHomePath(RegistryPath);
+
+    MyValidateCertificate();
 
     //
     // initialize simple utility modules.  these don't hook anything
@@ -236,6 +239,13 @@ _FX NTSTATUS DriverEntry(
         ok = Api_Init();
 
     //
+    // initializing Windows Filtering Platform callouts
+    //
+    
+    if (ok)
+        ok = WFP_Init();
+
+    //
     // finalize of driver initialization
     //
 
@@ -270,7 +280,7 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
     // or Windows 7 (v6.1) or later (64-bit)
     //
 
-#ifdef _WIN64
+#if defined(_WIN64) || !defined(XP_SUPPORT)
     const ULONG MajorVersionMin = 6;
     const ULONG MinorVersionMin = 1;
 #else
@@ -283,6 +293,8 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
     if (MajorVersion > MajorVersionMin ||
             (   MajorVersion == MajorVersionMin
              && MinorVersion >= MinorVersionMin)) {
+
+        // Hard Offset Dependency
 
         if (MajorVersion == 10) {
             Driver_OsVersion = DRIVER_WINDOWS_10;
@@ -332,7 +344,7 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
             return TRUE;
     }
 
-    swprintf(str, L"%d.%d (%d)", MajorVersion, MinorVersion, Driver_OsBuild);
+    RtlStringCbPrintfW(str, sizeof(str), L"%d.%d (%d)", MajorVersion, MinorVersion, Driver_OsBuild);
     Log_Msg(MSG_1105, str, NULL);
     return FALSE;
 }
@@ -605,7 +617,7 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
         return FALSE;                                           \
     if (! Hook_GetService(                                      \
             ptr, NULL, prmcnt, NULL, (void **)&svc)) {          \
-        swprintf(err_txt, L"%s.%S", Dll_NTDLL, ProcName);       \
+        RtlStringCbPrintfW(err_txt, szieof(err_txt), L"%s.%S", Dll_NTDLL, ProcName);       \
         Log_Msg1(MSG_1108, err_txt);                            \
         return FALSE;                                           \
     }                                                           \
@@ -662,9 +674,12 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
     // unload just the hooks, in case this is a partial unload
     //
 
+#ifdef XP_SUPPORT
     Gui_Unload();
+#endif
     Key_Unload();
     File_Unload();
+    Obj_Unload();
     Thread_Unload();
     Process_Unload(FALSE);
 
@@ -678,6 +693,7 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
         time.QuadPart = -SECONDS(5);
         KeDelayExecutionThread(KernelMode, FALSE, &time);
 
+        WFP_Unload();
         Session_Unload();
         Dll_Unload();
         Conf_Unload();
@@ -716,7 +732,11 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
     ok = FALSE;
+#ifdef USE_PROCESS_MAP
+    if (Process_Map.nnodes == 0) {
+#else
     if (! List_Count(&Process_List)) {
+#endif
         if (Api_Disable())
             ok = TRUE;
     }

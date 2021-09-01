@@ -3046,7 +3046,7 @@ Nasledovné vylúčenia umožnia web prehliadačom bežať v tomto Pieskovisku a
 .
 
 4323;txt;01
-Prinútiť %2 spustiť v tomto Pieskovisku (len Registrovaná verzia)
+Prinútiť %2 spustiť v tomto Pieskovisku
 .
 
 4324;txt;02

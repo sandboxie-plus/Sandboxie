@@ -21,6 +21,7 @@
 
 
 #include "obj.h"
+#include "conf.h"
 
 
 //---------------------------------------------------------------------------
@@ -55,15 +56,23 @@ const OBJECT_NAME_INFORMATION Obj_Unnamed = {
 P_ObGetObjectType pObGetObjectType = NULL;
 P_ObQueryNameInfo pObQueryNameInfo = NULL;
 
+//---------------------------------------------------------------------------
+// Include code for minifilter
+//---------------------------------------------------------------------------
+
+
+#include "obj_flt.c"
 
 //---------------------------------------------------------------------------
 // Include code for 32-bit Windows XP
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "obj_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -73,6 +82,16 @@ P_ObQueryNameInfo pObQueryNameInfo = NULL;
 
 _FX BOOLEAN Obj_Init(void)
 {
+    //
+    // register as a object filter on Vista SP1 and later
+    //
+
+    //if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+
+    //    if (!Obj_Init_Filter())
+    //        return FALSE;
+    //}
+
     if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
 
         //
@@ -102,6 +121,24 @@ _FX BOOLEAN Obj_Init(void)
     }
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Obj_Unload
+//---------------------------------------------------------------------------
+
+
+_FX void Obj_Unload(void)
+{
+    //
+    // deregister as a object filter on Vista SP1 and later
+    //
+
+    //if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+
+    //    Obj_Unload_Filter();
+    //}
 }
 
 

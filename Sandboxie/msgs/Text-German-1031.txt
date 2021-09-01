@@ -3015,7 +3015,7 @@ Die folgenden Regeln erlauben Webbrowsern ihre Daten außerhalb der Sandbox abzu
 .
 
 4323;txt;01
-Den Start des %2 in dieser Sandbox erzwingen (Registrierte Version erforderlich)
+Den Start des %2 in dieser Sandbox erzwingen
 .
 
 4324;txt;02

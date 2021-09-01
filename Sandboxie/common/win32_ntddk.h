@@ -554,8 +554,24 @@ typedef struct _FILE_SHORT_NAME_INFORMATION {
 
 // FileDispositionInformation
 typedef struct _FILE_DISPOSITION_INFORMATION {
-    BOOLEAN DeleteFile;
+    BOOLEAN DeleteFileOnClose;
 } FILE_DISPOSITION_INFORMATION, *PFILE_DISPOSITION_INFORMATION;
+
+// // FileDispositionInformationEx
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS1)
+#define FILE_DISPOSITION_DO_NOT_DELETE              0x00000000
+#define FILE_DISPOSITION_DELETE                     0x00000001
+#define FILE_DISPOSITION_POSIX_SEMANTICS            0x00000002
+#define FILE_DISPOSITION_FORCE_IMAGE_SECTION_CHECK  0x00000004
+#define FILE_DISPOSITION_ON_CLOSE                   0x00000008
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#define FILE_DISPOSITION_IGNORE_READONLY_ATTRIBUTE  0x00000010
+#endif
+
+typedef struct _FILE_DISPOSITION_INFORMATION_EX {
+    ULONG Flags;
+} FILE_DISPOSITION_INFORMATION_EX, *PFILE_DISPOSITION_INFORMATION_EX;
+#endif
 
 // FilePositionInformation
 typedef struct _FILE_POSITION_INFORMATION {
@@ -2174,6 +2190,22 @@ __declspec(dllimport) NTSTATUS __stdcall NtFilterToken(
     IN PTOKEN_GROUPS RestrictedSids OPTIONAL,
     OUT PHANDLE NewTokenHandle);
 
+__declspec(dllimport) NTSTATUS __stdcall NtFilterTokenEx(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _In_ ULONG DisableUserClaimsCount,
+    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
+    _In_ ULONG DisableDeviceClaimsCount,
+    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
+    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
+    _In_opt_ PVOID RestrictedUserAttributes,
+    _In_opt_ PVOID RestrictedDeviceAttributes,
+    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
+    _Out_ PHANDLE NewTokenHandle);
+
 __declspec(dllimport) NTSTATUS __stdcall NtAdjustPrivilegesToken(
     IN HANDLE TokenHandle,
     IN BOOLEAN DisableAllPrivileges,
@@ -2284,6 +2316,11 @@ __declspec(dllimport) NTSTATUS __stdcall NtCreateJobObject(
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL);
 
+__declspec(dllimport) NTSTATUS __stdcall NtOpenJobObject(
+    OUT PHANDLE JobHandle,
+    IN  ACCESS_MASK DesiredAccess,
+    IN  POBJECT_ATTRIBUTES ObjectAttributes);
+
 __declspec(dllimport) NTSTATUS __stdcall NtAssignProcessToJobObject(
     HANDLE hJob, HANDLE hProcess);
 
@@ -2381,6 +2418,21 @@ __declspec(dllimport) ULONG __stdcall
 RtlNtStatusToDosError(NTSTATUS Status);
 
 __declspec(dllimport) void __stdcall RtlRaiseStatus(NTSTATUS Status);
+
+NTSTATUS NTAPI RtlSetThreadErrorMode(IN ULONG NewMode, OUT PULONG OldMode);
+
+__declspec(dllimport) PULONG __stdcall
+RtlSubAuthoritySid(
+    _In_ PSID Sid,
+    _In_ ULONG SubAuthority
+    );
+
+__declspec(dllimport) NTSTATUS __stdcall
+RtlInitializeSid(
+    _Out_ PSID Sid,
+    _In_ PSID_IDENTIFIER_AUTHORITY IdentifierAuthority,
+    _In_ UCHAR SubAuthorityCount
+    );
 
 //---------------------------------------------------------------------------
 

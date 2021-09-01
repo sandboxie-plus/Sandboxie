@@ -142,6 +142,108 @@ QStringList SplitStr(const QString& String, QString Separator)
 	return List;
 }
 
+TArguments GetArguments(const QString& Arguments, QChar Separator, QChar Assigner, QString* First, bool bLowerKeys, bool bReadEsc)
+{
+	TArguments ArgumentList;
+
+	bool bReadValue = false;
+	QString Name;
+	QString Value;
+	QChar Prime = L'\0';
+	bool bEsc = false;
+	for(int i = 0; i < Arguments.size(); i++)
+	{
+		QChar Char = Arguments.at(i);
+		
+		if(Prime != L'\0') // inside a string
+		{
+			if(bEsc) // ESC sequence handling
+			{
+				switch(Char.unicode())
+				{
+					case L'\\':	Value += L'\\';	break;
+					case L'\'':	Value += L'\'';	break;
+					case L'\"':	Value += L'\"';	break;
+					case L'a':	Value += L'\a';	break;
+					case L'b':	Value += L'\b';	break;
+					case L'f':	Value += L'\f';	break;
+					case L'n':	Value += L'\n';	break;
+					case L'r':	Value += L'\r';	break;
+					case L't':	Value += L'\t';	break;
+					case L'v':	Value += L'\v';	break;
+					default:	Value += L'?';	break;
+				}
+				bEsc = false;
+			}
+			else if(bReadEsc && Char == L'\\')
+				bEsc = true;
+			else if(Char == Prime) // end of the string
+				Prime = L'\0';
+			else
+			{
+				if(bReadValue)
+					Value += Char;
+				else
+					Name += Char;
+			}
+			continue;
+		}
+		else if(Char == L'"' || Char == L'\'') // begin of a string
+		{
+			Prime = Char;
+			continue;
+		}
+
+		if(Char == L' ' || Char == L'\t')
+			continue;
+
+		if(!bReadValue) // reading argument name, or value for default argument
+		{
+			if(Char == Separator)
+			{
+				if(First) {*First = Name; First = NULL;}
+				else ArgumentList.insertMulti("",Name);
+				Name.clear();
+			}
+			else if(Char == Assigner)
+				bReadValue = true;
+			else
+				Name += Char;
+		}
+		else
+		{
+			if(Char == Separator)
+			{
+				if (bLowerKeys) Name = Name.toLower();
+				ArgumentList.insertMulti(Name,Value);
+				//if(First) {*First = Name; First = NULL;}
+				Name.clear();
+				Value.clear();
+				bReadValue = false;
+			}
+			else
+				Value += Char;
+		}
+	}
+
+	if(!Name.isEmpty())
+	{
+		if(bReadValue)
+		{
+			if (bLowerKeys) Name = Name.toLower();
+			ArgumentList.insertMulti(Name,Value);
+			//if (First) { *First = Name; }
+		}
+		else
+		{
+			if (First) { *First = Name; }
+			else ArgumentList.insertMulti("", Name);
+		}
+	}
+
+	return ArgumentList;
+}
+
 QString FormatSize(quint64 Size, int Precision)
 {
 	double Div;

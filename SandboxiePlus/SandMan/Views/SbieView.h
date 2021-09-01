@@ -19,10 +19,11 @@ public:
 	//virtual void				UpdateRunMenu();
 
 	virtual QString				AddNewBox();
+	virtual QString				AddNewGroup();
 	virtual void				SelectBox(const QString& Name);
 
-signals:
-	void						RecoveryRequested(const QString& BoxName);
+	virtual void				PopUpMenu(const QString& Name);
+	virtual void				ShowOptions(const QString& Name);
 
 public slots:
 	void						Clear();
@@ -51,6 +52,7 @@ protected:
 
 private:
 
+	void					UpdateMenu();
 	void					UpdateGroupMenu();
 
 	QString					FindParent(const QString& Name);
@@ -62,6 +64,8 @@ private:
 	CSbieModel*				m_pSbieModel;
 	QSortFilterProxyModel*	m_pSortProxy;
 
+	QMenu*					m_pMenu2;
+
 	QAction*				m_pNewBox;
 	QAction*				m_pAddGroupe;
 	QAction*				m_pDelGroupe;
@@ -71,9 +75,14 @@ private:
 	QAction*				m_pMenuRunMenu;
 	QAction*				m_pMenuRunBrowser;
 	QAction*				m_pMenuRunMailer;
+	QMenu*					m_pMenuRunTools;
 	QAction*				m_pMenuRunExplorer;
+	QAction*				m_pMenuRunRegEdit;
+	QAction*				m_pMenuRunAppWiz;
+	QAction*				m_pMenuAutoRun;
 	QAction*				m_pMenuRunCmd;
 	QAction*				m_pMenuRunCmdAdmin;
+	QAction*				m_pMenuRunCmd32;
 	QAction*				m_pMenuMkLink;
 	QMenu*					m_pMenuPresets;
 	QActionGroup*			m_pMenuPresetsAdmin;
@@ -85,7 +94,10 @@ private:
 	QAction*				m_pMenuOptions;
 	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;
+	QMenu*					m_pMenuContent;
 	QAction*				m_pMenuExplore;
+	QAction*				m_pMenuBrowse;
+	QAction*				m_pMenuRegEdit;
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;

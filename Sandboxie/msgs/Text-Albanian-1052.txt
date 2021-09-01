@@ -3011,7 +3011,7 @@ Përjashtimet më poshtë i lejojnë shfletuesit e Internetit që ekzekutohen n�
 .
 
 4323;txt;01
-Detyroj %2 të ekzekutohet në këtë kuti (Vetëm versioni i regjistruar)
+Detyroj %2 të ekzekutohet në këtë kuti
 .
 
 4324;txt;02

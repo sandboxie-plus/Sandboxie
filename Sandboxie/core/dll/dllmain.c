@@ -321,6 +321,9 @@ _FX void Dll_InitInjected(void)
         Dll_FixWow64Syscall();
 
     if (ok)
+        ok = File_InitHandles();
+
+    if (ok)
         ok = Obj_Init();
 
     if (ok) {
@@ -466,7 +469,7 @@ _FX void Dll_InitExeEntry(void)
 
     //
     // check if running as a forced COM server process
-    // note:  does not return if this is the case
+    // note:  it does not return if this is the case
     //
 
     Custom_ComServer();
@@ -475,9 +478,11 @@ _FX void Dll_InitExeEntry(void)
     // force load of UxTheme in a Google Chrome sandbox process
     //
 
-    Custom_Load_UxTheme();
+    // Note: this does not seem to be needed anymore for modern Chrome builds, also it breaks Vivaldi browser
 
-    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since win 7
+    //Custom_Load_UxTheme(); 
+
+    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since Win 7
 
     //
     // Windows 8.1:  hook UserEnv-related entrypoint in KernelBase
@@ -495,12 +500,14 @@ _FX void Dll_InitExeEntry(void)
 
 
 //---------------------------------------------------------------------------
-// Dll_SelectImageType
+// Dll_GetImageType
 //---------------------------------------------------------------------------
 
 
-_FX void Dll_SelectImageType(void)
+_FX ULONG Dll_GetImageType(const WCHAR *ImageName)
 {
+    ULONG ImageType = DLL_IMAGE_UNSPECIFIED;
+
     //
     // check for custom configured special images
     //
@@ -521,14 +528,18 @@ _FX void Dll_SelectImageType(void)
 
         *ptr++ = L'\0';
 
-        if (_wcsicmp(Dll_ImageName, ptr) == 0) {
+        if (_wcsicmp(ImageName, ptr) == 0) {
 
             if (_wcsicmp(L"chrome", buf) == 0)
-                Dll_ImageType = DLL_IMAGE_GOOGLE_CHROME;
+                ImageType = DLL_IMAGE_GOOGLE_CHROME;
             else if (_wcsicmp(L"firefox", buf) == 0)
-                Dll_ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+                ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+            else if (_wcsicmp(L"browser", buf) == 0)
+                ImageType = DLL_IMAGE_OTHER_WEB_BROWSER;
+            else if (_wcsicmp(L"mail", buf) == 0)
+                ImageType = DLL_IMAGE_OTHER_MAIL_CLIENT;
             else
-                Dll_ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
+                ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
 
             break;
         }
@@ -562,6 +573,8 @@ _FX void Dll_SelectImageType(void)
         L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"k-meleon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
+        L"librewolf.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
@@ -582,23 +595,50 @@ _FX void Dll_SelectImageType(void)
         L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is Chromium-based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
 
+        L"PuffinSecureBrowser.exe", (WCHAR *)DLL_IMAGE_OTHER_WEB_BROWSER,
+
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"plugin-container.exe",    (WCHAR *)DLL_IMAGE_PLUGIN_CONTAINER,
         L"Outlook.exe",             (WCHAR *)DLL_IMAGE_OFFICE_OUTLOOK,
         L"Excel.exe",               (WCHAR *)DLL_IMAGE_OFFICE_EXCEL,
+
+        L"thunderbird.exe",         (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"winmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"IncMail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"eudora.exe",              (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"thebat32.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"thebat64.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"Foxmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"Mailbird.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"MailClient.exe",          (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"postbox.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+        L"Inky.exe",                (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
+
         NULL,                       NULL
     };
 
-    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED) {
+    if (ImageType == DLL_IMAGE_UNSPECIFIED) {
 
         for (int i = 0; _ImageNames[i]; i += 2) {
-            if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
-                Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
+            if (_wcsicmp(ImageName, _ImageNames[i]) == 0) {
+                ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
                 break;
             }
         }
     }
+
+    return ImageType;
+}
+
+//---------------------------------------------------------------------------
+// Dll_SelectImageType
+//---------------------------------------------------------------------------
+
+
+_FX void Dll_SelectImageType(void)
+{
+    Dll_ImageType = Dll_GetImageType(Dll_ImageName);
 
     if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
             _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)
@@ -627,6 +667,8 @@ _FX void Dll_SelectImageType(void)
 
     if (Dll_ImageType == DLL_IMAGE_LAST)
         Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
+
+    SbieApi_QueryProcessInfoEx(0, 'spit', Dll_ImageType);
 
     //
     // we have some special cases for programs running under a restricted
@@ -738,13 +780,28 @@ _FX ULONG_PTR Dll_Ordinal1(
                 CloseHandle(heventProcessStart);
             }
         }
+
         //
         // workaround for Program Compatibility Assistant (PCA), we have
         // to start a second instance of this process outside the PCA job,
         // see also Proc_RestartProcessOutOfPcaJob
         //
 
-        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+        int MustRestartProcess = 0;
+        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
+            MustRestartProcess = 1;
+
+        else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
+            if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)
+             || SbieDll_CheckStringInList(Dll_ImageName, NULL, L"ForceRestart"))
+                MustRestartProcess = 2;
+        }
+
+        if (MustRestartProcess) {
+
+            WCHAR text[128];
+            Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
+            SbieApi_MonitorPut(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();

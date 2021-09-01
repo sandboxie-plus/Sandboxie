@@ -190,11 +190,13 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
     //
     // check if the caller is sandboxed before proceeding
     //
+    if (Driver_OsBuild < DRIVER_BUILD_WINDOWS_10_CU)
+    {
+        proc = Process_Find(NULL, NULL);
+        if (proc == PROCESS_TERMINATED)
+            return STATUS_PROCESS_IS_TERMINATING;
+    }
 
-    proc = Process_Find(NULL, NULL);
-    if (proc == PROCESS_TERMINATED)
-        return STATUS_PROCESS_IS_TERMINATING;
-    
     Info = (REG_OPEN_CREATE_KEY_INFORMATION_VISTA *)Arg2;
 
     // HACK ALERT! If you click a link in a Word doc, it will try to start an embedded IE, which cannot be forced into Sandboxie.
@@ -226,7 +228,7 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
     if (status != STATUS_SUCCESS)
         return status;
 
-    if (!proc || proc->bHostInject)
+    if (!proc || proc->bHostInject || proc->disable_key_flt)
         return STATUS_SUCCESS;
 
     //

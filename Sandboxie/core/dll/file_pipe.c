@@ -79,7 +79,7 @@ static BOOLEAN File_IsPipeSuffix(const WCHAR *ptr);
 
 static ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server);
 
-static const BOOLEAN File_InternetBlockade_ManualBypass();
+const BOOLEAN File_InternetBlockade_ManualBypass();
 
 static NTSTATUS File_NtCreateFilePipe(
     HANDLE *FileHandle,
@@ -254,10 +254,10 @@ _FX ULONG File_IsNamedPipe(const WCHAR *path, const WCHAR **server)
     // check if this is an Internet device matching a ClosedFilePath
     //
 
-    if (len >= 10 && _wcsnicmp(path, File_Mup, 8) == 0) {
+    if (len >= 10 && _wcsnicmp(path, File_Mup, 8) == 0) { // match \device\ only
 
 		BOOLEAN prompt = SbieApi_QueryConfBool(NULL, L"PromptForInternetAccess", FALSE);
-		if (SbieApi_CheckInternetAccess(NULL, path + 8, !prompt) == STATUS_ACCESS_DENIED
+		if (SbieApi_CheckInternetAccess(0, path + 8, !prompt) == STATUS_ACCESS_DENIED
 			&& (!prompt || !File_InternetBlockade_ManualBypass())) {
 
 			return TYPE_NET_DEVICE;
@@ -292,7 +292,7 @@ _FX const BOOLEAN File_InternetBlockade_ManualBypass()
 		Dll_Free(rpl);
 	}
 	else if(SbieApi_QueryConfBool(NULL, L"NotifyInternetAccessDenied", TRUE))
-		SbieApi_Log(1307, L"%s [%s]", Dll_ImageName, Dll_BoxName);
+		SbieApi_Log(1307, L"%S [%S]", Dll_ImageName, Dll_BoxName);
 
 	//
 	// Note: the granting process must notify the driver about the exemption 

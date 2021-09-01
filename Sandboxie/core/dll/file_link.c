@@ -28,6 +28,7 @@
 struct _FILE_DRIVE {
 
     WCHAR letter;
+    WCHAR sn[10];
     BOOLEAN subst;
     ULONG len;          // in characters, excluding NULL
     WCHAR path[0];

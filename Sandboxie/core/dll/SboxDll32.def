@@ -8,13 +8,10 @@ EXPORTS
 Dll_Ordinal1 @1 NONAME
 
 ;;;
-;;; SbieApi
+;;; SbieApiSbieApi_LogEx
 ;;;
 
 
-SbieApi_CallZero=_SbieApi_CallZero@4
-SbieApi_CallOne=_SbieApi_CallOne@8
-SbieApi_CallTwo=_SbieApi_CallTwo@12
 SbieApi_CheckInternetAccess=_SbieApi_CheckInternetAccess@12
 
 SbieApi_DisableForceProcess=_SbieApi_DisableForceProcess@8
@@ -35,7 +32,7 @@ SbieApi_IsBoxEnabled=_SbieApi_IsBoxEnabled@4
 
 SbieApi_MonitorControl=_SbieApi_MonitorControl@8
 ;;; SbieApi_MonitorGet=_SbieApi_MonitorGet@8
-SbieApi_MonitorGetEx=_SbieApi_MonitorGetEx@20
+SbieApi_MonitorGetEx=_SbieApi_MonitorGetEx@16
 SbieApi_MonitorPut=_SbieApi_MonitorPut@8
 SbieApi_MonitorPut2=_SbieApi_MonitorPut2@12
 
@@ -50,7 +47,7 @@ SbieApi_QueryProcessEx=_SbieApi_QueryProcessEx@24
 SbieApi_QueryProcessInfo=_SbieApi_QueryProcessInfo@8
 SbieApi_QueryProcessPath=_SbieApi_QueryProcessPath@28
 
-SbieApi_ReloadConf=_SbieApi_ReloadConf@4
+SbieApi_ReloadConf=_SbieApi_ReloadConf@8
 
 SbieApi_SessionLeader=_SbieApi_SessionLeader@8
 SbieApi_SetUserName=_SbieApi_SetUserName@8

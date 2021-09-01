@@ -198,6 +198,14 @@ class CBoxPage : public CPropertyPage
     afx_msg void RestrictPgm_AddStar();
 
     //
+    // Not Implemented
+    //
+
+    void NotImplemented_OnInitDialog(CBox &box);
+
+    afx_msg void OnLinkLabel(NMHDR *pNMHDR, LRESULT *pResult);
+
+    //
     // File Access
     //
 

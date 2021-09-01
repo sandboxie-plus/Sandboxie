@@ -1,12 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>SandMan.png</file>
-        <file alias="BoxEmpty">sandbox-empty.png</file>
-        <file alias="BoxInUse">sandbox-full.png</file>
         <file alias="dllIcon32">dll32.png</file>
         <file alias="exeIcon32">exe32.png</file>
         <file>close.png</file>
-        <file>SandMan2.png</file>
         <file>Actions/Internet.png</file>
         <file>Actions/Keep.png</file>
         <file>Actions/ReloadIni.png</file>
@@ -43,10 +40,26 @@
         <file>Actions/Box.png</file>
         <file>Actions/Template.png</file>
         <file>Actions/Stop.png</file>
-        <file>SandMan2N.png</file>
-        <file>SandManN.png</file>
         <file>Actions/finder.png</file>
         <file>Actions/Tree.png</file>
+        <file>Actions/Support.png</file>
+        <file>HelpingHand.png</file>
+        <file>Actions/RegEdit.png</file>
+        <file>Actions/Software.png</file>
+        <file>IconEmpty.png</file>
+        <file>IconEmptyD.png</file>
+        <file>IconFull.png</file>
+        <file>IconFullD.png</file>
+        <file>Actions/Ampel.png</file>
+        <file>Actions/Compatibility.png</file>
+        <file>IconOff.png</file>
+        <file>Actions/Lock.png</file>
+        <file>Actions/Shell.png</file>
+        <file>IconFullDC.png</file>
+        <file>IconEmptyDC.png</file>
+        <file>IconOffC.png</file>
+        <file>IconFullC.png</file>
+        <file>IconEmptyC.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

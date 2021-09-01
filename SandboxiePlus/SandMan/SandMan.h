@@ -23,6 +23,7 @@ class CBoxBorder;
 class CSbieTemplates;
 class CTraceView;
 
+
 class CSandMan : public QMainWindow
 {
 	Q_OBJECT
@@ -37,15 +38,21 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
+	bool				AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false);
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
-	static QIcon		GetIcon(const QString& Name);
+	static QIcon		GetIcon(const QString& Name, bool bAction = true);
 
 	bool				IsFullyPortable();
 
 	bool				IsShowHidden() { return m_pShowHidden->isChecked(); }
+
+	CSbieView*			GetBoxView() { return m_pBoxView; }
+
+	void				RunSandboxed(const QStringList& Commands, const QString& BoxName);
+
+	QIcon				GetBoxIcon(bool inUse, int boxType = 0);
 
 protected:
 	SB_STATUS			ConnectSbie();
@@ -54,6 +61,8 @@ protected:
 	SB_STATUS			StopSbie(bool andRemove = false);
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
+
+	QIcon				GetTrayIconName(bool isConnected = true);
 
 	void				closeEvent(QCloseEvent* e);
 
@@ -74,6 +83,22 @@ protected:
 
 	QStringList			m_MissingTemplates;
 
+	enum EBoxColors
+	{
+		eYellow = 0,
+		eRed,
+		eGreen,
+		eBlue,
+		eCyan,
+		eMagenta,
+		eOrang,
+		eMaxColor
+	};
+
+	QMap<EBoxColors, QPair<QIcon, QIcon> > m_BoxIcons;
+
+	class UGlobalHotkeys* m_pHotkeyManager;
+
 public slots:
 	void				OnMessage(const QString&);
 
@@ -84,12 +109,16 @@ public slots:
 	void				OnNotAuthorized(bool bLoginRequired, bool& bRetry);
 
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
-	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
+	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
-	void				OpenRecovery(const QString& BoxName);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty = false);
+	void				ShowRecovery(const CSandBoxPtr& pBox);
 
 	void				UpdateSettings();
 	void				OnIniReloaded();
+
+	void				SetupHotKeys();
+	void				OnHotKey(size_t id);
 
 	void				OnAsyncFinished();
 	void				OnAsyncFinished(CSbieProgress* pProgress);
@@ -105,12 +134,16 @@ public slots:
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
 
+	void				OnBoxMenu(const QPoint &);
+	void				OnBoxDblClick(QTreeWidgetItem*);
+
 private slots:
 	void				OnSelectionChanged();
 
 	void				OnMenuHover(QAction* action);
 
 	void				OnNewBox();
+	void				OnNewGroupe();
 	void				OnEmptyAll();
 	void				OnWndFinder();
 	void				OnDisableForce();
@@ -120,7 +153,7 @@ private slots:
 	void				OnViewMode(QAction* action);
 	void				OnAlwaysTop();
 	void				OnCleanUp();
-	void				OnSetKeep();
+	void				OnProcView();
 
 	void				OnSettings();
 	void				OnResetMsgs();
@@ -167,7 +200,8 @@ private:
 
 
 	QMenu*				m_pMenuFile;
-	QAction*			m_pNew;
+	QAction*			m_pNewBox;
+	QAction*			m_pNewGroup;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
@@ -198,6 +232,7 @@ private:
 	QAction*			m_pCleanUpTrace;
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
+	QAction*			m_pShowAllSessions;
 
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
@@ -216,12 +251,15 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QTreeWidget*		m_pTrayBoxes;
+	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	bool				m_bIconDisabled;
 
 	bool				m_bExit;
 
 	CProgressDialog*	m_pProgressDialog;
+	bool				m_pProgressModal;
 	CPopUpWindow*		m_pPopUpWindow;
 
 	void				SetUITheme();
@@ -231,6 +269,7 @@ private:
 	void				LoadLanguage();
 	QTranslator			m_Translator;
 	QByteArray			m_Translation;
+
 public:
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;

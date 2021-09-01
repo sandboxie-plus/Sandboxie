@@ -72,8 +72,6 @@ struct _KEY_MOUNT {
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Key_InitPaths(PROCESS *proc);
-
 static NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2);
 
 static BOOLEAN Key_MountHive2(PROCESS *proc, KEY_MOUNT *mount);
@@ -108,7 +106,9 @@ NTSTATUS Key_Api_SetLowLabel(PROCESS *proc, ULONG64 *parms);
 static LIST Key_Mounts;
 static PERESOURCE Key_MountsLock = NULL;
 
+#ifdef XP_SUPPORT
 static BOOLEAN Key_Have_KB979683 = FALSE;
+#endif
 
 const WCHAR *Key_Registry_Machine = L"\\REGISTRY\\MACHINE";
 
@@ -128,9 +128,11 @@ static BOOLEAN Key_NeverUnmountHives = FALSE;
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "key_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -149,6 +151,7 @@ _FX BOOLEAN Key_Init(void)
 
     P_Key_Init_2 p_Key_Init_2 = Key_Init_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -157,6 +160,7 @@ _FX BOOLEAN Key_Init(void)
     }
 
 #endif ! _WIN64
+#endif
 
     if (! p_Key_Init_2())
         return FALSE;
@@ -198,6 +202,7 @@ _FX void Key_Unload(void)
 
     P_Key_Unload_2 p_Key_Unload_2 = Key_Unload_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -206,6 +211,7 @@ _FX void Key_Unload(void)
     }
 
 #endif ! _WIn64
+#endif
 
     p_Key_Unload_2();
 
@@ -352,7 +358,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
             if (*(ULONG *)Context & 1)
                 write_access = TRUE;
-
+#ifdef XP_SUPPORT
         } else if (Key_Have_KB979683) {
 
             //
@@ -363,7 +369,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
             if (*(((UCHAR *)Context) + 0x21) & 1)
                 write_access = TRUE;
-
+#endif
         } else      // Context is sent by NtCreateKey
             write_access = TRUE;
     }
@@ -474,13 +480,13 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             if (!ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(K%c) %08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    else if (ShouldMonitorAccess) {
+    else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
     }
@@ -1035,6 +1041,7 @@ unmount_loop:
         KeLowerIrql(irql);
     }
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     //
@@ -1051,6 +1058,7 @@ unmount_loop:
     }
 
 #endif _WIN64
+#endif
 
     return status;
 }

@@ -19,7 +19,7 @@
 // Common Utility Functions
 //---------------------------------------------------------------------------
 
-
+#include <windows.h>
 #include "CommonUtils.h"
 
 

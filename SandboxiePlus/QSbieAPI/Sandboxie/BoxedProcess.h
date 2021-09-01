@@ -30,6 +30,7 @@ public:
 	virtual ~CBoxedProcess();
 
 	virtual bool			InitProcessInfo();
+	virtual bool			InitProcessInfoEx();
 
 	virtual quint32			GetProcessId() const { return m_ProcessId; }
 	virtual quint32			GetParendPID() const  { return m_ParendPID; }
@@ -37,6 +38,7 @@ public:
 	virtual QString			GetCommandLine() const  { return m_CommandLine; }
 	virtual QString			GetFileName() const { return m_ImagePath; }
 	virtual QDateTime		GetTimeStamp() const { return m_StartTime; }
+	virtual quint32			GetImageType() const { return m_ImageType; }
 
 	virtual SB_STATUS		Terminate();
 	virtual bool			IsTerminated(quint64 forMs = 0) const;
@@ -45,20 +47,26 @@ public:
 	//virtual SB_STATUS		SetSuspend(bool bSet);
 	//virtual bool			IsSuspended() const;
 
-	virtual QString			GetBoxName() const;
+	virtual bool			IsWoW64() const { return m_bIsWoW64; }
+
+	virtual QString			GetBoxName() const { return m_BoxName; }
+	virtual class CSandBox* GetBoxPtr() const { return m_pBox; }
 
 protected:
 	friend class CSbieAPI;
 
 	quint32			m_ProcessId;
+	QString			m_BoxName;
 	quint32			m_ParendPID;
 	QString			m_ImageName;
 	QString			m_ImagePath;
+	quint32			m_ImageType;
 	QString			m_CommandLine;
 	quint32			m_SessionId;
 	QDateTime		m_StartTime;
 	quint64			m_uTerminated;
 	//bool			m_bSuspended;
+	bool			m_bIsWoW64;
 
 	class CSandBox*	m_pBox;
 

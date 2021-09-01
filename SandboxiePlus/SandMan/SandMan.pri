@@ -18,7 +18,9 @@ HEADERS += ./stdafx.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
-    ./Windows/OptionsWindow.h
+    ./Windows/OptionsWindow.h \
+    ./Windows/SelectBoxWindow.h \
+    ./Windows/FileBrowserWindow.h
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
@@ -34,24 +36,40 @@ SOURCES += ./main.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
+    ./Windows/OptionsAccess.cpp \
+    ./Windows/OptionsAdvanced.cpp \
+    ./Windows/OptionsForce.cpp \
+    ./Windows/OptionsGeneral.cpp \
+    ./Windows/OptionsGrouping.cpp \
+    ./Windows/OptionsNetwork.cpp \
+    ./Windows/OptionsRecovery.cpp \
+    ./Windows/OptionsStart.cpp \
+    ./Windows/OptionsStop.cpp \
+    ./Windows/OptionsTemplates.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
     ./Windows/SettingsWindow.cpp \
-    ./Windows/SnapshotsWindow.cpp
+    ./Windows/SnapshotsWindow.cpp \
+    ./Windows/SelectBoxWindow.cpp \
+    ./Windows/FileBrowserWindow.cpp
 
 FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
     ./Forms/PopUpWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
-    ./Forms/SnapshotsWindow.ui
+    ./Forms/SnapshotsWindow.ui \
+    ./Forms/SelectBoxWindow.ui \
+    ./Forms/FileBrowserWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
+    sandman_en.ts \
     sandman_es.ts \
     sandman_it.ts \
+    sandman_nl.ts \
+    sandman_pl.ts \
     sandman_pt.ts \
     sandman_ru.ts \
-    sandman_pl.ts \
     sandman_tr.ts \
     sandman_zh-CN.ts \
     sandman_zh-TW.ts

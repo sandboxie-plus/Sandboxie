@@ -127,12 +127,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="KmdUtil.c" />
-    <ClCompile Include="rc4.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="sbiedrv.c" />
     <ClCompile Include="scandll.c" />
     <ClCompile Include="stdafx.c">
@@ -143,7 +137,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rc4.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

@@ -66,6 +66,10 @@ static NTSTATUS SysInfo_NtCreateJobObject(
     HANDLE *JobHandle, ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes);
 
+static NTSTATUS SysInfo_NtOpenJobObject(
+    HANDLE *JobHandle, ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes);
+
 static NTSTATUS SysInfo_NtAssignProcessToJobObject(
     HANDLE JobHandle, HANDLE ProcessHandle);
 
@@ -94,6 +98,7 @@ static P_SetLocaleInfo              __sys_SetLocaleInfoW            = NULL;
 static P_SetLocaleInfo              __sys_SetLocaleInfoA            = NULL;
 
 static P_NtCreateJobObject          __sys_NtCreateJobObject         = NULL;
+static P_NtOpenJobObject            __sys_NtOpenJobObject           = NULL;
 static P_NtAssignProcessToJobObject __sys_NtAssignProcessToJobObject = NULL;
 static P_NtSetInformationJobObject  __sys_NtSetInformationJobObject = NULL;
 
@@ -107,6 +112,8 @@ static P_NtTraceEvent  __sys_NtTraceEvent = NULL;
 
 static ULONG_PTR *SysInfo_JobCallbackData = NULL;
 
+BOOLEAN SysInfo_UseSbieJob = FALSE;
+BOOLEAN SysInfo_CanUseJobs = FALSE;
 
 //---------------------------------------------------------------------------
 // SysInfo_Init
@@ -122,10 +129,18 @@ _FX BOOLEAN SysInfo_Init(void)
         SBIEDLL_HOOK(SysInfo_,NtQuerySystemInformation);
     }
 
+    extern BOOLEAN Gui_OpenAllWinClasses;
+    SysInfo_UseSbieJob = !Gui_OpenAllWinClasses && !SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE);
+
+    if (Dll_OsBuild >= 8400)
+        SysInfo_CanUseJobs = SbieApi_QueryConfBool(NULL, L"AllowBoxedJobs", FALSE);
+
     SBIEDLL_HOOK(SysInfo_, NtCreateJobObject);
-    if (!SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE)) 
-    {
-        SBIEDLL_HOOK(SysInfo_, NtAssignProcessToJobObject);
+    SBIEDLL_HOOK(SysInfo_, NtOpenJobObject);
+    if (SysInfo_UseSbieJob) {
+        if (!SysInfo_CanUseJobs) {
+            SBIEDLL_HOOK(SysInfo_, NtAssignProcessToJobObject);
+        }
         SBIEDLL_HOOK(SysInfo_, NtSetInformationJobObject);
     }
 
@@ -376,6 +391,55 @@ _FX void *SysInfo_QueryProcesses(ULONG *out_len)
 
 
 //---------------------------------------------------------------------------
+// SysInfo_GetJobName
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** OutCopyPath)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    WCHAR *name;
+    ULONG objname_len;
+    WCHAR *objname_buf;
+    static volatile ULONG JobCounter = 0;
+    WCHAR dummy_name[MAX_PATH];
+
+    *OutCopyPath = NULL;
+
+    if (ObjectAttributes && ObjectAttributes->ObjectName) {
+        objname_len = ObjectAttributes->ObjectName->Length & ~1;
+        objname_buf = ObjectAttributes->ObjectName->Buffer;
+    } else {
+
+        InterlockedIncrement(&JobCounter);
+        Sbie_snwprintf(dummy_name, MAX_PATH, L"%s_DummyJob_%s_p%d_t%d_c%d",
+                        SBIE, Dll_ImageName, GetCurrentProcessId(), GetCurrentThreadId(), JobCounter);
+        
+        objname_len = wcslen(dummy_name);
+        objname_buf = dummy_name;
+    }
+
+
+    name = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, Dll_BoxIpcPathLen + objname_len);
+
+    *OutCopyPath = name;
+
+    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+    name += Dll_BoxIpcPathLen;
+
+    *name = L'\\';
+    name++;
+
+    wmemcpy(name, objname_buf, objname_len);
+    name += objname_len;
+    *name = L'\0';
+
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
 // SysInfo_NtCreateJobObject
 //---------------------------------------------------------------------------
 
@@ -384,48 +448,56 @@ _FX NTSTATUS SysInfo_NtCreateJobObject(
     HANDLE *JobHandle, ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes)
 {
-    static volatile ULONG _JobCounter = 0;
+    NTSTATUS status;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname;
-    WCHAR *jobname;
-    ULONG jobname_len;
-    NTSTATUS status;
+    WCHAR* CopyPath;
 
     //
     // the driver requires us to specify a sandboxed path name to a
     // job object, and to not request some specific rights
     //
 
-    if (!SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE))
+    if(!SysInfo_CanUseJobs && SysInfo_UseSbieJob)
         DesiredAccess &= ~(JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE);
 
-    jobname_len = Dll_BoxIpcPathLen + wcslen(Dll_ImageName) + 64;
-    jobname = Dll_AllocTemp(jobname_len * sizeof(WCHAR));
-
-    while (1) {
-
-        InterlockedIncrement(&_JobCounter);
-        Sbie_snwprintf(jobname, jobname_len, L"%s\\%s_DummyJob_%s_%d",
-                        Dll_BoxIpcPath, SBIE, Dll_ImageName, _JobCounter);
-        RtlInitUnicodeString(&objname, jobname);
-
-        InitializeObjectAttributes(&objattrs,
-            &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_EveryoneSD);
-
-        status = __sys_NtCreateJobObject(
-                                JobHandle, DesiredAccess, &objattrs);
-
-        //
-        // we always start each process with _JobCounter = 0 so we have to
-        // account for the case where a dummy job object was already created
-        // by another process, and not fail the request
-        //
-
-        if (status != STATUS_OBJECT_NAME_COLLISION)
-            break;
+    if (NT_SUCCESS(SysInfo_GetJobName(ObjectAttributes, &CopyPath))) {
+        RtlInitUnicodeString(&objname, CopyPath);
+        InitializeObjectAttributes(&objattrs, &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_EveryoneSD);
+        ObjectAttributes = &objattrs;
     }
 
-    Dll_Free(jobname);
+    status = __sys_NtCreateJobObject(JobHandle, DesiredAccess, ObjectAttributes);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SysInfo_NtCreateJobObject
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS SysInfo_NtOpenJobObject(
+    HANDLE* JobHandle, ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES* ObjectAttributes)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR* CopyPath;
+
+    if(!SysInfo_CanUseJobs && SysInfo_UseSbieJob)
+        DesiredAccess &= ~(JOB_OBJECT_ASSIGN_PROCESS | JOB_OBJECT_TERMINATE);
+
+    if (NT_SUCCESS(SysInfo_GetJobName(ObjectAttributes, &CopyPath))) {
+        RtlInitUnicodeString(&objname, CopyPath);
+        InitializeObjectAttributes(&objattrs, &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, Secure_EveryoneSD);
+        ObjectAttributes = &objattrs;
+    }
+
+    status = __sys_NtOpenJobObject(JobHandle, DesiredAccess, ObjectAttributes);
+
     return status;
 }
 
@@ -461,14 +533,27 @@ _FX NTSTATUS SysInfo_NtSetInformationJobObject(
     HANDLE JobHandle, JOBOBJECTINFOCLASS JobObjectInformationClass,
     void *JobObjectInformtion, ULONG JobObjectInformtionLength)
 {
+    //
+    // Since windows 8 we can have nested jobs i.e. we can have all sandboxed processes 
+    // be part of the box isoaltion job and also of for example a chrome sandbox job.
+    // Howeever we booth jobs can not specify UIRestrictions since our own job allready
+    // specified those restrictions, we dont allow a boxed process to spesify its own.
+    //
+
+    if (SysInfo_CanUseJobs && JobObjectInformationClass == JobObjectBasicUIRestrictions)
+        return STATUS_SUCCESS;
+
     NTSTATUS status = __sys_NtSetInformationJobObject(
         JobHandle, JobObjectInformationClass,
         JobObjectInformtion, JobObjectInformtionLength);
 
+    if(SysInfo_CanUseJobs)
+        return status;
+
     if (NT_SUCCESS(status) &&
             JobObjectInformationClass ==
                     JobObjectAssociateCompletionPortInformation) {
-
+    
         SysInfo_JobCallbackData_Set(NULL, JobObjectInformtion);
     }
 

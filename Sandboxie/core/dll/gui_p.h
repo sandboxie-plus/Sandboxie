@@ -820,7 +820,9 @@ BOOLEAN Gui_InitMsg(void);
 
 BOOLEAN Gui_InitWinHooks(void);
 
-LRESULT Gui_ApplyWinHooks(ULONG_PTR idThread);
+LRESULT Gui_RegisterWinHook(DWORD dwThreadId, ULONG64 ghk);
+
+LRESULT Gui_NotifyWinHooks(void);
 
 
 //---------------------------------------------------------------------------

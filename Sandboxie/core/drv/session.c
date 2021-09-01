@@ -92,7 +92,7 @@ static void Session_Unlock(KIRQL irql);
 static SESSION *Session_Get(
     BOOLEAN create, ULONG SessionId, KIRQL *out_irql);
 
-static BOOLEAN Session_CheckAdminAccess(const WCHAR *setting);
+static BOOLEAN Session_CheckAdminAccess2(const WCHAR *setting);
 
 
 //---------------------------------------------------------------------------
@@ -174,10 +174,13 @@ _FX BOOLEAN Session_Init(void)
         return FALSE;
     if (! Session_AddObjectType(L"Section"))
         return FALSE;
+#ifdef XP_SUPPORT
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
         if (! Session_AddObjectType(L"Port"))
             return FALSE;
-    } else {
+    } else 
+#endif
+    {
         if (! Session_AddObjectType(L"ALPC Port"))
             return FALSE;
     }
@@ -306,6 +309,7 @@ _FX SESSION *Session_Get(BOOLEAN create, ULONG SessionId, KIRQL *out_irql)
 
             memzero(session, sizeof(SESSION));
             session->session_id = SessionId;
+            session->leader_pid = PsGetCurrentProcessId();
 
             List_Insert_After(&Session_List, NULL, session);
         }
@@ -313,8 +317,6 @@ _FX SESSION *Session_Get(BOOLEAN create, ULONG SessionId, KIRQL *out_irql)
 
     if (! session)
         Session_Unlock(*out_irql);
-    else if (create)
-        session->leader_pid = PsGetCurrentProcessId();
 
     return session;
 }
@@ -364,37 +366,47 @@ _FX void Session_Cancel(HANDLE ProcessId)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Session_CheckAdminAccess(const WCHAR *setting)
+_FX BOOLEAN Session_CheckAdminAccess(BOOLEAN OnlyFull)
 {
-    if (Conf_Get_Boolean(NULL, setting, 0, FALSE)) {
+    //
+    // check if token is member of the Administrators group
+    //
+
+    PACCESS_TOKEN pAccessToken =
+        PsReferencePrimaryToken(PsGetCurrentProcess());
+    BOOLEAN IsAdmin = SeTokenIsAdmin(pAccessToken);
+    if ((! IsAdmin) && Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
 
         //
-        // check if token is member of the Administrators group
+        // on Windows Vista, check for UAC split token
         //
 
-        PACCESS_TOKEN pAccessToken =
-            PsReferencePrimaryToken(PsGetCurrentProcess());
-        BOOLEAN IsAdmin = SeTokenIsAdmin(pAccessToken);
-        if ((! IsAdmin) && Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
-
-            //
-            // on Windows Vista, check for UAC split token
-            //
-
-            ULONG *pElevationType;
-            NTSTATUS status = SeQueryInformationToken(
-                pAccessToken, TokenElevationType, &pElevationType);
-            if (NT_SUCCESS(status)) {
-                if (*pElevationType == TokenElevationTypeFull ||
-                    *pElevationType == TokenElevationTypeLimited)
-                    IsAdmin = TRUE;
-                ExFreePool(pElevationType);
-            }
+        ULONG *pElevationType;
+        NTSTATUS status = SeQueryInformationToken(
+            pAccessToken, TokenElevationType, &pElevationType);
+        if (NT_SUCCESS(status)) {
+            if (*pElevationType == TokenElevationTypeFull ||
+                (!OnlyFull && *pElevationType == TokenElevationTypeLimited))
+                IsAdmin = TRUE;
+            ExFreePool(pElevationType);
         }
+    }
 
-        PsDereferencePrimaryToken(pAccessToken);
-        if (! IsAdmin)
-            return FALSE;
+    PsDereferencePrimaryToken(pAccessToken);
+    return IsAdmin;
+}
+
+
+//---------------------------------------------------------------------------
+// Session_CheckAdminAccess
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Session_CheckAdminAccess2(const WCHAR *setting)
+{
+    if (!setting || Conf_Get_Boolean(NULL, setting, 0, FALSE)) {
+
+        return Session_CheckAdminAccess(FALSE);
     }
     return TRUE;
 }
@@ -422,11 +434,15 @@ _FX NTSTATUS Session_Api_Leader(PROCESS *proc, ULONG64 *parms)
 
         if (proc)
             status = STATUS_NOT_IMPLEMENTED;
+        else if (!MyIsCallerSigned()) 
+            status = STATUS_ACCESS_DENIED;
         else {
 
             session = Session_Get(TRUE, -1, &irql);
             if (! session)
                 status = STATUS_INSUFFICIENT_RESOURCES;
+            else if (session->leader_pid != PsGetCurrentProcessId())
+                status = STATUS_DEVICE_ALREADY_ATTACHED;  // STATUS_ALREADY_REGISTERED
         }
 
     } else {
@@ -507,7 +523,7 @@ _FX NTSTATUS Session_Api_DisableForce(PROCESS *proc, ULONG64 *parms)
         ULONG in_flag_value = *in_flag;
         if (in_flag_value) {
 
-            if (! Session_CheckAdminAccess(L"ForceDisableAdminOnly"))
+            if (! Session_CheckAdminAccess2(L"ForceDisableAdminOnly"))
                     return STATUS_ACCESS_DENIED;
             KeQuerySystemTime(&time);
 
@@ -573,6 +589,37 @@ _FX BOOLEAN Session_IsForceDisabled(ULONG SessionId)
 
 
 //---------------------------------------------------------------------------
+// Session_IsLeader
+//---------------------------------------------------------------------------
+
+
+_FX ULONG Session_GetLeadSession(HANDLE pid)
+{
+    NTSTATUS status;
+    SESSION* session;
+    KIRQL irql;
+    ULONG lead_session = 0;
+
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Session_ListLock, TRUE);
+
+    session = List_Head(&Session_List);
+    while (session) {
+        if (session->leader_pid == pid) {
+            lead_session = session->session_id;
+            break;
+        }
+        session = List_Next(session);
+    }
+
+    ExReleaseResourceLite(Session_ListLock);
+    KeLowerIrql(irql);
+
+    return lead_session;
+}
+
+
+//---------------------------------------------------------------------------
 // Session_MonitorPut
 //---------------------------------------------------------------------------
 
@@ -611,7 +658,7 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
 		//[Type 4][PID 4][TID 4][Data n*2]
 		SIZE_T entry_size = 4 + 4 + 4 + data_len;
 
-		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log);
+		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log, FALSE);
 		if (write_ptr) {
 			log_buffer_push_bytes((CHAR*)&type, 4, &write_ptr, session->monitor_log);
 			log_buffer_push_bytes((CHAR*)&pid, 4, &write_ptr, session->monitor_log);
@@ -621,7 +668,7 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
             for (int i = 0; strings[i] != NULL; i++)
 				log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
 		}
-		else // this can only happen when the entire buffer is to small to hold this one entry
+		else 
 			Log_Msg0(MSG_MONITOR_OVERFLOW);
     }
 
@@ -684,7 +731,7 @@ _FX NTSTATUS Session_Api_MonitorControl(PROCESS *proc, ULONG64 *parms)
         ProbeForRead(in_flag, sizeof(ULONG), sizeof(ULONG));
         if (*in_flag) {
 
-            if (! Session_CheckAdminAccess(L"MonitorAdminOnly"))
+            if (! Session_CheckAdminAccess2(L"MonitorAdminOnly"))
                 return STATUS_ACCESS_DENIED;
 
             EnableMonitor = TRUE;
@@ -756,7 +803,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
     if (! proc)
         return STATUS_NOT_IMPLEMENTED;
 
-    if (! Session_MonitorCount)
+    if (! Session_MonitorCount || proc->disable_monitor)
         return STATUS_SUCCESS;
 
     log_type = args->log_type.val;
@@ -959,7 +1006,7 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
 {
     API_MONITOR_GET_EX_ARGS* args = (API_MONITOR_GET_EX_ARGS*)parms;
     NTSTATUS status;
-    ULONG* seq_num;
+    //ULONG* seq_num;
     ULONG* log_type;
     ULONG* log_pid;
     ULONG* log_tid;
@@ -971,11 +1018,12 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
     if (proc)
         return STATUS_NOT_IMPLEMENTED;
 
-    seq_num = args->log_seq.val;
-    if (seq_num != NULL) {
-        ProbeForRead(seq_num, sizeof(ULONG), sizeof(ULONG));
-        ProbeForWrite(seq_num, sizeof(ULONG), sizeof(ULONG));
-    }
+    // Note: when logging a lot of enries the performance is to low when keeping entries
+    //seq_num = args->log_seq.val;
+    //if (seq_num != NULL) {
+    //    ProbeForRead(seq_num, sizeof(ULONG), sizeof(ULONG));
+    //    ProbeForWrite(seq_num, sizeof(ULONG), sizeof(ULONG));
+    //}
 
     log_type = args->log_type.val;
     ProbeForWrite(log_type, sizeof(ULONG), sizeof(ULONG));
@@ -1018,9 +1066,9 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
         }
 
         CHAR* read_ptr = NULL;
-        if (seq_num != NULL)
-            read_ptr = log_buffer_get_next(*seq_num, session->monitor_log);
-        else if (session->monitor_log->buffer_size > 0) // for compatibility with older versions we return the oldest entry
+        //if (seq_num != NULL)
+        //    read_ptr = log_buffer_get_next(*seq_num, session->monitor_log);
+        //else if (session->monitor_log->buffer_size > 0) // for compatibility with older versions we return the oldest entry
             read_ptr = session->monitor_log->buffer_start_ptr;
 
         if (!read_ptr) {
@@ -1067,9 +1115,9 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
         log_buffer[data_size / sizeof(wchar_t)] = L'\0';
         
 
-        if (seq_num != NULL)
-            *seq_num = seq_number;
-        else // for compatibility with older versions we fall back to clearing the returned entry
+        //if (seq_num != NULL)
+        //    *seq_num = seq_number;
+        //else // for compatibility with older versions we fall back to clearing the returned entry
             log_buffer_pop_entry(session->monitor_log);
 
     }

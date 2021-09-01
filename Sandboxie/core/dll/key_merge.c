@@ -200,6 +200,7 @@ _FX NTSTATUS Key_Merge(
         // if we got here, we need to discard the stale entry
         //
 
+        File_UnRegisterCloseHandler(merge->handle, Key_NtClose);
         List_Remove(&Key_Handles, merge);
         Key_MergeFree(merge, TRUE);
 
@@ -225,6 +226,7 @@ _FX NTSTATUS Key_Merge(
         memcpy(merge->name, TruePath, TruePath_len + sizeof(WCHAR));
 
         List_Insert_Before(&Key_Handles, NULL, merge);
+        File_RegisterCloseHandler(merge->handle, Key_NtClose);
     }
 
     //
@@ -1377,6 +1379,7 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
                 }
             }
 
+            File_UnRegisterCloseHandler(merge->handle, Key_NtClose);
             List_Remove(&Key_Handles, merge);
             Key_MergeFree(merge, TRUE);
         }
@@ -1444,7 +1447,7 @@ _FX void Key_NtClose(HANDLE KeyHandle)
             merge->ticks = 0;
             break;
         }
-        merge = List_Next(merge);;
+        merge = List_Next(merge);
     }
 
     LeaveCriticalSection(&Key_Handles_CritSec);

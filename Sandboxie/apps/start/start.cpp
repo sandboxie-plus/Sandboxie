@@ -38,6 +38,9 @@
 #define MyHeapAlloc(len) \
     (WCHAR*)HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (len))
 
+#define MyHeapFree(ptr) \
+    HeapFree(GetProcessHeap(), 0, ptr);
+
 
 //---------------------------------------------------------------------------
 // Functions
@@ -46,7 +49,6 @@
 
 void List_Process_Ids(void);
 int Terminate_All_Processes(BOOL all_boxes);
-BOOLEAN Register_Process(void);
 
 extern WCHAR *DoRunDialog(HINSTANCE hInstance);
 extern WCHAR *DoBoxDialog(void);
@@ -56,6 +58,16 @@ extern BOOL WriteStartMenuResult(const WCHAR *MapName, const WCHAR *Command);
 extern void DeleteSandbox(
     const WCHAR *BoxName, BOOL bLogoff, BOOL bSilent, int phase);
 
+
+extern "C" {
+    SBIEDLL_EXPORT NTSTATUS Key_GetName(
+        HANDLE RootDirectory, UNICODE_STRING* ObjectName,
+        WCHAR** OutTruePath, WCHAR** OutCopyPath, BOOLEAN* OutIsBoxedPath);
+
+    SBIEDLL_EXPORT NTSTATUS File_GetName(
+        HANDLE RootDirectory, UNICODE_STRING* ObjectName,
+        WCHAR** OutTruePath, WCHAR** OutCopyPath, ULONG* OutFlags);
+}
 
 //---------------------------------------------------------------------------
 // Variables
@@ -68,13 +80,14 @@ PWSTR ChildCmdLine = NULL;
 BOOL run_mail_agent = FALSE;
 BOOL display_run_dialog = FALSE;
 BOOL display_start_menu = FALSE;
+BOOL execute_auto_run = FALSE;
 BOOL run_elevated_2 = FALSE;
 BOOL disable_force_on_this_program = FALSE;
 BOOL auto_select_default_box = FALSE;
 WCHAR *StartMenuSectionName = NULL;
 BOOL run_silent = FALSE;
+BOOL keep_alive = FALSE;
 BOOL dont_start_sbie_ctrl = FALSE;
-BOOL process_was_registered = FALSE;
 BOOL hide_window = FALSE;
 BOOL wait_for_process = FALSE;
 BOOLEAN layout_rtl = FALSE;
@@ -375,6 +388,8 @@ BOOL Parse_Command_Line(void)
     static const WCHAR *mail_agent        = L"mail_agent";
     static const WCHAR *run_dialog        = L"run_dialog";
     static const WCHAR *start_menu        = L"start_menu";
+    static const WCHAR *auto_run          = L"auto_run";
+    static const WCHAR *mount_hive        = L"mount_hive";
     static const WCHAR *delete_sandbox    = L"delete_sandbox";
     static const WCHAR *_logoff           = L"_logoff";
     static const WCHAR *_silent           = L"_silent";
@@ -548,7 +563,7 @@ BOOL Parse_Command_Line(void)
 
         } else if (_wcsnicmp(cmd, L"reload", 6) == 0) {
 
-            SbieApi_ReloadConf(-1);
+            SbieApi_ReloadConf(-1, 0);
             ExitProcess(0);
 
         //
@@ -586,6 +601,16 @@ BOOL Parse_Command_Line(void)
             run_silent = TRUE;
 
         //
+        // Command line switch /keep_alive
+        //
+
+        } else if (_wcsnicmp(cmd, L"keep_alive", 10) == 0) {
+
+            cmd += 10;
+
+            keep_alive = TRUE;
+
+        //
         // Command line switch /elevate
         //
 
@@ -607,7 +632,7 @@ BOOL Parse_Command_Line(void)
             disable_force_on_this_program = TRUE;
 
         //
-        // Command line switch /elevate
+        // Command line switch /hide_window
         //
 
         } else if (_wcsnicmp(cmd, L"hide_window", 11) == 0) {
@@ -732,6 +757,38 @@ BOOL Parse_Command_Line(void)
 
         return TRUE;
 
+    // run auto start entries
+
+    } else if (wcsncmp(cmd, auto_run, wcslen(auto_run)) == 0) {
+
+        if (! SbieApi_QueryProcessInfo(
+                        (HANDLE)(ULONG_PTR)GetCurrentProcessId(), 0)) {
+            // this is the instance of Start.exe outside the sandbox
+            // so just resend the start_menu command line to the
+            // instance that will restart in the sandbox
+            ChildCmdLine = cmd;
+
+        }
+
+        execute_auto_run = TRUE;
+
+        return TRUE;
+
+    // mount hive
+
+    } else if (wcsncmp(cmd, mount_hive, wcslen(mount_hive)) == 0) {
+
+        if (! SbieApi_QueryProcessInfo(
+                        (HANDLE)(ULONG_PTR)GetCurrentProcessId(), 0)) {
+            ChildCmdLine = cmd;
+
+        }
+        else {
+            Sleep(5000);
+        }
+
+        return TRUE;
+
     // if rest is exactly "delete_sandbox", do that processing
 
     } else if (wcsncmp(cmd, delete_sandbox, wcslen(delete_sandbox)) == 0) {
@@ -795,6 +852,19 @@ BOOL Parse_Command_Line(void)
         SetLastError(0);
         Show_Error(SbieDll_FormatMessage0(MSG_3203));
         return FALSE;
+    }
+
+    //
+    // if this is a link to start.exe with a box, extract the target command line
+    //
+
+    if (StrStrIW(cmd, L"\\start.exe") != 0) {
+        wchar_t* tmp = StrStrIW(cmd, L"/box:");
+        if (tmp) {
+            tmp = StrStrIW(tmp, L" ");
+            if (tmp)
+                cmd = tmp + 1;
+        }
     }
 
     ChildCmdLine = (WCHAR *)MyHeapAlloc(10240 * sizeof(WCHAR));
@@ -960,7 +1030,7 @@ int Program_Start(void)
         shExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
         shExecInfo.fMask = SEE_MASK_FLAG_NO_UI | SEE_MASK_DOENVSUBST
                          | SEE_MASK_FLAG_DDEWAIT | SEE_MASK_NOZONECHECKS;
-        if (wait_for_process)
+        if (wait_for_process || keep_alive)
             shExecInfo.fMask |= SEE_MASK_NOCLOSEPROCESS;
         shExecInfo.hwnd = NULL;
         shExecInfo.lpVerb = NULL;
@@ -987,22 +1057,6 @@ int Program_Start(void)
 
                     shExecInfo.lpVerb = L"runas";
                 }
-            }
-        }
-
-        //
-        // if Online Armor is part of the process, then invoke Start.exe
-        // recursively, that somehow fixes the problem
-        //
-
-        if (process_was_registered && GetModuleHandle(L"oawatch.dll")) {
-
-            if (SbieDll_RunFromHome(START_EXE, cmdline, &si, &pi)) {
-
-                ok = TRUE;
-                err = 0;
-
-                break;
             }
         }
 
@@ -1045,8 +1099,7 @@ int Program_Start(void)
         // Start.exe which will then open the document normally
         //
 
-        if ((! ok) && (err == ERROR_NO_ASSOCIATION) &&
-            process_was_registered && run_elevated_2) {
+        /*if ((! ok) && (err == ERROR_NO_ASSOCIATION) && run_elevated_2) {
 
             WCHAR *start_exe = MyHeapAlloc((MAX_PATH + 8) * sizeof(WCHAR));
 
@@ -1060,7 +1113,7 @@ int Program_Start(void)
 
             shExecInfo.lpFile = cmdline;
             shExecInfo.lpParameters = NULL;
-        }
+        }*/
 
         //
         // handle a possible DDE error by retrying without the DDE option
@@ -1114,7 +1167,7 @@ int Program_Start(void)
             }
         }
 
-        if (ok && wait_for_process)
+        if (ok && (wait_for_process || keep_alive))
             hNewProcess = shExecInfo.hProcess;
 
         if (! ok) {
@@ -1131,7 +1184,7 @@ int Program_Start(void)
 
             err = ok ? 0 : GetLastError();
 
-            if (ok && wait_for_process)
+            if (ok && (wait_for_process || keep_alive))
                 hNewProcess = pi.hProcess;
         }
 
@@ -1158,6 +1211,8 @@ int Program_Start(void)
         SetLastError(err);
         Show_Error(errmsg);
 
+        keep_alive = FALSE; // disable keep alive when the process cant be started in the first place
+            
         return EXIT_FAILURE;
 
     } else if (hNewProcess) {
@@ -1165,8 +1220,11 @@ int Program_Start(void)
         if (WaitForSingleObject(hNewProcess, INFINITE) == WAIT_OBJECT_0) {
 
             ok = GetExitCodeProcess(hNewProcess, &err);
-            if (ok)
+            if (ok) {
+                if (keep_alive)
+                    return err;
                 ExitProcess(err);
+            }
         }
 
     } else if (GetModuleHandle(L"protect.dll")) {
@@ -1180,6 +1238,233 @@ int Program_Start(void)
     }
 
     return EXIT_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// StartAutoRunKey
+//---------------------------------------------------------------------------
+
+
+void StartAutoRun(const WCHAR* Name, const WCHAR* Cmd)
+{
+    SbieDll_RunStartExe(Cmd, NULL);
+}
+
+
+//---------------------------------------------------------------------------
+// StartAutoRunKey
+//---------------------------------------------------------------------------
+
+
+void StartAutoRunKey(LPCWSTR lpKey)
+{
+    WCHAR* OutTruePath;
+    WCHAR* OutCopyPath;
+    UNICODE_STRING objname;
+    RtlInitUnicodeString(&objname, lpKey);
+    Key_GetName(NULL, &objname, &OutTruePath, &OutCopyPath, NULL);
+
+
+	OBJECT_ATTRIBUTES ObjectAttributes;
+    UNICODE_STRING RegistryPath;
+	HANDLE hKey = NULL;
+    const ULONG BufferSize = sizeof(KEY_VALUE_FULL_INFORMATION) + MAX_PATH;
+	PUCHAR Buffer[BufferSize];
+    PKEY_VALUE_FULL_INFORMATION valueInfo = (PKEY_VALUE_FULL_INFORMATION)Buffer;
+	ULONG RequiredSize;
+	ULONG i = 0;
+	UNICODE_STRING Name;
+	UNICODE_STRING Data;
+	NTSTATUS Status;
+
+    // Get the native unhooked fucntion in order to enumerate only the sandboxed entries
+    P_NtOpenKey __sys_NtOpenKey = (P_NtOpenKey)SbieDll_GetSysFunction(L"NtOpenKey");
+    P_NtEnumerateValueKey __sys_NtEnumerateValueKey = (P_NtEnumerateValueKey)SbieDll_GetSysFunction(L"NtEnumerateValueKey");
+
+    RtlInitUnicodeString(&RegistryPath, OutCopyPath);
+	InitializeObjectAttributes(&ObjectAttributes, &RegistryPath, 0, NULL, NULL);
+	Status = __sys_NtOpenKey(&hKey, KEY_QUERY_VALUE, &ObjectAttributes);
+	if (!NT_SUCCESS(Status))
+		return;
+
+	while (TRUE) {
+		Status = __sys_NtEnumerateValueKey(hKey, i++, KeyValueFullInformation, valueInfo, sizeof(Buffer), &RequiredSize);
+		if (Status == STATUS_BUFFER_OVERFLOW)
+			continue;
+		else if (!NT_SUCCESS(Status))
+			break;
+		else if (valueInfo->Type != REG_SZ)
+			continue;
+
+		Name.Length = Name.MaximumLength = (USHORT)valueInfo->NameLength;
+		Name.Buffer = valueInfo->Name;
+
+		Data.Length = Data.MaximumLength = (USHORT)valueInfo->DataLength;
+		Data.Buffer = (PWCHAR)((ULONG_PTR)valueInfo + valueInfo->DataOffset);
+		if (Data.Length > sizeof(WCHAR) && Data.Buffer[Data.Length / sizeof(WCHAR) - 1] == UNICODE_NULL)
+			Data.Length -= sizeof(WCHAR);
+
+		StartAutoRun(Name.Buffer, Data.Buffer);
+	}
+
+	NtClose(hKey);
+}
+
+
+//---------------------------------------------------------------------------
+// StartAutoRunKey
+//---------------------------------------------------------------------------
+
+
+void StartLink(const WCHAR* Path, const WCHAR* Name)
+{
+    WCHAR path[MAX_PATH];
+    wcscpy(path, Path + 4); // skip \??\ prefix
+    if (path[wcslen(path)] != L'\\')
+        wcscat(path, L"\\");
+    wcscat(path, Name);
+
+    /*WCHAR *ptr = wcsrchr(path, L'.');
+    if (! ptr)
+        return;
+    if (_wcsicmp(ptr, L".lnk") != 0 /&& _wcsicmp(ptr, L".url") != 0/)
+        return;
+
+    IShellLink *pShellLink;
+    IPersistFile *pPersistFile;
+    void GetLinkInstance(const WCHAR * path, IShellLink * *ppShellLink, IPersistFile * *ppPersistFile, bool msi);
+    GetLinkInstance(path, &pShellLink, &pPersistFile, false);
+    if ((! pShellLink) || (! pPersistFile))
+        return;
+
+    DWORD buflen = 10240;
+    WCHAR *buf = (WCHAR *)MyHeapAlloc(buflen);
+
+    HRESULT hr = pShellLink->GetPath(buf, buflen / sizeof(WCHAR) - 1, NULL, 0);
+    if (SUCCEEDED(hr)) {
+
+        StartAutoRun(Name, buf);
+    }
+
+    MyHeapFree(buf);
+
+    pPersistFile->Release();
+    pShellLink->Release();*/
+
+    StartAutoRun(Name, path); // we can use the link directly
+}
+
+
+//---------------------------------------------------------------------------
+// StartAutoRunKey
+//---------------------------------------------------------------------------
+
+
+void StartAutoAutoFolder(LPCWSTR lpPath)
+{
+    WCHAR* OutTruePath;
+    WCHAR* OutCopyPath;
+    UNICODE_STRING objname;
+    RtlInitUnicodeString(&objname, lpPath);
+    File_GetName(NULL, &objname, &OutTruePath, &OutCopyPath, NULL);
+
+    UNICODE_STRING RootDirectoryName;
+	OBJECT_ATTRIBUTES RootDirectoryAttributes;
+	NTSTATUS ntStatus = STATUS_SUCCESS;
+	HANDLE RootDirectoryHandle;
+	IO_STATUS_BLOCK Iosb;
+	//HANDLE Event;
+    PFILE_ID_BOTH_DIR_INFORMATION DirInformation;
+
+    // Get the native unhooked fucntion in order to enumerate only the sandboxed entries
+    P_NtCreateFile __sys_NtCreateFile = (P_NtCreateFile)SbieDll_GetSysFunction(L"NtCreateFile");
+    P_NtQueryDirectoryFile __sys_NtQueryDirectoryFile = (P_NtQueryDirectoryFile)SbieDll_GetSysFunction(L"NtQueryDirectoryFile");
+	
+	RtlInitUnicodeString(&RootDirectoryName, OutCopyPath);
+	InitializeObjectAttributes(&RootDirectoryAttributes, &RootDirectoryName, OBJ_CASE_INSENSITIVE, 0, 0);
+	ntStatus = __sys_NtCreateFile(&RootDirectoryHandle,
+		GENERIC_READ, &RootDirectoryAttributes, &Iosb, 0, FILE_ATTRIBUTE_DIRECTORY,
+		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, FILE_OPEN, FILE_DIRECTORY_FILE, 0, 0);
+	if (!NT_SUCCESS(ntStatus))
+		return;
+	
+	//ntStatus = NtCreateEvent(&Event, GENERIC_ALL, 0, NotificationEvent, FALSE);
+	//if (!NT_SUCCESS(ntStatus))
+	//	return;
+
+    DirInformation = (PFILE_ID_BOTH_DIR_INFORMATION)MyHeapAlloc(65536);
+
+	if (__sys_NtQueryDirectoryFile(RootDirectoryHandle, 0, //Event,
+		0, 0, &Iosb, DirInformation, 65536, FileIdBothDirectoryInformation, FALSE, NULL, FALSE) == STATUS_PENDING)
+	{
+		//ntStatus = NtWaitForSingleobject(Event, TRUE, 0);
+	}
+    if (NT_SUCCESS(ntStatus))
+    {
+        while (1)
+        {
+            UNICODE_STRING EntryName;
+            EntryName.MaximumLength = EntryName.Length = (USHORT)DirInformation->FileNameLength;
+            EntryName.Buffer = &DirInformation->FileName[0];
+            if ((DirInformation->FileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0)
+            {
+                StartLink(lpPath, EntryName.Buffer);
+            }
+            if (0 == DirInformation->NextEntryOffset)
+                break;
+            else
+                DirInformation = (PFILE_ID_BOTH_DIR_INFORMATION)(((PUCHAR)DirInformation) + DirInformation->NextEntryOffset);
+        }
+    }
+    MyHeapFree(DirInformation);
+
+	NtClose(RootDirectoryHandle);
+}
+
+
+//---------------------------------------------------------------------------
+// StartAllAutoRunEntries
+//---------------------------------------------------------------------------
+
+
+void StartAllAutoRunEntries()
+{
+    //while (! IsDebuggerPresent())
+    //    Sleep(500);
+    //__debugbreak();
+
+    // Start boxed services
+    // todo
+
+    // start auto run registry
+    StartAutoRunKey(L"\\REGISTRY\\Machine\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
+    StartAutoRunKey(L"\\REGISTRY\\Machine\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+    //StartAutoRunKey(L"\\REGISTRY\\Machine\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
+    StartAutoRunKey(L"\\REGISTRY\\Machine\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run");
+    StartAutoRunKey(L"\\REGISTRY\\Machine\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+    //StartAutoRunKey(L"\\REGISTRY\\Machine\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
+
+    //HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices
+    //HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
+
+    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
+    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+    //StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
+    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run");
+    StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+    //StartAutoRunKey(L"\\REGISTRY\\User\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnceEx");
+    //HKCU\Software\Microsoft\Windows NT\CurrentVersion\Windows\Run
+
+    //HKCU\Software\Microsoft\Windows\CurrentVersion\RunServices
+    //HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
+
+    // start auto start menu
+    WCHAR AutoStartPath[MAX_PATH + 1] = L"\\??\\";
+    SHGetSpecialFolderPath(NULL, AutoStartPath + 4, CSIDL_COMMON_STARTUP, FALSE);
+    StartAutoAutoFolder(AutoStartPath);
+    SHGetSpecialFolderPath(NULL, AutoStartPath + 4, CSIDL_STARTUP, FALSE);
+    StartAutoAutoFolder(AutoStartPath);
 }
 
 
@@ -1398,6 +1683,8 @@ int __stdcall WinMainCRTStartup(
         } else if (display_start_menu) {
             if (! ChildCmdLine)
                 ChildCmdLine = DoStartMenu();
+        } else if (execute_auto_run) {
+            StartAllAutoRunEntries();
         }
 
         if (! ChildCmdLine) {
@@ -1418,7 +1705,21 @@ int __stdcall WinMainCRTStartup(
             break;
         }
 
+        UINT64 start;
+        int retry = 0;
+
+    run_program:
+
+        start = ::GetTickCount();
+
         rc = Program_Start();
+
+        // keep the process running unless it gracefully terminates
+        if (keep_alive && rc != EXIT_SUCCESS && retry++ < 5) { // after to many initialization failures abbort
+            if (::GetTickCount() - start >= 5000) // if the process run for less than 5 seconts considder it a failure to initialize
+                retry = 0; // reset failure counter on success ful start
+            goto run_program;
+        }
 
         if (! display_run_dialog || rc == EXIT_SUCCESS)
             break;

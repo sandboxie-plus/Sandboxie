@@ -51,7 +51,7 @@ protected:
 
     MSG_HEADER *KillAllHandler(HANDLE CallerProcessId, MSG_HEADER *msg);
 
-    NTSTATUS KillAllHelper(const WCHAR *BoxName, ULONG SessionId);
+    NTSTATUS KillAllHelper(const WCHAR *BoxName, ULONG SessionId, BOOLEAN TerminateJob = FALSE);
 
     MSG_HEADER *SetDeviceMap(HANDLE CallerProcessId, MSG_HEADER *msg);
 

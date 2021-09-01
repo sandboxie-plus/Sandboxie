@@ -26,6 +26,8 @@
 #include "ProcessServer.h"
 #include "Processwire.h"
 #include "DriverAssist.h"
+#include "GuiServer.h"
+#include "GuiWire.h"
 #include "misc.h"
 #include "common/defines.h"
 #include "common/my_version.h"
@@ -172,7 +174,7 @@ MSG_HEADER *ProcessServer::KillOneHandler(
     // match session id and box name
     //
 
-    if (CallerSessionId != TargetSessionId)
+    if (CallerSessionId != TargetSessionId && !PipeServer::IsCallerAdmin())
         return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
     if (CallerBoxName[0] && _wcsicmp(CallerBoxName, TargetBoxName) != 0)
@@ -203,6 +205,7 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     WCHAR TargetBoxName[48];
     ULONG CallerSessionId;
     WCHAR CallerBoxName[48];
+    BOOLEAN TerminateJob;
     NTSTATUS status;
 
     //
@@ -234,13 +237,18 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     } else if (status != STATUS_SUCCESS)
         return SHORT_REPLY(status);
 
+    if (status != STATUS_INVALID_CID) // if this is true the caller is boxed, should be rpcss
+        TerminateJob = FALSE; // if rpcss requests box termination, don't use the job method, fix-me: we get some stuck request in the queue
+    else
+        TerminateJob = !SbieApi_QueryConfBool(TargetBoxName, L"NoAddProcessToJob", FALSE);
+
     //
     // match session id and box name
     //
 
     if (TargetSessionId == -1)
         TargetSessionId = CallerSessionId;
-    else if (CallerSessionId != TargetSessionId)
+    else if (CallerSessionId != TargetSessionId && !PipeServer::IsCallerAdmin())
         return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
     if (CallerBoxName[0] && _wcsicmp(CallerBoxName, TargetBoxName) != 0)
@@ -250,7 +258,7 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     // kill target processes
     //
 
-    status = KillAllHelper(TargetBoxName, TargetSessionId);
+    status = KillAllHelper(TargetBoxName, TargetSessionId, TerminateJob);
 
     return SHORT_REPLY(status);
 }
@@ -261,19 +269,44 @@ MSG_HEADER *ProcessServer::KillAllHandler(
 //---------------------------------------------------------------------------
 
 
-NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId)
+NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId, BOOLEAN TerminateJob)
 {
     NTSTATUS status;
     ULONG retries, i;
-    ULONG pids[512];
+    const ULONG pids_len = 512;
+    ULONG pids[pids_len];
+    ULONG count;
 
-    for (retries = 0; retries < 10; ++retries) {
+    if (TerminateJob) {
 
-        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids, NULL);
+        //
+        // try killing the entire job in one go first
+        //
+
+        GUI_KILL_JOB_REQ data;
+        data.msgid = GUI_KILL_JOB;
+        if (BoxName) wcscpy(data.boxname, BoxName);
+        else data.boxname[0] = L'\0';
+
+        GuiServer::GetInstance()->SendMessageToSlave(SessionId, &data, sizeof(data));
+
+        //
+        // as fallback and for the case where jobs are not used run the manual termination
+        // 
+    }
+
+    
+    for (retries = 0; retries < 10; ) {
+
+        count = pids_len;
+        status = SbieApi_EnumProcessEx(BoxName, FALSE, SessionId, pids, &count);
         if (status != STATUS_SUCCESS)
             break;
-        if (! pids[0])
+        if (count == 0)
             break;
+
+        if (count < pids_len)
+            retries++;
 
         if (retries) {
             if (retries >= 10 - 1) {
@@ -283,7 +316,7 @@ NTSTATUS ProcessServer::KillAllHelper(const WCHAR *BoxName, ULONG SessionId)
             Sleep(100);
         }
 
-        for (i = 1; i <= pids[0]; ++i)
+        for (i = 0; i <= count; ++i)
             KillProcess(pids[i]);
     }
 
@@ -478,6 +511,10 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
             if (SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerPid, 0)) {
                 CallerInSandbox = true;
                 BoxNameOrModelPid = -(LONG_PTR)(LONG)CallerPid;
+                if ((req->si_flags & 0x80000000) != 0) { // bsession0 - this is only allowed for unsandboxed processes
+                    lvl = 0xFF;
+                    goto bail_out;
+                }
             } else {
                 CallerInSandbox = false;
                 if (*req->boxname == L'-')
@@ -540,6 +577,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 lvl = 0x33;
             }
 
+            bail_out:
             CloseHandle(CallerProcessHandle);
 
         } else {
@@ -999,9 +1037,9 @@ BOOL ProcessServer::RunSandboxedStripPrivilege(HANDLE NewTokenHandle, LPCWSTR lp
 
 BOOL ProcessServer::RunSandboxedStripPrivileges(HANDLE NewTokenHandle)
 {
-    BOOLEAN ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_TCB_NAME);
-    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);
-    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_ASSIGNPRIMARYTOKEN_NAME);
+    BOOLEAN ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_TCB_NAME);           // security critical
+    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);  // usualyl not held, but in case
+    //if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_ASSIGNPRIMARYTOKEN_NAME);
     return ok;
 }
 
@@ -1052,11 +1090,26 @@ BOOL ProcessServer::RunSandboxedStartProcess(
             (*crflags) |= CREATE_BREAKAWAY_FROM_JOB;
         }
 
+        // for certain usecases it may be desirable to run a sandbox in session 0
+        // to start a process in that session we use a unused flag bit in STARTUPINFOW::dwFlags
+        // if this bit is set we start a process based on our SYSTEM own token, security whise this is
+        // similar to running boxed services with "RunServicesAsSystem=y" hence to mitigate potential
+        // issues it is recommended to activate "DropAdminRights=y" for boxed using this feature
+        bool bSession0 = (si->dwFlags & 0x80000000) != 0;
+        if (bSession0) {
+            OpenProcessToken(GetCurrentProcess(), TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &PrimaryTokenHandle);
+        }
+
         // impersonate caller in case they have a different device map
         // with different drive mappings
         ok = DuplicateToken(PrimaryTokenHandle,
                             SecurityImpersonation,
                             &ImpersonationTokenHandle);
+
+        if (bSession0) {
+            CloseHandle(PrimaryTokenHandle);
+            PrimaryTokenHandle = NULL;
+        }
 
         if (ok)
             ok = SetThreadToken(NULL, ImpersonationTokenHandle);
@@ -1090,8 +1143,8 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
         if (ok && StartProgramInSandbox) {
 
-            LONG rc = SbieApi_CallTwo(API_START_PROCESS,
-                                      BoxNameOrModelPid, pi->dwProcessId);
+            LONG rc = SbieApi_Call(API_START_PROCESS, 2,
+                                      (ULONG_PTR)BoxNameOrModelPid, (ULONG_PTR)pi->dwProcessId);
             if (rc != 0) {
 
                 LastError = RtlNtStatusToDosError(rc);

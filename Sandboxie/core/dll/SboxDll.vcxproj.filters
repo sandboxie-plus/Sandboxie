@@ -9,11 +9,8 @@
     <ClCompile Include="dllpath.c" />
     <ClCompile Include="event.c" />
     <ClCompile Include="includes.c" />
-    <ClCompile Include="iphlp.c" />
     <ClCompile Include="lsa.c" />
     <ClCompile Include="mscoree.c" />
-    <ClCompile Include="net.c" />
-    <ClCompile Include="netapi.c" />
     <ClCompile Include="obj.c" />
     <ClCompile Include="pdh.c" />
     <ClCompile Include="proc.c" />
@@ -183,6 +180,27 @@
     <ClCompile Include="scm_msi.c">
       <Filter>scm</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\netfw.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\rbtree.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\list.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="net.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="netapi.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="iphlp.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\str_util.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
@@ -229,6 +247,27 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\pattern.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\apps\com\common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\netfw.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\rbtree.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\list.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_wsa.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\str_util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\ntproto.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -282,6 +321,9 @@
     </Filter>
     <Filter Include="api">
       <UniqueIdentifier>{1903d308-e235-4da0-a117-0dfaa6eb24eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{bbd6a003-d74d-405a-bd10-e2fea62301f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

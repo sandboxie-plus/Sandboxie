@@ -2,7 +2,7 @@ name: CI
 
 on:
 #  workflow_dispatch:
-#    branches: [ master ]
+#    branches: [ master, 0.8.x ]
   push:
     branches: [ master ]
   pull_request:
@@ -44,12 +44,12 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ../Qt
-          key: Qt-5.15.1-QtCache
+          key: Qt-5.15.2-QtCache
 
       - name: Install Qt 64 bit
         uses: jurplel/install-qt-action@v2
         with:
-          version: '5.15.1'
+          version: '5.15.2'
           dir: ..
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_64' 
@@ -59,7 +59,7 @@ jobs:
       - name: Install Qt 32 bit
         uses: jurplel/install-qt-action@v2
         with:
-          version: '5.15.1'
+          version: '5.15.2'
           dir: ..
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win32_msvc2019'

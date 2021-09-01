@@ -210,7 +210,10 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
     int i = 0;
     ULONGLONG target = 0;
     ULONG_PTR * ChromeTarget = NULL;
-
+    if (!addr) return NULL;
+    //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
+    //So far the offset has been positive between 0xa00000 and 0xb00000 bytes;
+    //This may change in a future version of chrome
     for (i = 0; i < MAX_FUNC_SIZE; i++) {
         if ((*(USHORT *)&addr[i] == 0x8b48)) {
             //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
@@ -218,6 +221,7 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
                 LONG delta;
                 target = (ULONG_PTR)(addr + i + 7);
                 delta = *(LONG *)&addr[i + 3];
+                //check if offset is close to the expected value (is positive and less than 0x100000 as of chrome 64) 
                 //  if (delta > 0 && delta < 0x100000 )  { //may need to check delta in a future version of chrome
                 target += delta;
                 ChromeTarget = *(ULONGLONG **)target;
@@ -327,7 +331,6 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             *(USHORT *)&ZwXxxPtr[10] == 0xe0ff)/* jmp rax */ {
             ULONGLONG *longlongs = *(ULONGLONG **)&ZwXxxPtr[2];
             chrome64Target = findChromeTarget((unsigned char *)longlongs);
-
         }
 #endif 
 
@@ -355,7 +358,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         //
 
 #ifdef _WIN64
-        if (chrome64Target) {
+        if (chrome64Target && data->Sbie64bitJumpTable) {
             RegionSize = 16;
             ZwXxxPtr = (UCHAR *)chrome64Target;
             RegionBase = ZwXxxPtr;
@@ -364,38 +367,48 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
                 NtCurrentProcess(), &RegionBase, &RegionSize,
                 PAGE_EXECUTE_READWRITE, &OldProtect);
 
-            if (data->Sbie64bitJumpTable) {
-                unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallPtr[0] & 0x3ff];
-                // write new patch for jump table
-                // The jTable is now injected in the same memory module with lowlevel; no need for a 64 bit long jump
-                jTableTarget[0] = 0x49;
-                jTableTarget[1] = 0xc7;
-                jTableTarget[2] = 0xc2;
-                *(ULONG *)&jTableTarget[3] = SyscallPtr[0];
-                if (data->is_win10) {
-                    jTableTarget[7] = 0x48;
-                    jTableTarget[8] = 0xe9;
-                    *(ULONG *)&jTableTarget[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (jTableTarget + 13));
-                }
-                else {
-
-                    jTableTarget[7] = 0xe9;
-                    *(ULONG *)&jTableTarget[8] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (jTableTarget + 12));
-
-                }
-                //  *(ULONGLONG *) &jTableTarget[-8] = 0x9090909090909090; /*patch location for sboxdll hook. jtable elements need to be at 0x18 in size for this*/
-                // jump table: using push rcx instead of push rax to differentiate from the chrome sandbox hook
-                // the sboxdll.dll needs this distinction to handle the chrome type hook properly and to not search
-                // for the chrome target in a sbox 64 bit jtable hook
-
-                ZwXxxPtr[0] = 0x51;     //push rcx
-                // mov rax,<8 byte address to jTableEntry>
-                ZwXxxPtr[1] = 0x48;
-                ZwXxxPtr[2] = 0xb8;
-                *(ULONGLONG *)&ZwXxxPtr[3] = (ULONGLONG)jTableTarget;
-                *(ULONG *)&ZwXxxPtr[11] = 0x24048948;       // mov [rsp],rax
-                ZwXxxPtr[15] = 0xc3;    // ret
+            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallPtr[0] & 0x3ff];
+            // write new patch for jump table
+            // The jTable is now injected in the same memory module with lowlevel; no need for a 64 bit long jump
+            // mov r10, <4 byte SyscallPtr[0]>
+            jTableTarget[0] = 0x49;
+            jTableTarget[1] = 0xc7;
+            jTableTarget[2] = 0xc2;
+            *(ULONG *)&jTableTarget[3] = SyscallPtr[0];
+            // jmp <4 byte SystemServiceAsm>
+            if (data->is_win10) {
+                jTableTarget[7] = 0x48;
+                jTableTarget[8] = 0xe9;
+                *(ULONG *)&jTableTarget[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (jTableTarget + 13));
             }
+            else {
+
+                jTableTarget[7] = 0xe9;
+                *(ULONG *)&jTableTarget[8] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (jTableTarget + 12));
+
+            }
+            //  *(ULONGLONG *) &jTableTarget[-8] = 0x9090909090909090; /*patch location for sboxdll hook. jtable elements need to be at 0x18 in size for this*/
+            // jump table: using push rcx instead of push rax to differentiate from the chrome sandbox hook
+            // the sboxdll.dll needs this distinction to handle the chrome type hook properly and to not search
+            // for the chrome target in a sbox 64 bit jtable hook
+
+            // using ret is not compatible with CET - Hardware-enforced Stack Protection
+            /*ZwXxxPtr[0] = 0x51;     //push rcx
+            // mov rax,<8 byte address to jTableEntry>
+            ZwXxxPtr[1] = 0x48;
+            ZwXxxPtr[2] = 0xb8;
+            *(ULONGLONG *)&ZwXxxPtr[3] = (ULONGLONG)jTableTarget;
+            *(ULONG *)&ZwXxxPtr[11] = 0x24048948;       // mov [rsp],rax
+            ZwXxxPtr[15] = 0xc3;    // ret*/
+
+            // mov rax,<8 byte address to jTableEntry>
+            ZwXxxPtr[0] = 0x90; // start with a nop so that it does not look lile a chrome hook
+            ZwXxxPtr[1] = 0x48;
+            ZwXxxPtr[2] = 0xb8;
+            *(ULONGLONG*)&ZwXxxPtr[3] = (ULONGLONG)jTableTarget;
+            // jmp rax
+            ZwXxxPtr[11] = 0xFF;
+            ZwXxxPtr[12] = 0xE0;
 
             chrome64Target = NULL;
         }

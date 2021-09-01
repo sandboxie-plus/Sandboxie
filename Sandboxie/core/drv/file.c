@@ -28,6 +28,7 @@
 #include "util.h"
 #include "session.h"
 #include "syscall.h"
+#include "wfp.h"
 #include "common/pattern.h"
 #include "common/my_version.h"
 
@@ -166,9 +167,11 @@ static const WCHAR *File_Nsi   = L"nsi";
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "file_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -187,6 +190,7 @@ _FX BOOLEAN File_Init(void)
 
     P_File_Init_2 p_File_Init_2 = File_Init_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -195,6 +199,7 @@ _FX BOOLEAN File_Init(void)
     }
 
 #endif ! _WIN64
+#endif
 
     if (! p_File_Init_2())
         return FALSE;
@@ -243,6 +248,7 @@ _FX void File_Unload(void)
 
     P_File_Unload_2 p_File_Unload_2 = File_Unload_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -251,6 +257,7 @@ _FX void File_Unload(void)
     }
 
 #endif ! _WIn64
+#endif 
 
     p_File_Unload_2();
 
@@ -403,7 +410,7 @@ _FX void File_CreateBoxPath_2(HANDLE FileHandle)
         File_DesktopIniText = Mem_Alloc(Driver_Pool, 768);
         if (File_DesktopIniText) {
 
-            sprintf(File_DesktopIniText,
+            RtlStringCbPrintfA(File_DesktopIniText, 768, 
                         "[.ShellClassInfo]\r\n"
                         "IconFile=%S\\%S\r\n"
                         "IconIndex=9\r\n"
@@ -868,12 +875,23 @@ _FX BOOLEAN File_BlockInternetAccess2(
 
 _FX BOOLEAN File_InitProcess(PROCESS *proc)
 {
+
+    //
+    // by default, Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseInBox=n to disable this behaviour
+    //
+
+    proc->always_close_for_boxed = Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 
+
     BOOLEAN ok = File_InitPaths(proc,   &proc->open_file_paths,
                                         &proc->closed_file_paths,
                                         &proc->read_file_paths,
                                         &proc->write_file_paths);
     if (ok)
         ok = File_BlockInternetAccess(proc);
+
+    if (ok)
+        ok = WFP_UpdateProcess(proc);
 
     if (ok) {
 
@@ -971,13 +989,13 @@ _FX NTSTATUS File_Generic_MyParseProc(
     // skip requests dealing with devices we don't care about
     //
 
-    if (device_type != FILE_DEVICE_DISK &&
+    if ((device_type != FILE_DEVICE_DISK &&
         device_type != FILE_DEVICE_NAMED_PIPE &&
         device_type != FILE_DEVICE_MAILSLOT &&
         device_type != FILE_DEVICE_NETWORK &&
         device_type != FILE_DEVICE_MULTI_UNC_PROVIDER &&
         device_type != FILE_DEVICE_NETWORK_FILE_SYSTEM &&
-        device_type != FILE_DEVICE_DFS)
+        device_type != FILE_DEVICE_DFS) || proc->disable_file_flt)
     {
         if ((proc->file_trace & TRACE_IGNORE) || Session_MonitorCount) {
 
@@ -996,13 +1014,13 @@ _FX NTSTATUS File_Generic_MyParseProc(
             ignore_str = Mem_Alloc(proc->pool, ignore_str_len);
             if (ignore_str) {
 
-                swprintf(ignore_str,
+                RtlStringCbPrintfW(ignore_str, ignore_str_len,
                     L"(FI) %08X %s", device_type, device_name_ptr);
 
                 if (proc->file_trace & TRACE_IGNORE)
                     Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
 
-                else if (Session_MonitorCount &&
+                else if (Session_MonitorCount && !proc->disable_monitor &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
                     Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
 
@@ -1511,14 +1529,14 @@ skip_due_to_home_folder:
             if(!IsPipeDevice && !ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 CreateDisposition & 0x0F, CreateOptions);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
 
-    else if (IsPipeDevice && Session_MonitorCount) {
+    else if (IsPipeDevice && Session_MonitorCount && !proc->disable_monitor) {
 
         ULONG mon_type = MONITOR_PIPE;
         WCHAR *mon_name = Name->Name.Buffer;
@@ -1532,7 +1550,7 @@ skip_due_to_home_folder:
             mon_type |= MONITOR_DENY;
         Session_MonitorPut(mon_type, mon_name, proc->pid);
 
-    } else if (ShouldMonitorAccess) {
+    } else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, Name->Name.Buffer, proc->pid);
 
@@ -2137,6 +2155,9 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
 	if (ok)
 		ok = File_BlockInternetAccess(proc);
 
+    if (ok)
+        ok = WFP_UpdateProcess(proc);
+
 	if (ok) {
 
         status = STATUS_SUCCESS;
@@ -2247,13 +2268,13 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
             ULONG mon_type = MONITOR_FILE;
             mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(F%c) %08X.%02X.%08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(F%c) %08X.%02X.%08X",
                 letter, DesiredAccess,
                 0 & 0x0F, CreateOptions);
             Log_Debug_Msg(mon_type, access_str, path);
         }
     }
-    else if (is_closed) {
+    else if (is_closed && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_FILE | MONITOR_DENY, path, proc->pid);
     }
@@ -2325,8 +2346,8 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     //
 
     user_devname = args->device_name.val;
-    if (! user_devname)
-        return STATUS_INVALID_PARAMETER;
+    if (!user_devname)
+        goto get_program; //return STATUS_INVALID_PARAMETER;
     ProbeForRead(user_devname, sizeof(WCHAR) * 32, sizeof(WCHAR));
     wmemcpy(device_name,        File_Mup,     8);   // \Device\ prefix
     wmemcpy(device_name + 8,    user_devname, 32);
@@ -2394,10 +2415,13 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     if (! chk)
         return STATUS_OBJECT_NAME_INVALID;
 
+
     //
     // if a ProcessId was specified, then locate and lock the matching
     // process. ProcessId must be specified if the caller is not sandboxed
     //
+
+get_program:
 
     ProcessId = args->process_id.val;
     if (proc) {
@@ -2422,7 +2446,7 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     // check file access restrictions
     //
 
-    if (1) {
+    if (user_devname) {
 
         BOOLEAN is_open, is_closed;
         KIRQL irql2;
@@ -2456,6 +2480,18 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
 
             status = STATUS_SUCCESS;
         }
+    }
+    else { // check for WFP state
+
+        status = STATUS_SUCCESS;
+
+        if (!proc->AllowInternetAccess) { // if the process isn't exempted check the config
+
+            if (!Process_GetConf_bool(proc, L"AllowNetworkAccess", TRUE)) {
+
+                status = STATUS_ACCESS_DENIED;
+            }
+	    }
     }
 
     //

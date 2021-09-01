@@ -3092,7 +3092,7 @@ As seguintes exclusões permitem que os navegadores da Internet em execução ne
 .
 
 4323;txt;01
-Forçar a execução do %2 nesta Caixa de Areia (Apenas na versão registada)
+Forçar a execução do %2 nesta Caixa de Areia
 .
 
 4324;txt;02

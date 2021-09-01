@@ -5,6 +5,10 @@
 #define OP_CONFIRM (3)
 #define OP_CANCELED (4)
 
+#include "qsbieapi_global.h"
+
+QString QSBIEAPI_EXPORT CSbieAPI__FormatNtStatus(long nsCode);
+
 enum ESbieMsgCodes
 {
 	SB_Generic = 0,
@@ -24,8 +28,8 @@ enum ESbieMsgCodes
 	SB_FailedKillAll,
 	SB_DeleteProtect,
 	SB_DeleteError,
-	SB_RemNotEmpty,
-	SB_DelNotEmpty,
+	//SB_RemNotEmpty,
+	//SB_DelNotEmpty,
 	SB_FailedMoveDir,
 	SB_SnapMkDirFail,
 	SB_SnapCopyRegFail,
@@ -39,6 +43,7 @@ enum ESbieMsgCodes
 	SB_ConfigFailed,
 	SB_SnapIsEmpty,
 	SB_NameExists,
+	SB_PasswordBad,
 };
 
 class CSbieStatus
@@ -59,7 +64,7 @@ public:
 	CSbieStatus(ESbieMsgCodes MsgCode, long Status) : CSbieStatus(MsgCode, QVariantList(), Status)
 	{
 	}
-	CSbieStatus(long Status) : CSbieStatus(SB_Generic, QVariantList(), Status)
+	CSbieStatus(long Status) : CSbieStatus(SB_Generic, QVariantList() << CSbieAPI__FormatNtStatus(Status), Status)
 	{
 	}
 	CSbieStatus(const CSbieStatus& other) : CSbieStatus()

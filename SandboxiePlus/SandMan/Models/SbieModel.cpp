@@ -3,13 +3,11 @@
 #include "../../MiscHelpers/Common/Common.h"
 #include "../../MiscHelpers/Common/IconExtreactor.h"
 #include <QFileIconProvider>
+#include "../SandMan.h"
 
 CSbieModel::CSbieModel(QObject *parent)
 :CTreeItemModel(parent)
 {
-	for (int i = 0; i < eMaxColor; i++)
-		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
-
 	//m_BoxEmpty = QIcon(":/BoxEmpty");
 	//m_BoxInUse = QIcon(":/BoxInUse");
 	m_ExeIcon = QIcon(":/exeIcon32");
@@ -128,11 +126,11 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			New[pNode->Path].append(pNode);
 			Added.append(ID);
 
-			pNode->Icon = m_BoxIcons[eYelow].first;
+			pNode->Icon = theGUI->GetBoxIcon(false);
 			pNode->IsBold = true;
 
 			pNode->Values[eName].Raw = Group;
-			pNode->Values[eStatus].Raw = tr("Box Groupe");
+			pNode->Values[eStatus].Raw = tr("Box Group");
 		}
 		else
 		{
@@ -175,22 +173,15 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
-		bool HasActive = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
-		int inUse = (HasActive ? 1 : 0);
-		int boxType = eYelow;
-		if(pBoxEx->HasLogApi())
-			boxType = eRed;
-		if (pBoxEx->IsUnsecureDebugging())
-			boxType = eMagenta;
-		else if (pBoxEx->IsSecurityRestricted())
-			boxType = eOrang;
-
+		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
+		int boxType = pBoxEx->GetType();
+		
 		if (pNode->inUse != inUse || pNode->boxType != boxType)
 		{
 			pNode->inUse = inUse;
 			pNode->boxType = boxType;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
-			pNode->Icon = pNode->inUse ? m_BoxIcons[(EBoxColors)boxType].second : m_BoxIcons[(EBoxColors)boxType].first;
+			pNode->Icon = theGUI->GetBoxIcon(inUse, boxType);
 			Changed = 1; // set change for first column
 		}
 

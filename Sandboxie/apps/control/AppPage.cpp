@@ -545,7 +545,8 @@ void CAppPage::Template_Filter()
         BOOL ff = (name.Find(L"Firefox_") != -1)
                || (name.Find(L"Waterfox_") != -1)
                || (name.Find(L"PaleMoon_") != -1)
-               || (name.Find(L"SeaMonkey_") != -1);
+               || (name.Find(L"SeaMonkey_") != -1)
+               || (name.Find(L"LibreWolf_") != -1);
         BOOL ch = (name.Find(L"Chrome_") != -1);
         BOOL other = (name.Find(L"Dragon_") != -1)
                   || (name.Find(L"Iron_") != -1)
@@ -770,7 +771,7 @@ void CAppPage::Folders_OnInitDialog(CBox &box)
 
     while (! tmpl_names.IsEmpty()) {
         CString tmpl_name = tmpl_names.RemoveHead();
-        CString varname = ini.GetTemplateVariable(tmpl_name);
+        CString varname = ini.GetTemplateVariable(tmpl_name); // fix-me: there may be more than one folder per template
         if (varname.IsEmpty())
             continue;
 
@@ -1039,6 +1040,20 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     info.TitleId = MSG_4228;
     info.LabelId = MSG_4207;
     info.WithLink = TRUE;
+    info.WithCreate = FALSE;
+    m_app_pages.AddTail(new CAppPage(&info, BoxName));
+    
+    info.ClassName = L"MediaPlayer";
+    info.TitleId = MSG_4393;
+    info.LabelId = MSG_4394;
+    info.WithLink = FALSE;
+    info.WithCreate = FALSE;
+    m_app_pages.AddTail(new CAppPage(&info, BoxName));
+    
+    info.ClassName = L"TorrentClient";
+    info.TitleId = MSG_4396;
+    info.LabelId = MSG_4397;
+    info.WithLink = FALSE;
     info.WithCreate = FALSE;
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
 
@@ -1541,4 +1556,31 @@ void CAppPage::SetDefaultTemplates8(CBox& box)
 {
     box.EnableTemplate(L"FileCopy", TRUE);
     box.EnableTemplate(L"SkipHook", TRUE);
+    SetDefaultTemplates9(box);
+}
+
+//---------------------------------------------------------------------------
+// SetDefaultTemplates9
+//---------------------------------------------------------------------------
+
+
+void CAppPage::SetDefaultTemplates9(CBox& box)
+{
+    CSbieIni &ini = CSbieIni::GetInstance();
+
+    // fix the unfortunate typo
+    if (box.IsTemplateEnabled(L"FileCppy")) {
+        box.EnableTemplate(L"FileCopy", TRUE);
+        box.EnableTemplate(L"FileCppy", FALSE);
+    }
+
+    box.EnableTemplate(L"WindowsFontCache", FALSE);
+
+    BOOL bHardened = FALSE;
+    ini.GetBool(box.GetName(), L"DropAdminRights", bHardened, FALSE);
+    if (!bHardened) {
+        // enable those templates only for non hardened boxes
+        box.EnableTemplate(L"OpenBluetooth", TRUE);
+        box.EnableTemplate(L"OpenSmartCard", TRUE);
+    }
 }

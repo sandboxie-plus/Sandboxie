@@ -19,6 +19,9 @@
 #include <QtConcurrent>
 #include "SandBox.h"
 #include "../SbieAPI.h"
+#ifdef _DEBUG
+#include <QGuiApplication>
+#endif
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -43,9 +46,8 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 	// when loading a sandbox that is not initialized, initialize it
 	int cfglvl = GetNum("ConfigLevel");
-	if (cfglvl >= 8)
+	if (cfglvl >= 9)
 		return;
-	SetNum("ConfigLevel", 8);
 
 	if (cfglvl == 0)
 	{
@@ -84,7 +86,27 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		InsertText("Template", "FileCopy");
 		InsertText("Template", "SkipHook");
 	}
+	
+	if (cfglvl < 9)
+	{
+		// fix the unfortunate typo
+		if (GetTextList("Template", false).contains("FileCppy"))
+		{
+			InsertText("Template", "FileCopy");
+			DelValue("Template", "FileCppy");
+		}
 
+		DelValue("Template", "WindowsFontCache");
+
+		// templates L9
+		if (GetBool("DropAdminRights", false) == false) 
+		{
+			// enable those templates only for non hardened boxes
+			InsertText("Template", "OpenBluetooth");
+		}
+	}
+
+	SetNum("ConfigLevel", 9);
 }
 
 CSandBox::~CSandBox()
@@ -98,6 +120,10 @@ void CSandBox::UpdateDetails()
 
 SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
+#ifdef _DEBUG
+	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
+		return RunSandboxed(Command);
+#endif
 	return m_pAPI->RunStart(m_Name, Command, NULL, Elevated);
 }
 
@@ -163,7 +189,13 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 
 	foreach(const QString& Folder, BoxFolders)
 	{
-		Status = CSandBox__DeleteFolder(pProgress, Folder);
+		for (int i = 0; i < 10; i++) {
+			Status = CSandBox__DeleteFolder(pProgress, Folder);
+			if (!Status.IsError())
+				break;
+			QThread::sleep(1); // wait a second
+		}
+
 		if (Status.IsError())
 			break;
 	}
@@ -171,22 +203,34 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 	pProgress->Finish(Status);
 }
 
+SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentFolder, const QString& TargetName);
+
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
-	if (!IsEmpty())
-		return SB_ERR(SB_RemNotEmpty);
-
 	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
 	if (Status.IsError())
 		return Status;
+
+	if (QDir(m_FilePath).exists()) 
+	{	
+		QStringList FilePath = m_FilePath.split("\\");
+		if (FilePath.last().isEmpty()) FilePath.removeLast();
+		QString Name = FilePath.takeLast();
+		if (Name.compare(m_Name, Qt::CaseInsensitive) == 0) 
+		{
+			Status = CSandBox__MoveFolder(m_FilePath, FilePath.join("\\"), NewName);
+			if (Status.IsError())
+				return Status;
+		}
+	}
 	
 	return RenameSection(NewName);
 }
 
 SB_STATUS CSandBox::RemoveBox()
 {
-	if (!IsEmpty())
-		return SB_ERR(SB_DelNotEmpty);
+	//if (!IsEmpty())
+	//	return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
 }

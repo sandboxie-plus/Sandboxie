@@ -340,6 +340,14 @@ typedef NTSTATUS (*P_NtEnumerateValueKey)(
     IN  ULONG Length,
     OUT PULONG ResultLength);
 
+typedef NTSTATUS(*P_NtDuplicateToken)(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ACCESS_MASK DesiredAccess,
+    _In_opt_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _In_ BOOLEAN EffectiveOnly,
+    _In_ TOKEN_TYPE TokenType,
+    _Out_ PHANDLE NewTokenHandle);
+
 typedef NTSTATUS (*P_NtFilterToken)(
     IN  HANDLE ExistingTokenHandle,
     IN  ULONG Flags,
@@ -347,6 +355,22 @@ typedef NTSTATUS (*P_NtFilterToken)(
     IN  PTOKEN_PRIVILEGES PrivilegesToDelete OPTIONAL,
     IN  PTOKEN_GROUPS RestrictedSids OPTIONAL,
     OUT PHANDLE NewTokenHandle);
+
+typedef NTSTATUS(*P_NtFilterTokenEx)(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _In_ ULONG DisableUserClaimsCount,
+    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
+    _In_ ULONG DisableDeviceClaimsCount,
+    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
+    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
+    _In_opt_ PVOID RestrictedUserAttributes,
+    _In_opt_ PVOID RestrictedDeviceAttributes,
+    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
+    _Out_ PHANDLE NewTokenHandle);
 
 typedef NTSTATUS (*P_NtFlushInstructionCache)(
     IN  HANDLE ProcessHandle,
@@ -462,6 +486,11 @@ typedef NTSTATUS (*P_NtOpenFile)(
     OUT PIO_STATUS_BLOCK IoStatusBlock,
     IN  ULONG ShareAccess,
     IN  ULONG OpenOptions);
+
+typedef NTSTATUS (*P_NtOpenJobObject)(
+	OUT PHANDLE JobHandle,
+	IN ACCESS_MASK DesiredAccess,
+	IN POBJECT_ATTRIBUTES ObjectAttributes);
 
 typedef NTSTATUS (*P_NtOpenKey)(
     OUT PHANDLE KeyHandle,
@@ -624,7 +653,7 @@ typedef NTSTATUS (*P_NtAccessCheck)(
   OUT PACCESS_MASK        GrantedAccess,
   OUT PNTSTATUS           AccessStatus );
 
-typedef NTSTATUS  (*P_NtAccessCheckByTypeResultList) (
+typedef NTSTATUS (*P_NtAccessCheckByTypeResultList) (
     PSECURITY_DESCRIPTOR SecurityDescriptor,
     PSID PrincipalSelfSid,
     HANDLE ClientToken,
@@ -637,6 +666,21 @@ typedef NTSTATUS  (*P_NtAccessCheckByTypeResultList) (
     PACCESS_MASK    GrantedAccess,
     PNTSTATUS   AccessStatus 
     );
+
+typedef NTSTATUS (*P_NtAccessCheckByType) (
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID PrincipalSelfSid,
+    HANDLE ClientToken,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_TYPE_LIST ObjectTypeList,
+    ULONG ObjectTypeListLength,
+    PGENERIC_MAPPING GenericMapping,
+    PPRIVILEGE_SET PrivilegeSet,
+    PULONG PrivilegeSetLength,
+    PACCESS_MASK GrantedAccess,
+    PNTSTATUS AccessStatus);
+
+typedef BOOLEAN (*P_RtlEqualSid) (void * sid1, void * sid2);
 
 typedef NTSTATUS (*P_NtQuerySystemInformation)(
     IN SYSTEM_INFORMATION_CLASS SystemInformationClass,

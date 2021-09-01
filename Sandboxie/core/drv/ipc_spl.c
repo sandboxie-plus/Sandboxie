@@ -311,7 +311,7 @@ _FX BOOLEAN Ipc_Filter_Spooler_Msg(PROCESS* proc, UCHAR uMsg)
 
         if (mon_type) {
             WCHAR msg_str[24];
-            swprintf(msg_str, L"Msg: %02X", (ULONG)uMsg);
+            RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Msg: %02X", (ULONG)uMsg);
             Log_Debug_Msg(mon_type, L"\\RPC Control\\spoolss", msg_str);
         }
     }

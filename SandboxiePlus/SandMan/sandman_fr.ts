@@ -736,52 +736,52 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="149"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="154"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vide</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="157"/>
         <source>NOT SECURE (Debug Config)</source>
-        <translation type="unfinished"></translation>
+        <translation>NON SÉCURISÉ (Configuration de débogage)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="159"/>
         <source>Reduced Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolation réduite</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="161"/>
         <source>Enhanced Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolation renforcée</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="164"/>
         <source>API Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Journal API</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="166"/>
         <source>No INet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;INet</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="168"/>
         <source>Net Share</source>
-        <translation type="unfinished"></translation>
+        <translation>Partage réseau</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="170"/>
         <source>No Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas administrateur</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="173"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
 </context>
 <context>
@@ -1525,37 +1525,37 @@ No will choose: %2</source>
     <message>
         <location filename="Models/SbieModel.cpp" line="133"/>
         <source>Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe de bacs</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="420"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="421"/>
         <source>Process ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID du processus</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="422"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Statut</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="423"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="425"/>
         <source>Start Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure de démarrage</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="426"/>
         <source>Path / Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin et ligne de commande</translation>
     </message>
 </context>
 <context>
@@ -2057,73 +2057,75 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="65"/>
         <source>Sandboxie Plus - Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus - Paramètres</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="94"/>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>De la langue</translatorcomment>
+        <translation>Détection automatique</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="216"/>
         <source>Close to Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Réduire vers la zone de notification</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="217"/>
         <source>Prompt before Close</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>la fenêtre</translatorcomment>
+        <translation>Demander avant de fermer</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="218"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="462"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci pour votre soutien au développement de Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat de support n&apos;est pas valide.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="507"/>
         <location filename="Windows/SettingsWindow.cpp" line="613"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le dossier</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="575"/>
         <source>Please enter the new configuration password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer le nouveau mot de passe de configuration.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="579"/>
         <source>Please re-enter the new configuration password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez saisir à nouveau le mot de passe de la configuration.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="584"/>
         <source>Passwords did not match, please retry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mots de passe ne correspondent pas, veuillez réessayer.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="594"/>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Processus</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="594"/>
         <source>Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="604"/>
         <source>Please enter a program file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer le nom de fichier du programme</translation>
     </message>
 </context>
 <context>
@@ -2131,32 +2133,32 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="24"/>
         <source>%1 - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Instantanés</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="36"/>
         <source>Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Instantané</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="160"/>
         <source>Please enter a name for the new Snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez saisir un nom pour le nouvel instantané.</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="160"/>
         <source>New Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvel instantané</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="176"/>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment changer l&apos;instantané actif&#xa0;? Si vous le faites, l&apos;état actuel sera supprimé&#xa0;!</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="189"/>
         <source>Do you really want to delete the selected snapshot?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer l&apos;instantané sélectionné&#xa0;?</translation>
     </message>
 </context>
 <context>
@@ -2249,27 +2251,27 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="32"/>
         <source>SandboxiePlus new box</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Nouveau bac</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="40"/>
         <source>Select restriction/isolation template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez le modèle de restriction ou d&apos;isolement&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
         <source>Initial sandbox configuration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration initiale du bac à sable&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="90"/>
         <source>Copy options from an existing box:</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier les options d&apos;un bac existant&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="110"/>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du bac à sable&#xa0;:</translation>
     </message>
 </context>
 <context>
@@ -3228,7 +3230,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Views/SbieView.cpp" line="728"/>
         <source>Drive %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecteur %1</translation>
     </message>
 </context>
 <context>
@@ -3236,17 +3238,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="SandMan.cpp" line="2170"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2171"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2172"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2173"/>
@@ -3401,7 +3403,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Show Sys-Tray</source>
-        <translation>Montrer dans la barre d&apos;outils</translation>
+        <translation>Montrer dans la zone de notification</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="81"/>
@@ -3411,223 +3413,223 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="107"/>
         <source>Show Notifications for relevant log Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les notifications pour les messages pertinents du journal</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="239"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer l&apos;interface utilisateur avec Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="287"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter «&#xa0;Exécuter dans un bac à sable&#xa0;» au menu contextuel de l&apos;explorateur</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="62"/>
         <source>Hotkey for terminating all boxed processes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourci pour terminer tous les processus isolés&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="246"/>
         <source>Always use DefaultBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours utiliser le bac par défaut (DefaultBox)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="297"/>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration avancée</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;Racine du système de fichiers&lt;/a&gt;&#xa0;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="575"/>
         <source>Clear password when main window becomes hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le mot de passe lorsque la fenêtre principale devient cachée</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
         <source>Separate user folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier utilisateur séparé</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="399"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;Racine ipc&lt;/a&gt;&#xa0;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="351"/>
         <source>Sandbox default</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres par défaut du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="568"/>
         <source>Config protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Protection de la configuration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="434"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="318"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;Racine du registre&lt;/a&gt;&#xa0;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="372"/>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonctionnalités d’isolation</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="379"/>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la plateforme de filtrage Windows pour restreindre l&apos;accès au réseau (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="603"/>
         <source>Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le mot de passe</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="596"/>
         <source>Password must be entered in order to make changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Le mot de passe doit être saisi pour pouvoir effectuer des modifications</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="582"/>
         <source>Only Administrator user accounts can make changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuls les comptes utilisateurs administrateurs peuvent effectuer des modifications</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="184"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Surveiller les changements dans Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="589"/>
         <source>Only Administrator user accounts can use Disable Forced Programs command</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuls les comptes utilisateurs administrateurs peuvent utiliser la commande Désactiver les programmes forcés</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="358"/>
         <source>Portable root folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier racine portable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="470"/>
         <source>Program Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle des programmes</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="479"/>
         <location filename="Forms/SettingsWindow.ui" line="656"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="484"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="492"/>
         <source>Remove Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le programme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="512"/>
         <source>Add Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un programme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="519"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lorsque l&apos;un des programmes suivants est lancé en dehors de tout bac à sable, Sandboxie émet le message SBIE1301.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="529"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un dossier</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="536"/>
         <source>Prevent the listed programs from starting on this system</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher les programmes listés de démarrer sur ce système</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="545"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le message 1308 lorsqu&apos;un programme ne parvient pas à démarrer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Protection de la configuration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
         <source>Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatibilité</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="634"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>A l&apos;avenir, ne vérifiez pas la compatibilité des logiciels</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="641"/>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="648"/>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="677"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie a détecté les applications logicielles suivantes dans votre système. Cliquez sur OK pour appliquer les paramètres de configuration, qui amélioreront la compatibilité avec ces applications. Ces paramètres de configuration auront un effet dans tous les bacs à sable existants et dans tous les nouveaux bacs à sable.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>
         <source>Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Support</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="734"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maintenir Sandboxie à jour avec les versions continues de Windows et compatible avec tous les navigateurs Web est une effort sans fin. Veuillez envisager de soutenir ce travail par un don.&lt;br /&gt;Vous pouvez soutenir le développement avec un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;don PayPal&lt;/a&gt;, fonctionnant également avec des cartes de crédit.&lt;br /&gt;Ou vous pouvez fournir un soutien continu avec un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;abonnement à Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="766"/>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le certificat de support ici</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="780"/>
         <source>Support Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de maintenance</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="787"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Les supporters du projet Sandboxie-Plus reçoivent un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificat de supporter&lt;/a&gt;. C&apos;est comme une clé de licence, mais pour des gens géniaux qui utilisent des logiciels libres :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Install updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer les mises à jour automatiquement</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="721"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier périodiquement les mises à jour de Sandboxie-Plus</translation>
     </message>
 </context>
 <context>

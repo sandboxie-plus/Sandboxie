@@ -44,7 +44,7 @@
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
         <source>Legacy Sandboxie Behaviour</source>
         <translatorcomment>Sélection de la configuration.</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Comportement du Bac à sable hérité</translation>
     </message>
 </context>
 <context>
@@ -503,7 +503,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="54"/>
         <source>Dismiss</source>
-        <translation>Rejeter</translation>
+        <translation type="unfinished">Rejeter</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="55"/>
@@ -1727,299 +1727,311 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="65"/>
         <source>Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau bac</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="66"/>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un groupe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="67"/>
         <source>Remove Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le groupe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="71"/>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Run Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter un programme</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
         <source>Run from Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter à partir du menu Démarrer</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="74"/>
         <source>Default Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Merci l’académie Française !</translatorcomment>
+        <translation>Butineur par défaut</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="75"/>
         <source>Default eMail Client</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Merci l’académie Française !</translatorcomment>
+        <translation>Client mél par défaut</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="76"/>
         <source>Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorateur de Windows</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="77"/>
         <source>Registry Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur de registre</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="78"/>
         <source>Programs and Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmes et fonctionnalités</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="79"/>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Traduction utilisée par Windows</translatorcomment>
+        <translation>Invite de commandes</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="80"/>
         <source>Terminal (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Traduction utilisée par Windows</translatorcomment>
+        <translation>Invite de commandes (Admin)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Terminal (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Traduction utilisée par Windows</translatorcomment>
+        <translation>Invite de commandes (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
         <source>Terminate All Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminer tous les programmes</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="86"/>
         <location filename="Views/SbieView.cpp" line="121"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un raccourci</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="88"/>
         <source>Explore Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorer le contenu</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="89"/>
         <source>Snapshots Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestionnaire d&apos;instantanés</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
         <source>Recover Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupération de fichiers</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="91"/>
         <source>Delete Content</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Supprimer (tous) le contenu (du bac)</translatorcomment>
+        <translation>Supprimer le contenu</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="93"/>
         <source>Sandbox Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Préréglages du bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="96"/>
         <source>Ask for UAC Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>Demander l&apos;élévation de privilège UAC</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
         <source>Drop Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Abandon des droits administrateur</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
         <source>Emulate Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Émuler les droits administrateur</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="106"/>
         <source>Block Internet Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer l&apos;accès à l&apos;Internet</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="108"/>
         <source>Allow Network Shares</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser les partages réseau</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="110"/>
         <source>Sandbox Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options du bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="111"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer le bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="113"/>
         <source>Move to Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer vers le groupe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="114"/>
         <source>Remove Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="119"/>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminer</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="124"/>
         <source>Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Présélection</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="125"/>
         <source>Pin to Run Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Épingler au menu de démarrage</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="127"/>
         <source>Block and Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer et terminer</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="131"/>
         <source>Allow internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès à l&apos;internet</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="133"/>
         <source>Force into this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer dans ce bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="135"/>
         <source>Set Linger Process</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>https://sandboxie-plus.com/sandboxie/lingerprocess/</translatorcomment>
+        <translation>Définir comme processus persistant</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="137"/>
         <source>Set Leader Process</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>https://sandboxie-plus.com/sandboxie/leaderprocess/</translatorcomment>
+        <translation>Définir comme processus directeur</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="210"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Fichier racine&#xa0;: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="211"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Racine du registre&#xa0;: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="212"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Racine IPC&#xa0;: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="214"/>
         <source>Options:
     </source>
-        <translation type="unfinished"></translation>
+        <translation>Options&#xa0;:
+    </translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="396"/>
         <source>[None]</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="456"/>
         <source>Please enter a new group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un nouveau nom de groupe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="470"/>
         <source>Do you really want to remove the selected group(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le groupe ou les groupes sélectionnés&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="512"/>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un groupe ne peut pas être son propre parent.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="580"/>
         <location filename="Views/SbieView.cpp" line="633"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne plus afficher ce message.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="624"/>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bac à sable est vide.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="659"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un nouveau nom pour le bac à sable.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="666"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="681"/>
         <source>This Sandbox is already empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bac à sable est déjà vide.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="692"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous supprimer le contenu du bac à sable sélectionné&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="695"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le contenu de plusieurs bacs à sable&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="709"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous mettre fin à tous les processus dans le ou les bacs à sable sélectionnés&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="745"/>
         <location filename="Views/SbieView.cpp" line="796"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un raccourci vers le bac à sable %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="772"/>
         <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous %1 le ou les processus sélectionnés&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="829"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bac n&apos;a pas de restrictions d&apos;accès à Internet en place, souhaitez-vous l&apos;activer&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="859"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bac à sable est désactivé, voulez-vous l&apos;activer&#xa0;?</translation>
     </message>
 </context>
 <context>
@@ -2027,17 +2039,17 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="33"/>
         <source>Sandboxie-Plus - Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Exécuter dans un bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="87"/>
         <source>Are you sure you want to run the program outside the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Êtes-vous sûr de vouloir exécuter le programme en dehors d&apos;un bac à sable ?</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="92"/>
         <source>Please select a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez sélectionner un bac à sable.</translation>
     </message>
 </context>
 <context>
@@ -3208,7 +3220,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/PopUpWindow.ui" line="32"/>
         <source>SandboxiePlus Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Notifications</translation>
     </message>
 </context>
 <context>
@@ -3252,47 +3264,48 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>DismissSandboxiePlus - Récupération</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="55"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="62"/>
         <source>Recover to</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer vers</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="69"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un dossier</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="76"/>
         <source>Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="96"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafraîchir</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="103"/>
         <source>Delete all</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer tout</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Show All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher tous les fichiers</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Texte générique, celui-ci n’est pas à traduire.</translatorcomment>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3328,72 +3341,72 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
         <source>SandboxiePlus Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Paramètres</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
         <source>General Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration générale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="74"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher d&apos;abord la fenêtre de récupération lors du vidage des bacs à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="91"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir les pages web à partir de ce bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options de la barre d&apos;outils</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Langue de l&apos;interface utilisateur&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Intégration au système</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="232"/>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter dans un bac à sable - Actions</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="273"/>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrage du gestionnaire des bacs à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="280"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer l&apos;interface utilisateur lors du lancement d&apos;un processus en bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="154"/>
         <source>On main window close:</source>
-        <translation type="unfinished"></translation>
+        <translation>A la fermeture de la fenêtre principale&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le thème sombre (entièrement appliqué après un redémarrage)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Show Sys-Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer dans la barre d&apos;outils</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="81"/>
         <source>Restart required (!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Redémarrage requis (!)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="107"/>
@@ -3642,7 +3655,8 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="98"/>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Je n&apos;ai pas trouvé de meilleur traduction.</translatorcomment>
+        <translation>Actions d&apos;instantané</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>

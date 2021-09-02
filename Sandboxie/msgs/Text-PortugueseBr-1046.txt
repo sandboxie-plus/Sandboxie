@@ -494,7 +494,6 @@ SBIE2301 %2
 SBIE2302 Conflito de configuração de imagem de processo: %2
 .
 
-
 2303;pop;err;01
 SBIE2303 Não foi possível fazer hook em %2
 .

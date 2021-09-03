@@ -119,8 +119,8 @@ portuguese.CustomPageInstallMode=Instalar {#MyAppName} neste computador
 portuguese.CustomPageUpgradeMode=Atualizar instalação existente do {#MyAppName}
 portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório para uso portable
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
-portuguese.ClassicFound=Instalação Classic Sandboxie detectada, deve ser desinstalada primeiro, você quer desinstalá-la agora?
-portuguese.RunSandboxedMenu=Rodar &Caixa de Areia
+portuguese.ClassicFound=Instalação do Classic Sandboxie detectada, deve ser desinstalado primeiro, você quer desinstalá-lo agora?
+portuguese.RunSandboxedMenu=Rodar na &Caixa de Areia
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню

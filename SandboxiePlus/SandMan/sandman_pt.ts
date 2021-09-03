@@ -855,6 +855,11 @@ Caminho completo: %4</translation>
         <translation>Criar Nova Caixa</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="366"/>
+        <source>Create Box Group</source>
+        <translation>Criar Grupo de Caixa</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="361"/>
         <source>Terminate All Processes</source>
         <translation>Terminar Todos os Processos</translation>
@@ -958,6 +963,11 @@ Caminho completo: %4</translation>
         <location filename="SandMan.cpp" line="401"/>
         <source>Show Hidden Boxes</source>
         <translation>Mostrar Caixas Ocultas</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="410"/>
+        <source>Show All Sessions</source>
+        <translation>Mostrar Todas as Sessões</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="404"/>
@@ -1802,6 +1812,26 @@ Não vou escolher: %2</translation>
         <translation>Cliente de E-Mail Padrão</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="77"/>
+        <source>Command Prompt</source>
+        <translation>Prompt de Comando</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="78"/>
+        <source>Boxed Tools</source>
+        <translation>Ferramentas de Caixa</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="79"/>
+        <source>Command Prompt (as Admin)</source>
+        <translation>Prompt de Comando (como Admin)</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="81"/>
+        <source>Command Prompt (32-bit)</source>
+        <translation>Prompt de Comando (32-bit)</translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="76"/>
         <source>Windows Explorer</source>
         <translation></translation>
@@ -1815,6 +1845,11 @@ Não vou escolher: %2</translation>
         <location filename="Views/SbieView.cpp" line="78"/>
         <source>Programs and Features</source>
         <translation>Programas e Recursos</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="86"/>
+        <source>Execute Autorun Entries</source>
+        <translation>Executar Entradas Autorun</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="79"/>
@@ -1850,6 +1885,21 @@ Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="89"/>
+        <source>Browse Content</source>
+        <translation>Navegador de Conteúdo</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="92"/>
+        <source>Box Content</source>
+        <translation>Conteúdo da Caixa</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="96"/>
+        <source>Open Registry</source>
+        <translation>Abrir Registro</translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="97"/>
         <source>Snapshots Manager</source>
         <translation>Gerenciador de Instantâneos</translation>
     </message>
@@ -2045,10 +2095,15 @@ Não vou escolher: %2</translation>
         <translation>Você deseja encerrar todos os processos na(s) caixa(s) selecionada(s)?</translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="738"/>
+        <source>Terminate without asking</source>
+        <translation>Terminar sem perguntar</translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="745"/>
         <location filename="Views/SbieView.cpp" line="796"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation>Criar Atalho para o sandboxie %1</translation>
+        <translation>Criar Atalho para a Caixa %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="772"/>
@@ -2065,6 +2120,62 @@ Não vou escolher: %2</translation>
         <location filename="Views/SbieView.cpp" line="859"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Essa caixa está desativada, deseja ativá-la?</translation>
+    </message>
+</context>
+<context>
+    <name>CSandBox</name>
+    <message>
+        <location filename="../QSbieAPI/SandBox.cpp" line="162"/>
+        <source>Waiting for folder: %1</source>
+        <translation>Aguardando pela pasta: %1</translation>
+    </message>
+    <message>
+        <location filename="../QSbieAPI/SandBox.cpp" line="171"/>
+        <source>Deleting folder: %1</source>
+        <translation>Excluindo pasta: %1</translation>
+    </message>
+    <message>
+        <location filename="../QSbieAPI/SandBox.cpp" line="381"/>
+        <source>Merging folders: %1 >> %2</source>
+        <translation>Mesclando pastas: %1 >> %2</translation>
+    </message>
+    <message>
+        <location filename="../QSbieAPI/SandBox.cpp" line="430"/>
+        <source>Finishing Snapshot Merge...</source>
+        <translation>Mesclagem de Instantâneo Finalizada...</translation>
+    </message>
+</context>
+<context>
+    <name>CFileBrowserWindow</name>
+    <message>
+        <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
+        <source>%1 - Files</source>
+        <translation>%1 - Arquivos</translation>
+    </message>
+    <message>
+        <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
+        <source>Create Shortcut</source>
+        <translation>Criar Atalho</translation>
+    </message>
+    <message>
+        <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
+        <source>Recover to Any Folder</source>
+        <translation>Recuperar para Qualquer Pasta</translation>
+    </message>
+    <message>
+        <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
+        <source>Recover to Same Folder</source>
+        <translation>Recuperar para a Mesma Pasta</translation>
+    </message>
+    <message>
+        <location filename="Windows/FileBrowserWindow.cpp" line="194"/>
+        <source>Select Directory</source>
+        <translation>Selecionar Diretório</translation>
+    </message>
+    <message>
+        <location filename="Windows/FileBrowserWindow.cpp" line="244"/>
+        <source>Create Shortcut to sandbox %1</source>
+        <translation>Criar Atalho para a Caixa %1</translation>
     </message>
 </context>
 <context>
@@ -2096,6 +2207,21 @@ Não vou escolher: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="94"/>
         <source>Auto Detection</source>
         <translation>Detecção Automática</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="105"/>
+        <source>Don't show any icon</source>
+        <translation>Não mostrar nenhum ícone</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="106"/>
+        <source>Show Plus icon</source>
+        <translation>Mostrar ícone Plus</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="107"/>
+        <source>Show Classic icon</source>
+        <translation>Mostrar ícone Clássico</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="216"/>
@@ -3446,7 +3572,17 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation>Idioma da Interface do Usuário:</translation>
+        <translation>Idioma da interface do usuário:</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="204"/>
+        <source>Show Icon in Systray:</source>
+        <translation>Mostrar Ícone na Bandeja:</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="201"/>
+        <source>Show the recovery window outright instead of only notifying about recoverable files</source>
+        <translation>Mostrar janela de recuperação imediatamente, em vez de apenas notificar sobre arquivos recuperáveis</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
@@ -3500,12 +3636,12 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="239"/>
         <source>Start UI with Windows</source>
-        <translation>Iniciar Interface do Usuário com windows</translation>
+        <translation>Iniciar interface do usuário com windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="287"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>Adicionar &apos;Rodar em uma caixa&apos; no menu de contexto do explorer</translation>
+        <translation>Adicionar &apos;Rodar na Caixa de Areia&apos; no menu de contexto do explorer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="62"/>
@@ -3712,8 +3848,13 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="787"/>
-        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation>Os apoiadores do projeto Sandboxie-Plus receberam um &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificado de suporte&lt;/a&gt;. É como uma chave de licença, mas para pessoas incríveis usando software livre. :-)</translation>
+        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It's like a license key but for awesome people using open source software. :-)</source>
+        <translation>Os apoiadores do projeto Sandboxie-Plus receberam um &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificado de suporte&lt;/a&gt;. É como uma chave de licença, mas para pessoas incríveis usando software de código aberto. :-)</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="811"/>
+        <source>This supporter certificate has expired, please get an updated certificate.</source>
+        <translation>Este certificado de suporte expirou, por favor, obtenha um certificado atualizado.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>

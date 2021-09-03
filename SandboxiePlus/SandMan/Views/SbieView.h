@@ -15,6 +15,7 @@ public:
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
 	virtual QList<CBoxedProcessPtr>	GetSelectedProcesses();
+	virtual QStringList			GetSelectedGroups(bool bAndBoxes = false);
 
 	//virtual void				UpdateRunMenu();
 
@@ -32,6 +33,8 @@ public slots:
 
 private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
+
+	void						OnCustomSortByColumn(int column);
 
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected);
@@ -54,6 +57,7 @@ private:
 
 	void					UpdateMenu();
 	void					UpdateGroupMenu();
+	void					RenameGroup(const QString OldName, const QString NewName);
 
 	QString					FindParent(const QString& Name);
 	bool					IsParentOf(const QString& Name, const QString& Group);
@@ -68,6 +72,7 @@ private:
 
 	QAction*				m_pNewBox;
 	QAction*				m_pAddGroupe;
+	QAction*				m_pRenGroupe;
 	QAction*				m_pDelGroupe;
 	int						m_iMenuTop;
 	QMenu*					m_pMenuRun;
@@ -101,6 +106,9 @@ private:
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
+	QAction*				m_pMenuMoveUp;
+	//QAction*				m_pMenuMoveBy;
+	QAction*				m_pMenuMoveDown;
 	QMenu*					m_pMenuMoveTo;
 	int						m_iMoveTo;
 	QAction*				m_pMenuRename;

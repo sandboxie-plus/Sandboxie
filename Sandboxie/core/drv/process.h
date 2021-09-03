@@ -142,7 +142,7 @@ struct _PROCESS {
     LIST read_file_paths;               // PATTERN elements
     LIST write_file_paths;              // PATTERN elements
     BOOLEAN always_close_for_boxed;
-    LIST blocked_dlls;
+    //LIST blocked_dlls;
     ULONG file_trace;
     ULONG pipe_trace;
     BOOLEAN disable_file_flt;

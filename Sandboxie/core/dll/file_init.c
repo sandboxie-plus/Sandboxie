@@ -262,7 +262,7 @@ _FX BOOLEAN File_Init(void)
     }
 
 
-    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)
+    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD)
     {
         void *WriteProcessMemory =
             GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,

@@ -4,6 +4,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.9.6 / 5.51.6] - 2021-08-??
+
+### Added
+- added ability to rename groups [#1152](https://github.com/sandboxie-plus/Sandboxie/issues/1152)
+- added ability to define a custom order for the sandboxes, you can move using the move context menu, or holding alt + arow key
+
+### Fixed
+- fixed issue with create group menu [#1151](https://github.com/sandboxie-plus/Sandboxie/issues/1151)
+- fixed issue when renaming a box it lost its group association
+- fixed issue with thunderbird build 91+ [#1156](https://github.com/sandboxie-plus/Sandboxie/issues/1156)
+- fixed an issue with file disposition handling [#1161](https://github.com/sandboxie-plus/Sandboxie/issues/1161)
+
+### Removed
+- removed "DelayLoadDll=" code from the deriver as the user mode component since opne sourcing never used that information
+
+
+
+
 ## [0.9.5 / 5.51.5] - 2021-08-30
 
 ### Added
@@ -191,7 +209,7 @@ Fixed issue with Windows 7
 -- the security-enhanced option "MsiInstallerExemptions=n" is now the default behaviour
 
 ### Fixed
-- fixed issue with the "explore sandboxed" command [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
+- fixed issue with the "Explore Sandboxed" command [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
 - rolled back the switch from using NtQueryKey to NtQueryObject as it seems to break some older Windows 10 versions like 1803 [#984](https://github.com/sandboxie-plus/Sandboxie/issues/984)
 -- this change was introduced to fix [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
 -- to use NtQueryObject the option "UseObjectNameForKeys=y" can be added to Sandboxie.ini
@@ -320,7 +338,7 @@ Fixed issue with Windows 7
 ## [0.8.0 / 5.50.0] - 2021-06-13
 
 ### Added
-- Sandboxie now applies by default "Close...=!<program>,..." directives to non-excluded images if they are located in a sandbox
+- Normally Sandboxie applies "Close...=!<program>,..." directives to non-excluded images if they are located in a sandbox
 -- added 'AlwaysCloseForBoxed=n' to disable this behaviour as it may not be always desired, and it doesn't provide extra security
 - added process image information to SandMan UI
 - localized template categories in the Plus UI [#727](https://github.com/sandboxie-plus/Sandboxie/issues/727)

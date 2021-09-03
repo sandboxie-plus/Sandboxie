@@ -64,13 +64,14 @@ typedef struct _MY_CONTEXT {
 } MY_CONTEXT;
 
 
-typedef struct _BLOCKED_DLL {
+//typedef struct _BLOCKED_DLL {
+//
+//    LIST_ELEM list_elem;
+//    ULONG path_len;
+//    WCHAR path[4];      // padding bytes
+//
+//} BLOCKED_DLL;
 
-    LIST_ELEM list_elem;
-    ULONG path_len;
-    WCHAR path[4];      // padding bytes
-
-} BLOCKED_DLL;
 
 
 //---------------------------------------------------------------------------
@@ -226,7 +227,7 @@ _FX BOOLEAN File_Init(void)
     Api_SetFunction(API_REFRESH_FILE_PATH_LIST, File_Api_RefreshPathList);
     Api_SetFunction(API_OPEN_FILE,              File_Api_Open);
     Api_SetFunction(API_CHECK_INTERNET_ACCESS,  File_Api_CheckInternetAccess);
-    Api_SetFunction(API_GET_BLOCKED_DLL,        File_Api_GetBlockedDll);
+    //Api_SetFunction(API_GET_BLOCKED_DLL,        File_Api_GetBlockedDll);
 
     return TRUE;
 }
@@ -930,29 +931,29 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN File_IsDelayLoadDll(PROCESS *proc, const WCHAR *DllName)
-{
-    BOOLEAN retval = FALSE;
-    ULONG idx = 0;
-
-    Conf_AdjustUseCount(TRUE);
-
-    while (1) {
-        const WCHAR *value = Conf_Get(proc->box->name, L"DelayLoadDll", idx);
-        if (! value)
-            break;
-        //DbgPrint("Comparing <%S> vs <%S>\n", DllName, value);
-        if (_wcsicmp(value, DllName) == 0) {
-            retval = TRUE;
-            break;
-        }
-        ++idx;
-    }
-
-    Conf_AdjustUseCount(FALSE);
-
-    return retval;
-}
+//_FX BOOLEAN File_IsDelayLoadDll(PROCESS *proc, const WCHAR *DllName)
+//{
+//    BOOLEAN retval = FALSE;
+//    ULONG idx = 0;
+//
+//    Conf_AdjustUseCount(TRUE);
+//
+//    while (1) {
+//        const WCHAR *value = Conf_Get(proc->box->name, L"DelayLoadDll", idx);
+//        if (! value)
+//            break;
+//        //DbgPrint("Comparing <%S> vs <%S>\n", DllName, value);
+//        if (_wcsicmp(value, DllName) == 0) {
+//            retval = TRUE;
+//            break;
+//        }
+//        ++idx;
+//    }
+//
+//    Conf_AdjustUseCount(FALSE);
+//
+//    return retval;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -1419,32 +1420,33 @@ _FX NTSTATUS File_Generic_MyParseProc(
         // has been initialized, then pretend the file does not exist,
         // and add the DLL path so it can be loaded by SbieDll
         //
-
-        if ((! proc->sbiedll_loaded) && status == STATUS_SUCCESS
-                && (CreateOptions & FILE_DIRECTORY_FILE) == 0) {
-
-            WCHAR *backslash = wcsrchr(path, L'\\');
-            if (backslash && File_IsDelayLoadDll(proc, backslash + 1)) {
-
-                ULONG len = sizeof(BLOCKED_DLL) + path_len * sizeof(WCHAR);
-                BLOCKED_DLL *blk = Mem_Alloc(proc->pool, len);
-                if (blk) {
-
-                    blk->path_len = path_len;
-                    wmemcpy(blk->path, path, path_len + 1);
-
-                    KeRaiseIrql(APC_LEVEL, &irql);
-                    ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
-
-                    List_Insert_After(&proc->blocked_dlls, NULL, blk);
-
-                    ExReleaseResourceLite(proc->file_lock);
-                    KeLowerIrql(irql);
-                }
-
-                status = STATUS_OBJECT_NAME_NOT_FOUND;
-            }
-        }
+        // DX: this info does not seam to be so no point in saving this data
+        //
+        //if ((! proc->sbiedll_loaded) && status == STATUS_SUCCESS
+        //        && (CreateOptions & FILE_DIRECTORY_FILE) == 0) {
+        //
+        //    WCHAR *backslash = wcsrchr(path, L'\\');
+        //    if (backslash && File_IsDelayLoadDll(proc, backslash + 1)) {
+        //
+        //        ULONG len = sizeof(BLOCKED_DLL) + path_len * sizeof(WCHAR);
+        //        BLOCKED_DLL *blk = Mem_Alloc(proc->pool, len);
+        //        if (blk) {
+        //
+        //            blk->path_len = path_len;
+        //            wmemcpy(blk->path, path, path_len + 1);
+        //
+        //            KeRaiseIrql(APC_LEVEL, &irql);
+        //            ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
+        //
+        //            List_Insert_After(&proc->blocked_dlls, NULL, blk);
+        //
+        //            ExReleaseResourceLite(proc->file_lock);
+        //            KeLowerIrql(irql);
+        //        }
+        //
+        //        status = STATUS_OBJECT_NAME_NOT_FOUND;
+        //    }
+        //}
 
         //
         // release temporary path
@@ -2513,69 +2515,69 @@ get_program:
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS File_Api_GetBlockedDll(PROCESS *proc, ULONG64 *parms)
-{
-    API_GET_BLOCKED_DLL_ARGS *args = (API_GET_BLOCKED_DLL_ARGS *)parms;
-    WCHAR *user_buf;
-    ULONG user_len;
-    ULONG len;
-    NTSTATUS status;
-    BLOCKED_DLL *blk;
-    KIRQL irql;
-
-    //
-    // this API must be invoked by a sandboxed process
-    //
-
-    if (! proc)
-        return STATUS_NOT_IMPLEMENTED;
-
-    //
-    // check input buffers
-    //
-
-    user_buf = args->dll_name_buf.val;
-    user_len = args->dll_name_len.val / sizeof(WCHAR);
-    if ((! user_buf) || (! user_len))
-        return STATUS_INVALID_PARAMETER;
-
-    //
-    // return first blocked dll in the list
-    //
-
-    KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
-
-    blk = List_Head(&proc->blocked_dlls);
-    if (! blk)
-        status = STATUS_END_OF_FILE;
-    else {
-
-        __try {
-
-            len = blk->path_len;
-            if (len >= user_len)
-                len = user_len - 1;
-
-            ProbeForWrite(
-                user_buf, sizeof(WCHAR) * (len + 1), sizeof(WCHAR));
-            wmemcpy(user_buf, blk->path, len);
-            user_buf[len] = L'\0';
-
-            status = STATUS_SUCCESS;
-
-        } __except (EXCEPTION_EXECUTE_HANDLER) {
-            status = GetExceptionCode();
-        }
-
-        List_Remove(&proc->blocked_dlls, blk);
-
-        len = sizeof(BLOCKED_DLL) + blk->path_len * sizeof(WCHAR);
-        Mem_Free(blk, len);
-    }
-
-    ExReleaseResourceLite(proc->file_lock);
-    KeLowerIrql(irql);
-
-    return status;
-}
+//_FX NTSTATUS File_Api_GetBlockedDll(PROCESS *proc, ULONG64 *parms)
+//{
+//    API_GET_BLOCKED_DLL_ARGS *args = (API_GET_BLOCKED_DLL_ARGS *)parms;
+//    WCHAR *user_buf;
+//    ULONG user_len;
+//    ULONG len;
+//    NTSTATUS status;
+//    BLOCKED_DLL *blk;
+//    KIRQL irql;
+//
+//    //
+//    // this API must be invoked by a sandboxed process
+//    //
+//
+//    if (! proc)
+//        return STATUS_NOT_IMPLEMENTED;
+//
+//    //
+//    // check input buffers
+//    //
+//
+//    user_buf = args->dll_name_buf.val;
+//    user_len = args->dll_name_len.val / sizeof(WCHAR);
+//    if ((! user_buf) || (! user_len))
+//        return STATUS_INVALID_PARAMETER;
+//
+//    //
+//    // return first blocked dll in the list
+//    //
+//
+//    KeRaiseIrql(APC_LEVEL, &irql);
+//    ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
+//
+//    blk = List_Head(&proc->blocked_dlls);
+//    if (! blk)
+//        status = STATUS_END_OF_FILE;
+//    else {
+//
+//        __try {
+//
+//            len = blk->path_len;
+//            if (len >= user_len)
+//                len = user_len - 1;
+//
+//            ProbeForWrite(
+//                user_buf, sizeof(WCHAR) * (len + 1), sizeof(WCHAR));
+//            wmemcpy(user_buf, blk->path, len);
+//            user_buf[len] = L'\0';
+//
+//            status = STATUS_SUCCESS;
+//
+//        } __except (EXCEPTION_EXECUTE_HANDLER) {
+//            status = GetExceptionCode();
+//        }
+//
+//        List_Remove(&proc->blocked_dlls, blk);
+//
+//        len = sizeof(BLOCKED_DLL) + blk->path_len * sizeof(WCHAR);
+//        Mem_Free(blk, len);
+//    }
+//
+//    ExReleaseResourceLite(proc->file_lock);
+//    KeLowerIrql(irql);
+//
+//    return status;
+//}

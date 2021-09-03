@@ -5924,7 +5924,7 @@ _FX NTSTATUS File_SetDisposition(
     // handle the request appropriately
     //
   
-    if (PATH_IS_OPEN(mp_flags) || (FileFlags & FGN_IS_BOXED_PATH) != 0) {
+    if (PATH_IS_OPEN(mp_flags) /*|| (FileFlags & FGN_IS_BOXED_PATH) != 0*/) {
 
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,
@@ -5938,7 +5938,7 @@ _FX NTSTATUS File_SetDisposition(
 
     if (NT_SUCCESS(status) && !PATH_IS_OPEN(mp_flags)) {
 
-        BOOLEAN DeleteOnClose;
+        BOOLEAN DeleteOnClose = FALSE;
 
         if (FileInformationClass == FileDispositionInformation) {
 

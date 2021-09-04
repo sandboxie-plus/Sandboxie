@@ -605,7 +605,7 @@ void CSbieView::OnGroupAction()
 		else if (Action == m_pMenuMoveDown)
 			Offset = 1;
 		else
-			Offset = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Move entries by (negative values move up oositive values move down):"), 0);
+			Offset = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Move entries by (negative values move up, positive values move down):"), 0);
 		if (Offset == 0)
 			return;
 

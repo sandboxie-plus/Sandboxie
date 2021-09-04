@@ -3347,8 +3347,7 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6005;txt;01
-Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la
-maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
+Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
 .
 
 6006;txt;01

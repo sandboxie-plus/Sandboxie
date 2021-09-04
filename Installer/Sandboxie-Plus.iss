@@ -56,9 +56,9 @@ Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: Desk
 ;Root: HKCU; Subkey: "Software\{#MyAppName}"; ValueName: "{#MyAppName}_Autorun"; ValueType: string; ValueData: "1"; Flags: uninsdeletekey; Tasks: AutoStartEntry
 
 [Tasks]
-Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable 
-Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable 
-Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable 
+Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable
+Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
+Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
 
 [Messages]
 ; Include with commandline /? message.
@@ -325,8 +325,8 @@ var
   //params: String;
 begin
 
-  // after the instalation
-  if (CurStep <> ssPostInstall) then  
+  // after the installation
+  if (CurStep <> ssPostInstall) then
     exit;
 
   //if (w7drv <> '') then
@@ -336,7 +336,7 @@ begin
   //    FileCopy(w7drv, ExpandConstant('{app}\SbieDrv.sys.rc4'), False);
   //end;
 
-  if (IsPortable()) then  
+  if (IsPortable()) then
     exit;
 
   // install the driver
@@ -380,7 +380,7 @@ var
   ExecRet: Integer;
 begin
   
-  // before the uninstalation
+  // before the uninstallation
   if (CurUninstallStep <> usUninstall) then
     exit;
 

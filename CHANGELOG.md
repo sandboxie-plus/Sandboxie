@@ -4,21 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.6 / 5.51.6] - 2021-08-??
+## [0.9.6 / 5.51.6] - 2021-09-??
 
 ### Added
 - added ability to rename groups [#1152](https://github.com/sandboxie-plus/Sandboxie/issues/1152)
-- added ability to define a custom order for the sandboxes, you can move using the move context menu, or holding alt + arow key
+- added ability to define a custom order for the sandboxes, you can move using the move context menu, or holding alt + arrow key
+
+### Changed
+- updated the BlockPort rule inside Template_BlockPorts to the new NetworkAccess format (by isaak654) [#1162](https://github.com/sandboxie-plus/Sandboxie/pull/1162)
 
 ### Fixed
 - fixed issue with create group menu [#1151](https://github.com/sandboxie-plus/Sandboxie/issues/1151)
 - fixed issue when renaming a box it lost its group association
-- fixed issue with thunderbird build 91+ [#1156](https://github.com/sandboxie-plus/Sandboxie/issues/1156)
+- fixed issue with Thunderbird build 91+ [#1156](https://github.com/sandboxie-plus/Sandboxie/issues/1156)
 - fixed an issue with file disposition handling [#1161](https://github.com/sandboxie-plus/Sandboxie/issues/1161)
+- fixed SRWare Iron template (by Dyras) [#1146](https://github.com/sandboxie-plus/Sandboxie/pull/1146)
+- fixed labels position in Classic UI (by isaak654) [#1088](https://github.com/sandboxie-plus/Sandboxie/issues/1088)
 
 ### Removed
-- removed "DelayLoadDll=" code from the deriver as the user mode component since opne sourcing never used that information
-
+- removed "DelayLoadDll=" code from the driver as the user mode component since open sourcing never used that information
 
 
 

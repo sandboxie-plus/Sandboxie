@@ -46,14 +46,17 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; boxType = -1; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; boxType = -1; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
 		int			boxType;
+		int			OrderNumber;
 
 		CBoxedProcessPtr pProcess;
 	};
+
+	virtual QVariant		NodeData(STreeNode* pNode, int role, int section) const;
 
 	virtual STreeNode*		MkNode(const QVariant& Id) { return new SSandBoxNode(Id); }
 

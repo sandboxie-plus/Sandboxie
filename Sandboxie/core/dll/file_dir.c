@@ -2132,7 +2132,7 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
         InitializeObjectAttributes(
             &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
             
-        status = File_NtDeleteFileImpl(&objattrs);
+        File_NtDeleteFileImpl(&objattrs);
     
         Dll_Free(DeletePath);
     }

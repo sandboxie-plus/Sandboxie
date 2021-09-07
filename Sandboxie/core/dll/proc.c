@@ -1944,9 +1944,10 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
     // check if image name matches a well-known email program
     //
 
-    if (imgType == DLL_IMAGE_OFFICE_OUTLOOK     ||
-        imgType == DLL_IMAGE_WINDOWS_LIVE_MAIL  ||
-        imgType == DLL_IMAGE_OTHER_MAIL_CLIENT  ||
+    if (imgType == DLL_IMAGE_OFFICE_OUTLOOK      ||
+        imgType == DLL_IMAGE_WINDOWS_LIVE_MAIL   ||
+        imgType == DLL_IMAGE_OTHER_MAIL_CLIENT   ||
+        imgType == DLL_IMAGE_MOZILLA_THUNDERBIRD ||
         0)
     {
         should_check_openfilepath = TRUE;

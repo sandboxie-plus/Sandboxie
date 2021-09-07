@@ -63,16 +63,16 @@ ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安�
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
 
 ; Chinese Traditional
-ChineseTraditional.AddSandboxedMenu=加入「在沙盒中執行」選單
+ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
 ChineseTraditional.CustomPageLabel1=選擇安裝方式
 ChineseTraditional.CustomPageLabel2=應該如何安裝
 ChineseTraditional.CustomPageLabel3=選擇安裝模式
 ChineseTraditional.CustomPageInstallMode=在這台電腦上安裝 {#MyAppName}
 ChineseTraditional.CustomPageUpgradeMode=更新目前已安裝的 {#MyAppName}
-ChineseTraditional.CustomPagePortableMode=提取全部檔案到指定目錄供便攜化使用
+ChineseTraditional.CustomPagePortableMode=解壓縮所有檔案到指定目錄供便攜化使用
 ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
-ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，繼續安裝必須先將其移除，是否開始移除？
-ChineseTraditional.RunSandboxedMenu=在沙盒中執行(&S)
+ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，要繼續安裝必須先將其移除，是否開始移除？
+ChineseTraditional.RunSandboxedMenu=在沙箱中執行(&S)
 
 ; Dutch
 dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
@@ -119,8 +119,8 @@ portuguese.CustomPageInstallMode=Instalar {#MyAppName} neste computador
 portuguese.CustomPageUpgradeMode=Atualizar instalação existente do {#MyAppName}
 portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório para uso portable
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
-portuguese.ClassicFound=Instalação Classic Sandboxie detectada, deve ser desinstalada primeiro, você quer desinstalá-la agora?
-portuguese.RunSandboxedMenu=Rodar &Caixa de Areia
+portuguese.ClassicFound=Instalação do Classic Sandboxie detectada, deve ser desinstalado primeiro, você quer desinstalá-lo agora?
+portuguese.RunSandboxedMenu=Rodar na &Caixa de Areia
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню

@@ -534,6 +534,8 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
                 ImageType = DLL_IMAGE_GOOGLE_CHROME;
             else if (_wcsicmp(L"firefox", buf) == 0)
                 ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+            else if (_wcsicmp(L"thunderbird", buf) == 0)
+                ImageType = DLL_IMAGE_MOZILLA_THUNDERBIRD;
             else if (_wcsicmp(L"browser", buf) == 0)
                 ImageType = DLL_IMAGE_OTHER_WEB_BROWSER;
             else if (_wcsicmp(L"mail", buf) == 0)
@@ -576,6 +578,8 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
         L"k-meleon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
         L"librewolf.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
+        L"thunderbird.exe",         (WCHAR *)DLL_IMAGE_MOZILLA_THUNDERBIRD,
+
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
         L"kmplayer.exe",            (WCHAR *)DLL_IMAGE_PANDORA_KMPLAYER,
@@ -603,7 +607,6 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
         L"Outlook.exe",             (WCHAR *)DLL_IMAGE_OFFICE_OUTLOOK,
         L"Excel.exe",               (WCHAR *)DLL_IMAGE_OFFICE_EXCEL,
 
-        L"thunderbird.exe",         (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
         L"winmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
         L"IncMail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
         L"eudora.exe",              (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,

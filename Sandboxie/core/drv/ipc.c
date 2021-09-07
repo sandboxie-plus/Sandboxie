@@ -546,6 +546,8 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\RPC Control\\webcache_*",
         L"*\\BaseNamedObjects\\windows_webcache_counters_*",
         L"*\\BaseNamedObjects\\[CoreUI]-*",
+        // open paths 11
+        L"*\\BaseNamedObjects\\SM*:WilStaging_*", // 22449.1000 accesses this before sbiedll load
         NULL
     };
 

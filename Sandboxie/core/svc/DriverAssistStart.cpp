@@ -180,6 +180,7 @@ driver_started:
         }
     }
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (ok) {
@@ -213,6 +214,7 @@ driver_started:
 
 
 #endif ! _WIN64
+#endif
 
     if (ok) {
 
@@ -224,6 +226,22 @@ driver_started:
         m_instance->LogMessage();
 
         m_instance->m_DriverReady = true;
+
+        //
+        // check if there are boxes configured to be run in bSession0 
+        // at system boot and run them on service start
+        //
+
+        WCHAR boxname[64];
+        for (ULONG i = 0; ; ++i) {
+
+            rc = SbieApi_QueryConfAsIs(
+                NULL, L"StartSystemBox", i, boxname, sizeof(WCHAR) * 64);
+            if (rc != 0)
+                break;
+
+            SbieDll_RunStartExe(L"auto_run", boxname);
+        }
     }
 
     if (! ok) {

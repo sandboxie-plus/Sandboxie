@@ -498,7 +498,7 @@ bool SbieIniServer::SetUserSettingsSectionName(HANDLE hToken)
 //---------------------------------------------------------------------------
 
 
-bool SbieIniServer::TokenIsAdmin(HANDLE hToken)
+bool SbieIniServer::TokenIsAdmin(HANDLE hToken, bool OnlyFull)
 {
     //
     // check if token is member of the Administrators group
@@ -522,7 +522,7 @@ bool SbieIniServer::TokenIsAdmin(HANDLE hToken)
         // on Windows Vista, check for UAC split token
         //
 
-        if (! b) {
+        if (! b || OnlyFull) {
             OSVERSIONINFO osvi;
             osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
             if (GetVersionEx(&osvi) && osvi.dwMajorVersion >= 6) {
@@ -531,7 +531,7 @@ bool SbieIniServer::TokenIsAdmin(HANDLE hToken)
                         hToken, (TOKEN_INFORMATION_CLASS)TokenElevationType,
                         &elevationType, sizeof(elevationType), &len);
                 if (b && (elevationType != TokenElevationTypeFull &&
-                          elevationType != TokenElevationTypeLimited))
+                          (OnlyFull || elevationType != TokenElevationTypeLimited)))
                     b = FALSE;
             }
         }
@@ -1491,7 +1491,7 @@ ULONG SbieIniServer::RefreshConf()
     // apply new Sandboxie.ini into the driver
     //
 
-    status = SbieApi_ReloadConf(m_session_id);
+    status = SbieApi_ReloadConf(m_session_id, 0);
 
 finish:
 

@@ -721,7 +721,7 @@ _FX void ScanFolder(MENU_DIR *menu, WCHAR *path, UCHAR source)
 
                     MENU_ITEM *menu_item;
                     wcscpy(path_end + 1, data.cFileName);
-                    *ptr = L'\0';
+                    //*ptr = L'\0';
                     menu_item = Insert_MENU_ITEM(
                                     menu, data.cFileName, path, source);
                     if (menu_item)

@@ -8,24 +8,34 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 ## System requirements
 Windows 7 or higher, 32-bit or 64-bit.
 
-## Changelog
-
+## Detailed changelog
 https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md
 
 ## Download
 [![GitHub All Releases](https://img.shields.io/github/downloads/sandboxie-plus/Sandboxie/total?style=for-the-badge)](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
 
 ## Features
-Sandboxie is available in two flavors, Plus and Classic. Both have the same core components, this means they have the same level of security and compatibility.
-What's different is the availability of features in the user interface:
+Sandboxie is available in two flavors, Plus and Classic. They both share the same core components, this means they have the same level of security and compatibility.
+What's different is the availability of features in the user interface.
 
-1) Plus build has a modern Qt based UI, which supports all new features that have been added since the project went open source.
-If you need an accurate list, you can take a look at the changelog above.
+Plus build has a modern Qt based UI, which supports all new features that have been added since the project went open source:
 
-2) Classic build has the old no longer developed MFC based UI, hence it lacks native support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
+  * Snapshot Manager - this feature takes a copy of any box in order to be restored when needed
+  * Maintenance mode - it allows to uninstall/install/start/stop Sandboxie driver and service when needed
+  * Portable mode - you can run the installer and choose to extract all files to a directory
+  * Additional UI options to block access for Windows components like printer spooler and clipboard
+  * More customization options for Start/Run and Internet access restrictions
+  * Global hotkey to terminate all boxed processes
+  * A new firewall per sandbox which supports Windows Filtering Platform (WFP)
+
+Classic build has the old no longer developed MFC based UI, hence it lacks native interface support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
+
+If you need to check all new features at once, a good way to highlight them quickly is to search the equal sign in the [detailed changelog](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md).
 
 ## Documentation
-A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation), [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) and [future development](https://github.com/sandboxie-plus/Sandboxie/labels/future%20development) labels in this repository.
+A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
+
+[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22)
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
 
@@ -51,22 +61,27 @@ Open Source release
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
-- mpheath - Help with Inno Setup installer
-- yfdyh000 - Localization fixes / Inno Setup
+- daveout - UI / Icons
+- mpheath - Author of Plus installer based on Inno Setup
+- yfdyh000 - Localization support of Plus installer
+- NewKidOnTheBlock - Changelog fixes
 
 ## Translators
 - yuhao2348732 - Chinese Simplified
 - nkh0472 - Chinese Simplified
 - yfdyh000 - Chinese Simplified
 - TragicLifeHu - Chinese Traditional
+- Hulen - Chinese Traditional
 - RockyTDR - Dutch
 - bastik-1001 - German
 - isaak654 - Italian
+- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?p=54) - Polish
 - JNylson - Portuguese
 - lufog - Russian
-- xorcan - Turkish
+- sebadamus - Spanish
+- xorcan - Turkish (currently unmaintained)
 
-More volunteers are welcome! ;)
+More volunteers are welcome here! ;)
 
 ## Support the project
 If you like the tool, please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos

@@ -15,17 +15,16 @@ public:
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
 	virtual QList<CBoxedProcessPtr>	GetSelectedProcesses();
+	virtual QStringList			GetSelectedGroups(bool bAndBoxes = false);
 
 	//virtual void				UpdateRunMenu();
 
 	virtual QString				AddNewBox();
+	virtual QString				AddNewGroup();
 	virtual void				SelectBox(const QString& Name);
 
 	virtual void				PopUpMenu(const QString& Name);
 	virtual void				ShowOptions(const QString& Name);
-
-signals:
-	void						RecoveryRequested(const QString& BoxName);
 
 public slots:
 	void						Clear();
@@ -34,6 +33,8 @@ public slots:
 
 private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
+
+	void						OnCustomSortByColumn(int column);
 
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected);
@@ -54,7 +55,9 @@ protected:
 
 private:
 
+	void					UpdateMenu();
 	void					UpdateGroupMenu();
+	void					RenameGroup(const QString OldName, const QString NewName);
 
 	QString					FindParent(const QString& Name);
 	bool					IsParentOf(const QString& Name, const QString& Group);
@@ -65,8 +68,11 @@ private:
 	CSbieModel*				m_pSbieModel;
 	QSortFilterProxyModel*	m_pSortProxy;
 
+	QMenu*					m_pMenu2;
+
 	QAction*				m_pNewBox;
 	QAction*				m_pAddGroupe;
+	QAction*				m_pRenGroupe;
 	QAction*				m_pDelGroupe;
 	int						m_iMenuTop;
 	QMenu*					m_pMenuRun;
@@ -74,9 +80,11 @@ private:
 	QAction*				m_pMenuRunMenu;
 	QAction*				m_pMenuRunBrowser;
 	QAction*				m_pMenuRunMailer;
+	QMenu*					m_pMenuRunTools;
 	QAction*				m_pMenuRunExplorer;
 	QAction*				m_pMenuRunRegEdit;
 	QAction*				m_pMenuRunAppWiz;
+	QAction*				m_pMenuAutoRun;
 	QAction*				m_pMenuRunCmd;
 	QAction*				m_pMenuRunCmdAdmin;
 	QAction*				m_pMenuRunCmd32;
@@ -91,10 +99,16 @@ private:
 	QAction*				m_pMenuOptions;
 	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;
+	QMenu*					m_pMenuContent;
 	QAction*				m_pMenuExplore;
+	QAction*				m_pMenuBrowse;
+	QAction*				m_pMenuRegEdit;
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
+	QAction*				m_pMenuMoveUp;
+	//QAction*				m_pMenuMoveBy;
+	QAction*				m_pMenuMoveDown;
 	QMenu*					m_pMenuMoveTo;
 	int						m_iMoveTo;
 	QAction*				m_pMenuRename;

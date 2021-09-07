@@ -51,10 +51,12 @@ typedef struct _LSA_MESSAGE_XP {
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
 static ULONG Ipc_MSV10_AuthPackageNumber = 0;
 
+#endif
 #endif
 
 
@@ -136,6 +138,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_Lsa(
             }
 
         }
+#ifdef XP_SUPPORT
 #ifndef _WIN64
         else { // xp support
 
@@ -166,6 +169,7 @@ _FX NTSTATUS Ipc_CheckPortRequest_Lsa(
                 }
             }
         }
+#endif
 #endif
 
     }
@@ -349,6 +353,7 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg)
     return filter;
 }
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
 
@@ -377,4 +382,5 @@ _FX NTSTATUS Ipc_Api_SetLsaAuthPkg(PROCESS* proc, ULONG64* parms) // xp support
     return STATUS_SUCCESS;
 }
 
+#endif
 #endif

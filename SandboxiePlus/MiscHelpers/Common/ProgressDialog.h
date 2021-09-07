@@ -2,20 +2,21 @@
 
 #include "../mischelpers_global.h"
 
-class MISCHELPERS_EXPORT CProgressDialog : public QMainWindow
+class MISCHELPERS_EXPORT CProgressDialog : public QDialog
 {
 	Q_OBJECT
 
 public:
 	CProgressDialog(const QString& Prompt, QWidget* parent = 0)
-	 : QMainWindow(parent)
+	 : QDialog(parent)
 	{
 		setWindowFlags(Qt::Tool);
 
-		m_pMainWidget = new QWidget();
+		//m_pMainWidget = new QWidget();
 		m_pMainLayout = new QGridLayout(this);
-		m_pMainWidget->setLayout(m_pMainLayout);
-		this->setCentralWidget(m_pMainWidget);
+		this->setLayout(m_pMainLayout);
+		//m_pMainWidget->setLayout(m_pMainLayout);
+		//this->setCentralWidget(m_pMainWidget);
  
 		m_pMessageLabel = new QLabel(Prompt);
 		m_pMessageLabel->setMinimumWidth(300);
@@ -87,7 +88,7 @@ protected:
 	{
 		if (e->timerId() != m_TimerId) 
 		{
-			QMainWindow::timerEvent(e);
+			QDialog::timerEvent(e);
 			return;
 		}
 		

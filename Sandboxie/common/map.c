@@ -254,7 +254,7 @@ void* map_remove(map_base_t* m, const void* key)
 }
 
 
-void map_deinit(map_base_t* m) 
+void map_clear(map_base_t* m) 
 {
     for (unsigned int i = m->nbuckets; i--; ) {
         map_node_t* node = m->buckets[i];
@@ -264,7 +264,11 @@ void map_deinit(map_base_t* m)
             node = next;
         }
     }
-    if (m->buckets) m->func_free(m->mem_pool, m->buckets);
+    if (m->buckets) {
+        m->func_free(m->mem_pool, m->buckets);
+        m->buckets = NULL;
+    }
+    m->nnodes = m->nbuckets = 0;
 }
 
 

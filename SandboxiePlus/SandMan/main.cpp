@@ -24,17 +24,30 @@ int main(int argc, char *argv[])
 
 	//InitConsole(false);
 
+	bool IsBoxed = GetModuleHandle(L"SbieDll.dll") != NULL;
+
 	SB_STATUS Status = CSbieUtils::DoAssist();
 	if (Status.GetStatus()) {
 		if(Status.GetStatus() == ERROR_OK) app.sendMessage("Status:OK");
 		else app.sendMessage("Status:" + CSandMan::FormatError(Status)); // todo: localization
 		return 0;
 	}
-	
-	QString PendingMessage;
 
 	QStringList Args = QCoreApplication::arguments();
-	int CmdPos = Args.indexOf("-op");
+	
+	int CmdPos = Args.indexOf("-open_reg", Qt::CaseInsensitive);
+	if (CmdPos != -1) {
+		if (Args.count() > CmdPos + 2) {
+			QProcess::startDetached(Args.at(CmdPos + 2));
+			QThread::msleep(1000);
+		}
+		ShellOpenRegKey(Args.at(CmdPos + 1));
+		return 0;
+	}
+
+	QString PendingMessage;
+
+	CmdPos = Args.indexOf("-op", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		QString Op;
 		if (Args.count() > CmdPos)
@@ -42,12 +55,26 @@ int main(int argc, char *argv[])
 		PendingMessage = "Op:" + Op;
 	}
 
-	CmdPos = Args.indexOf("/box:__ask__");
+	CmdPos = Args.indexOf("/box:__ask__", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
-		QString CommandLine;
-		for (int i = CmdPos + 1; i < Args.count(); i++)
-			CommandLine += "\"" + Args[i] + "\" ";
-		PendingMessage = "Run:" + CommandLine.trimmed();
+		// Note: a escaped command ending with \" will fail and unescape "
+		//QString CommandLine;
+		//for (int i = CmdPos + 1; i < Args.count(); i++)
+		//	CommandLine += "\"" + Args[i] + "\" ";
+		//PendingMessage = "Run:" + CommandLine.trimmed();
+		LPWSTR ChildCmdLine = wcsstr(GetCommandLineW(), L"/box:__ask__") + 13;
+
+		if (IsBoxed) {
+			ShellExecute(NULL, L"open", ChildCmdLine, NULL, NULL, SW_SHOWNORMAL);
+			return 0;
+		}
+
+		PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+	}
+
+	if (IsBoxed) {
+		QMessageBox::critical(NULL, "Sandboxie-Plus", CSandMan::tr("Sandboxie Manager can not be run sandboxed!"));
+		return -1;
 	}
 
 	if (!PendingMessage.isEmpty()) {

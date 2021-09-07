@@ -51,6 +51,8 @@ NTSTATUS Sbie_SepFilterToken_KernelMode(
     void        **NewToken
 );
 
+BOOLEAN Token_Init_SbieLogin(void);
+
 static BOOLEAN Token_Init_SepFilterToken(void);
 
 static void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject);
@@ -145,7 +147,7 @@ static UCHAR AnonymousLogonSid[12] = {
     SECURITY_ANONYMOUS_LOGON_RID,0,0,0      // SubAuthority
 };
 
-static UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
+UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
 
 static UCHAR SystemLogonSid[12] = {
 	1,                                      // Revision
@@ -222,24 +224,7 @@ _FX BOOLEAN Token_Init(void)
 
 	// SbieLogin BEGIN
 	if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE))
-	{
-		WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
-		UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
-		if (GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName) && AccountName.Length < 64)
-		{
-			wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
-			AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
-			//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
-
-			SID_NAME_USE use;
-			ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
-			WCHAR DomainBuff[20]; // doesn't work without this
-			UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
-
-			SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
-			//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
-		}
-	}
+        Token_Init_SbieLogin();
 	// SbieLogin END
 
     //
@@ -252,6 +237,34 @@ _FX BOOLEAN Token_Init(void)
     //
     // finish
     //
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Token_Init_SbieLogin
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Token_Init_SbieLogin(void)
+{
+    WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
+	UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
+	if (GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName) && AccountName.Length < 64)
+	{
+		wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
+		AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
+		//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
+
+		SID_NAME_USE use;
+		ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
+		WCHAR DomainBuff[20]; // doesn't work without this
+		UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
+
+		SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
+		//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
+	}
 
     return TRUE;
 }

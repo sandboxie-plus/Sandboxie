@@ -56,9 +56,9 @@ Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: Desk
 ;Root: HKCU; Subkey: "Software\{#MyAppName}"; ValueName: "{#MyAppName}_Autorun"; ValueType: string; ValueData: "1"; Flags: uninsdeletekey; Tasks: AutoStartEntry
 
 [Tasks]
-Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable 
-Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable 
-Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable 
+Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable
+Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
+Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
 
 [UninstallDelete]
 Type: dirifempty; Name: "{app}"
@@ -271,6 +271,10 @@ begin
   Exec(ExpandConstant('{app}\kmdutil.exe'), 'stop SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
   Exec(ExpandConstant('{app}\kmdutil.exe'), 'stop SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
 
+  // uninstall the driver
+  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
   Result := True;
 end;
 
@@ -325,8 +329,8 @@ var
   //params: String;
 begin
 
-  // after the instalation
-  if (CurStep <> ssPostInstall) then  
+  // after the installation
+  if (CurStep <> ssPostInstall) then
     exit;
 
   //if (w7drv <> '') then
@@ -336,7 +340,7 @@ begin
   //    FileCopy(w7drv, ExpandConstant('{app}\SbieDrv.sys.rc4'), False);
   //end;
 
-  if (IsPortable()) then  
+  if (IsPortable()) then
     exit;
 
   // install the driver
@@ -438,7 +442,7 @@ var
   ExecRet: Integer;
 begin
   
-  // before the uninstalation
+  // before the uninstallation
   if (CurUninstallStep <> usUninstall) then
     exit;
 
@@ -452,10 +456,6 @@ begin
     Abort();
     exit;
   end;
-
-  // uninstall the driver
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
 
   // remove from autostart
   RegDeleteValue(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Run', 'SandboxiePlus_AutoRun');

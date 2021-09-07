@@ -305,7 +305,7 @@ LONG SbieApi_QuerySymbolicLink(
 
 
 SBIEAPI_EXPORT
-LONG SbieApi_ReloadConf(ULONG session_id);
+LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags);
 
 
 SBIEAPI_EXPORT
@@ -364,6 +364,16 @@ LONG SbieApi_ProcessExemptionControl(
 	ULONG *OldState);
 
 //---------------------------------------------------------------------------
+
+
+SBIEAPI_EXPORT 
+void* SbieDll_GetSysFunction(
+    const WCHAR* name);
+
+SBIEAPI_EXPORT 
+BOOL SbieDll_RunStartExe(
+    const WCHAR* cmd, 
+    const wchar_t* boxname);
 
 #ifdef __cplusplus
 }

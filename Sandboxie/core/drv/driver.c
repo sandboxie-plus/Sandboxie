@@ -118,6 +118,7 @@ volatile BOOLEAN Driver_Unloading = FALSE;
 static BOOLEAN Driver_FullUnload = TRUE;
 
 UNICODE_STRING Driver_Altitude;
+const WCHAR* Altitude_Str = FILTER_ALTITUDE;
 
 ULONG Process_Flags1 = 0;
 ULONG Process_Flags2 = 0;
@@ -151,7 +152,7 @@ _FX NTSTATUS DriverEntry(
     Driver_Object = DriverObject;
     Driver_Object->DriverUnload = NULL;
 
-    RtlInitUnicodeString(&Driver_Altitude, FILTER_ALTITUDE);
+    RtlInitUnicodeString(&Driver_Altitude, Altitude_Str);
 
     if (ok)
         ok = Driver_CheckOsVersion();
@@ -176,6 +177,8 @@ _FX NTSTATUS DriverEntry(
 
     if (ok)
         ok = Driver_FindHomePath(RegistryPath);
+
+    MyValidateCertificate();
 
     //
     // initialize simple utility modules.  these don't hook anything
@@ -277,7 +280,7 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
     // or Windows 7 (v6.1) or later (64-bit)
     //
 
-#ifdef _WIN64
+#if defined(_WIN64) || !defined(XP_SUPPORT)
     const ULONG MajorVersionMin = 6;
     const ULONG MinorVersionMin = 1;
 #else
@@ -671,10 +674,12 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
     // unload just the hooks, in case this is a partial unload
     //
 
-    Obj_Unload();
+#ifdef XP_SUPPORT
     Gui_Unload();
+#endif
     Key_Unload();
     File_Unload();
+    Obj_Unload();
     Thread_Unload();
     Process_Unload(FALSE);
 

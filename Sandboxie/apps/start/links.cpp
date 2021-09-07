@@ -39,7 +39,7 @@ extern void MyCoInitialize(void);
 //---------------------------------------------------------------------------
 
 
-static void GetLinkInstance(
+void GetLinkInstance(
     const WCHAR *path,
     IShellLink **ppShellLink,
     IPersistFile **ppPersistFile,

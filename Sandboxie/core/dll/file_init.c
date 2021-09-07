@@ -262,7 +262,7 @@ _FX BOOLEAN File_Init(void)
     }
 
 
-    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)
+    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD)
     {
         void *WriteProcessMemory =
             GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
@@ -357,12 +357,15 @@ _FX ULONG File_GetVolumeSN(const FILE_DRIVE *drive)
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
     
+    ULONG OldMode;
+    RtlSetThreadErrorMode(0x10u, &OldMode);
     NTSTATUS status = NtCreateFile(
         &handle, GENERIC_READ | SYNCHRONIZE, &objattrs,
         &iosb, NULL, 0, FILE_SHARE_VALID_FLAGS,
         FILE_OPEN,
         FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
         NULL, 0);
+    RtlSetThreadErrorMode(OldMode, 0i64);
 
     Dll_Free(objname.Buffer);
 

@@ -202,9 +202,11 @@ _FX BOOLEAN Ipc_Init(void)
     Api_SetFunction(API_QUERY_SYMBOLIC_LINK,    Ipc_Api_QuerySymbolicLink);
     //Api_SetFunction(API_ALLOW_SPOOLER_PRINT_TO_FILE, Ipc_Api_AllowSpoolerPrintToFile);
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
     Api_SetFunction(API_SET_LSA_AUTH_PKG,       Ipc_Api_SetLsaAuthPkg);
 #endif ! _WIN64
+#endif
 
     Api_SetFunction(API_GET_DYNAMIC_PORT_FROM_PID, Ipc_Api_GetDynamicPortFromPid);
     Api_SetFunction(API_OPEN_DYNAMIC_PORT, Ipc_Api_OpenDynamicPort);
@@ -362,6 +364,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\SharedSection",
+        L"\\Windows\\SharedSection", // bSession0
         L"\\Sessions\\*\\BaseNamedObjects\\CrSharedMem_*",      // now required by Chromium browsers
         L"\\ThemeApiPort",
         L"\\KnownDlls\\*",              // see Ipc_Generic_MyOpenProc_2
@@ -543,6 +546,8 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\RPC Control\\webcache_*",
         L"*\\BaseNamedObjects\\windows_webcache_counters_*",
         L"*\\BaseNamedObjects\\[CoreUI]-*",
+        // open paths 11
+        L"*\\BaseNamedObjects\\SM*:WilStaging_*", // 22449.1000 accesses this before sbiedll load
         NULL
     };
 
@@ -1262,7 +1267,9 @@ _FX NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode)
             TypeBuffer = ObjectType->Name.Buffer;
         }
 
-    } else {
+    }
+#ifdef XP_SUPPORT
+    else {
 
         //
         // on earlier versions of Windows, the object header precedes the
@@ -1295,6 +1302,7 @@ _FX NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode)
 
         //DbgPrint("Object %08X Has NameInfo %08X TypeBuffer %*.*S\n", object, NameInfo, TypeLength/sizeof(WCHAR), TypeLength/sizeof(WCHAR), TypeBuffer);
     }
+#endif
 
     //
     // if we have the type name here, it means the object is unnamed,

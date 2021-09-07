@@ -42,6 +42,83 @@ static UCHAR KphpTrustedPublicKey[] =
 };
 
 
+typedef struct {
+    BCRYPT_ALG_HANDLE algHandle;
+    BCRYPT_HASH_HANDLE handle;
+    PVOID object;
+} MY_HASH_OBJ;
+
+VOID MyFreeHash(MY_HASH_OBJ* pHashObj)
+{
+    if (pHashObj->handle)
+        BCryptDestroyHash(pHashObj->handle);
+    if (pHashObj->object)
+        ExFreePoolWithTag(pHashObj->object, 'vhpK');
+    if (pHashObj->algHandle)
+        BCryptCloseAlgorithmProvider(pHashObj->algHandle, 0);
+}
+
+NTSTATUS MyInitHash(MY_HASH_OBJ* pHashObj)
+{
+    NTSTATUS status;
+    ULONG hashObjectSize;
+    ULONG querySize;
+    memset(pHashObj, 0, sizeof(MY_HASH_OBJ));
+
+    if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&pHashObj->algHandle, KPH_HASH_ALGORITHM, NULL, 0)))
+        goto CleanupExit;
+
+    if (!NT_SUCCESS(status = BCryptGetProperty(pHashObj->algHandle, BCRYPT_OBJECT_LENGTH, (PUCHAR)&hashObjectSize, sizeof(ULONG), &querySize, 0)))
+        goto CleanupExit;
+
+    pHashObj->object = ExAllocatePoolWithTag(PagedPool, hashObjectSize, 'vhpK');
+    if (!pHashObj->object) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto CleanupExit;
+    }
+
+    if (!NT_SUCCESS(status = BCryptCreateHash(pHashObj->algHandle, &pHashObj->handle, (PUCHAR)pHashObj->object, hashObjectSize, NULL, 0, 0)))
+        goto CleanupExit;
+
+CleanupExit:
+    // on failure the caller must call MyFreeHash
+
+    return status;
+}
+
+NTSTATUS MyHashData(MY_HASH_OBJ* pHashObj, PVOID Data, ULONG DataSize)
+{
+    return BCryptHashData(pHashObj->handle, (PUCHAR)Data, DataSize, 0);
+}
+
+NTSTATUS MyFinishHash(MY_HASH_OBJ* pHashObj, PVOID* Hash, PULONG HashSize)
+{
+    NTSTATUS status;
+    ULONG querySize;
+
+    if (!NT_SUCCESS(status = BCryptGetProperty(pHashObj->algHandle, BCRYPT_HASH_LENGTH, (PUCHAR)HashSize, sizeof(ULONG), &querySize, 0)))
+        goto CleanupExit;
+
+    *Hash = ExAllocatePoolWithTag(PagedPool, *HashSize, 'vhpK');
+    if (!*Hash) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto CleanupExit;
+    }
+
+    if (!NT_SUCCESS(status = BCryptFinishHash(pHashObj->handle, (PUCHAR)*Hash, *HashSize, 0)))
+        goto CleanupExit;
+
+    return STATUS_SUCCESS;
+
+CleanupExit:
+    if (*Hash) {
+        ExFreePoolWithTag(*Hash, 'vhpK');
+        *Hash = NULL;
+    }
+
+    return status;
+}
+
 NTSTATUS KphHashFile(
     _In_ PUNICODE_STRING FileName,
     _Out_ PVOID *Hash,
@@ -49,13 +126,8 @@ NTSTATUS KphHashFile(
     )
 {
     NTSTATUS status;
-    BCRYPT_ALG_HANDLE hashAlgHandle = NULL;
+    MY_HASH_OBJ hashObj;
     ULONG querySize;
-    ULONG hashObjectSize;
-    ULONG hashSize;
-    PVOID hashObject = NULL;
-    PVOID hash = NULL;
-    BCRYPT_HASH_HANDLE hashHandle = NULL;
     OBJECT_ATTRIBUTES objectAttributes;
     IO_STATUS_BLOCK iosb;
     HANDLE fileHandle = NULL;
@@ -64,37 +136,8 @@ NTSTATUS KphHashFile(
     ULONG bytesToRead;
     PVOID buffer = NULL;
 
-    // Open the hash algorithm and allocate memory for the hash object.
-
-    if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&hashAlgHandle, KPH_HASH_ALGORITHM, NULL, 0)))
+    if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
-    if (!NT_SUCCESS(status = BCryptGetProperty(hashAlgHandle, BCRYPT_OBJECT_LENGTH,
-        (PUCHAR)&hashObjectSize, sizeof(ULONG), &querySize, 0)))
-    {
-        goto CleanupExit;
-    }
-    if (!NT_SUCCESS(status = BCryptGetProperty(hashAlgHandle, BCRYPT_HASH_LENGTH, (PUCHAR)&hashSize,
-        sizeof(ULONG), &querySize, 0)))
-    {
-        goto CleanupExit;
-    }
-
-    if (!(hashObject = ExAllocatePoolWithTag(PagedPool, hashObjectSize, 'vhpK')))
-    {
-        status = STATUS_INSUFFICIENT_RESOURCES;
-        goto CleanupExit;
-    }
-    if (!(hash = ExAllocatePoolWithTag(PagedPool, hashSize, 'vhpK')))
-    {
-        status = STATUS_INSUFFICIENT_RESOURCES;
-        goto CleanupExit;
-    }
-
-    if (!NT_SUCCESS(status = BCryptCreateHash(hashAlgHandle, &hashHandle, hashObject, hashObjectSize,
-        NULL, 0, 0)))
-    {
-        goto CleanupExit;
-    }
 
     // Open the file and compute the hash.
 
@@ -149,42 +192,28 @@ NTSTATUS KphHashFile(
             goto CleanupExit;
         }
 
-        if (!NT_SUCCESS(status = BCryptHashData(hashHandle, buffer, bytesToRead, 0)))
+        if (!NT_SUCCESS(status = MyHashData(&hashObj, buffer, bytesToRead)))
             goto CleanupExit;
 
         remainingBytes -= bytesToRead;
     }
 
-    if (!NT_SUCCESS(status = BCryptFinishHash(hashHandle, hash, hashSize, 0)))
+    if (!NT_SUCCESS(status = MyFinishHash(&hashObj, Hash, HashSize)))
         goto CleanupExit;
-
-    if (NT_SUCCESS(status))
-    {
-        *Hash = hash;
-        *HashSize = hashSize;
-
-        hash = NULL; // Don't free this in the cleanup section
-    }
 
 CleanupExit:
     if (buffer)
         ExFreePoolWithTag(buffer, 'vhpK');
     if (fileHandle)
         ZwClose(fileHandle);
-    if (hashHandle)
-        BCryptDestroyHash(hashHandle);
-    if (hash)
-        ExFreePoolWithTag(hash, 'vhpK');
-    if (hashObject)
-        ExFreePoolWithTag(hashObject, 'vhpK');
-    if (hashAlgHandle)
-        BCryptCloseAlgorithmProvider(hashAlgHandle, 0);
+    MyFreeHash(&hashObj);
 
     return status;
 }
 
-NTSTATUS KphVerifyFile(
-    _In_ PUNICODE_STRING FileName,
+NTSTATUS KphVerifySignature(
+    _In_ PVOID Hash,
+    _In_ ULONG HashSize,
     _In_ PUCHAR Signature,
     _In_ ULONG SignatureSize
     )
@@ -205,6 +234,33 @@ NTSTATUS KphVerifyFile(
         goto CleanupExit;
     }
 
+    // Verify the hash.
+
+    if (!NT_SUCCESS(status = BCryptVerifySignature(keyHandle, NULL, Hash, HashSize, Signature,
+        SignatureSize, 0)))
+    {
+        goto CleanupExit;
+    }
+
+CleanupExit:
+    if (keyHandle)
+        BCryptDestroyKey(keyHandle);
+    if (signAlgHandle)
+        BCryptCloseAlgorithmProvider(signAlgHandle, 0);
+
+    return status;
+}
+
+NTSTATUS KphVerifyFile(
+    _In_ PUNICODE_STRING FileName,
+    _In_ PUCHAR Signature,
+    _In_ ULONG SignatureSize
+    )
+{
+    NTSTATUS status;
+    PVOID hash = NULL;
+    ULONG hashSize;
+
     // Hash the file.
 
     if (!NT_SUCCESS(status = KphHashFile(FileName, &hash, &hashSize)))
@@ -212,8 +268,7 @@ NTSTATUS KphVerifyFile(
 
     // Verify the hash.
 
-    if (!NT_SUCCESS(status = BCryptVerifySignature(keyHandle, NULL, hash, hashSize, Signature,
-        SignatureSize, 0)))
+    if (!NT_SUCCESS(status = KphVerifySignature(hash, hashSize, Signature, SignatureSize)))
     {
         goto CleanupExit;
     }
@@ -221,11 +276,7 @@ NTSTATUS KphVerifyFile(
 CleanupExit:
     if (hash)
         ExFreePoolWithTag(hash, 'vhpK');
-    if (keyHandle)
-        BCryptDestroyKey(keyHandle);
-    if (signAlgHandle)
-        BCryptCloseAlgorithmProvider(signAlgHandle, 0);
-
+ 
     return status;
 }
 
@@ -296,8 +347,8 @@ NTSTATUS KphVerifyCurrentProcess()
     NTSTATUS status;
     PUNICODE_STRING processFileName = NULL;
     PUNICODE_STRING signatureFileName = NULL;
-    ULONG SignatureSize = 0;
-    PUCHAR Signature = NULL;
+    ULONG signatureSize = 0;
+    PUCHAR signature = NULL;
     
     if (!NT_SUCCESS(status = SeLocateProcessImageName(PsGetCurrentProcess(), &processFileName)))
         goto CleanupExit;
@@ -322,19 +373,187 @@ NTSTATUS KphVerifyCurrentProcess()
     signatureFileName->Length += 4 * sizeof(WCHAR);
 
 
-    if (!NT_SUCCESS(status = KphReadSignature(signatureFileName, &Signature, &SignatureSize)))
+    if (!NT_SUCCESS(status = KphReadSignature(signatureFileName, &signature, &signatureSize)))
         goto CleanupExit;
 
-    status = KphVerifyFile(processFileName, Signature, SignatureSize); 
+    status = KphVerifyFile(processFileName, signature, signatureSize); 
 
 
 CleanupExit:
-    if (Signature)
-        ExFreePoolWithTag(Signature, tzuk);
+    if (signature)
+        ExFreePoolWithTag(signature, tzuk);
     if (processFileName)
         ExFreePool(processFileName);
     if (signatureFileName)
         ExFreePoolWithTag(signatureFileName, tzuk);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+
+#define KERNEL_MODE
+#include "common/stream.h"
+#include "common/base64.c"
+extern POOL *Driver_Pool;
+
+NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
+
+_FX NTSTATUS KphValidateCertificate(void)
+{
+    static const WCHAR *path_cert = L"%s\\Certificate.dat";
+    NTSTATUS status;
+    ULONG path_len = 0;
+    WCHAR *path = NULL;
+    STREAM *stream = NULL;
+
+    MY_HASH_OBJ hashObj;
+    ULONG hashSize;
+    PUCHAR hash = NULL;
+    ULONG signatureSize = 0;
+    PUCHAR signature = NULL;
+
+    const int line_size = 1024 * sizeof(WCHAR);
+    WCHAR *line = NULL; //512 wchars
+    char *temp = NULL; //1024 chars, utf8 encoded
+    int line_num = 0;
+
+    if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
+        goto CleanupExit;
+
+    path_len = wcslen(Driver_HomePathDos) * sizeof(WCHAR);
+    path_len += 64;     // room for \Certificate.ini
+    path = Mem_Alloc(Driver_Pool, path_len);
+    line = Mem_Alloc(Driver_Pool, line_size);
+    temp = Mem_Alloc(Driver_Pool, line_size);
+    if (!path || !line || !temp) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto CleanupExit;
+    }
+
+    //
+    // read (Home Path)\Certificate.dat
+    //
+
+    RtlStringCbPrintfW(path, path_len, path_cert, Driver_HomePathDos);
+
+    status = Stream_Open(&stream, path, FILE_GENERIC_READ, 0, FILE_SHARE_READ, FILE_OPEN, 0);
+    if (!NT_SUCCESS(status)) {
+        status = STATUS_NOT_FOUND;
+        goto CleanupExit;
+    }
+
+    if(!NT_SUCCESS(status = Stream_Read_BOM(stream, NULL)))
+        goto CleanupExit;
+
+    status = Conf_Read_Line(stream, line, &line_num);
+    while (NT_SUCCESS(status)) {
+
+        WCHAR *ptr;
+        WCHAR *name;
+        WCHAR *value;
+        ULONG temp_len;
+
+        // parse tag name: value
+
+        ptr = wcschr(line, L':');
+        if ((! ptr) || ptr == line) {
+            status = STATUS_INVALID_PARAMETER;
+            break;
+        }
+        value = &ptr[1];
+
+        // eliminate trailing whitespace in the tag name
+
+        while (ptr > line) {
+            --ptr;
+            if (*ptr > 32) {
+                ++ptr;
+                break;
+            }
+        }
+        *ptr = L'\0';
+
+        name = line;
+
+        // eliminate leading and trailing whitespace in value
+
+        while (*value <= 32) {
+            if (! (*value))
+                break;
+            ++value;
+        }
+
+        if (*value == L'\0') {
+            status = STATUS_INVALID_PARAMETER;
+            break;
+        }
+
+        ptr = value + wcslen(value);
+        while (ptr > value) {
+            --ptr;
+            if (*ptr > 32) {
+                ++ptr;
+                break;
+            }
+        }
+        *ptr = L'\0';
+
+        //
+        // hash the new tag
+        //
+
+        /*if (*value == '"') {
+            value++;
+            value[wcslen(value) - 1] = 0;
+        }*/
+
+        if (wcscmp(L"SIGNATURE", name) == 0 && signature == NULL) {
+            signatureSize = b64_decoded_size(value);
+            signature = Mem_Alloc(Driver_Pool, signatureSize);
+            b64_decode(value, signature, signatureSize);
+            goto next;
+        }
+
+        if (NT_SUCCESS(RtlUnicodeToUTF8N(temp, line_size, &temp_len, name, wcslen(name) * sizeof(wchar_t))))
+            MyHashData(&hashObj, temp, temp_len);
+        
+        if (NT_SUCCESS(RtlUnicodeToUTF8N(temp, line_size, &temp_len, value, wcslen(value) * sizeof(wchar_t))))
+            MyHashData(&hashObj, temp, temp_len);
+            
+    next:
+        status = Conf_Read_Line(stream, line, &line_num);
+    }
+
+    Stream_Close(stream);
+    
+
+    if(!NT_SUCCESS(status = MyFinishHash(&hashObj, &hash, &hashSize)))
+        goto CleanupExit;
+
+    if (!signature) {
+        status = STATUS_INVALID_SECURITY_DESCR;
+        goto CleanupExit;
+    }
+
+    status = KphVerifySignature(hash, hashSize, signature, signatureSize);
+    DbgPrint("Sbie Cert status: %08x\n", status);
+
+
+CleanupExit:
+    if(path)
+        Mem_Free(path, path_len);    
+    if(line)
+        Mem_Free(line, line_size);
+    if(temp)
+        Mem_Free(temp, line_size);
+
+    MyFreeHash(&hashObj);
+    if(hash)
+        ExFreePoolWithTag(hash, 'vhpK');
+    if(signature)
+        Mem_Free(signature, signatureSize);
 
     return status;
 }

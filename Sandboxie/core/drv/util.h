@@ -101,7 +101,12 @@ void *memmem(const void *pSearchBuf, size_t nBufSize, const void *pPattern, size
 BOOLEAN MyIsCallerSigned(void);
 
 
+NTSTATUS MyValidateCertificate(void);
+
+
 //---------------------------------------------------------------------------
 
+
+extern BOOLEAN Driver_Certified;
 
 #endif // _MY_UTIL_H

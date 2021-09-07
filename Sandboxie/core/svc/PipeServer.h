@@ -131,10 +131,16 @@ public:
     MSG_HEADER *Call(MSG_HEADER *msg);
 
     /*
+     * Checks if the calling process has administrative privileges
+     */
+
+    static bool IsCallerAdmin();
+
+    /*
      * Checks if the calling process has a valid signature
      */
 
-    static bool IsCallerSigned();
+    //static bool IsCallerSigned();
 
 protected:
 

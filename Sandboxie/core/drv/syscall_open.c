@@ -625,7 +625,9 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
         TypeLength = ObjectType->Name.Length;
         TypeBuffer = ObjectType->Name.Buffer;
 
-    } else {
+    } 
+#ifdef XP_SUPPORT
+    else {
 
         OBJECT_HEADER *ObjectHeader = OBJECT_TO_OBJECT_HEADER(OpenedObject);
 
@@ -645,6 +647,7 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
             TypeBuffer = ObjectType->Name.Buffer;
         }
     }
+#endif
 
     //DbgPrint("Object %08X TypeBuffer %*.*S (%d)\n", OpenedObject, TypeLength/sizeof(WCHAR), TypeLength/sizeof(WCHAR), TypeBuffer, TypeLength);
 

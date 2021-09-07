@@ -212,6 +212,7 @@
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Views\TraceView.cpp" />
+    <ClCompile Include="Windows\FileBrowserWindow.cpp" />
     <ClCompile Include="Windows\NewBoxWindow.cpp" />
     <ClCompile Include="Windows\OptionsAccess.cpp" />
     <ClCompile Include="Windows\OptionsAdvanced.cpp" />
@@ -231,6 +232,7 @@
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\FileBrowserWindow.h" />
     <QtMoc Include="Windows\SelectBoxWindow.h" />
     <QtMoc Include="Views\TraceView.h" />
     <QtMoc Include="Windows\NewBoxWindow.h" />
@@ -259,6 +261,7 @@
     <Image Include="Resources\SandMan.ico" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Forms\FileBrowserWindow.ui" />
     <QtUic Include="Forms\NewBoxWindow.ui" />
     <QtUic Include="Forms\OptionsWindow.ui" />
     <QtUic Include="Forms\PopUpWindow.ui" />

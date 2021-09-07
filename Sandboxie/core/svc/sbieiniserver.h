@@ -37,6 +37,8 @@ public:
 
     ~SbieIniServer();
 
+    static bool TokenIsAdmin(HANDLE hToken, bool OnlyFull = false);
+
 protected:
 
     static MSG_HEADER *Handler(void *_this, MSG_HEADER *msg);
@@ -77,8 +79,6 @@ protected:
 
     bool GetIniPath(WCHAR **IniPath, WCHAR **TmpPath,
                     BOOLEAN *IsHomePath = NULL, BOOLEAN* IsUTF8 = NULL);
-
-    bool TokenIsAdmin(HANDLE hToken);
 
     ULONG IsCallerAuthorized(HANDLE hToken, const WCHAR *Password);
 

@@ -41,6 +41,7 @@ private slots:
 	void OnAddGroup();
 	void OnAddProg();
 	void OnDelProg();
+	void OnShowGroupTmpl()			{ LoadGroupsTmpl(true); }
 
 	void OnForceProg();
 	void OnForceDir();
@@ -79,13 +80,13 @@ private slots:
 	void OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessSelectionChanged() { CloseAccessEdit(); }
 
-	void OnAddFile()				{ AddAccessEntry(eFile, eDirect, "", ""); }
+	void OnAddFile()				{ AddAccessEntry(eFile, eDirect, "", ""); m_AccessChanged = true; }
 	void OnBrowseFile();
 	void OnBrowseFolder();
-	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); }
-	void OnAddIPC()					{ AddAccessEntry(eIPC, eDirect, "", ""); }
-	void OnAddWnd()					{ AddAccessEntry(eWnd, eDirect, "", ""); }
-	void OnAddCOM()					{ AddAccessEntry(eCOM, eDirect, "", ""); }
+	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); m_AccessChanged = true; }
+	void OnAddIPC()					{ AddAccessEntry(eIPC, eDirect, "", ""); m_AccessChanged = true; }
+	void OnAddWnd()					{ AddAccessEntry(eWnd, eDirect, "", ""); m_AccessChanged = true; }
+	void OnAddCOM()					{ AddAccessEntry(eCOM, eDirect, "", ""); m_AccessChanged = true; }
 	void OnDelAccess();
 	void OnShowAccessTmpl()			{ LoadAccessListTmpl(true); }
 	//
@@ -224,6 +225,7 @@ protected:
 	void SaveGeneral();
 
 	void LoadGroups();
+	void LoadGroupsTmpl(bool bUpdate = false);
 	void SaveGroups();
 
 	void LoadForced();

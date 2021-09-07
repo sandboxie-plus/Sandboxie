@@ -58,7 +58,7 @@
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Key_GetName(
+SBIEDLL_EXPORT NTSTATUS Key_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, BOOLEAN *OutIsBoxedPath);
 
@@ -257,7 +257,7 @@ NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 //---------------------------------------------------------------------------
 
 
-P_NtOpenKey                         __sys_NtOpenKey                 = NULL;
+       P_NtOpenKey                  __sys_NtOpenKey                 = NULL;
 static P_NtOpenKeyEx                __sys_NtOpenKeyEx               = NULL;
 static P_NtCreateKey                __sys_NtCreateKey               = NULL;
 static P_NtDeleteKey                __sys_NtDeleteKey               = NULL;
@@ -266,7 +266,7 @@ static P_NtSetValueKey              __sys_NtSetValueKey             = NULL;
 static P_NtQueryKey                 __sys_NtQueryKey                = NULL;
 static P_NtEnumerateKey             __sys_NtEnumerateKey            = NULL;
 static P_NtQueryValueKey            __sys_NtQueryValueKey           = NULL;
-static P_NtEnumerateValueKey        __sys_NtEnumerateValueKey       = NULL;
+       P_NtEnumerateValueKey        __sys_NtEnumerateValueKey       = NULL;
 static P_NtQueryMultipleValueKey    __sys_NtQueryMultipleValueKey   = NULL;
 static P_NtNotifyChangeKey          __sys_NtNotifyChangeKey         = NULL;
 static P_NtNotifyChangeMultipleKeys __sys_NtNotifyChangeMultipleKeys= NULL;

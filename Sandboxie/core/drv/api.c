@@ -72,6 +72,8 @@ static NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
+static NTSTATUS Api_QueryDriverInfo(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 
@@ -191,6 +193,8 @@ _FX BOOLEAN Api_Init(void)
     //Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
 
 	Api_SetFunction(API_PROCESS_EXEMPTION_CONTROL, Api_ProcessExemptionControl);
+
+    Api_SetFunction(API_QUERY_DRIVER_INFO, Api_QueryDriverInfo);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;
@@ -1203,6 +1207,7 @@ _FX void Api_CopyStringToUser(
 // Api_ProcessExemptionControl
 //---------------------------------------------------------------------------
 
+
 _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
@@ -1212,7 +1217,9 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 	ULONG *out_flag;
 
 	if (proc) // is caller sandboxed?
-		return STATUS_ACCESS_DENIED;
+		return STATUS_NOT_IMPLEMENTED;
+    else if (!MyIsCallerSigned()) 
+        status = STATUS_ACCESS_DENIED;
 
 	if (pArgs->process_id.val == 0)
 		return STATUS_INVALID_PARAMETER;
@@ -1257,4 +1264,51 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
     //KeLowerIrql(irql);
 
 	return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Api_QueryDriverInfo
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS *)parms;
+	
+    if (proc)
+        status = STATUS_NOT_IMPLEMENTED;
+
+    __try {
+
+        if (args->info_class.val == 0) {
+
+            ULONG *data = args->info_data.val;
+            ProbeForWrite(data, sizeof(ULONG), sizeof(ULONG));
+
+            ULONG FeatureFlags = 0;
+
+            extern BOOLEAN WFP_Enabled;
+            if (WFP_Enabled)
+                FeatureFlags |= SBIE_FEATURE_FLAG_WFP;
+
+            extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
+            if (SandboxieLogonSid[0] != 0)
+                FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
+
+            if (Driver_Certified)
+                FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
+
+
+            *data = FeatureFlags;
+        }
+        else
+            status = STATUS_INVALID_INFO_CLASS;
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    return status;
 }

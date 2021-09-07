@@ -24,6 +24,9 @@
 #include "conf.h"
 #include "process.h"
 #include "api.h"
+#include "api_flags.h"
+#include "obj.h"
+#include "util.h"
 
 #define KERNEL_MODE
 #include "common/stream.h"
@@ -102,7 +105,7 @@ static NTSTATUS Conf_Read_Settings(
     STREAM *stream, CONF_DATA *data, CONF_SECTION *section,
     WCHAR *line, int *linenum);
 
-static NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
+NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
 
 static NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id);
 
@@ -1312,11 +1315,19 @@ _FX NTSTATUS Conf_IsValidBox(const WCHAR *section_name)
 _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status;
+    ULONG flags;
 
     if (proc)
-        status = STATUS_INVALID_PARAMETER;
-    else
-        status = Conf_Read((ULONG)parms[1]);
+        return STATUS_NOT_IMPLEMENTED;
+    
+    flags = (ULONG)parms[2];
+
+    if (flags & SBIE_CONF_FLAG_RELOAD_CERT) {
+        status = MyValidateCertificate();
+        goto finish;
+    }
+
+    status = Conf_Read((ULONG)parms[1]);
 
     if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
         status == STATUS_OBJECT_PATH_NOT_FOUND) {
@@ -1354,8 +1365,43 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         status = STATUS_SUCCESS;
     }
 
+    //
+    // Check the reconfigure drier flag and if its set, load/unload the components accordingly
+    //
+
+    if (flags & SBIE_CONF_FLAG_RECONFIGURE) {
+
+        static volatile ULONG reconf_lock = 0;
+        if (InterlockedCompareExchange(&reconf_lock, 1, 0) != 0) {
+            status = STATUS_OPERATION_IN_PROGRESS;
+            goto finish; // don't do anything is a reconfiguration is already in progress
+        }
+
+        BOOLEAN wpf_enabled = Conf_Get_Boolean(NULL, L"NetworkEnableWFP", 0, FALSE);
+        extern BOOLEAN WFP_Enabled;
+        if (WFP_Enabled != wpf_enabled) {
+            if (wpf_enabled) {
+                extern BOOLEAN WFP_Load(void);
+                WFP_Load();
+            }
+            else {
+                extern void WFP_Unload(void);
+                WFP_Unload();
+            }
+        }
+
+        extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
+        if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE) && SandboxieLogonSid[0] == 0) {
+            extern BOOLEAN Token_Init_SbieLogin(void);
+            Token_Init_SbieLogin();
+        }
+
+        InterlockedExchange(&reconf_lock, 0);
+    }
+
     Api_SendServiceMessage(SVC_RESTART_HOST_INJECTED_SVCS, 0, NULL);
 
+finish:
     return status;
 }
 

@@ -132,17 +132,17 @@ SBIE1212 Não é possível criar diretório '%3' %2
 SBIE1213 Não é possível criar diretório de objetos '%3' %2
 .
 
-1214;pop;err;01
-SBIE1214 Não é possível injetar SbieDll %2
-.
+# 1214;pop;err;01
+# SBIE1214 Não é possível injetar SbieDll %2
+# .
 
-1215;pop;err;01
-SBIE1215 Não é possível resolver caminho para imagem de processo %2
-.
+# 1215;pop;err;01
+# SBIE1215 Não é possível resolver caminho para imagem de processo %2
+# .
 
-1216;pop;err;01
-SBIE1216 Não foi possível consultar ID de segurança %2
-.
+# 1216;pop;err;01
+# SBIE1216 Não foi possível consultar ID de segurança %2
+# .
 
 # 1217;pop;err;01
 # SBIE1217 Não foi possível encontrar o processo pai
@@ -156,12 +156,16 @@ SBIE1216 Não foi possível consultar ID de segurança %2
 SBIE1222 Não é possível restringir token: %2
 .
 
-1223;pop;err;01
-SBIE1223 Não é possível substituir token: %2
-.
+# 1223;pop;err;01
+# SBIE1223 Não é possível substituir token: %2
+# .
 
-1224;pop;err;01
-SBIE1224 Não é possível consultar token: %2
+# 1224;pop;err;01
+# SBIE1224 Não é possível consultar token: %2
+# .
+
+1231;pop;err;01
+SBIE1231 Inicialização falhou para o processo %3 %2
 .
 
 1241;pop;err;01
@@ -190,9 +194,9 @@ SBIE1301 O processo '%2' foi executado fora de uma caixa de areia
 SBIE1303 Apenas uma caixa de areia pode estar ativa de cada vez
 .
 
-1304;pop;inf;01
-SBIE1304 Foi bloqueada a entrada simulada de dados do teclado ou do mouse pelo processo '%2'
-.
+# 1304;pop;inf;01
+# SBIE1304 Foi bloqueada a entrada simulada de dados do teclado ou do mouse pelo processo '%2'
+# .
 
 1306;pop;inf;01
 SBIE1306 O driver do Sandboxie (SbieDrv) não pode ser descarregado agora
@@ -214,9 +218,9 @@ SBIE1309 Foi negada uma tentativa de alterar a senha da conta de usuário
 SBIE1310 As funções estendidas estão desabilitadas até a licença ser reativada
 .
 
-1311;pop;inf;01
-SBIE1311 Foi negada uma tentativa de alterar o papel de parede pelo processo '%2' 
-.
+# 1311;pop;inf;01
+# SBIE1311 Foi negada uma tentativa de alterar o papel de parede pelo processo '%2' 
+# .
 
 1312;pop;inf;01
 SBIE1312 Foi negada uma tentativa de iniciar um programa DOS de 16 bits na caixa
@@ -230,8 +234,24 @@ SBIE1313 Foi bloqueado o acesso direto ao disco pelo processo '%2'
 SBIE1314 Foi negada uma tentativa do processo '%2' de alterar configurações de rede/firewall
 .
 
-1315;pop;inf;01
-SBIE1315 Possivelmente devido a conflito com o software: %2
+# 1315;pop;inf;01
+# SBIE1315 Possivelmente devido a conflito com o software: %2
+# .
+
+1316;pop;inf;01
+SBIE1316 Solicitação bloqueada para gerar evento de dispositivo na caixa de areia
+.
+
+1319;pop;inf;01
+SBIE1319 Spooler de impressão bloqueado para o arquivo, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 Permitir que o spooler de impressão escreva fora da caixa de areia para este processo, clique duas vezes nesta linha de mensagens
+.
+
+1399;pop;inf;01
+%0
 .
 
 #----------------------------------------------------------------------------
@@ -346,6 +366,14 @@ SBIE2192 Para atualizar o programa, rode-o fora da supervisão do Sandboxie.
 SBIE2193 Lembre-se de apagar a caixa após completar a atualização.
 .
 
+2194;pop;inf;01
+SBIE2194 Instalador MSI requer %2 opção a ser definida no ini, o que, no entanto, enfraquece o isolamento.
+.
+
+2198;pop;inf;01
+%0
+.
+
 2199;pop;inf;01
 %0
 .
@@ -448,6 +476,10 @@ SBIE2222 Para adicionar o programa às Restrições de Inicialização/Execuçã
 SBIE2223 Para aumentar o tamanho máximo de arquivo nas operações de cópia, clique duas vezes nesta linha de mensagem
 .
 
+2224;pop;wrn;01
+SBIE2224 Programa na caixa de areia caiu: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -456,6 +488,10 @@ SBIE2223 Para aumentar o tamanho máximo de arquivo nas operações de cópia, c
 
 2301;pop;err;01
 SBIE2301 %2
+.
+
+2302;pop;err;01
+SBIE2302 Conflito de configuração de imagem de processo: %2
 .
 
 2303;pop;err;01
@@ -562,9 +598,29 @@ SBIE2332 Não é possível acessar o arquivo SbiePst.dat
 # SBIE2333 DLL de software incompatível encontrada: %2
 # .
 
-2334;pop;err;01
-SBIE2334 Não foi possível carregar o arquivo de DLL: %2
+# 2334;pop;err;01
+# SBIE2334 Não foi possível carregar o arquivo de DLL: %2
+# .
+
+2335;pop;err;01
+SBIE2335 Inicialização falhou para o processo %2
 .
+
+2336;pop;err;01
+SBIE2336 Erro no servidor GUI:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Falha ao iniciar o programa:  %2
+.
+
+# 2398;txt;01
+# SBIE2398 Serviço sofreu exceção ... no endereço ...
+# .
+
+# 2399;txt;01
+# SBIE2399 Serviço falha com erro ...
+# .
 
 #----------------------------------------------------------------------------
 # SbieSvc
@@ -586,60 +642,52 @@ SBIE9154 O driver (SbieDrv) e o serviço (SbieSvc) têm versões diferentes
 SBIE9156 A inicialização do driver não foi concluída
 .
 
-9201;evt;err;01
-SBIE9201 Erro de token
+9234;evt;err;01
+SBIE9234 Erro de inicialização do serviço %2
 .
 
-9202;evt;err;01
-SBIE9202 Erro de token
-.
-
-9203;evt;err;01
-SBIE9203 Erro de token
-.
-
-9204;evt;err;01
-SBIE9204 Erro de descritor de segurança
-.
-
-9205;evt;err;01
-SBIE9205 Erro de descritor de segurança
-.
-
-9206;evt;err;01
-SBIE9206 Erro de descritor de segurança
-.
-
-9207;evt;err;01
-SBIE9207 Erro de descritor de segurança
-.
-
-9208;evt;err;01
-SBIE9208 Não é possível habilitar SeRestorePrivilege
-.
-
-9251;evt;err;01
-SBIE9251 Criação de evento de porta falhou
-.
-
-9252;evt;err;01
-SBIE9252 Criação de porta falhou
-.
-
-9253;evt;err;01
-SBIE9253 Criação de thread de porta falhou
-.
-
-# 9302;evt;err;01
-# SBIE9302 Criação de seção falhou (classes de configuração de dispositivo)
+# 9201;evt;err;01
+# SBIE9201 Erro de token
 # .
 
-# 9304;evt;err;01
-# SBIE9304 Criação de seção falhou (lista de id de dispositivo)
+# 9202;evt;err;01
+# SBIE9202 Erro de token
 # .
 
-# 9305;evt;err;01
-# SBIE9305 Terminar programas na caixa, se houver algum rodando
+# 9203;evt;err;01
+# SBIE9203 Erro de token
+# .
+
+# 9204;evt;err;01
+# SBIE9204 Erro de descritor de segurança
+# .
+
+# 9205;evt;err;01
+# SBIE9205 Erro de descritor de segurança
+# .
+
+# 9206;evt;err;01
+# SBIE9206 Erro de descritor de segurança
+# .
+
+# 9207;evt;err;01
+# SBIE9207 Erro de descritor de segurança
+# .
+
+# 9208;evt;err;01
+# SBIE9208 Não é possível habilitar SeRestorePrivilege
+# .
+
+# 9251;evt;err;01
+# SBIE9251 Criação de evento de porta falhou
+# .
+
+# 9252;evt;err;01
+# SBIE9252 Criação de porta falhou
+# .
+
+# 9253;evt;err;01
+# SBIE9253 Criação de thread de porta falhou
 # .
 
 #----------------------------------------------------------------------------
@@ -663,7 +711,7 @@ SBIE9253 Criação de thread de porta falhou
 .
 
 3005;txt;01
-Cor&tar
+Recor&tar
 .
 
 3051;txt;01
@@ -671,7 +719,7 @@ A proteção contra apagamento está ativada nesta caixa de areia
 .
 
 3052;txt;01
-Rodar em uma caixa de areia
+Rodar na Caixa de areia
 .
 
 #----------------------------------------------------------------------------
@@ -844,7 +892,7 @@ Clique aqui para fechar esta janela e cancelar
 .
 
 3241;txt;01
-O Sandboxie está requerindo privilégios administrativos
+O Sandboxie está requerendo privilégios administrativos
 para um programa rodando em uma caixa.
 .
 
@@ -865,10 +913,10 @@ Rodar Fora da Caixa
 3252;txt;01
 Inicia o programa expressamente fora da supervisão do Sandboxie,
 mesmo se o programa estiver forçado a rodar sob o Sandboxie.
-Esta exceção também se extende a programas iniciados por ele.
+Esta exceção também se estende a programas iniciados por ele.
 
 Você também pode selecionar esta opção segurando as teclas
-Ctrl e Shift ao clicar no comando Rodar em uma Caixa.
+Ctrl e Shift ao clicar no comando Rodar na Caixa.
 .
 
 3253;txt;01
@@ -877,7 +925,7 @@ Tem certeza de que deseja rodar o programa fora da caixa?
 
 3254;txt;01
 Para pular este diálogo de seleção da caixa, você pode manter
-Ctrl pressionado ao clicar no comando "Rodar em uma caixa".
+Ctrl pressionado ao clicar no comando "Rodar na Caixa".
 .
 
 3255;txt;01
@@ -1147,6 +1195,22 @@ Verificar &Atualizações
 &Sobre o Sandboxie
 .
 
+3457;txt;01
+Forum do &Sandboxie (Web)
+.
+
+3458;txt;01
+Permitir acesso direto ao Cache de fontes do Windows
+.
+
+3459;txt;01
+Permitir acesso direto ao driver qWave (Google Hangouts)
+.
+
+3460;txt;01
+Personalizações de ligação de funções
+.
+
 3461;txt;01
 &Rodar nesta caixa
 .
@@ -1169,6 +1233,10 @@ Rodar do &Menu Iniciar
 
 3466;txt;01
 Rodar o &Windows Explorer
+.
+
+3467;txt;01
+Atualizar para Sandboxie-Plus
 .
 
 3471;txt;01
@@ -1209,6 +1277,10 @@ Remo&ver a Caixa
 
 3483;txt;01
 &Acesso a Recursos
+.
+
+3484;txt;01
+Acesso a Recursos
 .
 
 3485;txt;01
@@ -1374,7 +1446,7 @@ O programa ou documento iniciará sob a supervisão do Sandboxie.
 
 Entretanto, é recomendável manipular o conteúdo da caixa
 através de uma instância do Windows Explorer em uma caixa. Para isto, use
-este comando: Sandbox -> Rodar em uma caixa -> Rodar o Windows Explorer.
+este comando: Sandbox -> Rodar na Caixa -> Rodar o Windows Explorer.
 .
 
 3535;txt;01
@@ -1411,33 +1483,33 @@ Proteger Configurações para desabilitar a proteção por senha.
 Público
 .
 
-3542;txt;01
-O modo Proteção Experimental aumenta a proteção
-oferecida pela versão de 64 bits do Sandboxie,
-levando-a ao mesmo nível de proteção oferecido
-pela versão de 32 bits do Sandboxie.
+# 3542;txt;01
+# O modo Proteção Experimental aumenta a proteção
+# oferecida pela versão de 64 bits do Sandboxie,
+# levando-a ao mesmo nível de proteção oferecido
+# pela versão de 32 bits do Sandboxie.
 
-IMPORTANTE: A Proteção Experimental usa recursos
-não documentados do kernel do Windows. Atualizações
-futuras do Windows poderão interferir com o modo
-Proteção Experimental e causar instabilidade do sistema.
+# IMPORTANTE: A Proteção Experimental usa recursos
+# não documentados do kernel do Windows. Atualizações
+# futuras do Windows poderão interferir com o modo
+# Proteção Experimental e causar instabilidade do sistema.
 
-USE POR SUA CONTA E RISCO.
+# USE POR SUA CONTA E RISCO.
 
-Para ativar o modo Proteção Experimental, você
-deve reiniciar o computador agora.
-.
+# Para ativar o modo Proteção Experimental, você
+# deve reiniciar o computador agora.
+# .
 
-3543;txt;01
-Para desabilitar o modo Proteção Experimental, você
-deve reiniciar o computador agora.
+# 3543;txt;01
+# Para desabilitar o modo Proteção Experimental, você
+# deve reiniciar o computador agora.
 
-Lembre-se que a configuração Redução de Privilégios
-será habilitada em todas as caixas.
-.
+# Lembre-se que a configuração Redução de Privilégios
+# será habilitada em todas as caixas.
+# .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control Dialogs: About/Welcome
+# Sandboxie Control Dialogs: About
 #----------------------------------------------------------------------------
 
 3601;txt;01
@@ -1599,7 +1671,7 @@ Ao clicar em OK, o mecanismo de Programas Forçados será temporariamente desabi
 .
 
 3599;txt;01
-Você pode desabilitar o início forçado de um programa específico pressionando as teclas Ctrl e Shift ao clicar no comando "Rodar em uma caixa".
+Você pode desabilitar o início forçado de um programa específico pressionando as teclas Ctrl e Shift ao clicar no comando "Rodar na Caixa".
 .
 
 #----------------------------------------------------------------------------
@@ -1713,7 +1785,7 @@ Se um dos programas abaixo for executado fora de uma caixa de areia, o Sandboxie
 #----------------------------------------------------------------------------
 
 3685;txt;01
-Integração ao shell
+Integração ao Shell
 .
 
 3686;txt;01
@@ -1729,15 +1801,15 @@ Ao executar um programa em uma caixa
 .
 
 3689;txt;01
-Ícones de atalho
+Ícones de Atalho
 .
 
 3690;txt;01
-Adicionar um atalho na área de trabalho para iniciar o navegador web sob o Sandboxie
+Adicionar um atalho na área de trabalho para iniciar o Navegador web sob o Sandboxie
 .
 
 3691;txt;01
-Adicionar um atalho na barra de inicialização rápida para iniciar o navegador web sob o Sandboxie
+Adicionar um atalho na Barra de Inicialização rápida para iniciar o Navegador web sob o Sandboxie
 .
 
 3692;txt;01
@@ -1745,15 +1817,15 @@ Clique para adicionar mais ícones de atalho na área de trabalho:
 .
 
 3693;txt;01
-&Adicionar ícones de atalho
+&Adicionar Ícones de Atalho
 .
 
 3694;txt;01
-Ações "Rodar em uma caixa"
+Ações "Rodar na Caixa"
 .
 
 3695;txt;01
-Adicionar opção do menu de contexto "Rodar em uma caixa" para arquivos e pastas
+Adicionar opção do menu de contexto "Rodar na Caixa" para arquivos e pastas
 .
 
 3696;txt;01
@@ -1772,7 +1844,7 @@ Navegador web em uma caixa.lnk
 .
 
 3699;txt;01
-Rodar em uma &caixa
+Rodar na &Caixa
 .
 
 4491;txt;01
@@ -2739,6 +2811,14 @@ Acesso COM (OpenClsid)
 Os programas na caixa não podem se comunicar com objetos COM pertencentes a programas rodando fora da caixa, a não ser que o ID de classe COM coincide com um dos seguintes IDs de classe.
 .
 
+4104;txt;01
+Acesso a Recurso::Acesso à Rede
+.
+
+4105;txt;01
+Acesso à Rede (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -2885,6 +2965,26 @@ Lista padrão de portas TCP/IP bloqueadas
 
 4294;txt;01
 Permitir que os programas atualizem listas de atalhos na barra de tarefas do Windows 7
+.
+
+4295;txt;01
+Exclusões padrão Predefinições de migração de arquivos
+.
+
+4296;txt;01
+Vinculações de porta RPC padrão
+.
+
+4297;txt;01
+Porta RPC Bluetooth aberta
+.
+
+4298;txt;01
+Porta RPC de cartão inteligente aberta
+.
+
+4299;txt;01
+Abra a porta do protocolo de descoberta de serviço simples (SSDP, UPnP) RPC
 .
 
 #----------------------------------------------------------------------------
@@ -3118,6 +3218,10 @@ Permitir acesso direto às preferências do %2
 Permitir acesso direto ao gerenciamento de sessões do %2
 .
 
+4341;txt;01
+Permitir acesso direto a %2 notas
+.
+
 4356;txt;02
 Permitir Acesso Direto aos Favoritos do %2
 .
@@ -3136,6 +3240,30 @@ Leitor de email
 
 4392;txt;01
 As seguintes exclusões permitem que os leitores de email rodando nesta caixa acessem arquivos de caixa de email fora da caixa.
+.
+
+4393;txt;01
+Reprodutores de Mídia
+.
+
+4394;txt;01
+As exclusões a seguir permitem que os reprodutores de mídia em execução nesta caixa de areia acesse arquivos fora da caixa.
+.
+
+4395;txt;01
+Permitir %2 Acessar direto à pasta Imagens para facilitar a captura de tela.
+.
+
+4396;txt;01
+Clientes Torrent
+.
+
+4397;txt;01
+As exclusões a seguir permitem que os clientes torrent em execução nesta caixa de areia acesse arquivos fora da caixa.
+.
+
+4398;txt;01
+Permitir %2 Acessar direto à pasta de Música para facilitar o gerenciamento da biblioteca de música.
 .
 
 #----------------------------------------------------------------------------
@@ -3225,6 +3353,55 @@ Mover para &baixo
 5154;txt;01
 Mover &para
 .
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+A interface do Sandboxie classic (SbieCtrl.exe) é muito limitada
+monitoramento de recursos e recursos de rastreamento de eventos.
+
+Para melhor solução de problemas é altamente aconselhável 
+instalar a nova interface do usuário, Sandboxie-Plus (SandMan.exe),
+que fornece excelentes capacidades de rastreamento e monitoramento.
+
+Quer baixar o Sandboxie-Plus agora?
+.
+
+6002;txt;01
+Visite <a ID="whats_new">sandboxie-plus.com</a> para saber sobre a nova funcionalidade do Sandboxie-Plus,
+ou clique diretamente <a ID="upgrade">aqui</a> para baixar o mais recente instalador do Sandboxie-Plus.
+.
+
+6003;txt;01
+A interface do usuário legada do Sandboxie classic não implementa suporte para a funcionalidade de firewall de rede.
+
+Embora você possa configurar o recurso suportado pelos componentes principais usando o arquivo ini, as regras são estruturadas como a seguir:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Se preferir usar uma interface para controlar essas opções, atualize para o Sandboxie-Plus, que tem suporte completo de interface para todos os novos recursos.
+.
+
+6005;txt;01
+Nota: Sem privilégios administrativos, os instaladores não iniciarão na caixa de areia. O Sandboxie-Plus oferece uma opção para fazer muitos instaladores terem sucesso sem esses privilégios. Você pode habilitar essa opção também na compilação clássica manualmente, adicionando "FakeAdminRights=y" à seção ini para esta caixa.
+.
+
+6006;txt;01
+A interface do usuário legada do Sandboxie classic implementa apenas suporte para algumas opções de restrição.
+
+Opções adicionais como "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" e muito mais pode ser definida na seção ini para esta caixa.
+A interface moderna (SandMan.exe) também oferece mais opções de personalização para Iniciar/Rodar e restrições de acesso a Internet.
+
+Se preferir usar uma interface para controlar essas opções, atualize para o Sandboxie-Plus, que tem suporte completo de interface para todos os novos recursos.
+.
+
+6007;txt;01
+...
+
+Se preferir usar uma interface para controlar essas opções, atualize para o Sandboxie-Plus, que tem suporte completo de interface para todos os novos recursos.
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard
@@ -3556,7 +3733,7 @@ O driver é instalado com sucesso na maioria dos sistemas.
 .
 
 8016;ins;01
-Por favor aguarde enquando o Sandboxie está sendo desinstalado.
+Por favor aguarde enquanto o Sandboxie está sendo desinstalado.
 .
 
 8021;ins;01
@@ -3576,7 +3753,7 @@ Roda um programa do Menu Iniciar sob a supervisão do Sandboxie
 .
 
 8025;ins;01
-Rodar o navegador web em uma caixa de areia.lnk
+Rodar o Navegador web em uma caixa de areia.lnk
 .
 
 8026;ins;01

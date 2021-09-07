@@ -19,6 +19,8 @@ QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
 QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
 }
 
+QMAKE_CXXFLAGS_RELEASE -= -O2
+
 CONFIG(debug, debug|release):contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/x64/Debug
 CONFIG(release, debug|release):contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/x64/Release
 CONFIG(debug, debug|release):!contains(QMAKE_HOST.arch, x86_64):DESTDIR = ../Bin/Win32/Debug

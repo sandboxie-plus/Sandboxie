@@ -112,7 +112,7 @@ static P_NtTraceEvent  __sys_NtTraceEvent = NULL;
 
 static ULONG_PTR *SysInfo_JobCallbackData = NULL;
 
-BOOLEAN SysInfo_UseSbieJob = TRUE;
+BOOLEAN SysInfo_UseSbieJob = FALSE;
 BOOLEAN SysInfo_CanUseJobs = FALSE;
 
 //---------------------------------------------------------------------------

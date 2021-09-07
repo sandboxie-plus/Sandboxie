@@ -30,22 +30,6 @@
 
 
 //---------------------------------------------------------------------------
-// Defines
-//---------------------------------------------------------------------------
-
-
-#define PROCESS_DENIED_ACCESS_MASK                              \
-        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
-            PROCESS_VM_READ | PROCESS_QUERY_INFORMATION |       \
-            PROCESS_QUERY_LIMITED_INFORMATION )
-
-#define THREAD_DENIED_ACCESS_MASK                               \
-        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
-            THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION |     \
-            THREAD_QUERY_LIMITED_INFORMATION )
-
-
-//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -73,10 +57,6 @@ static NTSTATUS Thread_CheckProcessObject(
 static NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess);
-
-static NTSTATUS Thread_CheckObject_Common(
-    PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1);
 
 
 //---------------------------------------------------------------------------
@@ -230,6 +210,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
     THREAD *thrd;
     KIRQL irql;
 
+#ifdef XP_SUPPORT
     //
     // implement Gui_ThreadModifyCount watchdog hook for gui_xp module
     //
@@ -243,6 +224,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
     }
 
 #endif _WIN64
+#endif
 
     //
     //
@@ -410,6 +392,7 @@ _FX PROCESS *Thread_FindAndInitProcess(
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
 // Thread_AdjustGrantedAccess
 //---------------------------------------------------------------------------
@@ -473,6 +456,7 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
     return TRUE;
 }
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -628,7 +612,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                 ImpersonationInfo_offset = 0x678;
             else if (Driver_OsBuild < 18980)
                 ImpersonationInfo_offset = 0x688;
-            else if (Driver_OsBuild < 21286)
+            else if (Driver_OsBuild < 20348)
                 ImpersonationInfo_offset = 0x4a8;
             else
                 ImpersonationInfo_offset = 0x4f8;
@@ -660,7 +644,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                 ImpersonationInfo_offset = 0x398;
             else  if (Driver_OsBuild < 18980) 
                 ImpersonationInfo_offset = 0x3A0;
-            else if (Driver_OsBuild < 21286)
+            else if (Driver_OsBuild < 20348)
                 ImpersonationInfo_offset = 0x2c8;
             else
                 ImpersonationInfo_offset = 0x2f0;
@@ -739,7 +723,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                     if ((*ImpersonationInfo & ~7) == (ULONG_PTR)TokenObject)
                     {
                         WCHAR str[64];
-                        swprintf(str, L"BAM! found: %d", i);
+                        RtlStringCbPrintfW(str, 64, L"BAM! found: %d", i);
                         Session_MonitorPut(MONITOR_OTHER, str, PsGetCurrentProcessId());
                     }
                 }

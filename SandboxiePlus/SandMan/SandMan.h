@@ -38,7 +38,7 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
+	bool				AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false);
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
@@ -50,7 +50,7 @@ public:
 
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 
-	void				RunSandboxed(const QStringList& Commands);
+	void				RunSandboxed(const QStringList& Commands, const QString& BoxName);
 
 	QIcon				GetBoxIcon(bool inUse, int boxType = 0);
 
@@ -61,6 +61,8 @@ protected:
 	SB_STATUS			StopSbie(bool andRemove = false);
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
+
+	QIcon				GetTrayIconName(bool isConnected = true);
 
 	void				closeEvent(QCloseEvent* e);
 
@@ -109,7 +111,8 @@ public slots:
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
-	void				OpenRecovery(const QString& BoxName);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty = false);
+	void				ShowRecovery(const CSandBoxPtr& pBox);
 
 	void				UpdateSettings();
 	void				OnIniReloaded();
@@ -140,6 +143,7 @@ private slots:
 	void				OnMenuHover(QAction* action);
 
 	void				OnNewBox();
+	void				OnNewGroupe();
 	void				OnEmptyAll();
 	void				OnWndFinder();
 	void				OnDisableForce();
@@ -149,7 +153,7 @@ private slots:
 	void				OnViewMode(QAction* action);
 	void				OnAlwaysTop();
 	void				OnCleanUp();
-	void				OnSetKeep();
+	void				OnProcView();
 
 	void				OnSettings();
 	void				OnResetMsgs();
@@ -196,7 +200,8 @@ private:
 
 
 	QMenu*				m_pMenuFile;
-	QAction*			m_pNew;
+	QAction*			m_pNewBox;
+	QAction*			m_pNewGroup;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
@@ -227,6 +232,7 @@ private:
 	QAction*			m_pCleanUpTrace;
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
+	QAction*			m_pShowAllSessions;
 
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
@@ -253,6 +259,7 @@ private:
 	bool				m_bExit;
 
 	CProgressDialog*	m_pProgressDialog;
+	bool				m_pProgressModal;
 	CPopUpWindow*		m_pPopUpWindow;
 
 	void				SetUITheme();

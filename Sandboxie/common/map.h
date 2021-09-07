@@ -51,7 +51,7 @@ BOOLEAN map_resize(map_base_t* m, int nbuckets);
 void* map_insert(map_base_t *m, const void* key, void* vdata, size_t vsize);
 void* map_get(map_base_t *m, const void* key);
 void* map_remove(map_base_t *m, const void* key);
-void map_deinit(map_base_t *m);
+void map_clear(map_base_t *m);
 
 typedef struct {
   unsigned int bucketidx;

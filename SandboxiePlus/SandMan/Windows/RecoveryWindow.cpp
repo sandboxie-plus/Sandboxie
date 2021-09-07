@@ -101,6 +101,7 @@ int	CRecoveryWindow::exec()
 
 void CRecoveryWindow::closeEvent(QCloseEvent *e)
 {
+	emit Closed();
 	this->deleteLater();
 }
 

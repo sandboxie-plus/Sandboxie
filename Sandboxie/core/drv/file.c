@@ -73,6 +73,7 @@ typedef struct _BLOCKED_DLL {
 } BLOCKED_DLL;
 
 
+
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
@@ -167,9 +168,11 @@ static const WCHAR *File_Nsi   = L"nsi";
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "file_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -188,6 +191,7 @@ _FX BOOLEAN File_Init(void)
 
     P_File_Init_2 p_File_Init_2 = File_Init_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -196,6 +200,7 @@ _FX BOOLEAN File_Init(void)
     }
 
 #endif ! _WIN64
+#endif
 
     if (! p_File_Init_2())
         return FALSE;
@@ -244,6 +249,7 @@ _FX void File_Unload(void)
 
     P_File_Unload_2 p_File_Unload_2 = File_Unload_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -252,6 +258,7 @@ _FX void File_Unload(void)
     }
 
 #endif ! _WIn64
+#endif 
 
     p_File_Unload_2();
 
@@ -1416,26 +1423,26 @@ _FX NTSTATUS File_Generic_MyParseProc(
 
         if ((! proc->sbiedll_loaded) && status == STATUS_SUCCESS
                 && (CreateOptions & FILE_DIRECTORY_FILE) == 0) {
-
+        
             WCHAR *backslash = wcsrchr(path, L'\\');
             if (backslash && File_IsDelayLoadDll(proc, backslash + 1)) {
-
+        
                 ULONG len = sizeof(BLOCKED_DLL) + path_len * sizeof(WCHAR);
                 BLOCKED_DLL *blk = Mem_Alloc(proc->pool, len);
                 if (blk) {
-
+        
                     blk->path_len = path_len;
                     wmemcpy(blk->path, path, path_len + 1);
-
+        
                     KeRaiseIrql(APC_LEVEL, &irql);
                     ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
-
+        
                     List_Insert_After(&proc->blocked_dlls, NULL, blk);
-
+        
                     ExReleaseResourceLite(proc->file_lock);
                     KeLowerIrql(irql);
                 }
-
+        
                 status = STATUS_OBJECT_NAME_NOT_FOUND;
             }
         }

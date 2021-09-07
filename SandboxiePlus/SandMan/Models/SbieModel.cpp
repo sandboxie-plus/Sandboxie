@@ -113,7 +113,9 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		if (Group.isEmpty())
 			continue;
 		QVariant ID = CSbieModel__AddGroupMark(Group);
-
+		
+		QModelIndex Index;
+		
 		QHash<QVariant, STreeNode*>::iterator I = Old.find(ID);
 		SSandBoxNode* pNode = I != Old.end() ? static_cast<SSandBoxNode*>(I.value()) : NULL;
 		if (!pNode)
@@ -135,7 +137,20 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		else
 		{
 			I.value() = NULL;
+			Index = Find(m_Root, pNode);
 		}
+
+		int Changed = 0;
+
+		QString ParentGroup = pNode->Path.isEmpty() ? "" : CSbieModel__RemoveGroupMark(pNode->Path.last().toString());
+		int OrderNumber = Groups[ParentGroup].indexOf(Group);
+		if (pNode->OrderNumber != OrderNumber) {
+			pNode->OrderNumber = OrderNumber;
+			Changed = 1;
+		}
+
+		if (Changed && Index.isValid())
+			emit dataChanged(createIndex(Index.row(), 0, pNode), createIndex(Index.row(), columnCount()-1, pNode));
 	}
 
 	foreach (const CSandBoxPtr& pBox, BoxList)
@@ -170,6 +185,13 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		int Col = 0;
 		bool State = false;
 		int Changed = 0;
+
+		QString Group = pNode->Path.isEmpty() ? "" : CSbieModel__RemoveGroupMark(pNode->Path.last().toString());
+		int OrderNumber = Groups[Group].indexOf(pBox->GetName());
+		if (pNode->OrderNumber != OrderNumber) {
+			pNode->OrderNumber = OrderNumber;
+			Changed = 1;
+		}
 
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
@@ -353,6 +375,14 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 	}
 
 	return ActiveCount != 0;
+}
+
+QVariant CSbieModel::NodeData(STreeNode* pNode, int role, int section) const
+{
+	if (section == 0 && role == Qt::InitialSortOrderRole) {
+		return ((SSandBoxNode*)pNode)->OrderNumber;
+	}
+	return CTreeItemModel::NodeData(pNode, role, section);
 }
 
 CSandBoxPtr CSbieModel::GetSandBox(const QModelIndex &index) const

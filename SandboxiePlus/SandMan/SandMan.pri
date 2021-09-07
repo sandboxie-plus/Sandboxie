@@ -19,7 +19,8 @@ HEADERS += ./stdafx.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
-    ./Windows/SelectBoxWindow.h
+    ./Windows/SelectBoxWindow.h \
+    ./Windows/FileBrowserWindow.h
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
@@ -49,7 +50,8 @@ SOURCES += ./main.cpp \
     ./Windows/RecoveryWindow.cpp \
     ./Windows/SettingsWindow.cpp \
     ./Windows/SnapshotsWindow.cpp \
-    ./Windows/SelectBoxWindow.cpp
+    ./Windows/SelectBoxWindow.cpp \
+    ./Windows/FileBrowserWindow.cpp
 
 FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
@@ -57,7 +59,8 @@ FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui \
-    ./Forms/SelectBoxWindow.ui
+    ./Forms/SelectBoxWindow.ui \
+    ./Forms/FileBrowserWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \

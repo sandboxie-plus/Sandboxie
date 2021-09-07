@@ -83,7 +83,9 @@ public:
 	};
 
 	EBoxTypes				GetType() const;
-
+	
+	class COptionsWindow*	m_pOptionsWnd;
+	class CRecoveryWindow*	m_pRecoveryWnd;
 
 protected:
 	friend class CSbiePlusAPI;

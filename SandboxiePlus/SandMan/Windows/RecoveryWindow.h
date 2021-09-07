@@ -41,6 +41,9 @@ public:
 	virtual void accept() {}
 	virtual void reject() { this->close(); }
 
+signals:
+	void		Closed();
+
 public slots:
 	int			exec();
 

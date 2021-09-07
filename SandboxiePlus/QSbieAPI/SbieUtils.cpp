@@ -161,7 +161,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 	SHELLEXECUTEINFO shex;
 	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
 	shex.cbSize = sizeof(SHELLEXECUTEINFO);
-	shex.fMask = SEE_MASK_NOCLOSEPROCESS | SEE_MASK_FLAG_NO_UI;
+	shex.fMask = SEE_MASK_FLAG_NO_UI;
 	shex.hwnd = NULL;
 	shex.lpFile = path.c_str();
 	shex.lpParameters = params.c_str();
@@ -277,7 +277,7 @@ void CSbieUtils::RemoveContextMenu()
 //////////////////////////////////////////////////////////////////////////////
 // Shortcuts
 
-bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, const QString &LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath, int iconIndex, const QString &workdir, bool bRunElevated)
+bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath, int iconIndex, const QString &workdir, bool bRunElevated)
 {
 	QString StartExe = pApi->GetStartPath();
 
@@ -312,6 +312,9 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, const QString &LinkPath, const Q
 		hr = pUnknown->QueryInterface(IID_IPersistFile, (void **)&pPersistFile);
 		if (SUCCEEDED(hr)) 
 		{
+			if (LinkPath.right(4) != ".lnk")
+				LinkPath.append(".lnk");
+
 			pPersistFile->Save(LinkPath.toStdWString().c_str(), FALSE);
 
 			pPersistFile->Release();
@@ -376,4 +379,106 @@ bool CSbieUtils::GetStartMenuShortcut(CSbieAPI* pApi, QString &BoxName, QString 
 	if (BoxName.isEmpty() || LinkPath.isEmpty())
 		return false;
 	return true;
+}
+
+
+BOOLEAN SelectFavoriteInRegedit(HWND RegeditWindow, std::wstring FavoriteName)
+{
+    HMENU menu;
+    HMENU favoritesMenu;
+    ULONG count;
+    ULONG i;
+    ULONG id = ULONG_MAX;
+
+	if (IsIconic(RegeditWindow)) {
+        ShowWindow(RegeditWindow, SW_RESTORE);
+        SetForegroundWindow(RegeditWindow);
+    }
+    else {
+        SetForegroundWindow(RegeditWindow);
+    }
+	
+	if (!(menu = GetMenu(RegeditWindow)))
+        return FALSE;
+
+	/*UINT scan = MapVirtualKey(VK_F5, 0);
+	LPARAM lparam = 0x00000001 | (LPARAM)(scan << 16); 
+	SendMessage(RegeditWindow, WM_KEYDOWN, VK_F5, lparam);
+	SendMessage(RegeditWindow, WM_KEYUP, VK_F5, 0);*/
+	SendMessage(RegeditWindow, WM_MENUSELECT, MAKEWPARAM(2, MF_POPUP), (LPARAM)menu);
+    SendMessage(RegeditWindow, WM_COMMAND, MAKEWPARAM(0x288, 0), 0); // F5 menu entry
+    PostMessage(RegeditWindow, WM_MENUSELECT, MAKEWPARAM(0, 0xffff), 0);
+
+
+    SendMessage(RegeditWindow, WM_MENUSELECT, MAKEWPARAM(3, MF_POPUP), (LPARAM)menu);
+    if (!(favoritesMenu = GetSubMenu(menu, 3)))
+        return FALSE;
+
+    count = GetMenuItemCount(favoritesMenu);
+    if (count == -1) return FALSE;
+    if (count > 1000) count = 1000;
+
+    for (i = 3; i < count; i++) {
+
+        MENUITEMINFO info = { sizeof(MENUITEMINFO) };
+        WCHAR buffer[MAX_PATH];
+
+        info.fMask = MIIM_ID | MIIM_STRING;
+        info.dwTypeData = buffer;
+        info.cch = RTL_NUMBER_OF(buffer);
+        GetMenuItemInfo(favoritesMenu, i, TRUE, &info);
+
+        if (info.cch > 0 && _wcsicmp(FavoriteName.c_str(),buffer) == 0) {
+            id = info.wID;
+            break;
+        }
+    }
+
+    if (id == ULONG_MAX)
+        return FALSE;
+
+    SendMessage(RegeditWindow, WM_COMMAND, MAKEWPARAM(id, 0), 0);
+    PostMessage(RegeditWindow, WM_MENUSELECT, MAKEWPARAM(0, 0xffff), 0);
+
+    return TRUE;
+}
+
+bool ShellOpenRegKey(const QString& KeyName)
+{
+	std::wstring keyName = KeyName.toStdWString();
+
+    HWND regeditWindow = FindWindow(L"RegEdit_RegEdit", NULL);
+
+    if (!regeditWindow)
+    {
+		RegSetKeyValue(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit", L"LastKey", REG_SZ, keyName.c_str(), (keyName.size() + 1) * sizeof(WCHAR));
+
+		SHELLEXECUTEINFO sei = { sizeof(sei) };
+		sei.fMask = 0;
+		sei.lpVerb = NULL;
+		sei.lpFile = L"regedit.exe";
+		sei.lpParameters = NULL;
+		sei.hwnd = NULL;
+		sei.nShow = SW_NORMAL;
+	
+		ShellExecuteEx(&sei);
+
+        return TRUE;
+    }
+	
+	// for this to work we need elevated privileges !!!
+
+	QString FavoriteName = "A_Sandbox_" + QString::number((quint32)rand(), 16);
+	std::wstring favoriteName = FavoriteName.toStdWString();
+
+	RegSetKeyValue(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\\Favorites", favoriteName.c_str(), REG_SZ, keyName.c_str(), (keyName.size() + 1) * sizeof(WCHAR));
+
+    BOOLEAN result = SelectFavoriteInRegedit(regeditWindow, favoriteName);
+
+	HKEY key;
+	RegOpenKey(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\\Favorites", &key);
+	RegDeleteValue(key, favoriteName.c_str());
+	RegCloseKey(key);
+
+    return result;
 }

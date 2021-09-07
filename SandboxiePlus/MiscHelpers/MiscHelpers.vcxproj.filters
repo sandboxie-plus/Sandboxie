@@ -93,6 +93,9 @@
     <ClCompile Include="Common\NetworkAccessManager.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="Common\OtherFunctions.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiscHelpers.h">
@@ -126,6 +129,9 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Common\qRC4.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\OtherFunctions.h">
       <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>

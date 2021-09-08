@@ -49,6 +49,11 @@ english.CustomPagePortableMode=Extract all files to a directory for portable use
 english.RequiresWin7OrLater=Sandboxie-Plus requires Windows 7 or later.
 english.ClassicFound=Sandboxie Classic installation detected, it must be uninstalled first, do you want to uninstall it now?
 english.RunSandboxedMenu=Run &Sandboxed
+english.UninstallTaskLabel1=Select Uninstall Type
+english.UninstallTaskLabel2=How would you like to uninstall Sandboxie-Plus?
+english.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the most recommended option if you plan to reinstall Sandboxie-Plus while keeping your configuration files and sandboxes.
+english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged.
+english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙盘中运行”菜单
@@ -61,6 +66,11 @@ ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
+;ChineseSimplified.UninstallTaskLabel1=
+;ChineseSimplified.UninstallTaskLabel2=
+;ChineseSimplified.UninstallTaskLabel3=
+;ChineseSimplified.UninstallTaskLabel4=
+;ChineseSimplified.UninstallTaskLabel5=
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
@@ -73,6 +83,11 @@ ChineseTraditional.CustomPagePortableMode=解壓縮所有檔案到指定目錄�
 ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，要繼續安裝必須先將其移除，是否開始移除？
 ChineseTraditional.RunSandboxedMenu=在沙箱中執行(&S)
+;ChineseTraditional.UninstallTaskLabel1=
+;ChineseTraditional.UninstallTaskLabel2=
+;ChineseTraditional.UninstallTaskLabel3=
+;ChineseTraditional.UninstallTaskLabel4=
+;ChineseTraditional.UninstallTaskLabel5=
 
 ; Dutch
 dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
@@ -85,6 +100,11 @@ dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaa
 dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
 dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd, die eerst moet verwijderd worden. Wilt u deze nu verwijderen?
 dutch.RunSandboxedMenu=In &sandbox uitvoeren
+;dutch.UninstallTaskLabel1=
+;dutch.UninstallTaskLabel2=
+;dutch.UninstallTaskLabel3=
+;dutch.UninstallTaskLabel4=
+;dutch.UninstallTaskLabel5=
 
 ; German
 german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
@@ -97,6 +117,11 @@ german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragba
 german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
 german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
 german.RunSandboxedMenu=In &Sandbox ausführen
+;german.UninstallTaskLabel1=
+;german.UninstallTaskLabel2=
+;german.UninstallTaskLabel3=
+;german.UninstallTaskLabel4=
+;german.UninstallTaskLabel5=
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
@@ -109,6 +134,11 @@ Italian.CustomPagePortableMode=Estrai tutti i file in una directory per uso port
 Italian.RequiresWin7OrLater=Sandboxie-Plus richiede Windows 7 o superiore.
 Italian.ClassicFound=È stata rilevata una installazione di Sandboxie Classic che potrebbe causare incompatibilità. Rimuoverla ora?
 Italian.RunSandboxedMenu=Avvia nell'&area virtuale
+;Italian.UninstallTaskLabel1=
+;Italian.UninstallTaskLabel2=
+;Italian.UninstallTaskLabel3=
+;Italian.UninstallTaskLabel4=
+;Italian.UninstallTaskLabel5=
 
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
@@ -121,6 +151,11 @@ portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório p
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
 portuguese.ClassicFound=Instalação do Classic Sandboxie detectada, deve ser desinstalado primeiro, você quer desinstalá-lo agora?
 portuguese.RunSandboxedMenu=Rodar na &Caixa de Areia
+;portuguese.UninstallTaskLabel1=
+;portuguese.UninstallTaskLabel2=
+;portuguese.UninstallTaskLabel3=
+;portuguese.UninstallTaskLabel4=
+;portuguese.UninstallTaskLabel5=
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
@@ -133,3 +168,8 @@ russian.CustomPagePortableMode=Извлечь все файлы в катало�
 russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
 russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
 russian.RunSandboxedMenu=Запустить в песочнице (&S)
+;russian.UninstallTaskLabel1=
+;russian.UninstallTaskLabel2=
+;russian.UninstallTaskLabel3=
+;russian.UninstallTaskLabel4=
+;russian.UninstallTaskLabel5=

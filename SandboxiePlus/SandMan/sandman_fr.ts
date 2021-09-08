@@ -578,67 +578,67 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="236"/>
         <source>Recover to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer vers&#xa0;:</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="241"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="242"/>
         <source>Clear folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer la liste des dossiers</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="250"/>
         <source>Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="251"/>
         <source>Recover the file to original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer le fichier vers son emplacement d&apos;origine</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="254"/>
         <source>Recover &amp;&amp; Explore</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer et explorer</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="255"/>
         <source>Recover &amp;&amp; Open/Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupérer et ouvrir ou exécuter</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="257"/>
         <source>Open file recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir la récupération de fichiers pour ce bac</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="265"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Rejeter</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="266"/>
         <source>Don&apos;t recover this file right now</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas récupérer ce fichier maintenant</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="269"/>
         <source>Dismiss all from this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Rejeter tout de ce bac</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="270"/>
         <source>Disable quick recovery until the box restarts</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver la récupération rapide jusqu&apos;à ce que le bac redémarre</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="294"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le répertoire</translation>
     </message>
 </context>
 <context>
@@ -1581,163 +1581,163 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="435"/>
         <source>Sbie RpcSs</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie RpcSs</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="436"/>
         <source>Sbie DcomLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie DcomLaunch</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="437"/>
         <source>Sbie Crypto</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Crypto</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="438"/>
         <source>Sbie WuauServ</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie WuauServ</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="439"/>
         <source>Sbie BITS</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie BITS</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="440"/>
         <source>Sbie Svc</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Svc</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="441"/>
         <source>MSI Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>MSI Installer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="442"/>
         <source>Trusted Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trusted Installer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="443"/>
         <source>Windows Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Update</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="444"/>
         <source>Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorateur Windows</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="445"/>
         <source>Internet Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Internet Explorer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="446"/>
         <source>Firefox</source>
-        <translation type="unfinished"></translation>
+        <translation>Firefox</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="447"/>
         <source>Windows Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Media Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="448"/>
         <source>Winamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Winamp</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="449"/>
         <source>KMPlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>KMPlayer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="450"/>
         <source>Windows Live Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Live Mail</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="451"/>
         <source>Service Model Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil ServiceModel</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="452"/>
         <source>RunDll32</source>
-        <translation type="unfinished"></translation>
+        <translation>RunDll32</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="453"/>
         <location filename="SbiePlusAPI.cpp" line="454"/>
         <source>DllHost</source>
-        <translation type="unfinished"></translation>
+        <translation>DllHost</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="455"/>
         <source>Windows Ink Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Services Windows Ink</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="456"/>
         <source>Chromium Based</source>
-        <translation type="unfinished"></translation>
+        <translation>Basé sur chromium</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="457"/>
         <source>Google Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Google Updater</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="458"/>
         <source>Acrobat Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Acrobat Reader</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="459"/>
         <source>MS Outlook</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Outlook</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="460"/>
         <source>MS Excel</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Excel</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="461"/>
         <source>Flash Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Flash Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="462"/>
         <source>Firefox Plugin Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Conteneur de plugin Firefox</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="463"/>
         <source>Generic Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Butineur générique</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="464"/>
         <source>Generic Mail Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Client mél générique</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="473"/>
         <source>Terminated</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminé</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="477"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>En cours d&apos;exécution</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="486"/>
         <source> (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>

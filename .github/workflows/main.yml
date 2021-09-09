@@ -20,7 +20,7 @@ jobs:
     #      - platform: x64
     #        qt-target: win64_msvc2019_64
           
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

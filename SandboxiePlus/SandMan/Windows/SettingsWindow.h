@@ -56,7 +56,6 @@ private slots:
 	void OnAddCompat();
 	void OnDelCompat();
 
-	void OnSupport(const QString& url);
 	void CertChanged();
 
 protected:

@@ -395,7 +395,9 @@ void CPopUpWindow::OnOpenRecovery()
 {
 	CPopUpRecovery* pEntry = qobject_cast<CPopUpRecovery*>(sender());
 
-	emit RecoveryRequested(pEntry->m_BoxName);
+	CSandBoxPtr pBox = theAPI->GetBoxByName(pEntry->m_BoxName);
+	if (pBox)
+		theGUI->ShowRecovery(pBox);
 
 	// since we opened the recovery dialog, we can dismiss all the notifications for this box
 	OnDismiss(0x01);

@@ -48,7 +48,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	if (HighLightOption)
 	{
 		m_pHighLight = new QCheckBox(tr("Highlight"));
-		m_pHighLight->setChecked(true);
+		//m_pHighLight->setChecked(true);
 		m_pSearchLayout->addWidget(m_pHighLight);
 		connect(m_pHighLight, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
 	}

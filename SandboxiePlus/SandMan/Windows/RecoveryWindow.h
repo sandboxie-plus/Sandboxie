@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QFileIconProvider>
 #include "ui_RecoveryWindow.h"
 #include "SbiePlusAPI.h"
 class CSimpleTreeModel;
@@ -48,11 +49,12 @@ public slots:
 	int			exec();
 
 	int			FindFiles();
+	void		AddFile(const QString& FilePath, const QString& BoxPath);
 
 private slots:
 	void		OnAddFolder();
 	void		OnRecover()		{ RecoverFiles(false); }
-	void		OnRecoverTo()	{ RecoverFiles(true); }
+	void		OnRecoverTo();
 	void		OnDeleteAll();
 
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
@@ -60,21 +62,30 @@ private slots:
 protected:
 	void		closeEvent(QCloseEvent *e);
 
+	void		LoadTargetList();
+
 	int			FindFiles(const QString& Folder);
 	int			FindBoxFiles(const QString& Folder);
-	int			FindFiles(const QString& RecParent, const QString& BoxedFolder, const QString& RealFolder);
+	QPair<int, quint64> FindFiles(const QString& BoxedFolder, const QString& RealFolder, const QString& Name, const QString& ParentID = QString());
 
-	void		RecoverFiles(bool bBrowse);
+	void		RecoverFiles(bool bBrowse, QString RecoveryFolder = QString());
 
 	CSandBoxPtr m_pBox;
 
 	QMap<QVariant, QVariantMap> m_FileMap;
+	QSet<QString> m_NewFiles;
 
 	QStringList m_RecoveryFolders;
 
 	CRecoveryCounter* m_pCounter;
 
+	bool m_bReloadPending;
+
 private:
 	Ui::RecoveryWindow ui;
+	
 	CSimpleTreeModel* m_pFileModel;
+	QSortFilterProxyModel*	m_pSortProxy;
+
+	QFileIconProvider m_IconProvider;
 };

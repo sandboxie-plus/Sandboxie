@@ -112,7 +112,7 @@ public slots:
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty = false);
-	void				ShowRecovery(const CSandBoxPtr& pBox);
+	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings();
 	void				OnIniReloaded();
@@ -130,6 +130,7 @@ public slots:
 
 	void				CheckForUpdates(bool bManual = true);
 
+	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
 	void				OpenUrl(const QUrl& url);
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);

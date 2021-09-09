@@ -423,9 +423,6 @@ public:
 
 	static void			SetDarkMode(bool bDark) { extern bool CPopUpWindow__DarkMode;  CPopUpWindow__DarkMode = bDark; }
 
-signals:
-	void				RecoveryRequested(const QString& BoxName);
-
 public slots:
 	virtual void		Show();
 	virtual void		Poke();

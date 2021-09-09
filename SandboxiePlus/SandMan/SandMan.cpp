@@ -1073,11 +1073,21 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 
 void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId)
 {
-	if (theConf->GetBool("Options/InstantRecovery", false))
+	if (theConf->GetBool("Options/InstantRecovery", true))
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-		if (pBox)
-			ShowRecovery(pBox);
+		if (pBox) {
+			CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
+
+			if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+				SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+				QTimer::singleShot(100, this, [pWnd]() {
+					SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+					});
+			}
+
+			pWnd->AddFile(FilePath, BoxPath);
+		}
 	}
 	else
 		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, BoxName, ProcessId);
@@ -1100,11 +1110,11 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
 	return true;
 }
 
-void CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
+CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
-		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
+		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, this);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
@@ -1114,7 +1124,9 @@ void CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
 	}
-	pBoxEx->m_pRecoveryWnd->FindFiles();
+	if(bFind)
+		pBoxEx->m_pRecoveryWnd->FindFiles();
+	return pBoxEx->m_pRecoveryWnd;
 }
 
 SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action)

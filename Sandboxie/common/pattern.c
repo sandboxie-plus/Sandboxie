@@ -402,7 +402,7 @@ _FX int Pattern_Match2(
         if (str_index != string_len && (! pat->info.f.star_at_tail))
             match = 0;
         else
-            match = str_index;
+            match = str_index + 1;
     }
 
     return match;

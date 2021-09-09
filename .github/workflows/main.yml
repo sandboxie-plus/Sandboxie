@@ -23,6 +23,9 @@ jobs:
     runs-on: windows-2022
     steps:
       - name: Checkout code
+        run: TestCI.cmd
+
+    	- name: Test Node
         uses: actions/checkout@v2
 
       - name: Setup msbuild

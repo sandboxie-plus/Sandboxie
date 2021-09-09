@@ -1,1 +1,4 @@
+dir C:\
+dir C:\Program Files\
+dir C:\Program Files (x86)\
 dir C:\Program Files (x86)\Windows Kits\

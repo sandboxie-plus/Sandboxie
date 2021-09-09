@@ -23,13 +23,13 @@ jobs:
     runs-on: windows-2022
     steps:
       - name: Checkout code
-        run: TestCI.cmd
-
-    	- name: Test Node
-        uses: actions/checkout@v2
+        run: actions/checkout@v2
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.0.3
+
+      - name: Do Tests
+        run: TestCI.cmd
 
     #  - name: Build Sandboxie
     #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}

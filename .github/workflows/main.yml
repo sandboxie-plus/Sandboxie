@@ -23,7 +23,7 @@ jobs:
     runs-on: windows-2022
     steps:
       - name: Checkout code
-        run: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.0.3

@@ -20,13 +20,15 @@ jobs:
     #      - platform: x64
     #        qt-target: win64_msvc2019_64
           
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v1
+        uses: microsoft/setup-msbuild@v1.0.3
+        with:
+          vs-prerelease: true
 
     #  - name: Do Tests
     #    run: .\TestCI.cmd

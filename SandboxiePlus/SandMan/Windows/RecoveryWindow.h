@@ -53,16 +53,14 @@ public slots:
 
 private slots:
 	void		OnAddFolder();
-	void		OnRecover()		{ RecoverFiles(false); }
-	void		OnRecoverTo();
+	void		OnRecover();
+	void		OnTargetChanged();
 	void		OnDeleteAll();
 
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
 
 protected:
 	void		closeEvent(QCloseEvent *e);
-
-	void		LoadTargetList();
 
 	int			FindFiles(const QString& Folder);
 	int			FindBoxFiles(const QString& Folder);
@@ -79,6 +77,8 @@ protected:
 
 	CRecoveryCounter* m_pCounter;
 
+	int m_LastTargetIndex;
+	bool m_bTargetsChanged;
 	bool m_bReloadPending;
 
 private:

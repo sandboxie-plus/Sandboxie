@@ -45,6 +45,8 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 
 	m_pCounter = NULL;
 
+	m_LastTargetIndex = 0;
+	m_bTargetsChanged = false;
 	m_bReloadPending = false;
 
 #ifdef WIN32
@@ -75,7 +77,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	ui.treeFiles->setSortingEnabled(true);
 	//ui.treeFiles->setUniformRowHeights(true);
 
-	ui.gridLayout->addWidget(new CFinder(m_pSortProxy, this, true), 4, 1, 1, 3);
+	ui.gridLayout->addWidget(new CFinder(m_pSortProxy, this, true), 3, 0, 1, 5);
 	ui.finder->deleteLater(); // remove place holder
 
 	//connect(ui.treeFiles, SIGNAL(clicked(const QModelIndex&)), this, SLOT(UpdateSnapshot(const QModelIndex&)));
@@ -86,7 +88,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.chkShowAll, SIGNAL(clicked(bool)), this, SLOT(FindFiles()));
 	connect(ui.btnRefresh, SIGNAL(clicked(bool)), this, SLOT(FindFiles()));
 	connect(ui.btnRecover, SIGNAL(clicked(bool)), this, SLOT(OnRecover()));
-	connect(ui.btnRecoverTo, SIGNAL(clicked(bool)), this, SLOT(OnRecoverTo()));
+	connect(ui.cmbRecover, SIGNAL(currentIndexChanged(int)), this, SLOT(OnTargetChanged()));
 	connect(ui.btnDeleteAll, SIGNAL(clicked(bool)), this, SLOT(OnDeleteAll()));
 	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 
@@ -108,7 +110,18 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 			m_RecoveryFolders.append(Folder);
 	}
 
-	LoadTargetList();
+	ui.cmbRecover->addItem(tr("Original location"), 0);
+	ui.cmbRecover->addItem(tr("Browse for location"), 1);
+	ui.cmbRecover->addItem(tr("Clear folder list"), -1);
+
+	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
+	ui.cmbRecover->insertItems(ui.cmbRecover->count()-1, RecoverTargets);
+
+	m_LastTargetIndex = theConf->GetInt("RecoveryWindow/LastTarget", -1);
+	ui.chkRemember->setChecked(m_LastTargetIndex != -1);
+	if (m_LastTargetIndex == -1)
+		m_LastTargetIndex = 0;
+	ui.cmbRecover->setCurrentIndex(m_LastTargetIndex);
 }
 
 CRecoveryWindow::~CRecoveryWindow()
@@ -116,20 +129,6 @@ CRecoveryWindow::~CRecoveryWindow()
 	theConf->SetBlob("RecoveryWindow/Window_Geometry",saveGeometry());
 
 	theConf->SetBlob("RecoveryWindow/TreeView_Columns", ui.treeFiles->header()->saveState());
-}
-
-void CRecoveryWindow::LoadTargetList()
-{
-	QMenu* pMenu = new QMenu();
-	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
-	foreach(const QString& RecoverTarget, RecoverTargets) {
-		QAction* pAction = pMenu->addAction(RecoverTarget, this, SLOT(OnRecoverTo()));
-		pAction->setData(RecoverTarget);
-	}
-	pMenu->addSeparator();
-	pMenu->addAction(tr("Clear this list"), this, SLOT(OnRecoverTo()));
-	ui.btnRecoverTo->setPopupMode(QToolButton::MenuButtonPopup);
-	ui.btnRecoverTo->setMenu(pMenu);
 }
 
 int	CRecoveryWindow::exec()
@@ -163,19 +162,49 @@ void CRecoveryWindow::OnAddFolder()
 	ui.treeFiles->expandAll();
 }
 
-void CRecoveryWindow::OnRecoverTo()
-{ 
-	QString RecoveryFolder;
-	if (QAction* pAction = qobject_cast<QAction*>(sender())) {
-		RecoveryFolder = pAction->data().toString();
-		if (RecoveryFolder.isEmpty()) {
-			theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_RecoverTarget", QStringList(), true);
-			LoadTargetList();
+void CRecoveryWindow::OnTargetChanged()
+{
+	int op = ui.cmbRecover->currentData().toInt();
+	if (op == 1)
+	{
+		QString Folder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
+		if (Folder.isEmpty()) {
+			ui.cmbRecover->setCurrentIndex(m_LastTargetIndex);
 			return;
 		}
+		m_LastTargetIndex = ui.cmbRecover->count() - 1;
+		ui.cmbRecover->insertItem(m_LastTargetIndex, Folder);
+		ui.cmbRecover->setCurrentIndex(m_LastTargetIndex);
+		m_bTargetsChanged = true;
+	}
+	else if (op == -1)
+	{
+		while (ui.cmbRecover->count() > 3)
+			ui.cmbRecover->removeItem(2);
+		ui.cmbRecover->setCurrentIndex(0);
+		m_bTargetsChanged = true;
+	}
+	else {
+		m_LastTargetIndex = ui.cmbRecover->currentIndex();
+	}
+}
+
+void CRecoveryWindow::OnRecover()
+{ 
+	if (m_bTargetsChanged) {
+		QStringList RecoverTargets;
+		for (int i = 2; i < ui.cmbRecover->count() - 1; i++)
+			RecoverTargets.append(ui.cmbRecover->itemText(i));
+		theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_RecoverTarget", RecoverTargets, true);
 	}
 
-	RecoverFiles(true, RecoveryFolder); 
+	theConf->SetValue("RecoveryWindow/LastTarget", ui.chkRemember->isChecked() ? m_LastTargetIndex : -1);
+
+	QString RecoveryFolder;
+	if (ui.cmbRecover->currentIndex() > 0)
+		RecoveryFolder = ui.cmbRecover->currentText();
+
+	RecoverFiles(false, RecoveryFolder); 
 }
 
 void CRecoveryWindow::OnDeleteAll()

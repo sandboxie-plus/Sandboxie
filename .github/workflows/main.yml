@@ -29,7 +29,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1
 
       - name: Do Tests
-        run: TestCI.cmd
+        run: .\TestCI.cmd
 
     #  - name: Build Sandboxie
     #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}

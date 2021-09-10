@@ -1608,7 +1608,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation>Sandboxie Manager kann nicht in in einer Sandbox getartet werden!</translation>
+        <translation>Sandboxie Manager kann nicht in einer Sandbox getartet werden!</translation>
     </message>
 </context>
 <context>

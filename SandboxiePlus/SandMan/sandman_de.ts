@@ -6,32 +6,32 @@
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
         <source>%1 - Files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Dateien</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Verknüpfung erstellen</translation>
+        <translation>Verknüpfung erstellen</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen in einen Ordner</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen in gleichen Ordner</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="194"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Ordner auswählen</translation>
+        <translation>Ordner auswählen</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="244"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Verknüpfung zu Sandbox %1 erstellen</translation>
+        <translation>Verknüpfung zu Sandbox %1 erstellen</translation>
     </message>
 </context>
 <context>
@@ -759,7 +759,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="130"/>
         <source>Clear this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Liste leeren</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="150"/>
@@ -770,7 +770,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="208"/>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es sind %1 neue Dateien zur Wiederherstellung verfügbar.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="405"/>
@@ -894,7 +894,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="367"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxgruppe erstellen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="369"/>
@@ -1004,7 +1004,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="411"/>
         <source>Show All Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige alle Sitzungen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="416"/>
@@ -1049,12 +1049,12 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlerstatus: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1686"/>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannt</translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1718"/>
@@ -1064,7 +1064,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1719"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Fehlerstatus: 0x%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1967"/>
@@ -1608,7 +1608,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Manager kann nicht in in einer Sandbox getartet werden!</translation>
     </message>
 </context>
 <context>
@@ -1819,7 +1819,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translation> in Sitzung %1</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="492"/>
@@ -1886,12 +1886,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
         <source>Browse Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalt durchsuchen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
         <source>Box Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxinhalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="99"/>
@@ -1907,7 +1907,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="102"/>
         <source>Open Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Registry</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="103"/>
@@ -1947,12 +1947,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxgruppe erstellen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe umbenenen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
@@ -1967,22 +1967,22 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="83"/>
         <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandozeile</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
         <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxte Werkzeuge</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="85"/>
         <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandozeile (als Admin)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="87"/>
         <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandozeile (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="89"/>
@@ -2083,17 +2083,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="561"/>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte einen neuen Namen für die Gruppe eingeben.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="565"/>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Gruppenname wird bereits verwendet.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="608"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewege Einträge um (negative Werte bewegen aufwärts, positive Werte bewegen abwärts):</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="634"/>
@@ -2136,17 +2136,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="Views/SbieView.cpp" line="918"/>
         <location filename="Views/SbieView.cpp" line="994"/>
         <source>Terminate without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Beenden ohne Rückfrage</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie %1 %2?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>die ausgewählten Prozessse</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1054"/>
@@ -2168,22 +2168,22 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="92"/>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Autostarteinträge ausführen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="128"/>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewege Box/Gruppe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Move Up</source>
-        <translation type="unfinished">Nach oben verschieben</translation>
+        <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="134"/>
         <source>Move Down</source>
-        <translation type="unfinished">Nach unten verschieben</translation>
+        <translation>Nach unten verschieben</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="244"/>
@@ -2277,17 +2277,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="106"/>
         <source>Don&apos;t show any icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Icon anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="107"/>
         <source>Show Plus icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus Icon anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="108"/>
         <source>Show Classic icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Klassiches Icon anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="110"/>
@@ -2475,7 +2475,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Forms/FileBrowserWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished">SandboxiePlus Schnappschüsse</translation>
+        <translation>SandboxiePlus Schnappschüsse</translation>
     </message>
 </context>
 <context>
@@ -3573,7 +3573,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Recover to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen nach...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="125"/>
@@ -3684,7 +3684,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Icon im System-Tray:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="220"/>
@@ -3744,12 +3744,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="803"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützer des Sandboxie-Plus Projektes erhalten ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstüzerzertifikat&lt;/a&gt;. Es ist wie ein Lizenzschlüssel, aber für großartige Menschen die Freie Software verweden. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="820"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstüzerzertifikat ist abgelaufen, bitte holen Sie sich ein aktuelles Zertifikat.</translation>
     </message>
     <message>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
@@ -3777,7 +3777,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="737"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
-        <translation>Periodisch nach Update für Sandboxie-Plus suchen</translation>
+        <translation>Periodisch nach Updates für Sandboxie-Plus suchen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
@@ -3817,7 +3817,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige wiederherstellbare Dateien als Benachrichtigunen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="486"/>

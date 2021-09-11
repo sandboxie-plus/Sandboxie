@@ -117,11 +117,11 @@ german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragba
 german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
 german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
 german.RunSandboxedMenu=In &Sandbox ausführen
-;german.UninstallTaskLabel1=
-;german.UninstallTaskLabel2=
-;german.UninstallTaskLabel3=
-;german.UninstallTaskLabel4=
-;german.UninstallTaskLabel5=
+german.UninstallTaskLabel1=Wählen Sie die De-Installationsart aus
+german.UninstallTaskLabel2=Wie möchten Sie Sandboxie-Plus de-installieren?
+german.UninstallTaskLabel3=&Konfiguration und Sandboxen behalten%nDies it die empfohlene Option, wenn Sie vorhaben Sandboxie-Plus erneut zu intallieren, während Sandboxie-Plus alle Sandboxen und Konfigurationsdateien behält.
+german.UninstallTaskLabel4=&Entferne die Konfiguration%nWählen Sie diese Option um die Sandboxie.ini und Sandboxie-Plus.ini Dateien zu entfernen, während die Sandboxen unverändert bleiben.
+german.UninstallTaskLabel5=Entferne die Konfiguration und alle &Sandboxen%nWählen Sie diese Option um alle Konfigurationsdateien und alle Sandboxen, inklusive des Sandboxordners im, durch die Dateisystemquelle, benutzerdefinierten Pfad.
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale

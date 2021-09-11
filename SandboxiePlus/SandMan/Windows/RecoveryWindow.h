@@ -56,7 +56,7 @@ private slots:
 	void		OnRecover();
 	void		OnTargetChanged();
 	void		OnDeleteAll();
-
+	void		OnCloseUntill();
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
 
 protected:
@@ -83,6 +83,7 @@ protected:
 
 private:
 	Ui::RecoveryWindow ui;
+	QAction* m_pRemember;
 	
 	CSimpleTreeModel* m_pFileModel;
 	QSortFilterProxyModel*	m_pSortProxy;

@@ -92,6 +92,13 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.btnDeleteAll, SIGNAL(clicked(bool)), this, SLOT(OnDeleteAll()));
 	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 
+	QMenu* pRecMenu = new QMenu(ui.btnRecover);
+	m_pRemember = pRecMenu->addAction(tr("Remember target selection"), this, SLOT(OnCloseUntill()));
+	m_pRemember->setCheckable(true);
+	ui.btnRecover->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnRecover->setMenu(pRecMenu);
+
+
 	restoreGeometry(theConf->GetBlob("RecoveryWindow/Window_Geometry"));
 
 	QByteArray Columns = theConf->GetBlob("RecoveryWindow/TreeView_Columns");
@@ -118,7 +125,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	ui.cmbRecover->insertItems(ui.cmbRecover->count()-1, RecoverTargets);
 
 	m_LastTargetIndex = theConf->GetInt("RecoveryWindow/LastTarget", -1);
-	ui.chkRemember->setChecked(m_LastTargetIndex != -1);
+	m_pRemember->setChecked(m_LastTargetIndex != -1);
 	if (m_LastTargetIndex == -1)
 		m_LastTargetIndex = 0;
 	ui.cmbRecover->setCurrentIndex(m_LastTargetIndex);
@@ -198,7 +205,7 @@ void CRecoveryWindow::OnRecover()
 		theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_RecoverTarget", RecoverTargets, true);
 	}
 
-	theConf->SetValue("RecoveryWindow/LastTarget", ui.chkRemember->isChecked() ? m_LastTargetIndex : -1);
+	theConf->SetValue("RecoveryWindow/LastTarget", m_pRemember->isChecked() ? m_LastTargetIndex : -1);
 
 	QString RecoveryFolder;
 	if (ui.cmbRecover->currentIndex() > 0)
@@ -216,8 +223,14 @@ void CRecoveryWindow::OnDeleteAll()
 void CRecoveryWindow::AddFile(const QString& FilePath, const QString& BoxPath)
 {
 	ui.chkShowAll->setTristate(true);
-	if (m_FileMap.isEmpty())
+	if (m_FileMap.isEmpty()) {
 		ui.chkShowAll->setCheckState(Qt::PartiallyChecked);
+
+		QMenu* pCloseMenu = new QMenu(ui.btnClose);
+		pCloseMenu->addAction(tr("Close untill all programs stop in this box"), this, SLOT(OnCloseUntill()));
+		ui.btnClose->setPopupMode(QToolButton::MenuButtonPopup);
+		ui.btnClose->setMenu(pCloseMenu);
+	}
 
 	m_NewFiles.insert(FilePath);
 
@@ -324,6 +337,7 @@ QPair<int, quint64>	CRecoveryWindow::FindFiles(const QString& BoxedFolder, const
 			RecFile["DiskPath"] = RealPath;
 			RecFile["BoxPath"] = Path;
 			RecFile["Icon"] = m_IconProvider.icon(Info);
+			RecFile["IsDir"] = false;
 			m_FileMap.insert(RealPath, RecFile);
 		}
 		else
@@ -344,6 +358,7 @@ QPair<int, quint64>	CRecoveryWindow::FindFiles(const QString& BoxedFolder, const
 		RecFolder["DiskPath"] = RealFolder;
 		RecFolder["BoxPath"] = BoxedFolder;
 		RecFolder["Icon"] = m_IconProvider.icon(QFileIconProvider::Folder);
+		RecFolder["IsDir"] = true;
 		m_FileMap.insert(RealFolder, RecFolder);
 	}
 
@@ -364,7 +379,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 		if (File.isEmpty())
 			continue;
 
-		if (!File["ParentID"].isNull())
+		if (File["IsDir"].toBool() == false)
 		{
 			//if (File["DiskPath"].toString().indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
 			//	HasShare = true;
@@ -372,19 +387,30 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 		}
 		else
 		{
-			for (int i = 0; i < m_pFileModel->rowCount(Index); i++)
+			QList<QModelIndex> Folders;
+			Folders.append(ModelIndex);
+			do
 			{
-				QModelIndex ChildIndex = m_pFileModel->index(i, 0, Index);
+				QModelIndex CurIndex = Folders.takeFirst();
+				for (int i = 0; i < m_pFileModel->rowCount(CurIndex); i++)
+				{
+					QModelIndex ChildIndex = m_pFileModel->index(i, 0, CurIndex);
 
-				QVariant ChildID = m_pFileModel->GetItemID(ChildIndex);
-				QVariantMap File = m_FileMap.value(ChildID);
-				if (File.isEmpty())
-					continue;
+					QVariant ChildID = m_pFileModel->GetItemID(ChildIndex);
+					QVariantMap File = m_FileMap.value(ChildID);
+					if (File.isEmpty())
+						continue;
 
-				//if (File["DiskPath"].toString().indexOf("\\device\\mup") == 0)
-				//	HasShare = true;
-				FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
-			}
+					if (File["IsDir"].toBool() == false) 
+					{
+						//if (File["DiskPath"].toString().indexOf("\\device\\mup") == 0)
+						//	HasShare = true;
+						FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
+					}
+					else
+						Folders.append(ChildIndex);
+				}
+			} while (!Folders.isEmpty());
 		}
 	}
 
@@ -432,6 +458,12 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 void CRecoveryWindow::OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize)
 {
 	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
+}
+
+void CRecoveryWindow::OnCloseUntill()
+{
+	m_pBox.objectCast<CSandBoxPlus>()->SetSuspendRecovery();
+	close();
 }
 
 void CRecoveryCounter::run()

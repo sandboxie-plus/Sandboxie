@@ -1073,24 +1073,25 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 
 void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId)
 {
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	if (!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended())
+		return;
+
 	if (theConf->GetBool("Options/InstantRecovery", true))
 	{
-		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-		if (pBox) {
-			CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
+		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
 
-			if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
-				SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-				QTimer::singleShot(100, this, [pWnd]() {
-					SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-					});
-			}
-
-			pWnd->AddFile(FilePath, BoxPath);
+		if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+			SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+			QTimer::singleShot(100, this, [pWnd]() {
+				SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+				});
 		}
+
+		pWnd->AddFile(FilePath, BoxPath);
 	}
 	else
-		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, BoxName, ProcessId);
+		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);
 }
 
 bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)

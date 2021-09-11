@@ -6,32 +6,32 @@
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
         <source>%1 - Files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Bestanden</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Snelkoppeling aanmaken</translation>
+        <translation>Snelkoppeling aanmaken</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen naar andere map</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen naar zelfde map</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="194"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Map selecteren</translation>
+        <translation>Map selecteren</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="244"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Snelkoppeling maken naar sandbox %1</translation>
+        <translation>Snelkoppeling maken naar sandbox %1</translation>
     </message>
 </context>
 <context>
@@ -753,7 +753,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="130"/>
         <source>Clear this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze lijst leegmaken</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="150"/>
@@ -764,7 +764,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="208"/>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn %1 nieuwe bestanden beschikbaar om te herstellen.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="405"/>
@@ -892,7 +892,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="367"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Box-groep aanmaken</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="369"/>
@@ -1002,7 +1002,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="411"/>
         <source>Show All Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle sessies weergeven</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="416"/>
@@ -1302,21 +1302,17 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Foutstatus: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1686"/>
         <source>Unknown</source>
-        <translation type="unfinished">Onbekend</translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1719"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Status: %1</source>
-        <translation type="vanished">Foutstatus: %1</translation>
+        <translation>Onbekende foutstatus: 0x%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1688"/>
@@ -1394,14 +1390,6 @@ Nee zal %2 kiezen</translation>
         <translation>Fout bij het verwijderen van de sandbox-map: %1</translation>
     </message>
     <message>
-        <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation type="vanished">Een sandbox moet leeggemaakt worden voordat de naam kan gewijzigd worden.</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">Een sandbox moet leeggemaakt worden voordat hij kan verwijderd worden.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1705"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Verplaatsen van map &apos;%1&apos; naar &apos;%2&apos; mislukt</translation>
@@ -1470,10 +1458,6 @@ Nee zal %2 kiezen</translation>
         <location filename="SandMan.cpp" line="1718"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Het configuratiewachtwoord mag niet langer zijn dan 64 tekens</translation>
-    </message>
-    <message>
-        <source>Unknown Error Status: %1</source>
-        <translation type="vanished">Onbekende foutstatus: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1739"/>
@@ -1589,7 +1573,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Manager kan niet gesandboxt uitgevoerd worden!</translation>
     </message>
 </context>
 <context>
@@ -1791,7 +1775,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translation> in sessie %1</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="492"/>
@@ -1805,10 +1789,6 @@ Nee zal %2 kiezen</translation>
         <location filename="Views/SbieView.cpp" line="71"/>
         <source>Create New Box</source>
         <translation>Nieuwe box aanmaken</translation>
-    </message>
-    <message>
-        <source>Add Group</source>
-        <translation type="vanished">Groep toevoegen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="74"/>
@@ -1854,18 +1834,6 @@ Nee zal %2 kiezen</translation>
         <location filename="Views/SbieView.cpp" line="91"/>
         <source>Programs and Features</source>
         <translation>Programma&apos;s en functies</translation>
-    </message>
-    <message>
-        <source>Terminal</source>
-        <translation type="vanished">Terminal</translation>
-    </message>
-    <message>
-        <source>Terminal (as Admin)</source>
-        <translation type="vanished">Terminal (als administrator)</translation>
-    </message>
-    <message>
-        <source>Terminal (32-bit)</source>
-        <translation type="vanished">Terminal (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="95"/>
@@ -1937,10 +1905,6 @@ Nee zal %2 kiezen</translation>
         <location filename="Views/SbieView.cpp" line="126"/>
         <source>Rename Sandbox</source>
         <translation>Naam van sandbox wijzigen</translation>
-    </message>
-    <message>
-        <source>Move to Group</source>
-        <translation type="vanished">Naar groep verplaatsen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="139"/>
@@ -2033,82 +1997,82 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Box-groep aanmaken</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam van groep wijzigen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="83"/>
         <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdrachtprompt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
         <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Geboxt gereedschap</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="85"/>
         <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdrachtprompt (als admin)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="87"/>
         <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdrachtprompt (32 bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="92"/>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorun-items uitvoeren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
         <source>Browse Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud doorbladeren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
         <source>Box Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Box-inhoud</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="102"/>
         <source>Open Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Register openen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="128"/>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Box/groep verplaatsen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Move Up</source>
-        <translation type="unfinished">Omhoog verplaatsen</translation>
+        <translation>Omhoog verplaatsen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="134"/>
         <source>Move Down</source>
-        <translation type="unfinished">Omlaag verplaatsen</translation>
+        <translation>Omlaag verplaatsen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="561"/>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer een nieuwe naam in voor de groep.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="565"/>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze groepsnaam is al in gebruik.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="608"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translation>Items verplaatsen met (negatieve waarden verplaatsen omhoog, positieve waarden verplaatsen omlaag):</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="634"/>
@@ -2161,7 +2125,7 @@ Nee zal %2 kiezen</translation>
         <location filename="Views/SbieView.cpp" line="918"/>
         <location filename="Views/SbieView.cpp" line="994"/>
         <source>Terminate without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Beëindigen zonder te vragen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="958"/>
@@ -2172,16 +2136,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u %2 %1?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="vanished">Wilt u de geselecteerde processen %1?</translation>
+        <translation>de geselecteerde processen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1054"/>
@@ -2227,17 +2187,17 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="106"/>
         <source>Don&apos;t show any icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen pictogram weergeven</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="107"/>
         <source>Show Plus icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus-pictogram weergeven</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="108"/>
         <source>Show Classic icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Klassiek pictogram weergeven</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="110"/>
@@ -2424,7 +2384,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Forms/FileBrowserWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished">SandboxiePlus - Snapshots</translation>
+        <translation>SandboxiePlus - Snapshots</translation>
     </message>
 </context>
 <context>
@@ -3470,10 +3430,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <translation>Sluiten</translation>
     </message>
     <message>
-        <source>Recover to</source>
-        <translation type="vanished">Herstellen naar</translation>
-    </message>
-    <message>
         <location filename="Forms/RecoveryWindow.ui" line="125"/>
         <source>Add Folder</source>
         <translation>Map toevoegen</translation>
@@ -3486,7 +3442,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Recover to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen naar...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="132"/>
@@ -3598,10 +3554,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="151"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
         <translation>Donker thema gebruiken (volledig toegepast na een herstart)</translation>
-    </message>
-    <message>
-        <source>Show Sys-Tray</source>
-        <translation type="vanished">Systeemvak weergeven</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="86"/>
@@ -3721,12 +3673,12 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstelbare bestanden als meldingen weergeven</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pictogram in systeemvak weergeven:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="486"/>
@@ -3827,16 +3779,12 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="803"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ondersteuners van het Sandboxie-Plus project ontvangen een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;ondersteunerscertificaat&lt;/a&gt;. Het is als een licentiesleutel, maar dan voor geweldige mensen die open source software gebruiken :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="820"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="vanished">Ondersteuners van het Sandboxie-Plus project ontvangen een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;ondersteunerscertificaat&lt;/a&gt;. Het is als een licentiesleutel, maar dan voor geweldige mensen die vrije software gebruiken :-)</translation>
+        <translation>Dit ondersteunerscertificaat is vervallen. Haal een bijgewerkt certificaat op.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="730"/>

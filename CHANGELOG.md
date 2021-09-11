@@ -9,9 +9,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added ability to rename groups [#1152](https://github.com/sandboxie-plus/Sandboxie/issues/1152)
 - added ability to define a custom order for the sandboxes, you can move using the move context menu, or holding alt + arrow key
+- added recovery to list to the recovery window: [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- added finder to the recovery window
 
 ### Changed
 - updated the BlockPort rule inside Template_BlockPorts to the new NetworkAccess format (by isaak654) [#1162](https://github.com/sandboxie-plus/Sandboxie/pull/1162)
+- default for immediate recovery behavioure is now th show the recovery window instzead of using the notifications window [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- the new run dialog now takes double click [#1171](https://github.com/sandboxie-plus/Sandboxie/issues/1171)
+- reworked the recovery window
 
 ### Fixed
 - fixed issue with create group menu [#1151](https://github.com/sandboxie-plus/Sandboxie/issues/1151)

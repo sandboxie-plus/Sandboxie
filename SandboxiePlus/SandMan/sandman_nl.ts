@@ -2968,7 +2968,8 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1597"/>
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
-'Direct' File and Key access only applies to program binaries located outside the sandbox.
+&apos;Direct&apos;
+            File and Key access only applies to program binaries located outside the sandbox.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
         <translation>Configureren welke processen toegang hebben tot welke bronnen. Dubbelklik op een item om het te bewerken.
 &apos;Directe&apos; bestand- en sleuteltoegang geldt alleen voor programma binaries die zich buiten de sandbox bevinden.

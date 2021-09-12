@@ -66,6 +66,12 @@
     <ClCompile Include="..\..\common\pattern.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\stream.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\ini.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />
@@ -124,6 +130,12 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\pool.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stream.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\ini.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

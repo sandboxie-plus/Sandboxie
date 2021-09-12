@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance
 -- Now comments in the Sandboxie.ini are being preserved as well as the order of all entries
 - enabled configuration section list replacement with a hash map to improve configuration performance
+- improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
 
 ### Fixed
 

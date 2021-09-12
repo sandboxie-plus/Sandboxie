@@ -800,7 +800,7 @@ ULONG SbieIniServer::CacheConfig()
         ULONG LastError = GetLastError();
         attrs = 0;
         if (LastError != ERROR_FILE_NOT_FOUND) {
-            SbieApi_LogEx(m_session_id, 2322, L"[11 / %d]", LastError);
+            SbieApi_LogEx(m_session_id, 2322, L"[21 / %d]", LastError);
             goto finish;
         }
     }
@@ -812,7 +812,7 @@ ULONG SbieIniServer::CacheConfig()
                                         FILE_ATTRIBUTE_OFFLINE);
 
     if (attrs & CONFLICTING_ATTRS) {
-        SbieApi_LogEx(m_session_id, 2322, L"[12 / %d]", GetLastError());
+        SbieApi_LogEx(m_session_id, 2322, L"[22 / %d]", GetLastError());
         attrs = 0;
         goto finish;
     }
@@ -829,7 +829,17 @@ ULONG SbieIniServer::CacheConfig()
         NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
     if (hFile == INVALID_HANDLE_VALUE) {
-        SbieApi_LogEx(m_session_id, 2322, L"[15 / %d]", GetLastError());
+        DWORD err = GetLastError();
+        if (err == ERROR_FILE_NOT_FOUND) {
+
+            m_pConfigIni = new SConfigIni;
+            m_pConfigIni->Encoding = 0;
+            m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });
+
+            status = STATUS_SUCCESS; // the file does not exist that's ok
+        }
+        else
+            SbieApi_LogEx(m_session_id, 2322, L"[23 / %d]", err);
         goto finish;
     }
 
@@ -840,8 +850,13 @@ ULONG SbieIniServer::CacheConfig()
     LARGE_INTEGER fileSize;
     if (!GetFileSizeEx(hFile, &fileSize) || fileSize.QuadPart >= CONF_LINE_LEN * CONF_MAX_LINES) {
         status = STATUS_INSUFFICIENT_RESOURCES;
-        SbieApi_LogEx(m_session_id, 2322, L"[15 / %d]", status);
+        SbieApi_LogEx(m_session_id, 2322, L"[24 / %d]", status);
         goto finish;
+    }
+
+    if (fileSize.QuadPart == 0) {
+        status = STATUS_SUCCESS;
+        goto finish; // nothing to do
     }
 
     iniData = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, (SIZE_T)(fileSize.QuadPart + 128));
@@ -853,7 +868,7 @@ ULONG SbieIniServer::CacheConfig()
     DWORD bytesRead;
     if (!ReadFile(hFile, iniData, (DWORD)fileSize.QuadPart, &bytesRead, NULL) || bytesRead != (DWORD)fileSize.QuadPart) {
         status = STATUS_NOT_READ_FROM_COPY;
-        SbieApi_LogEx(m_session_id, 2322, L"[15 / %d]", status);
+        SbieApi_LogEx(m_session_id, 2322, L"[25 / %d]", status);
         goto finish;
     }
 

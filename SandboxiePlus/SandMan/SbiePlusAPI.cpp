@@ -429,7 +429,8 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		FLASH_PLAYER_SANDBOX,
 		PLUGIN_CONTAINER,
 		OTHER_WEB_BROWSER,
-		OTHER_MAIL_CLIENT
+		OTHER_MAIL_CLIENT,
+		DLL_IMAGE_MOZILLA_THUNDERBIRD
 	};
 
 	switch (type)
@@ -465,6 +466,7 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case PLUGIN_CONTAINER: return tr("Firefox Plugin Container");
 		case OTHER_WEB_BROWSER: return tr("Generic Web Browser");
 		case OTHER_MAIL_CLIENT: return tr("Generic Mail Client");
+		case DLL_IMAGE_MOZILLA_THUNDERBIRD: return tr("Thunderbird");
 		default: return tr("");
 	}
 }

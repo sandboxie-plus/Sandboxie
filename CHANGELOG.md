@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.6 / 5.51.6] - 2021-09-??
+## [0.9.6 / 5.51.6] - 2021-09-12
 
 ### Added
 - added ability to rename groups [#1152](https://github.com/sandboxie-plus/Sandboxie/issues/1152)
@@ -26,7 +26,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with windows 11 22449.1000 [#1164](https://github.com/sandboxie-plus/Sandboxie/issues/1164)
 - fixed SRWare Iron template (by Dyras) [#1146](https://github.com/sandboxie-plus/Sandboxie/pull/1146)
 - fixed labels position in Classic UI (by isaak654) [#1088](https://github.com/sandboxie-plus/Sandboxie/issues/1088)
-
 
 
 

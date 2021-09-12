@@ -21,7 +21,7 @@ SBIE1104 Det finns inte tillräckligt med systemresurser för att fullfölja inl
 .
 
 1105;evt;err;01
-SBIE1105 Okänt operativsystem version:  %2
+SBIE1105 Okänd operativsystemsversion:  %2
 .
 
 1106;evt;err;01
@@ -29,7 +29,7 @@ SBIE1106 fel %2, detaljer %3
 .
 
 # 1107;evt;err;01
-# SBIE1107 Kan inte få åtkomst till LokalSystem kontot %2
+# SBIE1107 Kan inte få åtkomst till LokalSystem-kontot %2
 # .
 
 1108;evt;err;01
@@ -37,7 +37,7 @@ SBIE1108 Procedur %2 kunde inte analyseras
 .
 
 1109;evt;err;01
-SBIE1109 Ogiltig licens information:  %2
+SBIE1109 Ogiltig licens-information:  %2
 .
 
 1110;evt;err;01
@@ -95,7 +95,7 @@ SBIE1152 Trampolin tilldelning misslyckades %2
 .
 
 1153;evt;pop;err;01
-SBIE1153 Sandboxie inläsning misslyckades.  Stäng alla program och installera sen om Sandboxie eller starta om din dator.
+SBIE1153 Sandboxie-inläsning misslyckades.  Stäng alla program och installera sen om Sandboxie eller starta om din dator.
 .
 
 #----------------------------------------------------------------------------
@@ -117,7 +117,7 @@ SBIE1203 Kan inte bygga väg-lista (fel i %2)
 .
 
 1204;pop;err;01
-SBIE1204 Sandbox skapelse misslyckades för %3 %2
+SBIE1204 Skapning av sandlåda misslyckades för %3 %2
 .
 
 1211;pop;err;01
@@ -129,7 +129,7 @@ SBIE1212 Kan inte skapa bibliotek '%3' %2
 .
 
 1213;pop;err;01
-SBIE1213 Kan inte skapa objekt bibliotek '%3' %2
+SBIE1213 Kan inte skapa objekt-bibliotek '%3' %2
 .
 
 1214;pop;err;01
@@ -141,7 +141,7 @@ SBIE1215 Kan inte lösa väg till processavbilden %2
 .
 
 1216;pop;err;01
-SBIE1216 Kunde inte hämta säkerhets ID %2
+SBIE1216 Kunde inte hämta säkerhets-ID %2
 .
 
 # 1217;pop;err;01
@@ -183,7 +183,7 @@ SBIE1301 Programmet '%2' blev öppnat utanför sandlådan
 .
 
 1302;pop;inf;01
-SBIE1302 Sandbox '%2' är inte definierad eller aktiverad
+SBIE1302 Sandlåda '%2' är inte definierad eller aktiverad
 .
 
 1303;pop;inf;01
@@ -191,11 +191,11 @@ SBIE1303 Bara en sandbox kan vara aktiv på en gång
 .
 
 1304;pop;inf;01
-SBIE1304 Blockerade simulerat tangentbord eller musinput från processen '%2'
+SBIE1304 Blockerade simulerat tangentbord eller datormusinput från processen '%2'
 .
 
 1306;pop;inf;01
-SBIE1306 Sandboxie drivrutin (SbieDrv) kan inte stoppas nu
+SBIE1306 Sandboxie-drivrutin (SbieDrv) kan inte stoppas nu
 .
 
 1307;pop;inf;02
@@ -287,7 +287,7 @@ SBIE2101 %2
 .
 
 2102;pop;inf;01
-SBIE2102 Filen är för stor för att kopieras in i sandboxen - %2
+SBIE2102 Filen är för stor för att kopieras in i sandlådan - %2
 .
 
 2103;pop;inf;01
@@ -299,11 +299,11 @@ SBIE2104 Nekade försök att stänga av datorn - %2
 .
 
 # 2105;pop;inf;01
-# SBIE2105 Sandboxad tjänst startade utan fel:  %2
+# SBIE2105 Sandlådad tjänst startade utan fel:  %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Var god slå på "Kör som UAC administratör" i Sandboxie Kontrol, Fil meny
+# SBIE2106 Var god slå på "Kör som UAC-administratör" i Sandboxie-kontroll, filmeny
 # .
 
 # 2107;pop;inf;01
@@ -319,7 +319,7 @@ SBIE2108 Förfalskar framgångsrik montering av programmet '%2'
 # .
 
 # 2110;pop;inf;01
-# SBIE2110 Förbereder WinSxS krav för '%2'
+# SBIE2110 Förbereder WinSxS-krav för '%2'
 # .
 
 # %2 = Mozilla Firefox
@@ -354,11 +354,11 @@ SBIE2201 %2
 # .
 
 2203;pop;wrn;01
-SBIE2203 Kunde inte kommunicera med Sandboxie Service:  %2
+SBIE2203 Kunde inte kommunicera med Sandboxie-tjänsten:  %2
 .
 
 2204;pop;wrn;01
-SBIE2204 Kan inte starta sandboxed service %2
+SBIE2204 Kan inte starta tjänsten för sandlådning %2
 .
 
 2205;pop;wrn;01
@@ -366,7 +366,7 @@ SBIE2205 Tjänsten genomfördes ej:  %2
 .
 
 2206;pop;wrn;01
-SBIE2206 Bearbetelsen av AutoExec inställningar misslyckades %2
+SBIE2206 Bearbetelsen av AutoExec-inställningar misslyckades %2
 .
 
 2207;pop;wrn;01
@@ -390,11 +390,11 @@ SBIE2211 Sandlådad tjänst kunde inte starta:  %2
 .
 
 2212;pop;wrn;01
-SBIE2212 Email läsare '%2' är inte inställd på att köras sandlådad
+SBIE2212 Email-läsare '%2' är inte inställd på att köras sandlådad
 .
 
 2213;pop;wrn;01
-SBIE2213 Windows Credentials kan inte lagras i sandboxen
+SBIE2213 Windows Credentials kan inte lagras i sandlådan
 .
 
 2214;pop;wrn;01
@@ -1994,7 +1994,7 @@ Utseende
 .
 
 3812;txt;01
-Sandlådade program under översyn av Sandboxie kommer visa Sandboxie [#] märket i rutans titel.
+Sandlådade program under översyn av Sandboxie kommer visa Sandboxie [#]-märket i rutans titel.
 .
 
 3813;txt;01
@@ -2006,7 +2006,7 @@ Visa sandlådenamnet i rutans titel
 .
 
 3815;txt;01
-Visa inte sandlåde märket i rutans titel
+Visa inte Sandboxie-märket i rutans titel
 .
 
 3816;txt;01
@@ -2030,7 +2030,7 @@ Visa bara färg runt kanten på rutor när muspekaren är över sidnamnet
 #----------------------------------------------------------------------------
 
 # 3821;txt;01
-# Återskapning::Snabb Återskapning
+# Återskapning::Snabb återskapning
 # .
 
 3821;txt;02
@@ -2042,25 +2042,25 @@ Snabb återskapning
 .
 
 3823;txt;01
-Före sandlådan raderas, eller när du manuellt aktiverar Snabb Återställningsfunktionen kommer följande mappar sökas efter filer. 
+Före sandlådan raderas, eller när du manuellt aktiverar Snabb återställning kommer följande mappar sökas efter filer. 
 Om några filer hittas kommer 
 du få chansen att flytta ut dem ur sandlådan.
 .
 
 # 3831;txt;01
-# Recovery::Omedelbar Återskapning
+# Recovery::Omedelbar återskapning
 # .
 
 3832;txt;01
-Omedelbar Återskapning hjälper Snabb Återskapning genom att automatiskt fråga om du vill flytta ut filer när de skapas.
+Omedelbar återskapning hjälper Snabb återskapning genom att automatiskt fråga om du vill flytta ut filer när de skapas.
 .
 
 3833;txt;01
-Aktivera Omedelbar Återskapning
+Aktivera Omedelbar återskapning
 .
 
 3834;txt;01
-Följande filer och filtyper kommer inte vara med i Omedelbar Återskapning.
+Följande filer och filtyper kommer inte vara med i Omedelbar återskapning.
 .
 
 3835;txt;01
@@ -2068,11 +2068,11 @@ Lägg till &Typ
 .
 
 3836;txt;01
-Välj en mapp för att exkludera den från Omedelbar Återskapning
+Välj en mapp för att exkludera den från Omedelbar återskapning
 .
 
 3837;txt;01
-Skriv in en filtyp att exkludera från Omedelbar Återskapning
+Skriv in en filtyp att exkludera från Omedelbar återskapning
 .
 
 #----------------------------------------------------------------------------

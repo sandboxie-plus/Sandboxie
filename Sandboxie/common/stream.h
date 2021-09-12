@@ -92,6 +92,10 @@ NTSTATUS Stream_Read_Wchar(
     IN  STREAM* stream,
     OUT USHORT* v);
 
+ULONG Read_BOM(
+    UCHAR** data, 
+    ULONG* len);
+
 //---------------------------------------------------------------------------
 
 #endif // _MY_STREAM_H

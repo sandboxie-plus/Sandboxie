@@ -4,6 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [0.9.7 / 5.52.7] - 2021-09-??
+
+### Added
+
+### Changed
+- reworked sbiesvc ini server to allow for settings caching and greately improve performance
+-- Now comments in the sandboxie.ini are being preserved as well as the order of all entries
+- enabled configuration section list replacement with a hash map to improve configuration performance
+
+### Fixed
+
+
+
+
+
+
 ## [0.9.6 / 5.51.6] - 2021-09-12
 
 ### Added

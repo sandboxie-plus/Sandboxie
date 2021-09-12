@@ -86,7 +86,7 @@ typedef struct _SBIELOW_DATA {
         UCHAR   NtFlushInstructionCache_code[32];
     __declspec(align(16))
         UCHAR   NtProtectVirtualMemory_code[32];
-     ULONG64 RealNtDeviceIoControlFile;
+    ULONG64 RealNtDeviceIoControlFile;
 #ifdef _WIN64
     SBIELOW_J_TABLE * Sbie64bitJumpTable;
 	ULONG64     ntdll_wow64_base;

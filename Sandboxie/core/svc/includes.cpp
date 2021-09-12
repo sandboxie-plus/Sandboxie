@@ -42,6 +42,8 @@ extern "C" {
 #define PATTERN XPATTERN
 #include "common/pattern.c"
 
+#include "common/stream.c"
+
 #include "common/verify.c"
 
 #ifdef __cplusplus

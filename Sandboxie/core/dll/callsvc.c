@@ -709,6 +709,8 @@ _FX ULONG SbieDll_UpdateConf(
     else
         req->password[0] = L'\0';
 
+    req->refresh = TRUE;
+
     wcscpy(req->section, Section);
     wcscpy(req->setting, Setting);
     if (Value)

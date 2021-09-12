@@ -13,6 +13,7 @@ public:
 	virtual ~CSbieIni();
 
 	virtual QString		GetName() const { return m_Name; }
+	virtual void		SetRefreshOnChange(bool bSet) { m_RefreshOnChange = bSet; }
 
 	virtual SB_STATUS SetText(const QString& Setting, const QString& Value);
 	virtual SB_STATUS SetNum(const QString& Setting, int Value);
@@ -45,4 +46,5 @@ protected:
 
 	QString				m_Name;
 	class CSbieAPI*		m_pAPI;
+	bool				m_RefreshOnChange;
 };

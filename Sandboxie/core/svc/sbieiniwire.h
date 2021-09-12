@@ -27,6 +27,7 @@
 #include "msgids.h"
 
 #define CONF_LINE_LEN               2000    // keep in sync with drv/conf.c
+#define CONF_MAX_LINES              100000   // keep in sync with drv/conf.c
 
 //---------------------------------------------------------------------------
 // Get Version
@@ -122,13 +123,22 @@ struct tagSBIE_INI_SETTING_REQ
 {
     MSG_HEADER h;
     WCHAR password[66];
+    BOOLEAN refresh;
     WCHAR section[66];
     WCHAR setting[66];
     ULONG value_len;
     WCHAR value[1];
 };
 
+struct tagSBIE_INI_SETTING_RPL
+{
+    MSG_HEADER h;       // status is STATUS_SUCCESS or STATUS_UNSUCCESSFUL
+    ULONG value_len;
+    WCHAR value[1];
+};
+
 typedef struct tagSBIE_INI_SETTING_REQ SBIE_INI_SETTING_REQ;
+typedef struct tagSBIE_INI_SETTING_RPL SBIE_INI_SETTING_RPL;
 
 
 //---------------------------------------------------------------------------

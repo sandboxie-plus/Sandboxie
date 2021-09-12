@@ -363,6 +363,8 @@ void COptionsWindow::WriteTextList(const QString& Setting, const QStringList& Li
 
 void COptionsWindow::SaveConfig()
 {
+	m_pBox->SetRefreshOnChange(false);
+
 	try
 	{
 		if (m_GeneralChanged)
@@ -406,6 +408,9 @@ void COptionsWindow::SaveConfig()
 	{
 		theGUI->CheckResults(QList<SB_STATUS>() << Status);
 	}
+
+	m_pBox->SetRefreshOnChange(true);
+	m_pBox->GetAPI()->CommitIniChanges();
 }
 
 void COptionsWindow::apply()
@@ -592,10 +597,14 @@ void COptionsWindow::LoadIniSection()
 {
 	QString Section;
 
+	/*
 	m_Settings = m_pBox->GetIniSection(NULL, m_Template);
 	
 	for (QList<QPair<QString, QString>>::const_iterator I = m_Settings.begin(); I != m_Settings.end(); ++I)
 		Section += I->first + "=" + I->second + "\n";
+	*/
+
+	Section = m_pBox->GetAPI()->SbieIniGetEx(m_pBox->GetName(), "");
 
 	ui.txtIniSection->setPlainText(Section);
 }
@@ -603,6 +612,8 @@ void COptionsWindow::LoadIniSection()
 void COptionsWindow::SaveIniSection()
 {
 	m_ConfigDirty = true;
+
+	/*m_pBox->SetRefreshOnChange(false);
 
 	// Note: an incremental update would be more elegant but it would change the entry order in the ini,
 	//			hence it's better for the user to fully rebuild the section each time.
@@ -631,6 +642,11 @@ void COptionsWindow::SaveIniSection()
 	//
 	//for (QList<QPair<QString, QString>>::const_iterator I = NewSettings.begin(); I != NewSettings.end(); ++I)
 	//	m_pBox->InsertText(I->first, I->second);
+
+	m_pBox->SetRefreshOnChange(true);
+	m_pBox->GetAPI()->CommitIniChanges();*/
+
+	m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
 }

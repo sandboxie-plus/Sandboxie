@@ -32,7 +32,7 @@
 #include "common/my_version.h"
 #include "core/dll/sbiedll.h"
 #include "core/drv/api_defs.h"
-
+#include "sbieiniserver.h"
 
 //---------------------------------------------------------------------------
 // Variables
@@ -288,7 +288,17 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
         LogMessage();
 
     }
-    else if (msgid == SVC_RESTART_HOST_INJECTED_SVCS) {
+    else if (msgid == SVC_CONFIG_UPDATED) {
+
+#ifdef NEW_INI_MODE
+
+        //
+        // in case the ini was edited externaly, i.e. by notepad.exe 
+        // we update the ini cache each time the deriver reloads the ini file
+        //
+
+        SbieIniServer::NotifyConfigReloaded();
+#endif
 
         RestartHostInjectedSvcs();
     }

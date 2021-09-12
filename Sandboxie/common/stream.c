@@ -57,7 +57,7 @@ NTSTATUS Stream_Read_More(
 
 #ifndef KERNEL_MODE
 
-__declspec(align(16)) NTSTATUS Stream_Open(
+NTSTATUS Stream_Open(
     OUT STREAM **out_stream,
     IN  HANDLE Handle)
 {
@@ -65,7 +65,7 @@ __declspec(align(16)) NTSTATUS Stream_Open(
 
     *out_stream = NULL;
 
-    stream = HeapAlloc(GetProcessHeap(), 0, PAGE_SIZE);
+    stream = (STREAM*)HeapAlloc(GetProcessHeap(), 0, PAGE_SIZE);
     if (! stream)
         return STATUS_INSUFFICIENT_RESOURCES;
 
@@ -87,7 +87,7 @@ __declspec(align(16)) NTSTATUS Stream_Open(
 
 #ifdef KERNEL_MODE
 
-__declspec(align(16)) NTSTATUS Stream_Open(
+NTSTATUS Stream_Open(
     OUT STREAM **out_stream,
     IN  const WCHAR *FullPath,
     IN  ACCESS_MASK DesiredAccess,
@@ -160,7 +160,7 @@ __declspec(align(16)) NTSTATUS Stream_Open(
 // Stream_Close
 //---------------------------------------------------------------------------
 
-__declspec(align(16)) void Stream_Close(
+void Stream_Close(
     IN  STREAM *stream)
 {
 #ifndef KERNEL_MODE
@@ -176,7 +176,7 @@ __declspec(align(16)) void Stream_Close(
 // Stream_Read_More
 //---------------------------------------------------------------------------
 
-__declspec(align(16)) NTSTATUS Stream_Read_More(
+NTSTATUS Stream_Read_More(
     IN  STREAM *stream)
 {
     NTSTATUS status;
@@ -207,7 +207,7 @@ __declspec(align(16)) NTSTATUS Stream_Read_More(
 // Stream_Flush
 //---------------------------------------------------------------------------
 
-__declspec(align(16)) NTSTATUS Stream_Flush(
+NTSTATUS Stream_Flush(
     IN  STREAM *stream)
 {
     NTSTATUS status;
@@ -357,42 +357,35 @@ NTSTATUS Stream_Write_Long(
 }
 
 //---------------------------------------------------------------------------
-// Stream_Read_BOM
+// Read_BOM
 //---------------------------------------------------------------------------
 
-NTSTATUS Stream_Read_BOM(
-    IN  STREAM* stream, 
-    ULONG* encoding)
+ULONG Read_BOM(UCHAR** data, ULONG* len)
 {
-    if (stream->data_len == 0) 
-    {
-        NTSTATUS status = Stream_Read_More(stream);
-        if (!NT_SUCCESS(status))
-            return status;
-    }
+    ULONG encoding;
 
-    if (stream->data_len >= 3 && stream->data[0] == 0xEF && stream->data[1] == 0xBB && stream->data[2] == 0xBF) 
+    if (*len >= 3 && (*data)[0] == 0xEF && (*data)[1] == 0xBB && (*data)[2] == 0xBF) 
     {
-        stream->data_ptr += 3;
-        stream->data_len -= 3;
+        *data += 3;
+        *len -= 3;
 
-        stream->encoding = 1;
+        encoding = 1;
         //DbgPrint("sbie read ini, found UTF-8 Signature\n");
     }
-    else if (stream->data_len >= 2 && stream->data[0] == 0xFF && stream->data[1] == 0xFE)
+    else if (*len >= 2 && (*data)[0] == 0xFF && (*data)[1] == 0xFE)
     {
-        stream->data_ptr += 2;
-        stream->data_len -= 2;
+        *data += 2;
+        *len -= 2;
 
-        stream->encoding = 0;
+        encoding = 0;
         //DbgPrint("sbie read ini, found Unicode (UTF-16 LE) BOM\n");
     }
-    else if (stream->data_len >= 2 && stream->data[0] == 0xFE && stream->data[1] == 0xFF)
+    else if (*len >= 2 && (*data)[0] == 0xFE && (*data)[1] == 0xFF)
     {
-        stream->data_ptr += 2;
-        stream->data_len -= 2;
+        *data += 2;
+        *len -= 2;
 
-        stream->encoding = 2;
+        encoding = 2;
         //DbgPrint("sbie read ini, found Unicode (UTF-16 BE) BOM\n");
     }
     else
@@ -403,33 +396,53 @@ NTSTATUS Stream_Read_BOM(
         // similrly Unicode Big Endian (byte swaped) will have the n*2 bytes 0 as long
         BOOLEAN LooksUnicodeBE = TRUE;
         // UTF-8 shouldn't have null bytes
-        for (ULONG pos = 0; (pos + 1) < min(stream->data_len, 16); pos += 2) // check first 8 char16's
+        for (ULONG pos = 0; (pos + 1) < min(*len, 16); pos += 2) // check first 8 char16's
         {
-            if (stream->data[pos] != 0)
+            if ((*data)[pos] != 0)
                 LooksUnicodeBE = FALSE;
-            if (stream->data[pos + 1] != 0)
+            if ((*data)[pos + 1] != 0)
                 LooksUnicodeLE = FALSE;
         }
 
         if (!LooksUnicodeLE && !LooksUnicodeBE)
         {
-            stream->encoding = 1;
+            encoding = 1;
             //DbgPrint("sbie read ini, looks UTF-8 encoded\n");
         }
         else if (!LooksUnicodeLE && LooksUnicodeBE)
         {
-            stream->encoding = 2;
+            encoding = 2;
             //DbgPrint("sbie read ini, looks Unicode (UTF-16 BE) encoded\n");
         }
         else
         {
-            stream->encoding = 0;
+            encoding = 0;
             //if (LooksUnicodeLE && !LooksUnicodeBE)
             //  DbgPrint("sbie read ini, looks Unicode (UTF-16 LE) encoded\n");
             //else
             //  DbgPrint("sbie read ini, encoding looks broken, assuming (UTF-16 LE)\n");
         }
     }
+
+    return encoding;
+}
+
+//---------------------------------------------------------------------------
+// Stream_Read_BOM
+//---------------------------------------------------------------------------
+
+NTSTATUS Stream_Read_BOM(
+    IN  STREAM* stream,
+    ULONG* encoding)
+{
+    if (stream->data_len == 0) 
+    {
+        NTSTATUS status = Stream_Read_More(stream);
+        if (!NT_SUCCESS(status))
+            return status;
+    }
+
+    stream->encoding = Read_BOM(&stream->data_ptr, &stream->data_len);
 
     if (encoding) *encoding = stream->encoding;
 

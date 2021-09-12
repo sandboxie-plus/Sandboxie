@@ -288,7 +288,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	//m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.51.0";
+	QStringList CompatVersions = QStringList () << "5.52.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -1118,11 +1118,8 @@ retry:
 	return SB_ERR(SB_ConfigFailed, QVariantList() << SettingName << SectionName << CSbieAPI__FormatNtStatus(status), status);
 }
 
-SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode)
+SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode, bool bRefresh)
 {
-	if (Section.isEmpty())
-		return SB_ERR();
-
 	ULONG msgid = 0;
 	switch (Mode)
 	{
@@ -1134,7 +1131,9 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 		return SB_ERR();
 	}
 
-	SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)malloc(REQUEST_LEN);
+	SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)malloc(sizeof(SBIE_INI_SETTING_REQ) + Value.length() * sizeof(WCHAR));
+
+	req->refresh = bRefresh ? TRUE : FALSE;
 
 	Section.toWCharArray(req->section); // fix-me: potential overflow
 	req->section[Section.length()] = L'\0';
@@ -1151,6 +1150,42 @@ SB_STATUS CSbieAPI::SbieIniSet(const QString& Section, const QString& Setting, c
 	//	emit LogSbieMessage(0xC1020000 | 2203, QStringList() << "" << Status.GetText() << "", GetCurrentProcessId());
 	free(req);
 	return Status;
+}
+
+void CSbieAPI::CommitIniChanges()
+{
+	bool bRemoved = m_IniWatcher.removePath(m_IniPath);
+			
+	SbieIniSet("", "", ""); // commit and refresh
+
+	if (bRemoved) m_IniWatcher.addPath(m_IniPath);
+}
+
+QString CSbieAPI::SbieIniGetEx(const QString& Section, const QString& Setting)
+{
+	QString Value;
+
+	SBIE_INI_SETTING_REQ *req = (SBIE_INI_SETTING_REQ *)malloc(sizeof(SBIE_INI_SETTING_REQ) );
+	memset(req, 0, sizeof(SBIE_INI_SETTING_REQ));
+
+	Section.toWCharArray(req->section); // fix-me: potential overflow
+	req->section[Section.length()] = L'\0';
+	Setting.toWCharArray(req->setting); // fix-me: potential overflow
+	req->setting[Setting.length()] = L'\0';
+	req->h.msgid = MSGID_SBIE_INI_GET_SETTING;
+	req->h.length = sizeof(SBIE_INI_SETTING_REQ);
+
+	SBIE_INI_SETTING_RPL *rpl = NULL;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	free(req);
+	if (!Status || !rpl)
+		return QString();
+	if (rpl->h.status == 0) {
+		Value = QString::fromWCharArray(rpl->value, rpl->value_len - 1);
+	}
+	free(rpl);
+	
+	return Value;
 }
 
 QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode)

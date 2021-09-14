@@ -237,6 +237,12 @@ begin
 
     UpdateStatus(OutputProgressPage, 'KmdUtil delete SbieDrv', 100);
     Exec(ExpandConstant('{app}\KmdUtil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
+    // Query driver which can remove SbieDrv key if exist.
+    if RegKeyExists(HKLM, 'SYSTEM\CurrentControlSet\services\SbieDrv') then begin
+      UpdateStatus(OutputProgressPage, 'SC query SbieDrv', 100);
+      Exec(ExpandConstant('{sys}\sc.exe'), 'query SbieDrv', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+    end;
   finally
 
     // Restore status text (uninstall). Hide Prepare progress page (install).

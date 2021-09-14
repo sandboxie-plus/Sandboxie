@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
 
 ### Fixed
+- fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)
 
 
 

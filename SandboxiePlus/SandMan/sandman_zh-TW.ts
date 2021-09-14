@@ -6,32 +6,32 @@
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
         <source>%1 - Files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - 檔案</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">建立捷徑</translation>
+        <translation>建立捷徑</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>恢復到任意資料夾</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>恢復到相同資料夾</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="194"/>
         <source>Select Directory</source>
-        <translation type="unfinished">選取目錄</translation>
+        <translation>選擇目錄</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="244"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">為沙箱 %1 建立捷徑</translation>
+        <translation>建立沙箱 %1 的捷徑</translation>
     </message>
 </context>
 <context>
@@ -753,7 +753,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="130"/>
         <source>Clear this list</source>
-        <translation type="unfinished"></translation>
+        <translation>清除清單</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="150"/>
@@ -764,7 +764,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="208"/>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>有 %1 個新檔案可供恢復。</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="405"/>
@@ -892,7 +892,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="367"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>建立沙箱群組</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="369"/>
@@ -1002,7 +1002,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="411"/>
         <source>Show All Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示所有工作階段</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="416"/>
@@ -1042,7 +1042,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="428"/>
         <source>Reset all hidden messages</source>
-        <translation>重置所有隱藏訊息</translation>
+        <translation>重設所有隱藏訊息</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="430"/>
@@ -1302,21 +1302,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤程式碼: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1686"/>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1719"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Status: %1</source>
-        <translation type="vanished">錯誤程式碼: %1</translation>
+        <translation>未知錯誤狀態: 0x%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1688"/>
@@ -1394,14 +1390,6 @@ No will choose: %2</source>
         <translation>刪除沙箱資料夾錯誤: %1</translation>
     </message>
     <message>
-        <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation type="vanished">重新命名沙箱之前必須將其清空。</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">刪除沙箱之前必須清空。</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1705"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移動目錄 &apos;%1&apos; 至 &apos;%2&apos; 失敗</translation>
@@ -1470,10 +1458,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1718"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>設定密碼不得超過 64 個字元</translation>
-    </message>
-    <message>
-        <source>Unknown Error Status: %1</source>
-        <translation type="vanished">未知錯誤程式碼: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1739"/>
@@ -1589,7 +1573,7 @@ No will choose: %2</source>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱管理器不能在沙箱中執行！</translation>
     </message>
 </context>
 <context>
@@ -1791,7 +1775,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translation> 在工作階段 %1</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="492"/>
@@ -1805,10 +1789,6 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="71"/>
         <source>Create New Box</source>
         <translation>建立新沙箱</translation>
-    </message>
-    <message>
-        <source>Add Group</source>
-        <translation type="vanished">新增群組</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="74"/>
@@ -1854,18 +1834,6 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="91"/>
         <source>Programs and Features</source>
         <translation>程式和功能</translation>
-    </message>
-    <message>
-        <source>Terminal</source>
-        <translation type="vanished">終端機</translation>
-    </message>
-    <message>
-        <source>Terminal (as Admin)</source>
-        <translation type="vanished">終端機 (管理員)</translation>
-    </message>
-    <message>
-        <source>Terminal (32-bit)</source>
-        <translation type="vanished">終端機 (32 位元)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="95"/>
@@ -1937,10 +1905,6 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="126"/>
         <source>Rename Sandbox</source>
         <translation>重新命名沙箱</translation>
-    </message>
-    <message>
-        <source>Move to Group</source>
-        <translation type="vanished">移動至群組</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="139"/>
@@ -2033,82 +1997,82 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>建立沙箱群組</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>重新命名群組</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="83"/>
         <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>命令提示字元</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
         <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱工具</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="85"/>
         <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translation>命令提示字元 (管理員)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="87"/>
         <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>命令提示字元 (32 位元)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="92"/>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>執行自動執行項目</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
         <source>Browse Content</source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽內容</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
         <source>Box Content</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱內容</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="102"/>
         <source>Open Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟登錄</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="128"/>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>移動沙箱/群組</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Move Up</source>
-        <translation type="unfinished">上移</translation>
+        <translation>往上移</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="134"/>
         <source>Move Down</source>
-        <translation type="unfinished">下移</translation>
+        <translation>往下移</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="561"/>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>請為群組輸入新名稱。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="565"/>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>此群組名稱已被使用。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="608"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translation>移動項目 (負值向上移動，正值向下移動):</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="634"/>
@@ -2161,7 +2125,7 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="918"/>
         <location filename="Views/SbieView.cpp" line="994"/>
         <source>Terminate without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>不詢問就終止</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="958"/>
@@ -2172,16 +2136,12 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>您要 %1 %2 嗎？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="vanished">確定要 %1 選取的處理程序嗎？</translation>
+        <translation>選取的處理程序</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1054"/>
@@ -2227,17 +2187,17 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="106"/>
         <source>Don&apos;t show any icon</source>
-        <translation type="unfinished"></translation>
+        <translation>不顯示任何圖示(T)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="107"/>
         <source>Show Plus icon</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示 Plus 圖示</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="108"/>
         <source>Show Classic icon</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示 Classic 圖示</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="110"/>
@@ -2424,7 +2384,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/FileBrowserWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished">SandboxiePlus - 快照</translation>
+        <translation>SandboxiePlus - 快照</translation>
     </message>
 </context>
 <context>
@@ -3470,10 +3430,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>關閉</translation>
     </message>
     <message>
-        <source>Recover to</source>
-        <translation type="vanished">恢復至</translation>
-    </message>
-    <message>
         <location filename="Forms/RecoveryWindow.ui" line="125"/>
         <source>Add Folder</source>
         <translation>新增資料夾</translation>
@@ -3486,7 +3442,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Recover to...</source>
-        <translation type="unfinished"></translation>
+        <translation>恢復至...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="132"/>
@@ -3598,10 +3554,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="151"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
         <translation>使用深色佈景主題 (重新啟動程式後完全套用)</translation>
-    </message>
-    <message>
-        <source>Show Sys-Tray</source>
-        <translation type="vanished">在系統工具列顯示</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="86"/>
@@ -3721,12 +3673,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>將可恢復檔案顯示為通知</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
+        <translation>在系統匣中顯示圖示:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="486"/>
@@ -3812,7 +3764,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="750"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation>使 Sandboxie 與 Windows 的累積版本保持同步並與現代網頁瀏覽器相容是一項永無止境的努力。請考慮透過捐贈來支持這項工作。&lt;br&gt;您可以透過直接&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐贈&lt;/a&gt;;來支持開發，也適用於信用卡。&lt;br&gt;您還可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 訂閱&lt;/a&gt;提供持續的支持。</translation>
+        <translation>使 Sandboxie 與 Windows 的累積版本保持同步並與現代網頁瀏覽器相容是一項永無止境的努力。請考慮透過捐贈來支持這項工作。&lt;br&gt;您可以透過直接&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐贈&lt;/a&gt;來支持開發，也適用於信用卡。&lt;br&gt;您還可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 訂閱&lt;/a&gt;提供持續的支持。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="782"/>
@@ -3827,16 +3779,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="803"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 項目的支持者會收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者憑證&lt;/a&gt;。它就像一個授權金鑰，但適用於使用開放原始碼軟體的優秀人士。 :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="820"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="vanished">Sandboxie-Plus 項目的支持者會收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;支持者憑證&lt;/a&gt;。它就像一個授權金鑰，但適用於使用免費軟體的優秀人士。 :-)</translation>
+        <translation>此支持者證書已過期，請取得更新的證書。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="730"/>

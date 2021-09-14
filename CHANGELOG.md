@@ -47,7 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Windows 11 22449.1000 [#1164](https://github.com/sandboxie-plus/Sandboxie/issues/1164)
 - fixed SRWare Iron template (by Dyras) [#1146](https://github.com/sandboxie-plus/Sandboxie/pull/1146)
 - fixed label positioning in Classic UI (by isaak654) [#1088](https://github.com/sandboxie-plus/Sandboxie/issues/1088)
-
+- fixed an old issue that occurred when only an asterisk was set as path [#971](https://github.com/sandboxie-plus/Sandboxie/issues/971)
 
 
 ## [0.9.5 / 5.51.5] - 2021-08-30

@@ -30,7 +30,7 @@ typedef long NTSTATUS;
 #include <windows.h>
 #include "..\..\Sandboxie\common\win32_ntddk.h"
 
-#include "Helpers/NtIO.h"
+#include "../Helpers/NtIO.h"
 
 //struct SSandBox
 //{

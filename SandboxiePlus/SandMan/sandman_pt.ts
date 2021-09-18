@@ -760,7 +760,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="130"/>
         <source>Clear this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar esta lista</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="150"/>
@@ -771,7 +771,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="208"/>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>Existem %1 novos arquivos disponíveis para recuperar.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="405"/>
@@ -782,20 +782,24 @@ Caminho completo: %4</translation>
 <context>
     <name>CSandBox</name>
     <message>
+        <location filename="../QSbieAPI/Sandboxie/SandBox.cpp" line="169"/>
         <source>Waiting for folder: %1</source>
-        <translation type="vanished">Aguardando pela pasta: %1</translation>
+        <translation>Aguardando pela pasta: %1</translation>
     </message>
     <message>
+        <location filename="../QSbieAPI/Sandboxie/SandBox.cpp" line="178"/>
         <source>Deleting folder: %1</source>
-        <translation type="vanished">Excluindo pasta: %1</translation>
+        <translation>Excluindo pasta: %1</translation>
     </message>
     <message>
+        <location filename="../QSbieAPI/Sandboxie/SandBox.cpp" line="393"/>
         <source>Merging folders: %1 &gt;&gt; %2</source>
-        <translation type="vanished">Mesclando pastas: %1 &gt;&gt; %2</translation>
+        <translation>Mesclando pastas: %1 &gt;&gt; %2</translation>
     </message>
     <message>
+        <location filename="../QSbieAPI/Sandboxie/SandBox.cpp" line="437"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="vanished">Mesclagem de Instantâneo Finalizada...</translation>
+        <translation>Mesclagem de Instantâneo Finalizada...</translation>
     </message>
 </context>
 <context>
@@ -1054,7 +1058,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="422"/>
         <source>Keep terminated</source>
-        <translation>Manter terminado</translation>
+        <translation>Manter Terminado</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="426"/>
@@ -1069,18 +1073,18 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="428"/>
         <source>Reset all hidden messages</source>
-        <translation>Redefinir todas as mensagens ocultas</translation>
+        <translation>Redefinir Todas as Mensagens Ocultas</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="430"/>
         <source>Edit ini file</source>
         <translatorcomment>Freedom to ini being all caps</translatorcomment>
-        <translation>Editar arquivo ini</translation>
+        <translation>Editar Arquivo ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="431"/>
         <source>Reload ini file</source>
-        <translation>Recarregar arquivo ini</translation>
+        <translation>Recarregar Arquivo ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="433"/>
@@ -1136,17 +1140,17 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Status do erro: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1686"/>
         <source>Unknown</source>
-        <translation type="unfinished">Desconhecido</translation>
+        <translation>Desconhecido</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1719"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Status de Erro Desconhecido: 0x%1</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
@@ -1637,7 +1641,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>O Sandboxie Manager não pode ser executado com caixa de areia!</translation>
     </message>
 </context>
 <context>
@@ -1844,7 +1848,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translation> na sessão %1</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="492"/>
@@ -1962,12 +1966,12 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Create Box Group</source>
-        <translation type="unfinished">Criar Grupo de Caixa</translation>
+        <translation>Criar Grupo de Caixa</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear Grupo</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
@@ -1977,7 +1981,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="102"/>
         <source>Open Registry</source>
-        <translation>Abrir Registro</translation>
+        <translation>Editor de Registro</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="103"/>
@@ -2119,17 +2123,17 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="561"/>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, insira um novo nome para o grupo.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="565"/>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este nome do grupo já está em uso.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="608"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover entradas por (valores negativos sobem, valores positivos descem):</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="671"/>
@@ -2139,12 +2143,12 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Você quer %1 %2?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>os processos selecionados</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="575"/>
@@ -2155,17 +2159,17 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="128"/>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover Caixa/Grupo</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Move Up</source>
-        <translation type="unfinished">Mover para Cima</translation>
+        <translation>Mover para Cima</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="134"/>
         <source>Move Down</source>
-        <translation type="unfinished">Mover para Baixo</translation>
+        <translation>Mover para Baixo</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="634"/>
@@ -2475,7 +2479,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Forms/FileBrowserWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished">SandboxiePlus - Instantâneos</translation>
+        <translation>SandboxiePlus - Instantâneos</translation>
     </message>
 </context>
 <context>
@@ -3568,7 +3572,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Recover to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recuperar para...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="132"/>
@@ -3649,7 +3653,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar arquivos recuperáveis ​​como notificações</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
@@ -3929,7 +3933,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     <message>
         <location filename="Forms/SettingsWindow.ui" line="803"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Os apoiadores do projeto Sandboxie-Plus recebem um &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificado de suporte&lt;/a&gt;. É como uma chave de licença, mas para pessoas incríveis usando software de código aberto. :-)</translation>
     </message>
     <message>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>

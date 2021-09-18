@@ -140,6 +140,23 @@ Italian.UninstallTaskLabel3=&Mantieni i file di configurazione e le aree virtual
 Italian.UninstallTaskLabel4=Rimuovi i file di &configurazione%nSelezionare questa opzione per rimuovere i file di configurazione Sandboxie.ini e Sandboxie-Plus.ini, lasciando invariate le aree virtuali presenti.
 Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali%nSelezionare questa opzione per rimuovere tutti i file di configurazione e le aree virtuali, inclusa la cartella Sandbox nei percorsi personalizzati mediante FileRootPath.
 
+; Polish
+polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego
+polish.CustomPageLabel1=Wybierz typ instalacji
+polish.CustomPageLabel2=Jak należy instalować
+polish.CustomPageLabel3=Wybierz tryb instalacji
+polish.CustomPageInstallMode=Zainstaluj {#MyAppName} na tym komputerze
+polish.CustomPageUpgradeMode=Aktualizacja istniejącej instalacji {#MyAppName}
+polish.CustomPagePortableMode=Wypakuj wszystkie pliki do katalogu, aby użyć trybu przenośnego
+polish.RequiresWin7OrLater=Sandboxie-Plus wymaga systemu Windows 7 lub nowszego.
+polish.ClassicFound=Wykryto instalację Sandboxie Classic, która musi być najpierw odinstalowana, czy chcesz ją teraz odinstalować?
+polish.RunSandboxedMenu=Uruchom w &Sandboxie
+polish.UninstallTaskLabel1=Wybierz typ dezinstalacji
+polish.UninstallTaskLabel2=W jaki sposób chcesz odinstalować Sandboxie-Plus?
+polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to najbardziej zalecana opcja, jeśli planujesz reinstalować Sandboxie-Plus, zachowując pliki konfiguracyjne i piaskownice.
+polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
+polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
+
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
 portuguese.CustomPageLabel1=Selecione Tipo de Instalação

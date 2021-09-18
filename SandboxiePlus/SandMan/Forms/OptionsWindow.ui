@@ -2201,7 +2201,7 @@ The process match level has a higher priority than the specificity, it describes
                  <item row="8" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkOpenDevCMApi">
                    <property name="text">
-                    <string>Allow sandboxed programs to managing Hardware/Devices</string>
+                    <string>Allow sandboxed programs to manage Hardware/Devices</string>
                    </property>
                   </widget>
                  </item>

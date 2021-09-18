@@ -21,32 +21,33 @@
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
         <source>%1 - Files</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Plików / Pliki</translatorcomment>
+        <translation>%1 - Plików</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Utwórz skrót</translation>
+        <translation>Utwórz skrót</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć do dowolnego folderu</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć do tego samego folderu</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="194"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Wybierz folder</translation>
+        <translation>Wybierz katalog</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="244"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Utwórz skrót do piaskownicy %1</translation>
+        <translation>Utwórz skrót do piaskownicy %1</translation>
     </message>
 </context>
 <context>
@@ -253,7 +254,7 @@
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="104"/>
         <source>Select Directory</source>
-        <translation>Wybierz folder</translation>
+        <translation>Wybierz katalog</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="58"/>
@@ -679,7 +680,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="294"/>
         <source>Select Directory</source>
-        <translation>Wybierz folder</translation>
+        <translation>Wybierz katalog</translation>
     </message>
 </context>
 <context>
@@ -765,18 +766,18 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="130"/>
         <source>Clear this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyczyść tę listę</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="150"/>
         <location filename="Windows/RecoveryWindow.cpp" line="370"/>
         <source>Select Directory</source>
-        <translation>Wybierz folder</translation>
+        <translation>Wybierz katalog</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="208"/>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>Istnieje %1 nowych plików dostępnych do odzyskania.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="405"/>
@@ -942,7 +943,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="367"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Utwórz grupę piaskownic</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="369"/>
@@ -1052,7 +1053,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="411"/>
         <source>Show All Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż wszystkie sesje</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="416"/>
@@ -1072,17 +1073,17 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1685"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kod błędu: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1686"/>
         <source>Unknown</source>
-        <translation type="unfinished">Nieznane</translation>
+        <translation>Nieznane</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1719"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieznany status błędu: 0x%1</translation>
     </message>
     <message>
         <source>Cleanup Resource Log</source>
@@ -1264,7 +1265,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="860"/>
         <source>Sbie Directory: %1</source>
-        <translation>Folder z piaskownicami: %1</translation>
+        <translation>Folder Sbie: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="861"/>
@@ -1641,7 +1642,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2148"/>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Sandboxie-Plus jest otwarto źródłowym rozwidlenie Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Odwiedź &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; aby otrzymać dalsze informacje.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icony z &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Sandboxie-Plus jest otwarto źródłowym rozwidleniem Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Odwiedź &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; aby otrzymać dalsze informacje.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Ikony z &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2295"/>
@@ -1656,7 +1657,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2337"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>Uchwyć ikonę po lewej narzędzia Finder Tool nad okno, aby je zaznaczyć, a następnie zwolnij mysz, aby sprawdzić, czy okno jest częścią piaskownicy.</translation>
+        <translation>Przeciągnij ikonę z celownikiem narzędzia Finder Tool nad okno, aby je zaznaczyć, a następnie zwolnij mysz, aby sprawdzić, czy oknem zarządza piaskownica.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2392"/>
@@ -1666,7 +1667,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Manager nie może być uruchomiony w trybie piaskownicy!</translation>
     </message>
 </context>
 <context>
@@ -1868,12 +1869,13 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>nieznany kontekst</translatorcomment>
+        <translation> w sesji %1</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="492"/>
         <source> (%1)</source>
-        <translation> (%1)</translation>
+        <translation>(%1)</translation>
     </message>
 </context>
 <context>
@@ -2130,82 +2132,85 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="72"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Utwórz grupę piaskownic</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="73"/>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmień nazwę grupy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="83"/>
         <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiersz polecenia</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
         <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>nieznany kontekst</translatorcomment>
+        <translation>Narzędzia w piaskownicach</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="85"/>
         <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiersz polecenia (jako Admin)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="87"/>
         <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiersz polecenia (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="92"/>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>nieznany kontekst</translatorcomment>
+        <translation>Wykonaj wpisy z autorun</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
         <source>Browse Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Przeglądaj zawartość</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
         <source>Box Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Przegląd piaskownicy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="102"/>
         <source>Open Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz rejestr</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="128"/>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Przenieś piaskownicę/grupę</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Move Up</source>
-        <translation type="unfinished">Przesuń w górę</translation>
+        <translation>Przesuń w górę</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="134"/>
         <source>Move Down</source>
-        <translation type="unfinished">Przesuń w dół</translation>
+        <translation>Przesuń w dół</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="561"/>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadź nową nazwę grupy.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="565"/>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta nazwa grupy jest już używana.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="608"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>nieznany kontekst</translatorcomment>
+        <translation>Przenieś wpisy o (wartości ujemne w górę, wartości dodatnie w dół):</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="634"/>
@@ -2258,7 +2263,7 @@ Nie, wybierze: %2</translation>
         <location filename="Views/SbieView.cpp" line="918"/>
         <location filename="Views/SbieView.cpp" line="994"/>
         <source>Terminate without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakończ bez pytania</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="958"/>
@@ -2269,12 +2274,12 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz %1 %2?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>wybrane procesy</translation>
     </message>
     <message>
         <source>Do you want to %1 the selected process(es)?</source>
@@ -2328,17 +2333,17 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="106"/>
         <source>Don&apos;t show any icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie pokazuj żadnej ikony</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="107"/>
         <source>Show Plus icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż ikonę Plus</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="108"/>
         <source>Show Classic icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż ikonę klasyczną</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="110"/>
@@ -2369,7 +2374,7 @@ Nie, wybierze: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="513"/>
         <location filename="Windows/SettingsWindow.cpp" line="617"/>
         <source>Select Directory</source>
-        <translation>Wybierz folder</translation>
+        <translation>Wybierz katalog</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="579"/>
@@ -2497,7 +2502,7 @@ Nie, wybierze: %2</translation>
         <location filename="Views/TraceView.cpp" line="151"/>
         <location filename="Views/TraceView.cpp" line="193"/>
         <source>[All]</source>
-        <translation></translation>
+        <translation>[Wszystko]</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="66"/>
@@ -2525,7 +2530,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/FileBrowserWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished">Sandboxie-Plus - Migawki</translation>
+        <translation>Sandboxie-Plus - Migawki</translation>
     </message>
 </context>
 <context>
@@ -2543,7 +2548,8 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
         <source>Initial sandbox configuration:</source>
-        <translation>Inicjalna konfiguracja piaskownicy:</translation>
+        <translatorcomment>Początkowa konfiguracja piaskownicy:</translatorcomment>
+        <translation>Wstępna konfiguracja piaskownicy:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="90"/>
@@ -2553,7 +2559,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="110"/>
         <source>Sandbox Name:</source>
-        <translation>Nazwa piaskownicy:</translation>
+        <translation>Nazwa piaskonicy:</translation>
     </message>
 </context>
 <context>
@@ -2858,7 +2864,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="190"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation>Pokaż tę piaskownicę w monicie wyboru „uruchom w piaskownicy”</translation>
+        <translation>Pokaż to pole w monicie wyboru „uruchom w polu”</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="251"/>
@@ -3625,7 +3631,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Recover to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć do...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="132"/>
@@ -3774,7 +3780,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="584"/>
         <source>Config protection</source>
-        <translation>Ochrona ustawień</translation>
+        <translation>Ochrona konfiguracji</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="337"/>
@@ -3814,7 +3820,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż odzyskiwalne pliki jako powiadomienia</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
@@ -3824,7 +3830,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż ikonę w pasku zadań:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="220"/>
@@ -3864,12 +3870,12 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="803"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Osoby wspierające projekt Sandboxie-Plus otrzymują &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;. To jest jak klucz licencyjny, ale dla wspaniałych ludzi używających oprogramowania open source :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="820"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wygasł ten certyfikat wsparcia, proszę o zaktualizowanie certyfikatu.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="425"/>

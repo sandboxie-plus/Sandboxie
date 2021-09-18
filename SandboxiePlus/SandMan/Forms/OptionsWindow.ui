@@ -1873,7 +1873,7 @@ For files access you can use 'Direct All' instead to make it apply to all progra
                  <item row="2" column="1">
                   <widget class="QCheckBox" name="chkOpenDevCMApi">
                    <property name="text">
-                    <string>Allow sandboxed programs to managing Hardware/Devices</string>
+                    <string>Allow sandboxed programs to manage Hardware/Devices</string>
                    </property>
                   </widget>
                  </item>

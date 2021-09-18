@@ -3060,7 +3060,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1876"/>
-        <source>Allow sandboxed programs to managing Hardware/Devices</source>
+        <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

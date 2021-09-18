@@ -3185,7 +3185,7 @@ Para acessar arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fa
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1876"/>
-        <source>Allow sandboxed programs to managing Hardware/Devices</source>
+        <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation>Permitir que programas na caixa de areia gerenciem Hardware/Dispositivos</translation>
     </message>
     <message>

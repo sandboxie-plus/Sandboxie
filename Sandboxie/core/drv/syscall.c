@@ -315,6 +315,8 @@ _FX BOOLEAN Syscall_Init_List(void)
             if (syscall_index != -1) {
                 Syscall_GetKernelAddr(
                             syscall_index, &ntos_addr, &param_count);
+
+                //DbgPrint("    Found SysCall: %s, pcnt %d; idx: %d\r\n", name, param_count, syscall_index);
             }
         }
 

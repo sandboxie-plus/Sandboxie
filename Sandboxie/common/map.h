@@ -50,7 +50,8 @@ void map_init(map_base_t *m, void* pool);
 BOOLEAN map_resize(map_base_t* m, int nbuckets);
 void* map_insert(map_base_t *m, const void* key, void* vdata, size_t vsize);
 void* map_get(map_base_t *m, const void* key);
-void* map_remove(map_base_t *m, const void* key);
+void map_remove(map_base_t *m, const void* key);
+BOOLEAN map_take(map_base_t *m, const void* key, void* vdata, size_t vsize);
 void map_clear(map_base_t *m);
 
 typedef struct {

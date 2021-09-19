@@ -644,7 +644,7 @@ _FX void *Thread_SetInformationProcess_PrimaryToken_3(
     //
 
     if (!proc->image_from_box &&
-        _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
+            _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
 
         return TokenObject2;
     }

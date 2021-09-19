@@ -175,7 +175,7 @@ protected:
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
 
-	virtual quint32			GetImageType(quint32 ProcessId);
+	virtual quint32			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
 
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);

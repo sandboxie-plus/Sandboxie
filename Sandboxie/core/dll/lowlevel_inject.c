@@ -269,7 +269,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 		// Create a minimalistic driverless data
 		//
 
-		*syscall_data = 4 + 4 + 232; // size 4, offset 4, work area sizeof(INJECT_DATA)
+		*syscall_data = 4 + 4 + 232; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
 
 		const char* NtdllExports[] = { "NtDelayExecution", "NtDeviceIoControlFile", "NtFlushInstructionCache", "NtProtectVirtualMemory" };
 		for (ULONG i = 0; i < 4; ++i) {
@@ -279,6 +279,36 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 
 		len = *syscall_data;
 	}
+
+	/*
+	struct SYS_CALL_DATA {
+		ULONG size_of_buffer;
+		ULONG offset_to_extra_data;
+
+		struct _CODE {
+			UCHAR bytes[32]
+		}			saved_code[4];
+
+		struct _SC {
+			ULONG number;
+			ULONG offset;
+		}			sys_call_list[n + 1];
+
+		// the above is provided by the driver, the below we have to construct
+
+		struct _EX{
+			// ...
+		}			extra_data; // 40 bytes
+
+		char LdrLoadDll_str[16]			= "LdrLoadDll";
+		char LdrGetProcAddr_str[28]		= "LdrGetProcedureAddress";
+		char NtRaiseHardError_str[20]	= "NtRaiseHardError";
+		char RtlFindActCtx_str[44]		= "RtlFindActivationContextSectionString";
+		wchar_t KernelDll_str[13]		= L"kernel32.dll";
+		wchar_t NativeSbieDll_str[]		= L"..\\SbieDll.dll";
+		wchar_t Wow64SbieDll_str[]		= L"..\\32\\SbieDll.dll";
+	}
+	*/
 
 	//
 	// the second ULONG in syscall_data points to extra data appended
@@ -336,7 +366,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	wcscpy(ptr, L"kernel32.dll");
 
 	len = wcslen(ptr);
-	extra->KernelDll_offset = ULONG_DIFF(ptr, extra);;
+	extra->KernelDll_offset = ULONG_DIFF(ptr, extra);
 	extra->KernelDll_length = len * sizeof(WCHAR);
 	ptr += len + 1;
 
@@ -531,6 +561,9 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInje
 	//
 
 	memcpy(lowdata.NtDelayExecution_code, &m_syscall_data[2], (32 * 4));
+	// lowdata.NtDeviceIoControlFile_code
+	// lowdata.NtFlushInstructionCache_code
+	// lowdata.NtProtectVirtualMemory_code
 
 	//
 	// allocate space for and write the lowlevel (SbieLow) code

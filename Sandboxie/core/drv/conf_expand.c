@@ -409,6 +409,10 @@ _FX WCHAR *Conf_Expand_Helper(
 
         wcscpy(varvalue, args->sandbox);
 
+    } else if (_wcsicmp(varname, L"SbieHome") == 0) {
+
+        wcscpy(varvalue, Driver_HomePathNt);
+
     } else if (_wcsicmp(varname, L"sid") == 0) {
 
         wcscpy(varvalue, args->sid);

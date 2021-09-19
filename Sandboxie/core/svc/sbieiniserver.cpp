@@ -834,6 +834,13 @@ ULONG SbieIniServer::CacheConfig()
 
             m_pConfigIni = new SConfigIni;
             m_pConfigIni->Encoding = 0;
+
+            // set a ini header with a descriptive comment
+            m_pConfigIni->Sections.push_back(SIniSection{ L"" });
+            m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
+            m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie-Plus configuration file" });
+            m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
+
             m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });
 
             status = STATUS_SUCCESS; // the file does not exist that's ok
@@ -1032,7 +1039,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
     // check if this is a delete section request and if so execute it
     //
 
-    if ((wcscmp(req->setting, L"*") == 0 && wcslen(req->setting) == 0 && (!have_value))) 
+    if (wcscmp(req->setting, L"*") == 0 && !have_value) 
     {
         for (auto I = m_pConfigIni->Sections.begin(); I != m_pConfigIni->Sections.end(); ++I)
         {

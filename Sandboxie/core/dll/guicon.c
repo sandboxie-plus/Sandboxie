@@ -79,6 +79,11 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 
 _FX BOOLEAN Gui_InitConsole1(void)
 {
+    // NoSbieDesk BEGIN
+    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
+
     //
     // on Windows 7 we may need to connect this process to a console
     // instance (conhost.exe) outside the sandbox
@@ -143,16 +148,6 @@ _FX BOOL Gui_ConnectConsole(ULONG ShowFlag)
 {
     HANDLE ProcessToken;
     NTSTATUS status;
-
-	// NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE)) {
-
-		typedef BOOL(*P_AllocConsole)();
-		P_AllocConsole AllocConsole = (P_AllocConsole)
-			GetProcAddress(Dll_Kernel32, "AllocConsole");
-		return AllocConsole();
-	}
-	// NoSbieDesk END
 
     //
     // on Windows 7, a console process tries to launch conhost.exe through

@@ -353,3 +353,43 @@ _FX NTSTATUS MyValidateCertificate(void)
 
     return status;
 }
+
+
+//---------------------------------------------------------------------------
+// Util_GetProcessPidByName
+//---------------------------------------------------------------------------
+
+_FX HANDLE Util_GetProcessPidByName(const WCHAR* name) 
+{
+    HANDLE pid = (HANDLE)-1;
+    USHORT name_len = wcslen(name) * sizeof(WCHAR);
+    ULONG bufferSize = 0;
+    if (ZwQuerySystemInformation(SystemProcessesAndThreadsInformation, NULL, 0, &bufferSize) == STATUS_INFO_LENGTH_MISMATCH) 
+    {
+        if (bufferSize) 
+        {
+            PVOID memory = ExAllocatePoolWithTag(PagedPool, bufferSize, tzuk);
+            if (memory) 
+            {
+                NTSTATUS ntstatus = ZwQuerySystemInformation(SystemProcessesAndThreadsInformation, memory, bufferSize, &bufferSize);
+                if (NT_SUCCESS(ntstatus)) 
+                {
+                    SYSTEM_PROCESS_INFORMATION* processEntry = (SYSTEM_PROCESS_INFORMATION*)memory;
+                    for (;;)
+                    {
+                        if (processEntry->ProcessName.Length == name_len && _wcsicmp(name, processEntry->ProcessName.Buffer) == 0) 
+                        {
+                            pid = (HANDLE)processEntry->ProcessId;
+                            break;
+                        }
+                        if (!processEntry->NextEntryOffset)
+                            break;
+                        processEntry = (SYSTEM_PROCESS_INFORMATION*)((UCHAR*)processEntry + processEntry->NextEntryOffset);
+                    }
+                }
+                ExFreePoolWithTag(memory, tzuk);
+            }
+        }
+    }
+    return pid;
+}

@@ -886,6 +886,11 @@ _FX void Dll_FixWow64Syscall(void)
 {
     static UCHAR *_code = NULL;
 
+    // NoSysCallHooks BEGIN
+    if(SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+        return;
+    // NoSysCallHooks END
+
     //
     // the Wow64 thunking layer for syscalls in ntdll32 has several thunks:
     // thunk 0 calls the corresponding NtXxx export in the 64-bit ntdll.

@@ -7,9 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.7 / 5.51.7] - 2021-09-??
+## [0.9.7 / 5.52.7] - 2021-09-??
 
 ### Added
+- added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)
+- added "SbieTrace=y" option to trace the intaraction between sandboxie processes and the core sandboxie components 
+- when initializing an empty sandbox MSI debug keys are set to generate msi service debug output
+- added "DisableComProxy=y" alowing to disable com proxying through the service
 
 ### Changed
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance
@@ -19,10 +23,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)
+- fixed custom autoexec commands being executed on each box start instead of only on the initialization
+- fixed a design issue limiting the maximal amount of processes in one box to 511
+- fixed handle leaks in the lingering process monitor mechanism
 
-
-
-
+### removed
+- removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018
+- removed support for Messenger Plus! Live MSN messanger addon as MSN messager is EOL sinde 2013
 
 
 ## [0.9.6 / 5.51.6] - 2021-09-12

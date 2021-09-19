@@ -1532,7 +1532,7 @@ CBoxedProcessPtr CSbieAPI::GetProcessById(quint32 ProcessId) const
 	return m_BoxedProxesses.value(ProcessId);
 }
 
-quint32 CSbieAPI::GetImageType(quint32 ProcessId)
+quint32 CSbieAPI::QueryProcessInfo(quint32 ProcessId, quint32 InfoClass)
 {
 	__declspec(align(8)) ULONG64 ResultValue;
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -1542,7 +1542,7 @@ quint32 CSbieAPI::GetImageType(quint32 ProcessId)
 	args->func_code             = API_QUERY_PROCESS_INFO;
 
 	args->process_id.val64      = (ULONG64)(ULONG_PTR)ProcessId;
-	args->info_type.val64       = (ULONG64)(ULONG_PTR)'gpit';
+	args->info_type.val64       = (ULONG64)(ULONG_PTR)InfoClass;
 	args->info_data.val64       = (ULONG64)(ULONG_PTR)&ResultValue;
 	args->ext_data.val64        = (ULONG64)(ULONG_PTR)0;
 

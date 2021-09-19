@@ -90,6 +90,8 @@ CRITICAL_SECTION  VT_CriticalSection;
 
 const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
 
+BOOLEAN Dll_SbieTrace = FALSE;
+
 //extern ULONG64 __security_cookie = 0;
 
 
@@ -218,6 +220,8 @@ _FX void Dll_InitInjected(void)
 	ULONG BoxKeyPathLen;
 	ULONG BoxIpcPathLen;
 
+    Dll_SbieTrace = SbieApi_QueryConfBool(NULL, L"SbieTrace", FALSE);
+
 	if (SbieApi_QueryConfBool(NULL, L"DebugTrace", FALSE)) {
 
 		Trace_Init();
@@ -333,10 +337,9 @@ _FX void Dll_InitInjected(void)
         // (for AutoExec function in custom module)
         //
 
-        ULONG *pids = Dll_AllocTemp(2048);
-        if (SbieApi_EnumProcess(NULL, pids) == 0 && pids[0] == 1)
+        ULONG pid_count = 0;
+        if (NT_SUCCESS(SbieApi_EnumProcessEx(NULL,FALSE,-1,NULL,&pid_count)) && pid_count == 1)
             Dll_FirstProcessInBox = TRUE;
-        Dll_Free(pids);
     }
 
     if (ok) {
@@ -706,14 +709,17 @@ _FX ULONG_PTR Dll_Ordinal1(
 {
     struct _INJECT_DATA {           // keep in sync with core/low/inject.c
 
-        ULONG64 sbielow_data;
-        ULONG64 RtlFindActCtx_SavedArg1;
-        ULONG64 x1;
-        ULONG64 x2;
+        ULONG64 sbielow_data;               // syscall_data_len & extra_data_offset;
+        ULONG64 RtlFindActCtx_SavedArg1;    // LdrLoadDll
+
+        ULONG64 LdrGetProcAddr;
+        ULONG64 NtRaiseHardError;
         ULONG64 RtlFindActCtx;
         ULONG   RtlFindActCtx_Protect;
+        
+        UCHAR   Reserved[188];              // the rest of _INJECT_DATA
 
-    } *inject;
+    } *inject; // total size 232
 
     typedef ULONG_PTR (*P_RtlFindActivationContextSectionString)(
                     ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3,

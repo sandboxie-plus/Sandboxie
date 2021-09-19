@@ -38,6 +38,7 @@ public:
 	virtual QString			GetCommandLine() const  { return m_CommandLine; }
 	virtual QString			GetFileName() const { return m_ImagePath; }
 	virtual QDateTime		GetTimeStamp() const { return m_StartTime; }
+	virtual quint32			GetProcessFlags() const { return m_ProcessFlags; }
 	virtual quint32			GetImageType() const { return m_ImageType; }
 
 	virtual SB_STATUS		Terminate();
@@ -60,6 +61,7 @@ protected:
 	quint32			m_ParendPID;
 	QString			m_ImageName;
 	QString			m_ImagePath;
+	quint32			m_ProcessFlags;
 	quint32			m_ImageType;
 	QString			m_CommandLine;
 	quint32			m_SessionId;

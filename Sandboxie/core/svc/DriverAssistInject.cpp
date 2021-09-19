@@ -78,8 +78,10 @@ void DriverAssist::InjectLow(void *_msg)
 	//
 
 	BOOLEAN bHostInject = msg->bHostInject;
+    // NoSysCallHooks BEGIN
 	if (!bHostInject && SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE))
 		bHostInject = 2;
+    // NoSysCallHooks END
 
 	errlvl = SbieDll_InjectLow(hProcess, msg->is_wow64, bHostInject, TRUE);
 	if(errlvl != 0)
@@ -89,11 +91,15 @@ void DriverAssist::InjectLow(void *_msg)
     // put process into a job for win32 restrictions
     //
 
+    // NoSbieDesk BEGIN
+    BOOLEAN GuiProxy = SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE);
+    // NoSbieDesk END
+    // DisableComProxy BEGIN
+    BOOLEAN ComProxy = SbieApi_QueryConfBool(boxname, L"DisableComProxy", FALSE);
+    // DisableComProxy END
+	if(GuiProxy || ComProxy) // if we need a GUI/Console or a COM Proxy
     if (!msg->bHostInject)
     {
-		// NoSbieDesk BEGIN
-		//if(status != 0 || !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE)) // we need the proxy for com as well...
-		// NoSbieDesk END
         if(! GuiServer::GetInstance()->InitProcess(
                 hProcess, msg->process_id, msg->session_id,
                 msg->add_to_job)) {

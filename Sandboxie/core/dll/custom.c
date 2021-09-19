@@ -40,6 +40,7 @@ static BOOLEAN  DisableDCOM(void);
 static BOOLEAN  DisableRecycleBin(void);
 static BOOLEAN  DisableWinRS(void);
 static BOOLEAN  DisableWerFaultUI(void);
+static BOOLEAN  EnableMsiDebugging(void);
 static BOOLEAN  Custom_EnableBrowseNewProcess(void);
 static BOOLEAN  Custom_DisableBHOs(void);
 static HANDLE   OpenExplorerKey(
@@ -75,21 +76,23 @@ _FX BOOLEAN CustomizeSandbox(void)
         Custom_CreateRegLinks();
         DisableDCOM();
         DisableRecycleBin();
-        DisableWinRS();
+        if (SbieApi_QueryConfBool(NULL, L"BlockWinRM", TRUE))
+            DisableWinRS();
         DisableWerFaultUI();
+        EnableMsiDebugging();
         Custom_EnableBrowseNewProcess();
         DeleteShellAssocKeys(0);
         Custom_DisableBHOs();
 
         GetSetCustomLevel('1');
+
+        //
+        // process user-defined AutoExec settings
+        //
+
+        if (AutoExecHKey)
+            AutoExec();
     }
-
-    //
-    // process user-defined AutoExec settings
-    //
-
-    if (AutoExecHKey)
-        AutoExec();
 
     //
     // finish
@@ -382,6 +385,58 @@ _FX BOOLEAN DisableWinRS(void)
 
 
 //---------------------------------------------------------------------------
+// EnableMsiDebugging
+//
+// Enable Msi Server debug output
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN EnableMsiDebugging(void)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING uni;
+    HANDLE hKeyRoot;
+    HANDLE hKeyMSI;
+    HANDLE hKeyWin;
+
+    // Open HKLM
+    RtlInitUnicodeString(&uni, Custom_PrefixHKLM);
+    InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    if (NtOpenKey(&hKeyRoot, KEY_READ, &objattrs) == STATUS_SUCCESS)
+    {
+        // open/create WER parent key
+        RtlInitUnicodeString(&uni, L"SOFTWARE\\Policies\\Microsoft\\Windows");
+        InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyRoot, NULL);
+        if (Key_OpenOrCreateIfBoxed(&hKeyWin, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+        {
+            // open/create WER key
+            RtlInitUnicodeString(&uni, L"Installer");
+            InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyWin, NULL);
+            if (Key_OpenOrCreateIfBoxed(&hKeyMSI, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+            {
+                // set Debug = 7
+                DWORD seven = 7;
+                RtlInitUnicodeString(&uni, L"Debug");
+                status = NtSetValueKey(hKeyMSI, &uni, 0, REG_DWORD, &seven, sizeof(seven));
+
+                // set Logging = "voicewarmupx"
+                static const WCHAR str[] = L"voicewarmupx";
+                RtlInitUnicodeString(&uni, L"Logging");
+                status = NtSetValueKey(hKeyMSI, &uni, 0, REG_SZ, (BYTE *)&str, sizeof(str));
+
+                NtClose(hKeyMSI);
+            }
+            NtClose(hKeyWin);
+        }
+        NtClose(hKeyRoot);
+    }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 // DisableWerFaultUI
 //
 // WerFault's GUI doesn't work very well.  We will do our own in proc.c
@@ -433,6 +488,7 @@ _FX BOOLEAN DisableWerFaultUI(void)
 
     return TRUE;
 }
+
 
 //---------------------------------------------------------------------------
 // DisableRecycleBin
@@ -967,63 +1023,116 @@ _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
 
 
 //---------------------------------------------------------------------------
-// Custom_MsgPlusLive
+// Custom_ComServer
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Custom_MsgPlusLive(HMODULE module)
+_FX void Custom_ComServer(void)
 {
-    extern const WCHAR *Key_Registry;
-    extern const WCHAR *Key_UserCurrent;
+    //
+    // the scenario of a forced COM server occurs when the COM server
+    // program is forced to run in a sandbox, and it is started by COM
+    // outside the sandbox in response to a COM CoCreateInstance request.
+    // (typically this is Internet Explorer or Windows Media Player.)
+    //
+    // the program in the sandbox can't talk to COM outside the sandbox
+    // to serve the request, so we need some workaround.  prior to
+    // version 4, the workaround was to grant the process full access
+    // to the COM IPC objects (like epmapper) and then use the
+    // comserver module to simulate a COM server.  This means we talked
+    // to the real COM using expected COM interfaces, in order to get
+    // the url or file that has to be opened.  then we restarted the
+    // process (this time without access to COM IPC objects), specifying
+    // the path to the target url or file.
+    //
+    // in v4 this no longer works because the forced process is running
+    // with untrusted privileges so the real COM will not let it sign up
+    // as a COM server.  (COM returns error "out of memory" when we try
+    // to use CoRegisterClassObject.)  to work around this, the comserver
+    // module was moved into SbieSvc, and here we just issue a special
+    // SbieDll_RunSandboxed request which runs an instance of SbieSvc
+    // outside the sandbox.  SbieSvc (in file core/svc/comserver9.c) then
+    // talks to real COM to get the target url or file, then it starts the
+    // requested server program in the sandbox.
+    //
+    // the simulated COM server is implemented in core/svc/comserver9.c
+    //
 
-    NTSTATUS status;
-    WCHAR *unibuf;
-    UNICODE_STRING uni;
-    OBJECT_ATTRIBUTES objattrs;
-    HANDLE hKey;
-    ULONG i;
+    WCHAR *cmdline;
+    WCHAR exepath[MAX_PATH + 4];
+    STARTUPINFO StartupInfo;
+    PROCESS_INFORMATION ProcessInformation;
 
     //
-    // force Messenger Live Plus! to hook its stuff in spite of Sandboxie
+    // process is probably a COM server if has both the forced process flag
+    // and the protected process flag (see Ipc_IsComServer in core/drv/ipc.c)
+    // we also check that several other flags are not set
     //
 
-    InitializeObjectAttributes(
-        &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    const ULONG _FlagsOn    = SBIE_FLAG_FORCED_PROCESS
+                            | SBIE_FLAG_PROTECTED_PROCESS;
+    const ULONG _FlagsOff   = SBIE_FLAG_IMAGE_FROM_SANDBOX
+                            | SBIE_FLAG_PROCESS_IN_PCA_JOB;
 
-    unibuf = Dll_Alloc(256 * sizeof(WCHAR));
+    if ((Dll_ProcessFlags & (_FlagsOn | _FlagsOff)) != _FlagsOn)
+        return;
 
-    for (i = 0; i < 2; ++i) {
+    //
+    // check if we're running in an IEXPLORE.EXE / WMPLAYER.EXE process,
+    // which was given the -Embedding command line switch
+    //
 
-        wcscpy(unibuf, Key_Registry);
-        wcscat(unibuf, Key_UserCurrent);
-        wcscat(unibuf, L"\\software\\");
-        if (i == 0)
-            wcscat(unibuf, L"Patchou\\Messenger Plus! Live");
-        else if (i == 1)
-            wcscat(unibuf, L"Yuna Software\\Messenger Plus!\\"
-                           L"Windows Live Messenger");
-        wcscat(unibuf, L"\\GlobalSettings");
+    if (    Dll_ImageType != DLL_IMAGE_INTERNET_EXPLORER
+        &&  Dll_ImageType != DLL_IMAGE_WINDOWS_MEDIA_PLAYER
+        &&  Dll_ImageType != DLL_IMAGE_NULLSOFT_WINAMP
+        &&  Dll_ImageType != DLL_IMAGE_PANDORA_KMPLAYER) {
 
-        RtlInitUnicodeString(&uni, unibuf);
-
-        status = Key_OpenIfBoxed(&hKey, KEY_SET_VALUE, &objattrs);
-        if (NT_SUCCESS(status)) {
-
-            ULONG zero = 0;
-
-            RtlInitUnicodeString(&uni, L"SafeHook");
-
-            status = NtSetValueKey(
-                hKey, &uni, 0, REG_DWORD, &zero, sizeof(ULONG));
-
-            NtClose(hKey);
-        }
+        return;
     }
 
-    Dll_Free(unibuf);
+    cmdline = GetCommandLine();
+    if (! cmdline)
+        return;
+    if (! (wcsstr(cmdline, L"/Embedding") ||
+           wcsstr(cmdline, L"-Embedding")))
+        return;
 
-    return TRUE;
+    //
+    // we are a COM server process that was started by DcomLaunch outside
+    // the sandbox but forced to run in the sandbox.  we need to run SbieSvc
+    // outside the sandbox so it can talk to COM to get the invoked url,
+    // and then restart the server program in the sandbox
+    //
+
+    GetModuleFileName(NULL, exepath, MAX_PATH);
+
+    SetEnvironmentVariable(ENV_VAR_PFX L"COMSRV_EXE", exepath);
+    SetEnvironmentVariable(ENV_VAR_PFX L"COMSRV_CMD", cmdline);
+
+    memzero(&StartupInfo, sizeof(STARTUPINFO));
+    StartupInfo.cb = sizeof(STARTUPINFO);
+    StartupInfo.dwFlags = STARTF_FORCEOFFFEEDBACK;
+
+    if (Proc_ImpersonateSelf(TRUE)) {
+
+        // *COMSRV* as cmd line tells SbieSvc ProcessServer to run
+        // SbieSvc SANDBOXIE_ComProxy_ComServer:BoxName
+        // see also core/svc/ProcessServer.cpp
+        // and      core/svc/comserver9.c
+        BOOL ok = SbieDll_RunSandboxed(L"*THREAD*", L"*COMSRV*", L"", 0,
+                                       &StartupInfo, &ProcessInformation);
+
+        if (ok)
+            WaitForSingleObject(ProcessInformation.hProcess, INFINITE);
+    }
+
+    ExitProcess(0);
 }
+
+
+//---------------------------------------------------------------------------
+// BEYOND HERE BE DRAGONS - workarounds for non windows components
+//---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------
@@ -1274,133 +1383,6 @@ _FX BOOLEAN Custom_Avast_SnxHk(HMODULE module)
 
 
 //---------------------------------------------------------------------------
-// Custom_EMET_DLL
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN Custom_EMET_DLL(HMODULE hmodule)
-{
-    //
-    // EMET v4 (final) hooks VirtualProtect in a way that causes
-    // Gui_Hook_CREATESTRUCT_Handler to hang, so we want to avoid placing
-    // the hook if the EMET DLL is loaded in the process
-    //
-
-    extern BOOLEAN Gui_EMET_DLL_Loaded;     // guiclass.c
-    Gui_EMET_DLL_Loaded = TRUE;
-    return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
-// Custom_ComServer
-//---------------------------------------------------------------------------
-
-
-_FX void Custom_ComServer(void)
-{
-    //
-    // the scenario of a forced COM server occurs when the COM server
-    // program is forced to run in a sandbox, and it is started by COM
-    // outside the sandbox in response to a COM CoCreateInstance request.
-    // (typically this is Internet Explorer or Windows Media Player.)
-    //
-    // the program in the sandbox can't talk to COM outside the sandbox
-    // to serve the request, so we need some workaround.  prior to
-    // version 4, the workaround was to grant the process full access
-    // to the COM IPC objects (like epmapper) and then use the
-    // comserver module to simulate a COM server.  This means we talked
-    // to the real COM using expected COM interfaces, in order to get
-    // the url or file that has to be opened.  then we restarted the
-    // process (this time without access to COM IPC objects), specifying
-    // the path to the target url or file.
-    //
-    // in v4 this no longer works because the forced process is running
-    // with untrusted privileges so the real COM will not let it sign up
-    // as a COM server.  (COM returns error "out of memory" when we try
-    // to use CoRegisterClassObject.)  to work around this, the comserver
-    // module was moved into SbieSvc, and here we just issue a special
-    // SbieDll_RunSandboxed request which runs an instance of SbieSvc
-    // outside the sandbox.  SbieSvc (in file core/svc/comserver9.c) then
-    // talks to real COM to get the target url or file, then it starts the
-    // requested server program in the sandbox.
-    //
-    // the simulated COM server is implemented in core/svc/comserver9.c
-    //
-
-    WCHAR *cmdline;
-    WCHAR exepath[MAX_PATH + 4];
-    STARTUPINFO StartupInfo;
-    PROCESS_INFORMATION ProcessInformation;
-
-    //
-    // process is probably a COM server if has both the forced process flag
-    // and the protected process flag (see Ipc_IsComServer in core/drv/ipc.c)
-    // we also check that several other flags are not set
-    //
-
-    const ULONG _FlagsOn    = SBIE_FLAG_FORCED_PROCESS
-                            | SBIE_FLAG_PROTECTED_PROCESS;
-    const ULONG _FlagsOff   = SBIE_FLAG_IMAGE_FROM_SANDBOX
-                            | SBIE_FLAG_PROCESS_IN_PCA_JOB;
-
-    if ((Dll_ProcessFlags & (_FlagsOn | _FlagsOff)) != _FlagsOn)
-        return;
-
-    //
-    // check if we're running in an IEXPLORE.EXE / WMPLAYER.EXE process,
-    // which was given the -Embedding command line switch
-    //
-
-    if (    Dll_ImageType != DLL_IMAGE_INTERNET_EXPLORER
-        &&  Dll_ImageType != DLL_IMAGE_WINDOWS_MEDIA_PLAYER
-        &&  Dll_ImageType != DLL_IMAGE_NULLSOFT_WINAMP
-        &&  Dll_ImageType != DLL_IMAGE_PANDORA_KMPLAYER) {
-
-        return;
-    }
-
-    cmdline = GetCommandLine();
-    if (! cmdline)
-        return;
-    if (! (wcsstr(cmdline, L"/Embedding") ||
-           wcsstr(cmdline, L"-Embedding")))
-        return;
-
-    //
-    // we are a COM server process that was started by DcomLaunch outside
-    // the sandbox but forced to run in the sandbox.  we need to run SbieSvc
-    // outside the sandbox so it can talk to COM to get the invoked url,
-    // and then restart the server program in the sandbox
-    //
-
-    GetModuleFileName(NULL, exepath, MAX_PATH);
-
-    SetEnvironmentVariable(ENV_VAR_PFX L"COMSRV_EXE", exepath);
-    SetEnvironmentVariable(ENV_VAR_PFX L"COMSRV_CMD", cmdline);
-
-    memzero(&StartupInfo, sizeof(STARTUPINFO));
-    StartupInfo.cb = sizeof(STARTUPINFO);
-    StartupInfo.dwFlags = STARTF_FORCEOFFFEEDBACK;
-
-    if (Proc_ImpersonateSelf(TRUE)) {
-
-        // *COMSRV* as cmd line tells SbieSvc ProcessServer to run
-        // SbieSvc SANDBOXIE_ComProxy_ComServer:BoxName
-        // see also core/svc/ProcessServer.cpp
-        // and      core/svc/comserver9.c
-        BOOL ok = SbieDll_RunSandboxed(L"*THREAD*", L"*COMSRV*", L"", 0,
-                                       &StartupInfo, &ProcessInformation);
-
-        if (ok)
-            WaitForSingleObject(ProcessInformation.hProcess, INFINITE);
-    }
-
-    ExitProcess(0);
-}
-
-
-//---------------------------------------------------------------------------
 // Custom_SYSFER_DLL
 //---------------------------------------------------------------------------
 
@@ -1465,3 +1447,34 @@ _FX BOOLEAN Custom_SYSFER_DLL(HMODULE hmodule)
         }
     }
 }*/
+
+//---------------------------------------------------------------------------
+// Handles ActivClient's acscmonitor.dll which crashes firefox in sandboxie.
+//---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+// Acscmonitor_LoadLibrary
+//---------------------------------------------------------------------------
+
+ULONG CALLBACK Acscmonitor_LoadLibrary(LPVOID lpParam)
+{
+    // Acscmonitor is a plugin to Firefox which create a thread on initialize.
+    // Firefox has a habit of initializing the module right before it's about
+    // to unload the DLL, which is causing the crash.
+    // Our solution is to prevent the library from ever being removed by holding
+    // a reference to it.
+    LoadLibraryW(L"acscmonitor.dll");
+    return 0;
+}
+
+//---------------------------------------------------------------------------
+// Acscmonitor_Init
+//---------------------------------------------------------------------------
+
+_FX BOOLEAN Acscmonitor_Init(HMODULE hDll)
+{
+	HANDLE ThreadHandle = CreateThread(NULL, 0, Acscmonitor_LoadLibrary, (LPVOID)0, 0, NULL);
+	if (ThreadHandle)
+		CloseHandle(ThreadHandle); 
+    return TRUE;
+}

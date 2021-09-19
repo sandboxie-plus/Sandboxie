@@ -31,6 +31,13 @@
 #include <stdio.h>
 #include <psapi.h>
 
+//---------------------------------------------------------------------------
+// Variables
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Gui_UseProxyService = TRUE;
+
 
 //---------------------------------------------------------------------------
 // Function Pointers in USER32.DLL
@@ -356,6 +363,10 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     if (! Gdi_InitZero())       // only if Gdi_Init was not called yet
         return FALSE;
 
+    // NoSbieDesk BEGIN
+    Gui_UseProxyService = !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
+    // NoSbieDesk END
+
     GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);
@@ -532,15 +543,13 @@ import_fail:
     if (ok)
         ok = Gui_Init3();
 
-	// NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
-		return ok;
-	// NoSbieDesk END
+    if (Gui_UseProxyService) {
 
-    if (ok)
-        ok = Gui_InitWinHooks();
+        if (ok)
+            ok = Gui_InitWinHooks();
 
-    SBIEDLL_HOOK_GUI(AttachThreadInput);
+        SBIEDLL_HOOK_GUI(AttachThreadInput);
+    }
 
     return ok;
 }
@@ -586,20 +595,26 @@ _FX BOOLEAN Gui_Init2(void)
     if (! Gui_OpenAllWinClasses) {
 
         SBIEDLL_HOOK_GUI(UserHandleGrantAccess);
-        SBIEDLL_HOOK_GUI(IsWindow);
-        SBIEDLL_HOOK_GUI(IsWindowEnabled);
-        SBIEDLL_HOOK_GUI(IsWindowVisible);
-        SBIEDLL_HOOK_GUI(IsWindowUnicode);
-        SBIEDLL_HOOK_GUI(IsIconic);
-        SBIEDLL_HOOK_GUI(IsZoomed);
+
+        if(Gui_UseProxyService) {
+            SBIEDLL_HOOK_GUI(IsWindow);
+            SBIEDLL_HOOK_GUI(IsWindowEnabled);
+            SBIEDLL_HOOK_GUI(IsWindowVisible);
+            SBIEDLL_HOOK_GUI(IsWindowUnicode);
+            SBIEDLL_HOOK_GUI(IsIconic);
+            SBIEDLL_HOOK_GUI(IsZoomed);
+        }
+
         SBIEDLL_HOOK_GUI(MoveWindow);
         SBIEDLL_HOOK_GUI(SetWindowPos);
-        SBIEDLL_HOOK_GUI(MapWindowPoints);
-        SBIEDLL_HOOK_GUI(ClientToScreen);
-        SBIEDLL_HOOK_GUI(ScreenToClient);
-        SBIEDLL_HOOK_GUI(GetClientRect);
-        SBIEDLL_HOOK_GUI(GetWindowRect);
-        SBIEDLL_HOOK_GUI(GetWindowInfo);
+        if (Gui_UseProxyService) {
+            SBIEDLL_HOOK_GUI(MapWindowPoints);
+            SBIEDLL_HOOK_GUI(ClientToScreen);
+            SBIEDLL_HOOK_GUI(ScreenToClient);
+            SBIEDLL_HOOK_GUI(GetClientRect);
+            SBIEDLL_HOOK_GUI(GetWindowRect);
+            SBIEDLL_HOOK_GUI(GetWindowInfo);
+        }
         SBIEDLL_HOOK_GUI(AnimateWindow);
         SBIEDLL_HOOK_GUI(WaitForInputIdle);
         SBIEDLL_HOOK_GUI(ActivateKeyboardLayout);
@@ -800,6 +815,11 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     RTL_USER_PROCESS_PARAMETERS *ProcessParms;
     ULONG_PTR rc = 0;
     ULONG errlvl = 0;
+
+    // NoSbieDesk BEGIN
+	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+		return TRUE;
+	// NoSbieDesk END
 
     //
     // process is already connected to window station, connect to desktop
@@ -1820,7 +1840,7 @@ _FX BOOL Gui_SetWindowPos(
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
 
-    if (! Gui_IsSameBox(hWnd, NULL, NULL)) {
+    if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         GUI_SET_WINDOW_POS_REQ req;
         GUI_SET_WINDOW_POS_RPL *rpl;
@@ -1950,6 +1970,9 @@ _FX BOOL Gui_EndTask(HWND hWnd, BOOL fShutDown, BOOL fForce)
 
 _FX BOOL Gui_ConsoleControl(ULONG ctlcode, ULONG *data, ULONG_PTR unknown)
 {
+    // NoSbieDesk BEGIN
+    if (!SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	// NoSbieDesk END
     if (ctlcode == 7) {
         //
         // in Windows 8, conhost.exe uses ConsoleControl with

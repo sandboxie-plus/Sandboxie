@@ -163,6 +163,9 @@ P_D3D11CreateDevice D3D11CreateDevice = NULL;
 /*
 extern P_D3D11CreateDevice D3D11CreateDevice;
 */
+
+ULONGLONG GetTickCount64();
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -170,7 +173,7 @@ extern P_D3D11CreateDevice D3D11CreateDevice;
 
 static BOOLEAN Gui_D3D9_Loaded = FALSE;
 
-static ULONG Gui_GetShellWindow_LastTicks = 0;
+static ULONG64 Gui_GetShellWindow_LastTicks = 0;
 
 
 //---------------------------------------------------------------------------
@@ -186,10 +189,10 @@ _FX BOOLEAN Gui_InitEnum(void)
 
     if (! Gui_OpenAllWinClasses) {
 
-        if (! Gui_HookQueryWindow())
+        if (Gui_UseProxyService && !Gui_HookQueryWindow())
             return FALSE;
 
-        if (! Dll_SkipHook(L"enumwin")) {
+        if (Gui_UseProxyService && !Dll_SkipHook(L"enumwin")) {
 
             SBIEDLL_HOOK_GUI(EnumWindows);
             SBIEDLL_HOOK_GUI(EnumChildWindows);
@@ -197,7 +200,7 @@ _FX BOOLEAN Gui_InitEnum(void)
             SBIEDLL_HOOK_GUI(EnumDesktopWindows);
         }
 
-        if (! Dll_SkipHook(L"findwin")) {
+        if (!Dll_SkipHook(L"findwin")) {
 
             SBIEDLL_HOOK_GUI(FindWindowA);
             SBIEDLL_HOOK_GUI(FindWindowW);
@@ -750,7 +753,7 @@ _FX HWND Gui_FindWindowW(
         }
     }
 
-    if (! hwndResult) {
+    if (Gui_UseProxyService && ! hwndResult) {
         hwndResult = Gui_FindWindowCommon(
                         'fw w', NULL, NULL, lpClassName, lpWindowName);
     }
@@ -808,7 +811,7 @@ _FX HWND Gui_FindWindowA(
         }
     }
 
-    if (! hwndResult) {
+    if (Gui_UseProxyService && ! hwndResult) {
         hwndResult = Gui_FindWindowCommon(
                         'fw a', NULL, NULL, lpClassName, lpWindowName);
     }
@@ -869,7 +872,7 @@ _FX HWND Gui_FindWindowExW(
         }
     }
 
-    if (! hwndResult) {
+    if (Gui_UseProxyService && ! hwndResult) {
         hwndResult = Gui_FindWindowCommon(
             'fwxw', hwndParent, hwndChildAfter, lpClassName, lpWindowName);
     }
@@ -930,7 +933,7 @@ _FX HWND Gui_FindWindowExA(
         }
     }
 
-    if (! hwndResult) {
+    if (Gui_UseProxyService && ! hwndResult) {
         hwndResult = Gui_FindWindowCommon(
             'fwxa', hwndParent, hwndChildAfter, lpClassName, lpWindowName);
     }
@@ -1004,7 +1007,7 @@ _FX HWND Gui_GetShellWindow(void)
     static HWND _LastHwnd = NULL;
     HWND hwnd;
 
-    ULONG TicksNow = GetTickCount();
+    ULONG64 TicksNow = GetTickCount64();
     if (TicksNow - Gui_GetShellWindow_LastTicks <= 5000)
         return _LastHwnd;
     Gui_GetShellWindow_LastTicks = TicksNow;
@@ -1012,8 +1015,12 @@ _FX HWND Gui_GetShellWindow(void)
     hwnd = NULL;
     if (Gui_RenameClasses)
         hwnd = Gui_FindWindowW(_Progman, NULL);
-    if ((! hwnd) && Gui_D3D9_Loaded && __sys_FindWindowW)
-        hwnd = Gui_FindWindowCommon('fw w', NULL, NULL, _Progman, NULL);
+    if ((!hwnd) && Gui_D3D9_Loaded && __sys_FindWindowW) {
+        if (!Gui_UseProxyService)
+            hwnd = __sys_FindWindowW(_Progman, NULL);
+        else
+            hwnd = Gui_FindWindowCommon('fw w', NULL, NULL, _Progman, NULL); 
+    }
     _LastHwnd = hwnd;
     return hwnd;
 }

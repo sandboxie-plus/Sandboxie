@@ -478,8 +478,11 @@ QString CSbieProcess::GetStatusStr() const
 		Status = tr("Terminated");
 	//else if (m_bSuspended)
 	//	Status = tr("Suspended");
-	else
+	else {
+		if ((m_ProcessFlags & 0x00000002) != 0) // SBIE_FLAG_FORCED_PROCESS
+			Status = tr("Forced ");
 		Status = tr("Running");
+	}
 
 	if(m_SessionId != theAPI->GetSessionID())
 		Status += tr(" in session %1").arg(m_SessionId);

@@ -731,7 +731,7 @@ void WFP_DeleteProcess(PROCESS* proc)
 		return; // nothing to do
 
 	KIRQL irql; 
-	WFP_PROCESS* wfp_proc;
+	WFP_PROCESS* wfp_proc = NULL;
 	HANDLE processId = proc->pid;
 
 #ifdef _WIN64
@@ -740,7 +740,7 @@ void WFP_DeleteProcess(PROCESS* proc)
 	KeAcquireSpinLock(&WFP_MapLock, &irql);
 #endif
 
-	wfp_proc = map_remove(&WFP_Processes, processId);
+	map_take(&WFP_Processes, processId, &wfp_proc, 0);
     
 	KeReleaseSpinLock(&WFP_MapLock, irql);
 

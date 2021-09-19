@@ -119,7 +119,6 @@
     <ClCompile Include="taskbar.c">
       <Filter>gui</Filter>
     </ClCompile>
-    <ClCompile Include="acscmonitor.c" />
     <ClCompile Include="pst.cpp">
       <Filter>pst</Filter>
     </ClCompile>

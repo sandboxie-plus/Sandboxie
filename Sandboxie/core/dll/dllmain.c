@@ -743,13 +743,13 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
-    bHostInject = data->bHostInject == 1;
+    bHostInject = data->flags.bHostInject == 1;
 
     //
     // the SbieLow data area includes values that are useful to us
     //
 
-    Dll_IsWow64 = data->is_wow64;
+    Dll_IsWow64 = data->flags.is_wow64 == 1;
 
     SbieApi_DeviceHandle = (HANDLE)data->api_device_handle;
 

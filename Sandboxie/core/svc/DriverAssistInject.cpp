@@ -77,13 +77,19 @@ void DriverAssist::InjectLow(void *_msg)
 	// inject the lowlevel.dll into the target process
 	//
 
-	BOOLEAN bHostInject = msg->bHostInject;
-    // NoSysCallHooks BEGIN
-	if (!bHostInject && SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE))
-		bHostInject = 2;
-    // NoSysCallHooks END
+    SBIELOW_FLAGS sbieLow;
+    sbieLow.init_flags = 0;
 
-	errlvl = SbieDll_InjectLow(hProcess, msg->is_wow64, bHostInject, TRUE);
+    sbieLow.is_wow64 = msg->is_wow64;
+    sbieLow.bHostInject = msg->bHostInject;
+    // NoSysCallHooks BEGIN
+    sbieLow.bNoSysHooks = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
+    // NoSysCallHooks END
+    // NoSbieDesk BEGIN
+    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE);
+    // NoSbieDesk END
+
+	errlvl = SbieDll_InjectLow(hProcess, sbieLow.init_flags, TRUE);
 	if(errlvl != 0)
 		goto finish;
 
@@ -92,10 +98,10 @@ void DriverAssist::InjectLow(void *_msg)
     //
 
     // NoSbieDesk BEGIN
-    BOOLEAN GuiProxy = SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE);
+    BOOLEAN GuiProxy = !SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
     // DisableComProxy BEGIN
-    BOOLEAN ComProxy = SbieApi_QueryConfBool(boxname, L"DisableComProxy", FALSE);
+    BOOLEAN ComProxy = !SbieApi_QueryConfBool(boxname, L"DisableComProxy", FALSE);
     // DisableComProxy END
 	if(GuiProxy || ComProxy) // if we need a GUI/Console or a COM Proxy
     if (!msg->bHostInject)

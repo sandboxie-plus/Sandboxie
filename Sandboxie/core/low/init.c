@@ -376,7 +376,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             jTableTarget[2] = 0xc2;
             *(ULONG *)&jTableTarget[3] = SyscallPtr[0];
             // jmp <4 byte SystemServiceAsm>
-            if (data->is_win10) {
+            if (data->flags.is_win10) {
                 jTableTarget[7] = 0x48;
                 jTableTarget[8] = 0xe9;
                 *(ULONG *)&jTableTarget[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (jTableTarget + 13));
@@ -424,9 +424,9 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             ZwXxxPtr[1] = 0xC7;
             ZwXxxPtr[2] = 0xC2;
             *(ULONG *)&ZwXxxPtr[3] = SyscallPtr[0];
-            if (!data->long_diff) {
+            if (!data->flags.long_diff) {
 
-                if (data->is_win10) {
+                if (data->flags.is_win10) {
                     ZwXxxPtr[7] = 0x48;             // jmp SystemServiceAsm
                     ZwXxxPtr[8] = 0xE9;             // jmp SystemServiceAsm
                     *(ULONG *)&ZwXxxPtr[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (ZwXxxPtr + 13));
@@ -479,7 +479,7 @@ _FX void InitConsole(SBIELOW_DATA *data)
     ULONG64 addr64;
     ULONG   addr32;
 
-    if (! data->is_wow64)
+    if (! data->flags.is_wow64)
         return;
 
     //
@@ -564,11 +564,11 @@ _FX ULONG_PTR EntrypointC(SBIELOW_DATA *data,void *ActivationContext, void *Syst
 
         // WaitForDebugger(data);
 
-		if(!data->bHostInject)
+		if(!data->flags.bHostInject && !data->flags.bNoSysHooks)
 			InitSyscalls(data, SystemService);
 #ifdef _WIN64
 		InitInject(data, ActivationContext, ActivationContext64);
-		if (!data->bHostInject)
+		if (!data->flags.bNoConsole)
 			InitConsole(data);
 #else
 		InitInject(data, ActivationContext);

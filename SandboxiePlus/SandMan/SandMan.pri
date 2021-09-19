@@ -70,7 +70,7 @@ TRANSLATIONS += sandman_de.ts \
     sandman_pl.ts \
     sandman_pt.ts \
     sandman_ru.ts \
-    sandman_tr.ts \
+#   sandman_tr.ts \ (unmaintained)
     sandman_zh-CN.ts \
     sandman_zh-TW.ts
 

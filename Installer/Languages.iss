@@ -100,11 +100,11 @@ dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaa
 dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
 dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd. Het moet eerst verwijderd worden. Wilt u het nu verwijderen?
 dutch.RunSandboxedMenu=In &sandbox uitvoeren
-;dutch.UninstallTaskLabel1=Type verwijdering selecteren
-;dutch.UninstallTaskLabel2=Hoe wilt u Sandboxie-Plus verwijderen?
-;dutch.UninstallTaskLabel3=Configuratiebestanden en sandboxen behouden%nDit is de aanbevolen optie als u Sandboxie-Plus opnieuw wilt installeren en uw configuratiebestanden en sandboxen wilt behouden.
-;dutch.UninstallTaskLabel4=Configuratiebestanden verwijderen%nSelecteer deze optie om de configuratiebestanden Sandboxie.ini en Sandboxie-Plus.ini wilt verwijderen en de sandboxen ongewijzigd wilt laten.
-;dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelecteer deze optie om alle configuratiebestanden en sandboxen te verwijderen, inclusief de Sandbox-map die zich in aangepaste paden met FileRootPath bevindt.
+dutch.UninstallTaskLabel1=Type verwijdering selecteren
+dutch.UninstallTaskLabel2=Hoe wilt u Sandboxie-Plus verwijderen?
+dutch.UninstallTaskLabel3=Configuratiebestanden en sandboxen behouden%nDit is de aanbevolen optie als u Sandboxie-Plus opnieuw wilt installeren en uw configuratiebestanden en sandboxen wilt behouden.
+dutch.UninstallTaskLabel4=Configuratiebestanden verwijderen%nSelecteer deze optie om de configuratiebestanden Sandboxie.ini en Sandboxie-Plus.ini wilt verwijderen en de sandboxen ongewijzigd wilt laten.
+dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelecteer deze optie om alle configuratiebestanden en sandboxen te verwijderen, inclusief de Sandbox-map die zich in aangepaste paden met FileRootPath bevindt.
 
 ; German
 german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu

@@ -5,27 +5,27 @@
     <name>CFileBrowserWindow</name>
     <message>
         <source>%1 - Files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Файлы</translation>
     </message>
     <message>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Создать ярлык</translation>
+        <translation>Создать ярлык</translation>
     </message>
     <message>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить в любую папку</translation>
     </message>
     <message>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить в ту же папку</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
+        <translation>Выбрать каталог</translation>
     </message>
     <message>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Создать ярлык для песочницы %1</translation>
+        <translation>Создать ярлык для песочницы %1</translation>
     </message>
 </context>
 <context>
@@ -351,47 +351,47 @@
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Любой</translation>
     </message>
     <message>
         <source>TCP</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP</translation>
     </message>
     <message>
         <source>UDP</source>
-        <translation type="unfinished"></translation>
+        <translation>UDP</translation>
     </message>
     <message>
         <source>ICMP</source>
-        <translation type="unfinished"></translation>
+        <translation>ICMP</translation>
     </message>
     <message>
         <source>Allow access</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить доступ</translation>
     </message>
     <message>
         <source>Block using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировать с помощью платформы фильтрации Windows</translation>
     </message>
     <message>
         <source>Block by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировать путем запрета доступа к сетевым устройствам</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить</translation>
     </message>
     <message>
         <source>Block (WFP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировать (WFP)</translation>
     </message>
     <message>
         <source>Block (NDev)</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировать (NDev)</translation>
     </message>
     <message>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировать</translation>
     </message>
 </context>
 <context>
@@ -460,7 +460,7 @@
     </message>
     <message>
         <source>Yes and add to allowed programs</source>
-        <translation>Да и добавить в разрешенные программы</translation>
+        <translation>Да, и добавить в разрешенные программы</translation>
     </message>
 </context>
 <context>
@@ -541,30 +541,6 @@
         <translation>Вы хотите, чтобы диспетчер очереди печати мог писать вне песочницы для %1 (%2)?</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
-File name: %3</source>
-        <translation type="vanished">Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
-Имя файла: %3</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?
-Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернету?
-Полный путь: %3</translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.
-The file was written by: %3</source>
-        <translation type="vanished">%1 может быть быстро восстановлен из %2.
-Файл был написан: %3</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
-Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
-Полный путь: %4</translation>
-    </message>
-    <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
@@ -616,24 +592,16 @@ Full path: %4</source>
         <translation>%1 - Восстановление файла</translation>
     </message>
     <message>
-        <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="vanished">Один или несколько выбранных файлов находятся в общей сетевой папке и должны быть восстановлены на локальный диск. Выберите папку для восстановления всех выбранных файлов.</translation>
-    </message>
-    <message>
-        <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="vanished">В песочнице %1 файлов и %2 папок, которые занимают %3 байт дискового пространства.</translation>
-    </message>
-    <message>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 дискового пространства.</translation>
     </message>
     <message>
         <source>Clear this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить этот список</translation>
     </message>
     <message>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступно %1 новых файлов для восстановления.</translation>
     </message>
 </context>
 <context>
@@ -703,11 +671,11 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Помощь</translation>
+        <translation>Помощь (&amp;H)</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Вид</translation>
+        <translation>Вид (&amp;V)</translation>
     </message>
     <message>
         <source>Error deleting sandbox folder: %1</source>
@@ -716,10 +684,6 @@ Full path: %4</source>
     <message>
         <source>About Sandboxie-Plus</source>
         <translation>О Sandboxie-Plus</translation>
-    </message>
-    <message>
-        <source>Driver version: %1</source>
-        <translation type="vanished">Версия драйвера: %1</translation>
     </message>
     <message>
         <source>Sandboxie-Plus v%1</source>
@@ -865,23 +829,15 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation>&amp;Опции</translation>
+        <translation>Опции (&amp;O)</translation>
     </message>
     <message>
         <source>Show/Hide</source>
         <translation>Показать/Скрыть</translation>
     </message>
     <message>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">Перед удалением песочницу необходимо очистить.</translation>
-    </message>
-    <message>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Имя песочницы может содержать только буквы, цифры и символы подчеркивания, которые отображаются как пробелы.</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation type="vanished">Перед переименованием песочницу необходимо очистить.</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -893,7 +849,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Maintenance</source>
-        <translation>&amp;Обслуживание</translation>
+        <translation>Обслуживание (&amp;M)</translation>
     </message>
     <message>
         <source>The sandbox name can not be a device name.</source>
@@ -913,7 +869,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Sandbox</source>
-        <translation>&amp;Песочница</translation>
+        <translation>Песочница (&amp;S)</translation>
     </message>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
@@ -961,7 +917,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&amp;Advanced</source>
-        <translation>&amp;Расширенный</translation>
+        <translation>Расширенный (&amp;A)</translation>
     </message>
     <message>
         <source>Executing maintenance operation, please wait...</source>
@@ -1002,10 +958,6 @@ Full path: %4</source>
     <message>
         <source>PID %1: </source>
         <translation>PID %1: </translation>
-    </message>
-    <message>
-        <source>Error Status: %1</source>
-        <translation type="vanished">Статус ошибки: %1</translation>
     </message>
     <message>
         <source>Terminate All Processes</source>
@@ -1112,10 +1064,6 @@ Full path: %4</source>
         <translation>Невозможно удалить снимок, который используется несколькими более поздними снимками</translation>
     </message>
     <message>
-        <source>Unknown Error Status: %1</source>
-        <translation type="vanished">Неизвестный статус ошибки: %1</translation>
-    </message>
-    <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>Вы хотите открыть %1 в изолированном (да) или не изолированном (нет) браузере?</translation>
     </message>
@@ -1142,10 +1090,6 @@ Full path: %4</source>
     <message>
         <source>Failed to start required Sandboxie components</source>
         <translation>Не удалось запустить необходимые компоненты Sandboxie</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
-        <translation type="vanished">Sandboxie-Plus был запущен в портативном режиме, вы хотите поместить папку SandBox в ее родительский каталог?</translation>
     </message>
     <message>
         <source>The file %1 already exists, do you want to overwrite it?</source>
@@ -1190,10 +1134,6 @@ Full path: %4</source>
     <message>
         <source>Show Hidden Boxes</source>
         <translation>Показать скрытые песочницы</translation>
-    </message>
-    <message>
-        <source>Select box:</source>
-        <translation type="vanished">Выберите песочницу:</translation>
     </message>
     <message>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
@@ -1248,73 +1188,58 @@ Full path: %4</source>
         <translation>Ведение журнала трассировки</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
-
-Do you want to do the clean up?</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation type="vanished">Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
-
-Вы хотите выполнить очистку?</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
-<byte value="xd"/>
-
-Do you want to do the clean up?</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation type="vanished">Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные службы. Это вызовет запрос на получение административных привилегий.
-
-Вы хотите выполнить очистку?</translation>
-    </message>
-    <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
 <byte value="xd"/>
 Do you want to do the clean up?</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные сервисы. Это потребует административных привилегий.
+
+Вы хотите сделать уборку?</translation>
     </message>
     <message>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная операция &apos;%1&apos; запрошена из командной строки</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
 Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus был запущен в портативном режиме, вы хотите поместить папку Sandbox в ее родительский каталог?
+Да, выберет: %1
+Нет, выберет: %2</translation>
     </message>
     <message>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation type="unfinished"></translation>
+        <translation>ВНИМАНИЕ: другой агент (вероятно, SbieCtrl.exe) уже управляет этим сеансом Sandboxie, пожалуйста, сначала закройте его и подключитесь повторно, чтобы взять на себя управление.</translation>
     </message>
     <message>
         <source>The config password must not be longer than 64 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль конфигурации не должен быть длиннее 64 символов</translation>
     </message>
     <message>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Manager нельзя запускать в песочнице!</translation>
     </message>
     <message>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать группу песочниц</translation>
     </message>
     <message>
         <source>Show All Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать все сеансы</translation>
     </message>
     <message>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Состояние ошибки: 0x%1 (%2)</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный статус ошибки: 0x%1</translation>
     </message>
 </context>
 <context>
@@ -1371,20 +1296,12 @@ No will choose: %2</source>
         <translation>Sbie Crypto (CSP)</translation>
     </message>
     <message>
-        <source>Sbie WuAu Svc</source>
-        <translation type="vanished">Sbie WuAu Svc</translation>
-    </message>
-    <message>
         <source>Sbie BITS</source>
         <translation>Sbie BITS (фоновая интеллектуальная служба передачи)</translation>
     </message>
     <message>
         <source>Sbie Svc</source>
         <translation>Sbie Svc</translation>
-    </message>
-    <message>
-        <source>Msi Installer</source>
-        <translation type="vanished">Msi Installer</translation>
     </message>
     <message>
         <source>Trusted Installer</source>
@@ -1403,16 +1320,8 @@ No will choose: %2</source>
         <translation>Internet Explorer</translation>
     </message>
     <message>
-        <source>FireFox</source>
-        <translation type="vanished">FireFox</translation>
-    </message>
-    <message>
         <source>Windows Media Player</source>
         <translation>Проигрыватель Windows Media</translation>
-    </message>
-    <message>
-        <source>WinAmp</source>
-        <translation type="vanished">WinAmp</translation>
     </message>
     <message>
         <source>KMPlayer</source>
@@ -1464,10 +1373,6 @@ No will choose: %2</source>
         <translation>Flash Player</translation>
     </message>
     <message>
-        <source>FireFox Plugin Container</source>
-        <translation type="vanished">FireFox плагин-контейнер</translation>
-    </message>
-    <message>
         <source>Generic Web Browser</source>
         <translation>Стандартный веб-браузер</translation>
     </message>
@@ -1497,11 +1402,11 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Sbie WuauServ</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie WuauServ</translation>
     </message>
     <message>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translation> в сеансе %1</translation>
     </message>
 </context>
 <context>
@@ -1525,10 +1430,6 @@ No will choose: %2</source>
         <translation>Отбросить права администратора</translation>
     </message>
     <message>
-        <source>Run eMail Client</source>
-        <translation type="vanished">Запустить почтовый клиент</translation>
-    </message>
-    <message>
         <source>Remove Group</source>
         <translation>Удалить группу</translation>
     </message>
@@ -1539,14 +1440,6 @@ No will choose: %2</source>
     <message>
         <source>Sandbox Presets</source>
         <translation>Предустановки песочницы</translation>
-    </message>
-    <message>
-        <source>Do you want to %1 the selected process(es)</source>
-        <translation type="vanished">Вы хотите %1 выбранных процессов</translation>
-    </message>
-    <message>
-        <source>Move to Group</source>
-        <translation type="vanished">Переместить в группу</translation>
     </message>
     <message>
         <source>Remove Sandbox</source>
@@ -1575,10 +1468,6 @@ No will choose: %2</source>
     <message>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Введите новое имя для песочницы.</translation>
-    </message>
-    <message>
-        <source>Add Group</source>
-        <translation type="vanished">Добавить группу</translation>
     </message>
     <message>
         <source>Delete Content</source>
@@ -1631,24 +1520,12 @@ No will choose: %2</source>
         <translation>Вы действительно хотите удалить выбранные группы?</translation>
     </message>
     <message>
-        <source>Run Web Browser</source>
-        <translation type="vanished">Запустить веб-браузер</translation>
-    </message>
-    <message>
         <source>Allow Network Shares</source>
         <translation>Разрешить сетевые ресурсы</translation>
     </message>
     <message>
-        <source>Run Cmd.exe</source>
-        <translation type="vanished">Запустить Cmd.exe</translation>
-    </message>
-    <message>
         <source>Snapshots Manager</source>
         <translation>Менеджер снимков</translation>
-    </message>
-    <message>
-        <source>Run Explorer</source>
-        <translation type="vanished">Запустите проводник</translation>
     </message>
     <message>
         <source>Block Internet Access</source>
@@ -1724,10 +1601,6 @@ No will choose: %2</source>
         <translation>Группа не может быть собственным родителем.</translation>
     </message>
     <message>
-        <source>Run Cmd.exe as Admin</source>
-        <translation type="vanished">Запуск Cmd.exe от имени администратора</translation>
-    </message>
-    <message>
         <source>Ask for UAC Elevation</source>
         <translation>Запросить повышение уровня UAC</translation>
     </message>
@@ -1736,119 +1609,115 @@ No will choose: %2</source>
         <translation>Эмуляция прав администратора</translation>
     </message>
     <message>
-        <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="vanished">Вы хотите %1 выбранных процессов?</translation>
-    </message>
-    <message>
         <source>Default Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Веб-браузер по умолчанию</translation>
     </message>
     <message>
         <source>Default eMail Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Почтовый клиент по умолчанию</translation>
     </message>
     <message>
         <source>Windows Explorer</source>
-        <translation type="unfinished">Проводник</translation>
+        <translation>Проводник</translation>
     </message>
     <message>
         <source>Registry Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор реестра</translation>
     </message>
     <message>
         <source>Programs and Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Программы и компоненты</translation>
     </message>
     <message>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать группу песочниц</translation>
     </message>
     <message>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать группу</translation>
     </message>
     <message>
         <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Командная строка</translation>
     </message>
     <message>
         <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструменты в песочнице</translation>
     </message>
     <message>
         <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translation>Командная строка (от администратора)</translation>
     </message>
     <message>
         <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Командная строка (32-bit)</translation>
     </message>
     <message>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить записи автозапуска</translation>
     </message>
     <message>
         <source>Browse Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр содержимого</translation>
     </message>
     <message>
         <source>Box Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Содержимое песочницы</translation>
     </message>
     <message>
         <source>Open Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть реестр</translation>
     </message>
     <message>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить песочницу/группу</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished">Двигать вверх</translation>
+        <translation>Двигать вверх</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished">Двигать вниз</translation>
+        <translation>Двигать вниз</translation>
     </message>
     <message>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, введите новое имя для группы.</translation>
     </message>
     <message>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это название группы уже используется.</translation>
     </message>
     <message>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить записи на (отрицательные значения перемещают вверх, положительные значения перемещают вниз):</translation>
     </message>
     <message>
         <source>Terminate without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершить без запроса</translation>
     </message>
     <message>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите %1 %2?</translation>
     </message>
     <message>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>выбранные процессы</translation>
     </message>
 </context>
 <context>
     <name>CSelectBoxWindow</name>
     <message>
         <source>Sandboxie-Plus - Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Запуск в песочнице</translation>
     </message>
     <message>
         <source>Are you sure you want to run the program outside the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уверены, что хотите запустить программу вне песочницы?</translation>
     </message>
     <message>
         <source>Please select a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите песочницу.</translation>
     </message>
 </context>
 <context>
@@ -1903,23 +1772,23 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Спасибо за поддержку разработки Sandboxie-Plus.</translation>
     </message>
     <message>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот сертификат поддержки недействителен.</translation>
     </message>
     <message>
         <source>Don&apos;t show any icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать никаких значков</translation>
     </message>
     <message>
         <source>Show Plus icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать Plus значок</translation>
     </message>
     <message>
         <source>Show Classic icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать классический значок</translation>
     </message>
 </context>
 <context>
@@ -2011,19 +1880,15 @@ No will choose: %2</source>
         <translation>%1</translation>
     </message>
     <message>
-        <source>Show only sellectes box</source>
-        <translation type="vanished">Показать только выбранную песочницу</translation>
-    </message>
-    <message>
         <source>Filter selected box only</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр только выбранная песочница</translation>
     </message>
 </context>
 <context>
     <name>FileBrowserWindow</name>
     <message>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished">SandboxiePlus - Снимки</translation>
+        <translation>SandboxiePlus - Снимки</translation>
     </message>
 </context>
 <context>
@@ -2208,10 +2073,6 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>Добавить файл/папку</translation>
     </message>
     <message>
-        <source>Block internet access for all programs except those added to the list.</source>
-        <translation type="vanished">Заблокировать доступ в Интернет для всех программ, кроме добавленных в список.</translation>
-    </message>
-    <message>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>Сообщение о проблеме 1307, когда программе запрещен доступ в Интернет</translation>
     </message>
@@ -2320,18 +2181,6 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>Добавить ключ реестра</translation>
     </message>
     <message>
-        <source>Sandbox protection</source>
-        <translation type="vanished">Защита песочницы</translation>
-    </message>
-    <message>
-        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
-        <translation type="vanished">Вы можете сгруппировать программы вместе и дать им название группы. Группы программ могут использоваться с некоторыми настройками вместо имен программ.</translation>
-    </message>
-    <message>
-        <source>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</source>
-        <translation type="vanished">Защитить системные процессы в песочнице от непривилегированных процессов вне песочницы</translation>
-    </message>
-    <message>
         <source>Add Command</source>
         <translation>Добавить комманду</translation>
     </message>
@@ -2408,10 +2257,6 @@ instead of &quot;*&quot;.</source>
     <message>
         <source>Appearance</source>
         <translation>Внешний вид</translation>
-    </message>
-    <message>
-        <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation type="vanished">Добавить изолированные процессы к объектам задания (рекомендуется)</translation>
     </message>
     <message>
         <source>Remove Program</source>
@@ -2523,10 +2368,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Трассировка COM класса</translation>
     </message>
     <message>
-        <source>&lt;- for this one the above does not apply</source>
-        <translation type="vanished">&lt;- для этого то что выше не применяется</translation>
-    </message>
-    <message>
         <source>Block access to the printer spooler</source>
         <translation>Заблокировать доступ к диспетчеру печати принтера</translation>
     </message>
@@ -2587,10 +2428,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>(Рекомендуемые)</translation>
     </message>
     <message>
-        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="vanished">Примечание по безопасности: приложения с повышенными правами, работающие под контролем Sandboxie, с токеном администратора, имеют больше возможностей для обхода изоляции и изменения системы за пределами песочницы.</translation>
-    </message>
-    <message>
         <source>Raw Disk access</source>
         <translation>Прямой доступ к диску</translation>
     </message>
@@ -2601,10 +2438,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <source>Warn when an application opens a harddrive handle</source>
         <translation>Предупреждать, когда приложение открывает дескриптор жесткого диска</translation>
-    </message>
-    <message>
-        <source>Access Options</source>
-        <translation type="vanished">Опции доступа</translation>
     </message>
     <message>
         <source>Other restrictions</source>
@@ -2655,24 +2488,8 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
         <translation>Изоляция</translation>
     </message>
     <message>
-        <source>Allow sandboxed programs to Change User Passwords and alike</source>
-        <translation type="vanished">Разрешить изолированным программам изменять пароли пользователей и тому подобное</translation>
-    </message>
-    <message>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
         <translation>Различные расширенные функции изоляции могут нарушить совместимость с некоторыми приложениями, если вы используете эту песочницу &lt;b&gt;НЕ для безопасности&lt;/b&gt;, но для простой переносимости приложений, изменив эти параметры, вы можете восстановить совместимость, пожертвовав некоторой безопасностью.&lt;br&gt;Эти параметры можно безопасно использовать, если вы не предоставляете никаких прав администратора изолированному процессу.</translation>
-    </message>
-    <message>
-        <source>Allow sandboxed programs to Managing Hardware/Devices</source>
-        <translation type="vanished">Разрешить изолированным программам управлять оборудованием и устройствами</translation>
-    </message>
-    <message>
-        <source>Open access to windows Security Account Manager</source>
-        <translation type="vanished">Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
-    </message>
-    <message>
-        <source>Open access to windows Local Security Authority</source>
-        <translation type="vanished">Открытый доступ к Windows Local Security Authority</translation>
     </message>
     <message>
         <source>Access isolation</source>
@@ -2744,103 +2561,103 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать эту песочницу в окне выбора &apos;Выполнить в песочнице&apos;</translation>
     </message>
     <message>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечание по безопасности: расширенные приложения, работающие под контролем Sandboxie, с токеном администратора или системным токеном, имеют больше возможностей для обхода изоляции и изменения системы за пределами песочницы.</translation>
     </message>
     <message>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить MSIServer работать с изолированным системным токеном и при необходимости применить другие исключения</translation>
     </message>
     <message>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечание: Исключения для установщика Msi не требуются, но если вы столкнетесь с проблемами при установке пакета msi, которому вы доверяете, этот параметр может помочь успешно завершить установку. Вы также можете попробовать отключить сброс прав администратора.</translation>
     </message>
     <message>
         <source>Access Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничения доступа</translation>
     </message>
     <message>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете сгруппировать программы и дать группе название. Группы программ могут использоваться с некоторыми настройками вместо названий программ. Группы, определенные для ящика, перезаписывают группы, определенные в шаблонах.</translation>
     </message>
     <message>
         <source>Process Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничения процесса</translation>
     </message>
     <message>
         <source>Set network/internet access for unlisted processes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить доступ к сети/Интернету для неуказанных процессов:</translation>
     </message>
     <message>
         <source>Network Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Сетевые ограничения</translation>
     </message>
     <message>
         <source>Test Rules, Program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Правила тестирования, программа:</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт:</translation>
     </message>
     <message>
         <source>IP:</source>
-        <translation type="unfinished"></translation>
+        <translation>IP:</translation>
     </message>
     <message>
         <source>Protocol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Протокол:</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <source>Remove Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить правило</translation>
     </message>
     <message>
         <source>Add Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить правило</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Действие</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Протокол</translation>
     </message>
     <message>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
-        <translation type="unfinished"></translation>
+        <translation>ВНИМАНИЕ: Платформа фильтрации Windows не включена с драйвером, поэтому эти правила будут применяться только в пользовательском режиме и не могут быть применены!!! Это означает, что вредоносные приложения могут их обойти.</translation>
     </message>
     <message>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить использование вложенных объектов заданий (экспериментально, работает в Windows 8 и новее)</translation>
     </message>
     <message>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить изолированным программам управлять оборудованием/устройствами</translation>
     </message>
     <message>
         <source>Open access to Windows Local Security Authority</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть доступ к серверу проверки подлинности локальной системы безопасности</translation>
     </message>
     <message>
         <source>Network Firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Сетевой брандмауэр</translation>
     </message>
 </context>
 <context>
@@ -2873,11 +2690,11 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Да</translation>
+        <translation>Да (&amp;Y)</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Нет</translation>
+        <translation>Нет (&amp;N)</translation>
     </message>
 </context>
 <context>
@@ -2889,10 +2706,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>Add Folder</source>
         <translation>Добавить папку</translation>
-    </message>
-    <message>
-        <source>Recover to</source>
-        <translation type="vanished">Восстановить в</translation>
     </message>
     <message>
         <source>Recover</source>
@@ -2920,30 +2733,30 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Recover to...</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить в...</translation>
     </message>
 </context>
 <context>
     <name>SelectBoxWindow</name>
     <message>
         <source>SandboxiePlus select box</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus выбор песочницы</translation>
     </message>
     <message>
         <source>Select the sandbox in which to start the program, installer or document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите песочницу, в которой следует запустить программу, установщик или документ.</translation>
     </message>
     <message>
         <source>Run As UAC Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск от имени администратора UAC</translation>
     </message>
     <message>
         <source>Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить в песочнице</translation>
     </message>
     <message>
         <source>Run Outside the Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить вне песочницы</translation>
     </message>
 </context>
 <context>
@@ -2977,20 +2790,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Периодически проверять наличие обновлений Sandboxie-Plus</translation>
     </message>
     <message>
-        <source>General Options</source>
-        <translation type="vanished">Общие настройки</translation>
-    </message>
-    <message>
-        <source>Program Restrictions</source>
-        <translation type="vanished">Ограничения программы</translation>
-    </message>
-    <message>
         <source>Restart required (!)</source>
         <translation>Требуется перезагрузка (!)</translation>
-    </message>
-    <message>
-        <source>Tray options</source>
-        <translation type="vanished">Опции лотка</translation>
     </message>
     <message>
         <source>Enable</source>
@@ -3021,10 +2822,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Следить за изменениями в Sandboxie.ini</translation>
     </message>
     <message>
-        <source>Show Sys-Tray</source>
-        <translation type="vanished">Показать системный лоток</translation>
-    </message>
-    <message>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>В будущем не проверять совместимость программного обеспечения</translation>
     </message>
@@ -3039,10 +2836,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>Remove Program</source>
         <translation>Удалить программу</translation>
-    </message>
-    <message>
-        <source>Software Compatibility</source>
-        <translation type="vanished">Совместимость программного обеспечения</translation>
     </message>
     <message>
         <source>On main window close:</source>
@@ -3063,10 +2856,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>Separate user folders</source>
         <translation>Отдельные пользовательские папки</translation>
-    </message>
-    <message>
-        <source>Advanced Options</source>
-        <translation type="vanished">Расширенные настройки</translation>
     </message>
     <message>
         <source>Prevent the listed programs from starting on this system</source>
@@ -3117,104 +2906,100 @@ Please note that this values are currently user specific and saved globally for 
         <translation>...</translation>
     </message>
     <message>
-        <source>Other settings</source>
-        <translation type="vanished">Другие настройки</translation>
-    </message>
-    <message>
         <source>Use Dark Theme (fully applied after a restart)</source>
         <translation>Использовать темную тему (полностью применяется после перезапуска)</translation>
     </message>
     <message>
         <source>General Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Общая конфигурация</translation>
     </message>
     <message>
         <source>Hotkey for terminating all boxed processes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Горячая клавиша для завершения всех процессов в песочнице:</translation>
     </message>
     <message>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры системного лотка</translation>
     </message>
     <message>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык UI:</translation>
     </message>
     <message>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Интеграция с оболочкой</translation>
     </message>
     <message>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск в песочнице - Действия</translation>
     </message>
     <message>
         <source>Always use DefaultBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда использовать DefaultBox</translation>
     </message>
     <message>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить диспетчер песочницы</translation>
     </message>
     <message>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширенная конфигурация</translation>
     </message>
     <message>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>Возможности песочницы</translation>
     </message>
     <message>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать платформу фильтрации Windows для ограничения доступа к сети (экспериментально)</translation>
     </message>
     <message>
         <source>Program Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Программный контроль</translation>
     </message>
     <message>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Защита конфигурации</translation>
     </message>
     <message>
         <source>Compatibility</source>
-        <translation type="unfinished">Совместимость</translation>
+        <translation>Совместимость</translation>
     </message>
     <message>
         <source>Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержка</translation>
     </message>
     <message>
         <source>Install updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Устанавливать обновления автоматически</translation>
     </message>
     <message>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Постоянно обновлять Sandboxie с помощью скользящих выпусков Windows и поддерживать совместимость со всеми веб-браузерами. Поддержите эту работу пожертвованием.&lt;br /&gt;Вы можете поддержать разработку, сделав &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;пожертвование PayPal&lt;/a&gt;, также работает с кредитными картами.&lt;br /&gt;Или вы можете предоставить постоянную поддержку с помощью &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;подписки Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите здесь сертификат сторонника</translation>
     </message>
     <message>
         <source>Support Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки поддержки</translation>
     </message>
     <message>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать восстанавливаемые файлы в виде уведомлений</translation>
     </message>
     <message>
         <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать значок в системном лотке:</translation>
     </message>
     <message>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторонники проекта Sandboxie-Plus получают &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;. Это похоже на лицензионный ключ, но для хороших людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
     </message>
     <message>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Срок действия этого сертификата сторонника истек, получите обновленный сертификат.</translation>
     </message>
 </context>
 <context>

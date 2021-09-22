@@ -30,6 +30,8 @@ typedef long NTSTATUS;
 #include "common/win32_ntddk.h"
 #include "common/my_version.h"
 #include "common/defines.h"
+#define WITHOUT_POOL
+#include "common/map.c"
 
 
 //---------------------------------------------------------------------------
@@ -51,11 +53,11 @@ typedef struct _LINGER_LEADER {
     WCHAR image[1];
 } LINGER_LEADER;
 
-typedef struct _MONITOR_PIDS {
-    ULONG pid;
-    HANDLE hProcessExit;
-    struct _MONITOR_PIDS *next;
-} MONITOR_PIDS;
+typedef struct _MONITOR_PID {
+    HANDLE hProcHandle;
+    HANDLE hProcWait;
+} MONITOR_PID;
+
 
 //---------------------------------------------------------------------------
 // Variables
@@ -75,8 +77,7 @@ static const WCHAR *_tiworker            = L"tiworker.exe";
 static CRITICAL_SECTION ProcessCritSec;
 static HANDLE heventProcessStart;
 static HANDLE heventRpcSs;
-static ULONG *pids; 
-static MONITOR_PIDS *pidList = NULL;
+static HASH_MAP pidMap;
 
 void RemovePid(ULONG myPid);
 
@@ -99,29 +100,10 @@ VOID CALLBACK WaitOrTimerCallback( _In_  PVOID lpParameter, _In_  BOOLEAN TimerO
 
 void RemovePid(ULONG myPid)
 {
-    MONITOR_PIDS *curr = pidList;
-    MONITOR_PIDS *p = NULL;
-
-    if (!curr) {
-        return;
-    }
-    while (curr)
-    {
-        if (curr->pid == myPid) {
-
-            if (curr == pidList) {
-                pidList = curr->next;
-                CloseHandle(curr->hProcessExit);
-                free(curr);
-            }
-            else {
-                p->next = curr->next;
-                free(curr);
-            }
-            break;
-        }
-        p = curr;
-        curr = curr->next;
+    MONITOR_PID monitorPid;
+    if (map_take(&pidMap, (void*)myPid, &monitorPid, sizeof(monitorPid))) {
+        CloseHandle(monitorPid.hProcHandle);
+        UnregisterWait(monitorPid.hProcWait);
     }
 }
 
@@ -129,54 +111,16 @@ void RemovePid(ULONG myPid)
 // AddPid 
 //---------------------------------------------------------------------------
 
-void AddPid(ULONG *myPids)
+void AddPid(ULONG *myPids, ULONG count)
 {
-    ULONG i;
-    MONITOR_PIDS *curr = pidList;
-    MONITOR_PIDS *p = NULL;
-    HANDLE hNewHandle;
-    HANDLE hProcHandle = 0;
-
-
-    if (myPids[0] < 1) {
-        return;
-    }
-
-    for (i = 1; i <= myPids[0]; i++)
+    for (ULONG i = 0; i <= count; i++)
     {
-        curr = pidList;
-        p = curr;
-        //new list
-        if (!curr) {
-            hProcHandle = OpenProcess(SYNCHRONIZE, FALSE, myPids[i]);
-
-            curr = (MONITOR_PIDS*)calloc(1, sizeof(MONITOR_PIDS));
-            curr->next = NULL;
-            curr->pid = myPids[i];
-            pidList = curr;
-            if (hProcHandle) {
-                RegisterWaitForSingleObject(&curr->hProcessExit, hProcHandle, WaitOrTimerCallback, (void *)curr->pid, INFINITE, WT_EXECUTEONLYONCE);
-            }
-        }
-        else {
-            while (curr)
-            {
-                if (curr->pid == myPids[i]) {
-                    break;
-                }
-                p = curr;
-                curr = curr->next;
-            }
-            //pid not found: add new member
-            if (!curr) {
-                hProcHandle = OpenProcess(SYNCHRONIZE, FALSE, myPids[i]);
-                curr = (MONITOR_PIDS*)calloc(1, sizeof(MONITOR_PIDS));
-                curr->pid = myPids[i];
-                p->next = curr;
-                curr->next = NULL;
-                if (hProcHandle) {
-                    RegisterWaitForSingleObject(&hNewHandle, hProcHandle, WaitOrTimerCallback, (void *)curr->pid, INFINITE, WT_EXECUTEONLYONCE);
-                }
+        if (map_get(&pidMap, (void*)myPids[i]) == NULL) { // not yet listed
+            MONITOR_PID monitorPid;
+            monitorPid.hProcHandle = OpenProcess(SYNCHRONIZE, FALSE, myPids[i]);
+            if (monitorPid.hProcHandle) {
+                RegisterWaitForSingleObject(&monitorPid.hProcWait, monitorPid.hProcHandle, WaitOrTimerCallback, (void *)myPids[i], INFINITE, WT_EXECUTEONLYONCE);
+                map_insert(&pidMap, (void*)myPids[i], &monitorPid, sizeof(monitorPid));
             }
         }
     }
@@ -201,8 +145,19 @@ DWORD ProcessStartMonitor(void *arg) {
     while (1) {
         rc = WaitForSingleObject(heventProcessStart, INFINITE);
         EnterCriticalSection(&ProcessCritSec);
-        SbieApi_EnumProcess(NULL, pids);
-        AddPid(pids);
+
+        ULONG pid_count = 0;
+        SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+        pid_count += 128;
+
+        ULONG* pids = HeapAlloc(
+            GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
+        SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+
+        AddPid(pids, pid_count);
+
+        HeapFree(GetProcessHeap(), 0, pids);
+
         LeaveCriticalSection(&ProcessCritSec);
     }
     return 0;
@@ -249,17 +204,9 @@ _FX BOOL LingerEnumWindowsProc(HWND hwnd, LPARAM lParam)
         ULONG idProcess = 0;
         GetWindowThreadProcessId(hwnd, &idProcess);
         if (idProcess) {
-            for (i = 0; i < 510; ++i) {
-                if (! pids[i])
-                    break;
-                if (pids[i] == idProcess) {
-                    i = 510;
-                    break;
-                }
-            }
-            if (i < 510) {
-                pids[i] = idProcess;
-                pids[i + 1] = 0;
+            for (i = 0; pids[i] != -1; i++) {
+                if (idProcess == pids[i])
+                    return FALSE;
             }
         }
     }
@@ -274,7 +221,6 @@ _FX BOOL LingerEnumWindowsProc(HWND hwnd, LPARAM lParam)
 
 int DoLingerLeader(void)
 {
-    ULONG *wnd_pids;
     ULONG i, j;
     HANDLE pids_i;
     WCHAR image[128];
@@ -286,12 +232,6 @@ int DoLingerLeader(void)
     LONG rc;
     BOOLEAN any_leaders;
 
-    pids = HeapAlloc(
-        GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * 512);
-
-    wnd_pids = HeapAlloc(
-        GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * 512);
-
     //
     // handle linger/leader process terminations
     //
@@ -302,7 +242,10 @@ int DoLingerLeader(void)
     leaders = NULL;
     any_leaders = FALSE;
 
+    map_init(&pidMap, NULL);
+    
     InitializeCriticalSection(&ProcessCritSec);
+
     heventRpcSs = CreateEvent(0, FALSE, FALSE, NULL);
 	HANDLE ThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ProcessStartMonitor, NULL, 0, NULL);
 	if (ThreadHandle)
@@ -334,9 +277,17 @@ int DoLingerLeader(void)
         // LingerProcess programs and will not be terminated
         //
 
-        SbieApi_EnumProcess(NULL, pids);
-        AddPid(pids);
-        for (i = 1; i <= pids[0]; ++i) {
+        ULONG pid_count = 0;
+        SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+        pid_count += 128;
+
+        ULONG* pids = HeapAlloc(
+            GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
+        SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+
+        AddPid(pids, pid_count);
+
+        for (i = 0; i <= pid_count; ++i) {
 
             pids_i = (HANDLE) (ULONG_PTR) pids[i];
             SbieApi_QueryProcess(pids_i, NULL, image, NULL, NULL);
@@ -348,6 +299,8 @@ int DoLingerLeader(void)
                 }
             }
         }
+
+        HeapFree(GetProcessHeap(), 0, pids);
 
         //
         // add standard lingers.  note that we don't check if any of
@@ -433,13 +386,12 @@ int DoLingerLeader(void)
     // now just wait until such time when our COM framework is
     // the only things left running in the sandbox, and then die
     //
-    SbieApi_EnumProcess(NULL, pids);
-    process_count = pids[0];
 
     while (1)
     {
         BOOLEAN any_leaders_local = FALSE;
         BOOLEAN terminate_and_stop = TRUE;
+
         //
         // wait for the process exit event (my_event)
         //
@@ -447,13 +399,19 @@ int DoLingerLeader(void)
         WaitForSingleObject(heventRpcSs, INFINITE);
         EnterCriticalSection(&ProcessCritSec);
 
-        SbieApi_EnumProcess(NULL, pids);
+        SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &process_count); // query count
+        process_count += 128;
 
-        process_count = pids[0];
+        ULONG* pids = HeapAlloc(
+            GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * (process_count + 1)); // allocate oen more for the -1 marker
+        SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &process_count); // query pids
+        pids[process_count] = -1; // set the end marker
+
         //
         // query running processes
         //
-        for (i = 1; i <= pids[0]; ++i) {
+
+        for (i = 0; i <= process_count; ++i) {
 
             //
             // if the process in question was started by Start.exe,
@@ -582,20 +540,15 @@ int DoLingerLeader(void)
         //
 
         if (terminate_and_stop) {
-            wnd_pids[0] = 0;
-            EnumWindows(LingerEnumWindowsProc, (LPARAM)wnd_pids);
-            for (i = 1; i <= pids[0]; ++i) {
-                for (j = 0; j < 510; ++j) {
-                    if (! wnd_pids[j])
-                        break;
-                    if (wnd_pids[j] == pids[i]) {
-                        terminate_and_stop = FALSE;
-                        break;
-                    }
-                }
-                if (! terminate_and_stop)
-                    break;
-            }
+
+            //
+            // if a process in the PID list has a window LingerEnumWindowsProc will return FALSE
+            // what causes the enumeration to abort and EnumWindows to return FALSE as well
+            //
+
+            BOOL ret = EnumWindows(LingerEnumWindowsProc, (LPARAM)pids);
+            if (ret == FALSE)
+                terminate_and_stop = FALSE;
         }
 
         //
@@ -603,7 +556,7 @@ int DoLingerLeader(void)
         //
 
         if (terminate_and_stop) {
-            for (i = 1; i <= pids[0]; ++i) {
+            for (i = 0; i <= process_count; ++i) {
                 HANDLE hProcess = NULL;
                 ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(
                                 (HANDLE) (ULONG_PTR) pids[i], 0);
@@ -637,8 +590,11 @@ int DoLingerLeader(void)
         //
         // kill all programs and quit
         //
+
         LeaveCriticalSection(&ProcessCritSec);
 do_kill_all:
+
+        HeapFree(GetProcessHeap(), 0, pids);
 
         if (terminate_and_stop) {
             SbieDll_KillAll(-1, NULL);

@@ -4,25 +4,59 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.6 / 5.51.6] - 2021-09-??
+
+
+
+## [0.9.7 / 5.52.7] - 2021-09-??
+
+### Added
+- added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)
+- added "SbieTrace=y" option to trace the intaraction between sandboxie processes and the core sandboxie components 
+- when initializing an empty sandbox MSI debug keys are set to generate msi service debug output
+- added "DisableComProxy=y" alowing to disable com proxying through the service
+
+### Changed
+- reworked SbieSvc ini server to allow settings caching and greatly improve performance
+-- Now comments in the Sandboxie.ini are being preserved as well as the order of all entries
+- enabled configuration section list replacement with a hash map to improve configuration performance
+- improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
+- disabled Turkish language on Plus UI for inactivity (by isaak654) [#1215](https://github.com/sandboxie-plus/Sandboxie/pull/1215)
+
+### Fixed
+- fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)
+- fixed custom autoexec commands being executed on each box start instead of only on the initialization
+- fixed a design issue limiting the maximal amount of processes in one box to 511
+- fixed handle leaks in the lingering process monitor mechanism
+- fixed build issue with explicit SHA256 fd algorithm for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)
+
+### removed
+- removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018
+- removed support for Messenger Plus! Live MSN messanger addon as MSN messager is EOL sinde 2013
+
+
+## [0.9.6 / 5.51.6] - 2021-09-12
 
 ### Added
 - added ability to rename groups [#1152](https://github.com/sandboxie-plus/Sandboxie/issues/1152)
-- added ability to define a custom order for the sandboxes, you can move using the move context menu, or holding alt + arrow key
+- added ability to define a custom order for the sandboxes, they can be moved by using the move context menu, or holding Alt + Arrow Key
+- added recovery to list to the recovery window: [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- added finder to the recovery window
 
 ### Changed
 - updated the BlockPort rule inside Template_BlockPorts to the new NetworkAccess format (by isaak654) [#1162](https://github.com/sandboxie-plus/Sandboxie/pull/1162)
+- default for immediate recovery behaviour is now to show the recovery window instead of using the notifications window [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- the new run dialog now requires a double-click [#1171](https://github.com/sandboxie-plus/Sandboxie/issues/1171)
+- reworked the recovery window
 
 ### Fixed
 - fixed issue with create group menu [#1151](https://github.com/sandboxie-plus/Sandboxie/issues/1151)
-- fixed issue when renaming a box it lost its group association
-- fixed issue with Thunderbird build 91+ [#1156](https://github.com/sandboxie-plus/Sandboxie/issues/1156)
+- fixed issue that caused a box to lose its group association when renaming
+- fixed issue with Thunderbird 91+ [#1156](https://github.com/sandboxie-plus/Sandboxie/issues/1156)
 - fixed an issue with file disposition handling [#1161](https://github.com/sandboxie-plus/Sandboxie/issues/1161)
-- fixed issue with windows 11 22449.1000 [#1164](https://github.com/sandboxie-plus/Sandboxie/issues/1164)
+- fixed issue with Windows 11 22449.1000 [#1164](https://github.com/sandboxie-plus/Sandboxie/issues/1164)
 - fixed SRWare Iron template (by Dyras) [#1146](https://github.com/sandboxie-plus/Sandboxie/pull/1146)
-- fixed labels position in Classic UI (by isaak654) [#1088](https://github.com/sandboxie-plus/Sandboxie/issues/1088)
-
-
+- fixed label positioning in Classic UI (by isaak654) [#1088](https://github.com/sandboxie-plus/Sandboxie/issues/1088)
+- fixed an old issue that occurred when only an asterisk was set as path [#971](https://github.com/sandboxie-plus/Sandboxie/issues/971)
 
 
 ## [0.9.5 / 5.51.5] - 2021-08-30

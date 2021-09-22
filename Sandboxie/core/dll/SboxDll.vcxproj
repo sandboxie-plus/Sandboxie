@@ -213,7 +213,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="acscmonitor.c" />
     <ClCompile Include="advapi.c">
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">false</ShowIncludes>
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">false</ShowIncludes>

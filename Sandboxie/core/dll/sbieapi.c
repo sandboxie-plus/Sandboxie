@@ -97,6 +97,13 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
     UNICODE_STRING uni;
     IO_STATUS_BLOCK MyIoStatusBlock;
 
+    if (Dll_SbieTrace && parms[0] != API_MONITOR_PUT2) {
+        WCHAR dbg[1024];
+        extern const wchar_t* Trace_SbieDrvFunc2Str(ULONG func);
+        Sbie_snwprintf(dbg, 1024, L"SbieApi_Ioctl: %s %s", Dll_ImageName, Trace_SbieDrvFunc2Str((ULONG)parms[0]));
+        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, dbg, FALSE);
+    }
+
     if (SbieApi_DeviceHandle == INVALID_HANDLE_VALUE) {
 
         RtlInitUnicodeString(&uni, API_DEVICE_NAME);

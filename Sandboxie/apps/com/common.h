@@ -110,11 +110,15 @@ _FX ULONG FindProcessId(
     process = (HANDLE)(ULONG_PTR)GetCurrentProcessId();
     SbieApi_QueryProcess(process, NULL, NULL, this_sid, NULL);
 
-    pids = HeapAlloc(
-        GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * 512);
-    SbieApi_EnumProcess(NULL, pids);
+    ULONG pid_count = 0;
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+    pid_count += 128;
 
-    for (i = 1; i <= pids[0]; ++i) {
+    pids = HeapAlloc(
+        GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+
+    for (i = 0; i <= pid_count; ++i) {
 
         HANDLE pids_i = (HANDLE)(ULONG_PTR)pids[i];
         SbieApi_QueryProcess(pids_i, NULL, image, that_sid, NULL);

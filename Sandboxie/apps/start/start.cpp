@@ -883,20 +883,28 @@ void List_Process_Ids(void)
 {
     CHAR msg[32];
     ULONG len, i;
-    ULONG pids[512];
+    ULONG* pids;
 
-    ULONG rc = SbieApi_EnumProcess(BoxName, pids);
+    ULONG pid_count = 0;
+    SbieApi_EnumProcessEx(BoxName, FALSE, -1, NULL, &pid_count); // query count
+    pid_count += 128;
+
+    pids = (ULONG*)MyHeapAlloc(sizeof(ULONG) * pid_count);
+    ULONG rc = SbieApi_EnumProcessEx(BoxName, FALSE, -1, pids, &pid_count); // query pids
+
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     if (rc != 0 || (! out))
         return;
 
-    sprintf(msg, "%d\r\n", pids[0]);
+    sprintf(msg, "%d\r\n", pid_count);
     WriteFile(out, msg, strlen(msg), &len, NULL);
 
-    for (i = 1; i <= pids[0]; ++i) {
+    for (i = 0; i <= pid_count; ++i) {
         sprintf(msg, "%d\r\n", pids[i]);
         WriteFile(out, msg, strlen(msg), &len, NULL);
     }
+
+    MyHeapFree(pids);
 }
 
 

@@ -43,6 +43,26 @@ typedef struct _SBIELOW_J_TABLE
 
 #endif
 
+typedef union _SBIELOW_FLAGS {
+	ULONG	init_flags;
+	struct {
+		ULONG
+			is_wow64		: 1,
+			reservd_1		: 7,
+
+			long_diff		: 1,
+			reservd_2		: 7,
+
+			bHostInject		: 1,
+			bNoSysHooks		: 1,
+			bNoConsole		: 1,
+			reservd_3		: 5,
+
+			is_win10		: 1,
+			reservd_4		: 7;
+	};
+} SBIELOW_FLAGS;
+
 typedef struct _SBIELOW_DATA {
     ULONG64     ntdll_base;
     ULONG64     syscall_data;
@@ -51,30 +71,11 @@ typedef struct _SBIELOW_DATA {
     ULONG       api_sbiedrv_ctlcode;
     ULONG       api_invoke_syscall;
 
-	BOOLEAN     is_wow64;
-	BOOLEAN     long_diff;
-	BOOLEAN     bHostInject;
-	BOOLEAN     is_win10;
-
-	/*union {
-		ULONG	init_flags;
-		struct {
-			ULONG
-				is_wow64		: 1,
-				reservd_1		: 7,
-
-				long_diff		: 1,
-				reservd_2		: 7,
-
-				bHostInject		: 1,
-				bNoSysHooks		: 1,
-				bNoConsole		: 1,
-				reservd_3		: 5,
-
-				is_win10		: 1,
-				reservd_4		: 7;
-		};
-	};*/
+	//BOOLEAN     is_wow64;
+	//BOOLEAN     long_diff;
+	//BOOLEAN     bHostInject;
+	//BOOLEAN     is_win10;
+    SBIELOW_FLAGS flags;
 
     __declspec(align(16))
         UCHAR   LdrInitializeThunk_tramp[48];
@@ -86,7 +87,7 @@ typedef struct _SBIELOW_DATA {
         UCHAR   NtFlushInstructionCache_code[32];
     __declspec(align(16))
         UCHAR   NtProtectVirtualMemory_code[32];
-     ULONG64 RealNtDeviceIoControlFile;
+    ULONG64 RealNtDeviceIoControlFile;
 #ifdef _WIN64
     SBIELOW_J_TABLE * Sbie64bitJumpTable;
 	ULONG64     ntdll_wow64_base;

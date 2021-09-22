@@ -633,49 +633,6 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
             wcscat(wstrPortName, dynamicFalse + 9);
         }
     }
-    /*else if (_wcsicmp(StringBinding, L"ncalrpc:") == 0) {
-    
-        WCHAR pwszEmpty[] = L"";
-        WCHAR* pwszTempPortName = pwszEmpty;
-    
-        ULONG_PTR hWinHttp = (ULONG_PTR)GetModuleHandle(L"WinHttp.dll");
-        ULONG_PTR hBtApi = (ULONG_PTR)GetModuleHandle(L"BluetoothApis.dll");
-        ULONG_PTR hSsdpApi = (ULONG_PTR)GetModuleHandle(L"SSDPAPI.dll"); // A
-
-        if (RpcRt_TestCallingModule(pRetAddr, hWinHttp))
-        {
-            // WPAD (Windows Proxy Auto Discovery) uses dynamic RPC endpoints starting in Win 10 Anniv.
-            pwszTempPortName = GetDynamicLpcPortName(WPAD_PORT_ID);
-        }
-        else if (RpcRt_TestCallingModule(pRetAddr, hBtApi))
-        {
-            // Bluetooth support service
-            pwszTempPortName = GetDynamicLpcPortName(BT_PORT_ID);
-        }
-        else if (RpcRt_TestCallingModule(pRetAddr, hSsdpApi))
-        {
-            // Simple Service Discovery Protocol API
-            pwszTempPortName = GetDynamicLpcPortName(SSDP_PORT_ID);
-        }
-        
-        if (pwszTempPortName != pwszEmpty) {
-
-            if (pwszTempPortName == NULL)
-                return RPC_S_ACCESS_DENIED;
-
-            wcscpy(wstrPortName, L"ncalrpc:[");
-            wcscpy(wstrPortName + 9, pwszTempPortName);
-            wcscat(wstrPortName, L"]");
-        }
-    } 
-    else if (_wcsicmp(StringBinding, dynamicTrue) == 0) {
-
-        ULONG_PTR pWINNSI = (ULONG_PTR)GetModuleHandle(L"WINNSI.DLL");
-
-        if (RpcRt_TestCallingModule(pRetAddr, pWINNSI)) {
-            use_RpcMgmtSetComTimeout = FALSE;
-        }
-    }*/
     else if (_wcsicmp(StringBinding, L"0497b57d-2e66-424f-a0c6-157cd5d41700@ncalrpc:") == 0) {
 
         ULONG_PTR pkernel32 = (ULONG_PTR)GetModuleHandle(L"kernel32.dll");
@@ -802,33 +759,6 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
     {
         Template->StringEndpoint = (unsigned short*)L"samss lpc";
     }
-
-    /*else if ( (memcmp(&Template->ObjectUuid, &EMPTY_UUID, sizeof(GUID)) == 0) &&
-        RPC_PROTSEQ_LRPC == Template->ProtocolSequence &&
-        !Template->StringEndpoint)
-    {
-        ULONG_PTR hWinSCard = (ULONG_PTR)GetModuleHandle(L"WinSCard.dll");
-        ULONG_PTR hResourcePolicyClient = (ULONG_PTR)GetModuleHandle(L"resourcepolicyclient.dll");
-
-        if (RpcRt_TestCallingModule(pRetAddr, hWinSCard))
-        {
-            // smart card interface {C6B5235A-E413-481D-9AC8-31681B1FAAF5}  
-            Template->StringEndpoint = GetDynamicLpcPortName(SMART_CARD_PORT_ID);
-        }
-        else if (RpcRt_TestCallingModule(pRetAddr, hResourcePolicyClient))
-        {
-            // Win 10 AU WinRT interface - {88ABCBC3-34EA-76AE-8215-767520655A23}
-            Template->StringEndpoint = GetDynamicLpcPortName(GAME_CONFIG_STORE_PORT_ID);
-        }
-        else
-        {
-            ULONG_PTR pAppXDeploymentClient = (ULONG_PTR)GetModuleHandle(L"AppXDeploymentClient.dll");
-
-            if (RpcRt_TestCallingModule(pRetAddr, pAppXDeploymentClient)) {
-                use_RpcMgmtSetComTimeout = TRUE;
-            }
-        }
-    }*/
 
     RPC_WSTR   StringUuid;
     __sys_UuidToStringW(&Template->ObjectUuid, &StringUuid);

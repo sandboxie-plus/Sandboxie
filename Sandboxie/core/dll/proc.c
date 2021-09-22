@@ -2160,10 +2160,14 @@ _FX BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind)
     ULONG *pids, i;
     BOOLEAN found = FALSE;
 
-    pids = Dll_AllocTemp(sizeof(ULONG) * 512);
-    SbieApi_EnumProcess(NULL, pids);
+    ULONG pid_count = 0;
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+    pid_count += 128;
 
-    for (i = 1; i <= pids[0]; ++i) {
+    pids = Dll_AllocTemp(sizeof(ULONG) * pid_count);
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+
+    for (i = 0; i <= pid_count; ++i) {
 
         WCHAR image[128];
         HANDLE pids_i = (HANDLE) (ULONG_PTR) pids[i];

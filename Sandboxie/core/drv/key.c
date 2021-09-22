@@ -474,7 +474,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;
-                else
+                else if(write_access)
                     mon_type |= MONITOR_OPEN;
             }
             if (!ShouldMonitorAccess)
@@ -485,7 +485,6 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
-
     else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);

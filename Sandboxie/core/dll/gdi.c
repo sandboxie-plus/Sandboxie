@@ -275,6 +275,11 @@ _FX void Gdi_SplWow64(BOOLEAN Register)
     // see GuiServer::SplWow64Slave
     //
 
+    // NoSbieDesk BEGIN
+    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return;
+	// NoSbieDesk END
+
     GUI_SPLWOW64_REQ req;
     void *rpl;
 

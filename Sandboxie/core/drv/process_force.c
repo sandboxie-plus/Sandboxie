@@ -1719,8 +1719,7 @@ _FX void Process_DfpDelete(HANDLE ProcessId)
     FORCE_PROCESS_2 *proc;
 
 #ifdef USE_PROCESS_MAP
-    proc = map_remove(&Process_MapDfp, ProcessId);
-    if(proc)
+    if(map_take(&Process_MapDfp, ProcessId, &proc, 0))
         Mem_Free(proc, sizeof(FORCE_PROCESS_2));
 #else
     proc = List_Head(&Process_ListDfp);

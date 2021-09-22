@@ -418,13 +418,10 @@ public:
 
 	virtual void		AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	virtual void		AddUserPrompt(quint32 RequestId, const QVariantMap& Data, quint32 ProcessId);
-	virtual void		AddFileToRecover(const QString& FilePath, QString BoxPath, const QString& BoxName, quint32 ProcessId);
+	virtual void		AddFileToRecover(const QString& FilePath, QString BoxPath, const CSandBoxPtr& pBox, quint32 ProcessId);
 	virtual void		ShowProgress(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 
 	static void			SetDarkMode(bool bDark) { extern bool CPopUpWindow__DarkMode;  CPopUpWindow__DarkMode = bDark; }
-
-signals:
-	void				RecoveryRequested(const QString& BoxName);
 
 public slots:
 	virtual void		Show();

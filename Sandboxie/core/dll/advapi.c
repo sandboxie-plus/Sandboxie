@@ -239,6 +239,7 @@ _FX BOOLEAN AdvApi_Init(HMODULE module)
 
     // only hook SetSecurityInfo if this is Chrome.  Outlook 2013 uses delayed loading and will cause infinite callbacks
     // Starting with Win 10, we only want to hook ntmarta!SetSecurityInfo. Do NOT hook advapi!SetSecurityInfo. Delay loading for advapi will cause infinite recursion.
+    // Note: the infinite recursion issue has been resolved int 5.43
     if (((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER)) && (Dll_Windows < 10)) {
         SetSecurityInfo = __sys_SetSecurityInfo;
         GetSecurityInfo = __sys_GetSecurityInfo;

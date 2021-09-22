@@ -46,7 +46,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSbieTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	m_pSbieTree->setSortingEnabled(true);
 	//m_pSbieTree->setSortingEnabled(false);
-	m_pSbieTree->setUniformRowHeights(true);
 	//m_pSbieTree->header()->setSortIndicatorShown(true);
 	//m_pSbieTree->header()->setSectionsClickable(true);
 	connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnCustomSortByColumn(int)));

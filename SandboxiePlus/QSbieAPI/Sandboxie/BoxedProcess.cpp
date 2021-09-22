@@ -45,6 +45,7 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 	m_ParendPID = 0;
 	m_SessionId = 0;
 
+	m_ProcessFlags = 0;
 	m_ImageType = -1;
 
 	m_uTerminated = 0;
@@ -208,8 +209,10 @@ bool CBoxedProcess::InitProcessInfo()
 
 bool CBoxedProcess::InitProcessInfoEx()
 {
-	if(m_ImageType == -1 && m_pBox)
-		m_ImageType = m_pBox->Api()->GetImageType(m_ProcessId);
+	if (m_ProcessFlags == 0 && m_pBox) {
+		m_ProcessFlags = m_pBox->Api()->QueryProcessInfo(m_ProcessId);
+		m_ImageType = m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'gpit');
+	}
 
 	return true;
 }

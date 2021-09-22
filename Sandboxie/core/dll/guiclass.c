@@ -116,8 +116,6 @@ static ULONG_PTR Gui_HighestAddress = 0;
 BOOLEAN Gui_RenameClasses = TRUE;
 BOOLEAN Gui_OpenAllWinClasses = FALSE;
 
-BOOLEAN Gui_EMET_DLL_Loaded = FALSE;
-
 
 //---------------------------------------------------------------------------
 // Gui_InitClass
@@ -147,15 +145,6 @@ _FX BOOLEAN Gui_InitClass(void)
         CP_ACP, 0, Gui_BoxPrefixW, wcslen(Gui_BoxPrefixW),
         Gui_BoxPrefixA, len, NULL, NULL);
     Gui_BoxPrefixA[len - 1] = '\0';
-
-	// NoSbieDesk BEGIN
-	//if (SbieApi_QueryConfBool(NULL, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE)) {
-    //
-	//	Gui_OpenAllWinClasses = TRUE;
-	//	Gui_RenameClasses = FALSE;
-	//}
-	//else
-	// NoSbieDesk END
 
     //
     // if OpenWinClass specifies *, we will not do any window class
@@ -292,9 +281,6 @@ _FX void Gui_Hook_CREATESTRUCT_Handler(void)
     //
 
     if (! Gui_RenameClasses)
-        return;
-
-    if (Gui_EMET_DLL_Loaded)
         return;
 
     GetSystemInfo(&sysinfo);
@@ -740,7 +726,7 @@ _FX int Gui_GetClassNameW(
     err = GetLastError();
     clsnm = Dll_Alloc(sizeof(WCHAR) * 1024);
     n = __sys_GetClassNameW(hWnd, clsnm, 1023);
-    if (! n) {
+    if (Gui_UseProxyService && ! n) {
         SetLastError(err);
         n = Gui_GetClassName2(hWnd, clsnm, 1023, TRUE);
     }
@@ -794,7 +780,7 @@ _FX int Gui_GetClassNameA(
     err = GetLastError();
     clsnm = Dll_Alloc(sizeof(UCHAR) * 1024);
     n = __sys_GetClassNameA(hWnd, clsnm, 1023);
-    if (! n) {
+    if (Gui_UseProxyService && ! n) {
         SetLastError(err);
         n = Gui_GetClassName2(hWnd, clsnm, 1023, FALSE);
     }

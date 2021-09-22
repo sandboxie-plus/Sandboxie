@@ -1,13 +1,14 @@
 ﻿#define MyAppName "Sandboxie-Plus"
 #include "Languages.iss"
-;
-; use commandline to populate:
-; ISCC.exe /ORelease Sandboxie-Plus.iss /DMyAppVersion=%SbiePlusVer% /DMyDrvVersion=%SbieVer% /DMyAppArch=x64 /DMyAppSrc=SbiePlus64
+
+; Use commandline to populate:
+; ISCC.exe /ORelease Sandboxie-Plus.iss /DMyAppVersion=%SbiePlusVer% /DMyAppArch=x64 /DMyAppSrc=SbiePlus64
 ;
 ;#define MyAppVersion "0.7.5"
 ;#define MyDrvVersion "5.49.8"
 ;#define MyAppArch "x64"
 ;#define MyAppSrc "SbiePlus64"
+
 
 [Setup]
 AppName={#MyAppName}
@@ -18,8 +19,6 @@ AppPublisher=http://xanasoft.com/
 AppPublisherURL=http://sandboxie-plus.com/
 AppMutex=SBIEPLUS_MUTEX
 DefaultDirName={code:InstallPath}
-; Handled in code section as always want DirPage for portable mode.
-DisableDirPage=no
 DefaultGroupName={#MyAppName}
 Uninstallable=not IsPortable
 UninstallDisplayIcon={app}\SandMan.exe
@@ -30,73 +29,124 @@ ArchitecturesInstallIn64BitMode=x64
 AllowNoIcons=yes
 AlwaysRestart=no
 LicenseFile=.\license.txt
+UsedUserAreasWarning=no
 VersionInfoCopyright=Copyright (C) 2020-2021 by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
-;WizardImageFile=WizardImage0.bmp
-;WizardSmallImageFile=WizardSmallImage0.bmp
+
+; Handled in code section as always want DirPage for portable mode.
+DisableDirPage=no
 
 ; Allow /CURRENTUSER to be used with /PORTABLE=1 to avoid admin requirement.
 PrivilegesRequiredOverridesAllowed=commandline
 
-[Files]
-; Both portable and install.
-Source: ".\Release\{#MyAppSrc}\*"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: recursesubdirs ignoreversion; Excludes: "*.pdb";
-; Only if portable.
-Source: ".\Sandboxie.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
-Source: ".\Sandboxie-Plus.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
-
-[Icons]
-Name: "{group}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; MinVersion: 0.0,5.0;
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "http://sandboxie-plus.com/"; MinVersion: 0.0,5.0;
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; MinVersion: 0.0,5.0;
-Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0;
-;Name: "{userstartup}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: AutoStartEntry;
-
-;[Registry]
-;Root: HKCU; Subkey: "Software\{#MyAppName}"; ValueName: "{#MyAppName}_Autorun"; ValueType: string; ValueData: "1"; Flags: uninsdeletekey; Tasks: AutoStartEntry
 
 [Tasks]
 Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable
 Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
 Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
 
+
+[Files]
+; Both portable and install.
+Source: ".\Release\{#MyAppSrc}\*"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: recursesubdirs ignoreversion; Excludes: "*.pdb"
+
+; Only if portable.
+Source: ".\Sandboxie.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
+Source: ".\Sandboxie-Plus.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
+
+
+[Icons]
+Name: "{group}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; MinVersion: 0.0,5.0
+Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "http://sandboxie-plus.com/"; MinVersion: 0.0,5.0
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; MinVersion: 0.0,5.0
+Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0
+
+
+[Registry]
+; Autostart Sandman.
+Root: HKCU; Subkey: "Software\Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
+
+; AddRunSandboxed all files.
+Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
+Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
+Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
+
+; AddRunSandboxed folder.
+Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
+Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
+Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
+
+; External manifest for Sbie service.
+Root: HKLM; Subkey: "SYSTEM\ControlSet001\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
+
+
+[Run]
+; Install the Sbie driver.
+Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"" type=kernel start=demand altitude=86900"; StatusMsg: "KmdUtil install SbieDrv..."; Check: not IsPortable
+
+; Install the Sbie service.
+Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
+
+; Start the Sbie service.
+Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
+
+
+[UninstallDelete]
+Type: files; Name: "{app}\SbieDrv.sys.w10"
+Type: files; Name: "{app}\SbieDrv.sys.rc4"
+Type: dirifempty; Name: "{app}"
+Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
+
+
 [Messages]
 ; Include with commandline /? message.
 HelpTextNote=/PORTABLE=1%nEnable portable mode.%n
 
+
 [Code]
 var
   CustomPage: TInputOptionWizardPage;
-  Portable: boolean;
-  //w7drv: string;
-  //CompatVer: String;
-  IsInstalled: boolean;
-//  SbiePath: String;
+  IsInstalled: Boolean;
+  Portable: Boolean;
 
 
-// Return True or False for the value of Check.
-function IsPortable(): boolean;
+function IsPortable(): Boolean;
 begin
+
+  // Return True or False for the value of Check.
   if (ExpandConstant('{param:portable|0}') = '1') or Portable then begin
-    result := True;
+    Result := True;
   end;
 end;
 
-// Return the path to use for the value of DefaultDirName.
-function InstallPath(dummy: string): string;
-var 
-  DrvPath: string;
-  SbiePath: string;
-begin
-  
-  //if SbiePath <> '' then begin
-  //  result := SbiePath;
-  //  exit;
-  //end;
 
+function IsUpgrade(): Boolean;
+var
+  S: String;
+  InnoSetupReg: String;
+  AppPathName: String;
+begin
+
+  // Detect if already installed.
+  // Source: https://stackoverflow.com/a/30568071
+  InnoSetupReg := ExpandConstant('Software\Microsoft\Windows\CurrentVersion\Uninstall\{#SetupSetting("AppName")}_is1');
+  AppPathName := 'Inno Setup: App Path';
+
+  Result := RegQueryStringValue(HKLM, InnoSetupReg, AppPathName, S) or
+            RegQueryStringValue(HKCU, InnoSetupReg, AppPathName, S);
+end;
+
+
+function InstallPath(Dummy: String): String;
+var
+  DrvPath: String;
+  SbiePath: String;
+begin
+
+  // Return the path to use for the value of DefaultDirName.
   IsInstalled := False;
   SbiePath := ExpandConstant('{param:dir}');
-  
+
   if SbiePath = '' then begin
     if (ExpandConstant('{param:portable|0}') = '1') or Portable then begin
       SbiePath := ExpandConstant('{src}') + '\{#MyAppName}';
@@ -104,9 +154,11 @@ begin
       if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'ImagePath', DrvPath) then begin
         IsInstalled := True;
         DrvPath := ExtractFilePath(DrvPath);
-        if Copy(DrvPath,1,4) = '\??\' then begin
-          DrvPath := Copy(DrvPath, 5, Length(DrvPath)-5);
+
+        if Copy(DrvPath, 1, 4) = '\??\' then begin
+          DrvPath := Copy(DrvPath, 5, Length(DrvPath) - 5);
         end;
+
         SbiePath := DrvPath;
       end else begin
         SbiePath := ExpandConstant('{autopf}') + '\{#MyAppName}';
@@ -114,13 +166,152 @@ begin
     end;
   end;
 
-  result := SbiePath;
+  Result := SbiePath;
 end;
 
-// Create the custom page.
-// Source: https://timesheetsandstuff.wordpress.com/2008/06/27/the-joy-of-part-2/
-procedure InitializeWizard;
+
+procedure UpdateStatus(OutputProgressPage: TOutputProgressWizardPage; Text: String; Percentage: Integer);
 begin
+
+  // Called by ShutdownSbie() to update status or progress.
+  if IsUninstaller() then
+    UninstallProgressForm.StatusLabel.Caption := Text
+  else begin
+    OutputProgressPage.SetProgress(Percentage, 100);
+    OutputProgressPage.SetText(Text, '');
+  end;
+
+  // Output status information to log.
+  Log('Debug: ' + Text);
+end;
+
+
+function ShutdownSbie(): Boolean;
+var
+  ExecRet: Integer;
+  StatusText: String;
+  OutputProgressPage: TOutputProgressWizardPage;
+begin
+
+  // Require KmdUtil.exe to continue.
+  if (FileExists(ExpandConstant('{app}\KmdUtil.exe')) = False) then
+  begin
+    Result := True;
+    exit;
+  end;
+
+  try
+
+    // Backup status text (uninstall). Prepare progress page (install).
+    if IsUninstaller() then
+      StatusText := UninstallProgressForm.StatusLabel.Caption
+    else begin
+      OutputProgressPage := CreateOutputProgressPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc));
+      OutputProgressPage.Show();
+    end;
+
+    // Run KmdUtil scandll.
+    UpdateStatus(OutputProgressPage, 'KmdUtil scandll', 5);
+    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'scandll', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
+    if (ExecRet <> 0) then
+    begin
+      Result := False;
+      exit;
+    end;
+
+    // Stop processes.
+    UpdateStatus(OutputProgressPage, 'Taskkill /IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', 30);
+    Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+
+    // Stop service and driver.
+    UpdateStatus(OutputProgressPage, 'KmdUtil stop SbieSvc', 55);
+    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'stop SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
+    UpdateStatus(OutputProgressPage, 'KmdUtil stop SbieDrv', 85);
+    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'stop SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
+    // Uninstall service and driver.
+    UpdateStatus(OutputProgressPage, 'KmdUtil delete SbieSvc', 95);
+    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'delete SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
+    UpdateStatus(OutputProgressPage, 'KmdUtil delete SbieDrv', 100);
+    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+
+    // Query driver which can remove SbieDrv key if exist.
+    if RegKeyExists(HKLM, 'SYSTEM\CurrentControlSet\services\SbieDrv') then begin
+      UpdateStatus(OutputProgressPage, 'SC query SbieDrv', 100);
+      Exec(ExpandConstant('{sys}\sc.exe'), 'query SbieDrv', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+    end;
+  finally
+
+    // Restore status text (uninstall). Hide Prepare progress page (install).
+    if IsUninstaller() then
+      UninstallProgressForm.StatusLabel.Caption := StatusText
+    else begin
+      OutputProgressPage.SetProgress(0, 100);
+      OutputProgressPage.Hide();
+    end;
+  end;
+
+  Result := True;
+end;
+
+
+//////////////////////////////////////////////////////
+// Installation Events
+//
+
+
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+
+  // Get mode setting from Custom page and set path for the Dir page.
+  if CurPageID = CustomPage.ID then begin
+    Portable := not (CustomPage.SelectedValueIndex = 0);
+    WizardForm.DirEdit.Text := InstallPath('');
+
+    // No Start Menu folder setting on Ready page if portable.
+    if Portable then begin
+      WizardForm.NoIconsCheck.Checked := True;
+    end else begin
+      WizardForm.NoIconsCheck.Checked := False;
+    end;
+  end;
+
+  // Shutdown service, driver and processes as ready to install.
+  if ((CurPageID = wpReady) and (not IsPortable())) then
+  begin
+    Result := ShutdownSbie();
+    exit;
+  end;
+
+  Result := True;
+end;
+
+
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+
+  // Skip Custom page and Group page if portable.
+  if PageID = CustomPage.ID then begin
+    if ExpandConstant('{param:portable|0}') = '1' then
+      Result := True;
+  end else if PageID = wpSelectDir then begin
+    if not IsPortable and IsUpgrade then
+      Result := True;
+  end else if PageID = wpSelectProgramGroup then begin
+    if IsPortable then
+      Result := True;
+  end;
+end;
+
+
+procedure InitializeWizard();
+begin
+
+  // Create the custom page.
+  // Source: https://timesheetsandstuff.wordpress.com/2008/06/27/the-joy-of-part-2/
   CustomPage := CreateInputOptionPage(wpLicense,
                                       CustomMessage('CustomPageLabel1'),
                                       CustomMessage('CustomPageLabel2'),
@@ -131,9 +322,10 @@ begin
   end else begin
     CustomPage.Add(CustomMessage('CustomPageInstallMode'));
   end;
+
   CustomPage.Add(CustomMessage('CustomPagePortableMode'));
 
-  // Default - Normal Installation if not argument /PORTABLE=1.
+  // Default to Normal Installation if not argument /PORTABLE=1.
   if ExpandConstant('{param:portable|0}') = '1' then begin
     WizardForm.NoIconsCheck.Checked := True;
     CustomPage.SelectedValueIndex := 1;
@@ -142,68 +334,15 @@ begin
   end;
 end;
 
-// Get mode setting from Custom page and set path for the Dir page.
-function NextButtonClick2(CurPageID: integer): boolean;
-begin
-  if CurPageID = CustomPage.ID then begin
-    Portable := not (CustomPage.SelectedValueIndex = 0);
-    WizardForm.DirEdit.Text := InstallPath('');
-    
-    // No Start Menu folder setting on Ready page if portable.
-    if Portable then begin
-      WizardForm.NoIconsCheck.Checked := True;
-    end else begin
-      WizardForm.NoIconsCheck.Checked := False;
-    end;
-  end;
-  result := True;
-end;
-
-
-// Detect if already installed.
-// Source: https://stackoverflow.com/a/30568071
-function IsUpgrade: boolean;
-var
-  S: string;
-  InnoSetupReg: string;
-  AppPathName: string;
-begin
-  InnoSetupReg := ExpandConstant('Software\Microsoft\Windows\CurrentVersion\Uninstall\{#SetupSetting("AppName")}_is1');
-  AppPathName := 'Inno Setup: App Path';
-  result := RegQueryStringValue(HKLM, InnoSetupReg, AppPathName, S) or
-            RegQueryStringValue(HKCU, InnoSetupReg, AppPathName, S);
-end;
-
-// Skip Custom page and Group page if portable.
-function ShouldSkipPage(PageID: integer): boolean;
-begin
-  if PageID = CustomPage.ID then begin
-    if ExpandConstant('{param:portable|0}') = '1' then
-      result := True;
-  end else if PageID = wpSelectDir then begin
-    if not IsPortable and IsUpgrade then
-      result := True;
-  end else if PageID = wpSelectProgramGroup then begin
-    if IsPortable then
-      result := True;
-  end;
-end;
-
-//////////////////////////////////////////////////////
-// Installation
-//
 
 function InitializeSetup(): Boolean;
 var
   Version: TWindowsVersion;
-  DeleteFlag: Cardinal;
   ExecRet: Integer;
-  DrvVersion: Cardinal;
-  UninstallString: string;
+  UninstallString: String;
 begin
 
-  //CompatVer := '{#MyDrvVersion}.{#MyAppArch}';
-
+  // Require Windows 7 or later.
   GetWindowsVersionEx(Version);
 
   if (Version.NTPlatform = False) or (Version.Major < 6) then
@@ -213,13 +352,15 @@ begin
     exit;
   end;
 
+  // Ask to uninstall Sandboxie Classic if found.
   ExecRet := IDYES;
+
   while (ExecRet = IDYES) do
   begin
-  
       if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie', 'UninstallString', UninstallString) then begin
-        
+
         ExecRet := MsgBox(CustomMessage('ClassicFound'), mbConfirmation, MB_YESNOCANCEL);
+
         if ExecRet = IDCANCEL then
         begin
           Result := False;
@@ -233,8 +374,6 @@ begin
         end;
 
       end else begin
-        //SuppressibleMsgBox('test', mbError, MB_OK, MB_OK);
-        //ExecRet := IDNO;
         break;
       end;
   end;
@@ -242,164 +381,23 @@ begin
   Result := True;
 end;
 
-function ShutdownSbie(): Boolean;
-var
-  ExecRet: Integer;
-begin
-
-  if(FileExists(ExpandConstant('{app}\kmdutil.exe')) = False) then
-  begin
-    Result := True;
-    exit;
-  end;
-
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'scandll', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  if(ExecRet <> 0) then
-  begin
-    Result := False;
-    exit;
-  end;
-
-  Exec('taskkill', '/IM sandman.exe /F', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  Exec('taskkill', '/IM sbiectrl.exe /F', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  Exec('taskkill', '/IM start.exe /F', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'stop SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'stop SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-
-  // uninstall the driver
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'delete SbieDrv', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-
-  Result := True;
-end;
-
-function NextButtonClick(CurPageID: Integer): Boolean;
-var
-  ExecRet: Integer;
-  ErrCode: Integer;
-  Version: TWindowsVersion;
-begin
-
-  NextButtonClick2(CurPageID);
-
-  if (CurPageID = wpSelectTasks) then
-  begin
-    //GetWindowsVersionEx(Version);
-    //
-    //if (Version.NTPlatform = False) or (Version.Major < 8) then
-    //begin
-    //  ExecRet := MsgBox('Windows 7 requires a provisional driver. You will have to download it from the GitHub release page https://github.com/sandboxie-plus/Sandboxie/releases/' + #13#10 + 'Do you have it already downloaded? Select No to open browser, or Cancel to abort installation.', mbConfirmation, MB_YESNOCANCEL);
-    //  if ExecRet = IDCANCEL then
-    //  begin
-    //    Result := False;
-    //    exit;
-    //  end;
-    //
-    //  if ExecRet = IDNO then
-    //  begin
-    //    ShellExec('open', 'https://github.com/sandboxie-plus/Sandboxie/releases/', '', '', SW_SHOW, ewNoWait, ErrCode);
-    //  end;
-    //
-    //  if (GetOpenFileName('', w7drv, '', 'Driver binary (*.'+CompatVer+'.rc4)|*.'+CompatVer+'.rc4|All Files|*.*', CompatVer + '.rc4') = False) then
-    //  begin
-    //    Result := False;
-    //    exit;
-    //  end;
-    //end;
-
-  end;
-
-  if ((CurPageID = wpReady) and (not IsPortable())) then
-  begin
-      Result := ShutdownSbie();
-      exit;
-  end;
-
-  Result := True;
-end;
-
-procedure CurStepChanged(CurStep: TSetupStep);
-var
-  ExecRet: Integer;
-  //params: String;
-begin
-
-  // after the installation
-  if (CurStep <> ssPostInstall) then
-    exit;
-
-  //if (w7drv <> '') then
-  //begin
-  //    DeleteFile(ExpandConstant('{app}\SbieDrv.sys.w10'));
-  //    RenameFile(ExpandConstant('{app}\SbieDrv.sys'), ExpandConstant('{app}\SbieDrv.sys.w10'));
-  //    FileCopy(w7drv, ExpandConstant('{app}\SbieDrv.sys.rc4'), False);
-  //end;
-
-  if (IsPortable()) then
-    exit;
-
-  // install the driver
-  Exec(ExpandConstant('{app}\kmdutil.exe'), ExpandConstant('install SbieDrv "{app}\SbieDrv.sys" type=kernel start=demand altitude=86900'), '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-  // install the service
-  Exec(ExpandConstant('{app}\kmdutil.exe'), ExpandConstant('install SbieSvc "{app}\SbieSvc.exe" type=own start=auto display="Sandboxie Service" group=UIGroup'), '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
-
-  Exec(ExpandConstant('{app}\kmdutil.exe'), 'start SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
- 
-  Exec('reg.exe', 'ADD HKLM\SYSTEM\ControlSet001\Services\SbieSvc /v PreferExternalManifest /t REG_DWORD /d 1 /f', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
-
-  if WizardIsTaskSelected('AutoStartEntry') then
-  begin
-    RegWriteStringValue(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Run', 'SandboxiePlus_AutoRun', ExpandConstant('"{app}\SandMan.exe" -autorun'));
-  end;
-
-  if WizardIsTaskSelected('AddRunSandboxed') then
-  begin
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', '', CustomMessage('RunSandboxedMenu'));
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox', 'Icon', ExpandConstant('"{app}\start.exe"'));
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox\command', '', ExpandConstant('"{app}\SandMan.exe"') +' /box:__ask__ "%1" %*');
-
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', '', CustomMessage('RunSandboxedMenu'));
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox', 'Icon', ExpandConstant('"{app}\start.exe"'));
-    RegWriteStringValue(HKEY_CURRENT_USER, 'software\classes\Folder\shell\sandbox\command', '', ExpandConstant('"{app}\SandMan.exe"') +' /box:__ask__ C:\WINDOWS\Explorer.exe "%1"');
-  end;
-
-end;
 
 //////////////////////////////////////////////////////
-// Uninstallation
+// Uninstallation Events
 //
 
-function InitializeUninstall(): Boolean;
-begin
-  Result := True;
-end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
-var
-  ExecRet: Integer;
 begin
-  
-  // before the uninstallation
+
+  // Before the uninstallation.
   if (CurUninstallStep <> usUninstall) then
     exit;
 
+  // Shutdown service, driver and processes.
   if (ShutdownSbie() = False) then
   begin
     Abort();
     exit;
   end;
-
-  // remove from autostart
-  RegDeleteValue(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Run', 'SandboxiePlus_AutoRun');
-  
-  // remove shell integration
-  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'software\classes\*\shell\sandbox');
-  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'software\classes\folder\shell\sandbox');
-
-  // delete other left overs
-  DeleteFile(ExpandConstant('{app}\SbieDrv.sys.w10'));
-  DeleteFile(ExpandConstant('{app}\SbieDrv.sys.rc4'));
-
 end;
-

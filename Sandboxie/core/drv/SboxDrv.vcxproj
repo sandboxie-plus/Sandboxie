@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4019C5EB-8D1E-40E4-B7D1-5601B4B27288}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'" Label="Configuration">
@@ -126,6 +126,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+    </DriverSign>
     <PostBuildEvent>
       <Command>
       </Command>
@@ -168,6 +171,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+    </DriverSign>
     <PostBuildEvent>
       <Command>
       </Command>
@@ -198,6 +204,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+    </DriverSign>
     <PostBuildEvent>
       <Command>
       </Command>
@@ -238,6 +247,9 @@
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+    </DriverSign>
     <PostBuildEvent>
       <Command>
       </Command>

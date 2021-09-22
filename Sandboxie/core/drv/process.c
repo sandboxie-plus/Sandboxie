@@ -1327,7 +1327,7 @@ _FX void Process_Delete(HANDLE ProcessId)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
 #ifdef USE_PROCESS_MAP
-    proc = map_remove(&Process_Map, ProcessId);
+    map_take(&Process_Map, ProcessId, &proc, 0);
 #else
     proc = List_Head(&Process_List);
     while (proc) {

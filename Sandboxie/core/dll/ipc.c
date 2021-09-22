@@ -723,6 +723,11 @@ _FX BOOLEAN Ipc_GetName_AdjustSplWow64Path(WCHAR *TruePath, BOOLEAN adj)
     // a sandbox that wants to print has a corresponding SplWow64 process.
     //
 
+    // NoSbieDesk BEGIN
+    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
+
     WCHAR *nameStart = wcsrchr(TruePath, L'\\');
     if (nameStart && (0 == _wcsnicmp(nameStart + 1, L"SplWow64_", 9)
              ||  0 == _wcsnicmp(nameStart + 1, L"UmpdProxy_", 10)

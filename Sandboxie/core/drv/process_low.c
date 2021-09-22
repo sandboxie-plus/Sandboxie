@@ -24,6 +24,7 @@
 #include "process.h"
 #include "api.h"
 #include "util.h"
+#include "conf.h"
 
 
 //---------------------------------------------------------------------------
@@ -280,6 +281,11 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
 _FX BOOLEAN Process_Low_InitConsole(PROCESS *proc)
 {
     NTSTATUS status;
+
+	// NoSbieDesk BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"NoSandboxieDesktop", 0, FALSE))
+		return TRUE;
+	// NoSbieDesk END
 
     //
     // on Windows 7, a console process tries to launch conhost.exe through

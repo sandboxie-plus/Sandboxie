@@ -184,7 +184,7 @@ static void Terminal_WinStationFreeMemory(void *pMemory);
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Terminal_IsOpenPathIcaApi(void);
+static BOOLEAN Terminal_DontHook(void);
 
 static BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken);
 
@@ -225,12 +225,24 @@ extern const WCHAR *Ipc_SandboxieRpcSs;
 
 
 //---------------------------------------------------------------------------
-// Terminal_IsOpenPathIcaApi
+// Terminal_DontHook
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Terminal_IsOpenPathIcaApi(void)
+_FX BOOLEAN Terminal_DontHook(void)
 {
+
+    //
+    // On win 10 this endpoint does not exist, so hook always
+    //
+
+    if (Dll_OsBuild >= 10041)
+        return FALSE;
+
+    //
+    // On older windows check the endpoint
+    //
+
     ULONG mp_flags = SbieDll_MatchPath(L'i', L"\\RPC Control\\IcaApi");
     return (PATH_IS_OPEN(mp_flags));
 }
@@ -683,11 +695,8 @@ _FX BOOLEAN Terminal_Init_WinSta(HMODULE module)
     ULONG_PTR __sys_WinStationGetConnectionProperty = 0;
     ULONG_PTR __sys_WinStationFreePropertyValue = 0;
 
-    //
-    // if "\RPC Control\IcaApi" is an open path, then don't hook
-    //
 
-    if (Terminal_IsOpenPathIcaApi())
+    if (Terminal_DontHook())
         return TRUE;
 
     //
@@ -760,10 +769,14 @@ _FX BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken)
     err = ERROR_NO_TOKEN;
     *pToken = NULL;
 
-    pids = Dll_AllocTemp(sizeof(ULONG) * 512);
-    SbieApi_EnumProcess(NULL, pids);
+    ULONG pid_count = 0;
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+    pid_count += 128;
 
-    for (i = 1; i <= pids[0]; ++i) {
+    pids = Dll_AllocTemp(sizeof(ULONG) * pid_count);
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+
+    for (i = 0; i <= pid_count; ++i) {
 
         WCHAR image[128];
         HANDLE pids_i = (HANDLE) (ULONG_PTR) pids[i];
@@ -1150,19 +1163,21 @@ _FX BOOLEAN Terminal_Init_WtsApi(HMODULE module)
     ULONG_PTR __sys_WTSUnRegisterSessionNotification = 0;
     ULONG_PTR __sys_WTSUnRegisterSessionNotificationEx = 0;
 
-    //
-    // if "\RPC Control\IcaApi" is an open path, then don't hook
-    //
+    
+    WTSQueryUserToken = (P_WTSQueryUserToken)
+        GetProcAddress(module, "WTSQueryUserToken");
 
-    if (Terminal_IsOpenPathIcaApi())
+    if (WTSQueryUserToken) {
+        SBIEDLL_HOOK(Terminal_,WTSQueryUserToken);
+    }
+
+    if (Terminal_DontHook())
         return TRUE;
 
     //
     // hook terminal services
     //
 
-    WTSQueryUserToken = (P_WTSQueryUserToken)
-        GetProcAddress(module, "WTSQueryUserToken");
     WTSEnumerateSessionsW = (P_WTSEnumerateSessions)
         GetProcAddress(module, "WTSEnumerateSessionsW");
     WTSEnumerateProcessesW = (P_WTSEnumerateProcesses)
@@ -1178,9 +1193,7 @@ _FX BOOLEAN Terminal_Init_WtsApi(HMODULE module)
     WTSUnRegisterSessionNotificationEx=(P_WTSUnRegisterSessionNotificationEx)
         GetProcAddress(module, "WTSUnRegisterSessionNotificationEx");
 
-    if (WTSQueryUserToken) {
-        SBIEDLL_HOOK(Terminal_,WTSQueryUserToken);
-    }
+
     if (WTSEnumerateSessionsW) {
         SBIEDLL_HOOK(Terminal_,WTSEnumerateSessionsW);
     }

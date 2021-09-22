@@ -394,7 +394,7 @@ _FX LRESULT Gui_PostMessageA(
 {
     LRESULT lResult;
 
-    if (uMsg == WM_DDE_DATA)
+    if (Gui_UseProxyService && uMsg == WM_DDE_DATA)
         lResult = Gui_DDE_DATA_Posting(hWnd, wParam, lParam);
     else {
 
@@ -402,7 +402,7 @@ _FX LRESULT Gui_PostMessageA(
                         'pm a', hWnd, uMsg, wParam, lParam, 0, 0, NULL);
     }
 
-    if ((ULONG_PTR)hWnd != XFF4 && (ULONG_PTR)hWnd != XFF8) {
+    if (Gui_UseProxyService && (ULONG_PTR)hWnd != XFF4 && (ULONG_PTR)hWnd != XFF8) {
 
         //
         // for some messages, we have to pretend the post was successful,
@@ -432,7 +432,7 @@ _FX LRESULT Gui_PostMessageW(
 {
     LRESULT lResult;
 
-    if (uMsg == WM_DDE_DATA)
+    if (Gui_UseProxyService && uMsg == WM_DDE_DATA)
         lResult = Gui_DDE_DATA_Posting(hWnd, wParam, lParam);
     else {
 
@@ -440,7 +440,7 @@ _FX LRESULT Gui_PostMessageW(
                         'pm w', hWnd, uMsg, wParam, lParam, 0, 0, NULL);
     }
 
-    if ((ULONG_PTR)hWnd != XFF4 && (ULONG_PTR)hWnd != XFF8) {
+    if (Gui_UseProxyService && (ULONG_PTR)hWnd != XFF4 && (ULONG_PTR)hWnd != XFF8) {
 
         //
         // for some messages, we have to pretend the post was successful,
@@ -497,7 +497,7 @@ _FX LRESULT Gui_SendPostMessageCommon(
     // boundary of the job object) then issue a direct call
     //
 
-    if ((! hWnd) || Gui_IsSameBox(hWnd, NULL, NULL)) {
+    if ((! hWnd) || !Gui_UseProxyService || Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         if (hWnd && (which == 'pm w' || which == 'pm a')
                  && (uMsg >= WM_DDE_FIRST && uMsg <= WM_DDE_LAST)) {
@@ -588,7 +588,10 @@ _FX LRESULT Gui_SendPostMessageMulti(
     parm.uTimeout = uTimeout;
     parm.lpdwResult = lpdwResult;
 
-    Gui_EnumWindows(Gui_SendPostMessageMultiCallback, (LPARAM)&parm);
+    if(!Gui_UseProxyService && __sys_EnumWindows)
+		__sys_EnumWindows(Gui_SendPostMessageMultiCallback, (LPARAM)&parm);
+    else
+        Gui_EnumWindows(Gui_SendPostMessageMultiCallback, (LPARAM)&parm);
 
     return 1;
 }

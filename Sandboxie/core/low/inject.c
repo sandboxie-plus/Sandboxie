@@ -246,7 +246,7 @@ _FX void InitInject(SBIELOW_DATA *data, void * RtlFindActivationContextSectionSt
 
 #ifdef _WIN64
 
-    if (data->is_wow64) {
+    if (data->flags.is_wow64) {
 
 		//
 		// Instead of requiering the driver for this task, we can simplify it
@@ -320,7 +320,7 @@ _FX void InitInject(SBIELOW_DATA *data, void * RtlFindActivationContextSectionSt
 
 #ifdef _WIN64
 
-    if (data->is_wow64) {
+    if (data->flags.is_wow64) {
 
         InitInjectWow64(data,RtlFindActivationContextSectionString);
         goto store_sbielow_address;

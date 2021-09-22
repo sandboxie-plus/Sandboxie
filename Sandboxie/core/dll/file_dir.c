@@ -2081,30 +2081,22 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
             status = File_GetName(
                 FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
 
-            status = File_DeleteDirectory(CopyPath, TRUE);
+            ULONG len = wcslen(TruePath);
+            DeletePath = Dll_AllocTemp((len + 8) * sizeof(WCHAR));
+            wmemcpy(DeletePath, TruePath, len + 1);
 
-            if (status != STATUS_DIRECTORY_NOT_EMPTY)
-                status = STATUS_SUCCESS;
+            if (Dll_ChromeSandbox) {
 
-            if (NT_SUCCESS(status)) {
+                //
+                // if this is a Chrome sandbox process, we have
+                // to pass a DOS path to NtDeleteFile rather
+                // than a file handle
+                //
 
-                ULONG len = wcslen(TruePath);
-                DeletePath = Dll_AllocTemp((len + 8) * sizeof(WCHAR));
-                wmemcpy(DeletePath, TruePath, len + 1);
-
-                if (Dll_ChromeSandbox) {
-
-                    //
-                    // if this is a Chrome sandbox process, we have
-                    // to pass a DOS path to NtDeleteFile rather
-                    // than a file handle
-                    //
-
-                    if (SbieDll_TranslateNtToDosPath(DeletePath)) {
-                        len = wcslen(DeletePath);
-                        wmemmove(DeletePath + 4, DeletePath, len + 1);
-                        wmemcpy(DeletePath, File_BQQB, 4);
-                    }
+                if (SbieDll_TranslateNtToDosPath(DeletePath)) {
+                    len = wcslen(DeletePath);
+                    wmemmove(DeletePath + 4, DeletePath, len + 1);
+                    wmemcpy(DeletePath, File_BQQB, 4);
                 }
             }
 

@@ -1343,7 +1343,10 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
     GETPROCADDR_SYS(CoTaskMemAlloc);
     GETPROCADDR_SYS(IIDFromString);
 
-    if (!SbieDll_IsOpenCOM()) {
+    // DisableComProxy BEGIN
+    if (!SbieApi_QueryConfBool(NULL, L"DisableComProxy", FALSE))
+    // DisableComProxy END
+    if (! SbieDll_IsOpenCOM()) {
 
         SBIEDLL_HOOK(Com_, CoGetClassObject);
         if (!Dll_SkipHook(L"cocreate")) {
@@ -1353,7 +1356,7 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
 
         if (Dll_OsBuild >= 8400) {
             if (!Com_Hook_CoUnmarshalInterface_W8(
-                (UCHAR *)CoUnmarshalInterface))
+                (UCHAR*)CoUnmarshalInterface))
                 return FALSE;
         }
         else {
@@ -1362,22 +1365,21 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
 
         SBIEDLL_HOOK(Com_, CoMarshalInterface);
         SbieDll_IsOpenClsid(&IID_IUnknown, CLSCTX_LOCAL_SERVER, NULL);
-    }
 
-    if (Dll_OsBuild >= 8400) { // win8 and above
-        __sys_WindowsGetStringRawBuffer = (P_WindowsGetStringRawBuffer)GetProcAddress(module, "WindowsGetStringRawBuffer");
-        P_RoGetActivationFactory RoGetActivationFactory = (P_RoGetActivationFactory)GetProcAddress(module, "RoGetActivationFactory");
-        if (RoGetActivationFactory) {
-            SBIEDLL_HOOK(Com_, RoGetActivationFactory);
+
+        if (Dll_OsBuild >= 8400) { // win8 and above
+            __sys_WindowsGetStringRawBuffer = (P_WindowsGetStringRawBuffer)GetProcAddress(module, "WindowsGetStringRawBuffer");
+            P_RoGetActivationFactory RoGetActivationFactory = (P_RoGetActivationFactory)GetProcAddress(module, "RoGetActivationFactory");
+            if (RoGetActivationFactory) {
+                SBIEDLL_HOOK(Com_, RoGetActivationFactory);
+            }
         }
     }
 
-    {
-        // If there are any ClsidTrace options set, then output this debug string
-        WCHAR wsTraceOptions[4];
-        if (SbieApi_QueryConf(NULL, L"ClsidTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
-            Com_TraceFlag = TRUE;
-    }
+    // If there are any ClsidTrace options set, then output this debug string
+    WCHAR wsTraceOptions[4];
+    if (SbieApi_QueryConf(NULL, L"ClsidTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
+        Com_TraceFlag = TRUE;
 
     return TRUE;
 }
@@ -1408,6 +1410,9 @@ _FX BOOLEAN Com_Init_Ole32(HMODULE module)
     // other functions are still in ole32, even on Windows 8
     //
 
+    // DisableComProxy BEGIN
+    if (!SbieApi_QueryConfBool(NULL, L"DisableComProxy", FALSE))
+    // DisableComProxy END
     if (! SbieDll_IsOpenCOM()) {
 
         SBIEDLL_HOOK(Com_,CoGetObject);

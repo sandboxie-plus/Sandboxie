@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr">
 <context>
+    <name>CFileBrowserWindow</name>
+    <message>
+        <source>%1 - Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Shortcut</source>
+        <translation type="unfinished">Kısayol Oluştur</translation>
+    </message>
+    <message>
+        <source>Recover to Any Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recover to Same Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished">Dizin Seç</translation>
+    </message>
+    <message>
+        <source>Create Shortcut to sandbox %1</source>
+        <translation type="unfinished">%1 korumalı kutusuna kısayol oluştur</translation>
+    </message>
+</context>
+<context>
     <name>CMultiErrorDialog</name>
     <message>
         <source>Message</source>
@@ -576,6 +603,14 @@ Tam yol: %4</translation>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear this list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are %1 new files available to recover.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CResMonModel</name>
@@ -853,7 +888,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation>Bir korumalı kutu, silinmeden önce boşaltılmalıdır.</translation>
+        <translation type="vanished">Bir korumalı kutu, silinmeden önce boşaltılmalıdır.</translation>
     </message>
     <message>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
@@ -861,7 +896,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation>Bir korumalı kutu, yeniden adlandırılmadan önce boşaltılmalıdır.</translation>
+        <translation type="vanished">Bir korumalı kutu, yeniden adlandırılmadan önce boşaltılmalıdır.</translation>
     </message>
     <message>
         <source>Loaded Config: %1</source>
@@ -985,7 +1020,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Error Status: %1</source>
-        <translation>Hata durumu: %1</translation>
+        <translation type="vanished">Hata durumu: %1</translation>
     </message>
     <message>
         <source>Terminate All Processes</source>
@@ -1093,7 +1128,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Unknown Error Status: %1</source>
-        <translation>Bilinmeyen Hata Durumu: %1</translation>
+        <translation type="vanished">Bilinmeyen Hata Durumu: %1</translation>
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
@@ -1251,6 +1286,30 @@ No will choose: %2</source>
     </message>
     <message>
         <source>The config password must not be longer than 64 characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie Manager can not be run sandboxed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Box Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show All Sessions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Status: 0x%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Bilinmeyen</translation>
+    </message>
+    <message>
+        <source>Unknown Error Status: 0x%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1416,6 +1475,10 @@ No will choose: %2</source>
         <source>Sbie WuauServ</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> in session %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieView</name>
@@ -1459,7 +1522,7 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Move to Group</source>
-        <translation>Gruba Taşı</translation>
+        <translation type="vanished">Gruba Taşı</translation>
     </message>
     <message>
         <source>Remove Sandbox</source>
@@ -1495,7 +1558,7 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Add Group</source>
-        <translation>Grup ekle</translation>
+        <translation type="vanished">Grup ekle</translation>
     </message>
     <message>
         <source>Delete Content</source>
@@ -1653,10 +1716,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Default Web Browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1677,15 +1736,79 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Terminal</source>
+        <source>Create Box Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Terminal (as Admin)</source>
+        <source>Rename Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Terminal (32-bit)</source>
+        <source>Command Prompt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boxed Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Command Prompt (as Admin)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Command Prompt (32-bit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Execute Autorun Entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Registry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Box/Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Up</source>
+        <translation type="unfinished">Yukarı Taşı</translation>
+    </message>
+    <message>
+        <source>Move Down</source>
+        <translation type="unfinished">Aşağı taşı</translation>
+    </message>
+    <message>
+        <source>Please enter a new name for the Group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This Group name is already in use.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move entries by (negative values move up, positive values move down):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terminate without asking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to %1 %2?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>the selected processes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1760,6 +1883,18 @@ No will choose: %2</source>
     </message>
     <message>
         <source>This support certificate is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show any icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Plus icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Classic icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1854,6 +1989,13 @@ No will choose: %2</source>
     <message>
         <source>Filter selected box only</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileBrowserWindow</name>
+    <message>
+        <source>SandboxiePlus - Snapshots</source>
+        <translation type="unfinished">SandboxiePlus - Anlık Görüntüler</translation>
     </message>
 </context>
 <context>
@@ -2667,7 +2809,7 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Allow sandboxed programs to managing Hardware/Devices</source>
+        <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2728,7 +2870,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Recover to</source>
-        <translation>Şuraya kurtar</translation>
+        <translation type="vanished">Şuraya kurtar</translation>
     </message>
     <message>
         <source>Recover</source>
@@ -2753,6 +2895,10 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>SandboxiePlus - Recovery</source>
         <translation>SandboxiePlus - Kurtarma</translation>
+    </message>
+    <message>
+        <source>Recover to...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2858,7 +3004,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Show Sys-Tray</source>
-        <translation>Sistem Tepsisini Göster</translation>
+        <translation type="vanished">Sistem Tepsisini Göster</translation>
     </message>
     <message>
         <source>In the future, don&apos;t check software compatibility</source>
@@ -3037,7 +3183,19 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
+        <source>Show recoverable files as notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Icon in Systray:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This supporter certificate has expired, please get an updated certificate.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

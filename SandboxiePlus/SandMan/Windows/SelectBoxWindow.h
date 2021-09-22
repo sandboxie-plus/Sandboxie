@@ -13,6 +13,7 @@ public:
 	~CSelectBoxWindow();
 
 private slots:
+	void OnBoxDblClick(QTreeWidgetItem*);
 	void OnBoxType();
 	void OnRun();
 

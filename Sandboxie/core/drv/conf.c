@@ -38,14 +38,11 @@
 // Defines
 //---------------------------------------------------------------------------
 
-//#define USE_CONF_MAP
+#define USE_CONF_MAP
 
-#define CONF_LINE_LEN               2000        // keep in sync with
-#ifdef USE_CONF_MAP
-#define CONF_MAX_LINES              100000
-#else
-#define CONF_MAX_LINES              30000       // SbieCtrl/SbieIni.cpp
-#endif
+#define CONF_LINE_LEN               2000        // keep in sync with sbieiniwire.h
+#define CONF_MAX_LINES              100000      // keep in sync with sbieiniwire.h
+
 #define CONF_TMPL_LINE_BASE         0x01000000
 
 //---------------------------------------------------------------------------
@@ -1399,7 +1396,7 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         InterlockedExchange(&reconf_lock, 0);
     }
 
-    Api_SendServiceMessage(SVC_RESTART_HOST_INJECTED_SVCS, 0, NULL);
+    Api_SendServiceMessage(SVC_CONFIG_UPDATED, 0, NULL);
 
 finish:
     return status;

@@ -86,6 +86,7 @@
 #define MSGID_SBIE_INI_TEMPLATE                 0x1806
 #define MSGID_SBIE_INI_SET_PASSWORD             0x1807
 #define MSGID_SBIE_INI_TEST_PASSWORD            0x1808
+#define MSGID_SBIE_INI_GET_SETTING              0x1810
 #define MSGID_SBIE_INI_SET_SETTING              0x1811
 #define MSGID_SBIE_INI_ADD_SETTING              0x1812
 #define MSGID_SBIE_INI_INS_SETTING              0x1813

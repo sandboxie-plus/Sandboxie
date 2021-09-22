@@ -269,7 +269,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 		// Create a minimalistic driverless data
 		//
 
-		*syscall_data = 4 + 4 + 232; // size 4, offset 4, work area sizeof(INJECT_DATA)
+		*syscall_data = 4 + 4 + 232; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
 
 		const char* NtdllExports[] = { "NtDelayExecution", "NtDeviceIoControlFile", "NtFlushInstructionCache", "NtProtectVirtualMemory" };
 		for (ULONG i = 0; i < 4; ++i) {
@@ -279,6 +279,36 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 
 		len = *syscall_data;
 	}
+
+	/*
+	struct SYS_CALL_DATA {
+		ULONG size_of_buffer;
+		ULONG offset_to_extra_data;
+
+		struct _CODE {
+			UCHAR bytes[32]
+		}			saved_code[4];
+
+		struct _SC {
+			ULONG number;
+			ULONG offset;
+		}			sys_call_list[n + 1];
+
+		// the above is provided by the driver, the below we have to construct
+
+		struct _EX{
+			// ...
+		}			extra_data; // 40 bytes
+
+		char LdrLoadDll_str[16]			= "LdrLoadDll";
+		char LdrGetProcAddr_str[28]		= "LdrGetProcedureAddress";
+		char NtRaiseHardError_str[20]	= "NtRaiseHardError";
+		char RtlFindActCtx_str[44]		= "RtlFindActivationContextSectionString";
+		wchar_t KernelDll_str[13]		= L"kernel32.dll";
+		wchar_t NativeSbieDll_str[]		= L"..\\SbieDll.dll";
+		wchar_t Wow64SbieDll_str[]		= L"..\\32\\SbieDll.dll";
+	}
+	*/
 
 	//
 	// the second ULONG in syscall_data points to extra data appended
@@ -336,7 +366,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	wcscpy(ptr, L"kernel32.dll");
 
 	len = wcslen(ptr);
-	extra->KernelDll_offset = ULONG_DIFF(ptr, extra);;
+	extra->KernelDll_offset = ULONG_DIFF(ptr, extra);
 	extra->KernelDll_length = len * sizeof(WCHAR);
 	ptr += len + 1;
 
@@ -449,7 +479,7 @@ ULONG64 SbieDll_FindWOW64_Ntdll(_In_ HANDLE ProcessHandle)
 //---------------------------------------------------------------------------
 
 
-_FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInject, BOOLEAN dup_drv_handle)
+_FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_handle)
 {
 	//SVC_PROCESS_MSG *msg = (SVC_PROCESS_MSG *)_msg;
 	ULONG errlvl = 0;
@@ -471,14 +501,13 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInje
 	SBIELOW_DATA lowdata;
 	memzero(&lowdata, sizeof(lowdata));
 
+	lowdata.flags.init_flags = init_flags;
+
 #ifdef _WIN64
-	if (is_wow64)//(msg->is_wow64)
+	if (lowdata.flags.is_wow64)
 		lowdata.ntdll_wow64_base = SbieDll_FindWOW64_Ntdll(hProcess);
 #endif
 	lowdata.ntdll_base = (ULONG64)(ULONG_PTR)Dll_Ntdll;
-
-	lowdata.is_wow64 = is_wow64; //msg->is_wow64;
-	lowdata.bHostInject = bHostInject; //msg->bHostInject;
 
 	lowdata.RealNtDeviceIoControlFile = (ULONG64)GetProcAddress((HMODULE)lowdata.ntdll_base, "NtDeviceIoControlFile");
 	//
@@ -487,22 +516,22 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInje
 	// use of longer jump sequences than the 5-byte 0xE9 relative jump
 	//
 	if (Dll_Windows >= 10) {
-		lowdata.is_win10 = TRUE;
+		lowdata.flags.is_win10 = 1;
 	}
 
-	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowdata.is_wow64, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp));
+	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowdata.flags.is_wow64 == 1, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp));
 	if (!remote_addr) {
 		errlvl = 0x33;
 		goto finish;
 	}
 	//   if (lowdata.is_wow64 && (m_addr_high != m_addr_high_32))
 #ifdef _WIN64
-	lowdata.long_diff = TRUE;
+	lowdata.flags.long_diff = 1;
 	if (SbieDll_Has32BitJumpHorizon((void *)m_LdrInitializeThunk, remote_addr)) {
-		lowdata.long_diff = FALSE;
+		lowdata.flags.long_diff = 0;
 	}
 #else
-	lowdata.long_diff = FALSE;
+	lowdata.flags.long_diff = 0;
 #endif
 
 	if (dup_drv_handle)
@@ -531,6 +560,9 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInje
 	//
 
 	memcpy(lowdata.NtDelayExecution_code, &m_syscall_data[2], (32 * 4));
+	// lowdata.NtDeviceIoControlFile_code
+	// lowdata.NtFlushInstructionCache_code
+	// lowdata.NtProtectVirtualMemory_code
 
 	//
 	// allocate space for and write the lowlevel (SbieLow) code
@@ -548,7 +580,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInje
 		+ m_sbielow_data_offset     // offset of args area
 		+ FIELD_OFFSET(SBIELOW_DATA, LdrInitializeThunk_tramp);
 
-	if (!SbieDll_InjectLow_BuildTramp(lowdata.long_diff,
+	if (!SbieDll_InjectLow_BuildTramp(lowdata.flags.long_diff == 1,
 		lowdata.LdrInitializeThunk_tramp, tramp_remote_addr)) {
 
 		//UCHAR *code = lowdata.LdrInitializeThunk_tramp;
@@ -594,7 +626,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, BOOLEAN is_wow64, BOOLEAN bHostInje
 	//
 	// Removed hard coded dependency on (.HEAD.00). No longer need to add 8 to
 	// the remote_addr
-	if (!SbieDll_InjectLow_WriteJump(hProcess, (UCHAR *)remote_addr + m_sbielow_start_offset, lowdata.long_diff, &lowdata)) {
+	if (!SbieDll_InjectLow_WriteJump(hProcess, (UCHAR *)remote_addr + m_sbielow_start_offset, lowdata.flags.long_diff == 1, &lowdata)) {
 		errlvl = 0x77;
 		goto finish;
 	}

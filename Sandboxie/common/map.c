@@ -26,18 +26,28 @@ struct map_node_t {
 };
 
 
+#ifdef WITHOUT_POOL
+VOID* map_alloc(void* pool, size_t size)
+{
+    return malloc(size);
+}
+
+VOID map_free(void* pool, void* ptr)
+{
+    free(ptr);
+}
+#else
 VOID* map_alloc(void* pool, size_t size)
 {
     if (!pool) return NULL;
 #ifdef KERNEL_MODE
 	size_t* base = Mem_Alloc(pool, sizeof(size_t) + size);
 #else
-    size_t* base = (size_t*)Pool_Alloc((POOL*)pool, sizeof(size_t) + size);
+    size_t* base = (size_t*)Pool_Alloc((struct POOL*)pool, sizeof(size_t) + size);
 #endif
     *base++ = size;
     return base;
 }
-
 
 VOID map_free(void* pool, void* ptr)
 {
@@ -49,6 +59,7 @@ VOID map_free(void* pool, void* ptr)
 	Pool_Free(base, size);
 #endif
 }
+#endif
 
 
 static unsigned int map_hash(const void* key, size_t size) 
@@ -239,20 +250,31 @@ void* map_get(map_base_t* m, const void* key)
 }
 
 
-void* map_remove(map_base_t* m, const void* key) 
+void map_remove(map_base_t* m, const void* key) 
 {
-    void* value = NULL;
+    map_take(m, key, NULL, 0);
+}
+
+BOOLEAN map_take(map_base_t* m, const void* key, void* vdata, size_t vsize)
+{
     map_node_t** next = map_getref(m, key);
     if (next) {
         map_node_t* node = *next;
         *next = (*next)->next;
-        value = node->value;
+        if (vdata) {
+            if (vsize) // by value
+                memcpy(vdata, node->value, vsize);
+            else // by extern pointer
+                *((UINT_PTR*)vdata) = (UINT_PTR)node->value;
+        }
         m->func_free(m->mem_pool, node);
         m->nnodes--;
+        return TRUE;
     }
-    return value; // WARNING: this valus is only pointer when the map was storring an externaly allocated value!!!
+    if(vdata && !vsize)
+        *((UINT_PTR*)vdata) = 0;
+    return FALSE;
 }
-
 
 void map_clear(map_base_t* m) 
 {

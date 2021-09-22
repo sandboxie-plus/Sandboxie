@@ -90,8 +90,10 @@ public:
 	// Config
 	virtual SB_STATUS		ReloadConfig(bool ReconfigureDrv = false);
 	virtual SB_STATUS		ReloadCert();
+	virtual void			CommitIniChanges();
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
-	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
+	virtual QString			SbieIniGetEx(const QString& Section, const QString& Setting);
+	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate, bool bRefresh = true);
 	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
@@ -173,7 +175,7 @@ protected:
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
 
-	virtual quint32			GetImageType(quint32 ProcessId);
+	virtual quint32			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
 
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);

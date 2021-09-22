@@ -147,16 +147,19 @@ _FX BOOLEAN Gui_InitMisc(void)
 {
     if (! Gui_OpenAllWinClasses) {
 
-        SBIEDLL_HOOK_GUI(GetWindow);
-        SBIEDLL_HOOK_GUI(GetParent);
+        
         SBIEDLL_HOOK_GUI(SetParent);
-        SBIEDLL_HOOK_GUI(SetForegroundWindow);
-        SBIEDLL_HOOK_GUI(MonitorFromWindow);
-
-        SBIEDLL_HOOK_GUI(SetCursor);
-        SBIEDLL_HOOK_GUI(GetIconInfo);
-        SBIEDLL_HOOK_GUI(SetCursorPos);
-        SBIEDLL_HOOK_GUI(ClipCursor);
+        if (Gui_UseProxyService) {
+            SBIEDLL_HOOK_GUI(GetWindow);
+            SBIEDLL_HOOK_GUI(GetParent);
+            SBIEDLL_HOOK_GUI(SetForegroundWindow);
+            SBIEDLL_HOOK_GUI(MonitorFromWindow);
+        
+            SBIEDLL_HOOK_GUI(SetCursor);
+            SBIEDLL_HOOK_GUI(GetIconInfo);
+            SBIEDLL_HOOK_GUI(SetCursorPos);
+            SBIEDLL_HOOK_GUI(ClipCursor);
+        }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
 
@@ -174,10 +177,8 @@ _FX BOOLEAN Gui_InitMisc(void)
         }
     }
 
-	// NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	if (!Gui_UseProxyService)
 		return TRUE;
-	// NoSbieDesk END
 
     SBIEDLL_HOOK_GUI(OpenClipboard);
     SBIEDLL_HOOK_GUI(CloseClipboard);
@@ -1314,6 +1315,11 @@ static P_ImmCreateContext       __sys_ImmCreateContext      = NULL;
 
 _FX BOOLEAN Gui_Init_IMM32(HMODULE module)
 {
+    // NoSbieDesk BEGIN
+    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
+
     __sys_ImmAssociateContext = (P_ImmAssociateContext)
                 GetProcAddress(module, "ImmAssociateContext");
 

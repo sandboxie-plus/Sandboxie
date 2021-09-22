@@ -29,6 +29,17 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
+	if (!bAlwaysOnTop) {
+		HWND hWnd = (HWND)this->winId();
+		SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		QTimer::singleShot(100, this, [hWnd]() {
+			SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		});
+	}
+
 	ui.setupUi(this);
 	this->setWindowTitle(tr("Sandboxie-Plus - Run Sandboxed"));
 
@@ -38,6 +49,8 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 
 	connect(ui.buttonBox, SIGNAL(accepted()), SLOT(OnRun()));
 	connect(ui.buttonBox, SIGNAL(rejected()), SLOT(reject()));
+
+	connect(ui.treeBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 
 	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
@@ -51,7 +64,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setText(0, pBox->GetName().replace("_", " "));
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
-		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount(), pBoxEx->GetType()));
+		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount()));
 		ui.treeBoxes->addTopLevelItem(pItem);
 
 		if (pBox->GetName().compare(BoxName, Qt::CaseInsensitive) == 0)
@@ -75,6 +88,11 @@ void CSelectBoxWindow::closeEvent(QCloseEvent *e)
 void CSelectBoxWindow::OnBoxType()
 {
 	ui.treeBoxes->setEnabled(!ui.radUnBoxed->isChecked());
+}
+
+void CSelectBoxWindow::OnBoxDblClick(QTreeWidgetItem*)
+{
+	OnRun();
 }
 
 void CSelectBoxWindow::OnRun()

@@ -250,9 +250,9 @@ void RenameSandbox(void)
         if (status == STATUS_ACCESS_DENIED ||
             status == STATUS_SHARING_VIOLATION) {
 
-            ULONG pids[512];
-            SbieApi_EnumProcess(g_BoxName, pids);
-            if (pids[0]) {
+            ULONG pid_count = 0;
+            SbieApi_EnumProcessEx(g_BoxName, FALSE, -1, NULL, &pid_count);
+            if (pid_count) {
 
                 SetLastError(0);
                 Error(SbieDll_FormatMessage0(MSG_3221), 0);

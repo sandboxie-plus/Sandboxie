@@ -172,6 +172,12 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                     WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
                     Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
 
+                    //
+					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
+					//
+					/*const WCHAR* box_name = SbieApi_QueryConfBool(NULL, L"RunRpcSsAsSystem", FALSE) ? L"*SYSTEM*" : L"*THREAD*";
+
+                    if (! SbieDll_RunSandboxed(box_name, fullpath, homedir, 0, &si, &pi))*/
                     if (! SbieDll_RunSandboxed(
                             L"*THREAD*", fullpath, homedir, 0, &si, &pi))
                         errnum = GetLastError();

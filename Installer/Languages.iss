@@ -17,7 +17,7 @@ Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
+;Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 ;Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 ;Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 ;Name: "bulgarian"; MessagesFile: "compiler:Languages\Bulgarian.isl"
@@ -98,13 +98,13 @@ dutch.CustomPageInstallMode={#MyAppName} op deze computer installeren
 dutch.CustomPageUpgradeMode=Bestaande installatie van {#MyAppName} bijwerken
 dutch.CustomPagePortableMode=Alle bestanden naar een map uitpakken voor draagbaar gebruik
 dutch.RequiresWin7OrLater=Sandboxie-Plus vereist Windows 7 of later.
-dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd, die eerst moet verwijderd worden. Wilt u deze nu verwijderen?
+dutch.ClassicFound=Installatie van Sandboxie Classic gedetecteerd. Het moet eerst verwijderd worden. Wilt u het nu verwijderen?
 dutch.RunSandboxedMenu=In &sandbox uitvoeren
-;dutch.UninstallTaskLabel1=
-;dutch.UninstallTaskLabel2=
-;dutch.UninstallTaskLabel3=
-;dutch.UninstallTaskLabel4=
-;dutch.UninstallTaskLabel5=
+dutch.UninstallTaskLabel1=Type verwijdering selecteren
+dutch.UninstallTaskLabel2=Hoe wilt u Sandboxie-Plus verwijderen?
+dutch.UninstallTaskLabel3=Configuratiebestanden en sandboxen behouden%nDit is de aanbevolen optie als u Sandboxie-Plus opnieuw wilt installeren en uw configuratiebestanden en sandboxen wilt behouden.
+dutch.UninstallTaskLabel4=Configuratiebestanden verwijderen%nSelecteer deze optie om de configuratiebestanden Sandboxie.ini en Sandboxie-Plus.ini wilt verwijderen en de sandboxen ongewijzigd wilt laten.
+dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelecteer deze optie om alle configuratiebestanden en sandboxen te verwijderen, inclusief de Sandbox-map die zich in aangepaste paden met FileRootPath bevindt.
 
 ; German
 german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
@@ -117,11 +117,11 @@ german.CustomPagePortableMode=Extrahiere alle Dateien in einen Ordner zur tragba
 german.RequiresWin7OrLater=Sandboxie-Plus benötigt Windows 7 oder neuer.
 german.ClassicFound=Sandboxie Classic Installation gefunden, welche vorher deinstalliert werden muss. Möchten Sie diese nun deinstallieren?
 german.RunSandboxedMenu=In &Sandbox ausführen
-;german.UninstallTaskLabel1=
-;german.UninstallTaskLabel2=
-;german.UninstallTaskLabel3=
-;german.UninstallTaskLabel4=
-;german.UninstallTaskLabel5=
+german.UninstallTaskLabel1=Wählen Sie die De-Installationsart aus
+german.UninstallTaskLabel2=Wie möchten Sie Sandboxie-Plus de-installieren?
+german.UninstallTaskLabel3=&Konfiguration und Sandboxen behalten%nDies ist die empfohlene Option, wenn Sie vorhaben Sandboxie-Plus erneut zu intallieren, während Sandboxie-Plus alle Sandboxen und Konfigurationsdateien behält.
+german.UninstallTaskLabel4=&Entferne die Konfiguration%nWählen Sie diese Option um die Sandboxie.ini und Sandboxie-Plus.ini Dateien zu entfernen, während die Sandboxen unverändert bleiben.
+german.UninstallTaskLabel5=Entferne die Konfiguration und alle &Sandboxen%nWählen Sie diese Option um alle Konfigurationsdateien und alle Sandboxen, inklusive des Sandboxordners im, durch die Dateisystemquelle, benutzerdefinierten Pfad.
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
@@ -134,11 +134,28 @@ Italian.CustomPagePortableMode=Estrai tutti i file in una directory per uso port
 Italian.RequiresWin7OrLater=Sandboxie-Plus richiede Windows 7 o superiore.
 Italian.ClassicFound=È stata rilevata una installazione di Sandboxie Classic che potrebbe causare incompatibilità. Rimuoverla ora?
 Italian.RunSandboxedMenu=Avvia nell'&area virtuale
-;Italian.UninstallTaskLabel1=
-;Italian.UninstallTaskLabel2=
-;Italian.UninstallTaskLabel3=
-;Italian.UninstallTaskLabel4=
-;Italian.UninstallTaskLabel5=
+Italian.UninstallTaskLabel1=Seleziona tipo di disinstallazione
+Italian.UninstallTaskLabel2=Come vorresti disinstallare Sandboxie-Plus?
+Italian.UninstallTaskLabel3=&Mantieni i file di configurazione e le aree virtuali%nSelezionare questa opzione se si prevede di reinstallare Sandboxie in un secondo momento, conservando le impostazioni e le aree virtuali.
+Italian.UninstallTaskLabel4=Rimuovi i file di &configurazione%nSelezionare questa opzione per rimuovere i file di configurazione Sandboxie.ini e Sandboxie-Plus.ini, lasciando invariate le aree virtuali presenti.
+Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali%nSelezionare questa opzione per rimuovere tutti i file di configurazione e le aree virtuali, inclusa la cartella Sandbox nei percorsi personalizzati mediante FileRootPath.
+
+; Polish
+polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego
+polish.CustomPageLabel1=Wybierz typ instalacji
+polish.CustomPageLabel2=Jak należy instalować
+polish.CustomPageLabel3=Wybierz tryb instalacji
+polish.CustomPageInstallMode=Zainstaluj {#MyAppName} na tym komputerze
+polish.CustomPageUpgradeMode=Aktualizacja istniejącej instalacji {#MyAppName}
+polish.CustomPagePortableMode=Wypakuj wszystkie pliki do katalogu, aby użyć trybu przenośnego
+polish.RequiresWin7OrLater=Sandboxie-Plus wymaga systemu Windows 7 lub nowszego.
+polish.ClassicFound=Wykryto instalację Sandboxie Classic, która musi być najpierw odinstalowana, czy chcesz ją teraz odinstalować?
+polish.RunSandboxedMenu=Uruchom w &Sandboxie
+polish.UninstallTaskLabel1=Wybierz typ dezinstalacji
+polish.UninstallTaskLabel2=W jaki sposób chcesz odinstalować Sandboxie-Plus?
+polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to najbardziej zalecana opcja, jeśli planujesz reinstalować Sandboxie-Plus, zachowując pliki konfiguracyjne i piaskownice.
+polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
+polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
 
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
@@ -151,11 +168,11 @@ portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório p
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
 portuguese.ClassicFound=Instalação do Classic Sandboxie detectada, deve ser desinstalado primeiro, você quer desinstalá-lo agora?
 portuguese.RunSandboxedMenu=Rodar na &Caixa de Areia
-;portuguese.UninstallTaskLabel1=
-;portuguese.UninstallTaskLabel2=
-;portuguese.UninstallTaskLabel3=
-;portuguese.UninstallTaskLabel4=
-;portuguese.UninstallTaskLabel5=
+portuguese.UninstallTaskLabel1=Selecionar Tipo de Desinstalar
+portuguese.UninstallTaskLabel2=Como você gostaria de desinstalar Sandboxie-Plus?
+portuguese.UninstallTaskLabel3=&Manter os arquivos de configuração do sandboxes%nEsta é a opção mais recomendada se você planeja reinstalar o Sandboxie-Plus enquanto mantém seus arquivos de configuração e caixas de areia.
+portuguese.UninstallTaskLabel4=&Remover arquivos de configuração%nSelecione essa opção para remover os arquivos de configuração Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
+portuguese.UninstallTaskLabel5=Remover arquivos de configuração e &caixas de areia%nSelecione essa opção para remover todos os arquivos de configuração e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
@@ -168,8 +185,25 @@ russian.CustomPagePortableMode=Извлечь все файлы в катало�
 russian.RequiresWin7OrLater=Sandboxie-Plus требует Windows 7 или новее.
 russian.ClassicFound=Обнаружена установка Sandboxie Classic, перед установкой ее необходимо удалить. Удалить сейчас?
 russian.RunSandboxedMenu=Запустить в песочнице (&S)
-;russian.UninstallTaskLabel1=
-;russian.UninstallTaskLabel2=
-;russian.UninstallTaskLabel3=
-;russian.UninstallTaskLabel4=
-;russian.UninstallTaskLabel5=
+russian.UninstallTaskLabel1=Выберите тип удаления
+russian.UninstallTaskLabel2=Как вы хотите удалить Sandboxie-Plus?
+russian.UninstallTaskLabel3=Сохранять файлы конфигурации и песочницы (&K)%nЭто наиболее рекомендуемый вариант, если вы планируете переустановить Sandboxie-Plus, сохранив файлы конфигурации и песочницы.
+russian.UninstallTaskLabel4=Удалить файлы конфигурации (&C)%nВыберите этот параметр, чтобы удалить файлы конфигурации Sandboxie.ini и Sandboxie-Plus.ini, оставив файлы песочницы без изменений.
+russian.UninstallTaskLabel5=Удалить файлы конфигурации и песочницы (&S)%nВыберите этот параметр, чтобы удалить все файлы конфигурации и песочницы, включая папку Sandbox, расположение которой заданно в FileRootPath.
+
+; Spanish
+spanish.AddSandboxedMenu=Agregar "Ejecutar Aislado en una Sandbox" al menú contextual
+spanish.CustomPageLabel1=Seleccione el tipo de instalación
+spanish.CustomPageLabel2=¿Cómo se debe instalar?
+spanish.CustomPageLabel3=Elija el modo de instalación
+spanish.CustomPageInstallMode=Instalar {#MyAppName} en esta computadora
+spanish.CustomPageUpgradeMode=Actualizar la instalación existente de {#MyAppName}
+spanish.CustomPagePortableMode=Extraiga todos los archivos a un directorio para uso portátil
+spanish.RequiresWin7OrLater=Sandboxie-Plus requiere Windows 7 o posterior.
+spanish.ClassicFound=Se detectó la instalación de Sandboxie Classic, primero debe desinstalarse. ¿Quieres desinstalarlo ahora?
+spanish.RunSandboxedMenu=&Ejecutar Aislado en una Sandbox
+spanish.UninstallTaskLabel1=Seleccione el tipo de desinstalación
+spanish.UninstallTaskLabel2=¿Cómo le gustaría desinstalar Sandboxie-Plus?
+spanish.UninstallTaskLabel3=&Mantenga los archivos de configuración y las sandboxes%nEsta es la opción más recomendada si planea reinstalar Sandboxie-Plus mientras mantiene sus archivos de configuración y las sandboxes.
+spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione esta opción para eliminar los archivos de configuración Sandboxie.ini y Sandboxie-Plus.ini manteniendo las sandboxes sin cambios.
+spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.

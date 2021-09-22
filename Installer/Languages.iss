@@ -190,3 +190,20 @@ russian.UninstallTaskLabel2=Как вы хотите удалить Sandboxie-Pl
 russian.UninstallTaskLabel3=Сохранять файлы конфигурации и песочницы (&K)%nЭто наиболее рекомендуемый вариант, если вы планируете переустановить Sandboxie-Plus, сохранив файлы конфигурации и песочницы.
 russian.UninstallTaskLabel4=Удалить файлы конфигурации (&C)%nВыберите этот параметр, чтобы удалить файлы конфигурации Sandboxie.ini и Sandboxie-Plus.ini, оставив файлы песочницы без изменений.
 russian.UninstallTaskLabel5=Удалить файлы конфигурации и песочницы (&S)%nВыберите этот параметр, чтобы удалить все файлы конфигурации и песочницы, включая папку Sandbox, расположение которой заданно в FileRootPath.
+
+; Spanish
+spanish.AddSandboxedMenu=Agregar "Ejecutar Aislado en una Sandbox" al menú contextual
+spanish.CustomPageLabel1=Seleccione el tipo de instalación
+spanish.CustomPageLabel2=¿Cómo se debe instalar?
+spanish.CustomPageLabel3=Elija el modo de instalación
+spanish.CustomPageInstallMode=Instalar {#MyAppName} en esta computadora
+spanish.CustomPageUpgradeMode=Actualizar la instalación existente de {#MyAppName}
+spanish.CustomPagePortableMode=Extraiga todos los archivos a un directorio para uso portátil
+spanish.RequiresWin7OrLater=Sandboxie-Plus requiere Windows 7 o posterior.
+spanish.ClassicFound=Se detectó la instalación de Sandboxie Classic, primero debe desinstalarse. ¿Quieres desinstalarlo ahora?
+spanish.RunSandboxedMenu=&Ejecutar Aislado en una Sandbox
+spanish.UninstallTaskLabel1=Seleccione el tipo de desinstalación
+spanish.UninstallTaskLabel2=¿Cómo le gustaría desinstalar Sandboxie-Plus?
+spanish.UninstallTaskLabel3=&Mantenga los archivos de configuración y las sandboxes%nEsta es la opción más recomendada si planea reinstalar Sandboxie-Plus mientras mantiene sus archivos de configuración y las sandboxes.
+spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione esta opción para eliminar los archivos de configuración Sandboxie.ini y Sandboxie-Plus.ini manteniendo las sandboxes sin cambios.
+spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.

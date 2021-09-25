@@ -11,17 +11,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)
-- added "SbieTrace=y" option to trace the intaraction between sandboxie processes and the core sandboxie components 
-- when initializing an empty sandbox MSI debug keys are set to generate msi service debug output
-- added "DisableComProxy=y" alowing to disable com proxying through the service
+- added "SbieTrace=y" option to trace the interaction between Sandboxie processes and the Sandboxie core components
+- when initializing an empty sandbox, MSI debug keys are set to generate the debug output of MSI installer service
+- added "DisableComProxy=y" allowing to disable COM proxying through the service
 
 ### Changed
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance
 -- Now comments in the Sandboxie.ini are being preserved as well as the order of all entries
 - enabled configuration section list replacement with a hash map to improve configuration performance
 - improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
-- reworked rpcss start mechanics, sandboxed rpcss and dcomlaunch can now be run as system, use "RunRpcssAsSystem=y"
--- note: this is generally not recommended for security reasons but may be neede for compatybility in some scenarios
+- reworked RpcSs start mechanics, sandboxed RpcSs and DcomLaunch can now be run as system, use "RunRpcssAsSystem=y"
+-- note: this is generally not recommended for security reasons but may be needed for compatibility in some scenarios
 - reworked WTSQueryUserToken handling to work properly in all scenarios
 
 ### Fixed
@@ -29,12 +29,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed custom autoexec commands being executed on each box start instead of only on the initialization
 - fixed a design issue limiting the maximal amount of processes in one box to 511
 - fixed handle leaks in the lingering process monitor mechanism
-- fixed issue with openign device paths like "\\??\\FltMgr"
-- fixed build issue with explicit SHA256 fd algorithm for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)
+- fixed issue with opening device paths like "\\??\\FltMgr"
+- fixed build issue with an explicit FileDigestAlgorithm option for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)
 
 ### removed
 - removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018
-- removed support for Messenger Plus! Live MSN messanger addon as MSN messager is EOL sinde 2013
+- removed support for Messenger Plus! Live, as MSN Messenger is EOL since 2013
 - disabled Turkish language on Plus UI for inactivity (by isaak654) [#1215](https://github.com/sandboxie-plus/Sandboxie/pull/1215)
 
 

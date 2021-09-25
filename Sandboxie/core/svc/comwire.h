@@ -348,31 +348,6 @@ typedef struct tagCOM_CRYPT_PROTECT_DATA_REQ COM_CRYPT_PROTECT_DATA_REQ;
 typedef struct tagCOM_CRYPT_PROTECT_DATA_RPL COM_CRYPT_PROTECT_DATA_RPL;
 
 
-//---------------------------------------------------------------------------
-// Internet Explorer Cookie Service
-//---------------------------------------------------------------------------
-
-
-struct tagCOM_INTERNET_COOKIE_REQ
-{
-    MSG_HEADER h;
-    ULONG data_len;                     // -1 for get, otherwise set
-    ULONG flags;
-    UCHAR url[256];
-    UCHAR data[1];
-};
-
-struct tagCOM_INTERNET_COOKIE_RPL
-{
-    MSG_HEADER h;                       // status is win32 error
-    ULONG ret_val;
-    ULONG data_len;
-    UCHAR data[1];
-};
-
-typedef struct tagCOM_INTERNET_COOKIE_REQ COM_INTERNET_COOKIE_REQ;
-typedef struct tagCOM_INTERNET_COOKIE_RPL COM_INTERNET_COOKIE_RPL;
-
 
 //---------------------------------------------------------------------------
 

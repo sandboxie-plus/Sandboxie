@@ -1119,7 +1119,7 @@ _FX void Custom_ComServer(void)
         // SbieSvc SANDBOXIE_ComProxy_ComServer:BoxName
         // see also core/svc/ProcessServer.cpp
         // and      core/svc/comserver9.c
-        BOOL ok = SbieDll_RunSandboxed(L"*THREAD*", L"*COMSRV*", L"", 0,
+        BOOL ok = SbieDll_RunSandboxed(L"", L"*COMSRV*", L"", 0,
                                        &StartupInfo, &ProcessInformation);
 
         if (ok)

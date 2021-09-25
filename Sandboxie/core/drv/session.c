@@ -971,10 +971,10 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
          && status != STATUS_OBJECT_PATH_NOT_FOUND
          && status != STATUS_OBJECT_PATH_SYNTAX_BAD) {
 
-        if (! NT_SUCCESS(status)) {
+        /*if (! NT_SUCCESS(status)) {
             name[0] = L'?';
             name[1] = L'\0';
-        }
+        }*/
 
         const WCHAR* strings[2] = { name, NULL };
         Session_MonitorPutEx(log_type | MONITOR_USER, strings, NULL, proc->pid, PsGetCurrentThreadId());

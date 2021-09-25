@@ -20,18 +20,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Now comments in the Sandboxie.ini are being preserved as well as the order of all entries
 - enabled configuration section list replacement with a hash map to improve configuration performance
 - improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
-- disabled Turkish language on Plus UI for inactivity (by isaak654) [#1215](https://github.com/sandboxie-plus/Sandboxie/pull/1215)
+- reworked rpcss start mechanics, sandboxed rpcss and dcomlaunch can now be run as system, use "RunRpcssAsSystem=y"
+-- note: this is generally not recommended for security reasons but may be neede for compatybility in some scenarios
+- reworked WTSQueryUserToken handling to work properly in all scenarios
 
 ### Fixed
 - fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)
 - fixed custom autoexec commands being executed on each box start instead of only on the initialization
 - fixed a design issue limiting the maximal amount of processes in one box to 511
 - fixed handle leaks in the lingering process monitor mechanism
+- fixed issue with openign device paths like "\\??\\FltMgr"
 - fixed build issue with explicit SHA256 fd algorithm for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)
 
 ### removed
 - removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018
 - removed support for Messenger Plus! Live MSN messanger addon as MSN messager is EOL sinde 2013
+- disabled Turkish language on Plus UI for inactivity (by isaak654) [#1215](https://github.com/sandboxie-plus/Sandboxie/pull/1215)
+
 
 
 ## [0.9.6 / 5.51.6] - 2021-09-12
@@ -57,6 +62,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SRWare Iron template (by Dyras) [#1146](https://github.com/sandboxie-plus/Sandboxie/pull/1146)
 - fixed label positioning in Classic UI (by isaak654) [#1088](https://github.com/sandboxie-plus/Sandboxie/issues/1088)
 - fixed an old issue that occurred when only an asterisk was set as path [#971](https://github.com/sandboxie-plus/Sandboxie/issues/971)
+
 
 
 ## [0.9.5 / 5.51.5] - 2021-08-30

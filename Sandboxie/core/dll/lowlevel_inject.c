@@ -705,7 +705,8 @@ _FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, BOOLEAN iswow64, UCHAR *co
 #endif
 	region_size = lowLevel_size;
 
-	for (int i = 8; !remote_addr && i > 2; i--) {
+	//for (int i = 8; !remote_addr && i > 2; i--) {
+	for (int i = 8; !remote_addr && i >= 0; i--) {
 		NTSTATUS status = NtAllocateVirtualMemory(hProcess, &remote_addr, i, &region_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 		if (!NT_SUCCESS(status)) {
 			remote_addr = NULL;
@@ -898,7 +899,8 @@ _FX void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess)
 	int i;
 	NTSTATUS status;
 
-	for (i = 8; !remote_addr && i > 2; i--) {
+	//for (i = 8; !remote_addr && i > 2; i--) {
+	for (i = 8; !remote_addr && i >= 0; i--) {
 		status = NtAllocateVirtualMemory(hProcess, &remote_addr, i, &region_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 		if (!NT_SUCCESS(status)) {
 			remote_addr = NULL;

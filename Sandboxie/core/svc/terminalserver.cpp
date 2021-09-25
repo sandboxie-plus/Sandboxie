@@ -26,6 +26,9 @@
 #include "misc.h"
 #include "core/dll/sbiedll.h"
 #include "common/defines.h"
+#include <wtsapi32.h>
+#include "core/drv/api_defs.h"
+#include "core/dll/sbiedll.h"
 
 
 //---------------------------------------------------------------------------
@@ -139,6 +142,9 @@ MSG_HEADER *TerminalServer::Handler(void *_this, MSG_HEADER *msg)
 
     if (msg->msgid == MSGID_TERMINAL_DISCONNECT)
         return pThis->Disconnect(msg);
+
+    if (msg->msgid == MSGID_TERMINAL_GET_USER_TOKEN)
+        return pThis->GetUserToken(msg);
 
     return NULL;
 }
@@ -497,3 +503,89 @@ MSG_HEADER *TerminalServer::Disconnect(MSG_HEADER *msg)
 
     return SHORT_REPLY(err);
 }
+
+
+//---------------------------------------------------------------------------
+// GetUserToken
+//---------------------------------------------------------------------------
+
+
+MSG_HEADER *TerminalServer::GetUserToken(MSG_HEADER *msg)
+{
+    ULONG session_id;
+    ULONG err;
+    BOOL ok = FALSE;
+
+    HANDLE idProcess = (HANDLE)(ULONG_PTR)PipeServer::GetCallerProcessId();
+
+    if (msg->length != sizeof(MSG_HEADER)) {
+
+        err = ERROR_INVALID_PARAMETER;
+
+    } else if (0 != SbieApi_QueryProcess(idProcess, NULL, NULL, NULL, &session_id)) {
+
+        err = ERROR_ACCESS_DENIED;
+
+    } else {
+
+        WCHAR boxname[48] = { 0 };
+        SbieApi_QueryProcess(idProcess, boxname, NULL, NULL, NULL);
+
+        HANDLE hCallerProcess = OpenProcess(PROCESS_DUP_HANDLE, FALSE, (ULONG)(ULONG_PTR)idProcess);
+        if (!hCallerProcess)
+            err = GetLastError();
+        else {
+            HANDLE pHandle;
+
+            HANDLE hToken; //hToken = (HANDLE)SbieApi_QueryProcessInfoEx((HANDLE)idProcess, 'ptok', 0);
+            if (WTSQueryUserToken(session_id, &hToken)) {
+                
+                HANDLE hFilteredToken = NULL;
+
+                // OriginalToken BEGIN
+                if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)
+                // OriginalToken END
+                // OpenToken BEGIN
+                 && !SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) && !SbieApi_QueryConfBool(boxname, L"UnfilteredToken", FALSE))
+	            // OpenToken END
+                {
+                    // of one of the above is true we handle unfiltered tokens
+                    // if not we need to filter the token or else security checks in the driver wil fail!
+
+                    if (!NT_SUCCESS(SbieApi_Call(API_FILTER_TOKEN, 3, (ULONG_PTR)idProcess, (ULONG_PTR)hToken, (ULONG_PTR)&hFilteredToken)))
+                        goto fail;
+                }
+
+                ok = DuplicateHandle(GetCurrentProcess(), hFilteredToken ? hFilteredToken : hToken, hCallerProcess, &pHandle, TOKEN_ALL_ACCESS, FALSE, 0);
+
+                if(hFilteredToken)
+                    CloseHandle(hFilteredToken);
+                
+            fail:
+                CloseHandle(hToken);
+            }
+
+            if (!ok)
+                err = GetLastError();
+            
+            CloseHandle(hCallerProcess);
+
+            if (ok) {
+                ULONG rpl_len = sizeof(GET_USER_TOKEN_RPL);
+                GET_USER_TOKEN_RPL* rpl = (GET_USER_TOKEN_RPL*)LONG_REPLY(rpl_len);
+                if (!rpl) {
+                    err = GetLastError();
+                    CloseHandle(pHandle);
+                }
+                else {
+                    rpl->hToken = pHandle;
+                    return &rpl->h;
+                }
+            }
+        }
+    }
+
+    return SHORT_REPLY(err);
+}
+
+

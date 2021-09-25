@@ -238,6 +238,8 @@ _FX BOOLEAN Token_Init(void)
     // finish
     //
 
+    Api_SetFunction(API_FILTER_TOKEN,       Token_Api_Filter);
+
     return TRUE;
 }
 
@@ -1905,6 +1907,7 @@ _FX void Token_ReleaseProcess(PROCESS *proc)
     }
 }
 
+
 _FX NTSTATUS Sbie_SeFilterToken_KernelMode(
     IN PACCESS_TOKEN  ExistingToken,
     IN ULONG  Flags,
@@ -2057,6 +2060,7 @@ _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
     return status;
 }
 
+
 ULONG GetThreadTokenOwnerPid()
 {
     HANDLE hHandle = 0;
@@ -2079,4 +2083,68 @@ ULONG GetThreadTokenOwnerPid()
     if (impToken)
         ObDereferenceObject(impToken);
     return ulResult;
+}
+
+
+//---------------------------------------------------------------------------
+// Token_Api_Filter
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Token_Api_Filter(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status;
+    HANDLE ProcessId = (HANDLE)parms[1];
+    KIRQL irql;
+    HANDLE hToken = (HANDLE)parms[2];
+    PHANDLE pHandle = (PHANDLE)parms[3];
+    void *TokenObject;
+
+    if (proc) // only unsandboxed processes - if(PsGetCurrentProcessId() != Api_ServiceProcessId)
+        return STATUS_NOT_IMPLEMENTED;
+
+    if (! hToken || !pHandle)
+        return STATUS_INVALID_PARAMETER;
+
+    ProbeForWrite(pHandle, sizeof(HANDLE), sizeof(HANDLE));
+
+    proc = Process_Find(ProcessId, &irql);
+    if (! proc) {
+        ExReleaseResourceLite(Process_ListLock);
+        KeLowerIrql(irql);
+        return STATUS_INVALID_CID;
+    }
+
+	BOOLEAN DropRights = proc->drop_rights;
+	ULONG SessionId = proc->box->session_id;
+
+    ExReleaseResourceLite(Process_ListLock);
+    KeLowerIrql(irql);
+
+    status = ObReferenceObjectByHandle(
+                hToken, TOKEN_ALL_ACCESS,
+                *SeTokenObjectType, UserMode, &TokenObject, NULL);
+
+    if (NT_SUCCESS(status)) {
+
+        void *FilteredTokenObject =
+            Token_Filter(TokenObject, DropRights, SessionId);
+
+        if (! FilteredTokenObject)
+            status = STATUS_ACCESS_DENIED;
+        else {
+
+            HANDLE MyTokenHandle;
+            status = ObOpenObjectByPointer(FilteredTokenObject, 0, NULL, TOKEN_ALL_ACCESS, *SeTokenObjectType, UserMode, &MyTokenHandle);
+
+            if (NT_SUCCESS(status))
+                *pHandle = MyTokenHandle;
+
+            ObDereferenceObject(FilteredTokenObject);
+        }
+
+        ObDereferenceObject(TokenObject);
+    }
+
+    return status;
 }

@@ -146,15 +146,15 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
             STARTUPINFO si;
             PROCESS_INFORMATION pi;
 
-            WCHAR program[64];
-            wcscpy(program, SANDBOXIE);
-            wcscat(program, service);
-            wcscat(program, L".exe");
-
             memzero(&si, sizeof(STARTUPINFO));
             si.cb = sizeof(STARTUPINFO);
             si.dwFlags = STARTF_FORCEOFFFEEDBACK;
             si.dwXCountChars = si.dwYCountChars = tzuk;
+
+            WCHAR program[64];
+            wcscpy(program, SANDBOXIE);
+            wcscat(program, service);
+            wcscat(program, L".exe");
 
             if (service == _rpcss) {
 
@@ -169,23 +169,23 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                     errnum = ERROR_NO_IMPERSONATION_TOKEN;
                 else {
 
-                    WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
-                    Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
+                    //WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
+                    //Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
 
                     //
 					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
 					//
-					/*const WCHAR* box_name = SbieApi_QueryConfBool(NULL, L"RunRpcSsAsSystem", FALSE) ? L"*SYSTEM*" : L"*THREAD*";
 
-                    if (! SbieDll_RunSandboxed(box_name, fullpath, homedir, 0, &si, &pi))*/
+                    //if (! SbieDll_RunSandboxed(
+                    //        L"*THREAD*", fullpath, homedir, 0, &si, &pi))
                     if (! SbieDll_RunSandboxed(
-                            L"*THREAD*", fullpath, homedir, 0, &si, &pi))
+                              L"", L"*RPCSS*", homedir, 0, &si, &pi))
                         errnum = GetLastError();
                     else
                         errnum = -1;
                     Proc_ImpersonateSelf(FALSE);
 
-                    Dll_Free(fullpath);
+                    //Dll_Free(fullpath);
                 }
 
             } else {

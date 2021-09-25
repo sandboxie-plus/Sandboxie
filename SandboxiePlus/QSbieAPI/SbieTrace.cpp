@@ -108,6 +108,7 @@ QString CTraceEntry::GetTypeStr() const
 	case MONITOR_WINCLASS:		Type = "WinClass"; break;
 	case MONITOR_DRIVE:			Type = "Drive"; break;
 	case MONITOR_COMCLASS:		Type = "ComClass"; break;
+	case MONITOR_RTCLASS:		Type = "RtClass"; break;
 	case MONITOR_IGNORE:		Type = "Ignore"; break;
 	case MONITOR_IMAGE:			Type = "Image"; break;
 	case MONITOR_FILE:			Type = "File"; break;
@@ -116,8 +117,10 @@ QString CTraceEntry::GetTypeStr() const
 	default:					Type = "Unknown: " + QString::number(m_Type.Type);
 	}
 
-	//if (!m_Type.User)
-	//	Type.append(" (drv)");
+	if (m_Type.User)
+		Type.append(" (U)");
+	else
+		Type.append(" (D)");
 
 	return Type;
 }
@@ -135,9 +138,6 @@ QString CTraceEntry::GetStautsStr() const
 
 	if (m_Counter > 1)
 		Status.append(QString("(%1) ").arg(m_Counter));
-
-	if (m_Type.User)
-		Status = Status.toLower();
 
 	return Status;
 }

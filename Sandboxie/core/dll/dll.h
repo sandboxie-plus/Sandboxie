@@ -287,6 +287,8 @@ extern BOOLEAN Ldr_BoxedImage;
 
 extern WCHAR *Ldr_ImageTruePath;
 
+extern BOOLEAN Ipc_OpenCOM;
+
 extern const WCHAR *Scm_CryptSvc;
 
 extern BOOLEAN Dll_SbieTrace;

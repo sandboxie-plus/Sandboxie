@@ -386,7 +386,9 @@ ULONG ServiceServer::RunHandler2(
         {
             if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
                 ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_ALL, TRUE, idProcess);
-            else
+            // OriginalToken BEGIN
+            else if (!SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+            // OriginalToken END
                 ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_READ, FALSE);
 
             CloseHandle(hProcess);

@@ -1295,13 +1295,14 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, bool bAl
 SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 {
 	ULONG count = 0;
-	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, NULL, &count); // query the count
-	if (Status.IsError())
+	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, NULL, &count); // query count
+	if (Status.IsError()) 
+		return Status;
 
 	count += 128; // add some extra space
 	ULONG* boxed_pids = new ULONG[count]; 
 
-	Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, boxed_pids, &count); // query the count
+	Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, boxed_pids, &count); // query pids
 	if (Status.IsError()) {
 		delete[] boxed_pids;
 		return Status;

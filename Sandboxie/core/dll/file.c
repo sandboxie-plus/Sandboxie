@@ -2491,6 +2491,22 @@ _FX NTSTATUS File_NtCreateFileImpl(
         status = File_GetName(
             ObjectAttributes->RootDirectory, ObjectAttributes->ObjectName,
             &TruePath, &CopyPath, &FileFlags);
+
+        //
+        // this is some sort of device access
+        //
+
+        if (status == STATUS_OBJECT_PATH_SYNTAX_BAD) {
+
+            //WCHAR dbg[1024];
+            //Sbie_snwprintf(dbg, 1024, L"");
+            SbieApi_MonitorPut2(MONITOR_PIPE, TruePath, FALSE);
+
+            return __sys_NtCreateFile(
+                FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+                AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+                CreateOptions, EaBuffer, EaLength);
+        }
     }
 
     //if ( (wcsstr(TruePath, L"Harddisk0\\DR0") != 0) || wcsstr(TruePath, L"HarddiskVolume3") != 0) {

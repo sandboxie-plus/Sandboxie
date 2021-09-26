@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "SbieTrace=y" option to trace the interaction between Sandboxie processes and the Sandboxie core components
 - when initializing an empty sandbox, MSI debug keys are set to generate the debug output of MSI installer service
 - added "DisableComProxy=y" allowing to disable COM proxying through the service
-- added "ProcessLimit=..." that allows to limit the max count pf processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
+- added "ProcessLimit=..." that allows to limit the max count of processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
 
 ### Changed
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance

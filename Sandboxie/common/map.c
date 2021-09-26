@@ -355,7 +355,7 @@ BOOLEAN map_next(map_base_t* m, map_iter_t* iter)
 
 
 
-void map_dump(map_base_t *m)
+/*void map_dump(map_base_t *m)
 {
 	int used = 0;
 	int empty = 0;
@@ -379,4 +379,4 @@ void map_dump(map_base_t *m)
 #else
 	printf("\r\n\r\nBucket usage %d/%d (%d%%), average nodes per used bucket %.2f\r\n", used, used+empty, 100*used/(used+empty), (double)m->nnodes/used);
 #endif
-}
+}*/

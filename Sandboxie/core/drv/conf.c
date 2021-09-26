@@ -804,7 +804,7 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
             status = Conf_Merge_Template(
                 data, session_id, setting->value, sandbox);
 #ifdef USE_CONF_MAP
-            if (status = STATUS_NOT_FOUND) {
+            if (status == STATUS_NOT_FOUND) {
                 Log_Msg_Session(MSG_CONF_MISSING_TMPL, iter.key, setting->value, session_id);
                 status = STATUS_SUCCESS;
             }
@@ -919,7 +919,7 @@ _FX NTSTATUS Conf_Merge_Global(
             status = Conf_Merge_Template(
                 data, session_id, setting->value, sandbox);
 #ifdef USE_CONF_MAP
-            if (status = STATUS_NOT_FOUND) {
+            if (status == STATUS_NOT_FOUND) {
                 Log_Msg_Session(MSG_CONF_MISSING_TMPL, iter.key, setting->value, session_id);
                 status = STATUS_SUCCESS;
             }

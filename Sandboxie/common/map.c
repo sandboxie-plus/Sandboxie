@@ -108,11 +108,14 @@ static int map_bucket_idx(map_base_t* m, unsigned int hash)
 }
 
 
-static void map_add_node(map_base_t* m, map_node_t* node) 
+static void map_add_node(map_base_t* m, map_node_t* node, BOOLEAN append) 
 {
     int n = map_bucket_idx(m, node->hash);
-    node->next = m->buckets[n];
-    m->buckets[n] = node;
+	map_node_t** ptr = &m->buckets[n];
+	if(append)
+		while(*ptr) ptr = &(*ptr)->next;
+	node->next = *ptr;
+	*ptr = node;
 }
 
 
@@ -143,7 +146,7 @@ BOOLEAN map_resize(map_base_t* m, int nbuckets)
     map_node_t* node = nodes;
     while (node) {
         map_node_t* next = node->next;
-        map_add_node(m, node);
+        map_add_node(m, node, FALSE);
         node = next;
     }
     
@@ -185,12 +188,13 @@ static map_node_t* map_new_node(map_base_t* m, const void* _key, void* vdata, si
 }
 
 
-void* map_insert(map_base_t* m, const void* key, void* vdata, size_t vsize)
+void* map_add(map_base_t* m, const void* key, void* vdata, size_t vsize, BOOLEAN append)
 {
     // create a new node and fill inn all the blanks
     map_node_t* node = map_new_node(m, key, vdata, vsize);
     if(!node)  goto fail;
 
+	{
     // check and if we need to grow our bucker array
     //const int reduce_buckets = 0; // average 1.5 nodes/bucket and 49% of buckets used
     const int reduce_buckets = 1; // average 1.9 nodes/bucket and 75% of buckets used
@@ -201,14 +205,30 @@ void* map_insert(map_base_t* m, const void* key, void* vdata, size_t vsize)
         int nbuckets = (m->nbuckets > 0) ? (m->nbuckets << 1) : 1; // *2
         if (!map_resize(m, nbuckets)) goto fail;
     }
+	}
 
     // add new entry to the right bucket
-    map_add_node(m, node);
+    map_add_node(m, node, append);
     m->nnodes++;
 
     return node->value;
 fail:
     if (node) m->func_free(m->mem_pool, node);
+    return NULL;
+}
+
+
+static map_node_t** map_getmatch(map_base_t* m, map_node_t** next, unsigned int hash, const void* key, int ksize) 
+{
+	while (*next) {
+        if ((*next)->hash == hash && (m->func_match_key
+            ? m->func_match_key((*next)->key, key)
+            : (memcmp((*next)->key, key, ksize) == 0)
+            )) {
+            return next;
+        }
+        next = &(*next)->next;
+    }
     return NULL;
 }
 
@@ -230,30 +250,16 @@ static map_node_t** map_getref(map_base_t* m, const void* _key)
     unsigned int hash = m->func_hash_key(key, ksize);
 
     map_node_t** next = &m->buckets[map_bucket_idx(m, hash)];
-    while (*next) {
-        if ((*next)->hash == hash && (m->func_match_key
-            ? m->func_match_key((*next)->key, key)
-            : (memcmp((*next)->key, key, ksize) == 0)
-            )) {
-            return next;
-        }
-        next = &(*next)->next;
-    }
-    return NULL;
+	return map_getmatch(m, next, hash, key, ksize);
 }
 
 
 void* map_get(map_base_t* m, const void* key) 
 {
-    map_node_t** next = map_getref(m, key);
-    return next ? (*next)->value : NULL;
+    map_node_t** node = map_getref(m, key);
+    return node ? (*node)->value : NULL;
 }
 
-
-void map_remove(map_base_t* m, const void* key) 
-{
-    map_take(m, key, NULL, 0);
-}
 
 BOOLEAN map_take(map_base_t* m, const void* key, void* vdata, size_t vsize)
 {
@@ -276,6 +282,7 @@ BOOLEAN map_take(map_base_t* m, const void* key, void* vdata, size_t vsize)
     return FALSE;
 }
 
+
 void map_clear(map_base_t* m) 
 {
     for (unsigned int i = m->nbuckets; i--; ) {
@@ -294,11 +301,24 @@ void map_clear(map_base_t* m)
 }
 
 
-map_iter_t map_iter() 
+map_iter_t map_iter()
 {
     map_iter_t iter;
     memset(&iter, 0, sizeof(map_iter_t));
-    iter.bucketidx = -1;
+    iter.bucketIdx = -1;
+    return iter;
+}
+
+
+map_iter_t map_key_iter(map_base_t *m, const void* key)
+{
+    map_iter_t iter;
+    memset(&iter, 0, sizeof(map_iter_t));
+    iter.bucketIdx = -1;
+	if(key) {
+		iter.ksize = m->func_key_size ? m->func_key_size(key) : sizeof(void*);
+		iter.key = key;
+	}
     return iter;
 }
 
@@ -306,43 +326,57 @@ map_iter_t map_iter()
 BOOLEAN map_next(map_base_t* m, map_iter_t* iter) 
 {
     if (iter->node) {
-        iter->node = iter->node->next;
+		map_node_t** next = &iter->node->next;
+		if(iter->ksize){
+			// note: here key must always be pointer to key value
+			next = map_getmatch(m, next, iter->node->hash, iter->key, iter->ksize); 
+			if(!next) return FALSE;
+		}
+        iter->node = *next;
         if (iter->node == NULL) goto nextBucket;
     }
-    else {
+    else { // first tun
+		if(iter->ksize){
+			map_node_t** node = map_getref(m, iter->key);
+			if(!node) return FALSE;
+			iter->node = *node;
+		} else
     nextBucket:
         do {
-            if (++iter->bucketidx >= m->nbuckets) {
+            if (++iter->bucketIdx >= m->nbuckets) 
                 return FALSE;
-            }
-            iter->node = m->buckets[iter->bucketidx];
+            iter->node = m->buckets[iter->bucketIdx];
         } while (iter->node == NULL);
     }
-    iter->key = iter->node->key;
+	iter->key = iter->node->key;
     iter->value = iter->node->value;
     return TRUE;
 }
 
 
-/*
+
 void map_dump(map_base_t *m)
 {
 	int used = 0;
 	int empty = 0;
-	int bucketidx  = 0;
+	int bucketIdx  = -1;
 	//printf("start\r\n");
-	while(++bucketidx < m->nbuckets) {
-		map_node_t* bucket = m->buckets[bucketidx];
+	while(++bucketIdx < (int)m->nbuckets) {
+		map_node_t* bucket = m->buckets[bucketIdx];
 		if (bucket) {
 			used++;
-			//printf("bucket %d\r\n", bucketidx);
+			//printf("bucket %d\r\n", bucketIdx);
 			//for(map_node_t* node = bucket; node != NULL; node = node->next) {
 			//	printf("node %d: %d\r\n", node->hash, (int)node->value);
 			//}
 		} else {
 			empty++;
-			//printf("EMPTY bucket %d\r\n", bucketidx);
+			//printf("EMPTY bucket %d\r\n", bucketIdx);
 		}
 	}
+#ifdef KERNEL_MODE
+    DbgPrint("usage %d/%d (%d%%)\r\n", used, used+empty, 100*used/(used+empty));
+#else
 	printf("\r\n\r\nBucket usage %d/%d (%d%%), average nodes per used bucket %.2f\r\n", used, used+empty, 100*used/(used+empty), (double)m->nnodes/used);
-}*/
+#endif
+}

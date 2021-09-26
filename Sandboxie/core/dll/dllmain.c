@@ -244,7 +244,7 @@ _FX void Dll_InitInjected(void)
 
     Dll_ProcessId = (ULONG)(ULONG_PTR)GetCurrentProcessId();
 
-    status = SbieApi_QueryProcessEx2(
+    status = SbieApi_QueryProcessEx2( // sets proc->sbiedll_loaded = TRUE; in the driver
         (HANDLE)(ULONG_PTR)Dll_ProcessId, 255,
         Dll_BoxNameSpace, Dll_ImageNameSpace, Dll_SidStringSpace,
         &Dll_SessionId, NULL);
@@ -340,6 +340,17 @@ _FX void Dll_InitInjected(void)
         ULONG pid_count = 0;
         if (NT_SUCCESS(SbieApi_EnumProcessEx(NULL,FALSE,-1,NULL,&pid_count)) && pid_count == 1)
             Dll_FirstProcessInBox = TRUE;
+
+        WCHAR str[32];
+        if (NT_SUCCESS(SbieApi_QueryConfAsIs(NULL, L"ProcessLimit", 0, str, sizeof(str) - sizeof(WCHAR)))) {
+            ULONG num = _wtoi(str);
+            if (num > 0) {
+                if (num < pid_count)
+                    ExitProcess(-1);
+                if ((num * 8 / 10) < pid_count)
+                    Sleep(3000);
+            }
+        }
     }
 
     if (ok) {

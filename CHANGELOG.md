@@ -7,13 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.7 / 5.52.7] - 2021-09-??
+## [0.9.7 / 5.52.1] - 2021-09-??
 
 ### Added
 - added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)
 - added "SbieTrace=y" option to trace the interaction between Sandboxie processes and the Sandboxie core components
 - when initializing an empty sandbox, MSI debug keys are set to generate the debug output of MSI installer service
 - added "DisableComProxy=y" allowing to disable COM proxying through the service
+- added "ProcessLimit=..." that allows to limit the max count pf processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
 
 ### Changed
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance
@@ -23,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked RpcSs start mechanics, sandboxed RpcSs and DcomLaunch can now be run as system, use "RunRpcssAsSystem=y"
 -- note: this is generally not recommended for security reasons but may be needed for compatibility in some scenarios
 - reworked WTSQueryUserToken handling to work properly in all scenarios
+- reworked configuration value list to use a hash table for better performance
 
 ### Fixed
 - fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)

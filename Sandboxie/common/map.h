@@ -48,23 +48,27 @@ BOOLEAN map_wcsimatch(const void* key1, const void* key2);
 
 void map_init(map_base_t *m, void* pool);
 BOOLEAN map_resize(map_base_t* m, int nbuckets);
-void* map_insert(map_base_t *m, const void* key, void* vdata, size_t vsize);
+void* map_add(map_base_t *m, const void* key, void* vdata, size_t vsize, BOOLEAN append);
+__inline void* map_insert(map_base_t* m, const void* key, void* vdata, size_t vsize) { return map_add(m, key, vdata, vsize, FALSE); }
+__inline void* map_append(map_base_t *m, const void* key, void* vdata, size_t vsize) { return map_add(m, key, vdata, vsize, TRUE); }
 void* map_get(map_base_t *m, const void* key);
-void map_remove(map_base_t *m, const void* key);
 BOOLEAN map_take(map_base_t *m, const void* key, void* vdata, size_t vsize);
+__inline void map_remove(map_base_t* m, const void* key) { map_take(m, key, NULL, 0); }
 void map_clear(map_base_t *m);
 
 typedef struct {
-  unsigned int bucketidx;
+  unsigned int bucketIdx;
   map_node_t *node;
-  void* key;
+  int ksize;
+  const void* key;
   void* value;
 } map_iter_t;
 
 map_iter_t map_iter();
+map_iter_t map_key_iter(map_base_t *m, const void* key);
 BOOLEAN map_next(map_base_t *m, map_iter_t *iter);
 
-//void map_dump(map_base_t *m);
+void map_dump(map_base_t *m);
 
 #ifdef __cplusplus
 }

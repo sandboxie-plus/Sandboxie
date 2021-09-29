@@ -383,6 +383,94 @@ end;
 
 
 //////////////////////////////////////////////////////
+// Uninstallation Exclusive
+//
+
+
+procedure UninstallCleanup(ButtonCount: Integer);
+var
+  Buttons: Cardinal;
+  ButtonLabels: TArrayOfString;
+  ExecRet: Integer;
+  I: Integer;
+  Paths: TStringList;
+  ShowMsgbox: Boolean;
+  TaskRet: Integer;
+begin
+
+  // Require 2 or 3 for button count.
+  if (ButtonCount < 2) or (ButtonCount > 3) then
+    exit;
+
+  // Require Sandman.exe to continue.
+  if not FileExists(ExpandConstant('{app}\Sandman.exe')) then
+    exit;
+
+  // Make a list.
+  Paths := TStringList.Create;
+
+  // Append file paths to the list for removal.
+  Paths.Append('{localappdata}\{#MyAppName}\{#MyAppName}.ini');
+  Paths.Append('{win}\Sandboxie.ini');
+  Paths.Append('{app}\{#MyAppName}.ini');
+  Paths.Append('{app}\Sandboxie.ini');
+
+  // Expand paths and detect if any file exist.
+  for I := 0 to Paths.Count - 1 do begin
+    Paths[I] := ExpandConstant(Paths[I]);
+
+    if FileExists(Paths[I]) then
+      ShowMsgbox := True;
+  end;
+
+  // Delete the config files and the sandboxes.
+  if ShowMsgbox then begin
+    case ButtonCount of
+      2: begin
+        Buttons := MB_YESNO;
+        ButtonLabels := [CustomMessage('UninstallTaskLabel3'),
+                         CustomMessage('UninstallTaskLabel4')];
+      end;
+
+      3: begin
+        Buttons := MB_ABORTRETRYIGNORE;
+        ButtonLabels := [CustomMessage('UninstallTaskLabel3'),
+                         CustomMessage('UninstallTaskLabel4'),
+                         CustomMessage('UninstallTaskLabel5')];
+      end;
+    end;
+
+    case TaskDialogMsgBox(CustomMessage('UninstallTaskLabel1'),
+                          CustomMessage('UninstallTaskLabel2'),
+                          mbConfirmation, Buttons, ButtonLabels, 0) of
+
+      IDRETRY: TaskRet := 1;
+      IDIGNORE: TaskRet := 2;
+      IDABORT: TaskRet := 3;
+      IDYES: TaskRet := 1;
+      IDNO: TaskRet := 2;
+    end;
+
+    if TaskRet > 2 then begin
+      Log('Debug: Sandman /RemoveSandboxes');
+      Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+    end;
+
+    if TaskRet > 1 then begin
+      for I := 0 to Paths.Count - 1 do
+        if FileExists(Paths[I]) then begin
+          Log('Debug: DeleteFile(' + Paths[I] + ')');
+          DeleteFile(Paths[I]);
+        end;
+    end;
+  end;
+
+  // Release the list.
+  Paths.Free;
+end;
+
+
+//////////////////////////////////////////////////////
 // Uninstallation Events
 //
 
@@ -393,6 +481,10 @@ begin
   // Before the uninstallation.
   if (CurUninstallStep <> usUninstall) then
     exit;
+
+  // User to confirm extra files to remove.
+  if not UninstallSilent then
+    UninstallCleanup(2);
 
   // Shutdown service, driver and processes.
   if (ShutdownSbie() = False) then

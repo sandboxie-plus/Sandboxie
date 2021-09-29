@@ -11,7 +11,6 @@
 
 void COptionsWindow::LoadGroups()
 {
-	m_TemplateGroups.clear();
 	ui.treeGroups->clear();
 
 	QStringList ProcessGroups = m_pBox->GetTextList("ProcessGroup", m_Template);
@@ -51,7 +50,6 @@ void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
 		{
 			foreach(const QString& Group, m_pBox->GetTextListTmpl("ProcessGroup", Template))
 			{
-				m_TemplateGroups.insert(Group);
 				QStringList Entries = Group.split(",");
 				QString GroupName = Entries.takeFirst();
 				
@@ -90,6 +88,31 @@ void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
 	}
 }
 
+QStringList COptionsWindow::GetCurrentGroups()
+{
+	QStringList Groups;
+
+	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
+		QString GroupName = pItem->data(0, Qt::UserRole).toString();
+		Groups.append(GroupName);
+	}
+
+	foreach(const QString& Template, m_pBox->GetTemplates())
+	{
+		foreach(const QString& Group, m_pBox->GetTextListTmpl("ProcessGroup", Template))
+		{
+			QStringList Entries = Group.split(",");
+			QString GroupName = Entries.takeFirst();
+			if (!Groups.contains(GroupName))
+				Groups.append(GroupName);
+		}
+	}
+
+	return Groups;
+}
+
 void COptionsWindow::SaveGroups()
 {
 	QStringList ProcessGroups;
@@ -103,8 +126,6 @@ void COptionsWindow::SaveGroups()
 		for (int j = 0; j < pItem->childCount(); j++)
 			Programs.append(pItem->child(j)->data(0, Qt::UserRole).toString());
 		QString Group = GroupName + "," + Programs.join(",");
-		if (m_TemplateGroups.contains(Group))
-			continue; // don't save unchanged groups to local config
 		ProcessGroups.append(Group);
 	}
 
@@ -131,6 +152,7 @@ void COptionsWindow::OnAddGroup()
 	ui.treeGroups->addTopLevelItem(pItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::AddProgToGroup(QTreeWidget* pTree, const QString& Groupe)
@@ -172,6 +194,7 @@ void COptionsWindow::AddProgToGroup(const QString& Value, const QString& Groupe)
 	pGroupItem->addChild(pProgItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe)
@@ -196,6 +219,7 @@ void COptionsWindow::DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe)
 				{
 					delete pProgItem;
 					m_GroupsChanged = true;
+					OnOptChanged();
 					break;
 				}
 			}
@@ -214,6 +238,7 @@ void COptionsWindow::AddProgramToGroup(const QString& Program, const QString& Gr
 	pItem->addChild(pSubItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& Group)
@@ -229,6 +254,7 @@ void COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& 
 	}
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 QTreeWidgetItem* COptionsWindow::FindGroupByName(const QString& Group, bool bAdd)
@@ -280,6 +306,7 @@ void COptionsWindow::OnAddProg()
 	pItem->addChild(pSubItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelProg()
@@ -296,6 +323,7 @@ void COptionsWindow::OnDelProg()
 	delete pItem;
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::CopyGroupToList(const QString& Groupe, QTreeWidget* pTree)

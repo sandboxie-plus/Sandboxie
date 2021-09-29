@@ -4,6 +4,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.0 / 5.55.0] - 2021-10-??
+
+### Added 
+- added Privacy enchanced mode, sandboxes with "UsePrivacyMode=y" will not allow read access to locations containing user data
+-- all locations except generig windows system paths will need to be opened explicitly for read and/or write access
+-- using "NormalFilePath=...", "NormalKeyPath=...", "NormalIpcPath=..." allows to open locations to be readable and sandboxed
+
+- added new "App Compartment" mode of operation its enabled by adding "NoSecurityIsolation=y" to the box config
+-- in this mode security is traded in for compatibility, it should not be used for untrusted applications
+-- note: in this mode file and registry filtering is still in place, hance running processes without administrative privileges
+-- is reasonably safe, all filtering can be disabled with "NoSecurityFiltering=y"
+
+- added experimental use of ObRegisterCallbacks to filter object creation and duplication 
+-- this filtering is independant from the regular SbieDrv's sys call based filtering, hence it also applies to App Compartments
+-- with it enabled an application running in a compartment will not be able to manipulate processes running outside
+-- Note: this feature improves the security of unisolated App Compartment boxes
+-- to enable this feature set "EnableObjectFiltering=y" in the global section and reload the driver
+-- when globally activated, the filtering can be disabled for individual boxes with "DisableObjectFilter=y"
+
+- added "DontOpenForBoxed=n" this option disabled the discrimination of boxed processes for open file and open key directives
+-- this behavioure does not really improve security anways but may be anoying, also app compartments always disable this 
+
+- added setting to entierly Open access to the COM infrastructure
+
+### Changed
+- reworked the resource access path matching mechanism to optionally apply more specific rules over less specific once
+-- for example "OpenFilePath=C:\User\Me\AppData\Firefox takes precedence over "WriteFilePath=C:\User\Me\"
+-- to enable this new behavioure add "UseRuleSpecificity=y" to your sandboxie ini, this behavioure is always enabled in Privacy enchanced mode
+-- added "NormalFilePath=..." to restore default sandboxie behavioure on a given path
+-- added "OpenConfPath=..." which similarly to "OpenPipePath=..." is a "OpenKeyPath=..." variant which applies to executables located in the sandbox
+- removed option to copy a box duiring creation, instead the box context menu offers a duplication option
+- reworked the box creation dialog to offer new box types
+
 
 
 

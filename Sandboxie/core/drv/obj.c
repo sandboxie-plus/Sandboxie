@@ -21,6 +21,7 @@
 
 
 #include "obj.h"
+#include "thread.h"
 #include "conf.h"
 
 
@@ -83,14 +84,14 @@ P_ObQueryNameInfo pObQueryNameInfo = NULL;
 _FX BOOLEAN Obj_Init(void)
 {
     //
-    // register as a object filter on Vista SP1 and later
+    // prepare object filter callback registration on Vista SP1 and later
     //
 
-    //if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+    if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
 
-    //    if (!Obj_Init_Filter())
-    //        return FALSE;
-    //}
+        if (!Obj_Init_Filter())
+            return FALSE;
+    }
 
     if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
 
@@ -135,10 +136,10 @@ _FX void Obj_Unload(void)
     // deregister as a object filter on Vista SP1 and later
     //
 
-    //if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+    if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
 
-    //    Obj_Unload_Filter();
-    //}
+        Obj_Unload_Filter();
+    }
 }
 
 

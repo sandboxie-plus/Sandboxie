@@ -556,15 +556,44 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	QApplication::quit();
 }
 
-QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
+QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)
 {
 	EBoxColors color = eYellow;
 	switch (boxType) {
-	case CSandBoxPlus::eHardened:	color = eOrang; break;
-	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
-	case CSandBoxPlus::eInsecure:	color = eMagenta; break;
+	case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
+	case CSandBoxPlus::eHardened:			color = eOrang; break;
+	case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
+	case CSandBoxPlus::eDefault:			color = eYellow; break;
+	case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
+	case CSandBoxPlus::eAppBox:				color = eGreen; break;
+	case CSandBoxPlus::eInsecure:			color = eMagenta; break;
 	}
 	return inUse ? m_BoxIcons[color].second : m_BoxIcons[color].first;
+}
+
+QString CSandMan::GetBoxDescription(int boxType)
+{
+	QString Info;
+
+	switch (boxType) {
+	case CSandBoxPlus::eHardenedPlus:
+	case CSandBoxPlus::eHardened:
+		Info = tr("This box provides enchanced security isolation, it is suitable to test untrusted software.");
+		break;
+	case CSandBoxPlus::eDefaultPlus:
+	case CSandBoxPlus::eDefault:
+		Info = tr("This box provides standard isolation, it is suitable to run your software in to enchance security.");	
+		break;
+	case CSandBoxPlus::eAppBoxPlus:
+	case CSandBoxPlus::eAppBox:
+		Info = tr("This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.");
+		break;
+	}
+	
+	if(boxType == CSandBoxPlus::eHardenedPlus || boxType == CSandBoxPlus::eDefaultPlus || boxType == CSandBoxPlus::eAppBoxPlus)
+		Info.append(tr("\r\n\r\nThis box prevents access to all user data locations, except explicitly granted in the Resource Access options."));
+
+	return Info;
 }
 
 bool CSandMan::IsFullyPortable()
@@ -925,6 +954,10 @@ void CSandMan::OnStatusChanged()
 
 		g_FeatureFlags = theAPI->GetFeatureFlags();
 
+		// if teh certificate is valid but the driver does not report it being active it means its expired
+		if (!g_Certificate.isEmpty() && (g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+			OnLogMessage(tr("The supporter certificate is expired"));
+		}
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -1046,6 +1079,29 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 			m_MissingTemplates.append(MsgData[2]);
 	}
 
+	if ((MsgCode & 0xFFFF) == 6004) // certificat error
+	{
+		static bool bCertWarning = false;
+		if (!bCertWarning) {
+			bCertWarning = true;
+			
+			QMessageBox msgBox;
+			msgBox.setTextFormat(Qt::RichText);
+			msgBox.setIcon(QMessageBox::Critical);
+			msgBox.setWindowTitle("Sandboxie-Plus");
+			msgBox.setText( tr("The program %1 be started in box %2 will be terminated in 5 minutes because the box was configured to use features, exclusively available to project supporters.<br />"
+				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>").arg(MsgData[2]).arg(MsgData[1]));
+			msgBox.setStandardButtons(QMessageBox::Ok);
+			msgBox.exec();
+			/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+			if (msgBox.exec() == QDialogButtonBox::Yes) {
+				OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+			}*/
+			
+			bCertWarning = false;
+		}
+	}
+
 	QString Message = MsgCode != 0 ? theAPI->GetSbieMsgStr(MsgCode, m_LanguageId) : (MsgData.size() > 0 ? MsgData[0] : QString());
 
 	for (int i = 1; i < MsgData.size(); i++)
@@ -1064,6 +1120,32 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true))
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
+}
+
+bool CSandMan::CheckCertificate() 
+{
+	if (!g_Certificate.isEmpty())
+		return true;
+
+	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+	//	OnLogMessage(tr("The supporter certificate is expired"));
+	//	return false;
+	//}
+
+	QMessageBox msgBox;
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.setIcon(QMessageBox::Information);
+	msgBox.setWindowTitle("Sandboxie-Plus");
+	msgBox.setText(tr("The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.<br />"
+		"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
+	msgBox.setStandardButtons(QMessageBox::Ok);
+	msgBox.exec();
+	/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	if (msgBox.exec() == QDialogButtonBox::Yes) {
+		OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+	}*/
+
+	return false;
 }
 
 void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)
@@ -1789,7 +1871,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					bAdded = true;
 				}
 
-				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0));
 			}
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)
@@ -1913,7 +1995,10 @@ void CSandMan::CheckForUpdates(bool bManual)
 	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QString::number(m_LanguageId));
-	QString UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
+
+	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	if (UpdateKey.isEmpty())
+		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	if (!UpdateKey.isEmpty())
 		Query.addQueryItem("update_key", UpdateKey);
 	Query.addQueryItem("auto", bManual ? "0" : "1");
@@ -2146,16 +2231,26 @@ void CSandMan::OnAbout()
 			"<p>Version %1</p>"
 			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
 		).arg(GetVersion());
+
+		QString CertInfo;
+		if (!g_Certificate.isEmpty()) {
+			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("name"));
+		} else {
+			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
+		}
+
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is an open source continuation of Sandboxie.</p>"
-			"<p></p>"
-			"<p>Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.</p>"
-			"<p></p>"
-			"<p></p>"
-			"<p></p>"
-			"<p>Icons from <a href=\"https://icons8.com\">icons8.com</a></p>"
-			"<p></p>"
-		);
+			"Sandboxie-Plus is an open source continuation of Sandboxie."
+			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
+			"<br />"
+			"%3<br />"
+			"<br />"
+			"Driver version: %1<br />"
+			"Features: %2<br />"
+			"<br />"
+			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"
+		).arg(theAPI->GetVersion()).arg(theAPI->GetFeatureStr()).arg(CertInfo);
+
 		QMessageBox *msgBox = new QMessageBox(this);
 		msgBox->setAttribute(Qt::WA_DeleteOnClose);
 		msgBox->setWindowTitle(tr("About Sandboxie-Plus"));

@@ -11,6 +11,13 @@
 
 void COptionsWindow::CreateAccess()
 {
+	// Resource Access
+	connect(ui.chkPrivacy, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
+	connect(ui.chkUseSpecificity, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
+	connect(ui.chkCloseForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
+	connect(ui.chkNoOpenForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
+	//
+
 	connect(ui.btnAddFile, SIGNAL(clicked(bool)), this, SLOT(OnAddFile()));
 	QMenu* pFileBtnMenu = new QMenu(ui.btnAddFile);
 	pFileBtnMenu->addAction(tr("Browse for File"), this, SLOT(OnBrowseFile()));
@@ -21,15 +28,42 @@ void COptionsWindow::CreateAccess()
 	connect(ui.btnAddIPC, SIGNAL(clicked(bool)), this, SLOT(OnAddIPC()));
 	connect(ui.btnAddWnd, SIGNAL(clicked(bool)), this, SLOT(OnAddWnd()));
 	connect(ui.btnAddCOM, SIGNAL(clicked(bool)), this, SLOT(OnAddCOM()));
-	// todo: add priority by order 
-	ui.btnMoveUp->setVisible(false);
-	ui.btnMoveDown->setVisible(false);
 	connect(ui.chkShowAccessTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowAccessTmpl()));
 	connect(ui.btnDelAccess, SIGNAL(clicked(bool)), this, SLOT(OnDelAccess()));
 
 	//connect(ui.treeAccess, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeAccess, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemDoubleClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeAccess, SIGNAL(itemSelectionChanged()), this, SLOT(OnAccessSelectionChanged()));
+}
+
+void COptionsWindow::OnAccessChanged()
+{ 
+	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
+		theGUI->CheckCertificate();
+
+	UpdateAccessPolicy();
+
+	m_AccessChanged = true; 
+	OnOptChanged();
+}
+
+void COptionsWindow::UpdateAccessPolicy()
+{ 
+	if (ui.chkPrivacy->isChecked()) {
+		ui.chkUseSpecificity->setEnabled(false);
+		ui.chkUseSpecificity->setChecked(true);
+
+		ui.chkCloseForBox->setEnabled(false);
+		ui.chkCloseForBox->setChecked(false);
+		ui.chkNoOpenForBox->setEnabled(false);
+		ui.chkNoOpenForBox->setChecked(false);
+	}
+	else {
+		ui.chkUseSpecificity->setEnabled(true);
+
+		ui.chkCloseForBox->setEnabled(true);
+		ui.chkNoOpenForBox->setEnabled(true);
+	}
 }
 
 QTreeWidgetItem* COptionsWindow::GetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path)
@@ -51,6 +85,7 @@ void COptionsWindow::SetAccessEntry(EAccessType Type, const QString& Program, EA
 	if (GetAccessEntry(Type, Program, Mode, Path) != NULL)
 		return; // already set
 	m_AccessChanged = true;
+	OnOptChanged();
 	AddAccessEntry(Type, Mode, Program, Path);
 }
 
@@ -60,6 +95,7 @@ void COptionsWindow::DelAccessEntry(EAccessType Type, const QString& Program, EA
 	{
 		delete pItem;
 		m_AccessChanged = true;
+		OnOptChanged();
 	}
 }
 
@@ -67,17 +103,21 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 {
 	switch (Type)
 	{
+	case eNormalFilePath:	return "NormalFilePath";
 	case eOpenFilePath:		return "OpenFilePath";
 	case eOpenPipePath:		return "OpenPipePath";
 	case eClosedFilePath:	return "ClosedFilePath";
 	case eReadFilePath:		return "ReadFilePath";
 	case eWriteFilePath:	return "WriteFilePath";
 
+	case eNormalKeyPath:	return "NormalKeyPath";
 	case eOpenKeyPath:		return "OpenKeyPath";
+	case eOpenConfPath:		return "OpenConfPath";
 	case eClosedKeyPath:	return "ClosedKeyPath";
 	case eReadKeyPath:		return "ReadKeyPath";
 	case eWriteKeyPath:		return "WriteKeyPath";
 
+	case eNormalIpcPath:	return "NormalIpcPath";
 	case eOpenIpcPath:		return "OpenIpcPath";
 	case eClosedIpcPath:	return "ClosedIpcPath";
 
@@ -92,7 +132,10 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 
 void COptionsWindow::LoadAccessList()
 {
+	ui.chkPrivacy->setChecked(m_pBox->GetBool("UsePrivacyMode", false));
+	ui.chkUseSpecificity->setChecked(m_pBox->GetBool("UseRuleSpecificity", false));
 	ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
+	ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
 
 	ui.treeAccess->clear();
 
@@ -103,6 +146,8 @@ void COptionsWindow::LoadAccessList()
 	}
 
 	LoadAccessListTmpl();
+
+	UpdateAccessPolicy();
 
 	m_AccessChanged = false;
 }
@@ -141,23 +186,27 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	EAccessMode	Mode;
 	switch (EntryType)
 	{
-	case eOpenFilePath:		Type = eFile;	Mode = eDirect;	break;
-	case eOpenPipePath:		Type = eFile;	Mode = eDirectAll; break;
+	case eNormalFilePath:	Type = eFile;	Mode = eNormal;	break;
+	case eOpenFilePath:		Type = eFile;	Mode = eOpen;	break;
+	case eOpenPipePath:		Type = eFile;	Mode = eOpen4All; break;
 	case eClosedFilePath:	Type = eFile;	Mode = eClosed;	break;
 	case eReadFilePath:		Type = eFile;	Mode = eReadOnly; break;
 	case eWriteFilePath:	Type = eFile;	Mode = eWriteOnly; break;
 
-	case eOpenKeyPath:		Type = eKey;	Mode = eDirect;	break;
+	case eNormalKeyPath:	Type = eKey;	Mode = eNormal;	break;
+	case eOpenKeyPath:		Type = eKey;	Mode = eOpen;	break;
+	case eOpenConfPath:		Type = eKey;	Mode = eOpen4All;break;
 	case eClosedKeyPath:	Type = eKey;	Mode = eClosed;	break;
 	case eReadKeyPath:		Type = eKey;	Mode = eReadOnly; break;
 	case eWriteKeyPath:		Type = eKey;	Mode = eWriteOnly; break;
 
-	case eOpenIpcPath:		Type = eIPC;	Mode = eDirect;	break;
+	case eNormalIpcPath:	Type = eIPC;	Mode = eNormal;	break;
+	case eOpenIpcPath:		Type = eIPC;	Mode = eOpen;	break;
 	case eClosedIpcPath:	Type = eIPC;	Mode = eClosed;	break;
 
-	case eOpenWinClass:		Type = eWnd;	Mode = eDirect;	break;
+	case eOpenWinClass:		Type = eWnd;	Mode = eOpen;	break;
 
-	case eOpenCOM:			Type = eCOM;	Mode = eDirect;	break;
+	case eOpenCOM:			Type = eCOM;	Mode = eOpen;	break;
 	case eClosedCOM:		Type = eCOM;	Mode = eClosed;	break;
 	case eClosedCOM_RT:		Type = eCOM;	Mode = eClosedRT; break;
 
@@ -184,12 +233,13 @@ QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
 {
 	switch (Mode)
 	{
-	case eDirect:		return tr("Direct");
-	case eDirectAll:	return tr("Direct All");
+	case eNormal:		return tr("Normal");
+	case eOpen:			return tr("Open");
+	case eOpen4All:		return tr("Open for All");
 	case eClosed:		return tr("Closed");
 	case eClosedRT:		return tr("Closed RT");
 	case eReadOnly:		return tr("Read Only");
-	case eWriteOnly:	return tr("Hidden");
+	case eWriteOnly:	return tr("Boxed Only");
 	}
 	return tr("Unknown");
 }
@@ -213,9 +263,10 @@ void COptionsWindow::OnBrowseFile()
 	if (Value.isEmpty())
 		return;
 
-	AddAccessEntry(eFile, eDirect, "", Value);
+	AddAccessEntry(eFile, eOpen, "", Value);
 
 	m_AccessChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnBrowseFolder()
@@ -224,9 +275,10 @@ void COptionsWindow::OnBrowseFolder()
 	if (Value.isEmpty())
 		return;
 
-	AddAccessEntry(eFile, eDirect, "", Value);
+	AddAccessEntry(eFile, eOpen, "", Value);
 
 	m_AccessChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, const QString& Template)
@@ -265,8 +317,9 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 	case eFile:
 		switch (Mode)
 		{
-		case eDirect:		return "OpenFilePath";
-		case eDirectAll:	return "OpenPipePath";
+		case eNormal:		return "NormalFilePath";
+		case eOpen:			return "OpenFilePath";
+		case eOpen4All:		return "OpenPipePath";
 		case eClosed:		return "ClosedFilePath";
 		case eReadOnly:		return "ReadFilePath";
 		case eWriteOnly:	return "WriteFilePath";
@@ -275,7 +328,9 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 	case eKey:
 		switch (Mode)
 		{
-		case eDirect:		return "OpenKeyPath";
+		case eNormal:		return "NormalKeyPath";
+		case eOpen:			return "OpenKeyPath";
+		case eOpen4All:		return "OpenConfPath";
 		case eClosed:		return "ClosedKeyPath";
 		case eReadOnly:		return "ReadKeyPath";
 		case eWriteOnly:	return "WriteKeyPath";
@@ -284,20 +339,21 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 	case eIPC:
 		switch (Mode)
 		{
-		case eDirect:		return "OpenIpcPath";
+		case eNormal:		return "NormalIpcPath";
+		case eOpen:			return "OpenIpcPath";
 		case eClosed:		return "ClosedIpcPath";
 		}
 		break;
 	case eWnd:
 		switch (Mode)
 		{
-		case eDirect:		return "OpenWinClass";
+		case eOpen:			return "OpenWinClass";
 		}
 		break;
 	case eCOM:
 		switch (Mode)
 		{
-		case eDirect:		return "OpenClsid";
+		case eOpen:			return "OpenClsid";
 		case eClosed:		return "ClosedClsid";
 		case eClosedRT:		return "ClosedRT";
 		}
@@ -350,7 +406,7 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 			bool isGUID = pPath->text().length() == 38 && pPath->text().left(1) == "{" && pPath->text().right(1) == "}";
 			switch (pMode->currentData().toInt())
 			{
-			case eDirect:
+			case eOpen:
 			case eClosed:
 				if (!isGUID) {
 					QMessageBox::critical(this, "SandboxiePlus", tr("COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}"));
@@ -374,6 +430,7 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		pItem->setData(3, Qt::UserRole, pPath->text());
 
 		m_AccessChanged = true;
+		OnOptChanged();
 	}
 
 	ui.treeAccess->setItemWidget(pItem, 1, NULL);
@@ -385,11 +442,11 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 {
 	switch (Type)
 	{
-	case eFile:			return QList<EAccessMode>() << eDirect << eDirectAll << eClosed << eReadOnly << eWriteOnly;
-	case eKey:			return QList<EAccessMode>() << eDirect << eClosed << eReadOnly << eWriteOnly;
-	case eIPC:			return QList<EAccessMode>() << eDirect << eClosed;
-	case eWnd:			return QList<EAccessMode>() << eDirect;
-	case eCOM:			return QList<EAccessMode>() << eDirect << eClosed << eClosedRT;
+	case eFile:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eWriteOnly;
+	case eKey:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eWriteOnly;
+	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed;
+	case eWnd:			return QList<EAccessMode>() << eOpen;
+	case eCOM:			return QList<EAccessMode>() << eOpen << eClosed << eClosedRT;
 	}
 	return QList<EAccessMode>();
 }
@@ -424,9 +481,9 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 	QComboBox* pCombo = new QComboBox(pProgram);
 	pCombo->addItem(tr("All Programs"), "");
 
-	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) {
-		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
-		pCombo->addItem(tr("Group: %1").arg(pItem->text(0)), pItem->data(0, Qt::UserRole).toString());
+	foreach(const QString Group, GetCurrentGroups()){
+		QString GroupName = Group.mid(1, Group.length() - 2);
+		pCombo->addItem(tr("Group: %1").arg(Group), GroupName);
 	}
 
 	foreach(const QString & Name, m_Programs)
@@ -469,17 +526,22 @@ void COptionsWindow::OnDelAccess()
 {
 	DeleteAccessEntry(ui.treeAccess->currentItem());
 	m_AccessChanged = true;
+	OnOptChanged();
 }
 
 
 void COptionsWindow::SaveAccessList()
 {
+	WriteAdvancedCheck(ui.chkPrivacy, "UsePrivacyMode", "y", "");
+	WriteAdvancedCheck(ui.chkUseSpecificity, "UseRuleSpecificity", "y", "");
 	WriteAdvancedCheck(ui.chkCloseForBox, "AlwaysCloseForBoxed", "", "n");
+	WriteAdvancedCheck(ui.chkNoOpenForBox, "DontOpenForBoxed", "", "n");
 
 	CloseAccessEdit(true);
 
-	QStringList Keys = QStringList() << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
-		<< "OpenKeyPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
+	QStringList Keys = QStringList() 
+		<< "NormalFilePath" << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
+		<< "NormalKeyPath" << "OpenKeyPath" << "OpenConfPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
 		<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
 
 	QMap<QString, QList<QString>> AccessMap;

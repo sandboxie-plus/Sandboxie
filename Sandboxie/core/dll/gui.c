@@ -364,7 +364,14 @@ _FX BOOLEAN Gui_Init(HMODULE module)
         return FALSE;
 
     // NoSbieDesk BEGIN
-    Gui_UseProxyService = !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
+
+    //
+    // Sandboxie is routing many gui related things through teh service, 
+    // when we operate in app mode we dont need to do that hence
+    // disable the use of the gui proxy
+    //
+
+    Gui_UseProxyService = (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
 
     GUI_IMPORT___(GetWindowThreadProcessId);
@@ -817,7 +824,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     ULONG errlvl = 0;
 
     // NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 		return TRUE;
 	// NoSbieDesk END
 
@@ -983,7 +990,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
                 rc = (ULONG_PTR)NtCurrentThread();
 
 				// OriginalToken BEGIN
-				if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+				if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
 					rc = 0;
 				else
 				// OriginalToken END
@@ -1971,7 +1978,7 @@ _FX BOOL Gui_EndTask(HWND hWnd, BOOL fShutDown, BOOL fForce)
 _FX BOOL Gui_ConsoleControl(ULONG ctlcode, ULONG *data, ULONG_PTR unknown)
 {
     // NoSbieDesk BEGIN
-    if (!SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 	// NoSbieDesk END
     if (ctlcode == 7) {
         //

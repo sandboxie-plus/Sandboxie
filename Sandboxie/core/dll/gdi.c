@@ -212,7 +212,7 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     //
 
 	// NoSbieDesk BEGIN
-	if(!SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	if((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 	// NoSbieDesk END
     if (! _Initialized) {
 
@@ -276,7 +276,7 @@ _FX void Gdi_SplWow64(BOOLEAN Register)
     //
 
     // NoSbieDesk BEGIN
-    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
         return;
 	// NoSbieDesk END
 

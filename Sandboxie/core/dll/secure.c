@@ -359,7 +359,7 @@ _FX BOOLEAN Secure_Init(void)
     //
     // intercept NTDLL entry points
     //
-    if (!SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE)) {
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE)) {
         SBIEDLL_HOOK(Secure_, NtOpenProcess);
         SBIEDLL_HOOK(Secure_, NtOpenThread);
         SBIEDLL_HOOK(Secure_, NtDuplicateObject);
@@ -369,7 +369,7 @@ _FX BOOLEAN Secure_Init(void)
     SBIEDLL_HOOK(Secure_,NtSetInformationToken);
     SBIEDLL_HOOK(Secure_,NtAdjustPrivilegesToken);
     // OriginalToken BEGIN
-    if (!SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     // OriginalToken END
     if (Dll_OsBuild >= 21286) {    // Windows 11
         SBIEDLL_HOOK(Secure_, NtDuplicateToken);
@@ -890,6 +890,11 @@ _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal)
 {
     if (Dll_OsBuild < 9600) // this magic values are available only from windows 8.1 onwards
         return;
+
+    // OriginalToken BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+        return;
+    // OriginalToken END
 
     if ((LONG_PTR)token == LDR_TOKEN_PRIMARY) {
         NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY, hTokenReal);

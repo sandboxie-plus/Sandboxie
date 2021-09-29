@@ -777,7 +777,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 			// OriginalToken BEGIN
 			if (!ok) {
 
-				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+				if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
 
                     HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE,
 						PipeServer::GetCallerProcessId());
@@ -854,7 +854,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
         // OriginalToken BEGIN
-        else if (!SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+        else if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
         // OriginalToken END
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_READ, FALSE);
     }

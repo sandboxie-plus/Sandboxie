@@ -94,7 +94,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 
 	QMenu* pRecMenu = new QMenu(ui.btnRecover);
-	m_pRemember = pRecMenu->addAction(tr("Remember target selection"), this, SLOT(OnCloseUntil()));
+	m_pRemember = pRecMenu->addAction(tr("Remember target selection"), this, SLOT(OnCloseUntill()));
 	m_pRemember->setCheckable(true);
 	ui.btnRecover->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnRecover->setMenu(pRecMenu);
@@ -228,7 +228,7 @@ void CRecoveryWindow::AddFile(const QString& FilePath, const QString& BoxPath)
 		ui.chkShowAll->setCheckState(Qt::PartiallyChecked);
 
 		QMenu* pCloseMenu = new QMenu(ui.btnClose);
-		pCloseMenu->addAction(tr("Close until all programs stop in this box"), this, SLOT(OnCloseUntil()));
+		pCloseMenu->addAction(tr("Close untill all programs stop in this box"), this, SLOT(OnCloseUntill()));
 		ui.btnClose->setPopupMode(QToolButton::MenuButtonPopup);
 		ui.btnClose->setMenu(pCloseMenu);
 	}
@@ -461,7 +461,7 @@ void CRecoveryWindow::OnCount(quint32 fileCount, quint32 folderCount, quint64 to
 	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
 }
 
-void CRecoveryWindow::OnCloseUntil()
+void CRecoveryWindow::OnCloseUntill()
 {
 	m_pBox.objectCast<CSandBoxPlus>()->SetSuspendRecovery();
 	close();

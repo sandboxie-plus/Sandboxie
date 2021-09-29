@@ -495,6 +495,7 @@ NTSTATUS Key_OpenOrCreateIfBoxed(
 void Key_DeleteValueFromCLSID(
     const WCHAR *Xxxid, const WCHAR *Guid, const WCHAR *ValueName);
 
+void Key_CreateBaseKeys();
 
 //---------------------------------------------------------------------------
 // Functions (sxs)
@@ -591,6 +592,8 @@ BOOLEAN Secure_IsLocalSystemToken(BOOLEAN CheckThreadToken);
 BOOL Proc_ImpersonateSelf(BOOLEAN Enable);
 
 BOOLEAN Taskbar_SHCore_Init(HMODULE hmodule);
+
+BOOLEAN Win32_Init(HMODULE hmodule);
 
 
 //---------------------------------------------------------------------------

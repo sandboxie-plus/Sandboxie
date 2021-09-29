@@ -125,6 +125,8 @@ int __stdcall WinMain(
     BOOL hook_success = TRUE;
     BOOL ok;
 
+    //while(!IsDebuggerPresent()) Sleep(500); __debugbreak();
+
     Check_Windows_7();
 
     SetupExceptionHandler();

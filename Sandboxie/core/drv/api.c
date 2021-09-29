@@ -1293,13 +1293,27 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
             if (WFP_Enabled)
                 FeatureFlags |= SBIE_FEATURE_FLAG_WFP;
 
+            extern BOOLEAN Obj_CallbackInstalled;
+            if (Obj_CallbackInstalled)
+                FeatureFlags |= SBIE_FEATURE_FLAG_OB_CALLBACKS;
+
             extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
             if (SandboxieLogonSid[0] != 0)
                 FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
 
-            if (Driver_Certified)
+#ifdef HOOK_WIN32K
+            extern ULONG Syscall_MaxIndex32;
+            if (Syscall_MaxIndex32 != 0)
+                FeatureFlags |= SBIE_FEATURE_FLAG_WIN32K_HOOK;
+#endif
+
+            if (Driver_Certified) {
+
                 FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
 
+                FeatureFlags |= SBIE_FEATURE_FLAG_PRIVACY_MODE;
+                FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
+            }
 
             *data = FeatureFlags;
         }

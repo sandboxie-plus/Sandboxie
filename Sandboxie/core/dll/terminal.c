@@ -232,6 +232,12 @@ extern const WCHAR *Ipc_SandboxieRpcSs;
 
 _FX BOOLEAN Terminal_DontHook(void)
 {
+    //
+    // In in app mode we have a full token and this wil be successfull, hence no need for a hook
+    //
+    
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) 
+        return TRUE;
 
     //
     // On win 10 this endpoint does not exist, so hook always

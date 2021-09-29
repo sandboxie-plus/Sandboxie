@@ -125,6 +125,8 @@ struct _PROCESS {
 
     BOOLEAN change_notify_token_flag;
 
+    BOOLEAN bAppCompartment;
+
     BOOLEAN in_pca_job;
     BOOLEAN can_use_jobs;
 
@@ -132,16 +134,26 @@ struct _PROCESS {
 
     BOOLEAN disable_monitor;
 
+    BOOLEAN always_close_for_boxed;
+    BOOLEAN dont_open_for_boxed;
+#ifdef USE_MATCH_PATH_EX
+    BOOLEAN use_rule_specificity;
+    BOOLEAN use_privacy_mode;
+#endif
+
     ULONG call_trace;
 
     // file-related
 
     PERESOURCE file_lock;
+#ifdef USE_MATCH_PATH_EX
+    LIST normal_file_paths;             // PATTERN elements
+#endif
     LIST open_file_paths;               // PATTERN elements
     LIST closed_file_paths;             // PATTERN elements
     LIST read_file_paths;               // PATTERN elements
     LIST write_file_paths;              // PATTERN elements
-    BOOLEAN always_close_for_boxed;
+    BOOLEAN file_block_network_files;
     LIST blocked_dlls;
     ULONG file_trace;
     ULONG pipe_trace;
@@ -155,6 +167,9 @@ struct _PROCESS {
 
     PERESOURCE key_lock;
     KEY_MOUNT *key_mount;
+#ifdef USE_MATCH_PATH_EX
+    LIST normal_key_paths;              // PATTERN elements
+#endif
     LIST open_key_paths;                // PATTERN elements
     LIST closed_key_paths;              // PATTERN elements
     LIST read_key_paths;                // PATTERN elements
@@ -165,9 +180,13 @@ struct _PROCESS {
     // ipc-related
 
     PERESOURCE ipc_lock;
+#ifdef USE_MATCH_PATH_EX
+    LIST normal_ipc_paths;              // PATTERN elements
+#endif
     LIST open_ipc_paths;                // PATTERN elements
     LIST closed_ipc_paths;              // PATTERN elements
     ULONG ipc_trace;
+    BOOLEAN disable_object_flt;
     BOOLEAN ipc_warn_startrun;
     BOOLEAN ipc_block_password;
     BOOLEAN ipc_open_lsa_endpoint;
@@ -271,6 +290,30 @@ const WCHAR *Process_MatchPath(
     LIST *open_list, LIST *closed_list,
     BOOLEAN *is_open, BOOLEAN *is_closed);
 
+// Process_MatchPathEx:  given a list that was previously initialized with
+// Process_GetPaths, tests if the passed string 'path' matches any pattern.
+// path_len specifies the number of characters in path, excluding the
+// null terminator, or in other words, path_len is wcslen(path).
+// Returns the highest priority true path permission
+
+#define TRUE_PATH_CLOSED_FLAG    0x00
+#define TRUE_PATH_READ_FLAG      0x10
+#define TRUE_PATH_WRITE_FLAG     0x20
+#define TRUE_PATH_OPEN_FLAG      0x30
+#define TRUE_PATH_MASK           0x30
+
+#define COPY_PATH_CLOSED_FLAG    0x00
+#define COPY_PATH_READ_FLAG      0x01
+#define COPY_PATH_WRITE_FLAG     0x02
+#define COPY_PATH_OPEN_FLAG      0x03
+#define COPY_PATH_MASK           0x03
+
+ULONG Process_MatchPathEx(
+    PROCESS *proc, const WCHAR *path, ULONG path_len, WCHAR path_code,
+    LIST *normal_list, 
+    LIST *open_list, LIST *closed_list,
+    LIST *read_list, LIST *write_list,
+    const WCHAR** patsrc);
 
 // Process_GetConf:  retrives a configuration data value for a given process
 // use with Conf_AdjustUseCount to make sure the returned pointer is valid
@@ -389,7 +432,7 @@ BOOLEAN Process_CancelProcess(PROCESS *proc);
 
 // Terminate a process using a helper thread
 
-BOOLEAN Process_ScheduleKill(PROCESS *proc);
+BOOLEAN Process_ScheduleKill(PROCESS *proc, LONG delay_ms);
 
 // Check if process is running within a
 // Program Compatibility Assistant (PCA) job

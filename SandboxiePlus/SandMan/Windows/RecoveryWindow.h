@@ -56,7 +56,7 @@ private slots:
 	void		OnRecover();
 	void		OnTargetChanged();
 	void		OnDeleteAll();
-	void		OnCloseUntil();
+	void		OnCloseUntill();
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
 
 protected:

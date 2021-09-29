@@ -197,6 +197,7 @@ static DLL Ldr_Dlls[] = {
     { L"zipfldr.dll",           "zipfldr.dll",          SH32_Init_ZipFldr,              0},
     { L"uxtheme.dll",           "uxtheme.dll",          SH32_Init_UxTheme,              0}, // explorere.exe, SetWindowThemeAttribute
     { L"shcore.dll",            "shcore.dll",           Taskbar_SHCore_Init,            0}, // win 8, [Get/Set]CurrentProcessExplicitAppUserModelID
+    //{ L"win32u.dll",            "win32u.dll",           Win32_Init,                     0},
     { L"user32.dll",            "user32.dll",           Gui_Init,                       0},
     { L"imm32.dll",             "imm32.dll",            Gui_Init_IMM32,                 0},
     { L"d3d9.dll",              "d3d9.dll",             Gui_Init_D3D9,                  0},

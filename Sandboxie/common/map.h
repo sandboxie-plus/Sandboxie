@@ -68,7 +68,7 @@ map_iter_t map_iter();
 map_iter_t map_key_iter(map_base_t *m, const void* key);
 BOOLEAN map_next(map_base_t *m, map_iter_t *iter);
 
-void map_dump(map_base_t *m);
+//void map_dump(map_base_t *m);
 
 #ifdef __cplusplus
 }

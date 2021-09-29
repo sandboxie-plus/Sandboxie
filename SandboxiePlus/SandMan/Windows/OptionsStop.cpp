@@ -91,6 +91,7 @@ void COptionsWindow::OnAddLingering()
 		return;
 	AddStopEntry(Value, 1);
 	m_StopChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddLeader()
@@ -100,10 +101,12 @@ void COptionsWindow::OnAddLeader()
 		return;
 	AddStopEntry(Value, 2);
 	m_StopChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelStopProg()
 {
 	DeleteAccessEntry(ui.treeStop->currentItem());
 	m_StopChanged = true;
+	OnOptChanged();
 }

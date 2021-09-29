@@ -27,7 +27,12 @@ private slots:
 
 	//void OnWithTemplates();
 
+	void OnOptChanged();
+
 	void OnPickColor();
+
+	void OnBoxTypChanged();
+	void UpdateBoxType();
 
 	void OnBrowsePath();
 	void OnAddCommand();
@@ -59,13 +64,13 @@ private slots:
 
 	// net
 	void OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
-	void OnINetSelectionChanged()	{ CloseINetEdit(); }
+	void OnINetSelectionChanged()	{ CloseINetEdit(); OnOptChanged();}
 	void OnBlockINet();
 	void OnAddINetProg();
 	void OnDelINetProg();
 
 	void OnNetFwItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
-	void OnNetFwSelectionChanged()	{ CloseNetFwEdit(); }
+	void OnNetFwSelectionChanged()	{ CloseNetFwEdit(); OnOptChanged();}
 	void OnAddNetFwRule();
 	void OnDelNetFwRule();
 
@@ -78,15 +83,15 @@ private slots:
 	// access
 	//void OnAccessItemClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
-	void OnAccessSelectionChanged() { CloseAccessEdit(); }
+	void OnAccessSelectionChanged() { CloseAccessEdit(); OnOptChanged();}
 
-	void OnAddFile()				{ AddAccessEntry(eFile, eDirect, "", ""); m_AccessChanged = true; }
+	void OnAddFile()				{ AddAccessEntry(eFile, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
 	void OnBrowseFile();
 	void OnBrowseFolder();
-	void OnAddKey()					{ AddAccessEntry(eKey, eDirect, "", ""); m_AccessChanged = true; }
-	void OnAddIPC()					{ AddAccessEntry(eIPC, eDirect, "", ""); m_AccessChanged = true; }
-	void OnAddWnd()					{ AddAccessEntry(eWnd, eDirect, "", ""); m_AccessChanged = true; }
-	void OnAddCOM()					{ AddAccessEntry(eCOM, eDirect, "", ""); m_AccessChanged = true; }
+	void OnAddKey()					{ AddAccessEntry(eKey, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddIPC()					{ AddAccessEntry(eIPC, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddWnd()					{ AddAccessEntry(eWnd, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnAddCOM()					{ AddAccessEntry(eCOM, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
 	void OnDelAccess();
 	void OnShowAccessTmpl()			{ LoadAccessListTmpl(true); }
 	//
@@ -119,12 +124,14 @@ private slots:
 	void OnTab();
 
 	void OnGeneralChanged();
-	void OnStartChanged()			{ m_StartChanged = true; }
-	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; }
-	void OnINetBlockChanged()		{ m_INetBlockChanged = true; }
-	void OnRecoveryChanged()		{ m_RecoveryChanged = true; }
-	void OnAccessChanged()			{ m_AccessChanged = true; }
+	void OnStartChanged()			{ m_StartChanged = true; OnOptChanged(); }
+	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; OnOptChanged(); }
+	void OnINetBlockChanged()		{ m_INetBlockChanged = true; OnOptChanged(); }
+	void OnRecoveryChanged()		{ m_RecoveryChanged = true; OnOptChanged(); }
+	void OnAccessChanged();
 	void OnAdvancedChanged();
+	void OnOpenCOM();
+	void OnIsolationChanged();
 	void OnDebugChanged();
 
 	void SetIniEdit(bool bEnable);
@@ -155,17 +162,21 @@ protected:
 
 	enum EAccessEntry
 	{
+		eNormalFilePath,
 		eOpenFilePath,
 		eOpenPipePath,
 		eClosedFilePath,
 		eReadFilePath,
 		eWriteFilePath,
 
+		eNormalKeyPath,
 		eOpenKeyPath,
+		eOpenConfPath,
 		eClosedKeyPath,
 		eReadKeyPath,
 		eWriteKeyPath,
 
+		eNormalIpcPath,
 		eOpenIpcPath,
 		eClosedIpcPath,
 
@@ -189,8 +200,9 @@ protected:
 
 	enum EAccessMode
 	{
-		eDirect,
-		eDirectAll,
+		eNormal,
+		eOpen,
+		eOpen4All,
 		eClosed,
 		eClosedRT,
 		eReadOnly,
@@ -227,6 +239,7 @@ protected:
 	void LoadGroups();
 	void LoadGroupsTmpl(bool bUpdate = false);
 	void SaveGroups();
+	QStringList GetCurrentGroups();
 
 	void LoadForced();
 	void LoadForcedTmpl(bool bUpdate = false);
@@ -283,6 +296,8 @@ protected:
 
 	void CloseAccessEdit(bool bSave = true);
 	void CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave = true);
+
+	void UpdateAccessPolicy();
 	//
 
 	void LoadRecoveryList();
@@ -293,6 +308,7 @@ protected:
 	void CreateAdvanced();
 	void LoadAdvanced();
 	void SaveAdvanced();
+	void UpdateBoxIsolation();
 
 	void CreateDebug();
 	void LoadDebug();
@@ -311,8 +327,12 @@ protected:
 
 	QString GetCategoryName(const QString& Category);
 
+	bool m_HoldChange;
+
 	bool m_ConfigDirty;
 	QColor m_BorderColor;
+
+	bool m_HoldBoxType;
 
 	bool m_GeneralChanged;
 	bool m_GroupsChanged;
@@ -332,8 +352,6 @@ protected:
 	bool m_WFPisBlocking;
 
 	bool m_Template;
-
-	QSet<QString> m_TemplateGroups;
 
 	QMultiMap<QString, QPair<QString, QString>> m_AllTemplates;
 	QStringList m_GlobalTemplates;

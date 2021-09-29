@@ -80,7 +80,7 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 _FX BOOLEAN Gui_InitConsole1(void)
 {
     // NoSbieDesk BEGIN
-    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
         return TRUE;
 	// NoSbieDesk END
 

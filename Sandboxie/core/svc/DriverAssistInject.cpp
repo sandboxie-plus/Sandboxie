@@ -98,12 +98,8 @@ void DriverAssist::InjectLow(void *_msg)
     //
 
     // NoSbieDesk BEGIN
-    BOOLEAN GuiProxy = !SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE);
+    if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
     // NoSbieDesk END
-    // DisableComProxy BEGIN
-    BOOLEAN ComProxy = !SbieApi_QueryConfBool(boxname, L"DisableComProxy", FALSE);
-    // DisableComProxy END
-	if(GuiProxy || ComProxy) // if we need a GUI/Console or a COM Proxy
     if (!msg->bHostInject)
     {
         if(! GuiServer::GetInstance()->InitProcess(

@@ -97,6 +97,7 @@ void COptionsWindow::OnAddRecFolder()
 
 	AddRecoveryEntry(Value, 1);
 	m_RecoveryChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddRecIgnore()
@@ -107,6 +108,7 @@ void COptionsWindow::OnAddRecIgnore()
 
 	AddRecoveryEntry(Value, 2);
 	m_RecoveryChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddRecIgnoreExt()
@@ -117,6 +119,7 @@ void COptionsWindow::OnAddRecIgnoreExt()
 
 	AddRecoveryEntry(Value, 2);
 	m_RecoveryChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelRecEntry()
@@ -132,4 +135,5 @@ void COptionsWindow::OnDelRecEntry()
 
 	delete pItem;
 	m_RecoveryChanged = true;
+	OnOptChanged();
 }

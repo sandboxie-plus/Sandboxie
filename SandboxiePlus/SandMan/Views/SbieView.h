@@ -106,6 +106,7 @@ private:
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
+	QAction*				m_pMenuDuplicate;
 	QAction*				m_pMenuMoveUp;
 	//QAction*				m_pMenuMoveBy;
 	QAction*				m_pMenuMoveDown;

@@ -622,6 +622,7 @@ _FX NTSTATUS File_NtCreateFilePipe(
     // SbieSvc::NamedPipeServer::OpenHandler
     //
 
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0) // don't do that in app mode
     if (PipeType == TYPE_NAMED_PIPE) {
 
         name = wcsrchr(TruePath, L'\\');

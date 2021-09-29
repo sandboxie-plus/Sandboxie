@@ -3632,7 +3632,8 @@ ULONG GuiServer::GetProcessPathList(
     const HANDLE xpid = (HANDLE)(ULONG_PTR)pid;
 
     ULONG len;
-    LONG status = SbieApi_QueryPathList(path_code, &len, NULL, xpid);
+    LONG status = SbieApi_QueryPathList(path_code, &len, NULL, xpid, FALSE);
+    //LONG status = SbieApi_QueryPathList(path_code, &len, NULL, xpid, TRUE);
     if (status != 0)
         return status;
 
@@ -3646,7 +3647,8 @@ ULONG GuiServer::GetProcessPathList(
     LIST *list = (LIST *)Pool_Alloc(pool, sizeof(LIST));
 
     if (path && list)
-        status = SbieApi_QueryPathList(path_code, NULL, path, xpid);
+        status = SbieApi_QueryPathList(path_code, NULL, path, xpid, FALSE);
+        //status = SbieApi_QueryPathList(path_code, NULL, path, xpid, TRUE);
 
     if (status != STATUS_SUCCESS) {
         Pool_Delete(pool);
@@ -3655,7 +3657,11 @@ ULONG GuiServer::GetProcessPathList(
 
     List_Init(list);
     while (*path) {
-        PATTERN *pattern = Pattern_Create(pool, path, TRUE);
+        PATTERN *pattern = Pattern_Create(pool, path, TRUE, 0);
+    //while (*((ULONG*)path) != -1) {
+    //    ULONG level = *((ULONG*)path);
+    //    path += sizeof(ULONG)/sizeof(WCHAR);
+    //    PATTERN *pattern = Pattern_Create(pool, path, TRUE, level);
         if (! pattern) {
             Pool_Delete(pool);
             return status;

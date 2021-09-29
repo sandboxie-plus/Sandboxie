@@ -27,6 +27,7 @@
 #include "core/dll/sbiedll.h"
 #include "common/defines.h"
 #include "common/my_version.h"
+//#include <psapi.h> // For access to GetModuleFileNameEx
 #include "sbieiniserver.h"
 
 //---------------------------------------------------------------------------

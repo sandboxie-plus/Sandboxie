@@ -172,6 +172,12 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\map.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\common\str_util.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
@@ -378,6 +384,7 @@
     <ClCompile Include="terminal.c" />
     <ClCompile Include="trace.c" />
     <ClCompile Include="userenv.c" />
+    <ClCompile Include="Win32.c" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="util_asm.asm">
@@ -394,6 +401,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\apps\com\common.h" />
+    <ClInclude Include="..\..\common\map.h" />
     <ClInclude Include="..\..\common\ntproto.h" />
     <ClInclude Include="..\..\common\str_util.h" />
     <ClInclude Include="..\..\common\my_wsa.h" />

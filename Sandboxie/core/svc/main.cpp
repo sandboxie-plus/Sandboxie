@@ -487,6 +487,8 @@ finish:
 
 bool CheckDropRights(const WCHAR *BoxName)
 {
+    if (SbieApi_QueryConfBool(BoxName, L"NoSecurityIsolation", FALSE))
+        return false; // if we are not swaping the token we can not drop admin rights so keep this consistent
     if (SbieApi_QueryConfBool(BoxName, L"DropAdminRights", FALSE))
         return true;
     return false;

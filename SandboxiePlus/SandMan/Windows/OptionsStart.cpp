@@ -41,16 +41,19 @@ void COptionsWindow::OnRestrictStart()
 
 	ui.chkStartBlockMsg->setEnabled(!ui.radStartAll->isChecked());
 	//m_StartChanged = true;
+	//OnOptChanged();
 }
 
 void COptionsWindow::OnAddStartProg()
 {
 	AddProgToGroup(ui.treeStart, "<StartRunAccess>");
 	//m_StartChanged = true;
+	//OnOptChanged();
 }
 
 void COptionsWindow::OnDelStartProg()
 {
 	DelProgFromGroup(ui.treeStart, "<StartRunAccess>");
 	//m_StartChanged = true;
+	//OnOptChanged();
 }

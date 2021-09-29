@@ -1,8 +1,8 @@
 name: CI
 
 on:
-  workflow_dispatch:
-    branches: [ master, dev ]
+#  workflow_dispatch:
+#    branches: [ master, dev ]
   push:
     branches: [ master ]
   pull_request:

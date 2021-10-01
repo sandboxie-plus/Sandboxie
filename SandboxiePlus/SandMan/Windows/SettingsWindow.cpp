@@ -484,7 +484,7 @@ void CSettingsWindow::SaveSettings()
 					ui.lblCertExp->setVisible(true);
 				}
 				else {
-					QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the developement of Sandboxie-Plus."));
+					QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
 
 					palette.setColor(QPalette::Base, QColor(192, 255, 192));
 				}

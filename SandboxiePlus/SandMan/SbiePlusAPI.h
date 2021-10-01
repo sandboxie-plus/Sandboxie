@@ -101,8 +101,8 @@ protected:
 	bool					m_bSharesAllowed;
 	bool					m_bDropRights;
 
-	bool					m_bSecurityEnchanced;
-	bool					m_bPrivacyEnchanced;
+	bool					m_bSecurityEnhanced;
+	bool					m_bPrivacyEnhanced;
 	bool					m_bApplicationCompartment;
 	int						m_iUnsecureDebugging;
 

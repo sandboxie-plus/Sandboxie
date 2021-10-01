@@ -578,11 +578,11 @@ QString CSandMan::GetBoxDescription(int boxType)
 	switch (boxType) {
 	case CSandBoxPlus::eHardenedPlus:
 	case CSandBoxPlus::eHardened:
-		Info = tr("This box provides enchanced security isolation, it is suitable to test untrusted software.");
+		Info = tr("This box provides enhanced security isolation, it is suitable to test untrusted software.");
 		break;
 	case CSandBoxPlus::eDefaultPlus:
 	case CSandBoxPlus::eDefault:
-		Info = tr("This box provides standard isolation, it is suitable to run your software in to enchance security.");	
+		Info = tr("This box provides standard isolation, it is suitable to run your software to enhance security.");	
 		break;
 	case CSandBoxPlus::eAppBoxPlus:
 	case CSandBoxPlus::eAppBox:
@@ -1089,7 +1089,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 			msgBox.setTextFormat(Qt::RichText);
 			msgBox.setIcon(QMessageBox::Critical);
 			msgBox.setWindowTitle("Sandboxie-Plus");
-			msgBox.setText( tr("The program %1 be started in box %2 will be terminated in 5 minutes because the box was configured to use features, exclusively available to project supporters.<br />"
+			msgBox.setText( tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.<br />"
 				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>").arg(MsgData[2]).arg(MsgData[1]));
 			msgBox.setStandardButtons(QMessageBox::Ok);
 			msgBox.exec();

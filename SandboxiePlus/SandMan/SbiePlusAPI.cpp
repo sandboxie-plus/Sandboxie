@@ -86,8 +86,8 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bDropRights = false;
 	
 
-	m_bSecurityEnchanced = false;
-	m_bPrivacyEnchanced = false;
+	m_bSecurityEnhanced = false;
+	m_bPrivacyEnhanced = false;
 	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
 
@@ -136,9 +136,9 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityEnchanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
 	m_bApplicationCompartment = GetBool("NoSecurityIsolation", false);
-	m_bPrivacyEnchanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
+	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 
 	CSandBox::UpdateDetails();
 }
@@ -182,11 +182,11 @@ QString CSandBoxPlus::GetStatusStr() const
 		Status.append(tr("NOT SECURE"));
 	else if (m_iUnsecureDebugging == 2)
 		Status.append(tr("Reduced Isolation"));
-	else if(m_bSecurityEnchanced)
+	else if(m_bSecurityEnhanced)
 		Status.append(tr("Enhanced Isolation"));
 	
-	if(m_bPrivacyEnchanced)
-		Status.append(tr("Privacy Enchanced"));
+	if(m_bPrivacyEnhanced)
+		Status.append(tr("Privacy Enhanced"));
 
 	if (m_bLogApiFound)
 		Status.append(tr("API Log"));
@@ -194,7 +194,7 @@ QString CSandBoxPlus::GetStatusStr() const
 		Status.append(tr("No INet"));
 	if (m_bSharesAllowed)
 		Status.append(tr("Net Share"));
-	if (m_bDropRights && !m_bSecurityEnchanced)
+	if (m_bDropRights && !m_bSecurityEnhanced)
 		Status.append(tr("No Admin"));
 
 	if (Status.isEmpty())
@@ -204,7 +204,7 @@ QString CSandBoxPlus::GetStatusStr() const
 
 CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
 {
-	if (m_bApplicationCompartment && m_bPrivacyEnchanced)
+	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
 		return eAppBoxPlus;
 	if (m_bApplicationCompartment)
 		return eAppBox;
@@ -212,12 +212,12 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
 	if (m_iUnsecureDebugging != 0)
 		return eInsecure;
 
-	if (m_bSecurityEnchanced && m_bPrivacyEnchanced)
+	if (m_bSecurityEnhanced && m_bPrivacyEnhanced)
 		return eHardenedPlus;
-	if (m_bSecurityEnchanced)
+	if (m_bSecurityEnhanced)
 		return eHardened;
 
-	if (m_bPrivacyEnchanced)
+	if (m_bPrivacyEnhanced)
 		return eDefaultPlus;
 	return eDefault;
 }

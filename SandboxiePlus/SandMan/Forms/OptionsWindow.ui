@@ -223,7 +223,7 @@
                <item row="8" column="1" colspan="6">
                 <widget class="QLabel" name="lblSupportCert">
                  <property name="text">
-                  <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating a new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
+                  <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
                  </property>
                  <property name="textFormat">
                   <enum>Qt::RichText</enum>
@@ -1573,8 +1573,8 @@ If leader processes are defined, all others are treated as lingering processes.<
                 <widget class="QLabel" name="lblResources">
                  <property name="text">
                   <string>Configure which processes can access what resources. Double click on an entry to edit it.
-'Open' Normally File and Key access only applies to program binaries located outside the sandbox.
-You can use 'Open for All' instead to make it apply to all programs, or change this behaviour in the policies tab.</string>
+'Open' File and Key access only applies to program binaries located outside the sandbox.
+You can use 'Open for All' instead to make it apply to all programs, or change this behaviour in the Policies tab.</string>
                  </property>
                 </widget>
                </item>
@@ -1778,7 +1778,7 @@ The process match level has a higher priority than the specificity, it describes
                <item row="1" column="2" colspan="2">
                 <widget class="QCheckBox" name="chkPrivacy">
                  <property name="text">
-                  <string>Privacy Mode, block file and registry access to all locations except generic system once</string>
+                  <string>Privacy Mode, block file and registry access to all locations except the generic system one</string>
                  </property>
                 </widget>
                </item>
@@ -1799,7 +1799,7 @@ The process match level has a higher priority than the specificity, it describes
                <item row="2" column="3">
                 <widget class="QLabel" name="label_55">
                  <property name="text">
-                  <string>When The Privacy Mode is enabled sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need to be granted explicitly access to be readable and/or writable. In this mode  Rule Specificity is always enabled.</string>
+                  <string>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -2184,7 +2184,7 @@ The process match level has a higher priority than the specificity, it describes
                  <item row="3" column="2">
                   <widget class="QLabel" name="label_60">
                    <property name="text">
-                    <string>Security Isolation through the usage of a heavily restricted process token is sandboxies primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no loner providing reliable security, just simple application compartmentalization.</string>
+                    <string>Security Isolation through the usage of a heavily restricted process token is Sandboxie's primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>
@@ -2228,7 +2228,7 @@ The process match level has a higher priority than the specificity, it describes
                  <item row="0" column="0" colspan="3">
                   <widget class="QLabel" name="label_42">
                    <property name="text">
-                    <string>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.</string>
+                    <string>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>
@@ -2282,7 +2282,7 @@ The process match level has a higher priority than the specificity, it describes
                  <item row="5" column="2">
                   <widget class="QLabel" name="label_61">
                    <property name="text">
-                    <string>Security Filtering used by sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</string>
+                    <string>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>

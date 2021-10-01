@@ -250,13 +250,13 @@ void CPopUpWindow::AddUserPrompt(quint32 RequestId, const QVariantMap& Data, qui
 	switch (Data["id"].toInt())
 	{
 	case CSbieAPI::eFileMigration:
-		Message = tr("Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?\r\nFile name: %3")
+		Message = tr("Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?\nFile name: %3")
 			.arg(FormatSize(Data["fileSize"].toULongLong())).arg(pProcess->GetBoxName())
 			.arg(Data["fileName"].toString())
 			.arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId());
 		break;
 	case CSbieAPI::eInetBlockade:
-		Message = tr("Do you want to allow %1 (%2) access to the internet?\r\nFull path: %3")
+		Message = tr("Do you want to allow %1 (%2) access to the internet?\nFull path: %3")
 			.arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId())
 			.arg(pProcess->GetFileName());
 		break;
@@ -315,7 +315,7 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, co
 {
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 
-	QString Message = tr("%1 is eligible for quick recovery from %2.\r\nThe file was written by: %3")
+	QString Message = tr("%1 is eligible for quick recovery from %2.\nThe file was written by: %3")
 		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(pBox->GetName()).replace("_", " "))
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
@@ -408,7 +408,7 @@ void CPopUpWindow::ShowProgress(quint32 MsgCode, const QStringList& MsgData, qui
 	if (m_HiddenMessages.contains(0, FilePath))
 		return;
 
-	QString Message = tr("Migrating a large file %1 into the sandbox %2, %3 left.\r\nFull path: %4")
+	QString Message = tr("Migrating a large file %1 into the sandbox %2, %3 left.\nFull path: %4")
 		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(BoxName).arg(FormatSize(SizeLeft))
 		.arg(FilePath);
 

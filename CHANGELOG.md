@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - when initializing an empty sandbox, MSI debug keys are set to generate the debug output of MSI installer service
 - added "DisableComProxy=y" allowing to disable COM proxying through the service
 - added "ProcessLimit=..." that allows to limit the max count of processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
+- added missing IPC loging
 
 ### Changed
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance
@@ -33,6 +34,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed handle leaks in the lingering process monitor mechanism
 - fixed issue with opening device paths like "\\??\\FltMgr"
 - fixed build issue with an explicit FileDigestAlgorithm option for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)
+- fixed issue with resource access log sometimes getting corrupted
+- fixed issue with office C2R [#428](https://github.com/sandboxie-plus/Sandboxie/issues/428)
 
 ### removed
 - removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018

@@ -1110,7 +1110,7 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
         
         log_data->Length = (USHORT)data_size;
         ProbeForWrite(log_buffer, data_size + 1, sizeof(WCHAR));
-        memcpy(log_buffer, read_ptr, data_size);
+        log_buffer_get_bytes((CHAR*)log_buffer, data_size, &read_ptr, session->monitor_log);
 
         log_buffer[data_size / sizeof(wchar_t)] = L'\0';
         

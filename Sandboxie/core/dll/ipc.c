@@ -1028,7 +1028,7 @@ _FX NTSTATUS Ipc_NtCreatePort(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -1399,7 +1399,7 @@ _FX NTSTATUS Ipc_NtAlpcCreatePort(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2201,6 +2201,9 @@ _FX NTSTATUS Ipc_NtCreateEvent(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateEvent(
             EventHandle, DesiredAccess, ObjectAttributes,
             EventType, InitialState);
@@ -2215,7 +2218,7 @@ _FX NTSTATUS Ipc_NtCreateEvent(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2425,6 +2428,9 @@ _FX NTSTATUS Ipc_NtCreateMutant(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateMutant(
             MutantHandle, DesiredAccess, ObjectAttributes,
             InitialOwner);
@@ -2439,7 +2445,7 @@ _FX NTSTATUS Ipc_NtCreateMutant(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2650,6 +2656,9 @@ _FX NTSTATUS Ipc_NtCreateSemaphore(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateSemaphore(
             SemaphoreHandle, DesiredAccess, ObjectAttributes,
             InitialCount, MaximumCount);
@@ -2664,7 +2673,7 @@ _FX NTSTATUS Ipc_NtCreateSemaphore(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2887,6 +2896,9 @@ _FX NTSTATUS Ipc_NtCreateSection(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateSection(
             SectionHandle, DesiredAccess, ObjectAttributes,
             MaximumSize, PageAttributes, SectionAttributes, FileHandle);
@@ -2901,7 +2913,7 @@ _FX NTSTATUS Ipc_NtCreateSection(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;

@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.7 / 5.52.1] - 2021-09-??
+## [0.9.7 / 5.52.1] - 2021-10-01
 
 ### Added
 - added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)

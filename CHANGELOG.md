@@ -37,7 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with resource access log sometimes getting corrupted
 - fixed issue with Microsoft Office Click-to-Run [#428](https://github.com/sandboxie-plus/Sandboxie/issues/428) [#882](https://github.com/sandboxie-plus/Sandboxie/issues/882)
 
-### removed
+### Removed
 - removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018
 - removed support for Messenger Plus! Live, as MSN Messenger is EOL since 2013
 - disabled Turkish language on Plus UI for inactivity (by isaak654) [#1215](https://github.com/sandboxie-plus/Sandboxie/pull/1215)

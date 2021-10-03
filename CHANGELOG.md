@@ -11,10 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)
-- added "SbieTrace=y" option to trace the interaction between Sandboxie processes and the Sandboxie core components
+- added "SbieTrace=y" option to trace the interaction between Sandboxie processes and Sandboxie core components
 - when initializing an empty sandbox, MSI debug keys are set to generate the debug output of MSI installer service
 - added "DisableComProxy=y" allowing to disable COM proxying through the service
-- added "ProcessLimit=..." that allows to limit the max count of processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
+- added "ProcessLimit=..." which allows limiting the maximum number of processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
 - added missing IPC logging
 
 ### Changed
@@ -23,14 +23,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - enabled configuration section list replacement with a hash map to improve configuration performance
 - improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
 - reworked RpcSs start mechanics, sandboxed RpcSs and DcomLaunch can now be run as system, use "RunRpcssAsSystem=y"
--- note: this is generally not recommended for security reasons but may be needed for compatibility in some scenarios
+-- Note: this is generally not recommended for security reasons but may be needed for compatibility in some scenarios
 - reworked WTSQueryUserToken handling to work properly in all scenarios
 - reworked configuration value list to use a hash table for better performance
 
 ### Fixed
 - fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)
-- fixed custom autoexec commands being executed on each box start instead of only on the initialization
-- fixed a design issue limiting the maximal amount of processes in one box to 511
+- fixed custom autoexec commands being executed on each box start instead of only during the initialization
+- fixed a design issue limiting the maximum amount of processes per sandbox to 511
 - fixed handle leaks in the lingering process monitor mechanism
 - fixed issue with opening device paths like "\\??\\FltMgr"
 - fixed build issue with an explicit FileDigestAlgorithm option for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)

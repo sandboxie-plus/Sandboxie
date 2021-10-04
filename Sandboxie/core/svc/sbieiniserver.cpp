@@ -897,18 +897,21 @@ ULONG SbieIniServer::CacheConfig()
         HeapFree(GetProcessHeap(), 0, iniData);
         iniDataPtr = iniData = tmpData;
     }
-    else if (encoding == 2) { //Unicode (UTF-16 BE) BOM
-        // swap all bytes
-        UCHAR* tmpData = (UCHAR*)iniDataPtr;
-        for (DWORD i = 0; i < bytesRead-1; i+=2) {
-            UCHAR tmp = tmpData[i+1];
-            tmpData[i+1] = tmpData[i];
-            tmpData[i] = tmp;
+    else {
+        if (encoding == 2) { //Unicode (UTF-16 BE) BOM
+            // swap all bytes
+            UCHAR* tmpData = (UCHAR*)iniDataPtr;
+            for (DWORD i = 0; i < bytesRead - 1; i += 2) {
+                UCHAR tmp = tmpData[i + 1];
+                tmpData[i + 1] = tmpData[i];
+                tmpData[i] = tmp;
+            }
         }
+        //else if (encoding == 0) //Unicode (UTF-16 LE) BOM
+        bytesRead /= sizeof(wchar_t);
     }
-    //else if (encoding == 0) //Unicode (UTF-16 LE) BOM
 
-    iniDataPtr[bytesRead / sizeof(wchar_t)] = L'\0';
+    iniDataPtr[bytesRead] = L'\0';
 
     m_pConfigIni = new SConfigIni;
     m_pConfigIni->Encoding = encoding;

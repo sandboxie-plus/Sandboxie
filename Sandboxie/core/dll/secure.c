@@ -1783,7 +1783,7 @@ ALIGNED BOOLEAN __cdecl Secure_CheckElevation64(
 #endif _WIN64
 
 extern BOOLEAN g_rpc_client_hooks;
-void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, VOID* pStubDescriptor);
+void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, VOID* pStubDescriptor, void* pFormat);
 
 ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
     void *ReturnAddressFromNdrAsyncClientCall,
@@ -1791,9 +1791,9 @@ ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
 {
     if (g_rpc_client_hooks) {
 #ifdef _WIN64
-        RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor);
+        RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor, pFormat);
 #else
-        RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor);
+        RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor, pFormat);
 #endif
     }
 

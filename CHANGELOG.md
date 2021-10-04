@@ -7,6 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [0.9.7b / 5.52.2] - 2021-10-05
+
+### Fixed
+- fixed issue loading not unicode sandboxie.ini introduced with the previouse build
+
+
+
+
 ## [0.9.7 / 5.52.1] - 2021-10-02
 
 ### Added

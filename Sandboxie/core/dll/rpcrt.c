@@ -633,7 +633,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
             wcscat(wstrPortName, dynamicFalse + 9);
         }
     }
-    else if (_wcsicmp(StringBinding, L"0497b57d-2e66-424f-a0c6-157cd5d41700@ncalrpc:") == 0) {
+    /*else if (_wcsicmp(StringBinding, L"0497b57d-2e66-424f-a0c6-157cd5d41700@ncalrpc:") == 0) {
 
         ULONG_PTR pkernel32 = (ULONG_PTR)GetModuleHandle(L"kernel32.dll");
         // kernel32.dll!AicpCreateBindingHandle
@@ -644,7 +644,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         if (RpcRt_TestCallingModule(pRetAddr, pkernel32)) {
             use_RpcMgmtSetComTimeout = TRUE;
         }
-    }
+    }*/
 
     WCHAR* CallingModule = Trace_FindModuleByAddress((void*)pRetAddr);
     if (CallingModule)
@@ -844,7 +844,7 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
 
 void Sbie_StringFromGUID(const GUID* guid, WCHAR* str);
 
-void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress,PMIDL_STUB_DESC pStubDescriptor)
+void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress,PMIDL_STUB_DESC pStubDescriptor, void* pFormat)
 {
     WCHAR text[512] = L"RpcRt_NdrClientCallX";
     __try
@@ -879,7 +879,7 @@ ULONG_PTR RpcRt_NdrClientCall2_x64(
 {
     void* ReturnAddress = (void*)*(__int64*)(vl - (3 * 8));
 
-    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor);
+    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor, pFormat);
 
     return FALSE; // return TRUE to not call the trampoline upon return
 }
@@ -890,7 +890,7 @@ ULONG_PTR RpcRt_NdrClientCall3_x64(
     void* ReturnAddress = (void*)*(__int64*)(vl - (4 * 8));
 
     __try {
-        RpcRt_NdrClientCallX(L"NdrClientCall3", ReturnAddress, pProxyInfo->pStubDesc);
+        RpcRt_NdrClientCallX(L"NdrClientCall3", ReturnAddress, pProxyInfo->pStubDesc, pProxyInfo->ProcFormatString);
     }__except (EXCEPTION_EXECUTE_HANDLER) {}
 
     return FALSE; // return TRUE to not call the trampoline upon return
@@ -905,7 +905,7 @@ ULONG_PTR __cdecl RpcRt_NdrClientCall_x86(
     //va_list vl;
     //va_start(vl, pFormat);
 
-    RpcRt_NdrClientCallX(L"NdrClientCall", ReturnAddress, pStubDescriptor);
+    RpcRt_NdrClientCallX(L"NdrClientCall", ReturnAddress, pStubDescriptor, pFormat);
 
     //va_end(vl);
 
@@ -919,7 +919,7 @@ ULONG_PTR __cdecl RpcRt_NdrClientCall2_x86(
     //va_list vl;
     //va_start(vl, pFormat);
 
-    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor);
+    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor, pFormat);
 
     //va_end(vl);
 
@@ -933,7 +933,7 @@ ULONG_PTR __cdecl RpcRt_NdrClientCall4_x86(
     //va_list vl;
     //va_start(vl, pFormat);
 
-    RpcRt_NdrClientCallX(L"NdrClientCall4", ReturnAddress, pStubDescriptor);
+    RpcRt_NdrClientCallX(L"NdrClientCall4", ReturnAddress, pStubDescriptor, pFormat);
 
     //va_end(vl);
 

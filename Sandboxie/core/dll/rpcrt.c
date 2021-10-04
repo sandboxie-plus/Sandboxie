@@ -844,7 +844,7 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
 
 void Sbie_StringFromGUID(const GUID* guid, WCHAR* str);
 
-void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress,PMIDL_STUB_DESC pStubDescriptor, void* pFormat)
+void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress,PMIDL_STUB_DESC pStubDescriptor, const void* pFormat)
 {
     WCHAR text[512] = L"RpcRt_NdrClientCallX";
     __try

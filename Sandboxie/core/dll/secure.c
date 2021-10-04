@@ -1783,7 +1783,7 @@ ALIGNED BOOLEAN __cdecl Secure_CheckElevation64(
 #endif _WIN64
 
 extern BOOLEAN g_rpc_client_hooks;
-void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, VOID* pStubDescriptor, void* pFormat);
+void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, VOID* pStubDescriptor, const void* pFormat);
 
 ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
     void *ReturnAddressFromNdrAsyncClientCall,

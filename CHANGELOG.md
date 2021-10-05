@@ -8,14 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.7c / 5.52.3] - 2021-10-05
 
 ### Fixed
-- fixed yet an otehr in ihandling bug with SbieApi_EnumBoxesEx
-
+- fixed yet another handling bug with SbieApi_EnumBoxesEx
 
 
 ## [0.9.7b / 5.52.2] - 2021-10-04
 
 ### Fixed
-- fixed issue loading not unicode sandboxie.ini introduced with the previouse build
+- fixed issue about loading not Unicode Sandboxie.ini introduced with the previous build
 
 
 

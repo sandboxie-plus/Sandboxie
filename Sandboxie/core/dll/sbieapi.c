@@ -1295,7 +1295,7 @@ _FX LONG SbieApi_EnumBoxesEx(
     LONG rc;
     while (1) {
         ++index;
-        rc = SbieApi_QueryConf(NULL, NULL, index | CONF_GET_NO_EXPAND,
+        rc = SbieApi_QueryConf(NULL, NULL, index | CONF_GET_NO_TEMPLS | CONF_GET_NO_EXPAND,
                                box_name, sizeof(WCHAR) * 34);
         if (rc == STATUS_BUFFER_TOO_SMALL)
             continue;

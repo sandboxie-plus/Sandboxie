@@ -38,7 +38,7 @@ If applicable, add screenshots to help explain your problem.
 Add any other context about the problem here.
 
 **Sandboxie configuration**
-If applicable, consider to attach your Sandboxie.ini configuration by copying the content on https://gist.github.com and sharing the resulting link here. If you decide to paste the configuration here, make sure to use the backticks around strings, like in this working example:
+If applicable, consider to attach your Sandboxie.ini configuration by copying the content on https://gist.github.com and sharing the resulting link. If you decide to paste the configuration here, make sure to use the backticks around strings, like in this working example:
 
 <details>
  

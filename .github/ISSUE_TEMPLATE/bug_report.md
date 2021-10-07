@@ -24,8 +24,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **System details and installed software**
- - What is your Windows edition and version? (e.g. Windows 10 Pro 20H2 64-bit).
- - What is your current Sandboxie edition and version? (e.g. Sandboxie Plus 0.9.6 64-bit).
+ - What is your Windows edition and version? (e.g. Windows 10 Pro 20H2 64-bit)
+ - What is your current Sandboxie edition and version? (e.g. Sandboxie Plus 0.9.6 64-bit)
  - What was your previous Sandboxie version before the update, if any?
  - Please mention in which version this bug got introduced, because it acts as a guide for testers and developers.
  - Please mention any security software running in the background, even if the real-time protection is disabled.

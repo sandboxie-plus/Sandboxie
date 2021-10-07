@@ -1778,7 +1778,7 @@ The process match level has a higher priority than the specificity, it describes
                <item row="1" column="2" colspan="2">
                 <widget class="QCheckBox" name="chkPrivacy">
                  <property name="text">
-                  <string>Privacy Mode, block file and registry access to all locations except the generic system one</string>
+                  <string>Privacy Mode, block file and registry access to all locations except the generic system ones</string>
                  </property>
                 </widget>
                </item>

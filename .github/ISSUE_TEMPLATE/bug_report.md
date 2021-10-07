@@ -31,7 +31,7 @@ If applicable, add screenshots to help explain your problem.
  - Please mention any security software running in the background, even if the real-time protection is disabled.
 
 **If you have a compatibility issue**
- - Please add a reference link to the program not working properly in Sandboxie
+ - Please add a reference link to the program not working properly in Sandboxie.
  - Please consider to take a log and make it available for analysis: https://git.io/Jwj2y
 
 **Additional context**

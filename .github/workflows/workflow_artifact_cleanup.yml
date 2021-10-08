@@ -1,0 +1,14 @@
+name: 'Workflow Artifact Cleanup'
+on:
+    push:
+        workflow_dispatch:
+            branches: [ master ]
+
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: 0

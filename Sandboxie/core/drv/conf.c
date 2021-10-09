@@ -39,25 +39,30 @@
 //---------------------------------------------------------------------------
 
 #define USE_CONF_MAP
-#define USE_CONF_MAP2
 
 #define CONF_LINE_LEN               2000        // keep in sync with sbieiniwire.h
 #define CONF_MAX_LINES              100000      // keep in sync with sbieiniwire.h
 
 #define CONF_TMPL_LINE_BASE         0x01000000
 
+
 //---------------------------------------------------------------------------
 // Structures
 //---------------------------------------------------------------------------
 
+//
+// Note: we want to preserver the order of the settings when enumerating
+//          hence we can not replace the list with a hash map entierly
+//          instead we use booth, here the hash map ise used only for lookups
+//          the keys in the map are only pointers to the name fileds in the list entries
+//
 
 typedef struct _CONF_DATA {
 
     POOL *pool;
-#ifdef USE_CONF_MAP
-    HASH_MAP section_map;
-#else
     LIST sections;      // CONF_SECTION
+#ifdef USE_CONF_MAP
+    HASH_MAP sections_map;
 #endif
     BOOLEAN home;       // TRUE if configuration read from Driver_Home_Path
     ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swaped)
@@ -68,14 +73,11 @@ typedef struct _CONF_DATA {
 
 typedef struct _CONF_SECTION {
 
-#ifndef USE_CONF_MAP
     LIST_ELEM list_elem;
     WCHAR *name;
-#endif
-#ifdef USE_CONF_MAP2
-    HASH_MAP value_map;
-#else
     LIST settings;      // CONF_SETTING
+#ifdef USE_CONF_MAP
+    HASH_MAP settings_map;
 #endif
     BOOLEAN from_template;
 
@@ -84,10 +86,8 @@ typedef struct _CONF_SECTION {
 
 typedef struct _CONF_SETTING {
 
-#ifndef USE_CONF_MAP2
     LIST_ELEM list_elem;
     WCHAR *name;
-#endif
     WCHAR *value;
     BOOLEAN from_template;
     BOOLEAN template_handled;
@@ -133,6 +133,23 @@ static const WCHAR *Conf_Get_Setting_Name(
 
 //---------------------------------------------------------------------------
 
+
+static BOOLEAN str_map_match(const void* key1, const void* key2) {
+	const wchar_t** str1 = (const wchar_t**)key1;
+	const wchar_t** str2 = (const wchar_t**)key2;
+	return _wcsicmp(*str1, *str2) == 0;
+}
+
+static unsigned int str_map_hash(const void* key, size_t size) {
+	const wchar_t** str = (const wchar_t**)key;
+	unsigned int hash = 5381;
+	for (unsigned short* ptr = (unsigned short*)*str; *ptr != 0; ptr++)
+		hash = ((hash << 5) + hash) ^ *ptr;
+	return hash;
+}
+
+
+//---------------------------------------------------------------------------
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Conf_Init)
@@ -266,13 +283,13 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     else {
 
         data.pool = pool;
-#ifdef USE_CONF_MAP
-        map_init(&data.section_map, data.pool);
-        data.section_map.func_key_size = &map_wcssize;
-        data.section_map.func_match_key = &map_wcsimatch;
-        map_resize(&data.section_map, 16); // prepare some buckets for better performance
-#else
         List_Init(&data.sections);
+#ifdef USE_CONF_MAP
+        map_init(&data.sections_map, data.pool);
+        data.sections_map.func_key_size = NULL;
+        data.sections_map.func_match_key = &str_map_match;
+        data.sections_map.func_hash_key = &str_map_hash;
+        map_resize(&data.sections_map, 16); // prepare some buckets for better performance
 #endif
         data.home = path_home;
         data.use_count = 0;
@@ -454,7 +471,7 @@ _FX NTSTATUS Conf_Read_Sections(
         // find an existing section by that name or create a new one
         //
 #ifdef USE_CONF_MAP
-        section = map_get(&data->section_map, &line[1]);
+        section = map_get(&data->sections_map, &line[1]);
 #else
         section = List_Head(&data->sections);
         while (section) {
@@ -477,30 +494,27 @@ _FX NTSTATUS Conf_Read_Sections(
             else
                 section->from_template = FALSE;
 
-#ifndef USE_CONF_MAP
             section->name = Mem_AllocString(data->pool, &line[1]);
             if (! section->name) {
                 status = STATUS_INSUFFICIENT_RESOURCES;
                 break;
             }
-#endif
 
-#ifdef USE_CONF_MAP2
-            map_init(&section->value_map, data->pool);
-            section->value_map.func_key_size = &map_wcssize;
-            section->value_map.func_match_key = &map_wcsimatch;
-            map_resize(&section->value_map, 16); // prepare some buckets for better performance
-#else
             List_Init(&section->settings);
-#endif
-
 #ifdef USE_CONF_MAP
-            if(map_insert(&data->section_map, &line[1], section, 0) == NULL) {
+            map_init(&section->settings_map, data->pool);
+            section->settings_map.func_key_size = NULL;
+            section->settings_map.func_match_key = &str_map_match;
+            section->settings_map.func_hash_key = &str_map_hash;
+            map_resize(&section->settings_map, 16); // prepare some buckets for better performance
+#endif			
+
+            List_Insert_After(&data->sections, NULL, section);
+#ifdef USE_CONF_MAP
+            if(map_insert(&data->sections_map, section->name, section, 0) == NULL) {
                 status = STATUS_INSUFFICIENT_RESOURCES;
                 break;
             }
-#else
-            List_Insert_After(&data->sections, NULL, section);
 #endif
         }
 
@@ -508,9 +522,6 @@ _FX NTSTATUS Conf_Read_Sections(
 
         status = Conf_Read_Settings(stream, data, section, line, linenum);
     }
-
-    //DbgPrint("\tConf Section Map:\r\n");
-    //map_dump(&data->section_map);
 
     Mem_Free(line, line_len);
 
@@ -601,13 +612,11 @@ _FX NTSTATUS Conf_Read_Settings(
 
         setting->template_handled = FALSE;
 
-#ifndef USE_CONF_MAP2
         setting->name = Mem_AllocString(data->pool, line);
         if (! setting->name) {
             status = STATUS_INSUFFICIENT_RESOURCES;
             break;
         }
-#endif
 
         setting->value = Mem_AllocString(data->pool, value);
         if (! setting->value) {
@@ -615,18 +624,14 @@ _FX NTSTATUS Conf_Read_Settings(
             break;
         }
 
-#ifdef USE_CONF_MAP2
-        if(map_append(&section->value_map, line, setting, 0) == NULL) {
+        List_Insert_After(&section->settings, NULL, setting);
+#ifdef USE_CONF_MAP
+        if(map_append(&section->settings_map, setting->name, setting, 0) == NULL) {
             status = STATUS_INSUFFICIENT_RESOURCES;
             break;
         }
-#else
-        List_Insert_After(&section->settings, NULL, setting);
 #endif
     }
-
-    //DbgPrint("Conf Value Map %S:\r\n", section->name);
-    //map_dump(&section->value_map);
 
     return status;
 }
@@ -721,64 +726,62 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
     // scan sections to find a sandbox section
     //
 
-#ifdef USE_CONF_MAP
-	map_iter_t iter = map_iter();
-	while (map_next(&data->section_map, &iter)) {
-
-        sandbox = iter.value;
-#else
     sandbox = List_Head(&data->sections);
     while (sandbox) {
 
         CONF_SECTION *next_sandbox = List_Next(sandbox);
-#endif
 
         //
         // if we found the global section, handle it
         //
 
-#ifdef USE_CONF_MAP
-        if (_wcsicmp(iter.key, Conf_GlobalSettings) == 0) {
-#else
         if (_wcsicmp(sandbox->name, Conf_GlobalSettings) == 0) {
-#endif
 
             status = Conf_Merge_Global(data, session_id, sandbox);
 
             if (! NT_SUCCESS(status))
                 return status;
 
-#ifndef USE_CONF_MAP
             sandbox = next_sandbox;
-#endif
             continue;
         }
 
         //
-        // skip any template sections and user settings sections
+        // break once the template section starts
         //
 
-#ifdef USE_CONF_MAP
-        if (_wcsnicmp(iter.key, Conf_Template_, 9)      == 0 ||
-            _wcsnicmp(iter.key, Conf_UserSettings_, 13) == 0) {
-#else
-        if (_wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 ||
+        if (sandbox->from_template) {
+            // we can break because template sections come after
+            // all non-template sections
+            break;
+        }
+
+        //
+        // skip any local template sections and user settings sections
+        //
+
+        if (_wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 || // Template_ or Template_Local_
             _wcsnicmp(sandbox->name, Conf_UserSettings_, 13) == 0) {
 
             sandbox = next_sandbox;
-#endif 
             continue;
         }
+
+#ifdef USE_CONF_MAP
+
+        //
+        // use a keyed itterator to quickly go through all Template=Xxx settings
+        //
+
+        map_iter_t iter2 = map_key_iter(&sandbox->settings_map, Conf_Template);
+	    while (map_next(&sandbox->settings_map, &iter2)) {
+            setting = iter2.value;
+#else
 
         //
         // scan the section for a Template=Xxx setting
         //
 
-#ifdef USE_CONF_MAP2
-        map_iter_t iter2 = map_key_iter(&sandbox->value_map, Conf_Template);
-	    while (map_next(&sandbox->value_map, &iter2)) {
-            setting = iter2.value;
-#else
         setting = List_Head(&sandbox->settings);
         while (setting) {
 
@@ -791,7 +794,7 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
 
             if (setting->template_handled) {
 
-#ifndef USE_CONF_MAP2
+#ifndef USE_CONF_MAP
                 setting = List_Next(setting);
 #endif
                 continue;
@@ -803,18 +806,13 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
 
             status = Conf_Merge_Template(
                 data, session_id, setting->value, sandbox);
-#ifdef USE_CONF_MAP
-            if (status == STATUS_NOT_FOUND) {
-                Log_Msg_Session(MSG_CONF_MISSING_TMPL, iter.key, setting->value, session_id);
-                status = STATUS_SUCCESS;
-            }
-#endif
+
             if (! NT_SUCCESS(status))
                 return status;
 
             setting->template_handled = TRUE;
 
-#ifndef USE_CONF_MAP2
+#ifndef USE_CONF_MAP
             //
             // advance to next setting
             //
@@ -823,13 +821,11 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
 #endif
         }
 
-#ifndef USE_CONF_MAP
         //
         // advance to next section
         //
 
         sandbox = next_sandbox;
-#endif
     }
 
     return STATUS_SUCCESS;
@@ -853,11 +849,6 @@ _FX NTSTATUS Conf_Merge_Global(
     // scan the section for a Template=Xxx setting
     //
 
-#ifdef USE_CONF_MAP2
-    map_iter_t iter2 = map_key_iter(&global->value_map, Conf_Template);
-	while (map_next(&global->value_map, &iter2)) {
-        setting = iter2.value;
-#else
     setting = List_Head(&global->settings);
     while (setting) {
 
@@ -866,34 +857,23 @@ _FX NTSTATUS Conf_Merge_Global(
             setting = List_Next(setting);
             continue;
         }
-#endif
 
         //
         // scan sections to find a sandbox section
         //
 
-#ifdef USE_CONF_MAP
-	map_iter_t iter = map_iter();
-	while (map_next(&data->section_map, &iter)) {
-
-        sandbox = iter.value;
-#else
         sandbox = List_Head(&data->sections);
         while (sandbox) {
 
             CONF_SECTION *next_sandbox = List_Next(sandbox);
-#endif
 
             //
             // skip the global section
             //
 
-#ifdef USE_CONF_MAP
-            if (_wcsicmp(iter.key, Conf_GlobalSettings) == 0) {
-#else
             if (_wcsicmp(sandbox->name, Conf_GlobalSettings) == 0) {
+
                 sandbox = next_sandbox;
-#endif
                 continue;
             }
 
@@ -901,14 +881,10 @@ _FX NTSTATUS Conf_Merge_Global(
             // skip any template sections and user settings sections
             //
 
-#ifdef USE_CONF_MAP
-            if (_wcsnicmp(iter.key, Conf_Template_, 9)      == 0 ||
-                _wcsnicmp(iter.key, Conf_UserSettings_, 13) == 0) {
-#else
             if (_wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 ||
                 _wcsnicmp(sandbox->name, Conf_UserSettings_, 13) == 0) {
+
                 sandbox = next_sandbox;
-#endif
                 continue;
             }
 
@@ -918,31 +894,22 @@ _FX NTSTATUS Conf_Merge_Global(
 
             status = Conf_Merge_Template(
                 data, session_id, setting->value, sandbox);
-#ifdef USE_CONF_MAP
-            if (status == STATUS_NOT_FOUND) {
-                Log_Msg_Session(MSG_CONF_MISSING_TMPL, iter.key, setting->value, session_id);
-                status = STATUS_SUCCESS;
-            }
-#endif
+
             if (! NT_SUCCESS(status))
                 return status;
 
-#ifndef USE_CONF_MAP
             //
             // advance to next section
             //
 
             sandbox = next_sandbox;
-#endif
         }
 
-#ifndef USE_CONF_MAP2
         //
         // advance to next setting
         //
 
         setting = List_Next(setting);
-#endif
     }
 
     return STATUS_SUCCESS;
@@ -958,64 +925,51 @@ _FX NTSTATUS Conf_Merge_Template(
     CONF_DATA *data, ULONG session_id,
     const WCHAR *tmpl_name, CONF_SECTION *section)
 {
+
+#ifdef USE_CONF_MAP
+    //
+    // lookup the template section in the hash map
+    //
+
+    WCHAR section_name[130]; // 128 + 2 // max regular section length is 64
+    CONF_SECTION *tmpl = NULL;
+    if (wcslen(tmpl_name) < 119) { // 128 - wcslen(Conf_Template_)
+        wcscpy(section_name, Conf_Template_);
+        wcscat(section_name, tmpl_name);
+        tmpl = map_get(&data->sections_map, section_name);
+    }
+#else
     //
     // scan for a matching template section
     //
 
-#ifdef USE_CONF_MAP
-    CONF_SECTION *tmpl = NULL;
-
-	map_iter_t iter = map_iter();
-	while (map_next(&data->section_map, &iter)) {
-        tmpl = iter.value;
-#else
     CONF_SECTION *tmpl = List_Head(&data->sections);
     while (tmpl) {
-#endif
 
-#ifdef USE_CONF_MAP
-        if (wcslen(iter.key) >= 10 &&
-            _wcsnicmp(iter.key, Conf_Template_, 9) == 0 &&
-            _wcsicmp((WCHAR*)iter.key + 9, tmpl_name) == 0) {
-#else
         if (wcslen(tmpl->name) >= 10 &&
             _wcsnicmp(tmpl->name, Conf_Template_, 9) == 0 &&
             _wcsicmp(tmpl->name + 9, tmpl_name) == 0) {
-#endif
+
             break;
         }
 
-#ifndef USE_CONF_MAP
         tmpl = List_Next(tmpl);
-#else
-        tmpl = NULL;
-#endif
     }
+#endif
 
-   
     //
     // copy settings from template section into sandbox section
     //
 
     if (tmpl) {
 
-        CONF_SETTING* oset, * nset;
+        CONF_SETTING *oset, *nset;
 
-#ifdef USE_CONF_MAP2
-        map_iter_t iter2 = map_iter();
-        while (map_next(&tmpl->value_map, &iter2)) {
-            oset = iter2.value;
-#else
         oset = List_Head(&tmpl->settings);
         while (oset) {
-#endif
 
-#ifdef USE_CONF_MAP2
-            if (_wcsnicmp(iter2.key, Conf_Tmpl, 5) == 0) {
-#else
             if (_wcsnicmp(oset->name, Conf_Tmpl, 5) == 0) {
                 oset = List_Next(oset);
-#endif
                 continue;
             }
 
@@ -1024,33 +978,26 @@ _FX NTSTATUS Conf_Merge_Template(
             nset->template_handled = FALSE;
             if (! nset)
                 return STATUS_INSUFFICIENT_RESOURCES;
-#ifndef USE_CONF_MAP2
             nset->name = Mem_AllocString(data->pool, oset->name);
             if (! nset->name)
                 return STATUS_INSUFFICIENT_RESOURCES;
-#endif
             nset->value = Mem_AllocString(data->pool, oset->value);
             if (! nset->value)
                 return STATUS_INSUFFICIENT_RESOURCES;
 
-#ifdef USE_CONF_MAP2
-            if(map_append(&section->value_map, iter2.key, nset, 0) == NULL)
-                return STATUS_INSUFFICIENT_RESOURCES;
-#else
             List_Insert_After(&section->settings, NULL, nset);
+#ifdef USE_CONF_MAP
+            if(map_append(&section->settings_map, nset->name, nset, 0) == NULL)
+                return STATUS_INSUFFICIENT_RESOURCES;
+#endif
 
             oset = List_Next(oset);
-#endif
         }
 
     } else {
 
-#ifdef USE_CONF_MAP
-        return STATUS_NOT_FOUND;
-#else
         Log_Msg_Session(MSG_CONF_MISSING_TMPL,
                         section->name, tmpl_name, session_id);
-#endif
     }
 
     return STATUS_SUCCESS;
@@ -1073,7 +1020,11 @@ _FX const WCHAR *Conf_Get_Helper(
     value = NULL;
 
 #ifdef USE_CONF_MAP
-    section = map_get(&Conf_Data.section_map, section_name);
+    //
+    // lookup the section in the hash map
+    //
+
+    section = map_get(&Conf_Data.sections_map, section_name);
 #else
     section = List_Head(&Conf_Data.sections);
     while (section) {
@@ -1087,9 +1038,13 @@ _FX const WCHAR *Conf_Get_Helper(
         section = NULL;
 
     if (section) {
-#ifdef USE_CONF_MAP2
-        map_iter_t iter2 = map_key_iter(&section->value_map, setting_name);
-	    while (map_next(&section->value_map, &iter2)) {
+#ifdef USE_CONF_MAP
+        //
+        // use a keyed itterator to quickly go through all matching settings
+        //
+
+        map_iter_t iter2 = map_key_iter(&section->settings_map, setting_name);
+	    while (map_next(&section->settings_map, &iter2)) {
             setting = iter2.value;
 #else
         setting = List_Head(&section->settings);
@@ -1101,7 +1056,7 @@ _FX const WCHAR *Conf_Get_Helper(
                 // all non-template settings
                 break;
             }
-#ifndef USE_CONF_MAP2
+#ifndef USE_CONF_MAP
             if (_wcsicmp(setting->name, setting_name) == 0) {
 #endif
                 if (*index == 0) {
@@ -1109,7 +1064,7 @@ _FX const WCHAR *Conf_Get_Helper(
                     break;
                 }
                 --(*index);
-#ifndef USE_CONF_MAP2
+#ifndef USE_CONF_MAP
             }
             setting = List_Next(setting);
 #endif
@@ -1132,43 +1087,26 @@ _FX const WCHAR *Conf_Get_Section_Name(ULONG index, BOOLEAN skip_tmpl)
 
     value = NULL;
 
-#ifdef USE_CONF_MAP
-	map_iter_t iter = map_iter();
-	while (map_next(&Conf_Data.section_map, &iter)) {
-        section = iter.value;
-#else
     section = List_Head(&Conf_Data.sections);
     while (section) {
         CONF_SECTION *next_section = List_Next(section);
-#endif
 
-#ifdef USE_CONF_MAP
-        if (_wcsicmp(iter.key, Conf_GlobalSettings) == 0) {
-#else
         if (_wcsicmp(section->name, Conf_GlobalSettings) == 0) {
             section = next_section;
-#endif
             continue;
         }
         if (skip_tmpl && section->from_template) {
-#ifndef USE_CONF_MAP
-            section = next_section;
-#endif
-            continue;
+            // we can break because template sections come after
+            // all non-template sections
+            break;
         }
         if (index == 0) {
-#ifdef USE_CONF_MAP
-            value = (WCHAR*)iter.key;
-#else
             value = section->name;
-#endif
             break;
         }
 
         --index;
-#ifndef USE_CONF_MAP
         section = next_section;
-#endif
     }
 
     return value;
@@ -1191,7 +1129,11 @@ _FX const WCHAR *Conf_Get_Setting_Name(
     value = NULL;
 
 #ifdef USE_CONF_MAP
-    section = map_get(&Conf_Data.section_map, section_name);
+    //
+    // lookup the section in the hash map
+    //
+
+    section = map_get(&Conf_Data.sections_map, section_name);
 #else
     section = List_Head(&Conf_Data.sections);
     while (section) {
@@ -1203,37 +1145,20 @@ _FX const WCHAR *Conf_Get_Setting_Name(
     if (skip_tmpl && section && section->from_template)
         section = NULL;
 
-    if (section)
-    {
-#ifdef USE_CONF_MAP2
-        map_iter_t iter2 = map_iter();
-	    while (map_next(&section->value_map, &iter2)) {
-            setting = iter2.value;
-#else
+    if (section) {
         setting = List_Head(&section->settings);
         while (setting) {
-#endif
 
             if (skip_tmpl && setting->from_template) {
-#ifdef USE_CONF_MAP2
-                // the map only maintains the order of appended values with the same key
-                // hence here we have to go through the entire map
-                continue;
-#else
                 // we can break because template settings come after
                 // all non-template settings
                 break;
-#endif
             }
 
             //
             // check if we already processed this name
             //
 
-#ifdef USE_CONF_MAP2
-            setting2 = map_get(&section->value_map, iter2.key);
-            dup = (setting2 != setting); // if the first entry found found for this value is not this value than its a duplicate
-#else
             dup = FALSE;
             setting2 = List_Head(&section->settings);
             while (setting2 && setting2 != setting) {
@@ -1243,23 +1168,16 @@ _FX const WCHAR *Conf_Get_Setting_Name(
                 } else
                     setting2 = List_Next(setting2);
             }
-#endif
 
             if (! dup) {
                 if (index == 0) {
-#ifdef USE_CONF_MAP2
-                    value = (WCHAR*)iter2.key;
-#else
                     value = setting->name;
-#endif
                     break;
                 } else
                     --index;
             }
 
-#ifndef USE_CONF_MAP2
             setting = List_Next(setting);
-#endif
         }
     }
 
@@ -1314,6 +1232,12 @@ _FX const WCHAR *Conf_Get(
 
         if (section)
             value = Conf_Get_Helper(section, setting, &index, skip_tmpl);
+
+        //
+        // when no value has been found for the given section
+        // try getting it from the global section
+        //
+
         if ((! value) && check_global) {
             value = Conf_Get_Helper(
                 Conf_GlobalSettings, setting, &index, skip_tmpl);
@@ -1419,16 +1343,12 @@ _FX NTSTATUS Conf_IsValidBox(const WCHAR *section_name)
         KeRaiseIrql(APC_LEVEL, &irql);
         ExAcquireResourceSharedLite(Conf_Lock, TRUE);
 
-#ifdef USE_CONF_MAP
-        section = map_get(&Conf_Data.section_map, section_name);
-#else
         section = List_Head(&Conf_Data.sections);
         while (section) {
             if (_wcsicmp(section->name, section_name) == 0)
                 break;
             section = List_Next(section);
         }
-#endif
 
         if (! section)
             status = STATUS_OBJECT_NAME_NOT_FOUND;
@@ -1485,14 +1405,15 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         pool = Conf_Data.pool;
 
         Conf_Data.pool = NULL;
-#ifdef USE_CONF_MAP
-        map_init(&Conf_Data.section_map, Conf_Data.pool);
-        Conf_Data.section_map.func_key_size = &map_wcssize;
-        Conf_Data.section_map.func_match_key = &map_wcsimatch;
-        map_resize(&Conf_Data.section_map, 16); // prepare some buckets for better performance  
-#else
         List_Init(&Conf_Data.sections);
+#ifdef USE_CONF_MAP
+    	map_init(&Conf_Data.sections_map, NULL);
+    	Conf_Data.sections_map.func_key_size = NULL;
+		Conf_Data.sections_map.func_match_key = &str_map_match;
+		Conf_Data.sections_map.func_hash_key = &str_map_hash;
+        map_resize(&Conf_Data.sections_map, 16); // prepare some buckets for better performance  
 #endif
+
 		Conf_Data.home = FALSE;
         Conf_Data.encoding = 0;
 
@@ -1527,6 +1448,17 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
             else {
                 extern void WFP_Unload(void);
                 WFP_Unload();
+            }
+        }
+
+        BOOLEAN obj_filter_enabled = Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE);
+        extern BOOLEAN Obj_CallbackInstalled;
+        if (Obj_CallbackInstalled != obj_filter_enabled && Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+            if (obj_filter_enabled) {
+                Obj_Load_Filter();
+            }
+            else {
+                Obj_Unload_Filter();
             }
         }
 
@@ -1689,13 +1621,14 @@ release_and_return:
 _FX BOOLEAN Conf_Init(void)
 {
     Conf_Data.pool = NULL;
-#ifdef USE_CONF_MAP
-    map_init(&Conf_Data.section_map, NULL);
-    Conf_Data.section_map.func_key_size = &map_wcssize;
-    Conf_Data.section_map.func_match_key = &map_wcsimatch;
-#else
     List_Init(&Conf_Data.sections);
+#ifdef USE_CONF_MAP
+    map_init(&Conf_Data.sections_map, NULL);
+    Conf_Data.sections_map.func_key_size = NULL;
+	Conf_Data.sections_map.func_match_key = &str_map_match;
+	Conf_Data.sections_map.func_hash_key = &str_map_hash;
 #endif
+
     Conf_Data.home = FALSE;
     Conf_Data.encoding = 0;
 

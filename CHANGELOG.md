@@ -4,6 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.9.7e / 5.52.5] - 2021-10-09
+
+### Changed
+- reworked the settings handling once again, now the driver mainteains teh order when enumerating,
+-- but for good performance there is a hash map held in paralell for quick exact lookups
+
+
+## [0.9.7d / 5.52.4] - 2021-10-06
+
+### Fixed
+- fixed yet an otehr ini issue with the sbiectrl
+
 
 ## [0.9.7c / 5.52.3] - 2021-10-05
 

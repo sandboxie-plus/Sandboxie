@@ -17,11 +17,11 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
 **System details and installed software**
  - What is your Windows edition and version? (e.g. Windows 10 Pro 20H2 64-bit)
@@ -41,9 +41,9 @@ Add any other context about the problem here.
 If applicable, consider to attach your Sandboxie.ini configuration by copying the content on https://gist.github.com and sharing the resulting link. If you decide to paste the configuration here, make sure to use the backticks around strings, like in this working example:
 
 <details>
- 
+
 <summary>My initial sandboxie.ini settings</summary>
- 
+
 ```
 
 [GlobalSettings]

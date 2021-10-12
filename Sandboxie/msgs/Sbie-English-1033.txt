@@ -3485,7 +3485,7 @@ If you would prefer to use a UI to control these options, please upgrade to Sand
 6007;txt;01
 Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
 
-The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it's recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
 .
 
 

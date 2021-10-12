@@ -288,7 +288,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	//m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.52.0";
+	QStringList CompatVersions = QStringList () << "5.53.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{

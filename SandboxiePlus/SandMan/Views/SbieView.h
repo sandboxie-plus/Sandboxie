@@ -26,6 +26,8 @@ public:
 	virtual void				PopUpMenu(const QString& Name);
 	virtual void				ShowOptions(const QString& Name);
 
+	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
+
 public slots:
 	void						Clear();
 	void						Refresh();

@@ -66,6 +66,11 @@ public:
 				{
 				}*/
 			}
+			else if (msg->message == WM_DWMCOLORIZATIONCOLORCHANGED)
+			{
+				if (theGUI && theConf->GetInt("Options/UseDarkTheme", 2) == 2)
+					theGUI->UpdateTheme();
+			}
 		}
 		return false;
 	}
@@ -91,6 +96,7 @@ CSandMan::CSandMan(QWidget *parent)
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
 
+	m_ThemeUpdatePending = false;
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
 
@@ -201,7 +207,7 @@ CSandMan::CSandMan(QWidget *parent)
 	pShowHide->setFont(f);
 	m_pTrayMenu->addSeparator();
 
-	QWidgetAction* pTrayList = new QWidgetAction(m_pTrayMenu);
+	m_pTrayList = new QWidgetAction(m_pTrayMenu);
 
 	QWidget* pWidget = new CActionWidget();
     QHBoxLayout* pLayout = new QHBoxLayout();
@@ -227,8 +233,8 @@ CSandMan::CSandMan(QWidget *parent)
 	
 	pLayout->addWidget(m_pTrayBoxes);
 
-    pTrayList->setDefaultWidget(pWidget);
-	m_pTrayMenu->addAction(pTrayList);
+    m_pTrayList->setDefaultWidget(pWidget);
+	m_pTrayMenu->addAction(m_pTrayList);
 
 
 	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -236,7 +242,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 	//m_pBoxMenu
 
-	m_pTrayMenu->addSeparator();
+	m_pTraySeparator = m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
@@ -722,10 +728,20 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			bIsMonitoring = !theAPI->GetTrace().isEmpty();
 		m_pTraceView->setEnabled(bIsMonitoring);
 
+		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
+		int ActiveProcesses = 0;
+		if (m_pKeepTerminated->isChecked()) {
+			foreach(const CBoxedProcessPtr & Process, Processes) {
+				if (!Process->IsTerminated())
+					ActiveProcesses++;
+			}
+		}
+		else 
+			ActiveProcesses = Processes.count();
 
-		if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
+		if (m_bIconEmpty != (ActiveProcesses == 0) || m_bIconDisabled != bForceProcessDisabled)
 		{
-			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+			m_bIconEmpty = (ActiveProcesses == 0);
 			m_bIconDisabled = bForceProcessDisabled;
 
 			m_pTrayIcon->setIcon(GetTrayIconName());
@@ -858,6 +874,7 @@ void CSandMan::OnStatusChanged()
 	{
 		QString SbiePath = theAPI->GetSbiePath();
 		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("Sbie+ Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
@@ -1115,7 +1132,7 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
-		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, this);
+		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
@@ -1817,6 +1834,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				}
 
 				m_pTrayBoxes->setFixedHeight(Height);
+
+				m_pTrayMenu->removeAction(m_pTrayList);
+				m_pTrayMenu->insertAction(m_pTraySeparator, m_pTrayList);
 			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
@@ -2173,6 +2193,8 @@ void CSandMan::OnAbout()
 
 void CSandMan::SetUITheme()
 {
+	m_ThemeUpdatePending = false;
+
 	bool bDark;
 	int iDark = theConf->GetInt("Options/UseDarkTheme", 2);
 	if (iDark == 2) {
@@ -2214,6 +2236,15 @@ void CSandMan::SetUITheme()
 	CTreeItemModel::SetDarkMode(bDark);
 	CListItemModel::SetDarkMode(bDark);
 	CPopUpWindow::SetDarkMode(bDark);
+}
+
+void CSandMan::UpdateTheme()
+{
+	if (!m_ThemeUpdatePending)
+	{
+		m_ThemeUpdatePending = true;
+		QTimer::singleShot(500, this, SLOT(SetUITheme()));
+	}
 }
 
 void CSandMan::LoadLanguage()

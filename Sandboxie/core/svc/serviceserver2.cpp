@@ -132,14 +132,19 @@ bool ServiceServer::CanAccessSCM(HANDLE idProcess)
 	if (!securityDescriptor)
 		return bRet;
 
-	/*HANDLE hToken = NULL;
-	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)(UINT_PTR)idProcess);
-	if (hProcess != NULL) {
-		OpenProcessToken(hProcess, TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &hToken);
-		CloseHandle(hProcess);
-	}*/
+	HANDLE hToken = NULL;
+    // OriginalToken BEGIN
+    if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)(UINT_PTR)idProcess);
+        if (hProcess != NULL) {
+            OpenProcessToken(hProcess, TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &hToken);
+            CloseHandle(hProcess);
+        }
+    }
+    else
+    // OriginalToken END
+	    hToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
 
-	HANDLE hToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
 	if (hToken) {
 		HANDLE hImpersonatedToken = NULL;
 		if (DuplicateToken(hToken, SecurityImpersonation, &hImpersonatedToken)) {

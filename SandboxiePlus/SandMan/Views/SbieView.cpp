@@ -203,7 +203,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 CSbieView::~CSbieView()
 {
 	theConf->SetBlob("MainWindow/BoxTree_Columns", m_pSbieTree->saveState());
-	theConf->SetValue("MainWindow/BoxTree_UseOrder", m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	//theConf->SetValue("MainWindow/BoxTree_UseOrder", m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
 }
 
 void CSbieView::Clear()
@@ -261,10 +261,12 @@ void CSbieView::OnCustomSortByColumn(int column)
 		if (m_pSortProxy->sortRole() == Qt::InitialSortOrderRole) {
 			m_pSortProxy->sort(0, Qt::AscendingOrder);
 			m_pSortProxy->setSortRole(Qt::EditRole);
+			theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
 			m_pSbieTree->header()->setSortIndicatorShown(true);
 		} else if (order == Qt::DescendingOrder) {
 			m_pSortProxy->sort(0, Qt::AscendingOrder);
 			m_pSortProxy->setSortRole(Qt::InitialSortOrderRole);
+			theConf->SetValue("MainWindow/BoxTree_UseOrder", true);
 			m_pSbieTree->header()->setSortIndicatorShown(false);
 		}
 	}

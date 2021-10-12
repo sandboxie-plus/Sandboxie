@@ -1525,7 +1525,10 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
 
     Conf_AdjustUseCount(TRUE);
 
-    value1 = Conf_Get(boxname, setting, index);
+    if (setting && setting[0] == L'%')
+        value1 = setting; // shortcut to expand a avariable
+    else
+        value1 = Conf_Get(boxname, setting, index);
     if (! value1) {
         status = STATUS_RESOURCE_NAME_NOT_FOUND;
         goto release_and_return;

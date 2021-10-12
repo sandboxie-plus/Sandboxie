@@ -420,6 +420,13 @@ void CSettingsWindow::SaveSettings()
 					Used.append(pItem->data(0, Qt::UserRole).toString());
 			}
 
+			// retain local templates
+			foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
+				if (Template.left(6) == "Local_") {
+					Used.append(Template);
+				}
+			}
+
 			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
 			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected, false);
 			m_CompatChanged = false;

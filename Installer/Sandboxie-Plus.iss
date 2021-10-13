@@ -85,13 +85,16 @@ Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: 
 ; External manifest for Sbie service.
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
 
+; Set language for Sbie service.
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueType: dword; ValueName: "Language"; ValueData: "{code:SystemLanguage}"; Check: not IsPortable
+
 
 [Run]
 ; Install the Sbie driver.
-Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"" type=kernel start=demand altitude=86900"; StatusMsg: "KmdUtil install SbieDrv..."; Check: not IsPortable
+Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"" type=kernel start=demand msgfile=""{app}\SbieMsg.dll"" altitude=86900"; StatusMsg: "KmdUtil install SbieDrv..."; Check: not IsPortable
 
 ; Install the Sbie service.
-Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
+Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto msgfile=""{app}\SbieMsg.dll"" display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
 
 ; Start the Sbie service.
 Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
@@ -193,6 +196,14 @@ begin
     'spanish': Result := 'es';
     'turkish': Result := 'tr';
   end;
+end;
+
+
+function SystemLanguage(Dummy: String): String;
+begin
+
+  // Language identifier for the System Eventlog messages.
+  Result := IntToStr(GetUILanguage());
 end;
 
 

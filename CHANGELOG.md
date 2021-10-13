@@ -11,47 +11,45 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.8 / 5.53.0] - 2021-10-??
 
 ### Added 
-- added debug switch to disabel sbie console redirection "NoSandboxieConsole=y" 
+- added debug switch to disable Sbie console redirection "NoSandboxieConsole=y" 
 -- note that this was previously part of "NoSandboxieDesktop=y"
-- added sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
+- added Sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
 - added uninstall cleanup of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
 - added set language for Sandman for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
-- added EventLog messages with SbieMsg.dll for the Plus installer. (by mpheath)
+- added EventLog messages with SbieMsg.dll for the Plus installer (by mpheath)
 
 ### Changed
 - reworked and extended RPC logging
 - reintroduced the "UseRpcMgmtSetComTimeout=some.dll,n" setting to be used when no "RpcPortBinding" entry is specified
 --- this allows to enable/disable out of box RPC binding independently from the timeout setting
-- the "BoxNameTitle" value can now be set explicitly for a image by name [#1190](https://github.com/sandboxie-plus/Sandboxie/issues/1190)
+- the "BoxNameTitle" value can now be set explicitly on a per image name basis [#1190](https://github.com/sandboxie-plus/Sandboxie/issues/1190)
 
 ### Fixed
-- fixed inability to delete read only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
-- fixed wrong recovery target in plus ui [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
+- fixed inability to delete read-only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
+- fixed wrong recovery target in Plus UI [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
 - fixed SBIE2101 issue introduced with 0.9.7a
-- fixed inability to delete read only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
-- fixed wrong recovery target in plus ui [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
 - fixed sorting in the box picker window [#1269](https://github.com/sandboxie-plus/Sandboxie/issues/1269)
 - fixed tray refresh issue [#1250](https://github.com/sandboxie-plus/Sandboxie/issues/1250)
-- fixed trax activity display [#1221](https://github.com/sandboxie-plus/Sandboxie/issues/1221)
+- fixed tray activity display [#1221](https://github.com/sandboxie-plus/Sandboxie/issues/1221)
 - fixed recovery window not displaying in taskbar [#1195](https://github.com/sandboxie-plus/Sandboxie/issues/1195)
 - fixed dark theme preset not updating in real time [#1270](https://github.com/sandboxie-plus/Sandboxie/issues/1270)
-- fixed edge complainign about "FakeAdminRights=y" [#1271](https://github.com/sandboxie-plus/Sandboxie/issues/1271)
-- fixed issue with using local tempalted in the global section [#1212](https://github.com/sandboxie-plus/Sandboxie/issues/1212)
-- fixed issue with git.exe from mingw freezing [#1238](https://github.com/sandboxie-plus/Sandboxie/issues/1238)
+- fixed Microsoft Edge complaining about "FakeAdminRights=y" [#1271](https://github.com/sandboxie-plus/Sandboxie/issues/1271)
+- fixed issue with using local template in the global section [#1212](https://github.com/sandboxie-plus/Sandboxie/issues/1212)
+- fixed issue with git.exe from MinGW freezing [#1238](https://github.com/sandboxie-plus/Sandboxie/issues/1238)
 
 
 
 ## [0.9.7e / 5.52.5] - 2021-10-09
 
 ### Changed
-- reworked the settings handling once again, now the driver mainteains teh order when enumerating,
--- but for good performance there is a hash map held in paralell for quick exact lookups
+- reworked the settings handling once again, now the driver maintains the order when enumerating,
+-- but for good performance there is a Hash Map held in parallel for quick exact lookups
 
 
 ## [0.9.7d / 5.52.4] - 2021-10-06
 
 ### Fixed
-- fixed yet an otehr ini issue with the sbiectrl
+- fixed yet another ini issue with the Sbiectrl
 
 
 ## [0.9.7c / 5.52.3] - 2021-10-05

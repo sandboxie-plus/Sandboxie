@@ -2950,6 +2950,10 @@ Consenti accesso alle smart card
 Consenti accesso alle porte SSDP e UPnP
 .
 
+4300;txt;01
+Consenti binding aggiuntivi alle porte RPC
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3346,6 +3350,10 @@ NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.
 Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
 .
 
+6004;pop;err;01
+La configurazione dell'area virtuale selezionata non è consentita.
+.
+
 6005;txt;01
 Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
 .
@@ -3360,9 +3368,9 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6007;txt;01
-...
+Sandboxie Plus offre una maggiore protezione della privacy passando da una modalità black-list, che consente l'accesso in lettura all'intera unità (se non bloccato da Closed Path or Write Path) a una modalità white-list in cui i programmi nell'area virtuale sono autorizzati a leggere soltanto i percorsi di sistema, mentre l'accesso in lettura alla maggior parte dei dati utente deve essere concesso in modo esplicito.
 
-Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
+L'interfaccia legacy di Sandboxie Classic non implementa il supporto per questa modalità. Sebbene possa essere configurata tramite il file ini, si prega di aggiornare a Sandboxie Plus (SandMan.exe) che consente l'uso delle aree virtuali con protezione avanzata.
 .
 
 

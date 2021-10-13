@@ -77,7 +77,7 @@ Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; 
 Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
 
 ; External manifest for Sbie service.
-Root: HKLM; Subkey: "SYSTEM\ControlSet001\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
 
 
 [Run]
@@ -151,7 +151,7 @@ begin
     if (ExpandConstant('{param:portable|0}') = '1') or Portable then begin
       SbiePath := ExpandConstant('{src}') + '\{#MyAppName}';
     end else begin
-      if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'ImagePath', DrvPath) then begin
+      if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'ImagePath', DrvPath) then begin
         IsInstalled := True;
         DrvPath := ExtractFilePath(DrvPath);
 
@@ -357,7 +357,7 @@ begin
 
   while (ExecRet = IDYES) do
   begin
-      if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie', 'UninstallString', UninstallString) then begin
+      if RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie', 'UninstallString', UninstallString) then begin
 
         ExecRet := MsgBox(CustomMessage('ClassicFound'), mbConfirmation, MB_YESNOCANCEL);
 

@@ -10,6 +10,9 @@ public:
 	CFinder(QObject* pFilterTarget, QWidget *parent = NULL, bool HighLightOption = true);
 	~CFinder();
 
+	static void			SetDarkMode(bool bDarkMode) { m_DarkMode = bDarkMode; }
+	static bool			GetDarkMode() { return m_DarkMode; }
+
 	static QWidget* AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLightOption = true, CFinder** ppFinder = NULL);
 
 	QRegExp GetRegExp() const;
@@ -45,4 +48,6 @@ private:
 	QSortFilterProxyModel* m_pSortProxy;
 
 	QTimer*				m_pTimer;
+
+	static bool			m_DarkMode;
 };

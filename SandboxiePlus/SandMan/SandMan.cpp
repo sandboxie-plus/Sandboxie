@@ -2236,6 +2236,8 @@ void CSandMan::SetUITheme()
 	CTreeItemModel::SetDarkMode(bDark);
 	CListItemModel::SetDarkMode(bDark);
 	CPopUpWindow::SetDarkMode(bDark);
+	CPanelView::SetDarkMode(bDark);
+	CFinder::SetDarkMode(bDark);
 }
 
 void CSandMan::UpdateTheme()

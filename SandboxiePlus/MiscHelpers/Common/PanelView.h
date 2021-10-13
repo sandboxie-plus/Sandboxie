@@ -10,6 +10,7 @@ public:
 	virtual ~CPanelView();
 
 	static void					SetSimpleFormat(bool bSimple) { m_SimpleFormat = bSimple; }
+	static void					SetDarkMode(bool bDarkMode) { m_DarkMode = bDarkMode; }
 	static void					SetMaxCellWidth(int iMaxWidth) { m_MaxCellWidth = iMaxWidth; }
 	static void					SetCellSeparator(const QString& Sep) { m_CellSeparator = Sep; }
 
@@ -54,6 +55,7 @@ protected:
 	//bool						m_CopyAll;
 	QSet<int>					m_ForcedColumns;
 	static bool					m_SimpleFormat;
+	static bool					m_DarkMode;
 	static int					m_MaxCellWidth;
 	static QString				m_CellSeparator;
 };
@@ -112,8 +114,10 @@ public:
 
 	static void ApplyFilter(QTreeWidgetEx* pTree, QTreeWidgetItem* pItem, const QRegExp& Exp/*, bool bHighLight = false, int Col = -1*/)
 	{
-		for (int j = 0; j < pTree->columnCount(); j++)
-			pItem->setBackground(j, !Exp.isEmpty() && pItem->text(j).contains(Exp) ? Qt::yellow : Qt::white);
+		for (int j = 0; j < pTree->columnCount(); j++) {
+			pItem->setForeground(j, (m_DarkMode && !Exp.isEmpty() && pItem->text(j).contains(Exp)) ? Qt::yellow : pTree->palette().color(QPalette::WindowText));
+			pItem->setBackground(j, (!m_DarkMode && !Exp.isEmpty() && pItem->text(j).contains(Exp)) ? Qt::yellow : pTree->palette().color(QPalette::Base));
+		}
 
 		for (int i = 0; i < pItem->childCount(); i++)
 		{

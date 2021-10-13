@@ -99,9 +99,9 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	QMap<QString, QStringList> Groups = theGUI->GetBoxView()->GetGroups();
 
 	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
-		QMap<double, CSandBoxPtr> Boxes2;
+		QMultiMap<double, CSandBoxPtr> Boxes2;
 		foreach(const CSandBoxPtr &pBox, Boxes) {
-			Boxes2.insert(CSelectBoxWindow__GetBoxOrder(Groups, pBox->GetName()), pBox);
+			Boxes2.insertMulti(CSelectBoxWindow__GetBoxOrder(Groups, pBox->GetName()), pBox);
 		}
 		Boxes = Boxes2.values();
 	}

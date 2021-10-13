@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Finder.h"
 
+bool CFinder::m_DarkMode = false;
+
 QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLightOption, CFinder** ppFinder)
 {
 	QWidget* pWidget = new QWidget();

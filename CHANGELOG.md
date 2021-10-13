@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Microsoft Edge complaining about "FakeAdminRights=y" [#1271](https://github.com/sandboxie-plus/Sandboxie/issues/1271)
 - fixed issue with using local template in the global section [#1212](https://github.com/sandboxie-plus/Sandboxie/issues/1212)
 - fixed issue with git.exe from MinGW freezing [#1238](https://github.com/sandboxie-plus/Sandboxie/issues/1238)
+- fixed issue with search highlighting when using in dark mode
 
 
 
@@ -1272,3 +1273,4 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
+

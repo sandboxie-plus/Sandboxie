@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added debug switch to disabel sbie console redirection "NoSandboxieConsole=y" 
 -- note that this was previously part of "NoSandboxieDesktop=y"
 - added sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
+- added uninstall cleanup of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
 
 ### Changed
 - reworked and extended RPC logging

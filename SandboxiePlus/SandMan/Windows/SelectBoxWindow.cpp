@@ -119,7 +119,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setText(0, pBox->GetName().replace("_", " "));
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
-		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount()));
+		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() > 0, pBoxEx->GetType()));
 		if (pParent)
 			pParent->addChild(pItem);
 		else

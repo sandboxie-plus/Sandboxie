@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- note that this was previously part of "NoSandboxieDesktop=y"
 - added sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
 - added uninstall cleanup of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
+- added set language for Sandman for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
+- added EventLog messages with SbieMsg.dll for the Plus installer. (by mpheath)
 
 ### Changed
 - reworked and extended RPC logging

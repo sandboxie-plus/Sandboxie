@@ -62,6 +62,12 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; 
 Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0
 
 
+[INI]
+; Set Sandman language.
+Filename: "{localappdata}\{#MyAppName}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; String: "{code:SandmanLanguage|{language}}"; Check: not IsPortable
+Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; String: "{code:SandmanLanguage|{language}}"; Check: IsPortable
+
+
 [Registry]
 ; Autostart Sandman.
 Root: HKCU; Subkey: "Software\Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
@@ -167,6 +173,26 @@ begin
   end;
 
   Result := SbiePath;
+end;
+
+
+function SandmanLanguage(Language: String): String;
+begin
+
+  // Language values for Sandboxie-Plus.ini.
+  case Lowercase(Language) of
+    'english': Result := 'en';
+    'chinesesimplified': Result := 'zh-CN';
+    'chinesetraditional': Result := 'zh-TW';
+    'dutch': Result := 'nl';
+    'german': Result := 'de';
+    'italian': Result := 'it';
+    'polish': Result := 'pl';
+    'portuguese': Result := 'pt';
+    'russian': Result := 'ru';
+    'spanish': Result := 'es';
+    'turkish': Result := 'tr';
+  end;
 end;
 
 

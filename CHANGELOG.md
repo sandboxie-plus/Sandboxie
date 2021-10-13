@@ -27,7 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed inability to delete read-only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
 - fixed wrong recovery target in Plus UI [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
-- fixed SBIE2101 issue introduced with 0.9.7a
+- fixed SBIE2101 issue introduced with 0.9.7a [#1279](https://github.com/sandboxie-plus/Sandboxie/issues/1279)
 - fixed sorting in the box picker window [#1269](https://github.com/sandboxie-plus/Sandboxie/issues/1269)
 - fixed tray refresh issue [#1250](https://github.com/sandboxie-plus/Sandboxie/issues/1250)
 - fixed tray activity display [#1221](https://github.com/sandboxie-plus/Sandboxie/issues/1221)

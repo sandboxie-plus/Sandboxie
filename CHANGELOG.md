@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.8 / 5.53.0] - 2021-10-??
+## [0.9.8 / 5.53.0] - 2021-10-15
 
 ### Added 
 - added debug switch to disable Sbie console redirection "NoSandboxieConsole=y" 

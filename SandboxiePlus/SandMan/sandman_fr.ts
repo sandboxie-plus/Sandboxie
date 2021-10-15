@@ -2945,7 +2945,7 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser «&#xa0;Toujours direct&#x
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1838"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation type="unfinished">Émuler une plateforme de fenêtres en bac à sable pour tous les processus</translation>
+        <translation>Émuler une Station Windows en bac à sable pour tous les processus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1858"/>

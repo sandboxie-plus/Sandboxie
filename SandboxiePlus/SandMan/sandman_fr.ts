@@ -2339,102 +2339,102 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="70"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Abandonner les droits des groupes Administrateurs et Power Users</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="234"/>
         <source>px Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur en pixels</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="224"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire croire aux applications qu&apos;elles fonctionnent en mode administrateur (permet d&apos;exécuter les installateurs en toute sécurité)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="150"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION&#xa0;: Lors de l&apos;exécution sous l&apos;administrateur intégré, les processus ne peuvent pas abandonner les privilèges administratifs.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="217"/>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Apparence</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="117"/>
         <source>(Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Recommandé)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="190"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer ce bac dans l&apos;invite de sélection «&#xa0; exécuter dans un bac&#xa0;»</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="291"/>
         <source>File Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options des fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="299"/>
         <source>Auto delete content when last sandboxed process terminates</source>
-        <translation type="unfinished"></translation>
+        <translation>Suppression automatique du contenu à la fin du dernier processus du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="306"/>
         <source>Copy file size limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de la taille de fichier à copier&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="320"/>
         <source>Box Delete options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options de suppression du bac</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="340"/>
         <source>Protect this sandbox from deletion or emptying</source>
-        <translation type="unfinished"></translation>
+        <translation>Protéger ce bac à sable contre la suppression ou le vidage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
         <source>Raw Disk access</source>
-        <translation type="unfinished"></translation>
+        <translation>Accès direct au disque</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="368"/>
         <source>File Migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Migration de fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="375"/>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser les applications en mode administrateur du bac à sable à lire le disque dur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="382"/>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertir lorsqu&apos;une application ouvre un identifiant de disque dur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="389"/>
         <source>kilobytes</source>
-        <translation type="unfinished"></translation>
+        <translation>kilo-octets</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="406"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le message 2102 lorsqu&apos;un fichier est trop volumineux</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="439"/>
         <source>Prompt user for large file migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Demander à l&apos;utilisateur pour la migration de fichiers volumineux</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="449"/>
         <source>Access Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Restrictions d&apos;accès</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="457"/>

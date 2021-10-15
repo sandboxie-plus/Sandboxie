@@ -3015,59 +3015,61 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser «&#xa0;Toujours direct&#x
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2053"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation>Ne pas permettre aux processus en bac à sable de voir les processus en cours d&apos;exécution dans d&apos;autres bacs.</translation>
+        <translation>Ne pas permettre aux processus en bac à sable de voir les processus en cours d&apos;exécution dans d&apos;autres bacs</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2068"/>
         <source>Users</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisateurs</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2074"/>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation type="unfinished"></translation>
+        <translation>Restreindre le moniteur d&apos;accès aux ressources aux administrateurs uniquement</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2081"/>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un utilisateur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2104"/>
         <source>Remove User</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer l&apos;utilisateur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2111"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajoutez des comptes et des groupes d&apos;utilisateurs à la liste ci-dessous pour limiter l&apos;utilisation du bac à sable à ces seuls comptes. Si la liste est vide, le bac à sable peut être utilisé par tous les comptes d&apos;utilisateurs.
+
+Note : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac à sable ne s&apos;appliquent pas aux comptes utilisateurs qui ne peuvent pas utiliser le bac à sable.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2124"/>
         <source>Tracing</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"></translation>
+        <translation>Trace d&apos;appel API (nécessite que logapi soit installé dans le répertoire sbie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2152"/>
         <source>Pipe Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage des tubes (pipe)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2172"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer toutes les SetError dans le journal de traçage (crée beaucoup de sortie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2192"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer la sortie de débogage dans le journal de traçage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2199"/>
@@ -3079,169 +3081,178 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer tous les événements d&apos;accès tels que vus par le pilote dans le journal d&apos;accès aux ressources.
+
+Cette option définit le masque d&apos;événement à «&#xa0;*&#xa0;» - Tous les événements d&apos;accès.
+Vous pouvez personnaliser la journalisation en utilisant l&apos;ini en spécifiant&#xa0;:
+«&#xa0;A&#xa0;» - Accès autorisés
+«&#xa0;D&#xa0;» - Accès refusés
+«&#xa0;I&#xa0;» - Ignorer les demandes d&apos;accès
+au lieu de «&#xa0;*&#xa0;».</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2219"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage de appels systèmes Ntdll (crée beaucoup de sortie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2226"/>
         <source>File Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Trace des fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2233"/>
         <source>Disable Resource Access Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver le moniteur d&apos;accès aux ressources</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2240"/>
         <source>IPC Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage IPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2247"/>
         <source>GUI Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage de l&apos;interface graphique</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2261"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Moniteur d&apos;accès aux ressources</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2288"/>
         <source>Access Tracing</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage d&apos;accès</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2295"/>
         <source>COM Class Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage des classes COM</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2302"/>
         <source>Key Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Traçage des clés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2309"/>
         <source>Network Firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Pare-feu réseau</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2326"/>
         <source>Debug</source>
-        <translation type="unfinished"></translation>
+        <translation>Débogage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2370"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION, ces options peuvent désactiver les garanties de sécurité de base et briser la sécurité du bac à sable&#xa0;!!!</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2380"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation type="unfinished"></translation>
+        <translation>Ces options sont destinées à déboguer les problèmes de compatibilité, veuillez ne pas les utiliser en production. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2397"/>
         <source>App Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèles d&apos;applications</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2409"/>
         <source>Compatibility Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèles de compatibilité</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2417"/>
         <source>Filter Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre de catégories</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2430"/>
         <source>Text Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre de texte</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2437"/>
         <source>Add Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un modèle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2444"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette liste contient un grand nombre de modèles améliorant la compatibilité du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2457"/>
         <source>Remove Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le modèle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2481"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Catégorie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2497"/>
         <source>Template Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossiers des modèles</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2505"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurez l&apos;emplacement des dossiers utilisés par vos autres applications.
+
+Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisateur et enregistrées globalement pour tous les bacs.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2533"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2544"/>
         <source>Accessibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Accessibilité</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2552"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour compenser la perte de protection, veuillez consulter la page d&apos;abandon des droits dans le groupe de paramètres Restrictions.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2559"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecteurs d&apos;écran : JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2566"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les paramètres suivants permettent l&apos;utilisation de Sandboxie en combinaison avec un logiciel d&apos;accessibilité.  Veuillez noter que certaines mesures de protection de Sandboxie sont nécessairement perdues lorsque ces paramètres sont en vigueur.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2592"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer la section ini</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2598"/>
         <source>Edit ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer l&apos;ini</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2611"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2634"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer</translation>
     </message>
 </context>
 <context>

@@ -11,6 +11,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "ChineseSimplified"; MessagesFile: "isl\ChineseSimplified.isl"
 Name: "ChineseTraditional"; MessagesFile: "isl\ChineseTraditional.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 Name: "Italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
@@ -26,7 +27,6 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 ;Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
 ;Name: "danish"; MessagesFile: "compiler:Languages\Danish.isl"
 ;Name: "finnish"; MessagesFile: "compiler:Languages\Finnish.isl"
-;Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 ;Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
 ;Name: "icelandic"; MessagesFile: "compiler:Languages\Icelandic.isl"
 ;Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
@@ -105,6 +105,23 @@ dutch.UninstallTaskLabel2=Hoe wilt u Sandboxie-Plus verwijderen?
 dutch.UninstallTaskLabel3=Configuratiebestanden en sandboxen behouden%nDit is de aanbevolen optie als u Sandboxie-Plus opnieuw wilt installeren en uw configuratiebestanden en sandboxen wilt behouden.
 dutch.UninstallTaskLabel4=Configuratiebestanden verwijderen%nSelecteer deze optie om de configuratiebestanden Sandboxie.ini en Sandboxie-Plus.ini wilt verwijderen en de sandboxen ongewijzigd wilt laten.
 dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelecteer deze optie om alle configuratiebestanden en sandboxen te verwijderen, inclusief de Sandbox-map die zich in aangepaste paden met FileRootPath bevindt.
+
+; French
+french.AddSandboxedMenu=Ajouter « Exécuter dans un bac à sable » au menu contextuel
+french.CustomPageLabel1=Sélectionnez le type d'installation
+french.CustomPageLabel2=Comment doit-on l'installer
+french.CustomPageLabel3=Choisissez le mode d'installation
+french.CustomPageInstallMode=Installer {#MyAppName} sur cet ordinateur
+french.CustomPageUpgradeMode=Mettre à jour l'installation de {#MyAppName} existante
+french.CustomPagePortableMode=Extraire tous les fichiers dans un répertoire pour une utilisation portable
+french.RequiresWin7OrLater=Sandboxie-Plus nécessite Windows 7 ou une version ultérieure.
+french.ClassicFound=Installation de Sandboxie Classic détectée, il doit être désinstallé d'abord, voulez-vous le désinstaller maintenant ?
+french.RunSandboxedMenu=Exécuter dans un &bac à sable
+french.UninstallTaskLabel1=Sélectionnez le type de désinstallation
+french.UninstallTaskLabel2=Comment voulez-vous désinstaller Sandboxie-Plus ?
+french.UninstallTaskLabel3=&Conserver les fichiers de configuration et les bacs à sable%nCette option est la plus recommandée si vous prévoyez de réinstaller Sandboxie-Plus tout en conservant vos fichiers de configuration et vos bacs à sable.
+french.UninstallTaskLabel4=Supprimer les &fichiers de configuration%nSélectionnez cette option pour supprimer les fichiers de configuration « Sandboxie.ini » et « Sandboxie-Plus.ini » tout en conservant les bacs à sable inchangés.
+french.UninstallTaskLabel5=Supprimer les fichiers de configuration et les &bacs à sable%nSélectionnez cette option pour supprimer tous les fichiers de configuration et les bacs à sable, y compris le dossier « Sandbox » situé dans les chemins personnalisés avec « FileRootPath ».
 
 ; German
 german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu

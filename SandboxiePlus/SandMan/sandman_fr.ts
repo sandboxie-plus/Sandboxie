@@ -52,83 +52,87 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="16"/>
         <source>Browse for File</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Bouton pour ajouter un accès.</translatorcomment>
+        <translation>Choisir un fichier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="17"/>
         <source>Browse for Folder</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Bouton pour ajouter un accès.</translatorcomment>
+        <translation>Choisir un dossier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="187"/>
         <source>Direct</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Accès direct.</translatorcomment>
+        <translation>Direct</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="188"/>
         <source>Direct All</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Accès direct pour tous.</translatorcomment>
+        <translation>Toujours direct</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="189"/>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Refusé</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="190"/>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Refusé RT</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="191"/>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture seule</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="192"/>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Caché</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="194"/>
         <location filename="Windows/OptionsAccess.cpp" line="207"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Inconnu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="201"/>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier ou Dossier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="202"/>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Registre</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="203"/>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin IPC</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="204"/>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Classe Wnd</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="205"/>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Objet COM</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="212"/>
         <source>Select File</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez le fichier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="212"/>
         <source>All Files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="223"/>
@@ -136,7 +140,7 @@
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="104"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le répertoire</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
@@ -145,7 +149,7 @@
         <location filename="Windows/OptionsNetwork.cpp" line="471"/>
         <location filename="Windows/OptionsNetwork.cpp" line="574"/>
         <source>All Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les programmes</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="247"/>
@@ -156,17 +160,17 @@
         <location filename="Windows/OptionsWindow.cpp" line="468"/>
         <location filename="Windows/OptionsWindow.cpp" line="484"/>
         <source>Group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe&#xa0;: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="356"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation type="unfinished"></translation>
+        <translation>Les objets COM doivent être spécifiés par leur GUID, exemple&#xa0;: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="362"/>
         <source>RT interfaces must be specified by their name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les interfaces RT doivent être spécifiées par leur nom.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
@@ -174,317 +178,317 @@
         <location filename="Windows/OptionsGrouping.cpp" line="292"/>
         <location filename="Windows/OptionsNetwork.cpp" line="450"/>
         <source>Template values can not be edited.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les valeurs des modèles ne peuvent pas être modifiées.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="461"/>
         <location filename="Windows/OptionsRecovery.cpp" line="129"/>
         <source>Template values can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les valeurs des modèles ne peuvent pas être supprimées.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="180"/>
         <source>Please enter an auto exec command</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer une commande d&apos;exécution automatique</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="199"/>
         <source>Please enter a program file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un nom de fichier de programme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="311"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="58"/>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Processus</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="58"/>
         <location filename="Windows/OptionsRecovery.cpp" line="60"/>
         <source>Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="13"/>
         <source>Don&apos;t alter the window title</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas modifier le titre de la fenêtre</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="14"/>
         <source>Display [#] indicator only</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage de l&apos;indicateur [#] uniquement</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="15"/>
         <source>Display box name in title</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le nom du bac dans le titre</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="17"/>
         <source>Border disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Bordure désactivée</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>Show only when title is in focus</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher uniquement lorsque le titre est en focus</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>Always show</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours afficher</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="56"/>
         <location filename="Windows/OptionsGeneral.cpp" line="63"/>
         <source>Browse for Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorer pour un programme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="206"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>kilo-octets (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="228"/>
         <source>Please enter a program path</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un chemin de programme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="238"/>
         <location filename="Windows/OptionsGeneral.cpp" line="278"/>
         <source>Select Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez le programme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="238"/>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécutables (*.exe, *.cmd);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="248"/>
         <source>Please enter a service identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un identifiant de service</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="259"/>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Service</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="259"/>
         <source>Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Programme</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="278"/>
         <source>Executables (*.exe|*.cmd)</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécutables (*.exe, *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="282"/>
         <location filename="Windows/OptionsGeneral.cpp" line="296"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un titre de menu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="292"/>
         <source>Please enter a command</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer une commande</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="118"/>
         <source>Please enter a name for the new group</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer un nom pour le nouveau groupe</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="265"/>
         <source>Please select group first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez d&apos;abord sélectionner un groupe.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="35"/>
         <location filename="Windows/OptionsNetwork.cpp" line="505"/>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="36"/>
         <location filename="Windows/OptionsNetwork.cpp" line="506"/>
         <source>TCP</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="37"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
         <source>UDP</source>
-        <translation type="unfinished"></translation>
+        <translation>UDP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="38"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
         <source>ICMP</source>
-        <translation type="unfinished"></translation>
+        <translation>ICMP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="51"/>
         <source>Allow access</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="52"/>
         <source>Block using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer à l&apos;aide de la plate-forme de filtrage Windows (WFP)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="53"/>
         <source>Block by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer en refusant l&apos;accès aux périphériques réseaux</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="139"/>
         <location filename="Windows/OptionsNetwork.cpp" line="491"/>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="140"/>
         <source>Block (WFP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="141"/>
         <source>Block (NDev)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer (NDev)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="492"/>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquer</translation>
     </message>
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="60"/>
         <source>Exclusion</source>
-        <translation type="unfinished"></translation>
+        <translation>Exclusion</translation>
     </message>
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="114"/>
         <source>Please enter a file extension to be excluded</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer une extension de fichier à exclure</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="58"/>
         <source>Lingerer</source>
-        <translation type="unfinished"></translation>
+        <translation>Persistant</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="58"/>
         <source>Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>Directeur</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="59"/>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les catégories</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="92"/>
         <source>Custom Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèles personnalisés</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="93"/>
         <source>Email Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecteur de courriel</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="94"/>
         <source>PDF/Print</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF ou impression</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="95"/>
         <source>Security/Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sécurité ou confidentialité</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="96"/>
         <source>Desktop Utilities</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilitaires de bureau</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="97"/>
         <source>Download Managers</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestionnaires de téléchargement</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="98"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Divers</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="99"/>
         <source>Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigateur Web</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="100"/>
         <source>Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecteur multimédia</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="101"/>
         <source>Torrent Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Client de Torrent</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="146"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce modèle est activé de manière globale. Pour le configurer, utilisez les options globales.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="178"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer l&apos;identifiant du modèle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="186"/>
         <source>Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur&#xa0;: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="206"/>
         <source>Only local templates can be removed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuls les modèles locaux peuvent être supprimés !</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="210"/>
         <source>Do you really want to delete the selected local template?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le modèle local sélectionné&#xa0;?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="37"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus - &apos;%1&apos; Options</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="414"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bac à sable a été supprimé par conséquent la configuration ne peut pas être sauvegardée.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="456"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation type="unfinished"></translation>
+        <translation>Certains changements n&apos;ont pas encore été enregistrés, voulez-vous vraiment fermer cette fenêtre d&apos;options&#xa0;?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="477"/>
         <source>Enter program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le programme&#xa0;:</translation>
     </message>
 </context>
 <context>
@@ -1717,7 +1721,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="463"/>
         <source>Generic Web Browser</source>
-        <translation>Butineur générique</translation>
+        <translation>Navigateur Web générique</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="464"/>
@@ -1775,8 +1779,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="74"/>
         <source>Default Web Browser</source>
-        <translatorcomment>Merci l’académie Française !</translatorcomment>
-        <translation>Butineur par défaut</translation>
+        <translation>Navigateur Web par défaut</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="75"/>
@@ -2298,27 +2301,27 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="32"/>
         <source>SandboxiePlus Options</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus Options</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="52"/>
         <source>General Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options générales</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="62"/>
         <source>Box Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options du bac</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="100"/>
         <source>Sandbox Indicator in title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indicateur de bac à sable en titre&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="261"/>
         <source>Sandboxed window border:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bordure de fenêtre du bac à sable&#xa0;:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="167"/>
@@ -2326,12 +2329,12 @@ Non choisira&#xa0;: %2</translation>
         <location filename="Forms/OptionsWindow.ui" line="555"/>
         <location filename="Forms/OptionsWindow.ui" line="591"/>
         <source>Protect the system from sandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Protéger le système des processus en mode bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="170"/>
         <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Restrictions d&apos;élévation de privilège</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="70"/>
@@ -2846,7 +2849,9 @@ If leader processes are defined, all others are treated as lingering processes.<
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurer quels processus peuvent accéder à quelles ressources. Double-cliquez sur une entrée pour la modifier.
+L&apos;accès «&#xa0;Direct&#xa0;» aux fichiers et aux clés ne s&apos;applique qu&apos;aux programmes binaires situés en dehors du bac à sable.
+Pour l&apos;accès aux fichiers, vous pouvez utiliser «&#xa0;Toujours direct&#xa0;» pour qu&apos;il s&apos;applique à tous les programmes.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1606"/>

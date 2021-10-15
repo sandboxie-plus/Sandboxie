@@ -85,9 +85,9 @@ void DriverAssist::InjectLow(void *_msg)
     // NoSysCallHooks BEGIN
     sbieLow.bNoSysHooks = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
     // NoSysCallHooks END
-    // NoSbieDesk BEGIN
-    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE);
-    // NoSbieDesk END
+    // NoSbieCons BEGIN
+    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
+    // NoSbieCons END
 
 	errlvl = SbieDll_InjectLow(hProcess, sbieLow.init_flags, TRUE);
 	if(errlvl != 0)

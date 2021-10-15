@@ -11,7 +11,7 @@ public:
 	CTraceModel(QObject* parent = 0);
 	~CTraceModel();
 
-	QList<QVariant>	Sync(const QVector<CTraceEntryPtr>& EntryList, void* BoxPtr);
+	QList<QVariant>	Sync(const QVector<CTraceEntryPtr>& EntryList, int (*Filter)(const CTraceEntryPtr&, void*), void* params);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
 
@@ -45,14 +45,14 @@ signals:
 protected:
 	struct STraceNode : STreeNode
 	{
-		STraceNode(const QVariant& Id) : STreeNode(Id) {}
+		STraceNode(const QVariant& Id) : STreeNode(Id) { bHighLight = false; }
 
 		CTraceEntryPtr		pEntry;
+		bool				bHighLight;
 	};
 
 	QVariant				m_LastID;
 	int						m_LastCount;
-	void*					m_LastBoxPtr;
 
 	virtual STreeNode* MkNode(const QVariant& Id) { return new STraceNode(Id); }
 	virtual STreeNode* MkVirtualNode(const QVariant& Id, STreeNode* pParent);

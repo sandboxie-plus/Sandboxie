@@ -181,45 +181,47 @@ static P_Ldr_CallOneDllCallback __my_Ldr_CallOneDllCallback = NULL;
 static DLL Ldr_Dlls[] = {
     { L"advapi32.dll",          "advapi32.dll",         AdvApi_Init,                    0},
     { L"crypt32.dll",           "crypt32.dll",          Crypt_Init,                     0},
-    { L"hnetcfg.dll",           "hnetcfg.dll",          HNet_Init,                      0}, // firewall workaround
-    { L"ws2_32.dll",            "ws2_32.dll",           WSA_Init,                       0},
-    { L"iphlpapi.dll",          "iphlpapi.dll",         IpHlp_Init,                     0}, // ping
-    { L"netapi32.dll",          "netapi32.dll",         NetApi_Init,                    0}, // xp, vista - NetUseAdd
-    { L"wkscli.dll",            "wkscli.dll",           NetApi_Init_WksCli,             0}, // win 7 - NetUseAdd
-    { L"ole32.dll",             "ole32.dll",            Ole_Init,                       0},
-    { L"combase.dll",           "combase.dll",          Com_Init_ComBase,               0},
-    { L"pstorec.dll",           "pstorec.dll",          Pst_Init,                       0}, // Protected Storage
-    { L"secur32.dll",           "secur32.dll",          Lsa_Init_Secur32,               0}, // xp, vista - LsaRegisterLogonProcess
-    { L"sspicli.dll",           "sspicli.dll",          Lsa_Init_SspiCli,               0}, // win 7 - LsaRegisterLogonProcess
-    { L"setupapi.dll",          "setupapi.dll",         Setup_Init_SetupApi,            0}, // VerifyCatalogFile
-    { L"cfgmgr32.dll",          "cfgmgr32.dll",         Setup_Init_CfgMgr32,            0}, // CM_Add_Driver_PackageW
+    { L"ole32.dll",             "ole32.dll",            Ole_Init,                       0}, // COM, OLE
+    { L"combase.dll",           "combase.dll",          Com_Init_ComBase,               0}, // COM
+    { L"rpcrt4.dll",            "rpcrt4.dll",           RpcRt_Init,                     0}, // RPC, epmapper
+    { L"sechost.dll",           "sechost.dll",          Scm_SecHostDll,                 0}, // SCM
     { L"shell32.dll",           "shell32.dll",          SH32_Init,                      0},
-    { L"zipfldr.dll",           "zipfldr.dll",          SH32_Init_ZipFldr,              0},
-    { L"uxtheme.dll",           "uxtheme.dll",          SH32_Init_UxTheme,              0}, // explorere.exe, SetWindowThemeAttribute
     { L"shcore.dll",            "shcore.dll",           Taskbar_SHCore_Init,            0}, // win 8, [Get/Set]CurrentProcessExplicitAppUserModelID
+    { L"wtsapi32.dll",          "wtsapi32.dll",         Terminal_Init_WtsApi,           0},
+    { L"winsta.dll",            "winsta.dll",           Terminal_Init_WinSta,           0},
+    { L"MsCorEE.dll",           "MsCorEE.dll",          MsCorEE_Init,                   0}, // .net framework
     //{ L"win32u.dll",            "win32u.dll",           Win32_Init,                     0},
     { L"user32.dll",            "user32.dll",           Gui_Init,                       0},
     { L"imm32.dll",             "imm32.dll",            Gui_Init_IMM32,                 0},
-    { L"d3d9.dll",              "d3d9.dll",             Gui_Init_D3D9,                  0},
-    { L"sfc_os.dll",            "sfc_os.dll",           Sfc_Init,                       0},
-    { L"wtsapi32.dll",          "wtsapi32.dll",         Terminal_Init_WtsApi,           0},
-    { L"winsta.dll",            "winsta.dll",           Terminal_Init_WinSta,           0},
-    { L"wevtapi.dll",           "wevtapi.dll",          EvtApi_Init,                    0}, // EvtIntAssertConfig
-    { L"sxs.dll",               "sxs.dll",              Sxs_Init,                       0}, // add message to SxsInstallW
     { L"gdi32.dll",             "gdi32.dll",            Gdi_Init,                       0},
     { L"gdi32full.dll",         "gdi32full.dll",        Gdi_Full_Init,                  0},
-    { L"winspool.drv",          "winspool.drv",         Gdi_Init_Spool,                 0},
-    { L"rpcrt4.dll",            "rpcrt4.dll",           RpcRt_Init,                     0},
-    { L"userenv.dll",           "userenv.dll",          UserEnv_Init,                   0},
-    { L"sechost.dll",           "sechost.dll",          Scm_SecHostDll,                 0},
+    { L"d3d9.dll",              "d3d9.dll",             Gui_Init_D3D9,                  0},
+    { L"sxs.dll",               "sxs.dll",              Sxs_Init,                       0}, // add message to SxsInstallW
+    { L"ws2_32.dll",            "ws2_32.dll",           WSA_Init,                       0}, // network restrictions
+    { L"iphlpapi.dll",          "iphlpapi.dll",         IpHlp_Init,                     0}, // ping support
     { L"msi.dll",               "msi.dll",              Scm_MsiDll,                     0}, // msi installer
-    { L"dwrite.dll",            "dwrite.dll",           Scm_DWriteDll,                  0}, // ensure FontCache is tunning
-    { L"advpack.dll",           "advpack.dll",          Proc_Init_AdvPack,              0}, // fix for IE
-    { L"MsCorEE.dll",           "MsCorEE.dll",          MsCorEE_Init,                   0},
-    { L"Pdh.dll",               "Pdh.dll",              Pdh_Init,                       0}, // Performance Counters
+    { L"secur32.dll",           "secur32.dll",          Lsa_Init_Secur32,               0}, // xp, vista - LsaRegisterLogonProcess
+    { L"sspicli.dll",           "sspicli.dll",          Lsa_Init_SspiCli,               0}, // win 7 - LsaRegisterLogonProcess
+    { L"netapi32.dll",          "netapi32.dll",         NetApi_Init,                    0}, // xp, vista - NetUseAdd
+    { L"wkscli.dll",            "wkscli.dll",           NetApi_Init_WksCli,             0}, // win 7 - NetUseAdd
+    { L"pstorec.dll",           "pstorec.dll",          Pst_Init,                       0}, // Protected Storage
+    { L"winspool.drv",          "winspool.drv",         Gdi_Init_Spool,                 0}, // print spooler workaround for 32 bit
+    // Disabled functionality:
+    { L"userenv.dll",           "userenv.dll",          UserEnv_Init,                   0}, // disable some GPO stuff
+    { L"sfc_os.dll",            "sfc_os.dll",           Sfc_Init,                       0}, // disable SFC
+    { L"Pdh.dll",               "Pdh.dll",              Pdh_Init,                       0}, // disable Performance Counters
+    { L"wevtapi.dll",           "wevtapi.dll",          EvtApi_Init,                    0}, // disable EvtIntAssertConfig
+    { L"cfgmgr32.dll",          "cfgmgr32.dll",         Setup_Init_CfgMgr32,            0}, // CM_Add_Driver_PackageW
+    // Workarounds:
+    { L"setupapi.dll",          "setupapi.dll",         Setup_Init_SetupApi,            0}, // VerifyCatalogFile
+    { L"zipfldr.dll",           "zipfldr.dll",          SH32_Init_ZipFldr,              0},
+    { L"uxtheme.dll",           "uxtheme.dll",          SH32_Init_UxTheme,              0}, // explorere.exe, SetWindowThemeAttribute
+    { L"hnetcfg.dll",           "hnetcfg.dll",          HNet_Init,                      0}, // firewall workaround
     { L"winnsi.dll",            "winnsi.dll",           NsiRpc_Init,                    0}, // WININET workaround
+    { L"advpack.dll",           "advpack.dll",          Proc_Init_AdvPack,              0}, // fix for IE
+    { L"dwrite.dll",            "dwrite.dll",           Scm_DWriteDll,                  0}, // hack for IE 9, make sure FontCache is running
     { L"ComDlg32.dll",          "ComDlg32.dll",         ComDlg32_Init,                  0}, // fix for opera.exe
-    { L"ntmarta.dll",           "ntmarta.dll",          Ntmarta_Init,                   0}, // workaround for chrome and scrobat reader
+    { L"ntmarta.dll",           "ntmarta.dll",          Ntmarta_Init,                   0}, // workaround for chrome and acrobat reader
     // Non Windows DLLs:
     { L"osppc.dll",             "osppc.dll",            Scm_OsppcDll,                   0}, // ensure osppsvc is tunning
     { L"mso.dll",               "mso.dll",              File_MsoDll,                    0}, // hack for File_IsRecoverable

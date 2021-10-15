@@ -102,7 +102,7 @@ void CSbieTemplates::CollectObjects()
 			{
 				free(info);
 
-				info_len += 0x8000;
+				info_len *= 2;
 				info = (OBJECT_DIRECTORY_INFORMATION *)malloc(info_len);
 				continue;
 			}
@@ -270,8 +270,8 @@ void CSbieTemplates::CollectTemplates()
 	foreach(const QString& Template, Templates)
 		m_Templates.insert(Template, 0);
 
-	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template", true);
-	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject", true);
+	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template", false);
+	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject", false);
 
 	for(QMap<QString, int>::iterator I = m_Templates.begin(); I != m_Templates.end(); ++I)
 	{

@@ -79,10 +79,20 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 
 _FX BOOLEAN Gui_InitConsole1(void)
 {
-    // NoSbieDesk BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    // NoSbieCons BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
+
+        //
+        // We need to set Gui_ConsoleHwnd in order for Gui_InitConsole2 to start up properly,
+        // this functions starts a thread which listens for WM_DEVICECHANGE which we need
+        // we could go for a different signaling method in future but for now we stick to this methos
+        //
+
+        Gui_ConsoleHwnd = GetConsoleWindow();
+
         return TRUE;
-	// NoSbieDesk END
+    }
+	// NoSbieCons END
 
     //
     // on Windows 7 we may need to connect this process to a console
@@ -102,7 +112,7 @@ _FX BOOLEAN Gui_InitConsole1(void)
     // application which has used Gui_SetWindowsHookEx before creating
     // any windows (which would be needed to apply the hooks)
     //
-
+    
     Gui_ConsoleHwnd = GetConsoleWindow();
     if (! Gui_ConsoleHwnd) {
 
@@ -374,11 +384,14 @@ _FX ULONG Gui_ConsoleThread(void *xHandles)
 
     while (1) {
 
-        if (Gui_ConsoleHwnd && Dll_InitComplete) {
-
-            Taskbar_SetWindowAppUserModelId(Gui_ConsoleHwnd);
-            Gui_ConsoleHwnd = NULL;
-        }
+        //
+        // this causes git.exe to hang also jumplists for a console process are pointless anyways
+        // 
+        //if (Gui_ConsoleHwnd && Dll_InitComplete) {
+        //
+        //    Taskbar_SetWindowAppUserModelId(Gui_ConsoleHwnd);
+        //    Gui_ConsoleHwnd = NULL;
+        //}
 
         while (__sys_PeekMessageW(&msg, NULL, 0, 0, PM_NOREMOVE)) {
 

@@ -282,10 +282,10 @@ _FX BOOLEAN Process_Low_InitConsole(PROCESS *proc)
 {
     NTSTATUS status;
 
-	// NoSbieDesk BEGIN
-	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"NoSandboxieDesktop", 0, FALSE))
+	// NoSbieCons BEGIN
+	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"NoSandboxieConsole", 0, FALSE))
 		return TRUE;
-	// NoSbieDesk END
+	// NoSbieCons END
 
     //
     // on Windows 7, a console process tries to launch conhost.exe through

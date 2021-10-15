@@ -496,7 +496,7 @@ _FX NTSTATUS File_NtCreateNamedPipeFile(
     InitializeObjectAttributes(&objattrs,
         &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, NULL);
 
-    mp_flags = File_MatchPath(TruePath, NULL);
+    mp_flags = File_MatchPath2(TruePath, NULL, FALSE, TRUE); // File_MatchPath(TruePath, NULL);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;

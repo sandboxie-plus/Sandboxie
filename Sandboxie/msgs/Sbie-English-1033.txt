@@ -3065,6 +3065,10 @@ Open Smart Card RPC port
 Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
 .
 
+4300;txt;01
+Open Additional RPC Port Bindings
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------

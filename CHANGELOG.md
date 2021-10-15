@@ -28,6 +28,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - added setting to entirely open access to the COM infrastructure
 
+- added ability to save trace log to file
+
 ### Changed
 - reworked the resource access path matching mechanism to optionally apply more specific rules over less specific ones
 -- for example "OpenFilePath=C:\User\Me\AppData\Firefox takes precedence over "WriteFilePath=C:\User\Me\"
@@ -40,14 +42,81 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.7 / 5.52.1] - 2021-09-??
+
+## [0.9.9 / 5.53.1] - 2021-10-??
+
+
+
+
+## [0.9.8 / 5.53.0] - 2021-10-15
+
+### Added 
+- added debug switch to disable Sbie console redirection "NoSandboxieConsole=y" 
+-- note that this was previously part of "NoSandboxieDesktop=y"
+- added Sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
+- added uninstall cleanup of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
+- added set language for Sandman for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
+- added EventLog messages with SbieMsg.dll for the Plus installer (by mpheath)
+- group expansion state is now saved
+- added additional filters to the trace tab
+
+### Changed
+- reworked and extended RPC logging
+- reintroduced the "UseRpcMgmtSetComTimeout=some.dll,n" setting to be used when no "RpcPortBinding" entry is specified
+--- this allows to enable/disable out of box RPC binding independently from the timeout setting
+- the "BoxNameTitle" value can now be set explicitly on a per image name basis [#1190](https://github.com/sandboxie-plus/Sandboxie/issues/1190)
+
+### Fixed
+- fixed inability to delete read-only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
+- fixed wrong recovery target in Plus UI [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
+- fixed SBIE2101 issue introduced with 0.9.7a [#1279](https://github.com/sandboxie-plus/Sandboxie/issues/1279)
+- fixed sorting in the box picker window [#1269](https://github.com/sandboxie-plus/Sandboxie/issues/1269)
+- fixed tray refresh issue [#1250](https://github.com/sandboxie-plus/Sandboxie/issues/1250)
+- fixed tray activity display [#1221](https://github.com/sandboxie-plus/Sandboxie/issues/1221)
+- fixed recovery window not displaying in taskbar [#1195](https://github.com/sandboxie-plus/Sandboxie/issues/1195)
+- fixed dark theme preset not updating in real time [#1270](https://github.com/sandboxie-plus/Sandboxie/issues/1270)
+- fixed Microsoft Edge complaining about "FakeAdminRights=y" [#1271](https://github.com/sandboxie-plus/Sandboxie/issues/1271)
+- fixed issue with using local template in the global section [#1212](https://github.com/sandboxie-plus/Sandboxie/issues/1212)
+- fixed issue with git.exe from MinGW freezing [#1238](https://github.com/sandboxie-plus/Sandboxie/issues/1238)
+- fixed issue with search highlighting when using in dark mode
+
+### Removed
+- removed the ability to sort the trace log as it took too much CPU
+
+
+## [0.9.7e / 5.52.5] - 2021-10-09
+
+### Changed
+- reworked the settings handling once again, now the driver maintains the order when enumerating,
+-- but for good performance there is a Hash Map held in parallel for quick exact lookups
+
+
+## [0.9.7d / 5.52.4] - 2021-10-06
+
+### Fixed
+- fixed yet another ini issue with the Sbiectrl
+
+## [0.9.7c / 5.52.3] - 2021-10-05
+
+### Fixed
+- fixed yet another handling bug with SbieApi_EnumBoxesEx
+
+## [0.9.7b / 5.52.2] - 2021-10-04
+
+### Fixed
+- fixed issue about loading not Unicode Sandboxie.ini introduced with the previous build
+
+
+
+## [0.9.7 / 5.52.1] - 2021-10-02
 
 ### Added
 - added forced process indicator to process status column [#1174](https://github.com/sandboxie-plus/Sandboxie/issues/1174)
-- added "SbieTrace=y" option to trace the interaction between Sandboxie processes and the Sandboxie core components
+- added "SbieTrace=y" option to trace the interaction between Sandboxie processes and Sandboxie core components
 - when initializing an empty sandbox, MSI debug keys are set to generate the debug output of MSI installer service
 - added "DisableComProxy=y" allowing to disable COM proxying through the service
-- added "ProcessLimit=..." that allows to limit the max count of processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
+- added "ProcessLimit=..." which allows limiting the maximum number of processes in a sandbox [#1230](https://github.com/sandboxie-plus/Sandboxie/issues/1230)
+- added missing IPC logging
 
 ### Changed
 - reworked SbieSvc ini server to allow settings caching and greatly improve performance
@@ -55,19 +124,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - enabled configuration section list replacement with a hash map to improve configuration performance
 - improved progress and status messages for the Plus installer (by mpheath) [#1168](https://github.com/sandboxie-plus/Sandboxie/pull/1168)
 - reworked RpcSs start mechanics, sandboxed RpcSs and DcomLaunch can now be run as system, use "RunRpcssAsSystem=y"
--- note: this is generally not recommended for security reasons but may be needed for compatibility in some scenarios
+-- Note: this is generally not recommended for security reasons but may be needed for compatibility in some scenarios
 - reworked WTSQueryUserToken handling to work properly in all scenarios
 - reworked configuration value list to use a hash table for better performance
 
 ### Fixed
 - fixed Plus upgrade install in Windows 7 (by mpheath) [#1194](https://github.com/sandboxie-plus/Sandboxie/pull/1194)
-- fixed custom autoexec commands being executed on each box start instead of only on the initialization
-- fixed a design issue limiting the maximal amount of processes in one box to 511
+- fixed custom autoexec commands being executed on each box start instead of only during the initialization
+- fixed a design issue limiting the maximum amount of processes per sandbox to 511
 - fixed handle leaks in the lingering process monitor mechanism
 - fixed issue with opening device paths like "\\??\\FltMgr"
 - fixed build issue with an explicit FileDigestAlgorithm option for driver sign (by isaak654) [#1210](https://github.com/sandboxie-plus/Sandboxie/pull/1210)
+- fixed issue with resource access log sometimes getting corrupted
+- fixed issue with Microsoft Office Click-to-Run [#428](https://github.com/sandboxie-plus/Sandboxie/issues/428) [#882](https://github.com/sandboxie-plus/Sandboxie/issues/882)
 
-### removed
+### Removed
 - removed support for Microsoft EMET (Enhanced Mitigation Experience Toolkit), as it was EOL in 2018
 - removed support for Messenger Plus! Live, as MSN Messenger is EOL since 2013
 - disabled Turkish language on Plus UI for inactivity (by isaak654) [#1215](https://github.com/sandboxie-plus/Sandboxie/pull/1215)

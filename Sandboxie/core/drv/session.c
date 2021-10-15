@@ -74,6 +74,8 @@ struct _SESSION {
 
 	LOG_BUFFER* monitor_log;
 
+    BOOLEAN monitor_overflow;
+
 };
 
 
@@ -668,8 +670,10 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
             for (int i = 0; strings[i] != NULL; i++)
 				log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
 		}
-		else 
-			Log_Msg0(MSG_MONITOR_OVERFLOW);
+        else if (!session->monitor_overflow) {
+            session->monitor_overflow = TRUE;
+            Log_Msg0(MSG_MONITOR_OVERFLOW);
+        }
     }
 
     Session_Unlock(irql);
@@ -1072,7 +1076,8 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
             read_ptr = session->monitor_log->buffer_start_ptr;
 
         if (!read_ptr) {
-
+            if(session->monitor_overflow)
+                session->monitor_overflow = FALSE;
             status = STATUS_NO_MORE_ENTRIES;
             __leave;
         }
@@ -1110,7 +1115,7 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
         
         log_data->Length = (USHORT)data_size;
         ProbeForWrite(log_buffer, data_size + 1, sizeof(WCHAR));
-        memcpy(log_buffer, read_ptr, data_size);
+        log_buffer_get_bytes((CHAR*)log_buffer, data_size, &read_ptr, session->monitor_log);
 
         log_buffer[data_size / sizeof(wchar_t)] = L'\0';
         

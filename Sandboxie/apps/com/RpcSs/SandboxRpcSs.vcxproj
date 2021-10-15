@@ -82,7 +82,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
@@ -92,7 +92,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">
@@ -101,7 +101,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -110,7 +110,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>SbieDll.lib;ws2_32.lib;advapi32.lib;kernel32.lib;ntdll.lib;gdi32.lib;user32.lib;secur32.lib;psapi.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -3,12 +3,55 @@
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../SbiePlusAPI.h"
+#include "../Views/SbieView.h"
 
 #if defined(Q_OS_WIN)
 #include <wtypes.h>
 #include <QAbstractNativeEventFilter>
 #include <dbt.h>
 #endif
+
+QTreeWidgetItem* CSelectBoxWindow__GetBoxParent(const QMap<QString, QStringList>& Groups, QMap<QString, QTreeWidgetItem*>& GroupItems, QTreeWidget* treeBoxes, const QString& Name, int Depth = 0)
+{
+	if (Depth > 100)
+		return NULL;
+	for (auto I = Groups.constBegin(); I != Groups.constEnd(); ++I) {
+		if (I->contains(Name)) {
+			if (I.key().isEmpty())
+				return NULL; // global group
+			QTreeWidgetItem*& pParent = GroupItems[I.key()];
+			if (!pParent) {
+				pParent = new QTreeWidgetItem();
+				pParent->setText(0, I.key());
+				QFont fnt = pParent->font(0);
+				fnt.setBold(true);
+				pParent->setFont(0, fnt);
+				if (QTreeWidgetItem* pParent2 = CSelectBoxWindow__GetBoxParent(Groups, GroupItems, treeBoxes, I.key(), ++Depth))
+					pParent2->addChild(pParent);
+				else
+					treeBoxes->addTopLevelItem(pParent);
+			}
+			return pParent;
+		}
+	}
+	return NULL;
+}
+
+double CSelectBoxWindow__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QString& Name, double value = 0.0, int Depth = 0) 
+{
+	if (Depth > 100)
+		return 1000000000;
+	for (auto I = Groups.constBegin(); I != Groups.constEnd(); ++I) {
+		int Pos = I->indexOf(Name);
+		if (Pos != -1) {
+			value = double(Pos) + value / 10.0;
+			if (I.key().isEmpty())
+				return value;
+			return CSelectBoxWindow__GetBoxOrder(Groups, I.key(), value, ++Depth);
+		}
+	}
+	return 1000000000;
+}
 
 CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& BoxName, QWidget *parent)
 	: QDialog(parent)
@@ -52,24 +95,43 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 
 	connect(ui.treeBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 
-	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+	QList<CSandBoxPtr> Boxes = theAPI->GetAllBoxes().values(); // map is sorted by key (box name)
+	QMap<QString, QStringList> Groups = theGUI->GetBoxView()->GetGroups();
 
-	foreach(const CSandBoxPtr & pBox, Boxes) 
+	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
+		QMultiMap<double, CSandBoxPtr> Boxes2;
+		foreach(const CSandBoxPtr &pBox, Boxes) {
+			Boxes2.insertMulti(CSelectBoxWindow__GetBoxOrder(Groups, pBox->GetName()), pBox);
+		}
+		Boxes = Boxes2.values();
+	}
+
+	QMap<QString, QTreeWidgetItem*> GroupItems;
+	foreach(const CSandBoxPtr &pBox, Boxes) 
 	{
 		if (!pBox->IsEnabled() || !pBox->GetBool("ShowForRunIn", true))
 			continue;
 
 		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
 
+		QTreeWidgetItem* pParent = CSelectBoxWindow__GetBoxParent(Groups, GroupItems, ui.treeBoxes, pBox->GetName());
+		
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setText(0, pBox->GetName().replace("_", " "));
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
 		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount()));
-		ui.treeBoxes->addTopLevelItem(pItem);
+		if (pParent)
+			pParent->addChild(pItem);
+		else
+			ui.treeBoxes->addTopLevelItem(pItem);
 
 		if (pBox->GetName().compare(BoxName, Qt::CaseInsensitive) == 0)
 			ui.treeBoxes->setCurrentItem(pItem);
 	}
+
+	ui.treeBoxes->expandAll();
+
+	//ui.treeBoxes->sortByColumn(0, Qt::AscendingOrder);
 
 	//restoreGeometry(theConf->GetBlob("SelectBoxWindow/Window_Geometry"));
 }

@@ -542,7 +542,7 @@ void COptionsWindow::SaveAccessList()
 	QStringList Keys = QStringList() 
 		<< "NormalFilePath" << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "NormalKeyPath" << "OpenKeyPath" << "OpenConfPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
-		<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
+		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
 
 	QMap<QString, QList<QString>> AccessMap;
 	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)

@@ -63,8 +63,7 @@ public:
 	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
-
-	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
+	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { return m_BoxedProxesses; }
 
 	virtual CSandBoxPtr		GetBoxByProcessId(quint32 ProcessId) const;
 	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }

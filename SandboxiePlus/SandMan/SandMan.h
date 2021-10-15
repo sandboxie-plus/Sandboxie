@@ -57,6 +57,8 @@ public:
 
 	bool				CheckCertificate();
 
+	void				UpdateTheme();
+
 protected:
 	SB_STATUS			ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
@@ -176,6 +178,8 @@ private slots:
 	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
 	void				OnUpdateDownload();
 
+	void				SetUITheme();
+
 private:
 	void				CreateMenus();
 	void				CreateToolBar();
@@ -255,6 +259,8 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QAction*			m_pTraySeparator;
+	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
@@ -266,7 +272,7 @@ private:
 	bool				m_pProgressModal;
 	CPopUpWindow*		m_pPopUpWindow;
 
-	void				SetUITheme();
+	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
 

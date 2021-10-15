@@ -569,12 +569,12 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 //---------------------------------------------------------------------------
 
 
-/*BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
 {
     WCHAR buf[32];
     if (SbieDll_GetStringForStringList(string, boxname, setting, buf, sizeof(buf)))
         return Config_String2Bool(buf, def_found);
     return not_found;
-}*/
+}
 
 

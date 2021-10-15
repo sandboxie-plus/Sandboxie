@@ -35,6 +35,7 @@ public:
 	virtual QDateTime	GetTimeStamp() const { return m_TimeStamp; }
 
 	virtual quint16		GetType() const { return m_Type.Flags; }
+	static QString		GetTypeStr(quint32 Type);
 	virtual QString		GetTypeStr() const;
 	virtual QString		GetStautsStr() const;
 
@@ -53,6 +54,10 @@ public:
 	virtual void		Merge(const QSharedDataPointer<CTraceEntry>& pOther) {
 		m_Counter++; this->m_Type.Flags |= pOther->m_Type.Flags;
 	}
+
+	virtual bool		IsOpen() const;
+	virtual bool		IsClosed() const;
+	virtual bool		IsTrace() const;
 
 	quint64				GetUID() const { return m_uid; }
 

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Finder.h"
 
+bool CFinder::m_DarkMode = false;
+
 QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLightOption, CFinder** ppFinder)
 {
 	QWidget* pWidget = new QWidget();
@@ -40,10 +42,16 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	m_pSearchLayout->addWidget(m_pRegExp);
 	connect(m_pRegExp, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
 
-	m_pColumn = new QComboBox();
-	m_pSearchLayout->addWidget(m_pColumn);
-	connect(m_pColumn, SIGNAL(currentIndexChanged(int)), this, SLOT(OnUpdate()));
-	m_pColumn->setVisible(false);
+	m_pSortProxy = qobject_cast<QSortFilterProxyModel*>(pFilterTarget);
+
+	if (m_pSortProxy) {
+		m_pColumn = new QComboBox();
+		m_pSearchLayout->addWidget(m_pColumn);
+		connect(m_pColumn, SIGNAL(currentIndexChanged(int)), this, SLOT(OnUpdate()));
+		m_pColumn->setVisible(false);
+	}
+	else
+		m_pColumn = NULL;
 
 	if (HighLightOption)
 	{
@@ -83,7 +91,6 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 		QObject::connect(pFind, SIGNAL(triggered()), this, SLOT(Open()));
 	}
 
-	m_pSortProxy = qobject_cast<QSortFilterProxyModel*>(pFilterTarget);
 	if (pFilterTarget) {
 		QObject::connect(this, SIGNAL(SetFilter(const QRegExp&, bool, int)), pFilterTarget, SLOT(SetFilter(const QRegExp&, bool, int)));
 		QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));

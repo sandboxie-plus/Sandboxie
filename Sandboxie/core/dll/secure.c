@@ -25,7 +25,7 @@
 #include "core/drv/api_defs.h"
 #include "core/svc/ServiceWire.h"
 #include <stdio.h>
-
+#include <objbase.h>
 
 //---------------------------------------------------------------------------
 // Defines
@@ -423,7 +423,8 @@ _FX BOOLEAN Secure_Init(void)
     // note: when running as the built in administrator we should always act as if we have admin rights
     //
 
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin());
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
+                        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
 
     RtlQueryElevationFlags =
         GetProcAddress(Dll_Ntdll, "RtlQueryElevationFlags");
@@ -1566,7 +1567,7 @@ _FX BOOLEAN Secure_IsBuiltInAdmin()
 //---------------------------------------------------------------------------
 
 
-typedef struct _RPC_ASYNC_STATE {
+/*typedef struct _RPC_ASYNC_STATE {
 
     unsigned int    Size; // size of this structure
     unsigned long   Signature;
@@ -1580,7 +1581,7 @@ typedef struct _RPC_ASYNC_STATE {
     ULONG           NotificationType;
     HANDLE          hEvent;
 
-} RPC_ASYNC_STATE, *PRPC_ASYNC_STATE;
+} RPC_ASYNC_STATE, *PRPC_ASYNC_STATE;*/
 
 
 typedef struct _SECURE_UAC_ARGS {
@@ -1634,66 +1635,6 @@ typedef struct _SECURE_UAC_PACKET {
 
 
 //---------------------------------------------------------------------------
-// Functions
-//---------------------------------------------------------------------------
-
-
-#ifdef _WIN64
-
-extern ULONG_PTR __cdecl Secure_Ndr64AsyncClientCall(
-    void *pProxyInfo, ULONG nProcNum, void *pReturnValue, ...);
-
-#else
-
-extern ULONG_PTR __cdecl Secure_NdrAsyncClientCall(
-    void *pStubDescriptor, void *pFormat, ULONG_PTR *Args);
-
-#endif _WIN64
-
-#ifdef _WIN64
-
-BOOLEAN __cdecl Secure_CheckElevation64(
-    PVOID* pProxyInfo, ULONG nProcNum, void* pReturnValue, va_list vl);
-
-#endif _WIN64
-
-BOOLEAN __cdecl Secure_CheckElevation(
-    void *ReturnAddressFromNdrAsyncClientCall,
-    void *pStubDescriptor, void *pFormat, SECURE_UAC_ARGS *Args);
-
-ULONG_PTR __cdecl Secure_HandleElevation(
-    void *pStubDescriptor, void *pFormat, SECURE_UAC_ARGS *Args);
-
-static ULONG_PTR Secure_RpcAsyncCompleteCall(
-    RPC_ASYNC_STATE *AsyncState, void *Reply);
-
-
-//---------------------------------------------------------------------------
-
-
-typedef ULONG_PTR (__cdecl *P_NdrAsyncClientCall)(
-    void *pStubDescriptor, void *pFormat, ULONG_PTR *Args);
-
-typedef ULONG_PTR (__cdecl *P_Ndr64AsyncClientCall)(
-    void *pProxyInfo, ULONG nProcNum, void *pReturnValue, ...);
-
-typedef ULONG_PTR (*P_RpcAsyncCompleteCall)(
-    RPC_ASYNC_STATE *AsyncState, void *Reply);
-
-
-//---------------------------------------------------------------------------
-
-
-#ifdef _WIN64
-        P_Ndr64AsyncClientCall  __sys_Ndr64AsyncClientCall          = NULL;
-#else
-        P_NdrAsyncClientCall    __sys_NdrAsyncClientCall            = NULL;
-#endif _WIN64
-
-static  P_RpcAsyncCompleteCall  __sys_RpcAsyncCompleteCall          = NULL;
-
-
-//---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
 
@@ -1707,101 +1648,14 @@ static BOOLEAN Secure_Elevation_HookDisabled = FALSE;
 
 
 //---------------------------------------------------------------------------
-// Secure_Init_Elevation
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN Secure_Init_Elevation(HMODULE module)
-{
-#ifdef _WIN64
-    void *Ndr64AsyncClientCall;
-#else
-    void *NdrAsyncClientCall;
-#endif _WIN64
-    void *RpcAsyncCompleteCall;
-
-    if (Dll_OsBuild < 6000) {
-
-        //
-        // earlier than Windows Vista, no UAC
-        //
-
-        return TRUE;
-    }
-
-    RpcAsyncCompleteCall = (P_RpcAsyncCompleteCall)
-        Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcAsyncCompleteCall","RpcAsyncCompleteCall");
-
-#ifdef _WIN64
-
-    Ndr64AsyncClientCall = (P_Ndr64AsyncClientCall)
-        Ldr_GetProcAddrNew(DllName_rpcrt4, L"Ndr64AsyncClientCall","Ndr64AsyncClientCall");
-
-    SBIEDLL_HOOK(Secure_,Ndr64AsyncClientCall);
-
-    //NdrAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
-    //Ndr64AsyncClientCall(MIDL_STUBLESS_PROXY_INFO* pProxyInfo, unsigned int nProcNum, void* pReturnValue, ...) <- hook
-
-    //NdrDcomAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
-    //Ndr64DcomAsyncClientCall(MIDL_STUBLESS_PROXY_INFO* pProxyInfo, unsigned int nProcNum, void* pReturnValue, ...)
-
-#else ! _WIN64
-
-    NdrAsyncClientCall = (P_NdrAsyncClientCall)
-        Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrAsyncClientCall","NdrAsyncClientCall");
-
-    SBIEDLL_HOOK(Secure_,NdrAsyncClientCall);
-
-    //NdrAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...) <- hook
-    //NdrAsyncClientCall2(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...) -> NdrAsyncClientCall
-
-    //NdrDcomAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
-    //NdrDcomAsyncClientCall2(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)->NdrDcomAsyncClientCall
-
-#endif _WIN64
-
-    SBIEDLL_HOOK(Secure_,RpcAsyncCompleteCall);
-
-    return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
 // Secure_CheckElevation
 //---------------------------------------------------------------------------
 
-#ifdef _WIN64
 
-ALIGNED BOOLEAN __cdecl Secure_CheckElevation64(
-    PVOID* pProxyInfo, ULONG nProcNum, void* pReturnValue, va_list vl)
+ALIGNED BOOLEAN __cdecl Secure_CheckElevation( 
+    /*void* ReturnAddressFromNdrAsyncClientCall,
+    PMIDL_STUB_DESC pStubDescriptor, void* pFormat,*/ SECURE_UAC_ARGS* Args)
 {
-    void* ReturnAddress = NULL;
-    void* pStubDescriptor = NULL;
-    __try {
-        ReturnAddress = *(__int64**)(vl - (4 * 8));
-        pStubDescriptor = *pProxyInfo;
-    } __except (EXCEPTION_EXECUTE_HANDLER) {}
-
-    return Secure_CheckElevation(ReturnAddress, pStubDescriptor, NULL, vl);
-}
-
-#endif _WIN64
-
-extern BOOLEAN g_rpc_client_hooks;
-void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, VOID* pStubDescriptor);
-
-ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
-    void *ReturnAddressFromNdrAsyncClientCall,
-    void *pStubDescriptor, void *pFormat, SECURE_UAC_ARGS *Args)
-{
-    if (g_rpc_client_hooks) {
-#ifdef _WIN64
-        RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor);
-#else
-        RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor);
-#endif
-    }
-
     static UCHAR elevation_binding_1[16] = {
         0x9A, 0xF9, 0x1E, 0x20, 0xA0, 0x7F, 0x4C, 0x44,
         0x93, 0x99, 0x19, 0xBA, 0x84, 0xF1, 0x2A, 0x1A };
@@ -1862,7 +1716,8 @@ ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
             __leave;
         if (AsyncState->NotificationType != RpcNotificationTypeEvent)
             __leave;
-        if (! AsyncState->hEvent)
+        //if (! AsyncState->hEvent)
+        if (!AsyncState->u.hEvent)
             __leave;
 
         //
@@ -2002,7 +1857,8 @@ ALIGNED ULONG_PTR __cdecl Secure_HandleElevation(
     pkt->len = pkt_len;
     pkt->inv_len = ~pkt->len;
 
-    pkt->hEvent = (ULONG64)(ULONG_PTR)Secure_Elevation_AsyncState->hEvent;
+    //pkt->hEvent = (ULONG64)(ULONG_PTR)Secure_Elevation_AsyncState->hEvent;
+    pkt->hEvent = (ULONG64)(ULONG_PTR)Secure_Elevation_AsyncState->u.hEvent;
     pkt->hResult = 0;
     pkt->ret_code = ERROR_CANCELLED;
 
@@ -2067,11 +1923,11 @@ ALIGNED ULONG_PTR __cdecl Secure_HandleElevation(
 //---------------------------------------------------------------------------
 
 
-ALIGNED ULONG_PTR Secure_RpcAsyncCompleteCall(
+ALIGNED BOOLEAN Secure_RpcAsyncCompleteCall(
     RPC_ASYNC_STATE *AsyncState, void *Reply)
 {
     if (AsyncState != Secure_Elevation_AsyncState)
-        return __sys_RpcAsyncCompleteCall(AsyncState, Reply);
+        return FALSE;
 
     //
     // Start.exe posted the event referenced by pkt->hEvent (actually
@@ -2090,7 +1946,7 @@ ALIGNED ULONG_PTR Secure_RpcAsyncCompleteCall(
     Secure_Elevation_AsyncState = NULL;
     Secure_Elevation_Type = 0;
 
-    return 0;
+    return TRUE;
 }
 
 

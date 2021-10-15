@@ -718,8 +718,6 @@ BOOLEAN Com_Init_Ole32(HMODULE);
 
 BOOLEAN RpcRt_Init(HMODULE);
 
-BOOLEAN Secure_Init_Elevation(HMODULE);
-
 BOOLEAN UserEnv_Init(HMODULE);
 
 BOOLEAN UserEnv_InitVer(HMODULE);

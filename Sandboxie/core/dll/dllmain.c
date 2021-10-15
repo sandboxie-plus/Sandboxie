@@ -581,56 +581,23 @@ _FX ULONG Dll_GetImageType(const WCHAR *ImageName)
         L"explorer.exe",            (WCHAR *)DLL_IMAGE_SHELL_EXPLORER,
         L"rundll32.exe",            (WCHAR *)DLL_IMAGE_RUNDLL32,
         L"dllhost.exe",             (WCHAR *)DLL_IMAGE_DLLHOST,
+        L"ServiceModelReg.exe",     (WCHAR *)DLL_IMAGE_SERVICE_MODEL_REG,
 
         L"iexplore.exe",            (WCHAR *)DLL_IMAGE_INTERNET_EXPLORER,
-
-        L"firefox.exe",             (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"waterfox.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"k-meleon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"librewolf.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-
-        L"thunderbird.exe",         (WCHAR *)DLL_IMAGE_MOZILLA_THUNDERBIRD,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
         L"kmplayer.exe",            (WCHAR *)DLL_IMAGE_PANDORA_KMPLAYER,
         L"wlmail.exe",              (WCHAR *)DLL_IMAGE_WINDOWS_LIVE_MAIL,
-        L"ServiceModelReg.exe",     (WCHAR *)DLL_IMAGE_SERVICE_MODEL_REG,
         L"wisptis.exe",             (WCHAR *)DLL_IMAGE_WISPTIS,
 
-        L"iron.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"dragon.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"chrome.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"opera.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"neon.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"brave.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Yandex Browser
-        L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is Chromium-based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
-
-        L"PuffinSecureBrowser.exe", (WCHAR *)DLL_IMAGE_OTHER_WEB_BROWSER,
 
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"Acrobat.exe",             (WCHAR *)DLL_IMAGE_ACROBAT_READER,
         L"plugin-container.exe",    (WCHAR *)DLL_IMAGE_PLUGIN_CONTAINER,
         L"Outlook.exe",             (WCHAR *)DLL_IMAGE_OFFICE_OUTLOOK,
         L"Excel.exe",               (WCHAR *)DLL_IMAGE_OFFICE_EXCEL,
-
-        L"winmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"IncMail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"eudora.exe",              (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"thebat32.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"thebat64.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"Foxmail.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"Mailbird.exe",            (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"MailClient.exe",          (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"postbox.exe",             (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
-        L"Inky.exe",                (WCHAR *)DLL_IMAGE_OTHER_MAIL_CLIENT,
 
         NULL,                       NULL
     };

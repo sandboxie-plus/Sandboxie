@@ -15,9 +15,17 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkNestedJobs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkUseSbieWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	connect(ui.chkAddToJob, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkProtectSCM, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkRestrictServices, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	//connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkElevateRpcss, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkProtectSystem, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDropPrivileges, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+	connect(ui.chkOpenCOM, SIGNAL(clicked(bool)), this, SLOT(OnOpenCOM()));
+
+	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
+	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
 
 	connect(ui.chkOpenDevCMApi, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -58,10 +66,15 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", false));
 
+	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
 	ui.chkRestrictServices->setChecked(!m_pBox->GetBool("RunServicesAsSystem", false));
-	//ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
+	ui.chkElevateRpcss->setChecked(m_pBox->GetBool("RunRpcssAsSystem", false));
+	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
+	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
 
+	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
+	ui.chkNoSecurityFiltering->setChecked(m_pBox->GetBool("NoSecurityFiltering", false));
 
 	ui.chkOpenDevCMApi->setChecked(m_pBox->GetBool("OpenDevCMApi", false));
 	//ui.chkOpenLsaSSPI->setChecked(!m_pBox->GetBool("BlockPassword", true)); // OpenLsaSSPI
@@ -102,6 +115,11 @@ void COptionsWindow::LoadAdvanced()
 		ui.lstUsers->addItems(Users.mid(1));
 	ui.chkMonitorAdminOnly->setChecked(m_pBox->GetBool("MonitorAdminOnly", false));
 
+	UpdateBoxIsolation();
+
+	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
+	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
+
 	m_AdvancedChanged = false;
 }
 
@@ -110,10 +128,16 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "y", "");
 	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "y", "");
 
+	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
 	WriteAdvancedCheck(ui.chkNestedJobs, "AllowBoxedJobs", "y", "");
 	WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
-	//WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
+	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
+	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");
+	WriteAdvancedCheck(ui.chkDropPrivileges, "StripSystemPrivileges", "", "n");
+
+	WriteAdvancedCheck(ui.chkNoSecurityIsolation, "NoSecurityIsolation", "y", "");
+	WriteAdvancedCheck(ui.chkNoSecurityFiltering, "NoSecurityFiltering", "y", "");
 
 	WriteAdvancedCheck(ui.chkOpenDevCMApi, "OpenDevCMApi", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenLsaSSPI, "BlockPassword", "n", ""); // OpenLsaSSPI
@@ -158,21 +182,68 @@ void COptionsWindow::SaveAdvanced()
 	m_AdvancedChanged = false;
 }
 
-void COptionsWindow::OnAdvancedChanged()
+void COptionsWindow::OnIsolationChanged()
 {
-	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
-	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
+	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
+		theGUI->CheckCertificate();
+
+	UpdateBoxIsolation();
 
 	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::UpdateBoxIsolation()
+{
+	ui.chkNoSecurityFiltering->setEnabled(ui.chkNoSecurityIsolation->isChecked());
+
+	ui.chkAddToJob->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenLsaEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+
+	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
+	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+	ui.chkDropRights->setEnabled(!ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin());
+
+	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
+
+	ui.chkBlockSpooler->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
+	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
+
+	ui.chkCloseClipBoard->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+}
+
+void COptionsWindow::OnAdvancedChanged()
+{
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnOpenCOM()
+{
+	if (ui.chkOpenCOM->isChecked()) {
+		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
+		SetAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
+	}
+	else {
+		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
+		DelAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
+	}
 }
 
 void COptionsWindow::OnNoWindowRename()
 {
 	if (ui.chkNoWindowRename->isChecked())
-		SetAccessEntry(eWnd, "", eDirect, "#");
+		SetAccessEntry(eWnd, "", eOpen, "#");
 	else
-		DelAccessEntry(eWnd, "", eDirect, "#");
+		DelAccessEntry(eWnd, "", eOpen, "#");
 	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddAutoExec()
@@ -184,6 +255,7 @@ void COptionsWindow::OnAddAutoExec()
 	ui.lstAutoExec->addItem(Process);
 
 	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelAutoExec()
@@ -192,6 +264,7 @@ void COptionsWindow::OnDelAutoExec()
 		delete pItem;
 
 	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddProcess()
@@ -203,6 +276,7 @@ void COptionsWindow::OnAddProcess()
 	ui.lstProcesses->addItem(Process);
 
 	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelProcess()
@@ -211,6 +285,7 @@ void COptionsWindow::OnDelProcess()
 		delete pItem;
 
 	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 #include <wtypes.h>
@@ -281,6 +356,7 @@ void COptionsWindow::OnAddUser()
 	ui.lstUsers->addItems(Users);
 
 	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelUser()
@@ -326,6 +402,7 @@ void COptionsWindow::OnDebugChanged()
 {
 	QCheckBox* pCheck = qobject_cast<QCheckBox*>(sender());
 	m_DebugOptions[pCheck].Changed = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::LoadDebug()

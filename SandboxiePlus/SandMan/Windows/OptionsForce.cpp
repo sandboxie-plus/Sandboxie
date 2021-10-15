@@ -91,6 +91,7 @@ void COptionsWindow::OnForceProg()
 		return;
 	AddForcedEntry(Value, 1);
 	m_ForcedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnForceDir()
@@ -100,10 +101,12 @@ void COptionsWindow::OnForceDir()
 		return;
 	AddForcedEntry(Value, 2);
 	m_ForcedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelForce()
 {
 	DeleteAccessEntry(ui.treeForced->currentItem());
 	m_ForcedChanged = true;
+	OnOptChanged();
 }

@@ -37,6 +37,7 @@ typedef long NTSTATUS;
 
 #include "..\..\Sandboxie\core\svc\msgids.h"
 #include "..\..\Sandboxie\core\svc\ProcessWire.h"
+#include "..\..\Sandboxie\core\svc\GuiWire.h"
 #include "..\..\Sandboxie\core\svc\sbieiniwire.h"
 #include "..\..\Sandboxie\core\svc\QueueWire.h"
 #include "..\..\Sandboxie\core\svc\InteractiveWire.h"
@@ -288,7 +289,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	//m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.53.0";
+	QStringList CompatVersions = QStringList () << "5.55.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -2043,8 +2044,16 @@ QString CSbieAPI::GetFeatureStr()
 	QStringList str;
 	if (flags & SBIE_FEATURE_FLAG_WFP)
 		str.append("WFP");
+	if (flags & SBIE_FEATURE_FLAG_OB_CALLBACKS)
+		str.append("ObCB");
 	if (flags & SBIE_FEATURE_FLAG_SBIE_LOGIN)
 		str.append("SbL");
+	if (flags & SBIE_FEATURE_FLAG_PRIVACY_MODE)
+		str.append("PMod");
+	if (flags & SBIE_FEATURE_FLAG_COMPARTMENTS)
+		str.append("AppC");
+	if (flags & SBIE_FEATURE_FLAG_WIN32K_HOOK)
+		str.append("W32k");
 
 	return str.join(",");
 }

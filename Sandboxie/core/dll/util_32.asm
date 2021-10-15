@@ -96,17 +96,17 @@ PUBLIC _ProtectCall4@20
 
 
 ;----------------------------------------------------------------------------
-; RpcRt_NdrAsyncClientCall
+; Secure_NdrAsyncClientCall
 ;----------------------------------------------------------------------------
 
 
-EXTERN C RpcRt_NdrAsyncClientCall_x86 : PROC
+EXTERN C Secure_CheckElevation    : PROC
 EXTERN C Secure_HandleElevation   : PROC
 EXTERN C __sys_NdrAsyncClientCall : DWORD
 
-RpcRt_NdrAsyncClientCall   PROC C PUBLIC
+Secure_NdrAsyncClientCall   PROC C PUBLIC
 
-        call RpcRt_NdrAsyncClientCall_x86
+        call Secure_CheckElevation
         test al,al
         jnz WeHandleElevation
     
@@ -116,9 +116,9 @@ WeHandleElevation:
 
         jmp Secure_HandleElevation
 
-RpcRt_NdrAsyncClientCall   ENDP
+Secure_NdrAsyncClientCall   ENDP
 
-PUBLIC C RpcRt_NdrAsyncClientCall
+PUBLIC C Secure_NdrAsyncClientCall
 
 
 ;----------------------------------------------------------------------------
@@ -277,3 +277,29 @@ RpcRt_NdrClientCall2   ENDP
 
 PUBLIC C RpcRt_NdrClientCall2
 
+
+;----------------------------------------------------------------------------
+; RpcRt_NdrClientCall4
+;----------------------------------------------------------------------------
+
+
+EXTERN C RpcRt_NdrClientCall4_x86    : PROC
+;EXTERN C RpcRt_NdrClientCall4_...   : PROC
+EXTERN C __sys_NdrClientCall4 : DWORD
+
+RpcRt_NdrClientCall4   PROC C PUBLIC
+
+        call RpcRt_NdrClientCall4_x86
+        test al,al
+        jnz CancelCall4
+    
+        jmp dword ptr [__sys_NdrClientCall4]
+
+CancelCall4:
+
+;        jmp RpcRt_NdrClientCall4_...
+		ret
+
+RpcRt_NdrClientCall4   ENDP
+
+PUBLIC C RpcRt_NdrClientCall4

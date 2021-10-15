@@ -73,6 +73,8 @@ _FX BOOLEAN CustomizeSandbox(void)
 
     if (GetSetCustomLevel(0) != '1') {
 
+        Key_CreateBaseKeys();
+
         Custom_CreateRegLinks();
         DisableDCOM();
         DisableRecycleBin();

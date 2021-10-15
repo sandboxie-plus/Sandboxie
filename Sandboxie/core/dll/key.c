@@ -773,6 +773,12 @@ _FX NTSTATUS Key_FixNameWow64(
         if (! (DesiredAccess & KEY_WOW64_32KEY))
             return STATUS_SUCCESS;
 
+        // ToDo: ???
+        // NoSysCallHooks BEGIN
+        //if((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+        //    return STATUS_SUCCESS;
+        // NoSysCallHooks END
+
         return Key_FixNameWow64_2(OutTruePath, OutCopyPath);
     }
 
@@ -4279,4 +4285,37 @@ _FX ULONG Key_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     }
 
     return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_CreateBaseKeys
+//---------------------------------------------------------------------------
+
+
+_FX void Key_CreateBaseKeys()
+{
+    WCHAR buff[2048];
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR* base_keys[] = {
+        L"\\machine\\system", L"\\machine\\software",
+        L"\\user\\current\\software", L"\\user\\current_Classes", NULL};
+
+    //
+    // in privacy mode we need to pre create some keys or else the box initialization will fail
+    //
+ 
+    InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    for (WCHAR** base_key = base_keys; *base_key; base_key++) {
+
+        wcscpy(buff, Dll_BoxKeyPath);
+        wcscat(buff, *base_key);
+
+        RtlInitUnicodeString(&objname, buff);
+
+        Key_CreatePath(&objattrs, NULL);
+    }
 }

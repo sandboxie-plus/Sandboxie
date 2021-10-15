@@ -51,6 +51,13 @@ static BOOL Scm_OpenProcessToken(
     _Outptr_ PHANDLE TokenHandle
     );
 
+static BOOL Scm_OpenThreadToken(
+    _In_ HANDLE  ThreadHandle,
+    _In_ DWORD   DesiredAccess,
+    _In_ BOOL    OpenAsSelf,
+    _Outptr_ PHANDLE TokenHandle
+    );
+
 static BOOL Scm_GetTokenInformation(
     _In_ HANDLE TokenHandle,
     _In_ TOKEN_INFORMATION_CLASS TokenInformationClass,
@@ -74,6 +81,13 @@ typedef BOOL (*P_OpenProcessToken)(
     _Outptr_ PHANDLE TokenHandle
     );
 
+typedef BOOL (*P_OpenThreadToken)(
+    _In_ HANDLE  ThreadHandle,
+    _In_ DWORD   DesiredAccess,
+    _In_ BOOL    OpenAsSelf,
+    _Outptr_ PHANDLE TokenHandle
+    );
+
 typedef BOOL (*P_GetTokenInformation)(
     _In_ HANDLE TokenHandle,
     _In_ TOKEN_INFORMATION_CLASS TokenInformationClass,
@@ -90,6 +104,7 @@ typedef BOOL (*P_GetTokenInformation)(
 static P_CreateWaitableTimerW       __sys_CreateWaitableTimerW = NULL;
 
 static P_OpenProcessToken           __sys_OpenProcessToken = NULL;
+static P_OpenThreadToken            __sys_OpenThreadToken = NULL;
 
 static P_GetTokenInformation        __sys_GetTokenInformation = NULL;
 
@@ -163,6 +178,10 @@ _FX BOOLEAN Scm_SetupMsiHooks()
         void* OpenProcessToken = (P_OpenProcessToken)GetProcAddress(hAdvapi32, "OpenProcessToken");
         SBIEDLL_HOOK(Scm_, OpenProcessToken);
 
+        //void* OpenThreadToken = (P_OpenThreadToken)GetProcAddress(hAdvapi32, "OpenThreadToken");
+        //SBIEDLL_HOOK(Scm_, OpenThreadToken);
+
+
         void* GetTokenInformation = (P_GetTokenInformation)GetProcAddress(hAdvapi32, "GetTokenInformation");
         SBIEDLL_HOOK(Scm_, GetTokenInformation);
     }
@@ -217,6 +236,27 @@ _FX BOOL Scm_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE
     NTSTATUS status = __sys_OpenProcessToken(ProcessHandle, DesiredAccess, phTokenOut);
 
     if (NT_SUCCESS(status) && ProcessHandle == GetCurrentProcess()) {
+
+        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        TlsData->scm_last_own_token = *phTokenOut;
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_OpenThreadToken
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_OpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL OpenAsSelf, PHANDLE phTokenOut)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    NTSTATUS status = __sys_OpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, phTokenOut);
+
+    if (NT_SUCCESS(status) && ThreadHandle == GetCurrentThread()) {
 
         File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
         TlsData->scm_last_own_token = *phTokenOut;

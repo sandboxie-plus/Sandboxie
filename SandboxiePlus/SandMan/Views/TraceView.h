@@ -28,6 +28,8 @@ private slots:
 	void				SetFilter(const QRegExp& Exp, bool bHighLight = false, int Col = -1); // -1 = any
 	void				SelectNext();
 
+	void				SaveToFile();
+
 protected:
 	friend int CTraceView__Filter(const CTraceEntryPtr& pEntry, void* params);
 	CTraceModel*		m_pTraceModel;
@@ -45,10 +47,11 @@ protected:
 
 	QToolBar*			m_pTraceToolBar;
 	QAction*			m_pTraceTree;
-	QCheckBox*			m_pAllBoxes;
 	QComboBox*			m_pTracePid;
 	QComboBox*			m_pTraceTid;
 	QComboBox*			m_pTraceType;
 	QComboBox*			m_pTraceStatus;
+	QAction*			m_pAllBoxes;
+	QAction*			m_pSaveToFile;
 
 };

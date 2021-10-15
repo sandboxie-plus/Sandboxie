@@ -54,7 +54,6 @@ public:
 	virtual void			SetDropRights(bool bEnable);
 	virtual bool			IsDropRights() const				{ return m_bDropRights; }
 
-	virtual bool			IsSecurityRestricted() const		{ return m_bSecurityRestricted; }
 	virtual bool			IsUnsecureDebugging() const			{ return m_iUnsecureDebugging != 0; }
 
 	virtual void			BlockProgram(const QString& ProgName);
@@ -74,12 +73,15 @@ public:
 
 	enum EBoxTypes
 	{
-		eDefault = 0,
+		eHardenedPlus,
 		eHardened,
-		//eHasLogApi,
+		eDefaultPlus,
+		eDefault,
+		eAppBoxPlus,
+		eAppBox,
 		eInsecure,
 
-		eUnknown = -1
+		eUnknown
 	};
 
 	EBoxTypes				GetType() const;
@@ -99,12 +101,15 @@ protected:
 	bool					m_bSharesAllowed;
 	bool					m_bDropRights;
 
-	bool					m_bSecurityRestricted;
+	bool					m_bSecurityEnhanced;
+	bool					m_bPrivacyEnhanced;
+	bool					m_bApplicationCompartment;
 	int						m_iUnsecureDebugging;
 
 	bool					m_SuspendRecovery;
 
 	QSet<QString>			m_RecentPrograms;
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////

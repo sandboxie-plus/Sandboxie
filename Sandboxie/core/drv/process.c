@@ -709,6 +709,73 @@ _FX PROCESS *Process_Create(
     }
 
     //
+    // initialize box options
+    //
+
+    proc->bAppCompartment = Conf_Get_Boolean(proc->box->name, L"NoSecurityIsolation", 0, FALSE);
+
+    //
+    // by default, Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseForBoxed=n to disable this behaviour
+    //
+
+    proc->always_close_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 
+
+    //
+    // by default OpenFile and OpenKey apply only to unboxed processes
+    // use DontOpenForBoxed=n to thread boxed and unboxed programs the same way
+    //
+
+    proc->dont_open_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"DontOpenForBoxed", 0, TRUE); 
+
+    //
+    // privacy mode requirers Rule Specificity
+    //
+
+#ifdef USE_MATCH_PATH_EX
+    proc->use_privacy_mode = Conf_Get_Boolean(proc->box->name, L"UsePrivacyMode", 0, FALSE); 
+    proc->use_rule_specificity = proc->use_privacy_mode || Conf_Get_Boolean(proc->box->name, L"UseRuleSpecificity", 0, FALSE); 
+#endif
+
+    //
+    // check certificate
+    //
+
+    if (!Driver_Certified && !proc->image_sbie) {
+        if (
+#ifdef USE_MATCH_PATH_EX
+            proc->use_rule_specificity || 
+            proc->use_privacy_mode ||
+#endif
+            proc->bAppCompartment) {
+
+            Log_Msg_Process(MSG_6004, proc->box->name, proc->image_name, box->session_id, proc->pid);
+
+            //Pool_Delete(pool);
+            //Process_CreateTerminated(ProcessId, box->session_id);
+            //return NULL;
+            
+            // allow the process to run for a sort while to allow the features to be avaluated
+            Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
+        }
+    }
+
+    //
+    // configure monitor options
+    //
+
+    proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
+
+    //
+    // initialize filtering options
+    //
+
+    BOOLEAN no_filtering = proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"NoSecurityFiltering", 0, FALSE); // only in effect in app mode
+    proc->disable_file_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
+    proc->disable_key_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
+    proc->disable_object_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableObjectFilter", 0, FALSE);
+
+    //
     // initialize various locks
     //
 
@@ -735,16 +802,6 @@ _FX PROCESS *Process_Create(
         Process_CreateTerminated(ProcessId, box->session_id);
         return NULL;
     }
-
-    proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
-
-    //
-    // initialize debug options
-    //
-
-    proc->disable_file_flt = Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
-    proc->disable_key_flt = Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
-    //proc->disable_object_flt = Conf_Get_Boolean(proc->box->name, L"DisableObjectFilter", 0, FALSE);
 
     //
     // initialize trace flags
@@ -1219,7 +1276,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                 // don't put the process into a job if OpenWinClass=*
                 //
 
-				if (new_proc->open_all_win_classes || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
+				if (new_proc->open_all_win_classes || new_proc->bAppCompartment || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
 
                     new_proc->can_use_jobs = TRUE;
 					add_process_to_job = FALSE;

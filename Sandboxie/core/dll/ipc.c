@@ -343,8 +343,13 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK_IF(NtAlpcQueryInformation);
     SBIEDLL_HOOK_IF(NtAlpcQueryInformationMessage);
 
-    SBIEDLL_HOOK(Ipc_,NtImpersonateClientOfPort);
-    SBIEDLL_HOOK_IF(NtAlpcImpersonateClientOfPort);
+    // OriginalToken BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    // OriginalToken END
+    {
+        SBIEDLL_HOOK(Ipc_, NtImpersonateClientOfPort);
+        SBIEDLL_HOOK_IF(NtAlpcImpersonateClientOfPort);
+    }
 
     SBIEDLL_HOOK(Ipc_,NtRequestWaitReplyPort);
     SBIEDLL_HOOK_IF(NtAlpcSendWaitReceivePort);
@@ -366,8 +371,13 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK(Ipc_,NtCreateSection);
     SBIEDLL_HOOK(Ipc_,NtOpenSection);
 
-    SBIEDLL_HOOK(Ipc_,NtImpersonateAnonymousToken);
-    SBIEDLL_HOOK(Ipc_,NtImpersonateThread);
+    // OriginalToken BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    // OriginalToken END
+    {
+        SBIEDLL_HOOK(Ipc_, NtImpersonateAnonymousToken);
+        SBIEDLL_HOOK(Ipc_, NtImpersonateThread);
+    }
 
     Ipc_CreateObjects();
 
@@ -724,7 +734,7 @@ _FX BOOLEAN Ipc_GetName_AdjustSplWow64Path(WCHAR *TruePath, BOOLEAN adj)
     //
 
     // NoSbieDesk BEGIN
-    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
         return TRUE;
 	// NoSbieDesk END
 
@@ -1143,6 +1153,8 @@ _FX NTSTATUS Ipc_NtConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1269,6 +1281,8 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1519,6 +1533,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1693,6 +1709,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -3234,6 +3252,13 @@ _FX NTSTATUS Ipc_ConnectProxyPort(
     if (_wcsicmp(TruePath, L"\\RPC Control\\ntsvcs") != 0 &&
         _wcsicmp(TruePath, L"\\RPC Control\\plugplay") != 0)
         return STATUS_BAD_INITIAL_PC;
+
+    //
+    // check if we are in app mode in which case proxying is not needed, but we must indicate to open true path
+    //
+
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0)
+        return STATUS_BAD_INITIAL_STACK;
 
     status = STATUS_SUCCESS;
 

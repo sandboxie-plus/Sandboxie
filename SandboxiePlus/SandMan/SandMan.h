@@ -52,7 +52,7 @@ public:
 
 	void				RunSandboxed(const QStringList& Commands, const QString& BoxName);
 
-	QIcon				GetBoxIcon(bool inUse, int boxType = 0);
+	QIcon				GetBoxIcon(int boxType, bool inUse = false);
 	QString				GetBoxDescription(int boxType);
 
 	bool				CheckCertificate();

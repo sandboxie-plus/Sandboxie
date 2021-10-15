@@ -4,6 +4,46 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.0 / 5.55.0] - 2021-10-??
+
+### Added 
+- added Privacy enhanced mode, sandboxes with "UsePrivacyMode=y" will not allow read access to locations containing user data
+-- all locations except generic Windows system paths will need to be opened explicitly for read and/or write access
+-- using "NormalFilePath=...", "NormalKeyPath=...", "NormalIpcPath=..." allows to open locations to be readable and sandboxed
+
+- added new "App Compartment" mode of operation, it's enabled by adding "NoSecurityIsolation=y" to the box configuration
+-- in this mode, security is traded in for compatibility, it should not be used for untrusted applications
+-- note: in this mode, file and registry filtering are still in place, hence processes run without administrative privileges
+-- it is reasonably safe, all filtering can be disabled with "NoSecurityFiltering=y"
+
+- added experimental use of ObRegisterCallbacks to filter object creation and duplication 
+-- this filtering is independent from the regular SbieDrv's syscall-based filtering, hence it also applies to App Compartments
+-- with it enabled, an application running in a compartment will not be able to manipulate processes running outside the sandbox
+-- Note: this feature improves the security of unisolated App Compartment boxes
+-- to enable this feature, set "EnableObjectFiltering=y" in the global section and reload the driver
+-- when globally activated, the filtering can be disabled for individual boxes with "DisableObjectFilter=y"
+
+- added "DontOpenForBoxed=n", this option disables the discrimination of boxed processes for open file and open key directives
+-- this behaviour does not really improve security anyways, but may be annoying, also app compartments always disable this
+
+- added setting to entirely open access to the COM infrastructure
+
+- added ability to save trace log to file
+
+### Changed
+- reworked the resource access path matching mechanism to optionally apply more specific rules over less specific ones
+-- for example "OpenFilePath=C:\User\Me\AppData\Firefox takes precedence over "WriteFilePath=C:\User\Me\"
+-- to enable this new behaviour, add "UseRuleSpecificity=y" to your Sandboxie.ini, this behaviour is always enabled in Privacy enhanced mode
+-- added "NormalFilePath=..." to restore default sandboxie behaviour on a given path
+-- added "OpenConfPath=...", which similarly to "OpenPipePath=..." is a "OpenKeyPath=..." variant which applies to executables located in the sandbox
+- removed option to copy a box during creation, instead the box context menu offers a duplication option
+- reworked the box creation dialog to offer new box types
+
+
+
+
+
+## [0.9.9 / 5.53.1] - 2021-10-??
 
 
 
@@ -56,12 +96,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed yet another ini issue with the Sbiectrl
 
-
 ## [0.9.7c / 5.52.3] - 2021-10-05
 
 ### Fixed
 - fixed yet another handling bug with SbieApi_EnumBoxesEx
-
 
 ## [0.9.7b / 5.52.2] - 2021-10-04
 
@@ -1277,4 +1315,3 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
-

@@ -2498,7 +2498,22 @@ _FX NTSTATUS File_NtCreateFileImpl(
 
         if (status == STATUS_OBJECT_PATH_SYNTAX_BAD) {
 
-        	SbieApi_MonitorPut2(MONITOR_PIPE | MONITOR_DENY, TruePath, FALSE);
+            //
+            // teh driver usually blocks this anyways so try only in app mode
+            //
+
+            if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0){
+
+                SbieApi_MonitorPut2(MONITOR_PIPE, TruePath, FALSE);
+
+                return __sys_NtCreateFile(
+                    FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+                    AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+                    CreateOptions, EaBuffer, EaLength);
+
+            } else {
+                SbieApi_MonitorPut2(MONITOR_PIPE | MONITOR_DENY, TruePath, FALSE);
+            }
         }
     }
 

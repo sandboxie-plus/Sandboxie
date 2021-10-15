@@ -926,7 +926,7 @@ BOOL CThirdPartyDialog::CheckTemplate(const CString &tmpl_name)
                 continue;
             }
 
-            PATTERN *pat = Pattern_Create(NULL, value, TRUE);
+            PATTERN *pat = Pattern_Create(NULL, value, TRUE, 0);
             BOOLEAN match = FALSE;
 
             POSITION pos = list->GetHeadPosition();

@@ -240,6 +240,7 @@ void COptionsWindow::OnBlockINet()
 		DelAccessEntry(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices");
 
 	m_INetBlockChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddINetProg()
@@ -262,6 +263,7 @@ void COptionsWindow::OnAddINetProg()
 	AddProgramToGroup(Value, INetModeToGroup(Mode));
 
 	//m_INetBlockChanged = true;
+	//OnOptChanged();
 }
 
 void COptionsWindow::OnDelINetProg()
@@ -277,6 +279,7 @@ void COptionsWindow::OnDelINetProg()
 	delete pItem;
 
 	//m_INetBlockChanged = true;
+	//OnOptChanged();
 }
 
 bool COptionsWindow::FindEntryInSettingList(const QString& Name, const QString& Value)
@@ -560,6 +563,7 @@ void COptionsWindow::CloseNetFwEdit(QTreeWidgetItem* pItem, bool bSave)
 		pItem->setData(4, Qt::UserRole, pProt->currentData());
 
 		m_NetFwRulesChanged = true;
+		OnOptChanged();
 	}
 
 	for (int i = 0; i < 5; i++)
@@ -579,6 +583,7 @@ void COptionsWindow::OnAddNetFwRule()
 	ui.treeNetFw->addTopLevelItem(pItem);
 
 	m_NetFwRulesChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelNetFwRule()
@@ -589,8 +594,8 @@ void COptionsWindow::OnDelNetFwRule()
 
 	delete pItem;
 
-
 	m_NetFwRulesChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow__SetRowColor(QTreeWidgetItem* pItem, bool bMatch, bool bConflict = false, bool bBlock = false, bool bActive = false)

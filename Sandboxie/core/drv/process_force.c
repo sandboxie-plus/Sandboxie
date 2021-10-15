@@ -962,7 +962,7 @@ _FX void Process_CreateForceData(
             if (wcschr(buf, L'*')) {
 
                 folder->pat =
-                    Pattern_Create(box->box->expand_args->pool, buf, TRUE);
+                    Pattern_Create(box->box->expand_args->pool, buf, TRUE, 0);
 
                 Mem_Free(buf, buf_len);
 
@@ -1090,7 +1090,7 @@ _FX void Process_CreateForceData(
             if (wcschr(buf, L'*')) {
 
                 folder->pat =
-                    Pattern_Create(box->box->expand_args->pool, buf, TRUE);
+                    Pattern_Create(box->box->expand_args->pool, buf, TRUE, 0);
 
                 Mem_Free(buf, buf_len);
 

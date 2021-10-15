@@ -50,7 +50,7 @@ typedef struct _PATTERN PATTERN;
 // LIST_ELEM member (see list.h), so it can be inserted into a list.
 //
 
-PATTERN *Pattern_Create(POOL *pool, const WCHAR *string, BOOLEAN lower);
+PATTERN *Pattern_Create(POOL *pool, const WCHAR *string, BOOLEAN lower, ULONG level);
 
 //
 // Pattern_Free:  free the PATTERN object 'pattern'
@@ -63,6 +63,12 @@ void Pattern_Free(PATTERN *pat);
 //
 
 const WCHAR *Pattern_Source(PATTERN *pat);
+
+//
+// Pattern_Level:  returns the match level with the process.
+//
+
+ULONG Pattern_Level(PATTERN *pat);
 
 //
 // Pattern_Match:  returns TRUE if 'string' matches PATTERN object 'pattern'.

@@ -80,7 +80,7 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 _FX BOOLEAN Gui_InitConsole1(void)
 {
     // NoSbieCons BEGIN
-    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
 
         //
         // We need to set Gui_ConsoleHwnd in order for Gui_InitConsole2 to start up properly,
@@ -112,7 +112,7 @@ _FX BOOLEAN Gui_InitConsole1(void)
     // application which has used Gui_SetWindowsHookEx before creating
     // any windows (which would be needed to apply the hooks)
     //
-
+    
     Gui_ConsoleHwnd = GetConsoleWindow();
     if (! Gui_ConsoleHwnd) {
 

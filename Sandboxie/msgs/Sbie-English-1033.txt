@@ -3066,7 +3066,7 @@ Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
 .
 
 4300;txt;01
-Open additional RPC Port Bindings
+Open Additional RPC Port Bindings
 .
 
 #----------------------------------------------------------------------------

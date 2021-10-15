@@ -83,10 +83,10 @@ void DriverAssist::InjectLow(void *_msg)
     sbieLow.is_wow64 = msg->is_wow64;
     sbieLow.bHostInject = msg->bHostInject;
     // NoSysCallHooks BEGIN
-    sbieLow.bNoSysHooks = SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
+    sbieLow.bNoSysHooks = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
     // NoSysCallHooks END
     // NoSbieCons BEGIN
-    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
+    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
     // NoSbieCons END
 
 	errlvl = SbieDll_InjectLow(hProcess, sbieLow.init_flags, TRUE);
@@ -98,7 +98,7 @@ void DriverAssist::InjectLow(void *_msg)
     //
 
     // NoSbieDesk BEGIN
-    if (!SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
+    if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
     // NoSbieDesk END
     if (!msg->bHostInject)
     {

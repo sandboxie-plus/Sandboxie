@@ -883,13 +883,19 @@ _FX BOOL Proc_CreateProcessInternalW(
         lpApplicationName = TlsData->proc_image_path;
     }
 
+    // const wchar_t* imageName = L"DcomLaunch.exe";
+    // if ((lpApplicationName && wcsstr(lpApplicationName,imageName) != NULL) || (lpCommandLine && wcsstr(lpCommandLine,imageName) != NULL)) {
+    //    while (!IsDebuggerPresent())
+    //        Sleep(500);
+    //    __debugbreak();
+    //}
 
     //
     // create the new process
     //
 
     // OriginalToken BEGIN
-    if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     {
         extern BOOLEAN Scm_MsiServer_Systemless;
         if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless 

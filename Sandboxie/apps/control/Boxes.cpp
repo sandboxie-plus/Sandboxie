@@ -95,7 +95,7 @@ void CBoxes::ReloadBoxes()
             name[0] = L'\0';
         else {
             index = SbieApi_EnumBoxesEx(
-                            index, name, TRUE);
+                            index | CONF_GET_NO_TEMPLS, name, TRUE);
             if (index == -1)
                 break;
             LONG rc = SbieApi_IsBoxEnabled(name);

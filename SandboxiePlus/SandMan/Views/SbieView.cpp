@@ -126,6 +126,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsShares->setCheckable(true);
 	
+	m_pMenuDuplicate = m_pMenu->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_iMoveTo = m_pMenu->actions().count();
 	m_pMenuMoveTo = m_pMenu->addMenu(CSandMan::GetIcon("Group"), tr("Move Box/Group"));
@@ -354,6 +355,7 @@ void CSbieView::UpdateMenu()
 		UpdateRunMenu(pBox);
 
 	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
+	m_pMenuDuplicate->setEnabled(iSandBoxeCount == 1);
 	m_pMenuRename->setEnabled(iSandBoxeCount == 1);
 	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
 
@@ -872,6 +874,43 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			});
 			pSnapshotsWindow->show();
 		}
+	}
+	else if (Action == m_pMenuDuplicate)
+	{
+		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the duplicated Sandbox."), QLineEdit::Normal, tr("%1 Copy").arg(OldValue));
+		if (Value.isEmpty() || Value == OldValue)
+			return;
+		
+		QString Name = Value.replace(" ", "_");
+		SB_STATUS Status = theAPI->CreateBox(Name, false);
+
+		if (!Status.IsError())
+		{
+			CSandBoxPtr pBox = theAPI->GetBoxByName(Value);
+
+			QList<QPair<QString, QString>> Settings;
+			CSandBoxPtr pSrcBox = theAPI->GetBoxByName(SandBoxes.first()->GetName());
+			qint32 status = 0;
+			if (!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection(&status);
+			if (Settings.isEmpty())
+				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << SandBoxes.first()->GetName() << (quint32)status);
+			else
+			{
+				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
+				{
+					Status = theAPI->SbieIniSet(Name, I->first, I->second, CSbieAPI::eIniInsert, false);
+					if (Status.IsError())
+						break;
+				}
+			}
+
+			theAPI->CommitIniChanges();
+			theAPI->ReloadConfig();
+			theAPI->ReloadBoxes();
+		}
+
+		Results.append(Status);
 	}
 	else if (Action == m_pMenuRename)
 	{

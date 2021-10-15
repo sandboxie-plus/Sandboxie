@@ -151,6 +151,24 @@ _FX BOOLEAN Ipc_Init(void)
         }
     }
 
+    //
+    // register object filter callbacks on Vista SP1 and later
+    //
+
+    if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+
+        // Don't use experimental features by default
+        if (Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE)) {
+
+            if (!Obj_Load_Filter())
+                return FALSE;
+        }
+    }
+
+    //
+    // set up port request filter handlers
+    //
+
     if (! Syscall_Set1("ImpersonateClientOfPort", Ipc_ImpersonatePort))
         return FALSE;
 
@@ -358,6 +376,9 @@ _FX BOOLEAN Ipc_CreateBoxPath(PROCESS *proc)
 
 _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
 {
+#ifdef USE_MATCH_PATH_EX
+    static const WCHAR *_NormalPath = L"NormalIpcPath";
+#endif
     static const WCHAR *_OpenPath = L"OpenIpcPath";
     static const WCHAR *_ClosedPath = L"ClosedIpcPath";
     static const WCHAR *openpaths[] = {
@@ -550,9 +571,35 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"*\\BaseNamedObjects\\SM*:WilStaging_*", // 22449.1000 accesses this before sbiedll load
         NULL
     };
+#ifdef USE_MATCH_PATH_EX
+    //static const WCHAR *normalpaths[] = {
+    //    NULL
+    //};
+#endif
 
     ULONG i;
     BOOLEAN ok;
+    
+    //
+    // normal paths
+    //
+    
+#ifdef USE_MATCH_PATH_EX
+    ok = Process_GetPaths(proc, &proc->normal_ipc_paths, _NormalPath, FALSE);
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+        return FALSE;
+    }
+
+    //for (i = 0; normalpaths[i] && ok; ++i) {
+    //    ok = Process_AddPath(proc, &proc->normal_ipc_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+    //}
+    //
+    //if (! ok) {
+    //    Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+    //    return FALSE;
+    //}
+#endif
 
     //
     // open paths
@@ -856,7 +903,11 @@ _FX NTSTATUS Ipc_CheckGenericObject(
     if (! IsBoxedPath) {
 
         const WCHAR *pattern;
+#ifdef USE_MATCH_PATH_EX
+        ULONG mp_flags;
+#else
         BOOLEAN is_open, is_closed;
+#endif
 
         //
         // deny access in two cases:
@@ -864,25 +915,40 @@ _FX NTSTATUS Ipc_CheckGenericObject(
         // - if unsandboxed path does not match an open path
         //
 
+#ifdef USE_MATCH_PATH_EX
+        mp_flags = Process_MatchPathEx(proc, 
+            Name->Buffer, Name->Length / sizeof(WCHAR), L'i',
+            &proc->normal_ipc_paths, &proc->open_ipc_paths, &proc->closed_ipc_paths,
+            NULL, NULL, &pattern);
+#else
         pattern = Process_MatchPath(
             proc->pool,
             Name->Buffer, Name->Length / sizeof(WCHAR),
             &proc->open_ipc_paths, &proc->closed_ipc_paths,
             &is_open, &is_closed);
+#endif
 
         //
         // KnownDll objects:  prevent DELETE access
         //
 
+#ifdef USE_MATCH_PATH_EX
+        if (((mp_flags & TRUE_PATH_MASK) == TRUE_PATH_OPEN_FLAG) && pattern[0] == L'\\' && pattern[1] == L'K'
+                    && (wcsncmp(pattern, L"\\KnownDlls", 10) == 0)) { // L"\\KnownDlls\\*", L"\\KnownDlls32\\*",
+#else
         if (is_open && pattern[0] == L'\\' && pattern[1] == L'K'
                     && (wcsncmp(pattern, L"\\KnownDlls", 10) == 0)) { // L"\\KnownDlls\\*", L"\\KnownDlls32\\*",
+#endif
 
             if (GrantedAccess & (DELETE | SECTION_EXTEND_SIZE))
                 status = STATUS_ACCESS_DENIED;
         }
 
-
+#ifdef USE_MATCH_PATH_EX
+        else if (((mp_flags & TRUE_PATH_MASK) != TRUE_PATH_OPEN_FLAG) && ((mp_flags & COPY_PATH_MASK) == COPY_PATH_OPEN_FLAG))
+#else
         else if (!is_open && !is_closed)
+#endif
         {
             if (Ipc_Dynamic_Ports.pPortLock)
             {
@@ -896,7 +962,11 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                     {
                         // dynamic version of RPC ports, see also ipc_spl.c
                         // and RpcBindingFromStringBindingW in core/dll/rpcrt.c
+#ifdef USE_MATCH_PATH_EX
+                        mp_flags = TRUE_PATH_OPEN_FLAG;
+#else
                         is_open = TRUE;
+#endif
                         break;
                     }
 
@@ -908,7 +978,11 @@ _FX NTSTATUS Ipc_CheckGenericObject(
             }
         }
 
+#ifdef USE_MATCH_PATH_EX
+        if ((mp_flags & TRUE_PATH_MASK) == 0 || ((mp_flags & TRUE_PATH_MASK) != TRUE_PATH_OPEN_FLAG))
+#else
         if (is_closed || (! is_open))
+#endif
             status = STATUS_ACCESS_DENIED;
     }
 

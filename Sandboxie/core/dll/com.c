@@ -423,6 +423,14 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
         0x0358B920, 0x0AC7, 0x461F,
                         { 0x98, 0xF4, 0x58, 0xE3, 0x2C, 0xD8, 0x91, 0x48 } };
 
+    //
+    // open the null clsid to open all
+    //
+
+    static const GUID CLSID_Null = {
+        0x00000000, 0x0000, 0x0000,
+                        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } };
+
     if (clsctx & CLSCTX_LOCAL_SERVER) {
 
         ULONG index;
@@ -454,7 +462,7 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
 
         for (index = 0; index < Com_NumOpenClsids; ++index) {
             guid = &Com_OpenClsids[index];
-            if (memcmp(guid, rclsid, sizeof(GUID)) == 0)
+            if (memcmp(guid, rclsid, sizeof(GUID)) == 0 || memcmp(guid, &CLSID_Null, sizeof(GUID)) == 0)
                 return TRUE;
         }
     }
@@ -3500,10 +3508,10 @@ _FX HRESULT Com_RoGetActivationFactory(HSTRING activatableClassId, REFIID  iid, 
     const wchar_t* strClassId = __sys_WindowsGetStringRawBuffer(activatableClassId, NULL);
 
     if (Com_IsClosedRT(strClassId)) {
-        SbieApi_MonitorPut(MONITOR_COMCLASS | MONITOR_DENY, strClassId);
+        SbieApi_MonitorPut(MONITOR_RTCLASS | MONITOR_DENY, strClassId);
         return E_ACCESSDENIED;
     }
 
-    SbieApi_MonitorPut(MONITOR_COMCLASS, strClassId);
+    SbieApi_MonitorPut(MONITOR_RTCLASS, strClassId);
     return __sys_RoGetActivationFactory(activatableClassId, iid, factory);
 }

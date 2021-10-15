@@ -1,3 +1,74 @@
-# We'll let Git's auto-detection algorithm infer if a file is text. If it is,
-# enforce CRLF line endings regardless of OS or git configurations.
-* text=auto eol=crlf
+# AUTO-DETECT - Handle line endings automatically for files detected as text.
+# This will handle all files NOT defined below.
+* text=auto
+
+## SOURCE CODE
+*.bat    text eol=crlf
+*.cmd    text eol=crlf
+*.ini    text eol=crlf
+*.xml    text
+*.c      text
+*.h      text
+*.ts     text
+*.cpp    text
+*.rc     text
+
+## DOCUMENTATION
+*.md     text
+*.txt    text eol=crlf
+
+## CONFIGS
+.editorconfig  text
+.gitattributes text
+.gitconfig     text
+.gitignore     text
+*.yaml         text
+*.yml          text
+
+###############################################################################
+# Set the merge driver for project and solution files
+#
+# Merging from the command prompt will add diff markers to the files if there
+# are conflicts (Merging from VS is not affected by the settings below, in VS
+# the diff markers are never inserted). Diff markers may cause the following
+# file extensions to fail to load in VS. An alternative would be to treat
+# these files as binary and thus will always conflict and require user
+# intervention with every merge. To do so, just comment the entries below and
+# uncomment the group further below
+###############################################################################
+
+*.sln        text eol=crlf
+*.csproj     text eol=crlf
+*.vbproj     text eol=crlf
+*.vcxproj    text eol=crlf
+*.vcproj     text eol=crlf
+*.dbproj     text eol=crlf
+*.fsproj     text eol=crlf
+*.lsproj     text eol=crlf
+*.wixproj    text eol=crlf
+*.modelproj  text eol=crlf
+*.sqlproj    text eol=crlf
+*.wwaproj    text eol=crlf
+
+*.xproj      text eol=crlf
+*.props      text eol=crlf
+*.filters    text eol=crlf
+*.vcxitems   text eol=crlf
+
+#*.sln       merge=binary
+#*.csproj    merge=binary
+#*.vbproj    merge=binary
+#*.vcxproj   merge=binary
+#*.vcproj    merge=binary
+#*.dbproj    merge=binary
+#*.fsproj    merge=binary
+#*.lsproj    merge=binary
+#*.wixproj   merge=binary
+#*.modelproj merge=binary
+#*.sqlproj   merge=binary
+#*.wwaproj   merge=binary
+
+#*.xproj     merge=binary
+#*.props     merge=binary
+#*.filters   merge=binary
+#*.vcxitems  merge=binary

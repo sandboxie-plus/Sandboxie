@@ -17,7 +17,7 @@ public:
 
 	QRegExp GetRegExp() const;
 	bool GetHighLight() const	{ return m_pHighLight ? m_pHighLight->isChecked() : false; }
-	int GetColumn() const		{ return m_pColumn->currentData().toInt(); }
+	int GetColumn() const		{ return m_pColumn ? m_pColumn->currentData().toInt() : -1; }
 
 signals:
 	void				SetFilter(const QRegExp& Exp, bool bHighLight = false, int Column = -1);

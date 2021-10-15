@@ -11,7 +11,6 @@ CTraceModel::CTraceModel(QObject* parent)
 	m_Root = MkNode(QVariant());
 
 	m_LastCount = 0;
-	m_LastBoxPtr = NULL;
 }
 
 CTraceModel::~CTraceModel()
@@ -48,7 +47,7 @@ bool CTraceModel::TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pE
 	return Path.size() == Index;
 }*/
 
-QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, void* BoxPtr)
+QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int (*Filter)(const CTraceEntryPtr&, void*), void* params)
 {
 	QList<QVariant>	Added;
 	QMap<QList<QVariant>, QList<STreeNode*> > New;
@@ -57,7 +56,7 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, void
 	// Note: since this is a log and we ever always only add entries we save cpu time by always skipping the already know portion of the list
 
 	int i = 0;
-	if (EntryList.count() >= m_LastCount && m_LastCount > 0 && m_LastBoxPtr == BoxPtr)
+	if (EntryList.count() >= m_LastCount && m_LastCount > 0)
 	{
 		i = m_LastCount - 1;
 		if (m_LastID == EntryList.at(i)->GetUID())
@@ -68,13 +67,13 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, void
 		else
 			i = 0;
 	}
-	m_LastBoxPtr = BoxPtr;
 
 	for (; i < EntryList.count(); i++)
 	{
 		CTraceEntryPtr pEntry = EntryList.at(i);
 
-		if (BoxPtr && pEntry->GetBoxPtr() != BoxPtr)
+		int iFilter = Filter(pEntry, params);
+		if (!iFilter)
 			continue;
 
 		quint64 ID = pEntry->GetUID();
@@ -110,15 +109,11 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, void
 		bool State = false;
 		int Changed = 0;
 
-		// Note: icons are loaded asynchroniusly
-		/*if (m_bUseIcons && !pNode->Icon.isValid() && m_Columns.contains(eHandle))
-		{
-			QPixmap Icon = pNode->pEntry->GetFileIcon();
-			if (!Icon.isNull()) {
-				Changed = true; // set change for first column
-				pNode->Icon = Icon;
-			}
-		}*/
+		if (pNode->bHighLight != (iFilter == 2)) {
+			pNode->bHighLight = (iFilter == 2);
+			pNode->Color = pNode->bHighLight ? Qt::yellow : QColor();
+			Changed = -1;
+		}
 
 		for (int section = 0; section < columnCount(); section++)
 		{

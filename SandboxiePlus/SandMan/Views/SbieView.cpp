@@ -24,6 +24,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMainLayout->setMargin(0);
 	this->setLayout(m_pMainLayout);
 
+	m_UserConfigChanged = false;
+
 	m_pSbieModel = new CSbieModel();
 	m_pSbieModel->SetTree(true);
 	m_pSbieModel->SetUseIcons(true);
@@ -56,6 +58,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	connect(m_pSbieTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint &)));
 	connect(m_pSbieTree, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnDoubleClicked(const QModelIndex&)));
 	connect(m_pSbieTree->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), SLOT(ProcessSelection(QItemSelection, QItemSelection)));
+	connect(m_pSbieTree, SIGNAL(expanded(const QModelIndex &)), this, SLOT(OnExpanded(const QModelIndex &)));
+	connect(m_pSbieTree, SIGNAL(collapsed(const QModelIndex &)), this, SLOT(OnCollapsed(const QModelIndex &)));
 
 	//connect(theGUI, SIGNAL(ReloadPanels()), m_pSbieModel, SLOT(Clear()));
 
@@ -220,7 +224,22 @@ void CSbieView::Refresh()
 	{
 		QTimer::singleShot(100, this, [this, Added]() {
 			foreach(const QVariant ID, Added) {
-				m_pSbieTree->expand(m_pSortProxy->mapFromSource(m_pSbieModel->FindIndex(ID)));
+
+				QModelIndex ModelIndex = m_pSbieModel->FindIndex(ID);
+
+				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess)
+					m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+				else 
+				{
+					QString Name;
+					if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+						Name = m_pSbieModel->GetID(ModelIndex).toString();
+					else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
+						Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
+
+					if (!m_Collapsed.contains(Name))
+						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+				}
 			}
 		});
 	}
@@ -351,6 +370,10 @@ void CSbieView::UpdateMenu()
 	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 	m_pMenuSnapshots->setEnabled(iSandBoxeCount == 1);
 
+	m_pMenuMoveUp->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	m_pMenuMoveDown->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	//m_pMenuMoveBy->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+
 	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
 		MenuActions[i]->setVisible(iProcessCount != 0 && iSandBoxeCount == 0);
 	
@@ -433,17 +456,6 @@ int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m
 			break;
 	}
 	return Index;
-}
-
-void CSbieView::ReloadGroups()
-{
-	m_Groups.clear();
-
-	QString Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
-
-	CSbieView__ParseGroup(Grouping, m_Groups);
-
-	UpdateGroupMenu();
 }
 
 void CSbieView::UpdateGroupMenu()
@@ -655,8 +667,7 @@ void CSbieView::OnGroupAction()
 		m_pSbieModel->Clear(); //todo improve that
 	}
 
-	QString Grouping = CSbieView__SerializeGroup(m_Groups);
-	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
+	m_UserConfigChanged = true;
 	UpdateGroupMenu();
 }
 
@@ -689,8 +700,8 @@ QString CSbieView::AddNewGroup()
 
 	m_Groups[Parent].append(Name);
 
-	QString Grouping = CSbieView__SerializeGroup(m_Groups);
-	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
+	
+	m_UserConfigChanged = true;
 	UpdateGroupMenu();
 
 	return Name;
@@ -1260,4 +1271,49 @@ void CSbieView::ShowOptions(const QString& Name)
 	QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
 
 	OnDoubleClicked(ModelIndex);
+}
+
+void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
+{
+	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
+
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess)
+		return;
+
+	QString Name;
+	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eGroup)
+		Name = m_pSbieModel->GetID(ModelIndex).toString();
+	else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
+		Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
+
+	m_UserConfigChanged = true;
+	if(bExpand)
+		m_Collapsed.remove(Name);
+	else
+		m_Collapsed.insert(Name);
+}
+
+void CSbieView::ReloadUserConfig()
+{
+	m_Groups.clear();
+
+	QString Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
+
+	CSbieView__ParseGroup(Grouping, m_Groups);
+
+	UpdateGroupMenu();
+
+	m_Collapsed = SplitStr(theAPI->GetUserSettings()->GetText("BoxCollapsedView"), ",").toSet();
+}
+
+void CSbieView::SaveUserConfig()
+{
+	if (!m_UserConfigChanged)
+		return;
+	m_UserConfigChanged = false;
+
+	QString Grouping = CSbieView__SerializeGroup(m_Groups);
+	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
+
+	theAPI->GetUserSettings()->SetText("BoxCollapsedView", m_Collapsed.toList().join(","));
 }

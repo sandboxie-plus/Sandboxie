@@ -534,6 +534,9 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
+	if(theAPI->IsConnected())
+		m_pBoxView->SaveUserConfig();
+
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
 		int PortableStop = theConf->GetInt("Options/PortableStop", -1);
@@ -1615,7 +1618,7 @@ void CSandMan::OnReloadIni()
 
 void CSandMan::OnIniReloaded()
 {
-	m_pBoxView->ReloadGroups();
+	m_pBoxView->ReloadUserConfig();
 	m_pPopUpWindow->ReloadHiddenMessages();
 }
 

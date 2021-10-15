@@ -17,6 +17,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added uninstall cleanup of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
 - added set language for Sandman for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
 - added EventLog messages with SbieMsg.dll for the Plus installer (by mpheath)
+- group expansion state is now saved
+- added additional filters to the trace tab
 
 ### Changed
 - reworked and extended RPC logging
@@ -28,6 +30,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed inability to delete read-only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
 - fixed wrong recovery target in Plus UI [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
 - fixed SBIE2101 issue introduced with 0.9.7a [#1279](https://github.com/sandboxie-plus/Sandboxie/issues/1279)
+- fixed inability to delete read only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
+- fixed wrong recovery target in plus ui [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
 - fixed sorting in the box picker window [#1269](https://github.com/sandboxie-plus/Sandboxie/issues/1269)
 - fixed tray refresh issue [#1250](https://github.com/sandboxie-plus/Sandboxie/issues/1250)
 - fixed tray activity display [#1221](https://github.com/sandboxie-plus/Sandboxie/issues/1221)
@@ -38,6 +42,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with git.exe from MinGW freezing [#1238](https://github.com/sandboxie-plus/Sandboxie/issues/1238)
 - fixed issue with search highlighting when using in dark mode
 
+### Removed
+- removed the ability to sort the trace log as it took to much CPU
 
 
 ## [0.9.7e / 5.52.5] - 2021-10-09

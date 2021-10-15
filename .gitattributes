@@ -1,8 +1,9 @@
-# AUTO-DETECT - Handle line endings automatically for files detected as text.
+# AUTO-DETECT
+# Handle line endings automatically for files detected as text.
 # This will handle all files NOT defined below.
 * text=auto
 
-## SOURCE CODE
+# SOURCE CODE
 *.bat    text eol=crlf
 *.cmd    text eol=crlf
 *.ini    text eol=crlf
@@ -13,11 +14,11 @@
 *.cpp    text
 *.rc     text
 
-## DOCUMENTATION
+# DOCUMENTATION
 *.md     text
 *.txt    text eol=crlf
 
-## CONFIGS
+# CONFIGS
 .editorconfig  text
 .gitattributes text
 .gitconfig     text
@@ -25,7 +26,6 @@
 *.yaml         text
 *.yml          text
 
-###############################################################################
 # Set the merge driver for project and solution files
 #
 # Merging from the command prompt will add diff markers to the files if there
@@ -35,7 +35,6 @@
 # these files as binary and thus will always conflict and require user
 # intervention with every merge. To do so, just comment the entries below and
 # uncomment the group further below
-###############################################################################
 
 *.sln        text eol=crlf
 *.csproj     text eol=crlf

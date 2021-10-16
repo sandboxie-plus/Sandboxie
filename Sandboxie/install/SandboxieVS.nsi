@@ -672,12 +672,12 @@ Function SkipLicensePage
 ; Skip license page if not Install mode
 ;
 
-; Uncomment the below code to skip licence dialog for updates
 ;    StrCmp $InstallType "Install" SkipLicensePage_Done
-;    
-;    Abort
-;    
-;SkipLicensePage_Done:
+    StrCmp $InstallType "Remove" 0 SkipLicensePage_Done
+    
+    Abort
+    
+SkipLicensePage_Done:
 
 FunctionEnd
 

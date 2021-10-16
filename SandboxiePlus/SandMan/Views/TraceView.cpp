@@ -103,9 +103,15 @@ CTraceView::CTraceView(QWidget* parent) : CPanelWidget<QTreeViewEx>(parent)
 	connect(m_pTraceStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceStatus);
 
-	m_pAllBoxes = new QCheckBox(tr("Show All Boxes"));
-	connect(m_pAllBoxes, SIGNAL(stateChanged(int)), this, SLOT(OnSetFilter()));
-	m_pTraceToolBar->addWidget(m_pAllBoxes);
+	m_pAllBoxes = m_pTraceToolBar->addAction(CSandMan::GetIcon("All"), tr("Show All Boxes"), this, SLOT(OnSetFilter()));
+	m_pAllBoxes->setCheckable(true);
+	m_pAllBoxes->setChecked(theConf->GetBool("Options/UseLogTree"));
+
+	m_pTraceToolBar->addSeparator();
+
+	m_pSaveToFile = m_pTraceToolBar->addAction(CSandMan::GetIcon("Save"), tr("Save to file"), this, SLOT(SaveToFile()));
+	m_pSaveToFile->setCheckable(true);
+	m_pSaveToFile->setChecked(theConf->GetBool("Options/UseLogTree"));
 
 	m_pMainLayout->setSpacing(0);
 
@@ -325,3 +331,37 @@ void CTraceView::OnSetFilter()
 }
 
 
+void CTraceView::SaveToFile()
+{
+	QString Path = QFileDialog::getSaveFileName(this, tr("Save trace log to file"), "", QString("Log files (*.log)")).replace("/", "\\");
+
+	QFile File(Path);
+	if (!File.open(QFile::WriteOnly)) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to open log file for writing"));
+		return;
+	}
+
+	QVector<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
+	for (int i = 0; i < ResourceLog.count(); i++)
+	{
+		CTraceEntryPtr pEntry = ResourceLog.at(i);
+
+		//int iFilter = CTraceView__Filter(pEntry, this);
+		//if (!iFilter)
+		//	continue;
+
+		QStringList Line;
+		Line.append(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
+		QString Name = pEntry->GetProcessName();
+		Line.append(Name.isEmpty() ? tr("Unknown") : Name);
+		Line.append(QString("%1").arg(pEntry->GetProcessId()));
+		Line.append(QString("%1").arg(pEntry->GetThreadId()));
+		Line.append(pEntry->GetTypeStr());
+		Line.append(pEntry->GetStautsStr());
+		Line.append(pEntry->GetMessage());
+
+		File.write(Line.join("\t").toLatin1() + "\n");
+	}
+
+	File.close();
+}

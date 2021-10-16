@@ -1195,7 +1195,7 @@ QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, qui
 
 	WCHAR out_buffer[CONF_LINE_LEN] = { 0 };
 
-	__declspec(align(8)) UNICODE_STRING64 Output = { 0, CONF_LINE_LEN - 4 , (ULONG64)out_buffer };
+	__declspec(align(8)) UNICODE_STRING64 Output = { 0, sizeof(out_buffer) - 4 , (ULONG64)out_buffer };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 
 	memset(parms, 0, sizeof(parms));

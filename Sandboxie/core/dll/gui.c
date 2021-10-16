@@ -1311,7 +1311,7 @@ _FX HWND Gui_CreateWindowExW(
             TlsData->gui_hooks_installed = TRUE;
         }
 
-        Taskbar_SetProcessAppUserModelId();
+        //Taskbar_SetProcessAppUserModelId();
     }
 
     hwndResult = __sys_CreateWindowExW(
@@ -1419,7 +1419,7 @@ _FX HWND Gui_CreateWindowExA(
             TlsData->gui_hooks_installed = TRUE;
         }
 
-        Taskbar_SetProcessAppUserModelId();
+        //Taskbar_SetProcessAppUserModelId();
     }
 
     hwndResult = __sys_CreateWindowExA(

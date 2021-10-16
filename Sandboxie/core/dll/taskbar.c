@@ -499,49 +499,50 @@ _FX WCHAR *Taskbar_CreateAppUserModelId(const WCHAR *AppId)
 // Taskbar_SetProcessAppUserModelId
 //---------------------------------------------------------------------------
 
+
 //extern ULONG Dll_Windows;
-_FX void Taskbar_SetProcessAppUserModelId(void)
-{
-    static BOOLEAN _done = FALSE;
-
-    P_SetCurrentProcessExplicitAppUserModelID
-        SetCurrentProcessExplicitAppUserModelID;
-
-    if ((Dll_OsBuild < 7600) || (! Dll_InitComplete))
-        return;
-
-    if (Taskbar_SavedAppUserModelId || _done)
-        return;
-
-    //
-    // make sure the necessary function from shell32 is available
-    //
-//  if(Dll_Windows < 10) {
-    SetCurrentProcessExplicitAppUserModelID =
-        (P_SetCurrentProcessExplicitAppUserModelID) Ldr_GetProcAddrNew(DllName_shell32, L"SetCurrentProcessExplicitAppUserModelID","SetCurrentProcessExplicitAppUserModelID");
-
-    //  }
-    /*
-    else {
-
-    SetCurrentProcessExplicitAppUserModelID = (P_SetCurrentProcessExplicitAppUserModelID)
-        GetProcAddress(LoadLibraryW(DllName_shell32),"SetCurrentProcessExplicitAppUserModelID");
-    }
-    */
-    if (! SetCurrentProcessExplicitAppUserModelID)
-        return;
-
-    //
-    // override AppUserModelId
-    //
-
-    _done = TRUE;
-
-    if (Taskbar_ShouldOverrideAppUserModelId()) {
-
-        SetCurrentProcessExplicitAppUserModelID(Dll_ImageName);
-    }
-}
+//_FX void Taskbar_SetProcessAppUserModelId(void)
+//{
+//    static BOOLEAN _done = FALSE;
+//
+//    P_SetCurrentProcessExplicitAppUserModelID
+//        SetCurrentProcessExplicitAppUserModelID;
+//
+//    if ((Dll_OsBuild < 7600) || (! Dll_InitComplete))
+//        return;
+//
+//    if (Taskbar_SavedAppUserModelId || _done)
+//        return;
+//
+//    //
+//    // make sure the necessary function from shell32 is available
+//    //
+////  if(Dll_Windows < 10) {
+//    SetCurrentProcessExplicitAppUserModelID =
+//        (P_SetCurrentProcessExplicitAppUserModelID) Ldr_GetProcAddrNew(DllName_shell32, L"SetCurrentProcessExplicitAppUserModelID","SetCurrentProcessExplicitAppUserModelID");
+//
+//    //  }
+//    /*
+//    else {
+//
+//    SetCurrentProcessExplicitAppUserModelID = (P_SetCurrentProcessExplicitAppUserModelID)
+//        GetProcAddress(LoadLibraryW(DllName_shell32),"SetCurrentProcessExplicitAppUserModelID");
+//    }
+//    */
+//    if (! SetCurrentProcessExplicitAppUserModelID)
+//        return;
+//
+//    //
+//    // override AppUserModelId
+//    //
+//
+//    _done = TRUE;
+//
+//    if (Taskbar_ShouldOverrideAppUserModelId()) {
+//
+//        SetCurrentProcessExplicitAppUserModelID(Dll_ImageName);
+//    }
+//}
 
 
 //---------------------------------------------------------------------------
@@ -590,9 +591,15 @@ _FX void Taskbar_SetWindowAppUserModelId(HWND hwnd)
     // set explicit AppUserModelID for the window
     //
 
+    // Note: without the right value we may end up with multiple window groups 
+    //          so don't do anythign if we dont have Taskbar_SavedAppUserModelId
+    //          see also disabled Taskbar_SetProcessAppUserModelId
+    if (!Taskbar_SavedAppUserModelId)
+        return;
+
     AppId = Taskbar_SavedAppUserModelId;
-    if (! AppId)
-        AppId = Dll_ImageName;
+    //if (! AppId)
+    //    AppId = Dll_ImageName;
 
     v.vt = VT_BSTR;
     v.bstrVal = Taskbar_AllocBSTR(AppId);

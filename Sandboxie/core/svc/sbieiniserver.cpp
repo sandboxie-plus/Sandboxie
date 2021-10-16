@@ -830,21 +830,8 @@ ULONG SbieIniServer::CacheConfig()
 
     if (hFile == INVALID_HANDLE_VALUE) {
         DWORD err = GetLastError();
-        if (err == ERROR_FILE_NOT_FOUND) {
-
-            m_pConfigIni = new SConfigIni;
-            m_pConfigIni->Encoding = 0;
-
-            // set a ini header with a descriptive comment
-            m_pConfigIni->Sections.push_back(SIniSection{ L"" });
-            m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
-            m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie-Plus configuration file" });
-            m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
-
-            m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });
-
+        if (err == ERROR_FILE_NOT_FOUND) 
             status = STATUS_SUCCESS; // the file does not exist that's ok
-        }
         else
             SbieApi_LogEx(m_session_id, 2322, L"[23 / %d]", err);
         goto finish;
@@ -855,7 +842,7 @@ ULONG SbieIniServer::CacheConfig()
     //
 
     LARGE_INTEGER fileSize;
-    if (!GetFileSizeEx(hFile, &fileSize) || fileSize.QuadPart >= CONF_LINE_LEN * CONF_MAX_LINES) {
+    if (!GetFileSizeEx(hFile, &fileSize) || fileSize.QuadPart >= CONF_LINE_LEN * 2 * CONF_MAX_LINES) {
         status = STATUS_INSUFFICIENT_RESOURCES;
         SbieApi_LogEx(m_session_id, 2322, L"[24 / %d]", status);
         goto finish;
@@ -939,6 +926,20 @@ finish:
     LockConf(IniPath);
 
     HeapFree(GetProcessHeap(), 0, IniPath);
+
+    if (NT_SUCCESS(status) && m_pConfigIni == NULL) {
+
+        m_pConfigIni = new SConfigIni;
+        m_pConfigIni->Encoding = 0;
+
+        // set a ini header with a descriptive comment
+        m_pConfigIni->Sections.push_back(SIniSection{ L"" });
+        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
+        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie-Plus configuration file" });
+        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
+
+        m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });
+    }
 
     return status;
 }

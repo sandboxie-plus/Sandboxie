@@ -65,6 +65,7 @@ FORMS += ./Forms/NewBoxWindow.ui \
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \
     sandman_es.ts \
+    sandman_fr.ts \
     sandman_it.ts \
     sandman_nl.ts \
     sandman_pl.ts \

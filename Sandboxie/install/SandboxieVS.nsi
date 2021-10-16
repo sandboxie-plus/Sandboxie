@@ -672,11 +672,12 @@ Function SkipLicensePage
 ; Skip license page if not Install mode
 ;
 
-    StrCmp $InstallType "Install" SkipLicensePage_Done
-    
-    Abort
-    
-SkipLicensePage_Done:
+; Uncomment the below code to skip licence dialog for updates
+;    StrCmp $InstallType "Install" SkipLicensePage_Done
+;    
+;    Abort
+;    
+;SkipLicensePage_Done:
 
 FunctionEnd
 
@@ -1009,6 +1010,7 @@ WriteLoop:
     File /oname=${SBIEDLL_DLL} "${BIN_ROOT}\${SBIEDLL_DLL}"
 
     File /oname=${SBIESVC_EXE} "${BIN_ROOT}\SbieSvc.exe"
+    File /oname=${SBIESVC_EXE}.sig "${BIN_ROOT}\SbieSvc.exe.sig"
 
 !if "${_BUILDARCH}" == "x64"
 
@@ -1039,6 +1041,7 @@ WriteLoop:
     File /oname=${START_EXE} "${BIN_ROOT}\Start.exe"
     
     File /oname=${SBIECTRL_EXE} "${BIN_ROOT}\SbieCtrl.exe"
+    File /oname=${SBIECTRL_EXE}.sig "${BIN_ROOT}\SbieCtrl.exe.sig"
   
     File "..\install\Templates.ini"
 
@@ -1118,6 +1121,7 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SBIEDLL_DLL}"
     
     Delete "$INSTDIR\${SBIESVC_EXE}"
+    Delete "$INSTDIR\${SBIESVC_EXE}.sig"
 
 !if "${_BUILDARCH}" == "x64"    
     
@@ -1136,6 +1140,8 @@ Function DeleteProgramFiles
 ;    Delete "$INSTDIR\${SBIEDRV_SYSX}"
 
     Delete "$INSTDIR\KmdUtil.exe"
+    
+    Delete "$INSTDIR\SboxHostDll.dll"
 
     Delete "$INSTDIR\boxHostDll.dll"
 
@@ -1149,6 +1155,7 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${START_EXE}"
 
     Delete "$INSTDIR\${SBIECTRL_EXE}"
+    Delete "$INSTDIR\${SBIECTRL_EXE}.sig"
     
     Delete "$INSTDIR\Templates.ini"
     

@@ -7,6 +7,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.9.8b / 5.53.1] - 2021-10-??
+
+### Added
+- added ability to save trace log to file
+
+### Fixed
+- fixed template sections not showing in editor [#1287](https://github.com/sandboxie-plus/Sandboxie/issues/1287)
+- fixed issue with app ID resulting in some apps showing two button groups in the taskbar [#1101](https://github.com/sandboxie-plus/Sandboxie/issues/1101)
+- fixed issue with max ini value length in plus UI [#1293](https://github.com/sandboxie-plus/Sandboxie/issues/1293)
+- fixed issue handling an empty sandboxie.ini that got introduced recently [#1292](https://github.com/sandboxie-plus/Sandboxie/issues/1292)
+
+
+
 
 ## [0.9.8 / 5.53.0] - 2021-10-15
 

@@ -12,9 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added 
 - added debug switch to disable Sbie console redirection "NoSandboxieConsole=y" 
--- note that this was previously part of "NoSandboxieDesktop=y"
+-- Note: this was previously part of "NoSandboxieDesktop=y"
 - added Sbie+ version to the log [#1277](https://github.com/sandboxie-plus/Sandboxie/issues/1277)
-- added uninstall cleanup of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
+- added uninstall clean-up of extra files for the Plus installer (by mpheath) [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
 - added set language for Sandman for the Plus installer (by mpheath) [#1241](https://github.com/sandboxie-plus/Sandboxie/issues/1241)
 - added EventLog messages with SbieMsg.dll for the Plus installer (by mpheath)
 - group expansion state is now saved
@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Microsoft Edge complaining about "FakeAdminRights=y" [#1271](https://github.com/sandboxie-plus/Sandboxie/issues/1271)
 - fixed issue with using local template in the global section [#1212](https://github.com/sandboxie-plus/Sandboxie/issues/1212)
 - fixed issue with git.exe from MinGW freezing [#1238](https://github.com/sandboxie-plus/Sandboxie/issues/1238)
-- fixed issue with search highlighting when using in dark mode
+- fixed issue with search highlighting in dark mode
 
 ### Removed
 - removed the ability to sort the trace log as it took too much CPU
@@ -47,14 +47,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.7e / 5.52.5] - 2021-10-09
 
 ### Changed
-- reworked the settings handling once again, now the driver maintains the order when enumerating,
--- but for good performance there is a Hash Map held in parallel for quick exact lookups
+- reworked the settings handling once again, now the driver maintains the order when enumerating, but for good performance there is a Hash Map held in parallel for quick exact lookups
 
 
 ## [0.9.7d / 5.52.4] - 2021-10-06
 
 ### Fixed
-- fixed yet another ini issue with the Sbiectrl
+- fixed yet another ini issue with the SbieCtrl
 
 
 ## [0.9.7c / 5.52.3] - 2021-10-05
@@ -66,7 +65,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.7b / 5.52.2] - 2021-10-04
 
 ### Fixed
-- fixed issue about loading not Unicode Sandboxie.ini introduced with the previous build
+- fixed issue about loading a non-Unicode Sandboxie.ini that was introduced in the previous build
 
 
 
@@ -462,7 +461,7 @@ Fixed issue with Windows 7
 - added localization support for RPC templates (by isaak654) [#736](https://github.com/sandboxie-plus/Sandboxie/issues/736)
 
 ### Changed
-- portable cleanup message now has yes/no/cancel options [#874](https://github.com/sandboxie-plus/Sandboxie/issues/874)
+- portable clean-up message now has yes/no/cancel options [#874](https://github.com/sandboxie-plus/Sandboxie/issues/874)
 - consolidated Proc_CreateProcessInternalW and Proc_CreateProcessInternalW_RS5 to remove duplicate code
 - the ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant, will no longer be emulated by default [#858](https://github.com/sandboxie-plus/Sandboxie/issues/858)
 -- use 'ApplyElevateCreateProcessFix=y' or 'ApplyElevateCreateProcessFix=program.exe,y' to enable it
@@ -1242,7 +1241,7 @@ Fixed issue with Windows 7
 - IniWatcher, no more clicking reload, the ini is now reloaded automatically every time it changes
 - added Maintenance menu to the Sandbox menu, allowing to install/uninstall and start/stop Sandboxie driver, service
 - SandMan.exe now is packed with Sbie files and when no Sbie is installed acts as a portable installation
-- added option to clean up logs
+- added option to clean-up logs
 
 ### Changed
 - Sbie driver now first checks the home path for the Sbie ini before checking SystemRoot

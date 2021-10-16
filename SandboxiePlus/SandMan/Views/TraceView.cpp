@@ -332,6 +332,8 @@ void CTraceView::OnSetFilter()
 void CTraceView::SaveToFile()
 {
 	QString Path = QFileDialog::getSaveFileName(this, tr("Save trace log to file"), "", QString("Log files (*.log)")).replace("/", "\\");
+	if (Path.isEmpty())
+		return;
 
 	QFile File(Path);
 	if (!File.open(QFile::WriteOnly)) {

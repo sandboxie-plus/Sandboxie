@@ -10,13 +10,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.8b / 5.53.1] - 2021-10-??
 
 ### Added
-- added ability to save trace log to file
+- added ability to save trace log to file on Plus UI
+- added French language on Plus UI (by clexanis) [#1155](https://github.com/sandboxie-plus/Sandboxie/issues/1155)
+
+### Changed
+- Plus installer will autostart SandMan.exe after install to fix a taskbar icon issue [#3040211](https://www.wilderssecurity.com/threads/sandboxie-plus-0-9-7-test-build.440906/page-4#post-3040211)
+- Classic installer will show the license agreement when updating [#1187](https://github.com/sandboxie-plus/Sandboxie/issues/1187)
 
 ### Fixed
 - fixed template sections not showing in editor [#1287](https://github.com/sandboxie-plus/Sandboxie/issues/1287)
 - fixed issue with app ID resulting in some apps showing two button groups in the taskbar [#1101](https://github.com/sandboxie-plus/Sandboxie/issues/1101)
-- fixed issue with max ini value length in plus UI [#1293](https://github.com/sandboxie-plus/Sandboxie/issues/1293)
-- fixed issue handling an empty sandboxie.ini that got introduced recently [#1292](https://github.com/sandboxie-plus/Sandboxie/issues/1292)
+- fixed issue with maximum ini value length on Plus UI [#1293](https://github.com/sandboxie-plus/Sandboxie/issues/1293)
+- fixed issue handling an empty Sandboxie.ini that got introduced recently [#1292](https://github.com/sandboxie-plus/Sandboxie/issues/1292)
+- fixed issue with "SpecialImages" template (by Coverlin) [#1288](https://github.com/sandboxie-plus/Sandboxie/issues/1288) [#1289](https://github.com/sandboxie-plus/Sandboxie/issues/1289)
 
 
 
@@ -32,6 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added EventLog messages with SbieMsg.dll for the Plus installer (by mpheath)
 - group expansion state is now saved
 - added additional filters to the trace tab
+- added a new section [DefaultTemplates] in Templates.ini which contains mandatory templates that are always applied [0c9ecb0](https://github.com/sandboxie-plus/Sandboxie/commit/0c9ecb084286821c0db7436c41ef99e3b9daca76#diff-965721e9c3f2350b16f4acb47d3fb75654976f0dbb4da3c507d0eaff16a4f5f2)
 
 ### Changed
 - reworked and extended RPC logging

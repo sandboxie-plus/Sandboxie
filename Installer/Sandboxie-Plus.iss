@@ -188,6 +188,7 @@ begin
     'chinesesimplified': Result := 'zh-CN';
     'chinesetraditional': Result := 'zh-TW';
     'dutch': Result := 'nl';
+    'french': Result := 'fr';
     'german': Result := 'de';
     'italian': Result := 'it';
     'polish': Result := 'pl';

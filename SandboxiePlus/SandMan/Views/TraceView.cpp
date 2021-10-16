@@ -110,8 +110,6 @@ CTraceView::CTraceView(QWidget* parent) : CPanelWidget<QTreeViewEx>(parent)
 	m_pTraceToolBar->addSeparator();
 
 	m_pSaveToFile = m_pTraceToolBar->addAction(CSandMan::GetIcon("Save"), tr("Save to file"), this, SLOT(SaveToFile()));
-	m_pSaveToFile->setCheckable(true);
-	m_pSaveToFile->setChecked(theConf->GetBool("Options/UseLogTree"));
 
 	m_pMainLayout->setSpacing(0);
 

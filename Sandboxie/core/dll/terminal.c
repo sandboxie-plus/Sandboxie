@@ -217,6 +217,7 @@ static BOOL Terminal_WTSUnRegisterSessionNotificationEx(
 // Variables
 //---------------------------------------------------------------------------
 
+static P_WTSQueryUserToken      __sys_WTSQueryUserToken = 0;
 
 static P_WinStationFreeMemory   __sys_WinStationFreeMemory      = 0;
 static P_WTSFreeMemory          __sys_WTSFreeMemory             = 0;
@@ -231,6 +232,12 @@ extern const WCHAR *Ipc_SandboxieRpcSs;
 
 _FX BOOLEAN Terminal_DontHook(void)
 {
+    //
+    // In in app mode we have a full token and this wil be successfull, hence no need for a hook
+    //
+    
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) 
+        return TRUE;
 
     //
     // On win 10 this endpoint does not exist, so hook always
@@ -763,6 +770,48 @@ _FX BOOLEAN Terminal_Init_WinSta(HMODULE module)
 
 _FX BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken)
 {
+    if (Dll_SbieTrace) {
+        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, L"WTSQueryUserToken", FALSE);
+    }
+
+    // WTSQueryUserToken needs SE_TCB_NAME privilege and some IPC paths
+    //OpenIpcPath=\RPC Control\LSMApi
+    //OpenIpcPath=\BaseNamedObjects\TermSrvReadyEvent
+    //if (__sys_WTSQueryUserToken(SessionId, pToken))
+    //    return TRUE;
+
+#if 1
+
+    GET_USER_TOKEN_REQ *req;
+    GET_USER_TOKEN_RPL *rpl;
+    ULONG req_len;
+    ULONG error;
+
+    req_len = sizeof(GET_USER_TOKEN_REQ);
+
+    req = (GET_USER_TOKEN_REQ *)Dll_AllocTemp(req_len);
+    req->h.length = req_len;
+    req->h.msgid = MSGID_TERMINAL_GET_USER_TOKEN;
+
+    rpl = (GET_USER_TOKEN_RPL *)SbieDll_CallServer((MSG_HEADER *)req);
+    Dll_Free(req);
+
+    if (! rpl)
+        error = RPC_S_SERVER_UNAVAILABLE;
+    else
+        error = rpl->h.status;
+
+    if (error == 0) {
+
+        *pToken = rpl->hToken;
+    }
+
+    if (rpl)
+        Dll_Free(rpl);
+    SetLastError(error);
+    return (error == 0 ? TRUE : FALSE);
+
+#else
     ULONG *pids;
     ULONG i, err;
 
@@ -803,6 +852,8 @@ _FX BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken)
     Dll_Free(pids);
     SetLastError(err);
     return (err ? FALSE : TRUE);
+
+#endif
 }
 
 
@@ -1155,7 +1206,6 @@ _FX BOOLEAN Terminal_Init_WtsApi(HMODULE module)
     P_WTSRegisterSessionNotificationEx WTSRegisterSessionNotificationEx;
     P_WTSUnRegisterSessionNotification WTSUnRegisterSessionNotification;
     P_WTSUnRegisterSessionNotificationEx WTSUnRegisterSessionNotificationEx;
-    ULONG_PTR __sys_WTSQueryUserToken = 0;
     ULONG_PTR __sys_WTSEnumerateSessionsW = 0;
     ULONG_PTR __sys_WTSEnumerateProcessesW = 0;
     ULONG_PTR __sys_WTSRegisterSessionNotification = 0;

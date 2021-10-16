@@ -270,6 +270,7 @@ const wchar_t* Trace_SbieSvcFunc2Str(ULONG func)
         case MSGID_TERMINAL_GET_NAME:           return L"MSGID_TERMINAL_GET_NAME";
         case MSGID_TERMINAL_GET_PROPERTY:       return L"MSGID_TERMINAL_GET_PROPERTY";
         case MSGID_TERMINAL_DISCONNECT:         return L"MSGID_TERMINAL_DISCONNECT";
+        case MSGID_TERMINAL_GET_USER_TOKEN:     return L"MSGID_TERMINAL_GET_USER_TOKEN";
 
         case MSGID_NAMED_PIPE_OPEN:             return L"MSGID_NAMED_PIPE_OPEN";
         case MSGID_NAMED_PIPE_CLOSE:            return L"MSGID_NAMED_PIPE_CLOSE";

@@ -66,6 +66,11 @@ public:
 				{
 				}*/
 			}
+			else if (msg->message == WM_DWMCOLORIZATIONCOLORCHANGED)
+			{
+				if (theGUI && theConf->GetInt("Options/UseDarkTheme", 2) == 2)
+					theGUI->UpdateTheme();
+			}
 		}
 		return false;
 	}
@@ -91,6 +96,7 @@ CSandMan::CSandMan(QWidget *parent)
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
 
+	m_ThemeUpdatePending = false;
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
 
@@ -201,7 +207,7 @@ CSandMan::CSandMan(QWidget *parent)
 	pShowHide->setFont(f);
 	m_pTrayMenu->addSeparator();
 
-	QWidgetAction* pTrayList = new QWidgetAction(m_pTrayMenu);
+	m_pTrayList = new QWidgetAction(m_pTrayMenu);
 
 	QWidget* pWidget = new CActionWidget();
     QHBoxLayout* pLayout = new QHBoxLayout();
@@ -227,8 +233,8 @@ CSandMan::CSandMan(QWidget *parent)
 	
 	pLayout->addWidget(m_pTrayBoxes);
 
-    pTrayList->setDefaultWidget(pWidget);
-	m_pTrayMenu->addAction(pTrayList);
+    m_pTrayList->setDefaultWidget(pWidget);
+	m_pTrayMenu->addAction(m_pTrayList);
 
 
 	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -236,7 +242,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 	//m_pBoxMenu
 
-	m_pTrayMenu->addSeparator();
+	m_pTraySeparator = m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
@@ -528,13 +534,16 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
+	if(theAPI->IsConnected())
+		m_pBoxView->SaveUserConfig();
+
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
 		int PortableStop = theConf->GetInt("Options/PortableStop", -1);
 		if (PortableStop == -1)
 		{
 			bool State = false;
-			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\r\n\r\nDo you want to do the clean up?")
+			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\n\nDo you want to do the clean up?")
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
 
 			if (Ret == QDialogButtonBox::Cancel)
@@ -556,15 +565,44 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	QApplication::quit();
 }
 
-QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
+QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)
 {
 	EBoxColors color = eYellow;
 	switch (boxType) {
-	case CSandBoxPlus::eHardened:	color = eOrang; break;
-	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
-	case CSandBoxPlus::eInsecure:	color = eMagenta; break;
+	case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
+	case CSandBoxPlus::eHardened:			color = eOrang; break;
+	case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
+	case CSandBoxPlus::eDefault:			color = eYellow; break;
+	case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
+	case CSandBoxPlus::eAppBox:				color = eGreen; break;
+	case CSandBoxPlus::eInsecure:			color = eMagenta; break;
 	}
 	return inUse ? m_BoxIcons[color].second : m_BoxIcons[color].first;
+}
+
+QString CSandMan::GetBoxDescription(int boxType)
+{
+	QString Info;
+
+	switch (boxType) {
+	case CSandBoxPlus::eHardenedPlus:
+	case CSandBoxPlus::eHardened:
+		Info = tr("This box provides enhanced security isolation, it is suitable to test untrusted software.");
+		break;
+	case CSandBoxPlus::eDefaultPlus:
+	case CSandBoxPlus::eDefault:
+		Info = tr("This box provides standard isolation, it is suitable to run your software to enhance security.");	
+		break;
+	case CSandBoxPlus::eAppBoxPlus:
+	case CSandBoxPlus::eAppBox:
+		Info = tr("This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.");
+		break;
+	}
+	
+	if(boxType == CSandBoxPlus::eHardenedPlus || boxType == CSandBoxPlus::eDefaultPlus || boxType == CSandBoxPlus::eAppBoxPlus)
+		Info.append(tr("\n\nThis box prevents access to all user data locations, except explicitly granted in the Resource Access options."));
+
+	return Info;
 }
 
 bool CSandMan::IsFullyPortable()
@@ -722,10 +760,20 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			bIsMonitoring = !theAPI->GetTrace().isEmpty();
 		m_pTraceView->setEnabled(bIsMonitoring);
 
+		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
+		int ActiveProcesses = 0;
+		if (m_pKeepTerminated->isChecked()) {
+			foreach(const CBoxedProcessPtr & Process, Processes) {
+				if (!Process->IsTerminated())
+					ActiveProcesses++;
+			}
+		}
+		else 
+			ActiveProcesses = Processes.count();
 
-		if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
+		if (m_bIconEmpty != (ActiveProcesses == 0) || m_bIconDisabled != bForceProcessDisabled)
 		{
-			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+			m_bIconEmpty = (ActiveProcesses == 0);
 			m_bIconDisabled = bForceProcessDisabled;
 
 			m_pTrayIcon->setIcon(GetTrayIconName());
@@ -858,6 +906,7 @@ void CSandMan::OnStatusChanged()
 	{
 		QString SbiePath = theAPI->GetSbiePath();
 		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("Sbie+ Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
 
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
@@ -874,7 +923,7 @@ void CSandMan::OnStatusChanged()
 			{
 				bool State = false;
 				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
-					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\r\nYes will choose: %1\r\nNo will choose: %2")
+					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
 					.arg(BoxPath)
 					.arg("C:\\Sandbox") // todo resolve os drive properly
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
@@ -925,6 +974,10 @@ void CSandMan::OnStatusChanged()
 
 		g_FeatureFlags = theAPI->GetFeatureFlags();
 
+		// if teh certificate is valid but the driver does not report it being active it means its expired
+		if (!g_Certificate.isEmpty() && (g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+			OnLogMessage(tr("The supporter certificate is expired"));
+		}
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -1046,6 +1099,29 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 			m_MissingTemplates.append(MsgData[2]);
 	}
 
+	if ((MsgCode & 0xFFFF) == 6004) // certificat error
+	{
+		static bool bCertWarning = false;
+		if (!bCertWarning) {
+			bCertWarning = true;
+			
+			QMessageBox msgBox;
+			msgBox.setTextFormat(Qt::RichText);
+			msgBox.setIcon(QMessageBox::Critical);
+			msgBox.setWindowTitle("Sandboxie-Plus");
+			msgBox.setText( tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.<br />"
+				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>").arg(MsgData[2]).arg(MsgData[1]));
+			msgBox.setStandardButtons(QMessageBox::Ok);
+			msgBox.exec();
+			/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+			if (msgBox.exec() == QDialogButtonBox::Yes) {
+				OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+			}*/
+			
+			bCertWarning = false;
+		}
+	}
+
 	QString Message = MsgCode != 0 ? theAPI->GetSbieMsgStr(MsgCode, m_LanguageId) : (MsgData.size() > 0 ? MsgData[0] : QString());
 
 	for (int i = 1; i < MsgData.size(); i++)
@@ -1064,6 +1140,32 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true))
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
+}
+
+bool CSandMan::CheckCertificate() 
+{
+	if (!g_Certificate.isEmpty())
+		return true;
+
+	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+	//	OnLogMessage(tr("The supporter certificate is expired"));
+	//	return false;
+	//}
+
+	QMessageBox msgBox;
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.setIcon(QMessageBox::Information);
+	msgBox.setWindowTitle("Sandboxie-Plus");
+	msgBox.setText(tr("The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.<br />"
+		"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
+	msgBox.setStandardButtons(QMessageBox::Ok);
+	msgBox.exec();
+	/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	if (msgBox.exec() == QDialogButtonBox::Yes) {
+		OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+	}*/
+
+	return false;
 }
 
 void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)
@@ -1115,7 +1217,7 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
-		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, this);
+		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
@@ -1598,7 +1700,7 @@ void CSandMan::OnReloadIni()
 
 void CSandMan::OnIniReloaded()
 {
-	m_pBoxView->ReloadGroups();
+	m_pBoxView->ReloadUserConfig();
 	m_pPopUpWindow->ReloadHiddenMessages();
 }
 
@@ -1789,7 +1891,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					bAdded = true;
 				}
 
-				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0));
 			}
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)
@@ -1817,6 +1919,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				}
 
 				m_pTrayBoxes->setFixedHeight(Height);
+
+				m_pTrayMenu->removeAction(m_pTrayList);
+				m_pTrayMenu->insertAction(m_pTraySeparator, m_pTrayList);
 			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
@@ -1913,7 +2018,10 @@ void CSandMan::CheckForUpdates(bool bManual)
 	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QString::number(m_LanguageId));
-	QString UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
+
+	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	if (UpdateKey.isEmpty())
+		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	if (!UpdateKey.isEmpty())
 		Query.addQueryItem("update_key", UpdateKey);
 	Query.addQueryItem("auto", bManual ? "0" : "1");
@@ -2146,16 +2254,26 @@ void CSandMan::OnAbout()
 			"<p>Version %1</p>"
 			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
 		).arg(GetVersion());
+
+		QString CertInfo;
+		if (!g_Certificate.isEmpty()) {
+			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("name"));
+		} else {
+			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
+		}
+
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is an open source continuation of Sandboxie.</p>"
-			"<p></p>"
-			"<p>Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.</p>"
-			"<p></p>"
-			"<p></p>"
-			"<p></p>"
-			"<p>Icons from <a href=\"https://icons8.com\">icons8.com</a></p>"
-			"<p></p>"
-		);
+			"Sandboxie-Plus is an open source continuation of Sandboxie."
+			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
+			"<br />"
+			"%3<br />"
+			"<br />"
+			"Driver version: %1<br />"
+			"Features: %2<br />"
+			"<br />"
+			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"
+		).arg(theAPI->GetVersion()).arg(theAPI->GetFeatureStr()).arg(CertInfo);
+
 		QMessageBox *msgBox = new QMessageBox(this);
 		msgBox->setAttribute(Qt::WA_DeleteOnClose);
 		msgBox->setWindowTitle(tr("About Sandboxie-Plus"));
@@ -2173,6 +2291,8 @@ void CSandMan::OnAbout()
 
 void CSandMan::SetUITheme()
 {
+	m_ThemeUpdatePending = false;
+
 	bool bDark;
 	int iDark = theConf->GetInt("Options/UseDarkTheme", 2);
 	if (iDark == 2) {
@@ -2214,6 +2334,17 @@ void CSandMan::SetUITheme()
 	CTreeItemModel::SetDarkMode(bDark);
 	CListItemModel::SetDarkMode(bDark);
 	CPopUpWindow::SetDarkMode(bDark);
+	CPanelView::SetDarkMode(bDark);
+	CFinder::SetDarkMode(bDark);
+}
+
+void CSandMan::UpdateTheme()
+{
+	if (!m_ThemeUpdatePending)
+	{
+		m_ThemeUpdatePending = true;
+		QTimer::singleShot(500, this, SLOT(SetUITheme()));
+	}
 }
 
 void CSandMan::LoadLanguage()

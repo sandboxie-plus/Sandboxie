@@ -18,6 +18,40 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
 	ui.cmbBoxBorder->addItem(tr("Always show"), "on");
 
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefault), tr("Standard Isolation Sandbox (Default)"), (int)CSandBoxPlus::eDefault);
+	//ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eInsecure), tr("UNSECURE Configuration (please change)"), (int)CSandBoxPlus::eInsecure);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
+
+	ui.lblSupportCert->setVisible(false);
+	if (g_Certificate.isEmpty())
+	{
+		ui.lblSupportCert->setVisible(true);
+		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+
+		for (int i = 0; i < ui.cmbBoxType->count(); i++)
+		{
+			int BoxType = ui.cmbBoxType->itemData(i, Qt::UserRole).toInt();
+			bool disabled = BoxType != CSandBoxPlus::eDefault && BoxType != CSandBoxPlus::eHardened;
+
+			QStandardItemModel* model = qobject_cast<QStandardItemModel*>(ui.cmbBoxType->model());
+			QStandardItem* item = model->item(i);
+			item->setFlags(disabled ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
+		}
+	}
+
+
+	m_HoldBoxType = false;
+
+	connect(ui.cmbBoxType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBoxTypChanged()));
+	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+	connect(ui.chkPrivacy, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+
 	connect(ui.cmbBoxIndicator, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
@@ -63,7 +97,6 @@ void COptionsWindow::CreateGeneral()
 	pAutoBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnAddAutoExe()));
 	ui.btnAddAutoExe->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddAutoExe->setMenu(pAutoBtnMenu);
-	connect(ui.btnAddAutoExe, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExe()));
 	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnDelAutoSvc()));
 	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
 }
@@ -91,19 +124,16 @@ void COptionsWindow::LoadGeneral()
 		
 	ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
-	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked());
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
-	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked());
 
 	ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
-	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 	ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
 	ui.chkCloseClipBoard->setChecked(!m_pBox->GetBool("OpenClipboard", true));
 	//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
 	//ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
 
 	ui.treeAutoStart->clear();
-	foreach(const QString & Value, m_pBox->GetTextList("StartProgram", m_Template))
+	foreach(const QString & Value, m_pBox->GetTextList("StartCommand", m_Template))
 		AddAutoRunItem(Value, 0);
 	foreach(const QString & Value, m_pBox->GetTextList("StartService", m_Template))
 		AddAutoRunItem(Value, 1);
@@ -173,7 +203,7 @@ void COptionsWindow::SaveGeneral()
 		else
 			StartProgram.append(pItem->text(1));
 	}
-	WriteTextList("StartProgram", StartProgram);
+	WriteTextList("StartCommand", StartProgram);
 	WriteTextList("StartService", StartService);
 
 	QStringList RunCommands;
@@ -199,8 +229,6 @@ void COptionsWindow::SaveGeneral()
 
 void COptionsWindow::OnGeneralChanged()
 {
-	m_GeneralChanged = true;
-
 	ui.lblCopyLimit->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.txtCopyLimit->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.lblCopyLimit->setText(tr("kilobytes (%1)").arg(FormatSize(ui.txtCopyLimit->text().toULongLong() * 1024)));
@@ -209,8 +237,14 @@ void COptionsWindow::OnGeneralChanged()
 
 	ui.chkAutoEmpty->setEnabled(!ui.chkProtectBox->isChecked());
 
-	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked());
-	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked());
+	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
+	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
+	
+	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
+	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
+
+	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnPickColor()
@@ -219,6 +253,7 @@ void COptionsWindow::OnPickColor()
 	if (!color.isValid())
 		return;
 	m_GeneralChanged = true;
+	OnOptChanged();
 	m_BorderColor = color;
 	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
 }
@@ -231,6 +266,7 @@ void COptionsWindow::OnAddAutoCmd()
 
 	AddAutoRunItem(Value, 0);
 	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddAutoExe()
@@ -241,6 +277,7 @@ void COptionsWindow::OnAddAutoExe()
 
 	AddAutoRunItem(Value, 0);
 	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelAutoSvc()
@@ -251,6 +288,7 @@ void COptionsWindow::OnDelAutoSvc()
 
 	AddAutoRunItem(Value, 1);
 	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::AddAutoRunItem(const QString& Value, int Type)
@@ -271,6 +309,7 @@ void COptionsWindow::OnDelAuto()
 
 	delete pItem;
 	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnBrowsePath()
@@ -285,6 +324,7 @@ void COptionsWindow::OnBrowsePath()
 
 	AddRunItem(Name, Value);
 	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddCommand()
@@ -299,6 +339,7 @@ void COptionsWindow::OnAddCommand()
 
 	AddRunItem(Name, Value);
 	m_GeneralChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::AddRunItem(const QString& Name, const QString& Command)
@@ -318,4 +359,73 @@ void COptionsWindow::OnDelCommand()
 
 	delete pItem;
 	m_GeneralChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::UpdateBoxType()
+{
+	bool bPrivacyMode = ui.chkPrivacy->isChecked();
+	bool bNoAdmin = ui.chkDropRights->isChecked();
+	bool bAppBox = ui.chkNoSecurityIsolation->isChecked();
+
+	int BoxType;
+	if (bAppBox) 
+		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eAppBoxPlus : (int)CSandBoxPlus::eAppBox;
+	else if (bNoAdmin) 
+		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eHardenedPlus : (int)CSandBoxPlus::eHardened;
+	else 
+		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eDefaultPlus : (int)CSandBoxPlus::eDefault;
+
+	ui.lblBoxInfo->setText(theGUI->GetBoxDescription(BoxType));
+
+	if (m_HoldBoxType)
+		return;
+
+	m_HoldBoxType = true;
+	ui.cmbBoxType->setCurrentIndex(ui.cmbBoxType->findData(BoxType));
+	m_HoldBoxType = false;
+}
+
+void COptionsWindow::OnBoxTypChanged()
+{
+	if (m_HoldBoxType)
+		return;
+
+	int BoxType = ui.cmbBoxType->currentData().toInt();
+
+	switch (BoxType) {
+	case CSandBoxPlus::eHardenedPlus:
+	case CSandBoxPlus::eHardened:
+		ui.chkNoSecurityIsolation->setChecked(false);
+		ui.chkNoSecurityFiltering->setChecked(false);
+		ui.chkDropRights->setChecked(true);
+		ui.chkMsiExemptions->setChecked(false);
+		//ui.chkRestrictServices->setChecked(true);
+		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
+		break;
+	case CSandBoxPlus::eDefaultPlus:
+	case CSandBoxPlus::eDefault:
+		ui.chkNoSecurityIsolation->setChecked(false);
+		ui.chkNoSecurityFiltering->setChecked(false);
+		ui.chkDropRights->setChecked(false);
+		ui.chkMsiExemptions->setChecked(false);
+		//ui.chkRestrictServices->setChecked(true);
+		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eDefaultPlus);
+		break;
+	case CSandBoxPlus::eAppBoxPlus:
+	case CSandBoxPlus::eAppBox:
+		ui.chkNoSecurityIsolation->setChecked(true);
+		//ui.chkRestrictServices->setChecked(false);
+		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
+		break;
+	}
+
+	m_GeneralChanged = true;
+	m_AccessChanged = true;
+	m_AdvancedChanged = true;
+
+	m_HoldBoxType = true;
+	UpdateBoxType();
+	m_HoldBoxType = false;
+	OnOptChanged();
 }

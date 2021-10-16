@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -58,6 +59,7 @@
 #define MSGID_TERMINAL_GET_NAME                 0x1413
 #define MSGID_TERMINAL_GET_PROPERTY             0x1414
 #define MSGID_TERMINAL_DISCONNECT               0x1415
+#define MSGID_TERMINAL_GET_USER_TOKEN           0x1416
 
 #define MSGID_NAMED_PIPE                        0x1500
 #define MSGID_NAMED_PIPE_OPEN                   0x1501

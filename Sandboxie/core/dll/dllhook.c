@@ -670,7 +670,7 @@ _FX NTSTATUS Dll_GetSettingsForImageName(
         } else
             buf_ptr = buf;
 
-        image_pat = Pattern_Create(pool, buf_ptr, TRUE);
+        image_pat = Pattern_Create(pool, buf_ptr, TRUE, 0);
         if (Pattern_Match(image_pat, image_lwr, image_len)) {
 
             match = TRUE;
@@ -887,7 +887,7 @@ _FX void Dll_FixWow64Syscall(void)
     static UCHAR *_code = NULL;
 
     // NoSysCallHooks BEGIN
-    if(SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+    if((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
         return;
     // NoSysCallHooks END
 

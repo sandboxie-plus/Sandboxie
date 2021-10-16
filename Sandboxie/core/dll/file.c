@@ -2491,6 +2491,30 @@ _FX NTSTATUS File_NtCreateFileImpl(
         status = File_GetName(
             ObjectAttributes->RootDirectory, ObjectAttributes->ObjectName,
             &TruePath, &CopyPath, &FileFlags);
+
+        //
+        // this is some sort of device access
+        //
+
+        if (status == STATUS_OBJECT_PATH_SYNTAX_BAD) {
+
+            //
+            // teh driver usually blocks this anyways so try only in app mode
+            //
+
+            if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0){
+
+                SbieApi_MonitorPut2(MONITOR_PIPE, TruePath, FALSE);
+
+                return __sys_NtCreateFile(
+                    FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
+                    AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
+                    CreateOptions, EaBuffer, EaLength);
+
+            } else {
+                SbieApi_MonitorPut2(MONITOR_PIPE | MONITOR_DENY, TruePath, FALSE);
+            }
+        }
     }
 
     //if ( (wcsstr(TruePath, L"Harddisk0\\DR0") != 0) || wcsstr(TruePath, L"HarddiskVolume3") != 0) {
@@ -5887,6 +5911,7 @@ _FX NTSTATUS File_SetDisposition(
     UNICODE_STRING uni;
     //WCHAR *DosPath;
     NTSTATUS status;
+    ULONG FileFlags;
     ULONG mp_flags;
 
     //
@@ -5903,7 +5928,6 @@ _FX NTSTATUS File_SetDisposition(
     __try {
 
         WCHAR *TruePath, *CopyPath;
-        ULONG FileFlags;
 
         status = File_GetName(
                     FileHandle, &uni, &TruePath, &CopyPath, &FileFlags);
@@ -5957,7 +5981,7 @@ _FX NTSTATUS File_SetDisposition(
     // handle the request appropriately
     //
   
-    if (PATH_IS_OPEN(mp_flags)) {
+    if (PATH_IS_OPEN(mp_flags) /*|| ((FileFlags & FGN_IS_BOXED_PATH) != 0)*/) { // boxed path fails for directories
 
         status = __sys_NtSetInformationFile(
             FileHandle, IoStatusBlock,
@@ -5981,24 +6005,35 @@ _FX NTSTATUS File_SetDisposition(
                 DeleteOnClose = FALSE;
         }
 
-
-        EnterCriticalSection(&File_HandleOnClose_CritSec);
-
-        FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, FileHandle);
-        if (!on_close) {
-            on_close = map_insert(&File_HandleOnClose, FileHandle, NULL, sizeof(FILE_ON_CLOSE));
-        }
-
-        on_close->DeleteOnClose = DeleteOnClose;
-
-        LeaveCriticalSection(&File_HandleOnClose_CritSec);
-
-	    /*
         OBJECT_ATTRIBUTES objattrs;
 
         InitializeObjectAttributes(
             &objattrs, &uni, OBJ_CASE_INSENSITIVE, FileHandle, NULL);
 
+        //
+        // check if the call to File_NtDeleteFileImpl from the delete handler is expected to fail 
+        // and return the apropriate error
+        //
+
+        FILE_NETWORK_OPEN_INFORMATION info;
+        if (NT_SUCCESS(__sys_NtQueryFullAttributesFile(&objattrs, &info)) && ((info.FileAttributes & FILE_ATTRIBUTE_READONLY) != 0)) {
+
+            status = STATUS_CANNOT_DELETE;
+        } else {
+
+            EnterCriticalSection(&File_HandleOnClose_CritSec);
+
+            FILE_ON_CLOSE* on_close = map_get(&File_HandleOnClose, FileHandle);
+            if (!on_close) {
+                on_close = map_insert(&File_HandleOnClose, FileHandle, NULL, sizeof(FILE_ON_CLOSE));
+            }
+
+            on_close->DeleteOnClose = DeleteOnClose;
+
+            LeaveCriticalSection(&File_HandleOnClose_CritSec);
+        }
+
+	    /*
         if (DosPath) {
             objattrs.RootDirectory = NULL;
             RtlInitUnicodeString(&uni, DosPath);

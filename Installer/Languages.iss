@@ -66,11 +66,11 @@ ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
 ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
-;ChineseSimplified.UninstallTaskLabel1=
-;ChineseSimplified.UninstallTaskLabel2=
-;ChineseSimplified.UninstallTaskLabel3=
-;ChineseSimplified.UninstallTaskLabel4=
-;ChineseSimplified.UninstallTaskLabel5=
+ChineseSimplified.UninstallTaskLabel1=选择卸载方式
+ChineseSimplified.UninstallTaskLabel2=您想卸载 Sandboxie-Plus 到什么程度？
+ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙盘(&K)%n如果您是打算重新安装 Sandboxie-Plus，这是很好的选择，不会丢失您的配置文件和沙盘。
+ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将会移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但保留您的沙盘。
+ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盘(&S)%n选择此选项将会移除所有配置文件和沙盘，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
@@ -83,11 +83,11 @@ ChineseTraditional.CustomPagePortableMode=解壓縮所有檔案到指定目錄�
 ChineseTraditional.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseTraditional.ClassicFound=偵測到已安裝 Sandboxie 原版，要繼續安裝必須先將其移除，是否開始移除？
 ChineseTraditional.RunSandboxedMenu=在沙箱中執行(&S)
-;ChineseTraditional.UninstallTaskLabel1=
-;ChineseTraditional.UninstallTaskLabel2=
-;ChineseTraditional.UninstallTaskLabel3=
-;ChineseTraditional.UninstallTaskLabel4=
-;ChineseTraditional.UninstallTaskLabel5=
+ChineseTraditional.UninstallTaskLabel1=選擇移除類型
+ChineseTraditional.UninstallTaskLabel2=要如何移除 Sandboxie-Plus？
+ChineseTraditional.UninstallTaskLabel3=保留設定檔和沙箱(&K)%n如果您打算保留設定檔和沙箱的同時，並重新安裝 Sandboxie-Plus，這是最推薦的選項。
+ChineseTraditional.UninstallTaskLabel4=刪除設定檔案(&C)%n選擇此選項可刪除 Sandboxie.ini 和 Sandboxie-Plus.ini 設定檔，並完整保留沙箱。
+ChineseTraditional.UninstallTaskLabel5=刪除設定檔和沙箱(&S)%n選擇此選項可刪除所有設定檔和沙箱，包含位於 FileRootPath 自訂路徑中的 Sandbox 資料夾。
 
 ; Dutch
 dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen

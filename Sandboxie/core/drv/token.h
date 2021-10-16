@@ -60,5 +60,8 @@ BOOLEAN Token_ResetPrimary(PROCESS *proc);
 ULONG GetThreadTokenOwnerPid();
 //---------------------------------------------------------------------------
 
+NTSTATUS Token_Api_Filter(PROCESS *proc, ULONG64 *parms);
+
+//---------------------------------------------------------------------------
 
 #endif // _MY_TOKEN_H

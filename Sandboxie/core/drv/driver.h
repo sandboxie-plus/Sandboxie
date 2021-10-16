@@ -69,6 +69,8 @@
 
 #define USE_PROCESS_MAP
 
+#define USE_MATCH_PATH_EX
+
 //new FILE_INFORMATION_CLASS type not defined in current wdm.h used in windows 10 FCU
 #define SB_FileRenameInformationEx 65
 //---------------------------------------------------------------------------

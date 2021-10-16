@@ -68,14 +68,14 @@ _FX BOOLEAN Config_MatchImage(
         wcsncpy(tmp, pat_str, pat_len);
         tmp[pat_len] = L'\0';
 
-        pat = Pattern_Create(Dll_PoolTemp, tmp, TRUE);
+        pat = Pattern_Create(Dll_PoolTemp, tmp, TRUE, 0);
 
         Dll_Free(tmp);
 
     }
     else {
 
-        pat = Pattern_Create(Dll_PoolTemp, pat_str, TRUE);
+        pat = Pattern_Create(Dll_PoolTemp, pat_str, TRUE, 0);
     }
 
     if (!pat)
@@ -315,10 +315,11 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
             break;
         ++index;
 
-        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, NULL);
+        ULONG level;
+        WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
         if (value)
         {
-            pat = Pattern_Create(Dll_Pool, value, TRUE);
+            pat = Pattern_Create(Dll_Pool, value, TRUE, level);
 
             List_Insert_After(list, NULL, pat);
         }
@@ -568,12 +569,12 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 //---------------------------------------------------------------------------
 
 
-/*BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
 {
     WCHAR buf[32];
     if (SbieDll_GetStringForStringList(string, boxname, setting, buf, sizeof(buf)))
         return Config_String2Bool(buf, def_found);
     return not_found;
-}*/
+}
 
 

@@ -63,8 +63,7 @@ public:
 	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
-
-	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
+	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { return m_BoxedProxesses; }
 
 	virtual CSandBoxPtr		GetBoxByProcessId(quint32 ProcessId) const;
 	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
@@ -103,6 +102,16 @@ public:
 	virtual SB_STATUS		UnlockConfig(const QString& Password);
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
+
+	enum EFeatureFlags
+	{
+		eSbieFeatureWFP			= 0x00000001,
+		eSbieFeatureObCB		= 0x00000002,
+		eSbieFeaturePMod		= 0x00000004,
+		eSbieFeatureAppC		= 0x00000008,
+		eSbieFeatureSbiL		= 0x00000010,
+		eSbieFeatureCert		= 0x80000000
+	};
 
 	virtual quint32			GetFeatureFlags();
 	virtual QString			GetFeatureStr();

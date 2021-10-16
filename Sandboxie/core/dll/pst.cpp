@@ -90,6 +90,13 @@ extern "C" _FX BOOLEAN Pst_Init(HMODULE module)
         return TRUE;
 
     //
+    // in app mode we dont need these hooks as we have a full token
+    //
+
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0)
+        return TRUE;
+
+    //
     // hook Protected Storage entry point
     //
 

@@ -27,8 +27,6 @@
 
 static BOOLEAN Obj_Init_Filter(void);
 
-static void Obj_Unload_Filter(void);
-
 static OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     _In_ PVOID RegistrationContext, _Inout_ POB_PRE_OPERATION_INFORMATION PreInfo);
 
@@ -52,7 +50,7 @@ static PVOID Obj_FilterCookie = NULL;
 static OB_CALLBACK_REGISTRATION  Obj_CallbackRegistration = { 0 };
 static OB_OPERATION_REGISTRATION Obj_OperationRegistrations[2] = { { 0 }, { 0 } };
 
-static BOOLEAN Obj_CallbackInstalled = FALSE;
+BOOLEAN Obj_CallbackInstalled = FALSE;
 
 
 //---------------------------------------------------------------------------
@@ -62,18 +60,62 @@ static BOOLEAN Obj_CallbackInstalled = FALSE;
 
 _FX BOOLEAN Obj_Init_Filter(void)
 {
-    NTSTATUS status;
     UNICODE_STRING uni;
-
-    // Don't use experimental features by default
-    if (!Conf_Get_Boolean(NULL, L"UseObjectKernelCallbacks", 0, FALSE))
-        return TRUE;
 
     RtlInitUnicodeString(&uni, L"ObRegisterCallbacks");
     pObRegisterCallbacks = (P_ObRegisterCallbacks)MmGetSystemRoutineAddress(&uni);
 
     RtlInitUnicodeString(&uni, L"ObUnRegisterCallbacks");
     pObUnRegisterCallbacks = (P_ObUnRegisterCallbacks)MmGetSystemRoutineAddress(&uni);
+
+    // note: Obj_Load_Filter needs a few other things to be initialized first, hence it will be called by Ipc_Init
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Obj_Load_Filter
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Obj_Load_Filter(void)
+{
+    NTSTATUS status;
+
+    if (Obj_CallbackInstalled)
+        return TRUE;
+
+    // 
+    // from Syscall_DuplicateHandle_2:
+    // note that files and registry keys [...] don't support adding new permissions
+    // on the handle during duplication.  (this is true for any
+    // object type which specifies a SecurityProcedure.)
+    // 
+    // opening/creation of files is handled by a minifilter installed with FltRegisterFilter
+    // and opening/creation of registry keys is handled by CmRegisterCallbackEx
+    //
+    // The types handled by the Syscall_DuplicateHandle are as follows
+    // 
+    // "Process"    -> Thread_CheckProcessObject
+    // "Thread"     -> Thread_CheckThreadObject
+    // 
+    // "File"       -> File_CheckFileObject   <- given the the note above why do we double filter for files ???
+    // 
+    // "Event"      -> Ipc_CheckGenericObject
+    // "EventPair"  -> Ipc_CheckGenericObject           <- ExEventPairObjectType not exported
+    // "KeyedEvent" -> Ipc_CheckGenericObject           <- ExpKeyedEventObjectType not exported
+    // "Mutant"     -> Ipc_CheckGenericObject           <- ExMutantObjectType not exported
+    // "Semaphore"  -> Ipc_CheckGenericObject
+    // "Section"    -> Ipc_CheckGenericObject
+    // 
+    // "JobObject"  -> Ipc_CheckJobObject
+    // 
+    // "Port" / "ALPC Port" -> Ipc_CheckPortObject      <- AlpcPortObjectType and LpcWaitablePortObjectType not exported, LpcPortObjectType exported
+    //      Note: proper  IPC isolation requires filering of NtRequestPort, NtRequestWaitReplyPort, and NtAlpcSendWaitReceivePort calls
+    // 
+    // "Token"      -> Thread_CheckTokenObject
+    //
 
     if (!pObRegisterCallbacks || !pObUnRegisterCallbacks)
         status = STATUS_PROCEDURE_NOT_FOUND;
@@ -101,6 +143,7 @@ _FX BOOLEAN Obj_Init_Filter(void)
 
     if (! NT_SUCCESS(status)) {
         Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x81, status, L"Objects");
+        Obj_FilterCookie = NULL;
         return FALSE;
     }
 
@@ -120,6 +163,7 @@ _FX void Obj_Unload_Filter(void)
     if (Obj_CallbackInstalled) {
 
         pObUnRegisterCallbacks(Obj_FilterCookie);
+        Obj_FilterCookie = NULL;
 
         Obj_CallbackInstalled = FALSE;
     }
@@ -134,189 +178,100 @@ _FX void Obj_Unload_Filter(void)
 _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     _In_ PVOID RegistrationContext, _Inout_ POB_PRE_OPERATION_INFORMATION PreInfo)
 {
-    PROCESS *proc = NULL;
-    NTSTATUS status = STATUS_SUCCESS;
+    //
+    // Filter only if request made outside of the kernel
+    //
 
-    if (ExGetPreviousMode() == KernelMode)
-        return status;
-
-    proc = Process_Find(NULL, NULL);
-    if (!proc || (proc == PROCESS_TERMINATED))
+    //if (ExGetPreviousMode() == KernelMode)
+    if (PreInfo->KernelHandle == 1)
         return OB_PREOP_SUCCESS;
 
+    //
+    // Get the sandboxed process if this request comes form one,
+    // filter only requests from sandboxed processes
+    //
 
-    DbgPrint("Obj_PreOperationCallback for %S\r\n", proc->image_name);
+    PROCESS *proc = NULL;
+    proc = Process_Find(NULL, NULL);
+    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject || proc->disable_object_flt)
+        return OB_PREOP_SUCCESS;
 
-
-    /*
-    typedef struct _OB_PRE_CREATE_HANDLE_INFORMATION {
-        _Inout_ ACCESS_MASK         DesiredAccess;
-        _In_ ACCESS_MASK            OriginalDesiredAccess;
-    } OB_PRE_CREATE_HANDLE_INFORMATION, *POB_PRE_CREATE_HANDLE_INFORMATION;
-
-    typedef struct _OB_PRE_DUPLICATE_HANDLE_INFORMATION {
-        _Inout_ ACCESS_MASK         DesiredAccess;
-        _In_ ACCESS_MASK            OriginalDesiredAccess;
-        _In_ PVOID                  SourceProcess;
-        _In_ PVOID                  TargetProcess;
-    } OB_PRE_DUPLICATE_HANDLE_INFORMATION, * POB_PRE_DUPLICATE_HANDLE_INFORMATION;
-    */
-
-    /*PTD_CALLBACK_REGISTRATION CallbackRegistration;
-
-    ACCESS_MASK AccessBitsToClear     = 0;
-    ACCESS_MASK AccessBitsToSet       = 0;
-    ACCESS_MASK InitialDesiredAccess  = 0;
-    ACCESS_MASK OriginalDesiredAccess = 0;
-
+    //
+    // Get information about the intended operation
+    //
 
     PACCESS_MASK DesiredAccess = NULL;
-
-    LPCWSTR ObjectTypeName = NULL;
-    LPCWSTR OperationName = NULL;
-
-    // Not using driver specific values at this time
-    CallbackRegistration = (PTD_CALLBACK_REGISTRATION)RegistrationContext;
-
-
-    TD_ASSERT (PreInfo->CallContext == NULL);
-
-    // Only want to filter attempts to access protected process
-    // all other processes are left untouched
-
-    if (PreInfo->ObjectType == *PsProcessType)  {
-
-	    //HANDLE pid = PsGetProcessId((PEPROCESS)PreInfo->Object);
-	    //char szProcName[16] = { 0 };
-	    //UNREFERENCED_PARAMETER(RegistrationContext);
-	    //strcpy(szProcName, GetProcessNameByProcessID(pid));
-
-        //
-        // Ignore requests for processes other than our target process.
-        //
-
-        // if (TdProtectedTargetProcess != NULL &&
-        //    TdProtectedTargetProcess != PreInfo->Object)
-        if (TdProtectedTargetProcess != PreInfo->Object)
-        {
-            goto Exit;
-        }
-
-        //
-        // Also ignore requests that are trying to open/duplicate the current
-        // process.
-        //
-
-        if (PreInfo->Object == PsGetCurrentProcess())   {
-            DbgPrintEx (
-                DPFLTR_IHVDRIVER_ID, DPFLTR_TRACE_LEVEL,
-                "ObCallbackTest: CBTdPreOperationCallback: ignore process open/duplicate from the protected process itself\n");
-            goto Exit;
-        }
-
-        ObjectTypeName = L"PsProcessType";
-        AccessBitsToClear     = CB_PROCESS_TERMINATE;
-        AccessBitsToSet       = 0;
-    }
-    else if (PreInfo->ObjectType == *PsThreadType)  {
-        HANDLE ProcessIdOfTargetThread = PsGetThreadProcessId ((PETHREAD)PreInfo->Object);
-
-        //
-        // Ignore requests for threads belonging to processes other than our
-        // target process.
-        //
-
-        // if (CallbackRegistration->TargetProcess   != NULL &&
-        //     CallbackRegistration->TargetProcessId != ProcessIdOfTargetThread)
-        if (TdProtectedTargetProcessId != ProcessIdOfTargetThread)  {
-            goto Exit;
-        }
-
-        //
-        // Also ignore requests for threads belonging to the current processes.
-        //
-
-        if (ProcessIdOfTargetThread == PsGetCurrentProcessId()) {
-            DbgPrintEx (
-                DPFLTR_IHVDRIVER_ID, DPFLTR_TRACE_LEVEL,
-                "ObCallbackTest: CBTdPreOperationCallback: ignore thread open/duplicate from the protected process itself\n");
-            goto Exit;
-        }
-
-        ObjectTypeName = L"PsThreadType";
-        AccessBitsToClear     = CB_THREAD_TERMINATE;
-        AccessBitsToSet       = 0;
-    }
-    else    {
-        DbgPrintEx (
-            DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL,
-            "ObCallbackTest: CBTdPreOperationCallback: unexpected object type\n");
-        goto Exit;
-    }
+    ACCESS_MASK InitialDesiredAccess  = 0;
+    //ACCESS_MASK OriginalDesiredAccess = 0;
 
     switch (PreInfo->Operation) {
     case OB_OPERATION_HANDLE_CREATE:
         DesiredAccess = &PreInfo->Parameters->CreateHandleInformation.DesiredAccess;
-        OriginalDesiredAccess = PreInfo->Parameters->CreateHandleInformation.OriginalDesiredAccess;
-
-        OperationName = L"OB_OPERATION_HANDLE_CREATE";
+        //OriginalDesiredAccess = PreInfo->Parameters->CreateHandleInformation.OriginalDesiredAccess;
+        //OperationName = L"OB_OPERATION_HANDLE_CREATE";
         break;
 
     case OB_OPERATION_HANDLE_DUPLICATE:
         DesiredAccess = &PreInfo->Parameters->DuplicateHandleInformation.DesiredAccess;
-        OriginalDesiredAccess = PreInfo->Parameters->DuplicateHandleInformation.OriginalDesiredAccess;
-
-        OperationName = L"OB_OPERATION_HANDLE_DUPLICATE";
+        //OriginalDesiredAccess = PreInfo->Parameters->DuplicateHandleInformation.OriginalDesiredAccess;
+        //OperationName = L"OB_OPERATION_HANDLE_DUPLICATE";
         break;
 
     default:
-        TD_ASSERT (FALSE);
-        break;
+        DbgPrint("Sbie ObCallback: unexpected callback type\n");
+        goto Exit;
     }
 
     InitialDesiredAccess = *DesiredAccess;
 
-    // Filter only if request made outside of the kernel
-    if (PreInfo->KernelHandle != 1) {
-        *DesiredAccess &= ~AccessBitsToClear;
-        *DesiredAccess |=  AccessBitsToSet;
+    //
+    // Based on the object type apply the apropriate filter
+    //
+
+    if (PreInfo->ObjectType == *PsProcessType)  {
+
+        HANDLE TargetProcessId = PsGetProcessId((PEPROCESS)PreInfo->Object);
+
+        //
+        // Ignore requests for threads belonging to the current processes.
+        //
+
+        if (TargetProcessId == PsGetCurrentProcessId()) 
+            goto Exit;
+
+        PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
+        ACCESS_MASK WriteAccess = (InitialDesiredAccess & PROCESS_DENIED_ACCESS_MASK);
+        if (!NT_SUCCESS(Thread_CheckObject_Common(
+            proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'P'))) {
+            *DesiredAccess = 0; // deny any access
+        }
+        //ObjectTypeName = L"PsProcessType";
+    }
+    else if (PreInfo->ObjectType == *PsThreadType)  {
+
+        HANDLE TargetProcessId = PsGetThreadProcessId ((PETHREAD)PreInfo->Object);
+
+        //
+        // Ignore requests that are trying to open/duplicate the current process.
+        //
+
+        if (TargetProcessId == PsGetCurrentProcessId()) 
+            goto Exit;
+
+        PEPROCESS ProcessObject = PsGetThreadProcess((PETHREAD)PreInfo->Object);
+        ACCESS_MASK WriteAccess = (InitialDesiredAccess & THREAD_DENIED_ACCESS_MASK);
+        if (!NT_SUCCESS(Thread_CheckObject_Common(
+            proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'T'))) {
+            *DesiredAccess = 0; // deny any access
+        }
+        //ObjectTypeName = L"PsThreadType";
+    }
+    else {
+        DbgPrint("Sbie ObCallback: unexpected object type\n");
+        goto Exit;
     }
 
-    //
-    // Set call context.
-    //
-
-    TdSetCallContext (PreInfo, CallbackRegistration);
-
-
-    DbgPrintEx (
-        DPFLTR_IHVDRIVER_ID, DPFLTR_TRACE_LEVEL, "ObCallbackTest: CBTdPreOperationCallback: PROTECTED process %p (ID 0x%p)\n",
-        TdProtectedTargetProcess,
-        (PVOID)TdProtectedTargetProcessId
-    );
-
-    DbgPrintEx (
-        DPFLTR_IHVDRIVER_ID, DPFLTR_TRACE_LEVEL,
-        "ObCallbackTest: CBTdPreOperationCallback\n"
-        "    Client Id:    %p:%p\n"
-        "    Object:       %p\n"
-        "    Type:         %ls\n"
-        "    Operation:    %ls (KernelHandle=%d)\n"
-        "    OriginalDesiredAccess: 0x%x\n"
-        "    DesiredAccess (in):    0x%x\n"
-        "    DesiredAccess (out):   0x%x\n",
-        PsGetCurrentProcessId(),
-        PsGetCurrentThreadId(),
-        PreInfo->Object,
-        ObjectTypeName,
-        OperationName,
-        PreInfo->KernelHandle,
-        OriginalDesiredAccess,
-        InitialDesiredAccess,
-        *DesiredAccess
-    );
-
-Exit:*/
+Exit:
 
     return OB_PREOP_SUCCESS;
 }

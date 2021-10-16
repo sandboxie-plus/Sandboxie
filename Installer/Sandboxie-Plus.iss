@@ -62,6 +62,12 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; 
 Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0
 
 
+[INI]
+; Set Sandman language.
+Filename: "{localappdata}\{#MyAppName}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; String: "{code:SandmanLanguage|{language}}"; Check: not IsPortable
+Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; String: "{code:SandmanLanguage|{language}}"; Check: IsPortable
+
+
 [Registry]
 ; Autostart Sandman.
 Root: HKCU; Subkey: "Software\Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
@@ -77,15 +83,18 @@ Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; 
 Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
 
 ; External manifest for Sbie service.
-Root: HKLM; Subkey: "SYSTEM\ControlSet001\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
+
+; Set language for Sbie service.
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueType: dword; ValueName: "Language"; ValueData: "{code:SystemLanguage}"; Check: not IsPortable
 
 
 [Run]
 ; Install the Sbie driver.
-Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"" type=kernel start=demand altitude=86900"; StatusMsg: "KmdUtil install SbieDrv..."; Check: not IsPortable
+Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"" type=kernel start=demand msgfile=""{app}\SbieMsg.dll"" altitude=86900"; StatusMsg: "KmdUtil install SbieDrv..."; Check: not IsPortable
 
 ; Install the Sbie service.
-Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
+Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto msgfile=""{app}\SbieMsg.dll"" display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
 
 ; Start the Sbie service.
 Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
@@ -151,7 +160,7 @@ begin
     if (ExpandConstant('{param:portable|0}') = '1') or Portable then begin
       SbiePath := ExpandConstant('{src}') + '\{#MyAppName}';
     end else begin
-      if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'ImagePath', DrvPath) then begin
+      if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'ImagePath', DrvPath) then begin
         IsInstalled := True;
         DrvPath := ExtractFilePath(DrvPath);
 
@@ -167,6 +176,34 @@ begin
   end;
 
   Result := SbiePath;
+end;
+
+
+function SandmanLanguage(Language: String): String;
+begin
+
+  // Language values for Sandboxie-Plus.ini.
+  case Lowercase(Language) of
+    'english': Result := 'en';
+    'chinesesimplified': Result := 'zh-CN';
+    'chinesetraditional': Result := 'zh-TW';
+    'dutch': Result := 'nl';
+    'german': Result := 'de';
+    'italian': Result := 'it';
+    'polish': Result := 'pl';
+    'portuguese': Result := 'pt';
+    'russian': Result := 'ru';
+    'spanish': Result := 'es';
+    'turkish': Result := 'tr';
+  end;
+end;
+
+
+function SystemLanguage(Dummy: String): String;
+begin
+
+  // Language identifier for the System Eventlog messages.
+  Result := IntToStr(GetUILanguage());
 end;
 
 
@@ -357,7 +394,7 @@ begin
 
   while (ExecRet = IDYES) do
   begin
-      if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie', 'UninstallString', UninstallString) then begin
+      if RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sandboxie', 'UninstallString', UninstallString) then begin
 
         ExecRet := MsgBox(CustomMessage('ClassicFound'), mbConfirmation, MB_YESNOCANCEL);
 
@@ -383,6 +420,94 @@ end;
 
 
 //////////////////////////////////////////////////////
+// Uninstallation Exclusive
+//
+
+
+procedure UninstallCleanup(ButtonCount: Integer);
+var
+  Buttons: Cardinal;
+  ButtonLabels: TArrayOfString;
+  ExecRet: Integer;
+  I: Integer;
+  Paths: TStringList;
+  ShowMsgbox: Boolean;
+  TaskRet: Integer;
+begin
+
+  // Require 2 or 3 for button count.
+  if (ButtonCount < 2) or (ButtonCount > 3) then
+    exit;
+
+  // Require Sandman.exe to continue.
+  if not FileExists(ExpandConstant('{app}\Sandman.exe')) then
+    exit;
+
+  // Make a list.
+  Paths := TStringList.Create;
+
+  // Append file paths to the list for removal.
+  Paths.Append('{localappdata}\{#MyAppName}\{#MyAppName}.ini');
+  Paths.Append('{win}\Sandboxie.ini');
+  Paths.Append('{app}\{#MyAppName}.ini');
+  Paths.Append('{app}\Sandboxie.ini');
+
+  // Expand paths and detect if any file exist.
+  for I := 0 to Paths.Count - 1 do begin
+    Paths[I] := ExpandConstant(Paths[I]);
+
+    if FileExists(Paths[I]) then
+      ShowMsgbox := True;
+  end;
+
+  // Delete the config files and the sandboxes.
+  if ShowMsgbox then begin
+    case ButtonCount of
+      2: begin
+        Buttons := MB_YESNO;
+        ButtonLabels := [CustomMessage('UninstallTaskLabel3'),
+                         CustomMessage('UninstallTaskLabel4')];
+      end;
+
+      3: begin
+        Buttons := MB_ABORTRETRYIGNORE;
+        ButtonLabels := [CustomMessage('UninstallTaskLabel3'),
+                         CustomMessage('UninstallTaskLabel4'),
+                         CustomMessage('UninstallTaskLabel5')];
+      end;
+    end;
+
+    case TaskDialogMsgBox(CustomMessage('UninstallTaskLabel1'),
+                          CustomMessage('UninstallTaskLabel2'),
+                          mbConfirmation, Buttons, ButtonLabels, 0) of
+
+      IDRETRY: TaskRet := 1;
+      IDIGNORE: TaskRet := 2;
+      IDABORT: TaskRet := 3;
+      IDYES: TaskRet := 1;
+      IDNO: TaskRet := 2;
+    end;
+
+    if TaskRet > 2 then begin
+      Log('Debug: Sandman /RemoveSandboxes');
+      Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+    end;
+
+    if TaskRet > 1 then begin
+      for I := 0 to Paths.Count - 1 do
+        if FileExists(Paths[I]) then begin
+          Log('Debug: DeleteFile(' + Paths[I] + ')');
+          DeleteFile(Paths[I]);
+        end;
+    end;
+  end;
+
+  // Release the list.
+  Paths.Free;
+end;
+
+
+//////////////////////////////////////////////////////
 // Uninstallation Events
 //
 
@@ -393,6 +518,10 @@ begin
   // Before the uninstallation.
   if (CurUninstallStep <> usUninstall) then
     exit;
+
+  // User to confirm extra files to remove.
+  if not UninstallSilent then
+    UninstallCleanup(2);
 
   // Shutdown service, driver and processes.
   if (ShutdownSbie() = False) then

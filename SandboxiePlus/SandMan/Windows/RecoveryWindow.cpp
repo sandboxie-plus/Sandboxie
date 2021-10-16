@@ -94,7 +94,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 
 	QMenu* pRecMenu = new QMenu(ui.btnRecover);
-	m_pRemember = pRecMenu->addAction(tr("Remember target selection"), this, SLOT(OnCloseUntil()));
+	m_pRemember = pRecMenu->addAction(tr("Remember target selection"));
 	m_pRemember->setCheckable(true);
 	ui.btnRecover->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnRecover->setMenu(pRecMenu);
@@ -304,7 +304,7 @@ int CRecoveryWindow::FindBoxFiles(const QString& Folder)
 	QString RealFolder = theAPI->GetRealPath(m_pBox, m_pBox->GetFileRoot() + Folder);
 	if (RealFolder.isEmpty())
 		return 0;
-	return FindFiles(m_pBox->GetFileRoot() + Folder, Folder, RealFolder).first;
+	return FindFiles(m_pBox->GetFileRoot() + Folder, RealFolder, RealFolder).first;
 }
 
 QPair<int, quint64>	CRecoveryWindow::FindFiles(const QString& BoxedFolder, const QString& RealFolder, const QString& Name, const QString& ParentID)

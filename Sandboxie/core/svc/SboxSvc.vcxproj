@@ -208,6 +208,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="comserver.cpp" />
+    <ClCompile Include="comserver2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="comserver9.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>

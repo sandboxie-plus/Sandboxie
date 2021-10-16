@@ -1316,7 +1316,7 @@ static P_ImmCreateContext       __sys_ImmCreateContext      = NULL;
 _FX BOOLEAN Gui_Init_IMM32(HMODULE module)
 {
     // NoSbieDesk BEGIN
-    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
         return TRUE;
 	// NoSbieDesk END
 

@@ -121,6 +121,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	
 	m_WarnProgsChanged = false;
 
@@ -238,6 +239,7 @@ void CSettingsWindow::LoadSettings()
 		ui.ipcRoot->setText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
 
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
+		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -260,6 +262,7 @@ void CSettingsWindow::LoadSettings()
 		ui.fileRoot->setEnabled(false);
 		ui.chkSeparateUserFolders->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
+		ui.chkObjCb->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
@@ -291,7 +294,13 @@ void CSettingsWindow::LoadSettings()
 		QPalette palette = QApplication::palette();
 		if (theGUI->m_DarkTheme)
 			palette.setColor(QPalette::Text, Qt::black);
-		palette.setColor(QPalette::Base, QColor(192, 255, 192));
+		if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+			palette.setColor(QPalette::Base, QColor(255, 255, 192));
+			ui.lblCertExp->setVisible(true);
+		}
+		else {
+			palette.setColor(QPalette::Base, QColor(192, 255, 192));
+		}
 		ui.txtCertificate->setPalette(palette);
 	}
 
@@ -361,6 +370,7 @@ void CSettingsWindow::SaveSettings()
 
 
 		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
+		theAPI->GetGlobalSettings()->SetBool("EnableObjectFiltering", ui.chkObjCb->isChecked());
 
 		if (m_FeaturesChanged) {
 			m_FeaturesChanged = false;
@@ -420,6 +430,13 @@ void CSettingsWindow::SaveSettings()
 					Used.append(pItem->data(0, Qt::UserRole).toString());
 			}
 
+			// retain local templates
+			foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
+				if (Template.left(6) == "Local_") {
+					Used.append(Template);
+				}
+			}
+
 			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
 			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected, false);
 			m_CompatChanged = false;
@@ -457,6 +474,8 @@ void CSettingsWindow::SaveSettings()
 			if (theGUI->m_DarkTheme)
 				palette.setColor(QPalette::Text, Qt::black);
 
+			ui.lblCertExp->setVisible(false);
+
 			if (Certificate.isEmpty())
 			{
 				palette.setColor(QPalette::Base, Qt::white);
@@ -465,9 +484,17 @@ void CSettingsWindow::SaveSettings()
 			{
 				g_FeatureFlags = theAPI->GetFeatureFlags();
 
-				QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
+				if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+					QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
 
-				palette.setColor(QPalette::Base, QColor(192, 255, 192));
+					palette.setColor(QPalette::Base, QColor(255, 255, 192));
+					ui.lblCertExp->setVisible(true);
+				}
+				else {
+					QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
+
+					palette.setColor(QPalette::Base, QColor(192, 255, 192));
+				}
 			}
 			else
 			{

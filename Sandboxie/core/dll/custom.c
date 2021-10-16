@@ -73,6 +73,8 @@ _FX BOOLEAN CustomizeSandbox(void)
 
     if (GetSetCustomLevel(0) != '1') {
 
+        Key_CreateBaseKeys();
+
         Custom_CreateRegLinks();
         DisableDCOM();
         DisableRecycleBin();
@@ -1119,7 +1121,7 @@ _FX void Custom_ComServer(void)
         // SbieSvc SANDBOXIE_ComProxy_ComServer:BoxName
         // see also core/svc/ProcessServer.cpp
         // and      core/svc/comserver9.c
-        BOOL ok = SbieDll_RunSandboxed(L"*THREAD*", L"*COMSRV*", L"", 0,
+        BOOL ok = SbieDll_RunSandboxed(L"", L"*COMSRV*", L"", 0,
                                        &StartupInfo, &ProcessInformation);
 
         if (ok)
@@ -1128,6 +1130,61 @@ _FX void Custom_ComServer(void)
 
     ExitProcess(0);
 }
+
+
+//---------------------------------------------------------------------------
+// NsiRpc_Init
+//---------------------------------------------------------------------------
+
+#include <objbase.h>
+
+typedef RPC_STATUS (*P_NsiRpcRegisterChangeNotification)(
+    LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7);
+
+P_NsiRpcRegisterChangeNotification __sys_NsiRpcRegisterChangeNotification = NULL;
+
+static RPC_STATUS NsiRpc_NsiRpcRegisterChangeNotification(
+    LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7);
+
+
+_FX BOOLEAN NsiRpc_Init(HMODULE module)
+{
+    P_NsiRpcRegisterChangeNotification NsiRpcRegisterChangeNotification;
+
+    NsiRpcRegisterChangeNotification = (P_NsiRpcRegisterChangeNotification)
+        Ldr_GetProcAddrNew(DllName_winnsi, L"NsiRpcRegisterChangeNotification", "NsiRpcRegisterChangeNotification");
+
+    SBIEDLL_HOOK(NsiRpc_, NsiRpcRegisterChangeNotification);
+
+    return TRUE;
+}
+
+
+//  In Win8.1 WININET initialization needs to register network change events into NSI service (Network Store Interface Service).
+//  The communication between guest and NSI service is via epmapper. We currently block epmapper and it blocks guest and NSI service.
+//  This causes IE to pop up a dialog "Revocation information for the security certificate for this site is not available. Do you want to proceed?"
+//  The fix can be either - 
+//  1.  Allowing guest to talk to NSI service by fixing RpcBindingCreateW like what we did for keyiso-crypto and Smart Card service.
+//      ( We don't fully know what we actually open to allow guest to talk to NSI service and if it is needed. It has been blocked. )
+//  2. Hooking NsiRpcRegisterChangeNotification and silently returning NO_ERROR from the hook.
+//      ( Guest app won't get Network Change notification. I am not sure if this is needed for the APP we support. )
+//  We choose Fix 2 here. We may need fix 1 if see a need in the future.
+
+
+_FX RPC_STATUS NsiRpc_NsiRpcRegisterChangeNotification(LPVOID  p1, LPVOID  p2, LPVOID  p3, LPVOID  p4, LPVOID  p5, LPVOID  p6, LPVOID  p7)
+{
+    RPC_STATUS ret = __sys_NsiRpcRegisterChangeNotification(p1, p2, p3, p4, p5, p6, p7);
+
+    if (EPT_S_NOT_REGISTERED == ret)
+    {
+        ret = NO_ERROR;
+    }
+    return ret;
+}
+
+
+
+
 
 
 //---------------------------------------------------------------------------

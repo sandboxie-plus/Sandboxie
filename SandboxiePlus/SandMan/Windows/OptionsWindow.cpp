@@ -17,6 +17,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	m_Template = pBox->GetName().left(9).compare("Template_", Qt::CaseInsensitive) == 0;
 	bool ReadOnly = /*pBox->GetAPI()->IsConfigLocked() ||*/ (m_Template && pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) != 0);
 	
+	m_HoldChange = false;
+
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxPlus.isNull())
 		m_Programs = pBoxPlus->GetRecentPrograms();
@@ -120,10 +122,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	CreateAccess();
 
-	// Resource Access
-	connect(ui.chkCloseForBox, SIGNAL(clicked(bool)), this, SLOT(OnAccessChanged()));
-	//
-
 	// Recovery
 	connect(ui.chkAutoRecovery, SIGNAL(clicked(bool)), this, SLOT(OnRecoveryChanged()));
 	connect(ui.btnAddRecovery, SIGNAL(clicked(bool)), this, SLOT(OnAddRecFolder()));
@@ -151,6 +149,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
+	connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnOptChanged()));
+
 	//
 
 	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
@@ -161,7 +161,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	{
 		ui.btnEditIni->setEnabled(false);
 		ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-		ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 	}
 
 	if (theAPI->IsRunningAsAdmin())
@@ -173,6 +172,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		ui.lblAdmin->setVisible(false);
 
 	LoadConfig();
+
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 
 	ui.treeAccess->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
@@ -203,6 +204,12 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (!Columns.isEmpty()) ui.treeRecovery->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Templates_Columns");
 	if (!Columns.isEmpty()) ui.treeTemplates->header()->restoreState(Columns);
+}
+
+void COptionsWindow::OnOptChanged() {
+	if (m_HoldChange)
+		return;
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
 COptionsWindow::~COptionsWindow()
@@ -308,6 +315,7 @@ void COptionsWindow::LoadConfig()
 
 	LoadTemplates();
 	
+	UpdateBoxType();
 }
 
 void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value)
@@ -326,6 +334,9 @@ void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, 
 {
 	//if (pCheck->checkState() == Qt::PartiallyChecked)
 	//	return;
+
+	if (!pCheck->isEnabled())
+		return;
 
 	SB_STATUS Status;
 	if (pCheck->checkState() == Qt::Checked)
@@ -434,6 +445,8 @@ void COptionsWindow::apply()
 	UpdateCurrentTab();
 
 	emit OptionsChanged();
+
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 
 void COptionsWindow::ok()
@@ -484,9 +497,9 @@ QString COptionsWindow::SelectProgram(bool bOrGroup)
 
 	if (bOrGroup)
 	{
-		for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) {
-			QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
-			progDialog.addItem(tr("Group: %1").arg(pItem->text(0)), pItem->data(0, Qt::UserRole).toString());
+		foreach(const QString Group, GetCurrentGroups()){
+			QString GroupName = Group.mid(1, GroupName.length() - 2);
+			progDialog.addItem(tr("Group: %1").arg(Group), GroupName);
 		}
 	}
 
@@ -547,7 +560,9 @@ void COptionsWindow::UpdateCurrentTab()
 	}
 	else if (ui.tabs->currentWidget() == ui.tabAdvanced)
 	{
-		if (GetAccessEntry(eWnd, "", eDirect, "*") != NULL)
+		ui.chkOpenCOM->setChecked(GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL);
+
+		if (GetAccessEntry(eWnd, "", eOpen, "*") != NULL)
 		{
 			ui.chkNoWindowRename->setEnabled(false);
 			ui.chkNoWindowRename->setChecked(true);
@@ -555,7 +570,7 @@ void COptionsWindow::UpdateCurrentTab()
 		else
 		{
 			ui.chkNoWindowRename->setEnabled(true);
-			ui.chkNoWindowRename->setChecked(GetAccessEntry(eWnd, "", eDirect, "#") != NULL);
+			ui.chkNoWindowRename->setChecked(GetAccessEntry(eWnd, "", eOpen, "#") != NULL);
 		}
 	}
 }
@@ -606,7 +621,9 @@ void COptionsWindow::LoadIniSection()
 
 	Section = m_pBox->GetAPI()->SbieIniGetEx(m_pBox->GetName(), "");
 
+	m_HoldChange = true;
 	ui.txtIniSection->setPlainText(Section);
+	m_HoldChange = false;
 }
 
 void COptionsWindow::SaveIniSection()

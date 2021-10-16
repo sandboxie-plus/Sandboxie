@@ -201,6 +201,13 @@ _FX BOOLEAN NetApi_Hook_NetUseAdd(HMODULE module)
         if (PATH_IS_CLOSED(mp_flags))
             return TRUE;
     }
+    
+    //
+    // In in app mode we have a full token and this wil be successfull, hence no need for a hook
+    //
+    
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) 
+        return TRUE;
 
     //
     // otherwise hook NetUseAdd

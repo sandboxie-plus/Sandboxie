@@ -200,6 +200,12 @@
     <ClCompile Include="..\..\common\str_util.c">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\map.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32.c">
+      <Filter>gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
@@ -264,6 +270,9 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\str_util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\map.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\ntproto.h">

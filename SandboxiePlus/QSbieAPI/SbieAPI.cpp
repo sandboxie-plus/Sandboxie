@@ -37,6 +37,7 @@ typedef long NTSTATUS;
 
 #include "..\..\Sandboxie\core\svc\msgids.h"
 #include "..\..\Sandboxie\core\svc\ProcessWire.h"
+#include "..\..\Sandboxie\core\svc\GuiWire.h"
 #include "..\..\Sandboxie\core\svc\sbieiniwire.h"
 #include "..\..\Sandboxie\core\svc\QueueWire.h"
 #include "..\..\Sandboxie\core\svc\InteractiveWire.h"
@@ -288,7 +289,7 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 	//m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.52.0";
+	QStringList CompatVersions = QStringList () << "5.55.0";
 	QString CurVersion = GetVersion();
 	if (!CompatVersions.contains(CurVersion))
 	{
@@ -1295,13 +1296,14 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, bool bAl
 SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 {
 	ULONG count = 0;
-	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, NULL, &count); // query the count
-	if (Status.IsError())
+	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, NULL, &count); // query count
+	if (Status.IsError()) 
+		return Status;
 
 	count += 128; // add some extra space
 	ULONG* boxed_pids = new ULONG[count]; 
 
-	Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, boxed_pids, &count); // query the count
+	Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, boxed_pids, &count); // query pids
 	if (Status.IsError()) {
 		delete[] boxed_pids;
 		return Status;
@@ -2042,8 +2044,16 @@ QString CSbieAPI::GetFeatureStr()
 	QStringList str;
 	if (flags & SBIE_FEATURE_FLAG_WFP)
 		str.append("WFP");
+	if (flags & SBIE_FEATURE_FLAG_OB_CALLBACKS)
+		str.append("ObCB");
 	if (flags & SBIE_FEATURE_FLAG_SBIE_LOGIN)
 		str.append("SbL");
+	if (flags & SBIE_FEATURE_FLAG_PRIVACY_MODE)
+		str.append("PMod");
+	if (flags & SBIE_FEATURE_FLAG_COMPARTMENTS)
+		str.append("AppC");
+	if (flags & SBIE_FEATURE_FLAG_WIN32K_HOOK)
+		str.append("W32k");
 
 	return str.join(",");
 }

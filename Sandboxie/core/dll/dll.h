@@ -287,6 +287,8 @@ extern BOOLEAN Ldr_BoxedImage;
 
 extern WCHAR *Ldr_ImageTruePath;
 
+extern BOOLEAN Ipc_OpenCOM;
+
 extern const WCHAR *Scm_CryptSvc;
 
 extern BOOLEAN Dll_SbieTrace;
@@ -493,6 +495,7 @@ NTSTATUS Key_OpenOrCreateIfBoxed(
 void Key_DeleteValueFromCLSID(
     const WCHAR *Xxxid, const WCHAR *Guid, const WCHAR *ValueName);
 
+void Key_CreateBaseKeys();
 
 //---------------------------------------------------------------------------
 // Functions (sxs)
@@ -589,6 +592,8 @@ BOOLEAN Secure_IsLocalSystemToken(BOOLEAN CheckThreadToken);
 BOOL Proc_ImpersonateSelf(BOOLEAN Enable);
 
 BOOLEAN Taskbar_SHCore_Init(HMODULE hmodule);
+
+BOOLEAN Win32_Init(HMODULE hmodule);
 
 
 //---------------------------------------------------------------------------
@@ -712,8 +717,6 @@ BOOLEAN Com_Init(HMODULE);
 BOOLEAN Com_Init_Ole32(HMODULE);
 
 BOOLEAN RpcRt_Init(HMODULE);
-
-BOOLEAN Secure_Init_Elevation(HMODULE);
 
 BOOLEAN UserEnv_Init(HMODULE);
 

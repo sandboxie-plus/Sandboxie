@@ -72,6 +72,9 @@
     <ClCompile Include="..\..\common\ini.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="comserver2.cpp">
+      <Filter>ComProxy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />

@@ -230,24 +230,64 @@ _FX void Key_Unload(void)
 
 _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 {
+#ifdef USE_MATCH_PATH_EX
+    static const WCHAR *_NormalPath = L"NormalKeyPath";
+#endif
     static const WCHAR *_OpenPath = L"OpenKeyPath";
+    static const WCHAR *_OpenConf = L"OpenConfPath";
     static const WCHAR *_ClosedPath = L"ClosedKeyPath";
     static const WCHAR *_ReadPath = L"ReadKeyPath";
     static const WCHAR *_WritePath = L"WriteKeyPath";
+#ifdef USE_MATCH_PATH_EX
+    static const WCHAR *normalpaths[] = {
+        L"HKEY_LOCAL_MACHINE\\*",
+        NULL
+    };
+#endif
+
     BOOLEAN ok;
+
+#ifdef USE_MATCH_PATH_EX
+    ULONG i;
+
+    //
+    // normal paths
+    //
+
+    ok = Process_GetPaths(proc, &proc->normal_key_paths, _NormalPath, TRUE);
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+        return FALSE;
+    }
+
+    for (i = 0; normalpaths[i] && ok; ++i) {
+        ok = Process_AddPath(proc, &proc->normal_key_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+    }
+
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+        return FALSE;
+    }
+#endif
 
     //
     // open paths
     //
 
-    if (proc->image_from_box)
-        ok = TRUE;
-    else
+    ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenConf, TRUE);
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _OpenConf, proc->pid);
+        return FALSE;
+    }
+
+    if (! proc->dont_open_for_boxed || ! proc->image_from_box) {
+
         ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenPath, TRUE);
 
-    if (! ok) {
-        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
-        return FALSE;
+        if (! ok) {
+            Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
+            return FALSE;
+        }
     }
 
     //
@@ -264,8 +304,10 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // read-only paths (stored also as open paths)
     //
 
+#ifndef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, &proc->open_key_paths, _ReadPath, TRUE);
     if (ok)
+#endif
         ok = Process_GetPaths(proc, &proc->read_key_paths, _ReadPath, TRUE);
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
@@ -276,19 +318,20 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // write-only paths (stored also as closed paths)
     //
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_XP) {
-
-        ok = Process_GetPaths2(
-                proc, &proc->write_key_paths, &proc->closed_key_paths,
-                _WritePath, TRUE);
-        if (ok) {
-            ok = Process_GetPaths(
-                    proc, &proc->closed_key_paths, _WritePath, TRUE);
-        }
-        if (! ok) {
-            Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
-            return FALSE;
-        }
+#ifdef USE_MATCH_PATH_EX
+    ok = Process_GetPaths(proc, &proc->write_key_paths, _WritePath, TRUE);
+#else
+    ok = Process_GetPaths2(
+            proc, &proc->write_key_paths, &proc->closed_key_paths,
+            _WritePath, TRUE);
+    if (ok) {
+        ok = Process_GetPaths(
+                proc, &proc->closed_key_paths, _WritePath, TRUE);
+    }
+#endif
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
+        return FALSE;
     }
 
     //
@@ -383,8 +426,12 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
     if (! IsBoxedPath) {
 
+#ifdef USE_MATCH_PATH_EX
+        ULONG mp_flags;
+#else
         LIST *open_key_paths;
         BOOLEAN is_open, is_closed;
+#endif
 
         //
         // deny access in two cases:
@@ -393,6 +440,24 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
         //   and this is a write access
         //
 
+#ifdef USE_MATCH_PATH_EX
+        mp_flags = Process_MatchPathEx(proc, 
+            Name->Name.Buffer, Name->Name.Length / sizeof(WCHAR), L'k',
+            &proc->normal_key_paths, &proc->open_key_paths, &proc->closed_key_paths,
+            &proc->read_key_paths, &proc->write_key_paths, NULL);
+
+        //if ((mp_flags & (write_access ? TRUE_PATH_WRITE_FLAG : TRUE_PATH_READ_FLAG)) != 0) {
+        if ((mp_flags & TRUE_PATH_MASK) == 0 || (write_access && (mp_flags & TRUE_PATH_WRITE_FLAG) == 0)) {
+
+            if((mp_flags & COPY_PATH_WRITE_FLAG) != 0)
+                status = STATUS_OBJECT_NAME_NOT_FOUND;
+            else
+                status = STATUS_ACCESS_DENIED;
+
+            if ((mp_flags & TRUE_PATH_MASK) == 0)
+                ShouldMonitorAccess = TRUE;
+        }
+#else
         if (write_access)
             open_key_paths = &proc->open_key_paths;
         else
@@ -432,6 +497,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
                 ShouldMonitorAccess = TRUE;
             }
         }
+#endif
 
         //
         // when Software Restriction Policies is in effect, ADVAPI32 opens

@@ -659,7 +659,7 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
 File name: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Souhaitez-vous autoriser %4 (%5) à copier un fichier volumineux %1 dans le bac à sable&#xa0;: %2&#xa0;?
@@ -667,7 +667,7 @@ Nom du fichier&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
-        <source>Do you want to allow %1 (%2) access to the internet?
+        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
 Full path: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Souhaitez-vous autoriser %1 (%2) à accéder à Internet&#xa0;?
@@ -675,7 +675,7 @@ Chemin complet&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="322"/>
-        <source>%1 is eligible for quick recovery from %2.
+        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
 The file was written by: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>%1 est éligible pour une récupération rapide à partir de %2.
@@ -699,7 +699,7 @@ Le fichier a été écrit par&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="413"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
 Full path: %4</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Migration d&apos;un fichier volumineux %1 dans le bac à sable %2, %3 restant.
@@ -1073,8 +1073,8 @@ Chemin complet&#xa0;: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="524"/>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
-
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
+<byte value="xd"/>
 Do you want to do the clean up?</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus fonctionnait en mode portable, il est maintenant nécessaire de nettoyer les services créés. Cela demandera des privilèges administratifs.
@@ -1155,8 +1155,8 @@ Voulez-vous faire le nettoyage&#xa0;?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="853"/>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
-Yes will choose: %1
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
+Yes will choose: %1<byte value="xd"/>
 No will choose: %2</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus a été démarré en mode portable, voulez-vous mettre le dossier Sandbox dans son répertoire parent&#xa0;?

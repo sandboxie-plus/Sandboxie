@@ -8,14 +8,14 @@
 *.cmd    text eol=crlf
 *.ini    text eol=crlf
 *.xml    text
-*.c      text
-*.h      text
-*.ts     text
-*.cpp    text
+*.c      text eol=crlf
+*.h      text eol=crlf
+*.cpp    text eol=crlf
 *.rc     text
+*.ts     text eol=lf
 
 # DOCUMENTATION
-*.md     text
+*.md     text eol=lf
 *.txt    text eol=crlf
 
 # CONFIGS

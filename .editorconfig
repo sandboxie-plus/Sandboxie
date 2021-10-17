@@ -17,9 +17,15 @@ charset = utf-8
 indent_style = space
 indent_size = 2
 
-[*.{c,cpp,h,ts,md}]
+[*.{ts,md}]
 charset = utf-8
 end_of_line = lf
+indent_style = tab
+indent_size = unset
+
+[*.{c,h,cpp}]
+charset = utf-8
+end_of_line = crlf
 indent_style = tab
 indent_size = unset
 

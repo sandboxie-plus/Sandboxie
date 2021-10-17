@@ -753,22 +753,22 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="97"/>
         <source>Remember target selection</source>
-        <translation type="unfinished"></translation>
+        <translation>记住对此目标的选择</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="121"/>
         <source>Original location</source>
-        <translation type="unfinished"></translation>
+        <translation>原始位置</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="122"/>
         <source>Browse for location</source>
-        <translation type="unfinished"></translation>
+        <translation>浏览位置</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="123"/>
         <source>Clear folder list</source>
-        <translation type="unfinished">清除文件夹列表</translation>
+        <translation>清除文件夹列表</translation>
     </message>
     <message>
         <source>Clear this list</source>
@@ -784,7 +784,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="231"/>
         <source>Close until all programs stop in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭，在沙盒内全部程序停止后再显示</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="251"/>
@@ -1190,7 +1190,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="880"/>
         <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 版本：%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1706"/>
@@ -1837,7 +1837,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Thunderbird</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="478"/>
@@ -1847,7 +1847,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source>Forced </source>
-        <translation type="unfinished"></translation>
+        <translation>必沙 </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="484"/>
@@ -2484,57 +2484,57 @@ No will choose: %2</source>
     <message>
         <location filename="Views/TraceView.cpp" line="83"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>类型：</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="95"/>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>状态：</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="98"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>已打开</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="99"/>
         <source>Closed</source>
-        <translation type="unfinished">已关闭</translation>
+        <translation>已关闭</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="100"/>
         <source>Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>跟踪</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="101"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>其他</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="106"/>
         <source>Show All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>显示所有沙盒</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="112"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>保存到文件</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="334"/>
         <source>Save trace log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>保存跟踪日志到文件</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="340"/>
         <source>Failed to open log file for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开日志文件进行写入</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="356"/>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>Filter selected box only</source>
@@ -3660,7 +3660,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="117"/>
         <source>Recover target:</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复目标位置：</translation>
     </message>
     <message>
         <source>Recover to</source>

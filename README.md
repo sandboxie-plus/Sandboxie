@@ -60,23 +60,21 @@ Open Source release
 - Valinwolf - UI / Icons
 - daveout - UI / Icons
 - mpheath - Author of Plus installer based on Inno Setup
-- yfdyh000 - Localization support of Plus installer
+- yfdyh000 - Localization support for Plus installer
 - NewKidOnTheBlock - Changelog fixes
 
 ## Translators
-- yuhao2348732 - Chinese Simplified
-- nkh0472 - Chinese Simplified
-- yfdyh000 - Chinese Simplified
-- TragicLifeHu - Chinese Traditional
-- Hulen - Chinese Traditional
+- yuhao2348732, nkh0472, yfdyh000, gexgd0419 - Chinese Simplified
+- TragicLifeHu, Hulen - Chinese Traditional
 - RockyTDR - Dutch
+- clexanis - French
 - bastik-1001 - German
 - isaak654 - Italian
 - 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=10) - Polish
 - JNylson - Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- xorcan - Turkish (currently unmaintained)
+- xorcan - Turkish (disabled for inactivity since Plus 0.9.7)
 
 More volunteers are welcome here! ;)
 

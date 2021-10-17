@@ -1,30 +1,68 @@
-# AUTO-DETECT
 # Handle line endings automatically for files detected as text.
 # This will handle all files NOT defined below.
-* text=auto
+*               text=auto
 
-# SOURCE CODE
-*.bat    text eol=crlf
-*.cmd    text eol=crlf
-*.ini    text eol=crlf
-*.xml    text
-*.c      text eol=crlf diff=cpp
-*.h      text eol=crlf diff=cpp
-*.cpp    text eol=crlf diff=cpp
-*.rc     text eol=crlf
-*.ts     text eol=lf
+# Sources
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.ini           text eol=crlf
+*.xml           text
+*.c             text eol=crlf diff=c
+*.h             text eol=crlf diff=c
+*.cpp           text eol=crlf diff=cpp
+*.rc            text eol=crlf
+*.ts            text eol=lf
 
-# DOCUMENTATION
-*.md     text eol=lf diff=markdown
-*.txt    text eol=crlf
+# Documentation
+*.md            text eol=lf diff=markdown
+*.txt           text eol=crlf
 
-# CONFIGS
-.editorconfig  text
-.gitattributes text
-.gitconfig     text
-.gitignore     text
-*.yaml         text
-*.yml          text
+# Configs
+.editorconfig   text
+.gitattributes  text
+.gitconfig      text
+.gitignore      text
+*.yaml          text
+*.yml           text
+
+# Graphics
+*.ico           binary
+*.png           binary
+*.jpg           binary
+*.gif           binary
+
+# Archives
+*.7z            binary
+*.gz            binary
+*.tar           binary
+*.tgz           binary
+*.zip           binary
+
+# Executables
+*.exe           binary
+*.out           binary
+*.app           binary
+
+# Compiled object files
+*.slo           binary
+*.lo            binary
+*.o             binary
+*.obj           binary
+
+# Precompiled headers
+*.gch           binary
+*.pch           binary
+
+# Compiled dynamic libraries
+*.so            binary
+*.dylib         binary
+*.dll           binary
+
+# Compiled static libraries
+*.lai           binary
+*.la            binary
+*.a             binary
+*.lib           binary
 
 # Set the merge driver for project and solution files
 #
@@ -36,38 +74,38 @@
 # intervention with every merge. To do so, just comment the entries below and
 # uncomment the group further below
 
-*.sln        text eol=crlf
-*.csproj     text eol=crlf
-*.vbproj     text eol=crlf
-*.vcxproj    text eol=crlf
-*.vcproj     text eol=crlf
-*.dbproj     text eol=crlf
-*.fsproj     text eol=crlf
-*.lsproj     text eol=crlf
-*.wixproj    text eol=crlf
-*.modelproj  text eol=crlf
-*.sqlproj    text eol=crlf
-*.wwaproj    text eol=crlf
+*.sln           text eol=crlf
+*.csproj        text eol=crlf
+*.vbproj        text eol=crlf
+*.vcxproj       text eol=crlf
+*.vcproj        text eol=crlf
+*.dbproj        text eol=crlf
+*.fsproj        text eol=crlf
+*.lsproj        text eol=crlf
+*.wixproj       text eol=crlf
+*.modelproj     text eol=crlf
+*.sqlproj       text eol=crlf
+*.wwaproj       text eol=crlf
 
-*.xproj      text eol=crlf
-*.props      text eol=crlf
-*.filters    text eol=crlf
-*.vcxitems   text eol=crlf
+*.xproj         text eol=crlf
+*.props         text eol=crlf
+*.filters       text eol=crlf
+*.vcxitems      text eol=crlf
 
-#*.sln       merge=binary
-#*.csproj    merge=binary
-#*.vbproj    merge=binary
-#*.vcxproj   merge=binary
-#*.vcproj    merge=binary
-#*.dbproj    merge=binary
-#*.fsproj    merge=binary
-#*.lsproj    merge=binary
-#*.wixproj   merge=binary
-#*.modelproj merge=binary
-#*.sqlproj   merge=binary
-#*.wwaproj   merge=binary
+#*.sln          merge=binary
+#*.csproj       merge=binary
+#*.vbproj       merge=binary
+#*.vcxproj      merge=binary
+#*.vcproj       merge=binary
+#*.dbproj       merge=binary
+#*.fsproj       merge=binary
+#*.lsproj       merge=binary
+#*.wixproj      merge=binary
+#*.modelproj    merge=binary
+#*.sqlproj      merge=binary
+#*.wwaproj      merge=binary
 
-#*.xproj     merge=binary
-#*.props     merge=binary
-#*.filters   merge=binary
-#*.vcxitems  merge=binary
+#*.xproj        merge=binary
+#*.props        merge=binary
+#*.filters      merge=binary
+#*.vcxitems     merge=binary

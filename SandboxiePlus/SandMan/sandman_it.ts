@@ -794,25 +794,6 @@ Percorso completo: %4</translation>
     </message>
 </context>
 <context>
-    <name>CSandBox</name>
-    <message>
-        <source>Waiting for folder: %1</source>
-        <translation type="vanished">In attesa della cartella: %1</translation>
-    </message>
-    <message>
-        <source>Deleting folder: %1</source>
-        <translation type="vanished">Eliminazione della cartella: %1</translation>
-    </message>
-    <message>
-        <source>Merging folders: %1 &gt;&gt; %2</source>
-        <translation type="vanished">Unione cartelle: %1 &gt;&gt; %2</translation>
-    </message>
-    <message>
-        <source>Finishing Snapshot Merge...</source>
-        <translation type="vanished">Completamento unione istantanea...</translation>
-    </message>
-</context>
-<context>
     <name>CSandBoxPlus</name>
     <message>
         <location filename="SbiePlusAPI.cpp" line="152"/>
@@ -1362,10 +1343,6 @@ Scegliere No per selezionare: %2</translation>
         <translation>Le modifiche verranno applicate automaticamente non appena l&apos;editor viene chiuso.</translation>
     </message>
     <message>
-        <source>Error Status: %1</source>
-        <translation type="vanished">Stato di errore: %1</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1709"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Questa operazione richiede privilegi amministrativi.</translation>
@@ -1441,14 +1418,6 @@ Scegliere No per selezionare: %2</translation>
         <translation>Errore durante l&apos;eliminazione della cartella: %1</translation>
     </message>
     <message>
-        <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation type="vanished">Occorre svuotare il contenuto dell&apos;area virtuale prima di poterla rinominare.</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">Occorre svuotare il contenuto dell&apos;area virtuale prima di poterla rimuovere.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1726"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Impossibile spostare directory &apos;%1&apos; in &apos;%2&apos;</translation>
@@ -1517,10 +1486,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="SandMan.cpp" line="1739"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>La password non può superare i 64 caratteri</translation>
-    </message>
-    <message>
-        <source>Unknown Error Status: %1</source>
-        <translation type="vanished">Stato di errore sconosciuto: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1760"/>
@@ -1864,10 +1829,6 @@ Scegliere No per selezionare: %2</translation>
         <translation>Crea nuova area virtuale</translation>
     </message>
     <message>
-        <source>Add Group</source>
-        <translation type="vanished">Aggiungi gruppo</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="77"/>
         <source>Remove Group</source>
         <translation>Rimuovi gruppo</translation>
@@ -1911,18 +1872,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/SbieView.cpp" line="94"/>
         <source>Programs and Features</source>
         <translation>Programmi e funzionalità</translation>
-    </message>
-    <message>
-        <source>Terminal</source>
-        <translation type="vanished">Prompt dei comandi</translation>
-    </message>
-    <message>
-        <source>Terminal (as Admin)</source>
-        <translation type="vanished">Prompt dei comandi (amministratore)</translation>
-    </message>
-    <message>
-        <source>Terminal (32-bit)</source>
-        <translation type="vanished">Prompt dei comandi (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
@@ -1994,10 +1943,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Rename Sandbox</source>
         <translation>Rinomina area virtuale</translation>
-    </message>
-    <message>
-        <source>Move to Group</source>
-        <translation type="vanished">Sposta nel gruppo</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="142"/>
@@ -2165,7 +2110,6 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="621"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <oldsource>Move entries by (negative values move up oositive values move down):</oldsource>
         <translation>Ordina le voci per (i valori negativi spostano verso l&apos;alto, quelli positivi verso il basso):</translation>
     </message>
     <message>
@@ -2237,10 +2181,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/SbieView.cpp" line="1018"/>
         <source>the selected processes</source>
         <translation>i processi selezionati</translation>
-    </message>
-    <message>
-        <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="vanished">Vuoi %1 i processi selezionati?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1079"/>
@@ -2518,10 +2458,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/TraceView.cpp" line="356"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
-    </message>
-    <message>
-        <source>Filter selected box only</source>
-        <translation type="vanished">Mostra solo per l&apos;area virtuale selezionata</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="265"/>
@@ -3590,10 +3526,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Destinazione:</translation>
     </message>
     <message>
-        <source>Recover to</source>
-        <translation type="vanished">Recupera in</translation>
-    </message>
-    <message>
         <location filename="Forms/RecoveryWindow.ui" line="146"/>
         <source>Add Folder</source>
         <translation>Aggiungi cartella</translation>
@@ -3637,6 +3569,11 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Selezionare l&apos;area virtuale in cui avviare il programma o aprire il documento.</translation>
     </message>
     <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="51"/>
+        <source>Sandbox</source>
+        <translation>Elenco aree virtuali</translation>
+    </message>
+    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>
         <source>Run As UAC Administrator</source>
         <translation>Esegui come amministratore</translation>
@@ -3678,10 +3615,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/SettingsWindow.ui" line="103"/>
         <source>Systray options</source>
         <translation>Opzioni area di notifica</translation>
-    </message>
-    <message>
-        <source>Show Sys-Tray</source>
-        <translation type="vanished">Mostra icona nell&apos;area di notifica</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
@@ -3819,10 +3752,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Solo gli account Amministratore possono utilizzare la funzione Disattiva i programmi ad avvio forzato</translation>
     </message>
     <message>
-        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="vanished">I sostenitori del progetto Sandboxie Plus riceveranno un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificato di sostenitore&lt;/a&gt;. È come un codice di licenza, ma riservato a persone straordinarie che usano software free. :-)</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="350"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>&lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;Percorso file system&lt;/a&gt; dell&apos;area virtuale: </translation>
@@ -3885,7 +3814,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <oldsource>Show the recovery window outright instead of only notifying about recoverable files</oldsource>
         <translation>Mostra i file da recuperare nella finestra delle notifiche</translation>
     </message>
     <message>
@@ -3957,7 +3885,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="803"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <oldsource>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</oldsource>
         <translation>I sostenitori del progetto Sandboxie Plus riceveranno un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di sostenitore&lt;/a&gt;. È come un codice di licenza, ma riservato a persone straordinarie che usano software open source. :-)</translation>
     </message>
     <message>

@@ -3714,6 +3714,11 @@ Please note that this values are currently user specific and saved globally for 
         <translation>选择要用于运行程序、安装程序或打开文件的沙盒。</translation>
     </message>
     <message>
+        <location filename="Forms/SelectBoxWindow.ui" line="51"/>
+        <source>Sandbox</source>
+        <translation>沙盒</translation>
+    </message>
+    <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>
         <source>Run As UAC Administrator</source>
         <translation>以 UAC 管理员权限运行</translation>

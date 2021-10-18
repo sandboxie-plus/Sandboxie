@@ -803,6 +803,29 @@ Full path: %4</source>
     </message>
 </context>
 <context>
+    <name>CSandBox</name>
+    <message>
+        <location filename="SandMan.cpp" line="2302"/>
+        <source>Waiting for folder: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2303"/>
+        <source>Deleting folder: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2304"/>
+        <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2305"/>
+        <source>Finishing Snapshot Merge...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CSandBoxPlus</name>
     <message>
         <location filename="SbiePlusAPI.cpp" line="152"/>
@@ -1614,22 +1637,22 @@ No will choose: %2</source>
         <translation>&lt;p&gt;Sandboxie-Plus 是著名程序 Sandboxie 自开源以来的一个延续。&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 来了解更多信息。&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;图标来自 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2332"/>
+        <location filename="SandMan.cpp" line="2340"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>选择的窗口正作为程序 %1 一部分运行在沙盒 %2 中</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2339"/>
+        <location filename="SandMan.cpp" line="2347"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation>选择的窗口并非作为任何沙盒化程序的一部分而运行。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2374"/>
+        <location filename="SandMan.cpp" line="2382"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation>拖拽准星到被选窗口上，松开鼠标检查窗口是否来自沙盒化的程序。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2429"/>
+        <location filename="SandMan.cpp" line="2437"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - 窗口探查器</translation>
     </message>

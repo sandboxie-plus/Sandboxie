@@ -794,6 +794,29 @@ Percorso completo: %4</translation>
     </message>
 </context>
 <context>
+    <name>CSandBox</name>
+    <message>
+        <location filename="SandMan.cpp" line="2302"/>
+        <source>Waiting for folder: %1</source>
+        <translation>In attesa della cartella: %1</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2303"/>
+        <source>Deleting folder: %1</source>
+        <translation>Eliminazione della cartella: %1</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2304"/>
+        <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
+        <translation>Unione cartelle: %1 &gt;&gt; %2</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2305"/>
+        <source>Finishing Snapshot Merge...</source>
+        <translation>Completamento unione istantanea...</translation>
+    </message>
+</context>
+<context>
     <name>CSandBoxPlus</name>
     <message>
         <location filename="SbiePlusAPI.cpp" line="152"/>
@@ -1579,22 +1602,22 @@ Scegliere No per selezionare: %2</translation>
         <translation>&lt;p&gt;Sandboxie Plus è la continuazione open source di Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;/p&gt;&lt;p&gt;Traduzione a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2332"/>
+        <location filename="SandMan.cpp" line="2340"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>La finestra selezionata appartiene al programma %1 avviato nell&apos;area virtuale %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2339"/>
+        <location filename="SandMan.cpp" line="2347"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation>La finestra selezionata non appartiene ad alcun programma avviato nell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2374"/>
+        <location filename="SandMan.cpp" line="2382"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation>Trascina lo strumento di ricerca su una finestra per selezionarla, quindi rilascia il mouse per controllare se la finestra è in esecuzione in un&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2429"/>
+        <location filename="SandMan.cpp" line="2437"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie Plus - Controllo finestre</translation>
     </message>

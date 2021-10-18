@@ -597,11 +597,50 @@ Full path: %4</source>
     </message>
     <message>
         <source>Clear this list</source>
-        <translation>Очистить этот список</translation>
+        <translation type="vanished">Очистить этот список</translation>
     </message>
     <message>
         <source>There are %1 new files available to recover.</source>
         <translation>Доступно %1 новых файлов для восстановления.</translation>
+    </message>
+    <message>
+        <source>Remember target selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse for location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear folder list</source>
+        <translation type="unfinished">Очистить список папок</translation>
+    </message>
+    <message>
+        <source>Close until all programs stop in this box</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSandBox</name>
+    <message>
+        <source>Waiting for folder: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting folder: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finishing Snapshot Merge...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1241,6 +1280,10 @@ No will choose: %2</source>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Неизвестный статус ошибки: 0x%1</translation>
     </message>
+    <message>
+        <source>Sbie+ Version: %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieModel</name>
@@ -1407,6 +1450,14 @@ No will choose: %2</source>
     <message>
         <source> in session %1</source>
         <translation> в сеансе %1</translation>
+    </message>
+    <message>
+        <source>Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forced </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1881,7 +1932,51 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Filter selected box only</source>
-        <translation>Фильтр только выбранная песочница</translation>
+        <translation type="vanished">Фильтр только выбранная песочница</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed</source>
+        <translation type="unfinished">Закрытый</translation>
+    </message>
+    <message>
+        <source>Trace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show All Boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save trace log to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open log file for writing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Неизвестно</translation>
     </message>
 </context>
 <context>
@@ -2733,7 +2828,11 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Recover to...</source>
-        <translation>Восстановить в...</translation>
+        <translation type="vanished">Восстановить в...</translation>
+    </message>
+    <message>
+        <source>Recover target:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2757,6 +2856,10 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>Run Outside the Sandbox</source>
         <translation>Запустить вне песочницы</translation>
+    </message>
+    <message>
+        <source>Sandbox</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

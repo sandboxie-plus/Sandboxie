@@ -2296,6 +2296,14 @@ QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes"),
 QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
 };
 
+// Make sure that CSandBox strings won't be marked as vanished in all .ts files, even after running lupdate
+
+static const char* CSandBox_strings[] = {
+QT_TRANSLATE_NOOP("CSandBox", "Waiting for folder: %1"),
+QT_TRANSLATE_NOOP("CSandBox", "Deleting folder: %1"),
+QT_TRANSLATE_NOOP("CSandBox", "Merging folders: %1 &gt;&gt; %2"),
+QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // WinSpy based window finder

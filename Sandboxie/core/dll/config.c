@@ -516,26 +516,33 @@ BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* test_str, const WC
 
 BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size)
 {
+    BOOLEAN found = FALSE;
     WCHAR buf[CONF_LINE_LEN];
     ULONG index = 0;
     while (1) {
-        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, sizeof(buf) - 4);
         ++index;
         if (NT_SUCCESS(status)) {
             WCHAR* ptr = wcschr(buf, L',');
-            if (ptr) *ptr = L'\0';
-            if (_wcsicmp(buf, string) == 0) {
-                if (ptr++)
+            if (ptr) {
+                // check specific value
+                *ptr++ = L'\0';
+                if (_wcsicmp(buf, string) == 0) {
                     wcscpy_s(value, value_size / sizeof(WCHAR), ptr);
-                else
-                    *value = L'\0';
-                return TRUE;
+                    found = TRUE;
+                    break;
+                }
+            }
+            else if (!found) {
+                // default value
+                wcscpy_s(value, value_size / sizeof(WCHAR), buf);
+                found = TRUE;
             }
         }
         else if (status != STATUS_BUFFER_TOO_SMALL)
             break;
     }
-    return FALSE;
+    return found;
 }
 
 
@@ -568,12 +575,12 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
 //---------------------------------------------------------------------------
 
 
-BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def_found, BOOLEAN not_found)
+BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def)
 {
     WCHAR buf[32];
     if (SbieDll_GetStringForStringList(string, boxname, setting, buf, sizeof(buf)))
-        return Config_String2Bool(buf, def_found);
-    return not_found;
+        return Config_String2Bool(buf, def);
+    return def;
 }
 
 

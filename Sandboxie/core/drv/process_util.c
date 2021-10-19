@@ -42,7 +42,7 @@ static BOOLEAN Process_MatchImageGroup(
 static BOOLEAN Process_AddPath_2(
     PROCESS *proc, LIST *list, const WCHAR *value, const WCHAR *setting_name,
     BOOLEAN AddFirst, BOOLEAN AddStar,
-    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse);
+    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse, BOOLEAN* Reparsed);
 
 
 //---------------------------------------------------------------------------
@@ -529,6 +529,7 @@ _FX BOOLEAN Process_AddPath(
     ULONG len;
     BOOLEAN RemoveBackslashes = FALSE;
     BOOLEAN CheckReparse = FALSE;
+    BOOLEAN Reparsed;
     BOOLEAN ok;
 
     //
@@ -587,7 +588,14 @@ _FX BOOLEAN Process_AddPath(
     //
 
     ok = Process_AddPath_2(proc, list, value, setting_name,
-               AddFirst, AddStar, RemoveBackslashes, CheckReparse);
+               AddFirst, AddStar, RemoveBackslashes, CheckReparse, &Reparsed);
+    if (ok && CheckReparse && Reparsed) {
+        //
+        // If the path was reparsed, add also the original path to the list
+        //
+        ok = Process_AddPath_2(proc, list, value, setting_name,
+               AddFirst, AddStar, RemoveBackslashes, FALSE, NULL);
+    }
 
     //
     // if this is a file setting (CheckReparse == TRUE) and starts with
@@ -603,7 +611,11 @@ _FX BOOLEAN Process_AddPath(
         for (len = L'A'; (len <= L'Z') && ok; ++len) {
             *tmp = (WCHAR)len;
             ok = Process_AddPath_2(proc, list, tmp, setting_name,
-                   AddFirst, AddStar, RemoveBackslashes, CheckReparse);
+                   AddFirst, AddStar, RemoveBackslashes, CheckReparse, &Reparsed);
+            if (ok && CheckReparse && Reparsed) {
+                ok = Process_AddPath_2(proc, list, tmp, setting_name,
+                       AddFirst, AddStar, RemoveBackslashes, FALSE, NULL);
+            }
         }
         Mem_FreeString(tmp);
     }
@@ -620,7 +632,7 @@ _FX BOOLEAN Process_AddPath(
 _FX BOOLEAN Process_AddPath_2(
     PROCESS *proc, LIST *list, const WCHAR *value, const WCHAR *setting_name,
     BOOLEAN AddFirst, BOOLEAN AddStar,
-    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse)
+    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse, BOOLEAN* Reparsed)
 {
     PATTERN *pat;
     WCHAR *expand, *tmp;
@@ -688,8 +700,11 @@ _FX BOOLEAN Process_AddPath_2(
 
         WCHAR *tmp2 = File_TranslateReparsePoints(tmp, proc->pool);
         if (tmp2) {
+            *Reparsed = _wcsicmp(tmp, tmp2) != 0; // check if its actually different
             Mem_FreeString(tmp);
             tmp = tmp2;
+        } else {
+            *Reparsed = FALSE; // nothing found
         }
     }
 

@@ -202,6 +202,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	//m_pMenu = new QMenu();
 	AddPanelItemsToMenu();
+
+	UpdateMenu();
 }
 
 CSbieView::~CSbieView()

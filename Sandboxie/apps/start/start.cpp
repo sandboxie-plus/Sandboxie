@@ -1075,7 +1075,12 @@ int Program_Start(void)
         // the ClosedFilePath setting from core/drv/file.c will apply
         //
 
-        LoadLibrary(L"apphelp.dll");
+        //
+        // note: this workaround does nto work the path is still blocked 
+        // and we still get problems, hence now the deriver has an excemption for start.exe
+        //
+
+        //LoadLibrary(L"apphelp.dll");
 
         /*if (1) {
             WCHAR *AppHelpPath = MyHeapAlloc(512 * sizeof(WCHAR));

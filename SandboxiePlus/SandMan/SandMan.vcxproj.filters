@@ -261,13 +261,13 @@
     <None Include="sandman_tr.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh-TW.ts">
+    <None Include="sandman_zh_TW.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_pl.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh-CN.ts">
+    <None Include="sandman_zh_CN.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_es.ts">

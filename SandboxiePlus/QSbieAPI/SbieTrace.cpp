@@ -112,6 +112,8 @@ QString CTraceEntry::GetTypeStr(quint32 Type)
 	case MONITOR_IMAGE:			return "Image"; break;
 	case MONITOR_FILE:			return "File"; break;
 	case MONITOR_KEY:			return "Key"; break;
+	case MONITOR_NETFW:			return "Socket"; break;
+	case MONITOR_SCM:			return "SCM"; break; // Service Control Manager
 	case MONITOR_OTHER:			return "Debug"; break;
 	default:					return QString();
 	}

@@ -543,7 +543,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		if (PortableStop == -1)
 		{
 			bool State = false;
-			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\r\n\r\nDo you want to do the clean up?")
+			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\n\nDo you want to do the clean up?")
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
 
 			if (Ret == QDialogButtonBox::Cancel)
@@ -894,7 +894,7 @@ void CSandMan::OnStatusChanged()
 			{
 				bool State = false;
 				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
-					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\r\nYes will choose: %1\r\nNo will choose: %2")
+					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
 					.arg(BoxPath)
 					.arg("C:\\Sandbox") // todo resolve os drive properly
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
@@ -2254,8 +2254,6 @@ void CSandMan::UpdateTheme()
 
 void CSandMan::LoadLanguage()
 {
-	qApp->removeTranslator(&m_Translator);
-	m_Translation.clear();
 	m_LanguageId = 0;
 
 	QString Lang = theConf->GetString("Options/UiLanguage");
@@ -2263,28 +2261,35 @@ void CSandMan::LoadLanguage()
 		Lang = QLocale::system().name();
 
 	if (!Lang.isEmpty())
-	{
 		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+	if (!m_LanguageId) 
+		m_LanguageId = 1033; // default to English
 
+	LoadLanguage(Lang, "sandman", 0);
+	LoadLanguage(Lang, "qt", 1);
+}
+
+void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)
+{
+	qApp->removeTranslator(&m_Translator[Index]);
+
+	if (!Lang.isEmpty())
+	{
 		QString LangAux = Lang; // Short version as fallback
 		LangAux.truncate(LangAux.lastIndexOf('_'));
 
-		QString LangPath = QApplication::applicationDirPath() + "/translations/sandman_";
+		QString LangDir = QApplication::applicationDirPath() + "/translations/";
+
+		QString LangPath = LangDir + Module + "_";
 		bool bAux = false;
 		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
 		{
-			QFile File(LangPath + (bAux ? LangAux : Lang) + ".qm");
-			File.open(QFile::ReadOnly);
-			m_Translation = File.readAll();
+			if(m_Translator[Index].load(LangPath + (bAux ? LangAux : Lang) + ".qm", LangDir))
+				qApp->installTranslator(&m_Translator[Index]);
 		}
-
-		if (!m_Translation.isEmpty() && m_Translator.load((const uchar*)m_Translation.data(), m_Translation.size()))
-			qApp->installTranslator(&m_Translator);
 	}
-
-	if (!m_LanguageId) 
-		m_LanguageId = 1033; // default to English
 }
+
 
 // Make sure that QPlatformTheme strings won't be marked as vanished in all .ts files, even after running lupdate
 

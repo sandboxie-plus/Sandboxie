@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added French language on Plus UI (by clexanis) [#1155](https://github.com/sandboxie-plus/Sandboxie/issues/1155)
 
 ### Changed
+- network traffic trace is now properly logged to the driver log instead of to the kernel debug log
 - Plus installer will autostart SandMan.exe after install to fix a taskbar icon issue [#3040211](https://www.wilderssecurity.com/threads/sandboxie-plus-0-9-7-test-build.440906/page-4#post-3040211)
 - Classic installer will show the license agreement when updating [#1187](https://github.com/sandboxie-plus/Sandboxie/issues/1187)
 
@@ -23,6 +24,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with maximum ini value length on Plus UI [#1293](https://github.com/sandboxie-plus/Sandboxie/issues/1293)
 - fixed issue handling an empty Sandboxie.ini that got introduced recently [#1292](https://github.com/sandboxie-plus/Sandboxie/issues/1292)
 - fixed issue with "SpecialImages" template (by Coverlin) [#1288](https://github.com/sandboxie-plus/Sandboxie/issues/1288) [#1289](https://github.com/sandboxie-plus/Sandboxie/issues/1289)
+- fixed issue with box emptying [#1296](https://github.com/sandboxie-plus/Sandboxie/issues/1296)
+- fixed issues wich some languages [#1304](https://github.com/sandboxie-plus/Sandboxie/issues/1304)
+- fixed issue with mounted directories [#1302](https://github.com/sandboxie-plus/Sandboxie/issues/1302)
+- added missing translation for qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
+
 
 
 

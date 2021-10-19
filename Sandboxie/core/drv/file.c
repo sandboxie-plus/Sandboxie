@@ -732,7 +732,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     // the Windows compatibility (shim) DLLs to be loaded
     //
 
-    if (proc->image_sbie) {
+    if (proc->image_sbie && !proc->is_start_exe) {
 
         static const WCHAR *_ShimEng =
                                 L"%SystemRoot%\\System32\\shimeng.dll";
@@ -1524,7 +1524,7 @@ skip_due_to_home_folder:
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;
-                else
+                else if (write_access)
                     mon_type |= MONITOR_OPEN;
             }
             if(!IsPipeDevice && !ShouldMonitorAccess)

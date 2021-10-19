@@ -509,9 +509,16 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 
         if (WSA_TraceFlag){
             WCHAR msg[256];
-            Sbie_snwprintf(msg, 256, L"NetFw: %s network traffic; Port: %u; Prot: %u; IP: %08x %08x %08x %08x\r\n", block ? L"Blocked" : L"Allowed", port, protocol, 
-                _ntohl(ip.Data32[0]), _ntohl(ip.Data32[1]), _ntohl(ip.Data32[2]), _ntohl(ip.Data32[3]));
-            SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE | (block ? MONITOR_DENY : MONITOR_OPEN), msg, FALSE);
+			if ((BYTE)addr[0] == AF_INET6) {
+				Sbie_snwprintf(msg, 256, L"Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", port, protocol,
+					ip.Data[0], ip.Data[1], ip.Data[2], ip.Data[3], ip.Data[4], ip.Data[5], ip.Data[6], ip.Data[7],
+					ip.Data[8], ip.Data[9], ip.Data[10], ip.Data[11], ip.Data[12], ip.Data[13], ip.Data[14], ip.Data[15]);
+			}
+			else {
+				Sbie_snwprintf(msg, 256, L"Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", port, protocol, 
+                    ip.Data[12], ip.Data[13], ip.Data[14], ip.Data[15]);
+			}
+            SbieApi_MonitorPut2(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), msg, FALSE);
         }
 
         if (block) {

@@ -106,6 +106,8 @@ void CMonitorDialog::OnIdle()
     static const WCHAR *_Image      = L"Image    ";
     static const WCHAR *_File       = L"File     ";
     static const WCHAR *_Key        = L"Key      ";
+    static const WCHAR *_NetFw      = L"Socket   ";
+    static const WCHAR *_SCM        = L"SCM      "; // Service Control Manager
 	static const WCHAR *_Other      = L"Other    ";
     static const WCHAR *_Separator  = L"   -------------------------------";
 
@@ -168,7 +170,11 @@ void CMonitorDialog::OnIdle()
             PrefixPtr = _File;
         else if (type == MONITOR_KEY)
             PrefixPtr = _Key;
-        else if (type == MONITOR_OTHER)
+        else if (type == MONITOR_NETFW)
+            PrefixPtr = _NetFw;
+        else if (type == MONITOR_SCM)
+            PrefixPtr = _SCM;
+        else //if (type == MONITOR_OTHER)
             PrefixPtr = _Other;
         wcsncpy(name, PrefixPtr, 9);
 

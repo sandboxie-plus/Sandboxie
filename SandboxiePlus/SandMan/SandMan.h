@@ -277,8 +277,8 @@ private:
 	QPalette			m_DefaultPalett;
 
 	void				LoadLanguage();
-	QTranslator			m_Translator;
-	QByteArray			m_Translation;
+	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
+	QTranslator			m_Translator[2];
 
 public:
 	quint32				m_LanguageId;

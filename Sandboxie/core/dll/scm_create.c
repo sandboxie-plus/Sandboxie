@@ -825,7 +825,7 @@ _FX BOOL SbieDll_StartBoxedService(const WCHAR *ServiceName, BOOLEAN WithAdd)
 
 	WCHAR text[130];
 	Sbie_snwprintf(text, 130, L"StartBoxedService; name: '%s'", ServiceName); 
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
     //
     // when invoked from SandboxieRpcSs to handle StartProcess,
@@ -1096,7 +1096,7 @@ _FX BOOL Scm_StartServiceW(
 
     WCHAR text[130];
 	Sbie_snwprintf(text, 130, L"StartService: %s", ServiceName);
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
     if (Scm_IsBoxedService(ServiceName))
         return SbieDll_StartBoxedService(ServiceName, FALSE);
@@ -1146,13 +1146,13 @@ _FX ULONG Scm_ServiceMainThread(ULONG_PTR *args)
 {
     WCHAR text[130];
     Sbie_snwprintf(text, 130, L"ServiceMainThread; begin");
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
     typedef void (*P_Main)(ULONG argc, void **argv);
     ((P_Main)args[0])(1, (void **)&args[1]);
 
     Sbie_snwprintf(text, 130, L"ServiceMainThread; end");
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
     //
     // if this is the MSI Server, then wait for all our callers to end
@@ -1244,7 +1244,7 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
 
     WCHAR text[130];
 	Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; name: '%s'", ServiceName);
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
     //
     // open the key for the service
@@ -1362,7 +1362,7 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
     //
 
     Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; result: %s", Scm_Started ? L"sucess" : L"failure");
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
     if (! Scm_Started) {
         SbieApi_Log(2211, ServiceName);
@@ -1499,7 +1499,7 @@ _FX BOOL Scm_SetServiceStatus_Internal(
 
     WCHAR text[130];
     Sbie_snwprintf(text, 130, L"SetServiceStatus; status: <%08X>", lpServiceStatus->dwCurrentState);
-    SbieApi_MonitorPut(MONITOR_OTHER, text);
+    SbieApi_MonitorPut(MONITOR_SCM, text);
 
 #define MySetValueKey()                         \
     NtSetValueKey(ServiceKeyHandle, &uni,       \

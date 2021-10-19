@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [0.9.8b / 5.53.1] - 2021-10-??
+## [0.9.8b / 5.53.1] - 2021-10-19
 
 ### Added
 - added ability to save trace log to file on Plus UI
@@ -28,6 +28,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues wich some languages [#1304](https://github.com/sandboxie-plus/Sandboxie/issues/1304)
 - fixed issue with mounted directories [#1302](https://github.com/sandboxie-plus/Sandboxie/issues/1302)
 - added missing translation for qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
+- fixed issue with Windows compatibility assistant [#1265](https://github.com/sandboxie-plus/Sandboxie/issues/1265)
+- fixed issue with process image specific settigns [#1307](https://github.com/sandboxie-plus/Sandboxie/issues/1307)
 
 
 

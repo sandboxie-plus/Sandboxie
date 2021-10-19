@@ -183,6 +183,9 @@ void CFileBrowserWindow::OnFileMenu(const QPoint&)
             Files.append(BoxedPath);
     }
 
+    if (Files.isEmpty())
+        return;
+
     int iCmd = openShellContextMenu(Files, (void*)this->winId());
     if (iCmd == 0)
         return;

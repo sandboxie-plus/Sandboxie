@@ -31,7 +31,7 @@
 
 BOOLEAN Taskbar_Init(HMODULE);
 
-//void Taskbar_SetProcessAppUserModelId(void);
+void Taskbar_SetProcessAppUserModelId(void);
 
 void Taskbar_SetWindowAppUserModelId(HWND hwnd);
 

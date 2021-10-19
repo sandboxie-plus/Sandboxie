@@ -541,48 +541,28 @@
         <translation>Вы хотите, чтобы диспетчер очереди печати мог писать вне песочницы для %1 (%2)?</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
-File name: %3</source>
-        <translation type="vanished">Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
-Имя файла: %3</translation>
-    </message>
-    <message>
-        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
-Full path: %3</source>
-        <translation type="vanished">Вы хотите разрешить %1 (%2) доступ к Интернет?
-Полный путь: %3</translation>
-    </message>
-    <message>
-        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
-The file was written by: %3</source>
-        <translation type="vanished">%1 может быть быстро восстановлен из %2.
-Файл был записан: %3</translation>
-    </message>
-    <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
-Full path: %4</source>
-        <translation type="vanished">Перенос большого файла %1 в песочницу %2, осталось %3.
-Полный путь: %4</translation>
-    </message>
-    <message>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить %4 (%5) копировать большой файл %1 в песочницу: %2?
+Имя файла: %3</translation>
     </message>
     <message>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите разрешить %1 (%2) доступ к Интернет?
+Полный путь: %3</translation>
     </message>
     <message>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 может быть быстро восстановлен из %2.
+Файл был записан: %3</translation>
     </message>
     <message>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Перенос большого файла %1 в песочницу %2, осталось %3.
+Полный путь: %4</translation>
     </message>
 </context>
 <context>
@@ -1243,24 +1223,8 @@ Full path: %4</source>
         <translation>Ведение журнала трассировки</translation>
     </message>
     <message>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
-<byte value="xd"/>
-Do you want to do the clean up?</source>
-        <translation type="vanished">Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные сервисы. Это потребует административных привилегий.
-
-Вы хотите сделать уборку?</translation>
-    </message>
-    <message>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Неизвестная операция &apos;%1&apos; запрошена из командной строки</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
-Yes will choose: %1<byte value="xd"/>
-No will choose: %2</source>
-        <translation type="vanished">Sandboxie-Plus был запущен в портативном режиме, вы хотите поместить папку Sandbox в ее родительский каталог?
-Да, выберет: %1
-Нет, выберет: %2</translation>
     </message>
     <message>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
@@ -1302,13 +1266,17 @@ No will choose: %2</source>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus работала в портативном режиме, теперь ей нужно очистить созданные сервисы. Это потребует административных привилегий.
+
+Вы хотите сделать уборку?</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus был запущен в портативном режиме, вы хотите поместить папку Sandbox в ее родительский каталог?
+Да, выберет: %1
+Нет, выберет: %2</translation>
     </message>
 </context>
 <context>

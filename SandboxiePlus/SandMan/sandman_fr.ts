@@ -694,21 +694,21 @@
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="unfinished">Souhaitez-vous autoriser %4 (%5) à copier un fichier volumineux %1 dans le bac à sable&#xa0;: %2&#xa0;?
+        <translation>Souhaitez-vous autoriser %4 (%5) à copier un fichier volumineux %1 dans le bac à sable&#xa0;: %2&#xa0;?
 Nom du fichier&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="unfinished">Souhaitez-vous autoriser %1 (%2) à accéder à Internet&#xa0;?
+        <translation>Souhaitez-vous autoriser %1 (%2) à accéder à Internet&#xa0;?
 Chemin complet&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="318"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="unfinished">%1 est éligible pour une récupération rapide à partir de %2.
+        <translation>%1 est éligible pour une récupération rapide à partir de %2.
 Le fichier a été écrit par&#xa0;: %3</translation>
     </message>
     <message>
@@ -731,7 +731,7 @@ Le fichier a été écrit par&#xa0;: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="411"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished">Migration d&apos;un fichier volumineux %1 dans le bac à sable %2, %3 restant.
+        <translation>Migration d&apos;un fichier volumineux %1 dans le bac à sable %2, %3 restant.
 Chemin complet&#xa0;: %4</translation>
     </message>
 </context>
@@ -1169,7 +1169,7 @@ Chemin complet&#xa0;: %4</translation>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation type="unfinished">Sandboxie-Plus fonctionnait en mode portable, il est maintenant nécessaire de nettoyer les services créés. Cela demandera des privilèges administratifs.
+        <translation>Sandboxie-Plus fonctionnait en mode portable, il est maintenant nécessaire de nettoyer les services créés. Cela demandera des privilèges administratifs.
 
 Voulez-vous faire le nettoyage&#xa0;?</translation>
     </message>
@@ -1255,7 +1255,7 @@ Voulez-vous faire le nettoyage&#xa0;?</translation>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
-        <translation type="unfinished">Sandboxie-Plus a été démarré en mode portable, voulez-vous mettre le dossier Sandbox dans son répertoire parent&#xa0;?
+        <translation>Sandboxie-Plus a été démarré en mode portable, voulez-vous mettre le dossier Sandbox dans son répertoire parent&#xa0;?
 Oui choisira&#xa0;: %1
 Non choisira&#xa0;: %2</translation>
     </message>

@@ -759,22 +759,22 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="97"/>
         <source>Remember target selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielauswahl merken</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="121"/>
         <source>Original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Originalspeicherort</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="122"/>
         <source>Browse for location</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Speicherort suchen</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="123"/>
         <source>Clear folder list</source>
-        <translation type="unfinished">Leere die Ordnerliste</translation>
+        <translation>Leere die Ordnerliste</translation>
     </message>
     <message>
         <source>Clear this list</source>
@@ -790,7 +790,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="231"/>
         <source>Close until all programs stop in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen, bis alle Programme in dieser Box gestoppt sind</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="251"/>
@@ -808,22 +808,22 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2302"/>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Warte auf Ordner: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2303"/>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche Ordner: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2304"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe Ordner zusammen: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2305"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>Beende Schnappschuss Zusammenführung...</translation>
     </message>
 </context>
 <context>
@@ -1077,7 +1077,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="880"/>
         <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie+ Version: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="897"/>
@@ -1862,7 +1862,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Thunderbird</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="478"/>
@@ -1872,7 +1872,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source>Forced </source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwungen </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="484"/>
@@ -2522,57 +2522,57 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="83"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="95"/>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="98"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Geöffnet</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="99"/>
         <source>Closed</source>
-        <translation type="unfinished">Blockiert</translation>
+        <translation>Geschlossen</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="100"/>
         <source>Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Spur</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="101"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="106"/>
         <source>Show All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige alle Boxen</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="112"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>In Datei speichern</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="334"/>
         <source>Save trace log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Spurprotokoll in Datei speichern</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="340"/>
         <source>Failed to open log file for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte die Protokolldatei nicht zum Schreiben öffnen</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="356"/>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannt</translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <source>Filter selected box only</source>
@@ -3717,7 +3717,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="117"/>
         <source>Recover target:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellungsziel:</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
@@ -3754,7 +3754,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
         <source>Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>

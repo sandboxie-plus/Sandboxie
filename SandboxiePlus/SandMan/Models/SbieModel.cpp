@@ -309,7 +309,7 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 		if (!bIsTerminated)
 			ActiveCount++;
 
-		if (pNode->Icon.isNull())
+		if (pNode->Icon.isNull() && !pProcess->GetFileName().isEmpty())
 		{
 			//PixmapEntryList icons = extractIcons(pProcess->GetFileName(), false);
 			//if (icons.isEmpty())

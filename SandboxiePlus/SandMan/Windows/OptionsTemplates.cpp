@@ -143,8 +143,10 @@ void COptionsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
 {
 	QString Name = pItem->data(1, Qt::UserRole).toString().mid(9);
 	if (m_GlobalTemplates.contains(Name)) {
-		QMessageBox::warning(this, "SandboxiePlus", tr("This template is enabled globally. To configure it, use the global options."));
-		pItem->setCheckState(1, Qt::PartiallyChecked);
+		if (pItem->checkState(1) != Qt::PartiallyChecked) {
+			QMessageBox::warning(this, "SandboxiePlus", tr("This template is enabled globally. To configure it, use the global options."));
+			pItem->setCheckState(1, Qt::PartiallyChecked);
+		}
 		return;
 	}
 

@@ -681,25 +681,22 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>要允许 %4 (%5) 复制大文件 %1 到 %2 沙盒吗？
 文件名：%3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
-        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
+        <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>要允许 %1 (%2) 访问网络吗？
 完整路径：%3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="318"/>
-        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
+        <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>%1 可以从 %2 快速恢复。
 文件写入者：%3</translation>
     </message>
@@ -721,9 +718,8 @@ The file was written by: %3</source>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="411"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>迁移一个大文件 %1 到沙盒 %2，剩余 %3。
 完整路径：%4</translation>
     </message>
@@ -805,22 +801,22 @@ Full path: %4</source>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2302"/>
+        <location filename="SandMan.cpp" line="2307"/>
         <source>Waiting for folder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2303"/>
+        <location filename="SandMan.cpp" line="2308"/>
         <source>Deleting folder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2304"/>
+        <location filename="SandMan.cpp" line="2309"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2305"/>
+        <location filename="SandMan.cpp" line="2310"/>
         <source>Finishing Snapshot Merge...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1160,10 +1156,9 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="546"/>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
+
 Do you want to do the clean up?</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus 正运行于便携模式，现在将清理所创建的服务，这将寻求管理员权限。
 
 是否确认清理？</translation>
@@ -1279,10 +1274,9 @@ Do you want to do the clean up?</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="897"/>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
-Yes will choose: %1<byte value="xd"/>
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
+Yes will choose: %1
 No will choose: %2</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation>Sandboxie-Plus 运行于便携模式，是否要将沙盒目录放到上一层目录中？
 “是”将选择目录: %1
 “否”将选择目录: %2</translation>
@@ -1637,22 +1631,22 @@ No will choose: %2</source>
         <translation>&lt;p&gt;Sandboxie-Plus 是著名程序 Sandboxie 自开源以来的一个延续。&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 来了解更多信息。&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;图标来自 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2340"/>
+        <location filename="SandMan.cpp" line="2345"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>选择的窗口正作为程序 %1 一部分运行在沙盒 %2 中</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2347"/>
+        <location filename="SandMan.cpp" line="2352"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation>选择的窗口并非作为任何沙盒化程序的一部分而运行。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2382"/>
+        <location filename="SandMan.cpp" line="2387"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation>拖拽准星到被选窗口上，松开鼠标检查窗口是否来自沙盒化的程序。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2437"/>
+        <location filename="SandMan.cpp" line="2442"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - 窗口探查器</translation>
     </message>
@@ -1868,12 +1862,12 @@ No will choose: %2</source>
         <translation>已终止</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="483"/>
+        <location filename="SbiePlusAPI.cpp" line="484"/>
         <source>Forced </source>
         <translation>必沙 </translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="484"/>
+        <location filename="SbiePlusAPI.cpp" line="482"/>
         <source>Running</source>
         <translation>正在运行</translation>
     </message>
@@ -2085,45 +2079,45 @@ No will choose: %2</source>
         <translation>设置引导进程</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="261"/>
+        <location filename="Views/SbieView.cpp" line="263"/>
         <source>    File root: %1
 </source>
         <translation>    文件根目录: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="262"/>
+        <location filename="Views/SbieView.cpp" line="264"/>
         <source>    Registry root: %1
 </source>
         <translation>    注册表根: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="263"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC 根: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="265"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
         <source>Options:
     </source>
         <translation>选项：
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="472"/>
+        <location filename="Views/SbieView.cpp" line="474"/>
         <source>[None]</source>
         <translation>[无]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="691"/>
+        <location filename="Views/SbieView.cpp" line="693"/>
         <source>Please enter a new group name</source>
         <translation>请输入新的组名</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="588"/>
+        <location filename="Views/SbieView.cpp" line="590"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>确定要移除选中的组吗？</translation>
     </message>
@@ -2193,87 +2187,87 @@ No will choose: %2</source>
         <translation>下移</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="574"/>
+        <location filename="Views/SbieView.cpp" line="576"/>
         <source>Please enter a new name for the Group.</source>
         <translation>为此组指定新的名称。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="578"/>
+        <location filename="Views/SbieView.cpp" line="580"/>
         <source>This Group name is already in use.</source>
         <translation>该组名已被使用。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="621"/>
+        <location filename="Views/SbieView.cpp" line="623"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>将项目移动的距离（负数向上移动，正数向下移动）:</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="655"/>
+        <location filename="Views/SbieView.cpp" line="657"/>
         <source>A group can not be its own parent.</source>
         <translation>组不能是自己的父级。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="743"/>
-        <location filename="Views/SbieView.cpp" line="820"/>
+        <location filename="Views/SbieView.cpp" line="745"/>
+        <location filename="Views/SbieView.cpp" line="822"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再显示此消息</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="791"/>
-        <location filename="Views/SbieView.cpp" line="811"/>
-        <location filename="Views/SbieView.cpp" line="831"/>
+        <location filename="Views/SbieView.cpp" line="793"/>
+        <location filename="Views/SbieView.cpp" line="813"/>
+        <location filename="Views/SbieView.cpp" line="833"/>
         <source>This Sandbox is empty.</source>
         <translation>此沙盒是空的。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="879"/>
+        <location filename="Views/SbieView.cpp" line="881"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>请为该沙盒输入新名称。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="892"/>
+        <location filename="Views/SbieView.cpp" line="894"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
         <translation>确定要删除选中的沙盒吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="912"/>
+        <location filename="Views/SbieView.cpp" line="914"/>
         <source>This Sandbox is already empty.</source>
         <translation>此沙盒已清空。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="922"/>
+        <location filename="Views/SbieView.cpp" line="924"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>确定要删除选中沙盒的内容吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="925"/>
+        <location filename="Views/SbieView.cpp" line="927"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
         <translation>确定要删除多个沙盒的内容吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="942"/>
+        <location filename="Views/SbieView.cpp" line="944"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>确定要终止所选沙盒中的所有进程吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="943"/>
-        <location filename="Views/SbieView.cpp" line="1019"/>
+        <location filename="Views/SbieView.cpp" line="945"/>
+        <location filename="Views/SbieView.cpp" line="1021"/>
         <source>Terminate without asking</source>
         <translation>终止且无需询问</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="983"/>
-        <location filename="Views/SbieView.cpp" line="1046"/>
+        <location filename="Views/SbieView.cpp" line="985"/>
+        <location filename="Views/SbieView.cpp" line="1048"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1018"/>
+        <location filename="Views/SbieView.cpp" line="1020"/>
         <source>Do you want to %1 %2?</source>
         <translation>确定要%1 %2 吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1018"/>
+        <location filename="Views/SbieView.cpp" line="1020"/>
         <source>the selected processes</source>
         <translation>选中的进程</translation>
     </message>
@@ -2283,12 +2277,12 @@ No will choose: %2</source>
         <translation type="vanished">确定要 %1 选中的进程吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1079"/>
+        <location filename="Views/SbieView.cpp" line="1081"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>此沙盒无互联网限制，确定启用吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1109"/>
+        <location filename="Views/SbieView.cpp" line="1111"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>此沙盒已禁用，确定启用吗？</translation>
     </message>
@@ -3635,7 +3629,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="966"/>
+        <location filename="Views/SbieView.cpp" line="968"/>
         <source>Drive %1</source>
         <translation>磁盘 %1</translation>
     </message>
@@ -3643,27 +3637,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2292"/>
+        <location filename="SandMan.cpp" line="2297"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2293"/>
+        <location filename="SandMan.cpp" line="2298"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2294"/>
+        <location filename="SandMan.cpp" line="2299"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2295"/>
+        <location filename="SandMan.cpp" line="2300"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2296"/>
+        <location filename="SandMan.cpp" line="2301"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>

@@ -692,26 +692,23 @@
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation>Souhaitez-vous autoriser %4 (%5) à copier un fichier volumineux %1 dans le bac à sable&#xa0;: %2&#xa0;?
+        <translation type="unfinished">Souhaitez-vous autoriser %4 (%5) à copier un fichier volumineux %1 dans le bac à sable&#xa0;: %2&#xa0;?
 Nom du fichier&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
-        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
+        <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation>Souhaitez-vous autoriser %1 (%2) à accéder à Internet&#xa0;?
+        <translation type="unfinished">Souhaitez-vous autoriser %1 (%2) à accéder à Internet&#xa0;?
 Chemin complet&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="318"/>
-        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
+        <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation>%1 est éligible pour une récupération rapide à partir de %2.
+        <translation type="unfinished">%1 est éligible pour une récupération rapide à partir de %2.
 Le fichier a été écrit par&#xa0;: %3</translation>
     </message>
     <message>
@@ -732,10 +729,9 @@ Le fichier a été écrit par&#xa0;: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="411"/>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation>Migration d&apos;un fichier volumineux %1 dans le bac à sable %2, %3 restant.
+        <translation type="unfinished">Migration d&apos;un fichier volumineux %1 dans le bac à sable %2, %3 restant.
 Chemin complet&#xa0;: %4</translation>
     </message>
 </context>
@@ -807,22 +803,22 @@ Chemin complet&#xa0;: %4</translation>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2302"/>
+        <location filename="SandMan.cpp" line="2307"/>
         <source>Waiting for folder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2303"/>
+        <location filename="SandMan.cpp" line="2308"/>
         <source>Deleting folder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2304"/>
+        <location filename="SandMan.cpp" line="2309"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2305"/>
+        <location filename="SandMan.cpp" line="2310"/>
         <source>Finishing Snapshot Merge...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1170,11 +1166,10 @@ Chemin complet&#xa0;: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="546"/>
-        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
+
 Do you want to do the clean up?</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation>Sandboxie-Plus fonctionnait en mode portable, il est maintenant nécessaire de nettoyer les services créés. Cela demandera des privilèges administratifs.
+        <translation type="unfinished">Sandboxie-Plus fonctionnait en mode portable, il est maintenant nécessaire de nettoyer les services créés. Cela demandera des privilèges administratifs.
 
 Voulez-vous faire le nettoyage&#xa0;?</translation>
     </message>
@@ -1257,11 +1252,10 @@ Voulez-vous faire le nettoyage&#xa0;?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="897"/>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?<byte value="xd"/>
-Yes will choose: %1<byte value="xd"/>
+        <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
+Yes will choose: %1
 No will choose: %2</source>
-        <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
-        <translation>Sandboxie-Plus a été démarré en mode portable, voulez-vous mettre le dossier Sandbox dans son répertoire parent&#xa0;?
+        <translation type="unfinished">Sandboxie-Plus a été démarré en mode portable, voulez-vous mettre le dossier Sandbox dans son répertoire parent&#xa0;?
 Oui choisira&#xa0;: %1
 Non choisira&#xa0;: %2</translation>
     </message>
@@ -1635,22 +1629,22 @@ Non choisira&#xa0;: %2</translation>
         <translation>&lt;p&gt;Sandboxie-Plus est une continuation libre de Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visitez&lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; pour plus d&apos;informations.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icônes par &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2340"/>
+        <location filename="SandMan.cpp" line="2345"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>La fenêtre sélectionnée est exécutée en tant que partie du programme %1 dans le bac à sable %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2347"/>
+        <location filename="SandMan.cpp" line="2352"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation>La fenêtre sélectionnée n&apos;est pas exécutée dans le cadre d&apos;un programme isolé.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2382"/>
+        <location filename="SandMan.cpp" line="2387"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation>Faites glisser l&apos;outil de recherche sur une fenêtre pour la sélectionner, puis relâchez la souris pour vérifier si la fenêtre est isolé dans un bac à sable.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2437"/>
+        <location filename="SandMan.cpp" line="2442"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - Chercheur de fenêtres</translation>
     </message>
@@ -1857,12 +1851,12 @@ Non choisira&#xa0;: %2</translation>
         <translation>Terminé</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="483"/>
+        <location filename="SbiePlusAPI.cpp" line="484"/>
         <source>Forced </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="484"/>
+        <location filename="SbiePlusAPI.cpp" line="482"/>
         <source>Running</source>
         <translation>En cours d&apos;exécution</translation>
     </message>
@@ -2073,45 +2067,45 @@ Non choisira&#xa0;: %2</translation>
         <translation>Définir comme processus directeur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="261"/>
+        <location filename="Views/SbieView.cpp" line="263"/>
         <source>    File root: %1
 </source>
         <translation>    Fichier racine&#xa0;: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="262"/>
+        <location filename="Views/SbieView.cpp" line="264"/>
         <source>    Registry root: %1
 </source>
         <translation>    Racine du registre&#xa0;: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="263"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
         <source>    IPC root: %1
 </source>
         <translation>    Racine IPC&#xa0;: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="265"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
         <source>Options:
     </source>
         <translation>Options&#xa0;:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="472"/>
+        <location filename="Views/SbieView.cpp" line="474"/>
         <source>[None]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="691"/>
+        <location filename="Views/SbieView.cpp" line="693"/>
         <source>Please enter a new group name</source>
         <translation>Veuillez entrer un nouveau nom de groupe</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="588"/>
+        <location filename="Views/SbieView.cpp" line="590"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Voulez-vous vraiment supprimer le groupe ou les groupes sélectionnés&#xa0;?</translation>
     </message>
@@ -2181,87 +2175,87 @@ Non choisira&#xa0;: %2</translation>
         <translation type="unfinished">Descendre</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="574"/>
+        <location filename="Views/SbieView.cpp" line="576"/>
         <source>Please enter a new name for the Group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="578"/>
+        <location filename="Views/SbieView.cpp" line="580"/>
         <source>This Group name is already in use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="621"/>
+        <location filename="Views/SbieView.cpp" line="623"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="655"/>
+        <location filename="Views/SbieView.cpp" line="657"/>
         <source>A group can not be its own parent.</source>
         <translation>Un groupe ne peut pas être son propre parent.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="743"/>
-        <location filename="Views/SbieView.cpp" line="820"/>
+        <location filename="Views/SbieView.cpp" line="745"/>
+        <location filename="Views/SbieView.cpp" line="822"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne plus afficher ce message.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="791"/>
-        <location filename="Views/SbieView.cpp" line="811"/>
-        <location filename="Views/SbieView.cpp" line="831"/>
+        <location filename="Views/SbieView.cpp" line="793"/>
+        <location filename="Views/SbieView.cpp" line="813"/>
+        <location filename="Views/SbieView.cpp" line="833"/>
         <source>This Sandbox is empty.</source>
         <translation>Ce bac à sable est vide.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="879"/>
+        <location filename="Views/SbieView.cpp" line="881"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Veuillez entrer un nouveau nom pour le bac à sable.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="892"/>
+        <location filename="Views/SbieView.cpp" line="894"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
         <translation>Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés&#xa0;?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="912"/>
+        <location filename="Views/SbieView.cpp" line="914"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ce bac à sable est déjà vide.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="922"/>
+        <location filename="Views/SbieView.cpp" line="924"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Voulez-vous supprimer le contenu du bac à sable sélectionné&#xa0;?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="925"/>
+        <location filename="Views/SbieView.cpp" line="927"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
         <translation>Voulez-vous vraiment supprimer le contenu de plusieurs bacs à sable&#xa0;?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="942"/>
+        <location filename="Views/SbieView.cpp" line="944"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Voulez-vous mettre fin à tous les processus dans le ou les bacs à sable sélectionnés&#xa0;?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="943"/>
-        <location filename="Views/SbieView.cpp" line="1019"/>
+        <location filename="Views/SbieView.cpp" line="945"/>
+        <location filename="Views/SbieView.cpp" line="1021"/>
         <source>Terminate without asking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="983"/>
-        <location filename="Views/SbieView.cpp" line="1046"/>
+        <location filename="Views/SbieView.cpp" line="985"/>
+        <location filename="Views/SbieView.cpp" line="1048"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Créer un raccourci vers le bac à sable %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1018"/>
+        <location filename="Views/SbieView.cpp" line="1020"/>
         <source>Do you want to %1 %2?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1018"/>
+        <location filename="Views/SbieView.cpp" line="1020"/>
         <source>the selected processes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2270,12 +2264,12 @@ Non choisira&#xa0;: %2</translation>
         <translation type="vanished">Voulez-vous %1 le ou les processus sélectionnés&#xa0;?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1079"/>
+        <location filename="Views/SbieView.cpp" line="1081"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ce bac n&apos;a pas de restrictions d&apos;accès à Internet en place, souhaitez-vous l&apos;activer&#xa0;?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1109"/>
+        <location filename="Views/SbieView.cpp" line="1111"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ce bac à sable est désactivé, voulez-vous l&apos;activer&#xa0;?</translation>
     </message>
@@ -3571,7 +3565,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="966"/>
+        <location filename="Views/SbieView.cpp" line="968"/>
         <source>Drive %1</source>
         <translation>Lecteur %1</translation>
     </message>
@@ -3579,27 +3573,27 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2292"/>
+        <location filename="SandMan.cpp" line="2297"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2293"/>
+        <location filename="SandMan.cpp" line="2298"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2294"/>
+        <location filename="SandMan.cpp" line="2299"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2295"/>
+        <location filename="SandMan.cpp" line="2300"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2296"/>
+        <location filename="SandMan.cpp" line="2301"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>

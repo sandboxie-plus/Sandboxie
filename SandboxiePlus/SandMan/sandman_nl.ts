@@ -683,7 +683,7 @@
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox %2?
+        <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox: %2?
 Bestandsnaam: %3</translation>
     </message>
     <message>
@@ -749,26 +749,22 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="97"/>
         <source>Remember target selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Doelselectie onthouden</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="121"/>
         <source>Original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Originele locatie</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="122"/>
         <source>Browse for location</source>
-        <translation type="unfinished"></translation>
+        <translation>Bladeren naar locatie</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="123"/>
         <source>Clear folder list</source>
-        <translation type="unfinished">Maplijst wissen</translation>
-    </message>
-    <message>
-        <source>Clear this list</source>
-        <translation type="vanished">Deze lijst leegmaken</translation>
+        <translation>Maplijst wissen</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="157"/>
@@ -780,7 +776,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="231"/>
         <source>Close until all programs stop in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluiten totdat alle bestanden in deze box stoppen</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="251"/>
@@ -798,22 +794,22 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2307"/>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachten op map: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2308"/>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Map verwijderen: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2309"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappen samenvoegen: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2310"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>Samenvoegen van snapshot afwerken...</translation>
     </message>
 </context>
 <context>
@@ -1223,7 +1219,7 @@ Wilt u het opruimen uitvoeren?</translation>
     <message>
         <location filename="SandMan.cpp" line="880"/>
         <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie+ versie: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="881"/>
@@ -1812,7 +1808,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Thunderbird</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="478"/>
@@ -1822,7 +1818,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="484"/>
         <source>Forced </source>
-        <translation type="unfinished"></translation>
+        <translation>Geforceerd</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="482"/>
@@ -2426,61 +2422,57 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="83"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="95"/>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="98"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Geopend</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="99"/>
         <source>Closed</source>
-        <translation type="unfinished">Gesloten</translation>
+        <translation>Gesloten</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="100"/>
         <source>Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Trace</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="101"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="106"/>
         <source>Show All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle boxen weergeven</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="112"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan naar bestand</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="334"/>
         <source>Save trace log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Trace-log opslaan naar bestand</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="340"/>
         <source>Failed to open log file for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Log-bestand openen voor schrijven mislukt</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="356"/>
         <source>Unknown</source>
-        <translation type="unfinished">Onbekend</translation>
-    </message>
-    <message>
-        <source>Filter selected box only</source>
-        <translation type="vanished">Alleen geselecteerde box filteren</translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="265"/>
@@ -3546,7 +3538,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="117"/>
         <source>Recover target:</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen naar:</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="146"/>
@@ -3557,10 +3549,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
         <source>Recover</source>
         <translation>Herstellen</translation>
-    </message>
-    <message>
-        <source>Recover to...</source>
-        <translation type="vanished">Herstellen naar...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="153"/>
@@ -3598,7 +3586,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
         <source>Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>

@@ -1155,6 +1155,11 @@ Full path: %4</source>
         <translation>清理</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="497"/>
+        <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上支持 Sandboxie-Plus&lt;/a&gt;</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="528"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>确定关闭 Sandboxie 管理器？</translation>

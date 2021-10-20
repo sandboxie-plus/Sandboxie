@@ -494,7 +494,7 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupportLbl = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+	QLabel* pSupportLbl = new QLabel(tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>"));
 	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
 	m_pToolBar->addWidget(pSupportLbl);

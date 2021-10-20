@@ -115,11 +115,19 @@ void CSandBoxPlus::UpdateDetails()
 	m_bINetBlocked = false;
 	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
 	{
-		if (Entry.contains("InternetAccessDevices")) {
+		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
 			m_bINetBlocked = true;
 			break;
 		}
 	}
+	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false))
+	{
+		if (Entry == "!<InternetAccess>,n") {
+			m_bINetBlocked = true;
+			break;
+		}
+	}
+
 
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 

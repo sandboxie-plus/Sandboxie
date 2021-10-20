@@ -149,6 +149,11 @@
         <translation>KB (%1)</translation>
     </message>
     <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="218"/>
+        <source>Select color</source>
+        <translation>选择颜色</translation>
+    </message>
+    <message>
         <location filename="Windows/OptionsGeneral.cpp" line="228"/>
         <source>Please enter a program path</source>
         <translation>请输入一个程序路径</translation>

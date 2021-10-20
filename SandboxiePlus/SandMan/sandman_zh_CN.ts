@@ -808,22 +808,22 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="2307"/>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在等待文件夹: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2308"/>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在删除文件夹: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2309"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>正在合并文件夹: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2310"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在完成快照合并...</translation>
     </message>
 </context>
 <context>
@@ -3428,7 +3428,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1858"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation>允许使用嵌套工作对象 (job object) （实验性；适用于 Windows 8 及更高版本）</translation>
+        <translation>允许使用嵌套作业对象 (job object) （实验性；适用于 Windows 8 及更高版本）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1876"/>

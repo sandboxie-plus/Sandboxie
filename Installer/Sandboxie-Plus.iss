@@ -68,6 +68,11 @@ Filename: "{localappdata}\{#MyAppName}\{#MyAppName}.ini"; Section: "Options"; Ke
 Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; String: "{code:SandmanLanguage|{language}}"; Check: IsPortable
 
 
+[InstallDelete]
+Type: files; Name: "{app}\translations\sandman_zh-CN.qm"; Check: FileExists(ExpandConstant('{app}\translations\sandman_zh_CN.qm'))
+Type: files; Name: "{app}\translations\sandman_zh-TW.qm"; Check: FileExists(ExpandConstant('{app}\translations\sandman_zh_TW.qm'))
+
+
 [Registry]
 ; Autostart Sandman.
 Root: HKCU; Subkey: "Software\Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
@@ -191,8 +196,8 @@ begin
   // Language values for Sandboxie-Plus.ini.
   case Lowercase(Language) of
     'english': Result := 'en';
-    'chinesesimplified': Result := 'zh-CN';
-    'chinesetraditional': Result := 'zh-TW';
+    'chinesesimplified': Result := 'zh_CN';
+    'chinesetraditional': Result := 'zh_TW';
     'dutch': Result := 'nl';
     'french': Result := 'fr';
     'german': Result := 'de';

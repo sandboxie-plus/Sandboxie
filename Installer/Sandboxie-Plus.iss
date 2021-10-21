@@ -69,8 +69,8 @@ Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; Strin
 
 
 [InstallDelete]
-Type: files; Name: "{app}\translations\sandman_zh-CN.qm"; Check: FileExists(ExpandConstant('{app}\translations\sandman_zh_CN.qm'))
-Type: files; Name: "{app}\translations\sandman_zh-TW.qm"; Check: FileExists(ExpandConstant('{app}\translations\sandman_zh_TW.qm'))
+Type: files; Name: "{app}\translations\sandman_zh-CN.qm"
+Type: files; Name: "{app}\translations\sandman_zh-TW.qm"
 
 
 [Registry]

@@ -7,6 +7,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [0.9.8c / 5.53.2] - 2021-10-24
+
+### Fixed
+- fixed template sections not showing in editor [#1287](https://github.com/sandboxie-plus/Sandboxie/issues/1287)
+- fixed autodelete box content broken int the previouse build
+- fixed crash in browse content window [#1313](https://github.com/sandboxie-plus/Sandboxie/issues/1313)
+- fixed issue with icon resolution [#1310](https://github.com/sandboxie-plus/Sandboxie/issues/1310)
+- fixed invalid "No Inet" status in the status column [#1312](https://github.com/sandboxie-plus/Sandboxie/issues/1312)
+- fixed windows explorer search box not working (by isaak654) [#1002](https://github.com/sandboxie-plus/Sandboxie/issues/1002)
+
+
+
+
 ## [0.9.8b / 5.53.1] - 2021-10-19
 
 ### Added

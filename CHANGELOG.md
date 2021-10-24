@@ -14,15 +14,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed template sections not showing in editor [#1287](https://github.com/sandboxie-plus/Sandboxie/issues/1287)
-- fixed autodelete box content broken in the previous build [#1324](https://github.com/sandboxie-plus/Sandboxie/issues/1324)
+- fixed autodelete box content broken in the previous build [#1296](https://github.com/sandboxie-plus/Sandboxie/issues/1296) [#1324](https://github.com/sandboxie-plus/Sandboxie/issues/1324)
 - fixed crash in "Browse Content" window [#1313](https://github.com/sandboxie-plus/Sandboxie/issues/1313)
-- fixed issue with icon resolution [#1310](https://github.com/sandboxie-plus/Sandboxie/issues/1310)
+- fixed issue with icon resolution on Windows 7 [#1310](https://github.com/sandboxie-plus/Sandboxie/issues/1310)
 - fixed invalid "No Inet" status in the status column [#1312](https://github.com/sandboxie-plus/Sandboxie/issues/1312)
 - fixed Windows Explorer search box not working (by isaak654) [#1002](https://github.com/sandboxie-plus/Sandboxie/issues/1002)
 - fixed Waterfox phishing template (by Dyras) [#1309](https://github.com/sandboxie-plus/Sandboxie/pull/1309)
 - fixed issue with Chinese translation files on Plus installer (by mpheath) [#1317](https://github.com/sandboxie-plus/Sandboxie/issues/1317)
 - fixed autorun registry key path on Plus installer (by mpheath) [abd2d44](https://github.com/sandboxie-plus/Sandboxie/commit/abd2d44cd6f305da956ad70c7481cb1256efff24)
-- fixed issue with icon resolution on windows 7
 - fixed memory corruption in SbieSvc.exe
 
 

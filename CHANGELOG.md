@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed template sections not showing in editor [#1287](https://github.com/sandboxie-plus/Sandboxie/issues/1287)
-- fixed autodelete box content broken in the previous build
+- fixed autodelete box content broken in the previous build [#1324](https://github.com/sandboxie-plus/Sandboxie/issues/1324)
 - fixed crash in "Browse Content" window [#1313](https://github.com/sandboxie-plus/Sandboxie/issues/1313)
 - fixed issue with icon resolution [#1310](https://github.com/sandboxie-plus/Sandboxie/issues/1310)
 - fixed invalid "No Inet" status in the status column [#1312](https://github.com/sandboxie-plus/Sandboxie/issues/1312)
@@ -22,6 +22,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Waterfox phishing template (by Dyras) [#1309](https://github.com/sandboxie-plus/Sandboxie/pull/1309)
 - fixed issue with Chinese translation files on Plus installer (by mpheath) [#1317](https://github.com/sandboxie-plus/Sandboxie/issues/1317)
 - fixed autorun registry key path on Plus installer (by mpheath) [abd2d44](https://github.com/sandboxie-plus/Sandboxie/commit/abd2d44cd6f305da956ad70c7481cb1256efff24)
+- fixed issue with icon resolution on windows 7
+- fixed memory corruption in SbieSvc.exe
+
+
+
 
 ## [0.9.8b / 5.53.1] - 2021-10-19
 

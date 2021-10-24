@@ -1659,7 +1659,7 @@ typedef struct _ALPC_MESSAGE_VIEW {
     ULONG               SendFlags;
     ULONG               ReceiveFlags;
     union {
-        ULONG           Unknowns[12];
+        ULONG           Unknowns[16]; // was 12
         struct {
             ULONG       ReplyLength;
             ULONG       Unknown1;

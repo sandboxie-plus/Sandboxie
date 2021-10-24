@@ -320,6 +320,7 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			pNode->Icon = IconProvider.icon(QFileInfo(pProcess->GetFileName()));
 			if (pNode->Icon.isNull() || !pNode->Icon.isValid())
 				pNode->Icon = m_ExeIcon;
+			Changed = 1;
 		}
 
 		for (int section = 0; section < columnCount(); section++)

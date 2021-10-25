@@ -215,7 +215,7 @@ void COptionsWindow::OnGeneralChanged()
 
 void COptionsWindow::OnPickColor()
 {
-	QColor color = QColorDialog::getColor(m_BorderColor, this, "Select color");
+	QColor color = QColorDialog::getColor(m_BorderColor, this, tr("Select color"));
 	if (!color.isValid())
 		return;
 	m_GeneralChanged = true;

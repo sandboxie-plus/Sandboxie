@@ -24,12 +24,12 @@
         <translation>恢复到相同文件夹</translation>
     </message>
     <message>
-        <location filename="Windows/FileBrowserWindow.cpp" line="194"/>
+        <location filename="Windows/FileBrowserWindow.cpp" line="197"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Windows/FileBrowserWindow.cpp" line="244"/>
+        <location filename="Windows/FileBrowserWindow.cpp" line="247"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
@@ -134,12 +134,12 @@
         <translation>浏览文件夹</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="419"/>
+        <location filename="Windows/OptionsWindow.cpp" line="420"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>该沙盒已被删除，因此配置无法保存。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="461"/>
+        <location filename="Windows/OptionsWindow.cpp" line="462"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>部分变更未保存，确定关闭这个选项窗口吗？</translation>
     </message>
@@ -147,6 +147,11 @@
         <location filename="Windows/OptionsGeneral.cpp" line="206"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="218"/>
+        <source>Select color</source>
+        <translation>选择颜色</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="228"/>
@@ -201,8 +206,8 @@
         <location filename="Windows/OptionsNetwork.cpp" line="161"/>
         <location filename="Windows/OptionsNetwork.cpp" line="390"/>
         <location filename="Windows/OptionsNetwork.cpp" line="475"/>
-        <location filename="Windows/OptionsWindow.cpp" line="473"/>
-        <location filename="Windows/OptionsWindow.cpp" line="489"/>
+        <location filename="Windows/OptionsWindow.cpp" line="474"/>
+        <location filename="Windows/OptionsWindow.cpp" line="490"/>
         <source>Group: %1</source>
         <translation>组: %1</translation>
     </message>
@@ -212,7 +217,7 @@
         <translation>请输入新组的名称</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="482"/>
+        <location filename="Windows/OptionsWindow.cpp" line="483"/>
         <source>Enter program:</source>
         <translation>请输入程序：</translation>
     </message>
@@ -430,27 +435,27 @@
         <translation>BT 种子（Torrent）客户端</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="146"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="147"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>此模板已全局启用。如需配置，请前往全局选项。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="178"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="180"/>
         <source>Please enter the template identifier</source>
         <translation>请输入模板标识符</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="186"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
         <source>Error: %1</source>
         <translation>错误：%1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="206"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="208"/>
         <source>Only local templates can be removed!</source>
         <translation>仅可删除本地模板！</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="210"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="212"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>确定要删除所选的本地模板吗？</translation>
     </message>
@@ -803,73 +808,73 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="2307"/>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在等待文件夹: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2308"/>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在删除文件夹: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2309"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>正在合并文件夹: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2310"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在完成快照合并...</translation>
     </message>
 </context>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="152"/>
+        <location filename="SbiePlusAPI.cpp" line="160"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="157"/>
+        <location filename="SbiePlusAPI.cpp" line="165"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="160"/>
+        <location filename="SbiePlusAPI.cpp" line="168"/>
         <source>NOT SECURE (Debug Config)</source>
         <translation>不安全！（调试用配置）</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="162"/>
+        <location filename="SbiePlusAPI.cpp" line="170"/>
         <source>Reduced Isolation</source>
         <translation>削弱隔离</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="164"/>
+        <location filename="SbiePlusAPI.cpp" line="172"/>
         <source>Enhanced Isolation</source>
         <translation>加强隔离</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="167"/>
+        <location filename="SbiePlusAPI.cpp" line="175"/>
         <source>API Log</source>
         <translation>API 日志</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="169"/>
+        <location filename="SbiePlusAPI.cpp" line="177"/>
         <source>No INet</source>
         <translation>无网络</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="171"/>
+        <location filename="SbiePlusAPI.cpp" line="179"/>
         <source>Net Share</source>
         <translation>网络共享</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="173"/>
+        <location filename="SbiePlusAPI.cpp" line="181"/>
         <source>No Admin</source>
         <translation>无管理员</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="176"/>
+        <location filename="SbiePlusAPI.cpp" line="184"/>
         <source>Normal</source>
         <translation>标准</translation>
     </message>
@@ -1148,6 +1153,11 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="471"/>
         <source>Cleanup</source>
         <translation>清理</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="497"/>
+        <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上支持 Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="528"/>
@@ -1697,17 +1707,17 @@ No will choose: %2</source>
 <context>
     <name>CSbieProcess</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="439"/>
+        <location filename="SbiePlusAPI.cpp" line="447"/>
         <source>Sbie RpcSs</source>
         <translation>Sbie RPC 子系统</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="440"/>
+        <location filename="SbiePlusAPI.cpp" line="448"/>
         <source>Sbie DcomLaunch</source>
         <translation>Sbie DCOM 服务启动器</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="441"/>
+        <location filename="SbiePlusAPI.cpp" line="449"/>
         <source>Sbie Crypto</source>
         <translation>Sbie 密码学服务</translation>
     </message>
@@ -1716,168 +1726,168 @@ No will choose: %2</source>
         <translation type="vanished">Sbie 微软自动更新服务</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="442"/>
+        <location filename="SbiePlusAPI.cpp" line="450"/>
         <source>Sbie WuauServ</source>
         <translation>Sbie 微软自动更新服务</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="443"/>
+        <location filename="SbiePlusAPI.cpp" line="451"/>
         <source>Sbie BITS</source>
         <translation>Sbie 后台智能传输服务</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="444"/>
+        <location filename="SbiePlusAPI.cpp" line="452"/>
         <source>Sbie Svc</source>
         <translation>沙盘软件服务</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="445"/>
+        <location filename="SbiePlusAPI.cpp" line="453"/>
         <source>MSI Installer</source>
         <oldsource>Msi Installer</oldsource>
         <translation>MSI 安装程序</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="446"/>
+        <location filename="SbiePlusAPI.cpp" line="454"/>
         <source>Trusted Installer</source>
         <translation>可信安装程序</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="447"/>
+        <location filename="SbiePlusAPI.cpp" line="455"/>
         <source>Windows Update</source>
         <translation>Windows 更新</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="448"/>
+        <location filename="SbiePlusAPI.cpp" line="456"/>
         <source>Windows Explorer</source>
         <translation>Windows 文件资源管理器</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="449"/>
+        <location filename="SbiePlusAPI.cpp" line="457"/>
         <source>Internet Explorer</source>
         <translation>Internet Explorer</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="450"/>
+        <location filename="SbiePlusAPI.cpp" line="458"/>
         <source>Firefox</source>
         <oldsource>FireFox</oldsource>
         <translation>Firefox</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="451"/>
+        <location filename="SbiePlusAPI.cpp" line="459"/>
         <source>Windows Media Player</source>
         <translation>Windows Media Player</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="452"/>
+        <location filename="SbiePlusAPI.cpp" line="460"/>
         <source>Winamp</source>
         <oldsource>WinAmp</oldsource>
         <translation>Winamp</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="453"/>
+        <location filename="SbiePlusAPI.cpp" line="461"/>
         <source>KMPlayer</source>
         <oldsource>KM Player</oldsource>
         <translation>KMPlayer</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="454"/>
+        <location filename="SbiePlusAPI.cpp" line="462"/>
         <source>Windows Live Mail</source>
         <translation>Windows Live Mail</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="455"/>
+        <location filename="SbiePlusAPI.cpp" line="463"/>
         <source>Service Model Reg</source>
         <translation>服务模型注册表</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="456"/>
+        <location filename="SbiePlusAPI.cpp" line="464"/>
         <source>RunDll32</source>
         <translation>RunDll32</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="457"/>
-        <location filename="SbiePlusAPI.cpp" line="458"/>
+        <location filename="SbiePlusAPI.cpp" line="465"/>
+        <location filename="SbiePlusAPI.cpp" line="466"/>
         <source>DllHost</source>
         <translation>DllHost</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="459"/>
+        <location filename="SbiePlusAPI.cpp" line="467"/>
         <source>Windows Ink Services</source>
         <translation>Windows 快捷方式服务</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="460"/>
+        <location filename="SbiePlusAPI.cpp" line="468"/>
         <source>Chromium Based</source>
         <translation>基于 Chromium 的浏览器</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="461"/>
+        <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Google Updater</source>
         <translation>Google 更新程序</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="462"/>
+        <location filename="SbiePlusAPI.cpp" line="470"/>
         <source>Acrobat Reader</source>
         <translation>Acrobat Reader</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="463"/>
+        <location filename="SbiePlusAPI.cpp" line="471"/>
         <source>MS Outlook</source>
         <translation>微软 Outlook</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="464"/>
+        <location filename="SbiePlusAPI.cpp" line="472"/>
         <source>MS Excel</source>
         <translation>微软 Excel</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="465"/>
+        <location filename="SbiePlusAPI.cpp" line="473"/>
         <source>Flash Player</source>
         <translation>Flash Player</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="466"/>
+        <location filename="SbiePlusAPI.cpp" line="474"/>
         <source>Firefox Plugin Container</source>
         <oldsource>FireFox Plugin Container</oldsource>
         <translation>Firefox 插件容器</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="467"/>
+        <location filename="SbiePlusAPI.cpp" line="475"/>
         <source>Generic Web Browser</source>
         <translation>常规网页浏览器</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="468"/>
+        <location filename="SbiePlusAPI.cpp" line="476"/>
         <source>Generic Mail Client</source>
         <translation>常规电子邮件客户端</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="469"/>
+        <location filename="SbiePlusAPI.cpp" line="477"/>
         <source>Thunderbird</source>
         <translation>Thunderbird</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="478"/>
+        <location filename="SbiePlusAPI.cpp" line="486"/>
         <source>Terminated</source>
         <translation>已终止</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="484"/>
+        <location filename="SbiePlusAPI.cpp" line="492"/>
         <source>Forced </source>
         <translation>必沙 </translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="482"/>
+        <location filename="SbiePlusAPI.cpp" line="490"/>
         <source>Running</source>
         <translation>正在运行</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="488"/>
+        <location filename="SbiePlusAPI.cpp" line="496"/>
         <source> in session %1</source>
         <translation> 位于会话 %1</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="497"/>
+        <location filename="SbiePlusAPI.cpp" line="505"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
@@ -3418,7 +3428,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1858"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation>允许使用嵌套工作对象 (job object) （实验性；适用于 Windows 8 及更高版本）</translation>
+        <translation>允许使用嵌套作业对象 (job object) （实验性；适用于 Windows 8 及更高版本）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1876"/>

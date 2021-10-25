@@ -206,13 +206,12 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* te
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
-SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def);
 
-SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForImageName(
-    const WCHAR* boxname, const WCHAR* image_name, const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForName(
+    const WCHAR* boxname, const WCHAR* name, const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);
 
-SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForImageName_bool(
-    const WCHAR* boxname, const WCHAR* image_name, const WCHAR* setting, BOOLEAN defval);
+SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForName_bool(
+    const WCHAR* boxname, const WCHAR* name, const WCHAR* setting, BOOLEAN defval);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
 

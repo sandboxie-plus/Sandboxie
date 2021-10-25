@@ -68,7 +68,7 @@ _FX BOOLEAN Gui_InitTitle(void)
     // initialize title variables
     //
 
-    SbieDll_GetStringForStringList(Dll_ImageName, NULL, L"BoxNameTitle", buf, sizeof(buf));
+    SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"BoxNameTitle", buf, sizeof(buf), NULL);
     if (*buf == L'y' || *buf == L'Y') { // indicator + box name
 
         UNICODE_STRING uni;

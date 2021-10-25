@@ -277,20 +277,20 @@ BOOLEAN Config_String2Bool(const WCHAR* value, BOOLEAN defval)
 
 _FX BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval)
 {
-    return SbieDll_GetSettingsForImageName_bool(NULL, Dll_ImageName, setting, defval);
+    return SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, setting, defval);
 }
 
 
 //---------------------------------------------------------------------------
-// SbieDll_GetSettingsForImageName_bool
+// SbieDll_GetSettingsForName_bool
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN SbieDll_GetSettingsForImageName_bool(
-    const WCHAR* boxname, const WCHAR* image_name, const WCHAR* setting, BOOLEAN defval)
+_FX BOOLEAN SbieDll_GetSettingsForName_bool(
+    const WCHAR* boxname, const WCHAR* name, const WCHAR* setting, BOOLEAN defval)
 {
     WCHAR value[16];
-    SbieDll_GetSettingsForImageName(boxname, image_name, setting, value, sizeof(value), NULL);
+    SbieDll_GetSettingsForName(boxname, name, setting, value, sizeof(value), NULL);
     return Config_String2Bool(value, defval);
 }
 
@@ -329,12 +329,12 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
 
 
 //---------------------------------------------------------------------------
-// SbieDll_GetSettingsForImageName
+// SbieDll_GetSettingsForName
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN SbieDll_GetSettingsForImageName(
-    const WCHAR* boxname, const WCHAR* image_name, const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext)
+_FX BOOLEAN SbieDll_GetSettingsForName(
+    const WCHAR* boxname, const WCHAR* name, const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext)
 {
     WCHAR conf_buf[2048];
     ULONG found_level = -1;
@@ -349,7 +349,7 @@ _FX BOOLEAN SbieDll_GetSettingsForImageName(
         ++index;
 
         ULONG level = -1;
-        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, image_name, &level);
+        WCHAR* found_value = Config_MatchImageAndGetValue(conf_buf, name, &level);
         if (!found_value || level > found_level)
             continue;
         //if (found_value) {
@@ -568,19 +568,3 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
     }
     return FALSE;
 }
-
-
-//---------------------------------------------------------------------------
-// SbieDll_GetBoolForStringFromList
-//---------------------------------------------------------------------------
-
-
-BOOLEAN SbieDll_GetBoolForStringFromList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, BOOLEAN def)
-{
-    WCHAR buf[32];
-    if (SbieDll_GetStringForStringList(string, boxname, setting, buf, sizeof(buf)))
-        return Config_String2Bool(buf, def);
-    return def;
-}
-
-

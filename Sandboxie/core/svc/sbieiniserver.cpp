@@ -1004,8 +1004,8 @@ MSG_HEADER *SbieIniServer::GetSetting(MSG_HEADER *msg)
         }
         else if (_wcsicmp(I->Name.c_str(), req->setting) == 0) {
             if(!iniData.empty()) // string list
-                iniData.push_back(L'\0');
-                //iniData.push_back(L'\n');
+                //iniData.push_back(L'\0');
+                iniData.push_back(L'\n');
             iniData += I->Value;
         }
     }
@@ -1099,7 +1099,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
 
     if (have_value) 
     {
-        for (WCHAR* value = req->value; req->value_len > 0 && *value != L'\0';) 
+        /*for (WCHAR* value = req->value; req->value_len > 0 && *value != L'\0';) 
         {
             pSection->Entries.insert(pos, SIniEntry{ req->setting, value });
 
@@ -1109,8 +1109,13 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
                 req->value_len -= 1;
                 value += len + 1;
             }
-        }
-        /*for (WCHAR* value = req->value; *value != L'\0'; ) 
+        }*/
+
+        //
+        // Note: SbieCtrl passes a \n separated list to replace all values in a string list
+        //
+
+        for (WCHAR* value = req->value; *value != L'\0'; ) 
         {
             ULONG cpylen, skiplen;
             WCHAR *cr = wcschr(value, L'\n');
@@ -1127,7 +1132,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
             pSection->Entries.insert(pos, SIniEntry{ req->setting, std::wstring(value, cpylen) });
 
             value += skiplen;
-        }*/
+        }
     }
 
     return STATUS_SUCCESS;

@@ -709,7 +709,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     if (CallingModule)
     {
         // get the DLL specific preset if present
-        use_RpcMgmtSetComTimeout = SbieDll_GetBoolForStringFromList(CallingModule, NULL, L"UseRpcMgmtSetComTimeout", use_RpcMgmtSetComTimeout);
+        use_RpcMgmtSetComTimeout = SbieDll_GetSettingsForName_bool(NULL, CallingModule, L"UseRpcMgmtSetComTimeout", use_RpcMgmtSetComTimeout);
 
         //
         // check for a "RpcPortBinding" entry 
@@ -834,7 +834,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
     if (CallingModule)
     {
         // get the DLL specific preset if present
-        use_RpcMgmtSetComTimeout = SbieDll_GetBoolForStringFromList(CallingModule, NULL, L"UseRpcMgmtSetComTimeout", use_RpcMgmtSetComTimeout);
+        use_RpcMgmtSetComTimeout = SbieDll_GetSettingsForName_bool(NULL, CallingModule, L"UseRpcMgmtSetComTimeout", use_RpcMgmtSetComTimeout);
 
         //
         // check for a "RpcPortBinding" entry 

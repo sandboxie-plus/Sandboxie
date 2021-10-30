@@ -12,17 +12,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.8d / 5.53.3] - 2021-10-??
 
 ### Added
-- added checkbox if the user wants sandman to be started after instalation [#1318](https://github.com/sandboxie-plus/Sandboxie/issues/1318)
-- added template for windows 10 virtual desktop manager [#1326](https://github.com/sandboxie-plus/Sandboxie/discussions/1326)
+- added checkbox if the user wants SandMan.exe to be started after installation [#1318](https://github.com/sandboxie-plus/Sandboxie/issues/1318)
+- added template for Windows 10 virtual desktop manager [#1326](https://github.com/sandboxie-plus/Sandboxie/discussions/1326)
 
 ### Changed
 - "OpenClsid=..." is no longer restricted to CLSCTX_LOCAL_SERVER execution contexts only
--- this allows to run objects with the CLSCTX_INPROC_SERVER flag in the com helper service
-- in teh trace view now multiple types can be sellected at once
+-- this allows to run objects with the CLSCTX_INPROC_SERVER flag in the COM helper service
+- in the trace view, now multiple types can be selected at once
+- a few Plus UI entries were made translatable (by gexgd0419) [#1320](https://github.com/sandboxie-plus/Sandboxie/pull/1320)
+- changed default "terminate all boxed processes" key to Shift+Pause (by isaak654) [#1337](https://github.com/sandboxie-plus/Sandboxie/issues/1337)
 
 ### Fixed
-- fixed ini writing issue with sbiectrl and the new ini handling mechanism [#1331](https://github.com/sandboxie-plus/Sandboxie/issues/1331)
-- fixed issue with trace log fitlering
+- fixed ini writing issue with SbieCtrl and the new ini handling mechanism [#1331](https://github.com/sandboxie-plus/Sandboxie/issues/1331)
+- fixed issue with trace log filtering
+- fixed space issue about German language on Plus installer (by mpheath) [#1333](https://github.com/sandboxie-plus/Sandboxie/issues/1333)
+- restored Waterfox phishing template entries with a proper fix (by APMichael) [#1334](https://github.com/sandboxie-plus/Sandboxie/issues/1334)
 
 
 

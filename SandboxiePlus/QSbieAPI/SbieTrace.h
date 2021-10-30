@@ -34,7 +34,8 @@ public:
 	virtual quint32		GetThreadId() const { return m_ThreadId; }
 	virtual QDateTime	GetTimeStamp() const { return m_TimeStamp; }
 
-	virtual quint16		GetType() const { return m_Type.Flags; }
+	virtual quint16		GetType() const { return m_Type.Type; }
+	static QList<quint32>AllTypes();
 	static QString		GetTypeStr(quint32 Type);
 	virtual QString		GetTypeStr() const;
 	virtual QString		GetStautsStr() const;

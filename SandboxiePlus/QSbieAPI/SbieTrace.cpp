@@ -96,6 +96,15 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 	}
 }
 
+QList<quint32> CTraceEntry::AllTypes()
+{
+	return QList<quint32>() << MONITOR_APICALL << MONITOR_SYSCALL 
+		<< MONITOR_KEY << MONITOR_FILE << MONITOR_PIPE 
+		<< MONITOR_IPC << MONITOR_RPC << MONITOR_COMCLASS << MONITOR_RTCLASS
+		<< MONITOR_WINCLASS << MONITOR_DRIVE  << MONITOR_IGNORE << MONITOR_IMAGE 
+		<< MONITOR_NETFW << MONITOR_SCM << MONITOR_OTHER;
+}
+
 QString CTraceEntry::GetTypeStr(quint32 Type)
 {
 	switch (Type)
@@ -104,6 +113,7 @@ QString CTraceEntry::GetTypeStr(quint32 Type)
 	case MONITOR_SYSCALL:		return "SysCall"; break;
 	case MONITOR_PIPE:			return "Pipe"; break;
 	case MONITOR_IPC:			return "Ipc"; break;
+	case MONITOR_RPC:			return "Rpc"; break;
 	case MONITOR_WINCLASS:		return "WinClass"; break;
 	case MONITOR_DRIVE:			return "Drive"; break;
 	case MONITOR_COMCLASS:		return "ComClass"; break;

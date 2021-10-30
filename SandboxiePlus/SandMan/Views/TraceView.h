@@ -41,7 +41,7 @@ protected:
 	//int					m_FilterCol;
 	quint32				m_FilterPid;
 	quint32				m_FilterTid;
-	quint32				m_FilterType;
+	QList<quint32>		m_FilterTypes;
 	quint32				m_FilterStatus;
 	void*				m_pCurrentBox;
 
@@ -49,7 +49,7 @@ protected:
 	QAction*			m_pTraceTree;
 	QComboBox*			m_pTracePid;
 	QComboBox*			m_pTraceTid;
-	QComboBox*			m_pTraceType;
+	class QCheckList*	m_pTraceType;
 	QComboBox*			m_pTraceStatus;
 	QAction*			m_pAllBoxes;
 	QAction*			m_pSaveToFile;

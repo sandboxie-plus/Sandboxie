@@ -138,7 +138,7 @@ void CFinder::Open()
 
 QRegExp CFinder::GetRegExp() const
 {
-	if (!isVisible())
+	if (!isVisible() || m_pSearch->text().isEmpty())
 		return QRegExp();
 	return QRegExp(m_pSearch->text(), m_pCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive, m_pRegExp->isChecked() ? QRegExp::RegExp : QRegExp::FixedString);
 }

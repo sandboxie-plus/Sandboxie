@@ -534,7 +534,7 @@ WCHAR* GetDynamicLpcPortName(const WCHAR* wszPortId)
         else
             Sbie_snwprintf(text, 130, L"Failed to resolve dynamic port: %s; status: %08X", req.wszPortId, rpl ? rpl->h.status : 0);
 
-        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, text, FALSE);
+        SbieApi_MonitorPut2(MONITOR_RPC | MONITOR_TRACE, text, FALSE);
     }
 
     if (rpl && NT_SUCCESS(rpl->h.status))
@@ -763,7 +763,7 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
             CallingModule ? CallingModule : L"unknown");
 
         //OutputDebugString(msg);
-        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
+        SbieApi_MonitorPut2(MONITOR_RPC | MONITOR_TRACE, msg, FALSE);
     }
 
     if(use_RpcMgmtSetComTimeout) __sys_RpcMgmtSetComTimeout(*OutBinding, RPC_C_BINDING_TIMEOUT);
@@ -878,7 +878,7 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
             CallingModule ? CallingModule : L"unknown");
 
         //OutputDebugString(msg);
-        SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, msg, FALSE);
+        SbieApi_MonitorPut2(MONITOR_RPC | MONITOR_TRACE, msg, FALSE);
     }
 
     __sys_RpcStringFreeW(&StringUuid);
@@ -997,7 +997,7 @@ void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, PMIDL_STUB
         Sbie_snwprintf(text, 512, L"Calling %s, caused log exception, caller = '%s'", Function, CallingModule);
     }
 
-    SbieApi_MonitorPut2(MONITOR_IPC | MONITOR_TRACE, text, FALSE);
+    SbieApi_MonitorPut2(MONITOR_RPC | MONITOR_TRACE, text, FALSE);
 }
 
 

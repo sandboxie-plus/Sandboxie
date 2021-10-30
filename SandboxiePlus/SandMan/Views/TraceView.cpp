@@ -4,6 +4,7 @@
 #include "../QSbieAPI/SbieAPI.h"
 #include "..\Models\TraceModel.h"
 #include "..\..\MiscHelpers\Common\Common.h"
+#include "..\..\MiscHelpers\Common\CheckList.h"
 #include "SbieView.h"
 
 //class CTraceFilterProxyModel : public CSortFilterProxyModel
@@ -54,7 +55,6 @@ CTraceView::CTraceView(QWidget* parent) : CPanelWidget<QTreeViewEx>(parent)
 	//m_FilterCol = -1;
 	m_FilterPid = 0;
 	m_FilterTid = 0;
-	m_FilterType = 0;
 	m_FilterStatus = 0;
 
 	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -81,15 +81,14 @@ CTraceView::CTraceView(QWidget* parent) : CPanelWidget<QTreeViewEx>(parent)
 	m_pTraceToolBar->addWidget(m_pTraceTid);
 
 	m_pTraceToolBar->addWidget(new QLabel(tr("Type:")));
-	m_pTraceType = new QComboBox();
-	m_pTraceType->addItem(tr("[All]"), 0);
-	for (quint32 i = 0; i < 0xff; i++) {
-		QString TypeStr = CTraceEntry::GetTypeStr(i);
-		if(!TypeStr.isEmpty())
-			m_pTraceType->addItem(TypeStr, i);
-	}
-	m_pTraceType->setMinimumWidth(75);
-	connect(m_pTraceType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetFilter()));
+	m_pTraceType = new QCheckList();
+	//m_pTraceType->addItem(tr("[All]"), 0);
+	m_pTraceType->setAllCheckedText(tr("[All]"));
+	m_pTraceType->setNoneCheckedText(tr("[All]"));
+	foreach(quint32 type, CTraceEntry::AllTypes()) 
+		m_pTraceType->addCheckItem(CTraceEntry::GetTypeStr(type), type, Qt::Unchecked);
+	m_pTraceType->setMinimumWidth(100);
+	connect(m_pTraceType, SIGNAL(globalCheckStateChanged(int)), this, SLOT(OnSetFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceType);
 
 	m_pTraceToolBar->addWidget(new QLabel(tr("Status:")));
@@ -165,42 +164,43 @@ int CTraceView__Filter(const CTraceEntryPtr& pEntry, void* params)
 {
 	CTraceView* This = (CTraceView*)params;
 
-	int True = This->m_bHighLight ? 2 : 1;
-	int False = This->m_bHighLight ? 1 : 0;
+	int Ret = 1;
 
 	if (This->m_pCurrentBox != NULL && This->m_pCurrentBox != pEntry->GetBoxPtr())
-		return False;
+		return 0;
 
 	if (This->m_FilterExp.isValid()) {
 		if (!pEntry->GetMessage().contains(This->m_FilterExp)
 			//&& !pEntry->GetTypeStr().contains(This->m_FilterExp)
 			//&& !pEntry->GetStautsStr().contains(This->m_FilterExp)
 			&& !pEntry->GetProcessName().contains(This->m_FilterExp))
-				return False;
+			Ret = This->m_bHighLight ? 1 : 0;
+		else
+			Ret = This->m_bHighLight ? 2 : 1;
 	}
 
 	if (This->m_FilterPid != 0 && This->m_FilterPid != pEntry->GetProcessId())
-		return False;
+		return 0;
 
 	if (This->m_FilterTid != 0 && This->m_FilterTid != pEntry->GetThreadId())
-		return False;
+		return 0;
 
-	if (This->m_FilterType != 0 && This->m_FilterType != pEntry->GetType())
-		return False;
+	if (!This->m_FilterTypes.isEmpty() && !This->m_FilterTypes.contains(pEntry->GetType()))
+		return 0;
 	
 	if (This->m_FilterStatus != 0) {
 		if (pEntry->IsOpen()) {
-			if(This->m_FilterStatus == 1) return True;
+			if(This->m_FilterStatus == 1) return Ret;
 		} else if (pEntry->IsClosed()) {
-			if (This->m_FilterStatus == 2) return True;
+			if (This->m_FilterStatus == 2) return Ret;
 		} else if (pEntry->IsTrace()) {
-			if(This->m_FilterStatus == 3) return True;
+			if(This->m_FilterStatus == 3) return Ret;
 		} else
-			if(This->m_FilterStatus == 4) return True;
-		return False;
+			if(This->m_FilterStatus == 4) return Ret;
+		return 0;
 	}
 
-	return True;
+	return Ret;
 }
 
 void CTraceView::Refresh()
@@ -321,7 +321,13 @@ void CTraceView::OnSetTidFilter()
 
 void CTraceView::OnSetFilter()
 {
-	m_FilterType = m_pTraceType->currentData().toUInt();
+	m_FilterTypes.clear();
+	for (int i = 0; i < m_pTraceType->count(); i++) {
+		if (m_pTraceType->itemData(i, Qt::CheckStateRole).toInt() == Qt::Checked) {
+			m_FilterTypes.append(m_pTraceType->itemData(i, Qt::UserRole + 1).toUInt());
+		}
+	}
+
 	m_FilterStatus = m_pTraceStatus->currentData().toUInt();
 
 	m_FullRefresh = true;

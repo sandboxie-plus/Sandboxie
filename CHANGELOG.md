@@ -7,6 +7,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [0.9.8d / 5.53.3] - 2021-10-??
+
+### Added
+- added checkbox if the user wants sandman to be started after instalation [#1318](https://github.com/sandboxie-plus/Sandboxie/issues/1318)
+- added template for windows 10 virtual desktop manager [#1326](https://github.com/sandboxie-plus/Sandboxie/discussions/1326)
+
+### Changed
+- "OpenClsid=..." is no longer restricted to CLSCTX_LOCAL_SERVER execution contexts only
+-- this allows to run objects with the CLSCTX_INPROC_SERVER flag in the com helper service
+- in teh trace view now multiple types can be sellected at once
+
+### Fixed
+- fixed ini writing issue with sbiectrl and the new ini handling mechanism [#1331](https://github.com/sandboxie-plus/Sandboxie/issues/1331)
+- fixed issue with trace log fitlering
+
+
+
 ## [0.9.8c / 5.53.2] - 2021-10-24
 
 ### Added
@@ -16,7 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed template sections not showing in editor [#1287](https://github.com/sandboxie-plus/Sandboxie/issues/1287)
 - fixed autodelete box content broken in the previous build [#1296](https://github.com/sandboxie-plus/Sandboxie/issues/1296) [#1324](https://github.com/sandboxie-plus/Sandboxie/issues/1324)
 - fixed crash in "Browse Content" window [#1313](https://github.com/sandboxie-plus/Sandboxie/issues/1313)
-- fixed issue with icon resolution on Windows 7 [#1310](https://github.com/sandboxie-plus/Sandboxie/issues/1310)
+- fixed issue with icon resolution [#1310](https://github.com/sandboxie-plus/Sandboxie/issues/1310)
 - fixed invalid "No Inet" status in the status column [#1312](https://github.com/sandboxie-plus/Sandboxie/issues/1312)
 - fixed Windows Explorer search box not working (by isaak654) [#1002](https://github.com/sandboxie-plus/Sandboxie/issues/1002)
 - fixed Waterfox phishing template (by Dyras) [#1309](https://github.com/sandboxie-plus/Sandboxie/pull/1309)

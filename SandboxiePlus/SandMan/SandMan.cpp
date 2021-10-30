@@ -1024,7 +1024,7 @@ void CSandMan::SetupHotKeys()
 	m_pHotkeyManager->unregisterAllHotkeys();
 
 	if (theConf->GetBool("Options/EnablePanicKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel"), HK_PANIC);
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
 }
 
 void CSandMan::OnHotKey(size_t id)

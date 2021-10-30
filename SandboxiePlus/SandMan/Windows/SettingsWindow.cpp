@@ -217,7 +217,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkNotifyRecovery->setChecked(!theConf->GetBool("Options/InstantRecovery", true));
 
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
-	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel")));
+	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Shift+Pause")));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 

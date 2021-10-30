@@ -52,7 +52,6 @@ SOURCES += ./MiscHelpers.cpp \
     ./Common/MultiLineInputDialog.cpp \
     ./Common/PanelView.cpp \
     ./Common/qRC4.cpp \
-    ./Common/CheckList.cpp \
     ./Common/NetworkAccessManager.cpp \
     ./Common/Settings.cpp \
     ./Common/SettingsWidgets.cpp \

@@ -33,6 +33,7 @@ HEADERS += ./MiscHelpers.h \
     ./Common/TreeItemModel.h \
     ./Common/TreeViewEx.h \
     ./Common/TreeWidgetEx.h \
+    ./Common/CheckList.h \
     ./Common/NetworkAccessManager.h
     
 SOURCES += ./MiscHelpers.cpp \
@@ -51,6 +52,7 @@ SOURCES += ./MiscHelpers.cpp \
     ./Common/MultiLineInputDialog.cpp \
     ./Common/PanelView.cpp \
     ./Common/qRC4.cpp \
+    ./Common/CheckList.cpp \
     ./Common/NetworkAccessManager.cpp \
     ./Common/Settings.cpp \
     ./Common/SettingsWidgets.cpp \

@@ -4,12 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
-
-
-## [0.9.8d / 5.53.3] - 2021-10-??
+## [0.9.8d / 5.53.3] - 2021-11-01
 
 ### Added
 - added checkbox if the user wants SandMan.exe to be started after installation [#1318](https://github.com/sandboxie-plus/Sandboxie/issues/1318)

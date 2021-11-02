@@ -500,6 +500,11 @@ begin
       IDNO: TaskRet := 2;
     end;
 
+    if TaskRet > 1 then begin
+      Log('Debug: Taskkill /IM Sandman.exe /F');
+      Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+    end;
+
     if TaskRet > 2 then begin
       Log('Debug: Sandman /RemoveSandboxes');
       Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);

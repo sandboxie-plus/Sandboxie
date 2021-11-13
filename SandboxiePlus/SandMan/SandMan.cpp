@@ -494,7 +494,7 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupportLbl = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+	QLabel* pSupportLbl = new QLabel(tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>"));
 	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
 	m_pToolBar->addWidget(pSupportLbl);
@@ -1057,7 +1057,7 @@ void CSandMan::SetupHotKeys()
 	m_pHotkeyManager->unregisterAllHotkeys();
 
 	if (theConf->GetBool("Options/EnablePanicKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel"), HK_PANIC);
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -2397,6 +2397,14 @@ QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes"),
 QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
 };
 
+// Make sure that CSandBox strings won't be marked as vanished in all .ts files, even after running lupdate
+
+static const char* CSandBox_strings[] = {
+QT_TRANSLATE_NOOP("CSandBox", "Waiting for folder: %1"),
+QT_TRANSLATE_NOOP("CSandBox", "Deleting folder: %1"),
+QT_TRANSLATE_NOOP("CSandBox", "Merging folders: %1 &gt;&gt; %2"),
+QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // WinSpy based window finder

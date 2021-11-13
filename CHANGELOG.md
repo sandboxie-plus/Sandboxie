@@ -27,16 +27,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - added setting to entirely open access to the COM infrastructure
 
-
 ### Changed
 - reworked the resource access path matching mechanism to optionally apply more specific rules over less specific ones
 -- for example "OpenFilePath=C:\User\Me\AppData\Firefox takes precedence over "WriteFilePath=C:\User\Me\"
 -- to enable this new behaviour, add "UseRuleSpecificity=y" to your Sandboxie.ini, this behaviour is always enabled in Privacy enhanced mode
--- added "NormalFilePath=..." to restore default sandboxie behaviour on a given path
+-- added "NormalFilePath=..." to restore default Sandboxie behaviour on a given path
 -- added "OpenConfPath=...", which similarly to "OpenPipePath=..." is a "OpenKeyPath=..." variant which applies to executables located in the sandbox
 - removed option to copy a box during creation, instead the box context menu offers a duplication option
 - reworked the box creation dialog to offer new box types
 
+### Fixed
+- fixed SBIE1401 notification during Sandboxie Plus uninstall (by mpheath) [68fa37d](https://github.com/sandboxie-plus/Sandboxie/commit/68fa37d45be2be3565917d0de097709b7aa009e0)
 
 
 

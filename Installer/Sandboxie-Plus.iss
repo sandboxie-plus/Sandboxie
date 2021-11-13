@@ -107,7 +107,7 @@ Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"
 Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
 
 ; Start the Sandman UI.
-Filename: "{app}\SandMan.exe"; Parameters: "-autorun"; StatusMsg: "Launch SandMan UI..."; Flags: postinstall nowait; Check: not IsPortable
+Filename: "{app}\SandMan.exe"; Parameters: "-autorun"; StatusMsg: "Launch SandMan UI..."; Flags: postinstall nowait; Check: (not IsPortable) and (not WizardSilent)
 ;Filename: "{app}\SandMan.exe"; Parameters: "-autorun"; StatusMsg: "Launch SandMan UI..."; Flags: runasoriginaluser nowait; Check: not IsPortable
 
 
@@ -261,7 +261,7 @@ begin
 
     // Run KmdUtil scandll.
     UpdateStatus(OutputProgressPage, 'KmdUtil scandll', 5);
-    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'scandll', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+    Exec(ExpandConstant('{app}\KmdUtil.exe'), 'scandll_silent', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
 
     if (ExecRet <> 0) then
     begin

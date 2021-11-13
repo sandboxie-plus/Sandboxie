@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.0.0 / 5.55.0] - 2021-11-??
+## [1.0.0 / 5.55.0] - 2021-11-14
 
 ### Added 
 - added Privacy enhanced mode, sandboxes with "UsePrivacyMode=y" will not allow read access to locations containing user data
@@ -38,6 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed SBIE1401 notification during Sandboxie Plus uninstall (by mpheath) [68fa37d](https://github.com/sandboxie-plus/Sandboxie/commit/68fa37d45be2be3565917d0de097709b7aa009e0)
+- memory leak in driver handling FLT_FILE_NAME_INFORMATION (by Therzok) [#1371](https://github.com/sandboxie-plus/Sandboxie/pull/1371)
 
 
 

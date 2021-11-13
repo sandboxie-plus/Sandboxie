@@ -673,6 +673,10 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
     WCHAR wstrPortName[MAX_PATH];
     memset(wstrPortName, 0, sizeof(wstrPortName));
 
+    /*if (wcsstr(StringBinding, L"epmapper") != NULL) {
+        __debugbreak();
+    }*/
+
     static const WCHAR* dynamicFalse = L"ncalrpc:[,Security=Impersonation Dynamic False]";
     //static const WCHAR* dynamicTrue = L"ncalrpc:[,Security=Impersonation Dynamic True]";
 

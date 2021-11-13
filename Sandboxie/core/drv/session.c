@@ -72,7 +72,7 @@ struct _SESSION {
     // resource monitor
     //
 
-    LOG_BUFFER* monitor_log;
+	LOG_BUFFER* monitor_log;
 
     BOOLEAN monitor_overflow;
 

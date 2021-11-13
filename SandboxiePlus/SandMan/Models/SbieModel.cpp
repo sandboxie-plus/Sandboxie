@@ -128,7 +128,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			New[pNode->Path].append(pNode);
 			Added.append(ID);
 
-			pNode->Icon = theGUI->GetBoxIcon(false);
+			pNode->Icon = theGUI->GetBoxIcon(CSandBoxPlus::eDefault, false);
 			pNode->IsBold = true;
 
 			pNode->Values[eName].Raw = Group;
@@ -203,7 +203,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			pNode->inUse = inUse;
 			pNode->boxType = boxType;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
-			pNode->Icon = theGUI->GetBoxIcon(inUse, boxType);
+			pNode->Icon = theGUI->GetBoxIcon(boxType, inUse);
 			Changed = 1; // set change for first column
 		}
 

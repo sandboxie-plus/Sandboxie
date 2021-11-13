@@ -85,6 +85,7 @@ void COptionsWindow::OnScreenReaders()
 	else
 		m_BoxTemplates.removeAll("ScreenReader");
 	m_TemplatesChanged = true; 
+	OnOptChanged();
 }
 
 QString COptionsWindow::GetCategoryName(const QString& Category)
@@ -154,12 +155,14 @@ void COptionsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
 		if (!m_BoxTemplates.contains(Name)) {
 			m_BoxTemplates.append(Name);
 			m_TemplatesChanged = true;
+			OnOptChanged();
 		}
 	}
 	else if (pItem->checkState(1) == Qt::Unchecked) {
 		if (m_BoxTemplates.contains(Name)) {
 			m_BoxTemplates.removeAll(Name);
 			m_TemplatesChanged = true;
+			OnOptChanged();
 		}
 	}
 }
@@ -254,6 +257,7 @@ void COptionsWindow::OnFolderChanged()
 {
 	//CPathEdit* pEdit = (CPathEdit*)sender();
 	m_FoldersChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::ShowFolders()

@@ -42,14 +42,14 @@ static BOOLEAN Process_MatchImageGroup(
 static BOOLEAN Process_AddPath_2(
     PROCESS *proc, LIST *list, const WCHAR *value, const WCHAR *setting_name,
     BOOLEAN AddFirst, BOOLEAN AddStar,
-    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse, BOOLEAN* Reparsed);
+    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse, BOOLEAN* Reparsed, ULONG Level);
 
 
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
 
-
+static const WCHAR *Process_Normal = L"Normal";
 static const WCHAR *Process_Open   = L"Open";
 static const WCHAR *Process_Read   = L"Read";
 static const WCHAR *Process_Write  = L"Write";
@@ -154,7 +154,7 @@ _FX BOOLEAN Process_MatchImage(
     if (! expnd)
         return FALSE;
 
-    pat = Pattern_Create(box->expand_args->pool, expnd, TRUE);
+    pat = Pattern_Create(box->expand_args->pool, expnd, TRUE, 0);
 
     Mem_FreeString(expnd);
 
@@ -328,7 +328,7 @@ _FX const WCHAR* Process_MatchImageAndGetValue(BOX *box, const WCHAR* value, con
     }
     else {
 
-        if (pLevel) *pLevel = 2; // 2 - global default
+        if (pLevel) *pLevel = 3; // 3 - global default
     }
 
     if (! *value)
@@ -531,6 +531,7 @@ _FX BOOLEAN Process_AddPath(
     BOOLEAN CheckReparse = FALSE;
     BOOLEAN Reparsed;
     BOOLEAN ok;
+    ULONG Level;
 
     //
     // if this is a file/pipe/key setting, remove duplicate backslashes
@@ -540,7 +541,8 @@ _FX BOOLEAN Process_AddPath(
     if (setting_name) {
 
         const WCHAR *setting_name_ptr = setting_name;
-        if (_wcsnicmp(setting_name, Process_Closed, 6) == 0)
+        if (_wcsnicmp(setting_name, Process_Normal, 6) == 0 ||
+            _wcsnicmp(setting_name, Process_Closed, 6) == 0)
             setting_name_ptr = setting_name + 6;
         else if (_wcsnicmp(setting_name, Process_Write, 5) == 0)
             setting_name_ptr = setting_name + 5;
@@ -564,7 +566,7 @@ _FX BOOLEAN Process_AddPath(
         }
     }
 
-    value = Process_MatchImageAndGetValue(proc->box, value, proc->image_name, NULL);
+    value = Process_MatchImageAndGetValue(proc->box, value, proc->image_name, &Level);
 
     if (!value)
         return TRUE;
@@ -588,13 +590,13 @@ _FX BOOLEAN Process_AddPath(
     //
 
     ok = Process_AddPath_2(proc, list, value, setting_name,
-               AddFirst, AddStar, RemoveBackslashes, CheckReparse, &Reparsed);
+               AddFirst, AddStar, RemoveBackslashes, CheckReparse, &Reparsed, Level);
     if (ok && CheckReparse && Reparsed) {
         //
         // If the path was reparsed, add also the original path to the list
         //
         ok = Process_AddPath_2(proc, list, value, setting_name,
-               AddFirst, AddStar, RemoveBackslashes, FALSE, NULL);
+               AddFirst, AddStar, RemoveBackslashes, FALSE, NULL, Level);
     }
 
     //
@@ -611,10 +613,10 @@ _FX BOOLEAN Process_AddPath(
         for (len = L'A'; (len <= L'Z') && ok; ++len) {
             *tmp = (WCHAR)len;
             ok = Process_AddPath_2(proc, list, tmp, setting_name,
-                   AddFirst, AddStar, RemoveBackslashes, CheckReparse, &Reparsed);
+                   AddFirst, AddStar, RemoveBackslashes, CheckReparse, &Reparsed, Level);
             if (ok && CheckReparse && Reparsed) {
                 ok = Process_AddPath_2(proc, list, tmp, setting_name,
-                       AddFirst, AddStar, RemoveBackslashes, FALSE, NULL);
+                       AddFirst, AddStar, RemoveBackslashes, FALSE, NULL, Level);
             }
         }
         Mem_FreeString(tmp);
@@ -632,7 +634,7 @@ _FX BOOLEAN Process_AddPath(
 _FX BOOLEAN Process_AddPath_2(
     PROCESS *proc, LIST *list, const WCHAR *value, const WCHAR *setting_name,
     BOOLEAN AddFirst, BOOLEAN AddStar,
-    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse, BOOLEAN* Reparsed)
+    BOOLEAN RemoveBackslashes, BOOLEAN CheckReparse, BOOLEAN* Reparsed, ULONG Level)
 {
     PATTERN *pat;
     WCHAR *expand, *tmp;
@@ -712,7 +714,7 @@ _FX BOOLEAN Process_AddPath_2(
     // add the pattern
     //
 
-    pat = Pattern_Create(proc->pool, tmp, TRUE);
+    pat = Pattern_Create(proc->pool, tmp, TRUE, Level);
     if (pat) {
 
         if (AddFirst)
@@ -830,6 +832,239 @@ _FX const WCHAR *Process_MatchPath(
 
     Mem_Free(path_lwr, path_lwr_len);
     return patsrc;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_MatchPathList
+//---------------------------------------------------------------------------
+
+
+_FX int Process_MatchPathList(
+    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, const WCHAR** patsrc)
+{
+    PATTERN *pat;
+    int match_len = 0;
+    ULONG level = plevel ? *plevel : -1; // lower is better, 3 is max value
+
+    pat = List_Head(list);
+    while (pat) {
+
+        ULONG cur_level = Pattern_Level(pat);
+        if (cur_level > level)
+            goto next; // no point testing patters with a to weak level
+
+        int cur_len = Pattern_MatchX(pat, path_lwr, path_len);
+        if (cur_len > match_len) {
+            match_len = cur_len;
+            level = cur_level;
+            if (patsrc) *patsrc = Pattern_Source(pat);
+            
+            // we need to test all entries to find the best match, so we dont break here
+        }
+
+        //
+        // if we have a pattern like C:\Windows\,
+        // we still want it to match a path like C:\Windows,
+        // hence we add a L'\\' to the path and check again
+        //
+
+        else if (path_lwr[path_len - 1] != L'\\') { 
+            path_lwr[path_len] = L'\\';
+            cur_len = Pattern_MatchX(pat, path_lwr, path_len + 1);
+            path_lwr[path_len] = L'\0';
+            if (cur_len > match_len) {
+                match_len = cur_len;
+                level = cur_level;
+                if (patsrc) *patsrc = Pattern_Source(pat);
+            }
+        }
+
+    next:
+        pat = List_Next(pat);
+    }
+
+    if (plevel) *plevel = level;
+    return match_len;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_MatchPathEx
+//---------------------------------------------------------------------------
+
+
+_FX ULONG Process_MatchPathEx(
+    PROCESS *proc, const WCHAR *path, ULONG path_len, WCHAR path_code,
+    LIST *normal_list, 
+    LIST *open_list, LIST *closed_list,
+    LIST *read_list, LIST *write_list,
+    const WCHAR** patsrc)
+{
+    PATTERN *pat;
+    WCHAR *path_lwr;
+    ULONG path_lwr_len;
+    const WCHAR* curpat;
+    ULONG cur_level;
+    int cur_len;
+    int match_len;
+    ULONG level;
+    ULONG mp_flags;
+
+    path_lwr_len = (path_len + 4) * sizeof(WCHAR);
+    path_lwr = Mem_Alloc(proc->pool, path_lwr_len);
+    if (! path_lwr)
+        return 0;
+
+    wmemcpy(path_lwr, path, path_len);
+    path_lwr[path_len]     = L'\0';
+    path_len = wcslen(path_lwr);
+    if (! path_len) {
+        Mem_Free(path_lwr, path_lwr_len);
+        return 0;
+    }
+    path_lwr[path_len]     = L'\0';
+    path_lwr[path_len + 1] = L'\0';
+    _wcslwr(path_lwr);
+
+    //
+    // Rule priorities are implemented based on their specificity and match level with the process.
+    // The specificity describes how well a pattern matches a given path, 
+    // i.e. how many charakters of the path it matches, disregarding the last wild card.
+    // The process match level describes in which way a rule applies to a given process:
+    //  0 - exact match, eg. ...Path=program.exe,...
+    //  1 - match by negation, eg. ...Path=!program.exe,...
+    //  2 - match all, eg. ...Path=*,...
+    //  3 - global default, eg. ...Path=...
+    // Rules with the most exact matches overrule the more generic once.
+    // The match level overrules the specificity.
+    //
+    // Adding UseRuleSpecificity=n disables this behavioure and reverts to the old classical one
+    //
+
+    //
+    // set default behavioure 
+    //
+
+    level = 3; // 3 - global default - lower is better, 3 is max value
+    match_len = 0;
+    if (!proc->use_privacy_mode || path_code == L'i') {
+
+        //
+        // in normal sandbox mode we have read access to all locations unless restricted,
+        // and all writes are redirected to the sandbox
+        //
+
+        mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG; // normal mode
+    }
+    else {
+
+        //
+        // in privacy mode we only have read access to selected generic locations,
+        // and read access to user data must be explicityl grated,
+        // also all writes are redirected to the sandbox
+        //
+        // To enable privacy enchanced mode add UsePrivacyMode=y 
+        //
+
+        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG; // write path mode
+    }
+
+    //
+    // closed path list, in non specific mode has the higher priority
+    // these paths are inaccessible for true and copy locations 
+    //
+    
+    if (closed_list) {
+        cur_level = level;
+        cur_len = Process_MatchPathList(path_lwr, path_len, closed_list, &cur_level, &curpat);
+        if (cur_level <= level && cur_len > match_len) {
+            level = cur_level;
+            match_len = cur_len;
+            if (patsrc) *patsrc = curpat;
+
+            mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
+            if (!proc->use_rule_specificity) goto finish;
+        }
+    }
+    
+    //
+    // write path list, behaved on the driver side like closed path list
+    // these paths allow read acces to true location and read/write access to copy location
+    //
+    
+    if (write_list) {
+        cur_level = level;
+        cur_len = Process_MatchPathList(path_lwr, path_len, write_list, &cur_level, &curpat);
+        if (cur_level <= level && cur_len > match_len) {
+            level = cur_level;
+            match_len = cur_len;
+            if (patsrc) *patsrc = curpat;
+
+            mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG;
+            if (!proc->use_rule_specificity) goto finish;
+        }
+    }
+    
+    //
+    // read path list behaves in the kernel like the default normal behavioure
+    // these paths allow read only acces to true path and copy locations
+    //
+    
+    if (read_list) {
+        cur_level = level;
+        cur_len = Process_MatchPathList(path_lwr, path_len,read_list, &cur_level, &curpat);
+        if (cur_level <= level && cur_len > match_len) {
+            level = cur_level;
+            match_len = cur_len;
+            if (patsrc) *patsrc = curpat;
+
+            mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_READ_FLAG;
+            if (!proc->use_rule_specificity) goto finish;
+        }
+    }
+    
+    //
+    // normal path list restores normal behavioure when used in specific mode
+    // these paths allow reading the true location and write to the copy location
+    //
+    
+    if (normal_list) {
+        cur_level = level;
+        cur_len = Process_MatchPathList(path_lwr, path_len, normal_list, &cur_level, &curpat);
+        if (cur_level <= level && cur_len > match_len) {
+            level = cur_level;
+            match_len = cur_len;
+            if (patsrc) *patsrc = curpat;
+
+            mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
+            if (!proc->use_rule_specificity) goto finish;
+        }
+    }
+    
+    //
+    // open path has lowest priority in non specific mode 
+    // these paths allow read/write access to the true location
+    //
+    
+    if (open_list) {
+        cur_level = level;
+        cur_len = Process_MatchPathList(path_lwr, path_len, open_list, &cur_level, &curpat);
+        if (cur_level <= level && cur_len > match_len) {
+            level = cur_level;
+            match_len = cur_len;
+            if (patsrc) *patsrc = curpat;
+
+            mp_flags = TRUE_PATH_OPEN_FLAG;
+            if (!proc->use_rule_specificity) goto finish;
+        }
+    }
+
+
+finish:
+    Mem_Free(path_lwr, path_lwr_len);
+
+    return mp_flags;
 }
 
 
@@ -1107,7 +1342,7 @@ _FX BOOLEAN Process_TerminateProcess(PROCESS* proc)
         // else fall back to the kernel method
     }
 
-    return Process_ScheduleKill(proc);
+    return Process_ScheduleKill(proc, 0);
 }
 
 
@@ -1195,22 +1430,40 @@ _FX BOOLEAN Process_IsInPcaJob(HANDLE ProcessId)
 
 _FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
 {
+    PVOID* params = (PVOID*)StartContext;
+    HANDLE process_id = (HANDLE)(params[0]);
+    LONG delay_ms = (LONG)(params[1]);
+    Mem_Free(params, sizeof(PVOID)*2);
+
     NTSTATUS status;
-    HANDLE process_id = (HANDLE)StartContext;
     HANDLE handle = NULL;
     PEPROCESS ProcessObject;
 
     __try {
-
+    retry:
         status = PsLookupProcessByProcessId(process_id, &ProcessObject);
         if (NT_SUCCESS(status)) {
 
             status = ObOpenObjectByPointer(ProcessObject, OBJ_KERNEL_HANDLE, NULL, PROCESS_ALL_ACCESS, NULL, KernelMode, &handle);
             ObDereferenceObject(ProcessObject);
+
             if (NT_SUCCESS(status)) {
 
-                ZwTerminateProcess(handle, STATUS_PROCESS_IS_TERMINATING);
-                ZwClose(handle);
+                if (delay_ms > 0) {
+                    ZwClose(handle);
+
+                    LARGE_INTEGER time;
+                    time.QuadPart = -(SECONDS(1) / 20); // wait half a second = 50ms
+                    KeDelayExecutionThread(KernelMode, FALSE, &time);
+
+                    delay_ms -= 50;
+                    goto retry;
+                }
+                else {
+
+                    ZwTerminateProcess(handle, STATUS_PROCESS_IS_TERMINATING);
+                    ZwClose(handle);
+                }
             }
         }
 
@@ -1227,17 +1480,24 @@ _FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Process_ScheduleKill(PROCESS *proc)
+_FX BOOLEAN Process_ScheduleKill(PROCESS *proc, LONG delay_ms)
 {
     NTSTATUS status;
     OBJECT_ATTRIBUTES objattrs;
     HANDLE handle;
 
+    PVOID *params = Mem_Alloc(Driver_Pool, sizeof(PVOID)*2);
+    params[0] = proc->pid;
+    params[1] = (PVOID)delay_ms;
+
     InitializeObjectAttributes(&objattrs, NULL, OBJ_KERNEL_HANDLE, NULL, NULL);
-    status = PsCreateSystemThread(&handle, THREAD_ALL_ACCESS, &objattrs, NULL, NULL, Process_ScheduleKillProc, proc->pid);
+    status = PsCreateSystemThread(&handle, THREAD_ALL_ACCESS, &objattrs, NULL, NULL, Process_ScheduleKillProc, params);
     if (NT_SUCCESS(status)) {
 
         ZwClose(handle);
+
+        if (delay_ms != 0)
+            return TRUE;
 
         ULONG len = proc->image_name_len + 32 * sizeof(WCHAR);
         WCHAR *text = Mem_Alloc(Driver_Pool, len);

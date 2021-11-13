@@ -171,7 +171,7 @@ int CTraceView__Filter(const CTraceEntryPtr& pEntry, void* params)
 
 	if (This->m_FilterExp.isValid()) {
 		if (!pEntry->GetMessage().contains(This->m_FilterExp)
-			//&& !pEntry->GetTypeStr().contains(This->m_FilterExp)
+			&& !pEntry->GetTypeStr().contains(This->m_FilterExp)
 			//&& !pEntry->GetStautsStr().contains(This->m_FilterExp)
 			&& !pEntry->GetProcessName().contains(This->m_FilterExp))
 			Ret = This->m_bHighLight ? 1 : 0;

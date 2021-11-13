@@ -103,6 +103,16 @@ public:
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
 
+	enum EFeatureFlags
+	{
+		eSbieFeatureWFP			= 0x00000001,
+		eSbieFeatureObCB		= 0x00000002,
+		eSbieFeaturePMod		= 0x00000004,
+		eSbieFeatureAppC		= 0x00000008,
+		eSbieFeatureSbiL		= 0x00000010,
+		eSbieFeatureCert		= 0x80000000
+	};
+
 	virtual quint32			GetFeatureFlags();
 	virtual QString			GetFeatureStr();
 

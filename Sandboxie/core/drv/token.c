@@ -1796,7 +1796,7 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
     BOOLEAN ok = FALSE;
 
 	// OriginalToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
 		return TRUE;
 	// OriginalToken END
 

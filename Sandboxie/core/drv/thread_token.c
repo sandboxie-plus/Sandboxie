@@ -1356,7 +1356,7 @@ _FX NTSTATUS Thread_CheckTokenForImpersonation(
     NTSTATUS status;
 
     // OriginalToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
 		return STATUS_SUCCESS;
 	// OriginalToken END
 	// OpenToken BEGIN

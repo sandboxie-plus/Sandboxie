@@ -55,6 +55,9 @@ struct _PATTERN {
     // this PATTERN object
     WCHAR *source;
 
+    // a value denoting the match level for the process
+    ULONG level;
+
     // array of pointers to constant parts.  the actual number of
     // elements is indicate by info.num_cons, and the strings are
     // allocated as part of this PATTERN object
@@ -112,7 +115,7 @@ static const WCHAR *Pattern_Hex = L"__hex";
 
 
 _FX PATTERN *Pattern_Create(
-    POOL *pool, const WCHAR *string, BOOLEAN lower)
+    POOL *pool, const WCHAR *string, BOOLEAN lower, ULONG level)
 {
     ULONG num_cons;
     const WCHAR *iptr;
@@ -233,6 +236,8 @@ _FX PATTERN *Pattern_Create(
         *optr = L'\0';
     pat->source = optr;
 
+    pat->level = level;
+
     pat->info.v = 0;
     pat->info.num_cons = (USHORT)num_cons;
 
@@ -279,6 +284,17 @@ _FX void Pattern_Free(PATTERN *pat)
 _FX const WCHAR *Pattern_Source(PATTERN *pat)
 {
     return pat->source;
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_Level
+//---------------------------------------------------------------------------
+
+
+_FX ULONG Pattern_Level(PATTERN *pat)
+{
+    return pat->level;
 }
 
 

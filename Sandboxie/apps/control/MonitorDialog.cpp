@@ -100,6 +100,7 @@ void CMonitorDialog::OnIdle()
     static const WCHAR *_SysCall    = L"SysCall  ";
     static const WCHAR *_Pipe       = L"Pipe     ";
     static const WCHAR *_Ipc        = L"Ipc      ";
+    static const WCHAR *_Rpc        = L"Rpc      ";
     static const WCHAR *_WinClass   = L"WinCls   ";
     static const WCHAR *_Drive      = L"(Drive)  ";
     static const WCHAR *_Clsid      = L"Clsid    ";
@@ -158,6 +159,8 @@ void CMonitorDialog::OnIdle()
             PrefixPtr = _Pipe;
         else if (type == MONITOR_IPC)
             PrefixPtr = _Ipc;
+        else if (type == MONITOR_RPC)
+            PrefixPtr = _Rpc;
         else if (type == MONITOR_WINCLASS)
             PrefixPtr = _WinClass;
         else if (type == MONITOR_DRIVE)

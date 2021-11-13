@@ -17,17 +17,7 @@ public:
 private slots:
 	void CreateBox();
 
-	void OnPreset();
-
-protected:
-	enum ETemplates
-	{
-		eHardened = 0,
-		eDefault,
-		eLegacy,
-		eLenient,
-		eOpen
-	};
+	void OnBoxTypChanged();
 
 private:
 	Ui::NewBoxWindow ui;

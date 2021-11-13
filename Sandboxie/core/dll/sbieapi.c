@@ -758,7 +758,8 @@ _FX LONG SbieApi_QueryPathList(
     ULONG path_code,
     ULONG *path_len,
     WCHAR *path_str,
-    HANDLE process_id)
+    HANDLE process_id,
+    BOOLEAN prepend_level)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -770,6 +771,7 @@ _FX LONG SbieApi_QueryPathList(
     args->path_len.val64 = (ULONG64)(ULONG_PTR)path_len;
     args->path_str.val64 = (ULONG64)(ULONG_PTR)path_str;
     args->process_id.val64 = (ULONG64)(ULONG_PTR)process_id;
+    args->prepend_level.val = prepend_level;
     status = SbieApi_Ioctl(parms);
 
     return status;

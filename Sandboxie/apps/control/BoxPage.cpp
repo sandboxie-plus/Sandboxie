@@ -2343,7 +2343,7 @@ void CBoxPage::ForceLinger_OnCmdRemove()
 bool CBoxPage::ForceLinger_MatchPattern(
     const CString &pat, const CString &test)
 {
-    PATTERN *pattern = Pattern_Create(NULL, pat, TRUE);
+    PATTERN *pattern = Pattern_Create(NULL, pat, TRUE, 0);
     CString testlwr = test;
     testlwr.MakeLower();
     BOOLEAN match = Pattern_Match(pattern, testlwr, testlwr.GetLength());
@@ -3660,8 +3660,8 @@ void CBoxPage::DoPropertySheet(
     CBoxPage pageBlockNetworkFiles(
         BoxPageNetworkFiles,    BoxName,    MSG_3911,   MSG_3955);
 
-    //CBoxPage pageResourceAccess(
-    //    BoxPageResourceAccess,  BoxName,    0,          MSG_3484);
+    CBoxPage pageResourceAccess(
+        BoxPageResourceAccess,  BoxName,    0,          MSG_3484);
 
     CBoxPage pageOpenFile(
         BoxPageOpenFile,        BoxName,    0,          MSG_4001);
@@ -3721,7 +3721,7 @@ void CBoxPage::DoPropertySheet(
         sheet.AddPage(&pageBlockNetworkFiles);
     }
 
-    //sheet.AddPage(&pageResourceAccess);
+    sheet.AddPage(&pageResourceAccess);
     sheet.AddPage(&pageOpenFile);
     sheet.AddPage(&pageOpenPipe);
     sheet.AddPage(&pageReadFile);

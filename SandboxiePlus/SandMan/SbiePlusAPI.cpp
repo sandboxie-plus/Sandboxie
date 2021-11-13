@@ -86,7 +86,9 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bDropRights = false;
 	
 
-	m_bSecurityRestricted = false;
+	m_bSecurityEnhanced = false;
+	m_bPrivacyEnhanced = false;
+	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
 
 	m_SuspendRecovery = false;
@@ -142,7 +144,9 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bApplicationCompartment = GetBool("NoSecurityIsolation", false);
+	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 
 	CSandBox::UpdateDetails();
 }
@@ -152,37 +156,6 @@ void CSandBoxPlus::CloseBox()
 	CSandBox::CloseBox();
 
 	m_SuspendRecovery = false;
-}
-
-QString CSandBoxPlus::GetStatusStr() const
-{
-	if (!m_IsEnabled)
-		return tr("Disabled");
-
-	QStringList Status;
-
-	if (IsEmpty())
-		Status.append(tr("Empty"));
-
-	if (m_iUnsecureDebugging == 1)
-		Status.append(tr("NOT SECURE (Debug Config)"));
-	else if (m_iUnsecureDebugging == 2)
-		Status.append(tr("Reduced Isolation"));
-	else if(m_bSecurityRestricted)
-		Status.append(tr("Enhanced Isolation"));
-
-	if (m_bLogApiFound)
-		Status.append(tr("API Log"));
-	if (m_bINetBlocked)
-		Status.append(tr("No INet"));
-	if (m_bSharesAllowed)
-		Status.append(tr("Net Share"));
-	if (m_bDropRights)
-		Status.append(tr("No Admin"));
-
-	if (Status.isEmpty())
-		return tr("Normal");
-	return Status.join(", ");
 }
 
 bool CSandBoxPlus::CheckUnsecureConfig() const
@@ -195,8 +168,66 @@ bool CSandBoxPlus::CheckUnsecureConfig() const
 		if(GetBool("UnfilteredToken", false)) return true;
 	if (GetBool("DisableFileFilter", false)) return true;
 	if (GetBool("DisableKeyFilter", false)) return true;
+	if (GetBool("DisableObjectFilter", false)) return true;
+
 	if (GetBool("StripSystemPrivileges", false)) return true;
 	return false;
+}
+
+QString CSandBoxPlus::GetStatusStr() const
+{
+	if (!m_IsEnabled)
+		return tr("Disabled");
+
+	QStringList Status;
+
+	if (IsEmpty())
+		Status.append(tr("Empty"));
+
+	if (m_bApplicationCompartment)
+		Status.append(tr("Application Compartment"));
+	else if (m_iUnsecureDebugging == 1)
+		Status.append(tr("NOT SECURE"));
+	else if (m_iUnsecureDebugging == 2)
+		Status.append(tr("Reduced Isolation"));
+	else if(m_bSecurityEnhanced)
+		Status.append(tr("Enhanced Isolation"));
+	
+	if(m_bPrivacyEnhanced)
+		Status.append(tr("Privacy Enhanced"));
+
+	if (m_bLogApiFound)
+		Status.append(tr("API Log"));
+	if (m_bINetBlocked)
+		Status.append(tr("No INet"));
+	if (m_bSharesAllowed)
+		Status.append(tr("Net Share"));
+	if (m_bDropRights && !m_bSecurityEnhanced)
+		Status.append(tr("No Admin"));
+
+	if (Status.isEmpty())
+		return tr("Normal");
+	return Status.join(", ");
+}
+
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
+{
+	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
+		return eAppBoxPlus;
+	if (m_bApplicationCompartment)
+		return eAppBox;
+
+	if (m_iUnsecureDebugging != 0)
+		return eInsecure;
+
+	if (m_bSecurityEnhanced && m_bPrivacyEnhanced)
+		return eHardenedPlus;
+	if (m_bSecurityEnhanced)
+		return eHardened;
+
+	if (m_bPrivacyEnhanced)
+		return eDefaultPlus;
+	return eDefault;
 }
 
 void CSandBoxPlus::SetLogApi(bool bEnable)
@@ -387,17 +418,6 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 {
 	QStringList Programs = GetTextList("LeaderProcess", false);
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
-}
-
-CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
-{
-	//if (m_bLogApiFound)
-	//	return eHasLogApi;
-	if (m_iUnsecureDebugging != 0)
-		return eInsecure;
-	if (m_bSecurityRestricted)
-		return eHardened;
-	return eDefault;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

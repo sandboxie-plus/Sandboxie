@@ -283,7 +283,7 @@ _FX BOOLEAN Process_Low_InitConsole(PROCESS *proc)
     NTSTATUS status;
 
 	// NoSbieCons BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"NoSandboxieConsole", 0, FALSE))
+	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"NoSandboxieConsole", 0, FALSE))
 		return TRUE;
 	// NoSbieCons END
 

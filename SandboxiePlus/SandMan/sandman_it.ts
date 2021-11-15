@@ -3288,7 +3288,7 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2011"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation>Consenti ai soli processi privilegiati di accedere al Service Control Manager</translation>
+        <translation>Consenti solo ai processi privilegiati di accedere al Service Control Manager</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="485"/>

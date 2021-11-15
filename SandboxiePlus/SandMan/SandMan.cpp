@@ -2267,7 +2267,7 @@ void CSandMan::OnAbout()
 		}
 
 		QString AboutText = tr(
-			"Sandboxie-Plus is an open source continuation of Sandboxie."
+			"Sandboxie-Plus is an open source continuation of Sandboxie.<br />"
 			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
 			"<br />"
 			"%3<br />"

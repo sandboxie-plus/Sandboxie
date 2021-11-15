@@ -3287,8 +3287,8 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2011"/>
-        <source>Limit access to the emulated service control manager from privileged processes</source>
-        <translation>Limita l&apos;accesso al Service Control Manager emulato da parte dei processi con privilegi</translation>
+        <source>Allow only privileged processes to access the Service Control Manager</source>
+        <translation>Consenti ai soli processi privilegiati di accedere al Service Control Manager</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="485"/>

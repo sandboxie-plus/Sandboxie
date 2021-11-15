@@ -3158,7 +3158,7 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation type="unfinished">Toegang beperken to de geëmuleerde service-control-manager voor geprivilegieerde processen.</translation>
     </message>
     <message>

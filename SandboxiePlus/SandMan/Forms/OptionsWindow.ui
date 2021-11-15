@@ -2008,7 +2008,7 @@ The process match level has a higher priority than the specificity and describes
                  <item row="8" column="1">
                   <widget class="QCheckBox" name="chkProtectSCM">
                    <property name="text">
-                    <string>Limit access to the emulated service control manager from privileged processes</string>
+                    <string>Allow only privileged processes to access the Service Control Manager</string>
                    </property>
                   </widget>
                  </item>

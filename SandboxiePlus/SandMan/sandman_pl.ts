@@ -3217,8 +3217,8 @@ Aby uzyskać dostęp do plików, możesz zamiast tego użyć opcji „Bezpośred
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Ogranicz dostęp do emulowanego menedżera kontroli usług do procesów uprzywilejowanych</translation>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <translation type="unfinished">Ogranicz dostęp do emulowanego menedżera kontroli usług do procesów uprzywilejowanych</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1800"/>

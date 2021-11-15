@@ -3225,8 +3225,8 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>限制访问模拟的“服务控制管理器”以防止提权进程</translation>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <translation type="unfinished">限制访问模拟的“服务控制管理器”以防止提权进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1838"/>

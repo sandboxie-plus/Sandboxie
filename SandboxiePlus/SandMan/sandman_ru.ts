@@ -2150,8 +2150,8 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation>Трассировка IPC</translation>
     </message>
     <message>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Ограничить доступ к эмулируемому диспетчеру управления службами для привилегированных процессов</translation>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <translation type="unfinished">Ограничить доступ к эмулируемому диспетчеру управления службами для привилегированных процессов</translation>
     </message>
     <message>
         <source>Remove</source>

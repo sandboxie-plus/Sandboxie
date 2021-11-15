@@ -3232,8 +3232,8 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser «&#xa0;Toujours direct&#x
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Limiter l&apos;accès au gestionnaire de contrôle des services émulés aux processus privilégiés</translation>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <translation type="unfinished">Limiter l&apos;accès au gestionnaire de contrôle des services émulés aux processus privilégiés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1831"/>

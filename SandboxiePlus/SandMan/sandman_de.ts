@@ -3184,8 +3184,8 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Beschränke Zugriff auf emulierte Dienstkontrollmanager auf privilegierte Prozesse</translation>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <translation type="unfinished">Beschränke Zugriff auf emulierte Dienstkontrollmanager auf privilegierte Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="504"/>

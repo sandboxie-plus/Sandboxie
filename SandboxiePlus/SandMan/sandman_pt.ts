@@ -3244,8 +3244,8 @@ Para acessar arquivos, você pode usar o &apos;Direto a Todos&apos; em vez de fa
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
-        <translation>Limitar acesso ao gerenciador de controle de serviços emulados a processos privilegiados</translation>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
+        <translation type="unfinished">Limitar acesso ao gerenciador de controle de serviços emulados a processos privilegiados</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1831"/>

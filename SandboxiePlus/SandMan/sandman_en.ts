@@ -3141,7 +3141,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
-        <source>Limit access to the emulated service control manager to privileged processes</source>
+        <source>Limit access to the emulated service control manager from privileged processes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

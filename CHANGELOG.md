@@ -3,14 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.0.0 / 5.55.0] - 2021-11-14
+## [1.0.0 / 5.55.0] - 2021-11-17
 
 ### Added 
 - added Privacy enhanced mode, sandboxes with "UsePrivacyMode=y" will not allow read access to locations containing user data
 -- all locations except generic Windows system paths will need to be opened explicitly for read and/or write access
 -- using "NormalFilePath=...", "NormalKeyPath=...", "NormalIpcPath=..." allows to open locations to be readable and sandboxed
 
-- added new "App Compartment" mode of operation, it's enabled by adding "NoSecurityIsolation=y" to the box configuration
+- added new "App Compartment" mode of operation, it is enabled by adding "NoSecurityIsolation=y" to the box configuration
 -- in this mode, security is traded in for compatibility, it should not be used for untrusted applications
 -- note: in this mode, file and registry filtering are still in place, hence processes run without administrative privileges
 -- it is reasonably safe, all filtering can be disabled with "NoSecurityFiltering=y"

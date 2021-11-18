@@ -999,7 +999,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="187"/>
         <source>Trace Log</source>
-        <translation>Registro di accesso</translation>
+        <translation>Registro di Accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="204"/>
@@ -1192,7 +1192,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="439"/>
         <source>Trace Logging</source>
-        <translation>Attiva Registro di accesso</translation>
+        <translation>Attiva Registro di Accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="443"/>
@@ -1740,7 +1740,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2269"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;</translation>
+        <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni attive: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
@@ -2913,7 +2913,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="737"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation>Qui è possibile inserire nuove voci personalizzate per il menu Avvia.</translation>
+        <translation>Qui è possibile inserire nuove voci personalizzate per il menu Avvia di Sandboxie Plus.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="761"/>
@@ -3420,7 +3420,7 @@ Per accedere ai file, è possibile utilizzare l&apos;accesso &apos;Completo&apos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1371"/>
         <source>Network Firewall Rules</source>
-        <translation>Regole Firewall di rete</translation>
+        <translation>Regole firewall di rete</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1536"/>
@@ -3439,7 +3439,7 @@ La regola di accesso &apos;Consenti&apos; su file e chiavi di registro si applic
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1717"/>
         <source>Resource Access Policies</source>
-        <translation>Priorità Accesso risorse</translation>
+        <translation>Priorità di Accesso risorse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1750"/>
@@ -3704,12 +3704,12 @@ Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli ev
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2605"/>
         <source>Disable Resource Access Monitor</source>
-        <translation>Disattiva monitor di Accesso risorse</translation>
+        <translation>Disattiva monitoraggio di accesso risorse per quest&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2633"/>
         <source>Resource Access Monitor</source>
-        <translation>Monitor di Accesso risorse</translation>
+        <translation>Monitoraggio di accesso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2681"/>
@@ -3734,7 +3734,7 @@ Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli ev
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2769"/>
         <source>App Templates</source>
-        <translation>Compartimento applicazioni</translation>
+        <translation>Compatibilità applicazioni</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2781"/>

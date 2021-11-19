@@ -3167,7 +3167,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1817"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation type="unfinished">限制存取模擬服務控制管理員以提權處理程序</translation>
+        <translation type="unfinished">只允許有特殊權限的處理程序存取服務控制管理員</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1831"/>

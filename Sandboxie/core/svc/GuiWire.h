@@ -66,11 +66,6 @@ enum {
     GUI_MAX_REQUEST_CODE
 };
 
-#ifndef _DPI_AWARENESS_CONTEXTS_
-struct DPI_AWARENESS_CONTEXT__ { int unused; };
-typedef DPI_AWARENESS_CONTEXT__ *DPI_AWARENESS_CONTEXT;
-#endif
-
 
 //---------------------------------------------------------------------------
 // Initialize New Process
@@ -550,7 +545,7 @@ struct tagGUI_CLIP_CURSOR_REQ
     ULONG msgid;
     BOOLEAN have_rect;
     RECT rect;
-    DPI_AWARENESS_CONTEXT dpi_awareness_ctx;
+    LONG64 dpi_awareness_ctx;
 };
 
 typedef struct tagGUI_CLIP_CURSOR_REQ GUI_CLIP_CURSOR_REQ;
@@ -652,7 +647,7 @@ struct tagGUI_SET_CURSOR_POS_REQ
     ULONG error;
     LONG x;
     LONG y;
-    DPI_AWARENESS_CONTEXT dpi_awareness_ctx;
+    LONG64 dpi_awareness_ctx;
 };
 
 struct tagGUI_SET_CURSOR_POS_RPL

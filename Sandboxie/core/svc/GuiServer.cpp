@@ -85,6 +85,10 @@ typedef struct _WND_HOOK {
 
 static HWND DDE_Request_ProxyWnd = NULL;
 
+#ifndef _DPI_AWARENESS_CONTEXTS_
+struct DPI_AWARENESS_CONTEXT__ { int unused; };
+typedef DPI_AWARENESS_CONTEXT__ *DPI_AWARENESS_CONTEXT;
+#endif
 typedef DPI_AWARENESS_CONTEXT (WINAPI *P_SetThreadDpiAwarenessContext)(
     DPI_AWARENESS_CONTEXT dpiContext);
 
@@ -3051,7 +3055,7 @@ ULONG GuiServer::ClipCursorSlave(SlaveArgs *args)
         rect = &req->rect;
 
     DPI_AWARENESS_CONTEXT old_trd_dpi_ctx = __sys_SetThreadDpiAwarenessContext
-        ? __sys_SetThreadDpiAwarenessContext(req->dpi_awareness_ctx)
+        ? __sys_SetThreadDpiAwarenessContext((DPI_AWARENESS_CONTEXT)(LONG_PTR)req->dpi_awareness_ctx)
         : NULL;
 
     ClipCursor(rect); //if (! ) // as this seems to randomly fail, don't issue errors
@@ -3355,7 +3359,7 @@ ULONG GuiServer::SetCursorPosSlave(SlaveArgs *args)
         return STATUS_INFO_LENGTH_MISMATCH;
 
     DPI_AWARENESS_CONTEXT old_trd_dpi_ctx = __sys_SetThreadDpiAwarenessContext
-        ? __sys_SetThreadDpiAwarenessContext(req->dpi_awareness_ctx)
+        ? __sys_SetThreadDpiAwarenessContext((DPI_AWARENESS_CONTEXT)(LONG_PTR)req->dpi_awareness_ctx)
         : NULL;
 
     SetLastError(req->error);

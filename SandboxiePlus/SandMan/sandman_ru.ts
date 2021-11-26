@@ -1255,8 +1255,8 @@ Full path: %4</source>
         <translation>Неизвестный статус ошибки: 0x%1</translation>
     </message>
     <message>
-        <source>Версия Sbie+: %1 (%2)</source>
-        <translation>Sbie+ Version: %1 (%2)</translation>
+        <source>Sbie+ Version: %1 (%2)</source>
+        <translation>Версия Sbie+: %1 (%2)</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
@@ -2143,7 +2143,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-		<translation>Разрешить доступ к диспетчеру управления службами только привилегированным процессам</translation>
+        <translation>Разрешить доступ к диспетчеру управления службами только привилегированным процессам</translation>
     </message>
     <message>
         <source>Remove</source>

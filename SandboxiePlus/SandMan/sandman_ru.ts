@@ -592,51 +592,47 @@ Full path: %4</source>
         <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 дискового пространства.</translation>
     </message>
     <message>
-        <source>Clear this list</source>
-        <translation type="vanished">Очистить этот список</translation>
-    </message>
-    <message>
         <source>There are %1 new files available to recover.</source>
         <translation>Доступно %1 новых файлов для восстановления.</translation>
     </message>
     <message>
         <source>Remember target selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Запомнить выбор</translation>
     </message>
     <message>
         <source>Original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходное местоположение</translation>
     </message>
     <message>
         <source>Browse for location</source>
-        <translation type="unfinished"></translation>
+        <translation>Обзор</translation>
     </message>
     <message>
         <source>Clear folder list</source>
-        <translation type="unfinished">Очистить список папок</translation>
+        <translation>Очистить список папок</translation>
     </message>
     <message>
         <source>Close until all programs stop in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть, пока все программы в этой песочнице не остановятся</translation>
     </message>
 </context>
 <context>
     <name>CSandBox</name>
     <message>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидание папки: %1</translation>
     </message>
     <message>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление папки: %1</translation>
     </message>
     <message>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Слияние папок: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершение слияния снимков...</translation>
     </message>
 </context>
 <context>
@@ -1259,8 +1255,8 @@ Full path: %4</source>
         <translation>Неизвестный статус ошибки: 0x%1</translation>
     </message>
     <message>
-        <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <source>Версия Sbie+: %1 (%2)</source>
+        <translation>Sbie+ Version: %1 (%2)</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
@@ -1447,11 +1443,11 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Thunderbird</translation>
     </message>
     <message>
         <source>Forced </source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительно </translation>
     </message>
 </context>
 <context>
@@ -1925,52 +1921,48 @@ No will choose: %2</source>
         <translation>%1</translation>
     </message>
     <message>
-        <source>Filter selected box only</source>
-        <translation type="vanished">Фильтр только выбранная песочница</translation>
-    </message>
-    <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус:</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытый</translation>
     </message>
     <message>
         <source>Closed</source>
-        <translation type="unfinished">Закрытый</translation>
+        <translation>Закрытый</translation>
     </message>
     <message>
         <source>Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Трассировка</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Другое</translation>
     </message>
     <message>
         <source>Show All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать все песочницы</translation>
     </message>
     <message>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить в файл</translation>
     </message>
     <message>
         <source>Save trace log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить журнал трассировки в файл</translation>
     </message>
     <message>
         <source>Failed to open log file for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть файл журнала для записи</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестно</translation>
+        <translation>Неизвестно</translation>
     </message>
 </context>
 <context>
@@ -2151,7 +2143,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation type="unfinished">Ограничить доступ к эмулируемому диспетчеру управления службами для привилегированных процессов</translation>
+		<translation>Разрешить доступ к диспетчеру управления службами только привилегированным процессам</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2821,12 +2813,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation>SandboxiePlus - Восстановление</translation>
     </message>
     <message>
-        <source>Recover to...</source>
-        <translation type="vanished">Восстановить в...</translation>
-    </message>
-    <message>
         <source>Recover target:</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить:</translation>
     </message>
 </context>
 <context>
@@ -2853,7 +2841,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница</translation>
     </message>
 </context>
 <context>

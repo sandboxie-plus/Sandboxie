@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.0.1 / 5.55.1] - 2021-12-03
+
+### Changed
+- rolled back changed to "OpenClsid=..." handling
+
+### Fixed
+- issue with read only paths introduced in 1.0.0
+- fixed BSOD issue introduced in the 1.0.0 build
+
+
+
+
 ## [1.0.0 / 5.55.0] - 2021-11-17
 
 ### Added 

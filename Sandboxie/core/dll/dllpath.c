@@ -173,7 +173,7 @@ _FX BOOLEAN Dll_InitPathList2(
 #ifdef USE_MATCH_PATH_EX
     if (ok && read) {
         path_code = (path_code & 0xFF00) | 'r';
-        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, write);
+        ok = Dll_InitPathList3(Dll_PathListAnchor->pool, path_code, read);
     }
 #endif
 

@@ -414,9 +414,6 @@ _FX void Com_LoadClsidList(const WCHAR* setting, GUID** pClsids, ULONG* pNumClsi
 _FX BOOLEAN SbieDll_IsOpenClsid(
     REFCLSID rclsid, ULONG clsctx, const WCHAR *BoxName)
 {
-    ULONG index;
-    GUID *guid;
-
     static const GUID CLSID_WinMgmt = {
         0x8BC3F05E, 0xD86B, 0x11D0,
                         { 0xA0, 0x75, 0x00, 0xC0, 0x4F, 0xB6, 0x88, 0x20 } };
@@ -443,6 +440,9 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
 
     if (clsctx & CLSCTX_LOCAL_SERVER) {
 
+        ULONG index;
+        GUID *guid;
+
         //
         // check against list of built-in CLSID exclusions
         //
@@ -455,25 +455,24 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
 
             return TRUE;
         }
+
+        //
+        // initialize list of user-configured CLSID exclusions
+        //
+
+        static const WCHAR* setting = L"OpenClsid";
+        Com_LoadClsidList(setting , &Com_OpenClsids, &Com_NumOpenClsids, BoxName);
+
+        //
+        // check against list of user-configured CLSID exclusions
+        //
+
+        for (index = 0; index < Com_NumOpenClsids; ++index) {
+            guid = &Com_OpenClsids[index];
+            if (memcmp(guid, rclsid, sizeof(GUID)) == 0 /*|| memcmp(guid, &CLSID_Null, sizeof(GUID)) == 0*/)
+                return TRUE;
+        }
     }
-
-    //
-    // initialize list of user-configured CLSID exclusions
-    //
-
-    static const WCHAR* setting = L"OpenClsid";
-    Com_LoadClsidList(setting , &Com_OpenClsids, &Com_NumOpenClsids, BoxName);
-
-    //
-    // check against list of user-configured CLSID exclusions
-    //
-
-    for (index = 0; index < Com_NumOpenClsids; ++index) {
-        guid = &Com_OpenClsids[index];
-        if (memcmp(guid, rclsid, sizeof(GUID)) == 0 /*|| memcmp(guid, &CLSID_Null, sizeof(GUID)) == 0*/)
-            return TRUE;
-    }
-    
 
     if (Com_IsFirewallClsid(rclsid, BoxName))
         return TRUE;

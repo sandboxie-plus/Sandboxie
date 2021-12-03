@@ -3,19 +3,22 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.0.1 / 5.55.1] - 2021-12-03
+## [1.0.1 / 5.55.1] - 2021-12-xx
 
 ### Added
-- added checkboxed to most major box options lists
+- added checkboxes to most major box options lists
 
 ### Changed
-- rolled back changed to "OpenClsid=..." handling
+- rolled back change to "OpenClsid=..." handling
 - made all major lists in the box options editable
 
 ### Fixed
-- issue with read only paths introduced in 1.0.0
-- fixed BSOD issue introduced in the 1.0.0 build
+- fixed issue with read only paths introduced in 1.0.0
+- fixed BSOD issue introduced in the 1.0.0 build [#1389](https://github.com/sandboxie-plus/Sandboxie/issues/1389)
+- fixed multiple BITS notifications while running sandboxed Chromium browsers [ca320ec](https://github.com/sandboxie-plus/Sandboxie/commit/ca320ecc17180ff09a67bdefc524b30cf3540c08) [#1081](https://github.com/sandboxie-plus/Sandboxie/issues/1081)
 
+### Removed
+- removed Virtual Desktop Manager template [d775807](https://github.com/sandboxie-plus/Sandboxie/commit/d7758071f6930539c4e1f236297b4cfa332346ad) [#1326](https://github.com/sandboxie-plus/Sandboxie/discussions/1326)
 
 
 

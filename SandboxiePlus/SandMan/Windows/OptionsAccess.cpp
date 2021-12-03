@@ -34,6 +34,7 @@ void COptionsWindow::CreateAccess()
 	//connect(ui.treeAccess, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeAccess, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemDoubleClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeAccess, SIGNAL(itemSelectionChanged()), this, SLOT(OnAccessSelectionChanged()));
+	connect(ui.treeAccess, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnAccessChanged(QTreeWidgetItem *, int)));
 }
 
 void COptionsWindow::OnAccessChanged()
@@ -143,6 +144,9 @@ void COptionsWindow::LoadAccessList()
 	{
 		foreach(const QString& Value, m_pBox->GetTextList(AccessTypeToName((EAccessEntry)i), m_Template))
 			ParseAndAddAccessEntry((EAccessEntry)i, Value);
+
+		foreach(const QString& Value, m_pBox->GetTextList(AccessTypeToName((EAccessEntry)i) + "Disabled", m_Template))
+			ParseAndAddAccessEntry((EAccessEntry)i, Value, true);
 	}
 
 	LoadAccessListTmpl();
@@ -161,7 +165,7 @@ void COptionsWindow::LoadAccessListTmpl(bool bUpdate)
 			for (int i = 0; i < eMaxAccessType; i++)
 			{
 				foreach(const QString& Value, m_pBox->GetTextListTmpl(AccessTypeToName((EAccessEntry)i), Template))
-					ParseAndAddAccessEntry((EAccessEntry)i, Value, Template);
+					ParseAndAddAccessEntry((EAccessEntry)i, Value, false, Template);
 			}
 		}
 	}
@@ -180,7 +184,7 @@ void COptionsWindow::LoadAccessListTmpl(bool bUpdate)
 	}
 }
 
-void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, const QString& Template)
+void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled, const QString& Template)
 {
 	EAccessType	Type;
 	EAccessMode	Mode;
@@ -222,11 +226,11 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 
 	QStringList Values = Value.split(",");
 	if (Values.count() >= 2) 
-		AddAccessEntry(Type, Mode, Values[0], Values[1], Template);
+		AddAccessEntry(Type, Mode, Values[0], Values[1], disabled, Template);
 	else if (Values[0].left(2) == "$:") // special cases
-		AddAccessEntry(Type, Mode, Values[0].mid(2), "$", Template);
+		AddAccessEntry(Type, Mode, Values[0].mid(2), "$", disabled, Template);
 	else // all programs
-		AddAccessEntry(Type, Mode, "", Values[0], Template);
+		AddAccessEntry(Type, Mode, "", Values[0], disabled, Template);
 }
 
 QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
@@ -281,7 +285,7 @@ void COptionsWindow::OnBrowseFolder()
 	OnOptChanged();
 }
 
-void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, const QString& Template)
+void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 
@@ -307,6 +311,8 @@ void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString 
 	pItem->setText(3, Path);
 	pItem->setData(3, Qt::UserRole, Path);
 
+	if(Template.isEmpty())
+		pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	ui.treeAccess->addTopLevelItem(pItem);
 }
 
@@ -483,7 +489,7 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 
 	foreach(const QString Group, GetCurrentGroups()){
 		QString GroupName = Group.mid(1, Group.length() - 2);
-		pCombo->addItem(tr("Group: %1").arg(Group), GroupName);
+		pCombo->addItem(tr("Group: %1").arg(GroupName), Group);
 	}
 
 	foreach(const QString & Name, m_Programs)
@@ -507,6 +513,15 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 	QLineEdit* pPath = new QLineEdit();
 	pPath->setText(pItem->data(3, Qt::UserRole).toString());
 	ui.treeAccess->setItemWidget(pItem, 3, pPath);
+}
+
+void COptionsWindow::OnAccessChanged(QTreeWidgetItem* pItem, int Column)
+{
+	if (Column != 0)
+		return;
+
+	m_AccessChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::DeleteAccessEntry(QTreeWidgetItem* pItem)
@@ -539,10 +554,10 @@ void COptionsWindow::SaveAccessList()
 
 	CloseAccessEdit(true);
 
-	QStringList Keys = QStringList() 
+	/*QStringList Keys = QStringList() 
 		<< "NormalFilePath" << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "NormalKeyPath" << "OpenKeyPath" << "OpenConfPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
-		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
+		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";*/
 
 	QMap<QString, QList<QString>> AccessMap;
 	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
@@ -558,11 +573,17 @@ void COptionsWindow::SaveAccessList()
 			Value = "$:" + Program;
 		else if (!Program.isEmpty())
 			Value.prepend(Program + ",");
-		AccessMap[MakeAccessStr((EAccessType)Type, (EAccessMode)Mode)].append(Value);
+
+		QString AccessStr = MakeAccessStr((EAccessType)Type, (EAccessMode)Mode);
+		if (pItem->checkState(0) == Qt::Unchecked)
+			AccessStr += "Disabled";
+		AccessMap[AccessStr].append(Value);
 	}
 
-	foreach(const QString& Key, Keys)
+	foreach(const QString & Key, AccessMap.uniqueKeys()) {
 		WriteTextList(Key, AccessMap[Key]);
+		WriteTextList(Key + "Disabled", AccessMap[Key + "Disabled"]);
+	}
 
 	m_AccessChanged = false;
 }

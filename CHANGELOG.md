@@ -5,8 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.1 / 5.55.1] - 2021-12-03
 
+### Added
+- added checkboxed to most major box options lists
+
 ### Changed
 - rolled back changed to "OpenClsid=..." handling
+- made all major lists in the box options editable
 
 ### Fixed
 - issue with read only paths introduced in 1.0.0

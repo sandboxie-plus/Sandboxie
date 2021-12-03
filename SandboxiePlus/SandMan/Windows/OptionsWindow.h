@@ -15,6 +15,17 @@ public:
 	virtual void accept() {}
 	virtual void reject();
 
+	QStringList		GetCurrentGroups();
+	QSet<QString>	GetPrograms() { return  m_Programs; }
+
+	enum EntryTypes {
+		eUndefined = 0,
+		eProcess,
+		ePath,
+		eText,
+		eTemplate
+	};
+
 signals:
 	void OptionsChanged();
 	void Closed();
@@ -47,30 +58,36 @@ private slots:
 	void OnAddProg();
 	void OnDelProg();
 	void OnShowGroupTmpl()			{ LoadGroupsTmpl(true); }
+	void OnGroupsChanged(QTreeWidgetItem* pItem, int Index) { m_GroupsChanged = true;  OnOptChanged(); }
 
 	void OnForceProg();
 	void OnForceDir();
 	void OnDelForce();
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
+	void OnForcedChanged(QTreeWidgetItem* pItem, int Index);
 
 	void OnAddLingering();
 	void OnAddLeader();
 	void OnDelStopProg();
 	void OnShowStopTmpl()			{ LoadStopTmpl(true); }
+	void OnStopChanged(QTreeWidgetItem* pItem, int Index) { m_StopChanged = true;  OnOptChanged(); }
 
 	void OnRestrictStart();
 	void OnAddStartProg();
 	void OnDelStartProg();
+	void OnStartChanged(QTreeWidgetItem* pItem, int Index);
 
 	// net
 	void OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnINetSelectionChanged()	{ CloseINetEdit(); OnOptChanged();}
+	void OnINetChanged(QTreeWidgetItem* pItem, int Column);
 	void OnBlockINet();
 	void OnAddINetProg();
 	void OnDelINetProg();
 
 	void OnNetFwItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnNetFwSelectionChanged()	{ CloseNetFwEdit(); OnOptChanged();}
+	void OnNetFwChanged(QTreeWidgetItem* pItem, int Column);
 	void OnAddNetFwRule();
 	void OnDelNetFwRule();
 
@@ -84,6 +101,7 @@ private slots:
 	//void OnAccessItemClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessSelectionChanged() { CloseAccessEdit(); OnOptChanged();}
+	void OnAccessChanged(QTreeWidgetItem* pItem, int Column);
 
 	void OnAddFile()				{ AddAccessEntry(eFile, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
 	void OnBrowseFile();
@@ -213,15 +231,14 @@ protected:
 
 	QString SelectProgram(bool bOrGroup = true);
 	void AddProgramToGroup(const QString& Program, const QString& Group);
-	void DelProgramFromGroup(const QString& Program, const QString& Group);
+	bool DelProgramFromGroup(const QString& Program, const QString& Group);
 	QTreeWidgetItem* FindGroupByName(const QString& Group, bool bAdd = false);
 
-	void CopyGroupToList(const QString& Groupe, QTreeWidget* pTree);
+	void CopyGroupToList(const QString& Groupe, QTreeWidget* pTree, bool disabled = false);
 	QTreeWidgetItem* GetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void SetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void DelAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
-	void AddProgToGroup(QTreeWidget* pTree, const QString& Groupe);
-	void AddProgToGroup(const QString& Value, const QString& Groupe);
+	void AddProgToGroup(QTreeWidget* pTree, const QString& Groupe, bool disabled = false);
 	void DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe);
 
 	void LoadConfig();
@@ -239,16 +256,15 @@ protected:
 	void LoadGroups();
 	void LoadGroupsTmpl(bool bUpdate = false);
 	void SaveGroups();
-	QStringList GetCurrentGroups();
 
 	void LoadForced();
 	void LoadForcedTmpl(bool bUpdate = false);
-	void AddForcedEntry(const QString& Name, int type, const QString& Template = QString());
+	void AddForcedEntry(const QString& Name, int type, bool disabled = false, const QString& Template = QString());
 	void SaveForced();
 
 	void LoadStop();
 	void LoadStopTmpl(bool bUpdate = false);
-	void AddStopEntry(const QString& Name, int type, const QString& Template = QString());
+	void AddStopEntry(const QString& Name, int type, bool disabled = false, const QString& Template = QString());
 	void SaveStop();
 
 	void LoadStart();
@@ -268,7 +284,7 @@ protected:
 	void LoadINetAccess();
 	void SaveINetAccess();
 
-	void ParseAndAddFwRule(const QString& Value, const QString& Template = QString());
+	void ParseAndAddFwRule(const QString& Value, bool disabled = false, const QString& Template = QString());
 	void CloseNetFwEdit(bool bSave = true);
 	void CloseNetFwEdit(QTreeWidgetItem* pItem, bool bSave = true);
 	ENetWfProt GetFwRuleProt(const QString& Value);
@@ -287,8 +303,8 @@ protected:
 	void LoadAccessListTmpl(bool bUpdate = false);
 	QString	GetAccessTypeStr(EAccessType Type);
 	QString	GetAccessModeStr(EAccessMode Mode);
-	void ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, const QString& Template = QString());
-	void AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, const QString& Template = QString());
+	void ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled = false, const QString& Template = QString());
+	void AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled = false, const QString& Template = QString());
 	QString MakeAccessStr(EAccessType Type, EAccessMode Mode);
 	void SaveAccessList();
 	QList<EAccessMode> GetAccessModes(EAccessType Type);

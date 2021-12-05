@@ -161,12 +161,12 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="238"/>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation>Ausführbare Dateien (*.exe|*.cmd);;Alle Dateien(*.*)</translation>
+        <translation>Ausführbare Dateien (*.exe *.cmd);;Alle Dateien(*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="278"/>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation>Ausführbare Dateien (*.exe|*.cmd)</translation>
+        <source>Executables (*.exe *.cmd)</source>
+        <translation>Ausführbare Dateien (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="248"/>

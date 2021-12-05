@@ -198,8 +198,8 @@
         <translation>Введите программу:</translation>
     </message>
     <message>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation>Исполняемые файлы (*.exe|*.cmd)</translation>
+        <source>Executables (*.exe *.cmd)</source>
+        <translation>Исполняемые файлы (*.exe *.cmd)</translation>
     </message>
     <message>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>

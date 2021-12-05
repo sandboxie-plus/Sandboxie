@@ -314,7 +314,7 @@ void COptionsWindow::OnDelAuto()
 
 void COptionsWindow::OnBrowsePath()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe|*.cmd)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");;
 	if (Value.isEmpty())
 		return;
 

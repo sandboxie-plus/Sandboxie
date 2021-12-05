@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Hardened</source>
-        <translation>Усиленный (hardened)</translation>
+        <translation type="vanished">Усиленный (hardened)</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>По умолчанию</translation>
+        <translation type="vanished">По умолчанию</translation>
     </message>
     <message>
         <source>Sandboxie-Plus - Create New Box</source>
@@ -59,7 +59,31 @@
     </message>
     <message>
         <source>Legacy Sandboxie Behaviour</source>
-        <translation>Устаревшее поведение Sandboxie</translation>
+        <translation type="vanished">Устаревшее поведение Sandboxie</translation>
+    </message>
+    <message>
+        <source>Hardened Sandbox with Data Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security Hardened Sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandbox with Data Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard Isolation Sandbox (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Compartment with Data Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Compartment (NO Isolation)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -247,11 +271,11 @@
     </message>
     <message>
         <source>Direct</source>
-        <translation>Прямой</translation>
+        <translation type="vanished">Прямой</translation>
     </message>
     <message>
         <source>Direct All</source>
-        <translation>Прямой для всех</translation>
+        <translation type="vanished">Прямой для всех</translation>
     </message>
     <message>
         <source>Closed</source>
@@ -267,7 +291,7 @@
     </message>
     <message>
         <source>Hidden</source>
-        <translation>Скрытый</translation>
+        <translation type="vanished">Скрытый</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -392,6 +416,50 @@
     <message>
         <source>Block</source>
         <translation>Блокировать</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished">Нормальный</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Открытый</translation>
+    </message>
+    <message>
+        <source>Open for All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boxed Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hardened Sandbox with Data Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security Hardened Sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandbox with Data Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard Isolation Sandbox (Default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Compartment with Data Protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Compartment (NO Isolation)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -659,7 +727,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>NOT SECURE (Debug Config)</source>
-        <translation>НЕ БЕЗОПАСНЫЙ (отладочная конфигурация)</translation>
+        <translation type="vanished">НЕ БЕЗОПАСНЫЙ (отладочная конфигурация)</translation>
     </message>
     <message>
         <source>Enhanced Isolation</source>
@@ -676,6 +744,18 @@ Full path: %4</source>
     <message>
         <source>Empty</source>
         <translation>Пусто</translation>
+    </message>
+    <message>
+        <source>Application Compartment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NOT SECURE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Privacy Enhanced</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1136,7 +1216,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Sandboxie-Plus - это продолжение Sandboxie с открытым исходным кодом.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Посетите &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; для дополнительной информации.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Иконки из &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Sandboxie-Plus - это продолжение Sandboxie с открытым исходным кодом.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Посетите &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; для дополнительной информации.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Иконки из &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Always on Top</source>
@@ -1273,6 +1353,52 @@ No will choose: %2</source>
         <translation>Sandboxie-Plus был запущен в портативном режиме, вы хотите поместить папку Sandbox в ее родительский каталог?
 Да, выберет: %1
 Нет, выберет: %2</translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+
+This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The supporter certificate is expired</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This copy of Sandboxie+ is certified for: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie+ is free for personal and non-commercial use.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1745,6 +1871,18 @@ No will choose: %2</source>
         <source>the selected processes</source>
         <translation>выбранные процессы</translation>
     </message>
+    <message>
+        <source>Duplicate Sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a new name for the duplicated Sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSelectBoxWindow</name>
@@ -1830,6 +1968,10 @@ No will choose: %2</source>
     <message>
         <source>Show Classic icon</source>
         <translation>Показать классический значок</translation>
+    </message>
+    <message>
+        <source>This certificate is unfortunately expired.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1976,15 +2118,15 @@ No will choose: %2</source>
     <name>NewBoxWindow</name>
     <message>
         <source>Copy options from an existing box:</source>
-        <translation>Копировать параметры из существующей песочницы:</translation>
+        <translation type="vanished">Копировать параметры из существующей песочницы:</translation>
     </message>
     <message>
         <source>Initial sandbox configuration:</source>
-        <translation>Начальная конфигурация песочницы:</translation>
+        <translation type="vanished">Начальная конфигурация песочницы:</translation>
     </message>
     <message>
         <source>Select restriction/isolation template:</source>
-        <translation>Выберите шаблон ограничения/изоляции:</translation>
+        <translation type="vanished">Выберите шаблон ограничения/изоляции:</translation>
     </message>
     <message>
         <source>SandboxiePlus new box</source>
@@ -1993,6 +2135,18 @@ No will choose: %2</source>
     <message>
         <source>Sandbox Name:</source>
         <translation>Имя песочницы:</translation>
+    </message>
+    <message>
+        <source>Box Type Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2079,7 +2233,7 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Open Windows Credentials Store</source>
-        <translation>Открыть хранилище учетных данных Windows</translation>
+        <translation type="vanished">Открыть хранилище учетных данных Windows</translation>
     </message>
     <message>
         <source>kilobytes</source>
@@ -2103,7 +2257,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <source>Move Up</source>
-        <translation>Двигать вверх</translation>
+        <translation type="vanished">Двигать вверх</translation>
     </message>
     <message>
         <source>Access</source>
@@ -2365,7 +2519,7 @@ instead of &quot;*&quot;.</source>
     </message>
     <message>
         <source>Move Down</source>
-        <translation>Двигать вниз</translation>
+        <translation type="vanished">Двигать вниз</translation>
     </message>
     <message>
         <source>Protect this sandbox from deletion or emptying</source>
@@ -2442,7 +2596,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <source>Prevent change to network and firewall parameters</source>
-        <translation>Запретить изменение параметров сети и брандмауэра</translation>
+        <translation type="vanished">Запретить изменение параметров сети и брандмауэра</translation>
     </message>
     <message>
         <source>COM Class Trace</source>
@@ -2552,13 +2706,13 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation>Настройте, какие процессы могут получить доступ к каким ресурсам. Дважды кликните по записи, чтобы отредактировать ее.
+        <translation type="vanished">Настройте, какие процессы могут получить доступ к каким ресурсам. Дважды кликните по записи, чтобы отредактировать ее.
 &apos;Прямой&apos; доступ к файлам и ключам применяется только к двоичным файлам программ, расположенным за пределами песочницы.
 Для доступа к файлам вы можете использовать &apos;Прямой для всех&apos; вместо этого, чтобы применить его ко всем программам.</translation>
     </message>
     <message>
         <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
-        <translation>Применить Close...=!&lt;program&gt;,... директивы также для всех двоичных файлов, находящихся в песочнице.</translation>
+        <translation type="vanished">Применить Close...=!&lt;program&gt;,... директивы также для всех двоичных файлов, находящихся в песочнице.</translation>
     </message>
     <message>
         <source>Emulate sandboxed window station for all processes</source>
@@ -2570,7 +2724,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     </message>
     <message>
         <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation>Различные расширенные функции изоляции могут нарушить совместимость с некоторыми приложениями, если вы используете эту песочницу &lt;b&gt;НЕ для безопасности&lt;/b&gt;, но для простой переносимости приложений, изменив эти параметры, вы можете восстановить совместимость, пожертвовав некоторой безопасностью.&lt;br&gt;Эти параметры можно безопасно использовать, если вы не предоставляете никаких прав администратора изолированному процессу.</translation>
+        <translation type="vanished">Различные расширенные функции изоляции могут нарушить совместимость с некоторыми приложениями, если вы используете эту песочницу &lt;b&gt;НЕ для безопасности&lt;/b&gt;, но для простой переносимости приложений, изменив эти параметры, вы можете восстановить совместимость, пожертвовав некоторой безопасностью.&lt;br&gt;Эти параметры можно безопасно использовать, если вы не предоставляете никаких прав администратора изолированному процессу.</translation>
     </message>
     <message>
         <source>Access isolation</source>
@@ -2674,7 +2828,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>Network Restrictions</source>
-        <translation>Сетевые ограничения</translation>
+        <translation type="vanished">Сетевые ограничения</translation>
     </message>
     <message>
         <source>Test Rules, Program:</source>
@@ -2740,12 +2894,154 @@ Please note that this values are currently user specific and saved globally for 
         <source>Network Firewall</source>
         <translation>Сетевой брандмауэр</translation>
     </message>
+    <message>
+        <source>General Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box Type Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Admin Rights</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Windows Credentials Store (user mode)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prevent change to network and firewall parameters (user mode)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network Firewall Rules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource Access Rules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure which processes can access what resources. Double click on an entry to edit it.
+&apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
+You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource Access Policies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path. 
+The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prioritize rules based on their Specificity and Process Match Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule Policies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandboxed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open access to COM infrastructure (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add sandboxed processes to job objects (recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COM isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop critical privileges from processes running with a SYSTEM token</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Security Critical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Security Isolation (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security Isolation &amp; Filtering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Security Filtering (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
     <message>
         <source>SandboxiePlus Notifications</source>
         <translation>Уведомления SandboxiePlus</translation>
+    </message>
+</context>
+<context>
+    <name>ProgramsDelegate</name>
+    <message>
+        <source>Group: %1</source>
+        <translation type="unfinished">Группа: %1</translation>
     </message>
 </context>
 <context>
@@ -3085,6 +3381,10 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
         <translation>Срок действия этого сертификата сторонника истек, получите обновленный сертификат.</translation>
+    </message>
+    <message>
+        <source>Activate Kernel Mode Object Filtering (experimental)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

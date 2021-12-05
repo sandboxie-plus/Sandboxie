@@ -186,8 +186,8 @@
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="278"/>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation>可执行文件 (*.exe|*.cmd)</translation>
+        <source>Executables (*.exe *.cmd)</source>
+        <translation>可执行文件 (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="282"/>

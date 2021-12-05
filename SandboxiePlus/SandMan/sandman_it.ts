@@ -243,8 +243,8 @@
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="317"/>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation>File eseguibili (*.exe|*.cmd)</translation>
+        <source>Executables (*.exe *.cmd)</source>
+        <translation>File eseguibili (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="321"/>

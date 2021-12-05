@@ -310,7 +310,7 @@
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="278"/>
-        <source>Executables (*.exe|*.cmd)</source>
+        <source>Executables (*.exe *.cmd)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

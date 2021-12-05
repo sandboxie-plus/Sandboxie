@@ -300,7 +300,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="238"/>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation>Exécutables (*.exe, *.cmd);;Tous les fichiers (*.*)</translation>
+        <translation>Exécutables (*.exe *.cmd);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="248"/>
@@ -319,8 +319,8 @@
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="278"/>
-        <source>Executables (*.exe|*.cmd)</source>
-        <translation>Exécutables (*.exe, *.cmd)</translation>
+        <source>Executables (*.exe *.cmd)</source>
+        <translation>Exécutables (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="282"/>

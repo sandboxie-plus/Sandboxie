@@ -105,7 +105,7 @@
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="39"/>
+        <location filename="Windows/OptionsWindow.cpp" line="141"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie Plus - Opzioni &apos;%1&apos;</translation>
     </message>
@@ -191,12 +191,12 @@
         <translation>Cerca cartella</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="431"/>
+        <location filename="Windows/OptionsWindow.cpp" line="543"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Questa area virtuale è stata cancellata, quindi la configurazione non può essere salvata.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="475"/>
+        <location filename="Windows/OptionsWindow.cpp" line="587"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Alcune modifiche non sono state ancora salvate, vuoi chiudere la finestra opzioni?</translation>
     </message>
@@ -258,57 +258,57 @@
         <translation>Immetti un comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="299"/>
-        <location filename="Windows/OptionsAccess.cpp" line="486"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="161"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="393"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="478"/>
-        <location filename="Windows/OptionsWindow.cpp" line="487"/>
-        <location filename="Windows/OptionsWindow.cpp" line="503"/>
+        <location filename="Windows/OptionsAccess.cpp" line="303"/>
+        <location filename="Windows/OptionsAccess.cpp" line="492"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="170"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="437"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="529"/>
+        <location filename="Windows/OptionsWindow.cpp" line="599"/>
+        <location filename="Windows/OptionsWindow.cpp" line="615"/>
         <source>Group: %1</source>
         <translation>Gruppo: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="139"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="141"/>
         <source>Please enter a name for the new group</source>
         <translation>Immetti un nome per il nuovo gruppo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="496"/>
+        <location filename="Windows/OptionsWindow.cpp" line="608"/>
         <source>Enter program:</source>
         <translation>Scegli il programma:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="291"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="273"/>
         <source>Please select group first.</source>
         <translation>Seleziona un gruppo prima di procedere.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="58"/>
+        <location filename="Windows/OptionsForce.cpp" line="65"/>
         <source>Process</source>
         <translation>Processo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="58"/>
+        <location filename="Windows/OptionsForce.cpp" line="65"/>
         <location filename="Windows/OptionsRecovery.cpp" line="60"/>
         <source>Folder</source>
         <translation>Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="274"/>
-        <location filename="Windows/OptionsForce.cpp" line="99"/>
+        <location filename="Windows/OptionsAccess.cpp" line="278"/>
+        <location filename="Windows/OptionsForce.cpp" line="120"/>
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="105"/>
         <source>Select Directory</source>
         <translation>Seleziona directory</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsStop.cpp" line="58"/>
+        <location filename="Windows/OptionsStop.cpp" line="65"/>
         <source>Lingerer</source>
         <translation>Secondario</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsStop.cpp" line="58"/>
+        <location filename="Windows/OptionsStop.cpp" line="65"/>
         <source>Leader</source>
         <translation>Principale</translation>
     </message>
@@ -321,17 +321,17 @@
         <translation type="vanished">Completo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="239"/>
+        <location filename="Windows/OptionsAccess.cpp" line="243"/>
         <source>Closed</source>
         <translation>Non consentito</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="240"/>
+        <location filename="Windows/OptionsAccess.cpp" line="244"/>
         <source>Closed RT</source>
         <translation>WinRT non consentito</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="241"/>
+        <location filename="Windows/OptionsAccess.cpp" line="245"/>
         <source>Read Only</source>
         <translation>Sola lettura</translation>
     </message>
@@ -340,95 +340,95 @@
         <translation type="vanished">Nascosto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="236"/>
+        <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Normal</source>
         <translation>Normale</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="237"/>
+        <location filename="Windows/OptionsAccess.cpp" line="241"/>
         <source>Open</source>
         <translation>Consenti</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="238"/>
+        <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Open for All</source>
         <translation>Consenti tutto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="242"/>
+        <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Boxed Only</source>
         <translation>Solo area virtuale</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="244"/>
-        <location filename="Windows/OptionsAccess.cpp" line="257"/>
+        <location filename="Windows/OptionsAccess.cpp" line="248"/>
+        <location filename="Windows/OptionsAccess.cpp" line="261"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="251"/>
+        <location filename="Windows/OptionsAccess.cpp" line="255"/>
         <source>File/Folder</source>
         <translation>File/Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="252"/>
+        <location filename="Windows/OptionsAccess.cpp" line="256"/>
         <source>Registry</source>
         <translation>Registro</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="253"/>
+        <location filename="Windows/OptionsAccess.cpp" line="257"/>
         <source>IPC Path</source>
         <translation>Percorso IPC</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="254"/>
+        <location filename="Windows/OptionsAccess.cpp" line="258"/>
         <source>Wnd Class</source>
         <translation>Classe finestra</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="255"/>
+        <location filename="Windows/OptionsAccess.cpp" line="259"/>
         <source>COM Object</source>
         <translation>Oggetto COM</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="262"/>
+        <location filename="Windows/OptionsAccess.cpp" line="266"/>
         <source>Select File</source>
         <translation>Seleziona file</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="262"/>
+        <location filename="Windows/OptionsAccess.cpp" line="266"/>
         <source>All Files (*.*)</source>
         <translation>Tutti i file (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="294"/>
-        <location filename="Windows/OptionsAccess.cpp" line="482"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="388"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="474"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="578"/>
+        <location filename="Windows/OptionsAccess.cpp" line="298"/>
+        <location filename="Windows/OptionsAccess.cpp" line="488"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="432"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="525"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="638"/>
         <source>All Programs</source>
         <translation>Tutti i programmi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="412"/>
+        <location filename="Windows/OptionsAccess.cpp" line="418"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>Gli oggetti COM richiedono il rispettivo GUID, come: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="418"/>
+        <location filename="Windows/OptionsAccess.cpp" line="424"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>Le interfacce RT devono essere specificate per nome.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="461"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="296"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="319"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="453"/>
+        <location filename="Windows/OptionsAccess.cpp" line="467"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="278"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="302"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="504"/>
         <source>Template values can not be edited.</source>
         <translation>I valori predefiniti non possono essere modificati.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="518"/>
+        <location filename="Windows/OptionsAccess.cpp" line="533"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
         <translation>I valori predefiniti non possono essere rimossi.</translation>
@@ -534,62 +534,62 @@
         <translation>Eliminare il modello locale selezionato?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="35"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="508"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="37"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="559"/>
         <source>Any</source>
         <translation>Qualsiasi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="36"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="509"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="38"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="560"/>
         <source>TCP</source>
         <translation>TCP</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="37"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="510"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="39"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="561"/>
         <source>UDP</source>
         <translation>UDP</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="38"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="511"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="40"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="562"/>
         <source>ICMP</source>
         <translation>ICMP</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="51"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="53"/>
         <source>Allow access</source>
         <translation>Consenti accesso</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="52"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="54"/>
         <source>Block using Windows Filtering Platform</source>
         <translation>Imposta blocco mediante la piattaforma di filtraggio di Windows</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="53"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="55"/>
         <source>Block by denying access to Network devices</source>
         <translation>Blocca accesso ai dispositivi di rete</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="139"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="494"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="148"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="545"/>
         <source>Allow</source>
         <translation>Consenti</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="140"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="149"/>
         <source>Block (WFP)</source>
         <translation>Blocca (WFP)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="141"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="150"/>
         <source>Block (NDev)</source>
         <translation>Blocca (NDev)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="495"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="546"/>
         <source>Block</source>
         <translation>Blocca</translation>
     </message>
@@ -3837,6 +3837,14 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/PopUpWindow.ui" line="32"/>
         <source>SandboxiePlus Notifications</source>
         <translation>Sandboxie Plus - Notifiche</translation>
+    </message>
+</context>
+<context>
+    <name>ProgramsDelegate</name>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="42"/>
+        <source>Group: %1</source>
+        <translation>Gruppo: %1</translation>
     </message>
 </context>
 <context>

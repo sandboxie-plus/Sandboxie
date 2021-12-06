@@ -63,6 +63,9 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	//connect(theGUI, SIGNAL(ReloadPanels()), m_pSbieModel, SLOT(Clear()));
 
+	//m_pSbieTree->setStyleSheet("QTreeView::item:focus {selection-background-color: yellow;}");
+	//m_pSbieTree->setFocusPolicy(Qt::NoFocus);
+
 	m_pMainLayout->addWidget(m_pSbieTree);
 	// 
 

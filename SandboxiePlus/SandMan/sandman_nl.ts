@@ -62,44 +62,32 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Geharde sandbox met gegevensbescherming</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox met geharde beveiliging</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="40"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox met gegevensbescherming</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard isolatie-sandbox (standaard)</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="43"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassingscompartiment met gegevensbescherming</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="44"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hardened</source>
-        <translation type="vanished">Gehard</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standaard</translation>
-    </message>
-    <message>
-        <source>Legacy Sandboxie Behaviour</source>
-        <translation type="vanished">Gedrag van oude Sandboxie</translation>
+        <translation>Toepassingscompartiment (GEEN isolatie)</translation>
     </message>
 </context>
 <context>
@@ -113,14 +101,6 @@
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for Folder</source>
         <translation>Bladeren naar map</translation>
-    </message>
-    <message>
-        <source>Direct</source>
-        <translation type="vanished">Direct</translation>
-    </message>
-    <message>
-        <source>Direct All</source>
-        <translation type="vanished">Alles direct</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="243"/>
@@ -138,28 +118,24 @@
         <translation>Alleen-lezen</translation>
     </message>
     <message>
-        <source>Hidden</source>
-        <translation type="vanished">Verborgen</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Normal</source>
-        <translation type="unfinished">Normaal</translation>
+        <translation>Normaal</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="241"/>
         <source>Open</source>
-        <translation type="unfinished">Geopend</translation>
+        <translation>Open</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Open for All</source>
-        <translation type="unfinished"></translation>
+        <translation>Open voor iedereen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Boxed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen geboxt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="248"/>
@@ -313,32 +289,32 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Geharde sandbox met gegevensbescherming</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox met geharde beveiliging</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox met gegevensbescherming</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="24"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard isolatie-sandbox (standaard)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="26"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassingscompartiment met gegevensbescherming</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="27"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassingscompartiment (GEEN isolatie)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="90"/>
@@ -354,7 +330,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="252"/>
         <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur selecteren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="263"/>
@@ -904,18 +880,14 @@ Volledig pad: %4</translation>
         <translation>Leeg</translation>
     </message>
     <message>
-        <source>NOT SECURE (Debug Config)</source>
-        <translation type="vanished">NIET VEILIG (debug-config)</translation>
-    </message>
-    <message>
         <location filename="SbiePlusAPI.cpp" line="188"/>
         <source>Application Compartment</source>
-        <translation type="unfinished"></translation>
+        <translation>Toepassingscompartiment</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="190"/>
         <source>NOT SECURE</source>
-        <translation type="unfinished"></translation>
+        <translation>NIET VEILIG</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="192"/>
@@ -930,7 +902,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="197"/>
         <source>Privacy Enhanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbeterde privacy</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="200"/>
@@ -1236,7 +1208,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="497"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Sandboxie-Plus ondersteunen op Patreon&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="528"/>
@@ -1265,24 +1237,26 @@ Wilt u het opruimen uitvoeren?</translation>
     <message>
         <location filename="SandMan.cpp" line="590"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze box biedt een verbeterde veiligheidsisolatie. Hij is geschikt om niet-vertrouwde software te testen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="594"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze box biedt standaard isolatie. Hij is geschikt om uw software te draaien om de veiligheid te verhogen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="598"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze box dwingt geen isolatie af. Hij is alleen bedoeld voor gebruik als een toepassingscompartiment voor softwarevirtualisatie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="603"/>
         <source>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Deze box verhindert de toegang tot alle gegevenslocaties van gebruikers, behalve wanneer dit expliciet is toegestaan in de opties voor brontoegang.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="660"/>
@@ -1363,7 +1337,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="979"/>
         <source>The supporter certificate is expired</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ondersteuningscertificaat is verlopen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="985"/>
@@ -1378,7 +1352,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="1112"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Het programma %1 dat gestart is in box %2 wordt over 5 minuten beëindigd omdat de box geconfigureerd is om functies te gebruiken die exclusief zijn voor projectondersteuners.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Word een projectondersteuner&lt;/a&gt; en ontvang een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;ondersteunerscertificaat&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1135"/>
@@ -1393,7 +1367,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="1163"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>De geselecteerde functieset is alleen beschikbaar voor projectondersteuners. Processen die gestart zijn in een box met deze functieset ingeschakeld zonder ondersteunerscertificaat worden na 5 minuten beëindigd.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Word een projectondersteuner&lt;/a&gt; en ontvang een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;ondersteunerscertificaat&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1260"/>
@@ -1495,17 +1469,17 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="2264"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze kopie van Sandboxie+ is gecertificeerd voor %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2266"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie+ is gratis voor persoonlijk en niet-commercieel gebruik.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2269"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus is een open source verderzetting van Sandboxie.&lt;br /&gt;Bezoek &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; voor meer informatie.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver-versie: %1&lt;br /&gt;Functies: %2&lt;br /&gt;&lt;br /&gt;Pictogrammen van &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1795"/>
@@ -1737,10 +1711,6 @@ Nee zal %2 kiezen</translation>
         <location filename="SandMan.cpp" line="2256"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Over Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Versie %1&lt;/p&gt;&lt;p&gt;Auteursrecht (c) 2020-2021 door DavidXanatos&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Sandboxie-Plus is een open source verderzetting van Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Bezoek &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; voor meer informatie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Pictogrammen van &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2444"/>
@@ -2249,7 +2219,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Duplicate Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox dupliceren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="132"/>
@@ -2302,12 +2272,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="883"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer een nieuwe naam in voor de gedupliceerde Sandbox.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="883"/>
         <source>%1 Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kopiëren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="920"/>
@@ -2435,7 +2405,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="488"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit certificaat is spijtig genoeg verlopen.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="494"/>
@@ -2673,29 +2643,17 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="54"/>
         <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxtype-voorinstelling:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een sandbox isoleert uw hostsysteem van processen die binnen de box draaien. Het voorkomt dat ze permanente veranderingen aanbrengen aan andere programma&apos;s en gegevens op uw computer. Het niveau van isolatie heeft invloed op uw veiligheid en de compatibiliteit met toepassingen, vandaar dat er een verschillend niveau van isolatie zal zijn afhankelijk van het geselecteerde type box. Sandboxie kan ook uw persoonlijke gegevens beschermen tegen toegang door processen die onder zijn supervisie draaien.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select restriction/isolation template:</source>
-        <translation type="vanished">Beperking-/isolatiesjabloon selecteren:</translation>
-    </message>
-    <message>
-        <source>Initial sandbox configuration:</source>
-        <translation type="vanished">Initiële sandbox-configuratie:</translation>
-    </message>
-    <message>
-        <source>Copy options from an existing box:</source>
-        <translation type="vanished">Opties kopiëren vanuit een bestaande sandbox:</translation>
+        <translation>Box-info</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
@@ -2844,10 +2802,6 @@ Nee zal %2 kiezen</translation>
         <translation>Toegangsbeperkingen</translation>
     </message>
     <message>
-        <source>Open Windows Credentials Store</source>
-        <translation type="vanished">Windows Credentials Store openen</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
         <translation>De print spooler toestaan om bestanden buiten de sandbox af te drukken</translation>
@@ -2891,10 +2845,6 @@ Nee zal %2 kiezen</translation>
         <location filename="Forms/OptionsWindow.ui" line="714"/>
         <source>Block network files and folders, unless specifically opened.</source>
         <translation>Netwerkbestanden en -mappen blokkeren, tenzij ze specifiek worden geopend.</translation>
-    </message>
-    <message>
-        <source>Prevent change to network and firewall parameters</source>
-        <translation type="vanished">Wijziging aan netwerk- en firewall-parameters voorkomen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="731"/>
@@ -3036,37 +2986,37 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="101"/>
         <source>General Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Algemene configuratie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="111"/>
         <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxtype-voorinstelling:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
+        <translation>Box-info</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="226"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Meer types boxen&lt;/b&gt; zijn exclusief beschikbaar voor &lt;u&gt;projectondersteuners&lt;/u&gt;. De boxen met verbeterde privacy &lt;b&gt;&lt;font color=&apos;red&apos;&gt;beschermen gebruikersgegevens van ongeoorloofde toegang&lt;/font&gt;&lt;/b&gt; door de gesandboxte programma&apos;s.&lt;br /&gt;Als u nog geen ondersteuner bent, overweeg dan om &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;het project te ondersteunen&lt;/a&gt;, om een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;ondersteunercertificaat&lt;/a&gt; te ontvangen.&lt;br /&gt;U kunt de andere types boxen testen door nieuwe sandboxen van deze types te maken, maar processen hierin zullen na 5 minuten automatisch beëindigd worden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="413"/>
         <source>Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Administratorrechten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="570"/>
         <source>Open Windows Credentials Store (user mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Credentials Store openen (gebruikersmodus)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijziging aan netwerk- en firewall-parameters voorkomen (gebruikersmodus)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="965"/>
@@ -3176,10 +3126,6 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
         <translation>Netwerk-/internettoegang instellen processen die niet in de lijst zitten:</translation>
     </message>
     <message>
-        <source>Network Restrictions</source>
-        <translation type="vanished">Netwerkbeperkingen</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
         <source>Test Rules, Program:</source>
         <translation>Testregels, programma:</translation>
@@ -3253,14 +3199,16 @@ Als leidende processen gedefinieerd zijn, worden alle andere als achterblijvende
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1536"/>
         <source>Resource Access Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Brontoegang-regels</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1575"/>
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
 &apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
 You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configureren welke processen toegang hebben tot welke bronnen. Dubbelklik op een item om het te bewerken.
+&apos;Open&apos; bestand- en sleuteltoegang geldt alleen voor programma-binaries die zich buiten de sandbox bevinden.
+U kunt in plaats daarvan &apos;open voor iedereen&apos; gebruiken om het op alle programma&apos;s van toepassing te laten zijn, of dit gedrag wijzigen in het tabblad Beleid.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1707"/>
@@ -3271,10 +3219,6 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
         <source>Add Wnd Class</source>
         <translation>Wnd Class toevoegen</translation>
-    </message>
-    <message>
-        <source>Move Down</source>
-        <translation type="vanished">Omlaag verplaatsen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1654"/>
@@ -3290,22 +3234,6 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <location filename="Forms/OptionsWindow.ui" line="1596"/>
         <source>Add COM Object</source>
         <translation>COM-object toevoegen</translation>
-    </message>
-    <message>
-        <source>Move Up</source>
-        <translation type="vanished">Omhoog verplaatsen</translation>
-    </message>
-    <message>
-        <source>Configure which processes can access what resources. Double click on an entry to edit it.
-&apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
-For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation type="vanished">Configureren welke processen toegang hebben tot welke bronnen. Dubbelklik op een item om het te bewerken.
-&apos;Directe&apos; bestand- en sleuteltoegang geldt alleen voor programma binaries die zich buiten de sandbox bevinden.
-Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken om het op alle programma&apos;s van toepassing te laten zijn.</translation>
-    </message>
-    <message>
-        <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
-        <translation type="vanished">Close...=!&lt;program&gt;,... directives ook toepassen op alle binaries die in de sandbox aanwezig zijn.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1847"/>
@@ -3373,18 +3301,18 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2117"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder kritieke privileges van processen die draaien met een SYSTEM-token</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2131"/>
         <location filename="Forms/OptionsWindow.ui" line="2152"/>
         <source>(Security Critical)</source>
-        <translation type="unfinished"></translation>
+        <translation>(beveiliging kritiek)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2138"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesandboxte SYSTEM-processen beschermen tegen niet-geprivilegieerde processen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2169"/>
@@ -3399,63 +3327,64 @@ Voor bestandstoegang kunt u in plaats daarvan &apos;direct alles&apos; gebruiken
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1371"/>
         <source>Network Firewall Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk-firewall-regels</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1717"/>
         <source>Resource Access Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Brontoegang-beleid</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1750"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path. 
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
-        <translation type="unfinished"></translation>
+        <translation>De regel specificiteit is een maatstaf voor hoe goed een gegeven regel overeenkomt met een bepaald pad. Eenvoudig gezegd is de specificiteit de lengte van de tekens vanaf het begin van het pad tot en met de laatste overeenstemmende substring zonder wildcard. Een regel die alleen overeenstemt met bestandstypes zoals &quot;*.tmp&quot; zou de hoogste specificiteit hebben omdat hij altijd overeenstemt met het volledige bestandspad. 
+Het proces overeenstemmingsniveau heeft een hogere prioriteit dan de specificiteit en beschrijft hoe een regel van toepassing is op een gegeven proces. Regels die van toepassing zijn op procesnaam of groep hebben het sterkste overeenstemmingsniveau, gevolgd door het overeenstemmen door negatie (d.w.z. regels die van toepassing zijn op alle processen behalve het gegeven proces), terwijl de laagste overeenstemmingsniveaus globale overeenstemmingen hebben, d.w.z. regels die van toepassing zijn op gelijk welk proces.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1774"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Regels prioriteren op basis van hun specificiteit en procesovereenkomstniveau</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1781"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Privacymodus, blokkeert de toegang tot bestanden en het register op alle locaties behalve de algemene systeemlocaties</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1795"/>
         <source>Access Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Toegangmodus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1802"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer de privacymodus is ingeschakeld, kunnen gesandboxte processen alleen C:\Windows, C:\Program Files en delen van het HKLM-register lezen. Alle andere locaties hebben expliciete toegang nodig om leesbaar en/of schrijfbaar te zijn. In deze modus is regelspecificiteit altijd ingeschakeld.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1819"/>
         <source>Rule Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel-beleid</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1826"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Close...=!&lt;program&gt;,... regels ook toepassen op alle binaries die in de sandbox aanwezig zijn.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1833"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand- en sleutel open directives alleen toepassen op binaries die zich buiten de sandbox bevinden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2004"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>De gesandboxte RpcS&apos;en als een SYSTEM-proces starten (niet aanbevolen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2011"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation type="unfinished">Toegang beperken to de geëmuleerde service-control-manager voor geprivilegieerde processen.</translation>
+        <translation>Alleen processen met rechten toegang geven tot de Service Control Manager</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2032"/>
@@ -3465,17 +3394,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2059"/>
         <source>Open access to COM infrastructure (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Open toegang tot COM-infrastructuur (niet aanbevolen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2086"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesandboxte processen aan job-objecten toevoegen (aanbevolen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2103"/>
         <source>COM isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>COM-isolatie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2110"/>
@@ -3495,7 +3424,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2187"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveiligingsisolatie door het gebruik van een zwaar beperkt procestoken is de primaire manier van Sandboxie om sandboxbeperkingen af te dwingen. Wanneer dit uitgeschakeld is, werkt de box in de toepassingscompartimentenmodus, d.w.z. hij biedt niet langer betrouwbare beveiliging, alleen eenvoudige toepassingscompartimentering.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2204"/>
@@ -3505,12 +3434,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2224"/>
         <source>Disable Security Isolation (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveiligingsisolatie uitschakelen (experimenteel)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2231"/>
         <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschillende geavanceerde isolatiefuncties kunnen de compatibiliteit van sommige toepassingen verbreken als u deze sandbox &lt;b&gt;NIET voor beveiliging&lt;/b&gt; gebruikt, maar voor eenvoudige portabiliteit van toepassingen door het veranderen van deze opties, kunt u de compatibiliteit herstellen door wat beveiliging op te offeren.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2254"/>
@@ -3525,31 +3454,27 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2271"/>
         <source>Security Isolation &amp; Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveiligingsisolatie en filtering</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2278"/>
         <source>Disable Security Filtering (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveiligingsfiltering uitschakelen (niet aanbevolen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2285"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveiligingsfiltering gebruikt door Sandboxie om beperkingen op te leggen aan de toegang tot het bestandssysteem en het register, en om de toegang tot processen te beperken.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2295"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>De onderstaande opties kunnen veilig gebruikt worden als u geen administratorrechten toekent.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2315"/>
         <source>Access isolation</source>
         <translation>Toegangsisolatie</translation>
-    </message>
-    <message>
-        <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation type="vanished">Verschillende geavanceerde isolatiefuncties kunnen de compatibiliteit van sommige toepassingen verbreken als u deze sandbox &lt;b&gt;NIET voor beveiliging&lt;/b&gt; gebruikt, maar voor eenvoudige portabiliteit van toepassingen door het veranderen van deze opties, kunt u de compatibiliteit herstellen door wat beveiliging op te offeren.&lt;br&gt;Deze opties kunnen veilig worden gebruikt als u geen van de processen in de sandbox admin-rechten geeft.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2325"/>
@@ -3837,7 +3762,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="42"/>
         <source>Group: %1</source>
-        <translation type="unfinished">Groep: %1</translation>
+        <translation>Groep: %1</translation>
     </message>
 </context>
 <context>
@@ -4147,7 +4072,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="411"/>
         <source>Activate Kernel Mode Object Filtering (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kernel-mode objectfiltering inschakelen (experimenteel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

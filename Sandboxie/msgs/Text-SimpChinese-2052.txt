@@ -2602,13 +2602,13 @@ KB
 降低管理员和超级用户组的权限
 .
 
-3946;txt;01
-推荐保持此功能开启,以弥补Sandboxie的某些保护在64位系统中无效的缺陷。
-.
+# 3946;txt;01
+# 推荐保持此功能开启,以弥补Sandboxie的某些保护在64位系统中无效的缺陷。
+# .
 
-3947;txt;01
-要在 64-位 Windows 中启用增强防护，请使用配置菜单中的实验防护命令。
-.
+# 3947;txt;01
+# 要在 64-位 Windows 中启用增强防护，请使用配置菜单中的实验防护命令。
+# .
 
 3949;txt;01
 沙盘 '%2' 已启用降低权限设置，以防止使用管理员权限。
@@ -3407,9 +3407,52 @@ BT 种子（Torrent）客户端
 # Plus Tips
 #----------------------------------------------------------------------------
 
+6001;txt;01
+Sandboxie classic的旧用户界面（SbieCtrl.exe）具有非常有限的资源监视和事件跟踪功能。
+
+为了实现最佳的故障排除效果，强烈建议安装新版用户界面Sandboxie-Plus（SandMan.exe），
+它提供了出色的跟踪和监视功能。
+
+你想现在下载Sandboxie Plus吗？
+.
+
+6002;txt;01
+访问s<a ID="whats_new">sandboxie-plus.com</a>了解Sandboxie-Plus的新功能，
+或直接单击<a ID="upgrade">此处</a>下载最新的Sandboxie-Plus安装程序。
+.
+
+6003;txt;01
+Sandboxie classic的旧用户界面不支持网络防火墙功能。
+
+您可以使用ini文件配置核心组件支持的功能，规则结构如下：
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+如果您喜欢使用UI来控制这些选项，请升级到Sandboxie-Plus，它对所有新功能都有完整的UI支持。
+.
+
 6004;pop;err;01
 不允许使用所选的框配置。
 .
+
+6005;txt;01
+注意：如果没有管理权限，安装程序将无法在沙箱中启动。Sandboxie-Plus提供了一个选项，可以让许多安装程序在没有这些特权的情况下成功安装。您也可以在经典版本中手动启用此选项，方法是将“FakeAdminRights=y”添加到此框的ini部分。
+.
+
+6006;txt;01
+Sandboxie classic的旧用户界面只支持几个限制选项。
+
+其他选项，如“ClosePrintSpooler=y”、“OpenClipboard=n”、“BlockNetParam=n”等，可以在该框的ini部分中设置。
+新版的现代用户界面（SandMan.exe）还为启动/运行和互联网访问限制提供了更多自定义选项。
+
+如果您希望使用UI来控制这些选项，请升级到Sandboxie-Plus，它对所有新功能都有完整的UI支持。
+.
+
+6007;txt;01
+Sandboxie-Plus通过从黑名单模式切换旧行为提供增强的隐私保护。例如当允许对整个驱动器进行读取访问时，除非被封闭路径或写入路径阻止，在白名单模式下，沙盒程序只允许读取一般系统位置，并且必须先明确授予对大多数用户数据的读取权限。
+
+Sandboxie classic的旧UI不支持此操作模式。尽管可以使用ini文件进行配置，但如果您想使用增强隐私的沙盒，建议使用新版的现代用户界面Sandboxie-Plus（SandMan.exe）。
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

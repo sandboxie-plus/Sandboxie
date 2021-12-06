@@ -80,7 +80,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DAAF42A-43C6-40CB-848F-DF67122CD602}
-		Qt5Version = msvc2015_64
+		Qt5Version = msvc2019_64
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

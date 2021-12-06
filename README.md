@@ -32,7 +32,7 @@ If you need to check all new features at once, a good way to highlight them quic
 ## Documentation
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
 
-[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [compatibility regressions](https://github.com/sandboxie-plus/Sandboxie/issues?q=is%3Aissue+is%3Aopen+label%3A%22compatibility+regression%22) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22) | [more...](https://github.com/sandboxie-plus/Sandboxie/labels?sort=count-desc)
+[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [regressions](https://github.com/sandboxie-plus/Sandboxie/issues?q=is%3Aissue+is%3Aopen+label%3Aregression) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22) | [more...](https://github.com/sandboxie-plus/Sandboxie/labels?sort=count-desc)
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
 
@@ -74,7 +74,7 @@ Open Source release
 - JNylson - Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- xorcan - Turkish (disabled for inactivity since Plus 0.9.7)
+- xorcan - Turkish (disabled for inactivity, a new translator is needed)
 
 More volunteers are welcome here! ;)
 

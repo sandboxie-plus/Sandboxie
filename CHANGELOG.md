@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.0.1 / 5.55.1] - 2021-12-06
+## [1.0.1 / 5.55.1] - 2021-12-07
 
 ### Added
 - added checkboxes to most major box options lists

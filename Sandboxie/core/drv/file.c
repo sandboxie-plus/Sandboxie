@@ -1928,7 +1928,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
     *name = L'\0';
 
 #ifdef USE_MATCH_PATH_EX
-    mp_flags = Process_MatchPathEx(proc, path, path_len, L'f',
+    mp_flags = Process_MatchPathEx(proc, path, wcslen(path), L'f',
         &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
         &proc->read_file_paths, &proc->write_file_paths, NULL);
 #else
@@ -2391,7 +2391,7 @@ _FX NTSTATUS File_Api_Open(PROCESS *proc, ULONG64 *parms)
     ExAcquireResourceSharedLite(proc->file_lock, TRUE);
 
 #ifdef USE_MATCH_PATH_EX
-    mp_flags = Process_MatchPathEx(proc, path, path_len, L'f',
+    mp_flags = Process_MatchPathEx(proc, path, wcslen(path), L'f',
         &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
         &proc->read_file_paths, &proc->write_file_paths, NULL);
 #else

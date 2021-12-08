@@ -1786,7 +1786,7 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
     NTSTATUS status;
     UNICODE_STRING objname;
 
-    ULONG ImageNameIndex = -1;
+    SIZE_T ImageNameIndex = -1;
     for (SIZE_T i = 0; i < AttributeList->TotalLength; i++) {
         if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
             ImageNameIndex = i;
@@ -1826,7 +1826,7 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
                     wmemmove(CopyPath + 4, CopyPath, wcslen(CopyPath) + sizeof(WCHAR));
                     wmemcpy(CopyPath, L"\\??\\", 4);
 
-                    AttributeList->Attributes[ImageNameIndex].Value = CopyPath;
+                    AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)CopyPath;
                     AttributeList->Attributes[ImageNameIndex].Size = wcslen(CopyPath) * sizeof(WCHAR);
                 }
 
@@ -1848,7 +1848,7 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
         AttributeList);
 
     if (ImageNameIndex != -1) {
-        AttributeList->Attributes[ImageNameIndex].Value = objname.Buffer;
+        AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)objname.Buffer;
         AttributeList->Attributes[ImageNameIndex].Size = objname.Length;
     }
 

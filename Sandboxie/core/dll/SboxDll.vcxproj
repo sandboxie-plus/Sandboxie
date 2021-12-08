@@ -411,6 +411,7 @@
     <ClInclude Include="..\..\common\pool.h" />
     <ClInclude Include="..\..\common\rbtree.h" />
     <ClInclude Include="..\..\common\stream.h" />
+    <ClInclude Include="..\..\common\win32_ntddk.h" />
     <ClInclude Include="advapi.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="dll.h" />

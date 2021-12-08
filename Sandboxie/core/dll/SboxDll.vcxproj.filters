@@ -280,6 +280,9 @@
     <ClInclude Include="..\..\common\ntproto.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\win32_ntddk.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

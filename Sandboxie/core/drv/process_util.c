@@ -893,7 +893,7 @@ _FX int Process_MatchPathList(
 // Process_MatchPathEx
 //---------------------------------------------------------------------------
 
-
+#ifdef USE_MATCH_PATH_EX
 _FX ULONG Process_MatchPathEx(
     PROCESS *proc, const WCHAR *path, ULONG path_len, WCHAR path_code,
     LIST *normal_list, 
@@ -1038,7 +1038,7 @@ _FX ULONG Process_MatchPathEx(
             if (patsrc) *patsrc = curpat;
 
             mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
+            // dont goto finish as open can overwrite this 
         }
     }
     
@@ -1056,7 +1056,6 @@ _FX ULONG Process_MatchPathEx(
             if (patsrc) *patsrc = curpat;
 
             mp_flags = TRUE_PATH_OPEN_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
         }
     }
 
@@ -1066,7 +1065,7 @@ finish:
 
     return mp_flags;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Process_GetProcessName

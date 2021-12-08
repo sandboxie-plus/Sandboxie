@@ -20,7 +20,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
 	//flags &= ~Qt::WindowSystemMenuHint;
-	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	flags |= Qt::WindowMinMaxButtonsHint;
 	flags |= Qt::WindowMinimizeButtonHint;
 	//flags &= ~Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
@@ -459,6 +459,8 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 void CRecoveryWindow::OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize)
 {
 	ui.lblInfo->setText(tr("There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.").arg(fileCount).arg(folderCount).arg(FormatSize(totalSize)));
+	m_pCounter->deleteLater();
+	m_pCounter = NULL;
 }
 
 void CRecoveryWindow::OnCloseUntil()
@@ -500,7 +502,7 @@ void CRecoveryCounter::run()
 			}
 		}
 
-		emit Count(fileCount, folderCount, totalSize);
-
 	} while (!Folders.isEmpty());
+
+	emit Count(fileCount, folderCount, totalSize);
 }

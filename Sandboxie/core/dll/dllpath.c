@@ -593,7 +593,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
             //if (patsrc) *patsrc = curpat;
 
             mp_flags = 0;
-            if (!use_rule_specificity) goto finish;
+            // dont goto finish as open can overwrite this 
         }
     }
 
@@ -610,7 +610,6 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
             //if (patsrc) *patsrc = curpat;
 
             mp_flags = PATH_OPEN_FLAG;
-            if (!use_rule_specificity) goto finish;
         }
     }
 

@@ -381,10 +381,10 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                 if (proc->open_all_win_classes)
                     flags |= SBIE_FLAG_OPEN_ALL_WIN_CLASS;
 
-                if (proc->use_rule_specificity)
-                    flags |= SBIE_FLAG_RULE_SPECIFICITY;
-                if (proc->use_privacy_mode)
-                    flags |= SBIE_FLAG_PRIVACY_MODE;
+                //if (proc->use_rule_specificity)
+                //    flags |= SBIE_FLAG_RULE_SPECIFICITY;
+                //if (proc->use_privacy_mode)
+                //    flags |= SBIE_FLAG_PRIVACY_MODE;
                 if (proc->bAppCompartment)
                     flags |= SBIE_FLAG_APP_COMPARTMENT;
             }

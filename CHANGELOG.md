@@ -4,16 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-## [1.0.2 / 5.55.2] - 2021-12-??
-
-### Added
+## [1.0.2 / 5.55.2] - 2021-12-08
 
 ### Fixed
 - fixed recovery window not refreshing count on reload [#1402](https://github.com/sandboxie-plus/Sandboxie/issues/1402)
 - fixed printing issue introdudec in 1.0.1 [#1397](https://github.com/sandboxie-plus/Sandboxie/issues/1397)
 - fixed issues with create process [#1408](https://github.com/sandboxie-plus/Sandboxie/issues/1408)
-
 
 
 ## [1.0.1 / 5.55.1] - 2021-12-06

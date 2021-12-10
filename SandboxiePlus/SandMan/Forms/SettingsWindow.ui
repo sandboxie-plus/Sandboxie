@@ -487,7 +487,7 @@
            <item row="8" column="1" colspan="5">
             <widget class="QCheckBox" name="chkWin32k">
              <property name="text">
-              <string>Hook sellected win32k syscalls to enable GPU acceleration (experimental)</string>
+              <string>Hook selected Win32k system calls to enable GPU acceleration (experimental)</string>
              </property>
             </widget>
            </item>

@@ -494,7 +494,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
             if (ProcessId != 0)
                 status = STATUS_ACCESS_DENIED;
             
-            proc->detected_image_type = (ULONG)(args->ext_data.val);
+            if(proc->detected_image_type == -1)
+                proc->detected_image_type = (ULONG)(args->ext_data.val);
+
             *data = 0;
 
         } else if (args->info_type.val == 'gpit') { // get process image type

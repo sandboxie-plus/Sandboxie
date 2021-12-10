@@ -190,7 +190,7 @@ static DLL Ldr_Dlls[] = {
     { L"wtsapi32.dll",          "wtsapi32.dll",         Terminal_Init_WtsApi,           0},
     { L"winsta.dll",            "winsta.dll",           Terminal_Init_WinSta,           0},
     { L"MsCorEE.dll",           "MsCorEE.dll",          MsCorEE_Init,                   0}, // .net framework
-    //{ L"win32u.dll",            "win32u.dll",           Win32_Init,                     0},
+    { L"win32u.dll",            "win32u.dll",           Win32_Init,                     0},
     { L"user32.dll",            "user32.dll",           Gui_Init,                       0},
     { L"imm32.dll",             "imm32.dll",            Gui_Init_IMM32,                 0},
     { L"gdi32.dll",             "gdi32.dll",            Gdi_Init,                       0},

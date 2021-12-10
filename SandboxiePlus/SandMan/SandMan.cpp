@@ -307,7 +307,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(FileToRecover(const QString&, const QString&, const QString&, quint32)), this, SLOT(OnFileToRecover(const QString&, const QString&, const QString&, quint32)), Qt::QueuedConnection);
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
-	m_uTimerID = startTimer(250);
+	m_uTimerID = startTimer(1000);
 
 	OnStatusChanged();
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))

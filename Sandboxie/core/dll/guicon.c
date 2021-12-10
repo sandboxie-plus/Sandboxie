@@ -112,7 +112,7 @@ _FX BOOLEAN Gui_InitConsole1(void)
     // application which has used Gui_SetWindowsHookEx before creating
     // any windows (which would be needed to apply the hooks)
     //
-    
+
     Gui_ConsoleHwnd = GetConsoleWindow();
     if (! Gui_ConsoleHwnd) {
 

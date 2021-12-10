@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
 #include "dll.h"
 
-NTSTATUS Win32_NtUserCreateWindowEx(
+/*NTSTATUS Win32_NtUserCreateWindowEx(
 	DWORD dwExStyle,
 	PUNICODE_STRING UnsafeClassName,
 	LPCWSTR VersionedClass,
@@ -61,7 +61,9 @@ typedef NTSTATUS (*P_NtUserCreateWindowEx)(
 	DWORD dwUnknown2,
 	VOID* qwUnknown3);
 
-P_NtUserCreateWindowEx		__sys_NtUserCreateWindowEx = NULL;
+P_NtUserCreateWindowEx		__sys_NtUserCreateWindowEx = NULL;*/
+
+#define HOOK_WIN32K
 
 #ifdef HOOK_WIN32K
 
@@ -125,7 +127,7 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
 #endif
     
     SBIELOW_DATA* data = SbieApi_data;
-    SystemServiceAsm = (UCHAR*)0;// data->pSystemService; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    SystemServiceAsm = (UCHAR*)data->pSystemService;
 
 	UCHAR* syscall_data = (UCHAR *)HeapAlloc(GetProcessHeap(), 0, 16384); // enough room for over 2000 syscalls
 	if (!syscall_data)
@@ -294,9 +296,9 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
             ZwXxxPtr[1] = 0xC7;
             ZwXxxPtr[2] = 0xC2;
             *(ULONG *)&ZwXxxPtr[3] = SyscallNum;
-            if (!data->long_diff) {
+            if (!data->flags.long_diff) {
 
-                if (data->is_win10) {
+                if (data->flags.is_win10) {
                     ZwXxxPtr[7] = 0x48;             // jmp SystemServiceAsm
                     ZwXxxPtr[8] = 0xE9;             // jmp SystemServiceAsm
                     *(ULONG *)&ZwXxxPtr[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (ZwXxxPtr + 13));
@@ -343,22 +345,44 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
 {
 #ifdef HOOK_WIN32K
 	// In Windows 10 all Win32k.sys calls are located in win32u.dll
-    if (Dll_OsBuild < 10041)
+    if (Dll_OsBuild < 10041 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", FALSE))
         return TRUE; // just return on older builds
 
-    if (!SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", FALSE)) {
+    // NoSysCallHooks BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+        return TRUE;
+    // NoSysCallHooks END
+
+#ifndef _WIN64
+    // ToDo: add wow 64 support for win32 syscall hooking
+    if (Dll_IsWow64)
+        return TRUE;
+#endif
+
+    // disable Electron Workaround when we are ready to hook the required win32k syscalls
+    extern BOOL Dll_ElectronWorkaround;
+    Dll_ElectronWorkaround = FALSE; 
+
+    //
+    // chrome needs for a working GPU acceleration the GdiDdDDI* win32k syscalls to have the right user token
+    //
+
+    WCHAR* cmdline = GetCommandLine();
+
+    if ((wcsstr(cmdline, L"--type=gpu-process") != NULL && wcsstr(cmdline, L"--gpu-preferences=") != NULL)
+     || SbieApi_QueryConfBool(NULL, L"AlwaysUseWin32kHooks", FALSE)) {
 
         SbieDll_HookWin32SysCalls(hmodule);
     }
 
-	P_NtUserCreateWindowEx NtUserCreateWindowEx = (P_NtUserCreateWindowEx)GetProcAddress(hmodule, "NtUserCreateWindowEx");
-    SBIEDLL_HOOK(Win32_, NtUserCreateWindowEx);
+	//P_NtUserCreateWindowEx NtUserCreateWindowEx = (P_NtUserCreateWindowEx)GetProcAddress(hmodule, "NtUserCreateWindowEx");
+    //SBIEDLL_HOOK(Win32_, NtUserCreateWindowEx);
 #endif
 
 	return TRUE;
 }
 
-_FX NTSTATUS Win32_NtUserCreateWindowEx(
+/*_FX NTSTATUS Win32_NtUserCreateWindowEx(
 	DWORD dwExStyle,
 	PUNICODE_STRING UnsafeClassName,
 	LPCWSTR VersionedClass,
@@ -441,4 +465,4 @@ _FX NTSTATUS Win32_NtUserCreateWindowEx(
 	return status;
 
 #endif
-}
+}*/

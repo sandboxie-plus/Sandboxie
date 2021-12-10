@@ -954,7 +954,10 @@ _FX BOOLEAN SbieDll_InjectLow_CopyData(
 
 		ULONG protect;
 		vm_ok = VirtualProtectEx(hProcess, remote_addr, m_sbielow_len,
-			PAGE_EXECUTE_READ, &protect);
+			// we want to be able to pass data from the low level dll we do this here
+			// we set PAGE_EXECUTE_READ in SbieDll.dll Dll_Ordinal1
+			PAGE_EXECUTE_READWRITE, &protect);
+			//PAGE_EXECUTE_READ, &protect);
 		if (vm_ok) {
 			return TRUE;
 		}

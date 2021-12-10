@@ -564,6 +564,8 @@ _FX ULONG_PTR EntrypointC(SBIELOW_DATA *data,void *ActivationContext, void *Syst
 
         // WaitForDebugger(data);
 
+        data->pSystemService = (ULONG64)SystemService;
+
 		if(!data->flags.bHostInject && !data->flags.bNoSysHooks)
 			InitSyscalls(data, SystemService);
 #ifdef _WIN64

@@ -92,7 +92,9 @@ typedef struct _SBIELOW_DATA {
     SBIELOW_J_TABLE * Sbie64bitJumpTable;
 	ULONG64     ntdll_wow64_base;
 #endif
+    ULONG64     pSystemService;
 } SBIELOW_DATA;
+
 
 
 //

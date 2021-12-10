@@ -315,6 +315,8 @@ static HANDLE Proc_LastCreatedProcessHandle = NULL;
 
 static BOOL     g_boolWasWerFaultLastProcess = FALSE;
 
+BOOL            Dll_ElectronWorkaround = FALSE;
+
 //---------------------------------------------------------------------------
 // Proc_Init
 //---------------------------------------------------------------------------
@@ -325,6 +327,8 @@ _FX BOOLEAN Proc_Init(void)
     P_CreateProcessInternal CreateProcessInternalW;
     ANSI_STRING ansi;
     NTSTATUS status;
+
+    Dll_ElectronWorkaround = SbieApi_QueryConfBool(NULL, L"UseElectronWorkaround", TRUE);
 
     //
     // abort if we should not hook any process creation functions
@@ -674,7 +678,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
     //
 
-    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/)
+    if ((Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/) && Dll_ElectronWorkaround)
     {
         if(lpApplicationName && lpCommandLine)
         {

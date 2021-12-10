@@ -721,6 +721,12 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
+    extern SBIELOW_DATA* SbieApi_data;
+    SbieApi_data = data;
+
+    VirtualProtect((void *)(ULONG_PTR)data, sizeof(SBIELOW_DATA),
+                   PAGE_EXECUTE_READ, &dummy_prot);
+
     bHostInject = data->flags.bHostInject == 1;
 
     //

@@ -122,6 +122,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	
 	m_WarnProgsChanged = false;
 
@@ -240,6 +241,7 @@ void CSettingsWindow::LoadSettings()
 
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", false));
+		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -263,6 +265,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSeparateUserFolders->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
+		ui.chkWin32k->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
@@ -371,6 +374,8 @@ void CSettingsWindow::SaveSettings()
 
 		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
 		theAPI->GetGlobalSettings()->SetBool("EnableObjectFiltering", ui.chkObjCb->isChecked());
+		theAPI->GetGlobalSettings()->SetBool("EnableWin32kHooks", ui.chkWin32k->isChecked());
+
 
 		if (m_FeaturesChanged) {
 			m_FeaturesChanged = false;

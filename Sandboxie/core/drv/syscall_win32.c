@@ -222,16 +222,31 @@ _FX BOOLEAN Syscall_Init_List32(void)
         // to allow user code execution while we have restored the original token
         //
 
-        #define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
+        /*#define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
 
         if (    IS_PROC_NAME(18, "UserCreateWindowEx")
+
+            ||   memcmp(name, "User", 4) == 0 //  a lot of user stuff breaks genrally
+
+            ||  IS_PROC_NAME(27, "UserSetProcessWindowStation") // bsod
+            ||  IS_PROC_NAME(15, "UserCallNoParam") 
+            ||  IS_PROC_NAME(16, "UserCallOneParam") 
+            ||  IS_PROC_NAME(16, "UserCallTwoParam") 
+            ||  IS_PROC_NAME(20, "UserSetWindowLongPtr") 
+            ||  IS_PROC_NAME(33, "UserSetProcessDpiAwarenessContext") // bsod
+
             ||  IS_PROC_NAME( 7, "GdiInit") // bsod
             ||  IS_PROC_NAME(12, "GdiInitSpool") // probably too
             ||  IS_PROC_NAME(20, "UserSetThreadDesktop") // bsod
             
                                                             ) {
             goto next_ntxxx;
+        }*/
+
+        if (memcmp(name, "GdiDdDDI", 8) != 0) {
+            goto next_ntxxx;
         }
+
 
         //
         // analyze each NtXxx export to find the service index number
@@ -263,13 +278,14 @@ _FX BOOLEAN Syscall_Init_List32(void)
                 //test = MmIsAddressValid(ntos_addr);
                 //KeUnstackDetachProcess(&ApcState);
                 //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p %s\r\n", name, param_count, syscall_index, ntos_addr, test ? "valid" : "invalid");
-                //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d\r\n", name, param_count, syscall_index);
+                DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d\r\n", name, param_count, syscall_index);
             }
         }
 
         if (! ntos_addr) {
             Syscall_ErrorForAsciiName(name);
-            return FALSE;
+            goto next_ntxxx;
+            //return FALSE;
         }
 
         syscall_index = (syscall_index & 0xFFF);
@@ -401,7 +417,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
     syscall_index = (syscall_index & 0xFFF);
 
-    //DbgPrint("[syscall] request for service %d / %08X\n", syscall_index, syscall_index);
+    //DbgPrint("[syscall32] request for service %d / %08X\n", syscall_index | 0x1000, syscall_index | 0x1000);
 
     if (Syscall_Table32 && (syscall_index <= Syscall_MaxIndex32))
         entry = Syscall_Table32[syscall_index];
@@ -415,7 +431,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
     // DbgPrint("[syscall] request p=%06d t=%06d - BEGIN %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), entry->name);
 
-//    Thread_SetThreadToken(proc);        // may set proc->terminated
+    Thread_SetThreadToken(proc);        // may set proc->terminated
 
 //    if (proc->terminated) {
 //
@@ -525,7 +541,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     // use of the highly restricted primary token in this thread
     //
 
-//    Thread_ClearThreadToken();
+    Thread_ClearThreadToken();
 
     /*if (! NT_SUCCESS(status)) {
         DbgPrint("Process %06d Syscall %04X Status %08X\n", proc->pid, syscall_index, status);

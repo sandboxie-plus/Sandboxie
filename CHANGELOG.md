@@ -7,14 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.3 / 5.55.3] - 2021-12-??
 
 ### Added
-- added mechanism to hook win32 syscalls, this shoudl resolve the issue with chrome HW acceleration
--- to enable add "EnableWin32kHooks=y" to the global ini section, this feature is highly experimental (!)
--- the hooks will be automatically applied to chrome gpu processes
--- to force win32k hooks for all processes in a selected box add "AlwaysUseWin32kHooks=y"
+- added mechanism to hook Win32 system calls, this should resolve the issue with Chromium HW acceleration
+-- to enable it, add "EnableWin32kHooks=y" to the global ini section, this feature is highly experimental (!)
+-- the hooks will be automatically applied to Chromium GPU processes
+-- to force Win32k hooks for all processes in a selected box add "AlwaysUseWin32kHooks=y" [#1261](https://github.com/sandboxie-plus/Sandboxie/issues/1261) [#1395](https://github.com/sandboxie-plus/Sandboxie/issues/1395)
 
-###
-- fixed bug in GetVersionExW making "OverrideOsBuild=..." not working
-- fixed issue with some utf8 charakters when usded in the ini file
+### Fixed
+- fixed bug in GetVersionExW making "OverrideOsBuild=..." not working [#605](https://github.com/sandboxie-plus/Sandboxie/issues/605) [#1426](https://github.com/sandboxie-plus/Sandboxie/issues/1426)
+- fixed issue with some UTF-8 characters when used in the ini file
+- fixed isolation issue with Virtual Network Editor [#1102](https://github.com/sandboxie-plus/Sandboxie/issues/1102)
 
 
 
@@ -815,10 +816,10 @@ Fixed issue with Windows 7
 
 ### Changed
 - reduced SandMan CPU usage
-- Sandboxie.ini and Templates.ini can now be UTF8 encoded [#461](https://github.com/sandboxie-plus/Sandboxie/issues/461) [#197](https://github.com/sandboxie-plus/Sandboxie/issues/197)
+- Sandboxie.ini and Templates.ini can now be UTF-8 encoded [#461](https://github.com/sandboxie-plus/Sandboxie/issues/461) [#197](https://github.com/sandboxie-plus/Sandboxie/issues/197)
 -- this feature is experimental, files without a UTF-8 Signature should be recognized also
 -- "ByteOrderMark=yes" is obsolete, Sandboxie.ini is now always saved with a BOM/Signature
-- legacy language files can now be UTF8 encoded
+- legacy language files can now be UTF-8 encoded
 - reworked file migration behaviour, removed hardcoded lists in favour of templates [#441](https://github.com/sandboxie-plus/Sandboxie/issues/441)
 -- you can now use "CopyAlways=", "DontCopy=" and "CopyEmpty=" that support the same syntax as "OpenFilePath="
 -- "CopyBlockDenyWrite=program.exe,y" makes a write open call to a file that won't be copied fail instead of turning it read-only

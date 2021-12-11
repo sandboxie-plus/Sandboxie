@@ -784,6 +784,8 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     }
 #endif
 
+    syscall_index = (syscall_index & 0xFFF);
+
     //DbgPrint("[syscall] request for service %d / %08X\n", syscall_index, syscall_index);
 
     if (Syscall_Table && (syscall_index <= Syscall_MaxIndex))
@@ -1036,6 +1038,8 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     }
 #endif
 
+    BOOLEAN add_names = parms[3] != 0;
+
     //
     // caller must be our service process
     //
@@ -1050,7 +1054,7 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     buf_len = sizeof(ULONG)         // size of buffer
             + sizeof(ULONG)         // offset to extra data (for SbieSvc)
             + (32 * 4)              // saved code from ntdll
-            + List_Count(&Syscall_List) * sizeof(ULONG) * 2
+            + List_Count(&Syscall_List) * ((sizeof(ULONG) * 2) + (add_names ? 64 : 0))
             + sizeof(ULONG) * 2     // final terminator entry
             ;
 
@@ -1084,15 +1088,20 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     while (entry) {
 
         ULONG syscall_index = (ULONG)entry->syscall_index;
-#ifndef _WIN64
+//#ifndef _WIN64
         ULONG param_count = (ULONG)entry->param_count;
         syscall_index |= (param_count * 4) << 24;
-#endif ! _WIN64
+//#endif ! _WIN64
 
         *ptr = syscall_index;
         ++ptr;
         *ptr = entry->ntdll_offset;
         ++ptr;
+        if (add_names) {
+            memcpy(ptr, entry->name, entry->name_len);
+            ((char*)ptr)[entry->name_len] = 0;
+            ptr += 16; // 16 * sizeog(ULONG) = 64
+        }
 
         entry = List_Next(entry);
     }

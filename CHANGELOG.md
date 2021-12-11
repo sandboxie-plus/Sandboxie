@@ -4,6 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.3 / 5.55.3] - 2021-12-??
+
+### Added
+- added mechanism to hook win32 syscalls, this shoudl resolve the issue with chrome HW acceleration
+-- to enable add "EnableWin32kHooks=y" to the global ini section, this feature is highly experimental (!)
+-- the hooks will be automatically applied to chrome gpu processes
+-- to force win32k hooks for all processes in a selected box add "AlwaysUseWin32kHooks=y"
+
+###
+- fixed bug in GetVersionExW making "OverrideOsBuild=..." not working
+
+
 ## [1.0.2 / 5.55.2] - 2021-12-08
 
 ### Fixed

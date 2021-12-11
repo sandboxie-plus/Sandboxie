@@ -217,14 +217,14 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         //
         // we don't hook UserCreateWindowEx as it uses callbacks into
-        // user space from teh kernel, for ocne this dies not play well 
+        // user space from teh kernel, for ocne this does not play well 
         // with out sys call interface, but also it would be a security issue
         // to allow user code execution while we have restored the original token
         //
 
-        /*#define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
+        #define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
 
-        if (    IS_PROC_NAME(18, "UserCreateWindowEx")
+        /*if (    IS_PROC_NAME(18, "UserCreateWindowEx")
 
             ||   memcmp(name, "User", 4) == 0 //  a lot of user stuff breaks genrally
 
@@ -243,7 +243,10 @@ _FX BOOLEAN Syscall_Init_List32(void)
             goto next_ntxxx;
         }*/
 
-        if (memcmp(name, "GdiDdDDI", 8) != 0) {
+        #define IS_PROC_PREFIX(ln,nm) (name_len >= ln && memcmp(name, nm, ln) == 0)
+
+        if (!IS_PROC_PREFIX(8, "GdiDdDDI")
+         /*&& !IS_PROC_NAME(16, "UserSetCursorPos")*/) {
             goto next_ntxxx;
         }
 
@@ -278,7 +281,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
                 //test = MmIsAddressValid(ntos_addr);
                 //KeUnstackDetachProcess(&ApcState);
                 //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p %s\r\n", name, param_count, syscall_index, ntos_addr, test ? "valid" : "invalid");
-                DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d\r\n", name, param_count, syscall_index);
+                //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d\r\n", name, param_count, syscall_index);
             }
         }
 
@@ -414,6 +417,9 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
         return STATUS_NOT_IMPLEMENTED;
 
     syscall_index = (ULONG)parms[1];
+
+    if ((syscall_index & 0x1000) == 0) 
+        return STATUS_INVALID_SYSTEM_SERVICE;
 
     syscall_index = (syscall_index & 0xFFF);
 
@@ -563,12 +569,14 @@ _FX NTSTATUS Syscall_Api_Query32(PROCESS *proc, ULONG64 *parms)
     ULONG *ptr;
     SYSCALL_ENTRY *entry;
 
+    BOOLEAN add_names = parms[3] != 0;
+
     //
     // allocate user mode space for syscall table
     //
 
     buf_len = sizeof(ULONG)         // size of buffer
-            + List_Count(&Syscall_List32) * sizeof(ULONG) * 2
+            + List_Count(&Syscall_List32) * ((sizeof(ULONG) * 2) + (add_names ? 64 : 0))
             + sizeof(ULONG) * 2     // final terminator entry
             ;
 
@@ -595,16 +603,21 @@ _FX NTSTATUS Syscall_Api_Query32(PROCESS *proc, ULONG64 *parms)
     entry = List_Head(&Syscall_List32);
     while (entry) {
 
-        ULONG syscall_index = (ULONG)entry->syscall_index;
-#ifndef _WIN64
+        ULONG syscall_index = (ULONG)entry->syscall_index | 0x1000;
+//#ifndef _WIN64
         ULONG param_count = (ULONG)entry->param_count;
         syscall_index |= (param_count * 4) << 24;
-#endif ! _WIN64
+//#endif ! _WIN64
 
         *ptr = syscall_index;
         ++ptr;
         *ptr = entry->ntdll_offset;
         ++ptr;
+        if (add_names) {
+            memcpy(ptr, entry->name, entry->name_len);
+            ((char*)ptr)[entry->name_len] = 0;
+            ptr += 16; // 16 * sizeog(ULONG) = 64
+        }
 
         entry = List_Next(entry);
     }

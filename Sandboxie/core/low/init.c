@@ -238,6 +238,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 {
     UCHAR *SystemServiceAsm, *ZwXxxPtr;
     ULONG *SyscallPtr;
+    ULONG SyscallNum;
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
@@ -357,7 +358,11 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         // and then restore the original page protection
         //
 
+        SyscallNum = SyscallPtr[0];
+
 #ifdef _WIN64
+        SyscallNum &= 0xFFFF; // clear the not needed param count
+
         if (chrome64Target && data->Sbie64bitJumpTable) {
             RegionSize = 16;
             ZwXxxPtr = (UCHAR *)chrome64Target;
@@ -367,14 +372,14 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
                 NtCurrentProcess(), &RegionBase, &RegionSize,
                 PAGE_EXECUTE_READWRITE, &OldProtect);
 
-            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallPtr[0] & 0x3ff];
+            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallNum & 0x3ff];
             // write new patch for jump table
             // The jTable is now injected in the same memory module with lowlevel; no need for a 64 bit long jump
-            // mov r10, <4 byte SyscallPtr[0]>
+            // mov r10, <4 byte SyscallNum>
             jTableTarget[0] = 0x49;
             jTableTarget[1] = 0xc7;
             jTableTarget[2] = 0xc2;
-            *(ULONG *)&jTableTarget[3] = SyscallPtr[0];
+            *(ULONG *)&jTableTarget[3] = SyscallNum;
             // jmp <4 byte SystemServiceAsm>
             if (data->flags.is_win10) {
                 jTableTarget[7] = 0x48;
@@ -423,7 +428,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             ZwXxxPtr[0] = 0x49;                 // mov r10, SyscallNumber
             ZwXxxPtr[1] = 0xC7;
             ZwXxxPtr[2] = 0xC2;
-            *(ULONG *)&ZwXxxPtr[3] = SyscallPtr[0];
+            *(ULONG *)&ZwXxxPtr[3] = SyscallNum;
             if (!data->flags.long_diff) {
 
                 if (data->flags.is_win10) {
@@ -450,7 +455,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             PAGE_EXECUTE_READWRITE, &OldProtect);
 
         ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber
-        *(ULONG *)&ZwXxxPtr[1] = SyscallPtr[0];
+        *(ULONG *)&ZwXxxPtr[1] = SyscallNum;
         ZwXxxPtr[5] = 0xE9;                 // jmp SystemServiceAsm
         *(ULONG *)&ZwXxxPtr[6] =
             (ULONG)(ULONG_PTR)(SystemServiceAsm - (ZwXxxPtr + 10));

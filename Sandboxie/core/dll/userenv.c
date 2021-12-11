@@ -84,16 +84,17 @@ _FX BOOLEAN UserEnv_InitVer(HMODULE module)
     if (SbieDll_GetSettingsForName(NULL, Dll_ImageName, L"OverrideOsBuild", str, sizeof(str), NULL))
         UserEnv_dwBuildNumber = _wtoi(str);
 
-    if (UserEnv_dwBuildNumber == 0 && Dll_OsBuild < 9600)
-        return TRUE; // don't hook if not needed or its windows 8 or earlier
+    if (UserEnv_dwBuildNumber == 0)
+        return TRUE; // don't hook if not needed
 
-    
     RtlGetVersion = GetProcAddress(GetModuleHandleW(L"ntdll"), "RtlGetVersion");
     GetVersionExW = (P_GetVersionExW)GetProcAddress(module, "GetVersionExW");
     GetVersionExA = (P_GetVersionExA)GetProcAddress(module, "GetVersionExA");
     SBIEDLL_HOOK(UserEnv_, RtlGetVersion);
     SBIEDLL_HOOK(UserEnv_, GetVersionExW);
     SBIEDLL_HOOK(UserEnv_, GetVersionExA);
+
+    // todo, also hook RtlSwitchedVVI <- BOOL __stdcall VerifyVersionInfoW(LPOSVERSIONINFOEXW lpVersionInformation, DWORD dwTypeMask, DWORDLONG dwlConditionMask)
 
     return TRUE;
 }
@@ -240,6 +241,7 @@ _FX void UserEnv_MkVersionEx(DWORD* dwBuildNumber, DWORD* dwMajorVersion, DWORD*
 _FX NTSTATUS UserEnv_RtlGetVersion(LPOSVERSIONINFOEXW lpVersionInfo)
 {
     NTSTATUS status = __sys_RtlGetVersion(lpVersionInfo);
+
     if (UserEnv_dwBuildNumber) {
         UserEnv_MkVersionEx(&lpVersionInfo->dwBuildNumber,
             &lpVersionInfo->dwMajorVersion, &lpVersionInfo->dwMinorVersion,
@@ -255,16 +257,10 @@ _FX NTSTATUS UserEnv_RtlGetVersion(LPOSVERSIONINFOEXW lpVersionInfo)
 
 _FX BOOL UserEnv_GetVersionExW(LPOSVERSIONINFOEXW lpVersionInfo)
 {
-    // Get the version from the kernel
-    if (__sys_RtlGetVersion != NULL) {
-        __sys_RtlGetVersion(lpVersionInfo);
+    UserEnv_RtlGetVersion(lpVersionInfo);
 
-        // RtlGetVersion always returns STATUS_SUCCESS
-        return TRUE;
-    }
-
-    // Error
-    return FALSE;
+    // RtlGetVersion always returns STATUS_SUCCESS
+    return TRUE;
 }
 
 _FX BOOL UserEnv_GetVersionExA(LPOSVERSIONINFOEXA lpVersionInfo)

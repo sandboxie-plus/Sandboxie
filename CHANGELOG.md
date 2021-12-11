@@ -14,6 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ###
 - fixed bug in GetVersionExW making "OverrideOsBuild=..." not working
+- fixed issue with some utf8 charakters when usded in the ini file
+
 
 
 ## [1.0.2 / 5.55.2] - 2021-12-08

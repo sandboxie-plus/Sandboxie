@@ -151,7 +151,7 @@ _FX NTSTATUS SbieDll_WoW64SysCall(ULONG syscall, ULONG* args)
 	extern HANDLE SbieApi_DeviceHandle;
 
     ULONG argc = (syscall >> 24);
-    syscall &= 0x00FFFFFF;
+    syscall &= 0xFFFF;
 
 	ULONG64 stack[19];
     for (ULONG i = 0; i < argc; i++)

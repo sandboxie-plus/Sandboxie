@@ -30,7 +30,7 @@
 #include "util.h"
 #include "session.h"
 #include "conf.h"
-
+#include "common/pattern.h"
 
 
 //---------------------------------------------------------------------------
@@ -101,6 +101,7 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_GetServiceTable)
 #endif // ALLOC_PRAGMA
 
+#include "syscall_util.c"
 
 #ifdef HOOK_WIN32K
 #include "syscall_win32.c"
@@ -267,6 +268,7 @@ _FX BOOLEAN Syscall_Init(void)
 
 _FX BOOLEAN Syscall_Init_List(void)
 {
+    BOOLEAN success = FALSE;
     UCHAR *name, *ntdll_code;
     void *ntos_addr;
     DLL_ENTRY *dll;
@@ -277,16 +279,25 @@ _FX BOOLEAN Syscall_Init_List(void)
     List_Init(&Syscall_List);
 
     //
+    // preapre the enabled/disabled lists
+    //
+
+    //LIST enabled_hooks;
+    //LIST disabled_hooks;
+    //Syscall_LoadHookMap(L"EnableNtDllHook", &enabled_hooks);
+    //Syscall_LoadHookMap(L"DisableNtDllHook", &disabled_hooks);
+
+    //
     // scan each ZwXxx export in NTDLL
     //
 
     dll = Dll_Load(Dll_NTDLL);
     if (! dll)
-        return FALSE;
+        goto finish;
 
     proc_offset = Dll_GetNextProc(dll, "Zw", &name, &proc_index);
     if (! proc_offset)
-        return FALSE;
+        goto finish;
 
     while (proc_offset) {
 
@@ -321,11 +332,17 @@ _FX BOOLEAN Syscall_Init_List(void)
             ||  IS_PROC_NAME(18, "TerminateJobObject")
             ||  IS_PROC_NAME(16, "TerminateProcess")
             ||  IS_PROC_NAME(15, "TerminateThread")
-            ||  IS_PROC_NAME(14, "YieldExecution")            // ICD-10607 - McAfee uses it to pass its own data in the stack. The call is not important to us. 
 
                                                             ) {
             goto next_zwxxx;
         }
+
+        //BOOLEAN default_action = TRUE;
+
+        // ICD-10607 - McAfee uses it to pass its own data in the stack. The call is not important to us. 
+        if (    IS_PROC_NAME(14, "YieldExecution"))
+            goto next_zwxxx;
+        //    default_action = FALSE;
 
         //
         // the Google Chrome "wow_helper" process expects NtMapViewOfSection
@@ -336,6 +353,17 @@ _FX BOOLEAN Syscall_Init_List(void)
 
         if (    IS_PROC_NAME(16,  "MapViewOfSection"))
             goto next_zwxxx;
+        //    default_action = FALSE;
+
+        //
+        // check our custom map
+        //
+
+        //if (!Syscall_TestHookMap(name, name_len, &enabled_hooks, &disabled_hooks, default_action)) {
+        //    //DbgPrint("    NtDll Hook disabled for %s\n", name);
+        //    goto next_zwxxx;
+        //}
+        //DbgPrint("    NtDll Hook enabled for %s\n", name);
 
         //
         // analyze each ZwXxx export to find the service index number
@@ -368,7 +396,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         if (! ntos_addr) {
 
             Syscall_ErrorForAsciiName(name);
-            return FALSE;
+            goto finish;
         }
 
         //
@@ -378,7 +406,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         entry_len = sizeof(SYSCALL_ENTRY) + name_len + 1;
         entry = Mem_AllocEx(Driver_Pool, entry_len, TRUE);
         if (! entry)
-            return FALSE;
+            goto finish;
 
         entry->syscall_index = (USHORT)syscall_index;
         entry->param_count = (USHORT)param_count;
@@ -405,21 +433,28 @@ next_zwxxx:
         proc_offset = Dll_GetNextProc(dll, NULL, &name, &proc_index);
     }
 
+    success = TRUE;
+
     //
     // report an error if we did not find a reasonable number of services
     //
 
     if (Syscall_MaxIndex < 100) {
         Log_Msg1(MSG_1113, L"100");
-        return FALSE;
+        success = FALSE;
     }
 
     if (Syscall_MaxIndex >= 500) {
         Log_Msg1(MSG_1113, L"500");
-        return FALSE;
+        success = FALSE;
     }
 
-    return TRUE;
+finish:
+
+    //Syscall_FreeHookMap(&enabled_hooks);
+    //Syscall_FreeHookMap(&disabled_hooks);
+
+    return success;
 }
 
 

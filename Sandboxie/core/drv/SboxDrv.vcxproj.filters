@@ -156,6 +156,9 @@
     <ClCompile Include="dll.c">
       <Filter>syscall</Filter>
     </ClCompile>
+    <ClCompile Include="syscall_util.c">
+      <Filter>syscall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />

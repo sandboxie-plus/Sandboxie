@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.3 / 5.55.3] - 2021-12-??
 
 ### Added
-- added mechanism to hook Win32 system calls, this should resolve the issue with Chromium HW acceleration
+- added mechanism to hook Win32 system calls on windows 10 and later, this should resolve the issue with Chromium HW acceleration
 -- to enable it, add "EnableWin32kHooks=y" to the global ini section, this feature is highly experimental (!)
 -- the hooks will be automatically applied to Chromium GPU processes
 -- to force Win32k hooks for all processes in a selected box add "AlwaysUseWin32kHooks=y" [#1261](https://github.com/sandboxie-plus/Sandboxie/issues/1261) [#1395](https://github.com/sandboxie-plus/Sandboxie/issues/1395)

@@ -1489,6 +1489,20 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
             Token_Init_SbieLogin();
         }
 
+        /*
+#ifdef HOOK_WIN32K
+        // must be windows 10 or later
+        if (Driver_OsBuild >= 10041) {
+            extern ULONG Syscall_MaxIndex32;
+            if (Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, FALSE) && Syscall_MaxIndex32 == 0) {
+                if(Syscall_Init_List32()){
+                    Syscall_Init_Table32();
+                }
+            }
+        }
+#endif
+        */
+
         InterlockedExchange(&reconf_lock, 0);
     }
 

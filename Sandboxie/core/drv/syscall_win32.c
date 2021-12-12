@@ -148,7 +148,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
     Syscall_LoadHookMap(L"EnableWin32Hook", &enabled_hooks);
     Syscall_LoadHookMap(L"DisableWin32Hook", &disabled_hooks);
 
-    //BOOLEAN ignore_hook_blacklist = Conf_Get_Boolean(NULL, L"IgnoreHookBlacklist", 0, FALSE);
+    BOOLEAN ignore_hook_blacklist = Conf_Get_Boolean(NULL, L"IgnoreWin32HookBlacklist", 0, FALSE);
 
     //
     // get the syscall table
@@ -237,7 +237,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         #define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
 
-        //if(!ignore_hook_blacklist)
+        if (!ignore_hook_blacklist)
         if (    IS_PROC_NAME(18, "UserCreateWindowEx")
 
             ||  IS_PROC_NAME( 7, "GdiInit") // bsod
@@ -256,12 +256,12 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         //
         // Chrome and msedge need GdiDdDDI to be hooked in order for 
-        // the HW acceleration to work
+        // the HW acceleration to work.
         //
 
-        BOOLEAN default_action = IS_PROC_PREFIX(8, "GdiDdDDI");
+        BOOLEAN install_hook = IS_PROC_PREFIX(8, "GdiDdDDI");
 
-        if (!Syscall_TestHookMap(name, name_len, &enabled_hooks, &disabled_hooks, default_action)) {
+        if (!Syscall_TestHookMap(name, name_len, &enabled_hooks, &disabled_hooks, install_hook)) {
             //DbgPrint("    Win32k Hook disabled for %s\n", name);
             goto next_ntxxx;
         }

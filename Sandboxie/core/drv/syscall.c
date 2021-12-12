@@ -282,10 +282,10 @@ _FX BOOLEAN Syscall_Init_List(void)
     // preapre the enabled/disabled lists
     //
 
-    //LIST enabled_hooks;
-    //LIST disabled_hooks;
-    //Syscall_LoadHookMap(L"EnableNtDllHook", &enabled_hooks);
-    //Syscall_LoadHookMap(L"DisableNtDllHook", &disabled_hooks);
+    LIST enabled_hooks;
+    LIST disabled_hooks;
+    Syscall_LoadHookMap(L"EnableNtDllHook", &enabled_hooks);
+    Syscall_LoadHookMap(L"DisableNtDllHook", &disabled_hooks);
 
     //
     // scan each ZwXxx export in NTDLL
@@ -337,12 +337,11 @@ _FX BOOLEAN Syscall_Init_List(void)
             goto next_zwxxx;
         }
 
-        //BOOLEAN default_action = TRUE;
+        BOOLEAN install_hook = TRUE;
 
         // ICD-10607 - McAfee uses it to pass its own data in the stack. The call is not important to us. 
         if (    IS_PROC_NAME(14, "YieldExecution"))
-            goto next_zwxxx;
-        //    default_action = FALSE;
+            install_hook = FALSE;
 
         //
         // the Google Chrome "wow_helper" process expects NtMapViewOfSection
@@ -352,17 +351,16 @@ _FX BOOLEAN Syscall_Init_List(void)
         //
 
         if (    IS_PROC_NAME(16,  "MapViewOfSection"))
-            goto next_zwxxx;
-        //    default_action = FALSE;
+            install_hook = FALSE;
 
         //
         // check our custom map
         //
 
-        //if (!Syscall_TestHookMap(name, name_len, &enabled_hooks, &disabled_hooks, default_action)) {
-        //    //DbgPrint("    NtDll Hook disabled for %s\n", name);
-        //    goto next_zwxxx;
-        //}
+        if (!Syscall_TestHookMap(name, name_len, &enabled_hooks, &disabled_hooks, install_hook)) {
+            //DbgPrint("    NtDll Hook disabled for %s\n", name);
+            goto next_zwxxx;
+        }
         //DbgPrint("    NtDll Hook enabled for %s\n", name);
 
         //
@@ -451,8 +449,8 @@ next_zwxxx:
 
 finish:
 
-    //Syscall_FreeHookMap(&enabled_hooks);
-    //Syscall_FreeHookMap(&disabled_hooks);
+    Syscall_FreeHookMap(&enabled_hooks);
+    Syscall_FreeHookMap(&disabled_hooks);
 
     return success;
 }

@@ -779,6 +779,8 @@ WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG*
 
 BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
 
+VOID Config_FreePatternList(LIST* list);
+
 BOOLEAN Config_String2Bool(const WCHAR* value, BOOLEAN defval);
 
 BOOLEAN Config_GetSettingsForImageName_bool(const WCHAR* setting, BOOLEAN defval);

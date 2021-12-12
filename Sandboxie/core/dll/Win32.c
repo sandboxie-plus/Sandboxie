@@ -20,9 +20,14 @@
 //---------------------------------------------------------------------------
 
 
+#define NOGDI
 #include "dll.h"
 
+#include "common\pattern.h"
+
 #define HOOK_WIN32K
+
+//#define WOW64_EXPERIMEN
 
 #ifdef HOOK_WIN32K
 
@@ -146,6 +151,7 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
 }
 
 #ifndef _WIN64
+#ifdef WOW64_EXPERIMEN
 _FX NTSTATUS SbieDll_WoW64SysCall(ULONG syscall, ULONG* args)
 {
 	extern HANDLE SbieApi_DeviceHandle;
@@ -210,7 +216,7 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls(HMODULE win32u_base)
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
-    
+
     SystemServiceAsm = (UCHAR*)SbieDll_WoW64SysCallProc;
 
 	UCHAR* syscall_data = (UCHAR *)HeapAlloc(GetProcessHeap(), 0, 144000); // enough room for 2000 syscalls with names
@@ -224,6 +230,10 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls(HMODULE win32u_base)
         return FALSE;
     }
 
+    LIST DisabledHookList;
+    List_Init(&DisabledHookList);
+    Config_InitPatternList(L"SkipWin32Hook", &DisabledHookList);
+
     SyscallPtr = (ULONG *)(syscall_data
                          + sizeof(ULONG));         // size of buffer
 
@@ -233,8 +243,24 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls(HMODULE win32u_base)
         strcpy(FuncName + 2, (char*)&SyscallPtr[2]);
         ZwXxxPtr = (UCHAR*)GetProcAddress(win32u_base, FuncName);
         if (!ZwXxxPtr)
-            return FALSE;
+            goto next;
 
+        {
+            ULONG len = strlen((char*)&SyscallPtr[2]);
+            WCHAR wname[68];
+            for (ULONG i = 0; i < len; i++)
+                wname[i] = ((char*)&SyscallPtr[2])[i];
+            wname[len] = 0;
+
+            PATTERN* pat = List_Head(&DisabledHookList);
+            while (pat) 
+            {
+                if (Pattern_Match(pat, _wcslwr(wname), len))
+                    goto next;
+                
+                pat = List_Next(pat);
+            }
+        }
 
         RegionBase = ZwXxxPtr;
         RegionSize = 10;
@@ -253,13 +279,16 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls(HMODULE win32u_base)
             NtCurrentProcess(), &RegionBase, &RegionSize,
             OldProtect, &OldProtect);
         
-
+    next:
         SyscallPtr += 2 + 16;
     }
+
+    Config_FreePatternList(&DisabledHookList);
 
     HeapFree(GetProcessHeap(), 0, syscall_data);
     return TRUE;
 }
+#endif
 #endif
 
 #endif
@@ -276,6 +305,12 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
         return TRUE;
     // NoSysCallHooks END
 
+#ifndef WOW64_EXPERIMEN
+    // ToDo: add no WoW64 support
+    if (! Dll_IsWow64)
+        return TRUE;
+#endif
+
     // disable Electron Workaround when we are ready to hook the required win32k syscalls
     extern BOOL Dll_ElectronWorkaround;
     Dll_ElectronWorkaround = FALSE; 
@@ -287,12 +322,14 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
     WCHAR* cmdline = GetCommandLine();
 
     if ((wcsstr(cmdline, L"--type=gpu-process") != NULL && wcsstr(cmdline, L"--gpu-preferences=") != NULL)
-     || SbieApi_QueryConfBool(NULL, L"AlwaysUseWin32kHooks", FALSE)) {
+     || SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"AlwaysUseWin32kHooks", FALSE)) {
 
 #ifndef _WIN64
+#ifdef WOW64_EXPERIMEN
         if (Dll_IsWow64) 
             SbieDll_HookWoW64SysCalls(hmodule);
         else 
+#endif
 #endif
             SbieDll_HookWin32SysCalls(hmodule);
     }

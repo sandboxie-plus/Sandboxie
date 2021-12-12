@@ -149,6 +149,7 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
 _FX NTSTATUS SbieDll_WoW64SysCall(ULONG syscall, ULONG* args)
 {
 	extern HANDLE SbieApi_DeviceHandle;
+    extern P_NtDeviceIoControlFile __sys_NtDeviceIoControlFile;
 
     ULONG argc = (syscall >> 24);
     syscall &= 0xFFFF;
@@ -166,7 +167,7 @@ _FX NTSTATUS SbieDll_WoW64SysCall(ULONG syscall, ULONG* args)
     parms[2] = (ULONG64)(ULONG_PTR)stack; // pointer to system service arguments on stack
 
 	IO_STATUS_BLOCK MyIoStatusBlock;
-	status = NtDeviceIoControlFile(
+	status = __sys_NtDeviceIoControlFile(
         SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
         API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
 

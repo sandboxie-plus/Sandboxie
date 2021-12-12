@@ -128,7 +128,6 @@ _FX BOOLEAN Syscall_GetWin32kAddr(ULONG *Base_Copy,
 
 _FX BOOLEAN Syscall_Init_List32(void)
 {
-    BOOLEAN success = FALSE;
     UCHAR *name, *win32k_code;
     void *ntos_addr;
     DLL_ENTRY *dll;
@@ -140,24 +139,13 @@ _FX BOOLEAN Syscall_Init_List32(void)
     List_Init(&Syscall_List32);
 
     //
-    // preapre the enabled/disabled lists
-    //
-
-    LIST enabled_hooks;
-    LIST disabled_hooks;
-    Syscall_LoadHookMap(L"EnableWin32Hook", &enabled_hooks);
-    Syscall_LoadHookMap(L"DisableWin32Hook", &disabled_hooks);
-
-    BOOLEAN ignore_hook_blacklist = Conf_Get_Boolean(NULL, L"IgnoreWin32HookBlacklist", 0, FALSE);
-
-    //
     // get the syscall table
     //
 
     KSERVICE_TABLE_DESCRIPTOR *ShadowTable = (KSERVICE_TABLE_DESCRIPTOR *)Syscall_GetServiceTable();
     if (!ShadowTable) {
         Log_Msg1(MSG_1113, L"SHADOW_TABLE");
-        goto finish;
+        return FALSE;
     }
     //DbgPrint(" win32k.sys SysCalls: %d %p %p\n", ShadowTable->Limit, ShadowTable->Base, ShadowTable->Number);
     ShadowTable += 1;
@@ -165,7 +153,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
     if (ShadowTable->Limit > 0xFFF) { // not plausible
         Log_Msg1(MSG_1113, L"SHADOW_TABLE");
-        goto finish;
+        return FALSE;
     }
     
     //
@@ -177,13 +165,14 @@ _FX BOOLEAN Syscall_Init_List32(void)
     HANDLE csrssId = Util_GetProcessPidByName(L"csrss.exe");
     if (csrssId == (HANDLE)-1) {
         Log_Msg1(MSG_1113, L"csrss.exe");
-        goto finish;
+        return FALSE;
     }
 
     table_copy = (ULONG*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(long), TRUE);
     if (!table_copy)
-        goto finish;
+        return FALSE;
 
+    BOOLEAN success = FALSE;
     PEPROCESS ProcessObject;
     if (NT_SUCCESS(PsLookupProcessByProcessId(csrssId,&ProcessObject))) {
         KAPC_STATE ApcState;
@@ -200,7 +189,8 @@ _FX BOOLEAN Syscall_Init_List32(void)
         Log_Msg1(MSG_1113, L"WIN32K_TABLE");
         goto finish;
     }
-    success = FALSE;
+
+    //BOOLEAN ignore_hook_blacklist = Conf_Get_Boolean(NULL, L"IgnoreWin32HookBlacklist", 0, FALSE);
 
     //
     // scan each NtXxx export in WIN32U
@@ -237,8 +227,8 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         #define IS_PROC_NAME(ln,nm) (name_len == ln && memcmp(name, nm, ln) == 0)
 
-        if (!ignore_hook_blacklist)
-        if (    IS_PROC_NAME(18, "UserCreateWindowEx")
+        //if (!ignore_hook_blacklist)
+        /*if (    IS_PROC_NAME(18, "UserCreateWindowEx")
 
             ||  IS_PROC_NAME( 7, "GdiInit") // bsod
             ||  IS_PROC_NAME(12, "GdiInitSpool") // probably too
@@ -250,22 +240,14 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
             //DbgPrint("    Win32k Hook disabled for %s (blacklisted)\n", name);
             goto next_ntxxx;
-        }
+        }*/
 
         #define IS_PROC_PREFIX(ln,nm) (name_len >= ln && memcmp(name, nm, ln) == 0)
 
-        //
-        // Chrome and msedge need GdiDdDDI to be hooked in order for 
-        // the HW acceleration to work.
-        //
-
-        BOOLEAN install_hook = IS_PROC_PREFIX(8, "GdiDdDDI");
-
-        if (!Syscall_TestHookMap(name, name_len, &enabled_hooks, &disabled_hooks, install_hook)) {
-            //DbgPrint("    Win32k Hook disabled for %s\n", name);
+        if (!IS_PROC_PREFIX(8, "GdiDdDDI")
+         /*&& !IS_PROC_NAME(16, "UserSetCursorPos")*/) {
             goto next_ntxxx;
         }
-        //DbgPrint("    Win32k Hook enabled for %s\n", name);
 
         //
         // analyze each NtXxx export to find the service index number
@@ -304,6 +286,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
         if (! ntos_addr) {
             Syscall_ErrorForAsciiName(name);
             goto next_ntxxx;
+            //Syscall_MaxIndex32 = 0;
             //goto finish;   
         }
 
@@ -315,8 +298,10 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         entry_len = sizeof(SYSCALL_ENTRY) + name_len + 1;
         entry = Mem_AllocEx(Driver_Pool, entry_len, TRUE);
-        if (!entry)
+        if (!entry) {
+            Syscall_MaxIndex32 = 0;
             goto finish;
+        }
 
         entry->syscall_index = (USHORT)syscall_index;
         entry->param_count = (USHORT)param_count;
@@ -344,8 +329,6 @@ next_ntxxx:
 
     }
 
-    success = TRUE;
-
     //DbgPrint("Found %d win32 SysCalls\n", Syscall_MaxIndex32);
 
     //
@@ -354,26 +337,20 @@ next_ntxxx:
 
     if (Syscall_MaxIndex32 < 100) {
         Log_Msg1(MSG_1113, L"100");
-        success = FALSE;
+        Syscall_MaxIndex32 = 0;
     }
 
     if (Syscall_MaxIndex32 >= 2000) {
         Log_Msg1(MSG_1113, L"2000");
-        success = FALSE;
+        Syscall_MaxIndex32 = 0;
     }
 
 finish:
 
-    if(!success)
-        Syscall_MaxIndex32 = 0;
-
-    Syscall_FreeHookMap(&enabled_hooks);
-    Syscall_FreeHookMap(&disabled_hooks);
-
     if (table_copy)
         Mem_Free(table_copy, ShadowTable->Limit * sizeof(long));
 
-    return success;
+    return Syscall_MaxIndex32 != 0;
 }
 
 
@@ -456,7 +433,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     if (! entry)
         return STATUS_INVALID_SYSTEM_SERVICE;
 
-    //DbgPrint("[syscall] request %s\n", entry->name);
+    DbgPrint("[syscall] request %s\n", entry->name);
 
     // DbgPrint("[syscall] request p=%06d t=%06d - BEGIN %s\n", PsGetCurrentProcessId(), PsGetCurrentThreadId(), entry->name);
 

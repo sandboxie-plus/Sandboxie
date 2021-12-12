@@ -7,8 +7,8 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe the problem**
+A clear and concise description of what the problem is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -30,9 +30,10 @@ A clear and concise description of what you expected to happen.
  - Please mention in which version this bug got introduced, because it acts as a guide for testers and developers.
  - Please mention any security software running in the background, even if the real-time protection is disabled.
 
-**If you have a compatibility issue**
- - Please add a reference link to the program not working properly in Sandboxie.
+**If you had a compatibility issue or a crash**
+ - Please add a download link to the program not working properly in Sandboxie.
  - Please consider to take a log and make it available for analysis: https://git.io/Jwj2y
+ - Please attach the actual memory dump and NOT the simple output, which often turns out to be insufficient for a proper analysis.
 
 **Additional context**
 Add any other context about the problem here.

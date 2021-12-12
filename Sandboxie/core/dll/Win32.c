@@ -307,7 +307,7 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
 
 #ifndef WOW64_EXPERIMEN
     // ToDo: add no WoW64 support
-    if (! Dll_IsWow64)
+    if (Dll_IsWow64)
         return TRUE;
 #endif
 

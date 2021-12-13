@@ -238,7 +238,7 @@ SBIE1314 Blocage de la demande pour modifier les paramètres du pare-feu/réseau
 # SBIE1315 Probablement en raison d'un conflit avec le logiciel : %2
 # .
 
-316;pop;inf;01
+1316;pop;inf;01
 SBIE1316 Requête bloquée afin de générer un évènement d'appareil (Device) dans le Bac à sable
 .
 

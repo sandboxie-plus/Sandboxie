@@ -3332,7 +3332,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation>Использовать платформу фильтрации Windows для ограничения доступа к сети (экспериментально)</translation>
+        <translation type="vanished">Использовать платформу фильтрации Windows для ограничения доступа к сети (экспериментально)</translation>
     </message>
     <message>
         <source>Program Control</source>
@@ -3384,6 +3384,14 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>Activate Kernel Mode Object Filtering (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Windows Filtering Platform to restrict network access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -499,7 +499,7 @@ NTSTATUS Stream_Read_Wchar(
             wchar_t lowShort = (wchar_t)(cur_byte & 0x3F);
 
             //Create the UTF-16 code unit, then increment the iterator
-            int unicode = (highShort << 8) | lowShort;
+            int unicode = (highShort << 6) | lowShort;
 
             //Check to make sure the "unicode" is in the range [0..D7FF] and [E000..FFFF].
             if ((0 <= unicode && unicode <= 0xD7FF) || (0xE000 <= unicode && unicode <= 0xFFFF)) {

@@ -330,6 +330,23 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
 
 
 //---------------------------------------------------------------------------
+// Config_FreePatternList
+//---------------------------------------------------------------------------
+
+_FX VOID Config_FreePatternList(LIST *list)
+{
+    PATTERN* pat;
+    while (1) {
+        pat = List_Head(list);
+        if (! pat)
+            break;
+        List_Remove(list, pat);
+        Pattern_Free(pat);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // SbieDll_GetSettingsForName
 //---------------------------------------------------------------------------
 

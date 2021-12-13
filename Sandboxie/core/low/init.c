@@ -234,10 +234,9 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
 }
 #endif
 
-_FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
+_FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
 {
-    UCHAR *SystemServiceAsm, *ZwXxxPtr;
-    ULONG *SyscallPtr;
+    UCHAR *SystemServiceAsm;
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
@@ -245,7 +244,6 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     const ULONG OFFSET_ULONG_PTR =
 #ifdef _WIN64
     2;  // on 64-bit Windows, "mov rax, 0" instruction is two bytes
-    ULONGLONG *chrome64Target = NULL;
 #else
     1;  // on 32-bit Windows, "mov edx, 0" instruction is one byte
 #endif
@@ -254,7 +252,6 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     // modify our assembly SystemService entry stub (in entry.asm)
     // to include the data area pointer
     //
-
 
     SystemServiceAsm = (UCHAR *)SystemService;
     RegionBase = (void *)(SystemServiceAsm + OFFSET_ULONG_PTR);
@@ -269,6 +266,23 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     SBIELOW_CALL(NtProtectVirtualMemory)(
         NtCurrentProcess(), &RegionBase, &RegionSize,
         OldProtect, &OldProtect);
+
+    data->pSystemService = (ULONG64)SystemServiceAsm;
+}
+
+_FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
+{
+    UCHAR *SystemServiceAsm, *ZwXxxPtr;
+    ULONG *SyscallPtr;
+    ULONG SyscallNum;
+    void *RegionBase;
+    SIZE_T RegionSize;
+    ULONG OldProtect;
+#ifdef _WIN64
+    ULONGLONG *chrome64Target = NULL;
+#endif
+
+    SystemServiceAsm = (UCHAR *)SystemService;
 
     //
     // our syscall data area describes the ZwXxx functions in ntdll,
@@ -340,7 +354,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         RegionBase = ZwXxxPtr;
 
 #ifdef _WIN64
-        RegionSize = 12;
+        RegionSize = 14;
         if (!chrome64Target) {
             chrome64Target = (ULONG_PTR*)ZwXxxPtr;
         }
@@ -357,7 +371,11 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         // and then restore the original page protection
         //
 
+        SyscallNum = SyscallPtr[0];
+
 #ifdef _WIN64
+        SyscallNum &= 0xFFFF; // clear the not needed param count
+
         if (chrome64Target && data->Sbie64bitJumpTable) {
             RegionSize = 16;
             ZwXxxPtr = (UCHAR *)chrome64Target;
@@ -367,14 +385,14 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
                 NtCurrentProcess(), &RegionBase, &RegionSize,
                 PAGE_EXECUTE_READWRITE, &OldProtect);
 
-            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallPtr[0] & 0x3ff];
+            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallNum & 0x3ff];
             // write new patch for jump table
             // The jTable is now injected in the same memory module with lowlevel; no need for a 64 bit long jump
-            // mov r10, <4 byte SyscallPtr[0]>
+            // mov r10, <4 byte SyscallNum>
             jTableTarget[0] = 0x49;
             jTableTarget[1] = 0xc7;
             jTableTarget[2] = 0xc2;
-            *(ULONG *)&jTableTarget[3] = SyscallPtr[0];
+            *(ULONG *)&jTableTarget[3] = SyscallNum;
             // jmp <4 byte SystemServiceAsm>
             if (data->flags.is_win10) {
                 jTableTarget[7] = 0x48;
@@ -423,7 +441,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             ZwXxxPtr[0] = 0x49;                 // mov r10, SyscallNumber
             ZwXxxPtr[1] = 0xC7;
             ZwXxxPtr[2] = 0xC2;
-            *(ULONG *)&ZwXxxPtr[3] = SyscallPtr[0];
+            *(ULONG *)&ZwXxxPtr[3] = SyscallNum;
             if (!data->flags.long_diff) {
 
                 if (data->flags.is_win10) {
@@ -450,7 +468,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             PAGE_EXECUTE_READWRITE, &OldProtect);
 
         ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber
-        *(ULONG *)&ZwXxxPtr[1] = SyscallPtr[0];
+        *(ULONG *)&ZwXxxPtr[1] = SyscallNum;
         ZwXxxPtr[5] = 0xE9;                 // jmp SystemServiceAsm
         *(ULONG *)&ZwXxxPtr[6] =
             (ULONG)(ULONG_PTR)(SystemServiceAsm - (ZwXxxPtr + 10));
@@ -564,12 +582,13 @@ _FX ULONG_PTR EntrypointC(SBIELOW_DATA *data,void *ActivationContext, void *Syst
 
         // WaitForDebugger(data);
 
-        data->pSystemService = (ULONG64)SystemService;
-
+        PrepSyscalls(data, SystemService);
 		if(!data->flags.bHostInject && !data->flags.bNoSysHooks)
 			InitSyscalls(data, SystemService);
+
 #ifdef _WIN64
 		InitInject(data, ActivationContext, ActivationContext64);
+
 		if (!data->flags.bNoConsole)
 			InitConsole(data);
 #else

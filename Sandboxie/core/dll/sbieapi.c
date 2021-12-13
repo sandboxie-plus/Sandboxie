@@ -1659,17 +1659,22 @@ _FX LONG SbieApi_ProcessExemptionControl(
 // SbieDll_GetSysFunction
 //---------------------------------------------------------------------------
 
+extern HANDLE                       SbieApi_DeviceHandle;
 extern P_NtCreateFile               __sys_NtCreateFile;
 extern P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile;
 extern P_NtOpenKey                  __sys_NtOpenKey;
 extern P_NtEnumerateValueKey        __sys_NtEnumerateValueKey;
+extern P_NtDeviceIoControlFile      __sys_NtDeviceIoControlFile;
+
 
 void* SbieDll_GetSysFunction(const WCHAR* name)
 {
+    if (name == NULL)                                       return SbieApi_DeviceHandle;
     if (_wcsicmp(name, L"NtCreateFile") == 0)               return __sys_NtCreateFile;
     if (_wcsicmp(name, L"NtQueryDirectoryFile") == 0)       return __sys_NtQueryDirectoryFile;
     if (_wcsicmp(name, L"NtOpenKey") == 0)                  return __sys_NtOpenKey;
     if (_wcsicmp(name, L"NtEnumerateValueKey") == 0)        return __sys_NtEnumerateValueKey;
+    if (_wcsicmp(name, L"NtDeviceIoControlFile") == 0)      return __sys_NtDeviceIoControlFile;
     return NULL;
 }
 

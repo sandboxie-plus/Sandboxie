@@ -208,6 +208,9 @@
     <ClCompile Include="cred.c">
       <Filter>pst</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\wow64ext\wow64ext.cpp">
+      <Filter>common\wow64ext</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
@@ -283,6 +286,15 @@
     <ClInclude Include="..\..\common\win32_ntddk.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\wow64ext\CMemPtr.h">
+      <Filter>common\wow64ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\wow64ext\internal.h">
+      <Filter>common\wow64ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\wow64ext\wow64ext.h">
+      <Filter>common\wow64ext</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -337,6 +349,9 @@
     </Filter>
     <Filter Include="net">
       <UniqueIdentifier>{bbd6a003-d74d-405a-bd10-e2fea62301f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\wow64ext">
+      <UniqueIdentifier>{c6a9654a-9f55-43ca-9cd1-7571bb879288}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

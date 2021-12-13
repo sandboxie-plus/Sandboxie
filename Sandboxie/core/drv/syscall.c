@@ -30,7 +30,7 @@
 #include "util.h"
 #include "session.h"
 #include "conf.h"
-
+#include "common/pattern.h"
 
 
 //---------------------------------------------------------------------------
@@ -101,6 +101,7 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_GetServiceTable)
 #endif // ALLOC_PRAGMA
 
+#include "syscall_util.c"
 
 #ifdef HOOK_WIN32K
 #include "syscall_win32.c"
@@ -321,11 +322,14 @@ _FX BOOLEAN Syscall_Init_List(void)
             ||  IS_PROC_NAME(18, "TerminateJobObject")
             ||  IS_PROC_NAME(16, "TerminateProcess")
             ||  IS_PROC_NAME(15, "TerminateThread")
-            ||  IS_PROC_NAME(14, "YieldExecution")            // ICD-10607 - McAfee uses it to pass its own data in the stack. The call is not important to us. 
 
                                                             ) {
             goto next_zwxxx;
         }
+
+        // ICD-10607 - McAfee uses it to pass its own data in the stack. The call is not important to us. 
+        if (    IS_PROC_NAME(14, "YieldExecution"))
+            goto next_zwxxx;
 
         //
         // the Google Chrome "wow_helper" process expects NtMapViewOfSection
@@ -784,6 +788,8 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     }
 #endif
 
+    syscall_index = (syscall_index & 0xFFF);
+
     //DbgPrint("[syscall] request for service %d / %08X\n", syscall_index, syscall_index);
 
     if (Syscall_Table && (syscall_index <= Syscall_MaxIndex))
@@ -1036,6 +1042,8 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     }
 #endif
 
+    BOOLEAN add_names = parms[3] != 0;
+
     //
     // caller must be our service process
     //
@@ -1050,7 +1058,7 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     buf_len = sizeof(ULONG)         // size of buffer
             + sizeof(ULONG)         // offset to extra data (for SbieSvc)
             + (32 * 4)              // saved code from ntdll
-            + List_Count(&Syscall_List) * sizeof(ULONG) * 2
+            + List_Count(&Syscall_List) * ((sizeof(ULONG) * 2) + (add_names ? 64 : 0))
             + sizeof(ULONG) * 2     // final terminator entry
             ;
 
@@ -1093,6 +1101,11 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
         ++ptr;
         *ptr = entry->ntdll_offset;
         ++ptr;
+        if (add_names) {
+            memcpy(ptr, entry->name, entry->name_len);
+            ((char*)ptr)[entry->name_len] = 0;
+            ptr += 16; // 16 * sizeog(ULONG) = 64
+        }
 
         entry = List_Next(entry);
     }

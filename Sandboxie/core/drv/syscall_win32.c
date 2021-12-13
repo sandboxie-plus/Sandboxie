@@ -475,6 +475,10 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
     // todo: call KiConvertToGuiThread() or PsConvertToGuiThread()
 
+    // note: once this is implemented the below check with MmIsAddressValid will be obsolete
+
+
+
     //
     // if we have a handler for this service, invoke it
     //
@@ -522,6 +526,11 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
             status = entry->handler1_func(proc, entry, user_args);
 
         } else {
+
+            //
+            // we must validate the address as an application without being switched to
+            // gui mode could still issue a syscall to a win32k and cause a BSOD otherwise
+            //
 
             if (MmIsAddressValid(entry->ntos_func)) {
 
@@ -627,10 +636,10 @@ _FX NTSTATUS Syscall_Api_Query32(PROCESS *proc, ULONG64 *parms)
     while (entry) {
 
         ULONG syscall_index = (ULONG)entry->syscall_index | 0x1000;
-//#ifndef _WIN64
+#ifndef _WIN64
         ULONG param_count = (ULONG)entry->param_count;
         syscall_index |= (param_count * 4) << 24;
-//#endif ! _WIN64
+#endif ! _WIN64
 
         *ptr = syscall_index;
         ++ptr;

@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.0.4 / 5.55.4] - 2021-12-xx
+
+### Changed
+- mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64
+
+
+
+
 ## [1.0.3 / 5.55.3] - 2021-12-12
 
 ### Added

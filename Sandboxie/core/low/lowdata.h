@@ -88,11 +88,13 @@ typedef struct _SBIELOW_DATA {
     __declspec(align(16))
         UCHAR   NtProtectVirtualMemory_code[32];
     ULONG64 RealNtDeviceIoControlFile;
+
+    ULONG64     pSystemService;
+
 #ifdef _WIN64
     SBIELOW_J_TABLE * Sbie64bitJumpTable;
 	ULONG64     ntdll_wow64_base;
 #endif
-    ULONG64     pSystemService;
 } SBIELOW_DATA;
 
 

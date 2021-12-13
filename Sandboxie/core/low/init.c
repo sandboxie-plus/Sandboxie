@@ -234,11 +234,9 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
 }
 #endif
 
-_FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
+_FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
 {
-    UCHAR *SystemServiceAsm, *ZwXxxPtr;
-    ULONG *SyscallPtr;
-    ULONG SyscallNum;
+    UCHAR *SystemServiceAsm;
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
@@ -246,7 +244,6 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     const ULONG OFFSET_ULONG_PTR =
 #ifdef _WIN64
     2;  // on 64-bit Windows, "mov rax, 0" instruction is two bytes
-    ULONGLONG *chrome64Target = NULL;
 #else
     1;  // on 32-bit Windows, "mov edx, 0" instruction is one byte
 #endif
@@ -255,7 +252,6 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     // modify our assembly SystemService entry stub (in entry.asm)
     // to include the data area pointer
     //
-
 
     SystemServiceAsm = (UCHAR *)SystemService;
     RegionBase = (void *)(SystemServiceAsm + OFFSET_ULONG_PTR);
@@ -270,6 +266,23 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     SBIELOW_CALL(NtProtectVirtualMemory)(
         NtCurrentProcess(), &RegionBase, &RegionSize,
         OldProtect, &OldProtect);
+
+    data->pSystemService = (ULONG64)SystemServiceAsm;
+}
+
+_FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
+{
+    UCHAR *SystemServiceAsm, *ZwXxxPtr;
+    ULONG *SyscallPtr;
+    ULONG SyscallNum;
+    void *RegionBase;
+    SIZE_T RegionSize;
+    ULONG OldProtect;
+#ifdef _WIN64
+    ULONGLONG *chrome64Target = NULL;
+#endif
+
+    SystemServiceAsm = (UCHAR *)SystemService;
 
     //
     // our syscall data area describes the ZwXxx functions in ntdll,
@@ -341,7 +354,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         RegionBase = ZwXxxPtr;
 
 #ifdef _WIN64
-        RegionSize = 12;
+        RegionSize = 14;
         if (!chrome64Target) {
             chrome64Target = (ULONG_PTR*)ZwXxxPtr;
         }
@@ -569,12 +582,13 @@ _FX ULONG_PTR EntrypointC(SBIELOW_DATA *data,void *ActivationContext, void *Syst
 
         // WaitForDebugger(data);
 
-        data->pSystemService = (ULONG64)SystemService;
-
+        PrepSyscalls(data, SystemService);
 		if(!data->flags.bHostInject && !data->flags.bNoSysHooks)
 			InitSyscalls(data, SystemService);
+
 #ifdef _WIN64
 		InitInject(data, ActivationContext, ActivationContext64);
+
 		if (!data->flags.bNoConsole)
 			InitConsole(data);
 #else

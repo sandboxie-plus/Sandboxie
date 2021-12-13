@@ -1092,10 +1092,10 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     while (entry) {
 
         ULONG syscall_index = (ULONG)entry->syscall_index;
-//#ifndef _WIN64
+#ifndef _WIN64
         ULONG param_count = (ULONG)entry->param_count;
         syscall_index |= (param_count * 4) << 24;
-//#endif ! _WIN64
+#endif ! _WIN64
 
         *ptr = syscall_index;
         ++ptr;

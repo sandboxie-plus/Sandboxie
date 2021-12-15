@@ -450,7 +450,7 @@ skip_e9_rewrite: ;
     diff = (UCHAR *)DetourFunc - (func + 5);
     func[0] = 0xE9;             // JMP DetourFunc
     *(ULONG *)(&func[1]) = (ULONG)diff;
-	UsedCount = 1 + 4;
+	//UsedCount = 1 + 4;
 #endif
 
 	// just in case nop out the rest of the code we moved to the trampoline

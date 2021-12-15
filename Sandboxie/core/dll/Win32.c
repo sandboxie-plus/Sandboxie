@@ -25,15 +25,17 @@
 
 #include "common\pattern.h"
 
-#define HOOK_WIN32K
-
-#ifdef HOOK_WIN32K
-
 #include "core/drv/api_defs.h"
 #include "core/low/lowdata.h"
 
 SBIELOW_DATA* SbieApi_data = NULL;
 #define SBIELOW_CALL(x) ((P_##x)&data->x##_code)
+
+
+//---------------------------------------------------------------------------
+// SbieDll_HookWin32SysCalls
+//---------------------------------------------------------------------------
+
 
 _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
 {
@@ -102,7 +104,6 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
         SyscallNum = SyscallPtr[0];
 
 #ifdef _WIN64
-        SyscallNum &= 0xFFFF;   // clear the not needed param count
 
         ZwXxxPtr[0] = 0x49;                     // mov r10, SyscallNumber
         ZwXxxPtr[1] = 0xC7;
@@ -112,7 +113,7 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
 
             if (data->flags.is_win10) {
                 ZwXxxPtr[7] = 0x48;             // jmp SystemServiceAsm
-                ZwXxxPtr[8] = 0xE9;             // jmp SystemServiceAsm
+                ZwXxxPtr[8] = 0xE9;
                 *(ULONG *)&ZwXxxPtr[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (ZwXxxPtr + 13));
             }
             else {
@@ -129,7 +130,7 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
         
 #else ! _WIN64
 
-        ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber
+        ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber, with param count in the highest byte
         *(ULONG *)&ZwXxxPtr[1] = SyscallNum;
         ZwXxxPtr[5] = 0xE9;                 // jmp SystemServiceAsm
         *(ULONG *)&ZwXxxPtr[6] =
@@ -148,72 +149,12 @@ _FX BOOLEAN SbieDll_HookWin32SysCalls(HMODULE win32u_base)
     return TRUE;
 }
 
-#ifndef _WIN64
 
-BOOLEAN SbieDll_HookWoW64SysCalls();
-
-#endif
-
-#endif
-
-_FX BOOLEAN Win32_Init(HMODULE hmodule)
-{
-#ifdef HOOK_WIN32K
-	// In Windows 10 all Win32k.sys calls are located in win32u.dll
-    if (Dll_OsBuild < 10041 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", FALSE))
-        return TRUE; // just return on older builds
-
-    // NoSysCallHooks BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
-        return TRUE;
-    // NoSysCallHooks END
-
-    // disable Electron Workaround when we are ready to hook the required win32k syscalls
-    extern BOOL Dll_ElectronWorkaround;
-    Dll_ElectronWorkaround = FALSE; 
-
-    //
-    // chrome needs for a working GPU acceleration the GdiDdDDI* win32k syscalls to have the right user token
-    //
-
-    WCHAR* cmdline = GetCommandLine();
-
-    if ((wcsstr(cmdline, L"--type=gpu-process") != NULL && wcsstr(cmdline, L"--gpu-preferences=") != NULL)
-     || SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"AlwaysUseWin32kHooks", FALSE)) {
+//---------------------------------------------------------------------------
+// Win32_WoW64_GetSysCallNumber
+//---------------------------------------------------------------------------
 
 #ifndef _WIN64
-        if (Dll_IsWow64) 
-            SbieDll_HookWoW64SysCalls();
-        else 
-#endif
-            SbieDll_HookWin32SysCalls(hmodule);
-    }
-
-#endif
-
-	return TRUE;
-}
-
-#ifdef HOOK_WIN32K
-
-#ifndef _WIN64
-
-//#include "../../common/wow64ext/wow64ext.h"
-DWORD64 __cdecl X64Call(DWORD64 func, int argC, ...);
-DWORD64 __cdecl GetModuleHandle64(const wchar_t* lpModuleName);
-DWORD64 __cdecl getNTDLL64();
-DWORD64 __cdecl GetProcAddress64(DWORD64 hModule, const char* funcName);
-SIZE_T __cdecl VirtualQueryEx64(HANDLE hProcess, DWORD64 lpAddress, MEMORY_BASIC_INFORMATION64* lpBuffer, SIZE_T dwLength);
-DWORD64 __cdecl VirtualAllocEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect);
-BOOL __cdecl VirtualFreeEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE_T dwSize, DWORD dwFreeType);
-BOOL __cdecl VirtualProtectEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE_T dwSize, DWORD flNewProtect, DWORD* lpflOldProtect);
-BOOL __cdecl ReadProcessMemory64(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOID lpBuffer, SIZE_T nSize, SIZE_T *lpNumberOfBytesRead);
-BOOL __cdecl WriteProcessMemory64(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOID lpBuffer, SIZE_T nSize, SIZE_T *lpNumberOfBytesWritten);
-//BOOL __cdecl GetThreadContext64(HANDLE hThread, _CONTEXT64_2* lpContext);
-//BOOL __cdecl SetThreadContext64(HANDLE hThread, _CONTEXT64_2* lpContext);
-VOID __cdecl SetLastErrorFromX64Call(DWORD64 status);
-
-
 ULONG Win32_WoW64_GetSysCallNumber(DWORD64 pos, UCHAR* dll_data)
 {
     // 4C 8B D1 - r10,rcx
@@ -247,13 +188,52 @@ ULONG Win32_WoW64_GetSysCallNumber(DWORD64 pos, UCHAR* dll_data)
     if (!(dll_data[pos + 23] == 0xc3))
         return 0;
 
-    // 0F 1F 84 00 00 00 00 00
     //
 
     return syscall_index;
 }
 
-_FX BOOLEAN SbieDll_HookWoW64SysCalls()
+
+//---------------------------------------------------------------------------
+// SbieDll_HasSysCallHook
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_HasSysCallHook(UCHAR* syscall_data, ULONG syscall_index)
+{
+    ULONG *SyscallPtr;
+    ULONG SyscallNum;
+
+    SyscallPtr = (ULONG *)(syscall_data + sizeof(ULONG)); // size of buffer
+
+    while (SyscallPtr[0] || SyscallPtr[1]) {
+            
+        SyscallNum = SyscallPtr[0];
+            
+        SyscallNum &= 0xFFFF; // clear the not needed param count
+            
+        if (SyscallNum == syscall_index)
+            return TRUE;
+
+        SyscallPtr += 2;
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_HookWin32WoW64
+//---------------------------------------------------------------------------
+
+//#include "../../common/wow64ext/wow64ext.h"
+DWORD64 __cdecl X64Call(DWORD64 func, int argC, ...);
+DWORD64 __cdecl GetModuleHandle64(const wchar_t* lpModuleName);
+BOOL __cdecl VirtualProtectEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE_T dwSize, DWORD flNewProtect, DWORD* lpflOldProtect);
+BOOL __cdecl ReadProcessMemory64(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOID lpBuffer, SIZE_T nSize, SIZE_T *lpNumberOfBytesRead);
+BOOL __cdecl WriteProcessMemory64(HANDLE hProcess, DWORD64 lpBaseAddress, LPVOID lpBuffer, SIZE_T nSize, SIZE_T *lpNumberOfBytesWritten);
+
+_FX BOOLEAN SbieDll_HookWin32WoW64()
 {
     BOOLEAN ok = FALSE;
     UCHAR* dll_data = NULL;
@@ -261,20 +241,28 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls()
 
     DWORD64 BaseAddress = GetModuleHandle64(L"wow64win.dll");
     SIZE_T SizeOfImage = 0x00100000; // 1 MB should be more than enough
-    if (!BaseAddress)
+    if (!BaseAddress) {
+        SbieApi_Log(2303, L"win32k, wow64win.dll base not found");
         return FALSE;
+    }
 
     HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE,  GetCurrentProcessId());
-    if (hProcess == INVALID_HANDLE_VALUE)
+    if (hProcess == INVALID_HANDLE_VALUE) {
+        SbieApi_Log(2303, L"win32k, can't open process");
         return FALSE;
+    }
 
     dll_data = (UCHAR *)HeapAlloc(GetProcessHeap(), 0, (SIZE_T)SizeOfImage);
-    if (!dll_data)
+    if (!dll_data) {
+        SbieApi_Log(2303, L"win32k, alloc failed (1)");
         goto finish;
+    }
 
     SIZE_T SizeRead;
-    if (!ReadProcessMemory64(hProcess, (PVOID64)BaseAddress, dll_data, SizeOfImage, &SizeRead))
+    if (!ReadProcessMemory64(hProcess, (PVOID64)BaseAddress, dll_data, SizeOfImage, &SizeRead)) {
+        SbieApi_Log(2303, L"win32k, wow64win.dll read failed");
         goto finish;
+    }
 
     DWORD64 FuncTable = 0;
 
@@ -284,13 +272,14 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls()
             break;
         }
     }
-
-    if (FuncTable == 0)
+    
+    if (FuncTable == 0) {
+        SbieApi_Log(2303, L"win32k, wow64win.dll sys call table not found");
         goto finish;
+    }
 
     DWORD64 SystemServiceAsm;
     UCHAR ZwXxxPtr[16];
-    ULONG *SyscallPtr;
     ULONG SyscallNum;
     DWORD64 RegionBase;
     SIZE_T RegionSize;
@@ -300,79 +289,73 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls()
     SystemServiceAsm = data->pSystemService;
 
 	syscall_data = (UCHAR *)HeapAlloc(GetProcessHeap(), 0, 16384); // enough room for over 2000 syscalls
-	if (!syscall_data)
-		goto finish;
+    if (!syscall_data) {
+        SbieApi_Log(2303, L"win32k, alloc failed (2)");
+        goto finish;
+    }
 
     if (!NT_SUCCESS(SbieApi_Call(API_QUERY_SYSCALLS, 2, (ULONG_PTR)syscall_data, 1))) {
-        HeapFree(GetProcessHeap(), 0, syscall_data);
+        SbieApi_Log(2303, L"win32k, syscall query failed");
         goto finish;
     }
 
     for (DWORD64 pos = FuncTable; pos < SizeRead - 0x20; ) 
     {
-        ULONG syscall_index = Win32_WoW64_GetSysCallNumber(pos, dll_data);
-        if (syscall_index) 
+        SyscallNum = Win32_WoW64_GetSysCallNumber(pos, dll_data);
+        if (SyscallNum) 
         {
-            SyscallPtr = (ULONG *)(syscall_data + sizeof(ULONG));         // size of buffer
+            if(SbieDll_HasSysCallHook(syscall_data, SyscallNum))
+            {
+                RegionBase = BaseAddress + pos;
+                RegionSize = 14;
+                
+                //
+                // prepare call to call our SystemServiceAsm
+                //
 
-            while (SyscallPtr[0] || SyscallPtr[1]) {
-            
-                SyscallNum = SyscallPtr[0];
-            
-                SyscallNum &= 0xFFFF;   // clear the not needed param count
-            
-                if (SyscallNum == syscall_index){
-            
-                    RegionBase = BaseAddress + pos;
-                    // _WIN64
-                    RegionSize = 14;
-                    // ! _WIN64
+                ZwXxxPtr[0] = 0x49;                     // mov r10, SyscallNumber
+                ZwXxxPtr[1] = 0xC7;
+                ZwXxxPtr[2] = 0xC2;
+                *(ULONG *)&ZwXxxPtr[3] = SyscallNum;
+                if (!data->flags.long_diff) {
 
-                    if (!ReadProcessMemory64(hProcess, RegionBase, ZwXxxPtr, RegionSize, &SizeRead))
-                        goto finish;
-
-                    //
-                    // overwrite the ZwXxx export to call our SystemServiceAsm,
-                    // and then restore the original page protection
-                    //
-
-                    // _WIN64
-                    ZwXxxPtr[0] = 0x49;                     // mov r10, SyscallNumber
-                    ZwXxxPtr[1] = 0xC7;
-                    ZwXxxPtr[2] = 0xC2;
-                    *(ULONG *)&ZwXxxPtr[3] = SyscallNum;
-                    if (!data->flags.long_diff) {
-
-                        if (data->flags.is_win10) {
-                            ZwXxxPtr[7] = 0x48;             // jmp SystemServiceAsm
-                            ZwXxxPtr[8] = 0xE9;             // jmp SystemServiceAsm
-                            *(ULONG *)&ZwXxxPtr[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (RegionBase + 13));
-                        }
-                        else {
-                            ZwXxxPtr[7] = 0xe9;             // jmp SystemServiceAsm
-                            *(ULONG *)&ZwXxxPtr[8] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (RegionBase + 12));
-                        }
+                    if (data->flags.is_win10) {
+                        ZwXxxPtr[7] = 0x48;             // jmp SystemServiceAsm
+                        ZwXxxPtr[8] = 0xE9;
+                        *(ULONG *)&ZwXxxPtr[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (RegionBase + 13));
                     }
                     else {
-
-                        ZwXxxPtr[7] = 0xB8;                 // mov eax, SystemServiceAsm
-                        *(ULONG *)&ZwXxxPtr[8] = (ULONG)(ULONG_PTR)SystemServiceAsm;
-                        *(USHORT *)&ZwXxxPtr[12] = 0xE0FF;  // jmp rax
+                        ZwXxxPtr[7] = 0xe9;             // jmp SystemServiceAsm
+                        *(ULONG *)&ZwXxxPtr[8] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (RegionBase + 12));
                     }
-                    // ! _WIN64
+                }
+                else {
 
-
-                    if (!VirtualProtectEx64(hProcess, RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &OldProtect))
-                        goto finish;
-
-                    if (!WriteProcessMemory64(hProcess, RegionBase, ZwXxxPtr, RegionSize, &SizeRead))
-                        goto finish;
-
-                    if (!VirtualProtectEx64(hProcess, RegionBase, RegionSize, OldProtect, &OldProtect))
-                        goto finish;
+                    ZwXxxPtr[7] = 0xB8;                 // mov eax, SystemServiceAsm
+                    *(ULONG *)&ZwXxxPtr[8] = (ULONG)(ULONG_PTR)SystemServiceAsm;
+                    *(USHORT *)&ZwXxxPtr[12] = 0xE0FF;  // jmp rax
                 }
                 
-                SyscallPtr += 2;
+
+                //
+                // overwrite the ZwXxx export to call our SystemServiceAsm,
+                // and then restore the original page protection
+                //
+
+                if (!VirtualProtectEx64(hProcess, RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &OldProtect)) {
+                    SbieApi_Log(2303, L"win32k %d (1)", SyscallNum);
+                    goto finish;
+                }
+
+                if (!WriteProcessMemory64(hProcess, RegionBase, ZwXxxPtr, RegionSize, &SizeRead)) {
+                    SbieApi_Log(2303, L"win32k %d (2)", SyscallNum);
+                    goto finish;
+                }
+
+                if (!VirtualProtectEx64(hProcess, RegionBase, RegionSize, OldProtect, &OldProtect)) {
+                    SbieApi_Log(2303, L"win32k %d (3)", SyscallNum);
+                    goto finish;
+                }
             }
 
             pos += 0x20;
@@ -384,7 +367,6 @@ _FX BOOLEAN SbieDll_HookWoW64SysCalls()
         else
             pos++;
     }
-
 
 finish:
     
@@ -398,7 +380,44 @@ finish:
 
     return ok;
 }
-
 #endif
 
+//---------------------------------------------------------------------------
+// Win32_Init
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Win32_Init(HMODULE hmodule)
+{
+	// In Windows 10 all Win32k.sys calls are located in win32u.dll
+    if (Dll_OsBuild < 10041 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", FALSE))
+        return TRUE; // just return on older builds
+
+    // NoSysCallHooks BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+        return TRUE;
+    // NoSysCallHooks END
+
+    // disable Electron Workaround when we are ready to hook the required win32k syscalls
+    extern BOOL Dll_ElectronWorkaround;
+    Dll_ElectronWorkaround = FALSE; 
+
+    //
+    // chrome needs for a working GPU acceleration the GdiDdDDI* win32k syscalls to have the right user token
+    //
+
+    WCHAR* cmdline = GetCommandLine();
+
+    if ((wcsstr(cmdline, L"--type=gpu-process") != NULL && wcsstr(cmdline, L"--gpu-preferences=") != NULL)
+     || SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"AlwaysUseWin32kHooks", FALSE)) {
+
+#ifndef _WIN64
+        if (Dll_IsWow64) 
+            SbieDll_HookWin32WoW64(); // WoW64 hooks
+        else 
 #endif
+            SbieDll_HookWin32SysCalls(hmodule); // Native x86/x64 hooks
+    }
+
+	return TRUE;
+}

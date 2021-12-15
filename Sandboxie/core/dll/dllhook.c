@@ -130,7 +130,7 @@ _FX void *SbieDll_Hook(
     // (this helps to co-exist with Cisco Security Agent)
     //
 
-    if (*(UCHAR *)SourceFunc == 0xEB) {
+    if (*(UCHAR *)SourceFunc == 0xEB) { // jmp xx;
         signed char offset = *((signed char *)SourceFunc + 1);
         SourceFunc = (UCHAR *)SourceFunc + offset + 2;
     }
@@ -142,7 +142,7 @@ _FX void *SbieDll_Hook(
     // otherwise (for 32-bit code) just replace the jump target
     //
 
-    while (*(UCHAR *)SourceFunc == 0xE9) {
+    while (*(UCHAR *)SourceFunc == 0xE9) { // jmp xx xx xx xx;
 
         diff = *(LONG *)((ULONG_PTR)SourceFunc + 1);
         target = (ULONG_PTR)SourceFunc + diff + 5;
@@ -192,15 +192,15 @@ skip_e9_rewrite: ;
     // can process it
     //
 
-    if (*(USHORT *)SourceFunc == 0xE990) {
+    if (*(USHORT *)SourceFunc == 0xE990) { // nop; jmp xx xx xx xx;
         diff = *(LONG *)((ULONG_PTR)SourceFunc + 2);
         target = (ULONG_PTR)SourceFunc + diff + 6;
-        if (*(USHORT *)target == 0x25FF)
+        if (*(USHORT *)target == 0x25FF) // jmp QWORD PTR [rip+xx xx xx xx];
             SourceFunc = (void *)target;
     }
 
 	//
-	// DX: this simplification fails for delay loaded libraries, see coments about SetSecurityInfo,
+	// DX: this simplification fails for delay loaded libraries, see comments about SetSecurityInfo,
 	// resulting in an endless loop, so just dont do that 
 	//
 
@@ -211,13 +211,13 @@ skip_e9_rewrite: ;
     // 12 bytes.
     //
 
-    if (*(UCHAR *)SourceFunc == 0x48 &&
-            *(USHORT *)((UCHAR *)SourceFunc + 1) == 0x25FF) {
-        // 4825FF is same as 25FF
+    if (*(UCHAR *)SourceFunc == 0x48 && // rex.W
+            *(USHORT *)((UCHAR *)SourceFunc + 1) == 0x25FF) { // jmp QWORD PTR [rip+xx xx xx xx];
+        // 48 FF 25 is same as FF 25
         SourceFunc = (UCHAR *)SourceFunc + 1;
     }
 
-    if (*(USHORT *)SourceFunc == 0x25FF) {
+    if (*(USHORT *)SourceFunc == 0x25FF) { // jmp QWORD PTR [rip+xx xx xx xx];
 
         void *orig_addr;
         /*
@@ -254,7 +254,7 @@ skip_e9_rewrite: ;
 
 #ifdef _WIN64
 
-    if (*(USHORT *)SourceFunc == 0x15FF) {
+    if (*(USHORT *)SourceFunc == 0x15FF) { // call QWORD PTR [rip+xx xx xx xx];
 
         //
         // the call instruction pushes a qword into the stack, we need
@@ -312,8 +312,8 @@ skip_e9_rewrite: ;
         return NULL;
     }
 
-	ULONG ByteCount = *(ULONG*)(tramp + 80);
-	ULONG UsedCount = 0;
+	//ULONG ByteCount = *(ULONG*)(tramp + 80);
+	//ULONG UsedCount = 0;
 	
     //
     // create the detour
@@ -351,21 +351,19 @@ skip_e9_rewrite: ;
         OutputDebugStringA(buffer);
         */
         if (Dll_Windows >= 10) {
-            func[0] = 0x48;             // 32bit relative JMP DetourFunc
-            func[1] = 0xE9;             // 32bit relative JMP DetourFunc
+            func[0] = 0x48;             // 32bit relative rex.W JMP DetourFunc
+            func[1] = 0xE9;
             *(ULONG *)(&func[2]) = (ULONG)diff;
-			UsedCount = 1 + 1 + 4;
+			//UsedCount = 1 + 1 + 4;
         }
         else {
             func[0] = 0xE9;             // 32bit relative JMP DetourFunc
             *(ULONG *)(&func[1]) = (ULONG)diff;
-			UsedCount = 1 + 4;
+			//UsedCount = 1 + 4;
         }
     }
 
     else {
-
-
 
         BOOLEAN hookset = FALSE;
         BOOLEAN defaultRange = FALSE;
@@ -377,12 +375,12 @@ skip_e9_rewrite: ;
             //default step size 
 
             for (i = 0; i < NUM_VTABLES && !hookset; i++, ptrVTable++) {
-                if (!ptrVTable->offset) {
+                if (!ptrVTable->offset) { // if the vtable is not yet initialized initialize it
                     ULONG_PTR tempAddr;
                     ULONG_PTR step = 0x20000;// + VTABLE_SIZE;
                     ULONG_PTR max_attempts = 0x4000000 / step;
-                    // optimization for windows 7 and low memory DLL's
 
+                    // optimization for windows 7 and low memory DLL's
                     if ((ULONG_PTR)func < 0x80000000 && ((ULONG_PTR)func > 0x4000000)) {
                         step = 0x200000;
                     }
@@ -414,7 +412,7 @@ skip_e9_rewrite: ;
                     ptrVTable->index = 0;
                     ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void *);
                 }
-                if (ptrVTable->offset) {
+                if (ptrVTable->offset) { // check if we have an nitialized vtable
                     target = (ULONG_PTR)&func[6];
                     diff = (ULONG_PTR) &((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
                     diff = diff - target;
@@ -424,14 +422,14 @@ skip_e9_rewrite: ;
                     // is DetourFunc in 32bit jump range
                     if (delta < 0x80000000 && ptrVTable->index <= ptrVTable->maxEntries) {
                         ((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index] = (ULONG_PTR)DetourFunc;
-                        *(USHORT *)&func[0] = 0x25ff;
+                        *(USHORT *)&func[0] = 0x25ff;       // jmp QWORD PTR [rip+diff];
                         *(ULONG *)&func[2] = (ULONG)diff;
-						UsedCount = 2 + 4;
+						//UsedCount = 2 + 4;
                         ptrVTable->index++;
                         hookset = TRUE;
                     }
                 }
-                else {
+                else { // fail and disable vtable if it could not be initialized
                     bVTableEable = FALSE;
                     SbieApi_Log(2303, _fmt1, SourceFuncName, 888);
                     LeaveCriticalSection(&VT_CriticalSection);
@@ -529,9 +527,10 @@ ULONGLONG * SbieDll_findChromeTarget(unsigned char* addr)
 
 _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
 {
-#ifndef _WIN64
-
+    if (!SourceFunc)
+        return NULL;
     UCHAR *func = (UCHAR *)SourceFunc;
+#ifndef _WIN64
     if (func[0] == 0xB8 &&                  // mov eax,?
         func[5] == 0xBA &&                  // mov edx,?
         *(USHORT *)&func[10] == 0xE2FF)     // jmp edx
@@ -551,10 +550,7 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
         }
     }
 #else if  
-    UCHAR *func = (UCHAR *)SourceFunc;
     ULONGLONG *chrome64Target = NULL;
-    if (!SourceFunc)
-        return NULL;
 
     if (func[0] == 0x50 &&	//push rax
         func[1] == 0x48 &&	//mov rax,?
@@ -576,7 +572,8 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
     }
     /*sboxie 64bit jtable hook signature */
         /* // use this to hook jtable location (useful for debugging)
-        else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
+        //else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
+        else if(func[0] == 0x90 && func[1] == 0x48 && func[2] == 0xb8 ) {
             long long addr;
             addr = (ULONG_PTR) *(ULONGLONG **)&func[3] ;
             SourceFunc = (void *) addr;

@@ -295,6 +295,9 @@
     <ClInclude Include="..\..\common\wow64ext\wow64ext.h">
       <Filter>common\wow64ext</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\my_version.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

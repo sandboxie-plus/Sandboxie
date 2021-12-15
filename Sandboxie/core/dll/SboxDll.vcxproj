@@ -406,6 +406,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\apps\com\common.h" />
     <ClInclude Include="..\..\common\map.h" />
+    <ClInclude Include="..\..\common\my_version.h" />
     <ClInclude Include="..\..\common\ntproto.h" />
     <ClInclude Include="..\..\common\str_util.h" />
     <ClInclude Include="..\..\common\my_wsa.h" />

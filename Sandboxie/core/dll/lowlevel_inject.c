@@ -55,7 +55,7 @@ typedef struct _MY_TARGETS {
 SBIEDLL_EXPORT  HANDLE SbieDll_InjectLow_SendHandle(HANDLE hProcess);
 
 SBIEDLL_EXPORT  void *SbieDll_InjectLow_CopyCode(
-	HANDLE hProcess, BOOLEAN iswow64, UCHAR *code, ULONG code_len);
+	HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_InjectLow_BuildTramp(
 	BOOLEAN long_diff, UCHAR *code, ULONG_PTR addr);
 SBIEDLL_EXPORT  void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess);
@@ -519,7 +519,16 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 		lowdata.flags.is_win10 = 1;
 	}
 
-	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowdata.flags.is_wow64 == 1, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp));
+	SIZE_T lowLevel_size;
+#ifdef _WIN64 
+	BOOLEAN use_jump_Table = FALSE;
+	if(use_jump_Table)
+		lowLevel_size = m_sbielow_len + sizeof(SBIELOW_J_TABLE) + 0x400;
+	else
+#endif
+		lowLevel_size = m_sbielow_len;
+
+	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowLevel_size, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp));
 	if (!remote_addr) {
 		errlvl = 0x33;
 		goto finish;
@@ -570,7 +579,8 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	//
 
 #ifdef _WIN64
-	lowdata.Sbie64bitJumpTable = (SBIELOW_J_TABLE *)((ULONG_PTR)remote_addr + m_sbielow_len + 0x400); //(0x400 - (m_sbielow_len & 0x3ff))+ m_sbielow_len;
+	if(use_jump_Table)
+		lowdata.Sbie64bitJumpTable = (SBIELOW_J_TABLE *)((ULONG_PTR)remote_addr + m_sbielow_len + 0x400); //(0x400 - (m_sbielow_len & 0x3ff))+ m_sbielow_len;
 #endif
 
 	//
@@ -693,16 +703,10 @@ _FX HANDLE SbieDll_InjectLow_SendHandle(HANDLE hProcess)
 //---------------------------------------------------------------------------
 
 
-_FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, BOOLEAN iswow64, UCHAR *code, ULONG code_len)
+_FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len)
 {
 	SIZE_T region_size;
-	SIZE_T lowLevel_size;
 	void *remote_addr = NULL;
-#ifdef _WIN64 
-	lowLevel_size = m_sbielow_len + sizeof(SBIELOW_J_TABLE) + 0x400;
-#else
-	lowLevel_size = m_sbielow_len;
-#endif
 	region_size = lowLevel_size;
 
 	//for (int i = 8; !remote_addr && i > 2; i--) {
@@ -1097,7 +1101,7 @@ _FX BOOLEAN SbieDll_InjectLow_WriteJump(HANDLE hProcess, void *remote_addr, BOOL
 	//
 	UCHAR jump_code[16];
 	void * detour = (void *)remote_addr;
-	UCHAR *func = (UCHAR *)((ULONG_PTR)m_LdrInitializeThunk);;
+	UCHAR *func = (UCHAR *)((ULONG_PTR)m_LdrInitializeThunk);
 	SIZE_T len1;
 	BOOL myVM;
 	ULONG myProtect;

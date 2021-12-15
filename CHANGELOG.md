@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64
-
+- cleaned up low level hooking code a bit
 
 
 

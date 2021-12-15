@@ -208,7 +208,7 @@ _FX void WaitForDebugger(SBIELOW_DATA *data)
 ULONGLONG * findChromeTarget(unsigned char* addr)
 {
     int i = 0;
-    ULONGLONG target = 0;
+    ULONGLONG target;
     ULONG_PTR * ChromeTarget = NULL;
     if (!addr) return NULL;
     //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
@@ -233,6 +233,55 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
     return ChromeTarget;
 }
 #endif
+
+void *Hook_CheckChromeHook(void *SourceFunc)
+{
+    if (!SourceFunc)
+        return NULL;
+    UCHAR *ZwXxxPtr = (UCHAR *)SourceFunc;
+#ifndef _WIN64 //if not _WIN64
+    if (ZwXxxPtr[0] == 0xB8 &&                  // mov eax,?
+        ZwXxxPtr[5] == 0xBA &&                  // mov edx,?
+        *(USHORT *)&ZwXxxPtr[10] == 0xE2FF)		// jmp edx
+    {
+        ULONG i = 0;
+
+        ULONG *longs = *(ULONG **)&ZwXxxPtr[6];
+        for (i = 0; i < 20; i++, longs++)
+        {
+            if (longs[0] == 0x5208EC83 && longs[1] == 0x0C24548B &&
+                longs[2] == 0x08245489 && longs[3] == 0x0C2444C7 &&
+                longs[5] == 0x042444C7)
+            {
+                ZwXxxPtr = (UCHAR *)longs[4];
+                break;
+            }
+        }
+    }
+#else // _WIN64
+    ULONGLONG *chrome64Target = NULL;
+
+    if (ZwXxxPtr[0] == 0x50 &&	//push rax
+        ZwXxxPtr[1] == 0x48 &&	//mov rax,?
+        ZwXxxPtr[2] == 0xb8) {
+        ULONGLONG* longlongs = *(ULONGLONG**)&ZwXxxPtr[3];
+        chrome64Target = findChromeTarget((unsigned char*)longlongs);
+    }
+    // Chrome 49+ 64bit hook
+    // mov rax, <target> 
+    // jmp rax 
+    else if (ZwXxxPtr[0] == 0x48 && //mov rax,<target>
+        ZwXxxPtr[1] == 0xb8 &&
+        *(USHORT*)&ZwXxxPtr[10] == 0xe0ff)/* jmp rax */ {
+        ULONGLONG* longlongs = *(ULONGLONG**)&ZwXxxPtr[2];
+        chrome64Target = findChromeTarget((unsigned char*)longlongs);
+    }
+    if (chrome64Target != NULL) {
+        ZwXxxPtr = (UCHAR *)chrome64Target;
+    }
+#endif 
+    return ZwXxxPtr;
+}
 
 _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
 {
@@ -278,9 +327,6 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
-#ifdef _WIN64
-    ULONGLONG *chrome64Target = NULL;
-#endif
 
     SystemServiceAsm = (UCHAR *)SystemService;
 
@@ -310,54 +356,16 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         // saved by chrome, rather than the chrome hook itself (32-bit only)
         //
 
-#ifndef _WIN64 //if not _WIN64
-
-        if (ZwXxxPtr[0] == 0xB8 &&                  // mov eax,?
-            ZwXxxPtr[5] == 0xBA &&                  // mov edx,?
-            *(USHORT *)&ZwXxxPtr[10] == 0xE2FF)		// jmp edx
-        {
-            ULONG i = 0;
-
-            ULONG *longs = *(ULONG **)&ZwXxxPtr[6];
-            for (i = 0; i < 20; i++, longs++)
-            {
-                if (longs[0] == 0x5208EC83 && longs[1] == 0x0C24548B &&
-                    longs[2] == 0x08245489 && longs[3] == 0x0C2444C7 &&
-                    longs[5] == 0x042444C7)
-                {
-                    ZwXxxPtr = (UCHAR *)longs[4];
-                    break;
-                }
-            }
-        }
-#else // _WIN64
-        if (ZwXxxPtr[0] == 0x50 &&	//push rax
-            ZwXxxPtr[1] == 0x48 &&	//mov rax,?
-            ZwXxxPtr[2] == 0xb8) {
-            ULONGLONG *longlongs = *(ULONGLONG **)&ZwXxxPtr[3];
-            chrome64Target = findChromeTarget((unsigned char *)longlongs);
-        }
-        // Chrome 49+ 64bit hook
-        // mov rax, <target> 
-        // jmp rax 
-        else if (ZwXxxPtr[0] == 0x48 && //mov rax,<target>
-            ZwXxxPtr[1] == 0xb8 &&
-            *(USHORT *)&ZwXxxPtr[10] == 0xe0ff)/* jmp rax */ {
-            ULONGLONG *longlongs = *(ULONGLONG **)&ZwXxxPtr[2];
-            chrome64Target = findChromeTarget((unsigned char *)longlongs);
-        }
-#endif 
+        ZwXxxPtr = Hook_CheckChromeHook(ZwXxxPtr);
 
         //
         // make the syscall address writable
         //
+
         RegionBase = ZwXxxPtr;
 
 #ifdef _WIN64
-        RegionSize = 14;
-        if (!chrome64Target) {
-            chrome64Target = (ULONG_PTR*)ZwXxxPtr;
-        }
+        RegionSize = data->Sbie64bitJumpTable ? 13 : 14; // 16;
 #else ! _WIN64
         RegionSize = 10;
 #endif _WIN64
@@ -371,21 +379,18 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
         // and then restore the original page protection
         //
 
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &OldProtect);
+
         SyscallNum = SyscallPtr[0];
 
 #ifdef _WIN64
-        SyscallNum &= 0xFFFF; // clear the not needed param count
 
-        if (chrome64Target && data->Sbie64bitJumpTable) {
-            RegionSize = 16;
-            ZwXxxPtr = (UCHAR *)chrome64Target;
-            RegionBase = ZwXxxPtr;
+        if (data->Sbie64bitJumpTable) {
+            // bytes overwriten /*16*/ 13;
 
-            SBIELOW_CALL(NtProtectVirtualMemory)(
-                NtCurrentProcess(), &RegionBase, &RegionSize,
-                PAGE_EXECUTE_READWRITE, &OldProtect);
-
-            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallNum & 0x3ff];
+            unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallNum & 0x3ff]; // jump table is sized for up to 1024 entries
             // write new patch for jump table
             // The jTable is now injected in the same memory module with lowlevel; no need for a 64 bit long jump
             // mov r10, <4 byte SyscallNum>
@@ -427,18 +432,11 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             // jmp rax
             ZwXxxPtr[11] = 0xFF;
             ZwXxxPtr[12] = 0xE0;
-
-            chrome64Target = NULL;
         }
-        else
-        {
-            RegionBase = ZwXxxPtr;
+        else {
+            // bytes overwriten 14;
 
-            SBIELOW_CALL(NtProtectVirtualMemory)(
-                NtCurrentProcess(), &RegionBase, &RegionSize,
-                PAGE_EXECUTE_READWRITE, &OldProtect);
-
-            ZwXxxPtr[0] = 0x49;                 // mov r10, SyscallNumber
+            ZwXxxPtr[0] = 0x49;                     // mov r10, SyscallNumber
             ZwXxxPtr[1] = 0xC7;
             ZwXxxPtr[2] = 0xC2;
             *(ULONG *)&ZwXxxPtr[3] = SyscallNum;
@@ -446,7 +444,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 
                 if (data->flags.is_win10) {
                     ZwXxxPtr[7] = 0x48;             // jmp SystemServiceAsm
-                    ZwXxxPtr[8] = 0xE9;             // jmp SystemServiceAsm
+                    ZwXxxPtr[8] = 0xE9;
                     *(ULONG *)&ZwXxxPtr[9] = (ULONG)(ULONG_PTR)(SystemServiceAsm - (ZwXxxPtr + 13));
                 }
                 else {
@@ -456,18 +454,15 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             }
             else {
 
-                ZwXxxPtr[7] = 0xB8;             // mov eax, SystemServiceAsm
+                ZwXxxPtr[7] = 0xB8;                 // mov eax, SystemServiceAsm
                 *(ULONG *)&ZwXxxPtr[8] = (ULONG)(ULONG_PTR)SystemServiceAsm;
                 *(USHORT *)&ZwXxxPtr[12] = 0xE0FF;  // jmp rax
             }
         }
 #else ! _WIN64
+        // bytes overwriten 10;
 
-        SBIELOW_CALL(NtProtectVirtualMemory)(
-            NtCurrentProcess(), &RegionBase, &RegionSize,
-            PAGE_EXECUTE_READWRITE, &OldProtect);
-
-        ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber
+        ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber, with param count in the highest byte
         *(ULONG *)&ZwXxxPtr[1] = SyscallNum;
         ZwXxxPtr[5] = 0xE9;                 // jmp SystemServiceAsm
         *(ULONG *)&ZwXxxPtr[6] =

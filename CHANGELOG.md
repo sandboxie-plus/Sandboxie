@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.4 / 5.55.4] - 2021-12-xx
 
 ### Changed
-- mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64
+- mechanism to hook Win32k system calls now also works for 32 bit applications running under WoW64
 - cleaned up low level hooking code a bit
 
 
@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.3 / 5.55.3] - 2021-12-12
 
 ### Added
-- added mechanism to hook Win32 system calls on Windows 10 and later, this should resolve the issue with Chromium HW acceleration
+- added mechanism to hook Win32k system calls on Windows 10 and later, this should resolve the issue with Chromium HW acceleration
 -- Note: this mechanism does not, yet, work for 32 bit applications running under WoW64
 -- to enable it, add "EnableWin32kHooks=y" to the global ini section, this feature is highly experimental (!)
 -- the hooks will be automatically applied to Chromium GPU processes

@@ -3646,7 +3646,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
         <translation>配置哪些进程可以访问哪些资源。双击一个条目来编辑它。
 &apos;开放&apos;文件和密钥访问权限只适用于原先已位于沙盒之外的程序二进制文件。
-你可以使用 &apos;完全开放&apos; 来对所有程序开放所有权限，或者在策略标签中更改这一行为。/translation>
+你可以使用 &apos;完全开放&apos; 来对所有程序开放所有权限，或者在策略标签中更改这一行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1717"/>

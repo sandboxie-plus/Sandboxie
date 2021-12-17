@@ -1465,7 +1465,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1292"/>
-        <source>Failed to recover some files:
+        <source>Failed to recover some files: 
 </source>
         <translation>部分文件恢复失败：
 </translation>

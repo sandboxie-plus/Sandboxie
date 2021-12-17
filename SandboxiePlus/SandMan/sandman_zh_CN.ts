@@ -3149,7 +3149,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="226"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目支持者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问s&lt;/font&gt;&lt;/b&gt;。&lt;br /&gt;如果你还不是支持者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书;/a&gt;.&lt;br /&gt;。&lt;br /&gt;当然你也可以免除创建这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止。</translation>
+        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目支持者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;。&lt;br /&gt;如果你还不是支持者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt;。&lt;br /&gt;当然你也可以免除创建这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="413"/>
@@ -3646,7 +3646,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
         <translation>配置哪些进程可以访问哪些资源。双击一个条目来编辑它。
 &apos;开放&apos;文件和密钥访问权限只适用于原先已位于沙盒之外的程序二进制文件。
-你可以使用 &apos;完全开放&apos; 来对所有程序开放所有权限，或者在策略标签中更改这一行为。/translation>
+你可以使用 &apos;完全开放&apos; 来对所有程序开放所有权限，或者在策略标签中更改这一行为。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1717"/>

@@ -40,6 +40,11 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 ; English
 english.AddSandboxedMenu=Add "Run Sandboxed" to context menu
+english.AddSandboxedBrowser=Add Sandboxed web browser to desktop
+english.SandboxieStartMenu1=Run any program sandboxed
+english.SandboxieStartMenu2=Run Web browser sandboxed
+english.SandboxieStartMenu3=Sandboxie Start Menu
+english.SandboxedBrowser=Sandboxed Web Browser
 english.CustomPageLabel1=Select Installation Type
 english.CustomPageLabel2=How should be installed
 english.CustomPageLabel3=Choose the installation mode

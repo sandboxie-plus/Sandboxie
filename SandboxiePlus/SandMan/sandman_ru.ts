@@ -2986,10 +2986,6 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>COM isolation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3027,6 +3023,14 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COM/RPC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

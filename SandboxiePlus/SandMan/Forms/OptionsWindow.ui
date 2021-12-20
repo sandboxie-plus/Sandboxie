@@ -1747,7 +1747,7 @@ You can use 'Open for All' instead to make it apply to all programs, or change t
                <item row="5" column="3">
                 <widget class="QLabel" name="label_54">
                  <property name="text">
-                  <string>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
+                  <string>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path. 
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</string>
                  </property>
                  <property name="wordWrap">
@@ -1991,17 +1991,45 @@ The process match level has a higher priority than the specificity and describes
               <layout class="QGridLayout" name="gridLayout_26">
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_2">
-                 <item row="3" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkNoWindowRename">
+                 <item row="5" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkUseSbieWndStation">
                    <property name="text">
-                    <string>Don't alter window class names created by sandboxed programs</string>
+                    <string>Emulate sandboxed window station for all processes</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1">
-                  <widget class="QCheckBox" name="chkElevateRpcss">
+                 <item row="12" column="1">
+                  <widget class="QCheckBox" name="chkDropPrivileges">
                    <property name="text">
-                    <string>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</string>
+                    <string>Drop critical privileges from processes running with a SYSTEM token</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1">
+                  <widget class="QCheckBox" name="chkAddToJob">
+                   <property name="text">
+                    <string>Add sandboxed processes to job objects (recommended)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QCheckBox" name="chkRestrictServices">
+                   <property name="text">
+                    <string>Do not start sandboxed services using a system token (recommended)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="1">
+                  <widget class="QCheckBox" name="chkProtectSystem">
+                   <property name="text">
+                    <string>Protect sandboxed SYSTEM processes from unprivileged processes</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="14" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkOpenCOM">
+                   <property name="text">
+                    <string>Open access to COM infrastructure (not recommended)</string>
                    </property>
                   </widget>
                  </item>
@@ -2012,10 +2040,51 @@ The process match level has a higher priority than the specificity and describes
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="1">
-                  <widget class="QCheckBox" name="chkRestrictServices">
+                 <item row="2" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkPreferExternalManifest">
                    <property name="text">
-                    <string>Do not start sandboxed services using a system token (recommended)</string>
+                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="2">
+                  <widget class="QLabel" name="label_65">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                     <kerning>true</kerning>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>(Security Critical)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="16" column="2">
+                  <spacer name="horizontalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="10" column="1">
+                  <widget class="QCheckBox" name="chkElevateRpcss">
+                   <property name="text">
+                    <string>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkNoWindowRename">
+                   <property name="text">
+                    <string>Don't alter window class names created by sandboxed programs</string>
                    </property>
                   </widget>
                  </item>
@@ -2033,14 +2102,7 @@ The process match level has a higher priority than the specificity and describes
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkNestedJobs">
-                   <property name="text">
-                    <string>Allow use of nested job objects (experimental, works on Windows 8 and later)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="15" column="1">
+                 <item row="16" column="1">
                   <spacer name="verticalSpacer">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -2053,94 +2115,8 @@ The process match level has a higher priority than the specificity and describes
                    </property>
                   </spacer>
                  </item>
-                 <item row="14" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkOpenCOM">
-                   <property name="text">
-                    <string>Open access to COM infrastructure (not recommended)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="15" column="2">
-                  <spacer name="horizontalSpacer_6">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="2" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkPreferExternalManifest">
-                   <property name="text">
-                    <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1">
-                  <widget class="QCheckBox" name="chkAddToJob">
-                   <property name="text">
-                    <string>Add sandboxed processes to job objects (recommended)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="13" column="0">
-                  <widget class="QLabel" name="label_63">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                     <kerning>true</kerning>
-                    </font>
-                   </property>
-                   <property name="toolTip">
-                    <string>Protect the sandbox integrity itself</string>
-                   </property>
-                   <property name="text">
-                    <string>COM isolation</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1" colspan="2">
-                  <widget class="QCheckBox" name="chkUseSbieWndStation">
-                   <property name="text">
-                    <string>Emulate sandboxed window station for all processes</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="12" column="1">
-                  <widget class="QCheckBox" name="chkDropPrivileges">
-                   <property name="text">
-                    <string>Drop critical privileges from processes running with a SYSTEM token</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="12" column="2">
                   <widget class="QLabel" name="label_64">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                     <kerning>true</kerning>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>(Security Critical)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="1">
-                  <widget class="QCheckBox" name="chkProtectSystem">
-                   <property name="text">
-                    <string>Protect sandboxed SYSTEM processes from unprivileged processes</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="2">
-                  <widget class="QLabel" name="label_65">
                    <property name="font">
                     <font>
                      <weight>75</weight>
@@ -2167,6 +2143,37 @@ The process match level has a higher priority than the specificity and describes
                    </property>
                    <property name="text">
                     <string>Sandbox isolation</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="13" column="0">
+                  <widget class="QLabel" name="label_63">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                     <kerning>true</kerning>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Protect the sandbox integrity itself</string>
+                   </property>
+                   <property name="text">
+                    <string>COM/RPC</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkNestedJobs">
+                   <property name="text">
+                    <string>Allow use of nested job objects (experimental, works on Windows 8 and later)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="15" column="1" colspan="2">
+                  <widget class="QCheckBox" name="chkComTimeout">
+                   <property name="text">
+                    <string>Disable using RpcMgmtSetComTimeout by default (toggle this may resovle compatybility issues)</string>
                    </property>
                   </widget>
                  </item>
@@ -2708,8 +2715,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>63</width>
-                    <height>16</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">

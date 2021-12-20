@@ -131,7 +131,7 @@ public:
 	// Other
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
 
-	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL, bool Elevated = false);
+	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString());
 	virtual QString			GetStartPath() const;
 
 	virtual quint32			GetSessionID() const;

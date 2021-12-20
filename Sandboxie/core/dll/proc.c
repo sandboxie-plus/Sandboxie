@@ -1012,7 +1012,6 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
-
     ok = __sys_CreateProcessInternalW(
         NULL, lpApplicationName, lpCommandLine,
         lpProcessAttributes, lpThreadAttributes, bInheritHandles,

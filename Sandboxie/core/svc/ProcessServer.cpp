@@ -694,6 +694,30 @@ WCHAR *ProcessServer::RunSandboxedCopyString(
 
 
 //---------------------------------------------------------------------------
+// ProcessServer__RunRpcssAsSystem
+//---------------------------------------------------------------------------
+
+
+bool ProcessServer__RunRpcssAsSystem(WCHAR* boxname)
+{
+    if (SbieApi_QueryConfBool(boxname, L"RunRpcssAsSystem", FALSE))
+        return true;
+    // OriginalToken BEGIN
+    if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+    // OriginalToken END
+    
+        //
+        // if we run MSIServer as system we need to run the sandboxed Rpcss as system to or else it wil fail
+        //
+
+        if (SbieApi_QueryConfBool(boxname, L"MsiInstallerExemptions", FALSE) || SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
 // RunSandboxedGetToken
 //---------------------------------------------------------------------------
 
@@ -724,7 +748,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
         const WCHAR* TokenSrc = ThreadToken;
         
         if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */) 
-          && SbieApi_QueryConfBool(boxname, L"RunRpcssAsSystem", FALSE)) {
+          && ProcessServer__RunRpcssAsSystem(boxname)) {
             TokenSrc = SystemToken;
         }
 
@@ -853,9 +877,10 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
 		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_ALL, TRUE);
-        // OriginalToken BEGIN
-        else if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
-        // OriginalToken END
+        else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
+            // OriginalToken BEGIN
+            if(!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+            // OriginalToken END
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_READ, FALSE);
     }
 

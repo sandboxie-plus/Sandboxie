@@ -78,14 +78,19 @@ void COptionsWindow::LoadTemplates()
 	m_TemplatesChanged = false;
 }
 
-void COptionsWindow::OnScreenReaders()
-{ 
-	if (ui.chkScreenReaders->isChecked())
-		m_BoxTemplates.append("ScreenReader");
+void COptionsWindow::SetTemplate(const QString& Template, bool bEnabled)
+{
+	if(bEnabled)
+		m_BoxTemplates.append(Template);
 	else
-		m_BoxTemplates.removeAll("ScreenReader");
+		m_BoxTemplates.removeAll(Template);
 	m_TemplatesChanged = true; 
 	OnOptChanged();
+}
+
+void COptionsWindow::OnScreenReaders()
+{ 
+	SetTemplate("ScreenReader", ui.chkScreenReaders->isChecked());
 }
 
 QString COptionsWindow::GetCategoryName(const QString& Category)

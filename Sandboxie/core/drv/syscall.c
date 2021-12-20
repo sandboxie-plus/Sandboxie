@@ -222,7 +222,7 @@ _FX BOOLEAN Syscall_Init(void)
 
 #ifdef HOOK_WIN32K
     // must be windows 10 or later // Don't use experimental features by default
-    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, FALSE)) {
+    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
 
         if (!Syscall_Init_List32())
             return FALSE;

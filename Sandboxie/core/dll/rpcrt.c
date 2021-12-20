@@ -726,22 +726,21 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
             if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
             {
                 WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
-
-                if (pwszTempPortName == NULL)
-                    return RPC_S_ACCESS_DENIED;
-
-	            WCHAR* ptr = wcsstr(StringBinding, L":");
-	            if(ptr)
-	            {
-		            size_t len = ptr - StringBinding;
-		            wcsncpy(wstrPortName, StringBinding, len);
-		            wcscat(wstrPortName, L":[");
-		            wcscat(wstrPortName, pwszTempPortName);
-		            if(ptr[1] == L'[')
-			            wcscat(wstrPortName, ptr + 2);
-		            else
-			            wcscat(wstrPortName, L"]");
-	            }
+                if (pwszTempPortName != NULL)
+                {
+                    WCHAR* ptr = wcsstr(StringBinding, L":");
+                    if (ptr)
+                    {
+                        size_t len = ptr - StringBinding;
+                        wcsncpy(wstrPortName, StringBinding, len);
+                        wcscat(wstrPortName, L":[");
+                        wcscat(wstrPortName, pwszTempPortName);
+                        if (ptr[1] == L'[')
+                            wcscat(wstrPortName, ptr + 2);
+                        else
+                            wcscat(wstrPortName, L"]");
+                    }
+                }
                 // else error let it fail
             }
 
@@ -750,7 +749,6 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
                 use_RpcMgmtSetComTimeout = Config_String2Bool(tagValue, use_RpcMgmtSetComTimeout);
         }
     }
-
 
     RPC_STATUS  status;
     status = __sys_RpcBindingFromStringBindingW(*wstrPortName ? wstrPortName : StringBinding, OutBinding);
@@ -852,7 +850,9 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
             {
                 if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
                 {
-                    Template->StringEndpoint = GetDynamicLpcPortName(tagValue);
+                    WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
+                    if (pwszTempPortName != NULL)
+                        Template->StringEndpoint = pwszTempPortName;
                 }
                 /*else if (SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L','))
                 {
@@ -1079,6 +1079,7 @@ ALIGNED BOOLEAN __cdecl RpcRt_Ndr64AsyncClientCall_x64(
         RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddress, pProxyInfo->pStubDesc, pProxyInfo->ProcFormatString, &pStack[1]);
     }
 
+    if (!SbieApi_QueryConfBool(NULL, L"NoUACProxy", FALSE))
     if (Dll_OsBuild >= 6000) {
         return Secure_CheckElevation((struct SECURE_UAC_ARGS*)pStack);
     }
@@ -1095,6 +1096,7 @@ ALIGNED BOOLEAN __cdecl RpcRt_NdrAsyncClientCall_x86(
         RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddress, pStubDescriptor, pFormat, &pStack[1]);
     }
 
+    if (!SbieApi_QueryConfBool(NULL, L"NoUACProxy", FALSE))
     if (Dll_OsBuild >= 6000) {
         return Secure_CheckElevation((struct SECURE_UAC_ARGS*)pStack);
     }

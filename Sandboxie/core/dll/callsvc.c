@@ -757,6 +757,60 @@ _FX ULONG SbieDll_UpdateConf(
 
 
 //---------------------------------------------------------------------------
+// SbieDll_QueryConf
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieDll_QueryConf(const WCHAR *Section, const WCHAR *Setting,
+    ULONG setting_index, WCHAR *out_buffer, ULONG buffer_len)
+{
+    SBIE_INI_SETTING_REQ *req;
+    SBIE_INI_SETTING_RPL *rpl;
+    ULONG RequestLen;
+    ULONG status;
+
+    if ((! Section) || (! Setting))
+        return STATUS_INVALID_PARAMETER;
+
+    RequestLen = sizeof(SBIE_INI_SETTING_REQ);
+    req = Dll_Alloc(RequestLen);
+    if (! req)
+        return STATUS_INSUFFICIENT_RESOURCES;
+
+    req->h.length = RequestLen;
+    req->h.msgid  = MSGID_SBIE_INI_GET_SETTING;
+    
+    req->password[0] = L'\0';
+
+    req->refresh = FALSE;
+
+    wcscpy(req->section, Section);
+    wcscpy(req->setting, Setting);
+    req->value[0] = L'\0';
+    req->value_len = wcslen(req->value);
+
+    rpl = (SBIE_INI_SETTING_RPL *)SbieDll_CallServer(&req->h);
+
+    if (! rpl)
+        status = STATUS_INSUFFICIENT_RESOURCES;
+    else {
+        status = rpl->h.status;
+        if (NT_SUCCESS(status)) {
+            if (rpl->value_len > buffer_len)
+                status = STATUS_BUFFER_TOO_SMALL;
+            else
+                memcpy(out_buffer, rpl->value, rpl->value_len);
+        }
+
+        Dll_Free(rpl);
+    }
+
+    Dll_Free(req);
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieDll_RunSandboxed
 //---------------------------------------------------------------------------
 

@@ -116,6 +116,8 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 		QString Folder = theAPI->Nt2DosPath(NtFolder, &bOk);
 		if(bOk)
 			m_RecoveryFolders.append(Folder);
+		else if(NtFolder.left(11) == "\\Device\\Mup")
+			m_RecoveryFolders.append("\\" + NtFolder.mid(11));
 	}
 
 	ui.cmbRecover->addItem(tr("Original location"), 0);
@@ -154,7 +156,7 @@ void CRecoveryWindow::closeEvent(QCloseEvent *e)
 
 void CRecoveryWindow::OnAddFolder()
 {
-	QString Folder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");;
+	QString Folder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Folder.isEmpty())
 		return;
 

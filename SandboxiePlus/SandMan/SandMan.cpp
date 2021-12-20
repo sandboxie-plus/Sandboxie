@@ -614,8 +614,10 @@ bool CSandMan::IsFullyPortable()
 	return false;
 }
 
-void CSandMan::OnMessage(const QString& Message)
+void CSandMan::OnMessage(const QString& MsgData)
 {
+	QStringList Messages = MsgData.split("\n");
+	QString Message = Messages[0];
 	if (Message == "ShowWnd")
 	{
 		if (!isVisible())
@@ -637,11 +639,19 @@ void CSandMan::OnMessage(const QString& Message)
 			}
 		}
 
+		QString WrkDir;
+		for (int i = 1; i < Messages.length(); i++) {
+			if (Messages[i].left(5) == "From:") {
+				WrkDir = Messages[i].mid(5);
+				break;
+			}
+		}
+
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
-			theAPI->RunStart("DefaultBox", CmdLine);
+			theAPI->RunStart("DefaultBox", CmdLine, false, WrkDir);
 		}
 		else
-			RunSandboxed(QStringList(CmdLine), BoxName);
+			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -698,9 +708,9 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName)
+void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
 {
-	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName);
+	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
 	pSelectBoxWindow->show();
 }
 

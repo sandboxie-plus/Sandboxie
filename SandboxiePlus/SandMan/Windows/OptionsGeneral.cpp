@@ -271,7 +271,7 @@ void COptionsWindow::OnAddAutoCmd()
 
 void COptionsWindow::OnAddAutoExe()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
 
@@ -314,7 +314,7 @@ void COptionsWindow::OnDelAuto()
 
 void COptionsWindow::OnBrowsePath()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
 
@@ -402,6 +402,7 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkMsiExemptions->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
+		SetTemplate("NoUACProxy", false);
 		break;
 	case CSandBoxPlus::eDefaultPlus:
 	case CSandBoxPlus::eDefault:
@@ -411,12 +412,14 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkMsiExemptions->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eDefaultPlus);
+		SetTemplate("NoUACProxy", false);
 		break;
 	case CSandBoxPlus::eAppBoxPlus:
 	case CSandBoxPlus::eAppBox:
 		ui.chkNoSecurityIsolation->setChecked(true);
 		//ui.chkRestrictServices->setChecked(false);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
+		SetTemplate("NoUACProxy", true);
 		break;
 	}
 

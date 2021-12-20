@@ -2504,8 +2504,8 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
         (API_CHECK_INTERNET_ACCESS_ARGS *)parms;
     WCHAR *user_devname;
     WCHAR device_name[42];
-    WCHAR *ptr, *ptr2;
-    ULONG len;
+    //WCHAR *ptr, *ptr2;
+    //ULONG len;
     HANDLE ProcessId;
     NTSTATUS status;
     KIRQL irql;
@@ -2521,7 +2521,9 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     ProbeForRead(user_devname, sizeof(WCHAR) * 32, sizeof(WCHAR));
     wmemcpy(device_name,        File_Mup,     8);   // \Device\ prefix
     wmemcpy(device_name + 8,    user_devname, 32);
+    device_name[8+32] = L'\0';
 
+    /* this check is now done in unser mode
     //
     // convert the device name to lowercase, stop at the first backslash
     //
@@ -2584,6 +2586,7 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
 
     if (! chk)
         return STATUS_OBJECT_NAME_INVALID;
+    */
 
 
     //

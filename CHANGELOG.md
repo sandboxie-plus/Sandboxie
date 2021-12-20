@@ -5,11 +5,31 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.4 / 5.55.4] - 2021-12-xx
+## [1.0.4 / 5.55.4] - 2021-12-20
+
+### Added
+- Mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64
+- Added customization to Win32k hooking mechanism, as by default only GdiDdDDI* are installed
+-- You can force the installation of other hooks by specifying them with "EnableWin32Hook=..." 
+-- or disable the instalation of the default hooks with "DisableWin32Hook=..."
+-- Please note that some win32k hooks may cause BSOD's or undefined behavioure. (!)
+-- The most obviusly problematic win32k hooks are blacklisted, this can be bypassed with "IgnoreWin32HookBlacklist=y"
+- added debug option "AdjustBoxedSystem=n" option disable the adjustment of service ACL's running with a system token
+- added "NoUACProxy=y" option together with the acompanying template it allows to disable UAC proxy
+-- Note: Boxes configured in compartment mode activate this template by default
+- added UI option to change default RpcMgmtSetComTimeout preset
 
 ### Changed
-- mechanism to hook Win32k system calls now also works for 32 bit applications running under WoW64
-- cleaned up low level hooking code a bit
+- "EnableWin32kHooks=y" is now enabled by default, as no issues were reported in 1.0.3
+-- Note: currently only the GdiDdDDI* hooks are applied, required for chromeium HW acceleration
+- Cleaned up low level hooking code a bit
+- "RunRpcssAsSystem=y" is now auto applied for boxes in "App Compartment" mode when "RunServicesAsSystem=y" or "MsiInstallerExemptions=y" are present
+
+### Fixed
+- fixed RPC handling in case a requested open service is not running [#1443](https://github.com/sandboxie-plus/Sandboxie/issues/1443)
+- fixed a hooking issue with NdrClientCall2 with 32 bit applications
+- fixed issue with start directroy when usign sandman to run sansboxed [#1436](https://github.com/sandboxie-plus/Sandboxie/issues/1436)
+- fixed issue with recovering from network share locations [#1435](https://github.com/sandboxie-plus/Sandboxie/issues/1435)
 
 
 

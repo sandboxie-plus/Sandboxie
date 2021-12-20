@@ -508,6 +508,40 @@ _FX NTSTATUS RpcRt_FindModulePreset(
 
 
 //---------------------------------------------------------------------------
+// StoreLpcPortName
+//---------------------------------------------------------------------------
+
+
+const WCHAR* StoreLpcPortName(const WCHAR* wszPortId, const WCHAR* wszPortName)
+{
+    IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
+    while (port)
+    {
+        if (_wcsicmp(wszPortId, port->wstrPortId) == 0)
+        {
+            wmemcpy(port->wstrPortName, wszPortName, DYNAMIC_PORT_NAME_CHARS);
+            break;
+        }
+
+        port = List_Next(port);
+    }
+
+    if (port == NULL)
+    {
+        port = (IPC_DYNAMIC_PORT*)Dll_Alloc(sizeof(IPC_DYNAMIC_PORT));
+        if (port)
+        {
+            wmemcpy(port->wstrPortId, wszPortId, DYNAMIC_PORT_ID_CHARS);
+            wmemcpy(port->wstrPortName, wszPortName, DYNAMIC_PORT_NAME_CHARS);
+
+            List_Insert_After(&Ipc_DynamicPortNames, NULL, port);
+        }
+    }
+    return port ? port->wstrPortName : NULL;
+}
+
+
+//---------------------------------------------------------------------------
 // GetDynamicLpcPortName
 //---------------------------------------------------------------------------
 
@@ -539,33 +573,10 @@ WCHAR* GetDynamicLpcPortName(const WCHAR* wszPortId)
 
     if (rpl && NT_SUCCESS(rpl->h.status))
     {
-        IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
-        while (port) 
-        {    
-            if (_wcsicmp(req.wszPortId, port->wstrPortId) == 0)
-            {
-                wmemcpy(port->wstrPortName, rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
-                break;
-            }
-
-            port = List_Next(port);
-        }
-
-        if (port == NULL) 
-        {
-            port = (IPC_DYNAMIC_PORT*)Dll_Alloc(sizeof(IPC_DYNAMIC_PORT));
-            if (port)
-            {
-                wmemcpy(port->wstrPortId, req.wszPortId, DYNAMIC_PORT_ID_CHARS);
-                wmemcpy(port->wstrPortName, rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
-
-                List_Insert_After(&Ipc_DynamicPortNames, NULL, port);
-            }
-        }
-
+        WCHAR* port = StoreLpcPortName(req.wszPortId, rpl->wszPortName);
         Dll_Free(rpl);
         if(port)
-            return port->wstrPortName + 13; // skip "\\RPC Control\\"
+            return port + 13; // skip "\\RPC Control\\"
     }
 
     return NULL;
@@ -722,26 +733,30 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         WCHAR ModulePreset[256];
         if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringBinding, ModulePreset, sizeof(ModulePreset)))) {
             
+            WCHAR* pwszTempPortName = NULL;
             WCHAR tagValue[96];
-            if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
+            if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L',')) {
+                pwszTempPortName = GetDynamicLpcPortName(tagValue);
+            }
+            
+            if (!pwszTempPortName && SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L',')) {
+                pwszTempPortName = StoreLpcPortName(tagValue, tagValue);
+            }
+
+            if (pwszTempPortName != NULL)
             {
-                WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
-                if (pwszTempPortName != NULL)
+                WCHAR* ptr = wcsstr(StringBinding, L":");
+                if (ptr)
                 {
-                    WCHAR* ptr = wcsstr(StringBinding, L":");
-                    if (ptr)
-                    {
-                        size_t len = ptr - StringBinding;
-                        wcsncpy(wstrPortName, StringBinding, len);
-                        wcscat(wstrPortName, L":[");
-                        wcscat(wstrPortName, pwszTempPortName);
-                        if (ptr[1] == L'[')
-                            wcscat(wstrPortName, ptr + 2);
-                        else
-                            wcscat(wstrPortName, L"]");
-                    }
+                    size_t len = ptr - StringBinding;
+                    wcsncpy(wstrPortName, StringBinding, len);
+                    wcscat(wstrPortName, L":[");
+                    wcscat(wstrPortName, pwszTempPortName);
+                    if (ptr[1] == L'[')
+                        wcscat(wstrPortName, ptr + 2);
+                    else
+                        wcscat(wstrPortName, L"]");
                 }
-                // else error let it fail
             }
 
             // the "RpcPortBinding" overwrites "UseRpcMgmtSetComTimeout"
@@ -848,16 +863,13 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
             WCHAR tagValue[96];
             if (RPC_PROTSEQ_LRPC == Template->ProtocolSequence && !Template->StringEndpoint)
             {
-                if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
-                {
-                    WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
-                    if (pwszTempPortName != NULL)
-                        Template->StringEndpoint = pwszTempPortName;
+                if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L',')) {
+                    Template->StringEndpoint = GetDynamicLpcPortName(tagValue);
                 }
-                /*else if (SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L','))
-                {
-                    Template->StringEndpoint = (unsigned short*)...;
-                }*/
+
+                if (!Template->StringEndpoint && SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L',')){
+                    Template->StringEndpoint = StoreLpcPortName(tagValue, tagValue);
+                }
             }
 
             // the "RpcPortBinding" overwrites "UseRpcMgmtSetComTimeout"

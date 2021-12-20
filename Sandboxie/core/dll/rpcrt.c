@@ -512,7 +512,7 @@ _FX NTSTATUS RpcRt_FindModulePreset(
 //---------------------------------------------------------------------------
 
 
-const WCHAR* StoreLpcPortName(const WCHAR* wszPortId, const WCHAR* wszPortName)
+WCHAR* StoreLpcPortName(const WCHAR* wszPortId, const WCHAR* wszPortName)
 {
     IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
     while (port)

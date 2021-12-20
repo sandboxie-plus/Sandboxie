@@ -29,8 +29,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed RPC handling in case a requested open service is not running [#1443](https://github.com/sandboxie-plus/Sandboxie/issues/1443)
-- fixed a hooking issue with NdrClientCall2 with 32 bit applications
-- fixed issue with start directory when using SandMan to run sandboxed [#1436](https://github.com/sandboxie-plus/Sandboxie/issues/1436)
+- fixed a hooking issue with NdrClientCall2 in 32 bit applications
+- fixed issue with start directory to run sandboxed when using SandMan [#1436](https://github.com/sandboxie-plus/Sandboxie/issues/1436)
 - fixed issue with recovering from network share locations [#1435](https://github.com/sandboxie-plus/Sandboxie/issues/1435)
 
 

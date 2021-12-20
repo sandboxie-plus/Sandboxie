@@ -978,7 +978,7 @@ _FX LONG SbieApi_CheckInternetAccess(
         memzero(MyDeviceName, sizeof(MyDeviceName));
         wmemcpy(MyDeviceName, DeviceName32, len);
 
-        WCHAR* ptr = DeviceName32;
+        const WCHAR* ptr = DeviceName32;
 
         static const WCHAR *File_RawIp = L"rawip6";
         static const WCHAR *File_Http  = L"http\\";

@@ -274,7 +274,7 @@ _FX void Dll_InitInjected(void)
     Dll_HomeNtPath = Dll_AllocTemp(1024 * sizeof(WCHAR));
     Dll_HomeDosPath = Dll_AllocTemp(1024 * sizeof(WCHAR));
 
-    SbieApi_GetHomePath(Dll_HomeNtPath, 1020, Dll_HomeDosPath, 1020);
+    SbieApi_GetHomePath((WCHAR*)Dll_HomeNtPath, 1020, (WCHAR*)Dll_HomeDosPath, 1020);
 
     Dll_HomeNtPathLen = wcslen(Dll_HomeNtPath);
     //Dll_HomeDosPathLen = wcslen(Dll_HomeDosPath);

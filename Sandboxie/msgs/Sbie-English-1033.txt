@@ -3069,6 +3069,14 @@ Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
 Open additional RPC Port Bindings
 .
 
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------

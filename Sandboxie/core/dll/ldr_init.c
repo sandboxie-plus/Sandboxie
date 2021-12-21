@@ -182,9 +182,6 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     WCHAR *dllname = Dll_AllocTemp(MAX_PATH * 2 * sizeof(WCHAR));
     ULONG index = 0;
 
-	WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
-	SbieApi_GetHomePath(NULL, 0, path, 1020);
-
     if (!__sys_LdrLoadDll)
         __sys_LdrLoadDll = (P_LdrLoadDll)GetProcAddress(Dll_Ntdll, "LdrLoadDll");
 
@@ -205,10 +202,10 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
 		// starting with \ in that case the DLL is looked for in %SbieHome%
 		//
 
-        if (dllname[0] == L'\\' && wcslen(path) + wcslen(dllname) + 1 < MAX_PATH * 2)
+        if (dllname[0] == L'\\' && wcslen(Dll_HomeDosPath) + wcslen(dllname) + 1 < MAX_PATH * 2)
         {
-            wmemmove(dllname + wcslen(path), dllname, wcslen(dllname) + 1);
-            wmemcpy(dllname, path, wcslen(path));
+            wmemmove(dllname + wcslen(Dll_HomeDosPath), dllname, wcslen(dllname) + 1);
+            wmemcpy(dllname, Dll_HomeDosPath, wcslen(Dll_HomeDosPath));
         }
 
         //
@@ -249,7 +246,6 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     }
 
     Dll_Free(dllname);
-	Dll_Free(path);
 }
 
 

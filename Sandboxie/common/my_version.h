@@ -21,8 +21,8 @@
 #ifndef _MY_VERSION_H
 #define _MY_VERSION_H
 
-#define MY_VERSION_BINARY       5,55,4
-#define MY_VERSION_STRING       "5.55.4"
+#define MY_VERSION_BINARY       5,55,5
+#define MY_VERSION_STRING       "5.55.5"
 #define MY_VERSION_COMPAT		"5.55.0" // this refers to the driver ABI compatibility
 
 // These #defines are used by either Resource Compiler, or by NSIC installer

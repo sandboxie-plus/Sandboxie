@@ -1962,8 +1962,8 @@ _FX BOOLEAN SbieDll_RunFromHome(
     } else
         i = 0;
 
-    if (Dll_BoxName) {
-        SbieApi_GetHomePath(NULL, 0, &path[i], MAX_PATH);
+    if (Dll_HomeDosPath) {
+        wcscpy(&path[i], Dll_HomeDosPath);
         wcscat(path, L"\\");
     } else {
         GetModuleFileName(NULL, &path[i], MAX_PATH);

@@ -5,6 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.5 / 5.55.5] - 2021-12-??
+
+### Added
+- 
+
+### Changed
+- improved sbiedll initialization a bit
+
+### Fixed
+- fixed issue with forced process display [#1447](https://github.com/sandboxie-plus/Sandboxie/issues/1447)
+
+
+
+
 ## [1.0.4 / 5.55.4] - 2021-12-20
 
 ### Added

@@ -3940,7 +3940,7 @@ _FX ULONG File_DoAutoRecover_4(
     // get file name
     //
 
-    status = SbieApi_GetFileName(FileHandle, 1000, PathBuf1024);
+    status = File_GetFileName(FileHandle, 1000, PathBuf1024);
     if (! NT_SUCCESS(status))
         return 0;
 

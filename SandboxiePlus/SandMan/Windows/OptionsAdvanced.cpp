@@ -204,6 +204,7 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkNoSecurityFiltering->setEnabled(ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkAddToJob->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkNestedJobs->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	ui.chkOpenDevCMApi->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkOpenSamEndpoint->setEnabled(!ui.chkNoSecurityIsolation->isChecked());

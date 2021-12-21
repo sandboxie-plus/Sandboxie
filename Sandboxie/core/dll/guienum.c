@@ -225,6 +225,11 @@ _FX BOOLEAN Gui_InitEnum(void)
         }
     }
 
+	// NoSbieDesk BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
+
     //
     // hook desktop APIs
     //

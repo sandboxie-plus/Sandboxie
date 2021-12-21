@@ -28,7 +28,7 @@
 #include "core/drv/api_defs.h"
 #include "core/low/lowdata.h"
 
-SBIELOW_DATA* SbieApi_data = NULL;
+extern SBIELOW_DATA* SbieApi_data;
 #define SBIELOW_CALL(x) ((P_##x)&data->x##_code)
 
 

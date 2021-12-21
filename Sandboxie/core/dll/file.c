@@ -278,6 +278,8 @@ static void File_ScrambleShortName(WCHAR* ShortName, CCHAR* ShortNameLength, ULO
 
 static void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey);
 
+static NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR *NameBuf);
+
 //---------------------------------------------------------------------------
 
 
@@ -286,7 +288,7 @@ static P_NtOpenFile                 __sys_NtOpenFile                = NULL;
 static P_NtQueryAttributesFile      __sys_NtQueryAttributesFile     = NULL;
 static P_NtQueryFullAttributesFile  __sys_NtQueryFullAttributesFile = NULL;
 static P_NtQueryInformationFile     __sys_NtQueryInformationFile    = NULL;
-static P_GetFinalPathNameByHandle   __sys_GetFinalPathNameByHandleW = NULL;
+       P_GetFinalPathNameByHandle   __sys_GetFinalPathNameByHandleW = NULL;
        P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile      = NULL;
 static P_NtQueryDirectoryFileEx     __sys_NtQueryDirectoryFileEx    = NULL;
 static P_NtSetInformationFile       __sys_NtSetInformationFile      = NULL;
@@ -347,9 +349,6 @@ static ULONG File_CurrentUserLen = 0;
 
 static WCHAR *File_PublicUser = NULL;
 static ULONG File_PublicUserLen = 0;
-
-static WCHAR *File_HomeNtPath = NULL;
-static ULONG File_HomeNtPathLen = 0;
 
 static BOOLEAN File_DriveAddSN = FALSE;
 
@@ -2099,13 +2098,13 @@ _FX ULONG File_MatchPath2(const WCHAR *path, ULONG *FileFlags, BOOLEAN bCheckObj
     // disregarding any settings that might affect it
     //
 
-    if (File_HomeNtPathLen) {
+    if (Dll_HomeNtPathLen) {
         ULONG path_len = wcslen(path);
-        if (path_len >= File_HomeNtPathLen
-                && (path[File_HomeNtPathLen] == L'\\' ||
-                    path[File_HomeNtPathLen] == L'\0')
+        if (path_len >= Dll_HomeNtPathLen
+                && (path[Dll_HomeNtPathLen] == L'\\' ||
+                    path[Dll_HomeNtPathLen] == L'\0')
                 && 0 == Dll_NlsStrCmp(
-                            path, File_HomeNtPath, File_HomeNtPathLen)) {
+                            path, Dll_HomeNtPath, Dll_HomeNtPathLen)) {
 
             mp_flags = PATH_OPEN_FLAG;
             goto finish;

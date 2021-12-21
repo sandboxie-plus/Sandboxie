@@ -297,7 +297,6 @@ _FX void File_InitPathList(void)
     UNICODE_STRING objname;
     IO_STATUS_BLOCK MyIoStatusBlock;
     HANDLE handle;
-    WCHAR *path;
 
     RtlInitUnicodeString(&objname, L"\\SystemRoot");
     InitializeObjectAttributes(
@@ -309,20 +308,6 @@ _FX void File_InitPathList(void)
         NtClose(handle);
 
     SbieDll_MatchPath(L'f', (const WCHAR *)-1);
-
-    //
-    // query Sandboxie home folder to prevent ClosedFilePath
-    //
-
-    path = Dll_AllocTemp(1024 * sizeof(WCHAR));
-    SbieApi_GetHomePath(path, 1020, NULL, 0);
-    if (path[0]) {
-        File_HomeNtPathLen = wcslen(path);
-        File_HomeNtPath =
-            Dll_Alloc((File_HomeNtPathLen + 1) * sizeof(WCHAR));
-        wmemcpy(File_HomeNtPath, path, File_HomeNtPathLen + 1);
-    }
-    Dll_Free(path);
 }
 
 

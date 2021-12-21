@@ -411,7 +411,7 @@ int DoLingerLeader(void)
         // query running processes
         //
 
-        for (i = 0; i <= process_count; ++i) {
+        for (i = 0; i < process_count; ++i) {
 
             //
             // if the process in question was started by Start.exe,
@@ -556,7 +556,7 @@ int DoLingerLeader(void)
         //
 
         if (terminate_and_stop) {
-            for (i = 0; i <= process_count; ++i) {
+            for (i = 0; i < process_count; ++i) {
                 HANDLE hProcess = NULL;
                 ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(
                                 (HANDLE) (ULONG_PTR) pids[i], 0);

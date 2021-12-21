@@ -747,7 +747,7 @@ _FX WCHAR *Taskbar_GetStartExeCommand(const WCHAR *args)
 
 #else ! CUSTOM_APPUSERMODELID
 
-    SbieApi_GetHomePath(NULL, 0, &command[1], MAX_PATH);
+    wcscpy(&command[1], Dll_HomeDosPath);
     wcscat(command, L"\\" START_EXE L"\" /box:");
     wcscat(command, Dll_BoxName);
     wcscat(command, L" ");

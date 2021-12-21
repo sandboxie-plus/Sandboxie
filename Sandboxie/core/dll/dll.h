@@ -254,6 +254,11 @@ extern const WCHAR *Dll_BoxName;
 extern const WCHAR *Dll_ImageName;
 extern const WCHAR *Dll_SidString;
 
+extern const WCHAR *Dll_HomeNtPath;
+extern ULONG Dll_HomeNtPathLen;
+extern const WCHAR *Dll_HomeDosPath;
+//extern ULONG Dll_HomeDosPathLen;
+
 extern const WCHAR *Dll_BoxFilePath;
 extern const WCHAR *Dll_BoxKeyPath;
 extern const WCHAR *Dll_BoxIpcPath;

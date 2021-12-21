@@ -48,6 +48,8 @@ void Ldr_Inject_Init(BOOLEAN bHostInject);
 
 const ULONG tzuk = 'xobs';
 
+SBIELOW_DATA* SbieApi_data = NULL;
+
 HINSTANCE Dll_Instance = NULL;
 HMODULE Dll_Ntdll = NULL;
 HMODULE Dll_Kernel32 = NULL;
@@ -57,6 +59,11 @@ HMODULE Dll_DigitalGuardian = NULL;
 const WCHAR *Dll_BoxName = NULL;
 const WCHAR *Dll_ImageName = NULL;
 const WCHAR *Dll_SidString = NULL;
+
+const WCHAR *Dll_HomeNtPath = NULL;
+ULONG Dll_HomeNtPathLen = 0;
+const WCHAR *Dll_HomeDosPath = NULL;
+//ULONG Dll_HomeDosPathLen = 0;
 
 const WCHAR *Dll_BoxFilePath = NULL;
 const WCHAR *Dll_BoxKeyPath = NULL;
@@ -259,6 +266,18 @@ _FX void Dll_InitInjected(void)
     Dll_SidString = (const WCHAR *)Dll_SidStringSpace;
 
     Dll_SidStringLen = wcslen(Dll_SidString);
+
+    //
+    // query Sandboxie home folder
+    //
+
+    Dll_HomeNtPath = Dll_AllocTemp(1024 * sizeof(WCHAR));
+    Dll_HomeDosPath = Dll_AllocTemp(1024 * sizeof(WCHAR));
+
+    SbieApi_GetHomePath(Dll_HomeNtPath, 1020, Dll_HomeDosPath, 1020);
+
+    Dll_HomeNtPathLen = wcslen(Dll_HomeNtPath);
+    //Dll_HomeDosPathLen = wcslen(Dll_HomeDosPath);
 
     //
     // get process type and flags
@@ -721,7 +740,6 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
-    extern SBIELOW_DATA* SbieApi_data;
     SbieApi_data = data;
 
     VirtualProtect((void *)(ULONG_PTR)data, sizeof(SBIELOW_DATA),
@@ -764,7 +782,11 @@ _FX ULONG_PTR Dll_Ordinal1(
         //
         HANDLE heventProcessStart = 0;
 
-        Dll_InitInjected();
+        Dll_InitInjected(); // install required hooks
+
+        //
+        // notify RPCSS that a new proces was created in the current sandbox
+        //
 
         if (Dll_ImageType != DLL_IMAGE_SANDBOXIE_RPCSS) {
             heventProcessStart = CreateEvent(0, FALSE, FALSE, SESSION_PROCESS);

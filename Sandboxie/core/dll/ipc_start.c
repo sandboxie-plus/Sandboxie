@@ -162,24 +162,21 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                 // starting rpcss: go thrugh SbieSvc ProcessServer
                 //
 
-                WCHAR homedir[MAX_PATH];
-                SbieApi_GetHomePath(NULL, 0, homedir, MAX_PATH);
-
                 if (! Proc_ImpersonateSelf(TRUE))
                     errnum = ERROR_NO_IMPERSONATION_TOKEN;
                 else {
 
                     //WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
-                    //Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
+                    //Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", Dll_HomeDosPath, program);
 
                     //
 					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
 					//
 
                     //if (! SbieDll_RunSandboxed(
-                    //        L"*THREAD*", fullpath, homedir, 0, &si, &pi))
+                    //        L"*THREAD*", fullpath, Dll_HomeDosPath, 0, &si, &pi))
                     if (! SbieDll_RunSandboxed(
-                              L"", L"*RPCSS*", homedir, 0, &si, &pi))
+                              L"", L"*RPCSS*", Dll_HomeDosPath, 0, &si, &pi))
                         errnum = GetLastError();
                     else
                         errnum = -1;

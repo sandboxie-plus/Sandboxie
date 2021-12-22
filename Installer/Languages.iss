@@ -106,9 +106,9 @@ ChineseTraditional.UninstallTaskLabel5=刪除設定檔和沙箱(&S)%n選擇此�
 
 ; Dutch
 dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
-dutch.AddSandboxedBrowser=Bureaubladsnelkoppeling toevoegen om webbrowser onder Sandboxie te starten
+dutch.AddSandboxedBrowser=Gesandboxte webbrowser aan bureaublad toevoegen
 dutch.SandboxieStartMenu1=Programma gesandboxt uitvoeren
-dutch.SandboxieStartMenu2=Gesandboxte webbrowser uitvoeren
+dutch.SandboxieStartMenu2=Webbrowser gesandboxt uitvoeren
 dutch.SandboxieStartMenu3=Sandboxie-startmenu
 dutch.SandboxedBrowser=Gesandboxte webbrowser
 dutch.CustomPageLabel1=Installatietype selecteren

@@ -62,11 +62,11 @@ english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect th
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙盘中运行”菜单
-;ChineseSimplified.AddSandboxedBrowser=
-;ChineseSimplified.SandboxieStartMenu1=
-;ChineseSimplified.SandboxieStartMenu2=
-;ChineseSimplified.SandboxieStartMenu3=
-;ChineseSimplified.SandboxedBrowser=
+ChineseSimplified.AddSandboxedBrowser=为用 Sandboxie 启动网页浏览器添加桌面快捷方式
+ChineseSimplified.SandboxieStartMenu1=在沙盘中运行程序
+ChineseSimplified.SandboxieStartMenu2=在沙盘中运行网页浏览器
+ChineseSimplified.SandboxieStartMenu3=Sandboxie 开始菜单
+ChineseSimplified.SandboxedBrowser=在沙盘中运行网页浏览器
 ChineseSimplified.CustomPageLabel1=选择安装方式
 ChineseSimplified.CustomPageLabel2=应当如何安装
 ChineseSimplified.CustomPageLabel3=选择安装模式
@@ -84,11 +84,11 @@ ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盘(&S)%n选
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
-;ChineseTraditional.AddSandboxedBrowser=
-;ChineseTraditional.SandboxieStartMenu1=
-;ChineseTraditional.SandboxieStartMenu2=
-;ChineseTraditional.SandboxieStartMenu3=
-;ChineseTraditional.SandboxedBrowser=
+ChineseTraditional.AddSandboxedBrowser=在桌面放置從沙盤開啟網頁瀏覽器的捷徑
+ChineseTraditional.SandboxieStartMenu1=在沙盤中執行應用程式
+ChineseTraditional.SandboxieStartMenu2=在沙盤中開啟網頁瀏覽器
+ChineseTraditional.SandboxieStartMenu3=Sandboxie 開始功能表
+ChineseTraditional.SandboxedBrowser=從沙盤開啟網頁瀏覽器
 ChineseTraditional.CustomPageLabel1=選擇安裝方式
 ChineseTraditional.CustomPageLabel2=應該如何安裝
 ChineseTraditional.CustomPageLabel3=選擇安裝模式
@@ -106,11 +106,11 @@ ChineseTraditional.UninstallTaskLabel5=刪除設定檔和沙箱(&S)%n選擇此�
 
 ; Dutch
 dutch.AddSandboxedMenu="In sandbox uitvoeren" aan contextmenu toevoegen
-;dutch.AddSandboxedBrowser=
-;dutch.SandboxieStartMenu1=
-;dutch.SandboxieStartMenu2=
-;dutch.SandboxieStartMenu3=
-;dutch.SandboxedBrowser=
+dutch.AddSandboxedBrowser=Bureaubladsnelkoppeling toevoegen om webbrowser onder Sandboxie te starten
+dutch.SandboxieStartMenu1=Programma gesandboxt uitvoeren
+dutch.SandboxieStartMenu2=Gesandboxte webbrowser uitvoeren
+dutch.SandboxieStartMenu3=Sandboxie-startmenu
+dutch.SandboxedBrowser=Gesandboxte webbrowser
 dutch.CustomPageLabel1=Installatietype selecteren
 dutch.CustomPageLabel2=Hoe moet er geïnstalleerd worden
 dutch.CustomPageLabel3=Installatiemodus kiezen
@@ -128,11 +128,11 @@ dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelect
 
 ; French
 french.AddSandboxedMenu=Ajouter « Exécuter dans un bac à sable » au menu contextuel
-;french.AddSandboxedBrowser=
-;french.SandboxieStartMenu1=
-;french.SandboxieStartMenu2=
-;french.SandboxieStartMenu3=
-;french.SandboxedBrowser=
+french.AddSandboxedBrowser=Ajouter un raccourci sur le bureau pour Exécuter le Navigateur Internet dans Sandboxie
+french.SandboxieStartMenu1=Exécuter un programme sandboxé
+french.SandboxieStartMenu2=Exécuter le Navigateur Internet sandboxé
+french.SandboxieStartMenu3=Exécuter dans le menu Démarrer
+french.SandboxedBrowser=Lien Navigateur Internet Sandboxé
 french.CustomPageLabel1=Sélectionnez le type d'installation
 french.CustomPageLabel2=Comment doit-on l'installer
 french.CustomPageLabel3=Choisissez le mode d'installation
@@ -150,11 +150,11 @@ french.UninstallTaskLabel5=Supprimer les fichiers de configuration et les &bacs 
 
 ; German
 german.AddSandboxedMenu=Füge "In Sandbox ausführen" zum Kontextmenü hinzu
-;german.AddSandboxedBrowser=
-;german.SandboxieStartMenu1=
-;german.SandboxieStartMenu2=
-;german.SandboxieStartMenu3=
-;german.SandboxedBrowser=
+german.AddSandboxedBrowser=Desktop-Verknüpfung erstellen zum Starten des Standard-Webbrowsers mit Sandboxie
+german.SandboxieStartMenu1=Programm mit Sandboxie starten
+german.SandboxieStartMenu2=Webbrowser mit Sandboxie starten
+german.SandboxieStartMenu3=Sandboxie Startmenü
+german.SandboxedBrowser=Sandboxed Web Browser
 german.CustomPageLabel1=Wählen Sie die Installationsart aus
 german.CustomPageLabel2=Wie soll installiert werden
 german.CustomPageLabel3=Wählen Sie die Installationsmethode
@@ -196,11 +196,11 @@ Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali
 
 ; Polish
 polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego
-;polish.AddSandboxedBrowser=
-;polish.SandboxieStartMenu1=
-;polish.SandboxieStartMenu2=
-;polish.SandboxieStartMenu3=
-;polish.SandboxedBrowser=
+polish.AddSandboxedBrowser=Dodaj skrót pulpitu dla przeglądarki internetowej uruchamianej w Sandboxie
+polish.SandboxieStartMenu1=Uruchom dowolny program w piaskownicy
+polish.SandboxieStartMenu2=Uruchom przeglądarkę internetową w piaskownicy
+polish.SandboxieStartMenu3=Menu start w Sandboxie
+polish.SandboxedBrowser=Przeglądarka internetowa w piaskownicy
 polish.CustomPageLabel1=Wybierz typ instalacji
 polish.CustomPageLabel2=Jak należy instalować
 polish.CustomPageLabel3=Wybierz tryb instalacji
@@ -218,11 +218,11 @@ polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz t�
 
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
-;portuguese.AddSandboxedBrowser=
-;portuguese.SandboxieStartMenu1=
-;portuguese.SandboxieStartMenu2=
-;portuguese.SandboxieStartMenu3=
-;portuguese.SandboxedBrowser=
+portuguese.AddSandboxedBrowser=Adicionar um atalho na área de trabalho para iniciar o Navegador web sob o Sandboxie
+portuguese.SandboxieStartMenu1=Rodar qualquer programa em uma caixa de areia
+portuguese.SandboxieStartMenu2=Rodar o Navegador web em uma caixa de areia
+portuguese.SandboxieStartMenu3=Menu Iniciar no Sandboxie
+portuguese.SandboxedBrowser=Navegador web em uma caixa
 portuguese.CustomPageLabel1=Selecione Tipo de Instalação
 portuguese.CustomPageLabel2=Como deve ser instalado
 portuguese.CustomPageLabel3=Escolha o modo de instalação
@@ -240,11 +240,11 @@ portuguese.UninstallTaskLabel5=Remover arquivos de configuração e &caixas de a
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню
-;russian.AddSandboxedBrowser=
-;russian.SandboxieStartMenu1=
-;russian.SandboxieStartMenu2=
-;russian.SandboxieStartMenu3=
-;russian.SandboxedBrowser=
+russian.AddSandboxedBrowser=Добавить ярлык на рабочий стол для запуска браузера в Sandboxie
+russian.SandboxieStartMenu1=Запустить программу в песочнице
+russian.SandboxieStartMenu2=Запустить веб браузер в песочнице
+russian.SandboxieStartMenu3=Начальное меню Sandboxie
+russian.SandboxedBrowser=Браузер в песочнице
 russian.CustomPageLabel1=Выберите тип установки
 russian.CustomPageLabel2=Как следует установить
 russian.CustomPageLabel3=Выберите режим установки
@@ -262,11 +262,11 @@ russian.UninstallTaskLabel5=Удалить файлы конфигурации �
 
 ; Spanish
 spanish.AddSandboxedMenu=Agregar "Ejecutar Aislado en una Sandbox" al menú contextual
-;spanish.AddSandboxedBrowser=
-;spanish.SandboxieStartMenu1=
-;spanish.SandboxieStartMenu2=
-;spanish.SandboxieStartMenu3=
-;spanish.SandboxedBrowser=
+spanish.AddSandboxedBrowser=Agregar Acceso Directo al Escritorio para iniciar el Navegador Web supervisado por Sandboxie
+spanish.SandboxieStartMenu1=Ejecutar un programa aislado en la sandbox
+spanish.SandboxieStartMenu2=Ejecutar Navegador Web aislado en una sandbox
+spanish.SandboxieStartMenu3=Menú de Inicio de Sandboxie
+spanish.SandboxedBrowser=Navegador Web Aislado en una Sandbox
 spanish.CustomPageLabel1=Seleccione el tipo de instalación
 spanish.CustomPageLabel2=¿Cómo se debe instalar?
 spanish.CustomPageLabel3=Elija el modo de instalación

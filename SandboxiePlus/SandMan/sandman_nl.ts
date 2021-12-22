@@ -3338,8 +3338,8 @@ U kunt in plaats daarvan &apos;open voor iedereen&apos; gebruiken om het op alle
         <location filename="Forms/OptionsWindow.ui" line="1750"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
-        <translation>De regel specificiteit is een maatstaf voor hoe goed een gegeven regel overeenkomt met een bepaald pad. Eenvoudig gezegd is de specificiteit de lengte van de tekens vanaf het begin van het pad tot en met de laatste overeenstemmende substring zonder wildcard. Een regel die alleen overeenstemt met bestandstypes zoals &quot;*.tmp&quot; zou de hoogste specificiteit hebben omdat hij altijd overeenstemt met het volledige bestandspad.
-Het proces overeenstemmingsniveau heeft een hogere prioriteit dan de specificiteit en beschrijft hoe een regel van toepassing is op een gegeven proces. Regels die van toepassing zijn op procesnaam of groep hebben het sterkste overeenstemmingsniveau, gevolgd door het overeenstemmen door negatie (d.w.z. regels die van toepassing zijn op alle processen behalve het gegeven proces), terwijl de laagste overeenstemmingsniveaus globale overeenstemmingen hebben, d.w.z. regels die van toepassing zijn op gelijk welk proces.</translation>
+        <translation>De regel-specificiteit is een maatstaf voor hoe goed een gegeven regel overeenkomt met een bepaald pad. Eenvoudig gezegd is de specificiteit de lengte van de tekens vanaf het begin van het pad tot en met de laatste overeenstemmende substring zonder wildcard. Een regel die alleen overeenstemt met bestandstypes zoals &quot;*.tmp&quot; zou de hoogste specificiteit hebben omdat hij altijd overeenstemt met het volledige bestandspad.
+Het proces-overeenstemmingsniveau heeft een hogere prioriteit dan de specificiteit en beschrijft hoe een regel van toepassing is op een gegeven proces. Regels die van toepassing zijn op procesnaam of groep hebben het sterkste overeenstemmingsniveau, gevolgd door het overeenstemmen door negatie (d.w.z. regels die van toepassing zijn op alle processen behalve het gegeven proces), terwijl de laagste overeenstemmingsniveaus globale overeenstemmingen hebben, d.w.z. regels die van toepassing zijn op gelijk welk proces.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1774"/>
@@ -3402,10 +3402,6 @@ Het proces overeenstemmingsniveau heeft een hogere prioriteit dan de specificite
         <translation>Gesandboxte processen aan job-objecten toevoegen (aanbevolen)</translation>
     </message>
     <message>
-        <source>COM isolation</source>
-        <translation type="vanished">COM-isolatie</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1997"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Gesandboxt venster station emuleren voor alle processen</translation>
@@ -3453,12 +3449,12 @@ Het proces overeenstemmingsniveau heeft een hogere prioriteit dan de specificite
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2162"/>
         <source>COM/RPC</source>
-        <translation type="unfinished"></translation>
+        <translation>COM/RPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2176"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Het gebruik van RpcMgmtSetComTimeout standaard uitschakelen (dit kan compatibiliteitsproblemen oplossen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2278"/>
@@ -4034,10 +4030,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <translation>Sandboxing-functies</translation>
     </message>
     <message>
-        <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translation type="vanished">Windows Filtering Platform gebruiken om netwerktoegang te beperken (experimenteel)</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="633"/>
         <source>Change Password</source>
         <translation>Wachtwoord wijzigen</translation>
@@ -4080,7 +4072,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="367"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Filtering Platform gebruiken om netwerktoegang te beperken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="400"/>
@@ -4090,7 +4082,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="490"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerde Win32k system calls hooken om GPU-versnelling in te schakelen (experimenteel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>
@@ -4166,7 +4158,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>Sandboxie heeft de volgende softwaretoepassingen op uw systeem gedetecteerd. Klik op OK om configuratie-instellingen toe te passen, die de compatibiliteit met deze toepassingen zullen verbeteren. Deze configuratie-instellingen zullen effect hebben in alle bestaande sandboxen en in alle nieuwe sandboxen.</translation>
+        <translation>Sandboxie heeft de volgende softwaretoepassingen op uw systeem gedetecteerd. Klik op OK om configuratie-instellingen toe te passen die de compatibiliteit met deze toepassingen zullen verbeteren. Deze configuratie-instellingen zullen effect hebben in alle bestaande sandboxen en in alle nieuwe sandboxen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>

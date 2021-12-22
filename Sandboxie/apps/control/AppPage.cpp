@@ -555,7 +555,9 @@ void CAppPage::Template_Filter()
                   || (name.Find(L"Brave_") != -1)
                   || (name.Find(L"Maxthon_6_") != -1)
                   || (name.Find(L"Opera_") != -1)
-                  || (name.Find(L"Yandex_") != -1);
+                  || (name.Find(L"Yandex_") != -1)
+                  || (name.Find(L"Osiris_") != -1)
+                  || (name.Find(L"Slimjet_") != -1);
 
         BOOL keep = FALSE;
 

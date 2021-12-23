@@ -17,7 +17,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved sbiedll initialization a bit
-- "UseSbieWndStation=y" is now the default behavioure [#1442](https://github.com/sandboxie-plus/Sandboxie/issues/1442)
 - doubled name buffer depth [#1342](https://github.com/sandboxie-plus/Sandboxie/issues/1342)
 
 ### Fixed

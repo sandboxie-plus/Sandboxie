@@ -130,7 +130,7 @@ void COptionsWindow::LoadAdvanced()
 void COptionsWindow::SaveAdvanced()
 {
 	WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "y", "");
-	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "", "n");
+	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "y", "");
 
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");

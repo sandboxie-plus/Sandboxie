@@ -534,8 +534,8 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
-	if(theAPI->IsConnected())
-		m_pBoxView->SaveUserConfig();
+	//if(theAPI->IsConnected())
+	//	m_pBoxView->SaveUserConfig();
 
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
@@ -2369,13 +2369,16 @@ void CSandMan::LoadLanguage()
 	if(Lang.isEmpty())
 		Lang = QLocale::system().name();
 
-	if (!Lang.isEmpty())
-		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+	if (Lang.compare("native", Qt::CaseInsensitive) != 0) {
+		if (!Lang.isEmpty())
+			m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+
+		LoadLanguage(Lang, "sandman", 0);
+		LoadLanguage(Lang, "qt", 1);
+	}
+
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
-
-	LoadLanguage(Lang, "sandman", 0);
-	LoadLanguage(Lang, "qt", 1);
 }
 
 void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)

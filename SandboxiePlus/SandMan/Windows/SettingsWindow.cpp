@@ -93,7 +93,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setCurrentIndex(0);
 
 	ui.uiLang->addItem(tr("Auto Detection"), "");
-	ui.uiLang->addItem("International English", "en");
+	ui.uiLang->addItem("International English", "native");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
 	foreach(const QString& langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{

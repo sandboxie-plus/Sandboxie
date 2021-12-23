@@ -49,7 +49,7 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #define COPY_NAME_BUFFER        1
 #define TMPL_NAME_BUFFER        2
 #define NAME_BUFFER_COUNT       3
-#define NAME_BUFFER_DEPTH       12
+#define NAME_BUFFER_DEPTH       24
 
 
 #ifdef _WIN64

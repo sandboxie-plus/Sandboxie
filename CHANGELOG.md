@@ -17,11 +17,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved sbiedll initialization a bit
+- "UseSbieWndStation=y" is now the default behavioure [#1442](https://github.com/sandboxie-plus/Sandboxie/issues/1442)
+- doubled name buffer depth [#1342](https://github.com/sandboxie-plus/Sandboxie/issues/1342)
 
 ### Fixed
 - fixed issue with forced process display [#1447](https://github.com/sandboxie-plus/Sandboxie/issues/1447)
 - fixed crash issue with GetClassName [#1448](https://github.com/sandboxie-plus/Sandboxie/issues/1448)
-
+- fixed minor ui issue [#1382](https://github.com/sandboxie-plus/Sandboxie/issues/1382)
+- fixed ui lang preset issue [#1348](https://github.com/sandboxie-plus/Sandboxie/issues/1348)
+- fixed grouping issues in sandman UI [#1358](https://github.com/sandboxie-plus/Sandboxie/issues/1358)
 
 
 

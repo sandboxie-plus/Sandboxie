@@ -59,7 +59,7 @@ protected:
 
 	QMap<QString, QStringList>	m_Groups;
 	QSet<QString>				m_Collapsed;
-	bool						m_UserConfigChanged;
+	//bool						m_UserConfigChanged;
 
 private:
 

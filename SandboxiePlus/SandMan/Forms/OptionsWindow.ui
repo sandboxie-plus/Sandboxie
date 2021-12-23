@@ -2173,7 +2173,7 @@ The process match level has a higher priority than the specificity and describes
                  <item row="15" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkComTimeout">
                    <property name="text">
-                    <string>Disable using RpcMgmtSetComTimeout by default (toggle this may resovle compatybility issues)</string>
+                    <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
                    </property>
                   </widget>
                  </item>

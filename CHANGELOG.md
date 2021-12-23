@@ -8,23 +8,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.5 / 5.55.5] - 2021-12-??
 
 ### Added
-- sandbox top level exception handler to create crash dumps
--- can be enabled per process or globally using "EnableMiniDump=process.exe,y" or "EnableMiniDump=y" respectivly
--- the dump flags can be set as hex with MiniDumpFlags=0xAABBCCDD
--- a presellected flag set for a verbose dump can be set with MiniDumpFlags=Extended
--- note: Created dump files are located at: C:\Sandbox\%SANDBOX%
+- added template support for Osiris and Slimjet browsers (by Dyras) [#1454](https://github.com/sandboxie-plus/Sandboxie/pull/1454)
 
 ### Changed
 - improved sbiedll initialization a bit
 
 ### Fixed
 - fixed issue with forced process display [#1447](https://github.com/sandboxie-plus/Sandboxie/issues/1447)
-- fixed crash issue with GetClassName [#1448](https://github.com/sandboxie-plus/Sandboxie/issues/1448)
 
 
 
 
-## [1.0.4 / 5.55.4] - 2021-12-20
+## [1.0.4 / 5.55.4] - 2021-12-21
 
 ### Added
 - Mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64

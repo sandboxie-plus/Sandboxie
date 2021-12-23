@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-12-22
+#  Latest update by RockyTDR on 2021-12-23
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -3859,7 +3859,7 @@ Selecteer een programma uit het startmenu om uit te voeren onder toezicht van Sa
 .
 
 8025;ins;01
-Gesandboxte webbrowser uitvoeren.lnk
+Webbrowser gesandboxt uitvoeren.lnk
 .
 
 8026;ins;01

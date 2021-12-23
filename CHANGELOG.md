@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.5 / 5.55.5] - 2021-12-??
 
 ### Added
-- 
+- added template support for Osiris and Slimjet browsers (by Dyras) [#1454](https://github.com/sandboxie-plus/Sandboxie/pull/1454)
 
 ### Changed
 - improved sbiedll initialization a bit
@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.4 / 5.55.4] - 2021-12-20
+## [1.0.4 / 5.55.4] - 2021-12-21
 
 ### Added
 - Mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64

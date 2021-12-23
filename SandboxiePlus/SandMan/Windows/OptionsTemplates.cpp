@@ -120,13 +120,13 @@ void COptionsWindow::ShowTemplates()
 		if (!CategoryFilter.isEmpty() && I.key().compare(CategoryFilter, Qt::CaseInsensitive) != 0)
 			continue;
 
-		QString Name = I.value().first.mid(9);
-
-		if (!Name.isEmpty() && Name.indexOf(TextFilter, 0, Qt::CaseInsensitive) == -1)
+		if (I.value().second.indexOf(TextFilter, 0, Qt::CaseInsensitive) == -1)
 			continue;
 
 		if (I.key().isEmpty())
 			continue; // dont show templates without a category (these are usually deprecated templates)
+
+		QString Name = I.value().first.mid(9);
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setText(0, GetCategoryName(I.key()));

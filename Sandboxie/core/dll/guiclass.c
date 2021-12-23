@@ -742,8 +742,10 @@ _FX int Gui_GetClassNameW(
             n -= (ULONG)(clsnm_ptr - clsnm);
             if (n > nMaxCount - 1)
                 n = nMaxCount - 1;
-            wmemcpy(lpClassName, clsnm_ptr, n);
-            lpClassName[n] = L'\0';
+            if (lpClassName) {
+                wmemcpy(lpClassName, clsnm_ptr, n);
+                lpClassName[n] = L'\0';
+            }
         } else
             n = 0;
     } else
@@ -754,8 +756,10 @@ _FX int Gui_GetClassNameW(
             n = nMaxCount - 1;
         else
             n = n0;
-        wmemcpy(lpClassName, clsnm, n);
-        lpClassName[n] = L'\0';
+        if (lpClassName) {
+            wmemcpy(lpClassName, clsnm, n);
+            lpClassName[n] = L'\0';
+        }
     }
 
     Dll_Free(clsnm);
@@ -796,8 +800,10 @@ _FX int Gui_GetClassNameA(
             n -= (ULONG)(clsnm_ptr - clsnm);
             if (n > nMaxCount - 1)
                 n = nMaxCount - 1;
-            memcpy(lpClassName, clsnm_ptr, n);
-            lpClassName[n] = '\0';
+            if (lpClassName) {
+                memcpy(lpClassName, clsnm_ptr, n);
+                lpClassName[n] = '\0';
+            }
         } else
             n = 0;
     } else
@@ -808,8 +814,10 @@ _FX int Gui_GetClassNameA(
             n = nMaxCount - 1;
         else
             n = n0;
-        memcpy(lpClassName, clsnm, n);
-        lpClassName[n] = L'\0';
+        if (lpClassName) {
+            memcpy(lpClassName, clsnm, n);
+            lpClassName[n] = L'\0';
+        }
     }
 
     Dll_Free(clsnm);

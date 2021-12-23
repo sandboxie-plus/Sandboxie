@@ -240,6 +240,7 @@
     <ClCompile Include="dllmain.c" />
     <ClCompile Include="dllmem.c" />
     <ClCompile Include="dllpath.c" />
+    <ClCompile Include="dump.c" />
     <ClCompile Include="event.c" />
     <ClCompile Include="file.c" />
     <ClCompile Include="file_dir.c">
@@ -423,6 +424,7 @@
     <ClInclude Include="advapi.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="dll.h" />
+    <ClInclude Include="dump.h" />
     <ClInclude Include="guidlg.h" />
     <ClInclude Include="gui_p.h" />
     <ClInclude Include="hook.h" />

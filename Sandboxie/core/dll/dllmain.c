@@ -25,6 +25,7 @@
 #include "obj.h"
 #include "trace.h"
 #include "debug.h"
+#include "dump.h"
 #include "core/low/lowdata.h"
 #include "common/my_version.h"
 
@@ -529,6 +530,17 @@ _FX void Dll_InitExeEntry(void)
     //
 
     SbieDll_StartCOM(TRUE);
+
+    //
+    // setup own top level exception handler
+    //
+
+    if(Config_GetSettingsForImageName_bool(L"EnableMiniDump", FALSE))
+        Dump_Init();
+
+    //
+    // once we return here the process images entrypoint will be called
+    //
 }
 
 

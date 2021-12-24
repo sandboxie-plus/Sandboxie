@@ -9,22 +9,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - sandbox top level exception handler to create crash dumps
--- can be enabled per process or globally using "EnableMiniDump=process.exe,y" or "EnableMiniDump=y" respectivly
--- the dump flags can be set as hex with MiniDumpFlags=0xAABBCCDD
--- a presellected flag set for a verbose dump can be set with MiniDumpFlags=Extended
--- note: Created dump files are located at: C:\Sandbox\%SANDBOX%
+-- it can be enabled per process or globally using "EnableMiniDump=process.exe,y" or "EnableMiniDump=y" respectively
+-- the dump flags can be set as hex with "MiniDumpFlags=0xAABBCCDD"
+-- a preselected flag set for a verbose dump can be set with "MiniDumpFlags=Extended"
+-- Note: created dump files are located at: `C:\Sandbox\%SANDBOX%`
 - added template support for Osiris and Slimjet browsers (by Dyras) [#1454](https://github.com/sandboxie-plus/Sandboxie/pull/1454)
 
 ### Changed
-- improved sbiedll initialization a bit
-- doubled name buffer depth [#1342](https://github.com/sandboxie-plus/Sandboxie/issues/1342)
+- improved SbieDll initialization a bit
+- doubled size of Name_Buffer_Depth [#1342](https://github.com/sandboxie-plus/Sandboxie/issues/1342)
+- improved text filter in the templates view [#1456](https://github.com/sandboxie-plus/Sandboxie/issues/1456)
 
 ### Fixed
 - fixed issue with forced process display [#1447](https://github.com/sandboxie-plus/Sandboxie/issues/1447)
 - fixed crash issue with GetClassName [#1448](https://github.com/sandboxie-plus/Sandboxie/issues/1448)
-- fixed minor ui issue [#1382](https://github.com/sandboxie-plus/Sandboxie/issues/1382)
-- fixed ui lang preset issue [#1348](https://github.com/sandboxie-plus/Sandboxie/issues/1348)
-- fixed grouping issues in sandman UI [#1358](https://github.com/sandboxie-plus/Sandboxie/issues/1358)
+- fixed minor UI issue [#1382](https://github.com/sandboxie-plus/Sandboxie/issues/1382)
+- fixed UI language preset issue [#1348](https://github.com/sandboxie-plus/Sandboxie/issues/1348)
+- fixed grouping issues in SandMan UI [#1358](https://github.com/sandboxie-plus/Sandboxie/issues/1358)
+- fixed issue with EnableWin32kHooks [#1458](https://github.com/sandboxie-plus/Sandboxie/issues/1458)
 
 
 
@@ -1217,7 +1219,7 @@ Fixed issue with Windows 7
 -- programs can be terminated and blacklisted from the context menu
 - added additional process context menu options, lingering and leader process can be now set from menu
 - added option to view template presets for any given box
-- added text filter to template view
+- added text filter to templates view
 - added new compatibility templates:
 -- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis [#120](https://github.com/sandboxie-plus/Sandboxie/issues/120) [#88](https://github.com/sandboxie-plus/Sandboxie/issues/88)
 -- Firefox Quantum, access to Windows’ FontCachePort for compatibility with Windows 7

@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.5 / 5.55.5] - 2021-12-??
+## [1.0.5 / 5.55.5] - 2021-12-25
 
 ### Added
 - sandbox top level exception handler to create crash dumps

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
  * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -182,8 +182,8 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     WCHAR *dllname = Dll_AllocTemp(MAX_PATH * 2 * sizeof(WCHAR));
     ULONG index = 0;
 
-	WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
-	SbieApi_GetHomePath(NULL, 0, path, 1020);
+    WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
+    SbieApi_GetHomePath(NULL, 0, path, 1020);
 
     if (!__sys_LdrLoadDll)
         __sys_LdrLoadDll = (P_LdrLoadDll)GetProcAddress(Dll_Ntdll, "LdrLoadDll");
@@ -201,7 +201,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
         }
 
 		//
-		// For expidient use we allow to enter the dll name without a path 
+		// For expedient use we allow to enter the dll name without a path
 		// starting with \ in that case the DLL is looked for in %SbieHome%
 		//
 
@@ -217,7 +217,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
         //
 
         else if (bHostInject)
-            continue; 
+            continue;
 
 
         //
@@ -249,7 +249,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     }
 
     Dll_Free(dllname);
-	Dll_Free(path);
+    Dll_Free(path);
 }
 
 
@@ -803,7 +803,7 @@ _FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
         //
 
         Ldr_LoadInjectDlls(g_bHostInject);
-        
+
         Dll_InitExeEntry();
     }
     else

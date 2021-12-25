@@ -249,7 +249,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     }
 
     Dll_Free(dllname);
-	Dll_Free(path);
+    Dll_Free(path);
 }
 
 

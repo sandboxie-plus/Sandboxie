@@ -28,6 +28,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed grouping issues in SandMan UI [#1358](https://github.com/sandboxie-plus/Sandboxie/issues/1358)
 - fixed issue with EnableWin32kHooks [#1458](https://github.com/sandboxie-plus/Sandboxie/issues/1458)
 
+### Installers re-released with the following fix:
+- fixed regression when launching Office apps [#1468](https://github.com/sandboxie-plus/Sandboxie/issues/1468)
+
 
 
 ## [1.0.4 / 5.55.4] - 2021-12-20

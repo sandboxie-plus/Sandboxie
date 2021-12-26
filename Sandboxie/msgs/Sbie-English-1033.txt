@@ -748,6 +748,10 @@ Remove command from command history
 Select the sandbox in which to start the program or document.
 .
 
+3107;txt;01
+Type the name, or path to a program to open the following file with in the current sandbox:
+.
+
 3111;txt;01
       Sandboxie Start Menu - %2  %0
 .

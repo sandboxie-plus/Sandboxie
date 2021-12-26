@@ -993,7 +993,7 @@ QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 	return UserSection;
 }
 
-SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir)
+SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
@@ -1010,13 +1010,23 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, boo
 
 	//wchar_t sysPath[MAX_PATH];
 	//GetSystemDirectoryW(sysPath, MAX_PATH);
-	QProcess process;
-	//process.setWorkingDirectory(QString::fromWCharArray(sysPath));
-	if (!WorkingDir.isEmpty())
-		process.setWorkingDirectory(WorkingDir);
-	process.setProgram(GetStartPath());
-	process.setNativeArguments(StartArgs);
-	process.startDetached();
+	if (pProcess) {
+		//pProcess->setWorkingDirectory(QString::fromWCharArray(sysPath));
+		if (!WorkingDir.isEmpty())
+			pProcess->setWorkingDirectory(WorkingDir);
+		pProcess->setProgram(GetStartPath());
+		pProcess->setNativeArguments(StartArgs);
+		pProcess->start();
+	} 
+	else {
+		QProcess process;
+		//process.setWorkingDirectory(QString::fromWCharArray(sysPath));
+		if (!WorkingDir.isEmpty())
+			process.setWorkingDirectory(WorkingDir);
+		process.setProgram(GetStartPath());
+		process.setNativeArguments(StartArgs);
+		process.startDetached();
+	}
 
 	/*
 	QString CommandLine = "\"" + GetStartPath() + "\" " + StartArgs;

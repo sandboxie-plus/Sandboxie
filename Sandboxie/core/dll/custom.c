@@ -43,6 +43,7 @@ static BOOLEAN  DisableWerFaultUI(void);
 static BOOLEAN  EnableMsiDebugging(void);
 static BOOLEAN  Custom_EnableBrowseNewProcess(void);
 static BOOLEAN  Custom_DisableBHOs(void);
+static BOOLEAN  Custom_OpenWith(void);
 static HANDLE   OpenExplorerKey(
                     HANDLE ParentKey, const WCHAR *SubkeyName, ULONG *error);
 static void     DeleteShellAssocKeys(ULONG Wow64);
@@ -71,9 +72,9 @@ _FX BOOLEAN CustomizeSandbox(void)
     // customize sandbox if we need to
     //
 
-    if (GetSetCustomLevel(0) != '1') {
+    Key_CreateBaseKeys();
 
-        Key_CreateBaseKeys();
+    if (GetSetCustomLevel(0) != '2') {
 
         Custom_CreateRegLinks();
         DisableDCOM();
@@ -85,8 +86,10 @@ _FX BOOLEAN CustomizeSandbox(void)
         Custom_EnableBrowseNewProcess();
         DeleteShellAssocKeys(0);
         Custom_DisableBHOs();
+        if (Dll_OsBuild >= 8400) // only on win 8 and later
+            Custom_OpenWith();
 
-        GetSetCustomLevel('1');
+        GetSetCustomLevel('2');
 
         //
         // process user-defined AutoExec settings
@@ -132,6 +135,8 @@ _FX UCHAR GetSetCustomLevel(UCHAR SetLevel)
 
         wcscpy(path, L"\\registry\\user\\");
         wcscat(path, Dll_SidString);
+        //wcscpy(path, Dll_BoxKeyPath);
+        //wcscat(path, L"\\user\\current");
         wcscat(path, L"\\software\\SandboxAutoExec");
 
         RtlInitUnicodeString(&uni, path);
@@ -433,6 +438,110 @@ _FX BOOLEAN EnableMsiDebugging(void)
         }
         NtClose(hKeyRoot);
     }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Custom_OpenWith
+// 
+// Replace open With dialog as on Win10 it requirers UWP support
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Custom_OpenWith(void)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING uni;
+    HANDLE hKeyRoot;
+    HANDLE hKey;
+    HANDLE hKeyCL;
+
+    ULONG OpenWithSize = (wcslen(Dll_BoxName) + 128) * sizeof(WCHAR);
+    WCHAR* OpenWithStr = Dll_AllocTemp(OpenWithSize);
+    OpenWithStr[0] = L'\"';
+    wcscpy(&OpenWithStr[1], Dll_HomeDosPath);
+    wcscat(OpenWithStr, L"\\" START_EXE L"\" open_with \"%1\"");
+    OpenWithSize = (wcslen(OpenWithStr) + 1) * sizeof(WCHAR);
+
+    // Open HKLM
+    RtlInitUnicodeString(&uni, Custom_PrefixHKLM);
+    InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    if (NtOpenKey(&hKeyRoot, KEY_READ, &objattrs) == STATUS_SUCCESS)
+    {
+        // open Classes key
+        RtlInitUnicodeString(&uni, L"SOFTWARE\\Classes");
+        InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyRoot, NULL);
+        if (Key_OpenOrCreateIfBoxed(&hKeyCL, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+        {
+            // open/create Undecided\shell\open\command key
+            RtlInitUnicodeString(&uni, L"Undecided\\shell\\open\\command");
+            InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyCL, NULL);
+            if (Key_OpenOrCreateIfBoxed(&hKey, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+            {
+                // set @ = "..."
+                RtlInitUnicodeString(&uni, L"");
+                status = NtSetValueKey(hKey, &uni, 0, REG_SZ, (BYTE *)OpenWithStr, OpenWithSize);
+
+                RtlInitUnicodeString(&uni, L"DelegateExecute");
+                NtDeleteValueKey(hKey, &uni);
+
+                NtClose(hKey);
+            }
+
+            // open/create Unknown\shell\Open\command key
+            RtlInitUnicodeString(&uni, L"Unknown\\shell\\Open\\command");
+            InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyCL, NULL);
+            if (Key_OpenOrCreateIfBoxed(&hKey, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+            {
+                // set @ = "..."
+                RtlInitUnicodeString(&uni, L"");
+                status = NtSetValueKey(hKey, &uni, 0, REG_SZ, (BYTE *)OpenWithStr, OpenWithSize);
+
+                RtlInitUnicodeString(&uni, L"DelegateExecute");
+                NtDeleteValueKey(hKey, &uni);
+
+                NtClose(hKey);
+            }
+
+            // open/create Unknown\shell\openas\command key
+            RtlInitUnicodeString(&uni, L"Unknown\\shell\\openas\\command");
+            InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyCL, NULL);
+            if (Key_OpenOrCreateIfBoxed(&hKey, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+            {
+                // set @ = "..."
+                RtlInitUnicodeString(&uni, L"");
+                status = NtSetValueKey(hKey, &uni, 0, REG_SZ, (BYTE *)OpenWithStr, OpenWithSize);
+
+                RtlInitUnicodeString(&uni, L"DelegateExecute");
+                NtDeleteValueKey(hKey, &uni);
+
+                NtClose(hKey);
+            }
+
+            // open/create Unknown\shell\OpenWithSetDefaultOn\command key
+            RtlInitUnicodeString(&uni, L"Unknown\\shell\\OpenWithSetDefaultOn\\command");
+            InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyCL, NULL);
+            if (Key_OpenOrCreateIfBoxed(&hKey, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+            {
+                // set @ = "..."
+                RtlInitUnicodeString(&uni, L"");
+                status = NtSetValueKey(hKey, &uni, 0, REG_SZ, (BYTE *)OpenWithStr, OpenWithSize);
+
+                RtlInitUnicodeString(&uni, L"DelegateExecute");
+                NtDeleteValueKey(hKey, &uni);
+
+                NtClose(hKey);
+            }
+
+            NtClose(hKeyCL);
+        }
+        NtClose(hKeyRoot);
+    }
+
+    Dll_Free(OpenWithStr);
 
     return TRUE;
 }

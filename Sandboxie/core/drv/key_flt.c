@@ -275,6 +275,15 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
     }
 
     //
+    // Store app container support
+    //
+
+    if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
+        if (_wcsnicmp(pRemainingName->Buffer, proc->box->key_path + 9, (proc->box->key_path_len - (sizeof(WCHAR) * (9 + 1))) / sizeof(WCHAR)) == 0) // +9 skip \REGISTRY, +1 don't compare '\0'
+            return STATUS_SUCCESS;
+    }
+
+    //
     // call Key_MyParseProc_2
     //
 

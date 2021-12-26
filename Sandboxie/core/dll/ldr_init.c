@@ -182,6 +182,10 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     WCHAR *dllname = Dll_AllocTemp(MAX_PATH * 2 * sizeof(WCHAR));
     ULONG index = 0;
 
+    //
+    // We also end up here form host injection mode so Dll_HomeDosPath is not available
+    //
+
     WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
     SbieApi_GetHomePath(NULL, 0, path, 1020);
 

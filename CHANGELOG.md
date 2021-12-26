@@ -4,6 +4,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.6 / 5.55.6] - 2021-12-??
+
+### Added
+- replaced open with with a sandboxie dialog to work on win 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
+- added ability to run store apps in app container mode, requirers COM to be open
+- added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
+- added double click to recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
+
+### Changed
+- "UseSbieWndStation=y" is now the default behavioure [#1442](https://github.com/sandboxie-plus/Sandboxie/issues/1442)
+
+### Fixed
+- fixed box initialization issue in privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
+- fixed issue creating shortcuts introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
+
+
+
 
 ## [1.0.5 / 5.55.5] - 2021-12-25
 

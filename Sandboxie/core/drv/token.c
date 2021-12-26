@@ -69,7 +69,7 @@ static NTSTATUS Token_RestrictHelper2(
 
 static void *Token_RestrictHelper3(
     void *TokenObject, TOKEN_GROUPS *Groups, TOKEN_PRIVILEGES *Privileges,
-    PSID UserSid, ULONG FilterFlags, ULONG SessionId);
+    PSID UserSid, ULONG FilterFlags, PROCESS *proc);
 
 static BOOLEAN Token_AssignPrimary(
     void *ProcessObject, void *TokenObject, ULONG SessionId);
@@ -894,6 +894,11 @@ _FX void *Token_Restrict(
         void *FixedTokenObject = Token_RestrictHelper1(
             TokenObject, OutIntegrityLevel, proc);
 
+        // OpenToken BEGIN
+        if (Conf_Get_Boolean(proc->box->name, L"UnstrippedToken", 0, FALSE))
+            NewTokenObject = FixedTokenObject;
+        else
+        // OpenToken END
         if (FixedTokenObject) {
 
             TOKEN_PRIVILEGES *privs_arg =
@@ -901,17 +906,11 @@ _FX void *Token_Restrict(
 
             NewTokenObject = Token_RestrictHelper3(
                 FixedTokenObject, groups, privs_arg,
-                user->User.Sid, FilterFlags, proc->box->session_id);
+                user->User.Sid, FilterFlags, proc);
 
             ObDereferenceObject(FixedTokenObject);
-
         }
-        else
-            NewTokenObject = NULL;
-
     }
-    else
-        NewTokenObject = NULL;
 
     if (user)
         ExFreePool(user);
@@ -1430,7 +1429,7 @@ _FX NTSTATUS Token_RestrictHelper2(
 
 _FX void *Token_RestrictHelper3(
     void *TokenObject, TOKEN_GROUPS *Groups, TOKEN_PRIVILEGES *Privileges,
-    PSID UserSid, ULONG FilterFlags, ULONG SessionId)
+    PSID UserSid, ULONG FilterFlags, PROCESS *proc)
 {
     void *NewTokenObject;
     TOKEN_GROUPS *Disabled;
@@ -1459,6 +1458,7 @@ _FX void *Token_RestrictHelper3(
         BOOLEAN UserSidAlreadyInGroups = FALSE;
         BOOLEAN AnonymousLogonSidAlreadyInGroups = FALSE;
 		// todo: should we do somethign with SandboxieLogonSid here?
+        BOOLEAN KeepUserGroup = Conf_Get_Boolean(proc->box->name, L"KeepUserGroup", 0, FALSE);
 
         n = 0;
 
@@ -1467,8 +1467,11 @@ _FX void *Token_RestrictHelper3(
             if (Groups->Groups[i].Attributes & SE_GROUP_INTEGRITY)
                 continue;
 
-            if (RtlEqualSid(Groups->Groups[i].Sid, UserSid))
+            if (RtlEqualSid(Groups->Groups[i].Sid, UserSid)) {
+                if (KeepUserGroup)
+                    continue;
                 UserSidAlreadyInGroups = TRUE;
+            }
 
             if (RtlEqualSid(Groups->Groups[i].Sid, AnonymousLogonSid))
                 AnonymousLogonSidAlreadyInGroups = TRUE;
@@ -1482,7 +1485,7 @@ _FX void *Token_RestrictHelper3(
         // append the user SID and the anonymous logon SID to the array
         //
 
-        if (!UserSidAlreadyInGroups) {
+        if (!UserSidAlreadyInGroups && !KeepUserGroup) {
 
             Disabled->Groups[n].Sid = UserSid;
             Disabled->Groups[n].Attributes = 0;
@@ -1529,7 +1532,7 @@ _FX void *Token_RestrictHelper3(
         if (!NT_SUCCESS(status)) {
 
             NewTokenObject = NULL;
-            Log_Status_Ex_Session(MSG_1222, 0x33, status, NULL, SessionId);
+            Log_Status_Ex_Session(MSG_1222, 0x33, status, NULL, proc->box->session_id);
         }
 
     }

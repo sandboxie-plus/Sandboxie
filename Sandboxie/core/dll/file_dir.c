@@ -4108,3 +4108,23 @@ _FX void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey)
 	if (ShortName[ShortNameLength - 1] == L'.')
 		ShortName[ShortNameLength-- - 1] = 0;
 }
+
+
+//---------------------------------------------------------------------------
+// Key_CreateBaseFolders
+//---------------------------------------------------------------------------
+
+
+_FX void Key_CreateBaseFolders()
+{
+    //
+    // in privacy mode we need to pre create some folders or else programs may fail
+    //
+
+    File_CreateBoxedPath(File_SysVolume);
+
+    if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+        File_CreateBoxedPath(File_AllUsers);
+        File_CreateBoxedPath(File_CurrentUser);
+    }
+}

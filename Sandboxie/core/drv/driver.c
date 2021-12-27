@@ -764,18 +764,17 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
-// Driver_CheckThirdParty
+// Driver_GetRegDword
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Driver_CheckThirdParty(
-    const WCHAR *DriverName, ULONG DriverType)
+_FX ULONG Driver_GetRegDword(
+    const WCHAR *KeyPath, const WCHAR *ValueName)
 {
     NTSTATUS status;
     RTL_QUERY_REGISTRY_TABLE qrt[2];
     UNICODE_STRING uni;
     ULONG value;
-    BOOLEAN IsInstalled = FALSE;
 
     value = -1;
 
@@ -787,28 +786,25 @@ _FX BOOLEAN Driver_CheckThirdParty(
     qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
                     RTL_QUERY_REGISTRY_DIRECT |
                     RTL_QUERY_REGISTRY_NOEXPAND;
-    qrt[0].Name = (WCHAR *)L"Type";
+    qrt[0].Name = (WCHAR *)ValueName;
     qrt[0].EntryContext = &uni;
     qrt[0].DefaultType = REG_NONE;
 
     status = RtlQueryRegistryValues(
-        RTL_REGISTRY_SERVICES, DriverName, qrt, NULL, NULL);
+        RTL_REGISTRY_ABSOLUTE, KeyPath, qrt, NULL, NULL);
 
-    if (status == STATUS_SUCCESS) {
+    if (status != STATUS_SUCCESS)
+        return 0;
 
-        if (value == -1) {
+    if (value == -1) {
 
-            //
-            // if value is not string, RtlQueryRegistryValues writes
-            // it directly into EntryContext
-            //
+        //
+        // if value is not string, RtlQueryRegistryValues writes
+        // it directly into EntryContext
+        //
 
-            value = *(ULONG *)&uni;
-        }
-
-        if (value == DriverType)
-            IsInstalled = TRUE;
+        value = *(ULONG *)&uni;
     }
 
-    return IsInstalled;
+    return value;
 }

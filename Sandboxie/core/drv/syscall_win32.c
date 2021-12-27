@@ -601,6 +601,9 @@ _FX NTSTATUS Syscall_Api_Query32(PROCESS *proc, ULONG64 *parms)
     ULONG *ptr;
     SYSCALL_ENTRY *entry;
 
+    if (Syscall_MaxIndex32 == 0)
+        return STATUS_NOT_IMPLEMENTED;
+
     BOOLEAN add_names = parms[3] != 0;
 
     //

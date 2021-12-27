@@ -14,11 +14,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - "UseSbieWndStation=y" is now the default behavioure [#1442](https://github.com/sandboxie-plus/Sandboxie/issues/1442)
+- disabled Win32k hooking when HVCI is enabled due to an incompatybility (BSOD)
 
 ### Fixed
 - fixed box initialization issue in privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
 - fixed issue creating shortcuts introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
-
+- fixed access issues in privacy enhanced boxes
 
 
 

@@ -297,6 +297,9 @@ _FX void File_InitPathList(void)
     UNICODE_STRING objname;
     IO_STATUS_BLOCK MyIoStatusBlock;
     HANDLE handle;
+    WCHAR *buf, *ptr;
+
+    // why do we do that?
 
     RtlInitUnicodeString(&objname, L"\\SystemRoot");
     InitializeObjectAttributes(
@@ -304,6 +307,26 @@ _FX void File_InitPathList(void)
     handle = 0;
     NtOpenFile(&handle, FILE_READ_DATA, &objattrs,
                &MyIoStatusBlock, FILE_SHARE_VALID_FLAGS, 0);
+
+    // since we do that for some reason lets use it to get the system volume 
+
+    const ULONG PATH_BUF_LEN = 1024;
+    buf = Dll_AllocTemp(PATH_BUF_LEN);
+
+    if (NT_SUCCESS(File_GetFileName(handle, PATH_BUF_LEN, buf)) && (ptr = wcsrchr(buf, L'\\')) != NULL) 
+        ptr[1] = L'\0'; // strip the folder name
+    else // fallback
+        wcscpy(buf, L"\\??\\C:\\");
+
+    File_SysVolumeLen = wcslen(buf);
+    File_SysVolume =
+        Dll_Alloc((File_SysVolumeLen + 1) * sizeof(WCHAR));
+    wcscpy(File_SysVolume, buf);
+
+    Dll_Free(buf);
+
+    //
+
     if (handle)
         NtClose(handle);
 

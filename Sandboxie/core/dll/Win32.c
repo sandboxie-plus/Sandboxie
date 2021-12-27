@@ -390,13 +390,11 @@ finish:
 _FX BOOLEAN Win32_Init(HMODULE hmodule)
 {
 	// In Windows 10 all Win32k.sys calls are located in win32u.dll
-    if (Dll_OsBuild < 10041 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
-        return TRUE; // just return on older builds
+    if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0)
+        return TRUE; // just return on older builds, or not enabled
 
-    // NoSysCallHooks BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_data->flags.bNoSysHooks)
         return TRUE;
-    // NoSysCallHooks END
 
     // disable Electron Workaround when we are ready to hook the required win32k syscalls
     extern BOOL Dll_ElectronWorkaround;

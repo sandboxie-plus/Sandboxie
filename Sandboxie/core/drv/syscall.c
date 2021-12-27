@@ -221,8 +221,24 @@ _FX BOOLEAN Syscall_Init(void)
         return FALSE;
 
 #ifdef HOOK_WIN32K
-    // must be windows 10 or later // Don't use experimental features by default
-    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
+
+    //
+    // Win32k Hooking requirers 10 or later as only thre Win32u.dll is available
+    //
+    // Note: Win32k Hooking is not compatible with HVCI causing a BSOD
+    //  KERNEL_SECURITY_CHECK_FAILURE (139)
+    //      A kernel component has corrupted a critical data structure.  
+    //      Arguments:
+    //      Arg1: 0000000000000000, A stack-based buffer has been overrun.
+    //      Arg2: 0000000000000000, Address of the trap frame for the exception that caused the bugcheck
+    //      Arg3: 0000000000000000, Address of the exception record for the exception that caused the bugcheck
+    //      Arg4: ffffxxxxxxxxxxxx, Reserved
+    // 
+    // Note: this feature applied to GdiDdDDI* solves HW Acceleration issues with chromium, hence we enable it if possible
+    // 
+
+    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)
+        && Driver_GetRegDword(L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity", L"Enabled") == 0) {
 
         if (!Syscall_Init_List32())
             return FALSE;
@@ -1034,10 +1050,10 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     SYSCALL_ENTRY *entry;
 
 #ifdef HOOK_WIN32K
-    if (parms[2] == 1) { // win32k
+    if (parms[2] == 1) { // 1 - win32k
         return Syscall_Api_Query32(proc, parms);
     }
-    else if (parms[2] != 0) { // ntoskrnl
+    else if (parms[2] != 0) { // 0 - ntoskrnl
         return STATUS_INVALID_PARAMETER;
     }
 #endif

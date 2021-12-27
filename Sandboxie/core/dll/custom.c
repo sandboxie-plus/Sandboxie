@@ -72,7 +72,11 @@ _FX BOOLEAN CustomizeSandbox(void)
     // customize sandbox if we need to
     //
 
-    Key_CreateBaseKeys();
+    if ((Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
+
+        Key_CreateBaseKeys();
+        Key_CreateBaseFolders();
+    }
 
     if (GetSetCustomLevel(0) != '2') {
 

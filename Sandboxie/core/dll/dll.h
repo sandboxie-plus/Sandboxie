@@ -501,6 +501,7 @@ void Key_DeleteValueFromCLSID(
     const WCHAR *Xxxid, const WCHAR *Guid, const WCHAR *ValueName);
 
 void Key_CreateBaseKeys();
+void Key_CreateBaseFolders();
 
 //---------------------------------------------------------------------------
 // Functions (sxs)

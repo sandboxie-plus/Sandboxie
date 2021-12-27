@@ -380,11 +380,14 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
                 if (proc->open_all_win_classes)
                     flags |= SBIE_FLAG_OPEN_ALL_WIN_CLASS;
+                extern ULONG Syscall_MaxIndex32;
+                if (Syscall_MaxIndex32 != 0)
+                    flags |= SBIE_FLAG_WIN32K_HOOKABLE;
 
-                //if (proc->use_rule_specificity)
-                //    flags |= SBIE_FLAG_RULE_SPECIFICITY;
-                //if (proc->use_privacy_mode)
-                //    flags |= SBIE_FLAG_PRIVACY_MODE;
+                if (proc->use_rule_specificity)
+                    flags |= SBIE_FLAG_RULE_SPECIFICITY;
+                if (proc->use_privacy_mode)
+                    flags |= SBIE_FLAG_PRIVACY_MODE;
                 if (proc->bAppCompartment)
                     flags |= SBIE_FLAG_APP_COMPARTMENT;
             }

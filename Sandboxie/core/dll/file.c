@@ -341,6 +341,9 @@ static void *File_Wow64DisableWow64FsRedirection = NULL;
 static void *File_Wow64RevertWow64FsRedirection = NULL;
 #endif WOW64_FS_REDIR
 
+static WCHAR *File_SysVolume = NULL;
+static ULONG File_SysVolumeLen = 0;
+
 static WCHAR *File_AllUsers = NULL;
 static ULONG File_AllUsersLen = 0;
 

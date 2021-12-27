@@ -2894,7 +2894,9 @@ ReparseLoop:
 
         if (PATH_IS_WRITE(mp_flags)) {
 
-            if (SbieDll_HasReadableSubPath(L'f', TruePath)){
+            BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+
+            if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', TruePath)){
 
                 //
                 // When using Rule specificity we need to create some dummy directrories 
@@ -4856,7 +4858,9 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
 
     if (PATH_IS_WRITE(mp_flags)) {
 
-        if (SbieDll_HasReadableSubPath(L'f', TruePath)){
+        BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+
+        if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', TruePath)){
 
             //
             // When using Rule specificity we need to create some dummy directrories 

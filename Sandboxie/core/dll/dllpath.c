@@ -266,7 +266,7 @@ _FX ULONG SbieDll_MatchPath(WCHAR path_code, const WCHAR *path)
 //---------------------------------------------------------------------------
 
 
-_FX void SbieDll_GetReadablePaths(WCHAR path_code, const WCHAR *path, LIST **lists)
+_FX void SbieDll_GetReadablePaths(WCHAR path_code, LIST **lists)
 {
     if (path_code == L'f') {
 
@@ -815,4 +815,44 @@ _FX void Dll_RefreshPathList(void)
     }
 
     LeaveCriticalSection(&Dll_FilePathListCritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_IsParentReadable
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_HasReadableSubPath(WCHAR path_code, const WCHAR* TruePath)
+{
+    BOOLEAN FoundReadable = FALSE;
+
+    LIST* lists[4];
+    SbieDll_GetReadablePaths(path_code, lists);
+
+    ULONG TruePathLen = wcslen(TruePath);
+    if (TruePathLen > 1 && TruePath[TruePathLen - 1] == L'\\')
+        TruePathLen--; // never take last \ into account
+
+    for (int i=0; lists[i] != NULL; i++) {
+
+        PATTERN* pat = List_Head(lists[i]);
+        while (pat) {
+
+            const WCHAR* patstr = Pattern_Source(pat);
+
+            if (_wcsnicmp(TruePath, patstr, TruePathLen) == 0 && patstr[TruePathLen] == L'\\'){
+
+                FoundReadable = TRUE;
+                break;
+            }
+
+            pat = List_Next(pat);
+        }
+    }
+
+    if (path_code == L'f')
+        SbieDll_ReleaseFilePathLock();
+
+    return FoundReadable;
 }

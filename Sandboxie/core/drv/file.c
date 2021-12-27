@@ -1904,7 +1904,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
         &proc->read_file_paths, &proc->write_file_paths, NULL);
 
-    if ((mp_flags & TRUE_PATH_WRITE_FLAG) == 0) {
+    if ((mp_flags & TRUE_PATH_WRITE_FLAG) == 0 || (mp_flags & COPY_PATH_MASK) == 0) {
 #else
     Process_MatchPath(
         proc->pool, path, wcslen(path),

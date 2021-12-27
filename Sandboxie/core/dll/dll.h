@@ -362,6 +362,11 @@ ULONG SbieDll_MatchPath(WCHAR path_code, const WCHAR *path);
 
 ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckObjectExists, BOOLEAN bMonitorLog);
 
+void SbieDll_GetReadablePaths(WCHAR path_code, LIST **lists);
+void SbieDll_ReleaseFilePathLock();
+
+BOOLEAN SbieDll_HasReadableSubPath(WCHAR path_code, const WCHAR* TruePath);
+
 #define PATH_OPEN_FLAG      0x10
 #define PATH_CLOSED_FLAG    0x20
 #define PATH_WRITE_FLAG     0x40

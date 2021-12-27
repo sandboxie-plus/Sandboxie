@@ -425,7 +425,7 @@ int DoLingerLeader(void)
             //
 
             BOOLEAN excluded_from_linger = FALSE;
-            BOOLEAN is_local_system_sid = FALSE;
+            //BOOLEAN is_local_system_sid = FALSE;
 
             pids_i = (HANDLE)(ULONG_PTR)pids[i];
             image[0] = L'\0';
@@ -434,19 +434,21 @@ int DoLingerLeader(void)
                 && _wcsicmp(image, _SandboxieCrypto) != 0) {
 
                 //
-                // check if this is a local system process
+                // check if this is a local system process 
                 //
 
-                HANDLE ProcessHandle = 0;
-                SbieApi_OpenProcess(&ProcessHandle, pids_i);
-                if (ProcessHandle) {
-                    if (SbieDll_CheckProcessLocalSystem(ProcessHandle))
-                        is_local_system_sid = TRUE;
-                    CloseHandle(ProcessHandle);
-                }
+                // Note: since we normally no longer start services as system this is pointless
 
-                if (!is_local_system_sid) {
-
+                //HANDLE ProcessHandle = 0;
+                //SbieApi_OpenProcess(&ProcessHandle, pids_i);
+                //if (ProcessHandle) {
+                //    if (SbieDll_CheckProcessLocalSystem(ProcessHandle))
+                //        is_local_system_sid = TRUE;
+                //    CloseHandle(ProcessHandle);
+                //}
+                //
+                //if (!is_local_system_sid) 
+                {
                     //
                     // then check if the process was started explicitly
                     // (via forced mechanism or as a child of start.exe)

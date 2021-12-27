@@ -21,6 +21,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue creating shortcuts introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
 - fixed access issues in privacy enhanced boxes
 
+### Removed
+- removed obsolete SkyNetRootKit detection from 32 bit build
+
+
 
 
 ## [1.0.5 / 5.55.5] - 2021-12-25

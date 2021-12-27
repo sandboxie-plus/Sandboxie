@@ -102,8 +102,8 @@ void RemovePid(ULONG myPid)
 {
     MONITOR_PID monitorPid;
     if (map_take(&pidMap, (void*)myPid, &monitorPid, sizeof(monitorPid))) {
-        CloseHandle(monitorPid.hProcHandle);
         UnregisterWait(monitorPid.hProcWait);
+        CloseHandle(monitorPid.hProcHandle);
     }
 }
 

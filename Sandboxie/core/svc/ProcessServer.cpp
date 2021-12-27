@@ -46,8 +46,6 @@
 
 ProcessServer::ProcessServer(PipeServer *pipeServer)
 {
-    InitializeCriticalSection(&m_RunSandboxed_CritSec);
-
     pipeServer->Register(MSGID_PROCESS, this, Handler);
 }
 

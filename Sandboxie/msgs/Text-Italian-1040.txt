@@ -746,6 +746,10 @@ Rimuovi il comando dalla cronologia
 Selezionare l'area virtuale in cui avviare il programma o aprire il documento.
 .
 
+3107;txt;01
+Digitare il nome di un programma o il percorso per aprire il seguente file nell'area virtuale:
+.
+
 3111;txt;01
       Menu Start di Sandboxie - %2  %0
 .

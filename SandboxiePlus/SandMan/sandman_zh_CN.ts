@@ -57,7 +57,8 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="30"/>
         <source>New Box</source>
-        <translation>新沙盒</translation>
+        <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应更改此处！</translatorcomment>
+        <translation>New Box</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
@@ -357,7 +358,7 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Boxed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>仅沙盒内</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="248"/>
@@ -3708,7 +3709,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2169"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation>允许使用嵌套作业对象 (job object) （实验性；适用于 Windows 8 及更高版本）</translation>
+        <translation>允许使用嵌套作业对象 (job object) （实验性，适用于 Windows 8 及更高版本）</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2032"/>
@@ -3753,7 +3754,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2176"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>默认禁用 RpcMgmtSetComTimeout (或许可以解决兼容性问题)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2231"/>

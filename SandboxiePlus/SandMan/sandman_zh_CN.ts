@@ -58,7 +58,7 @@
         <location filename="Windows/NewBoxWindow.cpp" line="30"/>
         <source>New Box</source>
         <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应更改此处！</translatorcomment>
-        <translation type="unfinished">New Box</translation>
+        <translation>New Box</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
@@ -358,7 +358,7 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Boxed Only</source>
-        <translation type="unfinished">仅沙盒内</translation>
+        <translation>仅沙盒内</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="248"/>

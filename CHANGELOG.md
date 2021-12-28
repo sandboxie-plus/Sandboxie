@@ -7,23 +7,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.6 / 5.55.6] - 2021-12-??
 
 ### Added
-- replaced open with with a sandboxie dialog to work on win 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
-- added ability to run store apps in app container mode, requirers COM to be open
+- replaced "Open with" with a Sandboxie dialog to work on Windows 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
+- added ability to run Store apps in App Compartment mode, it requires COM to be open
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
-- added double click to recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
+- added double click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
 
 ### Changed
-- "UseSbieWndStation=y" is now the default behavioure [#1442](https://github.com/sandboxie-plus/Sandboxie/issues/1442)
-- disabled Win32k hooking when HVCI is enabled due to an incompatybility (BSOD)
+- "UseSbieWndStation=y" is now the default behaviour [#1442](https://github.com/sandboxie-plus/Sandboxie/issues/1442)
+- disabled Win32k hooking when HVCI is enabled due to an incompatibility (BSOD) [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
 
 ### Fixed
-- fixed box initialization issue in privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
-- fixed issue creating shortcuts introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
-- fixed variouse issues in privacy enhanced boxes and rule specificity
+- fixed box initialization issue in Privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
+- fixed issue with shortcuts creation introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
+- fixed various issues in Privacy Enhanced boxes and rule specificity
 - fixed issue with SeAccessCheckByType
 
 ### Removed
-- removed obsolete SkyNetRootKit detection from 32 bit build
+- removed obsolete SkyNet rootkit detection from 32 bit build
 
 
 

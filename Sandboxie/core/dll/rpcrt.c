@@ -921,10 +921,13 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
         Scm_Start_Sppsvc();
     }
     // we must block this in Win 10 to prevent r-click context menu hang in Explorer
-    else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
-    {
-        return STATUS_ACCESS_DENIED;
-    }
+    // note: this breaks otehr things but we need it, 
+    // so instead we block the {470C0EBD-5D73-4D58-9CED-E91E22E23282} Pin To Start Screen verb handler;
+    // inside Com_CoCreateInstance
+    //else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
+    //{
+    //    return STATUS_ACCESS_DENIED;
+    //}
     return __sys_RpcStringBindingComposeW(ObjUuid,ProtSeq,NetworkAddr,EndPoint,Options,StringBinding);
 }
 

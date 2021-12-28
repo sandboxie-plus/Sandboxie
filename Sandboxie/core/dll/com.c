@@ -543,14 +543,21 @@ _FX BOOLEAN Com_IsClosedClsid(REFCLSID rclsid)
         0x66, 0xf7, 0xe1, 0x1b, 0x36, 0x55, 0xd1, 0x11,
         0xb7, 0x26, 0x00, 0xc0, 0x4f, 0xb9, 0x26, 0xaf };
 
-    if (memcmp(rclsid, EventSystem, 16)      == 0)
-        return TRUE;
+    // moved to templates.ini
+    //static const UCHAR PinToStartScreen[16] = { // {470C0EBD-5D73-4D58-9CED-E91E22E23282} 
+    //    0xbd, 0x0e, 0x0c, 0x47, 0x73, 0x5d, 0x58, 0x4d, 
+    //    0x9c, 0xed, 0xe9, 0x1e, 0x22, 0xe2, 0x32, 0x82
+    //};
 
-    if (memcmp(rclsid, EventSystemTier2, 16) == 0)
-        return TRUE;
+    static const UCHAR* ClosedIDs[] = { EventSystem, EventSystemTier2/*, PinToStartScreen*/ };
 
     ULONG index;
     GUID* guid;
+
+    for (index = 0; index < ARRAYSIZE(ClosedIDs); ++index) {
+        if (memcmp(rclsid, ClosedIDs[index], 16) == 0)
+            return TRUE;
+    }
 
     //
     // initialize list of user-configured CLSID blocks

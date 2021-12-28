@@ -19,7 +19,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed box initialization issue in privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
 - fixed issue creating shortcuts introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
-- fixed access issues in privacy enhanced boxes
+- fixed variouse issues in privacy enhanced boxes and rule specificity
+- fixed issue with SeAccessCheckByType
 
 ### Removed
 - removed obsolete SkyNetRootKit detection from 32 bit build

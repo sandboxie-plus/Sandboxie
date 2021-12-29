@@ -20,7 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed box initialization issue in Privacy mode [#1469](https://github.com/sandboxie-plus/Sandboxie/issues/1469)
 - fixed issue with shortcuts creation introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
 - fixed various issues in Privacy Enhanced boxes and rule specificity
-- fixed issue with SeAccessCheckByType
+- fixed issue with SeAccessCheckByType and alike
+- fixed issues with win32k hooking on 32 bit windows [#1479](https://github.com/sandboxie-plus/Sandboxie/issues/1479)
 
 ### Removed
 - removed obsolete SkyNet rootkit detection from 32 bit build

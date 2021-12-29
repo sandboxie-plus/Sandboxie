@@ -110,7 +110,7 @@ _FX BOOLEAN Syscall_TestHookMap(const UCHAR* name, ULONG name_len, LIST* enabled
 
     int disabe_match = Syscall_HookMapMatch(wname, name_len, disabled_hooks);
     int enable_match = Syscall_HookMapMatch(wname, name_len, enabled_hooks);
-    if (disabe_match >= enable_match)
+    if (disabe_match != 0 && disabe_match >= enable_match)
         return FALSE;
     if (enable_match != 0)
         return TRUE;

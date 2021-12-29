@@ -18,6 +18,7 @@ Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 ;Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 ;Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 ;Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
@@ -33,7 +34,7 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 ;Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
 ;Name: "slovak"; MessagesFile: "compiler:Languages\Slovak.isl"
 ;Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
-;Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
+
 
 
 [CustomMessages]
@@ -281,3 +282,25 @@ spanish.UninstallTaskLabel2=¿Cómo le gustaría desinstalar Sandboxie-Plus?
 spanish.UninstallTaskLabel3=&Mantenga los archivos de configuración y las sandboxes%nEsta es la opción más recomendada si planea reinstalar Sandboxie-Plus mientras mantiene sus archivos de configuración y las sandboxes.
 spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione esta opción para eliminar los archivos de configuración Sandboxie.ini y Sandboxie-Plus.ini manteniendo las sandboxes sin cambios.
 spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.
+
+; Ukrainian
+ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню
+ukrainian.AddSandboxedBrowser=Додати ярлик на робочий стіл для запуску браузера в Sandboxie
+ukrainian.SandboxieStartMenu1=Запустити програму у пісочниці
+ukrainian.SandboxieStartMenu2=Запустити веб-браузер у пісочниці
+ukrainian.SandboxieStartMenu3=Початкове меню Sandboxie
+ukrainian.SandboxedBrowser=Браузер у пісочниці
+ukrainian.CustomPageLabel1=Оберіть тип встановки
+ukrainian.CustomPageLabel2=Як потрібно встановити
+ukrainian.CustomPageLabel3=Оберіть режим встановки
+ukrainian.CustomPageInstallMode=Встановити {#MyAppName} на цьому комп'ютері
+ukrainian.CustomPageUpgradeMode=Оновити існуючу встановку {#MyAppName}
+ukrainian.CustomPagePortableMode=Витягти всі файли у каталог для портативного режиму
+ukrainian.RequiresWin7OrLater=Для Sandboxie-Plus потрібно Windows 7 або новіше.
+ukrainian.ClassicFound=Виявлена версія Sandboxie Classic, на початку встановлення її потрібно видалити. Видалити зараз?
+ukrainian.RunSandboxedMenu=Виконати в пісочниці (&S)
+ukrainian.UninstallTaskLabel1=Оберіть тип видалення
+ukrainian.UninstallTaskLabel2=Як ви хочете видалити Sandboxie-Plus?
+ukrainian.UninstallTaskLabel3=Зберігти файли конфігурації и пісочниць (&K)%nЦе найбільш рекомендований варіант, якщо ви плануете перевстановити Sandboxie-Plus, зберігши файли конфігурації и пісочниць.
+ukrainian.UninstallTaskLabel4=Видалити файли конфігурації (&C)%nОберіть цей параметр, щоб видалити файли конфігурації Sandboxie.ini та Sandboxie-Plus.ini, залишивши файли пісочниць без змін.
+ukrainian.UninstallTaskLabel5=Видалити файли конфігурації та пісочниць (&S)%nОберіть цей параметр, щоб видалити всі файли конфігурації та пісочниць, включаючи папку Sandbox, яка має місцерозташування в FileRootPath.

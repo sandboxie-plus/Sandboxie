@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - replaced open with with a sandboxie dialog to work on win 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
-- added ability to run store apps in app container mode, requirers COM to be open
+- added ability to run store apps in app container mode (on win 11 requirers COM to be open)
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
 - added double click to recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
 

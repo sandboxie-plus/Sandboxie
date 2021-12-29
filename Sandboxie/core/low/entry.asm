@@ -262,7 +262,7 @@ else 		; 32-bit
 		; parms[0] = API_INVOKE_SYSCALL (from SbieLowData)
 		;
 
-		and	eax, 0FFFh	; keep just service index number
+		and	eax, 1FFFh	; keep just service index number
 		mov	dword ptr [esp+2*8], eax
 
 		lea	eax, [ebp+4*3]	; eax -> orig arg 1 on stack

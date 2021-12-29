@@ -90,36 +90,46 @@ typedef struct _KSERVICE_TABLE_DESCRIPTOR
     unsigned long *Base;
     unsigned long *Reserved1;
     unsigned long Limit;
-    unsigned int *Number;
+    unsigned char *Number;
 } KSERVICE_TABLE_DESCRIPTOR, *PKSERVICE_TABLE_DESCRIPTOR ;
 
-
-_FX BOOLEAN Syscall_GetWin32kAddr(ULONG *Base_Copy, 
+#ifdef _WIN64
+_FX BOOLEAN Syscall_GetWin32kAddr(KSERVICE_TABLE_DESCRIPTOR *ShadowTable, ULONG *Base_Copy, 
     ULONG index, void **pKernelAddr, ULONG *pParamCount)
 {
-    KSERVICE_TABLE_DESCRIPTOR *ShadowTable = (KSERVICE_TABLE_DESCRIPTOR *)Syscall_GetServiceTable();
-    ShadowTable += 1; // ServiceDescriptorTableShadow[0] -> ntoskrnl.exe, ServiceDescriptorTableShadow[1] -> win32k.sys
+    ULONG MaxSyscallIndexPlusOne = ShadowTable->Limit;
+    if ((index >= 0x1000) &&
+                ((index & 0xFFF) < MaxSyscallIndexPlusOne)) {
 
-    if (ShadowTable) {
+        long EntryValue = Base_Copy[index & 0xFFF];
 
-        ULONG MaxSyscallIndexPlusOne = ShadowTable->Limit;
-        if ((index >= 0x1000) &&
-                    ((index & 0xFFF) < MaxSyscallIndexPlusOne)) {
-
-            long EntryValue = Base_Copy[index & 0xFFF];
-
-            *pKernelAddr = (UCHAR *)ShadowTable->Base + (EntryValue >> 4);
-            *pParamCount = (ULONG)(EntryValue & 0x0F) + 4;
-            //DbgPrint("    SysCall32 offset: %d\r\n", (ULONG)(EntryValue >> 4));
-            return TRUE;
-        }
-
-        Log_Msg1(MSG_1113, L"ADDRESS");
+        *pKernelAddr = (UCHAR *)ShadowTable->Base + (EntryValue >> 4);
+        *pParamCount = (ULONG)(EntryValue & 0x0F) + 4;
+        //DbgPrint("    SysCall32 offset: %d\r\n", (ULONG)(EntryValue >> 4));
+        return TRUE;
     }
 
+    Log_Msg1(MSG_1113, L"ADDRESS");
     return FALSE;
 }
+#else
+_FX BOOLEAN Syscall_GetWin32kAddr(KSERVICE_TABLE_DESCRIPTOR *ShadowTable, ULONG *ProcTable, UCHAR *ParmTable,
+    ULONG index, void **pKernelAddr, ULONG *pParamCount)
+{
+    ULONG MaxSyscallIndexPlusOne = ShadowTable->Limit;
+    if ((index >= 0x1000) &&
+                ((index & 0xFFF) < MaxSyscallIndexPlusOne)) {
 
+        *pKernelAddr = (void *)ProcTable[index & 0xFFF];
+        *pParamCount = ((ULONG)ParmTable[index & 0xFFF]) / 4;
+        //DbgPrint("    SysCall32 offset: %d\r\n", (ULONG)(EntryValue >> 4));
+        return TRUE;
+    }
+
+    Log_Msg1(MSG_1113, L"ADDRESS");
+    return FALSE;
+}
+#endif
 
 //---------------------------------------------------------------------------
 // Syscall_Init_List32
@@ -135,7 +145,10 @@ _FX BOOLEAN Syscall_Init_List32(void)
     SYSCALL_ENTRY *entry;
     ULONG proc_index, proc_offset, syscall_index, param_count;
     ULONG name_len, entry_len;
-    ULONG* table_copy = NULL;
+    ULONG* base_copy = NULL;
+#ifndef _WIN64
+    UCHAR* number_copy = NULL;
+#endif
 
     List_Init(&Syscall_List32);
 
@@ -159,8 +172,8 @@ _FX BOOLEAN Syscall_Init_List32(void)
         Log_Msg1(MSG_1113, L"SHADOW_TABLE");
         goto finish;
     }
-    //DbgPrint(" win32k.sys SysCalls: %d %p %p\n", ShadowTable->Limit, ShadowTable->Base, ShadowTable->Number);
-    ShadowTable += 1;
+    //DbgPrint(" ntoskrln.exe SysCalls: %d %p %p\n", ShadowTable->Limit, ShadowTable->Base, ShadowTable->Number);
+    ShadowTable += 1; // ServiceDescriptorTableShadow[0] -> ntoskrnl.exe, ServiceDescriptorTableShadow[1] -> win32k.sys
     //DbgPrint(" win32k.sys SysCalls: %d %p %p\n", ShadowTable->Limit, ShadowTable->Base, ShadowTable->Number);
 
     if (ShadowTable->Limit > 0xFFF) { // not plausible
@@ -180,16 +193,28 @@ _FX BOOLEAN Syscall_Init_List32(void)
         goto finish;
     }
 
-    table_copy = (ULONG*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(long), TRUE);
-    if (!table_copy)
+    base_copy = (ULONG*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(long), TRUE);
+    if (!base_copy)
         goto finish;
+#ifndef _WIN64
+    number_copy = (UCHAR*)Mem_AllocEx(Driver_Pool, ShadowTable->Limit * sizeof(char), TRUE);
+    if (!number_copy)
+        goto finish;
+#endif
 
     PEPROCESS ProcessObject;
     if (NT_SUCCESS(PsLookupProcessByProcessId(csrssId,&ProcessObject))) {
         KAPC_STATE ApcState;
         KeStackAttachProcess(ProcessObject, &ApcState);
-        if (MmIsAddressValid(ShadowTable->Base)) {
-            memcpy(table_copy, ShadowTable->Base, ShadowTable->Limit * sizeof(long));
+        if (MmIsAddressValid(ShadowTable->Base)
+#ifndef _WIN64
+             && MmIsAddressValid(ShadowTable->Number)
+#endif
+        ) {
+            memcpy(base_copy, ShadowTable->Base, ShadowTable->Limit * sizeof(long));
+#ifndef _WIN64
+            memcpy(number_copy, ShadowTable->Number, ShadowTable->Limit * sizeof(char));
+#endif
             success = TRUE;
         }
         KeUnstackDetachProcess(&ApcState);
@@ -289,7 +314,10 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
             if (syscall_index != -1) {
 
-                Syscall_GetWin32kAddr(table_copy,
+                Syscall_GetWin32kAddr(ShadowTable, base_copy,
+#ifndef _WIN64
+                                                               number_copy,
+#endif
                             syscall_index, &ntos_addr, &param_count);
 
                 //BOOLEAN test;
@@ -297,7 +325,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
                 //test = MmIsAddressValid(ntos_addr);
                 //KeUnstackDetachProcess(&ApcState);
                 //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p %s\r\n", name, param_count, syscall_index, ntos_addr, test ? "valid" : "invalid");
-                //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d\r\n", name, param_count, syscall_index);
+                //DbgPrint("    Found SysCall32: %s, pcnt %d; idx: %d; addr: %p\r\n", name, param_count, syscall_index, ntos_addr);
             }
         }
 
@@ -370,8 +398,12 @@ finish:
     Syscall_FreeHookMap(&enabled_hooks);
     Syscall_FreeHookMap(&disabled_hooks);
 
-    if (table_copy)
-        Mem_Free(table_copy, ShadowTable->Limit * sizeof(long));
+    if (base_copy)
+        Mem_Free(base_copy, ShadowTable->Limit * sizeof(long));
+#ifndef _WIN64
+    if (number_copy)
+        Mem_Free(number_copy, ShadowTable->Limit * sizeof(char));
+#endif
 
     return success;
 }

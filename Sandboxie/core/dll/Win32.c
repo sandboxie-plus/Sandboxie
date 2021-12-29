@@ -390,7 +390,7 @@ finish:
 _FX BOOLEAN Win32_Init(HMODULE hmodule)
 {
 	// In Windows 10 all Win32k.sys calls are located in win32u.dll
-    if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0)
+    if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
         return TRUE; // just return on older builds, or not enabled
 
     if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_data->flags.bNoSysHooks)

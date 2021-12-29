@@ -1003,7 +1003,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="375"/>
         <source>Terminate All Processes</source>
-        <translation">Зупинити всі процеси</translation>
+        <translation>Зупинити всі процеси</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="376"/>
@@ -1383,7 +1383,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1283"/>
         <source>Do this for all files!</source>
-        <translationd">Зробити для всіх файлів!</translation>
+        <translation>Зробити для всіх файлів!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1302"/>
@@ -1590,7 +1590,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1828"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
-        <translation>Не вдалося видалити папку старого знімку &apos;%1&apos</translation>
+        <translation>Не вдалося видалити папку старого знімку &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1829"/>
@@ -1792,7 +1792,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Sbie Crypto</source>
-        <translation">Sbie Crypto</translation>
+        <translation>Sbie Crypto</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="470"/>
@@ -1923,7 +1923,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="496"/>
         <source>Generic Mail Client</source>
-        <translation">Загальний клієнт для ел. почти</translation>
+        <translation>Загальний клієнт для ел. почти</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="497"/>
@@ -2423,7 +2423,7 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="545"/>
         <location filename="Windows/SettingsWindow.cpp" line="649"/>
         <source>Select Directory</source>
-        <translation">Оберіть каталог</translation>
+        <translation>Оберіть каталог</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="611"/>
@@ -3141,7 +3141,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1423"/>
         <source>IP:</source>
-        <translation">IP:</translation>
+        <translation>IP:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1433"/>
@@ -4160,7 +4160,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="764"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation">Підтримка Sandboxie актувльним до нових версий Windows та суміснісним до всіх веб-браузерів - нескінченні зусулля. Підтримайте цю працю за допомогою пожертуванням.&lt;br /&gt;Ви можете підтримати розробку за допомогою &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal&lt;/a&gt;, також працює з кредитними картками.&lt;br /&gt;Або ви можете підтримати проєкт за допомогою &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;передплати на Patreon&lt;/a&gt;.</translation>
+        <translation>Підтримка Sandboxie актувльним до нових версий Windows та суміснісним до всіх веб-браузерів - нескінченні зусулля. Підтримайте цю працю за допомогою пожертуванням.&lt;br /&gt;Ви можете підтримати розробку за допомогою &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal&lt;/a&gt;, також працює з кредитними картками.&lt;br /&gt;Або ви можете підтримати проєкт за допомогою &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;передплати на Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="796"/>
@@ -4213,7 +4213,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="73"/>
         <source>Description:</source>
-        <translation">Опис:</translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="98"/>

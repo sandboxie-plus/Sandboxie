@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ua_UA">
+<TS version="2.1" language="uk_UA">
 <context>
     <name>CFileBrowserWindow</name>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
-        <source>%1 - Файли</source>
-        <translation></translation>
+        <source>%1 - Files</source>
+        <translation>%1 - Файли</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
@@ -166,7 +166,7 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="259"/>
         <source>COM Object</source>
-        <translation >Об&apos;єкт COM</translation>
+        <translation>Об&apos;єкт COM</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="266"/>
@@ -231,17 +231,17 @@
         <translation>Шаблон не можна видалити.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="264"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="269"/>
         <source>Please enter an auto exec command</source>
         <translation>Будь ласка, введіть команду для autoexec</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="285"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="290"/>
         <source>Please enter a program file name</source>
         <translation>Будь ласка, введіть назву файла програми</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="400"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="405"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -279,7 +279,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>Show only when title is in focus</source>
-		<translatorcomment>Можливо, це потрібно переробити</translatorcomment>
+        <translatorcomment>Можливо, це потрібно переробити</translatorcomment>
         <translation>Показати тільки, коли в фокусі</translation>
     </message>
     <message>
@@ -591,7 +591,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="55"/>
         <source>Remove this message from the list</source>
-        <translation >Прибрати це повідомлення зі списку</translation>
+        <translation>Прибрати це повідомлення зі списку</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="58"/>
@@ -848,22 +848,22 @@ Full path: %4</source>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2416"/>
+        <location filename="SandMan.cpp" line="2419"/>
         <source>Waiting for folder: %1</source>
         <translation>Очікування папки: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2417"/>
+        <location filename="SandMan.cpp" line="2420"/>
         <source>Deleting folder: %1</source>
         <translation>Видалення папки: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2418"/>
+        <location filename="SandMan.cpp" line="2421"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Злиття папок: %1 та %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2419"/>
+        <location filename="SandMan.cpp" line="2422"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Завершення злиття знімків...</translation>
     </message>
@@ -871,62 +871,62 @@ Full path: %4</source>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="180"/>
+        <location filename="SbiePlusAPI.cpp" line="182"/>
         <source>Disabled</source>
         <translation>Вимкнений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="185"/>
+        <location filename="SbiePlusAPI.cpp" line="187"/>
         <source>Empty</source>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="188"/>
+        <location filename="SbiePlusAPI.cpp" line="190"/>
         <source>Application Compartment</source>
         <translation>Пісочниця для додатків</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="190"/>
+        <location filename="SbiePlusAPI.cpp" line="192"/>
         <source>NOT SECURE</source>
         <translation>НЕ ЗАХИЩЕНО</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="192"/>
+        <location filename="SbiePlusAPI.cpp" line="194"/>
         <source>Reduced Isolation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="194"/>
+        <location filename="SbiePlusAPI.cpp" line="196"/>
         <source>Enhanced Isolation</source>
         <translation>Посилена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="197"/>
+        <location filename="SbiePlusAPI.cpp" line="199"/>
         <source>Privacy Enhanced</source>
         <translation>Посилена конфіденційність</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="200"/>
+        <location filename="SbiePlusAPI.cpp" line="202"/>
         <source>API Log</source>
         <translation>Журнал API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="202"/>
+        <location filename="SbiePlusAPI.cpp" line="204"/>
         <source>No INet</source>
         <translation>Без доступу до Інтернет</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="204"/>
+        <location filename="SbiePlusAPI.cpp" line="206"/>
         <source>Net Share</source>
         <translation>Локальна мережа</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="206"/>
+        <location filename="SbiePlusAPI.cpp" line="208"/>
         <source>No Admin</source>
         <translation>Без прав адміністратора</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="209"/>
+        <location filename="SbiePlusAPI.cpp" line="211"/>
         <source>Normal</source>
         <translation>Нормальний</translation>
     </message>
@@ -1714,22 +1714,22 @@ No will choose: %2</source>
         <translation>&lt;h3&gt;Про Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версія %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2454"/>
+        <location filename="SandMan.cpp" line="2457"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>Це вікно працює, як частина програми %1 в пісочниці %2 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2461"/>
+        <location filename="SandMan.cpp" line="2464"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation>Це вікно не працює, як частина будь-якої програми в пісочниці.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2496"/>
+        <location filename="SandMan.cpp" line="2499"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation>Перетягніть інструмент для пошуку на вікно, щоб його обрати, та відпустіть для перевірки вікна (у пісочниці або ззовні).</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2551"/>
+        <location filename="SandMan.cpp" line="2554"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - Пошук вікон</translation>
     </message>
@@ -1780,178 +1780,178 @@ No will choose: %2</source>
 <context>
     <name>CSbieProcess</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="467"/>
+        <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Sbie RpcSs</source>
         <translation>Sbie RpcSs</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="468"/>
+        <location filename="SbiePlusAPI.cpp" line="470"/>
         <source>Sbie DcomLaunch</source>
         <translation>Sbie DcomLaunch</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="469"/>
+        <location filename="SbiePlusAPI.cpp" line="471"/>
         <source>Sbie Crypto</source>
         <translation>Sbie Crypto</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="470"/>
+        <location filename="SbiePlusAPI.cpp" line="472"/>
         <source>Sbie WuauServ</source>
         <translation>Sbie WuauServ</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="471"/>
+        <location filename="SbiePlusAPI.cpp" line="473"/>
         <source>Sbie BITS</source>
         <translation>Sbie BITS</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="472"/>
+        <location filename="SbiePlusAPI.cpp" line="474"/>
         <source>Sbie Svc</source>
         <translation>Sbie Svc</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="473"/>
+        <location filename="SbiePlusAPI.cpp" line="475"/>
         <source>MSI Installer</source>
         <translation>MSI Installer</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="474"/>
+        <location filename="SbiePlusAPI.cpp" line="476"/>
         <source>Trusted Installer</source>
         <translation>Trusted Installer</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="475"/>
+        <location filename="SbiePlusAPI.cpp" line="477"/>
         <source>Windows Update</source>
         <translation>Windows Update</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="476"/>
+        <location filename="SbiePlusAPI.cpp" line="478"/>
         <source>Windows Explorer</source>
         <translation>Провідник Windows (Windows Explorer)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="477"/>
+        <location filename="SbiePlusAPI.cpp" line="479"/>
         <source>Internet Explorer</source>
         <translation>Internet Explorer</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="478"/>
+        <location filename="SbiePlusAPI.cpp" line="480"/>
         <source>Firefox</source>
         <translation>Firefox</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="479"/>
+        <location filename="SbiePlusAPI.cpp" line="481"/>
         <source>Windows Media Player</source>
         <translation>Windows Media Player</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="480"/>
+        <location filename="SbiePlusAPI.cpp" line="482"/>
         <source>Winamp</source>
         <translation>Winamp</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="481"/>
+        <location filename="SbiePlusAPI.cpp" line="483"/>
         <source>KMPlayer</source>
         <translation>KMPlayer</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="482"/>
+        <location filename="SbiePlusAPI.cpp" line="484"/>
         <source>Windows Live Mail</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="483"/>
+        <location filename="SbiePlusAPI.cpp" line="485"/>
         <source>Service Model Reg</source>
         <translation>Windows Live Mail</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="484"/>
+        <location filename="SbiePlusAPI.cpp" line="486"/>
         <source>RunDll32</source>
         <translation>Service Model Reg</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="485"/>
-        <location filename="SbiePlusAPI.cpp" line="486"/>
+        <location filename="SbiePlusAPI.cpp" line="487"/>
+        <location filename="SbiePlusAPI.cpp" line="488"/>
         <source>DllHost</source>
         <translation>DllHost</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="487"/>
+        <location filename="SbiePlusAPI.cpp" line="489"/>
         <source>Windows Ink Services</source>
         <translation>Служби Windows Ink</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="488"/>
+        <location filename="SbiePlusAPI.cpp" line="490"/>
         <source>Chromium Based</source>
         <translation>На основі Chromium</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="489"/>
+        <location filename="SbiePlusAPI.cpp" line="491"/>
         <source>Google Updater</source>
         <translation>Оновник Google (Google Updater)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="490"/>
+        <location filename="SbiePlusAPI.cpp" line="492"/>
         <source>Acrobat Reader</source>
         <translation>Acrobat Reader</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="491"/>
+        <location filename="SbiePlusAPI.cpp" line="493"/>
         <source>MS Outlook</source>
         <translation>MS Outlook</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="492"/>
+        <location filename="SbiePlusAPI.cpp" line="494"/>
         <source>MS Excel</source>
         <translation>MS Excel</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="493"/>
+        <location filename="SbiePlusAPI.cpp" line="495"/>
         <source>Flash Player</source>
         <translation>Flash Player</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="494"/>
+        <location filename="SbiePlusAPI.cpp" line="496"/>
         <source>Firefox Plugin Container</source>
         <translation>Firefox Plugin Container</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="495"/>
+        <location filename="SbiePlusAPI.cpp" line="497"/>
         <source>Generic Web Browser</source>
         <translation>Загальний веб-переглядач</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="496"/>
+        <location filename="SbiePlusAPI.cpp" line="498"/>
         <source>Generic Mail Client</source>
         <translation>Загальний клієнт для ел. почти</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="497"/>
+        <location filename="SbiePlusAPI.cpp" line="499"/>
         <source>Thunderbird</source>
         <translation>Thunderbird</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="506"/>
+        <location filename="SbiePlusAPI.cpp" line="508"/>
         <source>Terminated</source>
         <translation>Завершений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="512"/>
+        <location filename="SbiePlusAPI.cpp" line="514"/>
         <source>Forced </source>
         <translation>Примусовий </translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="510"/>
+        <location filename="SbiePlusAPI.cpp" line="512"/>
         <source>Running</source>
         <translation>Працює</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="516"/>
+        <location filename="SbiePlusAPI.cpp" line="518"/>
         <source> in session %1</source>
         <translation>в сеансі %1</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="525"/>
+        <location filename="SbiePlusAPI.cpp" line="527"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
@@ -2042,8 +2042,8 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="115"/>
         <source>Sandbox Presets</source>
+        <translatorcomment>Не вдалося вибрати більш точний переклад :(</translatorcomment>
         <translation>Готові налаштування для пісочниці</translation>
-		<translatorcomment>Не вдалося вибрати більш точний переклад :(</translatorcomment>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="117"/>
@@ -2154,17 +2154,17 @@ No will choose: %2</source>
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="479"/>
+        <location filename="Views/SbieView.cpp" line="482"/>
         <source>[None]</source>
         <translation>[Немає]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="698"/>
+        <location filename="Views/SbieView.cpp" line="703"/>
         <source>Please enter a new group name</source>
         <translation>Будь ласка, введіть назву нової групи</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="595"/>
+        <location filename="Views/SbieView.cpp" line="598"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Ви дійсно хочете видалити цю(і) групу(и)?</translation>
     </message>
@@ -2239,107 +2239,107 @@ No will choose: %2</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="581"/>
+        <location filename="Views/SbieView.cpp" line="584"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Будь ласка, введіть нову назву для групи.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="585"/>
+        <location filename="Views/SbieView.cpp" line="588"/>
         <source>This Group name is already in use.</source>
         <translation>Це ім&apos;я групи вже використовується.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="628"/>
+        <location filename="Views/SbieView.cpp" line="631"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Перемістити в (негативні значення піднімають вгору, позитивні - вниз):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="662"/>
+        <location filename="Views/SbieView.cpp" line="665"/>
         <source>A group can not be its own parent.</source>
         <translation>Ця група не може бути власним батьком.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="750"/>
-        <location filename="Views/SbieView.cpp" line="827"/>
+        <location filename="Views/SbieView.cpp" line="757"/>
+        <location filename="Views/SbieView.cpp" line="834"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Не показувати це повідомлення знову.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="798"/>
-        <location filename="Views/SbieView.cpp" line="818"/>
-        <location filename="Views/SbieView.cpp" line="838"/>
+        <location filename="Views/SbieView.cpp" line="805"/>
+        <location filename="Views/SbieView.cpp" line="825"/>
+        <location filename="Views/SbieView.cpp" line="845"/>
         <source>This Sandbox is empty.</source>
         <translation>Ця пісочниця порожня.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="886"/>
+        <location filename="Views/SbieView.cpp" line="893"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Будь ласка, введіть нове ім&apos;я для копії пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="886"/>
+        <location filename="Views/SbieView.cpp" line="893"/>
         <source>%1 Copy</source>
         <translation>%1 Копія</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="923"/>
+        <location filename="Views/SbieView.cpp" line="930"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Будь ласка, введіть нове ім&apos;я для пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="936"/>
+        <location filename="Views/SbieView.cpp" line="943"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
         <translation>Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="956"/>
+        <location filename="Views/SbieView.cpp" line="963"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ця пісочниця порожня</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="966"/>
+        <location filename="Views/SbieView.cpp" line="973"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Ви дійсно хочете видалити зміст цієї пісочниці?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="969"/>
+        <location filename="Views/SbieView.cpp" line="976"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
         <translation>Ви дійсно хочете видалити зміст цих пісочниць?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="986"/>
+        <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Ви хочете зупинити всі процеси в цієї(цих) пісочниці(ь)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="987"/>
-        <location filename="Views/SbieView.cpp" line="1063"/>
+        <location filename="Views/SbieView.cpp" line="994"/>
+        <location filename="Views/SbieView.cpp" line="1070"/>
         <source>Terminate without asking</source>
         <translation>Зупинити без запитань</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1027"/>
-        <location filename="Views/SbieView.cpp" line="1090"/>
+        <location filename="Views/SbieView.cpp" line="1034"/>
+        <location filename="Views/SbieView.cpp" line="1097"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Створити ярлик до пісочниці %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1062"/>
+        <location filename="Views/SbieView.cpp" line="1069"/>
         <source>Do you want to %1 %2?</source>
         <translation>Ви хочете %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1062"/>
+        <location filename="Views/SbieView.cpp" line="1069"/>
         <source>the selected processes</source>
         <translation>обрані процеси</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1123"/>
+        <location filename="Views/SbieView.cpp" line="1130"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ця пісочниця не має обмежень доступу до Інтернет, ви хочете їх увімкнути?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1153"/>
+        <location filename="Views/SbieView.cpp" line="1160"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ця пісочниця вимкнена, ви хочете її увімкнути?</translation>
     </message>
@@ -2983,7 +2983,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="502"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation>Примітка: Встановникам MSI не потрібні вийнятки. Якщо у вас є проблеми з встановленням MSI та впевнені в безпечності цього встановника, цей параметр може допомогти. Також ви можете вимкнути параметр "Прибрати права адміністратора".</translation>
+        <translation>Примітка: Встановникам MSI не потрібні вийнятки. Якщо у вас є проблеми з встановленням MSI та впевнені в безпечності цього встановника, цей параметр може допомогти. Також ви можете вимкнути параметр &quot;Прибрати права адміністратора&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="101"/>
@@ -3765,7 +3765,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1010"/>
+        <location filename="Views/SbieView.cpp" line="1017"/>
         <source>Drive %1</source>
         <translation>Диск %1</translation>
     </message>
@@ -3773,27 +3773,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2406"/>
+        <location filename="SandMan.cpp" line="2409"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2407"/>
+        <location filename="SandMan.cpp" line="2410"/>
         <source>Apply</source>
         <translation>Застосувати</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2408"/>
+        <location filename="SandMan.cpp" line="2411"/>
         <source>Cancel</source>
         <translation>Відмінити</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2409"/>
+        <location filename="SandMan.cpp" line="2412"/>
         <source>&amp;Yes</source>
         <translation>Так (&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2410"/>
+        <location filename="SandMan.cpp" line="2413"/>
         <source>&amp;No</source>
         <translation>Ні (&amp;N)</translation>
     </message>
@@ -4044,7 +4044,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Disable Forced Programs command</source>
-        <translation>Тільки адміністратор може використовувати команду "Вимкнути примусові програми"</translation>
+        <translation>Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
@@ -4165,7 +4165,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="796"/>
         <source>Enter the support certificate here</source>
-        <translation >Введіть сертифікат спонсора</translation>
+        <translation>Введіть сертифікат спонсора</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="810"/>

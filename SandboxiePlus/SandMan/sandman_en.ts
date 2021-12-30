@@ -231,17 +231,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="264"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="269"/>
         <source>Please enter an auto exec command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="285"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="290"/>
         <source>Please enter a program file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="400"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="405"/>
         <source>%1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -843,22 +843,22 @@ Full path: %4</source>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2416"/>
+        <location filename="SandMan.cpp" line="2419"/>
         <source>Waiting for folder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2417"/>
+        <location filename="SandMan.cpp" line="2420"/>
         <source>Deleting folder: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2418"/>
+        <location filename="SandMan.cpp" line="2421"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2419"/>
+        <location filename="SandMan.cpp" line="2422"/>
         <source>Finishing Snapshot Merge...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -866,62 +866,62 @@ Full path: %4</source>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="180"/>
+        <location filename="SbiePlusAPI.cpp" line="182"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="185"/>
+        <location filename="SbiePlusAPI.cpp" line="187"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="188"/>
+        <location filename="SbiePlusAPI.cpp" line="190"/>
         <source>Application Compartment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="190"/>
+        <location filename="SbiePlusAPI.cpp" line="192"/>
         <source>NOT SECURE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="192"/>
+        <location filename="SbiePlusAPI.cpp" line="194"/>
         <source>Reduced Isolation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="194"/>
+        <location filename="SbiePlusAPI.cpp" line="196"/>
         <source>Enhanced Isolation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="197"/>
+        <location filename="SbiePlusAPI.cpp" line="199"/>
         <source>Privacy Enhanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="200"/>
+        <location filename="SbiePlusAPI.cpp" line="202"/>
         <source>API Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="202"/>
+        <location filename="SbiePlusAPI.cpp" line="204"/>
         <source>No INet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="204"/>
+        <location filename="SbiePlusAPI.cpp" line="206"/>
         <source>Net Share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="206"/>
+        <location filename="SbiePlusAPI.cpp" line="208"/>
         <source>No Admin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="209"/>
+        <location filename="SbiePlusAPI.cpp" line="211"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1702,22 +1702,22 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2454"/>
+        <location filename="SandMan.cpp" line="2457"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2461"/>
+        <location filename="SandMan.cpp" line="2464"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2496"/>
+        <location filename="SandMan.cpp" line="2499"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2551"/>
+        <location filename="SandMan.cpp" line="2554"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1768,178 +1768,178 @@ No will choose: %2</source>
 <context>
     <name>CSbieProcess</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="467"/>
+        <location filename="SbiePlusAPI.cpp" line="469"/>
         <source>Sbie RpcSs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="468"/>
+        <location filename="SbiePlusAPI.cpp" line="470"/>
         <source>Sbie DcomLaunch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="469"/>
+        <location filename="SbiePlusAPI.cpp" line="471"/>
         <source>Sbie Crypto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="470"/>
+        <location filename="SbiePlusAPI.cpp" line="472"/>
         <source>Sbie WuauServ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="471"/>
+        <location filename="SbiePlusAPI.cpp" line="473"/>
         <source>Sbie BITS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="472"/>
+        <location filename="SbiePlusAPI.cpp" line="474"/>
         <source>Sbie Svc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="473"/>
+        <location filename="SbiePlusAPI.cpp" line="475"/>
         <source>MSI Installer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="474"/>
+        <location filename="SbiePlusAPI.cpp" line="476"/>
         <source>Trusted Installer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="475"/>
+        <location filename="SbiePlusAPI.cpp" line="477"/>
         <source>Windows Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="476"/>
+        <location filename="SbiePlusAPI.cpp" line="478"/>
         <source>Windows Explorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="477"/>
+        <location filename="SbiePlusAPI.cpp" line="479"/>
         <source>Internet Explorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="478"/>
+        <location filename="SbiePlusAPI.cpp" line="480"/>
         <source>Firefox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="479"/>
+        <location filename="SbiePlusAPI.cpp" line="481"/>
         <source>Windows Media Player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="480"/>
+        <location filename="SbiePlusAPI.cpp" line="482"/>
         <source>Winamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="481"/>
+        <location filename="SbiePlusAPI.cpp" line="483"/>
         <source>KMPlayer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="482"/>
+        <location filename="SbiePlusAPI.cpp" line="484"/>
         <source>Windows Live Mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="483"/>
+        <location filename="SbiePlusAPI.cpp" line="485"/>
         <source>Service Model Reg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="484"/>
+        <location filename="SbiePlusAPI.cpp" line="486"/>
         <source>RunDll32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="485"/>
-        <location filename="SbiePlusAPI.cpp" line="486"/>
+        <location filename="SbiePlusAPI.cpp" line="487"/>
+        <location filename="SbiePlusAPI.cpp" line="488"/>
         <source>DllHost</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="487"/>
+        <location filename="SbiePlusAPI.cpp" line="489"/>
         <source>Windows Ink Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="488"/>
+        <location filename="SbiePlusAPI.cpp" line="490"/>
         <source>Chromium Based</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="489"/>
+        <location filename="SbiePlusAPI.cpp" line="491"/>
         <source>Google Updater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="490"/>
+        <location filename="SbiePlusAPI.cpp" line="492"/>
         <source>Acrobat Reader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="491"/>
+        <location filename="SbiePlusAPI.cpp" line="493"/>
         <source>MS Outlook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="492"/>
+        <location filename="SbiePlusAPI.cpp" line="494"/>
         <source>MS Excel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="493"/>
+        <location filename="SbiePlusAPI.cpp" line="495"/>
         <source>Flash Player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="494"/>
+        <location filename="SbiePlusAPI.cpp" line="496"/>
         <source>Firefox Plugin Container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="495"/>
+        <location filename="SbiePlusAPI.cpp" line="497"/>
         <source>Generic Web Browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="496"/>
+        <location filename="SbiePlusAPI.cpp" line="498"/>
         <source>Generic Mail Client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="497"/>
+        <location filename="SbiePlusAPI.cpp" line="499"/>
         <source>Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="506"/>
+        <location filename="SbiePlusAPI.cpp" line="508"/>
         <source>Terminated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="512"/>
+        <location filename="SbiePlusAPI.cpp" line="514"/>
         <source>Forced </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="510"/>
+        <location filename="SbiePlusAPI.cpp" line="512"/>
         <source>Running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="516"/>
+        <location filename="SbiePlusAPI.cpp" line="518"/>
         <source> in session %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="525"/>
+        <location filename="SbiePlusAPI.cpp" line="527"/>
         <source> (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2137,17 +2137,17 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="479"/>
+        <location filename="Views/SbieView.cpp" line="482"/>
         <source>[None]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="698"/>
+        <location filename="Views/SbieView.cpp" line="703"/>
         <source>Please enter a new group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="595"/>
+        <location filename="Views/SbieView.cpp" line="598"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2222,107 +2222,107 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="581"/>
+        <location filename="Views/SbieView.cpp" line="584"/>
         <source>Please enter a new name for the Group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="585"/>
+        <location filename="Views/SbieView.cpp" line="588"/>
         <source>This Group name is already in use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="628"/>
+        <location filename="Views/SbieView.cpp" line="631"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="662"/>
+        <location filename="Views/SbieView.cpp" line="665"/>
         <source>A group can not be its own parent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="750"/>
-        <location filename="Views/SbieView.cpp" line="827"/>
+        <location filename="Views/SbieView.cpp" line="757"/>
+        <location filename="Views/SbieView.cpp" line="834"/>
         <source>Don&apos;t show this message again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="798"/>
-        <location filename="Views/SbieView.cpp" line="818"/>
-        <location filename="Views/SbieView.cpp" line="838"/>
+        <location filename="Views/SbieView.cpp" line="805"/>
+        <location filename="Views/SbieView.cpp" line="825"/>
+        <location filename="Views/SbieView.cpp" line="845"/>
         <source>This Sandbox is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="886"/>
+        <location filename="Views/SbieView.cpp" line="893"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="886"/>
+        <location filename="Views/SbieView.cpp" line="893"/>
         <source>%1 Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="923"/>
+        <location filename="Views/SbieView.cpp" line="930"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="936"/>
+        <location filename="Views/SbieView.cpp" line="943"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="956"/>
+        <location filename="Views/SbieView.cpp" line="963"/>
         <source>This Sandbox is already empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="966"/>
+        <location filename="Views/SbieView.cpp" line="973"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="969"/>
+        <location filename="Views/SbieView.cpp" line="976"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="986"/>
+        <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="987"/>
-        <location filename="Views/SbieView.cpp" line="1063"/>
+        <location filename="Views/SbieView.cpp" line="994"/>
+        <location filename="Views/SbieView.cpp" line="1070"/>
         <source>Terminate without asking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1027"/>
-        <location filename="Views/SbieView.cpp" line="1090"/>
+        <location filename="Views/SbieView.cpp" line="1034"/>
+        <location filename="Views/SbieView.cpp" line="1097"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1062"/>
+        <location filename="Views/SbieView.cpp" line="1069"/>
         <source>Do you want to %1 %2?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1062"/>
+        <location filename="Views/SbieView.cpp" line="1069"/>
         <source>the selected processes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1123"/>
+        <location filename="Views/SbieView.cpp" line="1130"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1153"/>
+        <location filename="Views/SbieView.cpp" line="1160"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3742,7 +3742,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1010"/>
+        <location filename="Views/SbieView.cpp" line="1017"/>
         <source>Drive %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3750,27 +3750,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2406"/>
+        <location filename="SandMan.cpp" line="2409"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2407"/>
+        <location filename="SandMan.cpp" line="2410"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2408"/>
+        <location filename="SandMan.cpp" line="2411"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2409"/>
+        <location filename="SandMan.cpp" line="2412"/>
         <source>&amp;Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2410"/>
+        <location filename="SandMan.cpp" line="2413"/>
         <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>

@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - replaced "Open with" with a Sandboxie dialog to work on Windows 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
-- added ability to run Store apps in App Compartment mode (on win 11 requirers COM to be open)
+- added ability to run Store apps in App Compartment mode (on Windows 11 requires COM to be open)
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
 - added double click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
 - added Ukrainian language on Plus UI (by SuperMaxusa) [#1488](https://github.com/sandboxie-plus/Sandboxie/pull/1488)
@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with shortcuts creation introduced in a recent build [#1471](https://github.com/sandboxie-plus/Sandboxie/issues/1471)
 - fixed various issues in Privacy Enhanced boxes and rule specificity
 - fixed issue with SeAccessCheckByType and alike
-- fixed issues with win32k hooking on 32 bit windows [#1479](https://github.com/sandboxie-plus/Sandboxie/issues/1479)
+- fixed issues with Win32k hooking on 32 bit Windows [#1479](https://github.com/sandboxie-plus/Sandboxie/issues/1479)
 
 ### Removed
 - removed obsolete SkyNet rootkit detection from 32 bit build
@@ -233,7 +233,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue handling an empty Sandboxie.ini that got introduced recently [#1292](https://github.com/sandboxie-plus/Sandboxie/issues/1292)
 - fixed issue with "SpecialImages" template (by Coverlin) [#1288](https://github.com/sandboxie-plus/Sandboxie/issues/1288) [#1289](https://github.com/sandboxie-plus/Sandboxie/issues/1289)
 - fixed issue with box emptying [#1296](https://github.com/sandboxie-plus/Sandboxie/issues/1296)
-- fixed issues wich some languages [#1304](https://github.com/sandboxie-plus/Sandboxie/issues/1304)
+- fixed issues with some languages [#1304](https://github.com/sandboxie-plus/Sandboxie/issues/1304)
 - fixed issue with mounted directories [#1302](https://github.com/sandboxie-plus/Sandboxie/issues/1302)
 - added missing translation for qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
 - fixed issue with Windows compatibility assistant [#1265](https://github.com/sandboxie-plus/Sandboxie/issues/1265)
@@ -1264,7 +1264,7 @@ Fixed issue with Windows 7
 -- use ini option DebugTrace=y to enable
 
 ### Changed
-- AppUserModelID sting no longer contains Sandboxie version string
+- AppUserModelID string no longer contains Sandboxie version string
 - now by default Sbie's application manifest hack is disabled, as it causes problems with version checking on Windows 10
 -- to enable old behaviour add "PreferExternalManifest=y" to the global or the box specific ini section
 - the resource log mechanism can now handle multiple strings to reduce on string copy operations

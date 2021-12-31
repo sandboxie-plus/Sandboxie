@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - replaced "Open with" with a Sandboxie dialog to work on Windows 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
 - added ability to run Win32 store apps in App Compartment mode (on Windows 11 requires COM to be open)
+-- Note: this does not mean UWP store apps, just regular win32 apps packaged to be deployed via the store
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
 - added double click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
 - added Ukrainian language on Plus UI (by SuperMaxusa) [#1488](https://github.com/sandboxie-plus/Sandboxie/pull/1488)

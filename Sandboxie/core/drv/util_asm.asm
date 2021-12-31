@@ -229,6 +229,7 @@ endif
 ;----------------------------------------------------------------------------
 
 ifdef _WIN64
+
 EXTERN Token_SepFilterToken : QWORD
 
 Sbie_SepFilterTokenHandler_asm PROC
@@ -237,32 +238,141 @@ Sbie_SepFilterTokenHandler_asm PROC
      mov         qword ptr [rsp+18h],r8  
      mov         qword ptr [rsp+10h],rdx  
      mov         qword ptr [rsp+8],rcx  
+
      sub         rsp,78h  
+
      mov         dword ptr [rsp+60h],0  
-     mov         rax,qword ptr [rsp+00000000000000A0h]  
+     mov         rax,qword ptr [rsp+00000000000000A0h] ; NewToken
      mov         qword ptr [rsp+50h],rax  
-     mov         rax,qword ptr [rsp+0000000000000098h]  
+     mov         rax,qword ptr [rsp+0000000000000098h] ; LengthIncrease
      mov         qword ptr [rsp+48h],rax  
-     mov         rax,qword ptr [rsp+0000000000000090h]  
+     mov         rax,qword ptr [rsp+0000000000000090h] ; SidPtr
      mov         qword ptr [rsp+40h],rax  
-     mov         rax,qword ptr [rsp+0000000000000088h]  
+     mov         rax,qword ptr [rsp+0000000000000088h] ; SidCount
      mov         qword ptr [rsp+38h],rax  
      mov         qword ptr [rsp+30h],0  
      mov         qword ptr [rsp+28h],0  
      mov         qword ptr [rsp+20h],0  
-     xor         r9d,r9d  
-     xor         r8d,r8d  
-     xor         edx,edx  
-     mov         rcx,qword ptr [rsp+0000000000000080h]  
+     mov         r9d,0
+     mov         r8d,0
+     mov         edx,0
+     mov         rcx,qword ptr [rsp+0000000000000080h] ; TokenObject 
      call        Token_SepFilterToken
-     mov         dword ptr [rsp+60h],eax  
-     mov         eax,dword ptr [rsp+60h]  
+
      add         rsp,78h  
+
      ret  
 
 Sbie_SepFilterTokenHandler_asm ENDP
+
 endif
 
 ;----------------------------------------------------------------------------
+
+ifdef _WIN64
+
+Sbie_InvokeSyscall_asm PROC
+
+     mov         qword ptr [rsp+20h], r9  
+     mov         qword ptr [rsp+18h], r8  
+     mov         qword ptr [rsp+10h], rdx  
+     mov         qword ptr [rsp+8], rcx 
+     
+     ; note: (count & 0x0F) + 4 = 19 arguments are the absolute maximum
+
+     ; quick sanity check
+     cmp         rdx, 13h ; if count > 19
+     jle         arg_count_ok
+     mov         rax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
+     ret
+arg_count_ok:
+
+     push        rsi
+     push        rdi
+     ; prepare enough stack for up to 19 arguments
+     sub         rsp, 98h  
+     
+     ; save our 3 relevant arguments to spare registers
+     mov         r11, r8  ; args
+     mov         r10, rdx ; count
+     mov         rax, rcx ; func
+
+     ; check if we have higher arguments and if not skip 
+     cmp         r10, 4
+     jle         copy_reg_args
+     ; copy arguments 5-19
+     mov         rsi, r11 ; source
+     add         rsi, 20h
+     mov         rdi, rsp ; destination
+     add         rdi, 20h
+     mov         rcx, r10 ; arg count
+     sub         rcx, 4   ; skip the register passed args
+     rep movsq
+
+copy_reg_args:
+     ; copy arguments 1-4
+     mov         r9,  qword ptr [r11+18h]
+     mov         r8,  qword ptr [r11+10h]
+     mov         rdx, qword ptr [r11+08h]
+     mov         rcx, qword ptr [r11+00h]
+
+     ; call the function
+     call        rax
+
+     ; clear stack
+     add         rsp, 98h  
+     pop         rdi
+     pop         rsi
+
+     ret  
+
+Sbie_InvokeSyscall_asm ENDP
+
+else
+
+_Sbie_InvokeSyscall_asm@12 PROC
+
+     ; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
+
+     ; quick sanity check
+     cmp         dword ptr [esp+04h+4h], 13h ; @count
+     jle         args_ok
+     mov         eax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
+     ret
+args_ok:
+
+     ; prepare enough stack for up to 19 arguments
+     push        ebp  
+     push        esi
+     push        edi
+     mov         ebp, esp  
+     sub         esp, 4Ch
+
+     ; copy arguments 0-19
+     mov         esi, dword ptr [ebp+10h+8h] ; source @args
+     mov         edi, esp ; destination
+     mov         ecx, dword ptr [ebp+10h+4h] ; arg count @count
+     rep movsd
+
+     ; call the function
+     mov         eax, dword ptr [ebp+10h+0h] ; @func
+     call        eax
+
+     ; clear stack
+function_end:
+
+     mov         esp,ebp  
+     pop         edi
+     pop         esi
+     pop         ebp
+     ret  
+
+_Sbie_InvokeSyscall_asm@12 ENDP
+PUBLIC _Sbie_InvokeSyscall_asm@12
+
+endif
+
+;----------------------------------------------------------------------------
+
 
 end

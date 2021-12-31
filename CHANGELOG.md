@@ -4,6 +4,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.0.7 / 5.55.7] - 2022-01-??
+
+
+### Changed
+- reworked syscall invocation code in the driver
+
+### Fixed
+- Win32k hooking is now compatible with HVCI [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
+
+
+
+
+
 ## [1.0.6 / 5.55.6] - 2021-12-31
 
 ### Added

@@ -2026,7 +2026,7 @@ _FX NTSTATUS Sbie_SepFilterToken_KernelMode(
     return statusRet;
 }
 
-_FX NTSTATUS Sbie_SepFilterTokenHandler_asm(void* TokenObject, ULONG_PTR   SidCount, ULONG_PTR   SidPtr, ULONG_PTR   LengthIncrease, void** NewToken);
+_FX NTSTATUS Sbie_SepFilterTokenHandler_asm(void* TokenObject, ULONG_PTR SidCount, ULONG_PTR SidPtr, ULONG_PTR LengthIncrease, void** NewToken);
 
 _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
     ULONG_PTR   SidCount,
@@ -2038,9 +2038,9 @@ _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
 
 #ifdef _WIN64
     //
-    // When built with VS2019 on systems with enabled "Core Isolation" we get a BSOD pointing to _chkstk,
-    // this is a function added by the compiler under certain conditions.
-    // We work around this issue by providing a hand crafter wrapper function that performs the call.
+    // When built with VS2019 on systems with enabled "Core Isolation" (HVCI) we get a BSOD.
+    // This is caused by "Control Flow Guard", we could eider disable it for this file or,
+    // work around this issue by providing a hand crafted wrapper function that performs the call.
     //
 
     status = Sbie_SepFilterTokenHandler_asm(TokenObject, SidCount, SidPtr, LengthIncrease, NewToken);

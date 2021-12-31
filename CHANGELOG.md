@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.6 / 5.55.6] - 2021-12-??
+## [1.0.6 / 5.55.6] - 2021-12-31
 
 ### Added
 - replaced "Open with" with a Sandboxie dialog to work on Windows 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)

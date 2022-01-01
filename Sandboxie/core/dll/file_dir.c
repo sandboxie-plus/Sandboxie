@@ -1356,8 +1356,7 @@ _FX NTSTATUS File_MergeDummy(
     WCHAR test_buf[MAX_PATH];
 
     LIST* lists[4];
-    extern void SbieDll_GetReadablePaths(WCHAR path_code, const WCHAR *path, LIST **lists);
-    SbieDll_GetReadablePaths(L'f', TruePath, lists);
+    SbieDll_GetReadablePaths(L'f', lists);
 
     ULONG TruePathLen = wcslen(TruePath);
     if (TruePathLen > 1 && TruePath[TruePathLen - 1] == L'\\')
@@ -1365,15 +1364,14 @@ _FX NTSTATUS File_MergeDummy(
 
     ULONG* PrevEntry = NULL;
     info_ptr = info_area;
-    for (int i=0; lists[i] != NULL; i++)
-    {
+    for (int i=0; lists[i] != NULL; i++) {
 
         PATTERN* pat = List_Head(lists[i]);
         while (pat) {
 
             const WCHAR* patstr = Pattern_Source(pat);
 
-            if (_wcsnicmp(TruePath, patstr, TruePathLen) == 0 && patstr[TruePathLen] == L'\\'){
+            if (_wcsnicmp(TruePath, patstr, TruePathLen) == 0 && patstr[TruePathLen] == L'\\') {
 
                 const WCHAR* ptr = &patstr[TruePathLen + 1];
                 const WCHAR* end = wcschr(ptr, L'\\');
@@ -1409,7 +1407,6 @@ _FX NTSTATUS File_MergeDummy(
         }
     }
 
-    extern void SbieDll_ReleaseFilePathLock();
     SbieDll_ReleaseFilePathLock();
 
     if(mask)
@@ -4107,4 +4104,24 @@ _FX void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey)
 		ShortName[ShortNameLength-- - 1] = 0;
 	if (ShortName[ShortNameLength - 1] == L'.')
 		ShortName[ShortNameLength-- - 1] = 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_CreateBaseFolders
+//---------------------------------------------------------------------------
+
+
+_FX void Key_CreateBaseFolders()
+{
+    //
+    // in privacy mode we need to pre create some folders or else programs may fail
+    //
+
+    File_CreateBoxedPath(File_SysVolume);
+
+    if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+        File_CreateBoxedPath(File_AllUsers);
+        File_CreateBoxedPath(File_CurrentUser);
+    }
 }

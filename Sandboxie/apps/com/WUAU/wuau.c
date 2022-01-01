@@ -198,8 +198,6 @@ int __stdcall WinMain(
 
     Check_Windows_7();
 
-    SetupExceptionHandler();
-
     HOOK_WIN32(CreateProcessW);
 
     memzero(&osvi, sizeof(OSVERSIONINFO));

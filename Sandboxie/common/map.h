@@ -70,6 +70,9 @@ BOOLEAN map_next(map_base_t *m, map_iter_t *iter);
 
 //void map_dump(map_base_t *m);
 
+BOOLEAN str_map_match(const void* key1, const void* key2);
+unsigned int str_map_hash(const void* key, size_t size);
+
 #ifdef __cplusplus
 }
 #endif

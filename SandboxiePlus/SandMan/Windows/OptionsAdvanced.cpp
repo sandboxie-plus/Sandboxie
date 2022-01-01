@@ -65,7 +65,7 @@ void COptionsWindow::LoadAdvanced()
 {
 	ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
 	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
-	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", false));
+	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
 	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
 	ui.chkProtectSCM->setChecked(!m_pBox->GetBool("UnrestrictedSCM", false));
@@ -130,7 +130,7 @@ void COptionsWindow::LoadAdvanced()
 void COptionsWindow::SaveAdvanced()
 {
 	WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "y", "");
-	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "y", "");
+	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "", "n");
 
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
@@ -242,10 +242,14 @@ void COptionsWindow::OnOpenCOM()
 {
 	if (ui.chkOpenCOM->isChecked()) {
 		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
+		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\LRPC*");
+		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\OLE*");
 		SetAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
 	}
 	else {
 		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
+		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\LRPC*");
+		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\OLE*");
 		DelAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
 	}
 }
@@ -399,6 +403,8 @@ void COptionsWindow::CreateDebug()
 
 			QString Info = DbgOption.Name + "=" + DbgOption.Value;
 			QCheckBox* pCheck = new QCheckBox(tr("%1 (%2)").arg(Description).arg(Info));
+			if (ValueDescr.size() >= 2 && ValueDescr[1] == "x")
+				pCheck->setDisabled(true);
 			//pCheck->setToolTip(Info);
 			ui.dbgLayout->addWidget(pCheck, RowCount++, Column, 1, 10-Column);
 

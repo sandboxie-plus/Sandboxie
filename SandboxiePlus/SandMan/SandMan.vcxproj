@@ -282,6 +282,7 @@
     <None Include="sandman_pt.ts" />
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
+    <None Include="sandman_ua.ts" />
     <None Include="sandman_zh_TW.ts" />
     <None Include="sandman_zh_CN.ts" />
   </ItemGroup>

@@ -509,11 +509,23 @@ INT_PTR RunDialogProc(
             SetDlgItemText(hwnd, IDCANCEL, SbieDll_FormatMessage0(MSG_3002));
             SetDlgItemText(hwnd, IDBROWSE, SbieDll_FormatMessage0(MSG_3003));
 
-            SetDlgItemText(hwnd, IDRUNDLGTEXT,
+            extern BOOL execute_open_with;
+            if (execute_open_with)
+            {
+                SetDlgItemText(hwnd, IDRUNDLGTEXT,
+                           SbieDll_FormatMessage0(MSG_3107));
+
+                extern PWSTR ChildCmdLine;
+                SetDlgItemText(hwnd, IDRUNDLGTEXT2, ChildCmdLine);
+            }
+            else
+            {
+                SetDlgItemText(hwnd, IDRUNDLGTEXT,
                            SbieDll_FormatMessage0(MSG_3103));
 
-            SetDlgItemText(hwnd, IDRUNDLGTEXT2,
+                SetDlgItemText(hwnd, IDRUNDLGTEXT2,
                            SbieDll_FormatMessage0(MSG_3104));
+            }
 
             //
             // position window

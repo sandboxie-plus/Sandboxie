@@ -1906,7 +1906,7 @@ _FX UINT Proc_WinExec(LPCSTR lpCmdLine, UINT uCmdShow)
 
     memzero(&pi, sizeof(PROCESS_INFORMATION));
 
-    ok = CreateProcessA(
+   ok = CreateProcessA(
         NULL, (char *)lpCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 
     if (ok) {

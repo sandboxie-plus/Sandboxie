@@ -267,6 +267,9 @@
     <None Include="sandman_pl.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_ua.ts">
+      <Filter>Translation Files</Filter>
+    </None>
     <None Include="sandman_zh_CN.ts">
       <Filter>Translation Files</Filter>
     </None>

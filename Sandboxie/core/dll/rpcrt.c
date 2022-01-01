@@ -909,9 +909,10 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
 //---------------------------------------------------------------------------
 
 
-#define UUID_UserMgrCli L"B18FBAB6-56F8-4702-84E0-41053293A869"
+//#define UUID_UserMgrCli L"B18FBAB6-56F8-4702-84E0-41053293A869"
 
-RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSeq,TCHAR *NetworkAddr,TCHAR *EndPoint,TCHAR *Options,TCHAR **StringBinding) {
+RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSeq,TCHAR *NetworkAddr,TCHAR *EndPoint,TCHAR *Options,TCHAR **StringBinding) 
+{
     ULONG_PTR hSppc =  (ULONG_PTR)GetModuleHandle(L"sppc.dll");
     ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
 
@@ -921,10 +922,13 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
         Scm_Start_Sppsvc();
     }
     // we must block this in Win 10 to prevent r-click context menu hang in Explorer
-    else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
-    {
-        return STATUS_ACCESS_DENIED;
-    }
+    // note: this breaks otehr things but we need it, 
+    // so instead we block the {470C0EBD-5D73-4D58-9CED-E91E22E23282} Pin To Start Screen verb handler;
+    // inside Com_CoCreateInstance
+    //else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
+    //{
+    //    return STATUS_ACCESS_DENIED;
+    //}
     return __sys_RpcStringBindingComposeW(ObjUuid,ProtSeq,NetworkAddr,EndPoint,Options,StringBinding);
 }
 

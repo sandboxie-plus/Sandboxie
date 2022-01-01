@@ -75,6 +75,7 @@ Open Source release
 - lufog - Russian
 - sebadamus - Spanish
 - xorcan - Turkish (disabled for inactivity, a new translator is needed)
+- SuperMaxusa - Ukrainian
 
 More volunteers are welcome here! ;)
 

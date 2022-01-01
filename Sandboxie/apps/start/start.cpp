@@ -81,6 +81,7 @@ BOOL run_mail_agent = FALSE;
 BOOL display_run_dialog = FALSE;
 BOOL display_start_menu = FALSE;
 BOOL execute_auto_run = FALSE;
+BOOL execute_open_with = FALSE;
 BOOL run_elevated_2 = FALSE;
 BOOL disable_force_on_this_program = FALSE;
 BOOL auto_select_default_box = FALSE;
@@ -388,6 +389,7 @@ BOOL Parse_Command_Line(void)
     static const WCHAR *mail_agent        = L"mail_agent";
     static const WCHAR *run_dialog        = L"run_dialog";
     static const WCHAR *start_menu        = L"start_menu";
+    static const WCHAR *open_with         = L"open_with";
     static const WCHAR *auto_run          = L"auto_run";
     static const WCHAR *mount_hive        = L"mount_hive";
     static const WCHAR *delete_sandbox    = L"delete_sandbox";
@@ -754,6 +756,27 @@ BOOL Parse_Command_Line(void)
         }
 
         display_start_menu = TRUE;
+
+        return TRUE;
+
+    // show open with dialog
+
+    } else if (wcsncmp(cmd, open_with, wcslen(open_with)) == 0) {
+
+        /*if (! SbieApi_QueryProcessInfo(
+                        (HANDLE)(ULONG_PTR)GetCurrentProcessId(), 0)) {
+            // this is the instance of Start.exe outside the sandbox
+            // so just resend the start_menu command line to the
+            // instance that will restart in the sandbox
+            ChildCmdLine = cmd;
+
+        }*/
+
+        execute_open_with = TRUE;
+
+        DWORD len = wcslen(open_with) + 1;
+        ChildCmdLine = MyHeapAlloc((wcslen(cmd) - len) * sizeof(WCHAR));
+        wcscpy(ChildCmdLine, cmd + len);
 
         return TRUE;
 
@@ -1690,9 +1713,20 @@ int __stdcall WinMainCRTStartup(
 
     while (1) {
 
-        if (display_run_dialog) {
+        if (display_run_dialog || execute_open_with) {
             MyCoInitialize();
-            ChildCmdLine = DoRunDialog(GetModuleHandle(NULL));
+            WCHAR* CmdLine = DoRunDialog(GetModuleHandle(NULL));
+            if (! ChildCmdLine)
+                ChildCmdLine = CmdLine;
+            else { // execute_open_with
+                WCHAR* FilePath = ChildCmdLine;
+                DWORD len = wcslen(CmdLine) + 1 + wcslen(FilePath) + 16;
+                ChildCmdLine = MyHeapAlloc(len * sizeof(WCHAR));
+                wsprintf(ChildCmdLine, L"%s %s", CmdLine, FilePath);
+                MyHeapFree(CmdLine);
+                MyHeapFree(FilePath);
+            }
+
         } else if (display_start_menu) {
             if (! ChildCmdLine)
                 ChildCmdLine = DoStartMenu();

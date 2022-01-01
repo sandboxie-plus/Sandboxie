@@ -9,7 +9,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  Build:
     #strategy:
     #  matrix:
     #    #platform: [Win32, x64]

@@ -357,3 +357,15 @@ _FX NTSTATUS Hook_Api_Tramp(PROCESS *proc, ULONG64 *parms)
 
     return status;
 }
+
+
+//---------------------------------------------------------------------------
+// 32-bit and 64-bit code
+//---------------------------------------------------------------------------
+
+
+#ifdef _WIN64
+#include "hook_64.c"
+#else ! _WIN64
+#include "hook_32.c"
+#endif _WIN64

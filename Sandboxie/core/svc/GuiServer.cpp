@@ -1047,10 +1047,10 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
 					ok = TRUE;
 				// OriginalToken END
-				// OpenToken BEGIN
-				if ((SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) || SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE)))
+				// UnrestrictedToken BEGIN
+				if (SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE))
 					ok = TRUE;
-				// OpenToken END
+				// UnrestrictedToken END
 
                 if (! ok) {
                     ok = SetInformationJobObject(

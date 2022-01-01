@@ -1280,12 +1280,12 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="594"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation>此类沙盒提供了标准的隔离，它适用于以安全的运行你的软件。</translation>
+        <translation>此类沙盒提供了标准的隔离，它适用于以安全的方式来运行你的软件。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="598"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation>此类沙盒不执行隔离，它的目的是作为一个只用于软件虚拟化的应用隔间。</translation>
+        <translation>此类沙盒不执行隔离，它的目的是将一个应用程序虚拟化。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="603"/>
@@ -1294,7 +1294,7 @@ Do you want to do the clean up?</source>
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
         <translation>
 
-此类沙盒阻止对所有用户数据位置的访问，除非在资源访问选项中明确授权。</translation>
+此类沙盒将限制对沙盒内程序对沙盒外数据的访问，除非在资源访问选项中明确授权。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="670"/>
@@ -3150,7 +3150,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="226"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目支持者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;。&lt;br /&gt;如果你还不是支持者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt;。&lt;br /&gt;当然你也可以免除创建这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止。</translation>
+        <translation>&lt;b&gt;更多沙盒类型&lt;/b&gt;仅&lt;u&gt;项目支持者&lt;/u&gt;可用，隐私增强沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;保护用户数据免受沙盒化的程序非法访问&lt;/font&gt;&lt;/b&gt;。&lt;br /&gt;如果你还不是支持者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠此项目&lt;/a&gt;，来获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt;。&lt;br /&gt;当然你也可以新建一个这些类型的沙盒进行测试，不过沙盒中运行的程序将在 5 分钟之后自动终止。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="413"/>

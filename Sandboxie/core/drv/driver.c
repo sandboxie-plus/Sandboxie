@@ -127,6 +127,7 @@ ULONG Process_Flags3 = 0;
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
 #endif // OLD_DDK
 P_NtCreateToken                 ZwCreateToken               = NULL;
+P_NtCreateTokenEx               ZwCreateTokenEx             = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -647,6 +648,10 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 
     ZwCreateToken = (P_NtCreateToken) Driver_FindMissingService("ZwCreateToken", 13);
     //DbgPrint("ZwCreateToken: %p\r\n", ZwCreateToken);
+    if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
+        ZwCreateTokenEx = (P_NtCreateTokenEx)Driver_FindMissingService("ZwCreateTokenEx", 17);
+        //DbgPrint("ZwCreateTokenEx: %p\r\n", ZwCreateTokenEx);
+    }
 
     return TRUE;
 }

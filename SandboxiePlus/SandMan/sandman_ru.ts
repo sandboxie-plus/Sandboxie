@@ -2224,7 +2224,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="135"/>
         <source>Move Box/Group</source>
-        <translation>Переместить песочницу/группу</translation>
+        <translation>Сдвинуть песочницу/группу</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="136"/>

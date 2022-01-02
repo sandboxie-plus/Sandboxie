@@ -338,7 +338,7 @@ _Sbie_InvokeSyscall_asm@12 PROC
      cmp         dword ptr [esp+04h+4h], 13h ; @count
      jle         args_ok
      mov         eax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
-     ret
+     ret         0Ch
 args_ok:
 
      ; prepare enough stack for up to 19 arguments
@@ -365,7 +365,7 @@ function_end:
      pop         edi
      pop         esi
      pop         ebp
-     ret  
+     ret         0Ch
 
 _Sbie_InvokeSyscall_asm@12 ENDP
 PUBLIC _Sbie_InvokeSyscall_asm@12

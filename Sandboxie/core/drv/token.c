@@ -76,7 +76,7 @@ static BOOLEAN Token_AssignPrimary(
 
 static void *Token_DuplicateToken(void *TokenObject, PROCESS *proc);
 
-static void *Token_CreateRestricted(void *TokenObject, PROCESS *proc);
+static void *Token_CreateNew(void *TokenObject, PROCESS *proc);
 
 //---------------------------------------------------------------------------
 
@@ -869,7 +869,7 @@ _FX void *Token_Restrict(
         // Create a new token from scratch, experimental
         //
 
-        FixedTokenObject = Token_CreateRestricted(TokenObject, proc);
+        FixedTokenObject = Token_CreateNew(TokenObject, proc);
     }
     else {
             
@@ -2225,11 +2225,11 @@ _FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POB
 
 
 //---------------------------------------------------------------------------
-// Token_CreateRestricted
+// Token_CreateNew
 //---------------------------------------------------------------------------
 
 
-_FX void* Token_CreateRestricted(void* TokenObject, PROCESS* proc)
+_FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
 {
     HANDLE TokenHandle = NULL;
     NTSTATUS status = STATUS_UNSUCCESSFUL;

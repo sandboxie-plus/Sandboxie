@@ -5,10 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
 ## [1.0.7 / 5.55.7] - 2022-01-??
 
 ### Added
-- added experimental option "CreateToken=y" ability to create a new token instead of restricting an existing one
+- added experimental option "CreateToken=y" ability to create a new token instead of repurposing an existing one
+- added option "DisableRtClsBlacklist=y" allowing to disable the hardcoded runtime class blacklist 
 
 ### Changed
 - reworked syscall invocation code in the driver
@@ -16,7 +18,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Win32k hooking is now compatible with HVCI [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
 - fixed memory leak in driver (conf_user.c)
+- fixed issue with file renaming in open paths introduced in 1.0.6
+- fixed issue chromium browsers not closing properly [#1496](https://github.com/sandboxie-plus/Sandboxie/issues/1496)
 
+### Removed
+- removed OpenToken as its only a shorthand for UnrestrictedToken=y and UnfilteredToken=y set together
 
 
 

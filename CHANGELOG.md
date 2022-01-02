@@ -7,13 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.7 / 5.55.7] - 2022-01-??
 
+### Added
+- added experimental option "CreateToken=y" ability to create a new token instead of restricting an existing one
 
 ### Changed
 - reworked syscall invocation code in the driver
 
 ### Fixed
 - Win32k hooking is now compatible with HVCI [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
-
+- fixed memory leak in driver (conf_user.c)
 
 
 

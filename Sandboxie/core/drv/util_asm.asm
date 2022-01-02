@@ -242,13 +242,13 @@ Sbie_SepFilterTokenHandler_asm PROC
      sub         rsp,78h  
 
      mov         dword ptr [rsp+60h],0  
-     mov         rax,qword ptr [rsp+00000000000000A0h] ; NewToken
+     mov         rax,qword ptr [rsp+0A0h] ; NewToken
      mov         qword ptr [rsp+50h],rax  
-     mov         rax,qword ptr [rsp+0000000000000098h] ; LengthIncrease
+     mov         rax,qword ptr [rsp+098h] ; LengthIncrease
      mov         qword ptr [rsp+48h],rax  
-     mov         rax,qword ptr [rsp+0000000000000090h] ; SidPtr
+     mov         rax,qword ptr [rsp+090h] ; SidPtr
      mov         qword ptr [rsp+40h],rax  
-     mov         rax,qword ptr [rsp+0000000000000088h] ; SidCount
+     mov         rax,qword ptr [rsp+088h] ; SidCount
      mov         qword ptr [rsp+38h],rax  
      mov         qword ptr [rsp+30h],0  
      mov         qword ptr [rsp+28h],0  
@@ -256,7 +256,7 @@ Sbie_SepFilterTokenHandler_asm PROC
      mov         r9d,0
      mov         r8d,0
      mov         edx,0
-     mov         rcx,qword ptr [rsp+0000000000000080h] ; TokenObject 
+     mov         rcx,qword ptr [rsp+080h] ; TokenObject 
      call        Token_SepFilterToken
 
      add         rsp,78h  

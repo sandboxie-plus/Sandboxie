@@ -76,10 +76,10 @@ Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; Strin
 
 
 [InstallDelete]
+; Remove deprecated files at install time.
 Type: files; Name: "{app}\translations\sandman_zh-CN.qm"
 Type: files; Name: "{app}\translations\sandman_zh-TW.qm"
-Type: files; Name: "{app}\translations\sandman_pt_BR.qm"
-Type: files; Name: "{app}\translations\sandman_pt_PT.qm"
+Type: files; Name: "{app}\translations\sandman_pt.qm"
 
 
 [Registry]

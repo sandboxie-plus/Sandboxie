@@ -212,8 +212,8 @@ begin
     'german': Result := 'de';
     'italian': Result := 'it';
     'polish': Result := 'pl';
-    'portuguese': Result := 'pt_BR';
-    'portuguese european': Result := 'pt_PT';
+    'brazilianportuguese': Result := 'pt_BR';
+    'portuguese': Result := 'pt_PT';
     'russian': Result := 'ru';
     'spanish': Result := 'es';
     'turkish': Result := 'tr';

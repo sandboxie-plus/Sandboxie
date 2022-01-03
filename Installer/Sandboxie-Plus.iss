@@ -78,6 +78,8 @@ Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; Strin
 [InstallDelete]
 Type: files; Name: "{app}\translations\sandman_zh-CN.qm"
 Type: files; Name: "{app}\translations\sandman_zh-TW.qm"
+Type: files; Name: "{app}\translations\sandman_pt_BR.qm"
+Type: files; Name: "{app}\translations\sandman_pt_PT.qm"
 
 
 [Registry]
@@ -210,7 +212,8 @@ begin
     'german': Result := 'de';
     'italian': Result := 'it';
     'polish': Result := 'pl';
-    'portuguese': Result := 'pt';
+    'portuguese': Result := 'pt_BR';
+    'portuguese european': Result := 'pt_PT';
     'russian': Result := 'ru';
     'spanish': Result := 'es';
     'turkish': Result := 'tr';

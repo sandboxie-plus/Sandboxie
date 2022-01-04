@@ -1158,7 +1158,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 bool CSandMan::CheckCertificate() 
 {
-	if (!g_Certificate.isEmpty())
+	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) != 0)
 		return true;
 
 	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
@@ -1678,6 +1678,7 @@ void CSandMan::OnEditIni()
 			theConf->SetValue("Options/NoEditInfo", false);
 	}
 
+	wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
 	wstring IniPath = theAPI->GetIniPath().toStdWString();
 
 	SHELLEXECUTEINFO si = { 0 };
@@ -1685,7 +1686,7 @@ void CSandMan::OnEditIni()
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
 	si.lpVerb = L"runas";
-	si.lpFile = L"notepad.exe";
+	si.lpFile = Editor.c_str();
 	si.lpParameters = IniPath.c_str();
 	si.lpDirectory = NULL;
 	si.nShow = SW_SHOW;
@@ -2266,7 +2267,7 @@ void CSandMan::OnAbout()
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
 			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
+			"<p>Copyright (c) 2020-2022 by DavidXanatos</p>"
 		).arg(GetVersion());
 
 		QString CertInfo;

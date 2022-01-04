@@ -2411,6 +2411,45 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
     ULONG virtualizationAllowed = 1;
     status = ZwSetInformationToken(TokenHandle, TokenVirtualizationAllowed, &virtualizationAllowed, sizeof(ULONG));
 
+
+    /*HANDLE OldTokenHandle;
+    status = ObOpenObjectByPointer(
+        TokenObject, OBJ_KERNEL_HANDLE, NULL, TOKEN_ALL_ACCESS,
+        *SeTokenObjectType, KernelMode, &OldTokenHandle);
+    if (NT_SUCCESS(status)) {
+
+        __try {
+
+        void* ptr = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
+        if (ptr) {
+            ULONG len = 0;
+            status = ZwQueryInformationToken(OldTokenHandle, TokenSecurityAttributes, ptr, PAGE_SIZE, &len);
+            if (NT_SUCCESS(status)) {
+
+                PTOKEN_SECURITY_ATTRIBUTES_AND_OPERATION_INFORMATION data = (PTOKEN_SECURITY_ATTRIBUTES_AND_OPERATION_INFORMATION)(((UCHAR*)ptr) + len);
+                len += sizeof(TOKEN_SECURITY_ATTRIBUTES_AND_OPERATION_INFORMATION);
+
+                data->Attributes = ptr;
+                data->Operations = (PTOKEN_SECURITY_ATTRIBUTE_OPERATION)(((UCHAR*)ptr) + len);
+                len += sizeof(TOKEN_SECURITY_ATTRIBUTE_OPERATION) * data->Attributes->AttributeCount;
+                for (ULONG i = 0; i < data->Attributes->AttributeCount; i++)
+                    data->Operations[i] = TOKEN_SECURITY_ATTRIBUTE_OPERATION_ADD;
+
+                status = ZwSetInformationToken(TokenHandle, TokenSecurityAttributes, data, len);
+            }
+        }
+        if (ptr)ExFreePool(ptr);
+
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            status = GetExceptionCode() + 0x01000000;
+        }
+        
+        DbgPrint("TokenSecurityAttributes %08x", status);
+
+        ZwClose(OldTokenHandle);
+    }*/
+
 finish:
     if (LocalStatistics)    ExFreePool((PVOID)LocalStatistics);
     if (LocalUser)          ExFreePool((PVOID)LocalUser);

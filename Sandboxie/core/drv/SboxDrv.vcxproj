@@ -31,6 +31,7 @@
     <TargetVersion>Windows7</TargetVersion>
     <DriverType>WDM</DriverType>
     <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'" Label="Configuration">
     <ConfigurationType>Driver</ConfigurationType>
@@ -39,6 +40,7 @@
     <TargetVersion>Windows7</TargetVersion>
     <DriverType>WDM</DriverType>
     <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'" Label="Configuration">
     <ConfigurationType>Driver</ConfigurationType>
@@ -49,6 +51,7 @@
     <DriverType>WDM</DriverType>
     <TargetVersion>Windows7</TargetVersion>
     <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'" Label="Configuration">
     <ConfigurationType>Driver</ConfigurationType>
@@ -57,6 +60,7 @@
     <TargetVersion>Windows7</TargetVersion>
     <DriverType>WDM</DriverType>
     <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -417,7 +421,12 @@
     <ClCompile Include="process_util.c" />
     <ClCompile Include="log_buff.c" />
     <ClCompile Include="session.c" />
-    <ClCompile Include="syscall.c" />
+    <ClCompile Include="syscall.c">
+      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">false</ControlFlowGuard>
+      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">false</ControlFlowGuard>
+      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">false</ControlFlowGuard>
+      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">false</ControlFlowGuard>
+    </ClCompile>
     <ClCompile Include="syscall_32.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>

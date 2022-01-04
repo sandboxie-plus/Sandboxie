@@ -27,7 +27,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
 
 	ui.lblSupportCert->setVisible(false);
-	if (g_Certificate.isEmpty())
+	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0)
 	{
 		ui.lblSupportCert->setVisible(true);
 		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -42,7 +42,6 @@ void COptionsWindow::CreateGeneral()
 			item->setFlags(disabled ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 		}
 	}
-
 
 	m_HoldBoxType = false;
 
@@ -403,6 +402,7 @@ void COptionsWindow::OnBoxTypChanged()
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
 		SetTemplate("NoUACProxy", false);
+		//SetTemplate("DeviceSecurity", true);
 		break;
 	case CSandBoxPlus::eDefaultPlus:
 	case CSandBoxPlus::eDefault:
@@ -413,6 +413,7 @@ void COptionsWindow::OnBoxTypChanged()
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eDefaultPlus);
 		SetTemplate("NoUACProxy", false);
+		//SetTemplate("DeviceSecurity", false);
 		break;
 	case CSandBoxPlus::eAppBoxPlus:
 	case CSandBoxPlus::eAppBox:
@@ -420,6 +421,7 @@ void COptionsWindow::OnBoxTypChanged()
 		//ui.chkRestrictServices->setChecked(false);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
 		SetTemplate("NoUACProxy", true);
+		//SetTemplate("DeviceSecurity", false);
 		break;
 	}
 

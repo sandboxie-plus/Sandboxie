@@ -10,7 +10,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added experimental option "CreateToken=y" ability to create a new token instead of repurposing an existing one
-- added option "DisableRtClsBlacklist=y" allowing to disable the hardcoded runtime class blacklist 
+- added option "DisableRTBlacklist=y" allowing to disable the hardcoded runtime class blacklist 
+- added new template "DeviceSecurity" template to lock down access to device drviers on the system
+-- Note: This template requires RuleSpecificity being available to work properly
+- added option to set a custom ini editor in the plus ui [#1475](https://github.com/sandboxie-plus/Sandboxie/issues/1475)
 
 ### Changed
 - reworked syscall invocation code in the driver

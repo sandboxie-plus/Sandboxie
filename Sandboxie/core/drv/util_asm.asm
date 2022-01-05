@@ -271,17 +271,17 @@ endif
 
 ifdef _WIN64
 
+; NTSTATUS Sbie_InvokeSyscall_hack(ULONG_PTR arg01, ... , ULONG_PTR arg19, void* func);
 Sbie_InvokeSyscall_jmp PROC
      jmp         qword ptr [rsp+0A0h] ; 20th argument
 Sbie_InvokeSyscall_jmp ENDP
 
 
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG_PTR count, void* args, ULONG_PTR dummy1, ..., ULONG_PTR dummy16);
 Sbie_InvokeSyscall_hack PROC
 
-     ;mov         qword ptr [rsp+20h], r9  
-     ;mov         qword ptr [rsp+18h], r8  
-     ;mov         qword ptr [rsp+10h], rdx  
-     ;mov         qword ptr [rsp+8], rcx 
+     ; WARNING: when calling this function after the 3 used arguments 16 more dummy's must be passed
+     ;              to reserve the required stack space at the caller's stack which we will use
 
      ; note: (count & 0x0F) + 4 = 19 arguments are the absolute maximum
 
@@ -300,11 +300,11 @@ arg_count_ok:
      ; check if we have higher arguments and if not skip 
      cmp         r10, 4
      jle         copy_reg_args
-     ; copy arguments 5-19
 
      push        rsi
      push        rdi
 
+     ; copy arguments 5-19
      mov         rsi, r11 ; source
      add         rsi, 20h
      mov         rdi, rsp ; destination
@@ -329,13 +329,9 @@ copy_reg_args:
 Sbie_InvokeSyscall_hack ENDP
 
 
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
 Sbie_InvokeSyscall_asm PROC
 
-     ;mov         qword ptr [rsp+20h], r9  
-     ;mov         qword ptr [rsp+18h], r8  
-     ;mov         qword ptr [rsp+10h], rdx  
-     ;mov         qword ptr [rsp+8], rcx 
-     
      ; note: (count & 0x0F) + 4 = 19 arguments are the absolute maximum
 
      ; quick sanity check
@@ -388,6 +384,7 @@ Sbie_InvokeSyscall_asm ENDP
 
 else
 
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
 _Sbie_InvokeSyscall_asm@12 PROC
 
      ; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);

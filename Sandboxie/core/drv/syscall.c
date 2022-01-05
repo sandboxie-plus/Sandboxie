@@ -604,19 +604,11 @@ _FX void Syscall_ErrorForAsciiName(const UCHAR *name_a)
 extern unsigned int g_TrapFrameOffset;
 
 #ifdef _WIN64
-//NTSTATUS Sbie_InvokeSyscall_jmp(
-//    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-//    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-//    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-//    ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15, ULONG_PTR arg16, 
-//    ULONG_PTR arg17, ULONG_PTR arg18, ULONG_PTR arg19, void* func);
-
-NTSTATUS Sbie_InvokeSyscall_hack(void* func, int count, void* args, ULONG_PTR arg04,
+NTSTATUS Sbie_InvokeSyscall_hack(void* func, ULONG_PTR count, void* args, ULONG_PTR arg04,
     ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
     ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
     ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15, ULONG_PTR arg16, 
     ULONG_PTR arg17, ULONG_PTR arg18, ULONG_PTR arg19);
-
 #else
 NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
 #endif
@@ -643,16 +635,8 @@ _FX NTSTATUS Syscall_Invoke(SYSCALL_ENTRY *entry, ULONG_PTR *stack)
         //  while working for 64 bit apps, makes 32 bit apps crash under wow64, 
         //  this should not be possible yet it happens, hence we use a hacky workaround
         //  where our sys call invoker does not do a call but a jmp that seams to be fine.
-        //  Ther for that we need to use this functions stack, hence those many 0 args.
+        //  Therefore we need to re-use this functions stack, hence those many 0 args passed.
         //
-
-        // this also works but is less efficient
-        //#define ARG(idx) (entry->param_count > idx ? stack[idx] : 0)
-        //status = Sbie_InvokeSyscall_jmp(
-        //    ARG(0), ARG(1), ARG(2), ARG(3), ARG(4), ARG(5), ARG(6), ARG(7), ARG(8), ARG(9),
-        //    ARG(10), ARG(11), ARG(12), ARG(13), ARG(14), ARG(15), ARG(16), ARG(17), ARG(18),
-        //    entry->ntos_func);
-        //#undef ARG
 
         status = Sbie_InvokeSyscall_hack(entry->ntos_func, entry->param_count, stack, 0, // args 1-4 shadow space
             0,0,0,0,0,0,0,0,0,0,0,0,0,0,0); // reserve stack for args 5-19

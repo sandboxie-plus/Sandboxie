@@ -271,81 +271,23 @@ endif
 
 ifdef _WIN64
 
-; NTSTATUS Sbie_InvokeSyscall_hack(ULONG_PTR arg01, ... , ULONG_PTR arg19, void* func);
-Sbie_InvokeSyscall_jmp PROC
-     jmp         qword ptr [rsp+0A0h] ; 20th argument
-Sbie_InvokeSyscall_jmp ENDP
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
+Sbie_InvokeSyscall_asm PROC FRAME
 
-
-; NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG_PTR count, void* args, ULONG_PTR dummy1, ..., ULONG_PTR dummy16);
-Sbie_InvokeSyscall_hack PROC
-
-     ; WARNING: when calling this function after the 3 used arguments 16 more dummy's must be passed
-     ;              to reserve the required stack space at the caller's stack which we will use
-
-     ; note: (count & 0x0F) + 4 = 19 arguments are the absolute maximum
-
+     ; prolog
+     push        rsi
+     push        rdi
+     sub         rsp, 98h ; 8 * 19 - prepare enough stack for up to 19 arguments
+     .allocstack(0A8h)
+     .endprolog
+     
      ; quick sanity check
      cmp         rdx, 13h ; if count > 19
      jle         arg_count_ok
      mov         rax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
-     ret
-arg_count_ok:
-     
-     ; save our 3 relevant arguments to spare registers
-     mov         r11, r8  ; args
-     mov         r10, rdx ; count
-     mov         rax, rcx ; func
-
-     ; check if we have higher arguments and if not skip 
-     cmp         r10, 4
-     jle         copy_reg_args
-
-     push        rsi
-     push        rdi
-
-     ; copy arguments 5-19
-     mov         rsi, r11 ; source
-     add         rsi, 20h
-     mov         rdi, rsp ; destination
-     add         rdi, 38h ; 28h + 8h + 8h
-     mov         rcx, r10 ; arg count
-     sub         rcx, 4   ; skip the register passed args
-     rep movsq
-
-     pop         rdi
-     pop         rsi
-
-copy_reg_args:
-     ; copy arguments 1-4
-     mov         r9,  qword ptr [r11+18h]
-     mov         r8,  qword ptr [r11+10h]
-     mov         rdx, qword ptr [r11+08h]
-     mov         rcx, qword ptr [r11+00h]
-
-     ; "call" the function
-     jmp         rax
-
-Sbie_InvokeSyscall_hack ENDP
-
-
-; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
-Sbie_InvokeSyscall_asm PROC
-
-     ; note: (count & 0x0F) + 4 = 19 arguments are the absolute maximum
-
-     ; quick sanity check
-     cmp         rdx, 13h ; if count > 19
-     jle         arg_count_ok
-     mov         rax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
-     ret
+     jmp         func_return
 arg_count_ok:
 
-     push        rsi
-     push        rdi
-     ; prepare enough stack for up to 19 arguments
-     sub         rsp, 98h  
-     
      ; save our 3 relevant arguments to spare registers
      mov         r11, r8  ; args
      mov         r10, rdx ; count
@@ -373,7 +315,8 @@ copy_reg_args:
      ; call the function
      call        rax
 
-     ; clear stack
+func_return:
+     ; epilog
      add         rsp, 98h  
      pop         rdi
      pop         rsi
@@ -384,24 +327,22 @@ Sbie_InvokeSyscall_asm ENDP
 
 else
 
-; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
 _Sbie_InvokeSyscall_asm@12 PROC
 
-     ; NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
-
-     ; quick sanity check
-     cmp         dword ptr [esp+04h+4h], 13h ; @count
-     jle         args_ok
-     mov         eax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
-     ret         0Ch
-args_ok:
-
-     ; prepare enough stack for up to 19 arguments
+     ; prolog
      push        ebp  
      push        esi
      push        edi
      mov         ebp, esp  
-     sub         esp, 4Ch
+     sub         esp, 4Ch ; 4 * 19 - prepare enough stack for up to 19 arguments
+
+     ; quick sanity check
+     cmp         dword ptr [ebp+10h+4h], 13h ; arg count @count
+     jle         arg_count_ok
+     mov         eax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
+     jmp         func_return
+arg_count_ok:
 
      ; copy arguments 0-19
      mov         esi, dword ptr [ebp+10h+8h] ; source @args
@@ -413,9 +354,8 @@ args_ok:
      mov         eax, dword ptr [ebp+10h+0h] ; @func
      call        eax
 
-     ; clear stack
-function_end:
-
+func_return:
+     ; epilog
      mov         esp,ebp  
      pop         edi
      pop         esi

@@ -276,9 +276,11 @@ Sbie_InvokeSyscall_asm PROC FRAME
 
      ; prolog
      push        rsi
+     .allocstack 8
      push        rdi
+     .allocstack 8
      sub         rsp, 98h ; 8 * 19 - prepare enough stack for up to 19 arguments
-     .allocstack(0A8h)
+     .allocstack 98h
      .endprolog
      
      ; quick sanity check

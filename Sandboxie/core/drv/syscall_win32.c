@@ -445,36 +445,6 @@ _FX BOOLEAN Syscall_Init_Table32(void)
 
 
 //---------------------------------------------------------------------------
-// Syscall_InvokeNew
-//---------------------------------------------------------------------------
-
-_FX NTSTATUS Sbie_InvokeSyscall_asm(void* func, int count, void* args);
-
-_FX NTSTATUS Syscall_InvokeNew(SYSCALL_ENTRY *entry, ULONG_PTR *stack)
-{
-    NTSTATUS status;
-
-    //
-    // Note: when directly calling win32k functions with "Core Isolation" (HVCI) enabled
-    //  the nt!guard_dispatch_icall will cause a bugcheck!
-    //  Hence we use a call proxy Sbie_InvokeSyscall_asm instead of a direct call
-    //
-
-    __try {
-
-        //DbgPrint("[syscall] request param count = %d\n", entry->param_count);
-
-        status = Sbie_InvokeSyscall_asm(entry->ntos_func, entry->param_count, stack);
-
-    } __except (EXCEPTION_EXECUTE_HANDLER) {
-        status = GetExceptionCode();
-    }
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
 // Syscall_Api_Invoke32
 //---------------------------------------------------------------------------
 

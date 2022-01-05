@@ -421,12 +421,7 @@
     <ClCompile Include="process_util.c" />
     <ClCompile Include="log_buff.c" />
     <ClCompile Include="session.c" />
-    <ClCompile Include="syscall.c">
-      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">false</ControlFlowGuard>
-      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">false</ControlFlowGuard>
-      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">false</ControlFlowGuard>
-      <ControlFlowGuard Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">false</ControlFlowGuard>
-    </ClCompile>
+    <ClCompile Include="syscall.c" />
     <ClCompile Include="syscall_32.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>

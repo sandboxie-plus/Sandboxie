@@ -470,9 +470,9 @@ _FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
 {
     LARGE_INTEGER date;
     TIME_FIELDS timeFiled = { 0 };
-    timeFiled.Day = days;
-    timeFiled.Month = months;
-    timeFiled.Year = years;
+    timeFiled.Day = 1 + days;
+    timeFiled.Month = 1 + months;
+    timeFiled.Year = 1601 + years;
     RtlTimeFieldsToTime(&timeFiled, &date);
     return date.QuadPart;
 }

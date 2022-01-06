@@ -482,7 +482,7 @@ _FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
 
 _FX NTSTATUS KphValidateCertificate(void)
 {
-    BOOLEAN CertDbg = TRUE;
+    BOOLEAN CertDbg = FALSE;
 
     static const WCHAR *path_cert = L"%s\\Certificate.dat";
     NTSTATUS status;

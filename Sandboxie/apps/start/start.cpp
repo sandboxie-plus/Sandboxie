@@ -1713,10 +1713,13 @@ int __stdcall WinMainCRTStartup(
 
     while (1) {
 
-        if (display_run_dialog || execute_open_with) {
+        if (display_run_dialog) {
+            MyCoInitialize();
+            ChildCmdLine = DoRunDialog(GetModuleHandle(NULL));
+        } else if (execute_open_with) {
             MyCoInitialize();
             WCHAR* CmdLine = DoRunDialog(GetModuleHandle(NULL));
-            if (! ChildCmdLine)
+            if (!CmdLine) // !CmdLine -> cancel
                 ChildCmdLine = CmdLine;
             else { // execute_open_with
                 WCHAR* FilePath = ChildCmdLine;
@@ -1726,7 +1729,6 @@ int __stdcall WinMainCRTStartup(
                 MyHeapFree(CmdLine);
                 MyHeapFree(FilePath);
             }
-
         } else if (display_start_menu) {
             if (! ChildCmdLine)
                 ChildCmdLine = DoStartMenu();

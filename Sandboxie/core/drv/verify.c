@@ -426,7 +426,7 @@ _FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
 }
 
 // Example of __DATE__ string: "Jul 27 2012"
-//                              01234567890
+//                              0123456789A
 
 #define BUILD_YEAR_CH0 (__DATE__[ 7])
 #define BUILD_YEAR_CH1 (__DATE__[ 8])
@@ -690,6 +690,11 @@ _FX NTSTATUS KphValidateCertificate(void)
             RtlTimeToTimeFields(&LocalTime, &timeFiled);
             DbgPrint("Sbie Current time: %02d:%02d:%02d %02d.%02d.%d\n"
                 , timeFiled.Hour, timeFiled.Minute, timeFiled.Second, timeFiled.Day, timeFiled.Month, timeFiled.Year);
+        }
+
+        if (!type && level) { // fix for some early hand crafted contributor certificates
+            type = level;
+            level = NULL;
         }
 
         if (type && _wcsicmp(type, L"CONTRIBUTOR") == 0) {

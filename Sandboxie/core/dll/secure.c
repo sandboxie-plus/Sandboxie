@@ -231,6 +231,15 @@ BOOLEAN Secure_Is_IE_NtQueryInformationToken = FALSE;
 
 BOOLEAN Secure_FakeAdmin = FALSE;
 
+static UCHAR AdministratorsSid[16] = {
+    1,                                      // Revision
+    2,                                      // SubAuthorityCount
+    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+    0x20, 0, 0, 0,   // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
+    0x20, 2, 0, 0    // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
+};
+
+
 //---------------------------------------------------------------------------
 // Secure_InitSecurityDescriptors
 //---------------------------------------------------------------------------
@@ -384,6 +393,15 @@ _FX BOOLEAN Secure_Init(void)
 
     SBIEDLL_HOOK(Ldr_, RtlEqualSid);
 
+    //
+    // install hooks to fake administrator privileges
+    // note: when running as the built in administrator we should always act as if we have admin rights
+    //
+
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
+        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
+
+
     if (Secure_FakeAdmin || Dll_OsBuild >= 9600) {
 
         void* NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");
@@ -418,13 +436,6 @@ _FX BOOLEAN Secure_Init(void)
             Secure_IsInternetExplorerTabProcess = TRUE;
     }
 
-    //
-    // install hooks to fake administrator privileges
-    // note: when running as the built in administrator we should always act as if we have admin rights
-    //
-
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
-                        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
 
     RtlQueryElevationFlags =
         GetProcAddress(Dll_Ntdll, "RtlQueryElevationFlags");
@@ -1066,6 +1077,7 @@ NTSTATUS Ldr_NtAccessCheckByType(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID P
     NTSTATUS rc;
     HANDLE hTokenReal = NULL;
 
+    // todo: is that right? seams wrong 
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_BITS ||
         Dll_ImageType == DLL_IMAGE_SANDBOXIE_WUAU ||
         Dll_ImageType == DLL_IMAGE_WUAUCLT) {
@@ -1092,6 +1104,23 @@ _FX NTSTATUS Ldr_NtAccessCheck(PSECURITY_DESCRIPTOR SecurityDescriptor, HANDLE C
     NTSTATUS status = 0;
     HANDLE hTokenReal = NULL;
 
+    if (Secure_FakeAdmin && SecurityDescriptor) {
+        BOOLEAN Fake = FALSE;
+
+        PSID Group, Owner;
+        BOOLEAN Dummy1, Dummy2;
+        if (NT_SUCCESS(RtlGetGroupSecurityDescriptor(SecurityDescriptor, &Group, &Dummy1))
+         && NT_SUCCESS(RtlGetOwnerSecurityDescriptor(SecurityDescriptor, &Owner, &Dummy2))) {
+            Fake = RtlEqualSid(Group, AdministratorsSid) || RtlEqualSid(Owner, AdministratorsSid);
+        }
+
+        if (Fake) {
+            *GrantedAccess = 1;
+            *AccessStatus = 0;
+            return STATUS_SUCCESS;
+        }
+    }
+
     Ldr_TestToken(ClientToken, &hTokenReal, TRUE);
 
     status = __sys_NtAccessCheck(SecurityDescriptor, hTokenReal ? hTokenReal : ClientToken, DesiredAccess, GenericMapping, RequiredPrivilegesBuffer, BufferLength, GrantedAccess, AccessStatus);
@@ -1102,7 +1131,7 @@ _FX NTSTATUS Ldr_NtAccessCheck(PSECURITY_DESCRIPTOR SecurityDescriptor, HANDLE C
     return status;
 }
 
-_FX NTSTATUS Ldr_NtAccessCheckByTypeResultList(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID PrincipalSelfSid, HANDLE ClientToken, ACCESS_MASK  DesiredAccess, POBJECT_TYPE_LIST ObjectTypeList, ULONG ObjectTypeListLength, PGENERIC_MAPPING GenericMapping, PPRIVILEGE_SET    PrivilegeSet, PULONG PrivilegeSetLength, PACCESS_MASK   GrantedAccess, PNTSTATUS    AccessStatus)
+_FX NTSTATUS Ldr_NtAccessCheckByTypeResultList(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID PrincipalSelfSid, HANDLE ClientToken, ACCESS_MASK  DesiredAccess, POBJECT_TYPE_LIST ObjectTypeList, ULONG ObjectTypeListLength, PGENERIC_MAPPING GenericMapping, PPRIVILEGE_SET PrivilegeSet, PULONG PrivilegeSetLength, PACCESS_MASK GrantedAccess, PNTSTATUS AccessStatus)
 {
     NTSTATUS status = 0;
     HANDLE hTokenReal = NULL;
@@ -1117,7 +1146,7 @@ _FX NTSTATUS Ldr_NtAccessCheckByTypeResultList(PSECURITY_DESCRIPTOR SecurityDesc
     return status;
 }
 
-BOOL Ldr_NtOpenThreadToken(HANDLE ThreadHandle, DWORD  DesiredAccess, BOOL    OpenAsSelf, PHANDLE TokenHandle)
+BOOL Ldr_NtOpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL OpenAsSelf, PHANDLE TokenHandle)
 {
     BOOL rc;
 
@@ -1360,16 +1389,7 @@ NTSTATUS Secure_RtlCheckTokenMembershipEx(
     DWORD flags,
     PUCHAR isMember)
 {
-
-    static UCHAR AdministratorsSid[16] = {
-        1,                                      // Revision
-        2,                                      // SubAuthorityCount
-        0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
-        0x20, 0, 0, 0,   // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
-        0x20, 2, 0, 0    // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
-    };
-
-    if (Secure_FakeAdmin && __sys_RtlEqualSid && __sys_RtlEqualSid(sidToCheck, AdministratorsSid)) {
+    if (Secure_FakeAdmin && RtlEqualSid(sidToCheck, AdministratorsSid)) {
         if (isMember) *isMember = TRUE;
         return STATUS_SUCCESS;
     }

@@ -61,7 +61,7 @@ protected:
 	virtual STreeNode*		MkNode(const QVariant& Id) { return new SSandBoxNode(Id); }
 
 	QList<QVariant>			MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
-	QList<QVariant>			MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
+	void					MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QList<QVariant>& Path);
 	bool					TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, int Index = 0);
 
 	QString					FindParent(const QVariant& Name, const QMap<QString, QStringList>& Groups);

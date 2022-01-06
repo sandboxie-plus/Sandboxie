@@ -21,23 +21,22 @@ CSbieModel::~CSbieModel()
 
 QList<QVariant> CSbieModel::MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList)
 {
-	QList<QVariant> Path = MakeProcPath(pProcess, ProcessList);
+	QList<QVariant> Path;
+	MakeProcPath(pProcess, ProcessList, Path);
 	Path.prepend(BoxName);
 	return Path;
 }
 
-QList<QVariant> CSbieModel::MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList)
+void CSbieModel::MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QList<QVariant>& Path)
 {
 	quint32 ParentID = pProcess->GetParendPID();
 	CBoxedProcessPtr pParent = ProcessList.value(ParentID);
 
-	QList<QVariant> Path;
-	if (!pParent.isNull() && ParentID != pProcess->GetProcessId())
+	if (!pParent.isNull() && ParentID != pProcess->GetProcessId() && !Path.contains(ParentID))
 	{
-		Path = MakeProcPath(pParent, ProcessList);
-		Path.append(ParentID);
+		Path.prepend(ParentID);
+		MakeProcPath(pParent, ProcessList, Path);
 	}
-	return Path;
 }
 
 bool CSbieModel::TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, int Index)

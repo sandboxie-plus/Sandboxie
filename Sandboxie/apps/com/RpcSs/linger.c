@@ -271,36 +271,39 @@ int DoLingerLeader(void)
             Add_LL_Entry(lingers, &linger_count, image);
         }
 
-        //
-        // see which of the LingerProcess programs were already active
-        // before SandboxieRpcSs started.  they will not be considered
-        // LingerProcess programs and will not be terminated
-        //
+        if (SbieApi_QueryConfBool(NULL, L"LingerLeniency", TRUE)) {
 
-        ULONG pid_count = 0;
-        SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
-        pid_count += 128;
+            //
+            // see which of the LingerProcess programs were already active
+            // before SandboxieRpcSs started.  they will not be considered
+            // LingerProcess programs and will not be terminated
+            //
 
-        ULONG* pids = HeapAlloc(
-            GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
-        SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+            ULONG pid_count = 0;
+            SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+            pid_count += 128;
 
-        AddPid(pids, pid_count);
+            ULONG* pids = HeapAlloc(
+                GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
+            SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
 
-        for (i = 0; i <= pid_count; ++i) {
+            AddPid(pids, pid_count);
 
-            pids_i = (HANDLE) (ULONG_PTR) pids[i];
-            SbieApi_QueryProcess(pids_i, NULL, image, NULL, NULL);
+            for (i = 0; i <= pid_count; ++i) {
 
-            for (j = 0; j < linger_count; ++j) {
-                if (_wcsicmp(lingers[j]->image, image) == 0) {
-                    lingers[j]->orig_pid = pids_i;
-                    break;
+                pids_i = (HANDLE)(ULONG_PTR)pids[i];
+                SbieApi_QueryProcess(pids_i, NULL, image, NULL, NULL);
+
+                for (j = 0; j < linger_count; ++j) {
+                    if (_wcsicmp(lingers[j]->image, image) == 0) {
+                        lingers[j]->orig_pid = pids_i;
+                        break;
+                    }
                 }
             }
-        }
 
-        HeapFree(GetProcessHeap(), 0, pids);
+            HeapFree(GetProcessHeap(), 0, pids);
+        }
 
         //
         // add standard lingers.  note that we don't check if any of
@@ -448,6 +451,7 @@ int DoLingerLeader(void)
                 //}
                 //
                 //if (!is_local_system_sid) 
+                if (SbieApi_QueryConfBool(NULL, L"LingerLeniency", TRUE))
                 {
                     //
                     // then check if the process was started explicitly

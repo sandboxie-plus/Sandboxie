@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added new template "DeviceSecurity" template to lock down access to device drviers on the system
 -- Note: This template requires RuleSpecificity being available to work properly
 - added option to set a custom ini editor in the plus ui [#1475](https://github.com/sandboxie-plus/Sandboxie/issues/1475)
+- added option "LingerLeniency=n" to solve issue [997](https://github.com/sandboxie-plus/Sandboxie/issues/997)
 
 ### Changed
 - reworked syscall invocation code in the driver
@@ -23,6 +24,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed memory leak in driver (conf_user.c)
 - fixed issue with file renaming in open paths introduced in 1.0.6
 - fixed issue chromium browsers not closing properly [#1496](https://github.com/sandboxie-plus/Sandboxie/issues/1496)
+- fixed issue with start.exe [#1517](https://github.com/sandboxie-plus/Sandboxie/issues/1517) [#1516](https://github.com/sandboxie-plus/Sandboxie/issues/1516)
+- fixed sandman issue with resude process ID's
+- fixed kmdutill sometimes not properly terminating the driver
 
 ### Removed
 - removed OpenToken as its only a shorthand for UnrestrictedToken=y and UnfilteredToken=y set together

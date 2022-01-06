@@ -232,7 +232,7 @@ ifdef _WIN64
 
 EXTERN Token_SepFilterToken : QWORD
 
-Sbie_SepFilterTokenHandler_asm PROC
+Sbie_SepFilterTokenHandler_asm PROC FRAME
 
     mov         qword ptr [rsp+20h],r9  
     mov         qword ptr [rsp+18h],r8  
@@ -240,6 +240,8 @@ Sbie_SepFilterTokenHandler_asm PROC
     mov         qword ptr [rsp+8],rcx  
 
     sub         rsp,78h  
+    .allocstack 78h
+    .endprolog
 
     mov         dword ptr [rsp+60h],0  
     mov         rax,qword ptr [rsp+0A0h] ; NewToken

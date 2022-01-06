@@ -75,7 +75,7 @@ _FX BOOLEAN CustomizeSandbox(void)
     if ((Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
 
         Key_CreateBaseKeys();
-        Key_CreateBaseFolders();
+        //Key_CreateBaseFolders(); // no longer needed those paths will be created on demand
     }
 
     if (GetSetCustomLevel(0) != '2') {

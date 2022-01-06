@@ -6,24 +6,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.7 / 5.55.7] - 2022-01-??
+## [1.0.7 / 5.55.7] - 2022-01-06
 
 ### Added
 - added experimental option "CreateToken=y" ability to create a new token instead of repurposing an existing one
 - added option "DisableRTBlacklist=y" allowing to disable the hardcoded runtime class blacklist 
-- added new template "DeviceSecurity" template to lock down access to device drviers on the system
+- added new template "DeviceSecurity" to lock down access to device drviers on the system
 -- Note: This template requires RuleSpecificity being available to work properly
 - added option to set a custom ini editor in the plus ui [#1475](https://github.com/sandboxie-plus/Sandboxie/issues/1475)
 - added option "LingerLeniency=n" to solve issue [997](https://github.com/sandboxie-plus/Sandboxie/issues/997)
 
 ### Changed
-- reworked syscall invocation code in the driver
+- reworked syscall invocation code in the driver 
+-- Win32k hooking is now compatible with HVCI [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
 
 ### Fixed
-- Win32k hooking is now compatible with HVCI [#1483](https://github.com/sandboxie-plus/Sandboxie/issues/1483)
 - fixed memory leak in driver (conf_user.c)
 - fixed issue with file renaming in open paths introduced in 1.0.6
-- fixed issue chromium browsers not closing properly [#1496](https://github.com/sandboxie-plus/Sandboxie/issues/1496)
+- fixed issue causing chromium browsers not closing properly [#1496](https://github.com/sandboxie-plus/Sandboxie/issues/1496)
 - fixed issue with start.exe [#1517](https://github.com/sandboxie-plus/Sandboxie/issues/1517) [#1516](https://github.com/sandboxie-plus/Sandboxie/issues/1516)
 - fixed sandman issue with resude process ID's
 - fixed kmdutill sometimes not properly terminating the driver

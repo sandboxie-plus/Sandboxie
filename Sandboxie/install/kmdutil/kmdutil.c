@@ -679,13 +679,15 @@ BOOL Kmd_Stop_Service(
                 service,
                 SERVICE_CONTROL_STOP, &service_status)) {
 
-            if ((GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
-                 GetLastError() == ERROR_SERVICE_NOT_ACTIVE ||
-                 GetLastError() == ERROR_PIPE_BUSY))
-                    continue;
+            if (GetLastError() == ERROR_SERVICE_NOT_ACTIVE)
+                return TRUE;
 
-            Display_Error(L"ControlService Stop", 0);
-            return FALSE;
+            if (!(GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
+                 GetLastError() == ERROR_PIPE_BUSY)){
+
+                Display_Error(L"ControlService Stop", 0);
+                return FALSE;
+            }
         }
 
         Sleep(500);

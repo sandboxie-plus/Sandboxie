@@ -309,20 +309,20 @@ ${If} ${RunningX64}
 !insertmacro DisableX64FSRedirection
 ${EndIf}
 
-!insertmacro CompareDllVersions	"$SYSDIR\mfc100u.dll" "10.0.40219.325"
+!insertmacro CompareDllVersions	"$SYSDIR\msvcp140.dll" "14.27.29016.0"
 StrCmp $R0 "2" Update_Version
-!insertmacro CompareDllVersions	"$SYSDIR\msvcr100.dll" "10.0.40219.325"
+!insertmacro CompareDllVersions	"$SYSDIR\vcruntime140.dll" "14.27.29016.0"
 StrCmp $R0 "2" Update_Version
 Goto	DownloadInstallVCRedist_Exit	; versions are all up to date
 
 Update_Version:
 
-StrCpy $1 "https://www.sandboxie.com/support"
+StrCpy $1 "https://aka.ms/vs/17/release"
 !if "${_BUILDARCH}" == "x64"
 	StrCpy $1 "$1/X64"
-	StrCpy $2 "vcredist_x64.exe"
+	StrCpy $2 "vc_redist.x64.exe"
 !else
-	StrCpy $2 "vcredist_x86.exe"
+	StrCpy $2 "vc_redist.x86.exe"
 !endif
 	
 NSISdl::download /TIMEOUT=30000 $1/$2 $TEMP\$2

@@ -217,7 +217,7 @@ begin
     'russian': Result := 'ru';
     'spanish': Result := 'es';
     'turkish': Result := 'tr';
-    'ukrainian': Result := 'ua';
+    'ukrainian': Result := 'uk';
   end;
 end;
 

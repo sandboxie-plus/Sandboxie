@@ -948,7 +948,15 @@ _FX ULONG Process_MatchPathEx(
 
     level = 3; // 3 - global default - lower is better, 3 is max value
     match_len = 0;
-    if (!proc->use_privacy_mode || path_code == L'i') {
+    if (path_code == L'n' && proc->file_block_network_files) {
+
+        //
+        // handle network share access preset
+        //
+
+        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
+    }
+    else if (!proc->use_privacy_mode || path_code == L'i') {
 
         //
         // in normal sandbox mode we have read access to all locations unless restricted,

@@ -15,13 +15,13 @@ Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 Name: "Italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
+Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 ;Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 ;Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
-;Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 ;Name: "bulgarian"; MessagesFile: "compiler:Languages\Bulgarian.isl"
 ;Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
 ;Name: "corsican"; MessagesFile: "compiler:Languages\Corsican.isl"
@@ -217,6 +217,28 @@ polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to
 polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
 polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
 
+; Brazilian Portuguese
+brazilianportuguese.AddSandboxedMenu=Adicionar "Executar na Caixa de Areia" no menu de contexto
+brazilianportuguese.AddSandboxedBrowser=Adicionar um atalho na área de trabalho para iniciar o Navegador web sob o Sandboxie
+brazilianportuguese.SandboxieStartMenu1=Executar qualquer programa em uma caixa de areia
+brazilianportuguese.SandboxieStartMenu2=Executar o Navegador web em uma caixa de areia
+brazilianportuguese.SandboxieStartMenu3=Menu Iniciar no Sandboxie
+brazilianportuguese.SandboxedBrowser=Navegador web em uma caixa
+brazilianportuguese.CustomPageLabel1=Selecione Tipo de Instalação
+brazilianportuguese.CustomPageLabel2=Como deve ser instalado
+brazilianportuguese.CustomPageLabel3=Escolha o modo de instalação
+brazilianportuguese.CustomPageInstallMode=Instalar {#MyAppName} neste computador
+brazilianportuguese.CustomPageUpgradeMode=Atualizar instalação existente do {#MyAppName}
+brazilianportuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório para uso portable
+brazilianportuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
+brazilianportuguese.ClassicFound=Instalação do Classic Sandboxie detectada, deve ser desinstalado primeiro, você quer desinstalá-lo agora?
+brazilianportuguese.RunSandboxedMenu=Executar na &Caixa de Areia
+brazilianportuguese.UninstallTaskLabel1=Selecionar Tipo de Desinstalar
+brazilianportuguese.UninstallTaskLabel2=Como você gostaria de desinstalar Sandboxie-Plus?
+brazilianportuguese.UninstallTaskLabel3=&Manter os arquivos de configuração do sandboxes%nEsta é a opção mais recomendada se você planeja reinstalar o Sandboxie-Plus enquanto mantém seus arquivos de configuração e caixas de areia.
+brazilianportuguese.UninstallTaskLabel4=&Remover arquivos de configuração%nSelecione essa opção para remover os arquivos de configuração Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
+brazilianportuguese.UninstallTaskLabel5=Remover arquivos de configuração e &caixas de areia%nSelecione essa opção para remover todos os arquivos de configuração e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
+
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
 portuguese.AddSandboxedBrowser=Adicionar um atalho na área de trabalho para iniciar o Navegador web sob o Sandboxie
@@ -229,15 +251,15 @@ portuguese.CustomPageLabel2=Como deve ser instalado
 portuguese.CustomPageLabel3=Escolha o modo de instalação
 portuguese.CustomPageInstallMode=Instalar {#MyAppName} neste computador
 portuguese.CustomPageUpgradeMode=Atualizar instalação existente do {#MyAppName}
-portuguese.CustomPagePortableMode=Extrair todos os arquivos para um diretório para uso portable
+portuguese.CustomPagePortableMode=Extrair todos os ficheiro para um diretório para uso portable
 portuguese.RequiresWin7OrLater=Sandboxie-Plus requer o Windows 7 ou posterior.
 portuguese.ClassicFound=Instalação do Classic Sandboxie detectada, deve ser desinstalado primeiro, você quer desinstalá-lo agora?
 portuguese.RunSandboxedMenu=Rodar na &Caixa de Areia
 portuguese.UninstallTaskLabel1=Selecionar Tipo de Desinstalar
 portuguese.UninstallTaskLabel2=Como você gostaria de desinstalar Sandboxie-Plus?
-portuguese.UninstallTaskLabel3=&Manter os arquivos de configuração do sandboxes%nEsta é a opção mais recomendada se você planeja reinstalar o Sandboxie-Plus enquanto mantém seus arquivos de configuração e caixas de areia.
-portuguese.UninstallTaskLabel4=&Remover arquivos de configuração%nSelecione essa opção para remover os arquivos de configuração Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
-portuguese.UninstallTaskLabel5=Remover arquivos de configuração e &caixas de areia%nSelecione essa opção para remover todos os arquivos de configuração e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
+portuguese.UninstallTaskLabel3=&Manter os ficheiro de definição do sandboxes%nEsta é a opção mais recomendada se você planeja reinstalar o Sandboxie-Plus enquanto mantém seus ficheiro de definição e caixas de areia.
+portuguese.UninstallTaskLabel4=&Remover ficheiro de definição%nSelecione essa opção para remover os ficheiro de definição Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
+portuguese.UninstallTaskLabel5=Remover ficheiro de definição e &caixas de areia%nSelecione essa opção para remover todos os ficheiro de definição e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню

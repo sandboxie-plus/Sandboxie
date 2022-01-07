@@ -279,7 +279,8 @@
     <None Include="sandman_it.ts" />
     <None Include="sandman_nl.ts" />
     <None Include="sandman_pl.ts" />
-    <None Include="sandman_pt.ts" />
+    <None Include="sandman_pt_BR.ts" />
+    <None Include="sandman_pt_PT.ts" />
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
     <None Include="sandman_ua.ts" />

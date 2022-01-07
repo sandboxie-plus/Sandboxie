@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - The filename "sandman_pt" was changed to "sandman_pt_BR" (Brazilian Portuguese) [#1497](https://github.com/sandboxie-plus/Sandboxie/pull/1497)
 
+### Fixed
+- fixed possible upgrade issue with Classic installers (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
+
 
 
 ## [1.0.7 / 5.55.7] - 2022-01-06

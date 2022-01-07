@@ -68,8 +68,8 @@ SetCompressor /SOLID /FINAL lzma
 !define ARCH ${ARCH_${_BUILDARCH}}
 !define BIN_ROOT	${BIN_ROOT_${_BUILDARCH}}
 
-!define VCRedist64SrcLocation "..\Build\Support\x64\vcredist_x64.exe"
-!define VCRedist32SrcLocation "..\Build\Support\vcredist_x86.exe"
+!define VCRedist64SrcLocation "..\Build\Support\x64\vc_redist.x64.exe"
+!define VCRedist32SrcLocation "..\Build\Support\vc_redist.x86.exe"
 
 Section binroot
 DetailPrint "binary root ${BIN_ROOT}"

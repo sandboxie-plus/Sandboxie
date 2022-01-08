@@ -493,14 +493,26 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
     SIZE_T BufferLength;
     NTSTATUS status;
 
-    extern P_NtQueryVirtualMemory __sys_NtQueryVirtualMemory;
-    if (! __sys_NtQueryVirtualMemory)
+    //
+    // Windows is caching loaded modules, when after being run a binary is moved
+    // and run again, NtQueryVirtualMemory wil return the original location
+    // and not the valid up to date current location.
+    // Hence we use NtQueryInformationProcess instead it also returns the reparsed path
+    //
+
+    //extern P_NtQueryVirtualMemory __sys_NtQueryVirtualMemory;
+    //if (! __sys_NtQueryVirtualMemory)
+    extern P_NtQueryInformationProcess __sys_NtQueryInformationProcess;
+    if (! __sys_NtQueryInformationProcess)
         return NULL;
 
     BufferLength = 256;
     NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
-    status = __sys_NtQueryVirtualMemory(
-        NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+    //status = __sys_NtQueryVirtualMemory(
+    //    NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+    //    NameUni, BufferLength, &BufferLength);
+    status = __sys_NtQueryInformationProcess(
+        NtCurrentProcess(), ProcessImageFileName,
         NameUni, BufferLength, &BufferLength);
 
     if (status == STATUS_INFO_LENGTH_MISMATCH ||
@@ -508,8 +520,11 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
 
         Dll_Free(NameUni);
         NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
-        status = __sys_NtQueryVirtualMemory(
-            NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+        //status = __sys_NtQueryVirtualMemory(
+        //    NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+        //    NameUni, BufferLength, &BufferLength);
+        status = __sys_NtQueryInformationProcess(
+            NtCurrentProcess(), ProcessImageFileName,
             NameUni, BufferLength, &BufferLength);
     }
 

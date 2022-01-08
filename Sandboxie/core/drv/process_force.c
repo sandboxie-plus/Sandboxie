@@ -136,7 +136,7 @@ static BOX *Process_CheckHostInjectProcess(
 
 
 _FX BOX *Process_GetForcedStartBox(
-    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN bHostInject, const WCHAR *pSidString)
+    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN* pHostInject, const WCHAR *pSidString)
 {
     NTSTATUS status;
     ULONG SessionId;
@@ -156,6 +156,8 @@ _FX BOX *Process_GetForcedStartBox(
     BOOLEAN dfp_already_added;
     BOOLEAN same_image_name;
 
+    check_force = TRUE;
+
     //
     // get process object to access SID string, session ID and PEB data
     //
@@ -172,31 +174,28 @@ _FX BOX *Process_GetForcedStartBox(
     if (! ProcessObject)
         return NULL;
 
-    if (    !bHostInject && (
-            (_wcsicmp(pSidString, Driver_S_1_5_18) == 0 || //	System
+    if (    (_wcsicmp(pSidString, Driver_S_1_5_18) == 0 || //	System
              _wcsicmp(pSidString, Driver_S_1_5_19) == 0 || //	Local Service
              _wcsicmp(pSidString, Driver_S_1_5_20) == 0)   //	Network Service
-                && (! Process_IsDcomLaunchParent(ParentId))) ){
+                && (! Process_IsDcomLaunchParent(ParentId)) ){
 
-        status = STATUS_SERVER_SID_MISMATCH;    // random status code
+        check_force = FALSE;
+    } 
+    
+    //
+    // get adjusted image path and image name
+    //
 
-    } else {
+    status = Process_TranslateDosToNt(
+                                ImagePath, &ImagePath2, &ImagePath2_len);
 
-        //
-        // get adjusted image path and image name
-        //
+    if (NT_SUCCESS(status)) {
 
-        status = Process_TranslateDosToNt(
-                                    ImagePath, &ImagePath2, &ImagePath2_len);
-
-        if (NT_SUCCESS(status)) {
-
-            ImageName = wcsrchr(ImagePath2, L'\\');
-            if (ImageName && ImageName[1])
-                ++ImageName;
-            else
-                status = STATUS_OBJECT_PATH_SYNTAX_BAD;     // random
-        }
+        ImageName = wcsrchr(ImagePath2, L'\\');
+        if (ImageName && ImageName[1])
+            ++ImageName;
+        else
+            status = STATUS_OBJECT_PATH_SYNTAX_BAD;     // random
     }
 
     if (! NT_SUCCESS(status)) {
@@ -217,13 +216,13 @@ _FX BOX *Process_GetForcedStartBox(
 
     Process_GetDocArg(ProcessObject, &DocArg, &DocArg_len);
 
-    check_force = TRUE;
     dfp_already_added = Process_DfpCheck(ProcessId, &same_image_name);
     if (dfp_already_added)
         force_alert = TRUE;
     else
         force_alert = Session_IsForceDisabled(SessionId);
 
+    box = NULL;
     alert = 0;
 
     Process_CreateForceData(&boxes, pSidString, SessionId);
@@ -232,14 +231,14 @@ _FX BOX *Process_GetForcedStartBox(
     // check if process can be forced
     //
 
-    if (!bHostInject)
-    {
+    if (check_force) {
+
         box = Process_CheckBoxPath(&boxes, ImagePath2);
 
         if ((! box) && CurDir)
             box = Process_CheckBoxPath(&boxes, CurDir);
 
-        if ((! box) && check_force) {
+        if (!box) {
 
             box = Process_CheckForceFolder(
                         &boxes, ImagePath2, force_alert, &alert);
@@ -283,13 +282,21 @@ _FX BOX *Process_GetForcedStartBox(
         if ((! box) && (alert != 1))
             Process_CheckAlertProcess(&boxes, ImageName, &alert);
     }
-    else
-    {
+
+    //
+    // check if proces should be injected
+    //
+
+    if ((! box) && (alert != 1) && pHostInject != NULL) {
+        
         box = Process_CheckHostInjectProcess(&boxes, ImageName);
+
+        if (box)
+            *pHostInject = TRUE;
     }
 
     //
-    // sss
+    // complete evaluation
     //
 
     if (box) {
@@ -842,7 +849,7 @@ _FX BOOLEAN Process_IsImmersiveProcess(
 
 
 _FX void Process_AddForceFolders(
-    LIST* Folders, const WCHAR* Setting, FORCE_BOX *box, const WCHAR *section)
+    LIST* Folders, const WCHAR* Setting, BOX *box, const WCHAR *section)
 {
     ULONG index2;
     const WCHAR *value;
@@ -860,7 +867,7 @@ _FX void Process_AddForceFolders(
             break;
         ++index2;
 
-        expnd = Conf_Expand(box->box->expand_args, value, Setting);
+        expnd = Conf_Expand(box->expand_args, value, Setting);
 
         buf = NULL;
 
@@ -915,7 +922,7 @@ _FX void Process_AddForceFolders(
         if (wcschr(buf, L'*')) {
 
             folder->pat =
-                Pattern_Create(box->box->expand_args->pool, buf, TRUE, 0);
+                Pattern_Create(box->expand_args->pool, buf, TRUE, 0);
 
             Mem_Free(buf, buf_len);
 
@@ -1042,7 +1049,7 @@ _FX void Process_CreateForceData(
         // scan list of ForceFolder settings for the box
         //
 
-        Process_AddForceFolders(&box->ForceFolder, L"ForceFolder", box, section);
+        Process_AddForceFolders(&box->ForceFolder, L"ForceFolder", box->box, section);
 
         //
         // scan list of ForceProcess settings for the box
@@ -1054,7 +1061,7 @@ _FX void Process_CreateForceData(
         // scan list of AlertFolder settings for the box
         //
 
-        Process_AddForceFolders(&box->AlertFolder, L"AlertFolder", box, section);
+        Process_AddForceFolders(&box->AlertFolder, L"AlertFolder", box->box, section);
 
         //
         // scan list of AlertProcess settings for the box
@@ -1182,12 +1189,79 @@ _FX BOX *Process_CheckBoxPath(LIST *boxes, const WCHAR *path)
 //---------------------------------------------------------------------------
 
 
+_FX BOOLEAN Process_CheckForceFolderList(
+    BOX *box, LIST* ForceFolder, ULONG prefix_len, const WCHAR *path)
+{
+    ULONG path_lwr_len = 0;
+    WCHAR *path_lwr = NULL;
+
+    FORCE_FOLDER *folder = List_Head(ForceFolder);
+    while (folder) {
+
+        BOOLEAN match = FALSE;
+
+        if (folder->pat) {
+
+            //
+            // wildcards in ForceFolder:  match using pattern
+            //
+
+            if (! path_lwr) {
+                path_lwr = Mem_AllocString(Driver_Pool, path);
+                if (path_lwr) {
+                    path_lwr[prefix_len] = L'\0';
+                    _wcslwr(path_lwr);
+                    path_lwr_len = wcslen(path_lwr);
+                }
+            }
+
+            if (path_lwr) {
+                match = Pattern_Match(
+                                    folder->pat, path_lwr, path_lwr_len);
+            }
+
+        } else {
+
+            //
+            // no wildcards:  match using nls-aware string comparison
+            //
+
+            ULONG folder_len = folder->len;
+            if (folder_len && prefix_len >= folder_len &&
+                    path[folder_len] == L'\\' &&
+                    Box_NlsStrCmp(path, folder->buf, folder_len) == 0) {
+
+                match = TRUE;
+            }
+        }
+
+        if (match) {
+
+            break;
+        }
+
+        folder = List_Next(folder);
+    }
+
+    if (path_lwr)
+        Mem_FreeString(path_lwr);
+
+    if (folder) // found
+        return TRUE;
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_CheckForceFolder
+//---------------------------------------------------------------------------
+
+
 _FX BOX *Process_CheckForceFolder(
     LIST *boxes, const WCHAR *path, BOOLEAN alert, ULONG *IsAlert)
 {
     const WCHAR *ptr;
-    ULONG prefix_len, path_lwr_len;
-    WCHAR *path_lwr;
+    ULONG prefix_len;
     FORCE_BOX *box;
 
     //
@@ -1219,75 +1293,47 @@ _FX BOX *Process_CheckForceFolder(
     // check if the folder is forced to any box
     //
 
-    path_lwr = NULL;
-    path_lwr_len = 0;
-
     box = List_Head(boxes);
     while (box) {
 
-        FORCE_FOLDER *folder = List_Head(&box->ForceFolder);
-        while (folder) {
+        if (Process_CheckForceFolderList(box->box, &box->ForceFolder, prefix_len, path)) {
 
-            BOOLEAN match = FALSE;
-
-            if (folder->pat) {
-
-                //
-                // wildcards in ForceFolder:  match using pattern
-                //
-
-                if (! path_lwr) {
-                    path_lwr = Mem_AllocString(Driver_Pool, path);
-                    if (path_lwr) {
-                        path_lwr[prefix_len] = L'\0';
-                        _wcslwr(path_lwr);
-                        path_lwr_len = wcslen(path_lwr);
-                    }
-                }
-
-                if (path_lwr) {
-                    match = Pattern_Match(
-                                        folder->pat, path_lwr, path_lwr_len);
-                }
-
-            } else {
-
-                //
-                // no wildcards:  match using nls-aware string comparison
-                //
-
-                ULONG folder_len = folder->len;
-                if (folder_len && prefix_len >= folder_len &&
-                        path[folder_len] == L'\\' &&
-                        Box_NlsStrCmp(path, folder->buf, folder_len) == 0) {
-
-                    match = TRUE;
-                }
+            if (alert) {
+                *IsAlert = 1;
+                return NULL;
             }
 
-            if (match) {
-
-                if (path_lwr)
-                    Mem_FreeString(path_lwr);
-
-                if (alert) {
-                    *IsAlert = 1;
-                    return NULL;
-                }
-
-                return box->box;
-            }
-
-            folder = List_Next(folder);
+            return box->box;
         }
 
         box = List_Next(box);
     }
 
-    if (path_lwr)
-        Mem_FreeString(path_lwr);
-
     return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_CheckForceProcessList
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_CheckForceProcessList(
+    BOX *box, LIST* ForceProcess, const WCHAR* name)
+{
+    FORCE_PROCESS *process = List_Head(ForceProcess);
+    while (process) {
+
+        const WCHAR *value = process->value;
+        if (Process_MatchImage(box, value, 0, name, 1)) {
+
+            return TRUE;
+        }
+
+        process = List_Next(process);
+    }
+
+    return FALSE;
 }
 
 
@@ -1308,21 +1354,13 @@ _FX BOX *Process_CheckForceProcess(
     box = List_Head(boxes);
     while (box) {
 
-        FORCE_PROCESS *process = List_Head(&box->ForceProcess);
-        while (process) {
-
-           const WCHAR *value = process->value;
-            if (Process_MatchImage(box->box, value, 0, name, 1)) {
-
-                if (alert) {
-                    *IsAlert = 1;
-                    return NULL;
-                }
-
-                return box->box;
+        if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name)) {
+            if (alert) {
+                *IsAlert = 1;
+                return NULL;
             }
 
-            process = List_Next(process);
+            return box->box;
         }
 
         box = List_Next(box);
@@ -1341,8 +1379,7 @@ _FX void Process_CheckAlertFolder(
     LIST *boxes, const WCHAR *path, ULONG *IsAlert)
 {
     const WCHAR *ptr;
-    ULONG prefix_len, path_lwr_len;
-    WCHAR *path_lwr;
+    ULONG prefix_len;
     FORCE_BOX *box;
 
     //
@@ -1359,84 +1396,20 @@ _FX void Process_CheckAlertFolder(
         return;
 
     //
-    // never alert a program from the Sandboxie home directory
-    //
-
-    if (wcslen(path) > Driver_HomePathNt_Len + 1
-        && _wcsnicmp(path, Driver_HomePathNt, Driver_HomePathNt_Len) == 0
-        && path[Driver_HomePathNt_Len] == L'\\') {
-
-        *IsAlert = 2;
-        return;
-    }
-
-    //
     // check if the folder is alerted to any box
     //
-
-    path_lwr = NULL;
-    path_lwr_len = 0;
 
     box = List_Head(boxes);
     while (box) {
 
-        FORCE_FOLDER *folder = List_Head(&box->AlertFolder);
-        while (folder) {
+        if (Process_CheckForceFolderList(box->box, &box->AlertFolder, prefix_len, path)) {
 
-            BOOLEAN match = FALSE;
-
-            if (folder->pat) {
-
-                //
-                // wildcards in AlertFolder:  match using pattern
-                //
-
-                if (! path_lwr) {
-                    path_lwr = Mem_AllocString(Driver_Pool, path);
-                    if (path_lwr) {
-                        path_lwr[prefix_len] = L'\0';
-                        _wcslwr(path_lwr);
-                        path_lwr_len = wcslen(path_lwr);
-                    }
-                }
-
-                if (path_lwr) {
-                    match = Pattern_Match(
-                                        folder->pat, path_lwr, path_lwr_len);
-                }
-
-            } else {
-
-                //
-                // no wildcards:  match using nls-aware string comparison
-                //
-
-                ULONG folder_len = folder->len;
-                if (folder_len && prefix_len >= folder_len &&
-                        path[folder_len] == L'\\' &&
-                        Box_NlsStrCmp(path, folder->buf, folder_len) == 0) {
-
-                    match = TRUE;
-                }
-            }
-
-            if (match) {
-
-                if (path_lwr)
-                    Mem_FreeString(path_lwr);
-
-                *IsAlert = 1;
-				return;
-            }
-
-            folder = List_Next(folder);
+            *IsAlert = 1;
+			return;
         }
 
         box = List_Next(box);
     }
-
-    if (path_lwr)
-        Mem_FreeString(path_lwr);
 }
 
 
@@ -1457,17 +1430,9 @@ static _FX void Process_CheckAlertProcess(
     box = List_Head(boxes);
     while (box) {
 
-        FORCE_PROCESS *process = List_Head(&box->AlertProcess);
-        while (process) {
-
-            const WCHAR *value = process->value;
-            if (Process_MatchImage(box->box, value, 0, name, 1)) {
-
-                *IsAlert = 1;
-                return;
-            }
-
-            process = List_Next(process);
+        if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name)) {
+            *IsAlert = 1;
+            return;
         }
 
         box = List_Next(box);
@@ -1497,7 +1462,7 @@ _FX BOX *Process_CheckHostInjectProcess(
                 nImageLen = (ULONG)(image_end - value);
             if (Process_MatchImage(box->box, value, nImageLen, name, 1)) {
 
-                return box->box;;
+                return box->box;
             }
 
             process = List_Next(process);
@@ -1519,6 +1484,7 @@ _FX BOOLEAN Process_IsBreakoutProcess(
     BOX *box, const WCHAR *ImagePath)
 {
     NTSTATUS status;
+    LIST BreakoutFolder;
     LIST BreakoutProcess;
     WCHAR *ImagePath2 = L"";
     ULONG ImagePath2_len;
@@ -1545,31 +1511,51 @@ _FX BOOLEAN Process_IsBreakoutProcess(
         return FALSE;
     }
 
+    //
+    // never break out a program from the Sandboxie home directory
+    //
 
+    if (wcslen(ImagePath2) > Driver_HomePathNt_Len + 1
+        && _wcsnicmp(ImagePath2, Driver_HomePathNt, Driver_HomePathNt_Len) == 0
+        && ImagePath2[Driver_HomePathNt_Len] == L'\\') {
+
+        goto finish;
+    }
+
+    //
+    // init breakout presets
+    //
+
+    List_Init(&BreakoutFolder);
     List_Init(&BreakoutProcess);
 
     Conf_AdjustUseCount(TRUE);
+
+    Process_AddForceFolders(&BreakoutFolder, L"BreakoutFolder", box, box->name);
 
     Process_AddForceProcesses(&BreakoutProcess, L"BreakoutProcess", box->name);
         
     Conf_AdjustUseCount(FALSE);
 
+    IsBreakout = Process_CheckForceProcessList(box, &BreakoutProcess, ImageName);
+    if (!IsBreakout) {
+        const WCHAR *ptr;
+        ULONG prefix_len;
 
-    FORCE_PROCESS *process = List_Head(&BreakoutProcess);
-    while (process) {
+        ptr = wcsrchr(ImagePath2, L'\\');
+        if (ptr && ptr[1])
+            prefix_len = (ULONG)(ptr - ImagePath2);
+        else
+            prefix_len = 0;
 
-        const WCHAR *value = process->value;
-        if (Process_MatchImage(box, value, 0, ImageName, 1)) {
-
-            IsBreakout = TRUE;
-            break;
-        }
-
-        process = List_Next(process);
+        if (prefix_len > 0)
+            IsBreakout = Process_CheckForceFolderList(box, &BreakoutFolder, prefix_len, ImagePath2);
     }
 
+    Process_DeleteForceDataFolders(&BreakoutFolder);
     Process_DeleteForceDataProcesses(&BreakoutProcess);
 
+finish:
     Mem_Free(ImagePath2, ImagePath2_len);
 
     return IsBreakout;

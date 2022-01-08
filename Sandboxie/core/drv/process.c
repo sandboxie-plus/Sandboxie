@@ -1173,14 +1173,17 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         BOX* breakout_box = NULL;
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
+            if(!Driver_Certified)
+                Log_Msg_Process(MSG_6004, box->name, NULL, box->session_id, CallerId);
+            else {
+                UNICODE_STRING image_uni;
+                RtlInitUnicodeString(&image_uni, ImagePath);
+                if (!Box_IsBoxedPath(box, file, &image_uni)) {
 
-            UNICODE_STRING image_uni;
-            RtlInitUnicodeString(&image_uni, ImagePath);
-            if (!Box_IsBoxedPath(box, file, &image_uni)) {
-
-                check_forced_program = TRUE; // the break out process of one mox may be the forced process of an otehr
-                breakout_box = box;
-                box = NULL;
+                    check_forced_program = TRUE; // the break out process of one box may be the forced process of an otehr
+                    breakout_box = box;
+                    box = NULL;
+                }
             }
         }
 
@@ -1195,7 +1198,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             // check if it might be a forced process
             //
 
-            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, FALSE, breakout_box ? breakout_box->sid : NULL);
+            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, &bHostInject, breakout_box ? breakout_box->sid : NULL);
 
             if (box == (BOX *)-1) {
 
@@ -1204,24 +1207,14 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
             } else if (box) {
 
-                process_is_forced = TRUE;
-                add_process_to_job = TRUE;
-            }
-            else
-            {
-                box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, TRUE, breakout_box ? breakout_box->sid : NULL);
+                if (bHostInject) {
 
-                if (box == (BOX *)-1) {
-
-                    create_terminated = TRUE;
-                    box = NULL;
-
-                }
-                else if (box) {
-
-                    bHostInject = TRUE;
                     add_process_to_job = FALSE;
 
+                } else {
+
+                    process_is_forced = TRUE;
+                    add_process_to_job = TRUE;
                 }
             }
         }

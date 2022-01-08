@@ -3626,7 +3626,7 @@ _FX NTSTATUS File_SetReparsePoint(
 
         objname.Length = NameLength;
         objname.MaximumLength = objname.Length;
-        objname.Buffer = (WCHAR *)(Data + 0x10 + NameOffset);;
+        objname.Buffer = (WCHAR *)(Data + 0x10 + NameOffset);
 
         status = File_GetName(NULL, &objname, &TruePath, &CopyPath, NULL);
         if (! NT_SUCCESS(status))

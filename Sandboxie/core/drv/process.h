@@ -387,7 +387,7 @@ NTSTATUS Process_GetSidStringAndSessionId(
 // Get a box for a forced sandboxed process
 
 BOX *Process_GetForcedStartBox(
-    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN bHostInject, const WCHAR *pSidString);
+    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN* pHostInject, const WCHAR *pSidString);
 
 
 BOOLEAN Process_IsBreakoutProcess(BOX *box, const WCHAR *ImagePath);

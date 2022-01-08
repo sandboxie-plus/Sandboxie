@@ -958,7 +958,11 @@ _FX BOOL Proc_CreateProcessInternalW(
         resume_thread = TRUE;
     dwCreationFlags |= CREATE_SUSPENDED;
 
-    dwCreationFlags &= ~CREATE_BREAKAWAY_FROM_JOB;
+    // no longer required see comment in GuiServer::GetJobObjectForAssign
+    //extern BOOLEAN SysInfo_UseSbieJob;
+    //if (SysInfo_UseSbieJob) {
+    //    dwCreationFlags &= ~CREATE_BREAKAWAY_FROM_JOB;
+    //}
 
 
     //

@@ -129,13 +129,14 @@ static void Process_CheckAlertProcess(
 static BOX *Process_CheckHostInjectProcess(
     LIST *boxes, const WCHAR *name);
 
+
 //---------------------------------------------------------------------------
 // Process_GetForcedStartBox
 //---------------------------------------------------------------------------
 
 
 _FX BOX *Process_GetForcedStartBox(
-    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN bHostInject)
+    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN bHostInject, const WCHAR *pSidString)
 {
     NTSTATUS status;
     ULONG SessionId;
@@ -165,13 +166,16 @@ _FX BOX *Process_GetForcedStartBox(
 
     ProcessObject = Process_OpenAndQuery(ProcessId, &SidString, &SessionId);
 
+    if (! pSidString)
+        pSidString = SidString.Buffer;
+
     if (! ProcessObject)
         return NULL;
 
     if (    !bHostInject && (
-            (_wcsicmp(SidString.Buffer, Driver_S_1_5_18) == 0 ||
-             _wcsicmp(SidString.Buffer, Driver_S_1_5_19) == 0 ||
-             _wcsicmp(SidString.Buffer, Driver_S_1_5_20) == 0)
+            (_wcsicmp(pSidString, Driver_S_1_5_18) == 0 || //	System
+             _wcsicmp(pSidString, Driver_S_1_5_19) == 0 || //	Local Service
+             _wcsicmp(pSidString, Driver_S_1_5_20) == 0)   //	Network Service
                 && (! Process_IsDcomLaunchParent(ParentId))) ){
 
         status = STATUS_SERVER_SID_MISMATCH;    // random status code
@@ -222,7 +226,7 @@ _FX BOX *Process_GetForcedStartBox(
 
     alert = 0;
 
-    Process_CreateForceData(&boxes, SidString.Buffer, SessionId);
+    Process_CreateForceData(&boxes, pSidString, SessionId);
 
     //
     // check if process can be forced
@@ -833,6 +837,153 @@ _FX BOOLEAN Process_IsImmersiveProcess(
 
 
 //---------------------------------------------------------------------------
+// Process_AddForceFolders
+//---------------------------------------------------------------------------
+
+
+_FX void Process_AddForceFolders(
+    LIST* Folders, const WCHAR* Setting, FORCE_BOX *box, const WCHAR *section)
+{
+    ULONG index2;
+    const WCHAR *value;
+    FORCE_FOLDER *folder;
+
+    index2 = 0;
+
+    while (1) {
+
+        WCHAR *expnd, *buf;
+        ULONG buf_len;
+
+        value = Conf_Get(section, Setting, index2);
+        if (! value)
+            break;
+        ++index2;
+
+        expnd = Conf_Expand(box->box->expand_args, value, Setting);
+
+        buf = NULL;
+
+        if (expnd) {
+
+            //
+            // remove duplicate backslashes and translate reparse points
+            //
+
+            WCHAR *tmp1, *tmp2;
+            buf_len = (wcslen(expnd) + 1) * sizeof(WCHAR);
+            tmp1 = Mem_Alloc(Driver_Pool, buf_len);
+
+            if (tmp1) {
+
+                WCHAR *src_ptr = expnd;
+                WCHAR *dst_ptr = tmp1;
+                while (*src_ptr) {
+                    if (src_ptr[0] == L'\\' && src_ptr[1] == L'\\') {
+                        ++src_ptr;
+                        continue;
+                    }
+                    *dst_ptr = *src_ptr;
+                    ++src_ptr;
+                    ++dst_ptr;
+                }
+                *dst_ptr = L'\0';
+
+                tmp2 = File_TranslateReparsePoints(tmp1, Driver_Pool);
+                if (tmp2) {
+
+                    Mem_Free(tmp1, buf_len);
+                    buf = tmp2;
+                    buf_len = (wcslen(buf) + 1) * sizeof(WCHAR);
+
+                } else
+                    buf = tmp1;
+            }
+
+            Mem_FreeString(expnd);
+        }
+
+        if (! buf)
+            continue;
+
+        folder = Mem_Alloc(Driver_Pool, sizeof(FORCE_FOLDER));
+        if (! folder) {
+            Mem_Free(buf, buf_len);
+            break;
+        }
+
+        if (wcschr(buf, L'*')) {
+
+            folder->pat =
+                Pattern_Create(box->box->expand_args->pool, buf, TRUE, 0);
+
+            Mem_Free(buf, buf_len);
+
+            if (! folder->pat) {
+                Mem_Free(folder, sizeof(FORCE_FOLDER));
+                break;
+            }
+
+            folder->buf_len = 0;
+            folder->len = 0;
+            folder->buf = NULL;
+
+        } else {
+
+            ULONG len = wcslen(buf);
+            while (len && buf[len - 1] == L'\\')
+                --len;
+
+            folder->buf_len = buf_len;
+            folder->len = len;
+            folder->buf = buf;
+
+            folder->pat = NULL;
+        }
+
+        List_Insert_After(Folders, NULL, folder);
+    }
+}
+
+
+//---------------------------------------------------------------------------
+// Process_AddForceProcesses
+//---------------------------------------------------------------------------
+
+
+_FX void Process_AddForceProcesses(
+    LIST* Processes, const WCHAR* Setting, const WCHAR *section)
+{
+    ULONG index2;
+    const WCHAR *value;
+    FORCE_PROCESS *process;
+
+    index2 = 0;
+
+    while (1) {
+
+        value = Conf_Get(section, Setting, index2);
+        if (! value)
+            break;
+        ++index2;
+
+        process = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS));
+        if (! process)
+            break;
+
+        // Ideally, RtlStringCchCopy() would be used here - Build issues
+        RtlZeroMemory(process->value, sizeof(process->value));
+        if (wcslen(value) < MAX_FORCE_PROCESS_VALUE_LEN)
+        {
+            wcscpy(process->value, value);
+        }
+
+        List_Insert_After(Processes, NULL, process);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // Process_CreateForceData
 //---------------------------------------------------------------------------
 
@@ -840,13 +991,10 @@ _FX BOOLEAN Process_IsImmersiveProcess(
 _FX void Process_CreateForceData(
     LIST *boxes, const WCHAR *SidString, ULONG SessionId)
 {
-    ULONG index1, index2;
+    ULONG index1;
     const WCHAR *section;
-    const WCHAR *value;
     FORCE_BOX *box;
-    FORCE_FOLDER *folder;
-    FORCE_PROCESS *process;
-
+    
     //
     // scan list of boxes and create FORCE_BOX elements
     //
@@ -894,288 +1042,83 @@ _FX void Process_CreateForceData(
         // scan list of ForceFolder settings for the box
         //
 
-        index2 = 0;
-
-        while (1) {
-
-            static const WCHAR *_ForceFolder = L"ForceFolder";
-            WCHAR *expnd, *buf;
-            ULONG buf_len;
-
-            value = Conf_Get(section, _ForceFolder, index2);
-            if (! value)
-                break;
-            ++index2;
-
-            expnd = Conf_Expand(box->box->expand_args, value, _ForceFolder);
-
-            buf = NULL;
-
-            if (expnd) {
-
-                //
-                // remove duplicate backslashes and translate reparse points
-                //
-
-                WCHAR *tmp1, *tmp2;
-                buf_len = (wcslen(expnd) + 1) * sizeof(WCHAR);
-                tmp1 = Mem_Alloc(Driver_Pool, buf_len);
-
-                if (tmp1) {
-
-                    WCHAR *src_ptr = expnd;
-                    WCHAR *dst_ptr = tmp1;
-                    while (*src_ptr) {
-                        if (src_ptr[0] == L'\\' && src_ptr[1] == L'\\') {
-                            ++src_ptr;
-                            continue;
-                        }
-                        *dst_ptr = *src_ptr;
-                        ++src_ptr;
-                        ++dst_ptr;
-                    }
-                    *dst_ptr = L'\0';
-
-                    tmp2 = File_TranslateReparsePoints(tmp1, Driver_Pool);
-                    if (tmp2) {
-
-                        Mem_Free(tmp1, buf_len);
-                        buf = tmp2;
-                        buf_len = (wcslen(buf) + 1) * sizeof(WCHAR);
-
-                    } else
-                        buf = tmp1;
-                }
-
-                Mem_FreeString(expnd);
-            }
-
-            if (! buf)
-                continue;
-
-            folder = Mem_Alloc(Driver_Pool, sizeof(FORCE_FOLDER));
-            if (! folder) {
-                Mem_Free(buf, buf_len);
-                break;
-            }
-
-            if (wcschr(buf, L'*')) {
-
-                folder->pat =
-                    Pattern_Create(box->box->expand_args->pool, buf, TRUE, 0);
-
-                Mem_Free(buf, buf_len);
-
-                if (! folder->pat) {
-                    Mem_Free(folder, sizeof(FORCE_FOLDER));
-                    break;
-                }
-
-                folder->buf_len = 0;
-                folder->len = 0;
-                folder->buf = NULL;
-
-            } else {
-
-                ULONG len = wcslen(buf);
-                while (len && buf[len - 1] == L'\\')
-                    --len;
-
-                folder->buf_len = buf_len;
-                folder->len = len;
-                folder->buf = buf;
-
-                folder->pat = NULL;
-            }
-
-            List_Insert_After(&box->ForceFolder, NULL, folder);
-        }
+        Process_AddForceFolders(&box->ForceFolder, L"ForceFolder", box, section);
 
         //
         // scan list of ForceProcess settings for the box
         //
 
-        index2 = 0;
-
-        while (1) {
-
-            value = Conf_Get(section, L"ForceProcess", index2);
-            if (! value)
-                break;
-            ++index2;
-
-            process = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS));
-            if (! process)
-                break;
-
-            // Ideally, RtlStringCchCopy() would be used here - Build issues
-            RtlZeroMemory(process->value, sizeof(process->value));
-            if (wcslen(value) < MAX_FORCE_PROCESS_VALUE_LEN)
-            {
-                wcscpy(process->value, value);
-            }
-
-            List_Insert_After(&box->ForceProcess, NULL, process);
-        }
+        Process_AddForceProcesses(&box->ForceProcess, L"ForceProcess", section);
 
 		//
         // scan list of AlertFolder settings for the box
         //
 
-        index2 = 0;
-
-        while (1) {
-
-            static const WCHAR *_AlertFolder = L"AlertFolder";
-            WCHAR *expnd, *buf;
-            ULONG buf_len;
-
-            value = Conf_Get(section, _AlertFolder, index2);
-            if (! value)
-                break;
-            ++index2;
-
-            expnd = Conf_Expand(box->box->expand_args, value, _AlertFolder);
-
-            buf = NULL;
-
-            if (expnd) {
-
-                //
-                // remove duplicate backslashes and translate reparse points
-                //
-
-                WCHAR *tmp1, *tmp2;
-                buf_len = (wcslen(expnd) + 1) * sizeof(WCHAR);
-                tmp1 = Mem_Alloc(Driver_Pool, buf_len);
-
-                if (tmp1) {
-
-                    WCHAR *src_ptr = expnd;
-                    WCHAR *dst_ptr = tmp1;
-                    while (*src_ptr) {
-                        if (src_ptr[0] == L'\\' && src_ptr[1] == L'\\') {
-                            ++src_ptr;
-                            continue;
-                        }
-                        *dst_ptr = *src_ptr;
-                        ++src_ptr;
-                        ++dst_ptr;
-                    }
-                    *dst_ptr = L'\0';
-
-                    tmp2 = File_TranslateReparsePoints(tmp1, Driver_Pool);
-                    if (tmp2) {
-
-                        Mem_Free(tmp1, buf_len);
-                        buf = tmp2;
-                        buf_len = (wcslen(buf) + 1) * sizeof(WCHAR);
-
-                    } else
-                        buf = tmp1;
-                }
-
-                Mem_FreeString(expnd);
-            }
-
-            if (! buf)
-                continue;
-
-            folder = Mem_Alloc(Driver_Pool, sizeof(FORCE_FOLDER));
-            if (! folder) {
-                Mem_Free(buf, buf_len);
-                break;
-            }
-
-            if (wcschr(buf, L'*')) {
-
-                folder->pat =
-                    Pattern_Create(box->box->expand_args->pool, buf, TRUE, 0);
-
-                Mem_Free(buf, buf_len);
-
-                if (! folder->pat) {
-                    Mem_Free(folder, sizeof(FORCE_FOLDER));
-                    break;
-                }
-
-                folder->buf_len = 0;
-                folder->len = 0;
-                folder->buf = NULL;
-
-            } else {
-
-                ULONG len = wcslen(buf);
-                while (len && buf[len - 1] == L'\\')
-                    --len;
-
-                folder->buf_len = buf_len;
-                folder->len = len;
-                folder->buf = buf;
-
-                folder->pat = NULL;
-            }
-
-            List_Insert_After(&box->AlertFolder, NULL, folder);
-        }
+        Process_AddForceFolders(&box->AlertFolder, L"AlertFolder", box, section);
 
         //
         // scan list of AlertProcess settings for the box
         //
 
-        index2 = 0;
-
-        while (1) {
-
-            value = Conf_Get(section, L"AlertProcess", index2);
-            if (! value)
-                break;
-            ++index2;
-
-            process = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS));
-            if (! process)
-                break;
-
-            // Ideally, RtlStringCchCopy() would be used here - Build issues
-            RtlZeroMemory(process->value, sizeof(process->value));
-            if (wcslen(value) < MAX_FORCE_PROCESS_VALUE_LEN)
-            {
-                wcscpy(process->value, value);
-            }
-
-            List_Insert_After(&box->AlertProcess, NULL, process);
-        }
+        Process_AddForceProcesses(&box->AlertProcess, L"AlertProcess", section);
 
         //
         // scan list of HostInjectProcess settings for the box
         //
 
-        index2 = 0;
-
-        while (1) {
-
-            value = Conf_Get(section, L"HostInjectProcess", index2);
-            if (! value)
-                break;
-            ++index2;
-
-            process = Mem_Alloc(Driver_Pool, sizeof(FORCE_PROCESS));
-            if (! process)
-                break;
-
-            // Ideally, RtlStringCchCopy() would be used here - Build issues
-            RtlZeroMemory(process->value, sizeof(process->value));
-            if (wcslen(value) < MAX_FORCE_PROCESS_VALUE_LEN)
-            {
-                wcscpy(process->value, value);
-            }
-
-            List_Insert_After(&box->HostInjectProcess, NULL, process);
-        }
-
+        Process_AddForceProcesses(&box->HostInjectProcess, L"HostInjectProcess", section);
     }
 
     Conf_AdjustUseCount(FALSE);
+}
+
+
+//---------------------------------------------------------------------------
+// Process_DeleteForceDataFolders
+//---------------------------------------------------------------------------
+
+
+_FX void Process_DeleteForceDataFolders(LIST* Folders)
+{
+    FORCE_FOLDER *folder;
+	while (1) {
+
+		folder = List_Head(Folders);
+		if (!folder)
+			break;
+
+		List_Remove(Folders, folder);
+
+		if (folder->pat)
+			Pattern_Free(folder->pat);
+		else
+			Mem_Free(folder->buf, folder->buf_len);
+
+		Mem_Free(folder, sizeof(FORCE_FOLDER));
+	}
+    
+}
+
+
+//---------------------------------------------------------------------------
+// Process_DeleteForceDataProcesses
+//---------------------------------------------------------------------------
+
+
+_FX void Process_DeleteForceDataProcesses(LIST* Folders)
+{
+    FORCE_PROCESS *process;
+
+    while (1) {
+
+        process = List_Head(Folders);
+        if (! process)
+            break;
+
+        List_Remove(Folders, process);
+
+        Mem_Free(process, sizeof(FORCE_PROCESS));
+    }
 }
 
 
@@ -1187,8 +1130,6 @@ _FX void Process_CreateForceData(
 _FX void Process_DeleteForceData(LIST *boxes)
 {
     FORCE_BOX *box;
-    FORCE_FOLDER *folder;
-    FORCE_PROCESS *process;
 
     while (1) {
 
@@ -1198,70 +1139,11 @@ _FX void Process_DeleteForceData(LIST *boxes)
 
         List_Remove(boxes, box);
 
-        while (1) {
-
-            folder = List_Head(&box->ForceFolder);
-            if (! folder)
-                break;
-
-            List_Remove(&box->ForceFolder, folder);
-
-            if (folder->pat)
-                Pattern_Free(folder->pat);
-            else
-                Mem_Free(folder->buf, folder->buf_len);
-
-            Mem_Free(folder, sizeof(FORCE_FOLDER));
-        }
-
-        while (1) {
-
-            process = List_Head(&box->ForceProcess);
-            if (! process)
-                break;
-
-            List_Remove(&box->ForceProcess, process);
-
-            Mem_Free(process, sizeof(FORCE_PROCESS));
-        }
-
-		while (1) {
-
-			folder = List_Head(&box->AlertFolder);
-			if (!folder)
-				break;
-
-			List_Remove(&box->AlertFolder, folder);
-
-			if (folder->pat)
-				Pattern_Free(folder->pat);
-			else
-				Mem_Free(folder->buf, folder->buf_len);
-
-			Mem_Free(folder, sizeof(FORCE_FOLDER));
-		}
-
-        while (1) {
-
-            process = List_Head(&box->AlertProcess);
-            if (! process)
-                break;
-
-            List_Remove(&box->AlertProcess, process);
-
-            Mem_Free(process, sizeof(FORCE_PROCESS));
-        }
-
-        while (1) {
-
-            process = List_Head(&box->HostInjectProcess);
-            if (! process)
-                break;
-
-            List_Remove(&box->HostInjectProcess, process);
-
-            Mem_Free(process, sizeof(FORCE_PROCESS));
-        }
+        Process_DeleteForceDataFolders(&box->ForceFolder);
+        Process_DeleteForceDataProcesses(&box->ForceProcess);
+        Process_DeleteForceDataFolders(&box->AlertFolder);
+        Process_DeleteForceDataProcesses(&box->AlertProcess);
+        Process_DeleteForceDataProcesses(&box->HostInjectProcess);
 
         Box_Free(box->box);
 
@@ -1626,6 +1508,73 @@ _FX BOX *Process_CheckHostInjectProcess(
 
     return NULL;
 }
+
+
+//---------------------------------------------------------------------------
+// Process_DfpInsert
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_IsBreakoutProcess(
+    BOX *box, const WCHAR *ImagePath)
+{
+    NTSTATUS status;
+    LIST BreakoutProcess;
+    WCHAR *ImagePath2 = L"";
+    ULONG ImagePath2_len;
+    const WCHAR *ImageName = L"";
+    BOOLEAN IsBreakout = FALSE;
+
+    //
+    // get adjusted image path and image name
+    //
+
+    status = Process_TranslateDosToNt(
+                                ImagePath, &ImagePath2, &ImagePath2_len);
+
+    if (NT_SUCCESS(status)) {
+
+        ImageName = wcsrchr(ImagePath2, L'\\');
+        if (ImageName && ImageName[1])
+            ++ImageName;
+        else
+            status = STATUS_OBJECT_PATH_SYNTAX_BAD;     // random
+    }
+
+    if (!NT_SUCCESS(status)) {
+        return FALSE;
+    }
+
+
+    List_Init(&BreakoutProcess);
+
+    Conf_AdjustUseCount(TRUE);
+
+    Process_AddForceProcesses(&BreakoutProcess, L"BreakoutProcess", box->name);
+        
+    Conf_AdjustUseCount(FALSE);
+
+
+    FORCE_PROCESS *process = List_Head(&BreakoutProcess);
+    while (process) {
+
+        const WCHAR *value = process->value;
+        if (Process_MatchImage(box, value, 0, ImageName, 1)) {
+
+            IsBreakout = TRUE;
+            break;
+        }
+
+        process = List_Next(process);
+    }
+
+    Process_DeleteForceDataProcesses(&BreakoutProcess);
+
+    Mem_Free(ImagePath2, ImagePath2_len);
+
+    return IsBreakout;
+}
+
 
 //---------------------------------------------------------------------------
 // Process_DfpInsert

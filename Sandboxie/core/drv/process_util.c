@@ -114,6 +114,24 @@ _FX BOOLEAN Process_IsSameBox(
 
 
 //---------------------------------------------------------------------------
+// Process_IsStarter
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_IsStarter(
+    PROCESS* proc1, PROCESS* proc2)
+{
+    if (proc1->create_time > proc2->create_time)
+        return FALSE; // reused pid? the new process can not be older than the on that started it
+
+    if (proc1->box->session_id != proc2->box->session_id)
+        return FALSE; // SID must be same
+
+    return proc1->pid == proc2->starter_id;
+}
+
+
+//---------------------------------------------------------------------------
 // Process_MatchImage
 //---------------------------------------------------------------------------
 

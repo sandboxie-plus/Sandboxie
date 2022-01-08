@@ -1303,10 +1303,10 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                 // Notify the agent about the new process using a specialized silent message
                 //
 
-				WCHAR msg[48], *buf = msg;
-				RtlStringCbPrintfW(buf, sizeof(msg), L"%s%c%d", new_proc->box->name, L'\0', (ULONG)ParentId);
-                buf += wcslen(buf) + 1;
-				Log_Popup_MsgEx(MSG_1399, new_proc->image_path, wcslen(new_proc->image_path), msg, (ULONG)(buf - msg), new_proc->box->session_id, ProcessId);
+				WCHAR sParentId[12];
+                _ultow_s((ULONG)ParentId, sParentId, 12, 10);
+                const WCHAR* strings[4] = { new_proc->image_path, new_proc->box->name, sParentId, NULL };
+                Api_AddMessage(MSG_1399, strings, NULL, new_proc->box->session_id, (ULONG)ProcessId);
 
                 if (! add_process_to_job)
                     new_proc->parent_was_sandboxed = TRUE;

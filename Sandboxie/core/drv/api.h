@@ -120,8 +120,7 @@ BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data);
 
 void Api_AddMessage(
 	NTSTATUS error_code,
-	const WCHAR *string1, ULONG string1_len,
-	const WCHAR *string2, ULONG string2_len,
+	const WCHAR** strings, ULONG* lengths,
 	ULONG session_id,
 	ULONG process_id);
 

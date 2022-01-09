@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl_PL">
 <context>
-    <name>CApiMonModel</name>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Proces</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Znacznik czasu</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation type="vanished">Wiadomość</translation>
-    </message>
-</context>
-<context>
     <name>CFileBrowserWindow</name>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
@@ -78,44 +63,32 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wzmocniona piaskownica z ochroną danych</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Wzmocniona ochrona piaskownicy</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="40"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Piaskownica z ochroną danych</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Piaskownica izolowana standardowo (domyślnie)</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="43"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Komora aplikacji z ochroną danych</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="44"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hardened</source>
-        <translation type="vanished">Utwardzona</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standartowa</translation>
-    </message>
-    <message>
-        <source>Legacy Sandboxie Behaviour</source>
-        <translation type="vanished">Zachowanie starszego typu Sandboxie</translation>
+        <translation>Komora aplikacji (bez izolacji)</translation>
     </message>
 </context>
 <context>
@@ -163,32 +136,32 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wzmocniona piaskownica z ochroną danych</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Wzmocniona ochrona piaskownicy</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Piaskownica z ochroną danych</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="24"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Piaskownica izolowana standardowo (domyślnie)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="26"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Komora aplikacji z ochroną danych</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="27"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Komora aplikacji (bez izolacji)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
@@ -224,7 +197,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="251"/>
         <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz kolor</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="262"/>
@@ -329,14 +302,6 @@
         <translation>Wiodący</translation>
     </message>
     <message>
-        <source>Direct</source>
-        <translation type="vanished">Bezpośredni</translation>
-    </message>
-    <message>
-        <source>Direct All</source>
-        <translation type="vanished">Bezpośredni, wszystkie</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAccess.cpp" line="243"/>
         <source>Closed</source>
         <translation>Zamknięte</translation>
@@ -352,28 +317,24 @@
         <translation>Tylko do odczytu</translation>
     </message>
     <message>
-        <source>Hidden</source>
-        <translation type="vanished">Ukryte</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Normal</source>
-        <translation type="unfinished">Normalna</translation>
+        <translation>Normalna</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="241"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Open for All</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwarte dla wszystkich</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Boxed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Tylko w piaskownicy</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="248"/>
@@ -841,26 +802,22 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="97"/>
         <source>Remember target selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapamiętaj wybór celu</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="123"/>
         <source>Original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Oryginalna lokalizacja</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="124"/>
         <source>Browse for location</source>
-        <translation type="unfinished"></translation>
+        <translation>Przejrzyj lokalizację</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="125"/>
         <source>Clear folder list</source>
-        <translation type="unfinished">Opróżnij listę</translation>
-    </message>
-    <message>
-        <source>Clear this list</source>
-        <translation type="vanished">Wyczyść tę listę</translation>
+        <translation>Opróżnij listę</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="159"/>
@@ -872,7 +829,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="233"/>
         <source>Close until all programs stop in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij, aż wszystkie programy zatrzymają się w tej piaskownicy</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="253"/>
@@ -884,63 +841,28 @@ Full path: %4</source>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>W piaskownicy znajduje się %1 plików i %2 folderów zajmujących %3 miejsca na dysku.</translation>
     </message>
-    <message>
-        <source>One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to.</source>
-        <translation type="vanished">Co najmniej jeden wybrany plik znajduje się na dysku sieciowym i musi być odtworzony na dysk lokalny, proszę wybrać folder, do którego zostaną odtworzone wszystkie pliki.</translation>
-    </message>
-    <message>
-        <source>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</source>
-        <translation type="vanished">W piaskownicy znajduje się %1 plików i %2 folderów, razem zajmują %3 bytów na dysku.</translation>
-    </message>
-</context>
-<context>
-    <name>CResMonModel</name>
-    <message>
-        <source>Unknown</source>
-        <translation type="vanished">Nieznane</translation>
-    </message>
-    <message>
-        <source>Process</source>
-        <translation type="vanished">Proces</translation>
-    </message>
-    <message>
-        <source>Time Stamp</source>
-        <translation type="vanished">Znacznik czasu</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">Typ</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="vanished">Status</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Wartość</translation>
-    </message>
 </context>
 <context>
     <name>CSandBox</name>
     <message>
         <location filename="SandMan.cpp" line="2428"/>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekiwanie na folder: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2429"/>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuwanie folderu: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2430"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Scalanie folderów: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2431"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kończenie scalania migawek...</translation>
     </message>
 </context>
 <context>
@@ -956,18 +878,14 @@ Full path: %4</source>
         <translation>Puste</translation>
     </message>
     <message>
-        <source>NOT SECURE (Debug Config)</source>
-        <translation type="vanished">NIEBEZPIECZNE (Konfiguracja debug)</translation>
-    </message>
-    <message>
         <location filename="SbiePlusAPI.cpp" line="191"/>
         <source>Application Compartment</source>
-        <translation type="unfinished"></translation>
+        <translation>Komora aplikacji</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="193"/>
         <source>NOT SECURE</source>
-        <translation type="unfinished"></translation>
+        <translation>NIE ZABEZPIECZONE</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="195"/>
@@ -982,7 +900,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="200"/>
         <source>Privacy Enhanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulepszona prywatność</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="203"/>
@@ -1047,14 +965,6 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="179"/>
         <source>Sbie Messages</source>
         <translation>Wiadomość Piaskownicy</translation>
-    </message>
-    <message>
-        <source>Resource Monitor</source>
-        <translation type="vanished">Monitor dostępu do zasobów</translation>
-    </message>
-    <message>
-        <source>Api Call Log</source>
-        <translation type="vanished">Log wywołani API</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="204"/>
@@ -1210,44 +1120,46 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="499"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Sponsoruj Sandboxie-Plus na Patreon&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta piaskownica zapewnia ulepszoną izolację bezpieczeństwa, jest odpowiednie do testowania niezaufanego oprogramowania.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="596"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta piaskownica zapewnia standardową izolację, jest odpowiednia do uruchamiania oprogramowania w celu zwiększenia bezpieczeństwa.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="600"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta piaskownica nie wymusza izolacji, jest przeznaczona wyłącznie do użytku jako komora aplikacji do wirtualizacji oprogramowania.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="605"/>
         <source>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Ta piaskownica uniemożliwia dostęp do wszystkich lokalizacji danych użytkownika, z wyjątkiem jawnie przyznanych w opcjach dostępu do zasobów.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="921"/>
         <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja Sbie+: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="991"/>
         <source>The supporter certificate is expired</source>
-        <translation type="unfinished"></translation>
+        <translation>Wygasł certyfikat sponsora</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1181"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybrany zestaw funkcji jest dostępny tylko dla sponsorów projektu. Procesy rozpoczęte w pudełku z włączonym zestawem funkcji bez certyfikatu wsparcia zostaną zakończone po 5 minutach.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Zostań sponsorem&lt;/a&gt; i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1811"/>
@@ -1272,21 +1184,17 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="2283"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta kopia Sandboxie+ jest certyfikowana dla: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2285"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program Sandboxie+ jest bezpłatny do użytku osobistego i niekomercyjnego.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2288"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cleanup Resource Log</source>
-        <translation type="vanished">Wyczyść log dostępów do zasobów</translation>
+        <translation>Sandboxie-Plus to kontynuacja Sandboxie o otwartym kodzie źródłowym.&lt;br /&gt;Odwiedź stronę &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt;, aby uzyskać więcej informacji.&lt;br /&gt;&lt; br /&gt;%3&lt;br /&gt;&lt;br /&gt;Wersja sterownika: %1&lt;br /&gt;Funkcje: %2&lt;br /&gt;&lt;br /&gt;Ikony z &lt;a href=&quot;https://icons8.com&quot;&gt; icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="428"/>
@@ -1322,14 +1230,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <location filename="SandMan.cpp" line="439"/>
         <source>Reload ini file</source>
         <translation>Odśwież plik ini</translation>
-    </message>
-    <message>
-        <source>Resource Logging</source>
-        <translation type="vanished">Logowanie dostępu do zasobów</translation>
-    </message>
-    <message>
-        <source>API Call Logging</source>
-        <translation type="vanished">Loguj wywołania API</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="187"/>
@@ -1437,10 +1337,6 @@ Do you want to do the clean up?</source>
         <translation>Operacja konserwacyjna zakończona sukcesem</translation>
     </message>
     <message>
-        <source>Select box:</source>
-        <translation type="vanished">Wybierz piaskownice:</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="997"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Domyślna piaskownica nie znaleziona, więc zostanie odtworzona: %1</translation>
@@ -1471,17 +1367,9 @@ Do you want to do the clean up?</source>
         <translation>Załadowana konfiguracja: %1</translation>
     </message>
     <message>
-        <source>Driver version: %1</source>
-        <translation type="vanished">Wersja sterownika: %1</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="929"/>
         <source>   -   Portable</source>
         <translation>   -   przenośna</translation>
-    </message>
-    <message>
-        <source>Sandboxie-Plus was started in portable mode, do you want to put the SandBox folder into its parent directory?</source>
-        <translation type="vanished">Sandboxie-Plus została wystartowana w modusie przenośnym, czy folder piaskownic ma zostać umieszczony w folderze powyższym?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="938"/>
@@ -1605,10 +1493,6 @@ Nie, wybierze: %2</translation>
         <translation>Zmiany będą zastosowane automatycznie jak tylko edytor zostanie zakończony.</translation>
     </message>
     <message>
-        <source>Error Status: %1</source>
-        <translation type="vanished">Kod błędu: %1</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1814"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Ta operacja wymaga uprawnień administratora.</translation>
@@ -1684,14 +1568,6 @@ Nie, wybierze: %2</translation>
         <translation>Błąd usuwania foldera piaskownicy: %1</translation>
     </message>
     <message>
-        <source>A sandbox must be emptied before it can be renamed.</source>
-        <translation type="vanished">Przed zmianą nazwy należy opróżnić piaskownicę.</translation>
-    </message>
-    <message>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">Przed usunięciem piaskownicy należy ją opróżnić.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1831"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Błąd przy przenoszeniu foldera %1 do %2</translation>
@@ -1760,10 +1636,6 @@ Nie, wybierze: %2</translation>
         <location filename="SandMan.cpp" line="1844"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Hasło konfiguracyjne nie może być dłuższe niż 64 znaki</translation>
-    </message>
-    <message>
-        <source>Unknown Error Status: %1</source>
-        <translation type="vanished">Nieznany kod błędu: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1865"/>
@@ -1845,14 +1717,6 @@ Nie, wybierze: %2</translation>
         <location filename="SandMan.cpp" line="2253"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Nowa wersja Sandboxie-Plus zostanie pobrana z:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Czy chcesz rozpocząć instalację? Jeśli jakieś programy działają w trybie piaskownicy, zostaną zakończone.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;O Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Wersja %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Sandboxie-Plus jest otwarto źródłowym rozwidleniem Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Odwiedź &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; aby otrzymać dalsze informacje.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Ikony z &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2466"/>
@@ -2069,7 +1933,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="500"/>
         <source>Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="509"/>
@@ -2079,7 +1943,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="515"/>
         <source>Forced </source>
-        <translation type="unfinished"></translation>
+        <translation>Wymuszone </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="513"/>
@@ -2106,10 +1970,6 @@ Nie, wybierze: %2</translation>
         <translation>Utwórz nową piaskownicę</translation>
     </message>
     <message>
-        <source>Add Group</source>
-        <translation type="vanished">Dodaj grupę</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="80"/>
         <source>Remove Group</source>
         <translation>Usuń grupę</translation>
@@ -2128,22 +1988,6 @@ Nie, wybierze: %2</translation>
         <location filename="Views/SbieView.cpp" line="86"/>
         <source>Run from Start Menu</source>
         <translation>Wykonaj program z menu startowego</translation>
-    </message>
-    <message>
-        <source>Run Web Browser</source>
-        <translation type="vanished">Wykonaj przeglądarkę internetową</translation>
-    </message>
-    <message>
-        <source>Run eMail Client</source>
-        <translation type="vanished">Wykonaj program eMail</translation>
-    </message>
-    <message>
-        <source>Run Explorer</source>
-        <translation type="vanished">Wykonaj explorator window</translation>
-    </message>
-    <message>
-        <source>Run Cmd.exe</source>
-        <translation type="vanished">Wykonaj cmd.exe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="101"/>
@@ -2180,10 +2024,6 @@ Nie, wybierze: %2</translation>
         <location filename="Views/SbieView.cpp" line="115"/>
         <source>Sandbox Presets</source>
         <translation>Ustawienia wstępne piaskownicy</translation>
-    </message>
-    <message>
-        <source>Enable API Call logging</source>
-        <translation type="vanished">Włącz logowanie Wywołani API</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="127"/>
@@ -2226,18 +2066,6 @@ Nie, wybierze: %2</translation>
         <translation>Programy i funkcje</translation>
     </message>
     <message>
-        <source>Terminal</source>
-        <translation type="vanished">Terminal</translation>
-    </message>
-    <message>
-        <source>Terminal (as Admin)</source>
-        <translation type="vanished">Terminal (jako Admin)</translation>
-    </message>
-    <message>
-        <source>Terminal (32-bit)</source>
-        <translation type="vanished">Terminal (32-bit)</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="117"/>
         <source>Ask for UAC Elevation</source>
         <translation>Pytaj o podniesienie poziomu kontroli konta użytkownika</translation>
@@ -2256,10 +2084,6 @@ Nie, wybierze: %2</translation>
         <location filename="Views/SbieView.cpp" line="133"/>
         <source>Rename Sandbox</source>
         <translation>Zmień nazwę piaskownicy</translation>
-    </message>
-    <message>
-        <source>Move to Group</source>
-        <translation type="vanished">Przenieś do grupy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="146"/>
@@ -2404,7 +2228,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="132"/>
         <source>Duplicate Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplikat piaskownicy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="135"/>
@@ -2458,12 +2282,12 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadź nową nazwę duplikatu piaskownicy.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
         <source>%1 Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kopia</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="930"/>
@@ -2516,14 +2340,6 @@ Nie, wybierze: %2</translation>
         <location filename="Views/SbieView.cpp" line="1069"/>
         <source>the selected processes</source>
         <translation>wybrane procesy</translation>
-    </message>
-    <message>
-        <source>Do you want to %1 the selected process(es)?</source>
-        <translation type="vanished">Czy chcesz %1 wybrane procesy?</translation>
-    </message>
-    <message>
-        <source>Do you want to %1 the selected process(es)</source>
-        <translation type="vanished">Czy naprawdę chcesz %1 wybrane procesy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1130"/>
@@ -2599,7 +2415,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="493"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niestety, ale ten certyfikat wygasł.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="499"/>
@@ -2756,61 +2572,57 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="83"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="94"/>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="97"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="98"/>
         <source>Closed</source>
-        <translation type="unfinished">Zamknięte</translation>
+        <translation>Zamknięte</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="99"/>
         <source>Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Śledzenie</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="100"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Inne</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="105"/>
         <source>Show All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż wszystkie piaskownice</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="111"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz do pliku</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="340"/>
         <source>Save trace log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz dziennik śledzenia do pliku</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="346"/>
         <source>Failed to open log file for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się otworzyć pliku dziennika do zapisu</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="362"/>
         <source>Unknown</source>
-        <translation type="unfinished">Nieznane</translation>
-    </message>
-    <message>
-        <source>Filter selected box only</source>
-        <translation type="vanished">Filtruj tylko wybrane pole</translation>
+        <translation>Nieznane</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="265"/>
@@ -2841,30 +2653,17 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="54"/>
         <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstępne ustawienie piaskownicy:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Piaskownica izoluje system hosta od procesów uruchomionych wewnątrz piaskownicy, uniemożliwia im dokonywanie trwałych zmian w innych programach i danych w komputerze. Poziom izolacji ma wpływ na bezpieczeństwo użytkownika oraz kompatybilność z aplikacjami, dlatego też w zależności od wybranego typu piaskownicy, poziom izolacji będzie różny. Sandboxie może również chronić dane osobowe użytkownika przed dostępem do nich przez procesy działające pod jego nadzorem.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select restriction/isolation template:</source>
-        <translation type="vanished">Wybierz szablon ograniczeń/izolacji:</translation>
-    </message>
-    <message>
-        <source>Initial sandbox configuration:</source>
-        <translatorcomment>Początkowa konfiguracja piaskownicy:</translatorcomment>
-        <translation type="vanished">Wstępna konfiguracja piaskownicy:</translation>
-    </message>
-    <message>
-        <source>Copy options from an existing box:</source>
-        <translation type="vanished">Skopiuj opcje z istniejącej piaskownicy:</translation>
+        <translation>Informacja o piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
@@ -2915,10 +2714,6 @@ Nie, wybierze: %2</translation>
         <translation>Granica okien w piaskownicy:</translation>
     </message>
     <message>
-        <source>Prevent change to network and firewall parameters</source>
-        <translation type="vanished">Zapobiegaj zmianom ustawień sieci i zapory</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="131"/>
         <source>px Width</source>
         <translation>px Szerokość</translation>
@@ -2937,17 +2732,9 @@ Nie, wybierze: %2</translation>
         <translation>Chroń system przed programami w piaskownicy</translation>
     </message>
     <message>
-        <source>General restrictions</source>
-        <translation type="vanished">Ogólne ograniczenia</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
         <translation>Zezwól buforowi wydruku na drukowanie do plików poza piaskownicą</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="vanished">Drukowanie</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
@@ -3135,10 +2922,6 @@ Nie, wybierze: %2</translation>
         <translation>Dodaj Program</translation>
     </message>
     <message>
-        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names.</source>
-        <translation type="vanished">Możesz zgrupować wiele programów i nadać im nazwę grupy. Grupy programów mogą być używane z niektórymi z ustawień, które przyjmują nazwy programu.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="992"/>
         <source>Forced Programs</source>
         <translation>Programy wymuszone</translation>
@@ -3193,27 +2976,27 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="101"/>
         <source>General Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja ogólna</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="111"/>
         <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstępne ustawienie piaskownicy:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacja o piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="226"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Więcej typów piaskownic&lt;/b&gt; jest dostępnych wyłącznie dla &lt;u&gt;sponsorów&lt;/u&gt;, pola o zwiększonej prywatności &lt;b&gt;&lt;font color=&apos;red&apos;&gt;chronią dane użytkownika przed nielegalnym dostępem&lt;/font&gt;&lt; /b&gt; przez programy w piaskownicy.&lt;br /&gt;Jeśli nie jesteś jeszcze sponsorem, rozważ &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot; &gt;to&lt;/a&gt;, aby otrzymać &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;.&lt;br /&gt;Możesz przetestować inne typy skrzynek tworząc nowe piaskownice tych typów, jednak procesy w nich będą automatycznie kończone po 5 minutach.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="413"/>
         <source>Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawa administratora</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="562"/>
@@ -3223,12 +3006,12 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="570"/>
         <source>Open Windows Credentials Store (user mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz Windows Credentials Store (tryb użytkownika)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapobiegaj zmianom parametrów sieci i zapory (tryb użytkownika)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="835"/>
@@ -3322,10 +3105,6 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation>Pokaż wiadomość 1307, gdy programowi odmówiono dostępu do Internetu</translation>
     </message>
     <message>
-        <source>Block internet access for all programs except those added to the list.</source>
-        <translation type="vanished">Zablokuj dostęp programów do Internetu które nie znajduje się na tej liście.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1317"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>* Programy zainstalowane w piaskownicy nie będą mogły używać Internetu.</translation>
@@ -3378,22 +3157,6 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation>Dodaj ścieżkę IPC</translation>
     </message>
     <message>
-        <source>Move Up</source>
-        <translation type="vanished">Przesuń w górę</translation>
-    </message>
-    <message>
-        <source>Move Down</source>
-        <translation type="vanished">Przesuń w dół</translation>
-    </message>
-    <message>
-        <source>Configure which processes can access what resources. Double click on an entry to edit it.
-&apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
-For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
-        <translation type="vanished">Skonfiguruj, które procesy mogą uzyskiwać dostęp do jakich zasobów. Kliknij dwukrotnie wpis, aby go edytować.
-„Bezpośredni” dostęp do plików i kluczy dotyczy tylko plików binarnych programu znajdujących się poza piaskownicą.
-Aby uzyskać dostęp do plików, możesz zamiast tego użyć opcji „Bezpośrednie wszystko”, aby zastosować ją do wszystkich programów.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1847"/>
         <source>File Recovery</source>
         <translation>Przywracanie plików</translation>
@@ -3439,13 +3202,9 @@ Aby uzyskać dostęp do plików, możesz zamiast tego użyć opcji „Bezpośred
         <translation>Różne</translation>
     </message>
     <message>
-        <source>Lift security restrictions</source>
-        <translation type="vanished">Usuń ograniczenia bezpieczeństwa</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2039"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation type="unfinished">Ogranicz dostęp do emulowanego menedżera kontroli usług do procesów uprzywilejowanych</translation>
+        <translation>Ogranicz dostęp do emulowanego menedżera kontroli usług do procesów uprzywilejowanych</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2142"/>
@@ -3454,10 +3213,6 @@ Aby uzyskać dostęp do plików, możesz zamiast tego użyć opcji „Bezpośred
         <location filename="Forms/OptionsWindow.ui" line="2319"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>Chroń integralność piaskownicy</translation>
-    </message>
-    <message>
-        <source>Sandbox protection</source>
-        <translation type="vanished">Ochrona piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2145"/>
@@ -3496,21 +3251,9 @@ Aby uzyskać dostęp do plików, możesz zamiast tego użyć opcji „Bezpośred
         <translation>Wymuś użycie niestandardowych fałszywych plików manifestu (zachowanie starszego typu)</translation>
     </message>
     <message>
-        <source>Protect sandboxed SYSTEM processes from unprivileged unsandboxed processes</source>
-        <translation type="vanished">Chroń procesy w piaskownicy uprawnieniami systemowymi</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2101"/>
         <source>Compatibility</source>
         <translation>Zgodność</translation>
-    </message>
-    <message>
-        <source>Open Windows Credentials Store</source>
-        <translation type="vanished">Otwórz Windows Credentials Store</translation>
-    </message>
-    <message>
-        <source>Allow access to Bluetooth</source>
-        <translation type="vanished">Zezwól na dostęp do Bluetooth</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2332"/>
@@ -3641,10 +3384,6 @@ zamiast &quot;*&quot;.</translation>
         <translation>Śledzenie klas COM</translation>
     </message>
     <message>
-        <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
-        <translation type="vanished">Zastosuj Zamknij...=!&lt;program&gt;,... również do wszystkich plików binarnych znajdujących się w piaskownicy.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1997"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Emuluj piaskownicę dla wszystkich procesów</translation>
@@ -3653,10 +3392,6 @@ zamiast &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="2186"/>
         <source>Isolation</source>
         <translation>Izolacja</translation>
-    </message>
-    <message>
-        <source>Various advanced isolation features can break compatibility, with some applications, if you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability by changing these options you can restore compatibility by sacrificing some security.&lt;br&gt;These options can be used securely when you don&apos;t grant any of the sandboxed process admin rights.</source>
-        <translation type="vanished">Różne zaawansowane funkcje izolacji mogą zakłócić zgodność z niektórymi aplikacjami, jeśli używasz tej piaskownicy &lt;b&gt;NIE dla bezpieczeństwa&lt;/b&gt;, ale w celu prostej przenośności aplikacji, zmieniając te opcje, możesz przywrócić zgodność, poświęcając pewne zabezpieczenia.&lt;br&gt;Te Opcje mogą być używane bezpiecznie, gdy nie przyznasz żadnych uprawnień administratora procesu w trybie piaskownicy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2322"/>
@@ -3737,10 +3472,6 @@ zamiast &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="1356"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>Ustawienie dostępu do sieci/internetu dla procesów niewymienionych na liście:</translation>
-    </message>
-    <message>
-        <source>Network Restrictions</source>
-        <translation type="vanished">Ograniczenia sieciowe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
@@ -3825,136 +3556,139 @@ zamiast &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1371"/>
         <source>Network Firewall Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguły zapory sieciowej</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1536"/>
         <source>Resource Access Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguły dostępu do zasobów</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1575"/>
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
 &apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
 You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skonfiguruj, które procesy mają dostęp do jakich zasobów. Kliknij dwukrotnie na wpis, aby go edytować.
+Otwarcie plików i dostęp do kluczy dotyczy tylko plików binarnych programów znajdujących się poza piaskownicą.
+Możesz zamiast tego użyć opcji „Otwórz dla wszystkich”, aby zastosować do wszystkich programów, lub zmienić zachowanie na karcie Zasady.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1717"/>
         <source>Resource Access Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Zasady dostępu do zasobów</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1750"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Specyfika reguły jest miar± tego, jak dobrze dana reguła pasuje do konkretnej ¶cieżki. Prościej: specyfika jest długo¶ci± znaków od pocz±tku ¶cieżki do ostatniego pasuj±cego niezawieraj±cego znaków wielko¶ciowych podłańcucha. Reguła, która dopasowuje tylko typy plików takie jak &quot;*.tmp&quot; będzie miała najwyższą specyfikę, ponieważ zawsze dopasuje całą ścieżkę do pliku.
+Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje sposób zastosowania reguły do danego procesu. Reguły stosuj±ce się do nazwy procesu lub grupy procesów maj± najsilniejszy poziom dopasowania, następnie dopasowanie przez negację (tj. reguły stosuj±ce się do wszystkich procesów oprócz danego), podczas gdy najniższe poziomy dopasowania maj± dopasowania globalne, tj. reguły stosuj±ce się do każdego procesu.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1774"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadaj priorytet regułom w oparciu o ich specyfikę i poziom dopasowania procesu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1781"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb prywatności, blokuje dostęp do plików i rejestru we wszystkich lokalizacjach z wyjątkiem ogólnych systemowych</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1795"/>
         <source>Access Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb dostępu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1802"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Po włączeniu trybu prywatności, procesy w trybie piaskownicy będą mogły odczytywać tylko C:\Windows\*, C:\Program Files\* i części rejestru HKLM, a wszystkie inne lokalizacje będą wymagały jawnego dostępu do odczytu i/lub zapisu. W tym trybie Specyfika reguły jest zawsze włączona.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1819"/>
         <source>Rule Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguły zasad</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1826"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastosuj reguły Close...=!&lt;program&gt;,... również do wszystkich plików binarnych znajdujących się w piaskownicy.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1833"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastosuj dyrektywy otwarcia pliku i klucza tylko do plików binarnych znajdujących się poza piaskownicą.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2080"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom proces RpcS w piaskownicy jako proces SYSTEMOWY (niezalecane)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2032"/>
         <source>Open access to COM infrastructure (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwarty dostęp do infrastruktury COM (niezalecane)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2004"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrzuć krytyczne uprawnienia z procesów uruchomionych z tokenem SYSTEM</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2060"/>
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>(Security Critical)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Kluczowe dla bezpieczeństwa)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2025"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Chroń procesy SYSTEM w piaskownicy przed nieuprzywilejowanymi procesami.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2162"/>
         <source>COM/RPC</source>
-        <translation type="unfinished"></translation>
+        <translation>COM/RPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2176"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączenie domyślnego użycia RpcMgmtSetComTimeout (może rozwiązać problemy z kompatybilnością)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2194"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izolacja bezpieczeństwa poprzez użycie silnie ograniczonego tokena procesu jest podstawowym sposobem Sandboxie wymuszania ograniczeń piaskownicy, gdy Izolacja jest wyłączona to piaskownica działa w trybie komory aplikacji, tj. nie zapewnia już niezawodnego bezpieczeństwa, tylko prosty podział aplikacji na komory.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2231"/>
         <source>Disable Security Isolation (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłącz izolację bezpieczeństwa (eksperymentalnie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
         <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Różne zaawansowane funkcje izolacji mogą złamać kompatybilność z niektórymi aplikacjami. Jeśli używasz tej piaskownicy &lt;b&gt;NIE dla bezpieczeństwa&lt;/b&gt;, ale dla prostej przenośności aplikacji, zmieniając te opcje, możesz przywrócić zgodność, poświęcając część bezpieczeństwa.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2278"/>
         <source>Security Isolation &amp; Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Izolacja i filtrowanie bezpieczeństwa</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2285"/>
         <source>Disable Security Filtering (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłącz filtrowanie zabezpieczeń (niezalecane)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2292"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrowanie bezpieczeństwa używane przez Sandboxie do wymuszania ograniczeń dostępu do systemu plików i rejestru, a także do ograniczania dostępu do procesów.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2302"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poniższe opcje mogą być bezpiecznie użyte, gdy nie nadano uprawnień administratora.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2612"/>
@@ -4044,7 +3778,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="42"/>
         <source>Group: %1</source>
-        <translation type="unfinished">Grupa: %1</translation>
+        <translation>Grupa: %1</translation>
     </message>
 </context>
 <context>
@@ -4099,11 +3833,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="117"/>
         <source>Recover target:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Recover to</source>
-        <translation type="vanished">Przywróć do</translation>
+        <translation>Odzyskaj cel:</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="146"/>
@@ -4114,10 +3844,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
         <source>Recover</source>
         <translation>Przywróć</translation>
-    </message>
-    <message>
-        <source>Recover to...</source>
-        <translation type="vanished">Przywróć do...</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="153"/>
@@ -4155,7 +3881,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
         <source>Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>
@@ -4193,14 +3919,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Pokaż powiadomienia dla ważnych wiadomości</translation>
     </message>
     <message>
-        <source>Use Dark Theme</source>
-        <translation type="vanished">Użyj ciemny motyw</translation>
-    </message>
-    <message>
-        <source>Show Sys-Tray</source>
-        <translation type="vanished">Pokaż w pasku zadań</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Open urls from this ui sandboxed</source>
         <translation>Otwieraj strony www tego programu w piaskownicy</translation>
@@ -4208,7 +3926,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="490"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Przechwytuj wybrane wywołania systemowe Win32k, aby włączyć przyspieszenie GPU (eksperymentalne)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="656"/>
@@ -4251,10 +3969,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Przy zamknięciu głównego okna:</translation>
     </message>
     <message>
-        <source>Tray options</source>
-        <translation type="vanished">Opcje ikony w zasobniku</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="296"/>
         <source>Start UI when a sandboxed process is started</source>
         <translation>Uruchom interfejs przy starcie procesów w piaskownicy</translation>
@@ -4268,10 +3982,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/SettingsWindow.ui" line="151"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
         <translation>Użyj ciemnego motywu (zadziała w pełni po restarcie SB+)</translation>
-    </message>
-    <message>
-        <source>Advanced Options</source>
-        <translation type="vanished">Opcje zaawansowane</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="598"/>
@@ -4356,12 +4066,12 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="367"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj platformy filtrowania systemu Windows, aby ograniczyć dostęp do sieci</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="400"/>
         <source>Activate Kernel Mode Object Filtering (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktywuj filtrowanie obiektów w trybie jądra (eksperymentalne)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="380"/>
@@ -4382,11 +4092,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/SettingsWindow.ui" line="834"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
         <translation>Wygasł ten certyfikat wsparcia, proszę o zaktualizowanie certyfikatu.</translation>
-    </message>
-    <message>
-        <source>Use Windows Filtering Platform to restrict network access (experimental)</source>
-        <translatorcomment>Użyj Windows Filtering Platform do ograniczenia dostępu do sieci (eksperymentalnie)</translatorcomment>
-        <translation type="vanished">Użyj platformy filtrowania systemu Windows do ograniczenia dostępu do sieci (eksperymentalnie)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>
@@ -4429,10 +4134,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Ustawienia wsparcia</translation>
     </message>
     <message>
-        <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="vanished">Osoby wspierające projekt Sandboxie-Plus otrzymują &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certyfikat wsparcia&lt;/a&gt;. To jest jak klucz licencyjny, ale dla wspaniałych ludzi używających wolnego oprogramowania :-)</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
         <source>Portable root folder</source>
         <translation>Przenośny folder główny</translation>
@@ -4448,17 +4149,9 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Ścieżki piaskownicy</translation>
     </message>
     <message>
-        <source>Other settings</source>
-        <translation type="vanished">Inne opcje</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Obserwuj modyfikacje Sandboxie.ini</translation>
-    </message>
-    <message>
-        <source>Program Restrictions</source>
-        <translation type="vanished">Ograniczenia procesów</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="509"/>
@@ -4500,10 +4193,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/SettingsWindow.ui" line="575"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Pokaż wiadomość 1308, gdy program nie może uruchomić się</translation>
-    </message>
-    <message>
-        <source>Software Compatibility</source>
-        <translation type="vanished">Kompatybilność programów</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="664"/>

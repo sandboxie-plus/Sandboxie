@@ -3081,6 +3081,10 @@ Open RPC Port Bindings for UAC
 Block common telemetry processes
 .
 
+4308;txt;01
+Filter access to \Devices\
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------

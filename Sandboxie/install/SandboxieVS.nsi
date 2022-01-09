@@ -1091,11 +1091,9 @@ WriteOk:
     ;
     
     StrCmp $BundledInstall "Y" SkipCopyInstaller
-    
-    System::Call 'Kernel32::GetModuleFileNameA(i 0, t .r0, i 1024) i r1'
-    ; $0 --> Installer Filename
-    
-    CopyFiles "$0" "$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}"
+
+    CreateDirectory "$WINDIR\Installer"
+    CopyFiles /SILENT "$EXEPATH" "$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}"
 
 SkipCopyInstaller:
    

@@ -324,14 +324,15 @@ StrCpy $1 "https://www.sandboxie.com/support"
 !else
 	StrCpy $2 "vcredist_x86.exe"
 !endif
-	
-NSISdl::download /TIMEOUT=30000 $1/$2 $TEMP\$2
+
+InitPluginsDir
+inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $1/$2 $PLUGINSDIR\$2 /END
 Pop $R0 ;Get the return value
-  StrCmp $R0 "success" +3
+  StrCmp $R0 "OK" +3
     MessageBox MB_RETRYCANCEL|MB_ICONSTOP "Download failed for: $1/$2.$\nError: $R0.$\nRerun the install when problem corrected." IDRETRY -3
     Quit
 
-ExecWait '"$TEMP\$2" /passive' $0
+ExecWait '"$PLUGINSDIR\$2" /passive' $0
 StrCmp $0 "0" +3
 	MessageBox MB_OK|MB_ICONSTOP "Installation of VCRedist failed: $0.$\nRerun the install when problem corrected."
 	Quit

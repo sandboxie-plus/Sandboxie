@@ -821,7 +821,7 @@ FunctionEnd
 
 Function DownloadStatPng
 ;
-;	Pop $0	; Get the parameter (file name to download)
+	Pop $0	; Get the parameter (file name to download)
 ;	${If} ${RunningX64}
 ;	SetRegView 64
 ;	${EndIf}

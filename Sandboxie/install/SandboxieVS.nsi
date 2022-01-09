@@ -1230,6 +1230,7 @@ Function WriteProductKey
     !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "DisplayVersion" '"${VERSION}"'
     !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "Publisher" '"${COMPANY_NAME}"'
     !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "UninstallString" `'"$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}" /remove'`
+    !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "QuietUninstallString" `'"$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}" /remove /S'`
 
 ;
 ; Create GUID value for CancelAutoplay functionality in Sandboxie Control

@@ -160,6 +160,7 @@ void CSandBoxPlus::CloseBox()
 
 bool CSandBoxPlus::CheckUnsecureConfig() const
 {
+	//if (GetBool("UnsafeTemplate", false)) return true;
 	if (GetBool("OriginalToken", false)) return true;
 	if (GetBool("OpenToken", false)) return true;
 		if(GetBool("UnrestrictedToken", false)) return true;

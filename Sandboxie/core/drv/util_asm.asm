@@ -229,40 +229,149 @@ endif
 ;----------------------------------------------------------------------------
 
 ifdef _WIN64
+
 EXTERN Token_SepFilterToken : QWORD
 
-Sbie_SepFilterTokenHandler_asm PROC
+Sbie_SepFilterTokenHandler_asm PROC FRAME
 
-     mov         qword ptr [rsp+20h],r9  
-     mov         qword ptr [rsp+18h],r8  
-     mov         qword ptr [rsp+10h],rdx  
-     mov         qword ptr [rsp+8],rcx  
-     sub         rsp,78h  
-     mov         dword ptr [rsp+60h],0  
-     mov         rax,qword ptr [rsp+00000000000000A0h]  
-     mov         qword ptr [rsp+50h],rax  
-     mov         rax,qword ptr [rsp+0000000000000098h]  
-     mov         qword ptr [rsp+48h],rax  
-     mov         rax,qword ptr [rsp+0000000000000090h]  
-     mov         qword ptr [rsp+40h],rax  
-     mov         rax,qword ptr [rsp+0000000000000088h]  
-     mov         qword ptr [rsp+38h],rax  
-     mov         qword ptr [rsp+30h],0  
-     mov         qword ptr [rsp+28h],0  
-     mov         qword ptr [rsp+20h],0  
-     xor         r9d,r9d  
-     xor         r8d,r8d  
-     xor         edx,edx  
-     mov         rcx,qword ptr [rsp+0000000000000080h]  
-     call        Token_SepFilterToken
-     mov         dword ptr [rsp+60h],eax  
-     mov         eax,dword ptr [rsp+60h]  
-     add         rsp,78h  
-     ret  
+    mov         qword ptr [rsp+20h],r9  
+    mov         qword ptr [rsp+18h],r8  
+    mov         qword ptr [rsp+10h],rdx  
+    mov         qword ptr [rsp+8],rcx  
+
+    sub         rsp,78h  
+    .allocstack 78h
+    .endprolog
+
+    mov         dword ptr [rsp+60h],0  
+    mov         rax,qword ptr [rsp+0A0h] ; NewToken
+    mov         qword ptr [rsp+50h],rax  
+    mov         rax,qword ptr [rsp+098h] ; LengthIncrease
+    mov         qword ptr [rsp+48h],rax  
+    mov         rax,qword ptr [rsp+090h] ; SidPtr
+    mov         qword ptr [rsp+40h],rax  
+    mov         rax,qword ptr [rsp+088h] ; SidCount
+    mov         qword ptr [rsp+38h],rax  
+    mov         qword ptr [rsp+30h],0  
+    mov         qword ptr [rsp+28h],0  
+    mov         qword ptr [rsp+20h],0  
+    mov         r9d,0
+    mov         r8d,0
+    mov         edx,0
+    mov         rcx,qword ptr [rsp+080h] ; TokenObject 
+    call        Token_SepFilterToken
+
+    add         rsp,78h  
+
+    ret  
 
 Sbie_SepFilterTokenHandler_asm ENDP
+
 endif
 
 ;----------------------------------------------------------------------------
+
+ifdef _WIN64
+
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
+Sbie_InvokeSyscall_asm PROC FRAME
+
+    ; prolog
+    push        rsi
+    .pushreg    rsi
+    push        rdi
+    .pushreg    rdi
+    sub         rsp, 98h ; 8 * 19 - prepare enough stack for up to 19 arguments
+    .allocstack 98h
+    .endprolog
+     
+    ; quick sanity check
+    cmp         rdx, 13h ; if count > 19
+    jle         arg_count_ok
+    mov         rax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
+    jmp         func_return
+arg_count_ok:
+
+    ; save our 3 relevant arguments to spare registers
+    mov         r11, r8  ; args
+    mov         r10, rdx ; count
+    mov         rax, rcx ; func
+
+    ; check if we have higher arguments and if not skip 
+    cmp         r10, 4
+    jle         copy_reg_args
+    ; copy arguments 5-19
+    mov         rsi, r11 ; source
+    add         rsi, 20h
+    mov         rdi, rsp ; destination
+    add         rdi, 20h
+    mov         rcx, r10 ; arg count
+    sub         rcx, 4   ; skip the register passed args
+    rep movsq
+
+copy_reg_args:
+    ; copy arguments 1-4
+    mov         r9,  qword ptr [r11+18h]
+    mov         r8,  qword ptr [r11+10h]
+    mov         rdx, qword ptr [r11+08h]
+    mov         rcx, qword ptr [r11+00h]
+
+    ; call the function
+    call        rax
+
+func_return:
+    ; epilog
+    add         rsp, 98h  
+    pop         rdi
+    pop         rsi
+
+    ret  
+
+Sbie_InvokeSyscall_asm ENDP
+
+else
+
+; NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
+_Sbie_InvokeSyscall_asm@12 PROC
+
+    ; prolog
+    push        ebp  
+    push        esi
+    push        edi
+    mov         ebp, esp  
+    sub         esp, 4Ch ; 4 * 19 - prepare enough stack for up to 19 arguments
+
+    ; quick sanity check
+    cmp         dword ptr [ebp+10h+4h], 13h ; arg count @count
+    jle         arg_count_ok
+    mov         eax, 0C000001Ch ; return STATUS_INVALID_SYSTEM_SERVICE
+    jmp         func_return
+arg_count_ok:
+
+    ; copy arguments 0-19
+    mov         esi, dword ptr [ebp+10h+8h] ; source @args
+    mov         edi, esp ; destination
+    mov         ecx, dword ptr [ebp+10h+4h] ; arg count @count
+    rep movsd
+
+    ; call the function
+    mov         eax, dword ptr [ebp+10h+0h] ; @func
+    call        eax
+
+func_return:
+    ; epilog
+    mov         esp,ebp  
+    pop         edi
+    pop         esi
+    pop         ebp
+    ret         0Ch
+
+_Sbie_InvokeSyscall_asm@12 ENDP
+PUBLIC _Sbie_InvokeSyscall_asm@12
+
+endif
+
+;----------------------------------------------------------------------------
+
 
 end

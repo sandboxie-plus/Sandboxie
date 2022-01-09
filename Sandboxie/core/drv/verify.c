@@ -400,8 +400,90 @@ extern POOL *Driver_Pool;
 
 NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
 
+_FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
+{
+    TIME_FIELDS timeFiled = { 0 };
+    const WCHAR* ptr = date_str;
+    const WCHAR* end = wcschr(ptr, L'.');
+    if (end) {
+        //*end = L'\0';
+        timeFiled.Day = (CSHORT)_wtoi(ptr);
+        //*end = L'.';
+        ptr = end + 1;
+
+        end = wcschr(ptr, L'.');
+        if (end) {
+            //*end++ = L'\0';
+            timeFiled.Month = (CSHORT)_wtoi(ptr);
+            //*end = L'.';
+            ptr = end + 1;
+
+            timeFiled.Year = (CSHORT)_wtoi(ptr);
+
+            RtlTimeFieldsToTime(&timeFiled, date);
+        }
+    }
+}
+
+// Example of __DATE__ string: "Jul 27 2012"
+//                              0123456789A
+
+#define BUILD_YEAR_CH0 (__DATE__[ 7])
+#define BUILD_YEAR_CH1 (__DATE__[ 8])
+#define BUILD_YEAR_CH2 (__DATE__[ 9])
+#define BUILD_YEAR_CH3 (__DATE__[10])
+
+#define BUILD_MONTH_IS_JAN (__DATE__[0] == 'J' && __DATE__[1] == 'a' && __DATE__[2] == 'n')
+#define BUILD_MONTH_IS_FEB (__DATE__[0] == 'F')
+#define BUILD_MONTH_IS_MAR (__DATE__[0] == 'M' && __DATE__[1] == 'a' && __DATE__[2] == 'r')
+#define BUILD_MONTH_IS_APR (__DATE__[0] == 'A' && __DATE__[1] == 'p')
+#define BUILD_MONTH_IS_MAY (__DATE__[0] == 'M' && __DATE__[1] == 'a' && __DATE__[2] == 'y')
+#define BUILD_MONTH_IS_JUN (__DATE__[0] == 'J' && __DATE__[1] == 'u' && __DATE__[2] == 'n')
+#define BUILD_MONTH_IS_JUL (__DATE__[0] == 'J' && __DATE__[1] == 'u' && __DATE__[2] == 'l')
+#define BUILD_MONTH_IS_AUG (__DATE__[0] == 'A' && __DATE__[1] == 'u')
+#define BUILD_MONTH_IS_SEP (__DATE__[0] == 'S')
+#define BUILD_MONTH_IS_OCT (__DATE__[0] == 'O')
+#define BUILD_MONTH_IS_NOV (__DATE__[0] == 'N')
+#define BUILD_MONTH_IS_DEC (__DATE__[0] == 'D')
+
+#define BUILD_DAY_CH0 ((__DATE__[4] >= '0') ? (__DATE__[4]) : '0')
+#define BUILD_DAY_CH1 (__DATE__[ 5])
+
+_FX VOID KphGetBuildDate(LARGE_INTEGER* date)
+{
+    TIME_FIELDS timeFiled = { 0 };
+    WCHAR DayW[3] = { BUILD_DAY_CH0, BUILD_DAY_CH1, L'\0' };
+    timeFiled.Day = (CSHORT)_wtoi(DayW);
+    timeFiled.Month = (
+        (BUILD_MONTH_IS_JAN) ? 1 : (BUILD_MONTH_IS_FEB) ? 2 : (BUILD_MONTH_IS_MAR) ? 3 :
+        (BUILD_MONTH_IS_APR) ? 4 : (BUILD_MONTH_IS_MAY) ? 5 : (BUILD_MONTH_IS_JUN) ? 6 :
+        (BUILD_MONTH_IS_JUL) ? 7 : (BUILD_MONTH_IS_AUG) ? 8 : (BUILD_MONTH_IS_SEP) ? 9 :
+        (BUILD_MONTH_IS_OCT) ? 10 : (BUILD_MONTH_IS_NOV) ? 11 : (BUILD_MONTH_IS_DEC) ? 12 
+     : 0);
+    WCHAR YearW[5] = { BUILD_YEAR_CH0, BUILD_YEAR_CH1, BUILD_YEAR_CH2, BUILD_YEAR_CH3, L'\0' };
+    timeFiled.Year = (CSHORT)_wtoi(YearW);
+
+    RtlTimeFieldsToTime(&timeFiled, date);
+}
+
+_FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
+{
+    LARGE_INTEGER date;
+    TIME_FIELDS timeFiled = { 0 };
+    timeFiled.Day = 1 + days;
+    timeFiled.Month = 1 + months;
+    timeFiled.Year = 1601 + years;
+    RtlTimeFieldsToTime(&timeFiled, &date);
+    return date.QuadPart;
+}
+
+
+#define SOFTWARE_NAME L"Sandboxie-Plus"
+
 _FX NTSTATUS KphValidateCertificate(void)
 {
+    BOOLEAN CertDbg = FALSE;
+
     static const WCHAR *path_cert = L"%s\\Certificate.dat";
     NTSTATUS status;
     ULONG path_len = 0;
@@ -418,6 +500,11 @@ _FX NTSTATUS KphValidateCertificate(void)
     WCHAR *line = NULL; //512 wchars
     char *temp = NULL; //1024 chars, utf8 encoded
     int line_num = 0;
+
+    WCHAR* type = NULL;
+    WCHAR* level = NULL;
+    //WCHAR* key = NULL;
+    LARGE_INTEGER cert_date = { 0 };
 
     if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
@@ -500,27 +587,65 @@ _FX NTSTATUS KphValidateCertificate(void)
         }
         *ptr = L'\0';
 
-        //
-        // hash the new tag
-        //
-
         /*if (*value == '"') {
             value++;
             value[wcslen(value) - 1] = 0;
         }*/
 
-        if (wcscmp(L"SIGNATURE", name) == 0 && signature == NULL) {
+        //
+        // Extract and decode the signature
+        //
+
+        if (_wcsicmp(L"SIGNATURE", name) == 0 && signature == NULL) {
             signatureSize = b64_decoded_size(value);
             signature = Mem_Alloc(Driver_Pool, signatureSize);
+            if (!signature) {
+                status = STATUS_INSUFFICIENT_RESOURCES;
+                goto CleanupExit;
+            }
             b64_decode(value, signature, signatureSize);
             goto next;
         }
+
+        //
+        // Hash the tag
+        //
 
         if (NT_SUCCESS(RtlUnicodeToUTF8N(temp, line_size, &temp_len, name, wcslen(name) * sizeof(wchar_t))))
             MyHashData(&hashObj, temp, temp_len);
         
         if (NT_SUCCESS(RtlUnicodeToUTF8N(temp, line_size, &temp_len, value, wcslen(value) * sizeof(wchar_t))))
             MyHashData(&hashObj, temp, temp_len);
+
+        //
+        // Note: when parsing we may change the value of value, by adding \0's, hence we do all that after the hashing
+        //
+
+        if (_wcsicmp(L"DATE", name) == 0 && cert_date.QuadPart == 0) {
+            // DD.MM.YYYY
+            KphParseDate(value, &cert_date);
+        }
+        else if (_wcsicmp(L"TYPE", name) == 0 && type == NULL) {
+            // TYPE-LEVEL
+            WCHAR* ptr = wcschr(value, L'-');
+            if (ptr != NULL) {
+                *ptr++ = L'\0';
+                if(level == NULL) level = Mem_AllocString(Driver_Pool, ptr);
+            }
+            type = Mem_AllocString(Driver_Pool, value);
+        }
+        else if (_wcsicmp(L"LEVEL", name) == 0 && level == NULL) {
+            level = Mem_AllocString(Driver_Pool, value);
+        }
+        //else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
+        //    key = Mem_AllocString(Driver_Pool, value);
+        //}
+        else if (_wcsicmp(L"SOFTWARE", name) == 0) { // if software is specified it must be the right one
+            if (_wcsicmp(value, SOFTWARE_NAME) != 0) {
+                status = STATUS_OBJECT_TYPE_MISMATCH;
+                goto CleanupExit;
+            }
+        }
             
     next:
         status = Conf_Read_Line(stream, line, &line_num);
@@ -538,22 +663,79 @@ _FX NTSTATUS KphValidateCertificate(void)
     }
 
     status = KphVerifySignature(hash, hashSize, signature, signatureSize);
-    DbgPrint("Sbie Cert status: %08x\n", status);
 
+    if (NT_SUCCESS(status)) {
+
+        if(CertDbg) DbgPrint("Sbie Cert type: %S-%S\n", type, level);
+
+        TIME_FIELDS timeFiled = { 0 };
+        if (CertDbg) {
+            RtlTimeToTimeFields(&cert_date, &timeFiled);
+            DbgPrint("Sbie Cert date: %02d.%02d.%d\n", timeFiled.Day, timeFiled.Month, timeFiled.Year);
+        }
+
+        LARGE_INTEGER BuildDate = { 0 };
+        KphGetBuildDate(&BuildDate);
+
+        if (CertDbg) {
+            RtlTimeToTimeFields(&BuildDate, &timeFiled);
+            if (CertDbg) DbgPrint("Sbie Build date: %02d.%02d.%d\n", timeFiled.Day, timeFiled.Month, timeFiled.Year);
+        }
+
+        LARGE_INTEGER SystemTime;
+        LARGE_INTEGER LocalTime;
+        KeQuerySystemTime(&SystemTime);
+        ExSystemTimeToLocalTime(&SystemTime, &LocalTime);
+        if (CertDbg) {
+            RtlTimeToTimeFields(&LocalTime, &timeFiled);
+            DbgPrint("Sbie Current time: %02d:%02d:%02d %02d.%02d.%d\n"
+                , timeFiled.Hour, timeFiled.Minute, timeFiled.Second, timeFiled.Day, timeFiled.Month, timeFiled.Year);
+        }
+
+        if (!type && level) { // fix for some early hand crafted contributor certificates
+            type = level;
+            level = NULL;
+        }
+
+        if (type && _wcsicmp(type, L"CONTRIBUTOR") == 0) {
+            // forever - nothing to check here
+        }
+        else if (type && _wcsicmp(type, L"PATREON") == 0) {
+            // todo: expire patrons which have left, use the update key
+        }
+        else if (type && _wcsicmp(type, L"BUSINESS") == 0) {
+            if (cert_date.QuadPart + KphGetDateInterval(0, 0, 1) < LocalTime.QuadPart) // valid for 1 year
+                status = STATUS_ACCOUNT_EXPIRED;
+        }
+        else /*if (!type || _wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"SUPPORTER") == 0) */ {
+            if (level && _wcsicmp(level, L"LARGE") == 0) {
+                // ok for now
+            }
+            else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // valid for all builds released with 1 year 
+                if (cert_date.QuadPart + KphGetDateInterval(0, 0, 1) < BuildDate.QuadPart) 
+                    status = STATUS_ACCOUNT_EXPIRED;
+            }
+            else /*if (!level || _wcsicmp(level, L"SMALL") == 0)*/ { // valid for 1 year
+                if (cert_date.QuadPart + KphGetDateInterval(0, 0, 1) < LocalTime.QuadPart) 
+                    status = STATUS_ACCOUNT_EXPIRED;
+            }
+        }
+    }
 
 CleanupExit:
-    if(path)
-        Mem_Free(path, path_len);    
-    if(line)
-        Mem_Free(line, line_size);
-    if(temp)
-        Mem_Free(temp, line_size);
+    if(CertDbg)     DbgPrint("Sbie Cert status: %08x\n", status);
 
-    MyFreeHash(&hashObj);
-    if(hash)
-        ExFreePoolWithTag(hash, 'vhpK');
-    if(signature)
-        Mem_Free(signature, signatureSize);
+    if(path)        Mem_Free(path, path_len);    
+    if(line)        Mem_Free(line, line_size);
+    if(temp)        Mem_Free(temp, line_size);
+
+    if (type)       Mem_FreeString(type);
+    if (level)      Mem_FreeString(level);
+    //if (key)        Mem_FreeString(key);
+
+                    MyFreeHash(&hashObj);
+    if(hash)        ExFreePoolWithTag(hash, 'vhpK');
+    if(signature)   Mem_Free(signature, signatureSize);
 
     return status;
 }

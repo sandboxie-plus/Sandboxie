@@ -3626,7 +3626,7 @@ _FX NTSTATUS File_SetReparsePoint(
 
         objname.Length = NameLength;
         objname.MaximumLength = objname.Length;
-        objname.Buffer = (WCHAR *)(Data + 0x10 + NameOffset);;
+        objname.Buffer = (WCHAR *)(Data + 0x10 + NameOffset);
 
         status = File_GetName(NULL, &objname, &TruePath, &CopyPath, NULL);
         if (! NT_SUCCESS(status))
@@ -4112,16 +4112,16 @@ _FX void File_UnScrambleShortName(WCHAR* ShortName, ULONG ScramKey)
 //---------------------------------------------------------------------------
 
 
-_FX void Key_CreateBaseFolders()
-{
-    //
-    // in privacy mode we need to pre create some folders or else programs may fail
-    //
-
-    File_CreateBoxedPath(File_SysVolume);
-
-    if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
-        File_CreateBoxedPath(File_AllUsers);
-        File_CreateBoxedPath(File_CurrentUser);
-    }
-}
+//_FX void Key_CreateBaseFolders()
+//{
+//    //
+//    // in privacy mode we need to pre create some folders or else programs may fail
+//    //
+//
+//    File_CreateBoxedPath(File_SysVolume);
+//
+//    if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+//        File_CreateBoxedPath(File_AllUsers);
+//        File_CreateBoxedPath(File_CurrentUser);
+//    }
+//}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>CFileBrowserWindow</name>
     <message>
@@ -103,21 +103,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="243"/>
-        <source>Closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsAccess.cpp" line="244"/>
-        <source>Closed RT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsAccess.cpp" line="245"/>
-        <source>Read Only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
@@ -130,6 +115,21 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Open for All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAccess.cpp" line="243"/>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAccess.cpp" line="244"/>
+        <source>Closed RT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAccess.cpp" line="245"/>
+        <source>Read Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -929,6 +929,11 @@ Full path: %4</source>
 <context>
     <name>CSandMan</name>
     <message>
+        <location filename="main.cpp" line="77"/>
+        <source>Sandboxie Manager can not be run sandboxed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="115"/>
         <location filename="SandMan.cpp" line="916"/>
         <source>Sandboxie-Plus v%1</source>
@@ -1340,6 +1345,21 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1122"/>
+        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1124"/>
+        <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="1125"/>
+        <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1153"/>
         <source>PID %1: </source>
         <translation type="unfinished"></translation>
@@ -1446,48 +1466,8 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1845"/>
-        <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="2275"/>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="2283"/>
-        <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="2285"/>
-        <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="2288"/>
-        <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1814"/>
         <source>Administrator rights are required for this operation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1122"/>
-        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1124"/>
-        <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1125"/>
-        <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1631,6 +1611,11 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1845"/>
+        <source>Unknown Error Status: 0x%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1865"/>
         <source>Operation failed for %1 item(s).</source>
         <translation type="unfinished"></translation>
@@ -1712,6 +1697,26 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="2275"/>
+        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2283"/>
+        <source>This copy of Sandboxie+ is certified for: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2285"/>
+        <source>Sandboxie+ is free for personal and non-commercial use.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2288"/>
+        <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="2466"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation type="unfinished"></translation>
@@ -1729,11 +1734,6 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2563"/>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="main.cpp" line="77"/>
-        <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1934,13 +1934,13 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="515"/>
-        <source>Forced </source>
+        <location filename="SbiePlusAPI.cpp" line="513"/>
+        <source>Running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="513"/>
-        <source>Running</source>
+        <location filename="SbiePlusAPI.cpp" line="515"/>
+        <source>Forced </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1959,6 +1959,16 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="77"/>
         <source>Create New Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="78"/>
+        <source>Create Box Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="79"/>
+        <source>Rename Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1992,6 +2002,26 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="89"/>
+        <source>Command Prompt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="90"/>
+        <source>Boxed Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="91"/>
+        <source>Command Prompt (as Admin)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="93"/>
+        <source>Command Prompt (32-bit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="95"/>
         <source>Windows Explorer</source>
         <translation type="unfinished"></translation>
@@ -2007,8 +2037,23 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="98"/>
+        <source>Execute Autorun Entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="101"/>
         <source>Terminate All Programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="103"/>
+        <source>Browse Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="104"/>
+        <source>Box Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2020,6 +2065,11 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="107"/>
         <source>Explore Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="108"/>
+        <source>Open Registry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2035,6 +2085,11 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="111"/>
         <source>Delete Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="113"/>
+        <source>Sandbox Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2068,13 +2123,28 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="113"/>
-        <source>Sandbox Options</source>
+        <location filename="Views/SbieView.cpp" line="132"/>
+        <source>Duplicate Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="133"/>
         <source>Rename Sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="135"/>
+        <source>Move Box/Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="136"/>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="141"/>
+        <source>Move Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2152,86 +2222,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="703"/>
-        <source>Please enter a new group name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="598"/>
-        <source>Do you really want to remove the selected group(s)?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="78"/>
-        <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="79"/>
-        <source>Rename Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="89"/>
-        <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="90"/>
-        <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="91"/>
-        <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="93"/>
-        <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="98"/>
-        <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="103"/>
-        <source>Browse Content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="104"/>
-        <source>Box Content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="108"/>
-        <source>Open Registry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="132"/>
-        <source>Duplicate Sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="135"/>
-        <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="136"/>
-        <source>Move Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/SbieView.cpp" line="141"/>
-        <source>Move Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="584"/>
         <source>Please enter a new name for the Group.</source>
         <translation type="unfinished"></translation>
@@ -2242,6 +2232,11 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Views/SbieView.cpp" line="598"/>
+        <source>Do you really want to remove the selected group(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/SbieView.cpp" line="631"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation type="unfinished"></translation>
@@ -2249,6 +2244,11 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="665"/>
         <source>A group can not be its own parent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/SbieView.cpp" line="703"/>
+        <source>Please enter a new group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2595,6 +2595,16 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Views/TraceView.cpp" line="265"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/TraceView.cpp" line="272"/>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Views/TraceView.cpp" line="340"/>
         <source>Save trace log to file</source>
         <translation type="unfinished"></translation>
@@ -2607,16 +2617,6 @@ No will choose: %2</source>
     <message>
         <location filename="Views/TraceView.cpp" line="362"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/TraceView.cpp" line="265"/>
-        <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Views/TraceView.cpp" line="272"/>
-        <source>%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2636,6 +2636,11 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/NewBoxWindow.ui" line="47"/>
+        <source>Sandbox Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/NewBoxWindow.ui" line="54"/>
         <source>Box Type Preset:</source>
         <translation type="unfinished"></translation>
@@ -2648,11 +2653,6 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/NewBoxWindow.ui" line="47"/>
-        <source>Sandbox Name:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2674,31 +2674,23 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="77"/>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="101"/>
+        <source>General Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="111"/>
+        <source>Box Type Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="121"/>
         <source>Sandbox Indicator in title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="141"/>
-        <source>Sandboxed window border:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="468"/>
-        <location filename="Forms/OptionsWindow.ui" line="638"/>
-        <location filename="Forms/OptionsWindow.ui" line="668"/>
-        <location filename="Forms/OptionsWindow.ui" line="704"/>
-        <source>Protect the system from sandboxed processes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="471"/>
-        <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="545"/>
-        <source>Drop rights from Administrators and Power Users groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2707,28 +2699,23 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="495"/>
-        <source>Make applications think they are running elevated (allows to run installers safely)</source>
+        <location filename="Forms/OptionsWindow.ui" line="141"/>
+        <source>Sandboxed window border:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="485"/>
-        <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="77"/>
-        <source>Appearance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="454"/>
-        <source>(Recommended)</source>
+        <location filename="Forms/OptionsWindow.ui" line="151"/>
+        <source>Box info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="184"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="226"/>
+        <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2792,8 +2779,66 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="413"/>
+        <source>Admin Rights</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="454"/>
+        <source>(Recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="468"/>
+        <location filename="Forms/OptionsWindow.ui" line="638"/>
+        <location filename="Forms/OptionsWindow.ui" line="668"/>
+        <location filename="Forms/OptionsWindow.ui" line="704"/>
+        <source>Protect the system from sandboxed processes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="471"/>
+        <source>Elevation restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="485"/>
+        <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="495"/>
+        <source>Make applications think they are running elevated (allows to run installers safely)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="502"/>
+        <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="535"/>
+        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="545"/>
+        <source>Drop rights from Administrators and Power Users groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="552"/>
+        <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="562"/>
         <source>Access Restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="570"/>
+        <source>Open Windows Credentials Store (user mode)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2839,6 +2884,11 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="714"/>
         <source>Block network files and folders, unless specifically opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="721"/>
+        <source>Prevent change to network and firewall parameters (user mode)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2932,6 +2982,21 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="965"/>
+        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="982"/>
+        <location filename="Forms/OptionsWindow.ui" line="1063"/>
+        <location filename="Forms/OptionsWindow.ui" line="1142"/>
+        <location filename="Forms/OptionsWindow.ui" line="1495"/>
+        <location filename="Forms/OptionsWindow.ui" line="1688"/>
+        <location filename="Forms/OptionsWindow.ui" line="1889"/>
+        <source>Show Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="992"/>
         <source>Forced Programs</source>
         <translation type="unfinished"></translation>
@@ -2951,71 +3016,6 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1043"/>
         <source>Force Program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="982"/>
-        <location filename="Forms/OptionsWindow.ui" line="1063"/>
-        <location filename="Forms/OptionsWindow.ui" line="1142"/>
-        <location filename="Forms/OptionsWindow.ui" line="1495"/>
-        <location filename="Forms/OptionsWindow.ui" line="1688"/>
-        <location filename="Forms/OptionsWindow.ui" line="1889"/>
-        <source>Show Templates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="535"/>
-        <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="552"/>
-        <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="502"/>
-        <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="101"/>
-        <source>General Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="111"/>
-        <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="151"/>
-        <source>Box info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="226"/>
-        <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="413"/>
-        <source>Admin Rights</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="570"/>
-        <source>Open Windows Credentials Store (user mode)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="721"/>
-        <source>Prevent change to network and firewall parameters (user mode)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="965"/>
-        <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3119,6 +3119,11 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="1371"/>
+        <source>Network Firewall Rules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
         <source>Test Rules, Program:</source>
         <translation type="unfinished"></translation>
@@ -3195,30 +3200,15 @@ If leader processes are defined, all others are treated as lingering processes.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1575"/>
-        <source>Configure which processes can access what resources. Double click on an entry to edit it.
-&apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
-You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1707"/>
-        <source>Add File/Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
         <source>Add Wnd Class</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1654"/>
-        <source>Add IPC Path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1615"/>
-        <source>Add Reg Key</source>
+        <location filename="Forms/OptionsWindow.ui" line="1575"/>
+        <source>Configure which processes can access what resources. Double click on an entry to edit it.
+&apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
+You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3227,97 +3217,18 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1847"/>
-        <source>File Recovery</source>
+        <location filename="Forms/OptionsWindow.ui" line="1615"/>
+        <source>Add Reg Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1868"/>
-        <source>Add Folder</source>
+        <location filename="Forms/OptionsWindow.ui" line="1654"/>
+        <source>Add IPC Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1875"/>
-        <source>Ignore Extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1882"/>
-        <source>Ignore Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1896"/>
-        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1940"/>
-        <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1950"/>
-        <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1963"/>
-        <source>Advanced Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1989"/>
-        <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2087"/>
-        <source>Don&apos;t alter window class names created by sandboxed programs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2018"/>
-        <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2142"/>
-        <location filename="Forms/OptionsWindow.ui" line="2159"/>
-        <location filename="Forms/OptionsWindow.ui" line="2275"/>
-        <location filename="Forms/OptionsWindow.ui" line="2319"/>
-        <source>Protect the sandbox integrity itself</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2004"/>
-        <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2060"/>
-        <location filename="Forms/OptionsWindow.ui" line="2128"/>
-        <source>(Security Critical)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2025"/>
-        <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2145"/>
-        <source>Sandbox isolation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2046"/>
-        <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="1371"/>
-        <source>Network Firewall Rules</source>
+        <location filename="Forms/OptionsWindow.ui" line="1707"/>
+        <source>Add File/Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3367,28 +3278,48 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2080"/>
-        <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
+        <location filename="Forms/OptionsWindow.ui" line="1847"/>
+        <source>File Recovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2039"/>
-        <source>Allow only privileged processes to access the Service Control Manager</source>
+        <location filename="Forms/OptionsWindow.ui" line="1868"/>
+        <source>Add Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2101"/>
-        <source>Compatibility</source>
+        <location filename="Forms/OptionsWindow.ui" line="1875"/>
+        <source>Ignore Extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2032"/>
-        <source>Open access to COM infrastructure (not recommended)</source>
+        <location filename="Forms/OptionsWindow.ui" line="1882"/>
+        <source>Ignore Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2011"/>
-        <source>Add sandboxed processes to job objects (recommended)</source>
+        <location filename="Forms/OptionsWindow.ui" line="1896"/>
+        <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1940"/>
+        <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1950"/>
+        <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1963"/>
+        <source>Advanced Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1989"/>
+        <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3397,8 +3328,87 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="2004"/>
+        <source>Drop critical privileges from processes running with a SYSTEM token</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2011"/>
+        <source>Add sandboxed processes to job objects (recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2018"/>
+        <source>Do not start sandboxed services using a system token (recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2025"/>
+        <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2032"/>
+        <source>Open access to COM infrastructure (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2039"/>
+        <source>Allow only privileged processes to access the Service Control Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2046"/>
+        <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2060"/>
+        <location filename="Forms/OptionsWindow.ui" line="2128"/>
+        <source>(Security Critical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2080"/>
+        <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2087"/>
+        <source>Don&apos;t alter window class names created by sandboxed programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2101"/>
+        <source>Compatibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2142"/>
+        <location filename="Forms/OptionsWindow.ui" line="2159"/>
+        <location filename="Forms/OptionsWindow.ui" line="2275"/>
+        <location filename="Forms/OptionsWindow.ui" line="2319"/>
+        <source>Protect the sandbox integrity itself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2145"/>
+        <source>Sandbox isolation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2162"/>
+        <source>COM/RPC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="2169"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2176"/>
+        <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3409,6 +3419,11 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2194"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2204"/>
+        <source>Open access to Windows Local Security Authority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3429,21 +3444,6 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2261"/>
         <source>Open access to Windows Security Account Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2204"/>
-        <source>Open access to Windows Local Security Authority</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2162"/>
-        <source>COM/RPC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2176"/>
-        <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3798,23 +3798,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="117"/>
-        <source>Recover target:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/RecoveryWindow.ui" line="146"/>
-        <source>Add Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/RecoveryWindow.ui" line="139"/>
-        <source>Recover</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/RecoveryWindow.ui" line="153"/>
-        <source>Refresh</source>
+        <location filename="Forms/RecoveryWindow.ui" line="90"/>
+        <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3828,8 +3813,23 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="90"/>
-        <source>TextLabel</source>
+        <location filename="Forms/RecoveryWindow.ui" line="117"/>
+        <source>Recover target:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="139"/>
+        <source>Recover</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="146"/>
+        <source>Add Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="153"/>
+        <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3879,13 +3879,18 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="161"/>
-        <source>Show first recovery window when emptying sandboxes</source>
+        <location filename="Forms/SettingsWindow.ui" line="60"/>
+        <source>Open urls from this ui sandboxed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="60"/>
-        <source>Open urls from this ui sandboxed</source>
+        <location filename="Forms/SettingsWindow.ui" line="70"/>
+        <source>Show Notifications for relevant log Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="86"/>
+        <source>Restart required (!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3894,8 +3899,43 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="123"/>
+        <source>Watch Sandboxie.ini for changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="132"/>
+        <source>Hotkey for terminating all boxed processes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="144"/>
+        <source>Show recoverable files as notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="151"/>
+        <source>Use Dark Theme (fully applied after a restart)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="161"/>
+        <source>Show first recovery window when emptying sandboxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="168"/>
+        <source>On main window close:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="204"/>
+        <source>Show Icon in Systray:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3909,6 +3949,16 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="255"/>
+        <source>Start UI with Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="262"/>
+        <source>Always use DefaultBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="289"/>
         <source>Start Sandbox Manager</source>
         <translation type="unfinished"></translation>
@@ -3919,43 +3969,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="168"/>
-        <source>On main window close:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="151"/>
-        <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="86"/>
-        <source>Restart required (!)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="70"/>
-        <source>Show Notifications for relevant log Messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="255"/>
-        <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="303"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="132"/>
-        <source>Hotkey for terminating all boxed processes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="262"/>
-        <source>Always use DefaultBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3964,18 +3979,28 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="464"/>
-        <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
+        <location filename="Forms/SettingsWindow.ui" line="360"/>
+        <source>Portable root folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="605"/>
-        <source>Clear password when main window becomes hidden</source>
+        <location filename="Forms/SettingsWindow.ui" line="367"/>
+        <source>Use Windows Filtering Platform to restrict network access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="380"/>
         <source>Separate user folders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="393"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="400"/>
+        <source>Activate Kernel Mode Object Filtering (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3989,13 +4014,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="598"/>
-        <source>Config protection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="393"/>
-        <source>...</source>
+        <location filename="Forms/SettingsWindow.ui" line="441"/>
+        <source>Sandboxing features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4004,58 +4024,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="441"/>
-        <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="633"/>
-        <source>Change Password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="626"/>
-        <source>Password must be entered in order to make changes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="612"/>
-        <source>Only Administrator user accounts can make changes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="123"/>
-        <source>Watch Sandboxie.ini for changes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="619"/>
-        <source>Only Administrator user accounts can use Disable Forced Programs command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="360"/>
-        <source>Portable root folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="144"/>
-        <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="204"/>
-        <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="367"/>
-        <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="400"/>
-        <source>Activate Kernel Mode Object Filtering (experimental)</source>
+        <location filename="Forms/SettingsWindow.ui" line="464"/>
+        <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4115,6 +4085,36 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="598"/>
+        <source>Config protection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="605"/>
+        <source>Clear password when main window becomes hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="612"/>
+        <source>Only Administrator user accounts can make changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="619"/>
+        <source>Only Administrator user accounts can use Disable Forced Programs command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="626"/>
+        <source>Password must be entered in order to make changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="633"/>
+        <source>Change Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="656"/>
         <source>Compatibility</source>
         <translation type="unfinished"></translation>
@@ -4145,6 +4145,16 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="744"/>
+        <source>Install updates automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="751"/>
+        <source>Check periodically for updates of Sandboxie-Plus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="764"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
@@ -4167,16 +4177,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="834"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="744"/>
-        <source>Install updates automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="751"/>
-        <source>Check periodically for updates of Sandboxie-Plus</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

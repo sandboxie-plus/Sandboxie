@@ -110,7 +110,7 @@ NTSTATUS WFP_RegisterCallout(const GUID* calloutKey, const GUID* applicableLayer
 
 const WCHAR* Process_MatchImageAndGetValue(BOX* box, const WCHAR* value, const WCHAR* ImageName, ULONG* pLevel);
 
-ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);;
+ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
 
 void WFP_FreeRules(LIST* NetFwRules);
 

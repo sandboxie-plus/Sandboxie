@@ -351,8 +351,8 @@ _FX NTSTATUS MyValidateCertificate(void)
 
     Driver_Certified = NT_SUCCESS(status);
 
-    //if (status == STATUS_ACCOUNT_EXPIRED)
-    //    status = STATUS_SUCCESS;
+    if (status == STATUS_ACCOUNT_EXPIRED)
+        status = STATUS_SUCCESS;
 
     return status;
 }

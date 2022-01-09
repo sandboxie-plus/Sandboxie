@@ -97,6 +97,12 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
     UNICODE_STRING uni;
     IO_STATUS_BLOCK MyIoStatusBlock;
 
+    if (parms == NULL) { // close request as used by kmdutil
+        if(SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
+            NtClose(SbieApi_DeviceHandle);
+        SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
+    }
+
     if (Dll_SbieTrace && parms[0] != API_MONITOR_PUT2) {
         WCHAR dbg[1024];
         extern const wchar_t* Trace_SbieDrvFunc2Str(ULONG func);

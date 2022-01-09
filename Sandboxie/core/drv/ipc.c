@@ -374,14 +374,14 @@ _FX BOOLEAN Ipc_CreateBoxPath(PROCESS *proc)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
+_FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
 {
 #ifdef USE_MATCH_PATH_EX
-    static const WCHAR *_NormalPath = L"NormalIpcPath";
+    static const WCHAR* _NormalPath = L"NormalIpcPath";
 #endif
-    static const WCHAR *_OpenPath = L"OpenIpcPath";
-    static const WCHAR *_ClosedPath = L"ClosedIpcPath";
-    static const WCHAR *openpaths[] = {
+    static const WCHAR* _OpenPath = L"OpenIpcPath";
+    static const WCHAR* _ClosedPath = L"ClosedIpcPath";
+    static const WCHAR* openpaths[] = {
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\SharedSection",
@@ -507,7 +507,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"\\...\\*",        // objects in an unnamed directory
         NULL
     };
-    static const WCHAR *openpaths_vista[] = {
+    static const WCHAR* openpaths_vista[] = {
         //
         // misc services (vista)
         //
@@ -532,7 +532,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
 #endif _WIN64
         NULL
     };
-    static const WCHAR *openpaths_windows7[] = {
+    static const WCHAR* openpaths_windows7[] = {
         L"\\ConsoleEvent-0x*",
         L"*\\BaseNamedObjects*\\ConsoleEvent-0x*",
         L"\\RPC Control\\console-0x*-lpc-handle",
@@ -547,7 +547,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
         L"*\\BaseNamedObjects*\\FntCache-*",
         NULL
     };
-    static const WCHAR *openpaths_windows8[] = {
+    static const WCHAR* openpaths_windows8[] = {
         L"\\Windows\\Theme*",
         L"\\Sessions\\*\\Windows\\Theme*",
         L"\\Sessions\\*\\Windows\\DwmApiPort",
@@ -562,7 +562,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
 #endif _WIN64
         NULL
     };
-    static const WCHAR *openpaths_windows10[] = {
+    static const WCHAR* openpaths_windows10[] = {
         L"*\\BaseNamedObjects*\\CoreMessagingRegistrar",
         L"\\RPC Control\\webcache_*",
         L"*\\BaseNamedObjects\\windows_webcache_counters_*",
@@ -579,20 +579,22 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS *proc)
 
     ULONG i;
     BOOLEAN ok;
-    
+
     //
     // normal paths
     //
-    
+
 #ifdef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, &proc->normal_ipc_paths, _NormalPath, FALSE);
-    if (! ok) {
+    if (!ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
         return FALSE;
     }
 
-    //for (i = 0; normalpaths[i] && ok; ++i) {
-    //    ok = Process_AddPath(proc, &proc->normal_ipc_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+    //if (proc->use_privacy_mode) {
+    //    for (i = 0; normalpaths[i] && ok; ++i) {
+    //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+    //    }
     //}
     //
     //if (! ok) {

@@ -377,7 +377,7 @@ MSG_HEADER *FileServer::LoadKey(MSG_HEADER *msg, HANDLE idProcess)
     NTSTATUS status = SbieApi_QueryProcess(
         idProcess, NULL, NULL, NULL, NULL);
     if (! NT_SUCCESS(status))
-        return SHORT_REPLY(STATUS_ACCESS_DENIED);;
+        return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
     //
     // this request is needed for Windows 7 TrustedInstaller trying to:

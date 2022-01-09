@@ -341,8 +341,8 @@ static void *File_Wow64DisableWow64FsRedirection = NULL;
 static void *File_Wow64RevertWow64FsRedirection = NULL;
 #endif WOW64_FS_REDIR
 
-static WCHAR *File_SysVolume = NULL;
-static ULONG File_SysVolumeLen = 0;
+//static WCHAR *File_SysVolume = NULL;
+//static ULONG File_SysVolumeLen = 0;
 
 static WCHAR *File_AllUsers = NULL;
 static ULONG File_AllUsersLen = 0;
@@ -2414,6 +2414,12 @@ _FX NTSTATUS File_NtCreateFileImpl(
             FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
             AllocationSize, FileAttributes, ShareAccess, CreateDisposition,
             CreateOptions, EaBuffer, EaLength);
+    }*/
+
+    /*if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && wcsstr(ObjectAttributes->ObjectName->Buffer, L"Game.ini") != NULL ) {
+        while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
+           __debugbreak();
     }*/
 
     //

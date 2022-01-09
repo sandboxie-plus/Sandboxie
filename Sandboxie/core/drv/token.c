@@ -62,7 +62,7 @@ static NTSTATUS Token_FilterDacl(void *TokenObject, ULONG SessionId);
 static NTSTATUS Token_SetHandleDacl(HANDLE Handle, ACL *Dacl);
 
 static void *Token_RestrictHelper1(
-    void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc);
+    void *TokenObject, PROCESS *proc);
 
 static NTSTATUS Token_RestrictHelper2(
     void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc);
@@ -74,6 +74,9 @@ static void *Token_RestrictHelper3(
 static BOOLEAN Token_AssignPrimary(
     void *ProcessObject, void *TokenObject, ULONG SessionId);
 
+static void *Token_DuplicateToken(void *TokenObject, PROCESS *proc);
+
+static void *Token_CreateNew(void *TokenObject, PROCESS *proc);
 
 //---------------------------------------------------------------------------
 
@@ -485,11 +488,11 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
         return NULL;
     }
 
-	// OpenToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)) {
+	// UnfilteredToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)) {
 		return PrimaryToken;
 	}
-	// OpenToken END
+	// UnfilteredToken END
 
     // DbgPrint("   Process Token %08X - %d <%S>\n", PrimaryToken, proc->pid, proc->image_name);
 
@@ -842,82 +845,90 @@ _FX void *Token_Restrict(
     TOKEN_PRIVILEGES *privs;
     TOKEN_USER *user;
     void *NewTokenObject = NULL;
-	
-    /*if (Conf_Get_Boolean(proc->box->name, L"CreateToken", 0, FALSE))
-    {
-        
-    }*/
+    void* FixedTokenObject;
 
-	// OpenToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
+	// UnrestrictedToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)) {
 
-		//NTSTATUS status = SeFilterToken(TokenObject, 0, NULL, NULL, NULL, &NewTokenObject);
+        //NTSTATUS status = SeFilterToken(TokenObject, 0, NULL, NULL, NULL, &NewTokenObject);
         //if(!NT_SUCCESS(status))
         //    Log_Status_Ex_Process(MSG_1222, 0xA0, status, NULL, proc->box->session_id, proc->pid);
+        // return NewTokenObject;
 
-        HANDLE OldTokenHandle;
-        NTSTATUS status = ObOpenObjectByPointer(
-            TokenObject, OBJ_KERNEL_HANDLE, NULL, TOKEN_ALL_ACCESS,
-            *SeTokenObjectType, KernelMode, &OldTokenHandle);
-        if (NT_SUCCESS(status)) {
-
-            HANDLE NewTokenHandle;
-            status = ZwDuplicateToken(OldTokenHandle, TOKEN_ALL_ACCESS, NULL,
-                FALSE, TokenPrimary, &NewTokenHandle);
-            if (NT_SUCCESS(status)) {
-
-                status = ObReferenceObjectByHandle(NewTokenHandle, 0, *SeTokenObjectType,
-                    UserMode, &NewTokenObject, NULL);
-                if (!NT_SUCCESS(status))
-                    Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
-
-                NtClose(NewTokenHandle);
-            }
-            else
-                Log_Status_Ex_Process(MSG_1222, 0xA2, status, NULL, proc->box->session_id, proc->pid);
-
-            ZwClose(OldTokenHandle);
-        }
-        else
-            Log_Status_Ex_Process(MSG_1222, 0xA1, status, NULL, proc->box->session_id, proc->pid);
-
-		return NewTokenObject;
+        return Token_DuplicateToken(TokenObject, proc);
 	}
-	// OpenToken END
+	// UnrestrictedToken END
 
-    groups = Token_Query(TokenObject, TokenGroups, proc->box->session_id);
-    privs = Token_Query(TokenObject, TokenPrivileges, proc->box->session_id);
-    user = Token_Query(TokenObject, TokenUser, proc->box->session_id);
+    //
+    // Create a heavily restricted primary token
+    //
 
-    if (groups && privs && user) {
+    if (Conf_Get_Boolean(proc->box->name, L"CreateToken", 0, FALSE)) {
+            
+        //
+        // Create a new token from scratch, experimental
+        //
 
-        void *FixedTokenObject = Token_RestrictHelper1(
-            TokenObject, OutIntegrityLevel, proc);
+        FixedTokenObject = Token_CreateNew(TokenObject, proc);
+    }
+    else {
+            
+        //
+        // Create a modified token from the original one
+        //
+
+        FixedTokenObject = Token_RestrictHelper1(TokenObject, proc);
+    }
+
+    //
+    // on Windows Vista, set the untrusted integrity integrity label,
+    // primarily to prevent programs in the sandbox from being able to
+    // call PostThreadMessage to threads of programs outside the sandbox
+    // and to prevent injection of Win32 and WinEvent hooks
+    //
+
+    if (FixedTokenObject) {
+
+        NTSTATUS status = Token_RestrictHelper2(
+            FixedTokenObject, OutIntegrityLevel, proc);
+
+        if (!NT_SUCCESS(status)) {
+
+            ObDereferenceObject(FixedTokenObject);
+            FixedTokenObject = NULL;
+        }
+    }
+
+    if (FixedTokenObject) {
 
         // OpenToken BEGIN
         if (Conf_Get_Boolean(proc->box->name, L"UnstrippedToken", 0, FALSE))
-            NewTokenObject = FixedTokenObject;
-        else
+            return FixedTokenObject;
         // OpenToken END
-        if (FixedTokenObject) {
 
-            TOKEN_PRIVILEGES *privs_arg =
+        groups = Token_Query(TokenObject, TokenGroups, proc->box->session_id);
+        privs = Token_Query(TokenObject, TokenPrivileges, proc->box->session_id);
+        user = Token_Query(TokenObject, TokenUser, proc->box->session_id);
+
+        if (groups && privs && user) {
+
+            TOKEN_PRIVILEGES* privs_arg =
                 (FilterFlags & DISABLE_MAX_PRIVILEGE) ? NULL : privs;
 
             NewTokenObject = Token_RestrictHelper3(
                 FixedTokenObject, groups, privs_arg,
                 user->User.Sid, FilterFlags, proc);
-
-            ObDereferenceObject(FixedTokenObject);
         }
-    }
+            
+        ObDereferenceObject(FixedTokenObject);
 
-    if (user)
-        ExFreePool(user);
-    if (privs)
-        ExFreePool(privs);
-    if (groups)
-        ExFreePool(groups);
+        if (user)
+            ExFreePool(user);
+        if (privs)
+            ExFreePool(privs);
+        if (groups)
+            ExFreePool(groups);
+    }
 
     return NewTokenObject;
 }
@@ -1070,7 +1081,7 @@ _FX BOOLEAN Token_IsSharedSid_W8(void *TokenObject)
 
 
 _FX void *Token_RestrictHelper1(
-    void *TokenObject, ULONG *OutIntegrityLevel, PROCESS *proc)
+    void *TokenObject, PROCESS *proc)
 {
     void *NewTokenObject = NULL;
     SID_AND_ATTRIBUTES *SidAndAttrsInToken = NULL;
@@ -1311,25 +1322,6 @@ _FX void *Token_RestrictHelper1(
         }
         else
             status = STATUS_UNKNOWN_REVISION;
-
-        //
-        // on Windows Vista, set the untrusted integrity integrity label,
-        // primarily to prevent programs in the sandbox from being able to
-        // call PostThreadMessage to threads of programs outside the sandbox
-        // and to prevent injection of Win32 and WinEvent hooks
-        //
-
-        if (NT_SUCCESS(status)) {
-
-            status = Token_RestrictHelper2(
-                NewTokenObject, OutIntegrityLevel, proc);
-        }
-
-        if (!NT_SUCCESS(status)) {
-
-            ObDereferenceObject(NewTokenObject);
-            NewTokenObject = NULL;
-        }
     }
 
     //
@@ -1417,6 +1409,9 @@ _FX NTSTATUS Token_RestrictHelper2(
             ZwClose(TokenHandle);
         }
     }
+
+    if (!NT_SUCCESS(status))
+		Log_Status_Ex_Process(MSG_1222, 0x33, status, NULL, proc->box->session_id, proc->pid);
 
     return status;
 }
@@ -1836,7 +1831,7 @@ _FX BOOLEAN Token_ReplacePrimary(PROCESS *proc)
 
 #ifdef _WIN64
                 // OpenToken BEGIN
-                if (!Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) 
+                if (!Conf_Get_Boolean(proc->box->name, L"CreateToken", 0, FALSE)
                  && !Conf_Get_Boolean(proc->box->name, L"UnrestrictedToken", 0, FALSE)
                   && Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
                 // OpenToken END
@@ -2026,7 +2021,7 @@ _FX NTSTATUS Sbie_SepFilterToken_KernelMode(
     return statusRet;
 }
 
-_FX NTSTATUS Sbie_SepFilterTokenHandler_asm(void* TokenObject, ULONG_PTR   SidCount, ULONG_PTR   SidPtr, ULONG_PTR   LengthIncrease, void** NewToken);
+_FX NTSTATUS Sbie_SepFilterTokenHandler_asm(void* TokenObject, ULONG_PTR SidCount, ULONG_PTR SidPtr, ULONG_PTR LengthIncrease, void** NewToken);
 
 _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
     ULONG_PTR   SidCount,
@@ -2038,9 +2033,9 @@ _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
 
 #ifdef _WIN64
     //
-    // When built with VS2019 on systems with enabled "Core Isolation" we get a BSOD pointing to _chkstk,
-    // this is a function added by the compiler under certain conditions.
-    // We work around this issue by providing a hand crafter wrapper function that performs the call.
+    // When built with VS2019 on systems with enabled "Core Isolation" (HVCI) we get a BSOD.
+    // This is caused by "Control Flow Guard", we could eider disable it for this file or,
+    // work around this issue by providing a hand crafted wrapper function that performs the call.
     //
 
     status = Sbie_SepFilterTokenHandler_asm(TokenObject, SidCount, SidPtr, LengthIncrease, NewToken);
@@ -2151,3 +2146,341 @@ _FX NTSTATUS Token_Api_Filter(PROCESS* proc, ULONG64* parms)
 
     return status;
 }
+
+
+//---------------------------------------------------------------------------
+// Token_DuplicateToken
+//---------------------------------------------------------------------------
+
+
+_FX void *Token_DuplicateToken(void *TokenObject, PROCESS *proc)
+{
+    void *NewTokenObject = NULL;
+
+    //
+    // This just duplicates a token starting with an object instead of a handle
+    // using SepDuplicateToken would be more convinient but its unexported :/
+    //
+
+    HANDLE OldTokenHandle;
+    NTSTATUS status = ObOpenObjectByPointer(
+        TokenObject, OBJ_KERNEL_HANDLE, NULL, TOKEN_ALL_ACCESS,
+        *SeTokenObjectType, KernelMode, &OldTokenHandle);
+    if (NT_SUCCESS(status)) {
+
+        HANDLE NewTokenHandle;
+        status = ZwDuplicateToken(OldTokenHandle, TOKEN_ALL_ACCESS, NULL,
+            FALSE, TokenPrimary, &NewTokenHandle);
+        if (NT_SUCCESS(status)) {
+
+            status = ObReferenceObjectByHandle(NewTokenHandle, 0, *SeTokenObjectType,
+                UserMode, &NewTokenObject, NULL);
+            if (!NT_SUCCESS(status))
+                Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
+
+            NtClose(NewTokenHandle);
+        }
+        else
+            Log_Status_Ex_Process(MSG_1222, 0xA2, status, NULL, proc->box->session_id, proc->pid);
+
+        ZwClose(OldTokenHandle);
+    }
+    else
+        Log_Status_Ex_Process(MSG_1222, 0xA1, status, NULL, proc->box->session_id, proc->pid);
+
+	return NewTokenObject;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieCreateToken
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POBJECT_ATTRIBUTES ObjectAttributes,
+    TOKEN_TYPE Type, PLUID AuthenticationId, PLARGE_INTEGER ExpirationTime, PTOKEN_USER User, PTOKEN_GROUPS Groups, PTOKEN_PRIVILEGES Privileges,
+    PTOKEN_SECURITY_ATTRIBUTES_INFORMATION UserAttributes, PTOKEN_SECURITY_ATTRIBUTES_INFORMATION DeviceAttributes,
+    PTOKEN_GROUPS DeviceGroups, PTOKEN_MANDATORY_POLICY MandatoryPolicy,
+    PTOKEN_OWNER Owner, PTOKEN_PRIMARY_GROUP PrimaryGroup, PTOKEN_DEFAULT_DACL DefaultDacl, PTOKEN_SOURCE Source)
+{
+    if (ZwCreateTokenEx) { // Win 8+
+        return ZwCreateTokenEx(TokenHandle, DesiredAccess, ObjectAttributes,
+            Type, AuthenticationId, ExpirationTime, User, Groups, Privileges,
+            UserAttributes, DeviceAttributes, DeviceGroups, MandatoryPolicy,
+            Owner, PrimaryGroup, DefaultDacl, Source);
+    }
+    if (ZwCreateToken) {
+        NTSTATUS status =  ZwCreateToken(TokenHandle, DesiredAccess, ObjectAttributes,
+            Type, AuthenticationId, ExpirationTime, User, Groups, Privileges,
+            Owner, PrimaryGroup, DefaultDacl, Source);
+
+        if (NT_SUCCESS(status)) {
+            if(MandatoryPolicy)
+                ZwSetInformationToken(TokenHandle, TokenMandatoryPolicy, MandatoryPolicy, sizeof(TOKEN_MANDATORY_POLICY));
+        }
+        return status;
+    }
+    return STATUS_INVALID_SYSTEM_SERVICE;
+}
+
+
+//---------------------------------------------------------------------------
+// Token_CreateNew
+//---------------------------------------------------------------------------
+
+
+_FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
+{
+    HANDLE TokenHandle = NULL;
+    NTSTATUS status = STATUS_UNSUCCESSFUL;
+
+    PTOKEN_STATISTICS		LocalStatistics = NULL;
+    PTOKEN_USER				LocalUser = NULL;
+    PTOKEN_GROUPS			LocalGroups = NULL;
+    PTOKEN_PRIVILEGES		LocalPrivileges = NULL;
+    
+    //PTOKEN_SECURITY_ATTRIBUTES_INFORMATION UserAttributes = NULL;
+    //PTOKEN_SECURITY_ATTRIBUTES_INFORMATION DeviceAttributes = NULL;
+    //PTOKEN_GROUPS           DeviceGroups = NULL;
+    PTOKEN_MANDATORY_POLICY MandatoryPolicy = NULL;
+
+    PTOKEN_OWNER			LocalOwner = NULL;
+    PTOKEN_PRIMARY_GROUP	LocalPrimaryGroup = NULL;
+    PTOKEN_DEFAULT_DACL		LocalDefaultDacl = NULL;
+    PTOKEN_SOURCE			LocalSource = NULL;
+
+    PTOKEN_DEFAULT_DACL		NewDefaultDacl = NULL;
+    ULONG DefaultDacl_Length = 0;
+    PACL  Dacl = NULL;
+    PSID  Sid = NULL;
+
+    OBJECT_ATTRIBUTES ObjectAttributes;
+    SECURITY_QUALITY_OF_SERVICE SecurityQos;
+
+    //
+    // Gether informations from the original token
+    //
+
+    if (   !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenStatistics, &LocalStatistics))
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenUser, &LocalUser))
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenGroups, &LocalGroups))
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenPrivileges, &LocalPrivileges))
+
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenOwner, &LocalOwner))
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenPrimaryGroup, &LocalPrimaryGroup))
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenDefaultDacl, &LocalDefaultDacl))
+        || !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenSource, &LocalSource))
+        )
+    {
+        Log_Status_Ex_Process(MSG_1222, 0xA1, STATUS_UNSUCCESSFUL, NULL, proc->box->session_id, proc->pid);
+        goto finish;
+    }
+
+    MandatoryPolicy = (PTOKEN_MANDATORY_POLICY)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_MANDATORY_POLICY), tzuk);
+    if (MandatoryPolicy) MandatoryPolicy->Policy = TOKEN_MANDATORY_POLICY_NO_WRITE_UP;
+
+    //
+    // Change the SID
+    //
+                
+    // SbieLogin BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"SandboxieLogon", 0, FALSE))
+	{
+        if (SandboxieLogonSid[0] != 0)
+            Sid = (PSID)SandboxieLogonSid;
+        else {
+            Log_Status_Ex_Process(MSG_1222, 0xA6, status, NULL, proc->box->session_id, proc->pid);
+            goto finish;
+        }
+	}
+	else
+	// SbieLogin END
+    if (Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
+    {
+		Sid = (PSID)AnonymousLogonSid;
+    }
+
+	if (Sid != NULL)
+	{
+		memcpy(LocalUser->User.Sid, Sid, RtlLengthSid(Sid));
+	}
+
+    //
+    // Create a new token from scratch
+    //
+
+    SecurityQos.Length = sizeof(SecurityQos);
+    SecurityQos.ImpersonationLevel = LocalStatistics->ImpersonationLevel;
+    SecurityQos.ContextTrackingMode = SECURITY_STATIC_TRACKING;
+    SecurityQos.EffectiveOnly = FALSE;
+
+    ObjectAttributes.SecurityQualityOfService = &SecurityQos;
+
+    InitializeObjectAttributes(
+        &ObjectAttributes,
+        NULL,
+        OBJ_CASE_INSENSITIVE,
+        NULL,
+        NULL
+    );
+
+    status = SbieCreateToken(
+        &TokenHandle,
+        TOKEN_ALL_ACCESS,
+        &ObjectAttributes,
+        LocalStatistics->TokenType,
+        &LocalStatistics->AuthenticationId,
+        &LocalStatistics->ExpirationTime,
+        LocalUser,
+        LocalGroups,
+        LocalPrivileges,
+        
+        0, //UserAttributes,
+        0, //DeviceAttributes,
+        0, //DeviceGroups,
+        MandatoryPolicy,
+
+        LocalOwner,
+        LocalPrimaryGroup,
+        LocalDefaultDacl,
+        LocalSource
+    );
+
+    //
+    // Retry with new DACLs on error
+    //
+
+    if (Sid && status == STATUS_INVALID_OWNER)
+    {
+        DefaultDacl_Length = LocalDefaultDacl->DefaultDacl->AclSize;
+        
+        // Construct a new ACL 
+        NewDefaultDacl = (PTOKEN_DEFAULT_DACL)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_DEFAULT_DACL) + 8 + DefaultDacl_Length + 128, tzuk);
+        if (NULL == NewDefaultDacl)
+        {
+            Log_Status_Ex_Process(MSG_1222, 0xA2, status, NULL, proc->box->session_id, proc->pid);
+            goto finish;
+        }
+
+        memcpy(NewDefaultDacl, LocalDefaultDacl, DefaultDacl_Length);
+
+        NewDefaultDacl->DefaultDacl = Dacl = (PACL)((ULONG_PTR)NewDefaultDacl + sizeof(TOKEN_DEFAULT_DACL));
+        NewDefaultDacl->DefaultDacl->AclSize += 128;
+        Sid = LocalUser->User.Sid;
+
+        RtlAddAccessAllowedAce(Dacl, ACL_REVISION2, GENERIC_ALL, Sid);
+
+        status = SbieCreateToken(
+            &TokenHandle,
+            TOKEN_ALL_ACCESS,
+            &ObjectAttributes,
+            LocalStatistics->TokenType,
+            &LocalStatistics->AuthenticationId,
+            &LocalStatistics->ExpirationTime,
+            LocalUser,
+            LocalGroups,
+            LocalPrivileges,
+
+            0, //UserAttributes,
+            0, //DeviceAttributes,
+            0, //DeviceGroups,
+            MandatoryPolicy,
+
+            (PTOKEN_OWNER)&Sid,
+            LocalPrimaryGroup,
+            NewDefaultDacl,
+            LocalSource
+        );
+
+        if (!NT_SUCCESS(status))
+        {
+            Log_Status_Ex_Process(MSG_1222, 0xA3, status, NULL, proc->box->session_id, proc->pid);
+            goto finish;
+        }
+
+        Token_SetHandleDacl(NtCurrentProcess(), Dacl);
+        Token_SetHandleDacl(NtCurrentThread(), Dacl);
+        Token_SetHandleDacl(TokenHandle, Dacl);
+    }
+    else if (!NT_SUCCESS(status))
+    {
+        Log_Status_Ex_Process(MSG_1222, 0xA4, status, NULL, proc->box->session_id, proc->pid);
+        goto finish;
+    }
+
+    ULONG virtualizationAllowed = 1;
+    status = ZwSetInformationToken(TokenHandle, TokenVirtualizationAllowed, &virtualizationAllowed, sizeof(ULONG));
+
+
+    /*HANDLE OldTokenHandle;
+    status = ObOpenObjectByPointer(
+        TokenObject, OBJ_KERNEL_HANDLE, NULL, TOKEN_ALL_ACCESS,
+        *SeTokenObjectType, KernelMode, &OldTokenHandle);
+    if (NT_SUCCESS(status)) {
+
+        __try {
+
+        void* ptr = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
+        if (ptr) {
+            ULONG len = 0;
+            status = ZwQueryInformationToken(OldTokenHandle, TokenSecurityAttributes, ptr, PAGE_SIZE, &len);
+            if (NT_SUCCESS(status)) {
+
+                PTOKEN_SECURITY_ATTRIBUTES_AND_OPERATION_INFORMATION data = (PTOKEN_SECURITY_ATTRIBUTES_AND_OPERATION_INFORMATION)(((UCHAR*)ptr) + len);
+                len += sizeof(TOKEN_SECURITY_ATTRIBUTES_AND_OPERATION_INFORMATION);
+
+                data->Attributes = ptr;
+                data->Operations = (PTOKEN_SECURITY_ATTRIBUTE_OPERATION)(((UCHAR*)ptr) + len);
+                len += sizeof(TOKEN_SECURITY_ATTRIBUTE_OPERATION) * data->Attributes->AttributeCount;
+                for (ULONG i = 0; i < data->Attributes->AttributeCount; i++)
+                    data->Operations[i] = TOKEN_SECURITY_ATTRIBUTE_OPERATION_ADD;
+
+                status = ZwSetInformationToken(TokenHandle, TokenSecurityAttributes, data, len);
+            }
+        }
+        if (ptr)ExFreePool(ptr);
+
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            status = GetExceptionCode() + 0x01000000;
+        }
+        
+        DbgPrint("TokenSecurityAttributes %08x", status);
+
+        ZwClose(OldTokenHandle);
+    }*/
+
+finish:
+    if (LocalStatistics)    ExFreePool((PVOID)LocalStatistics);
+    if (LocalUser)          ExFreePool((PVOID)LocalUser);
+    if (LocalGroups)        ExFreePool((PVOID)LocalGroups);
+    if (LocalPrivileges)    ExFreePool((PVOID)LocalPrivileges);
+
+    //if (UserAttributes)     ExFreePool((PVOID)UserAttributes);
+    //if (DeviceAttributes)   ExFreePool((PVOID)DeviceAttributes);
+    //if (DeviceGroups)       ExFreePool((PVOID)DeviceGroups);
+    if (MandatoryPolicy)    ExFreePool((PVOID)MandatoryPolicy);
+
+    if (LocalOwner)         ExFreePool((PVOID)LocalOwner);
+    if (LocalPrimaryGroup)  ExFreePool((PVOID)LocalPrimaryGroup);
+    if (LocalDefaultDacl)   ExFreePool((PVOID)LocalDefaultDacl);
+    if (LocalSource)        ExFreePool((PVOID)LocalSource);
+
+    if (NewDefaultDacl)     ExFreePool((PVOID)NewDefaultDacl);
+
+
+    //
+    // get the actual token object from the handle
+    //
+
+    void* NewTokenObject = NULL;
+    if (TokenHandle != NULL) {
+        status = ObReferenceObjectByHandle(TokenHandle, 0, *SeTokenObjectType, UserMode, &NewTokenObject, NULL);
+        if (!NT_SUCCESS(status))
+            Log_Status_Ex_Process(MSG_1222, 0xA5, status, NULL, proc->box->session_id, proc->pid);
+
+        NtClose(TokenHandle);
+    }
+    return NewTokenObject;
+}
+

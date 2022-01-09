@@ -490,7 +490,8 @@ _FX void Ldr_FixImagePath(void)
 _FX WCHAR *Ldr_FixImagePath_2(void)
 {
     UNICODE_STRING *NameUni;
-    SIZE_T BufferLength;
+    //SIZE_T BufferLength;
+    ULONG BufferLength;
     NTSTATUS status;
 
     //

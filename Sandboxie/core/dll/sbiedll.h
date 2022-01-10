@@ -149,6 +149,9 @@ SBIEDLL_EXPORT  ULONG SbieDll_UpdateConf(
     WCHAR OpCode, const WCHAR *Password, const WCHAR *Section,
     const WCHAR *Setting, const WCHAR *Value);
 
+SBIEDLL_EXPORT  ULONG SbieDll_QueryConf(
+    const WCHAR *Section, const WCHAR *Setting,
+    ULONG setting_index, WCHAR *out_buffer, ULONG buffer_len);
 
 //---------------------------------------------------------------------------
 // Functions (Other)

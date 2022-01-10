@@ -76,9 +76,6 @@ protected:
             HANDLE CallerProcessHandle, ULONG crflags,
             PROCESS_INFORMATION *piInput, PROCESS_INFORMATION *piReply);
 
-protected:
-
-    CRITICAL_SECTION m_RunSandboxed_CritSec;
 
 };
 

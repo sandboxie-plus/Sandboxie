@@ -79,7 +79,7 @@ typedef struct _MOUNTMGR_VOLUME_PATHS {
 //---------------------------------------------------------------------------
 
 
-static void File_InitPathList(void);
+//static void File_InitPathList(void);
 
 static BOOLEAN File_InitDrives(ULONG DriveMask);
 
@@ -154,7 +154,7 @@ _FX BOOLEAN File_Init(void)
     File_ProxyPipes = Dll_Alloc(sizeof(ULONG) * 256);
     memzero(File_ProxyPipes, sizeof(ULONG) * 256);
 
-    File_InitPathList();
+    SbieDll_MatchPath(L'f', (const WCHAR *)-1); //File_InitPathList();
 
     File_DriveAddSN = SbieApi_QueryConfBool(NULL, L"UseVolumeSerialNumbers", FALSE);
 
@@ -291,39 +291,45 @@ _FX BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName)
 //---------------------------------------------------------------------------
 
 
-_FX void File_InitPathList(void)
-{
-    OBJECT_ATTRIBUTES objattrs;
-    UNICODE_STRING objname;
-    IO_STATUS_BLOCK MyIoStatusBlock;
-    HANDLE handle;
-    WCHAR *path;
-
-    RtlInitUnicodeString(&objname, L"\\SystemRoot");
-    InitializeObjectAttributes(
-        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-    handle = 0;
-    NtOpenFile(&handle, FILE_READ_DATA, &objattrs,
-               &MyIoStatusBlock, FILE_SHARE_VALID_FLAGS, 0);
-    if (handle)
-        NtClose(handle);
-
-    SbieDll_MatchPath(L'f', (const WCHAR *)-1);
-
-    //
-    // query Sandboxie home folder to prevent ClosedFilePath
-    //
-
-    path = Dll_AllocTemp(1024 * sizeof(WCHAR));
-    SbieApi_GetHomePath(path, 1020, NULL, 0);
-    if (path[0]) {
-        File_HomeNtPathLen = wcslen(path);
-        File_HomeNtPath =
-            Dll_Alloc((File_HomeNtPathLen + 1) * sizeof(WCHAR));
-        wmemcpy(File_HomeNtPath, path, File_HomeNtPathLen + 1);
-    }
-    Dll_Free(path);
-}
+//_FX void File_InitPathList(void)
+//{
+//    OBJECT_ATTRIBUTES objattrs;
+//    UNICODE_STRING objname;
+//    IO_STATUS_BLOCK MyIoStatusBlock;
+//    HANDLE handle;
+//    WCHAR *buf, *ptr;
+//
+//    RtlInitUnicodeString(&objname, L"\\SystemRoot");
+//    InitializeObjectAttributes(
+//        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+//    handle = 0;
+//    NtOpenFile(&handle, FILE_READ_DATA, &objattrs,
+//               &MyIoStatusBlock, FILE_SHARE_VALID_FLAGS, 0);
+//
+//    //
+//
+//    const ULONG PATH_BUF_LEN = 1024;
+//    buf = Dll_AllocTemp(PATH_BUF_LEN);
+//
+//    if (NT_SUCCESS(File_GetFileName(handle, PATH_BUF_LEN, buf)) && (ptr = wcsrchr(buf, L'\\')) != NULL) 
+//        ptr[1] = L'\0'; // strip the folder name
+//    else // fallback
+//        wcscpy(buf, L"\\??\\C:\\");
+//
+//    File_SysVolumeLen = wcslen(buf);
+//    File_SysVolume =
+//        Dll_Alloc((File_SysVolumeLen + 1) * sizeof(WCHAR));
+//    wcscpy(File_SysVolume, buf);
+//
+//    Dll_Free(buf);
+//
+//    //
+//
+//    if (handle)
+//        NtClose(handle);
+//
+//    SbieDll_MatchPath(L'f', (const WCHAR *)-1);
+//}
 
 
 //---------------------------------------------------------------------------

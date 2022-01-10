@@ -27,7 +27,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
 
 	ui.lblSupportCert->setVisible(false);
-	if (g_Certificate.isEmpty())
+	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0)
 	{
 		ui.lblSupportCert->setVisible(true);
 		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -42,7 +42,6 @@ void COptionsWindow::CreateGeneral()
 			item->setFlags(disabled ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 		}
 	}
-
 
 	m_HoldBoxType = false;
 
@@ -116,7 +115,7 @@ void COptionsWindow::LoadGeneral()
 
 	ui.chkShowForRun->setChecked(m_pBox->GetBool("ShowForRunIn", true));
 
-	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
+	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
 	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 	ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 	ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
@@ -176,7 +175,7 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
 
-	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "", "n");
+	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
 	WriteAdvancedCheck(ui.chkDropRights, "DropAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkFakeElevation, "FakeAdminRights", "y", "");
@@ -271,7 +270,7 @@ void COptionsWindow::OnAddAutoCmd()
 
 void COptionsWindow::OnAddAutoExe()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
 
@@ -314,7 +313,7 @@ void COptionsWindow::OnDelAuto()
 
 void COptionsWindow::OnBrowsePath()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");;
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
 
@@ -402,6 +401,8 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkMsiExemptions->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
+		SetTemplate("NoUACProxy", false);
+		//SetTemplate("DeviceSecurity", true);
 		break;
 	case CSandBoxPlus::eDefaultPlus:
 	case CSandBoxPlus::eDefault:
@@ -411,12 +412,16 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkMsiExemptions->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eDefaultPlus);
+		SetTemplate("NoUACProxy", false);
+		//SetTemplate("DeviceSecurity", false);
 		break;
 	case CSandBoxPlus::eAppBoxPlus:
 	case CSandBoxPlus::eAppBox:
 		ui.chkNoSecurityIsolation->setChecked(true);
 		//ui.chkRestrictServices->setChecked(false);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
+		SetTemplate("NoUACProxy", true);
+		//SetTemplate("DeviceSecurity", false);
 		break;
 	}
 

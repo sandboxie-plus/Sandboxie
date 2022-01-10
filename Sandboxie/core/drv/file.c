@@ -667,8 +667,10 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         return FALSE;
     }
 
-    for (i = 0; normalpaths[i] && ok; ++i) {
-        ok = Process_AddPath(proc, normal_file_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+    if (proc->use_privacy_mode) {
+        for (i = 0; normalpaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, normal_file_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+        }
     }
 
     if (! ok) {
@@ -1322,8 +1324,6 @@ _FX NTSTATUS File_Generic_MyParseProc(
         mp_flags = Process_MatchPathEx(proc, path, path_len, L'f',
             &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
             &proc->read_file_paths, &proc->write_file_paths, NULL);
-
-        if ((!write_access || (mp_flags & TRUE_PATH_WRITE_FLAG) != 0) && ((mp_flags & TRUE_PATH_MASK) != 0)) {
 #else
         if (write_access)
             open_file_paths = &proc->open_file_paths;
@@ -1334,10 +1334,18 @@ _FX NTSTATUS File_Generic_MyParseProc(
             proc->pool, path, path_len,
             open_file_paths, &proc->closed_file_paths,
             &is_open, &is_closed);
-
-        if ((! is_open) && (! is_closed)) {
 #endif
 
+        //
+        // if the path has ho specified handling,
+        // check if its a network path and apply network specific presets.
+        //
+
+#ifdef USE_MATCH_PATH_EX
+        if ((!write_access || (mp_flags & TRUE_PATH_WRITE_FLAG) != 0) && ((mp_flags & TRUE_PATH_MASK) != 0)) {
+#else
+        if ((! is_open) && (! is_closed)) {
+#endif
             //
             // if we have a path that looks like any of these
             // \Device\LanmanRedirector\server\shr\f1.txt
@@ -1390,9 +1398,19 @@ _FX NTSTATUS File_Generic_MyParseProc(
                         len1 += File_MupLen + 1;
 
 #ifdef USE_MATCH_PATH_EX
-                        mp_flags = Process_MatchPathEx(proc, path2, len1, L'f',
-                            &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
-                            &proc->read_file_paths, &proc->write_file_paths, NULL);
+                        //
+                        // if this is not a atribute or sync request update the permissions for the network path
+                        //
+
+                        if ((MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
+                            (MyContext->OriginalDesiredAccess != SYNCHRONIZE))
+                        {
+                            mp_flags = Process_MatchPathEx(proc, path2, len1, L'n',
+                                &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
+                                &proc->read_file_paths, &proc->write_file_paths, NULL);
+
+                            //DbgPrint("MyParseProc %S, desired = %x, type = %x, flags = %x\n", path2, MyContext->OriginalDesiredAccess, device_type, mp_flags);
+                        }
 #else
                         Process_MatchPath(
                             proc->pool, path2, len1,
@@ -1423,22 +1441,8 @@ _FX NTSTATUS File_Generic_MyParseProc(
                                 is_open = TRUE;
                             }
                         }
-#endif
 
                         //DbgPrint("MyParseProc %S, desired = %x, type = %x\n", path2, MyContext->OriginalDesiredAccess, device_type);
-#ifdef USE_MATCH_PATH_EX
-                        if ((MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
-                            (MyContext->OriginalDesiredAccess != SYNCHRONIZE) &&
-                            (mp_flags & TRUE_PATH_MASK) != TRUE_PATH_OPEN_FLAG && proc->file_block_network_files)
-                        {
-                            //
-                            // if BlockNetworkFiles=y is set ant this path is not explicitly set as open,
-                            // deny also reading from it
-                            //
-
-                            mp_flags &= ~TRUE_PATH_READ_FLAG;
-                        }
-#else
                         if ((MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
                             (MyContext->OriginalDesiredAccess != SYNCHRONIZE) &&
                             !is_open && proc->file_block_network_files)
@@ -1460,6 +1464,10 @@ _FX NTSTATUS File_Generic_MyParseProc(
                 }
             }
         }
+
+        //
+        // finally evaluate if access should be denided
+        //
 
 #ifdef USE_MATCH_PATH_EX
         //if ((mp_flags & (write_access ? TRUE_PATH_WRITE_FLAG : TRUE_PATH_READ_FLAG)) != 0) {
@@ -1904,6 +1912,7 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
         &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
         &proc->read_file_paths, &proc->write_file_paths, NULL);
 
+    //if ((mp_flags & TRUE_PATH_WRITE_FLAG) == 0 || (mp_flags & COPY_PATH_MASK) == 0) { // this fails renamings
     if ((mp_flags & TRUE_PATH_WRITE_FLAG) == 0) {
 #else
     Process_MatchPath(
@@ -2504,8 +2513,8 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
         (API_CHECK_INTERNET_ACCESS_ARGS *)parms;
     WCHAR *user_devname;
     WCHAR device_name[42];
-    WCHAR *ptr, *ptr2;
-    ULONG len;
+    //WCHAR *ptr, *ptr2;
+    //ULONG len;
     HANDLE ProcessId;
     NTSTATUS status;
     KIRQL irql;
@@ -2521,7 +2530,9 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     ProbeForRead(user_devname, sizeof(WCHAR) * 32, sizeof(WCHAR));
     wmemcpy(device_name,        File_Mup,     8);   // \Device\ prefix
     wmemcpy(device_name + 8,    user_devname, 32);
+    device_name[8+32] = L'\0';
 
+    /* this check is now done in unser mode
     //
     // convert the device name to lowercase, stop at the first backslash
     //
@@ -2584,6 +2595,7 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
 
     if (! chk)
         return STATUS_OBJECT_NAME_INVALID;
+    */
 
 
     //

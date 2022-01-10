@@ -49,7 +49,7 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 		{
 			QTreeWidgetItem* pItem = ui.treeForced->topLevelItem(i);
 			int Type = pItem->data(0, Qt::UserRole).toInt();
-			if (Type == -(int)eProcess) {
+			if (Type == (int)eTemplate) {
 				delete pItem;
 				continue; // entry from template
 			}

@@ -99,6 +99,9 @@ ALIGNED BOOLEAN Kmd_Stop_SbieDrv(void)
         L"\\Registry\\Machine\\System\\CurrentControlSet"
         L"\\Services\\" SBIEDRV);
     rc = NtUnloadDriver(&uni);
+
+    SbieApi_Ioctl(NULL); // disconnect from driver
+
     if (rc == 0 || rc == STATUS_OBJECT_NAME_NOT_FOUND)
         return TRUE;
 

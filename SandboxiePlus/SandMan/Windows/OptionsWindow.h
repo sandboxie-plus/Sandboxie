@@ -147,6 +147,7 @@ private slots:
 	void OnINetBlockChanged()		{ m_INetBlockChanged = true; OnOptChanged(); }
 	void OnRecoveryChanged()		{ m_RecoveryChanged = true; OnOptChanged(); }
 	void OnAccessChanged();
+	void OnSysSvcChanged();
 	void OnAdvancedChanged();
 	void OnOpenCOM();
 	void OnIsolationChanged();
@@ -333,6 +334,7 @@ protected:
 	void LoadTemplates();
 	void ShowTemplates();
 	void SaveTemplates();
+	void SetTemplate(const QString& Template, bool bEnabled);
 
 	void LoadFolders();
 	void ShowFolders();

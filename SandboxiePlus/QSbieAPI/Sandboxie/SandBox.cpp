@@ -124,7 +124,7 @@ SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
 		return RunSandboxed(Command);
 #endif
-	return m_pAPI->RunStart(m_Name, Command, NULL, Elevated);
+	return m_pAPI->RunStart(m_Name, Command, Elevated);
 }
 
 SB_STATUS CSandBox::RunSandboxed(const QString& Command)

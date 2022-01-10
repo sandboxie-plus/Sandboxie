@@ -121,7 +121,7 @@ SBIE1204 A criação da caixa de areia falhou para %3 %2
 .
 
 1211;pop;err;01
-SBIE1211 Não foi possível rodar o processo %2 na caixa de areia
+SBIE1211 Não foi possível executar o processo %2 na caixa de areia
 .
 
 1212;pop;err;01
@@ -335,7 +335,7 @@ SBIE2104 Foi negada uma tentativa de encerrar esta sessão do Windows - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Por favor habilite "Rodar como Administrador CCU" no Controle do Sandboxie, menu Arquivo
+# SBIE2106 Por favor habilite "Executar como Administrador UAC" no Controle do Sandboxie, menu Arquivo
 # .
 
 # 2107;pop;inf;01
@@ -429,7 +429,7 @@ SBIE2211 O serviço %2 falhou ao iniciar na caixa de areia
 .
 
 2212;pop;wrn;01
-SBIE2212 O leitor de email '%2' não está configurado para rodar na caixa de areia
+SBIE2212 O leitor de email '%2' não está configurado para executar na caixa de areia
 .
 
 2213;pop;wrn;01
@@ -449,7 +449,7 @@ SBIE2214 Requisição para iniciar o serviço '%2' foi negada devido a redução
 # .
 
 2217;pop;wrn;02
-SBIE2217 Requisição para rodar como Administrador foi negada devido à redução de privilégios
+SBIE2217 Requisição para executar como Administrador foi negada devido à redução de privilégios
 .
 
 2218;pop;wrn;01
@@ -719,7 +719,7 @@ A proteção contra apagamento está ativada nesta caixa de areia
 .
 
 3052;txt;01
-Rodar na Caixa de areia
+Executar na Caixa de areia
 .
 
 #----------------------------------------------------------------------------
@@ -907,25 +907,25 @@ mesmo depois que os privilégios administrativos forem concedidos.
 .
 
 3251;txt;01
-Rodar Fora da Caixa
+Executar Fora da Caixa
 .
 
 3252;txt;01
 Inicia o programa expressamente fora da supervisão do Sandboxie,
-mesmo se o programa estiver forçado a rodar sob o Sandboxie.
+mesmo se o programa estiver forçado a executar sob o Sandboxie.
 Esta exceção também se estende a programas iniciados por ele.
 
 Você também pode selecionar esta opção segurando as teclas
-Ctrl e Shift ao clicar no comando Rodar na Caixa.
+Ctrl e Shift ao clicar no comando Executar na Caixa.
 .
 
 3253;txt;01
-Tem certeza de que deseja rodar o programa fora da caixa?
+Tem certeza de que deseja executar o programa fora da caixa?
 .
 
 3254;txt;01
 Para pular este diálogo de seleção da caixa, você pode manter
-Ctrl pressionado ao clicar no comando "Rodar na Caixa".
+Ctrl pressionado ao clicar no comando "Executar na Caixa".
 .
 
 3255;txt;01
@@ -1060,7 +1060,7 @@ Desabilitar Programas &Forçados
 .
 
 3414;txt;01
-Rodar como &Administrador
+Executar como &Administrador
 .
 
 3415;txt;01
@@ -1212,27 +1212,27 @@ Personalizações de ligação de funções
 .
 
 3461;txt;01
-&Rodar nesta caixa
+&Executar nesta caixa
 .
 
 3462;txt;01
-Rodar o &Navegador Web
+Executar o &Navegador Web
 .
 
 3463;txt;01
-Rodar o &Leitor de Email
+Executar o &Leitor de Email
 .
 
 3464;txt;01
-Rodar &Qualquer Programa
+Executar &Qualquer Programa
 .
 
 3465;txt;01
-Rodar do &Menu Iniciar
+Executar do &Menu Iniciar
 .
 
 3466;txt;01
-Rodar o &Windows Explorer
+Executar o &Windows Explorer
 .
 
 3467;txt;01
@@ -1446,7 +1446,7 @@ O programa ou documento iniciará sob a supervisão do Sandboxie.
 
 Entretanto, é recomendável manipular o conteúdo da caixa
 através de uma instância do Windows Explorer em uma caixa. Para isto, use
-este comando: Sandbox -> Rodar na Caixa -> Rodar o Windows Explorer.
+este comando: Sandbox -> Executar na Caixa -> Executar o Windows Explorer.
 .
 
 3535;txt;01
@@ -1671,7 +1671,7 @@ Ao clicar em OK, o mecanismo de Programas Forçados será temporariamente desabi
 .
 
 3599;txt;01
-Você pode desabilitar o início forçado de um programa específico pressionando as teclas Ctrl e Shift ao clicar no comando "Rodar na Caixa".
+Você pode desabilitar o início forçado de um programa específico pressionando as teclas Ctrl e Shift ao clicar no comando "Executar na Caixa".
 .
 
 #----------------------------------------------------------------------------
@@ -1821,11 +1821,11 @@ Clique para adicionar mais ícones de atalho na área de trabalho:
 .
 
 3694;txt;01
-Ações "Rodar na Caixa"
+Ações "Executar na Caixa"
 .
 
 3695;txt;01
-Adicionar opção do menu de contexto "Rodar na Caixa" para arquivos e pastas
+Adicionar opção do menu de contexto "Executar na Caixa" para arquivos e pastas
 .
 
 3696;txt;01
@@ -1844,7 +1844,7 @@ Navegador web em uma caixa.lnk
 .
 
 3699;txt;01
-Rodar na &Caixa
+Executar na &Caixa
 .
 
 4491;txt;01
@@ -1965,7 +1965,7 @@ Substituir todos os arquivos sem perguntar novamente
 .
 
 3737;txt;01
-&Recuperar && Rodar
+&Recuperar && Executar
 .
 
 3981;txt;01
@@ -2025,7 +2025,7 @@ Emitir mensagem de alerta SBIE1301
 .
 
 3754;txt;01
-Forçar o programa a rodar nesta caixa de areia
+Forçar o programa a executar nesta caixa de areia
 .
 
 3755;txt;01
@@ -2320,11 +2320,11 @@ Pastas Forçadas
 .
 
 3863;txt;01
-Se qualquer programa for executado fora de uma caixa de areia a partir das seguintes pastas, ele será forçado a rodar nesta caixa. Isto não é aplicável se o programa for explicitamente iniciado dentro de outra caixa.
+Se qualquer programa for executado fora de uma caixa de areia a partir das seguintes pastas, ele será forçado a executar nesta caixa. Isto não é aplicável se o programa for explicitamente iniciado dentro de outra caixa.
 .
 
 3864;txt;01
-Você pode forçar a Reprodução Automática de CD/DVD do Windows a rodar na caixa, se você incluir a letra das suas unidades de CD/DVD na lista a seguir.
+Você pode forçar a Reprodução Automática de CD/DVD do Windows a executar na caixa, se você incluir a letra das suas unidades de CD/DVD na lista a seguir.
 .
 
 3865;txt;01
@@ -2340,7 +2340,7 @@ Programas Forçados
 .
 
 3873;txt;01
-Se qualquer um dos seguintes programas for executado fora de uma caixa de areia, ele será forçado a rodar nesta caixa. Isto não é aplicável se o programa for explicitamente iniciado dentro de outra caixa.
+Se qualquer um dos seguintes programas for executado fora de uma caixa de areia, ele será forçado a executar nesta caixa. Isto não é aplicável se o programa for explicitamente iniciado dentro de outra caixa.
 .
 
 # 3962;txt;01
@@ -2348,7 +2348,7 @@ Se qualquer um dos seguintes programas for executado fora de uma caixa de areia,
 # .
 
 # 3963;txt;01
-# Se qualquer uma das seguintes contas de usuário efetuar logon neste computador, toda a sessão de logon será forçada a rodar nesta caixa.
+# Se qualquer uma das seguintes contas de usuário efetuar logon neste computador, toda a sessão de logon será forçada a executar nesta caixa.
 # .
 
 # 3964;txt;01
@@ -2478,15 +2478,15 @@ Acesso de Inicialização/Execução
 .
 
 3923;txt;01
-Os seguintes programas serão os únicos nesta caixa que podem iniciar e rodar.
+Os seguintes programas serão os únicos nesta caixa que podem iniciar e executar.
 .
 
 3924;txt;01
-Se este recurso for habilitado, os programas que forem instalados (ou baixados) nesta caixa nunca poderão iniciar ou rodar, mesmo se tiverem o nome especificado acima.
+Se este recurso for habilitado, os programas que forem instalados (ou baixados) nesta caixa nunca poderão iniciar ou executar, mesmo se tiverem o nome especificado acima.
 .
 
 3928;txt;01
-Todos os programas podem iniciar e rodar
+Todos os programas podem iniciar e executar
 .
 
 3930;txt;01
@@ -3163,7 +3163,7 @@ As seguintes exclusões permitem que os navegadores Web rodando nesta caixa faç
 .
 
 4323;txt;01
-Forçar o %2 a rodar nesta caixa
+Forçar o %2 a executar nesta caixa
 .
 
 4324;txt;02
@@ -3391,7 +3391,7 @@ Nota: Sem privilégios administrativos, os instaladores não iniciarão na caixa
 A interface do usuário legada do Sandboxie classic implementa apenas suporte para algumas opções de restrição.
 
 Opções adicionais como "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" e muito mais pode ser definida na seção ini para esta caixa.
-A interface moderna (SandMan.exe) também oferece mais opções de personalização para Iniciar/Rodar e restrições de acesso a Internet.
+A interface moderna (SandMan.exe) também oferece mais opções de personalização para Iniciar/Executar e restrições de acesso a Internet.
 
 Se preferir usar uma interface para controlar essas opções, atualize para o Sandboxie-Plus, que tem suporte completo de interface para todos os novos recursos.
 .
@@ -3737,7 +3737,7 @@ Por favor aguarde enquanto o Sandboxie está sendo desinstalado.
 .
 
 8021;ins;01
-Rodar qualquer programa em uma caixa de areia.lnk
+Executar qualquer programa em uma caixa de areia.lnk
 .
 
 8022;ins;01
@@ -3753,7 +3753,7 @@ Roda um programa do Menu Iniciar sob a supervisão do Sandboxie
 .
 
 8025;ins;01
-Rodar o Navegador web em uma caixa de areia.lnk
+Executar o Navegador web em uma caixa de areia.lnk
 .
 
 8026;ins;01
@@ -3761,7 +3761,7 @@ Roda o navegador web padrão sob a supervisão do Sandboxie
 .
 
 8027;ins;01
-Rodar o Windows Explorer em uma caixa de areia.lnk
+Executar o Windows Explorer em uma caixa de areia.lnk
 .
 
 8028;ins;01
@@ -3798,7 +3798,7 @@ com privilégios de Administrador do sistema.
 
 Se você está usando o Windows com Controle de Conta do
 Usuário (UAC) habilitado, inicie o pacote de instalação
-usando o comando Rodar como administrador.
+usando o comando Executar como administrador.
 .
 
 8043;ins;01

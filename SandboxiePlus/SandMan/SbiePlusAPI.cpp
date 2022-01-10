@@ -160,11 +160,14 @@ void CSandBoxPlus::CloseBox()
 
 bool CSandBoxPlus::CheckUnsecureConfig() const
 {
+	//if (GetBool("UnsafeTemplate", false)) return true;
 	if (GetBool("OriginalToken", false)) return true;
 	if (GetBool("OpenToken", false)) return true;
 		if(GetBool("UnrestrictedToken", false)) return true;
-			if (!GetBool("AnonymousLogon", true)) return true;
 			if (GetBool("KeepTokenIntegrity", false)) return true;
+			if (GetBool("UnstrippedToken", false)) return true;
+				if (GetBool("KeepUserGroup", false)) return true;
+			if (!GetBool("AnonymousLogon", true)) return true;
 		if(GetBool("UnfilteredToken", false)) return true;
 	if (GetBool("DisableFileFilter", false)) return true;
 	if (GetBool("DisableKeyFilter", false)) return true;

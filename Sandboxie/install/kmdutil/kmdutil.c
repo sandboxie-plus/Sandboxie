@@ -610,15 +610,9 @@ BOOL Kmd_Stop_Service(
     SC_HANDLE service;
     SERVICE_STATUS service_status;
     ULONG retries;
+    BOOLEAN is_driver;
 
-    if (_wcsicmp(Driver_Name, SBIEDRV) == 0) {
-        // stop the driver
-        if (! Kmd_Stop_SbieDrv())
-            return FALSE;
-
-        // fallback to stopping through SCM, otherwise the
-        // driver registry key does not always disappear
-    }
+    is_driver = _wcsicmp(Driver_Name, SBIEDRV) == 0;
 
     // try to open the service for the driver
 
@@ -639,18 +633,7 @@ BOOL Kmd_Stop_Service(
     // stop the service if it's active
     //
 
-    for (retries = 0; ; ++retries) {
-
-        if (retries) {
-
-            WCHAR Text[384];
-
-            wcscpy(Text, SbieDll_FormatMessage1(8102, Driver_Name));
-            wcscat(Text, L"\n\n");
-            wcscat(Text, SbieDll_FormatMessage0(8102 + retries));
-
-            MessageBox(NULL, Text, L"KmdUtil", MB_ICONEXCLAMATION | MB_OK);
-        }
+    for (retries = 0; retries <= 6; ++retries) {
 
         if (! ControlService(
                 service,
@@ -659,34 +642,55 @@ BOOL Kmd_Stop_Service(
             if (GetLastError() == ERROR_SERVICE_NOT_ACTIVE)
                 return TRUE;
 
-            if ((GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
-                GetLastError() == ERROR_PIPE_BUSY) && retries < 5) {
-                Sleep(2500);
-                continue;
-            }
+            if (!(GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
+                 GetLastError() == ERROR_PIPE_BUSY)){
 
-            Display_Error(L"ControlService Interrogate", 0);
-            return FALSE;
+                Display_Error(L"ControlService Interrogate", 0);
+                return FALSE;
+            }
+        }
+        else if (service_status.dwCurrentState == SERVICE_STOPPED)
+            return TRUE;
+
+        if (retries) {
+            if (retries <= 3) 
+                Sleep(2500 * retries);
+            else {
+                WCHAR Text[384];
+
+                wcscpy(Text, SbieDll_FormatMessage1(8102, Driver_Name));
+                wcscat(Text, L"\n\n");
+                wcscat(Text, SbieDll_FormatMessage0(8102 + retries - 3));
+
+                MessageBox(NULL, Text, L"KmdUtil", MB_ICONEXCLAMATION | MB_OK);
+            }
         }
 
-        if (service_status.dwCurrentState != SERVICE_STOPPED) {
+        if (is_driver) {
+            // stop the driver
+            if (! Kmd_Stop_SbieDrv())
+                continue;
 
-            if (! ControlService(
-                    service,
-                    SERVICE_CONTROL_STOP, &service_status)) {
+            // fallback to stopping through SCM, otherwise the
+            // driver registry key does not always disappear
+        }
 
-                if ((GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
-                    GetLastError() == ERROR_PIPE_BUSY) && retries < 5) {
-                    Sleep(2500);
-                    continue;
-                }
+        if (! ControlService(
+                service,
+                SERVICE_CONTROL_STOP, &service_status)) {
+
+            if (GetLastError() == ERROR_SERVICE_NOT_ACTIVE)
+                return TRUE;
+
+            if (!(GetLastError() == ERROR_SERVICE_REQUEST_TIMEOUT ||
+                 GetLastError() == ERROR_PIPE_BUSY)){
 
                 Display_Error(L"ControlService Stop", 0);
                 return FALSE;
             }
         }
 
-        return TRUE;
+        Sleep(500);
     }
 
     return FALSE;

@@ -543,14 +543,21 @@ _FX BOOLEAN Com_IsClosedClsid(REFCLSID rclsid)
         0x66, 0xf7, 0xe1, 0x1b, 0x36, 0x55, 0xd1, 0x11,
         0xb7, 0x26, 0x00, 0xc0, 0x4f, 0xb9, 0x26, 0xaf };
 
-    if (memcmp(rclsid, EventSystem, 16)      == 0)
-        return TRUE;
+    // moved to templates.ini
+    //static const UCHAR PinToStartScreen[16] = { // {470C0EBD-5D73-4D58-9CED-E91E22E23282} 
+    //    0xbd, 0x0e, 0x0c, 0x47, 0x73, 0x5d, 0x58, 0x4d, 
+    //    0x9c, 0xed, 0xe9, 0x1e, 0x22, 0xe2, 0x32, 0x82
+    //};
 
-    if (memcmp(rclsid, EventSystemTier2, 16) == 0)
-        return TRUE;
+    static const UCHAR* ClosedIDs[] = { EventSystem, EventSystemTier2/*, PinToStartScreen*/ };
 
     ULONG index;
     GUID* guid;
+
+    for (index = 0; index < ARRAYSIZE(ClosedIDs); ++index) {
+        if (memcmp(rclsid, ClosedIDs[index], 16) == 0)
+            return TRUE;
+    }
 
     //
     // initialize list of user-configured CLSID blocks
@@ -3498,13 +3505,18 @@ _FX void Com_LoadRTList(const WCHAR* setting, WCHAR** pNames)
 
 _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
 {
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0) { // in complartment mode those should work fine as we have a normal token
+    //
+    // Even in compartment mode thes things don't work only incombination with open COM its functional
+    //
+
+    if (!(Ipc_OpenCOM && (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) && !SbieApi_QueryConfBool(NULL, L"DisableRTBlacklist", FALSE)) {
 
         //
         // Chrome uses the FindAppUriHandlersAsync, which fails returning a NULL value when we don't have com open and more rights
         // than we should have. Chrome does not check for this failure mode and dereferences it, resulting in a fatal crash.
         // Since we don't support modern app features anyways, the simplest workaround is to block this interface.
         //
+
         if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) {
 
             if (wcscmp(strClassId, L"Windows.System.Launcher") == 0)
@@ -3512,9 +3524,11 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
         }
 
         //
-        // this seems to be broken as well
-        //if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)
-        //    return TRUE;
+        // ToastNotificationManager requirers open com and original token, with boxed com this causes in a dead lock
+        //
+
+        if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)
+            return TRUE;
     }
 
     static const WCHAR* setting = L"ClosedRT";

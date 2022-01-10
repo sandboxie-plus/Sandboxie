@@ -134,20 +134,6 @@ static const WCHAR *Conf_Get_Setting_Name(
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN str_map_match(const void* key1, const void* key2) {
-	const wchar_t** str1 = (const wchar_t**)key1;
-	const wchar_t** str2 = (const wchar_t**)key2;
-	return _wcsicmp(*str1, *str2) == 0;
-}
-
-static unsigned int str_map_hash(const void* key, size_t size) {
-	const wchar_t** str = (const wchar_t**)key;
-	unsigned int hash = 5381;
-	for (unsigned short* ptr = (unsigned short*)*str; *ptr != 0; ptr++)
-		hash = ((hash << 5) + hash) ^ *ptr;
-	return hash;
-}
-
 
 //---------------------------------------------------------------------------
 

@@ -545,9 +545,9 @@ MSG_HEADER *TerminalServer::GetUserToken(MSG_HEADER *msg)
                 // OriginalToken BEGIN
                 if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)
                 // OriginalToken END
-                // OpenToken BEGIN
-                 && !SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) && !SbieApi_QueryConfBool(boxname, L"UnfilteredToken", FALSE))
-	            // OpenToken END
+                // UnfilteredToken BEGIN
+                 && !SbieApi_QueryConfBool(boxname, L"UnfilteredToken", FALSE))
+	            // UnfilteredToken END
                 {
                     // of one of the above is true we handle unfiltered tokens
                     // if not we need to filter the token or else security checks in the driver wil fail!

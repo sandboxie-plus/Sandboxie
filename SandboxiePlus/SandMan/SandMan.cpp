@@ -315,6 +315,8 @@ CSandMan::CSandMan(QWidget *parent)
 		SB_STATUS Status = ConnectSbie();
 		CheckResults(QList<SB_STATUS>() << Status);
 	}
+
+	//qApp->setWindowIcon(GetIcon("IconEmptyDC", false));
 }
 
 CSandMan::~CSandMan()
@@ -534,8 +536,8 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
-	if(theAPI->IsConnected())
-		m_pBoxView->SaveUserConfig();
+	//if(theAPI->IsConnected())
+	//	m_pBoxView->SaveUserConfig();
 
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
@@ -614,8 +616,10 @@ bool CSandMan::IsFullyPortable()
 	return false;
 }
 
-void CSandMan::OnMessage(const QString& Message)
+void CSandMan::OnMessage(const QString& MsgData)
 {
+	QStringList Messages = MsgData.split("\n");
+	QString Message = Messages[0];
 	if (Message == "ShowWnd")
 	{
 		if (!isVisible())
@@ -637,11 +641,19 @@ void CSandMan::OnMessage(const QString& Message)
 			}
 		}
 
+		QString WrkDir;
+		for (int i = 1; i < Messages.length(); i++) {
+			if (Messages[i].left(5) == "From:") {
+				WrkDir = Messages[i].mid(5);
+				break;
+			}
+		}
+
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
-			theAPI->RunStart("DefaultBox", CmdLine);
+			theAPI->RunStart("DefaultBox", CmdLine, false, WrkDir);
 		}
 		else
-			RunSandboxed(QStringList(CmdLine), BoxName);
+			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -698,9 +710,9 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName)
+void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
 {
-	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName);
+	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
 	pSelectBoxWindow->show();
 }
 
@@ -1101,16 +1113,22 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	if ((MsgCode & 0xFFFF) == 6004) // certificat error
 	{
-		static bool bCertWarning = false;
-		if (!bCertWarning) {
-			bCertWarning = true;
+		static quint64 iLastCertWarning = 0;
+		if (iLastCertWarning + 60 < QDateTime::currentDateTime().toTime_t()) { // reset after 60 seconds
+			iLastCertWarning = QDateTime::currentDateTime().toTime_t();
 			
+			QString Message;
+			if (!MsgData[2].isEmpty())
+				Message = tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.").arg(MsgData[2]).arg(MsgData[1]);
+			else 
+				Message = tr("The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.").arg(MsgData[1]);
+			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
+
 			QMessageBox msgBox;
 			msgBox.setTextFormat(Qt::RichText);
 			msgBox.setIcon(QMessageBox::Critical);
 			msgBox.setWindowTitle("Sandboxie-Plus");
-			msgBox.setText( tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.<br />"
-				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>").arg(MsgData[2]).arg(MsgData[1]));
+			msgBox.setText(Message);
 			msgBox.setStandardButtons(QMessageBox::Ok);
 			msgBox.exec();
 			/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -1148,7 +1166,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 bool CSandMan::CheckCertificate() 
 {
-	if (!g_Certificate.isEmpty())
+	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) != 0)
 		return true;
 
 	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
@@ -1668,6 +1686,7 @@ void CSandMan::OnEditIni()
 			theConf->SetValue("Options/NoEditInfo", false);
 	}
 
+	wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
 	wstring IniPath = theAPI->GetIniPath().toStdWString();
 
 	SHELLEXECUTEINFO si = { 0 };
@@ -1675,7 +1694,7 @@ void CSandMan::OnEditIni()
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
 	si.lpVerb = L"runas";
-	si.lpFile = L"notepad.exe";
+	si.lpFile = Editor.c_str();
 	si.lpParameters = IniPath.c_str();
 	si.lpDirectory = NULL;
 	si.nShow = SW_SHOW;
@@ -2256,7 +2275,7 @@ void CSandMan::OnAbout()
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
 			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
+			"<p>Copyright (c) 2020-2022 by DavidXanatos</p>"
 		).arg(GetVersion());
 
 		QString CertInfo;
@@ -2359,13 +2378,16 @@ void CSandMan::LoadLanguage()
 	if(Lang.isEmpty())
 		Lang = QLocale::system().name();
 
-	if (!Lang.isEmpty())
-		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+	if (Lang.compare("native", Qt::CaseInsensitive) != 0) {
+		if (!Lang.isEmpty())
+			m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+
+		LoadLanguage(Lang, "sandman", 0);
+		LoadLanguage(Lang, "qt", 1);
+	}
+
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
-
-	LoadLanguage(Lang, "sandman", 0);
-	LoadLanguage(Lang, "qt", 1);
 }
 
 void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)

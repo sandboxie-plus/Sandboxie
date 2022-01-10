@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-10-16
+#  Latest update by RockyTDR on 2021-12-23
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -3073,6 +3073,14 @@ Simple Service Discovery Protocol (SSDP, UPnP) RPC-poort openen
 Aanvullende RPC-poort bindings openen
 .
 
+4306;txt;01
+RPC-poort bindings openen voor gebruikersaccountbeheer
+.
+
+4307;txt;01
+Algemene telemetrie-processen blokkeren
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3491,9 +3499,9 @@ Als u een UI zou verkiezen om deze opties te bedienen, upgrade dan naar Sandboxi
 .
 
 6007;txt;01
-Sandboxie Plus biedt verbeterde privacybescherming door het oude gedrag te veranderen van een zwarte-lijst modus, d.w.z. het toestaan van leestoegang tot de gehele schijf, behalve geblokkeerd door een gesloten pad of een schrijfpad, naar een witte-lijst modus waar gesandboxte programma's alleen generieke systeemlocaties mogen lezen en leestoegang tot de meeste gebruikersgegevens eerst expliciet moet worden toegestaan.
+Sandboxie Plus biedt verbeterde privacybescherming door het oude gedrag te veranderen van een zwarte-lijst modus, d.w.z. het toestaan van leestoegang tot de hele schijf, behalve geblokkeerd door een gesloten pad of een schrijfpad, naar een witte-lijst modus waar gesandboxte programma's alleen generieke systeemlocaties mogen lezen en leestoegang tot de meeste gebruikersgegevens eerst expliciet moet worden toegestaan.
 
-De oudere UI van Sandboxie classic biedt geen ondersteuning voor deze werkingsmodus. Hoewel het geconfigureerd kan worden met behulp van het ini-bestand, wordt het aangeraden om de moderne Sandboxie-Plus UI (SandMan.exe) te gebruiken als u privacy-verbeterde boxen wilt gebruiken.
+De oudere UI van Sandboxie classic biedt geen ondersteuning voor deze werkingsmodus. Hoewel het geconfigureerd kan worden met behulp van het ini-bestand, wordt het aangeraden om de moderne Sandboxie-Plus UI (SandMan.exe) te gebruiken als u boxen met verbeterde privacy wilt gebruiken.
 .
 
 
@@ -3851,7 +3859,7 @@ Selecteer een programma uit het startmenu om uit te voeren onder toezicht van Sa
 .
 
 8025;ins;01
-Gesandboxte webbrowser uitvoeren.lnk
+Webbrowser gesandboxt uitvoeren.lnk
 .
 
 8026;ins;01

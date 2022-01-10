@@ -109,86 +109,6 @@ static BOOLEAN Syscall_GetKernelAddr(
 
 
 //---------------------------------------------------------------------------
-
-
-typedef NTSTATUS (*P_SystemService00)(void);
-typedef NTSTATUS (*P_SystemService01)(
-    ULONG_PTR arg01);
-typedef NTSTATUS (*P_SystemService02)(
-    ULONG_PTR arg01, ULONG_PTR arg02);
-typedef NTSTATUS (*P_SystemService03)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03);
-typedef NTSTATUS (*P_SystemService04)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04);
-typedef NTSTATUS (*P_SystemService05)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05);
-typedef NTSTATUS (*P_SystemService06)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06);
-typedef NTSTATUS (*P_SystemService07)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07);
-typedef NTSTATUS (*P_SystemService08)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08);
-typedef NTSTATUS (*P_SystemService09)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09);
-typedef NTSTATUS (*P_SystemService10)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10);
-typedef NTSTATUS (*P_SystemService11)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11);
-typedef NTSTATUS (*P_SystemService12)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12);
-typedef NTSTATUS (*P_SystemService13)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13);
-typedef NTSTATUS (*P_SystemService14)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13, ULONG_PTR arg14);
-typedef NTSTATUS (*P_SystemService15)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15);
-typedef NTSTATUS (*P_SystemService16)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15, ULONG_PTR arg16);
-typedef NTSTATUS (*P_SystemService17)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15, ULONG_PTR arg16, 
-    ULONG_PTR arg17);
-typedef NTSTATUS (*P_SystemService18)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15, ULONG_PTR arg16, 
-    ULONG_PTR arg17, ULONG_PTR arg18);
-typedef NTSTATUS (*P_SystemService19)(
-    ULONG_PTR arg01, ULONG_PTR arg02, ULONG_PTR arg03, ULONG_PTR arg04,
-    ULONG_PTR arg05, ULONG_PTR arg06, ULONG_PTR arg07, ULONG_PTR arg08,
-    ULONG_PTR arg09, ULONG_PTR arg10, ULONG_PTR arg11, ULONG_PTR arg12,
-    ULONG_PTR arg13, ULONG_PTR arg14, ULONG_PTR arg15, ULONG_PTR arg16, 
-    ULONG_PTR arg17, ULONG_PTR arg18, ULONG_PTR arg19);
-// (count & 0x0F) + 4 -> 19 is absolute maximum
-
-//---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
 
@@ -221,8 +141,7 @@ _FX BOOLEAN Syscall_Init(void)
         return FALSE;
 
 #ifdef HOOK_WIN32K
-    // must be windows 10 or later // Don't use experimental features by default
-    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, FALSE)) {
+    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
 
         if (!Syscall_Init_List32())
             return FALSE;
@@ -603,147 +522,24 @@ _FX void Syscall_ErrorForAsciiName(const UCHAR *name_a)
 //---------------------------------------------------------------------------
 extern unsigned int g_TrapFrameOffset;
 
+NTSTATUS Sbie_InvokeSyscall_asm(void* func, ULONG count, void* args);
+
 _FX NTSTATUS Syscall_Invoke(SYSCALL_ENTRY *entry, ULONG_PTR *stack)
 {
     NTSTATUS status;
+
+    //
+    // Note: when directly calling win32k functions with "Core Isolation" (HVCI) enabled
+    //  the nt!guard_dispatch_icall will cause a bugcheck!
+    //  Hence we use a call proxy Sbie_InvokeSyscall_asm instead of a direct call
+    //  alternatively we could disable "Control Flow Guard" for this file
+    //
 
     __try {
 
         //DbgPrint("[syscall] request param count = %d\n", entry->param_count);
 
-        if (entry->param_count == 0) {
-
-            P_SystemService00 nt = (P_SystemService00)entry->ntos_func;
-            status = nt();
-
-        } else if (entry->param_count == 1) {
-
-            P_SystemService01 nt = (P_SystemService01)entry->ntos_func;
-            status = nt(stack[0]);
-
-        } else if (entry->param_count == 2) {
-
-            P_SystemService02 nt = (P_SystemService02)entry->ntos_func;
-            status = nt(stack[0], stack[1]);
-
-        } else if (entry->param_count == 3) {
-
-            P_SystemService03 nt = (P_SystemService03)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2]);
-
-        } else if (entry->param_count == 4) {
-
-            P_SystemService04 nt = (P_SystemService04)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3]);
-
-        } else if (entry->param_count == 5) {
-
-            P_SystemService05 nt = (P_SystemService05)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4]);
-
-        } else if (entry->param_count == 6) {
-
-            P_SystemService06 nt = (P_SystemService06)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5]);
-
-        } else if (entry->param_count == 7) {
-
-            P_SystemService07 nt = (P_SystemService07)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6]);
-
-        } else if (entry->param_count == 8) {
-
-            P_SystemService08 nt = (P_SystemService08)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7]);
-
-        } else if (entry->param_count == 9) {
-
-            P_SystemService09 nt = (P_SystemService09)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8]);
-
-        } else if (entry->param_count == 10) {
-
-            P_SystemService10 nt = (P_SystemService10)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9]);
-
-        } else if (entry->param_count == 11) {
-
-            P_SystemService11 nt = (P_SystemService11)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10]);
-
-        } else if (entry->param_count == 12) {
-
-            P_SystemService12 nt = (P_SystemService12)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11]);
-
-        } else if (entry->param_count == 13) {
-
-            P_SystemService13 nt = (P_SystemService13)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12]);
-
-        } else if (entry->param_count == 14) {
-
-            P_SystemService14 nt = (P_SystemService14)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12], stack[13]);
-
-        } else if (entry->param_count == 15) {
-
-            P_SystemService15 nt = (P_SystemService15)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12], stack[13],
-                        stack[14]);
-
-        } else if (entry->param_count == 16) {
-
-            P_SystemService16 nt = (P_SystemService16)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12], stack[13],
-                        stack[14], stack[15]);
-
-        } else if (entry->param_count == 17) {
-
-            P_SystemService17 nt = (P_SystemService17)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12], stack[13],
-                        stack[14], stack[15], stack[16]);
-
-        } else if (entry->param_count == 18) {
-
-            P_SystemService18 nt = (P_SystemService18)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12], stack[13],
-                        stack[14], stack[15], stack[16], stack[17]);
-
-        } else if (entry->param_count == 19) {
-
-            P_SystemService19 nt = (P_SystemService19)entry->ntos_func;
-            status = nt(stack[0], stack[1], stack[2], stack[3], stack[4],
-                        stack[5], stack[6], stack[7], stack[8], stack[9],
-                        stack[10], stack[11], stack[12], stack[13],
-                        stack[14], stack[15], stack[16], stack[17], 
-                        stack[18]);
-
-        } else {
-
-            status = STATUS_INVALID_SYSTEM_SERVICE;
-        }
+        status = Sbie_InvokeSyscall_asm(entry->ntos_func, entry->param_count, stack);
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
@@ -1034,10 +830,10 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     SYSCALL_ENTRY *entry;
 
 #ifdef HOOK_WIN32K
-    if (parms[2] == 1) { // win32k
+    if (parms[2] == 1) { // 1 - win32k
         return Syscall_Api_Query32(proc, parms);
     }
-    else if (parms[2] != 0) { // ntoskrnl
+    else if (parms[2] != 0) { // 0 - ntoskrnl
         return STATUS_INVALID_PARAMETER;
     }
 #endif

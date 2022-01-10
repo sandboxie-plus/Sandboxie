@@ -508,6 +508,40 @@ _FX NTSTATUS RpcRt_FindModulePreset(
 
 
 //---------------------------------------------------------------------------
+// StoreLpcPortName
+//---------------------------------------------------------------------------
+
+
+WCHAR* StoreLpcPortName(const WCHAR* wszPortId, const WCHAR* wszPortName)
+{
+    IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
+    while (port)
+    {
+        if (_wcsicmp(wszPortId, port->wstrPortId) == 0)
+        {
+            wmemcpy(port->wstrPortName, wszPortName, DYNAMIC_PORT_NAME_CHARS);
+            break;
+        }
+
+        port = List_Next(port);
+    }
+
+    if (port == NULL)
+    {
+        port = (IPC_DYNAMIC_PORT*)Dll_Alloc(sizeof(IPC_DYNAMIC_PORT));
+        if (port)
+        {
+            wmemcpy(port->wstrPortId, wszPortId, DYNAMIC_PORT_ID_CHARS);
+            wmemcpy(port->wstrPortName, wszPortName, DYNAMIC_PORT_NAME_CHARS);
+
+            List_Insert_After(&Ipc_DynamicPortNames, NULL, port);
+        }
+    }
+    return port ? port->wstrPortName : NULL;
+}
+
+
+//---------------------------------------------------------------------------
 // GetDynamicLpcPortName
 //---------------------------------------------------------------------------
 
@@ -539,33 +573,10 @@ WCHAR* GetDynamicLpcPortName(const WCHAR* wszPortId)
 
     if (rpl && NT_SUCCESS(rpl->h.status))
     {
-        IPC_DYNAMIC_PORT* port = List_Head(&Ipc_DynamicPortNames);
-        while (port) 
-        {    
-            if (_wcsicmp(req.wszPortId, port->wstrPortId) == 0)
-            {
-                wmemcpy(port->wstrPortName, rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
-                break;
-            }
-
-            port = List_Next(port);
-        }
-
-        if (port == NULL) 
-        {
-            port = (IPC_DYNAMIC_PORT*)Dll_Alloc(sizeof(IPC_DYNAMIC_PORT));
-            if (port)
-            {
-                wmemcpy(port->wstrPortId, req.wszPortId, DYNAMIC_PORT_ID_CHARS);
-                wmemcpy(port->wstrPortName, rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS);
-
-                List_Insert_After(&Ipc_DynamicPortNames, NULL, port);
-            }
-        }
-
+        WCHAR* port = StoreLpcPortName(req.wszPortId, rpl->wszPortName);
         Dll_Free(rpl);
         if(port)
-            return port->wstrPortName + 13; // skip "\\RPC Control\\"
+            return port + 13; // skip "\\RPC Control\\"
     }
 
     return NULL;
@@ -722,27 +733,30 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
         WCHAR ModulePreset[256];
         if (NT_SUCCESS(RpcRt_FindModulePreset(CallingModule, StringBinding, ModulePreset, sizeof(ModulePreset)))) {
             
+            WCHAR* pwszTempPortName = NULL;
             WCHAR tagValue[96];
-            if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
+            if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L',')) {
+                pwszTempPortName = GetDynamicLpcPortName(tagValue);
+            }
+            
+            if (!pwszTempPortName && SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L',')) {
+                pwszTempPortName = StoreLpcPortName(tagValue, tagValue);
+            }
+
+            if (pwszTempPortName != NULL)
             {
-                WCHAR* pwszTempPortName = GetDynamicLpcPortName(tagValue);
-
-                if (pwszTempPortName == NULL)
-                    return RPC_S_ACCESS_DENIED;
-
-	            WCHAR* ptr = wcsstr(StringBinding, L":");
-	            if(ptr)
-	            {
-		            size_t len = ptr - StringBinding;
-		            wcsncpy(wstrPortName, StringBinding, len);
-		            wcscat(wstrPortName, L":[");
-		            wcscat(wstrPortName, pwszTempPortName);
-		            if(ptr[1] == L'[')
-			            wcscat(wstrPortName, ptr + 2);
-		            else
-			            wcscat(wstrPortName, L"]");
-	            }
-                // else error let it fail
+                WCHAR* ptr = wcsstr(StringBinding, L":");
+                if (ptr)
+                {
+                    size_t len = ptr - StringBinding;
+                    wcsncpy(wstrPortName, StringBinding, len);
+                    wcscat(wstrPortName, L":[");
+                    wcscat(wstrPortName, pwszTempPortName);
+                    if (ptr[1] == L'[')
+                        wcscat(wstrPortName, ptr + 2);
+                    else
+                        wcscat(wstrPortName, L"]");
+                }
             }
 
             // the "RpcPortBinding" overwrites "UseRpcMgmtSetComTimeout"
@@ -750,7 +764,6 @@ _FX ULONG RpcRt_RpcBindingFromStringBindingW(
                 use_RpcMgmtSetComTimeout = Config_String2Bool(tagValue, use_RpcMgmtSetComTimeout);
         }
     }
-
 
     RPC_STATUS  status;
     status = __sys_RpcBindingFromStringBindingW(*wstrPortName ? wstrPortName : StringBinding, OutBinding);
@@ -850,14 +863,13 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
             WCHAR tagValue[96];
             if (RPC_PROTSEQ_LRPC == Template->ProtocolSequence && !Template->StringEndpoint)
             {
-                if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L','))
-                {
+                if (SbieDll_FindTagValue(ModulePreset, L"Resolve", tagValue, sizeof(tagValue), L'=', L',')) {
                     Template->StringEndpoint = GetDynamicLpcPortName(tagValue);
                 }
-                /*else if (SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L','))
-                {
-                    Template->StringEndpoint = (unsigned short*)...;
-                }*/
+
+                if (!Template->StringEndpoint && SbieDll_FindTagValue(ModulePreset, L"IpcPort", tagValue, sizeof(tagValue), L'=', L',')){
+                    Template->StringEndpoint = StoreLpcPortName(tagValue, tagValue);
+                }
             }
 
             // the "RpcPortBinding" overwrites "UseRpcMgmtSetComTimeout"
@@ -897,9 +909,10 @@ _FX RPC_STATUS RpcRt_RpcBindingCreateW(
 //---------------------------------------------------------------------------
 
 
-#define UUID_UserMgrCli L"B18FBAB6-56F8-4702-84E0-41053293A869"
+//#define UUID_UserMgrCli L"B18FBAB6-56F8-4702-84E0-41053293A869"
 
-RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSeq,TCHAR *NetworkAddr,TCHAR *EndPoint,TCHAR *Options,TCHAR **StringBinding) {
+RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSeq,TCHAR *NetworkAddr,TCHAR *EndPoint,TCHAR *Options,TCHAR **StringBinding) 
+{
     ULONG_PTR hSppc =  (ULONG_PTR)GetModuleHandle(L"sppc.dll");
     ULONG_PTR pRetAddr = (ULONG_PTR)_ReturnAddress();
 
@@ -909,10 +922,13 @@ RPC_STATUS RPC_ENTRY RpcRt_RpcStringBindingComposeW(TCHAR *ObjUuid,TCHAR *ProtSe
         Scm_Start_Sppsvc();
     }
     // we must block this in Win 10 to prevent r-click context menu hang in Explorer
-    else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
-    {
-        return STATUS_ACCESS_DENIED;
-    }
+    // note: this breaks otehr things but we need it, 
+    // so instead we block the {470C0EBD-5D73-4D58-9CED-E91E22E23282} Pin To Start Screen verb handler;
+    // inside Com_CoCreateInstance
+    //else if (ObjUuid && (!_wcsicmp(ObjUuid, UUID_UserMgrCli)))
+    //{
+    //    return STATUS_ACCESS_DENIED;
+    //}
     return __sys_RpcStringBindingComposeW(ObjUuid,ProtSeq,NetworkAddr,EndPoint,Options,StringBinding);
 }
 
@@ -1079,6 +1095,7 @@ ALIGNED BOOLEAN __cdecl RpcRt_Ndr64AsyncClientCall_x64(
         RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddress, pProxyInfo->pStubDesc, pProxyInfo->ProcFormatString, &pStack[1]);
     }
 
+    if (!SbieApi_QueryConfBool(NULL, L"NoUACProxy", FALSE))
     if (Dll_OsBuild >= 6000) {
         return Secure_CheckElevation((struct SECURE_UAC_ARGS*)pStack);
     }
@@ -1095,6 +1112,7 @@ ALIGNED BOOLEAN __cdecl RpcRt_NdrAsyncClientCall_x86(
         RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddress, pStubDescriptor, pFormat, &pStack[1]);
     }
 
+    if (!SbieApi_QueryConfBool(NULL, L"NoUACProxy", FALSE))
     if (Dll_OsBuild >= 6000) {
         return Secure_CheckElevation((struct SECURE_UAC_ARGS*)pStack);
     }

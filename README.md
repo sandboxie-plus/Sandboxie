@@ -1,5 +1,5 @@
 # Sandboxie
-[![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases)
+[![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions)
 
 <img align="left" src="https://user-images.githubusercontent.com/12372772/123517080-8ab20a00-d69f-11eb-8e82-2e18cf6e0303.png">
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br><br>
@@ -52,14 +52,14 @@ Open Source release
 - diversenok - Security analysis & PoC's
 - stephtr - CI / Certification
 - TechLord - Team-IRA / Reversing
-- hg421 - Security analysis 
+- hg421 - Security analysis / Code reviews
 - typpos - UI suggestions / Documentation / Code reviews
-- isaak654 - UI fixes / Templates / Documentation
+- isaak654 - Templates / Documentation / Code fixes
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - daveout - UI / Icons
-- mpheath - Author of Plus installer based on Inno Setup
+- mpheath - Author of Plus installer / Code fixes
 - yfdyh000 - Localization support for Plus installer
 - NewKidOnTheBlock - Changelog fixes
 
@@ -71,10 +71,11 @@ Open Source release
 - bastik-1001 - German
 - isaak654 - Italian
 - 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=10) - Polish
-- JNylson - Portuguese
+- JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
 - xorcan - Turkish (disabled for inactivity, a new translator is needed)
+- SuperMaxusa - Ukrainian
 
 More volunteers are welcome here! ;)
 

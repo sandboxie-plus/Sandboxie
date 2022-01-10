@@ -93,7 +93,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setCurrentIndex(0);
 
 	ui.uiLang->addItem(tr("Auto Detection"), "");
-	ui.uiLang->addItem("International English", "en");
+	ui.uiLang->addItem("International English", "native");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
 	foreach(const QString& langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{
@@ -241,7 +241,7 @@ void CSettingsWindow::LoadSettings()
 
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", false));
-		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", false));
+		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());

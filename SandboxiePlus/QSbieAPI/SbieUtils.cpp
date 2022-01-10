@@ -347,7 +347,7 @@ bool CSbieUtils::GetStartMenuShortcut(CSbieAPI* pApi, QString &BoxName, QString 
 	QString Command = "start_menu:" + QString::fromWCharArray(MapName);
 	if (!LinkPath.isEmpty())
 		Command += ":" + LinkPath;
-	pApi->RunStart(BoxName, Command, &Process);
+	pApi->RunStart(BoxName, Command, false, QString(), &Process);
 	//Process.waitForFinished(-1);
 	while(Process.state() != QProcess::NotRunning)
 		QCoreApplication::processEvents(); // keep UI responsive

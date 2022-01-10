@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
  * Copyright 2020 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -182,8 +182,12 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     WCHAR *dllname = Dll_AllocTemp(MAX_PATH * 2 * sizeof(WCHAR));
     ULONG index = 0;
 
-	WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
-	SbieApi_GetHomePath(NULL, 0, path, 1020);
+    //
+    // We also end up here form host injection mode so Dll_HomeDosPath is not available
+    //
+
+    WCHAR *path = Dll_AllocTemp(1024 * sizeof(WCHAR));
+    SbieApi_GetHomePath(NULL, 0, path, 1020);
 
     if (!__sys_LdrLoadDll)
         __sys_LdrLoadDll = (P_LdrLoadDll)GetProcAddress(Dll_Ntdll, "LdrLoadDll");
@@ -201,7 +205,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
         }
 
 		//
-		// For expidient use we allow to enter the dll name without a path 
+		// For expedient use we allow to enter the dll name without a path
 		// starting with \ in that case the DLL is looked for in %SbieHome%
 		//
 
@@ -217,7 +221,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
         //
 
         else if (bHostInject)
-            continue; 
+            continue;
 
 
         //
@@ -249,7 +253,7 @@ _FX void Ldr_LoadInjectDlls(BOOLEAN bHostInject)
     }
 
     Dll_Free(dllname);
-	Dll_Free(path);
+    Dll_Free(path);
 }
 
 
@@ -486,17 +490,30 @@ _FX void Ldr_FixImagePath(void)
 _FX WCHAR *Ldr_FixImagePath_2(void)
 {
     UNICODE_STRING *NameUni;
-    SIZE_T BufferLength;
+    //SIZE_T BufferLength;
+    ULONG BufferLength;
     NTSTATUS status;
 
-    extern P_NtQueryVirtualMemory __sys_NtQueryVirtualMemory;
-    if (! __sys_NtQueryVirtualMemory)
+    //
+    // Windows is caching loaded modules, when after being run a binary is moved
+    // and run again, NtQueryVirtualMemory wil return the original location
+    // and not the valid up to date current location.
+    // Hence we use NtQueryInformationProcess instead it also returns the reparsed path
+    //
+
+    //extern P_NtQueryVirtualMemory __sys_NtQueryVirtualMemory;
+    //if (! __sys_NtQueryVirtualMemory)
+    extern P_NtQueryInformationProcess __sys_NtQueryInformationProcess;
+    if (! __sys_NtQueryInformationProcess)
         return NULL;
 
     BufferLength = 256;
     NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
-    status = __sys_NtQueryVirtualMemory(
-        NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+    //status = __sys_NtQueryVirtualMemory(
+    //    NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+    //    NameUni, BufferLength, &BufferLength);
+    status = __sys_NtQueryInformationProcess(
+        NtCurrentProcess(), ProcessImageFileName,
         NameUni, BufferLength, &BufferLength);
 
     if (status == STATUS_INFO_LENGTH_MISMATCH ||
@@ -504,8 +521,11 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
 
         Dll_Free(NameUni);
         NameUni = Dll_AllocTemp((ULONG)BufferLength + sizeof(WCHAR) * 2);
-        status = __sys_NtQueryVirtualMemory(
-            NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+        //status = __sys_NtQueryVirtualMemory(
+        //    NtCurrentProcess(), (void *)Ldr_ImageBase, MemoryMappedFilenameInformation,
+        //    NameUni, BufferLength, &BufferLength);
+        status = __sys_NtQueryInformationProcess(
+            NtCurrentProcess(), ProcessImageFileName,
             NameUni, BufferLength, &BufferLength);
     }
 
@@ -803,7 +823,7 @@ _FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
         //
 
         Ldr_LoadInjectDlls(g_bHostInject);
-        
+
         Dll_InitExeEntry();
     }
     else

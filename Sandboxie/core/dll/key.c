@@ -4300,7 +4300,10 @@ _FX void Key_CreateBaseKeys()
     UNICODE_STRING objname;
     WCHAR* base_keys[] = {
         L"\\machine\\system", L"\\machine\\software",
-        L"\\user\\current\\software", L"\\user\\current_Classes", NULL};
+        L"\\user\\current\\software", L"\\user\\current_Classes",
+        L"\\machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        L"\\user\\current\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        NULL};
 
     //
     // in privacy mode we need to pre create some keys or else the box initialization will fail

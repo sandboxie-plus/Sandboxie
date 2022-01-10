@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="uk_UA">
 <context>
     <name>CFileBrowserWindow</name>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="25"/>
         <source>%1 - Files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Файли</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="129"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити ярлик</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити в будь-яку папку</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити в цю папку</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="197"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть каталог</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="247"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити ярлик до контейнеру %1</translation>
     </message>
 </context>
 <context>
@@ -39,12 +39,12 @@
     <message>
         <location filename="Dialogs/MultiErrorDialog.cpp" line="9"/>
         <source>Sandboxie-Plus - Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Помилка</translation>
     </message>
     <message>
         <location filename="Dialogs/MultiErrorDialog.cpp" line="17"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення</translation>
     </message>
 </context>
 <context>
@@ -52,42 +52,42 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="22"/>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Створити новий контейнер</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="30"/>
         <source>New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий контейнер</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміцнений контейнер зі захистом даних</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміцнений контейнер</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="40"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер зі захистом даних</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартний ізольований контейнер (За замовчуванням)</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="43"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер для додатків зі захистом даних</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="44"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця для додатків (БЕЗ ізоляції)</translation>
     </message>
 </context>
 <context>
@@ -95,88 +95,88 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="23"/>
         <source>Browse for File</source>
-        <translation type="unfinished"></translation>
+        <translation>Пошук файлу</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Пошук папки</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="243"/>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Закритий</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="244"/>
         <source>Closed RT</source>
-        <translation type="unfinished"></translation>
+        <translation>Закритий RT</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="245"/>
         <source>Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки зчитування</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормальний</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="241"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкритий</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Open for All</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкритий для всіх</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Boxed Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки для контейнеру</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="248"/>
         <location filename="Windows/OptionsAccess.cpp" line="261"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомо</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="255"/>
         <source>File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл/Папка</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="256"/>
         <source>Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Реєстр</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="257"/>
         <source>IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях IPC</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="258"/>
         <source>Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Клас Wnd</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="259"/>
         <source>COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Об&apos;єкт COM</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="266"/>
         <source>Select File</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть файл</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="266"/>
         <source>All Files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Усі файли (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="278"/>
@@ -184,7 +184,7 @@
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="105"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть каталог</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="298"/>
@@ -193,7 +193,7 @@
         <location filename="Windows/OptionsNetwork.cpp" line="525"/>
         <location filename="Windows/OptionsNetwork.cpp" line="638"/>
         <source>All Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Усі програми</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="303"/>
@@ -204,17 +204,17 @@
         <location filename="Windows/OptionsWindow.cpp" line="599"/>
         <location filename="Windows/OptionsWindow.cpp" line="615"/>
         <source>Group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Група: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="418"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation type="unfinished"></translation>
+        <translation>Об&apos;єкти COM повинні бути вказані за своїм GUID, наприклад {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="424"/>
         <source>RT interfaces must be specified by their name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтерфейси RT повинні бути вказані за своїм ім&apos;ям.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="467"/>
@@ -222,352 +222,353 @@
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="504"/>
         <source>Template values can not be edited.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон не можна редагувати.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="533"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон не можна видалити.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="269"/>
         <source>Please enter an auto exec command</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть команду для autoexec</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="290"/>
         <source>Please enter a program file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть назву файла програми</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="405"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="65"/>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="65"/>
         <location filename="Windows/OptionsRecovery.cpp" line="60"/>
         <source>Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="13"/>
         <source>Don&apos;t alter the window title</source>
-        <translation type="unfinished"></translation>
+        <translation>Не змінювати назву вікна</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="14"/>
         <source>Display [#] indicator only</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати тільки [#] індикатор</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="15"/>
         <source>Display box name in title</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати назву контейнера в заголовку</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="17"/>
         <source>Border disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Грань вимкнена</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>Show only when title is in focus</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Можливо, це потрібно переробити</translatorcomment>
+        <translation>Показати тільки, коли в фокусі</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>Always show</source>
-        <translation type="unfinished"></translation>
+        <translation>Завжди показувати</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміцнений контейнер зі захистом даних</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміцнений контейнер</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер зі захистом даних</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="24"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартний ізольований контейнер (За замовчуванням)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="26"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер для додатків зі захистом даних</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="27"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер для додатків (БЕЗ ізоляції)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="89"/>
         <location filename="Windows/OptionsGeneral.cpp" line="96"/>
         <source>Browse for Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть програму</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="233"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>кілобайт (%1)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="251"/>
         <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть колір</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="262"/>
         <source>Please enter a program path</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть шлях до програми</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="273"/>
         <location filename="Windows/OptionsGeneral.cpp" line="316"/>
         <source>Select Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати програму</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="273"/>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконавчі (*.exe *.cmd);;Усі файли (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="284"/>
         <source>Please enter a service identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть індентификатор служби</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="296"/>
         <source>Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Служба</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="296"/>
         <source>Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Програма</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="316"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконавчі (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="320"/>
         <location filename="Windows/OptionsGeneral.cpp" line="335"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть назву меню</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="331"/>
         <source>Please enter a command</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть команду</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="141"/>
         <source>Please enter a name for the new group</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть назву для нової групи</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="273"/>
         <source>Please select group first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, оберіть спочатку групу</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="37"/>
         <location filename="Windows/OptionsNetwork.cpp" line="559"/>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь-який</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="38"/>
         <location filename="Windows/OptionsNetwork.cpp" line="560"/>
         <source>TCP</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="39"/>
         <location filename="Windows/OptionsNetwork.cpp" line="561"/>
         <source>UDP</source>
-        <translation type="unfinished"></translation>
+        <translation>UDP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="40"/>
         <location filename="Windows/OptionsNetwork.cpp" line="562"/>
         <source>ICMP</source>
-        <translation type="unfinished"></translation>
+        <translation>ICMP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="53"/>
         <source>Allow access</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити доступ</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="54"/>
         <source>Block using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити за допомогою Windows Filtering Platform</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="55"/>
         <source>Block by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити, заблокувавши доступ до пристроїв мережі</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="148"/>
         <location filename="Windows/OptionsNetwork.cpp" line="545"/>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="149"/>
         <source>Block (WFP)</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити (WFP)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="150"/>
         <source>Block (NDev)</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити (NDev)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="546"/>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити</translation>
     </message>
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="60"/>
         <source>Exclusion</source>
-        <translation type="unfinished"></translation>
+        <translation>Вийняток</translation>
     </message>
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="116"/>
         <source>Please enter a file extension to be excluded</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть розширення файлів, які потрібно виключити</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="65"/>
         <source>Lingerer</source>
-        <translation type="unfinished"></translation>
+        <translation>Затриманий</translation>
     </message>
     <message>
         <location filename="Windows/OptionsStop.cpp" line="65"/>
         <source>Leader</source>
-        <translation type="unfinished"></translation>
+        <translation>Лідер</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="59"/>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Усі категорії</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="98"/>
         <source>Custom Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Користувальницькі шаблони</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="99"/>
         <source>Email Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Клієнт ел. почти</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="100"/>
         <source>PDF/Print</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF/Друк</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="101"/>
         <source>Security/Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Безпека/Конфіденційність</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="102"/>
         <source>Desktop Utilities</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосунки для робочого стола</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="103"/>
         <source>Download Managers</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджери для завантаження</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="104"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Різне</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="105"/>
         <source>Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Веб-браузер</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="106"/>
         <source>Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Програвач</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="107"/>
         <source>Torrent Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Torrent-клієнт</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="153"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей шаблон доступен глобально. Щоб його налаштувати, використовуйте глобальні параметри.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="188"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть іденфікатор шаблону</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="196"/>
         <source>Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="216"/>
         <source>Only local templates can be removed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки локальні шаблони можуть бути видаленими!</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="220"/>
         <source>Do you really want to delete the selected local template?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити обраний локальний шаблон?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="141"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus - Параметри &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="543"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей контейнер був видалений, тому конфігурацію не можна зберегти.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="587"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation type="unfinished"></translation>
+        <translation>Деякі зміни не збережені досі, ви дійсно хочете закрити це вікно параметрів?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="608"/>
         <source>Enter program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть програму</translation>
     </message>
 </context>
 <context>
@@ -575,27 +576,27 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="46"/>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>?</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="47"/>
         <source>Visit %1 for a detailed explanation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відвідайте %1 для ще більш детального пояснення.</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="54"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Відхилити</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="55"/>
         <source>Remove this message from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати це повідомлення зі списку</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="58"/>
         <source>Hide all such messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Сховати всі повідомлення</translation>
     </message>
 </context>
 <context>
@@ -603,12 +604,12 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="357"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Відхилити</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="358"/>
         <source>Remove this progress indicator from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати цей індикатор прогресу зі списку</translation>
     </message>
 </context>
 <context>
@@ -616,42 +617,42 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="99"/>
         <source>Remember for this process</source>
-        <translation type="unfinished"></translation>
+        <translation>Запам&apos;ятати для цього процесу</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="109"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Так</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="114"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="119"/>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершити</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="140"/>
         <source>Yes and add to allowed programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Так і додати до дозволених програм</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="175"/>
         <source>Requesting process terminated</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес запиту був завершений</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="180"/>
         <source>Request will time out in %1 sec</source>
-        <translation type="unfinished"></translation>
+        <translation>Час очікування запиту закінчиться через %1 сек</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="182"/>
         <source>Request timed out</source>
-        <translation type="unfinished"></translation>
+        <translation>Час очікування запиту закінчився</translation>
     </message>
 </context>
 <context>
@@ -659,67 +660,67 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="236"/>
         <source>Recover to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити в:</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="241"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Огляд</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="242"/>
         <source>Clear folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="250"/>
         <source>Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="251"/>
         <source>Recover the file to original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити файл до початкового розташування</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="254"/>
         <source>Recover &amp;&amp; Explore</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити та Показати</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="255"/>
         <source>Recover &amp;&amp; Open/Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити та Відкрити/Виконати</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="257"/>
         <source>Open file recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити відновлення файлів для цього контейнеру</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="265"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Відхилити</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="266"/>
         <source>Don&apos;t recover this file right now</source>
-        <translation type="unfinished"></translation>
+        <translation>Не відновлювати цей файл зараз</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="269"/>
         <source>Dismiss all from this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Відхилити все з цього контейнеру</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="270"/>
         <source>Disable quick recovery until the box restarts</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути швидке відновлення, поки контейнер перезавантажується</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="294"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть каталог</translation>
     </message>
 </context>
 <context>
@@ -727,52 +728,56 @@
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="23"/>
         <source>Sandboxie-Plus Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Сповіщення Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="160"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете дозволити диспетчеру друку доступ ззовні контейнера?</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити %4 (%5) скопіювати великий файл у контейнер: %2
+Назва файлу: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="259"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити %1 (%2) доступ до Інтернету?
+Повне розташування: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="318"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 може бути відновлений з %2 для швидкого відновлення.
+Файл буде записаний у: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="320"/>
         <source>an UNKNOWN process.</source>
-        <translation type="unfinished"></translation>
+        <translation>НЕВІДОМИЙ процес</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="320"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="404"/>
         <location filename="Windows/PopUpWindow.cpp" line="405"/>
         <source>UNKNOWN</source>
-        <translation type="unfinished"></translation>
+        <translation>НЕВІДОМО</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="411"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Переміщення великого файлу %1 у пісочницю %2, залишилось %3.
+Повне розташування: %4</translation>
     </message>
 </context>
 <context>
@@ -780,64 +785,64 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="43"/>
         <source>%1 - File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Відновлення файлів</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="63"/>
         <source>File Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я файла</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="64"/>
         <source>File Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір файла</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="65"/>
         <source>Full Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Повний шлях</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="97"/>
         <source>Remember target selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Запам&apos;ятати цей вибір</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="123"/>
         <source>Original location</source>
-        <translation type="unfinished"></translation>
+        <translation>Початкове розташування</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="124"/>
         <source>Browse for location</source>
-        <translation type="unfinished"></translation>
+        <translation>Огляд місця</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="125"/>
         <source>Clear folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити список папок</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="159"/>
         <location filename="Windows/RecoveryWindow.cpp" line="180"/>
         <location filename="Windows/RecoveryWindow.cpp" line="428"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть каталог</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="233"/>
         <source>Close until all programs stop in this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити, поки всі програми зупинять роботу в контейнері</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="253"/>
         <source>There are %1 new files available to recover.</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступно %1 нових файлів для відновлення.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="463"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
-        <translation type="unfinished"></translation>
+        <translation>В пісочниці є %1 файл(ів) та %2 папок, які використовують %3 дискового простору.</translation>
     </message>
 </context>
 <context>
@@ -845,22 +850,22 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="2428"/>
         <source>Waiting for folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Очікування папки: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2429"/>
         <source>Deleting folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалення папки: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2430"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Злиття папок: %1 та %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2431"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершення злиття знімків...</translation>
     </message>
 </context>
 <context>
@@ -868,22 +873,22 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="183"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнений</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="188"/>
         <source>Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Порожньо</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="191"/>
         <source>Application Compartment</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця для додатків</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="193"/>
         <source>NOT SECURE</source>
-        <translation type="unfinished"></translation>
+        <translation>НЕ ЗАХИЩЕНО</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="195"/>
@@ -893,37 +898,37 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="197"/>
         <source>Enhanced Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Посилена ізоляція</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="200"/>
         <source>Privacy Enhanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Посилена конфіденційність</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="203"/>
         <source>API Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Журнал API</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="205"/>
         <source>No INet</source>
-        <translation type="unfinished"></translation>
+        <translation>Без доступу до Інтернет</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="207"/>
         <source>Net Share</source>
-        <translation type="unfinished"></translation>
+        <translation>Локальна мережа</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="209"/>
         <source>No Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Без прав адміністратора</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="212"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормальний</translation>
     </message>
 </context>
 <context>
@@ -932,158 +937,158 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="115"/>
         <location filename="SandMan.cpp" line="916"/>
         <source>Sandboxie-Plus v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="133"/>
         <source>Reset Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути налаштування стовців</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="134"/>
         <source>Copy Cell</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопіювати клітинку</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="135"/>
         <source>Copy Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопіювати рядок</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="136"/>
         <source>Copy Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопіювати панель</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="171"/>
         <source>Time|Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Час|Повідомлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="179"/>
         <source>Sbie Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення Sbie</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="187"/>
         <source>Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Журнал відстеження</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="204"/>
         <source>Show/Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати/Сховати</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="247"/>
         <location filename="SandMan.cpp" line="379"/>
         <source>Disable Forced Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути примусові програми</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="373"/>
         <source>&amp;Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця (&amp;S)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="374"/>
         <source>Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити контейнер</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="375"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити групу контейнерів</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="377"/>
         <source>Terminate All Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити всі процеси</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="378"/>
         <source>Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Пошук вікна</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="382"/>
         <source>&amp;Maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Різне (&amp;M)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="383"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>З&apos;єднатись</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="384"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Від&apos;єднатись</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="386"/>
         <source>Stop All</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити все</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="388"/>
         <source>&amp;Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Розширений (&amp;A)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="389"/>
         <source>Install Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити драйвер</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="390"/>
         <source>Start Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити драйвер</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="391"/>
         <source>Stop Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити драйвер</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="392"/>
         <source>Uninstall Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити драйвер</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="394"/>
         <source>Install Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="395"/>
         <source>Start Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити слубжу</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="396"/>
         <source>Stop Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити службу</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="397"/>
         <source>Uninstall Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити службу</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="400"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="403"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>Вигляд (&amp;V)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Simple View</source>
-        <translation type="unfinished"></translation>
+        <translation>Простий</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="407"/>
@@ -1098,42 +1103,42 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="417"/>
         <source>Show Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати приховані контейнери</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="419"/>
         <source>Show All Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати всі сеанси</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>
         <source>Clean Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="425"/>
         <source>Cleanup Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити процеси</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="427"/>
         <source>Cleanup Message Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити журнал повідомлень</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="428"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити журнал відстеження</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="430"/>
         <source>Keep terminated</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="434"/>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри (&amp;O)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="435"/>
@@ -1148,7 +1153,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="438"/>
         <source>Edit ini file</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати ini файл</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="439"/>
@@ -1158,65 +1163,67 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="441"/>
         <source>Trace Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження в журналі</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="445"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Допомога (&amp;H)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="447"/>
         <source>Support Sandboxie-Plus with a Donation</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримати Sandboxie-Plus за допомогою пожертування</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Visit Support Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Відвідати форум підтримки</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="449"/>
         <source>Online Documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>Онлайн-документація</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="451"/>
         <source>Check for Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірити оновлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="453"/>
         <source>About the Qt Framework</source>
-        <translation type="unfinished"></translation>
+        <translation>Про Qt Framework</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="454"/>
         <location filename="SandMan.cpp" line="2302"/>
         <source>About Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Про Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="473"/>
         <source>Cleanup</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="499"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Підтримайте Sandboxie-Plus на Patreon&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="530"/>
         <source>Do you want to close Sandboxie Manager?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете закрити Sandboxie Manager?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="548"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation type="unfinished"></translation>
+        <translation>Програма Sandboxie-Plus працює в портативному режимі, зараз потрібно очистити створені служби. Для цього потрібні права адміністратора.
+
+Ви хочете зробити очищення?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="549"/>
@@ -1226,254 +1233,263 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1438"/>
         <location filename="SandMan.cpp" line="1683"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати це повідомлення знову</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="592"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця має посилену захисну ізоляцію, підходить для перевірки ненадійного програмного забезпечення.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="596"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця має стандартну ізоляцію, підходить для запуску вашого програмного забезпечення, щоб посилити захист.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="600"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця не має ізоляцію, вона була створена тільки для використання віртуалізації програмного забезпечення.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="605"/>
         <source>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Ця пісочниця блокує доступ до папок користувачів, окрім тих, які є дозволеними в налаштуваннях доступу до ресурсів.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="672"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідома операція &apos;%1&apos; була запитана за допомогою командного рядка</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="681"/>
         <location filename="SandMan.cpp" line="683"/>
         <location filename="SandMan.cpp" line="1863"/>
         <source>Sandboxie-Plus - Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Помилка</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="681"/>
         <source>Failed to stop all Sandboxie components</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося зупинити всі компоненти Sandboxie</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="683"/>
         <source>Failed to start required Sandboxie components</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося запустити потрібні для Sandboxie компоненти</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="685"/>
         <source>Maintenance operation %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Технічна операція %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="690"/>
         <source>Maintenance operation Successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Технічна операція була виконана успішно</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="816"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете перевіряти наявність нових версій Sandboxie-Plus?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="854"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Деякі шаблони для сумісності (%1) відсутні або видалені, ви хочете видалити їх з всіх пісочниць?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="871"/>
         <source>Cleaned up removed templates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Очищення прибраних шаблонів...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="920"/>
         <source>Sbie Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог Sbie: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="921"/>
         <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Версія Sbie+: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="922"/>
         <source>Loaded Config: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантажена конфігурація: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="929"/>
         <source>   -   Portable</source>
-        <translation type="unfinished"></translation>
+        <translation>   -   Портативно</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="938"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Програму Sandboxie-Plus було запущено в портативному режимі, ви хочете поставити папку Sandbox у батьківський каталог?
+Так, Sandboxie-Plus обере: %1
+Ні, Sandboxie-Plus обере: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="991"/>
         <source>The supporter certificate is expired</source>
-        <translation type="unfinished"></translation>
+        <translation>Термін дії сертифікату спонсора закінчився</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="997"/>
         <source>Default sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця за замовчуванням була не знайдена, створення:</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1003"/>
         <source>   -   NOT connected</source>
-        <translation type="unfinished"></translation>
+        <translation>- НЕ підключено</translation>
+    </message>
+    <message>
+        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
+        <translation type="vanished">Програма %1, яка працює в пісочниці %2, буде завершені через 5 хвилин, тому що пісочниця має в своїй конфігурації функції, які доступні лише для спонсорів.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте спонсором проєкту&lt;/a&gt;, та отримайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1153"/>
         <source>PID %1: </source>
-        <translation type="unfinished"></translation>
+        <translation>PID %1: </translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1155"/>
         <source>%1 (%2): </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2): </translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1181"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця функція доступна лише для спонсорів проєкту. Процеси, які працюють з цією функцією без сертифіката спонсора, будуть завершені через 5 хвилин.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте спонсором проєкту&lt;/a&gt;, та отримайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1278"/>
         <source>Recovering file %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновлення файлу %1 до %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1290"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл %1 вже існує, ви хочете перезаписати його?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1291"/>
         <source>Do this for all files!</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити для всіх файлів!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1310"/>
         <source>Failed to recover some files: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося відновити деякі файли: 
+		</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1338"/>
         <source>Only Administrators can change the config.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки адміністратор може змінити конфігурацію.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1348"/>
         <source>Please enter the configuration password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть пароль конфігурації.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1356"/>
         <source>Login Failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося увійти: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1392"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете завершити всі процеси в всіх пісочницях?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1393"/>
         <source>Terminate all without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершити без запитань</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1412"/>
         <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть тривалість для примусового завершення програм.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1437"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програму Sandboxie-Plus було запущено в портативному режимі та для цього режиму потрібно сторити необхідні служби. Це може потребувати права адміністратора.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1474"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation type="unfinished"></translation>
+        <translation>УВАГА: Ще один агент (можливо, SbieCtrl.exe) вже керує цим сеаносом Sandboxie, будь ласка, завершіть інший сеанс та повторно підключиться.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1537"/>
         <source>Executing maintenance operation, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконання операції для технічного обслуговування, зачекайте...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1645"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете скинути сховані вікна повідомлень (так), або тількі всі повідомлення журналу (ні)?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1681"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміни будуть застосовані автоматично, коли файл буде збережений.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1682"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміни будуть застосовані автоматично, коли текстовий редактор буде закритий.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1811"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Код помилки: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1812"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомо</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1845"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідома помилка: 0x%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2275"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Про Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версія %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2283"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця копія Sandboxie+ зарестрована для: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2285"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie+ безкоштовний для персонального та некомерційного викоростання.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2288"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - це продовження Sandboxie з відкритим кодом.&lt;br /&gt;Відвідайте &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; для більш детальної інформації.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Версія драйвера: %1&lt;br /&gt;Особливості: %2&lt;br /&gt;&lt;br /&gt;Зображення з &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1814"/>
         <source>Administrator rights are required for this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для цієї дії потрібні права адміністратора.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1122"/>
@@ -1493,248 +1509,252 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1815"/>
         <source>Failed to execute: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося виконати: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1816"/>
         <source>Failed to connect to the driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося підключитись до драйвера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1817"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося підключитись до служби Sandboxie: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1818"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Була знайдена несумісна версія Sandboxie %1. Сумістима версія: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1819"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося знайти місце інсталяції Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1820"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося скопіювати конфігурацію пісочниці %1: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1821"/>
         <source>A sandbox of the name %1 already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця з назвою %1 вже існує</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1822"/>
         <source>Failed to delete sandbox %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося видалити пісочницю %1: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1823"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва пісочниці має не більше 32 символів.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1824"/>
         <source>The sandbox name can not be a device name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва пісочниці не повина містити назву пристроя.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1825"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва пісочниці має містити тільки літери, цифри та символи підкреслення, які будуть відображатись, як пробіли.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1826"/>
         <source>Failed to terminate all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося завершити всі процеси</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1827"/>
         <source>Delete protection is enabled for the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Захист від видалення увімкнен для пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1828"/>
         <source>Error deleting sandbox folder: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка під час видалення папки пісочниці: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1831"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося перемістити папку &apos;%1&apos; до &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1832"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця операція зі знимком не може виконатись, коли процеси працюють в пісочниці.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1833"/>
         <source>Failed to create directory for new snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося створити папку для нового знімку</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1834"/>
         <source>Failed to copy RegHive</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося скопіювати RegHive</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1835"/>
         <source>Snapshot not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Знімок не знайдено</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1836"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка під час злиття папок знімків &apos;%1&apos; та &apos;%2&apos;, знімок був створений неповністю.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1837"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося видалити папку старого знімку &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1838"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можливо видалити знімок, який використовується в інших знімках.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1839"/>
         <source>Failed to remove old RegHive</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося видалити старий RegHive</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1840"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви не маєте прав змінювати конфігурацію в розділі &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося застосвувати параметр %1 конфігурації в розділі %2: %3</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1842"/>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можливо створити знімок у порожній пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1843"/>
         <source>A sandbox with that name already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця з такою назвою вже існує</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1844"/>
         <source>The config password must not be longer than 64 characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль конфігурації не повинен містити більше 64 символів</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1865"/>
         <source>Operation failed for %1 item(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Дія не вдалась для %1 елемента(ів)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1997"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете відкрити веб-браузер у пісочниці (так) чи ззовні (ні)?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1998"/>
         <source>Remember choice for later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запам&apos;ятати цей вибір</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2029"/>
         <source>Checking for updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірка оновленнь...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2079"/>
         <source>server not reachable</source>
-        <translation type="unfinished"></translation>
+        <translation>сервер не доступний</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2080"/>
         <location filename="SandMan.cpp" line="2082"/>
         <source>Failed to check for updates, error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося перевірити наявність оновленнь, помилка: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2099"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ви хочете перейти до &lt;a href=&quot;%1&quot;&gt;інформаційної сторінки&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2107"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати це оголошення знову.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2154"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Нова версія Sandboxie-Plus вже доступна.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Нова версія:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2156"/>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ви хочете завантажити останню версію?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2158"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ви хочете відкрити &lt;a href=&quot;%1&quot;&gt;сторінку завантаження&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2166"/>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати це повідомлення більше.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2194"/>
         <source>Downloading new version...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження нової версії...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2207"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нові оновлення не були знайдені, ваша версія andboxie-Plus є актуальною.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2249"/>
         <source>Failed to download update from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося завантажити оновлення з: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2253"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Нова версія Sandboxie-Plus була завантажена в: &lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Ви хочете почати інсталяцію? Якщо деякі програми вже працюють в пісочниці, то вони будуть завершені.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
+        <translation type="vanished">&lt;h3&gt;Про Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версія %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2466"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Це вікно працює, як частина програми %1 в пісочниці %2 </translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2473"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Це вікно не працює, як частина будь-якої програми в пісочниці.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2508"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетягніть інструмент для пошуку на вікно, щоб його обрати, та відпустіть для перевірки вікна (у пісочниці або ззовні).</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2563"/>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Пошук вікон</translation>
     </message>
     <message>
         <location filename="main.cpp" line="77"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Manager не може працювати в пісочниці!</translation>
     </message>
 </context>
 <context>
@@ -1742,37 +1762,37 @@ No will choose: %2</source>
     <message>
         <location filename="Models/SbieModel.cpp" line="134"/>
         <source>Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Група пісочниць</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="450"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="451"/>
         <source>Process ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID процесу</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="452"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="453"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок вікна</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="455"/>
         <source>Start Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Час початку</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="456"/>
         <source>Path / Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Розташування / Командний рядок</translation>
     </message>
 </context>
 <context>
@@ -1780,178 +1800,178 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="470"/>
         <source>Sbie RpcSs</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie RpcSs</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="471"/>
         <source>Sbie DcomLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie DcomLaunch</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="472"/>
         <source>Sbie Crypto</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Crypto</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="473"/>
         <source>Sbie WuauServ</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie WuauServ</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="474"/>
         <source>Sbie BITS</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie BITS</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="475"/>
         <source>Sbie Svc</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbie Svc</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="476"/>
         <source>MSI Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>MSI Installer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="477"/>
         <source>Trusted Installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trusted Installer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="478"/>
         <source>Windows Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Update</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="479"/>
         <source>Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Провідник Windows (Windows Explorer)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="480"/>
         <source>Internet Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Internet Explorer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="481"/>
         <source>Firefox</source>
-        <translation type="unfinished"></translation>
+        <translation>Firefox</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="482"/>
         <source>Windows Media Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Media Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="483"/>
         <source>Winamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Winamp</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="484"/>
         <source>KMPlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>KMPlayer</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="485"/>
         <source>Windows Live Mail</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="486"/>
         <source>Service Model Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Live Mail</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="487"/>
         <source>RunDll32</source>
-        <translation type="unfinished"></translation>
+        <translation>Service Model Reg</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="488"/>
         <location filename="SbiePlusAPI.cpp" line="489"/>
         <source>DllHost</source>
-        <translation type="unfinished"></translation>
+        <translation>DllHost</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="490"/>
         <source>Windows Ink Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Служби Windows Ink</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="491"/>
         <source>Chromium Based</source>
-        <translation type="unfinished"></translation>
+        <translation>На основі Chromium</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="492"/>
         <source>Google Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновник Google (Google Updater)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="493"/>
         <source>Acrobat Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Acrobat Reader</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="494"/>
         <source>MS Outlook</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Outlook</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="495"/>
         <source>MS Excel</source>
-        <translation type="unfinished"></translation>
+        <translation>MS Excel</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="496"/>
         <source>Flash Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Flash Player</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="497"/>
         <source>Firefox Plugin Container</source>
-        <translation type="unfinished"></translation>
+        <translation>Firefox Plugin Container</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="498"/>
         <source>Generic Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальний веб-переглядач</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="499"/>
         <source>Generic Mail Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальний клієнт для ел. почти</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="500"/>
         <source>Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Thunderbird</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="509"/>
         <source>Terminated</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершений</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="515"/>
         <source>Forced </source>
-        <translation type="unfinished"></translation>
+        <translation>Примусовий </translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="513"/>
         <source>Running</source>
-        <translation type="unfinished"></translation>
+        <translation>Працює</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="519"/>
         <source> in session %1</source>
-        <translation type="unfinished"></translation>
+        <translation>в сеансі %1</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="528"/>
         <source> (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -1959,382 +1979,387 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="77"/>
         <source>Create New Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити нову пісочницю</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="80"/>
         <source>Remove Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати групу</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="84"/>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="85"/>
         <source>Run Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати програму</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="86"/>
         <source>Run from Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати з меню &apos;Пуск&apos;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="87"/>
         <source>Default Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Веб-браузер за замовчуванням</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="88"/>
         <source>Default eMail Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Клієнт для ел. почти за замовчуванням</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="95"/>
         <source>Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Провідник Windows (Windows Explorer)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="96"/>
         <source>Registry Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор реєстру (Regedit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="97"/>
         <source>Programs and Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Програми та компоненти</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="101"/>
         <source>Terminate All Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити всі програми</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="105"/>
         <location filename="Views/SbieView.cpp" line="155"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити ярлик</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="107"/>
         <source>Explore Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Переглянути зміст</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="109"/>
         <source>Snapshots Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджер знімків</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="110"/>
         <source>Recover Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити файли</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="111"/>
         <source>Delete Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити зміст</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="115"/>
         <source>Sandbox Presets</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Не вдалося вибрати більш точний переклад :(</translatorcomment>
+        <translation>Готові налаштування для пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="117"/>
         <source>Ask for UAC Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>Запитати про UAC</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="118"/>
         <source>Drop Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати права адміністратора</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="119"/>
         <source>Emulate Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Емулювати права адміністратора</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="127"/>
         <source>Block Internet Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокувати доступ до Інтернету</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="129"/>
         <source>Allow Network Shares</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити ресурси локальної мережі</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="113"/>
         <source>Sandbox Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="133"/>
         <source>Rename Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейменувати пісочницю</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="146"/>
         <source>Remove Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити пісочницю</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="151"/>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершити</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="156"/>
         <source>Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Готові налаштування</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="157"/>
         <source>Pin to Run Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Закріпити в меню &apos;Пуск&apos;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="159"/>
         <source>Block and Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокувати та завершити</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>Allow internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити доступ до Інтернету</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="165"/>
         <source>Force into this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово в пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="167"/>
         <source>Set Linger Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити затриманий процес</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="169"/>
         <source>Set Leader Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановить лідерський процес</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="267"/>
         <source>    File root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Корінь файлу: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="268"/>
         <source>    Registry root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Корінь реєстру: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="269"/>
         <source>    IPC root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Корінь IPC: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Options:
     </source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри:
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="482"/>
         <source>[None]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Немає]</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="703"/>
         <source>Please enter a new group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть назву нової групи</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="598"/>
         <source>Do you really want to remove the selected group(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити цю(і) групу(и)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="78"/>
         <source>Create Box Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити групу пісочниць</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="79"/>
         <source>Rename Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейменувати групу</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="89"/>
         <source>Command Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Командний рядок</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
         <source>Boxed Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="91"/>
         <source>Command Prompt (as Admin)</source>
-        <translation type="unfinished"></translation>
+        <translation>Командний рядок (від імені Адміністратора)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="93"/>
         <source>Command Prompt (32-bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Командний рядок (32-біт)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="98"/>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати Autorun</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="103"/>
         <source>Browse Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Переглянути зміст</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="104"/>
         <source>Box Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміст пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="108"/>
         <source>Open Registry</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити Реєстр</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="132"/>
         <source>Duplicate Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити копію пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="135"/>
         <source>Move Box/Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити пісочницю/групу</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="136"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити вгору</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="141"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити вниз</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="584"/>
         <source>Please enter a new name for the Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть нову назву для групи.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="588"/>
         <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Це ім&apos;я групи вже використовується.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="631"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити в (негативні значення піднімають вгору, позитивні - вниз):</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="665"/>
         <source>A group can not be its own parent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця група не може бути власним батьком.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="757"/>
         <location filename="Views/SbieView.cpp" line="834"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати це повідомлення знову.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="805"/>
         <location filename="Views/SbieView.cpp" line="825"/>
         <location filename="Views/SbieView.cpp" line="845"/>
         <source>This Sandbox is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця порожня.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть нове ім&apos;я для копії пісочниці.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
         <source>%1 Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Копія</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="930"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть нове ім&apos;я для пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
         <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>
         <source>This Sandbox is already empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця порожня</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="973"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити зміст цієї пісочниці?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="976"/>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити зміст цих пісочниць?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="993"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете зупинити всі процеси в цієї(цих) пісочниці(ь)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="994"/>
         <location filename="Views/SbieView.cpp" line="1070"/>
         <source>Terminate without asking</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити без запитань</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1034"/>
         <location filename="Views/SbieView.cpp" line="1097"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити ярлик до пісочниці %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1069"/>
         <source>Do you want to %1 %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете %1 %2?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1069"/>
         <source>the selected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>обрані процеси</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1130"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця не має обмежень доступу до Інтернет, ви хочете їх увімкнути?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1160"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця пісочниця вимкнена, ви хочете її увімкнути?</translation>
     </message>
 </context>
 <context>
@@ -2342,17 +2367,17 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="88"/>
         <source>Sandboxie-Plus - Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Виконати в пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="168"/>
         <source>Are you sure you want to run the program outside the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете виконати цю програму ззовні пісочниці?</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="173"/>
         <source>Please select a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, виберіть пісочницю.</translation>
     </message>
 </context>
 <context>
@@ -2360,32 +2385,32 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="66"/>
         <source>Sandboxie Plus - Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus - Налаштування</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="95"/>
         <source>Auto Detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Автовиявлення</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="106"/>
         <source>Don&apos;t show any icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати будь-яких піктограм</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="107"/>
         <source>Show Plus icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати піктограму Plus</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="108"/>
         <source>Show Classic icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати класичну (classic) піктограму</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="110"/>
         <source>Close to Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Сховати у Tray</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="111"/>
@@ -2395,58 +2420,58 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="112"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="493"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation type="unfinished"></translation>
+        <translation>На жаль, термін цього сертифікату закінчився.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="499"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дякуємо за підтримку розробки Sandboxie-Plus.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="506"/>
         <source>This support certificate is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей сертифікат спонсора не є дійсним.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="545"/>
         <location filename="Windows/SettingsWindow.cpp" line="649"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть каталог</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="611"/>
         <source>Please enter the new configuration password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть новий пароль конфігурації.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="615"/>
         <source>Please re-enter the new configuration password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть новий пароль конфігурації ще раз.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="620"/>
         <source>Passwords did not match, please retry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Паролі не збігаються, будь ласка, спробуйте ще раз.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="630"/>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="630"/>
         <source>Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="640"/>
         <source>Please enter a program file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть назву файла програми</translation>
     </message>
 </context>
 <context>
@@ -2454,32 +2479,32 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="24"/>
         <source>%1 - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Знімки</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="36"/>
         <source>Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Знімок</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="160"/>
         <source>Please enter a name for the new Snapshot.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть ім&apos;я для нового знімку.</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="160"/>
         <source>New Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий знімок</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="176"/>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете змінити активний знімок? Це видалить теперешній стан!</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="189"/>
         <source>Do you really want to delete the selected snapshot?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити цей(ці) знімок(ки)?</translation>
     </message>
 </context>
 <context>
@@ -2487,42 +2512,42 @@ No will choose: %2</source>
     <message>
         <location filename="Models/TraceModel.cpp" line="154"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомо</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="242"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="244"/>
         <source>Process %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="252"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Потік %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="280"/>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Процес</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="282"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="283"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Стан</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="284"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Значення</translation>
     </message>
 </context>
 <context>
@@ -2530,12 +2555,12 @@ No will choose: %2</source>
     <message>
         <location filename="Views/TraceView.cpp" line="63"/>
         <source>Show as task tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати, як дерево задач</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="69"/>
         <source>PID:</source>
-        <translation type="unfinished"></translation>
+        <translation>PID:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="71"/>
@@ -2547,77 +2572,77 @@ No will choose: %2</source>
         <location filename="Views/TraceView.cpp" line="243"/>
         <location filename="Views/TraceView.cpp" line="301"/>
         <source>[All]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Всі]</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="76"/>
         <source>TID:</source>
-        <translation type="unfinished"></translation>
+        <translation>TID:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="83"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="94"/>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Стан:</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="97"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкритий</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="98"/>
         <source>Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Закритий</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="99"/>
         <source>Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="100"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Інше</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="105"/>
         <source>Show All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати всі пісочниці</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="111"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти в файл</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="340"/>
         <source>Save trace log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти журнал у файл</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="346"/>
         <source>Failed to open log file for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалось відкрити файл журналу для запису</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="362"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідомо</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="265"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="272"/>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
 </context>
 <context>
@@ -2625,7 +2650,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/FileBrowserWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Знімки</translation>
     </message>
 </context>
 <context>
@@ -2633,27 +2658,27 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="32"/>
         <source>SandboxiePlus new box</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus нова пісочниця</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="54"/>
         <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип пісочниці:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця ізольовує Вашу систему від процесів, які є в пісочниці, це захищає від змін в інших програмах та даних на вашому комп&apos;ютері. Рівень безпеки впливає на Вашу безпеку, так й на сумісність з іншими додатками, кожний тип пісочниці має свій рівень безпеки. Sandboxie може захистити Ваші персональні файли від процесів, які виконані у пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
+        <translation>Інформація про пісочницю:</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="47"/>
         <source>Sandbox Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва пісочниці:</translation>
     </message>
 </context>
 <context>
@@ -2661,27 +2686,27 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="32"/>
         <source>SandboxiePlus Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування SandboxiePlus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="52"/>
         <source>General Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальні налаштування</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="62"/>
         <source>Box Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="121"/>
         <source>Sandbox Indicator in title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Індикатор пісочниці в заголовку:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="141"/>
         <source>Sandboxed window border:</source>
-        <translation type="unfinished"></translation>
+        <translation>Грань вікна пісочниці:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="468"/>
@@ -2689,107 +2714,107 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="668"/>
         <location filename="Forms/OptionsWindow.ui" line="704"/>
         <source>Protect the system from sandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Захистити систему від процесів у пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="471"/>
         <source>Elevation restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження рівня прав</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="545"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати права в групи Адміністраторів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="131"/>
         <source>px Width</source>
-        <translation type="unfinished"></translation>
+        <translation>px ширини</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="495"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити додатки думати, що мають права адміністратора (дозволяє безпечно виконати встановлення деяких програм)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="485"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>УВАГА: При запуску з вбудованими правами Адміністратора, процеси не можуть прибрати ці права.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="77"/>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Зовнішний вигляд</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="454"/>
         <source>(Recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="184"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати цю пісочницю у вікні &apos;Запустити в пісочниці&apos;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="255"/>
         <source>File Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування файла</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="263"/>
         <source>Auto delete content when last sandboxed process terminates</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматичне видалення змісту, коли пісочниця закривається</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="270"/>
         <source>Copy file size limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ліміт на розмір копійованого файлу:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="284"/>
         <source>Box Delete options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри видалення пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="304"/>
         <source>Protect this sandbox from deletion or emptying</source>
-        <translation type="unfinished"></translation>
+        <translation>Захистити цю пісочницю від видалення</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="318"/>
         <source>Raw Disk access</source>
-        <translation type="unfinished"></translation>
+        <translation>Повний доступ до диску</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="332"/>
         <source>File Migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Перенесення файлів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="339"/>
         <source>Allow elevated sandboxed applications to read the harddrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити додаткам у пісочницю читати зміст диску</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="346"/>
         <source>Warn when an application opens a harddrive handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомляти, коли додаток має доступ до диску</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="353"/>
         <source>kilobytes</source>
-        <translation type="unfinished"></translation>
+        <translation>кілобайт</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="370"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення про проблему 2102, коли файл має дуже великий розмір</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="403"/>
         <source>Prompt user for large file migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Питати користувача про переміщення файлів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="562"/>
@@ -2799,57 +2824,57 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити диспетчеру друку, щоб друкувати файлів ззовні пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати диспетчер друку, принтери можуть бути встановлені ззовні пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>Block read access to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокувати доступ до буферу обміну</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="617"/>
         <source>Open System Protected Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити системне захищене сховище</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="624"/>
         <source>Block access to the printer spooler</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокувати доступ до диспетчеру друку</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="641"/>
         <source>Other restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Інші обмеження</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="671"/>
         <source>Printing restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження друку</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="707"/>
         <source>Network restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження мережі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="714"/>
         <source>Block network files and folders, unless specifically opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокувати файли та папки у мережі, якщо вони не відкриті.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="731"/>
         <source>Run Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню запуску</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="737"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете налаштувати користувальницькі об&apos;єкти для меню запуску пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="761"/>
@@ -2860,18 +2885,18 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="2865"/>
         <location filename="Forms/OptionsWindow.ui" line="2907"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="766"/>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Командний рядок</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="786"/>
         <location filename="Forms/OptionsWindow.ui" line="887"/>
         <source>Add program</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати програму</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="805"/>
@@ -2883,17 +2908,17 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="2358"/>
         <location filename="Forms/OptionsWindow.ui" line="2425"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="813"/>
         <source>Auto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Автозапуск</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="819"/>
         <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Тут ви можете налаштувати програми та/або служби, які повинні запускатись автоматично у контейнері, коли він активован</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="830"/>
@@ -2902,56 +2927,56 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1665"/>
         <location filename="Forms/OptionsWindow.ui" line="1920"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="835"/>
         <source>Program/Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Програма/Служба</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="906"/>
         <source>Add service</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати службу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="918"/>
         <source>Program Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Група програм</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="926"/>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати групу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="958"/>
         <location filename="Forms/OptionsWindow.ui" line="1211"/>
         <location filename="Forms/OptionsWindow.ui" line="1296"/>
         <source>Add Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати програму</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="992"/>
         <source>Forced Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусові програми</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1019"/>
         <source>Force Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусова папка</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1035"/>
         <location filename="Forms/OptionsWindow.ui" line="1134"/>
         <location filename="Forms/OptionsWindow.ui" line="1680"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1043"/>
         <source>Force Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусова програма</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="982"/>
@@ -2961,325 +2986,330 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1688"/>
         <location filename="Forms/OptionsWindow.ui" line="1889"/>
         <source>Show Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати шаблони</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="535"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка безпеки: додатки, які працюють під наглядом Sandboxie з правами адміністратора або з системним токеном, можуть обійти ізоляцію та модифікувати систему ззовні контейнера.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="552"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити MSIServer для запуску з токеном ізольованої системи та застосовувати інші розширення, якщо це потрібно</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="502"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка: Встановникам MSI не потрібні вийнятки. Якщо у вас є проблеми з встановленням MSI та впевнені в безпечності цього встановника, цей параметр може допомогти. Також ви можете вимкнути параметр &quot;Прибрати права адміністратора&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="101"/>
         <source>General Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальна конфігурація</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="111"/>
         <source>Box Type Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип пісочниці:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="151"/>
         <source>Box info</source>
-        <translation type="unfinished"></translation>
+        <translation>Інформація про контейнер</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="226"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>lt;b&gt;Більше типів пісочниць&lt;/b&gt; доступно для &lt;u&gt;спонсорів проєкту&lt;/u&gt;, пісочниці з посиленим захистом &lt;b&gt;&lt;font color=&apos;red&apos;&gt;захищає дані користувачів від несанкційного доступу&lt;/font&gt;&lt;/b&gt; програм, які працюють в пісочниці.&lt;br /&gt;Якщо ви не спонсор, ви можете &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;підтримати проєкт&lt;/a&gt;, щоб отримати &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;.&lt;br /&gt;Ви можете перевірити інші типи пісочниць, але через 5 хвилин після запуску пісочниці, всі процеси будуть зупинені.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="413"/>
         <source>Admin Rights</source>
-        <translation type="unfinished"></translation>
+        <translation>Права адміністратора</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="570"/>
         <source>Open Windows Credentials Store (user mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити Сховище Windows Credentials (user mode)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="721"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити змінювати налаштування мережі та файрволу (user mode)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="965"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете створити групу програм та дати назву їй.  Назву групи можна використовувати замість назв програм. Групи, які визначені для пісочниці, перезаписуються в групи, які визначені в групи.
+		</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1070"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програми, які є тут, або програми, які виконуються з вказаного місцерозташування, будуть автоматично переміщені в цю пісочницю, якщо вони не були запущені в інших пісочницях.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1083"/>
         <source>Stop Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити поведінки</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1091"/>
         <location filename="Forms/OptionsWindow.ui" line="1197"/>
         <location filename="Forms/OptionsWindow.ui" line="1310"/>
         <source>Remove Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати програму</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1111"/>
         <source>Add Leader Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати лідерующу програму</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1118"/>
         <source>Add Lingering Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати затриману програму</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1149"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Затримані програми будуть автоматично зупинені, якщо вони досі працюють після завершення всіх процесів.
+
+Якщо лідерські процеси визначені, всі інші стають, як затримані.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1164"/>
         <source>Start Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження на виконання</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1204"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення про проблему 1308, коли програма не може виконатись</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1223"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити запускати тільки ці програми в пісочниці. *</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1230"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заборонити запуск цих програм в пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1237"/>
         <source>Allow all programs to start in this sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити виконати всі програми в пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1244"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>* Примітка: Програми, які встановлені в пісочниці, не зможуть виконатись.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1259"/>
         <source>Internet Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження Інтернету</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1269"/>
         <source>Process Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження процесів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1289"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення про проблему 1307, коли програма не має доступ до Інтернету</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1303"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити підсказку користувачу про дозвіл на звільнення від обмежень.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1317"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка: Програми, встановлені в пісочниці, не матимуть доступу до Інтернету.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1346"/>
         <location filename="Forms/OptionsWindow.ui" line="1675"/>
         <source>Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1356"/>
         <source>Set network/internet access for unlisted processes:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
         <source>Test Rules, Program:</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірити правила, програми:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1413"/>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1423"/>
         <source>IP:</source>
-        <translation type="unfinished"></translation>
+        <translation>IP:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1433"/>
         <source>Protocol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Протокол:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1443"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>Х</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1452"/>
         <source>Remove Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати правило</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1459"/>
         <source>Add Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати правило</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1467"/>
         <location filename="Forms/OptionsWindow.ui" line="1670"/>
         <source>Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Програма</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1472"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Дія</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1477"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1482"/>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1487"/>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Протокол</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1509"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
-        <translation type="unfinished"></translation>
+        <translation>УВАГА: Windows Filtering Platform не увімнений у драйвері, тому ці правила можуть працювати тільки в користувальницькому режимі та можуть бути не застосовані!!! Шкідливі програми можуть це обійти.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1526"/>
         <source>Resource Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ до ресурсів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1536"/>
         <source>Resource Access Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Правила для доступу до ресурсів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1575"/>
         <source>Configure which processes can access what resources. Double click on an entry to edit it.
 &apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
 You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштуйте процеси та ресурси, до яких у них буде доступ. Натисність двічі, щоб змінити це.
+&apos;Відкритий&apos; доступ до файлів та ключів реєстру доступен лише для бінарних файлів, які знаходяться ззовні пісочниці.
+Ви можете використовувати &apos;Відкритий для всіх&apos;, щоб застосувати для всіх програм, або змінити цю поведінку у вкладці політик.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1707"/>
         <source>Add File/Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати файл/папку</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
         <source>Add Wnd Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати клас Wnd</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1654"/>
         <source>Add IPC Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати шлях IPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1615"/>
         <source>Add Reg Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати ключ реєстру</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1596"/>
         <source>Add COM Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати об&apos;єкт COM</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1847"/>
         <source>File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновлення файлів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1868"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати папку</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1875"/>
         <source>Ignore Extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Ігнорувати розширення</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1882"/>
         <source>Ignore Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ігнорувати папку</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1896"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути термінове відновлення файлів, щоб швидко відновити файли після їх створення.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете виключити деякі папки та типи файлів (або розширення файлів) з термінового відновлення.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1950"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation type="unfinished"></translation>
+        <translation>Коли швидке відновлення викликано, ці папки будуть перевірені в пісочниці. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1963"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаткові налаштування</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1989"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Різне</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2087"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Не змінювати ім&apos; класів вікон програм у пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2018"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не запускати служби пісочниці за допомогою системного токену (рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2142"/>
@@ -3287,139 +3317,140 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <location filename="Forms/OptionsWindow.ui" line="2275"/>
         <location filename="Forms/OptionsWindow.ui" line="2319"/>
         <source>Protect the sandbox integrity itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Захистити цілісність пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2004"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати критичні привілеї у процесів з системним токеном</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2060"/>
         <location filename="Forms/OptionsWindow.ui" line="2128"/>
         <source>(Security Critical)</source>
-        <translation type="unfinished"></translation>
+        <translation>(критично для безпеки)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2025"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Захистити системні процеси пісочниці від непривілегільованих процесів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2145"/>
         <source>Sandbox isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2046"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусове використання користувальницьких файлів маніфесту (застаріле)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1371"/>
         <source>Network Firewall Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Правила для мережі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1717"/>
         <source>Resource Access Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Політика доступу до ресурсів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1750"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Правило має таку специфікацію, що воно є мірою того, як добре це правило підходить певному шляху, кількості символів тощо. Правило, яке підходить для файлів типу &quot;*.tmp&quot;, має велику специфікацію, оскільки більше підходить за місцерозтушуванням.
+Процес рівня має більший пріорітет, чим специфікація та описує правило для процесу. Правила, які застосовуються до назви процесу або групи має більший рівень, за співпаданням по запереченням (тобто правила застосовуються для всіх процесів, але крім одного), поки найнижчі рівні мають глобальні збіги, тобто ті, які завжди застосовуються для будь-якого процесу.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1774"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Пріорітет правил, які побудовані на основі специфікації та рівня процесу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1781"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Приватний режим, блокує доступ до файлів та реєстру для всіх шляхів, окрім системних</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1795"/>
         <source>Access Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим доступу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1802"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли приватний режим увімнений, процеси в пісочниці мають доступ лише до C:\Windows\*, C:\Program Files\* та частинам реєстру HKLM, всі інших потрібен доступ на зчитування/записуванняю. У цьому режимі, специфікація правил увімкнена завжди.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1819"/>
         <source>Rule Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>Політика правил</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1826"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandboxed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Застсувати правило для закриття...=!&lt;програм&gt;,... та для всі бінарних файлам у пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1833"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати правила відкриття файлів тільки для бінарних у пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2080"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити RpcSc в пісочниці, як системний процес (не рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2039"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити доступ до Service Control Manager тільки привільованим процесам</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2101"/>
         <source>Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумістність</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2032"/>
         <source>Open access to COM infrastructure (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити доступ до COM-інфраструктури (не рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2011"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати процеси у пісочниці до об&apos;єктів завдань (рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1997"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Емулювати віконну станцію для всіх процесів у пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2169"/>
         <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити використання вкладених об&apos;єктів завдань (експериментально, працює тільки в Windows 8 та вище)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2186"/>
         <source>Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2194"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція безпеки використовує дуже обмежений системний токен, програма Sandboxie використовує це для обмежень пісочниці, коли вона використовує режим для додатків, тобто має лише розділення додатків.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2211"/>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити програмам у керувати пристроями комп&apos;ютера</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2231"/>
         <source>Disable Security Isolation (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути ізоляцію безпеки (експериментально)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
@@ -3429,17 +3460,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2261"/>
         <source>Open access to Windows Security Account Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити доступ до Windows Security Account Manager</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2204"/>
         <source>Open access to Windows Local Security Authority</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити доступ до Windows Local Security Authority</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2162"/>
         <source>COM/RPC</source>
-        <translation type="unfinished"></translation>
+        <translation>COM/RPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2176"/>
@@ -3454,7 +3485,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2285"/>
         <source>Disable Security Filtering (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути фільтр захисту (не рекомендовано)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2292"/>
@@ -3469,7 +3500,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2322"/>
         <source>Access isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція доступу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2332"/>
@@ -3479,7 +3510,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2338"/>
         <source>Add Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати команду</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2365"/>
@@ -3489,12 +3520,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2386"/>
         <source>Hide Processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Сховати процеси</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2405"/>
         <source>Add Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати процес</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2415"/>
@@ -3509,7 +3540,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2447"/>
         <source>Users</source>
-        <translation type="unfinished"></translation>
+        <translation>Користувачі</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2453"/>
@@ -3519,12 +3550,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2460"/>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати користувача</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2483"/>
         <source>Remove User</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити користувача</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2490"/>
@@ -3536,12 +3567,12 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2503"/>
         <source>Tracing</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстежування</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2511"/>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстежування викликів API (потрібен logapi, який повинен бути встановлений у папку sbie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2531"/>
@@ -3628,7 +3659,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2749"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>УВАГА, ці налаштування можуть вимкнути захист ядра та зламати захист пісочниці!!!</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2759"/>
@@ -3638,7 +3669,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2776"/>
         <source>App Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблони для додатків</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2788"/>
@@ -3658,27 +3689,27 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2816"/>
         <source>Add Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати шаблон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2823"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей список має багату кількість шаблонів сумісності</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2836"/>
         <source>Remove Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2860"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Категорія</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2876"/>
         <source>Template Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка з шаблонами</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2884"/>
@@ -3690,12 +3721,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2912"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2923"/>
         <source>Accessibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступність</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2931"/>
@@ -3705,32 +3736,32 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2938"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Читачі екрану: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2945"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ці налаштування допомагають використовувати Sandboxie з програмний забезпеченням для спеціальних можливостей. Зауважте, що при використанні цих параметрів, деякі функції захисту можуть не діяти.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2971"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати розділ ini файлу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2977"/>
         <source>Edit ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати ini</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2990"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3013"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберігти</translation>
     </message>
 </context>
 <context>
@@ -3738,7 +3769,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/PopUpWindow.ui" line="32"/>
         <source>SandboxiePlus Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Сповіщення SandboxiePlus</translation>
     </message>
 </context>
 <context>
@@ -3746,7 +3777,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="42"/>
         <source>Group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Група: %1</translation>
     </message>
 </context>
 <context>
@@ -3754,7 +3785,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Views/SbieView.cpp" line="1017"/>
         <source>Drive %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Диск %1</translation>
     </message>
 </context>
 <context>
@@ -3762,27 +3793,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="SandMan.cpp" line="2418"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2419"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2420"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2421"/>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Так (&amp;Y)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2422"/>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ні (&amp;N)</translation>
     </message>
 </context>
 <context>
@@ -3790,42 +3821,42 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Відновлення</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="70"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="117"/>
         <source>Recover target:</source>
-        <translation type="unfinished"></translation>
+        <translation>Місце до відновлення:</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="146"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати папку</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="139"/>
         <source>Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="153"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновити</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="103"/>
         <source>Delete all</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити все</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Show All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати всі файли</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="90"/>
@@ -3838,27 +3869,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="32"/>
         <source>SandboxiePlus select box</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - вибір пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="40"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть пісочницю, у якій потрібно відкирити/запустити програму, встановник або документ.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
         <source>Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>
         <source>Run As UAC Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати від імені Адміністратора</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="73"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати у пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="83"/>
@@ -3871,7 +3902,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
         <source>SandboxiePlus Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування SandboxiePlus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
@@ -3881,22 +3912,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="161"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати відновлення, коли</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="103"/>
         <source>Systray options</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування Systray</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="191"/>
         <source>UI Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Мова UI:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="220"/>
@@ -3911,12 +3942,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="289"/>
         <source>Start Sandbox Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити Sandbox Manager</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="296"/>
         <source>Start UI when a sandboxed process is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускати UI, коли процес пісочниці вже працює</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="168"/>
@@ -3926,27 +3957,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="151"/>
         <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати Темну тему (повноцінно застосовується після перезавантаження)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="86"/>
         <source>Restart required (!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Потрібен перезапуск (!)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="70"/>
         <source>Show Notifications for relevant log Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати сповіщення </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускати UI з Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="303"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати &apos;Виконати в пісочниці&apos; до меню Explorer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="132"/>
@@ -3956,12 +3987,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="262"/>
         <source>Always use DefaultBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Завжди використовувати DefaultBox</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Розширена конфігурація</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="464"/>
@@ -3971,12 +4002,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="605"/>
         <source>Clear password when main window becomes hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити пароль, коли основне вікно сховане</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="380"/>
         <source>Separate user folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Розділити папки користувачів</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="407"/>
@@ -3991,12 +4022,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="598"/>
         <source>Config protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Захист конфігурації</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="393"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="448"/>
@@ -4006,12 +4037,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="441"/>
         <source>Sandboxing features</source>
-        <translation type="unfinished"></translation>
+        <translation>Оссбливості пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="633"/>
         <source>Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінити пароль</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="626"/>
@@ -4026,32 +4057,32 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
         <source>Watch Sandboxie.ini for changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати Sandboxie.ini для змін</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Disable Forced Programs command</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
         <source>Portable root folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Корнева папка для портативної версії</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
         <source>Show recoverable files as notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати файли, які можна відновити, як сповіщення</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Show Icon in Systray:</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати піктограму в Systray:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="367"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати Windows Filtering Platform для обмеження доступу до мережі</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="400"/>
@@ -4061,43 +4092,43 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="490"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Перехоплювати обрані системні Win32k виклики, щоб увімкнути прискорення GPU (experimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>
         <source>Program Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Програмний контроль</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="509"/>
         <location filename="Forms/SettingsWindow.ui" line="686"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="514"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="522"/>
         <source>Remove Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибрати програму</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="542"/>
         <source>Add Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати програму</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="549"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли будь-яка з нижченаведених програм будуть відкриті не в контейнері, Sandboxie повідомить про SBIE1301.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="559"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати папку</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="566"/>
@@ -4107,77 +4138,77 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="575"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення про помилку 1308, коли програма не запуститись</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="583"/>
         <source>Config Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Захист конфігурації</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="656"/>
         <source>Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумістність</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="664"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Більше не перевіряти сумісність</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="671"/>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="678"/>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie помітив the following software applications in your system. Натисніть OK, щоб to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>
         <source>Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримка</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="764"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримка Sandboxie актувльним до нових версий Windows та суміснісним до всіх веб-браузерів - нескінченні зусулля. Підтримайте цю працю за допомогою пожертуванням.&lt;br /&gt;Ви можете підтримати розробку за допомогою &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal&lt;/a&gt;, також працює з кредитними картками.&lt;br /&gt;Або ви можете підтримати проєкт за допомогою &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;передплати на Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="796"/>
         <source>Enter the support certificate here</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть сертифікат спонсора</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="810"/>
         <source>Support Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри підтримки</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="817"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Спонсори Sandboxie-Plus отримують &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;спонсорський сертифікат&lt;/a&gt;. Це як ліцензійний ключ, але для чудових людей, які використовують програмне забезпечення з відкритим кодом (Open-source software). :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="834"/>
         <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Термін дії цього сертифікату вичерпаний, будь ласка, оновіть його.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="744"/>
         <source>Install updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановлювати нові версії автоматично</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="751"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Періодично перевіряти оновлення Sandboxie-Plus</translation>
     </message>
 </context>
 <context>
@@ -4185,42 +4216,42 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>SandboxiePlus - Знімкм</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="60"/>
         <source>Selected Snapshot Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталі обраних(ого) знімків(а)</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="66"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="73"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="98"/>
         <source>Snapshot Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Дії зі знімком</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>
         <source>Remove Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити знімок</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="111"/>
         <source>Go to Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейти до знімку:</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="118"/>
         <source>Take Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити знімок</translation>
     </message>
 </context>
 </TS>

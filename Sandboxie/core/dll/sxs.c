@@ -2160,7 +2160,7 @@ _FX BOOLEAN Sxs_FileCallback(const WCHAR *path, HANDLE *out_handle)
             HANDLE handle;
 
             WCHAR *FilePath = Dll_AllocTemp(MAX_PATH * 2 * sizeof(WCHAR));
-            SbieApi_GetHomePath(NULL, 0, FilePath, MAX_PATH);
+            wcscpy(FilePath, Dll_HomeDosPath);
             wcscat(FilePath, FileName);
 
             //OutputDebugString(L"*** *** ***\n");

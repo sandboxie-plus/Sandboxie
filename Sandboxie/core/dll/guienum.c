@@ -225,6 +225,11 @@ _FX BOOLEAN Gui_InitEnum(void)
         }
     }
 
+	// NoSbieDesk BEGIN
+    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
+
     //
     // hook desktop APIs
     //
@@ -239,7 +244,7 @@ _FX BOOLEAN Gui_InitEnum(void)
     // raises an error when CreateDesktop is call.  This hook
     // is removed for chrome.  See advapi.c: AdvApi_GetSecurityInfo
 
-    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", FALSE) && 
+    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) && 
         (Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) &&
         (Dll_ImageType != DLL_IMAGE_MOZILLA_FIREFOX)) {
         SBIEDLL_HOOK_GUI(CreateDesktopW);

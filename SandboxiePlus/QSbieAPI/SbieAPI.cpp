@@ -993,7 +993,7 @@ QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 	return UserSection;
 }
 
-SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess, bool Elevated)
+SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
@@ -1008,22 +1008,60 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, QPr
 
 	StartArgs += Command;
 
-	wchar_t sysPath[MAX_PATH];
-	GetSystemDirectoryW(sysPath, MAX_PATH);
-
+	//wchar_t sysPath[MAX_PATH];
+	//GetSystemDirectoryW(sysPath, MAX_PATH);
 	if (pProcess) {
-		pProcess->setWorkingDirectory(QString::fromWCharArray(sysPath));
+		//pProcess->setWorkingDirectory(QString::fromWCharArray(sysPath));
+		if (!WorkingDir.isEmpty())
+			pProcess->setWorkingDirectory(WorkingDir);
 		pProcess->setProgram(GetStartPath());
 		pProcess->setNativeArguments(StartArgs);
 		pProcess->start();
 	} 
 	else {
 		QProcess process;
-		process.setWorkingDirectory(QString::fromWCharArray(sysPath));
+		//process.setWorkingDirectory(QString::fromWCharArray(sysPath));
+		if (!WorkingDir.isEmpty())
+			process.setWorkingDirectory(WorkingDir);
 		process.setProgram(GetStartPath());
 		process.setNativeArguments(StartArgs);
 		process.startDetached();
 	}
+
+	/*
+	QString CommandLine = "\"" + GetStartPath() + "\" " + StartArgs;
+
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    ZeroMemory( &si, sizeof(si) );
+    si.cb = sizeof(si);
+    ZeroMemory( &pi, sizeof(pi) );
+
+    // Start the child process. 
+    if( !CreateProcessW( NULL,   // No module name (use command line)
+        (wchar_t*)CommandLine.toStdWString().c_str(),        // Command line
+        NULL,           // Process handle not inheritable
+        NULL,           // Thread handle not inheritable
+        FALSE,          // Set handle inheritance to FALSE
+        0,              // No creation flags
+        NULL,           // Use parent's environment block
+        NULL,           // Use parent's starting directory 
+        &si,            // Pointer to STARTUPINFO structure
+        &pi )           // Pointer to PROCESS_INFORMATION structure
+    ) 
+    {
+        printf( "CreateProcess failed (%d).\n", GetLastError() );
+		return SB_ERR();
+    }
+
+    // Wait until child process exits.
+    //WaitForSingleObject( pi.hProcess, INFINITE );
+
+    // Close process and thread handles. 
+    CloseHandle( pi.hProcess );
+    CloseHandle( pi.hThread );
+	*/
+
 	return SB_OK;
 }
 
@@ -1860,6 +1898,9 @@ QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
 			return BoxRoot + "\\user\\public" + Path.mid(m_PublicDir.length());
 	}
 
+	if (Path.length() >= 3 && Path.left(2) == "\\\\")
+		return BoxRoot + "\\share\\" + Path.mid(2);
+
 	if (Path.length() < 3 || Path.at(1) != ':')
 		return QString();
 	
@@ -1901,20 +1942,20 @@ QString CSbieAPI::GetRealPath(const CSandBoxPtr& pBox, const QString& Path)
 	if (BoxRoot.right(1) == "\\") BoxRoot.truncate(BoxRoot.length() - 1);
 
 	if (Path.length() < BoxRoot.length())
-		return QString();;
+		return QString();
 
 	RealPath = Path.mid(BoxRoot.length());
 
 	if (RealPath.left(6) == "\\share") 
 	{
-		QString Temp = RealPath.mid(6);
+		QString NtFolder = RealPath.mid(6);
 		bool bBs = false;
-		if ((bBs = (Temp.count("\\") < 3))) Temp += "\\";
+		if ((bBs = (NtFolder.count("\\") < 3))) NtFolder += "\\";
 		bool bOk;
-		Temp = Nt2DosPath("\\Device\\LanmanRedirector" + Temp, &bOk);
-		if (!bOk) return QString();
-		if (bBs) Temp.truncate(Temp.length() - 1);
-		return Temp;
+		QString Folder = Nt2DosPath("\\Device\\LanmanRedirector" + NtFolder, &bOk);
+		if (!bOk) return "\\" + NtFolder;
+		if (bBs) Folder.truncate(Folder.length() - 1);
+		return Folder;
 	}
 
 	if (RealPath.left(5) == "\\user")

@@ -101,6 +101,7 @@ void CNewBoxWindow::CreateBox()
 				pBox->SetBool("NoSecurityIsolation", true);
 				//pBox->SetBool("RunServicesAsSystem", true);
 				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eAppBoxPlus);
+				pBox->InsertText("Template", "NoUACProxy");
 				break;
 		}
 	}

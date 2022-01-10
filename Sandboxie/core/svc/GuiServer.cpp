@@ -1031,28 +1031,29 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
             hJobObject = CreateJobObject(&sa, jobname);
             if (hJobObject) {
 
-                //
-                // set UI restrictions on the job object
-                //
-
-                JOBOBJECT_BASIC_UI_RESTRICTIONS info;
-                info.UIRestrictionsClass = JOB_OBJECT_UILIMIT_EXITWINDOWS
-                                         | JOB_OBJECT_UILIMIT_HANDLES
-                                         | JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS
-                                         | JOB_OBJECT_UILIMIT_READCLIPBOARD;
-
                 BOOL ok = FALSE;        // set TRUE to skip UIRestrictions
 
 				// OriginalToken BEGIN
 				if (SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
 					ok = TRUE;
 				// OriginalToken END
-				// OpenToken BEGIN
-				if ((SbieApi_QueryConfBool(boxname, L"OpenToken", FALSE) || SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE)))
+				// UnrestrictedToken BEGIN
+				if (SbieApi_QueryConfBool(boxname, L"UnrestrictedToken", FALSE))
 					ok = TRUE;
-				// OpenToken END
+				// UnrestrictedToken END
 
                 if (! ok) {
+
+                    //
+                    // set UI restrictions on the job object
+                    //
+
+                    JOBOBJECT_BASIC_UI_RESTRICTIONS info;
+                    info.UIRestrictionsClass = JOB_OBJECT_UILIMIT_EXITWINDOWS
+                                             | JOB_OBJECT_UILIMIT_HANDLES
+                                             | JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS
+                                             | JOB_OBJECT_UILIMIT_READCLIPBOARD;
+
                     ok = SetInformationJobObject(
                                 hJobObject, JobObjectBasicUIRestrictions,
                                 &info, sizeof(info));
@@ -1066,6 +1067,21 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
 
                         ok = UserHandleGrantAccess(
                                 GetDesktopWindow(), hJobObject, TRUE);
+                    }
+
+                    //
+                    // we want to allow sandboxed processes to use jobs of thair own
+                    // with windows 8 we can have nested, a boxed process may want to use BREAKAWAY
+                    // hence we no longer prevent breaking away from our job,
+                    // instead we re assign the job on each initialization, like it was done for the initial one
+                    //
+
+                    if (ok) {
+                        JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobELInfo = {0};
+                        jobELInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_BREAKAWAY_OK
+                                                                   | JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK;
+                    
+                        ok = SetInformationJobObject(hJobObject, JobObjectExtendedLimitInformation, &jobELInfo, sizeof(jobELInfo));
                     }
                 }
                 if (! ok) {

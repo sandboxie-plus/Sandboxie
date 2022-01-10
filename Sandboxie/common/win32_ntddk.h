@@ -2258,6 +2258,19 @@ __declspec(dllimport) NTSTATUS RtlCreateSecurityDescriptor(
     ULONG Revision
 );
 
+__declspec(dllimport) NTSTATUS RtlGetOwnerSecurityDescriptor(
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID* Owner, PBOOLEAN OwnerDefaulted
+);
+
+__declspec(dllimport) NTSTATUS RtlGetGroupSecurityDescriptor(
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID* Group, PBOOLEAN GroupDefaulted
+);
+
+__declspec(dllimport) BOOLEAN RtlEqualSid(PSID Sid1, PSID Sid2);
+__declspec(dllimport) PVOID RtlFreeSid(PSID Sid);
+
 //---------------------------------------------------------------------------
 
 typedef struct _RTL_DRIVE_LETTER_CURDIR {

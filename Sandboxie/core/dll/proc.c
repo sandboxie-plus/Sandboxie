@@ -958,7 +958,11 @@ _FX BOOL Proc_CreateProcessInternalW(
         resume_thread = TRUE;
     dwCreationFlags |= CREATE_SUSPENDED;
 
-    dwCreationFlags &= ~CREATE_BREAKAWAY_FROM_JOB;
+    // no longer required see comment in GuiServer::GetJobObjectForAssign
+    //extern BOOLEAN SysInfo_UseSbieJob;
+    //if (SysInfo_UseSbieJob) {
+    //    dwCreationFlags &= ~CREATE_BREAKAWAY_FROM_JOB;
+    //}
 
 
     //
@@ -1011,7 +1015,6 @@ _FX BOOL Proc_CreateProcessInternalW(
             }
         }
     }
-
 
     ok = __sys_CreateProcessInternalW(
         NULL, lpApplicationName, lpCommandLine,
@@ -1907,7 +1910,7 @@ _FX UINT Proc_WinExec(LPCSTR lpCmdLine, UINT uCmdShow)
 
     memzero(&pi, sizeof(PROCESS_INFORMATION));
 
-    ok = CreateProcessA(
+   ok = CreateProcessA(
         NULL, (char *)lpCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 
     if (ok) {
@@ -1963,8 +1966,8 @@ _FX BOOLEAN SbieDll_RunFromHome(
     } else
         i = 0;
 
-    if (Dll_BoxName) {
-        SbieApi_GetHomePath(NULL, 0, &path[i], MAX_PATH);
+    if (Dll_HomeDosPath) {
+        wcscpy(&path[i], Dll_HomeDosPath);
         wcscat(path, L"\\");
     } else {
         GetModuleFileName(NULL, &path[i], MAX_PATH);

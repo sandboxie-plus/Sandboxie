@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
 		}
 
 		PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+		PendingMessage += "\nFrom:" + QDir::currentPath();
 	}
 
 	if (IsBoxed) {

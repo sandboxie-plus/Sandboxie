@@ -95,7 +95,8 @@ typedef struct _KEY_MOUNT           KEY_MOUNT;
 #ifdef OLD_DDK
 extern P_NtSetInformationToken          ZwSetInformationToken;
 #endif // OLD_DDK
-
+extern P_NtCreateToken                  ZwCreateToken;
+extern P_NtCreateTokenEx                ZwCreateTokenEx;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -104,7 +105,8 @@ extern P_NtSetInformationToken          ZwSetInformationToken;
 
 NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms);
 
-BOOLEAN Driver_CheckThirdParty(const WCHAR *DriverName, ULONG DriverType);
+ULONG Driver_GetRegDword(
+    const WCHAR *KeyPath, const WCHAR *ValueName);
 
 
 //---------------------------------------------------------------------------

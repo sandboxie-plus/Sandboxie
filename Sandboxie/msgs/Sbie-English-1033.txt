@@ -748,6 +748,10 @@ Remove command from command history
 Select the sandbox in which to start the program or document.
 .
 
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
 3111;txt;01
       Sandboxie Start Menu - %2  %0
 .
@@ -3069,6 +3073,18 @@ Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
 Open additional RPC Port Bindings
 .
 
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3470,7 +3486,7 @@ If you prefer to use a UI to control these options, please upgrade to Sandboxie-
 .
 
 6004;pop;err;01
-The selected box configuration is not permitted.
+The configuration of box %2 requires a supporter certificate.
 .
 
 6005;txt;01

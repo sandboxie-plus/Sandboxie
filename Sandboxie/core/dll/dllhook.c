@@ -101,6 +101,8 @@ _FX void *SbieDll_Hook(
     static const WCHAR *_fmt1 = L"%s (%d)";
     static const WCHAR *_fmt2 = L"%s (%d, %d)";
     UCHAR *tramp, *func;
+    void* RegionBase;
+    SIZE_T RegionSize;
     ULONG prot, dummy_prot;
     ULONG_PTR diff;
     ULONG_PTR target;
@@ -321,11 +323,26 @@ skip_e9_rewrite: ;
 
     func = (UCHAR *)SourceFunc;
 
-    if (!VirtualProtect(&func[-8], 20, PAGE_EXECUTE_READWRITE, &prot)) {
+    RegionBase = &func[-8]; // -8 for hotpatch area if present
+    RegionSize = 20;
 
-        ULONG err = GetLastError();
-        SbieApi_Log(2303, _fmt2, SourceFuncName, 33, err);
-        return NULL;
+    if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
+
+        //
+        // on windows 7 hooking NdrClientCall2 in 32bit (WoW64) mode fails
+        // because the memory area starts at -6 and not -8
+        // this area could be a hot patch reagion which we dont use
+        // hence if that fails just start at the exact offset and try again
+        //
+
+        RegionBase = &func[0];
+        RegionSize = 12;
+
+        if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
+            ULONG err = GetLastError();
+            SbieApi_Log(2303, _fmt2, SourceFuncName, 33, err);
+            return NULL;
+        }
     }
 
     //
@@ -458,7 +475,7 @@ skip_e9_rewrite: ;
 	//for(; UsedCount < ByteCount; UsedCount++)
 	//	func[UsedCount] = 0x90; // nop
 
-	VirtualProtect(&func[-8], 20, prot, &dummy_prot);
+	VirtualProtect(RegionBase, RegionSize, prot, &dummy_prot);
 
     // the trampoline code begins at trampoline + 16 bytes
     func = (UCHAR *)(ULONG_PTR)(tramp + 16);

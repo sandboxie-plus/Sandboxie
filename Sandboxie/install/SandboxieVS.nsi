@@ -938,21 +938,18 @@ Install2:
 
 	!define DllSrcLocation32 "..\Build\Support"
 
-;	MS libraries are all static with Visual Studio 2015	
+;	MS libraries are all static with Visual Studio 2019	
 ;!if "${_BUILDARCH}" == "x64"
 ;	!define DllSrcLocation64 "..\Build\Support\x64"
-;	!insertmacro InstallSystemDll "msvcr100.dll" false
-;	!insertmacro InstallSystemDll "mfc100u.dll" true
-;	!insertmacro InstallSystemDll "msvcr100.dll" true
-;	!insertmacro InstallSystemDll "msvcp100.dll" true
+;	!insertmacro InstallSystemDll "msvcp140.dll" true
+;	!insertmacro InstallSystemDll "vcruntime140.dll" true
 ;!endif
 
 ;!ifdef INCLUDE_VCREDIST_DNLD
 ;	!insertmacro DownloadInstallVCRedist
 ;!else
-;	!insertmacro InstallSystemDll "msvcr100.dll" false
-;	!insertmacro InstallSystemDll "mfc100u.dll" false
-;	!insertmacro InstallSystemDll "msvcp100.dll" false
+;	!insertmacro InstallSystemDll "msvcp140.dll" false
+;	!insertmacro InstallSystemDll "vcruntime140.dll" false
 ;!endif
 
     Call WriteProductKey

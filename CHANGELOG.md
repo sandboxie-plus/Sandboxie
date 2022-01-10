@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- if another sandbox has "ForceProcess=program.exe" configured, it will capture the process
 -- use case: set up a box with a Web browser forced, when another box opens a website, this will happen in the dedicated browser box
 -- Note: "BreakoutFolder=some\path" is also available
+- added silent uninstall switch `/remove /S` for Classic installer (by sredna) [#1532](https://github.com/sandboxie-plus/Sandboxie/pull/1532)
 
 ### Changed
 - The filename "sandman_pt" was changed to "sandman_pt_BR" (Brazilian Portuguese) [#1497](https://github.com/sandboxie-plus/Sandboxie/pull/1497)
@@ -21,7 +22,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issue with opening all file access OpenFilePath=* [#971](https://github.com/sandboxie-plus/Sandboxie/issues/971)
 - fixed issue with opening network shares [#1529](https://github.com/sandboxie-plus/Sandboxie/issues/1529)
-- fixed possible upgrade issue with Classic installers (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
+- fixed possible upgrade issue with Classic installer (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
+- fixed minor issues with Classic installer (by sredna) [#1533](https://github.com/sandboxie-plus/Sandboxie/pull/1533)
 - fixed Ldr_FixImagePath_2 issue [#1507](https://github.com/sandboxie-plus/Sandboxie/issues/1507)
 
 

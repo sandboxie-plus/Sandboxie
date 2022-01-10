@@ -2966,6 +2966,10 @@ Consenti accesso alle porte RPC per le impostazioni UAC
 Blocca i processi di telemetria più comuni
 .
 
+4308;txt;01
+Limita accesso ai dispositivi di sistema
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3363,7 +3367,7 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6004;pop;err;01
-La configurazione dell'area virtuale selezionata non è consentita.
+La configurazione dell'area virtuale selezionata richiede un certificato di supporto.
 .
 
 6005;txt;01

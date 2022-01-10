@@ -378,7 +378,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	wcscat(ptr, _SbieDll);
 
 	len = wcslen(ptr);
-	extra->NativeSbieDll_offset = ULONG_DIFF(ptr, extra);;
+	extra->NativeSbieDll_offset = ULONG_DIFF(ptr, extra);
 	extra->NativeSbieDll_length = len * sizeof(WCHAR);
 	ptr += len + 1;
 

@@ -260,8 +260,10 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
         return FALSE;
     }
 
-    for (i = 0; normalpaths[i] && ok; ++i) {
-        ok = Process_AddPath(proc, &proc->normal_key_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+    if (proc->use_privacy_mode) {
+        for (i = 0; normalpaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, &proc->normal_key_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
+        }
     }
 
     if (! ok) {

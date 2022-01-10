@@ -80,6 +80,7 @@ Filename: "{app}\{#MyAppName}.ini"; Section: "Options"; Key: "UiLanguage"; Strin
 Type: files; Name: "{app}\translations\sandman_zh-CN.qm"
 Type: files; Name: "{app}\translations\sandman_zh-TW.qm"
 Type: files; Name: "{app}\translations\sandman_pt.qm"
+Type: files; Name: "{app}\translations\sandman_ua.qm"
 
 
 [Registry]
@@ -217,7 +218,7 @@ begin
     'russian': Result := 'ru';
     'spanish': Result := 'es';
     'turkish': Result := 'tr';
-    'ukrainian': Result := 'ua';
+    'ukrainian': Result := 'uk';
   end;
 end;
 

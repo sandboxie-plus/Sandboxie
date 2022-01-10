@@ -7,9 +7,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Portuguese of Portugal on Plus UI (by JNylson, isaak654, mpheath) [#1497](https://github.com/sandboxie-plus/Sandboxie/pull/1497)
+- added "BreakoutProcess=program.exe", with this option selected applications can be started unboxed from within a box [#1500](https://github.com/sandboxie-plus/Sandboxie/issues/1500)
+-- the program image must be located outside the sandbox for this to work
+-- if another sandbox has "ForceProcess=program.exe" configured, it will capture the process
+-- use case: set up a box with a Web browser forced, when another box opens a website, this will happen in the dedicated browser box
+-- Note: "BreakoutFolder=some\path" is also available
 
 ### Changed
 - The filename "sandman_pt" was changed to "sandman_pt_BR" (Brazilian Portuguese) [#1497](https://github.com/sandboxie-plus/Sandboxie/pull/1497)
+- The filename "sandman_ua" was changed to "sandman_uk" (Ukrainian) [#1527](https://github.com/sandboxie-plus/Sandboxie/issues/1527)
+-- Note: Translators are encouraged to follow the [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123#discussioncomment-1203489) before creating a new pull request
+
+### Fixed
+- fixed issue with opening all file access OpenFilePath=* [#971](https://github.com/sandboxie-plus/Sandboxie/issues/971)
+- fixed issue with opening network shares [#1529](https://github.com/sandboxie-plus/Sandboxie/issues/1529)
+- fixed possible upgrade issue with Classic installers (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
+- fixed Ldr_FixImagePath_2 issue [#1507](https://github.com/sandboxie-plus/Sandboxie/issues/1507)
 
 
 

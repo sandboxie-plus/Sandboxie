@@ -3081,6 +3081,10 @@ Open RPC Port Bindings for UAC
 Block common telemetry processes
 .
 
+4308;txt;01
+Filter access to \Devices\
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3482,7 +3486,7 @@ If you prefer to use a UI to control these options, please upgrade to Sandboxie-
 .
 
 6004;pop;err;01
-The selected box configuration is not permitted.
+The configuration of box %2 requires a supporter certificate.
 .
 
 6005;txt;01

@@ -2416,6 +2416,12 @@ _FX NTSTATUS File_NtCreateFileImpl(
             CreateOptions, EaBuffer, EaLength);
     }*/
 
+    /*if (ObjectAttributes && ObjectAttributes->ObjectName && ObjectAttributes->ObjectName->Buffer
+        && wcsstr(ObjectAttributes->ObjectName->Buffer, L"Game.ini") != NULL ) {
+        while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
+           __debugbreak();
+    }*/
+
     //
     // if this is a recursive invocation of NtCreateFile,
     // then pass it as-is down the chain

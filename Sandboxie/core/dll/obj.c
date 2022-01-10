@@ -61,7 +61,7 @@ static P_NtQueryObject          __sys_NtQueryObject             = NULL;
 
        P_NtQueryVirtualMemory   __sys_NtQueryVirtualMemory      = NULL;
 
-	   P_NtQueryObject          __sys_NtQueryInformationProcess = NULL;
+	   P_NtQueryInformationProcess __sys_NtQueryInformationProcess = NULL;
 
 
 //---------------------------------------------------------------------------

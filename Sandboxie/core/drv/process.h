@@ -58,6 +58,7 @@ struct _PROCESS {
     // process id
 
     HANDLE pid;
+    HANDLE starter_id;
 
     // process pool.  created on process creation.  it is freed in its
     // entirety when the process terminates
@@ -242,6 +243,10 @@ BOOLEAN Process_NotifyProcess_Create(
 BOOLEAN Process_IsSameBox(PROCESS *proc, PROCESS *proc2, ULONG_PTR proc2_pid);
 
 
+// Process_IsStarter returns TRUE if proc2 was started by proc1
+
+BOOLEAN Process_IsStarter(PROCESS* proc1, PROCESS* proc2);
+
 // Process_MatchImage:  given an image name pattern 'pat_str', which
 // may contain wild cards, tests the image name 'test_str' against
 // the pattern.  If 'pat_len' is specified, only the first 'pat_len'
@@ -382,8 +387,10 @@ NTSTATUS Process_GetSidStringAndSessionId(
 // Get a box for a forced sandboxed process
 
 BOX *Process_GetForcedStartBox(
-    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN bHostInject);
+    HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN* pHostInject, const WCHAR *pSidString);
 
+
+BOOLEAN Process_IsBreakoutProcess(BOX *box, const WCHAR *ImagePath);
 
 // Manipulation of the List of Disabled Forced Processes:  (Process_List2)
 // Add ProcessId to list if ParentId is already listed

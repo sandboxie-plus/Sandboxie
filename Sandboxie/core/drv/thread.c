@@ -376,7 +376,7 @@ _FX PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc2 = Process_Find(PsGetProcessId(ProcessObject2), out_irql);
     if (proc2) {
 
-        if (! Process_IsSameBox(proc1, proc2, 0))
+        if (! Process_IsSameBox(proc1, proc2, 0) && ! Process_IsStarter(proc1, proc2))
             proc2 = NULL;
 
         else if (! proc2->threads_lock) {

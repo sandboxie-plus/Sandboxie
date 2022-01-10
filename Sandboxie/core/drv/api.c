@@ -653,8 +653,7 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
 
 _FX void Api_AddMessage(
 	NTSTATUS error_code,
-	const WCHAR *string1, ULONG string1_len,
-	const WCHAR *string2, ULONG string2_len,
+	const WCHAR** strings, ULONG* lengths,
 	ULONG session_id,
 	ULONG process_id)
 {
@@ -669,11 +668,14 @@ _FX void Api_AddMessage(
 
 	irql = Api_EnterCriticalSection();
 
+	ULONG data_len = 0;
+	for(int i=0; strings[i] != NULL; i++)
+		data_len += ((lengths ? lengths [i] : wcslen(strings[i])) + 1) * sizeof(WCHAR);
+
 	ULONG entry_size = sizeof(ULONG)	// session_id
 		+ sizeof(ULONG)					// process_id
 		+ sizeof(ULONG)					// error_code
-		+ (string1_len + 1) * sizeof(WCHAR)
-		+ (string2_len + 1) * sizeof(WCHAR);
+		+ data_len;
 
 	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer, TRUE);
 	if (write_ptr) {
@@ -682,10 +684,12 @@ _FX void Api_AddMessage(
 		log_buffer_push_bytes((CHAR*)&session_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)&process_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)&error_code, sizeof(ULONG), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)string1, string1_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)string2, string2_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+
+        // add strings '\0' separated
+        for (int i = 0; strings[i] != NULL; i++) {
+            log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+            log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+        }
 	}
 	// else // this can only happen when the entire buffer is to small to hold this entire entry
 		// if loging fails we can't log this error :/
@@ -946,89 +950,87 @@ _FX BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data)
 // Api_GetWork
 //---------------------------------------------------------------------------
 
-//
-//_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
-//{
-//	return STATUS_NOT_IMPLEMENTED;
-//
-//    /*API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
-//    NTSTATUS status;
-//    void *buffer_ptr;
-//    ULONG buffer_len;
-//    ULONG *result_len;
-//    ULONG length;
-//    API_WORK_ITEM *work_item;
-//    KIRQL irql;
-//
-//    //
-//    // caller must not be sandboxed, and caller has to be SbieSvc
-//    // if session parameter is -1
-//    //
-//
-//    if (proc)
-//        return STATUS_NOT_IMPLEMENTED;
-//
-//    if (args->session_id.val == -1 &&
-//            PsGetCurrentProcessId() != Api_ServiceProcessId)
-//        return STATUS_ACCESS_DENIED;
-//
-//    //
-//    // find next work/log item for the session
-//    //
-//
-//    buffer_ptr = args->buffer.val;
-//    buffer_len = args->buffer_len.val;
-//    result_len = args->result_len_ptr.val;
-//
-//    irql = Api_EnterCriticalSection();
-//
-//    work_item = List_Head(&Api_WorkList);
-//    while (work_item) {
-//        if (work_item->session_id == args->session_id.val)
-//            break;
-//        work_item = List_Next(work_item);
-//    }
-//
-//    __try {
-//
-//    if (! work_item) {
-//
-//        status = STATUS_NO_MORE_ENTRIES;
-//
-//    } else {
-//
-//        if (work_item->length <= buffer_len) {
-//
-//            length = work_item->length
-//                   - FIELD_OFFSET(API_WORK_ITEM, type);
-//            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
-//            memcpy(buffer_ptr, &work_item->type, length);
-//
-//            status = STATUS_SUCCESS;
-//
-//        } else {
-//
-//            length = work_item->length;
-//            status = STATUS_BUFFER_TOO_SMALL;
-//        }
-//
-//        if (result_len) {
-//            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
-//            *result_len = length;
-//        }
-//
-//        if (status == STATUS_SUCCESS)
-//            Api_DelWork(work_item);
-//    }
-//
-//    } __except (EXCEPTION_EXECUTE_HANDLER) {
-//        status = GetExceptionCode();
-//    }
-//
-//    Api_LeaveCriticalSection(irql);
-//
-//    return status;*/
-//}
+
+/*_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
+{
+    API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
+    NTSTATUS status;
+    void *buffer_ptr;
+    ULONG buffer_len;
+    ULONG *result_len;
+    ULONG length;
+    API_WORK_ITEM *work_item;
+    KIRQL irql;
+
+    //
+    // caller must not be sandboxed, and caller has to be SbieSvc
+    // if session parameter is -1
+    //
+
+    if (proc)
+        return STATUS_NOT_IMPLEMENTED;
+
+    if (args->session_id.val == -1 &&
+            PsGetCurrentProcessId() != Api_ServiceProcessId)
+        return STATUS_ACCESS_DENIED;
+
+    //
+    // find next work/log item for the session
+    //
+
+    buffer_ptr = args->buffer.val;
+    buffer_len = args->buffer_len.val;
+    result_len = args->result_len_ptr.val;
+
+    irql = Api_EnterCriticalSection();
+
+    work_item = List_Head(&Api_WorkList);
+    while (work_item) {
+        if (work_item->session_id == args->session_id.val)
+            break;
+        work_item = List_Next(work_item);
+    }
+
+    __try {
+
+    if (! work_item) {
+
+        status = STATUS_NO_MORE_ENTRIES;
+
+    } else {
+
+        if (work_item->length <= buffer_len) {
+
+            length = work_item->length
+                   - FIELD_OFFSET(API_WORK_ITEM, type);
+            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
+            memcpy(buffer_ptr, &work_item->type, length);
+
+            status = STATUS_SUCCESS;
+
+        } else {
+
+            length = work_item->length;
+            status = STATUS_BUFFER_TOO_SMALL;
+        }
+
+        if (result_len) {
+            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
+            *result_len = length;
+        }
+
+        if (status == STATUS_SUCCESS)
+            Api_DelWork(work_item);
+    }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Api_LeaveCriticalSection(irql);
+
+    return status;
+}*/
 
 
 //---------------------------------------------------------------------------

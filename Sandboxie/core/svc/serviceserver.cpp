@@ -94,7 +94,7 @@ MSG_HEADER *ServiceServer::StartHandler(MSG_HEADER *msg, HANDLE idProcess)
         return SHORT_REPLY(ERROR_INVALID_PARAMETER);
     ULONG offset = FIELD_OFFSET(SERVICE_START_REQ, name);
     if (offset + name_len > req->h.length)
-        return SHORT_REPLY(ERROR_INVALID_PARAMETER);;
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
 
     /*x
     should do:

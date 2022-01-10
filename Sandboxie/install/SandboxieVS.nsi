@@ -325,13 +325,14 @@ StrCpy $1 "https://aka.ms/vs/17/release"
 	StrCpy $2 "vc_redist.x86.exe"
 !endif
 
-NSISdl::download /TIMEOUT=30000 $1/$2 $TEMP\$2
+InitPluginsDir
+inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $1/$2 $PLUGINSDIR\$2 /END
 Pop $R0 ;Get the return value
-  StrCmp $R0 "success" +3
+  StrCmp $R0 "OK" +3
     MessageBox MB_RETRYCANCEL|MB_ICONSTOP "Download failed for: $1/$2.$\nError: $R0.$\nRerun the install when problem corrected." IDRETRY -3
     Quit
 
-ExecWait '"$TEMP\$2" /passive' $0
+ExecWait '"$PLUGINSDIR\$2" /passive' $0
 StrCmp $0 "0" +3
 	MessageBox MB_OK|MB_ICONSTOP "Installation of VCRedist failed: $0.$\nRerun the install when problem corrected."
 	Quit
@@ -821,7 +822,7 @@ FunctionEnd
 
 Function DownloadStatPng
 ;
-;	Pop $0	; Get the parameter (file name to download)
+	Pop $0	; Get the parameter (file name to download)
 ;	${If} ${RunningX64}
 ;	SetRegView 64
 ;	${EndIf}
@@ -1089,10 +1090,8 @@ WriteOk:
 
     StrCmp $BundledInstall "Y" SkipCopyInstaller
 
-    System::Call 'Kernel32::GetModuleFileNameA(i 0, t .r0, i 1024) i r1'
-    ; $0 --> Installer Filename
-
-    CopyFiles "$0" "$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}"
+    CreateDirectory "$WINDIR\Installer"
+    CopyFiles /SILENT "$EXEPATH" "$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}"
 
 SkipCopyInstaller:
 
@@ -1227,6 +1226,7 @@ Function WriteProductKey
     !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "DisplayVersion" '"${VERSION}"'
     !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "Publisher" '"${COMPANY_NAME}"'
     !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "UninstallString" `'"$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}" /remove'`
+    !insertmacro Reg_WriteString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "QuietUninstallString" `'"$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}" /remove /S'`
 
 ;
 ; Create GUID value for CancelAutoplay functionality in Sandboxie Control
@@ -1519,7 +1519,10 @@ Driver_Silent:
 Driver_Upgrade:
 
     WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\Services\${SBIEDRV}" "Start" 3
-
+    
+    Push "stop ${SBIESVC}"
+    Call KmdUtil
+    
     Push "stop ${SBIEDRV}"
     Call KmdUtil
 

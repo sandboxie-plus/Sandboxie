@@ -115,7 +115,7 @@ void COptionsWindow::LoadGeneral()
 
 	ui.chkShowForRun->setChecked(m_pBox->GetBool("ShowForRunIn", true));
 
-	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", true));
+	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
 	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
 	ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 	ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
@@ -175,7 +175,7 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
 
-	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "", "n");
+	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
 	WriteAdvancedCheck(ui.chkDropRights, "DropAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkFakeElevation, "FakeAdminRights", "y", "");

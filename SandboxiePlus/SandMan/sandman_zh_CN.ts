@@ -57,7 +57,7 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="30"/>
         <source>New Box</source>
-        <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应更改此处！</translatorcomment>
+        <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应对此处的文本进行翻译！</translatorcomment>
         <translation>New Box</translation>
     </message>
     <message>
@@ -343,7 +343,7 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Normal</source>
-        <translation type="unfinished">标准</translation>
+        <translation>标准</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="241"/>
@@ -1294,7 +1294,7 @@ Do you want to do the clean up?</source>
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
         <translation>
 
-此类沙盒将限制对沙盒内程序对沙盒外数据的访问，除非在资源访问选项中明确授权。</translation>
+此类沙盒将限制沙盒内程序对沙盒外数据的访问，除非在资源访问选项中明确授权。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="672"/>
@@ -1365,7 +1365,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="2275"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;关于 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
+        <translation>&lt;h3&gt;关于 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2283"/>
@@ -1446,27 +1446,27 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1122"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙盒 %2 中启动的程序 %1 将在 5 分钟之后自动终止，因为此沙盒被配置为使用项目支持者的特供功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1124"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒 %1 被配置为使用项目支持者专有的沙盒类型，这些预设选项将被忽略。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1125"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目支持者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1153"/>
         <source>PID %1: </source>
-        <translation>进程 ID %1：</translation>
+        <translation>进程 PID %1: </translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1155"/>
         <source>%1 (%2): </source>
-        <translation>%1 (%2)：</translation>
+        <translation>%1 (%2): </translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1278"/>
@@ -1487,7 +1487,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1310"/>
         <source>Failed to recover some files: 
 </source>
-        <translation>部分文件恢复失败：
+        <translation>部分文件恢复失败: 
 </translation>
     </message>
     <message>
@@ -1719,7 +1719,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1997"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>关于打开 %1，如果您希望在沙盒化的浏览器中环境下打开，请选“是”，反之选“否”。</translation>
+        <translation>是否在沙盒中的浏览器打开链接 %1 ？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1998"/>
@@ -2273,8 +2273,8 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Options:
     </source>
-        <translation>选项：
-</translation>
+        <translation>选项:
+    </translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="482"/>
@@ -2402,7 +2402,8 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
         <source>%1 Copy</source>
-        <translation>%1 复制</translation>
+        <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应对此处的文本进行翻译！</translatorcomment>
+        <translation>%1 Copy</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="930"/>
@@ -2865,7 +2866,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="714"/>
         <source>Block network files and folders, unless specifically opened.</source>
-        <translation>拦截非特别开启的网络文件和文件夹</translation>
+        <translation>拦截对网络文件和文件夹的访问，除非专门开放访问权限</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="495"/>
@@ -3385,17 +3386,17 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1896"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation>启用快速恢复提示以便快速恢复创建的文件。</translation>
+        <translation>启用快速恢复提示，以便快速恢复创建的文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1940"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
-        <translation>您可排除快速恢复中的文件夹和文件类型(扩展名)。</translation>
+        <translation>你可以从快速恢复中排除特定目录和文件类型(扩展名)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1950"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>当快速恢复功能被调用时，检查沙盒内的下列文件夹。</translation>
+        <translation>当快速恢复功能被调用时，检查沙盒内的下列文件夹</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1963"/>
@@ -3456,7 +3457,7 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2039"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
-        <translation type="unfinished">限制访问模拟的“服务控制管理器”以防止提权进程</translation>
+        <translation>仅允许特权进程访问“服务控制管理器”</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1997"/>
@@ -3687,7 +3688,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1781"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
-        <translation>隐私模式，阻止对通用系统目录之外的所有文件位置和注册表的访问。</translation>
+        <translation>隐私模式，阻止对通用系统目录之外的所有文件位置和注册表的访问</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1795"/>
@@ -3722,7 +3723,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2162"/>
         <source>COM/RPC</source>
-        <translation type="unfinished"></translation>
+        <translation>COM/RPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2169"/>
@@ -4005,7 +4006,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="42"/>
         <source>Group: %1</source>
-        <translation type="unfinished">组: %1</translation>
+        <translation>组: %1</translation>
     </message>
 </context>
 <context>
@@ -4236,12 +4237,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="407"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation>沙盒 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc&#x3000;根目录&lt;/a&gt;：</translation>
+        <translation>沙盒 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC&#x3000;根目录&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="448"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation>沙盒&lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;注册表根目录&lt;/a&gt;：</translation>
+        <translation>沙盒 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;注册表根目录&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="605"/>
@@ -4256,7 +4257,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="464"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation>沙盒&lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;文件系统根目录&lt;/a&gt;：</translation>
+        <translation>沙盒 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;文件系统根目录&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="132"/>
@@ -4311,7 +4312,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="367"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation>使用 Windows 筛选平台(WFP) 限制网络访问</translation>
+        <translation>使用 Windows 筛选平台 (WFP) 限制网络访问</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="400"/>

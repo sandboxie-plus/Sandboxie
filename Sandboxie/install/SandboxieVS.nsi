@@ -939,11 +939,12 @@ Install2:
 
 	!define DllSrcLocation32 "..\Build\Support"
 
-;	MS libraries are all static with Visual Studio 2019
+;	MS libraries are all static with Visual Studio 2015
 ;!if "${_BUILDARCH}" == "x64"
 ;	!define DllSrcLocation64 "..\Build\Support\x64"
 ;	!insertmacro InstallSystemDll "msvcp140.dll" true
 ;	!insertmacro InstallSystemDll "vcruntime140.dll" true
+;	!insertmacro InstallSystemDll "mfc140u.dll" true
 ;!endif
 
 ;!ifdef INCLUDE_VCREDIST_DNLD
@@ -951,6 +952,7 @@ Install2:
 ;!else
 ;	!insertmacro InstallSystemDll "msvcp140.dll" false
 ;	!insertmacro InstallSystemDll "vcruntime140.dll" false
+;	!insertmacro InstallSystemDll "mfc140u.dll" false
 ;!endif
 
     Call WriteProductKey
@@ -1519,10 +1521,10 @@ Driver_Silent:
 Driver_Upgrade:
 
     WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\Services\${SBIEDRV}" "Start" 3
-    
+
     Push "stop ${SBIESVC}"
     Call KmdUtil
-    
+
     Push "stop ${SBIEDRV}"
     Call KmdUtil
 

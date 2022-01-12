@@ -1263,7 +1263,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2275"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Über Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
+        <translation>&lt;h3&gt;Über Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2283"/>
@@ -1689,17 +1689,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1122"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Programm %1 gestartet in Box %2 wird in 5 Minuten beendet, weil diese Box so konfiguriert ist Funktionen zu verwenden die exklusiv für Projektunterstützer sind.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1124"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Box %1 ist so konfiguriert, dass sie exklusive Funktionen nutzt, die nur für Projektunterstützer verfügbar sind, diese Vorgaben werden ignoriert.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1125"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Werden Sie ein Projektunterstützer&lt;/a&gt;, und erhalten Sie ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1153"/>
@@ -2342,7 +2342,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
-        <translation>Bitte neuen Namen für dublizierte Sandbox eingeben.</translation>
+        <translation>Bitte neuen Namen für duplizierte Sandbox eingeben.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="893"/>
@@ -2410,7 +2410,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="132"/>
         <source>Duplicate Sandbox</source>
-        <translation>Dubliziere Sandbox</translation>
+        <translation>Dupliziere Sandbox</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="135"/>

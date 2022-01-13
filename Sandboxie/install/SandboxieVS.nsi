@@ -68,8 +68,8 @@ SetCompressor /SOLID /FINAL lzma
 !define ARCH ${ARCH_${_BUILDARCH}}
 !define BIN_ROOT	${BIN_ROOT_${_BUILDARCH}}
 
-!define VCRedist64SrcLocation "..\Build\Support\x64\vcredist_x64.exe"
-!define VCRedist32SrcLocation "..\Build\Support\vcredist_x86.exe"
+!define VCRedist64SrcLocation "..\Build\Support\x64\vc_redist.x64.exe"
+!define VCRedist32SrcLocation "..\Build\Support\vc_redist.x86.exe"
 
 Section binroot
 DetailPrint "binary root ${BIN_ROOT}"
@@ -88,7 +88,7 @@ ShowInstDetails nevershow
 RequestExecutionLevel admin
 
 ;----------------------------------------------------------------------------
-; 
+;
 ;----------------------------------------------------------------------------
 
 VIProductVersion "${VERSION}.0.0"
@@ -259,7 +259,7 @@ ${EndIf}
 !macro CompareDllVersions DllName Version
 
 	GetDllVersion "${DllName}" $R0 $R1
-	
+
 	IntOp $R2 $R0 / 0x00010000
 	IntOp $R3 $R0 & 0x0000FFFF
 	IntOp $R0 $R1 >> 16
@@ -309,20 +309,20 @@ ${If} ${RunningX64}
 !insertmacro DisableX64FSRedirection
 ${EndIf}
 
-!insertmacro CompareDllVersions	"$SYSDIR\mfc100u.dll" "10.0.40219.325"
+!insertmacro CompareDllVersions	"$SYSDIR\msvcp140.dll" "14.27.29016.0"
 StrCmp $R0 "2" Update_Version
-!insertmacro CompareDllVersions	"$SYSDIR\msvcr100.dll" "10.0.40219.325"
+!insertmacro CompareDllVersions	"$SYSDIR\vcruntime140.dll" "14.27.29016.0"
 StrCmp $R0 "2" Update_Version
 Goto	DownloadInstallVCRedist_Exit	; versions are all up to date
 
 Update_Version:
 
-StrCpy $1 "https://www.sandboxie.com/support"
+StrCpy $1 "https://aka.ms/vs/17/release"
 !if "${_BUILDARCH}" == "x64"
 	StrCpy $1 "$1/X64"
-	StrCpy $2 "vcredist_x64.exe"
+	StrCpy $2 "vc_redist.x64.exe"
 !else
-	StrCpy $2 "vcredist_x86.exe"
+	StrCpy $2 "vc_redist.x86.exe"
 !endif
 
 InitPluginsDir
@@ -342,7 +342,7 @@ DownloadInstallVCRedist_Exit:
 ${If} ${RunningX64}
 !insertmacro EnableX64FSRedirection
 ${EndIf}
-	
+
 !macroend
 
 ;----------------------------------------------------------------------------
@@ -362,7 +362,7 @@ Function .onInit
     StrCpy $DeleteSandboxieIni "Y"
     StrCpy $Language "0"
 
-;    
+;
 ; Force InstallType if requested on command line
 ;
 
@@ -375,13 +375,13 @@ Force_Loop:
     IntCmp $1 4 Force_Done Force_Done
     StrCpy $2 $0 $1
     IntOp  $1 $1 - 1
-    
+
     StrCmp $2 "/lang=" Force_Language
     StrCmp $2 "/install_bundled" Force_Bundled_Install
     StrCmp $2 "/install" Force_Install
     StrCmp $2 "/upgrade" Force_Upgrade
     StrCmp $2 "/remove" Force_Remove
-    
+
     Goto Force_Loop
 
 Force_Language:
@@ -394,13 +394,13 @@ Force_Language:
     StrCpy $0 $0 $1 $2
     StrLen $1 $0
     Goto Force_Loop
-    
+
 Force_Bundled_Install:
 
     StrCpy $BundledInstall "Y"
     StrCpy $LaunchControl "N"
     Goto Force_Done
-    
+
 Force_Install:
 
     StrCpy $InstallType "Install"
@@ -412,7 +412,7 @@ Force_Upgrade:
     Goto Force_Done
 
 Force_Remove:
-    
+
     StrCpy $InstallType "Remove"
     Goto Force_Done
 
@@ -421,35 +421,35 @@ Force_Done:
 ;
 ; Detect existing installation, unless given by /D parameter
 ;
-    
+
     StrCmp $INSTDIR "(na)" 0 InstDir_Done
 
     !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "SYSTEM\CurrentControlSet\Services\${SBIEDRV}" "ImagePath"
     Pop $0
     StrCmp $0 "" 0 InstDir_CheckPath
-    
+
     Goto InstDir_ProgramFiles
-    
+
 InstDir_CheckPath:
 
     StrCpy $1 $0 4 0
     StrCmp $1 "\??\" 0 InstDir_Check_Suffix
     StrCpy $0 $0 "" 4
-    
+
 InstDir_Check_Suffix:
 
     Push -12
     Pop  $2
     StrCpy $1 $0 "" $2
     StrCmp $1 "\${SBIEDRV_SYS}" InstDir_Suffix_Good
-    
+
     Goto InstDir_ProgramFiles
 
 InstDir_Suffix_Good:
 
     StrCpy $0 $0 $2
     Goto InstDir_Found
-    
+
 InstDir_ProgramFiles:
 
     !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion" "ProgramFilesDir"
@@ -460,7 +460,7 @@ InstDir_ProgramFiles:
 InstDir_Found:
 
     StrCpy $INSTDIR $0
-    
+
 InstDir_Done:
 
 ;
@@ -475,11 +475,11 @@ InstDir_Done:
     StrCmp "$EXEDIR"   "$WINDIR\Installer"    InstType_Remove
     StrCmp "$EXEDIR"   "$WINDIR\Installer\"   InstType_Remove
     StrCmp "$EXEDIR\"  "$WINDIR\Installer"    InstType_Remove
-    
+
     IfFileExists $INSTDIR\${SBIEDRV_SYS}      InstType_Upgrade
     IfFileExists $INSTDIR\${SBIESVC_EXE}      InstType_Upgrade
     IfFileExists $INSTDIR\${SBIEDLL_DLL}      InstType_Upgrade
-    
+
     ; default InstallType for a new install, unless we detected an installation
 
     StrCpy $InstallType "Install"
@@ -497,11 +497,11 @@ InstType_Remove:
 InstType_Done:
 
 ;
-; Language 
+; Language
 ;
 
     StrCmp $Language "0" 0 Lang_Done
-    
+
     ReadRegDWORD $0 HKLM "SYSTEM\CurrentControlSet\Services\${SBIESVC}" "Language"
     IntCmp $0 1033 Lang_AutoSelect  ; English
     IntCmp $0 1052 Lang_AutoSelect  ; Albanian
@@ -541,7 +541,7 @@ Lang_AutoSelect:
 
     StrCpy $Language $0
     StrCmp $InstallType "Remove" Lang_Done
-    
+
     !define MUI_LANGDLL_WINDOWTITLE "${NAME_${_BUILDARCH}}"
     !insertmacro MUI_LANGDLL_DISPLAY
 
@@ -553,7 +553,7 @@ Lang_Done:
 
     !insertmacro MUI_INSTALLOPTIONS_EXTRACT "InstallType.ini"
     !insertmacro MUI_INSTALLOPTIONS_EXTRACT "Warning.ini"
-    
+
 FunctionEnd
 
 ;----------------------------------------------------------------------------
@@ -588,7 +588,7 @@ SystemCheck_Fail:
     Quit
 
 ;SystemCheck_Done_XP_2003:
-    
+
 !if "${_BUILDARCH}" == "x64"
 
     MessageBox MB_OK|MB_ICONSTOP "$(MSG_8041)$\n\
@@ -597,11 +597,11 @@ SystemCheck_Fail:
     Quit
 
 !endif
-    
+
     Goto SystemCheck_Done
 
 SystemCheck_Force_Remove:
-    
+
     StrCpy $InstallType "ForceRemove"
     Goto SystemCheck_Done
 
@@ -626,7 +626,7 @@ PlusCheck_Done:
 
     MessageBox MB_OK|MB_ICONSTOP $(MSG_8042)
     Quit
-    
+
 AdminCheck_Done:
 
 ;
@@ -650,11 +650,11 @@ AdminCheck_Done:
     MessageBox MB_OK|MB_ICONSTOP $(MSG_8043)
     Quit
 
-!endif    
+!endif
 
 InitCheck_Done:
 
-	
+
 FunctionEnd
 
 ;----------------------------------------------------------------------------
@@ -675,9 +675,9 @@ Function SkipLicensePage
 
 ;    StrCmp $InstallType "Install" SkipLicensePage_Done
     StrCmp $InstallType "Remove" 0 SkipLicensePage_Done
-    
+
     Abort
-    
+
 SkipLicensePage_Done:
 
 FunctionEnd
@@ -713,7 +713,7 @@ Function InstallTypePage
 ;w7_Drv_ok:
 ;
 ;    nsDialogs::SelectFileDialog open "" "Driver binary (*.${_W7DRV_COMPAT}.rc4)|*.${_W7DRV_COMPAT}.rc4|All Files|*.*"
-;    
+;
 ;    Pop $0
 ;    StrCmp $0 "" w7_Drv_cancel
 ;    StrCpy $Win7Driver $0
@@ -723,20 +723,20 @@ Function InstallTypePage
 ;w7_Skip:
 
     StrCmp $InstallType "Install" InstallType_Done
-    
+
     StrCmp $InstallType "Upgrade" InstallType_SetFolder
-    
+
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 4" "State" "0"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 5" "State" "1"
-    
+
     StrCmp $InstallType "ForceRemove" 0 InstallType_SetFolder
     StrCpy $InstallType "Remove"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 4" "Flags" "DISABLED"
-    
+
 InstallType_SetFolder:
 
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 2" "State" "$INSTDIR"
-    
+
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Settings" "RTL" "$(^RTL)"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Settings" "NextButtonText" "$(MSG_8003)"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 1" "Text" "$(MSG_8004)"
@@ -745,7 +745,7 @@ InstallType_SetFolder:
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 5" "Text" "$(MSG_8007)"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 6" "Text" "$(MSG_8008)"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "InstallType.ini" "Field 7" "Text" "$(MSG_8009)"
-    
+
     !insertmacro MUI_HEADER_TEXT "$(MSG_8001)" "$(MSG_8002)"
     !insertmacro MUI_INSTALLOPTIONS_DISPLAY "InstallType.ini"
 
@@ -760,18 +760,18 @@ FunctionEnd
 Function SkipDirectoryPage
 
     StrCmp $InstallType "Install" SkipDirectoryPage_Done
-    
+
 ;
 ; Set InstallType according to selected radio button
 ;
 
     !insertmacro MUI_INSTALLOPTIONS_READ $4 "InstallType.ini" "Field 4" "State"
     !insertmacro MUI_INSTALLOPTIONS_READ $5 "InstallType.ini" "Field 5" "State"
-    
+
     StrCmp $4 "1" SetType_Upgrade
     StrCmp $5 "1" SetType_Remove
     Goto SetType_Done
-    
+
 SetType_Upgrade:
 
     StrCpy $InstallType "Upgrade"
@@ -781,11 +781,11 @@ SetType_Remove:
 
     StrCpy $InstallType "Remove"
     Goto SetType_Done
-    
+
 SetType_Done:
 
     Abort
-    
+
 SkipDirectoryPage_Done:
 
 FunctionEnd
@@ -799,17 +799,17 @@ Function SetHeaderForRemove
     StrCmp $InstallType "Remove" 0 SetHeaderForRemove_Done
 
     !insertmacro MUI_HEADER_TEXT "Uninstalling" "$(MSG_8016)"
-    
+
 ;
 ; Ask about removing settings
 ;
-    
+
     IfSilent SetHeaderForRemove_Done
-    
+
     MessageBox MB_YESNO|MB_ICONQUESTION "$(MSG_8054)" IDNO SetHeaderForRemove_Done
-    
+
     StrCpy $DeleteSandboxieIni "N"
-    
+
 SetHeaderForRemove_Done:
 
 FunctionEnd
@@ -828,7 +828,7 @@ Function DownloadStatPng
 ;	${EndIf}
 ;	ReadRegStr $1 HKLM "SOFTWARE\Microsoft\Cryptography" "MachineGuid"
 ;	StrCpy $2 "https://www.sandboxie.com/img/$0?SessionId=$1"
-;	
+;
 ;	;NSISdl::download_quiet /TIMEOUT=3000 $2 $TEMP\$0
 ;	inetc::get /SILENT /CONNECTTIMEOUT=5000 /RECEIVETIMEOUT=5000  $2 $TEMP\$0 /END
 ;	Pop $0 ;Get the return value
@@ -857,7 +857,7 @@ Section ""
     Push $0
     Call KmdUtilX
     IfErrors FindWindow_Abort
-    
+
 ;
 ; Close Sandboxie Control if it is running
 ;
@@ -869,10 +869,10 @@ FindWindow_Check:
 
     SendMessage $0 ${WM_DESTROY} 0 0 /TIMEOUT=2000
     Sleep 1000
-    
+
     FindWindow $0 "${SANDBOXIE_CONTROL}WndClass" ""
     StrCmp $0 0 FindWindow_Done
-    
+
     MessageBox MB_OKCANCEL|MB_ICONQUESTION "$(MSG_8051)" IDCANCEL FindWindow_Abort
 
     Goto FindWindow_Check
@@ -892,7 +892,7 @@ FindWindow_Done:
 
 	; Windows 10 doesn't allow copying a .sys on top of a running driver.  So we have to stop it here.
     Push "stop ${SBIEDRV}"
-    Call KmdUtil	
+    Call KmdUtil
 ;
 ; Branch to Install, Upgrade or Remove according to install mode
 ;
@@ -927,38 +927,41 @@ Upgrade:
 	Push  "sbietrayfullup.png"
 	Call DownloadStatPng
 	Goto Install2
-	
+
 Install:
 
 	; we use this file download as a total # of installs counter
 	Push  "sbietrayfull.png"
 	Call DownloadStatPng
-	
-Install2:	
+
+Install2:
     Call WriteProgramFiles
 
 	!define DllSrcLocation32 "..\Build\Support"
 
-;	MS libraries are all static with Visual Studio 2015	
+;	MS libraries are all static with Visual Studio 2015
 ;!if "${_BUILDARCH}" == "x64"
 ;	!define DllSrcLocation64 "..\Build\Support\x64"
-;	!insertmacro InstallSystemDll "msvcr100.dll" false
-;	!insertmacro InstallSystemDll "mfc100u.dll" true
-;	!insertmacro InstallSystemDll "msvcr100.dll" true
-;	!insertmacro InstallSystemDll "msvcp100.dll" true
+;	!insertmacro InstallSystemDll "msvcp140.dll" true
+;	!insertmacro InstallSystemDll "msvcp140_1.dll" true
+;	!insertmacro InstallSystemDll "vcruntime140.dll" true
+;	!insertmacro InstallSystemDll "vcruntime140_1.dll" true
+;	!insertmacro InstallSystemDll "mfc140u.dll" true
 ;!endif
 
 ;!ifdef INCLUDE_VCREDIST_DNLD
 ;	!insertmacro DownloadInstallVCRedist
 ;!else
-;	!insertmacro InstallSystemDll "msvcr100.dll" false
-;	!insertmacro InstallSystemDll "mfc100u.dll" false
-;	!insertmacro InstallSystemDll "msvcp100.dll" false
+;	!insertmacro InstallSystemDll "msvcp140.dll" false
+;	!insertmacro InstallSystemDll "msvcp140_1.dll" false
+;	!insertmacro InstallSystemDll "vcruntime140.dll" false
+;	!insertmacro InstallSystemDll "vcruntime140_1.dll" false
+;	!insertmacro InstallSystemDll "mfc140u.dll" false
 ;!endif
 
     Call WriteProductKey
     Call WriteShortCuts
-    
+
     Goto Section_Done
 
 ;
@@ -974,7 +977,7 @@ Remove:
     Call DeleteProgramFiles
     Call DeleteSystemKeys
     Call DeleteShortCuts
-    
+
     Goto Section_Done
 
 ;
@@ -1001,13 +1004,13 @@ Function WriteProgramFiles
     SetOutPath "$INSTDIR"
 
     StrCpy $2 0
-    
+
 WriteLoop:
 
     ;
     ; Write files
     ;
-    
+
     File /oname=${SBIEDLL_DLL} "${BIN_ROOT}\${SBIEDLL_DLL}"
 
     File /oname=${SBIESVC_EXE} "${BIN_ROOT}\SbieSvc.exe"
@@ -1018,7 +1021,7 @@ WriteLoop:
     CreateDirectory $INSTDIR\32
 
     File /oname=32\${SBIEDLL_DLL} "${BIN_ROOT_Win32}\${SBIEDLL_DLL}"
-    
+
     File /oname=32\${SBIESVC_EXE} "${BIN_ROOT_Win32}\SbieSvc.exe"
 
 !endif
@@ -1032,36 +1035,36 @@ WriteLoop:
     File /oname=KmdUtil.exe "${BIN_ROOT}\KmdUtil.Exe"
 
     File /oname=SboxHostDll.dll			   "${BIN_ROOT}\SboxHostDll.dll"
-    
+
     File /oname=${SANDBOXIE}RpcSs.exe      "${BIN_ROOT}\SandboxieRpcSs.exe"
     File /oname=${SANDBOXIE}DcomLaunch.exe "${BIN_ROOT}\SandboxieDcomLaunch.exe"
     File /oname=${SANDBOXIE}BITS.exe       "${BIN_ROOT}\SandboxieBITS.exe"
     File /oname=${SANDBOXIE}Crypto.exe     "${BIN_ROOT}\SandboxieCrypto.exe"
     File /oname=${SANDBOXIE}WUAU.exe       "${BIN_ROOT}\SandboxieWUAU.exe"
-    
+
     File /oname=${START_EXE} "${BIN_ROOT}\Start.exe"
-    
+
     File /oname=${SBIECTRL_EXE} "${BIN_ROOT}\SbieCtrl.exe"
     File /oname=${SBIECTRL_EXE}.sig "${BIN_ROOT}\SbieCtrl.exe.sig"
-  
+
     File "..\install\Templates.ini"
 
     File "Manifest0.txt"
     File "Manifest1.txt"
     File "Manifest2.txt"
-   
+
     File /oname=${SBIEINI_EXE} "${BIN_ROOT}\SbieIni.exe"
-    
+
     ;File "${BIN_ROOT}\License.exe"
-    
+
     File "LICENSE.TXT"
-    
+
     ;
     ; Check for files being held
     ;
-    
+
     IfErrors 0 WriteOk
-    
+
     IntCmp $2 5 WriteError
     IntOp  $2 $2 + 1
     Sleep 1000
@@ -1076,32 +1079,32 @@ WriteError:
 WriteAbort:
 
     Abort
-    
+
 WriteOk:
 
     SetOverwrite on
 
     ;
-    ; Create shortcut 
+    ; Create shortcut
     ;
-    
+
     CreateShortCut "$INSTDIR\QuickLaunch.lnk" "$INSTDIR\${START_EXE}" default_browser "" "" SW_SHOWNORMAL "" "$(MSG_8026)"
 
     ;
     ; Copy this Installer program to the Windows\Installer directory
     ;
-    
+
     StrCmp $BundledInstall "Y" SkipCopyInstaller
 
     CreateDirectory "$WINDIR\Installer"
     CopyFiles /SILENT "$EXEPATH" "$WINDIR\Installer\${OUTFILE_${_BUILDARCH}}"
 
 SkipCopyInstaller:
-   
+
     ;
     ; Delete old files
     ;
-    
+
     Delete "$DESKTOP\${PRODUCT_NAME} Quick Launch.lnk"
     Delete "$QUICKLAUNCH\${PRODUCT_NAME} Quick Launch.lnk"
 
@@ -1118,16 +1121,16 @@ Function DeleteProgramFiles
 ;
 
     Delete "$INSTDIR\${SBIEDLL_DLL}"
-    
+
     Delete "$INSTDIR\${SBIESVC_EXE}"
     Delete "$INSTDIR\${SBIESVC_EXE}.sig"
 
-!if "${_BUILDARCH}" == "x64"    
-    
+!if "${_BUILDARCH}" == "x64"
+
     Delete "$INSTDIR\32\${SBIEDLL_DLL}"
-    
+
     Delete "$INSTDIR\32\${SBIESVC_EXE}"
-    
+
     RMDir "$INSTDIR\32"
 
 !endif
@@ -1139,7 +1142,7 @@ Function DeleteProgramFiles
 ;    Delete "$INSTDIR\${SBIEDRV_SYSX}"
 
     Delete "$INSTDIR\KmdUtil.exe"
-    
+
     Delete "$INSTDIR\SboxHostDll.dll"
 
     Delete "$INSTDIR\boxHostDll.dll"
@@ -1150,22 +1153,22 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SANDBOXIE}BITS.exe"
     Delete "$INSTDIR\${SANDBOXIE}DcomLaunch.exe"
     Delete "$INSTDIR\${SANDBOXIE}RpcSs.exe"
-    
+
     Delete "$INSTDIR\${START_EXE}"
 
     Delete "$INSTDIR\${SBIECTRL_EXE}"
     Delete "$INSTDIR\${SBIECTRL_EXE}.sig"
-    
+
     Delete "$INSTDIR\Templates.ini"
-    
+
     Delete "$INSTDIR\Manifest0.txt"
     Delete "$INSTDIR\Manifest1.txt"
     Delete "$INSTDIR\Manifest2.txt"
-    
+
     Delete "$INSTDIR\${SBIEINI_EXE}"
-    
+
     Delete "$INSTDIR\LICENSE.EXE"
-    
+
     Delete "$INSTDIR\LICENSE.TXT"
 
 ;
@@ -1187,10 +1190,10 @@ Function DeleteProgramFiles
 
     Push "$DESKTOP"
     Call DeleteDesktopShortCuts
-    
+
     Push "$QUICKLAUNCH"
     Call DeleteDesktopShortCuts
-    
+
     RMDir /r "$SENDTO\${PRODUCT_NAME}"
     Delete "$SENDTO\${PRODUCT_NAME} - *.lnk"
 
@@ -1218,7 +1221,7 @@ FunctionEnd
 Function WriteProductKey
 
 ;
-; Create key for Add/Remove Programs 
+; Create key for Add/Remove Programs
 ;
 
     StrCmp $BundledInstall "Y" SkipAddRemovePrograms
@@ -1252,9 +1255,9 @@ FunctionEnd
 Function DeleteProductKey
 
 ;
-; Delete key for Add/Remove Programs 
+; Delete key for Add/Remove Programs
 ;
-    
+
     !insertmacro Reg_DeleteKey "" ${HKEY_LOCAL_MACHINE} "Software\Microsoft\Windows\CurrentVersion\Uninstall" "${PRODUCT_NAME}"
 
 FunctionEnd
@@ -1289,7 +1292,7 @@ Function DeleteShortCuts
 
     SetShellVarContext all
     Call DeleteShortCuts_2
-    
+
     SetShellVarContext current
     Call DeleteShortCuts_2
 
@@ -1313,7 +1316,7 @@ Function DeleteDesktopShortCuts
     ; delete #8025.lnk in selected language and in English
     Delete "$1\$(MSG_8025)"
     Delete "$1\Run Web browser sandboxed.lnk"
-    
+
     ; delete #8033.lnk in selected language and in English
     Delete "$1\$(MSG_8033)"
     Delete "$1\Sandboxed Web Browser.lnk"
@@ -1327,7 +1330,7 @@ FunctionEnd
 Function DeleteSystemKeys
 
     StrCmp $InstallType "Remove" 0 ShellKey_Folder_Done
-    
+
 ;
 ; Delete SandboxieControl value from Windows\Run key
 ;
@@ -1335,7 +1338,7 @@ Function DeleteSystemKeys
     !insertmacro Reg_ReadString "" ${HKEY_CURRENT_USER} "Software\Microsoft\Windows\CurrentVersion\Run" "${SANDBOXIE_CONTROL}"
     Pop $0
     StrCmp $0 "" RunKey_Done
-    
+
     !insertmacro Reg_DeleteValue "" ${HKEY_CURRENT_USER} "Software\Microsoft\Windows\CurrentVersion\Run" "${SANDBOXIE_CONTROL}"
 
 RunKey_Done:
@@ -1413,7 +1416,7 @@ HKLM_ShellKey_Folder_Done:
     !insertmacro Reg_TestKey "" ${HKEY_CLASSES_ROOT} "exefile\shell\${SANDBOX_VERB}"
     Pop $0
     StrCmp $0 "0" ShellKey_Exe_Done
-    
+
     !insertmacro Reg_DeleteKey "" ${HKEY_CLASSES_ROOT} "exefile\shell\${SANDBOX_VERB}" "command"
     !insertmacro Reg_DeleteKey "" ${HKEY_CLASSES_ROOT} "exefile\shell" "${SANDBOX_VERB}"
 
@@ -1446,7 +1449,7 @@ Function KmdUtil
     Call KmdUtilX
     IfErrors KmdUtil_Errors
     Goto KmdUtil_Done
-    
+
 KmdUtil_Errors:
     StrCmp $1 "stop ${SBIEDRV}" KmdUtil_SetReboot
     DetailPrint "Could not process KmdUtil command: $1"
@@ -1456,7 +1459,7 @@ KmdUtil_Errors:
 
 KmdUtil_SetReboot:
     SetRebootFlag true
-    
+
 KmdUtil_Done:
     ClearErrors
 
@@ -1475,7 +1478,7 @@ Function DriverPage
     StrCmp $InstallType "Remove" Driver_Remove
 
     IfSilent Driver_Silent
-    
+
     !insertmacro MUI_INSTALLOPTIONS_WRITE "Warning.ini" "Settings" "RTL" "$(^RTL)"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "Warning.ini" "Field 1" "Text" "$(MSG_8012)"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "Warning.ini" "Field 2" "Text" "$(MSG_8013)"
@@ -1502,12 +1505,12 @@ Driver_Silent:
     Call KmdUtil
 
     WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\Services\${SBIESVC}" "Language" $Language
-    
+
     WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\Services\${SBIESVC}" "PreferExternalManifest" 1
-    
+
     StrCmp $InstallType "Install" Driver_Install
     StrCmp $InstallType "Upgrade" Driver_Upgrade
-    
+
     Abort
 
 ;
@@ -1515,25 +1518,25 @@ Driver_Silent:
 ; then stop driver (service was already stopped), and fallthrough
 ; to install processing to re-start the service (and driver).
 ;
-; Note that KmdUtil "stop SbieDrv" will set the reboot flag, 
+; Note that KmdUtil "stop SbieDrv" will set the reboot flag,
 ; in case the driver cannot be unloaded.
 ;
 
 Driver_Upgrade:
 
     WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\Services\${SBIEDRV}" "Start" 3
-    
+
     Push "stop ${SBIESVC}"
     Call KmdUtil
-    
+
     Push "stop ${SBIEDRV}"
     Call KmdUtil
-    
+
     IfRebootFlag Driver_Done
     StrCmp $MustReboot "N" Driver_Install
     SetRebootFlag true
     Goto Driver_Done
-    
+
 ;
 ; For Install, we start the driver and finish
 ;
@@ -1553,7 +1556,7 @@ Driver_Install:
     Call KmdUtil
 
     StrCpy $LaunchControl "Y"
-    
+
     Goto Driver_Done
 
 ;
@@ -1564,7 +1567,7 @@ Driver_Remove:
 
     Push "stop ${SBIESVC}"
     Call KmdUtil
-    
+
     Push "stop ${SBIEDRV}"
     Call KmdUtil
 
@@ -1589,7 +1592,7 @@ Function DisableBackButton
 
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "BackEnabled" "0"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "CancelEnabled" "0"
-    
+
     StrCmp $InstallType "Remove" 0 DisableBackButton_Done
 
 ;

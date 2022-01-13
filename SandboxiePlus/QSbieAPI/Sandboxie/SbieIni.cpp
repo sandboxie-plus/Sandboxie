@@ -27,6 +27,7 @@ typedef long NTSTATUS;
 
 CSbieIni::CSbieIni(const QString& Section, class CSbieAPI* pAPI, QObject* parent) : QObject(parent)
 {
+	Q_ASSERT(!Section.isEmpty());
 	m_Name = Section;
 	m_pAPI = pAPI;
 	m_RefreshOnChange = true;
@@ -58,35 +59,35 @@ SB_STATUS CSbieIni::SetBool(const QString& Setting, bool Value)
 	return SetText(Setting, Value ? "y" : "n");
 }
 
-QString CSbieIni::GetText(const QString& Setting, const QString& Default) const
+QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal) const
 {
-	int flags = (m_Name.isEmpty() ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
 	QString Value = m_pAPI->SbieIniGet(m_Name, Setting, flags);
 	if (Value.isNull()) Value = Default;
 	return Value;
 }
 
-int CSbieIni::GetNum(const QString& Setting, int Default) const
+int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal) const
 {
-	QString StrValue = GetText(Setting);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal);
 	bool ok;
 	int Value = StrValue.toInt(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default) const
+__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal) const
 {
-	QString StrValue = GetText(Setting);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal);
 	bool ok;
 	__int64 Value = StrValue.toULongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-bool CSbieIni::GetBool(const QString& Setting, bool Default) const
+bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal) const
 {
-	QString StrValue = GetText(Setting);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal);
 	if (StrValue.compare("y", Qt::CaseInsensitive) == 0)
 		return true;
 	if (StrValue.compare("n", Qt::CaseInsensitive) == 0)
@@ -94,14 +95,14 @@ bool CSbieIni::GetBool(const QString& Setting, bool Default) const
 	return Default;
 }
 
-QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bool expand) const
+QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bool bExpand, bool bWithGlobal) const
 {
 	QStringList TextList;
 
-	int flags = (m_Name.isEmpty() ? 0 : CONF_GET_NO_GLOBAL);
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL);
 	if (!withTemplates)
 		flags |= CONF_GET_NO_TEMPLS;
-	if (!expand)
+	if (!bExpand)
 		flags |= CONF_GET_NO_EXPAND;
 
 	for (int index = 0; ; index++)

@@ -81,6 +81,8 @@ HWND MainWndHandle = NULL;
 
 CSandMan* theGUI = NULL;
 
+extern QString g_PendingMessage;
+
 CSandMan::CSandMan(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -269,9 +271,11 @@ CSandMan::CSandMan(QWidget *parent)
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
-	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
-	if(!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
-		m_pTrayIcon->hide();
+	if (g_PendingMessage.isEmpty()) {
+		m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
+		if (!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
+			m_pTrayIcon->hide();
+	}
 	//
 
 	LoadState();
@@ -297,7 +301,7 @@ CSandMan::CSandMan(QWidget *parent)
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
-	if (!bAutoRun)
+	if (!bAutoRun && g_PendingMessage.isEmpty())
 		show();
 
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
@@ -317,6 +321,11 @@ CSandMan::CSandMan(QWidget *parent)
 	}
 
 	//qApp->setWindowIcon(GetIcon("IconEmptyDC", false));
+
+	if (!g_PendingMessage.isEmpty()) {
+		OnMessage(g_PendingMessage);
+		PostQuitMessage(0);
+	}
 }
 
 CSandMan::~CSandMan()
@@ -713,7 +722,8 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
 {
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
-	pSelectBoxWindow->show();
+	//pSelectBoxWindow->show();
+	pSelectBoxWindow->exec();
 }
 
 void CSandMan::dropEvent(QDropEvent* e)
@@ -979,17 +989,21 @@ void CSandMan::OnStatusChanged()
 
 		if (!theAPI->ReloadCert().IsError()) {
 			CSettingsWindow::LoadCertificate();
+			UpdateCertState();
+
+			if ((g_CertInfo.expired || g_CertInfo.about_to_expire) && !theConf->GetBool("Options/NoSupportCheck", false)) 
+			{
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow();
+				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
+				pSettingsWindow->showSupport();
+			}
 		}
 		else {
 			g_Certificate.clear();
+			g_CertInfo.State = 0;
 		}
-
+		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
-
-		// if teh certificate is valid but the driver does not report it being active it means its expired
-		if (!g_Certificate.isEmpty() && (g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
-			OnLogMessage(tr("The supporter certificate is expired"));
-		}
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -1986,8 +2000,12 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 void CSandMan::OpenUrl(const QUrl& url)
 {
-	if (url.scheme() == "sbie")
-		return OpenUrl("https://sandboxie-plus.com/sandboxie" + url.path());
+	if (url.scheme() == "sbie") {
+		QString path = url.path();
+		if (path == "/cert")
+			return UpdateCert();
+		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
+	}
 
 	int iSandboxed = theConf->GetInt("Options/OpenUrlsSandboxed", 2);
 
@@ -2310,6 +2328,100 @@ void CSandMan::OnAbout()
 	}
 	else if (sender() == m_pAboutQt)
 		QMessageBox::aboutQt(this);
+}
+
+void CSandMan::UpdateCertState()
+{
+	g_CertInfo.State = theAPI->GetCertState();
+
+	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60*60*24*30);
+	if (g_CertInfo.outdated)
+		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
+			// outdated always implicates its no longer valid
+	else if (g_CertInfo.expired) // may be still valid for the current ald older builds
+		OnLogMessage(tr("The supporter certificate is expired%1, please get an updated certificate")
+			.arg(g_CertInfo.valid ? tr(", but it remians valid for the current build") : ""));
+	else if(g_CertInfo.about_to_expire)
+		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+
+	emit CertUpdated();
+}
+
+void CSandMan::UpdateCert()
+{
+	QString UpdateKey; // for now only patreons can update the cert automatically
+	if(GetArguments(g_Certificate, L'\n', L':').value("type").indexOf("PATREON") == 0)
+		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	if (UpdateKey.isEmpty()) {
+		OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
+		return;
+	}
+
+	if (!m_pUpdateProgress.isNull())
+		return;
+
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Checking for certificate..."));
+
+	if (m_RequestManager == NULL) 
+		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
+
+
+	QUrlQuery Query;
+	Query.addQueryItem("UpdateKey", UpdateKey);
+
+	QUrl Url("https://sandboxie-plus.com/get_cert.php");
+	Url.setQuery(Query);
+
+	QNetworkRequest Request = QNetworkRequest(Url);
+	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setRawHeader("Accept-Encoding", "gzip");
+	QNetworkReply* pReply = m_RequestManager->get(Request);
+	connect(pReply, SIGNAL(finished()), this, SLOT(OnCertCheck()));
+}
+
+void CSandMan::OnCertCheck()
+{
+	if (m_pUpdateProgress.isNull())
+		return;
+
+	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
+	QByteArray Reply = pReply->readAll();
+	int Code = pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	pReply->deleteLater();
+
+	m_pUpdateProgress->Finish(SB_OK);
+	m_pUpdateProgress.clear();
+
+	if (Code > 299 || Code < 200) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("No certificate found on server!"));
+		return;
+	}
+
+	if (Reply.replace("\r\n","\n").compare(g_Certificate.replace("\r\n","\n"), Qt::CaseInsensitive) == 0){
+		QMessageBox::information(this, "Sandboxie-Plus", tr("There is no updated certificate available."));
+		return;
+	}
+
+	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+	QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+	QFile CertFile(TempPath);
+	if (CertFile.open(QFile::WriteOnly)) {
+		CertFile.write(Reply);
+		CertFile.close();
+	}
+
+	WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+
+	if (!theAPI->ReloadCert().IsError()) {
+		CSettingsWindow::LoadCertificate();
+		UpdateCertState();
+	}
+	else { // this should not happen
+		g_Certificate.clear();
+		g_CertInfo.State = 0;
+	}
 }
 
 void CSandMan::SetUITheme()

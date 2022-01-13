@@ -56,8 +56,10 @@ Qt::CheckState CSettingsWindow__Int2Chk(int state)
 	}
 }
 
-QByteArray g_Certificate;
 quint32 g_FeatureFlags = 0;
+
+QByteArray g_Certificate;
+SCertInfo g_CertInfo = { 0 };
 
 CSettingsWindow::CSettingsWindow(QWidget *parent)
 	: QDialog(parent)
@@ -87,7 +89,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Ampel"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Lock"));
 	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
 
 
 	ui.tabs->setCurrentIndex(0);
@@ -145,18 +148,25 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
 	m_CompatChanged = false;
-	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
+	ui.chkNoCompat->setChecked(theConf->GetBool("Options/AutoRunSoftCompat", true));
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
-
+	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
+
+	// edit
+	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
+	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
+	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
+	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnOptChanged()));
 
 	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
@@ -175,6 +185,13 @@ void CSettingsWindow::showCompat()
 	m_CompatLoaded = 2;
 	ui.tabs->setCurrentWidget(ui.tabCompat);
 	show();
+}
+
+void CSettingsWindow::showSupport()
+{
+	ui.tabs->setCurrentWidget(ui.tabSupport);
+	show();
+	ui.chkNoCheck->setVisible(true);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -288,6 +305,20 @@ void CSettingsWindow::LoadSettings()
 	else
 		ui.chkAutoRoot->setVisible(false);
 
+	UpdateCert();
+
+	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
+	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
+
+	ui.chkNoCheck->setChecked(theConf->GetBool("Options/NoSupportCheck", false));
+	if(ui.chkNoCheck->isCheckable() && !g_CertInfo.expired)
+		ui.chkNoCheck->setVisible(false); // hide if not relevant
+
+	OnChange();
+}
+
+void CSettingsWindow::UpdateCert()
+{
 	ui.lblCertExp->setVisible(false);
 	if (!g_Certificate.isEmpty()) 
 	{
@@ -297,20 +328,20 @@ void CSettingsWindow::LoadSettings()
 		QPalette palette = QApplication::palette();
 		if (theGUI->m_DarkTheme)
 			palette.setColor(QPalette::Text, Qt::black);
-		if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+		if (g_CertInfo.expired) {
 			palette.setColor(QPalette::Base, QColor(255, 255, 192));
+			ui.lblCertExp->setText(tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>."));
 			ui.lblCertExp->setVisible(true);
 		}
 		else {
+			if (g_CertInfo.about_to_expire) {
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"sbie://update/cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+				ui.lblCertExp->setVisible(true);
+			}
 			palette.setColor(QPalette::Base, QColor(192, 255, 192));
 		}
 		ui.txtCertificate->setPalette(palette);
 	}
-
-	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
-	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
-
-	OnChange();
 }
 
 void CSettingsWindow::SaveSettings()
@@ -488,9 +519,13 @@ void CSettingsWindow::SaveSettings()
 			else if (!theAPI->ReloadCert().IsError())
 			{
 				g_FeatureFlags = theAPI->GetFeatureFlags();
+				theGUI->UpdateCertState();
 
-				if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
-					QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
+				if (g_CertInfo.expired || g_CertInfo.outdated) {
+					if(g_CertInfo.expired)
+						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
+					else
+						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
 
 					palette.setColor(QPalette::Base, QColor(255, 255, 192));
 					ui.lblCertExp->setVisible(true);
@@ -507,6 +542,7 @@ void CSettingsWindow::SaveSettings()
 
 				palette.setColor(QPalette::Base, QColor(255, 192, 192));
 				Certificate.clear();
+				g_CertInfo.State = 0;
 			}
 
 			g_Certificate = Certificate;
@@ -519,12 +555,17 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
 
+	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
+
 	emit OptionsChanged();
 }
 
 void CSettingsWindow::apply()
 {
-	SaveSettings();
+	if (!ui.btnEditIni->isEnabled())
+		SaveIniSection();
+	else
+		SaveSettings();
 	LoadSettings();
 }
 
@@ -563,7 +604,12 @@ void CSettingsWindow::OnChange()
 
 void CSettingsWindow::OnTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	if (ui.tabs->currentWidget() == ui.tabEdit)
+	{
+		LoadIniSection();
+		ui.txtIniSection->setReadOnly(true);
+	}
+	else if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->GetCompat()->RunCheck();
@@ -688,6 +734,62 @@ void CSettingsWindow::OnDelCompat()
 	pItem->setCheckState(0, Qt::Unchecked);
 	m_CompatChanged = true;
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Raw section ini Editot
+//
+
+void CSettingsWindow::SetIniEdit(bool bEnable)
+{
+	for (int i = 0; i < ui.tabs->count() - 2; i++) {
+		bool Enabled = ui.tabs->widget(i)->isEnabled();
+		ui.tabs->setTabEnabled(i, !bEnable && Enabled);
+		ui.tabs->widget(i)->setEnabled(Enabled);
+	}
+	ui.btnSaveIni->setEnabled(bEnable);
+	ui.btnCancelEdit->setEnabled(bEnable);
+	ui.txtIniSection->setReadOnly(!bEnable);
+	ui.btnEditIni->setEnabled(!bEnable);
+}
+
+void CSettingsWindow::OnEditIni()
+{
+	SetIniEdit(true);
+}
+
+void CSettingsWindow::OnSaveIni()
+{
+	SaveIniSection();
+	SetIniEdit(false);
+	LoadSettings();
+}
+
+void CSettingsWindow::OnCancelEdit()
+{
+	SetIniEdit(false);
+}
+
+void CSettingsWindow::LoadIniSection()
+{
+	QString Section;
+
+	Section = theAPI->SbieIniGetEx("GlobalSettings", "");
+
+	ui.txtIniSection->setPlainText(Section);
+}
+
+void CSettingsWindow::SaveIniSection()
+{
+	theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
+
+	LoadIniSection();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Support
+//
 
 void CSettingsWindow::CertChanged() 
 { 

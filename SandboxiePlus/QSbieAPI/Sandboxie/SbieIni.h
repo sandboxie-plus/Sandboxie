@@ -20,12 +20,12 @@ public:
 	virtual SB_STATUS SetNum64(const QString& Setting, __int64 Value);
 	virtual SB_STATUS SetBool(const QString& Setting, bool Value);
 
-	virtual QString GetText(const QString& Setting, const QString& Default = QString()) const;
-	virtual int GetNum(const QString& Setting, int Default = 0) const;
-	virtual __int64 GetNum64(const QString& Setting, __int64 Default = 0) const;
-	virtual bool GetBool(const QString& Setting, bool Default = false) const;
+	virtual QString GetText(const QString& Setting, const QString& Default = QString(), bool bWithGlobal = false) const;
+	virtual int GetNum(const QString& Setting, int Default = 0, bool bWithGlobal = false) const;
+	virtual __int64 GetNum64(const QString& Setting, __int64 Default = 0, bool bWithGlobal = false) const;
+	virtual bool GetBool(const QString& Setting, bool Default = false, bool bWithGlobal = false) const;
 
-	virtual QStringList GetTextList(const QString &Setting, bool withTemplates, bool expand = false) const;
+	virtual QStringList GetTextList(const QString &Setting, bool withTemplates, bool bExpand = false, bool bWithGlobal = false) const;
 	virtual SB_STATUS UpdateTextList(const QString &Setting, const QStringList& List, bool withTemplates);
 	virtual QStringList GetTemplates() const;
 	virtual QStringList GetTextListTmpl(const QString &Setting, const QString& Template) const;

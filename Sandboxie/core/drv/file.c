@@ -1342,7 +1342,9 @@ _FX NTSTATUS File_Generic_MyParseProc(
         //
 
 #ifdef USE_MATCH_PATH_EX
-        if ((!write_access || (mp_flags & TRUE_PATH_WRITE_FLAG) != 0) && ((mp_flags & TRUE_PATH_MASK) != 0)) {
+        // is_open = ((mp_flags & TRUE_PATH_MASK) == TRUE_PATH_OPEN_FLAG);
+        // is_closed = ((mp_flags & TRUE_PATH_MASK) == 0)
+        if ((!write_access || !((mp_flags & TRUE_PATH_WRITE_FLAG) != 0)) && !((mp_flags & TRUE_PATH_MASK) == 0)) {
 #else
         if ((! is_open) && (! is_closed)) {
 #endif

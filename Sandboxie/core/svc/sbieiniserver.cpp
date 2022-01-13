@@ -2302,11 +2302,12 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
         PROCESS_INFORMATION pi;
 
         WCHAR *args;
-        if (isSandboxed)
-            args = NULL;
-        else if (*ctrlName)
-            args = L" -autorun";
-        else
+        if (isSandboxed) {
+            if (*ctrlName)
+                args = L" -autorun";
+            else 
+                args = NULL;
+        } else
             args = L" /open /sync";
 
         if (SbieDll_RunFromHome(*ctrlName ? ctrlName : SBIECTRL_EXE, args, &si, NULL)) {

@@ -215,13 +215,19 @@ void CSettingsWindow::LoadSettings()
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
-	if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
-		if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
-			ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
+	if (theAPI->IsConnected()) {
+		if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
+			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
+				ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
+			else
+				ui.chkSvcStart->setChecked(true);
+		}
 		else
-			ui.chkSvcStart->setChecked(true);
-	} else
-		ui.chkSvcStart->setChecked(false);
+			ui.chkSvcStart->setChecked(false);
+	}
+	else {
+		ui.chkSvcStart->setEnabled(false);
+	}
 
 	ui.chkShellMenu->setCheckState(CSettingsWindow__IsContextMenu());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
@@ -280,6 +286,7 @@ void CSettingsWindow::LoadSettings()
 	{
 		ui.fileRoot->setEnabled(false);
 		ui.chkSeparateUserFolders->setEnabled(false);
+		ui.chkAutoRoot->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
@@ -351,11 +358,14 @@ void CSettingsWindow::SaveSettings()
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 
-	if (ui.chkSvcStart->checkState() == Qt::Checked) {
-		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
-		theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
-	} else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
-		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
+	if (theAPI->IsConnected()) {
+		if (ui.chkSvcStart->checkState() == Qt::Checked) {
+			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
+			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+		}
+		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
+			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
+	}
 
 	if (ui.chkShellMenu->checkState() != CSettingsWindow__IsContextMenu())
 	{
@@ -483,8 +493,7 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
 
-	
-	if (m_CertChanged)
+	if (m_CertChanged && theAPI->IsConnected())
 	{
 		QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
 		if (g_Certificate != Certificate) {
@@ -774,14 +783,16 @@ void CSettingsWindow::LoadIniSection()
 {
 	QString Section;
 
-	Section = theAPI->SbieIniGetEx("GlobalSettings", "");
+	if(theAPI->IsConnected())
+		Section = theAPI->SbieIniGetEx("GlobalSettings", "");
 
 	ui.txtIniSection->setPlainText(Section);
 }
 
 void CSettingsWindow::SaveIniSection()
 {
-	theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
+	if(theAPI->IsConnected())
+		theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
 }

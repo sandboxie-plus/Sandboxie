@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed dpi issues with Qt [#1368](https://github.com/sandboxie-plus/Sandboxie/issues/1368)
 - fixed issue with bright flashing on window creation when in dark mode [#1231](https://github.com/sandboxie-plus/Sandboxie/issues/1231)
 - fixed issues with the PortableRootDir setting [#1509](https://github.com/sandboxie-plus/Sandboxie/issues/1509)
+- fixed issue with the settings window crashign when the driver was nto connected
 
 
 

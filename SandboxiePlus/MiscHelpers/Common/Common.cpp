@@ -453,3 +453,19 @@ bool InitConsole(bool bCreateIfNeeded)
 	return true;
 }
 #endif
+
+//
+// avoid flashing a bright white window when in dark mode
+//
+
+void SafeShow(QWidget* pWidget) {
+	pWidget->setProperty("windowOpacity", 0.0);
+	pWidget->show();
+	QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeSocketNotifiers);
+	pWidget->setProperty("windowOpacity", 1.0);
+}
+
+int SafeExec(QDialog* pDialog){
+	SafeShow(pDialog);
+	return pDialog->exec();
+}

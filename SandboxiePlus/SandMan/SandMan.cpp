@@ -271,10 +271,10 @@ CSandMan::CSandMan(QWidget *parent)
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
-	if (g_PendingMessage.isEmpty()) {
-		m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
-		if (!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
-			m_pTrayIcon->hide();
+	if(g_PendingMessage.isEmpty()){
+	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
+	if(!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
+		m_pTrayIcon->hide();
 	}
 	//
 
@@ -940,8 +940,8 @@ void CSandMan::OnStatusChanged()
 
 			QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox").replace("/", "\\");
 
-			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
-			if (PortableRootDir == -1)
+			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", 2);
+			if (PortableRootDir == 2)
 			{
 				bool State = false;
 				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
@@ -2337,10 +2337,10 @@ void CSandMan::UpdateCertState()
 	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60*60*24*30);
 	if (g_CertInfo.outdated)
 		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
-			// outdated always implicates it is no longer valid
-	else if (g_CertInfo.expired) // may be still valid for the current older builds
-		OnLogMessage(tr("The supporter certificate is expired %1 days ago, please get an updated certificate")
-			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
+			// outdated always implicates its no longer valid
+	else if (g_CertInfo.expired) // may be still valid for the current ald older builds
+		OnLogMessage(tr("The supporter certificate is expired%1, please get an updated certificate")
+			.arg(g_CertInfo.valid ? tr(", but it remians valid for the current build") : ""));
 	else if(g_CertInfo.about_to_expire)
 		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 

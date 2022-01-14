@@ -184,13 +184,13 @@ void CSettingsWindow::showCompat()
 {
 	m_CompatLoaded = 2;
 	ui.tabs->setCurrentWidget(ui.tabCompat);
-	show();
+	SafeShow(this);
 }
 
 void CSettingsWindow::showSupport()
 {
 	ui.tabs->setCurrentWidget(ui.tabSupport);
-	show();
+	SafeShow(this);
 	ui.chkNoCheck->setVisible(true);
 }
 
@@ -299,9 +299,8 @@ void CSettingsWindow::LoadSettings()
 	}
 
 
-	int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
-	if (PortableRootDir != -1 && theConf->IsPortable())
-		ui.chkAutoRoot->setChecked(PortableRootDir == 0 ? Qt::Unchecked : Qt::Checked);
+	if (theGUI->IsFullyPortable())
+		ui.chkAutoRoot->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/PortableRootDir", 2)));
 	else
 		ui.chkAutoRoot->setVisible(false);
 
@@ -480,7 +479,7 @@ void CSettingsWindow::SaveSettings()
 	}
 
 	if (ui.chkAutoRoot->isVisible())
-		theConf->SetValue("Options/PortableRootDir", ui.chkAutoRoot->checkState() == Qt::Checked ? 1 : 0);
+		theConf->SetValue("Options/PortableRootDir", CSettingsWindow__Chk2Int(ui.chkAutoRoot->checkState()));
 
 	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
 
@@ -596,7 +595,7 @@ void CSettingsWindow::OnChange()
 	QStandardItem *item = model->item(0);
 	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 
-	if (ui.chkAutoRoot->isVisible() && theGUI->IsFullyPortable())
+	if (ui.chkAutoRoot->isVisible())
 		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);
 
 	ui.btnSetPassword->setEnabled(ui.chkPassRequired->isChecked());

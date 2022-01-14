@@ -816,7 +816,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
 				FileBrowserWindows.remove(pBox.data());
 			});
-			pFileBrowserWindow->show();
+			SafeShow(pFileBrowserWindow);
 		}
 	}
 	else if (Action == m_pMenuExplore)
@@ -884,7 +884,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
 				SnapshotWindows.remove(pBox.data());
 			});
-			pSnapshotsWindow->show();
+			SafeShow(pSnapshotsWindow);
 		}
 	}
 	else if (Action == m_pMenuDuplicate)
@@ -1168,7 +1168,7 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;
 		});
-		pBoxEx->m_pOptionsWnd->show();
+		SafeShow(pBoxEx->m_pOptionsWnd);
 	}
 	else {
 		pBoxEx->m_pOptionsWnd->setWindowState((pBoxEx->m_pOptionsWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);

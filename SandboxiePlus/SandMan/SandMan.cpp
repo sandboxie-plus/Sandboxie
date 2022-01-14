@@ -2594,7 +2594,7 @@ UINT GetMonitorScaling(HWND hwnd)
             return Scale;
         }
     }
-    return 0;
+    return 100;
 }
 
 
@@ -2689,7 +2689,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
 			SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
 
-
 			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
 
 			break;
@@ -2724,7 +2723,7 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	mainWindowClass.lpfnWndProc = WndProc;
 	mainWindowClass.hCursor = LoadCursor(0, IDC_ARROW);
 
-	mainWindowClass.cbWndExtra = sizeof(void*);
+	mainWindowClass.cbWndExtra = sizeof(void*); // SFinderWndData
 
 	RegisterClass(&mainWindowClass);
 

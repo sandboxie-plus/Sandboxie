@@ -671,11 +671,11 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         for (i = 0; normalpaths[i] && ok; ++i) {
             ok = Process_AddPath(proc, normal_file_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
         }
-    }
 
-    if (! ok) {
-        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-        return FALSE;
+        if (!ok) {
+            Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+            return FALSE;
+        }
     }
 #endif
 

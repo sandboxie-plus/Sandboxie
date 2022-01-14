@@ -25,6 +25,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed possible upgrade issue with Classic installer (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
 - fixed minor issues with Classic installer (by sredna) [#1533](https://github.com/sandboxie-plus/Sandboxie/pull/1533)
 - fixed Ldr_FixImagePath_2 issue [#1507](https://github.com/sandboxie-plus/Sandboxie/issues/1507)
+- when using run sandboxed with sandman ui and the UI is off, it wil stay off.
+- fixed issue with Util_GetProcessPidByName that should resolve the driver sometimes failing to start at boot
+- when starting sandman because of a boxed process start it now starts in background like sbiectrl did
+- fixed taskbar not showing with persistent box border in full screen
+- fixed box border not spaning across multiple monitors
+- fixed issues with border when using different DPI scaling on multiple monitors [#1512](https://github.com/sandboxie-plus/Sandboxie/issues/1512) [#1506](https://github.com/sandboxie-plus/Sandboxie/issues/1506)
+- fixed dpi issues with Qt [#1368](https://github.com/sandboxie-plus/Sandboxie/issues/1368)
 
 
 

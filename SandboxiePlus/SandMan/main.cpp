@@ -15,10 +15,9 @@ QString g_PendingMessage;
 int main(int argc, char *argv[])
 {
 #ifdef Q_OS_WIN
-	SetProcessDPIAware();
+	//SetProcessDPIAware();
 #endif // Q_OS_WIN 
-
-	//QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
 	//QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 
 	QtSingleApplication app(argc, argv);

@@ -236,21 +236,38 @@ void CBoxBorder::timerEvent(QTimerEvent* pEvent)
 		Desktop = &Monitor.rcWork;
 
 		int ax = rect.left;
-		if (ax < Desktop->left)
-			ax = Desktop->left;
+		//if (ax < Desktop->left)
+		//	ax = Desktop->left;
 		int ay = rect.top;
-		if (ay < Desktop->top)
-			ay = Desktop->top;
+		//if (ay < Desktop->top)
+		//	ay = Desktop->top;
+
+		//if (ax == Monitor.rcMonitor.left)
+		//	ax += 1;
+		//if (ay == Monitor.rcMonitor.top)
+		//	ay += 1;
+
 		int aw = -ax;
-		if (rect.right <= Desktop->right)
+		//if (rect.right <= Desktop->right)
 			aw += rect.right;
-		else
-			aw += Desktop->right;
+		//else
+		//	aw += Desktop->right;
 		int ah = -ay;
-		if (rect.bottom <= Desktop->bottom)
+		//if (rect.bottom <= Desktop->bottom)
 			ah += rect.bottom;
-		else
-			ah += Desktop->bottom;
+		//else
+		//	ah += Desktop->bottom;
+
+		// 
+		// in windows 10 and 11 if this is truly fullscreen the taskbar does not appear when hidden
+		// if its 1 px less on any side it works normally, so we pick bottom as thets where the taskbar usualyl is
+		// but with the taskbar to the side it woudl also work
+		//
+
+		//if (rect.right == Desktop->right)
+		//	aw -= 1;
+		if (rect.bottom == Desktop->bottom) 
+			ah -= 1;
 
 
 		POINT Points[10];

@@ -289,7 +289,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 	m_pShowAllSessions->setChecked(theConf->GetBool("Options/ShowAllSessions"));
 
-	m_pProgressDialog = new CProgressDialog("", this);
+	m_pProgressDialog = new CProgressDialog("");
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 	m_pProgressModal = false;
@@ -300,6 +300,8 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pWndTopMost->setChecked(bAlwaysOnTop);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
 
 	if (!bAutoRun && g_PendingMessage.isEmpty())
 		show();
@@ -723,7 +725,7 @@ void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName,
 {
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
 	//pSelectBoxWindow->show();
-	pSelectBoxWindow->exec();
+	SafeExec(pSelectBoxWindow);
 }
 
 void CSandMan::dropEvent(QDropEvent* e)
@@ -1549,7 +1551,7 @@ void CSandMan::OnMaintenance()
 	if (Status.GetStatus() == OP_ASYNC) {
 		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
 		m_pProgressDialog->OnStatusMessage(tr("Executing maintenance operation, please wait..."));
-		m_pProgressDialog->show();
+		SafeShow(m_pProgressDialog);
 		return;
 	}
 
@@ -1570,6 +1572,7 @@ void CSandMan::OnAlwaysTop()
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	this->show(); // why is this needed?
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 }
 
 void CSandMan::SetViewMode(bool bAdvanced)
@@ -1636,7 +1639,7 @@ void CSandMan::OnSettings()
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 			pSettingsWindow = NULL;
 		});
-		pSettingsWindow->show();
+		SafeShow(pSettingsWindow);
 	}
 }
 
@@ -1761,11 +1764,11 @@ bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
 	m_pProgressDialog->OnStatusMessage("");
 	if (bWait) {
 		m_pProgressModal = true;
-		m_pProgressDialog->exec();
+		SafeExec(m_pProgressDialog);
 		m_pProgressModal = false;
 	}
 	else
-		m_pProgressDialog->show();
+		SafeShow(m_pProgressDialog);
 
 	if (pProgress->IsFinished()) // Note: since the operation runs asynchronously, it may have already finished, so we need to test for that
 		OnAsyncFinished(pProgress.data());
@@ -2324,7 +2327,7 @@ void CSandMan::OnAbout()
 		QIcon ico(QLatin1String(":/SandMan.png"));
 		msgBox->setIconPixmap(ico.pixmap(128, 128));
 
-		msgBox->exec();
+		SafeExec(msgBox);
 	}
 	else if (sender() == m_pAboutQt)
 		QMessageBox::aboutQt(this);
@@ -2550,10 +2553,62 @@ QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
 #include <windows.h>
 #include "Helpers/FindTool.h"
 
+
+typedef enum DEVICE_SCALE_FACTOR {
+    DEVICE_SCALE_FACTOR_INVALID	= 0,
+    SCALE_100_PERCENT	= 100,
+    SCALE_120_PERCENT	= 120,
+    SCALE_125_PERCENT	= 125,
+    SCALE_140_PERCENT	= 140,
+    SCALE_150_PERCENT	= 150,
+    SCALE_160_PERCENT	= 160,
+    SCALE_175_PERCENT	= 175,
+    SCALE_180_PERCENT	= 180,
+    SCALE_200_PERCENT	= 200,
+    SCALE_225_PERCENT	= 225,
+    SCALE_250_PERCENT	= 250,
+    SCALE_300_PERCENT	= 300,
+    SCALE_350_PERCENT	= 350,
+    SCALE_400_PERCENT	= 400,
+    SCALE_450_PERCENT	= 450,
+    SCALE_500_PERCENT	= 500
+} 	DEVICE_SCALE_FACTOR;
+
+typedef HRESULT (CALLBACK *P_GetScaleFactorForMonitor)(HMONITOR, DEVICE_SCALE_FACTOR*);
+
+UINT GetMonitorScaling(HWND hwnd)
+{
+    static HINSTANCE shcore = LoadLibrary(L"Shcore.dll");
+    if (shcore != nullptr)
+    {
+        if (auto getScaleFactorForMonitor =
+                P_GetScaleFactorForMonitor(GetProcAddress(shcore, "GetScaleFactorForMonitor")))
+        {
+			HMONITOR monitor =
+                MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+
+            DEVICE_SCALE_FACTOR Scale;
+
+            getScaleFactorForMonitor(monitor, &Scale);
+
+            return Scale;
+        }
+    }
+    return 0;
+}
+
+
 #define IDD_FINDER_TOOL                 111
 #define ID_FINDER_TARGET                112
 #define ID_FINDER_EXPLAIN               113
 #define ID_FINDER_RESULT                114
+
+struct SFinderWndData {
+	int Scale;
+	HFONT hFont;
+};
+
+#define DS(x) ((x) * WndData.Scale / 100)
 
 UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 {
@@ -2565,12 +2620,14 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 
 	hwndTool = GetParent(hwndTool);
 
+	SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwndTool, 0);
+
 	if (pid && pid != GetCurrentProcessId())
 	{
 		RECT rc;
 		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top <= 150) 
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+		if (rc.bottom - rc.top <= DS(150)) 
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
 
 		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
 		if (!pProcess.isNull()) 
@@ -2593,8 +2650,8 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 	{
 		RECT rc;
 		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top > 150)
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+		if (rc.bottom - rc.top > DS(150))
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
 
 		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_HIDE);
 		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_HIDE);
@@ -2617,11 +2674,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		case WM_CREATE:
 		{
+			CREATESTRUCT* createStruct = (CREATESTRUCT*)lParam;
+			SFinderWndData &WndData = *(SFinderWndData*)createStruct->lpCreateParams;
+			SetWindowLongPtr(hwnd, 0, (LONG_PTR)&WndData);
+
 			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
 
-			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, 10, 10, 32, 32, hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
-			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, 60, 10, 180, 65, hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
-			CreateWindow(L"Static", L"", WS_CHILD, 60, 80, 180, 50, hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
+			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
+			CreateWindow(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+
+			WndData.hFont = CreateFont(DS(13), 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
+
+			SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+			SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+
 
 			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
 
@@ -2629,7 +2696,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 
 		case WM_CLOSE:
+			SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwnd, 0);
+
 			//DestroyWindow(hwnd);
+			DeleteObject(WndData.hFont);
 			PostQuitMessage(0);
 			break;
 	}
@@ -2654,6 +2724,8 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	mainWindowClass.lpfnWndProc = WndProc;
 	mainWindowClass.hCursor = LoadCursor(0, IDC_ARROW);
 
+	mainWindowClass.cbWndExtra = sizeof(void*);
+
 	RegisterClass(&mainWindowClass);
 
 	// Notes:
@@ -2672,21 +2744,17 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	//               identifier; it must be unique for all
 	//               child windows with the same parent window.
 
-	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
-		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 275, 115, NULL, 0, hInstance, NULL);
+	SFinderWndData WndData;
+	WndData.Scale = GetMonitorScaling(MainWndHandle);
 
-	HFONT hFont = CreateFont(13, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
-	
-	SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)hFont, TRUE);
-	SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)hFont, TRUE);
+	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
+		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, DS(275), DS(135), NULL, 0, hInstance, &WndData);
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
-	DeleteObject(hFont);
 
 	return (int)msg.wParam;
 }

@@ -450,24 +450,28 @@ void CBorderGuard::RefreshBorder(
     desktop = &monitor.rcWork;
 
     int ax = rect->left;
-    if (ax < desktop->left)
-        ax = desktop->left;
+    //if (ax < desktop->left)
+    //    ax = desktop->left;
 
     int ay = rect->top;
-    if (ay < desktop->top)
-        ay = desktop->top;
+    //if (ay < desktop->top)
+    //    ay = desktop->top;
 
     int aw = -ax;
-    if (rect->right <= desktop->right)
+    //if (rect->right <= desktop->right)
         aw += rect->right;
-    else
-        aw += desktop->right;
+    //else
+    //    aw += desktop->right;
 
     int ah = -ay;
-    if (rect->bottom <= desktop->bottom)
+    //if (rect->bottom <= desktop->bottom)
         ah += rect->bottom;
-    else
-        ah += desktop->bottom;
+    //else
+    //    ah += desktop->bottom;
+
+
+	if (rect->bottom == desktop->bottom) 
+		ah -= 1;
 
     //int bb = 6;
     //if (rect->left   <= desktop->left &&

@@ -2341,8 +2341,8 @@ void CSandMan::UpdateCertState()
 	if (g_CertInfo.outdated)
 		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
 			// outdated always implicates it is no longer valid
-	else if (g_CertInfo.expired) // may be still valid for the current older builds
-		OnLogMessage(tr("The supporter certificate is expired %1 days ago, please get an updated certificate")
+	else if (g_CertInfo.expired) // may be still valid for the current and older builds
+		OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
 			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
 	else if(g_CertInfo.about_to_expire)
 		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60*60*24)));

@@ -847,22 +847,22 @@ Percorso completo: %4</translation>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2428"/>
+        <location filename="SandMan.cpp" line="2543"/>
         <source>Waiting for folder: %1</source>
         <translation>In attesa della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2429"/>
+        <location filename="SandMan.cpp" line="2544"/>
         <source>Deleting folder: %1</source>
         <translation>Eliminazione della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2430"/>
+        <location filename="SandMan.cpp" line="2545"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Unione cartelle: %1 &gt;&gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2431"/>
+        <location filename="SandMan.cpp" line="2546"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Completamento unione istantanea...</translation>
     </message>
@@ -933,287 +933,287 @@ Percorso completo: %4</translation>
 <context>
     <name>CSandMan</name>
     <message>
-        <location filename="SandMan.cpp" line="115"/>
-        <location filename="SandMan.cpp" line="916"/>
+        <location filename="SandMan.cpp" line="117"/>
+        <location filename="SandMan.cpp" line="928"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="133"/>
+        <location filename="SandMan.cpp" line="135"/>
         <source>Reset Columns</source>
         <translation>Reimposta colonne</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="134"/>
+        <location filename="SandMan.cpp" line="136"/>
         <source>Copy Cell</source>
         <translation>Copia cella</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="135"/>
+        <location filename="SandMan.cpp" line="137"/>
         <source>Copy Row</source>
         <translation>Copia riga</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="136"/>
+        <location filename="SandMan.cpp" line="138"/>
         <source>Copy Panel</source>
         <translation>Copia riquadro</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="171"/>
+        <location filename="SandMan.cpp" line="173"/>
         <source>Time|Message</source>
         <translation>Ora|Messaggio</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="179"/>
+        <location filename="SandMan.cpp" line="181"/>
         <source>Sbie Messages</source>
         <translation>Messaggi di Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="187"/>
+        <location filename="SandMan.cpp" line="189"/>
         <source>Trace Log</source>
         <translation>Registro di Accesso</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="204"/>
+        <location filename="SandMan.cpp" line="206"/>
         <source>Show/Hide</source>
         <translation>Mostra/Nascondi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="247"/>
-        <location filename="SandMan.cpp" line="379"/>
+        <location filename="SandMan.cpp" line="249"/>
+        <location filename="SandMan.cpp" line="390"/>
         <source>Disable Forced Programs</source>
         <translation>Disattiva i programmi ad avvio forzato</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="373"/>
+        <location filename="SandMan.cpp" line="384"/>
         <source>&amp;Sandbox</source>
         <translation>&amp;Area virtuale</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="374"/>
+        <location filename="SandMan.cpp" line="385"/>
         <source>Create New Box</source>
         <translation>Crea nuova area virtuale</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="375"/>
+        <location filename="SandMan.cpp" line="386"/>
         <source>Create Box Group</source>
         <translation>Aggiungi gruppo</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="377"/>
+        <location filename="SandMan.cpp" line="388"/>
         <source>Terminate All Processes</source>
         <translation>Chiudi tutti i processi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="378"/>
+        <location filename="SandMan.cpp" line="389"/>
         <source>Window Finder</source>
         <translation>Strumento di controllo finestre</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="382"/>
+        <location filename="SandMan.cpp" line="393"/>
         <source>&amp;Maintenance</source>
         <translation>&amp;Manutenzione</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="383"/>
+        <location filename="SandMan.cpp" line="394"/>
         <source>Connect</source>
         <translation>Connetti</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="384"/>
+        <location filename="SandMan.cpp" line="395"/>
         <source>Disconnect</source>
         <translation>Disconnetti</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="386"/>
+        <location filename="SandMan.cpp" line="397"/>
         <source>Stop All</source>
         <translation>Ferma tutto</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="388"/>
+        <location filename="SandMan.cpp" line="399"/>
         <source>&amp;Advanced</source>
         <translation>&amp;Avanzate</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="389"/>
+        <location filename="SandMan.cpp" line="400"/>
         <source>Install Driver</source>
         <translation>Installa driver</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="390"/>
+        <location filename="SandMan.cpp" line="401"/>
         <source>Start Driver</source>
         <translation>Avvia driver</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="391"/>
+        <location filename="SandMan.cpp" line="402"/>
         <source>Stop Driver</source>
         <translation>Ferma driver</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="392"/>
+        <location filename="SandMan.cpp" line="403"/>
         <source>Uninstall Driver</source>
         <translation>Rimuovi driver</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="394"/>
+        <location filename="SandMan.cpp" line="405"/>
         <source>Install Service</source>
         <translation>Installa servizio</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="395"/>
+        <location filename="SandMan.cpp" line="406"/>
         <source>Start Service</source>
         <translation>Avvia servizio</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="396"/>
+        <location filename="SandMan.cpp" line="407"/>
         <source>Stop Service</source>
         <translation>Ferma servizio</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="397"/>
+        <location filename="SandMan.cpp" line="408"/>
         <source>Uninstall Service</source>
         <translation>Rimuovi servizio</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="400"/>
+        <location filename="SandMan.cpp" line="411"/>
         <source>Exit</source>
         <translation>Esci</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="403"/>
+        <location filename="SandMan.cpp" line="414"/>
         <source>&amp;View</source>
         <translation>&amp;Visualizza</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="406"/>
+        <location filename="SandMan.cpp" line="417"/>
         <source>Simple View</source>
         <translation>Vista semplice</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="407"/>
+        <location filename="SandMan.cpp" line="418"/>
         <source>Advanced View</source>
         <translation>Vista avanzata</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="411"/>
+        <location filename="SandMan.cpp" line="422"/>
         <source>Always on Top</source>
         <translation>Sempre in primo piano</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="417"/>
+        <location filename="SandMan.cpp" line="428"/>
         <source>Show Hidden Boxes</source>
         <translation>Mostra aree virtuali nascoste</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="419"/>
+        <location filename="SandMan.cpp" line="430"/>
         <source>Show All Sessions</source>
         <translation>Mostra tutte le sessioni</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="424"/>
+        <location filename="SandMan.cpp" line="435"/>
         <source>Clean Up</source>
         <translation>Pulizia</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="425"/>
+        <location filename="SandMan.cpp" line="436"/>
         <source>Cleanup Processes</source>
         <translatorcomment>Entra in funzione solo se viene attivata l&apos;opzione &apos;Mantieni lo stato terminato dei processi&apos;</translatorcomment>
         <translation>Rimuovi i processi dallo stato terminato</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="427"/>
+        <location filename="SandMan.cpp" line="438"/>
         <source>Cleanup Message Log</source>
         <translation>Pulisci registro dei messaggi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="428"/>
+        <location filename="SandMan.cpp" line="439"/>
         <source>Cleanup Trace Log</source>
         <translation>Pulisci registro di accesso</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="430"/>
+        <location filename="SandMan.cpp" line="441"/>
         <source>Keep terminated</source>
         <translatorcomment>Con quest&apos;opzione attiva, una volta chiusi i programmi dell&apos;area virtuale, essi rimarranno sempre visibili come applicazioni terminate senza scomparire dalla lista</translatorcomment>
         <translation>Mantieni lo stato terminato dei processi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="434"/>
+        <location filename="SandMan.cpp" line="445"/>
         <source>&amp;Options</source>
         <translation>&amp;Opzioni</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="435"/>
+        <location filename="SandMan.cpp" line="446"/>
         <source>Global Settings</source>
         <translation>Impostazioni globali</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="436"/>
+        <location filename="SandMan.cpp" line="447"/>
         <source>Reset all hidden messages</source>
         <translation>Reimposta tutti i messaggi nascosti</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="438"/>
+        <location filename="SandMan.cpp" line="449"/>
         <source>Edit ini file</source>
         <translation>Modifica file ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="439"/>
+        <location filename="SandMan.cpp" line="450"/>
         <source>Reload ini file</source>
         <translation>Ricarica file ini</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="441"/>
+        <location filename="SandMan.cpp" line="452"/>
         <source>Trace Logging</source>
         <translation>Attiva Registro di Accesso</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="445"/>
+        <location filename="SandMan.cpp" line="456"/>
         <source>&amp;Help</source>
         <translation>&amp;Aiuto</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="447"/>
+        <location filename="SandMan.cpp" line="458"/>
         <source>Support Sandboxie-Plus with a Donation</source>
         <translation>Supporta Sandboxie Plus con una donazione</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="448"/>
+        <location filename="SandMan.cpp" line="459"/>
         <source>Visit Support Forum</source>
         <translation>Visita il forum di supporto</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="449"/>
+        <location filename="SandMan.cpp" line="460"/>
         <source>Online Documentation</source>
         <translation>Documentazione online</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="451"/>
+        <location filename="SandMan.cpp" line="462"/>
         <source>Check for Updates</source>
         <translation>Controlla aggiornamenti</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="453"/>
+        <location filename="SandMan.cpp" line="464"/>
         <source>About the Qt Framework</source>
         <translation>Informazioni su Qt Framework</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="454"/>
-        <location filename="SandMan.cpp" line="2302"/>
+        <location filename="SandMan.cpp" line="465"/>
+        <location filename="SandMan.cpp" line="2323"/>
         <source>About Sandboxie-Plus</source>
         <translation>Informazioni su Sandboxie Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="473"/>
+        <location filename="SandMan.cpp" line="484"/>
         <source>Cleanup</source>
         <translation>Pulizia</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="530"/>
+        <location filename="SandMan.cpp" line="541"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>Vuoi chiudere Sandboxie Manager?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="548"/>
+        <location filename="SandMan.cpp" line="559"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -1222,119 +1222,119 @@ Do you want to do the clean up?</source>
 Effettuare la pulizia?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="549"/>
-        <location filename="SandMan.cpp" line="817"/>
-        <location filename="SandMan.cpp" line="856"/>
-        <location filename="SandMan.cpp" line="941"/>
-        <location filename="SandMan.cpp" line="1438"/>
-        <location filename="SandMan.cpp" line="1683"/>
+        <location filename="SandMan.cpp" line="560"/>
+        <location filename="SandMan.cpp" line="829"/>
+        <location filename="SandMan.cpp" line="868"/>
+        <location filename="SandMan.cpp" line="953"/>
+        <location filename="SandMan.cpp" line="1454"/>
+        <location filename="SandMan.cpp" line="1700"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Non mostrare più questo messaggio.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="672"/>
+        <location filename="SandMan.cpp" line="683"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Operazione sconosciuta &apos;%1&apos; richiesta tramite riga di comando</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="681"/>
-        <location filename="SandMan.cpp" line="683"/>
-        <location filename="SandMan.cpp" line="1863"/>
+        <location filename="SandMan.cpp" line="692"/>
+        <location filename="SandMan.cpp" line="694"/>
+        <location filename="SandMan.cpp" line="1880"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie Plus - Errore</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="681"/>
+        <location filename="SandMan.cpp" line="692"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Impossibile fermare tutti i componenti di Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="683"/>
+        <location filename="SandMan.cpp" line="694"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Impossibile avviare i componenti di Sandboxie richiesti</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="685"/>
+        <location filename="SandMan.cpp" line="696"/>
         <source>Maintenance operation %1</source>
         <translation>Operazione di manutenzione %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="690"/>
+        <location filename="SandMan.cpp" line="701"/>
         <source>Maintenance operation Successful</source>
         <translation>Operazione di manutenzione eseguita con successo</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="921"/>
+        <location filename="SandMan.cpp" line="933"/>
         <source>Sbie+ Version: %1 (%2)</source>
         <translation>Versione di Sandboxie+: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="997"/>
+        <location filename="SandMan.cpp" line="1013"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Area virtuale predefinita non trovata; in fase di creazione: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1122"/>
+        <location filename="SandMan.cpp" line="1138"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>Il programma %1 avviato nell&apos;area virtuale %2 verrà terminato tra 5 minuti poichè l&apos;area virtuale utilizza funzioni disponibili esclusivamente ai sostenitori del progetto.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1124"/>
+        <location filename="SandMan.cpp" line="1140"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>L&apos;area virtuale %1 utilizza funzioni disponibili esclusivamente ai sostenitori del progetto, pertanto le seguenti impostazioni verranno ignorate.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1125"/>
+        <location filename="SandMan.cpp" line="1141"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Diventa un sostenitore di Sandboxie Plus&lt;/a&gt; per ricevere un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1811"/>
+        <location filename="SandMan.cpp" line="1828"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Stato di errore: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1812"/>
+        <location filename="SandMan.cpp" line="1829"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1845"/>
+        <location filename="SandMan.cpp" line="1862"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Stato di errore sconosciuto: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2275"/>
+        <location filename="SandMan.cpp" line="2296"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Informazioni su Sandboxie Plus&lt;/h3&gt;&lt;p&gt;Versione %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="816"/>
+        <location filename="SandMan.cpp" line="828"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>Vuoi controllare se esiste una nuova versione di Sandboxie Plus?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="499"/>
+        <location filename="SandMan.cpp" line="510"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Sostieni Sandboxie Plus su Patreon&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="592"/>
+        <location filename="SandMan.cpp" line="603"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
         <translation>Quest&apos;area virtuale fornisce un isolamento avanzato, ed è indicata per testare software non attendibile.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="596"/>
+        <location filename="SandMan.cpp" line="607"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>Quest&apos;area virtuale fornisce un isolamento standard, ed è indicata ad eseguire software in sicurezza.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="600"/>
+        <location filename="SandMan.cpp" line="611"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
         <translation>Quest&apos;area virtuale non applica l&apos;isolamento, ed è indicata per una migliore compatibilità.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="605"/>
+        <location filename="SandMan.cpp" line="616"/>
         <source>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
@@ -1343,32 +1343,32 @@ This box prevents access to all user data locations, except explicitly granted i
 Quest&apos;area virtuale impedisce l&apos;accesso a tutti i percorsi dei dati utente, tranne quelli esplicitamente consentiti nelle opzioni di Accesso risorse.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="854"/>
+        <location filename="SandMan.cpp" line="866"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
         <translation>Alcuni modelli di compatibilità (%1) sono mancanti, probabilmente cancellati, vuoi rimuoverli da tutte le aree virtuali?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="871"/>
+        <location filename="SandMan.cpp" line="883"/>
         <source>Cleaned up removed templates...</source>
         <translation>Pulizia dei modelli rimossi...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="920"/>
+        <location filename="SandMan.cpp" line="932"/>
         <source>Sbie Directory: %1</source>
         <translation>Directory Sandboxie: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="922"/>
+        <location filename="SandMan.cpp" line="934"/>
         <source>Loaded Config: %1</source>
         <translation>Configurazione caricata: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="929"/>
+        <location filename="SandMan.cpp" line="941"/>
         <source>   -   Portable</source>
         <translation>   -   Portatile</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="938"/>
+        <location filename="SandMan.cpp" line="950"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -1377,383 +1377,405 @@ Scegliere Sì per selezionare: %1
 Scegliere No per selezionare: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="991"/>
-        <source>The supporter certificate is expired</source>
-        <translation>Il certificato di supporto è scaduto</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1003"/>
+        <location filename="SandMan.cpp" line="1019"/>
         <source>   -   NOT connected</source>
         <translation>   -   NON connesso</translation>
     </message>
     <message>
-        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="vanished">Il programma %1 avviato nell&apos;area virtuale %2 verrà terminato tra 5 minuti poichè l&apos;area virtuale utilizza funzioni disponibili esclusivamente ai sostenitori del progetto.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Diventa un sostenitore di Sandboxie Plus&lt;/a&gt;, e ricevi un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1153"/>
+        <location filename="SandMan.cpp" line="1169"/>
         <source>PID %1: </source>
         <translation>PID %1: </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1155"/>
+        <location filename="SandMan.cpp" line="1171"/>
         <source>%1 (%2): </source>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1181"/>
+        <location filename="SandMan.cpp" line="1197"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>La funzionalità selezionata è disponibile solo ai sostenitori del progetto. I processi avviati nell&apos;area virtuale con questa funzione senza un valido certificato di supporto verranno terminati dopo 5 minuti.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Diventa un sostenitore di Sandboxie Plus&lt;/a&gt;, e ricevi un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1278"/>
+        <location filename="SandMan.cpp" line="1294"/>
         <source>Recovering file %1 to %2</source>
         <translation>Recupero file %1 in %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1290"/>
+        <location filename="SandMan.cpp" line="1306"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Il file %1 esiste già, vuoi sovrascriverlo?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1291"/>
+        <location filename="SandMan.cpp" line="1307"/>
         <source>Do this for all files!</source>
         <translation>Applica a tutti i file!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1310"/>
+        <location filename="SandMan.cpp" line="1326"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Impossibile recuperare alcuni file: 
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1338"/>
+        <location filename="SandMan.cpp" line="1354"/>
         <source>Only Administrators can change the config.</source>
         <translation>Solo gli amministratori possono cambiare la configurazione.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1348"/>
+        <location filename="SandMan.cpp" line="1364"/>
         <source>Please enter the configuration password.</source>
         <translation>Immettere la password di configurazione.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1356"/>
+        <location filename="SandMan.cpp" line="1372"/>
         <source>Login Failed: %1</source>
         <translation>Login non riuscito: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1392"/>
+        <location filename="SandMan.cpp" line="1408"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Chiudere tutti i processi in tutte le aree virtuali?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1393"/>
+        <location filename="SandMan.cpp" line="1409"/>
         <source>Terminate all without asking</source>
         <translation>Terminali tutti senza chiedere</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1412"/>
+        <location filename="SandMan.cpp" line="1428"/>
         <source>Please enter the duration for disabling forced programs.</source>
         <translation>Immettere la durata per la disattivazione dei programmi ad avvio forzato.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1437"/>
+        <location filename="SandMan.cpp" line="1453"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie Plus è stato avviato in modalità portatile e deve creare i servizi necessari. Questa operazione richiederà privilegi amministrativi.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1474"/>
+        <location filename="SandMan.cpp" line="1490"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>ATTENZIONE: Un altro processo (probabilmente SbieCtrl.exe) sta attualmente gestendo questa sessione Sandboxie, si prega di chiuderla e di riconnettersi.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1537"/>
+        <location filename="SandMan.cpp" line="1553"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Operazione di manutenzione in esecuzione, attendere...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1645"/>
+        <location filename="SandMan.cpp" line="1662"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Vuoi reimpostare i messaggi nascosti (sì), o soltanto i log dei messaggi (no)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1681"/>
+        <location filename="SandMan.cpp" line="1698"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Le modifiche verranno applicate automaticamente ogni volta che il file viene salvato.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1682"/>
+        <location filename="SandMan.cpp" line="1699"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Le modifiche verranno applicate automaticamente non appena l&apos;editor viene chiuso.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1814"/>
+        <location filename="SandMan.cpp" line="1831"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Questa operazione richiede privilegi amministrativi.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1815"/>
+        <location filename="SandMan.cpp" line="1832"/>
         <source>Failed to execute: %1</source>
         <translation>Impossibile eseguire: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1816"/>
+        <location filename="SandMan.cpp" line="1833"/>
         <source>Failed to connect to the driver</source>
         <translation>Impossibile collegarsi al driver</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1817"/>
+        <location filename="SandMan.cpp" line="1834"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Impossibile comunicare con Sandboxie Service: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1818"/>
+        <location filename="SandMan.cpp" line="1835"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>La versione di Sandboxie %1 risulta incompatibile. Versioni compatibili: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1819"/>
+        <location filename="SandMan.cpp" line="1836"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Impossibile trovare il percorso di installazione di Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1820"/>
+        <location filename="SandMan.cpp" line="1837"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Impossibile copiare la configurazione dall&apos;area virtuale %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1821"/>
+        <location filename="SandMan.cpp" line="1838"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>Un&apos;area virtuale %1 è già presente</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1822"/>
+        <location filename="SandMan.cpp" line="1839"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Impossibile cancellare area virtuale %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1823"/>
+        <location filename="SandMan.cpp" line="1840"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Il nome dell&apos;area virtuale non può superare i 32 caratteri.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1824"/>
+        <location filename="SandMan.cpp" line="1841"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Il nome dell&apos;area virtuale non può essere quello di un dispositivo.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1825"/>
+        <location filename="SandMan.cpp" line="1842"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Il nome dell&apos;area virtuale  può contenere solo lettere, cifre e trattini bassi che vengono visualizzati come spazi.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1826"/>
+        <location filename="SandMan.cpp" line="1843"/>
         <source>Failed to terminate all processes</source>
         <translation>Impossibile terminare tutti i processi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1827"/>
+        <location filename="SandMan.cpp" line="1844"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Blocco di eliminazione attivo per quest&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1828"/>
+        <location filename="SandMan.cpp" line="1845"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Errore durante l&apos;eliminazione della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1831"/>
+        <location filename="SandMan.cpp" line="1848"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Impossibile spostare directory &apos;%1&apos; in &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1832"/>
+        <location filename="SandMan.cpp" line="1849"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Questa istantanea non può essere eseguita mentre i processi sono ancora in esecuzione nell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1833"/>
+        <location filename="SandMan.cpp" line="1850"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Impossibile creare directory su nuova istantanea</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1834"/>
+        <location filename="SandMan.cpp" line="1851"/>
         <source>Failed to copy RegHive</source>
         <translation>Impossibile copiare RegHive</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1835"/>
+        <location filename="SandMan.cpp" line="1852"/>
         <source>Snapshot not found</source>
         <translation>Istantanea non trovata</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1836"/>
+        <location filename="SandMan.cpp" line="1853"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Errore durante l&apos;unione delle directory &apos;%1&apos; con &apos;%2&apos;: unione delle istantanee non riuscita.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1837"/>
+        <location filename="SandMan.cpp" line="1854"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Impossibile rimuovere directory di istantanea &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1838"/>
+        <location filename="SandMan.cpp" line="1855"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Impossibile rimuovere un&apos;istantanea condivisa da istantanee successive</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1839"/>
+        <location filename="SandMan.cpp" line="1856"/>
         <source>Failed to remove old RegHive</source>
         <translation>Rimozione RegHive non riuscita</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1840"/>
+        <location filename="SandMan.cpp" line="1857"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Non sei autorizzato ad aggiornare la configurazione nel punto &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1841"/>
+        <location filename="SandMan.cpp" line="1858"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Salvataggio dell&apos;impostazione di configurazione %1 fallito nel punto %2: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1842"/>
+        <location filename="SandMan.cpp" line="1859"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Impossibile creare istantanea di un&apos;area virtuale vuota</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1843"/>
+        <location filename="SandMan.cpp" line="1860"/>
         <source>A sandbox with that name already exists</source>
         <translation>Un&apos;area virtuale con quel nome è già presente</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1844"/>
+        <location filename="SandMan.cpp" line="1861"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>La password non può superare i 64 caratteri</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1865"/>
+        <location filename="SandMan.cpp" line="1882"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Operazione fallita per %1 elemento(i).</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1997"/>
+        <location filename="SandMan.cpp" line="2018"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>Aprire %1 nel browser dell&apos;area virtuale (sì) o all&apos;esterno (no)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1998"/>
+        <location filename="SandMan.cpp" line="2019"/>
         <source>Remember choice for later.</source>
         <translation>Ricorda la scelta per dopo.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2029"/>
+        <location filename="SandMan.cpp" line="2050"/>
         <source>Checking for updates...</source>
-        <translation>Controllo aggiornamenti...</translation>
+        <translation>Controllo aggiornamenti in corso...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2079"/>
+        <location filename="SandMan.cpp" line="2100"/>
         <source>server not reachable</source>
         <translation>server non raggiungibile</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2080"/>
-        <location filename="SandMan.cpp" line="2082"/>
+        <location filename="SandMan.cpp" line="2101"/>
+        <location filename="SandMan.cpp" line="2103"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>Controllo aggiornamenti fallito, errore: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2099"/>
+        <location filename="SandMan.cpp" line="2120"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Desideri aprire la &lt;a href=&quot;%1&quot;&gt;pagina delle informazioni&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2107"/>
+        <location filename="SandMan.cpp" line="2128"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Non mostrare questo avviso in futuro.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2154"/>
+        <location filename="SandMan.cpp" line="2175"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;È disponibile una nuova versione di Sandboxie Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Nuova versione:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2156"/>
+        <location filename="SandMan.cpp" line="2177"/>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vuoi scaricare l&apos;ultima versione?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2158"/>
+        <location filename="SandMan.cpp" line="2179"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Desideri aprire la &lt;a href=&quot;%1&quot;&gt;pagina dei download&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2166"/>
+        <location filename="SandMan.cpp" line="2187"/>
         <source>Don&apos;t show this message anymore.</source>
         <translation>Non mostrare più questo messaggio.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2194"/>
+        <location filename="SandMan.cpp" line="2215"/>
         <source>Downloading new version...</source>
         <translation>Download in corso della nuova versione...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2207"/>
+        <location filename="SandMan.cpp" line="2228"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
         <translation>Nessun aggiornamento trovato, hai l&apos;ultima versione di Sandboxie Plus.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2249"/>
+        <location filename="SandMan.cpp" line="2270"/>
         <source>Failed to download update from: %1</source>
         <translation>Impossibile scaricare aggiornamento da: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2253"/>
+        <location filename="SandMan.cpp" line="2274"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;La nuova versione è stata scaricata nel seguente percorso:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Iniziare l&apos;installazione? Se ci sono altri programmi in esecuzione nell&apos;area virtuale, verranno terminati.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;Informazioni su Sandboxie Plus&lt;/h3&gt;&lt;p&gt;Versione %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="2283"/>
+        <location filename="SandMan.cpp" line="2304"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Questa copia di Sandboxie+ è certificata per: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2285"/>
+        <location filename="SandMan.cpp" line="2306"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ è gratuito per uso personale e non commerciale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2288"/>
+        <location filename="SandMan.cpp" line="2309"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni attive: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione italiana a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2466"/>
+        <location filename="SandMan.cpp" line="2342"/>
+        <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
+        <translation>Il certificato non è valido per questa build, si prega di ottenere un certificato aggiornato</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2345"/>
+        <source>The supporter certificate has expired%1, please get an updated certificate</source>
+        <translation>Il certificato è scaduto%1, si prega di ottenere un certificato aggiornato</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2346"/>
+        <source>, but it remains valid for the current build</source>
+        <translation>, ma resta valido per la build corrente</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2348"/>
+        <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
+        <translation>Il certificato scadrà fra %1 giorni, si prega di ottenere un certificato aggiornato</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2368"/>
+        <source>Checking for certificate...</source>
+        <translation>Controllo del certificato in corso...</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2401"/>
+        <source>No certificate found on server!</source>
+        <translation>Nessun certificato trovato sul server!</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2406"/>
+        <source>There is no updated certificate available.</source>
+        <translation>Non è disponibile alcun certificato aggiornato.</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2635"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>La finestra selezionata appartiene al programma %1 avviato nell&apos;area virtuale %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2473"/>
+        <location filename="SandMan.cpp" line="2642"/>
         <source>The selected window is not running as part of any sandboxed program.</source>
         <translation>La finestra selezionata non appartiene ad alcun programma avviato nell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2508"/>
+        <location filename="SandMan.cpp" line="2681"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
         <translation>Trascina lo strumento di ricerca su una finestra per selezionarla, quindi rilascia il mouse per controllare se la finestra è in esecuzione in un&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2563"/>
+        <location filename="SandMan.cpp" line="2749"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie Plus - Controllo finestre</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="77"/>
+        <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager non può essere avviato nell&apos;area virtuale!</translation>
     </message>
@@ -2383,93 +2405,113 @@ Scegliere No per selezionare: %2</translation>
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="66"/>
+        <location filename="Windows/SettingsWindow.cpp" line="68"/>
         <source>Sandboxie Plus - Settings</source>
         <translation>Sandboxie Plus - Impostazioni</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="95"/>
+        <location filename="Windows/SettingsWindow.cpp" line="98"/>
         <source>Auto Detection</source>
         <translation>Rilevamento automatico</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="106"/>
+        <location filename="Windows/SettingsWindow.cpp" line="99"/>
+        <source>No Translation</source>
+        <translation>Nessuna traduzione</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="109"/>
         <source>Don&apos;t show any icon</source>
         <translation>Disattiva</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="107"/>
+        <location filename="Windows/SettingsWindow.cpp" line="110"/>
         <source>Show Plus icon</source>
         <translation>Mostra icona Plus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="108"/>
+        <location filename="Windows/SettingsWindow.cpp" line="111"/>
         <source>Show Classic icon</source>
         <translation>Mostra icona Classic</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="110"/>
+        <location filename="Windows/SettingsWindow.cpp" line="113"/>
         <source>Close to Tray</source>
         <translation>Riduci a icona nell&apos;area di notifica</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="111"/>
+        <location filename="Windows/SettingsWindow.cpp" line="114"/>
         <source>Prompt before Close</source>
         <translation>Chiedi conferma prima di uscire</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="112"/>
+        <location filename="Windows/SettingsWindow.cpp" line="115"/>
         <source>Close</source>
         <translation>Esci</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="493"/>
-        <source>This certificate is unfortunately expired.</source>
-        <translation>Questo certificato risulta scaduto.</translation>
+        <location filename="Windows/SettingsWindow.cpp" line="339"/>
+        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation>Questo certificato è scaduto, si prega di &lt;a href=&quot;sbie://update/cert&quot;&gt;ottenere un certificato aggiornato&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="499"/>
+        <location filename="Windows/SettingsWindow.cpp" line="344"/>
+        <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation>Questo certificato &lt;font color=&apos;red&apos;&gt;scadrà fra %1 giorni&lt;/font&gt;, si prega di &lt;a href=&quot;sbie://update/cert&quot;&gt;ottenere un certificato aggiornato&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="534"/>
+        <source>This certificate is unfortunately expired.</source>
+        <translation>Questo certificato è scaduto.</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="536"/>
+        <source>This certificate is unfortunately outdated.</source>
+        <translation>Questo certificato è obsoleto.</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="542"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Grazie per aver sostenuto lo sviluppo di Sandboxie Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="506"/>
+        <location filename="Windows/SettingsWindow.cpp" line="549"/>
         <source>This support certificate is not valid.</source>
         <translation>Certificato di supporto non valido.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="545"/>
-        <location filename="Windows/SettingsWindow.cpp" line="649"/>
+        <location filename="Windows/SettingsWindow.cpp" line="594"/>
+        <location filename="Windows/SettingsWindow.cpp" line="703"/>
         <source>Select Directory</source>
         <translation>Seleziona directory</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="611"/>
+        <location filename="Windows/SettingsWindow.cpp" line="665"/>
         <source>Please enter the new configuration password.</source>
         <translation>Immettere la nuova password di configurazione.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="615"/>
+        <location filename="Windows/SettingsWindow.cpp" line="669"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Reimmettere la nuova password di configurazione.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="620"/>
+        <location filename="Windows/SettingsWindow.cpp" line="674"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Le password non corrispondono, si prega di riprovare.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="684"/>
         <source>Process</source>
         <translation>Processo</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="630"/>
+        <location filename="Windows/SettingsWindow.cpp" line="684"/>
         <source>Folder</source>
         <translation>Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="640"/>
+        <location filename="Windows/SettingsWindow.cpp" line="694"/>
         <source>Please enter a program file name</source>
         <translation>Immettere il nome del programma (es. nomefile.exe)</translation>
     </message>
@@ -3437,10 +3479,6 @@ Il livello di corrispondenza del processo ha una priorità più alta della speci
         <translation>Aggiungi processi in esecuzione nell&apos;area virtuale agli oggetti Job (raccomandato)</translation>
     </message>
     <message>
-        <source>COM isolation</source>
-        <translation type="vanished">Isolamento COM</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2004"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>Rimuovi i privilegi critici dai processi avviati con un token di sistema</translation>
@@ -3805,27 +3843,27 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2418"/>
+        <location filename="SandMan.cpp" line="2533"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2419"/>
+        <location filename="SandMan.cpp" line="2534"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2420"/>
+        <location filename="SandMan.cpp" line="2535"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2421"/>
+        <location filename="SandMan.cpp" line="2536"/>
         <source>&amp;Yes</source>
         <translation>&amp;Sì</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2422"/>
+        <location filename="SandMan.cpp" line="2537"/>
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>
@@ -3954,32 +3992,37 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Compatibilità</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="720"/>
+        <location filename="Forms/SettingsWindow.ui" line="777"/>
         <source>Support</source>
         <translation>Supporto</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="764"/>
+        <location filename="Forms/SettingsWindow.ui" line="878"/>
+        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation>Questo certificato è scaduto, si prega di &lt;a href=&quot;sbie://update/cert&quot;&gt;ottenere un certificato aggiornato&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="898"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
         <translation>Mantenere Sandboxie aggiornato con i rilasci continui di Windows e garantire la compatibilità con i browser moderni è uno sforzo senza fine. Si prega di supportare questo lavoro con una donazione.&lt;br /&gt;È possibile supportare lo sviluppo con una &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;donazione PayPal&lt;/a&gt;, che consente anche la donazione tramite carta di credito.&lt;br /&gt;È inoltre possibile fornire un supporto costante tramite  &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;abbonamento Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="796"/>
+        <location filename="Forms/SettingsWindow.ui" line="807"/>
         <source>Enter the support certificate here</source>
         <translation>Inserire il certificato di supporto</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="810"/>
+        <location filename="Forms/SettingsWindow.ui" line="864"/>
         <source>Support Settings</source>
         <translation>Impostazioni di supporto</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="744"/>
+        <location filename="Forms/SettingsWindow.ui" line="837"/>
         <source>Install updates automatically</source>
         <translation>Installa gli aggiornamenti automaticamente</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="751"/>
+        <location filename="Forms/SettingsWindow.ui" line="885"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
         <translation>Controlla periodicamente gli aggiornamenti di Sandboxie Plus</translation>
     </message>
@@ -4197,7 +4240,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="664"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation>In futuro, non controllare la compatibilità dei programmi</translation>
+        <translation>Non controllare la compatibilità dei programmi in futuro</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="671"/>
@@ -4215,14 +4258,34 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>È stata rilevata la presenza dei seguenti programmi nel sistema. Fare click su OK per applicare le configurazioni che miglioreranno la compatibilità con questi programmi. Le configurazioni verranno applicate a tutte le aree virtuali, esistenti e non.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="817"/>
+        <location filename="Forms/SettingsWindow.ui" line="720"/>
+        <source>Edit ini Section</source>
+        <translation>Modifica configurazione</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="729"/>
+        <source>Save</source>
+        <translation>Salva</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="736"/>
+        <source>Edit ini</source>
+        <translation>Modifica file ini</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="762"/>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>I sostenitori del progetto Sandboxie Plus riceveranno un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di sostenitore&lt;/a&gt;. È come un codice di licenza, ma riservato a persone straordinarie che usano software open source. :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="834"/>
-        <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation>Questo certificato è scaduto, si prega di ottenere un certificato aggiornato.</translation>
+        <location filename="Forms/SettingsWindow.ui" line="911"/>
+        <source>In the future, don&apos;t notify about certificate expiration</source>
+        <translation>Non notificare la scadenza del certificato in futuro</translation>
     </message>
 </context>
 <context>

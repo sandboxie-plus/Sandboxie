@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with the PortableRootDir setting [#1509](https://github.com/sandboxie-plus/Sandboxie/issues/1509)
 - fixed issue with the settings window crashing when the driver was not connected
 - fixed DPI issues with Finder Tool [#912](https://github.com/sandboxie-plus/Sandboxie/issues/912)
+- fixed an other issue with reused pids [#1547](https://github.com/sandboxie-plus/Sandboxie/issues/1547)
 
 
 

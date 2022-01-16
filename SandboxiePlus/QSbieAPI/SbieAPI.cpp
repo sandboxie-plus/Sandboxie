@@ -1575,7 +1575,7 @@ SB_STATUS CSbieAPI::UpdateProcessInfo(const CBoxedProcessPtr& pProcess)
 CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 {
 	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
-	if (!pProcess)
+	if (!pProcess || pProcess->IsTerminated())
 		return CSandBoxPtr();
 	return GetBoxByName(pProcess->GetBoxName());
 }

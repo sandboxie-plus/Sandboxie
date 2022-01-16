@@ -229,8 +229,8 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 
 SB_STATUS CSandBox::RemoveBox()
 {
-	//if (!IsEmpty())
-	//	return SB_ERR(SB_DelNotEmpty);
+	if (!IsEmpty())
+		return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
 }

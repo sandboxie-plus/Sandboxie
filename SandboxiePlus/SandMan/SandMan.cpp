@@ -1844,7 +1844,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
 	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
 	//case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
-	//case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
+	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
 	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
 	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
@@ -2685,9 +2685,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			CreateWindow(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
 
 			WndData.hFont = CreateFont(DS(13), 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
-
-			SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
-			SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+			if (WndData.hFont) {
+				SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+				SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+			}
 
 			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
 
@@ -2697,8 +2698,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		case WM_CLOSE:
 			SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwnd, 0);
 
+			if (WndData.hFont) DeleteObject(WndData.hFont);
+
 			//DestroyWindow(hwnd);
-			DeleteObject(WndData.hFont);
 			PostQuitMessage(0);
 			break;
 	}

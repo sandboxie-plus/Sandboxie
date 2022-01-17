@@ -29,7 +29,7 @@ enum ESbieMsgCodes
 	SB_DeleteProtect,
 	SB_DeleteError,
 	//SB_RemNotEmpty,
-	//SB_DelNotEmpty,
+	SB_DelNotEmpty,
 	SB_FailedMoveDir,
 	SB_SnapMkDirFail,
 	SB_SnapCopyRegFail,

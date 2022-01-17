@@ -24,7 +24,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with opening network shares [#1529](https://github.com/sandboxie-plus/Sandboxie/issues/1529)
 - fixed possible upgrade issue with Classic installer (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
 - fixed minor issues with Classic installer (by sredna) [#1533](https://github.com/sandboxie-plus/Sandboxie/pull/1533)
-- fixed Ldr_FixImagePath_2 issue [#1507](https://github.com/sandboxie-plus/Sandboxie/issues/1507)
+- fixed issue with Ldr_FixImagePath_2 [#1507](https://github.com/sandboxie-plus/Sandboxie/issues/1507)
+- when using "Run Sandboxed" with SandMan UI and the UI is off, it wil stay off.
+- fixed issue with Util_GetProcessPidByName that should resolve the driver sometimes failing to start at boot [#1451](https://github.com/sandboxie-plus/Sandboxie/issues/1451)
+- SandMan will now run in background like SbieCtrl when starting a boxed process [post506](https://forum.xanasoft.com/viewtopic.php?p=506#p506)
+- fixed taskbar not showing with persistent box border in full screen [post474](https://forum.xanasoft.com/viewtopic.php?p=474#p474)
+- fixed box border not spanning across multiple monitors [#1512](https://github.com/sandboxie-plus/Sandboxie/issues/1512)
+- fixed issues with border when using DPI scaling [#1506](https://github.com/sandboxie-plus/Sandboxie/issues/1506)
+- fixed DPI issues with Qt [#1368](https://github.com/sandboxie-plus/Sandboxie/issues/1368)
+- fixed issue with bright flashing on window creation when in dark mode [#1231](https://github.com/sandboxie-plus/Sandboxie/issues/1231)
+- fixed issues with the PortableRootDir setting [#1509](https://github.com/sandboxie-plus/Sandboxie/issues/1509)
+- fixed issue with the settings window crashing when the driver was not connected
+- fixed DPI issues with Finder Tool [#912](https://github.com/sandboxie-plus/Sandboxie/issues/912)
+- fixed an other issue with reused pids [#1547](https://github.com/sandboxie-plus/Sandboxie/issues/1547)
+
 
 
 
@@ -463,7 +476,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed "del" shortcut to terminate a process not always working
 - fixed group display issue [#1094](https://github.com/sandboxie-plus/Sandboxie/issues/1094)
-- fixed issue when using "run sandboxed" on a file that is already located in a sandbox [#1099](https://github.com/sandboxie-plus/Sandboxie/issues/1099)
+- fixed issue when using "Run Sandboxed" on a file that is already located in a sandbox [#1099](https://github.com/sandboxie-plus/Sandboxie/issues/1099)
 
 
 
@@ -663,7 +676,7 @@ Fixed issue with Windows 7
 
 ### Added
 - added global hotkey to terminate all sandboxed processes (default: Ctrl+Pause)
-- the Run Sandboxed dialog can now be handled by the SandMan UI
+- the "Run Sandboxed" dialog can now be handled by the SandMan UI
 - added "AllowBoxedJobs=y" allowing boxed processes to use nested jobs on Windows 8 and later
 -- Note: this allows Chrome and other programs to use the job system for additional isolation
 - added Librewolf.exe to the list of Firefox derivatives [#927](https://github.com/sandboxie-plus/Sandboxie/issues/927)

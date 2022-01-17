@@ -816,7 +816,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
 				FileBrowserWindows.remove(pBox.data());
 			});
-			pFileBrowserWindow->show();
+			SafeShow(pFileBrowserWindow);
 		}
 	}
 	else if (Action == m_pMenuExplore)
@@ -884,7 +884,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
 				SnapshotWindows.remove(pBox.data());
 			});
-			pSnapshotsWindow->show();
+			SafeShow(pSnapshotsWindow);
 		}
 	}
 	else if (Action == m_pMenuDuplicate)
@@ -940,7 +940,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	}
 	else if (Action == m_pMenuRemove)
 	{
-		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected sandbox(es)?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected sandbox(es)?<br /><br />Warning: The box content will also be deleted!"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 
 		foreach(const CSandBoxPtr & pBox, SandBoxes)
@@ -1168,7 +1168,7 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;
 		});
-		pBoxEx->m_pOptionsWnd->show();
+		SafeShow(pBoxEx->m_pOptionsWnd);
 	}
 	else {
 		pBoxEx->m_pOptionsWnd->setWindowState((pBoxEx->m_pOptionsWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);

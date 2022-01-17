@@ -267,7 +267,7 @@ int CRecoveryWindow::FindFiles()
 		foreach(const QFileInfo & Info, Dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
 			Count += FindBoxFiles("\\drive\\" + Info.fileName());
 
-		if (m_pBox->GetBool("SeparateUserFolders", true)) {
+		if (m_pBox->GetBool("SeparateUserFolders", true, true)) {
 			Count += FindBoxFiles("\\user\\current");
 			Count += FindBoxFiles("\\user\\all");
 			Count += FindBoxFiles("\\user\\public");

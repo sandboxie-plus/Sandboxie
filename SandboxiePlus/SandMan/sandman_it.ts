@@ -1554,6 +1554,11 @@ Scegliere No per selezionare: %2</translation>
         <translation>Errore durante l&apos;eliminazione della cartella: %1</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation>Occorre svuotare il contenuto dell&apos;area virtuale prima di poterla rimuovere.</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1848"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Impossibile spostare directory &apos;%1&apos; in &apos;%2&apos;</translation>
@@ -1770,7 +1775,7 @@ Scegliere No per selezionare: %2</translation>
         <translation>Trascina lo strumento di ricerca su una finestra per selezionarla, quindi rilascia il mouse per controllare se la finestra è in esecuzione in un&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie Plus - Controllo finestre</translation>
     </message>
@@ -2328,8 +2333,8 @@ Scegliere No per selezionare: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>Eliminare l&apos;area virtuale o le aree virtuali selezionate?</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <translation>Eliminare l&apos;area virtuale o le aree virtuali selezionate?&lt;br /&gt;&lt;br /&gt;Attenzione: Il contenuto verrà anch&apos;esso eliminato!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

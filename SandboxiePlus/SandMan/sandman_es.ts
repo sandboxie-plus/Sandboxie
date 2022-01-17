@@ -1687,8 +1687,9 @@ No will choose: %2</source>
         <translation type="vanished">Una sandbox debe ser vaciada antes de que pueda ser renombrada.</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">Una sandbox debe ser vaciada antes de que pueda ser eliminada.</translation>
+        <translation>Una sandbox debe ser vaciada antes de que pueda ser eliminada.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1848"/>
@@ -1869,7 +1870,7 @@ No will choose: %2</source>
         <translation>Arrastre la Herramienta de Busqueda sobre la ventana para seleccionarla, luego suelte el mouse para verificar si la ventana se ejecuta dentro de una sandbox.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - Buscador de Ventanas</translation>
     </message>
@@ -2455,8 +2456,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>Desea realmente remover la sandbox(es) seleccionada(s)?</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
+        <translation type="unfinished">Desea realmente remover la sandbox(es) seleccionada(s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

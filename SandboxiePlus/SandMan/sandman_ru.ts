@@ -1335,6 +1335,11 @@ No will choose: %2</source>
 Нет, выберет: %2</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="2342"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation type="unfinished"></translation>
@@ -1781,7 +1786,7 @@ No will choose: %2</source>
         <translation>Перетащите инструмент поиска на окно, чтобы выбрать его, затем отпустите кнопку мыши, чтобы проверить, является ли окно изолированным.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - Поиск окна</translation>
     </message>
@@ -2339,8 +2344,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>Вы действительно хотите удалить выбранные песочницы?</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
+        <translation type="unfinished">Вы действительно хотите удалить выбранные песочницы?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

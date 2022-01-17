@@ -1669,8 +1669,9 @@ No will choose: %2</source>
         <translation type="vanished">沙盒被重命名前必须清空。</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">沙盒被删除前必须清空。</translation>
+        <translation>沙盒被删除前必须清空。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1848"/>
@@ -1851,7 +1852,7 @@ No will choose: %2</source>
         <translation>拖拽准星到被选窗口上，松开鼠标检查窗口是否来自沙盒化的程序。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - 窗口探查器</translation>
     </message>
@@ -2447,8 +2448,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>确定要删除选中的沙盒吗？</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
+        <translation type="unfinished">确定要删除选中的沙盒吗？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

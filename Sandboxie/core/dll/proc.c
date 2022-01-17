@@ -2196,7 +2196,7 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
 
 _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
 {
-    WCHAR *MatchExe, *MatchDir, *SoftName;
+    WCHAR *MatchExe, **MatchDirs, *SoftName;
     WCHAR *backslash;
     ULONG mp_flags;
     BOOLEAN IsUpdate;
@@ -2224,7 +2224,8 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) {
 
         MatchExe = L"updater.exe";
-        MatchDir = L"\\mozilla firefox\\updates\\";
+        static WCHAR* Dirs[] = { L"\\mozilla firefox\\updates\\" , L"\\mozilla\\updates\\", L""};
+        MatchDirs = Dirs;
         SoftName = L"Mozilla Firefox";
 
     } else if (Dll_ImageType == DLL_IMAGE_GOOGLE_UPDATE) {
@@ -2233,7 +2234,8 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
             return FALSE;
 
         MatchExe = L"chrome_installer.exe";
-        MatchDir = L"\\google\\update\\";
+        static WCHAR* Dirs[] = { L"\\google\\update\\", L""};
+        MatchDirs = Dirs;
         SoftName = L"Google Chrome";
 
     } else if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH) {
@@ -2242,7 +2244,8 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
             return FALSE;
 
         MatchExe = L"microsoftedgeupdatebroker.exe";
-        MatchDir = L"\\microsoft\\edgeupdate";
+        static WCHAR* Dirs[] = { L"\\microsoft\\edgeupdate", L""};
+        MatchDirs = Dirs;
         SoftName = L"Microsoft Edge";
 
     } else
@@ -2262,9 +2265,13 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
         wmemcpy(path2, path, len);
         _wcslwr(path2);
 
-        if (wcsstr(path2, MatchDir)) {
+        for (WCHAR** MatchDir = MatchDirs; (*MatchDir)[0] != L'\0'; MatchDir++) {
 
-            IsUpdate = TRUE;
+            if (wcsstr(path2, *MatchDir)) {
+
+                IsUpdate = TRUE;
+                break;
+            }
         }
 
         Dll_Free(path2);

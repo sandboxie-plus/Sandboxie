@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The filename "sandman_pt" was changed to "sandman_pt_BR" (Brazilian Portuguese) [#1497](https://github.com/sandboxie-plus/Sandboxie/pull/1497)
 - The filename "sandman_ua" was changed to "sandman_uk" (Ukrainian) [#1527](https://github.com/sandboxie-plus/Sandboxie/issues/1527)
 -- Note: Translators are encouraged to follow the [Localization notes and tips](https://github.com/sandboxie-plus/Sandboxie/discussions/1123#discussioncomment-1203489) before creating a new pull request
+- updated firefox update blocker (by isaak654) [#1545](https://github.com/sandboxie-plus/Sandboxie/issues/1545)
 
 ### Fixed
 - fixed issue with opening all file access OpenFilePath=* [#971](https://github.com/sandboxie-plus/Sandboxie/issues/971)
@@ -37,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with the settings window crashing when the driver was not connected
 - fixed DPI issues with Finder Tool [#912](https://github.com/sandboxie-plus/Sandboxie/issues/912)
 - fixed an other issue with reused pids [#1547](https://github.com/sandboxie-plus/Sandboxie/issues/1547)
-
+- fixed issue introduced in 1.0.6 related to SeAccessCheckByType [#1548](https://github.com/sandboxie-plus/Sandboxie/issues/1548)
 
 
 

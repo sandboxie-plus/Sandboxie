@@ -1571,6 +1571,11 @@ Nee zal %2 kiezen</translation>
         <translation>Fout bij het verwijderen van de sandbox-map: %1</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1848"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Verplaatsen van map &apos;%1&apos; naar &apos;%2&apos; mislukt</translation>
@@ -1773,7 +1778,7 @@ Nee zal %2 kiezen</translation>
         <translation>Sleep het zoekgereedschap over een venster om het te selecteren. Laat de muis los om te controleren of het venster gesandboxt is.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - Vensterzoeker</translation>
     </message>
@@ -2331,8 +2336,9 @@ Nee zal %2 kiezen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>Wilt u de geselecteerde sandbox(en) echt verwijderen?</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
+        <translation type="unfinished">Wilt u de geselecteerde sandbox(en) echt verwijderen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

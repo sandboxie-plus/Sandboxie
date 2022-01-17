@@ -1666,8 +1666,9 @@ Non choisira&#xa0;: %2</translation>
         <translation type="vanished">Un bac à sable doit être vidé avant de pouvoir être renommé.</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="vanished">Un bac à sable doit être vidé avant de pouvoir être supprimé.</translation>
+        <translation>Un bac à sable doit être vidé avant de pouvoir être supprimé.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1848"/>
@@ -1848,7 +1849,7 @@ Non choisira&#xa0;: %2</translation>
         <translation>Faites glisser l&apos;outil de recherche sur une fenêtre pour la sélectionner, puis relâchez la souris pour vérifier si la fenêtre est isolé dans un bac à sable.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - Chercheur de fenêtres</translation>
     </message>
@@ -2434,8 +2435,9 @@ Non choisira&#xa0;: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés&#xa0;?</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
+        <translation type="unfinished">Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés&#xa0;?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

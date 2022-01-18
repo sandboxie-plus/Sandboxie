@@ -59,6 +59,12 @@ public:
 
 	void				UpdateTheme();
 
+	void				UpdateCertState();
+	void				UpdateCert();
+
+signals:
+	void				CertUpdated();
+
 protected:
 	SB_STATUS			ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
@@ -105,7 +111,7 @@ protected:
 	class UGlobalHotkeys* m_pHotkeyManager;
 
 public slots:
-	void				OnMessage(const QString&);
+	void				OnMessage(const QString& MsgData);
 
 	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message, bool bNotify = false);
@@ -177,6 +183,8 @@ private slots:
 	void				OnUpdateCheck();
 	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
 	void				OnUpdateDownload();
+
+	void				OnCertCheck();
 
 	void				SetUITheme();
 

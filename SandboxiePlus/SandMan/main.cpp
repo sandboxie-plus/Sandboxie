@@ -10,13 +10,14 @@
 
 CSettings* theConf = NULL;
 
+QString g_PendingMessage;
+
 int main(int argc, char *argv[])
 {
 #ifdef Q_OS_WIN
-	SetProcessDPIAware();
+	//SetProcessDPIAware();
 #endif // Q_OS_WIN 
-
-	//QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
 	//QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 
 	QtSingleApplication app(argc, argv);
@@ -45,14 +46,12 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	QString PendingMessage;
-
 	CmdPos = Args.indexOf("-op", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		QString Op;
 		if (Args.count() > CmdPos)
 			Op = Args.at(CmdPos + 1);
-		PendingMessage = "Op:" + Op;
+		g_PendingMessage = "Op:" + Op;
 	}
 
 	CmdPos = Args.indexOf("/box:__ask__", Qt::CaseInsensitive);
@@ -61,7 +60,7 @@ int main(int argc, char *argv[])
 		//QString CommandLine;
 		//for (int i = CmdPos + 1; i < Args.count(); i++)
 		//	CommandLine += "\"" + Args[i] + "\" ";
-		//PendingMessage = "Run:" + CommandLine.trimmed();
+		//g_PendingMessage = "Run:" + CommandLine.trimmed();
 		LPWSTR ChildCmdLine = wcsstr(GetCommandLineW(), L"/box:__ask__") + 13;
 
 		if (IsBoxed) {
@@ -69,8 +68,8 @@ int main(int argc, char *argv[])
 			return 0;
 		}
 
-		PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
-		PendingMessage += "\nFrom:" + QDir::currentPath();
+		g_PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+		g_PendingMessage += "\nFrom:" + QDir::currentPath();
 	}
 
 	if (IsBoxed) {
@@ -78,8 +77,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	if (!PendingMessage.isEmpty()) {
-		if(app.sendMessage(PendingMessage))
+	if (!g_PendingMessage.isEmpty()) {
+		if(app.sendMessage(g_PendingMessage))
 			return 0;
 	}
 	else if (app.sendMessage("ShowWnd"))
@@ -92,8 +91,6 @@ int main(int argc, char *argv[])
 	CSandMan* pWnd = new CSandMan();
 
 	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));
-	if (!PendingMessage.isEmpty())
-		QMetaObject::invokeMethod(pWnd, "OnMessage", Qt::QueuedConnection, Q_ARG(QString, PendingMessage));
 
 	int ret =  app.exec();
 

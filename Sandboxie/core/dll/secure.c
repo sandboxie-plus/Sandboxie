@@ -908,16 +908,19 @@ _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal, BOOLEAN bImpersonate)
         return;
     // OriginalToken END
 
+    BOOLEAN bDuplicate = FALSE;
     if ((LONG_PTR)token == LDR_TOKEN_PRIMARY) {
         NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), hTokenReal);
+        bDuplicate = TRUE;
     }
     else if ((LONG_PTR)token == LDR_TOKEN_IMPERSONATION) {
-        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), FALSE, hTokenReal);
+        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY, FALSE, hTokenReal);
     }
     else if ((LONG_PTR)token <= LDR_TOKEN_EFFECTIVE) {
-        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), FALSE, hTokenReal);
+        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY, FALSE, hTokenReal);
         if (*hTokenReal == NULL) {
             NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), hTokenReal);
+            bDuplicate = TRUE;
         }
     }
 
@@ -927,7 +930,7 @@ _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal, BOOLEAN bImpersonate)
     // or a pseudo handle, hence we have to convert the token here
     //
 
-    if (bImpersonate && *hTokenReal != NULL) {
+    if (bDuplicate && *hTokenReal != NULL) {
 
         HANDLE hTokenRealImp = NULL;
         OBJECT_ATTRIBUTES objattrs;

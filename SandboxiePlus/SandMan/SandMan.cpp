@@ -81,6 +81,8 @@ HWND MainWndHandle = NULL;
 
 CSandMan* theGUI = NULL;
 
+extern QString g_PendingMessage;
+
 CSandMan::CSandMan(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -269,9 +271,11 @@ CSandMan::CSandMan(QWidget *parent)
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
+	if(g_PendingMessage.isEmpty()){
 	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
 	if(!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
 		m_pTrayIcon->hide();
+	}
 	//
 
 	LoadState();
@@ -285,7 +289,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 	m_pShowAllSessions->setChecked(theConf->GetBool("Options/ShowAllSessions"));
 
-	m_pProgressDialog = new CProgressDialog("", this);
+	m_pProgressDialog = new CProgressDialog("");
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 	m_pProgressModal = false;
@@ -296,8 +300,10 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pWndTopMost->setChecked(bAlwaysOnTop);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
-	if (!bAutoRun)
+
+	if (!bAutoRun && g_PendingMessage.isEmpty())
 		show();
 
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
@@ -317,6 +323,11 @@ CSandMan::CSandMan(QWidget *parent)
 	}
 
 	//qApp->setWindowIcon(GetIcon("IconEmptyDC", false));
+
+	if (!g_PendingMessage.isEmpty()) {
+		OnMessage(g_PendingMessage);
+		PostQuitMessage(0);
+	}
 }
 
 CSandMan::~CSandMan()
@@ -713,7 +724,8 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
 {
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
-	pSelectBoxWindow->show();
+	//pSelectBoxWindow->show();
+	SafeExec(pSelectBoxWindow);
 }
 
 void CSandMan::dropEvent(QDropEvent* e)
@@ -930,8 +942,8 @@ void CSandMan::OnStatusChanged()
 
 			QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox").replace("/", "\\");
 
-			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
-			if (PortableRootDir == -1)
+			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", 2);
+			if (PortableRootDir == 2)
 			{
 				bool State = false;
 				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
@@ -979,17 +991,21 @@ void CSandMan::OnStatusChanged()
 
 		if (!theAPI->ReloadCert().IsError()) {
 			CSettingsWindow::LoadCertificate();
+			UpdateCertState();
+
+			if ((g_CertInfo.expired || g_CertInfo.about_to_expire) && !theConf->GetBool("Options/NoSupportCheck", false)) 
+			{
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow();
+				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
+				pSettingsWindow->showSupport();
+			}
 		}
 		else {
 			g_Certificate.clear();
+			g_CertInfo.State = 0;
 		}
-
+		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
-
-		// if teh certificate is valid but the driver does not report it being active it means its expired
-		if (!g_Certificate.isEmpty() && (g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
-			OnLogMessage(tr("The supporter certificate is expired"));
-		}
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -1535,7 +1551,7 @@ void CSandMan::OnMaintenance()
 	if (Status.GetStatus() == OP_ASYNC) {
 		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
 		m_pProgressDialog->OnStatusMessage(tr("Executing maintenance operation, please wait..."));
-		m_pProgressDialog->show();
+		SafeShow(m_pProgressDialog);
 		return;
 	}
 
@@ -1556,6 +1572,7 @@ void CSandMan::OnAlwaysTop()
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	this->show(); // why is this needed?
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 }
 
 void CSandMan::SetViewMode(bool bAdvanced)
@@ -1622,7 +1639,7 @@ void CSandMan::OnSettings()
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 			pSettingsWindow = NULL;
 		});
-		pSettingsWindow->show();
+		SafeShow(pSettingsWindow);
 	}
 }
 
@@ -1747,11 +1764,11 @@ bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
 	m_pProgressDialog->OnStatusMessage("");
 	if (bWait) {
 		m_pProgressModal = true;
-		m_pProgressDialog->exec();
+		SafeExec(m_pProgressDialog);
 		m_pProgressModal = false;
 	}
 	else
-		m_pProgressDialog->show();
+		SafeShow(m_pProgressDialog);
 
 	if (pProgress->IsFinished()) // Note: since the operation runs asynchronously, it may have already finished, so we need to test for that
 		OnAsyncFinished(pProgress.data());
@@ -1827,7 +1844,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
 	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
 	//case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
-	//case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
+	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
 	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
 	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
@@ -1986,8 +2003,12 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 void CSandMan::OpenUrl(const QUrl& url)
 {
-	if (url.scheme() == "sbie")
-		return OpenUrl("https://sandboxie-plus.com/sandboxie" + url.path());
+	if (url.scheme() == "sbie") {
+		QString path = url.path();
+		if (path == "/cert")
+			return UpdateCert();
+		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
+	}
 
 	int iSandboxed = theConf->GetInt("Options/OpenUrlsSandboxed", 2);
 
@@ -2306,10 +2327,104 @@ void CSandMan::OnAbout()
 		QIcon ico(QLatin1String(":/SandMan.png"));
 		msgBox->setIconPixmap(ico.pixmap(128, 128));
 
-		msgBox->exec();
+		SafeExec(msgBox);
 	}
 	else if (sender() == m_pAboutQt)
 		QMessageBox::aboutQt(this);
+}
+
+void CSandMan::UpdateCertState()
+{
+	g_CertInfo.State = theAPI->GetCertState();
+
+	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60*60*24*30);
+	if (g_CertInfo.outdated)
+		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
+			// outdated always implicates it is no longer valid
+	else if (g_CertInfo.expired) // may be still valid for the current and older builds
+		OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
+			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
+	else if(g_CertInfo.about_to_expire)
+		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+
+	emit CertUpdated();
+}
+
+void CSandMan::UpdateCert()
+{
+	QString UpdateKey; // for now only patreons can update the cert automatically
+	if(GetArguments(g_Certificate, L'\n', L':').value("type").indexOf("PATREON") == 0)
+		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	if (UpdateKey.isEmpty()) {
+		OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
+		return;
+	}
+
+	if (!m_pUpdateProgress.isNull())
+		return;
+
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Checking for certificate..."));
+
+	if (m_RequestManager == NULL) 
+		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
+
+
+	QUrlQuery Query;
+	Query.addQueryItem("UpdateKey", UpdateKey);
+
+	QUrl Url("https://sandboxie-plus.com/get_cert.php");
+	Url.setQuery(Query);
+
+	QNetworkRequest Request = QNetworkRequest(Url);
+	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setRawHeader("Accept-Encoding", "gzip");
+	QNetworkReply* pReply = m_RequestManager->get(Request);
+	connect(pReply, SIGNAL(finished()), this, SLOT(OnCertCheck()));
+}
+
+void CSandMan::OnCertCheck()
+{
+	if (m_pUpdateProgress.isNull())
+		return;
+
+	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
+	QByteArray Reply = pReply->readAll();
+	int Code = pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	pReply->deleteLater();
+
+	m_pUpdateProgress->Finish(SB_OK);
+	m_pUpdateProgress.clear();
+
+	if (Code > 299 || Code < 200) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("No certificate found on server!"));
+		return;
+	}
+
+	if (Reply.replace("\r\n","\n").compare(g_Certificate.replace("\r\n","\n"), Qt::CaseInsensitive) == 0){
+		QMessageBox::information(this, "Sandboxie-Plus", tr("There is no updated certificate available."));
+		return;
+	}
+
+	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+	QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+	QFile CertFile(TempPath);
+	if (CertFile.open(QFile::WriteOnly)) {
+		CertFile.write(Reply);
+		CertFile.close();
+	}
+
+	WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+
+	if (!theAPI->ReloadCert().IsError()) {
+		CSettingsWindow::LoadCertificate();
+		UpdateCertState();
+	}
+	else { // this should not happen
+		g_Certificate.clear();
+		g_CertInfo.State = 0;
+	}
 }
 
 void CSandMan::SetUITheme()
@@ -2438,10 +2553,62 @@ QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
 #include <windows.h>
 #include "Helpers/FindTool.h"
 
+
+typedef enum DEVICE_SCALE_FACTOR {
+    DEVICE_SCALE_FACTOR_INVALID	= 0,
+    SCALE_100_PERCENT	= 100,
+    SCALE_120_PERCENT	= 120,
+    SCALE_125_PERCENT	= 125,
+    SCALE_140_PERCENT	= 140,
+    SCALE_150_PERCENT	= 150,
+    SCALE_160_PERCENT	= 160,
+    SCALE_175_PERCENT	= 175,
+    SCALE_180_PERCENT	= 180,
+    SCALE_200_PERCENT	= 200,
+    SCALE_225_PERCENT	= 225,
+    SCALE_250_PERCENT	= 250,
+    SCALE_300_PERCENT	= 300,
+    SCALE_350_PERCENT	= 350,
+    SCALE_400_PERCENT	= 400,
+    SCALE_450_PERCENT	= 450,
+    SCALE_500_PERCENT	= 500
+} 	DEVICE_SCALE_FACTOR;
+
+typedef HRESULT (CALLBACK *P_GetScaleFactorForMonitor)(HMONITOR, DEVICE_SCALE_FACTOR*);
+
+UINT GetMonitorScaling(HWND hwnd)
+{
+    static HINSTANCE shcore = LoadLibrary(L"Shcore.dll");
+    if (shcore != nullptr)
+    {
+        if (auto getScaleFactorForMonitor =
+                P_GetScaleFactorForMonitor(GetProcAddress(shcore, "GetScaleFactorForMonitor")))
+        {
+			HMONITOR monitor =
+                MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+
+            DEVICE_SCALE_FACTOR Scale;
+
+            getScaleFactorForMonitor(monitor, &Scale);
+
+            return Scale;
+        }
+    }
+    return 100;
+}
+
+
 #define IDD_FINDER_TOOL                 111
 #define ID_FINDER_TARGET                112
 #define ID_FINDER_EXPLAIN               113
 #define ID_FINDER_RESULT                114
+
+struct SFinderWndData {
+	int Scale;
+	HFONT hFont;
+};
+
+#define DS(x) ((x) * WndData.Scale / 100)
 
 UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 {
@@ -2453,12 +2620,14 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 
 	hwndTool = GetParent(hwndTool);
 
+	SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwndTool, 0);
+
 	if (pid && pid != GetCurrentProcessId())
 	{
 		RECT rc;
 		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top <= 150) 
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+		if (rc.bottom - rc.top <= DS(150)) 
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
 
 		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
 		if (!pProcess.isNull()) 
@@ -2481,8 +2650,8 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 	{
 		RECT rc;
 		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top > 150)
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+		if (rc.bottom - rc.top > DS(150))
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
 
 		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_HIDE);
 		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_HIDE);
@@ -2505,11 +2674,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		case WM_CREATE:
 		{
+			CREATESTRUCT* createStruct = (CREATESTRUCT*)lParam;
+			SFinderWndData &WndData = *(SFinderWndData*)createStruct->lpCreateParams;
+			SetWindowLongPtr(hwnd, 0, (LONG_PTR)&WndData);
+
 			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
 
-			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, 10, 10, 32, 32, hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
-			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, 60, 10, 180, 65, hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
-			CreateWindow(L"Static", L"", WS_CHILD, 60, 80, 180, 50, hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
+			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
+			CreateWindow(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+
+			WndData.hFont = CreateFont(DS(13), 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
+			if (WndData.hFont) {
+				SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+				SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+			}
 
 			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
 
@@ -2517,6 +2696,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 
 		case WM_CLOSE:
+			SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwnd, 0);
+
+			if (WndData.hFont) DeleteObject(WndData.hFont);
+
 			//DestroyWindow(hwnd);
 			PostQuitMessage(0);
 			break;
@@ -2542,6 +2725,8 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	mainWindowClass.lpfnWndProc = WndProc;
 	mainWindowClass.hCursor = LoadCursor(0, IDC_ARROW);
 
+	mainWindowClass.cbWndExtra = sizeof(void*); // SFinderWndData
+
 	RegisterClass(&mainWindowClass);
 
 	// Notes:
@@ -2560,21 +2745,17 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	//               identifier; it must be unique for all
 	//               child windows with the same parent window.
 
-	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
-		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 275, 115, NULL, 0, hInstance, NULL);
+	SFinderWndData WndData;
+	WndData.Scale = GetMonitorScaling(MainWndHandle);
 
-	HFONT hFont = CreateFont(13, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
-	
-	SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)hFont, TRUE);
-	SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)hFont, TRUE);
+	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
+		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, DS(275), DS(135), NULL, 0, hInstance, &WndData);
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
-	DeleteObject(hFont);
 
 	return (int)msg.wParam;
 }

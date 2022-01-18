@@ -2,7 +2,7 @@
 #  Translation to DUTCH (Nederlands)                                  *
 #  Original translations by Alfons Van de Meutter - Belgium on may-10-2012*
 #  Complete rework by Thomas De Rocker (RockyTDR) and Alex Dewaegemaeker (september 2016)
-#  Latest update by RockyTDR on 2021-12-23
+#  Latest update by RockyTDR on 2022-01-10
 # SbieDrv
 #
 # Initialization errors issued to to the System event Log
@@ -750,6 +750,10 @@ Opdracht verwijderen uit opdracht-geschiedenis
 
 3106;txt;01
 Selecteer de sandbox waarin het progamma of document moet starten.
+.
+
+3107;txt;01
+Typ een naam van een programma of een pad om het volgende bestand in de huidige sandbox te openen:
 .
 
 3111;txt;01
@@ -3081,6 +3085,10 @@ RPC-poort bindings openen voor gebruikersaccountbeheer
 Algemene telemetrie-processen blokkeren
 .
 
+4308;txt;01
+Toegang tot \devices\ filteren
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3482,7 +3490,7 @@ Als u een UI verkiest om deze opties te bedienen, upgrade dan naar Sandboxie-Plu
 .
 
 6004;pop;err;01
-De geselecteerde boxconfiguratie is niet toegestaan.
+De configuratie van box %2 vereist een ondersteunerscertificaat.
 .
 
 6005;txt;01

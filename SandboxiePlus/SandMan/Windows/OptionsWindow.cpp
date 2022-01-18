@@ -691,7 +691,7 @@ void COptionsWindow::UpdateCurrentTab()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Raw section ini Editot
+// Raw section ini Editor
 //
 
 void COptionsWindow::SetIniEdit(bool bEnable)
@@ -727,7 +727,7 @@ void COptionsWindow::LoadIniSection()
 {
 	QString Section;
 
-	// Note: the service only caches sandboxie.ini not templates. ini hence for global tempaltes we need to load the section through the driver
+	// Note: the service only caches sandboxie.ini not templates.ini, hence for global templates we need to load the section through the driver
 	if (m_Template && m_pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) != 0)
 	{
 		m_Settings = m_pBox->GetIniSection(NULL, m_Template);

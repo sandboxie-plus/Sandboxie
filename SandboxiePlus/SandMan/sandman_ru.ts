@@ -1376,10 +1376,6 @@ No will choose: %2</source>
         <translation>Обновленный сертификат недоступен.</translation>
     </message>
     <message>
-        <source>The supporter certificate is expired</source>
-        <translation type="vanished">Срок действия сертификата спонсора истек</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1013"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Песочница по умолчанию не найдена; создание: %1</translation>
@@ -1388,10 +1384,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1019"/>
         <source>   -   NOT connected</source>
         <translation>   -   НЕ подключено</translation>
-    </message>
-    <message>
-        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="vanished">Программа %1 запущенная в песочнице %2 будет завершена через 5 минут, потому что песочница была настроена для использования функций, доступных исключительно спонсорам.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте спонсором проекта&lt;/a&gt;, и получите &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат спонсора&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1169"/>
@@ -1765,10 +1757,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2274"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Новый Sandboxie-Plus был загружен в следующую папку:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Вы хотите начать установку? Если какие-либо программы работают в изолированном режиме, они будут остановлены.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;О Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версия %1&lt;/p&gt;&lt;p&gt; Авторское право (c) 2020-2021 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2635"/>
@@ -4293,10 +4281,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Сторонники проекта Sandboxie-Plus получают &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;. Это похоже на лицензионный ключ, но для потрясающих людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="vanished">Срок действия этого сертификата сторонника истек, получите обновленный сертификат.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="837"/>

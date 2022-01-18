@@ -1347,8 +1347,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2345"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>Срок действия сертификата сторонника истек %1, получите обновленный сертификат</translation>
+        <translation>Срок действия сертификата сторонника истек%1, пожалуйста получите обновленный сертификат</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2346"/>
@@ -2333,7 +2332,6 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation>Вы действительно хотите удалить выбранные песочницы?&lt;br /&gt;&lt;br /&gt;Внимание: содержимое песочницы также будет удалено!</translation>
     </message>
     <message>

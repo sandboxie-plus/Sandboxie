@@ -2874,7 +2874,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
         <source>Remove spooler restriction, printers can be installed outside the sandbox</source>
-        <translation>Сниять ограничение диспетчера печати, принтеры можно устанавливать вне песочницы</translation>
+        <translation>Снять ограничение диспетчера печати, принтеры можно устанавливать вне песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>

@@ -1342,12 +1342,12 @@ This box prevents access to all user data locations, except explicitly granted i
         <location filename="SandMan.cpp" line="2345"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>此支持者证书已过期 %1，请获取可用的新证书</translation>
+        <translation>此支持者证书已过期%1，请获取可用的新证书</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2346"/>
         <source>, but it remains valid for the current build</source>
-        <translation>但它对当前构建的沙盒版本仍然有效</translation>
+        <translation>，但它对当前构建的沙盒版本仍然有效</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2348"/>

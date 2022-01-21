@@ -1571,6 +1571,11 @@ No will choose: %2</source>
         <translation>刪除沙箱資料夾錯誤: %1</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1848"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移動目錄 &apos;%1&apos; 至 &apos;%2&apos; 失敗</translation>
@@ -1773,7 +1778,7 @@ No will choose: %2</source>
         <translation>拖曳尋找工具至一個視窗上以選取它，即可檢查此程式是否來自沙箱。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2749"/>
+        <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
         <translation>Sandboxie-Plus - 尋找視窗</translation>
     </message>
@@ -2331,8 +2336,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
-        <source>Do you really want to remove the selected sandbox(es)?</source>
-        <translation>確定要刪除所選沙箱嗎？</translation>
+        <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
+        <translation type="unfinished">確定要刪除所選沙箱嗎？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>

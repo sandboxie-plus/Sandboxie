@@ -1335,10 +1335,6 @@ No will choose: %2</source>
 [否] 將選擇: %2</translation>
     </message>
     <message>
-        <source>The supporter certificate is expired</source>
-        <translation type="vanished">支持者證書已過期</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1013"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>未找到預設沙箱; 建立中: %1</translation>
@@ -1456,6 +1452,11 @@ No will choose: %2</source>
         <translation>未知</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1847"/>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation>刪除沙箱前必須先清空。</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1862"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>未知錯誤狀態: 0x%1</translation>
@@ -1569,11 +1570,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1845"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>刪除沙箱資料夾錯誤: %1</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1847"/>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1848"/>
@@ -1729,38 +1725,37 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2342"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>此支持者證書對該版本沙箱無效，請取得可用的新證書</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2345"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>此支持者證書已過期%1，請取得可用的新證書</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2346"/>
         <source>, but it remains valid for the current build</source>
-        <translation type="unfinished"></translation>
+        <translation>，但它對目前建置的沙箱版本仍然有效</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2348"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>此支持者證書將在 %1 天後過期，請取得可用的新證書</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2368"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>檢查證書...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2401"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished"></translation>
+        <translation>未在伺服器搜尋到證書！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2406"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished"></translation>
+        <translation>目前沒有可用的證書更新。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2635"/>
@@ -1775,17 +1770,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2681"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>拖曳尋找工具至一個視窗上以選取它，即可檢查此程式是否來自沙箱。</translation>
+        <translation>拖曳準星到要選取的視窗上，放開滑鼠檢查視窗是否來自沙箱化的程式。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2751"/>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation>Sandboxie-Plus - 尋找視窗</translation>
+        <translation>Sandboxie-Plus - 視窗尋找工具</translation>
     </message>
     <message>
         <location filename="main.cpp" line="76"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation>沙箱管理器不能在沙箱中執行！</translation>
+        <translation>Sandboxie 管理器不能在沙箱中執行！</translation>
     </message>
 </context>
 <context>
@@ -2337,8 +2332,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation type="unfinished">確定要刪除所選沙箱嗎？</translation>
+        <translation>確定要刪除選取的沙箱？&lt;br /&gt;&lt;br /&gt;警告：沙箱內的內容也將一併刪除！</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="963"/>
@@ -2426,7 +2420,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>無翻譯</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2461,12 +2455,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>此支持者證書已過期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新證書&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>此支持者證書將&lt;font color=&apos;red&apos;&gt;在 %1 天後過期&lt;/font&gt;，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新證書&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="534"/>
@@ -2476,7 +2470,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="536"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>很不幸此證書已過時。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="542"/>
@@ -2486,7 +2480,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="549"/>
         <source>This support certificate is not valid.</source>
-        <translation>這個支持證書無效。</translation>
+        <translation>此支持者證書無效。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="594"/>
@@ -2507,7 +2501,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="674"/>
         <source>Passwords did not match, please retry.</source>
-        <translation>密碼不相符，請再試一次。</translation>
+        <translation>密碼不相符，請重新輸入。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="684"/>
@@ -4234,22 +4228,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">編輯 ini 子項</translation>
+        <translation>編輯 ini 區段</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="729"/>
         <source>Save</source>
-        <translation type="unfinished">儲存</translation>
+        <translation>儲存</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Edit ini</source>
-        <translation type="unfinished">編輯 ini</translation>
+        <translation>編輯 ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
@@ -4259,7 +4253,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="878"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>此支持者證書已過期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新證書&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="898"/>
@@ -4269,12 +4263,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="911"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
-        <translation type="unfinished"></translation>
+        <translation>不再通知證書過期的情況</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="807"/>
         <source>Enter the support certificate here</source>
-        <translation>在此處輸入支援證書</translation>
+        <translation>在此輸入支持者證書</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="864"/>
@@ -4285,10 +4279,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Sandboxie-Plus 專案的支持者會收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者憑證&lt;/a&gt;。它就像一個授權金鑰，但適用於使用開放原始碼軟體的優秀人士。 :-)</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="vanished">此支持者證書已過期，請取得更新的證書。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="837"/>

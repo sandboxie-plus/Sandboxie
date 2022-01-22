@@ -1730,8 +1730,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2345"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>此支持者證書已過期 %1，請取得可用的新證書</translation>
+        <translation>此支持者證書已過期%1，請取得可用的新證書</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2346"/>
@@ -2333,7 +2332,6 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="943"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation>確定要刪除選取的沙箱？&lt;br /&gt;&lt;br /&gt;警告：沙箱內的內容也將一併刪除！</translation>
     </message>
     <message>

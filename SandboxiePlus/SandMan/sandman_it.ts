@@ -1133,7 +1133,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="441"/>
         <source>Keep terminated</source>
-        <translatorcomment>Con quest&apos;opzione attiva, una volta chiusi i programmi dell&apos;area virtuale, essi rimarranno sempre visibili come applicazioni terminate senza scomparire dalla lista</translatorcomment>
+        <translatorcomment>Attivando questa opzione, i processi terminati resteranno in primo piano anche dopo la chiusura di tutti i programmi dall&apos;area virtuale</translatorcomment>
         <translation>Mantieni lo stato terminato dei processi</translation>
     </message>
     <message>
@@ -1446,7 +1446,8 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1428"/>
         <source>Please enter the duration for disabling forced programs.</source>
-        <translation>Immettere la durata per la disattivazione dei programmi ad avvio forzato.</translation>
+        <translatorcomment>Qui ho forzato di proposito un ritorno a capo per ragioni di lunghezza</translatorcomment>
+        <translation>Immettere l&apos;intervallo in secondi per la disattivazione&lt;br /&gt;dei programmi ad avvio forzato.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1453"/>

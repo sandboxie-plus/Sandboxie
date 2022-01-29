@@ -3764,6 +3764,11 @@ _FX NTSTATUS File_SetReparsePoint(
 }
 
 
+//---------------------------------------------------------------------------
+// File_DoAutoRecover
+//---------------------------------------------------------------------------
+
+
 _FX void File_DoAutoRecover(BOOLEAN force)
 {
     static ULONG last_ticks = 0;

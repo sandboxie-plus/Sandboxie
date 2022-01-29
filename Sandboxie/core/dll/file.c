@@ -3375,11 +3375,12 @@ ReparseLoop:
     }
 
     //
+    // Note: This is disabled in the driver since Win 10 1903 (see comments in file.c in File_Generic_MyParseProc).
     // if the caller specifies write attributes, this is only permitted
     // on non-directory files, so we must be sure to tell the driver
     //
 
-    if (DesiredAccess & DIRECTORY_JUNCTION_ACCESS) {
+    /*if (DesiredAccess & DIRECTORY_JUNCTION_ACCESS) {
 
         if ((CreateOptions & FILE_DIRECTORY_FILE) ||
                 (FileType & TYPE_DIRECTORY) &&
@@ -3392,7 +3393,7 @@ ReparseLoop:
 
             CreateOptions |= FILE_NON_DIRECTORY_FILE;
         }
-    }
+    }*/
 
     //
     // finally we are ready to execute the caller's request on CopyPath.

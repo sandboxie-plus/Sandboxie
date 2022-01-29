@@ -298,7 +298,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	if (!QDir().mkdir(m_FilePath + "\\snapshot-" + ID))
 		return SB_ERR(SB_SnapMkDirFail);
 	if (!QFile::copy(m_FilePath + "\\RegHive", m_FilePath + "\\snapshot-" + ID + "\\RegHive"))
-		return SB_ERR(SB_SnapCopyRegFail);
+		return SB_ERR(SB_SnapCopyDatFail);
 
 	ini.setValue("Snapshot_" + ID + "/Name", Name);
 	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime().toTime_t());
@@ -492,9 +492,9 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
 
 	if (!QFile::remove(m_FilePath + "\\RegHive"))
-		return SB_ERR(SB_SnapDelRegFail);
+		return SB_ERR(SB_SnapDelDatFail);
 	if (!QFile::copy(m_FilePath + "\\snapshot-" + ID + "\\RegHive", m_FilePath + "\\RegHive"))
-		return SB_ERR(SB_SnapCopyRegFail);
+		return SB_ERR(SB_SnapCopyDatFail);
 
 	ini.setValue("Current/Snapshot", ID);
 	ini.sync();

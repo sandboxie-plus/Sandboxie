@@ -382,6 +382,23 @@ static ULONG File_Snapshot_Count = 0;
 
 
 //---------------------------------------------------------------------------
+// File_FindBoxPrefixLength
+//---------------------------------------------------------------------------
+
+
+_FX ULONG File_FindBoxPrefixLength(const WCHAR* CopyPath)
+{
+	ULONG length = wcslen(CopyPath);
+	ULONG prefixLen = 0;
+	if (length >= Dll_BoxFilePathLen && 0 == Dll_NlsStrCmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen))
+		prefixLen = Dll_BoxFilePathLen;
+	if (File_AltBoxPath && length >= File_AltBoxPathLen && 0 == Dll_NlsStrCmp(CopyPath, File_AltBoxPath, File_AltBoxPathLen))
+		prefixLen = File_AltBoxPathLen;
+	return prefixLen;
+}
+
+
+//---------------------------------------------------------------------------
 // File_GetName
 //---------------------------------------------------------------------------
 

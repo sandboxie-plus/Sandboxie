@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -973,10 +973,7 @@ check_sandbox_prefix:
     // as the base for creating CopyPath
     //
 
-    if (is_boxed_path)
-        TruePath = NULL;
-    else
-        TruePath = File_TranslateTempLinks(*OutTruePath, TRUE);
+    TruePath = File_TranslateTempLinks(*OutTruePath, TRUE);
 
     if (TruePath) {
 
@@ -2510,7 +2507,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
             // teh driver usually blocks this anyways so try only in app mode
             //
 
-            if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0){
+            if (Dll_CompartmentMode){
 
                 SbieApi_MonitorPut2(MONITOR_PIPE, TruePath, FALSE);
 
@@ -5949,6 +5946,7 @@ _FX NTSTATUS File_SetDisposition(
     NTSTATUS status;
     ULONG FileFlags;
     ULONG mp_flags;
+    FILE_ATTRIBUTE_TAG_INFORMATION taginfo;
 
     //
     // check if the specified path is an open or closed path
@@ -5976,6 +5974,13 @@ _FX NTSTATUS File_SetDisposition(
                 status = STATUS_ACCESS_DENIED;
 
             else if (PATH_NOT_OPEN(mp_flags)) {
+
+                status = __sys_NtQueryInformationFile(
+                    FileHandle, IoStatusBlock,
+                    &taginfo, sizeof(taginfo), FileAttributeTagInformation);
+
+                if (NT_SUCCESS(status) && (taginfo.FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
+                    __leave;
 
                 status = File_DeleteDirectory(CopyPath, TRUE);
 
@@ -6117,7 +6122,7 @@ _FX NTSTATUS File_NtDeleteFileImpl(OBJECT_ATTRIBUTES *ObjectAttributes)
 
     status = File_NtCreateFileImpl(
         &handle, DELETE, ObjectAttributes, &IoStatusBlock, NULL, 0,
-        FILE_SHARE_VALID_FLAGS, FILE_OPEN, FILE_DELETE_ON_CLOSE, NULL, 0);
+        FILE_SHARE_VALID_FLAGS, FILE_OPEN, FILE_DELETE_ON_CLOSE | FILE_OPEN_REPARSE_POINT, NULL, 0);
 
     if (NT_SUCCESS(status))
         NtClose(handle);
@@ -6992,13 +6997,17 @@ _FX void SbieDll_DeviceChange(WPARAM wParam, LPARAM lParam)
             }
         }
 
-    } else if ((wParam & 0xFF80) == 0xAA00 && lParam == tzuk) {
+    } else if ((wParam & 0xFF80) == 0xAA00 && lParam == tzuk) { // see NetApi_NetUseAdd
 
         UCHAR drive_number = (UCHAR)(wParam & 0x1F);
         if (drive_number < 26) {
             File_InitDrives(1 << drive_number);
             Dll_RefreshPathList();
         }
+
+    } else if (wParam == 'sb' && lParam == 0) {
+
+        Dll_RefreshPathList();
     }
 }
 

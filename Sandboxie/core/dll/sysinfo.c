@@ -412,9 +412,9 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
         objname_buf = ObjectAttributes->ObjectName->Buffer;
     } else {
 
-        InterlockedIncrement(&JobCounter);
+        ULONG jobCounter = InterlockedIncrement(&JobCounter);
         Sbie_snwprintf(dummy_name, MAX_PATH, L"%s_DummyJob_%s_p%d_t%d_c%d",
-                        SBIE, Dll_ImageName, GetCurrentProcessId(), GetCurrentThreadId(), JobCounter);
+                        SBIE, Dll_ImageName, GetCurrentProcessId(), GetCurrentThreadId(), jobCounter);
         
         objname_len = wcslen(dummy_name);
         objname_buf = dummy_name;

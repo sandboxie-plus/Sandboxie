@@ -487,6 +487,8 @@ void COptionsWindow::WriteTextList(const QString& Setting, const QStringList& Li
 
 void COptionsWindow::SaveConfig()
 {
+	bool UpdatePaths = false;
+
 	m_pBox->SetRefreshOnChange(false);
 
 	try
@@ -512,8 +514,10 @@ void COptionsWindow::SaveConfig()
 		if (m_NetFwRulesChanged)
 			SaveNetFwRules();
 
-		if (m_AccessChanged)
+		if (m_AccessChanged) {
 			SaveAccessList();
+			UpdatePaths = true;
+		}
 
 		if (m_RecoveryChanged)
 			SaveRecoveryList();
@@ -535,6 +539,9 @@ void COptionsWindow::SaveConfig()
 
 	m_pBox->SetRefreshOnChange(true);
 	m_pBox->GetAPI()->CommitIniChanges();
+
+	if (UpdatePaths)
+		TriggerPathReload();
 }
 
 void COptionsWindow::apply()
@@ -783,4 +790,17 @@ void COptionsWindow::SaveIniSection()
 	m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
+}
+
+
+#include <windows.h>
+
+void COptionsWindow::TriggerPathReload()
+{
+	//
+	// this message makes all boxes reload thair path presets
+	//
+
+	DWORD bsm_app = BSM_APPLICATIONS;
+	BroadcastSystemMessage(BSF_POSTMESSAGE, &bsm_app, WM_DEVICECHANGE, 'sb', 0);
 }

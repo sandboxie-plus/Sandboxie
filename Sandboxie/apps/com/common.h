@@ -118,7 +118,7 @@ _FX ULONG FindProcessId(
         GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
     SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
 
-    for (i = 0; i <= pid_count; ++i) {
+    for (i = 0; i < pid_count; ++i) {
 
         HANDLE pids_i = (HANDLE)(ULONG_PTR)pids[i];
         SbieApi_QueryProcess(pids_i, NULL, image, that_sid, NULL);

@@ -1131,13 +1131,7 @@ _FX BOOLEAN Gui_IsWindowAccessible(HWND hWnd)
         if ((! allow) && idProcess) {
 
             NTSTATUS status;
-            HANDLE hProcess = OpenProcess(
-                PROCESS_QUERY_INFORMATION, FALSE, (ULONG)idProcess);
-            if (! hProcess) {
-                status = SbieApi_OpenProcess(&hProcess, (HANDLE)idProcess);
-                if (! NT_SUCCESS(status))
-                    hProcess = NULL;
-            }
+            HANDLE hProcess = SbieDll_OpenProcess(PROCESS_QUERY_INFORMATION, (HANDLE)idProcess);
             if (hProcess) {
 
                 ULONG len;

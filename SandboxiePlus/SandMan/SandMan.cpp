@@ -395,7 +395,6 @@ void CSandMan::CreateMenus()
 			m_pDisconnect = m_pMaintenance->addAction(CSandMan::GetIcon("Disconnect"), tr("Disconnect"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
 			m_pStopAll = m_pMaintenance->addAction(CSandMan::GetIcon("Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
-			m_pMaintenance->addSeparator();
 			m_pMaintenanceItems = m_pMaintenance->addMenu(CSandMan::GetIcon("ManMaintenance"), tr("&Advanced"));
 				m_pInstallDrv = m_pMaintenanceItems->addAction(tr("Install Driver"), this, SLOT(OnMaintenance()));
 				m_pStartDrv = m_pMaintenanceItems->addAction(tr("Start Driver"), this, SLOT(OnMaintenance()));
@@ -406,6 +405,10 @@ void CSandMan::CreateMenus()
 				m_pStartSvc = m_pMaintenanceItems->addAction(tr("Start Service"), this, SLOT(OnMaintenance()));
 				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
+			m_pMaintenance->addSeparator();
+			if(IsFullyPortable())
+				m_pUninstallAll = m_pMaintenance->addAction(CSandMan::GetIcon("Uninstall"), tr("Uninstall All"), this, SLOT(OnMaintenance()));
+			
 				
 		m_pMenuFile->addSeparator();
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
@@ -1425,7 +1428,7 @@ void CSandMan::OnDisableForce()
 		int LastValue = theAPI->GetGlobalSettings()->GetNum("ForceDisableSeconds", 60);
 
 		bool bOK = false;
-		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), LastValue, 0, INT_MAX, 1, &bOK);
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration, in seconds, for disabling forced programs."), LastValue, 0, INT_MAX, 1, &bOK);
 		if (!bOK)
 			return;
 	}
@@ -1541,12 +1544,17 @@ void CSandMan::OnMaintenance()
 
 	else if (sender() == m_pInstallSvc)
 		Status = CSbieUtils::Install(CSbieUtils::eService);
-	else if(sender() == m_pStartSvc)
+	else if (sender() == m_pStartSvc)
 		Status = CSbieUtils::Start(CSbieUtils::eService);
-	else if(sender() == m_pStopSvc)
+	else if (sender() == m_pStopSvc)
 		Status = CSbieUtils::Stop(CSbieUtils::eService);
 	else if (sender() == m_pUninstallSvc)
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
+
+	// uninstall	
+	else if (sender() == m_pUninstallAll)
+		Status = StopSbie(true);
+
 
 	if (Status.GetStatus() == OP_ASYNC) {
 		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
@@ -1764,7 +1772,7 @@ bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
 	m_pProgressDialog->OnStatusMessage("");
 	if (bWait) {
 		m_pProgressModal = true;
-		SafeExec(m_pProgressDialog);
+		m_pProgressDialog->exec(); // safe exec breaks the closing
 		m_pProgressModal = false;
 	}
 	else
@@ -1848,12 +1856,12 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
 	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
 	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
-	case SB_SnapCopyRegFail:Message = tr("Failed to copy RegHive"); break;
+	case SB_SnapCopyDatFail:Message = tr("Failed to copy box data files"); break;
 	case SB_SnapNotFound:	Message = tr("Snapshot not found"); break;
 	case SB_SnapMergeFail:	Message = tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged."); break;
 	case SB_SnapRmDirFail:	Message = tr("Failed to remove old snapshot directory '%1'"); break;
 	case SB_SnapIsShared:	Message = tr("Can't remove a snapshot that is shared by multiple later snapshots"); break;
-	case SB_SnapDelRegFail:	Message = tr("Failed to remove old RegHive"); break;
+	case SB_SnapDelDatFail:	Message = tr("Failed to remove old box data files"); break;
 	case SB_NotAuthorized:	Message = tr("You are not authorized to update configuration in section '%1'"); break;
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;

@@ -235,6 +235,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pUninstallAll;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;

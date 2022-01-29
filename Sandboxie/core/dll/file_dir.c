@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -844,7 +844,8 @@ _FX NTSTATUS File_OpenForMerge(
 	else
 		ptr = NULL;
 
-	objname.Length = (USHORT)len;
+    // RtlInitUnicodeString(&objname, );
+    objname.Length = (USHORT)len;
 	objname.MaximumLength = objname.Length + sizeof(WCHAR);
 	objname.Buffer = TruePath;
 
@@ -2318,6 +2319,12 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     status = pSysNtClose ? pSysNtClose(FileHandle) : NtClose(FileHandle);
 
     //
+    // finish
+    //
+
+    TlsData->file_NtClose_lock = FALSE;
+
+    //
     // execute pending delete disposition
     //
 
@@ -2332,12 +2339,6 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     
         Dll_Free(DeletePath);
     }
-
-    //
-    // finish
-    //
-
-    TlsData->file_NtClose_lock = FALSE;
 
     SetLastError(LastError);
     return status;
@@ -3549,31 +3550,18 @@ _FX NTSTATUS File_NtQueryVolumeInformationFile(
 
 
 _FX NTSTATUS File_SetReparsePoint(
-    HANDLE FileHandle, UCHAR *Data, ULONG DataLen)
+    HANDLE FileHandle, PREPARSE_DATA_BUFFER Data, ULONG DataLen)
 {
     THREAD_DATA *TlsData;
     NTSTATUS status;
     UNICODE_STRING objname;
     OBJECT_ATTRIBUTES objattrs;
     WCHAR *TruePath, *CopyPath;
-    WCHAR *SourcePath, *TargetPath;
-    USHORT NameOffset, NameLength;
+    //WCHAR *SourcePath = NULL, *TargetPath = NULL;
     ULONG FileFlags, mp_flags;
-
-    if (! Data)
-        return STATUS_BAD_INITIAL_PC;
-
-    if (*(ULONG *)Data == IO_REPARSE_TAG_SYMLINK)
-        return STATUS_INVALID_DEVICE_REQUEST;
-
-    if (*(ULONG *)Data != IO_REPARSE_TAG_MOUNT_POINT)
-        return STATUS_BAD_INITIAL_PC;
-
-    NameOffset = *(USHORT *)(Data + 8);
-    NameLength = *(USHORT *)(Data + 10);
-
-    SourcePath = NULL;
-    TargetPath = NULL;
+    PREPARSE_DATA_BUFFER NewData = NULL;
+    ULONG NewDataLen;
+    IO_STATUS_BLOCK MyIoStatusBlock;
 
     //
     // get paths to source and target directories
@@ -3584,6 +3572,37 @@ _FX NTSTATUS File_SetReparsePoint(
     Dll_PushTlsNameBuffer(TlsData);
 
     __try {
+        USHORT SubstituteNameLength;
+        WCHAR* SubstituteNameBuffer;
+        USHORT PrintNameLength;
+        WCHAR* PrintNameBuffer;
+        //BOOLEAN RelativePath = FALSE;
+
+        if (! Data)
+            return STATUS_BAD_INITIAL_PC;
+
+        if (Data->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+        {
+            SubstituteNameLength = Data->SymbolicLinkReparseBuffer.SubstituteNameLength;
+            SubstituteNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+            PrintNameLength = Data->SymbolicLinkReparseBuffer.PrintNameLength;
+            PrintNameBuffer = &Data->SymbolicLinkReparseBuffer.PathBuffer[Data->SymbolicLinkReparseBuffer.PrintNameOffset/sizeof(WCHAR)];
+            if (Data->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
+                return STATUS_BAD_INITIAL_PC; //RelativePath = TRUE; // let it be done normally
+
+            NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, SymbolicLinkReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
+        }
+        else if (Data->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+        {
+            SubstituteNameLength = Data->MountPointReparseBuffer.SubstituteNameLength;
+            SubstituteNameBuffer = &Data->MountPointReparseBuffer.PathBuffer[Data->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+            PrintNameLength = Data->MountPointReparseBuffer.PrintNameLength;
+            PrintNameBuffer = &Data->MountPointReparseBuffer.PathBuffer[Data->MountPointReparseBuffer.PrintNameOffset/sizeof(WCHAR)]; 
+
+            NewDataLen = (UFIELD_OFFSET(REPARSE_DATA_BUFFER, MountPointReparseBuffer.PathBuffer) - UFIELD_OFFSET(REPARSE_DATA_BUFFER, GenericReparseBuffer));
+        }
+        else 
+            return STATUS_BAD_INITIAL_PC;
 
         //
         // get copy path of reparse source
@@ -3614,35 +3633,86 @@ _FX NTSTATUS File_SetReparsePoint(
             __leave;
         }
 
-		if (File_Snapshot != NULL)
-			File_FindSnapshotPath(&CopyPath);
+		//if (File_Snapshot != NULL)
+		//	File_FindSnapshotPath(&CopyPath);
 
-        SourcePath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
-        wcscpy(SourcePath, CopyPath);
+        //SourcePath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
+        //wcscpy(SourcePath, CopyPath);
 
         //
         // get copy path of reparse target
         //
 
-        objname.Length = NameLength;
+        objname.Length = SubstituteNameLength;
         objname.MaximumLength = objname.Length;
-        objname.Buffer = (WCHAR *)(Data + 0x10 + NameOffset);
+        objname.Buffer = SubstituteNameBuffer;
 
         status = File_GetName(NULL, &objname, &TruePath, &CopyPath, NULL);
         if (! NT_SUCCESS(status))
             __leave;
 
-        TargetPath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
-        wcscpy(TargetPath, CopyPath);
+        //TargetPath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
+        //wcscpy(TargetPath, CopyPath);
 
-    //
-    // finish
-    //
+        WCHAR* OldPrintNameBuffer = PrintNameBuffer; // we dont need to change the display name
+
+        SubstituteNameLength = wcslen(CopyPath) * sizeof(WCHAR);
+
+        NewDataLen += SubstituteNameLength + sizeof(WCHAR) + PrintNameLength + sizeof(WCHAR) + 8;
+        NewData = Dll_Alloc(NewDataLen);
+        memzero(NewData, sizeof(REPARSE_DATA_BUFFER));
+
+        NewData->ReparseTag = Data->ReparseTag;
+        NewData->Reserved = 0; //Data->Reserved;
+        NewData->ReparseDataLength = (USHORT)NewDataLen - 8;
+
+        if (NewData->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+        {
+            NewData->SymbolicLinkReparseBuffer.SubstituteNameOffset = 0;
+            NewData->SymbolicLinkReparseBuffer.SubstituteNameLength = SubstituteNameLength;
+            SubstituteNameBuffer = &NewData->SymbolicLinkReparseBuffer.PathBuffer[NewData->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+            NewData->SymbolicLinkReparseBuffer.PrintNameLength = PrintNameLength;
+            NewData->SymbolicLinkReparseBuffer.PrintNameOffset = SubstituteNameLength + sizeof(WCHAR);
+            PrintNameBuffer = &NewData->SymbolicLinkReparseBuffer.PathBuffer[NewData->SymbolicLinkReparseBuffer.PrintNameOffset/sizeof(WCHAR)];
+            
+        }
+        else if (NewData->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+        {
+            NewData->MountPointReparseBuffer.SubstituteNameOffset = 0;
+            NewData->MountPointReparseBuffer.SubstituteNameLength = SubstituteNameLength;
+            SubstituteNameBuffer = &NewData->MountPointReparseBuffer.PathBuffer[NewData->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+            NewData->MountPointReparseBuffer.PrintNameLength = PrintNameLength;
+            NewData->MountPointReparseBuffer.PrintNameOffset = SubstituteNameLength + sizeof(WCHAR);
+            PrintNameBuffer = &NewData->MountPointReparseBuffer.PathBuffer[NewData->MountPointReparseBuffer.PrintNameOffset/sizeof(WCHAR)]; 
+        }
+
+        memcpy(SubstituteNameBuffer, CopyPath, SubstituteNameLength + sizeof(WCHAR));
+        memcpy(PrintNameBuffer, OldPrintNameBuffer, PrintNameLength + sizeof(WCHAR));
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
     }
 
+    //
+    // since curt's code in the driver handles reparsing and the driver is no logner blocking this operation
+    // we can do it directly without the need to ask our service
+    //
+
+    if (NT_SUCCESS(status)) {
+
+        File_CreateBoxedPath(TruePath);
+
+        status = __sys_NtFsControlFile(
+            FileHandle, NULL, NULL, NULL,
+            &MyIoStatusBlock, FSCTL_SET_REPARSE_POINT,
+            NewData, NewDataLen,
+            NULL, 0);
+    }
+
+    if (NewData)
+        Dll_Free(NewData);
+
+    /*
     //
     // send request to SbieSvc
     //
@@ -3686,17 +3756,12 @@ _FX NTSTATUS File_SetReparsePoint(
     if (SourcePath)
         Dll_Free(SourcePath);
     if (TargetPath)
-        Dll_Free(TargetPath);
+        Dll_Free(TargetPath);*/
 
     Dll_PopTlsNameBuffer(TlsData);
 
     return status;
 }
-
-
-//---------------------------------------------------------------------------
-// File_DoAutoRecover
-//---------------------------------------------------------------------------
 
 
 _FX void File_DoAutoRecover(BOOLEAN force)

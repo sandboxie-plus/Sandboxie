@@ -930,8 +930,65 @@ _FX BOOL Proc_CreateProcessInternalW(
     // create the new process
     //
 
+#ifndef DRV_BREAKOUT
+
+    //
+    // check if this is a break out candidate
+    //
+
+    if(lpApplicationName && lpCommandLine) {
+        const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
+        if (lpProgram) {
+            if (SbieDll_CheckStringInList(lpProgram + 1, NULL, L"BreakoutProcess")
+                || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName),  NULL, L"BreakoutFolder")) {
+                
+                const WCHAR* lpArguments;
+                if (lpCommandLine[0] == L'\"') {
+                    lpArguments = wcschr(lpCommandLine + 1, L'\"');
+                    if (lpArguments) lpArguments++; // skip "
+                } else
+                    lpArguments = wcschr(lpCommandLine, L' ');
+                if(!lpArguments) lpArguments = wcschr(lpCommandLine, L'\0');
+
+                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + wcslen(lpArguments) + 1) * sizeof(WCHAR));
+                if (mybuf) {
+
+                    //
+                    // The breakout request is validated by the service, hence we need a clean and complete 
+                    // application path and not a just a command line where the binary may be missing the .exe
+                    // and or be only relative to the workign directory, or worse the path variable.
+                    //
+
+                    wcscpy(mybuf, L"\"");
+                    wcscat(mybuf, lpApplicationName);
+                    wcscat(mybuf, L"\"");
+                    wcscat(mybuf, lpArguments);
+
+                    ULONG crflags2 = dwCreationFlags & (CREATE_NO_WINDOW | CREATE_SUSPENDED
+                        |   HIGH_PRIORITY_CLASS | ABOVE_NORMAL_PRIORITY_CLASS
+                        |   BELOW_NORMAL_PRIORITY_CLASS | IDLE_PRIORITY_CLASS
+                        |   CREATE_UNICODE_ENVIRONMENT);
+
+                    ok = SbieDll_RunSandboxed(L"*UNBOXED*", mybuf, lpCurrentDirectory, crflags2, lpStartupInfo, lpProcessInformation);
+
+                    err = GetLastError();
+
+                    Dll_Free(mybuf);
+
+                    goto finish;
+                }
+            }
+        }
+    }
+#endif
+
+
+    //
+    // in compartment mode we dont mess around just create the process
+    //
+
     // OriginalToken BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     {
         extern BOOLEAN Scm_MsiServer_Systemless;
         if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && Scm_MsiServer_Systemless 
@@ -1396,7 +1453,7 @@ _FX BOOL Proc_ImpersonateSelf(BOOLEAN Enable)
 
     creation_flags &= ~CREATE_NEW_CONSOLE;
 
-    ok = SbieDll_RunSandboxed(L"*THREAD*", cmd, dir, creation_flags,
+    ok = SbieDll_RunSandboxed(L"", cmd, dir, creation_flags,
                               StartupInfo, ProcessInformation);
 
     err = GetLastError();
@@ -2309,7 +2366,7 @@ _FX BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind)
     pids = Dll_AllocTemp(sizeof(ULONG) * pid_count);
     SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
 
-    for (i = 0; i <= pid_count; ++i) {
+    for (i = 0; i < pid_count; ++i) {
 
         WCHAR image[128];
         HANDLE pids_i = (HANDLE) (ULONG_PTR) pids[i];
@@ -2675,7 +2732,7 @@ _FX void Proc_RestartProcessOutOfPcaJob(void)
     StartupInfo.dwFlags = STARTF_FORCEOFFFEEDBACK;
     memzero(&ProcessInformation, sizeof(PROCESS_INFORMATION));
 
-    ok = SbieDll_RunSandboxed(L"*THREAD*", CommandLine, Directory, 0,
+    ok = SbieDll_RunSandboxed(L"", CommandLine, Directory, 0,
                               &StartupInfo, &ProcessInformation);
 
     if (ok) {

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -620,9 +620,10 @@ _FX NTSTATUS File_NtCreateFilePipe(
     //
     // keep list of permitted pipes in sync with
     // SbieSvc::NamedPipeServer::OpenHandler
+    // and with
+    // SbieDrv::openPipesCM
     //
 
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0) // don't do that in app mode
     if (PipeType == TYPE_NAMED_PIPE) {
 
         name = wcsrchr(TruePath, L'\\');

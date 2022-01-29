@@ -3,6 +3,30 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.0.9 / 5.55.9] - 2022-01-??
+
+### Added
+- sandman now causes all boxed processes to update thair path settings in real time when access options were modified
+- added new maintenance meu option Uninstal All to quickly remove all components when runnign in portable mode
+
+### Changed
+- reworked breakout mechanism to be service based and not alow the parent process to access the broken out child process
+- enabled creatin of directory junctions for sandboxed processes [#1375](https://github.com/sandboxie-plus/Sandboxie/issues/1375)
+- changed back to set AutoRecover=y on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
+
+### Fixed
+- fixed BreakoutProcess not working with EnableObjectFiltering=y
+- FIXED SECURITY ISSUE: when starting *COMSRV* unboxed, the returned process handle had full access
+- fixed issue with progress dialog [#](https://github.com/sandboxie-plus/Sandboxie/issues/1562)
+- fixed issue with handling directory junctions in sandboxie [#1396](https://github.com/sandboxie-plus/Sandboxie/issues/1396)
+- fixed a handle leak in File_NtCloseImpl
+- fixed border issues on maximized windows introduced in the last build [#1561](https://github.com/sandboxie-plus/Sandboxie/issues/1561)
+- fixed a couple if index overruns (thanks 7eRoM)
+
+
+
+
+
 ## [1.0.8 / 5.55.8] - 2022-01-18
 
 ### Added

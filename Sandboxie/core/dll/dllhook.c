@@ -901,7 +901,7 @@ _FX void Dll_FixWow64Syscall(void)
     static UCHAR *_code = NULL;
 
     // NoSysCallHooks BEGIN
-    if((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+    if(Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
         return;
     // NoSysCallHooks END
 

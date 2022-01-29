@@ -272,7 +272,7 @@ static NTSTATUS File_RenameFile(
 static BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath);
 
 static NTSTATUS File_SetReparsePoint(
-    HANDLE FileHandle, UCHAR *Data, ULONG DataLen);
+    HANDLE FileHandle, PREPARSE_DATA_BUFFER Data, ULONG DataLen);
 
 static void File_ScrambleShortName(WCHAR* ShortName, CCHAR* ShortNameLength, ULONG ScramKey);
 

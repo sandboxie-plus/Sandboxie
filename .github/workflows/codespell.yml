@@ -33,4 +33,5 @@ jobs:
         with:
           check_filenames: false
           skip: ./.git,./SandboxiePlus/MiscHelpers/*,./Sandboxie/msgs/Text-*-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss
-          ignore_words_list: pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd
+          builtin: clear,rare,code
+          ignore_words_list: pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring

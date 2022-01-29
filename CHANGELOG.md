@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed a handle leak in File_NtCloseImpl
 - fixed border issues on maximized windows introduced in the last build [#1561](https://github.com/sandboxie-plus/Sandboxie/issues/1561)
 - fixed a couple if index overruns (thanks 7eRoM)
-
+- fixed issues with sysnative directroy [#1403](https://github.com/sandboxie-plus/Sandboxie/issues/1403)
 
 
 

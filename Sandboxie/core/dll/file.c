@@ -334,6 +334,8 @@ static const ULONG File_MupLen = 12;
        const WCHAR *File_BQQB = L"\\??\\";
 
 #ifdef WOW64_FS_REDIR
+static WCHAR *File_Wow64System32 = NULL;
+static ULONG  File_Wow64System32Len = 0;
 static WCHAR *File_Wow64SysNative = NULL;
 static ULONG  File_Wow64SysNativeLen = 0;
 static FILE_LINK *File_Wow64FileLink = NULL;
@@ -509,6 +511,35 @@ _FX NTSTATUS File_GetName(
                 && (name[sys32len] == L'\\' || name[sys32len] == L'\0')) {
 
                 convert_wow64_link = FALSE;
+            }
+
+            else {
+
+                //
+                // if the file/directory is located in the sandbox, we still need to check the path
+                //
+
+                ULONG prefixLen = File_FindBoxPrefixLength(name);
+                if (prefixLen != 0) {
+
+                    name += prefixLen;
+                    length -= prefixLen;
+
+		            if (length >= 10 && 0 == Dll_NlsStrCmp(name, L"\\snapshot-", 10)) {
+			            WCHAR* ptr = wcschr(name + 10, L'\\');
+                        if (ptr) {
+                            length -= (ULONG)(ptr - name);
+                            name = ptr;
+                        }
+		            }
+
+                    if(length >= File_Wow64System32Len
+                        && _wcsnicmp(name, File_Wow64System32, File_Wow64System32Len) == 0
+                        && (name[File_Wow64System32Len] == L'\\' || name[File_Wow64System32Len] == L'\0')) {
+
+                        convert_wow64_link = FALSE;
+                    }
+                }
             }
         }
 #endif WOW64_FS_REDIR
@@ -1879,6 +1910,41 @@ _FX ULONG File_GetName_SkipWow64Link(const WCHAR *name)
     }
 
     return x;
+}
+#endif WOW64_FS_REDIR
+
+
+//---------------------------------------------------------------------------
+// File_Wow64FixProcImage
+//---------------------------------------------------------------------------
+
+
+#ifdef WOW64_FS_REDIR
+_FX VOID File_Wow64FixProcImage(WCHAR* proc_image_path)
+{
+    if (!proc_image_path)
+        return;
+
+    if (File_Wow64FileLink) {
+
+        const ULONG sys32len = File_Wow64FileLink->src_len;
+
+        WCHAR* name = File_TranslateDosToNtPath(proc_image_path);
+        ULONG length = wcslen(name);
+
+        if (length >= sys32len
+            && _wcsnicmp(name, File_Wow64FileLink->src, sys32len) == 0
+            && (name[sys32len] == L'\\' || name[sys32len] == L'\0')) {
+
+            wmemcpy(proc_image_path, File_Wow64SysNative, File_Wow64SysNativeLen);
+            wmemcpy(proc_image_path + File_Wow64SysNativeLen, name + sys32len, length - sys32len + 1);
+
+            SbieDll_TranslateNtToDosPath(proc_image_path);
+        }
+
+        Dll_Free(name);
+    }
+
 }
 #endif WOW64_FS_REDIR
 

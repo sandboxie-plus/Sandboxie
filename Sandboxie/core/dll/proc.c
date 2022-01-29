@@ -916,6 +916,11 @@ _FX BOOL Proc_CreateProcessInternalW(
     }
 
     if (TlsData->proc_image_path) {
+#ifndef  _WIN64
+        VOID File_Wow64FixProcImage(WCHAR* proc_image_path);
+        File_Wow64FixProcImage(TlsData->proc_image_path);
+#endif ! _WIN64
+
         lpApplicationName = TlsData->proc_image_path;
     }
 

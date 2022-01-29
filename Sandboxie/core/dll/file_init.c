@@ -979,6 +979,15 @@ _FX void File_InitWow64(void)
         wcscat(path, L"\\System32");
     }
 
+    path32 = Dll_Alloc((7 + wcslen(path) + 1) * sizeof(WCHAR));
+
+    wcscpy(path32, L"\\drive\\");
+    path32[7] = path[0]; // drive letter
+    wcscpy(&path32[8], &path[2]); // skip :
+
+    File_Wow64System32 = path32;
+    File_Wow64System32Len = wcslen(path32);
+
     path32 = File_TranslateDosToNtPath(path);
     if (path32) {
 

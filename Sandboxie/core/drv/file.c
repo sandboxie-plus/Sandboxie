@@ -1646,7 +1646,7 @@ skip_due_to_home_folder:
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;
-                else if (write_access)
+                else if (write_access && NT_SUCCESS(status))
                     mon_type |= MONITOR_OPEN;
             }
             if(!IsPipeDevice && !ShouldMonitorAccess)

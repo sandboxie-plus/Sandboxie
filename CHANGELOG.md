@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed a couple of index overruns (thanks 7eRoM) [#1571](https://github.com/sandboxie-plus/Sandboxie/pull/1571)
 - fixed issues with sysnative directory [#1403](https://github.com/sandboxie-plus/Sandboxie/issues/1403)
 - fixed issue with starting SandMan when running sandboxed from context menu [#1579](https://github.com/sandboxie-plus/Sandboxie/issues/1579)
-- fixed dark mode flash issue with main window creation
+- fixed dark mode flash issue with main window creation [#1231](https://github.com/sandboxie-plus/Sandboxie/issues/1231#issuecomment-1024469681)
 - fixed issues with snapshot error handling
 
 

@@ -246,7 +246,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pTraySeparator = m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
 
@@ -387,7 +387,7 @@ void CSandMan::CreateMenus()
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
-		m_pDisableForce = m_pMenuFile->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
 		m_pMaintenance = m_pMenuFile->addMenu(CSandMan::GetIcon("Maintenance"), tr("&Maintenance"));
@@ -1487,7 +1487,7 @@ SB_STATUS CSandMan::ConnectSbie()
 
 SB_STATUS CSandMan::ConnectSbieImpl()
 {
-	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
+	SB_STATUS Status = theAPI->Connect(g_PendingMessage.isEmpty(), theConf->GetBool("Options/UseInteractiveQueue", true));
 
 	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
 		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));

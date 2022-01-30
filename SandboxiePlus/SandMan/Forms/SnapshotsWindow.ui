@@ -86,7 +86,7 @@
              <string>When deleting a snapshot content, it will be returned to this snapshot instead of none.</string>
             </property>
             <property name="text">
-             <string>Default shapsnot</string>
+             <string>Default snapshot</string>
             </property>
            </widget>
           </item>

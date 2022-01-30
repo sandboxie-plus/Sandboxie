@@ -225,6 +225,18 @@ QtSingleApplication::QtSingleApplication(Display* dpy, const QString &appId, int
 #  endif // Q_WS_X11
 #endif // QT_VERSION < 0x050000
 
+/*!
+
+*/
+
+void QtSingleApplication::disableSingleApp()
+{
+    if (!peer)
+        return;
+    peer->deleteLater();
+    peer = NULL;
+}
+
 
 /*!
     Returns true if another instance of this application is running;
@@ -239,6 +251,8 @@ QtSingleApplication::QtSingleApplication(Display* dpy, const QString &appId, int
 
 bool QtSingleApplication::isRunning()
 {
+    if (!peer)
+        return false;
     return peer->isClient();
 }
 
@@ -258,6 +272,8 @@ bool QtSingleApplication::isRunning()
 */
 bool QtSingleApplication::sendMessage(const QString &message, int timeout)
 {
+    if (!peer)
+        return false;
     return peer->sendMessage(message, timeout);
 }
 
@@ -268,6 +284,8 @@ bool QtSingleApplication::sendMessage(const QString &message, int timeout)
 */
 QString QtSingleApplication::id() const
 {
+    if (!peer)
+        return QString();
     return peer->applicationId();
 }
 
@@ -287,6 +305,8 @@ QString QtSingleApplication::id() const
 void QtSingleApplication::setActivationWindow(QWidget* aw, bool activateOnMessage)
 {
     actWin = aw;
+    if (!peer)
+        return;
     if (activateOnMessage)
         connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
     else

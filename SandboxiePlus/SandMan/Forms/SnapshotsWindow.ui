@@ -83,7 +83,7 @@
           <item row="0" column="2">
            <widget class="QCheckBox" name="chkDefault">
             <property name="toolTip">
-             <string>When deleting a snapshots content, it will be returned to this snapshot instead of to none.</string>
+             <string>When deleting a snapshot content, it will be returned to this snapshot instead of none.</string>
             </property>
             <property name="text">
              <string>Default shapsnot</string>

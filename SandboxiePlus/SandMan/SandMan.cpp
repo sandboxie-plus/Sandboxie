@@ -1896,9 +1896,9 @@ void CSandMan::CheckResults(QList<SB_STATUS> Results)
 	}
 
 	if (Errors.count() == 1)
-		QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), Errors.first());
+		QMessageBox::warning(theGUI, tr("Sandboxie-Plus - Error"), Errors.first());
 	else if (Errors.count() > 1) {
-		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors);
+		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors, theGUI);
 		Dialog.exec();
 	}
 }

@@ -1356,6 +1356,8 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
     OUT PVOID OutputBuffer OPTIONAL,
     IN ULONG OutputBufferLength)
 {
+    NTSTATUS status;
+
     //
     // check if this is an IOCTL that we want to deny
     //
@@ -1366,7 +1368,6 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
         ULONG LastError;
         THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
-        NTSTATUS status;
         WCHAR *TruePath;
         WCHAR *CopyPath;
 
@@ -1411,8 +1412,10 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
     // otherwise
     //
 
-    return __sys_NtDeviceIoControlFile(
+    status = __sys_NtDeviceIoControlFile(
         FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock,
         IoControlCode, InputBuffer, InputBufferLength,
         OutputBuffer, OutputBufferLength);
+
+    return status;
 }

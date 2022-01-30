@@ -258,7 +258,7 @@ static NTSTATUS File_SetAttributes(
     HANDLE FileHandle, const WCHAR *CopyPath,
     FILE_BASIC_INFORMATION *Information);
 
-static NTSTATUS File_SetDisposition(
+NTSTATUS File_SetDisposition(
     HANDLE FileHandle, IO_STATUS_BLOCK *IoStatusBlock,
     void *FileInformation, ULONG Length, FILE_INFORMATION_CLASS FileInformationClass);
 

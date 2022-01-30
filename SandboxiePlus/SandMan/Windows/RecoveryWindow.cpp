@@ -101,7 +101,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	ui.btnRecover->setMenu(pRecMenu);
 
 	QMenu* pDelMenu = new QMenu(ui.btnDeleteAll);
-	pDelMenu->addAction(tr("Delete evertyhign including all snapshots"), this, SLOT(OnDeleteEverything()));
+	pDelMenu->addAction(tr("Delete everything, including all snapshots"), this, SLOT(OnDeleteEverything()));
 	ui.btnDeleteAll->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnDeleteAll->setMenu(pDelMenu);
 

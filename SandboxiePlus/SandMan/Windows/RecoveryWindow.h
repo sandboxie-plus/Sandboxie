@@ -39,6 +39,8 @@ public:
 	CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent = Q_NULLPTR);
 	~CRecoveryWindow();
 
+	bool		IsDeleteShapshots() { return m_DeleteShapshots; }
+
 	virtual void accept() {}
 	virtual void reject() { this->close(); }
 
@@ -56,6 +58,7 @@ private slots:
 	void		OnRecover();
 	void		OnTargetChanged();
 	void		OnDeleteAll();
+	void		OnDeleteEverything();
 	void		OnCloseUntil();
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
 
@@ -80,6 +83,7 @@ protected:
 	int m_LastTargetIndex;
 	bool m_bTargetsChanged;
 	bool m_bReloadPending;
+	bool m_DeleteShapshots;
 
 private:
 	Ui::RecoveryWindow ui;

@@ -116,10 +116,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 
-	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
-		CSettingsWindow::LoadCertificate();
-	}
-
 	this->setWindowTitle(appTitle);
 
 	setAcceptDrops(true);
@@ -303,9 +299,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 
-	if (!bAutoRun && g_PendingMessage.isEmpty())
-		show();
-
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
 	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
@@ -314,6 +307,9 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
 	m_uTimerID = startTimer(1000);
+
+	if (!bAutoRun && g_PendingMessage.isEmpty())
+		SafeShow(this);
 
 	OnStatusChanged();
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
@@ -899,11 +895,20 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
+		bool DeleteShapshots = false;
 		// if this box auto deletes first show the recovry dialog with the option to abort deletion
-		if(!theGUI->OpenRecovery(pBox, true)) // unless no files are found than continue silently
+		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
 
-		SB_PROGRESS Status = pBox->CleanBox();
+		SB_PROGRESS Status;
+		if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
+			QString Current;
+			pBox->GetDefaultSnapshot(&Current);
+			Status = pBox->SelectSnapshot(Current);
+		}
+		else // if there are no snapshots jut use the normal cleaning procedure
+			Status = pBox->CleanBox();
+
 		if (Status.GetStatus() == OP_ASYNC)
 			AddAsyncOp(Status.GetValue());
 	}
@@ -932,9 +937,10 @@ void CSandMan::OnStatusChanged()
 	if (isConnected)
 	{
 		QString SbiePath = theAPI->GetSbiePath();
-		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
-		OnLogMessage(tr("Sbie+ Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
+		OnLogMessage(tr("Installation Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("Sandboxie-Plus Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+		OnLogMessage(tr("Data Directory: %1").arg(QString(theConf->GetConfigDir()).replace("/","\\")));
 
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
@@ -1006,6 +1012,10 @@ void CSandMan::OnStatusChanged()
 		else {
 			g_Certificate.clear();
 			g_CertInfo.State = 0;
+
+			QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
+			if(QFile::exists(CertPath)) // always delete invalid certificates
+				WindowsMoveFile(CertPath.replace("/", "\\"), "");
 		}
 		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
@@ -1237,7 +1247,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);
 }
 
-bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
+bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
@@ -1251,6 +1261,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
 	}
 	else if (pRecoveryWindow->exec() != 1)
 		return false;
+	DeleteShapshots = pRecoveryWindow->IsDeleteShapshots();
 	return true;
 }
 

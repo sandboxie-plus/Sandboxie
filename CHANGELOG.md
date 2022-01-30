@@ -3,16 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.0.9 / 5.55.9] - 2022-01-??
+## [1.0.9 / 5.55.9] - 2022-01-31
 
 ### Added
 - sandman now causes all boxed processes to update thair path settings in real time when access options were modified
 - added new maintenance meu option Uninstal All to quickly remove all components when runnign in portable mode
+- added option to return not to a snapshot but to an empty box state while keeping all snapshots
+- Sandboxie-Plus.ini can now be placed in C:\ProgramData\Sandboxie-Plus\ folder and takes precedence (for business use)
 
 ### Changed
 - reworked breakout mechanism to be service based and not alow the parent process to access the broken out child process
 - enabled creatin of directory junctions for sandboxed processes [#1375](https://github.com/sandboxie-plus/Sandboxie/issues/1375)
 - changed back to set AutoRecover=y on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
+- improved snapshot support [#1220](https://github.com/sandboxie-plus/Sandboxie/issues/1220)
 
 ### Fixed
 - fixed BreakoutProcess not working with EnableObjectFiltering=y
@@ -23,6 +26,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed border issues on maximized windows introduced in the last build [#1561](https://github.com/sandboxie-plus/Sandboxie/issues/1561)
 - fixed a couple if index overruns (thanks 7eRoM)
 - fixed issues with sysnative directroy [#1403](https://github.com/sandboxie-plus/Sandboxie/issues/1403)
+- fixed issue with starting sandman when running sandboxed from context menu [#1579](https://github.com/sandboxie-plus/Sandboxie/issues/1579)
+- fixed dark mode flash issue with main window creation
+- fixed issues with snapshot error handling
 
 
 

@@ -96,10 +96,11 @@ union SCertInfo {
     quint64	State;
     struct {
         quint32
-            valid     : 1,
-            expired   : 1,
-			outdated  : 1,
-            reservd_1 : 5,
+            valid     : 1, // certificate is active
+            expired   : 1, // certificate is expired but may be active
+            outdated  : 1, // certificate is expired, not anymore valid for the current build
+            business  : 1, // certificate is siutable for business use
+            reservd_1 : 4,
             reservd_2 : 8,
             reservd_3 : 8,
 			reservd_4 : 8;

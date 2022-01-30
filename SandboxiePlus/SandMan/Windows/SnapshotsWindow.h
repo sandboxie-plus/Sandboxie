@@ -27,6 +27,8 @@ private slots:
 
 	void OnTakeSnapshot();
 	void OnSelectSnapshot();
+	void OnSelectEmpty();
+	void OnChangeDefault();
 	void OnRemoveSnapshot();
 
 	void OnSaveInfo();
@@ -34,10 +36,12 @@ private slots:
 protected:
 	void closeEvent(QCloseEvent *e);
 
+	void SelectSnapshot(const QString& ID);
 	void HandleResult(SB_PROGRESS Status);
 
 	CSandBoxPtr m_pBox;
 	QString						m_CurSnapshot;
+	QString						m_DefaultSnapshot;
 	QMap<QVariant, QVariantMap> m_SnapshotMap;
 
 	QVariant	m_SellectedID;

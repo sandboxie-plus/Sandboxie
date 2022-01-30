@@ -911,6 +911,9 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			{
 				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
 				{
+					if (I->first == "FileRootPath" && !I->second.toUpper().contains("%SANDBOX%"))
+						continue; // skip the FileRootPath if it does not contain a %SANDBOX% 
+
 					Status = theAPI->SbieIniSet(Name, I->first, I->second, CSbieAPI::eIniInsert, false);
 					if (Status.IsError())
 						break;
@@ -957,6 +960,8 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	}
 	else if (Action == m_pMenuCleanUp)
 	{
+		bool DeleteShapshots = false;
+
 		if (SandBoxes.count() == 1)
 		{
 			if (SandBoxes.first()->IsEmpty()) {
@@ -967,18 +972,27 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			if (theConf->GetBool("Options/ShowRecovery", false))
 			{
 				// Use recovery dialog in place of the confirmation messagebox for box clean up
-				if(!theGUI->OpenRecovery(SandBoxes.first()))
+				if(!theGUI->OpenRecovery(SandBoxes.first(), DeleteShapshots))
 					return;
 			}
-			else if(QMessageBox("Sandboxie-Plus", tr("Do you want to delete the content of the selected sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
-				return;
+			else if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to delete the content of the selected sandbox?")
+				, tr("Also delete all Snapshots"), &DeleteShapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+					return;
 		}
-		else if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the content of multiple sandboxes?"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
-			return;
+		else if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you really want to delete the content of all sellected sandboxes?")
+			, tr("Also delete all Snapshots"), &DeleteShapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+				return;
 
 		foreach(const CSandBoxPtr & pBox, SandBoxes)
 		{
-			SB_PROGRESS Status = pBox->CleanBox();
+			SB_PROGRESS Status;
+			if (!DeleteShapshots && pBox->HasSnapshots()) {
+				QString Default = pBox->GetDefaultSnapshot();
+				Status = pBox->SelectSnapshot(Default);
+			}
+			else // if there are no snapshots jut use the normal cleaning procedure
+				Status = pBox->CleanBox();
+
 			if (Status.GetStatus() == OP_ASYNC)
 				theGUI->AddAsyncOp(Status.GetValue());
 			else if (Status.IsError())
@@ -991,7 +1005,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		{
 			bool State = false;
 			if(CCheckableMessageBox::question(this, "Sandboxie-Plus",  tr("Do you want to terminate all processes in the selected sandbox(es)?")
-				, tr("Terminate without asking"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
+				, tr("Terminate without asking"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 				return;
 
 			if (State)
@@ -1067,7 +1081,7 @@ void CSbieView::OnProcessAction()
 
 			bool State = false;
 			if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to %1 %2?").arg(((QAction*)sender())->text().toLower()).arg(Processes.count() == 1 ? Processes[0]->GetProcessName() : tr("the selected processes"))
-				, tr("Terminate without asking"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
+				, tr("Terminate without asking"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 				return;
 
 			if (State)
@@ -1242,21 +1256,6 @@ QList<CBoxedProcessPtr> CSbieView::GetSelectedProcesses()
 	}
 	return  List;
 }
-
-/*void CSbieView::UpdateRunMenu()
-{
-	while (m_iMenuRun < m_pMenuRun->actions().count())
-		m_pMenuRun->removeAction(m_pMenuRun->actions().at(m_iMenuRun));
-
-	QStringList RunOptions = theConf->ListKeys("RunOptions");
-	foreach(const QString& RunOption, RunOptions)
-	{
-		StrPair NameCmd = Split2(theConf->GetString("RunOptions/" + RunOption), "|");
-
-		QAction* pAction = m_pMenuRun->addAction(NameCmd.first, this, SLOT(OnSandBoxAction()));
-		pAction->setData(NameCmd.second);
-	}
-}*/
 
 void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 {

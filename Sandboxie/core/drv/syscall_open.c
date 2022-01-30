@@ -382,14 +382,14 @@ _FX NTSTATUS Syscall_OpenHandle(
         }
     }
 
-    if (!NT_SUCCESS(status)) {
-
-        //WCHAR trace_str[128];
-        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
-        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
-
-        Process_SetTerminated(proc, 7);
-    }
+    //if (!NT_SUCCESS(status)) {
+    //
+    //    //WCHAR trace_str[128];
+    //    //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
+    //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+    //
+    //    Process_SetTerminated(proc, 7);
+    //}
 
     return status;
 }
@@ -539,13 +539,13 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     //  if (! NT_SUCCESS(status)) {
     //      if(!wcsicmp(proc->image_name,L"SandboxieBITS.exe") && status == STATUS_ACCESS_DENIED) { 
     //          return status;
-    //  }
+    //      }
     //
     //    //WCHAR trace_str[128];
     //    //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
     //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
     //
-    //  Process_SetTerminated(proc, 9);
+    //    Process_SetTerminated(proc, 9);
     //}
 
     return status;

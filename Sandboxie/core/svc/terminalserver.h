@@ -48,6 +48,8 @@ protected:
 
     MSG_HEADER *Disconnect(MSG_HEADER *msg);
 
+    MSG_HEADER *GetUserToken(MSG_HEADER *msg);
+
 protected:
 
     void *m_WinStaQueryInformation;

@@ -21,4 +21,4 @@
 
 #define SBIEMSG_DLL     L"SbieMsg.dll"
 
-#define MAX_RPL_BUF_SIZE    32768
+#define MAX_REQUEST_LENGTH      (2048 * 1024)

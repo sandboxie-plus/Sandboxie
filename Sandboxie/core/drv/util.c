@@ -351,5 +351,57 @@ _FX NTSTATUS MyValidateCertificate(void)
 
     Driver_Certified = NT_SUCCESS(status);
 
+    if (status == STATUS_ACCOUNT_EXPIRED)
+        status = STATUS_SUCCESS;
+
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Util_GetProcessPidByName
+//---------------------------------------------------------------------------
+
+_FX HANDLE Util_GetProcessPidByName(const WCHAR* name) 
+{
+    HANDLE pid = (HANDLE)-1;
+    USHORT name_len = wcslen(name) * sizeof(WCHAR);
+    PVOID buffer = NULL;
+    ULONG buffer_size = 0x10000;
+    ULONG retry_count = 0;
+    NTSTATUS status;
+
+retry:
+    buffer = ExAllocatePoolWithTag(PagedPool, buffer_size, tzuk);
+    if (buffer){
+
+        status = ZwQuerySystemInformation(SystemProcessesAndThreadsInformation, buffer, buffer_size, &buffer_size);
+        if (status == STATUS_INFO_LENGTH_MISMATCH && retry_count++ < 100) {
+            ExFreePoolWithTag(buffer, tzuk);
+            buffer_size += 0x1000 * retry_count;
+            goto retry;
+        }
+
+        if (NT_SUCCESS(status)) {
+
+            SYSTEM_PROCESS_INFORMATION* processEntry = (SYSTEM_PROCESS_INFORMATION*)buffer;
+            for (;;) {
+
+                if (processEntry->ProcessName.Length == name_len && _wcsicmp(name, processEntry->ProcessName.Buffer) == 0) {
+
+                    pid = (HANDLE)processEntry->ProcessId;
+                    break;
+                }
+
+                if (!processEntry->NextEntryOffset)
+                    break;
+
+                processEntry = (SYSTEM_PROCESS_INFORMATION*)((UCHAR*)processEntry + processEntry->NextEntryOffset);
+            }
+        }
+
+        ExFreePoolWithTag(buffer, tzuk);
+    }
+
+    return pid;
 }

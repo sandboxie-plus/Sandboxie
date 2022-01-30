@@ -81,6 +81,7 @@ BOOL run_mail_agent = FALSE;
 BOOL display_run_dialog = FALSE;
 BOOL display_start_menu = FALSE;
 BOOL execute_auto_run = FALSE;
+BOOL execute_open_with = FALSE;
 BOOL run_elevated_2 = FALSE;
 BOOL disable_force_on_this_program = FALSE;
 BOOL auto_select_default_box = FALSE;
@@ -388,6 +389,7 @@ BOOL Parse_Command_Line(void)
     static const WCHAR *mail_agent        = L"mail_agent";
     static const WCHAR *run_dialog        = L"run_dialog";
     static const WCHAR *start_menu        = L"start_menu";
+    static const WCHAR *open_with         = L"open_with";
     static const WCHAR *auto_run          = L"auto_run";
     static const WCHAR *mount_hive        = L"mount_hive";
     static const WCHAR *delete_sandbox    = L"delete_sandbox";
@@ -757,6 +759,27 @@ BOOL Parse_Command_Line(void)
 
         return TRUE;
 
+    // show open with dialog
+
+    } else if (wcsncmp(cmd, open_with, wcslen(open_with)) == 0) {
+
+        /*if (! SbieApi_QueryProcessInfo(
+                        (HANDLE)(ULONG_PTR)GetCurrentProcessId(), 0)) {
+            // this is the instance of Start.exe outside the sandbox
+            // so just resend the start_menu command line to the
+            // instance that will restart in the sandbox
+            ChildCmdLine = cmd;
+
+        }*/
+
+        execute_open_with = TRUE;
+
+        DWORD len = wcslen(open_with) + 1;
+        ChildCmdLine = MyHeapAlloc((wcslen(cmd) - len) * sizeof(WCHAR));
+        wcscpy(ChildCmdLine, cmd + len);
+
+        return TRUE;
+
     // run auto start entries
 
     } else if (wcsncmp(cmd, auto_run, wcslen(auto_run)) == 0) {
@@ -883,20 +906,28 @@ void List_Process_Ids(void)
 {
     CHAR msg[32];
     ULONG len, i;
-    ULONG pids[512];
+    ULONG* pids;
 
-    ULONG rc = SbieApi_EnumProcess(BoxName, pids);
+    ULONG pid_count = 0;
+    SbieApi_EnumProcessEx(BoxName, FALSE, -1, NULL, &pid_count); // query count
+    pid_count += 128;
+
+    pids = (ULONG*)MyHeapAlloc(sizeof(ULONG) * pid_count);
+    ULONG rc = SbieApi_EnumProcessEx(BoxName, FALSE, -1, pids, &pid_count); // query pids
+
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     if (rc != 0 || (! out))
         return;
 
-    sprintf(msg, "%d\r\n", pids[0]);
+    sprintf(msg, "%d\r\n", pid_count);
     WriteFile(out, msg, strlen(msg), &len, NULL);
 
-    for (i = 1; i <= pids[0]; ++i) {
+    for (i = 0; i < pid_count; ++i) {
         sprintf(msg, "%d\r\n", pids[i]);
         WriteFile(out, msg, strlen(msg), &len, NULL);
     }
+
+    MyHeapFree(pids);
 }
 
 
@@ -1067,7 +1098,12 @@ int Program_Start(void)
         // the ClosedFilePath setting from core/drv/file.c will apply
         //
 
-        LoadLibrary(L"apphelp.dll");
+        //
+        // note: this workaround does nto work the path is still blocked 
+        // and we still get problems, hence now the deriver has an excemption for start.exe
+        //
+
+        //LoadLibrary(L"apphelp.dll");
 
         /*if (1) {
             WCHAR *AppHelpPath = MyHeapAlloc(512 * sizeof(WCHAR));
@@ -1680,6 +1716,19 @@ int __stdcall WinMainCRTStartup(
         if (display_run_dialog) {
             MyCoInitialize();
             ChildCmdLine = DoRunDialog(GetModuleHandle(NULL));
+        } else if (execute_open_with) {
+            MyCoInitialize();
+            WCHAR* CmdLine = DoRunDialog(GetModuleHandle(NULL));
+            if (!CmdLine) // !CmdLine -> cancel
+                ChildCmdLine = CmdLine;
+            else { // execute_open_with
+                WCHAR* FilePath = ChildCmdLine;
+                DWORD len = wcslen(CmdLine) + 1 + wcslen(FilePath) + 16;
+                ChildCmdLine = MyHeapAlloc(len * sizeof(WCHAR));
+                wsprintf(ChildCmdLine, L"%s %s", CmdLine, FilePath);
+                MyHeapFree(CmdLine);
+                MyHeapFree(FilePath);
+            }
         } else if (display_start_menu) {
             if (! ChildCmdLine)
                 ChildCmdLine = DoStartMenu();

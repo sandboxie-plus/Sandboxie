@@ -125,9 +125,9 @@ int __stdcall WinMain(
     BOOL hook_success = TRUE;
     BOOL ok;
 
-    Check_Windows_7();
+    //while(!IsDebuggerPresent()) Sleep(500); __debugbreak();
 
-    SetupExceptionHandler();
+    Check_Windows_7();
 
     HOOK_WIN32(CoImpersonateClient);
     HOOK_WIN32(LogonUserW);

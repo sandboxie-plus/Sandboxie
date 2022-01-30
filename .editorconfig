@@ -2,9 +2,72 @@
 root = true
 
 [*]
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[Templates.ini]
+charset = utf-8-bom
+indent_style = space
+indent_size = 4
+
+[*.{yaml,yml,rc}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[*.{ts,md}]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = unset
+
+[*.{c,h,cpp}]
+charset = utf-8
+end_of_line = crlf
+indent_style = tab
+indent_size = unset
+
+[*.{txt,cmd,bat}]
+charset = utf-8
 end_of_line = crlf
 
-# Matches multiple files with brace expansion notation
-# Set default charset
-[*.{cmd,txt,md,ts}]
-charset = utf-8
+# Xml files
+[*.{xml,stylecop,resx,ruleset}]
+indent_style = space
+indent_size = 2
+
+# Xml config files
+[*.{props,targets,config,nuspec}]
+indent_style = space
+indent_size = 2
+
+#
+# VS project files
+#
+[*.csproj]
+# This is how Visual Studio creates project files.
+indent_size = 2
+
+# Unfortunately, Visual Studio seems to ignore the end-of-line style for .csproj
+# files - and always creates .csproj files with crlf. Thus, we enforce the end-of-line
+# characters in .gitattributes instead.
+end_of_line = unset
+
+#
+# .props files
+#
+[*.props]
+# This mirrors the indent size for .csproj files.
+indent_size = 2
+
+#
+# Visual Studio Solution files
+#
+[*.sln]
+charset = utf-8-bom
+
+# .sln files require tabs or the solution won't load
+indent_style = tab
+indent_size = 4
+end_of_line = crlf

@@ -77,6 +77,7 @@ public:
 #  endif // Q_WS_X11
 #endif // QT_VERSION < 0x050000
 
+    void disableSingleApp();
     bool isRunning();
     QString id() const;
 

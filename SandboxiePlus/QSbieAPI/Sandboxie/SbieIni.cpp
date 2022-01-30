@@ -27,8 +27,10 @@ typedef long NTSTATUS;
 
 CSbieIni::CSbieIni(const QString& Section, class CSbieAPI* pAPI, QObject* parent) : QObject(parent)
 {
+	Q_ASSERT(!Section.isEmpty());
 	m_Name = Section;
 	m_pAPI = pAPI;
+	m_RefreshOnChange = true;
 }
 
 CSbieIni::~CSbieIni()
@@ -39,7 +41,7 @@ SB_STATUS CSbieIni::SetText(const QString& Setting, const QString& Value)
 {
 	if (GetText(Setting) == Value)
 		return SB_OK;
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value);
+	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniUpdate, m_RefreshOnChange);
 }
 
 SB_STATUS CSbieIni::SetNum(const QString& Setting, int Value)
@@ -57,35 +59,35 @@ SB_STATUS CSbieIni::SetBool(const QString& Setting, bool Value)
 	return SetText(Setting, Value ? "y" : "n");
 }
 
-QString CSbieIni::GetText(const QString& Setting, const QString& Default) const
+QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal) const
 {
-	int flags = (m_Name.isEmpty() ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
 	QString Value = m_pAPI->SbieIniGet(m_Name, Setting, flags);
 	if (Value.isNull()) Value = Default;
 	return Value;
 }
 
-int CSbieIni::GetNum(const QString& Setting, int Default) const
+int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal) const
 {
-	QString StrValue = GetText(Setting);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal);
 	bool ok;
 	int Value = StrValue.toInt(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default) const
+__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal) const
 {
-	QString StrValue = GetText(Setting);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal);
 	bool ok;
 	__int64 Value = StrValue.toULongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-bool CSbieIni::GetBool(const QString& Setting, bool Default) const
+bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal) const
 {
-	QString StrValue = GetText(Setting);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal);
 	if (StrValue.compare("y", Qt::CaseInsensitive) == 0)
 		return true;
 	if (StrValue.compare("n", Qt::CaseInsensitive) == 0)
@@ -93,14 +95,14 @@ bool CSbieIni::GetBool(const QString& Setting, bool Default) const
 	return Default;
 }
 
-QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bool expand) const
+QStringList CSbieIni::GetTextList(const QString &Setting, bool withTemplates, bool bExpand, bool bWithGlobal) const
 {
 	QStringList TextList;
 
-	int flags = (m_Name.isEmpty() ? 0 : CONF_GET_NO_GLOBAL);
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL);
 	if (!withTemplates)
 		flags |= CONF_GET_NO_TEMPLS;
-	if (!expand)
+	if (!bExpand)
 		flags |= CONF_GET_NO_EXPAND;
 
 	for (int index = 0; ; index++)
@@ -163,17 +165,17 @@ QStringList CSbieIni::GetTextListTmpl(const QString &Setting, const QString& Tem
 
 SB_STATUS CSbieIni::InsertText(const QString& Setting, const QString& Value)
 {
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniInsert);
+	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniInsert, m_RefreshOnChange);
 }
 
 SB_STATUS CSbieIni::AppendText(const QString& Setting, const QString& Value)
 {
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniAppend);
+	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniAppend, m_RefreshOnChange);
 }
 
 SB_STATUS CSbieIni::DelValue(const QString& Setting, const QString& Value)
 {
-	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniDelete);
+	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniDelete, m_RefreshOnChange);
 }
 
 QList<QPair<QString, QString>> CSbieIni::GetIniSection(qint32* pStatus, bool withTemplates) const
@@ -246,7 +248,7 @@ do_write:
 	// Apply all Settigns
 	for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
 	{
-		SB_STATUS Status = m_pAPI->SbieIniSet(NewName, I->first, I->second, CSbieAPI::eIniInsert);
+		SB_STATUS Status = m_pAPI->SbieIniSet(NewName, I->first, I->second, CSbieAPI::eIniInsert, true);
 		if (Status.IsError())
 			return Status;
 	}
@@ -255,7 +257,7 @@ do_delete:
 	// Selete ini section
 	if (deleteOld)
 	{
-		SB_STATUS Status = m_pAPI->SbieIniSet(m_Name, "*", "");
+		SB_STATUS Status = m_pAPI->SbieIniSet(m_Name, "*", "", CSbieAPI::eIniUpdate, true);
 		if (Status.IsError())
 			return SB_ERR(SB_DeleteFailed, QVariantList() << m_Name << (quint32)Status.GetStatus(), Status.GetStatus());
 		deleteOld = false;
@@ -264,10 +266,13 @@ do_delete:
 			goto do_write;
 	}
 
+	if (m_RefreshOnChange)
+		m_pAPI->CommitIniChanges();
+
 	return SB_OK;
 }
 
 SB_STATUS CSbieIni::RemoveSection()
 {
-	return m_pAPI->SbieIniSet(m_Name, "*", "");
+	return m_pAPI->SbieIniSet(m_Name, "*", "", CSbieAPI::eIniUpdate, m_RefreshOnChange);
 }

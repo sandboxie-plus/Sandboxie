@@ -198,5 +198,8 @@
     <QtMoc Include="Common\NetworkAccessManager.h">
       <Filter>Common</Filter>
     </QtMoc>
+    <QtMoc Include="Common\CheckList.h">
+      <Filter>Common</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

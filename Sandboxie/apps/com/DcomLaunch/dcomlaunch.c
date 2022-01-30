@@ -127,8 +127,6 @@ int __stdcall WinMain(
     BOOL ok;
     HANDLE hThreadEvent;
 
-    SetupExceptionHandler();
-
     Check_Windows_7();
 
     // pretend we are the SCM

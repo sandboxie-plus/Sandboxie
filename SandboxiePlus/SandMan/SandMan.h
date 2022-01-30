@@ -50,9 +50,20 @@ public:
 
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 
-	void				RunSandboxed(const QStringList& Commands, const QString& BoxName);
+	void				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 
-	QIcon				GetBoxIcon(bool inUse, int boxType = 0);
+	QIcon				GetBoxIcon(int boxType, bool inUse = false);
+	QString				GetBoxDescription(int boxType);
+
+	bool				CheckCertificate();
+
+	void				UpdateTheme();
+
+	void				UpdateCertState();
+	void				UpdateCert();
+
+signals:
+	void				CertUpdated();
 
 protected:
 	SB_STATUS			ConnectSbie();
@@ -100,7 +111,7 @@ protected:
 	class UGlobalHotkeys* m_pHotkeyManager;
 
 public slots:
-	void				OnMessage(const QString&);
+	void				OnMessage(const QString& MsgData);
 
 	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message, bool bNotify = false);
@@ -111,8 +122,8 @@ public slots:
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
-	bool				OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty = false);
-	void				ShowRecovery(const CSandBoxPtr& pBox);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
+	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings();
 	void				OnIniReloaded();
@@ -130,6 +141,7 @@ public slots:
 
 	void				CheckForUpdates(bool bManual = true);
 
+	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
 	void				OpenUrl(const QUrl& url);
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
@@ -171,6 +183,10 @@ private slots:
 	void				OnUpdateCheck();
 	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
 	void				OnUpdateDownload();
+
+	void				OnCertCheck();
+
+	void				SetUITheme();
 
 private:
 	void				CreateMenus();
@@ -219,6 +235,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pUninstallAll;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;
@@ -251,6 +268,8 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QAction*			m_pTraySeparator;
+	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
@@ -262,13 +281,13 @@ private:
 	bool				m_pProgressModal;
 	CPopUpWindow*		m_pPopUpWindow;
 
-	void				SetUITheme();
+	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
 
 	void				LoadLanguage();
-	QTranslator			m_Translator;
-	QByteArray			m_Translation;
+	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
+	QTranslator			m_Translator[2];
 
 public:
 	quint32				m_LanguageId;

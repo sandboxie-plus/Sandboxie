@@ -66,6 +66,11 @@ public:
 				{
 				}*/
 			}
+			else if (msg->message == WM_DWMCOLORIZATIONCOLORCHANGED)
+			{
+				if (theGUI && theConf->GetInt("Options/UseDarkTheme", 2) == 2)
+					theGUI->UpdateTheme();
+			}
 		}
 		return false;
 	}
@@ -75,6 +80,8 @@ HWND MainWndHandle = NULL;
 #endif
 
 CSandMan* theGUI = NULL;
+
+extern QString g_PendingMessage;
 
 CSandMan::CSandMan(QWidget *parent)
 	: QMainWindow(parent)
@@ -91,6 +98,7 @@ CSandMan::CSandMan(QWidget *parent)
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
 
+	m_ThemeUpdatePending = false;
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
 
@@ -107,10 +115,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_RequestManager = NULL;
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
-
-	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
-		CSettingsWindow::LoadCertificate();
-	}
 
 	this->setWindowTitle(appTitle);
 
@@ -201,7 +205,7 @@ CSandMan::CSandMan(QWidget *parent)
 	pShowHide->setFont(f);
 	m_pTrayMenu->addSeparator();
 
-	QWidgetAction* pTrayList = new QWidgetAction(m_pTrayMenu);
+	m_pTrayList = new QWidgetAction(m_pTrayMenu);
 
 	QWidget* pWidget = new CActionWidget();
     QHBoxLayout* pLayout = new QHBoxLayout();
@@ -227,8 +231,8 @@ CSandMan::CSandMan(QWidget *parent)
 	
 	pLayout->addWidget(m_pTrayBoxes);
 
-    pTrayList->setDefaultWidget(pWidget);
-	m_pTrayMenu->addAction(pTrayList);
+    m_pTrayList->setDefaultWidget(pWidget);
+	m_pTrayMenu->addAction(m_pTrayList);
 
 
 	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -236,9 +240,9 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 	//m_pBoxMenu
 
-	m_pTrayMenu->addSeparator();
+	m_pTraySeparator = m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
 
@@ -263,9 +267,11 @@ CSandMan::CSandMan(QWidget *parent)
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
+	if(g_PendingMessage.isEmpty()){
 	m_pTrayIcon->show(); // Note: qt bug; hide does not work if not showing first :/
 	if(!bAutoRun && theConf->GetInt("Options/SysTrayIcon", 1) == 0)
 		m_pTrayIcon->hide();
+	}
 	//
 
 	LoadState();
@@ -279,7 +285,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 	m_pShowAllSessions->setChecked(theConf->GetBool("Options/ShowAllSessions"));
 
-	m_pProgressDialog = new CProgressDialog("", this);
+	m_pProgressDialog = new CProgressDialog("");
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 	m_pProgressModal = false;
@@ -290,9 +296,8 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pWndTopMost->setChecked(bAlwaysOnTop);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
-	if (!bAutoRun)
-		show();
 
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
@@ -301,13 +306,23 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(FileToRecover(const QString&, const QString&, const QString&, quint32)), this, SLOT(OnFileToRecover(const QString&, const QString&, const QString&, quint32)), Qt::QueuedConnection);
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
-	m_uTimerID = startTimer(250);
+	m_uTimerID = startTimer(1000);
+
+	if (!bAutoRun && g_PendingMessage.isEmpty())
+		SafeShow(this);
 
 	OnStatusChanged();
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 	{
 		SB_STATUS Status = ConnectSbie();
 		CheckResults(QList<SB_STATUS>() << Status);
+	}
+
+	//qApp->setWindowIcon(GetIcon("IconEmptyDC", false));
+
+	if (!g_PendingMessage.isEmpty()) {
+		OnMessage(g_PendingMessage);
+		PostQuitMessage(0);
 	}
 }
 
@@ -368,7 +383,7 @@ void CSandMan::CreateMenus()
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
-		m_pDisableForce = m_pMenuFile->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
 		m_pMaintenance = m_pMenuFile->addMenu(CSandMan::GetIcon("Maintenance"), tr("&Maintenance"));
@@ -376,7 +391,6 @@ void CSandMan::CreateMenus()
 			m_pDisconnect = m_pMaintenance->addAction(CSandMan::GetIcon("Disconnect"), tr("Disconnect"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
 			m_pStopAll = m_pMaintenance->addAction(CSandMan::GetIcon("Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
-			m_pMaintenance->addSeparator();
 			m_pMaintenanceItems = m_pMaintenance->addMenu(CSandMan::GetIcon("ManMaintenance"), tr("&Advanced"));
 				m_pInstallDrv = m_pMaintenanceItems->addAction(tr("Install Driver"), this, SLOT(OnMaintenance()));
 				m_pStartDrv = m_pMaintenanceItems->addAction(tr("Start Driver"), this, SLOT(OnMaintenance()));
@@ -387,6 +401,10 @@ void CSandMan::CreateMenus()
 				m_pStartSvc = m_pMaintenanceItems->addAction(tr("Start Service"), this, SLOT(OnMaintenance()));
 				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
+			m_pMaintenance->addSeparator();
+			if(IsFullyPortable())
+				m_pUninstallAll = m_pMaintenance->addAction(CSandMan::GetIcon("Uninstall"), tr("Uninstall All"), this, SLOT(OnMaintenance()));
+			
 				
 		m_pMenuFile->addSeparator();
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
@@ -488,7 +506,7 @@ void CSandMan::CreateToolBar()
 
 	m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupportLbl = new QLabel("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+	QLabel* pSupportLbl = new QLabel(tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>"));
 	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
 	m_pToolBar->addWidget(pSupportLbl);
@@ -528,13 +546,16 @@ void CSandMan::closeEvent(QCloseEvent *e)
 		}
 	}
 
+	//if(theAPI->IsConnected())
+	//	m_pBoxView->SaveUserConfig();
+
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
 		int PortableStop = theConf->GetInt("Options/PortableStop", -1);
 		if (PortableStop == -1)
 		{
 			bool State = false;
-			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\r\n\r\nDo you want to do the clean up?")
+			auto Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.\n\nDo you want to do the clean up?")
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
 
 			if (Ret == QDialogButtonBox::Cancel)
@@ -556,15 +577,44 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	QApplication::quit();
 }
 
-QIcon CSandMan::GetBoxIcon(bool inUse, int boxType)
+QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)
 {
 	EBoxColors color = eYellow;
 	switch (boxType) {
-	case CSandBoxPlus::eHardened:	color = eOrang; break;
-	//case CSandBoxPlus::eHasLogApi:	color = eRed; break;
-	case CSandBoxPlus::eInsecure:	color = eMagenta; break;
+	case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
+	case CSandBoxPlus::eHardened:			color = eOrang; break;
+	case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
+	case CSandBoxPlus::eDefault:			color = eYellow; break;
+	case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
+	case CSandBoxPlus::eAppBox:				color = eGreen; break;
+	case CSandBoxPlus::eInsecure:			color = eMagenta; break;
 	}
 	return inUse ? m_BoxIcons[color].second : m_BoxIcons[color].first;
+}
+
+QString CSandMan::GetBoxDescription(int boxType)
+{
+	QString Info;
+
+	switch (boxType) {
+	case CSandBoxPlus::eHardenedPlus:
+	case CSandBoxPlus::eHardened:
+		Info = tr("This box provides enhanced security isolation, it is suitable to test untrusted software.");
+		break;
+	case CSandBoxPlus::eDefaultPlus:
+	case CSandBoxPlus::eDefault:
+		Info = tr("This box provides standard isolation, it is suitable to run your software to enhance security.");	
+		break;
+	case CSandBoxPlus::eAppBoxPlus:
+	case CSandBoxPlus::eAppBox:
+		Info = tr("This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.");
+		break;
+	}
+	
+	if(boxType == CSandBoxPlus::eHardenedPlus || boxType == CSandBoxPlus::eDefaultPlus || boxType == CSandBoxPlus::eAppBoxPlus)
+		Info.append(tr("\n\nThis box prevents access to all user data locations, except explicitly granted in the Resource Access options."));
+
+	return Info;
 }
 
 bool CSandMan::IsFullyPortable()
@@ -576,8 +626,10 @@ bool CSandMan::IsFullyPortable()
 	return false;
 }
 
-void CSandMan::OnMessage(const QString& Message)
+void CSandMan::OnMessage(const QString& MsgData)
 {
+	QStringList Messages = MsgData.split("\n");
+	QString Message = Messages[0];
 	if (Message == "ShowWnd")
 	{
 		if (!isVisible())
@@ -599,11 +651,19 @@ void CSandMan::OnMessage(const QString& Message)
 			}
 		}
 
+		QString WrkDir;
+		for (int i = 1; i < Messages.length(); i++) {
+			if (Messages[i].left(5) == "From:") {
+				WrkDir = Messages[i].mid(5);
+				break;
+			}
+		}
+
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
-			theAPI->RunStart("DefaultBox", CmdLine);
+			theAPI->RunStart("DefaultBox", CmdLine, false, WrkDir);
 		}
 		else
-			RunSandboxed(QStringList(CmdLine), BoxName);
+			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
 	}
 	else if (Message.left(3) == "Op:")
 	{
@@ -660,10 +720,11 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName)
+void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
 {
-	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName);
-	pSelectBoxWindow->show();
+	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
+	//pSelectBoxWindow->show();
+	SafeExec(pSelectBoxWindow);
 }
 
 void CSandMan::dropEvent(QDropEvent* e)
@@ -722,10 +783,20 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			bIsMonitoring = !theAPI->GetTrace().isEmpty();
 		m_pTraceView->setEnabled(bIsMonitoring);
 
+		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
+		int ActiveProcesses = 0;
+		if (m_pKeepTerminated->isChecked()) {
+			foreach(const CBoxedProcessPtr & Process, Processes) {
+				if (!Process->IsTerminated())
+					ActiveProcesses++;
+			}
+		}
+		else 
+			ActiveProcesses = Processes.count();
 
-		if (m_bIconEmpty != (theAPI->TotalProcesses() == 0) || m_bIconDisabled != bForceProcessDisabled)
+		if (m_bIconEmpty != (ActiveProcesses == 0) || m_bIconDisabled != bForceProcessDisabled)
 		{
-			m_bIconEmpty = (theAPI->TotalProcesses() == 0);
+			m_bIconEmpty = (ActiveProcesses == 0);
 			m_bIconDisabled = bForceProcessDisabled;
 
 			m_pTrayIcon->setIcon(GetTrayIconName());
@@ -824,11 +895,20 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
+		bool DeleteShapshots = false;
 		// if this box auto deletes first show the recovry dialog with the option to abort deletion
-		if(!theGUI->OpenRecovery(pBox, true)) // unless no files are found than continue silently
+		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
 
-		SB_PROGRESS Status = pBox->CleanBox();
+		SB_PROGRESS Status;
+		if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
+			QString Current;
+			pBox->GetDefaultSnapshot(&Current);
+			Status = pBox->SelectSnapshot(Current);
+		}
+		else // if there are no snapshots jut use the normal cleaning procedure
+			Status = pBox->CleanBox();
+
 		if (Status.GetStatus() == OP_ASYNC)
 			AddAsyncOp(Status.GetValue());
 	}
@@ -857,8 +937,10 @@ void CSandMan::OnStatusChanged()
 	if (isConnected)
 	{
 		QString SbiePath = theAPI->GetSbiePath();
-		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("Installation Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("Sandboxie-Plus Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+		OnLogMessage(tr("Data Directory: %1").arg(QString(theConf->GetConfigDir()).replace("/","\\")));
 
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
@@ -869,12 +951,12 @@ void CSandMan::OnStatusChanged()
 
 			QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox").replace("/", "\\");
 
-			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
-			if (PortableRootDir == -1)
+			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", 2);
+			if (PortableRootDir == 2)
 			{
 				bool State = false;
 				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
-					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\r\nYes will choose: %1\r\nNo will choose: %2")
+					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
 					.arg(BoxPath)
 					.arg("C:\\Sandbox") // todo resolve os drive properly
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
@@ -918,13 +1000,25 @@ void CSandMan::OnStatusChanged()
 
 		if (!theAPI->ReloadCert().IsError()) {
 			CSettingsWindow::LoadCertificate();
+			UpdateCertState();
+
+			if ((g_CertInfo.expired || g_CertInfo.about_to_expire) && !theConf->GetBool("Options/NoSupportCheck", false)) 
+			{
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow();
+				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
+				pSettingsWindow->showSupport();
+			}
 		}
 		else {
 			g_Certificate.clear();
+			g_CertInfo.State = 0;
+
+			QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
+			if(QFile::exists(CertPath)) // always delete invalid certificates
+				WindowsMoveFile(CertPath.replace("/", "\\"), "");
 		}
-
+		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
-
 
 		SB_STATUS Status = theAPI->ReloadBoxes();
 
@@ -1004,7 +1098,7 @@ void CSandMan::SetupHotKeys()
 	m_pHotkeyManager->unregisterAllHotkeys();
 
 	if (theConf->GetBool("Options/EnablePanicKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel"), HK_PANIC);
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -1046,6 +1140,36 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 			m_MissingTemplates.append(MsgData[2]);
 	}
 
+	if ((MsgCode & 0xFFFF) == 6004) // certificat error
+	{
+		static quint64 iLastCertWarning = 0;
+		if (iLastCertWarning + 60 < QDateTime::currentDateTime().toTime_t()) { // reset after 60 seconds
+			iLastCertWarning = QDateTime::currentDateTime().toTime_t();
+			
+			QString Message;
+			if (!MsgData[2].isEmpty())
+				Message = tr("The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.").arg(MsgData[2]).arg(MsgData[1]);
+			else 
+				Message = tr("The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.").arg(MsgData[1]);
+			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
+
+			QMessageBox msgBox;
+			msgBox.setTextFormat(Qt::RichText);
+			msgBox.setIcon(QMessageBox::Critical);
+			msgBox.setWindowTitle("Sandboxie-Plus");
+			msgBox.setText(Message);
+			msgBox.setStandardButtons(QMessageBox::Ok);
+			msgBox.exec();
+			/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+			if (msgBox.exec() == QDialogButtonBox::Yes) {
+				OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+			}*/
+			
+			//bCertWarning = false;
+		}
+		// return;
+	}
+
 	QString Message = MsgCode != 0 ? theAPI->GetSbieMsgStr(MsgCode, m_LanguageId) : (MsgData.size() > 0 ? MsgData[0] : QString());
 
 	for (int i = 1; i < MsgData.size(); i++)
@@ -1062,8 +1186,37 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	OnLogMessage(Message);
 
+	if ((MsgCode & 0xFFFF) == 6004) // certificat error
+		return; // dont pop that one up
+
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true))
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
+}
+
+bool CSandMan::CheckCertificate() 
+{
+	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) != 0)
+		return true;
+
+	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
+	//	OnLogMessage(tr("The supporter certificate is expired"));
+	//	return false;
+	//}
+
+	QMessageBox msgBox;
+	msgBox.setTextFormat(Qt::RichText);
+	msgBox.setIcon(QMessageBox::Information);
+	msgBox.setWindowTitle("Sandboxie-Plus");
+	msgBox.setText(tr("The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.<br />"
+		"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
+	msgBox.setStandardButtons(QMessageBox::Ok);
+	msgBox.exec();
+	/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	if (msgBox.exec() == QDialogButtonBox::Yes) {
+		OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+	}*/
+
+	return false;
 }
 
 void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)
@@ -1073,17 +1226,28 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 
 void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId)
 {
-	if (theConf->GetBool("Options/InstantRecovery", false))
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	if (!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended())
+		return;
+
+	if (theConf->GetBool("Options/InstantRecovery", true))
 	{
-		CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-		if (pBox)
-			ShowRecovery(pBox);
+		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
+
+		if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+			SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+			QTimer::singleShot(100, this, [pWnd]() {
+				SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+				});
+		}
+
+		pWnd->AddFile(FilePath, BoxPath);
 	}
 	else
-		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, BoxName, ProcessId);
+		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);
 }
 
-bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
+bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
@@ -1097,10 +1261,11 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
 	}
 	else if (pRecoveryWindow->exec() != 1)
 		return false;
+	DeleteShapshots = pRecoveryWindow->IsDeleteShapshots();
 	return true;
 }
 
-void CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
+CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
@@ -1114,7 +1279,9 @@ void CSandMan::ShowRecovery(const CSandBoxPtr& pBox)
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
 	}
-	pBoxEx->m_pRecoveryWnd->FindFiles();
+	if(bFind)
+		pBoxEx->m_pRecoveryWnd->FindFiles();
+	return pBoxEx->m_pRecoveryWnd;
 }
 
 SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action)
@@ -1272,7 +1439,7 @@ void CSandMan::OnDisableForce()
 		int LastValue = theAPI->GetGlobalSettings()->GetNum("ForceDisableSeconds", 60);
 
 		bool bOK = false;
-		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), LastValue, 0, INT_MAX, 1, &bOK);
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration, in seconds, for disabling Forced Programs rules."), LastValue, 0, INT_MAX, 1, &bOK);
 		if (!bOK)
 			return;
 	}
@@ -1331,7 +1498,7 @@ SB_STATUS CSandMan::ConnectSbie()
 
 SB_STATUS CSandMan::ConnectSbieImpl()
 {
-	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
+	SB_STATUS Status = theAPI->Connect(g_PendingMessage.isEmpty(), theConf->GetBool("Options/UseInteractiveQueue", true));
 
 	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
 		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
@@ -1388,17 +1555,22 @@ void CSandMan::OnMaintenance()
 
 	else if (sender() == m_pInstallSvc)
 		Status = CSbieUtils::Install(CSbieUtils::eService);
-	else if(sender() == m_pStartSvc)
+	else if (sender() == m_pStartSvc)
 		Status = CSbieUtils::Start(CSbieUtils::eService);
-	else if(sender() == m_pStopSvc)
+	else if (sender() == m_pStopSvc)
 		Status = CSbieUtils::Stop(CSbieUtils::eService);
 	else if (sender() == m_pUninstallSvc)
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
 
+	// uninstall	
+	else if (sender() == m_pUninstallAll)
+		Status = StopSbie(true);
+
+
 	if (Status.GetStatus() == OP_ASYNC) {
 		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
 		m_pProgressDialog->OnStatusMessage(tr("Executing maintenance operation, please wait..."));
-		m_pProgressDialog->show();
+		SafeShow(m_pProgressDialog);
 		return;
 	}
 
@@ -1419,6 +1591,7 @@ void CSandMan::OnAlwaysTop()
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	this->show(); // why is this needed?
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 }
 
 void CSandMan::SetViewMode(bool bAdvanced)
@@ -1485,7 +1658,7 @@ void CSandMan::OnSettings()
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 			pSettingsWindow = NULL;
 		});
-		pSettingsWindow->show();
+		SafeShow(pSettingsWindow);
 	}
 }
 
@@ -1549,6 +1722,7 @@ void CSandMan::OnEditIni()
 			theConf->SetValue("Options/NoEditInfo", false);
 	}
 
+	wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
 	wstring IniPath = theAPI->GetIniPath().toStdWString();
 
 	SHELLEXECUTEINFO si = { 0 };
@@ -1556,7 +1730,7 @@ void CSandMan::OnEditIni()
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
 	si.lpVerb = L"runas";
-	si.lpFile = L"notepad.exe";
+	si.lpFile = Editor.c_str();
 	si.lpParameters = IniPath.c_str();
 	si.lpDirectory = NULL;
 	si.nShow = SW_SHOW;
@@ -1585,7 +1759,7 @@ void CSandMan::OnReloadIni()
 
 void CSandMan::OnIniReloaded()
 {
-	m_pBoxView->ReloadGroups();
+	m_pBoxView->ReloadUserConfig();
 	m_pPopUpWindow->ReloadHiddenMessages();
 }
 
@@ -1609,11 +1783,11 @@ bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
 	m_pProgressDialog->OnStatusMessage("");
 	if (bWait) {
 		m_pProgressModal = true;
-		m_pProgressDialog->exec();
+		m_pProgressDialog->exec(); // safe exec breaks the closing
 		m_pProgressModal = false;
 	}
 	else
-		m_pProgressDialog->show();
+		SafeShow(m_pProgressDialog);
 
 	if (pProgress->IsFinished()) // Note: since the operation runs asynchronously, it may have already finished, so we need to test for that
 		OnAsyncFinished(pProgress.data());
@@ -1689,16 +1863,16 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
 	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
 	//case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
-	//case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
+	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
 	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
 	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
-	case SB_SnapCopyRegFail:Message = tr("Failed to copy RegHive"); break;
+	case SB_SnapCopyDatFail:Message = tr("Failed to copy box data files"); break;
 	case SB_SnapNotFound:	Message = tr("Snapshot not found"); break;
 	case SB_SnapMergeFail:	Message = tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged."); break;
 	case SB_SnapRmDirFail:	Message = tr("Failed to remove old snapshot directory '%1'"); break;
 	case SB_SnapIsShared:	Message = tr("Can't remove a snapshot that is shared by multiple later snapshots"); break;
-	case SB_SnapDelRegFail:	Message = tr("Failed to remove old RegHive"); break;
+	case SB_SnapDelDatFail:	Message = tr("Failed to remove old box data files"); break;
 	case SB_NotAuthorized:	Message = tr("You are not authorized to update configuration in section '%1'"); break;
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
@@ -1722,9 +1896,9 @@ void CSandMan::CheckResults(QList<SB_STATUS> Results)
 	}
 
 	if (Errors.count() == 1)
-		QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), Errors.first());
+		QMessageBox::warning(theGUI, tr("Sandboxie-Plus - Error"), Errors.first());
 	else if (Errors.count() > 1) {
-		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors);
+		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors, theGUI);
 		Dialog.exec();
 	}
 }
@@ -1776,7 +1950,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					bAdded = true;
 				}
 
-				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBox->GetActiveProcessCount() != 0, pBoxEx->GetType()));
+				pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0));
 			}
 
 			foreach(QTreeWidgetItem* pItem, OldBoxes)
@@ -1804,6 +1978,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				}
 
 				m_pTrayBoxes->setFixedHeight(Height);
+
+				m_pTrayMenu->removeAction(m_pTrayList);
+				m_pTrayMenu->insertAction(m_pTraySeparator, m_pTrayList);
 			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
@@ -1845,8 +2022,12 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 void CSandMan::OpenUrl(const QUrl& url)
 {
-	if (url.scheme() == "sbie")
-		return OpenUrl("https://sandboxie-plus.com/sandboxie" + url.path());
+	if (url.scheme() == "sbie") {
+		QString path = url.path();
+		if (path == "/cert")
+			return UpdateCert();
+		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
+	}
 
 	int iSandboxed = theConf->GetInt("Options/OpenUrlsSandboxed", 2);
 
@@ -1900,7 +2081,10 @@ void CSandMan::CheckForUpdates(bool bManual)
 	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QString::number(m_LanguageId));
-	QString UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
+
+	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	if (UpdateKey.isEmpty())
+		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	if (!UpdateKey.isEmpty())
 		Query.addQueryItem("update_key", UpdateKey);
 	Query.addQueryItem("auto", bManual ? "0" : "1");
@@ -2131,18 +2315,28 @@ void CSandMan::OnAbout()
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
 			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2021 by DavidXanatos</p>"
+			"<p>Copyright (c) 2020-2022 by DavidXanatos</p>"
 		).arg(GetVersion());
+
+		QString CertInfo;
+		if (!g_Certificate.isEmpty()) {
+			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("name"));
+		} else {
+			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
+		}
+
 		QString AboutText = tr(
-			"<p>Sandboxie-Plus is an open source continuation of Sandboxie.</p>"
-			"<p></p>"
-			"<p>Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.</p>"
-			"<p></p>"
-			"<p></p>"
-			"<p></p>"
-			"<p>Icons from <a href=\"https://icons8.com\">icons8.com</a></p>"
-			"<p></p>"
-		);
+			"Sandboxie-Plus is an open source continuation of Sandboxie.<br />"
+			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
+			"<br />"
+			"%3<br />"
+			"<br />"
+			"Driver version: %1<br />"
+			"Features: %2<br />"
+			"<br />"
+			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"
+		).arg(theAPI->GetVersion()).arg(theAPI->GetFeatureStr()).arg(CertInfo);
+
 		QMessageBox *msgBox = new QMessageBox(this);
 		msgBox->setAttribute(Qt::WA_DeleteOnClose);
 		msgBox->setWindowTitle(tr("About Sandboxie-Plus"));
@@ -2152,14 +2346,110 @@ void CSandMan::OnAbout()
 		QIcon ico(QLatin1String(":/SandMan.png"));
 		msgBox->setIconPixmap(ico.pixmap(128, 128));
 
-		msgBox->exec();
+		SafeExec(msgBox);
 	}
 	else if (sender() == m_pAboutQt)
 		QMessageBox::aboutQt(this);
 }
 
+void CSandMan::UpdateCertState()
+{
+	g_CertInfo.State = theAPI->GetCertState();
+
+	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60*60*24*30);
+	if (g_CertInfo.outdated)
+		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
+			// outdated always implicates it is no longer valid
+	else if (g_CertInfo.expired) // may be still valid for the current and older builds
+		OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
+			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
+	else if(g_CertInfo.about_to_expire)
+		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+
+	emit CertUpdated();
+}
+
+void CSandMan::UpdateCert()
+{
+	QString UpdateKey; // for now only patreons can update the cert automatically
+	if(GetArguments(g_Certificate, L'\n', L':').value("type").indexOf("PATREON") == 0)
+		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	if (UpdateKey.isEmpty()) {
+		OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
+		return;
+	}
+
+	if (!m_pUpdateProgress.isNull())
+		return;
+
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Checking for certificate..."));
+
+	if (m_RequestManager == NULL) 
+		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
+
+
+	QUrlQuery Query;
+	Query.addQueryItem("UpdateKey", UpdateKey);
+
+	QUrl Url("https://sandboxie-plus.com/get_cert.php");
+	Url.setQuery(Query);
+
+	QNetworkRequest Request = QNetworkRequest(Url);
+	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setRawHeader("Accept-Encoding", "gzip");
+	QNetworkReply* pReply = m_RequestManager->get(Request);
+	connect(pReply, SIGNAL(finished()), this, SLOT(OnCertCheck()));
+}
+
+void CSandMan::OnCertCheck()
+{
+	if (m_pUpdateProgress.isNull())
+		return;
+
+	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
+	QByteArray Reply = pReply->readAll();
+	int Code = pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	pReply->deleteLater();
+
+	m_pUpdateProgress->Finish(SB_OK);
+	m_pUpdateProgress.clear();
+
+	if (Code > 299 || Code < 200) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("No certificate found on server!"));
+		return;
+	}
+
+	if (Reply.replace("\r\n","\n").compare(g_Certificate.replace("\r\n","\n"), Qt::CaseInsensitive) == 0){
+		QMessageBox::information(this, "Sandboxie-Plus", tr("There is no updated certificate available."));
+		return;
+	}
+
+	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+	QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+	QFile CertFile(TempPath);
+	if (CertFile.open(QFile::WriteOnly)) {
+		CertFile.write(Reply);
+		CertFile.close();
+	}
+
+	WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+
+	if (!theAPI->ReloadCert().IsError()) {
+		CSettingsWindow::LoadCertificate();
+		UpdateCertState();
+	}
+	else { // this should not happen
+		g_Certificate.clear();
+		g_CertInfo.State = 0;
+	}
+}
+
 void CSandMan::SetUITheme()
 {
+	m_ThemeUpdatePending = false;
+
 	bool bDark;
 	int iDark = theConf->GetInt("Options/UseDarkTheme", 2);
 	if (iDark == 2) {
@@ -2201,41 +2491,60 @@ void CSandMan::SetUITheme()
 	CTreeItemModel::SetDarkMode(bDark);
 	CListItemModel::SetDarkMode(bDark);
 	CPopUpWindow::SetDarkMode(bDark);
+	CPanelView::SetDarkMode(bDark);
+	CFinder::SetDarkMode(bDark);
+}
+
+void CSandMan::UpdateTheme()
+{
+	if (!m_ThemeUpdatePending)
+	{
+		m_ThemeUpdatePending = true;
+		QTimer::singleShot(500, this, SLOT(SetUITheme()));
+	}
 }
 
 void CSandMan::LoadLanguage()
 {
-	qApp->removeTranslator(&m_Translator);
-	m_Translation.clear();
 	m_LanguageId = 0;
 
 	QString Lang = theConf->GetString("Options/UiLanguage");
 	if(Lang.isEmpty())
 		Lang = QLocale::system().name();
 
-	if (!Lang.isEmpty())
-	{
-		m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+	if (Lang.compare("native", Qt::CaseInsensitive) != 0) {
+		if (!Lang.isEmpty())
+			m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 
-		QString LangAux = Lang; // Short version as fallback
-		LangAux.truncate(LangAux.lastIndexOf('_'));
-
-		QString LangPath = QApplication::applicationDirPath() + "/translations/sandman_";
-		bool bAux = false;
-		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
-		{
-			QFile File(LangPath + (bAux ? LangAux : Lang) + ".qm");
-			File.open(QFile::ReadOnly);
-			m_Translation = File.readAll();
-		}
-
-		if (!m_Translation.isEmpty() && m_Translator.load((const uchar*)m_Translation.data(), m_Translation.size()))
-			qApp->installTranslator(&m_Translator);
+		LoadLanguage(Lang, "sandman", 0);
+		LoadLanguage(Lang, "qt", 1);
 	}
 
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
 }
+
+void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)
+{
+	qApp->removeTranslator(&m_Translator[Index]);
+
+	if (!Lang.isEmpty())
+	{
+		QString LangAux = Lang; // Short version as fallback
+		LangAux.truncate(LangAux.lastIndexOf('_'));
+
+		QString LangDir = QApplication::applicationDirPath() + "/translations/";
+
+		QString LangPath = LangDir + Module + "_";
+		bool bAux = false;
+		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
+		{
+			if(m_Translator[Index].load(LangPath + (bAux ? LangAux : Lang) + ".qm", LangDir))
+				qApp->installTranslator(&m_Translator[Index]);
+		}
+	}
+}
+
 
 // Make sure that QPlatformTheme strings won't be marked as vanished in all .ts files, even after running lupdate
 
@@ -2247,6 +2556,14 @@ QT_TRANSLATE_NOOP("QPlatformTheme", "&Yes"),
 QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
 };
 
+// Make sure that CSandBox strings won't be marked as vanished in all .ts files, even after running lupdate
+
+static const char* CSandBox_strings[] = {
+QT_TRANSLATE_NOOP("CSandBox", "Waiting for folder: %1"),
+QT_TRANSLATE_NOOP("CSandBox", "Deleting folder: %1"),
+QT_TRANSLATE_NOOP("CSandBox", "Merging folders: %1 &gt;&gt; %2"),
+QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // WinSpy based window finder
@@ -2255,10 +2572,62 @@ QT_TRANSLATE_NOOP("QPlatformTheme", "&No"),
 #include <windows.h>
 #include "Helpers/FindTool.h"
 
+
+typedef enum DEVICE_SCALE_FACTOR {
+    DEVICE_SCALE_FACTOR_INVALID	= 0,
+    SCALE_100_PERCENT	= 100,
+    SCALE_120_PERCENT	= 120,
+    SCALE_125_PERCENT	= 125,
+    SCALE_140_PERCENT	= 140,
+    SCALE_150_PERCENT	= 150,
+    SCALE_160_PERCENT	= 160,
+    SCALE_175_PERCENT	= 175,
+    SCALE_180_PERCENT	= 180,
+    SCALE_200_PERCENT	= 200,
+    SCALE_225_PERCENT	= 225,
+    SCALE_250_PERCENT	= 250,
+    SCALE_300_PERCENT	= 300,
+    SCALE_350_PERCENT	= 350,
+    SCALE_400_PERCENT	= 400,
+    SCALE_450_PERCENT	= 450,
+    SCALE_500_PERCENT	= 500
+} 	DEVICE_SCALE_FACTOR;
+
+typedef HRESULT (CALLBACK *P_GetScaleFactorForMonitor)(HMONITOR, DEVICE_SCALE_FACTOR*);
+
+UINT GetMonitorScaling(HWND hwnd)
+{
+    static HINSTANCE shcore = LoadLibrary(L"Shcore.dll");
+    if (shcore != nullptr)
+    {
+        if (auto getScaleFactorForMonitor =
+                P_GetScaleFactorForMonitor(GetProcAddress(shcore, "GetScaleFactorForMonitor")))
+        {
+			HMONITOR monitor =
+                MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+
+            DEVICE_SCALE_FACTOR Scale;
+
+            getScaleFactorForMonitor(monitor, &Scale);
+
+            return Scale;
+        }
+    }
+    return 100;
+}
+
+
 #define IDD_FINDER_TOOL                 111
 #define ID_FINDER_TARGET                112
 #define ID_FINDER_EXPLAIN               113
 #define ID_FINDER_RESULT                114
+
+struct SFinderWndData {
+	int Scale;
+	HFONT hFont;
+};
+
+#define DS(x) ((x) * WndData.Scale / 100)
 
 UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 {
@@ -2270,12 +2639,14 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 
 	hwndTool = GetParent(hwndTool);
 
+	SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwndTool, 0);
+
 	if (pid && pid != GetCurrentProcessId())
 	{
 		RECT rc;
 		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top <= 150) 
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+		if (rc.bottom - rc.top <= DS(150)) 
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
 
 		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
 		if (!pProcess.isNull()) 
@@ -2298,8 +2669,8 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 	{
 		RECT rc;
 		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top > 150)
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - 70, SWP_SHOWWINDOW | SWP_NOMOVE);
+		if (rc.bottom - rc.top > DS(150))
+			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
 
 		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_HIDE);
 		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_HIDE);
@@ -2322,11 +2693,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		case WM_CREATE:
 		{
+			CREATESTRUCT* createStruct = (CREATESTRUCT*)lParam;
+			SFinderWndData &WndData = *(SFinderWndData*)createStruct->lpCreateParams;
+			SetWindowLongPtr(hwnd, 0, (LONG_PTR)&WndData);
+
 			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
 
-			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, 10, 10, 32, 32, hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
-			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, 60, 10, 180, 65, hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
-			CreateWindow(L"Static", L"", WS_CHILD, 60, 80, 180, 50, hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
+			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
+			CreateWindow(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
+
+			WndData.hFont = CreateFont(DS(13), 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
+			if (WndData.hFont) {
+				SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+				SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
+			}
 
 			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
 
@@ -2334,6 +2715,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 
 		case WM_CLOSE:
+			SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwnd, 0);
+
+			if (WndData.hFont) DeleteObject(WndData.hFont);
+
 			//DestroyWindow(hwnd);
 			PostQuitMessage(0);
 			break;
@@ -2359,6 +2744,8 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	mainWindowClass.lpfnWndProc = WndProc;
 	mainWindowClass.hCursor = LoadCursor(0, IDC_ARROW);
 
+	mainWindowClass.cbWndExtra = sizeof(void*); // SFinderWndData
+
 	RegisterClass(&mainWindowClass);
 
 	// Notes:
@@ -2377,21 +2764,17 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	//               identifier; it must be unique for all
 	//               child windows with the same parent window.
 
-	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
-		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 275, 115, NULL, 0, hInstance, NULL);
+	SFinderWndData WndData;
+	WndData.Scale = GetMonitorScaling(MainWndHandle);
 
-	HFONT hFont = CreateFont(13, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
-	
-	SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)hFont, TRUE);
-	SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)hFont, TRUE);
+	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
+		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, DS(275), DS(135), NULL, 0, hInstance, &WndData);
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
-	DeleteObject(hFont);
 
 	return (int)msg.wParam;
 }

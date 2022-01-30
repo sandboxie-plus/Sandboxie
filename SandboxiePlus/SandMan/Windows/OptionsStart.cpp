@@ -41,16 +41,34 @@ void COptionsWindow::OnRestrictStart()
 
 	ui.chkStartBlockMsg->setEnabled(!ui.radStartAll->isChecked());
 	//m_StartChanged = true;
+	//OnOptChanged();
 }
 
 void COptionsWindow::OnAddStartProg()
 {
 	AddProgToGroup(ui.treeStart, "<StartRunAccess>");
 	//m_StartChanged = true;
+	//OnOptChanged();
 }
 
 void COptionsWindow::OnDelStartProg()
 {
 	DelProgFromGroup(ui.treeStart, "<StartRunAccess>");
+	DelProgFromGroup(ui.treeStart, "<StartRunAccessDisabled>");
 	//m_StartChanged = true;
+	//OnOptChanged();
+}
+
+void COptionsWindow::OnStartChanged(QTreeWidgetItem* pItem, int Index) 
+{ 
+	if (pItem->checkState(0) == Qt::Checked) {
+		if(DelProgramFromGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccessDisabled>"))
+			AddProgramToGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccess>");
+	}
+	else {
+		if(DelProgramFromGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccess>"))
+			AddProgramToGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccessDisabled>");
+	}
+	//m_StartChanged = true;  
+	//OnOptChanged(); 
 }

@@ -393,6 +393,13 @@ _FX BOOLEAN Crypt_Init(HMODULE module)
     void *CertGetCertificateChain;
 
     //
+    // in app mode we have our original token so no need to hook this
+    //
+
+    if (Dll_CompartmentMode) 
+        return TRUE;
+
+    //
     // hook cryptography services
     //
 

@@ -380,6 +380,16 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
                 if (proc->open_all_win_classes)
                     flags |= SBIE_FLAG_OPEN_ALL_WIN_CLASS;
+                extern ULONG Syscall_MaxIndex32;
+                if (Syscall_MaxIndex32 != 0)
+                    flags |= SBIE_FLAG_WIN32K_HOOKABLE;
+
+                if (proc->use_rule_specificity)
+                    flags |= SBIE_FLAG_RULE_SPECIFICITY;
+                if (proc->use_privacy_mode)
+                    flags |= SBIE_FLAG_PRIVACY_MODE;
+                if (proc->bAppCompartment)
+                    flags |= SBIE_FLAG_APP_COMPARTMENT;
             }
             else
             {
@@ -406,6 +416,8 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 				if (PrimaryTokenObject)
 				{
 					ObReferenceObject(PrimaryTokenObject);
+
+                    //ACCESS_MASK access = (PsGetCurrentProcessId() != Api_ServiceProcessId) ? TOKEN_ALL_ACCESS : (TOKEN_QUERY | TOKEN_DUPLICATE);
 
 					HANDLE MyTokenHandle;
 					status = ObOpenObjectByPointer(PrimaryTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
@@ -485,7 +497,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
             if (ProcessId != 0)
                 status = STATUS_ACCESS_DENIED;
             
-            proc->detected_image_type = (ULONG)(args->ext_data.val);
+            if(proc->detected_image_type == -1)
+                proc->detected_image_type = (ULONG)(args->ext_data.val);
+
             *data = 0;
 
         } else if (args->info_type.val == 'gpit') { // get process image type
@@ -691,6 +705,7 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
     ULONG path_len;
     KIRQL irql;
     BOOLEAN process_list_locked;
+    BOOLEAN prepend_level;
 
     //
     // caller can either be a sandboxed process asking its own path list,
@@ -722,6 +737,12 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
     // select path list based on the parameter given
     //
 
+#ifdef USE_MATCH_PATH_EX
+    if (args->path_code.val == 'fn') {
+        list   = &proc->normal_file_paths;
+        lock   =  proc->file_lock;
+    } else 
+#endif
     if (args->path_code.val == 'fo') {
         list   = &proc->open_file_paths;
         lock   =  proc->file_lock;
@@ -735,6 +756,11 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
         list   = &proc->write_file_paths;
         lock   =  proc->file_lock;
 
+#ifdef USE_MATCH_PATH_EX
+    } else  if (args->path_code.val == 'kn') {
+        list   = &proc->normal_key_paths;
+        lock   =  proc->key_lock;
+#endif
     } else if (args->path_code.val == 'ko') {
         list   = &proc->open_key_paths;
         lock   =  proc->key_lock;
@@ -748,6 +774,11 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
         list   = &proc->write_key_paths;
         lock   =  proc->key_lock;
 
+#ifdef USE_MATCH_PATH_EX
+    } else  if (args->path_code.val == 'in') {
+        list   = &proc->normal_ipc_paths;
+        lock   =  proc->ipc_lock;
+#endif
     } else if (args->path_code.val == 'io') {
         list   = &proc->open_ipc_paths;
         lock   =  proc->ipc_lock;
@@ -779,6 +810,13 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
 
     ExAcquireResourceSharedLite(lock, TRUE);
 
+    prepend_level = args->prepend_level.val;
+
+    //
+    // path format: ([level 4])[wchar 2*n][0x0000]
+    // level is optional
+    //
+
     //
     // count the length of the desired path list
     //
@@ -787,10 +825,12 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
 
     pat = List_Head(list);
     while (pat) {
+        if (prepend_level) path_len += sizeof(ULONG);
         path_len += (wcslen(Pattern_Source(pat)) + 1) * sizeof(WCHAR);
         pat = List_Next(pat);
     }
 
+    if (prepend_level) path_len += sizeof(ULONG);
     path_len += sizeof(WCHAR);
 
     //
@@ -798,6 +838,41 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
     //
 
     __try {
+        
+        if(args->path_str.val) {
+
+            //
+            // if a output buffer was specified store the paths into it
+            //
+
+            if (args->path_len.val && *args->path_len.val < path_len) {
+
+                status = STATUS_BUFFER_TOO_SMALL;
+                __leave;
+            }
+            
+            path = args->path_str.val;
+            ProbeForWrite(path, path_len, sizeof(WCHAR));
+
+            pat = List_Head(list);
+            while (pat) {
+                if (prepend_level) {
+                    *((ULONG*)path) = Pattern_Level(pat);
+                    path += sizeof(ULONG)/sizeof(WCHAR);
+                }
+                const WCHAR *pat_src = Pattern_Source(pat);
+                ULONG pat_len = wcslen(pat_src) + 1;
+                wmemcpy(path, pat_src, pat_len);
+                path += pat_len;
+                pat = List_Next(pat);
+            }
+
+            if (prepend_level){
+                *((ULONG*)path) = -1;
+                path += sizeof(ULONG)/sizeof(WCHAR);
+            }
+            *path = L'\0';
+        }
 
         if (args->path_len.val) {
 
@@ -808,26 +883,7 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
             ProbeForWrite(args->path_len.val, sizeof(ULONG), sizeof(ULONG));
             *args->path_len.val = path_len;
 
-        } else {
-
-            //
-            // otherwise store the paths into the output buffer
-            //
-
-            path = args->path_str.val;
-            ProbeForWrite(path, path_len, sizeof(WCHAR));
-
-            pat = List_Head(list);
-            while (pat) {
-                const WCHAR *pat_src = Pattern_Source(pat);
-                ULONG pat_len = wcslen(pat_src) + 1;
-                wmemcpy(path, pat_src, pat_len);
-                path += pat_len;
-                pat = List_Next(pat);
-            }
-
-            *path = L'\0';
-        }
+        } 
 
         status = STATUS_SUCCESS;
 

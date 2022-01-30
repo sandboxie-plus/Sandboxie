@@ -110,11 +110,15 @@ _FX ULONG FindProcessId(
     process = (HANDLE)(ULONG_PTR)GetCurrentProcessId();
     SbieApi_QueryProcess(process, NULL, NULL, this_sid, NULL);
 
-    pids = HeapAlloc(
-        GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * 512);
-    SbieApi_EnumProcess(NULL, pids);
+    ULONG pid_count = 0;
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+    pid_count += 128;
 
-    for (i = 1; i <= pids[0]; ++i) {
+    pids = HeapAlloc(
+        GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
+    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+
+    for (i = 0; i < pid_count; ++i) {
 
         HANDLE pids_i = (HANDLE)(ULONG_PTR)pids[i];
         SbieApi_QueryProcess(pids_i, NULL, image, that_sid, NULL);
@@ -799,71 +803,6 @@ BOOL Service_Start_ServiceMain(WCHAR *SvcName, const WCHAR *SvcDllName, const UC
     }
 
     return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
-// VectoredExceptionHandler
-//---------------------------------------------------------------------------
-
-
-_FX LONG VectoredExceptionHandler(EXCEPTION_POINTERS *ExceptionInfo)
-{
-    static ULONG LastExcCode = -1;
-    WCHAR txt[256];
-
-    //
-    // SkyNetRootKit crashes SandboxieRpcSs with an exception address
-    // beyond user space, so indicate this special condition
-    //
-
-    if (LastExcCode != ExceptionInfo->ExceptionRecord->ExceptionCode) {
-
-        ULONG_PTR ExceptionAddress =
-            (ULONG_PTR)ExceptionInfo->ExceptionRecord->ExceptionAddress;
-
-        LastExcCode = ExceptionInfo->ExceptionRecord->ExceptionCode;
-
-        if ((ExceptionAddress & 0xF0000000) >= 0x80000000) {
-
-            swprintf(txt, L"%s (%08X)", ServiceTitle, LastExcCode);
-            SbieApi_Log(2204, txt);
-
-            wsprintf(txt,
-                L"SBIE2398 Service suffers exception %08X at address %08X."
-                L"  Last checkpoint was %d\n",
-                ExceptionInfo->ExceptionRecord->ExceptionCode,
-                ExceptionInfo->ExceptionRecord->ExceptionAddress,
-                ServiceStatus_CheckPoint);
-            ErrorMessageBox(txt);
-        }
-    }
-
-    return EXCEPTION_CONTINUE_SEARCH;
-}
-
-
-//---------------------------------------------------------------------------
-// Setup
-//---------------------------------------------------------------------------
-
-
-_FX void SetupExceptionHandler(void)
-{
-#ifndef _WIN64
-
-    typedef void *(*P_AddVectoredExceptionHandler)(
-        ULONG FirstHandler,
-        PVECTORED_EXCEPTION_HANDLER VectoredHandler);
-
-    HMODULE kernel32 = GetModuleHandle(L"kernel32.dll");
-    void *ptr = GetProcAddress(kernel32, "AddVectoredExceptionHandler");
-    if (!ptr)
-        return;
-
-    ((P_AddVectoredExceptionHandler)ptr)(1, VectoredExceptionHandler);
-
-#endif _WIN64
 }
 
 

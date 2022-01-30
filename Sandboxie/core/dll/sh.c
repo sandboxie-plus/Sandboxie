@@ -1572,7 +1572,10 @@ _FX ULONG SH_WindowMonitorCount(void)
     args[0] = (ULONG_PTR)info;
     args[1] = 0;
 
-    Gui_EnumWindows(SH_WindowMonitorEnum, (LPARAM)args);
+    if(!Gui_UseProxyService && __sys_EnumWindows)
+		__sys_EnumWindows(SH_WindowMonitorEnum, (LPARAM)args);
+    else
+        Gui_EnumWindows(SH_WindowMonitorEnum, (LPARAM)args);
 
     Dll_Free(info);
 

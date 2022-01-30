@@ -545,6 +545,7 @@ struct tagGUI_CLIP_CURSOR_REQ
     ULONG msgid;
     BOOLEAN have_rect;
     RECT rect;
+    LONG64 dpi_awareness_ctx;
 };
 
 typedef struct tagGUI_CLIP_CURSOR_REQ GUI_CLIP_CURSOR_REQ;
@@ -646,6 +647,7 @@ struct tagGUI_SET_CURSOR_POS_REQ
     ULONG error;
     LONG x;
     LONG y;
+    LONG64 dpi_awareness_ctx;
 };
 
 struct tagGUI_SET_CURSOR_POS_RPL

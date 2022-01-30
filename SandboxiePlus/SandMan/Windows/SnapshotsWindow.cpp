@@ -49,11 +49,18 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	connect(ui.treeSnapshots->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(UpdateSnapshot(const QModelIndex&)));
 	connect(ui.treeSnapshots, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnSelectSnapshot()));
 
+	
+	QMenu* pSelMenu = new QMenu(ui.btnSelect);
+	pSelMenu->addAction(tr("Revert to empty box"), this, SLOT(OnSelectEmpty()));
+	ui.btnSelect->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnSelect->setMenu(pSelMenu);
+
 	connect(ui.btnTake, SIGNAL(clicked(bool)), this, SLOT(OnTakeSnapshot()));
 	connect(ui.btnSelect, SIGNAL(clicked(bool)), this, SLOT(OnSelectSnapshot()));
 	connect(ui.btnRemove, SIGNAL(clicked(bool)), this, SLOT(OnRemoveSnapshot()));
 	
 	connect(ui.txtName, SIGNAL(textEdited(const QString&)), this, SLOT(SaveInfo()));
+	connect(ui.chkDefault, SIGNAL(clicked(bool)), this, SLOT(OnChangeDefault()));
 	connect(ui.txtInfo, SIGNAL(textChanged()), this, SLOT(SaveInfo()));
 
 	ui.groupBox->setEnabled(false);
@@ -84,13 +91,16 @@ void CSnapshotsWindow::closeEvent(QCloseEvent *e)
 void CSnapshotsWindow::UpdateSnapshots(bool AndSelect)
 {
 	m_SnapshotMap.clear();
-	QList<SBoxSnapshot> SnapshotList = m_pBox->GetSnapshots(&m_CurSnapshot);
+	QList<SBoxSnapshot> SnapshotList = m_pBox->GetSnapshots(&m_CurSnapshot, &m_DefaultSnapshot);
 	foreach(const SBoxSnapshot& Snapshot, SnapshotList)
 	{
 		QVariantMap BoxSnapshot;
 		BoxSnapshot["ID"] = Snapshot.ID;
 		BoxSnapshot["ParentID"] = Snapshot.Parent;
-		BoxSnapshot["Name"] = Snapshot.NameStr;
+		if(m_DefaultSnapshot == Snapshot.ID)
+			BoxSnapshot["Name"] = Snapshot.NameStr + tr(" (default)");
+		else
+			BoxSnapshot["Name"] = Snapshot.NameStr;
 		BoxSnapshot["Info"] = Snapshot.InfoStr;
 		BoxSnapshot["Date"] = Snapshot.SnapDate;
 		if(m_CurSnapshot == Snapshot.ID)
@@ -131,6 +141,7 @@ void CSnapshotsWindow::UpdateSnapshot(const QModelIndex& Index)
 
 	m_SaveInfoPending = -1;
 	ui.txtName->setText(BoxSnapshot["Name"].toString());
+	ui.chkDefault->setChecked(ID == m_DefaultSnapshot);
 	ui.txtInfo->setPlainText(BoxSnapshot["Info"].toString());
 	m_SaveInfoPending = 0;
 
@@ -173,10 +184,37 @@ void CSnapshotsWindow::OnSelectSnapshot()
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
+	SelectSnapshot(ID.toString());
+}
+
+void CSnapshotsWindow::OnSelectEmpty()
+{
+	SelectSnapshot(QString());
+}
+
+void CSnapshotsWindow::SelectSnapshot(const QString& ID)
+{
 	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to switch the active snapshot? Doing so will delete the current state!"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 		return;
 
-	HandleResult(m_pBox->SelectSnapshot(ID.toString()));
+	HandleResult(m_pBox->SelectSnapshot(ID));
+}
+
+void CSnapshotsWindow::OnChangeDefault()
+{
+	QModelIndex Index = ui.treeSnapshots->currentIndex();
+	//QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
+	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
+	QVariant ID = m_pSnapshotModel->GetItemID(Index);
+
+	if (ui.chkDefault->isChecked())
+		m_DefaultSnapshot = ID.toString();
+	else
+		m_DefaultSnapshot.clear();
+
+	m_pBox->SetDefaultSnapshot(m_DefaultSnapshot);
+
+	UpdateSnapshots();
 }
 
 void CSnapshotsWindow::OnRemoveSnapshot()

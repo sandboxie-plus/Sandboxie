@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2004-2020 Sandboxie Holdings, LLC
  * Copyright 2020-2021 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -548,14 +548,16 @@ void CAppPage::Template_Filter()
                || (name.Find(L"SeaMonkey_") != -1)
                || (name.Find(L"LibreWolf_") != -1);
         BOOL ch = (name.Find(L"Chrome_") != -1);
-        BOOL other = (name.Find(L"Dragon_") != -1)
-                  || (name.Find(L"Iron_") != -1)
-                  || (name.Find(L"Ungoogled_") != -1)
-                  || (name.Find(L"Vivaldi_") != -1)
+        BOOL other = (name.Find(L"Vivaldi_") != -1)
                   || (name.Find(L"Brave_") != -1)
-                  || (name.Find(L"Maxthon_6_") != -1)
                   || (name.Find(L"Opera_") != -1)
-                  || (name.Find(L"Yandex_") != -1);
+                  || (name.Find(L"Yandex_") != -1)
+                  || (name.Find(L"Ungoogled_") != -1)
+                  || (name.Find(L"Iron_") != -1)
+                  || (name.Find(L"Maxthon_6_") != -1)
+                  || (name.Find(L"Dragon_") != -1)
+                  || (name.Find(L"Osiris_") != -1)
+                  || (name.Find(L"Slimjet_") != -1);
 
         BOOL keep = FALSE;
 
@@ -1042,14 +1044,14 @@ void CAppPage::AddPages(CPropertySheet &sheet, const CString &BoxName)
     info.WithLink = TRUE;
     info.WithCreate = FALSE;
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
-    
+
     info.ClassName = L"MediaPlayer";
     info.TitleId = MSG_4393;
     info.LabelId = MSG_4394;
     info.WithLink = FALSE;
     info.WithCreate = FALSE;
     m_app_pages.AddTail(new CAppPage(&info, BoxName));
-    
+
     info.ClassName = L"TorrentClient";
     info.TitleId = MSG_4396;
     info.LabelId = MSG_4397;
@@ -1206,7 +1208,7 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     //
     // replace with:    Template=Opera_Bookmarks_DirectAccess
     //
-    
+
     const CString &OperaBookmarksTmpl(L"Opera_Bookmarks_DirectAccess");
     const CString &OperaBookmarks1(L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks");
     const CString &OperaBookmarks2(L"%AppData%\\Opera Software\\Opera Stable\\Bookmarks.bak");
@@ -1222,7 +1224,7 @@ void CAppPage::UpdateWebTemplates(CBox &box)
     // find and remove invalid OpenFilePath reference:
     //      OpenFilePath=bookmarks.exe,bookmarks*
     //
-    
+
     const CString &InvalidEntry1(L"bookmarks*");
 
     UpdateTemplates2(

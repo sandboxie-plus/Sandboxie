@@ -1,15 +1,12 @@
 # Sandboxie
-
-[![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg)](https://github.com/sandboxie-plus/Sandboxie/releases)
+[![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions)
 
 <img align="left" src="https://user-images.githubusercontent.com/12372772/123517080-8ab20a00-d69f-11eb-8e82-2e18cf6e0303.png">
-Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.
+Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br><br>
 
-## System requirements
-Windows 7 or higher, 32-bit or 64-bit.
-
-## Detailed changelog
-https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md
+|  System requirements  |      Release notes     |
+|         :---:         |          :---:         |
+| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md)
 
 ## Download
 [![GitHub All Releases](https://img.shields.io/github/downloads/sandboxie-plus/Sandboxie/total?style=for-the-badge)](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
@@ -30,12 +27,12 @@ Plus build has a modern Qt based UI, which supports all new features that have b
 
 Classic build has the old no longer developed MFC based UI, hence it lacks native interface support for Plus features. However, most of them can be configured manually in the Sandboxie.ini configuration file, and some valuable [contributions](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22) can still be applied nowadays.
 
-If you need to check all new features at once, a good way to highlight them quickly is to search the equal sign in the [detailed changelog](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md).
+If you need to check all new features at once, a good way to highlight them quickly is to find the equal sign in the [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md) file.
 
 ## Documentation
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
 
-[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22)
+[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [regressions](https://github.com/sandboxie-plus/Sandboxie/issues?q=is%3Aissue+is%3Aopen+label%3Aregression) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22) | [more...](https://github.com/sandboxie-plus/Sandboxie/labels?sort=count-desc)
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
 
@@ -51,35 +48,34 @@ Open Source release
 2020 onwards David Xanatos
 
 ## Helpful Contributors
-- DavidBerdik - Author of Sandboxie Website Archive
+- DavidBerdik - Maintainer of [Sandboxie Website Archive](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io)
 - diversenok - Security analysis & PoC's
 - stephtr - CI / Certification
 - TechLord - Team-IRA / Reversing
-- hg421 - Security analysis 
+- hg421 - Security analysis / Code reviews
 - typpos - UI suggestions / Documentation / Code reviews
-- isaak654 - UI fixes / Templates / Documentation
+- isaak654 - Templates / Documentation / Code fixes
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - daveout - UI / Icons
-- mpheath - Author of Plus installer based on Inno Setup
-- yfdyh000 - Localization support of Plus installer
+- mpheath - Author of Plus installer / Code fixes
+- yfdyh000 - Localization support for Plus installer
 - NewKidOnTheBlock - Changelog fixes
 
 ## Translators
-- yuhao2348732 - Chinese Simplified
-- nkh0472 - Chinese Simplified
-- yfdyh000 - Chinese Simplified
-- TragicLifeHu - Chinese Traditional
-- Hulen - Chinese Traditional
+- yuhao2348732, nkh0472, yfdyh000, gexgd0419 - Chinese Simplified
+- TragicLifeHu, Hulen - Chinese Traditional
 - RockyTDR - Dutch
+- clexanis - French
 - bastik-1001 - German
 - isaak654 - Italian
-- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?p=54) - Polish
-- JNylson - Portuguese
+- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=10) - Polish
+- JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- xorcan - Turkish (currently unmaintained)
+- xorcan - Turkish (disabled for inactivity, a new translator is needed)
+- SuperMaxusa - Ukrainian
 
 More volunteers are welcome here! ;)
 

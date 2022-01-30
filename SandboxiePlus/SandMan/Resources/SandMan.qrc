@@ -60,6 +60,12 @@
         <file>IconOffC.png</file>
         <file>IconFullC.png</file>
         <file>IconEmptyC.png</file>
+        <file>Actions/Duplicate.png</file>
+        <file>Actions/Up.png</file>
+        <file>Actions/Down.png</file>
+        <file>Actions/All.png</file>
+        <file>Actions/Save.png</file>
+        <file>Actions/Uninstall.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

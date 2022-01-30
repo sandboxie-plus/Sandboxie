@@ -414,8 +414,11 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
 								Log_Msg_Process(MSG_1319, wcPid, (PWCHAR)pStr, proc->box->session_id, proc->pid);
                                 Mem_Free(pStr, len);
                             }
-                            FltReleaseFileNameInformation(pTargetFileNameInfo);
                         }   // if (FltGetFileNameInformation)
+
+                        if (pTargetFileNameInfo != NULL) {
+                            FltReleaseFileNameInformation(pTargetFileNameInfo);
+                        }
                     }   // if (proc)
                 }   // if (ulOwnerPid)
             }   // is this the print spooler process?

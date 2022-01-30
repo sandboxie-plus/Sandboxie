@@ -206,8 +206,8 @@ _FX void Thread_Unload(void)
 _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
 {
     void *TokenObject = NULL;
-    PROCESS *proc;
-    THREAD *thrd;
+    PROCESS *proc = NULL;
+    THREAD *thrd = NULL;
     KIRQL irql;
 
 #ifdef XP_SUPPORT
@@ -239,7 +239,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
         if (Create)
             thrd = map_get(&proc->thread_map, ThreadId);
         else // remove
-            thrd = map_remove(&proc->thread_map, ThreadId);
+            map_take(&proc->thread_map, ThreadId, &thrd, 0);
 #else
         thrd = List_Head(&proc->threads);
         while (thrd) {
@@ -376,7 +376,11 @@ _FX PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc2 = Process_Find(PsGetProcessId(ProcessObject2), out_irql);
     if (proc2) {
 
-        if (! Process_IsSameBox(proc1, proc2, 0))
+        if (! Process_IsSameBox(proc1, proc2, 0) 
+#ifdef DRV_BREAKOUT
+            && ! Process_IsStarter(proc1, proc2)
+#endif
+        )
             proc2 = NULL;
 
         else if (! proc2->threads_lock) {

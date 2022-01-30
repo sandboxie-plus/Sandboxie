@@ -120,6 +120,25 @@ typedef struct _TERMINAL_GET_PROPERTY_RPL {
 
 
 //---------------------------------------------------------------------------
+// Get User Token
+//---------------------------------------------------------------------------
+
+
+struct tagGET_USER_TOKEN_REQ
+{
+    MSG_HEADER h;
+};
+
+struct tagGET_USER_TOKEN_RPL
+{
+    MSG_HEADER h;                       // status is win32 error
+    void *hToken;
+};
+
+typedef struct tagGET_USER_TOKEN_REQ GET_USER_TOKEN_REQ;
+typedef struct tagGET_USER_TOKEN_RPL GET_USER_TOKEN_RPL;
+
+//---------------------------------------------------------------------------
 
 
 #endif /* _MY_TERMINALWIRE_H */

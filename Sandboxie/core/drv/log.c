@@ -152,8 +152,11 @@ _FX void Log_Popup_MsgEx(
         session_id = 1;
 
     //Log_Popup_Msg_2(
-	Api_AddMessage(
-        error_code, string1, string1_len, string2, string2_len, session_id, (ULONG)pid);
+    //  error_code, string1, string1_len, string2, string2_len, session_id, (ULONG)pid);
+
+    const WCHAR* strings[3] = { string1, string2, NULL };
+    ULONG lengths[3] = { string1_len, string2_len, 0 };
+	Api_AddMessage(error_code, strings, lengths, session_id, (ULONG)pid);
 
     //
     // log message to SbieSvc and trigger SbieSvc to wake up and collect it
@@ -234,6 +237,7 @@ _FX void Log_Msg(
     const WCHAR *string1,
     const WCHAR *string2)
 {
+    //DbgPrint("Sbie MSG_%d: %S; %S\r\n", (error_code & 0xFFFF), string1, string2);
     Log_Msg_Session(error_code, string1, string2, -1);
 }
 

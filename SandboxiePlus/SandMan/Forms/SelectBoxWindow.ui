@@ -48,7 +48,7 @@
       <widget class="QTreeWidget" name="treeBoxes">
        <column>
         <property name="text">
-         <string notr="true">Sandbox</string>
+         <string>Sandbox</string>
         </property>
        </column>
       </widget>

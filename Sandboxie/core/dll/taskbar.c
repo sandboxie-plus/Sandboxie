@@ -499,7 +499,8 @@ _FX WCHAR *Taskbar_CreateAppUserModelId(const WCHAR *AppId)
 // Taskbar_SetProcessAppUserModelId
 //---------------------------------------------------------------------------
 
-//extern ULONG Dll_Windows;
+
+extern ULONG Dll_Windows;
 _FX void Taskbar_SetProcessAppUserModelId(void)
 {
     static BOOLEAN _done = FALSE;
@@ -589,6 +590,12 @@ _FX void Taskbar_SetWindowAppUserModelId(HWND hwnd)
     //
     // set explicit AppUserModelID for the window
     //
+
+    // Note: without the right value we may end up with multiple window groups 
+    //          so don't do anythign if we dont have Taskbar_SavedAppUserModelId
+    //          see also disabled Taskbar_SetProcessAppUserModelId
+    //if (!Taskbar_SavedAppUserModelId)
+    //    return;
 
     AppId = Taskbar_SavedAppUserModelId;
     if (! AppId)
@@ -740,7 +747,7 @@ _FX WCHAR *Taskbar_GetStartExeCommand(const WCHAR *args)
 
 #else ! CUSTOM_APPUSERMODELID
 
-    SbieApi_GetHomePath(NULL, 0, &command[1], MAX_PATH);
+    wcscpy(&command[1], Dll_HomeDosPath);
     wcscat(command, L"\\" START_EXE L"\" /box:");
     wcscat(command, Dll_BoxName);
     wcscat(command, L" ");

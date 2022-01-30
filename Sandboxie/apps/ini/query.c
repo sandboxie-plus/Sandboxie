@@ -48,7 +48,7 @@ void DoListSections(void)
 
         WCHAR section_name[34];
         index = SbieApi_EnumBoxesEx(
-                    index | CONF_GET_NO_TEMPLS, section_name, TRUE);
+                    index, section_name, TRUE);
         if (index == -1)
             break;
 

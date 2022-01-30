@@ -45,6 +45,7 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 	m_ParendPID = 0;
 	m_SessionId = 0;
 
+	m_ProcessFlags = 0;
 	m_ImageType = -1;
 
 	m_uTerminated = 0;
@@ -172,9 +173,18 @@ bool CBoxedProcess::InitProcessInfo()
 		m_ParendPID = (quint32)BasicInformation.InheritedFromUniqueProcessId;
 	}
 
+	int iMaxRetry = 10;
+retry:
 	TCHAR filename[MAX_PATH];
 	if (DWORD size = GetModuleFileNameEx(ProcessHandle, NULL, filename, MAX_PATH))
 		m_ImagePath = QString::fromWCharArray(filename);
+	else if (iMaxRetry-- > 0) {
+		// on win 7 this sometimes fails with invalid handle despite the handle being valid, 
+		// just wait a second and retry, this happend when comming from OnProcessBoxed
+		QThread::msleep(50);
+		goto retry;
+	}
+
 
 	BOOL isTargetWow64Process = FALSE;
 	IsWow64Process(ProcessHandle, &isTargetWow64Process);
@@ -208,8 +218,10 @@ bool CBoxedProcess::InitProcessInfo()
 
 bool CBoxedProcess::InitProcessInfoEx()
 {
-	if(m_ImageType == -1 && m_pBox)
-		m_ImageType = m_pBox->Api()->GetImageType(m_ProcessId);
+	if (m_ProcessFlags == 0 && m_pBox) {
+		m_ProcessFlags = m_pBox->Api()->QueryProcessInfo(m_ProcessId);
+		m_ImageType = m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'gpit');
+	}
 
 	return true;
 }

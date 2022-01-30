@@ -86,7 +86,9 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bDropRights = false;
 	
 
-	m_bSecurityRestricted = false;
+	m_bSecurityEnhanced = false;
+	m_bPrivacyEnhanced = false;
+	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
 
 	m_SuspendRecovery = false;
@@ -115,11 +117,19 @@ void CSandBoxPlus::UpdateDetails()
 	m_bINetBlocked = false;
 	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
 	{
-		if (Entry.contains("InternetAccessDevices")) {
+		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
 			m_bINetBlocked = true;
 			break;
 		}
 	}
+	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false))
+	{
+		if (Entry == "!<InternetAccess>,n") {
+			m_bINetBlocked = true;
+			break;
+		}
+	}
+
 
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
@@ -134,7 +144,9 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bApplicationCompartment = GetBool("NoSecurityIsolation", false);
+	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 
 	CSandBox::UpdateDetails();
 }
@@ -144,6 +156,25 @@ void CSandBoxPlus::CloseBox()
 	CSandBox::CloseBox();
 
 	m_SuspendRecovery = false;
+}
+
+bool CSandBoxPlus::CheckUnsecureConfig() const
+{
+	//if (GetBool("UnsafeTemplate", false)) return true;
+	if (GetBool("OriginalToken", false)) return true;
+	if (GetBool("OpenToken", false)) return true;
+		if(GetBool("UnrestrictedToken", false)) return true;
+			if (GetBool("KeepTokenIntegrity", false)) return true;
+			if (GetBool("UnstrippedToken", false)) return true;
+				if (GetBool("KeepUserGroup", false)) return true;
+			if (!GetBool("AnonymousLogon", true)) return true;
+		if(GetBool("UnfilteredToken", false)) return true;
+	if (GetBool("DisableFileFilter", false)) return true;
+	if (GetBool("DisableKeyFilter", false)) return true;
+	if (GetBool("DisableObjectFilter", false)) return true;
+
+	if (GetBool("StripSystemPrivileges", false)) return true;
+	return false;
 }
 
 QString CSandBoxPlus::GetStatusStr() const
@@ -156,12 +187,17 @@ QString CSandBoxPlus::GetStatusStr() const
 	if (IsEmpty())
 		Status.append(tr("Empty"));
 
-	if (m_iUnsecureDebugging == 1)
-		Status.append(tr("NOT SECURE (Debug Config)"));
+	if (m_bApplicationCompartment)
+		Status.append(tr("Application Compartment"));
+	else if (m_iUnsecureDebugging == 1)
+		Status.append(tr("NOT SECURE"));
 	else if (m_iUnsecureDebugging == 2)
 		Status.append(tr("Reduced Isolation"));
-	else if(m_bSecurityRestricted)
+	else if(m_bSecurityEnhanced)
 		Status.append(tr("Enhanced Isolation"));
+	
+	if(m_bPrivacyEnhanced)
+		Status.append(tr("Privacy Enhanced"));
 
 	if (m_bLogApiFound)
 		Status.append(tr("API Log"));
@@ -169,7 +205,7 @@ QString CSandBoxPlus::GetStatusStr() const
 		Status.append(tr("No INet"));
 	if (m_bSharesAllowed)
 		Status.append(tr("Net Share"));
-	if (m_bDropRights)
+	if (m_bDropRights && !m_bSecurityEnhanced)
 		Status.append(tr("No Admin"));
 
 	if (Status.isEmpty())
@@ -177,18 +213,24 @@ QString CSandBoxPlus::GetStatusStr() const
 	return Status.join(", ");
 }
 
-bool CSandBoxPlus::CheckUnsecureConfig() const
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
 {
-	if (GetBool("OriginalToken", false)) return true;
-	if (GetBool("OpenToken", false)) return true;
-		if(GetBool("UnrestrictedToken", false)) return true;
-			if (!GetBool("AnonymousLogon", true)) return true;
-			if (GetBool("KeepTokenIntegrity", false)) return true;
-		if(GetBool("UnfilteredToken", false)) return true;
-	if (GetBool("DisableFileFilter", false)) return true;
-	if (GetBool("DisableKeyFilter", false)) return true;
-	if (GetBool("StripSystemPrivileges", false)) return true;
-	return false;
+	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
+		return eAppBoxPlus;
+	if (m_bApplicationCompartment)
+		return eAppBox;
+
+	if (m_iUnsecureDebugging != 0)
+		return eInsecure;
+
+	if (m_bSecurityEnhanced && m_bPrivacyEnhanced)
+		return eHardenedPlus;
+	if (m_bSecurityEnhanced)
+		return eHardened;
+
+	if (m_bPrivacyEnhanced)
+		return eDefaultPlus;
+	return eDefault;
 }
 
 void CSandBoxPlus::SetLogApi(bool bEnable)
@@ -381,17 +423,6 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
-CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
-{
-	//if (m_bLogApiFound)
-	//	return eHasLogApi;
-	if (m_iUnsecureDebugging != 0)
-		return eInsecure;
-	if (m_bSecurityRestricted)
-		return eHardened;
-	return eDefault;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // CSbieProcess
 //
@@ -429,7 +460,8 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		FLASH_PLAYER_SANDBOX,
 		PLUGIN_CONTAINER,
 		OTHER_WEB_BROWSER,
-		OTHER_MAIL_CLIENT
+		OTHER_MAIL_CLIENT,
+		DLL_IMAGE_MOZILLA_THUNDERBIRD
 	};
 
 	switch (type)
@@ -465,6 +497,7 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 		case PLUGIN_CONTAINER: return tr("Firefox Plugin Container");
 		case OTHER_WEB_BROWSER: return tr("Generic Web Browser");
 		case OTHER_MAIL_CLIENT: return tr("Generic Mail Client");
+		case DLL_IMAGE_MOZILLA_THUNDERBIRD: return tr("Thunderbird");
 		default: return tr("");
 	}
 }
@@ -476,8 +509,11 @@ QString CSbieProcess::GetStatusStr() const
 		Status = tr("Terminated");
 	//else if (m_bSuspended)
 	//	Status = tr("Suspended");
-	else
+	else {
 		Status = tr("Running");
+		if ((m_ProcessFlags & 0x00000002) != 0) // SBIE_FLAG_FORCED_PROCESS
+			Status.prepend(tr("Forced "));
+	}
 
 	if(m_SessionId != theAPI->GetSessionID())
 		Status += tr(" in session %1").arg(m_SessionId);

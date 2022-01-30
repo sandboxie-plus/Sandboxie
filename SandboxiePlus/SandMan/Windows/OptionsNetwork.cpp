@@ -20,11 +20,13 @@ void COptionsWindow::CreateNetwork()
 
 	connect(ui.treeINet, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnINetItemDoubleClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeINet, SIGNAL(itemSelectionChanged()), this, SLOT(OnINetSelectionChanged()));
+	connect(ui.treeINet, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnINetChanged(QTreeWidgetItem *, int)));
 
 	connect(ui.btnAddFwRule, SIGNAL(clicked(bool)), this, SLOT(OnAddNetFwRule()));
 	connect(ui.btnDelFwRule, SIGNAL(clicked(bool)), this, SLOT(OnDelNetFwRule()));
 	connect(ui.treeNetFw, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnNetFwItemDoubleClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeNetFw, SIGNAL(itemSelectionChanged()), this, SLOT(OnNetFwSelectionChanged()));
+	connect(ui.treeNetFw, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnNetFwChanged(QTreeWidgetItem *, int)));
 
 	connect(ui.chkShowNetFwTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowNetFwTmpl()));
 
@@ -74,6 +76,9 @@ int COptionsWindow::GroupToINetMode(const QString& Mode)
 	if (Mode.compare("<InternetAccess>", Qt::CaseInsensitive) == 0)		return 0;
 	if (Mode.compare("<BlockNetAccess>", Qt::CaseInsensitive) == 0)		return 1;
 	if (Mode.compare("<BlockNetDevices>", Qt::CaseInsensitive) == 0)	return 2;
+	if (Mode.compare("<InternetAccessDisabled>", Qt::CaseInsensitive) == 0)		return 0 | 0x10;
+	if (Mode.compare("<BlockNetAccessDisabled>", Qt::CaseInsensitive) == 0)		return 1 | 0x10;
+	if (Mode.compare("<BlockNetDevicesDisabled>", Qt::CaseInsensitive) == 0)	return 2 | 0x10;
 	return -1;
 }
 
@@ -81,9 +86,12 @@ QString COptionsWindow::INetModeToGroup(int Mode)
 {
 	switch (Mode)
 	{
-	case 0:		return "<InternetAccess>";
-	case 1:		return "<BlockNetAccess>";
-	case 2:		return "<BlockNetDevices>";
+	case 0:				return "<InternetAccess>";
+	case 1:				return "<BlockNetAccess>";
+	case 2:				return "<BlockNetDevices>";
+	case 0 | 0x10:		return "<InternetAccessDisabled>";
+	case 1 | 0x10:		return "<BlockNetAccessDisabled>";
+	case 2 | 0x10:		return "<BlockNetDevicesDisabled>";
 	}
 	return "";
 }
@@ -120,6 +128,7 @@ void COptionsWindow::LoadBlockINet()
 			QString Value = pGroupItem->child(j)->data(0, Qt::UserRole).toString();
 
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
+			pItem->setCheckState(0, (Mode & 0x10) != 0 ? Qt::Unchecked : Qt::Checked);
 			
 			SetProgramItem(Value, pItem, 0);
 	
@@ -183,6 +192,31 @@ void COptionsWindow::OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	ui.treeINet->setItemWidget(pItem, 1, pMode);
 }
 
+void COptionsWindow::OnINetChanged(QTreeWidgetItem* pItem, int Column)
+{
+	if (Column != 0)
+		return;
+
+	if (pItem->checkState(0) == Qt::Checked) {
+		QString Program = pItem->data(0, Qt::UserRole).toString();
+		int Mode = pItem->data(1, Qt::UserRole).toInt();
+		Mode |= 0x10;
+		if (DelProgramFromGroup(Program, INetModeToGroup(Mode))) {
+			Mode &= ~0x10;
+			AddProgramToGroup(Program, INetModeToGroup(Mode));
+		}
+	}
+	else {
+		QString Program = pItem->data(0, Qt::UserRole).toString();
+		int Mode = pItem->data(1, Qt::UserRole).toInt();
+		Mode &= ~0x10;
+		if (DelProgramFromGroup(Program, INetModeToGroup(Mode))) {
+			Mode |= 0x10;
+			AddProgramToGroup(Program, INetModeToGroup(Mode));
+		}
+	}
+}
+
 void COptionsWindow::CloseINetEdit(bool bSave)
 {
 	for (int i = 0; i < ui.treeINet->topLevelItemCount(); i++)
@@ -208,11 +242,15 @@ void COptionsWindow::CloseINetEdit(QTreeWidgetItem* pItem, bool bSave)
 	{
 		QString OldProgram = pItem->data(0, Qt::UserRole).toString();
 		int OldMode = pItem->data(1, Qt::UserRole).toInt();
+		if (pItem->checkState(0) == Qt::Unchecked)
+			OldMode |= 0x10;
 		DelProgramFromGroup(OldProgram, INetModeToGroup(OldMode));
 
 
 		QString NewProgram = pCombo->currentText();
 		int NewMode = pMode->currentData().toInt();
+		if (pItem->checkState(0) == Qt::Unchecked)
+			NewMode |= 0x10;
 		AddProgramToGroup(NewProgram, INetModeToGroup(NewMode));
 
 
@@ -240,6 +278,7 @@ void COptionsWindow::OnBlockINet()
 		DelAccessEntry(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices");
 
 	m_INetBlockChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnAddINetProg()
@@ -257,11 +296,13 @@ void COptionsWindow::OnAddINetProg()
 	pItem->setText(1, GetINetModeStr(Mode));
 	pItem->setData(1, Qt::UserRole, Mode);
 
+	pItem->setCheckState(0, Qt::Checked);
 	ui.treeINet->addTopLevelItem(pItem);
 
 	AddProgramToGroup(Value, INetModeToGroup(Mode));
 
 	//m_INetBlockChanged = true;
+	//OnOptChanged();
 }
 
 void COptionsWindow::OnDelINetProg()
@@ -272,11 +313,14 @@ void COptionsWindow::OnDelINetProg()
 
 	QString OldProgram = pItem->data(0, Qt::UserRole).toString();
 	int OldMode = pItem->data(1, Qt::UserRole).toInt();
+	if (pItem->checkState(0) == Qt::Unchecked)
+		OldMode |= 0x10;
 	DelProgramFromGroup(OldProgram, INetModeToGroup(OldMode));
 
 	delete pItem;
 
 	//m_INetBlockChanged = true;
+	//OnOptChanged();
 }
 
 bool COptionsWindow::FindEntryInSettingList(const QString& Name, const QString& Value)
@@ -303,6 +347,9 @@ void COptionsWindow::LoadNetFwRules()
 	foreach(const QString & Value, m_pBox->GetTextList("NetworkAccess", m_Template))
 		ParseAndAddFwRule(Value);
 
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkAccessDisabled", m_Template))
+		ParseAndAddFwRule(Value, true);
+
 	LoadNetFwRulesTmpl();
 
 	m_NetFwRulesChanged = false;
@@ -315,7 +362,7 @@ void COptionsWindow::LoadNetFwRulesTmpl(bool bUpdate)
 		foreach(const QString& Template, m_pBox->GetTemplates())
 		{
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("NetworkAccess", Template))
-				ParseAndAddFwRule(Value, Template);
+				ParseAndAddFwRule(Value, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -367,7 +414,7 @@ COptionsWindow::ENetWfProt COptionsWindow::GetFwRuleProt(const QString& Value)
 	return eAny;
 }
 
-void COptionsWindow::ParseAndAddFwRule(const QString& Value, const QString& Template)
+void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	
@@ -407,12 +454,15 @@ void COptionsWindow::ParseAndAddFwRule(const QString& Value, const QString& Temp
 	pItem->setText(4, Prot);
 	pItem->setData(4, Qt::UserRole, (int)GetFwRuleProt(Prot));
 
+	if(Template.isEmpty())
+		pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	ui.treeNetFw->addTopLevelItem(pItem);
 }
 
 void COptionsWindow::SaveNetFwRules()
 {
 	QList<QString> Rules;
+	QList<QString> RulesDisabled;
 	for (int i = 0; i < ui.treeNetFw->topLevelItemCount(); i++)
 	{
 		QTreeWidgetItem* pItem = ui.treeNetFw->topLevelItem(i);
@@ -436,9 +486,13 @@ void COptionsWindow::SaveNetFwRules()
 		if (!IP.isEmpty()) Tags.append("Address=" + IP);
 		if (!Prot.isEmpty()) Tags.append("Protocol=" + Prot);
 
-		Rules.append(Tags.join(";"));
+		if(pItem->checkState(0) == Qt::Checked)
+			Rules.append(Tags.join(";"));
+		else
+			RulesDisabled.append(Tags.join(";"));
 	}
 	WriteTextList("NetworkAccess", Rules);
+	WriteTextList("NetworkAccessDisabled", RulesDisabled);
 
 	m_NetFwRulesChanged = false;
 }
@@ -510,6 +564,15 @@ void COptionsWindow::OnNetFwItemDoubleClicked(QTreeWidgetItem* pItem, int Column
 	ui.treeNetFw->setItemWidget(pItem, 4, pProt);
 }
 
+void COptionsWindow::OnNetFwChanged(QTreeWidgetItem* pItem, int Column)
+{
+	if (Column != 0)
+		return;
+
+	m_NetFwRulesChanged = true;
+	OnOptChanged();
+}
+
 void COptionsWindow::CloseNetFwEdit(bool bSave)
 {
 	for (int i = 0; i < ui.treeNetFw->topLevelItemCount(); i++)
@@ -560,6 +623,7 @@ void COptionsWindow::CloseNetFwEdit(QTreeWidgetItem* pItem, bool bSave)
 		pItem->setData(4, Qt::UserRole, pProt->currentData());
 
 		m_NetFwRulesChanged = true;
+		OnOptChanged();
 	}
 
 	for (int i = 0; i < 5; i++)
@@ -576,9 +640,11 @@ void COptionsWindow::OnAddNetFwRule()
 	pItem->setText(1, GetFwRuleActionStr(eBlock));
 	pItem->setData(1, Qt::UserRole, (int)eBlock);
 
+	pItem->setCheckState(0, Qt::Checked);
 	ui.treeNetFw->addTopLevelItem(pItem);
 
 	m_NetFwRulesChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelNetFwRule()
@@ -589,8 +655,8 @@ void COptionsWindow::OnDelNetFwRule()
 
 	delete pItem;
 
-
 	m_NetFwRulesChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow__SetRowColor(QTreeWidgetItem* pItem, bool bMatch, bool bConflict = false, bool bBlock = false, bool bActive = false)

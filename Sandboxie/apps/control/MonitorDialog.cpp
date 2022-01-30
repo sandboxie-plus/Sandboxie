@@ -100,12 +100,15 @@ void CMonitorDialog::OnIdle()
     static const WCHAR *_SysCall    = L"SysCall  ";
     static const WCHAR *_Pipe       = L"Pipe     ";
     static const WCHAR *_Ipc        = L"Ipc      ";
+    static const WCHAR *_Rpc        = L"Rpc      ";
     static const WCHAR *_WinClass   = L"WinCls   ";
     static const WCHAR *_Drive      = L"(Drive)  ";
     static const WCHAR *_Clsid      = L"Clsid    ";
     static const WCHAR *_Image      = L"Image    ";
     static const WCHAR *_File       = L"File     ";
     static const WCHAR *_Key        = L"Key      ";
+    static const WCHAR *_NetFw      = L"Socket   ";
+    static const WCHAR *_SCM        = L"SCM      "; // Service Control Manager
 	static const WCHAR *_Other      = L"Other    ";
     static const WCHAR *_Separator  = L"   -------------------------------";
 
@@ -156,6 +159,8 @@ void CMonitorDialog::OnIdle()
             PrefixPtr = _Pipe;
         else if (type == MONITOR_IPC)
             PrefixPtr = _Ipc;
+        else if (type == MONITOR_RPC)
+            PrefixPtr = _Rpc;
         else if (type == MONITOR_WINCLASS)
             PrefixPtr = _WinClass;
         else if (type == MONITOR_DRIVE)
@@ -168,7 +173,11 @@ void CMonitorDialog::OnIdle()
             PrefixPtr = _File;
         else if (type == MONITOR_KEY)
             PrefixPtr = _Key;
-        else if (type == MONITOR_OTHER)
+        else if (type == MONITOR_NETFW)
+            PrefixPtr = _NetFw;
+        else if (type == MONITOR_SCM)
+            PrefixPtr = _SCM;
+        else //if (type == MONITOR_OTHER)
             PrefixPtr = _Other;
         wcsncpy(name, PrefixPtr, 9);
 

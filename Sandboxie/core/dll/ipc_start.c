@@ -146,15 +146,15 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
             STARTUPINFO si;
             PROCESS_INFORMATION pi;
 
-            WCHAR program[64];
-            wcscpy(program, SANDBOXIE);
-            wcscat(program, service);
-            wcscat(program, L".exe");
-
             memzero(&si, sizeof(STARTUPINFO));
             si.cb = sizeof(STARTUPINFO);
             si.dwFlags = STARTF_FORCEOFFFEEDBACK;
             si.dwXCountChars = si.dwYCountChars = tzuk;
+
+            WCHAR program[64];
+            wcscpy(program, SANDBOXIE);
+            wcscat(program, service);
+            wcscat(program, L".exe");
 
             if (service == _rpcss) {
 
@@ -162,24 +162,25 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
                 // starting rpcss: go thrugh SbieSvc ProcessServer
                 //
 
-                WCHAR homedir[MAX_PATH];
-                SbieApi_GetHomePath(NULL, 0, homedir, MAX_PATH);
-
                 if (! Proc_ImpersonateSelf(TRUE))
                     errnum = ERROR_NO_IMPERSONATION_TOKEN;
                 else {
 
-                    WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
-                    Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", homedir, program);
+                    //WCHAR *fullpath = Dll_AllocTemp(512 * sizeof(WCHAR));
+                    //Sbie_snwprintf(fullpath, 512, L"\"%s\\%s\"", Dll_HomeDosPath, program);
+
+                    //
+					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
+					//
 
                     if (! SbieDll_RunSandboxed(
-                            L"*THREAD*", fullpath, homedir, 0, &si, &pi))
+                              L"", L"*RPCSS*", Dll_HomeDosPath, 0, &si, &pi))
                         errnum = GetLastError();
                     else
                         errnum = -1;
                     Proc_ImpersonateSelf(FALSE);
 
-                    Dll_Free(fullpath);
+                    //Dll_Free(fullpath);
                 }
 
             } else {

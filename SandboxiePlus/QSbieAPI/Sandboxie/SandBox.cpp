@@ -30,7 +30,7 @@ typedef long NTSTATUS;
 #include <windows.h>
 #include "..\..\Sandboxie\common\win32_ntddk.h"
 
-#include "Helpers/NtIO.h"
+#include "../Helpers/NtIO.h"
 
 //struct SSandBox
 //{
@@ -51,7 +51,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 	if (cfglvl == 0)
 	{
-		SetBool("AutoRecover", false);
+		SetBool("AutoRecover", true);
 		SetBool("BlockNetworkFiles", true);
 
 		// recovery
@@ -124,7 +124,7 @@ SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
 		return RunSandboxed(Command);
 #endif
-	return m_pAPI->RunStart(m_Name, Command, NULL, Elevated);
+	return m_pAPI->RunStart(m_Name, Command, Elevated);
 }
 
 SB_STATUS CSandBox::RunSandboxed(const QString& Command)
@@ -229,13 +229,13 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 
 SB_STATUS CSandBox::RemoveBox()
 {
-	//if (!IsEmpty())
-	//	return SB_ERR(SB_DelNotEmpty);
+	if (!IsEmpty())
+		return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
 }
 
-QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent) const
+QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent, QString* pDefault) const
 {
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
@@ -259,11 +259,64 @@ QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent) const
 
 	if(pCurrent)
 		*pCurrent = ini.value("Current/Snapshot").toString();
+	if(pDefault)
+		*pDefault = ini.value("Current/Default").toString();
 
 	return Snapshots;
 }
 
+void CSandBox::SetDefaultSnapshot(QString Default)
+{
+	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
+
+	ini.setValue("Current/Default", Default);
+	ini.sync();
+}
+
+QString CSandBox::GetDefaultSnapshot(QString* pCurrent) const
+{
+	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
+
+	if(pCurrent)
+		*pCurrent = ini.value("Current/Snapshot").toString();
+
+	return ini.value("Current/Default").toString();
+}
+
 QStringList CSandBox__BoxSubFolders = QStringList() << "drive" << "user" << "share";
+
+struct SBoxDataFile
+{
+	SBoxDataFile(QString name, bool required, bool recursive) : Name(name), Required(required), Recursive(recursive) {}
+	QString Name;
+	bool Required; // fail on fail
+	bool Recursive;
+};
+
+QList<SBoxDataFile> CSandBox__BoxDataFiles = QList<SBoxDataFile>() 
+	<< SBoxDataFile("RegHive", true, false) 
+;
+
+bool CSandBox::IsInitialized() const
+{
+	if (IsEmpty())
+		return false;
+
+	foreach(const QString & BoxSubFolder, CSandBox__BoxSubFolders) {
+		if (QDir(m_FilePath + "\\" + BoxSubFolder).exists())
+			return true;
+	}
+	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles) {
+		if (BoxDataFile.Required && QFile::exists(m_FilePath + "\\" + BoxDataFile.Name))
+			return true;
+	}
+	return false;
+}
+
+bool CSandBox::HasSnapshots() const
+{
+	return QFile::exists(m_FilePath + "\\Snapshots.ini");
+}
 
 SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentFolder, const QString& TargetName)
 {
@@ -282,7 +335,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	if (m_pAPI->HasProcesses(m_Name))
 		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
 
-	if (IsEmpty())
+	if (!IsInitialized())
 		return SB_ERR(SB_SnapIsEmpty);
 
 	QStringList Snapshots = ini.childGroups();
@@ -295,10 +348,18 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 			break;
 	}
 
-	if (!QDir().mkdir(m_FilePath + "\\snapshot-" + ID))
+	if (!QDir().mkpath(m_FilePath + "\\snapshot-" + ID))
 		return SB_ERR(SB_SnapMkDirFail);
-	if (!QFile::copy(m_FilePath + "\\RegHive", m_FilePath + "\\snapshot-" + ID + "\\RegHive"))
-		return SB_ERR(SB_SnapCopyRegFail);
+
+	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles) 
+	{
+		if (!QFile::copy(m_FilePath + "\\" + BoxDataFile.Name, m_FilePath + "\\snapshot-" + ID + "\\" + BoxDataFile.Name)) {
+			if (BoxDataFile.Required)
+				return SB_ERR(SB_SnapCopyDatFail);
+		}
+		else if (BoxDataFile.Required) // this one is incremental, hence delete it from the copy root, after it was copied to the snapshot
+			QFile::remove(m_FilePath + "\\" + BoxDataFile.Name);
+	}
 
 	ini.setValue("Snapshot_" + ID + "/Name", Name);
 	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime().toTime_t());
@@ -400,14 +461,18 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 SB_STATUS CSandBox__CleanupSnapshot(const QString& Folder)
 {
-	SNtObject ntHiveFile(L"\\??\\" + (Folder + "\\RegHive").toStdWString());
-	SB_STATUS status = NtDeleteFile(&ntHiveFile.attr);
-	if (NT_SUCCESS(status)) {
-		SNtObject ntSnapshotFile(L"\\??\\" + Folder.toStdWString());
-		status = NtDeleteFile(&ntSnapshotFile.attr);
+	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles) 
+	{
+		SNtObject ntHiveFile(L"\\??\\" + (Folder + "\\" + BoxDataFile.Name).toStdWString());
+		SB_STATUS status = NtDeleteFile(&ntHiveFile.attr);
+		if (NT_SUCCESS(status)) {
+			SNtObject ntSnapshotFile(L"\\??\\" + Folder.toStdWString());
+			status = NtDeleteFile(&ntSnapshotFile.attr);
+		}
+		if(BoxDataFile.Required)
+			if (!NT_SUCCESS(status))
+				return SB_ERR(SB_SnapRmDirFail, QVariantList() << Folder, status);
 	}
-	if (!NT_SUCCESS(status))
-		return SB_ERR(SB_SnapRmDirFail, QVariantList() << Folder, status);
 	return SB_OK;
 }
 
@@ -485,16 +550,30 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 {
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
-	if (!ini.childGroups().contains("Snapshot_" + ID))
+	if (!ID.isEmpty() && !ini.childGroups().contains("Snapshot_" + ID))
 		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
 		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
 
-	if (!QFile::remove(m_FilePath + "\\RegHive"))
-		return SB_ERR(SB_SnapDelRegFail);
-	if (!QFile::copy(m_FilePath + "\\snapshot-" + ID + "\\RegHive", m_FilePath + "\\RegHive"))
-		return SB_ERR(SB_SnapCopyRegFail);
+	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
+	{
+		if (!QFile::exists(m_FilePath + "\\" + BoxDataFile.Name))
+			continue;
+
+		if (!QFile::remove(m_FilePath + "\\" + BoxDataFile.Name)) {
+			if (BoxDataFile.Required)
+				return SB_ERR(SB_SnapDelDatFail);
+		}
+
+		if (ID.isEmpty() || BoxDataFile.Recursive)
+			continue; // this one is incremental, don't restore it
+
+		if (!QFile::copy(m_FilePath + "\\snapshot-" + ID + "\\" + BoxDataFile.Name, m_FilePath + "\\" + BoxDataFile.Name)) {
+			if (BoxDataFile.Required)
+				return SB_ERR(SB_SnapCopyDatFail);
+		}
+	}
 
 	ini.setValue("Current/Snapshot", ID);
 	ini.sync();

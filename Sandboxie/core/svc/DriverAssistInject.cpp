@@ -77,11 +77,19 @@ void DriverAssist::InjectLow(void *_msg)
 	// inject the lowlevel.dll into the target process
 	//
 
-	BOOLEAN bHostInject = msg->bHostInject;
-	if (!bHostInject && SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE))
-		bHostInject = 2;
+    SBIELOW_FLAGS sbieLow;
+    sbieLow.init_flags = 0;
 
-	errlvl = SbieDll_InjectLow(hProcess, msg->is_wow64, bHostInject, TRUE);
+    sbieLow.is_wow64 = msg->is_wow64;
+    sbieLow.bHostInject = msg->bHostInject;
+    // NoSysCallHooks BEGIN
+    sbieLow.bNoSysHooks = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
+    // NoSysCallHooks END
+    // NoSbieCons BEGIN
+    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
+    // NoSbieCons END
+
+	errlvl = SbieDll_InjectLow(hProcess, sbieLow.init_flags, TRUE);
 	if(errlvl != 0)
 		goto finish;
 
@@ -89,11 +97,11 @@ void DriverAssist::InjectLow(void *_msg)
     // put process into a job for win32 restrictions
     //
 
+    // NoSbieDesk BEGIN
+    if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
+    // NoSbieDesk END
     if (!msg->bHostInject)
     {
-		// NoSbieDesk BEGIN
-		//if(status != 0 || !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE)) // we need the proxy for com as well...
-		// NoSbieDesk END
         if(! GuiServer::GetInstance()->InitProcess(
                 hProcess, msg->process_id, msg->session_id,
                 msg->add_to_job)) {

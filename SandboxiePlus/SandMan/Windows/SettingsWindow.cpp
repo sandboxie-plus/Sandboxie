@@ -2,6 +2,7 @@
 #include "SettingsWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
+#include "../MiscHelpers/Common/Common.h"
 #include "Helpers/WinAdmin.h"
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "../QSbieAPI/SbieUtils.h"
@@ -55,8 +56,10 @@ Qt::CheckState CSettingsWindow__Int2Chk(int state)
 	}
 }
 
-QByteArray g_Certificate;
 quint32 g_FeatureFlags = 0;
+
+QByteArray g_Certificate;
+SCertInfo g_CertInfo = { 0 };
 
 CSettingsWindow::CSettingsWindow(QWidget *parent)
 	: QDialog(parent)
@@ -86,13 +89,14 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Ampel"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Lock"));
 	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
 
 
 	ui.tabs->setCurrentIndex(0);
 
 	ui.uiLang->addItem(tr("Auto Detection"), "");
-	ui.uiLang->addItem("International English", "en");
+	ui.uiLang->addItem(tr("No Translation"), "native");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
 	foreach(const QString& langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{
@@ -120,6 +124,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	
 	m_WarnProgsChanged = false;
 
@@ -142,18 +148,25 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
 	m_CompatChanged = false;
-	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
+	ui.chkNoCompat->setChecked(theConf->GetBool("Options/AutoRunSoftCompat", true));
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 
-	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), this, SLOT(OnSupport(const QString&)));
-	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), this, SLOT(OnSupport(const QString&)));
+	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
-
+	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
+
+	// edit
+	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
+	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
+	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
+	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnOptChanged()));
 
 	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
@@ -167,16 +180,18 @@ CSettingsWindow::~CSettingsWindow()
 	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
 }
 
-void CSettingsWindow::OnSupport(const QString& url)
-{
-	QDesktopServices::openUrl(url);
-}
-
 void CSettingsWindow::showCompat()
 {
 	m_CompatLoaded = 2;
 	ui.tabs->setCurrentWidget(ui.tabCompat);
-	show();
+	SafeShow(this);
+}
+
+void CSettingsWindow::showSupport()
+{
+	ui.tabs->setCurrentWidget(ui.tabSupport);
+	SafeShow(this);
+	ui.chkNoCheck->setVisible(true);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -200,13 +215,19 @@ void CSettingsWindow::LoadSettings()
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.chkAutoStart->setChecked(IsAutorunEnabled());
-	if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
-		if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
-			ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
+	if (theAPI->IsConnected()) {
+		if (theAPI->GetUserSettings()->GetBool("SbieCtrl_EnableAutoStart", true)) {
+			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent", "") != "SandMan.exe")
+				ui.chkSvcStart->setCheckState(Qt::PartiallyChecked);
+			else
+				ui.chkSvcStart->setChecked(true);
+		}
 		else
-			ui.chkSvcStart->setChecked(true);
-	} else
-		ui.chkSvcStart->setChecked(false);
+			ui.chkSvcStart->setChecked(false);
+	}
+	else {
+		ui.chkSvcStart->setEnabled(false);
+	}
 
 	ui.chkShellMenu->setCheckState(CSettingsWindow__IsContextMenu());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
@@ -218,10 +239,10 @@ void CSettingsWindow::LoadSettings()
 	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
-	ui.chkInstantRecovery->setChecked(theConf->GetBool("Options/InstantRecovery", false));
+	ui.chkNotifyRecovery->setChecked(!theConf->GetBool("Options/InstantRecovery", true));
 
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
-	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Ctrl+Alt+Cancel")));
+	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Shift+Pause")));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
@@ -242,6 +263,8 @@ void CSettingsWindow::LoadSettings()
 		ui.ipcRoot->setText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
 
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
+		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", false));
+		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -263,7 +286,10 @@ void CSettingsWindow::LoadSettings()
 	{
 		ui.fileRoot->setEnabled(false);
 		ui.chkSeparateUserFolders->setEnabled(false);
+		ui.chkAutoRoot->setEnabled(false);
 		ui.chkWFP->setEnabled(false);
+		ui.chkObjCb->setEnabled(false);
+		ui.chkWin32k->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
@@ -280,12 +306,26 @@ void CSettingsWindow::LoadSettings()
 	}
 
 
-	int PortableRootDir = theConf->GetInt("Options/PortableRootDir", -1);
-	if (PortableRootDir != -1 && theConf->IsPortable())
-		ui.chkAutoRoot->setChecked(PortableRootDir == 0 ? Qt::Unchecked : Qt::Checked);
+	if (theGUI->IsFullyPortable())
+		ui.chkAutoRoot->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/PortableRootDir", 2)));
 	else
 		ui.chkAutoRoot->setVisible(false);
 
+	UpdateCert();
+
+	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
+	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
+
+	ui.chkNoCheck->setChecked(theConf->GetBool("Options/NoSupportCheck", false));
+	if(ui.chkNoCheck->isCheckable() && !g_CertInfo.expired)
+		ui.chkNoCheck->setVisible(false); // hide if not relevant
+
+	OnChange();
+}
+
+void CSettingsWindow::UpdateCert()
+{
+	ui.lblCertExp->setVisible(false);
 	if (!g_Certificate.isEmpty()) 
 	{
 		ui.txtCertificate->setPlainText(g_Certificate);
@@ -294,14 +334,20 @@ void CSettingsWindow::LoadSettings()
 		QPalette palette = QApplication::palette();
 		if (theGUI->m_DarkTheme)
 			palette.setColor(QPalette::Text, Qt::black);
-		palette.setColor(QPalette::Base, QColor(192, 255, 192));
+		if (g_CertInfo.expired) {
+			palette.setColor(QPalette::Base, QColor(255, 255, 192));
+			ui.lblCertExp->setText(tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>."));
+			ui.lblCertExp->setVisible(true);
+		}
+		else {
+			if (g_CertInfo.about_to_expire) {
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"sbie://update/cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+				ui.lblCertExp->setVisible(true);
+			}
+			palette.setColor(QPalette::Base, QColor(192, 255, 192));
+		}
 		ui.txtCertificate->setPalette(palette);
 	}
-
-	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
-	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
-
-	OnChange();
 }
 
 void CSettingsWindow::SaveSettings()
@@ -312,11 +358,14 @@ void CSettingsWindow::SaveSettings()
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 
-	if (ui.chkSvcStart->checkState() == Qt::Checked) {
-		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
-		theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
-	} else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
-		theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
+	if (theAPI->IsConnected()) {
+		if (ui.chkSvcStart->checkState() == Qt::Checked) {
+			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", true);
+			theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+		}
+		else if (ui.chkSvcStart->checkState() == Qt::Unchecked)
+			theAPI->GetUserSettings()->SetBool("SbieCtrl_EnableAutoStart", false);
+	}
 
 	if (ui.chkShellMenu->checkState() != CSettingsWindow__IsContextMenu())
 	{
@@ -333,7 +382,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OpenUrlsSandboxed", CSettingsWindow__Chk2Int(ui.chkSandboxUrls->checkState()));
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
-	theConf->SetValue("Options/InstantRecovery", ui.chkInstantRecovery->isChecked());
+	theConf->SetValue("Options/InstantRecovery", !ui.chkNotifyRecovery->isChecked());
 
 	theConf->SetValue("Options/EnablePanicKey", ui.chkPanic->isChecked());
 	theConf->SetValue("Options/PanicKeySequence", ui.keyPanic->keySequence().toString());
@@ -364,6 +413,9 @@ void CSettingsWindow::SaveSettings()
 
 
 		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
+		theAPI->GetGlobalSettings()->SetBool("EnableObjectFiltering", ui.chkObjCb->isChecked());
+		theAPI->GetGlobalSettings()->SetBool("EnableWin32kHooks", ui.chkWin32k->isChecked());
+
 
 		if (m_FeaturesChanged) {
 			m_FeaturesChanged = false;
@@ -423,6 +475,13 @@ void CSettingsWindow::SaveSettings()
 					Used.append(pItem->data(0, Qt::UserRole).toString());
 			}
 
+			// retain local templates
+			foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
+				if (Template.left(6) == "Local_") {
+					Used.append(Template);
+				}
+			}
+
 			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
 			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected, false);
 			m_CompatChanged = false;
@@ -430,12 +489,11 @@ void CSettingsWindow::SaveSettings()
 	}
 
 	if (ui.chkAutoRoot->isVisible())
-		theConf->SetValue("Options/PortableRootDir", ui.chkAutoRoot->checkState() == Qt::Checked ? 1 : 0);
+		theConf->SetValue("Options/PortableRootDir", CSettingsWindow__Chk2Int(ui.chkAutoRoot->checkState()));
 
 	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
 
-	
-	if (m_CertChanged)
+	if (m_CertChanged && theAPI->IsConnected())
 	{
 		QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
 		if (g_Certificate != Certificate) {
@@ -460,6 +518,8 @@ void CSettingsWindow::SaveSettings()
 			if (theGUI->m_DarkTheme)
 				palette.setColor(QPalette::Text, Qt::black);
 
+			ui.lblCertExp->setVisible(false);
+
 			if (Certificate.isEmpty())
 			{
 				palette.setColor(QPalette::Base, Qt::white);
@@ -467,10 +527,22 @@ void CSettingsWindow::SaveSettings()
 			else if (!theAPI->ReloadCert().IsError())
 			{
 				g_FeatureFlags = theAPI->GetFeatureFlags();
+				theGUI->UpdateCertState();
 
-				QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
+				if (g_CertInfo.expired || g_CertInfo.outdated) {
+					if(g_CertInfo.expired)
+						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
+					else
+						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
 
-				palette.setColor(QPalette::Base, QColor(192, 255, 192));
+					palette.setColor(QPalette::Base, QColor(255, 255, 192));
+					ui.lblCertExp->setVisible(true);
+				}
+				else {
+					QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
+
+					palette.setColor(QPalette::Base, QColor(192, 255, 192));
+				}
 			}
 			else
 			{
@@ -478,6 +550,7 @@ void CSettingsWindow::SaveSettings()
 
 				palette.setColor(QPalette::Base, QColor(255, 192, 192));
 				Certificate.clear();
+				g_CertInfo.State = 0;
 			}
 
 			g_Certificate = Certificate;
@@ -490,12 +563,17 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
 
+	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
+
 	emit OptionsChanged();
 }
 
 void CSettingsWindow::apply()
 {
-	SaveSettings();
+	if (!ui.btnEditIni->isEnabled())
+		SaveIniSection();
+	else
+		SaveSettings();
 	LoadSettings();
 }
 
@@ -526,7 +604,7 @@ void CSettingsWindow::OnChange()
 	QStandardItem *item = model->item(0);
 	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 
-	if (ui.chkAutoRoot->isVisible() && theGUI->IsFullyPortable())
+	if (ui.chkAutoRoot->isVisible())
 		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);
 
 	ui.btnSetPassword->setEnabled(ui.chkPassRequired->isChecked());
@@ -534,7 +612,12 @@ void CSettingsWindow::OnChange()
 
 void CSettingsWindow::OnTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	if (ui.tabs->currentWidget() == ui.tabEdit)
+	{
+		LoadIniSection();
+		ui.txtIniSection->setReadOnly(true);
+	}
+	else if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->GetCompat()->RunCheck();
@@ -660,6 +743,64 @@ void CSettingsWindow::OnDelCompat()
 	m_CompatChanged = true;
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Raw section ini Editor
+//
+
+void CSettingsWindow::SetIniEdit(bool bEnable)
+{
+	for (int i = 0; i < ui.tabs->count() - 2; i++) {
+		bool Enabled = ui.tabs->widget(i)->isEnabled();
+		ui.tabs->setTabEnabled(i, !bEnable && Enabled);
+		ui.tabs->widget(i)->setEnabled(Enabled);
+	}
+	ui.btnSaveIni->setEnabled(bEnable);
+	ui.btnCancelEdit->setEnabled(bEnable);
+	ui.txtIniSection->setReadOnly(!bEnable);
+	ui.btnEditIni->setEnabled(!bEnable);
+}
+
+void CSettingsWindow::OnEditIni()
+{
+	SetIniEdit(true);
+}
+
+void CSettingsWindow::OnSaveIni()
+{
+	SaveIniSection();
+	SetIniEdit(false);
+	LoadSettings();
+}
+
+void CSettingsWindow::OnCancelEdit()
+{
+	SetIniEdit(false);
+}
+
+void CSettingsWindow::LoadIniSection()
+{
+	QString Section;
+
+	if(theAPI->IsConnected())
+		Section = theAPI->SbieIniGetEx("GlobalSettings", "");
+
+	ui.txtIniSection->setPlainText(Section);
+}
+
+void CSettingsWindow::SaveIniSection()
+{
+	if(theAPI->IsConnected())
+		theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
+
+	LoadIniSection();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Support
+//
+
 void CSettingsWindow::CertChanged() 
 { 
 	m_CertChanged = true; 
@@ -670,7 +811,7 @@ void CSettingsWindow::CertChanged()
 void CSettingsWindow::LoadCertificate()
 {
 	QString CertPath;
-	if (theAPI->IsConnected())
+	if (theAPI && theAPI->IsConnected())
 		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 	else
 		CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";

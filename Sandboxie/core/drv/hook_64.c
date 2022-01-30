@@ -195,6 +195,10 @@ _FX ULONG Hook_Find_ZwRoutine(ULONG ServiceNum, void **out_routine)
         // 0x48 8B C4 FA 48 83 EC xx 50 9C 6A xx 48 8D xx xx xx xx xx 50 ...
         //  ... B8 xx xx xx xx E9 xx xx xx xx 66 90
 
+        // a ZwXxx system service redirector looks like this in Windows 10 64-bit
+        // 48 8B C4 FA 48 83 EC xx 50 9C 6A xx 48 8D xx xx
+        // xx xx xx 50 B8 xx xx xx xx E9 xx xx xx xx C3 90
+
         if (addr[0] != 0x48 || addr[1] != 0x8B)
             break;
         addr += 4;
@@ -218,7 +222,7 @@ _FX ULONG Hook_Find_ZwRoutine(ULONG ServiceNum, void **out_routine)
             break;
         addr += 5;
 
-        if (addr[0] != 0x66 || addr[1] != 0x90)
+        if ((addr[0] != 0x66 && addr[0] != 0xC3) || addr[1] != 0x90)
             break;
         addr += 2;
     }

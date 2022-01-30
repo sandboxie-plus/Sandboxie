@@ -58,7 +58,7 @@ static void Process_NotifyProcess(
 #endif
 
 static void Process_NotifyProcessEx(
-    HANDLE ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo);
+    PEPROCESS ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo);
 
 static PROCESS *Process_Create(
     HANDLE ProcessId, const BOX *box, const WCHAR *image_path,
@@ -709,6 +709,73 @@ _FX PROCESS *Process_Create(
     }
 
     //
+    // initialize box options
+    //
+
+    proc->bAppCompartment = Conf_Get_Boolean(proc->box->name, L"NoSecurityIsolation", 0, FALSE);
+
+    //
+    // by default, Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseForBoxed=n to disable this behaviour
+    //
+
+    proc->always_close_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 
+
+    //
+    // by default OpenFile and OpenKey apply only to unboxed processes
+    // use DontOpenForBoxed=n to thread boxed and unboxed programs the same way
+    //
+
+    proc->dont_open_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"DontOpenForBoxed", 0, TRUE); 
+
+    //
+    // privacy mode requirers Rule Specificity
+    //
+
+#ifdef USE_MATCH_PATH_EX
+    proc->use_privacy_mode = Conf_Get_Boolean(proc->box->name, L"UsePrivacyMode", 0, FALSE); 
+    proc->use_rule_specificity = proc->use_privacy_mode || Conf_Get_Boolean(proc->box->name, L"UseRuleSpecificity", 0, FALSE); 
+#endif
+
+    //
+    // check certificate
+    //
+
+    if (!Driver_Certified && !proc->image_sbie) {
+        if (
+#ifdef USE_MATCH_PATH_EX
+            proc->use_rule_specificity || 
+            proc->use_privacy_mode ||
+#endif
+            proc->bAppCompartment) {
+
+            Log_Msg_Process(MSG_6004, proc->box->name, proc->image_name, box->session_id, proc->pid);
+
+            //Pool_Delete(pool);
+            //Process_CreateTerminated(ProcessId, box->session_id);
+            //return NULL;
+            
+            // allow the process to run for a sort while to allow the features to be avaluated
+            Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
+        }
+    }
+
+    //
+    // configure monitor options
+    //
+
+    proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
+
+    //
+    // initialize filtering options
+    //
+
+    BOOLEAN no_filtering = proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"NoSecurityFiltering", 0, FALSE); // only in effect in app mode
+    proc->disable_file_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
+    proc->disable_key_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
+    proc->disable_object_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableObjectFilter", 0, FALSE);
+
+    //
     // initialize various locks
     //
 
@@ -735,16 +802,6 @@ _FX PROCESS *Process_Create(
         Process_CreateTerminated(ProcessId, box->session_id);
         return NULL;
     }
-
-    proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
-
-    //
-    // initialize debug options
-    //
-
-    proc->disable_file_flt = Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
-    proc->disable_key_flt = Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
-    //proc->disable_object_flt = Conf_Get_Boolean(proc->box->name, L"DisableObjectFilter", 0, FALSE);
 
     //
     // initialize trace flags
@@ -1107,6 +1164,34 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
 
+#ifdef DRV_BREAKOUT
+        //
+        // check if this process is set up as break out program,
+        // it must't be located in a sandboxed for this to work.
+        //
+
+        BOX* breakout_box = NULL;
+
+        if (box && Process_IsBreakoutProcess(box, ImagePath)) {
+            if(!Driver_Certified)
+                Log_Msg_Process(MSG_6004, box->name, NULL, box->session_id, CallerId);
+            else {
+                UNICODE_STRING image_uni;
+                RtlInitUnicodeString(&image_uni, ImagePath);
+                if (!Box_IsBoxedPath(box, file, &image_uni)) {
+
+                    check_forced_program = TRUE; // the break out process of one box may be the forced process of an otehr
+                    breakout_box = box;
+                    box = NULL;
+                }
+            }
+        }
+#endif
+
+        //
+        // check forced processes
+        //
+
         if (check_forced_program) {
 
             //
@@ -1114,7 +1199,12 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             // check if it might be a forced process
             //
 
-            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, FALSE);
+            const WCHAR* pSidString = NULL;
+#ifdef DRV_BREAKOUT
+            if (breakout_box)
+                pSidString = breakout_box->sid;
+#endif
+            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, &bHostInject, pSidString);
 
             if (box == (BOX *)-1) {
 
@@ -1123,27 +1213,37 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
             } else if (box) {
 
-                process_is_forced = TRUE;
-                add_process_to_job = TRUE;
-            }
-            else
-            {
-                box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, TRUE);
+                if (bHostInject) {
 
-                if (box == (BOX *)-1) {
-
-                    create_terminated = TRUE;
-                    box = NULL;
-
-                }
-                else if (box) {
-
-                    bHostInject = TRUE;
                     add_process_to_job = FALSE;
 
+                } else {
+
+                    process_is_forced = TRUE;
+                    add_process_to_job = TRUE;
                 }
             }
         }
+
+#ifdef DRV_BREAKOUT
+        //
+        // if this is a break out process and no other box clamed it as forced, 
+        // set bHostInject and threat it accordingly, we need this in order for
+        // the custom SetInformationProcess call from CreateProcessInternalW to succeed
+        //
+
+        if (breakout_box) {
+            if (!box) {
+                bHostInject = TRUE;
+                add_process_to_job = FALSE;
+                box = breakout_box;
+            }
+            else {
+                Box_Free(breakout_box);
+                breakout_box = NULL;
+            }
+        }
+#endif
 
         //
         // if parent is a sandboxed process but for some reason we don't
@@ -1201,25 +1301,35 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             ULONG session_id = new_proc->box->session_id;
 
             new_proc->bHostInject = bHostInject;
+#ifdef DRV_BREAKOUT
+            new_proc->starter_id = CallerId;
+#endif
             new_proc->parent_was_start_exe = parent_was_start_exe;
             new_proc->rights_dropped = parent_had_rights_dropped;
             new_proc->forced_process = process_is_forced;
 
-            if (! bHostInject)
-            {
-				WCHAR msg[48], *buf = msg;
-				RtlStringCbPrintfW(buf, sizeof(msg), L"%s%c%d", new_proc->box->name, L'\0', (ULONG)ParentId);
-                buf += wcslen(buf) + 1;
-				Log_Popup_MsgEx(MSG_1399, new_proc->image_path, wcslen(new_proc->image_path), msg, (ULONG)(buf - msg), new_proc->box->session_id, ProcessId);
+            if (! bHostInject) {
+
+                //
+                // Notify the agent about the new process using a specialized silent message
+                //
+
+				WCHAR sParentId[12];
+                _ultow_s((ULONG)ParentId, sParentId, 12, 10);
+                const WCHAR* strings[4] = { new_proc->image_path, new_proc->box->name, sParentId, NULL };
+                Api_AddMessage(MSG_1399, strings, NULL, new_proc->box->session_id, (ULONG)ProcessId);
 
                 if (! add_process_to_job)
                     new_proc->parent_was_sandboxed = TRUE;
 
+                add_process_to_job = TRUE; // we need this because of JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK used in GuiServer::GetJobObjectForAssign
+
                 //
                 // don't put the process into a job if OpenWinClass=*
+                // don't put the process into a job if NoSecurityIsolation=y
                 //
 
-				if (new_proc->open_all_win_classes || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
+				if (new_proc->open_all_win_classes || new_proc->bAppCompartment || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
 
                     new_proc->can_use_jobs = TRUE;
 					add_process_to_job = FALSE;
@@ -1233,7 +1343,6 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
                     new_proc->can_use_jobs = Conf_Get_Boolean(new_proc->box->name, L"AllowBoxedJobs", 0, FALSE);
                 }
-
 
                 //
                 // on Windows Vista, a forced process may start inside a
@@ -1327,7 +1436,7 @@ _FX void Process_Delete(HANDLE ProcessId)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
 #ifdef USE_PROCESS_MAP
-    proc = map_remove(&Process_Map, ProcessId);
+    map_take(&Process_Map, ProcessId, &proc, 0);
 #else
     proc = List_Head(&Process_List);
     while (proc) {

@@ -644,7 +644,7 @@ _FX void *Thread_SetInformationProcess_PrimaryToken_3(
     //
 
     if (!proc->image_from_box &&
-        _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
+            _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
 
         return TokenObject2;
     }
@@ -1356,13 +1356,13 @@ _FX NTSTATUS Thread_CheckTokenForImpersonation(
     NTSTATUS status;
 
     // OriginalToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
 		return STATUS_SUCCESS;
 	// OriginalToken END
-	// OpenToken BEGIN
-	if ((Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
+	// UnfilteredToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE))
 		return STATUS_SUCCESS;
-	// OpenToken END
+	// UnfilteredToken END
 
 	BOOLEAN DropRights = proc->drop_rights;
 	ULONG SessionId = proc->box->session_id;

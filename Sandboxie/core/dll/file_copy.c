@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -68,9 +68,9 @@ _FX BOOLEAN File_InitFileMigration(void)
     for(ULONG i=0; i < NUM_COPY_MODES; i++)
         List_Init(&File_MigrationOptions[i]);
 
-    Config_InitPatternList(L"CopyEmpty", &File_MigrationOptions[FILE_COPY_EMPTY]);
-    Config_InitPatternList(L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT]);
-    Config_InitPatternList(L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY]);
+    Config_InitPatternList(NULL, L"CopyEmpty", &File_MigrationOptions[FILE_COPY_EMPTY]);
+    Config_InitPatternList(NULL, L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT]);
+    Config_InitPatternList(NULL, L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY]);
 
     File_MigrationDenyWrite = Config_GetSettingsForImageName_bool(L"CopyBlockDenyWrite", FALSE);
 

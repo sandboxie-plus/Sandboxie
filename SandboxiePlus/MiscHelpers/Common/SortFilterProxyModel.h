@@ -3,6 +3,7 @@
 #include "../mischelpers_global.h"
 #include <QSortFilterProxyModel>
 #include <QTreeView>
+#include "Finder.h"
 
 class MISCHELPERS_EXPORT CSortFilterProxyModel: public QSortFilterProxyModel
 {
@@ -55,19 +56,19 @@ public:
 	QVariant data(const QModelIndex &index, int role) const
 	{
 		QVariant Data = QSortFilterProxyModel::data(index, role);
+		if (m_bHighLight && role == (CFinder::GetDarkMode() ? Qt::ForegroundRole : Qt::BackgroundRole))
+		{
+			if (!filterRegExp().isEmpty())
+			{
+				QString Key = QSortFilterProxyModel::data(index, filterRole()).toString();
+				if (Key.contains(filterRegExp()))
+					return QColor(Qt::yellow);
+			}
+			//return QColor(Qt::white);
+		}
+
 		if (role == Qt::BackgroundRole)
 		{
-			if (m_bHighLight)
-			{
-				if (!filterRegExp().isEmpty())
-				{
-					QString Key = QSortFilterProxyModel::data(index, filterRole()).toString();
-					if (Key.contains(filterRegExp()))
-						return QColor(Qt::yellow);
-				}
-				return QColor(Qt::white);
-			}
-
 			if (m_bAlternate && !Data.isValid())
 			{
 				if (0 == index.row() % 2)

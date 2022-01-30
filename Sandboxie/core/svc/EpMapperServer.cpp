@@ -203,7 +203,7 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
                 wstrPortName[23] = 0;                                                       // Take off the ']'
                 RpcStringFreeW(&pwszPortName);
 
-                if (wcsncmp(wstrPortName, L"LRPC-", 5) == 0)
+                if (wcsncmp(wstrPortName, L"LRPC-", 5) == 0 /*|| wcsncmp(wstrPortName, L"OLE", 3) == 0*/)
                 {
                     _snwprintf(rpl->wszPortName, DYNAMIC_PORT_NAME_CHARS, L"\\RPC Control\\%s", wstrPortName);
                     rpl->h.status = STATUS_SUCCESS;

@@ -33,6 +33,7 @@ HEADERS += ./MiscHelpers.h \
     ./Common/TreeItemModel.h \
     ./Common/TreeViewEx.h \
     ./Common/TreeWidgetEx.h \
+    ./Common/CheckList.h \
     ./Common/NetworkAccessManager.h
     
 SOURCES += ./MiscHelpers.cpp \

@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>6</number>
+        <number>7</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -139,9 +139,9 @@
             </layout>
            </item>
            <item row="5" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkInstantRecovery">
+            <widget class="QCheckBox" name="chkNotifyRecovery">
              <property name="text">
-              <string>Show the recovery window outright instead of only notifying about recoverable files</string>
+              <string>Show recoverable files as notifications</string>
              </property>
             </widget>
            </item>
@@ -315,43 +315,7 @@
         <layout class="QGridLayout" name="gridLayout_6">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_5">
-           <item row="6" column="1" colspan="5">
-            <widget class="QCheckBox" name="chkWFP">
-             <property name="text">
-              <string>Use Windows Filtering Platform to restrict network access (experimental)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QLabel" name="label_15">
-             <property name="text">
-              <string>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="openExternalLinks">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="3" column="2" colspan="4">
-            <widget class="QLineEdit" name="regRoot"/>
-           </item>
-           <item row="7" column="3">
+           <item row="9" column="3">
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -364,7 +328,7 @@
              </property>
             </spacer>
            </item>
-           <item row="7" column="1">
+           <item row="9" column="1">
             <spacer name="horizontalSpacer_4">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -377,12 +341,18 @@
              </property>
             </spacer>
            </item>
-           <item row="2" column="2">
-            <widget class="QCheckBox" name="chkSeparateUserFolders">
-             <property name="text">
-              <string>Separate user folders</string>
+           <item row="9" column="4">
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item row="2" column="5">
             <widget class="QCheckBox" name="chkAutoRoot">
@@ -391,8 +361,45 @@
              </property>
             </widget>
            </item>
+           <item row="6" column="1" colspan="5">
+            <widget class="QCheckBox" name="chkWFP">
+             <property name="text">
+              <string>Use Windows Filtering Platform to restrict network access</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2" colspan="4">
+            <widget class="QLineEdit" name="fileRoot"/>
+           </item>
            <item row="4" column="2" colspan="4">
             <widget class="QLineEdit" name="ipcRoot"/>
+           </item>
+           <item row="2" column="2">
+            <widget class="QCheckBox" name="chkSeparateUserFolders">
+             <property name="text">
+              <string>Separate user folders</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QPushButton" name="btnBrowse">
+             <property name="maximumSize">
+              <size>
+               <width>23</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1" colspan="5">
+            <widget class="QCheckBox" name="chkObjCb">
+             <property name="text">
+              <string>Activate Kernel Mode Object Filtering (experimental)</string>
+             </property>
+            </widget>
            </item>
            <item row="4" column="0" colspan="2">
             <widget class="QLabel" name="label_17">
@@ -407,16 +414,17 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QLabel" name="label_16">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_43">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
              <property name="text">
-              <string>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="openExternalLinks">
-              <bool>true</bool>
+              <string>Sandbox default</string>
              </property>
             </widget>
            </item>
@@ -434,46 +442,52 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="2" colspan="4">
-            <widget class="QLineEdit" name="fileRoot"/>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_43">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
+           <item row="3" column="0" colspan="2">
+            <widget class="QLabel" name="label_16">
              <property name="text">
-              <string>Sandbox default</string>
+              <string>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
-           <item row="7" column="4">
-            <spacer name="horizontalSpacer_5">
+           <item row="3" column="2" colspan="4">
+            <widget class="QLineEdit" name="regRoot"/>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="2">
+            <spacer name="verticalSpacer_2">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>40</width>
-               <height>20</height>
+               <width>20</width>
+               <height>40</height>
               </size>
              </property>
             </spacer>
            </item>
-           <item row="1" column="6">
-            <widget class="QPushButton" name="btnBrowse">
-             <property name="maximumSize">
-              <size>
-               <width>23</width>
-               <height>16777215</height>
-              </size>
-             </property>
+           <item row="8" column="1" colspan="5">
+            <widget class="QCheckBox" name="chkWin32k">
              <property name="text">
-              <string>...</string>
+              <string>Hook selected Win32k system calls to enable GPU acceleration (experimental)</string>
              </property>
             </widget>
            </item>
@@ -602,7 +616,7 @@
            <item row="3" column="1">
             <widget class="QCheckBox" name="chkAdminOnlyFP">
              <property name="text">
-              <string>Only Administrator user accounts can use Disable Forced Programs command</string>
+              <string>Only Administrator user accounts can use Pause Forced Programs Rules command</string>
              </property>
             </widget>
            </item>
@@ -701,7 +715,64 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tab">
+       <widget class="QWidget" name="tabEdit">
+        <attribute name="title">
+         <string>Edit ini Section</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_16">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btnSaveIni">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btnEditIni">
+           <property name="text">
+            <string>Edit ini</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="btnCancelEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="4">
+          <widget class="QPlainTextEdit" name="txtIniSection">
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabSupport">
         <attribute name="title">
          <string>Support</string>
         </attribute>
@@ -711,6 +782,62 @@
            <property name="leftMargin">
             <number>0</number>
            </property>
+           <item row="1" column="0" rowspan="5" colspan="2">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../Resources/SandMan.qrc">:/HelpingHand.png</pixmap>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2" colspan="2">
+            <widget class="QPlainTextEdit" name="txtCertificate">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="placeholderText">
+              <string>Enter the support certificate here</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="3">
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="3" column="2" colspan="2">
+            <widget class="QLabel" name="lblSupportCert">
+             <property name="text">
+              <string>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It's like a license key but for awesome people using open source software. :-)</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="3">
+            <widget class="QCheckBox" name="chkAutoInstall">
+             <property name="text">
+              <string>Install updates automatically</string>
+             </property>
+            </widget>
+           </item>
            <item row="9" column="2">
             <spacer name="verticalSpacer_5">
              <property name="orientation">
@@ -724,10 +851,31 @@
              </property>
             </spacer>
            </item>
-           <item row="8" column="3">
-            <widget class="QCheckBox" name="chkAutoInstall">
+           <item row="6" column="0" colspan="3">
+            <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
              <property name="text">
-              <string>Install updates automatically</string>
+              <string>Support Settings</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2" colspan="2">
+            <widget class="QLabel" name="lblCertExp">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="text">
+              <string>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</string>
              </property>
             </widget>
            </item>
@@ -757,66 +905,10 @@
              </property>
             </widget>
            </item>
-           <item row="9" column="3">
-            <spacer name="horizontalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="4" column="2" colspan="2">
-            <widget class="QPlainTextEdit" name="txtCertificate">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>60</height>
-              </size>
-             </property>
-             <property name="placeholderText">
-              <string>Enter the support certificate here</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="3">
-            <widget class="QLabel" name="label_7">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
+           <item row="10" column="0" colspan="4">
+            <widget class="QCheckBox" name="chkNoCheck">
              <property name="text">
-              <string>Support Settings</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2" colspan="2">
-            <widget class="QLabel" name="lblSupportCert">
-             <property name="text">
-              <string>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It's like a license key but for awesome people using open source software. :-)</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" rowspan="5" colspan="2">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../Resources/SandMan.qrc">:/HelpingHand.png</pixmap>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+              <string>In the future, don't notify about certificate expiration</string>
              </property>
             </widget>
            </item>

@@ -748,6 +748,10 @@ Remove command from command history
 Select the sandbox in which to start the program or document.
 .
 
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
 3111;txt;01
       Sandboxie Start Menu - %2  %0
 .
@@ -3065,6 +3069,22 @@ Open Smart Card RPC port
 Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
 .
 
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3465,6 +3485,10 @@ NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.
 If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
 .
 
+6004;pop;err;01
+The configuration of box %2 requires a supporter certificate.
+.
+
 6005;txt;01
 Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
 .
@@ -3479,9 +3503,9 @@ If you would prefer to use a UI to control these options, please upgrade to Sand
 .
 
 6007;txt;01
-...
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
 
-If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
 .
 
 

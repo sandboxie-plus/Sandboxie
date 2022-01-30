@@ -14,10 +14,16 @@ void COptionsWindow::LoadForced()
 	ui.treeForced->clear();
 
 	foreach(const QString& Value, m_pBox->GetTextList("ForceProcess", m_Template))
-		AddForcedEntry(Value, 1);
+		AddForcedEntry(Value, (int)eProcess);
+
+	foreach(const QString& Value, m_pBox->GetTextList("ForceProcessDisabled", m_Template))
+		AddForcedEntry(Value, (int)eProcess, true);
 
 	foreach(const QString& Value, m_pBox->GetTextList("ForceFolder", m_Template))
-		AddForcedEntry(Value, 2);
+		AddForcedEntry(Value, (int)ePath);
+
+	foreach(const QString& Value, m_pBox->GetTextList("ForceFolderDisabled", m_Template))
+		AddForcedEntry(Value, (int)ePath, true);
 
 	LoadForcedTmpl();
 
@@ -31,10 +37,10 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 		foreach(const QString& Template, m_pBox->GetTemplates())
 		{
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("ForceProcess", Template))
-				AddForcedEntry(Value, 1, Template);
+				AddForcedEntry(Value, (int)eProcess, false, Template);
 
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("ForceFolder", Template))
-				AddForcedEntry(Value, 2, Template);
+				AddForcedEntry(Value, (int)ePath, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -43,7 +49,7 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 		{
 			QTreeWidgetItem* pItem = ui.treeForced->topLevelItem(i);
 			int Type = pItem->data(0, Qt::UserRole).toInt();
-			if (Type == -1) {
+			if (Type == (int)eTemplate) {
 				delete pItem;
 				continue; // entry from template
 			}
@@ -52,34 +58,49 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 	}
 }
 
-void COptionsWindow::AddForcedEntry(const QString& Name, int type, const QString& Template)
+void COptionsWindow::AddForcedEntry(const QString& Name, int type, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, (type == 1 ? tr("Process") : tr("Folder")) + (Template.isEmpty() ? "" : (" (" + Template + ")")));
-	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : -1);
-	SetProgramItem(Name, pItem, 1);
+	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	pItem->setText(0, (type == (int)eProcess ? tr("Process") : tr("Folder")) + (Template.isEmpty() ? "" : (" (" + Template + ")")));
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? type : (int)eTemplate);
+	SetProgramItem(Name, pItem, (int)eProcess);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeForced->addTopLevelItem(pItem);
 }
 
 void COptionsWindow::SaveForced()
 {
 	QStringList ForceProcess;
+	QStringList ForceProcessDisabled;
 	QStringList ForceFolder;
+	QStringList ForceFolderDisabled;
+
 	for (int i = 0; i < ui.treeForced->topLevelItemCount(); i++)
 	{
 		QTreeWidgetItem* pItem = ui.treeForced->topLevelItem(i);
 		int Type = pItem->data(0, Qt::UserRole).toInt();
-		if (Type == -1)
+		if (Type == (int)eTemplate)
 			continue; // entry from template
-		switch (Type)
-		{
-		case 1:	ForceProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
-		case 2: ForceFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+
+		if (pItem->checkState(0) == Qt::Checked) {
+			switch (Type) {
+			case eProcess:	ForceProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case ePath: ForceFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+			}
+		}
+		else {
+			switch (Type) {
+			case eProcess:	ForceProcessDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			case ePath: ForceFolderDisabled.append(pItem->data(1, Qt::UserRole).toString()); break;
+			}
 		}
 	}
 
 	WriteTextList("ForceProcess", ForceProcess);
+	WriteTextList("ForceProcessDisabled", ForceProcessDisabled);
 	WriteTextList("ForceFolder", ForceFolder);
+	WriteTextList("ForceFolderDisabled", ForceFolderDisabled);
 
 	m_ForcedChanged = false;
 }
@@ -89,8 +110,9 @@ void COptionsWindow::OnForceProg()
 	QString Value = SelectProgram();
 	if (Value.isEmpty())
 		return;
-	AddForcedEntry(Value, 1);
+	AddForcedEntry(Value, (int)eProcess);
 	m_ForcedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnForceDir()
@@ -98,12 +120,22 @@ void COptionsWindow::OnForceDir()
 	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
-	AddForcedEntry(Value, 2);
+	AddForcedEntry(Value, (int)ePath);
 	m_ForcedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelForce()
 {
 	DeleteAccessEntry(ui.treeForced->currentItem());
 	m_ForcedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnForcedChanged(QTreeWidgetItem* pItem, int Index) 
+{
+	//QString Test = pItem->data(1, Qt::UserRole).toString();
+	//qDebug() << Test;
+	m_ForcedChanged = true; 
+	OnOptChanged();
 }

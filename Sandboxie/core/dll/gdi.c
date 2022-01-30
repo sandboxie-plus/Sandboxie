@@ -212,7 +212,7 @@ _FX ULONG_PTR Gdi_GdiDllInitialize_Common(
     //
 
 	// NoSbieDesk BEGIN
-	if(!SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	if(!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 	// NoSbieDesk END
     if (! _Initialized) {
 
@@ -274,6 +274,11 @@ _FX void Gdi_SplWow64(BOOLEAN Register)
     //
     // see GuiServer::SplWow64Slave
     //
+
+    // NoSbieDesk BEGIN
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return;
+	// NoSbieDesk END
 
     GUI_SPLWOW64_REQ req;
     void *rpl;

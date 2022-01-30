@@ -120,6 +120,9 @@ extern "C" _FX BOOLEAN Ole_Init(HMODULE module)
     void *RegisterDragDrop;
     void *RevokeDragDrop;
 
+    // DisableComProxy BEGIN
+    if (!SbieApi_QueryConfBool(NULL, L"DisableComProxy", FALSE))
+    // DisableComProxy END
     if (! SbieDll_IsOpenCOM()) {
 
         Com_Init_Ole32(module);

@@ -96,48 +96,81 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 	}
 }
 
+QList<quint32> CTraceEntry::AllTypes()
+{
+	return QList<quint32>() << MONITOR_APICALL << MONITOR_SYSCALL 
+		<< MONITOR_KEY << MONITOR_FILE << MONITOR_PIPE 
+		<< MONITOR_IPC << MONITOR_RPC << MONITOR_COMCLASS << MONITOR_RTCLASS
+		<< MONITOR_WINCLASS << MONITOR_DRIVE  << MONITOR_IGNORE << MONITOR_IMAGE 
+		<< MONITOR_NETFW << MONITOR_SCM << MONITOR_OTHER;
+}
+
+QString CTraceEntry::GetTypeStr(quint32 Type)
+{
+	switch (Type)
+	{
+	case MONITOR_APICALL:		return "ApiCall"; break;
+	case MONITOR_SYSCALL:		return "SysCall"; break;
+	case MONITOR_PIPE:			return "Pipe"; break;
+	case MONITOR_IPC:			return "Ipc"; break;
+	case MONITOR_RPC:			return "Rpc"; break;
+	case MONITOR_WINCLASS:		return "WinClass"; break;
+	case MONITOR_DRIVE:			return "Drive"; break;
+	case MONITOR_COMCLASS:		return "ComClass"; break;
+	case MONITOR_RTCLASS:		return "RtClass"; break;
+	case MONITOR_IGNORE:		return "Ignore"; break;
+	case MONITOR_IMAGE:			return "Image"; break;
+	case MONITOR_FILE:			return "File"; break;
+	case MONITOR_KEY:			return "Key"; break;
+	case MONITOR_NETFW:			return "Socket"; break;
+	case MONITOR_SCM:			return "SCM"; break; // Service Control Manager
+	case MONITOR_OTHER:			return "Debug"; break;
+	default:					return QString();
+	}
+}
+
 QString CTraceEntry::GetTypeStr() const
 {
-	QString Type;
-	switch (m_Type.Type)
-	{
-	case MONITOR_APICALL:		Type = "ApiCall"; break;
-	case MONITOR_SYSCALL:		Type = "SysCall"; break;
-	case MONITOR_PIPE:			Type = "Pipe"; break;
-	case MONITOR_IPC:			Type = "Ipc"; break;
-	case MONITOR_WINCLASS:		Type = "WinClass"; break;
-	case MONITOR_DRIVE:			Type = "Drive"; break;
-	case MONITOR_COMCLASS:		Type = "ComClass"; break;
-	case MONITOR_IGNORE:		Type = "Ignore"; break;
-	case MONITOR_IMAGE:			Type = "Image"; break;
-	case MONITOR_FILE:			Type = "File"; break;
-	case MONITOR_KEY:			Type = "Key"; break;
-	case MONITOR_OTHER:			Type = "Debug"; break;
-	default:					Type = "Unknown: " + QString::number(m_Type.Type);
-	}
+	QString Type = GetTypeStr(m_Type.Type);
+	if(Type.isEmpty())
+		Type = "Unknown: " + QString::number(m_Type.Type);
 
-	//if (!m_Type.User)
-	//	Type.append(" (drv)");
+	if (m_Type.User)
+		Type.append(" (U)");
+	else
+		Type.append(" (D)");
 
 	return Type;
+}
+
+bool CTraceEntry::IsOpen() const 
+{
+	return (m_Type.Flags & MONITOR_DISPOSITION_MASK) == MONITOR_OPEN;
+}
+
+bool CTraceEntry::IsClosed() const
+{
+	return (m_Type.Flags & MONITOR_DISPOSITION_MASK) == MONITOR_DENY;
+}
+
+bool CTraceEntry::IsTrace() const
+{
+	return m_Type.Trace;
 }
 
 QString CTraceEntry::GetStautsStr() const
 {
 	QString Status;
-	if ((m_Type.Flags & MONITOR_DISPOSITION_MASK) == MONITOR_OPEN)
+	if (IsOpen())
 		Status.append("Open ");
-	if ((m_Type.Flags & MONITOR_DISPOSITION_MASK) == MONITOR_DENY)
+	if (IsClosed())
 		Status.append("Closed ");
 
-	if (m_Type.Trace)
+	if (IsTrace())
 		Status.append("Trace ");
 
 	if (m_Counter > 1)
 		Status.append(QString("(%1) ").arg(m_Counter));
-
-	if (m_Type.User)
-		Status = Status.toLower();
 
 	return Status;
 }

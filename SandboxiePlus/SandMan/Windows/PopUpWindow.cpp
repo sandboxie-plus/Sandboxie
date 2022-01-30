@@ -103,7 +103,7 @@ void CPopUpWindow::Show()
 		this->move(scrRect.width() - 600 - 20, scrRect.height() - 200 - 50);
 	}
 
-	this->show();
+	SafeShow(this);
 }
 
 void CPopUpWindow::Poke()
@@ -250,13 +250,13 @@ void CPopUpWindow::AddUserPrompt(quint32 RequestId, const QVariantMap& Data, qui
 	switch (Data["id"].toInt())
 	{
 	case CSbieAPI::eFileMigration:
-		Message = tr("Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?\r\nFile name: %3")
+		Message = tr("Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?\nFile name: %3")
 			.arg(FormatSize(Data["fileSize"].toULongLong())).arg(pProcess->GetBoxName())
 			.arg(Data["fileName"].toString())
 			.arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId());
 		break;
 	case CSbieAPI::eInetBlockade:
-		Message = tr("Do you want to allow %1 (%2) access to the internet?\r\nFull path: %3")
+		Message = tr("Do you want to allow %1 (%2) access to the internet?\nFull path: %3")
 			.arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId())
 			.arg(pProcess->GetFileName());
 		break;
@@ -311,22 +311,18 @@ void CPopUpWindow::SendPromptResult(CPopUpPrompt* pEntry, int retval)
 		pEntry->m_pProcess.objectCast<CSbieProcess>()->SetRememberedAction(pEntry->m_Result["id"].toInt(), retval);
 }
 
-void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, const QString& BoxName, quint32 ProcessId)
+void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, const CSandBoxPtr& pBox, quint32 ProcessId)
 {
-	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	if (!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended())
-		return;
-
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 
-	QString Message = tr("%1 is eligible for quick recovery from %2.\r\nThe file was written by: %3")
-		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(BoxName).replace("_", " "))
+	QString Message = tr("%1 is eligible for quick recovery from %2.\nThe file was written by: %3")
+		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(QString(pBox->GetName()).replace("_", " "))
 		.arg(pProcess.isNull() ? tr("an UNKNOWN process.") : tr("%1 (%2)").arg(pProcess->GetProcessName()).arg(pProcess->GetProcessId()));
 
 	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
-		BoxPath = theAPI->GetBoxedPath(BoxName, FilePath);
+		BoxPath = theAPI->GetBoxedPath(pBox->GetName(), FilePath);
 
-	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, BoxName, this);
+	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, pBox->GetName(), this);
 
 	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
 	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);
@@ -395,7 +391,9 @@ void CPopUpWindow::OnOpenRecovery()
 {
 	CPopUpRecovery* pEntry = qobject_cast<CPopUpRecovery*>(sender());
 
-	emit RecoveryRequested(pEntry->m_BoxName);
+	CSandBoxPtr pBox = theAPI->GetBoxByName(pEntry->m_BoxName);
+	if (pBox)
+		theGUI->ShowRecovery(pBox);
 
 	// since we opened the recovery dialog, we can dismiss all the notifications for this box
 	OnDismiss(0x01);
@@ -410,7 +408,7 @@ void CPopUpWindow::ShowProgress(quint32 MsgCode, const QStringList& MsgData, qui
 	if (m_HiddenMessages.contains(0, FilePath))
 		return;
 
-	QString Message = tr("Migrating a large file %1 into the sandbox %2, %3 left.\r\nFull path: %4")
+	QString Message = tr("Migrating a large file %1 into the sandbox %2, %3 left.\nFull path: %4")
 		.arg(FilePath.mid(FilePath.lastIndexOf("\\") + 1)).arg(BoxName).arg(FormatSize(SizeLeft))
 		.arg(FilePath);
 

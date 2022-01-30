@@ -272,17 +272,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finder.cur" />
+    <None Include="sandman_cs.ts" />
     <None Include="sandman_de.ts" />
     <None Include="sandman_en.ts" />
     <None Include="sandman_es.ts" />
+    <None Include="sandman_fr.ts" />
     <None Include="sandman_it.ts" />
     <None Include="sandman_nl.ts" />
     <None Include="sandman_pl.ts" />
-    <None Include="sandman_pt.ts" />
+    <None Include="sandman_pt_BR.ts" />
+    <None Include="sandman_pt_PT.ts" />
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
-    <None Include="sandman_zh-TW.ts" />
-    <None Include="sandman_zh-CN.ts" />
+    <None Include="sandman_uk.ts" />
+    <None Include="sandman_zh_TW.ts" />
+    <None Include="sandman_zh_CN.ts" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SandMan.rc" />

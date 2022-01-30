@@ -11,7 +11,6 @@
 
 void COptionsWindow::LoadGroups()
 {
-	m_TemplateGroups.clear();
 	ui.treeGroups->clear();
 
 	QStringList ProcessGroups = m_pBox->GetTextList("ProcessGroup", m_Template);
@@ -31,8 +30,10 @@ void COptionsWindow::LoadGroups()
 				continue;
 			QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
 			SetProgramItem(Entries[i], pSubItem, 0);
+			pSubItem->setFlags(pSubItem->flags() | Qt::ItemIsEditable);
 			pItem->addChild(pSubItem);
 		}
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 		ui.treeGroups->addTopLevelItem(pItem);
 	}
 	
@@ -51,7 +52,6 @@ void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
 		{
 			foreach(const QString& Group, m_pBox->GetTextListTmpl("ProcessGroup", Template))
 			{
-				m_TemplateGroups.insert(Group);
 				QStringList Entries = Group.split(",");
 				QString GroupName = Entries.takeFirst();
 				
@@ -90,6 +90,31 @@ void COptionsWindow::LoadGroupsTmpl(bool bUpdate)
 	}
 }
 
+QStringList COptionsWindow::GetCurrentGroups()
+{
+	QStringList Groups;
+
+	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
+		QString GroupName = pItem->data(0, Qt::UserRole).toString();
+		Groups.append(GroupName);
+	}
+
+	foreach(const QString& Template, m_pBox->GetTemplates())
+	{
+		foreach(const QString& Group, m_pBox->GetTextListTmpl("ProcessGroup", Template))
+		{
+			QStringList Entries = Group.split(",");
+			QString GroupName = Entries.takeFirst();
+			if (!Groups.contains(GroupName))
+				Groups.append(GroupName);
+		}
+	}
+
+	return Groups;
+}
+
 void COptionsWindow::SaveGroups()
 {
 	QStringList ProcessGroups;
@@ -103,8 +128,6 @@ void COptionsWindow::SaveGroups()
 		for (int j = 0; j < pItem->childCount(); j++)
 			Programs.append(pItem->child(j)->data(0, Qt::UserRole).toString());
 		QString Group = GroupName + "," + Programs.join(",");
-		if (m_TemplateGroups.contains(Group))
-			continue; // don't save unchanged groups to local config
 		ProcessGroups.append(Group);
 	}
 
@@ -128,50 +151,26 @@ void COptionsWindow::OnAddGroup()
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setText(0, Value);
 	pItem->setData(0, Qt::UserRole, "<" + Value + ">");
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeGroups->addTopLevelItem(pItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
-void COptionsWindow::AddProgToGroup(QTreeWidget* pTree, const QString& Groupe)
+void COptionsWindow::AddProgToGroup(QTreeWidget* pTree, const QString& Groupe, bool disabled)
 {
 	QString Value = SelectProgram();
 	if (Value.isEmpty())
 		return;
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 	SetProgramItem(Value, pItem, 0);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	pTree->addTopLevelItem(pItem);
 
-	AddProgToGroup(Value, Groupe);
-}
-
-void COptionsWindow::AddProgToGroup(const QString& Value, const QString& Groupe)
-{
-	QTreeWidgetItem* pGroupItem = NULL;
-	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++)
-	{
-		QTreeWidgetItem* pCurItem = ui.treeGroups->topLevelItem(i);
-		if (pCurItem->data(0, Qt::UserRole).toString().compare(Groupe, Qt::CaseInsensitive) == 0)
-		{
-			pGroupItem = pCurItem;
-			break;
-		}
-	}
-
-	if (!pGroupItem)
-	{
-		pGroupItem = new QTreeWidgetItem();
-		pGroupItem->setText(0, Groupe.mid(1, Groupe.length()-2));
-		pGroupItem->setData(0, Qt::UserRole, Groupe);
-		ui.treeGroups->addTopLevelItem(pGroupItem);
-	}
-
-	QTreeWidgetItem* pProgItem = new QTreeWidgetItem();
-	SetProgramItem(Value, pProgItem, 0);
-	pGroupItem->addChild(pProgItem);
-
-	m_GroupsChanged = true;
+	AddProgramToGroup(Value, Groupe);
 }
 
 void COptionsWindow::DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe)
@@ -196,6 +195,7 @@ void COptionsWindow::DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe)
 				{
 					delete pProgItem;
 					m_GroupsChanged = true;
+					OnOptChanged();
 					break;
 				}
 			}
@@ -211,24 +211,31 @@ void COptionsWindow::AddProgramToGroup(const QString& Program, const QString& Gr
 
 	QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
 	SetProgramItem(Program, pSubItem, 0);
+	pSubItem->setFlags(pSubItem->flags() | Qt::ItemIsEditable);
 	pItem->addChild(pSubItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
-void COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& Group)
+bool COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& Group)
 {
 	QTreeWidgetItem* pItem = FindGroupByName(Group, true);
 
+	bool bFound = false;
 	for (int j = 0; j < pItem->childCount(); j++){
 		QTreeWidgetItem* pProgItem = pItem->child(j);
 		if (pProgItem->data(0, Qt::UserRole).toString().compare(Program, Qt::CaseInsensitive) == 0)  {
 			delete pProgItem;
+			bFound = true;
 			break;
 		}
 	}
 
 	m_GroupsChanged = true;
+	OnOptChanged();
+
+	return bFound;
 }
 
 QTreeWidgetItem* COptionsWindow::FindGroupByName(const QString& Group, bool bAdd)
@@ -247,6 +254,7 @@ QTreeWidgetItem* COptionsWindow::FindGroupByName(const QString& Group, bool bAdd
 		if (GroupName.length() > 2)
 			GroupName = GroupName.mid(1, GroupName.length() - 2);
 		pItem->setText(0, GroupName);
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 		ui.treeGroups->addTopLevelItem(pItem);
 		return pItem;
 	}
@@ -277,9 +285,11 @@ void COptionsWindow::OnAddProg()
 
 	QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
 	SetProgramItem(Value, pSubItem, 0);
+	pSubItem->setFlags(pSubItem->flags() | Qt::ItemIsEditable);
 	pItem->addChild(pSubItem);
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelProg()
@@ -296,11 +306,11 @@ void COptionsWindow::OnDelProg()
 	delete pItem;
 
 	m_GroupsChanged = true;
+	OnOptChanged();
 }
 
-void COptionsWindow::CopyGroupToList(const QString& Groupe, QTreeWidget* pTree)
+void COptionsWindow::CopyGroupToList(const QString& Groupe, QTreeWidget* pTree, bool disabled)
 {
-	pTree->clear();
 	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) 
 	{
 		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
@@ -311,7 +321,9 @@ void COptionsWindow::CopyGroupToList(const QString& Groupe, QTreeWidget* pTree)
 				QString Value = pItem->child(j)->data(0, Qt::UserRole).toString();
 
 				QTreeWidgetItem* pSubItem = new QTreeWidgetItem();
+				pSubItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
 				SetProgramItem(Value, pSubItem, 0);
+				pSubItem->setFlags(pSubItem->flags() | Qt::ItemIsEditable);
 				pTree->addTopLevelItem(pSubItem);
 			}
 			break;

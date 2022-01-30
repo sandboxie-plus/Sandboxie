@@ -7,16 +7,18 @@
 //#include "../MiscHelpers/Common/qRC4.h"
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
+#include "./Windows/SettingsWindow.h"
 
 CSettings* theConf = NULL;
+
+QString g_PendingMessage;
 
 int main(int argc, char *argv[])
 {
 #ifdef Q_OS_WIN
-	SetProcessDPIAware();
+	//SetProcessDPIAware();
 #endif // Q_OS_WIN 
-
-	//QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
 	//QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 
 	QtSingleApplication app(argc, argv);
@@ -45,14 +47,12 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	QString PendingMessage;
-
 	CmdPos = Args.indexOf("-op", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		QString Op;
 		if (Args.count() > CmdPos)
 			Op = Args.at(CmdPos + 1);
-		PendingMessage = "Op:" + Op;
+		g_PendingMessage = "Op:" + Op;
 	}
 
 	CmdPos = Args.indexOf("/box:__ask__", Qt::CaseInsensitive);
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 		//QString CommandLine;
 		//for (int i = CmdPos + 1; i < Args.count(); i++)
 		//	CommandLine += "\"" + Args[i] + "\" ";
-		//PendingMessage = "Run:" + CommandLine.trimmed();
+		//g_PendingMessage = "Run:" + CommandLine.trimmed();
 		LPWSTR ChildCmdLine = wcsstr(GetCommandLineW(), L"/box:__ask__") + 13;
 
 		if (IsBoxed) {
@@ -69,7 +69,8 @@ int main(int argc, char *argv[])
 			return 0;
 		}
 
-		PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+		g_PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+		g_PendingMessage += "\nFrom:" + QDir::currentPath();
 	}
 
 	if (IsBoxed) {
@@ -77,22 +78,29 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	if (!PendingMessage.isEmpty()) {
-		if(app.sendMessage(PendingMessage))
+	if (!g_PendingMessage.isEmpty()) {
+		if(app.sendMessage(g_PendingMessage))
 			return 0;
+		app.disableSingleApp(); // we start to do one job and exit, don't interfear with starting a regular instance
 	}
 	else if (app.sendMessage("ShowWnd"))
 		return 0;
 
-	theConf = new CSettings("Sandboxie-Plus");
+
+	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
+		CSettingsWindow::LoadCertificate();
+		g_CertInfo.business = GetArguments(g_Certificate, L'\n', L':').value("TYPE").toUpper().contains("BUSINESS");
+	}
+
+	// use a shared setting location when used in a business environment for easier administration
+	theConf = new CSettings("Sandboxie-Plus", g_CertInfo.business);
 
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
+
 
 	CSandMan* pWnd = new CSandMan();
 
 	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));
-	if (!PendingMessage.isEmpty())
-		QMetaObject::invokeMethod(pWnd, "OnMessage", Qt::QueuedConnection, Q_ARG(QString, PendingMessage));
 
 	int ret =  app.exec();
 

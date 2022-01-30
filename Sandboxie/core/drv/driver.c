@@ -56,9 +56,7 @@ static BOOLEAN Driver_InitPublicSecurity(void);
 
 static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
-#ifdef OLD_DDK
 static BOOLEAN Driver_FindMissingServices(void);
-#endif // OLD_DDK
 
 static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
@@ -70,9 +68,7 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #pragma alloc_text (INIT, DriverEntry)
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
 #pragma alloc_text (INIT, Driver_FindHomePath)
-#ifdef OLD_DDK
 #pragma alloc_text (INIT, Driver_FindMissingServices)
-#endif // OLD_DDK
 #endif // ALLOC_PRAGMA
 
 
@@ -130,6 +126,8 @@ ULONG Process_Flags3 = 0;
 #ifdef OLD_DDK
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
 #endif // OLD_DDK
+P_NtCreateToken                 ZwCreateToken               = NULL;
+P_NtCreateTokenEx               ZwCreateTokenEx             = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -199,10 +197,8 @@ _FX NTSTATUS DriverEntry(
     if (ok)
         ok = Session_Init();
 
-#ifdef OLD_DDK
     if (ok)
         ok = Driver_FindMissingServices();
-#endif // OLD_DDK
 
     if (ok)
         ok = Token_Init();
@@ -607,58 +603,58 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 //---------------------------------------------------------------------------
 
 
-#ifdef OLD_DDK
-
-#define FIND_SERVICE(svc,prmcnt)                                \
-    {                                                           \
-    static const char *ProcName = #svc;                         \
-    ptr = Dll_GetProc(Dll_NTDLL, ProcName, FALSE);              \
-    if (! ptr)                                                  \
-        return FALSE;                                           \
-    if (! Hook_GetService(                                      \
-            ptr, NULL, prmcnt, NULL, (void **)&svc)) {          \
-        RtlStringCbPrintfW(err_txt, szieof(err_txt), L"%s.%S", Dll_NTDLL, ProcName);       \
-        Log_Msg1(MSG_1108, err_txt);                            \
-        return FALSE;                                           \
-    }                                                           \
-    }
+void* Driver_FindMissingService(const char* ProcName, int prmcnt)
+{
+    void* ptr = Dll_GetProc(Dll_NTDLL, ProcName, FALSE);
+    if (!ptr)
+        return NULL;
+    void* svc = NULL;
+    if (!Hook_GetService(ptr, NULL, prmcnt, NULL, &svc))
+        return NULL;
+    return svc;
+}
 
 
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
+#ifdef OLD_DDK
     UNICODE_STRING uni;
+	RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
 
     //
     // Windows 7 kernel exports ZwSetInformationToken
     // on earlier versions of Windows, we search for it
     //
-#ifndef _WIN64
+//#ifndef _WIN64
     if (Driver_OsVersion < DRIVER_WINDOWS_7) {
-		
-		void *ptr;
-		WCHAR err_txt[128];
 
-		FIND_SERVICE(ZwSetInformationToken, 4);
+        ZwSetInformationToken = (P_NtSetInformationToken) Driver_FindMissingService("ZwSetInformationToken", 4);
 
     } else 
-#endif
+//#endif
 	{
-		RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
-		ZwSetInformationToken = (P_NtSetInformationToken)
-			MmGetSystemRoutineAddress(&uni);
-		if (!ZwSetInformationToken) {
-			Log_Msg1(MSG_1108, uni.Buffer);
-			return FALSE;
-		}
+		ZwSetInformationToken = (P_NtSetInformationToken) MmGetSystemRoutineAddress(&uni);
+    }
+
+    if (!ZwSetInformationToken) {
+		Log_Msg1(MSG_1108, uni.Buffer);
+		return FALSE;
+	}
+#endif
+
+    //
+    // Retrive some unexported kernel functions that may be usefull
+    //
+
+    ZwCreateToken = (P_NtCreateToken) Driver_FindMissingService("ZwCreateToken", 13);
+    //DbgPrint("ZwCreateToken: %p\r\n", ZwCreateToken);
+    if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
+        ZwCreateTokenEx = (P_NtCreateTokenEx)Driver_FindMissingService("ZwCreateTokenEx", 17);
+        //DbgPrint("ZwCreateTokenEx: %p\r\n", ZwCreateTokenEx);
     }
 
     return TRUE;
 }
-
-
-#undef FIND_SERVICE
-
-#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------
@@ -764,18 +760,17 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
-// Driver_CheckThirdParty
+// Driver_GetRegDword
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Driver_CheckThirdParty(
-    const WCHAR *DriverName, ULONG DriverType)
+_FX ULONG Driver_GetRegDword(
+    const WCHAR *KeyPath, const WCHAR *ValueName)
 {
     NTSTATUS status;
     RTL_QUERY_REGISTRY_TABLE qrt[2];
     UNICODE_STRING uni;
     ULONG value;
-    BOOLEAN IsInstalled = FALSE;
 
     value = -1;
 
@@ -787,28 +782,25 @@ _FX BOOLEAN Driver_CheckThirdParty(
     qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
                     RTL_QUERY_REGISTRY_DIRECT |
                     RTL_QUERY_REGISTRY_NOEXPAND;
-    qrt[0].Name = (WCHAR *)L"Type";
+    qrt[0].Name = (WCHAR *)ValueName;
     qrt[0].EntryContext = &uni;
     qrt[0].DefaultType = REG_NONE;
 
     status = RtlQueryRegistryValues(
-        RTL_REGISTRY_SERVICES, DriverName, qrt, NULL, NULL);
+        RTL_REGISTRY_ABSOLUTE, KeyPath, qrt, NULL, NULL);
 
-    if (status == STATUS_SUCCESS) {
+    if (status != STATUS_SUCCESS)
+        return 0;
 
-        if (value == -1) {
+    if (value == -1) {
 
-            //
-            // if value is not string, RtlQueryRegistryValues writes
-            // it directly into EntryContext
-            //
+        //
+        // if value is not string, RtlQueryRegistryValues writes
+        // it directly into EntryContext
+        //
 
-            value = *(ULONG *)&uni;
-        }
-
-        if (value == DriverType)
-            IsInstalled = TRUE;
+        value = *(ULONG *)&uni;
     }
 
-    return IsInstalled;
+    return value;
 }

@@ -246,7 +246,13 @@
     <None Include="sandman_de.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_pt.ts">
+    <None Include="sandman_fr.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_pt_BR.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_pt_PT.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_ru.ts">
@@ -258,13 +264,16 @@
     <None Include="sandman_tr.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh-TW.ts">
+    <None Include="sandman_zh_TW.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_pl.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh-CN.ts">
+    <None Include="sandman_uk.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_zh_CN.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_es.ts">
@@ -277,6 +286,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_en.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_cs.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

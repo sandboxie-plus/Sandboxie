@@ -40,7 +40,7 @@ public:
 	static bool				IsSbieCtrlRunning();
 	static bool				TerminateSbieCtrl();
 
-	virtual SB_STATUS		Connect(bool withQueue = true);
+	virtual SB_STATUS		Connect(bool takeOver, bool withQueue);
 	virtual SB_STATUS		Disconnect();
 	virtual bool			IsConnected() const;
 
@@ -63,8 +63,7 @@ public:
 	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
-
-	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
+	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { return m_BoxedProxesses; }
 
 	virtual CSandBoxPtr		GetBoxByProcessId(quint32 ProcessId) const;
 	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
@@ -90,8 +89,10 @@ public:
 	// Config
 	virtual SB_STATUS		ReloadConfig(bool ReconfigureDrv = false);
 	virtual SB_STATUS		ReloadCert();
+	virtual void			CommitIniChanges();
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
-	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
+	virtual QString			SbieIniGetEx(const QString& Section, const QString& Setting);
+	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate, bool bRefresh = true);
 	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
@@ -102,8 +103,19 @@ public:
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
 
+	enum EFeatureFlags
+	{
+		eSbieFeatureWFP			= 0x00000001,
+		eSbieFeatureObCB		= 0x00000002,
+		eSbieFeaturePMod		= 0x00000004,
+		eSbieFeatureAppC		= 0x00000008,
+		eSbieFeatureSbiL		= 0x00000010,
+		eSbieFeatureCert		= 0x80000000
+	};
+
 	virtual quint32			GetFeatureFlags();
 	virtual QString			GetFeatureStr();
+	virtual quint64			GetCertState();
 
 	// Forced Processes
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);
@@ -120,7 +132,7 @@ public:
 	// Other
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
 
-	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL, bool Elevated = false);
+	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	virtual QString			GetStartPath() const;
 
 	virtual quint32			GetSessionID() const;
@@ -173,7 +185,7 @@ protected:
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
 
-	virtual quint32			GetImageType(quint32 ProcessId);
+	virtual quint32			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
 
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);

@@ -88,7 +88,7 @@ BEGIN
         BLOCK "0c0704b0"
         BEGIN
             VALUE "CompanyName", MY_COMPANY_NAME_STRING
-            VALUE "FileDescription", "SandBox Manager"
+            VALUE "FileDescription", "SandBoxie Manager"
             VALUE "FileVersion", VERSION_STR
             VALUE "InternalName", "SandMan.exe"
             VALUE "LegalCopyright", MY_COPYRIGHT_STRING

@@ -73,8 +73,9 @@ static LIST Dll_List;
 static BOOLEAN Dll_List_Initialized = FALSE;
 
 const WCHAR *Dll_NTDLL = L"NTDLL";
+#ifdef XP_SUPPORT
 const WCHAR *Dll_USER = L"USER32";
-
+#endif
 
 //---------------------------------------------------------------------------
 // Dll_Init
@@ -86,10 +87,12 @@ _FX BOOLEAN Dll_Init(void)
     List_Init(&Dll_List);
     Dll_List_Initialized = TRUE;
 
-    if (! Dll_Load(Dll_NTDLL)) // ntoskrnl.exe - ntdll.dll
+    if (! Dll_Load(Dll_NTDLL))
         return FALSE;
-    if (! Dll_Load(Dll_USER)) // win32k.sys - w10: win32u.dll - w7: user32.dll & gdi32.dll
+#ifdef XP_SUPPORT
+    if (! Dll_Load(Dll_USER))
         return FALSE;
+#endif
 
     return TRUE;
 }

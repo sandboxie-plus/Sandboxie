@@ -47,6 +47,8 @@ extern "C" {
 // Sandboxie API Calls
 //---------------------------------------------------------------------------
 
+SBIEAPI_EXPORT
+long SbieApi_Ioctl(ULONG64* parms);
 
 SBIEAPI_EXPORT
 LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...);
@@ -88,6 +90,7 @@ SBIEAPI_EXPORT
 LONG SbieApi_GetHomePath(
     WCHAR *NtPath, ULONG NtPathMaxLen,
     WCHAR *DosPath, ULONG DosPathMaxLen);
+
 
 
 //---------------------------------------------------------------------------
@@ -156,7 +159,8 @@ LONG SbieApi_QueryPathList(
     ULONG path_code,
     ULONG *path_len,
     WCHAR *path_str,
-    HANDLE process_id);
+    HANDLE process_id,
+    BOOLEAN prepend_level);
 
 SBIEAPI_EXPORT
 LONG SbieApi_EnumProcessEx(
@@ -249,7 +253,7 @@ LONG SbieApi_CheckInternetAccess(
     const WCHAR *DeviceName32,
     BOOLEAN IssueMessage);
 
-//SBIEAPI_EXPORT
+SBIEAPI_EXPORT
 LONG SbieApi_GetBlockedDll(
     WCHAR *DllNameBuf,
     ULONG DllNameLen);

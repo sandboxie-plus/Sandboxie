@@ -123,6 +123,16 @@ typedef int (*P_ReleaseDC)(
 
 static P_GetUserObjectInformationW __sys_GetUserObjectInformationW = NULL;
 
+#ifndef _DPI_AWARENESS_CONTEXTS_
+struct DPI_AWARENESS_CONTEXT__ { int unused; };
+typedef DPI_AWARENESS_CONTEXT__ *DPI_AWARENESS_CONTEXT;
+#endif
+
+typedef DPI_AWARENESS_CONTEXT (WINAPI *P_GetThreadDpiAwarenessContext)(
+    VOID);
+
+static P_GetThreadDpiAwarenessContext __sys_GetThreadDpiAwarenessContext = NULL;
+
 
 //---------------------------------------------------------------------------
 // Variables
@@ -147,16 +157,19 @@ _FX BOOLEAN Gui_InitMisc(void)
 {
     if (! Gui_OpenAllWinClasses) {
 
-        SBIEDLL_HOOK_GUI(GetWindow);
-        SBIEDLL_HOOK_GUI(GetParent);
+        
         SBIEDLL_HOOK_GUI(SetParent);
-        SBIEDLL_HOOK_GUI(SetForegroundWindow);
-        SBIEDLL_HOOK_GUI(MonitorFromWindow);
-
-        SBIEDLL_HOOK_GUI(SetCursor);
-        SBIEDLL_HOOK_GUI(GetIconInfo);
-        SBIEDLL_HOOK_GUI(SetCursorPos);
-        SBIEDLL_HOOK_GUI(ClipCursor);
+        if (Gui_UseProxyService) {
+            SBIEDLL_HOOK_GUI(GetWindow);
+            SBIEDLL_HOOK_GUI(GetParent);
+            SBIEDLL_HOOK_GUI(SetForegroundWindow);
+            SBIEDLL_HOOK_GUI(MonitorFromWindow);
+        
+            SBIEDLL_HOOK_GUI(SetCursor);
+            SBIEDLL_HOOK_GUI(GetIconInfo);
+            SBIEDLL_HOOK_GUI(SetCursorPos);
+            SBIEDLL_HOOK_GUI(ClipCursor);
+        }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
 
@@ -174,10 +187,8 @@ _FX BOOLEAN Gui_InitMisc(void)
         }
     }
 
-	// NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	if (!Gui_UseProxyService)
 		return TRUE;
-	// NoSbieDesk END
 
     SBIEDLL_HOOK_GUI(OpenClipboard);
     SBIEDLL_HOOK_GUI(CloseClipboard);
@@ -228,6 +239,9 @@ _FX BOOLEAN Gui_InitMisc(void)
 
     SBIEDLL_HOOK_GUI(GetRawInputDeviceInfoA);
     SBIEDLL_HOOK_GUI(GetRawInputDeviceInfoW);
+
+	__sys_GetThreadDpiAwarenessContext = (P_GetThreadDpiAwarenessContext)
+		Ldr_GetProcAddrNew(DllName_user32, L"GetThreadDpiAwarenessContext","GetThreadDpiAwarenessContext");
 
     return TRUE;
 }
@@ -313,6 +327,7 @@ _FX BOOL Gui_ClipCursor(const RECT *lpRect)
         memzero(&req.rect, sizeof(req.rect));
         Gui_ClipCursorActive = FALSE;
     }
+    req.dpi_awareness_ctx = __sys_GetThreadDpiAwarenessContext ? (LONG64)(LONG_PTR)__sys_GetThreadDpiAwarenessContext() : 0;
 
     rpl = Gui_CallProxy(&req, sizeof(req), sizeof(ULONG));
     if (rpl) {
@@ -464,6 +479,7 @@ _FX BOOL Gui_SetCursorPos(int x, int y)
     req.error = GetLastError();
     req.x = x;
     req.y = y;
+    req.dpi_awareness_ctx = __sys_GetThreadDpiAwarenessContext ? (LONG64)(LONG_PTR)__sys_GetThreadDpiAwarenessContext() : 0;
     rpl = Gui_CallProxyEx(&req, sizeof(req), sizeof(ULONG), TRUE);
     if (rpl) {
         retval = rpl->retval;
@@ -1314,6 +1330,11 @@ static P_ImmCreateContext       __sys_ImmCreateContext      = NULL;
 
 _FX BOOLEAN Gui_Init_IMM32(HMODULE module)
 {
+    // NoSbieDesk BEGIN
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
+
     __sys_ImmAssociateContext = (P_ImmAssociateContext)
                 GetProcAddress(module, "ImmAssociateContext");
 

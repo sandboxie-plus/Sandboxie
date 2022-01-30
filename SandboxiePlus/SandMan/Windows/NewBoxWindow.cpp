@@ -35,19 +35,16 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 		break;
 	}
 
-	ui.cmbTemplates->addItem(tr("Hardened"));
-	ui.cmbTemplates->addItem(tr("Default"));
-	ui.cmbTemplates->setCurrentIndex(eDefault);
-	ui.cmbTemplates->addItem(tr("Legacy Sandboxie Behaviour"));
-	// leniant
-	// open
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefault), tr("Standard Isolation Sandbox (Default)"), (int)CSandBoxPlus::eDefault);
+	//ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eInsecure), tr("UNSECURE Configuration (please change)"), (int)CSandBoxPlus::eInsecure);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
 
-	foreach(const CSandBoxPtr& pBox, Boxes)
-		ui.cmbBoxes->addItem(pBox->GetName());
-
-	connect(ui.radTemplate, SIGNAL(toggled(bool)), this, SLOT(OnPreset()));
-	connect(ui.radCopy, SIGNAL(toggled(bool)), this, SLOT(OnPreset()));
-	ui.radTemplate->setChecked(true);
+	connect(ui.cmbBoxType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBoxTypChanged()));
+	ui.cmbBoxType->setCurrentIndex(3); // default
 
 	ui.txtName->setFocus();
 
@@ -59,10 +56,14 @@ CNewBoxWindow::~CNewBoxWindow()
 	//theConf->SetBlob("NewBoxWindow/Window_Geometry", saveGeometry());
 }
 
-void CNewBoxWindow::OnPreset()
+void CNewBoxWindow::OnBoxTypChanged()
 {
-	ui.cmbTemplates->setEnabled(ui.radTemplate->isChecked());
-	ui.cmbBoxes->setEnabled(ui.radCopy->isChecked());
+	int BoxType = ui.cmbBoxType->currentData().toInt();
+
+	ui.lblBoxInfo->setText(theGUI->GetBoxDescription(BoxType));
+
+	if(BoxType != CSandBoxPlus::eDefault && BoxType != CSandBoxPlus::eHardened)
+		theGUI->CheckCertificate();
 }
 
 void CNewBoxWindow::CreateBox()
@@ -70,50 +71,37 @@ void CNewBoxWindow::CreateBox()
 	m_Name = ui.txtName->text();
 	m_Name.replace(" ", "_");
 
-	bool bCopy = ui.radCopy->isChecked();
+	int BoxType = ui.cmbBoxType->currentData().toInt();
 
-	SB_STATUS Status = theAPI->CreateBox(m_Name, !bCopy);
+	SB_STATUS Status = theAPI->CreateBox(m_Name, true);
 
 	if (!Status.IsError())
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(m_Name);
 
-		if (bCopy)
+		switch (BoxType)
 		{
-			QList<QPair<QString, QString>> Settings;
-			CSandBoxPtr pSrcBox = theAPI->GetBoxByName(ui.cmbBoxes->currentText());			
-			qint32 status = 0;
-			if(!pSrcBox.isNull()) Settings = pSrcBox->GetIniSection(&status);
-			if (Settings.isEmpty())
-				Status = SB_ERR(SB_FailedCopyConf, QVariantList() << ui.cmbBoxes->currentText() << (quint32)status);
-			else
-			{
-				for (QList<QPair<QString, QString>>::iterator I = Settings.begin(); I != Settings.end(); ++I)
-				{
-					Status = theAPI->SbieIniSet(m_Name, I->first, I->second, CSbieAPI::eIniInsert);
-					if (Status.IsError())
-						break;
-				}
-			}
-
-			theAPI->ReloadConfig();
-			theAPI->ReloadBoxes();
-		}
-		else switch (ui.cmbTemplates->currentIndex())
-		{
-			case eHardened:
-				pBox.objectCast<CSandBoxPlus>()->SetBool("DropAdminRights", true);
-				//pBox.objectCast<CSandBoxPlus>()->SetBool("FakeAdminRights", true); // Note: making the app think it has admin rights has no security downsides, but it can help with compatibility
-				pBox.objectCast<CSandBoxPlus>()->SetBool("ClosePrintSpooler", true);
+			case CSandBoxPlus::eHardenedPlus:
+			case CSandBoxPlus::eHardened:
+				//pBox->SetBool("NoSecurityIsolation", false);
+				pBox->SetBool("DropAdminRights", true);
+				//pBox->SetBool("MsiInstallerExemptions", false);
+				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eHardenedPlus);
 				break;
-			case eLegacy:
-				pBox.objectCast<CSandBoxPlus>()->SetBool("UnrestrictedSCM", true);
-				//pBox.objectCast<CSandBoxPlus>()->SetBool("ExposeBoxedSystem", true); 
-				//pBox.objectCast<CSandBoxPlus>()->SetBool("RunServicesAsSystem", true); // legacy behaviour, but there should be no normal use cases which require this
-				pBox.objectCast<CSandBoxPlus>()->SetBool("OpenPrintSpooler", true);
-				pBox.objectCast<CSandBoxPlus>()->InsertText("Template", "OpenSmartCard");
-			default:
-				pBox.objectCast<CSandBoxPlus>()->InsertText("Template", "OpenBluetooth"); // most Unity games needs that, besides most modern games are Unity based
+			case CSandBoxPlus::eDefaultPlus:
+			case CSandBoxPlus::eDefault:
+				//pBox->SetBool("NoSecurityIsolation", false);
+				//pBox->SetBool("DropAdminRights", false);
+				//pBox->SetBool("MsiInstallerExemptions", false);
+				//pBox->SetBool("RunServicesAsSystem", false);
+				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eDefaultPlus);
+				break;
+			case CSandBoxPlus::eAppBoxPlus:
+			case CSandBoxPlus::eAppBox:
+				pBox->SetBool("NoSecurityIsolation", true);
+				//pBox->SetBool("RunServicesAsSystem", true);
+				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eAppBoxPlus);
+				pBox->InsertText("Template", "NoUACProxy");
 				break;
 		}
 	}

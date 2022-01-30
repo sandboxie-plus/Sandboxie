@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@ static P_NtQueryObject          __sys_NtQueryObject             = NULL;
 
        P_NtQueryVirtualMemory   __sys_NtQueryVirtualMemory      = NULL;
 
-	   P_NtQueryObject          __sys_NtQueryInformationProcess = NULL;
+	   P_NtQueryInformationProcess __sys_NtQueryInformationProcess = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -430,7 +430,7 @@ _FX NTSTATUS Obj_NtQueryInformationProcess(
 	status = __sys_NtQueryInformationProcess(
 		ProcessHandle, ProcessInformationClass, ProcessInformation, ProcessInformationLength, &outlen);
 	
-	if (ProcessInformationClass == ProcessImageFileName)
+	if (ProcessInformationClass == ProcessImageFileName && ProcessInformation != NULL)
 	{
 		//
 		// since file paths are always shorter without the sandbox prefix we can keep this simple

@@ -65,13 +65,17 @@ FORMS += ./Forms/NewBoxWindow.ui \
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \
     sandman_es.ts \
+    sandman_fr.ts \
     sandman_it.ts \
     sandman_nl.ts \
     sandman_pl.ts \
-    sandman_pt.ts \
+    sandman_pt_BR.ts \
+    sandman_pt_PT.ts \
     sandman_ru.ts \
-    sandman_tr.ts \
-    sandman_zh-CN.ts \
-    sandman_zh-TW.ts
+    sandman_uk.ts \
+    sandman_zh_CN.ts \
+    sandman_zh_TW.ts
+
+#   sandman_tr.ts (unmaintained)
 
 RESOURCES += Resources/SandMan.qrc

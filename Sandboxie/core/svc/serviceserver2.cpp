@@ -132,14 +132,19 @@ bool ServiceServer::CanAccessSCM(HANDLE idProcess)
 	if (!securityDescriptor)
 		return bRet;
 
-	/*HANDLE hToken = NULL;
-	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)(UINT_PTR)idProcess);
-	if (hProcess != NULL) {
-		OpenProcessToken(hProcess, TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &hToken);
-		CloseHandle(hProcess);
-	}*/
+	HANDLE hToken = NULL;
+    // OriginalToken BEGIN
+    if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)(UINT_PTR)idProcess);
+        if (hProcess != NULL) {
+            OpenProcessToken(hProcess, TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &hToken);
+            CloseHandle(hProcess);
+        }
+    }
+    else
+    // OriginalToken END
+	    hToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
 
-	HANDLE hToken = (HANDLE)SbieApi_QueryProcessInfo(idProcess, 'ptok');
 	if (hToken) {
 		HANDLE hImpersonatedToken = NULL;
 		if (DuplicateToken(hToken, SecurityImpersonation, &hImpersonatedToken)) {
@@ -386,18 +391,20 @@ ULONG ServiceServer::RunHandler2(
         {
             if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))
                 ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_ALL, TRUE, idProcess);
-            else
+            else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
+                // OriginalToken BEGIN
+                if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+                // OriginalToken END
                 ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_READ, FALSE);
 
             CloseHandle(hProcess);
         }
+    
+        if (ok && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
+            errlvl = 0x27;
+            ok = ProcessServer::RunSandboxedStripPrivileges(hNewToken);
+        }
     }
-
-    if (ok && asSys && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
-        errlvl = 0x27;
-        ok = ProcessServer::RunSandboxedStripPrivileges(hNewToken);
-    }
-
 
     if (ok) {
 

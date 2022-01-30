@@ -80,10 +80,10 @@ static SOCKET WSA_WSASocketW(
     unsigned int        g,
     DWORD               dwFlags);
 
-/*static int WSA_bind(
+static int WSA_bind(
     SOCKET         s,
     const void     *name,
-    int            namelen);*/
+    int            namelen);
 
 static int WSA_connect(
     SOCKET         s,
@@ -300,7 +300,7 @@ static P_WSANSPIoctl        __sys_WSANSPIoctl       = NULL;
 
 static P_WSASocketW         __sys_WSASocketW        = NULL;
 
-//static P_bind               __sys_bind              = NULL;
+static P_bind               __sys_bind              = NULL;
 
 static P_connect            __sys_connect           = NULL;
 static P_WSAConnect         __sys_WSAConnect        = NULL;
@@ -465,16 +465,102 @@ static SOCKET WSA_WSASocketW(
 
 
 //---------------------------------------------------------------------------
+// WSA_HandleAfUnix
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN WSA_HandleAfUnix(const short** paddr, int* paddrlen)
+{
+    if (!(*paddrlen >= sizeof(SOCKADDR_UN) && *paddr && (*paddr)[0] == AF_UNIX))
+        return FALSE; // not AF_UNIX nothing to do
+
+    BOOLEAN ret = FALSE;
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    WCHAR* path = NULL;
+
+    //
+    // use create file to get the proper sandboxed file path, take care of resource access settings 
+    // and encure a box path exists if needed
+    //
+
+    handle = CreateFileA(((SOCKADDR_UN*)*paddr)->path, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    DWORD err = GetLastError();
+    if (handle == INVALID_HANDLE_VALUE)
+        goto finish;
+    
+    //
+    // if the file was created we need to delete it again
+    //
+
+    if (err == 0) { // != ERROR_ALREADY_EXISTS
+        
+        NTSTATUS File_SetDisposition(
+            HANDLE FileHandle, IO_STATUS_BLOCK * IoStatusBlock,
+            void* FileInformation, ULONG Length, FILE_INFORMATION_CLASS FileInformationClass);
+
+        IO_STATUS_BLOCK Iosb;
+        FILE_DISPOSITION_INFORMATION fdi;
+        fdi.DeleteFileOnClose = TRUE;
+        File_SetDisposition(handle, &Iosb, &fdi, sizeof(FILE_DISPOSITION_INFORMATION), FileDispositionInformation);
+    }
+
+    //
+    // get the path form the handle and translate it to Dos
+    //
+
+    path = Dll_Alloc(sizeof(WCHAR) * 8192);
+
+    BOOLEAN IsBoxedPath;
+    NTSTATUS status = SbieDll_GetHandlePath(handle, path, &IsBoxedPath);
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    if (!SbieDll_TranslateNtToDosPath(path))
+        goto finish;
+    
+    //
+    // create a new addr with the new path
+    //
+
+    ULONG len = wcslen(path) * 2;
+    *paddr = Dll_Alloc(sizeof(SOCKADDR_UN) + len);
+
+    SOCKADDR_UN* un_addr = (SOCKADDR_UN*)*paddr;
+    un_addr->family = AF_UNIX;
+
+    len = WideCharToMultiByte(CP_ACP, 0, path, wcslen(path) + 1, un_addr->path, len, NULL, NULL);
+
+    *paddrlen = sizeof(SOCKADDR_UN) + len;
+
+    ret = TRUE;
+
+finish:
+    if (handle != INVALID_HANDLE_VALUE) 
+        NtClose(handle);
+    if (path)
+        Dll_Free(path);
+
+    return ret;
+}
+
+
+//---------------------------------------------------------------------------
 // WSA_bind
 //---------------------------------------------------------------------------
 
-/*_FX int WSA_bind(
+_FX int WSA_bind(
     SOCKET         s,
     const void     *name,
     int            namelen)
 {
-    return __sys_bind(s, name, namelen);
-}*/
+    BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
+
+    int ret = __sys_bind(s, name, namelen);
+
+    if (new_name) Dll_Free((void*)name);
+
+    return ret;
+}
 
 
 //---------------------------------------------------------------------------
@@ -509,9 +595,16 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 
         if (WSA_TraceFlag){
             WCHAR msg[256];
-            Sbie_snwprintf(msg, 256, L"NetFw: %s network traffic; Port: %u; Prot: %u; IP: %08x %08x %08x %08x\r\n", block ? L"Blocked" : L"Allowed", port, protocol, 
-                _ntohl(ip.Data32[0]), _ntohl(ip.Data32[1]), _ntohl(ip.Data32[2]), _ntohl(ip.Data32[3]));
-            SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE | (block ? MONITOR_DENY : MONITOR_OPEN), msg, FALSE);
+			if ((BYTE)addr[0] == AF_INET6) {
+				Sbie_snwprintf(msg, 256, L"Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", port, protocol,
+					ip.Data[0], ip.Data[1], ip.Data[2], ip.Data[3], ip.Data[4], ip.Data[5], ip.Data[6], ip.Data[7],
+					ip.Data[8], ip.Data[9], ip.Data[10], ip.Data[11], ip.Data[12], ip.Data[13], ip.Data[14], ip.Data[15]);
+			}
+			else {
+				Sbie_snwprintf(msg, 256, L"Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", port, protocol, 
+                    ip.Data[12], ip.Data[13], ip.Data[14], ip.Data[15]);
+			}
+            SbieApi_MonitorPut2(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), msg, FALSE);
         }
 
         if (block) {
@@ -537,7 +630,14 @@ _FX int WSA_connect(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
-    return __sys_connect(s, name, namelen);
+
+    BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
+
+    int ret = __sys_connect(s, name, namelen);
+
+    if (new_name) Dll_Free((void*)name);
+
+    return ret;
 }
 
 
@@ -557,8 +657,15 @@ _FX int WSA_WSAConnect(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
-    return __sys_WSAConnect(
+
+    BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
+
+    int ret = __sys_WSAConnect(
         s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS);
+
+    if (new_name) Dll_Free((void*)name);
+
+    return ret;
 }
 
 
@@ -578,8 +685,15 @@ _FX int WSA_ConnectEx(
 {
     if (WSA_IsBlockedTraffic(name, namelen, IPPROTO_TCP))
         return SOCKET_ERROR;
-    return __sys_ConnectEx(
+
+    BOOLEAN new_name = WSA_HandleAfUnix(&name, &namelen);
+
+    int ret = __sys_ConnectEx(
         s, name, namelen, lpSendBuffer, dwSendDataLength, lpdwBytesSent, lpOverlapped);
+
+    if (new_name) Dll_Free((void*)name);
+
+    return ret;
 }
 
 /*
@@ -782,7 +896,7 @@ _FX BOOLEAN WSA_Init(HMODULE module)
 
     P_WSASocketW        WSASocketW;
 
-    //P_bind              bind;
+    P_bind              bind;
 
     P_connect           connect;
     P_WSAConnect        WSAConnect;
@@ -806,10 +920,10 @@ _FX BOOLEAN WSA_Init(HMODULE module)
     }
 
 
-    /*bind = (P_WSANSPIoctl)GetProcAddress(module, "bind");
+    bind = (P_bind)GetProcAddress(module, "bind");
     if (bind) {
         SBIEDLL_HOOK(WSA_,bind);
-    }*/
+    }
 
 
     //

@@ -214,6 +214,7 @@
   <ItemGroup>
     <QtMoc Include="Common\CheckableMessageBox.h" />
     <QtMoc Include="Common\ComboInputDialog.h" />
+    <QtMoc Include="Common\CheckList.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Common\DebugHelpers.h" />
     <ClInclude Include="Common\ExitDialog.h" />

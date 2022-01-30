@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -496,7 +496,7 @@ _FX NTSTATUS File_NtCreateNamedPipeFile(
     InitializeObjectAttributes(&objattrs,
         &objname, OBJECT_ATTRIBUTES_ATTRIBUTES, NULL, NULL);
 
-    mp_flags = File_MatchPath(TruePath, NULL);
+    mp_flags = File_MatchPath2(TruePath, NULL, FALSE, TRUE); // File_MatchPath(TruePath, NULL);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -620,6 +620,8 @@ _FX NTSTATUS File_NtCreateFilePipe(
     //
     // keep list of permitted pipes in sync with
     // SbieSvc::NamedPipeServer::OpenHandler
+    // and with
+    // SbieDrv::openPipesCM
     //
 
     if (PipeType == TYPE_NAMED_PIPE) {
@@ -1354,6 +1356,8 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
     OUT PVOID OutputBuffer OPTIONAL,
     IN ULONG OutputBufferLength)
 {
+    NTSTATUS status;
+
     //
     // check if this is an IOCTL that we want to deny
     //
@@ -1364,7 +1368,6 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
         ULONG LastError;
         THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
-        NTSTATUS status;
         WCHAR *TruePath;
         WCHAR *CopyPath;
 
@@ -1409,8 +1412,10 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
     // otherwise
     //
 
-    return __sys_NtDeviceIoControlFile(
+    status = __sys_NtDeviceIoControlFile(
         FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock,
         IoControlCode, InputBuffer, InputBufferLength,
         OutputBuffer, OutputBufferLength);
+
+    return status;
 }

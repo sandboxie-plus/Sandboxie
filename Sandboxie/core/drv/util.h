@@ -103,6 +103,12 @@ BOOLEAN MyIsCallerSigned(void);
 
 NTSTATUS MyValidateCertificate(void);
 
+//
+// misc helpers
+//
+
+HANDLE Util_GetProcessPidByName(const WCHAR* name);
+
 
 //---------------------------------------------------------------------------
 

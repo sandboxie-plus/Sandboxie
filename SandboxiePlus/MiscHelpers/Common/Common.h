@@ -98,3 +98,6 @@ MISCHELPERS_EXPORT QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, con
 #ifdef WIN32
 MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
 #endif
+
+MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
+MISCHELPERS_EXPORT int SafeExec(QDialog* pDialog);

@@ -746,6 +746,10 @@ Rimuovi il comando dalla cronologia
 Selezionare l'area virtuale in cui avviare il programma o aprire il documento.
 .
 
+3107;txt;01
+Digitare il nome di un programma o il percorso per aprire il seguente file nell'area virtuale:
+.
+
 3111;txt;01
       Menu Start di Sandboxie - %2  %0
 .
@@ -1010,10 +1014,10 @@ Si è verificato un errore durante l'applicazione delle impostazioni predefinite
 # 3322;txt;01
 # La sessione di accesso corrente è in esecuzione sotto la supervisione di Sandboxie.
 # L'eliminazione del contenuto dell'area virtuale provocherà la perdita di tutte le modifiche eseguite in questa sessione.
-# 
+#
 # Account utente: %2
 # Area virtuale: %3
-# 
+#
 # Eliminare il contenuto dell'area virtuale e disconnettersi da Windows?
 # .
 
@@ -1517,11 +1521,11 @@ Informazioni su Sandboxie
 # .
 
 # 3605;txt;01
-# 
+#
 # Con Sandboxie è possibile avviare i programmi in una particolare area isolata, chiamata 'area virtuale'.
-# 
+#
 # I programmi in esecuzione nell'area virtuale non potranno apportare modifiche o danneggiare il computer.
-# 
+#
 # Potrebbe essere utile utilizzare l'area virtuale per installare e provare nuovi programmi.
 # .
 
@@ -2421,7 +2425,7 @@ Quando la dimensione di un file è troppo grande e non è possibile copiare tale
 .
 
 3908;txt;01
-Non mostrare il messaggio SBIE2102 
+Non mostrare il messaggio SBIE2102
 .
 
 3909;txt;01
@@ -2950,6 +2954,22 @@ Consenti accesso alle smart card
 Consenti accesso alle porte SSDP e UPnP
 .
 
+4300;txt;01
+Consenti binding aggiuntivi alle porte RPC
+.
+
+4306;txt;01
+Consenti accesso alle porte RPC per le impostazioni UAC
+.
+
+4307;txt;01
+Blocca i processi di telemetria più comuni
+.
+
+4308;txt;01
+Limita accesso ai dispositivi di sistema
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3346,9 +3366,12 @@ NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.
 Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
 .
 
+6004;pop;err;01
+La configurazione dell'area virtuale selezionata richiede un certificato di supporto.
+.
+
 6005;txt;01
-Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la
-maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
+Nota: Senza privilegi amministrativi, gli installer non saranno avviati nell'area virtuale. Sandboxie Plus fornisce un'opzione per avviare la maggior parte degli installer senza quei privilegi, ed è possibile attivarla manualmente aggiungendo "FakeAdminRights=y" nella sezione ini dell'area virtuale.
 .
 
 6006;txt;01
@@ -3361,9 +3384,9 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6007;txt;01
-...
+Sandboxie Plus offre una maggiore protezione della privacy passando da una modalità black-list, che consente l'accesso in lettura all'intera unità (se non bloccato da Closed Path or Write Path) a una modalità white-list in cui i programmi nell'area virtuale sono autorizzati a leggere soltanto i percorsi di sistema, mentre l'accesso in lettura alla maggior parte dei dati utente deve essere concesso in modo esplicito.
 
-Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di aggiornare a Sandboxie Plus, che fornisce supporto visivo per le nuove funzionalità.
+L'interfaccia legacy di Sandboxie Classic non implementa il supporto per questa modalità. Sebbene possa essere configurata tramite il file ini, si prega di aggiornare a Sandboxie Plus (SandMan.exe) che consente l'uso delle aree virtuali con protezione avanzata.
 .
 
 

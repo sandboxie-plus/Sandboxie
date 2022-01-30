@@ -21,9 +21,9 @@
 #ifndef _MY_VERSION_H
 #define _MY_VERSION_H
 
-#define MY_VERSION_BINARY       5,51,5
-#define MY_VERSION_STRING       "5.51.5"
-#define MY_VERSION_COMPAT		"5.51.0" // this refers to the driver ABI compatibility
+#define MY_VERSION_BINARY       5,55,9
+#define MY_VERSION_STRING       "5.55.9"
+#define MY_VERSION_COMPAT		"5.55.0" // this refers to the driver ABI compatibility
 
 // These #defines are used by either Resource Compiler, or by NSIC installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"
@@ -31,8 +31,8 @@
 #define SBIE_INSTALLER_PATH_64  "..\\Bin\\x64\\SandboxieInstall64.exe"
 
 #define MY_PRODUCT_NAME_STRING  "Sandboxie"
-#define MY_COMPANY_NAME_STRING  "sandboxie-plus.com"
-#define MY_COPYRIGHT_STRING     "Copyright © 2020-2021 by David Xanatos (xanasoft.com)"
+#define MY_COMPANY_NAME_STRING  "Sandboxie-Plus.com"
+#define MY_COPYRIGHT_STRING     "Copyright © 2020-2022 by David Xanatos (xanasoft.com)"
 #define MY_COPYRIGHT_STRING_OLD "Copyright © 2004-2020 by Sandboxie Holdings, LLC"
 
 #define SANDBOXIE               L"Sandboxie"

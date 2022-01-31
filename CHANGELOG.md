@@ -8,9 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - SandMan now causes all boxed processes to update their path settings in real time when access options were modified
 - added new maintenance menu option "Uninstall All" to quickly remove all components when running in portable mode
+- added version number to the title bar of Sandboxie Classic
 - added option to return not to a snapshot but to an empty box state while keeping all snapshots
 - Sandboxie-Plus.ini can now be placed in C:\ProgramData\Sandboxie-Plus\ folder and takes precedence (for business use)
-- added support for AF_UNIX in on windows to resolve issues with OpenJDK17 and later [#1009](https://github.com/sandboxie-plus/Sandboxie/issues/1009)  [#1520](https://github.com/sandboxie-plus/Sandboxie/issues/1520) [#1521](https://github.com/sandboxie-plus/Sandboxie/issues/1521)
+- added support for AF_UNIX on Windows to resolve issues with OpenJDK17 and later [#1009](https://github.com/sandboxie-plus/Sandboxie/issues/1009) [#1520](https://github.com/sandboxie-plus/Sandboxie/issues/1520) [#1521](https://github.com/sandboxie-plus/Sandboxie/issues/1521)
 
 ### Changed
 - reworked breakout mechanism to be service based and not allowing the parent process to access the broken out child process
@@ -31,7 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with starting SandMan when running sandboxed from context menu [#1579](https://github.com/sandboxie-plus/Sandboxie/issues/1579)
 - fixed dark mode flash issue with main window creation [#1231](https://github.com/sandboxie-plus/Sandboxie/issues/1231#issuecomment-1024469681)
 - fixed issues with snapshot error handling [#350](https://github.com/sandboxie-plus/Sandboxie/issues/350)
-- fixed issues with the always on top option
+- fixed issues with the always on top option (Plus only)
 
 
 

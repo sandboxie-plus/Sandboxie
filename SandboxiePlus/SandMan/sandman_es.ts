@@ -1744,12 +1744,6 @@ No will choose: %2</source>
         <translation>Fallo al crear el directorio para la nueva instantanea</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">Fallo al copiar RegHive</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1871"/>
         <source>Snapshot not found</source>
         <translation>Instantanea no fue encontrada</translation>

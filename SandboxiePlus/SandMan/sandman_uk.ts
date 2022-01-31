@@ -1673,12 +1673,6 @@ No will choose: %2</source>
         <translation>Не вдалося створити папку для нового знімку</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">Не вдалося скопіювати RegHive</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1871"/>
         <source>Snapshot not found</source>
         <translation>Знімок не знайдено</translation>

@@ -1628,12 +1628,6 @@ No will choose: %2</source>
         <translation>建立新的快照目錄失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">複製 RegHive 失敗</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1871"/>
         <source>Snapshot not found</source>
         <translation>未發現快照</translation>

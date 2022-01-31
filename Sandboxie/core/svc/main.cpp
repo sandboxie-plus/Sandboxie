@@ -541,32 +541,42 @@ bool IsProcessWoW64(HANDLE pid)
 //---------------------------------------------------------------------------
 
 
+extern "C" {
+    WINBASEAPI DWORD WINAPI GetFinalPathNameByHandleW(
+        _In_ HANDLE hFile,
+        _Out_writes_(cchFilePath) LPWSTR lpszFilePath,
+        _In_ DWORD cchFilePath,
+        _In_ DWORD dwFlags
+    );
+}
+
 bool IsHostPath(HANDLE idProcess, WCHAR* dos_path)
 {
     bool result = false; // false on failure
     WCHAR* request_path = NULL;
     WCHAR* sandbox_path = NULL;
+    HANDLE handle = INVALID_HANDLE_VALUE;
     ULONG len = 0;
 
     //
-    // convert the dos path to an nt path
+    // get the final file path by opening it and retreiving it from the handle
     //
 
-    if (dos_path[0] == L'\\' && dos_path[1] == L'?' && dos_path[2] == L'?' && dos_path[3] == L'\\')
-        dos_path += 4; // skip L"\\??\\" is present
+    handle = CreateFileW(dos_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+    if (handle == INVALID_HANDLE_VALUE)
+        goto finish;
 
-    request_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, (MAX_PATH + wcslen(dos_path)) * sizeof(WCHAR));
+    len = 8192;
+    request_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len * sizeof(WCHAR));
     if (!request_path)
         goto finish;
 
-    WCHAR save_char = dos_path[2];
-    dos_path[2] = L'\0'; // use X: , replace L'\\' with L'\0'
-    DWORD ret = QueryDosDeviceW(dos_path, request_path, MAX_PATH);
-    dos_path[2] = save_char; // restore L'\\'
-    if (ret == 0)
+    DWORD dwRet = GetFinalPathNameByHandleW(handle, request_path, len, VOLUME_NAME_NT);
+    if (dwRet == 0 || dwRet > len) // failed || buffer to small
         goto finish;
 
-    wcscat(request_path, &dos_path[2]); // combine the paths
+    if(len > 12 && _wcsnicmp(request_path, L"\\Device\\Mup\\", 12) == 0)
+        goto finish; // files on network shares are not files on the host
 
     //
     // get the box file path for the calling process
@@ -598,6 +608,8 @@ finish:
         HeapFree(GetProcessHeap(), 0, request_path);
     if (sandbox_path)
         HeapFree(GetProcessHeap(), 0, sandbox_path);
+    if (handle != INVALID_HANDLE_VALUE) 
+        NtClose(handle);
 
     return result;
 }

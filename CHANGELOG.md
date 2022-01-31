@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+
+# [1.0.10 / 5.55.10] - 2022-01-??
+
+### Added
+
+### Changed
+- HideHostProcess=program.exe can now be used to hide sandboxie saervices [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+
+### Fixed
+- fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
+- fixed issues with re opening already open windows [#1584](https://github.com/sandboxie-plus/Sandboxie/issues/1584)
+
+
+
 ## [1.0.9 / 5.55.9] - 2022-01-31
 
 ### Added

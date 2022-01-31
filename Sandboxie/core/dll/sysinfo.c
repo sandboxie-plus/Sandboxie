@@ -260,17 +260,14 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, NULL, NULL);
 
 		BOOL hideProcess = FALSE;
-		if (hideOther) {
-			if(boxname[0] && _wcsicmp(boxname, Dll_BoxName) != 0)
-				hideProcess = TRUE;
+		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
+			hideProcess = TRUE;
 		}
-
-		if(hiddenProcesses) {
-			if ((!boxname[0]) && next->ImageName.Buffer) {
-				WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
-				if (imagename)  imagename += 1; // skip L'\\'
-				else			imagename = next->ImageName.Buffer;
-
+		else if(hiddenProcesses && next->ImageName.Buffer) {
+            WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
+			if (imagename)  imagename += 1; // skip L'\\'
+			else			imagename = next->ImageName.Buffer;
+			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
 						hideProcess = TRUE;

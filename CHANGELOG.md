@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reworked breakout mechanism to be service based and not allowing the parent process to access the broken out child process
 - enabled creation of directory junctions for sandboxed processes [#1375](https://github.com/sandboxie-plus/Sandboxie/issues/1375)
-- changed back to set AutoRecover=y on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
+- restored back AutoRecover=y on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
 - improved snapshot support [#1220](https://github.com/sandboxie-plus/Sandboxie/issues/1220)
 - renamed "Disable Forced Programs" command to "Pause Forced Programs Rules" (Plus only)
 

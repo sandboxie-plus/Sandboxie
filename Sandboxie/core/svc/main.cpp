@@ -534,3 +534,70 @@ bool IsProcessWoW64(HANDLE pid)
 
     return IsWow64;
 }
+
+
+//---------------------------------------------------------------------------
+// IsBoxedPath
+//---------------------------------------------------------------------------
+
+
+bool IsHostPath(HANDLE idProcess, WCHAR* dos_path)
+{
+    bool result = false; // false on failure
+    WCHAR* request_path = NULL;
+    WCHAR* sandbox_path = NULL;
+    ULONG len = 0;
+
+    //
+    // convert the dos path to an nt path
+    //
+
+    if (dos_path[0] == L'\\' && dos_path[1] == L'?' && dos_path[2] == L'?' && dos_path[3] == L'\\')
+        dos_path += 4; // skip L"\\??\\" is present
+
+    request_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, (MAX_PATH + wcslen(dos_path)) * sizeof(WCHAR));
+    if (!request_path)
+        goto finish;
+
+    WCHAR save_char = dos_path[2];
+    dos_path[2] = L'\0'; // use X: , replace L'\\' with L'\0'
+    DWORD ret = QueryDosDeviceW(dos_path, request_path, MAX_PATH);
+    dos_path[2] = save_char; // restore L'\\'
+    if (ret == 0)
+        goto finish;
+
+    wcscat(request_path, &dos_path[2]); // combine the paths
+
+    //
+    // get the box file path for the calling process
+    //
+
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath(idProcess, NULL, NULL, NULL, &len, NULL, NULL)))
+        goto finish;
+
+    sandbox_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len + 8 * sizeof(WCHAR));
+    if (!sandbox_path)
+        goto finish;
+
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath(idProcess, sandbox_path, NULL, NULL, &len, NULL, NULL)))
+        goto finish;
+
+    //
+    // make sure the specified path is _NOT_ inside the sandbox
+    //
+
+    ULONG sandbox_path_len = wcslen(sandbox_path);
+    ULONG request_path_len = wcslen(request_path);
+    if (request_path_len <= sandbox_path_len || _wcsnicmp(sandbox_path, request_path, sandbox_path_len) != 0) {
+
+        result = true;
+    }
+
+finish:
+    if (request_path)
+        HeapFree(GetProcessHeap(), 0, request_path);
+    if (sandbox_path)
+        HeapFree(GetProcessHeap(), 0, sandbox_path);
+
+    return result;
+}

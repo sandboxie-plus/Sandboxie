@@ -28,6 +28,7 @@
 #include "DriverAssist.h"
 #include "GuiServer.h"
 #include "GuiWire.h"
+#include "FileServer.h"
 #include "misc.h"
 #include "common/defines.h"
 #include "common/my_version.h"
@@ -537,7 +538,14 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                     *ptr = L'\0'; // end cmd where lpApplicationName ends
                     WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
                     if (lpProgram) {
-                        if (SbieDll_CheckStringInList(lpProgram + 1, boxname, L"BreakoutProcess")
+
+                        //
+                        // check if the process/directory is configued for breakout
+                        // if its a BreakoutProcess we must also test if the path is not in the sandbox itself
+                        //
+
+                        if ((SbieDll_CheckStringInList(lpProgram + 1, boxname, L"BreakoutProcess")
+                            && IsHostPath((HANDLE)(ULONG_PTR)CallerPid, lpApplicationName))
                             || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), boxname, L"BreakoutFolder")) {
 
                             //
@@ -557,7 +565,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                 index = SbieApi_EnumBoxes(index, BoxName);
                                 if (index == -1)
                                     break;
-                                
+
                                 if (SbieDll_CheckStringInList(lpProgram + 1, BoxName, L"ForceProcess")
                                     || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder")) {
 

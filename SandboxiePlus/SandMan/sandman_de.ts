@@ -1606,12 +1606,6 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <translation>Konnte den Ordner für den neuen Schnappschuss (Snapshot) nicht erstellen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">Konnte RegHive nicht kopieren</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
         <translation type="unfinished"></translation>

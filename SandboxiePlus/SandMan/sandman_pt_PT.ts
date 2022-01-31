@@ -1734,12 +1734,6 @@ Não vou escolher: %2</translation>
         <translation>Falha ao construir diretório para novo instantâneo</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">Falha ao copiar RegHive</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1871"/>
         <source>Snapshot not found</source>
         <translation>Instantâneo não encontrado</translation>

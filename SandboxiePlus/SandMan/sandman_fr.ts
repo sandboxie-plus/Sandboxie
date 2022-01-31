@@ -1711,12 +1711,6 @@ Non choisira&#xa0;: %2</translation>
         <translation>Impossible de créer un répertoire pour le nouvel instantané</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">Échec de la copie de la base de registre</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>

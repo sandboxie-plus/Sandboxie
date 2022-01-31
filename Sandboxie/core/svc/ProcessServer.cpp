@@ -1322,8 +1322,9 @@ BOOL ProcessServer::RunSandboxedDupAndCloseHandles(
     }
 
     if (ok) {
+        // Note: PROCESS_SUSPEND_RESUME is enough to start a debugging session which will give a full access handle in the first debug event (diversenok)
         DWORD dwRead =  STANDARD_RIGHTS_READ | SYNCHRONIZE |
-                        PROCESS_VM_READ | PROCESS_QUERY_INFORMATION | PROCESS_SUSPEND_RESUME |
+                        PROCESS_VM_READ | PROCESS_QUERY_INFORMATION | //PROCESS_SUSPEND_RESUME | unlike THREAD_SUSPEND_RESUME this one is dangerous
                         PROCESS_QUERY_LIMITED_INFORMATION;
         ok = DuplicateHandle(GetCurrentProcess(), piInput->hProcess,
                              CallerProcessHandle, &piReply->hProcess,

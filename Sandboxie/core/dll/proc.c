@@ -941,21 +941,24 @@ _FX BOOL Proc_CreateProcessInternalW(
     // check if this is a break out candidate
     //
 
-    if(lpApplicationName && lpCommandLine) {
+    if(lpApplicationName) {
         const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
         if (lpProgram) {
             if (SbieDll_CheckStringInList(lpProgram + 1, NULL, L"BreakoutProcess")
                 || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName),  NULL, L"BreakoutFolder")) {
                 
-                const WCHAR* lpArguments;
-                if (lpCommandLine[0] == L'\"') {
-                    lpArguments = wcschr(lpCommandLine + 1, L'\"');
-                    if (lpArguments) lpArguments++; // skip "
-                } else
-                    lpArguments = wcschr(lpCommandLine, L' ');
-                if(!lpArguments) lpArguments = wcschr(lpCommandLine, L'\0');
+                const WCHAR* lpArguments = NULL;
+                if (lpCommandLine) {
+                    if (lpCommandLine[0] == L'\"') {
+                        lpArguments = wcschr(lpCommandLine + 1, L'\"');
+                        if (lpArguments) lpArguments++; // skip "
+                    }
+                    else
+                        lpArguments = wcschr(lpCommandLine, L' ');
+                    if (!lpArguments) lpArguments = wcschr(lpCommandLine, L'\0');
+                }
 
-                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + wcslen(lpArguments) + 1) * sizeof(WCHAR));
+                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) : 0) + 1) * sizeof(WCHAR));
                 if (mybuf) {
 
                     //
@@ -967,9 +970,18 @@ _FX BOOL Proc_CreateProcessInternalW(
                     wcscpy(mybuf, L"\"");
                     wcscat(mybuf, lpApplicationName);
                     wcscat(mybuf, L"\"");
-                    wcscat(mybuf, lpArguments);
+                    if(lpArguments)
+                        wcscat(mybuf, lpArguments);
 
-                    ULONG crflags2 = dwCreationFlags & (CREATE_NO_WINDOW | CREATE_SUSPENDED
+                    if (! lpCurrentDirectory) {
+                        lpCurrentDirectory = Dll_Alloc(sizeof(WCHAR) * 8192);
+                        if (lpCurrentDirectory) {
+                            ((WCHAR*)lpCurrentDirectory)[0] = L'\0';
+                            RtlGetCurrentDirectory_U(sizeof(WCHAR) * 8190, lpCurrentDirectory);
+                        }
+                    }
+
+                    ULONG crflags2 = dwCreationFlags & (CREATE_NO_WINDOW //| CREATE_SUSPENDED 
                         |   HIGH_PRIORITY_CLASS | ABOVE_NORMAL_PRIORITY_CLASS
                         |   BELOW_NORMAL_PRIORITY_CLASS | IDLE_PRIORITY_CLASS
                         |   CREATE_UNICODE_ENVIRONMENT);

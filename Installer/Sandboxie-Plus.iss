@@ -30,7 +30,7 @@ AllowNoIcons=yes
 AlwaysRestart=no
 LicenseFile=.\license.txt
 UsedUserAreasWarning=no
-VersionInfoCopyright=Copyright (C) 2020-2021 by David Xanatos (xanasoft.com)
+VersionInfoCopyright=Copyright (C) 2020-2022 by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
 
 ; Handled in code section as always want DirPage for portable mode.
@@ -117,7 +117,7 @@ Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"
 Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
 
 ; Start the Sandman UI.
-Filename: "{app}\SandMan.exe"; Parameters: "-autorun"; StatusMsg: "Launch SandMan UI..."; Flags: postinstall nowait; Check: (not IsPortable) and (not WizardSilent)
+Filename: "{app}\SandMan.exe"; StatusMsg: "Launch SandMan UI..."; Flags: postinstall nowait; Check: (not IsPortable) and (not WizardSilent)
 ;Filename: "{app}\SandMan.exe"; Parameters: "-autorun"; StatusMsg: "Launch SandMan UI..."; Flags: runasoriginaluser nowait; Check: not IsPortable
 
 

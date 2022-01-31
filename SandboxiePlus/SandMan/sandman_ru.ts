@@ -809,7 +809,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все, включая все снимки</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -984,10 +984,6 @@ Full path: %4</source>
         <translation>Показать/Скрыть</translation>
     </message>
     <message>
-        <source>Disable Forced Programs</source>
-        <translation type="vanished">Отключить принудительные программы</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="380"/>
         <source>&amp;Sandbox</source>
         <translation>Песочница (&amp;S)</translation>
@@ -1080,7 +1076,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -1314,14 +1310,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <translation>Убраны удаленные шаблоны...</translation>
     </message>
     <message>
-        <source>Sbie Directory: %1</source>
-        <translation type="vanished">Каталог sbie: %1</translation>
-    </message>
-    <message>
-        <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="vanished">Версия Sbie+: %1 (%2)</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="942"/>
         <source>Loaded Config: %1</source>
         <translation>Загруженная конфигурация: %1</translation>
@@ -1453,10 +1441,6 @@ No will choose: %2</source>
         <translation>Завершить все, не спрашивая</translation>
     </message>
     <message>
-        <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="vanished">Введите продолжительность принудительного отключения программ.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1467"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus запущен в портативном режиме, и ему нужно создать необходимые службы. Это потребует административных привилегий.</translation>
@@ -1499,12 +1483,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1870"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось скопировать файлы данных песочницы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1875"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось удалить старые файлы данных песочницы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1881"/>
@@ -1540,22 +1524,22 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановить правила принудительных программ</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог установки: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus версия: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="943"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог данных: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1151"/>
@@ -1575,7 +1559,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите продолжительность в секундах, для отключения правил принудительных программ.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1851"/>
@@ -1663,12 +1647,6 @@ No will choose: %2</source>
         <translation>Не удалось создать каталог для нового снимка</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1851"/>
-        <source>Failed to execute: %1</source>
-        <oldsource>Failed to copy RegHive</oldsource>
-        <translation type="unfinished">Не удалось скопировать RegHive</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1871"/>
         <source>Snapshot not found</source>
         <translation>Снимок не найден</translation>
@@ -1687,10 +1665,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1874"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Невозможно удалить снимок, который используется несколькими более поздними снимками</translation>
-    </message>
-    <message>
-        <source>Failed to remove old RegHive</source>
-        <translation type="vanished">Не удалось удалить старый RegHive</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1876"/>
@@ -2389,16 +2363,12 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="979"/>
         <location filename="Views/SbieView.cpp" line="983"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Также удалить все снимки</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="vanished">Вы действительно хотите удалить содержимое нескольких песочниц?</translation>
+        <translation>Вы действительно хотите удалить содержимое всех выбранных песочниц?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1007"/>
@@ -2585,12 +2555,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>Возврат к пустой песочнице</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (по умолчанию)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -3957,7 +3927,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">Удалить содержимое</translation>
+        <translation>Удалить содержимое</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="126"/>
@@ -3968,10 +3938,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/RecoveryWindow.ui" line="140"/>
         <source>Refresh</source>
         <translation>Обновить</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Удалить все</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="97"/>
@@ -4182,8 +4148,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
-        <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">Только учетные записи администраторов могут использовать команду &apos;Отключить принудительные программы&apos;</translation>
+        <translation>Только учетная запись администратора может использовать команду &apos;Приостановить правила принудительных программ&apos;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
@@ -4382,12 +4347,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>При удалении содержимого снимка, оно будет возвращено этому снимку, а не пустому.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Снимок по умолчанию</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

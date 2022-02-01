@@ -47,7 +47,7 @@ protected:
 
     MSG_HEADER *LoadKey(MSG_HEADER *msg, HANDLE idProcess);
 
-    MSG_HEADER *SetReparsePoint(MSG_HEADER *msg, HANDLE idProcess);
+    //MSG_HEADER *SetReparsePoint(MSG_HEADER *msg, HANDLE idProcess);
 
     MSG_HEADER *OpenWow64Key(MSG_HEADER *msg, HANDLE idProcess);
 

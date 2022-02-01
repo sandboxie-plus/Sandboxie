@@ -58,7 +58,9 @@ struct _PROCESS {
     // process id
 
     HANDLE pid;
+#ifdef DRV_BREAKOUT
     HANDLE starter_id;
+#endif
 
     // process pool.  created on process creation.  it is freed in its
     // entirety when the process terminates
@@ -242,10 +244,11 @@ BOOLEAN Process_NotifyProcess_Create(
 
 BOOLEAN Process_IsSameBox(PROCESS *proc, PROCESS *proc2, ULONG_PTR proc2_pid);
 
-
+#ifdef DRV_BREAKOUT
 // Process_IsStarter returns TRUE if proc2 was started by proc1
 
 BOOLEAN Process_IsStarter(PROCESS* proc1, PROCESS* proc2);
+#endif
 
 // Process_MatchImage:  given an image name pattern 'pat_str', which
 // may contain wild cards, tests the image name 'test_str' against
@@ -390,7 +393,9 @@ BOX *Process_GetForcedStartBox(
     HANDLE ProcessId, HANDLE ParentId, const WCHAR *ImagePath, BOOLEAN* pHostInject, const WCHAR *pSidString);
 
 
+#ifdef DRV_BREAKOUT
 BOOLEAN Process_IsBreakoutProcess(BOX *box, const WCHAR *ImagePath);
+#endif
 
 // Manipulation of the List of Disabled Forced Processes:  (Process_List2)
 // Add ProcessId to list if ParentId is already listed

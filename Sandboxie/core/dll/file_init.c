@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -978,6 +978,15 @@ _FX void File_InitWow64(void)
             path[wcslen(path) - 1] = L'\0';
         wcscat(path, L"\\System32");
     }
+
+    path32 = Dll_Alloc((7 + wcslen(path) + 1) * sizeof(WCHAR));
+
+    wcscpy(path32, L"\\drive\\");
+    path32[7] = path[0]; // drive letter
+    wcscpy(&path32[8], &path[2]); // skip :
+
+    File_Wow64System32 = path32;
+    File_Wow64System32Len = wcslen(path32);
 
     path32 = File_TranslateDosToNtPath(path);
     if (path32) {

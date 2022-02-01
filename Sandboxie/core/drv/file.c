@@ -651,6 +651,15 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         // Note: This is not a proper fix its just a cheap mitidation!!! 
         NULL
     };
+    static const WCHAR* openPipesCM[] = {
+        // open thos in compartment mode as do not use the de-administrator-ize proxy in File_NtCreateFilePipe
+        //
+        L"\\device\\*pipe\\lsarpc",
+        L"\\device\\*pipe\\srvsvc",
+        L"\\device\\*pipe\\wkssvc",
+        L"\\device\\*pipe\\samr",
+        L"\\device\\*pipe\\netlogon"
+    };
 
     BOOLEAN ok;
     ULONG i;
@@ -708,6 +717,13 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     for (i = 0; openpipes[i] && ok; ++i) {
         ok = Process_AddPath(
             proc, open_file_paths, NULL, TRUE, openpipes[i], FALSE);
+    }
+
+    if (proc->bAppCompartment) {
+        for (i = 0; openPipesCM[i] && ok; ++i) {
+            ok = Process_AddPath(
+                proc, open_file_paths, NULL, TRUE, openPipesCM[i], FALSE);
+        }
     }
 
     if (! ok) {
@@ -1630,7 +1646,7 @@ skip_due_to_home_folder:
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;
-                else if (write_access)
+                else if (write_access && NT_SUCCESS(status))
                     mon_type |= MONITOR_OPEN;
             }
             if(!IsPipeDevice && !ShouldMonitorAccess)

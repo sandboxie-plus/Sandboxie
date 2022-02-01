@@ -544,7 +544,6 @@ void COptionsWindow::OnDelAccess()
 	OnOptChanged();
 }
 
-
 void COptionsWindow::SaveAccessList()
 {
 	WriteAdvancedCheck(ui.chkPrivacy, "UsePrivacyMode", "y", "");

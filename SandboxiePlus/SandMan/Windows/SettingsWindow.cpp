@@ -811,7 +811,7 @@ void CSettingsWindow::CertChanged()
 void CSettingsWindow::LoadCertificate()
 {
 	QString CertPath;
-	if (theAPI->IsConnected())
+	if (theAPI && theAPI->IsConnected())
 		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 	else
 		CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";

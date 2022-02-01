@@ -122,7 +122,7 @@ public slots:
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
-	bool				OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty = false);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings();
@@ -235,6 +235,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pUninstallAll;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;

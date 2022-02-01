@@ -264,7 +264,7 @@ void CBox::SetDefaultSettings()
 
     if (ok)
     {
-        //ok = ini.SetBool(m_name, _AutoRecover, TRUE);
+        ok = ini.SetBool(m_name, _AutoRecover, TRUE);
         ok = ini.SetBool(m_name, L"BlockNetworkFiles", TRUE);
     }
 

@@ -116,10 +116,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 
-	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
-		CSettingsWindow::LoadCertificate();
-	}
-
 	this->setWindowTitle(appTitle);
 
 	setAcceptDrops(true);
@@ -246,7 +242,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pTraySeparator = m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
 
@@ -303,9 +299,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 
-	if (!bAutoRun && g_PendingMessage.isEmpty())
-		show();
-
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
 	connect(theAPI, SIGNAL(NotAuthorized(bool, bool&)), this, SLOT(OnNotAuthorized(bool, bool&)), Qt::DirectConnection);
@@ -314,6 +307,9 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
 	m_uTimerID = startTimer(1000);
+
+	if (!bAutoRun && g_PendingMessage.isEmpty())
+		SafeShow(this);
 
 	OnStatusChanged();
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
@@ -387,7 +383,7 @@ void CSandMan::CreateMenus()
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
-		m_pDisableForce = m_pMenuFile->addAction(tr("Disable Forced Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
 		m_pMaintenance = m_pMenuFile->addMenu(CSandMan::GetIcon("Maintenance"), tr("&Maintenance"));
@@ -395,7 +391,6 @@ void CSandMan::CreateMenus()
 			m_pDisconnect = m_pMaintenance->addAction(CSandMan::GetIcon("Disconnect"), tr("Disconnect"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
 			m_pStopAll = m_pMaintenance->addAction(CSandMan::GetIcon("Stop"), tr("Stop All"), this, SLOT(OnMaintenance()));
-			m_pMaintenance->addSeparator();
 			m_pMaintenanceItems = m_pMaintenance->addMenu(CSandMan::GetIcon("ManMaintenance"), tr("&Advanced"));
 				m_pInstallDrv = m_pMaintenanceItems->addAction(tr("Install Driver"), this, SLOT(OnMaintenance()));
 				m_pStartDrv = m_pMaintenanceItems->addAction(tr("Start Driver"), this, SLOT(OnMaintenance()));
@@ -406,6 +401,10 @@ void CSandMan::CreateMenus()
 				m_pStartSvc = m_pMaintenanceItems->addAction(tr("Start Service"), this, SLOT(OnMaintenance()));
 				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
+			m_pMaintenance->addSeparator();
+			if(IsFullyPortable())
+				m_pUninstallAll = m_pMaintenance->addAction(CSandMan::GetIcon("Uninstall"), tr("Uninstall All"), this, SLOT(OnMaintenance()));
+			
 				
 		m_pMenuFile->addSeparator();
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
@@ -896,11 +895,20 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
+		bool DeleteShapshots = false;
 		// if this box auto deletes first show the recovry dialog with the option to abort deletion
-		if(!theGUI->OpenRecovery(pBox, true)) // unless no files are found than continue silently
+		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
 
-		SB_PROGRESS Status = pBox->CleanBox();
+		SB_PROGRESS Status;
+		if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
+			QString Current;
+			pBox->GetDefaultSnapshot(&Current);
+			Status = pBox->SelectSnapshot(Current);
+		}
+		else // if there are no snapshots jut use the normal cleaning procedure
+			Status = pBox->CleanBox();
+
 		if (Status.GetStatus() == OP_ASYNC)
 			AddAsyncOp(Status.GetValue());
 	}
@@ -929,9 +937,10 @@ void CSandMan::OnStatusChanged()
 	if (isConnected)
 	{
 		QString SbiePath = theAPI->GetSbiePath();
-		OnLogMessage(tr("Sbie Directory: %1").arg(SbiePath));
-		OnLogMessage(tr("Sbie+ Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
+		OnLogMessage(tr("Installation Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("Sandboxie-Plus Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
 		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+		OnLogMessage(tr("Data Directory: %1").arg(QString(theConf->GetConfigDir()).replace("/","\\")));
 
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
@@ -1003,6 +1012,10 @@ void CSandMan::OnStatusChanged()
 		else {
 			g_Certificate.clear();
 			g_CertInfo.State = 0;
+
+			QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
+			if(QFile::exists(CertPath)) // always delete invalid certificates
+				WindowsMoveFile(CertPath.replace("/", "\\"), "");
 		}
 		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
@@ -1234,7 +1247,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);
 }
 
-bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
+bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
@@ -1248,6 +1261,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty)
 	}
 	else if (pRecoveryWindow->exec() != 1)
 		return false;
+	DeleteShapshots = pRecoveryWindow->IsDeleteShapshots();
 	return true;
 }
 
@@ -1425,7 +1439,7 @@ void CSandMan::OnDisableForce()
 		int LastValue = theAPI->GetGlobalSettings()->GetNum("ForceDisableSeconds", 60);
 
 		bool bOK = false;
-		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration for disabling forced programs."), LastValue, 0, INT_MAX, 1, &bOK);
+		Seconds = QInputDialog::getInt(this, "Sandboxie-Plus", tr("Please enter the duration, in seconds, for disabling Forced Programs rules."), LastValue, 0, INT_MAX, 1, &bOK);
 		if (!bOK)
 			return;
 	}
@@ -1484,7 +1498,7 @@ SB_STATUS CSandMan::ConnectSbie()
 
 SB_STATUS CSandMan::ConnectSbieImpl()
 {
-	SB_STATUS Status = theAPI->Connect(theConf->GetBool("Options/UseInteractiveQueue", true));
+	SB_STATUS Status = theAPI->Connect(g_PendingMessage.isEmpty(), theConf->GetBool("Options/UseInteractiveQueue", true));
 
 	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
 		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
@@ -1541,12 +1555,17 @@ void CSandMan::OnMaintenance()
 
 	else if (sender() == m_pInstallSvc)
 		Status = CSbieUtils::Install(CSbieUtils::eService);
-	else if(sender() == m_pStartSvc)
+	else if (sender() == m_pStartSvc)
 		Status = CSbieUtils::Start(CSbieUtils::eService);
-	else if(sender() == m_pStopSvc)
+	else if (sender() == m_pStopSvc)
 		Status = CSbieUtils::Stop(CSbieUtils::eService);
 	else if (sender() == m_pUninstallSvc)
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
+
+	// uninstall	
+	else if (sender() == m_pUninstallAll)
+		Status = StopSbie(true);
+
 
 	if (Status.GetStatus() == OP_ASYNC) {
 		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
@@ -1764,7 +1783,7 @@ bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
 	m_pProgressDialog->OnStatusMessage("");
 	if (bWait) {
 		m_pProgressModal = true;
-		SafeExec(m_pProgressDialog);
+		m_pProgressDialog->exec(); // safe exec breaks the closing
 		m_pProgressModal = false;
 	}
 	else
@@ -1848,12 +1867,12 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;
 	case SB_SnapIsRunning:	Message = tr("This Snapshot operation can not be performed while processes are still running in the box."); break;
 	case SB_SnapMkDirFail:	Message = tr("Failed to create directory for new snapshot"); break;
-	case SB_SnapCopyRegFail:Message = tr("Failed to copy RegHive"); break;
+	case SB_SnapCopyDatFail:Message = tr("Failed to copy box data files"); break;
 	case SB_SnapNotFound:	Message = tr("Snapshot not found"); break;
 	case SB_SnapMergeFail:	Message = tr("Error merging snapshot directories '%1' with '%2', the snapshot has not been fully merged."); break;
 	case SB_SnapRmDirFail:	Message = tr("Failed to remove old snapshot directory '%1'"); break;
 	case SB_SnapIsShared:	Message = tr("Can't remove a snapshot that is shared by multiple later snapshots"); break;
-	case SB_SnapDelRegFail:	Message = tr("Failed to remove old RegHive"); break;
+	case SB_SnapDelDatFail:	Message = tr("Failed to remove old box data files"); break;
 	case SB_NotAuthorized:	Message = tr("You are not authorized to update configuration in section '%1'"); break;
 	case SB_ConfigFailed:	Message = tr("Failed to set configuration setting %1 in section %2: %3"); break;
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
@@ -1877,9 +1896,9 @@ void CSandMan::CheckResults(QList<SB_STATUS> Results)
 	}
 
 	if (Errors.count() == 1)
-		QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), Errors.first());
+		QMessageBox::warning(theGUI, tr("Sandboxie-Plus - Error"), Errors.first());
 	else if (Errors.count() > 1) {
-		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors);
+		CMultiErrorDialog Dialog(tr("Operation failed for %1 item(s).").arg(Errors.size()), Errors, theGUI);
 		Dialog.exec();
 	}
 }

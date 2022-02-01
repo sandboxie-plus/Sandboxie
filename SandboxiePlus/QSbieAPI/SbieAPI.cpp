@@ -258,7 +258,7 @@ void CSbieAPI::GetUserPaths()
 	}
 }
 
-SB_STATUS CSbieAPI::Connect(bool withQueue)
+SB_STATUS CSbieAPI::Connect(bool takeOver, bool withQueue)
 {
 	if (IsConnected())
 		return SB_OK;
@@ -298,9 +298,12 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 		return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
 	}
 
-	SB_STATUS Status = TakeOver();
-	if (!Status) // only the session leader manages the interactive queue
-		withQueue = false;
+	SB_STATUS Status = SB_OK;
+	if (takeOver) {
+		Status = TakeOver();
+		if (!Status) // only the session leader manages the interactive queue
+			withQueue = false;
+	}
 
 	m_bWithQueue = withQueue;
 	m_bTerminate = false;

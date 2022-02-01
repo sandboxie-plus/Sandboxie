@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -258,7 +258,7 @@ static NTSTATUS File_SetAttributes(
     HANDLE FileHandle, const WCHAR *CopyPath,
     FILE_BASIC_INFORMATION *Information);
 
-static NTSTATUS File_SetDisposition(
+NTSTATUS File_SetDisposition(
     HANDLE FileHandle, IO_STATUS_BLOCK *IoStatusBlock,
     void *FileInformation, ULONG Length, FILE_INFORMATION_CLASS FileInformationClass);
 
@@ -272,7 +272,7 @@ static NTSTATUS File_RenameFile(
 static BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath);
 
 static NTSTATUS File_SetReparsePoint(
-    HANDLE FileHandle, UCHAR *Data, ULONG DataLen);
+    HANDLE FileHandle, PREPARSE_DATA_BUFFER Data, ULONG DataLen);
 
 static void File_ScrambleShortName(WCHAR* ShortName, CCHAR* ShortNameLength, ULONG ScramKey);
 
@@ -334,6 +334,8 @@ static const ULONG File_MupLen = 12;
        const WCHAR *File_BQQB = L"\\??\\";
 
 #ifdef WOW64_FS_REDIR
+static WCHAR *File_Wow64System32 = NULL;
+static ULONG  File_Wow64System32Len = 0;
 static WCHAR *File_Wow64SysNative = NULL;
 static ULONG  File_Wow64SysNativeLen = 0;
 static FILE_LINK *File_Wow64FileLink = NULL;
@@ -377,6 +379,23 @@ static ULONG File_Snapshot_Count = 0;
 #include "file_misc.c"
 #include "file_copy.c"
 #include "file_init.c"
+
+
+//---------------------------------------------------------------------------
+// File_FindBoxPrefixLength
+//---------------------------------------------------------------------------
+
+
+_FX ULONG File_FindBoxPrefixLength(const WCHAR* CopyPath)
+{
+	ULONG length = wcslen(CopyPath);
+	ULONG prefixLen = 0;
+	if (length >= Dll_BoxFilePathLen && 0 == Dll_NlsStrCmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen))
+		prefixLen = Dll_BoxFilePathLen;
+	if (File_AltBoxPath && length >= File_AltBoxPathLen && 0 == Dll_NlsStrCmp(CopyPath, File_AltBoxPath, File_AltBoxPathLen))
+		prefixLen = File_AltBoxPathLen;
+	return prefixLen;
+}
 
 
 //---------------------------------------------------------------------------
@@ -509,6 +528,35 @@ _FX NTSTATUS File_GetName(
                 && (name[sys32len] == L'\\' || name[sys32len] == L'\0')) {
 
                 convert_wow64_link = FALSE;
+            }
+
+            else {
+
+                //
+                // if the file/directory is located in the sandbox, we still need to check the path
+                //
+
+                ULONG prefixLen = File_FindBoxPrefixLength(name);
+                if (prefixLen != 0) {
+
+                    name += prefixLen;
+                    length -= prefixLen;
+
+		            if (length >= 10 && 0 == Dll_NlsStrCmp(name, L"\\snapshot-", 10)) {
+			            WCHAR* ptr = wcschr(name + 10, L'\\');
+                        if (ptr) {
+                            length -= (ULONG)(ptr - name);
+                            name = ptr;
+                        }
+		            }
+
+                    if(length >= File_Wow64System32Len
+                        && _wcsnicmp(name, File_Wow64System32, File_Wow64System32Len) == 0
+                        && (name[File_Wow64System32Len] == L'\\' || name[File_Wow64System32Len] == L'\0')) {
+
+                        convert_wow64_link = FALSE;
+                    }
+                }
             }
         }
 #endif WOW64_FS_REDIR
@@ -973,10 +1021,7 @@ check_sandbox_prefix:
     // as the base for creating CopyPath
     //
 
-    if (is_boxed_path)
-        TruePath = NULL;
-    else
-        TruePath = File_TranslateTempLinks(*OutTruePath, TRUE);
+    TruePath = File_TranslateTempLinks(*OutTruePath, TRUE);
 
     if (TruePath) {
 
@@ -1887,6 +1932,41 @@ _FX ULONG File_GetName_SkipWow64Link(const WCHAR *name)
 
 
 //---------------------------------------------------------------------------
+// File_Wow64FixProcImage
+//---------------------------------------------------------------------------
+
+
+#ifdef WOW64_FS_REDIR
+_FX VOID File_Wow64FixProcImage(WCHAR* proc_image_path)
+{
+    if (!proc_image_path)
+        return;
+
+    if (File_Wow64FileLink) {
+
+        const ULONG sys32len = File_Wow64FileLink->src_len;
+
+        WCHAR* name = File_TranslateDosToNtPath(proc_image_path);
+        ULONG length = wcslen(name);
+
+        if (length >= sys32len
+            && _wcsnicmp(name, File_Wow64FileLink->src, sys32len) == 0
+            && (name[sys32len] == L'\\' || name[sys32len] == L'\0')) {
+
+            wmemcpy(proc_image_path, File_Wow64SysNative, File_Wow64SysNativeLen);
+            wmemcpy(proc_image_path + File_Wow64SysNativeLen, name + sys32len, length - sys32len + 1);
+
+            SbieDll_TranslateNtToDosPath(proc_image_path);
+        }
+
+        Dll_Free(name);
+    }
+
+}
+#endif WOW64_FS_REDIR
+
+
+//---------------------------------------------------------------------------
 // File_GetName_FromFileId
 //---------------------------------------------------------------------------
 
@@ -2510,7 +2590,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
             // teh driver usually blocks this anyways so try only in app mode
             //
 
-            if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0){
+            if (Dll_CompartmentMode){
 
                 SbieApi_MonitorPut2(MONITOR_PIPE, TruePath, FALSE);
 
@@ -3378,11 +3458,12 @@ ReparseLoop:
     }
 
     //
+    // Note: This is disabled in the driver since Win 10 1903 (see comments in file.c in File_Generic_MyParseProc).
     // if the caller specifies write attributes, this is only permitted
     // on non-directory files, so we must be sure to tell the driver
     //
 
-    if (DesiredAccess & DIRECTORY_JUNCTION_ACCESS) {
+    /*if (DesiredAccess & DIRECTORY_JUNCTION_ACCESS) {
 
         if ((CreateOptions & FILE_DIRECTORY_FILE) ||
                 (FileType & TYPE_DIRECTORY) &&
@@ -3395,7 +3476,7 @@ ReparseLoop:
 
             CreateOptions |= FILE_NON_DIRECTORY_FILE;
         }
-    }
+    }*/
 
     //
     // finally we are ready to execute the caller's request on CopyPath.
@@ -5949,6 +6030,7 @@ _FX NTSTATUS File_SetDisposition(
     NTSTATUS status;
     ULONG FileFlags;
     ULONG mp_flags;
+    FILE_ATTRIBUTE_TAG_INFORMATION taginfo;
 
     //
     // check if the specified path is an open or closed path
@@ -5976,6 +6058,13 @@ _FX NTSTATUS File_SetDisposition(
                 status = STATUS_ACCESS_DENIED;
 
             else if (PATH_NOT_OPEN(mp_flags)) {
+
+                status = __sys_NtQueryInformationFile(
+                    FileHandle, IoStatusBlock,
+                    &taginfo, sizeof(taginfo), FileAttributeTagInformation);
+
+                if (NT_SUCCESS(status) && (taginfo.FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
+                    __leave;
 
                 status = File_DeleteDirectory(CopyPath, TRUE);
 
@@ -6117,7 +6206,7 @@ _FX NTSTATUS File_NtDeleteFileImpl(OBJECT_ATTRIBUTES *ObjectAttributes)
 
     status = File_NtCreateFileImpl(
         &handle, DELETE, ObjectAttributes, &IoStatusBlock, NULL, 0,
-        FILE_SHARE_VALID_FLAGS, FILE_OPEN, FILE_DELETE_ON_CLOSE, NULL, 0);
+        FILE_SHARE_VALID_FLAGS, FILE_OPEN, FILE_DELETE_ON_CLOSE | FILE_OPEN_REPARSE_POINT, NULL, 0);
 
     if (NT_SUCCESS(status))
         NtClose(handle);
@@ -6992,13 +7081,17 @@ _FX void SbieDll_DeviceChange(WPARAM wParam, LPARAM lParam)
             }
         }
 
-    } else if ((wParam & 0xFF80) == 0xAA00 && lParam == tzuk) {
+    } else if ((wParam & 0xFF80) == 0xAA00 && lParam == tzuk) { // see NetApi_NetUseAdd
 
         UCHAR drive_number = (UCHAR)(wParam & 0x1F);
         if (drive_number < 26) {
             File_InitDrives(1 << drive_number);
             Dll_RefreshPathList();
         }
+
+    } else if (wParam == 'sb' && lParam == 0) {
+
+        Dll_RefreshPathList();
     }
 }
 

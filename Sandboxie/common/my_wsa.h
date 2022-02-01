@@ -42,6 +42,7 @@
 
 #define WSA_IO_PENDING          (ERROR_IO_PENDING)
 
+#define AF_UNIX                 1               /* unix socket available since windows build 17063 */
 #define AF_INET                 2               /* internetwork: UDP, TCP, etc. */
 #define AF_INET6                23              /* internetwork v6: UDP, TCP, etc. */
 #define SOCKET                  ULONG_PTR
@@ -95,10 +96,15 @@ typedef struct sockaddr_in6 {
     ULONG  sin6_flowinfo;       // IPv6 flow information.
     IN6_ADDR sin6_addr;         // IPv6 address.
     union {
-        ULONG sin6_scope_id;     // Set of interfaces for a scope.
+        ULONG sin6_scope_id;    // Set of interfaces for a scope.
         SCOPE_ID sin6_scope_struct;
     };
 } SOCKADDR_IN6_LH, *PSOCKADDR_IN6_LH, FAR *LPSOCKADDR_IN6_LH;
+
+typedef struct sockaddr_un {
+    ADDRESS_FAMILY  family;     // AF_UNIX
+    char            path[1];    // Pathname
+} SOCKADDR_UN;
 
 typedef void (*PIPFORWARD_CHANGE_CALLBACK)
     (void *CallerContext, void *Row, ULONG NotificationType);

@@ -236,7 +236,7 @@ _FX BOOLEAN Terminal_DontHook(void)
     // In in app mode we have a full token and this wil be successfull, hence no need for a hook
     //
     
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) 
+    if (Dll_CompartmentMode) 
         return TRUE;
 
     //
@@ -825,7 +825,7 @@ _FX BOOL Terminal_WTSQueryUserToken(ULONG SessionId, HANDLE *pToken)
     pids = Dll_AllocTemp(sizeof(ULONG) * pid_count);
     SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
 
-    for (i = 0; i <= pid_count; ++i) {
+    for (i = 0; i < pid_count; ++i) {
 
         WCHAR image[128];
         HANDLE pids_i = (HANDLE) (ULONG_PTR) pids[i];

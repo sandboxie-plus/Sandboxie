@@ -198,6 +198,8 @@ _FX int Debug_Init(void)
 
 #endif
 
+#if 0
+
     //
     // break
     //
@@ -230,6 +232,8 @@ _FX int Debug_Init(void)
         }
         __debugbreak();
     }
+
+#endif
 
     return TRUE;
 }
@@ -390,6 +394,30 @@ _FX NTSTATUS Debug_LdrGetDllHandle(
     return status;
 }
 #endif
+
+
+
+//---------------------------------------------------------------------------
+// DbgPrint
+//---------------------------------------------------------------------------
+
+
+void DbgPrint(const char* format, ...)
+{
+    va_list va_args;
+    va_start(va_args, format);
+    
+    char *tmp1 = Dll_AllocTemp(510);
+
+    extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+    P_vsnprintf(tmp1, 510, format, va_args);
+
+    OutputDebugStringA(tmp1);
+
+    Dll_Free(tmp1);
+
+    va_end(va_args);
+}
 
 
 //---------------------------------------------------------------------------

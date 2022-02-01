@@ -206,7 +206,7 @@ _FX BOOLEAN NetApi_Hook_NetUseAdd(HMODULE module)
     // In in app mode we have a full token and this wil be successfull, hence no need for a hook
     //
     
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) 
+    if (Dll_CompartmentMode) // NoServiceAssist
         return TRUE;
 
     //

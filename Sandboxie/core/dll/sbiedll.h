@@ -184,6 +184,8 @@ SBIEDLL_EXPORT  BOOL SbieDll_StartBoxedService(
 
 SBIEDLL_EXPORT  BOOL SbieDll_CheckProcessLocalSystem(HANDLE ProcessHandle);
 
+SBIEDLL_EXPORT  HANDLE SbieDll_OpenProcess(ACCESS_MASK DesiredAccess, HANDLE idProcess);
+
 SBIEDLL_EXPORT  HRESULT SbieDll_ComCreateProxy(
     REFIID riid, void *pUnkOuter, void *pChannel, void **ppUnknown);
 
@@ -209,6 +211,8 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_MatchImage(const WCHAR* pat_str, const WCHAR* te
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetStringForStringList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting, WCHAR* value, ULONG value_size);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, const WCHAR* setting);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_CheckPatternInList(const WCHAR* string, ULONG length, const WCHAR* boxname, const WCHAR* setting);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForName(
     const WCHAR* boxname, const WCHAR* name, const WCHAR* setting, WCHAR* value, ULONG value_size, const WCHAR* deftext);

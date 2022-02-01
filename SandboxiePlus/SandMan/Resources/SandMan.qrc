@@ -65,6 +65,7 @@
         <file>Actions/Down.png</file>
         <file>Actions/All.png</file>
         <file>Actions/Save.png</file>
+        <file>Actions/Uninstall.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

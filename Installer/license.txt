@@ -1,4 +1,4 @@
-Copyright 2020 - 2021 David Xanatos (xanasoft.com)
+Copyright 2020 - 2022 David Xanatos (xanasoft.com)
 
 This software is provided under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 

@@ -7,6 +7,7 @@
 //#include "../MiscHelpers/Common/qRC4.h"
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
+#include "./Windows/SettingsWindow.h"
 
 CSettings* theConf = NULL;
 
@@ -80,13 +81,22 @@ int main(int argc, char *argv[])
 	if (!g_PendingMessage.isEmpty()) {
 		if(app.sendMessage(g_PendingMessage))
 			return 0;
+		app.disableSingleApp(); // we start to do one job and exit, don't interfear with starting a regular instance
 	}
 	else if (app.sendMessage("ShowWnd"))
 		return 0;
 
-	theConf = new CSettings("Sandboxie-Plus");
+
+	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
+		CSettingsWindow::LoadCertificate();
+		g_CertInfo.business = GetArguments(g_Certificate, L'\n', L':').value("TYPE").toUpper().contains("BUSINESS");
+	}
+
+	// use a shared setting location when used in a business environment for easier administration
+	theConf = new CSettings("Sandboxie-Plus", g_CertInfo.business);
 
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
+
 
 	CSandMan* pWnd = new CSandMan();
 

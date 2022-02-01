@@ -922,7 +922,7 @@ void List_Process_Ids(void)
     sprintf(msg, "%d\r\n", pid_count);
     WriteFile(out, msg, strlen(msg), &len, NULL);
 
-    for (i = 0; i <= pid_count; ++i) {
+    for (i = 0; i < pid_count; ++i) {
         sprintf(msg, "%d\r\n", pids[i]);
         WriteFile(out, msg, strlen(msg), &len, NULL);
     }

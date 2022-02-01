@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest a new idea for Sandboxie
+
+body:
+  - type: textarea
+    id: describe-feature
+    attributes:
+      label: Is your feature request related to a problem or use case?
+      description: A clear and concise description of what the problem is. You can add screenshots and provide links to help explain it.
+    validations:
+      required: true
+  - type: textarea
+    id: preferred-solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe alternatives you've considered
+      description: If applicable, specify any alternative solutions or features you've considered.
+    validations:
+      required: false

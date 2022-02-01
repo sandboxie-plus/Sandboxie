@@ -179,8 +179,8 @@ MSG_HEADER *FileServer::Handler(void *_this, MSG_HEADER *msg)
     if (PipeServer::ImpersonateCaller(&msg) != 0)
         return msg;
 
-    if (msg->msgid == MSGID_FILE_SET_REPARSE_POINT)
-        return pThis->SetReparsePoint(msg, idProcess);
+    //if (msg->msgid == MSGID_FILE_SET_REPARSE_POINT)
+    //    return pThis->SetReparsePoint(msg, idProcess);
 
     if (msg->msgid == MSGID_FILE_OPEN_WOW64_KEY)
         return pThis->OpenWow64Key(msg, idProcess);
@@ -552,7 +552,7 @@ MSG_HEADER *FileServer::GetAllHandles(HANDLE idProcess)
 //---------------------------------------------------------------------------
 
 
-MSG_HEADER *FileServer::SetReparsePoint(MSG_HEADER *msg, HANDLE idProcess)
+/*MSG_HEADER *FileServer::SetReparsePoint(MSG_HEADER *msg, HANDLE idProcess)
 {
     NTSTATUS status;
 
@@ -648,7 +648,7 @@ MSG_HEADER *FileServer::SetReparsePoint(MSG_HEADER *msg, HANDLE idProcess)
     MyFree(dst_file);
 
     return SHORT_REPLY(status);
-}
+}*/
 
 
 //---------------------------------------------------------------------------

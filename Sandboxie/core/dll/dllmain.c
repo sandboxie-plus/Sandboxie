@@ -86,6 +86,7 @@ BOOLEAN Dll_InitComplete = FALSE;
 BOOLEAN Dll_RestrictedToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
+BOOLEAN Dll_CompartmentMode = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
@@ -286,6 +287,8 @@ _FX void Dll_InitInjected(void)
 
     Dll_ProcessFlags = SbieApi_QueryProcessInfo(0, 0);
 
+    Dll_CompartmentMode = (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
+
     Dll_SelectImageType();
 
     //
@@ -423,7 +426,8 @@ _FX void Dll_InitInjected(void)
     //
 
 #ifdef WITH_DEBUG
-    if (ok && (! Debug_Init())) ok = FALSE;
+    if (ok) 
+        ok = Debug_Init();
 #endif WITH_DEBUG
 
     if (! ok) {

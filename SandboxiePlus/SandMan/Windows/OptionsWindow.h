@@ -18,6 +18,8 @@ public:
 	QStringList		GetCurrentGroups();
 	QSet<QString>	GetPrograms() { return  m_Programs; }
 
+	static void		TriggerPathReload();
+
 	enum EntryTypes {
 		eUndefined = 0,
 		eProcess,

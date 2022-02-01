@@ -597,6 +597,8 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
         msgid = MSG_1314;
     else if (msgid == 1307)
         msgid = MSG_1307;
+    else if (msgid == 6004)
+        msgid = MSG_6004;
     else
         msgid = MSG_2301; // unknown message
 

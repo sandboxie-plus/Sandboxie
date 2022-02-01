@@ -481,10 +481,11 @@ union SCertInfo {
     ULONGLONG	State;
     struct {
         ULONG
-            valid     : 1, // certific is active
-            expired   : 1, // certific is expired but may be active
-            outdated  : 1, // certific is expired, not anymore valid for the current build
-            reservd_1 : 5,
+            valid     : 1, // certificate is active
+            expired   : 1, // certificate is expired but may be active
+            outdated  : 1, // certificate is expired, not anymore valid for the current build
+            business  : 1, // certificate is siutable for business use
+            reservd_1 : 4,
             reservd_2 : 8,
             reservd_3 : 8,
             reservd_4 : 8;
@@ -741,6 +742,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             // forever - nothing to check here
         }
         else if (type && _wcsicmp(type, L"BUSINESS") == 0) {
+            Verify_CertInfo.business = 1;
             TEST_EXPIRATION(0, 0, 1);
         }
         else /*if (!type || _wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"PATREON") == 0 || _wcsicmp(type, L"SUPPORTER") == 0) */ {

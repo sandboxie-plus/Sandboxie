@@ -3,6 +3,54 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+
+# [1.0.10 / 5.55.10] - 2022-01-??
+
+### Added
+
+### Changed
+- HideHostProcess=program.exe can now be used to hide sandboxie saervices [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+
+### Fixed
+- fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
+- fixed issues with re opening already open windows [#1584](https://github.com/sandboxie-plus/Sandboxie/issues/1584)
+
+
+
+## [1.0.9 / 5.55.9] - 2022-01-31
+
+### Added
+- SandMan now causes all boxed processes to update their path settings in real time when access options were modified
+- added new maintenance menu option "Uninstall All" to quickly remove all components when running in portable mode
+- added version number to the title bar of Sandboxie Classic
+- added option to return not to a snapshot but to an empty box state while keeping all snapshots
+- Sandboxie-Plus.ini can now be placed in C:\ProgramData\Sandboxie-Plus\ folder and takes precedence (for business use)
+- added support for AF_UNIX on Windows to resolve issues with OpenJDK17 and later [#1009](https://github.com/sandboxie-plus/Sandboxie/issues/1009) [#1520](https://github.com/sandboxie-plus/Sandboxie/issues/1520) [#1521](https://github.com/sandboxie-plus/Sandboxie/issues/1521)
+
+### Changed
+- reworked breakout mechanism to be service based and not allowing the parent process to access the broken out child process
+- enabled creation of directory junctions for sandboxed processes [#1375](https://github.com/sandboxie-plus/Sandboxie/issues/1375)
+- restored back AutoRecover=y on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
+- improved snapshot support [#1220](https://github.com/sandboxie-plus/Sandboxie/issues/1220)
+- renamed "Disable Forced Programs" command to "Pause Forced Programs Rules" (Plus only)
+
+### Fixed
+- fixed BreakoutProcess not working with EnableObjectFiltering=y
+- FIXED SECURITY ISSUE: when starting *COMSRV* unboxed, the returned process handle had full access
+- fixed issue with progress dialog [#1562](https://github.com/sandboxie-plus/Sandboxie/issues/1562)
+- fixed issue with handling directory junctions in Sandboxie [#1396](https://github.com/sandboxie-plus/Sandboxie/issues/1396)
+- fixed a handle leak in File_NtCloseImpl
+- fixed border issues on maximized windows introduced in the last build [#1561](https://github.com/sandboxie-plus/Sandboxie/issues/1561)
+- fixed a couple of index overruns (thanks 7eRoM) [#1571](https://github.com/sandboxie-plus/Sandboxie/pull/1571)
+- fixed issues with sysnative directory [#1403](https://github.com/sandboxie-plus/Sandboxie/issues/1403)
+- fixed issue with starting SandMan when running sandboxed from context menu [#1579](https://github.com/sandboxie-plus/Sandboxie/issues/1579)
+- fixed dark mode flash issue with main window creation [#1231](https://github.com/sandboxie-plus/Sandboxie/issues/1231#issuecomment-1024469681)
+- fixed issues with snapshot error handling [#350](https://github.com/sandboxie-plus/Sandboxie/issues/350)
+- fixed issues with the always on top option (Plus only)
+
+
+
 ## [1.0.8 / 5.55.8] - 2022-01-18
 
 ### Added
@@ -26,7 +74,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed possible upgrade issue with Classic installer (by isaak654) [130c43a](https://github.com/sandboxie-plus/Sandboxie/commit/130c43a62c9778b734fa625bf4f46b12d0701719)
 - fixed minor issues with Classic installer (by sredna) [#1533](https://github.com/sandboxie-plus/Sandboxie/pull/1533)
 - fixed issue with Ldr_FixImagePath_2 [#1507](https://github.com/sandboxie-plus/Sandboxie/issues/1507)
-- when using "Run Sandboxed" with SandMan UI and the UI is off, it wil stay off.
+- when using "Run Sandboxed" with SandMan UI and the UI is off, it will stay off.
 - fixed issue with Util_GetProcessPidByName that should resolve the driver sometimes failing to start at boot [#1451](https://github.com/sandboxie-plus/Sandboxie/issues/1451)
 - SandMan will now run in background like SbieCtrl when starting a boxed process [post506](https://forum.xanasoft.com/viewtopic.php?p=506#p506)
 - fixed taskbar not showing with persistent box border in full screen [post474](https://forum.xanasoft.com/viewtopic.php?p=474#p474)

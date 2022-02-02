@@ -83,6 +83,25 @@ CSandMan* theGUI = NULL;
 
 extern QString g_PendingMessage;
 
+#include <QStyledItemDelegate>
+class CTrayBoxesItemDelegate : public QStyledItemDelegate
+{
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QStyleOptionViewItem opt(option);
+		if ((opt.state & QStyle::State_MouseOver) != 0)
+			opt.state |= QStyle::State_Selected;
+		else if ((opt.state & QStyle::State_HasFocus) != 0 && m_Hold)
+			opt.state |= QStyle::State_Selected;
+		opt.state &= ~QStyle::State_HasFocus;
+		QStyledItemDelegate::paint(painter, opt, index);
+	}
+public:
+	static bool m_Hold;
+};
+
+bool CTrayBoxesItemDelegate::m_Hold = false;
+
 CSandMan::CSandMan(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -220,6 +239,8 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pTrayBoxes->setHeaderHidden(true);
 	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
 	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
+	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
 
 	pLayout->insertSpacing(0, 1);// 32);
 
@@ -1362,11 +1383,15 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 
 void CSandMan::OnBoxMenu(const QPoint & point)
 {
-	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
+	QPoint pos = ((QWidget*)m_pTrayBoxes->parent())->mapFromParent(point);
+	QTreeWidgetItem* pItem = m_pTrayBoxes->itemAt(pos);
 	if (!pItem)
 		return;
+	m_pTrayBoxes->setCurrentItem(pItem);
 
+	CTrayBoxesItemDelegate::m_Hold = true;
 	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
+	CTrayBoxesItemDelegate::m_Hold = false;
 
 	//m_pBoxMenu->popup(QCursor::pos());	
 }
@@ -1937,7 +1962,14 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 		{
 			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
+			bool bActiveOnly = theConf->GetBool("Options/TrayActiveOnly", false);
+
 			bool bAdded = false;
+
+			if (m_pTrayBoxes->topLevelItemCount() == 0) { 
+				bAdded = true; // triger frefresh
+				QTimer::singleShot(100, m_pTrayBoxes, SLOT(setFocus())); // make the hover highlight work
+			}
 
 			QMap<QString, QTreeWidgetItem*> OldBoxes;
 			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
@@ -1953,6 +1985,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					continue;
 
 				CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+
+				if (bActiveOnly && pBoxEx->GetActiveProcessCount() == 0)
+					continue;
 
 				QTreeWidgetItem* pItem = OldBoxes.take(pBox->GetName());
 				if(!pItem)

@@ -1319,7 +1319,8 @@ void CSbieView::SelectBox(const QString& Name)
 void CSbieView::PopUpMenu(const QString& Name)
 {
 	SelectBox(Name);
-	m_pMenu2->popup(QCursor::pos());
+	m_pMenu2->exec(QCursor::pos());
+	//m_pMenu2->popup(QCursor::pos());
 	//OnMenu(QCursor::pos());
 }
 

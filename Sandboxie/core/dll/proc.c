@@ -973,7 +973,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                     if(lpArguments)
                         wcscat(mybuf, lpArguments);
 
-                    if (! lpCurrentDirectory) {
+                    if (! lpCurrentDirectory) { // lpCurrentDirectory must not be NULL
                         lpCurrentDirectory = Dll_Alloc(sizeof(WCHAR) * 8192);
                         if (lpCurrentDirectory) {
                             ((WCHAR*)lpCurrentDirectory)[0] = L'\0';
@@ -992,7 +992,12 @@ _FX BOOL Proc_CreateProcessInternalW(
 
                     Dll_Free(mybuf);
 
-                    goto finish;
+                    //
+                    // when the service returns ERROR_NOT_SUPPORTED this means we should take the normal process creation route
+                    //
+
+                    if(err != ERROR_NOT_SUPPORTED)
+                        goto finish;
                 }
             }
         }

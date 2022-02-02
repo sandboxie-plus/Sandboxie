@@ -809,14 +809,18 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		CSandBoxPtr pBox = SandBoxes.first();
 		
 		static QMap<void*, CFileBrowserWindow*> FileBrowserWindows;
-		if (!FileBrowserWindows.contains(pBox.data()))
-		{
-			CFileBrowserWindow* pFileBrowserWindow = new CFileBrowserWindow(SandBoxes.first());
+		CFileBrowserWindow* pFileBrowserWindow = FileBrowserWindows.value(pBox.data());
+		if (pFileBrowserWindow == NULL) {
+			pFileBrowserWindow = new CFileBrowserWindow(SandBoxes.first());
 			FileBrowserWindows.insert(pBox.data(), pFileBrowserWindow);
 			connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
 				FileBrowserWindows.remove(pBox.data());
 			});
 			SafeShow(pFileBrowserWindow);
+		}
+		else {
+			pFileBrowserWindow->setWindowState((pFileBrowserWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+			SetForegroundWindow((HWND)pFileBrowserWindow->winId());
 		}
 	}
 	else if (Action == m_pMenuExplore)
@@ -877,14 +881,18 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		CSandBoxPtr pBox = SandBoxes.first();
 
 		static QMap<void*, CSnapshotsWindow*> SnapshotWindows;
-		if (!SnapshotWindows.contains(pBox.data()))
-		{
-			CSnapshotsWindow* pSnapshotsWindow = new CSnapshotsWindow(SandBoxes.first(), this);
+		CSnapshotsWindow* pSnapshotsWindow = SnapshotWindows.value(pBox.data());
+		if (pSnapshotsWindow == NULL) {
+			pSnapshotsWindow = new CSnapshotsWindow(SandBoxes.first(), this);
 			SnapshotWindows.insert(pBox.data(), pSnapshotsWindow);
 			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
 				SnapshotWindows.remove(pBox.data());
 			});
 			SafeShow(pSnapshotsWindow);
+		}
+		else {
+			pSnapshotsWindow->setWindowState((pSnapshotsWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+			SetForegroundWindow((HWND)pSnapshotsWindow->winId());
 		}
 	}
 	else if (Action == m_pMenuDuplicate)

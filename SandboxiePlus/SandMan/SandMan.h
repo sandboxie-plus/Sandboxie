@@ -50,7 +50,7 @@ public:
 
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 
-	void				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
+	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);
 	QString				GetBoxDescription(int boxType);
@@ -66,10 +66,10 @@ signals:
 	void				CertUpdated();
 
 protected:
-	SB_STATUS			ConnectSbie();
+	SB_RESULT(void*)	ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
-	SB_STATUS			StopSbie(bool andRemove = false);
+	SB_RESULT(void*)	StopSbie(bool andRemove = false);
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
@@ -191,6 +191,8 @@ private slots:
 private:
 	void				CreateMenus();
 	void				CreateToolBar();
+
+	void				HandleMaintenance(SB_RESULT(void*) Status);
 
 	void				SetViewMode(bool bAdvanced);
 

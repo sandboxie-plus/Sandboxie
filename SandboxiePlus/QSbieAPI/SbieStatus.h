@@ -149,7 +149,7 @@ public:
 	{
 		Attach(&other);
 	}
-	CSbieResult(const CSbieResult& other) : CSbieResult(other)
+	CSbieResult(const CSbieResult& other) : CSbieStatus(other)
 	{
 		v = other.v;
 	}

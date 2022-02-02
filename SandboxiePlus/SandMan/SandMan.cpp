@@ -314,16 +314,11 @@ CSandMan::CSandMan(QWidget *parent)
 	OnStatusChanged();
 	if (CSbieUtils::IsRunning(CSbieUtils::eAll) || theConf->GetBool("Options/StartIfStopped", true))
 	{
-		SB_STATUS Status = ConnectSbie();
-		CheckResults(QList<SB_STATUS>() << Status);
+		SB_RESULT(void*) Status = ConnectSbie();
+		HandleMaintenance(Status);
 	}
 
 	//qApp->setWindowIcon(GetIcon("IconEmptyDC", false));
-
-	if (!g_PendingMessage.isEmpty()) {
-		OnMessage(g_PendingMessage);
-		PostQuitMessage(0);
-	}
 }
 
 CSandMan::~CSandMan()
@@ -347,7 +342,9 @@ CSandMan::~CSandMan()
 
 void CSandMan::LoadState()
 {
+    setWindowState(Qt::WindowNoState);
 	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
+	restoreState(theConf->GetBlob("MainWindow/Window_State"));
 	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
 	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
 	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
@@ -358,6 +355,7 @@ void CSandMan::LoadState()
 void CSandMan::StoreState()
 {
 	theConf->SetBlob("MainWindow/Window_Geometry", saveGeometry());
+	theConf->SetBlob("MainWindow/Window_State", saveState());
 	//theConf->SetBlob("MainWindow/BoxTree_Columns", m_pBoxTree->saveState());
 	theConf->SetBlob("MainWindow/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
 	theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
@@ -570,8 +568,10 @@ void CSandMan::closeEvent(QCloseEvent *e)
 				theConf->SetValue("Options/PortableStop", PortableStop);
 		}
 
-		if(PortableStop == 1)
-			StopSbie(true);
+		if (PortableStop == 1) {
+			SB_RESULT(void*) Status = StopSbie(true);
+			// don't care for Status we quit here anyways
+		}
 	}
 
 	QApplication::quit();
@@ -669,7 +669,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 	{
 		QString Op = Message.mid(3);
 
-		SB_STATUS Status;
+		SB_RESULT(void*) Status;
 		if (Op == "Connect")
 			Status = ConnectSbie();
 		else if (Op == "Disconnect")
@@ -680,36 +680,8 @@ void CSandMan::OnMessage(const QString& MsgData)
 			Status = theAPI->TerminateAll();
 		else
 			Status = SB_ERR(SB_Message, QVariantList () << (tr("Unknown operation '%1' requested via command line").arg(Op)));
-		CheckResults(QList<SB_STATUS>() << Status);
-	}
-	else if (Message.left(6) == "Status")
-	{
-		QString Status = Message.mid(7);
-		if (Status != "OK")
-		{
-			if(m_bStopPending)
-				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all Sandboxie components"));
-			else if(m_bConnectPending)
-				QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required Sandboxie components"));
 
-			OnLogMessage(tr("Maintenance operation %1").arg(Status));
-			CheckResults(QList<SB_STATUS>() << SB_ERR(SB_Message, QVariantList() << Status));
-		}
-		else
-		{
-			OnLogMessage(tr("Maintenance operation Successful"));
-			if (m_bConnectPending) {
-
-				QTimer::singleShot(1000, [this]() {
-					SB_STATUS Status = this->ConnectSbieImpl();
-					CheckResults(QList<SB_STATUS>() << Status);
-				});
-			}
-		}
-		m_pProgressDialog->hide();
-		//statusBar()->showMessage(tr("Maintenance operation completed"), 3000);
-		m_bConnectPending = false;
-		m_bStopPending = false;
+		HandleMaintenance(Status);
 	}
 }
 
@@ -720,11 +692,11 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-void CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
+bool CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
 {
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
 	//pSelectBoxWindow->show();
-	SafeExec(pSelectBoxWindow);
+	return SafeExec(pSelectBoxWindow) == 1;
 }
 
 void CSandMan::dropEvent(QDropEvent* e)
@@ -1452,10 +1424,9 @@ void CSandMan::OnDisableForce2()
 	theAPI->DisableForceProcess(Status);
 }
 
-SB_STATUS CSandMan::ConnectSbie()
+SB_RESULT(void*) CSandMan::ConnectSbie()
 {
-	SB_STATUS Status;
-	bool bJustStarted = false;
+	SB_RESULT(void*) Status;
 	if (!CSbieUtils::IsRunning(CSbieUtils::eAll)) 
 	{
 		if (!CSbieUtils::IsInstalled(CSbieUtils::eAll))
@@ -1475,24 +1446,16 @@ SB_STATUS CSandMan::ConnectSbie()
 				return SB_OK;
 		}
 
-		bJustStarted = true;
 		Status = CSbieUtils::Start(CSbieUtils::eAll);
 	}
 
 	if (Status.GetStatus() == OP_ASYNC) {
 		m_bConnectPending = true;
-		return SB_OK;
+		return Status;
 	}
 	if (Status.IsError())
 		return Status;
-	if (bJustStarted) {
-		QTimer::singleShot(1000, [this]() {
-			SB_STATUS Status = this->ConnectSbieImpl();
-			CheckResults(QList<SB_STATUS>() << Status);
-		});
-		return SB_OK;
-	}
-	
+
 	return ConnectSbieImpl();
 }
 
@@ -1505,6 +1468,11 @@ SB_STATUS CSandMan::ConnectSbieImpl()
 		return SB_OK;
 	}
 
+	if (!g_PendingMessage.isEmpty()) {
+		OnMessage(g_PendingMessage);
+		PostQuitMessage(0);
+	}
+
 	return Status;
 }
 
@@ -1513,9 +1481,9 @@ SB_STATUS CSandMan::DisconnectSbie()
 	return theAPI->Disconnect();
 }
 
-SB_STATUS CSandMan::StopSbie(bool andRemove)
+SB_RESULT(void*) CSandMan::StopSbie(bool andRemove)
 {
-	SB_STATUS Status;
+	SB_RESULT(void*) Status;
 
 	if (theAPI->IsConnected()) {
 		Status = theAPI->TerminateAll();
@@ -1535,7 +1503,7 @@ SB_STATUS CSandMan::StopSbie(bool andRemove)
 
 void CSandMan::OnMaintenance()
 {
-	SB_STATUS Status;
+	SB_RESULT(void*) Status;
 	if (sender() == m_pConnect)
 		Status = ConnectSbie();
 	else if (sender() == m_pDisconnect)
@@ -1566,11 +1534,56 @@ void CSandMan::OnMaintenance()
 	else if (sender() == m_pUninstallAll)
 		Status = StopSbie(true);
 
+	HandleMaintenance(Status);
+}
 
+void CSandMan::HandleMaintenance(SB_RESULT(void*) Status)
+{
 	if (Status.GetStatus() == OP_ASYNC) {
+
+		HANDLE hProcess = Status.GetValue();
+		QWinEventNotifier* processFinishedNotifier = new QWinEventNotifier(hProcess);
+		processFinishedNotifier->setEnabled(true);
+		connect(processFinishedNotifier, &QWinEventNotifier::activated, this, [processFinishedNotifier, this, hProcess]() {
+			processFinishedNotifier->setEnabled(false);
+			processFinishedNotifier->deleteLater();
+			
+			DWORD dwStatus = 0;
+			GetExitCodeProcess(hProcess, & dwStatus);
+
+			if (dwStatus != 0)
+			{
+				if(m_bStopPending)
+					QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all Sandboxie components"));
+				else if(m_bConnectPending)
+					QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required Sandboxie components"));
+
+				OnLogMessage(tr("Maintenance operation failed (%1)").arg((quint32)dwStatus));
+				CheckResults(QList<SB_STATUS>() << SB_ERR(dwStatus));
+			}
+			else
+			{
+				OnLogMessage(tr("Maintenance operation Successful"));
+				if (m_bConnectPending) {
+
+					QTimer::singleShot(1000, [this]() {
+						SB_STATUS Status = this->ConnectSbieImpl();
+						CheckResults(QList<SB_STATUS>() << Status);
+					});
+				}
+			}
+			m_pProgressDialog->hide();
+			//statusBar()->showMessage(tr("Maintenance operation completed"), 3000);
+			m_bConnectPending = false;
+			m_bStopPending = false;
+
+			CloseHandle(hProcess);
+		});
+
 		//statusBar()->showMessage(tr("Executing maintenance operation, please wait..."));
 		m_pProgressDialog->OnStatusMessage(tr("Executing maintenance operation, please wait..."));
 		SafeShow(m_pProgressDialog);
+
 		return;
 	}
 
@@ -1586,12 +1599,14 @@ void CSandMan::OnViewMode(QAction* pAction)
 
 void CSandMan::OnAlwaysTop()
 {
+	StoreState();
 	bool bAlwaysOnTop = m_pWndTopMost->isChecked();
 	theConf->SetValue("Options/AlwaysOnTop", bAlwaysOnTop);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	this->show(); // why is this needed?
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	LoadState();
 }
 
 void CSandMan::SetViewMode(bool bAdvanced)

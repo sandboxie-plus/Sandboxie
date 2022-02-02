@@ -1429,7 +1429,7 @@ static _FX void Process_CheckAlertProcess(
     box = List_Head(boxes);
     while (box) {
 
-        if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name)) {
+        if (Process_CheckForceProcessList(box->box, &box->AlertProcess, name)) {
             *IsAlert = 1;
             return;
         }

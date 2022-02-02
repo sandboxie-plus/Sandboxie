@@ -169,6 +169,7 @@ private slots:
 
 	void				OnSettings();
 	void				OnResetMsgs();
+	void				OnResetGUI();
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
@@ -256,6 +257,7 @@ private:
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
 	QAction*			m_pMenuResetMsgs;
+	QAction*			m_pMenuResetGUI;
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;

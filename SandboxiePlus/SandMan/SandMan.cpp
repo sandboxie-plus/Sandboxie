@@ -463,6 +463,7 @@ void CSandMan::CreateMenus()
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
+		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI elements"), this, SLOT(OnResetGUI()));
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
@@ -1745,6 +1746,46 @@ void CSandMan::OnResetMsgs()
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
 	m_pPopUpWindow->ReloadHiddenMessages();
+}
+
+void CSandMan::OnResetGUI()
+{
+	hide();
+
+	theConf->DelValue("ErrorWindow/Window_Geometry");
+	theConf->DelValue("MainWindow/Window_Geometry");
+	theConf->DelValue("MainWindow/Window_State");
+	theConf->DelValue("MainWindow/BoxTree_Columns");
+	theConf->DelValue("MainWindow/LogList_Columns");
+	theConf->DelValue("MainWindow/Log_Splitter");
+	theConf->DelValue("MainWindow/Panel_Splitter");
+	theConf->DelValue("MainWindow/BoxTree_Columns");
+	theConf->DelValue("MainWindow/TraceLog_Columns");
+	theConf->DelValue("FileBrowserWindow/Window_Geometry");
+	theConf->DelValue("FileBrowserWindow/FileTree_Columns");
+	theConf->DelValue("NewBoxWindow/Window_Geometry");
+	theConf->DelValue("OptionsWindow/Window_Geometry");
+	theConf->DelValue("OptionsWindow/Run_Columns");
+	theConf->DelValue("OptionsWindow/AutoRun_Columns");
+	theConf->DelValue("OptionsWindow/Groups_Columns");
+	theConf->DelValue("OptionsWindow/Forced_Columns");
+	theConf->DelValue("OptionsWindow/Stop_Columns");
+	theConf->DelValue("OptionsWindow/Start_Columns");
+	theConf->DelValue("OptionsWindow/INet_Columns");
+	theConf->DelValue("OptionsWindow/NetFw_Columns");
+	theConf->DelValue("OptionsWindow/Access_Columns");
+	theConf->DelValue("OptionsWindow/Recovery_Columns");
+	theConf->DelValue("OptionsWindow/Templates_Columns");
+	theConf->DelValue("PopUpWindow/Window_Geometry");
+	theConf->DelValue("RecoveryWindow/Window_Geometry");
+	theConf->DelValue("RecoveryWindow/TreeView_Columns");
+	theConf->DelValue("SelectBoxWindow/Window_Geometry");
+	theConf->DelValue("SettingsWindow/Window_Geometry");
+	theConf->DelValue("SnapshotsWindow/Window_Geometry");
+
+	LoadState();
+
+	show();
 }
 
 void CSandMan::OnEditIni()

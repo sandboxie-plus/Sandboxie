@@ -100,6 +100,7 @@ public:
 	CSettings(const QString& AppName, bool bShared = false, QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
 	virtual ~CSettings();
 
+	void				DelValue(const QString& key);
 	bool				SetValue(const QString& key, const QVariant& value);
 	QVariant			GetValue(const QString& key, const QVariant& preset = QVariant());
 

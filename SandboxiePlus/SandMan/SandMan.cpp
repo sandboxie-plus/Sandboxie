@@ -1965,11 +1965,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 			bool bActiveOnly = theConf->GetBool("Options/TrayActiveOnly", false);
 
 			bool bAdded = false;
-
-			if (m_pTrayBoxes->topLevelItemCount() == 0) { 
-				bAdded = true; // triger frefresh
-				QTimer::singleShot(100, m_pTrayBoxes, SLOT(setFocus())); // make the hover highlight work
-			}
+			if (m_pTrayBoxes->topLevelItemCount() == 0)
+				bAdded = true; // triger size refresh
 
 			QMap<QString, QTreeWidgetItem*> OldBoxes;
 			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
@@ -2031,6 +2028,8 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 				m_pTrayMenu->removeAction(m_pTrayList);
 				m_pTrayMenu->insertAction(m_pTraySeparator, m_pTrayList);
+
+				m_pTrayBoxes->setFocus();
 			}
 
 			m_pTrayMenu->popup(QCursor::pos());	

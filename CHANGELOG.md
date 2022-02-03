@@ -8,13 +8,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 # [1.0.10 / 5.55.10] - 2022-01-??
 
 ### Added
+- added option to show only boxes in hray with runnign processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
+todo:- add reset ui ooption
 
 ### Changed
-- HideHostProcess=program.exe can now be used to hide sandboxie saervices [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+- HideHostProcess=program.exe can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
 
 ### Fixed
 - fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
 - fixed issues with re opening already open windows [#1584](https://github.com/sandboxie-plus/Sandboxie/issues/1584)
+- fixed issue with desktop access [#1588](https://github.com/sandboxie-plus/Sandboxie/issues/1588)
+- fixed issue handling commandline invokation [#1133](https://github.com/sandboxie-plus/Sandboxie/issues/1133)
+- fixed ui issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
+- fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
+- fixed firefox updates not being properly blocked
+
+
 
 
 

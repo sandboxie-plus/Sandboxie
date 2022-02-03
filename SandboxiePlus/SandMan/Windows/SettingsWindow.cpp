@@ -248,6 +248,7 @@ void CSettingsWindow::LoadSettings()
 
 	
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
+	ui.chkTrayActiveOnly->setChecked(theConf->GetBool("Options/TrayActiveOnly", false));
 	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 
 
@@ -390,6 +391,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
+	theConf->SetValue("Options/TrayActiveOnly", ui.chkTrayActiveOnly->isChecked());
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 
 

@@ -61,7 +61,7 @@ SB_STATUS CSbieUtils::DoAssist()
 	return SB_ERR(ERROR_OK);
 }
 
-SB_STATUS CSbieUtils::Start(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Start(EComponent Component)
 {
 	QStringList Ops;
 	if(!IsInstalled(Component))
@@ -79,7 +79,7 @@ void CSbieUtils::Start(EComponent Component, QStringList& Ops)
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|start|" SBIEDRV));
 }
 
-SB_STATUS CSbieUtils::Stop(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Stop(EComponent Component)
 {
 	QStringList Ops;
 	Stop(Component, Ops);
@@ -104,7 +104,7 @@ bool CSbieUtils::IsRunning(EComponent Component)
 	return true;
 }
 
-SB_STATUS CSbieUtils::Install(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Install(EComponent Component)
 {
 	QStringList Ops;
 	Install(Component, Ops);
@@ -122,7 +122,7 @@ void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 	}
 }
 
-SB_STATUS CSbieUtils::Uninstall(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Uninstall(EComponent Component)
 {
 	QStringList Ops;
 	Stop(Component, Ops);
@@ -147,7 +147,7 @@ bool CSbieUtils::IsInstalled(EComponent Component)
 	return true;
 }
 
-SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
+SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 {
 	if (Ops.isEmpty())
 		return SB_OK;
@@ -161,7 +161,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 	SHELLEXECUTEINFO shex;
 	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
 	shex.cbSize = sizeof(SHELLEXECUTEINFO);
-	shex.fMask = SEE_MASK_FLAG_NO_UI;
+	shex.fMask = SEE_MASK_FLAG_NO_UI | SEE_MASK_NOCLOSEPROCESS;
 	shex.hwnd = NULL;
 	shex.lpFile = path.c_str();
 	shex.lpParameters = params.c_str();
@@ -170,7 +170,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 
 	if (!ShellExecuteEx(&shex))
 		return SB_ERR(SB_NeedAdmin);
-	return SB_ERR(OP_ASYNC);
+	return CSbieResult<void*>(OP_ASYNC, shex.hProcess);
 }
 
 SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)

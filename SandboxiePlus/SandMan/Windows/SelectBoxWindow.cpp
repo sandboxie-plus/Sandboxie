@@ -184,5 +184,6 @@ void CSelectBoxWindow::OnRun()
 	}
 	//CSandMan::CheckResults(Results);
 
+	setResult(1);
 	close();
 }

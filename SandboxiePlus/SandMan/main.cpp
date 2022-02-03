@@ -28,11 +28,13 @@ int main(int argc, char *argv[])
 
 	bool IsBoxed = GetModuleHandle(L"SbieDll.dll") != NULL;
 
-	SB_STATUS Status = CSbieUtils::DoAssist();
-	if (Status.GetStatus()) {
-		if(Status.GetStatus() == ERROR_OK) app.sendMessage("Status:OK");
-		else app.sendMessage("Status:" + CSandMan::FormatError(Status)); // todo: localization
-		return 0;
+	if (!IsBoxed) {
+		SB_STATUS Status = CSbieUtils::DoAssist();
+		if (Status.GetStatus()) {
+			if (Status.GetStatus() != ERROR_OK)
+				return Status.GetStatus();
+			return 0;
+		}
 	}
 
 	QStringList Args = QCoreApplication::arguments();

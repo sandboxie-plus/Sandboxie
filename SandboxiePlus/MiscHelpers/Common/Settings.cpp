@@ -57,6 +57,15 @@ CSettings::~CSettings()
 	m_pConf->sync();
 }
 
+void CSettings::DelValue(const QString& key)
+{
+	QMutexLocker Locker(&m_Mutex);
+
+	m_pConf->remove(key);
+
+	m_ValueCache.clear();
+}
+
 bool CSettings::SetValue(const QString &key, const QVariant &value)
 {
 	QMutexLocker Locker(&m_Mutex);

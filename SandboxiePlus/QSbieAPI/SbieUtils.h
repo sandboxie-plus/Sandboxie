@@ -18,12 +18,12 @@ public:
 
 	static SB_STATUS		DoAssist();
 
-	static SB_STATUS		Start(EComponent Component);
-	static SB_STATUS		Stop(EComponent Component);
+	static SB_RESULT(void*)	Start(EComponent Component);
+	static SB_RESULT(void*)	Stop(EComponent Component);
 	static bool				IsRunning(EComponent Component);
 
-	static SB_STATUS		Install(EComponent Component);
-	static SB_STATUS		Uninstall(EComponent Component);
+	static SB_RESULT(void*)	Install(EComponent Component);
+	static SB_RESULT(void*)	Uninstall(EComponent Component);
 	static bool				IsInstalled(EComponent Component);
 
 	static QString			GetContextMenuStartCmd();
@@ -34,7 +34,7 @@ public:
 	static bool				GetStartMenuShortcut(class CSbieAPI* pApi, QString &BoxName, QString &LinkPath, QString &IconPath, quint32& IconIndex, QString &WorkDir);
 
 private:
-	static SB_STATUS		ElevateOps(const QStringList& Ops);
+	static SB_RESULT(void*)	ElevateOps(const QStringList& Ops);
 	static SB_STATUS		ExecOps(const QStringList& Ops);
 
 	static void				Start(EComponent Component, QStringList& Ops);

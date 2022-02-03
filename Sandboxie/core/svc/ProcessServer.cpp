@@ -513,6 +513,11 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 CallerInSandbox = true;
                 SbieApi_QueryProcess((HANDLE)(ULONG_PTR)CallerPid, boxname, NULL, NULL, NULL);
                 BoxNameOrModelPid = -(LONG_PTR)(LONG)CallerPid;
+                if ((req->si_flags & 0x80000000) != 0) { // bsession0 - this is only allowed for unsandboxed processes
+                    lvl = 0xFF;
+                    err = ERROR_NOT_SUPPORTED;
+                    goto end;
+                }
             } else {
                 CallerInSandbox = false;
                 if (*req->boxname == L'-') {
@@ -527,11 +532,16 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
 
 #ifndef DRV_BREAKOUT
             if (CallerInSandbox && wcscmp(req->boxname, L"*UNBOXED*") == 0 && *cmd == L'\"') {
-              ULONG flags = 0;
-              if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 2, 0, (ULONG_PTR)&flags)) || (flags & SBIE_FEATURE_FLAG_CERTIFIED) == 0) {
-                ULONG SessionId = PipeServer::GetCallerSessionId();
-                SbieApi_LogEx(SessionId, 6004, L"%S", boxname);
-              } else {
+
+                ULONG flags = 0;
+                if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 2, 0, (ULONG_PTR)&flags)) || (flags & SBIE_FEATURE_FLAG_CERTIFIED) == 0) {
+                    ULONG SessionId = PipeServer::GetCallerSessionId();
+                    SbieApi_LogEx(SessionId, 6004, L"%S", boxname);
+                    lvl = 0x66;
+                    err = ERROR_NOT_SUPPORTED;
+                    goto end;
+                } 
+
                 WCHAR* lpApplicationName = cmd + 1;
                 WCHAR* ptr = wcschr(lpApplicationName, L'\"');
                 if (ptr) {
@@ -569,6 +579,23 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                 if (SbieDll_CheckStringInList(lpProgram + 1, BoxName, L"ForceProcess")
                                     || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder")) {
 
+                                    //
+                                    // check if the breakout process is suposed to end in the box its trying to break out of
+                                    // and deny the breakout in that case, to take the normal process creation route
+                                    // 
+                                    // this happens when a break out is configured globally
+                                    //
+
+                                    if (_wcsicmp(boxname, BoxName) == 0) {
+                                        lvl = 0;
+                                        err = ERROR_NOT_SUPPORTED;
+                                        goto end;
+                                    }
+
+                                    //
+                                    // set otehr box
+                                    //
+
                                     BoxNameOrModelPid = (LONG_PTR)boxname;
                                     wcscpy(boxname, BoxName);
                                     break;
@@ -579,7 +606,6 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                     // restore cmd
                     *ptr = L'\"';
                 }
-              }
             }
 #endif
 
@@ -637,6 +663,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 lvl = 0x33;
             }
 
+        end:
             CloseHandle(CallerProcessHandle);
 
         } else {

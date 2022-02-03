@@ -810,7 +810,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити все, включаючи всі знімки</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -898,7 +898,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="195"/>
         <source>Reduced Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Знижена ізоляція</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="197"/>
@@ -1081,7 +1081,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити усе</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -1096,17 +1096,17 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="416"/>
         <source>Simple View</source>
-        <translation>Простий</translation>
+        <translation>Простий вигляд</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="417"/>
         <source>Advanced View</source>
-        <translation type="unfinished"></translation>
+        <translation>Розширений вигляд</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="421"/>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Поверх всіх вікон</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="427"/>
@@ -1141,7 +1141,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="440"/>
         <source>Keep terminated</source>
-        <translation></translation>
+        <translation>Залишити завершеним</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="444"/>
@@ -1151,12 +1151,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="445"/>
         <source>Global Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальні налаштування</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="446"/>
         <source>Reset all hidden messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути всі приховані повідомлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="448"/>
@@ -1166,7 +1166,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="449"/>
         <source>Reload ini file</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезавантажити ini файл</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="451"/>
@@ -1344,43 +1344,43 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1866"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця повинна бути порожня, перед тим, як її буде видалено.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2361"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей сертифікат спонсора не є дійсним для цієї збірки, будь ласка, оновіть сертифікат</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2364"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Цей сертифікат спонсора був вичерпаний %1 днів тому, будь ласка, отримайте новий сертифікат</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2365"/>
         <source>, but it remains valid for the current build</source>
-        <translation type="unfinished"></translation>
+        <translation>, але він залишається дісним для поточної збірки</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2367"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей сертифікат спонсора буде вичерпаний через %1 днів, будь ласка, отримайте новий сертифікат</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2387"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірка сертифіката...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2420"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертифікат не було знайдено на сервері!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2425"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновлений сертифікат недоступний.</translation>
     </message>
     <message>
         <source>The supporter certificate is expired</source>
@@ -1509,12 +1509,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1870"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося скопіювати файли пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1875"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося видалити старі файли пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1881"/>
@@ -1524,7 +1524,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2315"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Про Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версія %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
+        <translation>&lt;h3&gt;Про Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версія %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2323"/>
@@ -1550,7 +1550,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Тимчасово зупинити правила для програм</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="940"/>
@@ -1560,7 +1560,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished">Версія Sandboxie-Plus: %1 (%2)</translation>
+        <translation>Версія Sandboxie-Plus: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="943"/>
@@ -1570,12 +1570,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1151"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програма %1, яка виконується в пісочниці %2, буде зупинена через 5 хвилин, тому що пісочниця використовує функції, які доступні лише для спонсорів проєкту.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1153"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця програма має в своїй конфігурації функції, які доступні лише для спонсорів проєкту, ці готові налаштування будуть ігноровані.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1154"/>
@@ -1585,7 +1585,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, введіть тривалість вимкнення правил примусових програм у секундах.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1851"/>
@@ -2506,7 +2506,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="114"/>
         <source>Prompt before Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Підсказка перез закриттям</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="115"/>
@@ -2516,7 +2516,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished">Термін дії цього сертифікату спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
+        <translation>Термін дії цього сертифікату спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
@@ -2935,7 +2935,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="562"/>
         <source>Access Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Обмеження доступу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="583"/>
@@ -3260,7 +3260,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1356"/>
         <source>Set network/internet access for unlisted processes:</source>
-        <translation></translation>
+        <translation>Встановити доступ до мережі/Інтернету для не перерахованих процесів:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
@@ -3571,7 +3571,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
         <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Деякі розширені функції ізоляції можуть пошкодити сумісність з деякими додатками. Якщо Ви використовуєте пісочницю &lt;b&gt;НЕ для безпеки&lt;/b&gt;, але для простої портативності додатків, використовуючи ці налаштування, Ви можете відновити сумісність, але це змінить безпеку пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2261"/>
@@ -3591,12 +3591,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2176"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути використання RpcMgmtSetComTimeout за замовчуванням (може визивати проблеми з сумісністю)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2278"/>
         <source>Security Isolation &amp; Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізоляція безпеки та фільтрування</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2285"/>
@@ -3621,7 +3621,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2332"/>
         <source>Auto Exec</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматичне виконання (Auto Exec)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2338"/>
@@ -3646,12 +3646,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2415"/>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сховати процеси хоста від процесів, які виконуються в пісочниці.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2432"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не дозволяти процесам у пісочниці бачити інші процеси, які знаходяться в інших пісочницях.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2447"/>
@@ -3698,12 +3698,12 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2551"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Записувати всі SetError до журналу відстеження (створює багато даних у виході)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2571"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Записувати Debug-дані до журналу відстеження</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2578"/>
@@ -3720,12 +3720,12 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2598"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження системних викликів NTDLL (створює багато даних у виході)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2605"/>
         <source>File Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження файлів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2612"/>
@@ -3735,12 +3735,12 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2619"/>
         <source>IPC Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження IPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2626"/>
         <source>GUI Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження GUI</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2640"/>
@@ -3750,12 +3750,12 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2667"/>
         <source>Access Tracing</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження доступу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2674"/>
         <source>COM Class Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження COM класу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2681"/>
@@ -3770,7 +3770,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2705"/>
         <source>Debug</source>
-        <translation type="unfinished"></translation>
+        <translation>Відладка</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2749"/>
@@ -3790,17 +3790,17 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2788"/>
         <source>Compatibility Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблони для сумісності</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2796"/>
         <source>Filter Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Категорії фільтрів</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2809"/>
         <source>Text Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Текстовий фільтр</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2816"/>
@@ -3957,7 +3957,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">Видалити зміст</translation>
+        <translation>Видалити зміст</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="126"/>
@@ -3981,7 +3981,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="90"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Текстова мітка</translation>
     </message>
 </context>
 <context>
@@ -4037,7 +4037,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation></translation>
+        <translation>Відкривати посилання з цього UI в пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="103"/>
@@ -4052,7 +4052,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="220"/>
         <source>Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтеграція в оболонці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="248"/>
@@ -4137,7 +4137,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="427"/>
         <source>Sandbox default</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця за замовчуванням</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="598"/>
@@ -4294,17 +4294,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">Редагувати розділ ini файлу</translation>
+        <translation>Редагувати розділ ini файлу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="729"/>
         <source>Save</source>
-        <translation type="unfinished">Зберігти</translation>
+        <translation>Зберігти</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Edit ini</source>
-        <translation type="unfinished">Редагувати ini</translation>
+        <translation>Редагувати ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>

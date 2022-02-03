@@ -2478,8 +2478,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>
-		дії цього сертифіката спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
+        <translation>Термін дії цього сертифіката спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>

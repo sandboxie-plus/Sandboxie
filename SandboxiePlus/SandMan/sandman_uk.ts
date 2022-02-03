@@ -2478,17 +2478,18 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>Термін дії цього сертифікату спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
+        <translation>
+		дії цього сертифіката спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>Термін дії цього сертифікату спонсора &lt;font color=&apos;red&apos;&gt;буде вичерпаний через %1 днів&lt;/font&gt;, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертифікат&lt;/a&gt;.</translation>
+        <translation>Термін дії цього сертифіката спонсора &lt;font color=&apos;red&apos;&gt;буде вичерпаний через %1 днів&lt;/font&gt;, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертифікат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="534"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation>На жаль, термін цього сертифікату закінчився.</translation>
+        <translation>На жаль, термін цього сертифіката закінчився.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="536"/>
@@ -4246,7 +4247,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>Sandboxie помітив the following software applications in your system. Натисніть OK, щоб to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</translation>
+        <translation>Sandboxie помітив, що наступне програмне забезпечення встановлено в системі. Натисніть OK, щоб застосувати налаштування конфігурації, які покращать сумісність з цими додатками. Ці налаштування конфігурації будуть застосовані для всіх існуючих пісочниць та в будь-яких нових пісочницях.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>
@@ -4276,7 +4277,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="878"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Термін дії цього сертифіката вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;оновіть його&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="898"/>

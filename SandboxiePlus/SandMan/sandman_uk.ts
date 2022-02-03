@@ -2349,7 +2349,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="946"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <translation type="unfinished">Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
+        <translation type="unfinished">Ви дійсно хочете видалити цю(ці) пісочницю(і)? Увага: Вміст пісочниць також буде видалений!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="968"/>
@@ -4140,7 +4140,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
-        <translation type="unfinished">Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
+        <translation type="unfinished">Тільки адміністратор може використовувати команду &quot;Тимчасово зупинити правила примусових програм&quot;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>

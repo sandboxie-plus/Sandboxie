@@ -985,10 +985,6 @@ Full path: %4</source>
         <translation>Показати/Сховати</translation>
     </message>
     <message>
-        <source>Disable Forced Programs</source>
-        <translation type="vanished">Вимкнути примусові програми</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="380"/>
         <source>&amp;Sandbox</source>
         <translation>Пісочниця (&amp;S)</translation>
@@ -1315,14 +1311,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <translation>Очищення прибраних шаблонів...</translation>
     </message>
     <message>
-        <source>Sbie Directory: %1</source>
-        <translation type="vanished">Каталог Sbie: %1</translation>
-    </message>
-    <message>
-        <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="vanished">Версія Sbie+: %1 (%2)</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="942"/>
         <source>Loaded Config: %1</source>
         <translation>Завантажена конфігурація: %1</translation>
@@ -1354,8 +1342,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2364"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>Цей сертифікат спонсора був вичерпаний %1 днів тому, будь ласка, отримайте новий сертифікат</translation>
+        <translation>Цей сертифікат спонсора був вичерпаний%1, будь ласка, отримайте новий сертифікат</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2365"/>
@@ -1383,10 +1370,6 @@ No will choose: %2</source>
         <translation>Оновлений сертифікат недоступний.</translation>
     </message>
     <message>
-        <source>The supporter certificate is expired</source>
-        <translation type="vanished">Термін дії сертифікату спонсора закінчився</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1026"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Пісочниця за замовчуванням була не знайдена, створення:</translation>
@@ -1395,10 +1378,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1032"/>
         <source>   -   NOT connected</source>
         <translation>- НЕ підключено</translation>
-    </message>
-    <message>
-        <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="vanished">Програма %1, яка працює в пісочниці %2, буде завершені через 5 хвилин, тому що пісочниця має в своїй конфігурації функції, які доступні лише для спонсорів.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте спонсором проєкту&lt;/a&gt;, та отримайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1182"/>
@@ -1461,10 +1440,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1423"/>
         <source>Terminate all without asking</source>
         <translation>Завершити без запитань</translation>
-    </message>
-    <message>
-        <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="vanished">Будь ласка, введіть тривалість для примусового завершення програм.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1467"/>
@@ -1693,10 +1668,6 @@ No will choose: %2</source>
         <translation>Не можливо видалити знімок, який використовується в інших знімках.</translation>
     </message>
     <message>
-        <source>Failed to remove old RegHive</source>
-        <translation type="vanished">Не вдалося видалити старий RegHive</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1876"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Ви не маєте прав змінювати конфігурацію в розділі &apos;%1&apos;</translation>
@@ -1801,10 +1772,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2293"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Нова версія Sandboxie-Plus була завантажена в: &lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Ви хочете почати інсталяцію? Якщо деякі програми вже працюють в пісочниці, то вони будуть завершені.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;Про Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версія %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2654"/>
@@ -2382,8 +2349,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="946"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
+        <translation type="unfinished">Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="968"/>
@@ -2405,10 +2371,6 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Ви дійсно хочете видалити зміст усіх обраних пісочниць?</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="vanished">Ви дійсно хочете видалити зміст цих пісочниць?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1007"/>
@@ -3970,10 +3932,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Оновити</translation>
     </message>
     <message>
-        <source>Delete all</source>
-        <translation type="vanished">Видалити все</translation>
-    </message>
-    <message>
         <location filename="Forms/RecoveryWindow.ui" line="97"/>
         <source>Show All Files</source>
         <translation>Показати всі файли</translation>
@@ -4182,8 +4140,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
-        <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation>Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
+        <translation type="unfinished">Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
@@ -4345,10 +4302,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Спонсори Sandboxie-Plus отримують &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;спонсорський сертифікат&lt;/a&gt;. Це як ліцензійний ключ, але для чудових людей, які використовують програмне забезпечення з відкритим кодом (Open-source software). :-)</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="vanished">Термін дії цього сертифікату вичерпаний, будь ласка, оновіть його.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="837"/>

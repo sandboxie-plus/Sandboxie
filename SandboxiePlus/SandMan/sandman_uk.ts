@@ -3613,7 +3613,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2432"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation type="unfinished">Не дозволяти процесам у пісочниці бачити інші процеси, які знаходяться в інших пісочницях.</translation>
+        <translation type="unfinished">Не дозволяти процесам у пісочниці бачити інші процеси, які знаходяться в інших пісочницях</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2447"/>

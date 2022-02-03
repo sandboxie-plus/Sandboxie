@@ -1555,17 +1555,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог встановлення: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Версія Sandboxie-Plus: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="943"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог даних: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1151"/>
@@ -1580,7 +1580,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1154"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте спонсором проєкту&lt;/a&gt;, та отримайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
@@ -1950,17 +1950,17 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="485"/>
         <source>Windows Live Mail</source>
-        <translation></translation>
+        <translation>Пошта Windows Live (Windows Live Mail)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="486"/>
         <source>Service Model Reg</source>
-        <translation>Windows Live Mail</translation>
+        <translation>Service Model Reg</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="487"/>
         <source>RunDll32</source>
-        <translation>Service Model Reg</translation>
+        <translation>RunDll32</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="488"/>
@@ -2383,7 +2383,7 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="946"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation type="unfinished">Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
+        <translation>Ви дійсно хочете видалити цю(ці) пісочницю(і)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="968"/>
@@ -2399,12 +2399,12 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="979"/>
         <location filename="Views/SbieView.cpp" line="983"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Також видалити всі знімки</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити зміст усіх обраних пісочниць?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
@@ -2481,7 +2481,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає перекладу</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2516,12 +2516,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Термін дії цього сертифікату спонсору вичерпаний, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертфікат&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Термін дії цього сертифікату спонсора &lt;font color=&apos;red&apos;&gt;буде вичерпаний через %1 днів&lt;/font&gt;, будь ласка, &lt;a href=&quot;sbie://update/cert&quot;&gt;отримайте новий сертифікат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="534"/>
@@ -2531,7 +2531,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="536"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>На жаль, цей сертифікат застарілий.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="542"/>
@@ -2595,12 +2595,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>Повернути до порожньої пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (за замовчуванням)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -4096,8 +4096,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="303"/>
-        <source>Add &apos;
-		&apos; to the explorer context menu</source>
+        <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Додати &apos;Виконати в пісочниці&apos; до меню Explorer</translation>
     </message>
     <message>

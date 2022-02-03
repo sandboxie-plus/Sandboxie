@@ -4014,7 +4014,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="83"/>
         <source>Run Outside the Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати ззовні пісочниці</translation>
     </message>
 </context>
 <context>
@@ -4027,7 +4027,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
         <source>General Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальні налаштування</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="161"/>
@@ -4057,7 +4057,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="248"/>
         <source>Run Sandboxed - Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконати в пісочниці - Дії</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="289"/>
@@ -4072,7 +4072,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="168"/>
         <source>On main window close:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коли головне вікно буде закрите:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="151"/>
@@ -4096,13 +4096,14 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="303"/>
-        <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
+        <source>Add &apos;
+		&apos; to the explorer context menu</source>
         <translation>Додати &apos;Виконати в пісочниці&apos; до меню Explorer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="132"/>
         <source>Hotkey for terminating all boxed processes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Гаряча клавіша для зупинки всіх процесів у пісочниці:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="262"/>
@@ -4117,7 +4118,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="464"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;корінь файлової системи&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="605"/>
@@ -4132,7 +4133,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="407"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;корінь ipc&lt;/a&gt;:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="427"/>
@@ -4157,7 +4158,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="441"/>
         <source>Sandboxing features</source>
-        <translation>Оссбливості пісочниці</translation>
+        <translation>Особливості пісочниці</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="633"/>
@@ -4172,7 +4173,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="612"/>
         <source>Only Administrator user accounts can make changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки Адміністратори можуть робити зміни</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
@@ -4183,7 +4184,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
+        <translation>Тільки адміністратор може використовувати команду &quot;Вимкнути примусові програми&quot;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
@@ -4309,7 +4310,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
@@ -4391,7 +4392,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Знімок за замовчуванням</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

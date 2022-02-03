@@ -1323,7 +1323,7 @@ _FX BOOL Proc_AlternateCreateProcess(
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
     BOOL *ReturnValue)
 {
-    if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", TRUE))
+    if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", FALSE))
     if (Proc_IsSoftwareUpdateW(lpApplicationName ? lpApplicationName : lpCommandLine)) {
 
         SetLastError(ERROR_ACCESS_DENIED);

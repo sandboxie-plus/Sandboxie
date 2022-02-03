@@ -131,7 +131,7 @@ static BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath);
 
 static BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path);
 
-static BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind);
+//static BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind);
 
 static BOOLEAN Proc_IsSplWow64(
     const WCHAR *lpApplicationName, const WCHAR *lpCommandLine,
@@ -1323,7 +1323,7 @@ _FX BOOL Proc_AlternateCreateProcess(
     void *lpCurrentDirectory, LPPROCESS_INFORMATION lpProcessInformation,
     BOOL *ReturnValue)
 {
-    if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", TRUE))
+    if (SbieApi_QueryConfBool(NULL, L"BlockSoftwareUpdaters", FALSE))
     if (Proc_IsSoftwareUpdateW(lpApplicationName ? lpApplicationName : lpCommandLine)) {
 
         SetLastError(ERROR_ACCESS_DENIED);
@@ -2275,8 +2275,8 @@ _FX BOOLEAN Proc_CheckMailer(const WCHAR *ImagePath, BOOLEAN IsBoxedPath)
 
 _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
 {
-    WCHAR *MatchExe, **MatchDirs, *SoftName;
-    WCHAR *backslash;
+    //WCHAR *MatchExe, **MatchDirs, *SoftName;
+    //WCHAR *backslash;
     ULONG mp_flags;
     BOOLEAN IsUpdate;
 
@@ -2300,61 +2300,63 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     // which was not installed into the sandbox
     //
 
-    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) {
-
-        MatchExe = L"updater.exe";
-        static WCHAR* Dirs[] = { L"\\mozilla firefox\\updates\\" , L"\\mozilla\\updates\\", L"\\mozilla firefox\\", L""};
-        MatchDirs = Dirs;
-        SoftName = L"Mozilla Firefox";
-
-    } else if (Dll_ImageType == DLL_IMAGE_GOOGLE_UPDATE) {
-
-        if (! Proc_IsProcessRunning(L"chrome.exe"))
-            return FALSE;
-
-        MatchExe = L"chrome_installer.exe";
-        static WCHAR* Dirs[] = { L"\\google\\update\\", L""};
-        MatchDirs = Dirs;
-        SoftName = L"Google Chrome";
-
-    } else if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH) {
-
-        if (! Proc_IsProcessRunning(L"msedge.exe"))
-            return FALSE;
-
-        MatchExe = L"microsoftedgeupdatebroker.exe";
-        static WCHAR* Dirs[] = { L"\\microsoft\\edgeupdate", L""};
-        MatchDirs = Dirs;
-        SoftName = L"Microsoft Edge";
-
-    } else
-        return FALSE;
+    //if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) {
+    //
+    //    MatchExe = L"updater.exe";
+    //    static WCHAR* Dirs[] = { L"\\mozilla firefox\\updates\\" , L"\\mozilla\\updates\\", L"\\mozilla firefox\\", L""};
+    //    MatchDirs = Dirs;
+    //    SoftName = L"Mozilla Firefox";
+    //
+    //} else if (Dll_ImageType == DLL_IMAGE_GOOGLE_UPDATE) {
+    //
+    //    if (! Proc_IsProcessRunning(L"chrome.exe"))
+    //        return FALSE;
+    //
+    //    MatchExe = L"chrome_installer.exe";
+    //    static WCHAR* Dirs[] = { L"\\google\\update\\", L""};
+    //    MatchDirs = Dirs;
+    //    SoftName = L"Google Chrome";
+    //
+    //} else if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH) {
+    //
+    //    if (! Proc_IsProcessRunning(L"msedge.exe"))
+    //        return FALSE;
+    //
+    //    MatchExe = L"microsoftedgeupdatebroker.exe";
+    //    static WCHAR* Dirs[] = { L"\\microsoft\\edgeupdate", L""};
+    //    MatchDirs = Dirs;
+    //    SoftName = L"Microsoft Edge";
+    //
+    //} else
+    //    return FALSE;
 
     //
     // check if launching an update process
     //
 
-    IsUpdate = FALSE;
+    //IsUpdate = FALSE;
+    //
+    //backslash = wcsrchr(path, L'\\');
+    //if (backslash && _wcsnicmp(backslash + 1, MatchExe, wcslen(MatchExe)) == 0) {
+    //
+    //    ULONG len = wcslen(path) + 1;
+    //    WCHAR *path2 = Dll_AllocTemp(len * sizeof(WCHAR));
+    //    wmemcpy(path2, path, len);
+    //    _wcslwr(path2);
+    //
+    //    for (WCHAR** MatchDir = MatchDirs; (*MatchDir)[0] != L'\0'; MatchDir++) {
+    //
+    //        if (wcsstr(path2, *MatchDir)) {
+    //
+    //            IsUpdate = TRUE;
+    //            break;
+    //        }
+    //    }
+    //
+    //    Dll_Free(path2);
+    //}
 
-    backslash = wcsrchr(path, L'\\');
-    if (backslash && _wcsnicmp(backslash + 1, MatchExe, wcslen(MatchExe)) == 0) {
-
-        ULONG len = wcslen(path) + 1;
-        WCHAR *path2 = Dll_AllocTemp(len * sizeof(WCHAR));
-        wmemcpy(path2, path, len);
-        _wcslwr(path2);
-
-        for (WCHAR** MatchDir = MatchDirs; (*MatchDir)[0] != L'\0'; MatchDir++) {
-
-            if (wcsstr(path2, *MatchDir)) {
-
-                IsUpdate = TRUE;
-                break;
-            }
-        }
-
-        Dll_Free(path2);
-    }
+    IsUpdate = SbieDll_CheckPatternInList(path, wcslen(path), NULL, L"SoftwareUpdater");
 
     //
     // issue message and return
@@ -2362,7 +2364,8 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
 
     if (IsUpdate) {
 
-        SbieApi_Log(2191, SoftName);
+        //SbieApi_Log(2191, SoftName);
+        SbieApi_Log(2191, Dll_ImageName);
         SbieApi_Log(2192, NULL);
         SbieApi_Log(2193, NULL);
     }
@@ -2376,33 +2379,33 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind)
-{
-    ULONG *pids, i;
-    BOOLEAN found = FALSE;
-
-    ULONG pid_count = 0;
-    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
-    pid_count += 128;
-
-    pids = Dll_AllocTemp(sizeof(ULONG) * pid_count);
-    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
-
-    for (i = 0; i < pid_count; ++i) {
-
-        WCHAR image[128];
-        HANDLE pids_i = (HANDLE) (ULONG_PTR) pids[i];
-        SbieApi_QueryProcess(pids_i, NULL, image, NULL, NULL);
-        if (_wcsicmp(image, ImageToFind) == 0) {
-
-            found = TRUE;
-            break;
-        }
-    }
-
-    Dll_Free(pids);
-    return found;
-}
+//_FX BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind)
+//{
+//    ULONG *pids, i;
+//    BOOLEAN found = FALSE;
+//
+//    ULONG pid_count = 0;
+//    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+//    pid_count += 128;
+//
+//    pids = Dll_AllocTemp(sizeof(ULONG) * pid_count);
+//    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+//
+//    for (i = 0; i < pid_count; ++i) {
+//
+//        WCHAR image[128];
+//        HANDLE pids_i = (HANDLE) (ULONG_PTR) pids[i];
+//        SbieApi_QueryProcess(pids_i, NULL, image, NULL, NULL);
+//        if (_wcsicmp(image, ImageToFind) == 0) {
+//
+//            found = TRUE;
+//            break;
+//        }
+//    }
+//
+//    Dll_Free(pids);
+//    return found;
+//}
 
 
 //---------------------------------------------------------------------------

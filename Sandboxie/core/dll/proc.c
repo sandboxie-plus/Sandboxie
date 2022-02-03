@@ -2303,7 +2303,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) {
 
         MatchExe = L"updater.exe";
-        static WCHAR* Dirs[] = { L"\\mozilla firefox\\updates\\" , L"\\mozilla\\updates\\", L""};
+        static WCHAR* Dirs[] = { L"\\mozilla firefox\\updates\\" , L"\\mozilla\\updates\\", L"\\mozilla firefox\\", L""};
         MatchDirs = Dirs;
         SoftName = L"Mozilla Firefox";
 

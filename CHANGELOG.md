@@ -13,6 +13,7 @@ todo:- add reset ui ooption
 
 ### Changed
 - HideHostProcess=program.exe can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+- updater blocking is now done using a template with BlockSoftwareUpdaters
 
 ### Fixed
 - fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
@@ -21,7 +22,7 @@ todo:- add reset ui ooption
 - fixed issue handling commandline invokation [#1133](https://github.com/sandboxie-plus/Sandboxie/issues/1133)
 - fixed ui issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
-- fixed firefox updates not being properly blocked
+
 
 
 

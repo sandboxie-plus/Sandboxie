@@ -2336,7 +2336,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="1" column="1">
                 <widget class="QLabel" name="label_33">
                  <property name="toolTip">
-                  <string>This events are executed each time a boxed is started</string>
+                  <string>These events are executed each time a box is started</string>
                  </property>
                  <property name="text">
                   <string>On Box Start</string>
@@ -2381,7 +2381,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="8" column="1">
                 <widget class="QLabel" name="label_67">
                  <property name="toolTip">
-                  <string>This commands are run UNBOXED just before the box content is deleted</string>
+                  <string>These commands are run UNBOXED just before the box content is deleted</string>
                  </property>
                  <property name="text">
                   <string>On Box Delete</string>
@@ -2413,7 +2413,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="5" column="1">
                 <widget class="QLabel" name="label_66">
                  <property name="toolTip">
-                  <string>This commands are only executed when a box gets initialized, to have them re-run the box content must be deleted.</string>
+                  <string>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</string>
                  </property>
                  <property name="text">
                   <string>On Box Init</string>

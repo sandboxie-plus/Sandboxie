@@ -728,6 +728,8 @@ _FX PROCESS *Process_Create(
 
     proc->dont_open_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"DontOpenForBoxed", 0, TRUE); 
 
+    proc->hide_other_boxes = Conf_Get_Boolean(proc->box->name, L"HideOtherBoxes", 0, FALSE); 
+
     //
     // privacy mode requirers Rule Specificity
     //

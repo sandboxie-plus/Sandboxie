@@ -997,7 +997,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
     // if/which boxes are involved
     //
 
-    if (pid && (WriteAccess == 0)) {
+    if (pid && (WriteAccess == 0) && !proc->hide_other_boxes) {
         status = STATUS_SUCCESS;
         goto trace;
     }

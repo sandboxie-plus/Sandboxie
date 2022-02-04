@@ -363,26 +363,21 @@ int DoLingerLeader(void)
             SbieDll_StartBoxedService(image, TRUE);
         }
 
+        ULONG buf_len = 4096 * sizeof(WCHAR);
+        WCHAR* buf1 = Dll_AllocTemp(buf_len);
+        memzero(buf1, buf_len);
+
         for (i = 0; ; ++i) {
 
             rc = SbieApi_QueryConfAsIs(
-                NULL, L"StartProgram", i, image, sizeof(WCHAR) * 120);
+                NULL, L"StartProgram", i, buf1, buf_len - 16);
             if (rc != 0)
                 break;
 
-            SbieDll_ExpandAndRunProgram(image);
+            SbieDll_ExpandAndRunProgram(buf1);
         }
 
-        WCHAR Cmd[8191];
-        for (i = 0; ; ++i) {
-
-            rc = SbieApi_QueryConfAsIs(
-                NULL, L"StartCommand", i, Cmd, sizeof(Cmd));
-            if (rc != 0)
-                break;
-
-            SbieDll_RunStartExe(Cmd, NULL);
-        }
+        Dll_Free(buf1);
     }
 
     //

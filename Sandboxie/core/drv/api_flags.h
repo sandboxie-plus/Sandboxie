@@ -28,6 +28,7 @@
 //---------------------------------------------------------------------------
 
 
+#define CONF_JUST_EXPAND				0x80000000L
 #define CONF_GET_NO_GLOBAL				0x40000000L
 #define CONF_GET_NO_EXPAND				0x20000000L
 #define CONF_GET_NO_TEMPLS				0x10000000L

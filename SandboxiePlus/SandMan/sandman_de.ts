@@ -839,7 +839,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles löschen, inklusive aller Schnappschüsse</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -1114,7 +1114,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle deinstallieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -1289,38 +1289,38 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2361"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Unterstützerzertifikat ist für diese Version nicht gültig, bitte holen Sie sich ein aktuelles Zertifikat</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2364"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Das Unterstützerzertifikat ist abgelaufen%1, bitte holen Sie sich ein aktuelles Zertifikat</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2365"/>
         <source>, but it remains valid for the current build</source>
-        <translation type="unfinished"></translation>
+        <translation>, aber es blebt für die aktuelle Version gültig</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2367"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Unterstützerzertifikat wird in %1 Tagen ablaufen, bitte holen Sie sich ein aktuelles Zertifikat</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2387"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prüfe auf Zertifikat...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2420"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Zertifikat auf dem Server gefunden!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2425"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist kein aktuelles Zertifikat verfügbar.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2654"/>
@@ -1351,7 +1351,7 @@ Nein wählt: %2</translation>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausiere erzwungene Programmregeln</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="444"/>
@@ -1608,12 +1608,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Installationsordner: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Version: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1871"/>
@@ -1740,7 +1740,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="943"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenordner: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1151"/>
@@ -1790,7 +1790,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie die Dauer, in Sekunden, ein, zum Pausieren der erzwungenen Programmregeln.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1572"/>
@@ -1820,7 +1820,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1870"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlschlag beim Kopieren der Boxdateien</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1874"/>
@@ -1830,7 +1830,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1875"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlschlag beim Entfernen der alten Boxdateien</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1901"/>
@@ -2542,18 +2542,18 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="Views/SbieView.cpp" line="946"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation type="unfinished">Möchten Sie wirklich die ausgewählte(n) Sandbox(en) entfernen?</translation>
+        <translation>Möchten Sie wirklich die ausgewählte(n) Sandbox(en) entfernen?&lt;br /&gt;&lt;br /&gt;Warnung: Der Boxinhalt wird ebenfalls gelöscht!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="979"/>
         <location filename="Views/SbieView.cpp" line="983"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Auch alle Schnappschüsse löschen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich den Inhalt von allen ausgewählten Sandboxen löschen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1048"/>
@@ -2601,7 +2601,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Übersetzung</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2636,12 +2636,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;sbie://update/cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstützerzertifikat wird &lt;font color=&apos;red&apos;&gt;in %1 Tagen ablaufen&lt;/font&gt;, bitte &lt;a href=&quot;sbie://update/cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="534"/>
@@ -2651,7 +2651,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="536"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Zertifikat ist leider nicht mehr aktuell.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="542"/>
@@ -2715,12 +2715,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu leerer Box zurückkehren</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (Standard)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -4214,7 +4214,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">Inhalte löschen</translation>
+        <translation>Inhalte löschen</translation>
     </message>
     <message>
         <source>Recover to</source>
@@ -4354,22 +4354,22 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">INI Sektion bearbeiten</translation>
+        <translation>INI Sektion bearbeiten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="729"/>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Edit ini</source>
-        <translation type="unfinished">INI bearbeiten</translation>
+        <translation>INI bearbeiten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
@@ -4384,7 +4384,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="878"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;sbie://update/cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="898"/>
@@ -4394,7 +4394,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="911"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
-        <translation type="unfinished"></translation>
+        <translation>Zukünftig nicht über ablaufende Zertifikate informieren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="807"/>
@@ -4457,7 +4457,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">Nur Administratoren können das Erzwingen von Programmen deaktivieren</translation>
+        <translation>Nur Administratoren können die Regeln zum  Erzwingen von Programmen pausieren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="612"/>
@@ -4668,12 +4668,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Löschen von Schnappschussinhalten wird zu diesem Schnappschuss zurückgekehrt, anstelle von keinem.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardschnappschuss</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

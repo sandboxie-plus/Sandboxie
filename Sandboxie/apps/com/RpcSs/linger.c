@@ -364,8 +364,7 @@ int DoLingerLeader(void)
         }
 
         ULONG buf_len = 4096 * sizeof(WCHAR);
-        WCHAR* buf1 = Dll_AllocTemp(buf_len);
-        memzero(buf1, buf_len);
+        WCHAR* buf1 = HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS | HEAP_ZERO_MEMORY, buf_len);
 
         for (i = 0; ; ++i) {
 
@@ -377,7 +376,7 @@ int DoLingerLeader(void)
             SbieDll_ExpandAndRunProgram(buf1);
         }
 
-        Dll_Free(buf1);
+        HeapFree(GetProcessHeap(), 0, buf1);
     }
 
     //

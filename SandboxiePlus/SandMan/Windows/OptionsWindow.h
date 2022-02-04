@@ -51,11 +51,6 @@ private slots:
 	void OnAddCommand();
 	void OnDelCommand();
 
-	void OnAddAutoCmd();
-	void OnAddAutoExe();
-	void OnDelAutoSvc();
-	void OnDelAuto();
-
 	void OnAddGroup();
 	void OnAddProg();
 	void OnDelProg();
@@ -122,16 +117,23 @@ private slots:
 	void OnDelRecEntry();
 	void OnShowRecoveryTmpl()		{ LoadRecoveryListTmpl(true); }
 
+	// advanced
+	void OnNoWindowRename();
+
+	void OnTriggerChanged()			{ m_AdvancedChanged = true; OnOptChanged(); }
+	void OnShowTriggersTmpl()		{ ShowTriggersTmpl(true); }
+	void OnAddAutoRun();
+	void OnAddAutoSvc();
 	void OnAddAutoExec();
-	void OnDelAutoExec();
+	void OnAddDeleteCmd();
+	void OnDelAuto();
 
 	void OnAddProcess();
 	void OnDelProcess();
 
-	void OnNoWindowRename();
-
 	void OnAddUser();
 	void OnDelUser();
+	//
 
 	void OnFilterTemplates()		{ ShowTemplates(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
@@ -230,6 +232,13 @@ protected:
 		eWriteOnly
 	};
 
+	enum ETriggerAction {
+		eOnStartCmd,
+		eOnStartSvc,
+		eAutoExec,
+		eDeleteCmd
+	};
+
 	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column);
 
 	QString SelectProgram(bool bOrGroup = true);
@@ -247,8 +256,6 @@ protected:
 	void LoadConfig();
 	void SaveConfig();
 	void UpdateCurrentTab();
-
-	void AddAutoRunItem(const QString& Value, int Type);
 
 	void AddRunItem(const QString& Name, const QString& Command);
 
@@ -324,10 +331,14 @@ protected:
 	void AddRecoveryEntry(const QString& Name, int type, const QString& Template = QString());
 	void SaveRecoveryList();
 
+	// advanced 
 	void CreateAdvanced();
 	void LoadAdvanced();
 	void SaveAdvanced();
 	void UpdateBoxIsolation();
+	void ShowTriggersTmpl(bool bUpdate = false);
+	void AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template = QString());
+	//
 
 	void CreateDebug();
 	void LoadDebug();

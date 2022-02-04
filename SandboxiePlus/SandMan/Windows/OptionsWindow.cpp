@@ -297,8 +297,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	QByteArray
 	Columns = theConf->GetBlob("OptionsWindow/Run_Columns");
 	if (!Columns.isEmpty()) ui.treeRun->header()->restoreState(Columns);
-	Columns = theConf->GetBlob("OptionsWindow/AutoRun_Columns");
-	if (!Columns.isEmpty()) ui.treeAutoStart->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Triggers_Columns");
+	if (!Columns.isEmpty()) ui.treeTriggers->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Groups_Columns");
 	if (!Columns.isEmpty()) ui.treeGroups->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Forced_Columns");
@@ -330,7 +330,7 @@ COptionsWindow::~COptionsWindow()
 	theConf->SetBlob("OptionsWindow/Window_Geometry",saveGeometry());
 
 	theConf->SetBlob("OptionsWindow/Run_Columns", ui.treeRun->header()->saveState());
-	theConf->SetBlob("OptionsWindow/AutoRun_Columns", ui.treeAutoStart->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Triggers_Columns", ui.treeTriggers->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Groups_Columns", ui.treeGroups->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Forced_Columns", ui.treeForced->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Stop_Columns", ui.treeStop->header()->saveState());

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>479</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -803,107 +803,6 @@
                </property>
                <property name="text">
                 <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tab_6">
-            <attribute name="title">
-             <string>Auto Start</string>
-            </attribute>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_32">
-               <property name="text">
-                <string>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" rowspan="4">
-              <widget class="QTreeWidget" name="treeAutoStart">
-               <column>
-                <property name="text">
-                 <string>Type</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Program/Service</string>
-                </property>
-               </column>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QToolButton" name="btnDelAuto">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <spacer name="verticalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="1">
-              <widget class="QToolButton" name="btnAddAutoExe">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Add program</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QToolButton" name="btnAddAutoSvc">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Add service</string>
                </property>
               </widget>
              </item>
@@ -2329,17 +2228,23 @@ The process match level has a higher priority than the specificity and describes
              </widget>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
-               <string>Auto Exec</string>
+               <string>Triggers</string>
               </attribute>
-              <layout class="QGridLayout" name="gridLayout_35">
-               <item row="1" column="1">
-                <widget class="QPushButton" name="btnAddAutoExec">
-                 <property name="text">
-                  <string>Add Command</string>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="10" column="1">
+                <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
-               <item row="2" column="1">
+               <item row="4" column="1">
                 <spacer name="verticalSpacer_18">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -2352,25 +2257,188 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="1">
-                <widget class="QPushButton" name="btnDelAutoExec">
+               <item row="12" column="1">
+                <widget class="QToolButton" name="btnDelAuto">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Remove</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_33">
+               <item row="1" column="0" rowspan="12">
+                <widget class="QTreeWidget" name="treeTriggers">
+                 <column>
+                  <property name="text">
+                   <string>Event</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Action</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QToolButton" name="btnAddAutoExec">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</string>
+                  <string>Run Command</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QToolButton" name="btnAddAutoSvc">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Start Service</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_33">
+                 <property name="toolTip">
+                  <string>This events are executed each time a boxed is started</string>
+                 </property>
+                 <property name="text">
+                  <string>On Box Start</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QToolButton" name="btnAddAutoRun">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Run Command</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <spacer name="verticalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="8" column="1">
+                <widget class="QLabel" name="label_67">
+                 <property name="toolTip">
+                  <string>This commands are run UNBOXED just before the box content is deleted</string>
+                 </property>
+                 <property name="text">
+                  <string>On Box Delete</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1">
+                <widget class="QToolButton" name="btnAddDeleteCmd">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Run Command</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLabel" name="label_66">
+                 <property name="toolTip">
+                  <string>This commands are only executed when a box gets initialized, to have them re-run the box content must be deleted.</string>
+                 </property>
+                 <property name="text">
+                  <string>On Box Init</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_32">
+                 <property name="text">
+                  <string>Here you can specify actions to be executed automatically on various box events.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0" rowspan="3">
-                <widget class="QListWidget" name="lstAutoExec"/>
+               <item row="11" column="1">
+                <widget class="QCheckBox" name="chkShowTriggersTmpl">
+                 <property name="text">
+                  <string>Show Templates</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -2715,8 +2783,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>63</width>
+                    <height>16</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">
@@ -3054,8 +3122,8 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkNoCopyWarn</tabstop>
   <tabstop>chkAutoEmpty</tabstop>
   <tabstop>chkProtectBox</tabstop>
-  <tabstop>treeAutoStart</tabstop>
-  <tabstop>btnAddAutoExe</tabstop>
+  <tabstop>treeTriggers</tabstop>
+  <tabstop>btnAddAutoRun</tabstop>
   <tabstop>btnAddAutoSvc</tabstop>
   <tabstop>btnDelAuto</tabstop>
   <tabstop>treeGroups</tabstop>
@@ -3102,9 +3170,6 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>tabsAdvanced</tabstop>
   <tabstop>chkPreferExternalManifest</tabstop>
   <tabstop>chkNoWindowRename</tabstop>
-  <tabstop>lstAutoExec</tabstop>
-  <tabstop>btnAddAutoExec</tabstop>
-  <tabstop>btnDelAutoExec</tabstop>
   <tabstop>chkHideOtherBoxes</tabstop>
   <tabstop>lstProcesses</tabstop>
   <tabstop>btnAddProcess</tabstop>

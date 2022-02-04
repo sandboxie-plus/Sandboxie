@@ -212,12 +212,12 @@ QString CSbieUtils::GetContextMenuStartCmd()
 	return QString::fromWCharArray(path);
 }
 
-void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPath)
+void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr, const QString& ExploreStr, const QString& IconPath)
 {
 	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
 	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
 
-	CreateShellEntry(L"*", L"Run &Sandboxed", icon_path, start_path + L" /box:__ask__ \"%1\" %*");
+	CreateShellEntry(L"*", L"sandbox", RunStr.toStdWString(), icon_path, start_path + L" /box:__ask__ \"%1\" %*");
 
 	wstring explorer_path(512, L'\0');
 
@@ -242,13 +242,13 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPat
 		explorer_path.append(L"\\explorer.exe");
 	}
 
-	CreateShellEntry(L"Folder", L"Explore &Sandboxed", icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
+	CreateShellEntry(L"Folder", L"sandbox", ExploreStr.toStdWString(), icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
 }
 
-void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)
+void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& key, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)
 {
 	HKEY hkey;
-	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\sandbox").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\" + key).c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
 	if (rc != 0)
 		return;
 
@@ -259,7 +259,7 @@ void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdte
 	if (rc != 0)
 		return;
 
-	rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\sandbox\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\"  + key + L"\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
 	if (rc != 0)
 		return;
 
@@ -272,6 +272,32 @@ void CSbieUtils::RemoveContextMenu()
 {
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\sandbox");
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\folder\\shell\\sandbox");
+}
+
+bool CSbieUtils::HasContextMenu2()
+{
+	const wchar_t* key = L"Software\\Classes\\*\\shell\\unbox\\command";
+	HKEY hkey;
+	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	if (rc != 0)
+		return false;
+
+	RegCloseKey(hkey);
+
+	return true;
+}
+
+void CSbieUtils::AddContextMenu2(const QString& StartPath, const QString& RunStr, const QString& IconPath)
+{
+	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\",-104";
+
+	CreateShellEntry(L"*", L"unbox", RunStr.toStdWString(), icon_path, start_path + L" /disable_force \"%1\" %*");
+}
+
+void CSbieUtils::RemoveContextMenu2()
+{
+	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\unbox");
 }
 
 //////////////////////////////////////////////////////////////////////////////

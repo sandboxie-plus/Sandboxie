@@ -991,8 +991,10 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			, tr("Also delete all Snapshots"), &DeleteShapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 				return;
 
-		foreach(const CSandBoxPtr & pBox, SandBoxes)
+		foreach(const CSandBoxPtr &pBox, SandBoxes)
 		{
+			theGUI->DoDeleteCmd(pBox);
+
 			SB_PROGRESS Status;
 			if (!DeleteShapshots && pBox->HasSnapshots()) {
 				QString Default = pBox->GetDefaultSnapshot();

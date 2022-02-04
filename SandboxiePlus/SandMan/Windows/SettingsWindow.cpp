@@ -203,11 +203,18 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 Qt::CheckState CSettingsWindow__IsContextMenu()
 {
 	QString cmd = CSbieUtils::GetContextMenuStartCmd();
-	if (cmd.contains("sandman.exe", Qt::CaseInsensitive)) 
+	if (cmd.contains("SandMan.exe", Qt::CaseInsensitive)) 
 		return Qt::Checked; // set up and sandman
 	if (!cmd.isEmpty()) // ... probably sbiectrl.exe
 		return Qt::PartiallyChecked; 
 	return Qt::Unchecked; // not set up
+}
+
+void CSettingsWindow__AddContextMenu()
+{
+	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
+		CSettingsWindow::tr("Run &Sandboxed"), CSettingsWindow::tr("Explore &Sandboxed"),
+			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
 }
 
 void CSettingsWindow::LoadSettings()
@@ -230,6 +237,7 @@ void CSettingsWindow::LoadSettings()
 	}
 
 	ui.chkShellMenu->setCheckState(CSettingsWindow__IsContextMenu());
+	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
@@ -370,12 +378,21 @@ void CSettingsWindow::SaveSettings()
 
 	if (ui.chkShellMenu->checkState() != CSettingsWindow__IsContextMenu())
 	{
-		if (ui.chkShellMenu->isChecked()) {
-			CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
-		} else
+		if (ui.chkShellMenu->isChecked())
+			CSettingsWindow__AddContextMenu();
+		else
 			CSbieUtils::RemoveContextMenu();
 	}
+
+	if (ui.chkShellMenu2->isChecked() != CSbieUtils::HasContextMenu2()) {
+		if (ui.chkShellMenu2->isChecked()) {
+			CSbieUtils::AddContextMenu2(QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe",
+				tr("Run &Un-Sandboxed"),
+				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+		} else
+			CSbieUtils::RemoveContextMenu2();
+	}
+
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 
 	theConf->SetValue("Options/ShowNotifications", ui.chkNotifications->isChecked());

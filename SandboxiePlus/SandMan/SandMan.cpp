@@ -463,7 +463,7 @@ void CSandMan::CreateMenus()
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
-		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI elements"), this, SLOT(OnResetGUI()));
+		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
@@ -881,6 +881,33 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
+void CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
+{
+	foreach(const QString& Value, pBox->GetTextList("OnBoxDelete", true, false, true)) {
+
+		QString Value2 = Value;
+
+		QRegExp rx("%([a-zA-Z0-9 ]+)%");
+		for(int pos = 0; (pos = rx.indexIn(Value, pos)) != -1; ) {
+			QString var = rx.cap(1);
+			QString val;
+			if (var.compare("Sandbox", Qt::CaseInsensitive) == 0)
+				val = pBox->GetFileRoot();
+			else if (var.compare("SandboxName", Qt::CaseInsensitive) == 0)
+				val = pBox->GetName();
+			else
+				val = theAPI->SbieIniGet(pBox->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
+			Value2.replace("%" + var + "%", val);
+			pos += rx.matchedLength();
+		}
+
+		// todo add progress dialog
+		QProcess Process;
+		Process.execute(Value2);
+		Process.waitForFinished();
+	}
+}
+
 void CSandMan::OnBoxClosed(const QString& BoxName)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
@@ -893,6 +920,8 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 		// if this box auto deletes first show the recovry dialog with the option to abort deletion
 		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
+
+		DoDeleteCmd(pBox);
 
 		SB_PROGRESS Status;
 		if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
@@ -979,10 +1008,8 @@ void CSandMan::OnStatusChanged()
 				theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
 
 			QString cmd = CSbieUtils::GetContextMenuStartCmd();
-			if (!cmd.isEmpty() && !cmd.contains("sandman.exe", Qt::CaseInsensitive)) {
-				CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-					QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
-			}
+			if (!cmd.isEmpty() && !cmd.contains("SandMan.exe", Qt::CaseInsensitive))
+				CSettingsWindow__AddContextMenu();
 		}
 
 		m_pBoxView->Clear();
@@ -1785,7 +1812,7 @@ void CSandMan::OnResetGUI()
 
 	LoadState();
 
-	show();
+	SafeShow(this);
 }
 
 void CSandMan::OnEditIni()

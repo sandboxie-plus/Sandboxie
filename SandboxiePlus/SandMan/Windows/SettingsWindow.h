@@ -87,6 +87,8 @@ private:
 	Ui::SettingsWindow ui;
 };
 
+void CSettingsWindow__AddContextMenu();
+
 void WindowsMoveFile(const QString& from, const QString& to);
 
 extern quint32 g_FeatureFlags;

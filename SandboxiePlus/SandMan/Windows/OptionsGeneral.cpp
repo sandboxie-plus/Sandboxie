@@ -90,14 +90,6 @@ void COptionsWindow::CreateGeneral()
 	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddCmd->setMenu(pRunBtnMenu);
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
-
-	connect(ui.btnAddAutoExe, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoCmd()));
-	QMenu* pAutoBtnMenu = new QMenu(ui.btnAddFile);
-	pAutoBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnAddAutoExe()));
-	ui.btnAddAutoExe->setPopupMode(QToolButton::MenuButtonPopup);
-	ui.btnAddAutoExe->setMenu(pAutoBtnMenu);
-	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnDelAutoSvc()));
-	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
 }
 
 void COptionsWindow::LoadGeneral()
@@ -130,12 +122,6 @@ void COptionsWindow::LoadGeneral()
 	ui.chkCloseClipBoard->setChecked(!m_pBox->GetBool("OpenClipboard", true));
 	//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
 	//ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
-
-	ui.treeAutoStart->clear();
-	foreach(const QString & Value, m_pBox->GetTextList("StartCommand", m_Template))
-		AddAutoRunItem(Value, 0);
-	foreach(const QString & Value, m_pBox->GetTextList("StartService", m_Template))
-		AddAutoRunItem(Value, 1);
 
 	ui.treeRun->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
@@ -193,18 +179,6 @@ void COptionsWindow::SaveGeneral()
 	//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
 
 
-	QStringList StartProgram;
-	QStringList StartService;
-	for (int i = 0; i < ui.treeAutoStart->topLevelItemCount(); i++) {
-		QTreeWidgetItem* pItem = ui.treeAutoStart->topLevelItem(i);
-		if (pItem->data(0, Qt::UserRole).toInt())
-			StartService.append(pItem->text(1));
-		else
-			StartProgram.append(pItem->text(1));
-	}
-	WriteTextList("StartCommand", StartProgram);
-	WriteTextList("StartService", StartService);
-
 	QStringList RunCommands;
 	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
@@ -255,60 +229,6 @@ void COptionsWindow::OnPickColor()
 	OnOptChanged();
 	m_BorderColor = color;
 	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
-}
-
-void COptionsWindow::OnAddAutoCmd()
-{
-	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program path"), QLineEdit::Normal);
-	if (Value.isEmpty())
-		return;
-
-	AddAutoRunItem(Value, 0);
-	m_GeneralChanged = true;
-	OnOptChanged();
-}
-
-void COptionsWindow::OnAddAutoExe()
-{
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd);;All files (*.*)")).replace("/", "\\");
-	if (Value.isEmpty())
-		return;
-
-	AddAutoRunItem(Value, 0);
-	m_GeneralChanged = true;
-	OnOptChanged();
-}
-
-void COptionsWindow::OnDelAutoSvc()
-{
-	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a service identifier"), QLineEdit::Normal);
-	if (Value.isEmpty())
-		return;
-
-	AddAutoRunItem(Value, 1);
-	m_GeneralChanged = true;
-	OnOptChanged();
-}
-
-void COptionsWindow::AddAutoRunItem(const QString& Value, int Type)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Type ? tr("Service") : tr("Program"));
-	pItem->setData(0, Qt::UserRole, Type);
-	pItem->setText(1, Value);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeAutoStart->addTopLevelItem(pItem);
-}
-
-void COptionsWindow::OnDelAuto()
-{
-	QTreeWidgetItem* pItem = ui.treeAutoStart->currentItem();
-	if (!pItem)
-		return;
-
-	delete pItem;
-	m_GeneralChanged = true;
-	OnOptChanged();
 }
 
 void COptionsWindow::OnBrowsePath()
@@ -401,7 +321,7 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkMsiExemptions->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
-		SetTemplate("NoUACProxy", false);
+		//SetTemplate("NoUACProxy", false);
 		//SetTemplate("DeviceSecurity", true);
 		break;
 	case CSandBoxPlus::eDefaultPlus:
@@ -412,7 +332,7 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkMsiExemptions->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eDefaultPlus);
-		SetTemplate("NoUACProxy", false);
+		//SetTemplate("NoUACProxy", false);
 		//SetTemplate("DeviceSecurity", false);
 		break;
 	case CSandBoxPlus::eAppBoxPlus:
@@ -420,7 +340,7 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkNoSecurityIsolation->setChecked(true);
 		//ui.chkRestrictServices->setChecked(false);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
-		SetTemplate("NoUACProxy", true);
+		//SetTemplate("NoUACProxy", true);
 		//SetTemplate("DeviceSecurity", false);
 		break;
 	}

@@ -1113,13 +1113,13 @@ _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
 			break;
 
 		if (ptr != ptr1) { // copy static portion unless we start with a %
-			ULONG length = ptr - ptr1;
+			ULONG length = (ULONG)(ptr - ptr1);
 			wmemcpy(ptr2, ptr1, length);
 			ptr2 += length;
 		}
 		ptr1 = end + 1;
 
-		ULONG length = end - ptr + 1;
+		ULONG length = (ULONG)(end - ptr + 1);
 		if (length <= 64) {
 			WCHAR Var[66];
 			wmemcpy(Var, ptr, length);

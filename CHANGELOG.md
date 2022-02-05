@@ -33,7 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
 - fixed issue with "AutoExec=..."
 - fixed issues canceling box deletion operations didn't working [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
-
+- fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
 
 
 

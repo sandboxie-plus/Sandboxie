@@ -5,15 +5,44 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+# [1.1.0 / 5.56.0] - 2022-01-??
+
+### Added
+- added support for NtRenameKey (this requires UseRegDeleteV2=y) [#205](https://github.com/sandboxie-plus/Sandboxie/issues/205)
+- added options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
+
+### Changed
+- reworked the mechanism sandboxie uses to mark host files as deleted
+-- the new behavioure creates a data file in the box root FilePaths.dat instead of creating dummy files
+-- it can be enabled with UseFileDeleteV2=y sane for the registry UseRegDeleteV2=y using RegPaths.dat
+- disabled a couple driver based workarounds for boxes in compartment mode as then thay should not be required
+
+
+### Fixed
+- fixed folder rename issues (this requires UseFileDeleteV2=y) [#71](https://github.com/sandboxie-plus/Sandboxie/issues/71)
+
+
+
+
 # [1.0.10 / 5.55.10] - 2022-01-??
 
 ### Added
-- added option to show only boxes in hray with runnign processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
-todo:- add reset ui ooption
+- added option to show only boxes in tray with runnign processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
+-- additional option show only pinned bixes, in box options a bix can be set to be always shown in theay list (Pinned)
+- add reset ui option
+- added 'Run Un-Sandboxed' context menu option
+- added new trigger "OnBoxDelete" that allows to specify a command that is run UNBOXED just before the box content gets deleted
+-- note: this can be used as a replacemetn to the DeleteCommand [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
+- sellected box operations (deletion) no longer show the progress dialog [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
+-- instead a box with a running operation show a blinking hour glass icon, the context menu can be used to cancel the operation
 
 ### Changed
 - HideHostProcess=program.exe can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
-- updater blocking is now done using a template with BlockSoftwareUpdaters
+- updater blocking is now done using a template called BlockSoftwareUpdaters
+- enchanced "StartProgram=..." making "StartCommand=..." obsolete
+-- for same functionality as "StartCommand=..." use "StartProgram=%SbieHome%\Start.exe ..."
+- merged "Auto Start" General tab with the "Auto Exec" Advanced tab into a universal"Triggers" Advanced tab
 
 ### Fixed
 - fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
@@ -22,8 +51,8 @@ todo:- add reset ui ooption
 - fixed issue handling commandline invokation [#1133](https://github.com/sandboxie-plus/Sandboxie/issues/1133)
 - fixed ui issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
-
-
+- fixed issue with "AutoExec=..."
+- fixed issues canceling box deletion operations didn't working [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 
 
 

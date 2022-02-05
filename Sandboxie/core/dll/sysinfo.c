@@ -422,14 +422,26 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
 
     *OutCopyPath = name;
 
-    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
-    name += Dll_BoxIpcPathLen;
+    //if (Dll_AlernateIpcNaming)
+    //{
+    //    wmemcpy(name, objname_buf, objname_len);
+    //    name += objname_len;
+    //
+    //    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+    //    name += Dll_BoxIpcPathLen;
+    //}
+    //else
+    {
+        wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+        name += Dll_BoxIpcPathLen;
 
-    *name = L'\\';
-    name++;
+        *name = L'\\';
+        name++;
 
-    wmemcpy(name, objname_buf, objname_len);
-    name += objname_len;
+        wmemcpy(name, objname_buf, objname_len);
+        name += objname_len;
+    }
+
     *name = L'\0';
 
     return STATUS_SUCCESS;

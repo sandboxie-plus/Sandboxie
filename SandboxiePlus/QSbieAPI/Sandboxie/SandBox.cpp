@@ -323,6 +323,8 @@ struct SBoxDataFile
 
 QList<SBoxDataFile> CSandBox__BoxDataFiles = QList<SBoxDataFile>() 
 	<< SBoxDataFile("RegHive", true, false) 
+	<< SBoxDataFile("RegPaths.dat", false, false) 
+	<< SBoxDataFile("FilePaths.dat", false, true)
 ;
 
 bool CSandBox::IsInitialized() const

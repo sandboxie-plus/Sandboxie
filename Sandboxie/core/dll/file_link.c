@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -470,6 +471,9 @@ _FX WCHAR *File_TranslateTempLinks(
     WCHAR *ret;
     ULONG TruePath_len, ret_len;
 
+    if (File_NoReparse)
+        return NULL;
+
     //
     // entry
     //
@@ -794,12 +798,13 @@ _FX WCHAR *File_TranslateTempLinks_2(WCHAR *input_str, ULONG input_len)
 
 _FX NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR* NameBuf)
 {
-    //extern P_GetFinalPathNameByHandle __sys_GetFinalPathNameByHandleW;
-    //if (__sys_GetFinalPathNameByHandleW(FileHandle, NameBuf, NameLen, VOLUME_NAME_NT) > 0)
-    //    return STATUS_SUCCESS;
-    //return STATUS_UNSUCCESSFUL;
+    if (!Dll_CompartmentMode || !__sys_GetFinalPathNameByHandleW) // NoDriverAssist
+        return SbieApi_GetFileName(FileHandle, NameLen, NameBuf);
 
-    return SbieApi_GetFileName(FileHandle, NameLen, NameBuf);
+    // available in vista and later
+    if (__sys_GetFinalPathNameByHandleW(FileHandle, NameBuf, NameLen, VOLUME_NAME_NT) > 0)
+        return STATUS_SUCCESS;
+    return STATUS_UNSUCCESSFUL;
 }
 
 

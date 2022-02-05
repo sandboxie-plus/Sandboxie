@@ -1164,7 +1164,7 @@ _FX NTSTATUS File_NtFsControlFile(
                                         InputBuffer, InputBufferLength);
             SetLastError(LastError);
 
-        } else if (IoControlCode == FSCTL_PIPE_IMPERSONATE) {
+        } else if (IoControlCode == FSCTL_PIPE_IMPERSONATE && !Dll_CompartmentMode) {
 
             SbieApi_Log(2205, L"ImpersonateNamedPipe");
             if (Proc_ImpersonateSelf(TRUE))

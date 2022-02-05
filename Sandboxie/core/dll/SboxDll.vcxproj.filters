@@ -6,11 +6,9 @@
     <ClCompile Include="custom.c" />
     <ClCompile Include="dllmem.c" />
     <ClCompile Include="dllpath.c" />
-    <ClCompile Include="event.c" />
     <ClCompile Include="includes.c" />
     <ClCompile Include="lsa.c" />
     <ClCompile Include="mscoree.c" />
-    <ClCompile Include="obj.c" />
     <ClCompile Include="pdh.c" />
     <ClCompile Include="proc.c" />
     <ClCompile Include="secure.c" />
@@ -218,6 +216,25 @@
     <ClCompile Include="dump.c">
       <Filter>debug</Filter>
     </ClCompile>
+    <ClCompile Include="file_del.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="key_del.c">
+      <Filter>key</Filter>
+    </ClCompile>
+    <ClCompile Include="obj.c">
+      <Filter>obj</Filter>
+    </ClCompile>
+    <ClCompile Include="handle.c">
+      <Filter>obj</Filter>
+    </ClCompile>
+    <ClCompile Include="event.c" />
+    <ClCompile Include="file_recovery.c">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file_snapshots.c">
+      <Filter>file</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
@@ -254,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="sbiedll.h">
       <Filter>api</Filter>
-    </ClInclude>
-    <ClInclude Include="obj.h">
-      <Filter>com</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\stream.h">
       <Filter>common</Filter>
@@ -311,6 +325,12 @@
     </ClInclude>
     <ClInclude Include="dump.h">
       <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="obj.h">
+      <Filter>obj</Filter>
+    </ClInclude>
+    <ClInclude Include="handle.h">
+      <Filter>obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +392,9 @@
     </Filter>
     <Filter Include="debug">
       <UniqueIdentifier>{db0f9820-8908-4325-96f9-69c82fa9e268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="obj">
+      <UniqueIdentifier>{05955a21-494a-4624-854e-d7c9b1e33401}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

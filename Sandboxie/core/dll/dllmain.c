@@ -87,6 +87,7 @@ BOOLEAN Dll_RestrictedToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
 BOOLEAN Dll_CompartmentMode = FALSE;
+//BOOLEAN Dll_AlernateIpcNaming = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
@@ -326,6 +327,28 @@ _FX void Dll_InitInjected(void)
     Dll_BoxKeyPathLen = wcslen(Dll_BoxKeyPath);
     Dll_BoxIpcPathLen = wcslen(Dll_BoxIpcPath);
 
+  //  Dll_AlernateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlernateIpcNaming", FALSE);
+  //  if (Dll_AlernateIpcNaming) {
+  //
+  //      //
+  //      // instead of using a separate namespace
+  //		// just replace all \ with _ and use it as a sufix rather then an actual path
+  //      // similarly a its done for named pipes already
+  //      // this approche can help to reduce teh footprint when running in portable mode
+  //      // alternatively we could create volatile entries under AppContainerNamedObjects 
+  //      //
+  //
+  //      WCHAR* ptr = (WCHAR*)Dll_BoxIpcPath;
+  //      while (*ptr) {
+  //          WCHAR *ptr2 = wcschr(ptr, L'\\');
+  //          if (ptr2) {
+  //              ptr = ptr2;
+  //              *ptr = L'_';
+  //          } else
+  //              ptr += wcslen(ptr);
+  //      }
+  //  }
+
     //
     // check if process SID is LocalSystem
     //
@@ -348,7 +371,7 @@ _FX void Dll_InitInjected(void)
         Dll_FixWow64Syscall();
 
     if (ok)
-        ok = File_InitHandles();
+        ok = Handle_Init();
 
     if (ok)
         ok = Obj_Init();
@@ -418,7 +441,7 @@ _FX void Dll_InitInjected(void)
     if (ok)
         ok = Gui_InitConsole1();
 
-    if (ok)
+    if (ok) // Note: Ldr_Init may cause rpcss to be started early
         ok = Ldr_Init();            // last to initialize
 
     //

@@ -1,6 +1,5 @@
 /*
- * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2022 David Xanatos, xanasoft.com
+ * Copyright 2021-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -16,39 +15,39 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-//---------------------------------------------------------------------------
-// Sandboxie Debug
-//---------------------------------------------------------------------------
 
-
-#ifndef _MY_DEBUG_H
-#define _MY_DEBUG_H
+#ifndef _MY_HANDLE_H
+#define _MY_HANDLE_H
 
 
 //---------------------------------------------------------------------------
+// Defines
+//---------------------------------------------------------------------------
+
+#define MAX_CLOSE_HANDLERS 4
 
 
-//#undef  WITH_DEBUG
-//#define WITH_DEBUG
+//---------------------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------------------
+
+
+typedef void(*P_CloseHandler)(HANDLE handle);
+
+VOID Handle_SetDeleteOnClose(HANDLE FileHandle, BOOLEAN DeleteOnClose);
+
+BOOLEAN Handle_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+
+BOOLEAN Handle_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+
+VOID Handle_SetRelocationPath(HANDLE FileHandle, WCHAR* RelocationPath);
+
+WCHAR* Handle_GetRelocationPath(HANDLE FileHandle, ULONG ExtraLength);
+
+BOOLEAN Handle_FreeCloseHandler(HANDLE FileHandle, P_CloseHandler* CloseHandlers, BOOLEAN* DeleteOnClose);
 
 
 //---------------------------------------------------------------------------
 
 
-#ifdef  WITH_DEBUG
-
-//#define  BREAK_IMAGE_1      L"java.exe" // L"jp2launcher.exe"
-#define  BREAK_IMAGE_1      L"TestTarget.exe" 
-
-int Debug_Init(void);
-
-void DbgPrint(const char* format, ...);
-void DbgTrace(const char* format, ...);
-
-#endif  WITH_DEBUG
-
-
-//---------------------------------------------------------------------------
-
-
-#endif /* _MY_DEBUG_H */
+#endif /* _MY_HANDLE_H */

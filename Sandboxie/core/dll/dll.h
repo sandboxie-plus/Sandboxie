@@ -48,7 +48,8 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #define TRUE_NAME_BUFFER        0
 #define COPY_NAME_BUFFER        1
 #define TMPL_NAME_BUFFER        2
-#define NAME_BUFFER_COUNT       3
+#define MOVE_NAME_BUFFER        3
+#define NAME_BUFFER_COUNT       4
 #define NAME_BUFFER_DEPTH       24
 
 
@@ -280,6 +281,7 @@ extern BOOLEAN Dll_RestrictedToken;
 extern BOOLEAN Dll_ChromeSandbox;
 extern BOOLEAN Dll_FirstProcessInBox;
 extern BOOLEAN Dll_CompartmentMode;
+//extern BOOLEAN Dll_AlernateIpcNaming;
 
 extern ULONG Dll_ImageType;
 
@@ -348,6 +350,11 @@ void Dll_FreeTlsData(void);
 WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size);
 void Dll_PushTlsNameBuffer(THREAD_DATA *data);
 void Dll_PopTlsNameBuffer(THREAD_DATA *data);
+//void Dll_PushTlsNameBuffer_(THREAD_DATA *data, char* func);
+//void Dll_PopTlsNameBuffer_(THREAD_DATA *data, char* func);
+//#define Dll_PushTlsNameBuffer(x) Dll_PushTlsNameBuffer_(x, __FUNCTION__)
+//#define Dll_PopTlsNameBuffer(x) Dll_PopTlsNameBuffer_(x, __FUNCTION__)
+
 
 
 //---------------------------------------------------------------------------
@@ -444,7 +451,7 @@ NTSTATUS Pipe_NtCreateFile(
     void *EaBuffer,
     ULONG EaLength);
 
-void File_DuplicateRecover(HANDLE OldFileHandle, HANDLE NewFileHandle);
+void Handle_SetupDuplicate(HANDLE OldFileHandle, HANDLE NewFileHandle);
 
 void File_DoAutoRecover(BOOLEAN force);
 
@@ -477,9 +484,7 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
-typedef void(*P_CloseHandler)(HANDLE handle);
-BOOLEAN File_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
-BOOLEAN File_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+void File_NotifyRecover(HANDLE FileHandle);
 
 //---------------------------------------------------------------------------
 // Functions (key)
@@ -612,7 +617,7 @@ BOOLEAN Win32_Init(HMODULE hmodule);
 // Functions (init for DllMain)
 //---------------------------------------------------------------------------
 
-BOOLEAN File_InitHandles(void);
+BOOLEAN Handle_Init(void);
 
 BOOLEAN Key_Init(void);
 

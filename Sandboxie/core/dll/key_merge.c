@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,6 +36,7 @@ typedef struct _KEY_MERGE {
 
     BOOLEAN subkeys_merged;
     LARGE_INTEGER last_write_time;
+    ULONGLONG last_paths_version;
     LIST subkeys;
 
     ULONG last_index;
@@ -200,7 +202,7 @@ _FX NTSTATUS Key_Merge(
         // if we got here, we need to discard the stale entry
         //
 
-        File_UnRegisterCloseHandler(merge->handle, Key_NtClose);
+        Handle_UnRegisterCloseHandler(merge->handle, Key_NtClose);
         List_Remove(&Key_Handles, merge);
         Key_MergeFree(merge, TRUE);
 
@@ -226,7 +228,7 @@ _FX NTSTATUS Key_Merge(
         memcpy(merge->name, TruePath, TruePath_len + sizeof(WCHAR));
 
         List_Insert_Before(&Key_Handles, NULL, merge);
-        File_RegisterCloseHandler(merge->handle, Key_NtClose);
+        Handle_RegisterCloseHandler(merge->handle, Key_NtClose);
     }
 
     //
@@ -234,6 +236,7 @@ _FX NTSTATUS Key_Merge(
     // or CopyPath exist, but not both, so return special status
     //
 
+    if(!Key_Delete_v2 || !Key_HasDeleted_v2(TruePath))
     if (merge->cant_merge) {
 
         LeaveCriticalSection(&Key_Handles_CritSec);
@@ -316,6 +319,7 @@ _FX NTSTATUS Key_OpenForMerge(
     ULONG len;
     HANDLE TrueHandle;
     ULONG mp_flags;
+    const WCHAR* OriginalPath = NULL;
 
     *out_TrueMerge  = NULL;
     *out_CopyHandle = NULL;
@@ -362,6 +366,7 @@ _FX NTSTATUS Key_OpenForMerge(
             &info, sizeof(KEY_BASIC_INFORMATION), &len);
 
         if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) {
+            // if (!Key_Delete_v2 &&
             if (IS_DELETE_MARK(&info.LastWriteTime))
                 status = STATUS_KEY_DELETED;
             else
@@ -379,12 +384,27 @@ _FX NTSTATUS Key_OpenForMerge(
         // if we couldn't find a copy key, indicate there is nothing to merge
         //
 
-        status = STATUS_BAD_INITIAL_PC;
+        if (Key_Delete_v2 && Key_HasDeleted_v2(TruePath))
+            status = STATUS_SUCCESS;
+        else
+            status = STATUS_BAD_INITIAL_PC;
     }
 
     if (! NT_SUCCESS(status)) {
         *out_CopyHandle = NULL;
         return status;
+    }
+
+    //
+    // get the redirection location for this key if there is one
+    //
+
+    if (Key_Delete_v2) {
+        WCHAR* OldTruePath = Key_GetRelocation(TruePath);
+        if (OldTruePath) {
+            OriginalPath = TruePath;
+            TruePath = OldTruePath;
+        }
     }
 
     //
@@ -415,7 +435,7 @@ _FX NTSTATUS Key_OpenForMerge(
         if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) {
 
             status = Key_MergeCache(
-                TrueHandle, &info.LastWriteTime, TruePath, out_TrueMerge);
+                TrueHandle, &info.LastWriteTime, OriginalPath ? OriginalPath : TruePath, out_TrueMerge);
         }
 
         File_NtCloseImpl(TrueHandle);
@@ -623,7 +643,7 @@ _FX NTSTATUS Key_MergeCache(
 
     if (merge) {
 
-        if (LastWriteTime->QuadPart == merge->last_write_time.QuadPart) {
+        if (LastWriteTime->QuadPart == merge->last_write_time.QuadPart && Key_PathsVersion == merge->last_paths_version) {
             *out_TrueMerge = merge;
             return STATUS_SUCCESS;
         }
@@ -646,6 +666,7 @@ _FX NTSTATUS Key_MergeCache(
     }
 
     merge->last_write_time.QuadPart = LastWriteTime->QuadPart;
+    merge->last_paths_version = Key_PathsVersion;
 
     //
     // build the subkeys and values in the true merge
@@ -729,6 +750,12 @@ _FX NTSTATUS Key_MergeCacheSubkeys(KEY_MERGE *merge, HANDLE TrueHandle)
         subkey->TitleOrClass = (info->TitleIndex ||
                                 info->ClassOffset != -1 ||
                                 info->ClassLength);
+
+        if (Key_Delete_v2 && Key_IsDeletedEx_v2(merge->name, subkey->name, FALSE)) {
+            Dll_Free(subkey);
+            ++index;
+            continue;
+        }
 
         //
         // find where to insert it.  if the new key is already larger than
@@ -828,6 +855,12 @@ _FX NTSTATUS Key_MergeCacheValues(KEY_MERGE *merge, HANDLE TrueHandle)
         memcpy(value->data_ptr,
                (UCHAR *)info + info->DataOffset, info->DataLength);
 
+        if (Key_Delete_v2 && Key_IsDeletedEx_v2(merge->name, value->name, TRUE)) {
+            Dll_Free(value);
+            ++index;
+            continue;
+        }
+
         //
         // find where to insert it
         //
@@ -864,7 +897,7 @@ _FX NTSTATUS Key_MergeSubkeys(
     KEY_NODE_INFORMATION *info;
     ULONG index;
     KEY_MERGE_SUBKEY *subkey, *subkey2;
-    BOOLEAN subkey_deleted;
+    BOOLEAN subkey_deleted = FALSE;
 
     //
     // get the latest of the two LastWriteTime fields
@@ -882,6 +915,7 @@ _FX NTSTATUS Key_MergeSubkeys(
     }
 
     merge->last_write_time.QuadPart = info->LastWriteTime.QuadPart;
+    merge->last_paths_version = Key_PathsVersion;
 
     if (! TrueMerge)
         goto TrueHandleFinish;
@@ -962,6 +996,7 @@ TrueHandleFinish:
                                 info->ClassOffset != -1 ||
                                 info->ClassLength);
 
+        if (!Key_Delete_v2)
         if (IS_DELETE_MARK(&info->LastWriteTime))
             subkey_deleted = TRUE;
         else
@@ -988,7 +1023,8 @@ TrueHandleFinish:
                     if (subkey->TitleOrClass)
                         subkey2->TitleOrClass = subkey->TitleOrClass;
                 }
-                subkey_deleted = TRUE;
+                Dll_Free(subkey);
+                subkey = NULL;
                 break;
             }
 
@@ -1033,7 +1069,7 @@ _FX NTSTATUS Key_MergeValues(
     KEY_VALUE_FULL_INFORMATION *info;
     ULONG index;
     KEY_MERGE_VALUE *value, *value2;
-    BOOLEAN value_deleted;
+    BOOLEAN value_deleted = FALSE;
 
     info_len = 128;         // at least sizeof(KEY_VALUE_FULL_INFORMATION)
     info = Dll_Alloc(info_len);
@@ -1125,6 +1161,7 @@ TrueHandleFinish:
         memcpy(value->data_ptr,
                (UCHAR *)info + info->DataOffset, value->data_len);
 
+        if (!Key_Delete_v2)
         if (info->Type == tzuk)
             value_deleted = TRUE;
         else
@@ -1379,7 +1416,7 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
                 }
             }
 
-            File_UnRegisterCloseHandler(merge->handle, Key_NtClose);
+            Handle_UnRegisterCloseHandler(merge->handle, Key_NtClose);
             List_Remove(&Key_Handles, merge);
             Key_MergeFree(merge, TRUE);
         }

@@ -379,6 +379,7 @@ _FX BOOLEAN Ipc_Init(void)
         SBIEDLL_HOOK(Ipc_, NtImpersonateThread);
     }
 
+    //if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
     Ipc_CreateObjects();
 
     List_Init(&Ipc_DynamicPortNames);
@@ -525,6 +526,21 @@ _FX NTSTATUS Ipc_GetName(
     if (ObjectName) {
         objname_len = ObjectName->Length & ~1;
         objname_buf = ObjectName->Buffer;
+
+        //if (Dll_AlernateIpcNaming) {
+        //    
+        //    //
+        //    // Since in this mode we don't call Ipc_CreateObjects we dont have a boxed namespace
+        //    // and are using existing namespaces only with a name suffix
+        //    // hence we can't use Global without system provileges, so we strip it
+        //    //
+        //
+        //    if (_wcsnicmp(objname_buf, L"Global\\", 7) == 0) {
+        //        objname_len -= 7;
+        //        objname_buf += 7;
+        //    }
+        //}
+
     } else {
         objname_len = 0;
         objname_buf = NULL;
@@ -665,6 +681,21 @@ _FX NTSTATUS Ipc_GetName(
 
 check_sandbox_prefix:
 
+    //if (Dll_AlernateIpcNaming)
+    //{
+    //    if (length >= Dll_BoxIpcPathLen &&
+    //        0 == Dll_NlsStrCmp(
+    //            &(*OutTruePath)[length - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen))
+    //    {
+    //        (*OutTruePath)[length - Dll_BoxIpcPathLen] = L'\0';
+    //        length -= Dll_BoxIpcPathLen;
+    //        if (OutIsBoxedPath)
+    //            *OutIsBoxedPath = TRUE;
+    //
+    //        goto check_sandbox_prefix;
+    //    }
+    //}
+    //else
     if (length >= Dll_BoxIpcPathLen &&
             0 == Dll_NlsStrCmp(
                 *OutTruePath, Dll_BoxIpcPath, Dll_BoxIpcPathLen))
@@ -688,11 +719,23 @@ check_sandbox_prefix:
 
     *OutCopyPath = name;
 
-    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
-    name += Dll_BoxIpcPathLen;
+    //if (Dll_AlernateIpcNaming)
+    //{
+    //    wmemcpy(name, *OutTruePath, length);
+    //    name += length;
+    //
+    //    wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+    //    name += Dll_BoxIpcPathLen;
+    //}
+    //else
+    {
+        wmemcpy(name, Dll_BoxIpcPath, Dll_BoxIpcPathLen);
+        name += Dll_BoxIpcPathLen;
 
-    wmemcpy(name, *OutTruePath, length);
-    name += length;
+        wmemcpy(name, *OutTruePath, length);
+        name += length;
+    }
+
     *name = L'\0';
 
     //
@@ -882,6 +925,9 @@ _FX NTSTATUS Ipc_CreatePath(WCHAR *TruePath, WCHAR *CopyPath)
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname;
     WCHAR *backslash;
+
+    //if (Dll_AlernateIpcNaming)
+    //    return STATUS_OBJECT_PATH_NOT_FOUND;
 
     //
     // open the TruePath object directory containing the object
@@ -3730,6 +3776,20 @@ _FX ULONG Ipc_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     ULONG Len = ObjectName->Length;
     WCHAR *Buf = ObjectName->Buffer;
 
+    //if (Dll_AlernateIpcNaming)
+    //{
+    //    if (Len >= Dll_BoxIpcPathLen * sizeof(WCHAR) &&
+    //            0 == Dll_NlsStrCmp(&Buf[Len - Dll_BoxIpcPathLen], Dll_BoxIpcPath, Dll_BoxIpcPathLen)) {
+    //
+    //        Buf[Len - Dll_BoxIpcPathLen] = L'\0';
+    //
+    //        ObjectName->Length -= (USHORT)Dll_BoxIpcPathLen;
+    //        ObjectName->MaximumLength = ObjectName->Length + sizeof(WCHAR);
+    //
+    //        return ObjectName->MaximumLength;
+    //    }
+    //}
+    //else
     if (Len >= Dll_BoxIpcPathLen * sizeof(WCHAR) &&
             0 == Dll_NlsStrCmp(Buf, Dll_BoxIpcPath, Dll_BoxIpcPathLen)) {
 

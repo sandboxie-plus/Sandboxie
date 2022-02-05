@@ -23,10 +23,11 @@
 
 #include "dll.h"
 #include "obj.h"
+#include "handle.h"
 #include "core/svc/FileWire.h"
 #include "core/drv/api_defs.h"
 #include <stdio.h>
-
+#include "debug.h"
 
 //---------------------------------------------------------------------------
 // Defines
@@ -305,6 +306,8 @@ static const WCHAR *Key_Wow6432Node = L"\\Wow6432Node\\";
 
 static BOOLEAN Key_UseObjectNames = FALSE;
 
+BOOLEAN Key_Delete_v2 = FALSE;
+
 //---------------------------------------------------------------------------
 // Debug Prints
 //---------------------------------------------------------------------------
@@ -337,6 +340,7 @@ static BOOLEAN Key_UseObjectNames = FALSE;
 //---------------------------------------------------------------------------
 
 
+#include "key_del.c"
 #include "key_merge.c"
 #include "key_util.c"
 
@@ -356,6 +360,8 @@ _FX BOOLEAN Key_Init(void)
     SbieDll_MatchPath(L'k', (const WCHAR *)-1);
 
     Key_UseObjectNames = SbieApi_QueryConfBool(NULL, L"UseObjectNameForKeys", FALSE);
+
+    Key_Delete_v2 = SbieApi_QueryConfBool(NULL, L"UseRegDeleteV2", FALSE);
 
     List_Init(&Key_Handles);
     List_Init(&Key_MergeCacheList);
@@ -450,6 +456,16 @@ _FX NTSTATUS Key_GetName(
 
     if (RootDirectory) {
 
+      name = Handle_GetRelocationPath(RootDirectory, objname_len);
+      if (name) {
+
+        *OutTruePath = name;
+
+        name = (*OutTruePath) + wcslen(*OutTruePath);
+
+      }
+      else {
+
         length = 256;
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
@@ -503,6 +519,8 @@ _FX NTSTATUS Key_GetName(
             name = (*OutTruePath)
                  + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
         }
+
+      }
 
         if (objname_len) {
 
@@ -1095,6 +1113,41 @@ _FX NTSTATUS Key_NtCreateKey(
 //---------------------------------------------------------------------------
 
 
+#ifdef WITH_DEBUG_
+static P_NtCreateKey               __sys_NtCreateKey_ = NULL;
+
+_FX NTSTATUS Key_MyCreateKey(
+    HANDLE *KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    ULONG TitleIndex,
+    UNICODE_STRING *Class,
+    ULONG CreateOptions,
+    ULONG *Disposition)
+{
+    ULONG Disposition_ = 0;
+
+    if (!Disposition)
+        Disposition = &Disposition_;
+
+    NTSTATUS status = __sys_NtCreateKey_(
+        KeyHandle, DesiredAccess, ObjectAttributes, TitleIndex,
+        Class, CreateOptions, Disposition);
+
+    if (*Disposition == REG_CREATED_NEW_KEY) {
+       while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
+          __debugbreak();
+    }
+
+    //if (NT_SUCCESS(status)) DbgPrint("%p: %p\r\n", _ReturnAddress(), *KeyHandle);
+
+    status = StopTailCallOptimization(status);
+
+    return status;
+}
+#endif
+
+
 _FX NTSTATUS Key_NtCreateKeyImpl(
     HANDLE *KeyHandle,
     ACCESS_MASK DesiredAccess,
@@ -1119,6 +1172,17 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     BOOLEAN CopyPathCreated;
     BOOLEAN TruePathExists;
     PSECURITY_DESCRIPTOR *OverrideSecurityDescriptor;
+    ULONG TruePathFlags;
+    WCHAR* OriginalPath;
+    BOOLEAN TrueOpened;
+
+#ifdef WITH_DEBUG_
+    if (__sys_NtCreateKey_ == NULL)
+    {
+        __sys_NtCreateKey_ = __sys_NtCreateKey;
+        __sys_NtCreateKey = Key_MyCreateKey;
+    }
+#endif
 
     //
     // if this is a recursive invocation of NtCreateKey,
@@ -1146,6 +1210,8 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
     CopyPathCreated = FALSE;
     TruePathExists = FALSE;
+    OriginalPath = NULL;
+    TrueOpened = FALSE;
 
     TlsData->key_NtCreateKey_lock = TRUE;
 
@@ -1225,6 +1291,8 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
             }
         }
 
+        if (NT_SUCCESS(status)) TrueOpened = TRUE;
+
         __leave;
 
 #undef KEY_READ_WOW64
@@ -1256,6 +1324,8 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
     Wow64KeyReadAccess = Key_GetWow64Flag(TruePath, KEY_READ);
 
+    RtlInitUnicodeString(&objname, CopyPath);
+
     //
     // first we try to create or open CopyPath with whatever DesiredAccess
     // the caller specified.  if this succeeds, then CopyPath must exist
@@ -1263,8 +1333,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     // we also check that the parent of the key is not marked deleted.
     //
 
-    RtlInitUnicodeString(&objname, CopyPath);
-
+    if (!Key_Delete_v2)
     if (Key_CheckDeletedParent(CopyPath)) {
 
         //
@@ -1310,6 +1379,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     // requested copy key so that we can open it
     //
 
+    if (!Dll_CompartmentMode) // NoDriverAssist
     if (status == STATUS_ACCESS_DENIED && Secure_IsRestrictedToken(TRUE)) {
 
         NTSTATUS status2 = SbieApi_SetLowLabelKey(CopyPath);
@@ -1350,9 +1420,12 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
     if (NT_SUCCESS(status)) {
 
-        BOOLEAN KeyDeleted = Key_CheckDeletedKey(*KeyHandle);
+        BOOLEAN KeyDeleted = FALSE;
 
-        if (KeyDeleted) {
+        if (!Key_Delete_v2)
+        if (Key_CheckDeletedKey(*KeyHandle)) {
+
+            KeyDeleted = TRUE;
 
             if (CreateOptions == tzuk) {
 
@@ -1418,6 +1491,28 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     }
 
     //
+    // Check true path relocation
+    //
+
+    TruePathFlags = 0;
+
+    if (Key_Delete_v2) {
+
+        WCHAR* OldTruePath = Key_ResolveTruePath(TruePath, &TruePathFlags);
+        if (OldTruePath) {
+            OriginalPath = TruePath;
+            TruePath = OldTruePath;
+        }
+
+        // if key marked as deleted dont even try opening true path
+        if (KEY_PATH_DELETED(TruePathFlags) && CreateOptions == tzuk) { 
+            status = STATUS_OBJECT_NAME_NOT_FOUND;
+            __leave;
+        }
+    }
+
+
+    //
     // if we're successful, or we got any of the three status codes
     // that we don't handle, then stop here
     //
@@ -1447,7 +1542,10 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
         int depth = Key_CheckDepthForIsWritePath(TruePath);
         if (depth == 0) {
-            status = SbieApi_OpenKey(KeyHandle, TruePath);
+            if (Dll_CompartmentMode) { // NoDriverAssist
+                status = __sys_NtOpenKey(KeyHandle, Wow64KeyReadAccess, &objattrs);
+            } else
+                status = SbieApi_OpenKey(KeyHandle, TruePath);
             if (NT_SUCCESS(status))
                 goto SkipReadOnlyCheck;
         } else
@@ -1463,6 +1561,8 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     }
 
     if (NT_SUCCESS(status)) {
+
+        TrueOpened = TRUE;
 
         //
         // if the TruePath key exists, and caller is asking for
@@ -1614,6 +1714,8 @@ SkipReadOnlyCheck:
             status = __sys_NtOpenKey(
                 KeyHandle, DesiredAccess, ObjectAttributes);
 
+            if (NT_SUCCESS(status)) TrueOpened = TRUE; // is that right?
+
             if (NT_SUCCESS(status) && Disposition)
                 *Disposition = REG_OPENED_EXISTING_KEY;
         }
@@ -1626,6 +1728,19 @@ SkipReadOnlyCheck:
 
     if (CopyPathCreated)
         Key_DiscardMergeByPath(TruePath, TRUE);
+
+    //
+    // Relocation, if we opened the true key and its relocated set the path info
+    //
+
+    if (TrueOpened && OriginalPath) {
+
+        Handle_SetRelocationPath(*KeyHandle, OriginalPath);
+    }
+
+    //
+    // finish
+    //
 
     Dll_PopTlsNameBuffer(TlsData);
 
@@ -1653,6 +1768,34 @@ _FX NTSTATUS Key_CreatePath(
     USHORT savelength;
     USHORT savemaximumlength;
     ULONG disp;
+
+    if (Key_Delete_v2) {
+
+        THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+        BOOLEAN ParentDeleted = FALSE;
+        WCHAR *TruePath;
+        WCHAR *CopyPath;
+
+        Dll_PushTlsNameBuffer(TlsData);
+
+        __try {
+
+        status = Key_GetName(NULL, objattrs->ObjectName, &TruePath, &CopyPath, NULL);
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            status = GetExceptionCode();
+        }
+
+        if (NT_SUCCESS(status)) {
+            ParentDeleted = KEY_PARENT_DELETED(Key_IsDeleted_v2(TruePath));
+        }
+
+        Dll_PopTlsNameBuffer(TlsData);
+
+        if(ParentDeleted)
+            return STATUS_OBJECT_NAME_NOT_FOUND;
+    }
 
     //
     // first we traverse backward along the path, removing the last
@@ -1702,6 +1845,7 @@ _FX NTSTATUS Key_CreatePath(
 
         if (NT_SUCCESS(status)) {
 
+            if (!Key_Delete_v2)
             if (disp == REG_OPENED_EXISTING_KEY) {
                 if (Key_CheckDeletedKey(handle)) {
 
@@ -1746,6 +1890,7 @@ _FX NTSTATUS Key_CreatePath(
 
         status = Key_CreatePath_Key(&handle, objattrs, &disp);
 
+        if (!Dll_CompartmentMode) // NoDriverAssist
         if (status == STATUS_ACCESS_DENIED && Dll_RestrictedToken) {
 
             //
@@ -2043,7 +2188,7 @@ _FX NTSTATUS Key_NtDeleteKeyTreeImpl(HANDLE KeyHandle, BOOLEAN DeleteTree)
     // open the key.  this will create a copy key, if necessary
     //
 
-    status = Key_NtOpenKeyImpl(&handle, GENERIC_WRITE | KEY_READ, &objattrs);
+    status = Key_NtOpenKeyImpl(&handle, GENERIC_WRITE | KEY_READ | DELETE, &objattrs);
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -2182,17 +2327,51 @@ _FX NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle)
     // mark key deleted by setting its last write time information
     //
 
-    kwti.LastWriteTime.HighPart = DELETE_MARK_HIGH;
-    kwti.LastWriteTime.LowPart  = DELETE_MARK_LOW;
-    status = NtSetInformationKey(
-        KeyHandle, KeyWriteTimeInformation,
-        &kwti, sizeof(KEY_WRITE_TIME_INFORMATION));
+    if (Key_Delete_v2) {
 
-    //
-    // refresh all merges
-    //
+        THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
-    Key_DiscardMergeByHandle(TlsData, KeyHandle, TRUE);
+        UNICODE_STRING objname;
+        WCHAR *TruePath;
+        WCHAR *CopyPath;
+
+        Dll_PushTlsNameBuffer(TlsData);
+
+        RtlInitUnicodeString(&objname, L"");
+
+        __try {
+
+        status = Key_GetName(KeyHandle, &objname, &TruePath, &CopyPath, NULL);
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            status = GetExceptionCode();
+        }
+
+        if (NT_SUCCESS(status)) {
+            Key_MarkDeletedEx_v2(TruePath, NULL);
+
+            Key_DiscardMergeByPath(TruePath, TRUE);
+        }
+
+        Dll_PopTlsNameBuffer(TlsData);
+
+        __sys_NtDeleteKey(KeyHandle);
+
+    }
+    else {
+
+        kwti.LastWriteTime.HighPart = DELETE_MARK_HIGH;
+        kwti.LastWriteTime.LowPart = DELETE_MARK_LOW;
+        status = NtSetInformationKey(
+            KeyHandle, KeyWriteTimeInformation,
+            &kwti, sizeof(KEY_WRITE_TIME_INFORMATION));
+
+        //
+        // refresh all merges
+        //
+
+        Key_DiscardMergeByHandle(TlsData, KeyHandle, TRUE);
+    }
 
     //
     // close key handle
@@ -2307,13 +2486,17 @@ _FX NTSTATUS Key_NtDeleteValueKey(
         status = GetExceptionCode();
     }
 
-    Dll_PopTlsNameBuffer(TlsData);
-
     if (NT_SUCCESS(status)) {
 
         if (PATH_IS_OPEN(mp_flags)) {
 
             status = __sys_NtDeleteValueKey(KeyHandle, ValueName);
+
+        } if (Key_Delete_v2){ 
+
+            Key_MarkDeletedEx_v2(TruePath, ValueName->Buffer);
+
+            __sys_NtDeleteValueKey(KeyHandle, ValueName);
 
         } else {
 
@@ -2340,6 +2523,8 @@ _FX NTSTATUS Key_NtDeleteValueKey(
             }
         }
     }
+
+    Dll_PopTlsNameBuffer(TlsData);
 
     SetLastError(LastError);
     return status;
@@ -2496,6 +2681,16 @@ _FX NTSTATUS Key_NtQueryKeyImpl(
     __try {
 
     //
+    // get the full paths for the true and copy keys
+    //
+
+    RtlInitUnicodeString(&objname, L"");
+
+    status = Key_GetName(KeyHandle, &objname, &TruePath, &CopyPath, NULL);
+    if (! NT_SUCCESS(status))
+        __leave;
+
+    //
     // for KeyBasicInformation, KeyNodeInformation, KeyFlagsInformation,
     // we let the system handle the call, then check for the delete mark.
     // They both begin with a LARGE_INTEGER LastWriteTime.
@@ -2509,25 +2704,20 @@ _FX NTSTATUS Key_NtQueryKeyImpl(
             KeyHandle, KeyInformationClass, KeyInformation,
             Length, ResultLength);
 
-        if (KeyInformationClass != KeyFlagsInformation &&
-            (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) &&
-            IS_DELETE_MARK((LARGE_INTEGER *)KeyInformation))
+        if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW)
         {
-            status = STATUS_KEY_DELETED;
+            if (Key_Delete_v2) {
+                if (Key_IsDeleted_v2(TruePath))
+                    status = STATUS_KEY_DELETED;
+            }
+            else if(KeyInformationClass != KeyFlagsInformation) {
+                if (IS_DELETE_MARK((LARGE_INTEGER*)KeyInformation))
+                    status = STATUS_KEY_DELETED;
+            }
         }
 
         __leave;
     }
-
-    //
-    // get the full paths for the true and copy keys
-    //
-
-    RtlInitUnicodeString(&objname, L"");
-
-    status = Key_GetName(KeyHandle, &objname, &TruePath, &CopyPath, NULL);
-    if (! NT_SUCCESS(status))
-        __leave;
 
     //
     // for KeyNameInformation, we want to place TruePath in the
@@ -2601,10 +2791,16 @@ _FX NTSTATUS Key_NtQueryKeyImpl(
                 KeyHandle, KeyInformationClass, KeyInformation,
                 Length, ResultLength);
 
-            if ((NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) &&
-                IS_DELETE_MARK((LARGE_INTEGER *)KeyInformation))
+            if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW)
             {
-                status = STATUS_KEY_DELETED;
+                if (Key_Delete_v2) {
+                    if (Key_IsDeleted_v2(TruePath))
+                        status = STATUS_KEY_DELETED;
+                }
+                else {
+                    if (IS_DELETE_MARK((LARGE_INTEGER*)KeyInformation))
+                        status = STATUS_KEY_DELETED;
+                }
             }
         }
 
@@ -2789,10 +2985,16 @@ _FX NTSTATUS Key_NtEnumerateKey(
                 KeyHandle, Index, KeyInformationClass, KeyInformation,
                 Length, ResultLength);
 
-            if ((NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) &&
-                IS_DELETE_MARK((LARGE_INTEGER *)KeyInformation))
+            if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) 
             {
-                status = STATUS_KEY_DELETED;
+                if (Key_Delete_v2) {
+                    if (Key_IsDeleted_v2(TruePath))
+                        status = STATUS_KEY_DELETED;
+                }
+                else {
+                    if (IS_DELETE_MARK((LARGE_INTEGER*)KeyInformation))
+                        status = STATUS_KEY_DELETED;
+                }
             }
         }
 
@@ -3188,11 +3390,16 @@ _FX NTSTATUS Key_NtQueryValueKey(
                 KeyValueInformationClass, KeyValueInformation,
                 Length, ResultLength);
 
-            if ((NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) &&
-                Key_CheckDeletedValue(
-                    KeyValueInformationClass, KeyValueInformation))
+            if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW)
             {
-                status = STATUS_OBJECT_NAME_NOT_FOUND;
+                if (Key_Delete_v2) {
+                    if(Key_IsDeletedEx_v2(TruePath, ValueNameBuf, TRUE))
+                        status = STATUS_OBJECT_NAME_NOT_FOUND;
+                }
+                else {
+                    if (Key_CheckDeletedValue(KeyValueInformationClass, KeyValueInformation))
+                        status = STATUS_OBJECT_NAME_NOT_FOUND;
+                }
             }
         }
 
@@ -3544,11 +3751,26 @@ _FX NTSTATUS Key_NtEnumerateValueKey(
                 KeyValueInformationClass, KeyValueInformation,
                 Length, ResultLength);
 
-            if ((NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) &&
-                Key_CheckDeletedValue(
-                    KeyValueInformationClass, KeyValueInformation))
+            if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW)
             {
-                status = STATUS_OBJECT_NAME_NOT_FOUND;
+                if (Key_Delete_v2) {
+
+                    WCHAR* ValueName;
+
+                    if (KeyValueInformationClass == KeyValueBasicInformation)
+                        ValueName = ((KEY_VALUE_BASIC_INFORMATION *)KeyValueInformation)->Name;
+                    else if (KeyValueInformationClass == KeyValueFullInformation)
+                        ValueName = ((KEY_VALUE_FULL_INFORMATION *)KeyValueInformation)->Name;
+                    else
+                        ValueName = 0;
+
+                    if(ValueName && Key_IsDeletedEx_v2(TruePath, ValueName, TRUE))
+                        status = STATUS_OBJECT_NAME_NOT_FOUND;
+                }
+                else {
+                    if (Key_CheckDeletedValue(KeyValueInformationClass, KeyValueInformation))
+                        status = STATUS_OBJECT_NAME_NOT_FOUND;
+                }
             }
         }
 
@@ -4068,8 +4290,153 @@ _FX HANDLE Key_GetTrueHandle(HANDLE KeyHandle, BOOLEAN *pIsOpenPath)
 _FX NTSTATUS Key_NtRenameKey(
     HANDLE KeyHandle, UNICODE_STRING *ReplacementName)
 {
-    SbieApi_Log(2205, L"NtRenameKey");
-    return __sys_NtRenameKey(KeyHandle, ReplacementName);
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    if (!Key_Delete_v2) {
+        SbieApi_Log(2205, L"NtRenameKey");
+        return __sys_NtRenameKey(KeyHandle, ReplacementName);
+    }
+
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    HANDLE handle;
+    WCHAR* TruePath;
+    WCHAR* CopyPath;
+    WCHAR* NewTruePath;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    //
+    // get the full new name of the key to be renamed
+    //
+
+    __try {
+
+        status = Key_GetName(KeyHandle, NULL, &TruePath, &CopyPath, NULL);
+
+        WCHAR* TruePathSlash = wcsrchr(TruePath, L'\\');
+        if (!TruePathSlash) {
+            status = STATUS_INVALID_PARAMETER;
+            __leave;
+        }
+        ULONG len = (ULONG)(TruePathSlash - TruePath + 1);
+
+        NewTruePath = Dll_GetTlsNameBuffer(TlsData, MOVE_NAME_BUFFER, 
+            len * sizeof(WCHAR) + ReplacementName->Length + sizeof(WCHAR));
+
+        wmemcpy(NewTruePath, TruePath, len);
+        wmemcpy(NewTruePath + len, ReplacementName->Buffer, ReplacementName->Length / sizeof(WCHAR));
+        NewTruePath[len + ReplacementName->Length / sizeof(WCHAR)] = L'\0';
+
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    //
+    // rename the key ensuring we wil have a boxed copy
+    //
+
+    if (NT_SUCCESS(status)) {
+
+        //
+        // check if the target key already exists in the true path
+        //
+
+        RtlInitUnicodeString(&objname, NewTruePath);
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+        status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
+
+        if (NT_SUCCESS(status)) {
+
+            if(!Key_IsDeleted_v2(NewTruePath))
+                status = STATUS_OBJECT_NAME_COLLISION;
+
+            File_NtCloseImpl(handle);
+        }
+
+        //
+        // try renaming if it fails with access denided try again with a new handle
+        //
+
+        if (NT_SUCCESS(status))
+            status = __sys_NtRenameKey(KeyHandle, ReplacementName);
+
+        if (status == STATUS_ACCESS_DENIED) {
+
+            //
+            // if we get STATUS_ACCESS_DENIED, the caller may be using a
+            // TruePath handle that was opened with MAXIMUM_ALLOWED, but
+            // reduced to read-only access in our NtCreateKey
+            //
+
+            OBJECT_ATTRIBUTES objattrs;
+            UNICODE_STRING objname;
+            HANDLE handle;
+
+            RtlInitUnicodeString(&objname, L"");
+            InitializeObjectAttributes(
+                &objattrs, &objname, OBJ_CASE_INSENSITIVE, KeyHandle, NULL);
+
+            status = NtOpenKey(&handle, KEY_WRITE, &objattrs);
+
+            if (NT_SUCCESS(status)) {
+
+                status = __sys_NtRenameKey(handle, ReplacementName);
+
+                NtClose(handle);
+            }
+        }
+    }
+
+    //
+    // set the redirection information
+    //
+
+    if (NT_SUCCESS(status)) {
+
+        //*TruePathSlash = L'\0';
+        //Key_DiscardMergeByPath(TruePath, TRUE); // fix-me: act on Key_MergeCacheList
+        //*TruePathSlash = L'\\';
+
+        //
+        // check if the true path exists and if so mark path deleted
+        //
+
+        BOOLEAN TrueExists = FALSE;
+
+        RtlInitUnicodeString(&objname, TruePath);
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+        status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
+
+        if (NT_SUCCESS(status)) {
+
+            //
+            // if the true key exists mark it deleted
+            //
+
+            TrueExists = TRUE;
+
+            File_NtCloseImpl(handle);
+        }
+
+        //
+        // setup/update the key relocation
+        //
+
+        Key_SetRelocation(TruePath, NewTruePath, TrueExists);
+
+        status = STATUS_SUCCESS;
+    }
+
+    Dll_PopTlsNameBuffer(TlsData);
+
+    return status;
 }
 
 
@@ -4081,7 +4448,7 @@ _FX NTSTATUS Key_NtRenameKey(
 _FX NTSTATUS Key_NtSaveKey(
     HANDLE KeyHandle, HANDLE FileHandle)
 {
-    //SbieApi_Log(2205, L"NtSaveKey");
+    SbieApi_Log(2205, L"NtSaveKey");
     return STATUS_SUCCESS;
 }
 
@@ -4106,6 +4473,10 @@ _FX NTSTATUS Key_NtLoadKey(
     FILE_LOAD_KEY_REQ *req;
 
     status = __sys_NtLoadKey(TargetObjectAttributes, SourceObjectAttributes);
+
+    if (Dll_CompartmentMode) // NoDriverAssist
+        return status;
+
     if (status != STATUS_PRIVILEGE_NOT_HELD)
         return status;
 

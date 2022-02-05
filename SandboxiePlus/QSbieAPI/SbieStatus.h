@@ -44,6 +44,7 @@ enum ESbieMsgCodes
 	SB_SnapIsEmpty,
 	SB_NameExists,
 	SB_PasswordBad,
+	SB_Canceled,
 };
 
 class CSbieStatus
@@ -173,7 +174,7 @@ class QSBIEAPI_EXPORT CSbieProgress : public QObject
 public:
 	CSbieProgress() : m_Status(OP_ASYNC), m_Canceled(false) {}
 
-	void Cancel() { m_Canceled = true; }
+	void Cancel() { m_Canceled = true; emit Canceled(); }
 	bool IsCanceled() { return m_Canceled; }
 
 	void ShowMessage(const QString& text) { emit Message(text);}
@@ -187,6 +188,7 @@ signals:
 	//void Progress(int procent);
 	void Message(const QString& text);
 	void Progress(int value);
+	void Canceled();
 	void Finished();
 
 protected:

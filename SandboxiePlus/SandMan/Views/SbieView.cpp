@@ -954,11 +954,11 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected sandbox(es)?<br /><br />Warning: The box content will also be deleted!"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 
-		foreach(const CSandBoxPtr & pBox, SandBoxes)
+		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
 			SB_PROGRESS Status = pBox->CleanBox();
 			if (Status.GetStatus() == OP_ASYNC)
-				theGUI->AddAsyncOp(Status.GetValue(), true);
+				theGUI->AddAsyncOp(Status.GetValue(), true, tr("Deleting %1 content").arg(pBox->GetName()));
 			else if (Status.IsError()) {
 				Results.append(Status);
 				continue;
@@ -993,7 +993,8 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 		foreach(const CSandBoxPtr &pBox, SandBoxes)
 		{
-			theGUI->DoDeleteCmd(pBox);
+			if (!theGUI->DoDeleteCmd(pBox))
+				break;
 
 			SB_PROGRESS Status;
 			if (!DeleteShapshots && pBox->HasSnapshots()) {

@@ -170,14 +170,21 @@ SB_STATUS CSandBox__DeleteFolder(const CSbieProgressPtr& pProgress, const QStrin
 
 	SNtObject ntObject(L"\\??\\" + Folder.toStdWString());
 
-	NtIo_WaitForFolder(&ntObject.attr);
+	NtIo_WaitForFolder(&ntObject.attr, 10, [](const WCHAR* info, void* param) {
+		return !((CSbieProgress*)param)->IsCanceled(); 
+	}, pProgress.data());
 
 	if (pProgress->IsCanceled())
-		return STATUS_REQUEST_ABORTED; // or STATUS_TRANSACTION_ABORTED ?
+		return SB_ERR(SB_DeleteError, QVariantList() << Folder, STATUS_CANCELLED);
 
 	pProgress->ShowMessage(CSandBox::tr("Deleting folder: %1").arg(Folder));
 
-	NTSTATUS status = NtIo_DeleteFolderRecursively(&ntObject.attr);
+	NTSTATUS status = NtIo_DeleteFolderRecursively(&ntObject.attr, [](const WCHAR* info, void* param) {
+		CSbieProgress* pProgress = (CSbieProgress*)param;
+		pProgress->ShowMessage(QString::fromWCharArray(info));
+		return !pProgress->IsCanceled(); 
+	}, pProgress.data());
+
 	if (!NT_SUCCESS(status))
 		return SB_ERR(SB_DeleteError, QVariantList() << Folder, status);
 	return SB_OK;
@@ -191,9 +198,10 @@ void CSandBox::CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringLis
 	{
 		for (int i = 0; i < 10; i++) {
 			Status = CSandBox__DeleteFolder(pProgress, Folder);
-			if (!Status.IsError())
+			if (!Status.IsError() || Status.GetStatus() == STATUS_CANCELLED)
 				break;
-			QThread::sleep(1); // wait a second
+			
+			QThread::sleep(1); // wait a second and retry
 		}
 
 		if (Status.IsError())
@@ -437,7 +445,9 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 	SNtObject ntSource(L"\\??\\" + SourceFolder.toStdWString());
 
-	NtIo_WaitForFolder(&ntSource.attr);
+	NtIo_WaitForFolder(&ntSource.attr, 10, [](const WCHAR* info, void* param) {
+		return !((CSbieProgress*)param)->IsCanceled(); 
+	}, pProgress.data());
 
 	if (!QDir().exists(TargetFolder))
 		QDir().mkpath(TargetFolder); // just make it
@@ -446,14 +456,21 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 	SNtObject ntTarget(L"\\??\\" + TargetFolder.toStdWString());
 
-	NtIo_WaitForFolder(&ntTarget.attr);
+	NtIo_WaitForFolder(&ntTarget.attr, 10, [](const WCHAR* info, void* param) {
+		return !((CSbieProgress*)param)->IsCanceled(); 
+	}, pProgress.data());
 
 	if (pProgress->IsCanceled())
-		return STATUS_REQUEST_ABORTED; // or STATUS_TRANSACTION_ABORTED ?
+		return SB_ERR(SB_SnapMergeFail, QVariantList() << TargetFolder << SourceFolder, STATUS_CANCELLED);
 
 	pProgress->ShowMessage(CSandBox::tr("Merging folders: %1 >> %2").arg(SourceFolder).arg(TargetFolder));
 
-	NTSTATUS status = NtIo_MergeFolder(&ntSource.attr, &ntTarget.attr);
+	NTSTATUS status = NtIo_MergeFolder(&ntSource.attr, &ntTarget.attr, [](const WCHAR* info, void* param) {
+		CSbieProgress* pProgress = (CSbieProgress*)param;
+		pProgress->ShowMessage(QString::fromWCharArray(info));
+		return !pProgress->IsCanceled(); 
+	}, pProgress.data());
+
 	if (!NT_SUCCESS(status))
 		return SB_ERR(SB_SnapMergeFail, QVariantList() << TargetFolder << SourceFolder, status);
 	return SB_OK;

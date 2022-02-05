@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SbieUtils.h"
 #include <QCoreApplication>
+#include <QWinEventNotifier>
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -188,6 +189,53 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 			return SB_ERR(SB_ExecFail, QVariantList() << Args.join(" "));
 	}
 	return SB_OK;
+}
+
+CSbieProgressPtr CSbieUtils::RunCommand(const QString& Command, bool noGui)
+{
+	STARTUPINFOW si = { 0 };
+	si.cb = sizeof(si);
+	if (noGui) {	
+		si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
+		si.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+		si.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+		si.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+		si.wShowWindow = SW_HIDE;
+	}
+	PROCESS_INFORMATION pi = { 0 };
+	if (!CreateProcessW(NULL, (LPWSTR)Command.toStdWString().c_str(), NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi))
+		return CSbieProgressPtr();
+	
+	HANDLE hJobObject = CreateJobObject(NULL, NULL);
+	if (hJobObject)
+		AssignProcessToJobObject(hJobObject, pi.hProcess);
+
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+
+	QWinEventNotifier* processFinishedNotifier = new QWinEventNotifier(pi.hProcess);
+	processFinishedNotifier->setEnabled(true);
+	QObject::connect(processFinishedNotifier, &QWinEventNotifier::activated, [=]() {
+		processFinishedNotifier->setEnabled(false);
+		processFinishedNotifier->deleteLater();
+
+		pProgress->Finish(SB_OK);
+
+		if(hJobObject)
+			CloseHandle(hJobObject);
+		CloseHandle(pi.hThread);
+		CloseHandle(pi.hProcess);
+	});
+
+	QObject::connect(pProgress.data(), &CSbieProgress::Canceled, [=]() {
+		if (hJobObject)
+			TerminateJobObject(hJobObject, 0);
+		else
+			TerminateProcess(pi.hProcess, 0);
+	});
+
+	ResumeThread(pi.hThread);
+	
+	return pProgress;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -508,3 +556,4 @@ bool ShellOpenRegKey(const QString& KeyName)
 
     return result;
 }
+

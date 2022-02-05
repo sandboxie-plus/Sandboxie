@@ -881,7 +881,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
-void CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
+bool CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
 {
 	foreach(const QString& Value, pBox->GetTextList("OnBoxDelete", true, false, true)) {
 
@@ -891,9 +891,9 @@ void CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
 		for(int pos = 0; (pos = rx.indexIn(Value, pos)) != -1; ) {
 			QString var = rx.cap(1);
 			QString val;
-			if (var.compare("Sandbox", Qt::CaseInsensitive) == 0)
+			if (var.compare("BoxPath", Qt::CaseInsensitive) == 0)
 				val = pBox->GetFileRoot();
-			else if (var.compare("SandboxName", Qt::CaseInsensitive) == 0)
+			else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
 				val = pBox->GetName();
 			else
 				val = theAPI->SbieIniGet(pBox->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
@@ -901,11 +901,14 @@ void CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
 			pos += rx.matchedLength();
 		}
 
-		// todo add progress dialog
-		QProcess Process;
-		Process.execute(Value2);
-		Process.waitForFinished();
+		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
+		if (!pProgress.isNull()) {
+			AddAsyncOp(pProgress, true, tr("Executing OnBoxDelete: %1").arg(Value2));
+			if (pProgress->IsCanceled())
+				return false;
+		}
 	}
+	return true;
 }
 
 void CSandMan::OnBoxClosed(const QString& BoxName)
@@ -921,7 +924,8 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
 
-		DoDeleteCmd(pBox);
+		if (!DoDeleteCmd(pBox))
+			return;
 
 		SB_PROGRESS Status;
 		if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
@@ -933,7 +937,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 			Status = pBox->CleanBox();
 
 		if (Status.GetStatus() == OP_ASYNC)
-			AddAsyncOp(Status.GetValue());
+			AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 content").arg(BoxName));
 	}
 }
 
@@ -1881,14 +1885,14 @@ void CSandMan::OnSetMonitoring()
 	//m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
 }
 
-bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait)
+bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait, const QString& InitialMsg)
 {
 	m_pAsyncProgress.insert(pProgress.data(), pProgress);
 	connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
 	connect(pProgress.data(), SIGNAL(Progress(int)), this, SLOT(OnAsyncProgress(int)));
 	connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
 
-	m_pProgressDialog->OnStatusMessage("");
+	m_pProgressDialog->OnStatusMessage(InitialMsg);
 	if (bWait) {
 		m_pProgressModal = true;
 		m_pProgressDialog->exec(); // safe exec breaks the closing
@@ -1986,6 +1990,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_SnapIsEmpty:	Message = tr("Can not create snapshot of an empty sandbox"); break;
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
 	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
+	case SB_Canceled:		Message = tr("The operation was canceled by the user"); break;
 	default:				return tr("Unknown Error Status: 0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0'));
 	}
 

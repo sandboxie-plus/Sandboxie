@@ -37,6 +37,8 @@ public:
 	static bool				CreateShortcut(class CSbieAPI* pApi, QString LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath = QString(), int iconIndex = 0, const QString &workdir = QString(), bool bRunElevated = false);
 	static bool				GetStartMenuShortcut(class CSbieAPI* pApi, QString &BoxName, QString &LinkPath, QString &IconPath, quint32& IconIndex, QString &WorkDir);
 
+	static CSbieProgressPtr RunCommand(const QString& Command, bool noGui = false);
+
 private:
 	static SB_RESULT(void*)	ElevateOps(const QStringList& Ops);
 	static SB_STATUS		ExecOps(const QStringList& Ops);

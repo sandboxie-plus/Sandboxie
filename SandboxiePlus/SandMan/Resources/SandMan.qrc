@@ -82,5 +82,6 @@
         <file alias="Full0">Boxes/sandbox-y-full.png</file>
         <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
         <file alias="Full6">Boxes/sandbox-o-full.png</file>
+        <file alias="Busy">Boxes/BusyOverlay.png</file>
     </qresource>
 </RCC>

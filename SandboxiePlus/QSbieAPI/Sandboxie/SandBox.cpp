@@ -147,9 +147,8 @@ SB_PROGRESS CSandBox::CleanBox()
 	if (GetBool("NeverDelete", false))
 		return SB_ERR(SB_DeleteProtect);
 
-	SB_STATUS Status = TerminateAll();
-	if (Status.IsError())
-		return Status;
+	if (GetActiveProcessCount() > 0)
+		return SB_ERR(SB_DeleteNotEmpty);
 
 	return CleanBoxFolders(QStringList(m_FilePath));
 }
@@ -181,7 +180,7 @@ SB_STATUS CSandBox__DeleteFolder(const CSbieProgressPtr& pProgress, const QStrin
 
 	NTSTATUS status = NtIo_DeleteFolderRecursively(&ntObject.attr, [](const WCHAR* info, void* param) {
 		CSbieProgress* pProgress = (CSbieProgress*)param;
-		pProgress->ShowMessage(QString::fromWCharArray(info));
+		pProgress->ShowMessage(CSandBox::tr("Deleting folder: %1").arg(QString::fromWCharArray(info)));
 		return !pProgress->IsCanceled(); 
 	}, pProgress.data());
 
@@ -241,6 +240,27 @@ SB_STATUS CSandBox::RemoveBox()
 		return SB_ERR(SB_DelNotEmpty);
 
 	return RemoveSection();
+}
+
+QString CSandBox::Expand(const QString& Value)
+{
+	QString Value2 = Value;
+
+	QRegExp rx("%([a-zA-Z0-9 ]+)%");
+	for (int pos = 0; (pos = rx.indexIn(Value, pos)) != -1; ) {
+		QString var = rx.cap(1);
+		QString val;
+		if (var.compare("BoxPath", Qt::CaseInsensitive) == 0)
+			val = this->GetFileRoot();
+		else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
+			val = this->GetName();
+		else
+			val = m_pAPI->SbieIniGet(this->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
+		Value2.replace("%" + var + "%", val);
+		pos += rx.matchedLength();
+	}
+
+	return Value2;
 }
 
 QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent, QString* pDefault) const
@@ -467,7 +487,7 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 	NTSTATUS status = NtIo_MergeFolder(&ntSource.attr, &ntTarget.attr, [](const WCHAR* info, void* param) {
 		CSbieProgress* pProgress = (CSbieProgress*)param;
-		pProgress->ShowMessage(QString::fromWCharArray(info));
+		pProgress->ShowMessage(CSandBox::tr("Merging folder: %1").arg(QString::fromWCharArray(info)));
 		return !pProgress->IsCanceled(); 
 	}, pProgress.data());
 

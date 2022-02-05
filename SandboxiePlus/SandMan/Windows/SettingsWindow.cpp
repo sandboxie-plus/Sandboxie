@@ -110,6 +110,10 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.cmbSysTray->addItem(tr("Show Plus icon"));
 	ui.cmbSysTray->addItem(tr("Show Classic icon"));
 
+	ui.cmbTrayBoxes->addItem(tr("All Boxes"));
+	ui.cmbTrayBoxes->addItem(tr("Active + Pinned"));
+	ui.cmbTrayBoxes->addItem(tr("Pinned Only"));
+
 	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
 	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
@@ -120,6 +124,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	LoadSettings();
 	
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
+	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 
 	m_FeaturesChanged = false;
@@ -256,7 +261,7 @@ void CSettingsWindow::LoadSettings()
 
 	
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
-	ui.chkTrayActiveOnly->setChecked(theConf->GetBool("Options/TrayActiveOnly", false));
+	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
 	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 
 
@@ -408,7 +413,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
-	theConf->SetValue("Options/TrayActiveOnly", ui.chkTrayActiveOnly->isChecked());
+	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 
 

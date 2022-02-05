@@ -78,6 +78,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
 	m_pRenGroupe = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Group"), this, SLOT(OnGroupAction()));
 	m_pDelGroupe = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Group"), this, SLOT(OnGroupAction()));
+	m_pStopAsync = m_pMenu->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
 	m_iMenuTop = m_pMenu->actions().count();
 	//m_pMenu->addSeparator();
 
@@ -301,7 +302,7 @@ void CSbieView::OnCustomSortByColumn(int column)
 	}
 }
 
-void CSbieView::UpdateMenu()
+bool CSbieView::UpdateMenu()
 {
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
@@ -312,6 +313,7 @@ void CSbieView::UpdateMenu()
 	//}
 
 	CSandBoxPtr pBox;
+	bool bBoxBusy = false;
 	CBoxedProcessPtr pProcess;
 	int iProcessCount = 0;
 	int iSandBoxeCount = 0;
@@ -338,23 +340,32 @@ void CSbieView::UpdateMenu()
 					iSandBoxeCount = -1;
 				else if (iSandBoxeCount != -1)
 					iSandBoxeCount++;
+
+				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+				if(pBoxEx->IsBusy())
+					bBoxBusy = true;
 			}
 			else
 				iGroupe++;
 		}
 	}
 
+	if (bBoxBusy) {
+		iSandBoxeCount = 0;
+		iGroupe = 0;
+	}
 
 	for (int i = 0; i < m_iMenuTop; i++)
-		MenuActions[i]->setVisible(iSandBoxeCount == 0 && iProcessCount == 0);
+		MenuActions[i]->setVisible(!bBoxBusy && iSandBoxeCount == 0 && iProcessCount == 0);
+	m_pStopAsync->setVisible(bBoxBusy);
 	m_pRenGroupe->setVisible(iGroupe == 1 && iSandBoxeCount == 0 && iProcessCount == 0);
-	m_pDelGroupe->setVisible(!Rows.isEmpty() && iSandBoxeCount == 0 && iProcessCount == 0);
+	m_pDelGroupe->setVisible(iGroupe > 0 && iSandBoxeCount == 0 && iProcessCount == 0);
 
 	for (int i = m_iMenuTop; i < m_iMenuBox; i++)
 		MenuActions[i]->setVisible(iSandBoxeCount != 0 && iProcessCount == 0);
 	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
 
-	MenuActions[m_iMoveTo]->setVisible(!Rows.isEmpty() && iProcessCount == 0);
+	MenuActions[m_iMoveTo]->setVisible((iGroupe > 0 || iSandBoxeCount > 0) && iProcessCount == 0);
 
 	if(iSandBoxeCount == 1)
 		UpdateRunMenu(pBox);
@@ -428,6 +439,8 @@ void CSbieView::UpdateMenu()
 	//	foreach(QAction * pAction, MenuActions)
 	//		pAction->setEnabled(false);
 	//}
+
+	return bBoxBusy == false;
 }
 
 void CSbieView::OnMenu(const QPoint& Point)
@@ -435,6 +448,7 @@ void CSbieView::OnMenu(const QPoint& Point)
 	if (!theAPI->IsConnected())
 		return;
 
+	UpdateMenu();
 	CPanelView::OnMenu(Point);
 }
 
@@ -733,7 +747,15 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	QList<CSandBoxPtr> SandBoxes = CSbieView::GetSelectedBoxes();
 	if (SandBoxes.isEmpty())
 		return;
-	if (Action == m_pMenuRunAny)
+	if (Action == m_pStopAsync)
+	{
+		foreach(const CSandBoxPtr & pBox, SandBoxes)
+		{
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+			pBoxEx->OnCancelAsync();
+		}
+	}
+	else if (Action == m_pMenuRunAny)
 	{
 		/*QString Command = ShowRunDialog(SandBoxes.first()->GetName());
 		if(!Command.isEmpty())
@@ -956,6 +978,12 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
+			SB_STATUS Status1 = pBox->TerminateAll();
+			if (Status1.IsError()) {
+				Results.append(Status1);
+				continue;
+			}
+
 			SB_PROGRESS Status = pBox->CleanBox();
 			if (Status.GetStatus() == OP_ASYNC)
 				theGUI->AddAsyncOp(Status.GetValue(), true, tr("Deleting %1 content").arg(pBox->GetName()));
@@ -993,20 +1021,9 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 		foreach(const CSandBoxPtr &pBox, SandBoxes)
 		{
-			if (!theGUI->DoDeleteCmd(pBox))
-				break;
-
-			SB_PROGRESS Status;
-			if (!DeleteShapshots && pBox->HasSnapshots()) {
-				QString Default = pBox->GetDefaultSnapshot();
-				Status = pBox->SelectSnapshot(Default);
-			}
-			else // if there are no snapshots jut use the normal cleaning procedure
-				Status = pBox->CleanBox();
-
-			if (Status.GetStatus() == OP_ASYNC)
-				theGUI->AddAsyncOp(Status.GetValue());
-			else if (Status.IsError())
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+			SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+			if (Status.IsError())
 				Results.append(Status);
 		}	
 	}
@@ -1204,7 +1221,7 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)
 {
 	if (selected.empty()) {
-		UpdateMenu();
+		//UpdateMenu();
 		return;
 	}
 
@@ -1237,7 +1254,7 @@ void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSele
 
 	selectionModel->select(invalid, QItemSelectionModel::Deselect);
 
-	UpdateMenu();
+	//UpdateMenu();
 }
 
 QList<CSandBoxPtr> CSbieView::GetSelectedBoxes()
@@ -1322,6 +1339,8 @@ void CSbieView::SelectBox(const QString& Name)
 void CSbieView::PopUpMenu(const QString& Name)
 {
 	SelectBox(Name);
+	if (!UpdateMenu())
+		return;
 	m_pMenu2->exec(QCursor::pos());
 	//m_pMenu2->popup(QCursor::pos());
 	//OnMenu(QCursor::pos());

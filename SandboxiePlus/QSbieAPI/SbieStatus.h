@@ -27,6 +27,7 @@ enum ESbieMsgCodes
 	SB_BadNameChar,
 	SB_FailedKillAll,
 	SB_DeleteProtect,
+	SB_DeleteNotEmpty,
 	SB_DeleteError,
 	//SB_RemNotEmpty,
 	SB_DelNotEmpty,

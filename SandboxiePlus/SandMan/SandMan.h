@@ -38,8 +38,6 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	bool				DoDeleteCmd(const CSandBoxPtr &pBox);
-
 	bool				AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
@@ -54,7 +52,7 @@ public:
 
 	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 
-	QIcon				GetBoxIcon(int boxType, bool inUse = false);
+	QIcon				GetBoxIcon(int boxType, bool inUse = false, bool inBusy = false);
 	QString				GetBoxDescription(int boxType);
 
 	bool				CheckCertificate();
@@ -108,7 +106,12 @@ protected:
 		eMaxColor
 	};
 
-	QMap<EBoxColors, QPair<QIcon, QIcon> > m_BoxIcons;
+	struct SBoxIcon {
+		QIcon Empty;
+		QIcon InUse;
+		QIcon Busy;
+	};
+	QMap<int, SBoxIcon> m_BoxIcons;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
 

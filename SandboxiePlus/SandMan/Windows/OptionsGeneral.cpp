@@ -56,6 +56,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.btnBorderColor, SIGNAL(clicked(bool)), this, SLOT(OnPickColor()));
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -106,6 +107,7 @@ void COptionsWindow::LoadGeneral()
 	ui.spinBorderWidth->setValue(BorderWidth);
 
 	ui.chkShowForRun->setChecked(m_pBox->GetBool("ShowForRunIn", true));
+	ui.chkPinToTray->setChecked(m_pBox->GetBool("PinToTray", false));
 
 	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
 	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
@@ -160,6 +162,7 @@ void COptionsWindow::SaveGeneral()
 	WriteText("BorderColor", BorderCfg.join(","));
 
 	WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
+	WriteAdvancedCheck(ui.chkPinToTray, "PinToTray", "y", "");
 
 	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");

@@ -1,6 +1,7 @@
 #pragma once
 #include <qwidget.h>
 #include "../SbiePlusAPI.h"
+#include "../SbieProcess.h"
 #include "../../MiscHelpers/Common/TreeItemModel.h"
 
 
@@ -50,6 +51,7 @@ protected:
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
+		int			busyState;
 		int			boxType;
 		int			OrderNumber;
 

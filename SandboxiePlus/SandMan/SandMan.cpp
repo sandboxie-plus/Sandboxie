@@ -207,8 +207,23 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
 	SetupHotKeys();
 
-	for (int i = 0; i < eMaxColor; i++)
-		m_BoxIcons[(EBoxColors)i] = qMakePair(QIcon(QString(":/Boxes/Empty%1").arg(i)), QIcon(QString(":/Boxes/Full%1").arg(i)));
+	for (int i = 0; i < eMaxColor; i++) {
+		m_BoxIcons[i].Empty = QIcon(QString(":/Boxes/Empty%1").arg(i));
+		m_BoxIcons[i].InUse= QIcon(QString(":/Boxes/Full%1").arg(i));
+
+		//QImage Image(QString(":/Boxes/Empty%1").arg(i));
+		//Image.invertPixels();
+		//m_BoxIcons[i].Busy = QIcon(QPixmap::fromImage(Image));
+
+		QPixmap base = QPixmap(QString(":/Boxes/Empty%1").arg(i));
+		QPixmap overlay= QPixmap(":/Boxes/Busy");
+		QPixmap result(base.width(), base.height());
+		result.fill(Qt::transparent); // force alpha channel
+		QPainter painter(&result);
+		painter.drawPixmap(0, 0, base);
+		painter.drawPixmap(0, 0, overlay);
+		m_BoxIcons[i].Busy = QIcon(result);
+	}
 
 	// Tray
 	m_pTrayIcon = new QSystemTrayIcon(GetTrayIconName(), this);
@@ -599,7 +614,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	QApplication::quit();
 }
 
-QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)
+QIcon CSandMan::GetBoxIcon(int boxType, bool inUse, bool inBusy)
 {
 	EBoxColors color = eYellow;
 	switch (boxType) {
@@ -611,7 +626,11 @@ QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)
 	case CSandBoxPlus::eAppBox:				color = eGreen; break;
 	case CSandBoxPlus::eInsecure:			color = eMagenta; break;
 	}
-	return inUse ? m_BoxIcons[color].second : m_BoxIcons[color].first;
+	if (inBusy)
+		return m_BoxIcons[color].Busy;
+	if (inUse)
+		return m_BoxIcons[color].InUse;
+	return m_BoxIcons[color].Empty;
 }
 
 QString CSandMan::GetBoxDescription(int boxType)
@@ -881,36 +900,6 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
-bool CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
-{
-	foreach(const QString& Value, pBox->GetTextList("OnBoxDelete", true, false, true)) {
-
-		QString Value2 = Value;
-
-		QRegExp rx("%([a-zA-Z0-9 ]+)%");
-		for(int pos = 0; (pos = rx.indexIn(Value, pos)) != -1; ) {
-			QString var = rx.cap(1);
-			QString val;
-			if (var.compare("BoxPath", Qt::CaseInsensitive) == 0)
-				val = pBox->GetFileRoot();
-			else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
-				val = pBox->GetName();
-			else
-				val = theAPI->SbieIniGet(pBox->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
-			Value2.replace("%" + var + "%", val);
-			pos += rx.matchedLength();
-		}
-
-		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
-		if (!pProgress.isNull()) {
-			AddAsyncOp(pProgress, true, tr("Executing OnBoxDelete: %1").arg(Value2));
-			if (pProgress->IsCanceled())
-				return false;
-		}
-	}
-	return true;
-}
-
 void CSandMan::OnBoxClosed(const QString& BoxName)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
@@ -924,20 +913,9 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
 
-		if (!DoDeleteCmd(pBox))
-			return;
-
-		SB_PROGRESS Status;
-		if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
-			QString Current;
-			pBox->GetDefaultSnapshot(&Current);
-			Status = pBox->SelectSnapshot(Current);
-		}
-		else // if there are no snapshots jut use the normal cleaning procedure
-			Status = pBox->CleanBox();
-
-		if (Status.GetStatus() == OP_ASYNC)
-			AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 content").arg(BoxName));
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+		SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+		CheckResults(QList<SB_STATUS>() << Status);
 	}
 }
 
@@ -1973,6 +1951,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_BadNameChar:	Message = tr("The sandbox name can contain only letters, digits and underscores which are displayed as spaces."); break;
 	case SB_FailedKillAll:	Message = tr("Failed to terminate all processes"); break;
 	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
+	case SB_DeleteNotEmpty:	Message = tr("All sandbox processes must be stopped before the box content can be deleted"); break;
 	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
 	//case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
 	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
@@ -2035,7 +2014,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 		{
 			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
-			bool bActiveOnly = theConf->GetBool("Options/TrayActiveOnly", false);
+			int iSysTrayFilter = theConf->GetInt("Options/SysTrayFilter", 0);
 
 			bool bAdded = false;
 			if (m_pTrayBoxes->topLevelItemCount() == 0)
@@ -2056,8 +2035,14 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 				CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
 
-				if (bActiveOnly && pBoxEx->GetActiveProcessCount() == 0)
-					continue;
+				if (iSysTrayFilter == 2) { // pinned only
+					if (!pBox->GetBool("PinToTray", false))
+						continue;
+				}
+				else if (iSysTrayFilter == 1) { // active + pinned
+					if (pBoxEx->GetActiveProcessCount() == 0 && !pBox->GetBool("PinToTray", false))
+						continue;
+				}
 
 				QTreeWidgetItem* pItem = OldBoxes.take(pBox->GetName());
 				if(!pItem)

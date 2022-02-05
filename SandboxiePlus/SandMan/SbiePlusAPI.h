@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../QSbieAPI/SbieAPI.h"
+#include "BoxJob.h"
 
 
 class CSbiePlusAPI : public CSbieAPI
@@ -89,12 +90,26 @@ public:
 	class COptionsWindow*	m_pOptionsWnd;
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
+	bool					IsBusy() const { return !m_JobQueue.isEmpty(); }
+	SB_STATUS				DeleteContentAsync(bool DeleteShapshots = true, bool bOnAutoDelete = false);
+
+public slots:
+	void					OnAsyncFinished();
+	void					OnAsyncMessage(const QString& Text);
+	void					OnAsyncProgress(int Progress);
+	void					OnCancelAsync();
+
 protected:
 	friend class CSbiePlusAPI;
 	virtual bool			CheckUnsecureConfig() const;
 
 	virtual bool			TestProgramGroup(const QString& Group, const QString& ProgName);
 	virtual void			EditProgramGroup(const QString& Group, const QString& ProgName, bool bSet);
+
+	void					AddJobToQueue(CBoxJob* pJob);
+	void					StartNextJob();
+
+	QList<QSharedPointer<CBoxJob>> m_JobQueue;
 
 	bool					m_bLogApiFound;
 	bool					m_bINetBlocked;
@@ -107,40 +122,8 @@ protected:
 	int						m_iUnsecureDebugging;
 
 	bool					m_SuspendRecovery;
+	QString					m_StatusStr;
 
 	QSet<QString>			m_RecentPrograms;
 
-};
-
-///////////////////////////////////////////////////////////////////////////////
-// CSbieProcess
-//
-
-class CSbieProcess : public CBoxedProcess
-{
-	Q_OBJECT
-public:
-	CSbieProcess(quint32 ProcessId, class CSandBox* pBox) : CBoxedProcess(ProcessId, pBox) {}
-
-	virtual QString	GetStatusStr() const;
-
-	virtual void BlockProgram()									{ GetBox()->BlockProgram(m_ImageName); }
-	virtual void SetInternetAccess(bool bSet)					{ GetBox()->SetInternetAccess(m_ImageName, bSet); }
-	virtual bool HasInternetAccess()							{ return GetBox()->HasInternetAccess(m_ImageName); }
-	virtual void SetForcedProgram(bool bSet)					{ GetBox()->SetForcedProgram(m_ImageName, bSet); }
-	virtual bool IsForcedProgram()								{ return GetBox()->IsForcedProgram(m_ImageName); }
-	virtual void SetLingeringProgram(bool bSet)					{ GetBox()->SetLingeringProgram(m_ImageName, bSet); }
-	virtual int	 IsLingeringProgram()							{ return GetBox()->IsLingeringProgram(m_ImageName); }
-	virtual void SetLeaderProgram(bool bSet)					{ GetBox()->SetLeaderProgram(m_ImageName, bSet); }
-	virtual int	 IsLeaderProgram()								{ return GetBox()->IsLeaderProgram(m_ImageName); }
-
-	virtual CSandBoxPlus* GetBox()								{ return qobject_cast<CSandBoxPlus*>(m_pBox); }
-
-	virtual int GetRememberedAction(int Action)					{ return m_RememberedActions.value(Action, -1); }
-	virtual void SetRememberedAction(int Action, int retval)	{ m_RememberedActions.insert(Action, retval); }
-
-	static QString ImageTypeToStr(quint32 type);
-
-protected:
-	QMap<int, int>			m_RememberedActions;
 };

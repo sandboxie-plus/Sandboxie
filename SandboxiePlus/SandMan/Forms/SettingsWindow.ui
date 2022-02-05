@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -211,12 +211,21 @@
            <item row="0" column="1">
             <widget class="QComboBox" name="uiLang"/>
            </item>
-           <item row="10" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkTrayActiveOnly">
+           <item row="10" column="0">
+            <widget class="QLabel" name="label_21">
              <property name="text">
-              <string>Show only sandboxes with running processes in the tray list</string>
+              <string>Show boxes in tray list:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QComboBox" name="cmbTrayBoxes"/>
            </item>
           </layout>
          </item>

@@ -65,6 +65,8 @@ public:
 	virtual SB_STATUS				RenameBox(const QString& NewName);
 	virtual SB_STATUS				RemoveBox();
 
+	virtual QString					Expand(const QString& Value);
+
 	virtual QList<SBoxSnapshot>		GetSnapshots(QString* pCurrent = NULL, QString* pDefault = NULL) const;
 	virtual void					SetDefaultSnapshot(QString Default);
 	virtual QString					GetDefaultSnapshot(QString* pCurrent = NULL) const;

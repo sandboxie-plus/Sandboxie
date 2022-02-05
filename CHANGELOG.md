@@ -35,6 +35,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues canceling box deletion operations didn't working [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 - fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
 
+### Removed
+- removed UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y used for free download manager as it broke other things
+-- when using free download manager ad the line manually to your sandboxie.ini
 
 
 ## [1.0.9 / 5.55.9] - 2022-01-31

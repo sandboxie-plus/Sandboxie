@@ -78,6 +78,14 @@ typedef struct _WND_HOOK {
 
 } WND_HOOK;
 
+#ifndef _DPI_AWARENESS_CONTEXTS_
+struct DPI_AWARENESS_CONTEXT__ { int unused; };
+typedef DPI_AWARENESS_CONTEXT__ *DPI_AWARENESS_CONTEXT;
+#endif
+typedef DPI_AWARENESS_CONTEXT (WINAPI *P_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT dpiContext);
+
+typedef BOOL (WINAPI *P_SetProcessDpiAwarenessContext)(DPI_AWARENESS_CONTEXT value);
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -85,14 +93,8 @@ typedef struct _WND_HOOK {
 
 static HWND DDE_Request_ProxyWnd = NULL;
 
-#ifndef _DPI_AWARENESS_CONTEXTS_
-struct DPI_AWARENESS_CONTEXT__ { int unused; };
-typedef DPI_AWARENESS_CONTEXT__ *DPI_AWARENESS_CONTEXT;
-#endif
-typedef DPI_AWARENESS_CONTEXT (WINAPI *P_SetThreadDpiAwarenessContext)(
-    DPI_AWARENESS_CONTEXT dpiContext);
-
 static P_SetThreadDpiAwarenessContext __sys_SetThreadDpiAwarenessContext = NULL;
+static P_SetProcessDpiAwarenessContext __sys_SetProcessDpiAwarenessContext = NULL;
 
 //---------------------------------------------------------------------------
 // Constructor
@@ -124,6 +126,9 @@ GuiServer::GuiServer()
 
     __sys_SetThreadDpiAwarenessContext = (P_SetThreadDpiAwarenessContext)GetProcAddress(
         GetModuleHandle(L"user32.dll"), "SetThreadDpiAwarenessContext");
+
+    __sys_SetProcessDpiAwarenessContext = (P_SetProcessDpiAwarenessContext)GetProcAddress(
+        GetModuleHandle(L"user32.dll"), "SetProcessDpiAwarenessContext");
 }
 
 
@@ -566,6 +571,10 @@ void GuiServer::RunSlave(const WCHAR *cmdline)
     }
 
     GuiServer *pThis = GetInstance();
+
+    if (__sys_SetProcessDpiAwarenessContext) {
+        __sys_SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
+    }
 
     //
     // get process id for parent (which should be the main SbieSvc process)

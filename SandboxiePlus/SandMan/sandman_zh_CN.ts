@@ -834,7 +834,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>删除所有内容，包括所有快照</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -1009,7 +1009,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="177"/>
         <source>Sbie Messages</source>
-        <translation>沙盘消息</translation>
+        <translation>沙盒消息</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="185"/>
@@ -1048,7 +1048,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="385"/>
         <source>Window Finder</source>
-        <translation>检查窗口是否在沙盘中运行</translation>
+        <translation>检查窗口是否在沙盒中运行</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="389"/>
@@ -1118,7 +1118,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部卸载</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -1401,7 +1401,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1875"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>无法删除旧沙盒中的数据文件</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1881"/>
@@ -1454,7 +1454,7 @@ This box prevents access to all user data locations, except explicitly granted i
     </message>
     <message>
         <source>Sbie Directory: %1</source>
-        <translation type="vanished">沙盘目录：%1</translation>
+        <translation type="vanished">沙盒目录：%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="942"/>
@@ -1562,7 +1562,7 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="vanished">请输入“必沙程序”停用的持续时间。</translation>
+        <translation type="vanished">请输入停用“必沙程序”的持续时间。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1467"/>
@@ -1701,32 +1701,32 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>停用必沙程序规则</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>安装目录</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 版本号: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="943"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>数据存放目录: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>请输入“停用必沙程序规则”的持续时间（单位：秒）.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1870"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>复制沙盒数据文件失败</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1871"/>
@@ -1820,7 +1820,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2147"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation>未来不再显示此通告</translation>
+        <translation>今后不要再显示此公告</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2194"/>
@@ -1850,17 +1850,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2247"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
-        <translation>无可用更新，您的 Sandboxie-Plus 已是最新版。</translation>
+        <translation>暂无可用更新，您的 Sandboxie-Plus 已是最新版。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2289"/>
         <source>Failed to download update from: %1</source>
-        <translation>从如下地址下载更新失败：%1</translation>
+        <translation>从 %1 下载更新文件时失败了</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2293"/>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;新版 Sandboxie-Plus 已下载到下列位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;您想开始安装吗？目前在沙盒中运行的程序将被终止(如有)。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;新版 Sandboxie-Plus 已下载到下列位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;您想开始安装吗？目前在沙盒中运行的程序将被终止(如有的话)。&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt;</source>
@@ -1968,7 +1968,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="475"/>
         <source>Sbie Svc</source>
-        <translation>沙盘软件服务</translation>
+        <translation>沙盒软件服务</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="476"/>
@@ -2499,12 +2499,12 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="979"/>
         <location filename="Views/SbieView.cpp" line="983"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>同时删除所有快照</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>你真的想删除所有选定的沙盒的内容吗？</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
@@ -2586,7 +2586,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>无译文</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2700,12 +2700,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复到空沙盒</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (默认)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -3466,12 +3466,12 @@ For files access you can use &apos;Direct All&apos; instead to make it apply to 
 &apos;Direct&apos; File and Key access only applies to program binaries located outside the sandbox.
 For files access you can use &apos;Direct All&apos; instead to make it apply to all programs.</source>
         <translation type="vanished">配置各个进程可以访问哪些资源。双击特定行编辑它。
-“直接访问”文件和键值访问仅适用位于沙盘外的程序文件。
+“直接访问”文件和键值访问仅适用位于沙盒外的程序文件。
 “全部直接访问”可使设置适用于所有程序。</translation>
     </message>
     <message>
         <source>Apply Close...=!&lt;program&gt;,... directives also to all binaries located in the sandboxed.</source>
-        <translation type="vanished">将 Close...=!&lt;program&gt;,... 指令同时应用于沙盘内的所有程序文件。</translation>
+        <translation type="vanished">将 Close...=!&lt;program&gt;,... 指令同时应用于沙盒内的所有程序文件。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1847"/>
@@ -3918,7 +3918,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2511"/>
         <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation>API 调用跟踪 (需将 logapi 安装到沙盘目录)</translation>
+        <translation>API 调用跟踪 (需将 logapi 安装到沙盒目录)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2551"/>
@@ -4031,7 +4031,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2823"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
-        <translation>此列表含有大量的沙盘兼容性增强模板</translation>
+        <translation>此列表含有大量的沙盒兼容性增强模板</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2836"/>
@@ -4175,7 +4175,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">删除内容</translation>
+        <translation>删除内容</translation>
     </message>
     <message>
         <source>Recover to</source>
@@ -4397,7 +4397,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">仅管理员账户可使用“禁用必沙程序”命令</translation>
+        <translation>仅管理员账户可“停用必沙程序规则”</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="464"/>
@@ -4579,7 +4579,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="549"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>下列程序在沙盒之外启动时，Sandboxie 将发出 SBIE1301 警示。</translation>
+        <translation>下列程序在沙盒之外启动时，Sandboxie 将发出 SBIE1301 警告。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="559"/>
@@ -4618,7 +4618,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="707"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>沙盒已检测到您的系统中安装了以下软件。点击“确定”应用配置，将改进与这些软件的兼容性。这些配置作用于所有沙盘，包括现存的和未来新增的沙盘。</translation>
+        <translation>沙盒已检测到您的系统中安装了以下软件。点击“确定”应用配置，将改进与这些软件的兼容性。这些配置作用于所有沙盒，包括现存的和未来新增的沙盒。</translation>
     </message>
 </context>
 <context>
@@ -4646,12 +4646,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>当删除一个快照时，它将被回退到此快照拍摄时的状态，而不是直接清空</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>默认快照</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

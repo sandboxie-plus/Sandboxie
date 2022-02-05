@@ -1701,7 +1701,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation>禁用必沙程序</translation>
+        <translation>停用必沙程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="940"/>
@@ -1721,7 +1721,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation>请输入停用“必沙程序”的持续时间（单位：秒）.</translation>
+        <translation>请输入“停用必沙程序”的持续时间（单位：秒）.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1870"/>
@@ -4397,7 +4397,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation>仅管理员账户可使用“禁用必沙程序”命令</translation>
+        <translation>仅管理员账户可“停用必沙程序”</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="464"/>

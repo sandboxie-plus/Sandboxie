@@ -87,8 +87,6 @@ typedef struct _SESSION             SESSION;
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Session_AddObjectType(const WCHAR *TypeName);
-
 static void Session_Unlock(KIRQL irql);
 
 static SESSION *Session_Get(
@@ -116,14 +114,6 @@ static NTSTATUS Session_Api_MonitorGetEx(PROCESS *proc, ULONG64 *parms);
 
 
 //---------------------------------------------------------------------------
-
-
-#ifdef ALLOC_PRAGMA
-#pragma alloc_text (INIT, Session_AddObjectType)
-#endif // ALLOC_PRAGMA
-
-
-//---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
 
@@ -132,8 +122,6 @@ static LIST Session_List;
 PERESOURCE Session_ListLock = NULL;
 
 volatile LONG Session_MonitorCount = 0;
-
-static POBJECT_TYPE *Session_ObjectTypes = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -156,36 +144,6 @@ _FX BOOLEAN Session_Init(void)
     //Api_SetFunction(API_MONITOR_GET,            Session_Api_MonitorGet);
 	Api_SetFunction(API_MONITOR_GET_EX,			Session_Api_MonitorGetEx);
 
-    //
-    // initialize set of recognized objects types for Session_Api_MonitorPut
-    //
-
-    Session_ObjectTypes = Mem_AllocEx(
-                            Driver_Pool, sizeof(POBJECT_TYPE) * 9, TRUE);
-    if (! Session_ObjectTypes)
-        return FALSE;
-    memzero(Session_ObjectTypes, sizeof(POBJECT_TYPE) * 9);
-
-    if (! Session_AddObjectType(L"Job"))
-        return FALSE;
-    if (! Session_AddObjectType(L"Event"))
-        return FALSE;
-    if (! Session_AddObjectType(L"Mutant"))
-        return FALSE;
-    if (! Session_AddObjectType(L"Semaphore"))
-        return FALSE;
-    if (! Session_AddObjectType(L"Section"))
-        return FALSE;
-#ifdef XP_SUPPORT
-    if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
-        if (! Session_AddObjectType(L"Port"))
-            return FALSE;
-    } else 
-#endif
-    {
-        if (! Session_AddObjectType(L"ALPC Port"))
-            return FALSE;
-    }
 
     return TRUE;
 }
@@ -203,62 +161,6 @@ _FX void Session_Unload(void)
         Session_Cancel(NULL);
         Mem_FreeLockResource(&Session_ListLock);
     }
-}
-
-
-//---------------------------------------------------------------------------
-// Session_AddObjectType
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN Session_AddObjectType(const WCHAR *TypeName)
-{
-    NTSTATUS status;
-    WCHAR ObjectName[64];
-    UNICODE_STRING uni;
-    OBJECT_ATTRIBUTES objattrs;
-    HANDLE handle;
-    OBJECT_TYPE *object;
-    ULONG i;
-
-    wcscpy(ObjectName, L"\\ObjectTypes\\");
-    wcscat(ObjectName, TypeName);
-    RtlInitUnicodeString(&uni, ObjectName);
-    InitializeObjectAttributes(&objattrs,
-        &uni, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
-
-    //
-    // Windows 7 requires that we pass ObjectType in the second parameter
-    // below, while earlier versions of Windows do not require this.
-    // Obj_GetTypeObjectType() returns ObjectType on Windows 7, and
-    // NULL on earlier versions of Windows
-    //
-
-    status = ObOpenObjectByName(
-                    &objattrs, Obj_GetTypeObjectType(), KernelMode,
-                    NULL, 0, NULL, &handle);
-    if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x44, status, TypeName);
-        return FALSE;
-    }
-
-    status = ObReferenceObjectByHandle(
-                    handle, 0, NULL, KernelMode, &object, NULL);
-
-    ZwClose(handle);
-
-    if (! NT_SUCCESS(status)) {
-        Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x55, status, TypeName);
-        return FALSE;
-    }
-
-    ObDereferenceObject(object);
-
-    for (i = 0; Session_ObjectTypes[i]; ++i)
-        ;
-    Session_ObjectTypes[i] = object;
-
-    return TRUE;
 }
 
 
@@ -867,7 +769,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 
                 RtlInitUnicodeString(&objname, name);
 
-                for (i = 0; Session_ObjectTypes[i]; ++i) {
+                for (i = 0; Obj_ObjectTypes[i]; ++i) {
 
                     // ObReferenceObjectByName needs a non-zero ObjectType
                     // so we have to keep going through all possible object
@@ -875,7 +777,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 
                     status = ObReferenceObjectByName(
                                 &objname, OBJ_CASE_INSENSITIVE, NULL, 0,
-                                Session_ObjectTypes[i], KernelMode, NULL,
+                                Obj_ObjectTypes[i], KernelMode, NULL,
                                 &object);
 
                     if (status != STATUS_OBJECT_TYPE_MISMATCH)

@@ -6,11 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-# [1.1.0 / 5.56.0] - 2022-01-??
+# [1.1.0 / 5.56.0] - 2022-01-06
 
 ### Added
 - added support for NtRenameKey (this requires UseRegDeleteV2=y) [#205](https://github.com/sandboxie-plus/Sandboxie/issues/205)
-- added options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
 
 ### Changed
 - reworked the mechanism sandboxie uses to mark host files as deleted
@@ -25,12 +24,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-# [1.0.10 / 5.55.10] - 2022-01-??
+# [1.0.10 / 5.55.10] - 2022-01-06
 
 ### Added
 - added option to show only boxes in tray with runnign processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
 -- additional option show only pinned bixes, in box options a bix can be set to be always shown in theay list (Pinned)
-- add reset ui option
+- added options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
 - added 'Run Un-Sandboxed' context menu option
 - added new trigger "OnBoxDelete" that allows to specify a command that is run UNBOXED just before the box content gets deleted
 -- note: this can be used as a replacemetn to the DeleteCommand [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
@@ -54,6 +53,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with "AutoExec=..."
 - fixed issues canceling box deletion operations didn't working [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 - fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
+
+### Removed
+- removed UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y used for free download manager as it broke other things
+-- when using free download manager ad the line manually to your sandboxie.ini
+
 
 
 

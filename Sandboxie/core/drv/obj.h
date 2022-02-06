@@ -84,6 +84,7 @@ BOOLEAN Obj_HookParseProc(
 // Variables
 //---------------------------------------------------------------------------
 
+extern POBJECT_TYPE *Obj_ObjectTypes;
 
 extern const OBJECT_NAME_INFORMATION Obj_Unnamed;
 

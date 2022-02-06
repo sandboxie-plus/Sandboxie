@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option to show only boxes in tray with runnign processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
 -- additional option show only pinned bixes, in box options a bix can be set to be always shown in theay list (Pinned)
-- add reset ui option
+- added options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
 - added 'Run Un-Sandboxed' context menu option
 - added new trigger "OnBoxDelete" that allows to specify a command that is run UNBOXED just before the box content gets deleted
 -- note: this can be used as a replacemetn to the DeleteCommand [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
@@ -38,6 +38,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - removed UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y used for free download manager as it broke other things
 -- when using free download manager ad the line manually to your sandboxie.ini
+
+
 
 
 ## [1.0.9 / 5.55.9] - 2022-01-31

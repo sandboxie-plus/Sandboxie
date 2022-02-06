@@ -1706,7 +1706,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation>安装目录</translation>
+        <translation>安装目录: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
@@ -2586,7 +2586,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation>无译文</translation>
+        <translation>保持默认</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -4308,7 +4308,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
         <source>Support</source>
-        <translation>支持</translation>
+        <translation>捐赠支持</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="837"/>

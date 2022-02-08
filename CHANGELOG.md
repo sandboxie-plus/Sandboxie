@@ -5,39 +5,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-# [1.0.10 / 5.55.10] - 2022-01-??
+## [1.0.10 / 5.55.10] - 2022-02-06
 
 ### Added
-- added option to show only boxes in tray with runnign processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
--- additional option show only pinned bixes, in box options a bix can be set to be always shown in theay list (Pinned)
-- added options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
-- added 'Run Un-Sandboxed' context menu option
-- added new trigger "OnBoxDelete" that allows to specify a command that is run UNBOXED just before the box content gets deleted
--- note: this can be used as a replacemetn to the DeleteCommand [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
-- sellected box operations (deletion) no longer show the progress dialog [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
--- instead a box with a running operation show a blinking hour glass icon, the context menu can be used to cancel the operation
+- added option to show only boxes in tray with running processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
+-- additional option shows only pinned boxes, in box options a box can be set to be always shown in tray list (Pinned)
+- added Options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
+- added `Run Un-Sandboxed` context menu option
+- added new trigger `OnBoxDelete` that allows to specify a command that is run UNBOXED just before the box content gets deleted
+-- note: this can be used as a replacement to `DeleteCommand` [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
+- selected box operations (deletion) no longer show the progress dialog [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
+-- if a box with a running operation shows a blinking hour glass icon, the context menu can be used to cancel the operation
 
 ### Changed
-- HideHostProcess=program.exe can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+- `HideHostProcess=program.exe` can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
 - updater blocking is now done using a template called BlockSoftwareUpdaters
-- enchanced "StartProgram=..." making "StartCommand=..." obsolete
--- for same functionality as "StartCommand=..." use "StartProgram=%SbieHome%\Start.exe ..."
-- merged "Auto Start" General tab with the "Auto Exec" Advanced tab into a universal"Triggers" Advanced tab
+- enhanced `StartProgram=...` makes `StartCommand=...` obsolete
+-- for same functionality as `StartCommand=...`, use `StartProgram=%SbieHome%\Start.exe ...`
+- merged `Auto Start` General tab with the `Auto Exec` Advanced tab into a universal `Triggers` Advanced tab
 
 ### Fixed
 - fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
-- fixed issues with re opening already open windows [#1584](https://github.com/sandboxie-plus/Sandboxie/issues/1584)
+- fixed issues with re-opening windows already open [#1584](https://github.com/sandboxie-plus/Sandboxie/issues/1584)
 - fixed issue with desktop access [#1588](https://github.com/sandboxie-plus/Sandboxie/issues/1588)
-- fixed issue handling commandline invokation [#1133](https://github.com/sandboxie-plus/Sandboxie/issues/1133)
-- fixed ui issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
+- fixed issue about command line invocation handling [#1133](https://github.com/sandboxie-plus/Sandboxie/issues/1133)
+- fixed UI issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
-- fixed issue with "AutoExec=..."
-- fixed issues canceling box deletion operations didn't working [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
+- fixed issue with `AutoExec=...`
+- fixed issues where canceling box deletion operations didn't work [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 - fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
 
 ### Removed
-- removed UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y used for free download manager as it broke other things
--- when using free download manager ad the line manually to your sandboxie.ini
+- removed `UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y` used for Free Download Manager as it broke other things
+-- only if you use Free Download Manager together with the setting `RpcMgmtSetComTimeout=n` in a sandbox, you have to add the line manually to your Sandboxie.ini
 
 
 

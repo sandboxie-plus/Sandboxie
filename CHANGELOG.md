@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added optional tray notification when a box content gets auto deleted
 - added FreeDownloadManager template
+- added warnign when opening unsandboxed regedit [#1606](https://github.com/sandboxie-plus/Sandboxie/issues/1606)
 
 ### Changed
 - the asynchroniouse box operations introduced in the last build are due to a pupular request now disabled by default

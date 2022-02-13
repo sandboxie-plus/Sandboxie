@@ -218,7 +218,7 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 void CSettingsWindow__AddContextMenu()
 {
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
-		CSettingsWindow::tr("Run &Sandboxed"), CSettingsWindow::tr("Explore &Sandboxed"),
+		CSettingsWindow::tr("Run &Sandboxed"), //CSettingsWindow::tr("Explore &Sandboxed"),
 			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
 }
 

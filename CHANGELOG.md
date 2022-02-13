@@ -19,6 +19,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - the asynchroniouse box operations introduced in the last build are due to a pupular request now disabled by default
 - moved sys tray options from general to shell integration tab
+- removed "AlwaysUseWin32kHooks", now these win32 hooks are always enabled
+-- note: you can use "UseWin32kHooks=program.exe,n" to disable them for sellected programs
 
 ### Fixed
 - fixed compatybility issue with SECUROM [#1597](https://github.com/sandboxie-plus/Sandboxie/issues/1597)
@@ -35,7 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added `Run Un-Sandboxed` context menu option
 - added new trigger `OnBoxDelete` that allows to specify a command that is run UNBOXED just before the box content gets deleted
 -- note: this can be used as a replacement to `DeleteCommand` [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
-- selected box operations (deletion) no longer show the progress dialog [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
+- selected box operations (deletion) no longer show the progress dialog [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 -- if a box with a running operation shows a blinking hour glass icon, the context menu can be used to cancel the operation
 
 ### Changed
@@ -53,7 +55,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UI issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
 - fixed issue with `AutoExec=...`
-- fixed issues where canceling box deletion operations didn't work [1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
+- fixed issues where canceling box deletion operations didn't work [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 - fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
 
 ### Removed

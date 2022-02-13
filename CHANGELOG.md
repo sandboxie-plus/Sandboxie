@@ -15,12 +15,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added optional tray notification when a box content gets auto deleted
 - added FreeDownloadManager template
 - added warnign when opening unsandboxed regedit [#1606](https://github.com/sandboxie-plus/Sandboxie/issues/1606)
+- added missing languages files that were missing in official Qt 5.15.2 (by DevSplash) [#1605](https://github.com/sandboxie-plus/Sandboxie/pull/1605)
 
 ### Changed
 - the asynchroniouse box operations introduced in the last build are due to a pupular request now disabled by default
 - moved sys tray options from general to shell integration tab
 - removed "AlwaysUseWin32kHooks", now these win32 hooks are always enabled
 -- note: you can use "UseWin32kHooks=program.exe,n" to disable them for sellected programs
+- updated Listary template to v6 (by isaak654) [#1610](https://github.com/sandboxie-plus/Sandboxie/pull/1610)
 
 ### Fixed
 - fixed compatybility issue with SECUROM [#1597](https://github.com/sandboxie-plus/Sandboxie/issues/1597)
@@ -34,18 +36,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to show only boxes in tray with running processes [#1186](https://github.com/sandboxie-plus/Sandboxie/issues/1186)
 -- additional option shows only pinned boxes, in box options a box can be set to be always shown in tray list (Pinned)
 - added Options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
-- added `Run Un-Sandboxed` context menu option
-- added new trigger `OnBoxDelete` that allows to specify a command that is run UNBOXED just before the box content gets deleted
--- note: this can be used as a replacement to `DeleteCommand` [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
+- added "Run Un-Sandboxed" context menu option
+- added new trigger "OnBoxDelete" that allows to specify a command that is run UNBOXED just before the box content gets deleted
+-- note: this can be used as a replacement to "DeleteCommand" [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
 - selected box operations (deletion) no longer show the progress dialog [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 -- if a box with a running operation shows a blinking hour glass icon, the context menu can be used to cancel the operation
 
 ### Changed
-- `HideHostProcess=program.exe` can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+- "HideHostProcess=program.exe" can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
 - updater blocking is now done using a template called BlockSoftwareUpdaters
-- enhanced `StartProgram=...` makes `StartCommand=...` obsolete
--- for same functionality as `StartCommand=...`, use `StartProgram=%SbieHome%\Start.exe ...`
-- merged `Auto Start` General tab with the `Auto Exec` Advanced tab into a universal `Triggers` Advanced tab
+- enhanced "StartProgram=..." makes "StartCommand=..." obsolete
+-- for same functionality as "StartCommand=...", use "StartProgram=%SbieHome%\Start.exe ..."
+- merged "Auto Start" General tab with the "Auto Exec" Advanced tab into a universal "Triggers" Advanced tab
 
 ### Fixed
 - fixed a couple issues with the new breakout process feature and improved security (thanks Diversenok)
@@ -54,13 +56,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue about command line invocation handling [#1133](https://github.com/sandboxie-plus/Sandboxie/issues/1133)
 - fixed UI issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
-- fixed issue with `AutoExec=...`
+- fixed issue with "AutoExec=..."
 - fixed issues where canceling box deletion operations didn't work [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 - fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
 
 ### Removed
-- removed `UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y` used for Free Download Manager as it broke other things
--- only if you use Free Download Manager together with the setting `RpcMgmtSetComTimeout=n` in a sandbox, you have to add the line manually to your Sandboxie.ini
+- removed "UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y" used for Free Download Manager as it broke other things
+-- only if you use Free Download Manager together with the setting "RpcMgmtSetComTimeout=n" in a sandbox, you have to add the line manually to your Sandboxie.ini
 
 
 

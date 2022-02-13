@@ -1529,8 +1529,8 @@ void CAppPage::UpdateTemplates3(CBox &box,
 void CAppPage::SetDefaultTemplates6(CBox &box)
 {
     box.EnableTemplate(L"AutoRecoverIgnore", TRUE);
-    box.EnableTemplate(L"Firefox_Phishing_DirectAccess", TRUE);
-    box.EnableTemplate(L"Chrome_Phishing_DirectAccess", TRUE);
+    //box.EnableTemplate(L"Firefox_Phishing_DirectAccess", TRUE);
+    //box.EnableTemplate(L"Chrome_Phishing_DirectAccess", TRUE);
     box.EnableTemplate(L"LingerPrograms", TRUE);
     SetDefaultTemplates7(box);
 }

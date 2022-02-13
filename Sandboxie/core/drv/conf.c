@@ -1458,8 +1458,7 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
             }
         }
 
-        BOOLEAN obj_filter_enabled = Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE);
-        extern BOOLEAN Obj_CallbackInstalled;
+        BOOLEAN obj_filter_enabled = Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, TRUE);
         if (Obj_CallbackInstalled != obj_filter_enabled && Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
             if (obj_filter_enabled) {
                 Obj_Load_Filter();

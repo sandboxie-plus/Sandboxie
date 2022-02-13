@@ -237,7 +237,6 @@ _FX void Log_Msg(
     const WCHAR *string1,
     const WCHAR *string2)
 {
-    //DbgPrint("Sbie MSG_%d: %S; %S\r\n", (error_code & 0xFFFF), string1, string2);
     Log_Msg_Session(error_code, string1, string2, -1);
 }
 
@@ -268,6 +267,8 @@ _FX void Log_Msg_Process(
 	ULONG session_id,
 	HANDLE process_id)
 {
+    DbgPrint("Sbie MSG_%d: %S; %S\r\n", (error_code & 0xFFFF), string1, string2);
+
 	ULONG facility = (error_code >> 16) & 0x0F;
 	if (facility & MSG_FACILITY_EVENT)
 		Log_Event_Msg(error_code, string1, string2);

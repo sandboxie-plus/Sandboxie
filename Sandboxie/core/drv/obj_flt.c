@@ -240,9 +240,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             goto Exit;        
 
         PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
-        ACCESS_MASK WriteAccess = (InitialDesiredAccess & PROCESS_DENIED_ACCESS_MASK);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(
-            proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'P'))) {
+        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, TRUE))) {
 
 #ifdef DRV_BREAKOUT
             //
@@ -301,9 +299,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             goto Exit;
 
         PEPROCESS ProcessObject = PsGetThreadProcess((PETHREAD)PreInfo->Object);
-        ACCESS_MASK WriteAccess = (InitialDesiredAccess & THREAD_DENIED_ACCESS_MASK);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(
-            proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'T'))) {
+        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, FALSE))) {
             *DesiredAccess = 0; // deny any access
         }
         //ObjectTypeName = L"PsThreadType";

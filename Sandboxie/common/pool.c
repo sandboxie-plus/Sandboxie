@@ -373,7 +373,7 @@ static const WCHAR *Pool_large_chunks_lock_Name = L"PoolLockL";
 
 ALIGNED void *Pool_Alloc_Mem(ULONG size, ULONG tag)
 {
-    void *ptr;
+    void *ptr = NULL;
 
     Pool_Timing(NULL);
 
@@ -382,7 +382,9 @@ ALIGNED void *Pool_Alloc_Mem(ULONG size, ULONG tag)
 #ifdef KERNEL_MODE
     ptr = ExAllocatePoolWithTag(PagedPool, size, tag);
 #else
-    ptr = VirtualAlloc(0, size, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
+    //ptr = VirtualAlloc(0, size, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
+    ULONG_PTR RegionSize = size;
+    NtAllocateVirtualMemory(NtCurrentProcess(), &ptr, 0, &RegionSize, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
         ((UCHAR)tag == 0xFF ? PAGE_EXECUTE_READWRITE : PAGE_READWRITE));
 #endif
     // printf("Allocated %d bytes at %08X\n", size, ptr);

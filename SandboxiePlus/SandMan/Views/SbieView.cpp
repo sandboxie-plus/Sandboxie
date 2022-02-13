@@ -872,6 +872,17 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			return;
 		}
 
+ 		if (theConf->GetInt("Options/WarnOpenRegistry", -1) == -1)
+		{
+			bool State = false;
+			if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("WARNING: The opened registry editor is not sand boxed, please be careful and only do changes to the pre-selected sandbox locations.")
+			  , tr("Don't show this warning in future"), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Ok)
+				return;
+
+			if (State)
+				theConf->SetValue("Options/WarnOpenRegistry", 1);
+		}
+
 		wstring path = QCoreApplication::applicationFilePath().toStdWString();
 
 		QStringList RegRoot = SandBoxes.first()->GetRegRoot().split("\\");
@@ -1021,10 +1032,37 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 		foreach(const CSandBoxPtr &pBox, SandBoxes)
 		{
-			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-			SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
-			if (Status.IsError())
-				Results.append(Status);
+			if (theConf->GetBool("Options/UseAsyncBoxOps", false))
+			{
+				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+				if (Status.IsError())
+					Results.append(Status);
+			}
+			else  
+			{
+				SB_STATUS Status1 = pBox->TerminateAll();
+				if (Status1.IsError()) {
+					Results.append(Status1);
+					continue;
+				}
+
+				if (!theGUI->DoDeleteCmd(pBox))
+					continue;
+
+				SB_PROGRESS Status;
+				if (!DeleteShapshots && pBox->HasSnapshots()) {
+					QString Default = pBox->GetDefaultSnapshot();
+					Status = pBox->SelectSnapshot(Default);
+				}
+				else // if there are no snapshots jut use the normal cleaning procedure
+					Status = pBox->CleanBox();
+
+				if (Status.GetStatus() == OP_ASYNC)
+					theGUI->AddAsyncOp(Status.GetValue());
+				else if (Status.IsError())
+					Results.append(Status);
+			}
 		}	
 	}
 	else if (Action == m_pMenuEmptyBox)

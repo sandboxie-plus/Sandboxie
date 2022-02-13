@@ -5,6 +5,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+
+## [1.0.11 / 5.55.11] - 2022-02-14
+
+### Added
+- added optional tray notification when a box content gets auto deleted
+- added FreeDownloadManager template
+
+### Changed
+- the asynchroniouse box operations introduced in the last build are due to a pupular request now disabled by default
+- moved sys tray options from general to shell integration tab
+
+### Fixed
+- fixed compatybility issue with SECUROM [#1597](https://github.com/sandboxie-plus/Sandboxie/issues/1597)
+- fixed modality issue [#1615](https://github.com/sandboxie-plus/Sandboxie/issues/1615)
+
+
+
 ## [1.0.10 / 5.55.10] - 2022-02-06
 
 ### Added

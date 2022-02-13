@@ -34,13 +34,20 @@ public:
     {
         if (*m_ptr && watchActive)
         { 
-            free(*m_ptr); 
+            HeapFree(GetProcessHeap(), 0, *m_ptr); 
             *m_ptr = 0; 
         } 
     }
 
+    static void* Alloc(size_t size) {
+        return HeapAlloc(GetProcessHeap(), 0, size);
+    }
+
     void disableWatch() { watchActive = false; }
 };
+
+#define NEW(size) \
+    CMemPtr::Alloc(size)
 
 #define WATCH(ptr) \
     CMemPtr watch_##ptr((void**)&ptr)

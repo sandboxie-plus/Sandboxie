@@ -459,9 +459,15 @@ bool InitConsole(bool bCreateIfNeeded)
 //
 
 void SafeShow(QWidget* pWidget) {
+	static bool Lock = false;
 	pWidget->setProperty("windowOpacity", 0.0);
-	pWidget->show();
-	QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeSocketNotifiers);
+	if (Lock == false) {
+		Lock = true;
+		pWidget->show();
+		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeSocketNotifiers);
+		Lock = false;
+	} else
+		pWidget->show();
 	pWidget->setProperty("windowOpacity", 1.0);
 }
 

@@ -38,6 +38,8 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
+	bool				DoDeleteCmd(const CSandBoxPtr &pBox);
+
 	bool				AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);

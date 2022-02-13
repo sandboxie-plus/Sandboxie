@@ -202,6 +202,7 @@ protected:
 		eNormalIpcPath,
 		eOpenIpcPath,
 		eClosedIpcPath,
+		eReadIpcPath,
 
 		eOpenWinClass,
 
@@ -229,7 +230,7 @@ protected:
 		eClosed,
 		eClosedRT,
 		eReadOnly,
-		eWriteOnly
+		eBoxOnly
 	};
 
 	enum ETriggerAction {

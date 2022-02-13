@@ -900,6 +900,20 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
+bool CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
+{
+	foreach(const QString& Value, pBox->GetTextList("OnBoxDelete", true, false, true)) {
+		QString Value2 = pBox->Expand(Value);
+		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
+		if (!pProgress.isNull()) {
+			AddAsyncOp(pProgress, true, tr("Executing OnBoxDelete: %1").arg(Value2));
+			if (pProgress->IsCanceled())
+				return false;
+		}
+	}
+	return true;
+}
+
 void CSandMan::OnBoxClosed(const QString& BoxName)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
@@ -913,9 +927,32 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
 			return;
 
-		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-		SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
-		CheckResults(QList<SB_STATUS>() << Status);
+		if(theConf->GetBool("Options/AutoBoxOpsNotify", false))
+			OnLogMessage(tr("Auto deleting content of %1").arg(BoxName), true);
+
+		if (theConf->GetBool("Options/UseAsyncBoxOps", false))
+		{
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+			SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+			CheckResults(QList<SB_STATUS>() << Status);
+		}
+		else
+		{
+			if (!DoDeleteCmd(pBox))
+				return;
+
+			SB_PROGRESS Status;
+			if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
+				QString Current;
+				pBox->GetDefaultSnapshot(&Current);
+				Status = pBox->SelectSnapshot(Current);
+			}
+			else // if there are no snapshots just use the normal cleaning procedure
+				Status = pBox->CleanBox();
+
+			if (Status.GetStatus() == OP_ASYNC)
+				AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 content").arg(BoxName));
+		}
 	}
 }
 
@@ -1156,7 +1193,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 				Message = tr("The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.").arg(MsgData[1]);
 			Message.append(tr("<br /><a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>"));
 
-			QMessageBox msgBox;
+			QMessageBox msgBox(this);
 			msgBox.setTextFormat(Qt::RichText);
 			msgBox.setIcon(QMessageBox::Critical);
 			msgBox.setWindowTitle("Sandboxie-Plus");
@@ -1206,7 +1243,7 @@ bool CSandMan::CheckCertificate()
 	//	return false;
 	//}
 
-	QMessageBox msgBox;
+	QMessageBox msgBox(this);
 	msgBox.setTextFormat(Qt::RichText);
 	msgBox.setIcon(QMessageBox::Information);
 	msgBox.setWindowTitle("Sandboxie-Plus");
@@ -1589,9 +1626,9 @@ void CSandMan::HandleMaintenance(SB_RESULT(void*) Status)
 			if (dwStatus != 0)
 			{
 				if(m_bStopPending)
-					QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to stop all Sandboxie components"));
+					QMessageBox::warning(this, tr("Sandboxie-Plus - Error"), tr("Failed to stop all Sandboxie components"));
 				else if(m_bConnectPending)
-					QMessageBox::warning(NULL, tr("Sandboxie-Plus - Error"), tr("Failed to start required Sandboxie components"));
+					QMessageBox::warning(this, tr("Sandboxie-Plus - Error"), tr("Failed to start required Sandboxie components"));
 
 				OnLogMessage(tr("Maintenance operation failed (%1)").arg((quint32)dwStatus));
 				CheckResults(QList<SB_STATUS>() << SB_ERR(dwStatus));

@@ -37,17 +37,6 @@
 //HANDLE g_heap;
 BOOL g_isWow64 = TRUE;
 
-void* malloc(size_t size)
-{
-	return HeapAlloc(GetProcessHeap(), 0, size);
-}
-
-void free(void* ptr)
-{
-	if (nullptr != ptr)
-		HeapFree(GetProcessHeap(), 0, ptr);
-}
-
 #include "CMemPtr.h"
 
 /*int _wcsicmp(const wchar_t *string1, const wchar_t *string2)
@@ -329,7 +318,7 @@ extern "C" DWORD64 __cdecl GetModuleHandle64(const wchar_t* lpModuleName)
     {
         getMem64(&head, head.InLoadOrderLinks.Flink, sizeof(LDR_DATA_TABLE_ENTRY64));
 
-        wchar_t* tempBuf = (wchar_t*)malloc(head.BaseDllName.MaximumLength);
+        wchar_t* tempBuf = (wchar_t*)NEW(head.BaseDllName.MaximumLength);
         if (nullptr == tempBuf)
             return 0;
         WATCH(tempBuf);
@@ -373,19 +362,19 @@ DWORD64 getLdrGetProcedureAddress()
     IMAGE_EXPORT_DIRECTORY ied;
     getMem64(&ied, modBase + idd.VirtualAddress, sizeof(ied));
 
-    DWORD* rvaTable = (DWORD*)malloc(sizeof(DWORD)*ied.NumberOfFunctions);
+    DWORD* rvaTable = (DWORD*)NEW(sizeof(DWORD)*ied.NumberOfFunctions);
     if (nullptr == rvaTable)
         return 0;
     WATCH(rvaTable);
     getMem64(rvaTable, modBase + ied.AddressOfFunctions, sizeof(DWORD)*ied.NumberOfFunctions);
     
-    WORD* ordTable = (WORD*)malloc(sizeof(WORD)*ied.NumberOfFunctions);
+    WORD* ordTable = (WORD*)NEW(sizeof(WORD)*ied.NumberOfFunctions);
     if (nullptr == ordTable)
         return 0;
     WATCH(ordTable);
     getMem64(ordTable, modBase + ied.AddressOfNameOrdinals, sizeof(WORD)*ied.NumberOfFunctions);
 
-    DWORD* nameTable = (DWORD*)malloc(sizeof(DWORD)*ied.NumberOfNames);
+    DWORD* nameTable = (DWORD*)NEW(sizeof(DWORD)*ied.NumberOfNames);
     if (nullptr == nameTable)
         return 0;
     WATCH(nameTable);

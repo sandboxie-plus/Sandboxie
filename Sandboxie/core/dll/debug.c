@@ -407,14 +407,37 @@ void DbgPrint(const char* format, ...)
     va_list va_args;
     va_start(va_args, format);
     
-    char *tmp1 = Dll_AllocTemp(510);
+    char tmp1[510];
 
     extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
     P_vsnprintf(tmp1, 510, format, va_args);
 
     OutputDebugStringA(tmp1);
 
-    Dll_Free(tmp1);
+    va_end(va_args);
+}
+
+
+
+//---------------------------------------------------------------------------
+// DbgPrint
+//---------------------------------------------------------------------------
+
+
+void DbgTrace(const char* format, ...)
+{
+    va_list va_args;
+    va_start(va_args, format);
+    
+    char tmp1[510];
+    WCHAR tmp2[510];
+
+    extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+    P_vsnprintf(tmp1, 510, format, va_args);
+
+    Sbie_snwprintf((WCHAR *)tmp2, 510, L"%S", tmp1);
+
+    SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, tmp2, FALSE);
 
     va_end(va_args);
 }

@@ -5,17 +5,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.12 / 5.55.12] - 2022-02-xx (in development)
+
+### Changed
+- disabled Chrome and Firefox phishing entries in new sandboxes (by isaak654) [#1616](https://github.com/sandboxie-plus/Sandboxie/pull/1616)
+- updated Mozilla paths for the BlockSoftwareUpdaters template (by isaak654) [#1623](https://github.com/sandboxie-plus/Sandboxie/pull/1623)
 
 
 
-
-## [1.0.11 / 5.55.11] - 2022-02-14
+## [1.0.11 / 5.55.11] - 2022-02-13
 
 ### Added
 - added optional tray notification when a box content gets auto deleted
 - added FreeDownloadManager template
 - added warnign when opening unsandboxed regedit [#1606](https://github.com/sandboxie-plus/Sandboxie/issues/1606)
-- added missing languages files that were missing in official Qt 5.15.2 (by DevSplash) [#1605](https://github.com/sandboxie-plus/Sandboxie/pull/1605)
+- added languages files that were missing in official Qt 5.15.2 (by DevSplash) [#1605](https://github.com/sandboxie-plus/Sandboxie/pull/1605)
 
 ### Changed
 - the asynchroniouse box operations introduced in the last build are due to a pupular request now disabled by default

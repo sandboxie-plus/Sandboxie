@@ -2481,7 +2481,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
         <source>Close to Tray</source>
-        <translation>Свернуть в лоток</translation>
+        <translation>Свернуть в системный лоток</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="114"/>
@@ -4230,7 +4230,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="612"/>
         <source>Only Administrator user accounts can make changes</source>
-        <translation>Только учетные записи администраторов могут вносить изменения</translation>
+        <translation>Только учетная запись администратора может вносить изменения</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
@@ -4265,7 +4265,7 @@ Please note that this values are currently user specific and saved globally for 
 	<message>
         <location filename="Forms/SettingsWindow.ui" line="242"/>
         <source>Show boxes in tray list:</source>
-        <translation>Показать песочницы в списке лотков:</translation>
+        <translation>Показать песочницы в списке лотка:</translation>
     </message>
 	<message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>

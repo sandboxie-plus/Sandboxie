@@ -1489,7 +1489,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation>暫停強制程式規則</translation>
+        <translation>暫停強制沙箱程式規則</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="940"/>

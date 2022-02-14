@@ -809,7 +809,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除所有內容，包括所有快照</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -984,10 +984,6 @@ Full path: %4</source>
         <translation>顯示/隱藏</translation>
     </message>
     <message>
-        <source>Disable Forced Programs</source>
-        <translation type="vanished">停用強制沙箱程式</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="380"/>
         <source>&amp;Sandbox</source>
         <translation>沙箱(&amp;S)</translation>
@@ -1080,7 +1076,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部解除安裝</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -1314,14 +1310,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <translation>清理已刪除的範本...</translation>
     </message>
     <message>
-        <source>Sbie Directory: %1</source>
-        <translation type="vanished">沙箱目錄: %1</translation>
-    </message>
-    <message>
-        <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="vanished">Sandboxie-Plus 版本: %1 (%2)</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="942"/>
         <source>Loaded Config: %1</source>
         <translation>載入的配置: %1</translation>
@@ -1413,10 +1401,6 @@ No will choose: %2</source>
         <translation>終止全部並不再詢問</translation>
     </message>
     <message>
-        <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="vanished">請輸入停用強制執行程式的時間。</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1467"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus 已於可攜式模式中啟動，需建立必要的服務。將會提示管理員授權。</translation>
@@ -1464,12 +1448,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1870"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>複製沙箱資料檔案失敗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1875"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>移除舊沙箱資料檔案失敗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1881"/>
@@ -1505,22 +1489,22 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>暫停強制程式規則</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>安裝資料夾: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 版本: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="943"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>資料目錄: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1151"/>
@@ -1540,7 +1524,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入禁用強制程式規則的持續時間 (以秒為單位)。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1851"/>
@@ -1646,10 +1630,6 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1874"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>無法刪除由多個後續快照共享的快照</translation>
-    </message>
-    <message>
-        <source>Failed to remove old RegHive</source>
-        <translation type="vanished">刪除舊的 RegHive 失敗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1876"/>
@@ -2383,27 +2363,23 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="979"/>
         <location filename="Views/SbieView.cpp" line="983"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>同時刪除所有快照</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="vanished">您確定要刪除多個沙箱的內容？</translation>
+        <translation>您確定要刪除所選沙箱的內容嗎？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1007"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation>您確定要終止選定沙箱中的所有處理程序？</translation>
+        <translation>您確定要終止選定沙箱中的所有處理程序嗎？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1008"/>
         <location filename="Views/SbieView.cpp" line="1084"/>
         <source>Terminate without asking</source>
-        <translation>不詢問就終止</translation>
+        <translation>終止且不再詢問</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1048"/>
@@ -2579,12 +2555,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>恢復為空白沙箱</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (預設)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -3951,7 +3927,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">刪除內容</translation>
+        <translation>刪除內容</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="126"/>
@@ -3962,10 +3938,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/RecoveryWindow.ui" line="140"/>
         <source>Refresh</source>
         <translation>重新整理</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">全部刪除</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="97"/>
@@ -4177,7 +4149,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">僅管理員帳戶可使用停用強制沙箱程式命令</translation>
+        <translation>僅管理員帳戶可使用「暫停強制沙箱程式規則」命令</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
@@ -4376,12 +4348,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除快照內容時，將退回至此快照時的狀態，而不是無動作。</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>預設快照</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

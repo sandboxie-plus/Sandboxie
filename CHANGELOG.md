@@ -16,20 +16,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.11 / 5.55.11] - 2022-02-13
 
 ### Added
-- added optional tray notification when a box content gets auto deleted
+- added optional tray notification when box content gets auto-deleted
 - added FreeDownloadManager template
-- added warnign when opening unsandboxed regedit [#1606](https://github.com/sandboxie-plus/Sandboxie/issues/1606)
+- added warning when opening unsandboxed regedit [#1606](https://github.com/sandboxie-plus/Sandboxie/issues/1606)
 - added languages files that were missing in official Qt 5.15.2 (by DevSplash) [#1605](https://github.com/sandboxie-plus/Sandboxie/pull/1605)
 
 ### Changed
-- the asynchroniouse box operations introduced in the last build are due to a pupular request now disabled by default
+- the asynchronous box operations introduced in the last build are now disabled by default
 - moved sys tray options from general to shell integration tab
 - removed "AlwaysUseWin32kHooks", now these win32 hooks are always enabled
--- note: you can use "UseWin32kHooks=program.exe,n" to disable them for sellected programs
+-- Note: you can use "UseWin32kHooks=program.exe,n" to disable them for selected programs
 - updated Listary template to v6 (by isaak654) [#1610](https://github.com/sandboxie-plus/Sandboxie/pull/1610)
 
 ### Fixed
-- fixed compatybility issue with SECUROM [#1597](https://github.com/sandboxie-plus/Sandboxie/issues/1597)
+- fixed compatibility issue with SECUROM [#1597](https://github.com/sandboxie-plus/Sandboxie/issues/1597)
 - fixed modality issue [#1615](https://github.com/sandboxie-plus/Sandboxie/issues/1615)
 
 
@@ -47,7 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- if a box with a running operation shows a blinking hour glass icon, the context menu can be used to cancel the operation
 
 ### Changed
-- "HideHostProcess=program.exe" can now be used to hide sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
+- "HideHostProcess=program.exe" can now be used to hide Sandboxie services [#1336](https://github.com/sandboxie-plus/Sandboxie/issues/1336)
 - updater blocking is now done using a template called BlockSoftwareUpdaters
 - enhanced "StartProgram=..." makes "StartCommand=..." obsolete
 -- for same functionality as "StartCommand=...", use "StartProgram=%SbieHome%\Start.exe ..."
@@ -61,8 +61,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UI issue with main window state when switching always on top attribute [#1169](https://github.com/sandboxie-plus/Sandboxie/issues/1169)
 - fixed issue with box context menu in tray list [1106](https://github.com/sandboxie-plus/Sandboxie/issues/1106)
 - fixed issue with "AutoExec=..."
-- fixed issues where canceling box deletion operations didn't work [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
-- fixed issue with DPI scalling and color picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
+- fixed issues where cancelling box deletion operations didn't work [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
+- fixed issue with DPI scaling and colour picker dialog [#803](https://github.com/sandboxie-plus/Sandboxie/issues/803)
 
 ### Removed
 - removed "UseRpcMgmtSetComTimeout=AppXDeploymentClient.dll,y" used for Free Download Manager as it broke other things
@@ -316,12 +316,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added experimental use of ObRegisterCallbacks to filter object creation and duplication 
 -- this filtering is independent from the regular SbieDrv's syscall-based filtering, hence it also applies to App Compartments
 -- with it enabled, an application running in a compartment will not be able to manipulate processes running outside the sandbox
--- Note: this feature improves the security of unisolated App Compartment boxes
+-- Note: this feature improves the security of non-isolated App Compartment boxes
 -- to enable this feature, set "EnableObjectFiltering=y" in the global section and reload the driver
 -- when globally activated, the filtering can be disabled for individual boxes with "DisableObjectFilter=y"
 
 - added "DontOpenForBoxed=n", this option disables the discrimination of boxed processes for open file and open key directives
--- this behaviour does not really improve security anyways, but may be annoying, also app compartments always disable this
+-- this behaviour does not really improve security anyway, but may be annoying, also app compartments always disable this
 
 - added setting to entirely open access to the COM infrastructure
 

@@ -1204,6 +1204,11 @@ Full path: %4</source>
         <source>About Sandboxie-Plus</source>
         <translation>О Sandboxie-Plus</translation>
     </message>
+	<message>
+        <location filename="SandMan.cpp" line="481"/>
+        <source>Reset all GUI options</source>
+        <translation>Сбросить все настройки GUI</translation>
+    </message>
     <message>
         <location filename="SandMan.cpp" line="483"/>
         <source>Cleanup</source>
@@ -2081,7 +2086,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="107"/>
         <source>Explore Content</source>
-        <translation>Посмотреть содержимое</translation>
+        <translation>Открыть в проводнике</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="109"/>
@@ -2274,7 +2279,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="108"/>
         <source>Open Registry</source>
-        <translation>Открыть реестр</translation>
+        <translation>Открыть в редакторе реестра</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="132"/>
@@ -2458,10 +2463,25 @@ No will choose: %2</source>
         <source>Show Classic icon</source>
         <translation>Показать классический значок</translation>
     </message>
+	<message>
+        <location filename="Windows/SettingsWindow.cpp" line="113"/>
+        <source>All Boxes</source>
+        <translation>Все песочницы</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="114"/>
+        <source>Active + Pinned</source>
+        <translation>Активные + закрепленные</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="115"/>
+        <source>Pinned Only</source>
+        <translation>Только закрепленные</translation>
+    </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
         <source>Close to Tray</source>
-        <translation>Свернуть в лоток</translation>
+        <translation>Свернуть в системный лоток</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="114"/>
@@ -3666,6 +3686,68 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <source>Log Debug Output to the Trace Log</source>
         <translation>Записывать вывод отладки в журнал трассировки</translation>
     </message>
+	<message>
+        <location filename="Forms/OptionsWindow.ui" line="252"/>
+        <source>Always show this sandbox in the systray list (Pinned)</source>
+        <translation>Всегда показывать эту песочницу в системном лотке (закреплено)</translation>
+    </message>
+	<message>
+        <location filename="Forms/OptionsWindow.ui" line="2238"/>
+        <source>Triggers</source>
+        <translation>Триггеры</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2290"/>
+        <source>Event</source>
+        <translation>Событие</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2320"/>
+        <location filename="Forms/OptionsWindow.ui" line="2371"/>
+        <location filename="Forms/OptionsWindow.ui" line="2416"/>
+        <source>Run Command</source>
+        <translation>Выполнить комманду</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2339"/>
+        <source>Start Service</source>
+        <translation>Запустить сервис</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2346"/>
+        <source>These events are executed each time a box is started</source>
+        <translation>Эти события выполняются каждый раз при запуске песочницы</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2349"/>
+        <source>On Box Start</source>
+        <translation>При запуске песочницы</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2391"/>
+        <source>These commands are run UNBOXED just before the box content is deleted</source>
+        <translation>Эти команды запускаются вне песочницы непосредственно перед удалением содержимого песочницы.</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2394"/>
+        <source>On Box Delete</source>
+        <translation>При удалении песочницы</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2423"/>
+        <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
+        <translation>Эти команды выполняются только при инициализации песочницы. Чтобы они снова запустились, содержимое песочницы должно быть удалено.</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2426"/>
+        <source>On Box Init</source>
+        <translation>При инициализации песочницы</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2436"/>
+        <source>Here you can specify actions to be executed automatically on various box events.</source>
+        <translation>Здесь вы можете указать действия, которые будут выполняться автоматически при различных событиях песочницы.</translation>
+    </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2578"/>
         <source>Log all access events as seen by the driver to the resource access log.
@@ -4075,6 +4157,11 @@ Please note that this values are currently user specific and saved globally for 
         <source>Always use DefaultBox</source>
         <translation>Всегда использовать DefaultBox</translation>
     </message>
+	<message>
+        <location filename="Forms/SettingsWindow.ui" line="330"/>
+        <source>Show a tray notification when automatic box operations are started</source>
+        <translation>Показывать уведомление в трее при запуске автоматических операций с песочницами</translation>
+    </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Advanced Config</source>
@@ -4094,6 +4181,11 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="380"/>
         <source>Separate user folders</source>
         <translation>Раздельные папки пользователей</translation>
+    </message>
+	<message>
+        <location filename="Forms/SettingsWindow.ui" line="463"/>
+        <source>Activate Kernel Mode Object Filtering</source>
+        <translation>Активировать фильтрацию объектов в режиме ядра</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="407"/>
@@ -4138,7 +4230,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="612"/>
         <source>Only Administrator user accounts can make changes</source>
-        <translation>Только учетные записи администраторов могут вносить изменения</translation>
+        <translation>Только учетная запись администратора может вносить изменения</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="123"/>
@@ -4149,6 +4241,11 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <translation>Только учетная запись администратора может использовать команду &apos;Приостановить правила принудительных программ&apos;</translation>
+    </message>
+	<message>
+        <location filename="Forms/SettingsWindow.ui" line="160"/>
+        <source>Run box operations asynchronously whenever possible (like content deletion)</source>
+        <translation>Выполнять операции с песочницами асинхронно, когда это возможно (например, удаление содержимого)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>
@@ -4164,6 +4261,16 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="204"/>
         <source>Show Icon in Systray:</source>
         <translation>Показать значок в системном лотке:</translation>
+    </message>
+	<message>
+        <location filename="Forms/SettingsWindow.ui" line="242"/>
+        <source>Show boxes in tray list:</source>
+        <translation>Показать песочницы в списке лотка:</translation>
+    </message>
+	<message>
+        <location filename="Forms/SettingsWindow.ui" line="276"/>
+        <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
+        <translation>Добавить &apos;Запустить без песочницы&apos; в контекстное меню</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="367"/>

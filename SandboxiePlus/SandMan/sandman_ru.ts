@@ -2081,7 +2081,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="107"/>
         <source>Explore Content</source>
-        <translation>Посмотреть содержимое</translation>
+        <translation>Открыть в проводнике</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="109"/>
@@ -2274,7 +2274,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="108"/>
         <source>Open Registry</source>
-        <translation>Открыть реестр</translation>
+        <translation>Открыть в редакторе реестра</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="132"/>

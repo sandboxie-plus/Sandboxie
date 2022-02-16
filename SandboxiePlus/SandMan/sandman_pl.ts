@@ -53,12 +53,12 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="22"/>
         <source>Sandboxie-Plus - Create New Box</source>
-        <translation>Sandboxie-Plus - Utwórz nową piaskownicę</translation>
+        <translation>Sandboxie-Plus - Utwórz nowy boks</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="30"/>
         <source>New Box</source>
-        <translation>Nowa piaskownica</translation>
+        <translation>Nowy boks</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>
@@ -116,7 +116,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="15"/>
         <source>Display box name in title</source>
-        <translation>Dodaj nazwę piaskownicy do tytułów okien</translation>
+        <translation>Dodaj nazwę boksu do tytułów okien</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="17"/>
@@ -695,7 +695,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="257"/>
         <source>Open file recovery for this box</source>
-        <translation>Otwórz przywracanie folderów dla tej piaskownicy</translation>
+        <translation>Otwórz przywracanie folderów dla tego boksu</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="265"/>
@@ -710,12 +710,12 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="269"/>
         <source>Dismiss all from this box</source>
-        <translation>Odrzuć wszystkie dla tej piaskownicy</translation>
+        <translation>Odrzuć wszystkie dla tego boksu</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="270"/>
         <source>Disable quick recovery until the box restarts</source>
-        <translation>Deaktywuj szybkie przywracanie, aż do restartu piaskownicy</translation>
+        <translation>Deaktywuj szybkie przywracanie, aż do restartu boksu</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="294"/>
@@ -807,7 +807,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń wszystko, w tym wszystkie migawki</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -977,10 +977,6 @@ Full path: %4</source>
         <translation>Pokaż/Ukryj</translation>
     </message>
     <message>
-        <source>Disable Forced Programs</source>
-        <translation type="vanished">Wyłącz wymuszone programy</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="380"/>
         <source>&amp;Sandbox</source>
         <translation>&amp;Piaskownica</translation>
@@ -988,12 +984,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="381"/>
         <source>Create New Box</source>
-        <translation>Utwórz nową piaskownicę</translation>
+        <translation>Utwórz nowy boks</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="382"/>
         <source>Create Box Group</source>
-        <translation>Utwórz grupę piaskownic</translation>
+        <translation>Utwórz Grupę Boksów</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="384"/>
@@ -1073,7 +1069,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="406"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń wszystko</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="410"/>
@@ -1103,7 +1099,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="427"/>
         <source>Show Hidden Boxes</source>
-        <translation>Pokaż ukryte piaskownice</translation>
+        <translation>Pokaż ukryte boksy</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="429"/>
@@ -1133,17 +1129,17 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="602"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
-        <translation>Ta piaskownica zapewnia ulepszoną izolację bezpieczeństwa, jest odpowiednie do testowania niezaufanego oprogramowania.</translation>
+        <translation>Ten boks zapewnia ulepszoną izolację bezpieczeństwa, jest odpowiednie do testowania niezaufanego oprogramowania.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="606"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation>Ta piaskownica zapewnia standardową izolację, jest odpowiednia do uruchamiania oprogramowania w celu zwiększenia bezpieczeństwa.</translation>
+        <translation>Ten boks zapewnia standardową izolację, jest odpowiednia do uruchamiania oprogramowania w celu zwiększenia bezpieczeństwa.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="610"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation>Ta piaskownica nie wymusza izolacji, jest przeznaczona wyłącznie do użytku jako komora aplikacji do wirtualizacji oprogramowania.</translation>
+        <translation>Ten boks nie wymusza izolacji, jest przeznaczona wyłącznie do użytku jako komora aplikacji do wirtualizacji oprogramowania.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="615"/>
@@ -1152,25 +1148,17 @@ Full path: %4</source>
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
         <translation>
 
-Ta piaskownica uniemożliwia dostęp do wszystkich lokalizacji danych użytkownika, z wyjątkiem jawnie przyznanych w opcjach dostępu do zasobów.</translation>
-    </message>
-    <message>
-        <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="vanished">Wersja Sbie+: %1 (%2)</translation>
-    </message>
-    <message>
-        <source>The supporter certificate is expired</source>
-        <translation type="vanished">Wygasł certyfikat sponsora</translation>
+Ten boks uniemożliwia dostęp do wszystkich lokalizacji danych użytkownika, z wyjątkiem jawnie przyznanych w opcjach dostępu do zasobów.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1210"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>Wybrany zestaw funkcji jest dostępny tylko dla sponsorów projektu. Procesy rozpoczęte w pudełku z włączonym zestawem funkcji bez certyfikatu wsparcia zostaną zakończone po 5 minutach.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Zostań sponsorem&lt;/a&gt; i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
+        <translation>Wybrany zestaw funkcji jest dostępny tylko dla sponsorów projektu. Procesy rozpoczęte w boksie z włączonym zestawem funkcji bez certyfikatu wsparcia zostaną zakończone po 5 minutach.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Zostań sponsorem&lt;/a&gt; i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1442"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadź czas (w sekundach) wyłączenia reguł Programów wymuszonych.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1847"/>
@@ -1185,12 +1173,12 @@ Ta piaskownica uniemożliwia dostęp do wszystkich lokalizacji danych użytkowni
     <message>
         <location filename="SandMan.cpp" line="1870"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się skopiować plików danych boksu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1875"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się usunąć starych plików danych boksu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1881"/>
@@ -1200,7 +1188,7 @@ Ta piaskownica uniemożliwia dostęp do wszystkich lokalizacji danych użytkowni
     <message>
         <location filename="SandMan.cpp" line="2315"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;O Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Wersja %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 by DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
+        <translation>&lt;h3&gt;O Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Wersja %1&lt;/p&gt;&lt;p&gt;Prawo autorskie (c) 2020-2022 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2323"/>
@@ -1261,7 +1249,7 @@ Ta piaskownica uniemożliwia dostęp do wszystkich lokalizacji danych użytkowni
         <location filename="SandMan.cpp" line="245"/>
         <location filename="SandMan.cpp" line="386"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstrzymaj reguł Programów wymuszonych</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="451"/>
@@ -1366,17 +1354,17 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="940"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Katalog instalacji: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="941"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja Sandboxie-Plus: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="943"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Katalog danych: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1026"/>
@@ -1391,16 +1379,12 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="865"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation>Brakuje niektórych szablonów zgodności (%1), prawdopodobnie usunięto, czy chcesz je usunąć ze wszystkich skrzynek?</translation>
+        <translation>Brakuje niektórych szablonów zgodności (%1), prawdopodobnie usunięto, czy chcesz je usunąć ze wszystkich boksów?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="882"/>
         <source>Cleaned up removed templates...</source>
         <translation>Wyczyszczono usunięte szablony…</translation>
-    </message>
-    <message>
-        <source>Sbie Directory: %1</source>
-        <translation type="vanished">Folder Sbie: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="942"/>
@@ -1429,17 +1413,17 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1151"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program %1 uruchomiony w boksie %2 zostanie zakończony za 5 minut, ponieważ piaskownicy została skonfigurowana do korzystania z funkcji dostępnych wyłącznie dla sponsorów projektu.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1153"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Boks %1 jest skonfigurowany do używania funkcji dostępnych wyłącznie dla sponsorów projektu, te wstępne ustawienia będą ignorowane.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1154"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Zostań sponsorem projektu&lt;/a&gt;, i otrzymaj &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1182"/>
@@ -1499,10 +1483,6 @@ Nie, wybierze: %2</translation>
         <translation>W przyszłości zakańczaj bez pytania</translation>
     </message>
     <message>
-        <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="vanished">Proszę podać czas trwania wyłączenia programów wymuszonych.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1467"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus został uruchomiony w trybie przenośnym i musi utworzyć niezbędne usługi. Spowoduje to wyświetlenie pytania o uprawnienia administracyjne.</translation>
@@ -1520,7 +1500,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1681"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation>Czy ukryte okna z wiadomościami mają zostać zresetowane (tak), czy tylko wiadomości piaskownic (nie)?</translation>
+        <translation>Czy chcesz również zresetować ukrywany komunikat boksów (tak) czy tylko wszystkie komunikaty dziennika (nie)?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1717"/>
@@ -1610,7 +1590,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1866"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Przed usunięciem piaskownicy należy ją opróżnić.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1867"/>
@@ -1620,7 +1600,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1868"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>Tej operacji migawki nie można wykonać, gdy procesy są nadal uruchomione w piaskownicy.</translation>
+        <translation>Tej operacji migawki nie można wykonać, gdy procesy są nadal uruchomione w boksie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1869"/>
@@ -1646,10 +1626,6 @@ Nie, wybierze: %2</translation>
         <location filename="SandMan.cpp" line="1874"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Nie można usunąć migawki, która jest używana przez inne migawki</translation>
-    </message>
-    <message>
-        <source>Failed to remove old RegHive</source>
-        <translation type="vanished">Błąd przy usuwaniu gałęzi rejestru</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1876"/>
@@ -1760,38 +1736,37 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2361"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Certyfikat wsparcia jest nieważny dla tej kompilacji, proszę o zaktualizowanie certyfikatu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2364"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wygasł certyfikat wsparcia%1, proszę o zaktualizowanie certyfikatu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2365"/>
         <source>, but it remains valid for the current build</source>
-        <translation type="unfinished"></translation>
+        <translation>, ale zachowuje ważność dla obecnej kompilacji</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2367"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Certyfikat wspiercia wygaśnie za %1 dni, proszę o zaktualizowanie certyfikatu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2387"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdzanie certyfikatu...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2420"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie znaleziono certyfikatu na serwerze!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2425"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak dostępnego zaktualizowanego certyfikatu.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2654"/>
@@ -2034,7 +2009,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="528"/>
         <source> (%1)</source>
-        <translation>(%1)</translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -2042,7 +2017,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="77"/>
         <source>Create New Box</source>
-        <translation>Utwórz nową piaskownicę</translation>
+        <translation>Utwórz nowy boks</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="80"/>
@@ -2251,7 +2226,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="78"/>
         <source>Create Box Group</source>
-        <translation>Utwórz grupę piaskownic</translation>
+        <translation>Utwórz Grupę Boksów</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="79"/>
@@ -2308,7 +2283,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="135"/>
         <source>Move Box/Group</source>
-        <translation>Przenieś piaskownicę/grupę</translation>
+        <translation>Przenieś boks/grupę</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="136"/>
@@ -2372,8 +2347,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="946"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
-        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation type="unfinished">Czy naprawdę chcesz skasować wybrane piaskownice?</translation>
+        <translation>Czy na pewno chcesz skasować wybraną(-e) piaskownicę(-e)?&lt;br /&gt;&lt;br /&gt;Ostrzeżenie: zawartość boksu również zostanie usunięta!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="968"/>
@@ -2389,16 +2363,12 @@ Nie, wybierze: %2</translation>
         <location filename="Views/SbieView.cpp" line="979"/>
         <location filename="Views/SbieView.cpp" line="983"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Skasuj również wszystkie migawki</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="982"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="vanished">Czy naprawdę chcesz skasować zawartość wybranych piaskownic?</translation>
+        <translation>Czy na pewno chcesz skasować zawartość wszystkich wybranych piaskownic?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1007"/>
@@ -2430,7 +2400,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1144"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation>Ta piaskownica nie ma aktualnie ograniczonego dostępu do Internetu, czy chcesz je włączyć?</translation>
+        <translation>Ten boks nie ma aktualnie ograniczonego dostępu do Internetu, czy chcesz go włączyć?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1174"/>
@@ -2471,7 +2441,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak tłumaczenia</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2506,12 +2476,12 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="339"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wygasł ten certyfikat wsparcia, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten certyfikat wsparcia wygaśnie &lt;font color=&apos;red&apos;&gt;za %1 dni&lt;/font&gt;, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="534"/>
@@ -2521,7 +2491,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="536"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten certyfikat jest niestety nieaktualny.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="542"/>
@@ -2585,12 +2555,12 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>Powróć do pustego boksu</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (domyślne)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -2764,7 +2734,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="32"/>
         <source>SandboxiePlus new box</source>
-        <translation>Sandboxie-Plus - Nowa piaskownica</translation>
+        <translation>Sandboxie-Plus - Nowy boks</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="54"/>
@@ -2774,7 +2744,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Piaskownica izoluje system hosta od procesów uruchomionych wewnątrz piaskownicy, uniemożliwia im dokonywanie trwałych zmian w innych programach i danych w komputerze. Poziom izolacji ma wpływ na bezpieczeństwo użytkownika oraz kompatybilność z aplikacjami, dlatego też w zależności od wybranego typu piaskownicy, poziom izolacji będzie różny. Sandboxie może również chronić dane osobowe użytkownika przed dostępem do nich przez procesy działające pod jego nadzorem.</translation>
+        <translation>Piaskownica izoluje system hosta od procesów uruchomionych wewnątrz piaskownicy, uniemożliwia im dokonywanie trwałych zmian w innych programach i danych w komputerze. Poziom izolacji ma wpływ na bezpieczeństwo użytkownika oraz kompatybilność z aplikacjami, dlatego też w zależności od wybranego Typu Boksu, poziom izolacji będzie różny. Sandboxie może również chronić dane osobowe użytkownika przed dostępem do nich przez procesy działające pod jego nadzorem.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
@@ -3072,7 +3042,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="184"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation>Pokaż to pole w monicie wyboru „uruchom w polu”</translation>
+        <translation>Pokaż ten boks w monicie wyboru &apos;uruchom w boksie&apos;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="535"/>
@@ -3107,7 +3077,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="226"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;Więcej typów piaskownic&lt;/b&gt; jest dostępnych wyłącznie dla &lt;u&gt;sponsorów&lt;/u&gt;, pola o zwiększonej prywatności &lt;b&gt;&lt;font color=&apos;red&apos;&gt;chronią dane użytkownika przed nielegalnym dostępem&lt;/font&gt;&lt; /b&gt; przez programy w piaskownicy.&lt;br /&gt;Jeśli nie jesteś jeszcze sponsorem, rozważ &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot; &gt;to&lt;/a&gt;, aby otrzymać &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;.&lt;br /&gt;Możesz przetestować inne typy skrzynek tworząc nowe piaskownice tych typów, jednak procesy w nich będą automatycznie kończone po 5 minutach.</translation>
+        <translation>&lt;b&gt;Więcej Typów Boksów&lt;/b&gt; jest dostępnych wyłącznie dla &lt;u&gt;sponsorów&lt;/u&gt;, pola o zwiększonej prywatności &lt;b&gt;&lt;font color=&apos;red&apos;&gt;chronią dane użytkownika przed nielegalnym dostępem&lt;/font&gt;&lt; /b&gt; przez programy w piaskownicy.&lt;br /&gt;Jeśli nie jesteś jeszcze sponsorem, rozważ &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot; &gt;to&lt;/a&gt;, aby otrzymać &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;.&lt;br /&gt;Możesz przetestować inne typy skrzynek tworząc nowe piaskownice tych typów, jednak procesy w nich będą automatycznie kończone po 5 minutach.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="413"/>
@@ -3137,7 +3107,7 @@ Nie, wybierze: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="965"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
-        <translation>Możesz pogrupować programy i nadać im nazwę grupy. Grupy programów mogą być używane z niektórymi ustawieniami zamiast nazw programów. Grupy zdefiniowane dla piaskownicy zastępują grupy zdefiniowane w szablonach.</translation>
+        <translation>Możesz pogrupować programy i nadać im nazwę grupy. Grupy programów mogą być używane z niektórymi ustawieniami zamiast nazw programów. Grupy zdefiniowane dla boksu zastępują grupy zdefiniowane w szablonach.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1070"/>
@@ -3353,13 +3323,12 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>Block read access to the clipboard</source>
-        <oldsource>Allow access to Smart Cards</oldsource>
         <translation>Zablokuj dostęp do odczytu schowka</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2011"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation>Dodaj procesy w piaskownicy to obiektu zdań (wskazane)</translation>
+        <translation>Dodaj procesy w piaskownicy do obiektów zadań (zalecane)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2046"/>
@@ -3404,7 +3373,7 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2432"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
-        <translation>Ukryj procesy w piaskownicach przed procesami w innych piaskownicach</translation>
+        <translation>Nie zezwalaj procesom w trybie piaskownicy widzieć procesów działających w innych boksach</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2447"/>
@@ -3759,7 +3728,7 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2025"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation>Chroń procesy SYSTEM w piaskownicy przed nieuprzywilejowanymi procesami.</translation>
+        <translation>Chroń procesy SYSTEM w piaskownicy przed nieuprzywilejowanymi procesami</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2162"/>
@@ -3774,7 +3743,7 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2194"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
-        <translation>Izolacja bezpieczeństwa poprzez użycie silnie ograniczonego tokena procesu jest podstawowym sposobem Sandboxie wymuszania ograniczeń piaskownicy, gdy Izolacja jest wyłączona to piaskownica działa w trybie komory aplikacji, tj. nie zapewnia już niezawodnego bezpieczeństwa, tylko prosty podział aplikacji na komory.</translation>
+        <translation>Izolacja bezpieczeństwa poprzez użycie silnie ograniczonego tokena procesu jest podstawowym sposobem Sandboxie wymuszania ograniczeń piaskownicy, gdy Izolacja jest wyłączona to boks działa w trybie komory aplikacji, tj. nie zapewnia już niezawodnego bezpieczeństwa, tylko prosty podział aplikacji na komory.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2231"/>
@@ -3833,7 +3802,7 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
 Please note that this values are currently user specific and saved globally for all boxes.</source>
         <translation>Skonfiguruj lokalizacje folderów używane przez inne aplikacje.
 
-Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i zapisywane globalnie dla wszystkich skrzynek.</translation>
+Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i zapisywane globalnie dla wszystkich boksów.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2912"/>
@@ -3938,7 +3907,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="32"/>
         <source>SandboxiePlus - Recovery</source>
-        <oldsource>SandboxiePlus Settings</oldsource>
         <translation>Sandboxie-Plus - Przywracanie</translation>
     </message>
     <message>
@@ -3959,7 +3927,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">Skasuj zawartość</translation>
+        <translation>Skasuj zawartość</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="126"/>
@@ -3970,10 +3938,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/RecoveryWindow.ui" line="140"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Skasuj wszystko</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="97"/>
@@ -4001,7 +3965,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
         <source>Sandbox</source>
-        <translation>Sandbox</translation>
+        <translation>Piaskownica</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="66"/>
@@ -4030,7 +3994,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
         <source>General Config</source>
-        <oldsource>General Options</oldsource>
         <translation>Ogólne opcje</translation>
     </message>
     <message>
@@ -4056,22 +4019,22 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="720"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">Edytuj sekcję ini</translation>
+        <translation>Edytuj sekcję ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="729"/>
         <source>Save</source>
-        <translation type="unfinished">Zapisz</translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Edit ini</source>
-        <translation type="unfinished">Edytuj ini</translation>
+        <translation>Edytuj ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
@@ -4086,7 +4049,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="878"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wygasł ten certyfikat wsparcia, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="885"/>
@@ -4151,8 +4114,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="619"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
-        <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">Tylko konta użytkowników typu Administrator mogą używać polecenia Wyłącz Programy Wymuszone</translation>
+        <translation>Tylko konta użytkowników typu Administrator mogą używać polecenia Wstrzymaj reguł Programów wymuszonych</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="464"/>
@@ -4233,10 +4195,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Osoby wspierające projekt Sandboxie-Plus otrzymują &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;. To jest jak klucz licencyjny, ale dla wspaniałych ludzi używających oprogramowania open source :-)</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="vanished">Wygasł ten certyfikat wsparcia, proszę o zaktualizowanie certyfikatu.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>
@@ -4362,7 +4320,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="911"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
-        <translation type="unfinished"></translation>
+        <translation>W przyszłości nie powiadamiaj o wygaśnięciu certyfikatu</translation>
     </message>
 </context>
 <context>
@@ -4370,7 +4328,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="32"/>
         <source>SandboxiePlus - Snapshots</source>
-        <oldsource>SandboxiePlus Settings</oldsource>
         <translation>Sandboxie-Plus - Migawki</translation>
     </message>
     <message>
@@ -4391,12 +4348,12 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>Po usunięciu zawartości migawki zostanie ona zwrócona do tej migawki zamiast do żadnej.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślna migawka</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

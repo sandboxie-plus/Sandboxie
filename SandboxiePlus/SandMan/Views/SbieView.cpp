@@ -989,20 +989,12 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
-			SB_STATUS Status1 = pBox->TerminateAll();
-			if (Status1.IsError()) {
-				Results.append(Status1);
-				continue;
-			}
-
-			SB_PROGRESS Status = pBox->CleanBox();
-			if (Status.GetStatus() == OP_ASYNC)
-				theGUI->AddAsyncOp(Status.GetValue(), true, tr("Deleting %1 content").arg(pBox->GetName()));
-			else if (Status.IsError()) {
-				Results.append(Status);
-				continue;
-			}
-			Results.append(pBox->RemoveBox());
+			SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
+			if (Status.GetMsgCode() == SB_Canceled)
+				break;
+			if (!Status.IsError())
+				Status = pBox->RemoveBox();
+			Results.append(Status);
 		}	
 	}
 	else if (Action == m_pMenuCleanUp)
@@ -1041,27 +1033,10 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			}
 			else  
 			{
-				SB_STATUS Status1 = pBox->TerminateAll();
-				if (Status1.IsError()) {
-					Results.append(Status1);
-					continue;
-				}
-
-				if (!theGUI->DoDeleteCmd(pBox))
-					continue;
-
-				SB_PROGRESS Status;
-				if (!DeleteShapshots && pBox->HasSnapshots()) {
-					QString Default = pBox->GetDefaultSnapshot();
-					Status = pBox->SelectSnapshot(Default);
-				}
-				else // if there are no snapshots jut use the normal cleaning procedure
-					Status = pBox->CleanBox();
-
-				if (Status.GetStatus() == OP_ASYNC)
-					theGUI->AddAsyncOp(Status.GetValue());
-				else if (Status.IsError())
-					Results.append(Status);
+				SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eDefault, DeleteShapshots);
+				if (Status.GetMsgCode() == SB_Canceled)
+					break;
+				Results.append(Status);
 			}
 		}	
 	}

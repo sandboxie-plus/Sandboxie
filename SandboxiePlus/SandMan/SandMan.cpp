@@ -226,11 +226,13 @@ CSandMan::CSandMan(QWidget *parent)
 	}
 
 	// Tray
-	m_pTrayIcon = new QSystemTrayIcon(GetTrayIconName(), this);
-	m_pTrayIcon->setToolTip("Sandboxie-Plus");
+	m_pTrayIcon = new QSystemTrayIcon(GetTrayIcon(), this);
+	m_pTrayIcon->setToolTip(GetTrayText());
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
+	m_bIconBusy = false;
+	m_iDeletingContent = 0;
 
 	m_pTrayMenu = new QMenu();
 	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
@@ -278,7 +280,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pTraySeparator = m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
 
@@ -417,7 +419,7 @@ void CSandMan::CreateMenus()
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
-		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forced Programs Rules"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 		m_pMenuFile->addSeparator();
 		m_pMaintenance = m_pMenuFile->addMenu(CSandMan::GetIcon("Maintenance"), tr("&Maintenance"));
@@ -751,24 +753,60 @@ void CSandMan::dropEvent(QDropEvent* e)
 	RunSandboxed(Commands, "DefaultBox");
 }
 
-QIcon CSandMan::GetTrayIconName(bool isConnected)
+QIcon CSandMan::GetTrayIcon(bool isConnected)
 {
+	bool bClassic = (theConf->GetInt("Options/SysTrayIcon", 1) == 2);
+
 	QString IconFile;
 	if (isConnected) {
 		if (m_bIconEmpty)
 			IconFile = "IconEmpty";
 		else
 			IconFile = "IconFull";
-
-		if (m_bIconDisabled)
-			IconFile += "D";
 	} else 
 		IconFile = "IconOff";
+	if (bClassic) IconFile += "C";
 
-	if (theConf->GetInt("Options/SysTrayIcon", 1) == 2)
-		IconFile += "C";
+	QSize size = QSize(16, 16);
+	QPixmap result(size);
+	result.fill(Qt::transparent); // force alpha channel
+	QPainter painter(&result);
+	QPixmap base = GetIcon(IconFile, false).pixmap(size);
+	QPixmap overlay;
 
-	return GetIcon(IconFile, false);
+	if (m_bIconBusy) {
+		IconFile = "IconBusy";
+		if (bClassic) { // classic has a different icon instead of an overlay
+			IconFile += "C";
+			base = GetIcon(IconFile, false).pixmap(size);
+		}
+		else
+			overlay = GetIcon(IconFile, false).pixmap(size);
+	}
+
+	painter.drawPixmap(0, 0, base);
+	if(!overlay.isNull()) painter.drawPixmap(0, 0, overlay);
+
+	if (m_bIconDisabled) {
+		IconFile = "IconDFP";
+		if (bClassic) IconFile += "C";
+		overlay = GetIcon(IconFile, false).pixmap(size);
+		painter.drawPixmap(0, 0, overlay);
+	}
+
+	return QIcon(result);
+}
+
+QString CSandMan::GetTrayText(bool isConnected)
+{
+	QString Text = "Sandboxie-Plus";
+
+	if(!isConnected)
+		Text +=  tr(" - Driver/Service NOT Running!");
+	else if(m_iDeletingContent)
+		Text += tr(" - Deleting Sandbox Content");
+
+	return Text;
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)
@@ -777,6 +815,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		return;
 
 	bool bForceProcessDisabled = false;
+	bool bIconBusy = false;
 	bool bConnected = false;
 
 	if (theAPI->IsConnected())
@@ -807,12 +846,17 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		else 
 			ActiveProcesses = Processes.count();
 
-		if (m_bIconEmpty != (ActiveProcesses == 0) || m_bIconDisabled != bForceProcessDisabled)
+		if (theAPI->IsBusy() || m_iDeletingContent > 0)
+			bIconBusy = true;
+
+		if (m_bIconEmpty != (ActiveProcesses == 0)  || m_bIconBusy != bIconBusy || m_bIconDisabled != bForceProcessDisabled)
 		{
 			m_bIconEmpty = (ActiveProcesses == 0);
+			m_bIconBusy = bIconBusy;
 			m_bIconDisabled = bForceProcessDisabled;
 
-			m_pTrayIcon->setIcon(GetTrayIconName());
+			m_pTrayIcon->setIcon(GetTrayIcon());
+			m_pTrayIcon->setToolTip(GetTrayText());
 		}
 	}
 
@@ -900,18 +944,49 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
-bool CSandMan::DoDeleteCmd(const CSandBoxPtr &pBox)
+SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteShapshots)
 {
-	foreach(const QString& Value, pBox->GetTextList("OnBoxDelete", true, false, true)) {
-		QString Value2 = pBox->Expand(Value);
-		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
-		if (!pProgress.isNull()) {
-			AddAsyncOp(pProgress, true, tr("Executing OnBoxDelete: %1").arg(Value2));
-			if (pProgress->IsCanceled())
-				return false;
+	SB_STATUS Ret = SB_OK;
+	m_iDeletingContent++;
+
+	if (Mode != eAuto) {
+		Ret = pBox->TerminateAll();
+		if (Ret.IsError())
+			goto finish;
+	}
+
+	if (Mode != eForDelete) {
+		foreach(const QString & Value, pBox->GetTextList("OnBoxDelete", true, false, true)) {
+			QString Value2 = pBox->Expand(Value);
+			CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
+			if (!pProgress.isNull()) {
+				AddAsyncOp(pProgress, true, tr("Executing OnBoxDelete: %1").arg(Value2));
+				if (pProgress->IsCanceled()) {
+					Ret = CSbieStatus(SB_Canceled);
+					goto finish;
+				}
+			}
 		}
 	}
-	return true;
+	
+	{
+		SB_PROGRESS Status;
+		if (Mode != eForDelete && !DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
+			QString Current;
+			QString Default = pBox->GetDefaultSnapshot(&Current);
+			Status = pBox->SelectSnapshot(Mode == eAuto ? Current : Default);
+		}
+		else // if there are no snapshots just use the normal cleaning procedure
+			Status = pBox->CleanBox();
+
+		Ret = Status;
+		if (Status.GetStatus() == OP_ASYNC)
+			Ret = AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 Content").arg(pBox->GetName()));
+	}
+
+finish:
+	m_iDeletingContent--;
+	return Ret;
 }
 
 void CSandMan::OnBoxClosed(const QString& BoxName)
@@ -937,22 +1012,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 			CheckResults(QList<SB_STATUS>() << Status);
 		}
 		else
-		{
-			if (!DoDeleteCmd(pBox))
-				return;
-
-			SB_PROGRESS Status;
-			if (!DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
-				QString Current;
-				pBox->GetDefaultSnapshot(&Current);
-				Status = pBox->SelectSnapshot(Current);
-			}
-			else // if there are no snapshots just use the normal cleaning procedure
-				Status = pBox->CleanBox();
-
-			if (Status.GetStatus() == OP_ASYNC)
-				AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 content").arg(BoxName));
-		}
+			DeleteBoxContent(pBox, eAuto, DeleteShapshots);
 	}
 }
 
@@ -1080,9 +1140,11 @@ void CSandMan::OnStatusChanged()
 
 	this->setWindowTitle(appTitle);
 
-	m_pTrayIcon->setIcon(GetTrayIconName(isConnected));
+	m_pTrayIcon->setIcon(GetTrayIcon(isConnected));
+	m_pTrayIcon->setToolTip(GetTrayText(isConnected));
 	m_bIconEmpty = true;
 	m_bIconDisabled = false;
+	m_bIconBusy = false;
 
 	m_pNewBox->setEnabled(isConnected);
 	m_pNewGroup->setEnabled(isConnected);
@@ -1900,7 +1962,7 @@ void CSandMan::OnSetMonitoring()
 	//m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
 }
 
-bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait, const QString& InitialMsg)
+SB_STATUS CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait, const QString& InitialMsg)
 {
 	m_pAsyncProgress.insert(pProgress.data(), pProgress);
 	connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
@@ -1919,7 +1981,9 @@ bool CSandMan::AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait, const Q
 	if (pProgress->IsFinished()) // Note: since the operation runs asynchronously, it may have already finished, so we need to test for that
 		OnAsyncFinished(pProgress.data());
 
-	return !pProgress->IsCanceled();
+	if (pProgress->IsCanceled())
+		return CSbieStatus(SB_Canceled);
+	return SB_OK;
 }
 
 void CSandMan::OnAsyncFinished()

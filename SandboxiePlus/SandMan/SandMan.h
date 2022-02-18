@@ -38,9 +38,15 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	bool				DoDeleteCmd(const CSandBoxPtr &pBox);
+	enum EDelMode {
+		eDefault,
+		eAuto,
+		eForDelete
+	};
 
-	bool				AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
+	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteShapshots = true);
+
+	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
@@ -75,7 +81,8 @@ protected:
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	QIcon				GetTrayIconName(bool isConnected = true);
+	QIcon				GetTrayIcon(bool isConnected = true);
+	QString				GetTrayText(bool isConnected = true);
 
 	void				closeEvent(QCloseEvent* e);
 
@@ -285,6 +292,8 @@ private:
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	bool				m_bIconDisabled;
+	bool				m_bIconBusy;
+	int					m_iDeletingContent;
 
 	bool				m_bExit;
 

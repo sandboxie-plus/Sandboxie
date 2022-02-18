@@ -46,26 +46,27 @@
         <file>HelpingHand.png</file>
         <file>Actions/RegEdit.png</file>
         <file>Actions/Software.png</file>
-        <file>IconEmpty.png</file>
-        <file>IconEmptyD.png</file>
-        <file>IconFull.png</file>
-        <file>IconFullD.png</file>
         <file>Actions/Ampel.png</file>
         <file>Actions/Compatibility.png</file>
-        <file>IconOff.png</file>
         <file>Actions/Lock.png</file>
         <file>Actions/Shell.png</file>
-        <file>IconFullDC.png</file>
-        <file>IconEmptyDC.png</file>
-        <file>IconOffC.png</file>
-        <file>IconFullC.png</file>
-        <file>IconEmptyC.png</file>
         <file>Actions/Duplicate.png</file>
         <file>Actions/Up.png</file>
         <file>Actions/Down.png</file>
         <file>Actions/All.png</file>
         <file>Actions/Save.png</file>
         <file>Actions/Uninstall.png</file>
+        <file>IconBusy.png</file>
+        <file>IconBusyC.png</file>
+        <file>IconDFP.png</file>
+        <file>IconDFPC.png</file>
+        <file>IconEmpty.png</file>
+        <file>IconEmptyC.png</file>
+        <file>IconFull.png</file>
+        <file>IconFullC.png</file>
+        <file>IconOff.png</file>
+        <file>IconOffC.png</file>
+        <file>IconOffCx.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

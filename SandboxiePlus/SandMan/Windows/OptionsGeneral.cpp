@@ -325,7 +325,9 @@ void COptionsWindow::OnBoxTypChanged()
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
 		//SetTemplate("NoUACProxy", false);
-		//SetTemplate("DeviceSecurity", true);
+		//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0)
+		//	SetTemplate("DeviceSecurity", true); // requirers rule specificity
+		SetTemplate("RpcPortBindingsExt", false);
 		break;
 	case CSandBoxPlus::eDefaultPlus:
 	case CSandBoxPlus::eDefault:
@@ -345,6 +347,7 @@ void COptionsWindow::OnBoxTypChanged()
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
 		//SetTemplate("NoUACProxy", true);
 		//SetTemplate("DeviceSecurity", false);
+		SetTemplate("RpcPortBindingsExt", true);
 		break;
 	}
 

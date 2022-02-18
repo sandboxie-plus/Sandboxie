@@ -2290,12 +2290,12 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pProcess->InitProcessInfo();
 	}
 
-	if (pProcess->m_ParendPID == 0){
-		pProcess->m_ParendPID = ParentId;
-		pProcess->m_ImagePath = Path;
-	}
 	if(pProcess->m_ImageName.isEmpty())
 		pProcess->m_ImageName = Path.mid(Path.lastIndexOf("\\") + 1);
+	if (pProcess->m_ParendPID == 0)
+		pProcess->m_ParendPID = ParentId;
+	if (pProcess->m_ImagePath.isEmpty())
+		pProcess->m_ImagePath = Path;
 
 	return pProcess;
 }

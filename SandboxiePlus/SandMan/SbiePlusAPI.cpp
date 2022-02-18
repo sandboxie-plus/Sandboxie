@@ -7,6 +7,7 @@
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
+	m_JobCount = 0;
 }
 
 CSbiePlusAPI::~CSbiePlusAPI()
@@ -451,6 +452,7 @@ SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteShapshots, bool bOnAutoDel
 
 void CSandBoxPlus::AddJobToQueue(CBoxJob* pJob)
 {
+	theAPI->m_JobCount++;
 	m_JobQueue.append(QSharedPointer<CBoxJob>(pJob));
 	if (m_JobQueue.count() == 1)
 		StartNextJob();
@@ -476,6 +478,7 @@ next:
 	else
 	{
 		m_JobQueue.removeFirst();
+		theAPI->m_JobCount--;
 		if (Status.IsError()) {
 			m_JobQueue.clear();
 			theGUI->CheckResults(QList<SB_STATUS>() << Status);
@@ -494,6 +497,7 @@ void CSandBoxPlus::OnAsyncFinished()
 	m_StatusStr.clear();
 
 	QSharedPointer<CBoxJob> pJob = m_JobQueue.takeFirst();
+	theAPI->m_JobCount--;
 	CSbieProgressPtr pProgress = pJob->GetProgress();
 	if (pProgress->IsCanceled()) {
 		m_JobQueue.clear();

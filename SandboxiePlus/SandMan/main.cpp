@@ -97,6 +97,10 @@ int main(int argc, char *argv[])
 	// use a shared setting location when used in a business environment for easier administration
 	theConf = new CSettings("Sandboxie-Plus", g_CertInfo.business);
 
+#ifndef _DEBUG
+	InitMiniDumpWriter(L"SandMan", QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
+#endif
+
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 
 

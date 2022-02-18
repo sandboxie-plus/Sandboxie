@@ -172,19 +172,11 @@ bool CBoxedProcess::InitProcessInfo()
 	if (NT_SUCCESS(status)) {
 		m_ParendPID = (quint32)BasicInformation.InheritedFromUniqueProcessId;
 	}
-
-	int iMaxRetry = 10;
-retry:
+	
 	TCHAR filename[MAX_PATH];
-	if (DWORD size = GetModuleFileNameEx(ProcessHandle, NULL, filename, MAX_PATH))
+	DWORD dwSize = MAX_PATH;
+	if(QueryFullProcessImageNameW(ProcessHandle, 0, filename, &dwSize))
 		m_ImagePath = QString::fromWCharArray(filename);
-	else if (iMaxRetry-- > 0) {
-		// on win 7 this sometimes fails with invalid handle despite the handle being valid, 
-		// just wait a second and retry, this happend when comming from OnProcessBoxed
-		QThread::msleep(50);
-		goto retry;
-	}
-
 
 	BOOL isTargetWow64Process = FALSE;
 	IsWow64Process(ProcessHandle, &isTargetWow64Process);

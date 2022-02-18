@@ -193,6 +193,7 @@ static tMDWD s_pMDWD;
 static HMODULE s_hDbgHelpMod;
 static MINIDUMP_TYPE s_dumpTyp = MiniDumpNormal; // MiniDumpWithDataSegs or MiniDumpWithFullMemory
 static wchar_t s_szMiniDumpName[64];
+static wchar_t s_szMiniDumpPath[MAX_PATH];
 
 static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
 {  
@@ -214,7 +215,7 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
   wchar_t szMiniDumpFileName[128];
   wsprintf(szMiniDumpFileName, L"%s %s.dmp", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy hh-mm-ss,zzz").replace(QRegExp("[:*?<>|\"\\/]"), "_").toStdWString().c_str());
   
-  wchar_t szMiniDumpPath[MAX_PATH] = { 0 };
+  /*wchar_t szMiniDumpPath[MAX_PATH] = { 0 };
 
   HANDLE hFile = CreateFile(szMiniDumpFileName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
   if (hFile != INVALID_HANDLE_VALUE)
@@ -226,7 +227,14 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
 	  wchar_t szMiniDumpFilePath[MAX_PATH] = { 0 };
 	  wsprintf(szMiniDumpFilePath, L"%s\\%s.dmp", szMiniDumpPath, szMiniDumpFileName);
 	  hFile = CreateFile(szMiniDumpFilePath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-  }
+  }*/
+
+  wchar_t szMiniDumpPath[MAX_PATH];
+  wcscpy(szMiniDumpPath, s_szMiniDumpPath);
+  wcscat(szMiniDumpPath, L"\\");
+  wcscat(szMiniDumpPath, szMiniDumpFileName);
+
+  HANDLE hFile = CreateFile(szMiniDumpPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
   if (hFile != INVALID_HANDLE_VALUE)
   {
@@ -256,14 +264,16 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
   return EXCEPTION_CONTINUE_SEARCH;  // this will trigger the "normal" OS error-dialog
 }
 
-void InitMiniDumpWriter(const wchar_t* Name)
+void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
 {
   if (s_hDbgHelpMod != NULL)
     return;
 
   ASSERT(wcslen(Name) < ARRSIZE(s_szMiniDumpName));
   wcscpy(s_szMiniDumpName, Name);
- 
+  ASSERT(wcslen(Path) < ARRSIZE(s_szMiniDumpPath));
+  wcscpy(s_szMiniDumpPath, Path);
+
   // Initialize the member, so we do not load the dll after the exception has occured
   // which might be not possible anymore...
   s_hDbgHelpMod = LoadLibrary(L"dbghelp.dll");
@@ -369,7 +379,7 @@ void InstallSigAction(int sig)
     }
 }
 
-void InitMiniDumpWriter(const wchar_t* Name)
+void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
 {
     ASSERT(wcslen(Name) < ARRSIZE(s_szMiniDumpName));
     wcscpy(s_szMiniDumpName, Name);
@@ -384,7 +394,7 @@ quint64 GetCurCycle()
 }
 
 #else
-void InitMiniDumpWriter(const wchar_t* Name)
+void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
 {
 
 }

@@ -17,12 +17,17 @@ public:
 
 	virtual bool			IsRunningAsAdmin();
 
+	virtual bool			IsBusy() const { return m_JobCount > 0; }
+
 protected:
+	friend class CSandBoxPlus;
+
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
 
 	virtual CBoxedProcessPtr OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
 
+	int						m_JobCount;
 	QMultiMap<quint32, QString> m_WindowMap;
 };
 

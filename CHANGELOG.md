@@ -5,11 +5,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.12 / 5.55.12] - 2022-02-xx (in development)
 
-### Changed
+## [1.0.12 / 5.55.12] - 2022-02-??
+
+### Added
+- added mini dump creation to sandman.exe in case it crashes
+
+### Changed 
 - disabled Chrome and Firefox phishing entries in new sandboxes (by isaak654) [#1616](https://github.com/sandboxie-plus/Sandboxie/pull/1616)
 - updated Mozilla paths for the BlockSoftwareUpdaters template (by isaak654) [#1623](https://github.com/sandboxie-plus/Sandboxie/pull/1623)
+- reworked tray icon generation now using overlays, added busy overlay
+
+### Fixed
+- fixed issue with accessing network drives in privacy mode [#1617](https://github.com/sandboxie-plus/Sandboxie/issues/1617)
+- fixed issue with ping in compartment mode [1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
+- fixed sandman zu freezing when a log of processes are created and closed in a box
 
 
 

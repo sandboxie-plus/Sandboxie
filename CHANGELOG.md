@@ -14,12 +14,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed 
 - disabled Chrome and Firefox phishing entries in new sandboxes (by isaak654) [#1616](https://github.com/sandboxie-plus/Sandboxie/pull/1616)
 - updated Mozilla paths for the BlockSoftwareUpdaters template (by isaak654) [#1623](https://github.com/sandboxie-plus/Sandboxie/pull/1623)
+- renamed "Pause Forced Programs Rules" command to "Pause Forcing Programs" (Plus only)
 - reworked tray icon generation now using overlays, added busy overlay
 
 ### Fixed
 - fixed issue with accessing network drives in privacy mode [#1617](https://github.com/sandboxie-plus/Sandboxie/issues/1617)
-- fixed issue with ping in compartment mode [1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
-- fixed sandman zu freezing when a log of processes are created and closed in a box
+- fixed issue with ping in compartment mode [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
+- fixed SandMan UI freezing when a lot of processes are created and closed in a box
 
 
 
@@ -41,6 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed compatibility issue with SECUROM [#1597](https://github.com/sandboxie-plus/Sandboxie/issues/1597)
 - fixed modality issue [#1615](https://github.com/sandboxie-plus/Sandboxie/issues/1615)
+- fixed special form of OpenWinClass in Templates.ini [d6d9588](https://github.com/sandboxie-plus/Sandboxie/commit/d6d95889a91d31dd55dd2b2d136d8f80c9a8ea71)
 
 
 
@@ -94,12 +96,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reworked breakout mechanism to be service based and not allowing the parent process to access the broken out child process
 - enabled creation of directory junctions for sandboxed processes [#1375](https://github.com/sandboxie-plus/Sandboxie/issues/1375)
-- restored back AutoRecover=y on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
+- restored back "AutoRecover=y" on box creation [#1554](https://github.com/sandboxie-plus/Sandboxie/discussions/1554)
 - improved snapshot support [#1220](https://github.com/sandboxie-plus/Sandboxie/issues/1220)
 - renamed "Disable Forced Programs" command to "Pause Forced Programs Rules" (Plus only)
 
 ### Fixed
-- fixed BreakoutProcess not working with EnableObjectFiltering=y
+- fixed BreakoutProcess not working with "EnableObjectFiltering=y"
 - FIXED SECURITY ISSUE: when starting *COMSRV* unboxed, the returned process handle had full access
 - fixed issue with progress dialog [#1562](https://github.com/sandboxie-plus/Sandboxie/issues/1562)
 - fixed issue with handling directory junctions in Sandboxie [#1396](https://github.com/sandboxie-plus/Sandboxie/issues/1396)
@@ -214,7 +216,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- it can be enabled per process or globally using "EnableMiniDump=process.exe,y" or "EnableMiniDump=y" respectively
 -- the dump flags can be set as hex with "MiniDumpFlags=0xAABBCCDD"
 -- a preselected flag set for a verbose dump can be set with "MiniDumpFlags=Extended"
--- Note: created dump files are located at: `C:\Sandbox\%SANDBOX%`
+-- Note: created dump files are located at: `C:\Sandbox\%USER%\%SANDBOX%`
 - added template support for Osiris and Slimjet browsers (by Dyras) [#1454](https://github.com/sandboxie-plus/Sandboxie/pull/1454)
 
 ### Changed
@@ -1614,9 +1616,9 @@ Fixed issue with Windows 7
 ## [0.2.2 / 5.41.2] - 2020-06-19
 
 ### Added
-- added option SeparateUserFolders=n to no longer have the user profile files stored separately in the sandbox
-- added SandboxieLogon=y it makes processes run under the SID of the "Sandboxie" user instead of the Anonymous user
--- Note: the global option AllowSandboxieLogon=y must be enabled, the "Sandboxie" user account must be manually created first and the driver reloaded, else process start will fail
+- added option "SeparateUserFolders=n" to no longer have the user profile files stored separately in the sandbox
+- added "SandboxieLogon=y" - it makes processes run under the SID of the "Sandboxie" user instead of the Anonymous user
+-- Note: the global option "AllowSandboxieLogon=y" must be enabled, the "Sandboxie" user account must be manually created first and the driver reloaded, else process start will fail
 - improved debugging around process creation errors in the driver
 
 ### Fixed

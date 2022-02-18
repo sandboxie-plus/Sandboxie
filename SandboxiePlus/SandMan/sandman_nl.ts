@@ -6,7 +6,7 @@
     <message>
         <location filename="BoxJob.h" line="35"/>
         <source>Deleting Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud verwijderen</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@
     <message>
         <location filename="BoxJob.h" line="56"/>
         <source>OnDelete: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij verwijdering: %1</translation>
     </message>
 </context>
 <context>
@@ -152,12 +152,12 @@
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
         <source>Read Only</source>
         <oldsource>Boxed Only</oldsource>
-        <translation type="unfinished">Alleen geboxt</translation>
+        <translation>Alleen-lezen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="247"/>
         <source>Box Only (Write Only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen box (alleen schrijven)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="249"/>
@@ -253,43 +253,39 @@
         <translation>Sjabloonwaarden kunnen niet worden verwijderd.</translation>
     </message>
     <message>
-        <source>Please enter an auto exec command</source>
-        <translation type="vanished">Voer een opdracht voor automatisch uitvoeren in</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="336"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="340"/>
         <source>On Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij starten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="337"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="345"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="349"/>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdracht uitvoeren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="341"/>
         <source>Start Service</source>
-        <translation type="unfinished">Service starten</translation>
+        <translation>Service starten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="344"/>
         <source>On Init</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij initialisatie</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="348"/>
         <source>On Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij verwijderen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="359"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="381"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="392"/>
         <source>Please enter the command line to be executed</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer de uit te voeren opdrachtregel in</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="411"/>
@@ -388,30 +384,14 @@
         <translation>Kleur selecteren</translation>
     </message>
     <message>
-        <source>Please enter a program path</source>
-        <translation type="vanished">Voer een programmapad in</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsGeneral.cpp" line="239"/>
         <source>Select Program</source>
         <translation>Programma selecteren</translation>
     </message>
     <message>
-        <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="vanished">Uitvoerbare bestanden (*.exe *.cmd);;Alle bestanden (*.*)</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="370"/>
         <source>Please enter a service identifier</source>
         <translation>Een service-identifier invoeren</translation>
-    </message>
-    <message>
-        <source>Service</source>
-        <translation type="vanished">Service</translation>
-    </message>
-    <message>
-        <source>Program</source>
-        <translation type="vanished">Programma</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="239"/>
@@ -859,7 +839,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles verwijderen inclusief alle snapshots</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -1034,10 +1014,6 @@ Volledig pad: %4</translation>
         <translation>Weergeven/verbergen</translation>
     </message>
     <message>
-        <source>Disable Forced Programs</source>
-        <translation type="vanished">Geforceerde programma&apos;s uitschakelen</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="414"/>
         <source>&amp;Sandbox</source>
         <translation>Sandbox</translation>
@@ -1130,7 +1106,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="440"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles deïnstalleren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="444"/>
@@ -1210,7 +1186,7 @@ Volledig pad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="481"/>
         <source>Reset all GUI options</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle GUI-opties herstellen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="483"/>
@@ -1329,17 +1305,17 @@ Deze box verhindert de toegang tot alle gegevenslocaties van gebruikers, behalve
     <message>
         <location filename="SandMan.cpp" line="909"/>
         <source>Executing OnBoxDelete: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>OnBoxDelete uitvoeren: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="931"/>
         <source>Auto deleting content of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud van %1 automatisch verwijderen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="954"/>
         <source>Auto Deleting %1 content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud van %1 automatisch verwijderen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1629"/>
@@ -1357,10 +1333,6 @@ Deze box verhindert de toegang tot alle gegevenslocaties van gebruikers, behalve
         <location filename="SandMan.cpp" line="1631"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Starten van vereiste Sandboxie-onderdelen mislukt</translation>
-    </message>
-    <message>
-        <source>Maintenance operation %1</source>
-        <translation type="vanished">Onderhoudsbewerking%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1638"/>
@@ -1383,14 +1355,6 @@ Deze box verhindert de toegang tot alle gegevenslocaties van gebruikers, behalve
         <translation>Verwijderde sjablonen opgeruimd...</translation>
     </message>
     <message>
-        <source>Sbie Directory: %1</source>
-        <translation type="vanished">Sbie-map: %1</translation>
-    </message>
-    <message>
-        <source>Sbie+ Version: %1 (%2)</source>
-        <translation type="vanished">Sbie+ versie: %1 (%2)</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="984"/>
         <source>Loaded Config: %1</source>
         <translation>Geladen config: %1</translation>
@@ -1408,10 +1372,6 @@ No will choose: %2</source>
         <translation>Sandboxie-Plus is in portable modus gestart. Wilt u de Sandbox-map in zijn bovenliggende map plaatsen?
 Ja zal %1 kiezen
 Nee zal %2 kiezen</translation>
-    </message>
-    <message>
-        <source>The supporter certificate is expired</source>
-        <translation type="vanished">Het ondersteuningscertificaat is verlopen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1066"/>
@@ -1486,10 +1446,6 @@ Nee zal %2 kiezen</translation>
         <translation>Alles beëindigen zonder vragen</translation>
     </message>
     <message>
-        <source>Please enter the duration for disabling forced programs.</source>
-        <translation type="vanished">Geef de duur op voor het uitschakelen van geforceerde programma&apos;s</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="1510"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus is gestart in portable modus en moet de nodige services aanmaken. Dit zal om administratieve rechten vragen.</translation>
@@ -1530,14 +1486,19 @@ Nee zal %2 kiezen</translation>
         <translation>Onbekend</translation>
     </message>
     <message>
+        <location filename="SandMan.cpp" line="1994"/>
+        <source>A sandbox must be emptied before it can be deleted.</source>
+        <translation>Een sandbox moet leeggemaakt worden voordat hij kan verwijderd worden.</translation>
+    </message>
+    <message>
         <location filename="SandMan.cpp" line="1998"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëren van gegevensbestanden van box mislukt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2003"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen van oude gegevensbestanden van box mislukt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2010"/>
@@ -1573,22 +1534,22 @@ Nee zal %2 kiezen</translation>
         <location filename="SandMan.cpp" line="281"/>
         <location filename="SandMan.cpp" line="420"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Regels voor pauzeren van geforceerde programma&apos;s</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="982"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Installatiemap: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="983"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus versie %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="985"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegevensmap: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1191"/>
@@ -1608,12 +1569,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="1486"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef de duur op, in seconden, voor het uitschakelen van regels voor geforceerde programma&apos;s.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1633"/>
         <source>Maintenance operation failed (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderhoudsbewerking mislukt (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1978"/>
@@ -1683,17 +1644,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="1991"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle sandbox-processen moeten worden gestopt voordat de inhoud van de box kan worden verwijderd</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1992"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Fout bij het verwijderen van de sandbox-map: %1</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="1994"/>
-        <source>A sandbox must be emptied before it can be deleted.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1995"/>
@@ -1731,10 +1687,6 @@ Nee zal %2 kiezen</translation>
         <translation>Kan geen snapshot verwijderen die gedeeld is door meerdere latere snapshots</translation>
     </message>
     <message>
-        <source>Failed to remove old RegHive</source>
-        <translation type="vanished">Verwijderen van oude RegHive mislukt</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2004"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>U hebt geen toestemming om de configuratie bij te werken in sectie &apos;%1&apos;</translation>
@@ -1762,7 +1714,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="2009"/>
         <source>The operation was canceled by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>De bewerking is geannuleerd door de gebruiker</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2030"/>
@@ -1848,38 +1800,38 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="SandMan.cpp" line="2505"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ondersteunerscertificaat is niet geldig voor deze build. Haal een bijgewerkt certificaat op</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2508"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Het ondersteunerscertificaat is vervallen%1. Haal een bijgewerkt certificaat op.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2509"/>
         <source>, but it remains valid for the current build</source>
-        <translation type="unfinished"></translation>
+        <translation>, maar het blijft geldig voor de huidige build</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2511"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ondersteunerscertificaat vervalt over %1 dagen. Haal een bijgewerkt certificaat op.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2531"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Certificaat controleren...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2564"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen certificaat gevonden op de server!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2569"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is geen bijgewerkt certificaat beschikbaar.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2798"/>
@@ -2348,7 +2300,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Stop Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerkingen stoppen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
@@ -2446,12 +2398,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="878"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>WAARSCHUWING: de geopende register-editor is niet gesandboxt, wees voorzichtig en doe alleen veranderingen op de voorgeselecteerde sandbox-locaties.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="879"/>
         <source>Don&apos;t show this warning in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze waarschuwing in de toekomst niet weergeven</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="934"/>
@@ -2472,12 +2424,12 @@ Nee zal %2 kiezen</translation>
         <location filename="Views/SbieView.cpp" line="987"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation type="unfinished">Wilt u de geselecteerde sandbox(en) echt verwijderen?</translation>
+        <translation>Wilt u de geselecteerde sandbox(en) echt verwijderen?&lt;br /&gt;&lt;br /&gt;Waarschuwing: de inhoud van de box wordt ook verwijderd!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1000"/>
         <source>Deleting %1 content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud van %1 verwijderen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1015"/>
@@ -2493,16 +2445,12 @@ Nee zal %2 kiezen</translation>
         <location filename="Views/SbieView.cpp" line="1026"/>
         <location filename="Views/SbieView.cpp" line="1030"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Ook alle snapshots verwijderen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1029"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the content of multiple sandboxes?</source>
-        <translation type="vanished">Wilt u echt de inhoud van meerdere sandboxen verwijderen?</translation>
+        <translation>Wilt u echt de inhoud van alle geselecteerde sandboxen verwijderen?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1073"/>
@@ -2575,7 +2523,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen vertaling</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2595,17 +2543,17 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
         <source>All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle boxen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="114"/>
         <source>Active + Pinned</source>
-        <translation type="unfinished"></translation>
+        <translation>Actief + vastgezet</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="115"/>
         <source>Pinned Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen vastgezet</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="117"/>
@@ -2625,22 +2573,22 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="221"/>
         <source>Run &amp;Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ge&amp;sandboxt uitvoeren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit ondersteunerscertificaat is vervallen. &lt;a href=&quot;sbie://update/cert&quot;&gt;Haal een bijgewerkt certificaat op&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="360"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit ondersteunerscertificaat &lt;font color=&apos;red&apos;&gt;vervalt over %1 dagen&lt;/font&gt;. &lt;a href=&quot;sbie://update/cert&quot;&gt;Haal een bijgewerkt certificaat op&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="397"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-gesandboxt uitvoeren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="562"/>
@@ -2650,7 +2598,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="564"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit certificaat is spijtig genoeg verouderd.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="570"/>
@@ -2714,12 +2662,12 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>Terugzetten naar lege box</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (standaard)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -3144,28 +3092,12 @@ Nee zal %2 kiezen</translation>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>Auto Start</source>
-        <translation type="vanished">Automatisch starten</translation>
-    </message>
-    <message>
-        <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation type="vanished">Hier kunt u programma&apos;s en/of services opgeven die automatisch moeten gestart worden in de sandbox wanneer hij geactiveerd wordt</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="936"/>
         <location filename="Forms/OptionsWindow.ui" line="1035"/>
         <location filename="Forms/OptionsWindow.ui" line="1571"/>
         <location filename="Forms/OptionsWindow.ui" line="1826"/>
         <source>Type</source>
         <translation>Type</translation>
-    </message>
-    <message>
-        <source>Program/Service</source>
-        <translation type="vanished">Programma/service</translation>
-    </message>
-    <message>
-        <source>Add service</source>
-        <translation type="vanished">Service toevoegen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="824"/>
@@ -3255,7 +3187,7 @@ Nee zal %2 kiezen</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
         <source>Always show this sandbox in the systray list (Pinned)</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze sandbox altijd weergeven in de systeemvak-lijst (vastgezet)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
@@ -3737,73 +3669,61 @@ Het proces-overeenstemmingsniveau heeft een hogere prioriteit dan de specificite
         <translation>Toegangsisolatie</translation>
     </message>
     <message>
-        <source>Auto Exec</source>
-        <translation type="vanished">Automatisch uitvoeren</translation>
-    </message>
-    <message>
-        <source>Add Command</source>
-        <translation type="vanished">Opdracht toevoegen</translation>
-    </message>
-    <message>
-        <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation type="vanished">Hier kunt u een lijst van opdrachten opgeven die elke keer dat de zandbak voor het eerst wordt gevuld, worden uitgevoerd.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
         <source>Triggers</source>
-        <translation type="unfinished"></translation>
+        <translation>Triggers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2290"/>
         <source>Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebeurtenis</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <location filename="Forms/OptionsWindow.ui" line="2371"/>
         <location filename="Forms/OptionsWindow.ui" line="2416"/>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdracht uitvoeren</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2339"/>
         <source>Start Service</source>
-        <translation type="unfinished">Service starten</translation>
+        <translation>Service starten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2346"/>
         <source>These events are executed each time a box is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze gebeurtenissen worden uitgevoerd telkens wanneer een box wordt gestart</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2349"/>
         <source>On Box Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij starten van box</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2391"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze opdrachten worden NIET-GEBOXT uitgevoerd vlak voordat de inhoud van de box verwijderd wordt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2394"/>
         <source>On Box Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij verwijderen van box</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2423"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze opdrachten worden alleen uitgevoerd wanneer een box geïnitialiseerd wordt. Om ze opnieuw te laten uitvoeren, moet de inhoud van de box verwijderd worden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2426"/>
         <source>On Box Init</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij initialisatie van de box</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2436"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kunt u aangeven welke acties automatisch moeten worden uitgevoerd bij diverse boxgebeurtenissen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2461"/>
@@ -4140,7 +4060,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">Inhoud verwijderen</translation>
+        <translation>Inhoud verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="126"/>
@@ -4151,10 +4071,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/RecoveryWindow.ui" line="140"/>
         <source>Refresh</source>
         <translation>Vernieuwen</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Alles verwijderen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="97"/>
@@ -4285,7 +4201,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="160"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
-        <translation type="unfinished"></translation>
+        <translation>Box-handelingen zoveel mogelijk asynchroon uitvoeren (zoals het verwijderen van inhoud)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="169"/>
@@ -4295,7 +4211,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="242"/>
         <source>Show boxes in tray list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxen weergeven in systeemvak-lijst:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="269"/>
@@ -4305,12 +4221,12 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;Niet-gesandboxt uitvoeren&apos; toevoegen aan het contextmenu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="330"/>
         <source>Show a tray notification when automatic box operations are started</source>
-        <translation type="unfinished"></translation>
+        <translation>Een systeemvak-melding weergeven wanneer automatische box-bewerkingen gestart worden</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="376"/>
@@ -4320,7 +4236,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="463"/>
         <source>Activate Kernel Mode Object Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Kernel-mode objectfiltering inschakelen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="527"/>
@@ -4391,7 +4307,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="682"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">Alleen administrator-gebruikersaccounts kunnen de opdracht gebruiken om geforceerde programma&apos;s uit te schakelen.</translation>
+        <translation>Alleen administrator-gebruikersaccounts kunnen de opdracht gebruiken om regels voor geforceerde programma&apos;s te pauzeren.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="423"/>
@@ -4412,10 +4328,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="430"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Windows Filtering Platform gebruiken om netwerktoegang te beperken</translation>
-    </message>
-    <message>
-        <source>Activate Kernel Mode Object Filtering (experimental)</source>
-        <translation type="vanished">Kernel-mode objectfiltering inschakelen (experimenteel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
@@ -4501,22 +4413,22 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="783"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">Ini-sectie bewerken</translation>
+        <translation>Ini-sectie bewerken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="792"/>
         <source>Save</source>
-        <translation type="unfinished">Opslaan</translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="799"/>
         <source>Edit ini</source>
-        <translation type="unfinished">Ini bewerken</translation>
+        <translation>Ini bewerken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="825"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="840"/>
@@ -4526,7 +4438,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="941"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit ondersteunerscertificaat is vervallen. &lt;a href=&quot;sbie://update/cert&quot;&gt;Haal een bijgewerkt certificaat op&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="961"/>
@@ -4536,7 +4448,7 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SettingsWindow.ui" line="974"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
-        <translation type="unfinished"></translation>
+        <translation>In de toekomst geen melding maken over het verlopen van certificaten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="870"/>
@@ -4552,10 +4464,6 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <location filename="Forms/SettingsWindow.ui" line="890"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Ondersteuners van het Sandboxie-Plus project ontvangen een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;ondersteunerscertificaat&lt;/a&gt;. Het is als een licentiesleutel, maar dan voor geweldige mensen die open source software gebruiken :-)</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please get an updated certificate.</source>
-        <translation type="vanished">Dit ondersteunerscertificaat is vervallen. Haal een bijgewerkt certificaat op.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="900"/>
@@ -4593,12 +4501,12 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer de inhoud van een snapshot wordt verwijderd, zal het naar deze snapshot worden teruggebracht in plaats van naar geen enkele.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard snapshot</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

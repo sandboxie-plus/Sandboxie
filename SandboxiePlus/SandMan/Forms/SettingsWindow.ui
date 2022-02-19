@@ -679,7 +679,7 @@
            <item row="3" column="1">
             <widget class="QCheckBox" name="chkAdminOnlyFP">
              <property name="text">
-              <string>Only Administrator user accounts can use Pause Forced Programs Rules command</string>
+              <string>Only Administrator user accounts can use Pause Forcing Programs command</string>
              </property>
             </widget>
            </item>

@@ -511,13 +511,16 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 	}
 }
 
-QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QString& Parent = "")
+QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QString& Parent = "", QSet<QString> Test = QSet<QString>())
 {
 	QStringList Grouping;
 	foreach(const QString& Name, m_Groups[Parent])
 	{
+		if (Test.contains(Name))
+			continue; // recursion, skil
+		Test.insert(Name);
 		if (m_Groups.contains(Name))
-			Grouping.append(Name + "(" + CSbieView__SerializeGroup(m_Groups, Name) + ")");
+			Grouping.append(Name + "(" + CSbieView__SerializeGroup(m_Groups, Name, Test) + ")");
 		else
 			Grouping.append(Name);
 	}

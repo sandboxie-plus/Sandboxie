@@ -530,14 +530,29 @@ void CSettingsWindow::SaveSettings()
 
 			QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 			if (!Certificate.isEmpty()) {
-				QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
-				QFile CertFile(TempPath);
-				if (CertFile.open(QFile::WriteOnly)) {
-					CertFile.write(Certificate);
-					CertFile.close();
-				}
 
-				WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+				bool bLooksOk = true;
+				if (GetArguments(g_Certificate, L'\n', L':').value("NAME").isEmpty()) // mandatory
+					bLooksOk = false;
+				//if (GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY").isEmpty())
+				//	bLooksOk = false;
+				if (GetArguments(g_Certificate, L'\n', L':').value("SIGNATURE").isEmpty()) // absolutely mandatory
+					bLooksOk = false;
+
+				if (bLooksOk) {
+					QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+					QFile CertFile(TempPath);
+					if (CertFile.open(QFile::WriteOnly)) {
+						CertFile.write(Certificate);
+						CertFile.close();
+					}
+
+					WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+				}
+				else {
+					Certificate.clear();
+					QMessageBox::critical(this, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate not just a portion of it."));
+				}
 			}
 			else if(!g_Certificate.isEmpty()){
 				WindowsMoveFile(CertPath.replace("/", "\\"), "");

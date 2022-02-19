@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 	theConf = new CSettings("Sandboxie-Plus", g_CertInfo.business);
 
 #ifndef _DEBUG
-	InitMiniDumpWriter(L"SandMan", QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
+	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
 #endif
 
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));

@@ -1428,8 +1428,7 @@ Esta caja previene el acceso a todas las ubicaciones de datos de usaurio, expect
     <message>
         <location filename="SandMan.cpp" line="2508"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>El certificado de patrocinador ha expirado %1, por favor obtenga una actualizacion de certificado</translation>
+        <translation>El certificado de patrocinador ha expirado%1, por favor obtenga una actualizacion de certificado</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2509"/>

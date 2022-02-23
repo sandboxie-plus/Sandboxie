@@ -35,6 +35,7 @@ public slots:
 	void apply();
 
 	void showCompat();
+	void showSupport();
 
 private slots:
 	void OnChange();
@@ -56,7 +57,14 @@ private slots:
 	void OnAddCompat();
 	void OnDelCompat();
 
+	void SetIniEdit(bool bEnable);
+	void OnEditIni();
+	void OnSaveIni();
+	void OnCancelEdit();
+
+
 	void CertChanged();
+	void UpdateCert();
 
 protected:
 	void closeEvent(QCloseEvent *e);
@@ -65,6 +73,9 @@ protected:
 
 	void	LoadSettings();
 	void	SaveSettings();
+
+	void	LoadIniSection();
+	void	SaveIniSection();
 
 	int 	m_CompatLoaded;
 	QString m_NewPassword;
@@ -76,7 +87,29 @@ private:
 	Ui::SettingsWindow ui;
 };
 
+void CSettingsWindow__AddContextMenu();
+
 void WindowsMoveFile(const QString& from, const QString& to);
 
-extern QByteArray g_Certificate;
 extern quint32 g_FeatureFlags;
+
+extern QByteArray g_Certificate;
+union SCertInfo {
+    quint64	State;
+    struct {
+        quint32
+            valid     : 1, // certificate is active
+            expired   : 1, // certificate is expired but may be active
+            outdated  : 1, // certificate is expired, not anymore valid for the current build
+            business  : 1, // certificate is siutable for business use
+            reservd_1 : 4,
+            reservd_2 : 8,
+            reservd_3 : 8,
+			reservd_4 : 8;
+		quint32 
+			expirers_in_sec : 30, 
+			unused_1        : 1, // skim a couple high bits to use as flags flag, 0x3fffffff -> is 34 years count down isenough
+			about_to_expire : 1; 
+    };
+};
+extern SCertInfo g_CertInfo;

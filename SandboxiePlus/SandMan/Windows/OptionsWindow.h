@@ -18,6 +18,8 @@ public:
 	QStringList		GetCurrentGroups();
 	QSet<QString>	GetPrograms() { return  m_Programs; }
 
+	static void		TriggerPathReload();
+
 	enum EntryTypes {
 		eUndefined = 0,
 		eProcess,
@@ -48,11 +50,6 @@ private slots:
 	void OnBrowsePath();
 	void OnAddCommand();
 	void OnDelCommand();
-
-	void OnAddAutoCmd();
-	void OnAddAutoExe();
-	void OnDelAutoSvc();
-	void OnDelAuto();
 
 	void OnAddGroup();
 	void OnAddProg();
@@ -120,16 +117,23 @@ private slots:
 	void OnDelRecEntry();
 	void OnShowRecoveryTmpl()		{ LoadRecoveryListTmpl(true); }
 
+	// advanced
+	void OnNoWindowRename();
+
+	void OnTriggerChanged()			{ m_AdvancedChanged = true; OnOptChanged(); }
+	void OnShowTriggersTmpl()		{ ShowTriggersTmpl(true); }
+	void OnAddAutoRun();
+	void OnAddAutoSvc();
 	void OnAddAutoExec();
-	void OnDelAutoExec();
+	void OnAddDeleteCmd();
+	void OnDelAuto();
 
 	void OnAddProcess();
 	void OnDelProcess();
 
-	void OnNoWindowRename();
-
 	void OnAddUser();
 	void OnDelUser();
+	//
 
 	void OnFilterTemplates()		{ ShowTemplates(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
@@ -198,6 +202,7 @@ protected:
 		eNormalIpcPath,
 		eOpenIpcPath,
 		eClosedIpcPath,
+		eReadIpcPath,
 
 		eOpenWinClass,
 
@@ -225,7 +230,14 @@ protected:
 		eClosed,
 		eClosedRT,
 		eReadOnly,
-		eWriteOnly
+		eBoxOnly
+	};
+
+	enum ETriggerAction {
+		eOnStartCmd,
+		eOnStartSvc,
+		eAutoExec,
+		eDeleteCmd
 	};
 
 	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column);
@@ -245,8 +257,6 @@ protected:
 	void LoadConfig();
 	void SaveConfig();
 	void UpdateCurrentTab();
-
-	void AddAutoRunItem(const QString& Value, int Type);
 
 	void AddRunItem(const QString& Name, const QString& Command);
 
@@ -322,10 +332,14 @@ protected:
 	void AddRecoveryEntry(const QString& Name, int type, const QString& Template = QString());
 	void SaveRecoveryList();
 
+	// advanced 
 	void CreateAdvanced();
 	void LoadAdvanced();
 	void SaveAdvanced();
 	void UpdateBoxIsolation();
+	void ShowTriggersTmpl(bool bUpdate = false);
+	void AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template = QString());
+	//
 
 	void CreateDebug();
 	void LoadDebug();

@@ -38,7 +38,15 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	bool				AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false);
+	enum EDelMode {
+		eDefault,
+		eAuto,
+		eForDelete
+	};
+
+	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteShapshots = true);
+
+	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
@@ -50,24 +58,31 @@ public:
 
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 
-	void				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
+	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 
-	QIcon				GetBoxIcon(int boxType, bool inUse = false);
+	QIcon				GetBoxIcon(int boxType, bool inUse = false, bool inBusy = false);
 	QString				GetBoxDescription(int boxType);
 
 	bool				CheckCertificate();
 
 	void				UpdateTheme();
 
+	void				UpdateCertState();
+	void				UpdateCert();
+
+signals:
+	void				CertUpdated();
+
 protected:
-	SB_STATUS			ConnectSbie();
+	SB_RESULT(void*)	ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
-	SB_STATUS			StopSbie(bool andRemove = false);
+	SB_RESULT(void*)	StopSbie(bool andRemove = false);
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	QIcon				GetTrayIconName(bool isConnected = true);
+	QIcon				GetTrayIcon(bool isConnected = true);
+	QString				GetTrayText(bool isConnected = true);
 
 	void				closeEvent(QCloseEvent* e);
 
@@ -100,12 +115,17 @@ protected:
 		eMaxColor
 	};
 
-	QMap<EBoxColors, QPair<QIcon, QIcon> > m_BoxIcons;
+	struct SBoxIcon {
+		QIcon Empty;
+		QIcon InUse;
+		QIcon Busy;
+	};
+	QMap<int, SBoxIcon> m_BoxIcons;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
 
 public slots:
-	void				OnMessage(const QString&);
+	void				OnMessage(const QString& MsgData);
 
 	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message, bool bNotify = false);
@@ -116,7 +136,7 @@ public slots:
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
-	bool				OpenRecovery(const CSandBoxPtr& pBox, bool bCloseEmpty = false);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings();
@@ -163,6 +183,7 @@ private slots:
 
 	void				OnSettings();
 	void				OnResetMsgs();
+	void				OnResetGUI();
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
@@ -178,11 +199,15 @@ private slots:
 	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
 	void				OnUpdateDownload();
 
+	void				OnCertCheck();
+
 	void				SetUITheme();
 
 private:
 	void				CreateMenus();
 	void				CreateToolBar();
+
+	void				HandleMaintenance(SB_RESULT(void*) Status);
 
 	void				SetViewMode(bool bAdvanced);
 
@@ -227,6 +252,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pUninstallAll;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;
@@ -245,6 +271,7 @@ private:
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
 	QAction*			m_pMenuResetMsgs;
+	QAction*			m_pMenuResetGUI;
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
@@ -265,6 +292,8 @@ private:
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	bool				m_bIconDisabled;
+	bool				m_bIconBusy;
+	int					m_iDeletingContent;
 
 	bool				m_bExit;
 

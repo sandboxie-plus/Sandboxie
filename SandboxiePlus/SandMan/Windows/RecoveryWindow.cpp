@@ -49,6 +49,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	m_LastTargetIndex = 0;
 	m_bTargetsChanged = false;
 	m_bReloadPending = false;
+	m_DeleteShapshots = false;
 
 #ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
@@ -99,6 +100,10 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	ui.btnRecover->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnRecover->setMenu(pRecMenu);
 
+	QMenu* pDelMenu = new QMenu(ui.btnDeleteAll);
+	pDelMenu->addAction(tr("Delete everything, including all snapshots"), this, SLOT(OnDeleteEverything()));
+	ui.btnDeleteAll->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnDeleteAll->setMenu(pDelMenu);
 
 	restoreGeometry(theConf->GetBlob("RecoveryWindow/Window_Geometry"));
 
@@ -145,6 +150,7 @@ int	CRecoveryWindow::exec()
 {
 	//QDialog::setWindowModality(Qt::WindowModal);
 	ui.btnDeleteAll->setVisible(true);
+	SafeShow(this);
 	return QDialog::exec();
 }
 
@@ -223,6 +229,12 @@ void CRecoveryWindow::OnDeleteAll()
 	this->close();
 }
 
+void CRecoveryWindow::OnDeleteEverything()
+{
+	m_DeleteShapshots = true;
+	OnDeleteAll();
+}
+
 void CRecoveryWindow::AddFile(const QString& FilePath, const QString& BoxPath)
 {
 	ui.chkShowAll->setTristate(true);
@@ -267,7 +279,7 @@ int CRecoveryWindow::FindFiles()
 		foreach(const QFileInfo & Info, Dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
 			Count += FindBoxFiles("\\drive\\" + Info.fileName());
 
-		if (m_pBox->GetBool("SeparateUserFolders", true)) {
+		if (m_pBox->GetBool("SeparateUserFolders", true, true)) {
 			Count += FindBoxFiles("\\user\\current");
 			Count += FindBoxFiles("\\user\\all");
 			Count += FindBoxFiles("\\user\\public");

@@ -1006,19 +1006,11 @@ _FX void AutoExec(void)
     NTSTATUS status;
     UNICODE_STRING uni;
     WCHAR error_str[16];
-    WCHAR *buf1, *buf2;
+    WCHAR* buf1;
     ULONG buf_len;
     ULONG index;
     KEY_VALUE_BASIC_INFORMATION basic_info;
     ULONG len;
-
-    //
-    // only do AutoExec processing in the context of the
-    // first process in the box
-    //
-
-    if (! Dll_FirstProcessInBox)
-        return;
 
     //
     // query the values in the AutoExec setting
@@ -1027,8 +1019,6 @@ _FX void AutoExec(void)
     buf_len = 4096 * sizeof(WCHAR);
     buf1 = Dll_AllocTemp(buf_len);
     memzero(buf1, buf_len);
-    buf2 = Dll_AllocTemp(buf_len);
-    memzero(buf2, buf_len);
 
     index = 0;
 
@@ -1039,16 +1029,11 @@ _FX void AutoExec(void)
         if (status != 0)
             break;
 
-        len = ExpandEnvironmentStrings(
-            buf1, buf2, buf_len / sizeof(WCHAR) - 16);
-        if (len == 0 || len > buf_len / sizeof(WCHAR) - 16)
-            wcscpy(buf2, buf1);
-
         //
         // check the key value matching the setting value
         //
 
-        RtlInitUnicodeString(&uni, buf2);
+        RtlInitUnicodeString(&uni, buf1);
 
         if (AutoExecHKey) {
             status = NtQueryValueKey(
@@ -1066,7 +1051,7 @@ _FX void AutoExec(void)
 
             if (NT_SUCCESS(status)) {
 
-                SbieDll_ExpandAndRunProgram(buf2);
+                SbieDll_ExpandAndRunProgram(buf1);
 
             } else {
                 Sbie_snwprintf(error_str, 16, L"%d [%08X]", index, status);
@@ -1082,7 +1067,6 @@ _FX void AutoExec(void)
     //
 
     Dll_Free(buf1);
-    Dll_Free(buf2);
 }
 
 
@@ -1094,7 +1078,7 @@ _FX void AutoExec(void)
 _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
 {
     ULONG len;
-    WCHAR *cmdline;
+    WCHAR *cmdline, *cmdline2;
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
     BOOL ok;
@@ -1112,6 +1096,51 @@ _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
     cmdline[len] = L'\0';
 
     //
+    // expand sandboxie variables
+    //
+
+    len = 8192 * sizeof(WCHAR);
+    cmdline2 = Dll_AllocTemp(len);
+
+	const WCHAR* ptr1 = cmdline;
+	WCHAR* ptr2 = cmdline2;
+	for (;;) {
+		const WCHAR* ptr = wcschr(ptr1, L'%');
+		if (!ptr)
+			break;
+		const WCHAR* end = wcschr(ptr + 1, L'%');
+		if (!end) 
+			break;
+
+		if (ptr != ptr1) { // copy static portion unless we start with a %
+			ULONG length = (ULONG)(ptr - ptr1);
+			wmemcpy(ptr2, ptr1, length);
+			ptr2 += length;
+		}
+		ptr1 = end + 1;
+
+		ULONG length = (ULONG)(end - ptr + 1);
+		if (length <= 64) {
+			WCHAR Var[66];
+			wmemcpy(Var, ptr, length);
+			Var[length] = L'\0';
+			if (NT_SUCCESS(SbieApi_QueryConf(NULL, Var, CONF_JUST_EXPAND, ptr2, len - ((ptr2 - cmdline2) * sizeof(WCHAR))))) {
+				if (_wcsnicmp(ptr2, L"\\Device\\", 8) == 0)
+					SbieDll_TranslateNtToDosPath(ptr2);
+				ptr2 += wcslen(ptr2);
+				continue; // success - look for the next one
+			}
+		}
+		
+		// fallback - not found keep the %something%
+		wmemcpy(ptr2, ptr, length);
+		ptr2 += len;
+	}
+	wcscpy(ptr2, ptr1); // copy whats left
+
+    Dll_Free(cmdline);
+
+    //
     // execute command line
     //
 
@@ -1122,9 +1151,9 @@ _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
     memzero(&pi, sizeof(PROCESS_INFORMATION));
 
     ok = CreateProcess(
-            NULL, cmdline, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+            NULL, cmdline2, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 
-    Dll_Free(cmdline);
+    Dll_Free(cmdline2);
 
     if (ok) {
 

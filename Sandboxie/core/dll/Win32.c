@@ -393,12 +393,12 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
     if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
         return TRUE; // just return on older builds, or not enabled
 
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_data->flags.bNoSysHooks)
-        return TRUE;
-
     // disable Electron Workaround when we are ready to hook the required win32k syscalls
     extern BOOL Dll_ElectronWorkaround;
     Dll_ElectronWorkaround = FALSE; 
+
+    if (Dll_CompartmentMode || SbieApi_data->flags.bNoSysHooks)
+        return TRUE;
 
     //
     // chrome needs for a working GPU acceleration the GdiDdDDI* win32k syscalls to have the right user token
@@ -406,8 +406,7 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
 
     WCHAR* cmdline = GetCommandLine();
 
-    if ((wcsstr(cmdline, L"--type=gpu-process") != NULL && wcsstr(cmdline, L"--gpu-preferences=") != NULL)
-     || SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"AlwaysUseWin32kHooks", FALSE)) {
+    if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"UseWin32kHooks", TRUE)) {
 
 #ifndef _WIN64
         if (Dll_IsWow64) 

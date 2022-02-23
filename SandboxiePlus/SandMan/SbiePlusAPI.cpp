@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "SbiePlusAPI.h"
+#include "SbieProcess.h"
+#include "SandMan.h"
 #include "..\MiscHelpers\Common\Common.h"
 #include <windows.h>
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
+	m_JobCount = 0;
 }
 
 CSbiePlusAPI::~CSbiePlusAPI()
@@ -181,6 +184,9 @@ QString CSandBoxPlus::GetStatusStr() const
 {
 	if (!m_IsEnabled)
 		return tr("Disabled");
+
+	if (!m_StatusStr.isEmpty())
+		return m_StatusStr;
 
 	QStringList Status;
 
@@ -423,110 +429,108 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// CSbieProcess
-//
-
-QString CSbieProcess::ImageTypeToStr(quint32 type)
+SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteShapshots, bool bOnAutoDelete)
 {
-	enum {
-		UNSPECIFIED = 0,
-		SANDBOXIE_RPCSS,
-		SANDBOXIE_DCOMLAUNCH,
-		SANDBOXIE_CRYPTO,
-		SANDBOXIE_WUAU,
-		SANDBOXIE_BITS,
-		SANDBOXIE_SBIESVC,
-		MSI_INSTALLER,
-		TRUSTED_INSTALLER,
-		WUAUCLT,
-		SHELL_EXPLORER,
-		INTERNET_EXPLORER,
-		MOZILLA_FIREFOX,
-		WINDOWS_MEDIA_PLAYER,
-		NULLSOFT_WINAMP,
-		PANDORA_KMPLAYER,
-		WINDOWS_LIVE_MAIL,
-		SERVICE_MODEL_REG,
-		RUNDLL32,
-		DLLHOST,
-		DLLHOST_WININET_CACHE,
-		WISPTIS,
-		GOOGLE_CHROME,
-		GOOGLE_UPDATE,
-		ACROBAT_READER,
-		OFFICE_OUTLOOK,
-		OFFICE_EXCEL,
-		FLASH_PLAYER_SANDBOX,
-		PLUGIN_CONTAINER,
-		OTHER_WEB_BROWSER,
-		OTHER_MAIL_CLIENT,
-		DLL_IMAGE_MOZILLA_THUNDERBIRD
-	};
+	if (GetBool("NeverDelete", false))
+		return SB_ERR(SB_DeleteProtect);
 
-	switch (type)
+	SB_STATUS Status = TerminateAll();
+	if (Status.IsError())
+		return Status;
+	m_ActiveProcessCount = 0; // to ensure CleanBox will be happy
+
+	foreach(const QString& Command, GetTextList("OnBoxDelete", true, false, true)) {
+		CBoxJob* pJob = new COnDeleteJob(this, Expand(Command));
+		AddJobToQueue(pJob);
+	}
+
+	CBoxJob* pJob = new CCleanUpJob(this, DeleteShapshots, bOnAutoDelete);
+	AddJobToQueue(pJob);
+
+	return SB_OK;
+}
+
+void CSandBoxPlus::AddJobToQueue(CBoxJob* pJob)
+{
+	theAPI->m_JobCount++;
+	m_JobQueue.append(QSharedPointer<CBoxJob>(pJob));
+	if (m_JobQueue.count() == 1)
+		StartNextJob();
+}
+
+void CSandBoxPlus::StartNextJob()
+{
+next:
+	Q_ASSERT(m_JobQueue.count() > 0);
+	Q_ASSERT(m_JobQueue.first()->GetProgress().isNull());
+
+	QSharedPointer<CBoxJob> pJob = m_JobQueue.first();
+	SB_PROGRESS Status = pJob->Start();
+	if (Status.GetStatus() == OP_ASYNC) 
 	{
-		case UNSPECIFIED: return tr("");
-		case SANDBOXIE_RPCSS: return tr("Sbie RpcSs");
-		case SANDBOXIE_DCOMLAUNCH: return tr("Sbie DcomLaunch");
-		case SANDBOXIE_CRYPTO: return tr("Sbie Crypto");
-		case SANDBOXIE_WUAU: return tr("Sbie WuauServ");
-		case SANDBOXIE_BITS: return tr("Sbie BITS");
-		case SANDBOXIE_SBIESVC: return tr("Sbie Svc");
-		case MSI_INSTALLER: return tr("MSI Installer");
-		case TRUSTED_INSTALLER: return tr("Trusted Installer");
-		case WUAUCLT: return tr("Windows Update");
-		case SHELL_EXPLORER: return tr("Windows Explorer");
-		case INTERNET_EXPLORER: return tr("Internet Explorer");
-		case MOZILLA_FIREFOX: return tr("Firefox");
-		case WINDOWS_MEDIA_PLAYER: return tr("Windows Media Player");
-		case NULLSOFT_WINAMP: return tr("Winamp");
-		case PANDORA_KMPLAYER: return tr("KMPlayer");
-		case WINDOWS_LIVE_MAIL: return tr("Windows Live Mail");
-		case SERVICE_MODEL_REG: return tr("Service Model Reg");
-		case RUNDLL32: return tr("RunDll32");
-		case DLLHOST: return tr("DllHost");
-		case DLLHOST_WININET_CACHE: return tr("DllHost");
-		case WISPTIS: return tr("Windows Ink Services");
-		case GOOGLE_CHROME: return tr("Chromium Based");
-		case GOOGLE_UPDATE: return tr("Google Updater");
-		case ACROBAT_READER: return tr("Acrobat Reader");
-		case OFFICE_OUTLOOK: return tr("MS Outlook");
-		case OFFICE_EXCEL: return tr("MS Excel");
-		case FLASH_PLAYER_SANDBOX: return tr("Flash Player");
-		case PLUGIN_CONTAINER: return tr("Firefox Plugin Container");
-		case OTHER_WEB_BROWSER: return tr("Generic Web Browser");
-		case OTHER_MAIL_CLIENT: return tr("Generic Mail Client");
-		case DLL_IMAGE_MOZILLA_THUNDERBIRD: return tr("Thunderbird");
-		default: return tr("");
+		m_StatusStr = pJob->GetDescription();
+
+		CSbieProgressPtr pProgress = Status.GetValue();
+		connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
+		connect(pProgress.data(), SIGNAL(Progress(int)), this, SLOT(OnAsyncProgress(int)));
+		connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
+	}
+	else
+	{
+		m_JobQueue.removeFirst();
+		theAPI->m_JobCount--;
+		if (Status.IsError()) {
+			m_JobQueue.clear();
+			theGUI->CheckResults(QList<SB_STATUS>() << Status);
+			return;
+		}
+		if (!m_JobQueue.isEmpty())
+			goto next;
 	}
 }
 
-QString CSbieProcess::GetStatusStr() const
+void CSandBoxPlus::OnAsyncFinished()
 {
-	QString Status;
-	if (m_uTerminated != 0)
-		Status = tr("Terminated");
-	//else if (m_bSuspended)
-	//	Status = tr("Suspended");
-	else {
-		Status = tr("Running");
-		if ((m_ProcessFlags & 0x00000002) != 0) // SBIE_FLAG_FORCED_PROCESS
-			Status.prepend(tr("Forced "));
+	Q_ASSERT(m_JobQueue.count() > 0);
+	Q_ASSERT(!m_JobQueue.first()->GetProgress().isNull());
+
+	m_StatusStr.clear();
+
+	QSharedPointer<CBoxJob> pJob = m_JobQueue.takeFirst();
+	theAPI->m_JobCount--;
+	CSbieProgressPtr pProgress = pJob->GetProgress();
+	if (pProgress->IsCanceled()) {
+		m_JobQueue.clear();
+		return;
 	}
 
-	if(m_SessionId != theAPI->GetSessionID())
-		Status += tr(" in session %1").arg(m_SessionId);
-
-	if (m_bIsWoW64)
-		Status += " *32";
-
-	quint32 ImageType = GetImageType();
-	if (ImageType != -1) {
-		QString Type = ImageTypeToStr(ImageType);
-		if(!Type.isEmpty())
-			Status += tr(" (%1)").arg(Type);
+	SB_STATUS Status = pProgress->GetStatus();
+	if (Status.IsError()) {
+		m_JobQueue.clear();
+		theGUI->CheckResults(QList<SB_STATUS>() << Status);
+		return;
 	}
 
-	return Status;
+	if (!m_JobQueue.isEmpty())
+		StartNextJob();
+}
+
+void CSandBoxPlus::OnAsyncMessage(const QString& Text)
+{
+	m_StatusStr = Text;
+}
+
+void CSandBoxPlus::OnAsyncProgress(int Progress)
+{
+}
+
+void CSandBoxPlus::OnCancelAsync()
+{
+	if (m_JobQueue.isEmpty())
+		return;
+	Q_ASSERT(!m_JobQueue.first()->GetProgress().isNull());
+
+	QSharedPointer<CBoxJob> pJob = m_JobQueue.first();
+	CSbieProgressPtr pProgress = pJob->GetProgress();
+	pProgress->Cancel();
 }

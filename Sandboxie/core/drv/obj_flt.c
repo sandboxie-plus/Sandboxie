@@ -237,13 +237,55 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
         //
 
         if (TargetProcessId == PsGetCurrentProcessId()) 
-            goto Exit;
+            goto Exit;        
 
         PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
         ACCESS_MASK WriteAccess = (InitialDesiredAccess & PROCESS_DENIED_ACCESS_MASK);
         if (!NT_SUCCESS(Thread_CheckObject_Common(
             proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'P'))) {
-            *DesiredAccess = 0; // deny any access
+
+#ifdef DRV_BREAKOUT
+            //
+            // Check if this is a break out process
+            //
+
+            BOOLEAN is_breakout = FALSE;
+            PROCESS *proc2;
+            KIRQL irql;
+
+            proc2 = Process_Find(TargetProcessId, &irql);
+            if (proc2 && Process_IsStarter(proc, proc2)) {
+                is_breakout = TRUE;
+            }
+
+            ExReleaseResourceLite(Process_ListLock);
+            KeLowerIrql(irql);
+
+            if (is_breakout) {
+
+                //
+                // this is a BreakoutProcess in this case we need to grant some permissions
+                //
+
+                *DesiredAccess = InitialDesiredAccess & (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE |
+                                                            /**/PROCESS_TERMINATE |
+                                                            //PROCESS_CREATE_THREAD |
+                                                            //PROCESS_SET_SESSIONID | 
+                                                            /**/PROCESS_VM_OPERATION | // needed
+                                                            PROCESS_VM_READ |
+                                                            /**/PROCESS_VM_WRITE | // needed
+                                                            //PROCESS_DUP_HANDLE |
+                                                            PROCESS_CREATE_PROCESS |
+                                                            //PROCESS_SET_QUOTA | 
+                                                            /**/PROCESS_SET_INFORMATION  | // needed
+                                                            PROCESS_QUERY_INFORMATION |
+                                                            /**/PROCESS_SUSPEND_RESUME | // needed
+                                                            PROCESS_QUERY_LIMITED_INFORMATION |
+                                                            //PROCESS_SET_LIMITED_INFORMATION |
+                                                        0);
+            } else
+#endif
+                *DesiredAccess = 0; // deny any access
         }
         //ObjectTypeName = L"PsProcessType";
     }

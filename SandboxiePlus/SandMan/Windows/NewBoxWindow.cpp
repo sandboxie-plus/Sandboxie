@@ -101,7 +101,7 @@ void CNewBoxWindow::CreateBox()
 				pBox->SetBool("NoSecurityIsolation", true);
 				//pBox->SetBool("RunServicesAsSystem", true);
 				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eAppBoxPlus);
-				pBox->InsertText("Template", "NoUACProxy");
+				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
 				break;
 		}
 	}

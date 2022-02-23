@@ -1,0 +1,185 @@
+name: Problem report
+description: Please report your problem here to help us improve
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear and concise description of what the problem is. You can add screenshots and provide links to help explain it.
+      placeholder: Tell us what you see! If you had a compatibility issue, you may want to include a download link to the incompatible software.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: To Reproduce
+      description: If applicable, write the exact steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '....'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: false
+  - type: input
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Tell us what you expect to see!
+    validations:
+      required: true
+  - type: input
+    id: windows-version
+    attributes:
+      label: What is your Windows edition and version?
+      placeholder: "e.g. Windows 10 Pro 21H1 64-bit"
+    validations:
+      required: true
+  - type: dropdown
+    id: user-account
+    attributes:
+      label: "In which Windows account you have this problem?"
+      description: "Note: Built-in user accounts like Guest or Administrator are disabled by default in Windows because they pose a security risk."
+      options:
+        - "A local or Microsoft account without special changes."
+        - "User account with secure desktop turned off for UAC prompts."
+        - "User account with UAC protection completely turned off."
+        - "User account with UAC protection set to Always notify."
+        - "I use the built-in Administrator account."
+        - "I use the built-in Administrator with Admin Approval Mode turned on."
+        - "I reproduced it under a Guest account."
+        - "Not relevant to my request."
+    validations:
+      required: true
+  - type: input
+    id: security-software
+    attributes:
+      label: Please mention any installed security software
+      description: Even if the real-time protection is disabled, any security solution could still conflict with Sandboxie.
+      placeholder: e.g. Windows Defender
+    validations:
+      required: true
+  - type: input
+    id: sandboxie-version
+    attributes:
+      label: What version of Sandboxie are you running?
+      placeholder: e.g. Sandboxie Plus 1.0.9 64-bit
+    validations:
+      required: true
+  - type: input
+    id: regression
+    attributes:
+      label: Is it a regression?
+      description: If applicable, specify in which Sandboxie version this problem was introduced the first time (including any pre-release version).
+      placeholder: e.g. Since 5.55.9 64-bit
+  - type: input
+    id: browsers
+    attributes:
+      label: List of affected browsers
+      description: If applicable, in which sandboxed browsers are you seeing the problem?
+      placeholder: e.g. Firefox 96.0.3 64-bit, ....
+  - type: dropdown
+    id: box-types
+    attributes:
+      label: In which sandbox type you have this problem?
+      description: Select "Not relevant" if you don't have any malfunctioning program or setting to report.
+      options:
+        - "In a Standard isolation sandbox (yellow sandbox icon)."
+        - "In a Hardened sandbox (red sandbox icon)."
+        - "In a Sandbox with data protection (blue sandbox icon)."
+        - "In an Application Compartment sandbox with data protection (cyan sandbox icon)."
+        - "In an Application Compartment sandbox with no isolation (green sandbox icon)."
+        - "All sandbox types (I tried them all)."
+        - "I only reproduced it with Sandboxie Classic."
+        - "Not relevant to my request."
+    validations:
+      required: true
+  - type: dropdown
+    id: sandboxed-or-not
+    attributes:
+      label: Is the sandboxed program also installed outside the sandbox?
+      description: Select "Not relevant" if you don't have any malfunctioning program to report.
+      options:
+        - "Yes, it is also installed outside the sandbox."
+        - "No, it is not installed in the real system."
+        - "Not relevant to my request."
+    validations:
+      required: true
+  - type: dropdown
+    id: box-state
+    attributes:
+      label: Can you reproduce this problem on an empty sandbox?
+      description: |
+        Select "Not relevant" if you don't have any malfunctioning program to report.
+
+        Tip: An empty sandbox is a clean box without any installed program or data.
+      options:
+      - "I can confirm it also on an empty sandbox."
+      - "My sandbox contains existing programs or data."
+      - "Not relevant to my request."
+    validations:
+      required: true
+  - type: textarea
+    id: policy-settings
+    attributes:
+      label: Did you previously enable some security policy settings outside Sandboxie?
+      description: |
+        For example in gpedit.msc, secpol.msc, Windows Defender Exploit protection settings, or other management tools like parental controls.
+
+        Tip: You may consider to turn off non-default Windows settings.
+      placeholder: |
+        I enabled the following security / policy settings outside Sandboxie:
+        ....
+  - type: input
+    id: crashdumps
+    attributes:
+      label: Crash dump
+      description: |
+        If applicable, provide a direct link containing the .dmp file for your crash issue!
+
+        Tip: You need to upload it on a file storage service, then share the resulting link below.
+      placeholder: https://
+  - type: input
+    id: logs
+    attributes:
+      label: Trace log
+      description: |
+        Please consider to take one or more logs for Resource Access issues. For instructions, see https://git.io/Jwj2y
+
+        Tip: You can compress multiple log files in a .zip archive to upload on a file storage service, then share the resulting link below.
+      placeholder: https://
+  - type: textarea
+    id: sandboxie-config
+    attributes:
+      label: Sandboxie.ini configuration
+      description: |
+        If applicable, consider to attach your Sandboxie.ini settings (usually located in `C:\Windows` or in the installation folder).
+
+        Tip: If the content is too long, you are recommended to copy the settings on https://gist.github.com and share the resulting link below.
+      placeholder: |
+        [GlobalSettings]
+        .....
+
+        [UserSettings_xxxxxxxx]
+        .....
+
+        [DefaultBox]
+        .....
+
+      render: shell
+  - type: input
+    id: sandboxie-plus-config
+    attributes:
+      label: Sandboxie-Plus.ini configuration (for Plus interface issues)
+      description: |
+        Sandboxie-Plus.ini is only needed if you have specific user interface issues with Sandboxie Plus
+        (this is usually located in `C:\Users\%Username%\AppData\Local\Sandboxie-Plus` or `C:\ProgramData\Sandboxie-Plus` for corporate users).
+
+        Please copy the content on https://gist.github.com and share the resulting link below.
+      placeholder: https://

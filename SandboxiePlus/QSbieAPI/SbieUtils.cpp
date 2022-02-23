@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SbieUtils.h"
 #include <QCoreApplication>
+#include <QWinEventNotifier>
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -61,7 +62,7 @@ SB_STATUS CSbieUtils::DoAssist()
 	return SB_ERR(ERROR_OK);
 }
 
-SB_STATUS CSbieUtils::Start(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Start(EComponent Component)
 {
 	QStringList Ops;
 	if(!IsInstalled(Component))
@@ -79,7 +80,7 @@ void CSbieUtils::Start(EComponent Component, QStringList& Ops)
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|start|" SBIEDRV));
 }
 
-SB_STATUS CSbieUtils::Stop(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Stop(EComponent Component)
 {
 	QStringList Ops;
 	Stop(Component, Ops);
@@ -104,7 +105,7 @@ bool CSbieUtils::IsRunning(EComponent Component)
 	return true;
 }
 
-SB_STATUS CSbieUtils::Install(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Install(EComponent Component)
 {
 	QStringList Ops;
 	Install(Component, Ops);
@@ -122,7 +123,7 @@ void CSbieUtils::Install(EComponent Component, QStringList& Ops)
 	}
 }
 
-SB_STATUS CSbieUtils::Uninstall(EComponent Component)
+SB_RESULT(void*) CSbieUtils::Uninstall(EComponent Component)
 {
 	QStringList Ops;
 	Stop(Component, Ops);
@@ -147,7 +148,7 @@ bool CSbieUtils::IsInstalled(EComponent Component)
 	return true;
 }
 
-SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
+SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 {
 	if (Ops.isEmpty())
 		return SB_OK;
@@ -161,7 +162,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 	SHELLEXECUTEINFO shex;
 	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
 	shex.cbSize = sizeof(SHELLEXECUTEINFO);
-	shex.fMask = SEE_MASK_FLAG_NO_UI;
+	shex.fMask = SEE_MASK_FLAG_NO_UI | SEE_MASK_NOCLOSEPROCESS;
 	shex.hwnd = NULL;
 	shex.lpFile = path.c_str();
 	shex.lpParameters = params.c_str();
@@ -170,7 +171,7 @@ SB_STATUS CSbieUtils::ElevateOps(const QStringList& Ops)
 
 	if (!ShellExecuteEx(&shex))
 		return SB_ERR(SB_NeedAdmin);
-	return SB_ERR(OP_ASYNC);
+	return CSbieResult<void*>(OP_ASYNC, shex.hProcess);
 }
 
 SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
@@ -188,6 +189,53 @@ SB_STATUS CSbieUtils::ExecOps(const QStringList& Ops)
 			return SB_ERR(SB_ExecFail, QVariantList() << Args.join(" "));
 	}
 	return SB_OK;
+}
+
+CSbieProgressPtr CSbieUtils::RunCommand(const QString& Command, bool noGui)
+{
+	STARTUPINFOW si = { 0 };
+	si.cb = sizeof(si);
+	if (noGui) {	
+		si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
+		si.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+		si.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+		si.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+		si.wShowWindow = SW_HIDE;
+	}
+	PROCESS_INFORMATION pi = { 0 };
+	if (!CreateProcessW(NULL, (LPWSTR)Command.toStdWString().c_str(), NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi))
+		return CSbieProgressPtr();
+	
+	HANDLE hJobObject = CreateJobObject(NULL, NULL);
+	if (hJobObject)
+		AssignProcessToJobObject(hJobObject, pi.hProcess);
+
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+
+	QWinEventNotifier* processFinishedNotifier = new QWinEventNotifier(pi.hProcess);
+	processFinishedNotifier->setEnabled(true);
+	QObject::connect(processFinishedNotifier, &QWinEventNotifier::activated, [=]() {
+		processFinishedNotifier->setEnabled(false);
+		processFinishedNotifier->deleteLater();
+
+		pProgress->Finish(SB_OK);
+
+		if(hJobObject)
+			CloseHandle(hJobObject);
+		CloseHandle(pi.hThread);
+		CloseHandle(pi.hProcess);
+	});
+
+	QObject::connect(pProgress.data(), &CSbieProgress::Canceled, [=]() {
+		if (hJobObject)
+			TerminateJobObject(hJobObject, 0);
+		else
+			TerminateProcess(pi.hProcess, 0);
+	});
+
+	ResumeThread(pi.hThread);
+	
+	return pProgress;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -212,12 +260,12 @@ QString CSbieUtils::GetContextMenuStartCmd()
 	return QString::fromWCharArray(path);
 }
 
-void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPath)
+void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr, /*const QString& ExploreStr,*/ const QString& IconPath)
 {
 	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
 	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
 
-	CreateShellEntry(L"*", L"Run &Sandboxed", icon_path, start_path + L" /box:__ask__ \"%1\" %*");
+	CreateShellEntry(L"*", L"sandbox", RunStr.toStdWString(), icon_path, start_path + L" /box:__ask__ \"%1\" %*");
 
 	wstring explorer_path(512, L'\0');
 
@@ -242,13 +290,13 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& IconPat
 		explorer_path.append(L"\\explorer.exe");
 	}
 
-	CreateShellEntry(L"Folder", L"Explore &Sandboxed", icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
+	CreateShellEntry(L"Folder", L"sandbox", RunStr.toStdWString(), icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\""); // ExploreStr
 }
 
-void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)
+void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& key, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)
 {
 	HKEY hkey;
-	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\sandbox").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\" + key).c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
 	if (rc != 0)
 		return;
 
@@ -259,7 +307,7 @@ void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& cmdte
 	if (rc != 0)
 		return;
 
-	rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\sandbox\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
+	rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\"  + key + L"\\command").c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
 	if (rc != 0)
 		return;
 
@@ -272,6 +320,32 @@ void CSbieUtils::RemoveContextMenu()
 {
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\sandbox");
 	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\folder\\shell\\sandbox");
+}
+
+bool CSbieUtils::HasContextMenu2()
+{
+	const wchar_t* key = L"Software\\Classes\\*\\shell\\unbox\\command";
+	HKEY hkey;
+	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
+	if (rc != 0)
+		return false;
+
+	RegCloseKey(hkey);
+
+	return true;
+}
+
+void CSbieUtils::AddContextMenu2(const QString& StartPath, const QString& RunStr, const QString& IconPath)
+{
+	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\",-104";
+
+	CreateShellEntry(L"*", L"unbox", RunStr.toStdWString(), icon_path, start_path + L" /disable_force \"%1\" %*");
+}
+
+void CSbieUtils::RemoveContextMenu2()
+{
+	RegDeleteTreeW(HKEY_CURRENT_USER, L"software\\classes\\*\\shell\\unbox");
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -482,3 +556,4 @@ bool ShellOpenRegKey(const QString& KeyName)
 
     return result;
 }
+

@@ -15,8 +15,8 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
 	//flags &= ~Qt::WindowSystemMenuHint;
-	flags &= ~Qt::WindowMinMaxButtonsHint;
-	//flags &= ~Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	flags &= ~Qt::WindowMaximizeButtonHint;
 	//flags &= ~Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
 
@@ -26,7 +26,7 @@ CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 	ui.setupUi(centralWidget);
 	this->setCentralWidget(centralWidget);
 
-	setWindowFlags(Qt::Tool);
+	//setWindowFlags(Qt::Tool);
 
 	ui.table->verticalHeader()->hide();
 	ui.table->horizontalHeader()->hide();
@@ -103,7 +103,7 @@ void CPopUpWindow::Show()
 		this->move(scrRect.width() - 600 - 20, scrRect.height() - 200 - 50);
 	}
 
-	this->show();
+	SafeShow(this);
 }
 
 void CPopUpWindow::Poke()

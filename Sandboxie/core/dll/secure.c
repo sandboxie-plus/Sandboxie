@@ -368,7 +368,7 @@ _FX BOOLEAN Secure_Init(void)
     //
     // intercept NTDLL entry points
     //
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE)) {
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE)) {
         SBIEDLL_HOOK(Secure_, NtOpenProcess);
         SBIEDLL_HOOK(Secure_, NtOpenThread);
         SBIEDLL_HOOK(Secure_, NtDuplicateObject);
@@ -378,7 +378,7 @@ _FX BOOLEAN Secure_Init(void)
     SBIEDLL_HOOK(Secure_,NtSetInformationToken);
     SBIEDLL_HOOK(Secure_,NtAdjustPrivilegesToken);
     // OriginalToken BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     // OriginalToken END
     if (Dll_OsBuild >= 21286) {    // Windows 11
         SBIEDLL_HOOK(Secure_, NtDuplicateToken);
@@ -498,6 +498,23 @@ _FX BOOLEAN Secure_Init(void)
     }
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_OpenProcess
+//---------------------------------------------------------------------------
+
+
+_FX HANDLE SbieDll_OpenProcess(ACCESS_MASK DesiredAccess, HANDLE idProcess)
+{
+    HANDLE hProcess = OpenProcess(DesiredAccess, FALSE, (DWORD)(UINT_PTR)idProcess);
+    if (! hProcess) {
+        if (!Dll_CompartmentMode) // NoDriverAssist
+        if (! NT_SUCCESS(SbieApi_OpenProcess(&hProcess, (HANDLE)idProcess)))
+            hProcess = NULL;
+    }
+    return hProcess;
 }
 
 
@@ -904,20 +921,23 @@ _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal, BOOLEAN bImpersonate)
         return;
 
     // OriginalToken BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
         return;
     // OriginalToken END
 
+    BOOLEAN bDuplicate = FALSE;
     if ((LONG_PTR)token == LDR_TOKEN_PRIMARY) {
         NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), hTokenReal);
+        bDuplicate = TRUE;
     }
     else if ((LONG_PTR)token == LDR_TOKEN_IMPERSONATION) {
-        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), FALSE, hTokenReal);
+        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY, FALSE, hTokenReal);
     }
     else if ((LONG_PTR)token <= LDR_TOKEN_EFFECTIVE) {
-        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), FALSE, hTokenReal);
+        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY, FALSE, hTokenReal);
         if (*hTokenReal == NULL) {
             NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), hTokenReal);
+            bDuplicate = TRUE;
         }
     }
 
@@ -927,7 +947,7 @@ _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal, BOOLEAN bImpersonate)
     // or a pseudo handle, hence we have to convert the token here
     //
 
-    if (bImpersonate && *hTokenReal != NULL) {
+    if (bDuplicate && *hTokenReal != NULL) {
 
         HANDLE hTokenRealImp = NULL;
         OBJECT_ATTRIBUTES objattrs;

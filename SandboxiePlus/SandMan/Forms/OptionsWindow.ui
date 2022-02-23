@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>479</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -64,74 +64,13 @@
             <layout class="QGridLayout" name="gridLayout_27">
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_8">
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_7">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Appearance</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QComboBox" name="cmbBoxIndicator"/>
-               </item>
-               <item row="2" column="5">
-                <widget class="QToolButton" name="btnBorderColor">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QLabel" name="label_56">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>General Configuration</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="3" colspan="2">
-                <widget class="QComboBox" name="cmbBoxType"/>
-               </item>
-               <item row="5" column="0" colspan="3">
+               <item row="6" column="0" colspan="3">
                 <widget class="QLabel" name="label_57">
                  <property name="text">
                   <string>Box Type Preset:</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0" colspan="3">
-                <widget class="QLabel" name="label_20">
-                 <property name="text">
-                  <string>Sandbox Indicator in title:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="7">
-                <widget class="QLabel" name="label_14">
-                 <property name="text">
-                  <string>px Width</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
@@ -145,23 +84,17 @@
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1" colspan="6">
-                <widget class="QLabel" name="lblBoxInfo">
+               <item row="5" column="0" colspan="2">
+                <widget class="QLabel" name="label_56">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
                  <property name="text">
-                  <string>Box info</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::AutoText</enum>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1" colspan="6">
-                <widget class="QLabel" name="label_58">
-                 <property name="text">
-                  <string/>
+                  <string>General Configuration</string>
                  </property>
                 </widget>
                </item>
@@ -178,28 +111,51 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1" colspan="7">
-                <widget class="QCheckBox" name="chkShowForRun">
+               <item row="6" column="3" colspan="2">
+                <widget class="QComboBox" name="cmbBoxType"/>
+               </item>
+               <item row="7" column="1" colspan="6">
+                <widget class="QLabel" name="label_58">
                  <property name="text">
-                  <string>Show this box in the 'run in box' selection prompt</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="2" colspan="5">
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+               <item row="9" column="1" colspan="6">
+                <widget class="QLabel" name="lblSupportCert">
+                 <property name="text">
+                  <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
+                 <property name="textFormat">
+                  <enum>Qt::RichText</enum>
                  </property>
-                </spacer>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
-               <item row="2" column="3" colspan="2">
-                <widget class="QComboBox" name="cmbBoxBorder"/>
+               <item row="2" column="7">
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>px Width</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1" colspan="6">
+                <widget class="QLabel" name="lblBoxInfo">
+                 <property name="text">
+                  <string>Box info</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::AutoText</enum>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_30">
@@ -220,20 +176,41 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1" colspan="6">
-                <widget class="QLabel" name="lblSupportCert">
+               <item row="2" column="3" colspan="2">
+                <widget class="QComboBox" name="cmbBoxBorder"/>
+               </item>
+               <item row="2" column="5">
+                <widget class="QToolButton" name="btnBorderColor">
                  <property name="text">
-                  <string>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::RichText</enum>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_7">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Appearance</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="3">
+                <widget class="QLabel" name="label_20">
+                 <property name="text">
+                  <string>Sandbox Indicator in title:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1">
                 <spacer name="verticalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -245,6 +222,36 @@
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="10" column="2" colspan="5">
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="cmbBoxIndicator"/>
+               </item>
+               <item row="3" column="1" colspan="7">
+                <widget class="QCheckBox" name="chkShowForRun">
+                 <property name="text">
+                  <string>Show this box in the 'run in box' selection prompt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="7">
+                <widget class="QCheckBox" name="chkPinToTray">
+                 <property name="text">
+                  <string>Always show this sandbox in the systray list (Pinned)</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -803,107 +810,6 @@
                </property>
                <property name="text">
                 <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tab_6">
-            <attribute name="title">
-             <string>Auto Start</string>
-            </attribute>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_32">
-               <property name="text">
-                <string>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" rowspan="4">
-              <widget class="QTreeWidget" name="treeAutoStart">
-               <column>
-                <property name="text">
-                 <string>Type</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Program/Service</string>
-                </property>
-               </column>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QToolButton" name="btnDelAuto">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Remove</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <spacer name="verticalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="1">
-              <widget class="QToolButton" name="btnAddAutoExe">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Add program</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QToolButton" name="btnAddAutoSvc">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Add service</string>
                </property>
               </widget>
              </item>
@@ -2329,17 +2235,23 @@ The process match level has a higher priority than the specificity and describes
              </widget>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
-               <string>Auto Exec</string>
+               <string>Triggers</string>
               </attribute>
-              <layout class="QGridLayout" name="gridLayout_35">
-               <item row="1" column="1">
-                <widget class="QPushButton" name="btnAddAutoExec">
-                 <property name="text">
-                  <string>Add Command</string>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="10" column="1">
+                <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
-               <item row="2" column="1">
+               <item row="4" column="1">
                 <spacer name="verticalSpacer_18">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -2352,25 +2264,188 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="1">
-                <widget class="QPushButton" name="btnDelAutoExec">
+               <item row="12" column="1">
+                <widget class="QToolButton" name="btnDelAuto">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Remove</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_33">
+               <item row="1" column="0" rowspan="12">
+                <widget class="QTreeWidget" name="treeTriggers">
+                 <column>
+                  <property name="text">
+                   <string>Event</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Action</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QToolButton" name="btnAddAutoExec">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</string>
+                  <string>Run Command</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QToolButton" name="btnAddAutoSvc">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Start Service</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_33">
+                 <property name="toolTip">
+                  <string>These events are executed each time a box is started</string>
+                 </property>
+                 <property name="text">
+                  <string>On Box Start</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QToolButton" name="btnAddAutoRun">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Run Command</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <spacer name="verticalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="8" column="1">
+                <widget class="QLabel" name="label_67">
+                 <property name="toolTip">
+                  <string>These commands are run UNBOXED just before the box content is deleted</string>
+                 </property>
+                 <property name="text">
+                  <string>On Box Delete</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1">
+                <widget class="QToolButton" name="btnAddDeleteCmd">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Run Command</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLabel" name="label_66">
+                 <property name="toolTip">
+                  <string>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</string>
+                 </property>
+                 <property name="text">
+                  <string>On Box Init</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_32">
+                 <property name="text">
+                  <string>Here you can specify actions to be executed automatically on various box events.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0" rowspan="3">
-                <widget class="QListWidget" name="lstAutoExec"/>
+               <item row="11" column="1">
+                <widget class="QCheckBox" name="chkShowTriggersTmpl">
+                 <property name="text">
+                  <string>Show Templates</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -3054,8 +3129,8 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>chkNoCopyWarn</tabstop>
   <tabstop>chkAutoEmpty</tabstop>
   <tabstop>chkProtectBox</tabstop>
-  <tabstop>treeAutoStart</tabstop>
-  <tabstop>btnAddAutoExe</tabstop>
+  <tabstop>treeTriggers</tabstop>
+  <tabstop>btnAddAutoRun</tabstop>
   <tabstop>btnAddAutoSvc</tabstop>
   <tabstop>btnDelAuto</tabstop>
   <tabstop>treeGroups</tabstop>
@@ -3102,9 +3177,6 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>tabsAdvanced</tabstop>
   <tabstop>chkPreferExternalManifest</tabstop>
   <tabstop>chkNoWindowRename</tabstop>
-  <tabstop>lstAutoExec</tabstop>
-  <tabstop>btnAddAutoExec</tabstop>
-  <tabstop>btnDelAutoExec</tabstop>
   <tabstop>chkHideOtherBoxes</tabstop>
   <tabstop>lstProcesses</tabstop>
   <tabstop>btnAddProcess</tabstop>

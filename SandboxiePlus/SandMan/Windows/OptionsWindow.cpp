@@ -297,8 +297,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	QByteArray
 	Columns = theConf->GetBlob("OptionsWindow/Run_Columns");
 	if (!Columns.isEmpty()) ui.treeRun->header()->restoreState(Columns);
-	Columns = theConf->GetBlob("OptionsWindow/AutoRun_Columns");
-	if (!Columns.isEmpty()) ui.treeAutoStart->header()->restoreState(Columns);
+	Columns = theConf->GetBlob("OptionsWindow/Triggers_Columns");
+	if (!Columns.isEmpty()) ui.treeTriggers->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Groups_Columns");
 	if (!Columns.isEmpty()) ui.treeGroups->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Forced_Columns");
@@ -330,7 +330,7 @@ COptionsWindow::~COptionsWindow()
 	theConf->SetBlob("OptionsWindow/Window_Geometry",saveGeometry());
 
 	theConf->SetBlob("OptionsWindow/Run_Columns", ui.treeRun->header()->saveState());
-	theConf->SetBlob("OptionsWindow/AutoRun_Columns", ui.treeAutoStart->header()->saveState());
+	theConf->SetBlob("OptionsWindow/Triggers_Columns", ui.treeTriggers->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Groups_Columns", ui.treeGroups->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Forced_Columns", ui.treeForced->header()->saveState());
 	theConf->SetBlob("OptionsWindow/Stop_Columns", ui.treeStop->header()->saveState());
@@ -487,6 +487,8 @@ void COptionsWindow::WriteTextList(const QString& Setting, const QStringList& Li
 
 void COptionsWindow::SaveConfig()
 {
+	bool UpdatePaths = false;
+
 	m_pBox->SetRefreshOnChange(false);
 
 	try
@@ -512,8 +514,10 @@ void COptionsWindow::SaveConfig()
 		if (m_NetFwRulesChanged)
 			SaveNetFwRules();
 
-		if (m_AccessChanged)
+		if (m_AccessChanged) {
 			SaveAccessList();
+			UpdatePaths = true;
+		}
 
 		if (m_RecoveryChanged)
 			SaveRecoveryList();
@@ -535,6 +539,9 @@ void COptionsWindow::SaveConfig()
 
 	m_pBox->SetRefreshOnChange(true);
 	m_pBox->GetAPI()->CommitIniChanges();
+
+	if (UpdatePaths)
+		TriggerPathReload();
 }
 
 void COptionsWindow::apply()
@@ -691,7 +698,7 @@ void COptionsWindow::UpdateCurrentTab()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Raw section ini Editot
+// Raw section ini Editor
 //
 
 void COptionsWindow::SetIniEdit(bool bEnable)
@@ -727,7 +734,7 @@ void COptionsWindow::LoadIniSection()
 {
 	QString Section;
 
-	// Note: the service only caches sandboxie.ini not templates. ini hence for global tempaltes we need to load the section through the driver
+	// Note: the service only caches sandboxie.ini not templates.ini, hence for global templates we need to load the section through the driver
 	if (m_Template && m_pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) != 0)
 	{
 		m_Settings = m_pBox->GetIniSection(NULL, m_Template);
@@ -783,4 +790,17 @@ void COptionsWindow::SaveIniSection()
 	m_pBox->GetAPI()->SbieIniSet(m_pBox->GetName(), "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
+}
+
+
+#include <windows.h>
+
+void COptionsWindow::TriggerPathReload()
+{
+	//
+	// this message makes all boxes reload thair path presets
+	//
+
+	DWORD bsm_app = BSM_APPLICATIONS;
+	BroadcastSystemMessage(BSF_POSTMESSAGE, &bsm_app, WM_DEVICECHANGE, 'sb', 0);
 }

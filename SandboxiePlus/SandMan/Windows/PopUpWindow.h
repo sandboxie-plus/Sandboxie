@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_PopUpWindow.h"
 #include "../SbiePlusAPI.h"
+#include "../SbieProcess.h"
 
 class CPopUpEntry: public QWidget
 {

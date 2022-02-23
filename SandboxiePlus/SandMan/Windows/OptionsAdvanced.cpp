@@ -48,8 +48,13 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	connect(ui.treeStop, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged(QTreeWidgetItem *, int)));
+	connect(ui.btnAddAutoRun, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoRun()));
+	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoSvc()));
 	connect(ui.btnAddAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExec()));
-	connect(ui.btnDelAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnDelAutoExec()));
+	connect(ui.btnAddDeleteCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddDeleteCmd()));
+	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
+	connect(ui.chkShowTriggersTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowTriggersTmpl()));
 
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnAddProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddProcess()));
@@ -85,11 +90,6 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
 
 
-	QStringList AutoExec = m_pBox->GetTextList("AutoExec", m_Template);
-	ui.lstAutoExec->clear();
-	ui.lstAutoExec->addItems(AutoExec);
-
-
 	bool bGlobalNoMon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("DisableResourceMonitor", false);
 	ui.chkDisableMonitor->setChecked(m_pBox->GetBool("DisableResourceMonitor", bGlobalNoMon));
 	ReadAdvancedCheck("CallTrace", ui.chkCallTrace, "*");
@@ -105,6 +105,20 @@ void COptionsWindow::LoadAdvanced()
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
 	if (pBoxPlus)
 		ui.chkApiTrace->setChecked(pBoxPlus->HasLogApi());
+
+	// triggers
+	ui.treeTriggers->clear();
+	foreach(const QString & Value, m_pBox->GetTextList("StartProgram", m_Template))
+		AddTriggerItem(Value, eOnStartCmd);
+	foreach(const QString & Value, m_pBox->GetTextList("StartService", m_Template))
+		AddTriggerItem(Value, eOnStartSvc);
+	foreach(const QString & Value, m_pBox->GetTextList("AutoExec", m_Template))
+		AddTriggerItem(Value, eAutoExec);
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxDelete", m_Template))
+		AddTriggerItem(Value, eDeleteCmd);
+
+	ShowTriggersTmpl();
+	//
 
 	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
 	QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
@@ -125,6 +139,37 @@ void COptionsWindow::LoadAdvanced()
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 
 	m_AdvancedChanged = false;
+}
+
+void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
+{
+	if (ui.chkShowRecoveryTmpl->isChecked())
+	{
+		foreach(const QString& Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("StartProgram", Template))
+				AddTriggerItem(Value, eOnStartCmd, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("StartService", Template))
+				AddTriggerItem(Value, eOnStartSvc, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("AutoExec", Template))
+				AddTriggerItem(Value, eAutoExec, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnBoxDelete", Template))
+				AddTriggerItem(Value, eDeleteCmd, Template);
+		}
+	}
+	else if (bUpdate)
+	{
+		for (int i = 0; i < ui.treeRecovery->topLevelItemCount(); )
+		{
+			QTreeWidgetItem* pItem = ui.treeRecovery->topLevelItem(i);
+			int Type = pItem->data(0, Qt::UserRole).toInt();
+			if (Type == -1) {
+				delete pItem;
+				continue; // entry from template
+			}
+			i++;
+		}
+	}
 }
 
 void COptionsWindow::SaveAdvanced()
@@ -151,11 +196,6 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
 
 
-	QStringList AutoExec;
-	for (int i = 0; i < ui.lstAutoExec->count(); i++)
-		AutoExec.append(ui.lstAutoExec->item(i)->text());
-	WriteTextList("AutoExec", AutoExec);
-
 	bool bGlobalNoMon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("DisableResourceMonitor", false);
 	WriteAdvancedCheck(ui.chkDisableMonitor, "DisableResourceMonitor", bGlobalNoMon ? "" : "y", bGlobalNoMon ? "n" : "");
 	WriteAdvancedCheck(ui.chkCallTrace, "CallTrace", "*");
@@ -171,6 +211,27 @@ void COptionsWindow::SaveAdvanced()
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
 	if (pBoxPlus)
 		pBoxPlus->SetLogApi(ui.chkApiTrace->isChecked());
+
+	// triggers
+	QStringList StartProgram;
+	QStringList StartService;
+	QStringList DeleteCommand;
+	QStringList AutoExec;
+	for (int i = 0; i < ui.treeTriggers->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = ui.treeTriggers->topLevelItem(i);
+		switch (pItem->data(0, Qt::UserRole).toInt())
+		{
+		case eOnStartCmd:	StartProgram.append(pItem->text(2)); break;
+		case eOnStartSvc:	StartService.append(pItem->text(2)); break;
+		case eAutoExec:		AutoExec.append(pItem->text(2)); break;
+		case eDeleteCmd:	DeleteCommand.append(pItem->text(2)); break;
+		}
+	}
+	WriteTextList("StartProgram", StartProgram);
+	WriteTextList("StartService", StartService);
+	WriteTextList("AutoExec", AutoExec);
+	WriteTextList("OnBoxDelete", DeleteCommand);
+	//
 
 	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
 
@@ -264,26 +325,86 @@ void COptionsWindow::OnNoWindowRename()
 	OnOptChanged();
 }
 
-void COptionsWindow::OnAddAutoExec()
+// triggers
+void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template)
 {
-	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter an auto exec command"));
-	if (Process.isEmpty())
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? Type : -1);
+	switch (Type)
+	{
+		case eOnStartCmd:
+			pItem->setText(0, tr("On Start"));
+			pItem->setText(1, tr("Run Command"));
+			break;
+		case eOnStartSvc:
+			pItem->setText(0, tr("On Start"));
+			pItem->setText(1, tr("Start Service"));
+			break;
+		case eAutoExec:
+			pItem->setText(0, tr("On Init"));
+			pItem->setText(1, tr("Run Command"));
+			break;
+		case eDeleteCmd:
+			pItem->setText(0, tr("On Delete"));
+			pItem->setText(1, tr("Run Command"));
+			break;
+	}
+	pItem->setText(2, Value);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	ui.treeTriggers->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::OnAddAutoRun()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the command line to be executed"), QLineEdit::Normal);
+	if (Value.isEmpty())
 		return;
 
-	ui.lstAutoExec->addItem(Process);
-
+	AddTriggerItem(Value, eOnStartCmd);
 	m_AdvancedChanged = true;
 	OnOptChanged();
 }
 
-void COptionsWindow::OnDelAutoExec()
+void COptionsWindow::OnAddAutoSvc()
 {
-	foreach(QListWidgetItem * pItem, ui.lstAutoExec->selectedItems())
-		delete pItem;
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a service identifier"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
 
+	AddTriggerItem(Value, eOnStartSvc);
 	m_AdvancedChanged = true;
 	OnOptChanged();
 }
+
+void COptionsWindow::OnAddAutoExec()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the command line to be executed"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	AddTriggerItem(Value, eAutoExec);
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnAddDeleteCmd()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the command line to be executed"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	AddTriggerItem(Value, eDeleteCmd);
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnDelAuto()
+{
+	DeleteAccessEntry(ui.treeTriggers->currentItem());
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+//
 
 void COptionsWindow::OnAddProcess()
 {

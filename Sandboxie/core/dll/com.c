@@ -3509,7 +3509,7 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
     // Even in compartment mode thes things don't work only incombination with open COM its functional
     //
 
-    if (!(Ipc_OpenCOM && (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0) && !SbieApi_QueryConfBool(NULL, L"DisableRTBlacklist", FALSE)) {
+    if (!(Ipc_OpenCOM && Dll_CompartmentMode) && !SbieApi_QueryConfBool(NULL, L"DisableRTBlacklist", FALSE)) {
 
         //
         // Chrome uses the FindAppUriHandlersAsync, which fails returning a NULL value when we don't have com open and more rights

@@ -138,6 +138,12 @@
     <ClCompile Include="Windows\FileBrowserWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="BoxJob.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="SbieProcess.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -198,6 +204,12 @@
     </QtMoc>
     <QtMoc Include="Windows\FileBrowserWindow.h">
       <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="BoxJob.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="SbieProcess.h">
+      <Filter>SandMan</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +298,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_en.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_cs.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

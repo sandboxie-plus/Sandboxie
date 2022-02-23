@@ -1557,8 +1557,8 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
 
     Conf_AdjustUseCount(TRUE);
 
-    if (setting && setting[0] == L'%')
-        value1 = setting; // shortcut to expand a avariable
+    if ((setting && setting[0] == L'%') || (index & CONF_JUST_EXPAND))
+        value1 = setting; // shortcut to expand a variable
     else
         value1 = Conf_Get(boxname, setting, index);
     if (! value1) {

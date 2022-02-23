@@ -117,7 +117,7 @@ _FX BOOLEAN Process_IsSameBox(
 // Process_IsStarter
 //---------------------------------------------------------------------------
 
-
+#ifdef DRV_BREAKOUT
 _FX BOOLEAN Process_IsStarter(
     PROCESS* proc1, PROCESS* proc2)
 {
@@ -129,7 +129,7 @@ _FX BOOLEAN Process_IsStarter(
 
     return proc1->pid == proc2->starter_id;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Process_MatchImage

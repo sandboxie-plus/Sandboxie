@@ -279,6 +279,7 @@ extern BOOLEAN Dll_InitComplete;
 extern BOOLEAN Dll_RestrictedToken;
 extern BOOLEAN Dll_ChromeSandbox;
 extern BOOLEAN Dll_FirstProcessInBox;
+extern BOOLEAN Dll_CompartmentMode;
 
 extern ULONG Dll_ImageType;
 
@@ -788,7 +789,7 @@ BOOLEAN Config_MatchImage(
 
 WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
 
-BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list);
+BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list);
 
 VOID Config_FreePatternList(LIST* list);
 

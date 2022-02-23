@@ -63,7 +63,7 @@ protected:
 
 private:
 
-	void					UpdateMenu();
+	bool					UpdateMenu();
 	void					UpdateGroupMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
 
@@ -84,6 +84,7 @@ private:
 	QAction*				m_pAddGroupe;
 	QAction*				m_pRenGroupe;
 	QAction*				m_pDelGroupe;
+	QAction*				m_pStopAsync;
 	int						m_iMenuTop;
 	QMenu*					m_pMenuRun;
 	QAction*				m_pMenuRunAny;

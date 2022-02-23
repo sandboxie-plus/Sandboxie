@@ -195,14 +195,17 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
 		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
+		bool Busy = pBoxEx->IsBusy();
 		int boxType = pBoxEx->GetType();
 		
-		if (pNode->inUse != inUse || pNode->boxType != boxType)
+		if (pNode->inUse != inUse || (pNode->busyState || Busy) || pNode->boxType != boxType)
 		{
 			pNode->inUse = inUse;
 			pNode->boxType = boxType;
+			if(Busy) pNode->busyState = (pNode->busyState == 1) ? 2 : 1; // make it flach, the cheep way
+			else	 pNode->busyState = 0;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
-			pNode->Icon = theGUI->GetBoxIcon(boxType, inUse);
+			pNode->Icon = theGUI->GetBoxIcon(boxType, inUse, pNode->busyState == 1);
 			Changed = 1; // set change for first column
 		}
 

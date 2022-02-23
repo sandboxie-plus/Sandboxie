@@ -449,20 +449,18 @@ _FX VOID KphParseDate(const WCHAR* date_str, LARGE_INTEGER* date)
 #define BUILD_DAY_CH0 ((__DATE__[4] >= '0') ? (__DATE__[4]) : '0')
 #define BUILD_DAY_CH1 (__DATE__[ 5])
 
+#define CH2N(c) (c - '0')
+
 _FX VOID KphGetBuildDate(LARGE_INTEGER* date)
 {
     TIME_FIELDS timeFiled = { 0 };
-    WCHAR DayW[3] = { BUILD_DAY_CH0, BUILD_DAY_CH1, L'\0' };
-    timeFiled.Day = (CSHORT)_wtoi(DayW);
+    timeFiled.Day = CH2N(BUILD_DAY_CH0) * 10 + CH2N(BUILD_DAY_CH1);
     timeFiled.Month = (
-        (BUILD_MONTH_IS_JAN) ? 1 : (BUILD_MONTH_IS_FEB) ? 2 : (BUILD_MONTH_IS_MAR) ? 3 :
-        (BUILD_MONTH_IS_APR) ? 4 : (BUILD_MONTH_IS_MAY) ? 5 : (BUILD_MONTH_IS_JUN) ? 6 :
-        (BUILD_MONTH_IS_JUL) ? 7 : (BUILD_MONTH_IS_AUG) ? 8 : (BUILD_MONTH_IS_SEP) ? 9 :
-        (BUILD_MONTH_IS_OCT) ? 10 : (BUILD_MONTH_IS_NOV) ? 11 : (BUILD_MONTH_IS_DEC) ? 12 
-     : 0);
-    WCHAR YearW[5] = { BUILD_YEAR_CH0, BUILD_YEAR_CH1, BUILD_YEAR_CH2, BUILD_YEAR_CH3, L'\0' };
-    timeFiled.Year = (CSHORT)_wtoi(YearW);
-
+        (BUILD_MONTH_IS_JAN) ?  1 : (BUILD_MONTH_IS_FEB) ?  2 : (BUILD_MONTH_IS_MAR) ?  3 :
+        (BUILD_MONTH_IS_APR) ?  4 : (BUILD_MONTH_IS_MAY) ?  5 : (BUILD_MONTH_IS_JUN) ?  6 :
+        (BUILD_MONTH_IS_JUL) ?  7 : (BUILD_MONTH_IS_AUG) ?  8 : (BUILD_MONTH_IS_SEP) ?  9 :
+        (BUILD_MONTH_IS_OCT) ? 10 : (BUILD_MONTH_IS_NOV) ? 11 : (BUILD_MONTH_IS_DEC) ? 12 : 0);
+    timeFiled.Year = CH2N(BUILD_YEAR_CH0) * 1000 + CH2N(BUILD_YEAR_CH1) * 100 + CH2N(BUILD_YEAR_CH2) * 10 + CH2N(BUILD_YEAR_CH3);
     RtlTimeFieldsToTime(&timeFiled, date);
 }
 
@@ -477,8 +475,23 @@ _FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
     return date.QuadPart;
 }
 
-
 #define SOFTWARE_NAME L"Sandboxie-Plus"
+
+union SCertInfo {
+    ULONGLONG	State;
+    struct {
+        ULONG
+            valid     : 1, // certificate is active
+            expired   : 1, // certificate is expired but may be active
+            outdated  : 1, // certificate is expired, not anymore valid for the current build
+            business  : 1, // certificate is siutable for business use
+            reservd_1 : 4,
+            reservd_2 : 8,
+            reservd_3 : 8,
+            reservd_4 : 8;
+        ULONG expirers_in_sec;
+    };
+} Verify_CertInfo = {0};
 
 _FX NTSTATUS KphValidateCertificate(void)
 {
@@ -664,7 +677,10 @@ _FX NTSTATUS KphValidateCertificate(void)
 
     status = KphVerifySignature(hash, hashSize, signature, signatureSize);
 
+    Verify_CertInfo.State = 0; // clear
     if (NT_SUCCESS(status)) {
+
+        Verify_CertInfo.valid = 1;
 
         if(CertDbg) DbgPrint("Sbie Cert type: %S-%S\n", type, level);
 
@@ -697,33 +713,65 @@ _FX NTSTATUS KphValidateCertificate(void)
             level = NULL;
         }
 
+        // Checks if the certi if within its validity periode, failing that has no effect except ui notification
+#define TEST_CERT_DATE(days, months, years) \
+            if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < LocalTime.QuadPart){ \
+                Verify_CertInfo.expired = 1; \
+            } else \
+                Verify_CertInfo.expirers_in_sec = (ULONG)(((cert_date.QuadPart + KphGetDateInterval(0, 0, 1)) - LocalTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
+
+        // Check if the certificate is valid for the current build, failing this locks features out
+#define TEST_VALIDITY(days, months, years) \
+            TEST_CERT_DATE(days, months, years) \
+            if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < BuildDate.QuadPart){ \
+                Verify_CertInfo.outdated = 1; \
+                Verify_CertInfo.valid = 0; \
+                status = STATUS_ACCOUNT_EXPIRED; \
+            }
+
+        // Check if the certificate is expired, failing this locks features out
+#define TEST_EXPIRATION(days, months, years) \
+            TEST_CERT_DATE(days, months, years) \
+            if(Verify_CertInfo.expired == 1) { \
+                Verify_CertInfo.valid = 0; \
+                status = STATUS_ACCOUNT_EXPIRED; \
+            }
+
+
         if (type && _wcsicmp(type, L"CONTRIBUTOR") == 0) {
             // forever - nothing to check here
         }
-        else if (type && _wcsicmp(type, L"PATREON") == 0) {
-            // todo: expire patrons which have left, use the update key
-        }
         else if (type && _wcsicmp(type, L"BUSINESS") == 0) {
-            if (cert_date.QuadPart + KphGetDateInterval(0, 0, 1) < LocalTime.QuadPart) // valid for 1 year
-                status = STATUS_ACCOUNT_EXPIRED;
+            Verify_CertInfo.business = 1;
+            TEST_EXPIRATION(0, 0, 1);
         }
-        else /*if (!type || _wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"SUPPORTER") == 0) */ {
-            if (level && _wcsicmp(level, L"LARGE") == 0) {
-                // ok for now
+        else /*if (!type || _wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"PATREON") == 0 || _wcsicmp(type, L"SUPPORTER") == 0) */ {
+            // persistent
+            if (level && _wcsicmp(level, L"HUGE") == 0) {
+                // 
+            } 
+            else if (level && _wcsicmp(level, L"LARGE") == 0) {
+                TEST_CERT_DATE(0, 0, 2); // no real expiration just ui reminder
             }
             else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // valid for all builds released with 1 year 
-                if (cert_date.QuadPart + KphGetDateInterval(0, 0, 1) < BuildDate.QuadPart) 
-                    status = STATUS_ACCOUNT_EXPIRED;
+                TEST_VALIDITY(0, 0, 1);
+            }
+            // subscriptions
+            else if (level && _wcsicmp(level, L"TEST") == 0) { // test certificate 5 days only
+                TEST_EXPIRATION(5, 0, 0);
+            }
+            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // patreon entry level, first 3 monts, later longer
+                TEST_EXPIRATION(0, 3, 0);
             }
             else /*if (!level || _wcsicmp(level, L"SMALL") == 0)*/ { // valid for 1 year
-                if (cert_date.QuadPart + KphGetDateInterval(0, 0, 1) < LocalTime.QuadPart) 
-                    status = STATUS_ACCOUNT_EXPIRED;
+                TEST_EXPIRATION(0, 0, 1);
             }
         }
     }
 
 CleanupExit:
     if(CertDbg)     DbgPrint("Sbie Cert status: %08x\n", status);
+
 
     if(path)        Mem_Free(path, path_len);    
     if(line)        Mem_Free(line, line_size);

@@ -21,16 +21,16 @@ private:
 };
 
 
-bool NtIo_WaitForFolder(POBJECT_ATTRIBUTES objattrs, int seconds = 10);
+bool NtIo_WaitForFolder(POBJECT_ATTRIBUTES objattrs, int seconds = 10, bool (*cb)(const WCHAR* info, void* param) = NULL, void* param = NULL);
 
 NTSTATUS NtIo_RemoveProblematicAttributes(POBJECT_ATTRIBUTES objattrs);
 
 NTSTATUS NtIo_RemoveJunction(POBJECT_ATTRIBUTES objattrs);
 
-NTSTATUS NtIo_DeleteFolderRecursively(POBJECT_ATTRIBUTES objattrs);
+NTSTATUS NtIo_DeleteFolderRecursively(POBJECT_ATTRIBUTES objattrs, bool (*cb)(const WCHAR* info, void* param) = NULL, void* param = NULL);
 
 NTSTATUS NtIo_RenameFile(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES dest_objattrs, const WCHAR* DestName);
 NTSTATUS NtIo_RenameFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES dest_objattrs, const WCHAR* DestName);
 NTSTATUS NtIo_RenameJunction(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES dest_objattrs, const WCHAR* DestName);
 
-NTSTATUS NtIo_MergeFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES dest_objattrs);
+NTSTATUS NtIo_MergeFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES dest_objattrs, bool (*cb)(const WCHAR* info, void* param) = NULL, void* param = NULL);

@@ -173,8 +173,6 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
 					// Note: ServiceServer::CanAccessSCM has a special case to permit DcomLaunch to start services without being system
 					//
 
-                    //if (! SbieDll_RunSandboxed(
-                    //        L"*THREAD*", fullpath, Dll_HomeDosPath, 0, &si, &pi))
                     if (! SbieDll_RunSandboxed(
                               L"", L"*RPCSS*", Dll_HomeDosPath, 0, &si, &pi))
                         errnum = GetLastError();

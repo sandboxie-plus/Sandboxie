@@ -258,7 +258,7 @@ void CSbieAPI::GetUserPaths()
 	}
 }
 
-SB_STATUS CSbieAPI::Connect(bool withQueue)
+SB_STATUS CSbieAPI::Connect(bool takeOver, bool withQueue)
 {
 	if (IsConnected())
 		return SB_OK;
@@ -298,9 +298,12 @@ SB_STATUS CSbieAPI::Connect(bool withQueue)
 		return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
 	}
 
-	SB_STATUS Status = TakeOver();
-	if (!Status) // only the session leader manages the interactive queue
-		withQueue = false;
+	SB_STATUS Status = SB_OK;
+	if (takeOver) {
+		Status = TakeOver();
+		if (!Status) // only the session leader manages the interactive queue
+			withQueue = false;
+	}
 
 	m_bWithQueue = withQueue;
 	m_bTerminate = false;
@@ -1575,7 +1578,7 @@ SB_STATUS CSbieAPI::UpdateProcessInfo(const CBoxedProcessPtr& pProcess)
 CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 {
 	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
-	if (!pProcess)
+	if (!pProcess || pProcess->IsTerminated())
 		return CSandBoxPtr();
 	return GetBoxByName(pProcess->GetBoxName());
 }
@@ -1888,7 +1891,7 @@ QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
 	//if (Path.indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
 	//	return QStringList(BoxRoot + "\\share" + Path.mid(11));
 
-	if (pBox->GetBool("SeparateUserFolders", true))
+	if (pBox->GetBool("SeparateUserFolders", true, true))
 	{
 		if (Path.indexOf(m_UserDir, 0, Qt::CaseInsensitive) == 0)
 			return BoxRoot + "\\user\\current" + Path.mid(m_UserDir.length());
@@ -2112,6 +2115,27 @@ QString CSbieAPI::GetFeatureStr()
 	return str.join(",");
 }
 
+quint64 CSbieAPI::GetCertState()
+{
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS*)parms;
+
+	ULONGLONG state = 0;
+	ULONG len = sizeof(state);
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_QUERY_DRIVER_INFO;
+	args->info_class.val = -1;
+	args->info_data.val = &state;
+	args->info_len.val = len;
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return 0;
+
+	return state;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Log
 //
@@ -2266,12 +2290,12 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pProcess->InitProcessInfo();
 	}
 
-	if (pProcess->m_ParendPID == 0){
-		pProcess->m_ParendPID = ParentId;
-		pProcess->m_ImagePath = Path;
-	}
 	if(pProcess->m_ImageName.isEmpty())
 		pProcess->m_ImageName = Path.mid(Path.lastIndexOf("\\") + 1);
+	if (pProcess->m_ParendPID == 0)
+		pProcess->m_ParendPID = ParentId;
+	if (pProcess->m_ImagePath.isEmpty())
+		pProcess->m_ImagePath = Path;
 
 	return pProcess;
 }

@@ -1103,7 +1103,6 @@ _FX void Process_DeleteForceDataFolders(LIST* Folders)
 
 		Mem_Free(folder, sizeof(FORCE_FOLDER));
 	}
-    
 }
 
 
@@ -1430,7 +1429,7 @@ static _FX void Process_CheckAlertProcess(
     box = List_Head(boxes);
     while (box) {
 
-        if (Process_CheckForceProcessList(box->box, &box->ForceProcess, name)) {
+        if (Process_CheckForceProcessList(box->box, &box->AlertProcess, name)) {
             *IsAlert = 1;
             return;
         }
@@ -1476,10 +1475,10 @@ _FX BOX *Process_CheckHostInjectProcess(
 
 
 //---------------------------------------------------------------------------
-// Process_DfpInsert
+// Process_IsBreakoutProcess
 //---------------------------------------------------------------------------
 
-
+#ifdef DRV_BREAKOUT
 _FX BOOLEAN Process_IsBreakoutProcess(
     BOX *box, const WCHAR *ImagePath)
 {
@@ -1560,7 +1559,7 @@ finish:
 
     return IsBreakout;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Process_DfpInsert

@@ -28,6 +28,7 @@
 #include "DriverAssist.h"
 #include "GuiServer.h"
 #include "GuiWire.h"
+#include "FileServer.h"
 #include "misc.h"
 #include "common/defines.h"
 #include "common/my_version.h"
@@ -505,24 +506,111 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
 
             LONG_PTR BoxNameOrModelPid;
             bool CallerInSandbox;
+            WCHAR boxname[48] = { 0 };
+            BOOL FilterHandles = FALSE;
 
             if (SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerPid, 0)) {
                 CallerInSandbox = true;
+                SbieApi_QueryProcess((HANDLE)(ULONG_PTR)CallerPid, boxname, NULL, NULL, NULL);
                 BoxNameOrModelPid = -(LONG_PTR)(LONG)CallerPid;
                 if ((req->si_flags & 0x80000000) != 0) { // bsession0 - this is only allowed for unsandboxed processes
                     lvl = 0xFF;
-                    goto bail_out;
+                    err = ERROR_NOT_SUPPORTED;
+                    goto end;
                 }
             } else {
                 CallerInSandbox = false;
-                if (*req->boxname == L'-')
-                    BoxNameOrModelPid = - _wtoi(req->boxname + 1);
-                else
+                if (*req->boxname == L'-') {
+                    int Pid = _wtoi(req->boxname + 1);
+                    SbieApi_QueryProcess((HANDLE)(ULONG_PTR)Pid, boxname, NULL, NULL, NULL);
+                    BoxNameOrModelPid = -Pid;
+                } else {
                     BoxNameOrModelPid = (LONG_PTR)req->boxname;
+                    wcscpy(boxname, req->boxname);
+                }
             }
 
+#ifndef DRV_BREAKOUT
+            if (CallerInSandbox && wcscmp(req->boxname, L"*UNBOXED*") == 0 && *cmd == L'\"') {
+
+                ULONG flags = 0;
+                if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 2, 0, (ULONG_PTR)&flags)) || (flags & SBIE_FEATURE_FLAG_CERTIFIED) == 0) {
+                    ULONG SessionId = PipeServer::GetCallerSessionId();
+                    SbieApi_LogEx(SessionId, 6004, L"%S", boxname);
+                    lvl = 0x66;
+                    err = ERROR_NOT_SUPPORTED;
+                    goto end;
+                } 
+
+                WCHAR* lpApplicationName = cmd + 1;
+                WCHAR* ptr = wcschr(lpApplicationName, L'\"');
+                if (ptr) {
+                    *ptr = L'\0'; // end cmd where lpApplicationName ends
+                    WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
+                    if (lpProgram) {
+
+                        //
+                        // check if the process/directory is configued for breakout
+                        // if its a BreakoutProcess we must also test if the path is not in the sandbox itself
+                        //
+
+                        if ((SbieDll_CheckStringInList(lpProgram + 1, boxname, L"BreakoutProcess")
+                            && IsHostPath((HANDLE)(ULONG_PTR)CallerPid, lpApplicationName))
+                            || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), boxname, L"BreakoutFolder")) {
+
+                            //
+                            // this is a break out process, its alowed to leave teh sandbox
+                            //
+
+                            BoxNameOrModelPid = 0;
+                            FilterHandles = TRUE;
+
+                            //
+                            // check if it shoudl en up in an other box
+                            //
+
+                            WCHAR BoxName[34];
+                            int index = -1;
+                            while (1) {
+                                index = SbieApi_EnumBoxes(index, BoxName);
+                                if (index == -1)
+                                    break;
+
+                                if (SbieDll_CheckStringInList(lpProgram + 1, BoxName, L"ForceProcess")
+                                    || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder")) {
+
+                                    //
+                                    // check if the breakout process is suposed to end in the box its trying to break out of
+                                    // and deny the breakout in that case, to take the normal process creation route
+                                    // 
+                                    // this happens when a break out is configured globally
+                                    //
+
+                                    if (_wcsicmp(boxname, BoxName) == 0) {
+                                        lvl = 0;
+                                        err = ERROR_NOT_SUPPORTED;
+                                        goto end;
+                                    }
+
+                                    //
+                                    // set otehr box
+                                    //
+
+                                    BoxNameOrModelPid = (LONG_PTR)boxname;
+                                    wcscpy(boxname, BoxName);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    // restore cmd
+                    *ptr = L'\"';
+                }
+            }
+#endif
+
             HANDLE PrimaryTokenHandle = RunSandboxedGetToken(
-                        CallerProcessHandle, CallerInSandbox, req->boxname, cmd, CallerPid);
+                        CallerProcessHandle, CallerInSandbox, boxname, cmd);
 
             if (PrimaryTokenHandle) {
 
@@ -545,11 +633,11 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 //
 
                 if (RunSandboxedStartProcess(
-                        PrimaryTokenHandle, BoxNameOrModelPid, CallerPid,
-                        cmd, dir, env, &req->creation_flags, &si, &pi)) {
+                        PrimaryTokenHandle, BoxNameOrModelPid,
+                        cmd, dir, env, &FilterHandles, req->creation_flags, &si, &pi)) {
 
                     if (RunSandboxedDupAndCloseHandles(
-                            CallerProcessHandle, req->creation_flags,
+                            CallerProcessHandle, FilterHandles, req->creation_flags,
                             &pi, &piReply)) {
 
                         err = 0;
@@ -575,7 +663,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 lvl = 0x33;
             }
 
-            bail_out:
+        end:
             CloseHandle(CallerProcessHandle);
 
         } else {
@@ -696,7 +784,7 @@ WCHAR *ProcessServer::RunSandboxedCopyString(
 //---------------------------------------------------------------------------
 
 
-bool ProcessServer__RunRpcssAsSystem(WCHAR* boxname)
+bool ProcessServer__RunRpcssAsSystem(const WCHAR* boxname)
 {
     if (SbieApi_QueryConfBool(boxname, L"RunRpcssAsSystem", FALSE))
         return true;
@@ -721,7 +809,7 @@ bool ProcessServer__RunRpcssAsSystem(WCHAR* boxname)
 
 
 HANDLE ProcessServer::RunSandboxedGetToken(
-    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *BoxName, const WCHAR *cmd, ULONG idProcess)
+    HANDLE CallerProcessHandle, bool CallerInSandbox, const WCHAR *boxname, const WCHAR* cmd)
 {
     const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
                              | TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID
@@ -733,28 +821,14 @@ HANDLE ProcessServer::RunSandboxedGetToken(
     BOOL ok;
     bool ShouldAdjustSessionId = true;
     bool ShouldAdjustDacl = false;
-    WCHAR boxname[48] = { 0 };
 
     if (CallerInSandbox) {
 
-        SbieApi_QueryProcess((HANDLE)(ULONG_PTR)idProcess, boxname, NULL, NULL, NULL);
-
-        static const WCHAR* SystemToken = L"*SYSTEM*";
-        static const WCHAR* SessionToken = L"*SESSION*";
-        static const WCHAR* ThreadToken = L"*THREAD*";
-
-        const WCHAR* TokenSrc = ThreadToken;
-        
         if ((wcscmp(cmd, L"*RPCSS*") == 0 /* || wcscmp(cmd, L"*DCOM*") == 0 */) 
           && ProcessServer__RunRpcssAsSystem(boxname)) {
-            TokenSrc = SystemToken;
-        }
-
-
-        if (wcscmp(TokenSrc, SystemToken) == 0) {
-
+            
             //
-            // sandboxed caller specified *SYSTEM* so we use our system token
+            // use our system token
             //
 
             ok = OpenProcessToken(
@@ -764,10 +838,11 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             ShouldAdjustDacl = true;
 
-        } else if (wcscmp(TokenSrc, SessionToken) == 0) {
+        }
+        /*else if (...) {
 
             //
-            // sandboxed caller specified *SESSION* so we use session token
+            // use session token
             //
 
             ULONG SessionId = PipeServer::GetCallerSessionId();
@@ -779,10 +854,14 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             ShouldAdjustSessionId = false;
 
-        } else if (wcscmp(TokenSrc, ThreadToken) == 0) {
-
+        }*/
+        else
+        // OriginalToken BEGIN
+        if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+        // OriginalToken END
+        {
             //
-            // sandboxed caller specified *THREAD* so we use its thread token
+            // use its thread token
             //
 
             HANDLE ThreadHandle = OpenThread(THREAD_QUERY_INFORMATION, FALSE,
@@ -796,43 +875,12 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
             CloseHandle(ThreadHandle);
 
-			// OriginalToken BEGIN
-			if (!ok) {
-
-				if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
-
-                    HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE,
-						PipeServer::GetCallerProcessId());
-
-					ok = OpenProcessToken(
-                        ProcessHandle, TOKEN_RIGHTS, &OldTokenHandle);
-
-					CloseHandle(ProcessHandle);
-				}
-			}
-			// OriginalToken END
-
             if (! ok) {
                 SetLastError(LastError);
                 return NULL;
             }
 
-        } else if (TokenSrc[0]) {
-
-            SetLastError(ERROR_INVALID_PARAMETER);
-            return NULL;
         }
-
-    }
-    else
-    {
-        if (*BoxName == L'-')
-        {
-            LONG_PTR Pid = _wtoi(BoxName + 1);
-            SbieApi_QueryProcess((HANDLE)(ULONG_PTR)Pid, boxname, NULL, NULL, NULL);
-        }
-        else
-            wcscpy(boxname, BoxName);
     }
 
     if (! OldTokenHandle) {
@@ -880,13 +928,12 @@ HANDLE ProcessServer::RunSandboxedGetToken(
             if(!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
             // OriginalToken END
 			ok = RunSandboxedSetDacl(CallerProcessHandle, NewTokenHandle, GENERIC_READ, FALSE);
+    
+        if (ok && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
+
+            ok = RunSandboxedStripPrivileges(NewTokenHandle);
+        }
     }
-
-    if (ok && ShouldAdjustDacl && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
-
-        ok = RunSandboxedStripPrivileges(NewTokenHandle);
-    }
-
 
     if (! ok) {
         LastError = GetLastError();
@@ -1079,13 +1126,13 @@ BOOL ProcessServer::RunSandboxedStripPrivileges(HANDLE NewTokenHandle)
 
 BOOL ProcessServer::RunSandboxedStartProcess(
     HANDLE PrimaryTokenHandle, LONG_PTR BoxNameOrModelPid,
-    ULONG CallerProcessId,
-    WCHAR *cmd, const WCHAR *dir, WCHAR *env, ULONG *crflags,
+    WCHAR *cmd, const WCHAR *dir, WCHAR *env, 
+    BOOL* FilterHandles, ULONG crflags,
     STARTUPINFO *si, PROCESS_INFORMATION *pi)
 {
     HANDLE ImpersonationTokenHandle = NULL;
     ULONG LastError;
-    BOOL ok;
+    BOOL ok = TRUE;
     bool CmdAltered = false;
     bool StartProgramInSandbox = true;
 
@@ -1093,15 +1140,15 @@ BOOL ProcessServer::RunSandboxedStartProcess(
     // create the new process in the target session using the token handle
     //
 
-    ULONG crflags2 = (*crflags) & (CREATE_NO_WINDOW | CREATE_SUSPENDED
+    ULONG crflags2 = crflags & (CREATE_NO_WINDOW | CREATE_SUSPENDED
                 |   HIGH_PRIORITY_CLASS | ABOVE_NORMAL_PRIORITY_CLASS
                 |   BELOW_NORMAL_PRIORITY_CLASS | IDLE_PRIORITY_CLASS
                 |   CREATE_UNICODE_ENVIRONMENT);
-    if (crflags2 != (*crflags)) {
+    if (crflags2 != crflags) {
 
         ok = FALSE;
         LastError = ERROR_INVALID_PARAMETER;
-
+        
     } else {
 
         // RunSandboxedDupAndCloseHandles will un-suspend if necessary
@@ -1109,9 +1156,16 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
         const WCHAR* service = NULL;
 
+#ifndef DRV_BREAKOUT
+        if (BoxNameOrModelPid == 0) { // breakout process
+            StartProgramInSandbox = false;
+            *FilterHandles = TRUE;
+        } else
+#endif
+
         // check if special request to run Start.exe outside the sandbox
-        if (wcscmp(cmd, L"*COMSRV*") == 0) {
-            cmd = RunSandboxedComServer(CallerProcessId);
+        if (wcscmp(cmd, L"*COMSRV*") == 0 && BoxNameOrModelPid < 0) {
+            cmd = RunSandboxedComServer((ULONG) -BoxNameOrModelPid);
             if (! cmd) {
                 SetLastError(ERROR_ACCESS_DENIED);
                 return FALSE;
@@ -1119,7 +1173,7 @@ BOOL ProcessServer::RunSandboxedStartProcess(
             dir = NULL;
             CmdAltered = true;
             StartProgramInSandbox = false;
-            (*crflags) |= CREATE_BREAKAWAY_FROM_JOB;
+            *FilterHandles = TRUE;
         }
 
         // check if we are starting rpcss or dcomlaunch
@@ -1148,7 +1202,8 @@ BOOL ProcessServer::RunSandboxedStartProcess(
         // if this bit is set we start a process based on our SYSTEM own token, security whise this is
         // similar to running boxed services with "RunServicesAsSystem=y" hence to mitigate potential
         // issues it is recommended to activate "DropAdminRights=y" for boxed using this feature
-        bool bSession0 = (si->dwFlags & 0x80000000) != 0;
+        // Note: BoxNameOrModelPid > 0 is only true when the caller is not sandboxed
+        bool bSession0 = (BoxNameOrModelPid > 0) && ((si->dwFlags & 0x80000000) != 0);
         if (bSession0) {
             OpenProcessToken(GetCurrentProcess(), TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &PrimaryTokenHandle);
         }
@@ -1187,7 +1242,7 @@ BOOL ProcessServer::RunSandboxedStartProcess(
 
     if (ok) {
 
-        if (BoxNameOrModelPid >= 0) {
+        if (BoxNameOrModelPid > 0) { // > 0 BoxName, 0 break out, < 0 PID
 
             ok = SetThreadToken(NULL, ImpersonationTokenHandle);
             if (! ok)
@@ -1285,13 +1340,13 @@ WCHAR *ProcessServer::RunSandboxedComServer(ULONG CallerProcessId)
 
 
 BOOL ProcessServer::RunSandboxedDupAndCloseHandles(
-    HANDLE CallerProcessHandle, ULONG crflags,
+    HANDLE CallerProcessHandle, BOOL FilterHandles, ULONG crflags,
     PROCESS_INFORMATION *piInput, PROCESS_INFORMATION *piReply)
 {
     ULONG LastError;
     BOOL ok = TRUE;
 
-    if (! (crflags & CREATE_BREAKAWAY_FROM_JOB)) {      // *COMSRV* case
+    if (!FilterHandles) {      // *COMSRV* case or breakout process
 
         if (! SbieApi_QueryProcessInfo(
                     (HANDLE)(ULONG_PTR)piInput->dwProcessId, 0)) {
@@ -1302,14 +1357,21 @@ BOOL ProcessServer::RunSandboxedDupAndCloseHandles(
     }
 
     if (ok) {
+        // Note: PROCESS_SUSPEND_RESUME is enough to start a debugging session which will give a full access handle in the first debug event (diversenok)
+        DWORD dwRead =  STANDARD_RIGHTS_READ | SYNCHRONIZE |
+                        PROCESS_VM_READ | PROCESS_QUERY_INFORMATION | //PROCESS_SUSPEND_RESUME | unlike THREAD_SUSPEND_RESUME this one is dangerous
+                        PROCESS_QUERY_LIMITED_INFORMATION;
         ok = DuplicateHandle(GetCurrentProcess(), piInput->hProcess,
                              CallerProcessHandle, &piReply->hProcess,
-                             0, FALSE, DUPLICATE_SAME_ACCESS);
+                             FilterHandles ? dwRead : 0, FALSE, FilterHandles ? 0 : DUPLICATE_SAME_ACCESS);
     }
     if (ok) {
+        DWORD dwRead =  STANDARD_RIGHTS_READ | SYNCHRONIZE |
+                        THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION | THREAD_SUSPEND_RESUME | 
+                        THREAD_QUERY_LIMITED_INFORMATION;
         ok = DuplicateHandle(GetCurrentProcess(), piInput->hThread,
                              CallerProcessHandle, &piReply->hThread,
-                             0, FALSE, DUPLICATE_SAME_ACCESS);
+                             FilterHandles ? dwRead : 0, FALSE, FilterHandles ? 0 : DUPLICATE_SAME_ACCESS);
     }
 
     if (ok) {

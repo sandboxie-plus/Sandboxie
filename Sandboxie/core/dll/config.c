@@ -300,7 +300,7 @@ _FX BOOLEAN SbieDll_GetSettingsForName_bool(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
+_FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list)
 {
     WCHAR conf_buf[2048];
 
@@ -310,7 +310,7 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* setting, LIST* list)
     while (1) {
 
         NTSTATUS status = SbieApi_QueryConf(
-            NULL, setting, index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
+            boxname, setting, index, conf_buf, sizeof(conf_buf) - 16 * sizeof(WCHAR));
         if (!NT_SUCCESS(status))
             break;
         ++index;
@@ -585,4 +585,50 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
             break;
     }
     return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_CheckStringInList
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_CheckPatternInList(const WCHAR* string, ULONG length, const WCHAR* boxname, const WCHAR* setting)
+{
+    LIST Patterns;
+    BOOLEAN ret = FALSE;
+
+    List_Init(&Patterns);
+
+    Config_InitPatternList(boxname, setting, &Patterns);
+
+    if (length == 0)
+        length = wcslen(string);
+
+    ULONG path_len = (length + 1) * sizeof(WCHAR);
+    WCHAR* path_lwr = Dll_AllocTemp(path_len);
+    if (!path_lwr) {
+        SbieApi_Log(2305, NULL);
+        goto finish;
+    }
+    memcpy(path_lwr, string, path_len);
+    path_lwr[length] = L'\0';
+    _wcslwr(path_lwr);
+
+    PATTERN* pat = List_Head(&Patterns);
+    while (pat) 
+    {
+        if (Pattern_Match(pat, path_lwr, length))
+        {
+            ret = TRUE;
+            goto finish;
+        }
+        pat = List_Next(pat);
+    }
+
+finish:
+    Dll_Free(path_lwr);
+
+    Config_FreePatternList(&Patterns);
+    return ret;
 }

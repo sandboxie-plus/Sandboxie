@@ -344,7 +344,7 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK_IF(NtAlpcQueryInformationMessage);
 
     // OriginalToken BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     // OriginalToken END
     {
         SBIEDLL_HOOK(Ipc_, NtImpersonateClientOfPort);
@@ -372,7 +372,7 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK(Ipc_,NtOpenSection);
 
     // OriginalToken BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
     // OriginalToken END
     {
         SBIEDLL_HOOK(Ipc_, NtImpersonateAnonymousToken);
@@ -734,7 +734,7 @@ _FX BOOLEAN Ipc_GetName_AdjustSplWow64Path(WCHAR *TruePath, BOOLEAN adj)
     //
 
     // NoSbieDesk BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
         return TRUE;
 	// NoSbieDesk END
 
@@ -3257,7 +3257,7 @@ _FX NTSTATUS Ipc_ConnectProxyPort(
     // check if we are in app mode in which case proxying is not needed, but we must indicate to open true path
     //
 
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0)
+    if (Dll_CompartmentMode) // NoServiceAssist
         return STATUS_BAD_INITIAL_STACK;
 
     status = STATUS_SUCCESS;

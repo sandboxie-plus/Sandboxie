@@ -282,7 +282,7 @@ _FX THREAD_DATA *Dll_GetTlsData(ULONG *pLastError)
 _FX void Dll_FreeTlsData(void)
 {
     THREAD_DATA *data;
-    ULONG depth;
+    ULONG depth, type;
 
     if (Dll_TlsIndex == TLS_OUT_OF_INDEXES)
         data = NULL;
@@ -295,20 +295,13 @@ _FX void Dll_FreeTlsData(void)
 
     for (depth = 0; depth < NAME_BUFFER_DEPTH; ++depth) {
 
-        WCHAR *buf = data->name_buffer[TRUE_NAME_BUFFER][depth];
-        if (buf)
-            Dll_Free(buf);
-        data->name_buffer[TRUE_NAME_BUFFER][depth] = NULL;
+        for (type = 0; type < NAME_BUFFER_COUNT; ++type) {
 
-        buf = data->name_buffer[COPY_NAME_BUFFER][depth];
-        if (buf)
-            Dll_Free(buf);
-        data->name_buffer[COPY_NAME_BUFFER][depth] = NULL;
-
-		buf = data->name_buffer[TMPL_NAME_BUFFER][depth];
-		if (buf)
-			Dll_Free(buf);
-		data->name_buffer[TMPL_NAME_BUFFER][depth] = NULL;
+            WCHAR* buf = data->name_buffer[type][depth];
+            if (buf)
+                Dll_Free(buf);
+            data->name_buffer[type][depth] = NULL;
+        }
     }
 
     Dll_Free(data);

@@ -194,7 +194,7 @@ TArguments GetArguments(const QString& Arguments, QChar Separator, QChar Assigne
 			continue;
 		}
 
-		if(Char == L' ' || Char == L'\t')
+		if(/*Char == L' ' ||*/ Char == L'\t')
 			continue;
 
 		if(!bReadValue) // reading argument name, or value for default argument
@@ -202,7 +202,7 @@ TArguments GetArguments(const QString& Arguments, QChar Separator, QChar Assigne
 			if(Char == Separator)
 			{
 				if(First) {*First = Name; First = NULL;}
-				else ArgumentList.insertMulti("",Name);
+				else ArgumentList.insertMulti("",Name.trimmed());
 				Name.clear();
 			}
 			else if(Char == Assigner)
@@ -215,7 +215,7 @@ TArguments GetArguments(const QString& Arguments, QChar Separator, QChar Assigne
 			if(Char == Separator)
 			{
 				if (bLowerKeys) Name = Name.toLower();
-				ArgumentList.insertMulti(Name,Value);
+				ArgumentList.insertMulti(Name.trimmed(),Value.trimmed());
 				//if(First) {*First = Name; First = NULL;}
 				Name.clear();
 				Value.clear();
@@ -231,13 +231,13 @@ TArguments GetArguments(const QString& Arguments, QChar Separator, QChar Assigne
 		if(bReadValue)
 		{
 			if (bLowerKeys) Name = Name.toLower();
-			ArgumentList.insertMulti(Name,Value);
+			ArgumentList.insertMulti(Name.trimmed(),Value.trimmed());
 			//if (First) { *First = Name; }
 		}
 		else
 		{
 			if (First) { *First = Name; }
-			else ArgumentList.insertMulti("", Name);
+			else ArgumentList.insertMulti("", Name.trimmed());
 		}
 	}
 
@@ -270,7 +270,7 @@ QString FormatRate(quint64 Size, int Precision)
 QString FormatUnit(quint64 Size, int Precision)
 {
 	double Div;
-	if(Size > (quint64)(Div = 1.0*1000*1000*1000*1024*1000*1000))
+	if(Size > (quint64)(Div = 1.0*1000*1000*1000*1000*1000*1000))
 		return QString::number(double(Size)/Div, 'f', Precision) + " E";
 	if(Size > (quint64)(Div = 1.0*1000*1000*1000*1000*1000))
 		return QString::number(double(Size)/Div, 'f', Precision) + " P";
@@ -453,3 +453,25 @@ bool InitConsole(bool bCreateIfNeeded)
 	return true;
 }
 #endif
+
+//
+// avoid flashing a bright white window when in dark mode
+//
+
+void SafeShow(QWidget* pWidget) {
+	static bool Lock = false;
+	pWidget->setProperty("windowOpacity", 0.0);
+	if (Lock == false) {
+		Lock = true;
+		pWidget->show();
+		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeSocketNotifiers);
+		Lock = false;
+	} else
+		pWidget->show();
+	pWidget->setProperty("windowOpacity", 1.0);
+}
+
+int SafeExec(QDialog* pDialog){
+	SafeShow(pDialog);
+	return pDialog->exec();
+}

@@ -260,17 +260,14 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 		SbieApi_QueryProcess(next->UniqueProcessId, boxname, NULL, NULL, NULL);
 
 		BOOL hideProcess = FALSE;
-		if (hideOther) {
-			if(boxname[0] && _wcsicmp(boxname, Dll_BoxName) != 0)
-				hideProcess = TRUE;
+		if (hideOther && *boxname && _wcsicmp(boxname, Dll_BoxName) != 0) {
+			hideProcess = TRUE;
 		}
-
-		if(hiddenProcesses) {
-			if ((!boxname[0]) && next->ImageName.Buffer) {
-				WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
-				if (imagename)  imagename += 1; // skip L'\\'
-				else			imagename = next->ImageName.Buffer;
-
+		else if(hiddenProcesses && next->ImageName.Buffer) {
+            WCHAR* imagename = wcschr(next->ImageName.Buffer, L'\\');
+			if (imagename)  imagename += 1; // skip L'\\'
+			else			imagename = next->ImageName.Buffer;
+			if (!*boxname || _wcsnicmp(imagename, L"Sandboxie", 9) == 0) {
 				for (hiddenProcessesPtr = hiddenProcesses; *hiddenProcessesPtr != L'\0'; hiddenProcessesPtr += wcslen(hiddenProcessesPtr) + 1) {
 					if (_wcsicmp(imagename, hiddenProcessesPtr) == 0) {
 						hideProcess = TRUE;
@@ -412,9 +409,9 @@ _FX NTSTATUS SysInfo_GetJobName(OBJECT_ATTRIBUTES* ObjectAttributes, WCHAR** Out
         objname_buf = ObjectAttributes->ObjectName->Buffer;
     } else {
 
-        InterlockedIncrement(&JobCounter);
+        ULONG jobCounter = InterlockedIncrement(&JobCounter);
         Sbie_snwprintf(dummy_name, MAX_PATH, L"%s_DummyJob_%s_p%d_t%d_c%d",
-                        SBIE, Dll_ImageName, GetCurrentProcessId(), GetCurrentThreadId(), JobCounter);
+                        SBIE, Dll_ImageName, GetCurrentProcessId(), GetCurrentThreadId(), jobCounter);
         
         objname_len = wcslen(dummy_name);
         objname_buf = dummy_name;

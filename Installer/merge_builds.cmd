@@ -2,6 +2,8 @@
 
 call %~dp0get_openssl.cmd
 
+call %~dp0get_qttranslations.cmd
+
 call %~dp0copy_build.cmd x64
 
 call %~dp0copy_build.cmd x86

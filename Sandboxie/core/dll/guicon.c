@@ -80,7 +80,7 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 _FX BOOLEAN Gui_InitConsole1(void)
 {
     // NoSbieCons BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
 
         //
         // We need to set Gui_ConsoleHwnd in order for Gui_InitConsole2 to start up properly,

@@ -60,12 +60,8 @@
           <string>Selected Snapshot Details</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Name:</string>
-            </property>
-           </widget>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="txtName"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
@@ -77,11 +73,25 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1" rowspan="2">
-           <widget class="QPlainTextEdit" name="txtInfo"/>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Name:</string>
+            </property>
+           </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="txtName"/>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="chkDefault">
+            <property name="toolTip">
+             <string>When deleting a snapshot content, it will be returned to this snapshot instead of none.</string>
+            </property>
+            <property name="text">
+             <string>Default snapshot</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" rowspan="2" colspan="2">
+           <widget class="QPlainTextEdit" name="txtInfo"/>
           </item>
          </layout>
         </widget>
@@ -98,20 +108,6 @@
           <string>Snapshot Actions</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="0">
-           <widget class="QPushButton" name="btnRemove">
-            <property name="text">
-             <string>Remove Snapshot</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="btnSelect">
-            <property name="text">
-             <string>Go to Snapshot</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QPushButton" name="btnTake">
             <property name="text">
@@ -132,6 +128,32 @@
             </property>
            </spacer>
           </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="btnRemove">
+            <property name="text">
+             <string>Remove Snapshot</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QToolButton" name="btnSelect">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Go to Snapshot</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -147,7 +169,6 @@
  <tabstops>
   <tabstop>btnTake</tabstop>
   <tabstop>treeSnapshots</tabstop>
-  <tabstop>btnSelect</tabstop>
   <tabstop>btnRemove</tabstop>
   <tabstop>txtName</tabstop>
   <tabstop>txtInfo</tabstop>

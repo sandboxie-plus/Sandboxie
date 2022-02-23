@@ -113,7 +113,7 @@ void RemovePid(ULONG myPid)
 
 void AddPid(ULONG *myPids, ULONG count)
 {
-    for (ULONG i = 0; i <= count; i++)
+    for (ULONG i = 0; i < count; i++)
     {
         if (map_get(&pidMap, (void*)myPids[i]) == NULL) { // not yet listed
             MONITOR_PID monitorPid;
@@ -289,7 +289,7 @@ int DoLingerLeader(void)
 
             AddPid(pids, pid_count);
 
-            for (i = 0; i <= pid_count; ++i) {
+            for (i = 0; i < pid_count; ++i) {
 
                 pids_i = (HANDLE)(ULONG_PTR)pids[i];
                 SbieApi_QueryProcess(pids_i, NULL, image, NULL, NULL);
@@ -363,26 +363,20 @@ int DoLingerLeader(void)
             SbieDll_StartBoxedService(image, TRUE);
         }
 
+        ULONG buf_len = 4096 * sizeof(WCHAR);
+        WCHAR* buf1 = HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS | HEAP_ZERO_MEMORY, buf_len);
+
         for (i = 0; ; ++i) {
 
             rc = SbieApi_QueryConfAsIs(
-                NULL, L"StartProgram", i, image, sizeof(WCHAR) * 120);
+                NULL, L"StartProgram", i, buf1, buf_len - 16);
             if (rc != 0)
                 break;
 
-            SbieDll_ExpandAndRunProgram(image);
+            SbieDll_ExpandAndRunProgram(buf1);
         }
 
-        WCHAR Cmd[8191];
-        for (i = 0; ; ++i) {
-
-            rc = SbieApi_QueryConfAsIs(
-                NULL, L"StartCommand", i, Cmd, sizeof(Cmd));
-            if (rc != 0)
-                break;
-
-            SbieDll_RunStartExe(Cmd, NULL);
-        }
+        HeapFree(GetProcessHeap(), 0, buf1);
     }
 
     //
@@ -442,8 +436,7 @@ int DoLingerLeader(void)
 
                 // Note: since we normally no longer start services as system this is pointless
 
-                //HANDLE ProcessHandle = 0;
-                //SbieApi_OpenProcess(&ProcessHandle, pids_i);
+                //HANDLE ProcessHandle = SbieDll_OpenProcess(PROCESS_QUERY_INFORMATION, pids_i);
                 //if (ProcessHandle) {
                 //    if (SbieDll_CheckProcessLocalSystem(ProcessHandle))
                 //        is_local_system_sid = TRUE;

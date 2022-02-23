@@ -65,15 +65,15 @@ protected:
     WCHAR *RunSandboxedCopyString(MSG_HEADER *msg, ULONG ofs, ULONG len);
     HANDLE RunSandboxedGetToken(
             HANDLE CallerProcessHandle, bool CallerInSandbox,
-            const WCHAR *BoxName, const WCHAR *cmd, ULONG idProcess);
+            const WCHAR *BoxName, const WCHAR* cmd);
     BOOL RunSandboxedStartProcess(
             HANDLE PrimaryTokenHandle, LONG_PTR BoxNameOrModelPid,
-            ULONG CallerProcessId,
-            WCHAR *cmd, const WCHAR *dir, WCHAR *env, ULONG *crflags,
+            WCHAR *cmd, const WCHAR *dir, WCHAR *env, 
+            BOOL* FilterHandles, ULONG crflags,
             STARTUPINFO *si, PROCESS_INFORMATION *pi);
     WCHAR *RunSandboxedComServer(ULONG CallerProcessId);
     BOOL RunSandboxedDupAndCloseHandles(
-            HANDLE CallerProcessHandle, ULONG crflags,
+            HANDLE CallerProcessHandle, BOOL FilterHandles, ULONG crflags,
             PROCESS_INFORMATION *piInput, PROCESS_INFORMATION *piReply);
 
 

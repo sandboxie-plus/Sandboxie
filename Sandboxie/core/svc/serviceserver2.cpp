@@ -399,13 +399,12 @@ ULONG ServiceServer::RunHandler2(
 
             CloseHandle(hProcess);
         }
+    
+        if (ok && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
+            errlvl = 0x27;
+            ok = ProcessServer::RunSandboxedStripPrivileges(hNewToken);
+        }
     }
-
-    if (ok && asSys && SbieApi_QueryConfBool(boxname, L"StripSystemPrivileges", TRUE)) {
-        errlvl = 0x27;
-        ok = ProcessServer::RunSandboxedStripPrivileges(hNewToken);
-    }
-
 
     if (ok) {
 

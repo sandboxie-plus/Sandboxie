@@ -264,11 +264,11 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
         for (i = 0; normalpaths[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->normal_key_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
         }
-    }
 
-    if (! ok) {
-        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-        return FALSE;
+        if (!ok) {
+            Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+            return FALSE;
+        }
     }
 #endif
 

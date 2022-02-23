@@ -371,7 +371,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     // disable the use of the gui proxy
     //
 
-    Gui_UseProxyService = (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
+    Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
 
     GUI_IMPORT___(GetWindowThreadProcessId);
@@ -416,7 +416,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(ExitWindowsEx);
     GUI_IMPORT___(EndTask);
     // NoSbieCons BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE))
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE))
 	// NoSbieCons END
     if (Dll_OsBuild >= 8400) {
         GUI_IMPORT___(ConsoleControl);
@@ -575,7 +575,7 @@ _FX BOOLEAN Gui_Init2(void)
     SBIEDLL_HOOK_GUI(ExitWindowsEx);
     SBIEDLL_HOOK_GUI(EndTask);
     // NoSbieCons BEGIN
-    if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) == 0 && !SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE))
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE))
 	// NoSbieCons END
     if (__sys_ConsoleControl) {
         SBIEDLL_HOOK_GUI(ConsoleControl);
@@ -830,7 +830,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     ULONG errlvl = 0;
 
     // NoSbieDesk BEGIN
-	if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+	if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 		return TRUE;
 	// NoSbieDesk END
 
@@ -996,7 +996,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
                 rc = (ULONG_PTR)NtCurrentThread();
 
 				// OriginalToken BEGIN
-				if ((Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0 || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+				if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
 					rc = 0;
 				else
 				// OriginalToken END

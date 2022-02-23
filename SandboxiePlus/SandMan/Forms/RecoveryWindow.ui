@@ -91,19 +91,6 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="3">
-        <widget class="QPushButton" name="btnDeleteAll">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Delete all</string>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="0">
         <widget class="QCheckBox" name="chkShowAll">
          <property name="text">
@@ -154,6 +141,25 @@
          </property>
         </widget>
        </item>
+       <item row="6" column="3">
+        <widget class="QToolButton" name="btnDeleteAll">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Delete Content</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
@@ -163,7 +169,6 @@
  <tabstops>
   <tabstop>treeFiles</tabstop>
   <tabstop>chkShowAll</tabstop>
-  <tabstop>btnDeleteAll</tabstop>
  </tabstops>
  <resources/>
  <connections/>

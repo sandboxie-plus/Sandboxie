@@ -21,8 +21,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with accessing network drives in privacy mode [#1617](https://github.com/sandboxie-plus/Sandboxie/issues/1617)
 - fixed issue with ping in compartment mode [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
 - fixed SandMan UI freezing when a lot of processes are created and closed in a box
-- fixed Editing existing 'Run Menu' Command Line entry not being recognized https://github.com/sandboxie-plus/Sandboxie/issues/1648
+- fixed Editing existing 'Run Menu' Command Line entry not being recognized [#1648](https://github.com/sandboxie-plus/Sandboxie/issues/1648)
 - fixed bsod issue in driver (thanks Diversenok)
+- fixed incompatybility with windows 11 insider build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
+
 
 
 ## [1.0.11 / 5.55.11] - 2022-02-13

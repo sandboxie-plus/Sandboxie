@@ -671,20 +671,17 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     //
 
     ok = Process_GetPaths(proc, normal_file_paths, _NormalPath, TRUE);
+
+    if (ok && proc->use_privacy_mode) {
+        for (i = 0; normalpaths[i] && ok; ++i) {
+            ok = Process_AddPath(
+                proc, normal_file_paths, NULL, TRUE, normalpaths[i], FALSE);
+        }
+    }
+
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
         return FALSE;
-    }
-
-    if (proc->use_privacy_mode) {
-        for (i = 0; normalpaths[i] && ok; ++i) {
-            ok = Process_AddPath(proc, normal_file_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
-        }
-
-        if (!ok) {
-            Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-            return FALSE;
-        }
     }
 #endif
 
@@ -1358,9 +1355,10 @@ _FX NTSTATUS File_Generic_MyParseProc(
         //
 
 #ifdef USE_MATCH_PATH_EX
+        // is_write = ((mp_flags & TRUE_PATH_MASK) == TRUE_PATH_CLOSED_FLAG) && ((mp_flags & COPY_PATH_MASK) == COPY_PATH_OPEN_FLAG); 
         // is_open = ((mp_flags & TRUE_PATH_MASK) == TRUE_PATH_OPEN_FLAG);
         // is_closed = ((mp_flags & TRUE_PATH_MASK) == 0)
-        if ((!write_access || !((mp_flags & TRUE_PATH_WRITE_FLAG) != 0)) && !((mp_flags & TRUE_PATH_MASK) == 0)) {
+        if (proc->use_rule_specificity || ((!write_access || !((mp_flags & TRUE_PATH_WRITE_FLAG) != 0)) && !((mp_flags & TRUE_PATH_MASK) == 0))) {
 #else
         if ((! is_open) && (! is_closed)) {
 #endif
@@ -1420,7 +1418,8 @@ _FX NTSTATUS File_Generic_MyParseProc(
                         // if this is not a atribute or sync request update the permissions for the network path
                         //
 
-                        if ((MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
+                        if (proc->use_rule_specificity || 
+                            (MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
                             (MyContext->OriginalDesiredAccess != SYNCHRONIZE))
                         {
                             mp_flags = Process_MatchPathEx(proc, path2, len1, L'n',
@@ -2648,21 +2647,35 @@ get_program:
 
     if (user_devname) {
 
+#ifdef USE_MATCH_PATH_EX
+        ULONG mp_flags;
+#else
         BOOLEAN is_open, is_closed;
+#endif
         KIRQL irql2;
 
         KeRaiseIrql(APC_LEVEL, &irql2);
         ExAcquireResourceSharedLite(proc->file_lock, TRUE);
 
+#ifdef USE_MATCH_PATH_EX
+        mp_flags = Process_MatchPathEx(proc, device_name, wcslen(device_name), L'f',
+            &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
+            &proc->read_file_paths, &proc->write_file_paths, NULL);
+#else
         Process_MatchPath(
             proc->pool, device_name, wcslen(device_name),
             NULL, &proc->closed_file_paths,
             &is_open, &is_closed);
+#endif
 
         ExReleaseResourceLite(proc->file_lock);
         KeLowerIrql(irql2);
 
+#ifdef USE_MATCH_PATH_EX
+        if ((mp_flags & TRUE_PATH_MASK) == 0) {
+#else
         if (is_closed) {
+#endif
 
             status = STATUS_ACCESS_DENIED;
 

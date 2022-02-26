@@ -50,6 +50,7 @@ private slots:
 	void OnBrowsePath();
 	void OnAddCommand();
 	void OnDelCommand();
+	void OnRunChanged() { m_GeneralChanged = true;  OnOptChanged(); }
 
 	void OnAddGroup();
 	void OnAddProg();

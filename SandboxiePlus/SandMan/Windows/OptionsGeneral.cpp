@@ -91,6 +91,7 @@ void COptionsWindow::CreateGeneral()
 	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddCmd->setMenu(pRunBtnMenu);
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
+	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
 }
 
 void COptionsWindow::LoadGeneral()

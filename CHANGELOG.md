@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.12 / 5.55.12] - 2022-02-??
+## [1.0.12 / 5.55.12] - 2022-03-01
 
 ### Added
 - added mini dump creation to sandman.exe in case it crashes

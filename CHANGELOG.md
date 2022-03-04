@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with ping in compartment mode [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
 - fixed SandMan UI freezing when a lot of processes are created and closed in a box
 - fixed Editing existing 'Run Menu' Command Line entry not being recognized [#1648](https://github.com/sandboxie-plus/Sandboxie/issues/1648)
-- fixed bluescreen issue in driver (thanks Diversenok)
+- fixed blue screen issue in driver (thanks Diversenok)
 - fixed incompatibility with Windows 11 Insider Build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
 
 

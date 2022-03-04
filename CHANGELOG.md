@@ -1,4 +1,12 @@
-## [1.0.12 / 5.55.12] - 2022-03-04
+# Changelog
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/).
+
+
+
+
+
+## [1.0.12 / 5.55.12] - 2022-03-02
 
 ### Added
 - added mini dump creation to Sandman.exe in case it crashes

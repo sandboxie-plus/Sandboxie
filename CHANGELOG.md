@@ -6,10 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.12 / 5.55.12] - 2022-03-01
+## [1.0.12 / 5.55.12] - 2022-03-02
 
 ### Added
-- added mini dump creation to sandman.exe in case it crashes
+- added mini dump creation to Sandman.exe in case it crashes
 
 ### Changed 
 - disabled Chrome and Firefox phishing entries in new sandboxes (by isaak654) [#1616](https://github.com/sandboxie-plus/Sandboxie/pull/1616)
@@ -22,8 +22,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with ping in compartment mode [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
 - fixed SandMan UI freezing when a lot of processes are created and closed in a box
 - fixed Editing existing 'Run Menu' Command Line entry not being recognized [#1648](https://github.com/sandboxie-plus/Sandboxie/issues/1648)
-- fixed bsod issue in driver (thanks Diversenok)
-- fixed incompatybility with windows 11 insider build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
+- fixed bluescreen issue in driver (thanks Diversenok)
+- fixed incompatibility with Windows 11 Insider Build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
 
 
 

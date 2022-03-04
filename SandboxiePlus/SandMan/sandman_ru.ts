@@ -4293,7 +4293,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="682"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
-        <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>Только учетная запись администратора может использовать команду &apos;Приостановить принудительные программы&apos;</translation>
     </message>
     <message>

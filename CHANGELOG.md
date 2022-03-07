@@ -6,6 +6,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.0.13 / 5.55.13] - 2022-03-07
+
+
+### Fixed
+- FIXED SECURITY ISSUE: Hard link creation was not properly filtered (thanks Diversenok)
+- fixed issue with checking the certificate entry.
+
+
 ## [1.0.12 / 5.55.12] - 2022-03-02
 
 ### Added

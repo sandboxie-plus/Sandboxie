@@ -2290,7 +2290,7 @@ void CSandMan::CheckForUpdates(bool bManual)
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
 	Query.addQueryItem("language", QString::number(m_LanguageId));
 
-	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	if (UpdateKey.isEmpty())
 		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	if (!UpdateKey.isEmpty())
@@ -2528,7 +2528,7 @@ void CSandMan::OnAbout()
 
 		QString CertInfo;
 		if (!g_Certificate.isEmpty()) {
-			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("name"));
+			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("NAME"));
 		} else {
 			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
 		}
@@ -2581,7 +2581,7 @@ void CSandMan::UpdateCert()
 {
 	QString UpdateKey; // for now only patreons can update the cert automatically
 	if(GetArguments(g_Certificate, L'\n', L':').value("type").indexOf("PATREON") == 0)
-		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("updatekey");
+		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	if (UpdateKey.isEmpty()) {
 		OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
 		return;

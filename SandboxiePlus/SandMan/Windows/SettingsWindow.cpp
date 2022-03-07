@@ -531,12 +531,14 @@ void CSettingsWindow::SaveSettings()
 			QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 			if (!Certificate.isEmpty()) {
 
+				auto Args = GetArguments(Certificate, L'\n', L':');
+
 				bool bLooksOk = true;
-				if (GetArguments(g_Certificate, L'\n', L':').value("NAME").isEmpty()) // mandatory
+				if (Args.value("NAME").isEmpty()) // mandatory
 					bLooksOk = false;
-				//if (GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY").isEmpty())
+				//if (Args.value("UPDATEKEY").isEmpty())
 				//	bLooksOk = false;
-				if (GetArguments(g_Certificate, L'\n', L':').value("SIGNATURE").isEmpty()) // absolutely mandatory
+				if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
 					bLooksOk = false;
 
 				if (bLooksOk) {

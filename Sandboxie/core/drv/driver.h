@@ -73,8 +73,6 @@
 
 #define HOOK_WIN32K
 
-//new FILE_INFORMATION_CLASS type not defined in current wdm.h used in windows 10 FCU
-#define SB_FileRenameInformationEx 65
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------

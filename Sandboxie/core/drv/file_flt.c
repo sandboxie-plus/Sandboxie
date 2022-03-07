@@ -316,7 +316,8 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
         // we allow IRP_MJ_SET_INFORMATION to pass except for these 3 
         if ((Iopb->Parameters.SetFileInformation.FileInformationClass != FileRenameInformation) &&
             (Iopb->Parameters.SetFileInformation.FileInformationClass != FileLinkInformation) &&
-            (Iopb->Parameters.SetFileInformation.FileInformationClass != SB_FileRenameInformationEx))
+            (Iopb->Parameters.SetFileInformation.FileInformationClass != FileLinkInformationEx) &&
+            (Iopb->Parameters.SetFileInformation.FileInformationClass != FileRenameInformationEx))
 
             goto finish;
 
@@ -444,11 +445,34 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
 
     if (Iopb->MajorFunction == IRP_MJ_SET_INFORMATION) {
         // Do not allow hard links outside the sandbox
-        if (Iopb->Parameters.SetFileInformation.FileInformationClass == FileLinkInformation) {
-            if(Iopb->Parameters.SetFileInformation.ParentOfTarget &&
-               !Box_IsBoxedPath(proc->box, file, &Iopb->Parameters.SetFileInformation.ParentOfTarget->FileName)) {
+        if (Iopb->Parameters.SetFileInformation.FileInformationClass == FileLinkInformation 
+         || Iopb->Parameters.SetFileInformation.FileInformationClass == FileLinkInformationEx) {
+            // FILE_LINK_INFORMATION* FileInfo = (FILE_LINK_INFORMATION*)Iopb->Parameters.SetFileInformation.InfoBuffer;
+            
+            // For rename or link operations. If InfoBuffer->FileName contains a fully qualified file name, or if InfoBuffer->RootDirectory is non-NULL, 
+            // this member is a file object pointer for the parent directory of the file that is the target of the operation. Otherwise it is NULL.
+            if (Iopb->Parameters.SetFileInformation.ParentOfTarget == NULL) {
+
+                FLT_FILE_NAME_INFORMATION   *pTargetFileNameInfo = NULL;
+
+                if (FltGetFileNameInformation(Data, FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT, &pTargetFileNameInfo) != STATUS_SUCCESS)
+                {
+                    status = STATUS_ACCESS_DENIED;      // if we can't get the name, just disallow the call
+                }
+                else
+                {
+                    // if the file is to be created in the same directroy as the original file, we check if the original file is in a sandboxed location
+                    if(!Box_IsBoxedPath(proc->box, file, &pTargetFileNameInfo->Name)) {
+                        status = STATUS_ACCESS_DENIED;
+                    }
+                }
+                       
+                if (pTargetFileNameInfo != NULL) {
+                    FltReleaseFileNameInformation(pTargetFileNameInfo);
+                }
+            }
+            else if(!Box_IsBoxedPath(proc->box, file, &Iopb->Parameters.SetFileInformation.ParentOfTarget->FileName)) {
                 status = STATUS_ACCESS_DENIED;
-                goto finish;
             }
         }
         else {

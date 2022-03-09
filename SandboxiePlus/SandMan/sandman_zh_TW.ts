@@ -1799,8 +1799,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2508"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>此支持者證書已過期 %1，請取得可用的新證書</translation>
+        <translation>此支持者證書已過期%1，請取得可用的新證書</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2509"/>

@@ -6,7 +6,7 @@
     <message>
         <location filename="BoxJob.h" line="35"/>
         <source>Deleting Content</source>
-        <translation type="unfinished"></translation>
+        <translation>正在刪除內容</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@
     <message>
         <location filename="BoxJob.h" line="56"/>
         <source>OnDelete: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除階段: %1</translation>
     </message>
 </context>
 <context>
@@ -149,15 +149,9 @@
         <translation>完全開放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="246"/>
-        <source>Read Only</source>
-        <oldsource>Boxed Only</oldsource>
-        <translation type="unfinished">僅沙箱內</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAccess.cpp" line="247"/>
         <source>Box Only (Write Only)</source>
-        <translation type="unfinished"></translation>
+        <translation>僅沙箱內 (唯寫)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="249"/>
@@ -253,43 +247,39 @@
         <translation>範本值無法刪除。</translation>
     </message>
     <message>
-        <source>Please enter an auto exec command</source>
-        <translation type="vanished">請輸入自動執行命令</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="336"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="340"/>
         <source>On Start</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動階段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="337"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="345"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="349"/>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>執行命令</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="341"/>
         <source>Start Service</source>
-        <translation type="unfinished">啟動服務</translation>
+        <translation>啟動服務</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="344"/>
         <source>On Init</source>
-        <translation type="unfinished"></translation>
+        <translation>初始化階段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="348"/>
         <source>On Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除階段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="359"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="381"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="392"/>
         <source>Please enter the command line to be executed</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入需要執行的命令行</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="411"/>
@@ -388,30 +378,14 @@
         <translation>選擇顏色</translation>
     </message>
     <message>
-        <source>Please enter a program path</source>
-        <translation type="vanished">請輸入程式路徑</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsGeneral.cpp" line="239"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
     <message>
-        <source>Executables (*.exe *.cmd);;All files (*.*)</source>
-        <translation type="vanished">可執行檔案 (*.exe *.cmd);;所有檔案 (*.*)</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="370"/>
         <source>Please enter a service identifier</source>
         <translation>請輸入服務識別元</translation>
-    </message>
-    <message>
-        <source>Service</source>
-        <translation type="vanished">服務</translation>
-    </message>
-    <message>
-        <source>Program</source>
-        <translation type="vanished">程式</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="239"/>
@@ -886,7 +860,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="245"/>
         <source>Close until all programs stop in this box</source>
-        <translation>選取目錄</translation>
+        <translation>關閉，在沙箱內全部程式停止後再顯示</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="265"/>
@@ -1161,7 +1135,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="463"/>
         <source>Show All Sessions</source>
-        <translation>顯示所有工作階段</translation>
+        <translation>顯示所有會話的處理程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="468"/>
@@ -1201,12 +1175,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="480"/>
         <source>Reset all hidden messages</source>
-        <translation>重設所有隱藏訊息</translation>
+        <translation>重設所有已隱藏訊息</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="481"/>
         <source>Reset all GUI options</source>
-        <translation type="unfinished"></translation>
+        <translation>重設所有圖形介面設定選項</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="483"/>
@@ -1320,22 +1294,22 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="723"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
-        <translation>透過命令列請求的未知操作 &apos;%1&apos;</translation>
+        <translation>透過命令行請求的未知操作 &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="909"/>
         <source>Executing OnBoxDelete: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>在刪除沙箱時執行: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="931"/>
         <source>Auto deleting content of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>自動刪除 %1 的內容</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="954"/>
         <source>Auto Deleting %1 content</source>
-        <translation type="unfinished"></translation>
+        <translation>自動刪除 %1 的內容</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1629"/>
@@ -1353,10 +1327,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <location filename="SandMan.cpp" line="1631"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>啟動所需 Sandboxie 元件失敗</translation>
-    </message>
-    <message>
-        <source>Maintenance operation %1</source>
-        <translation type="vanished">維護作業 %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1638"/>
@@ -1487,7 +1457,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1768"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
-        <translation>您是否要重置已隱藏訊息視窗 (是) ，或僅用於所有日誌訊息 (否)？</translation>
+        <translation>請確認是否要重設已隱藏的訊息框 (選「是」)，或者僅重設所有日誌訊息 (選「否」)？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1844"/>
@@ -1593,17 +1563,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1486"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation>請輸入禁用強制程式規則的持續時間 (以秒為單位)。</translation>
+        <translation>請輸入「停用強制沙箱程式規則」的持續時間 (單位：秒)。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1633"/>
         <source>Maintenance operation failed (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>維護作業執行失敗 (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1978"/>
         <source>Failed to execute: %1</source>
-        <translation>執行失敗: %1</translation>
+        <translation>執行失敗：%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1979"/>
@@ -1668,7 +1638,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1991"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>在刪除沙箱內容之前，必須先停止沙箱內的所有處理程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1992"/>
@@ -1678,7 +1648,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1995"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>移動目錄 &apos;%1&apos; 至 &apos;%2&apos; 失敗</translation>
+        <translation>移動目錄 &apos;%1&apos; 到 &apos;%2&apos; 失敗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1996"/>
@@ -1703,7 +1673,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2001"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
-        <translation>刪除舊版快照目錄 &apos;%1&apos; 失敗</translation>
+        <translation>移除舊快照的目錄 &apos;%1&apos; 失敗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2002"/>
@@ -1738,7 +1708,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2009"/>
         <source>The operation was canceled by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>該操作已被使用者取消</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2030"/>
@@ -1829,7 +1799,8 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2508"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <translation>此支持者證書已過期%1，請取得可用的新證書</translation>
+        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
+        <translation>此支持者證書已過期 %1，請取得可用的新證書</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2509"/>
@@ -2323,7 +2294,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Stop Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>停止作業</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
@@ -2421,12 +2392,12 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="878"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>警告: 開啟的註冊表編輯器未沙箱化，請審慎且僅對預先選取的沙箱位置進行修改。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="879"/>
         <source>Don&apos;t show this warning in future</source>
-        <translation type="unfinished"></translation>
+        <translation>不再顯示此警告</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="934"/>
@@ -2446,12 +2417,13 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="987"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
+        <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation>確定要刪除選取的沙箱？&lt;br /&gt;&lt;br /&gt;警告：沙箱內的內容也將一併刪除！</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1000"/>
         <source>Deleting %1 content</source>
-        <translation type="unfinished"></translation>
+        <translation>正在刪除 %1 的內容</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1015"/>
@@ -2565,17 +2537,17 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
         <source>All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>所有沙箱</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="114"/>
         <source>Active + Pinned</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動或已固定的沙箱</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="115"/>
         <source>Pinned Only</source>
-        <translation type="unfinished"></translation>
+        <translation>僅已固定的沙箱</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="117"/>
@@ -2595,7 +2567,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="221"/>
         <source>Run &amp;Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙箱中執行(&amp;S)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
@@ -2610,7 +2582,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="397"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>在沙箱外執行(&amp;U)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="562"/>
@@ -3114,28 +3086,12 @@ No will choose: %2</source>
         <translation>移除</translation>
     </message>
     <message>
-        <source>Auto Start</source>
-        <translation type="vanished">自動啟動</translation>
-    </message>
-    <message>
-        <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translation type="vanished">您可以指定將在沙箱啟用時自動啟動的程式或服務</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="936"/>
         <location filename="Forms/OptionsWindow.ui" line="1035"/>
         <location filename="Forms/OptionsWindow.ui" line="1571"/>
         <location filename="Forms/OptionsWindow.ui" line="1826"/>
         <source>Type</source>
         <translation>類型</translation>
-    </message>
-    <message>
-        <source>Program/Service</source>
-        <translation type="vanished">程式/服務</translation>
-    </message>
-    <message>
-        <source>Add service</source>
-        <translation type="vanished">新增服務</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="824"/>
@@ -3225,7 +3181,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
         <source>Always show this sandbox in the systray list (Pinned)</source>
-        <translation type="unfinished"></translation>
+        <translation>固定住此沙箱，以便總是在系統匣列表顯示</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
@@ -3707,73 +3663,61 @@ The process match level has a higher priority than the specificity and describes
         <translation>存取隔離</translation>
     </message>
     <message>
-        <source>Auto Exec</source>
-        <translation type="vanished">自動執行</translation>
-    </message>
-    <message>
-        <source>Add Command</source>
-        <translation type="vanished">新增命令</translation>
-    </message>
-    <message>
-        <source>Here you can specify a list of commands that are executed every time the sandbox is initially populated.</source>
-        <translation type="vanished">您可以指定一系列每次沙箱啟動時需執行的命令。</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
         <source>Triggers</source>
-        <translation type="unfinished"></translation>
+        <translation>觸發器</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2290"/>
         <source>Event</source>
-        <translation type="unfinished"></translation>
+        <translation>事件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <location filename="Forms/OptionsWindow.ui" line="2371"/>
         <location filename="Forms/OptionsWindow.ui" line="2416"/>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>執行命令</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2339"/>
         <source>Start Service</source>
-        <translation type="unfinished">啟動服務</translation>
+        <translation>啟動服務</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2346"/>
         <source>These events are executed each time a box is started</source>
-        <translation type="unfinished"></translation>
+        <translation>這些事件當沙箱每次啟動時都會被執行</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2349"/>
         <source>On Box Start</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動階段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2391"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>這些命令將在刪除沙箱的內容之前，以非沙箱化的方式被執行</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2394"/>
         <source>On Box Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除階段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2423"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>這些命令只在沙箱被初始化時執行。要使它們再次執行，必須刪除沙箱內容。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2426"/>
         <source>On Box Init</source>
-        <translation type="unfinished"></translation>
+        <translation>初始化階段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2436"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation type="unfinished"></translation>
+        <translation>在這裡，您可以設定各種沙箱事件中自動執行特定的動作。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2461"/>
@@ -4251,7 +4195,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="160"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
-        <translation type="unfinished"></translation>
+        <translation>盡可能以異步方式執行沙箱的各類操作 (如內容刪除)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="169"/>
@@ -4261,7 +4205,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="242"/>
         <source>Show boxes in tray list:</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示沙箱清單:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="269"/>
@@ -4271,12 +4215,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>加入「在沙箱外執行」到右鍵選單</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="330"/>
         <source>Show a tray notification when automatic box operations are started</source>
-        <translation type="unfinished"></translation>
+        <translation>當沙箱自動化作業事件開始執行時，彈出系統匣通知</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="376"/>
@@ -4286,7 +4230,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="463"/>
         <source>Activate Kernel Mode Object Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動核心模式物件篩選器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="527"/>
@@ -4378,10 +4322,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="430"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>使用 Windows 篩選平台 (WFP) 限制網路存取</translation>
-    </message>
-    <message>
-        <source>Activate Kernel Mode Object Filtering (experimental)</source>
-        <translation type="vanished">啟動核心模式物件篩選器 (實驗性)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
@@ -4565,12 +4505,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>
         <source>Snapshot Actions</source>
-        <translation>快照行為</translation>
+        <translation>快照操作</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="134"/>
         <source>Remove Snapshot</source>
-        <translation>刪除快照</translation>
+        <translation>移除快照</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="153"/>

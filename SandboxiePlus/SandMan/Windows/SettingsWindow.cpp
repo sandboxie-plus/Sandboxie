@@ -153,7 +153,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
 	m_CompatChanged = false;
-	ui.chkNoCompat->setChecked(theConf->GetBool("Options/AutoRunSoftCompat", true));
+	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 

@@ -103,7 +103,6 @@ int main(int argc, char *argv[])
 
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 
-
 	CSandMan* pWnd = new CSandMan();
 
 	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));

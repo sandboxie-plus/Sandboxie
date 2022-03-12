@@ -43,6 +43,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	m_IsEnabled = true;
 
 	m_ActiveProcessCount = 0;
+	m_ActiveProcessDirty = false;
 
 	// when loading a sandbox that is not initialized, initialize it
 	int cfglvl = GetNum("ConfigLevel");

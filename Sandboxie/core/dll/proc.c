@@ -579,6 +579,43 @@ _FX BOOL Proc_SetProcessMitigationPolicy(
 
 
 //---------------------------------------------------------------------------
+// Proc_FindArgumentEnd
+//---------------------------------------------------------------------------
+
+
+_FX const WCHAR* Proc_FindArgumentEnd(const WCHAR* arguments)
+{
+    //
+    // when suplying: "aaaa \"bb cc\"ddd\"e\\"f\" gg hh \\"ii \"jjjj kkkk"
+    // to an application for (int i = 0; i < argc; i++) printf("%s\n", argv[i]); gives:
+    // "aaaa", "bb ccddde\"f", "gg", "hh", "\"ii", "jjjj kkkk"
+    // here we exactly replicate this parsing scheme
+    //
+
+    const WCHAR* ptr = arguments;
+    BOOLEAN inq = FALSE;
+    BOOLEAN esc = FALSE;
+    for (; *ptr != L'\0'; ptr++) {
+        if (esc) 
+            esc = FALSE;
+        else {
+            if (*ptr == L'\\') {
+                esc = TRUE;
+                continue;
+            }
+            if (*ptr == L'\"') {
+                inq = !inq;
+                continue;
+            }
+        }
+        if (!inq && (*ptr == L' ' || *ptr == L'\t'))
+            break;
+    }
+    return ptr;
+}
+
+
+//---------------------------------------------------------------------------
 // Proc_CreateProcessInternalW
 //---------------------------------------------------------------------------
 
@@ -620,7 +657,7 @@ void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpComma
         return NULL;
     }
 
-    memset(mybuf, 0xcd, len * 2);
+    memset(mybuf, 0xcd, (len + 4) * 2);
     wcsncpy(mybuf, start, len - 1);
     mybuf[len - 1] = L'\0';
 
@@ -751,6 +788,13 @@ _FX BOOL Proc_CreateProcessInternalW(
             return FALSE;
 
         FileHandle = CreateFileW(mybuf, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        if (FileHandle == INVALID_HANDLE_VALUE) {
+            LONG len = wcslen(mybuf);
+            if (len < 4 || _wcsicmp(mybuf - 4, L".exe") != 0) {
+                wcscat(mybuf, L".exe");
+                FileHandle = CreateFileW(mybuf, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+            }
+        }
 
         Dll_Free(mybuf);
 
@@ -948,17 +992,10 @@ _FX BOOL Proc_CreateProcessInternalW(
                 || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName),  NULL, L"BreakoutFolder")) {
                 
                 const WCHAR* lpArguments = NULL;
-                if (lpCommandLine) {
-                    if (lpCommandLine[0] == L'\"') {
-                        lpArguments = wcschr(lpCommandLine + 1, L'\"');
-                        if (lpArguments) lpArguments++; // skip "
-                    }
-                    else
-                        lpArguments = wcschr(lpCommandLine, L' ');
-                    if (!lpArguments) lpArguments = wcschr(lpCommandLine, L'\0');
-                }
+                if (lpCommandLine)
+                    lpArguments = Proc_FindArgumentEnd(lpCommandLine);
 
-                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) : 0) + 1) * sizeof(WCHAR));
+                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) + 8192 : 0) + 1) * sizeof(WCHAR));
                 if (mybuf) {
 
                     //
@@ -970,8 +1007,61 @@ _FX BOOL Proc_CreateProcessInternalW(
                     wcscpy(mybuf, L"\"");
                     wcscat(mybuf, lpApplicationName);
                     wcscat(mybuf, L"\"");
-                    if(lpArguments)
-                        wcscat(mybuf, lpArguments);
+                    if (lpArguments) { // must always start with a space
+                        //wcscat(mybuf, lpArguments);
+                        
+                        WCHAR* mybuff2 = mybuf + wcslen(mybuf);
+
+                        // 
+                        // add arguments one by one and if needed adapt them
+                        //
+
+                        WCHAR* temp = Dll_Alloc(sizeof(WCHAR) * 8192);
+
+                        for (const WCHAR* ptr = lpArguments; *ptr != L'\0';) {
+                            WCHAR* end = (WCHAR*)Proc_FindArgumentEnd(ptr);
+                            ULONG len = (ULONG)(end - ptr);
+                            if (len > 0) {
+                                WCHAR savechar = *end;
+                                *end = L'\0';
+
+                                const WCHAR* tmp = ptr;
+                                if (ptr[0] == L'\"') tmp++;
+                                if (((tmp[0] >= L'A' && tmp[0] <= L'Z') || (tmp[0] >= L'a' && tmp[0] <= L'z')) && tmp[1] == L':') {
+
+                                    wcscpy(temp, tmp);
+                                    if (ptr[0] == L'\"') temp[len - 2] = L'\0';
+          
+                                    HANDLE hFile = CreateFileW(temp, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+
+                                    if (hFile != INVALID_HANDLE_VALUE) {
+
+                                        BOOLEAN is_copy;
+                                        LONG status = SbieDll_GetHandlePath(hFile, temp, &is_copy);
+                                        if (status == 0 && is_copy) {
+
+                                            SbieDll_TranslateNtToDosPath(temp);
+                                            ptr = temp;
+                                            len = wcslen(ptr);
+                                        } 
+
+                                        CloseHandle(hFile);
+                                    }
+
+                                }
+
+                                wmemcpy(mybuff2, ptr, len);
+                                mybuff2 += len;                                
+
+                                *end = savechar;
+                            }
+                            *mybuff2++ = *end;
+                            if (*end != L'\0') end++;
+                            ptr = end;
+                        }
+
+                        Dll_Free(temp);
+                    }
 
                     if (! lpCurrentDirectory) { // lpCurrentDirectory must not be NULL
                         lpCurrentDirectory = Dll_Alloc(sizeof(WCHAR) * 8192);
@@ -1870,56 +1960,56 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
     _In_opt_ PPS_ATTRIBUTE_LIST AttributeList)
 {
     NTSTATUS status;
-    UNICODE_STRING objname;
+    //UNICODE_STRING objname;
 
-    SIZE_T ImageNameIndex = -1;
-    for (SIZE_T i = 0; i < AttributeList->TotalLength; i++) {
-        if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
-            ImageNameIndex = i;
-            break;
-        }
-    }
-       
-    if (ImageNameIndex != -1) {
+    //SIZE_T ImageNameIndex = -1;
+    //for (SIZE_T i = 0; i < AttributeList->TotalLength; i++) {
+    //    if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
+    //        ImageNameIndex = i;
+    //        break;
+    //    }
+    //}
+    //   
+    //if (ImageNameIndex != -1) {
 
-        objname.Buffer = (WCHAR*)AttributeList->Attributes[ImageNameIndex].Value;
-        objname.Length = (USHORT)AttributeList->Attributes[ImageNameIndex].Size;
-        objname.MaximumLength = objname.Length + sizeof(wchar_t);
+    //    objname.Buffer = (WCHAR*)AttributeList->Attributes[ImageNameIndex].Value;
+    //    objname.Length = (USHORT)AttributeList->Attributes[ImageNameIndex].Size;
+    //    objname.MaximumLength = objname.Length + sizeof(wchar_t);
 
-        WCHAR *TruePath;
-        WCHAR *CopyPath;
-        ULONG FileFlags;
-        if (NT_SUCCESS(File_GetName(NULL, &objname, &TruePath, &CopyPath, &FileFlags))) {
+    //    WCHAR *TruePath;
+    //    WCHAR *CopyPath;
+    //    ULONG FileFlags;
+    //    if (NT_SUCCESS(File_GetName(NULL, &objname, &TruePath, &CopyPath, &FileFlags))) {
 
-            HANDLE FileHandle;
-            OBJECT_ATTRIBUTES objattrs;
-            UNICODE_STRING objname2;
-            IO_STATUS_BLOCK IoStatusBlock;
+    //        HANDLE FileHandle;
+    //        OBJECT_ATTRIBUTES objattrs;
+    //        UNICODE_STRING objname2;
+    //        IO_STATUS_BLOCK IoStatusBlock;
 
-            RtlInitUnicodeString(&objname2, CopyPath);
-            InitializeObjectAttributes(
-                &objattrs, &objname2, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    //        RtlInitUnicodeString(&objname2, CopyPath);
+    //        InitializeObjectAttributes(
+    //            &objattrs, &objname2, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-            extern P_NtCreateFile __sys_NtCreateFile;
-            status = __sys_NtCreateFile(
-                &FileHandle, FILE_GENERIC_READ, &objattrs,
-                &IoStatusBlock, NULL, 0, FILE_SHARE_READ,
-                FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+    //        extern P_NtCreateFile __sys_NtCreateFile;
+    //        status = __sys_NtCreateFile(
+    //            &FileHandle, FILE_GENERIC_READ, &objattrs,
+    //            &IoStatusBlock, NULL, 0, FILE_SHARE_READ,
+    //            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
 
-            if (NT_SUCCESS(status)) {
+    //        if (NT_SUCCESS(status)) {
 
-                if (SbieDll_TranslateNtToDosPath(CopyPath)) {
-                    wmemmove(CopyPath + 4, CopyPath, wcslen(CopyPath) + sizeof(WCHAR));
-                    wmemcpy(CopyPath, L"\\??\\", 4);
+    //            if (SbieDll_TranslateNtToDosPath(CopyPath)) {
+    //                wmemmove(CopyPath + 4, CopyPath, wcslen(CopyPath) + sizeof(WCHAR));
+    //                wmemcpy(CopyPath, L"\\??\\", 4);
 
-                    AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)CopyPath;
-                    AttributeList->Attributes[ImageNameIndex].Size = wcslen(CopyPath) * sizeof(WCHAR);
-                }
+    //                AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)CopyPath;
+    //                AttributeList->Attributes[ImageNameIndex].Size = wcslen(CopyPath) * sizeof(WCHAR);
+    //            }
 
-                NtClose(FileHandle);
-            }
-        }
-    }
+    //            NtClose(FileHandle);
+    //        }
+    //    }
+    //}
 
     status = __sys_NtCreateUserProcess(ProcessHandle,
         ThreadHandle,
@@ -1933,10 +2023,10 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
         CreateInfo,
         AttributeList);
 
-    if (ImageNameIndex != -1) {
-        AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)objname.Buffer;
-        AttributeList->Attributes[ImageNameIndex].Size = objname.Length;
-    }
+    //if (ImageNameIndex != -1) {
+    //    AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)objname.Buffer;
+    //    AttributeList->Attributes[ImageNameIndex].Size = objname.Length;
+    //}
 
     return status;
 }

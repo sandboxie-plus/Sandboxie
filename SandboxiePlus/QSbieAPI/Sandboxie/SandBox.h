@@ -94,6 +94,7 @@ protected:
 	
 	QMap<quint32, CBoxedProcessPtr>	m_ProcessList;
 	int								m_ActiveProcessCount;
+	bool							m_ActiveProcessDirty;
 
 //private:
 //	struct SSandBox* m;

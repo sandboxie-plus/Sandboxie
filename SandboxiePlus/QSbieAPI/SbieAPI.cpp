@@ -1350,8 +1350,6 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 		return Status;
 	}
 
-	bool ProcessesChanged = false;
-
 	QMap<quint32, CBoxedProcessPtr>	OldProcessList;
 	foreach(const CSandBoxPtr& pBox, m_SandBoxes)
 		OldProcessList.insert(pBox->m_ProcessList);
@@ -1373,10 +1371,9 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 			pProcess->m_pBox = pBox.data();
 			pBox->m_ProcessList.insert(ProcessId, pProcess);
 			m_BoxedProxesses.insert(ProcessId, pProcess);
+			pBox->m_ActiveProcessDirty = true;
 
 			pProcess->InitProcessInfo();
-
-			ProcessesChanged = true;
 		}
 
 		pProcess->InitProcessInfoEx();
@@ -1386,7 +1383,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 	{
 		if (!pProcess->IsTerminated()) {
 			pProcess->SetTerminated();
-			ProcessesChanged = true;
+			pProcess->m_pBox->m_ActiveProcessDirty = true;
 		}
 		else if (!bKeep && pProcess->IsTerminated(1500)) { // keep for at least 1.5 seconds
 			pProcess->m_pBox->m_ProcessList.remove(pProcess->m_ProcessId);
@@ -1394,9 +1391,11 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 		}
 	}
 
-	if (ProcessesChanged) {
-		foreach(const CSandBoxPtr & pBox, m_SandBoxes)
+	foreach(const CSandBoxPtr & pBox, m_SandBoxes)
+	{
+		if (pBox->m_ActiveProcessDirty) 
 		{
+			pBox->m_ActiveProcessDirty = false;
 			int ActiveProcessCount = 0;
 			foreach(const CBoxedProcessPtr & pProcess, pBox->GetProcessList()) {
 				if (!pProcess->IsTerminated())
@@ -2285,6 +2284,7 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
 		m_BoxedProxesses.insert(ProcessId, pProcess);
+		pBox->m_ActiveProcessDirty = true;
 
 		UpdateProcessInfo(pProcess);
 		pProcess->InitProcessInfo();

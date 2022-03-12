@@ -125,6 +125,10 @@ CSandMan::CSandMan(QWidget *parent)
 	LoadLanguage();
 	SetUITheme();
 
+	if (!theConf->IsWritable()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("WARNING: Sandboxie-Plus.ini in %1 can not be writen to, settings will not be saved.").arg(theConf->GetConfigDir()));
+	}
+
 	m_bExit = false;
 
 	theAPI = new CSbiePlusAPI(this);
@@ -258,6 +262,8 @@ CSandMan::CSandMan(QWidget *parent)
 	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
 	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
+
+	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 
 	pLayout->insertSpacing(0, 1);// 32);
 
@@ -1813,7 +1819,9 @@ void CSandMan::OnSettings()
 
 void CSandMan::UpdateSettings()
 {
+	m_pTrayBoxes->clear(); // force refresh
 	SetUITheme();
+	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 
 	//m_pBoxView->UpdateRunMenu();
 
@@ -2165,7 +2173,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 			if (!OldBoxes.isEmpty() || bAdded) 
 			{
 				auto palette = m_pTrayBoxes->palette();
-				palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(QPalette::Window));
+				palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(m_DarkTheme ? QPalette::Base : QPalette::Window));
 				m_pTrayBoxes->setPalette(palette);
 				m_pTrayBoxes->setFrameShape(QFrame::NoFrame);
 
@@ -2451,8 +2459,10 @@ void CSandMan::OnUpdateCheck()
 	{
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toTime_t());
 
-		if (bManual)
-			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date."));
+		if (bManual) {
+			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
+				"\nNote: The update check is ofter behind the latest github release to ensure only tested udpates are offered."));
+		}
 	}
 }
 

@@ -21,6 +21,7 @@
 //---------------------------------------------------------------------------
 
 
+#define NOGDI
 #include "dll.h"
 #include "obj.h"
 #include "core/svc/FileWire.h"

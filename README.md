@@ -62,6 +62,7 @@ Open Source release
 - mpheath - Author of Plus installer / Code fixes
 - yfdyh000 - Localization support for Plus installer
 - NewKidOnTheBlock - Changelog fixes
+- Naeemh1 - Documentation additions
 
 ## Translators
 - yuhao2348732, nkh0472, yfdyh000, gexgd0419 - Chinese Simplified

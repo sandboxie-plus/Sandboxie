@@ -442,7 +442,7 @@ _FX NTSTATUS Key_OpenForMerge(
         //
 
         if (use_rule_specificity)
-            Key_MergeCache(NULL, &info.LastWriteTime, OriginalPath ? OriginalPath : TruePath, out_TrueMerge);
+            Key_MergeCache(NULL, &info.LastWriteTime, TruePath, out_TrueMerge);
     }
 
     if (! NT_SUCCESS(status)) {

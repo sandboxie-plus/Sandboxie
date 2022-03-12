@@ -126,7 +126,7 @@ CSandMan::CSandMan(QWidget *parent)
 	SetUITheme();
 
 	if (!theConf->IsWritable()) {
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("WARNING: Sandboxie-Plus.ini in %1 can not be writen to, settings will not be saved.").arg(theConf->GetConfigDir()));
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.").arg(theConf->GetConfigDir()));
 	}
 
 	m_bExit = false;
@@ -2461,7 +2461,7 @@ void CSandMan::OnUpdateCheck()
 
 		if (bManual) {
 			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
-				"\nNote: The update check is ofter behind the latest github release to ensure only tested udpates are offered."));
+				"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
 		}
 	}
 }

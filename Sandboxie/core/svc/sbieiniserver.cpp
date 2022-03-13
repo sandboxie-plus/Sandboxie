@@ -82,6 +82,9 @@ SbieIniServer::~SbieIniServer()
     delete m_pConfigIni;
 
     LeaveCriticalSection(&m_instance->m_critsec);
+
+	// cleanup CS
+	DeleteCriticalSection(&m_instance->m_critsec);
 }
 
 

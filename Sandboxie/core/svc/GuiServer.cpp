@@ -131,6 +131,12 @@ GuiServer::GuiServer()
         GetModuleHandle(L"user32.dll"), "SetProcessDpiAwarenessContext");
 }
 
+GuiServer::~GuiServer()
+{
+	// cleanup CS
+	DeleteCriticalSection(&m_SlavesLock);
+}
+
 
 //---------------------------------------------------------------------------
 // GuiServer

@@ -601,6 +601,9 @@ do_kill_all:
         }
     }
 
+	// cleanup CS
+	DeleteCriticalSection(&ProcessCritSec);
+
     // this process is no longer needed
 
     ExitProcess(0);

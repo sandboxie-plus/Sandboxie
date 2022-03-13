@@ -45,6 +45,8 @@ private:
 
     DriverAssist();
 
+	~DriverAssist();
+
     bool InitializePortAndThreads();
 
     void ShutdownPortAndThreads();

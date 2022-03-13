@@ -174,6 +174,12 @@ _FX BOOL WINAPI DllMain(
             File_DoAutoRecover(TRUE);
             Gui_ResetClipCursor();
         }
+
+#ifdef _WIN64
+		// cleanup CS
+		DeleteCriticalSection(&VT_CriticalSection);
+#endif
+
     }
 
     return TRUE;

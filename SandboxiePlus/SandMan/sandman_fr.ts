@@ -6,7 +6,7 @@
     <message>
         <location filename="BoxJob.h" line="35"/>
         <source>Deleting Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Suppression du contenu</translation>
     </message>
 </context>
 <context>
@@ -24,7 +24,7 @@
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="135"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished">Récupérer vers un autre dossier</translation>
+        <translation>Récupérer vers un dossier</translation>
     </message>
     <message>
         <location filename="Windows/FileBrowserWindow.cpp" line="137"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="BoxJob.h" line="56"/>
         <source>OnDelete: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>OnDelete: %1</translation>
     </message>
 </context>
 <context>
@@ -174,23 +174,17 @@
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Open</source>
-        <translation type="unfinished">Autorisé</translation>
+        <translation>Autorisé</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="243"/>
         <source>Open for All</source>
-        <translation type="unfinished">Autorisé pour tous</translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsAccess.cpp" line="246"/>
-        <source>Read Only</source>
-        <oldsource>Boxed Only</oldsource>
-        <translation type="unfinished">Dans le bac uniquement</translation>
+        <translation>Autorisé pour tous</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="247"/>
         <source>Box Only (Write Only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Limité à la sandbox (Écriture seule)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="249"/>
@@ -293,36 +287,36 @@
         <location filename="Windows/OptionsAdvanced.cpp" line="336"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="340"/>
         <source>On Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Au Démarrage</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="337"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="345"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="349"/>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer une Commande</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="341"/>
         <source>Start Service</source>
-        <translation type="unfinished">Démarrer le service</translation>
+        <translation>Démarrer un service</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="344"/>
         <source>On Init</source>
-        <translation type="unfinished"></translation>
+        <translation>À l&apos;Initialisation</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="348"/>
         <source>On Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>À la suppression</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="359"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="381"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="392"/>
         <source>Please enter the command line to be executed</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez la commande qui sera exécutée</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="411"/>
@@ -894,7 +888,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout supprimer, y compris les sauvegardes (snapshots)</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="128"/>
@@ -1172,7 +1166,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="440"/>
         <source>Uninstall All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout Désinstaller</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="444"/>
@@ -1256,7 +1250,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="481"/>
         <source>Reset all GUI options</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser toutes les options d&apos;interface</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="483"/>
@@ -1376,17 +1370,17 @@ Ce bac empêche l&apos;accès à tous les emplacements des données utilisateur,
     <message>
         <location filename="SandMan.cpp" line="909"/>
         <source>Executing OnBoxDelete: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécution de OnBoxDelete: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="931"/>
         <source>Auto deleting content of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Supression automatique du contenu de %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="954"/>
         <source>Auto Deleting %1 content</source>
-        <translation type="unfinished"></translation>
+        <translation>Supression automatique du contenu %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1629"/>
@@ -1445,7 +1439,7 @@ Ce bac empêche l&apos;accès à tous les emplacements des données utilisateur,
     <message>
         <location filename="SandMan.cpp" line="985"/>
         <source>Data Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier des données: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="992"/>
@@ -1464,43 +1458,43 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1486"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez la durée, en secondes, pour désactiver les règles des programmes forcés.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2505"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Le certificat de supporter n&apos;est pas valide pour cette version (build), veuillez obtenir un certificat à jour</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2508"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat de supporter a expiré %1, veuillez obtenir un certificat à jour</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2509"/>
         <source>, but it remains valid for the current build</source>
-        <translation type="unfinished"></translation>
+        <translation>, mais il reste valide pour la version (build) actuelle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2511"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Le certificat de supporter expirera dans %1 jours, veuillez obtenir un certificat à jour</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2531"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche d&apos;un certificat...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2564"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun certificat trouvé sur le serveur!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2569"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun certificat mis à jour n&apos;est disponible.</translation>
     </message>
     <message>
         <source>The supporter certificate is expired</source>
@@ -1519,17 +1513,17 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1191"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le programme %1 lancé dans la sandbox %2 sera arrêté dans 5 minutes car la sansbox a été configurée pour utiliser des fonctionnalités uniquement disponibles aux supporteurs du projet.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1193"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>La sandbox %1 est configurée pour utiliser des fonctionnalités uniquement disponibles aux supporteurs du projet, ces réglages seront donc ignorés.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1194"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Deviens un supporter&lt;/a&gt;, et reçoit un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat de supporter&lt;/a&gt;</translation>
     </message>
     <message>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
@@ -1614,7 +1608,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1633"/>
         <source>Maintenance operation failed (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;opération de maintenance (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1656"/>
@@ -1639,7 +1633,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1974"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation type="unfinished">Code erreur : 0x%1 (%2)</translation>
+        <translation>Erreur - Code: 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1975"/>
@@ -1649,32 +1643,32 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1991"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les processus de la sandbox doivent être arrêtés pour que le contenu de la sandbox puissent être supprimé</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1998"/>
         <source>Failed to copy box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la copie des fichiers de données de la sandbox</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2003"/>
         <source>Failed to remove old box data files</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la suppression des fichiers de données de l&apos;ancienne sandbox</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2009"/>
         <source>The operation was canceled by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos; opération a été annulée par l&apos;utilisateur</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2010"/>
         <source>Unknown Error Status: 0x%1</source>
-        <translation type="unfinished">Code erreur inconnu : 0x%1</translation>
+        <translation>Code erreur inconnu : 0x%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2459"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;À propos de Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2021 par DavidXanatos&lt;/p&gt; {3&gt;?} {3&gt;?} {1&lt;?} {2020-2022 ?}</translation>
+        <translation>&lt;h3&gt;À propos de Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 par DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2467"/>
@@ -1798,17 +1792,17 @@ Non choisira&#xa0;: %2</translation>
         <location filename="SandMan.cpp" line="281"/>
         <location filename="SandMan.cpp" line="420"/>
         <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspendre les règles des programmes forcés</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="982"/>
         <source>Installation Directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier d&apos;Installation: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="983"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Version de Sandboxie-Plus: %1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1999"/>
@@ -2178,7 +2172,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="90"/>
         <source>Forced </source>
-        <translation type="unfinished">Forcé </translation>
+        <translation>Forcé </translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="88"/>
@@ -2447,7 +2441,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
         <source>Stop Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter les Opérations</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="90"/>
@@ -2472,7 +2466,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="99"/>
         <source>Execute Autorun Entries</source>
-        <translation type="unfinished">Executer les entrées d&apos;Autorun</translation>
+        <translation>Executer les Entrées d&apos;Autorun</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="104"/>
@@ -2545,12 +2539,12 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="878"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION: L&apos;éditeur de registre qui va s&apos;ouvrir n&apos;est pas isolé dans une sandbox, faites attention et ne modifiez que les emplacements pré-sélectionnés des sandbox.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="879"/>
         <source>Don&apos;t show this warning in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne plus afficher cet avertissement à l&apos;avenir</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="934"/>
@@ -2571,12 +2565,12 @@ Non choisira&#xa0;: %2</translation>
         <location filename="Views/SbieView.cpp" line="987"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation type="unfinished">Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés&#xa0;?</translation>
+        <translation>Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés&#xa0;? &lt;br /&gt;&lt;br /&gt;Attention: Le contenu de la sandbox sera aussi supprimé !</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1000"/>
         <source>Deleting %1 content</source>
-        <translation type="unfinished"></translation>
+        <translation>Supression du contenu %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1015"/>
@@ -2592,12 +2586,12 @@ Non choisira&#xa0;: %2</translation>
         <location filename="Views/SbieView.cpp" line="1026"/>
         <location filename="Views/SbieView.cpp" line="1030"/>
         <source>Also delete all Snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussi supprimer les Instantanés (snapshots)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1029"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer le contenu de toutes les sandboxs sélectionnées ?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
@@ -2679,7 +2673,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="99"/>
         <source>No Translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de Traduction</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="109"/>
@@ -2699,17 +2693,17 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
         <source>All Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les sandboxs</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="114"/>
         <source>Active + Pinned</source>
-        <translation type="unfinished"></translation>
+        <translation>Actives + Épinglées</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="115"/>
         <source>Pinned Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Uniquement Épinglées</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="117"/>
@@ -2730,22 +2724,22 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="221"/>
         <source>Run &amp;Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer dans une &amp;Sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat de supporter a expiré, veuillez &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenir un certificat à jour&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="360"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat de supporter va &lt;font color=&apos;red&apos;&gt;expirer dans %1 jours&lt;/font&gt;, veuillez &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenir un certificat à jour&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="397"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer &amp;En-dehors d&apos;une sandbox</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="562"/>
@@ -2755,7 +2749,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="564"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat est malheureusement obsolète.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="570"/>
@@ -2819,12 +2813,12 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="54"/>
         <source>Revert to empty box</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir à une sandbox vide</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="101"/>
         <source> (default)</source>
-        <translation type="unfinished"></translation>
+        <translation> (défaut)</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="171"/>
@@ -2932,12 +2926,12 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="97"/>
         <source>Open</source>
-        <translation type="unfinished">Autorisé</translation>
+        <translation>Autorisé</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="98"/>
         <source>Closed</source>
-        <translation type="unfinished">Refusé</translation>
+        <translation>Refusé</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="99"/>
@@ -3386,7 +3380,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
         <source>Always show this sandbox in the systray list (Pinned)</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours montrer cette sandbox dans la barre des tâches (Épinglée)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
@@ -3396,7 +3390,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="577"/>
         <source>Open Windows Credentials Store (user mode)</source>
-        <translation type="unfinished">Ouvrir le magasin d&apos;identifiants Windows (mode utilisateur)</translation>
+        <translation>Ouvrir le magasin d&apos;identifiants Windows (mode utilisateur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="728"/>
@@ -3785,7 +3779,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1739"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation type="unfinished">Appliquer les directives Open (autoriser) pour les fichiers (File) et les clefs (Key) seulement aux binaires situés en dehors du bac à sable.</translation>
+        <translation>Appliquer les directives Open (autoriser) pour les fichiers (File) et les clefs (Key) seulement aux binaires situés en dehors du bac à sable.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1986"/>
@@ -3824,7 +3818,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2068"/>
         <source>COM/RPC</source>
-        <translation type="unfinished"></translation>
+        <translation>COM/RPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2075"/>
@@ -3834,7 +3828,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver l&apos;utilisation de RpcMgmtSetComTimeout par défaut (cela peut résoudre des problèmes de compatibilité)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2092"/>
@@ -3916,59 +3910,59 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2238"/>
         <source>Triggers</source>
-        <translation type="unfinished"></translation>
+        <translation>Déclencheurs</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2290"/>
         <source>Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Évènements</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2320"/>
         <location filename="Forms/OptionsWindow.ui" line="2371"/>
         <location filename="Forms/OptionsWindow.ui" line="2416"/>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer une Commande</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2339"/>
         <source>Start Service</source>
-        <translation type="unfinished">Démarrer le service</translation>
+        <translation>Démarrer le Service</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2346"/>
         <source>These events are executed each time a box is started</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces évènements sont exécutés à chaque fois qu&apos;une sandbox est démarrée</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2349"/>
         <source>On Box Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Au Démarrage</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2391"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces commandes sont lancées NON ISOLÉES avant que le contenu de la sandbox ne soit supprimé</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2394"/>
         <source>On Box Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>À la suppression</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2423"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces commandes sont exécutées lorsqu&apos;une sandbox est initialisée. Pour les lancer à nouveau, le contenu de la sandbox doit être supprimé.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2426"/>
         <source>On Box Init</source>
-        <translation type="unfinished"></translation>
+        <translation>À l&apos;initialisation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2436"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez spécifier ici des actions à exécuter automatiquement lors de divers évènements.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2461"/>
@@ -4309,7 +4303,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="104"/>
         <source>Recover target:</source>
-        <translation type="unfinished">Cible :</translation>
+        <translation>Cible à récupérer:</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="140"/>
@@ -4319,7 +4313,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="159"/>
         <source>Delete Content</source>
-        <translation type="unfinished">Supprimer le contenu</translation>
+        <translation>Supprimer le contenu</translation>
     </message>
     <message>
         <source>Delete all</source>
@@ -4459,7 +4453,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="160"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer les opérations de la sandbox de manière asynchrone quand c&apos;est possible (par exemple la supression du contenu)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="169"/>
@@ -4469,7 +4463,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="242"/>
         <source>Show boxes in tray list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les sandbox dans la zone de notification:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="269"/>
@@ -4479,12 +4473,12 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter &quot;Lancer non-isolé&quot; au menu contextuel</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="330"/>
         <source>Show a tray notification when automatic box operations are started</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher une notification lorsqu&apos;une opération automatique est lancée</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="376"/>
@@ -4494,7 +4488,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="463"/>
         <source>Activate Kernel Mode Object Filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le filtrage d&apos;objet au niveau noyau (Kernel Mode Object Filtering)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="527"/>
@@ -4569,7 +4563,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/SettingsWindow.ui" line="682"/>
         <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
         <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
-        <translation type="unfinished">Seuls les comptes utilisateurs administrateurs peuvent utiliser la commande Désactiver les programmes forcés</translation>
+        <translation>Seuls les comptes utilisateurs administrateurs peuvent utiliser la commande Suspendre les Règles des Programmes Forcés</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="423"/>
@@ -4589,7 +4583,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="430"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la Plateforme de Filtrage Windows pour restreindre l&apos;accès au réseau</translation>
     </message>
     <message>
         <source>Activate Kernel Mode Object Filtering (experimental)</source>
@@ -4599,7 +4593,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Accrocher les appels systèmes Win32k sélectionnés pour permettre l&apos;accélération GPU (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="563"/>
@@ -4680,22 +4674,22 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="783"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">Éditer la section ini</translation>
+        <translation>Éditer la section ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="792"/>
         <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="799"/>
         <source>Edit ini</source>
-        <translation type="unfinished">Éditer l&apos;ini</translation>
+        <translation>Éditer l&apos;ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="825"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="840"/>
@@ -4705,7 +4699,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="941"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce certificat de supporter a expiré, veuillez &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenir un certificat à jour&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="961"/>
@@ -4715,7 +4709,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="974"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
-        <translation type="unfinished"></translation>
+        <translation>A l&apos;avenir, ne pas alerter à propos de l&apos;expiration des certificats</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="870"/>
@@ -4776,12 +4770,12 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lors de la supression du contenu d&apos;un instantané, un retour est effectué à l&apos;instantané précédent à la place.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>
         <source>Default snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Instantané par défaut</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="108"/>

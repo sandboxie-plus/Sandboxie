@@ -2457,7 +2457,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
         //SbieApi_Log(2191, SoftName);
         SbieApi_Log(2191, Dll_ImageName);
         SbieApi_Log(2192, NULL);
-        SbieApi_Log(2193, NULL);
+        //SbieApi_Log(2193, NULL);
     }
 
     return IsUpdate;

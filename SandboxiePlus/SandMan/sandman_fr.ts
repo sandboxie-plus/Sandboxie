@@ -1436,7 +1436,7 @@ Ce bac empêche l&apos;accès à tous les emplacements des données utilisateur,
         <location filename="SandMan.cpp" line="289"/>
         <location filename="SandMan.cpp" line="428"/>
         <source>Pause Forcing Programs</source>
-        <translation>Suspende le Forcage des Programmes</translation>
+        <translation>Suspende le Forçage des Programmes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="928"/>
@@ -4598,7 +4598,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/SettingsWindow.ui" line="682"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
-        <translation>Seuls les comptes utilisateurs Administrateurs peuvent utiliser la commande Suspendre les Règles des Programmes Forcés</translation>
+        <translation>Seuls les comptes utilisateurs Administrateurs peuvent utiliser la commande Suspendre le Forçage des Programmes</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="423"/>

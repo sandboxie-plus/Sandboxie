@@ -1493,8 +1493,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2582"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>Ce certificat de supporter a expiré %1, veuillez obtenir un certificat à jour</translation>
+        <translation>Ce certificat de supporter a expiré%1, veuillez obtenir un certificat à jour</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2583"/>

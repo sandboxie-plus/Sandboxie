@@ -4,30 +4,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.14 / 5.55.14] - 2022-03-xx
-
-
-### Added
-- added main browsers to BlockSoftwareUpdaters template (by Dyras) [#1630](https://github.com/sandboxie-plus/Sandboxie/pull/1630)
-
-### Changed
-- disabled SBIE2193 notification (by isaak654) [#1690](https://github.com/sandboxie-plus/Sandboxie/pull/1690)
-
-
-
-
 ## [1.0.14 / 5.55.14] - 2022-03-
 
 ### Added
-- added notification window to when updates are checked for notifying that the default update checker is often behing whats newest on github, to ensure only bug free builds are offered as updates.
+- added notification window to warn that the default update checker is often behind the newest release on GitHub, to ensure that only bug-free builds are offered as updates [#1682](https://github.com/sandboxie-plus/Sandboxie/issues/1682)
+- added main browsers to BlockSoftwareUpdaters template (by Dyras) [#1630](https://github.com/sandboxie-plus/Sandboxie/pull/1630)
+- added a warning when sandboxie-plus.ini is not writable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
+- added cleanup for critical sections (by chunyou128) [#1686](https://github.com/sandboxie-plus/Sandboxie/pull/1686)
 
 ### Changed
 - improved command line handling for breakout processes [#1655](https://github.com/sandboxie-plus/Sandboxie/issues/1655)
+- disabled SBIE2193 notification (by isaak654) [#1690](https://github.com/sandboxie-plus/Sandboxie/pull/1690)
 
 ### Fixed
 - fixed dark mode issue with the new tray list
-- fixed now showing a warning when sandboxie-plus.ini is not writable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
-- fixed issue with software compatybilty checkbox (thanks MitchCapper) [#1678](https://github.com/sandboxie-plus/Sandboxie/issues/1678)
+- fixed issue with software compatibility checkbox (thanks MitchCapper) [#1678](https://github.com/sandboxie-plus/Sandboxie/issues/1678)
 - fixed issue with events on box close not always being executed [#1658](https://github.com/sandboxie-plus/Sandboxie/issues/1658)
 - fixed memory leaks in key_merge.c
 - fixed issue enumerating registry keys in privacy mode

@@ -175,10 +175,10 @@ _FX BOOL WINAPI DllMain(
             Gui_ResetClipCursor();
         }
 
-#ifdef _WIN64
-		// cleanup CS
-		DeleteCriticalSection(&VT_CriticalSection);
-#endif
+//#ifdef _WIN64
+//		// cleanup CS
+//		DeleteCriticalSection(&VT_CriticalSection);
+//#endif
 
     }
 

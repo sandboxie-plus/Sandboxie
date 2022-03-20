@@ -15,6 +15,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.0.14 / 5.55.14] - 2022-03-
+
+### Added
+- added notification window to when updates are checked for notifying that the default update checker is often behing whats newest on github, to ensure only bug free builds are offered as updates.
+
+### Changed
+- improved command line handling for breakout processes [#1655](https://github.com/sandboxie-plus/Sandboxie/issues/1655)
+
+### Fixed
+- fixed dark mode issue with the new tray list
+- fixed now showing a warning when sandboxie-plus.ini is not writable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
+- fixed issue with software compatybilty checkbox (thanks MitchCapper) [#1678](https://github.com/sandboxie-plus/Sandboxie/issues/1678)
+- fixed issue with events on box close not always being executed [#1658](https://github.com/sandboxie-plus/Sandboxie/issues/1658)
+- fixed memory leaks in key_merge.c
+- fixed issue enumerating registry keys in privacy mode
+- fixed setting issue introduced in 1.0.13 [#1684](https://github.com/sandboxie-plus/Sandboxie/issues/1684)
+- fixed crash issue when parsing firewall port options
+
+
 ## [1.0.13 / 5.55.13] - 2022-03-08
 
 

@@ -480,7 +480,7 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
             if (port_str2) {
                 port_len1 = (ULONG)(port_str2 - port_str1);
                 port_str2++; // skip dash
-                ULONG port_len2 = (ULONG)(port_end - port_str2);
+                ULONG port_len2 = (ULONG)(port_value - port_str2);
 
                 USHORT Port1 = (USHORT)_wntoi(port_str1, port_len1);
                 USHORT Port2 = (USHORT)_wntoi(port_str2, port_len2);
@@ -506,7 +506,7 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
             if (ip_str2) {
                 ip_len1 = (ULONG)(ip_str2 - ip_str1);
                 ip_str2++; // skip dash
-                ULONG ip_len2 = (ULONG)(ip_end - ip_str2);
+                ULONG ip_len2 = (ULONG)(ip_value - ip_str2);
 
                 IP_ADDRESS ip1;
                 _inet_xton(ip_str1, ip_len1, &ip1);

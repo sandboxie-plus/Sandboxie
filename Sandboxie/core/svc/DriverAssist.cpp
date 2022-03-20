@@ -65,6 +65,12 @@ DriverAssist::DriverAssist()
     InitializeCriticalSection(&m_critSecHostInjectedSvcs);
 }
 
+DriverAssist::~DriverAssist()
+{
+	DeleteCriticalSection(&m_LogMessage_CritSec);
+	DeleteCriticalSection(&m_critSecHostInjectedSvcs);
+}
+
 
 //---------------------------------------------------------------------------
 // Initialize

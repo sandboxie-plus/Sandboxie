@@ -78,6 +78,12 @@ QueueServer::QueueServer(PipeServer *pipeServer)
     pipeServer->Register(MSGID_QUEUE, this, Handler);
 }
 
+QueueServer::~QueueServer()
+{
+	// cleanup CS
+	DeleteCriticalSection(&m_lock);
+}
+
 
 //---------------------------------------------------------------------------
 // CloseCallback

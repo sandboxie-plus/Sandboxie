@@ -170,6 +170,12 @@ ComServer::ComServer(PipeServer *pipeServer)
     pipeServer->Register(MSGID_COM, this, Handler);
 }
 
+ComServer::~ComServer()
+{
+	// cleanup CS
+	DeleteCriticalSection(&m_SlavesLock);
+}
+
 
 //---------------------------------------------------------------------------
 // Handler

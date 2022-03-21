@@ -1401,7 +1401,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2582"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
-        <translation>Термін дії сертифіката підтримки закінчився %1 днів тому, будь ласка, отримайте оновлений сертифікат</translation>
+        <translation>Термін дії сертифіката підтримки закінчився%1, будь ласка, отримайте оновлений сертифікат</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2583"/>

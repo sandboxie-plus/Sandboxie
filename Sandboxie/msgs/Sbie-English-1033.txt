@@ -3486,7 +3486,7 @@ If you prefer to use a UI to control these options, please upgrade to Sandboxie-
 .
 
 6004;pop;err;01
-The configuration of box %2 requires a supporter certificate.
+The configuration %3 of box %2 requires a supporter certificate.
 .
 
 6005;txt;01

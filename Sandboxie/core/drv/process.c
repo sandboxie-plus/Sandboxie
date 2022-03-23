@@ -744,14 +744,21 @@ _FX PROCESS *Process_Create(
     //
 
     if (!Driver_Certified && !proc->image_sbie) {
-        if (
-#ifdef USE_MATCH_PATH_EX
-            proc->use_rule_specificity || 
-            proc->use_privacy_mode ||
-#endif
-            proc->bAppCompartment) {
 
-            Log_Msg_Process(MSG_6004, proc->box->name, proc->image_name, box->session_id, proc->pid);
+        const WCHAR* exclusive_setting = NULL;
+#ifdef USE_MATCH_PATH_EX
+        if (proc->use_rule_specificity)
+            exclusive_setting = L"UseRuleSpecificity";
+        else if (proc->use_privacy_mode)
+            exclusive_setting = L"UsePrivacyMode";
+        else
+#endif
+        if (proc->bAppCompartment)
+            exclusive_setting = L"NoSecurityIsolation";
+
+        if (exclusive_setting) {
+
+            Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
 
             //Pool_Delete(pool);
             //Process_CreateTerminated(ProcessId, box->session_id);
@@ -1176,7 +1183,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
             if(!Driver_Certified)
-                Log_Msg_Process(MSG_6004, box->name, NULL, box->session_id, CallerId);
+                Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
             else {
                 UNICODE_STRING image_uni;
                 RtlInitUnicodeString(&image_uni, ImagePath);

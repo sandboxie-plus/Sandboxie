@@ -403,7 +403,47 @@ _FX NTSTATUS Syscall_OpenHandle(
 _FX NTSTATUS Syscall_GetNextProcess(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
+    if (Obj_CallbackInstalled) // ObCallbacks takes care of that already
+        return Syscall_Invoke(syscall_entry, user_args); // so here we can just allow the execution
+
+    // ToDo: make this syscall work
+
     return STATUS_ACCESS_DENIED;
+}
+
+//---------------------------------------------------------------------------
+// Syscall_GetNextThread
+//---------------------------------------------------------------------------
+
+_FX NTSTATUS Syscall_GetNextThread(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
+{
+    NTSTATUS status;
+    HANDLE ProcessHandle = (HANDLE)user_args[0];
+    ACCESS_MASK DesiredAccess = (ACCESS_MASK)user_args[2];
+    PEPROCESS ProcessObject;
+
+    if (Obj_CallbackInstalled) // ObCallbacks takes care of that already
+        return Syscall_Invoke(syscall_entry, user_args); // so here we can just allow the execution
+
+    //
+    // check if the caller is allowed to access this process, we don't filter on a per thread basis
+    //
+
+    status = ObReferenceObjectByHandle(ProcessHandle, 0, *PsProcessType, UserMode, &ProcessObject, NULL);
+
+    if (NT_SUCCESS(status)) {
+
+        status = Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, FALSE);
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    if (!NT_SUCCESS(status)) 
+        return STATUS_ACCESS_DENIED;
+
+    // if all checks apssed we can llow the execution of this syscall
+    return Syscall_Invoke(syscall_entry, user_args);
 }
 
 //---------------------------------------------------------------------------

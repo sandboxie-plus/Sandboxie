@@ -56,6 +56,9 @@ static NTSTATUS Syscall_OpenHandle(
 static NTSTATUS Syscall_GetNextProcess(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
+static NTSTATUS Syscall_GetNextThread(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
+
 static NTSTATUS Syscall_DeviceIoControlFile(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
@@ -156,6 +159,9 @@ _FX BOOLEAN Syscall_Init(void)
 
     if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
         if (!Syscall_Set1("GetNextProcess", Syscall_GetNextProcess))
+            return FALSE;
+
+        if (!Syscall_Set1("GetNextThread", Syscall_GetNextThread))
             return FALSE;
     }
 

@@ -435,7 +435,8 @@ _FX NTSTATUS Syscall_GetNextThread(
 
     if (NT_SUCCESS(status)) {
 
-        status = Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, FALSE);
+		ACCESS_MASK WriteAccess = (DesiredAccess & THREAD_DENIED_ACCESS_MASK);
+        status = Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, WriteAccess, L'T');
 
         ObDereferenceObject(ProcessObject);
     }

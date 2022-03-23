@@ -1047,7 +1047,7 @@ void CSandMan::OnStatusChanged()
 		QString SbiePath = theAPI->GetSbiePath();
 		OnLogMessage(tr("Installation Directory: %1").arg(SbiePath));
 		OnLogMessage(tr("Sandboxie-Plus Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
-		OnLogMessage(tr("Loaded Config: %1").arg(theAPI->GetIniPath()));
+		OnLogMessage(tr("Current Config: %1").arg(theAPI->GetIniPath()));
 		OnLogMessage(tr("Data Directory: %1").arg(QString(theConf->GetConfigDir()).replace("/","\\")));
 
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));

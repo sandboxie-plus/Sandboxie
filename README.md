@@ -54,7 +54,7 @@ Thank you [Vector 35](https://vector35.com/) for providing a [Binary Ninja](http
 <br>
 Binary Ninja is a multi-platform interactive disassembler, decompiler, and binary analysis tool for reverse engineers, malware analysts, vulnerability researchers, and software developers.<br>
 <br>
-<img align="left" height="64" width="64" src="https://raw.githubusercontent.com/sandboxie-plus/Sandboxie/master/.github/images/Icons8_logo.png">Thank you [Icons8](https://icons8.de/) for providing icons for the project.
+[<img align="left" height="64" width="64" src="https://raw.githubusercontent.com/sandboxie-plus/Sandboxie/master/.github/images/Icons8_logo.png">](https://icons8.de/)Thank you [Icons8](https://icons8.de/) for providing icons for the project.
 <br>
 <br>
 <br>

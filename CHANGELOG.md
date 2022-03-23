@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.14 / 5.55.14] - 2022-03-
+## [1.0.14 / 5.55.14] - 2022-03-23
 
 ### Added
 - added notification window to warn that the default update checker is often behind the newest release on GitHub, to ensure that only bug-free builds are offered as updates [#1682](https://github.com/sandboxie-plus/Sandboxie/issues/1682)

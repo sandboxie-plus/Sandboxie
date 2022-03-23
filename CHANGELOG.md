@@ -15,15 +15,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - improved command line handling for breakout processes [#1655](https://github.com/sandboxie-plus/Sandboxie/issues/1655)
 - disabled SBIE2193 notification (by isaak654) [#1690](https://github.com/sandboxie-plus/Sandboxie/pull/1690)
+- improved error message 6004 [#1719](https://github.com/sandboxie-plus/Sandboxie/issues/1719)
 
 ### Fixed
 - fixed dark mode issue with the new tray list
+- fixed now showing a warning when sandboxie-plus.ini is not writable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
 - fixed issue with software compatibility checkbox (thanks MitchCapper) [#1678](https://github.com/sandboxie-plus/Sandboxie/issues/1678)
 - fixed issue with events on box close not always being executed [#1658](https://github.com/sandboxie-plus/Sandboxie/issues/1658)
 - fixed memory leaks in key_merge.c
 - fixed issue enumerating registry keys in privacy mode
 - fixed setting issue introduced in 1.0.13 [#1684](https://github.com/sandboxie-plus/Sandboxie/issues/1684)
 - fixed crash issue when parsing firewall port options
+- FIXED SECURITY ISSUE: in certain usage cases a sandboxed process could obtain a handle on a unsandboxed thread with write privileges [#1714](https://github.com/sandboxie-plus/Sandboxie/issues/1714)
 
 
 ## [1.0.13 / 5.55.13] - 2022-03-08

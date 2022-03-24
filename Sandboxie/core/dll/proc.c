@@ -652,12 +652,16 @@ void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpComma
         len = (int)(end - start) + 1;
     }
 
-    WCHAR *mybuf = Dll_Alloc(len * sizeof(WCHAR));
+    //
+    // add + 4 space to be able to append a ".exe" in case its missing
+    //
+
+    WCHAR *mybuf = Dll_Alloc((len + 4) * sizeof(WCHAR));
     if (!mybuf) {
         return NULL;
     }
 
-    memset(mybuf, 0xcd, (len + 4) * 2);
+    memset(mybuf, 0xcd, (len + 4) * sizeof(WCHAR));
     wcsncpy(mybuf, start, len - 1);
     mybuf[len - 1] = L'\0';
 
@@ -1963,7 +1967,9 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
     //UNICODE_STRING objname;
 
     //SIZE_T ImageNameIndex = -1;
-    //for (SIZE_T i = 0; i < AttributeList->TotalLength; i++) {
+    // 
+    //SIZE_T count = (AttributeList->TotalLength - sizeof(SIZE_T)) / sizeof(PS_ATTRIBUTE);
+    //for (SIZE_T i = 0; i < count; i++) {
     //    if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
     //        ImageNameIndex = i;
     //        break;

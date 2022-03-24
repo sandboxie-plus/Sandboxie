@@ -7,10 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.14 / 5.55.14] - 2022-03-23
 
 ### Added
-- added notification window to warn that the default update checker is often behind the newest release on GitHub, to ensure that only bug-free builds are offered as updates [#1682](https://github.com/sandboxie-plus/Sandboxie/issues/1682)
+- added notification to warn that the default update checker is lagging behind the newest release on GitHub, to ensure that only bug-free builds are offered as updates [#1682](https://github.com/sandboxie-plus/Sandboxie/issues/1682)
 - added main browsers to BlockSoftwareUpdaters template (by Dyras) [#1630](https://github.com/sandboxie-plus/Sandboxie/pull/1630)
-- added a warning when sandboxie-plus.ini is not writable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
-- added cleanup for critical sections (by chunyou128) [#1686](https://github.com/sandboxie-plus/Sandboxie/pull/1686)
+- added a warning when Sandboxie-Plus.ini is not writeable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
+- added clean-up for critical sections (by chunyou128) [#1686](https://github.com/sandboxie-plus/Sandboxie/pull/1686)
 
 ### Changed
 - improved command line handling for breakout processes [#1655](https://github.com/sandboxie-plus/Sandboxie/issues/1655)
@@ -19,14 +19,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed dark mode issue with the new tray list
-- fixed now showing a warning when sandboxie-plus.ini is not writable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
+- fixed not showing a warning when Sandboxie-Plus.ini is not writeable [#1681](https://github.com/sandboxie-plus/Sandboxie/issues/1681)
 - fixed issue with software compatibility checkbox (thanks MitchCapper) [#1678](https://github.com/sandboxie-plus/Sandboxie/issues/1678)
-- fixed issue with events on box close not always being executed [#1658](https://github.com/sandboxie-plus/Sandboxie/issues/1658)
+- fixed issue with events on box closure not always being executed [#1658](https://github.com/sandboxie-plus/Sandboxie/issues/1658)
 - fixed memory leaks in key_merge.c
 - fixed issue enumerating registry keys in privacy mode
-- fixed setting issue introduced in 1.0.13 [#1684](https://github.com/sandboxie-plus/Sandboxie/issues/1684)
+- fixed settings issue introduced in 1.0.13 [#1684](https://github.com/sandboxie-plus/Sandboxie/issues/1684)
 - fixed crash issue when parsing firewall port options
-- FIXED SECURITY ISSUE: in certain usage cases a sandboxed process could obtain a handle on a unsandboxed thread with write privileges [#1714](https://github.com/sandboxie-plus/Sandboxie/issues/1714)
+- FIXED SECURITY ISSUE: in certain cases a sandboxed process could obtain a handle on an unsandboxed thread with write privileges [#1714](https://github.com/sandboxie-plus/Sandboxie/issues/1714)
 
 
 ## [1.0.13 / 5.55.13] - 2022-03-08
@@ -41,7 +41,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.12 / 5.55.12] - 2022-03-02
 
 ### Added
-- added mini dump creation to Sandman.exe in case it crashes
+- added mini dump creation to SandMan.exe in case it crashes
 
 ### Changed 
 - disabled Chrome and Firefox phishing entries in new sandboxes (by isaak654) [#1616](https://github.com/sandboxie-plus/Sandboxie/pull/1616)
@@ -1726,4 +1726,3 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
-

@@ -244,6 +244,14 @@ static NTSTATUS Ipc_NtOpenSection(
 
 //---------------------------------------------------------------------------
 
+static NTSTATUS Ipc_NtCreateSymbolicLinkObject (
+    PHANDLE pHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PUNICODE_STRING DestinationName);
+
+
+//---------------------------------------------------------------------------
 
 static P_NtCreatePort               __sys_NtCreatePort              = NULL;
 static P_NtConnectPort              __sys_NtConnectPort             = NULL;
@@ -269,6 +277,9 @@ static P_NtCreateSemaphore          __sys_NtCreateSemaphore         = NULL;
 static P_NtOpenSemaphore            __sys_NtOpenSemaphore           = NULL;
 static P_NtCreateSection            __sys_NtCreateSection           = NULL;
 static P_NtOpenSection              __sys_NtOpenSection             = NULL;
+
+static P_NtCreateSymbolicLinkObject __sys_NtCreateSymbolicLinkObject= NULL;
+
 static P_NtImpersonateAnonymousToken
                                     __sys_NtImpersonateAnonymousToken
                                                                     = NULL;
@@ -370,6 +381,8 @@ _FX BOOLEAN Ipc_Init(void)
 
     SBIEDLL_HOOK(Ipc_,NtCreateSection);
     SBIEDLL_HOOK(Ipc_,NtOpenSection);
+
+    SBIEDLL_HOOK(Ipc_,NtCreateSymbolicLinkObject);
 
     // OriginalToken BEGIN
     if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
@@ -3744,4 +3757,24 @@ _FX ULONG Ipc_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     }
 
     return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtCreateSymbolicLinkObject
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtCreateSymbolicLinkObject(
+    PHANDLE pHandle, ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes, PUNICODE_STRING DestinationName)
+{
+    WCHAR strW[8192];
+	Sbie_snwprintf(strW, 8192, L"NtCreateSymbolicLinkObject, %s", DestinationName);
+	SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, strW, FALSE);
+
+    SbieApi_Log(2205, L"NtCreateSymbolicLinkObject");
+
+    return STATUS_PRIVILEGE_NOT_HELD;
+    //return __sys_NtCreateSymbolicLinkObject(pHandle, DesiredAccess, ObjectAttributes, DestinationName);
 }

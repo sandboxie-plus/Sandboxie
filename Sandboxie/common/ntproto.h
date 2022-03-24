@@ -511,6 +511,12 @@ typedef NTSTATUS (*P_NtImpersonateThread)(
     IN  HANDLE ClientThreadHandle,
     IN  PSECURITY_QUALITY_OF_SERVICE SecurityQos);
 
+typedef NTSTATUS (*P_NtCreateSymbolicLinkObject)(
+    PHANDLE pHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PUNICODE_STRING DestinationName);
+
 typedef NTSTATUS (*P_NtLoadDriver)(
     IN  PUNICODE_STRING RegistryPath);
 

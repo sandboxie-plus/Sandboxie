@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.0.15 / 5.55.15] - 2022-03-24
+
+### Fixed
+- fixed memory corruption introduced in the last build causing chrome to sometimes crash.
+- FIXED SECURITY ISSUE: NtCreateSymbolicLinkObject was not filtered (thanks Diversenok)
+
+
+
 ## [1.0.14 / 5.55.14] - 2022-03-23
 
 ### Added

@@ -104,6 +104,9 @@ static NTSTATUS File_Generic_MyParseProc(
 static NTSTATUS File_CreatePagingFile(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
+static NTSTATUS File_CreateSymbolicLinkObject(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
+
 static void File_ReplaceTokenIfFontRequest(
     ACCESS_STATE *AccessState,
     PDEVICE_OBJECT DeviceObject, UNICODE_STRING *FileName, BOOLEAN* pbSetDirty);
@@ -219,6 +222,9 @@ _FX BOOLEAN File_Init(void)
     //
 
     if (! Syscall_Set1("CreatePagingFile", File_CreatePagingFile))
+        return FALSE;
+
+    if (! Syscall_Set1("CreateSymbolicLinkObject", File_CreateSymbolicLinkObject))
         return FALSE;
 
     //
@@ -1706,6 +1712,18 @@ skip_due_to_home_folder:
 
 
 _FX NTSTATUS File_CreatePagingFile(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
+{
+    return STATUS_PRIVILEGE_NOT_HELD;
+}
+
+
+//---------------------------------------------------------------------------
+// File_CreateSymbolicLinkObject
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_CreateSymbolicLinkObject(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
     return STATUS_PRIVILEGE_NOT_HELD;

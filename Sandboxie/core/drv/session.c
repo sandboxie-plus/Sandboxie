@@ -829,8 +829,8 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
     //
 
     if (!args->check_object_exists.val64){ 
-        const WCHAR* strings[3] = { args->is_message.val64 ? Driver_Empty : log_data, args->is_message.val64 ? NULL : log_data, NULL };
-        ULONG lengths[3] = { args->is_message.val64 ? 0 : log_len, args->is_message.val64 ? 0 : log_len, 0 };
+        const WCHAR* strings[3] = { args->is_message.val64 ? Driver_Empty : log_data, args->is_message.val64 ? log_data : NULL, NULL };
+        ULONG lengths[3] = { args->is_message.val64 ? 0 : log_len, args->is_message.val64 ? log_len : 0, 0 };
         Session_MonitorPutEx(log_type | MONITOR_USER, strings, lengths, proc->pid, PsGetCurrentThreadId());
         return STATUS_SUCCESS;
     }

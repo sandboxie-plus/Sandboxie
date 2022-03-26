@@ -25,6 +25,7 @@
 #include "process.h"
 #include "syscall.h"
 #include "token.h"
+#include "obj.h"
 #include "session.h"
 #include "api.h"
 

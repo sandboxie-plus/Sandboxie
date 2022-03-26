@@ -238,7 +238,7 @@ _FX BOOL Scm_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE
 
     if (NT_SUCCESS(status) && ProcessHandle == GetCurrentProcess()) {
 
-        Handle_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 
@@ -259,7 +259,7 @@ _FX BOOL Scm_OpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL Open
 
     if (NT_SUCCESS(status) && ThreadHandle == GetCurrentThread()) {
 
-        Handle_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 

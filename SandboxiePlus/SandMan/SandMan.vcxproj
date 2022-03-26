@@ -201,6 +201,7 @@
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Models\MonitorModel.cpp" />
     <ClCompile Include="Models\TraceModel.cpp" />
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="SandMan.cpp" />
@@ -251,6 +252,7 @@
     <QtMoc Include="BoxJob.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
+    <QtMoc Include="Models\MonitorModel.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
     <QtMoc Include="SbieProcess.h" />

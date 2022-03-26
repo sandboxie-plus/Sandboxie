@@ -7,8 +7,6 @@
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
-#include "Models/TraceModel.h"
-//#include "Models/ApiMonModel.h"
 #include <QTranslator>
 #include "Windows/PopUpWindow.h"
 

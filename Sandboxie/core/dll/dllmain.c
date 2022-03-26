@@ -838,7 +838,7 @@ _FX ULONG_PTR Dll_Ordinal1(
 
             WCHAR text[128];
             Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
-            SbieApi_MonitorPut(MONITOR_OTHER, text);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();

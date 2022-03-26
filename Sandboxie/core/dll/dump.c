@@ -149,7 +149,7 @@ static LONG __stdcall Dump_CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
         Sbie_snwprintf(szMiniDumpMessage, 256, L"%s crashed!\r\nCrashdump creation failed.", Dll_ImageName);
     else
         Sbie_snwprintf(szMiniDumpMessage, 256, L"%s crashed!\r\nCrashdump saved to \"%s\".", Dll_ImageName, szMiniDumpFileName);
-    SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, szMiniDumpMessage, FALSE);
+    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, szMiniDumpMessage);
 
     // or return one of the following:
     // - EXCEPTION_CONTINUE_SEARCH      // this will trigger the "normal" OS error-dialog
@@ -240,6 +240,6 @@ _FX int Dump_Init(void)
 
     SBIEDLL_HOOK(Dump_, SetUnhandledExceptionFilter);
 
-    //SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, L"Minidump enabled", FALSE);
+    //SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, L"Minidump enabled", FALSE);
     return 1;
 }

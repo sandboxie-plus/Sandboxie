@@ -1399,7 +1399,7 @@ finish:
     {
         WCHAR msg[1024];
         Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
-        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, msg, FALSE);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
     }
 
     SetLastError(err);
@@ -1423,7 +1423,7 @@ _FX BOOL Proc_AlternateCreateProcess(
         SetLastError(ERROR_ACCESS_DENIED);
         *ReturnValue = FALSE;
 
-        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of an updater");
+        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of an updater");
         return TRUE;        // exit CreateProcessInternal
     }
 
@@ -1446,13 +1446,13 @@ _FX BOOL Proc_AlternateCreateProcess(
         // don't start Kaspersky Anti Virus klwtblfs.exe component
         // because Kaspersky protects the process and we can't put
         // it into a job or inject SbieLow and so on
-        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of klwtblfs.exe");
+        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of klwtblfs.exe");
         return TRUE;        // exit CreateProcessInternal
     }
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH && lpCommandLine
         && wcsstr(lpCommandLine, L"smartscreen.exe")) {
 
-        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of smartscreen.exe");
+        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of smartscreen.exe");
         return TRUE;        // exit CreateProcessInternal
     }
     return FALSE;           // continue with CreateProcessInternal

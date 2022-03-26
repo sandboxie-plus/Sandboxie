@@ -3771,7 +3771,7 @@ _FX NTSTATUS Ipc_NtCreateSymbolicLinkObject(
 {
     WCHAR strW[8192];
 	Sbie_snwprintf(strW, 8192, L"NtCreateSymbolicLinkObject, %s", DestinationName);
-	SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, strW, FALSE);
+	SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, strW);
 
     SbieApi_Log(2205, L"NtCreateSymbolicLinkObject");
 

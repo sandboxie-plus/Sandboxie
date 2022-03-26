@@ -334,13 +334,13 @@ _FX void Log_Status_Ex_Process(
 //---------------------------------------------------------------------------
 
 
-_FX void Log_Debug_Msg(ULONG type, const WCHAR *string1, const WCHAR *string2)
+_FX void Log_Debug_Msg(ULONG type, const WCHAR *message, const WCHAR *name)
 {
     //DbgPrint("(%06d) SBIE %S %S\n",
-    //    PsGetCurrentProcessId(), string1, string2);
+    //    PsGetCurrentProcessId(), message, name);
 	if (Session_MonitorCount) {
 	
-		const WCHAR* strings[4] = { string1, string2 ? L" " : NULL, string2, NULL };
+		const WCHAR* strings[3] = { name, message, NULL };
 		Session_MonitorPutEx(type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
 	}
 }

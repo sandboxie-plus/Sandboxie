@@ -654,7 +654,7 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
 
 		SIZE_T data_len = 0;
 		for(int i=0; strings[i] != NULL; i++)
-			data_len += (lengths ? lengths [i] : wcslen(strings[i])) * sizeof(WCHAR);
+			data_len += ((lengths ? lengths [i] : wcslen(strings[i])) + 1) * sizeof(WCHAR);
 
         
 		//[Type 4][PID 4][TID 4][Data n*2]
@@ -662,13 +662,16 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
 
 		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log, FALSE);
 		if (write_ptr) {
+            WCHAR null_char = L'\0';
 			log_buffer_push_bytes((CHAR*)&type, 4, &write_ptr, session->monitor_log);
 			log_buffer_push_bytes((CHAR*)&pid, 4, &write_ptr, session->monitor_log);
             log_buffer_push_bytes((CHAR*)&tid, 4, &write_ptr, session->monitor_log);
 
-			// join strings seamlessly
-            for (int i = 0; strings[i] != NULL; i++)
-				log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
+			// add strings '\0' separated
+            for (int i = 0; strings[i] != NULL; i++) {
+                log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, session->monitor_log);
+                log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, session->monitor_log);
+            }
 		}
         else if (!session->monitor_overflow) {
             session->monitor_overflow = TRUE;
@@ -826,8 +829,8 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
     //
 
     if (!args->check_object_exists.val64){ 
-        const WCHAR* strings[2] = { log_data, NULL };
-        ULONG lengths[2] = { log_len, 0 };
+        const WCHAR* strings[3] = { args->is_message.val64 ? Driver_Empty : log_data, args->is_message.val64 ? NULL : log_data, NULL };
+        ULONG lengths[3] = { args->is_message.val64 ? 0 : log_len, args->is_message.val64 ? 0 : log_len, 0 };
         Session_MonitorPutEx(log_type | MONITOR_USER, strings, lengths, proc->pid, PsGetCurrentThreadId());
         return STATUS_SUCCESS;
     }

@@ -202,8 +202,9 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pTraceView = new CTraceView(this);
 
-	m_pTraceView->GetMenu()->insertAction(m_pTraceView->GetMenu()->actions()[0], m_pCleanUpTrace);
-	m_pTraceView->GetMenu()->insertSeparator(m_pTraceView->GetMenu()->actions()[0]);
+	// todo:
+	//m_pTraceView->GetMenu()->insertAction(m_pTraceView->GetMenu()->actions()[0], m_pCleanUpTrace);
+	//m_pTraceView->GetMenu()->insertSeparator(m_pTraceView->GetMenu()->actions()[0]);
 
 	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
 

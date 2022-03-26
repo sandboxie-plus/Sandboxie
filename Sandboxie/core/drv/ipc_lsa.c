@@ -346,7 +346,7 @@ _FX BOOLEAN Ipc_Filter_Lsa_Ep_Msg(PROCESS* proc, UCHAR uMsg)
         if (mon_type) {
             WCHAR msg_str[24];
             RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Msg: %02X", (ULONG)uMsg);
-            Log_Debug_Msg(mon_type, L"\\RPC Control\\LSARPC_ENDPOINT", msg_str);
+            Log_Debug_Msg(mon_type, msg_str, L"\\RPC Control\\LSARPC_ENDPOINT");
         }
     }
 

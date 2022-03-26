@@ -30,7 +30,7 @@ public:
 		eCount
 	};
 
-	struct SProgInfo
+	/*struct SProgInfo
 	{
 		SProgInfo() { Dirty = true; }
 		QString Name;
@@ -40,7 +40,7 @@ public:
 	QMap<quint32, SProgInfo>GetPids() { return m_PidMap; }
 
 signals:
-	void			NewBranche();
+	void			NewBranche();*/
 
 protected:
 	struct STraceNode : STreeNode
@@ -60,8 +60,8 @@ protected:
 	/*QList<QVariant>			MakePath(const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList);
 	bool					TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList, int Index = 0);*/
 
-	void					SetProcessName(const QString& Name, quint32 pid, quint32 tid);
+	/*void					SetProcessName(const QString& Name, quint32 pid, quint32 tid);
 	QString					GetProcessName(quint32 pid);
 	void					LogThreadId(quint32 pid, quint32 tid);
-	QMap<quint32, SProgInfo>m_PidMap;
+	QMap<quint32, SProgInfo>m_PidMap;*/
 };

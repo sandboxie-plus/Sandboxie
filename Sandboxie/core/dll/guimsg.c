@@ -796,7 +796,7 @@ fail:
     }
 
     Sbie_snwprintf(name, 48, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
-    SbieApi_MonitorPut(MONITOR_WINCLASS | MONITOR_DENY, name);
+    SbieApi_MonitorPut2(MONITOR_WINCLASS | MONITOR_DENY, name, FALSE);
 
     return FALSE;
 }

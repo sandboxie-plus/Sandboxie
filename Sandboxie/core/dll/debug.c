@@ -410,7 +410,7 @@ void DbgPrint(const char* format, ...)
     char tmp1[510];
 
     extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
-    P_vsnprintf(tmp1, 510, format, va_args);
+    P_vsnprintf(tmp1, sizeof(tmp1), format, va_args);
 
     OutputDebugStringA(tmp1);
 
@@ -433,11 +433,11 @@ void DbgTrace(const char* format, ...)
     WCHAR tmp2[510];
 
     extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
-    P_vsnprintf(tmp1, 510, format, va_args);
+    P_vsnprintf(tmp1, sizeof(tmp1), format, va_args);
 
-    Sbie_snwprintf((WCHAR *)tmp2, 510, L"%S", tmp1);
+    Sbie_snwprintf((WCHAR *)tmp2, sizeof(tmp2)/sizeof(WCHAR), L"%S", tmp1);
 
-    SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, tmp2, FALSE);
+    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, tmp2);
 
     va_end(va_args);
 }

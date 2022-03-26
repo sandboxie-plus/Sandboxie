@@ -107,7 +107,7 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
         WCHAR dbg[1024];
         extern const wchar_t* Trace_SbieDrvFunc2Str(ULONG func);
         Sbie_snwprintf(dbg, 1024, L"SbieApi_Ioctl: %s %s", Dll_ImageName, Trace_SbieDrvFunc2Str((ULONG)parms[0]));
-        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, dbg, FALSE);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
     }
 
     if (SbieApi_DeviceHandle == INVALID_HANDLE_VALUE) {
@@ -1478,6 +1478,7 @@ _FX LONG SbieApi_MonitorPut(
     return SbieApi_MonitorPut2(Type, Name, TRUE);
 }
 
+
 //---------------------------------------------------------------------------
 // SbieApi_MonitorPut2
 //---------------------------------------------------------------------------
@@ -1503,6 +1504,31 @@ _FX LONG SbieApi_MonitorPut2(
     return status;
 }
 
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorPutMsg
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorPutMsg(
+    ULONG Type,
+    const WCHAR* Message)
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
+
+    memset(parms, 0, sizeof(parms));
+    args->func_code                 = API_MONITOR_PUT2;
+    args->log_type.val              = Type;
+    args->log_len.val64             = wcslen(Message) * sizeof(WCHAR);
+    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Message;
+    args->check_object_exists.val64 = FALSE;
+    args->is_message.val64          = TRUE;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
 
 //---------------------------------------------------------------------------
 // SbieApi_MonitorGet

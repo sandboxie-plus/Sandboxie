@@ -27,14 +27,15 @@
 class QSBIEAPI_EXPORT CTraceEntry : public QSharedData
 {
 public:
-	CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, const QString& Message);
+	CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData);
 
+	virtual QString		GetName() const { return m_Name; }
 	virtual QString		GetMessage() const { return m_Message; }
 	virtual quint32		GetProcessId() const { return m_ProcessId; }
 	virtual quint32		GetThreadId() const { return m_ThreadId; }
 	virtual QDateTime	GetTimeStamp() const { return m_TimeStamp; }
 
-	virtual quint16		GetType() const { return m_Type.Type; }
+	virtual quint8		GetType() const { return m_Type.Type; }
 	static QList<quint32>AllTypes();
 	static QString		GetTypeStr(quint32 Type);
 	virtual QString		GetTypeStr() const;
@@ -50,6 +51,7 @@ public:
 
 	virtual bool		Equals(const QSharedDataPointer<CTraceEntry>& pOther) const {
 			return pOther->m_ProcessId == this->m_ProcessId && pOther->m_ThreadId == this->m_ThreadId
+			&& pOther->m_Name == this->m_Name
 			&& pOther->m_Message == this->m_Message;
 	}
 	virtual void		Merge(const QSharedDataPointer<CTraceEntry>& pOther) {
@@ -63,6 +65,7 @@ public:
 	quint64				GetUID() const { return m_uid; }
 
 protected:
+	QString m_Name;
 	QString m_Message;
 	quint32 m_ProcessId;
 	quint32 m_ThreadId;

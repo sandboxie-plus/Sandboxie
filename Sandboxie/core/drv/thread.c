@@ -947,6 +947,7 @@ _FX NTSTATUS Thread_CheckProcessObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess)
 {
+    if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = (PEPROCESS)Object;
     ACCESS_MASK WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
     return Thread_CheckObject_Common(
@@ -963,6 +964,7 @@ _FX NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess)
 {
+    if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = PsGetThreadProcess(Object);
     ACCESS_MASK WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
     return Thread_CheckObject_Common(

@@ -2381,11 +2381,10 @@ bool CSbieAPI::GetMonitor()
 	ULONG pid = 0;
 	ULONG tid = 0;
 	wchar_t* Buffer[4 * 1024];
-	ULONG Length = ARRAYSIZE(Buffer);
 
 	//ULONG RecordNum = m->lastRecordNum;
 
-	__declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)Length, (ULONG64)Buffer };
+	__declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)ARRAYSIZE(Buffer), (ULONG64)Buffer };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
     API_MONITOR_GET_EX_ARGS* args	= (API_MONITOR_GET_EX_ARGS*)parms;
 
@@ -2410,18 +2409,16 @@ bool CSbieAPI::GetMonitor()
 	if (m->clearingBuffers)
 		return true; 
 
-	QString Data = QString::fromWCharArray((wchar_t*)log_buffer.Buffer, log_buffer.Length / sizeof(wchar_t));
-	if (Data.length() == Length - 1) // if we got exactly the max length assume data were truncated and indicate accordingly...
-		Data += "..."; 
-
-	// cleanup debug output strings and drop empty once.
-	if (type == (MONITOR_OTHER | MONITOR_TRACE)) {
-		Data = Data.trimmed();
-		if (Data.isEmpty())
-			return true;
+	QStringList LogData;
+	for (size_t pos = 0; pos < log_buffer.Length; ) {
+		size_t len = wcslen((WCHAR*)(log_buffer.Buffer + pos));
+		if (len == 0)
+			break;
+		LogData.append(QString::fromWCharArray((WCHAR*)(log_buffer.Buffer + pos), len));
+		pos += (len + 1) * sizeof(WCHAR);
 	}
 
-	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, Data));
+	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, LogData));
 	AddTraceEntry(LogEntry, true);
 
 	return true;

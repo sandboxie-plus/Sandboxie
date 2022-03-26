@@ -1067,8 +1067,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
     {
         if ((proc->file_trace & TRACE_IGNORE) || Session_MonitorCount) {
 
-            ULONG ignore_str_len;
-            WCHAR *ignore_str;
+            WCHAR ignore_str[24];
             WCHAR *device_name_ptr;
 
             status = Obj_GetParseName(
@@ -1078,21 +1077,17 @@ _FX NTSTATUS File_Generic_MyParseProc(
             else
                 device_name_ptr = Obj_Unnamed.Name.Buffer;
 
-            ignore_str_len = (wcslen(device_name_ptr) + 24) * sizeof(WCHAR);
-            ignore_str = Mem_Alloc(proc->pool, ignore_str_len);
             if (ignore_str) {
 
-                RtlStringCbPrintfW(ignore_str, ignore_str_len,
-                    L"(FI) %08X %s", device_type, device_name_ptr);
+                RtlStringCbPrintfW(ignore_str, sizeof(ignore_str),
+                    L"(FI) %08X %s", device_type);
 
                 if (proc->file_trace & TRACE_IGNORE)
-                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
+                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, device_name_ptr);
 
                 else if (Session_MonitorCount && !proc->disable_monitor &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
-                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
-
-                Mem_Free(ignore_str, ignore_str_len);
+                    Session_MonitorPut(MONITOR_IGNORE, device_name_ptr, proc->pid);
             }
 
             if (Name && Name != &Obj_Unnamed)

@@ -853,17 +853,19 @@ void WFP_classify(
 
 			WCHAR trace_str[256];
 			if (v6) {
-				RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", remote_port, protocol,
+				RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", 
+					send ? L"Outgoing " : L"Incomming ", remote_port, protocol,
 					remote_ip.Data[0], remote_ip.Data[1], remote_ip.Data[2], remote_ip.Data[3], remote_ip.Data[4], remote_ip.Data[5], remote_ip.Data[6], remote_ip.Data[7],
 					remote_ip.Data[8], remote_ip.Data[9], remote_ip.Data[10], remote_ip.Data[11], remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
 			}
 			else {
-				RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", remote_port, protocol,
+				RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", 
+					send ? L"Outgoing " : L"Incomming ", remote_port, protocol,
 					remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
 			}
 			const WCHAR* strings[3] = { send ? L"Outgoing " : L"Incomming ", trace_str, NULL };
             ULONG lengths[3] = { wcslen(strings[0]), wcslen(trace_str), 0 };
-            Session_MonitorPutEx(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            Session_MonitorPut(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), trace_str, PsGetCurrentProcessId());
         }
 
 		if (block) {

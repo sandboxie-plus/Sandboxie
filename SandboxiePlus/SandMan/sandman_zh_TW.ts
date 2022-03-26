@@ -65,8 +65,8 @@
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="30"/>
         <source>New Box</source>
+        <translatorcomment>沙箱名稱只能包含字母、數字和下劃線，不應對此處的文字進行翻譯！</translatorcomment>
         <translation>New Box</translation>
-		<translatorcomment>沙箱名稱只能包含字母、數字和下劃線，不應對此處的文字進行翻譯！</translatorcomment>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="38"/>

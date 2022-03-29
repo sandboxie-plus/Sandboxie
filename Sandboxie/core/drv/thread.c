@@ -148,6 +148,7 @@ _FX BOOLEAN Thread_Init(void)
                     "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
         return FALSE;
 
+
     //
     // set object open handlers
     //
@@ -168,6 +169,7 @@ _FX BOOLEAN Thread_Init(void)
                     "AlpcOpenSenderThread",     Thread_CheckThreadObject))
             return FALSE;
     }
+
 
     //
     // set API handlers
@@ -950,9 +952,7 @@ _FX NTSTATUS Thread_CheckProcessObject(
 {
     if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = (PEPROCESS)Object;
-    ACCESS_MASK WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
-    return Thread_CheckObject_Common(
-                proc, ProcessObject, GrantedAccess, WriteAccess, L'P');
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, TRUE, TRUE);
 }
 
 
@@ -967,9 +967,7 @@ _FX NTSTATUS Thread_CheckThreadObject(
 {
     if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = PsGetThreadProcess(Object);
-    ACCESS_MASK WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
-    return Thread_CheckObject_Common(
-                proc, ProcessObject, GrantedAccess, WriteAccess, L'T');
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, FALSE, TRUE);
 }
 
 
@@ -980,11 +978,35 @@ _FX NTSTATUS Thread_CheckThreadObject(
 
 _FX NTSTATUS Thread_CheckObject_Common(
     PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1)
+    ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
+    BOOLEAN AllowTerminating)
 {
     ULONG_PTR pid;
     const WCHAR *pSetting;
     NTSTATUS status;
+    WCHAR Letter1;
+    ACCESS_MASK WriteAccess;
+    ACCESS_MASK ReadAccess;
+
+    if (EntireProcess) {
+        Letter1 = L'P';
+        WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
+        ReadAccess = (GrantedAccess & PROCESS_VM_READ); 
+
+        //
+        // PROCESS_QUERY_INFORMATION allows to steal an attached debug object
+        // using object filtering mitigates this issue 
+        // but when its not active we should block that access
+        //
+
+        if(!Obj_CallbackInstalled)
+            ReadAccess |= (GrantedAccess & PROCESS_QUERY_INFORMATION); 
+    }
+    else {
+        Letter1 = L'T';
+        WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
+        ReadAccess = 0;
+    }
 
     //
     // if an error occured and can't find pid, then don't allow
@@ -995,24 +1017,14 @@ _FX NTSTATUS Thread_CheckObject_Common(
     if (! pid)
         return STATUS_ACCESS_DENIED;
 
-    //
-    // for read-only access to the target process, we don't care
-    // if/which boxes are involved
-    //
-
-    if (pid && (WriteAccess == 0) && !proc->hide_other_boxes) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    status = STATUS_SUCCESS;
 
     //
-    // otherwise this is write access, confirm if same box
+    // allow access if it's within the same box
     //
 
-    if (Process_IsSameBox(proc, NULL, pid)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    if (Process_IsSameBox(proc, NULL, pid))
+        goto finish;
 
     //
     // also permit if process is exiting, because it is possible that
@@ -1021,18 +1033,34 @@ _FX NTSTATUS Thread_CheckObject_Common(
     // (e.g. VS2012 MSBuild.exe does this with the csc.exe compiler)
     //
 
-    if (PsGetProcessExitProcessCalled(ProcessObject)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    if (AllowTerminating && PsGetProcessExitProcessCalled(ProcessObject))
+        goto finish;
+
 
     //
-    // write access outside box, check if we have the following setting
+    // access outside box, check if we have the following setting
     // OpenIpcPath=$:ProcessName.exe
     //
 
-    status = Process_CheckProcessName(
-                    proc, &proc->open_ipc_paths, pid, &pSetting);
+    if (Process_CheckProcessName(proc, &proc->closed_ipc_paths, pid, &pSetting)) {
+
+        status = STATUS_ACCESS_DENIED;
+
+    } else if (WriteAccess != 0 || ReadAccess != 0) {
+
+        if (!Process_CheckProcessName(proc, &proc->open_ipc_paths, pid, &pSetting)) {
+
+            if (WriteAccess != 0) {
+
+                status = STATUS_ACCESS_DENIED;
+
+            } else if (!Process_CheckProcessName(proc, &proc->read_ipc_paths, pid, &pSetting)) {
+
+                status = STATUS_ACCESS_DENIED;
+            }
+        }
+    }
+    
 
     //
     // log the cross-sandbox access attempt, based on the status code
@@ -1062,11 +1090,11 @@ _FX NTSTATUS Thread_CheckObject_Common(
         }
     }
 
+finish:
+
     //
     // trace
     //
-
-trace:
 
     if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY)) {
 

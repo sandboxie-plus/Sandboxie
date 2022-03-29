@@ -785,6 +785,9 @@ _FX NTSTATUS Process_Api_QueryPathList(PROCESS *proc, ULONG64 *parms)
     } else if (args->path_code.val == 'ic') {
         list   = &proc->closed_ipc_paths;
         lock   =  proc->ipc_lock;
+    } else if (args->path_code.val == 'ir') {
+        list   = &proc->read_ipc_paths;
+        lock   =  proc->ipc_lock;
 
     } else if (args->path_code.val == 'wo') {
         list   = &proc->open_win_classes;

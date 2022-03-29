@@ -37,8 +37,15 @@
 // Functions
 //---------------------------------------------------------------------------
 
+static OBJECT_TYPE* Obj_GetObjectType(const WCHAR* TypeName);
+
+static BOOLEAN Obj_AddObjectType(const WCHAR *TypeName);
+
+//---------------------------------------------------------------------------
 
 #ifdef ALLOC_PRAGMA
+#pragma alloc_text (INIT, Obj_GetObjectType)
+#pragma alloc_text (INIT, Obj_AddObjectType)
 #pragma alloc_text (INIT, Obj_Init)
 #endif // ALLOC_PRAGMA
 
@@ -47,6 +54,7 @@
 // Variables
 //---------------------------------------------------------------------------
 
+POBJECT_TYPE *Obj_ObjectTypes = NULL;
 
 static const WCHAR Obj_Unnamed_Name = L'\0';
 
@@ -75,6 +83,54 @@ P_ObQueryNameInfo pObQueryNameInfo = NULL;
 #endif _WIN64
 #endif
 
+//
+//  kernel object types (w8 64bit):
+// 
+// AlpcPortObjectType	
+// CmKeyObjectType	                    Exported
+// DbgkDebugObjectType	
+// EtwpRealTimeConnectionObjectType	
+// EtwpRegistrationObjectType	
+// ExCallbackObjectType	
+// ExCompositionSurfaceObjectType	    Exported
+// ExDesktopObjectType	                Exported
+// ExEventObjectType	                Exported
+// ExEventPairObjectType	
+// ExMutantObjectType	
+// ExProfileObjectType	
+// ExSemaphoreObjectType	            Exported
+// ExTimerObjectType	
+// ExWindowStationObjectType	        Exported
+// ExpIRTimerObjectType	
+// ExpKeyedEventObjectType	
+// ExpWorkerFactoryObjectType	
+// IoAdapterObjectType	                Exported
+// IoCompletionObjectType	
+// IoControllerObjectType	
+// IoDeviceHandlerObjectType	        Exported
+// IoDeviceObjectType	                Exported
+// IoDriverObjectType	                Exported
+// IoFileObjectType	                    Exported
+// IopWaitCompletionPacketObjectType	
+// LpcPortObjectType	                Exported
+// LpcWaitablePortObjectType	
+// MmSectionObjectType	                Exported
+// MmSessionObjectType	
+// ObpDirectoryObjectType	
+// ObpSymbolicLinkObjectType	
+// ObpTypeObjectType	
+// PopPowerRequestObjectType	
+// PsProcessType                        Exported
+// PsThreadType                         Exported
+// PsJobType                            Exported
+// SeTokenObjectType	                Exported
+// TmEnlistmentObjectType	            Exported
+// TmResourceManagerObjectType	        Exported
+// TmTransactionManagerObjectType	    Exported
+// TmTransactionObjectType	            Exported
+// WmipGuidObjectType	
+//
+
 
 //---------------------------------------------------------------------------
 // Obj_Init
@@ -83,16 +139,6 @@ P_ObQueryNameInfo pObQueryNameInfo = NULL;
 
 _FX BOOLEAN Obj_Init(void)
 {
-    //
-    // prepare object filter callback registration on Vista SP1 and later
-    //
-
-    if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
-
-        if (!Obj_Init_Filter())
-            return FALSE;
-    }
-
     if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
 
         //
@@ -119,6 +165,49 @@ _FX BOOLEAN Obj_Init(void)
         }
 
         pObGetObjectType = (P_ObGetObjectType)ptr;
+    }
+
+    //
+    // initialize set of recognized objects types
+    //
+
+    Obj_ObjectTypes = Mem_AllocEx(
+                            Driver_Pool, sizeof(POBJECT_TYPE) * 9, TRUE);
+    if (! Obj_ObjectTypes)
+        return FALSE;
+    memzero(Obj_ObjectTypes, sizeof(POBJECT_TYPE) * 9);
+
+    if (! Obj_AddObjectType(L"Job")) // PsJobType
+        return FALSE;
+    if (! Obj_AddObjectType(L"Event")) // ExEventObjectType
+        return FALSE;
+    if (! Obj_AddObjectType(L"Mutant")) // ExMutantObjectType - not exported
+        return FALSE;
+    if (! Obj_AddObjectType(L"Semaphore")) // ExSemaphoreObjectType
+        return FALSE;
+    if (! Obj_AddObjectType(L"Section")) // MmSectionObjectType
+        return FALSE;
+#ifdef XP_SUPPORT
+    if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
+        if (! Obj_AddObjectType(L"Port")) // LpcPortObjectType
+            return FALSE;
+    } else 
+#endif
+    {
+        if (! Obj_AddObjectType(L"ALPC Port"))  // AlpcPortObjectType - not exported
+            return FALSE;
+    }
+
+    //DbgPrint("JobObject; Known: %p; Found: %p\r\n", *PsJobType, Obj_ObjectTypes[0]);
+
+    //
+    // prepare object filter callback registration on Vista SP1 and later
+    //
+
+    if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+
+        if (!Obj_Init_Filter())
+            return FALSE;
     }
 
     return TRUE;
@@ -614,4 +703,77 @@ _FX POBJECT_TYPE Obj_GetTypeObjectType(void)
     }
 
     return _TypeObjectType;
+}
+
+
+//---------------------------------------------------------------------------
+// Obj_GetObjectType
+//---------------------------------------------------------------------------
+
+
+_FX OBJECT_TYPE* Obj_GetObjectType(const WCHAR *TypeName)
+{
+    NTSTATUS status;
+    WCHAR ObjectName[64];
+    UNICODE_STRING uni;
+    OBJECT_ATTRIBUTES objattrs;
+    HANDLE handle;
+    OBJECT_TYPE *object;
+
+    wcscpy(ObjectName, L"\\ObjectTypes\\");
+    wcscat(ObjectName, TypeName);
+    RtlInitUnicodeString(&uni, ObjectName);
+    InitializeObjectAttributes(&objattrs,
+        &uni, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+
+    //
+    // Windows 7 requires that we pass ObjectType in the second parameter
+    // below, while earlier versions of Windows do not require this.
+    // Obj_GetTypeObjectType() returns ObjectType on Windows 7, and
+    // NULL on earlier versions of Windows
+    //
+
+    status = ObOpenObjectByName(
+                    &objattrs, Obj_GetTypeObjectType(), KernelMode,
+                    NULL, 0, NULL, &handle);
+    if (! NT_SUCCESS(status)) {
+        Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x44, status, TypeName);
+        return NULL;
+    }
+
+    status = ObReferenceObjectByHandle(
+                    handle, 0, NULL, KernelMode, &object, NULL);
+
+    ZwClose(handle);
+
+    if (! NT_SUCCESS(status)) {
+        Log_Status_Ex(MSG_OBJ_HOOK_ANY_PROC, 0x55, status, TypeName);
+        return NULL;
+    }
+
+    ObDereferenceObject(object);
+
+    return object;
+}
+
+
+//---------------------------------------------------------------------------
+// Obj_AddObjectType
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Obj_AddObjectType(const WCHAR *TypeName)
+{
+    OBJECT_TYPE* object;
+    ULONG i;
+
+    object = Obj_GetObjectType(TypeName);
+    if (object == NULL)
+        return FALSE;
+
+    for (i = 0; Obj_ObjectTypes[i]; ++i)
+        ;
+    Obj_ObjectTypes[i] = object;
+
+    return TRUE;
 }

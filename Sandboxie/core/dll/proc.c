@@ -620,53 +620,53 @@ _FX const WCHAR* Proc_FindArgumentEnd(const WCHAR* arguments)
 //---------------------------------------------------------------------------
 
 
-void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)
-{
-    if ((lpApplicationName == NULL) && (lpCommandLine == NULL))
-        return NULL;
-
-    const WCHAR *start = NULL;
-    int len = 0;
-
-    if (lpApplicationName) {
-        start = lpApplicationName;
-        len = wcslen(start) + 1;    // add 1 for NULL
-    }
-    else {
-        start = lpCommandLine;
-        const WCHAR *end;
-
-        // if command line is not quoted, look for 1st space
-        if (*start != L'\"') {
-            end = start;
-            while (*end != 0 && *end != L' ')
-                end++;
-        }
-        // else, look for end quote
-        else {
-            start++;
-            end = start;
-            while (*end != 0 && *end != L'\"')
-                end++;
-        }
-        len = (int)(end - start) + 1;
-    }
-
-    //
-    // add + 4 space to be able to append a ".exe" in case its missing
-    //
-
-    WCHAR *mybuf = Dll_Alloc((len + 4) * sizeof(WCHAR));
-    if (!mybuf) {
-        return NULL;
-    }
-
-    memset(mybuf, 0xcd, (len + 4) * sizeof(WCHAR));
-    wcsncpy(mybuf, start, len - 1);
-    mybuf[len - 1] = L'\0';
-
-    return mybuf;
-}
+//void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)
+//{
+//    if ((lpApplicationName == NULL) && (lpCommandLine == NULL))
+//        return NULL;
+//
+//    const WCHAR *start = NULL;
+//    int len = 0;
+//
+//    if (lpApplicationName) {
+//        start = lpApplicationName;
+//        len = wcslen(start) + 1;    // add 1 for NULL
+//    }
+//    else {
+//        start = lpCommandLine;
+//        const WCHAR *end;
+//
+//        // if command line is not quoted, look for 1st space
+//        if (*start != L'\"') {
+//            end = start;
+//            while (*end != 0 && *end != L' ')
+//                end++;
+//        }
+//        // else, look for end quote
+//        else {
+//            start++;
+//            end = start;
+//            while (*end != 0 && *end != L'\"')
+//                end++;
+//        }
+//        len = (int)(end - start) + 1;
+//    }
+//
+//    //
+//    // add + 4 space to be able to append a ".exe" in case its missing
+//    //
+//
+//    WCHAR *mybuf = Dll_Alloc((len + 4) * sizeof(WCHAR));
+//    if (!mybuf) {
+//        return NULL;
+//    }
+//
+//    memset(mybuf, 0xcd, (len + 4) * sizeof(WCHAR));
+//    wcsncpy(mybuf, start, len - 1);
+//    mybuf[len - 1] = L'\0';
+//
+//    return mybuf;
+//}
 
 
 //
@@ -786,6 +786,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     if (Dll_OsBuild >= 17677) { // 10 RS5 and later
 
+        /*
         //Logic for windows 10 RS5
         WCHAR* mybuf = Proc_GetImageFullPath(lpApplicationName, lpCommandLine);
         if (mybuf == NULL)
@@ -805,7 +806,23 @@ _FX BOOL Proc_CreateProcessInternalW(
         if (FileHandle != INVALID_HANDLE_VALUE) {
             Proc_StoreImagePath(TlsData, FileHandle);
             NtClose(FileHandle);
-        }
+        }*/
+
+        //
+        // invoke the real CreateProcessInternal so it can record acurate
+        //
+
+        TlsData->proc_create_process_capture_image = TRUE;
+
+        ok = __sys_CreateProcessInternalW(
+            NULL, lpApplicationName, lpCommandLine,
+            NULL, NULL, FALSE, dwCreationFlags,
+            lpEnvironment, lpCurrentDirectory,
+            lpStartupInfo, lpProcessInformation, hNewToken);
+
+        //err = GetLastError(); // == ERROR_BAD_EXE_FORMAT
+
+        TlsData->proc_create_process_capture_image = FALSE;
 
         //
         // the system may have quoted the first part of the command line,
@@ -1961,61 +1978,57 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
     _In_ ULONG ThreadFlags, // THREAD_CREATE_FLAGS_*
     _In_opt_ PVOID ProcessParameters, // PRTL_USER_PROCESS_PARAMETERS
     _Inout_ PPS_CREATE_INFO CreateInfo,
-    _In_opt_ PPS_ATTRIBUTE_LIST AttributeList)
+    _In_ PPS_ATTRIBUTE_LIST AttributeList)
 {
     NTSTATUS status;
-    //UNICODE_STRING objname;
+    UNICODE_STRING objname;
 
-    //SIZE_T ImageNameIndex = -1;
-    // 
-    //SIZE_T count = (AttributeList->TotalLength - sizeof(SIZE_T)) / sizeof(PS_ATTRIBUTE);
-    //for (SIZE_T i = 0; i < count; i++) {
-    //    if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
-    //        ImageNameIndex = i;
-    //        break;
-    //    }
-    //}
-    //   
-    //if (ImageNameIndex != -1) {
+    SIZE_T ImageNameIndex = -1;
+     
+    SIZE_T count = (AttributeList->TotalLength - sizeof(SIZE_T)) / sizeof(PS_ATTRIBUTE);
+    for (SIZE_T i = 0; i < count; i++) {
+        if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
+            ImageNameIndex = i;
+            break;
+        }
+    }
+       
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
-    //    objname.Buffer = (WCHAR*)AttributeList->Attributes[ImageNameIndex].Value;
-    //    objname.Length = (USHORT)AttributeList->Attributes[ImageNameIndex].Size;
-    //    objname.MaximumLength = objname.Length + sizeof(wchar_t);
+    if (TlsData->proc_create_process_capture_image) {
 
-    //    WCHAR *TruePath;
-    //    WCHAR *CopyPath;
-    //    ULONG FileFlags;
-    //    if (NT_SUCCESS(File_GetName(NULL, &objname, &TruePath, &CopyPath, &FileFlags))) {
+        TlsData->proc_create_process_capture_image = FALSE;
 
-    //        HANDLE FileHandle;
-    //        OBJECT_ATTRIBUTES objattrs;
-    //        UNICODE_STRING objname2;
-    //        IO_STATUS_BLOCK IoStatusBlock;
+        if (ImageNameIndex != -1) {
 
-    //        RtlInitUnicodeString(&objname2, CopyPath);
-    //        InitializeObjectAttributes(
-    //            &objattrs, &objname2, OBJ_CASE_INSENSITIVE, NULL, NULL);
+            objname.Buffer = (WCHAR*)AttributeList->Attributes[ImageNameIndex].Value;
+            objname.Length = (USHORT)AttributeList->Attributes[ImageNameIndex].Size;
+            objname.MaximumLength = objname.Length + sizeof(wchar_t);
 
-    //        extern P_NtCreateFile __sys_NtCreateFile;
-    //        status = __sys_NtCreateFile(
-    //            &FileHandle, FILE_GENERIC_READ, &objattrs,
-    //            &IoStatusBlock, NULL, 0, FILE_SHARE_READ,
-    //            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+            HANDLE FileHandle;
+            OBJECT_ATTRIBUTES objattrs;
+            IO_STATUS_BLOCK IoStatusBlock;
 
-    //        if (NT_SUCCESS(status)) {
+            InitializeObjectAttributes(
+                &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    //            if (SbieDll_TranslateNtToDosPath(CopyPath)) {
-    //                wmemmove(CopyPath + 4, CopyPath, wcslen(CopyPath) + sizeof(WCHAR));
-    //                wmemcpy(CopyPath, L"\\??\\", 4);
+            status = NtCreateFile(
+                &FileHandle, FILE_GENERIC_READ, &objattrs,
+                &IoStatusBlock, NULL, 0, FILE_SHARE_READ,
+                FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
 
-    //                AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)CopyPath;
-    //                AttributeList->Attributes[ImageNameIndex].Size = wcslen(CopyPath) * sizeof(WCHAR);
-    //            }
+            if (NT_SUCCESS(status)) {
 
-    //            NtClose(FileHandle);
-    //        }
-    //    }
-    //}
+                Proc_StoreImagePath(TlsData, FileHandle);
+
+                NtClose(FileHandle);
+            }
+        }
+
+        SetLastError(LastError);
+        return STATUS_BAD_INITIAL_PC;
+    }
 
     status = __sys_NtCreateUserProcess(ProcessHandle,
         ThreadHandle,
@@ -2028,11 +2041,6 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
         ProcessParameters,
         CreateInfo,
         AttributeList);
-
-    //if (ImageNameIndex != -1) {
-    //    AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)objname.Buffer;
-    //    AttributeList->Attributes[ImageNameIndex].Size = objname.Length;
-    //}
 
     return status;
 }

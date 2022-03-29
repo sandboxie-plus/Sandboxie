@@ -1173,23 +1173,23 @@ _FX void Process_GetProcessName(
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Process_CheckProcessName(
+_FX BOOLEAN Process_CheckProcessName(
     PROCESS *proc, LIST *open_paths, ULONG_PTR idProcess,
     const WCHAR **pSetting)
 {
-    NTSTATUS status;
+    BOOLEAN result;
     PATTERN *pat;
     void *nbuf;
     ULONG nlen;
     WCHAR *nptr;
 
-    status = STATUS_ACCESS_DENIED;
+    result = FALSE;
 
     if (pSetting)
         *pSetting = NULL;
 
     if (! idProcess)
-        return status;
+        return result;
 
     nbuf = NULL;
     nlen = 0;
@@ -1204,7 +1204,7 @@ _FX NTSTATUS Process_CheckProcessName(
 
         const WCHAR *src = Pattern_Source(pat);
         pat = List_Next(pat);
-        if (wcslen(src) > 3 && src[0] == L'$' && src[1] == L':') {
+        if (wcslen(src) >= 3 && src[0] == L'$' && src[1] == L':') {
 
             if (! nptr) {
                 Process_GetProcessName(
@@ -1212,8 +1212,8 @@ _FX NTSTATUS Process_CheckProcessName(
                 if (! nptr)
                     break;
             }
-            if (_wcsicmp(nptr, src + 2) == 0) {
-                status = STATUS_SUCCESS;
+            if (_wcsicmp(nptr, src + 2) == 0 || (src[2] == L'*' && src[3] == L'\0')) { // "$:*" is permitted
+                result = TRUE;
                 if (pSetting)
                     *pSetting = src;
                 break;
@@ -1224,7 +1224,7 @@ _FX NTSTATUS Process_CheckProcessName(
     if (nbuf)
         Mem_Free(nbuf, nlen);
 
-    return status;
+    return result;
 }
 
 

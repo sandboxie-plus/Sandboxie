@@ -157,8 +157,7 @@ _FX BOOLEAN Ipc_Init(void)
 
     if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
 
-        // Don't use experimental features by default
-        if (Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE)) {
+        if (Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, TRUE)) {
 
             if (!Obj_Load_Filter())
                 return FALSE;
@@ -381,6 +380,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
 #endif
     static const WCHAR* _OpenPath = L"OpenIpcPath";
     static const WCHAR* _ClosedPath = L"ClosedIpcPath";
+    static const WCHAR* _ReadPath = L"ReadIpcPath";
     static const WCHAR* openpaths[] = {
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
@@ -576,6 +576,10 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     //    NULL
     //};
 #endif
+    static const WCHAR *readpaths[] = {
+        L"$:explorer.exe",
+        NULL
+    };
 
     ULONG i;
     BOOLEAN ok;
@@ -586,21 +590,19 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
 
 #ifdef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, &proc->normal_ipc_paths, _NormalPath, FALSE);
+
+    //if (ok && proc->use_privacy_mode) {
+    // 
+    //    for (i = 0; normalpaths[i] && ok; ++i) {
+    //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, NULL,
+    //                          TRUE, normalpaths[i], FALSE);
+    //    }
+    //}
+
     if (!ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
         return FALSE;
     }
-
-    //if (proc->use_privacy_mode) {
-    //    for (i = 0; normalpaths[i] && ok; ++i) {
-    //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
-    //    }
-    //
-    //    if (! ok) {
-    //        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-    //        return FALSE;
-    //    }
-    //}
 #endif
 
     //
@@ -695,6 +697,29 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
     }
+
+    //
+    // read-only paths
+    //
+
+    ok = Process_GetPaths(proc, &proc->read_ipc_paths, _ReadPath, FALSE);
+
+    if (ok) {
+
+        for (i = 0; readpaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, &proc->read_ipc_paths, NULL,
+                                TRUE, readpaths[i], FALSE);
+        }
+    }
+
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
+        return FALSE;
+    }
+
+    //
+    // other options
+    //
 
     proc->ipc_warn_startrun = Conf_Get_Boolean(
         proc->box->name, L"NotifyStartRunAccessDenied", 0, TRUE);

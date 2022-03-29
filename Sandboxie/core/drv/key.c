@@ -241,6 +241,9 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *normalpaths[] = {
         L"HKEY_LOCAL_MACHINE\\*",
+        //L"HKEY_CURRENT_USER\\software\\Microsoft\\*",
+        //L"HKEY_CURRENT_USER\\software\\WOW6432Node\\Microsoft\\*",
+        //L"\\REGISTRY\\USER\\*_Classes\\*",
         NULL
     };
 #endif

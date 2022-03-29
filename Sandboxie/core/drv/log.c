@@ -237,7 +237,6 @@ _FX void Log_Msg(
     const WCHAR *string1,
     const WCHAR *string2)
 {
-    //DbgPrint("Sbie MSG_%d: %S; %S\r\n", (error_code & 0xFFFF), string1, string2);
     Log_Msg_Session(error_code, string1, string2, -1);
 }
 

@@ -97,24 +97,24 @@ _FX BOOLEAN Obj_Load_Filter(void)
     //
     // The types handled by the Syscall_DuplicateHandle are as follows
     // 
-    // "Process"    -> Thread_CheckProcessObject
-    // "Thread"     -> Thread_CheckThreadObject
+    // "Process"    -> Thread_CheckProcessObject        <- PsProcessType
+    // "Thread"     -> Thread_CheckThreadObject         <- PsThreadType
     // 
-    // "File"       -> File_CheckFileObject   <- given the the note above why do we double filter for files ???
+    // "File"       -> File_CheckFileObject             <- IoFileObjectType // given the the note above why do we double filter for files ???
     // 
     // "Event"      -> Ipc_CheckGenericObject
     // "EventPair"  -> Ipc_CheckGenericObject           <- ExEventPairObjectType not exported
     // "KeyedEvent" -> Ipc_CheckGenericObject           <- ExpKeyedEventObjectType not exported
     // "Mutant"     -> Ipc_CheckGenericObject           <- ExMutantObjectType not exported
-    // "Semaphore"  -> Ipc_CheckGenericObject
-    // "Section"    -> Ipc_CheckGenericObject
+    // "Semaphore"  -> Ipc_CheckGenericObject           <- ExSemaphoreObjectType
+    // "Section"    -> Ipc_CheckGenericObject           <- MmSectionObjectType
     // 
-    // "JobObject"  -> Ipc_CheckJobObject
+    // "JobObject"  -> Ipc_CheckJobObject               <- PsJobType
     // 
     // "Port" / "ALPC Port" -> Ipc_CheckPortObject      <- AlpcPortObjectType and LpcWaitablePortObjectType not exported, LpcPortObjectType exported
-    //      Note: proper  IPC isolation requires filering of NtRequestPort, NtRequestWaitReplyPort, and NtAlpcSendWaitReceivePort calls
+    //      Note: proper  IPC isolation requires filtering of NtRequestPort, NtRequestWaitReplyPort, and NtAlpcSendWaitReceivePort calls
     // 
-    // "Token"      -> Thread_CheckTokenObject
+    // "Token"      -> Thread_CheckTokenObject          <- SeTokenObjectType
     //
 
     if (!pObRegisterCallbacks || !pObUnRegisterCallbacks)
@@ -240,9 +240,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             goto Exit;        
 
         PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
-        ACCESS_MASK WriteAccess = (InitialDesiredAccess & PROCESS_DENIED_ACCESS_MASK);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(
-            proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'P'))) {
+        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, TRUE, TRUE))) {
 
 #ifdef DRV_BREAKOUT
             //
@@ -301,9 +299,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             goto Exit;
 
         PEPROCESS ProcessObject = PsGetThreadProcess((PETHREAD)PreInfo->Object);
-        ACCESS_MASK WriteAccess = (InitialDesiredAccess & THREAD_DENIED_ACCESS_MASK);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(
-            proc, ProcessObject, InitialDesiredAccess, WriteAccess, L'T'))) {
+        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, FALSE, TRUE))) {
             *DesiredAccess = 0; // deny any access
         }
         //ObjectTypeName = L"PsThreadType";

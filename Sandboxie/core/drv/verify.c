@@ -464,15 +464,20 @@ _FX VOID KphGetBuildDate(LARGE_INTEGER* date)
     RtlTimeFieldsToTime(&timeFiled, date);
 }
 
-_FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
+_FX LONGLONG KphGetDate(CSHORT days, CSHORT months, CSHORT years)
 {
     LARGE_INTEGER date;
     TIME_FIELDS timeFiled = { 0 };
-    timeFiled.Day = 1 + days;
-    timeFiled.Month = 1 + months;
-    timeFiled.Year = 1601 + years;
+    timeFiled.Day = days;
+    timeFiled.Month = months;
+    timeFiled.Year = years;
     RtlTimeFieldsToTime(&timeFiled, &date);
     return date.QuadPart;
+}
+
+_FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
+{
+    return KphGetDate(1 + days, 1 + months, 1601 + years);
 }
 
 #define SOFTWARE_NAME L"Sandboxie-Plus"
@@ -750,8 +755,11 @@ _FX NTSTATUS KphValidateCertificate(void)
             if (level && _wcsicmp(level, L"HUGE") == 0) {
                 // 
             } 
-            else if (level && _wcsicmp(level, L"LARGE") == 0) {
+            else if (level && _wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1,04,2022)) { // valid for all builds released with 2 years
                 TEST_CERT_DATE(0, 0, 2); // no real expiration just ui reminder
+            }
+            else if (level && _wcsicmp(level, L"LARGE") == 0) { // valid for all builds released with 2 years
+                TEST_VALIDITY(0, 0, 2);
             }
             else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // valid for all builds released with 1 year 
                 TEST_VALIDITY(0, 0, 1);

@@ -121,6 +121,7 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 	case eNormalIpcPath:	return "NormalIpcPath";
 	case eOpenIpcPath:		return "OpenIpcPath";
 	case eClosedIpcPath:	return "ClosedIpcPath";
+	case eReadIpcPath:		return "ReadIpcPath";
 
 	case eOpenWinClass:		return "OpenWinClass";
 
@@ -452,7 +453,7 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 	{
 	case eFile:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eKey:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
-	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed;
+	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed << eReadOnly;
 	case eWnd:			return QList<EAccessMode>() << eOpen;
 	case eCOM:			return QList<EAccessMode>() << eOpen << eClosed << eClosedRT;
 	}

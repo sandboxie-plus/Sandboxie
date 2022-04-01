@@ -183,13 +183,3 @@ body:
         .....
 
       render: shell
-  - type: input
-    id: sandboxie-plus-config
-    attributes:
-      label: Sandboxie-Plus.ini configuration (for Plus interface issues)
-      description: |
-        Sandboxie-Plus.ini is only needed if you have specific user interface issues with Sandboxie Plus
-        (this is usually located in `C:\Users\%Username%\AppData\Local\Sandboxie-Plus` or `C:\ProgramData\Sandboxie-Plus` for corporate users).
-
-        Please copy the content on https://gist.github.com and share the resulting link below.
-      placeholder: https://

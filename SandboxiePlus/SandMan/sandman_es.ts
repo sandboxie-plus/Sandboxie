@@ -2381,12 +2381,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="119"/>
         <source>Drop Admin Rights</source>
-        <translation>Dejar Permisos Admin</translation>
+        <translation>Rebajar Permisos de Administrador</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="120"/>
         <source>Emulate Admin Rights</source>
-        <translation>Emular Permisos Admin</translation>
+        <translation>Emular Permisos de Administrador</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="128"/>
@@ -3182,12 +3182,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="509"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation>Nota: Excepciones del instalador MSI no deben ser requeeridas, pero si encuentra problemas instalando paquetes msi que ud. confia, esta opción puede ayudar a que la instalación se complete correctamente.  Ud. puede tambien intentar deshabilitar Solptar Permisos Administrativos.</translation>
+        <translation>Nota: Excepciones para instaladores MSI no deben ser requeridas, pero si encuentra problemas instalando paquetes MSI confiables, esta opción puede ayudar a que la instalación se complete satisfactoriamente.  Tambien puede intentar deshabilitar Rebajar permisos de grupos Administradores y Usuarios Avanzados.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="410"/>
         <source>Prompt user for large file migration</source>
-        <translation>Preguntar al usuario sobre migrar archivos grandes</translation>
+        <translation>Preguntar al usuario si desea migrar archivos grandes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="569"/>
@@ -3253,7 +3253,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="552"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>Dejar permisos de grupos Administradores y Usuarios Avanzados</translation>
+        <translation>Rebajar permisos de grupos Administradores y Usuarios Avanzados</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="461"/>
@@ -3512,7 +3512,7 @@ NO seleccionará: %2</translation>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>Programas persistentes seran automaticamente terminados si aun estar ejecutandose luego de que todos los demas procesos hayan terminado.
+        <translation>Programas persistentes seran automaticamente terminados si aun estan ejecutandose luego de que todos los demas procesos hayan terminado.
 
 Si los procesos lider son definidos, todos los demas son tratados como persistentes.</translation>
     </message>
@@ -3573,7 +3573,7 @@ Si los procesos lider son definidos, todos los demas son tratados como persisten
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1209"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
-        <translation>Preguntar al usuario.si permitir una excepción al bloqueo.</translation>
+        <translation>Preguntar al usuario si desea permitir excepción al bloqueo.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1432"/>

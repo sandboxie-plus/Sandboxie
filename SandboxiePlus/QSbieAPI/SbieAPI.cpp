@@ -2412,8 +2412,6 @@ bool CSbieAPI::GetMonitor()
 	QStringList LogData;
 	for (size_t pos = 0; pos < log_buffer.Length; ) {
 		size_t len = wcslen((WCHAR*)(log_buffer.Buffer + pos));
-		if (len == 0)
-			break;
 		LogData.append(QString::fromWCharArray((WCHAR*)(log_buffer.Buffer + pos), len));
 		pos += (len + 1) * sizeof(WCHAR);
 	}

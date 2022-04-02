@@ -192,6 +192,16 @@ _FX NTSTATUS Syscall_CheckObject(
         status = syscall_entry->handler2_func(
             proc, OpenedObject, &Name->Name, HandleInfo->GrantedAccess);
 
+        //
+        // process/thread access has an own loggin routine
+        //
+
+        if ((syscall_entry->name_len == 11 && memcmp(syscall_entry->name, "OpenProcess", 11) == 0) ||
+            (syscall_entry->name_len == 10 && memcmp(syscall_entry->name, "OpenThread", 10) == 0) ||
+            (syscall_entry->name_len == 21 && memcmp(syscall_entry->name, "AlpcOpenSenderProcess", 21) == 0) ||
+            (syscall_entry->name_len == 20 && memcmp(syscall_entry->name, "AlpcOpenSenderThread", 20) == 0))
+            goto skip_log;
+
         if ((status != STATUS_SUCCESS)
                             && (status != STATUS_BAD_INITIAL_PC)) {
 
@@ -200,9 +210,10 @@ _FX NTSTATUS Syscall_CheckObject(
 
             WCHAR msg[256];
             RtlStringCbPrintfW(msg, sizeof(msg), L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
-			Log_Msg_Process(MSG_2101, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
+			Log_Msg_Process(MSG_2112, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
         }
 
+skip_log:
         if (Name != &Obj_Unnamed)
             Mem_Free(Name, NameLength);
     }

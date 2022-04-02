@@ -229,8 +229,6 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	QStringList Values = Value.split(",");
 	if (Values.count() >= 2) 
 		AddAccessEntry(Type, Mode, Values[0], Values[1], disabled, Template);
-	else if (Values[0].left(2) == "$:") // special cases
-		AddAccessEntry(Type, Mode, Values[0].mid(2), "$", disabled, Template);
 	else // all programs
 		AddAccessEntry(Type, Mode, "", Values[0], disabled, Template);
 }
@@ -571,9 +569,7 @@ void COptionsWindow::SaveAccessList()
 		int Mode = pItem->data(2, Qt::UserRole).toInt();
 		QString Program = pItem->data(1, Qt::UserRole).toString();
 		QString Value = pItem->data(3, Qt::UserRole).toString();
-		if (Value == "$") // special cases
-			Value = "$:" + Program;
-		else if (!Program.isEmpty())
+		if (!Program.isEmpty())
 			Value.prepend(Program + ",");
 
 		QString AccessStr = MakeAccessStr((EAccessType)Type, (EAccessMode)Mode);

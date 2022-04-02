@@ -979,7 +979,7 @@ _FX NTSTATUS Thread_CheckThreadObject(
 _FX NTSTATUS Thread_CheckObject_Common(
     PROCESS *proc, PEPROCESS ProcessObject,
     ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
-    BOOLEAN AllowTerminating)
+    BOOLEAN ExplicitAccess)
 {
     ULONG_PTR pid;
     const WCHAR *pSetting;
@@ -987,6 +987,11 @@ _FX NTSTATUS Thread_CheckObject_Common(
     WCHAR Letter1;
     ACCESS_MASK WriteAccess;
     ACCESS_MASK ReadAccess;
+
+    BOOLEAN ShouldMonitorAccess = FALSE;
+    void *nbuf;
+    ULONG nlen;
+    WCHAR *nptr;
 
     if (EntireProcess) {
         Letter1 = L'P';
@@ -1033,7 +1038,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
     // (e.g. VS2012 MSBuild.exe does this with the csc.exe compiler)
     //
 
-    if (AllowTerminating && PsGetProcessExitProcessCalled(ProcessObject))
+    if (ExplicitAccess && PsGetProcessExitProcessCalled(ProcessObject))
         goto finish;
 
 
@@ -1061,36 +1066,27 @@ _FX NTSTATUS Thread_CheckObject_Common(
         }
     }
     
-
     //
     // log the cross-sandbox access attempt, based on the status code
     //
 
-    if (Session_MonitorCount && !proc->disable_monitor) {
-
-        void *nbuf;
-        ULONG nlen;
-        WCHAR *nptr;
-
-        Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
-        if (nbuf) {
-
-            ULONG mon_type = MONITOR_IPC;
-            if (NT_SUCCESS(status))
-                mon_type |= MONITOR_OPEN;
-            else
-                mon_type |= MONITOR_DENY;
-
-            --nptr; *nptr = L':';
-            --nptr; *nptr = L'$';
-
-            Session_MonitorPut(mon_type, nptr, proc->pid);
-
-            Mem_Free(nbuf, nlen);
-        }
-    }
+    ShouldMonitorAccess = TRUE;
 
 finish:
+
+    Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
+    if (nbuf) {
+        --nptr; *nptr = L':';
+        --nptr; *nptr = L'$';
+    }
+
+    ULONG mon_type = MONITOR_IPC;
+    if(!NT_SUCCESS(status))
+        mon_type |= MONITOR_DENY;
+    else if (WriteAccess || ReadAccess)
+        mon_type |= MONITOR_OPEN;
+    if (!ShouldMonitorAccess)
+        mon_type |= MONITOR_TRACE;
 
     //
     // trace
@@ -1111,9 +1107,23 @@ finish:
         if (Letter2) {
             RtlStringCbPrintfW(str, sizeof(str), L"(%c%c) %08X %06d",
                                 Letter1, Letter2, GrantedAccess, (int)pid);
-            Log_Debug_Msg(MONITOR_IPC | MONITOR_TRACE, str, Driver_Empty);
+            Log_Debug_Msg(mon_type, str, nptr ? nptr : Driver_Empty);
         }
     }
+    else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor && nbuf != NULL) {
+
+        Session_MonitorPut(mon_type, nptr, proc->pid);
+    }
+
+    if (ExplicitAccess && (status != STATUS_SUCCESS) && (status != STATUS_BAD_INITIAL_PC)) {
+
+        WCHAR msg[256];
+        RtlStringCbPrintfW(msg, sizeof(msg), L"%s (%08X) access=%08X initialized=%d", EntireProcess ? L"OpenProcess" : L"OpenThread", status, GrantedAccess, proc->initialized);
+		Log_Msg_Process(MSG_2111, msg, nptr != NULL ? nptr : L"Unnamed process", -1, proc->pid);
+    }
+
+    if (nbuf) 
+        Mem_Free(nbuf, nlen);
 
     return status;
 }

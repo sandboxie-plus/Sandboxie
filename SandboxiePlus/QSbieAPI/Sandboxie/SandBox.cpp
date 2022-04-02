@@ -135,7 +135,10 @@ SB_STATUS CSandBox::RunSandboxed(const QString& Command)
 
 SB_STATUS CSandBox::TerminateAll()
 {
-	return m_pAPI->TerminateAll(m_Name);
+	SB_STATUS Status = m_pAPI->TerminateAll(m_Name);
+	if(!Status.IsError())
+		m_ActiveProcessCount = 0;
+	return Status;
 }
 
 bool CSandBox::IsEmpty() const

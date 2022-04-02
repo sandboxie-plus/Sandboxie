@@ -97,7 +97,7 @@ THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid);
 NTSTATUS Thread_CheckObject_Common(
     PROCESS *proc, PEPROCESS ProcessObject,
     ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
-    BOOLEAN AllowTerminating);
+    BOOLEAN ExplicitAccess);
 
 //---------------------------------------------------------------------------
 

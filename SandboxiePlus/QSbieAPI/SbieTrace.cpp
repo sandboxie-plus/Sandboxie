@@ -63,7 +63,7 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 {
 	m_ProcessId = ProcessId;
 	m_ThreadId = ThreadId;
-	m_Name = LogData.first();
+	m_Name = LogData.length() > 0 ? LogData.at(0) : QString("(empty)");
 	m_Message = LogData.length() > 1 ? LogData.at(1) : QString();
 	m_Type.Flags = Type;
 

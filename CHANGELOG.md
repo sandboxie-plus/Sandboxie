@@ -7,15 +7,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.17 / 5.55.17] - 2022-04-??
+
+
+## [1.0.17 / 5.55.17] - 2022-04-02
+
+### Added
+- added checkbox to easeli allow read access to memory of unsandboxed processes (old sbie behavioure, not recommended)
+
+### Changed
+- improved OpenProcess/OpenThread logging
 
 ### Fixed
 - Fixed crash issue with the new monitor mode
+- Fixed issue with resource access entry parsing
 
 
 
 
-## [1.0.16 / 5.55.16] - 2022-04-02
+## [1.0.16 / 5.55.16] - 2022-04-01
 
 ### Added
 - FIXED SECURITY ISSUE: memory of unsandboxed processes can no longer be read, except for exceptions

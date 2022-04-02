@@ -71,6 +71,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCloseClipBoard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkVmRead, SIGNAL(clicked(bool)), this, SLOT(OnVmRead()));
 	//connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
@@ -359,5 +360,15 @@ void COptionsWindow::OnBoxTypChanged()
 	m_HoldBoxType = true;
 	UpdateBoxType();
 	m_HoldBoxType = false;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnVmRead()
+{
+	if (ui.chkVmRead->isChecked())
+		SetAccessEntry(eIPC, "", eReadOnly, "$:*");
+	else
+		DelAccessEntry(eIPC, "", eReadOnly, "$:*");
+	m_AdvancedChanged = true;
 	OnOptChanged();
 }

@@ -52,6 +52,8 @@ private slots:
 	void OnDelCommand();
 	void OnRunChanged() { m_GeneralChanged = true;  OnOptChanged(); }
 
+	void OnVmRead();
+
 	void OnAddGroup();
 	void OnAddProg();
 	void OnDelProg();

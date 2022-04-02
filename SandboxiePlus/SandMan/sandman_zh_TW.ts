@@ -280,7 +280,7 @@
         <location filename="Windows/OptionsAdvanced.cpp" line="381"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="392"/>
         <source>Please enter the command line to be executed</source>
-        <translation>請輸入需要執行的命令行</translation>
+        <translation>請輸入將要執行的命令列</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="411"/>
@@ -1301,7 +1301,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="731"/>
         <source>Unknown operation '%1' requested via command line</source>
-        <translation>透過命令行請求的未知操作 '%1'</translation>
+        <translation>透過命令列請求的未知操作 '%1'</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="811"/>
@@ -1412,7 +1412,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1318"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>選取的功能只對專案支持者可用。如果沒有支持者憑證，在啟用該功能的沙箱裡啟動的處理程序，將在 5 分鍾後將被終止。&lt;br /&gt;&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;成為專案支持者&lt;/a&gt;，以取得&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;支持者證書&lt;/a&gt;</translation>
+        <translation>選取的功能只對專案贊助者可用。如果沒有贊助者憑證，在啟用該功能的沙箱裡啟動的處理程序，將在 5 分鍾後將被終止。&lt;br /&gt;&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1416"/>
@@ -1573,17 +1573,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="1259"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
-        <translation>在沙箱 %2 中啟動的程式 %1 將在 5 分鍾之後自動終止，因為此沙箱被設定為使用專案支持者的特有功能。</translation>
+        <translation>在沙箱 %2 中啟動的程式 %1 將在 5 分鍾之後自動終止，因為此沙箱被設定為使用專案贊助者的特有功能。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1261"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
-        <translation>沙箱 %1 被設定為使用專案支持者專有的沙箱類型，這些預設選項將被忽略。</translation>
+        <translation>沙箱 %1 被設定為使用專案贊助者專有的沙箱類型，這些預設選項將被忽略。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1262"/>
         <source>&lt;br /&gt;&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>&lt;br /&gt;&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;成為專案支持者&lt;/a&gt;，以取得&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;支持者憑證&lt;/a&gt;</translation>
+        <translation>&lt;br /&gt;&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1554"/>
@@ -1814,38 +1814,38 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="2579"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
-        <translation>此支持者證書對該版本沙箱無效，請取得可用的新證書</translation>
+        <translation>此贊助者憑證對該版本沙箱無效，請取得更新的憑證</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2582"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
-        <translation>此支持者證書已過期%1，請取得可用的新證書</translation>
+        <translation>此贊助者憑證已逾期%1，請取得更新的憑證</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2583"/>
         <source>, but it remains valid for the current build</source>
-        <translation>，但它對目前建置的沙箱版本仍然有效</translation>
+        <translation>，但它對目前組建的沙箱版本仍然有效</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2585"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
-        <translation>此支持者證書將在 %1 天後過期，請取得可用的新證書</translation>
+        <translation>此贊助者憑證將在 %1 天後過期，請取得更新的憑證</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2605"/>
         <source>Checking for certificate...</source>
-        <translation>檢查證書...</translation>
+        <translation>檢查憑證中...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2638"/>
         <source>No certificate found on server!</source>
-        <translation>未在伺服器搜尋到證書！</translation>
+        <translation>未在伺服器中尋找到憑證！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2643"/>
         <source>There is no updated certificate available.</source>
-        <translation>目前沒有可用的證書更新。</translation>
+        <translation>目前沒有可用的憑證更新。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2872"/>
@@ -2412,7 +2412,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="881"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>警告: 開啟的註冊表編輯器未沙箱化，請審慎且僅對預先選取的沙箱位置進行修改。</translation>
+        <translation>警告: 開啟的登錄編輯程式未沙箱化，請審慎且僅對預先選取的沙箱位置進行修改。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="882"/>
@@ -2587,12 +2587,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="355"/>
         <source>This supporter certificate has expired, please &lt;a href="sbie://update/cert"&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此支持者證書已過期，請&lt;a href="sbie://update/cert"&gt;取得新證書&lt;/a&gt;。</translation>
+        <translation>此贊助者憑證已逾期，請&lt;a href="sbie://update/cert"&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="360"/>
         <source>This supporter certificate will &lt;font color='red'&gt;expire in %1 days&lt;/font&gt;, please &lt;a href="sbie://update/cert"&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此支持者證書將&lt;font color='red'&gt;在 %1 天後過期&lt;/font&gt;，請&lt;a href="sbie://update/cert"&gt;取得新證書&lt;/a&gt;。</translation>
+        <translation>此贊助者憑證將&lt;font color='red'&gt;在 %1 天後過期&lt;/font&gt;，請&lt;a href="sbie://update/cert"&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="397"/>
@@ -2602,27 +2602,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="556"/>
         <source>This does not look like a certificate, please enter the entire certificate not just a portion of it.</source>
-        <translation>這看起來不像證書，請完整輸入整個證書內容，而不僅僅是其中的一部分。</translation>
+        <translation>這看起來不像是憑證，請輸入完整憑證內容，而不僅僅是其中的一部分。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="579"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation>很不幸此證書已過期。</translation>
+        <translation>很不幸此憑證已逾期。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="581"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation>很不幸此證書已過時。</translation>
+        <translation>很不幸此憑證已廢止。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="587"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
-        <translation>感謝您對 Sandboxie-Plus 開發的支持。</translation>
+        <translation>感謝您對 Sandboxie-Plus 開發工作的支持。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="594"/>
         <source>This support certificate is not valid.</source>
-        <translation>此支持者證書無效。</translation>
+        <translation>此贊助者憑證無效。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="639"/>
@@ -2643,7 +2643,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="719"/>
         <source>Passwords did not match, please retry.</source>
-        <translation>密碼不相符，請重新輸入。</translation>
+        <translation>密碼不匹配，請重新輸入。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="729"/>
@@ -3196,12 +3196,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="127"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color='red'&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;更多沙箱類型&lt;/b&gt;僅&lt;u&gt;專案支持者&lt;/u&gt;可用，隱私增強沙箱&lt;b&gt;&lt;font color='red'&gt;保護使用者資料免受沙箱化的程式非法存取&lt;/font&gt;&lt;/b&gt;。&lt;br /&gt;如果您還不是支持者，請考慮&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;捐贈此專案&lt;/a&gt;，來取得&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;支持者證書&lt;/a&gt;。&lt;br /&gt;當然您也可以新增一個這些類型的沙箱進行測試，不過沙箱中執行的程式將在 5 分鍾之後自動終止。</translation>
+        <translation>&lt;b&gt;更多沙箱類型&lt;/b&gt;僅&lt;u&gt;專案贊助者&lt;/u&gt;可用，隱私增強沙箱&lt;b&gt;&lt;font color='red'&gt;保護使用者資料免受沙箱化的程式非法存取&lt;/font&gt;&lt;/b&gt;。&lt;br /&gt;如果您還不是贊助者，請考慮&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-get-cert"&gt;捐贈此專案&lt;/a&gt;，來取得&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;贊助者憑證&lt;/a&gt;。&lt;br /&gt;當然您也可以新增一個這些類型的沙箱進行測試，不過沙箱中執行的程式將在 5 分鍾之後自動終止。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
         <source>Always show this sandbox in the systray list (Pinned)</source>
-        <translation>固定住此沙箱，以便總是在系統匣列表顯示</translation>
+        <translation>固定此沙箱，以便總是在系統匣清單中顯示</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
@@ -4240,7 +4240,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="330"/>
         <source>Show a tray notification when automatic box operations are started</source>
-        <translation>當沙箱自動化作業事件開始執行時，彈出系統匣通知</translation>
+        <translation>當沙箱自動化作業事件開始執行時，跳出系統匣通知</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="376"/>
@@ -4447,37 +4447,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="840"/>
         <source>Support</source>
-        <translation>支持</translation>
+        <translation>贊助</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="941"/>
         <source>This supporter certificate has expired, please &lt;a href="sbie://update/cert"&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此支持者證書已過期，請&lt;a href="sbie://update/cert"&gt;取得新證書&lt;/a&gt;。</translation>
+        <translation>此贊助者憑證已逾期，請&lt;a href="sbie://update/cert"&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="961"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href="https://sandboxie-plus.com/go.php?to=donate"&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href="https://sandboxie-plus.com/go.php?to=patreon"&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation>使 Sandboxie 與 Windows 的累積版本保持同步，並與現代網頁瀏覽器相容，是一項永無止境的努力。請考慮透過捐贈來支持這項工作。&lt;br&gt;您可以透過直接&lt;a href="https://sandboxie-plus.com/go.php?to=donate"&gt;PayPal 捐贈&lt;/a&gt;來支持開發，也適用於信用卡。&lt;br&gt;您還可以透過&lt;a href="https://sandboxie-plus.com/go.php?to=patreon"&gt;Patreon 訂閱&lt;/a&gt;提供持續的支持。</translation>
+        <translation>使 Sandboxie 與 Windows 的累積性版本更新保持同步，並與所有網頁瀏覽器相容，這是一項永無止境的工程。請考慮透過捐贈來支持這項工作。&lt;br&gt;您可以透過直接&lt;a href="https://sandboxie-plus.com/go.php?to=donate"&gt;PayPal 捐贈&lt;/a&gt;來支援開發 (也適用於信用卡)。&lt;br&gt;您還可以透過&lt;a href="https://sandboxie-plus.com/go.php?to=patreon"&gt;Patreon 訂閱&lt;/a&gt;提供持續的支援。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="974"/>
         <source>In the future, don't notify about certificate expiration</source>
-        <translation>不再通知證書過期的情況</translation>
+        <translation>不再通知憑證逾期的情況</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="870"/>
         <source>Enter the support certificate here</source>
-        <translation>在此輸入支持者證書</translation>
+        <translation>在此輸入贊助者憑證</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="927"/>
         <source>Support Settings</source>
-        <translation>支持設定</translation>
+        <translation>贊助設定</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="890"/>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;supporter certificate&lt;/a&gt;. It's like a license key but for awesome people using open source software. :-)</source>
-        <translation>Sandboxie-Plus 專案的支持者會收到&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;支持者憑證&lt;/a&gt;。它就像一個授權金鑰，但適用於使用開放原始碼軟體的優秀人士。 :-)</translation>
+        <translation>Sandboxie-Plus 專案的贊助者會收到&lt;a href="https://sandboxie-plus.com/go.php?to=sbie-cert"&gt;贊助者憑證&lt;/a&gt;。它就像一個授權金鑰，但適用的是使用開放原始碼軟體的優秀人士。 :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="900"/>

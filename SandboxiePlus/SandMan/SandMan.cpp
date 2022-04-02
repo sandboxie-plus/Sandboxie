@@ -1298,6 +1298,9 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 	if ((MsgCode & 0xFFFF) == 6004) // certificat error
 		return; // dont pop that one up
 
+	if ((MsgCode & 0xFFFF) == 2111) // process open denided
+		return; // dont pop that one up
+
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true))
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
 }

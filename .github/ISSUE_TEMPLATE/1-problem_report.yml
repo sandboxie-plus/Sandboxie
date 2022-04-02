@@ -6,6 +6,8 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this report!
+        To see if your problem has already been reported, you can use the search box on the Issues and Discussions tabs.
+        Also, you may find your answer in our documentation hosted on GitHub: https://sandboxie-plus.github.io/sandboxie-docs
   - type: textarea
     id: what-happened
     attributes:

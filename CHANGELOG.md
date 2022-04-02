@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.0.16 / 5.55.16] - 2022-04-02
+
+### Added
+- FIXED SECURITY ISSUE: memory of unsandboxed processes can no longer be read, except for exceptions
+-- you can use ReadIpcPath=$:program.exe to allow read access to unsandboxed processes or processes in other boxes
+- Added "Monitor Mode" to the resource access trace, similar to the old monitor view of sbiectrl.exe
+
+### Changed
+- EnableObjectFiltering is now set enabled by default, and replaces sbies old process/thread handle filter
+- the $: syntax now accepts a wildcard $:* no more specialized wildcards though
+
+### fixed
+- fixed NtGetNextProcess being fully disabled instead of properly filtered
+- fixed reworked image name resolution when creating new processes in a sandbox
+
 
 
 ## [1.0.15 / 5.55.15] - 2022-03-24
@@ -36,6 +51,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed settings issue introduced in 1.0.13 [#1684](https://github.com/sandboxie-plus/Sandboxie/issues/1684)
 - fixed crash issue when parsing firewall port options
 - FIXED SECURITY ISSUE: in certain cases a sandboxed process could obtain a handle on an unsandboxed thread with write privileges [#1714](https://github.com/sandboxie-plus/Sandboxie/issues/1714)
+
 
 
 ## [1.0.13 / 5.55.13] - 2022-03-08

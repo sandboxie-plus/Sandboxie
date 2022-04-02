@@ -3181,13 +3181,13 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="509"/>
-        <source>Note: MSI Installer Exemptions should not be required, but if you encounter issues installing a MSI package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
+        <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
         <translation>Nota: Excepciones para instaladores MSI no deben ser requeridas, pero si encuentra problemas instalando paquetes MSI confiables, esta opción puede ayudar a que la instalación se complete satisfactoriamente.  Tambien puede intentar deshabilitar Rebajar permisos de grupos Administradores y Usuarios Avanzados.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="410"/>
-        <source>Prompt user for large file migration.</source>
-        <translation>Preguntar al usuario si desea migrar archivos grandes.</translation>
+        <source>Prompt user for large file migration</source>
+        <translation>Preguntar al usuario si desea migrar archivos grandes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="569"/>

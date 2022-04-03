@@ -851,20 +851,43 @@ void WFP_classify(
 			BOOLEAN send = (filter->filterId == WFP_send_filter_id_v4) || (filter->filterId == WFP_send_filter_id_v6);
 			BOOLEAN v6 = (filter->filterId == WFP_send_filter_id_v6) || (filter->filterId == WFP_recv_filter_id_v6);
 
-			WCHAR trace_str[256];
+			/*
+			RtlStringCbPrintfW at DISPATCH_LEVEL or higher can cause a BSOD, 
+			the issue is with accessing unicode tables, which may be paged out.
+
+			The documentation for KdPrint() states it this way:
+
+			<wdk>
+			Format
+			Specifies a pointer to the format string to print. The Format string
+			supports all the printf-style formatting codes. However, the Unicode format
+			codes (%C, %S, %lc, %ls, %wc, %ws, and %wZ) can only be used with IRQL =
+			PASSIVE_LEVEL.
+			</wdk>
+
+			RtlStringCbPrintfA is technically also not permitted so a better solution needs to be found
+			*/
+
+			char trace_strA[256];
 			if (v6) {
-				RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", 
-					send ? L"Outgoing " : L"Incomming ", remote_port, protocol,
+				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", 
+					send ? "Outgoing " : "Incomming ", remote_port, protocol,
 					remote_ip.Data[0], remote_ip.Data[1], remote_ip.Data[2], remote_ip.Data[3], remote_ip.Data[4], remote_ip.Data[5], remote_ip.Data[6], remote_ip.Data[7],
 					remote_ip.Data[8], remote_ip.Data[9], remote_ip.Data[10], remote_ip.Data[11], remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
 			}
 			else {
-				RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", 
-					send ? L"Outgoing " : L"Incomming ", remote_port, protocol,
+				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", 
+					send ? "Outgoing " : "Incomming ", remote_port, protocol,
 					remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
 			}
-			const WCHAR* strings[3] = { send ? L"Outgoing " : L"Incomming ", trace_str, NULL };
-            ULONG lengths[3] = { wcslen(strings[0]), wcslen(trace_str), 0 };
+
+			WCHAR trace_str[256];
+			char* cptr = trace_strA;
+			WCHAR* wptr = trace_str;
+			while (*cptr != '\0')
+				*wptr++ = *cptr++;
+			*wptr = L'\0';
+
             Session_MonitorPut(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), trace_str, PsGetCurrentProcessId());
         }
 

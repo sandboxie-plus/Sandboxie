@@ -25,6 +25,7 @@
 #include "obj.h"
 #include "trace.h"
 #include "debug.h"
+#include "dump.h"
 #include "core/low/lowdata.h"
 #include "common/my_version.h"
 
@@ -48,6 +49,8 @@ void Ldr_Inject_Init(BOOLEAN bHostInject);
 
 const ULONG tzuk = 'xobs';
 
+SBIELOW_DATA* SbieApi_data = NULL;
+
 HINSTANCE Dll_Instance = NULL;
 HMODULE Dll_Ntdll = NULL;
 HMODULE Dll_Kernel32 = NULL;
@@ -57,6 +60,11 @@ HMODULE Dll_DigitalGuardian = NULL;
 const WCHAR *Dll_BoxName = NULL;
 const WCHAR *Dll_ImageName = NULL;
 const WCHAR *Dll_SidString = NULL;
+
+const WCHAR *Dll_HomeNtPath = NULL;
+ULONG Dll_HomeNtPathLen = 0;
+const WCHAR *Dll_HomeDosPath = NULL;
+//ULONG Dll_HomeDosPathLen = 0;
 
 const WCHAR *Dll_BoxFilePath = NULL;
 const WCHAR *Dll_BoxKeyPath = NULL;
@@ -78,6 +86,7 @@ BOOLEAN Dll_InitComplete = FALSE;
 BOOLEAN Dll_RestrictedToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
+BOOLEAN Dll_CompartmentMode = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
@@ -89,6 +98,8 @@ CRITICAL_SECTION  VT_CriticalSection;
 #endif
 
 const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
+
+BOOLEAN Dll_SbieTrace = FALSE;
 
 //extern ULONG64 __security_cookie = 0;
 
@@ -163,6 +174,12 @@ _FX BOOL WINAPI DllMain(
             File_DoAutoRecover(TRUE);
             Gui_ResetClipCursor();
         }
+
+//#ifdef _WIN64
+//		// cleanup CS
+//		DeleteCriticalSection(&VT_CriticalSection);
+//#endif
+
     }
 
     return TRUE;
@@ -218,6 +235,8 @@ _FX void Dll_InitInjected(void)
 	ULONG BoxKeyPathLen;
 	ULONG BoxIpcPathLen;
 
+    Dll_SbieTrace = SbieApi_QueryConfBool(NULL, L"SbieTrace", FALSE);
+
 	if (SbieApi_QueryConfBool(NULL, L"DebugTrace", FALSE)) {
 
 		Trace_Init();
@@ -240,7 +259,7 @@ _FX void Dll_InitInjected(void)
 
     Dll_ProcessId = (ULONG)(ULONG_PTR)GetCurrentProcessId();
 
-    status = SbieApi_QueryProcessEx2(
+    status = SbieApi_QueryProcessEx2( // sets proc->sbiedll_loaded = TRUE; in the driver
         (HANDLE)(ULONG_PTR)Dll_ProcessId, 255,
         Dll_BoxNameSpace, Dll_ImageNameSpace, Dll_SidStringSpace,
         &Dll_SessionId, NULL);
@@ -257,10 +276,24 @@ _FX void Dll_InitInjected(void)
     Dll_SidStringLen = wcslen(Dll_SidString);
 
     //
+    // query Sandboxie home folder
+    //
+
+    Dll_HomeNtPath = Dll_AllocTemp(1024 * sizeof(WCHAR));
+    Dll_HomeDosPath = Dll_AllocTemp(1024 * sizeof(WCHAR));
+
+    SbieApi_GetHomePath((WCHAR*)Dll_HomeNtPath, 1020, (WCHAR*)Dll_HomeDosPath, 1020);
+
+    Dll_HomeNtPathLen = wcslen(Dll_HomeNtPath);
+    //Dll_HomeDosPathLen = wcslen(Dll_HomeDosPath);
+
+    //
     // get process type and flags
     //
 
     Dll_ProcessFlags = SbieApi_QueryProcessInfo(0, 0);
+
+    Dll_CompartmentMode = (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
 
     Dll_SelectImageType();
 
@@ -321,6 +354,9 @@ _FX void Dll_InitInjected(void)
         Dll_FixWow64Syscall();
 
     if (ok)
+        ok = File_InitHandles();
+
+    if (ok)
         ok = Obj_Init();
 
     if (ok) {
@@ -330,10 +366,20 @@ _FX void Dll_InitInjected(void)
         // (for AutoExec function in custom module)
         //
 
-        ULONG *pids = Dll_AllocTemp(2048);
-        if (SbieApi_EnumProcess(NULL, pids) == 0 && pids[0] == 1)
+        ULONG pid_count = 0;
+        if (NT_SUCCESS(SbieApi_EnumProcessEx(NULL,FALSE,-1,NULL,&pid_count)) && pid_count == 1)
             Dll_FirstProcessInBox = TRUE;
-        Dll_Free(pids);
+
+        WCHAR str[32];
+        if (NT_SUCCESS(SbieApi_QueryConfAsIs(NULL, L"ProcessLimit", 0, str, sizeof(str) - sizeof(WCHAR)))) {
+            ULONG num = _wtoi(str);
+            if (num > 0) {
+                if (num < pid_count)
+                    ExitProcess(-1);
+                if ((num * 8 / 10) < pid_count)
+                    Sleep(3000);
+            }
+        }
     }
 
     if (ok) {
@@ -386,7 +432,8 @@ _FX void Dll_InitInjected(void)
     //
 
 #ifdef WITH_DEBUG
-    if (ok && (! Debug_Init())) ok = FALSE;
+    if (ok) 
+        ok = Debug_Init();
 #endif WITH_DEBUG
 
     if (! ok) {
@@ -466,7 +513,7 @@ _FX void Dll_InitExeEntry(void)
 
     //
     // check if running as a forced COM server process
-    // note:  does not return if this is the case
+    // note:  it does not return if this is the case
     //
 
     Custom_ComServer();
@@ -475,9 +522,11 @@ _FX void Dll_InitExeEntry(void)
     // force load of UxTheme in a Google Chrome sandbox process
     //
 
-    Custom_Load_UxTheme();
+    // Note: this does not seem to be needed anymore for modern Chrome builds, also it breaks Vivaldi browser
 
-    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since win 7
+    //Custom_Load_UxTheme(); 
+
+    UserEnv_InitVer(Dll_OsBuild >= 7600 ? Dll_KernelBase : Dll_Kernel32); // in KernelBase since Win 7
 
     //
     // Windows 8.1:  hook UserEnv-related entrypoint in KernelBase
@@ -491,16 +540,29 @@ _FX void Dll_InitExeEntry(void)
     //
 
     SbieDll_StartCOM(TRUE);
+
+    //
+    // setup own top level exception handler
+    //
+
+    if(Config_GetSettingsForImageName_bool(L"EnableMiniDump", FALSE))
+        Dump_Init();
+
+    //
+    // once we return here the process images entrypoint will be called
+    //
 }
 
 
 //---------------------------------------------------------------------------
-// Dll_SelectImageType
+// Dll_GetImageType
 //---------------------------------------------------------------------------
 
 
-_FX void Dll_SelectImageType(void)
+_FX ULONG Dll_GetImageType(const WCHAR *ImageName)
 {
+    ULONG ImageType = DLL_IMAGE_UNSPECIFIED;
+
     //
     // check for custom configured special images
     //
@@ -521,14 +583,20 @@ _FX void Dll_SelectImageType(void)
 
         *ptr++ = L'\0';
 
-        if (_wcsicmp(Dll_ImageName, ptr) == 0) {
+        if (_wcsicmp(ImageName, ptr) == 0) {
 
             if (_wcsicmp(L"chrome", buf) == 0)
-                Dll_ImageType = DLL_IMAGE_GOOGLE_CHROME;
+                ImageType = DLL_IMAGE_GOOGLE_CHROME;
             else if (_wcsicmp(L"firefox", buf) == 0)
-                Dll_ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+                ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+            else if (_wcsicmp(L"thunderbird", buf) == 0)
+                ImageType = DLL_IMAGE_MOZILLA_THUNDERBIRD;
+            else if (_wcsicmp(L"browser", buf) == 0)
+                ImageType = DLL_IMAGE_OTHER_WEB_BROWSER;
+            else if (_wcsicmp(L"mail", buf) == 0)
+                ImageType = DLL_IMAGE_OTHER_MAIL_CLIENT;
             else
-                Dll_ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
+                ImageType = DLL_IMAGE_LAST; // invalid type set place holder such that we keep this image uncustomized
 
             break;
         }
@@ -554,32 +622,16 @@ _FX void Dll_SelectImageType(void)
         L"explorer.exe",            (WCHAR *)DLL_IMAGE_SHELL_EXPLORER,
         L"rundll32.exe",            (WCHAR *)DLL_IMAGE_RUNDLL32,
         L"dllhost.exe",             (WCHAR *)DLL_IMAGE_DLLHOST,
+        L"ServiceModelReg.exe",     (WCHAR *)DLL_IMAGE_SERVICE_MODEL_REG,
 
         L"iexplore.exe",            (WCHAR *)DLL_IMAGE_INTERNET_EXPLORER,
-
-        L"firefox.exe",             (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"waterfox.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"palemoon.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"basilisk.exe",            (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
-        L"seamonkey.exe",           (WCHAR *)DLL_IMAGE_MOZILLA_FIREFOX,
 
         L"wmplayer.exe",            (WCHAR *)DLL_IMAGE_WINDOWS_MEDIA_PLAYER,
         L"winamp.exe",              (WCHAR *)DLL_IMAGE_NULLSOFT_WINAMP,
         L"kmplayer.exe",            (WCHAR *)DLL_IMAGE_PANDORA_KMPLAYER,
         L"wlmail.exe",              (WCHAR *)DLL_IMAGE_WINDOWS_LIVE_MAIL,
-        L"ServiceModelReg.exe",     (WCHAR *)DLL_IMAGE_SERVICE_MODEL_REG,
         L"wisptis.exe",             (WCHAR *)DLL_IMAGE_WISPTIS,
 
-        L"iron.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"dragon.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"chrome.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"opera.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"neon.exe",                (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"maxthon.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"vivaldi.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"brave.exe",               (WCHAR *)DLL_IMAGE_GOOGLE_CHROME,
-        L"browser.exe",             (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Yandex Browser
-        L"msedge.exe",              (WCHAR *)DLL_IMAGE_GOOGLE_CHROME, // Modern Edge is Chromium-based
         L"GoogleUpdate.exe",        (WCHAR *)DLL_IMAGE_GOOGLE_UPDATE,
 
         L"AcroRd32.exe",            (WCHAR *)DLL_IMAGE_ACROBAT_READER,
@@ -587,18 +639,31 @@ _FX void Dll_SelectImageType(void)
         L"plugin-container.exe",    (WCHAR *)DLL_IMAGE_PLUGIN_CONTAINER,
         L"Outlook.exe",             (WCHAR *)DLL_IMAGE_OFFICE_OUTLOOK,
         L"Excel.exe",               (WCHAR *)DLL_IMAGE_OFFICE_EXCEL,
+
         NULL,                       NULL
     };
 
-    if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED) {
+    if (ImageType == DLL_IMAGE_UNSPECIFIED) {
 
         for (int i = 0; _ImageNames[i]; i += 2) {
-            if (_wcsicmp(Dll_ImageName, _ImageNames[i]) == 0) {
-                Dll_ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
+            if (_wcsicmp(ImageName, _ImageNames[i]) == 0) {
+                ImageType = (ULONG)(ULONG_PTR)_ImageNames[i + 1];
                 break;
             }
         }
     }
+
+    return ImageType;
+}
+
+//---------------------------------------------------------------------------
+// Dll_SelectImageType
+//---------------------------------------------------------------------------
+
+
+_FX void Dll_SelectImageType(void)
+{
+    Dll_ImageType = Dll_GetImageType(Dll_ImageName);
 
     if (Dll_ImageType == DLL_IMAGE_UNSPECIFIED &&
             _wcsnicmp(Dll_ImageName, L"FlashPlayerPlugin_", 18) == 0)
@@ -627,6 +692,8 @@ _FX void Dll_SelectImageType(void)
 
     if (Dll_ImageType == DLL_IMAGE_LAST)
         Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
+
+    SbieApi_QueryProcessInfoEx(0, 'spit', Dll_ImageType);
 
     //
     // we have some special cases for programs running under a restricted
@@ -661,14 +728,17 @@ _FX ULONG_PTR Dll_Ordinal1(
 {
     struct _INJECT_DATA {           // keep in sync with core/low/inject.c
 
-        ULONG64 sbielow_data;
-        ULONG64 RtlFindActCtx_SavedArg1;
-        ULONG64 x1;
-        ULONG64 x2;
+        ULONG64 sbielow_data;               // syscall_data_len & extra_data_offset;
+        ULONG64 RtlFindActCtx_SavedArg1;    // LdrLoadDll
+
+        ULONG64 LdrGetProcAddr;
+        ULONG64 NtRaiseHardError;
         ULONG64 RtlFindActCtx;
         ULONG   RtlFindActCtx_Protect;
+        
+        UCHAR   Reserved[188];              // the rest of _INJECT_DATA
 
-    } *inject;
+    } *inject; // total size 232
 
     typedef ULONG_PTR (*P_RtlFindActivationContextSectionString)(
                     ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3,
@@ -692,13 +762,18 @@ _FX ULONG_PTR Dll_Ordinal1(
 
     data = (SBIELOW_DATA *)inject->sbielow_data;
 
-    bHostInject = data->bHostInject == 1;
+    SbieApi_data = data;
+
+    VirtualProtect((void *)(ULONG_PTR)data, sizeof(SBIELOW_DATA),
+                   PAGE_EXECUTE_READ, &dummy_prot);
+
+    bHostInject = data->flags.bHostInject == 1;
 
     //
     // the SbieLow data area includes values that are useful to us
     //
 
-    Dll_IsWow64 = data->is_wow64;
+    Dll_IsWow64 = data->flags.is_wow64 == 1;
 
     SbieApi_DeviceHandle = (HANDLE)data->api_device_handle;
 
@@ -729,7 +804,11 @@ _FX ULONG_PTR Dll_Ordinal1(
         //
         HANDLE heventProcessStart = 0;
 
-        Dll_InitInjected();
+        Dll_InitInjected(); // install required hooks
+
+        //
+        // notify RPCSS that a new proces was created in the current sandbox
+        //
 
         if (Dll_ImageType != DLL_IMAGE_SANDBOXIE_RPCSS) {
             heventProcessStart = CreateEvent(0, FALSE, FALSE, SESSION_PROCESS);
@@ -738,13 +817,28 @@ _FX ULONG_PTR Dll_Ordinal1(
                 CloseHandle(heventProcessStart);
             }
         }
+
         //
         // workaround for Program Compatibility Assistant (PCA), we have
         // to start a second instance of this process outside the PCA job,
         // see also Proc_RestartProcessOutOfPcaJob
         //
 
-        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+        int MustRestartProcess = 0;
+        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
+            MustRestartProcess = 1;
+
+        else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
+            if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)
+             || SbieDll_CheckStringInList(Dll_ImageName, NULL, L"ForceRestart"))
+                MustRestartProcess = 2;
+        }
+
+        if (MustRestartProcess) {
+
+            WCHAR text[128];
+            Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();

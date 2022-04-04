@@ -36,11 +36,12 @@ void CTabPanel::ShowTab(int Index, bool bShow)
 	RebuildTabs(ActiveTab, VisibleTabs);
 }
 
-void CTabPanel::AddTab(QWidget* pWidget, const QString& Name)
+int CTabPanel::AddTab(QWidget* pWidget, const QString& Name)
 {
 	STab Tab{Name, pWidget, true};
 	m_AllTabs.append(Tab);
 	m_pTabs->addTab(Tab.pWidget, Tab.Name);
+	return m_AllTabs.count() - 1;
 }
 
 void CTabPanel::SaveTabs(int& ActiveTab, QStringList& VisibleTabs)
@@ -64,10 +65,9 @@ void CTabPanel::RebuildTabs(const int ActiveTab, const QStringList& VisibleTabs)
 	{
 		STab& Tab = m_AllTabs[i];
 
-		if (VisibleTabs.size() <= i || VisibleTabs[i].toInt() != 0)
+		Tab.bVisible = (VisibleTabs.size() <= i || VisibleTabs[i].toInt() != 0);
+		if (Tab.bVisible)
 		{
-			Tab.bVisible = true;
-
 			m_pTabs->addTab(Tab.pWidget, Tab.Name);
 			if (i == ActiveTab)
 				m_pTabs->setCurrentWidget(Tab.pWidget);

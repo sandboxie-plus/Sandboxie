@@ -198,6 +198,8 @@ _FX int Debug_Init(void)
 
 #endif
 
+#if 0
+
     //
     // break
     //
@@ -230,6 +232,8 @@ _FX int Debug_Init(void)
         }
         __debugbreak();
     }
+
+#endif
 
     return TRUE;
 }
@@ -390,6 +394,53 @@ _FX NTSTATUS Debug_LdrGetDllHandle(
     return status;
 }
 #endif
+
+
+
+//---------------------------------------------------------------------------
+// DbgPrint
+//---------------------------------------------------------------------------
+
+
+void DbgPrint(const char* format, ...)
+{
+    va_list va_args;
+    va_start(va_args, format);
+    
+    char tmp1[510];
+
+    extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+    P_vsnprintf(tmp1, sizeof(tmp1), format, va_args);
+
+    OutputDebugStringA(tmp1);
+
+    va_end(va_args);
+}
+
+
+
+//---------------------------------------------------------------------------
+// DbgPrint
+//---------------------------------------------------------------------------
+
+
+void DbgTrace(const char* format, ...)
+{
+    va_list va_args;
+    va_start(va_args, format);
+    
+    char tmp1[510];
+    WCHAR tmp2[510];
+
+    extern int(*P_vsnprintf)(char *_Buffer, size_t Count, const char * const, va_list Args);
+    P_vsnprintf(tmp1, sizeof(tmp1), format, va_args);
+
+    Sbie_snwprintf((WCHAR *)tmp2, sizeof(tmp2)/sizeof(WCHAR), L"%S", tmp1);
+
+    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, tmp2);
+
+    va_end(va_args);
+}
 
 
 //---------------------------------------------------------------------------

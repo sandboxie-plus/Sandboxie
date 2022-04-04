@@ -39,7 +39,7 @@
 #include "gui.h"
 #include "util.h"
 #include "token.h"
-
+#include "wfp.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -56,9 +56,7 @@ static BOOLEAN Driver_InitPublicSecurity(void);
 
 static BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath);
 
-#ifdef OLD_DDK
 static BOOLEAN Driver_FindMissingServices(void);
-#endif // OLD_DDK
 
 static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 
@@ -70,9 +68,7 @@ static void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject);
 #pragma alloc_text (INIT, DriverEntry)
 #pragma alloc_text (INIT, Driver_CheckOsVersion)
 #pragma alloc_text (INIT, Driver_FindHomePath)
-#ifdef OLD_DDK
 #pragma alloc_text (INIT, Driver_FindMissingServices)
-#endif // OLD_DDK
 #endif // ALLOC_PRAGMA
 
 
@@ -118,6 +114,7 @@ volatile BOOLEAN Driver_Unloading = FALSE;
 static BOOLEAN Driver_FullUnload = TRUE;
 
 UNICODE_STRING Driver_Altitude;
+const WCHAR* Altitude_Str = FILTER_ALTITUDE;
 
 ULONG Process_Flags1 = 0;
 ULONG Process_Flags2 = 0;
@@ -129,6 +126,8 @@ ULONG Process_Flags3 = 0;
 #ifdef OLD_DDK
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
 #endif // OLD_DDK
+P_NtCreateToken                 ZwCreateToken               = NULL;
+P_NtCreateTokenEx               ZwCreateTokenEx             = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -151,7 +150,7 @@ _FX NTSTATUS DriverEntry(
     Driver_Object = DriverObject;
     Driver_Object->DriverUnload = NULL;
 
-    RtlInitUnicodeString(&Driver_Altitude, FILTER_ALTITUDE);
+    RtlInitUnicodeString(&Driver_Altitude, Altitude_Str);
 
     if (ok)
         ok = Driver_CheckOsVersion();
@@ -177,6 +176,8 @@ _FX NTSTATUS DriverEntry(
     if (ok)
         ok = Driver_FindHomePath(RegistryPath);
 
+    MyValidateCertificate();
+
     //
     // initialize simple utility modules.  these don't hook anything
     //
@@ -196,10 +197,8 @@ _FX NTSTATUS DriverEntry(
     if (ok)
         ok = Session_Init();
 
-#ifdef OLD_DDK
     if (ok)
         ok = Driver_FindMissingServices();
-#endif // OLD_DDK
 
     if (ok)
         ok = Token_Init();
@@ -236,6 +235,13 @@ _FX NTSTATUS DriverEntry(
         ok = Api_Init();
 
     //
+    // initializing Windows Filtering Platform callouts
+    //
+    
+    if (ok)
+        ok = WFP_Init();
+
+    //
     // finalize of driver initialization
     //
 
@@ -270,7 +276,7 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
     // or Windows 7 (v6.1) or later (64-bit)
     //
 
-#ifdef _WIN64
+#if defined(_WIN64) || !defined(XP_SUPPORT)
     const ULONG MajorVersionMin = 6;
     const ULONG MinorVersionMin = 1;
 #else
@@ -283,6 +289,8 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
     if (MajorVersion > MajorVersionMin ||
             (   MajorVersion == MajorVersionMin
              && MinorVersion >= MinorVersionMin)) {
+
+        // Hard Offset Dependency
 
         if (MajorVersion == 10) {
             Driver_OsVersion = DRIVER_WINDOWS_10;
@@ -332,7 +340,7 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
             return TRUE;
     }
 
-    swprintf(str, L"%d.%d (%d)", MajorVersion, MinorVersion, Driver_OsBuild);
+    RtlStringCbPrintfW(str, sizeof(str), L"%d.%d (%d)", MajorVersion, MinorVersion, Driver_OsBuild);
     Log_Msg(MSG_1105, str, NULL);
     return FALSE;
 }
@@ -595,58 +603,58 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 //---------------------------------------------------------------------------
 
 
-#ifdef OLD_DDK
-
-#define FIND_SERVICE(svc,prmcnt)                                \
-    {                                                           \
-    static const char *ProcName = #svc;                         \
-    ptr = Dll_GetProc(Dll_NTDLL, ProcName, FALSE);              \
-    if (! ptr)                                                  \
-        return FALSE;                                           \
-    if (! Hook_GetService(                                      \
-            ptr, NULL, prmcnt, NULL, (void **)&svc)) {          \
-        swprintf(err_txt, L"%s.%S", Dll_NTDLL, ProcName);       \
-        Log_Msg1(MSG_1108, err_txt);                            \
-        return FALSE;                                           \
-    }                                                           \
-    }
+void* Driver_FindMissingService(const char* ProcName, int prmcnt)
+{
+    void* ptr = Dll_GetProc(Dll_NTDLL, ProcName, FALSE);
+    if (!ptr)
+        return NULL;
+    void* svc = NULL;
+    if (!Hook_GetService(ptr, NULL, prmcnt, NULL, &svc))
+        return NULL;
+    return svc;
+}
 
 
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
+#ifdef OLD_DDK
     UNICODE_STRING uni;
+	RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
 
     //
     // Windows 7 kernel exports ZwSetInformationToken
     // on earlier versions of Windows, we search for it
     //
-#ifndef _WIN64
+//#ifndef _WIN64
     if (Driver_OsVersion < DRIVER_WINDOWS_7) {
-		
-		void *ptr;
-		WCHAR err_txt[128];
 
-		FIND_SERVICE(ZwSetInformationToken, 4);
+        ZwSetInformationToken = (P_NtSetInformationToken) Driver_FindMissingService("ZwSetInformationToken", 4);
 
     } else 
-#endif
+//#endif
 	{
-		RtlInitUnicodeString(&uni, L"ZwSetInformationToken");
-		ZwSetInformationToken = (P_NtSetInformationToken)
-			MmGetSystemRoutineAddress(&uni);
-		if (!ZwSetInformationToken) {
-			Log_Msg1(MSG_1108, uni.Buffer);
-			return FALSE;
-		}
+		ZwSetInformationToken = (P_NtSetInformationToken) MmGetSystemRoutineAddress(&uni);
+    }
+
+    if (!ZwSetInformationToken) {
+		Log_Msg1(MSG_1108, uni.Buffer);
+		return FALSE;
+	}
+#endif
+
+    //
+    // Retrive some unexported kernel functions that may be usefull
+    //
+
+    ZwCreateToken = (P_NtCreateToken) Driver_FindMissingService("ZwCreateToken", 13);
+    //DbgPrint("ZwCreateToken: %p\r\n", ZwCreateToken);
+    if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
+        ZwCreateTokenEx = (P_NtCreateTokenEx)Driver_FindMissingService("ZwCreateTokenEx", 17);
+        //DbgPrint("ZwCreateTokenEx: %p\r\n", ZwCreateTokenEx);
     }
 
     return TRUE;
 }
-
-
-#undef FIND_SERVICE
-
-#endif // OLD_DDK
 
 
 //---------------------------------------------------------------------------
@@ -662,9 +670,12 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
     // unload just the hooks, in case this is a partial unload
     //
 
+#ifdef XP_SUPPORT
     Gui_Unload();
+#endif
     Key_Unload();
     File_Unload();
+    Obj_Unload();
     Thread_Unload();
     Process_Unload(FALSE);
 
@@ -678,6 +689,7 @@ _FX void SbieDrv_DriverUnload(DRIVER_OBJECT *DriverObject)
         time.QuadPart = -SECONDS(5);
         KeDelayExecutionThread(KernelMode, FALSE, &time);
 
+        WFP_Unload();
         Session_Unload();
         Dll_Unload();
         Conf_Unload();
@@ -716,7 +728,11 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
     ok = FALSE;
+#ifdef USE_PROCESS_MAP
+    if (Process_Map.nnodes == 0) {
+#else
     if (! List_Count(&Process_List)) {
+#endif
         if (Api_Disable())
             ok = TRUE;
     }
@@ -744,18 +760,17 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
-// Driver_CheckThirdParty
+// Driver_GetRegDword
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Driver_CheckThirdParty(
-    const WCHAR *DriverName, ULONG DriverType)
+_FX ULONG Driver_GetRegDword(
+    const WCHAR *KeyPath, const WCHAR *ValueName)
 {
     NTSTATUS status;
     RTL_QUERY_REGISTRY_TABLE qrt[2];
     UNICODE_STRING uni;
     ULONG value;
-    BOOLEAN IsInstalled = FALSE;
 
     value = -1;
 
@@ -767,28 +782,25 @@ _FX BOOLEAN Driver_CheckThirdParty(
     qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
                     RTL_QUERY_REGISTRY_DIRECT |
                     RTL_QUERY_REGISTRY_NOEXPAND;
-    qrt[0].Name = (WCHAR *)L"Type";
+    qrt[0].Name = (WCHAR *)ValueName;
     qrt[0].EntryContext = &uni;
     qrt[0].DefaultType = REG_NONE;
 
     status = RtlQueryRegistryValues(
-        RTL_REGISTRY_SERVICES, DriverName, qrt, NULL, NULL);
+        RTL_REGISTRY_ABSOLUTE, KeyPath, qrt, NULL, NULL);
 
-    if (status == STATUS_SUCCESS) {
+    if (status != STATUS_SUCCESS)
+        return 0;
 
-        if (value == -1) {
+    if (value == -1) {
 
-            //
-            // if value is not string, RtlQueryRegistryValues writes
-            // it directly into EntryContext
-            //
+        //
+        // if value is not string, RtlQueryRegistryValues writes
+        // it directly into EntryContext
+        //
 
-            value = *(ULONG *)&uni;
-        }
-
-        if (value == DriverType)
-            IsInstalled = TRUE;
+        value = *(ULONG *)&uni;
     }
 
-    return IsInstalled;
+    return value;
 }

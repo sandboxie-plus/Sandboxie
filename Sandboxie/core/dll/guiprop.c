@@ -146,6 +146,9 @@ _FX BOOLEAN Gui_InitProp(void)
     // hook functions
     //
 
+    // DisableComProxy BEGIN
+    if (!SbieApi_QueryConfBool(NULL, L"DisableComProxy", FALSE))
+    // DisableComProxy END
     if (! SbieDll_IsOpenCOM()) {
 
         //
@@ -378,16 +381,16 @@ _FX HANDLE Gui_GetPropW(HWND hWnd, const WCHAR *lpString)
 
         ULONG LastError = GetLastError();
 
-        if (! Gui_IsWindowAccessible(hWnd)) {
-            if (hWnd != __sys_GetDesktopWindow()) {
-                SetLastError(ERROR_INVALID_WINDOW_HANDLE);
-                return NULL;
-            }
+        BOOLEAN IsDesktop = (hWnd == __sys_GetDesktopWindow());
+
+        if (! Gui_IsWindowAccessible(hWnd) && !IsDesktop) {
+            SetLastError(ERROR_INVALID_WINDOW_HANDLE);
+            return NULL;
         }
 
         lpString = Gui_ReplaceAtom(lpString);
 
-        if (Gui_IsSameBox(hWnd, NULL, NULL))
+        if (!Gui_UseProxyService || Gui_IsSameBox(hWnd, NULL, NULL) || IsDesktop)
             return __sys_GetPropW(hWnd, lpString);
         else
             return Gui_GetPropCommon(hWnd, lpString, TRUE, LastError);
@@ -419,16 +422,16 @@ _FX HANDLE Gui_GetPropA(HWND hWnd, const UCHAR *lpString)
 
         ULONG LastError = GetLastError();
 
-        if (! Gui_IsWindowAccessible(hWnd)) {
-            if (hWnd != __sys_GetDesktopWindow()) {
-                SetLastError(ERROR_INVALID_WINDOW_HANDLE);
-                return NULL;
-            }
+        BOOLEAN IsDesktop = (hWnd == __sys_GetDesktopWindow());
+
+        if (! Gui_IsWindowAccessible(hWnd) && !IsDesktop) {
+            SetLastError(ERROR_INVALID_WINDOW_HANDLE);
+            return NULL;
         }
 
         lpString = Gui_ReplaceAtom(lpString);
 
-        if (Gui_IsSameBox(hWnd, NULL, NULL))
+        if (!Gui_UseProxyService || Gui_IsSameBox(hWnd, NULL, NULL) || IsDesktop)
             return __sys_GetPropA(hWnd, lpString);
         else
             return Gui_GetPropCommon(hWnd, lpString, TRUE, LastError);
@@ -539,7 +542,7 @@ _FX ULONG_PTR Gui_GetLongCommon(HWND hWnd, int nIndex, ULONG which)
     ULONG_PTR result;
     ULONG LastError = GetLastError();
 
-    if (Gui_IsSameBox(hWnd, NULL, NULL)) {
+    if (!Gui_UseProxyService || Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         //
         // if target window is in the same sandbox (i.e. within the

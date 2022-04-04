@@ -143,6 +143,8 @@ public:
 
 	void				SetText(const QString& Text)	{m_pEdit->setText(Text);}
 	QString				GetText()						{return m_pEdit->text();}
+	void				SetDefault(const QString& Text)	{m_pEdit->setPlaceholderText(Text);}
+	void				SetWindowsPaths(bool bSet = true) {m_bWinPath = bSet;}
 
 signals:
 	void				textChanged(const QString& text);
@@ -152,6 +154,7 @@ private slots:
 protected:
 	QLineEdit*		m_pEdit;
 	bool			m_bDirs;
+	bool			m_bWinPath;
 };
 
 ///////////////////////////////////////////////////

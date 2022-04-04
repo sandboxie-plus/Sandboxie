@@ -55,6 +55,9 @@ struct _PATTERN {
     // this PATTERN object
     WCHAR *source;
 
+    // a value denoting the match level for the process
+    ULONG level;
+
     // array of pointers to constant parts.  the actual number of
     // elements is indicate by info.num_cons, and the strings are
     // allocated as part of this PATTERN object
@@ -71,13 +74,12 @@ struct _PATTERN {
 // Functions
 //---------------------------------------------------------------------------
 
-
-static BOOLEAN Pattern_Match2(
+static int Pattern_Match2(
     PATTERN *pat,
     const WCHAR *string, int string_len,
     int str_index, int con_index);
 
-static BOOLEAN Pattern_Match3(
+static int Pattern_Match3(
     PATTERN *pat,
     const WCHAR *string, int string_len,
     int str_index, int con_index);
@@ -113,7 +115,7 @@ static const WCHAR *Pattern_Hex = L"__hex";
 
 
 _FX PATTERN *Pattern_Create(
-    POOL *pool, const WCHAR *string, BOOLEAN lower)
+    POOL *pool, const WCHAR *string, BOOLEAN lower, ULONG level)
 {
     ULONG num_cons;
     const WCHAR *iptr;
@@ -234,6 +236,8 @@ _FX PATTERN *Pattern_Create(
         *optr = L'\0';
     pat->source = optr;
 
+    pat->level = level;
+
     pat->info.v = 0;
     pat->info.num_cons = (USHORT)num_cons;
 
@@ -284,11 +288,36 @@ _FX const WCHAR *Pattern_Source(PATTERN *pat)
 
 
 //---------------------------------------------------------------------------
+// Pattern_Level
+//---------------------------------------------------------------------------
+
+
+_FX ULONG Pattern_Level(PATTERN *pat)
+{
+    return pat->level;
+}
+
+
+//---------------------------------------------------------------------------
 // Pattern_Match
 //---------------------------------------------------------------------------
 
 
 _FX BOOLEAN Pattern_Match(
+    PATTERN *pat, const WCHAR *string, int string_len)
+{
+    if (Pattern_MatchX(pat, string, string_len) != 0)
+        return TRUE;
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_MatchX
+//---------------------------------------------------------------------------
+
+
+_FX int Pattern_MatchX(
     PATTERN *pat, const WCHAR *string, int string_len)
 {
     //
@@ -298,30 +327,30 @@ _FX BOOLEAN Pattern_Match(
     //
 
     if (! string)
-        return FALSE;
+        return 0;
 
     if (pat->info.f.star_missing) {
 
         if (pat->info.num_cons == 0)
-            return FALSE;
+            return 0;
         if (string_len != pat->cons[0].len)
-            return FALSE;
+            return 0;
 
         if (pat->info.f.have_a_qmark) {
 
             const WCHAR *x = Pattern_wcsnstr(
                             string, pat->cons[0].ptr, pat->cons[0].len);
             if (x != string)
-                return FALSE;
+                return 0;
 
         } else {
 
             ULONG x = wmemcmp(string, pat->cons[0].ptr, pat->cons[0].len);
             if (x != 0)
-                return FALSE;
+                return 0;
         }
 
-        return TRUE;
+        return string_len;
     }
 
     //
@@ -337,12 +366,12 @@ _FX BOOLEAN Pattern_Match(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Pattern_Match2(
+_FX int Pattern_Match2(
     PATTERN *pat,
     const WCHAR *string, int string_len,
     int str_index, int con_index)
 {
-    BOOLEAN ok = TRUE;
+    int match;
 
     if (con_index < pat->info.num_cons) {
 
@@ -359,27 +388,27 @@ _FX BOOLEAN Pattern_Match2(
             if (! ptr) {
 
                 if (pat->cons[con_index].hex) {
-                    ok = Pattern_Match3(
+                    match = Pattern_Match3(
                         pat, string, string_len, str_index, con_index);
                 } else
-                    ok = FALSE;
+                    match = 0;
                 break;
             }
 
             if (str_index == 0 && ptr > string &&
                     (! pat->info.f.star_at_head)) {
-                ok = FALSE;
+                match = 0;
                 break;
             }
 
             str_index = (ULONG)(ptr - string) + pat->cons[con_index].len;
-            ok = Pattern_Match2(
+            match = Pattern_Match2(
                     pat, string, string_len, str_index, con_index + 1);
-            if (ok)
+            if (match)
                 break;
         }
 
-    } else if (ok) {
+    } else {
 
         //
         // if we think we have a match, just make sure there aren't
@@ -387,10 +416,12 @@ _FX BOOLEAN Pattern_Match2(
         //
 
         if (str_index != string_len && (! pat->info.f.star_at_tail))
-            ok = FALSE;
+            match = 0;
+        else
+            match = str_index + 1;
     }
 
-    return ok;
+    return match;
 }
 
 
@@ -399,7 +430,7 @@ _FX BOOLEAN Pattern_Match2(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Pattern_Match3(
+_FX int Pattern_Match3(
     PATTERN *pat,
     const WCHAR *string, int string_len,
     int str_index, int con_index)
@@ -418,7 +449,7 @@ _FX BOOLEAN Pattern_Match3(
     conptr = pat->cons[con_index].ptr;
     seqptr = Pattern_wcsnstr(conptr, Pattern_Hex, 5);
     if (! seqptr)
-        return FALSE;
+        return 0;
 
 restart1:
 
@@ -426,9 +457,9 @@ restart1:
 
     if (con_len) {
         if (string_len - str_index < con_len)
-            return FALSE;
+            return 0;
         if (Pattern_wcsnstr(srcptr, conptr, con_len) != srcptr)
-            return FALSE;
+            return 0;
         srcptr += con_len;
     }
 
@@ -452,10 +483,10 @@ restart1:
     }
 
     if (*seqptr != L'_')
-        return FALSE;
+        return 0;
     ++seqptr;
     if (*seqptr != L'_')
-        return FALSE;
+        return 0;
     ++seqptr;
 
     //
@@ -492,7 +523,7 @@ restart2:
             }
         }
 
-        return FALSE;
+        return 0;
     }
 
     //
@@ -517,7 +548,7 @@ restart2:
 
     if (con_len) {
         if (Pattern_wcsnstr(srcptr, seqptr, con_len) != srcptr)
-            return FALSE;
+            return 0;
     }
 
     str_index = (int)(ULONG_PTR)(srcptr + con_len - string);

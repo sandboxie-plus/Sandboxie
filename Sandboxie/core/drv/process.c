@@ -34,6 +34,7 @@
 #include "gui.h"
 #include "token.h"
 #include "thread.h"
+#include "wfp.h"
 #include "common/my_version.h"
 
 
@@ -42,6 +43,9 @@
 //---------------------------------------------------------------------------
 
 
+ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
+
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
 static NTSTATUS Process_HookProcessNotify(
@@ -49,12 +53,12 @@ static NTSTATUS Process_HookProcessNotify(
 
 #endif _WIN64
 
-static ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting);
-
 static void Process_NotifyProcess(
     HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create);
+#endif
 
-static void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId);
+static void Process_NotifyProcessEx(
+    PEPROCESS ParentId, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo);
 
 static PROCESS *Process_Create(
     HANDLE ProcessId, const BOX *box, const WCHAR *image_path,
@@ -74,9 +78,11 @@ static void Process_NotifyImage(
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Process_Init)
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #pragma alloc_text (INIT, Process_HookProcessNotify)
 #endif _WIN64
+#endif
 #endif // ALLOC_PRAGMA
 
 
@@ -85,8 +91,13 @@ static void Process_NotifyImage(
 //---------------------------------------------------------------------------
 
 
+#ifdef USE_PROCESS_MAP
+HASH_MAP Process_Map;
+HASH_MAP Process_MapDfp;
+#else
 LIST Process_List;
 LIST Process_ListDfp;
+#endif
 PERESOURCE Process_ListLock = NULL;
 
 static BOOLEAN Process_NotifyImageInstalled = FALSE;
@@ -94,11 +105,13 @@ static BOOLEAN Process_NotifyProcessInstalled = FALSE;
 
 volatile BOOLEAN Process_ReadyToSandbox = FALSE;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
 static PCREATE_PROCESS_NOTIFY_ROUTINE *Process_pOldNotifyProcess = NULL;
 
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -108,10 +121,18 @@ static PCREATE_PROCESS_NOTIFY_ROUTINE *Process_pOldNotifyProcess = NULL;
 
 _FX BOOLEAN Process_Init(void)
 {
-    NTSTATUS status;
+    NTSTATUS status = STATUS_UNSUCCESSFUL;
 
+#ifdef USE_PROCESS_MAP
+    map_init(&Process_Map, Driver_Pool);
+	map_resize(&Process_Map, 128); // prepare some buckets for better performance
+
+    map_init(&Process_MapDfp, Driver_Pool);
+	map_resize(&Process_MapDfp, 128); // prepare some buckets for better performance
+#else
     List_Init(&Process_List);
     List_Init(&Process_ListDfp);
+#endif
 
     if (! Mem_GetLockResource(&Process_ListLock, TRUE))
         return FALSE;
@@ -123,7 +144,15 @@ _FX BOOLEAN Process_Init(void)
     // install process notify routines
     //
 
-    status = PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, FALSE);
+    if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+        status = PsSetCreateProcessNotifyRoutineEx(Process_NotifyProcessEx, FALSE);
+    }
+#ifdef XP_SUPPORT
+    else { // XP, Vista
+
+        status = PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, FALSE);
+    }
 
 #ifndef _WIN64
 
@@ -134,6 +163,7 @@ _FX BOOLEAN Process_Init(void)
     }
 
 #endif _WIN64
+#endif
 
     if (NT_SUCCESS(status)) {
 
@@ -189,8 +219,15 @@ _FX void Process_Unload(BOOLEAN FreeLock)
 
     if (Process_NotifyProcessInstalled) {
 
-        PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, TRUE);
-        Process_NotifyProcessInstalled = FALSE;
+        if (Driver_OsVersion >= DRIVER_WINDOWS_7) {
+
+            PsSetCreateProcessNotifyRoutineEx(Process_NotifyProcessEx, TRUE);
+        }
+#ifdef XP_SUPPORT
+        else { // XP, Vista
+
+            PsSetCreateProcessNotifyRoutine(Process_NotifyProcess, TRUE);
+        }
 
 #ifndef _WIN64
 
@@ -204,6 +241,9 @@ _FX void Process_Unload(BOOLEAN FreeLock)
         }
 
 #endif _WIN64
+#endif
+
+        Process_NotifyProcessInstalled = FALSE;
 
     }
 
@@ -214,6 +254,7 @@ _FX void Process_Unload(BOOLEAN FreeLock)
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
 // Process_HookProcessNotify
 //---------------------------------------------------------------------------
@@ -373,6 +414,7 @@ _FX NTSTATUS Process_HookProcessNotify(
 }
 
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -421,46 +463,41 @@ _FX PROCESS *Process_Find(HANDLE ProcessId, KIRQL *out_irql)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceSharedLite(Process_ListLock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+    proc = map_get(&Process_Map, ProcessId);
+    if (proc) {
+#else
     proc = List_Head(&Process_List);
+    while (proc) {
+        if (proc->pid == ProcessId) {
+#endif
 
-    if (check_terminated) {
+            if (check_terminated && proc->terminated) {
+                //
+                // ntdll is going to call NtRaiseHardError before
+                // aborting, so disable hard errors to avoid the
+                // pop up box from csrss
+                //
 
-        while (proc) {
-            if (proc->pid == ProcessId) {
-
-                if (proc->terminated) {
-                    //
-                    // ntdll is going to call NtRaiseHardError before
-                    // aborting, so disable hard errors to avoid the
-                    // pop up box from csrss
-                    //
-
-                    if (proc->terminated != 9) {
-                        proc->terminated = 9;
-                        PsSetThreadHardErrorsAreDisabled(
-                            (PETHREAD)KeGetCurrentThread(), TRUE);
-                    }
-                    //
-                    // signal that the caller should return status
-                    //     STATUS_PROCESS_IS_TERMINATING
-                    // (see Api_FastIo_DEVICE_CONTROL for example)
-                    //
-                    proc = PROCESS_TERMINATED;
+                if (proc->terminated != 9) {
+                    proc->terminated = 9;
+                    PsSetThreadHardErrorsAreDisabled(
+                        (PETHREAD)KeGetCurrentThread(), TRUE);
                 }
-
-                break;
+                //
+                // signal that the caller should return status
+                //     STATUS_PROCESS_IS_TERMINATING
+                // (see Api_FastIo_DEVICE_CONTROL for example)
+                //
+                proc = PROCESS_TERMINATED;
             }
 
-            proc = List_Next(proc);
+#ifndef USE_PROCESS_MAP
+            break;
         }
 
-    } else {
-
-        while (proc) {
-            if (proc->pid == ProcessId)
-                break;
-            proc = List_Next(proc);
-        }
+        proc = List_Next(proc);
+#endif
     }
 
     if (out_irql) {
@@ -506,17 +543,19 @@ _FX void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId)
     PROCESS *proc;
     KIRQL irql;
 
-    pid_str.Length = 10 * sizeof(WCHAR);
-    pid_str.MaximumLength = pid_str.Length + sizeof(WCHAR);
+    if (SessionId != -1) { // for StartRunAlertDenied, dont log in this case
+    
+        pid_str.Length = 10 * sizeof(WCHAR);
+        pid_str.MaximumLength = pid_str.Length + sizeof(WCHAR);
 
-    pid_str.Buffer = Mem_Alloc(Driver_Pool, pid_str.MaximumLength);
-    if (pid_str.Buffer) {
+        pid_str.Buffer = Mem_Alloc(Driver_Pool, pid_str.MaximumLength);
+        if (pid_str.Buffer) {
 
-        RtlIntPtrToUnicodeString((ULONG_PTR)ProcessId, 10, &pid_str);
-		if (SessionId != -1) // for StartRunAlertDenied
-			Log_Msg_Process(MSG_1211, pid_str.Buffer, NULL, SessionId, ProcessId);
+            RtlIntPtrToUnicodeString((ULONG_PTR)ProcessId, 10, &pid_str);
+            Log_Msg_Process(MSG_1211, pid_str.Buffer, NULL, SessionId, ProcessId);
 
-        Mem_Free(pid_str.Buffer, pid_str.MaximumLength);
+            Mem_Free(pid_str.Buffer, pid_str.MaximumLength);
+        }
     }
 
     proc = Mem_Alloc(Driver_Pool, sizeof(PROCESS));
@@ -530,7 +569,11 @@ _FX void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId)
         KeRaiseIrql(APC_LEVEL, &irql);
         ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+        map_insert(&Process_Map, ProcessId, proc, 0);
+#else
         List_Insert_After(&Process_List, NULL, proc);
+#endif
 
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
@@ -606,6 +649,8 @@ _FX PROCESS *Process_Create(
 
     proc->integrity_level = tzuk;   // default to no integrity level
 
+    proc->detected_image_type = -1; // indicate non initialized
+
     //
     // initialize image name from image path
     //
@@ -664,6 +709,80 @@ _FX PROCESS *Process_Create(
     }
 
     //
+    // initialize box options
+    //
+
+    proc->bAppCompartment = Conf_Get_Boolean(proc->box->name, L"NoSecurityIsolation", 0, FALSE);
+
+    //
+    // by default, Close[...]=!<program>,path includes all boxed images
+    // use AlwaysCloseForBoxed=n to disable this behaviour
+    //
+
+    proc->always_close_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"AlwaysCloseForBoxed", 0, TRUE); 
+
+    //
+    // by default OpenFile and OpenKey apply only to unboxed processes
+    // use DontOpenForBoxed=n to thread boxed and unboxed programs the same way
+    //
+
+    proc->dont_open_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"DontOpenForBoxed", 0, TRUE); 
+
+    //
+    // privacy mode requirers Rule Specificity
+    //
+
+#ifdef USE_MATCH_PATH_EX
+    proc->use_privacy_mode = Conf_Get_Boolean(proc->box->name, L"UsePrivacyMode", 0, FALSE); 
+    proc->use_rule_specificity = proc->use_privacy_mode || Conf_Get_Boolean(proc->box->name, L"UseRuleSpecificity", 0, FALSE); 
+#endif
+
+    //
+    // check certificate
+    //
+
+    if (!Driver_Certified && !proc->image_sbie) {
+
+        const WCHAR* exclusive_setting = NULL;
+#ifdef USE_MATCH_PATH_EX
+        if (proc->use_rule_specificity)
+            exclusive_setting = L"UseRuleSpecificity";
+        else if (proc->use_privacy_mode)
+            exclusive_setting = L"UsePrivacyMode";
+        else
+#endif
+        if (proc->bAppCompartment)
+            exclusive_setting = L"NoSecurityIsolation";
+
+        if (exclusive_setting) {
+
+            Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
+
+            //Pool_Delete(pool);
+            //Process_CreateTerminated(ProcessId, box->session_id);
+            //return NULL;
+            
+            // allow the process to run for a sort while to allow the features to be avaluated
+            Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
+        }
+    }
+
+    //
+    // configure monitor options
+    //
+
+    proc->disable_monitor = Conf_Get_Boolean(proc->box->name, L"DisableResourceMonitor", 0, FALSE);
+
+    //
+    // initialize filtering options
+    //
+
+    BOOLEAN no_filtering = proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"NoSecurityFiltering", 0, FALSE); // only in effect in app mode
+    proc->disable_file_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableFileFilter", 0, FALSE);
+    proc->disable_key_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableKeyFilter", 0, FALSE);
+    proc->disable_object_flt = no_filtering || Conf_Get_Boolean(proc->box->name, L"DisableObjectFilter", 0, FALSE);
+
+    //
     // initialize various locks
     //
 
@@ -715,7 +834,11 @@ _FX PROCESS *Process_Create(
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+    map_insert(&Process_Map, ProcessId, proc, 0);
+#else
     List_Insert_After(&Process_List, NULL, proc);
+#endif
 
     *out_irql = irql;
 
@@ -752,6 +875,7 @@ _FX ULONG Process_GetTraceFlag(PROCESS *proc, const WCHAR *setting)
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
 // Process_NotifyProcess
 //---------------------------------------------------------------------------
@@ -776,7 +900,7 @@ _FX void Process_NotifyProcess(
     //
 
     if (! Process_ReadyToSandbox)
-        return;
+        return TRUE;
 
     //
     // handle process creation and deletion.  note that we are running
@@ -796,7 +920,97 @@ _FX void Process_NotifyProcess(
 
             //DbgPrint("Process_NotifyProcess_Create pid=%d parent=%d current=%d\n", ProcessId, ParentId, PsGetCurrentProcessId());
             
-            Process_NotifyProcess_Create(ProcessId, ParentId, PsGetCurrentProcessId(), NULL);
+            if (!Process_NotifyProcess_Create(ProcessId, ParentId, PsGetCurrentProcessId(), NULL)) {
+
+                //
+                // Note: the process is already marked for termination so we don't need to do anything
+                //          in case one would want to schedule an explicit termination, the code below can be used
+                //
+
+                /*
+                PEPROCESS ProcessObject;
+                ULONG session_id;
+                ULONG64 create_time;
+
+                ProcessObject = Process_OpenAndQuery(ProcessId, NULL, &session_id);
+                if (ProcessObject) {
+    
+                    create_time = PsGetProcessCreateTimeQuadPart(ProcessObject);
+                    ObDereferenceObject(ProcessObject);
+                }
+                
+                void *nbuf1;
+                ULONG nlen1;
+                WCHAR *nptr1;
+
+                Process_GetProcessName(
+                            Driver_Pool, (ULONG_PTR)ProcessId, &nbuf1, &nlen1, &nptr1);
+
+                if (1) {
+
+                    BOX dummy_box;
+                    PROCESS dummy_proc;
+                    memzero(&dummy_box, sizeof(dummy_box));
+                    memzero(&dummy_proc, sizeof(dummy_proc));
+                    dummy_box.session_id = session_id;
+                    dummy_proc.box = &dummy_box;
+                    dummy_proc.pid = ProcessId;
+                    dummy_proc.create_time = create_time;
+                    dummy_proc.image_name = (WCHAR*)nptr1;
+
+                    Process_TerminateProcess(&dummy_proc);
+                }
+
+                Mem_Free(nbuf1, nlen1);
+                */
+            }
+
+        } else {
+
+            Process_NotifyProcess_Delete(ProcessId);
+        }
+    }
+}
+#endif
+
+
+//---------------------------------------------------------------------------
+// Process_NotifyProcessEx
+//---------------------------------------------------------------------------
+
+
+_FX void Process_NotifyProcessEx(
+    PEPROCESS Process, HANDLE ProcessId, PPS_CREATE_NOTIFY_INFO CreateInfo)
+{
+    //
+    // don't do anything before the main driver init says it's ok
+    //
+
+    if (! Process_ReadyToSandbox)
+        return;
+
+    //
+    // handle process creation and deletion.  note that we are running
+    // in an arbitrary thread context
+    //
+
+    if (ProcessId) {
+
+        if (CreateInfo != NULL) {
+
+            //
+            // it is possible to specify the parrent process when calling RtlCreateUserProcess
+            // this is for example done by the appinfo service running under svchost.exe
+            // to start LocalBridge.exe with RuntimeBroker.exe as parent
+            // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
+            //
+
+            //DbgPrint("Process_NotifyProcess_Create pid=%d parent=%d current=%d\n", ProcessId, CreateInfo->ParentProcessId, PsGetCurrentProcessId());
+            
+            if (!Process_NotifyProcess_Create(ProcessId, CreateInfo->ParentProcessId, PsGetCurrentProcessId(), NULL)) {
+
+                CreateInfo->CreationStatus = STATUS_ACCESS_DENIED;
+            }
 
         } else {
 
@@ -811,7 +1025,7 @@ _FX void Process_NotifyProcess(
 //---------------------------------------------------------------------------
 
 
-_FX void Process_NotifyProcess_Create(
+_FX BOOLEAN Process_NotifyProcess_Create(
     HANDLE ProcessId, HANDLE ParentId, HANDLE CallerId, BOX *box)
 {
     void *nbuf1, *nbuf2;
@@ -822,6 +1036,7 @@ _FX void Process_NotifyProcess_Create(
     BOOLEAN parent_had_rights_dropped = FALSE;
     BOOLEAN process_is_forced = FALSE;
     BOOLEAN add_process_to_job = FALSE;
+	BOOLEAN create_terminated = FALSE;
     BOOLEAN bHostInject = FALSE;
     KIRQL irql;
 
@@ -834,7 +1049,7 @@ _FX void Process_NotifyProcess_Create(
     if (! nbuf1) {
 
         Process_CreateTerminated(ProcessId, -1);
-        return;
+        return FALSE;
     }
 
     ImagePath = ((UNICODE_STRING *)nbuf1)->Buffer;
@@ -871,7 +1086,6 @@ _FX void Process_NotifyProcess_Create(
         // 2.  check if parent is sandboxed
         //
 
-        BOOLEAN create_terminated = FALSE;
         BOOLEAN added_to_dfp_list = FALSE;
         BOOLEAN check_forced_program = FALSE;
 
@@ -957,6 +1171,34 @@ _FX void Process_NotifyProcess_Create(
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
 
+#ifdef DRV_BREAKOUT
+        //
+        // check if this process is set up as break out program,
+        // it must't be located in a sandboxed for this to work.
+        //
+
+        BOX* breakout_box = NULL;
+
+        if (box && Process_IsBreakoutProcess(box, ImagePath)) {
+            if(!Driver_Certified)
+                Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
+            else {
+                UNICODE_STRING image_uni;
+                RtlInitUnicodeString(&image_uni, ImagePath);
+                if (!Box_IsBoxedPath(box, file, &image_uni)) {
+
+                    check_forced_program = TRUE; // the break out process of one box may be the forced process of an otehr
+                    breakout_box = box;
+                    box = NULL;
+                }
+            }
+        }
+#endif
+
+        //
+        // check forced processes
+        //
+
         if (check_forced_program) {
 
             //
@@ -964,7 +1206,12 @@ _FX void Process_NotifyProcess_Create(
             // check if it might be a forced process
             //
 
-            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, FALSE);
+            const WCHAR* pSidString = NULL;
+#ifdef DRV_BREAKOUT
+            if (breakout_box)
+                pSidString = breakout_box->sid;
+#endif
+            box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, &bHostInject, pSidString);
 
             if (box == (BOX *)-1) {
 
@@ -973,27 +1220,37 @@ _FX void Process_NotifyProcess_Create(
 
             } else if (box) {
 
-                process_is_forced = TRUE;
-                add_process_to_job = TRUE;
-            }
-            else
-            {
-                box = Process_GetForcedStartBox(ProcessId, ParentId, ImagePath, TRUE);
+                if (bHostInject) {
 
-                if (box == (BOX *)-1) {
-
-                    create_terminated = TRUE;
-                    box = NULL;
-
-                }
-                else if (box) {
-
-                    bHostInject = TRUE;
                     add_process_to_job = FALSE;
 
+                } else {
+
+                    process_is_forced = TRUE;
+                    add_process_to_job = TRUE;
                 }
             }
         }
+
+#ifdef DRV_BREAKOUT
+        //
+        // if this is a break out process and no other box clamed it as forced, 
+        // set bHostInject and threat it accordingly, we need this in order for
+        // the custom SetInformationProcess call from CreateProcessInternalW to succeed
+        //
+
+        if (breakout_box) {
+            if (!box) {
+                bHostInject = TRUE;
+                add_process_to_job = FALSE;
+                box = breakout_box;
+            }
+            else {
+                Box_Free(breakout_box);
+                breakout_box = NULL;
+            }
+        }
+#endif
 
         //
         // if parent is a sandboxed process but for some reason we don't
@@ -1038,6 +1295,10 @@ _FX void Process_NotifyProcess_Create(
     if (box) {
 
         PROCESS *new_proc = Process_Create(ProcessId, box, ImagePath, &irql);
+        if (!new_proc) {
+		
+            create_terminated = TRUE;
+		}
         Box_Free(box);
 
         if (new_proc) {
@@ -1047,27 +1308,48 @@ _FX void Process_NotifyProcess_Create(
             ULONG session_id = new_proc->box->session_id;
 
             new_proc->bHostInject = bHostInject;
+#ifdef DRV_BREAKOUT
+            new_proc->starter_id = CallerId;
+#endif
             new_proc->parent_was_start_exe = parent_was_start_exe;
             new_proc->rights_dropped = parent_had_rights_dropped;
             new_proc->forced_process = process_is_forced;
 
-            if (! bHostInject)
-            {
-				WCHAR msg[48], *buf = msg;
-				buf += swprintf(buf, L"%s%c%d", new_proc->box->name, L'\0', (ULONG)ParentId) + 1;
-				Log_Popup_MsgEx(MSG_1399, new_proc->image_path, wcslen(new_proc->image_path), msg, (ULONG)(buf - msg), new_proc->box->session_id, ProcessId);
+            if (! bHostInject) {
+
+                //
+                // Notify the agent about the new process using a specialized silent message
+                //
+
+				WCHAR sParentId[12];
+                _ultow_s((ULONG)ParentId, sParentId, 12, 10);
+                const WCHAR* strings[4] = { new_proc->image_path, new_proc->box->name, sParentId, NULL };
+                Api_AddMessage(MSG_1399, strings, NULL, new_proc->box->session_id, (ULONG)ProcessId);
 
                 if (! add_process_to_job)
                     new_proc->parent_was_sandboxed = TRUE;
 
+                add_process_to_job = TRUE; // we need this because of JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK used in GuiServer::GetJobObjectForAssign
+
                 //
                 // don't put the process into a job if OpenWinClass=*
+                // don't put the process into a job if NoSecurityIsolation=y
                 //
 
-				if (new_proc->open_all_win_classes || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
+				if (new_proc->open_all_win_classes || new_proc->bAppCompartment || Conf_Get_Boolean(new_proc->box->name, L"NoAddProcessToJob", 0, FALSE)) {
 
+                    new_proc->can_use_jobs = TRUE;
 					add_process_to_job = FALSE;
 				}
+                else if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
+
+                    //
+                    // on windows 8 and later we can have nested jobs so asigning a 
+                    // boxed job to a process will not interfear with the job assigned by SbieSvc
+                    //
+
+                    new_proc->can_use_jobs = Conf_Get_Boolean(new_proc->box->name, L"AllowBoxedJobs", 0, FALSE);
+                }
 
                 //
                 // on Windows Vista, a forced process may start inside a
@@ -1100,12 +1382,29 @@ _FX void Process_NotifyProcess_Create(
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
 
-            Process_Low_Inject(
-                pid, session_id, create_time, nptr1, add_process_to_job, bHostInject);
+            if (!Process_Low_Inject(
+                pid, session_id, create_time, nptr1, add_process_to_job, bHostInject)) {
+
+                create_terminated = TRUE;
+
+                //
+                // re acquire the process object, and mark it terminated
+                //
+
+                new_proc = Process_Find(ProcessId, &irql);
+
+                if (new_proc)
+                    Process_SetTerminated(new_proc, 2);
+
+                ExReleaseResourceLite(Process_ListLock);
+                KeLowerIrql(irql);
+            }
         }
     }
 
     Mem_Free(nbuf1, nlen1);
+
+    return create_terminated == FALSE;
 }
 
 
@@ -1143,6 +1442,9 @@ _FX void Process_Delete(HANDLE ProcessId)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(Process_ListLock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+    map_take(&Process_Map, ProcessId, &proc, 0);
+#else
     proc = List_Head(&Process_List);
     while (proc) {
         if (proc->pid == ProcessId) {
@@ -1151,6 +1453,7 @@ _FX void Process_Delete(HANDLE ProcessId)
         }
         proc = (PROCESS *)List_Next(proc);
     }
+#endif
 
     Process_DfpDelete(ProcessId);
 
@@ -1168,6 +1471,8 @@ _FX void Process_Delete(HANDLE ProcessId)
             // process was found to be sandboxed:  it was already unlinked
             // from Process_List.  we have to do some process clean-up
             //
+
+            WFP_DeleteProcess(proc);
 
             Key_UnmountHive(proc);
 
@@ -1268,6 +1573,9 @@ _FX void Process_NotifyImage(
         // initialize the filtering components
         //
 
+        if (!fail && !WFP_InitProcess(proc))
+			fail = 0x0B;
+
         if (!fail && !File_InitProcess(proc))
 			fail = 0x04;
 
@@ -1305,7 +1613,7 @@ _FX void Process_NotifyImage(
 
         proc->terminated = TRUE;
 		proc->reason = (!fail) ? -1 : 0;
-        Process_CancelProcess(proc);
+        Process_TerminateProcess(proc);
     }
 
     //DbgPrint("IMAGE LOADED, PROCESS INITIALIZATION %d COMPLETE %d\n", proc->pid, ok);
@@ -1314,6 +1622,14 @@ _FX void Process_NotifyImage(
 
 void Process_SetTerminated(PROCESS *proc, ULONG reason)
 {
+    //
+    // This function markes a process for termination, this causes File_PreOperation 
+    // and Key_Callback to return STATUS_PROCESS_IS_TERMINATING which prevents 
+    // the process form accessing the file system and the registry
+    // 
+    // Note: if this is set during process creation the process wont be able to start at all
+    //
+
     if (!proc->terminated)
     {
         proc->terminated = TRUE;

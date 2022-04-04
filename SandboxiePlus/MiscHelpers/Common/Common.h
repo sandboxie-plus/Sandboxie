@@ -19,6 +19,9 @@ MISCHELPERS_EXPORT typedef QPair<QString,QString> StrPair;
 MISCHELPERS_EXPORT StrPair Split2(const QString& String, QString Separator = "=", bool Back = false);
 MISCHELPERS_EXPORT QStringList SplitStr(const QString& String, QString Separator);
 
+typedef MISCHELPERS_EXPORT QMap<QString,QString> TArguments;
+TArguments MISCHELPERS_EXPORT GetArguments(const QString& Arguments, QChar Separator = L';', QChar Assigner = L'=', QString* First = NULL, bool bLowerKeys = false, bool bReadEsc = false);
+
 MISCHELPERS_EXPORT QString UnEscape(QString Text);
 
 MISCHELPERS_EXPORT QString FormatSize(quint64 Size, int Precision = 2);
@@ -95,3 +98,6 @@ MISCHELPERS_EXPORT QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, con
 #ifdef WIN32
 MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
 #endif
+
+MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
+MISCHELPERS_EXPORT int SafeExec(QDialog* pDialog);

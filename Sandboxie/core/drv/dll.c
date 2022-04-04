@@ -73,8 +73,9 @@ static LIST Dll_List;
 static BOOLEAN Dll_List_Initialized = FALSE;
 
 const WCHAR *Dll_NTDLL = L"NTDLL";
+#ifdef XP_SUPPORT
 const WCHAR *Dll_USER = L"USER32";
-
+#endif
 
 //---------------------------------------------------------------------------
 // Dll_Init
@@ -88,8 +89,10 @@ _FX BOOLEAN Dll_Init(void)
 
     if (! Dll_Load(Dll_NTDLL))
         return FALSE;
+#ifdef XP_SUPPORT
     if (! Dll_Load(Dll_USER))
         return FALSE;
+#endif
 
     return TRUE;
 }
@@ -174,7 +177,7 @@ _FX DLL_ENTRY *Dll_Load(const WCHAR *DllBaseName)
     // open the dll file and query its on-disk size
     //
 
-    swprintf(path, L"\\SystemRoot\\System32\\%s%s", DllBaseName, _DotDll);
+    RtlStringCbPrintfW(path, sizeof(path), L"\\SystemRoot\\System32\\%s%s", DllBaseName, _DotDll);
 
 #ifdef _WIN64
 
@@ -358,7 +361,7 @@ _FX void *Dll_GetProc(
 
     if (! proc) {
         WCHAR dll_proc_name[96];
-        swprintf(dll_proc_name, L"%s.%S", DllName, ProcName);
+        RtlStringCbPrintfW(dll_proc_name, sizeof(dll_proc_name), L"%s.%S", DllName, ProcName);
         Log_Msg1(MSG_DLL_GET_PROC, dll_proc_name);
     }
 
@@ -400,7 +403,7 @@ _FX ULONG Dll_GetNextProc(
             if (! dll_offset) {
 
                 WCHAR dll_proc_name[96];
-                swprintf(dll_proc_name, L"%s.%S", dll->name, SearchName);
+                RtlStringCbPrintfW(dll_proc_name, sizeof(dll_proc_name), L"%s.%S", dll->name, SearchName);
                 Log_Msg1(MSG_1112, dll_proc_name);
             }
 

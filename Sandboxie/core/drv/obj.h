@@ -45,6 +45,12 @@ typedef ULONG (*P_ObQueryNameInfo)(void *Object);
 
 BOOLEAN Obj_Init(void);
 
+void Obj_Unload(void);
+
+BOOLEAN Obj_Load_Filter(void);
+
+void Obj_Unload_Filter(void);
+
 NTSTATUS Obj_GetName(
     POOL *pool, void *Object,
     OBJECT_NAME_INFORMATION **Name, ULONG *NameLength);
@@ -78,12 +84,14 @@ BOOLEAN Obj_HookParseProc(
 // Variables
 //---------------------------------------------------------------------------
 
+extern POBJECT_TYPE *Obj_ObjectTypes;
 
 extern const OBJECT_NAME_INFORMATION Obj_Unnamed;
 
 extern P_ObGetObjectType pObGetObjectType;
 extern P_ObQueryNameInfo pObQueryNameInfo;
 
+extern BOOLEAN Obj_CallbackInstalled;
 
 //---------------------------------------------------------------------------
 // Macros Related to ParseProcedure

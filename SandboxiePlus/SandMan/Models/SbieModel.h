@@ -1,6 +1,7 @@
 #pragma once
 #include <qwidget.h>
 #include "../SbiePlusAPI.h"
+#include "../SbieProcess.h"
 #include "../../MiscHelpers/Common/TreeItemModel.h"
 
 
@@ -46,19 +47,23 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = -1; boxType = -1; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; boxType = -1; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
-		int			inUse;
+		bool		inUse;
+		int			busyState;
 		int			boxType;
+		int			OrderNumber;
 
 		CBoxedProcessPtr pProcess;
 	};
 
+	virtual QVariant		NodeData(STreeNode* pNode, int role, int section) const;
+
 	virtual STreeNode*		MkNode(const QVariant& Id) { return new SSandBoxNode(Id); }
 
 	QList<QVariant>			MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
-	QList<QVariant>			MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
+	void					MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QList<QVariant>& Path);
 	bool					TestProcPath(const QList<QVariant>& Path, const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, int Index = 0);
 
 	QString					FindParent(const QVariant& Name, const QMap<QString, QStringList>& Groups);
@@ -68,19 +73,6 @@ protected:
 	//virtual QVariant		GetDefaultIcon() const;
 
 private:
-	enum EBoxColors
-	{
-		eYelow = 0,
-		eRed,
-		eGreen,
-		eBlue,
-		eCyan,
-		eMagenta,
-		eOrang,
-		eMaxColor
-	};
-
-	QMap<EBoxColors, QPair<QIcon, QIcon> > m_BoxIcons;
 
 	//QIcon m_BoxEmpty;
 	//QIcon m_BoxInUse;

@@ -7,8 +7,6 @@
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
-#include "Models/TraceModel.h"
-//#include "Models/ApiMonModel.h"
 #include <QTranslator>
 #include "Windows/PopUpWindow.h"
 
@@ -22,6 +20,7 @@ class CSbieView;
 class CBoxBorder;
 class CSbieTemplates;
 class CTraceView;
+
 
 class CSandMan : public QMainWindow
 {
@@ -37,23 +36,51 @@ public:
 
 	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
-	void				AddAsyncOp(const CSbieProgressPtr& pProgress);
+	enum EDelMode {
+		eDefault,
+		eAuto,
+		eForDelete
+	};
+
+	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteShapshots = true);
+
+	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
 	static void			CheckResults(QList<SB_STATUS> Results);
 
-	static QIcon		GetIcon(const QString& Name);
+	static QIcon		GetIcon(const QString& Name, bool bAction = true);
 
 	bool				IsFullyPortable();
 
 	bool				IsShowHidden() { return m_pShowHidden->isChecked(); }
 
+	CSbieView*			GetBoxView() { return m_pBoxView; }
+
+	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
+
+	QIcon				GetBoxIcon(int boxType, bool inUse = false, bool inBusy = false);
+	QString				GetBoxDescription(int boxType);
+
+	bool				CheckCertificate();
+
+	void				UpdateTheme();
+
+	void				UpdateCertState();
+	void				UpdateCert();
+
+signals:
+	void				CertUpdated();
+
 protected:
-	SB_STATUS			ConnectSbie();
+	SB_RESULT(void*)	ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
-	SB_STATUS			StopSbie(bool andRemove = false);
+	SB_RESULT(void*)	StopSbie(bool andRemove = false);
 
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
+
+	QIcon				GetTrayIcon(bool isConnected = true);
+	QString				GetTrayText(bool isConnected = true);
 
 	void				closeEvent(QCloseEvent* e);
 
@@ -74,8 +101,29 @@ protected:
 
 	QStringList			m_MissingTemplates;
 
+	enum EBoxColors
+	{
+		eYellow = 0,
+		eRed,
+		eGreen,
+		eBlue,
+		eCyan,
+		eMagenta,
+		eOrang,
+		eMaxColor
+	};
+
+	struct SBoxIcon {
+		QIcon Empty;
+		QIcon InUse;
+		QIcon Busy;
+	};
+	QMap<int, SBoxIcon> m_BoxIcons;
+
+	class UGlobalHotkeys* m_pHotkeyManager;
+
 public slots:
-	void				OnMessage(const QString&);
+	void				OnMessage(const QString& MsgData);
 
 	void				OnStatusChanged();
 	void				OnLogMessage(const QString& Message, bool bNotify = false);
@@ -84,12 +132,16 @@ public slots:
 	void				OnNotAuthorized(bool bLoginRequired, bool& bRetry);
 
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
-	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
+	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 
-	void				OpenRecovery(const QString& BoxName);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
+	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings();
 	void				OnIniReloaded();
+
+	void				SetupHotKeys();
+	void				OnHotKey(size_t id);
 
 	void				OnAsyncFinished();
 	void				OnAsyncFinished(CSbieProgress* pProgress);
@@ -101,9 +153,13 @@ public slots:
 
 	void				CheckForUpdates(bool bManual = true);
 
+	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
 	void				OpenUrl(const QUrl& url);
 
 	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
+
+	void				OnBoxMenu(const QPoint &);
+	void				OnBoxDblClick(QTreeWidgetItem*);
 
 private slots:
 	void				OnSelectionChanged();
@@ -111,6 +167,7 @@ private slots:
 	void				OnMenuHover(QAction* action);
 
 	void				OnNewBox();
+	void				OnNewGroupe();
 	void				OnEmptyAll();
 	void				OnWndFinder();
 	void				OnDisableForce();
@@ -120,10 +177,11 @@ private slots:
 	void				OnViewMode(QAction* action);
 	void				OnAlwaysTop();
 	void				OnCleanUp();
-	void				OnSetKeep();
+	void				OnProcView();
 
 	void				OnSettings();
 	void				OnResetMsgs();
+	void				OnResetGUI();
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnSetMonitoring();
@@ -139,9 +197,15 @@ private slots:
 	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
 	void				OnUpdateDownload();
 
+	void				OnCertCheck();
+
+	void				SetUITheme();
+
 private:
 	void				CreateMenus();
 	void				CreateToolBar();
+
+	void				HandleMaintenance(SB_RESULT(void*) Status);
 
 	void				SetViewMode(bool bAdvanced);
 
@@ -167,7 +231,8 @@ private:
 
 
 	QMenu*				m_pMenuFile;
-	QAction*			m_pNew;
+	QAction*			m_pNewBox;
+	QAction*			m_pNewGroup;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
@@ -185,6 +250,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pUninstallAll;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;
@@ -198,10 +264,12 @@ private:
 	QAction*			m_pCleanUpTrace;
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
+	QAction*			m_pShowAllSessions;
 
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
 	QAction*			m_pMenuResetMsgs;
+	QAction*			m_pMenuResetGUI;
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
@@ -216,21 +284,29 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
+	QAction*			m_pTraySeparator;
+	QWidgetAction*		m_pTrayList;
+	QTreeWidget*		m_pTrayBoxes;
+	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	bool				m_bIconDisabled;
+	bool				m_bIconBusy;
+	int					m_iDeletingContent;
 
 	bool				m_bExit;
 
 	CProgressDialog*	m_pProgressDialog;
+	bool				m_pProgressModal;
 	CPopUpWindow*		m_pPopUpWindow;
 
-	void				SetUITheme();
+	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
 
 	void				LoadLanguage();
-	QTranslator			m_Translator;
-	QByteArray			m_Translation;
+	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
+	QTranslator			m_Translator[2];
+
 public:
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;

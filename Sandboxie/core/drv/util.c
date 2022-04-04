@@ -278,3 +278,130 @@ void *memmem(const void *pSearchBuf,
 
     return NULL;
 }
+
+
+//---------------------------------------------------------------------------
+// MyIsTestSigning
+//---------------------------------------------------------------------------
+
+typedef struct _SYSTEM_CODEINTEGRITY_INFORMATION
+{
+    ULONG Length;
+    ULONG CodeIntegrityOptions;
+} SYSTEM_CODEINTEGRITY_INFORMATION, *PSYSTEM_CODEINTEGRITY_INFORMATION;
+
+_FX BOOLEAN MyIsTestSigning(void)
+{
+    SYSTEM_CODEINTEGRITY_INFORMATION sci = {sizeof(SYSTEM_CODEINTEGRITY_INFORMATION)};
+	if(NT_SUCCESS(ZwQuerySystemInformation(/*SystemCodeIntegrityInformation*/ 103, &sci, sizeof(sci), NULL)))
+	{
+		//BOOLEAN bCodeIntegrityEnabled = !!(sci.CodeIntegrityOptions & /*CODEINTEGRITY_OPTION_ENABLED*/ 0x1);
+		BOOLEAN bTestSigningEnabled = !!(sci.CodeIntegrityOptions & /*CODEINTEGRITY_OPTION_TESTSIGN*/ 0x2);
+
+        //DbgPrint("Test Signing: %d; Code Integrity: %d\r\n", bTestSigningEnabled, bCodeIntegrityEnabled);
+
+        //if (bTestSigningEnabled || !bCodeIntegrityEnabled)
+        if (bTestSigningEnabled)
+            return TRUE;
+	}
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// MyIsCallerSigned
+//---------------------------------------------------------------------------
+
+NTSTATUS KphVerifyCurrentProcess();
+
+_FX BOOLEAN MyIsCallerSigned(void)
+{
+    NTSTATUS status;
+
+    // in test signing mode don't verify the signature
+    if (MyIsTestSigning())
+        return TRUE;
+
+    status = KphVerifyCurrentProcess();
+
+    //DbgPrint("Image Signature Verification result: 0x%08x\r\n", status);
+
+    if (!NT_SUCCESS(status)) {
+
+        //Log_Status(MSG_1330, 0, status);
+
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// MyValidateCertificate
+//---------------------------------------------------------------------------
+
+BOOLEAN Driver_Certified = FALSE;
+
+NTSTATUS KphValidateCertificate();
+
+_FX NTSTATUS MyValidateCertificate(void)
+{
+    NTSTATUS status = KphValidateCertificate();
+
+    Driver_Certified = NT_SUCCESS(status);
+
+    if (status == STATUS_ACCOUNT_EXPIRED)
+        status = STATUS_SUCCESS;
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Util_GetProcessPidByName
+//---------------------------------------------------------------------------
+
+_FX HANDLE Util_GetProcessPidByName(const WCHAR* name) 
+{
+    HANDLE pid = (HANDLE)-1;
+    USHORT name_len = wcslen(name) * sizeof(WCHAR);
+    PVOID buffer = NULL;
+    ULONG buffer_size = 0x10000;
+    ULONG retry_count = 0;
+    NTSTATUS status;
+
+retry:
+    buffer = ExAllocatePoolWithTag(PagedPool, buffer_size, tzuk);
+    if (buffer){
+
+        status = ZwQuerySystemInformation(SystemProcessesAndThreadsInformation, buffer, buffer_size, &buffer_size);
+        if (status == STATUS_INFO_LENGTH_MISMATCH && retry_count++ < 100) {
+            ExFreePoolWithTag(buffer, tzuk);
+            buffer_size += 0x1000 * retry_count;
+            goto retry;
+        }
+
+        if (NT_SUCCESS(status)) {
+
+            SYSTEM_PROCESS_INFORMATION* processEntry = (SYSTEM_PROCESS_INFORMATION*)buffer;
+            for (;;) {
+
+                if (processEntry->ProcessName.Length == name_len && _wcsicmp(name, processEntry->ProcessName.Buffer) == 0) {
+
+                    pid = (HANDLE)processEntry->ProcessId;
+                    break;
+                }
+
+                if (!processEntry->NextEntryOffset)
+                    break;
+
+                processEntry = (SYSTEM_PROCESS_INFORMATION*)((UCHAR*)processEntry + processEntry->NextEntryOffset);
+            }
+        }
+
+        ExFreePoolWithTag(buffer, tzuk);
+    }
+
+    return pid;
+}

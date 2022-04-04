@@ -5,6 +5,10 @@
 #define OP_CONFIRM (3)
 #define OP_CANCELED (4)
 
+#include "qsbieapi_global.h"
+
+QString QSBIEAPI_EXPORT CSbieAPI__FormatNtStatus(long nsCode);
+
 enum ESbieMsgCodes
 {
 	SB_Generic = 0,
@@ -23,22 +27,25 @@ enum ESbieMsgCodes
 	SB_BadNameChar,
 	SB_FailedKillAll,
 	SB_DeleteProtect,
+	SB_DeleteNotEmpty,
 	SB_DeleteError,
-	SB_RemNotEmpty,
+	//SB_RemNotEmpty,
 	SB_DelNotEmpty,
 	SB_FailedMoveDir,
 	SB_SnapMkDirFail,
-	SB_SnapCopyRegFail,
+	SB_SnapCopyDatFail,
 	SB_SnapNotFound,
 	SB_SnapMergeFail,
 	SB_SnapRmDirFail,
 	SB_SnapIsShared,
 	SB_SnapIsRunning,
-	SB_SnapDelRegFail,
+	SB_SnapDelDatFail,
 	SB_NotAuthorized,
 	SB_ConfigFailed,
 	SB_SnapIsEmpty,
 	SB_NameExists,
+	SB_PasswordBad,
+	SB_Canceled,
 };
 
 class CSbieStatus
@@ -59,7 +66,7 @@ public:
 	CSbieStatus(ESbieMsgCodes MsgCode, long Status) : CSbieStatus(MsgCode, QVariantList(), Status)
 	{
 	}
-	CSbieStatus(long Status) : CSbieStatus(SB_Generic, QVariantList(), Status)
+	CSbieStatus(long Status) : CSbieStatus(SB_Generic, QVariantList() << CSbieAPI__FormatNtStatus(Status), Status)
 	{
 	}
 	CSbieStatus(const CSbieStatus& other) : CSbieStatus()
@@ -144,7 +151,7 @@ public:
 	{
 		Attach(&other);
 	}
-	CSbieResult(const CSbieResult& other) : CSbieResult(other)
+	CSbieResult(const CSbieResult& other) : CSbieStatus(other)
 	{
 		v = other.v;
 	}
@@ -168,7 +175,7 @@ class QSBIEAPI_EXPORT CSbieProgress : public QObject
 public:
 	CSbieProgress() : m_Status(OP_ASYNC), m_Canceled(false) {}
 
-	void Cancel() { m_Canceled = true; }
+	void Cancel() { m_Canceled = true; emit Canceled(); }
 	bool IsCanceled() { return m_Canceled; }
 
 	void ShowMessage(const QString& text) { emit Message(text);}
@@ -182,6 +189,7 @@ signals:
 	//void Progress(int procent);
 	void Message(const QString& text);
 	void Progress(int value);
+	void Canceled();
 	void Finished();
 
 protected:

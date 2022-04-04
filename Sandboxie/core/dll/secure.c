@@ -25,6 +25,16 @@
 #include "core/drv/api_defs.h"
 #include "core/svc/ServiceWire.h"
 #include <stdio.h>
+#include <objbase.h>
+
+//---------------------------------------------------------------------------
+// Defines
+//---------------------------------------------------------------------------
+
+
+#define LDR_TOKEN_PRIMARY -4
+#define LDR_TOKEN_IMPERSONATION -5
+#define LDR_TOKEN_EFFECTIVE -6
 
 
 //---------------------------------------------------------------------------
@@ -65,12 +75,66 @@ static NTSTATUS Secure_NtSetSecurityObject(
     SECURITY_INFORMATION SecurityInformation,
     SECURITY_DESCRIPTOR *SecurityDescriptor);
 
-static NTSTATUS Secure_NtQueryInformationToken(
+NTSTATUS Ldr_NtAccessCheckByType(
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID PrincipalSelfSid,
+    HANDLE ClientToken,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_TYPE_LIST ObjectTypeList,
+    ULONG ObjectTypeListLength,
+    PGENERIC_MAPPING GenericMapping,
+    PPRIVILEGE_SET PrivilegeSet,
+    PULONG PrivilegeSetLength,
+    PACCESS_MASK GrantedAccess,
+    PNTSTATUS AccessStatus
+);
+
+NTSTATUS  Ldr_NtAccessCheckByTypeResultList(
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID PrincipalSelfSid,
+    HANDLE ClientToken,
+    ACCESS_MASK     DesiredAccess,
+    POBJECT_TYPE_LIST ObjectTypeList,
+    ULONG ObjectTypeListLength,
+    PGENERIC_MAPPING GenericMapping,
+    PPRIVILEGE_SET  PrivilegeSet,
+    PULONG PrivilegeSetLength,
+    PACCESS_MASK    GrantedAccess,
+    PNTSTATUS   AccessStatus
+);
+
+NTSTATUS Ldr_NtAccessCheck(
+    IN PSECURITY_DESCRIPTOR SecurityDescriptor,
+    IN HANDLE               ClientToken,
+    IN ACCESS_MASK          DesiredAccess,
+    IN PGENERIC_MAPPING     GenericMapping OPTIONAL,
+    OUT PPRIVILEGE_SET      RequiredPrivilegesBuffer,
+    IN OUT PULONG           BufferLength,
+    OUT PACCESS_MASK        GrantedAccess,
+    OUT PNTSTATUS           AccessStatus);
+
+NTSTATUS Ldr_NtQuerySecurityAttributesToken(
+    IN HANDLE TokenHandle,
+    IN PUNICODE_STRING Attributes,
+    IN ULONG NumberOfAttributes,
+    OUT PVOID Buffer,
+    IN ULONG Length,
+    OUT PULONG ReturnLength);
+
+NTSTATUS Ldr_NtQueryInformationToken(
     HANDLE TokenHandle,
     TOKEN_INFORMATION_CLASS TokenInformationClass,
     void *TokenInformation,
     ULONG TokenInformationLength,
     ULONG *ReturnLength);
+    
+static BOOL Ldr_NtOpenThreadToken(
+    HANDLE ThreadHandle, 
+    DWORD  DesiredAccess, 
+    BOOL    OpenAsSelf, 
+    PHANDLE TokenHandle);
+
+static BOOL Ldr_RtlEqualSid(void * sid1, void * sid2);
 
 static NTSTATUS Secure_NtSetInformationToken(
     HANDLE TokenHandle,
@@ -86,6 +150,38 @@ static NTSTATUS Secure_NtAdjustPrivilegesToken(
     TOKEN_PRIVILEGES *PreviousState,
     ULONG *ReturnLength);
 
+static NTSTATUS Secure_NtDuplicateToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ACCESS_MASK DesiredAccess,
+    _In_opt_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _In_ BOOLEAN EffectiveOnly,
+    _In_ TOKEN_TYPE TokenType,
+    _Out_ PHANDLE NewTokenHandle);
+
+static NTSTATUS Secure_NtFilterToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _Out_ PHANDLE NewTokenHandle);
+
+/*static NTSTATUS Secure_NtFilterTokenEx(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _In_ ULONG DisableUserClaimsCount,
+    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
+    _In_ ULONG DisableDeviceClaimsCount,
+    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
+    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
+    _In_opt_ PVOID RestrictedUserAttributes,
+    _In_opt_ PVOID RestrictedDeviceAttributes,
+    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
+    _Out_ PHANDLE NewTokenHandle);*/
+
 static NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags);
 
 static NTSTATUS Secure_RtlCheckTokenMembershipEx(
@@ -96,6 +192,7 @@ static NTSTATUS Secure_RtlCheckTokenMembershipEx(
 
 static BOOLEAN Secure_IsSameBox(HANDLE idProcess);
 
+static BOOLEAN Secure_IsBuiltInAdmin();
 
 //---------------------------------------------------------------------------
 
@@ -105,12 +202,19 @@ static P_NtOpenThread               __sys_NtOpenThread              = NULL;
 static P_NtDuplicateObject          __sys_NtDuplicateObject         = NULL;
 static P_NtQuerySecurityObject      __sys_NtQuerySecurityObject     = NULL;
 static P_NtSetSecurityObject        __sys_NtSetSecurityObject       = NULL;
-static P_NtQueryInformationToken    __sys_NtQueryInformationToken   = NULL;
+static P_NtAccessCheckByType            __sys_NtAccessCheckByType = NULL;
+static P_NtAccessCheck                  __sys_NtAccessCheck = NULL;
+static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
+static P_NtQueryInformationToken        __sys_NtQueryInformationToken = NULL;
+static P_NtAccessCheckByTypeResultList  __sys_NtAccessCheckByTypeResultList = NULL;
+static P_NtOpenThreadToken          __sys_NtOpenThreadToken = NULL;
+       P_RtlEqualSid                __sys_RtlEqualSid = NULL;
 static P_NtSetInformationToken      __sys_NtSetInformationToken     = NULL;
 static P_NtAdjustPrivilegesToken    __sys_NtAdjustPrivilegesToken   = NULL;
+static P_NtDuplicateToken           __sys_NtDuplicateToken          = NULL;
+static P_NtFilterToken              __sys_NtFilterToken             = NULL;
 static P_RtlQueryElevationFlags     __sys_RtlQueryElevationFlags    = NULL;
 static P_RtlCheckTokenMembershipEx  __sys_RtlCheckTokenMembershipEx = NULL;
-static P_NtQuerySecurityAttributesToken __sys_NtQuerySecurityAttributesToken = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -126,6 +230,15 @@ BOOLEAN Secure_IsInternetExplorerTabProcess = FALSE;
 BOOLEAN Secure_Is_IE_NtQueryInformationToken = FALSE;
 
 BOOLEAN Secure_FakeAdmin = FALSE;
+
+static UCHAR AdministratorsSid[16] = {
+    1,                                      // Revision
+    2,                                      // SubAuthorityCount
+    0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
+    0x20, 0, 0, 0,   // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
+    0x20, 2, 0, 0    // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
+};
+
 
 //---------------------------------------------------------------------------
 // Secure_InitSecurityDescriptors
@@ -255,16 +368,60 @@ _FX BOOLEAN Secure_Init(void)
     //
     // intercept NTDLL entry points
     //
-
-    SBIEDLL_HOOK(Secure_,NtOpenProcess);
-    SBIEDLL_HOOK(Secure_,NtOpenThread);
-    SBIEDLL_HOOK(Secure_,NtDuplicateObject);
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE)) {
+        SBIEDLL_HOOK(Secure_, NtOpenProcess);
+        SBIEDLL_HOOK(Secure_, NtOpenThread);
+        SBIEDLL_HOOK(Secure_, NtDuplicateObject);
+    }
     SBIEDLL_HOOK(Secure_,NtQuerySecurityObject);
     SBIEDLL_HOOK(Secure_,NtSetSecurityObject);
     SBIEDLL_HOOK(Secure_,NtSetInformationToken);
     SBIEDLL_HOOK(Secure_,NtAdjustPrivilegesToken);
-    if (Dll_Windows < 10) {
-        SBIEDLL_HOOK(Secure_, NtQueryInformationToken);
+    // OriginalToken BEGIN
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    // OriginalToken END
+    if (Dll_OsBuild >= 21286) {    // Windows 11
+        SBIEDLL_HOOK(Secure_, NtDuplicateToken);
+        SBIEDLL_HOOK(Secure_, NtFilterToken);
+        //NtFilterTokenEx is only present in windows 8 later windoses return STATUS_NOT_SUPPORTED
+    }
+    //if (Dll_Windows < 10) {
+    //    SBIEDLL_HOOK(Secure_, NtQueryInformationToken);
+    //}
+
+    void* RtlEqualSid = (P_RtlEqualSid)GetProcAddress(Dll_Ntdll, "RtlEqualSid");
+
+    SBIEDLL_HOOK(Ldr_, RtlEqualSid);
+
+    //
+    // install hooks to fake administrator privileges
+    // note: when running as the built in administrator we should always act as if we have admin rights
+    //
+
+    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", Secure_IsBuiltInAdmin())
+        && (_wcsicmp(Dll_ImageName, L"msedge.exe") != 0); // never for msedge.exe
+
+
+    if (Secure_FakeAdmin || Dll_OsBuild >= 9600) {
+
+        void* NtAccessCheckByType = GetProcAddress(Dll_Ntdll, "NtAccessCheckByType");
+        void* NtAccessCheck = GetProcAddress(Dll_Ntdll, "NtAccessCheck");
+        void* NtQuerySecurityAttributesToken = GetProcAddress(Dll_Ntdll, "NtQuerySecurityAttributesToken");
+        void* NtQueryInformationToken = GetProcAddress(Dll_Ntdll, "NtQueryInformationToken");
+        void* NtAccessCheckByTypeResultList = GetProcAddress(Dll_Ntdll, "NtAccessCheckByTypeResultList");
+        
+
+        SBIEDLL_HOOK(Ldr_, NtQuerySecurityAttributesToken);
+        SBIEDLL_HOOK(Ldr_, NtAccessCheckByType);
+        SBIEDLL_HOOK(Ldr_, NtAccessCheck);
+        SBIEDLL_HOOK(Ldr_, NtAccessCheckByTypeResultList);
+        SBIEDLL_HOOK(Ldr_, NtQueryInformationToken);
+    }
+    
+    if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
+        if (DLL_IMAGE_GOOGLE_CHROME == Dll_ImageType) {
+            SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
+        }
     }
 
     //
@@ -279,11 +436,6 @@ _FX BOOLEAN Secure_Init(void)
             Secure_IsInternetExplorerTabProcess = TRUE;
     }
 
-    //
-    // install hooks to fake administrator privileges
-    //
-
-    Secure_FakeAdmin = Config_GetSettingsForImageName_bool(L"FakeAdminRights", FALSE);
 
     RtlQueryElevationFlags =
         GetProcAddress(Dll_Ntdll, "RtlQueryElevationFlags");
@@ -346,6 +498,23 @@ _FX BOOLEAN Secure_Init(void)
     }
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_OpenProcess
+//---------------------------------------------------------------------------
+
+
+_FX HANDLE SbieDll_OpenProcess(ACCESS_MASK DesiredAccess, HANDLE idProcess)
+{
+    HANDLE hProcess = OpenProcess(DesiredAccess, FALSE, (DWORD)(UINT_PTR)idProcess);
+    if (! hProcess) {
+        if (!Dll_CompartmentMode) // NoDriverAssist
+        if (! NT_SUCCESS(SbieApi_OpenProcess(&hProcess, (HANDLE)idProcess)))
+            hProcess = NULL;
+    }
+    return hProcess;
 }
 
 
@@ -746,7 +915,61 @@ _FX NTSTATUS Secure_NtSetSecurityObject(
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Secure_NtQueryInformationToken(
+_FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal, BOOLEAN bImpersonate)
+{
+    if (Dll_OsBuild < 9600) // this magic values are available only from windows 8.1 onwards
+        return;
+
+    // OriginalToken BEGIN
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+        return;
+    // OriginalToken END
+
+    BOOLEAN bDuplicate = FALSE;
+    if ((LONG_PTR)token == LDR_TOKEN_PRIMARY) {
+        NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), hTokenReal);
+        bDuplicate = TRUE;
+    }
+    else if ((LONG_PTR)token == LDR_TOKEN_IMPERSONATION) {
+        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY, FALSE, hTokenReal);
+    }
+    else if ((LONG_PTR)token <= LDR_TOKEN_EFFECTIVE) {
+        NtOpenThreadToken(NtCurrentThread(), TOKEN_QUERY, FALSE, hTokenReal);
+        if (*hTokenReal == NULL) {
+            NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY | (bImpersonate ? TOKEN_DUPLICATE : 0), hTokenReal);
+            bDuplicate = TRUE;
+        }
+    }
+
+    //
+    // SeAccessCheckByType requires the token to eider be 
+    // an impersonation token of level SecurityIdentification or higher
+    // or a pseudo handle, hence we have to convert the token here
+    //
+
+    if (bDuplicate && *hTokenReal != NULL) {
+
+        HANDLE hTokenRealImp = NULL;
+        OBJECT_ATTRIBUTES objattrs;
+        SECURITY_QUALITY_OF_SERVICE QoS;
+
+        InitializeObjectAttributes(&objattrs, NULL, 0, NULL, NULL);
+        QoS.Length = sizeof(SECURITY_QUALITY_OF_SERVICE);
+        QoS.ImpersonationLevel = SecurityImpersonation;
+        QoS.ContextTrackingMode = SECURITY_STATIC_TRACKING;
+        QoS.EffectiveOnly = FALSE;
+        objattrs.SecurityQualityOfService = &QoS;
+
+        if (NT_SUCCESS(NtDuplicateToken(*hTokenReal, MAXIMUM_ALLOWED, &objattrs, FALSE, TokenImpersonation, &hTokenRealImp))) {
+
+            NtClose(*hTokenReal);
+
+            *hTokenReal = hTokenRealImp;
+        }
+    }
+}
+
+_FX NTSTATUS Ldr_NtQueryInformationToken(
     HANDLE TokenHandle,
     TOKEN_INFORMATION_CLASS TokenInformationClass,
     void *TokenInformation,
@@ -755,21 +978,32 @@ _FX NTSTATUS Secure_NtQueryInformationToken(
 {
     NTSTATUS status = 0;
     THREAD_DATA *TlsData = NULL;
+    HANDLE hTokenReal = NULL;
+    BOOLEAN FakeAdmin = FALSE;
 
+    Ldr_TestToken(TokenHandle, &hTokenReal, FALSE);
 
     status = __sys_NtQueryInformationToken(
-        TokenHandle, TokenInformationClass,
+        hTokenReal ? hTokenReal : TokenHandle, TokenInformationClass,
         TokenInformation, TokenInformationLength, ReturnLength);
 
-    if (!Secure_Is_IE_NtQueryInformationToken)
+    //
+    // To make the process think we need to chage here a few values
+    // we also ensure that tha token belongs to the current process
+    //
+
+    if (Secure_FakeAdmin && (SbieApi_QueryProcessInfoEx(0, 'ippt', (LONG_PTR)(hTokenReal ? hTokenReal : TokenHandle))))
     {
-        return status;
+        FakeAdmin = TRUE;
     }
 
-    TlsData = Dll_GetTlsData(NULL);
+    if (hTokenReal)
+    {
+        NtClose(hTokenReal);
+    }
 
     //
-    // NtQueryInformationToken is hooked only for Internet Explorer.
+    // NtQueryInformationToken is hooked for Internet Explorer.
     //
     // if the check occurs during CreateProcess, then return the real
     // information, so UAC elevation may occur for the new process.
@@ -778,9 +1012,21 @@ _FX NTSTATUS Secure_NtQueryInformationToken(
     // we are running as Administrator
     //
 
-    if (NT_SUCCESS(status) && (! TlsData->proc_create_process)) {
+    TlsData = Dll_GetTlsData(NULL);
 
-        if (TokenInformationClass == TokenElevationType) {
+    if (Secure_Is_IE_NtQueryInformationToken && !TlsData->proc_create_process)
+    {
+        FakeAdmin = TRUE;
+    }
+
+    if (NT_SUCCESS(status) && FakeAdmin) {
+
+        if (TokenInformationClass == TokenElevation) {
+
+            *(BOOLEAN *)TokenInformation = TRUE;
+        }
+
+        else if (TokenInformationClass == TokenElevationType) {
 
             //
             // on Vista, fake a return value for a full token
@@ -789,7 +1035,7 @@ _FX NTSTATUS Secure_NtQueryInformationToken(
             *(ULONG *)TokenInformation = TokenElevationTypeFull;
         }
 
-        if (TokenInformationClass == TokenIntegrityLevel) {
+        else if (TokenInformationClass == TokenIntegrityLevel) {
 
             //
             // on Vista, fake a high integrity level
@@ -814,12 +1060,12 @@ _FX NTSTATUS Secure_NtQueryInformationToken(
                 TOKEN_INTEGRITY_LEVEL *Info =
                     (TOKEN_INTEGRITY_LEVEL *)TokenInformation;
 
-                Info->Pointer       = (ULONG_PTR)TokenInformation
-                                    + sizeof(ULONG_PTR) * 2;
-                Info->Sixty         = 0x60;
-                Info->OneOhOne      = 0x101;
-                Info->HighBitSet    = 0x10000000;
-                Info->ThreeK        = 0x3000;
+                Info->Pointer = (ULONG_PTR)TokenInformation
+                    + sizeof(ULONG_PTR) * 2;
+                Info->Sixty = 0x60;
+                Info->OneOhOne = 0x101;
+                Info->HighBitSet = 0x10000000;
+                Info->ThreeK = 0x3000;
 
                 if (ReturnLength)
                     *ReturnLength = sizeof(TOKEN_INTEGRITY_LEVEL);
@@ -828,6 +1074,115 @@ _FX NTSTATUS Secure_NtQueryInformationToken(
     }
 
     return status;
+}
+
+_FX NTSTATUS Ldr_NtQuerySecurityAttributesToken(HANDLE TokenHandle, PUNICODE_STRING Attributes, ULONG NumberOfAttributes, PVOID Buffer, ULONG Length, PULONG ReturnLength)
+{
+    NTSTATUS status = 0;
+    HANDLE hTokenReal = NULL;
+
+    Ldr_TestToken(TokenHandle, &hTokenReal, FALSE);
+
+    status = __sys_NtQuerySecurityAttributesToken(hTokenReal ? hTokenReal : TokenHandle, Attributes, NumberOfAttributes, Buffer, Length, ReturnLength);
+
+    if (hTokenReal) {
+        NtClose(hTokenReal);
+    }
+    return status;
+}
+
+
+NTSTATUS Ldr_NtAccessCheckByType(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID PrincipalSelfSid, HANDLE ClientToken, ACCESS_MASK DesiredAccess, POBJECT_TYPE_LIST ObjectTypeList, ULONG ObjectTypeListLength, PGENERIC_MAPPING GenericMapping, PPRIVILEGE_SET PrivilegeSet, PULONG PrivilegeSetLength, PACCESS_MASK GrantedAccess, PNTSTATUS AccessStatus)
+{
+    NTSTATUS rc;
+    HANDLE hTokenReal = NULL;
+
+    // todo: is that right? seams wrong 
+    if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_BITS ||
+        Dll_ImageType == DLL_IMAGE_SANDBOXIE_WUAU ||
+        Dll_ImageType == DLL_IMAGE_WUAUCLT) {
+        *GrantedAccess = 0xFFFFFFFF;
+        *AccessStatus = TRUE;
+        SetLastError(0);
+        return TRUE;
+    }
+    
+    Ldr_TestToken(ClientToken, &hTokenReal, TRUE);
+
+    rc = __sys_NtAccessCheckByType(SecurityDescriptor, PrincipalSelfSid, hTokenReal ? hTokenReal : ClientToken, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus);
+
+    if (hTokenReal) {
+        NtClose(hTokenReal);
+    }
+
+    return rc;
+}
+
+
+_FX NTSTATUS Ldr_NtAccessCheck(PSECURITY_DESCRIPTOR SecurityDescriptor, HANDLE ClientToken, ACCESS_MASK DesiredAccess, PGENERIC_MAPPING GenericMapping, PPRIVILEGE_SET RequiredPrivilegesBuffer, PULONG BufferLength, PACCESS_MASK GrantedAccess, PNTSTATUS AccessStatus)
+{
+    NTSTATUS status = 0;
+    HANDLE hTokenReal = NULL;
+
+    if (Secure_FakeAdmin && SecurityDescriptor) {
+        BOOLEAN Fake = FALSE;
+
+        PSID Group, Owner;
+        BOOLEAN Dummy1, Dummy2;
+        if (NT_SUCCESS(RtlGetGroupSecurityDescriptor(SecurityDescriptor, &Group, &Dummy1))
+         && NT_SUCCESS(RtlGetOwnerSecurityDescriptor(SecurityDescriptor, &Owner, &Dummy2))) {
+            Fake = RtlEqualSid(Group, AdministratorsSid) || RtlEqualSid(Owner, AdministratorsSid);
+        }
+
+        if (Fake) {
+            *GrantedAccess = 1;
+            *AccessStatus = 0;
+            return STATUS_SUCCESS;
+        }
+    }
+
+    Ldr_TestToken(ClientToken, &hTokenReal, TRUE);
+
+    status = __sys_NtAccessCheck(SecurityDescriptor, hTokenReal ? hTokenReal : ClientToken, DesiredAccess, GenericMapping, RequiredPrivilegesBuffer, BufferLength, GrantedAccess, AccessStatus);
+    
+    if (hTokenReal) {
+        NtClose(hTokenReal);
+    }
+    return status;
+}
+
+_FX NTSTATUS Ldr_NtAccessCheckByTypeResultList(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID PrincipalSelfSid, HANDLE ClientToken, ACCESS_MASK  DesiredAccess, POBJECT_TYPE_LIST ObjectTypeList, ULONG ObjectTypeListLength, PGENERIC_MAPPING GenericMapping, PPRIVILEGE_SET PrivilegeSet, PULONG PrivilegeSetLength, PACCESS_MASK GrantedAccess, PNTSTATUS AccessStatus)
+{
+    NTSTATUS status = 0;
+    HANDLE hTokenReal = NULL;
+
+    Ldr_TestToken(ClientToken, &hTokenReal, TRUE);
+
+    status = __sys_NtAccessCheckByTypeResultList(SecurityDescriptor, PrincipalSelfSid, ClientToken, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus);
+
+    if (hTokenReal) {
+        NtClose(hTokenReal);
+    }
+    return status;
+}
+
+BOOL Ldr_NtOpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL OpenAsSelf, PHANDLE TokenHandle)
+{
+    BOOL rc;
+
+    rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, TokenHandle);
+    if (rc == STATUS_ACCESS_DENIED && OpenAsSelf) {
+        rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, 0, TokenHandle);
+    }
+    return rc;
+}
+
+BOOL Ldr_RtlEqualSid(void * sid1, void * sid2)
+{
+    if (!sid1 || !sid2) {
+        return FALSE;
+    }
+    return __sys_RtlEqualSid(sid1, sid2);
 }
 
 
@@ -873,6 +1228,73 @@ _FX NTSTATUS Secure_NtAdjustPrivilegesToken(
         BufferLength, PreviousState, ReturnLength);
     if (status == STATUS_NOT_ALL_ASSIGNED)
         status = STATUS_SUCCESS;
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_NtDuplicateToken
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Secure_NtDuplicateToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ACCESS_MASK DesiredAccess,
+    _In_opt_ POBJECT_ATTRIBUTES ObjectAttributes,
+    _In_ BOOLEAN EffectiveOnly,
+    _In_ TOKEN_TYPE TokenType,
+    _Out_ PHANDLE NewTokenHandle)
+{
+    //
+    // on windows 11 MSIServer fails to duplicte its impersonation token when using it
+    // so we drop the impersonation, do the duplication and re impersonate
+    //
+
+    HANDLE hToken = NULL;
+    NtOpenThreadToken(NtCurrentThread(), MAXIMUM_ALLOWED, TRUE, &hToken);
+    HANDLE hNull = NULL;
+    NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hNull, sizeof(HANDLE));
+
+    ULONG status = __sys_NtDuplicateToken(
+        ExistingTokenHandle, DesiredAccess, ObjectAttributes,
+        EffectiveOnly, TokenType, NewTokenHandle);
+    
+    if (hToken) {
+        NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));
+        NtClose(hToken);
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_NtFilterToken
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Secure_NtFilterToken(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _Out_ PHANDLE NewTokenHandle)
+{
+    HANDLE hToken = NULL;
+    NtOpenThreadToken(NtCurrentThread(), MAXIMUM_ALLOWED, TRUE, &hToken);
+    HANDLE hNull = NULL;
+    NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hNull, sizeof(HANDLE));
+
+    ULONG status = __sys_NtFilterToken(
+        ExistingTokenHandle, Flags, SidsToDisable,
+        PrivilegesToDelete, RestrictedSids, NewTokenHandle);
+
+    if (hToken) {
+        NtSetInformationThread(NtCurrentThread(), ThreadImpersonationToken, &hToken, sizeof(HANDLE));
+        NtClose(hToken);
+    }
+
     return status;
 }
 
@@ -987,19 +1409,7 @@ NTSTATUS Secure_RtlCheckTokenMembershipEx(
     DWORD flags,
     PUCHAR isMember)
 {
-
-    static UCHAR AdministratorsSid[16] = {
-        1,                                      // Revision
-        2,                                      // SubAuthorityCount
-        0,0,0,0,0,5, // SECURITY_NT_AUTHORITY   // IdentifierAuthority
-        0x20, 0, 0, 0,   // SubAuthority 1 - SECURITY_BUILTIN_DOMAIN_RID
-        0x20, 2, 0, 0    // SubAuthority 2 - DOMAIN_ALIAS_RID_ADMINS
-    };
-
-    typedef BOOL (*P_EqualSid)(PSID pSid1, PSID pSid2);
-    extern P_EqualSid __sys_RtlEqualSid;
-
-    if (Secure_FakeAdmin && __sys_RtlEqualSid && __sys_RtlEqualSid(sidToCheck, AdministratorsSid)) {
+    if (Secure_FakeAdmin && RtlEqualSid(sidToCheck, AdministratorsSid)) {
         if (isMember) *isMember = TRUE;
         return STATUS_SUCCESS;
     }
@@ -1086,6 +1496,54 @@ _FX BOOLEAN Secure_IsRestrictedToken(BOOLEAN CheckThreadToken)
 
 
 //---------------------------------------------------------------------------
+// Secure_IsTokenLocalSystem
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Secure_IsTokenLocalSystem(HANDLE hToken)
+{
+    NTSTATUS status;
+    BOOLEAN return_value = FALSE;
+
+    ULONG64 user_space[88];
+    PTOKEN_USER user = (PTOKEN_USER)user_space;
+    ULONG len;
+
+    len = sizeof(user_space);
+    status = NtQueryInformationToken(
+                        hToken, TokenUser, user, len, &len);
+
+    if (status == STATUS_BUFFER_TOO_SMALL) {
+
+        user = Dll_AllocTemp(len);
+        status = NtQueryInformationToken(
+                        hToken, TokenUser, user, len, &len);
+    }
+
+    if (NT_SUCCESS(status)) {
+
+        UNICODE_STRING SidString;
+
+        status = RtlConvertSidToUnicodeString(
+            &SidString, user->User.Sid, TRUE);
+
+        if (NT_SUCCESS(status)) {
+
+            if (_wcsicmp(SidString.Buffer, L"S-1-5-18") == 0)
+                return_value = TRUE;
+
+            RtlFreeUnicodeString(&SidString);
+        }
+    }
+
+    if (user != (PTOKEN_USER)user_space)
+        Dll_Free(user);
+
+    return return_value;
+}
+
+
+//---------------------------------------------------------------------------
 // Secure_IsLocalSystemToken
 //---------------------------------------------------------------------------
 
@@ -1119,39 +1577,7 @@ _FX BOOLEAN Secure_IsLocalSystemToken(BOOLEAN CheckThreadToken)
 
     if (NT_SUCCESS(status)) {
 
-        ULONG64 user_space[8];
-        PTOKEN_USER user = (PTOKEN_USER)user_space;
-        ULONG len;
-
-        len = sizeof(user_space);
-        status = NtQueryInformationToken(
-                            hToken, TokenUser, user, len, &len);
-
-        if (status == STATUS_BUFFER_TOO_SMALL) {
-
-            user = Dll_AllocTemp(len);
-            status = NtQueryInformationToken(
-                            hToken, TokenUser, user, len, &len);
-        }
-
-        if (NT_SUCCESS(status)) {
-
-            UNICODE_STRING SidString;
-
-            status = RtlConvertSidToUnicodeString(
-                &SidString, user->User.Sid, TRUE);
-
-            if (NT_SUCCESS(status)) {
-
-                if (_wcsicmp(SidString.Buffer, L"S-1-5-18") == 0)
-                    return_value = TRUE;
-
-                RtlFreeUnicodeString(&SidString);
-            }
-        }
-
-        if (user != (PTOKEN_USER)user_space)
-            Dll_Free(user);
+        return_value = Secure_IsTokenLocalSystem(hToken);
 
         NtClose(hToken);
     }
@@ -1182,6 +1608,22 @@ _FX BOOLEAN Secure_IsSameBox(HANDLE idProcess)
 
 
 //---------------------------------------------------------------------------
+// Secure_IsBuiltInAdmin
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Secure_IsBuiltInAdmin()
+{
+    // Check if this is the built in administrator account its SID is always: S-1-5-21-domain-500
+    if (_wcsnicmp(Dll_SidString, L"S-1-5-21-", 9) != 0)
+        return FALSE;
+    if (Dll_SidStringLen < 4 || _wcsnicmp(Dll_SidString + Dll_SidStringLen - 4, L"-500", 4) != 0)
+        return FALSE;
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
 //
 // Support for UAC Elevation
 //
@@ -1192,7 +1634,7 @@ _FX BOOLEAN Secure_IsSameBox(HANDLE idProcess)
 //---------------------------------------------------------------------------
 
 
-typedef struct _RPC_ASYNC_STATE {
+/*typedef struct _RPC_ASYNC_STATE {
 
     unsigned int    Size; // size of this structure
     unsigned long   Signature;
@@ -1206,7 +1648,7 @@ typedef struct _RPC_ASYNC_STATE {
     ULONG           NotificationType;
     HANDLE          hEvent;
 
-} RPC_ASYNC_STATE, *PRPC_ASYNC_STATE;
+} RPC_ASYNC_STATE, *PRPC_ASYNC_STATE;*/
 
 
 typedef struct _SECURE_UAC_ARGS {
@@ -1260,66 +1702,6 @@ typedef struct _SECURE_UAC_PACKET {
 
 
 //---------------------------------------------------------------------------
-// Functions
-//---------------------------------------------------------------------------
-
-
-#ifdef _WIN64
-
-extern ULONG_PTR __cdecl Secure_Ndr64AsyncClientCall(
-    void *pProxyInfo, ULONG nProcNum, void *pReturnValue, ...);
-
-#else
-
-extern ULONG_PTR __cdecl Secure_NdrAsyncClientCall(
-    void *pStubDescriptor, void *pFormat, ULONG_PTR *Args);
-
-#endif _WIN64
-
-#ifdef _WIN64
-
-BOOLEAN __cdecl Secure_CheckElevation64(
-    PVOID* pProxyInfo, ULONG nProcNum, void* pReturnValue, va_list vl);
-
-#endif _WIN64
-
-BOOLEAN __cdecl Secure_CheckElevation(
-    void *ReturnAddressFromNdrAsyncClientCall,
-    void *pStubDescriptor, void *pFormat, SECURE_UAC_ARGS *Args);
-
-ULONG_PTR __cdecl Secure_HandleElevation(
-    void *pStubDescriptor, void *pFormat, SECURE_UAC_ARGS *Args);
-
-static ULONG_PTR Secure_RpcAsyncCompleteCall(
-    RPC_ASYNC_STATE *AsyncState, void *Reply);
-
-
-//---------------------------------------------------------------------------
-
-
-typedef ULONG_PTR (__cdecl *P_NdrAsyncClientCall)(
-    void *pStubDescriptor, void *pFormat, ULONG_PTR *Args);
-
-typedef ULONG_PTR (__cdecl *P_Ndr64AsyncClientCall)(
-    void *pProxyInfo, ULONG nProcNum, void *pReturnValue, ...);
-
-typedef ULONG_PTR (*P_RpcAsyncCompleteCall)(
-    RPC_ASYNC_STATE *AsyncState, void *Reply);
-
-
-//---------------------------------------------------------------------------
-
-
-#ifdef _WIN64
-        P_Ndr64AsyncClientCall  __sys_Ndr64AsyncClientCall          = NULL;
-#else
-        P_NdrAsyncClientCall    __sys_NdrAsyncClientCall            = NULL;
-#endif _WIN64
-
-static  P_RpcAsyncCompleteCall  __sys_RpcAsyncCompleteCall          = NULL;
-
-
-//---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
 
@@ -1333,101 +1715,14 @@ static BOOLEAN Secure_Elevation_HookDisabled = FALSE;
 
 
 //---------------------------------------------------------------------------
-// Secure_Init_Elevation
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN Secure_Init_Elevation(HMODULE module)
-{
-#ifdef _WIN64
-    void *Ndr64AsyncClientCall;
-#else
-    void *NdrAsyncClientCall;
-#endif _WIN64
-    void *RpcAsyncCompleteCall;
-
-    if (Dll_OsBuild < 6000) {
-
-        //
-        // earlier than Windows Vista, no UAC
-        //
-
-        return TRUE;
-    }
-
-    RpcAsyncCompleteCall = (P_RpcAsyncCompleteCall)
-        Ldr_GetProcAddrNew(DllName_rpcrt4, L"RpcAsyncCompleteCall","RpcAsyncCompleteCall");
-
-#ifdef _WIN64
-
-    Ndr64AsyncClientCall = (P_Ndr64AsyncClientCall)
-        Ldr_GetProcAddrNew(DllName_rpcrt4, L"Ndr64AsyncClientCall","Ndr64AsyncClientCall");
-
-    SBIEDLL_HOOK(Secure_,Ndr64AsyncClientCall);
-
-    //NdrAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
-    //Ndr64AsyncClientCall(MIDL_STUBLESS_PROXY_INFO* pProxyInfo, unsigned int nProcNum, void* pReturnValue, ...) <- hook
-
-    //NdrDcomAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
-    //Ndr64DcomAsyncClientCall(MIDL_STUBLESS_PROXY_INFO* pProxyInfo, unsigned int nProcNum, void* pReturnValue, ...)
-
-#else ! _WIN64
-
-    NdrAsyncClientCall = (P_NdrAsyncClientCall)
-        Ldr_GetProcAddrNew(DllName_rpcrt4, L"NdrAsyncClientCall","NdrAsyncClientCall");
-
-    SBIEDLL_HOOK(Secure_,NdrAsyncClientCall);
-
-    //NdrAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...) <- hook
-    //NdrAsyncClientCall2(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...) -> NdrAsyncClientCall
-
-    //NdrDcomAsyncClientCall(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)
-    //NdrDcomAsyncClientCall2(PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, ...)->NdrDcomAsyncClientCall
-
-#endif _WIN64
-
-    SBIEDLL_HOOK(Secure_,RpcAsyncCompleteCall);
-
-    return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
 // Secure_CheckElevation
 //---------------------------------------------------------------------------
 
-#ifdef _WIN64
 
-ALIGNED BOOLEAN __cdecl Secure_CheckElevation64(
-    PVOID* pProxyInfo, ULONG nProcNum, void* pReturnValue, va_list vl)
+ALIGNED BOOLEAN __cdecl Secure_CheckElevation( 
+    /*void* ReturnAddressFromNdrAsyncClientCall,
+    PMIDL_STUB_DESC pStubDescriptor, void* pFormat,*/ SECURE_UAC_ARGS* Args)
 {
-    void* ReturnAddress = NULL;
-    void* pStubDescriptor = NULL;
-    __try {
-        ReturnAddress = *(__int64**)(vl - (4 * 8));
-        pStubDescriptor = *pProxyInfo;
-    } __except (EXCEPTION_EXECUTE_HANDLER) {}
-
-    return Secure_CheckElevation(ReturnAddress, pStubDescriptor, NULL, vl);
-}
-
-#endif _WIN64
-
-extern BOOLEAN g_rpc_client_hooks;
-void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, VOID* pStubDescriptor);
-
-ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
-    void *ReturnAddressFromNdrAsyncClientCall,
-    void *pStubDescriptor, void *pFormat, SECURE_UAC_ARGS *Args)
-{
-    if (g_rpc_client_hooks) {
-#ifdef _WIN64
-        RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor);
-#else
-        RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddressFromNdrAsyncClientCall, pStubDescriptor);
-#endif
-    }
-
     static UCHAR elevation_binding_1[16] = {
         0x9A, 0xF9, 0x1E, 0x20, 0xA0, 0x7F, 0x4C, 0x44,
         0x93, 0x99, 0x19, 0xBA, 0x84, 0xF1, 0x2A, 0x1A };
@@ -1488,7 +1783,8 @@ ALIGNED BOOLEAN __cdecl Secure_CheckElevation(
             __leave;
         if (AsyncState->NotificationType != RpcNotificationTypeEvent)
             __leave;
-        if (! AsyncState->hEvent)
+        //if (! AsyncState->hEvent)
+        if (!AsyncState->u.hEvent)
             __leave;
 
         //
@@ -1628,7 +1924,8 @@ ALIGNED ULONG_PTR __cdecl Secure_HandleElevation(
     pkt->len = pkt_len;
     pkt->inv_len = ~pkt->len;
 
-    pkt->hEvent = (ULONG64)(ULONG_PTR)Secure_Elevation_AsyncState->hEvent;
+    //pkt->hEvent = (ULONG64)(ULONG_PTR)Secure_Elevation_AsyncState->hEvent;
+    pkt->hEvent = (ULONG64)(ULONG_PTR)Secure_Elevation_AsyncState->u.hEvent;
     pkt->hResult = 0;
     pkt->ret_code = ERROR_CANCELLED;
 
@@ -1693,11 +1990,11 @@ ALIGNED ULONG_PTR __cdecl Secure_HandleElevation(
 //---------------------------------------------------------------------------
 
 
-ALIGNED ULONG_PTR Secure_RpcAsyncCompleteCall(
+ALIGNED BOOLEAN Secure_RpcAsyncCompleteCall(
     RPC_ASYNC_STATE *AsyncState, void *Reply)
 {
     if (AsyncState != Secure_Elevation_AsyncState)
-        return __sys_RpcAsyncCompleteCall(AsyncState, Reply);
+        return FALSE;
 
     //
     // Start.exe posted the event referenced by pkt->hEvent (actually
@@ -1716,7 +2013,7 @@ ALIGNED ULONG_PTR Secure_RpcAsyncCompleteCall(
     Secure_Elevation_AsyncState = NULL;
     Secure_Elevation_Type = 0;
 
-    return 0;
+    return TRUE;
 }
 
 

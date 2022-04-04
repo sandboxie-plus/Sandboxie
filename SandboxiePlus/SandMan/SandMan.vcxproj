@@ -121,7 +121,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -146,7 +146,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -167,7 +167,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -191,19 +191,22 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
-      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QSbieAPI.lib;MiscHelpers.lib;ntdll.lib;QtSingleApp.lib;UGlobalHotkey.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoxJob.cpp" />
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
     <ClCompile Include="Helpers\FindTool.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Models\MonitorModel.cpp" />
     <ClCompile Include="Models\TraceModel.cpp" />
     <ClCompile Include="Models\SbieModel.cpp" />
     <ClCompile Include="SandMan.cpp" />
     <ClCompile Include="SbiePlusAPI.cpp" />
+    <ClCompile Include="SbieProcess.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -212,14 +215,28 @@
     </ClCompile>
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Views\TraceView.cpp" />
+    <ClCompile Include="Windows\FileBrowserWindow.cpp" />
     <ClCompile Include="Windows\NewBoxWindow.cpp" />
+    <ClCompile Include="Windows\OptionsAccess.cpp" />
+    <ClCompile Include="Windows\OptionsAdvanced.cpp" />
+    <ClCompile Include="Windows\OptionsForce.cpp" />
+    <ClCompile Include="Windows\OptionsGeneral.cpp" />
+    <ClCompile Include="Windows\OptionsGrouping.cpp" />
+    <ClCompile Include="Windows\OptionsNetwork.cpp" />
+    <ClCompile Include="Windows\OptionsRecovery.cpp" />
+    <ClCompile Include="Windows\OptionsStart.cpp" />
+    <ClCompile Include="Windows\OptionsStop.cpp" />
+    <ClCompile Include="Windows\OptionsTemplates.cpp" />
     <ClCompile Include="Windows\OptionsWindow.cpp" />
     <ClCompile Include="Windows\PopUpWindow.cpp" />
     <ClCompile Include="Windows\RecoveryWindow.cpp" />
+    <ClCompile Include="Windows\SelectBoxWindow.cpp" />
     <ClCompile Include="Windows\SettingsWindow.cpp" />
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\FileBrowserWindow.h" />
+    <QtMoc Include="Windows\SelectBoxWindow.h" />
     <QtMoc Include="Views\TraceView.h" />
     <QtMoc Include="Windows\NewBoxWindow.h" />
     <QtMoc Include="Windows\RecoveryWindow.h" />
@@ -232,10 +249,13 @@
     <QtMoc Include="Models\SbieModel.h" />
     <QtMoc Include="Models\TraceModel.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
+    <QtMoc Include="BoxJob.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
+    <QtMoc Include="Models\MonitorModel.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
+    <QtMoc Include="SbieProcess.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -247,24 +267,32 @@
     <Image Include="Resources\SandMan.ico" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Forms\FileBrowserWindow.ui" />
     <QtUic Include="Forms\NewBoxWindow.ui" />
     <QtUic Include="Forms\OptionsWindow.ui" />
     <QtUic Include="Forms\PopUpWindow.ui" />
     <QtUic Include="Forms\RecoveryWindow.ui" />
+    <QtUic Include="Forms\SelectBoxWindow.ui" />
     <QtUic Include="Forms\SettingsWindow.ui" />
     <QtUic Include="Forms\SnapshotsWindow.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finder.cur" />
+    <None Include="sandman_cs.ts" />
     <None Include="sandman_de.ts" />
+    <None Include="sandman_en.ts" />
     <None Include="sandman_es.ts" />
+    <None Include="sandman_fr.ts" />
     <None Include="sandman_it.ts" />
+    <None Include="sandman_nl.ts" />
     <None Include="sandman_pl.ts" />
-    <None Include="sandman_pt.ts" />
+    <None Include="sandman_pt_BR.ts" />
+    <None Include="sandman_pt_PT.ts" />
     <None Include="sandman_ru.ts" />
     <None Include="sandman_tr.ts" />
-    <None Include="sandman_zh-TW.ts" />
-    <None Include="sandman_zh-CN.ts" />
+    <None Include="sandman_uk.ts" />
+    <None Include="sandman_zh_TW.ts" />
+    <None Include="sandman_zh_CN.ts" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SandMan.rc" />

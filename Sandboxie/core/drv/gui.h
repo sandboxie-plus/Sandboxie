@@ -34,7 +34,9 @@
 
 BOOLEAN Gui_Init(void);
 
+#ifdef XP_SUPPORT
 void Gui_Unload(void);
+#endif
 
 BOOLEAN Gui_InitProcess(PROCESS *proc);
 

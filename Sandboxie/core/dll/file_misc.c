@@ -506,6 +506,7 @@ _FX ULONG File_GetTempPathW(ULONG nBufferLength, WCHAR *lpBuffer)
     return rc;
 }
 
+//BOOLEAN RpcRt_TestCallingModule(ULONG_PTR pRetAddr, ULONG_PTR hModule);
 
 BOOL File_WriteProcessMemory(
     HANDLE hProcess,
@@ -519,6 +520,7 @@ BOOL File_WriteProcessMemory(
     //
 
     if (lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
+    //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
     {
         if (lpNumberOfBytesWritten)
         {

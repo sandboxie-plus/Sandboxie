@@ -72,8 +72,6 @@ struct _KEY_MOUNT {
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Key_InitPaths(PROCESS *proc);
-
 static NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2);
 
 static BOOLEAN Key_MountHive2(PROCESS *proc, KEY_MOUNT *mount);
@@ -108,7 +106,9 @@ NTSTATUS Key_Api_SetLowLabel(PROCESS *proc, ULONG64 *parms);
 static LIST Key_Mounts;
 static PERESOURCE Key_MountsLock = NULL;
 
+#ifdef XP_SUPPORT
 static BOOLEAN Key_Have_KB979683 = FALSE;
+#endif
 
 const WCHAR *Key_Registry_Machine = L"\\REGISTRY\\MACHINE";
 
@@ -128,9 +128,11 @@ static BOOLEAN Key_NeverUnmountHives = FALSE;
 //---------------------------------------------------------------------------
 
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 #include "key_xp.c"
 #endif _WIN64
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -149,6 +151,7 @@ _FX BOOLEAN Key_Init(void)
 
     P_Key_Init_2 p_Key_Init_2 = Key_Init_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -157,6 +160,7 @@ _FX BOOLEAN Key_Init(void)
     }
 
 #endif ! _WIN64
+#endif
 
     if (! p_Key_Init_2())
         return FALSE;
@@ -198,6 +202,7 @@ _FX void Key_Unload(void)
 
     P_Key_Unload_2 p_Key_Unload_2 = Key_Unload_Filter;
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     if (Driver_OsVersion < DRIVER_WINDOWS_VISTA) {
@@ -206,6 +211,7 @@ _FX void Key_Unload(void)
     }
 
 #endif ! _WIn64
+#endif
 
     p_Key_Unload_2();
 
@@ -224,24 +230,71 @@ _FX void Key_Unload(void)
 
 _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 {
+#ifdef USE_MATCH_PATH_EX
+    static const WCHAR *_NormalPath = L"NormalKeyPath";
+#endif
     static const WCHAR *_OpenPath = L"OpenKeyPath";
+    static const WCHAR *_OpenConf = L"OpenConfPath";
     static const WCHAR *_ClosedPath = L"ClosedKeyPath";
     static const WCHAR *_ReadPath = L"ReadKeyPath";
     static const WCHAR *_WritePath = L"WriteKeyPath";
+#ifdef USE_MATCH_PATH_EX
+    static const WCHAR *normalpaths[] = {
+        L"HKEY_LOCAL_MACHINE\\*",
+        //L"HKEY_CURRENT_USER\\software\\Microsoft\\*",
+        //L"HKEY_CURRENT_USER\\software\\WOW6432Node\\Microsoft\\*",
+        //L"\\REGISTRY\\USER\\*_Classes\\*",
+        NULL
+    };
+#endif
+
     BOOLEAN ok;
+
+#ifdef USE_MATCH_PATH_EX
+    ULONG i;
+
+    //
+    // normal paths
+    //
+
+    ok = Process_GetPaths(proc, &proc->normal_key_paths, _NormalPath, TRUE);
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+        return FALSE;
+    }
+
+    if (ok && proc->use_privacy_mode) {
+
+        for (i = 0; normalpaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, &proc->normal_key_paths, NULL, 
+                                    TRUE, normalpaths[i], FALSE);
+        }
+    }
+
+    if (!ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+        return FALSE;
+    }
+#endif
 
     //
     // open paths
     //
 
-    if (proc->image_from_box)
-        ok = TRUE;
-    else
+    ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenConf, TRUE);
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _OpenConf, proc->pid);
+        return FALSE;
+    }
+
+    if (! proc->dont_open_for_boxed || ! proc->image_from_box) {
+
         ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenPath, TRUE);
 
-    if (! ok) {
-        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
-        return FALSE;
+        if (! ok) {
+            Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
+            return FALSE;
+        }
     }
 
     //
@@ -258,8 +311,10 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // read-only paths (stored also as open paths)
     //
 
+#ifndef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, &proc->open_key_paths, _ReadPath, TRUE);
     if (ok)
+#endif
         ok = Process_GetPaths(proc, &proc->read_key_paths, _ReadPath, TRUE);
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
@@ -270,19 +325,20 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // write-only paths (stored also as closed paths)
     //
 
-    if (Driver_OsVersion >= DRIVER_WINDOWS_XP) {
-
-        ok = Process_GetPaths2(
-                proc, &proc->write_key_paths, &proc->closed_key_paths,
-                _WritePath, TRUE);
-        if (ok) {
-            ok = Process_GetPaths(
-                    proc, &proc->closed_key_paths, _WritePath, TRUE);
-        }
-        if (! ok) {
-            Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
-            return FALSE;
-        }
+#ifdef USE_MATCH_PATH_EX
+    ok = Process_GetPaths(proc, &proc->write_key_paths, _WritePath, TRUE);
+#else
+    ok = Process_GetPaths2(
+            proc, &proc->write_key_paths, &proc->closed_key_paths,
+            _WritePath, TRUE);
+    if (ok) {
+        ok = Process_GetPaths(
+                proc, &proc->closed_key_paths, _WritePath, TRUE);
+    }
+#endif
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
+        return FALSE;
     }
 
     //
@@ -352,7 +408,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
             if (*(ULONG *)Context & 1)
                 write_access = TRUE;
-
+#ifdef XP_SUPPORT
         } else if (Key_Have_KB979683) {
 
             //
@@ -363,7 +419,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
             if (*(((UCHAR *)Context) + 0x21) & 1)
                 write_access = TRUE;
-
+#endif
         } else      // Context is sent by NtCreateKey
             write_access = TRUE;
     }
@@ -377,8 +433,12 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
 
     if (! IsBoxedPath) {
 
+#ifdef USE_MATCH_PATH_EX
+        ULONG mp_flags;
+#else
         LIST *open_key_paths;
         BOOLEAN is_open, is_closed;
+#endif
 
         //
         // deny access in two cases:
@@ -387,6 +447,24 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
         //   and this is a write access
         //
 
+#ifdef USE_MATCH_PATH_EX
+        mp_flags = Process_MatchPathEx(proc, 
+            Name->Name.Buffer, Name->Name.Length / sizeof(WCHAR), L'k',
+            &proc->normal_key_paths, &proc->open_key_paths, &proc->closed_key_paths,
+            &proc->read_key_paths, &proc->write_key_paths, NULL);
+
+        //if ((mp_flags & (write_access ? TRUE_PATH_WRITE_FLAG : TRUE_PATH_READ_FLAG)) != 0) {
+        if ((mp_flags & TRUE_PATH_MASK) == 0 || (write_access && (mp_flags & TRUE_PATH_WRITE_FLAG) == 0)) {
+
+            if((mp_flags & COPY_PATH_WRITE_FLAG) != 0)
+                status = STATUS_OBJECT_NAME_NOT_FOUND;
+            else
+                status = STATUS_ACCESS_DENIED;
+
+            if ((mp_flags & TRUE_PATH_MASK) == 0)
+                ShouldMonitorAccess = TRUE;
+        }
+#else
         if (write_access)
             open_key_paths = &proc->open_key_paths;
         else
@@ -426,6 +504,7 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
                 ShouldMonitorAccess = TRUE;
             }
         }
+#endif
 
         //
         // when Software Restriction Policies is in effect, ADVAPI32 opens
@@ -468,19 +547,18 @@ _FX NTSTATUS Key_MyParseProc_2(OBJ_PARSE_PROC_ARGS_2)
             if (!IsBoxedPath) {
                 if (ShouldMonitorAccess == TRUE)
                     mon_type |= MONITOR_DENY;
-                else
+                else if(write_access)
                     mon_type |= MONITOR_OPEN;
             }
             if (!ShouldMonitorAccess)
                 mon_type |= MONITOR_TRACE;
 
-            swprintf(access_str, L"(K%c) %08X",
+            RtlStringCbPrintfW(access_str, sizeof(access_str), L"(K%c) %08X",
                 letter, AccessState->OriginalDesiredAccess);
             Log_Debug_Msg(mon_type, access_str, Name->Name.Buffer);
         }
     }
-
-    else if (ShouldMonitorAccess) {
+    else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor) {
 
         Session_MonitorPut(MONITOR_KEY | MONITOR_DENY, Name->Name.Buffer, proc->pid);
     }
@@ -1035,6 +1113,7 @@ unmount_loop:
         KeLowerIrql(irql);
     }
 
+#ifdef XP_SUPPORT
 #ifndef _WIN64
 
     //
@@ -1051,6 +1130,7 @@ unmount_loop:
     }
 
 #endif _WIN64
+#endif
 
     return status;
 }

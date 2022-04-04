@@ -354,6 +354,14 @@ SBIE2108 Faking successful completion for program '%2'
 # SBIE2110 Preparing WinSxS dependencies for '%2'
 # .
 
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 should not be updated while running under Sandboxie.
@@ -746,6 +754,10 @@ Remove command from command history
 
 3106;txt;01
 Select the sandbox in which to start the program or document.
+.
+
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
 .
 
 3111;txt;01
@@ -1200,7 +1212,7 @@ Getting Started &Tutorial
 .
 
 3454;txt;01
-Check For &Updates
+Check for &Updates
 .
 
 3455;txt;01
@@ -1251,6 +1263,10 @@ Run From Start &Menu
 Run &Windows Explorer
 .
 
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
 3471;txt;01
 &Terminate Programs
 .
@@ -1289,6 +1305,10 @@ Program &Settings
 
 3483;txt;01
 &Resource Access
+.
+
+3484;txt;01
+Resource Access
 .
 
 3485;txt;01
@@ -2878,6 +2898,14 @@ COM Access (OpenClsid)
 Sandboxed programs cannot communicate with COM objects that belong to programs running outside the sandbox, unless the COM class ID matches one of the following class IDs.
 .
 
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -3031,6 +3059,38 @@ Permit programs to update jump lists in the Windows 7 taskbar
 
 4295;txt;01
 Default exclusions File Migration presets
+.
+
+4296;txt;01
+Default RPC Port Bindings
+.
+
+4297;txt;01
+Open Bluetooth RPC port
+.
+
+4298;txt;01
+Open Smart Card RPC port
+.
+
+4299;txt;01
+Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
 .
 
 #----------------------------------------------------------------------------
@@ -3268,6 +3328,10 @@ Allow direct access to %2 preferences
 Allow direct access to %2 session management
 .
 
+4341;txt;01
+Allow direct access to %2 notes
+.
+
 4356;txt;02
 Allow direct access to %2 bookmarks
 .
@@ -3306,6 +3370,10 @@ Torrent Clients
 
 4397;txt;01
 The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
+.
+
+4398;txt;01
+Allow %2 direct access to the Music folder for easier music library management.
 .
 
 #----------------------------------------------------------------------------
@@ -3395,6 +3463,59 @@ Move &Down
 5154;txt;01
 Move &To
 .
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

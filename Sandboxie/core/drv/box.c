@@ -333,7 +333,7 @@ _FX BOOLEAN Box_InitPaths(POOL *pool, BOX *box)
     }
 
     // sometimes we get here without a user temp var being set.  Check first to avoid an error popup.
-    swprintf(KeyPath, L"\\REGISTRY\\USER\\%.184s\\Environment", box->sid);
+    RtlStringCbPrintfW(KeyPath, sizeof(KeyPath), L"\\REGISTRY\\USER\\%.184s\\Environment", box->sid);
     if (DoesRegValueExist(RTL_REGISTRY_ABSOLUTE, KeyPath, L"temp"))
         Box_ExpandString(box, L"%temp%", L"", &box->user_temp_path, &box->user_temp_path_len);
 

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,7 +21,9 @@
 //---------------------------------------------------------------------------
 
 
+#define NOGDI
 #include "dll.h"
+#include "obj.h"
 #include "core/svc/FileWire.h"
 #include "core/drv/api_defs.h"
 #include <stdio.h>
@@ -57,7 +60,7 @@
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Key_GetName(
+SBIEDLL_EXPORT NTSTATUS Key_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, BOOLEAN *OutIsBoxedPath);
 
@@ -256,7 +259,7 @@ NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 //---------------------------------------------------------------------------
 
 
-P_NtOpenKey                         __sys_NtOpenKey                 = NULL;
+       P_NtOpenKey                  __sys_NtOpenKey                 = NULL;
 static P_NtOpenKeyEx                __sys_NtOpenKeyEx               = NULL;
 static P_NtCreateKey                __sys_NtCreateKey               = NULL;
 static P_NtDeleteKey                __sys_NtDeleteKey               = NULL;
@@ -265,7 +268,7 @@ static P_NtSetValueKey              __sys_NtSetValueKey             = NULL;
 static P_NtQueryKey                 __sys_NtQueryKey                = NULL;
 static P_NtEnumerateKey             __sys_NtEnumerateKey            = NULL;
 static P_NtQueryValueKey            __sys_NtQueryValueKey           = NULL;
-static P_NtEnumerateValueKey        __sys_NtEnumerateValueKey       = NULL;
+       P_NtEnumerateValueKey        __sys_NtEnumerateValueKey       = NULL;
 static P_NtQueryMultipleValueKey    __sys_NtQueryMultipleValueKey   = NULL;
 static P_NtNotifyChangeKey          __sys_NtNotifyChangeKey         = NULL;
 static P_NtNotifyChangeMultipleKeys __sys_NtNotifyChangeMultipleKeys= NULL;
@@ -299,6 +302,9 @@ static const ULONG Key_ClickToRunLen_v16 = 63;
 
 
 static const WCHAR *Key_Wow6432Node = L"\\Wow6432Node\\";
+
+
+static BOOLEAN Key_UseObjectNames = FALSE;
 
 //---------------------------------------------------------------------------
 // Debug Prints
@@ -349,6 +355,8 @@ _FX BOOLEAN Key_Init(void)
     InitializeCriticalSection(&Key_Handles_CritSec);
 
     SbieDll_MatchPath(L'k', (const WCHAR *)-1);
+
+    Key_UseObjectNames = SbieApi_QueryConfBool(NULL, L"UseObjectNameForKeys", FALSE);
 
     List_Init(&Key_Handles);
     List_Init(&Key_MergeCacheList);
@@ -447,25 +455,55 @@ _FX NTSTATUS Key_GetName(
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-        status = __sys_NtQueryKey(
-            RootDirectory, KeyNameInformation, name, length, &length);
+        if (Key_UseObjectNames)
+        {
+            //
+            // Note: some keys like L"\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Perflib\\007"
+            // do not return valid results when querying using NtQueryKey and returns a STATUS_INVALID_HANDLE
+            // using Obj_GetObjectName seams to break sbie on 1803, strangely on w7 its fine
+            // hence this alternative access mode is made optional
+            //
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+            status = Obj_GetObjectName(RootDirectory, name, &length);
 
-            name = Dll_GetTlsNameBuffer(
-                        TlsData, TRUE_NAME_BUFFER, length + objname_len);
+            if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
+                name = Dll_GetTlsNameBuffer(
+                    TlsData, TRUE_NAME_BUFFER, length + objname_len);
+
+                status = Obj_GetObjectName(RootDirectory, name, &length);
+            }
+
+            if (!NT_SUCCESS(status))
+                return status;
+
+            *OutTruePath = ((OBJECT_NAME_INFORMATION*)name)->Name.Buffer;
+
+            name = (*OutTruePath)
+                + ((OBJECT_NAME_INFORMATION*)name)->Name.Length / sizeof(WCHAR);
+        }
+        else
+        {
             status = __sys_NtQueryKey(
                 RootDirectory, KeyNameInformation, name, length, &length);
+
+            if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
+
+                name = Dll_GetTlsNameBuffer(
+                            TlsData, TRUE_NAME_BUFFER, length + objname_len);
+
+                status = __sys_NtQueryKey(
+                    RootDirectory, KeyNameInformation, name, length, &length);
+            }
+
+            if (! NT_SUCCESS(status))
+                return status;
+
+            *OutTruePath = ((KEY_NAME_INFORMATION *)name)->Name;
+
+            name = (*OutTruePath)
+                 + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
         }
-
-        if (! NT_SUCCESS(status))
-            return status;
-
-        *OutTruePath = ((KEY_NAME_INFORMATION *)name)->Name;
-
-        name = (*OutTruePath)
-             + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
 
         if (objname_len) {
 
@@ -737,6 +775,12 @@ _FX NTSTATUS Key_FixNameWow64(
         if (! (DesiredAccess & KEY_WOW64_32KEY))
             return STATUS_SUCCESS;
 
+        // ToDo: ???
+        // NoSysCallHooks BEGIN
+        //if(Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+        //    return STATUS_SUCCESS;
+        // NoSysCallHooks END
+
         return Key_FixNameWow64_2(OutTruePath, OutCopyPath);
     }
 
@@ -821,13 +865,16 @@ _FX NTSTATUS Key_FixNameWow64(
         Dll_Free(NewPtr);
     File_NtCloseImpl(handle);
 
-    //
-    // the result might contain \Wow6432Node\Wow6432Node,
-    // so strip one of them away
-    //
+    if (NT_SUCCESS(status)) {
 
-    if (Key_FixNameWow64_3(OutTruePath))
-        Key_FixNameWow64_3(OutCopyPath);
+        //
+        // the result might contain \Wow6432Node\Wow6432Node,
+        // so strip one of them away
+        //
+
+        if (Key_FixNameWow64_3(OutTruePath))
+            Key_FixNameWow64_3(OutCopyPath);
+    }
 
     return status;
 }
@@ -4240,4 +4287,40 @@ _FX ULONG Key_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     }
 
     return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_CreateBaseKeys
+//---------------------------------------------------------------------------
+
+
+_FX void Key_CreateBaseKeys()
+{
+    WCHAR buff[2048];
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    WCHAR* base_keys[] = {
+        L"\\machine\\system", L"\\machine\\software",
+        L"\\user\\current\\software", L"\\user\\current_Classes",
+        L"\\machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        L"\\user\\current\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        NULL};
+
+    //
+    // in privacy mode we need to pre create some keys or else the box initialization will fail
+    //
+ 
+    InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    for (WCHAR** base_key = base_keys; *base_key; base_key++) {
+
+        wcscpy(buff, Dll_BoxKeyPath);
+        wcscat(buff, *base_key);
+
+        RtlInitUnicodeString(&objname, buff);
+
+        Key_CreatePath(&objattrs, NULL);
+    }
 }

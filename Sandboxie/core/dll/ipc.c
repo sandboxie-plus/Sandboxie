@@ -244,6 +244,14 @@ static NTSTATUS Ipc_NtOpenSection(
 
 //---------------------------------------------------------------------------
 
+static NTSTATUS Ipc_NtCreateSymbolicLinkObject (
+    PHANDLE pHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PUNICODE_STRING DestinationName);
+
+
+//---------------------------------------------------------------------------
 
 static P_NtCreatePort               __sys_NtCreatePort              = NULL;
 static P_NtConnectPort              __sys_NtConnectPort             = NULL;
@@ -269,6 +277,9 @@ static P_NtCreateSemaphore          __sys_NtCreateSemaphore         = NULL;
 static P_NtOpenSemaphore            __sys_NtOpenSemaphore           = NULL;
 static P_NtCreateSection            __sys_NtCreateSection           = NULL;
 static P_NtOpenSection              __sys_NtOpenSection             = NULL;
+
+static P_NtCreateSymbolicLinkObject __sys_NtCreateSymbolicLinkObject= NULL;
+
 static P_NtImpersonateAnonymousToken
                                     __sys_NtImpersonateAnonymousToken
                                                                     = NULL;
@@ -343,8 +354,13 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK_IF(NtAlpcQueryInformation);
     SBIEDLL_HOOK_IF(NtAlpcQueryInformationMessage);
 
-    SBIEDLL_HOOK(Ipc_,NtImpersonateClientOfPort);
-    SBIEDLL_HOOK_IF(NtAlpcImpersonateClientOfPort);
+    // OriginalToken BEGIN
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    // OriginalToken END
+    {
+        SBIEDLL_HOOK(Ipc_, NtImpersonateClientOfPort);
+        SBIEDLL_HOOK_IF(NtAlpcImpersonateClientOfPort);
+    }
 
     SBIEDLL_HOOK(Ipc_,NtRequestWaitReplyPort);
     SBIEDLL_HOOK_IF(NtAlpcSendWaitReceivePort);
@@ -366,8 +382,15 @@ _FX BOOLEAN Ipc_Init(void)
     SBIEDLL_HOOK(Ipc_,NtCreateSection);
     SBIEDLL_HOOK(Ipc_,NtOpenSection);
 
-    SBIEDLL_HOOK(Ipc_,NtImpersonateAnonymousToken);
-    SBIEDLL_HOOK(Ipc_,NtImpersonateThread);
+    SBIEDLL_HOOK(Ipc_,NtCreateSymbolicLinkObject);
+
+    // OriginalToken BEGIN
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    // OriginalToken END
+    {
+        SBIEDLL_HOOK(Ipc_, NtImpersonateAnonymousToken);
+        SBIEDLL_HOOK(Ipc_, NtImpersonateThread);
+    }
 
     Ipc_CreateObjects();
 
@@ -561,7 +584,7 @@ _FX NTSTATUS Ipc_GetName(
 
         status = Obj_GetObjectName(RootDirectory, name, &length);
 
-        if (status == STATUS_BUFFER_OVERFLOW) {
+        if (status == STATUS_BUFFER_OVERFLOW || status == STATUS_BUFFER_TOO_SMALL || status == STATUS_INFO_LENGTH_MISMATCH) {
 
             name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
@@ -722,6 +745,11 @@ _FX BOOLEAN Ipc_GetName_AdjustSplWow64Path(WCHAR *TruePath, BOOLEAN adj)
     // Gdi_SplWow64 and GuiServer::SplWow64Slave help with making sure
     // a sandbox that wants to print has a corresponding SplWow64 process.
     //
+
+    // NoSbieDesk BEGIN
+    if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+        return TRUE;
+	// NoSbieDesk END
 
     WCHAR *nameStart = wcsrchr(TruePath, L'\\');
     if (nameStart && (0 == _wcsnicmp(nameStart + 1, L"SplWow64_", 9)
@@ -1023,7 +1051,7 @@ _FX NTSTATUS Ipc_NtCreatePort(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -1138,6 +1166,8 @@ _FX NTSTATUS Ipc_NtConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1264,6 +1294,8 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1394,7 +1426,7 @@ _FX NTSTATUS Ipc_NtAlpcCreatePort(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -1514,6 +1546,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1688,6 +1722,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -2196,6 +2232,9 @@ _FX NTSTATUS Ipc_NtCreateEvent(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateEvent(
             EventHandle, DesiredAccess, ObjectAttributes,
             EventType, InitialState);
@@ -2210,7 +2249,7 @@ _FX NTSTATUS Ipc_NtCreateEvent(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2420,6 +2459,9 @@ _FX NTSTATUS Ipc_NtCreateMutant(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateMutant(
             MutantHandle, DesiredAccess, ObjectAttributes,
             InitialOwner);
@@ -2434,7 +2476,7 @@ _FX NTSTATUS Ipc_NtCreateMutant(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2645,6 +2687,9 @@ _FX NTSTATUS Ipc_NtCreateSemaphore(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateSemaphore(
             SemaphoreHandle, DesiredAccess, ObjectAttributes,
             InitialCount, MaximumCount);
@@ -2659,7 +2704,7 @@ _FX NTSTATUS Ipc_NtCreateSemaphore(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -2882,6 +2927,9 @@ _FX NTSTATUS Ipc_NtCreateSection(
 
     if (! TruePath) {
 
+        if(ObjectAttributes->ObjectName->Buffer)
+            SbieApi_MonitorPut2(MONITOR_IPC, ObjectAttributes->ObjectName->Buffer, FALSE);
+
         status = __sys_NtCreateSection(
             SectionHandle, DesiredAccess, ObjectAttributes,
             MaximumSize, PageAttributes, SectionAttributes, FileHandle);
@@ -2896,7 +2944,7 @@ _FX NTSTATUS Ipc_NtCreateSection(
     // check if this is an open or closed path
     //
 
-    mp_flags = SbieDll_MatchPath(L'i', TruePath);
+    mp_flags = SbieDll_MatchPath2(L'i', TruePath, FALSE, TRUE); // SbieDll_MatchPath(L'i', TruePath);
 
     if (PATH_IS_CLOSED(mp_flags)) {
         status = STATUS_ACCESS_DENIED;
@@ -3217,6 +3265,13 @@ _FX NTSTATUS Ipc_ConnectProxyPort(
     if (_wcsicmp(TruePath, L"\\RPC Control\\ntsvcs") != 0 &&
         _wcsicmp(TruePath, L"\\RPC Control\\plugplay") != 0)
         return STATUS_BAD_INITIAL_PC;
+
+    //
+    // check if we are in app mode in which case proxying is not needed, but we must indicate to open true path
+    //
+
+    if (Dll_CompartmentMode) // NoServiceAssist
+        return STATUS_BAD_INITIAL_STACK;
 
     status = STATUS_SUCCESS;
 
@@ -3702,4 +3757,24 @@ _FX ULONG Ipc_NtQueryObjectName(UNICODE_STRING *ObjectName, ULONG MaxLen)
     }
 
     return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtCreateSymbolicLinkObject
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_NtCreateSymbolicLinkObject(
+    PHANDLE pHandle, ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes, PUNICODE_STRING DestinationName)
+{
+    WCHAR strW[8192];
+	Sbie_snwprintf(strW, 8192, L"NtCreateSymbolicLinkObject, %s", DestinationName);
+	SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, strW);
+
+    SbieApi_Log(2205, L"NtCreateSymbolicLinkObject");
+
+    return STATUS_PRIVILEGE_NOT_HELD;
+    //return __sys_NtCreateSymbolicLinkObject(pHandle, DesiredAccess, ObjectAttributes, DestinationName);
 }

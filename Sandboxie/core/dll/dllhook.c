@@ -101,6 +101,8 @@ _FX void *SbieDll_Hook(
     static const WCHAR *_fmt1 = L"%s (%d)";
     static const WCHAR *_fmt2 = L"%s (%d, %d)";
     UCHAR *tramp, *func;
+    void* RegionBase;
+    SIZE_T RegionSize;
     ULONG prot, dummy_prot;
     ULONG_PTR diff;
     ULONG_PTR target;
@@ -130,7 +132,7 @@ _FX void *SbieDll_Hook(
     // (this helps to co-exist with Cisco Security Agent)
     //
 
-    if (*(UCHAR *)SourceFunc == 0xEB) {
+    if (*(UCHAR *)SourceFunc == 0xEB) { // jmp xx;
         signed char offset = *((signed char *)SourceFunc + 1);
         SourceFunc = (UCHAR *)SourceFunc + offset + 2;
     }
@@ -142,7 +144,7 @@ _FX void *SbieDll_Hook(
     // otherwise (for 32-bit code) just replace the jump target
     //
 
-    while (*(UCHAR *)SourceFunc == 0xE9) {
+    while (*(UCHAR *)SourceFunc == 0xE9) { // jmp xx xx xx xx;
 
         diff = *(LONG *)((ULONG_PTR)SourceFunc + 1);
         target = (ULONG_PTR)SourceFunc + diff + 5;
@@ -192,15 +194,15 @@ skip_e9_rewrite: ;
     // can process it
     //
 
-    if (*(USHORT *)SourceFunc == 0xE990) {
+    if (*(USHORT *)SourceFunc == 0xE990) { // nop; jmp xx xx xx xx;
         diff = *(LONG *)((ULONG_PTR)SourceFunc + 2);
         target = (ULONG_PTR)SourceFunc + diff + 6;
-        if (*(USHORT *)target == 0x25FF)
+        if (*(USHORT *)target == 0x25FF) // jmp QWORD PTR [rip+xx xx xx xx];
             SourceFunc = (void *)target;
     }
 
 	//
-	// this simplification fails for delay loaded libraries, see coments about SetSecurityInfo,
+	// DX: this simplification fails for delay loaded libraries, see comments about SetSecurityInfo,
 	// resulting in an endless loop, so just dont do that 
 	//
 
@@ -211,13 +213,13 @@ skip_e9_rewrite: ;
     // 12 bytes.
     //
 
-    if (*(UCHAR *)SourceFunc == 0x48 &&
-            *(USHORT *)((UCHAR *)SourceFunc + 1) == 0x25FF) {
-        // 4825FF is same as 25FF
+    if (*(UCHAR *)SourceFunc == 0x48 && // rex.W
+            *(USHORT *)((UCHAR *)SourceFunc + 1) == 0x25FF) { // jmp QWORD PTR [rip+xx xx xx xx];
+        // 48 FF 25 is same as FF 25
         SourceFunc = (UCHAR *)SourceFunc + 1;
     }
 
-    if (*(USHORT *)SourceFunc == 0x25FF) {
+    if (*(USHORT *)SourceFunc == 0x25FF) { // jmp QWORD PTR [rip+xx xx xx xx];
 
         void *orig_addr;
         /*
@@ -254,7 +256,7 @@ skip_e9_rewrite: ;
 
 #ifdef _WIN64
 
-    if (*(USHORT *)SourceFunc == 0x15FF) {
+    if (*(USHORT *)SourceFunc == 0x15FF) { // call QWORD PTR [rip+xx xx xx xx];
 
         //
         // the call instruction pushes a qword into the stack, we need
@@ -312,8 +314,8 @@ skip_e9_rewrite: ;
         return NULL;
     }
 
-	ULONG ByteCount = *(ULONG*)(tramp + 80);
-	ULONG UsedCount = 0;
+	//ULONG ByteCount = *(ULONG*)(tramp + 80);
+	//ULONG UsedCount = 0;
 	
     //
     // create the detour
@@ -321,11 +323,26 @@ skip_e9_rewrite: ;
 
     func = (UCHAR *)SourceFunc;
 
-    if (!VirtualProtect(&func[-8], 20, PAGE_EXECUTE_READWRITE, &prot)) {
+    RegionBase = &func[-8]; // -8 for hotpatch area if present
+    RegionSize = 20;
 
-        ULONG err = GetLastError();
-        SbieApi_Log(2303, _fmt2, SourceFuncName, 33, err);
-        return NULL;
+    if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
+
+        //
+        // on windows 7 hooking NdrClientCall2 in 32bit (WoW64) mode fails
+        // because the memory area starts at -6 and not -8
+        // this area could be a hot patch reagion which we dont use
+        // hence if that fails just start at the exact offset and try again
+        //
+
+        RegionBase = &func[0];
+        RegionSize = 12;
+
+        if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
+            ULONG err = GetLastError();
+            SbieApi_Log(2303, _fmt2, SourceFuncName, 33, err);
+            return NULL;
+        }
     }
 
     //
@@ -351,21 +368,19 @@ skip_e9_rewrite: ;
         OutputDebugStringA(buffer);
         */
         if (Dll_Windows >= 10) {
-            func[0] = 0x48;             // 32bit relative JMP DetourFunc
-            func[1] = 0xE9;             // 32bit relative JMP DetourFunc
+            func[0] = 0x48;             // 32bit relative rex.W JMP DetourFunc
+            func[1] = 0xE9;
             *(ULONG *)(&func[2]) = (ULONG)diff;
-			UsedCount = 1 + 1 + 4;
+			//UsedCount = 1 + 1 + 4;
         }
         else {
             func[0] = 0xE9;             // 32bit relative JMP DetourFunc
             *(ULONG *)(&func[1]) = (ULONG)diff;
-			UsedCount = 1 + 4;
+			//UsedCount = 1 + 4;
         }
     }
 
     else {
-
-
 
         BOOLEAN hookset = FALSE;
         BOOLEAN defaultRange = FALSE;
@@ -377,12 +392,12 @@ skip_e9_rewrite: ;
             //default step size 
 
             for (i = 0; i < NUM_VTABLES && !hookset; i++, ptrVTable++) {
-                if (!ptrVTable->offset) {
+                if (!ptrVTable->offset) { // if the vtable is not yet initialized initialize it
                     ULONG_PTR tempAddr;
                     ULONG_PTR step = 0x20000;// + VTABLE_SIZE;
                     ULONG_PTR max_attempts = 0x4000000 / step;
-                    // optimization for windows 7 and low memory DLL's
 
+                    // optimization for windows 7 and low memory DLL's
                     if ((ULONG_PTR)func < 0x80000000 && ((ULONG_PTR)func > 0x4000000)) {
                         step = 0x200000;
                     }
@@ -414,7 +429,7 @@ skip_e9_rewrite: ;
                     ptrVTable->index = 0;
                     ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void *);
                 }
-                if (ptrVTable->offset) {
+                if (ptrVTable->offset) { // check if we have an nitialized vtable
                     target = (ULONG_PTR)&func[6];
                     diff = (ULONG_PTR) &((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
                     diff = diff - target;
@@ -424,14 +439,14 @@ skip_e9_rewrite: ;
                     // is DetourFunc in 32bit jump range
                     if (delta < 0x80000000 && ptrVTable->index <= ptrVTable->maxEntries) {
                         ((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index] = (ULONG_PTR)DetourFunc;
-                        *(USHORT *)&func[0] = 0x25ff;
+                        *(USHORT *)&func[0] = 0x25ff;       // jmp QWORD PTR [rip+diff];
                         *(ULONG *)&func[2] = (ULONG)diff;
-						UsedCount = 2 + 4;
+						//UsedCount = 2 + 4;
                         ptrVTable->index++;
                         hookset = TRUE;
                     }
                 }
-                else {
+                else { // fail and disable vtable if it could not be initialized
                     bVTableEable = FALSE;
                     SbieApi_Log(2303, _fmt1, SourceFuncName, 888);
                     LeaveCriticalSection(&VT_CriticalSection);
@@ -452,7 +467,7 @@ skip_e9_rewrite: ;
     diff = (UCHAR *)DetourFunc - (func + 5);
     func[0] = 0xE9;             // JMP DetourFunc
     *(ULONG *)(&func[1]) = (ULONG)diff;
-	UsedCount = 1 + 4;
+	//UsedCount = 1 + 4;
 #endif
 
 	// just in case nop out the rest of the code we moved to the trampoline
@@ -460,7 +475,7 @@ skip_e9_rewrite: ;
 	//for(; UsedCount < ByteCount; UsedCount++)
 	//	func[UsedCount] = 0x90; // nop
 
-	VirtualProtect(&func[-8], 20, prot, &dummy_prot);
+	VirtualProtect(RegionBase, RegionSize, prot, &dummy_prot);
 
     // the trampoline code begins at trampoline + 16 bytes
     func = (UCHAR *)(ULONG_PTR)(tramp + 16);
@@ -489,7 +504,6 @@ skip_e9_rewrite: ;
 // SbieDll_Hook_CheckChromeHook
 //---------------------------------------------------------------------------
 #ifdef _WIN64
-ULONGLONG * SbieDll_findChromeTarget(unsigned char* addr);
 #define MAX_FUNC_SIZE 0x76
 //Note any change to this function requires the same modification to the function in LowLevel: see init.c (findChromeTarget)
 ULONGLONG * SbieDll_findChromeTarget(unsigned char* addr)
@@ -502,7 +516,14 @@ ULONGLONG * SbieDll_findChromeTarget(unsigned char* addr)
     //So far the offset has been positive between 0xa00000 and 0xb00000 bytes;
     //This may change in a future version of chrome
     for (i = 0; i < MAX_FUNC_SIZE; i++) {
+        // some chromium 90+ derivatives replace the function with a return 1 stub
+        // mov eax,1
+        // ret
+        // int 3
+        if (addr[i] == 0xB8 && addr[i + 5] == 0xC3 && addr[i + 6] == 0xCC)
+            return NULL;
         if ((*(USHORT *)&addr[i] == 0x8b48)) {
+            //Look for mov rcx,[target 4 byte offset] or in some cases mov rax,[target 4 byte offset]
             if ((addr[i + 2] == 0x0d || addr[i + 2] == 0x05)) {
                 LONG delta;
                 target = (ULONG_PTR)(addr + i + 7);
@@ -523,9 +544,10 @@ ULONGLONG * SbieDll_findChromeTarget(unsigned char* addr)
 
 _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
 {
-#ifndef _WIN64
-
+    if (!SourceFunc)
+        return NULL;
     UCHAR *func = (UCHAR *)SourceFunc;
+#ifndef _WIN64
     if (func[0] == 0xB8 &&                  // mov eax,?
         func[5] == 0xBA &&                  // mov edx,?
         *(USHORT *)&func[10] == 0xE2FF)     // jmp edx
@@ -545,19 +567,20 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
         }
     }
 #else if  
-    UCHAR *func = (UCHAR *)SourceFunc;
     ULONGLONG *chrome64Target = NULL;
-    if (!SourceFunc)
-        return NULL;
 
-    if (func[0] == 0x50 && func[1] == 0x48 && func[2] == 0xb8) {
+    if (func[0] == 0x50 &&	//push rax
+        func[1] == 0x48 &&	//mov rax,?
+        func[2] == 0xb8) {
         ULONGLONG *longlongs = *(ULONGLONG **)&func[3];
         chrome64Target = SbieDll_findChromeTarget((unsigned char *)longlongs);
     }
     // Chrome 49+ 64bit hook
     // mov rax, <target> 
     // jmp rax 
-    else if (func[0] == 0x48 && func[1] == 0xb8 && *(USHORT *)&func[10] == 0xe0ff) {
+    else if (func[0] == 0x48 && //mov rax,<target>
+        func[1] == 0xb8 &&
+        *(USHORT *)&func[10] == 0xe0ff) /* jmp rax */ {
         ULONGLONG *longlongs = *(ULONGLONG **)&func[2];
         chrome64Target = SbieDll_findChromeTarget((unsigned char *)longlongs);
     }
@@ -566,7 +589,8 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
     }
     /*sboxie 64bit jtable hook signature */
         /* // use this to hook jtable location (useful for debugging)
-        else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
+        //else if(func[0] == 0x51 && func[1] == 0x48 && func[2] == 0xb8 ) {
+        else if(func[0] == 0x90 && func[1] == 0x48 && func[2] == 0xb8 ) {
             long long addr;
             addr = (ULONG_PTR) *(ULONGLONG **)&func[3] ;
             SourceFunc = (void *) addr;
@@ -660,7 +684,7 @@ _FX NTSTATUS Dll_GetSettingsForImageName(
         } else
             buf_ptr = buf;
 
-        image_pat = Pattern_Create(pool, buf_ptr, TRUE);
+        image_pat = Pattern_Create(pool, buf_ptr, TRUE, 0);
         if (Pattern_Match(image_pat, image_lwr, image_len)) {
 
             match = TRUE;
@@ -875,6 +899,11 @@ extern ULONG Dll_Windows;
 _FX void Dll_FixWow64Syscall(void)
 {
     static UCHAR *_code = NULL;
+
+    // NoSysCallHooks BEGIN
+    if(Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSysCallHooks", FALSE))
+        return;
+    // NoSysCallHooks END
 
     //
     // the Wow64 thunking layer for syscalls in ntdll32 has several thunks:

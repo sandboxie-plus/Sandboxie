@@ -24,6 +24,9 @@
 #include "conf.h"
 #include "process.h"
 #include "api.h"
+#include "api_flags.h"
+#include "obj.h"
+#include "util.h"
 
 #define KERNEL_MODE
 #include "common/stream.h"
@@ -35,9 +38,11 @@
 // Defines
 //---------------------------------------------------------------------------
 
+#define USE_CONF_MAP
 
-#define CONF_LINE_LEN               2000        // keep in sync with
-#define CONF_MAX_LINES              30000       // SbieCtrl/SbieIni.cpp
+#define CONF_LINE_LEN               2000        // keep in sync with sbieiniwire.h
+#define CONF_MAX_LINES              100000      // keep in sync with sbieiniwire.h
+
 #define CONF_TMPL_LINE_BASE         0x01000000
 
 
@@ -45,11 +50,20 @@
 // Structures
 //---------------------------------------------------------------------------
 
+//
+// Note: we want to preserver the order of the settings when enumerating
+//          hence we can not replace the list with a hash map entierly
+//          instead we use booth, here the hash map ise used only for lookups
+//          the keys in the map are only pointers to the name fileds in the list entries
+//
 
 typedef struct _CONF_DATA {
 
     POOL *pool;
     LIST sections;      // CONF_SECTION
+#ifdef USE_CONF_MAP
+    HASH_MAP sections_map;
+#endif
     BOOLEAN home;       // TRUE if configuration read from Driver_Home_Path
     ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swaped)
     volatile ULONG use_count;
@@ -62,6 +76,9 @@ typedef struct _CONF_SECTION {
     LIST_ELEM list_elem;
     WCHAR *name;
     LIST settings;      // CONF_SETTING
+#ifdef USE_CONF_MAP
+    HASH_MAP settings_map;
+#endif
     BOOLEAN from_template;
 
 } CONF_SECTION;
@@ -92,7 +109,7 @@ static NTSTATUS Conf_Read_Settings(
     STREAM *stream, CONF_DATA *data, CONF_SECTION *section,
     WCHAR *line, int *linenum);
 
-static NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
+NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum);
 
 static NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id);
 
@@ -117,6 +134,9 @@ static const WCHAR *Conf_Get_Setting_Name(
 //---------------------------------------------------------------------------
 
 
+
+//---------------------------------------------------------------------------
+
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text (INIT, Conf_Init)
 #endif // ALLOC_PRAGMA
@@ -133,6 +153,7 @@ static PERESOURCE Conf_Lock = NULL;
 static const WCHAR *Conf_GlobalSettings   = L"GlobalSettings";
 static const WCHAR *Conf_UserSettings_    = L"UserSettings_";
 static const WCHAR *Conf_Template_        = L"Template_";
+static const WCHAR *Conf_DefaultTemplates = L"DefaultTemplates";
        const WCHAR *Conf_TemplateSettings = L"TemplateSettings";
 
 static const WCHAR *Conf_Template = L"Template";
@@ -205,7 +226,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     //
 
 	path_home = TRUE; //  = FALSE;
-	swprintf(path, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
+	RtlStringCbPrintfW(path, path_len, path_sandboxie, Driver_HomePathDos); // , SystemRoot);
 
     status = Stream_Open(
         &stream, path, FILE_GENERIC_READ, 0, FILE_SHARE_READ, FILE_OPEN, 0);
@@ -213,7 +234,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     if (status == STATUS_OBJECT_NAME_NOT_FOUND) {
 
 		path_home = FALSE; // = TRUE;
-		swprintf(path, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
+		RtlStringCbPrintfW(path, path_len, path_sandboxie, SystemRoot); // , Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -250,6 +271,13 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
 
         data.pool = pool;
         List_Init(&data.sections);
+#ifdef USE_CONF_MAP
+        map_init(&data.sections_map, data.pool);
+        data.sections_map.func_key_size = NULL;
+        data.sections_map.func_match_key = &str_map_match;
+        data.sections_map.func_hash_key = &str_map_hash;
+        map_resize(&data.sections_map, 16); // prepare some buckets for better performance
+#endif
         data.home = path_home;
         data.use_count = 0;
 
@@ -270,7 +298,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
 
     if (NT_SUCCESS(status)) {
 
-        swprintf(path, path_templates, Driver_HomePathDos);
+        RtlStringCbPrintfW(path, path_len, path_templates, Driver_HomePathDos);
 
         status = Stream_Open(
             &stream, path,
@@ -350,7 +378,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     //
 
     if (! NT_SUCCESS(status)) {
-        swprintf(linenum_str, L"%d", linenum);
+        RtlStringCbPrintfW(linenum_str, sizeof(linenum_str), L"%d", linenum);
         //DbgPrint("Conf error %X at line %d (%S)\n", status, linenum, linenum_str);
         if (status == STATUS_BUFFER_OVERFLOW) {
             Log_Msg_Session(
@@ -429,13 +457,16 @@ _FX NTSTATUS Conf_Read_Sections(
         //
         // find an existing section by that name or create a new one
         //
-
+#ifdef USE_CONF_MAP
+        section = map_get(&data->sections_map, &line[1]);
+#else
         section = List_Head(&data->sections);
         while (section) {
             if (_wcsicmp(section->name, &line[1]) == 0)
                 break;
             section = List_Next(section);
         }
+#endif
 
         if (! section) {
 
@@ -457,8 +488,21 @@ _FX NTSTATUS Conf_Read_Sections(
             }
 
             List_Init(&section->settings);
+#ifdef USE_CONF_MAP
+            map_init(&section->settings_map, data->pool);
+            section->settings_map.func_key_size = NULL;
+            section->settings_map.func_match_key = &str_map_match;
+            section->settings_map.func_hash_key = &str_map_hash;
+            map_resize(&section->settings_map, 16); // prepare some buckets for better performance
+#endif			
 
             List_Insert_After(&data->sections, NULL, section);
+#ifdef USE_CONF_MAP
+            if(map_insert(&data->sections_map, section->name, section, 0) == NULL) {
+                status = STATUS_INSUFFICIENT_RESOURCES;
+                break;
+            }
+#endif
         }
 
         // read settings for this section
@@ -568,6 +612,12 @@ _FX NTSTATUS Conf_Read_Settings(
         }
 
         List_Insert_After(&section->settings, NULL, setting);
+#ifdef USE_CONF_MAP
+        if(map_append(&section->settings_map, setting->name, setting, 0) == NULL) {
+            status = STATUS_INSUFFICIENT_RESOURCES;
+            break;
+        }
+#endif
     }
 
     return status;
@@ -649,6 +699,40 @@ _FX NTSTATUS Conf_Read_Line(STREAM *stream, WCHAR *line, int *linenum)
 
 
 //---------------------------------------------------------------------------
+// Conf_Get_Section
+//---------------------------------------------------------------------------
+
+
+_FX CONF_SECTION* Conf_Get_Section(
+    CONF_DATA* data, const WCHAR* section_name)
+{
+#ifdef USE_CONF_MAP
+    //
+    // lookup the template section in the hash map
+    //
+
+    return map_get(&data->sections_map, section_name);
+#else
+    //
+    // scan for a matching template section
+    //
+
+    CONF_SECTION* section = List_Head(&data->sections);
+    while (section) {
+
+        if (_wcsicmp(section->name, section_name) == 0) {
+
+            break;
+        }
+
+        section = List_Next(section);
+    }
+    return section;
+#endif
+}
+
+
+//---------------------------------------------------------------------------
 // Conf_Merge_Templates
 //---------------------------------------------------------------------------
 
@@ -660,6 +744,28 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
     CONF_SETTING *setting;
 
     //
+    // first handle the global section
+    //
+
+    CONF_SECTION* global = Conf_Get_Section(data, Conf_GlobalSettings);
+    if (global) {
+        status = Conf_Merge_Global(data, session_id, global);
+        if (!NT_SUCCESS(status))
+            return status;
+    }
+
+    //
+    // second handle the default templates
+    //
+
+    global = Conf_Get_Section(data, Conf_DefaultTemplates);
+    if (global) {
+        status = Conf_Merge_Global(data, session_id, global);
+        if (!NT_SUCCESS(status))
+            return status;
+    }
+
+    //
     // scan sections to find a sandbox section
     //
 
@@ -669,30 +775,37 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
         CONF_SECTION *next_sandbox = List_Next(sandbox);
 
         //
-        // if we found the global section, handle it
+        // break once the template section starts
         //
 
-        if (_wcsicmp(sandbox->name, Conf_GlobalSettings) == 0) {
-
-            status = Conf_Merge_Global(data, session_id, sandbox);
-
-            if (! NT_SUCCESS(status))
-                return status;
-
-            sandbox = next_sandbox;
-            continue;
+        if (sandbox->from_template) {
+            // we can break because template sections come after
+            // all non-template sections
+            break;
         }
 
         //
-        // skip any template sections and user settings sections
+        // skip the global section, skip any local template sections and user settings sections
         //
 
-        if (_wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 ||
+        if (_wcsicmp(sandbox->name, Conf_GlobalSettings) == 0     ||
+            _wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 || // Template_ or Template_Local_
             _wcsnicmp(sandbox->name, Conf_UserSettings_, 13) == 0) {
 
             sandbox = next_sandbox;
             continue;
         }
+
+#ifdef USE_CONF_MAP
+
+        //
+        // use a keyed itterator to quickly go through all Template=Xxx settings
+        //
+
+        map_iter_t iter2 = map_key_iter(&sandbox->settings_map, Conf_Template);
+	    while (map_next(&sandbox->settings_map, &iter2)) {
+            setting = iter2.value;
+#else
 
         //
         // scan the section for a Template=Xxx setting
@@ -706,10 +819,13 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
                 setting = List_Next(setting);
                 continue;
             }
+#endif
 
             if (setting->template_handled) {
 
+#ifndef USE_CONF_MAP
                 setting = List_Next(setting);
+#endif
                 continue;
             }
 
@@ -723,12 +839,15 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
             if (! NT_SUCCESS(status))
                 return status;
 
+            setting->template_handled = TRUE;
+
+#ifndef USE_CONF_MAP
             //
             // advance to next setting
             //
 
-            setting->template_handled = TRUE;
             setting = List_Head(&sandbox->settings);
+#endif
         }
 
         //
@@ -778,20 +897,21 @@ _FX NTSTATUS Conf_Merge_Global(
             CONF_SECTION *next_sandbox = List_Next(sandbox);
 
             //
-            // skip the global section
+            // break once the template section starts
             //
 
-            if (_wcsicmp(sandbox->name, Conf_GlobalSettings) == 0) {
-
-                sandbox = next_sandbox;
-                continue;
+            if (sandbox->from_template) {
+                // we can break because template sections come after
+                // all non-template sections
+                break;
             }
 
             //
-            // skip any template sections and user settings sections
+            // skip the global section, any template sections and user settings sections
             //
 
-            if (_wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 ||
+            if (_wcsicmp(sandbox->name, Conf_GlobalSettings)     == 0 ||
+                _wcsnicmp(sandbox->name, Conf_Template_, 9)      == 0 ||
                 _wcsnicmp(sandbox->name, Conf_UserSettings_, 13) == 0) {
 
                 sandbox = next_sandbox;
@@ -835,21 +955,13 @@ _FX NTSTATUS Conf_Merge_Template(
     CONF_DATA *data, ULONG session_id,
     const WCHAR *tmpl_name, CONF_SECTION *section)
 {
-    //
-    // scan for a matching template section
-    //
+    CONF_SECTION *tmpl = NULL;
 
-    CONF_SECTION *tmpl = List_Head(&data->sections);
-    while (tmpl) {
-
-        if (wcslen(tmpl->name) >= 10 &&
-            _wcsnicmp(tmpl->name, Conf_Template_, 9) == 0 &&
-            _wcsicmp(tmpl->name + 9, tmpl_name) == 0) {
-
-            break;
-        }
-
-        tmpl = List_Next(tmpl);
+    WCHAR section_name[130]; // 128 + 2 // max regular section length is 64
+    if (wcslen(tmpl_name) < 119) { // 128 - wcslen(Conf_Template_)
+        wcscpy(section_name, Conf_Template_);
+        wcscat(section_name, tmpl_name);
+        tmpl = Conf_Get_Section(data, section_name);
     }
 
     //
@@ -881,6 +993,10 @@ _FX NTSTATUS Conf_Merge_Template(
                 return STATUS_INSUFFICIENT_RESOURCES;
 
             List_Insert_After(&section->settings, NULL, nset);
+#ifdef USE_CONF_MAP
+            if(map_append(&section->settings_map, nset->name, nset, 0) == NULL)
+                return STATUS_INSUFFICIENT_RESOURCES;
+#endif
 
             oset = List_Next(oset);
         }
@@ -910,36 +1026,56 @@ _FX const WCHAR *Conf_Get_Helper(
 
     value = NULL;
 
+#ifdef USE_CONF_MAP
+    //
+    // lookup the section in the hash map
+    //
+
+    section = map_get(&Conf_Data.sections_map, section_name);
+#else
     section = List_Head(&Conf_Data.sections);
     while (section) {
         //DbgPrint("        Examining section at %X name %S (looking for %S)\n", section, section->name, section_name);
-        if (_wcsicmp(section->name, section_name) == 0) {
-            if (skip_tmpl && section->from_template)
-                section = NULL;
+        if (_wcsicmp(section->name, section_name) == 0) 
             break;
-        }
         section = List_Next(section);
     }
+#endif
+    if (skip_tmpl && section && section->from_template)
+        section = NULL;
 
-    if (section)
+    if (section) {
+#ifdef USE_CONF_MAP
+        //
+        // use a keyed itterator to quickly go through all matching settings
+        //
+
+        map_iter_t iter2 = map_key_iter(&section->settings_map, setting_name);
+	    while (map_next(&section->settings_map, &iter2)) {
+            setting = iter2.value;
+#else
         setting = List_Head(&section->settings);
-    else
-        setting = NULL;
-    while (setting) {
-        //DbgPrint("        Examining setting at %X name %S (looking for %S)\n", setting, setting->name, setting_name);
-        if (skip_tmpl && setting->from_template) {
-            // we can break because template settings come after
-            // all non-template settings
-            break;
-        }
-        if (_wcsicmp(setting->name, setting_name) == 0) {
-            if (*index == 0) {
-                value = setting->value;
+        while (setting) {
+            //DbgPrint("        Examining setting at %X name %S (looking for %S)\n", setting, setting->name, setting_name);
+#endif
+            if (skip_tmpl && setting->from_template) {
+                // we can break because template settings come after
+                // all non-template settings
                 break;
             }
-            --(*index);
+#ifndef USE_CONF_MAP
+            if (_wcsicmp(setting->name, setting_name) == 0) {
+#endif
+                if (*index == 0) {
+                    value = setting->value;
+                    break;
+                }
+                --(*index);
+#ifndef USE_CONF_MAP
+            }
+            setting = List_Next(setting);
+#endif
         }
-        setting = List_Next(setting);
     }
 
     return value;
@@ -962,17 +1098,22 @@ _FX const WCHAR *Conf_Get_Section_Name(ULONG index, BOOLEAN skip_tmpl)
     while (section) {
         CONF_SECTION *next_section = List_Next(section);
 
-        if (_wcsicmp(section->name, Conf_GlobalSettings) == 0)
+        if (_wcsicmp(section->name, Conf_GlobalSettings) == 0) {
             section = next_section;
-        else if (skip_tmpl && section->from_template)
-            section = next_section;
-        else if (index == 0) {
+            continue;
+        }
+        if (skip_tmpl && section->from_template) {
+            // we can break because template sections come after
+            // all non-template sections
+            break;
+        }
+        if (index == 0) {
             value = section->name;
             break;
-        } else {
-            --index;
-            section = next_section;
         }
+
+        --index;
+        section = next_section;
     }
 
     return value;
@@ -994,47 +1135,57 @@ _FX const WCHAR *Conf_Get_Setting_Name(
 
     value = NULL;
 
+#ifdef USE_CONF_MAP
+    //
+    // lookup the section in the hash map
+    //
+
+    section = map_get(&Conf_Data.sections_map, section_name);
+#else
     section = List_Head(&Conf_Data.sections);
     while (section) {
-        if (_wcsicmp(section->name, section_name) == 0) {
-            if (skip_tmpl && section->from_template)
-                section = NULL;
+        if (_wcsicmp(section->name, section_name) == 0)
             break;
-        }
         section = List_Next(section);
     }
+#endif
+    if (skip_tmpl && section && section->from_template)
+        section = NULL;
 
-    if (section)
+    if (section) {
         setting = List_Head(&section->settings);
-    else
-        setting = NULL;
-    while (setting) {
+        while (setting) {
 
-        if (skip_tmpl && setting->from_template) {
-            // we can break because template settings come after
-            // all non-template settings
-            break;
-        }
-
-        dup = FALSE;
-        setting2 = List_Head(&section->settings);
-        while (setting2 && setting2 != setting) {
-            if (_wcsicmp(setting2->name, setting->name) == 0) {
-                dup = TRUE;
+            if (skip_tmpl && setting->from_template) {
+                // we can break because template settings come after
+                // all non-template settings
                 break;
-            } else
-                setting2 = List_Next(setting2);
-        }
+            }
 
-        if (! dup) {
-            if (index == 0) {
-                value = setting->name;
-                break;
-            } else
-                --index;
-        }
+            //
+            // check if we already processed this name
+            //
 
-        setting = List_Next(setting);
+            dup = FALSE;
+            setting2 = List_Head(&section->settings);
+            while (setting2 && setting2 != setting) {
+                if (_wcsicmp(setting2->name, setting->name) == 0) {
+                    dup = TRUE;
+                    break;
+                } else
+                    setting2 = List_Next(setting2);
+            }
+
+            if (! dup) {
+                if (index == 0) {
+                    value = setting->name;
+                    break;
+                } else
+                    --index;
+            }
+
+            setting = List_Next(setting);
+        }
     }
 
     return value;
@@ -1088,6 +1239,12 @@ _FX const WCHAR *Conf_Get(
 
         if (section)
             value = Conf_Get_Helper(section, setting, &index, skip_tmpl);
+
+        //
+        // when no value has been found for the given section
+        // try getting it from the global section
+        //
+
         if ((! value) && check_global) {
             value = Conf_Get_Helper(
                 Conf_GlobalSettings, setting, &index, skip_tmpl);
@@ -1225,11 +1382,19 @@ _FX NTSTATUS Conf_IsValidBox(const WCHAR *section_name)
 _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status;
+    ULONG flags;
 
     if (proc)
-        status = STATUS_INVALID_PARAMETER;
-    else
-        status = Conf_Read((ULONG)parms[1]);
+        return STATUS_NOT_IMPLEMENTED;
+    
+    flags = (ULONG)parms[2];
+
+    if (flags & SBIE_CONF_FLAG_RELOAD_CERT) {
+        status = MyValidateCertificate();
+        goto finish;
+    }
+
+    status = Conf_Read((ULONG)parms[1]);
 
     if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
         status == STATUS_OBJECT_PATH_NOT_FOUND) {
@@ -1248,6 +1413,14 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
 
         Conf_Data.pool = NULL;
         List_Init(&Conf_Data.sections);
+#ifdef USE_CONF_MAP
+    	map_init(&Conf_Data.sections_map, NULL);
+    	Conf_Data.sections_map.func_key_size = NULL;
+		Conf_Data.sections_map.func_match_key = &str_map_match;
+		Conf_Data.sections_map.func_hash_key = &str_map_hash;
+        map_resize(&Conf_Data.sections_map, 16); // prepare some buckets for better performance  
+#endif
+
 		Conf_Data.home = FALSE;
         Conf_Data.encoding = 0;
 
@@ -1260,8 +1433,68 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         status = STATUS_SUCCESS;
     }
 
-    Api_SendServiceMessage(SVC_RESTART_HOST_INJECTED_SVCS, 0, NULL);
+    //
+    // Check the reconfigure drier flag and if its set, load/unload the components accordingly
+    //
 
+    if (flags & SBIE_CONF_FLAG_RECONFIGURE) {
+
+        static volatile ULONG reconf_lock = 0;
+        if (InterlockedCompareExchange(&reconf_lock, 1, 0) != 0) {
+            status = STATUS_OPERATION_IN_PROGRESS;
+            goto finish; // don't do anything is a reconfiguration is already in progress
+        }
+
+        BOOLEAN wpf_enabled = Conf_Get_Boolean(NULL, L"NetworkEnableWFP", 0, FALSE);
+        extern BOOLEAN WFP_Enabled;
+        if (WFP_Enabled != wpf_enabled) {
+            if (wpf_enabled) {
+                extern BOOLEAN WFP_Load(void);
+                WFP_Load();
+            }
+            else {
+                extern void WFP_Unload(void);
+                WFP_Unload();
+            }
+        }
+
+        BOOLEAN obj_filter_enabled = Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE);
+        extern BOOLEAN Obj_CallbackInstalled;
+        if (Obj_CallbackInstalled != obj_filter_enabled && Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
+            if (obj_filter_enabled) {
+                Obj_Load_Filter();
+            }
+            else {
+                Obj_Unload_Filter();
+            }
+        }
+
+        extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
+        if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE) && SandboxieLogonSid[0] == 0) {
+            extern BOOLEAN Token_Init_SbieLogin(void);
+            Token_Init_SbieLogin();
+        }
+
+        /*
+#ifdef HOOK_WIN32K
+        // must be windows 10 or later
+        if (Driver_OsBuild >= 10041) {
+            extern ULONG Syscall_MaxIndex32;
+            if (Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, FALSE) && Syscall_MaxIndex32 == 0) {
+                if(Syscall_Init_List32()){
+                    Syscall_Init_Table32();
+                }
+            }
+        }
+#endif
+        */
+
+        InterlockedExchange(&reconf_lock, 0);
+    }
+
+    Api_SendServiceMessage(SVC_CONFIG_UPDATED, 0, NULL);
+
+finish:
     return status;
 }
 
@@ -1324,7 +1557,10 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
 
     Conf_AdjustUseCount(TRUE);
 
-    value1 = Conf_Get(boxname, setting, index);
+    if ((setting && setting[0] == L'%') || (index & CONF_JUST_EXPAND))
+        value1 = setting; // shortcut to expand a variable
+    else
+        value1 = Conf_Get(boxname, setting, index);
     if (! value1) {
         status = STATUS_RESOURCE_NAME_NOT_FOUND;
         goto release_and_return;
@@ -1340,13 +1576,33 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
         if (proc)
             value2 = Conf_Expand(proc->box->expand_args, value1, setting);
         else {
-            BOX *box = Box_Create(Driver_Pool, boxname, FALSE);
-            if (! box) {
+
+            CONF_EXPAND_ARGS *expand_args = Mem_Alloc(Driver_Pool, sizeof(CONF_EXPAND_ARGS));
+            if (! expand_args) {
                 status = STATUS_UNSUCCESSFUL;
                 goto release_and_return;
             }
-            value2 = Conf_Expand(box->expand_args, value1, setting);
-            Box_Free(box);
+
+            expand_args->pool = Driver_Pool;
+            expand_args->sandbox = boxname;
+
+            UNICODE_STRING SidString;
+            ULONG SessionId;
+            status = Process_GetSidStringAndSessionId(NtCurrentProcess(), NULL, &SidString, &SessionId);
+            if (!NT_SUCCESS(status)) {
+                Mem_Free(expand_args, sizeof(CONF_EXPAND_ARGS));
+                status = STATUS_UNSUCCESSFUL;
+                goto release_and_return;
+            }
+
+            expand_args->sid = SidString.Buffer;
+            expand_args->session = &SessionId;
+
+            value2 = Conf_Expand(expand_args, value1, setting);
+
+            RtlFreeUnicodeString(&SidString);
+
+            Mem_Free(expand_args, sizeof(CONF_EXPAND_ARGS));
         }
 
         if (! value2) {
@@ -1390,6 +1646,13 @@ _FX BOOLEAN Conf_Init(void)
 {
     Conf_Data.pool = NULL;
     List_Init(&Conf_Data.sections);
+#ifdef USE_CONF_MAP
+    map_init(&Conf_Data.sections_map, NULL);
+    Conf_Data.sections_map.func_key_size = NULL;
+	Conf_Data.sections_map.func_match_key = &str_map_match;
+	Conf_Data.sections_map.func_hash_key = &str_map_hash;
+#endif
+
     Conf_Data.home = FALSE;
     Conf_Data.encoding = 0;
 

@@ -95,6 +95,7 @@
       <CompileAs>Default</CompileAs>
       <OmitFramePointers />
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
@@ -115,6 +116,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>Default</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ntdll.lib;uuid.lib;kernel32.lib</AdditionalDependencies>
@@ -170,9 +172,33 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\map.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\str_util.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\common\list.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\common\my_ntdll.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">Disabled</Optimization>
+    </ClCompile>
+    <ClCompile Include="..\..\common\netfw.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\common\pattern.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
@@ -186,13 +212,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\common\rbtree.c" />
     <ClCompile Include="..\..\common\stream.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="acscmonitor.c" />
+    <ClCompile Include="..\..\common\wow64ext\wow64ext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="advapi.c">
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">false</ShowIncludes>
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">false</ShowIncludes>
@@ -210,6 +240,7 @@
     <ClCompile Include="dllmain.c" />
     <ClCompile Include="dllmem.c" />
     <ClCompile Include="dllpath.c" />
+    <ClCompile Include="dump.c" />
     <ClCompile Include="event.c" />
     <ClCompile Include="file.c" />
     <ClCompile Include="file_dir.c">
@@ -358,6 +389,7 @@
     <ClCompile Include="terminal.c" />
     <ClCompile Include="trace.c" />
     <ClCompile Include="userenv.c" />
+    <ClCompile Include="Win32.c" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="util_asm.asm">
@@ -373,12 +405,26 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\apps\com\common.h" />
+    <ClInclude Include="..\..\common\map.h" />
+    <ClInclude Include="..\..\common\my_version.h" />
+    <ClInclude Include="..\..\common\ntproto.h" />
+    <ClInclude Include="..\..\common\str_util.h" />
+    <ClInclude Include="..\..\common\my_wsa.h" />
+    <ClInclude Include="..\..\common\list.h" />
+    <ClInclude Include="..\..\common\netfw.h" />
     <ClInclude Include="..\..\common\pattern.h" />
     <ClInclude Include="..\..\common\pool.h" />
+    <ClInclude Include="..\..\common\rbtree.h" />
     <ClInclude Include="..\..\common\stream.h" />
+    <ClInclude Include="..\..\common\win32_ntddk.h" />
+    <ClInclude Include="..\..\common\wow64ext\CMemPtr.h" />
+    <ClInclude Include="..\..\common\wow64ext\internal.h" />
+    <ClInclude Include="..\..\common\wow64ext\wow64ext.h" />
     <ClInclude Include="advapi.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="dll.h" />
+    <ClInclude Include="dump.h" />
     <ClInclude Include="guidlg.h" />
     <ClInclude Include="gui_p.h" />
     <ClInclude Include="hook.h" />

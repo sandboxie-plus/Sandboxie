@@ -25,43 +25,9 @@
 #include "process.h"
 #include "syscall.h"
 #include "token.h"
+#include "obj.h"
 #include "session.h"
 #include "api.h"
-
-
-//---------------------------------------------------------------------------
-// Defines
-//---------------------------------------------------------------------------
-
-
-#define PROCESS_DENIED_ACCESS_MASK                              \
-        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
-            PROCESS_VM_READ | PROCESS_QUERY_INFORMATION |       \
-            PROCESS_QUERY_LIMITED_INFORMATION )
-
-#define THREAD_DENIED_ACCESS_MASK                               \
-        ~(  STANDARD_RIGHTS_READ | SYNCHRONIZE |                \
-            THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION |     \
-            THREAD_QUERY_LIMITED_INFORMATION )
-
-
-//---------------------------------------------------------------------------
-// Structures and Types
-//---------------------------------------------------------------------------
-
-
-struct _THREAD {
-
-    LIST_ELEM list_elem;
-
-    HANDLE tid;
-
-    void *token_object;
-    BOOLEAN token_CopyOnOpen;
-    BOOLEAN token_EffectiveOnly;
-    SECURITY_IMPERSONATION_LEVEL token_ImpersonationLevel;
-
-};
 
 
 //---------------------------------------------------------------------------
@@ -73,8 +39,6 @@ static void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create);
 
 static PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc1, void *ProcessObject2, KIRQL *out_irql);
-
-static THREAD *Thread_GetCurrent(PROCESS *proc);
 
 static THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create);
 
@@ -94,10 +58,6 @@ static NTSTATUS Thread_CheckProcessObject(
 static NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess);
-
-static NTSTATUS Thread_CheckObject_Common(
-    PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1);
 
 
 //---------------------------------------------------------------------------
@@ -188,6 +148,7 @@ _FX BOOLEAN Thread_Init(void)
                     "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
         return FALSE;
 
+
     //
     // set object open handlers
     //
@@ -208,6 +169,7 @@ _FX BOOLEAN Thread_Init(void)
                     "AlpcOpenSenderThread",     Thread_CheckThreadObject))
             return FALSE;
     }
+
 
     //
     // set API handlers
@@ -247,10 +209,11 @@ _FX void Thread_Unload(void)
 _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
 {
     void *TokenObject = NULL;
-    PROCESS *proc;
-    THREAD *thrd;
+    PROCESS *proc = NULL;
+    THREAD *thrd = NULL;
     KIRQL irql;
 
+#ifdef XP_SUPPORT
     //
     // implement Gui_ThreadModifyCount watchdog hook for gui_xp module
     //
@@ -264,6 +227,7 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
     }
 
 #endif _WIN64
+#endif
 
     //
     //
@@ -274,12 +238,19 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
 
         ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+        if (Create)
+            thrd = map_get(&proc->thread_map, ThreadId);
+        else // remove
+            map_take(&proc->thread_map, ThreadId, &thrd, 0);
+#else
         thrd = List_Head(&proc->threads);
         while (thrd) {
             if (thrd->tid == ThreadId)
                 break;
             thrd = List_Next(thrd);
         }
+#endif
 
         if (thrd) {
 
@@ -293,7 +264,9 @@ _FX void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create)
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
 
+#ifndef USE_PROCESS_MAP
                 List_Remove(&proc->threads, thrd);
+#endif
                 Mem_Free(thrd, sizeof(THREAD));
             }
         }
@@ -321,7 +294,12 @@ _FX BOOLEAN Thread_InitProcess(PROCESS *proc)
 
     if (! proc->threads_lock) {
 
+#ifdef USE_PROCESS_MAP
+        map_init(&proc->thread_map, proc->pool);
+	    map_resize(&proc->thread_map, 32); // prepare some buckets for better performance
+#else
         List_Init(&proc->threads);
+#endif
 
         ok = Mem_GetLockResource(&proc->threads_lock, FALSE);
         if (! ok)
@@ -357,15 +335,23 @@ _FX void Thread_ReleaseProcess(PROCESS *proc)
             KeRaiseIrql(APC_LEVEL, &irql);
             ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+	        map_iter_t iter = map_iter();
+	        while (map_next(&proc->thread_map, &iter)) {
+                thrd = iter.value;
+#else
             thrd = List_Head(&proc->threads);
             while (thrd) {
+#endif
 
                 TokenObject = InterlockedExchangePointer(
                                             &thrd->token_object, NULL);
                 if (TokenObject)
                     break;
 
+#ifndef USE_PROCESS_MAP
                 thrd = List_Next(thrd);
+#endif
             }
 
             ExReleaseResourceLite(proc->threads_lock);
@@ -393,7 +379,11 @@ _FX PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc2 = Process_Find(PsGetProcessId(ProcessObject2), out_irql);
     if (proc2) {
 
-        if (! Process_IsSameBox(proc1, proc2, 0))
+        if (! Process_IsSameBox(proc1, proc2, 0) 
+#ifdef DRV_BREAKOUT
+            && ! Process_IsStarter(proc1, proc2)
+#endif
+        )
             proc2 = NULL;
 
         else if (! proc2->threads_lock) {
@@ -409,6 +399,7 @@ _FX PROCESS *Thread_FindAndInitProcess(
 }
 
 
+#ifdef XP_SUPPORT
 //---------------------------------------------------------------------------
 // Thread_AdjustGrantedAccess
 //---------------------------------------------------------------------------
@@ -472,32 +463,38 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
     return TRUE;
 }
+#endif
 
 
 //---------------------------------------------------------------------------
-// Thread_GetCurrent
+// Thread_GetByThreadId
 //---------------------------------------------------------------------------
 
 
-_FX THREAD *Thread_GetCurrent(PROCESS *proc)
+_FX THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid)
 {
     THREAD *thrd;
-    HANDLE tid;
     KIRQL irql;
 
     if (! proc->threads_lock)
         return NULL;
+    
+    if (! tid)
+        tid = PsGetCurrentThreadId();
 
-    tid = PsGetCurrentThreadId();
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
+#ifdef USE_PROCESS_MAP
+    thrd = map_get(&proc->thread_map, tid);
+#else
     thrd = List_Head(&proc->threads);
     while (thrd) {
         if (thrd->tid == tid)
             break;
         thrd = List_Next(thrd);
     }
+#endif
 
     ExReleaseResourceLite(proc->threads_lock);
     KeLowerIrql(irql);
@@ -517,19 +514,27 @@ _FX THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create)
     if (! tid)
         tid = PsGetCurrentThreadId();
 
+#ifdef USE_PROCESS_MAP
+    thrd = map_get(&proc->thread_map, tid);
+#else
     thrd = List_Head(&proc->threads);
     while (thrd) {
         if (thrd->tid == tid)
             break;
         thrd = List_Next(thrd);
     }
+#endif
 
     if ((! thrd) && create) {
         thrd = Mem_Alloc(proc->pool, sizeof(THREAD));
         if (thrd) {
             memzero(thrd, sizeof(THREAD));
             thrd->tid = tid;
+#ifdef USE_PROCESS_MAP
+            map_insert(&proc->thread_map, tid, thrd, 0);
+#else
             List_Insert_After(&proc->threads, NULL, thrd);
+#endif
         }
     }
 
@@ -579,6 +584,8 @@ _FX NTSTATUS Thread_MyImpersonateClient(
     NTSTATUS status = PsImpersonateClient(ThreadObject, TokenObject,
                         CopyOnOpen, EffectiveOnly, SecurityIdentification);
 
+    // Hard Offset Dependency
+
     // ***** ImpersonationInfo_offset is the offset of ClientSecurity field in nt!ETHREAD structure *****
 
     if (NT_SUCCESS(status) && TokenObject) {
@@ -612,7 +619,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                 ImpersonationInfo_offset = 0x678;
             else if (Driver_OsBuild < 18980)
                 ImpersonationInfo_offset = 0x688;
-            else if (Driver_OsBuild < 21286)
+            else if (Driver_OsBuild < 20348)
                 ImpersonationInfo_offset = 0x4a8;
             else
                 ImpersonationInfo_offset = 0x4f8;
@@ -644,7 +651,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                 ImpersonationInfo_offset = 0x398;
             else  if (Driver_OsBuild < 18980) 
                 ImpersonationInfo_offset = 0x3A0;
-            else if (Driver_OsBuild < 21286)
+            else if (Driver_OsBuild < 20348)
                 ImpersonationInfo_offset = 0x2c8;
             else
                 ImpersonationInfo_offset = 0x2f0;
@@ -723,7 +730,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                     if ((*ImpersonationInfo & ~7) == (ULONG_PTR)TokenObject)
                     {
                         WCHAR str[64];
-                        swprintf(str, L"BAM! found: %d", i);
+                        RtlStringCbPrintfW(str, 64, L"BAM! found: %d", i);
                         Session_MonitorPut(MONITOR_OTHER, str, PsGetCurrentProcessId());
                     }
                 }
@@ -771,7 +778,7 @@ _FX void Thread_SetThreadToken(PROCESS *proc)
 
     DerefToken = FALSE;
 
-    thrd = Thread_GetCurrent(proc);
+    thrd = Thread_GetByThreadId(proc, 0);
     if (thrd) {
 
         //
@@ -883,7 +890,7 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
-    thrd = Thread_GetCurrent(proc);
+    thrd = Thread_GetByThreadId(proc, 0);
     if (thrd) {
 
         //
@@ -943,10 +950,9 @@ _FX NTSTATUS Thread_CheckProcessObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess)
 {
+    if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = (PEPROCESS)Object;
-    ACCESS_MASK WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
-    return Thread_CheckObject_Common(
-                proc, ProcessObject, GrantedAccess, WriteAccess, L'P');
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, TRUE, TRUE);
 }
 
 
@@ -959,10 +965,9 @@ _FX NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess)
 {
+    if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = PsGetThreadProcess(Object);
-    ACCESS_MASK WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
-    return Thread_CheckObject_Common(
-                proc, ProcessObject, GrantedAccess, WriteAccess, L'T');
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, FALSE, TRUE);
 }
 
 
@@ -973,11 +978,40 @@ _FX NTSTATUS Thread_CheckThreadObject(
 
 _FX NTSTATUS Thread_CheckObject_Common(
     PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1)
+    ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess)
 {
     ULONG_PTR pid;
     const WCHAR *pSetting;
     NTSTATUS status;
+    WCHAR Letter1;
+    ACCESS_MASK WriteAccess;
+    ACCESS_MASK ReadAccess;
+
+    BOOLEAN ShouldMonitorAccess = FALSE;
+    void *nbuf;
+    ULONG nlen;
+    WCHAR *nptr;
+
+    if (EntireProcess) {
+        Letter1 = L'P';
+        WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
+        ReadAccess = (GrantedAccess & PROCESS_VM_READ); 
+
+        //
+        // PROCESS_QUERY_INFORMATION allows to steal an attached debug object
+        // using object filtering mitigates this issue 
+        // but when its not active we should block that access
+        //
+
+        if(!Obj_CallbackInstalled)
+            ReadAccess |= (GrantedAccess & PROCESS_QUERY_INFORMATION); 
+    }
+    else {
+        Letter1 = L'T';
+        WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
+        ReadAccess = 0;
+    }
 
     //
     // if an error occured and can't find pid, then don't allow
@@ -988,24 +1022,14 @@ _FX NTSTATUS Thread_CheckObject_Common(
     if (! pid)
         return STATUS_ACCESS_DENIED;
 
-    //
-    // for read-only access to the target process, we don't care
-    // if/which boxes are involved
-    //
-
-    if (pid && (WriteAccess == 0)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    status = STATUS_SUCCESS;
 
     //
-    // otherwise this is write access, confirm if same box
+    // allow access if it's within the same box
     //
 
-    if (Process_IsSameBox(proc, NULL, pid)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    if (Process_IsSameBox(proc, NULL, pid))
+        goto finish;
 
     //
     // also permit if process is exiting, because it is possible that
@@ -1014,52 +1038,59 @@ _FX NTSTATUS Thread_CheckObject_Common(
     // (e.g. VS2012 MSBuild.exe does this with the csc.exe compiler)
     //
 
-    if (PsGetProcessExitProcessCalled(ProcessObject)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    if (ExplicitAccess && PsGetProcessExitProcessCalled(ProcessObject))
+        goto finish;
+
 
     //
-    // write access outside box, check if we have the following setting
+    // access outside box, check if we have the following setting
     // OpenIpcPath=$:ProcessName.exe
     //
 
-    status = Process_CheckProcessName(
-                    proc, &proc->open_ipc_paths, pid, &pSetting);
+    if (Process_CheckProcessName(proc, &proc->closed_ipc_paths, pid, &pSetting)) {
 
+        status = STATUS_ACCESS_DENIED;
+
+    } else if (WriteAccess != 0 || ReadAccess != 0) {
+
+        if (!Process_CheckProcessName(proc, &proc->open_ipc_paths, pid, &pSetting)) {
+
+            if (WriteAccess != 0) {
+
+                status = STATUS_ACCESS_DENIED;
+
+            } else if (!Process_CheckProcessName(proc, &proc->read_ipc_paths, pid, &pSetting)) {
+
+                status = STATUS_ACCESS_DENIED;
+            }
+        }
+    }
+    
     //
     // log the cross-sandbox access attempt, based on the status code
     //
 
-    if (Session_MonitorCount) {
+    ShouldMonitorAccess = TRUE;
 
-        void *nbuf;
-        ULONG nlen;
-        WCHAR *nptr;
+finish:
 
-        Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
-        if (nbuf) {
-
-            ULONG mon_type = MONITOR_IPC;
-            if (NT_SUCCESS(status))
-                mon_type |= MONITOR_OPEN;
-            else
-                mon_type |= MONITOR_DENY;
-
-            --nptr; *nptr = L':';
-            --nptr; *nptr = L'$';
-
-            Session_MonitorPut(mon_type, nptr, proc->pid);
-
-            Mem_Free(nbuf, nlen);
-        }
+    Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
+    if (nbuf) {
+        --nptr; *nptr = L':';
+        --nptr; *nptr = L'$';
     }
+
+    ULONG mon_type = MONITOR_IPC;
+    if(!NT_SUCCESS(status))
+        mon_type |= MONITOR_DENY;
+    else if (WriteAccess || ReadAccess)
+        mon_type |= MONITOR_OPEN;
+    if (!ShouldMonitorAccess)
+        mon_type |= MONITOR_TRACE;
 
     //
     // trace
     //
-
-trace:
 
     if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY)) {
 
@@ -1074,11 +1105,25 @@ trace:
             Letter2 = 0;
 
         if (Letter2) {
-            swprintf(str, L"(%c%c) %08X %06d",
+            RtlStringCbPrintfW(str, sizeof(str), L"(%c%c) %08X %06d",
                                 Letter1, Letter2, GrantedAccess, (int)pid);
-            Log_Debug_Msg(MONITOR_IPC | MONITOR_TRACE, str, Driver_Empty);
+            Log_Debug_Msg(mon_type, str, nptr ? nptr : Driver_Empty);
         }
     }
+    else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor && nbuf != NULL) {
+
+        Session_MonitorPut(mon_type, nptr, proc->pid);
+    }
+
+    if (ExplicitAccess && (status != STATUS_SUCCESS) && (status != STATUS_BAD_INITIAL_PC)) {
+
+        WCHAR msg[256];
+        RtlStringCbPrintfW(msg, sizeof(msg), L"%s (%08X) access=%08X initialized=%d", EntireProcess ? L"OpenProcess" : L"OpenThread", status, GrantedAccess, proc->initialized);
+		Log_Msg_Process(MSG_2111, msg, nptr != NULL ? nptr : L"Unnamed process", -1, proc->pid);
+    }
+
+    if (nbuf) 
+        Mem_Free(nbuf, nlen);
 
     return status;
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@
 //---------------------------------------------------------------------------
 
 
-#undef  WITH_DEBUG
+//#undef  WITH_DEBUG
 //#define WITH_DEBUG
 
 
@@ -40,6 +41,9 @@
 #define  BREAK_IMAGE_1      L"TestTarget.exe" 
 
 int Debug_Init(void);
+
+void DbgPrint(const char* format, ...);
+void DbgTrace(const char* format, ...);
 
 #endif  WITH_DEBUG
 

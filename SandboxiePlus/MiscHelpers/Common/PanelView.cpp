@@ -2,6 +2,7 @@
 #include "PanelView.h"
 
 bool CPanelView::m_SimpleFormat = false;
+bool CPanelView::m_DarkMode = false;
 int CPanelView::m_MaxCellWidth = 0;
 QString CPanelView::m_CellSeparator = "\t";
 

@@ -183,20 +183,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\common\BoxOrder.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\common\FontStore.cpp" />
     <ClCompile Include="..\common\Layout.cpp" />
-    <ClCompile Include="..\common\MyGdi.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\common\MyMsg.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
@@ -297,12 +285,11 @@
     <ClInclude Include="..\..\common\json\JSON.h" />
     <ClInclude Include="..\..\common\json\JSONValue.h" />
     <ClInclude Include="..\..\common\my_version.h" />
-    <ClInclude Include="..\common\BoxOrder.h" />
     <ClInclude Include="..\common\FontStore.h" />
     <ClInclude Include="..\common\Layout.h" />
-    <ClInclude Include="..\common\MyGdi.h" />
     <ClInclude Include="..\common\MyMsg.h" />
     <ClInclude Include="..\common\RunBrowser.h" />
+    <ClInclude Include="..\common\RunStartExe.h" />
     <ClInclude Include="AboutDialog.h" />
     <ClInclude Include="AlertDialog.h" />
     <ClInclude Include="AnimatedBitmap.h" />

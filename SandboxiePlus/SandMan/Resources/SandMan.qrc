@@ -1,12 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>SandMan.png</file>
-        <file alias="BoxEmpty">sandbox-empty.png</file>
-        <file alias="BoxInUse">sandbox-full.png</file>
         <file alias="dllIcon32">dll32.png</file>
         <file alias="exeIcon32">exe32.png</file>
         <file>close.png</file>
-        <file>SandMan2.png</file>
         <file>Actions/Internet.png</file>
         <file>Actions/Keep.png</file>
         <file>Actions/ReloadIni.png</file>
@@ -43,10 +40,34 @@
         <file>Actions/Box.png</file>
         <file>Actions/Template.png</file>
         <file>Actions/Stop.png</file>
-        <file>SandMan2N.png</file>
-        <file>SandManN.png</file>
         <file>Actions/finder.png</file>
         <file>Actions/Tree.png</file>
+        <file>Actions/Support.png</file>
+        <file>HelpingHand.png</file>
+        <file>Actions/RegEdit.png</file>
+        <file>Actions/Software.png</file>
+        <file>Actions/Ampel.png</file>
+        <file>Actions/Compatibility.png</file>
+        <file>Actions/Lock.png</file>
+        <file>Actions/Shell.png</file>
+        <file>Actions/Duplicate.png</file>
+        <file>Actions/Up.png</file>
+        <file>Actions/Down.png</file>
+        <file>Actions/All.png</file>
+        <file>Actions/Save.png</file>
+        <file>Actions/Uninstall.png</file>
+        <file>IconBusy.png</file>
+        <file>IconBusyC.png</file>
+        <file>IconDFP.png</file>
+        <file>IconDFPC.png</file>
+        <file>IconEmpty.png</file>
+        <file>IconEmptyC.png</file>
+        <file>IconFull.png</file>
+        <file>IconFullC.png</file>
+        <file>IconOff.png</file>
+        <file>IconOffC.png</file>
+        <file>IconOffCx.png</file>
+        <file>Actions/Monitor.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
@@ -63,5 +84,6 @@
         <file alias="Full0">Boxes/sandbox-y-full.png</file>
         <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
         <file alias="Full6">Boxes/sandbox-o-full.png</file>
+        <file alias="Busy">Boxes/BusyOverlay.png</file>
     </qresource>
 </RCC>

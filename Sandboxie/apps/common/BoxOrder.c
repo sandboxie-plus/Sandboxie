@@ -325,7 +325,7 @@ _FX void BoxOrder_ReadMissing(BOX_ORDER_ENTRY *parent)
     box_index = -1;
     while (1) {
         box_index = SbieApi_EnumBoxesEx(
-                        box_index | CONF_GET_NO_TEMPLS, work_name, TRUE);
+                        box_index, work_name, TRUE);
         if (box_index == -1)
             break;
         if (SbieApi_IsBoxEnabled(work_name) == 0)
@@ -342,7 +342,7 @@ _FX void BoxOrder_ReadMissing(BOX_ORDER_ENTRY *parent)
     while (name_index < box_count) {
         name = &all_names[name_index * 34];
         box_index = SbieApi_EnumBoxesEx(
-                        box_index | CONF_GET_NO_TEMPLS, name, TRUE);
+                        box_index, name, TRUE);
         if (box_index == -1)
             break;
         if (SbieApi_IsBoxEnabled(name) == 0)

@@ -21,6 +21,7 @@
 //---------------------------------------------------------------------------
 
 #include "conf.h"
+#include "obj.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -191,6 +192,16 @@ _FX NTSTATUS Syscall_CheckObject(
         status = syscall_entry->handler2_func(
             proc, OpenedObject, &Name->Name, HandleInfo->GrantedAccess);
 
+        //
+        // process/thread access has an own loggin routine
+        //
+
+        if ((syscall_entry->name_len == 11 && memcmp(syscall_entry->name, "OpenProcess", 11) == 0) ||
+            (syscall_entry->name_len == 10 && memcmp(syscall_entry->name, "OpenThread", 10) == 0) ||
+            (syscall_entry->name_len == 21 && memcmp(syscall_entry->name, "AlpcOpenSenderProcess", 21) == 0) ||
+            (syscall_entry->name_len == 20 && memcmp(syscall_entry->name, "AlpcOpenSenderThread", 20) == 0))
+            goto skip_log;
+
         if ((status != STATUS_SUCCESS)
                             && (status != STATUS_BAD_INITIAL_PC)) {
 
@@ -198,10 +209,11 @@ _FX NTSTATUS Syscall_CheckObject(
                 puName = &Name->Name;
 
             WCHAR msg[256];
-            swprintf(msg, L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
-			Log_Msg_Process(MSG_2101, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
+            RtlStringCbPrintfW(msg, sizeof(msg), L"%S (%08X) access=%08X initialized=%d", syscall_entry->name, status, HandleInfo->GrantedAccess, proc->initialized);
+			Log_Msg_Process(MSG_2112, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
         }
 
+skip_log:
         if (Name != &Obj_Unnamed)
             Mem_Free(Name, NameLength);
     }
@@ -270,7 +282,7 @@ _FX NTSTATUS Syscall_OpenHandle(
                         || wcsncmp(&puName->Buffer[4], L"Volume", 6) == 0) // \??\Volume{2b985816-4b6f-11ea-bd33-48a4725d5bbe}
                     {
                         WCHAR access_str[24];
-                        swprintf(access_str, L"(DD) %08X", DesiredAccess);
+                        RtlStringCbPrintfW(access_str, sizeof(access_str), L"(DD) %08X", DesiredAccess);
                         Log_Debug_Msg(MONITOR_DRIVE | MONITOR_DENY, access_str, puName->Buffer);
 
                         if (proc->file_warn_direct_access) {
@@ -318,7 +330,7 @@ _FX NTSTATUS Syscall_OpenHandle(
     if (! NewHandle) {
 
         //WCHAR trace_str[128];
-        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
         //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
 
         Process_SetTerminated(proc, 6);
@@ -382,14 +394,14 @@ _FX NTSTATUS Syscall_OpenHandle(
         }
     }
 
-    if (!NT_SUCCESS(status)) {
-
-        //WCHAR trace_str[128];
-        //swprintf(trace_str, L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
-        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
-
-        Process_SetTerminated(proc, 7);
-    }
+    //if (!NT_SUCCESS(status)) {
+    //
+    //    //WCHAR trace_str[128];
+    //    //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation, status = 0x%X, terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name, status);
+    //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+    //
+    //    Process_SetTerminated(proc, 7);
+    //}
 
     return status;
 }
@@ -403,7 +415,154 @@ _FX NTSTATUS Syscall_OpenHandle(
 _FX NTSTATUS Syscall_GetNextProcess(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
-    return STATUS_ACCESS_DENIED;
+    if (Obj_CallbackInstalled) // ObCallbacks takes care of that already
+        return Syscall_Invoke(syscall_entry, user_args); // so here we can just allow the execution
+
+    // ToDo: make this syscall work
+
+
+    NTSTATUS status;
+    NTSTATUS orig_status;
+    HANDLE *UserHandlePtr;
+    HANDLE *TlsPtr;
+    HANDLE TlsValue;
+    HANDLE NewHandle;
+    HANDLE OldHandle = (HANDLE)user_args[0];
+    ACCESS_MASK DesiredAccess = (ACCESS_MASK)user_args[1];
+    PEPROCESS ProcessObject;
+    
+next:
+
+    //
+    // replace the address of the handle in the user stack
+    //
+
+    UserHandlePtr = Syscall_ReplaceTargetHandle(
+                                (HANDLE *)&user_args[4], TRUE,
+                                &TlsPtr, &TlsValue);
+
+    //
+    // execute the syscall to get the handle into the TLS, then extract
+    // the handle value and restore the original value at the TLS slot
+    //
+    // save the original return code from the syscall, in case there is
+    // a non-zero success status code (see also Syscall_OpenHandle)
+    //
+    // if the syscall did not complete due to an APC, then we abort early
+    //
+
+    status = Syscall_Invoke(syscall_entry, user_args);
+
+    orig_status = status;
+
+    NewHandle = Syscall_RestoreTargetHandle(
+                                &user_args[4], UserHandlePtr,
+                                TlsPtr, TlsValue);
+
+    if (! NewHandle) {
+
+        //WCHAR trace_str[128];
+        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
+
+        Process_SetTerminated(proc, 8);
+        status = STATUS_PROCESS_IS_TERMINATING;
+    }
+
+    //
+    // always close the old handle we were nto allowed to access
+    //
+
+    if (OldHandle != (HANDLE)user_args[0]) {
+
+        NtClose((HANDLE)user_args[0]);
+    }
+
+    //
+    // return on error if an APC interrupted the syscall
+    //
+
+    if ((! NT_SUCCESS(status)) || (status == STATUS_USER_APC))
+        return status;
+    
+    //
+    // check if the caller is allowed to access this process
+    //
+
+    status = ObReferenceObjectByHandle(NewHandle, 0, *PsProcessType, UserMode, &ProcessObject, NULL);
+
+    if (NT_SUCCESS(status)) {
+
+        status = Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, TRUE, FALSE);
+
+        ObDereferenceObject(ProcessObject);
+    }
+    
+    if (!NT_SUCCESS(status)) {
+
+        //
+        // if we are not alowed to open this process, try the next one, don't forget to close this handle!
+        //
+
+        user_args[0] = (ULONG_PTR)NewHandle;
+
+        goto next;
+    }
+
+    //
+    // if all went well, copy the opened handle into the first parameter
+    //
+
+    if (NT_SUCCESS(status)) {
+
+        __try {
+
+            if (UserHandlePtr)
+                *UserHandlePtr = NewHandle;
+            status = orig_status;
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+
+            status = STATUS_PROCESS_IS_TERMINATING;
+        }
+    }
+
+    return status;
+}
+
+//---------------------------------------------------------------------------
+// Syscall_GetNextThread
+//---------------------------------------------------------------------------
+
+_FX NTSTATUS Syscall_GetNextThread(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
+{
+    NTSTATUS status;
+    HANDLE ProcessHandle = (HANDLE)user_args[0];
+    ACCESS_MASK DesiredAccess = (ACCESS_MASK)user_args[2];
+    PEPROCESS ProcessObject;
+
+    if (Obj_CallbackInstalled) // ObCallbacks takes care of that already
+        return Syscall_Invoke(syscall_entry, user_args); // so here we can just allow the execution
+
+    //
+    // check if the caller is allowed to access this process, we don't filter on a per thread basis
+    //
+
+    status = ObReferenceObjectByHandle(ProcessHandle, 0, *PsProcessType, UserMode, &ProcessObject, NULL);
+
+    if (NT_SUCCESS(status)) {
+
+        status = Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, FALSE, FALSE);
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    if (!NT_SUCCESS(status)) 
+        return STATUS_ACCESS_DENIED;
+
+    // if all checks apssed we can llow the execution of this syscall
+    return Syscall_Invoke(syscall_entry, user_args);
 }
 
 //---------------------------------------------------------------------------
@@ -478,7 +637,7 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     if (! NewHandle) {
 
         //WCHAR trace_str[128];
-        //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+        //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
         //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
 
         Process_SetTerminated(proc, 8);
@@ -539,13 +698,13 @@ _FX NTSTATUS Syscall_DuplicateHandle(
     //  if (! NT_SUCCESS(status)) {
     //      if(!wcsicmp(proc->image_name,L"SandboxieBITS.exe") && status == STATUS_ACCESS_DENIED) { 
     //          return status;
-    //  }
+    //      }
     //
     //    //WCHAR trace_str[128];
-    //    //swprintf(trace_str, L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
+    //    //RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"Syscall %.*S security violation terminating process", max(strlen(syscall_entry->name), 64), syscall_entry->name);
     //    //Session_MonitorPut(MONITOR_OTHER, trace_str, PsGetCurrentProcessId());
     //
-    //  Process_SetTerminated(proc, 9);
+    //    Process_SetTerminated(proc, 9);
     //}
 
     return status;
@@ -625,7 +784,9 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
         TypeLength = ObjectType->Name.Length;
         TypeBuffer = ObjectType->Name.Buffer;
 
-    } else {
+    } 
+#ifdef XP_SUPPORT
+    else {
 
         OBJECT_HEADER *ObjectHeader = OBJECT_TO_OBJECT_HEADER(OpenedObject);
 
@@ -645,6 +806,7 @@ _FX NTSTATUS Syscall_DuplicateHandle_2(
             TypeBuffer = ObjectType->Name.Buffer;
         }
     }
+#endif
 
     //DbgPrint("Object %08X TypeBuffer %*.*S (%d)\n", OpenedObject, TypeLength/sizeof(WCHAR), TypeLength/sizeof(WCHAR), TypeBuffer, TypeLength);
 
@@ -703,6 +865,7 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
     USHORT TypeLength, WCHAR *TypeBuffer)
 {
     static const WCHAR *_Port = L"Port";
+    static const WCHAR *_Job = L"Job";
     SYSCALL_ENTRY *entry;
     ULONG name_len;
     UCHAR SyscallName[32];
@@ -722,6 +885,10 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
         (TypeLength == 9 && wmemcmp(TypeBuffer + 5, _Port, 4) == 0)) {
 
         strcpy(SyscallName, "ConnectPort");
+
+    } else if (TypeLength == 3 && wmemcmp(TypeBuffer, _Job, 3) == 0) {
+
+        strcpy(SyscallName, "OpenJobObject");
 
     } else if (TypeLength <= 24) {
 

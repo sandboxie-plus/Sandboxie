@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -97,6 +97,19 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
     UNICODE_STRING uni;
     IO_STATUS_BLOCK MyIoStatusBlock;
 
+    if (parms == NULL) { // close request as used by kmdutil
+        if(SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
+            NtClose(SbieApi_DeviceHandle);
+        SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
+    }
+
+    if (Dll_SbieTrace && parms[0] != API_MONITOR_PUT2) {
+        WCHAR dbg[1024];
+        extern const wchar_t* Trace_SbieDrvFunc2Str(ULONG func);
+        Sbie_snwprintf(dbg, 1024, L"SbieApi_Ioctl: %s %s", Dll_ImageName, Trace_SbieDrvFunc2Str((ULONG)parms[0]));
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
+    }
+
     if (SbieApi_DeviceHandle == INVALID_HANDLE_VALUE) {
 
         RtlInitUnicodeString(&uni, API_DEVICE_NAME);
@@ -138,84 +151,27 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
-// SbieApi_CallZero
+// SbieApi_CallFunc
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_CallZero(ULONG api_code)
+_FX LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...) 
 {
+    va_list valist;
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 
     memzero(parms, sizeof(parms));
     parms[0] = api_code;
-    status = SbieApi_Ioctl(parms);
 
-    if (NT_SUCCESS(status)) {
-        if (api_code == API_UNLOAD_DRIVER) {
-            NtClose(SbieApi_DeviceHandle);
-            SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
-        }
-    }
+    if (arg_num >= (API_NUM_ARGS - 1))
+        return STATUS_INVALID_PARAMETER;
 
-    return status;
-}
+    va_start(valist, arg_num);
+    for (LONG i = 1; i <= arg_num; i++)
+        parms[i] = (ULONG64)va_arg(valist, ULONG_PTR);
+    va_end(valist);
 
-
-//---------------------------------------------------------------------------
-// SbieApi_CallOne
-//---------------------------------------------------------------------------
-
-
-_FX LONG SbieApi_CallOne(ULONG api_code, ULONG_PTR arg)
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-
-    memzero(parms, sizeof(parms));
-    parms[0] = api_code;
-    parms[1] = (ULONG64)arg;
-    status = SbieApi_Ioctl(parms);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// SbieApi_CallTwo
-//---------------------------------------------------------------------------
-
-
-_FX LONG SbieApi_CallTwo(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2)
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-
-    memzero(parms, sizeof(parms));
-    parms[0] = api_code;
-    parms[1] = (ULONG64)arg1;
-    parms[2] = (ULONG64)arg2;
-    status = SbieApi_Ioctl(parms);
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
-// SbieApi_CallThree
-//---------------------------------------------------------------------------
-
-
-_FX LONG SbieApi_CallThree(ULONG api_code, ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3)
-{
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-
-    memzero(parms, sizeof(parms));
-    parms[0] = api_code;
-    parms[1] = (ULONG64)arg1;
-    parms[2] = (ULONG64)arg2;
-    parms[3] = (ULONG64)arg3;
     status = SbieApi_Ioctl(parms);
 
     return status;
@@ -808,7 +764,8 @@ _FX LONG SbieApi_QueryPathList(
     ULONG path_code,
     ULONG *path_len,
     WCHAR *path_str,
-    HANDLE process_id)
+    HANDLE process_id,
+    BOOLEAN prepend_level)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -820,6 +777,7 @@ _FX LONG SbieApi_QueryPathList(
     args->path_len.val64 = (ULONG64)(ULONG_PTR)path_len;
     args->path_str.val64 = (ULONG64)(ULONG_PTR)path_str;
     args->process_id.val64 = (ULONG64)(ULONG_PTR)process_id;
+    args->prepend_level.val = prepend_level;
     status = SbieApi_Ioctl(parms);
 
     return status;
@@ -1019,16 +977,74 @@ _FX LONG SbieApi_CheckInternetAccess(
     WCHAR MyDeviceName[34];
     ULONG len;
 
-    len = wcslen(DeviceName32);
-    if (len > 32)
-        len = 32;
-    memzero(MyDeviceName, sizeof(MyDeviceName));
-    wmemcpy(MyDeviceName, DeviceName32, len);
+    if (DeviceName32) {
+        len = wcslen(DeviceName32);
+        if (len > 32)
+            len = 32;
+        memzero(MyDeviceName, sizeof(MyDeviceName));
+        wmemcpy(MyDeviceName, DeviceName32, len);
+
+        const WCHAR* ptr = DeviceName32;
+
+        static const WCHAR *File_RawIp = L"rawip6";
+        static const WCHAR *File_Http  = L"http\\";
+        static const WCHAR *File_Tcp   = L"tcp6";
+        static const WCHAR *File_Udp   = L"udp6";
+        static const WCHAR *File_Ip    = L"ip6";
+        static const WCHAR *File_Afd   = L"afd";
+        static const WCHAR *File_Nsi   = L"nsi";
+
+        //
+        // check if this is an internet device
+        //
+
+        BOOLEAN chk = FALSE;
+        if (len == 6) {
+            
+            if (_wcsnicmp(ptr, File_RawIp, 6) == 0)
+                chk = TRUE;
+
+        } else if (len == 5) {
+
+            if (_wcsnicmp(ptr, File_RawIp, 5) == 0)
+                chk = TRUE;
+
+        } else if (len == 4) {
+
+            if (_wcsnicmp(ptr, File_Http, 4) == 0)
+                chk = TRUE;
+            if (_wcsnicmp(ptr, File_Tcp, 4) == 0)
+                chk = TRUE;
+            else if (_wcsnicmp(ptr, File_Udp, 4) == 0)
+                chk = TRUE;
+
+        } else if (len == 3) {
+
+            if (_wcsnicmp(ptr, File_Tcp, 3) == 0)
+                chk = TRUE;
+            else if (_wcsnicmp(ptr, File_Udp, 3) == 0)
+                chk = TRUE;
+            else if (_wcsnicmp(ptr, File_Ip, 3) == 0)
+                chk = TRUE;
+            else if (_wcsnicmp(ptr, File_Afd, 3) == 0)
+                chk = TRUE;
+            else if (_wcsnicmp(ptr, File_Nsi, 3) == 0)
+                chk = TRUE;
+
+        } else if (len == 2) {
+
+            if (_wcsnicmp(ptr, File_Ip, 2) == 0)
+                chk = TRUE;
+        }
+
+        if (! chk) // quick bail out, don't bother the driver with irrelevant devices
+            return STATUS_OBJECT_NAME_INVALID;
+    }
 
     memzero(parms, sizeof(parms));
     args->func_code               = API_CHECK_INTERNET_ACCESS;
     args->process_id.val64        = (ULONG64)(ULONG_PTR)ProcessId;
-    args->device_name.val64       = (ULONG64)(ULONG_PTR)MyDeviceName;
+    args->device_name.val64       = (ULONG64)(ULONG_PTR)(DeviceName32 ? MyDeviceName : NULL);
     args->issue_message.val64     = (ULONG64)(ULONG_PTR)IssueMessage;
 
     status = SbieApi_Ioctl(parms);
@@ -1234,7 +1250,7 @@ _FX LONG SbieApi_QuerySymbolicLink(
 //---------------------------------------------------------------------------
 
 
-_FX LONG SbieApi_ReloadConf(ULONG session_id)
+_FX LONG SbieApi_ReloadConf(ULONG session_id, ULONG flags)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -1242,6 +1258,7 @@ _FX LONG SbieApi_ReloadConf(ULONG session_id)
     memset(parms, 0, sizeof(parms));
     parms[0] = API_RELOAD_CONF;
     parms[1] = session_id;
+    parms[2] = flags;
     status = SbieApi_Ioctl(parms);
 
     return status;
@@ -1295,6 +1312,25 @@ _FX LONG SbieApi_QueryConf(
 
 
 //---------------------------------------------------------------------------
+// SbieApi_QueryConf
+//---------------------------------------------------------------------------
+
+
+/*_FX LONG SbieApi_QueryConf(
+    const WCHAR* section_name,      // WCHAR [66]
+    const WCHAR* setting_name,      // WCHAR [66]
+    ULONG setting_index,
+    WCHAR* out_buffer,
+    ULONG buffer_len)
+{
+    //if(SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
+        return SbieApi_QueryConfDrv(section_name, setting_name, setting_index, out_buffer, buffer_len);
+    // else try service    
+    //return STATUS_CONNECTION_INVALID;
+}*/
+
+
+//---------------------------------------------------------------------------
 // SbieApi_QueryConfBool
 //---------------------------------------------------------------------------
 
@@ -1342,7 +1378,7 @@ _FX LONG SbieApi_EnumBoxesEx(
     LONG rc;
     while (1) {
         ++index;
-        rc = SbieApi_QueryConf(NULL, NULL, index | CONF_GET_NO_EXPAND,
+        rc = SbieApi_QueryConf(NULL, NULL, index | CONF_GET_NO_TEMPLS | CONF_GET_NO_EXPAND,
                                box_name, sizeof(WCHAR) * 34);
         if (rc == STATUS_BUFFER_TOO_SMALL)
             continue;
@@ -1442,6 +1478,7 @@ _FX LONG SbieApi_MonitorPut(
     return SbieApi_MonitorPut2(Type, Name, TRUE);
 }
 
+
 //---------------------------------------------------------------------------
 // SbieApi_MonitorPut2
 //---------------------------------------------------------------------------
@@ -1467,6 +1504,31 @@ _FX LONG SbieApi_MonitorPut2(
     return status;
 }
 
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorPutMsg
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorPutMsg(
+    ULONG Type,
+    const WCHAR* Message)
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
+
+    memset(parms, 0, sizeof(parms));
+    args->func_code                 = API_MONITOR_PUT2;
+    args->log_type.val              = Type;
+    args->log_len.val64             = wcslen(Message) * sizeof(WCHAR);
+    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Message;
+    args->check_object_exists.val64 = FALSE;
+    args->is_message.val64          = TRUE;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
 
 //---------------------------------------------------------------------------
 // SbieApi_MonitorGet
@@ -1505,7 +1567,6 @@ _FX LONG SbieApi_MonitorPut2(
 
 
 _FX LONG SbieApi_MonitorGetEx(
-	ULONG *SeqNum,
 	ULONG *Type,
 	ULONG *Pid,
     ULONG *Tid,
@@ -1518,7 +1579,7 @@ _FX LONG SbieApi_MonitorGetEx(
 
     memset(parms, 0, sizeof(parms));
 	args->func_code = API_MONITOR_GET_EX;
-	args->log_seq.val = SeqNum;
+	//args->log_seq.val = SeqNum;
 	args->log_type.val = Type;
 	args->log_pid.val = Pid;
     args->log_tid.val = Tid;
@@ -1698,4 +1759,63 @@ _FX LONG SbieApi_ProcessExemptionControl(
 	}
 
 	return status;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_GetSysFunction
+//---------------------------------------------------------------------------
+
+extern HANDLE                       SbieApi_DeviceHandle;
+extern P_NtCreateFile               __sys_NtCreateFile;
+extern P_NtQueryDirectoryFile       __sys_NtQueryDirectoryFile;
+extern P_NtOpenKey                  __sys_NtOpenKey;
+extern P_NtEnumerateValueKey        __sys_NtEnumerateValueKey;
+extern P_NtDeviceIoControlFile      __sys_NtDeviceIoControlFile;
+
+
+void* SbieDll_GetSysFunction(const WCHAR* name)
+{
+    if (name == NULL)                                       return SbieApi_DeviceHandle;
+    if (_wcsicmp(name, L"NtCreateFile") == 0)               return __sys_NtCreateFile;
+    if (_wcsicmp(name, L"NtQueryDirectoryFile") == 0)       return __sys_NtQueryDirectoryFile;
+    if (_wcsicmp(name, L"NtOpenKey") == 0)                  return __sys_NtOpenKey;
+    if (_wcsicmp(name, L"NtEnumerateValueKey") == 0)        return __sys_NtEnumerateValueKey;
+    if (_wcsicmp(name, L"NtDeviceIoControlFile") == 0)      return __sys_NtDeviceIoControlFile;
+    return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_RunStartExe
+//---------------------------------------------------------------------------
+
+
+BOOL SbieDll_RunStartExe(const WCHAR* cmd, const wchar_t* boxname)
+{
+    WCHAR cmdline[MAX_PATH] = L"";
+
+    if (boxname) {
+        wcscat(cmdline, L"/box:");
+        wcscat(cmdline, boxname);
+        wcscat(cmdline, L" ");
+    }
+    wcscat(cmdline, cmd);
+
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    memzero(&si, sizeof(si));
+    si.cb = sizeof(STARTUPINFO);
+    //if (inherit) si.lpReserved = (LPTSTR)1;
+    BOOL ret = FALSE;
+
+    if ( SbieDll_RunFromHome(START_EXE, cmdline, &si, &pi)) {
+
+        ret = TRUE;
+
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+    }
+
+    return ret;
 }

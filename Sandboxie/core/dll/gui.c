@@ -31,6 +31,13 @@
 #include <stdio.h>
 #include <psapi.h>
 
+//---------------------------------------------------------------------------
+// Variables
+//---------------------------------------------------------------------------
+
+
+BOOLEAN Gui_UseProxyService = TRUE;
+
 
 //---------------------------------------------------------------------------
 // Function Pointers in USER32.DLL
@@ -356,6 +363,17 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     if (! Gdi_InitZero())       // only if Gdi_Init was not called yet
         return FALSE;
 
+    // NoSbieDesk BEGIN
+
+    //
+    // Sandboxie is routing many gui related things through teh service, 
+    // when we operate in app mode we dont need to do that hence
+    // disable the use of the gui proxy
+    //
+
+    Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
+    // NoSbieDesk END
+
     GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);
@@ -397,6 +415,9 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     
     GUI_IMPORT___(ExitWindowsEx);
     GUI_IMPORT___(EndTask);
+    // NoSbieCons BEGIN
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE))
+	// NoSbieCons END
     if (Dll_OsBuild >= 8400) {
         GUI_IMPORT___(ConsoleControl);
     }
@@ -527,20 +548,18 @@ import_fail:
         ok = Gui_InitMsg();
 
     if (ok)
-        ok = Gui_InitWinHooks();
-
-    if (ok)
         ok = Gui_InitDlgTmpl();
 
     if (ok)
         ok = Gui_Init3();
 
-	// NoSbieDesk BEGIN
-	if (SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
-		return ok;
-	// NoSbieDesk END
+    if (Gui_UseProxyService) {
 
-    SBIEDLL_HOOK_GUI(AttachThreadInput);
+        if (ok)
+            ok = Gui_InitWinHooks();
+
+        SBIEDLL_HOOK_GUI(AttachThreadInput);
+    }
 
     return ok;
 }
@@ -555,6 +574,9 @@ _FX BOOLEAN Gui_Init2(void)
 {
     SBIEDLL_HOOK_GUI(ExitWindowsEx);
     SBIEDLL_HOOK_GUI(EndTask);
+    // NoSbieCons BEGIN
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE))
+	// NoSbieCons END
     if (__sys_ConsoleControl) {
         SBIEDLL_HOOK_GUI(ConsoleControl);
     }
@@ -586,20 +608,26 @@ _FX BOOLEAN Gui_Init2(void)
     if (! Gui_OpenAllWinClasses) {
 
         SBIEDLL_HOOK_GUI(UserHandleGrantAccess);
-        SBIEDLL_HOOK_GUI(IsWindow);
-        SBIEDLL_HOOK_GUI(IsWindowEnabled);
-        SBIEDLL_HOOK_GUI(IsWindowVisible);
-        SBIEDLL_HOOK_GUI(IsWindowUnicode);
-        SBIEDLL_HOOK_GUI(IsIconic);
-        SBIEDLL_HOOK_GUI(IsZoomed);
+
+        if(Gui_UseProxyService) {
+            SBIEDLL_HOOK_GUI(IsWindow);
+            SBIEDLL_HOOK_GUI(IsWindowEnabled);
+            SBIEDLL_HOOK_GUI(IsWindowVisible);
+            SBIEDLL_HOOK_GUI(IsWindowUnicode);
+            SBIEDLL_HOOK_GUI(IsIconic);
+            SBIEDLL_HOOK_GUI(IsZoomed);
+        }
+
         SBIEDLL_HOOK_GUI(MoveWindow);
         SBIEDLL_HOOK_GUI(SetWindowPos);
-        SBIEDLL_HOOK_GUI(MapWindowPoints);
-        SBIEDLL_HOOK_GUI(ClientToScreen);
-        SBIEDLL_HOOK_GUI(ScreenToClient);
-        SBIEDLL_HOOK_GUI(GetClientRect);
-        SBIEDLL_HOOK_GUI(GetWindowRect);
-        SBIEDLL_HOOK_GUI(GetWindowInfo);
+        if (Gui_UseProxyService) {
+            SBIEDLL_HOOK_GUI(MapWindowPoints);
+            SBIEDLL_HOOK_GUI(ClientToScreen);
+            SBIEDLL_HOOK_GUI(ScreenToClient);
+            SBIEDLL_HOOK_GUI(GetClientRect);
+            SBIEDLL_HOOK_GUI(GetWindowRect);
+            SBIEDLL_HOOK_GUI(GetWindowInfo);
+        }
         SBIEDLL_HOOK_GUI(AnimateWindow);
         SBIEDLL_HOOK_GUI(WaitForInputIdle);
         SBIEDLL_HOOK_GUI(ActivateKeyboardLayout);
@@ -801,6 +829,11 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     ULONG_PTR rc = 0;
     ULONG errlvl = 0;
 
+    // NoSbieDesk BEGIN
+	if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
+		return TRUE;
+	// NoSbieDesk END
+
     //
     // process is already connected to window station, connect to desktop
     //
@@ -963,7 +996,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
                 rc = (ULONG_PTR)NtCurrentThread();
 
 				// OriginalToken BEGIN
-				if (SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+				if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
 					rc = 0;
 				else
 				// OriginalToken END
@@ -1230,20 +1263,22 @@ _FX HWND Gui_CreateWindowExW(
     HWND hwndResult;
 
     //
-    // under Sandboxie 4 the Chrome sandbox child process gets confused
+    // Under Sandboxie 4, the Chrome sandbox child process gets confused
     // (reason not known) and creates some top level windows, for which it
-    // does not process messages.  this causes DDE message broadcast to
-    // hang for several seconds.  to workaround this, we cause the windows
+    // does not process messages. This causes DDE message broadcast to
+    // hang for several seconds. To workaround this, we cause the windows
     // to be created as message-only windows
     //
     // note:  the desktop window was made accessible in early v4 builds
     // but this code is still here to handle any other parent windows
     //
-    
-    if (Dll_ChromeSandbox) {
+    // note:  this code breaks Chrome hw acceleration, so it is no longer used
+    //
+
+    /*if (Dll_ChromeSandbox) { 
         dwStyle |= WS_CHILD;
         hWndParent = HWND_MESSAGE;
-    }
+    }*/
 
     //
     // replace title on windows that have no parent
@@ -1308,7 +1343,7 @@ _FX HWND Gui_CreateWindowExW(
     // replace window procedure
     //
 
-    if (hwndResult) {
+    if (hwndResult && Gui_RenameClasses) {
 
         Gui_SetWindowProc(hwndResult, FALSE);
 
@@ -1416,7 +1451,7 @@ _FX HWND Gui_CreateWindowExA(
     // replace window procedure
     //
 
-    if (hwndResult) {
+    if (hwndResult && Gui_RenameClasses) {
 
         Gui_SetWindowProc(hwndResult, FALSE);
 
@@ -1818,7 +1853,7 @@ _FX BOOL Gui_SetWindowPos(
     // use SbieSvc GUI Proxy if hWnd is accessible but outside the sandbox
     //
 
-    if (! Gui_IsSameBox(hWnd, NULL, NULL)) {
+    if (Gui_UseProxyService && !Gui_IsSameBox(hWnd, NULL, NULL)) {
 
         GUI_SET_WINDOW_POS_REQ req;
         GUI_SET_WINDOW_POS_RPL *rpl;
@@ -1957,7 +1992,7 @@ _FX BOOL Gui_ConsoleControl(ULONG ctlcode, ULONG *data, ULONG_PTR unknown)
         BOOLEAN ok = SbieDll_KillOne(*data);
         if (ok)
             return STATUS_SUCCESS;
-        SbieApi_Log(2205, L"ConsoleControl");
+        //SbieApi_Log(2205, L"ConsoleControl"); // don't log when the process was already killed
     }
     return __sys_ConsoleControl(ctlcode, data, unknown);
 }

@@ -188,7 +188,7 @@ static ULONG_PTR                    __jmp_NtRequestWaitReplyPort      = 0;
         return FALSE;                                           \
     svc_num = Hook_GetServiceIndex(ptr, SkipIndexes);           \
     if (svc_num <= 0 || (svc_num & 0xF000) != range) {          \
-        swprintf(err_txt, L"%s.%S", dllname, ProcName);         \
+        RtlStringCbPrintfW(err_txt, 128*sizeof(WCHAR), L"%s.%S", dllname, ProcName);         \
         Log_Msg1(MSG_1108, err_txt);                            \
         return FALSE;                                           \
     }                                                           \
@@ -1311,12 +1311,14 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
             status = STATUS_SUCCESS;
         else {
             status = Gui_CheckBoxedThread(proc, idThread, &idProcess);
-            if (status == STATUS_ACCESS_DENIED)
-                status = Process_CheckProcessName(
-                            proc, &proc->open_win_classes, idProcess, NULL);
+            if (status == STATUS_ACCESS_DENIED) {
+                if (Process_CheckProcessName(
+                    proc, &proc->open_win_classes, idProcess, NULL))
+                        status = STATUS_SUCCESS;
+            }
         }
 
-        if (Session_MonitorCount) {
+        if (Session_MonitorCount && !proc->disable_monitor) {
 
             void *nbuf;
             ULONG nlen;
@@ -1346,7 +1348,7 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
             if (proc->gui_trace & TRACE_DENY) {
 
                 WCHAR access_str[80];
-                swprintf(access_str,
+                RtlStringCbPrintfW(access_str, sizeof(access_str),
                     L"(GD) ThrdMessage %05d (%04X) to tid=%06d    pid=%06d",
                     Msg, Msg, idThread, idProcess);
                 Log_Debug_Msg(MONITOR_WINCLASS, access_str, Driver_Empty);
@@ -1441,7 +1443,7 @@ _FX ULONG_PTR Gui_NtUserSendInput(
 
             if (letter) {
 
-                swprintf(access_str, L"(G%c) SendInput", letter);
+                RtlStringCbPrintfW(access_str, sizeof(access_str), L"(G%c) SendInput", letter);
                 Log_Debug_Msg(MONITOR_WINCLASS | MONITOR_TRACE, access_str, Driver_Empty);
             }
         }
@@ -1535,7 +1537,7 @@ _FX ULONG_PTR Gui_NtUserSetWindowsHookEx(
 
             if (letter) {
 
-                swprintf(access_str,
+                RtlStringCbPrintfW(access_str, sizeof(access_str),
                          L"(G%c) WinHook %04d on tid=%06d pid=%06d",
                          letter, HookType, idThread, idProcess);
                 Log_Debug_Msg(MONITOR_WINCLASS | MONITOR_TRACE, access_str, Driver_Empty);
@@ -1593,7 +1595,7 @@ _FX ULONG_PTR Gui_NtUserSetWinEventHook(
 
             if (letter) {
 
-                swprintf(access_str, L"(G%c) AccHook on tid=%06d pid=%06d",
+                RtlStringCbPrintfW(access_str, sizeof(access_str), L"(G%c) AccHook on tid=%06d pid=%06d",
                          letter, idThread, idProcess);
                 Log_Debug_Msg(MONITOR_WINCLASS | MONITOR_TRACE, access_str, Driver_Empty);
             }

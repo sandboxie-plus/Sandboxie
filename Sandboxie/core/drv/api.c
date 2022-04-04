@@ -25,6 +25,7 @@
 #include "process.h"
 #include "util.h"
 #include "hook.h"
+#include "session.h"
 #include "common/my_version.h"
 #include "log_buff.h"
 
@@ -71,6 +72,8 @@ static NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
+static NTSTATUS Api_QueryDriverInfo(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 
@@ -88,7 +91,7 @@ static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
 static P_Api_Function *Api_Functions = NULL;
 
-static DEVICE_OBJECT *Api_DeviceObject = NULL;
+DEVICE_OBJECT *Api_DeviceObject = NULL;
 
 static FAST_IO_DISPATCH *Api_FastIoDispatch = NULL;
 
@@ -190,6 +193,8 @@ _FX BOOLEAN Api_Init(void)
     //Api_SetFunction(API_HOOK_TRAMP,         Hook_Api_Tramp);
 
 	Api_SetFunction(API_PROCESS_EXEMPTION_CONTROL, Api_ProcessExemptionControl);
+
+    Api_SetFunction(API_QUERY_DRIVER_INFO, Api_QueryDriverInfo);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;
@@ -590,8 +595,12 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
         msgid = msgid - 2301 + MSG_2301;
     else if (msgid == 1314)
         msgid = MSG_1314;
+    else if (msgid == 1307)
+        msgid = MSG_1307;
+    else if (msgid == 6004)
+        msgid = MSG_6004;
     else
-        msgid = MSG_2301;
+        msgid = MSG_2301; // unknown message
 
     msgtext = args->msgtext.val;
     if (! msgtext)
@@ -646,8 +655,7 @@ _FX NTSTATUS Api_LogMessage(PROCESS *proc, ULONG64 *parms)
 
 _FX void Api_AddMessage(
 	NTSTATUS error_code,
-	const WCHAR *string1, ULONG string1_len,
-	const WCHAR *string2, ULONG string2_len,
+	const WCHAR** strings, ULONG* lengths,
 	ULONG session_id,
 	ULONG process_id)
 {
@@ -662,23 +670,28 @@ _FX void Api_AddMessage(
 
 	irql = Api_EnterCriticalSection();
 
+	ULONG data_len = 0;
+	for(int i=0; strings[i] != NULL; i++)
+		data_len += ((lengths ? lengths [i] : wcslen(strings[i])) + 1) * sizeof(WCHAR);
+
 	ULONG entry_size = sizeof(ULONG)	// session_id
 		+ sizeof(ULONG)					// process_id
 		+ sizeof(ULONG)					// error_code
-		+ (string1_len + 1) * sizeof(WCHAR)
-		+ (string2_len + 1) * sizeof(WCHAR);
+		+ data_len;
 
-	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer);
+	CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, Api_LogBuffer, TRUE);
 	if (write_ptr) {
 		//[session_id 4][process_id 4][error_code 4][string1 n*2][\0 2][string2 n*2][\0 2]
 		WCHAR null_char = L'\0';
 		log_buffer_push_bytes((CHAR*)&session_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)&process_id, sizeof(ULONG), &write_ptr, Api_LogBuffer);
 		log_buffer_push_bytes((CHAR*)&error_code, sizeof(ULONG), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)string1, string1_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)string2, string2_len * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
-		log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+
+        // add strings '\0' separated
+        for (int i = 0; strings[i] != NULL; i++) {
+            log_buffer_push_bytes((CHAR*)strings[i], (lengths ? lengths[i] : wcslen(strings[i])) * sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+            log_buffer_push_bytes((CHAR*)&null_char, sizeof(WCHAR), &write_ptr, Api_LogBuffer);
+        }
 	}
 	// else // this can only happen when the entire buffer is to small to hold this entire entry
 		// if loging fails we can't log this error :/
@@ -702,6 +715,12 @@ _FX NTSTATUS Api_GetMessage(PROCESS *proc, ULONG64 *parms)
 
 	if (proc) // sandboxed processes can't read the log
 		return STATUS_NOT_IMPLEMENTED;
+
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId) {
+        // non service queries can be only performed for the own session
+        if (Session_GetLeadSession(PsGetCurrentProcessId()) != args->session_id.val)
+            return STATUS_ACCESS_DENIED;
+    }
 
 	ProbeForRead(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
 	ProbeForWrite(args->msg_num.val, sizeof(ULONG), sizeof(ULONG));
@@ -933,89 +952,87 @@ _FX BOOLEAN Api_SendServiceMessage(ULONG msgid, ULONG data_len, void *data)
 // Api_GetWork
 //---------------------------------------------------------------------------
 
-//
-//_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
-//{
-//	return STATUS_NOT_IMPLEMENTED;
-//
-//    /*API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
-//    NTSTATUS status;
-//    void *buffer_ptr;
-//    ULONG buffer_len;
-//    ULONG *result_len;
-//    ULONG length;
-//    API_WORK_ITEM *work_item;
-//    KIRQL irql;
-//
-//    //
-//    // caller must not be sandboxed, and caller has to be SbieSvc
-//    // if session parameter is -1
-//    //
-//
-//    if (proc)
-//        return STATUS_NOT_IMPLEMENTED;
-//
-//    if (args->session_id.val == -1 &&
-//            PsGetCurrentProcessId() != Api_ServiceProcessId)
-//        return STATUS_ACCESS_DENIED;
-//
-//    //
-//    // find next work/log item for the session
-//    //
-//
-//    buffer_ptr = args->buffer.val;
-//    buffer_len = args->buffer_len.val;
-//    result_len = args->result_len_ptr.val;
-//
-//    irql = Api_EnterCriticalSection();
-//
-//    work_item = List_Head(&Api_WorkList);
-//    while (work_item) {
-//        if (work_item->session_id == args->session_id.val)
-//            break;
-//        work_item = List_Next(work_item);
-//    }
-//
-//    __try {
-//
-//    if (! work_item) {
-//
-//        status = STATUS_NO_MORE_ENTRIES;
-//
-//    } else {
-//
-//        if (work_item->length <= buffer_len) {
-//
-//            length = work_item->length
-//                   - FIELD_OFFSET(API_WORK_ITEM, type);
-//            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
-//            memcpy(buffer_ptr, &work_item->type, length);
-//
-//            status = STATUS_SUCCESS;
-//
-//        } else {
-//
-//            length = work_item->length;
-//            status = STATUS_BUFFER_TOO_SMALL;
-//        }
-//
-//        if (result_len) {
-//            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
-//            *result_len = length;
-//        }
-//
-//        if (status == STATUS_SUCCESS)
-//            Api_DelWork(work_item);
-//    }
-//
-//    } __except (EXCEPTION_EXECUTE_HANDLER) {
-//        status = GetExceptionCode();
-//    }
-//
-//    Api_LeaveCriticalSection(irql);
-//
-//    return status;*/
-//}
+
+/*_FX NTSTATUS Api_GetWork(PROCESS *proc, ULONG64 *parms)
+{
+    API_GET_WORK_ARGS *args = (API_GET_WORK_ARGS *)parms;
+    NTSTATUS status;
+    void *buffer_ptr;
+    ULONG buffer_len;
+    ULONG *result_len;
+    ULONG length;
+    API_WORK_ITEM *work_item;
+    KIRQL irql;
+
+    //
+    // caller must not be sandboxed, and caller has to be SbieSvc
+    // if session parameter is -1
+    //
+
+    if (proc)
+        return STATUS_NOT_IMPLEMENTED;
+
+    if (args->session_id.val == -1 &&
+            PsGetCurrentProcessId() != Api_ServiceProcessId)
+        return STATUS_ACCESS_DENIED;
+
+    //
+    // find next work/log item for the session
+    //
+
+    buffer_ptr = args->buffer.val;
+    buffer_len = args->buffer_len.val;
+    result_len = args->result_len_ptr.val;
+
+    irql = Api_EnterCriticalSection();
+
+    work_item = List_Head(&Api_WorkList);
+    while (work_item) {
+        if (work_item->session_id == args->session_id.val)
+            break;
+        work_item = List_Next(work_item);
+    }
+
+    __try {
+
+    if (! work_item) {
+
+        status = STATUS_NO_MORE_ENTRIES;
+
+    } else {
+
+        if (work_item->length <= buffer_len) {
+
+            length = work_item->length
+                   - FIELD_OFFSET(API_WORK_ITEM, type);
+            ProbeForWrite(buffer_ptr, length, sizeof(UCHAR));
+            memcpy(buffer_ptr, &work_item->type, length);
+
+            status = STATUS_SUCCESS;
+
+        } else {
+
+            length = work_item->length;
+            status = STATUS_BUFFER_TOO_SMALL;
+        }
+
+        if (result_len) {
+            ProbeForWrite(result_len, sizeof(ULONG), sizeof(ULONG));
+            *result_len = length;
+        }
+
+        if (status == STATUS_SUCCESS)
+            Api_DelWork(work_item);
+    }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    Api_LeaveCriticalSection(irql);
+
+    return status;
+}*/
 
 
 //---------------------------------------------------------------------------
@@ -1068,6 +1085,11 @@ _FX NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms)
     if ((! proc) && MyIsCallerMyServiceProcess()) {
 
         status = STATUS_SUCCESS;
+    }
+
+    if (NT_SUCCESS(status) && !MyIsCallerSigned()) {
+    
+        status = STATUS_INVALID_SIGNATURE;
     }
 
     //
@@ -1189,6 +1211,7 @@ _FX void Api_CopyStringToUser(
 // Api_ProcessExemptionControl
 //---------------------------------------------------------------------------
 
+
 _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
@@ -1198,7 +1221,9 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
 	ULONG *out_flag;
 
 	if (proc) // is caller sandboxed?
-		return STATUS_ACCESS_DENIED;
+		return STATUS_NOT_IMPLEMENTED;
+    else if (!MyIsCallerSigned()) 
+        status = STATUS_ACCESS_DENIED;
 
 	if (pArgs->process_id.val == 0)
 		return STATUS_INVALID_PARAMETER;
@@ -1243,4 +1268,79 @@ _FX NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms)
     //KeLowerIrql(irql);
 
 	return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Api_QueryDriverInfo
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS *)parms;
+	
+    if (proc)
+        status = STATUS_NOT_IMPLEMENTED;
+
+    __try {
+
+        if (args->info_class.val == 0) {
+
+            ULONG *data = args->info_data.val;
+            ProbeForWrite(data, sizeof(ULONG), sizeof(ULONG));
+
+            ULONG FeatureFlags = 0;
+
+            extern BOOLEAN WFP_Enabled;
+            if (WFP_Enabled)
+                FeatureFlags |= SBIE_FEATURE_FLAG_WFP;
+
+            extern BOOLEAN Obj_CallbackInstalled;
+            if (Obj_CallbackInstalled)
+                FeatureFlags |= SBIE_FEATURE_FLAG_OB_CALLBACKS;
+
+            extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
+            if (SandboxieLogonSid[0] != 0)
+                FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
+
+#ifdef HOOK_WIN32K
+            extern ULONG Syscall_MaxIndex32;
+            if (Syscall_MaxIndex32 != 0)
+                FeatureFlags |= SBIE_FEATURE_FLAG_WIN32K_HOOK;
+#endif
+
+            if (Driver_Certified) {
+
+                FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
+
+                FeatureFlags |= SBIE_FEATURE_FLAG_PRIVACY_MODE;
+                FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
+            }
+
+            *data = FeatureFlags;
+        }
+        else if (args->info_class.val == -1) {
+
+            extern ULONGLONG Verify_CertInfo;
+            if (args->info_len.val >= sizeof(ULONGLONG)) {
+                ULONGLONG* data = args->info_data.val;
+                *data = Verify_CertInfo;
+            }
+            else if (args->info_len.val == sizeof(ULONG)) {
+                ULONG* data = args->info_data.val;
+                *data = (ULONG)(Verify_CertInfo & 0xFFFFFFFF); // drop optional data
+            }
+            else
+                status = STATUS_BUFFER_TOO_SMALL;
+        }
+        else
+            status = STATUS_INVALID_INFO_CLASS;
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    return status;
 }

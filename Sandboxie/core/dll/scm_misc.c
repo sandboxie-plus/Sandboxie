@@ -246,7 +246,7 @@ _FX BOOLEAN Scm_DllHack(HMODULE module, const WCHAR *svcname)
     SERVICE_QUERY_RPL *rpl;
 
     //
-    // hack for Office 2010:  make sure osppsvc service is running
+    // hack:  make sure the given service is running
     //
 
     if (! module)

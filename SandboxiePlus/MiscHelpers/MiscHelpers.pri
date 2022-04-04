@@ -6,6 +6,7 @@ HEADERS += ./MiscHelpers.h \
     ./mischelpers_global.h \
     ./stdafx.h \
     ./Common/Common.h \
+    ./Common/OtherFunctions.h \
     ./Common/DebugHelpers.h \
     ./Common/ExitDialog.h \
     ./Common/FlexError.h \
@@ -32,6 +33,7 @@ HEADERS += ./MiscHelpers.h \
     ./Common/TreeItemModel.h \
     ./Common/TreeViewEx.h \
     ./Common/TreeWidgetEx.h \
+    ./Common/CheckList.h \
     ./Common/NetworkAccessManager.h
     
 SOURCES += ./MiscHelpers.cpp \
@@ -39,6 +41,7 @@ SOURCES += ./MiscHelpers.cpp \
     ./Common/CheckableMessageBox.cpp \
     ./Common/ComboInputDialog.cpp \
     ./Common/Common.cpp \
+    ./Common/OtherFunctions.cpp \
     ./Common/DebugHelpers.cpp \
     ./Common/Finder.cpp \
     ./Common/FlowLayout.cpp \

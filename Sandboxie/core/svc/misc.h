@@ -25,7 +25,8 @@ void AbortServer(void);
 bool RestrictToken(void);
 bool CheckDropRights(const WCHAR *BoxName);
 
-SECURITY_ATTRIBUTES *GetSecurityAttributes(ACCESS_MASK EveryoneAccess);
+bool IsProcessWoW64(HANDLE pid);
+bool IsHostPath(HANDLE idProcess, WCHAR* dos_path);
 
 extern HMODULE _Ntdll;
 extern HMODULE _Kernel32;

@@ -102,6 +102,51 @@
     <ClCompile Include="Views\TraceView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\SelectBoxWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsAccess.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsAdvanced.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsForce.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsGeneral.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsGrouping.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsNetwork.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsRecovery.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsStart.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsStop.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\OptionsTemplates.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\FileBrowserWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxJob.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="SbieProcess.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\MonitorModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -157,6 +202,21 @@
     <QtMoc Include="Views\TraceView.h">
       <Filter>Views</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\SelectBoxWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Windows\FileBrowserWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="BoxJob.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="SbieProcess.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\MonitorModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -193,12 +253,24 @@
     <QtUic Include="Forms\NewBoxWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="Forms\SelectBoxWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\FileBrowserWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="sandman_de.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_pt.ts">
+    <None Include="sandman_fr.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_pt_BR.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_pt_PT.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_ru.ts">
@@ -210,19 +282,31 @@
     <None Include="sandman_tr.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh-TW.ts">
+    <None Include="sandman_zh_TW.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_pl.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_zh-CN.ts">
+    <None Include="sandman_uk.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_zh_CN.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_es.ts">
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_it.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_nl.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_en.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_cs.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

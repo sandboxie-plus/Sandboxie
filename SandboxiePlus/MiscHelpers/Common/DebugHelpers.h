@@ -169,5 +169,5 @@ private:
  #define TRACE_LOCKER(x)
 #endif
 
-MISCHELPERS_EXPORT void InitMiniDumpWriter(const wchar_t* Name);
+MISCHELPERS_EXPORT void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path);
 MISCHELPERS_EXPORT quint64 GetCurCycle();

@@ -37,11 +37,14 @@
 
 #include "common/defines.h"
 #include "common/list.h"
+#include "common/map.h"
 #include "common/pool.h"
 #include "common/ntproto.h"
 #include "log.h"
 #include "mem.h"
 
+#define NTSTRSAFE_LIB
+#include <ntstrsafe.h>
 
 //---------------------------------------------------------------------------
 // Defines
@@ -64,8 +67,12 @@
 #define TRACE_DENY              2
 #define TRACE_IGNORE            4
 
-//new FILE_INFORMATION_CLASS type not defined in current wdm.h used in windows 10 FCU
-#define SB_FileRenameInformationEx 65
+#define USE_PROCESS_MAP
+
+#define USE_MATCH_PATH_EX
+
+#define HOOK_WIN32K
+
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -86,7 +93,8 @@ typedef struct _KEY_MOUNT           KEY_MOUNT;
 #ifdef OLD_DDK
 extern P_NtSetInformationToken          ZwSetInformationToken;
 #endif // OLD_DDK
-
+extern P_NtCreateToken                  ZwCreateToken;
+extern P_NtCreateTokenEx                ZwCreateTokenEx;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -95,7 +103,8 @@ extern P_NtSetInformationToken          ZwSetInformationToken;
 
 NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms);
 
-BOOLEAN Driver_CheckThirdParty(const WCHAR *DriverName, ULONG DriverType);
+ULONG Driver_GetRegDword(
+    const WCHAR *KeyPath, const WCHAR *ValueName);
 
 
 //---------------------------------------------------------------------------

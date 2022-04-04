@@ -82,14 +82,14 @@ ALIGNED BOOLEAN Kmd_Stop_SbieDrv(void)
     rc = SbieApi_GetVersion(driver_version);
     if (rc == 0) {
 
-        rc = SbieApi_CallZero(API_UNLOAD_DRIVER);
+        rc = SbieApi_Call(API_UNLOAD_DRIVER, 0);
         if (rc == STATUS_CONNECTION_IN_USE) {
             Sleep(2500);
-            rc = SbieApi_CallZero(API_UNLOAD_DRIVER);
+            rc = SbieApi_Call(API_UNLOAD_DRIVER, 0);
         }
         if (rc == STATUS_CONNECTION_IN_USE) {
             Sleep(2500);
-            rc = SbieApi_CallZero(API_UNLOAD_DRIVER);
+            rc = SbieApi_Call(API_UNLOAD_DRIVER, 0);
         }
     }
 
@@ -99,6 +99,9 @@ ALIGNED BOOLEAN Kmd_Stop_SbieDrv(void)
         L"\\Registry\\Machine\\System\\CurrentControlSet"
         L"\\Services\\" SBIEDRV);
     rc = NtUnloadDriver(&uni);
+
+    SbieApi_Ioctl(NULL); // disconnect from driver
+
     if (rc == 0 || rc == STATUS_OBJECT_NAME_NOT_FOUND)
         return TRUE;
 

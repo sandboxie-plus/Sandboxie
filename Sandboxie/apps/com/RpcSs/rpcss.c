@@ -399,8 +399,6 @@ _FX int __stdcall WinMain(
         return STATUS_LICENSE_QUOTA_EXCEEDED;
     }
 
-    SetupExceptionHandler();
-
     if (1) {
         ULONG idThread;
         HANDLE hThread = CreateThread(

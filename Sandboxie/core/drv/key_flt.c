@@ -190,11 +190,13 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
     //
     // check if the caller is sandboxed before proceeding
     //
+    if (Driver_OsBuild < DRIVER_BUILD_WINDOWS_10_CU)
+    {
+        proc = Process_Find(NULL, NULL);
+        if (proc == PROCESS_TERMINATED)
+            return STATUS_PROCESS_IS_TERMINATING;
+    }
 
-    proc = Process_Find(NULL, NULL);
-    if (proc == PROCESS_TERMINATED)
-        return STATUS_PROCESS_IS_TERMINATING;
-    
     Info = (REG_OPEN_CREATE_KEY_INFORMATION_VISTA *)Arg2;
 
     // HACK ALERT! If you click a link in a Word doc, it will try to start an embedded IE, which cannot be forced into Sandboxie.
@@ -226,7 +228,7 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
     if (status != STATUS_SUCCESS)
         return status;
 
-    if (!proc || proc->bHostInject)
+    if (!proc || proc->bHostInject || proc->disable_key_flt)
         return STATUS_SUCCESS;
 
     //
@@ -270,6 +272,15 @@ _FX NTSTATUS Key_Callback(void *Context, void *Arg1, void *Arg2)
 
         RtlInitUnicodeString(&RemainingName, L"\\X");
         pRemainingName = &RemainingName;
+    }
+
+    //
+    // Store app container support
+    //
+
+    if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
+        if (_wcsnicmp(pRemainingName->Buffer, proc->box->key_path + 9, (proc->box->key_path_len - (sizeof(WCHAR) * (9 + 1))) / sizeof(WCHAR)) == 0) // +9 skip \REGISTRY, +1 don't compare '\0'
+            return STATUS_SUCCESS;
     }
 
     //

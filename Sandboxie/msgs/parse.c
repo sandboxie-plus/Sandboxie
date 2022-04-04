@@ -285,8 +285,8 @@ void ReadTextFile(const UCHAR *path, LIST *msgs)
     {
         char* utf8 = BufPtr;
 
-        ByteSize *= 2;
-        Buffer = Alloc(ByteSize + 16);
+        ByteSize = MultiByteToWideChar(CP_UTF8, 0, utf8, ReadSize, NULL, 0) + 1;
+        Buffer = Alloc(ByteSize * sizeof(wchar_t));
         BufPtr = Buffer;
 
         MultiByteToWideChar(CP_UTF8, 0, utf8, ReadSize, BufPtr, ByteSize);

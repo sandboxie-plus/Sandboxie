@@ -31,8 +31,7 @@
 
 enum {
 
-    GUI_SHUTDOWN = 1,
-    GUI_INIT_PROCESS,
+    GUI_INIT_PROCESS = 1,
     GUI_GET_WINDOW_STATION,
     GUI_CREATE_CONSOLE,
     GUI_QUERY_WINDOW,
@@ -63,6 +62,7 @@ enum {
     GUI_GET_RAW_INPUT_DEVICE_INFO,
     GUI_WND_HOOK_NOTIFY,
     GUI_WND_HOOK_REGISTER,
+    GUI_KILL_JOB,
     GUI_MAX_REQUEST_CODE
 };
 
@@ -545,6 +545,7 @@ struct tagGUI_CLIP_CURSOR_REQ
     ULONG msgid;
     BOOLEAN have_rect;
     RECT rect;
+    LONG64 dpi_awareness_ctx;
 };
 
 typedef struct tagGUI_CLIP_CURSOR_REQ GUI_CLIP_CURSOR_REQ;
@@ -646,6 +647,7 @@ struct tagGUI_SET_CURSOR_POS_REQ
     ULONG error;
     LONG x;
     LONG y;
+    LONG64 dpi_awareness_ctx;
 };
 
 struct tagGUI_SET_CURSOR_POS_RPL
@@ -749,6 +751,21 @@ struct tagGUI_WND_HOOK_REGISTER_RPL
 
 typedef struct tagGUI_WND_HOOK_REGISTER_REQ GUI_WND_HOOK_REGISTER_REQ;
 typedef struct tagGUI_WND_HOOK_REGISTER_RPL GUI_WND_HOOK_REGISTER_RPL;
+
+
+
+//---------------------------------------------------------------------------
+// Terminate Job
+//---------------------------------------------------------------------------
+
+
+struct tagGUI_KILL_JOB_REQ
+{
+    ULONG msgid;
+    WCHAR boxname[34];
+};
+
+typedef struct tagGUI_KILL_JOB_REQ GUI_KILL_JOB_REQ;
 
 //---------------------------------------------------------------------------
 

@@ -106,7 +106,7 @@ static NTSTATUS Thread_ImpersonateAnonymousToken(
 //---------------------------------------------------------------------------
 
 
-static NTSTATUS Thread_GetKernelHandleForUserHandle(
+NTSTATUS Thread_GetKernelHandleForUserHandle(
     HANDLE *OutKernelHandle, HANDLE InUserHandle);
 
 
@@ -640,11 +640,11 @@ _FX void *Thread_SetInformationProcess_PrimaryToken_3(
     }
 
     //
-    // special allowance for MSIServer
+    // special allowance for MSIServer running without system privileges
     //
 
     if (!proc->image_from_box &&
-        _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
+            _wcsicmp(proc->image_name, L"msiexec.exe") == 0) {
 
         return TokenObject2;
     }
@@ -1355,14 +1355,14 @@ _FX NTSTATUS Thread_CheckTokenForImpersonation(
 {
     NTSTATUS status;
 
-	// OpenToken BEGIN
-	if ((Conf_Get_Boolean(proc->box->name, L"OpenToken", 0, FALSE) || Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE)))
-		return STATUS_SUCCESS;
-	// OpenToken END
-	// OriginalToken BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
+    // OriginalToken BEGIN
+	if (proc->bAppCompartment || Conf_Get_Boolean(proc->box->name, L"OriginalToken", 0, FALSE))
 		return STATUS_SUCCESS;
 	// OriginalToken END
+	// UnfilteredToken BEGIN
+	if (Conf_Get_Boolean(proc->box->name, L"UnfilteredToken", 0, FALSE))
+		return STATUS_SUCCESS;
+	// UnfilteredToken END
 
 	BOOLEAN DropRights = proc->drop_rights;
 	ULONG SessionId = proc->box->session_id;

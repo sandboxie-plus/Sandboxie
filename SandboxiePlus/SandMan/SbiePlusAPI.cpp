@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "SbiePlusAPI.h"
+#include "SbieProcess.h"
+#include "SandMan.h"
 #include "..\MiscHelpers\Common\Common.h"
 #include <windows.h>
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
+	m_JobCount = 0;
 }
 
 CSbiePlusAPI::~CSbiePlusAPI()
@@ -65,6 +68,15 @@ void CSbiePlusAPI::UpdateWindowMap()
 	EnumWindows(CSbiePlusAPI__WindowEnum, (LPARAM)&m_WindowMap);
 }
 
+bool CSbiePlusAPI::IsRunningAsAdmin()
+{
+	if (m_UserSid.left(9) != "S-1-5-21-")
+		return false;
+	if (m_UserSid.right(4) != "-500")
+		return false;
+	return true;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // CSandBoxPlus
 //
@@ -77,10 +89,15 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bDropRights = false;
 	
 
-	m_bSecurityRestricted = false;
+	m_bSecurityEnhanced = false;
+	m_bPrivacyEnhanced = false;
+	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
 
 	m_SuspendRecovery = false;
+
+	m_pOptionsWnd = NULL;
+	m_pRecoveryWnd = NULL;
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -103,17 +120,25 @@ void CSandBoxPlus::UpdateDetails()
 	m_bINetBlocked = false;
 	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
 	{
-		if (Entry.contains("InternetAccessDevices")) {
+		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
+			m_bINetBlocked = true;
+			break;
+		}
+	}
+	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false))
+	{
+		if (Entry == "!<InternetAccess>,n") {
 			m_bINetBlocked = true;
 			break;
 		}
 	}
 
+
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
 	m_bDropRights = GetBool("DropAdminRights", false);
 
-	if (CheckOpenToken() || GetBool("StripSystemPrivileges", false))
+	if (CheckUnsecureConfig())
 		m_iUnsecureDebugging = 1;
 	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) /*|| GetBool("RunServicesAsSystem", false)*/)
 		m_iUnsecureDebugging = 2;
@@ -122,7 +147,9 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityRestricted = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bApplicationCompartment = GetBool("NoSecurityIsolation", false);
+	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 
 	CSandBox::UpdateDetails();
 }
@@ -134,22 +161,49 @@ void CSandBoxPlus::CloseBox()
 	m_SuspendRecovery = false;
 }
 
+bool CSandBoxPlus::CheckUnsecureConfig() const
+{
+	//if (GetBool("UnsafeTemplate", false)) return true;
+	if (GetBool("OriginalToken", false)) return true;
+	if (GetBool("OpenToken", false)) return true;
+		if(GetBool("UnrestrictedToken", false)) return true;
+			if (GetBool("KeepTokenIntegrity", false)) return true;
+			if (GetBool("UnstrippedToken", false)) return true;
+				if (GetBool("KeepUserGroup", false)) return true;
+			if (!GetBool("AnonymousLogon", true)) return true;
+		if(GetBool("UnfilteredToken", false)) return true;
+	if (GetBool("DisableFileFilter", false)) return true;
+	if (GetBool("DisableKeyFilter", false)) return true;
+	if (GetBool("DisableObjectFilter", false)) return true;
+
+	if (GetBool("StripSystemPrivileges", false)) return true;
+	return false;
+}
+
 QString CSandBoxPlus::GetStatusStr() const
 {
 	if (!m_IsEnabled)
 		return tr("Disabled");
+
+	if (!m_StatusStr.isEmpty())
+		return m_StatusStr;
 
 	QStringList Status;
 
 	if (IsEmpty())
 		Status.append(tr("Empty"));
 
-	if (m_iUnsecureDebugging == 1)
-		Status.append(tr("NOT SECURE (Debug Config)"));
+	if (m_bApplicationCompartment)
+		Status.append(tr("Application Compartment"));
+	else if (m_iUnsecureDebugging == 1)
+		Status.append(tr("NOT SECURE"));
 	else if (m_iUnsecureDebugging == 2)
 		Status.append(tr("Reduced Isolation"));
-	else if(m_bSecurityRestricted)
+	else if(m_bSecurityEnhanced)
 		Status.append(tr("Enhanced Isolation"));
+	
+	if(m_bPrivacyEnhanced)
+		Status.append(tr("Privacy Enhanced"));
 
 	if (m_bLogApiFound)
 		Status.append(tr("API Log"));
@@ -157,7 +211,7 @@ QString CSandBoxPlus::GetStatusStr() const
 		Status.append(tr("No INet"));
 	if (m_bSharesAllowed)
 		Status.append(tr("Net Share"));
-	if (m_bDropRights)
+	if (m_bDropRights && !m_bSecurityEnhanced)
 		Status.append(tr("No Admin"));
 
 	if (Status.isEmpty())
@@ -165,15 +219,24 @@ QString CSandBoxPlus::GetStatusStr() const
 	return Status.join(", ");
 }
 
-bool CSandBoxPlus::CheckOpenToken() const
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
 {
-	if (GetBool("OriginalToken", false)) return true;
-	if (GetBool("OpenToken", false)) return true;
-		if(GetBool("UnrestrictedToken", false)) return true;
-			if (!GetBool("AnonymousLogon", true)) return true;
-			if (GetBool("KeepTokenIntegrity", false)) return true;
-		if(GetBool("UnfilteredToken", false)) return true;
-	return false;
+	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
+		return eAppBoxPlus;
+	if (m_bApplicationCompartment)
+		return eAppBox;
+
+	if (m_iUnsecureDebugging != 0)
+		return eInsecure;
+
+	if (m_bSecurityEnhanced && m_bPrivacyEnhanced)
+		return eHardenedPlus;
+	if (m_bSecurityEnhanced)
+		return eHardened;
+
+	if (m_bPrivacyEnhanced)
+		return eDefaultPlus;
+	return eDefault;
 }
 
 void CSandBoxPlus::SetLogApi(bool bEnable)
@@ -366,15 +429,108 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// CSbieProcess
-//
-
-QString CSbieProcess::GetStatusStr() const
+SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteShapshots, bool bOnAutoDelete)
 {
-	if (m_uTerminated != 0)
-		return tr("Terminated");
-	//if (m_bSuspended)
-	//	return tr("Suspended");
-	return tr("Running");
+	if (GetBool("NeverDelete", false))
+		return SB_ERR(SB_DeleteProtect);
+
+	SB_STATUS Status = TerminateAll();
+	if (Status.IsError())
+		return Status;
+	m_ActiveProcessCount = 0; // to ensure CleanBox will be happy
+
+	foreach(const QString& Command, GetTextList("OnBoxDelete", true, false, true)) {
+		CBoxJob* pJob = new COnDeleteJob(this, Expand(Command));
+		AddJobToQueue(pJob);
+	}
+
+	CBoxJob* pJob = new CCleanUpJob(this, DeleteShapshots, bOnAutoDelete);
+	AddJobToQueue(pJob);
+
+	return SB_OK;
+}
+
+void CSandBoxPlus::AddJobToQueue(CBoxJob* pJob)
+{
+	theAPI->m_JobCount++;
+	m_JobQueue.append(QSharedPointer<CBoxJob>(pJob));
+	if (m_JobQueue.count() == 1)
+		StartNextJob();
+}
+
+void CSandBoxPlus::StartNextJob()
+{
+next:
+	Q_ASSERT(m_JobQueue.count() > 0);
+	Q_ASSERT(m_JobQueue.first()->GetProgress().isNull());
+
+	QSharedPointer<CBoxJob> pJob = m_JobQueue.first();
+	SB_PROGRESS Status = pJob->Start();
+	if (Status.GetStatus() == OP_ASYNC) 
+	{
+		m_StatusStr = pJob->GetDescription();
+
+		CSbieProgressPtr pProgress = Status.GetValue();
+		connect(pProgress.data(), SIGNAL(Message(const QString&)), this, SLOT(OnAsyncMessage(const QString&)));
+		connect(pProgress.data(), SIGNAL(Progress(int)), this, SLOT(OnAsyncProgress(int)));
+		connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(OnAsyncFinished()));
+	}
+	else
+	{
+		m_JobQueue.removeFirst();
+		theAPI->m_JobCount--;
+		if (Status.IsError()) {
+			m_JobQueue.clear();
+			theGUI->CheckResults(QList<SB_STATUS>() << Status);
+			return;
+		}
+		if (!m_JobQueue.isEmpty())
+			goto next;
+	}
+}
+
+void CSandBoxPlus::OnAsyncFinished()
+{
+	Q_ASSERT(m_JobQueue.count() > 0);
+	Q_ASSERT(!m_JobQueue.first()->GetProgress().isNull());
+
+	m_StatusStr.clear();
+
+	QSharedPointer<CBoxJob> pJob = m_JobQueue.takeFirst();
+	theAPI->m_JobCount--;
+	CSbieProgressPtr pProgress = pJob->GetProgress();
+	if (pProgress->IsCanceled()) {
+		m_JobQueue.clear();
+		return;
+	}
+
+	SB_STATUS Status = pProgress->GetStatus();
+	if (Status.IsError()) {
+		m_JobQueue.clear();
+		theGUI->CheckResults(QList<SB_STATUS>() << Status);
+		return;
+	}
+
+	if (!m_JobQueue.isEmpty())
+		StartNextJob();
+}
+
+void CSandBoxPlus::OnAsyncMessage(const QString& Text)
+{
+	m_StatusStr = Text;
+}
+
+void CSandBoxPlus::OnAsyncProgress(int Progress)
+{
+}
+
+void CSandBoxPlus::OnCancelAsync()
+{
+	if (m_JobQueue.isEmpty())
+		return;
+	Q_ASSERT(!m_JobQueue.first()->GetProgress().isNull());
+
+	QSharedPointer<CBoxJob> pJob = m_JobQueue.first();
+	CSbieProgressPtr pProgress = pJob->GetProgress();
+	pProgress->Cancel();
 }

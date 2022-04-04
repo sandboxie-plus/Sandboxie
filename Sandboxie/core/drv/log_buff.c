@@ -38,7 +38,7 @@ void log_buffer_free(LOG_BUFFER* ptr_buffer)
 	ExFreePoolWithTag(ptr_buffer, tzuk);
 }
 
-CHAR* log_buffer_push_entry(LOG_BUFFER_SIZE_T size, LOG_BUFFER* ptr_buffer)
+CHAR* log_buffer_push_entry(LOG_BUFFER_SIZE_T size, LOG_BUFFER* ptr_buffer, BOOLEAN can_pop)
 {
 	SIZE_T total_size = size + sizeof(LOG_BUFFER_SIZE_T) * 2 + sizeof(LOG_BUFFER_SEQ_T);
 	if (total_size > ptr_buffer->buffer_size)
@@ -46,8 +46,11 @@ CHAR* log_buffer_push_entry(LOG_BUFFER_SIZE_T size, LOG_BUFFER* ptr_buffer)
 
 	ptr_buffer->seq_counter++;
 
-	while (ptr_buffer->buffer_size - ptr_buffer->buffer_used < total_size)
+	while (ptr_buffer->buffer_size - ptr_buffer->buffer_used < total_size) {
+		if (!can_pop)
+			return NULL;
 		log_buffer_pop_entry(ptr_buffer);
+	}
 
 	CHAR* write_ptr = ptr_buffer->buffer_start_ptr + ptr_buffer->buffer_used;
 	ptr_buffer->buffer_used += total_size;

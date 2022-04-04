@@ -19,6 +19,7 @@ public:
 	//void			CountItems();
 	QModelIndex		FindIndex(const QVariant& ID);
 	void			RemoveIndex(const QModelIndex &index);
+	int				Count() const					{ return m_Map.count(); }
 
 	QVariant		GetItemID(const QModelIndex& index) const;
 

@@ -3,13 +3,13 @@ REM @ECHO OFF
 
 set archPath=%1
 set sysPath=%windir%\System32
-set qtPath=%~dp0..\..\Qt\5.15.1\msvc2019_64
+set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019_64
 set instPath=%~dp0\SbiePlus64
 IF %archPath% == x86 (
 	set archPath=Win32
 	set instPath=%~dp0\SbiePlus32
 	set sysPath=%windir%\SysWOW64
-  set qtPath=%~dp0..\..\Qt\5.15.1\msvc2019
+  set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019
 )
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release
 set sbiePath=%~dp0..\Sandboxie\Bin\%archPath%\SbieRelease
@@ -66,6 +66,7 @@ copy %srcPath%\MiscHelpers.pdb %instPath%\
 copy %srcPath%\QSbieAPI.dll %instPath%\
 copy %srcPath%\QSbieAPI.pdb %instPath%\
 copy %srcPath%\QtSingleApp.dll %instPath%\
+copy %srcPath%\UGlobalHotkey.dll %instPath%\
 copy %srcPath%\SandMan.exe %instPath%\
 copy %srcPath%\SandMan.pdb %instPath%\
 
@@ -74,6 +75,11 @@ ECHO Copying SandMan translations
 mkdir %instPath%\translations\
 rem copy /y %~dp0..\SandboxiePlus\SandMan\sandman_*.qm %instPath%\translations\
 copy /y %~dp0..\SandboxiePlus\Build_SandMan_%archPath%\release\sandman_*.qm %instPath%\translations\
+copy /y %~dp0\qttranslations\qm\qt_*.qm %instPath%\translations\
+copy /y %~dp0\qttranslations\qm\qtbase_*.qm %instPath%\translations\
+copy /y %~dp0\qttranslations\qm\qtmultimedia_*.qm %instPath%\translations\
+copy /y %qtPath%\translations\qtscript_*.qm %instPath%\translations\
+copy /y %qtPath%\translations\qtxmlpatterns_*.qm %instPath%\translations\
 
 ECHO Copying Sandboxie
 

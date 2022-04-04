@@ -40,7 +40,7 @@ public:
 	static bool				IsSbieCtrlRunning();
 	static bool				TerminateSbieCtrl();
 
-	virtual SB_STATUS		Connect(bool withQueue = true);
+	virtual SB_STATUS		Connect(bool takeOver, bool withQueue);
 	virtual SB_STATUS		Disconnect();
 	virtual bool			IsConnected() const;
 
@@ -53,18 +53,17 @@ public:
 	virtual QString			GetIniPath() const { return m_IniPath; }
 
 	virtual void			UpdateDriveLetters();
-	virtual QString			Nt2DosPath(QString NtPath) const;
+	virtual QString			Nt2DosPath(QString NtPath, bool* pOk = NULL) const;
 
 	virtual SB_STATUS		ReloadBoxes(bool bFullUpdate = false);
 	static  SB_STATUS		ValidateName(const QString& BoxName);
-	virtual SB_STATUS		CreateBox(const QString& BoxName);
+	virtual SB_STATUS		CreateBox(const QString& BoxName, bool bReLoad = true);
 
-	virtual SB_STATUS		UpdateProcesses(bool bKeep);
-	virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
+	virtual SB_STATUS		UpdateProcesses(bool bKeep, bool bAllSessions);
+	//virtual SB_STATUS		UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox);
 
 	virtual QMap<QString, CSandBoxPtr> GetAllBoxes() { return m_SandBoxes; }
-
-	virtual int				TotalProcesses() const { return m_BoxedProxesses.count(); }
+	virtual QMap<quint32, CBoxedProcessPtr> GetAllProcesses() { return m_BoxedProxesses; }
 
 	virtual CSandBoxPtr		GetBoxByProcessId(quint32 ProcessId) const;
 	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
@@ -88,16 +87,35 @@ public:
 	};
 
 	// Config
-	virtual SB_STATUS		ReloadConfig(quint32 SessionId = -1);
+	virtual SB_STATUS		ReloadConfig(bool ReconfigureDrv = false);
+	virtual SB_STATUS		ReloadCert();
+	virtual void			CommitIniChanges();
 	virtual QString			SbieIniGet(const QString& Section, const QString& Setting, quint32 Index = 0, qint32* ErrCode = NULL);
-	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate);
+	virtual QString			SbieIniGetEx(const QString& Section, const QString& Setting);
+	virtual SB_STATUS		SbieIniSet(const QString& Section, const QString& Setting, const QString& Value, ESetMode Mode = eIniUpdate, bool bRefresh = true);
 	virtual bool			IsBox(const QString& BoxName, bool& bIsEnabled);
 	virtual CSbieIni*		GetGlobalSettings() const { return m_pGlobalSection; }
 	virtual CSbieIni*		GetUserSettings() const { return m_pUserSection; }
+	virtual QString			GetCurrentUserName() const { return m_UserName; }
+	virtual QString			GetCurrentUserSid() const { return m_UserSid; }
 	virtual bool			IsConfigLocked();
 	virtual SB_STATUS		UnlockConfig(const QString& Password);
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
+
+	enum EFeatureFlags
+	{
+		eSbieFeatureWFP			= 0x00000001,
+		eSbieFeatureObCB		= 0x00000002,
+		eSbieFeaturePMod		= 0x00000004,
+		eSbieFeatureAppC		= 0x00000008,
+		eSbieFeatureSbiL		= 0x00000010,
+		eSbieFeatureCert		= 0x80000000
+	};
+
+	virtual quint32			GetFeatureFlags();
+	virtual QString			GetFeatureStr();
+	virtual quint64			GetCertState();
 
 	// Forced Processes
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);
@@ -108,14 +126,17 @@ public:
 	virtual bool			IsMonitoring();
 
 	virtual void			AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge = false);
-	virtual QList<CTraceEntryPtr> GetTrace() const { QReadLocker Lock(&m_TraceMutex); return m_TraceList; }
-	virtual void			ClearTrace() { QWriteLocker Lock(&m_TraceMutex); m_TraceList.clear(); }
+	virtual QVector<CTraceEntryPtr> GetTrace() const;
+	virtual void			ClearTrace() { QWriteLocker Lock(&m_TraceMutex); m_TraceList.clear(); m_LastTraceEntry = 0; }
 
 	// Other
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
 
-	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, QProcess* pProcess = NULL, bool Elevated = false);
+	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 	virtual QString			GetStartPath() const;
+
+	virtual quint32			GetSessionID() const;
+
 
 	enum ESbieQueuedRequests
 	{
@@ -134,7 +155,7 @@ signals:
 	//void					LogMessage(const QString& Message, bool bNotify = true);
 	void					LogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	void					ProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
-	void					FileToRecover(const QString& BoxName, const QString& FilePath, quint32 ProcessId);
+	void					FileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 	void					BoxClosed(const QString& BoxName);
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 	void					QueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
@@ -149,18 +170,22 @@ protected:
 	friend class CSandBox;
 	friend class CBoxedProcess;
 
+	virtual SB_STATUS		ReloadConf(quint32 flags, quint32 SessionId = -1);
+
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
 
 	virtual QString			GetSbieHome() const;
 	virtual QString			GetIniPath(bool* IsHome) const;
-	virtual QString			GetUserSection() const;
+	virtual QString			GetUserSection(QString* pUserName = NULL, bool* pIsAdmin = NULL) const;
 
 	virtual bool			HasProcesses(const QString& BoxName);
 
 	virtual bool			GetQueue();
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
+
+	virtual quint32			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
 
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);
@@ -181,10 +206,22 @@ protected:
 	QMap<quint32, CBoxedProcessPtr> m_BoxedProxesses;
 
 	mutable QReadWriteLock	m_TraceMutex;
-	QList<CTraceEntryPtr>	m_TraceList;
+	QVector<CTraceEntryPtr>	m_TraceList;
+	int						m_LastTraceEntry;
 
 	mutable QReadWriteLock	m_DriveLettersMutex;
-	QMap<QString, QString>	m_DriveLetters;
+	struct SDrive
+	{
+		QString Letter;
+		QString NtPath;
+		enum EType
+		{
+			EVolume = 0,
+			EShare
+		} Type;
+		QString Aux;
+	};
+	QMap<QString, SDrive>	m_DriveLetters;
 
 	QString					m_SbiePath;
 	QString					m_IniPath;
@@ -197,6 +234,8 @@ protected:
 
 	CSbieIni*				m_pGlobalSection;
 	CSbieIni*				m_pUserSection;
+	QString					m_UserName;
+	QString					m_UserSid;
 
 	QString					m_ProgramDataDir;
 	QString					m_PublicDir;

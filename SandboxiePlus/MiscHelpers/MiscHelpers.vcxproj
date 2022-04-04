@@ -192,6 +192,7 @@
     <ClCompile Include="Common\KeyValueInputDialog.cpp" />
     <ClCompile Include="Common\ListItemModel.cpp" />
     <ClCompile Include="Common\MultiLineInputDialog.cpp" />
+    <ClCompile Include="Common\OtherFunctions.cpp" />
     <ClCompile Include="Common\PanelView.cpp" />
     <ClCompile Include="Common\qRC4.cpp" />
     <ClCompile Include="Common\NetworkAccessManager.cpp" />
@@ -213,6 +214,7 @@
   <ItemGroup>
     <QtMoc Include="Common\CheckableMessageBox.h" />
     <QtMoc Include="Common\ComboInputDialog.h" />
+    <QtMoc Include="Common\CheckList.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Common\DebugHelpers.h" />
     <ClInclude Include="Common\ExitDialog.h" />
@@ -236,6 +238,7 @@
     <QtMoc Include="Common\TreeViewEx.h" />
     <QtMoc Include="Common\TreeWidgetEx.h" />
     <ClInclude Include="Common\IconExtreactor.h" />
+    <ClInclude Include="Common\OtherFunctions.h" />
     <ClInclude Include="Common\qRC4.h" />
     <QtMoc Include="Common\NetworkAccessManager.h" />
     <ClInclude Include="Common\Xml.h" />

@@ -59,11 +59,17 @@ public:
 	virtual bool					IsEnabled() const  { return m_IsEnabled; }
 
 	virtual bool					IsEmpty() const;
+	virtual bool					IsInitialized() const;
+	virtual bool					HasSnapshots() const;
 	virtual SB_PROGRESS				CleanBox();
 	virtual SB_STATUS				RenameBox(const QString& NewName);
 	virtual SB_STATUS				RemoveBox();
 
-	virtual QList<SBoxSnapshot>		GetSnapshots(QString* pCurrent = NULL) const;
+	virtual QString					Expand(const QString& Value);
+
+	virtual QList<SBoxSnapshot>		GetSnapshots(QString* pCurrent = NULL, QString* pDefault = NULL) const;
+	virtual void					SetDefaultSnapshot(QString Default);
+	virtual QString					GetDefaultSnapshot(QString* pCurrent = NULL) const;
 	virtual SB_PROGRESS				TakeSnapshot(const QString& Name);
 	virtual SB_PROGRESS				RemoveSnapshot(const QString& ID);
 	virtual SB_PROGRESS				SelectSnapshot(const QString& ID);
@@ -88,6 +94,7 @@ protected:
 	
 	QMap<quint32, CBoxedProcessPtr>	m_ProcessList;
 	int								m_ActiveProcessCount;
+	bool							m_ActiveProcessDirty;
 
 //private:
 //	struct SSandBox* m;

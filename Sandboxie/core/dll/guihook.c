@@ -96,6 +96,7 @@ static CRITICAL_SECTION Gui_HooksCritSec;
 static LIST Gui_Hooks;
 static DWORD Gui_HookHelperThreadId = 0;
 static int Gui_HookCount = 0;
+static BOOLEAN Gui_HookInit = FALSE;
 
 //---------------------------------------------------------------------------
 // Gui_InitWinHooks
@@ -110,6 +111,8 @@ _FX BOOLEAN Gui_InitWinHooks(void)
     SBIEDLL_HOOK_GUI(SetWindowsHookExA);
     SBIEDLL_HOOK_GUI(SetWindowsHookExW);
     SBIEDLL_HOOK_GUI(UnhookWindowsHookEx);
+
+    Gui_HookInit = TRUE;
 
     return TRUE;
 }
@@ -618,6 +621,9 @@ _FX BOOL Gui_UnhookWindowsHookEx(HHOOK hhk)
 
 _FX LRESULT Gui_NotifyWinHooks()
 {
+    if (!Gui_HookInit)
+        return 0;
+
     GUI_WND_HOOK_NOTIFY_REQ req;
     GUI_WND_HOOK_NOTIFY_RPL *rpl;
 

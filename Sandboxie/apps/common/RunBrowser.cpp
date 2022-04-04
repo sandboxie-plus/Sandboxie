@@ -24,6 +24,7 @@
 
 #include "RunBrowser.h"
 #include "CommonUtils.h"
+#include "RunStartExe.h"
 #include "MyMsg.h"
 #include "core/dll/sbiedll.h"
 

@@ -4,16 +4,12 @@
     <ClCompile Include="advapi.c" />
     <ClCompile Include="crypt.c" />
     <ClCompile Include="custom.c" />
-    <ClCompile Include="debug.c" />
     <ClCompile Include="dllmem.c" />
     <ClCompile Include="dllpath.c" />
     <ClCompile Include="event.c" />
     <ClCompile Include="includes.c" />
-    <ClCompile Include="iphlp.c" />
     <ClCompile Include="lsa.c" />
     <ClCompile Include="mscoree.c" />
-    <ClCompile Include="net.c" />
-    <ClCompile Include="netapi.c" />
     <ClCompile Include="obj.c" />
     <ClCompile Include="pdh.c" />
     <ClCompile Include="proc.c" />
@@ -122,7 +118,6 @@
     <ClCompile Include="taskbar.c">
       <Filter>gui</Filter>
     </ClCompile>
-    <ClCompile Include="acscmonitor.c" />
     <ClCompile Include="pst.cpp">
       <Filter>pst</Filter>
     </ClCompile>
@@ -132,7 +127,6 @@
     <ClCompile Include="ipstore_enum.cpp">
       <Filter>pst</Filter>
     </ClCompile>
-    <ClCompile Include="cred.c" />
     <ClCompile Include="sbieapi.c">
       <Filter>api</Filter>
     </ClCompile>
@@ -166,7 +160,6 @@
     <ClCompile Include="dllmain.c">
       <Filter>hook</Filter>
     </ClCompile>
-    <ClCompile Include="trace.c" />
     <ClCompile Include="..\..\common\my_ntdll.c">
       <Filter>common</Filter>
     </ClCompile>
@@ -183,10 +176,51 @@
     <ClCompile Include="scm_msi.c">
       <Filter>scm</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\netfw.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\rbtree.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\list.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="net.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="netapi.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="iphlp.c">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\str_util.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\map.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="cred.c">
+      <Filter>pst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\wow64ext\wow64ext.cpp">
+      <Filter>common\wow64ext</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.c">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="trace.c">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="dump.c">
+      <Filter>debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advapi.h" />
-    <ClInclude Include="debug.h" />
     <ClInclude Include="dll.h" />
     <ClInclude Include="hook.h">
       <Filter>hook</Filter>
@@ -224,12 +258,59 @@
     <ClInclude Include="obj.h">
       <Filter>com</Filter>
     </ClInclude>
-    <ClInclude Include="trace.h" />
     <ClInclude Include="..\..\common\stream.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\pattern.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\apps\com\common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\netfw.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\rbtree.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\list.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_wsa.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\str_util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\map.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\ntproto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\win32_ntddk.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\wow64ext\CMemPtr.h">
+      <Filter>common\wow64ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\wow64ext\internal.h">
+      <Filter>common\wow64ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\wow64ext\wow64ext.h">
+      <Filter>common\wow64ext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\my_version.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="trace.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="dump.h">
+      <Filter>debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +363,15 @@
     </Filter>
     <Filter Include="api">
       <UniqueIdentifier>{1903d308-e235-4da0-a117-0dfaa6eb24eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{bbd6a003-d74d-405a-bd10-e2fea62301f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\wow64ext">
+      <UniqueIdentifier>{c6a9654a-9f55-43ca-9cd1-7571bb879288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="debug">
+      <UniqueIdentifier>{db0f9820-8908-4325-96f9-69c82fa9e268}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

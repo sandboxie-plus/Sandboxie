@@ -284,6 +284,8 @@ _FX BOOLEAN Conf_GetGroupsForSid(WCHAR *PageSizeBuffer, ULONG SessionId)
                 break;
         }
 
+        ExFreePool(groups);
+
         //
         // on Windows Vista, check for UAC split token
         //

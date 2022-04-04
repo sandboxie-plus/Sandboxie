@@ -11,7 +11,7 @@ public:
 	CTraceModel(QObject* parent = 0);
 	~CTraceModel();
 
-	QList<QVariant>	Sync(const QList<CTraceEntryPtr>& EntryList);
+	QList<QVariant>	Sync(const QVector<CTraceEntryPtr>& EntryList, int (*Filter)(const CTraceEntryPtr&, void*), void* params);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
 
@@ -30,7 +30,7 @@ public:
 		eCount
 	};
 
-	struct SProgInfo
+	/*struct SProgInfo
 	{
 		SProgInfo() { Dirty = true; }
 		QString Name;
@@ -40,14 +40,15 @@ public:
 	QMap<quint32, SProgInfo>GetPids() { return m_PidMap; }
 
 signals:
-	void			NewBranche();
+	void			NewBranche();*/
 
 protected:
 	struct STraceNode : STreeNode
 	{
-		STraceNode(const QVariant& Id) : STreeNode(Id) {}
+		STraceNode(const QVariant& Id) : STreeNode(Id) { bHighLight = false; }
 
 		CTraceEntryPtr		pEntry;
+		bool				bHighLight;
 	};
 
 	QVariant				m_LastID;
@@ -59,7 +60,8 @@ protected:
 	/*QList<QVariant>			MakePath(const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList);
 	bool					TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList, int Index = 0);*/
 
-	QString					GetProcessName(quint32 pid, quint32 tid = 0);
+	/*void					SetProcessName(const QString& Name, quint32 pid, quint32 tid);
+	QString					GetProcessName(quint32 pid);
 	void					LogThreadId(quint32 pid, quint32 tid);
-	QMap<quint32, SProgInfo>m_PidMap;
+	QMap<quint32, SProgInfo>m_PidMap;*/
 };

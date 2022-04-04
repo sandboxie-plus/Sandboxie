@@ -21,11 +21,14 @@
 
 #pragma once
 
-#include "ntstatus.h"
+#include <ntstatus.h>
 #define WIN32_NO_STATUS
 typedef long NTSTATUS;
 
-#include <afxwin.h>         // MFC core and standard components
-#include <afxext.h>         // MFC extensions
-#include <afxdisp.h>        // MFC Automation classes
-
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <shellapi.h>
+#include <shlwapi.h>
+#include <Shlobj.h>
+#include <objbase.h>

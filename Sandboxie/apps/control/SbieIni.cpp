@@ -456,8 +456,9 @@ BOOL CSbieIni::CallSbieSvc(
         (SBIE_INI_SETTING_REQ *)malloc(REQUEST_LEN);
     if (req) {
 
-        wcscpy(req->section, Section);
+        req->refresh = TRUE;
 
+        wcscpy(req->section, Section);
         wcscpy(req->setting, Setting);
 
         wcscpy(req->value, Value);

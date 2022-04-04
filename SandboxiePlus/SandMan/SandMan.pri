@@ -6,8 +6,11 @@
 HEADERS += ./stdafx.h \
     ./SandMan.h \
     ./SbiePlusAPI.h \
+    ./SbieProcess.h \
+    ./BoxJob.h \
     ./Models/SbieModel.h \
     ./Models/TraceModel.h \
+    ./Models/MonitorModel.h \
     ./Views/SbieView.h \
     ./Views/TraceView.h \
     ./Dialogs/MultiErrorDialog.h \
@@ -18,13 +21,18 @@ HEADERS += ./stdafx.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
     ./Windows/SettingsWindow.h \
-    ./Windows/OptionsWindow.h
+    ./Windows/OptionsWindow.h \
+    ./Windows/SelectBoxWindow.h \
+    ./Windows/FileBrowserWindow.h
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
     ./SandMan.cpp \
     ./SbiePlusAPI.cpp \
+    ./SbieProcess.cpp \
+    ./BoxJob.cpp \
     ./Models/TraceModel.cpp \
+    ./Models/MonitorModel.cpp \
     ./Models/SbieModel.cpp \
     ./Views/SbieView.cpp \
     ./Views/TraceView.cpp \
@@ -34,26 +42,46 @@ SOURCES += ./main.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
+    ./Windows/OptionsAccess.cpp \
+    ./Windows/OptionsAdvanced.cpp \
+    ./Windows/OptionsForce.cpp \
+    ./Windows/OptionsGeneral.cpp \
+    ./Windows/OptionsGrouping.cpp \
+    ./Windows/OptionsNetwork.cpp \
+    ./Windows/OptionsRecovery.cpp \
+    ./Windows/OptionsStart.cpp \
+    ./Windows/OptionsStop.cpp \
+    ./Windows/OptionsTemplates.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
     ./Windows/SettingsWindow.cpp \
-    ./Windows/SnapshotsWindow.cpp
+    ./Windows/SnapshotsWindow.cpp \
+    ./Windows/SelectBoxWindow.cpp \
+    ./Windows/FileBrowserWindow.cpp
 
 FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
     ./Forms/PopUpWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
-    ./Forms/SnapshotsWindow.ui
+    ./Forms/SnapshotsWindow.ui \
+    ./Forms/SelectBoxWindow.ui \
+    ./Forms/FileBrowserWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
+    sandman_en.ts \
     sandman_es.ts \
+    sandman_fr.ts \
     sandman_it.ts \
-    sandman_pt.ts \
-    sandman_ru.ts \
+    sandman_nl.ts \
     sandman_pl.ts \
-    sandman_tr.ts \
-    sandman_zh-CN.ts \
-    sandman_zh-TW.ts
+    sandman_pt_BR.ts \
+    sandman_pt_PT.ts \
+    sandman_ru.ts \
+    sandman_uk.ts \
+    sandman_zh_CN.ts \
+    sandman_zh_TW.ts
+
+#   sandman_tr.ts (unmaintained)
 
 RESOURCES += Resources/SandMan.qrc

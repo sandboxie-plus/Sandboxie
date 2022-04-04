@@ -33,6 +33,7 @@ class QueueServer
 public:
 
     QueueServer(PipeServer *pipeServer);
+	~QueueServer();
 
 protected:
 

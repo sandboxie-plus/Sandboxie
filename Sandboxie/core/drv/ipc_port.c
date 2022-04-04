@@ -168,13 +168,16 @@ _FX void *Ipc_GetServerPort(void *Object)
     //    (in ConnectionPort) disappearing while we're working with it.
     //
 
+#ifdef XP_SUPPORT
     if (Driver_OsVersion == DRIVER_WINDOWS_XP ||
         Driver_OsVersion == DRIVER_WINDOWS_2003) {
 
         port_object =
             ((struct LPC_PORT_OBJECT_XP_2003 *)Object)->ConnectionPort;
 
-    } else if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
+    } else 
+#endif
+    if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
 
         port_object =
             *(((struct ALPC_PORT_OBJECT_VISTA *)Object)->ConnectionPortPtr);
@@ -256,8 +259,8 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     /*if (Session_MonitorCount)// && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) 
     {
         WCHAR msg_str[256];
-        swprintf(msg_str, L"CheckPortRequest, Status <%08X> on Port <%*.*s>\n", status, Name->Name.Length / sizeof(WCHAR), Name->Name.Length / sizeof(WCHAR), Name->Name.Buffer);
-        Log_Debug_Msg(MONITOR_IPC, msg_str, NULL);
+        RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"CheckPortRequest, Status <%08X> on Port <%*.*s>\n", status, Name->Name.Length / sizeof(WCHAR), Name->Name.Length / sizeof(WCHAR), Name->Name.Buffer);
+        Log_Debug_Msg(MONITOR_IPC, msg_str, Driver_Empty);
     }*/
 
     //
@@ -501,7 +504,10 @@ _FX NTSTATUS Ipc_CheckPortRequest_WinApi(
             }
 
             // MS11-063
-            if ( ((Driver_OsVersion == DRIVER_WINDOWS_XP || Driver_OsVersion == DRIVER_WINDOWS_VISTA) && msg2->api_code == WINAPI_SRVDEVICEEVENT) ||
+            if ( 
+#ifdef XP_SUPPORT
+                ((Driver_OsVersion == DRIVER_WINDOWS_XP || Driver_OsVersion == DRIVER_WINDOWS_VISTA) && msg2->api_code == WINAPI_SRVDEVICEEVENT) ||
+#endif
                  (Driver_OsVersion == DRIVER_WINDOWS_7 && msg2->api_code == WINAPI_SRVDEVICEEVENT_WIN7) ) {
 
                 Log_MsgP0(MSG_1316, proc->pid);
@@ -591,16 +597,16 @@ _FX NTSTATUS Ipc_AlpcSendWaitReceivePort(
 _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
 {
     NTSTATUS status = STATUS_SUCCESS;
-    //KIRQL irql;
+    KIRQL irql;
     API_OPEN_DYNAMIC_PORT_ARGS* pArgs = (API_OPEN_DYNAMIC_PORT_ARGS*)parms;
     WCHAR portName[DYNAMIC_PORT_NAME_CHARS];
     WCHAR portId[DYNAMIC_PORT_ID_CHARS];
 
     if (proc) // is caller sandboxed?
-        return STATUS_ACCESS_DENIED;
+        return STATUS_NOT_IMPLEMENTED;
 
-    //if (PsGetCurrentProcessId() != Api_ServiceProcessId)
-    //    return STATUS_ACCESS_DENIED;
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId)
+        return STATUS_ACCESS_DENIED;
 
     if (pArgs->port_name.val == NULL)
         return STATUS_INVALID_PARAMETER;
@@ -669,24 +675,19 @@ _FX NTSTATUS Ipc_Api_OpenDynamicPort(PROCESS* proc, ULONG64* parms)
 
     if (pArgs->process_id.val != 0)
     {
-        //proc = Process_Find(pArgs->process_id.val, &irql);
-        proc = Process_Find(pArgs->process_id.val, NULL);
+        proc = Process_Find(pArgs->process_id.val, &irql);
         if (proc && (proc != PROCESS_TERMINATED))
         {
-            KIRQL irql2;
-
-            KeRaiseIrql(APC_LEVEL, &irql2);
             ExAcquireResourceExclusiveLite(proc->ipc_lock, TRUE);
 
             Process_AddPath(proc, &proc->open_ipc_paths, NULL, FALSE, portName, FALSE);
 
             ExReleaseResourceLite(proc->ipc_lock);
-            KeLowerIrql(irql2);
         }
         else
             status = STATUS_NOT_FOUND;
-        //ExReleaseResourceLite(Process_ListLock);
-        //KeLowerIrql(irql);
+        ExReleaseResourceLite(Process_ListLock);
+        KeLowerIrql(irql);
     }
 
     return status;
@@ -825,7 +826,7 @@ _FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR* pDstPortNa
                 (ObjName->Length < 64 * sizeof(WCHAR)) &&
                 _wcsnicmp(ObjName->Buffer, L"LRPC-", 5) == 0) {
 
-                swprintf(name, L"%s\\%s", _rpc_control, ObjName->Buffer);
+                RtlStringCbPrintfW(name, sizeof(name), L"%s\\%s", _rpc_control, ObjName->Buffer);
 
                 RtlInitUnicodeString(&objname, name);
 
@@ -886,6 +887,8 @@ _FX NTSTATUS Ipc_Api_GetRpcPortName_2(PEPROCESS ProcessObject, WCHAR* pDstPortNa
     return status;
 }
 
+
+#ifdef XP_SUPPORT
 
 //---------------------------------------------------------------------------
 //
@@ -948,3 +951,4 @@ _FX NTSTATUS Ipc_NtRequestWaitReplyPort(
 
 
 #endif _WIN64
+#endif

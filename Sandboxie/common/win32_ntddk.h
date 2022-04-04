@@ -554,8 +554,24 @@ typedef struct _FILE_SHORT_NAME_INFORMATION {
 
 // FileDispositionInformation
 typedef struct _FILE_DISPOSITION_INFORMATION {
-    BOOLEAN DeleteFile;
+    BOOLEAN DeleteFileOnClose;
 } FILE_DISPOSITION_INFORMATION, *PFILE_DISPOSITION_INFORMATION;
+
+// // FileDispositionInformationEx
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS1)
+#define FILE_DISPOSITION_DO_NOT_DELETE              0x00000000
+#define FILE_DISPOSITION_DELETE                     0x00000001
+#define FILE_DISPOSITION_POSIX_SEMANTICS            0x00000002
+#define FILE_DISPOSITION_FORCE_IMAGE_SECTION_CHECK  0x00000004
+#define FILE_DISPOSITION_ON_CLOSE                   0x00000008
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#define FILE_DISPOSITION_IGNORE_READONLY_ATTRIBUTE  0x00000010
+#endif
+
+typedef struct _FILE_DISPOSITION_INFORMATION_EX {
+    ULONG Flags;
+} FILE_DISPOSITION_INFORMATION_EX, *PFILE_DISPOSITION_INFORMATION_EX;
+#endif
 
 // FilePositionInformation
 typedef struct _FILE_POSITION_INFORMATION {
@@ -1643,7 +1659,7 @@ typedef struct _ALPC_MESSAGE_VIEW {
     ULONG               SendFlags;
     ULONG               ReceiveFlags;
     union {
-        ULONG           Unknowns[12];
+        ULONG           Unknowns[16]; // was 12
         struct {
             ULONG       ReplyLength;
             ULONG       Unknown1;
@@ -2174,6 +2190,22 @@ __declspec(dllimport) NTSTATUS __stdcall NtFilterToken(
     IN PTOKEN_GROUPS RestrictedSids OPTIONAL,
     OUT PHANDLE NewTokenHandle);
 
+__declspec(dllimport) NTSTATUS __stdcall NtFilterTokenEx(
+    _In_ HANDLE ExistingTokenHandle,
+    _In_ ULONG Flags,
+    _In_opt_ PTOKEN_GROUPS SidsToDisable,
+    _In_opt_ PTOKEN_PRIVILEGES PrivilegesToDelete,
+    _In_opt_ PTOKEN_GROUPS RestrictedSids,
+    _In_ ULONG DisableUserClaimsCount,
+    _In_opt_ PUNICODE_STRING UserClaimsToDisable,
+    _In_ ULONG DisableDeviceClaimsCount,
+    _In_opt_ PUNICODE_STRING DeviceClaimsToDisable,
+    _In_opt_ PTOKEN_GROUPS DeviceGroupsToDisable,
+    _In_opt_ PVOID RestrictedUserAttributes,
+    _In_opt_ PVOID RestrictedDeviceAttributes,
+    _In_opt_ PTOKEN_GROUPS RestrictedDeviceGroups,
+    _Out_ PHANDLE NewTokenHandle);
+
 __declspec(dllimport) NTSTATUS __stdcall NtAdjustPrivilegesToken(
     IN HANDLE TokenHandle,
     IN BOOLEAN DisableAllPrivileges,
@@ -2225,6 +2257,19 @@ __declspec(dllimport) NTSTATUS RtlCreateSecurityDescriptor(
     PSECURITY_DESCRIPTOR SecurityDescriptor,
     ULONG Revision
 );
+
+__declspec(dllimport) NTSTATUS RtlGetOwnerSecurityDescriptor(
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID* Owner, PBOOLEAN OwnerDefaulted
+);
+
+__declspec(dllimport) NTSTATUS RtlGetGroupSecurityDescriptor(
+    PSECURITY_DESCRIPTOR SecurityDescriptor,
+    PSID* Group, PBOOLEAN GroupDefaulted
+);
+
+__declspec(dllimport) BOOLEAN RtlEqualSid(PSID Sid1, PSID Sid2);
+__declspec(dllimport) PVOID RtlFreeSid(PSID Sid);
 
 //---------------------------------------------------------------------------
 
@@ -2279,10 +2324,126 @@ __declspec(dllimport) NTSTATUS RtlCreateProcessParameters(
     UNICODE_STRING *ShellInfo,
     UNICODE_STRING *RuntimeData);
 
+
+// windows-internals-book:"Chapter 5"
+typedef enum _PS_CREATE_STATE
+{
+    PsCreateInitialState,
+    PsCreateFailOnFileOpen,
+    PsCreateFailOnSectionCreate,
+    PsCreateFailExeFormat,
+    PsCreateFailMachineMismatch,
+    PsCreateFailExeName, // Debugger specified
+    PsCreateSuccess,
+    PsCreateMaximumStates
+} PS_CREATE_STATE;
+
+
+typedef struct _PS_CREATE_INFO
+{
+    SIZE_T Size;
+    PS_CREATE_STATE State;
+    union
+    {
+        // PsCreateInitialState
+        struct
+        {
+            union
+            {
+                ULONG InitFlags;
+                struct
+                {
+                    UCHAR WriteOutputOnExit : 1;
+                    UCHAR DetectManifest : 1;
+                    UCHAR IFEOSkipDebugger : 1;
+                    UCHAR IFEODoNotPropagateKeyState : 1;
+                    UCHAR SpareBits1 : 4;
+                    UCHAR SpareBits2 : 8;
+                    USHORT ProhibitedImageCharacteristics : 16;
+                };
+            };
+            ACCESS_MASK AdditionalFileAccess;
+        } InitState;
+
+        // PsCreateFailOnSectionCreate
+        struct
+        {
+            HANDLE FileHandle;
+        } FailSection;
+
+        // PsCreateFailExeFormat
+        struct
+        {
+            USHORT DllCharacteristics;
+        } ExeFormat;
+
+        // PsCreateFailExeName
+        struct
+        {
+            HANDLE IFEOKey;
+        } ExeName;
+
+        // PsCreateSuccess
+        struct
+        {
+            union
+            {
+                ULONG OutputFlags;
+                struct
+                {
+                    UCHAR ProtectedProcess : 1;
+                    UCHAR AddressSpaceOverride : 1;
+                    UCHAR DevOverrideEnabled : 1; // from Image File Execution Options
+                    UCHAR ManifestDetected : 1;
+                    UCHAR ProtectedProcessLight : 1;
+                    UCHAR SpareBits1 : 3;
+                    UCHAR SpareBits2 : 8;
+                    USHORT SpareBits3 : 16;
+                };
+            };
+            HANDLE FileHandle;
+            HANDLE SectionHandle;
+            ULONGLONG UserProcessParametersNative;
+            ULONG UserProcessParametersWow64;
+            ULONG CurrentParameterFlags;
+            ULONGLONG PebAddressNative;
+            ULONG PebAddressWow64;
+            ULONGLONG ManifestAddress;
+            ULONG ManifestSize;
+        } SuccessState;
+    };
+} PS_CREATE_INFO, *PPS_CREATE_INFO;
+
+
+
+typedef struct _PS_ATTRIBUTE
+{
+    ULONG_PTR Attribute;
+    SIZE_T Size;
+    union
+    {
+        ULONG_PTR Value;
+        PVOID ValuePtr;
+    };
+    PSIZE_T ReturnLength;
+} PS_ATTRIBUTE, *PPS_ATTRIBUTE;
+
+typedef struct _PS_ATTRIBUTE_LIST
+{
+    SIZE_T TotalLength;
+    PS_ATTRIBUTE Attributes[1];
+} PS_ATTRIBUTE_LIST, *PPS_ATTRIBUTE_LIST;
+
+
 __declspec(dllimport) NTSTATUS __stdcall NtCreateJobObject(
     OUT PHANDLE JobHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL);
+
+__declspec(dllimport) NTSTATUS __stdcall NtOpenJobObject(
+    OUT PHANDLE JobHandle,
+    IN  ACCESS_MASK DesiredAccess,
+    IN  POBJECT_ATTRIBUTES ObjectAttributes);
 
 __declspec(dllimport) NTSTATUS __stdcall NtAssignProcessToJobObject(
     HANDLE hJob, HANDLE hProcess);
@@ -2381,6 +2542,8 @@ __declspec(dllimport) ULONG __stdcall
 RtlNtStatusToDosError(NTSTATUS Status);
 
 __declspec(dllimport) void __stdcall RtlRaiseStatus(NTSTATUS Status);
+
+NTSTATUS NTAPI RtlSetThreadErrorMode(IN ULONG NewMode, OUT PULONG OldMode);
 
 __declspec(dllimport) PULONG __stdcall
 RtlSubAuthoritySid(

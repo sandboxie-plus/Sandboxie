@@ -162,9 +162,13 @@ _FX BOOLEAN Sxs_Init(void)
     HANDLE EvtHandle;
     ULONG status = -1;
     int retry = 0;
+
     //
     // initialize stuff needed to call SxsGenerateActivationContext
     //
+
+    if (SbieApi_QueryConfBool(NULL, L"DisableBoxedWinSxS", FALSE))
+        return FALSE;
 
     memzero(&osvi, sizeof(OSVERSIONINFO));
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);

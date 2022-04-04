@@ -106,9 +106,9 @@ _FX NTSTATUS Syscall_DeviceIoControlFile(
 
             /*
             WCHAR msg_str[240];
-            swprintf(msg_str, L"DeviceIoContoleFile, CMApi, func = 0x%X, filter=%d, p=%06d t=%06d, %s\n",
+            RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"DeviceIoContoleFile, CMApi, func = 0x%X, filter=%d, p=%06d t=%06d, %s\n",
                 function, filter, PsGetCurrentProcessId(), PsGetCurrentThreadId(), proc->image_name);
-            Log_Debug_Msg(MONITOR_OTHER | MONITOR_TRACE, msg_str, NULL);*/
+            Log_Debug_Msg(MONITOR_OTHER | MONITOR_TRACE, msg_str, Driver_Empty);*/
 
             if (Session_MonitorCount && (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))) {
 
@@ -123,8 +123,8 @@ _FX NTSTATUS Syscall_DeviceIoControlFile(
 
                 if (mon_type) {
                     WCHAR msg_str[24];
-                    swprintf(msg_str, L"Func: %02X", (ULONG)function);
-                    Log_Debug_Msg(mon_type, L"\\Device\\DeviceApi\\CMApi", msg_str);
+                    RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Func: %02X", (ULONG)function);
+                    Log_Debug_Msg(mon_type, msg_str, L"\\Device\\DeviceApi\\CMApi");
                 }
             }
 

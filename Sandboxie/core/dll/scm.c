@@ -1214,3 +1214,25 @@ _FX void Scm_DiscardKeyCache(const WCHAR *ServiceName)
     Key_DiscardMergeByPath(keyname, TRUE);
     Dll_Free(keyname);
 }
+
+
+//---------------------------------------------------------------------------
+// SbieDll_CheckProcessLocalSystem
+//---------------------------------------------------------------------------
+
+
+_FX BOOL SbieDll_CheckProcessLocalSystem(HANDLE ProcessHandle)
+{
+    BOOL IsLocalSystem = FALSE;
+
+    HANDLE TokenHandle;
+    if (NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle)) {
+
+        extern BOOL Secure_IsTokenLocalSystem(HANDLE hToken);
+        IsLocalSystem = Secure_IsTokenLocalSystem(TokenHandle);
+
+        NtClose(TokenHandle);
+    }
+
+    return IsLocalSystem;
+}

@@ -487,7 +487,129 @@ finish:
 
 bool CheckDropRights(const WCHAR *BoxName)
 {
+    if (SbieApi_QueryConfBool(BoxName, L"NoSecurityIsolation", FALSE))
+        return false; // if we are not swaping the token we can not drop admin rights so keep this consistent
     if (SbieApi_QueryConfBool(BoxName, L"DropAdminRights", FALSE))
         return true;
     return false;
+}
+
+
+//---------------------------------------------------------------------------
+// CheckDropRights
+//---------------------------------------------------------------------------
+
+
+bool IsProcessWoW64(HANDLE pid)
+{
+    typedef BOOL (*P_IsWow64Process)(HANDLE, BOOL *);
+    static P_IsWow64Process pIsWow64Process = NULL;
+    if(!pIsWow64Process)
+        pIsWow64Process = (P_IsWow64Process)GetProcAddress(_Kernel32, "IsWow64Process");
+
+    if (!pIsWow64Process)
+        return false;
+
+    bool IsWow64 = false;
+
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,
+                                    FALSE, (ULONG)(ULONG_PTR)pid);
+    if (hProcess) {
+
+        BOOL xwow64 = FALSE;
+        if (pIsWow64Process && pIsWow64Process(hProcess, &xwow64) && xwow64) {
+
+            IsWow64 = true;
+        }
+
+        CloseHandle(hProcess);
+    }
+#ifdef DEBUG_COMSERVER
+    else {
+
+        WCHAR txt[256]; wsprintf(txt, L"Cannot determine wow64ness for idProcess=%d\n", idProcess);
+        OutputDebugString(txt);
+    }
+#endif
+
+    return IsWow64;
+}
+
+
+//---------------------------------------------------------------------------
+// IsBoxedPath
+//---------------------------------------------------------------------------
+
+
+extern "C" {
+    WINBASEAPI DWORD WINAPI GetFinalPathNameByHandleW(
+        _In_ HANDLE hFile,
+        _Out_writes_(cchFilePath) LPWSTR lpszFilePath,
+        _In_ DWORD cchFilePath,
+        _In_ DWORD dwFlags
+    );
+}
+
+bool IsHostPath(HANDLE idProcess, WCHAR* dos_path)
+{
+    bool result = false; // false on failure
+    WCHAR* request_path = NULL;
+    WCHAR* sandbox_path = NULL;
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    ULONG len = 0;
+
+    //
+    // get the final file path by opening it and retreiving it from the handle
+    //
+
+    handle = CreateFileW(dos_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+    if (handle == INVALID_HANDLE_VALUE)
+        goto finish;
+
+    len = 8192;
+    request_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len * sizeof(WCHAR));
+    if (!request_path)
+        goto finish;
+
+    DWORD dwRet = GetFinalPathNameByHandleW(handle, request_path, len, VOLUME_NAME_NT);
+    if (dwRet == 0 || dwRet > len) // failed || buffer to small
+        goto finish;
+
+    if(len > 12 && _wcsnicmp(request_path, L"\\Device\\Mup\\", 12) == 0)
+        goto finish; // files on network shares are not files on the host
+
+    //
+    // get the box file path for the calling process
+    //
+
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath(idProcess, NULL, NULL, NULL, &len, NULL, NULL)))
+        goto finish;
+
+    sandbox_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len + 8 * sizeof(WCHAR));
+    if (!sandbox_path)
+        goto finish;
+
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath(idProcess, sandbox_path, NULL, NULL, &len, NULL, NULL)))
+        goto finish;
+
+    //
+    // make sure the specified path is _NOT_ inside the sandbox
+    //
+
+    ULONG sandbox_path_len = wcslen(sandbox_path);
+    ULONG request_path_len = wcslen(request_path);
+    if (request_path_len <= sandbox_path_len || _wcsnicmp(sandbox_path, request_path, sandbox_path_len) != 0) {
+
+        result = true;
+    }
+
+finish:
+    if (request_path)
+        HeapFree(GetProcessHeap(), 0, request_path);
+    if (sandbox_path)
+        HeapFree(GetProcessHeap(), 0, sandbox_path);
+    if (handle != INVALID_HANDLE_VALUE) 
+        NtClose(handle);
+
+    return result;
 }

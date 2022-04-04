@@ -152,8 +152,11 @@ _FX void Log_Popup_MsgEx(
         session_id = 1;
 
     //Log_Popup_Msg_2(
-	Api_AddMessage(
-        error_code, string1, string1_len, string2, string2_len, session_id, (ULONG)pid);
+    //  error_code, string1, string1_len, string2, string2_len, session_id, (ULONG)pid);
+
+    const WCHAR* strings[3] = { string1, string2, NULL };
+    ULONG lengths[3] = { string1_len, string2_len, 0 };
+	Api_AddMessage(error_code, strings, lengths, session_id, (ULONG)pid);
 
     //
     // log message to SbieSvc and trigger SbieSvc to wake up and collect it
@@ -317,9 +320,9 @@ _FX void Log_Status_Ex_Process(
     WCHAR str[100];
 
     if (error_subcode)
-        swprintf(str, L"[%08X / %02X]", nt_status, error_subcode);
+        RtlStringCbPrintfW(str, sizeof(str), L"[%08X / %02X]", nt_status, error_subcode);
     else
-        swprintf(str, L"[%08X]", nt_status);
+        RtlStringCbPrintfW(str, sizeof(str), L"[%08X]", nt_status);
 
     Log_Msg_Process(error_code, str, string2, session_id, process_id);
 }
@@ -330,13 +333,13 @@ _FX void Log_Status_Ex_Process(
 //---------------------------------------------------------------------------
 
 
-_FX void Log_Debug_Msg(ULONG type, const WCHAR *string1, const WCHAR *string2)
+_FX void Log_Debug_Msg(ULONG type, const WCHAR *message, const WCHAR *name)
 {
     //DbgPrint("(%06d) SBIE %S %S\n",
-    //    PsGetCurrentProcessId(), string1, string2);
+    //    PsGetCurrentProcessId(), message, name);
 	if (Session_MonitorCount) {
 	
-		const WCHAR* strings[4] = { string1, string2 ? L" " : NULL, string2, NULL };
+		const WCHAR* strings[3] = { name, message, NULL };
 		Session_MonitorPutEx(type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
 	}
 }

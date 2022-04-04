@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_PopUpWindow.h"
 #include "../SbiePlusAPI.h"
+#include "../SbieProcess.h"
 
 class CPopUpEntry: public QWidget
 {
@@ -215,10 +216,11 @@ class CPopUpRecovery : public CPopUpEntry
 {
 	Q_OBJECT
 public:
-	CPopUpRecovery(const QString& Message, const QString& FilePath, const QString& BoxName, QWidget* parent = 0) : CPopUpEntry(Message, parent)
+	CPopUpRecovery(const QString& Message, const QString& FilePath, const QString& BoxPath, const QString& BoxName, QWidget* parent = 0) : CPopUpEntry(Message, parent)
 	{
 		m_BoxName = BoxName;
 		m_FilePath = FilePath;
+		m_BoxPath = BoxPath;
 
 		QLabel* pLabel = new QLabel(Message);
 		pLabel->setToolTip(Message);
@@ -323,6 +325,7 @@ protected:
 	}
 
 	QString				m_FilePath;
+	QString				m_BoxPath;
 	QString				m_BoxName;
 	QComboBox*			m_pTarget;
 	int					m_LastTargetIndex;
@@ -416,16 +419,14 @@ public:
 
 	virtual void		AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	virtual void		AddUserPrompt(quint32 RequestId, const QVariantMap& Data, quint32 ProcessId);
-	virtual void		AddFileToRecover(const QString& FilePath, const QString& BoxName, quint32 ProcessId);
+	virtual void		AddFileToRecover(const QString& FilePath, QString BoxPath, const CSandBoxPtr& pBox, quint32 ProcessId);
 	virtual void		ShowProgress(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 
 	static void			SetDarkMode(bool bDark) { extern bool CPopUpWindow__DarkMode;  CPopUpWindow__DarkMode = bDark; }
 
-signals:
-	void				RecoveryRequested(const QString& BoxName);
-
 public slots:
 	virtual void		Show();
+	virtual void		Poke();
 
 	virtual void		ReloadHiddenMessages();
 private slots:
@@ -445,6 +446,8 @@ private slots:
 protected:
 	virtual void		closeEvent(QCloseEvent *e);
 
+	void				timerEvent(QTimerEvent* pEvent);
+
 	virtual void		AddEntry(CPopUpEntry* pEntry);
 	virtual void		RemoveEntry(CPopUpEntry* pEntry);
 
@@ -457,5 +460,7 @@ protected:
 private:
 	bool				m_ResetPosition;
 	QAction*			m_pActionCopy;
+	int					m_uTimerID;
+	int					m_iTopMost;
 	Ui::PopUpWindow ui;
 };

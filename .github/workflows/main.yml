@@ -43,7 +43,7 @@ jobs:
 
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v3.0.0
+        uses: actions/cache@v3.0.1
         with:
           path: ${{ runner.workspace }}\Qt
           key: Qt-5.15.2-QtCache

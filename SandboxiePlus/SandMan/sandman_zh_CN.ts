@@ -1275,7 +1275,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="493"/>
         <source>Reload ini file</source>
-        <translation>重新加载配置文件</translation>
+        <translation>重载配置文件</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="495"/>

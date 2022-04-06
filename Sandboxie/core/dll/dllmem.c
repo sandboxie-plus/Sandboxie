@@ -372,8 +372,16 @@ ALIGNED WCHAR *Dll_GetTlsNameBuffer(
 //---------------------------------------------------------------------------
 
 
+#ifdef NAME_BUFFER_DEBUG
+ALIGNED void Dll_PushTlsNameBuffer_(THREAD_DATA *data, char* func)
+#else
 ALIGNED void Dll_PushTlsNameBuffer(THREAD_DATA *data)
+#endif
 {
+#ifdef NAME_BUFFER_DEBUG
+    DbgTrace("Dll_PushTlsNameBuffer, %s, %d\r\n", func, data->depth);
+#endif
+
     ++data->depth;
     if (data->depth > NAME_BUFFER_DEPTH - 4)
         SbieApi_Log(2310, L"%d", data->depth);
@@ -388,8 +396,16 @@ ALIGNED void Dll_PushTlsNameBuffer(THREAD_DATA *data)
 //---------------------------------------------------------------------------
 
 
+#ifdef NAME_BUFFER_DEBUG
+_FX void Dll_PopTlsNameBuffer_(THREAD_DATA *data, char* func)
+#else
 _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
+#endif
 {
+#ifdef NAME_BUFFER_DEBUG
+    DbgTrace("Dll_PopTlsNameBuffer, %s, %d\r\n", func, data->depth-1);
+#endif
+
     //
     // debug checks:  the name buffer is allocated at least 64 bytes
     // more than needed.  fill these with 0xCC, andd check that later

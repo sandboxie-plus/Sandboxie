@@ -192,6 +192,7 @@ struct _PROCESS {
     ULONG ipc_trace;
     BOOLEAN disable_object_flt;
     BOOLEAN ipc_warn_startrun;
+    BOOLEAN ipc_warn_open_proc;
     BOOLEAN ipc_block_password;
     BOOLEAN ipc_open_lsa_endpoint;
     BOOLEAN ipc_open_sam_endpoint;

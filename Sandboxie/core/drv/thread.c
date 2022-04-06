@@ -1115,7 +1115,7 @@ finish:
         Session_MonitorPut(mon_type, nptr, proc->pid);
     }
 
-    if (ExplicitAccess && (status != STATUS_SUCCESS) && (status != STATUS_BAD_INITIAL_PC)) {
+    if (ExplicitAccess && proc->ipc_warn_open_proc && (status != STATUS_SUCCESS) && (status != STATUS_BAD_INITIAL_PC)) {
 
         WCHAR msg[256];
         RtlStringCbPrintfW(msg, sizeof(msg), L"%s (%08X) access=%08X initialized=%d", EntireProcess ? L"OpenProcess" : L"OpenThread", status, GrantedAccess, proc->initialized);

@@ -958,6 +958,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 
 	if (Mode != eAuto) {
 		Ret = pBox->TerminateAll();
+		theAPI->UpdateProcesses(m_pKeepTerminated->isChecked(), m_pShowAllSessions->isChecked());
 		if (Ret.IsError())
 			goto finish;
 	}

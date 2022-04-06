@@ -154,7 +154,6 @@ static const WCHAR *Ldr_InjectDll       = LDR_INJECT_SETTING_NAME;
 static const WCHAR *Ldr_HostInjectDll   = LDR_HOST_INJECT_SETTING_NAME;
 
 static ULONG_PTR Ldr_ImageBase = 0;
-static ULONG_PTR Ldr_ImportDescriptor = 0;
 
 BOOLEAN Ldr_BoxedImage = FALSE;
 

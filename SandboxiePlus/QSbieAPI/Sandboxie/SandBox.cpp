@@ -135,10 +135,7 @@ SB_STATUS CSandBox::RunSandboxed(const QString& Command)
 
 SB_STATUS CSandBox::TerminateAll()
 {
-	SB_STATUS Status = m_pAPI->TerminateAll(m_Name);
-	if(!Status.IsError())
-		m_ActiveProcessCount = 0;
-	return Status;
+	return m_pAPI->TerminateAll(m_Name);
 }
 
 bool CSandBox::IsEmpty() const
@@ -365,7 +362,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning);
 
 	if (!IsInitialized())
 		return SB_ERR(SB_SnapIsEmpty);
@@ -419,7 +416,7 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning);
 	
 	QStringList ChildIDs;
 	foreach(const QString& Snapshot, ini.childGroups())
@@ -595,7 +592,7 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning);
 
 	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
 	{

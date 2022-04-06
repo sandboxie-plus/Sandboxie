@@ -8,6 +8,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.18 / 5.55.18] - 2022-04-??
+
+### Changed
+- Failed memory read attempts to unboxed processes will by default no longer cause message 2111
+-- Note: the message can be enabled in the settings if desired "NotifyProcessAccessDenied=y"
+
+###
+- fixed pipe impersonation in comaprtment mode
+- fixed issue with box clean up introduced in a recent build
+
+
 
 ## [1.0.17 / 5.55.17] - 2022-04-02
 
@@ -1772,3 +1783,4 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
+

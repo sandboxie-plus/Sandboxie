@@ -345,9 +345,20 @@ void Dll_FreeCode128(void *ptr);
 THREAD_DATA *Dll_GetTlsData(ULONG *pLastError);
 void Dll_FreeTlsData(void);
 
+//#define NAME_BUFFER_DEBUG
+#ifdef NAME_BUFFER_DEBUG
+WCHAR *Dll_GetTlsNameBuffer_(THREAD_DATA *data, ULONG which, ULONG size, char* func);
+void Dll_PushTlsNameBuffer_(THREAD_DATA *data, char* func);
+void Dll_PopTlsNameBuffer_(THREAD_DATA *data, char* func);
+#define Dll_GetTlsNameBuffer(x,y,z) Dll_GetTlsNameBuffer_(x, y, z, __FUNCTION__)
+#define Dll_PushTlsNameBuffer(x) Dll_PushTlsNameBuffer_(x, __FUNCTION__)
+#define Dll_PopTlsNameBuffer(x) Dll_PopTlsNameBuffer_(x, __FUNCTION__)
+#else
 WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size);
 void Dll_PushTlsNameBuffer(THREAD_DATA *data);
 void Dll_PopTlsNameBuffer(THREAD_DATA *data);
+#endif
+
 
 
 //---------------------------------------------------------------------------

@@ -724,6 +724,9 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     proc->ipc_warn_startrun = Conf_Get_Boolean(
         proc->box->name, L"NotifyStartRunAccessDenied", 0, TRUE);
 
+    proc->ipc_warn_open_proc = Conf_Get_Boolean(
+        proc->box->name, L"NotifyProcessAccessDenied", 0, FALSE);
+
     //
     // block password
     //

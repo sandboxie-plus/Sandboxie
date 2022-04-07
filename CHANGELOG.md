@@ -11,12 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.18 / 5.55.18] - 2022-04-??
 
 ### Changed
-- Failed memory read attempts to unboxed processes will by default no longer cause message 2111
--- Note: the message can be enabled in the settings if desired "NotifyProcessAccessDenied=y"
+- Failed memory read attempts to unboxed processes will no longer cause message 2111 by default
+-- Note: the message can be enabled in the settings if desired with "NotifyProcessAccessDenied=y"
 
-###
-- fixed pipe impersonation in comaprtment mode
-- fixed issue with box clean up introduced in a recent build
+### Fixed
+- fixed pipe impersonation in compartment mode
+- fixed issue with box clean-up introduced in a recent build
 
 
 
@@ -46,16 +46,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - EnableObjectFiltering is now set enabled by default, and replaces Sbie's old process/thread handle filter
 - the $: syntax now accepts a wildcard $:* no more specialized wildcards though
 
-### fixed
+### Fixed
 - fixed NtGetNextProcess being fully disabled instead of properly filtered
 - fixed reworked image name resolution when creating new processes in a sandbox
+- fixed regression with HideOtherBoxes=y [#1743](https://github.com/sandboxie-plus/Sandboxie/issues/1743) [#1666](https://github.com/sandboxie-plus/Sandboxie/issues/1666)
 
 
 
 ## [1.0.15 / 5.55.15] - 2022-03-24
 
 ### Fixed
-- fixed memory corruption introduced in the last build causing Chrome to crash sometimes.
+- fixed memory corruption introduced in the last build causing Chrome to crash sometimes
 - FIXED SECURITY ISSUE: NtCreateSymbolicLinkObject was not filtered (thanks Diversenok)
 
 

@@ -50,6 +50,8 @@ public:
 	void				Refresh();
 	void				Clear();
 
+	void				AddAction(QAction* pAction);
+
 public slots:
 	void				OnSetTree();
 	void				OnSetMode();

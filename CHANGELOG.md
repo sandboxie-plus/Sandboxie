@@ -17,6 +17,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed pipe impersonation in compartment mode
 - fixed issue with box clean-up introduced in a recent build
+- fixed missing trace log cleanup command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
+- fixed unpin did not work [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
+
 
 
 

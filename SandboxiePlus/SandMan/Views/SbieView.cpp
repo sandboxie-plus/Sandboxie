@@ -404,7 +404,9 @@ bool CSbieView::UpdateMenu()
 		QString FoundPin;
 		QString FileName = pProcess->GetFileName();
 		foreach(const QString& RunOption, RunOptions) {
-			if (Split2(RunOption, "|").second.indexOf(FileName) == 0) {
+			QString Cmd = Split2(RunOption, "|").second;
+			int pos = Cmd.indexOf(FileName);
+			if (pos == 0 || pos == 1) { // 1 for "
 				FoundPin = RunOption;
 				break;
 			}

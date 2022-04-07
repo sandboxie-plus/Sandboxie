@@ -430,6 +430,15 @@ void CTraceView::Clear()
 	m_pMonitor->m_pMonitorModel->Clear();
 }
 
+void CTraceView::AddAction(QAction* pAction)
+{
+	m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[0], pAction);
+	m_pTrace->GetMenu()->insertSeparator(m_pTrace->GetMenu()->actions()[0]);
+
+	m_pMonitor->GetMenu()->insertAction(m_pMonitor->GetMenu()->actions()[0], pAction);
+	m_pMonitor->GetMenu()->insertSeparator(m_pMonitor->GetMenu()->actions()[0]);
+}
+
 void CTraceView::OnSetTree()
 {
 	((CTraceModel*)m_pTrace->GetModel())->SetTree(m_pTraceTree->isChecked());

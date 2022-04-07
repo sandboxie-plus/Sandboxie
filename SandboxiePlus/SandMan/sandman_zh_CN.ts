@@ -4069,7 +4069,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
-        <source>Issue message 2111 when a process access is denided</source>
+        <source>Issue message 2111 when a process access is denied</source>
         <translation>进程被拒绝访问非沙盒进程内存时发出问题代码 2111</translation>
     </message>
     <message>

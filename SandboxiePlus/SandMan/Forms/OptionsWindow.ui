@@ -739,7 +739,7 @@
                <item row="12" column="2">
                 <widget class="QCheckBox" name="chkVmReadNotify">
                  <property name="text">
-                  <string>Issue message 2111 when a process access is denided</string>
+                  <string>Issue message 2111 when a process access is denied</string>
                  </property>
                 </widget>
                </item>

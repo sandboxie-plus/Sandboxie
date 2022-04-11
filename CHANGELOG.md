@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.18 / 5.55.18] - 2022-04-??
 
+### Added
+- added minor browsers to BlockSoftwareUpdaters template (by APMichael) [#1602](https://github.com/sandboxie-plus/Sandboxie/issues/1602#issuecomment-1091956328)
+
 ### Changed
 - Failed memory read attempts to unboxed processes will no longer cause message 2111 by default
 -- Note: the message can be enabled in the settings if desired with "NotifyProcessAccessDenied=y"

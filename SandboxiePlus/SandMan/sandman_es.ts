@@ -2079,7 +2079,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Models/SbieModel.cpp" line="459"/>
         <source>Path / Command Line</source>
-        <translation>Ruta./.Linea de Comandos</translation>
+        <translation>Ruta / Linea de Comandos</translation>
     </message>
 </context>
 <context>
@@ -3900,7 +3900,7 @@ El proceso de nivel de coincidencia tiene mayor prioridad que la especificidad y
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1910"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
-        <translation>Soltar privilegios criticos de procesos ejecutandose con autentificación de SISTEMA</translation>
+        <translation>Rebajar privilegios criticos de procesos ejecutandose con autentificación de SISTEMA</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1966"/>

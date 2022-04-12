@@ -82,7 +82,7 @@ jobs:
         run: Installer\merge_builds.cmd
 
       - name: Upload Sandboxie 32
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_x86
           path: |
@@ -90,7 +90,7 @@ jobs:
           retention-days: 60
 
       - name: Upload Sandboxie 64
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_x64
           path: |

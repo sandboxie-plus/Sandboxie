@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.18 / 5.55.18] - 2022-04-??
+## [1.0.18 / 5.55.18] - 2022-04-13
 
 ### Added
 - added minor browsers to BlockSoftwareUpdaters template (by APMichael) [#1784](https://github.com/sandboxie-plus/Sandboxie/pull/1784)

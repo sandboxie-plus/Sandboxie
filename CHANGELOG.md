@@ -11,18 +11,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.18 / 5.55.18] - 2022-04-13
 
 ### Added
-- added minor browsers to BlockSoftwareUpdaters template (by APMichael) [#1784](https://github.com/sandboxie-plus/Sandboxie/pull/1784)
+- added minor browsers to the BlockSoftwareUpdaters template (by APMichael) [#1784](https://github.com/sandboxie-plus/Sandboxie/pull/1784)
 
 ### Changed
-- Failed memory read attempts to unboxed processes will no longer cause message 2111 by default
--- Note: the message can be enabled in the settings if desired with "NotifyProcessAccessDenied=y"
-- reordered BlockSoftwareUpdaters template (by APMichael) [#1785](https://github.com/sandboxie-plus/Sandboxie/pull/1785)
+- failed memory read attempts to unboxed processes will no longer cause message 2111 by default
+-- Note: the message can still be enabled in the settings with "NotifyProcessAccessDenied=y"
+- reordered the BlockSoftwareUpdaters template (by APMichael) [#1785](https://github.com/sandboxie-plus/Sandboxie/pull/1785)
 
 ### Fixed
 - fixed pipe impersonation in compartment mode
 - fixed issue with box clean-up introduced in a recent build
-- fixed missing trace log cleanup command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
-- fixed unpin did not work [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
+- fixed missing trace log clean-up command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
+- fixed inability to unpin programs that have been pinned to the run menu  [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
 
 
 

@@ -947,7 +947,7 @@ _FX NTSTATUS Process_Enumerate(
 #ifdef USE_PROCESS_MAP
 
         //
-        // quick shortcut for global count retrival
+        // quick shortcut for global count retrieval
         //
 
         if (pids == NULL && (! boxname[0]) && all_sessions) { // no pids, all boxes, all sessions

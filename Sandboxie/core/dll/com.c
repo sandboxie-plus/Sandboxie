@@ -3524,7 +3524,7 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
         }
 
         //
-        // ToastNotificationManager requirers open com and original token, with boxed com this causes in a dead lock
+        // ToastNotificationManager requires open com and original token, with boxed com this causes a deadlock
         //
 
         if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)

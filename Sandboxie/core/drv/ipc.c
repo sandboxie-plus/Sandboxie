@@ -1282,7 +1282,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
             //
             // driver verifier wants us to provide a kernel handle as process handles
             // but the source handle must be a user handle and the ZwDuplicateObject
-            // function creates an other user handle hence NtClose
+            // function creates another user handle hence NtClose
             //
 
             status = ZwDuplicateObject(

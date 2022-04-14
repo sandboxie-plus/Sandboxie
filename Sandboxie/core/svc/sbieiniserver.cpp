@@ -1074,7 +1074,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
 
         WCHAR* iniDataPtr = req->value;
         Ini_Read_ConfigSection(iniDataPtr, entries);
-        if (*iniDataPtr != L'\0') // there must be no sections inside an other section
+        if (*iniDataPtr != L'\0') // there must be no sections inside another section
             return STATUS_INVALID_PARAMETER;
 
         pSection->Entries = entries;
@@ -1177,7 +1177,7 @@ ULONG SbieIniServer::AddSetting(MSG_HEADER* msg, bool insert)
             if(!insert || pos == pSection->Entries.end())
                 pos = I;
             if (_wcsicmp(I->Value.c_str(), req->value) == 0) {
-                // this value is already present, so lets abort right here
+                // this value is already present, so let's abort right here
                 return STATUS_SUCCESS;
             }
         }

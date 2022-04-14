@@ -37,10 +37,10 @@ WCHAR* Ini_Prep_ConfigLine(WCHAR* iniDataPtr, WCHAR* &line, WCHAR* &end)
     while (*line == L' ' || *line == L'\t' || *line == L'\r') line++; 
     // find the line ending
     end = wcschr(line, L'\n');
-    // if there is no line ending its the last line so fine the string termiantor
+    // it is the last line if there is no line ending, so find the string terminator
     if (end == NULL) iniDataPtr = end = wcschr(line, L'\0');
     else iniDataPtr = end + 1;
-    // trim tailing whitespaces
+    // trim trailing whitespaces
     while (end > line && (*(end-1) == L' ' || *(end-1) == L'\t' || *(end-1) == L'\r')) end--; 
     // return pointer to next line
     return iniDataPtr;

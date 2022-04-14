@@ -2159,7 +2159,7 @@ _FX void *Token_DuplicateToken(void *TokenObject, PROCESS *proc)
 
     //
     // This just duplicates a token starting with an object instead of a handle
-    // using SepDuplicateToken would be more convenient but its unexported :/
+    // using SepDuplicateToken would be more convenient but it is unexported :/
     //
 
     HANDLE OldTokenHandle;
@@ -2258,7 +2258,7 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
     SECURITY_QUALITY_OF_SERVICE SecurityQos;
 
     //
-    // Gether information from the original token
+    // Gather information from the original token
     //
 
     if (   !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenStatistics, &LocalStatistics))

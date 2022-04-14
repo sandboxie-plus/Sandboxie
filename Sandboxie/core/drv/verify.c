@@ -718,7 +718,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             level = NULL;
         }
 
-        // Checks if the certi if within its validity period, failing that has no effect except ui notification
+        // Checks if the certificate is within its validity period, otherwise it has no effect except for UI notification
 #define TEST_CERT_DATE(days, months, years) \
             if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < LocalTime.QuadPart){ \
                 Verify_CertInfo.expired = 1; \

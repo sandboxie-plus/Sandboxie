@@ -559,14 +559,14 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                             || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), boxname, L"BreakoutFolder")) {
 
                             //
-                            // this is a break out process, its allowed to leave the sandbox
+                            // this is a breakout process, it is allowed to leave the sandbox
                             //
 
                             BoxNameOrModelPid = 0;
                             FilterHandles = TRUE;
 
                             //
-                            // check if it should en up in an other box
+                            // check if it should end up in another box
                             //
 
                             WCHAR BoxName[34];
@@ -580,7 +580,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                     || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder")) {
 
                                     //
-                                    // check if the breakout process is supposed to end in the box its trying to break out of
+                                    // check if the breakout process is supposed to end in the box it is trying to break out of
                                     // and deny the breakout in that case, to take the normal process creation route
                                     // 
                                     // this happens when a break out is configured globally

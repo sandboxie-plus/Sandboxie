@@ -391,7 +391,7 @@ ULONG Read_BOM(UCHAR** data, ULONG* len)
     else
     {
         // If there is no BOM/Signature try to detect the file type
-        // Unicode Little Endian (windows wchar_t) will have the n*2+1 bytes 0 as long, as no higher unicode chrakters are used
+        // Unicode Little Endian (windows wchar_t) will have the n*2+1 bytes 0 as long, as no higher unicode characters are used
         BOOLEAN LooksUnicodeLE = TRUE;
         // similrly Unicode Big Endian (byte swapped) will have the n*2 bytes 0 as long
         BOOLEAN LooksUnicodeBE = TRUE;

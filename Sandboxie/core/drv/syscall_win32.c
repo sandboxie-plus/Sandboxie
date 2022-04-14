@@ -253,8 +253,8 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         //
         // we don't hook UserCreateWindowEx as it uses callbacks into
-        // user space from the kernel, for ocne this does not play well 
-        // with out sys call interface, but also it would be a security issue
+        // user space from the kernel, for once this does not play well 
+        // with our system call interface, but it would also be a security issue
         // to allow user code execution while we have restored the original token
         //
         // also some hooks cause BSOD's for now we just blacklist them

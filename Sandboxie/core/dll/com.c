@@ -3506,7 +3506,7 @@ _FX void Com_LoadRTList(const WCHAR* setting, WCHAR** pNames)
 _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
 {
     //
-    // Even in compartment mode these things don't work only incombination with open COM its functional
+    // Even in compartment mode, these things are functional only in combination with open COM
     //
 
     if (!(Ipc_OpenCOM && Dll_CompartmentMode) && !SbieApi_QueryConfBool(NULL, L"DisableRTBlacklist", FALSE)) {

@@ -302,7 +302,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 			goto next; // must be same protocol
 
 		//
-		// seams we might be able to merge these rules
+		// it seems we might be able to merge these rules
 		// now we check the convoluted case when rules havs ip's and port's set
 		//
 

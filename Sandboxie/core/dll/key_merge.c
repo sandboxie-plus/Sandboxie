@@ -1023,8 +1023,8 @@ TrueHandleFinish:
     ;
 
     //
-    // next, get the subkeys from CopyHandle.  subkeys that are
-    // marked deleted are removed from the merge.  other subkeys
+    // next, get the subkeys from CopyHandle. Subkeys that are
+    // marked as deleted are removed from the merge. Other subkeys
     // are inserted in sorted alphabetical order
     //
 

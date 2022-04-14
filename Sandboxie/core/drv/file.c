@@ -833,7 +833,7 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
     BOOLEAN ok;
 
     //
-    // is this process exempted from the blocade
+    // is this process exempted from the blockade
     //
 
 	if (proc->AllowInternetAccess)

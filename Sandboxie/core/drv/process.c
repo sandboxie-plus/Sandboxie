@@ -1187,7 +1187,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                 RtlInitUnicodeString(&image_uni, ImagePath);
                 if (!Box_IsBoxedPath(box, file, &image_uni)) {
 
-                    check_forced_program = TRUE; // the break out process of one box may be the forced process of an other
+                    check_forced_program = TRUE; // the breakout process of one box may be the forced process of another
                     breakout_box = box;
                     box = NULL;
                 }

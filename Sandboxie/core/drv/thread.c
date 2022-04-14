@@ -414,7 +414,7 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
     //
     // on Windows XP, the kernel caches a granted access value for use
-    // with the psuedo handle NtCurrentThread(), but this value is
+    // with the pseudo handle NtCurrentThread(), but this value is
     // computed using the real primary token which is highly restricted.
     // we have to fix this value
     //
@@ -1014,7 +1014,7 @@ _FX NTSTATUS Thread_CheckObject_Common(
     }
 
     //
-    // if an error occured and can't find pid, then don't allow
+    // if an error occurred and can't find pid, then don't allow
     //
 
     pid = (ULONG_PTR)PsGetProcessId(ProcessObject);

@@ -590,7 +590,7 @@ _FX NTSTATUS Key_MergeCache(
     //
     // this function returns (possibly first creating) a cached KEY_MERGE
     // which represents only the true key for a particular key path.
-    // this makes a noticable performance difference, because most true
+    // this makes a noticeable performance difference, because most true
     // keys don't change during the lifetime of a sandboxed process,
     // but they still need to be repeatedly merged with copy keys
     //
@@ -1023,9 +1023,9 @@ TrueHandleFinish:
     ;
 
     //
-    // next, get the subkeys from CopyHandle.  subkeys that are
-    // marked deleted are removed from the merge.  other subkeys
-    // are insterted in sorted alphabetical order
+    // next, get the subkeys from CopyHandle. Subkeys that are
+    // marked as deleted are removed from the merge. Other subkeys
+    // are inserted in sorted alphabetical order
     //
 
     index = 0;
@@ -1184,7 +1184,7 @@ TrueHandleFinish:
     //
     // next, get the values from CopyHandle.  values that are
     // marked deleted are removed from the merge.  other values
-    // are insterted in sorted alphabetical order
+    // are inserted in sorted alphabetical order
     //
 
     index = 0;

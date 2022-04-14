@@ -233,7 +233,7 @@ BOOLEAN UnicodeStringEndsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEA
 
 BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName)
 {
-    WCHAR DummyBuffer[1] = {0}; // if we provide a NULL buffer this wil cause a memory pool leak someware in the kernel
+    WCHAR DummyBuffer[1] = {0}; // if we provide a NULL buffer, this will cause a memory pool leak somewhere in the kernel
     UNICODE_STRING Dummy = { 0, sizeof(DummyBuffer), DummyBuffer };
     return GetRegString(RelativeTo, Path, ValueName, &Dummy);
 }

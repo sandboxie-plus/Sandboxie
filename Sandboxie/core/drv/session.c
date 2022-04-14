@@ -727,7 +727,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
     ProbeForRead(log_data, log_len * sizeof(WCHAR), sizeof(WCHAR));
 
     //
-    // if we dont need to check_object_exists we can use a shortcut
+    // if we don't need to check_object_exists we can use a shortcut
     //
 
     if (!args->check_object_exists.val64){ 

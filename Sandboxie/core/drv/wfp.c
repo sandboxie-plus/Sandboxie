@@ -396,7 +396,7 @@ _FX BOOLEAN WFP_Install_Callbacks(void)
 	status = WFP_RegisterCallout(&WPF_RECV_CALLOUT_GUID_V6, &FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6, &WFP_recv_callout_id_v6, &WFP_recv_filter_id_v6);
 	stage = 0x44; if (!NT_SUCCESS(status)) goto Exit;
 
-	// note: we could also setup FWPM_LAYER_ALE_AUTH_LISTEN_V4 but since we block all accepts we dont have to
+	// note: we could also setup FWPM_LAYER_ALE_AUTH_LISTEN_V4 but since we block all accepts we don't have to
 
 
 	// Commit transaction to the Filter Engine
@@ -535,7 +535,7 @@ NTSTATUS WFP_RegisterCallout(const GUID* calloutKey, const GUID* applicableLayer
 	FWPM_FILTER filter = { 0 };
 	filter.displayData.name = WFP_FILTER_NAME;
 	filter.displayData.description = WFP_FILTER_DESCRIPTION;
-	filter.action.type = FWP_ACTION_CALLOUT_TERMINATING;	// Says this filter's callout MUST make a block/permit decission
+	filter.action.type = FWP_ACTION_CALLOUT_TERMINATING;	// Says this filter's callout MUST make a block/permit decision
 	filter.subLayerKey = WFP_SUBLAYER_GUID;
 	filter.weight.type = FWP_UINT8;
 	filter.weight.uint8 = 0xf;		// The weight of this filter within its sublayer
@@ -640,7 +640,7 @@ BOOLEAN WFP_InitProcess(PROCESS* proc)
 #endif
 
 	if(map_get(&WFP_Processes, wfp_proc->ProcessId) != NULL)
-		ok = FALSE; // that woudl be a duplicate, should not happen, but in case
+		ok = FALSE; // that would be a duplicate, should not happen, but in case
 	else if (!map_insert(&WFP_Processes, wfp_proc->ProcessId, wfp_proc, 0))
 		ok = FALSE;
     
@@ -871,13 +871,13 @@ void WFP_classify(
 			char trace_strA[256];
 			if (v6) {
 				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv6: %02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x", 
-					send ? "Outgoing " : "Incomming ", remote_port, protocol,
+					send ? "Outgoing " : "Incoming ", remote_port, protocol,
 					remote_ip.Data[0], remote_ip.Data[1], remote_ip.Data[2], remote_ip.Data[3], remote_ip.Data[4], remote_ip.Data[5], remote_ip.Data[6], remote_ip.Data[7],
 					remote_ip.Data[8], remote_ip.Data[9], remote_ip.Data[10], remote_ip.Data[11], remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
 			}
 			else {
 				RtlStringCbPrintfA(trace_strA, sizeof(trace_strA), "%s Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", 
-					send ? "Outgoing " : "Incomming ", remote_port, protocol,
+					send ? "Outgoing " : "Incoming ", remote_port, protocol,
 					remote_ip.Data[12], remote_ip.Data[13], remote_ip.Data[14], remote_ip.Data[15]);
 			}
 

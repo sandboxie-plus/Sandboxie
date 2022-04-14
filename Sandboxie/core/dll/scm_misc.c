@@ -132,7 +132,7 @@ _FX BOOLEAN Scm_SecHostDll(HMODULE module)
     //
     // support for Windows 7 SecHost:
     // for every function that our AdvApi32 module hooks,
-    // we route the correspoding function in SecHost to AdvApi32
+    // we route the corresponding function in SecHost to AdvApi32
     //
 
     advapi = LoadLibrary(DllName_advapi32);

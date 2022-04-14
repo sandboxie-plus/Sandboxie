@@ -193,7 +193,7 @@ _FX NTSTATUS Syscall_CheckObject(
             proc, OpenedObject, &Name->Name, HandleInfo->GrantedAccess);
 
         //
-        // process/thread access has an own loggin routine
+        // process/thread access has its own logging routine
         //
 
         if ((syscall_entry->name_len == 11 && memcmp(syscall_entry->name, "OpenProcess", 11) == 0) ||
@@ -470,7 +470,7 @@ next:
     }
 
     //
-    // always close the old handle we were nto allowed to access
+    // always close the old handle we were not allowed to access
     //
 
     if (OldHandle != (HANDLE)user_args[0]) {
@@ -501,7 +501,7 @@ next:
     if (!NT_SUCCESS(status)) {
 
         //
-        // if we are not alowed to open this process, try the next one, don't forget to close this handle!
+        // if we are not allowed to open this process, try the next one, don't forget to close this handle!
         //
 
         user_args[0] = (ULONG_PTR)NewHandle;

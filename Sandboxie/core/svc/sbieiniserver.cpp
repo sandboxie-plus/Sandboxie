@@ -75,7 +75,7 @@ SbieIniServer::SbieIniServer(PipeServer *pipeServer)
 
 SbieIniServer::~SbieIniServer()
 {
-    m_instance = this; // fix-me: potential race condition, but this does nto mater as we dont use teh destructor anyways
+    m_instance = this; // fix-me: potential race condition, but this does not matter as we don't use the destructor anyways
 
     EnterCriticalSection(&m_instance->m_critsec);
     
@@ -1014,7 +1014,7 @@ MSG_HEADER *SbieIniServer::GetSetting(MSG_HEADER *msg)
     }
 
     //
-    // preapre the reply
+    // prepare the reply
     //
 
     ULONG rpl_len = sizeof(SBIE_INI_SETTING_RPL) + (iniData.size() + 1) * sizeof(WCHAR);
@@ -1074,7 +1074,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
 
         WCHAR* iniDataPtr = req->value;
         Ini_Read_ConfigSection(iniDataPtr, entries);
-        if (*iniDataPtr != L'\0') // there must be no sections inside an otehr section
+        if (*iniDataPtr != L'\0') // there must be no sections inside another section
             return STATUS_INVALID_PARAMETER;
 
         pSection->Entries = entries;
@@ -1177,7 +1177,7 @@ ULONG SbieIniServer::AddSetting(MSG_HEADER* msg, bool insert)
             if(!insert || pos == pSection->Entries.end())
                 pos = I;
             if (_wcsicmp(I->Value.c_str(), req->value) == 0) {
-                // this value is already present, so lets abbort right here
+                // this value is already present, so let's abort right here
                 return STATUS_SUCCESS;
             }
         }
@@ -2007,7 +2007,7 @@ ULONG SbieIniServer::RefreshConf()
 
     //
     // rebuild the ini from the cache with new values, if present, 
-    // and keeping coments and most of the formating
+    // and keeping comments and most of the formatting
     //
 
     for (auto I = m_pConfigIni->Sections.begin(); I != m_pConfigIni->Sections.end(); ++I)

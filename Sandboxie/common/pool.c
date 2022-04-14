@@ -933,7 +933,7 @@ ALIGNED void Pool_Free_Cells(void *ptr, ULONG size)
     POOL_LOCK(pages_lock);
 
     // if after de-allocation, a full page crosses threshold in reverse,
-    // we move it to the list of usuable pages
+    // we move it to the list of usable pages
 
     if (page->num_free < FULL_PAGE_THRESHOLD &&
             page->num_free + size >= FULL_PAGE_THRESHOLD) {

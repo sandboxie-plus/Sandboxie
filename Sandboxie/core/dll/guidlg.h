@@ -255,7 +255,7 @@ void *GUI_CreateDialogTemplate(
     }
 
     for (i = 0; i < tmpl->cDlgItems; ++i) {
-        // every dialog item begins on a DWORD boundry
+        // every dialog item begins on a DWORD boundary
         memzero(out, sizeof(ULONG));
         out = (UCHAR *)((((SIZE_T)out) + 3) & (~3));
         ptr = (UCHAR *)((((SIZE_T)ptr) + 3) & (~3));

@@ -78,11 +78,11 @@
 //
 //      that proxy window in SbieSvc will actually send the WM_DDE_ACK
 //      to the client, and will present itself as the server for the
-//      DDE conversation, so it can recieve any posted WM_DDE_EXECUTE
+//      DDE conversation, so it can receive any posted WM_DDE_EXECUTE
 //      messages without IL limitations (per the introduction above).
 //
 // 4.   the proxy window in SbieSvc GUI Proxy receives the WM_DDE_EXECUTE
-//      message, extracts the command text gived in the message LPARAM,
+//      message, extracts the command text given in the message LPARAM,
 //      and sends a WM_COPYDATA to the server window in the sandbox.
 //      the Gui_DDE_COPYDATA_Received function gets this message through
 //      the Gui_CanForwardMsg function.

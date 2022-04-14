@@ -561,7 +561,7 @@ _FX BOOLEAN Com_IsClosedClsid(REFCLSID rclsid)
 
     //
     // initialize list of user-configured CLSID blocks
-    // Note: the service threads everythign not explicitly open as closed anyways
+    // Note: the service threads everything not explicitly open as closed anyways
     //
 
     static const WCHAR* setting = L"ClosedClsid";
@@ -1441,7 +1441,7 @@ _FX BOOLEAN Com_Init_Ole32(HMODULE module)
         //
         // on Windows 8, core COM functions are in combase.dll which is
         // initialized separately.  on earlier versions of Windows, the
-        // core COM fuctions are part of ole32.dll
+        // core COM functions are part of ole32.dll
         //
 
         if (! Com_Init_ComBase(module))
@@ -3506,7 +3506,7 @@ _FX void Com_LoadRTList(const WCHAR* setting, WCHAR** pNames)
 _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
 {
     //
-    // Even in compartment mode thes things don't work only incombination with open COM its functional
+    // Even in compartment mode, these things are functional only in combination with open COM
     //
 
     if (!(Ipc_OpenCOM && Dll_CompartmentMode) && !SbieApi_QueryConfBool(NULL, L"DisableRTBlacklist", FALSE)) {
@@ -3524,7 +3524,7 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
         }
 
         //
-        // ToastNotificationManager requirers open com and original token, with boxed com this causes in a dead lock
+        // ToastNotificationManager requires open com and original token, with boxed com this causes a deadlock
         //
 
         if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)

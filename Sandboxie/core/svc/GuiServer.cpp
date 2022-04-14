@@ -1646,7 +1646,7 @@ ULONG GuiServer::CreateConsoleSlave(SlaveArgs *args)
     }
 
     //
-    // prepare commnand line for console helper process
+    // prepare command line for console helper process
     //
 
     cmdline = (WCHAR *)HeapAlloc(
@@ -3432,7 +3432,7 @@ BOOL CALLBACK EnumThreadWndProc(HWND hwnd, LPARAM lParam)
     GUI_REMOVE_HOST_WINDOW_RPL* pRpl = (GUI_REMOVE_HOST_WINDOW_RPL*)lParam; // pRpl is from caller's stack.
 
     // thread window should from guest process. We only need check the first window's process.
-    // Note, GetWindowThreadProcessId is not availabe in XP.
+    // Note, GetWindowThreadProcessId is not available in XP.
     if (pRpl->status == STATUS_UNSUCCESSFUL)
     {
         if (isGuestProcessWindow(hwnd))
@@ -4340,7 +4340,7 @@ void GuiServer::RunConsoleSlave(const WCHAR *evtname)
             }
         }
 
-        //HeapFree(GetProcessHeap(), 0, pids); // dont bother we ExitProcess aynways
+        //HeapFree(GetProcessHeap(), 0, pids); // don't bother we ExitProcess aynways
     }
 
     ExitProcess(0);

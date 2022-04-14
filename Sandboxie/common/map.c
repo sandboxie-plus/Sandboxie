@@ -96,7 +96,7 @@ void map_init(map_base_t* m, void* pool)
     m->func_free = &map_free;
     m->func_hash_key = &map_hash;
     m->func_key_size = NULL; // use key by value not by reference
-    m->func_match_key = NULL; // use memcmp by defualt
+    m->func_match_key = NULL; // use memcmp by default
 }
 
 

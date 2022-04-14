@@ -366,8 +366,8 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     // NoSbieDesk BEGIN
 
     //
-    // Sandboxie is routing many gui related things through teh service, 
-    // when we operate in app mode we dont need to do that hence
+    // Sandboxie is routing many gui related things through the service, 
+    // when we operate in app mode we don't need to do that hence
     // disable the use of the gui proxy
     //
 

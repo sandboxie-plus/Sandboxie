@@ -461,7 +461,7 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                 }
                 else
                 {
-                    // if the file is to be created in the same directroy as the original file, we check if the original file is in a sandboxed location
+                    // if the file is to be created in the same directory as the original file, we check if the original file is in a sandboxed location
                     if(!Box_IsBoxedPath(proc->box, file, &pTargetFileNameInfo->Name)) {
                         status = STATUS_ACCESS_DENIED;
                     }

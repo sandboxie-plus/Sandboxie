@@ -225,7 +225,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     InitialDesiredAccess = *DesiredAccess;
 
     //
-    // Based on the object type apply the apropriate filter
+    // Based on the object type apply the appropriate filter
     //
 
     if (PreInfo->ObjectType == *PsProcessType)  {

@@ -100,7 +100,7 @@ _FX ULONG File_MigrateFile_GetMode(const WCHAR* TruePath, ULONGLONG file_size)
     path_len = wcslen(path_lwr);
 
     //
-    // Check what preset applyes to this file type/path
+    // Check what preset applies to this file type/path
     //
 
     for (ULONG i = 0; i < NUM_COPY_MODES; i++)
@@ -158,7 +158,7 @@ found_match:
     }
 
     //
-    // issue apropriate message if so configured, and user wasn't asked
+    // issue appropriate message if so configured, and user wasn't asked
     //
 
     else if (!File_CopyLimitSilent) 

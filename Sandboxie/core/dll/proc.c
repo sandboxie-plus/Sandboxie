@@ -809,7 +809,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         }*/
 
         //
-        // invoke the real CreateProcessInternal so it can record acurate
+        // invoke the real CreateProcessInternal so it can record accurate
         //
 
         TlsData->proc_create_process_capture_image = TRUE;
@@ -861,7 +861,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     else { // xp, 7, 8 and 10 before RS5
 
         //
-        // invoke the real CreateProcessInternal so it can record acurate
+        // invoke the real CreateProcessInternal so it can record accurate
         // paths in NtCreateSection/Proc_SectionCallback, and then fail.
         //
 
@@ -1022,7 +1022,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                     //
                     // The breakout request is validated by the service, hence we need a clean and complete 
                     // application path and not a just a command line where the binary may be missing the .exe
-                    // and or be only relative to the workign directory, or worse the path variable.
+                    // and or be only relative to the working directory, or worse the path variable.
                     //
 
                     wcscpy(mybuf, L"\"");
@@ -1117,7 +1117,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
 
     //
-    // in compartment mode we dont mess around just create the process
+    // in compartment mode we don't mess around just create the process
     //
 
     // OriginalToken BEGIN

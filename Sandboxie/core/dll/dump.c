@@ -56,7 +56,7 @@ static HMODULE Dump_DbgHelpMod;
                             MiniDumpWithProcessThreadData | \
                             MiniDumpWithoutOptionalData | \
                             MiniDumpIgnoreInaccessibleMemory | \
-                            MiniDumpFilterTriage //0x001205a4  thats what WerFault.exe uses
+                            MiniDumpFilterTriage //0x001205a4  that's what WerFault.exe uses
 
 #define DUMP_FLAGS_EXTENDED MiniDumpWithFullMemory | \
                             MiniDumpWithHandleData | \
@@ -95,7 +95,7 @@ static LONG __stdcall Dump_CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
 #ifdef _M_IX86
     if (pEx->ExceptionRecord->ExceptionCode == EXCEPTION_STACK_OVERFLOW)
     {
-        // be sure that we have enought space...
+        // be sure that we have enough space...
         static char MyStack[1024 * 128];
         // it assumes that DS and SS are the same!!! (this is the case for Win32)
         // change the stack only if the selectors are the same (this is the case for Win32)
@@ -207,7 +207,7 @@ _FX int Dump_Init(void)
     if (Dump_DbgHelpMod != NULL)
         return 2;
 
-    // Initialize the member, so we do not load the dll after the exception has occured
+    // Initialize the member, so we do not load the dll after the exception has occurred
     // which might be not possible anymore...
     Dump_DbgHelpMod = LoadLibrary(L"dbghelp.dll");
     if (!Dump_DbgHelpMod )

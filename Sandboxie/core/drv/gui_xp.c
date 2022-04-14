@@ -1508,7 +1508,7 @@ _FX ULONG_PTR Gui_NtUserSetWindowsHookEx(
         if (HookType == WH_JOURNALRECORD || HookType == WH_JOURNALPLAYBACK ||
             HookType == WH_KEYBOARD_LL || HookType == WH_MOUSE_LL) {
 
-            // MSDN explictly says these hooks are NOT injected into the target
+            // MSDN explicitly says these hooks are NOT injected into the target
 
             status = STATUS_SUCCESS;
 

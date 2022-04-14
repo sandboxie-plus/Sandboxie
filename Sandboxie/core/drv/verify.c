@@ -718,7 +718,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             level = NULL;
         }
 
-        // Checks if the certi if within its validity periode, failing that has no effect except ui notification
+        // Checks if the certificate is within its validity period, otherwise it has no effect except for UI notification
 #define TEST_CERT_DATE(days, months, years) \
             if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < LocalTime.QuadPart){ \
                 Verify_CertInfo.expired = 1; \
@@ -768,7 +768,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             else if (level && _wcsicmp(level, L"TEST") == 0) { // test certificate 5 days only
                 TEST_EXPIRATION(5, 0, 0);
             }
-            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // patreon entry level, first 3 monts, later longer
+            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // patreon entry level, first 3 months, later longer
                 TEST_EXPIRATION(0, 3, 0);
             }
             else /*if (!level || _wcsicmp(level, L"SMALL") == 0)*/ { // valid for 1 year

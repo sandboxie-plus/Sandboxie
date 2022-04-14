@@ -658,7 +658,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         NULL
     };
     static const WCHAR* openPipesCM[] = {
-        // open thos in compartment mode as do not use the de-administrator-ize proxy in File_NtCreateFilePipe
+        // open those in compartment mode as do not use the de-administrator-ize proxy in File_NtCreateFilePipe
         //
         L"\\device\\*pipe\\lsarpc",
         L"\\device\\*pipe\\srvsvc",
@@ -833,7 +833,7 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
     BOOLEAN ok;
 
     //
-    // is this process excempted from the blocade
+    // is this process exempted from the blockade
     //
 
 	if (proc->AllowInternetAccess)
@@ -1416,7 +1416,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
 
 #ifdef USE_MATCH_PATH_EX
                         //
-                        // if this is not a atribute or sync request update the permissions for the network path
+                        // if this is not a attribute or sync request update the permissions for the network path
                         //
 
                         if (proc->use_rule_specificity || 
@@ -2562,7 +2562,7 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     wmemcpy(device_name + 8,    user_devname, 32);
     device_name[8+32] = L'\0';
 
-    /* this check is now done in unser mode
+    /* this check is now done in user mode
     //
     // convert the device name to lowercase, stop at the first backslash
     //

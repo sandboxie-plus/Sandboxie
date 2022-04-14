@@ -445,7 +445,7 @@ _FX BOOLEAN Process_GetPaths(
 
         if (closed && (*value == L'!')) {
 
-            // dont close paths for sbie components
+            // don't close paths for sbie components
             if (closed_ipc && proc->image_sbie)
                 continue; 
 
@@ -878,7 +878,7 @@ _FX int Process_MatchPathList(
             level = cur_level;
             if (patsrc) *patsrc = Pattern_Source(pat);
             
-            // we need to test all entries to find the best match, so we dont break here
+            // we need to test all entries to find the best match, so we don't break here
         }
 
         //
@@ -990,7 +990,7 @@ _FX ULONG Process_MatchPathEx(
         // and read access to user data must be explicityl grated,
         // also all writes are redirected to the sandbox
         //
-        // To enable privacy enchanced mode add UsePrivacyMode=y 
+        // To enable privacy enhanced mode add UsePrivacyMode=y 
         //
 
         mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG; // write path mode
@@ -1016,7 +1016,7 @@ _FX ULONG Process_MatchPathEx(
     
     //
     // write path list, behaved on the driver side like closed path list
-    // these paths allow read acces to true location and read/write access to copy location
+    // these paths allow read access to true location and read/write access to copy location
     //
     
     if (write_list) {
@@ -1034,7 +1034,7 @@ _FX ULONG Process_MatchPathEx(
     
     //
     // read path list behaves in the kernel like the default normal behavioure
-    // these paths allow read only acces to true path and copy locations
+    // these paths allow read only access to true path and copy locations
     //
     
     if (read_list) {
@@ -1064,7 +1064,7 @@ _FX ULONG Process_MatchPathEx(
             if (patsrc) *patsrc = curpat;
 
             mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
-            // dont goto finish as open can overwrite this 
+            // don't goto finish as open can overwrite this 
         }
     }
     
@@ -1530,7 +1530,7 @@ _FX BOOLEAN Process_ScheduleKill(PROCESS *proc, LONG delay_ms)
 
             if (proc->reason == 0)
                 RtlStringCbPrintfW(text, len, L"%s", proc->image_name);
-            else if (proc->reason != -1) // in this case we have SBIE1308 and dont want any other messages
+            else if (proc->reason != -1) // in this case we have SBIE1308 and don't want any other messages
                 RtlStringCbPrintfW(text, len, L"%s [%d]", proc->image_name, proc->reason);
             else
                 *text = 0;

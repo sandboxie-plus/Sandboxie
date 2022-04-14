@@ -391,9 +391,9 @@ ULONG Read_BOM(UCHAR** data, ULONG* len)
     else
     {
         // If there is no BOM/Signature try to detect the file type
-        // Unicode Litle Endian (windows wchar_t) will have the n*2+1 bytes 0 as long, as no higher unicode chrakters are used
+        // Unicode Little Endian (windows wchar_t) will have the n*2+1 bytes 0 as long, as no higher unicode characters are used
         BOOLEAN LooksUnicodeLE = TRUE;
-        // similrly Unicode Big Endian (byte swaped) will have the n*2 bytes 0 as long
+        // similrly Unicode Big Endian (byte swapped) will have the n*2 bytes 0 as long
         BOOLEAN LooksUnicodeBE = TRUE;
         // UTF-8 shouldn't have null bytes
         for (ULONG pos = 0; (pos + 1) < min(*len, 16); pos += 2) // check first 8 char16's
@@ -457,7 +457,7 @@ NTSTATUS Stream_Read_Wchar(
     IN  STREAM* stream,
     OUT USHORT* v)
 {
-    if (stream->encoding == 0) // Unicode Litle Endian
+    if (stream->encoding == 0) // Unicode Little Endian
     {
         UCHAR* b = (UCHAR*)v;
         STREAM_GET_BYTE(b[0]);

@@ -190,7 +190,7 @@ _FX BOOLEAN IpHlp_Init(HMODULE module)
     void *NotifyRouteChange2;
     void *CancelMibChangeNotify2;
 
-    if (Dll_CompartmentMode || Dll_OsBuild < 6000) { // in compartment mode we have a full token so no need to hook anythign here
+    if (Dll_CompartmentMode || Dll_OsBuild < 6000) { // in compartment mode we have a full token so no need to hook anything here
 
         //
         // earlier than Windows Vista, don't hook

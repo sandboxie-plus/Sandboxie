@@ -653,7 +653,7 @@ static int delimchar(int c)
 
 int _inet_pton(int af, const wchar_t *src, void *dst) // ip is always in network order !!!
 {
-	int i, elipsis = 0;
+	int i, ellipsis = 0;
 	unsigned char *to;
 	unsigned long x;
 	const wchar_t *p, *op;
@@ -691,9 +691,9 @@ int _inet_pton(int af, const wchar_t *src, void *dst) // ip is always in network
 		to[i+1] = (unsigned char)x;
 		if(*p == L':'){
 			if(*++p == L':'){        /* :: is elided zero short(s) */
-				if (elipsis)
+				if (ellipsis)
 					return 0;       /* second :: */
-				elipsis = i+2;
+				ellipsis = i+2;
 				p++;
 			}
 		} else if (p == op)             /* strtoul made no progress? */
@@ -702,8 +702,8 @@ int _inet_pton(int af, const wchar_t *src, void *dst) // ip is always in network
 	if (p == src || !delimchar(*p))
 		return 0;                               /* parse error */
 	if(i < 16){
-		memmove(&to[elipsis+16-i], &to[elipsis], i-elipsis);
-		memset(&to[elipsis], 0, 16-i);
+		memmove(&to[ellipsis+16-i], &to[ellipsis], i-ellipsis);
+		memset(&to[ellipsis], 0, 16-i);
 	}
 	return 1;
 }

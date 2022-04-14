@@ -193,7 +193,7 @@ _FX NTSTATUS Syscall_CheckObject(
             proc, OpenedObject, &Name->Name, HandleInfo->GrantedAccess);
 
         //
-        // process/thread access has an own loggin routine
+        // process/thread access has its own logging routine
         //
 
         if ((syscall_entry->name_len == 11 && memcmp(syscall_entry->name, "OpenProcess", 11) == 0) ||

@@ -694,7 +694,7 @@ _FX void Api_AddMessage(
         }
 	}
 	// else // this can only happen when the entire buffer is to small to hold this entire entry
-		// if loging fails we can't log this error :/
+		// if logging fails we can't log this error :/
 
 	Api_LeaveCriticalSection(irql);
 }

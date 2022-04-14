@@ -348,7 +348,7 @@ _FX BOOL Gui_ClipCursor(const RECT *lpRect)
 _FX void Gui_ResetClipCursor(void)
 {
     //
-    // progams that set a clip cursor (e.g. full screen games) tend to
+    // programs that set a clip cursor (e.g. full screen games) tend to
     // remove the clip on alt-tab switch, but do not remove the clip when
     // terminating.  and the clip remains in effect probably because the
     // sandboxed process does not have WINSTA_WRITEATTRIBUTES access.

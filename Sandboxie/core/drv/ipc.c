@@ -1270,7 +1270,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
         //
         // we duplicate the handle into kernel space such that that user 
-        // wont be able to grab it while we are evaluaiting it
+        // won't be able to grab it while we are evaluaiting it
         //
 
         HANDLE SourceProcessKernelHandle;
@@ -1282,7 +1282,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
             //
             // driver verifier wants us to provide a kernel handle as process handles
             // but the source handle must be a user handle and the ZwDuplicateObject
-            // function creates an otehr user handle hence NtClose
+            // function creates an other user handle hence NtClose
             //
 
             status = ZwDuplicateObject(

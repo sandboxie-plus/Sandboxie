@@ -219,7 +219,7 @@ _FX BIGNUM BigNum_ShiftRight(POOL *pool, BIGNUM BigNumA, ULONG Bits)
 {
     //
     // shift an input bignum by the specified number of bits.  calculate
-    // the number of words in the result as the number of signficant words
+    // the number of words in the result as the number of significant words
     // in the input, minus the number of shift bits divided by the size of
     // a bignum word.  if the new length is zero or one words, then use a
     // zero value or the value of the highest word, respectively, to create
@@ -293,9 +293,9 @@ _FX BIGNUM BigNum_ShiftLeft(
     //
     // shift an input bignum by the specified number of bits and 'or' the
     // last parameter into the resulting low order word.  if the number of
-    // signficant words in the input is zero, the create a single word
+    // significant words in the input is zero, the create a single word
     // bignum using the 'or' value.  otherwise calculatevthe number of
-    // words in the result as the number of signficant words in the input,
+    // words in the result as the number of significant words in the input,
     // plus the number of shift bits divided by the size of a bignum word.
     // left-shift each two consecutive words from the input bignum into a
     // single word in the result bignum.

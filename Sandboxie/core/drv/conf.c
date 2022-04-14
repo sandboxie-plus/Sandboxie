@@ -54,7 +54,7 @@
 // Note: we want to preserver the order of the settings when enumerating
 //          hence we can not replace the list with a hash map entierly
 //          instead we use booth, here the hash map ise used only for lookups
-//          the keys in the map are only pointers to the name fileds in the list entries
+//          the keys in the map are only pointers to the name fields in the list entries
 //
 
 typedef struct _CONF_DATA {
@@ -65,7 +65,7 @@ typedef struct _CONF_DATA {
     HASH_MAP sections_map;
 #endif
     BOOLEAN home;       // TRUE if configuration read from Driver_Home_Path
-    ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swaped)
+    ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swapped)
     volatile ULONG use_count;
 
 } CONF_DATA;

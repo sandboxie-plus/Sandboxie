@@ -85,7 +85,7 @@ _FX BOOLEAN Gui_InitConsole1(void)
         //
         // We need to set Gui_ConsoleHwnd in order for Gui_InitConsole2 to start up properly,
         // this functions starts a thread which listens for WM_DEVICECHANGE which we need
-        // we could go for a different signaling method in future but for now we stick to this methos
+        // we could go for a different signaling method in future but for now we stick to this method
         //
 
         Gui_ConsoleHwnd = GetConsoleWindow();

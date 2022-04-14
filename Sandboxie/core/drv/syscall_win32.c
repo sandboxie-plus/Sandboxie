@@ -153,7 +153,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
     List_Init(&Syscall_List32);
 
     //
-    // preapre the enabled/disabled lists
+    // prepare the enabled/disabled lists
     //
 
     LIST enabled_hooks;
@@ -253,7 +253,7 @@ _FX BOOLEAN Syscall_Init_List32(void)
 
         //
         // we don't hook UserCreateWindowEx as it uses callbacks into
-        // user space from teh kernel, for ocne this does not play well 
+        // user space from the kernel, for ocne this does not play well 
         // with out sys call interface, but also it would be a security issue
         // to allow user code execution while we have restored the original token
         //

@@ -247,9 +247,9 @@ _FX BOOLEAN Setup_Init_CfgMgr32(HMODULE module)
 {
     FIND_EP(CM_Add_Driver_PackageW);
     FIND_EP(CM_Add_Driver_Package_ExW);
-    // Note: When the Add_Driver_Package is not hooked it will atempt to contact the deviceinstall service,
+    // Note: When the Add_Driver_Package is not hooked it will attempt to contact the deviceinstall service,
     // which uses a dynamic rpc port, heence as long as there is no blank OpenIpcPath=* this call will fail
-    // We hook these two functions only to provide the user a SBIE2205 informing, that drivers cant be installed.
+    // We hook these two functions only to provide the user a SBIE2205 informing, that drivers can't be installed.
     if (__sys_CM_Add_Driver_PackageW) {
         DO_CALL_HOOK(
             CM_Add_Driver_PackageW,Setup_CM_Add_Driver_PackageW);

@@ -581,7 +581,7 @@ ALIGNED UCHAR *Hook_Analyze_Prefix(UCHAR *addr, BOOLEAN is64, ULONG *flags)
     // an instruction actually encodes full 64-bits of information:
     //
     // - moving to/from accum register:                 opcodes A0..A3
-    //   - this is the default, unless overriden
+    //   - this is the default, unless overridden
     //     by prefix 67
     //
     // - moving immediate value to any register:        opcodes B8..BF

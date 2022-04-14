@@ -298,7 +298,7 @@ JSONValue *JSONValue::Parse(const wchar_t **data)
 		return NULL;
 	}
 
-	// Ran out of possibilites, it's bad!
+	// Ran out of possibilities, it's bad!
 	else
 	{
 		return NULL;

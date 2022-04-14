@@ -1718,7 +1718,7 @@ void ComServer::GetClassObjectSlave(void *_map, LIST *ObjectsList,
 
         //
         // elevate using CoGetObject
-        // this is primarily inteded for the firewall object
+        // this is primarily intended for the firewall object
         //
 
         typedef struct tagBIND_OPTS3 {

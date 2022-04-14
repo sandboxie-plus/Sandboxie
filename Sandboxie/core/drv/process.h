@@ -325,7 +325,7 @@ ULONG Process_MatchPathEx(
     LIST *read_list, LIST *write_list,
     const WCHAR** patsrc);
 
-// Process_GetConf:  retrives a configuration data value for a given process
+// Process_GetConf:  retrieves a configuration data value for a given process
 // use with Conf_AdjustUseCount to make sure the returned pointer is valid
 
 const WCHAR* Process_GetConf(PROCESS* proc, const WCHAR* setting);

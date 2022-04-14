@@ -807,7 +807,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         Dll_InitInjected(); // install required hooks
 
         //
-        // notify RPCSS that a new proces was created in the current sandbox
+        // notify RPCSS that a new process was created in the current sandbox
         //
 
         if (Dll_ImageType != DLL_IMAGE_SANDBOXIE_RPCSS) {

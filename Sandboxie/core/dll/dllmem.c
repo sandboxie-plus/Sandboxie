@@ -351,7 +351,7 @@ ALIGNED WCHAR *Dll_GetTlsNameBuffer(
 
     //
     // debug checks:  the name buffer is allocated at least 64 bytes
-    // more than needed.  fill these with 0xCC, andd check that later
+    // more than needed.  fill these with 0xCC, and check that later
     //
 
 #ifdef DEBUG_MEMORY
@@ -408,7 +408,7 @@ _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
 
     //
     // debug checks:  the name buffer is allocated at least 64 bytes
-    // more than needed.  fill these with 0xCC, andd check that later
+    // more than needed.  fill these with 0xCC, and check that later
     //
 
 #ifdef DEBUG_MEMORY

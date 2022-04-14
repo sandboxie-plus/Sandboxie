@@ -83,7 +83,7 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
     if (user_box_parm < 0) {
 
         //
-        // if paramter is negative, it specifies the pid number for a
+        // if parameter is negative, it specifies the pid number for a
         // process, from which we copy the box information, including
         // SID and session
         //

@@ -521,7 +521,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
             //
             // if the object is a valid symbolic link but we don't have
-            // acccess rights to open the symbolic link then we ask the
+            // access rights to open the symbolic link then we ask the
             // driver to query the link for us
             //
 

@@ -136,7 +136,7 @@ BOOLEAN NetFw_MergePortMaps(rbtree_t* dst, rbtree_t* src, POOL* pool)
 {
 	//
 	// search for overlaps, and if found abort
-	// we merge only non overlaping ranges as single entries vs ranges have a different priority
+	// we merge only non overlapping ranges as single entries vs ranges have a different priority
 	//
 
 	for (NETFW_PORTS* src_node = (NETFW_PORTS*)rbtree_first(src); ((rbnode_t*)src_node) != RBTREE_NULL; src_node = (NETFW_PORTS*)rbtree_next((rbnode_t*)src_node)) {
@@ -224,7 +224,7 @@ BOOLEAN NetFw_MergeIPMaps(rbtree_t* dst, rbtree_t* src, POOL* pool)
 {
 	//
 	// search for overlaps, and if found abort
-	// we merge only non overlaping ranges as single entries vs ranges have a different priority
+	// we merge only non overlapping ranges as single entries vs ranges have a different priority
 	//
 
 	for (NETFW_IPS* src_node = (NETFW_IPS*)rbtree_first(src); ((rbnode_t*)src_node) != RBTREE_NULL; src_node = (NETFW_IPS*)rbtree_next((rbnode_t*)src_node)) {
@@ -302,7 +302,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 			goto next; // must be same protocol
 
 		//
-		// seams we might be able to marge these rules
+		// seams we might be able to merge these rules
 		// now we check the convoluted case when rules havs ip's and port's set
 		//
 

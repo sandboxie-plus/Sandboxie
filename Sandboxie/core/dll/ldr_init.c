@@ -495,7 +495,7 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
 
     //
     // Windows is caching loaded modules, when after being run a binary is moved
-    // and run again, NtQueryVirtualMemory wil return the original location
+    // and run again, NtQueryVirtualMemory will return the original location
     // and not the valid up to date current location.
     // Hence we use NtQueryInformationProcess instead it also returns the reparsed path
     //

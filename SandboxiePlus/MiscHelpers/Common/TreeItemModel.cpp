@@ -249,7 +249,7 @@ void CTreeItemModel::Fill(STreeNode* pParent, const QModelIndex &parent, const Q
 		{
 			i = 0;
 			pNode = MkVirtualNode(CurPath, pParent);
-			pAdded->append(CurPath);
+			if (pAdded) pAdded->append(CurPath);
 			m_Map.insert(CurPath, pNode);
 
 			//int Count = pParent->Children.count();

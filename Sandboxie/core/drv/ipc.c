@@ -102,6 +102,7 @@ static const WCHAR *Ipc_Mutant_TypeName     = L"Mutant";
 static const WCHAR *Ipc_Semaphore_TypeName  = L"Semaphore";
 static const WCHAR *Ipc_Section_TypeName    = L"Section";
 static const WCHAR *Ipc_JobObject_TypeName  = L"JobObject";
+static const WCHAR *Ipc_SymLink_TypeName    = L"SymbolicLinkObject";
 
 
 //---------------------------------------------------------------------------
@@ -135,6 +136,9 @@ _FX BOOLEAN Ipc_Init(void)
 #undef Ipc_Init_Type_Generic
 
     if (! Ipc_Init_Type(Ipc_JobObject_TypeName, Ipc_CheckJobObject))
+        return FALSE;
+
+    if (! Ipc_Init_Type(Ipc_SymLink_TypeName, Ipc_CheckGenericObject))
         return FALSE;
 
     //
@@ -1141,7 +1145,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
     HANDLE SourceHandle;
     HANDLE TargetProcessHandle;
     HANDLE *TargetHandle;
-    HANDLE TestHandle;
+    HANDLE DuplicatedHandle;
     ULONG DesiredAccess;
     ULONG HandleAttributes;
     ULONG Options;
@@ -1287,15 +1291,15 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
             status = ZwDuplicateObject(
                 SourceProcessKernelHandle, SourceHandle,
-                TargetProcessKernelHandle, &TestHandle,
+                TargetProcessKernelHandle, &DuplicatedHandle,
                 DesiredAccess, HandleAttributes,
                 Options & ~DUPLICATE_CLOSE_SOURCE);
 
             if (NT_SUCCESS(status)) {
 
-                status = Ipc_CheckObjectName(TestHandle, UserMode);
+                status = Ipc_CheckObjectName(DuplicatedHandle, UserMode);
 
-                NtClose(TestHandle);
+                NtClose(DuplicatedHandle);
             }
 
             ZwClose(SourceProcessKernelHandle);
@@ -1310,10 +1314,12 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = NtDuplicateObject(
+        status = ZwDuplicateObject(
             SourceProcessHandle, SourceHandle,
-            TargetProcessHandle, TargetHandle,
+            TargetProcessHandle, &DuplicatedHandle,
             DesiredAccess, HandleAttributes, Options);
+
+        *TargetHandle = DuplicatedHandle;
     }
 
     //

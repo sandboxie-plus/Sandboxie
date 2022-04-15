@@ -8,6 +8,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.0.19 / 5.55.19] - 2022-04-??
+
+### Fixed
+- fixed crash issue in the sandman ui
+- fixed issue some installers when EnableObjectFiltering is enabled [#1795](https://github.com/sandboxie-plus/Sandboxie/issues/1795)
+- fixed to allow NtCreateSymbolicLinkObject to be used safely in the sandbox
+
+
+
+
 ## [1.0.18 / 5.55.18] - 2022-04-13
 
 ### Added

@@ -189,6 +189,18 @@ _FX NTSTATUS Syscall_CheckObject(
                             proc->pool, OpenedObject, &Name, &NameLength);
     if (NT_SUCCESS(status)) {
 
+        //
+        // we enforce only CreateSymbolicLinkObject to use copy paths, 
+        // OpenSymbolicLinkObject can use true paths
+        //
+
+        if ((syscall_entry->name_len == 22 && memcmp(syscall_entry->name, "OpenSymbolicLinkObject", 22) == 0))
+            goto finish;
+
+        //
+        // invoke the Ipc_Check[Type]Object handler
+        //
+
         status = syscall_entry->handler2_func(
             proc, OpenedObject, &Name->Name, HandleInfo->GrantedAccess);
 
@@ -200,7 +212,7 @@ _FX NTSTATUS Syscall_CheckObject(
             (syscall_entry->name_len == 10 && memcmp(syscall_entry->name, "OpenThread", 10) == 0) ||
             (syscall_entry->name_len == 21 && memcmp(syscall_entry->name, "AlpcOpenSenderProcess", 21) == 0) ||
             (syscall_entry->name_len == 20 && memcmp(syscall_entry->name, "AlpcOpenSenderThread", 20) == 0))
-            goto skip_log;
+            goto finish;
 
         if ((status != STATUS_SUCCESS)
                             && (status != STATUS_BAD_INITIAL_PC)) {
@@ -213,7 +225,7 @@ _FX NTSTATUS Syscall_CheckObject(
 			Log_Msg_Process(MSG_2112, msg, puName != NULL ? puName->Buffer : L"Unnamed object", -1, proc->pid);
         }
 
-skip_log:
+finish:
         if (Name != &Obj_Unnamed)
             Mem_Free(Name, NameLength);
     }

@@ -512,10 +512,20 @@ typedef NTSTATUS (*P_NtImpersonateThread)(
     IN  PSECURITY_QUALITY_OF_SERVICE SecurityQos);
 
 typedef NTSTATUS (*P_NtCreateSymbolicLinkObject)(
-    PHANDLE pHandle,
+    PHANDLE SymbolicLinkHandle,
     ACCESS_MASK DesiredAccess,
     POBJECT_ATTRIBUTES ObjectAttributes,
     PUNICODE_STRING DestinationName);
+
+typedef NTSTATUS (*P_NtOpenSymbolicLinkObject)(
+    OUT PHANDLE SymbolicLinkHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+typedef NTSTATUS (*P_NtQuerySymbolicLinkObject)(
+    IN HANDLE SymbolicLinkHandle,
+    IN OUT PUNICODE_STRING LinkTarget,
+    OUT PULONG ReturnedLength);
 
 typedef NTSTATUS (*P_NtLoadDriver)(
     IN  PUNICODE_STRING RegistryPath);

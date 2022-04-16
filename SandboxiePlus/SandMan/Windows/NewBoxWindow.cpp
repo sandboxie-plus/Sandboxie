@@ -2,6 +2,7 @@
 #include "NewBoxWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
+#include "Views/SbieView.h"
 
 
 CNewBoxWindow::CNewBoxWindow(QWidget *parent)

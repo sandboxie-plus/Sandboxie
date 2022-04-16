@@ -844,6 +844,16 @@ _FX ULONG_PTR Dll_Ordinal1(
             Proc_RestartProcessOutOfPcaJob();
             // does not return
         }
+
+        //
+        // explorer needs sandboxed COM show warnign and terminate when COM is not sandboxies
+        //
+
+        if (Dll_ImageType == DLL_IMAGE_SHELL_EXPLORER && SbieDll_IsOpenCOM()) {
+
+            SbieApi_Log(2195, NULL);
+            ExitProcess(0);
+        }
     }
     else
     {

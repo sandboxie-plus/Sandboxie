@@ -379,6 +379,10 @@ SBIE2193 Make sure to delete the sandbox after completing the update process.
 SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
 .
 
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed the COM must not be Open.
+.
+
 2198;pop;inf;01
 %0
 .

@@ -215,6 +215,9 @@ SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentF
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
+	if (NewName.compare(m_Name, Qt::CaseInsensitive) == 0)
+		return SB_OK;
+
 	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
 	if (Status.IsError())
 		return Status;
@@ -386,7 +389,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 			if (BoxDataFile.Required)
 				return SB_ERR(SB_SnapCopyDatFail);
 		}
-		else if (BoxDataFile.Required) // this one is incremental, hence delete it from the copy root, after it was copied to the snapshot
+		else if (BoxDataFile.Recursive) // this one is incremental, hence delete it from the copy root, after it was copied to the snapshot
 			QFile::remove(m_FilePath + "\\" + BoxDataFile.Name);
 	}
 

@@ -107,7 +107,7 @@ CMonitorList::CMonitorList(QWidget* parent)
 	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	m_pMonitorModel = new CMonitorModel();
-	connect(m_pMonitorModel, SIGNAL(NewBranche()), this, SLOT(UpdateFilters()));
+	//connect(m_pMonitorModel, SIGNAL(NewBranche()), this, SLOT(UpdateFilters()));
 
 	m_pSortProxy = new CSortFilterProxyModel(false, this);
 	m_pSortProxy->setSortRole(Qt::EditRole);

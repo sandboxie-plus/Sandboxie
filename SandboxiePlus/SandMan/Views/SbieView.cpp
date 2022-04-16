@@ -45,6 +45,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSbieTree->setModel(m_pSortProxy);
 	((CSortFilterProxyModel*)m_pSortProxy)->setView(m_pSbieTree);
 
+	m_pSbieTree->setDragDropMode(QAbstractItemView::InternalMove);
+
 	m_pSbieTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	m_pSbieTree->setSortingEnabled(true);
 	//m_pSbieTree->setSortingEnabled(false);
@@ -62,6 +64,9 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	connect(m_pSbieTree, SIGNAL(collapsed(const QModelIndex &)), this, SLOT(OnCollapsed(const QModelIndex &)));
 
 	//connect(theGUI, SIGNAL(ReloadPanels()), m_pSbieModel, SLOT(Clear()));
+
+	connect(m_pSbieModel, SIGNAL(MoveBox(const QString&, const QString&)), this, SLOT(OnMoveItem(const QString&, const QString&)));
+	connect(m_pSbieModel, SIGNAL(MoveGroup(const QString&, const QString&)), this, SLOT(OnMoveItem(const QString&, const QString&)));
 
 	//m_pSbieTree->setStyleSheet("QTreeView::item:focus {selection-background-color: yellow;}");
 	//m_pSbieTree->setFocusPolicy(Qt::NoFocus);
@@ -150,16 +155,16 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//UpdateRunMenu();
 
 	m_pMenuTerminate = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Terminate"), this, SLOT(OnProcessAction()));
-	m_pMenuTerminate->setShortcut(QKeySequence::Delete);
-	m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	//m_pMenuTerminate->setShortcut(QKeySequence::Delete);
+	//m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pMenuTerminate);
 	m_pMenuLinkTo = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnProcessAction()));
 	m_pMenuPreset = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Preset"));
 	m_pMenuPinToRun = m_pMenuPreset->addAction(tr("Pin to Run Menu"), this, SLOT(OnProcessAction()));
 	m_pMenuPinToRun->setCheckable(true);
 	m_pMenuBlackList = m_pMenuPreset->addAction(tr("Block and Terminate"), this, SLOT(OnProcessAction()));
-	m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
-	m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	//m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
+	//m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 	this->addAction(m_pMenuBlackList);
 	m_pMenuAllowInternet = m_pMenuPreset->addAction(tr("Allow internet access"), this, SLOT(OnProcessAction()));
 	m_pMenuAllowInternet->setCheckable(true);
@@ -172,6 +177,12 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
 	//m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 	m_iMenuProc = m_pMenu->actions().count();
+
+	m_pRemove = new QAction(this);
+	m_pRemove->setShortcut(QKeySequence::Delete);
+	m_pRemove->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pRemove);
+	connect(m_pRemove, SIGNAL(triggered()), this, SLOT(OnRemoveItem()));
 
 
 	// menu for the tray
@@ -506,11 +517,21 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 	auto Group = m_Groups.take(OldName);
 	m_Groups.insert(NewName, Group);
 
+	RenameItem(OldName, NewName);
+}
+
+bool CSbieView::RenameItem(const QString OldName, const QString NewName)
+{
+	if (m_Groups.contains(NewName))
+		return false;
+
 	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 	{
 		if (I.value().removeOne(OldName))
 			I.value().append(NewName);
 	}
+
+	return true;
 }
 
 QString CSbieView__SerializeGroup(QMap<QString, QStringList>& m_Groups, const QString& Parent = "", QSet<QString> Test = QSet<QString>())
@@ -571,26 +592,23 @@ QStringList CSbieView::GetSelectedGroups(bool bAndBoxes)
 
 void CSbieView::OnGroupAction()
 {
-	QAction* Action = qobject_cast<QAction*>(sender());
+	OnGroupAction(qobject_cast<QAction*>(sender()));
+}
 
-	if (Action == m_pNewBox)
+void CSbieView::OnGroupAction(QAction* Action)
+{
+	if (Action == m_pNewBox || Action == m_pAddGroupe)
 	{
-		QString Name = AddNewBox();
+		QStringList List = GetSelectedGroups();
+
+		QString Name = Action == m_pNewBox ? AddNewBox() : AddNewGroup();
 		if (Name.isEmpty())
 			return;
 
-		QStringList List = GetSelectedGroups();
 		if (List.isEmpty())
 			return;
-		
-		m_Groups[List.first()].append(Name);
 
-		m_pSbieModel->Clear(); //todo improve that
-	}
-	else if (Action == m_pAddGroupe)
-	{
-		AddNewGroup();
-		return;
+		m_Groups[List.first()].append(Name);
 	}
 	else if (Action == m_pRenGroupe)
 	{
@@ -603,14 +621,10 @@ void CSbieView::OnGroupAction()
 		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Group."), QLineEdit::Normal, OldValue);
 		if (Value.isEmpty() || Value == OldValue)
 			return;
-		if (m_Groups.contains(Value)) {
-			QMessageBox("Sandboxie-Plus", tr("This Group name is already in use."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
+		if (!TestNameAndWarn(Value))
 			return;
-		}
-		
-		RenameGroup(OldValue, Value);
 
-		m_pSbieModel->Clear(); //todo improve that
+		RenameGroup(OldValue, Value);
 	}
 	else if (Action == m_pDelGroupe)
 	{
@@ -636,8 +650,6 @@ void CSbieView::OnGroupAction()
 				}
 			}
 		}
-
-		m_pSbieModel->Clear(); //todo improve that, also move boxes to grant parent?
 	}
 	else if (Action == m_pMenuMoveUp /*|| Action == m_pMenuMoveBy*/ || Action == m_pMenuMoveDown)
 	{
@@ -685,21 +697,27 @@ void CSbieView::OnGroupAction()
 				continue;
 			}
 
-			// remove from old
-			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
-				I.value().removeAll(Name);
-
-			// add to new
-			m_Groups[Group].append(Name);
+			MoveItem(Name, Group);
 		}
-
-		m_pSbieModel->Clear(); //todo improve that
 	}
+
+	if (!(Action == m_pMenuMoveUp /*|| Action == m_pMenuMoveBy*/ || Action == m_pMenuMoveDown))
+		m_pSbieModel->Clear(); //todo improve that
 
 	//m_UserConfigChanged = true;
 	UpdateGroupMenu();
 
 	SaveUserConfig();
+}
+
+void CSbieView::MoveItem(const QString& Name, const QString& To)
+{
+	// remove from old
+	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+		I.value().removeAll(Name);
+
+	// add to new
+	m_Groups[To].append(Name);
 }
 
 QString CSbieView::AddNewBox()
@@ -722,6 +740,9 @@ QString CSbieView::AddNewGroup()
 	QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new group name"), QLineEdit::Normal);
 	if (Name.isEmpty() || m_Groups.contains(Name))
 		return "";
+	if (!TestNameAndWarn(Name))
+		return "";
+
 	m_Groups[Name] = QStringList();
 
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(m_pSbieTree->currentIndex());
@@ -738,6 +759,21 @@ QString CSbieView::AddNewGroup()
 	SaveUserConfig();
 
 	return Name;
+}
+
+bool CSbieView::TestNameAndWarn(const QString& Name)
+{
+	if (m_Groups.contains(Name)) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("This name is already used for a Box Group."));
+		return false;
+	}
+
+	if (!theAPI->GetBoxByName(QString(Name).replace(" ", "_")).isNull()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("This name is already used for a Sandbox."));
+		return false;
+	}
+
+	return true;
 }
 
 void CSbieView::OnSandBoxAction()
@@ -979,9 +1015,12 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
 		if (Value.isEmpty() || Value == OldValue)
 			return;
+		if (!TestNameAndWarn(Value))
+			return;
+
 		Results.append((SandBoxes.first()->RenameBox(Value.replace(" ", "_"))));
 
-		RenameGroup(OldValue, Value);
+		RenameItem(OldValue, Value);
 	}
 	else if (Action == m_pMenuRecover)
 	{
@@ -1113,11 +1152,15 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 void CSbieView::OnProcessAction()
 {
+	OnProcessAction(qobject_cast<QAction*>(sender()));
+}
+
+void CSbieView::OnProcessAction(QAction* Action)
+{
 	QList<SB_STATUS> Results;
 
 	QList<CBoxedProcessPtr> Processes = CSbieView::GetSelectedProcesses();
 
-	QAction* Action = qobject_cast<QAction*>(sender());
 	if (Action == m_pMenuTerminate || Action == m_pMenuBlackList)
 	{
  		if (theConf->GetInt("Options/WarnTerminate", -1) == -1)
@@ -1418,4 +1461,26 @@ void CSbieView::SaveUserConfig()
 	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
 
 	theAPI->GetUserSettings()->SetText("BoxCollapsedView", m_Collapsed.toList().join(","));
+}
+
+void CSbieView::OnMoveItem(const QString& Name, const QString& To)
+{
+	MoveItem(Name, To);
+
+	m_pSbieModel->Clear(); //todo improve that
+
+	//m_UserConfigChanged = true;
+	UpdateGroupMenu();
+
+	SaveUserConfig();
+}
+
+void CSbieView::OnRemoveItem() 
+{
+	if (!GetSelectedProcesses().isEmpty())
+		OnProcessAction(m_pMenuTerminate);
+	else if (!GetSelectedBoxes().isEmpty())
+		OnSandBoxAction(m_pMenuRemove);
+	else if (!GetSelectedGroups().isEmpty())
+		OnGroupAction(m_pDelGroupe);
 }

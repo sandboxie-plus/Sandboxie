@@ -218,6 +218,7 @@ _FX BOOLEAN Gui_InitClass(void)
     // by forcing Gui_RenameClasses=TRUE in maxthon child processes
     //
 
+    // $Workaround$ - 3rd party fix
     if ((! Gui_OpenAllWinClasses) && (! Gui_RenameClasses)
                     && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME
                     && _wcsicmp(Dll_ImageName, L"maxthon.exe") == 0) {
@@ -225,6 +226,22 @@ _FX BOOLEAN Gui_InitClass(void)
         const WCHAR *cmd = GetCommandLine();
         if (wcsstr(cmd, L"-Run"))
             Gui_RenameClasses = TRUE;
+    }
+
+
+    //
+    // vivaldi somehow screws up its hooks and its trampoline to NtCreateSection 
+    // ends up pointing to our RegisterClassW detour function
+    // to work around this issue we disable Gui_RenameClasses for vivaldi.exe
+    //
+
+    // $Workaround$ - 3rd party fix
+    if (Gui_RenameClasses
+                    && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME
+                    && _wcsicmp(Dll_ImageName, L"vivaldi.exe") == 0
+                    && SbieApi_QueryConfBool(NULL, L"UseVivaldiWorkaround", TRUE)) {
+
+        Gui_RenameClasses = FALSE;
     }
 
     //

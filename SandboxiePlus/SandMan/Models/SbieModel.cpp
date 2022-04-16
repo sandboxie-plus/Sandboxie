@@ -12,6 +12,8 @@ CSbieModel::CSbieModel(QObject *parent)
 	//m_BoxInUse = QIcon(":/BoxInUse");
 	m_ExeIcon = QIcon(":/exeIcon32");
 
+	m_SbieModelMimeType = "application/x-sbie-data";
+
 	m_Root = MkNode(QVariant());
 }
 
@@ -66,6 +68,11 @@ bool CSbieModel::TestProcPath(const QList<QVariant>& Path, const QString& BoxNam
 QString CSbieModel__AddGroupMark(const QString& Name)
 {
 	return Name.isEmpty() ? "" : ("!" + Name);
+}
+
+bool CSbieModel__HasGroupMark(const QString& Name)
+{
+	return Name.left(1) == "!";
 }
 
 QString CSbieModel__RemoveGroupMark(const QString& Name)
@@ -410,6 +417,20 @@ CBoxedProcessPtr CSbieModel::GetProcess(const QModelIndex &index) const
 	return pNode->pProcess;
 }
 
+QString	CSbieModel::GetGroup(const QModelIndex& index) const
+{
+	if (!index.isValid())
+		return QString();
+
+	SSandBoxNode* pNode = static_cast<SSandBoxNode*>(index.internalPointer());
+	ASSERT(pNode);
+	
+	if(!CSbieModel__HasGroupMark(pNode->ID.toString()))
+		return QString();
+
+	return pNode->ID.toString();
+}
+
 QVariant CSbieModel::GetID(const QModelIndex &index) const
 {
 	if (!index.isValid())
@@ -466,3 +487,50 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 { 
 	return g_ExeIcon;
 }*/
+
+Qt::ItemFlags CSbieModel::flags(const QModelIndex& index) const 
+{
+	Qt::ItemFlags Flags = CTreeItemModel::flags(index);
+
+	Flags |= Qt::ItemIsDragEnabled;
+
+	SSandBoxNode* pNode = static_cast<SSandBoxNode*>(index.internalPointer());
+	if (!pNode || (pNode && CSbieModel__HasGroupMark(pNode->ID.toString())) || pNode == m_Root)
+		Flags |= Qt::ItemIsDropEnabled;
+
+	return Flags;
+}
+
+QMimeData* CSbieModel::mimeData(const QModelIndexList &indexes) const
+{
+	QStringList Boxes;
+	for (int i = 0; i < indexes.count(); i++) {
+		if (indexes[i].column() != 0)
+			continue;
+		SSandBoxNode* pNode = static_cast<SSandBoxNode*>(indexes[i].internalPointer());
+		Boxes.append(pNode->ID.toString());
+	}
+
+	QMimeData *data = new QMimeData();
+	data->setData(m_SbieModelMimeType, Boxes.join(",").toLatin1());
+	return data;
+}
+
+bool CSbieModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) {
+
+	QStringList Boxes = QString::fromLatin1(data->data(m_SbieModelMimeType)).split(",");
+	QString To = ""; // root
+
+	SSandBoxNode* pNode = static_cast<SSandBoxNode*>(parent.internalPointer());
+	if (pNode)
+		To = CSbieModel__RemoveGroupMark(pNode->ID.toString());
+
+	foreach(const QString & Name, Boxes) {
+		if(CSbieModel__HasGroupMark(Name))
+			MoveGroup(CSbieModel__RemoveGroupMark(Name), To);
+		else
+			MoveBox(Name, To);
+	}
+
+	return true;
+}

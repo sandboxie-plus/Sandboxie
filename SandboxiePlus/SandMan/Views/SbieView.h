@@ -21,6 +21,7 @@ public:
 
 	virtual QString				AddNewBox();
 	virtual QString				AddNewGroup();
+	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);
 
 	virtual void				PopUpMenu(const QString& Name);
@@ -43,12 +44,18 @@ private slots:
 	void						ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected);
 
 	void						OnGroupAction();
+	void						OnGroupAction(QAction* pAction);
 	void						OnSandBoxAction();
 	void						OnSandBoxAction(QAction* pAction);
 	void						OnProcessAction();
+	void						OnProcessAction(QAction* pAction);
 
 	void						OnExpanded(const QModelIndex& index) { ChangeExpand(index, true); }
 	void						OnCollapsed(const QModelIndex& index) { ChangeExpand(index, false); }
+
+	void						OnMoveItem(const QString& Name, const QString& To);
+
+	void						OnRemoveItem();
 
 protected:
 	virtual void				OnMenu(const QPoint& Point);
@@ -66,6 +73,9 @@ private:
 	bool					UpdateMenu();
 	void					UpdateGroupMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
+	bool					RenameItem(const QString OldName, const QString NewName);
+
+	void					MoveItem(const QString& Name, const QString& To);
 
 	QString					FindParent(const QString& Name);
 	bool					IsParentOf(const QString& Name, const QString& Group);
@@ -138,6 +148,8 @@ private:
 	//QAction*				m_pMenuSuspend;
 	//QAction*				m_pMenuResume;
 	int						m_iMenuProc;
+
+	QAction*				m_pRemove;
 
 	int						m_iMenuRun;
 };

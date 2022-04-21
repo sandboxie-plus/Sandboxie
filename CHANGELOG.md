@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.19 / 5.55.19] - 2022-04-??
+## [1.0.19 / 5.55.19] - 2022-04-21
 
 ### Added
 - added drag and drop support for groups [#1775](https://github.com/sandboxie-plus/Sandboxie/issues/1775)

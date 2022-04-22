@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added drag and drop support for groups [#1775](https://github.com/sandboxie-plus/Sandboxie/issues/1775)
-- added del key support to the box view for all entry types [#1779](https://github.com/sandboxie-plus/Sandboxie/issues/1779)
+- added Del key support to the box view for all entry types [#1779](https://github.com/sandboxie-plus/Sandboxie/issues/1779)
 - added warning when trying to run explorer.exe in a box with OpenCOM [#1716](https://github.com/sandboxie-plus/Sandboxie/issues/1716)
 
 ### Fixed

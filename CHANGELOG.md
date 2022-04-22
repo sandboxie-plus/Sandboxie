@@ -14,19 +14,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added drag and drop support for groups [#1775](https://github.com/sandboxie-plus/Sandboxie/issues/1775)
-- added del key support to the box view for all entry types [#1779](https://github.com/sandboxie-plus/Sandboxie/issues/1779)
-- added warnign when trying to run explorer.exe in a box with OpenCOM [#1716](https://github.com/sandboxie-plus/Sandboxie/issues/1716)
+- added Del key support to the box view for all entry types [#1779](https://github.com/sandboxie-plus/Sandboxie/issues/1779)
+- added warning when trying to run explorer.exe in a box with COM open [#1716](https://github.com/sandboxie-plus/Sandboxie/issues/1716)
 
 ### Fixed
-- fixed crash issue in the sandman ui [#1772](https://github.com/sandboxie-plus/Sandboxie/issues/1772)
-- fixed issue some installers when EnableObjectFiltering is enabled [#1795](https://github.com/sandboxie-plus/Sandboxie/issues/1795)
+- fixed crash issue in the SandMan UI [#1772](https://github.com/sandboxie-plus/Sandboxie/issues/1772)
+- fixed issue with some installers when EnableObjectFiltering is enabled [#1795](https://github.com/sandboxie-plus/Sandboxie/issues/1795)
 - fixed to allow NtCreateSymbolicLinkObject to be used safely in the sandbox
-- added workaround for a vivaldi hooking issue [1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
--- Note: its a very provisional fix hence it can be disabled with UseVivaldiWorkaround=n
+- added workaround for a Vivaldi hooking issue [1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
+-- Note: this fix is provisional, therefore it can be disabled with UseVivaldiWorkaround=n
 - fixed registry issue with snapshots [#1782](https://github.com/sandboxie-plus/Sandboxie/issues/1782)
 - fixed issue with box grouping [#1778](https://github.com/sandboxie-plus/Sandboxie/issues/1778) [#1777](https://github.com/sandboxie-plus/Sandboxie/issues/1777) [#1776](https://github.com/sandboxie-plus/Sandboxie/issues/1776) 
-- fixed more issue with box grouping [#1698](https://github.com/sandboxie-plus/Sandboxie/issues/1698) [#1697](https://github.com/sandboxie-plus/Sandboxie/issues/1697)
-- fixed issues with snadshot ui [#1696](https://github.com/sandboxie-plus/Sandboxie/issues/1696) [#1695](https://github.com/sandboxie-plus/Sandboxie/issues/1695)
+- fixed further issues with box grouping [#1698](https://github.com/sandboxie-plus/Sandboxie/issues/1698) [#1697](https://github.com/sandboxie-plus/Sandboxie/issues/1697)
+- fixed issues with snapshot UI [#1696](https://github.com/sandboxie-plus/Sandboxie/issues/1696) [#1695](https://github.com/sandboxie-plus/Sandboxie/issues/1695)
 - fixed issue with recovery dialog focus [#1374](https://github.com/sandboxie-plus/Sandboxie/issues/1374)
 
 
@@ -45,7 +45,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed pipe impersonation in compartment mode
-- fixed issue with box clean-up introduced in a recent build
+- fixed issue with box clean-up which was introduced in a recent build
 - fixed missing trace log clean-up command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
 - fixed inability to unpin programs that have been pinned to the run menu  [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
 

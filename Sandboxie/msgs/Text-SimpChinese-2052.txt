@@ -372,7 +372,7 @@ SBIE2194 启动 MSI 安装包需要在 ini 中设置 %2 选项，但这会削弱
 .
 
 2195;pop;inf;01
-SBIE2195 要在沙盒中运行 Explorer.exe，不应打开 COM。
+SBIE2195 要在沙盒中运行 Explorer.exe，则不得打开 COM 基础结构的访问权限。
 .
 
 2198;pop;inf;01

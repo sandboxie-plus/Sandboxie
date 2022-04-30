@@ -75,9 +75,9 @@ ECHO Copying SandMan translations
 mkdir %instPath%\translations\
 rem copy /y %~dp0..\SandboxiePlus\SandMan\sandman_*.qm %instPath%\translations\
 copy /y %~dp0..\SandboxiePlus\Build_SandMan_%archPath%\release\sandman_*.qm %instPath%\translations\
-copy /y %qtPath%\translations\qt_*.qm %instPath%\translations\
-copy /y %qtPath%\translations\qtbase_*.qm %instPath%\translations\
-copy /y %qtPath%\translations\qtmultimedia_*.qm %instPath%\translations\
+copy /y %~dp0\qttranslations\qm\qt_*.qm %instPath%\translations\
+copy /y %~dp0\qttranslations\qm\qtbase_*.qm %instPath%\translations\
+copy /y %~dp0\qttranslations\qm\qtmultimedia_*.qm %instPath%\translations\
 copy /y %qtPath%\translations\qtscript_*.qm %instPath%\translations\
 copy /y %qtPath%\translations\qtxmlpatterns_*.qm %instPath%\translations\
 

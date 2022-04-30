@@ -121,6 +121,7 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 	case eNormalIpcPath:	return "NormalIpcPath";
 	case eOpenIpcPath:		return "OpenIpcPath";
 	case eClosedIpcPath:	return "ClosedIpcPath";
+	case eReadIpcPath:		return "ReadIpcPath";
 
 	case eOpenWinClass:		return "OpenWinClass";
 
@@ -228,8 +229,6 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	QStringList Values = Value.split(",");
 	if (Values.count() >= 2) 
 		AddAccessEntry(Type, Mode, Values[0], Values[1], disabled, Template);
-	else if (Values[0].left(2) == "$:") // special cases
-		AddAccessEntry(Type, Mode, Values[0].mid(2), "$", disabled, Template);
 	else // all programs
 		AddAccessEntry(Type, Mode, "", Values[0], disabled, Template);
 }
@@ -452,7 +451,7 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 	{
 	case eFile:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eKey:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
-	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed;
+	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed << eReadOnly;
 	case eWnd:			return QList<EAccessMode>() << eOpen;
 	case eCOM:			return QList<EAccessMode>() << eOpen << eClosed << eClosedRT;
 	}
@@ -570,9 +569,7 @@ void COptionsWindow::SaveAccessList()
 		int Mode = pItem->data(2, Qt::UserRole).toInt();
 		QString Program = pItem->data(1, Qt::UserRole).toString();
 		QString Value = pItem->data(3, Qt::UserRole).toString();
-		if (Value == "$") // special cases
-			Value = "$:" + Program;
-		else if (!Program.isEmpty())
+		if (!Program.isEmpty())
 			Value.prepend(Program + ",");
 
 		QString AccessStr = MakeAccessStr((EAccessType)Type, (EAccessMode)Mode);

@@ -604,7 +604,7 @@ _FX int WSA_IsBlockedTraffic(const short *addr, int addrlen, int protocol)
 				Sbie_snwprintf(msg, 256, L"Network Traffic; Port: %u; Prot: %u; IPv4: %d.%d.%d.%d", port, protocol, 
                     ip.Data[12], ip.Data[13], ip.Data[14], ip.Data[15]);
 			}
-            SbieApi_MonitorPut2(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), msg, FALSE);
+            SbieApi_MonitorPutMsg(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), msg);
         }
 
         if (block) {

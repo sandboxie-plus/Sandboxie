@@ -543,7 +543,7 @@ _FX void Process_CreateTerminated(HANDLE ProcessId, ULONG SessionId)
     PROCESS *proc;
     KIRQL irql;
 
-    if (SessionId != -1) { // for StartRunAlertDenied, dont log in this case
+    if (SessionId != -1) { // for StartRunAlertDenied, don't log in this case
     
         pid_str.Length = 10 * sizeof(WCHAR);
         pid_str.MaximumLength = pid_str.Length + sizeof(WCHAR);
@@ -742,20 +742,27 @@ _FX PROCESS *Process_Create(
     //
 
     if (!Driver_Certified && !proc->image_sbie) {
-        if (
-#ifdef USE_MATCH_PATH_EX
-            proc->use_rule_specificity || 
-            proc->use_privacy_mode ||
-#endif
-            proc->bAppCompartment) {
 
-            Log_Msg_Process(MSG_6004, proc->box->name, proc->image_name, box->session_id, proc->pid);
+        const WCHAR* exclusive_setting = NULL;
+#ifdef USE_MATCH_PATH_EX
+        if (proc->use_rule_specificity)
+            exclusive_setting = L"UseRuleSpecificity";
+        else if (proc->use_privacy_mode)
+            exclusive_setting = L"UsePrivacyMode";
+        else
+#endif
+        if (proc->bAppCompartment)
+            exclusive_setting = L"NoSecurityIsolation";
+
+        if (exclusive_setting) {
+
+            Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
 
             //Pool_Delete(pool);
             //Process_CreateTerminated(ProcessId, box->session_id);
             //return NULL;
             
-            // allow the process to run for a sort while to allow the features to be avaluated
+            // allow the process to run for a sort while to allow the features to be evaluated
             Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
         }
     }
@@ -905,7 +912,7 @@ _FX void Process_NotifyProcess(
         if (Create) {
 
             //
-            // it is possible to specify the parrent process when calling RtlCreateUserProcess
+            // it is possible to specify the parent process when calling RtlCreateUserProcess
             // this is for example done by the appinfo service running under svchost.exe
             // to start LocalBridge.exe with RuntimeBroker.exe as parent
             // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
@@ -992,7 +999,7 @@ _FX void Process_NotifyProcessEx(
         if (CreateInfo != NULL) {
 
             //
-            // it is possible to specify the parrent process when calling RtlCreateUserProcess
+            // it is possible to specify the parent process when calling RtlCreateUserProcess
             // this is for example done by the appinfo service running under svchost.exe
             // to start LocalBridge.exe with RuntimeBroker.exe as parent
             // hence we take for our purposes the ID of the process calling RtlCreateUserProcess instead
@@ -1086,7 +1093,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         // there are a couple of scenarios here
         // a. CallerId == ParentId boring, all's fine
         // b. Caller is sandboxed designated Parent is NOT sandboxed, 
-        //      possible sandbox escape atempt
+        //      possible sandbox escape attempt
         // c. Caller is not sandboxed, designated Parent IS sandboxed, 
         //      service trying to start something on the behalf of a sandboxed process 
         //      eg. seclogon reacting to a runas request 
@@ -1174,13 +1181,13 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
             if(!Driver_Certified)
-                Log_Msg_Process(MSG_6004, box->name, NULL, box->session_id, CallerId);
+                Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
             else {
                 UNICODE_STRING image_uni;
                 RtlInitUnicodeString(&image_uni, ImagePath);
                 if (!Box_IsBoxedPath(box, file, &image_uni)) {
 
-                    check_forced_program = TRUE; // the break out process of one box may be the forced process of an otehr
+                    check_forced_program = TRUE; // the breakout process of one box may be the forced process of another
                     breakout_box = box;
                     box = NULL;
                 }
@@ -1337,8 +1344,8 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                 else if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
 
                     //
-                    // on windows 8 and later we can have nested jobs so asigning a 
-                    // boxed job to a process will not interfear with the job assigned by SbieSvc
+                    // on windows 8 and later we can have nested jobs so assigning a 
+                    // boxed job to a process will not interfere with the job assigned by SbieSvc
                     //
 
                     new_proc->can_use_jobs = Conf_Get_Boolean(new_proc->box->name, L"AllowBoxedJobs", 0, FALSE);
@@ -1616,11 +1623,11 @@ _FX void Process_NotifyImage(
 void Process_SetTerminated(PROCESS *proc, ULONG reason)
 {
     //
-    // This function markes a process for termination, this causes File_PreOperation 
+    // This function marks a process for termination, this causes File_PreOperation 
     // and Key_Callback to return STATUS_PROCESS_IS_TERMINATING which prevents 
     // the process form accessing the file system and the registry
     // 
-    // Note: if this is set during process creation the process wont be able to start at all
+    // Note: if this is set during process creation the process won't be able to start at all
     //
 
     if (!proc->terminated)

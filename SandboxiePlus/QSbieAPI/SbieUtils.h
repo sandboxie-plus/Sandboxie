@@ -27,7 +27,7 @@ public:
 	static bool				IsInstalled(EComponent Component);
 
 	static QString			GetContextMenuStartCmd();
-	static void				AddContextMenu(const QString& StartPath, const QString& RunStr, const QString& ExploreStr, const QString& IconPath = QString());
+	static void				AddContextMenu(const QString& StartPath, const QString& RunStr, /*const QString& ExploreStr,*/ const QString& IconPath = QString());
 	static void				RemoveContextMenu();
 
 	static bool 			HasContextMenu2();

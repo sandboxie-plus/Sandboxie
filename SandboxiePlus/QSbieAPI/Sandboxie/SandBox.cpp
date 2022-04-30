@@ -43,6 +43,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	m_IsEnabled = true;
 
 	m_ActiveProcessCount = 0;
+	m_ActiveProcessDirty = false;
 
 	// when loading a sandbox that is not initialized, initialize it
 	int cfglvl = GetNum("ConfigLevel");
@@ -67,8 +68,8 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	{
 		// templates L6
 		InsertText("Template", "AutoRecoverIgnore");
-		InsertText("Template", "Firefox_Phishing_DirectAccess");
-		InsertText("Template", "Chrome_Phishing_DirectAccess");
+		//InsertText("Template", "Firefox_Phishing_DirectAccess");
+		//InsertText("Template", "Chrome_Phishing_DirectAccess");
 		InsertText("Template", "LingerPrograms");
 	}
 
@@ -214,6 +215,9 @@ SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentF
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
+	if (NewName.compare(m_Name, Qt::CaseInsensitive) == 0)
+		return SB_OK;
+
 	SB_STATUS Status = CSbieAPI::ValidateName(NewName);
 	if (Status.IsError())
 		return Status;
@@ -363,7 +367,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning);
 
 	if (!IsInitialized())
 		return SB_ERR(SB_SnapIsEmpty);
@@ -387,7 +391,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 			if (BoxDataFile.Required)
 				return SB_ERR(SB_SnapCopyDatFail);
 		}
-		else if (BoxDataFile.Required) // this one is incremental, hence delete it from the copy root, after it was copied to the snapshot
+		else if (BoxDataFile.Recursive) // this one is incremental, hence delete it from the copy root, after it was copied to the snapshot
 			QFile::remove(m_FilePath + "\\" + BoxDataFile.Name);
 	}
 
@@ -417,7 +421,7 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning);
 	
 	QStringList ChildIDs;
 	foreach(const QString& Snapshot, ini.childGroups())
@@ -593,7 +597,7 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 		return SB_ERR(SB_SnapNotFound);
 
 	if (m_pAPI->HasProcesses(m_Name))
-		return SB_ERR(SB_SnapIsRunning, OP_CONFIRM);
+		return SB_ERR(SB_SnapIsRunning);
 
 	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
 	{

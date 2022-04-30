@@ -2,6 +2,7 @@
 #include "NewBoxWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
+#include "Views/SbieView.h"
 
 
 CNewBoxWindow::CNewBoxWindow(QWidget *parent)
@@ -69,9 +70,12 @@ void CNewBoxWindow::OnBoxTypChanged()
 void CNewBoxWindow::CreateBox()
 {
 	m_Name = ui.txtName->text();
-	m_Name.replace(" ", "_");
-
 	int BoxType = ui.cmbBoxType->currentData().toInt();
+
+	if (!theGUI->GetBoxView()->TestNameAndWarn(m_Name))
+		return;
+
+	m_Name.replace(" ", "_");
 
 	SB_STATUS Status = theAPI->CreateBox(m_Name, true);
 

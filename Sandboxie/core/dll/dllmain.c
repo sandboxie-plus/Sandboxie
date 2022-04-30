@@ -175,6 +175,12 @@ _FX BOOL WINAPI DllMain(
             File_DoAutoRecover(TRUE);
             Gui_ResetClipCursor();
         }
+
+//#ifdef _WIN64
+//		// cleanup CS
+//		DeleteCriticalSection(&VT_CriticalSection);
+//#endif
+
     }
 
     return TRUE;
@@ -824,7 +830,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         Dll_InitInjected(); // install required hooks
 
         //
-        // notify RPCSS that a new proces was created in the current sandbox
+        // notify RPCSS that a new process was created in the current sandbox
         //
 
         if (Dll_ImageType != DLL_IMAGE_SANDBOXIE_RPCSS) {
@@ -855,11 +861,21 @@ _FX ULONG_PTR Dll_Ordinal1(
 
             WCHAR text[128];
             Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
-            SbieApi_MonitorPut(MONITOR_OTHER, text);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();
             // does not return
+        }
+
+        //
+        // explorer needs sandboxed COM show warnign and terminate when COM is not sandboxies
+        //
+
+        if (Dll_ImageType == DLL_IMAGE_SHELL_EXPLORER && SbieDll_IsOpenCOM()) {
+
+            SbieApi_Log(2195, NULL);
+            ExitProcess(0);
         }
     }
     else

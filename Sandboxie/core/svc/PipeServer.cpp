@@ -217,6 +217,9 @@ PipeServer::~PipeServer()
 
     if (m_pool)
         Pool_Delete(m_pool);
+
+	// cleanup CS
+	DeleteCriticalSection(&m_lock);
 }
 
 

@@ -223,7 +223,7 @@ static DLL Ldr_Dlls[] = {
     { L"ComDlg32.dll",          "ComDlg32.dll",         ComDlg32_Init,                  0}, // fix for opera.exe
     { L"ntmarta.dll",           "ntmarta.dll",          Ntmarta_Init,                   0}, // workaround for chrome and acrobat reader
     // Non Windows DLLs:
-    { L"osppc.dll",             "osppc.dll",            Scm_OsppcDll,                   0}, // ensure osppsvc is tunning
+    { L"osppc.dll",             "osppc.dll",            Scm_OsppcDll,                   0}, // ensure osppsvc is running
     { L"mso.dll",               "mso.dll",              File_MsoDll,                    0}, // hack for File_IsRecoverable
     { L"agcore.dll",            "agcore.dll",           Custom_SilverlightAgCore,       0}, // msft silverlight - deprecated
     // Non Microsoft DLLs:

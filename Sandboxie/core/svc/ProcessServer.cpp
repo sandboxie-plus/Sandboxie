@@ -550,7 +550,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                     if (lpProgram) {
 
                         //
-                        // check if the process/directory is configued for breakout
+                        // check if the process/directory is configured for breakout
                         // if its a BreakoutProcess we must also test if the path is not in the sandbox itself
                         //
 
@@ -559,14 +559,14 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                             || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), boxname, L"BreakoutFolder")) {
 
                             //
-                            // this is a break out process, its alowed to leave teh sandbox
+                            // this is a breakout process, it is allowed to leave the sandbox
                             //
 
                             BoxNameOrModelPid = 0;
                             FilterHandles = TRUE;
 
                             //
-                            // check if it shoudl en up in an other box
+                            // check if it should end up in another box
                             //
 
                             WCHAR BoxName[34];
@@ -580,7 +580,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                     || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder")) {
 
                                     //
-                                    // check if the breakout process is suposed to end in the box its trying to break out of
+                                    // check if the breakout process is supposed to end in the box it is trying to break out of
                                     // and deny the breakout in that case, to take the normal process creation route
                                     // 
                                     // this happens when a break out is configured globally
@@ -593,7 +593,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                                     }
 
                                     //
-                                    // set otehr box
+                                    // set other box
                                     //
 
                                     BoxNameOrModelPid = (LONG_PTR)boxname;
@@ -615,7 +615,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
             if (PrimaryTokenHandle) {
 
                 //
-                // copy STARTUPINFO paramters from caller
+                // copy STARTUPINFO parameters from caller
                 //
 
                 STARTUPINFO si;
@@ -793,7 +793,7 @@ bool ProcessServer__RunRpcssAsSystem(const WCHAR* boxname)
     // OriginalToken END
     
         //
-        // if we run MSIServer as system we need to run the sandboxed Rpcss as system to or else it wil fail
+        // if we run MSIServer as system we need to run the sandboxed Rpcss as system to or else it will fail
         //
 
         if (SbieApi_QueryConfBool(boxname, L"MsiInstallerExemptions", FALSE) || SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE))
@@ -1101,7 +1101,7 @@ BOOL ProcessServer::RunSandboxedStripPrivilege(HANDLE NewTokenHandle, LPCWSTR lp
 
     NTSTATUS status = NtAdjustPrivilegesToken(NewTokenHandle, FALSE, &NewState, sizeof(NewState), (PTOKEN_PRIVILEGES)NULL, 0);
 
-    return NT_SUCCESS(status); // STATUS_SUCCESS or STATUS_NOT_ALL_ASSIGNED when the privilege wasnt there in the first palce, which is also passes NT_SUCCESS
+    return NT_SUCCESS(status); // STATUS_SUCCESS or STATUS_NOT_ALL_ASSIGNED when the privilege wasn't there in the first place, which is also passes NT_SUCCESS
 }
 
 

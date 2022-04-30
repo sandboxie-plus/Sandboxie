@@ -39,6 +39,8 @@ protected:
 	void SelectSnapshot(const QString& ID);
 	void HandleResult(SB_PROGRESS Status);
 
+	QVariant GetCurrentItem();
+
 	CSandBoxPtr m_pBox;
 	QString						m_CurSnapshot;
 	QString						m_DefaultSnapshot;

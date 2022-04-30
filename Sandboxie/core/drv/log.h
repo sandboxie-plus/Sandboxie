@@ -172,7 +172,7 @@ void Log_Status_Ex_Process(
 #define Log_Status(error_code,error_subcode,ntstatus) \
     Log_Status_Ex(error_code, error_subcode, ntstatus, NULL)
 
-void Log_Debug_Msg(ULONG type, const WCHAR *string1, const WCHAR *string2);
+void Log_Debug_Msg(ULONG type, const WCHAR *message, const WCHAR *name);
 
 
 //---------------------------------------------------------------------------

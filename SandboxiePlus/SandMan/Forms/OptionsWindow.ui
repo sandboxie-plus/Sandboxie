@@ -571,57 +571,10 @@
             <layout class="QGridLayout" name="gridLayout_37">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_36">
-               <item row="9" column="2">
-                <widget class="QCheckBox" name="chkOpenCredentials">
-                 <property name="text">
-                  <string>Open Windows Credentials Store (user mode)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="2">
-                <widget class="QCheckBox" name="chkPrintToFile">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Allow the print spooler to print to files outside the sandbox</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="2">
-                <widget class="QCheckBox" name="chkOpenSpooler">
-                 <property name="text">
-                  <string>Remove spooler restriction, printers can be installed outside the sandbox</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="11" column="0">
-                <spacer name="verticalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
                <item row="10" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkCloseClipBoard">
                  <property name="text">
                   <string>Block read access to the clipboard</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkOpenProtectedStorage">
-                 <property name="text">
-                  <string>Open System Protected Storage</string>
                  </property>
                 </widget>
                </item>
@@ -631,6 +584,19 @@
                   <string>Block access to the printer spooler</string>
                  </property>
                 </widget>
+               </item>
+               <item row="13" column="2">
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="7" column="0" colspan="2">
                 <widget class="QLabel" name="label_18">
@@ -649,19 +615,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="11" column="2">
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
                <item row="3" column="0">
                 <widget class="QLabel" name="label_31">
                  <property name="font">
@@ -676,6 +629,26 @@
                  </property>
                  <property name="text">
                   <string>Printing restrictions</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="2">
+                <widget class="QCheckBox" name="chkPrintToFile">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Allow the print spooler to print to files outside the sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkVmRead">
+                 <property name="text">
+                  <string>Allow to read memory of unsandboxed processes (not recommended)</string>
                  </property>
                 </widget>
                </item>
@@ -698,6 +671,34 @@
                  </property>
                 </widget>
                </item>
+               <item row="2" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockNetParam">
+                 <property name="text">
+                  <string>Prevent change to network and firewall parameters (user mode)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockNetShare">
+                 <property name="text">
+                  <string>Block network files and folders, unless specifically opened.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="2">
+                <widget class="QCheckBox" name="chkOpenCredentials">
+                 <property name="text">
+                  <string>Open Windows Credentials Store (user mode)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="2">
+                <widget class="QCheckBox" name="chkOpenSpooler">
+                 <property name="text">
+                  <string>Remove spooler restriction, printers can be installed outside the sandbox</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_34">
                  <property name="font">
@@ -715,17 +716,30 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockNetShare">
+               <item row="13" column="0">
+                <spacer name="verticalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="8" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkOpenProtectedStorage">
                  <property name="text">
-                  <string>Block network files and folders, unless specifically opened.</string>
+                  <string>Open System Protected Storage</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockNetParam">
+               <item row="12" column="2">
+                <widget class="QCheckBox" name="chkVmReadNotify">
                  <property name="text">
-                  <string>Prevent change to network and firewall parameters (user mode)</string>
+                  <string>Issue message 2111 when a process access is denied</string>
                  </property>
                 </widget>
                </item>
@@ -2790,8 +2804,8 @@ instead of &quot;*&quot;.</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>80</width>
+                    <height>16</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="dbgLayout">

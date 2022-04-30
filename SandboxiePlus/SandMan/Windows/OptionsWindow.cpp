@@ -286,6 +286,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	LoadConfig();
 
+	UpdateCurrentTab();
+
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 
 	ui.treeAccess->viewport()->installEventFilter(this);
@@ -658,7 +660,10 @@ void COptionsWindow::OnTab()
 
 void COptionsWindow::UpdateCurrentTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabStart)
+	if (ui.tabs->currentWidget() == ui.tabGeneral) {
+		ui.chkVmRead->setChecked(GetAccessEntry(eIPC, "", eReadOnly, "$:*") != NULL);
+	}
+	else if (ui.tabs->currentWidget() == ui.tabStart)
 	{
 		if (GetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*") != NULL)
 			ui.radStartSelected->setChecked(true);

@@ -21,6 +21,7 @@
 //---------------------------------------------------------------------------
 
 
+#define NOGDI
 #include "dll.h"
 #include "obj.h"
 #include "handle.h"

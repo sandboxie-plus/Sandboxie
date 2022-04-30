@@ -154,7 +154,6 @@ static const WCHAR *Ldr_InjectDll       = LDR_INJECT_SETTING_NAME;
 static const WCHAR *Ldr_HostInjectDll   = LDR_HOST_INJECT_SETTING_NAME;
 
 static ULONG_PTR Ldr_ImageBase = 0;
-static ULONG_PTR Ldr_ImportDescriptor = 0;
 
 BOOLEAN Ldr_BoxedImage = FALSE;
 
@@ -496,7 +495,7 @@ _FX WCHAR *Ldr_FixImagePath_2(void)
 
     //
     // Windows is caching loaded modules, when after being run a binary is moved
-    // and run again, NtQueryVirtualMemory wil return the original location
+    // and run again, NtQueryVirtualMemory will return the original location
     // and not the valid up to date current location.
     // Hence we use NtQueryInformationProcess instead it also returns the reparsed path
     //

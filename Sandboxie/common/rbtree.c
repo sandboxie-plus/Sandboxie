@@ -68,7 +68,7 @@ static void rbtree_insert_fixup(rbtree_t *rbtree, rbnode_t *node);
 static void rbtree_delete_fixup(rbtree_t* rbtree, rbnode_t* child, rbnode_t* child_parent);
 
 /*
- * Intializes a new red black tree.
+ * Initializes a new red black tree.
  *
  */
 void 

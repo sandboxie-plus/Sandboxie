@@ -153,7 +153,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
 	m_CompatChanged = false;
-	ui.chkNoCompat->setChecked(theConf->GetBool("Options/AutoRunSoftCompat", true));
+	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 
@@ -530,14 +530,31 @@ void CSettingsWindow::SaveSettings()
 
 			QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 			if (!Certificate.isEmpty()) {
-				QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
-				QFile CertFile(TempPath);
-				if (CertFile.open(QFile::WriteOnly)) {
-					CertFile.write(Certificate);
-					CertFile.close();
-				}
 
-				WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+				auto Args = GetArguments(Certificate, L'\n', L':');
+
+				bool bLooksOk = true;
+				if (Args.value("NAME").isEmpty()) // mandatory
+					bLooksOk = false;
+				//if (Args.value("UPDATEKEY").isEmpty())
+				//	bLooksOk = false;
+				if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
+					bLooksOk = false;
+
+				if (bLooksOk) {
+					QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+					QFile CertFile(TempPath);
+					if (CertFile.open(QFile::WriteOnly)) {
+						CertFile.write(Certificate);
+						CertFile.close();
+					}
+
+					WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+				}
+				else {
+					Certificate.clear();
+					QMessageBox::critical(this, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate not just a portion of it."));
+				}
 			}
 			else if(!g_Certificate.isEmpty()){
 				WindowsMoveFile(CertPath.replace("/", "\\"), "");

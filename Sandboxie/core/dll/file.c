@@ -811,7 +811,7 @@ check_sandbox_prefix:
 
 	//
 	// If its a sandboxed file, check if its in the current image or in a snapshot
-	// If its in a snapshot remove teh snapshot prefix
+	// If its in a snapshot remove the snapshot prefix
 	//
 
 	if (is_boxed_path) {
@@ -893,7 +893,7 @@ check_sandbox_prefix:
     // that's ok because it hasn't been initialized yet
     //
 
-    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && // if we disable File_InitUsers we dont need to do it here and below
+    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && // if we disable File_InitUsers we don't need to do it here and below
 			 length >= _UserLen &&
                 _wcsnicmp(*OutTruePath, _User, _UserLen) == 0) {
 
@@ -1567,7 +1567,7 @@ _FX NTSTATUS File_GetName_ExpandShortNames2(
 	if (Cur_Snapshot && Cur_Snapshot->ScramKey && wcslen(&Path[backslash_index + 1]) <= 12)
 	{
 		//
-		// If we are checking in a snapshot we ned to unscramble the short name
+		// If we are checking in a snapshot we need to unscramble the short name
 		//
 
 		wcscpy(ShortName, &Path[backslash_index + 1]);
@@ -2186,7 +2186,7 @@ _FX ULONG File_MatchPath2(const WCHAR *path, ULONG *FileFlags, BOOLEAN bCheckObj
         goto finish;
 
     //
-    // if path references a mount point, wee see it as the mount location
+    // if path references a mount point, we see it as the mount location
     // \Device\HarddiskVolume1\MOUNT but the driver sees it as the target
     // location \Device\HarddiskVolume2, so check for this case
     //
@@ -2511,7 +2511,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
         if (status == STATUS_OBJECT_PATH_SYNTAX_BAD) {
 
             //
-            // teh driver usually blocks this anyways so try only in app mode
+            // the driver usually blocks this anyways so try only in app mode
             //
 
             if (Dll_CompartmentMode){
@@ -2909,7 +2909,7 @@ ReparseLoop:
             if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', TruePath)){
 
                 //
-                // When using Rule specificity we need to create some dummy directrories 
+                // When using Rule specificity we need to create some dummy directories 
                 //
 
                 File_CreateBoxedPath(TruePath);
@@ -4983,7 +4983,7 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
         if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', TruePath)){
 
             //
-            // When using Rule specificity we need to create some dummy directrories 
+            // When using Rule specificity we need to create some dummy directories 
             //
 
             File_CreateBoxedPath(TruePath);
@@ -5138,7 +5138,7 @@ _FX NTSTATUS File_NtQueryInformationFile(
         // that the file can be opened by it without unscrambling
         // (see also File_GetName_FromFileId)
         //
-        // the reason for this is the possibily of files on both C:
+        // the reason for this is the possibly of files on both C:
         // and D: drives having the same FileId.  the program may
         // wish to open use a handle on drive C: to open using the
         // FileId by might end up using a sandbox handle like
@@ -6185,7 +6185,7 @@ _FX NTSTATUS File_SetDisposition(
 
         //
         // check if the call to File_NtDeleteFileImpl from the delete handler is expected to fail 
-        // and return the apropriate error
+        // and return the appropriate error
         //
 
         FILE_NETWORK_OPEN_INFORMATION info;
@@ -6713,7 +6713,7 @@ _FX NTSTATUS File_RenameFile(
     if (! info2->ReplaceIfExists) {
 
         //
-        // if caller did not explictly ask to replace, but the
+        // if caller did not explicitly ask to replace, but the
         // destination path name is marked deleted, then we also
         // physically delete the destination
         //

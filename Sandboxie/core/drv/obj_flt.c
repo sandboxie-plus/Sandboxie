@@ -225,7 +225,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     InitialDesiredAccess = *DesiredAccess;
 
     //
-    // Based on the object type apply the apropriate filter
+    // Based on the object type apply the appropriate filter
     //
 
     if (PreInfo->ObjectType == *PsProcessType)  {
@@ -240,7 +240,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             goto Exit;        
 
         PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
-        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, TRUE))) {
+        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, TRUE, TRUE))) {
 
 #ifdef DRV_BREAKOUT
             //
@@ -299,7 +299,7 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             goto Exit;
 
         PEPROCESS ProcessObject = PsGetThreadProcess((PETHREAD)PreInfo->Object);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, FALSE))) {
+        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, FALSE, TRUE))) {
             *DesiredAccess = 0; // deny any access
         }
         //ObjectTypeName = L"PsThreadType";

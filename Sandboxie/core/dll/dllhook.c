@@ -54,7 +54,7 @@ typedef struct _VECTOR_TABLE {
 
 BOOL bVTableEable = TRUE;
 #define NUM_VTABLES 0x10 
-#define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entrys
+#define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entries
 
 VECTOR_TABLE SbieDllVectorTable[NUM_VTABLES] = {
     {0,0,0},{0,0,0},{0,0,0},{0,0,0},
@@ -203,7 +203,7 @@ skip_e9_rewrite: ;
 
 	//
 	// DX: this simplification fails for delay loaded libraries, see comments about SetSecurityInfo,
-	// resulting in an endless loop, so just dont do that 
+	// resulting in an endless loop, so just don't do that 
 	//
 
 #if 0
@@ -331,7 +331,7 @@ skip_e9_rewrite: ;
         //
         // on windows 7 hooking NdrClientCall2 in 32bit (WoW64) mode fails
         // because the memory area starts at -6 and not -8
-        // this area could be a hot patch reagion which we dont use
+        // this area could be a hot patch reagion which we don't use
         // hence if that fails just start at the exact offset and try again
         //
 

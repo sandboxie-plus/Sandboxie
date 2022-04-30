@@ -65,6 +65,12 @@ DriverAssist::DriverAssist()
     InitializeCriticalSection(&m_critSecHostInjectedSvcs);
 }
 
+DriverAssist::~DriverAssist()
+{
+	DeleteCriticalSection(&m_LogMessage_CritSec);
+	DeleteCriticalSection(&m_critSecHostInjectedSvcs);
+}
+
 
 //---------------------------------------------------------------------------
 // Initialize
@@ -293,8 +299,8 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
 #ifdef NEW_INI_MODE
 
         //
-        // in case the ini was edited externaly, i.e. by notepad.exe 
-        // we update the ini cache each time the deriver reloads the ini file
+        // in case the ini was edited externally, i.e. by notepad.exe 
+        // we update the ini cache each time the driver reloads the ini file
         //
 
         SbieIniServer::NotifyConfigReloaded();
@@ -468,7 +474,7 @@ void DriverAssist::CancelProcess(void *_msg)
 
     if (msg->reason == 0)
         SbieApi_LogEx(msg->session_id, 2314, msg->process_name);
-	else if (msg->reason != -1) // in this case we have SBIE1308 and dont want any other messages
+	else if (msg->reason != -1) // in this case we have SBIE1308 and don't want any other messages
 		SbieApi_LogEx(msg->session_id, 2314, L"%S [%d / %d]", msg->process_name, msg->process_id, msg->reason);
 }
 

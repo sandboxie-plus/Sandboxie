@@ -241,6 +241,9 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *normalpaths[] = {
         L"HKEY_LOCAL_MACHINE\\*",
+        //L"HKEY_CURRENT_USER\\software\\Microsoft\\*",
+        //L"HKEY_CURRENT_USER\\software\\WOW6432Node\\Microsoft\\*",
+        //L"\\REGISTRY\\USER\\*_Classes\\*",
         NULL
     };
 #endif
@@ -927,7 +930,7 @@ _FX BOOLEAN Key_MountHive3(
                 InitializeObjectAttributes(&objattrs,
                     &uni, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
 
-                // ZwLoadKey can fail with device path if current process' devicemap is null
+                // ZwLoadKey can fail with device path if current process's devicemap is null
                 // One workaround is to call ObOpenObjectByName and it will trigger devicemap
                 // to be initialized. Note, Using C: is not necessary. The disk volume doesn't
                 // need to be there.L"\\??\\A:" works in the tests.

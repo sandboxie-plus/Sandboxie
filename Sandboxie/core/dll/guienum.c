@@ -975,7 +975,7 @@ _FX void Gui_MonitorW(const WCHAR *clsnm, ULONG monflag, HWND hwnd)
         Sbie_snwprintf(text, 130, L"#%d", PtrToUlong(clsnm) & 0xFFFF);
     if ((! hwnd) && (! monflag))
         monflag |= MONITOR_DENY;
-    SbieApi_MonitorPut(MONITOR_WINCLASS | monflag, text);
+    SbieApi_MonitorPut2(MONITOR_WINCLASS | monflag, text, FALSE);
 }
 
 

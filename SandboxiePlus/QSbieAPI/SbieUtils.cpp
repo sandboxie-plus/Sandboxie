@@ -260,7 +260,7 @@ QString CSbieUtils::GetContextMenuStartCmd()
 	return QString::fromWCharArray(path);
 }
 
-void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr, const QString& ExploreStr, const QString& IconPath)
+void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr, /*const QString& ExploreStr,*/ const QString& IconPath)
 {
 	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
 	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
@@ -290,7 +290,7 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr,
 		explorer_path.append(L"\\explorer.exe");
 	}
 
-	CreateShellEntry(L"Folder", L"sandbox", ExploreStr.toStdWString(), icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\"");
+	CreateShellEntry(L"Folder", L"sandbox", RunStr.toStdWString(), icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\""); // ExploreStr
 }
 
 void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& key, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)

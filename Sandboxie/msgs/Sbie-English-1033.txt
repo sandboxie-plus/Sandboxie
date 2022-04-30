@@ -354,6 +354,14 @@ SBIE2108 Faking successful completion for program '%2'
 # SBIE2110 Preparing WinSxS dependencies for '%2'
 # .
 
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 should not be updated while running under Sandboxie.
@@ -369,6 +377,10 @@ SBIE2193 Make sure to delete the sandbox after completing the update process.
 
 2194;pop;inf;01
 SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
 .
 
 2198;pop;inf;01
@@ -3486,7 +3498,7 @@ If you prefer to use a UI to control these options, please upgrade to Sandboxie-
 .
 
 6004;pop;err;01
-The configuration of box %2 requires a supporter certificate.
+The configuration %3 of box %2 requires a supporter certificate.
 .
 
 6005;txt;01

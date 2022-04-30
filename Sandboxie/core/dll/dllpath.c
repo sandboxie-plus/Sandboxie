@@ -324,7 +324,7 @@ _FX int Process_MatchPathList(
             level = cur_level;
             if (patsrc) *patsrc = Pattern_Source(pat);
             
-            // we need to test all entries to find the best match, so we dont break here
+            // we need to test all entries to find the best match, so we don't break here
         }
 
         //
@@ -599,7 +599,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
             //if (patsrc) *patsrc = curpat;
 
             mp_flags = 0;
-            // dont goto finish as open can overwrite this 
+            // don't goto finish as open can overwrite this 
         }
     }
 

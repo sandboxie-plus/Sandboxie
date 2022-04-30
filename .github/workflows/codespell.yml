@@ -11,8 +11,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   #push:
   #  branches: [ master ]
-  #pull_request:
-  #  branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Check spelling errors
         uses: codespell-project/actions-codespell@master

@@ -144,6 +144,9 @@
     <ClCompile Include="SbieProcess.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
+    <ClCompile Include="Models\MonitorModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -210,6 +213,9 @@
     </QtMoc>
     <QtMoc Include="SbieProcess.h">
       <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\MonitorModel.h">
+      <Filter>Models</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

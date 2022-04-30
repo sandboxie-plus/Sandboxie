@@ -57,7 +57,7 @@ _FX DWORD MsCorEE__CorExeMain()
 }
 
 
-// Load inject dlls in .Net process' entry (_CorExeMain).
+// Load inject dlls in .Net process's entry (_CorExeMain).
 _FX BOOLEAN MsCorEE_Init(HMODULE hmodule)
 {
 

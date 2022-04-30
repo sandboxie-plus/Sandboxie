@@ -33,6 +33,7 @@ class ComServer
 public:
 
     ComServer(PipeServer *pipeServer);
+	~ComServer();
 
     void DeleteAllSlaves();
 

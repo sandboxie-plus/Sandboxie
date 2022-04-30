@@ -83,7 +83,7 @@ _FX NTSTATUS Process_Api_Start(PROCESS *proc, ULONG64 *parms)
     if (user_box_parm < 0) {
 
         //
-        // if paramter is negative, it specifies the pid number for a
+        // if parameter is negative, it specifies the pid number for a
         // process, from which we copy the box information, including
         // SID and session
         //
@@ -947,7 +947,7 @@ _FX NTSTATUS Process_Enumerate(
 #ifdef USE_PROCESS_MAP
 
         //
-        // quick shortcut for global count retrival
+        // quick shortcut for global count retrieval
         //
 
         if (pids == NULL && (! boxname[0]) && all_sessions) { // no pids, all boxes, all sessions

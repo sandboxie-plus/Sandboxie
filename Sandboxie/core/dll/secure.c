@@ -997,8 +997,8 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
         TokenInformation, TokenInformationLength, ReturnLength);
 
     //
-    // To make the process think we need to chage here a few values
-    // we also ensure that tha token belongs to the current process
+    // To make the process think we need to change here a few values
+    // we also ensure that the token belongs to the current process
     //
 
     if (Secure_FakeAdmin && (SbieApi_QueryProcessInfoEx(0, 'ippt', (LONG_PTR)(hTokenReal ? hTokenReal : TokenHandle))))

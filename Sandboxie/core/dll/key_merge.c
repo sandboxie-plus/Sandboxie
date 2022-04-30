@@ -20,6 +20,7 @@
 // Key Merge
 //---------------------------------------------------------------------------
 
+#include "common/pattern.h"
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -98,6 +99,8 @@ static NTSTATUS Key_MergeCache(
 static NTSTATUS Key_MergeCacheSubkeys(KEY_MERGE *merge, HANDLE TrueHandle);
 
 static NTSTATUS Key_MergeCacheValues(KEY_MERGE *merge, HANDLE TrueHandle);
+
+static NTSTATUS Key_MergeCacheDummys(KEY_MERGE *merge, const WCHAR *TruePath);
 
 static NTSTATUS Key_MergeSubkeys(
     KEY_MERGE *merge, KEY_MERGE *TrueMerge, HANDLE CopyHandle);
@@ -449,6 +452,17 @@ _FX NTSTATUS Key_OpenForMerge(
         //
 
         status = STATUS_SUCCESS;
+
+        BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+
+        //
+        // if rule specificity is enabled we may not have access to this true path
+        // but still have access to some sub paths, in this case instead of listing the
+        // true directory we parse the rule list and construst a cached dummy directory
+        //
+
+        if (use_rule_specificity)
+            Key_MergeCache(NULL, &info.LastWriteTime, TruePath, out_TrueMerge);
     }
 
     if (! NT_SUCCESS(status)) {
@@ -596,7 +610,7 @@ _FX NTSTATUS Key_MergeCache(
     //
     // this function returns (possibly first creating) a cached KEY_MERGE
     // which represents only the true key for a particular key path.
-    // this makes a noticable performance difference, because most true
+    // this makes a noticeable performance difference, because most true
     // keys don't change during the lifetime of a sandboxed process,
     // but they still need to be repeatedly merged with copy keys
     //
@@ -672,9 +686,14 @@ _FX NTSTATUS Key_MergeCache(
     // build the subkeys and values in the true merge
     //
 
-    status = Key_MergeCacheSubkeys(merge, TrueHandle);
-    if (NT_SUCCESS(status))
-        status = Key_MergeCacheValues(merge, TrueHandle);
+    if (TrueHandle != NULL) {
+        status = Key_MergeCacheSubkeys(merge, TrueHandle);
+        if (NT_SUCCESS(status))
+            status = Key_MergeCacheValues(merge, TrueHandle);
+    }
+    else { // special case for rule specificity
+        status = Key_MergeCacheDummys(merge, TruePath);
+    }
     if (NT_SUCCESS(status))
         *out_TrueMerge = merge;
     else {
@@ -683,6 +702,94 @@ _FX NTSTATUS Key_MergeCache(
     }
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_MergeCacheDummys
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_MergeCacheDummys(KEY_MERGE *merge, const WCHAR *TruePath)
+{
+    ULONG len;
+    KEY_MERGE_SUBKEY *subkey, *subkey2;
+
+    //
+    // create a dummy key
+    //
+
+    LIST* lists[4];
+    SbieDll_GetReadablePaths(L'k', lists);
+
+    ULONG TruePathLen = wcslen(TruePath);
+    if (TruePathLen > 1 && TruePath[TruePathLen - 1] == L'\\')
+        TruePathLen--; // never take last \ into account
+
+    ULONG* PrevEntry = NULL;
+    for (int i=0; lists[i] != NULL; i++) {
+
+        PATTERN* pat = List_Head(lists[i]);
+        while (pat) {
+
+            const WCHAR* patstr = Pattern_Source(pat);
+
+            if (_wcsnicmp(TruePath, patstr, TruePathLen) == 0 && patstr[TruePathLen] == L'\\') {
+
+                const WCHAR* ptr = &patstr[TruePathLen + 1];
+                const WCHAR* end = wcschr(ptr, L'\\');
+                if(end == NULL) end = wcschr(ptr, L'*');
+                if(end == NULL) end = wcschr(ptr, L'\0');
+                ULONG name_len = (ULONG)(end - ptr) * sizeof(WCHAR);
+
+                //
+                // create the subkey
+                //
+
+                len = sizeof(KEY_MERGE_SUBKEY) + name_len + sizeof(WCHAR);
+                subkey = Dll_Alloc(len);
+
+                subkey->name_len = name_len;
+                memcpy(subkey->name, ptr, subkey->name_len);
+                subkey->name[subkey->name_len / sizeof(WCHAR)] = L'\0';
+
+                subkey->LastWriteTime.QuadPart = 0;
+
+                subkey->TitleOrClass = FALSE;
+
+                //
+                // find where to insert it.  if the new key is already larger than
+                // our last key in the sorted list, instead directly at the end
+                //
+
+                subkey2 = List_Tail(&merge->subkeys);
+                if (subkey2 && _wcsicmp(subkey2->name, subkey->name) < 0)
+                    subkey2 = NULL;
+                else {
+                    subkey2 = List_Head(&merge->subkeys);
+                    while (subkey2) {
+                        int cmp = _wcsicmp(subkey2->name, subkey->name);
+                        if (cmp == 0) goto next;
+                        if (cmp > 0)
+                            break;
+                        subkey2 = List_Next(subkey2);
+                    }
+                }
+
+                if (subkey2)
+                    List_Insert_Before(&merge->subkeys, subkey2, subkey);
+                else
+                    List_Insert_After(&merge->subkeys, NULL, subkey);
+            }
+
+        next:
+            pat = List_Next(pat);
+        }
+    }
+
+    SbieDll_ReleaseFilePathLock();
+
+    return STATUS_SUCCESS;
 }
 
 
@@ -782,6 +889,7 @@ _FX NTSTATUS Key_MergeCacheSubkeys(KEY_MERGE *merge, HANDLE TrueHandle)
         ++index;
     }
 
+    Dll_Free(info);
     return STATUS_SUCCESS;
 }
 
@@ -879,6 +987,7 @@ _FX NTSTATUS Key_MergeCacheValues(KEY_MERGE *merge, HANDLE TrueHandle)
         ++index;
     }
 
+    Dll_Free(info);
     return STATUS_SUCCESS;
 }
 
@@ -948,9 +1057,9 @@ TrueHandleFinish:
     ;
 
     //
-    // next, get the subkeys from CopyHandle.  subkeys that are
-    // marked deleted are removed from the merge.  other subkeys
-    // are insterted in sorted alphabetical order
+    // next, get the subkeys from CopyHandle. Subkeys that are
+    // marked as deleted are removed from the merge. Other subkeys
+    // are inserted in sorted alphabetical order
     //
 
     index = 0;
@@ -1111,7 +1220,7 @@ TrueHandleFinish:
     //
     // next, get the values from CopyHandle.  values that are
     // marked deleted are removed from the merge.  other values
-    // are insterted in sorted alphabetical order
+    // are inserted in sorted alphabetical order
     //
 
     index = 0;

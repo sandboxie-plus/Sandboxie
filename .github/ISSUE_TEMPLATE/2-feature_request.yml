@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest a new idea for Sandboxie
-
+labels: ["Feature request"]
 body:
   - type: textarea
     id: describe-feature

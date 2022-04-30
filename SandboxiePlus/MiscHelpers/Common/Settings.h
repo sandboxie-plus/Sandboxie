@@ -138,6 +138,8 @@ public:
 	const QString		GetConfigDir()												{QMutexLocker Locker(&m_Mutex); return m_ConfigDir;}
 	const bool			IsPortable()												{QMutexLocker Locker(&m_Mutex); return m_bPortable;}
 
+	const bool			IsWritable()												{QMutexLocker Locker(&m_Mutex); return m_pConf->isWritable();}
+
 protected:
 	QMutex				m_Mutex;
 	QMap<QString, SSetting> m_DefaultValues;

@@ -284,7 +284,7 @@ _FX BOX *Process_GetForcedStartBox(
     }
 
     //
-    // check if proces should be injected
+    // check if process should be injected
     //
 
     if ((! box) && (alert != 1) && pHostInject != NULL) {

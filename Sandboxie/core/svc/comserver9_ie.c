@@ -686,7 +686,7 @@ _FX HRESULT IEServer_IHTMLWindow2_NotImpl(IHTMLWindow2 *This)
 _FX void IEServer_RestartProgram(const WCHAR *arg)
 {
 #ifdef COMSERVER_DEBUG
-    OutputDebugString(L"IEServer Restart Commmand Line:\n");
+    OutputDebugString(L"IEServer Restart Command Line:\n");
     OutputDebugString(arg);
 #endif
 

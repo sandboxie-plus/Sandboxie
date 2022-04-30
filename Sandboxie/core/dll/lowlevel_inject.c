@@ -495,7 +495,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	}
 
 	//
-	// prepare the lowdata paramters area to copy into target process
+	// prepare the lowdata parameters area to copy into target process
 	//
 
 	SBIELOW_DATA lowdata;
@@ -771,7 +771,7 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 
 	//
 	// skip past several bytes in the code copied from the top of the
-	// LdrInitializeThunk fuction, where we will inject a jmp sequence.
+	// LdrInitializeThunk function, where we will inject a jmp sequence.
 	//
 	// a simple E9 relative JMP five byte instruction in most cases,
 	// a slightly longer seven byte version in case there is a long

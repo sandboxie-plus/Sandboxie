@@ -27,7 +27,7 @@
 
 
 //---------------------------------------------------------------------------
-// Fuctions
+// Functions
 //---------------------------------------------------------------------------
 
 
@@ -1136,7 +1136,7 @@ _FX BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command)
 		wmemcpy(ptr2, ptr, length);
 		ptr2 += len;
 	}
-	wcscpy(ptr2, ptr1); // copy whats left
+	wcscpy(ptr2, ptr1); // copy what's left
 
     Dll_Free(cmdline);
 

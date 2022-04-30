@@ -421,7 +421,7 @@ void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, cons
 	//NetworkAccess=explorer.exe,Allow;Port=137,138,139,445;Address=192.168.0.1-192.168.100.255;Protocol=TCP;
 
 	QString FirstStr;
-	TArguments Tags = GetArguments(Value, L';', L'=', &FirstStr);
+	TArguments Tags = GetArguments(Value, L';', L'=', &FirstStr, true);
 	StrPair ProgAction = Split2(FirstStr, ",", true);
 	QString Program = ProgAction.second.isEmpty() ? "" : ProgAction.first;
 	QString Action = ProgAction.second.isEmpty() ? ProgAction.first : ProgAction.second;

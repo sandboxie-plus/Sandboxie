@@ -643,7 +643,7 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 #endif
 
     //
-    // Retrive some unexported kernel functions that may be usefull
+    // Retrieve some unexported kernel functions that may be useful
     //
 
     ZwCreateToken = (P_NtCreateToken) Driver_FindMissingService("ZwCreateToken", 13);

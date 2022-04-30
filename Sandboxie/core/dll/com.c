@@ -561,7 +561,7 @@ _FX BOOLEAN Com_IsClosedClsid(REFCLSID rclsid)
 
     //
     // initialize list of user-configured CLSID blocks
-    // Note: the service threads everythign not explicitly open as closed anyways
+    // Note: the service threads everything not explicitly open as closed anyways
     //
 
     static const WCHAR* setting = L"ClosedClsid";
@@ -1441,7 +1441,7 @@ _FX BOOLEAN Com_Init_Ole32(HMODULE module)
         //
         // on Windows 8, core COM functions are in combase.dll which is
         // initialized separately.  on earlier versions of Windows, the
-        // core COM fuctions are part of ole32.dll
+        // core COM functions are part of ole32.dll
         //
 
         if (! Com_Init_ComBase(module))
@@ -3403,7 +3403,7 @@ _FX void Com_Trace2(
     //ptr[1] = L'\0';
     //OutputDebugString(text);
     *ptr = L'\0';
-    SbieApi_MonitorPut(MONITOR_COMCLASS | monflag, text);
+    SbieApi_MonitorPut2(MONITOR_COMCLASS | monflag, text, FALSE);
 
     Com_Free(text);
 }
@@ -3420,7 +3420,7 @@ _FX void Com_Monitor(REFCLSID rclsid, ULONG monflag)
 
         WCHAR text[160];
         Com_Trace_Guid(text, rclsid, L"CLSID");
-        SbieApi_MonitorPut(MONITOR_COMCLASS | monflag, text);
+        SbieApi_MonitorPut2(MONITOR_COMCLASS | monflag, text, FALSE);
     }
 }
 
@@ -3506,7 +3506,7 @@ _FX void Com_LoadRTList(const WCHAR* setting, WCHAR** pNames)
 _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
 {
     //
-    // Even in compartment mode thes things don't work only incombination with open COM its functional
+    // Even in compartment mode, these things are functional only in combination with open COM
     //
 
     if (!(Ipc_OpenCOM && Dll_CompartmentMode) && !SbieApi_QueryConfBool(NULL, L"DisableRTBlacklist", FALSE)) {
@@ -3524,7 +3524,7 @@ _FX BOOLEAN Com_IsClosedRT(const wchar_t* strClassId)
         }
 
         //
-        // ToastNotificationManager requirers open com and original token, with boxed com this causes in a dead lock
+        // ToastNotificationManager requires open com and original token, with boxed com this causes a deadlock
         //
 
         if (wcscmp(strClassId, L"Windows.UI.Notifications.ToastNotificationManager") == 0)
@@ -3557,11 +3557,11 @@ _FX HRESULT Com_RoGetActivationFactory(HSTRING activatableClassId, REFIID  iid, 
     const wchar_t* strClassId = __sys_WindowsGetStringRawBuffer(activatableClassId, NULL);
 
     if (Com_IsClosedRT(strClassId)) {
-        SbieApi_MonitorPut(MONITOR_RTCLASS | MONITOR_DENY, strClassId);
+        SbieApi_MonitorPut2(MONITOR_RTCLASS | MONITOR_DENY, strClassId, FALSE);
         return E_ACCESSDENIED;
     }
 
-    SbieApi_MonitorPut(MONITOR_RTCLASS, strClassId);
+    SbieApi_MonitorPut2(MONITOR_RTCLASS, strClassId, FALSE);
     return __sys_RoGetActivationFactory(activatableClassId, iid, factory);
 }
 

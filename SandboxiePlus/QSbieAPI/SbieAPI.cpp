@@ -1350,8 +1350,6 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 		return Status;
 	}
 
-	bool ProcessesChanged = false;
-
 	QMap<quint32, CBoxedProcessPtr>	OldProcessList;
 	foreach(const CSandBoxPtr& pBox, m_SandBoxes)
 		OldProcessList.insert(pBox->m_ProcessList);
@@ -1373,10 +1371,9 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 			pProcess->m_pBox = pBox.data();
 			pBox->m_ProcessList.insert(ProcessId, pProcess);
 			m_BoxedProxesses.insert(ProcessId, pProcess);
+			pBox->m_ActiveProcessDirty = true;
 
 			pProcess->InitProcessInfo();
-
-			ProcessesChanged = true;
 		}
 
 		pProcess->InitProcessInfoEx();
@@ -1386,7 +1383,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 	{
 		if (!pProcess->IsTerminated()) {
 			pProcess->SetTerminated();
-			ProcessesChanged = true;
+			pProcess->m_pBox->m_ActiveProcessDirty = true;
 		}
 		else if (!bKeep && pProcess->IsTerminated(1500)) { // keep for at least 1.5 seconds
 			pProcess->m_pBox->m_ProcessList.remove(pProcess->m_ProcessId);
@@ -1394,9 +1391,11 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 		}
 	}
 
-	if (ProcessesChanged) {
-		foreach(const CSandBoxPtr & pBox, m_SandBoxes)
+	foreach(const CSandBoxPtr & pBox, m_SandBoxes)
+	{
+		if (pBox->m_ActiveProcessDirty) 
 		{
+			pBox->m_ActiveProcessDirty = false;
 			int ActiveProcessCount = 0;
 			foreach(const CBoxedProcessPtr & pProcess, pBox->GetProcessList()) {
 				if (!pProcess->IsTerminated())
@@ -2285,17 +2284,18 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
 		m_BoxedProxesses.insert(ProcessId, pProcess);
+		pBox->m_ActiveProcessDirty = true;
 
 		UpdateProcessInfo(pProcess);
 		pProcess->InitProcessInfo();
 	}
 
-	if (pProcess->m_ParendPID == 0){
-		pProcess->m_ParendPID = ParentId;
-		pProcess->m_ImagePath = Path;
-	}
 	if(pProcess->m_ImageName.isEmpty())
 		pProcess->m_ImageName = Path.mid(Path.lastIndexOf("\\") + 1);
+	if (pProcess->m_ParendPID == 0)
+		pProcess->m_ParendPID = ParentId;
+	if (pProcess->m_ImagePath.isEmpty())
+		pProcess->m_ImagePath = Path;
 
 	return pProcess;
 }
@@ -2381,11 +2381,10 @@ bool CSbieAPI::GetMonitor()
 	ULONG pid = 0;
 	ULONG tid = 0;
 	wchar_t* Buffer[4 * 1024];
-	ULONG Length = ARRAYSIZE(Buffer);
 
 	//ULONG RecordNum = m->lastRecordNum;
 
-	__declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)Length, (ULONG64)Buffer };
+	__declspec(align(8)) UNICODE_STRING64 log_buffer = { 0, (USHORT)ARRAYSIZE(Buffer), (ULONG64)Buffer };
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
     API_MONITOR_GET_EX_ARGS* args	= (API_MONITOR_GET_EX_ARGS*)parms;
 
@@ -2410,18 +2409,14 @@ bool CSbieAPI::GetMonitor()
 	if (m->clearingBuffers)
 		return true; 
 
-	QString Data = QString::fromWCharArray((wchar_t*)log_buffer.Buffer, log_buffer.Length / sizeof(wchar_t));
-	if (Data.length() == Length - 1) // if we got exactly the max length assume data were truncated and indicate accordingly...
-		Data += "..."; 
-
-	// cleanup debug output strings and drop empty once.
-	if (type == (MONITOR_OTHER | MONITOR_TRACE)) {
-		Data = Data.trimmed();
-		if (Data.isEmpty())
-			return true;
+	QStringList LogData;
+	for (size_t pos = 0; pos < log_buffer.Length; ) {
+		size_t len = wcslen((WCHAR*)(log_buffer.Buffer + pos));
+		LogData.append(QString::fromWCharArray((WCHAR*)(log_buffer.Buffer + pos), len));
+		pos += (len + 1) * sizeof(WCHAR);
 	}
 
-	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, Data));
+	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, LogData));
 	AddTraceEntry(LogEntry, true);
 
 	return true;

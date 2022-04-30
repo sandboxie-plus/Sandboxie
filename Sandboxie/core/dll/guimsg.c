@@ -343,7 +343,7 @@ _FX LRESULT Gui_SendMessageTimeoutW(
             // the window of the owner of the clipboard data, in order
             // to test if the window is not hung, and display or hide
             // the Paste menu command accordingly.  make sure the
-            // command is displayed even for windows ouside the sandbox
+            // command is displayed even for windows outside the sandbox
             //
 
             if (hWnd == __sys_GetClipboardOwner()) {
@@ -796,7 +796,7 @@ fail:
     }
 
     Sbie_snwprintf(name, 48, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
-    SbieApi_MonitorPut(MONITOR_WINCLASS | MONITOR_DENY, name);
+    SbieApi_MonitorPut2(MONITOR_WINCLASS | MONITOR_DENY, name, FALSE);
 
     return FALSE;
 }

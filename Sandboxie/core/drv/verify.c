@@ -464,15 +464,20 @@ _FX VOID KphGetBuildDate(LARGE_INTEGER* date)
     RtlTimeFieldsToTime(&timeFiled, date);
 }
 
-_FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
+_FX LONGLONG KphGetDate(CSHORT days, CSHORT months, CSHORT years)
 {
     LARGE_INTEGER date;
     TIME_FIELDS timeFiled = { 0 };
-    timeFiled.Day = 1 + days;
-    timeFiled.Month = 1 + months;
-    timeFiled.Year = 1601 + years;
+    timeFiled.Day = days;
+    timeFiled.Month = months;
+    timeFiled.Year = years;
     RtlTimeFieldsToTime(&timeFiled, &date);
     return date.QuadPart;
+}
+
+_FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
+{
+    return KphGetDate(1 + days, 1 + months, 1601 + years);
 }
 
 #define SOFTWARE_NAME L"Sandboxie-Plus"
@@ -713,7 +718,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             level = NULL;
         }
 
-        // Checks if the certi if within its validity periode, failing that has no effect except ui notification
+        // Checks if the certificate is within its validity period, otherwise it has no effect except for UI notification
 #define TEST_CERT_DATE(days, months, years) \
             if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < LocalTime.QuadPart){ \
                 Verify_CertInfo.expired = 1; \
@@ -750,8 +755,11 @@ _FX NTSTATUS KphValidateCertificate(void)
             if (level && _wcsicmp(level, L"HUGE") == 0) {
                 // 
             } 
-            else if (level && _wcsicmp(level, L"LARGE") == 0) {
+            else if (level && _wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1,04,2022)) { // valid for all builds released with 2 years
                 TEST_CERT_DATE(0, 0, 2); // no real expiration just ui reminder
+            }
+            else if (level && _wcsicmp(level, L"LARGE") == 0) { // valid for all builds released with 2 years
+                TEST_VALIDITY(0, 0, 2);
             }
             else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // valid for all builds released with 1 year 
                 TEST_VALIDITY(0, 0, 1);
@@ -760,7 +768,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             else if (level && _wcsicmp(level, L"TEST") == 0) { // test certificate 5 days only
                 TEST_EXPIRATION(5, 0, 0);
             }
-            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // patreon entry level, first 3 monts, later longer
+            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // patreon entry level, first 3 months, later longer
                 TEST_EXPIRATION(0, 3, 0);
             }
             else /*if (!level || _wcsicmp(level, L"SMALL") == 0)*/ { // valid for 1 year

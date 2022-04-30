@@ -36,6 +36,8 @@ public:
                 P_ProxyHandle_CloseCallback close_callback,
                 void *context_for_callback);
 
+	~ProxyHandle();
+
     ULONG Create(HANDLE process_id, void *model_data);
 
     void *Find(HANDLE process_id, ULONG unique_id);

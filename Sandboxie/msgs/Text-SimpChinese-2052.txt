@@ -354,6 +354,14 @@ SBIE2108 程序 '%2' 伪成功完成
 # SBIE2110 正在为 '%2' 准备 WinSxS 依赖项
 # .
 
+2111;pop;inf;01
+SBIE2111 进程无法访问: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 对象无法访问: %3, call %2
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 不建议更新在沙盘中运行的 %2
@@ -369,6 +377,10 @@ SBIE2193 请在更新完成后清空此沙盘内容。
 
 2194;pop;inf;01
 SBIE2194 启动 MSI 安装包需要在 ini 中设置 %2 选项，但这会削弱隔离效果。
+.
+
+2195;pop;inf;01
+SBIE2195 要在沙盒中运行 Explorer.exe，则不得打开 COM 基础结构的访问权限。
 .
 
 2198;pop;inf;01
@@ -3447,7 +3459,7 @@ NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.
 .
 
 6004;pop;err;01
-所选框%2的配置需要支持者证书。
+所选框%2的配置%3需要支持者证书。
 .
 
 6005;txt;01

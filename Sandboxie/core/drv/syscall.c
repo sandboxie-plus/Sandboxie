@@ -56,6 +56,9 @@ static NTSTATUS Syscall_OpenHandle(
 static NTSTATUS Syscall_GetNextProcess(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
+static NTSTATUS Syscall_GetNextThread(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
+
 static NTSTATUS Syscall_DeviceIoControlFile(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
@@ -156,6 +159,9 @@ _FX BOOLEAN Syscall_Init(void)
 
     if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
         if (!Syscall_Set1("GetNextProcess", Syscall_GetNextProcess))
+            return FALSE;
+
+        if (!Syscall_Set1("GetNextThread", Syscall_GetNextThread))
             return FALSE;
     }
 
@@ -741,12 +747,13 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             if (hConnection)
             {
                 WCHAR trace_str[128];
-                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"[syscall] %.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
+                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
                     max(strlen(entry->name), 64), entry->name,
                     status, hConnection);
-                const WCHAR* strings[3] = { trace_str, puStr ? puStr->Buffer : NULL, NULL };
-                ULONG lengths[3] = { wcslen(trace_str), puStr ? puStr->Length / 2 : 0, 0 };
-                Session_MonitorPutEx(MONITOR_IPC | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+                const WCHAR* strings[4] = { trace_str, trace_str + (entry->name_len + 2), puStr ? puStr->Buffer : NULL, NULL };
+                ULONG lengths[4] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 4), puStr ? puStr->Length / 2 : 0, 0 };
+                Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+
                 traced = TRUE;
             }
         }
@@ -754,11 +761,12 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
         {
             WCHAR trace_str[128];
-            RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"[syscall] %.*S, status = 0x%X", //59 chars + entry->name
+            RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X", //59 chars + entry->name
                 max(strlen(entry->name), 64), entry->name,
                 status);
-            const WCHAR* strings[2] = { trace_str, NULL };
-            Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            const WCHAR* strings[3] = { trace_str, trace_str + (entry->name_len + 2), NULL };
+            ULONG lengths[3] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 2), 0 };
+            Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
         }
 
 #ifdef _WIN64

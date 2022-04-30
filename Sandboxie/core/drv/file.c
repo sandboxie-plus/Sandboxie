@@ -104,6 +104,9 @@ static NTSTATUS File_Generic_MyParseProc(
 static NTSTATUS File_CreatePagingFile(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
+static NTSTATUS File_CreateSymbolicLinkObject(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
+
 static void File_ReplaceTokenIfFontRequest(
     ACCESS_STATE *AccessState,
     PDEVICE_OBJECT DeviceObject, UNICODE_STRING *FileName, BOOLEAN* pbSetDirty);
@@ -219,6 +222,9 @@ _FX BOOLEAN File_Init(void)
     //
 
     if (! Syscall_Set1("CreatePagingFile", File_CreatePagingFile))
+        return FALSE;
+
+    if (! Syscall_Set1("CreateSymbolicLinkObject", File_CreateSymbolicLinkObject))
         return FALSE;
 
     //
@@ -652,7 +658,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         NULL
     };
     static const WCHAR* openPipesCM[] = {
-        // open thos in compartment mode as do not use the de-administrator-ize proxy in File_NtCreateFilePipe
+        // open those in compartment mode as do not use the de-administrator-ize proxy in File_NtCreateFilePipe
         //
         L"\\device\\*pipe\\lsarpc",
         L"\\device\\*pipe\\srvsvc",
@@ -827,7 +833,7 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
     BOOLEAN ok;
 
     //
-    // is this process excempted from the blocade
+    // is this process exempted from the blockade
     //
 
 	if (proc->AllowInternetAccess)
@@ -1061,8 +1067,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
     {
         if ((proc->file_trace & TRACE_IGNORE) || Session_MonitorCount) {
 
-            ULONG ignore_str_len;
-            WCHAR *ignore_str;
+            WCHAR ignore_str[24];
             WCHAR *device_name_ptr;
 
             status = Obj_GetParseName(
@@ -1072,21 +1077,17 @@ _FX NTSTATUS File_Generic_MyParseProc(
             else
                 device_name_ptr = Obj_Unnamed.Name.Buffer;
 
-            ignore_str_len = (wcslen(device_name_ptr) + 24) * sizeof(WCHAR);
-            ignore_str = Mem_Alloc(proc->pool, ignore_str_len);
             if (ignore_str) {
 
-                RtlStringCbPrintfW(ignore_str, ignore_str_len,
-                    L"(FI) %08X %s", device_type, device_name_ptr);
+                RtlStringCbPrintfW(ignore_str, sizeof(ignore_str),
+                    L"(FI) %08X %s", device_type);
 
                 if (proc->file_trace & TRACE_IGNORE)
-                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, Driver_Empty);
+                    Log_Debug_Msg(MONITOR_IGNORE, ignore_str, device_name_ptr);
 
                 else if (Session_MonitorCount && !proc->disable_monitor &&
                         device_type != FILE_DEVICE_PHYSICAL_NETCARD)
-                    Session_MonitorPut(MONITOR_IGNORE, ignore_str + 4, proc->pid);
-
-                Mem_Free(ignore_str, ignore_str_len);
+                    Session_MonitorPut(MONITOR_IGNORE, device_name_ptr, proc->pid);
             }
 
             if (Name && Name != &Obj_Unnamed)
@@ -1355,9 +1356,10 @@ _FX NTSTATUS File_Generic_MyParseProc(
         //
 
 #ifdef USE_MATCH_PATH_EX
+        // is_write = ((mp_flags & TRUE_PATH_MASK) == TRUE_PATH_CLOSED_FLAG) && ((mp_flags & COPY_PATH_MASK) == COPY_PATH_OPEN_FLAG); 
         // is_open = ((mp_flags & TRUE_PATH_MASK) == TRUE_PATH_OPEN_FLAG);
         // is_closed = ((mp_flags & TRUE_PATH_MASK) == 0)
-        if ((!write_access || !((mp_flags & TRUE_PATH_WRITE_FLAG) != 0)) && !((mp_flags & TRUE_PATH_MASK) == 0)) {
+        if (proc->use_rule_specificity || ((!write_access || !((mp_flags & TRUE_PATH_WRITE_FLAG) != 0)) && !((mp_flags & TRUE_PATH_MASK) == 0))) {
 #else
         if ((! is_open) && (! is_closed)) {
 #endif
@@ -1414,10 +1416,11 @@ _FX NTSTATUS File_Generic_MyParseProc(
 
 #ifdef USE_MATCH_PATH_EX
                         //
-                        // if this is not a atribute or sync request update the permissions for the network path
+                        // if this is not a attribute or sync request update the permissions for the network path
                         //
 
-                        if ((MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
+                        if (proc->use_rule_specificity || 
+                            (MyContext->OriginalDesiredAccess != FILE_READ_ATTRIBUTES) &&
                             (MyContext->OriginalDesiredAccess != SYNCHRONIZE))
                         {
                             mp_flags = Process_MatchPathEx(proc, path2, len1, L'n',
@@ -1704,6 +1707,18 @@ skip_due_to_home_folder:
 
 
 _FX NTSTATUS File_CreatePagingFile(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
+{
+    return STATUS_PRIVILEGE_NOT_HELD;
+}
+
+
+//---------------------------------------------------------------------------
+// File_CreateSymbolicLinkObject
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_CreateSymbolicLinkObject(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
     return STATUS_PRIVILEGE_NOT_HELD;
@@ -2547,7 +2562,7 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     wmemcpy(device_name + 8,    user_devname, 32);
     device_name[8+32] = L'\0';
 
-    /* this check is now done in unser mode
+    /* this check is now done in user mode
     //
     // convert the device name to lowercase, stop at the first backslash
     //
@@ -2645,21 +2660,35 @@ get_program:
 
     if (user_devname) {
 
+#ifdef USE_MATCH_PATH_EX
+        ULONG mp_flags;
+#else
         BOOLEAN is_open, is_closed;
+#endif
         KIRQL irql2;
 
         KeRaiseIrql(APC_LEVEL, &irql2);
         ExAcquireResourceSharedLite(proc->file_lock, TRUE);
 
+#ifdef USE_MATCH_PATH_EX
+        mp_flags = Process_MatchPathEx(proc, device_name, wcslen(device_name), L'f',
+            &proc->normal_file_paths, &proc->open_file_paths, &proc->closed_file_paths,
+            &proc->read_file_paths, &proc->write_file_paths, NULL);
+#else
         Process_MatchPath(
             proc->pool, device_name, wcslen(device_name),
             NULL, &proc->closed_file_paths,
             &is_open, &is_closed);
+#endif
 
         ExReleaseResourceLite(proc->file_lock);
         KeLowerIrql(irql2);
 
+#ifdef USE_MATCH_PATH_EX
+        if ((mp_flags & TRUE_PATH_MASK) == 0) {
+#else
         if (is_closed) {
+#endif
 
             status = STATUS_ACCESS_DENIED;
 

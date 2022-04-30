@@ -260,7 +260,7 @@ _FX NTSTATUS Ipc_CheckPortRequest(
     {
         WCHAR msg_str[256];
         RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"CheckPortRequest, Status <%08X> on Port <%*.*s>\n", status, Name->Name.Length / sizeof(WCHAR), Name->Name.Length / sizeof(WCHAR), Name->Name.Buffer);
-        Log_Debug_Msg(MONITOR_IPC, msg_str, NULL);
+        Log_Debug_Msg(MONITOR_IPC, msg_str, Driver_Empty);
     }*/
 
     //

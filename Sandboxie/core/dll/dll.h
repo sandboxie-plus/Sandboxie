@@ -48,9 +48,9 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #define TRUE_NAME_BUFFER        0
 #define COPY_NAME_BUFFER        1
 #define TMPL_NAME_BUFFER        2
-#define MOVE_NAME_BUFFER        3
-#define NAME_BUFFER_COUNT       4
-#define NAME_BUFFER_DEPTH       24
+#define MISC_NAME_BUFFER        3 // 4, 5, 6, 7
+#define NAME_BUFFER_COUNT       8
+#define NAME_BUFFER_DEPTH       16 // 12
 
 
 #ifdef _WIN64
@@ -153,6 +153,7 @@ typedef struct _MY_LDR_WORKER_QUEUE_STUFF {
 }MY_LDR_WORKER_QUEUE_STUFF;
 #endif
 */
+
 typedef struct _THREAD_DATA {
 
     //
@@ -161,7 +162,8 @@ typedef struct _THREAD_DATA {
 
     WCHAR *name_buffer[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
     ULONG name_buffer_len[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
-    int depth;
+    int name_buffer_count[NAME_BUFFER_DEPTH];
+    int name_buffer_depth;
 
     //
     // locks

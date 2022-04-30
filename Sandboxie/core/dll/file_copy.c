@@ -278,7 +278,6 @@ _FX NTSTATUS File_MigrateFile(
 
     if (status == STATUS_SHARING_VIOLATION) {
 
-        if (!Dll_CompartmentMode) // NoDriverAssist
         status = SbieApi_OpenFile(&TrueHandle, TruePath);
 
         if (!NT_SUCCESS(status)) {

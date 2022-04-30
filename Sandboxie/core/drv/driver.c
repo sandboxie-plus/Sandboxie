@@ -615,6 +615,11 @@ void* Driver_FindMissingService(const char* ProcName, int prmcnt)
 }
 
 
+//---------------------------------------------------------------------------
+// Driver_FindMissingServices
+//---------------------------------------------------------------------------
+
+
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
 #ifdef OLD_DDK

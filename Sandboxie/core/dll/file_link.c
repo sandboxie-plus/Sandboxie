@@ -798,13 +798,12 @@ _FX WCHAR *File_TranslateTempLinks_2(WCHAR *input_str, ULONG input_len)
 
 _FX NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR* NameBuf)
 {
-    if (!Dll_CompartmentMode || !__sys_GetFinalPathNameByHandleW) // NoDriverAssist
-        return SbieApi_GetFileName(FileHandle, NameLen, NameBuf);
+    //extern P_GetFinalPathNameByHandle __sys_GetFinalPathNameByHandleW;
+    //if (__sys_GetFinalPathNameByHandleW(FileHandle, NameBuf, NameLen, VOLUME_NAME_NT) > 0)
+    //    return STATUS_SUCCESS;
+    //return STATUS_UNSUCCESSFUL;
 
-    // available in vista and later
-    if (__sys_GetFinalPathNameByHandleW(FileHandle, NameBuf, NameLen, VOLUME_NAME_NT) > 0)
-        return STATUS_SUCCESS;
-    return STATUS_UNSUCCESSFUL;
+    return SbieApi_GetFileName(FileHandle, NameLen, NameBuf);
 }
 
 

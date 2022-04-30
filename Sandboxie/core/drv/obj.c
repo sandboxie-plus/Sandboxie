@@ -644,7 +644,6 @@ _FX POBJECT_TYPE Obj_GetTypeObjectType(void)
                             (POBJECT_TYPE *)(ptr + i + 7 + offset);
                     }
                 }
-                DbgPrint("pObTypeIndexTable = %p\n", pObTypeIndexTable);
             }
 #else ! _WIN64
             UCHAR k = 0;
@@ -661,9 +660,8 @@ _FX POBJECT_TYPE Obj_GetTypeObjectType(void)
                     pObTypeIndexTable = (POBJECT_TYPE *)*ptr2;
                 }
             }
-
 #endif _WIN64
-
+            //DbgPrint("pObTypeIndexTable = %p\n", pObTypeIndexTable);
         }
 
         if (! pObTypeIndexTable) {

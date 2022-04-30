@@ -236,16 +236,6 @@ _FX BOOLEAN File_Init(void)
         }
     }
 
-
-    if (File_Delete_v2)
-        File_InitDelete_v2();
-
-    // Note: loading the file tha way its done now only works once file hooks are installed so this must eb here
-    extern BOOLEAN Key_Delete_v2;
-    extern BOOLEAN Key_InitDelete_v2();
-    if (Key_Delete_v2)
-        Key_InitDelete_v2();
-
     //
     // support for Google Chrome flash plugin process
     //
@@ -515,7 +505,6 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
         status = NtOpenSymbolicLinkObject(
             &handle, SYMBOLIC_LINK_QUERY, &objattrs);
 
-        if (!Dll_CompartmentMode) // NoDriverAssist
         if (status == STATUS_ACCESS_DENIED) {
 
             //
@@ -1746,7 +1735,6 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
 
         status = NtOpenDirectoryObject(&handle, DIRECTORY_QUERY, &objattrs);
 
-        if (!Dll_CompartmentMode) // NoDriverAssist
         if (status == STATUS_ACCESS_DENIED) {
 
             //

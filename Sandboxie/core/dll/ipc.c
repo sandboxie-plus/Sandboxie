@@ -3496,14 +3496,10 @@ _FX BOOLEAN Ipc_IsKnownDllInSandbox(
     if (NT_SUCCESS(status)) {
 
         BOOLEAN IsBoxedPath;
-        WCHAR *path8k = Dll_AllocTemp(8192 * sizeof(WCHAR));
-
-        status = SbieDll_GetHandlePath(handle, path8k, &IsBoxedPath);
+        status = SbieDll_GetHandlePath(handle, NULL, &IsBoxedPath);
 
         if (NT_SUCCESS(status) && IsBoxedPath)
             is_known_dll_in_sandbox = TRUE;
-
-        Dll_Free(path8k);
 
         NtClose(handle);
     }

@@ -15,6 +15,8 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "../../common/my_version.h"
+
 //---------------------------------------------------------------------------
 // Key (Delete)
 //---------------------------------------------------------------------------
@@ -53,6 +55,8 @@
 static LIST Key_PathRoot;
 static CRITICAL_SECTION *Key_PathRoot_CritSec = NULL;
 
+BOOLEAN Key_RegPaths_Loaded = FALSE;
+
 static HANDLE Key_BoxRootWatcher = NULL;
 static volatile ULONGLONG Key_PathsVersion = 0; // count reloads
 
@@ -76,13 +80,16 @@ static ULONG Key_IsDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName, B
 
 VOID File_ClearPathBranche_internal(LIST* parent);
 VOID File_SavePathTree_internal(LIST* Root, const WCHAR* name);
-VOID File_LoadPathTree_internal(LIST* Root, const WCHAR* name);
+BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name);
 VOID File_SetPathFlags_internal(LIST* Root, const WCHAR* Path, ULONG setFlags, ULONG clrFlags, const WCHAR* Relocation);
 ULONG File_GetPathFlags_internal(LIST* Root, const WCHAR* Path, WCHAR** pRelocation, BOOLEAN CheckChildren);
 VOID File_SavePathNode_internal(HANDLE hPathsFile, LIST* parent, WCHAR* Path, ULONG Length, ULONG SetFlags);
 VOID File_MarkDeleted_internal(LIST* Root, const WCHAR* Path);
-VOID File_SetRelocation_internal(LIST* Root, const WCHAR* OldTruePath, const WCHAR* NewTruePath, BOOLEAN TrueExists);
+VOID File_SetRelocation_internal(LIST* Root, const WCHAR* OldTruePath, const WCHAR* NewTruePath);
 
+HANDLE File_AcquireMutex(const WCHAR* MutexName);
+void File_ReleaseMutex(HANDLE hMutex);
+#define KEY_VCM_MUTEX SBIE L"_VCM_Mutex"
 
 
 //---------------------------------------------------------------------------
@@ -132,11 +139,15 @@ _FX BOOLEAN Key_SavePathTree()
 
 _FX BOOLEAN Key_LoadPathTree()
 {
+    HANDLE hMutex = File_AcquireMutex(KEY_VCM_MUTEX);
+
     EnterCriticalSection(Key_PathRoot_CritSec);
 
-    File_LoadPathTree_internal(&Key_PathRoot, KEY_PATH_FILE_NAME);
+    Key_RegPaths_Loaded = File_LoadPathTree_internal(&Key_PathRoot, KEY_PATH_FILE_NAME);
 
     LeaveCriticalSection(Key_PathRoot_CritSec);
+    
+    File_ReleaseMutex(hMutex);
 
     Key_PathsVersion++;
 
@@ -206,6 +217,8 @@ _FX NTSTATUS Key_MarkDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName)
     // add a key/value or directory to the deleted list
     //
 
+    HANDLE hMutex = File_AcquireMutex(KEY_VCM_MUTEX);
+
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     WCHAR* FullPath = Dll_GetTlsNameBuffer(TlsData, TMPL_NAME_BUFFER, 
@@ -224,6 +237,8 @@ _FX NTSTATUS Key_MarkDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName)
     LeaveCriticalSection(Key_PathRoot_CritSec);
 
     Key_SavePathTree();
+
+    File_ReleaseMutex(hMutex);
 
     return STATUS_SUCCESS;
 }
@@ -294,19 +309,23 @@ _FX BOOLEAN Key_HasDeleted_v2(const WCHAR* TruePath)
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Key_SetRelocation(const WCHAR *OldTruePath, const WCHAR *NewTruePath, BOOLEAN TrueExists)
+_FX NTSTATUS Key_SetRelocation(const WCHAR *OldTruePath, const WCHAR *NewTruePath)
 {
     //
     // List a mapping for the new location
     //
+    
+    HANDLE hMutex = File_AcquireMutex(KEY_VCM_MUTEX);
 
     EnterCriticalSection(Key_PathRoot_CritSec);
 
-    File_SetRelocation_internal(&Key_PathRoot, OldTruePath, NewTruePath, TrueExists);
+    File_SetRelocation_internal(&Key_PathRoot, OldTruePath, NewTruePath);
 
     LeaveCriticalSection(Key_PathRoot_CritSec);
 
     Key_SavePathTree();
+
+    File_ReleaseMutex(hMutex);
 
     return STATUS_SUCCESS;
 }

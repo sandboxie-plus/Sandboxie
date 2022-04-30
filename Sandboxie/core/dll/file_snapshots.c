@@ -265,107 +265,143 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 
 	THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
-	//
-	// this function handles the Delete V2 as well as with snapshots
-	//
+	if (File_Delete_v2) 
+	{
+		File_RefreshPathTree();
 
-	if (File_Delete_v2) {
+		if(!pRelocation)
+			Dll_PushTlsNameBuffer(TlsData);
+
+		EnterCriticalSection(File_PathRoot_CritSec);
 
 		//
 		// check true path relocation and deleteion for the active state
 		//
 
-		Relocation = NULL;
-		Flags = File_GetPathFlags(TruePath, &Relocation);
+		Flags = File_GetPathFlags_internal(&File_PathRoot, TruePath, &Relocation, TRUE); // this requires a name buffer
 		if (FILE_PATH_DELETED(Flags))
 			goto finish;
+	}
 
-		if (Relocation) {
+	if (!File_Snapshot) 
+	{
+		if (pRelocation) *pRelocation = Relocation; // return a MISC_NAME_BUFFER buffer valid at the current name buffer depth
 
-			if (!File_Snapshot) 
-				goto finish; // take a shortcut
+		goto finish;
+	}
 
-			TruePath = Dll_GetTlsNameBuffer(TlsData, TRUE_NAME_BUFFER, wcslen(Relocation));
-			wcscpy((WCHAR*)TruePath, Relocation);
+	//
+	// Handle snapshots
+	//
+
+	NTSTATUS status;
+	OBJECT_ATTRIBUTES objattrs;
+	UNICODE_STRING objname;
+	ULONG FileType;
+
+	InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+	//
+	// we need a few helper buffers here, to make it efficient we will exploit
+	// an implementation artefact of the TlsNameBuffer mechanism, namely
+	// the property that after a pop the buffers remain valid untill the next push
+	// 
+	// so we can pop out of the current frame request a buffer of the required size
+	// and still read from the buffer that was filled in the previosue frame
+	//
+
+	Dll_PushTlsNameBuffer(TlsData);
+
+	WCHAR* TmplRelocation = Relocation;
+
+	for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != lastSnapshot; Cur_Snapshot = Cur_Snapshot->Parent)
+	{
+		if (TmplRelocation) 
+		{
+			//
+			// update the true file name
+			//
+
+			TruePath = Dll_GetTlsNameBuffer(TlsData, TRUE_NAME_BUFFER, (wcslen(TmplRelocation) + 1) * sizeof(WCHAR));
+			wcscpy((WCHAR*)TruePath, TmplRelocation);
+
+			if (CopyPath) 
+			{
+				//
+				// update the copy file name
+				//
+
+				Dll_PushTlsNameBuffer(TlsData);
+
+				WCHAR* TruePath2, * CopyPath2;
+				RtlInitUnicodeString(&objname, TmplRelocation);
+				File_GetName(NULL, &objname, &TruePath2, &CopyPath2, NULL);
+
+				Dll_PopTlsNameBuffer(TlsData);
+
+				// note: pop leaves TruePath2 valid we can still use it
+
+				CopyPath = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, (wcslen(CopyPath2) + 1) * sizeof(WCHAR));
+				wcscpy((WCHAR*)CopyPath, CopyPath2);
+			}
+		}
+
+		if (CopyPath) 
+		{
+			//
+			// check if the specified file is present in the current snapshot
+			//
+
+			WCHAR* TmplName = File_MakeSnapshotPath(Cur_Snapshot, CopyPath);
+			if (!TmplName)
+				break; // something went wrong
+
+			RtlInitUnicodeString(&objname, TmplName);
+			status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+			if (!(status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND)) 
+			{
+				Flags |= FILE_INSNAPSHOT_FLAG;
+				Relocation = TmplName;
+				goto complete;
+			}
+		}
+
+		if (File_Delete_v2) 
+		{
+			//
+			// check true path relocation and deleteion for the current snapshot
+			//
+
+			TmplRelocation = NULL;
+			Flags = File_GetPathFlags_internal(&Cur_Snapshot->PathRoot, TruePath, &TmplRelocation, TRUE);
+			if(TmplRelocation)
+				Relocation = TmplRelocation;
+			if (FILE_PATH_DELETED(Flags))
+				goto complete;
 		}
 	}
 
-	if (File_Snapshot != NULL) {
+complete:
+	Dll_PopTlsNameBuffer(TlsData);
 
-		NTSTATUS status;
-		OBJECT_ATTRIBUTES objattrs;
-		UNICODE_STRING objname;
-		ULONG FileType;
+	// note: pop leaves the buffers valid we can still use them
 
-		InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-		for (FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot; Cur_Snapshot != lastSnapshot; Cur_Snapshot = Cur_Snapshot->Parent)
-		{
-			if (CopyPath) {
-
-				//
-				// check if the specified file is present in the current snapshot
-				//
-
-				WCHAR* TmplName = File_MakeSnapshotPath(Cur_Snapshot, CopyPath);
-				if (!TmplName)
-					break; // something went wrong
-
-				RtlInitUnicodeString(&objname, TmplName);
-				status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
-				if (!(status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND)) {
-
-					Flags |= FILE_INSNAPSHOT_FLAG;
-					Relocation = TmplName;
-					goto finish;
-				}
-			}
-
-			if (File_Delete_v2) {
-
-				//
-				// check true path relocation and deleteion for the current snapshot
-				//
-
-				Flags = File_GetPathFlags_internal(&Cur_Snapshot->PathRoot, TruePath, &Relocation, TRUE);
-				if (FILE_PATH_DELETED(Flags))
-					goto finish;
-
-				if (Relocation) {
-
-					if (!Cur_Snapshot->Parent) 
-						break; // take a shortcut
-
-					TruePath = Dll_GetTlsNameBuffer(TlsData, TRUE_NAME_BUFFER, (wcslen(Relocation) + 1) * sizeof(WCHAR));
-					wcscpy((WCHAR*)TruePath, Relocation);
-
-					if (!CopyPath)
-						continue; 
-
-					//
-					// update the copy file name
-					//
-
-					Dll_PushTlsNameBuffer(TlsData);
-
-					WCHAR* TruePath2, *CopyPath2;
-					RtlInitUnicodeString(&objname, Relocation);
-					File_GetName(NULL, &objname, &TruePath2, &CopyPath2, NULL);
-
-					Dll_PopTlsNameBuffer(TlsData);
-
-					// note: pop leaves TruePath2 valid we can still use it
-
-					CopyPath = Dll_GetTlsNameBuffer(TlsData, COPY_NAME_BUFFER, (wcslen(CopyPath2) + 1) * sizeof(WCHAR));
-					wcscpy((WCHAR*)CopyPath, CopyPath2);
-				}
-			}
-		}
+	if (pRelocation && Relocation) // return a new TMPL_NAME_BUFFER buffer valid at the current name buffer depth
+	{
+		*pRelocation = Dll_GetTlsNameBuffer(TlsData, TMPL_NAME_BUFFER, (wcslen(Relocation) + 1) * sizeof(WCHAR));
+		wcscpy(*pRelocation, Relocation);
 	}
 
 finish:
 
-    if (pRelocation) *pRelocation = Relocation; // can be template buffer or move buffer
+	if (File_Delete_v2) 
+	{
+		LeaveCriticalSection(File_PathRoot_CritSec);
+
+		if(!pRelocation)
+			Dll_PopTlsNameBuffer(TlsData);
+	}
+
 	return Flags;
 }
 
@@ -433,8 +469,8 @@ _FX void File_InitSnapshots(void)
 		WCHAR ShapshotId[26] = L"Snapshot_";
 		wcscat(ShapshotId, Shapshot);
 		
-		if (File_Delete_v2) {
-
+		if (File_Delete_v2) 
+		{
 			WCHAR PathFile[MAX_PATH];
 			wcscpy(PathFile, File_Snapshot_Prefix);
 			wcscat(PathFile, Cur_Snapshot->ID);

@@ -464,6 +464,16 @@ _FX void Dll_InitInjected(void)
         ExitProcess(-1);
     }
 
+    extern BOOLEAN File_Delete_v2;
+    extern BOOLEAN File_InitDelete_v2();
+    if (File_Delete_v2)
+        File_InitDelete_v2();
+
+    extern BOOLEAN Key_Delete_v2;
+    extern BOOLEAN Key_InitDelete_v2();
+    if (Key_Delete_v2)
+        Key_InitDelete_v2();
+
     Dll_InitComplete = TRUE;
 
     if (! Dll_RestrictedToken)
@@ -848,8 +858,10 @@ _FX ULONG_PTR Dll_Ordinal1(
         //
 
         int MustRestartProcess = 0;
-        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
-            MustRestartProcess = 1;
+        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPAC", FALSE))
+                MustRestartProcess = 1;
+        }
 
         else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
             if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)

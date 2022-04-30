@@ -439,6 +439,7 @@ _FX NTSTATUS Key_GetName(
     ULONG length;
     WCHAR *name;
     ULONG objname_len;
+    BOOLEAN is_boxed_path;
 
     *OutTruePath = NULL;
     *OutCopyPath = NULL;
@@ -456,16 +457,6 @@ _FX NTSTATUS Key_GetName(
     //
 
     if (RootDirectory) {
-
-      name = Handle_GetRelocationPath(RootDirectory, objname_len);
-      if (name) {
-
-        *OutTruePath = name;
-
-        name = (*OutTruePath) + wcslen(*OutTruePath);
-
-      }
-      else {
 
         length = 256;
         name = Dll_GetTlsNameBuffer(
@@ -520,8 +511,6 @@ _FX NTSTATUS Key_GetName(
             name = (*OutTruePath)
                  + ((KEY_NAME_INFORMATION *)name)->NameLength / sizeof(WCHAR);
         }
-
-      }
 
         if (objname_len) {
 
@@ -605,6 +594,8 @@ _FX NTSTATUS Key_GetName(
     // and restore the "\REGISTRY" prefix that would have been lost.
     //
 
+    is_boxed_path = FALSE;
+
 check_sandbox_prefix:
 
     if (length >= Dll_BoxKeyPathLen &&
@@ -616,6 +607,7 @@ check_sandbox_prefix:
         length -= Dll_BoxKeyPathLen - Key_RegistryLen;
         if (OutIsBoxedPath)
             *OutIsBoxedPath = TRUE;
+        is_boxed_path = TRUE;
 
         goto check_sandbox_prefix;
     }
@@ -667,6 +659,33 @@ check_sandbox_prefix:
 
         if (_wcsnicmp(*OutTruePath, _bfe, wcslen(_bfe)) == 0)
             return STATUS_OBJECT_NAME_NOT_FOUND;
+    }
+
+    //
+    // if this is a unboxed path, and we opened it by object,
+    // check path relocation and update true path accordingly.
+    //
+
+    if (!is_boxed_path && RootDirectory) {
+      
+        name = Handle_GetRelocationPath(RootDirectory, objname_len);
+        if (name) {
+
+            *OutTruePath = name;
+
+            name = (*OutTruePath) + wcslen(*OutTruePath);
+
+            if (objname_len) {
+
+                *name = L'\\';
+                ++name;
+                memcpy(name, ObjectName->Buffer, objname_len);
+
+                name += objname_len / sizeof(WCHAR);
+            }
+
+            *name = L'\0';
+        }
     }
 
     //
@@ -1380,7 +1399,6 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     // requested copy key so that we can open it
     //
 
-    if (!Dll_CompartmentMode) // NoDriverAssist
     if (status == STATUS_ACCESS_DENIED && Secure_IsRestrictedToken(TRUE)) {
 
         NTSTATUS status2 = SbieApi_SetLowLabelKey(CopyPath);
@@ -1543,10 +1561,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
         int depth = Key_CheckDepthForIsWritePath(TruePath);
         if (depth == 0) {
-            if (Dll_CompartmentMode) { // NoDriverAssist
-                status = __sys_NtOpenKey(KeyHandle, Wow64KeyReadAccess, &objattrs);
-            } else
-                status = SbieApi_OpenKey(KeyHandle, TruePath);
+            status = SbieApi_OpenKey(KeyHandle, TruePath);
             if (NT_SUCCESS(status))
                 goto SkipReadOnlyCheck;
         } else
@@ -1576,9 +1591,13 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
         // the reason is that if NtSetValueKey has to re-open this key
         // for write access, it would not be able to pass the WOW64 flag
         //
+        // this special case makes IMHO no sense, wow registry redirection
+        // acts only on specific paths, and our sanboxed paths do not fall 
+        // into that category, hence thay dont need KEY_WOW64_xxKEY flags!
+        //
 
-        if (OriginalDesiredAccess & (KEY_WOW64_32KEY | KEY_WOW64_64KEY))
-            goto SkipReadOnlyCheck;
+        //if (OriginalDesiredAccess & (KEY_WOW64_32KEY | KEY_WOW64_64KEY))
+        //    goto SkipReadOnlyCheck;
 
         if (((DesiredAccess & ~MAXIMUM_ALLOWED) & KEY_DENIED_ACCESS) == 0) {
 
@@ -1731,7 +1750,8 @@ SkipReadOnlyCheck:
         Key_DiscardMergeByPath(TruePath, TRUE);
 
     //
-    // Relocation, if we opened the true key and its relocated set the path info
+    // Relocation, if we opened a relocated location we need to 
+    // store the original true path for the Key_GetName function
     //
 
     if (TrueOpened && OriginalPath) {
@@ -1891,7 +1911,6 @@ _FX NTSTATUS Key_CreatePath(
 
         status = Key_CreatePath_Key(&handle, objattrs, &disp);
 
-        if (!Dll_CompartmentMode) // NoDriverAssist
         if (status == STATUS_ACCESS_DENIED && Dll_RestrictedToken) {
 
             //
@@ -4317,123 +4336,131 @@ _FX NTSTATUS Key_NtRenameKey(
         status = Key_GetName(KeyHandle, NULL, &TruePath, &CopyPath, NULL);
 
         WCHAR* TruePathSlash = wcsrchr(TruePath, L'\\');
-        if (!TruePathSlash) {
+        if (!TruePathSlash){
             status = STATUS_INVALID_PARAMETER;
             __leave;
         }
+    
         ULONG len = (ULONG)(TruePathSlash - TruePath + 1);
 
-        NewTruePath = Dll_GetTlsNameBuffer(TlsData, MOVE_NAME_BUFFER, 
+        NewTruePath = Dll_GetTlsNameBuffer(TlsData, MISC_NAME_BUFFER, 
             len * sizeof(WCHAR) + ReplacementName->Length + sizeof(WCHAR));
 
         wmemcpy(NewTruePath, TruePath, len);
         wmemcpy(NewTruePath + len, ReplacementName->Buffer, ReplacementName->Length / sizeof(WCHAR));
         NewTruePath[len + ReplacementName->Length / sizeof(WCHAR)] = L'\0';
 
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER) {
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
     }
 
+    if (!NT_SUCCESS(status))
+        goto finish;
+
+    //
+    // check if the target key already exists in the true path
+    //
+
+    WCHAR* NewTruePath2 = NewTruePath;
+    WCHAR* OldTruePath = Key_GetRelocation(NewTruePath);
+    if (OldTruePath)
+        NewTruePath2 = OldTruePath;
+
+    RtlInitUnicodeString(&objname, NewTruePath2);
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
+
+    if (NT_SUCCESS(status)) {
+
+        if(Key_IsDeleted_v2(NewTruePath))
+            status = STATUS_OBJECT_NAME_NOT_FOUND;
+
+        File_NtCloseImpl(handle);
+    }
+
+    if (status != STATUS_OBJECT_NAME_NOT_FOUND)
+        goto finish;
+
     //
     // rename the key ensuring we wil have a boxed copy
+    // try renaming if it fails with access denided try again with a new handle
     //
+
+    status = __sys_NtRenameKey(KeyHandle, ReplacementName);
+
+    if (status == STATUS_ACCESS_DENIED) {
+
+        //
+        // if we get STATUS_ACCESS_DENIED, the caller may be using a
+        // TruePath handle that was opened with MAXIMUM_ALLOWED, but
+        // reduced to read-only access in our NtCreateKey
+        //
+
+        OBJECT_ATTRIBUTES objattrs;
+        UNICODE_STRING objname;
+        HANDLE handle;
+
+        RtlInitUnicodeString(&objname, L"");
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, KeyHandle, NULL);
+
+        status = NtOpenKey(&handle, KEY_WRITE, &objattrs);
+
+        if (NT_SUCCESS(status)) {
+
+            status = __sys_NtRenameKey(handle, ReplacementName);
+
+            NtClose(handle);
+        }
+    }
+
+    //
+    // check if the true path exists and if so mark path deleted
+    //
+
+    BOOLEAN TrueExists = FALSE;
+
+    WCHAR* TruePath2 = TruePath;
+
+    OldTruePath = Key_GetRelocation(TruePath);
+    if (OldTruePath)
+        TruePath2 = OldTruePath;
+
+    RtlInitUnicodeString(&objname, TruePath2);
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
 
     if (NT_SUCCESS(status)) {
 
         //
-        // check if the target key already exists in the true path
+        // if the true key exists mark it deleted
         //
 
-        RtlInitUnicodeString(&objname, NewTruePath);
-        InitializeObjectAttributes(
-            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        TrueExists = TRUE;
 
-        status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
-
-        if (NT_SUCCESS(status)) {
-
-            if(!Key_IsDeleted_v2(NewTruePath))
-                status = STATUS_OBJECT_NAME_COLLISION;
-
-            File_NtCloseImpl(handle);
-        }
-
-        //
-        // try renaming if it fails with access denided try again with a new handle
-        //
-
-        if (NT_SUCCESS(status))
-            status = __sys_NtRenameKey(KeyHandle, ReplacementName);
-
-        if (status == STATUS_ACCESS_DENIED) {
-
-            //
-            // if we get STATUS_ACCESS_DENIED, the caller may be using a
-            // TruePath handle that was opened with MAXIMUM_ALLOWED, but
-            // reduced to read-only access in our NtCreateKey
-            //
-
-            OBJECT_ATTRIBUTES objattrs;
-            UNICODE_STRING objname;
-            HANDLE handle;
-
-            RtlInitUnicodeString(&objname, L"");
-            InitializeObjectAttributes(
-                &objattrs, &objname, OBJ_CASE_INSENSITIVE, KeyHandle, NULL);
-
-            status = NtOpenKey(&handle, KEY_WRITE, &objattrs);
-
-            if (NT_SUCCESS(status)) {
-
-                status = __sys_NtRenameKey(handle, ReplacementName);
-
-                NtClose(handle);
-            }
-        }
+        File_NtCloseImpl(handle);
     }
 
     //
     // set the redirection information
     //
 
-    if (NT_SUCCESS(status)) {
+    if (TrueExists) {
 
-        //*TruePathSlash = L'\0';
-        //Key_DiscardMergeByPath(TruePath, TRUE); // fix-me: act on Key_MergeCacheList
-        //*TruePathSlash = L'\\';
-
-        //
-        // check if the true path exists and if so mark path deleted
-        //
-
-        BOOLEAN TrueExists = FALSE;
-
-        RtlInitUnicodeString(&objname, TruePath);
-        InitializeObjectAttributes(
-            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-        status = __sys_NtOpenKey(&handle, KEY_READ, &objattrs);
-
-        if (NT_SUCCESS(status)) {
-
-            //
-            // if the true key exists mark it deleted
-            //
-
-            TrueExists = TRUE;
-
-            File_NtCloseImpl(handle);
-        }
-
-        //
-        // setup/update the key relocation
-        //
-
-        Key_SetRelocation(TruePath, NewTruePath, TrueExists);
-
-        status = STATUS_SUCCESS;
+        Key_SetRelocation(TruePath, NewTruePath);
     }
+
+    //*TruePathSlash = L'\0';
+    //Key_DiscardMergeByPath(TruePath, TRUE); // fix-me: act on Key_MergeCacheList
+    //*TruePathSlash = L'\\';
+
+    status = STATUS_SUCCESS;
+
+finish:
 
     Dll_PopTlsNameBuffer(TlsData);
 
@@ -4474,10 +4501,6 @@ _FX NTSTATUS Key_NtLoadKey(
     FILE_LOAD_KEY_REQ *req;
 
     status = __sys_NtLoadKey(TargetObjectAttributes, SourceObjectAttributes);
-
-    if (Dll_CompartmentMode) // NoDriverAssist
-        return status;
-
     if (status != STATUS_PRIVILEGE_NOT_HELD)
         return status;
 

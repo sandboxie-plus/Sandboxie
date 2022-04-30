@@ -15,6 +15,8 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "../../common/my_version.h"
+
 //---------------------------------------------------------------------------
 // File (Delete)
 //---------------------------------------------------------------------------
@@ -74,13 +76,17 @@ static ULONG File_GetPathFlags(const WCHAR* Path, WCHAR** pRelocation);
 static BOOLEAN File_SavePathTree();
 static BOOLEAN File_LoadPathTree();
 static VOID File_RefreshPathTree();
-static BOOLEAN File_InitDelete_v2();
+BOOLEAN File_InitDelete_v2();
 
 static NTSTATUS File_MarkDeleted_v2(const WCHAR *TruePath);
 static ULONG File_IsDeleted_v2(const WCHAR* TruePath);
 static BOOLEAN File_HasDeleted_v2(const WCHAR* TruePath);
 static WCHAR* File_GetRelocation(const WCHAR* TruePath);
-static NTSTATUS File_SetRelocation(const WCHAR *OldTruePath, const WCHAR *NewTruePath, BOOLEAN TrueExists);
+static NTSTATUS File_SetRelocation(const WCHAR *OldTruePath, const WCHAR *NewTruePath);
+
+HANDLE File_AcquireMutex(const WCHAR* MutexName);
+void File_ReleaseMutex(HANDLE hMutex);
+#define FILE_VFS_MUTEX SBIE L"_VFS_Mutex"
 
 //---------------------------------------------------------------------------
 // File_ClearPathBranche
@@ -288,7 +294,7 @@ _FX ULONG File_GetPathFlags_internal(LIST* Root, const WCHAR* Path, WCHAR** pRel
 
         THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
-        *pRelocation = Dll_GetTlsNameBuffer(TlsData, MOVE_NAME_BUFFER, (wcslen(Relocation) + wcslen(SubPath) + 16) * sizeof(WCHAR)); // +16 some room for changes
+        *pRelocation = Dll_GetTlsNameBuffer(TlsData, MISC_NAME_BUFFER, (wcslen(Relocation) + wcslen(SubPath) + 16) * sizeof(WCHAR)); // +16 some room for changes
         wcscpy(*pRelocation, Relocation);
         wcscat(*pRelocation, SubPath);
     }
@@ -419,11 +425,44 @@ _FX BOOLEAN File_SavePathTree()
 
 
 //---------------------------------------------------------------------------
+// File_AcquireMutex
+//---------------------------------------------------------------------------
+
+
+_FX HANDLE File_AcquireMutex(const WCHAR *MutexName)
+{
+    HANDLE hMutex = OpenMutex(MUTEX_ALL_ACCESS, FALSE, MutexName);
+    if (! hMutex)
+        hMutex = CreateMutex(NULL, FALSE, MutexName);
+    if (hMutex)
+        WaitForSingleObject(hMutex, 5000);
+
+    return hMutex;
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_ReleaseMutex
+//---------------------------------------------------------------------------
+
+
+_FX void File_ReleaseMutex(HANDLE hMutex)
+{
+    if (hMutex) {
+
+        ReleaseMutex(hMutex);
+
+        CloseHandle(hMutex);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // File_LoadPathTree_internal
 //---------------------------------------------------------------------------
 
 
-_FX VOID File_LoadPathTree_internal(LIST* Root, const WCHAR* name)
+_FX BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name)
 {
     WCHAR PathsFile[MAX_PATH] = { 0 };
     wcscpy(PathsFile, Dll_BoxFilePath);
@@ -434,7 +473,7 @@ _FX VOID File_LoadPathTree_internal(LIST* Root, const WCHAR* name)
     HANDLE hPathsFile;
     hPathsFile = CreateFile(PathsFile, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hPathsFile == INVALID_HANDLE_VALUE)
-        return;
+        return FALSE;
 
     File_ClearPathBranche_internal(Root);
 
@@ -480,6 +519,8 @@ _FX VOID File_LoadPathTree_internal(LIST* Root, const WCHAR* name)
     Dll_Free(Buffer);
 
     CloseHandle(hPathsFile);
+
+    return TRUE;
 }
 
 
@@ -490,11 +531,15 @@ _FX VOID File_LoadPathTree_internal(LIST* Root, const WCHAR* name)
 
 _FX BOOLEAN File_LoadPathTree()
 {
+    HANDLE hMutex = File_AcquireMutex(FILE_VFS_MUTEX);
+
     EnterCriticalSection(File_PathRoot_CritSec);
 
     File_LoadPathTree_internal(&File_PathRoot, FILE_PATH_FILE_NAME);
 
     LeaveCriticalSection(File_PathRoot_CritSec);
+
+    File_ReleaseMutex(hMutex);
 
     return TRUE;
 }
@@ -558,6 +603,8 @@ _FX BOOLEAN File_InitDelete_v2()
 
 _FX VOID File_MarkDeleted_internal(LIST* Root, const WCHAR* Path)
 {
+    HANDLE hMutex = File_AcquireMutex(FILE_VFS_MUTEX);
+
     EnterCriticalSection(File_PathRoot_CritSec);
 
     // 1. remove deleted branche
@@ -581,6 +628,8 @@ _FX VOID File_MarkDeleted_internal(LIST* Root, const WCHAR* Path)
     LeaveCriticalSection(File_PathRoot_CritSec);
 
     File_SavePathTree();
+
+    File_ReleaseMutex(hMutex);
 }
 
 
@@ -595,6 +644,8 @@ _FX NTSTATUS File_MarkDeleted_v2(const WCHAR* TruePath)
     // add a file or directory to the deleted list
     //
 
+    HANDLE hMutex = File_AcquireMutex(FILE_VFS_MUTEX);
+
     EnterCriticalSection(File_PathRoot_CritSec);
 
     File_MarkDeleted_internal(&File_PathRoot, TruePath);
@@ -602,6 +653,8 @@ _FX NTSTATUS File_MarkDeleted_v2(const WCHAR* TruePath)
     LeaveCriticalSection(File_PathRoot_CritSec);
 
     File_SavePathTree();
+
+    File_ReleaseMutex(hMutex);
 
     return STATUS_SUCCESS;
 }
@@ -647,7 +700,7 @@ _FX BOOLEAN File_HasDeleted_v2(const WCHAR* TruePath)
 //---------------------------------------------------------------------------
 
 
-_FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const WCHAR *NewTruePath, BOOLEAN TrueExists)
+_FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const WCHAR *NewTruePath)
 {
     // 1. separate branche from OldTruePath
     
@@ -667,45 +720,44 @@ _FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const
         }
     }
 
+
     // 3. add true delete entry OldTruePath
 
     File_SetPathFlags_internal(Root, OldTruePath, FILE_DELETED_FLAG, 0, NULL);
 
+
     // 4. set redirection NewTruePath -> OldTruePath
 
-    if (TrueExists || HasRelocation || (Node && Node->items.count > 0)) {
+    PATH_NODE* NewNode = File_FindPathBranche_internal(Root, NewTruePath, NULL, TRUE);
 
-        PATH_NODE* NewNode = File_FindPathBranche_internal(Root, NewTruePath, NULL, TRUE);
-
-        // OldTruePath may have a relocated parent, if so unwrap it
-        if (!HasRelocation) {
-            WCHAR* OldOldTruePath = NULL;
-            File_GetPathFlags_internal(&File_PathRoot, OldTruePath, &OldOldTruePath, TRUE);
-            if (OldOldTruePath) OldTruePath = OldOldTruePath;
-        }
-
-        if (TrueExists || HasRelocation) {
-            NewNode->flags |= FILE_RELOCATION_FLAG;
-            NewNode->relocation = Dll_Alloc((wcslen(OldTruePath) + 1) * sizeof(WCHAR));
-            wcscpy(NewNode->relocation, OldTruePath);
-        }
+    // OldTruePath may have a relocated parent, if so unwrap it
+    if (!HasRelocation) {
+        WCHAR* OldOldTruePath = NULL;
+        File_GetPathFlags_internal(Root, OldTruePath, &OldOldTruePath, TRUE);
+        if (OldOldTruePath) OldTruePath = OldOldTruePath;
+    }
+    
+    NewNode->flags |= FILE_RELOCATION_FLAG;
+    NewNode->relocation = Dll_Alloc((wcslen(OldTruePath) + 1) * sizeof(WCHAR));
+    wcscpy(NewNode->relocation, OldTruePath);
+    
 
     // 5. reatach branche to NewTruePath
 
-        if (Node) {
-            PATH_NODE* child = List_Head(&Node->items);
-            while (child) {
+    if (Node) {
+        PATH_NODE* child = List_Head(&Node->items);
+        while (child) {
 
-                PATH_NODE* next_child = List_Next(child);
+            PATH_NODE* next_child = List_Next(child);
 
-                List_Remove(&Node->items, child);
+            List_Remove(&Node->items, child);
                 
-                List_Insert_After(&NewNode->items, NULL, child);
+            List_Insert_After(&NewNode->items, NULL, child);
 
-                child = next_child;
-            }
+            child = next_child;
         }
     }
+    
 
     // 6. clean up
 
@@ -724,19 +776,23 @@ _FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS File_SetRelocation(const WCHAR* OldTruePath, const WCHAR* NewTruePath, BOOLEAN TrueExists)
+_FX NTSTATUS File_SetRelocation(const WCHAR* OldTruePath, const WCHAR* NewTruePath)
 {
     //
     // List a mapping for the new location
     //
 
+    HANDLE hMutex = File_AcquireMutex(FILE_VFS_MUTEX);
+
     EnterCriticalSection(File_PathRoot_CritSec);
 
-    File_SetRelocation_internal(&File_PathRoot, OldTruePath, NewTruePath, TrueExists);
+    File_SetRelocation_internal(&File_PathRoot, OldTruePath, NewTruePath);
 
     LeaveCriticalSection(File_PathRoot_CritSec);
 
     File_SavePathTree();
+
+    File_ReleaseMutex(hMutex);
 
     return STATUS_SUCCESS;
 }

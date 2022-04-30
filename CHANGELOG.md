@@ -10,22 +10,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added support for NtRenameKey (this requires UseRegDeleteV2=y) [#205](https://github.com/sandboxie-plus/Sandboxie/issues/205)
-- FIXED SECURITY ISSUE: memory of unsandboxed processes can no longer be read, except for exceptions
-- added ReadIpcPath to enable more flexibility in IPC usage
-
 
 ### Changed
 - reworked the mechanism sandboxie uses to mark host files as deleted
 -- the new behavioure creates a data file in the box root FilePaths.dat instead of creating dummy files
 -- it can be enabled with UseFileDeleteV2=y sane for the registry UseRegDeleteV2=y using RegPaths.dat
-- disabled a couple driver based workarounds for boxes in compartment mode as then thay should not be required
-- removed "AlwaysUseWin32kHooks", now these win32 hooks are always enabled
--- note: you can use "UseWin32kHooks=program.exe,n" to disable them for sellected programs
-- EnableObjectFiltering is now set enabled by default, and replaces sbies old process/thread handle filter
+- reworked the TlsNameBuffer mechanism to be more versatile and less error prone
 
 ### Fixed
 - fixed folder rename issues (this requires UseFileDeleteV2=y) [#71](https://github.com/sandboxie-plus/Sandboxie/issues/71)
 - fixed issue with process access [#1603](https://github.com/sandboxie-plus/Sandboxie/issues/1603)
+
 
 
 
@@ -64,7 +59,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed pipe impersonation in compartment mode
-- fixed issue with box clean-up which was introduced in a recent build
+- fixed issue with box clean-up introduced in a recent build
 - fixed missing trace log clean-up command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
 - fixed inability to unpin programs that have been pinned to the run menu  [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
 

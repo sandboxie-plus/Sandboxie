@@ -620,8 +620,7 @@ _FX NTSTATUS File_OpenForMerge(
     if (File_Delete_v2) {
 
         //
-        // test if the path is deleted and find the oldest snapshot with a relocation,
-        // or 
+        // test if the path is deleted and find the oldest snapshot with a relocation
         //
 
         WCHAR* OldTruePath = File_ResolveTruePath(TruePath, NULL, &TruePathFlags);
@@ -3018,14 +3017,13 @@ _FX NTSTATUS File_NtQueryVolumeInformationFile(
     // then open the real drive X to get the correct result
     //
 
-    path = Dll_AllocTemp(8192);
-
     handle = FileHandle;
 
-    status = SbieDll_GetHandlePath(FileHandle, path, &IsBoxedPath);
+    status = SbieDll_GetHandlePath(FileHandle, NULL, &IsBoxedPath);
     if (IsBoxedPath && (
             NT_SUCCESS(status) || (status == STATUS_BAD_INITIAL_PC))) {
-
+        
+        path = Dll_AllocTemp(8192);
         status = SbieDll_GetHandlePath(FileHandle, path, NULL);
         if (NT_SUCCESS(status)) {
 
@@ -3085,9 +3083,10 @@ _FX NTSTATUS File_NtQueryVolumeInformationFile(
                 LeaveCriticalSection(File_DrivesAndLinks_CritSec);
             }
         }
+
+        Dll_Free(path);
     }
 
-    Dll_Free(path);
 
     status = __sys_NtQueryVolumeInformationFile(
         handle, IoStatusBlock, FsInformation, Length, FsInformationClass);

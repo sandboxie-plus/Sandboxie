@@ -81,6 +81,7 @@
 #define FGN_REPARSED_CLOSED_PATH    0x0200
 #define FGN_REPARSED_WRITE_PATH     0x0400
 
+#define NO_RELOCATION               ((PUNICODE_STRING)-1)
 
 #ifndef  _WIN64
 #define WOW64_FS_REDIR
@@ -258,7 +259,7 @@ static BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath);
 static NTSTATUS File_SetReparsePoint(
     HANDLE FileHandle, PREPARSE_DATA_BUFFER Data, ULONG DataLen);
 
-static NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR *NameBuf);
+NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR *NameBuf);
 
 //---------------------------------------------------------------------------
 
@@ -337,7 +338,7 @@ static ULONG File_PublicUserLen = 0;
 
 static BOOLEAN File_DriveAddSN = FALSE;
 
-static BOOLEAN File_Delete_v2 = FALSE;
+BOOLEAN File_Delete_v2 = FALSE;
 static BOOLEAN File_NoReparse = FALSE;
 
 static BOOLEAN File_Windows2000 = FALSE;
@@ -425,12 +426,19 @@ _FX NTSTATUS File_GetName(
 #else
     const BOOLEAN convert_wow64_link = FALSE;
 #endif WOW64_FS_REDIR
-
+    BOOLEAN no_relocation = FALSE;
+    WCHAR snapshot_id[FILE_MAX_SNAPSHOT_ID];
+    snapshot_id[0] = L'\0';
 
     *OutTruePath = NULL;
     *OutCopyPath = NULL;
     if (OutFlags)
         *OutFlags = 0;
+
+    if (ObjectName == NO_RELOCATION) {
+        no_relocation = TRUE;
+        ObjectName = NULL;
+    }
 
     if (ObjectName) {
         objname_len = ObjectName->Length & ~1;
@@ -452,16 +460,6 @@ _FX NTSTATUS File_GetName(
     if (RootDirectory) {
 
         UNICODE_STRING *uni = NULL;
-
-      name = Handle_GetRelocationPath(RootDirectory, objname_len + sizeof(UNICODE_STRING));
-      if (name) {
-
-          length = (wcslen(name) + 1) * sizeof(WCHAR);
-          uni = ((UCHAR*)name) + (length + objname_len);
-          RtlInitUnicodeString(uni, name);
-
-      }
-      else {
 
         length = 256;
         name = Dll_GetTlsNameBuffer(
@@ -500,7 +498,6 @@ _FX NTSTATUS File_GetName(
             return status;
 
         uni = &((OBJECT_NAME_INFORMATION *)name)->Name;
-      }
 
 #ifdef WOW64_FS_REDIR
         //
@@ -536,8 +533,8 @@ _FX NTSTATUS File_GetName(
                     name += prefixLen;
                     length -= prefixLen;
 
-		            if (length >= 10 && 0 == Dll_NlsStrCmp(name, L"\\snapshot-", 10)) {
-			            WCHAR* ptr = wcschr(name + 10, L'\\');
+		            if (length >= 10 && 0 == Dll_NlsStrCmp(name + 1, File_Snapshot_Prefix, File_Snapshot_PrefixLen)) {
+			            WCHAR* ptr = wcschr(name + 1 + File_Snapshot_PrefixLen, L'\\');
                         if (ptr) {
                             length -= (ULONG)(ptr - name);
                             name = ptr;
@@ -815,19 +812,26 @@ check_sandbox_prefix:
 	//
 
 	if (is_boxed_path) {
-		if (length >= 10 &&
-			0 == Dll_NlsStrCmp(
-				*OutTruePath, L"\\snapshot-", 10))
+		if (length >= 10 && 0 == Dll_NlsStrCmp(*OutTruePath + 1, File_Snapshot_Prefix, File_Snapshot_PrefixLen))
 		{
-			WCHAR* path = wcschr(*OutTruePath + 10, L'\\');
-
+			WCHAR* path = wcschr(*OutTruePath + 1 + File_Snapshot_PrefixLen, L'\\');
 			if (path == NULL) {
+
 				//
-				// caller specified just the sandbox snapshot prefix
+				// caller specified just the sandbox snapshot prefix, or the path is to long
 				//
+
 				*OutTruePath = TruePath;
 				return STATUS_BAD_INITIAL_PC;
 			}
+
+            if (no_relocation) {
+                ULONG len = (ULONG)(path - (*OutTruePath + 1 + File_Snapshot_PrefixLen));
+                if (len < FILE_MAX_SNAPSHOT_ID) {
+                    wmemcpy(snapshot_id, *OutTruePath + 1 + File_Snapshot_PrefixLen, len);
+                    snapshot_id[len] = L'\0';
+                }
+            }
 
 			length -= (ULONG)(path - *OutTruePath);
 			*OutTruePath = path;
@@ -1070,6 +1074,34 @@ check_sandbox_prefix:
         TruePath = *OutTruePath;
 
     //
+    // if this is a unboxed path, and we opened it by object,
+    // check path relocation and update true path accordingly.
+    //
+
+    if (!is_boxed_path && RootDirectory && !no_relocation) {
+      
+        name = Handle_GetRelocationPath(RootDirectory, objname_len);
+        if (name) {
+
+            *OutTruePath = name;
+            TruePath = *OutTruePath;
+
+            name = (*OutTruePath) + wcslen(*OutTruePath);
+
+            if (objname_len) {
+
+                *name = L'\\';
+                ++name;
+                memcpy(name, objname_buf, objname_len);
+
+                name += objname_len / sizeof(WCHAR);
+            }
+
+            *name = L'\0';
+        }
+    }
+
+    //
     // now create the copy path, which is the box prefix prepended
     // to the true path that we have.  note that the copy path will
     // still be missing its null terminator.
@@ -1082,6 +1114,21 @@ check_sandbox_prefix:
 
     wmemcpy(name, Dll_BoxFilePath, Dll_BoxFilePathLen);
     name += Dll_BoxFilePathLen;
+
+    //
+    // if we requested real paths, re add the snapshot prefix
+    //
+
+    if (*snapshot_id) {
+
+        *name++ = L'\\';
+        wmemcpy(name, File_Snapshot_Prefix, File_Snapshot_PrefixLen);
+        name += File_Snapshot_PrefixLen;
+        ULONG len = wcslen(snapshot_id);
+        wmemcpy(name, snapshot_id, len);
+        name += len;
+    }
+
 
     //
     // if the true path points to a remote share or mapped drive,
@@ -1354,7 +1401,6 @@ _FX WCHAR *File_GetName_TranslateSymlinks(
         if (NT_SUCCESS(status))
             break;
 
-        if (!Dll_CompartmentMode) // NoDriverAssist
         if (status == STATUS_ACCESS_DENIED &&
                                 objname.Length <= 1020 * sizeof(WCHAR)) {
 
@@ -1969,12 +2015,12 @@ _FX NTSTATUS File_GetName_FromFileId(
     if (1) {
 
         BOOLEAN IsBoxedPath;
-        WCHAR *path = Dll_AllocTemp(8192);
         status = SbieDll_GetHandlePath(
-                    ObjectAttributes->RootDirectory, path, &IsBoxedPath);
+                    ObjectAttributes->RootDirectory, NULL, &IsBoxedPath);
         if (IsBoxedPath && (
                 NT_SUCCESS(status) || (status == STATUS_BAD_INITIAL_PC))) {
 
+            WCHAR *path = Dll_AllocTemp(8192);
             status = SbieDll_GetHandlePath(
                 ObjectAttributes->RootDirectory, path, NULL);
             if (NT_SUCCESS(status)) {
@@ -2012,9 +2058,9 @@ _FX NTSTATUS File_GetName_FromFileId(
                     NtClose(hTrueRoot);
                 }
             }
-        }
 
-        Dll_Free(path);
+            Dll_Free(path);
+        }
     }
 
     //
@@ -2177,6 +2223,53 @@ _FX ULONG File_MatchPath2(const WCHAR *path, ULONG *FileFlags, BOOLEAN bCheckObj
     }
 
     //
+    // check for network paths
+    //
+
+    if (_wcsnicmp(path, File_Redirector, File_RedirectorLen) == 0)
+        PrefixLen = File_RedirectorLen;
+    else if (_wcsnicmp(path, File_DfsClientRedir, File_DfsClientRedirLen) == 0)
+        PrefixLen = File_DfsClientRedirLen;
+    else if (_wcsnicmp(path, File_HgfsRedir, File_HgfsRedirLen) == 0)
+        PrefixLen = File_HgfsRedirLen;
+    else if (_wcsnicmp(path, File_MupRedir, File_MupRedirLen) == 0)
+        PrefixLen = File_MupRedirLen;
+    else
+        PrefixLen = 0;
+
+    //
+    // if we have a path that looks like
+    // \Device\LanmanRedirector\;Q:000000000000b09f\server\share\f1.txt
+    // \Device\Mup\;LanmanRedirector\;Q:000000000000b09f\server\share\f1.txt
+    // then translate to
+    // \Device\Mup\server\share\f1.txt
+    // and test again.  We do this because the SbieDrv records paths
+    // in the \Device\Mup format.  See SbieDrv::File_TranslateShares.
+    //
+
+    if (PrefixLen) {
+
+        ptr = path + PrefixLen;
+        if (*ptr == L';')
+            ptr = wcschr(ptr, L'\\');
+        else
+            --ptr;
+        if (ptr && ptr[0] && ptr[1]) {
+
+            ULONG len1 = wcslen(ptr + 1);
+            ULONG len2 = (File_MupLen + len1 + 8) * sizeof(WCHAR);
+            WCHAR* path2 = Dll_AllocTemp(len2);
+            wmemcpy(path2, File_Mup, File_MupLen);
+            wmemcpy(path2 + File_MupLen, ptr + 1, len1 + 1);
+
+            mp_flags = SbieDll_MatchPath2(L'f', path2, bCheckObjectExists, bMonitorLog);
+
+            Dll_Free(path2);
+            goto finish;
+        }
+    }
+
+    //
     // match path
     //
 
@@ -2211,49 +2304,6 @@ _FX ULONG File_MatchPath2(const WCHAR *path, ULONG *FileFlags, BOOLEAN bCheckObj
                 goto finish;
             }
         }
-    }
-
-    //
-    // check for network paths
-    //
-
-    if (_wcsnicmp(path, File_Redirector, File_RedirectorLen) == 0)
-        PrefixLen = File_RedirectorLen;
-    else if (_wcsnicmp(path, File_DfsClientRedir, File_DfsClientRedirLen) == 0)
-        PrefixLen = File_DfsClientRedirLen;
-    else if (_wcsnicmp(path, File_HgfsRedir, File_HgfsRedirLen) == 0)
-        PrefixLen = File_HgfsRedirLen;
-    else if (_wcsnicmp(path, File_MupRedir, File_MupRedirLen) == 0)
-        PrefixLen = File_MupRedirLen;
-    else
-        goto finish;
-
-    //
-    // if we have a path that looks like
-    // \Device\LanmanRedirector\;Q:000000000000b09f\server\share\f1.txt
-    // \Device\Mup\;LanmanRedirector\;Q:000000000000b09f\server\share\f1.txt
-    // then translate to
-    // \Device\Mup\server\share\f1.txt
-    // and test again.  We do this because the SbieDrv records paths
-    // in the \Device\Mup format.  See SbieDrv::File_TranslateShares.
-    //
-
-    ptr = path + PrefixLen;
-    if (*ptr == L';')
-        ptr = wcschr(ptr, L'\\');
-    else
-        --ptr;
-    if (ptr && ptr[0] && ptr[1]) {
-
-        ULONG len1   = wcslen(ptr + 1);
-        ULONG len2   = (File_MupLen + len1 + 8) * sizeof(WCHAR);
-        WCHAR *path2 = Dll_AllocTemp(len2);
-        wmemcpy(path2, File_Mup, File_MupLen);
-        wmemcpy(path2 + File_MupLen, ptr + 1, len1 + 1);
-
-        mp_flags = SbieDll_MatchPath2(L'f', path2, bCheckObjectExists, bMonitorLog);
-
-        Dll_Free(path2);
     }
 
     //
@@ -3618,7 +3668,8 @@ ReparseLoop:
     }
 
     //
-    // Relocation, if we opened the true file and its relocated set the path info
+    // Relocation, if we opened a relocated location we need to 
+    // store the original true path for the File_GetName function
     //
 
     if (TrueOpened && OriginalPath) {
@@ -4634,33 +4685,13 @@ _FX NTSTATUS File_QueryFullAttributesDirectoryFile(
     HANDLE FileHandle;
     NTSTATUS status;
 
-    if (!Dll_CompartmentMode) { // NoDriverAssist
+    //
+    // try to use SbieApi_OpenFile which will open the file, bypassing
+    // ClosedFilePath settings, but only if it a directory file.  it
+    // returns a handle that can only be used to query file attributes
+    //
 
-        //
-        // try to use SbieApi_OpenFile which will open the file, bypassing
-        // ClosedFilePath settings, but only if it a directory file.  it
-        // returns a handle that can only be used to query file attributes
-        //
-
-        status = SbieApi_OpenFile(&FileHandle, TruePath);
-
-    }
-    else {
-
-        OBJECT_ATTRIBUTES objattrs;
-        UNICODE_STRING objname;
-
-        InitializeObjectAttributes(
-            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-        RtlInitUnicodeString(&objname, TruePath);
-
-        status = __sys_NtCreateFile(
-            &FileHandle, FILE_GENERIC_READ, &objattrs, &MyIoStatusBlock,
-            NULL, 0, FILE_SHARE_VALID_FLAGS,
-            FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
-    }
-
+    status = SbieApi_OpenFile(&FileHandle, TruePath);
     if (NT_SUCCESS(status)) {
 
         status = __sys_NtQueryInformationFile(
@@ -5166,17 +5197,14 @@ _FX NTSTATUS File_NtQueryInformationFile(
         if (FileId && FileId->QuadPart) {
 
             BOOLEAN IsBoxedPath;
-            WCHAR *path = Dll_AllocTemp(8192);
             NTSTATUS status2 =
-                SbieDll_GetHandlePath(FileHandle, path, &IsBoxedPath);
+                SbieDll_GetHandlePath(FileHandle, NULL, &IsBoxedPath);
             if (IsBoxedPath && (NT_SUCCESS(status2)
                                     || (status2 == STATUS_BAD_INITIAL_PC))) {
 
                 FileId->LowPart  ^= 0xFFFFFFFF;
                 FileId->HighPart ^= 0xFFFFFFFF;
             }
-
-            Dll_Free(path);
         }
 
         return status;
@@ -5317,15 +5345,15 @@ _FX ULONG File_GetFinalPathNameByHandleW(
     WCHAR *path, *result;
     BOOLEAN IsBoxedPath;
 
-    path = Dll_AllocTemp(8192);
-    status = SbieDll_GetHandlePath(hFile, path, &IsBoxedPath);
+    status = SbieDll_GetHandlePath(hFile, NULL, &IsBoxedPath);
     if (IsBoxedPath &&
             (NT_SUCCESS(status) || (status == STATUS_BAD_INITIAL_PC))) {
 
         //
         // the specified file is inside the sandbox, so handle the request
         //
-
+        
+        path = Dll_AllocTemp(8192);
         status = SbieDll_GetHandlePath(hFile, path, NULL);
         if (! NT_SUCCESS(status)) {
 
@@ -5359,6 +5387,8 @@ _FX ULONG File_GetFinalPathNameByHandleW(
                     Dll_Free(result);
             }
         }
+
+        Dll_Free(path);
     }
 
     //
@@ -5372,7 +5402,6 @@ _FX ULONG File_GetFinalPathNameByHandleW(
         err = GetLastError();
     }
 
-    Dll_Free(path);
     SetLastError(err);
     return rc;
 }
@@ -6593,10 +6622,10 @@ _FX NTSTATUS File_RenameFile(
     if (! ReparsedPath)
         ReparsedPath = TargetTruePath;
 
-    if (!Dll_CompartmentMode) // NoDriverAssist
+    //if (!Dll_CompartmentMode) // NoDriverAssist
         status = SbieApi_RenameFile(SourceHandle, ReparsedPath, TargetFileName, info->ReplaceIfExists);
-    else
-        status = File_RenameOpenFile(SourceHandle, ReparsedPath, TargetFileName, info->ReplaceIfExists);
+    //else
+    //    status = File_RenameOpenFile(SourceHandle, ReparsedPath, TargetFileName, info->ReplaceIfExists);
 
     if (ReparsedPath != TargetTruePath)
         Dll_Free(ReparsedPath);
@@ -6732,6 +6761,7 @@ _FX NTSTATUS File_RenameFile(
             }
 
         } else {
+
             WCHAR* TargetTruePath2 = TargetTruePath;
 
             ULONG TargetTruePathFlags = 0;
@@ -6912,9 +6942,9 @@ after_rename:
             // if this is a directory and if so update/create the appropriate remapping
             //
 
-            if (IsDirectroy) {
+            if (TrueExists && IsDirectroy) {
 
-                File_SetRelocation(SourceTruePath, TargetTruePath, TrueExists);
+                File_SetRelocation(SourceTruePath, TargetTruePath);
             }
         }
         else
@@ -7062,8 +7092,16 @@ _FX ULONG SbieDll_GetHandlePath(
 
     Dll_PushTlsNameBuffer(TlsData);
 
+    //
+    // This function returns actual paths as thay exist in the real filesystem
+    // copy paths may point to the snapshot if the file is there
+    // and true paths will point to the original location if thay rere redirected
+    // ther for calling hooked file functions on these paths may run into file not found 
+    // when the original location is marked as deleted
+    //
+
     status = File_GetName(
-        FileHandle, NULL, &TruePath, &CopyPath, &FileFlags);
+        FileHandle, NO_RELOCATION, &TruePath, &CopyPath, &FileFlags);
 
     if (IsBoxedPath) {
 
@@ -7075,20 +7113,16 @@ _FX ULONG SbieDll_GetHandlePath(
     } else if (status == STATUS_BAD_INITIAL_PC)
         status = STATUS_SUCCESS;
 
-    if (NT_SUCCESS(status)) {
+    if (NT_SUCCESS(status) && OutWchar8192) {
 
         ULONG len;
         WCHAR *src = TruePath;
         if (Dll_BoxName &&              // sandboxed process
                 IsBoxedPath && *IsBoxedPath) {
 
-            if (File_Snapshot != NULL) {
-                WCHAR* TmplName = File_FindSnapshotPath(CopyPath);
-                if (TmplName) CopyPath = TmplName;
-            }
-
             src = CopyPath;
         }
+
         len = wcslen(src);
         if (len > 8192 / sizeof(WCHAR) - 4)
             len = 8192 / sizeof(WCHAR) - 4;

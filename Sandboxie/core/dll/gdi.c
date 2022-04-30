@@ -66,7 +66,7 @@ static ULONG Gdi_CreateScalableFontResourceW(
 static void Gdi_AddFontsInBox(void);
 
 static void Gdi_AddFontsInBox_2(
-    HANDLE hFontsDir, void *buf8k, WCHAR *WinFonts);
+    HANDLE hFontsDir, WCHAR *WinFonts);
 
 static int Gdi_EnumFontFamiliesExA(
     HDC hdc, void *lpLogfont, void *lpEnumFontFamExProc,

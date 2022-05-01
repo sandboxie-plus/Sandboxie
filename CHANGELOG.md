@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed BSOD issue with driver [#1811](https://github.com/sandboxie-plus/Sandboxie/issues/1811)
 - fixed issue with editing start restriction entries
 - fixed issue with netwirk options tab [#1825](https://github.com/sandboxie-plus/Sandboxie/issues/1825)
-
+- fixed portable mode issue when runnign sandman as admin [#1764](https://github.com/sandboxie-plus/Sandboxie/issues/1764)
 
 
 

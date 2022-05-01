@@ -153,8 +153,11 @@ SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 	if (Ops.isEmpty())
 		return SB_OK;
 
-	if (IsProcessElevatd())
-		return ExecOps(Ops);
+	if (IsProcessElevatd()) {
+		SB_RESULT(void*) result = ExecOps(Ops);
+		QThread::msleep(1000); // wait for the operation to finish properly
+		return result;
+	}
 
 	wstring path = QCoreApplication::applicationFilePath().toStdWString();
 	wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";

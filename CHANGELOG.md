@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with video playback in firefox introduced in the previouse build [#1831](https://github.com/sandboxie-plus/Sandboxie/issues/1831)
+- fixed BSOD issue with driver [#1811](https://github.com/sandboxie-plus/Sandboxie/issues/1811)
+- fixed issue with editing start restriction entries
+- fixed issue with netwirk options tab [#1825](https://github.com/sandboxie-plus/Sandboxie/issues/1825)
 
 
 

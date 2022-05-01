@@ -266,6 +266,9 @@ void COptionsWindow::CloseINetEdit(QTreeWidgetItem* pItem, bool bSave)
 
 void COptionsWindow::OnBlockINet()
 {
+	if (m_HoldChange)
+		return;
+
 	//bool Enable = ui.chkBlockINet->isChecked();
 
 	int Mode = ui.cmbBlockINet->currentData().toInt();

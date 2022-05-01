@@ -111,7 +111,7 @@ PSECURITY_DESCRIPTOR Driver_LowLabelSd = NULL;
 
 volatile BOOLEAN Driver_Unloading = FALSE;
 
-static BOOLEAN Driver_FullUnload = TRUE;
+BOOLEAN Driver_FullUnload = TRUE;
 
 UNICODE_STRING Driver_Altitude;
 const WCHAR* Altitude_Str = FILTER_ALTITUDE;

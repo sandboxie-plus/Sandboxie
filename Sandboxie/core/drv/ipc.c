@@ -581,6 +581,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     //};
 #endif
     static const WCHAR *readpaths[] = {
+        L"\\??\\pipe\\*",
         L"$:explorer.exe",
         NULL
     };

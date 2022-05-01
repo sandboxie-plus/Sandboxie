@@ -407,6 +407,8 @@ void COptionsWindow::LoadConfig()
 {
 	m_ConfigDirty = false;
 
+	m_HoldChange = true;
+
 	LoadGeneral();
 
 	LoadGroups();
@@ -431,6 +433,8 @@ void COptionsWindow::LoadConfig()
 	LoadTemplates();
 	
 	UpdateBoxType();
+
+	m_HoldChange = false;
 }
 
 void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value)
@@ -682,8 +686,6 @@ void COptionsWindow::UpdateCurrentTab()
 		CheckINetBlock();
 
 		LoadBlockINet();
-
-		OnBlockINet();
 	}
 	else if (ui.tabs->currentWidget() == ui.tabAdvanced)
 	{

@@ -1452,6 +1452,7 @@ _FX BOOLEAN Process_IsInPcaJob(HANDLE ProcessId)
 // Process_ScheduleKillProc
 //---------------------------------------------------------------------------
 
+extern BOOLEAN Driver_FullUnload;
 
 _FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
 {
@@ -1466,6 +1467,8 @@ _FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
 
     __try {
     retry:
+        if (Driver_FullUnload)
+            __leave;
         status = PsLookupProcessByProcessId(process_id, &ProcessObject);
         if (NT_SUCCESS(status)) {
 

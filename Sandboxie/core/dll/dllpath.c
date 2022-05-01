@@ -69,6 +69,9 @@ typedef struct _PATH_LIST_ANCHOR {
 #endif
     LIST open_ipc_path;
     LIST closed_ipc_path;
+#ifdef USE_MATCH_PATH_EX
+	LIST read_ipc_path;
+#endif
 
     LIST open_win_classes;
 
@@ -288,7 +291,8 @@ _FX void SbieDll_GetReadablePaths(WCHAR path_code, LIST **lists)
 
         lists[0] = &Dll_PathListAnchor->normal_ipc_path;
         lists[1] = &Dll_PathListAnchor->open_ipc_path;
-        lists[2] = NULL;
+        lists[2] = &Dll_PathListAnchor->read_ipc_path;
+        lists[3] = NULL;
 
     }
 }
@@ -460,12 +464,12 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
         closed_list = &Dll_PathListAnchor->closed_ipc_path;
         write_list  = NULL;
 #ifdef USE_MATCH_PATH_EX
-        read_list   = NULL;
+        read_list   = &Dll_PathListAnchor->read_ipc_path;
 #endif
 
         if (! Dll_PathListAnchor->ipc_paths_initialized) {
 #ifdef USE_MATCH_PATH_EX
-            Dll_InitPathList2('ix', normal_list, open_list, closed_list, NULL, NULL);
+            Dll_InitPathList2('ix', normal_list, open_list, closed_list, NULL, read_list);
 #else
             Dll_InitPathList2('ix', open_list, closed_list, NULL);
 #endif

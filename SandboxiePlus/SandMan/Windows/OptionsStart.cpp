@@ -61,13 +61,28 @@ void COptionsWindow::OnDelStartProg()
 
 void COptionsWindow::OnStartChanged(QTreeWidgetItem* pItem, int Index) 
 { 
-	if (pItem->checkState(0) == Qt::Checked) {
-		if(DelProgramFromGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccessDisabled>"))
-			AddProgramToGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccess>");
+	QString Name = pItem->data(0, Qt::UserRole).toString();
+	QString NewName = pItem->text(0);
+	if (Name != NewName) 
+	{
+		pItem->setData(0, Qt::UserRole, NewName);
+
+		if (pItem->checkState(0) == Qt::Checked) {
+			if (DelProgramFromGroup(Name, "<StartRunAccess>"))
+				AddProgramToGroup(NewName, "<StartRunAccess>");
+		}
+		else {
+			if (DelProgramFromGroup(Name, "<StartRunAccessDisabled>"))
+				AddProgramToGroup(NewName, "<StartRunAccessDisabled>");
+		}
+	}
+	else if (pItem->checkState(0) == Qt::Checked) {
+		if(DelProgramFromGroup(Name, "<StartRunAccessDisabled>"))
+			AddProgramToGroup(Name, "<StartRunAccess>");
 	}
 	else {
-		if(DelProgramFromGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccess>"))
-			AddProgramToGroup(pItem->data(0, Qt::UserRole).toString(), "<StartRunAccessDisabled>");
+		if(DelProgramFromGroup(Name, "<StartRunAccess>"))
+			AddProgramToGroup(Name, "<StartRunAccessDisabled>");
 	}
 	//m_StartChanged = true;  
 	//OnOptChanged(); 

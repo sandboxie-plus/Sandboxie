@@ -276,6 +276,21 @@ _FX void Dll_InitInjected(void)
 
     Dll_SidStringLen = wcslen(Dll_SidString);
 
+
+    //
+    // break for the debugger, as soon as we have Dll_ImageName
+    //
+
+    if (SbieDll_CheckStringInList(Dll_ImageName, NULL, L"WaitForDebugger")) {
+    //if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"WaitForDebugger", FALSE)) {
+    //if (SbieApi_QueryConfBool(NULL, L"WaitForDebuggerAll", FALSE)) {
+        while (!IsDebuggerPresent()) {
+            OutputDebugString(L"Waiting for Debugger\n");
+            Sleep(500);
+        } __debugbreak();
+    }
+
+
     //
     // query Sandboxie home folder
     //
@@ -447,6 +462,12 @@ _FX void Dll_InitInjected(void)
     if (ok)
         ok = Gui_InitConsole1();
 
+    // we need ipc stuff to be up hance we initialize delete stuff second to last
+    if (ok && File_Delete_v2)
+        File_InitDelete_v2();
+    if (ok && Key_Delete_v2)
+        Key_InitDelete_v2();
+
     if (ok) // Note: Ldr_Init may cause rpcss to be started early
         ok = Ldr_Init();            // last to initialize
 
@@ -464,46 +485,10 @@ _FX void Dll_InitInjected(void)
         ExitProcess(-1);
     }
 
-    extern BOOLEAN File_Delete_v2;
-    extern BOOLEAN File_InitDelete_v2();
-    if (File_Delete_v2)
-        File_InitDelete_v2();
-
-    extern BOOLEAN Key_Delete_v2;
-    extern BOOLEAN Key_InitDelete_v2();
-    if (Key_Delete_v2)
-        Key_InitDelete_v2();
-
     Dll_InitComplete = TRUE;
 
     if (! Dll_RestrictedToken)
         CustomizeSandbox();
-
-    /*while (! IsDebuggerPresent()) {
-        OutputDebugString(L"BREAK\n");
-        Sleep(500);
-    }
-    __debugbreak();*/
-
-    /*if (_wcsicmp(Dll_ImageName, L"iexplore.exe") == 0) {
-        WCHAR *cmd = GetCommandLine();
-        if (wcsstr(cmd, L"SCODEF")) {
-
-            while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();
-        }
-    }*/
-
-    /*if (_wcsicmp(Dll_ImageName, L"dllhost.exe") == 0) {
-            while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();
-    }*/
 }
 
 

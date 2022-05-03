@@ -184,7 +184,6 @@ _FX BOOLEAN Hook_Tramp_CountBytes(
     void *SysProc, ULONG *ByteCount, BOOLEAN is64, BOOLEAN probe)
 {
     UCHAR *addr = (UCHAR *)SysProc;
-    //ULONG needlen = (is64 == 9 ? 13 : (is64 ? 12 : (File_TrusteerLoaded()?6:5)));
 	ULONG needlen = (is64 ? 12 : 5);
     ULONG copylen = 0;
 

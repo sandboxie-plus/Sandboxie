@@ -9,6 +9,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [1.0.21 / 5.55.21] - 2022-05-02
+
+
+### Changed
+- improved support certificate entry box
+- changing language no longer requires a restart
+- fixed issue with high cpu load when using sbiectrl to change settings
+
+### Fixed
+- fixed issue when running a firefox/chrome built with mingw [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
+
+
+
+
+
 ## [1.0.20 / 5.55.20] - 2022-05-02
 
 ### Fixed

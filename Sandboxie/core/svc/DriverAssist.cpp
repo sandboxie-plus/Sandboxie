@@ -299,11 +299,15 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
 #ifdef NEW_INI_MODE
 
         //
-        // in case the ini was edited externally, i.e. by notepad.exe 
-        // we update the ini cache each time the driver reloads the ini file
+        // In case the ini was edited externally, i.e. by notepad.exe 
+        // we update the ini cache each time the driver reloads the ini file.
+        // 
+        // In newer builds the driver tells us which process issued the reload
+        // if we did it we dont need to purge the cached ini data
         //
 
-        SbieIniServer::NotifyConfigReloaded();
+        if(data_len < sizeof(ULONG) || *(ULONG*)data_ptr != GetCurrentProcessId())
+            SbieIniServer::NotifyConfigReloaded();
 #endif
 
         RestartHostInjectedSvcs();
@@ -483,9 +487,25 @@ extern void RestartHostInjectedSvcs();
 
 void DriverAssist::RestartHostInjectedSvcs()
 {
-    EnterCriticalSection(&m_critSecHostInjectedSvcs);
-    ::RestartHostInjectedSvcs();
-    LeaveCriticalSection(&m_critSecHostInjectedSvcs);
+    //
+    // SbieCtrl issues a refresh on every setting change,
+    // resulting in this function getting triggered way to often, 
+    // hence we implement a small workaround.
+    // The first thread to hit this monitors how many 
+    // calls go in and waits untill the last one,
+    // then it starts the Job.
+    //
+
+    static volatile ULONG JobCounter = 0;
+    if (InterlockedIncrement(&JobCounter) == 1) {
+        do {
+            Sleep(250);
+        } while (JobCounter > 1);
+        EnterCriticalSection(&m_critSecHostInjectedSvcs);
+        ::RestartHostInjectedSvcs();
+        LeaveCriticalSection(&m_critSecHostInjectedSvcs);
+    }
+    InterlockedDecrement(&JobCounter);
 }
 
 

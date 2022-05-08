@@ -121,7 +121,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
 
-	m_LanguageId = 1033; // lang en_us
 	LoadLanguage();
 	SetUITheme();
 
@@ -156,6 +155,8 @@ CSandMan::CSandMan(QWidget *parent)
 	CPanelView::m_CopyRow = tr("Copy Row");
 	CPanelView::m_CopyPanel = tr("Copy Panel");
 
+	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
+
 	CreateMenus();
 
 	m_pMainWidget = new QWidget();
@@ -166,45 +167,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	CreateToolBar();
 
-	m_pLogSplitter = new QSplitter();
-	m_pLogSplitter->setOrientation(Qt::Vertical);
-	m_pMainLayout->addWidget(m_pLogSplitter);
-
-	m_pPanelSplitter = new QSplitter();
-	m_pPanelSplitter->setOrientation(Qt::Horizontal);
-	m_pLogSplitter->addWidget(m_pPanelSplitter);
-
-
-	m_pBoxView = new CSbieView();
-	m_pPanelSplitter->addWidget(m_pBoxView);
-
-	connect(m_pBoxView->GetTree()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnSelectionChanged()));
-
-	//m_pPanelSplitter->addWidget();
-
-	m_pLogTabs = new QTabWidget();
-	m_pLogSplitter->addWidget(m_pLogTabs);
-
-	// Message Log
-	m_pMessageLog = new CPanelWidgetEx();
-
-	//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-	((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
-
-	m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
-	m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
-
-	m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	m_pMessageLog->GetView()->setSortingEnabled(false);
-
-	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
-	//
-
-	m_pTraceView = new CTraceView(this);
-
-	m_pTraceView->AddAction(m_pCleanUpTrace);
-
-	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
+	CreateView();
 
 	m_pHotkeyManager = new UGlobalHotkeys(this);
 	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
@@ -237,57 +200,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bIconBusy = false;
 	m_iDeletingContent = 0;
 
-	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
-	QFont f = pShowHide->font();
-	f.setBold(true);
-	pShowHide->setFont(f);
-	m_pTrayMenu->addSeparator();
-
-	m_pTrayList = new QWidgetAction(m_pTrayMenu);
-
-	QWidget* pWidget = new CActionWidget();
-    QHBoxLayout* pLayout = new QHBoxLayout();
-	pLayout->setMargin(0);
-	pWidget->setLayout(pLayout);
-
-	m_pTrayBoxes = new QTreeWidget();
-
-	m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
-	m_pTrayBoxes->setRootIsDecorated(false);
-	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
-	m_pTrayBoxes->setHeaderHidden(true);
-	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
-	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
-	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
-
-	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
-
-	pLayout->insertSpacing(0, 1);// 32);
-
-	/*QFrame* vFrame = new QFrame;
-	vFrame->setFixedWidth(1);
-	vFrame->setFrameShape(QFrame::VLine);
-	vFrame->setFrameShadow(QFrame::Raised);
-	pLayout->addWidget(vFrame);*/
-	
-	pLayout->addWidget(m_pTrayBoxes);
-
-    m_pTrayList->setDefaultWidget(pWidget);
-	m_pTrayMenu->addAction(m_pTrayList);
-
-
-	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnBoxMenu(const QPoint &)));
-	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
-	//m_pBoxMenu
-
-	m_pTraySeparator = m_pTrayMenu->addSeparator();
-	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
-	m_pDisableForce2->setCheckable(true);
-	m_pTrayMenu->addSeparator();
+	CreateTrayMenu();
 
 	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
 
@@ -416,8 +329,6 @@ QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
 
 void CSandMan::CreateMenus()
 {
-	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
-
 	m_pMenuFile = menuBar()->addMenu(tr("&Sandbox"));
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnNewGroupe()));
@@ -553,6 +464,104 @@ void CSandMan::CreateToolBar()
 	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
 	m_pToolBar->addWidget(pSupportLbl);
 	m_pToolBar->addWidget(new QLabel("        "));
+}
+
+void CSandMan::CreateView()
+{
+	m_pLogSplitter = new QSplitter();
+	m_pLogSplitter->setOrientation(Qt::Vertical);
+	m_pMainLayout->addWidget(m_pLogSplitter);
+
+	m_pPanelSplitter = new QSplitter();
+	m_pPanelSplitter->setOrientation(Qt::Horizontal);
+	m_pLogSplitter->addWidget(m_pPanelSplitter);
+
+
+	m_pBoxView = new CSbieView();
+	m_pPanelSplitter->addWidget(m_pBoxView);
+
+	connect(m_pBoxView->GetTree()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnSelectionChanged()));
+
+	//m_pPanelSplitter->addWidget();
+
+	m_pLogTabs = new QTabWidget();
+	m_pLogSplitter->addWidget(m_pLogTabs);
+
+	// Message Log
+	m_pMessageLog = new CPanelWidgetEx();
+
+	//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
+	((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
+
+	m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
+	m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
+
+	m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	m_pMessageLog->GetView()->setSortingEnabled(false);
+
+	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
+	//
+
+	m_pTraceView = new CTraceView(this);
+
+	m_pTraceView->AddAction(m_pCleanUpTrace);
+
+	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
+}
+
+void CSandMan::CreateTrayMenu()
+{
+	m_pTrayMenu = new QMenu();
+	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QFont f = pShowHide->font();
+	f.setBold(true);
+	pShowHide->setFont(f);
+	m_pTrayMenu->addSeparator();
+
+	m_pTrayList = new QWidgetAction(m_pTrayMenu);
+
+	QWidget* pWidget = new CActionWidget();
+    QHBoxLayout* pLayout = new QHBoxLayout();
+	pLayout->setMargin(0);
+	pWidget->setLayout(pLayout);
+
+	m_pTrayBoxes = new QTreeWidget();
+
+	m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+	m_pTrayBoxes->setRootIsDecorated(false);
+	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
+	m_pTrayBoxes->setHeaderHidden(true);
+	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
+	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
+	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
+
+	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
+
+	pLayout->insertSpacing(0, 1);// 32);
+
+	/*QFrame* vFrame = new QFrame;
+	vFrame->setFixedWidth(1);
+	vFrame->setFrameShape(QFrame::VLine);
+	vFrame->setFrameShadow(QFrame::Raised);
+	pLayout->addWidget(vFrame);*/
+	
+	pLayout->addWidget(m_pTrayBoxes);
+
+    m_pTrayList->setDefaultWidget(pWidget);
+	m_pTrayMenu->addAction(m_pTrayList);
+
+
+	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnBoxMenu(const QPoint &)));
+	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
+	//m_pBoxMenu
+
+	m_pTraySeparator = m_pTrayMenu->addSeparator();
+	m_pTrayMenu->addAction(m_pEmptyAll);
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2->setCheckable(true);
+	m_pTrayMenu->addSeparator();
 }
 
 void CSandMan::OnExit()
@@ -1345,12 +1354,12 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 	{
 		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
 
-		if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
-			SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-			QTimer::singleShot(100, this, [pWnd]() {
-				SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-				});
-		}
+		//if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+		//	SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		//	QTimer::singleShot(100, this, [pWnd]() {
+		//		SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		//		});
+		//}
 
 		pWnd->AddFile(FilePath, BoxPath);
 	}
@@ -1388,7 +1397,7 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	}
 	else {
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
+		//SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
 	}
 	if(bFind)
 		pBoxEx->m_pRecoveryWnd->FindFiles();
@@ -1834,6 +1843,21 @@ void CSandMan::UpdateSettings()
 		m_pTrayIcon->show();
 	else
 		m_pTrayIcon->hide();
+
+	if (m_Language != theConf->GetString("Options/UiLanguage")) 
+	{
+		LoadLanguage();
+
+		menuBar()->clear();
+		CreateMenus();
+
+		m_pMainLayout->removeWidget(m_pLogSplitter);
+		m_pLogSplitter->deleteLater();
+		CreateView();
+
+		m_pTrayMenu->deleteLater();
+		CreateTrayMenu();
+	}
 }
 
 void CSandMan::OnResetMsgs()
@@ -2727,42 +2751,40 @@ void CSandMan::UpdateTheme()
 
 void CSandMan::LoadLanguage()
 {
-	m_LanguageId = 0;
-
 	QString Lang = theConf->GetString("Options/UiLanguage");
 	if(Lang.isEmpty())
 		Lang = QLocale::system().name();
+	m_Language = Lang;
 
-	if (Lang.compare("native", Qt::CaseInsensitive) != 0) {
-		if (!Lang.isEmpty())
-			m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+	if (Lang.compare("native", Qt::CaseInsensitive) == 0)
+		Lang.clear();
 
-		LoadLanguage(Lang, "sandman", 0);
-		LoadLanguage(Lang, "qt", 1);
-	}
-
+	m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
+
+	LoadLanguage(Lang, "sandman", 0);
+	LoadLanguage(Lang, "qt", 1);
 }
 
 void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)
 {
 	qApp->removeTranslator(&m_Translator[Index]);
 
-	if (!Lang.isEmpty())
+	if (Lang.isEmpty())
+		return;
+	
+	QString LangAux = Lang; // Short version as fallback
+	LangAux.truncate(LangAux.lastIndexOf('_'));
+
+	QString LangDir = QApplication::applicationDirPath() + "/translations/";
+
+	QString LangPath = LangDir + Module + "_";
+	bool bAux = false;
+	if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
 	{
-		QString LangAux = Lang; // Short version as fallback
-		LangAux.truncate(LangAux.lastIndexOf('_'));
-
-		QString LangDir = QApplication::applicationDirPath() + "/translations/";
-
-		QString LangPath = LangDir + Module + "_";
-		bool bAux = false;
-		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
-		{
-			if(m_Translator[Index].load(LangPath + (bAux ? LangAux : Lang) + ".qm", LangDir))
-				qApp->installTranslator(&m_Translator[Index]);
-		}
+		if(m_Translator[Index].load(LangPath + (bAux ? LangAux : Lang) + ".qm", LangDir))
+			qApp->installTranslator(&m_Translator[Index]);
 	}
 }
 

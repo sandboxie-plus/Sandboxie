@@ -204,6 +204,8 @@ private slots:
 private:
 	void				CreateMenus();
 	void				CreateToolBar();
+	void				CreateView();
+	void				CreateTrayMenu();
 
 	void				HandleMaintenance(SB_RESULT(void*) Status);
 
@@ -308,6 +310,7 @@ private:
 	QTranslator			m_Translator[2];
 
 public:
+	QString				m_Language;
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
 };

@@ -165,6 +165,14 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
 	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
 
+	ui.txtCertificate->setPlaceholderText(
+		"NAME: User Name\n"
+		"LEVEL: ULTIMATE\n"
+		"DATE: dd.mm.yyyy\n"
+		"UPDATEKEY: 00000000000000000000000000000000\n"
+		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+	);
+
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// edit

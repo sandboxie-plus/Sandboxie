@@ -52,6 +52,8 @@ public:
 	virtual QString			GetSbiePath() const { return m_SbiePath; }
 	virtual QString			GetIniPath() const { return m_IniPath; }
 
+	virtual QString			ResolveAbsolutePath(const QString& Path);
+
 	virtual void			UpdateDriveLetters();
 	virtual QString			Nt2DosPath(QString NtPath, bool* pOk = NULL) const;
 

@@ -117,12 +117,14 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 
 	foreach(const QString& NtFolder, m_pBox->GetTextList("RecoverFolder", true, true)) 
 	{
+		QString RecFolder = theAPI->ResolveAbsolutePath(NtFolder);
+
 		bool bOk;
-		QString Folder = theAPI->Nt2DosPath(NtFolder, &bOk);
+		QString Folder = theAPI->Nt2DosPath(RecFolder, &bOk);
 		if(bOk)
 			m_RecoveryFolders.append(Folder);
-		else if(NtFolder.left(11) == "\\Device\\Mup")
-			m_RecoveryFolders.append("\\" + NtFolder.mid(11));
+		else if(RecFolder.left(11) == "\\Device\\Mup")
+			m_RecoveryFolders.append("\\" + RecFolder.mid(11));
 	}
 
 	ui.cmbRecover->addItem(tr("Original location"), 0);
@@ -383,7 +385,11 @@ QPair<int, quint64>	CRecoveryWindow::FindFiles(const QString& BoxedFolder, const
 void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 {
 	//bool HasShare = false;
-	QMap<QString, QString> FileMap;
+	struct SRecItem {
+		QString FullPath;
+		QString RelPath;
+	};
+	QMap<QString, SRecItem> FileMap;
 	foreach(const QModelIndex& Index, ui.treeFiles->selectionModel()->selectedIndexes())
 	{
 		QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
@@ -398,10 +404,16 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 		{
 			//if (File["DiskPath"].toString().indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
 			//	HasShare = true;
-			FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
+			QString CurPath = File["DiskPath"].toString();;
+			FileMap[File["BoxPath"].toString()].FullPath = CurPath;
+			FileMap[File["BoxPath"].toString()].RelPath = CurPath.mid(CurPath.lastIndexOf("\\"));
 		}
 		else
 		{
+			QString DirPath = File["DiskPath"].toString();
+			//if(ModelIndex.parent().isValid())
+			//	DirPath = Split2(DirPath, "\\", true).first;
+
 			QList<QModelIndex> Folders;
 			Folders.append(ModelIndex);
 			do
@@ -420,7 +432,12 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 					{
 						//if (File["DiskPath"].toString().indexOf("\\device\\mup") == 0)
 						//	HasShare = true;
-						FileMap[File["BoxPath"].toString()] = File["DiskPath"].toString();
+						QString CurPath = File["DiskPath"].toString();
+						FileMap[File["BoxPath"].toString()].FullPath = CurPath;
+
+						QString RelPath = CurPath.mid(DirPath.length());
+						if (RelPath.length() > FileMap[File["BoxPath"].toString()].RelPath.length())
+							FileMap[File["BoxPath"].toString()].RelPath = RelPath;
 					}
 					else
 						Folders.append(ChildIndex);
@@ -448,14 +465,15 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 
 
 	QList<QPair<QString, QString>> FileList;
-	for(QMap<QString, QString>::const_iterator I = FileMap.begin(); I != FileMap.end(); ++I)
+	for(QMap<QString, SRecItem>::const_iterator I = FileMap.begin(); I != FileMap.end(); ++I)
 	{
 		QString BoxedFilePath = I.key();
-		QString RecoveryPath = I.value();
+		QString RecoveryPath = I.value().FullPath;
 		if (!RecoveryFolder.isEmpty())
 		{
-			QString FileName = RecoveryPath.mid(RecoveryPath.lastIndexOf("\\") + 1);
-			RecoveryPath = RecoveryFolder + "\\" + FileName;
+			//QString FileName = RecoveryPath.mid(RecoveryPath.lastIndexOf("\\") + 1);
+			//RecoveryPath = RecoveryFolder + "\\" + FileName;
+			RecoveryPath = RecoveryFolder + I.value().RelPath;
 		}
 
 		FileList.append(qMakePair(BoxedFilePath, RecoveryPath));

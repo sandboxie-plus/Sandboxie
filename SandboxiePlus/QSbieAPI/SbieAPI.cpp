@@ -869,6 +869,43 @@ ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
     return sn;
 }
 
+QString CSbieAPI::ResolveAbsolutePath(const QString& Path)
+{
+	wstring path = Path.toStdWString();
+	UNICODE_STRING uni;
+    RtlInitUnicodeString(&uni, path.c_str());
+	OBJECT_ATTRIBUTES objattrs;
+    InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+	HANDLE FileHandle;
+    IO_STATUS_BLOCK IoStatusBlock;
+    NTSTATUS status = NtCreateFile(&FileHandle, FILE_READ_ATTRIBUTES | SYNCHRONIZE, &objattrs, &IoStatusBlock, NULL, 0,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,NULL, 0);
+
+    if (NT_SUCCESS(status)) {
+
+		const ULONG NameLen = 4096;
+		WCHAR NameBuf[NameLen];
+
+		__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+		API_GET_FILE_NAME_ARGS *args = (API_GET_FILE_NAME_ARGS *)parms;
+
+		memset(parms, 0, sizeof(parms));
+		args->func_code               = API_GET_FILE_NAME;
+		args->handle.val64            = (ULONG64)(ULONG_PTR)FileHandle;
+		args->name_len.val64          = (ULONG64)(ULONG_PTR)(NameLen * sizeof(WCHAR));
+		args->name_buf.val64          = (ULONG64)(ULONG_PTR)NameBuf;
+		status = m->IoControl(parms);
+
+        NtClose(FileHandle);
+
+		if (NT_SUCCESS(status))
+			return QString::fromWCharArray(NameBuf);
+    }
+
+	return Path;
+}
+
 void CSbieAPI::UpdateDriveLetters()
 {
 	QWriteLocker Lock(&m_DriveLettersMutex);

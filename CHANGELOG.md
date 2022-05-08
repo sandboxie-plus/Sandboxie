@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue when running a firefox/chrome built with mingw [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
-
+- fixed issues with folder recovery using the sandman ui [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840) [#1380](https://github.com/sandboxie-plus/Sandboxie/issues/1380)
 
 
 

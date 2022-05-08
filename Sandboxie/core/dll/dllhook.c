@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -38,6 +38,8 @@
 static void *SbieDll_Hook_CheckChromeHook(void *SourceFunc);
 
 ULONG_PTR  DLL_FindWow64Target(ULONG_PTR address);
+
+BOOLEAN SbieDll_FuncSkipHook(const char* func);
 
 //---------------------------------------------------------------------------
 // Variables
@@ -110,6 +112,9 @@ _FX void *SbieDll_Hook(
     long long delta;
     BOOLEAN CallInstruction64 = FALSE;
 #endif _WIN64
+
+    if (SbieDll_FuncSkipHook(SourceFuncName))
+        return SourceFunc;
 
     //
     // validate parameters
@@ -613,6 +618,40 @@ _FX void *SbieDll_Hook_CheckChromeHook(void *SourceFunc)
         */
 #endif ! _WIN64
     return SourceFunc;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_FuncSkipHook
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_FuncSkipHook(const char* func)
+{
+    static const WCHAR* setting = L"FuncSkipHook";
+
+    static BOOLEAN Disable = FALSE;
+    if (Disable) return FALSE;
+
+    WCHAR buf[66];
+    ULONG index = 0;
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(NULL, setting, index, buf, 64 * sizeof(WCHAR));
+        if (NT_SUCCESS(status)) {
+            WCHAR* ptr = buf;
+            for (const char* tmp = func; *ptr && *tmp && *ptr == *tmp; ptr++, tmp++);
+            if (*ptr == L'\0') //if (_wcsicmp(buf, func) == 0)
+                return TRUE;
+        }
+        else if (status != STATUS_BUFFER_TOO_SMALL)
+            break;
+        ++index;
+    }
+
+    // if there are no fucntions to skip configured, disable the check
+    if (index == 0) Disable = TRUE;
+
+    return FALSE;
 }
 
 

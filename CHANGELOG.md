@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with high CPU load when using SbieCtrl to change settings
 
 ### Fixed
-- fixed issue when running a Firefox/Chrome build with MinGW toolchain [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
+- fixed issue when running Firefox/Chromium browsers compiled with MinGW toolchain [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
 - fixed issues with folder recovery on Plus UI [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840) [#1380](https://github.com/sandboxie-plus/Sandboxie/issues/1380)
 
 

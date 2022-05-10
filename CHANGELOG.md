@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.21 / 5.55.21] - 2022-05-xx
+## [1.0.21 / 5.55.21] - 2022-05-10
 
 ### Added
 - added "FuncSkipHook=FunctionName" option to selectively disable individual function hooks

@@ -12,19 +12,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.21 / 5.55.21] - 2022-05-02
+## [1.0.21 / 5.55.21] - 2022-05-10
 
 ### Added
-- added "FuncSkipHook=FunctionName" option to allow to sellecively disable individual function hooks
+- added "FuncSkipHook=FunctionName" option to selectively disable certain function hooks
 
 ### Changed
-- improved support certificate entry box
-- changing language no longer requires a restart
-- fixed issue with high cpu load when using sbiectrl to change settings
+- improved the support certificate entry box
+- changing the language no longer requires a restart on Plus UI
+- fixed issue with high CPU load when using SbieCtrl to change settings
 
 ### Fixed
-- fixed issue when running a firefox/chrome built with mingw [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
-- fixed issues with folder recovery using the sandman ui [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840) [#1380](https://github.com/sandboxie-plus/Sandboxie/issues/1380)
+- fixed issue with Firefox/Chromium browsers that have been compiled with the MinGW toolchain [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
+- fixed issues with folder recovery on Plus UI [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840) [#1380](https://github.com/sandboxie-plus/Sandboxie/issues/1380)
 
 
 

@@ -1370,7 +1370,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-	if (!pBoxEx) return;
+	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
 		pBoxEx->m_pRecoveryWnd->close();
 		// todo: resuse window?
@@ -1389,7 +1389,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-	if (!pBoxEx) return;
+	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
 		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {

@@ -12,6 +12,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.22 / 5.55.22] - 2022-05-xx
+
+
+### Fixed
+- fixed sandman crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
+- fixed issue with windows server 2022 build 20348
+
+
+
 ## [1.0.21 / 5.55.21] - 2022-05-10
 
 ### Added

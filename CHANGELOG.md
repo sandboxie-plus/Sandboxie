@@ -60,7 +60,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed crash issue in the SandMan UI [#1772](https://github.com/sandboxie-plus/Sandboxie/issues/1772)
 - fixed issue with some installers when EnableObjectFiltering is enabled [#1795](https://github.com/sandboxie-plus/Sandboxie/issues/1795)
 - fixed allowing NtCreateSymbolicLinkObject to be safely used in the sandbox
-- added workaround for a Vivaldi hooking issue [1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
+- added workaround for a Vivaldi hooking issue [#1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
 -- Note: this fix is provisional, it can be disabled with UseVivaldiWorkaround=n
 - fixed registry issue with snapshots [#1782](https://github.com/sandboxie-plus/Sandboxie/issues/1782)
 - fixed issue with box grouping [#1778](https://github.com/sandboxie-plus/Sandboxie/issues/1778) [#1777](https://github.com/sandboxie-plus/Sandboxie/issues/1777) [#1776](https://github.com/sandboxie-plus/Sandboxie/issues/1776) 

@@ -65,6 +65,8 @@ public:
 
 	void				UpdateTheme();
 
+	void				InstallUpdate();
+
 	void				UpdateCertState();
 	void				UpdateCert();
 
@@ -152,6 +154,7 @@ public slots:
 	void				OnBoxClosed(const QString& BoxName);
 
 	void				CheckForUpdates(bool bManual = true);
+	void				DownloadUpdates(const QString& DownloadUrl, bool bManual);
 
 	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
 	void				OpenUrl(const QUrl& url);
@@ -200,6 +203,8 @@ private slots:
 	void				OnCertCheck();
 
 	void				SetUITheme();
+
+	void				UpdateLabel();
 
 private:
 	void				CreateMenus();
@@ -275,6 +280,9 @@ private:
 	QAction*			m_pEditIni;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
+
+	QAction*			m_pSeparator;
+	QLabel*				m_pLabel;
 
 	QMenu*				m_pMenuHelp;
 	QAction*			m_pSupport;

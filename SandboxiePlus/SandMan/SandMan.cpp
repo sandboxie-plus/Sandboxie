@@ -447,9 +447,7 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addAction(m_pEnableMonitoring);
 	//m_pToolBar->addSeparator();
 	
-
-	if (!g_Certificate.isEmpty())
-		return;
+	// Label
 
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -457,13 +455,46 @@ void CSandMan::CreateToolBar()
 
 	//m_pToolBar->addAction(m_pMenuElevate);
 
-	m_pToolBar->addSeparator();
+	m_pSeparator = m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupportLbl = new QLabel(tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>"));
-	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
-	m_pToolBar->addWidget(pSupportLbl);
+	m_pLabel = new QLabel();
+	m_pLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+	connect(m_pLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(OpenUrl(const QString&)));
+	m_pToolBar->addWidget(m_pLabel);
 	m_pToolBar->addWidget(new QLabel("        "));
+
+	UpdateLabel();
+}
+
+void CSandMan::UpdateLabel()
+{
+	QString LabelText;
+	QString LabelTip;
+
+	if (!theConf->GetString("Options/PendingUpdatePackage").isEmpty()) 
+	{
+		LabelText = tr("<a href=\"sbie://update/package\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
+
+		//QPalette palette = m_pLabel->palette();
+		//palette.setColor(QPalette::Link, Qt::red);
+		//palette.setColor(m_pLabel->backgroundRole(), Qt::yellow);
+		//palette.setColor(m_pLabel->foregroundRole(), Qt::red);
+		//m_pLabel->setAutoFillBackground(true);
+		//m_pLabel->setPalette(palette);
+
+		//m_pLabel->setStyleSheet("QLabel { link-color : red; }");
+
+		LabelTip = tr("Click to install update");
+	}
+	else if (g_Certificate.isEmpty()) {
+		LabelText = tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+		LabelTip = tr("Click to open web browser");
+	}
+
+	m_pSeparator->setVisible(!LabelText.isEmpty());
+	m_pLabel->setVisible(!LabelText.isEmpty());
+	m_pLabel->setText(LabelText);
+	m_pLabel->setToolTip(LabelTip);
 }
 
 void CSandMan::CreateView()
@@ -1850,6 +1881,11 @@ void CSandMan::UpdateSettings()
 	{
 		LoadLanguage();
 
+		QTreeViewEx::m_ResetColumns = tr("Reset Columns");
+		CPanelView::m_CopyCell = tr("Copy Cell");
+		CPanelView::m_CopyRow = tr("Copy Row");
+		CPanelView::m_CopyPanel = tr("Copy Panel");
+
 		menuBar()->clear();
 		CreateMenus();
 
@@ -1859,6 +1895,8 @@ void CSandMan::UpdateSettings()
 
 		m_pTrayMenu->deleteLater();
 		CreateTrayMenu();
+
+		UpdateLabel();
 	}
 }
 
@@ -2267,8 +2305,14 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 void CSandMan::OpenUrl(const QUrl& url)
 {
-	if (url.scheme() == "sbie") {
-		QString path = url.path();
+	QString scheme = url.scheme();
+	QString host = url.host();
+	QString path = url.path();	
+	QString query = url.query();
+
+	if (scheme == "sbie") {	
+		if (path == "/package")
+			return InstallUpdate();
 		if (path == "/cert")
 			return UpdateCert();
 		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
@@ -2351,8 +2395,8 @@ void CSandMan::OnUpdateCheck()
 		return;
 
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
-	QByteArray Reply = pReply->readAll();
 	bool bManual = pReply->property("manual").toBool();
+	QByteArray Reply = pReply->readAll();
 	pReply->deleteLater();
 
 	m_pUpdateProgress->Finish(SB_OK);
@@ -2429,57 +2473,51 @@ void CSandMan::OnUpdateCheck()
 			bNothing = false;
 			//QDateTime Updated = QDateTime::fromTime_t(Data["updated"].toULongLong());
 
-			QString UpdateMsg = Data["updateMsg"].toString();
-			QString UpdateUrl = Data["updateUrl"].toString();
-
 			QString DownloadUrl = Data["downloadUrl"].toString();
 			//	'sha256'
 			//	'signature'
 
-			QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
-			if (!DownloadUrl.isEmpty())
-				FullMessage += tr("<p>Do you want to download the latest version?</p>");
-			else if (!UpdateUrl.isEmpty())
-				FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">download page</a>?</p>").arg(UpdateUrl);
-
-			CCheckableMessageBox mb(this);
-			mb.setWindowTitle("Sandboxie-Plus");
-			QIcon ico(QLatin1String(":/SandMan.png"));
-			mb.setIconPixmap(ico.pixmap(64, 64));
-			//mb.setTextFormat(Qt::RichText);
-			mb.setText(FullMessage);
-			mb.setCheckBoxText(tr("Don't show this message anymore."));
-			mb.setCheckBoxVisible(!bManual);
-
-			if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {
-				mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
-				mb.setDefaultButton(QDialogButtonBox::Yes);
-			}
+			if (!DownloadUrl.isEmpty() && theConf->GetInt("Options/DownloadUpdates", 1) == 1)
+				DownloadUpdates(DownloadUrl, bManual);
 			else
-				mb.setStandardButtons(QDialogButtonBox::Ok);
-
-			mb.exec();
-
-			if (mb.isChecked())
-				theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
-
-			if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
 			{
-				if (!DownloadUrl.isEmpty())
-				{
-					QNetworkRequest Request = QNetworkRequest(DownloadUrl);
-					Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-					//Request.setRawHeader("Accept-Encoding", "gzip");
-					QNetworkReply* pReply = m_RequestManager->get(Request);
-					connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateDownload()));
-					connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
+				QString UpdateMsg = Data["updateMsg"].toString();
+				QString UpdateUrl = Data["updateUrl"].toString();
 
-					m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-					AddAsyncOp(m_pUpdateProgress);
-					m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
+				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
+				if (!DownloadUrl.isEmpty())
+					FullMessage += tr("<p>Do you want to download the latest version?</p>");
+				else if (!UpdateUrl.isEmpty())
+					FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">download page</a>?</p>").arg(UpdateUrl);
+
+				CCheckableMessageBox mb(this);
+				mb.setWindowTitle("Sandboxie-Plus");
+				QIcon ico(QLatin1String(":/SandMan.png"));
+				mb.setIconPixmap(ico.pixmap(64, 64));
+				//mb.setTextFormat(Qt::RichText);
+				mb.setText(FullMessage);
+				mb.setCheckBoxText(tr("Don't show this message anymore."));
+				mb.setCheckBoxVisible(!bManual);
+
+				if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {
+					mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
+					mb.setDefaultButton(QDialogButtonBox::Yes);
 				}
 				else
-					QDesktopServices::openUrl(UpdateUrl);
+					mb.setStandardButtons(QDialogButtonBox::Ok);
+
+				mb.exec();
+
+				if (mb.isChecked())
+					theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
+
+				if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
+				{
+					if (!DownloadUrl.isEmpty())
+						DownloadUpdates(DownloadUrl, bManual);
+					else
+						QDesktopServices::openUrl(UpdateUrl);
+				}
 			}
 		}
 	}
@@ -2493,6 +2531,21 @@ void CSandMan::OnUpdateCheck()
 				"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
 		}
 	}
+}
+
+void CSandMan::DownloadUpdates(const QString& DownloadUrl, bool bManual)
+{
+	QNetworkRequest Request = QNetworkRequest(DownloadUrl);
+	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setRawHeader("Accept-Encoding", "gzip");
+	QNetworkReply* pReply = m_RequestManager->get(Request);
+	pReply->setProperty("manual", bManual);
+	connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateDownload()));
+	connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
+
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
 }
 
 void CSandMan::OnUpdateProgress(qint64 bytes, qint64 bytesTotal)
@@ -2513,6 +2566,7 @@ void CSandMan::OnUpdateDownload()
 	m_pUpdateProgress->Progress(-1);
 
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
+	bool bManual = pReply->property("manual").toBool();
 	quint64 Size = pReply->bytesAvailable();
 	QString Name = pReply->request().url().fileName();
 	if (Name.isEmpty() || Name.right(4).compare(".exe", Qt::CaseInsensitive) != 0)
@@ -2537,10 +2591,48 @@ void CSandMan::OnUpdateDownload()
 		return;
 	}
 
-	QString Message = tr("<p>New Sandboxie-Plus has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
-		.arg(FilePath).arg("File:///" + TempDir);
-	if (QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
-		QProcess::startDetached(FilePath);
+	theConf->SetValue("Options/PendingUpdatePackage", FilePath);
+	UpdateLabel();
+
+	if (bManual)
+		InstallUpdate();
+}
+
+void CSandMan::InstallUpdate()
+{
+	QString FilePath = theConf->GetString("Options/PendingUpdatePackage");
+	if (FilePath.isEmpty())
+		return;
+
+	QString Message = tr("<p>A Sandboxie-Plus update has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
+		.arg(FilePath).arg("File:///" + Split2(FilePath, "/", true).first);
+	int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, this).exec();
+	if (Ret == QMessageBox::Cancel) {
+		theConf->DelValue("Options/PendingUpdatePackage");
+		UpdateLabel();
+	}
+	if (Ret != QMessageBox::Yes)
+		return;
+	
+	theAPI->TerminateAll();
+
+	wstring wFile = FilePath.toStdWString();
+
+	SHELLEXECUTEINFO si = { 0 };
+	si.cbSize = sizeof(SHELLEXECUTEINFO);
+	si.fMask = SEE_MASK_NOCLOSEPROCESS;
+	si.hwnd = NULL;
+	si.lpVerb = L"runas";
+	si.lpFile = wFile.c_str();
+	si.lpParameters = L"/SILENT";
+	si.lpDirectory = NULL;
+	si.nShow = SW_SHOW;
+	si.hInstApp = NULL;
+
+	if (ShellExecuteEx(&si)) {
+		theConf->DelValue("Options/PendingUpdatePackage");
+		QApplication::quit();
+	}
 }
 
 void CSandMan::OnHelp()

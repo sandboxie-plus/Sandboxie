@@ -68,6 +68,7 @@
         <file>IconOffC.png</file>
         <file>IconOffCx.png</file>
         <file>Actions/Monitor.png</file>
+        <file>SideLogo.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

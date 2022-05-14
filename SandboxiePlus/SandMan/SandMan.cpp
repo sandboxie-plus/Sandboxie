@@ -21,6 +21,8 @@
 #include "Views/TraceView.h"
 #include "Windows/SelectBoxWindow.h"
 #include "../UGlobalHotkey/uglobalhotkeys.h"
+#include "Wizards/SetupWizard.h"
+#include "Helpers/WinAdmin.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -354,6 +356,7 @@ void CSandMan::CreateMenus()
 				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
+			m_pSetupWizard = m_pMaintenance->addAction(CSandMan::GetIcon("Software"), tr("Setup Wizard"), this, SLOT(OnMaintenance()));
 			if(IsFullyPortable())
 				m_pUninstallAll = m_pMaintenance->addAction(CSandMan::GetIcon("Uninstall"), tr("Uninstall All"), this, SLOT(OnMaintenance()));
 			
@@ -1172,6 +1175,18 @@ void CSandMan::OnStatusChanged()
 			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
 			theAPI->CreateBox("DefaultBox");
 		}
+
+		int BusinessUse = theConf->GetInt("Options/BusinessUse", 2);
+		if (g_CertInfo.business && BusinessUse == 0) // if we have a Business cert switch to that use case
+			theConf->SetValue("Options/BusinessUse", 1);
+
+		int WizardLevel = theConf->GetBool("Options/WizardLevel", 0);
+		if (WizardLevel == 0) {
+			if (CSetupWizard::ShowWizard())
+				UpdateSettings();
+			else // if user canceled mark that and not show again
+				theConf->SetValue("Options/WizardLevel", -1);
+		}
 	}
 	else
 	{
@@ -1716,8 +1731,21 @@ void CSandMan::OnMaintenance()
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
 
 	// uninstall	
-	else if (sender() == m_pUninstallAll)
+	else if (sender() == m_pUninstallAll) {
+
 		Status = StopSbie(true);
+
+		AutorunEnable(false);
+
+		CSbieUtils::RemoveContextMenu();
+		CSbieUtils::RemoveContextMenu2();
+	}
+
+	else if (sender() == m_pSetupWizard) {
+		if (CSetupWizard::ShowWizard())
+			UpdateSettings();
+		return;
+	}
 
 	HandleMaintenance(Status);
 }

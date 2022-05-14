@@ -1,6 +1,6 @@
 Sandboxie-Plus is made up of the following components, governed under various licenses:
 * MiscHelpers a generic Qt based helper library, license under the LGPL.
-* The Qt Framework license under the LGPL.
+* The Qt Framework which is license under the LGPL.
 * SandMan the primary Sandboxie-Plus UI component, provided under a custom license.
 * QSbieAPI a stand alone re implementation of sandboxie’s API using IPC mechanisms to. communicate with sandboxie’s core components, license under the LGPL.
 * Sandboxie core components, licensed under the GPL v3.

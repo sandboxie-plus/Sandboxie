@@ -111,8 +111,8 @@ _FX void *Syscall_GetMasterServiceTable(void)
 
     ExFreePoolWithTag(ptr, tzuk);
 
-    //MasterTable lookup for windows 11
-    if (Driver_OsBuild >= 22563) {
+    //MasterTable lookup for windows 11 insider 22563 or server 2022 20348
+    if (Driver_OsBuild >= 20348) {
 
         ULONG_PTR kernel_base = nt;
         RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");

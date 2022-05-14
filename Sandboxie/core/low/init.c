@@ -225,6 +225,21 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
                 //  if (delta > 0 && delta < 0x100000 )  { //may need to check delta in a future version of chrome
                 target += delta;
                 ChromeTarget = *(ULONGLONG **)target;
+				
+                // special case when compiled using mingw toolchain
+                // mov rcx,qword ptr [rax+offset] or mov rcx,qword ptr [rcx+offset]
+                if ((*(USHORT *)&addr[i + 7] == 0x8B48)) 
+                {
+                    if (addr[i + 9] == 0x48 || addr[i + 9] == 0x49)
+                        delta = addr[i + 10];
+                    else if (addr[i + 9] == 0x88 || addr[i + 9] == 0x89)
+                        delta = *(ULONG*)&addr[i + 10];
+                    else
+                        break;
+                    target = (ULONGLONG)ChromeTarget + delta;
+                    ChromeTarget = *(ULONGLONG **)target;
+                }
+				
                 // }
                 break;
             }

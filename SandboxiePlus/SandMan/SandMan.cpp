@@ -121,7 +121,6 @@ CSandMan::CSandMan(QWidget *parent)
 	m_DefaultStyle = QApplication::style()->objectName();
 	m_DefaultPalett = QApplication::palette();
 
-	m_LanguageId = 1033; // lang en_us
 	LoadLanguage();
 	SetUITheme();
 
@@ -156,6 +155,8 @@ CSandMan::CSandMan(QWidget *parent)
 	CPanelView::m_CopyRow = tr("Copy Row");
 	CPanelView::m_CopyPanel = tr("Copy Panel");
 
+	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
+
 	CreateMenus();
 
 	m_pMainWidget = new QWidget();
@@ -166,45 +167,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	CreateToolBar();
 
-	m_pLogSplitter = new QSplitter();
-	m_pLogSplitter->setOrientation(Qt::Vertical);
-	m_pMainLayout->addWidget(m_pLogSplitter);
-
-	m_pPanelSplitter = new QSplitter();
-	m_pPanelSplitter->setOrientation(Qt::Horizontal);
-	m_pLogSplitter->addWidget(m_pPanelSplitter);
-
-
-	m_pBoxView = new CSbieView();
-	m_pPanelSplitter->addWidget(m_pBoxView);
-
-	connect(m_pBoxView->GetTree()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnSelectionChanged()));
-
-	//m_pPanelSplitter->addWidget();
-
-	m_pLogTabs = new QTabWidget();
-	m_pLogSplitter->addWidget(m_pLogTabs);
-
-	// Message Log
-	m_pMessageLog = new CPanelWidgetEx();
-
-	//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-	((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
-
-	m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
-	m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
-
-	m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	m_pMessageLog->GetView()->setSortingEnabled(false);
-
-	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
-	//
-
-	m_pTraceView = new CTraceView(this);
-
-	m_pTraceView->AddAction(m_pCleanUpTrace);
-
-	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
+	CreateView();
 
 	m_pHotkeyManager = new UGlobalHotkeys(this);
 	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
@@ -237,57 +200,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bIconBusy = false;
 	m_iDeletingContent = 0;
 
-	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
-	QFont f = pShowHide->font();
-	f.setBold(true);
-	pShowHide->setFont(f);
-	m_pTrayMenu->addSeparator();
-
-	m_pTrayList = new QWidgetAction(m_pTrayMenu);
-
-	QWidget* pWidget = new CActionWidget();
-    QHBoxLayout* pLayout = new QHBoxLayout();
-	pLayout->setMargin(0);
-	pWidget->setLayout(pLayout);
-
-	m_pTrayBoxes = new QTreeWidget();
-
-	m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
-	m_pTrayBoxes->setRootIsDecorated(false);
-	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
-	m_pTrayBoxes->setHeaderHidden(true);
-	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
-	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
-	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
-
-	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
-
-	pLayout->insertSpacing(0, 1);// 32);
-
-	/*QFrame* vFrame = new QFrame;
-	vFrame->setFixedWidth(1);
-	vFrame->setFrameShape(QFrame::VLine);
-	vFrame->setFrameShadow(QFrame::Raised);
-	pLayout->addWidget(vFrame);*/
-	
-	pLayout->addWidget(m_pTrayBoxes);
-
-    m_pTrayList->setDefaultWidget(pWidget);
-	m_pTrayMenu->addAction(m_pTrayList);
-
-
-	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnBoxMenu(const QPoint &)));
-	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
-	//m_pBoxMenu
-
-	m_pTraySeparator = m_pTrayMenu->addSeparator();
-	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
-	m_pDisableForce2->setCheckable(true);
-	m_pTrayMenu->addSeparator();
+	CreateTrayMenu();
 
 	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
 
@@ -416,8 +329,6 @@ QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
 
 void CSandMan::CreateMenus()
 {
-	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
-
 	m_pMenuFile = menuBar()->addMenu(tr("&Sandbox"));
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnNewBox()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnNewGroupe()));
@@ -536,9 +447,7 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addAction(m_pEnableMonitoring);
 	//m_pToolBar->addSeparator();
 	
-
-	if (!g_Certificate.isEmpty())
-		return;
+	// Label
 
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -546,13 +455,144 @@ void CSandMan::CreateToolBar()
 
 	//m_pToolBar->addAction(m_pMenuElevate);
 
-	m_pToolBar->addSeparator();
+	m_pSeparator = m_pToolBar->addSeparator();
 	m_pToolBar->addWidget(new QLabel("        "));
-	QLabel* pSupportLbl = new QLabel(tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>"));
-	pSupportLbl->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	connect(pSupportLbl, SIGNAL(linkActivated(const QString&)), this, SLOT(OnHelp()));
-	m_pToolBar->addWidget(pSupportLbl);
+	m_pLabel = new QLabel();
+	m_pLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+	connect(m_pLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(OpenUrl(const QString&)));
+	m_pToolBar->addWidget(m_pLabel);
 	m_pToolBar->addWidget(new QLabel("        "));
+
+	UpdateLabel();
+}
+
+void CSandMan::UpdateLabel()
+{
+	QString LabelText;
+	QString LabelTip;
+
+	if (!theConf->GetString("Options/PendingUpdatePackage").isEmpty()) 
+	{
+		LabelText = tr("<a href=\"sbie://update/package\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
+
+		//QPalette palette = m_pLabel->palette();
+		//palette.setColor(QPalette::Link, Qt::red);
+		//palette.setColor(m_pLabel->backgroundRole(), Qt::yellow);
+		//palette.setColor(m_pLabel->foregroundRole(), Qt::red);
+		//m_pLabel->setAutoFillBackground(true);
+		//m_pLabel->setPalette(palette);
+
+		//m_pLabel->setStyleSheet("QLabel { link-color : red; }");
+
+		LabelTip = tr("Click to install update");
+	}
+	else if (g_Certificate.isEmpty()) {
+		LabelText = tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
+		LabelTip = tr("Click to open web browser");
+	}
+
+	m_pSeparator->setVisible(!LabelText.isEmpty());
+	m_pLabel->setVisible(!LabelText.isEmpty());
+	m_pLabel->setText(LabelText);
+	m_pLabel->setToolTip(LabelTip);
+}
+
+void CSandMan::CreateView()
+{
+	m_pLogSplitter = new QSplitter();
+	m_pLogSplitter->setOrientation(Qt::Vertical);
+	m_pMainLayout->addWidget(m_pLogSplitter);
+
+	m_pPanelSplitter = new QSplitter();
+	m_pPanelSplitter->setOrientation(Qt::Horizontal);
+	m_pLogSplitter->addWidget(m_pPanelSplitter);
+
+
+	m_pBoxView = new CSbieView();
+	m_pPanelSplitter->addWidget(m_pBoxView);
+
+	connect(m_pBoxView->GetTree()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(OnSelectionChanged()));
+
+	//m_pPanelSplitter->addWidget();
+
+	m_pLogTabs = new QTabWidget();
+	m_pLogSplitter->addWidget(m_pLogTabs);
+
+	// Message Log
+	m_pMessageLog = new CPanelWidgetEx();
+
+	//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
+	((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
+
+	m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
+	m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
+
+	m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	m_pMessageLog->GetView()->setSortingEnabled(false);
+
+	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
+	//
+
+	m_pTraceView = new CTraceView(this);
+
+	m_pTraceView->AddAction(m_pCleanUpTrace);
+
+	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
+}
+
+void CSandMan::CreateTrayMenu()
+{
+	m_pTrayMenu = new QMenu();
+	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QFont f = pShowHide->font();
+	f.setBold(true);
+	pShowHide->setFont(f);
+	m_pTrayMenu->addSeparator();
+
+	m_pTrayList = new QWidgetAction(m_pTrayMenu);
+
+	QWidget* pWidget = new CActionWidget();
+    QHBoxLayout* pLayout = new QHBoxLayout();
+	pLayout->setMargin(0);
+	pWidget->setLayout(pLayout);
+
+	m_pTrayBoxes = new QTreeWidget();
+
+	m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+	m_pTrayBoxes->setRootIsDecorated(false);
+	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
+	m_pTrayBoxes->setHeaderHidden(true);
+	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
+	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
+	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
+
+	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
+
+	pLayout->insertSpacing(0, 1);// 32);
+
+	/*QFrame* vFrame = new QFrame;
+	vFrame->setFixedWidth(1);
+	vFrame->setFrameShape(QFrame::VLine);
+	vFrame->setFrameShadow(QFrame::Raised);
+	pLayout->addWidget(vFrame);*/
+	
+	pLayout->addWidget(m_pTrayBoxes);
+
+    m_pTrayList->setDefaultWidget(pWidget);
+	m_pTrayMenu->addAction(m_pTrayList);
+
+
+	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnBoxMenu(const QPoint &)));
+	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
+	//m_pBoxMenu
+
+	m_pTraySeparator = m_pTrayMenu->addSeparator();
+	m_pTrayMenu->addAction(m_pEmptyAll);
+	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
+	m_pDisableForce2->setCheckable(true);
+	m_pTrayMenu->addSeparator();
 }
 
 void CSandMan::OnExit()
@@ -1345,12 +1385,12 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 	{
 		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
 
-		if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
-			SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-			QTimer::singleShot(100, this, [pWnd]() {
-				SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-				});
-		}
+		//if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+		//	SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		//	QTimer::singleShot(100, this, [pWnd]() {
+		//		SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		//		});
+		//}
 
 		pWnd->AddFile(FilePath, BoxPath);
 	}
@@ -1361,6 +1401,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
 		pBoxEx->m_pRecoveryWnd->close();
 		// todo: resuse window?
@@ -1379,6 +1420,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
 		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
@@ -1388,7 +1430,7 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	}
 	else {
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
+		//SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
 	}
 	if(bFind)
 		pBoxEx->m_pRecoveryWnd->FindFiles();
@@ -1834,6 +1876,28 @@ void CSandMan::UpdateSettings()
 		m_pTrayIcon->show();
 	else
 		m_pTrayIcon->hide();
+
+	if (m_Language != theConf->GetString("Options/UiLanguage")) 
+	{
+		LoadLanguage();
+
+		QTreeViewEx::m_ResetColumns = tr("Reset Columns");
+		CPanelView::m_CopyCell = tr("Copy Cell");
+		CPanelView::m_CopyRow = tr("Copy Row");
+		CPanelView::m_CopyPanel = tr("Copy Panel");
+
+		menuBar()->clear();
+		CreateMenus();
+
+		m_pMainLayout->removeWidget(m_pLogSplitter);
+		m_pLogSplitter->deleteLater();
+		CreateView();
+
+		m_pTrayMenu->deleteLater();
+		CreateTrayMenu();
+
+		UpdateLabel();
+	}
 }
 
 void CSandMan::OnResetMsgs()
@@ -2241,8 +2305,14 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 void CSandMan::OpenUrl(const QUrl& url)
 {
-	if (url.scheme() == "sbie") {
-		QString path = url.path();
+	QString scheme = url.scheme();
+	QString host = url.host();
+	QString path = url.path();	
+	QString query = url.query();
+
+	if (scheme == "sbie") {	
+		if (path == "/package")
+			return InstallUpdate();
 		if (path == "/cert")
 			return UpdateCert();
 		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
@@ -2325,8 +2395,8 @@ void CSandMan::OnUpdateCheck()
 		return;
 
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
-	QByteArray Reply = pReply->readAll();
 	bool bManual = pReply->property("manual").toBool();
+	QByteArray Reply = pReply->readAll();
 	pReply->deleteLater();
 
 	m_pUpdateProgress->Finish(SB_OK);
@@ -2403,57 +2473,51 @@ void CSandMan::OnUpdateCheck()
 			bNothing = false;
 			//QDateTime Updated = QDateTime::fromTime_t(Data["updated"].toULongLong());
 
-			QString UpdateMsg = Data["updateMsg"].toString();
-			QString UpdateUrl = Data["updateUrl"].toString();
-
 			QString DownloadUrl = Data["downloadUrl"].toString();
 			//	'sha256'
 			//	'signature'
 
-			QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
-			if (!DownloadUrl.isEmpty())
-				FullMessage += tr("<p>Do you want to download the latest version?</p>");
-			else if (!UpdateUrl.isEmpty())
-				FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">download page</a>?</p>").arg(UpdateUrl);
-
-			CCheckableMessageBox mb(this);
-			mb.setWindowTitle("Sandboxie-Plus");
-			QIcon ico(QLatin1String(":/SandMan.png"));
-			mb.setIconPixmap(ico.pixmap(64, 64));
-			//mb.setTextFormat(Qt::RichText);
-			mb.setText(FullMessage);
-			mb.setCheckBoxText(tr("Don't show this message anymore."));
-			mb.setCheckBoxVisible(!bManual);
-
-			if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {
-				mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
-				mb.setDefaultButton(QDialogButtonBox::Yes);
-			}
+			if (!DownloadUrl.isEmpty() && theConf->GetInt("Options/DownloadUpdates", 1) == 1)
+				DownloadUpdates(DownloadUrl, bManual);
 			else
-				mb.setStandardButtons(QDialogButtonBox::Ok);
-
-			mb.exec();
-
-			if (mb.isChecked())
-				theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
-
-			if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
 			{
-				if (!DownloadUrl.isEmpty())
-				{
-					QNetworkRequest Request = QNetworkRequest(DownloadUrl);
-					Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-					//Request.setRawHeader("Accept-Encoding", "gzip");
-					QNetworkReply* pReply = m_RequestManager->get(Request);
-					connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateDownload()));
-					connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
+				QString UpdateMsg = Data["updateMsg"].toString();
+				QString UpdateUrl = Data["updateUrl"].toString();
 
-					m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-					AddAsyncOp(m_pUpdateProgress);
-					m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
+				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
+				if (!DownloadUrl.isEmpty())
+					FullMessage += tr("<p>Do you want to download the latest version?</p>");
+				else if (!UpdateUrl.isEmpty())
+					FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">download page</a>?</p>").arg(UpdateUrl);
+
+				CCheckableMessageBox mb(this);
+				mb.setWindowTitle("Sandboxie-Plus");
+				QIcon ico(QLatin1String(":/SandMan.png"));
+				mb.setIconPixmap(ico.pixmap(64, 64));
+				//mb.setTextFormat(Qt::RichText);
+				mb.setText(FullMessage);
+				mb.setCheckBoxText(tr("Don't show this message anymore."));
+				mb.setCheckBoxVisible(!bManual);
+
+				if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {
+					mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
+					mb.setDefaultButton(QDialogButtonBox::Yes);
 				}
 				else
-					QDesktopServices::openUrl(UpdateUrl);
+					mb.setStandardButtons(QDialogButtonBox::Ok);
+
+				mb.exec();
+
+				if (mb.isChecked())
+					theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
+
+				if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
+				{
+					if (!DownloadUrl.isEmpty())
+						DownloadUpdates(DownloadUrl, bManual);
+					else
+						QDesktopServices::openUrl(UpdateUrl);
+				}
 			}
 		}
 	}
@@ -2467,6 +2531,21 @@ void CSandMan::OnUpdateCheck()
 				"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
 		}
 	}
+}
+
+void CSandMan::DownloadUpdates(const QString& DownloadUrl, bool bManual)
+{
+	QNetworkRequest Request = QNetworkRequest(DownloadUrl);
+	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setRawHeader("Accept-Encoding", "gzip");
+	QNetworkReply* pReply = m_RequestManager->get(Request);
+	pReply->setProperty("manual", bManual);
+	connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateDownload()));
+	connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
+
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
 }
 
 void CSandMan::OnUpdateProgress(qint64 bytes, qint64 bytesTotal)
@@ -2487,6 +2566,7 @@ void CSandMan::OnUpdateDownload()
 	m_pUpdateProgress->Progress(-1);
 
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
+	bool bManual = pReply->property("manual").toBool();
 	quint64 Size = pReply->bytesAvailable();
 	QString Name = pReply->request().url().fileName();
 	if (Name.isEmpty() || Name.right(4).compare(".exe", Qt::CaseInsensitive) != 0)
@@ -2511,10 +2591,48 @@ void CSandMan::OnUpdateDownload()
 		return;
 	}
 
-	QString Message = tr("<p>New Sandboxie-Plus has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
-		.arg(FilePath).arg("File:///" + TempDir);
-	if (QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
-		QProcess::startDetached(FilePath);
+	theConf->SetValue("Options/PendingUpdatePackage", FilePath);
+	UpdateLabel();
+
+	if (bManual)
+		InstallUpdate();
+}
+
+void CSandMan::InstallUpdate()
+{
+	QString FilePath = theConf->GetString("Options/PendingUpdatePackage");
+	if (FilePath.isEmpty())
+		return;
+
+	QString Message = tr("<p>A Sandboxie-Plus update has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
+		.arg(FilePath).arg("File:///" + Split2(FilePath, "/", true).first);
+	int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, this).exec();
+	if (Ret == QMessageBox::Cancel) {
+		theConf->DelValue("Options/PendingUpdatePackage");
+		UpdateLabel();
+	}
+	if (Ret != QMessageBox::Yes)
+		return;
+	
+	theAPI->TerminateAll();
+
+	wstring wFile = FilePath.toStdWString();
+
+	SHELLEXECUTEINFO si = { 0 };
+	si.cbSize = sizeof(SHELLEXECUTEINFO);
+	si.fMask = SEE_MASK_NOCLOSEPROCESS;
+	si.hwnd = NULL;
+	si.lpVerb = L"runas";
+	si.lpFile = wFile.c_str();
+	si.lpParameters = L"/SILENT";
+	si.lpDirectory = NULL;
+	si.nShow = SW_SHOW;
+	si.hInstApp = NULL;
+
+	if (ShellExecuteEx(&si)) {
+		theConf->DelValue("Options/PendingUpdatePackage");
+		QApplication::quit();
+	}
 }
 
 void CSandMan::OnHelp()
@@ -2727,42 +2845,40 @@ void CSandMan::UpdateTheme()
 
 void CSandMan::LoadLanguage()
 {
-	m_LanguageId = 0;
-
 	QString Lang = theConf->GetString("Options/UiLanguage");
 	if(Lang.isEmpty())
 		Lang = QLocale::system().name();
+	m_Language = Lang;
 
-	if (Lang.compare("native", Qt::CaseInsensitive) != 0) {
-		if (!Lang.isEmpty())
-			m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
+	if (Lang.compare("native", Qt::CaseInsensitive) == 0)
+		Lang.clear();
 
-		LoadLanguage(Lang, "sandman", 0);
-		LoadLanguage(Lang, "qt", 1);
-	}
-
+	m_LanguageId = LocaleNameToLCID(Lang.toStdWString().c_str(), 0);
 	if (!m_LanguageId) 
 		m_LanguageId = 1033; // default to English
+
+	LoadLanguage(Lang, "sandman", 0);
+	LoadLanguage(Lang, "qt", 1);
 }
 
 void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)
 {
 	qApp->removeTranslator(&m_Translator[Index]);
 
-	if (!Lang.isEmpty())
+	if (Lang.isEmpty())
+		return;
+	
+	QString LangAux = Lang; // Short version as fallback
+	LangAux.truncate(LangAux.lastIndexOf('_'));
+
+	QString LangDir = QApplication::applicationDirPath() + "/translations/";
+
+	QString LangPath = LangDir + Module + "_";
+	bool bAux = false;
+	if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
 	{
-		QString LangAux = Lang; // Short version as fallback
-		LangAux.truncate(LangAux.lastIndexOf('_'));
-
-		QString LangDir = QApplication::applicationDirPath() + "/translations/";
-
-		QString LangPath = LangDir + Module + "_";
-		bool bAux = false;
-		if (QFile::exists(LangPath + Lang + ".qm") || (bAux = QFile::exists(LangPath + LangAux + ".qm")))
-		{
-			if(m_Translator[Index].load(LangPath + (bAux ? LangAux : Lang) + ".qm", LangDir))
-				qApp->installTranslator(&m_Translator[Index]);
-		}
+		if(m_Translator[Index].load(LangPath + (bAux ? LangAux : Lang) + ".qm", LangDir))
+			qApp->installTranslator(&m_Translator[Index]);
 	}
 }
 

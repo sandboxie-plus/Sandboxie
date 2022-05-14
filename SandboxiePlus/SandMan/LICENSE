@@ -1,11 +1,57 @@
-Copyright 2020 - 2021 David Xanatos (xanasoft.com)
+Copyright 2020 - 2022 David Xanatos (xanasoft.com)
 
-This software is provided under the Creative Commons 
-Attribution-NonCommercial-ShareAlike 4.0 International Public License
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
-OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Permission is hereby granted to any person obtaining a copy 
+of this software and associated documentation files, to use the 
+Software under the following restrictions and obligations:
+
+
+Usage of the official binary distribution:
+
+   1. Whomever obtains a copy of the software is permitted 
+      to use it in any noncommercial setting to the full 
+      extend the software permits; however certain functionality
+      is only available with a support certificate which
+      can be obtained from xanasoft.com
+	  
+   2. To use the software commercially a business certificate 
+      must be obtained from xanasoft.com; however it is permitted to 
+      use the software commercially for a limited period of time
+      on no more than 3 machines for evaluation purposes.
+	  
+   3. It is permitted to redistribute the original unmodified 
+      binaries free of charge. 
+
+
+Usage of the source code:
+
+   1. Whomever obtains a copy of the source code is allowed to modify,
+      compile and redistribute the source code, as well as use the 
+      compiled binaries for private, i.e. noncommercial use. 
+	
+   2. This copyright notice and this permission notice shall be 
+      included in all copies or substantial portions of the Software.
+  
+   3. Public distribution of self-compiled binaries is only permitted  
+      under the following conditions:
+        i) The entire source code with all modifications must be made 
+           publicly available, such that all improvements may be back 
+           ported to the official distribution.
+        ii) The software’s name may not be changed, and no authorship or 
+           copyright information’s displayed by the software are 
+           allowed to be removed. 
+        iii) The original author of this software reserves the right to 
+           prohibit any distribution of unofficial binaries on his own 
+           discretion. 
+	  
+   4. Using self-compiled binaries for commercial use is only permitted 
+      when an appropriate commercial use certificate has been obtained.
+
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

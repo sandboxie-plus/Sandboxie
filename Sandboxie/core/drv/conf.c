@@ -1491,7 +1491,13 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         InterlockedExchange(&reconf_lock, 0);
     }
 
-    Api_SendServiceMessage(SVC_CONFIG_UPDATED, 0, NULL);
+    //
+    // notify service about setting change
+    //
+
+    ULONG process_id = (ULONG)PsGetCurrentProcessId();
+
+    Api_SendServiceMessage(SVC_CONFIG_UPDATED, sizeof(process_id), &process_id);
 
 finish:
     return status;
@@ -1513,6 +1519,10 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
     ULONG index;
     const WCHAR *value1;
     WCHAR *value2;
+
+    //
+    // prepare parameters
+    // 
 
     // parms[1] --> WCHAR [66] SectionName
 

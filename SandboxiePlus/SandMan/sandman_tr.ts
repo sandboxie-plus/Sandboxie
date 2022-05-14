@@ -36,6 +36,25 @@
     </message>
 </context>
 <context>
+    <name>CMonitorModel</name>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tür</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Durum</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Değer</translation>
+    </message>
+    <message>
+        <source>Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CMultiErrorDialog</name>
     <message>
         <source>Message</source>
@@ -651,28 +670,28 @@
         <translation>Yazdırma biriktiricisinin %1 (%2) için korumalı kutunun dışına yazmasına izin vermek istiyor musunuz?</translation>
     </message>
     <message>
-        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?<byte value="xd"/>
+        <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation type="vanished">4 (%5)&apos;in %1 büyük bir dosyayı %2 korumalı kutusuna kopyalamasına izin vermek istiyor musunuz?
 Dosya adı: %3</translation>
     </message>
     <message>
-        <source>Do you want to allow %1 (%2) access to the internet?<byte value="xd"/>
+        <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation type="vanished">%1 (%2)&apos;in internet erişimine izin vermek istiyor musunuz?
 Tam yol: %3</translation>
     </message>
     <message>
-        <source>%1 is eligible for quick recovery from %2.<byte value="xd"/>
+        <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation type="vanished">%1, %2&apos;den hızlı kurtarma için uygun.
 Dosyayı yazan: %3</translation>
     </message>
     <message>
-        <source>Migrating a large file %1 into the sandbox %2, %3 left.<byte value="xd"/>
+        <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translatorcomment>We recommend to not remove or touch the byte value references in all .ts files, because they are needed to render correctly some specific source tags that contain multiple lines.</translatorcomment>
         <translation type="vanished">Büyük bir dosya %1, %2 korumalı kutusuna taşınıyor, %3 kaldı.
@@ -871,7 +890,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Yeni Sandboxie-Plus şu konuma indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Kuruluma başlamak istiyor musunuz? Herhangi bir program korumalı kutu içinde çalışıyorsa, sonlandırılacaktır.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Yeni Sandboxie-Plus şu konuma indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Kuruluma başlamak istiyor musunuz? Herhangi bir program korumalı kutu içinde çalışıyorsa, sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
@@ -1081,7 +1100,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Loaded Config: %1</source>
-        <translation>Yüklü Yapılandırma: %1</translation>
+        <translation type="vanished">Yüklü Yapılandırma: %1</translation>
     </message>
     <message>
         <source>Reload ini file</source>
@@ -1353,7 +1372,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
-        <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.</translation>
+        <translation type="vanished">Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
@@ -1530,10 +1549,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uninstall All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1547,10 +1562,6 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Auto deleting content of %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto Deleting %1 content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1631,6 +1642,52 @@ No will choose: %2</source>
     </message>
     <message>
         <source>There is no updated certificate available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause Forcing Programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to install update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to open web browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - Driver/Service NOT Running!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - Deleting Sandbox Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Deleting %1 Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current Config: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No new updates found, your Sandboxie-Plus is up-to-date.
+
+Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2121,10 +2178,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2169,15 +2222,19 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deleting %1 content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Also delete all Snapshots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This name is already used for a Box Group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This name is already used for a Sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2306,6 +2363,10 @@ No will choose: %2</source>
         <source>This certificate is unfortunately outdated.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This does not look like a certificate, please enter the entire certificate not just a portion of it.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSnapshotsWindow</name>
@@ -2354,10 +2415,6 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Process %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thread %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2446,6 +2503,10 @@ No will choose: %2</source>
     <message>
         <source>Unknown</source>
         <translation type="unfinished">Bilinmeyen</translation>
+    </message>
+    <message>
+        <source>Monitor mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3454,6 +3515,14 @@ The process match level has a higher priority than the specificity and describes
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Allow to read memory of unsandboxed processes (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue message 2111 when a process access is denied</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -3605,7 +3674,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>General Options</source>
-        <translation type="vanished">Genel Ayarlar</translation>
+        <translation>Genel Ayarlar</translation>
     </message>
     <message>
         <source>Program Restrictions</source>
@@ -3613,7 +3682,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>Restart required (!)</source>
-        <translation>Yeniden başlatma gerekir (!)</translation>
+        <translation type="vanished">Yeniden başlatma gerekir (!)</translation>
     </message>
     <message>
         <source>Tray options</source>
@@ -3868,10 +3937,6 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit ini Section</source>
         <translation type="unfinished">İni bölümünü düzenle</translation>
     </message>
@@ -3893,6 +3958,14 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>In the future, don&apos;t notify about certificate expiration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Updates automatically</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

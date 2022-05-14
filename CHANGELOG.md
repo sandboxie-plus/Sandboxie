@@ -14,10 +14,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.22 / 5.55.22] - 2022-05-xx
 
+### Added
+- added auto update download and silent install option to sandman.exe
 
 ### Fixed
 - fixed sandman crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
 - fixed issue with windows server 2022 build 20348
+- fixed translation switching issues [#1852](https://github.com/sandboxie-plus/Sandboxie/issues/1852)
+
+
 
 
 

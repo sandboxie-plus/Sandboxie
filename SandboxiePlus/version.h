@@ -2,7 +2,7 @@
 
 #define VERSION_MJR		1
 #define VERSION_MIN 	0
-#define VERSION_REV 	21
+#define VERSION_REV 	22
 #define VERSION_UPD 	0
 
 #ifndef STR

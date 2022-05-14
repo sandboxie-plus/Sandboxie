@@ -3349,7 +3349,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1164"/>
-        <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
+        <source>* Note: Programs installed to this sandbox won't be able to start at all.</source>
         <translation>* 注意: 安裝至此沙箱裡的程式將完全無法啟動。</translation>
     </message>
     <message>
@@ -3374,7 +3374,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1237"/>
-        <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
+        <source>Note: Programs installed to this sandbox won't be able to access the internet at all.</source>
         <translation>注意: 安裝在此沙箱中的程式將完全無法存取網路。</translation>
     </message>
     <message>
@@ -3878,7 +3878,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2640"/>
-        <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
+        <source>Log all SetError's to Trace log (creates a lot of output)</source>
         <translation>記錄所有 SetError 至追蹤日誌 (產生大量輸出)</translation>
     </message>
     <message>

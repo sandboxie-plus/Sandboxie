@@ -10,9 +10,11 @@ Usage of the official binary distribution:
 
    1. Whomever obtains a copy of the software is permitted 
       to use it in any noncommercial setting to the full 
-      extend the software permits.
+      extend the software permits; however certain functionality
+      is only available with a support certificate which
+      can be obtained from xanasoft.com
 	  
-   2. To use the software commercially a business license 
+   2. To use the software commercially a business certificate 
       must be obtained from xanasoft.com; however it is permitted to 
       use the software commercially for a limited period of time
       on no more than 3 machines for evaluation purposes.
@@ -43,7 +45,7 @@ Usage of the source code:
            discretion. 
 	  
    4. Using self-compiled binaries for commercial use is only permitted 
-      when an appropriate commercial use license has been obtained.
+      when an appropriate commercial use certificate has been obtained.
 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,

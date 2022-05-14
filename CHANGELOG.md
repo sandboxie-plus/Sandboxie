@@ -26,11 +26,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.20 / 5.55.20] - 2022-05-02
 
 ### Fixed
-- fixed issue with video playback in firefox introduced in the previouse build [#1831](https://github.com/sandboxie-plus/Sandboxie/issues/1831)
-- fixed BSOD issue with driver [#1811](https://github.com/sandboxie-plus/Sandboxie/issues/1811)
+- fixed issue with Firefox video playback introduced in the previous build [#1831](https://github.com/sandboxie-plus/Sandboxie/issues/1831)
+- fixed driver-related BSOD [#1811](https://github.com/sandboxie-plus/Sandboxie/issues/1811)
 - fixed issue with editing start restriction entries
-- fixed issue with netwirk options tab [#1825](https://github.com/sandboxie-plus/Sandboxie/issues/1825)
-- fixed portable mode issue when runnign sandman as admin [#1764](https://github.com/sandboxie-plus/Sandboxie/issues/1764)
+- fixed issue with the network options tab [#1825](https://github.com/sandboxie-plus/Sandboxie/issues/1825)
+- fixed portable mode issue if SandMan is run as admin [#1764](https://github.com/sandboxie-plus/Sandboxie/issues/1764)
 
 
 
@@ -44,9 +44,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed crash issue in the SandMan UI [#1772](https://github.com/sandboxie-plus/Sandboxie/issues/1772)
 - fixed issue with some installers when EnableObjectFiltering is enabled [#1795](https://github.com/sandboxie-plus/Sandboxie/issues/1795)
-- fixed to allow NtCreateSymbolicLinkObject to be used safely in the sandbox
+- fixed allowing NtCreateSymbolicLinkObject to be safely used in the sandbox
 - added workaround for a Vivaldi hooking issue [1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
--- Note: this fix is provisional, therefore it can be disabled with UseVivaldiWorkaround=n
+-- Note: this fix is provisional, it can be disabled with UseVivaldiWorkaround=n
 - fixed registry issue with snapshots [#1782](https://github.com/sandboxie-plus/Sandboxie/issues/1782)
 - fixed issue with box grouping [#1778](https://github.com/sandboxie-plus/Sandboxie/issues/1778) [#1777](https://github.com/sandboxie-plus/Sandboxie/issues/1777) [#1776](https://github.com/sandboxie-plus/Sandboxie/issues/1776) 
 - fixed further issues with box grouping [#1698](https://github.com/sandboxie-plus/Sandboxie/issues/1698) [#1697](https://github.com/sandboxie-plus/Sandboxie/issues/1697)

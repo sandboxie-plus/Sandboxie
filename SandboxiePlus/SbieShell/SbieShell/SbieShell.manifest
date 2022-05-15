@@ -2,7 +2,7 @@
 <assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
   <assemblyIdentity version="1.0.0.0" name="SandboxieShell.app"/>
   <msix xmlns="urn:schemas-microsoft-com:msix.v1"
-          publisher="CN=xanasoft.com"
+          publisher="CN=Tonalio GmbH"
           packageName="SandboxieShell"
           applicationId="SandboxieShell"
         />

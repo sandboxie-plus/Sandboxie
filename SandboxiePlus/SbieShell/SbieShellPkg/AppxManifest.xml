@@ -11,7 +11,7 @@
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   IgnorableNamespaces="uap uap2 uap3 rescap desktop desktop4 desktop5 uap10 com">
-  <Identity Name="SandboxieShell" ProcessorArchitecture="neutral" Publisher="CN=xanasoft.com" Version="1.0.0.0" />
+  <Identity Name="SandboxieShell" ProcessorArchitecture="neutral" Publisher="CN=Tonalio GmbH" Version="1.0.0.0" />
   <Properties>
     <DisplayName>SandboxieShell</DisplayName>
     <PublisherDisplayName>Sparse Package</PublisherDisplayName>

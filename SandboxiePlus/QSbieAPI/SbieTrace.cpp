@@ -138,7 +138,7 @@ QString CTraceEntry::GetTypeStr() const
 		Type = "Unknown: " + QString::number(m_Type.Type);
 
 	if(!m_SubType.isEmpty())
-		Type.append("/" + m_SubType);
+		Type.append(" / " + m_SubType);
 
 	if (m_Type.User)
 		Type.append(" (U)");

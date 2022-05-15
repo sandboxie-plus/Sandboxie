@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added auto update download and silent install option to sandman.exe [#917](https://github.com/sandboxie-plus/Sandboxie/issues/917)
 - trace monitor mode can now also save to file [#1851](https://github.com/sandboxie-plus/Sandboxie/issues/1851)
 - trace log now shows ipc object type information
+- added support for windows 11 context menus
 
 ### Fixed
 - fixed sandman crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)

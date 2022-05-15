@@ -455,7 +455,6 @@ void CTraceView::OnSetMode()
 
 	m_pTraceTree->setEnabled(!m_pMonitorMode->isChecked());
 	m_pTraceStatus->setEnabled(!m_pMonitorMode->isChecked());
-	m_pSaveToFile->setEnabled(!m_pMonitorMode->isChecked());
 
 	m_FullRefresh = true;
 
@@ -556,27 +555,36 @@ void CTraceView::SaveToFile()
 		return;
 	}
 
-	QVector<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
-	for (int i = 0; i < ResourceLog.count(); i++)
+	if (m_pMonitorMode->isChecked())
 	{
-		CTraceEntryPtr pEntry = ResourceLog.at(i);
+		QList<QStringList> Rows = m_pMonitor->DumpPanel();
+		foreach(const QStringList& Row, Rows)
+			File.write(Row.join("\t").toLatin1() + "\n");
+	}
+	else
+	{
+		QVector<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
+		for (int i = 0; i < ResourceLog.count(); i++)
+		{
+			CTraceEntryPtr pEntry = ResourceLog.at(i);
 
-		//int iFilter = CTraceView__Filter(pEntry, this);
-		//if (!iFilter)
-		//	continue;
+			//int iFilter = CTraceView__Filter(pEntry, this);
+			//if (!iFilter)
+			//	continue;
 
-		QStringList Line;
-		Line.append(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
-		QString Name = pEntry->GetProcessName();
-		Line.append(Name.isEmpty() ? tr("Unknown") : Name);
-		Line.append(QString("%1").arg(pEntry->GetProcessId()));
-		Line.append(QString("%1").arg(pEntry->GetThreadId()));
-		Line.append(pEntry->GetTypeStr());
-		Line.append(pEntry->GetStautsStr());
-		Line.append(pEntry->GetName());
-		Line.append(pEntry->GetMessage());
+			QStringList Line;
+			Line.append(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
+			QString Name = pEntry->GetProcessName();
+			Line.append(Name.isEmpty() ? tr("Unknown") : Name);
+			Line.append(QString("%1").arg(pEntry->GetProcessId()));
+			Line.append(QString("%1").arg(pEntry->GetThreadId()));
+			Line.append(pEntry->GetTypeStr());
+			Line.append(pEntry->GetStautsStr());
+			Line.append(pEntry->GetName());
+			Line.append(pEntry->GetMessage());
 
-		File.write(Line.join("\t").toLatin1() + "\n");
+			File.write(Line.join("\t").toLatin1() + "\n");
+		}
 	}
 
 	File.close();

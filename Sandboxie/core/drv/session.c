@@ -706,6 +706,9 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
     ULONG log_type;
     WCHAR *log_data;
     WCHAR *name;
+    const WCHAR *type_pipe = L"Pipe";
+    const WCHAR *type_file = L"File";
+    const WCHAR *type_name = NULL;
     NTSTATUS status;
     ULONG log_len;
 
@@ -783,8 +786,10 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
                                 Obj_ObjectTypes[i], KernelMode, NULL,
                                 &object);
 
-                    if (status != STATUS_OBJECT_TYPE_MISMATCH)
+                    if (status != STATUS_OBJECT_TYPE_MISMATCH) {
+                        type_name = Obj_ObjectTypes[i]->Name.Buffer;
                         break;
+                    }
                 }
 
                 // DbgPrint("IPC  Status = %08X Object = %08X for Open <%S>\n", status, object, name);
@@ -795,7 +800,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
             // to get the name assigned to it at time of creation
             //
 
-            if ((log_type & MONITOR_TYPE_MASK) == MONITOR_PIPE) {
+            else if ((log_type & MONITOR_TYPE_MASK) == MONITOR_PIPE) {
 
                 OBJECT_ATTRIBUTES objattrs;
                 IO_STATUS_BLOCK IoStatusBlock;
@@ -833,6 +838,8 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
 
                     status = STATUS_OBJECT_NAME_NOT_FOUND;
                 }
+
+                type_name = type_pipe;
 
                 //DbgPrint("PIPE Status3 = %08X Object = %08X for Open <%S>\n", status, object, name);
             }
@@ -885,7 +892,7 @@ _FX NTSTATUS Session_Api_MonitorPut2(PROCESS *proc, ULONG64 *parms)
             name[1] = L'\0';
         }*/
 
-        const WCHAR* strings[2] = { name, NULL };
+        const WCHAR* strings[4] = { name, L"", type_name, NULL };
         Session_MonitorPutEx(log_type | MONITOR_USER, strings, NULL, proc->pid, PsGetCurrentThreadId());
     }
 

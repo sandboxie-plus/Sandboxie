@@ -24,8 +24,6 @@ public:
 	virtual void accept() {}
 	virtual void reject();
 
-	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
-
 	static void LoadCertificate();
 
 signals:
@@ -90,6 +88,7 @@ private:
 };
 
 void CSettingsWindow__AddContextMenu();
+void CSettingsWindow__RemoveContextMenu();
 void CSettingsWindow__AddBrowserIcon();
 
 void WindowsMoveFile(const QString& from, const QString& to);

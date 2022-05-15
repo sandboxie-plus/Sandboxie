@@ -14,6 +14,8 @@ public:
 	static void					SetMaxCellWidth(int iMaxWidth) { m_MaxCellWidth = iMaxWidth; }
 	static void					SetCellSeparator(const QString& Sep) { m_CellSeparator = Sep; }
 
+	virtual QList<QStringList>	DumpPanel();
+
 	static QString				m_CopyCell;
 	static QString				m_CopyRow;
 	static QString				m_CopyPanel;

@@ -215,6 +215,12 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 
 Qt::CheckState CSettingsWindow__IsContextMenu()
 {
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	foreach(const QString & Key, settings.childGroups()) {
+		if (Key.indexOf("SandboxieShell") == 0)
+			return Qt::Checked;
+	}
+
 	QString cmd = CSbieUtils::GetContextMenuStartCmd();
 	if (cmd.contains("SandMan.exe", Qt::CaseInsensitive)) 
 		return Qt::Checked; // set up and sandman
@@ -225,9 +231,31 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 
 void CSettingsWindow__AddContextMenu()
 {
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (settings.value("CurrentBuild") >= 22000) // Windows 11
+	{
+		QProcess Proc;
+		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RegisterPackage");
+		Proc.waitForFinished();
+		return;
+	}
+
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
 		CSettingsWindow::tr("Run &Sandboxed"), //CSettingsWindow::tr("Explore &Sandboxed"),
 			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+}
+
+void CSettingsWindow__RemoveContextMenu()
+{
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (settings.value("CurrentBuild") >= 22000) // Windows 11
+	{
+		QProcess Proc;
+		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RemovePackage");
+		Proc.waitForFinished();
+	}
+
+	CSbieUtils::RemoveContextMenu();
 }
 
 void CSettingsWindow__AddBrowserIcon()
@@ -405,7 +433,7 @@ void CSettingsWindow::SaveSettings()
 		if (ui.chkShellMenu->isChecked())
 			CSettingsWindow__AddContextMenu();
 		else
-			CSbieUtils::RemoveContextMenu();
+			CSettingsWindow__RemoveContextMenu();
 	}
 
 	if (ui.chkShellMenu2->isChecked() != CSbieUtils::HasContextMenu2()) {
@@ -542,26 +570,80 @@ void CSettingsWindow::SaveSettings()
 	{
 		QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
 		if (g_Certificate != Certificate) {
-
+			
 			QPalette palette = QApplication::palette();
+
+			QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+			if (!Certificate.isEmpty()) {
+
+				auto Args = GetArguments(Certificate, L'\n', L':');
+
+				bool bLooksOk = true;
+				if (Args.value("NAME").isEmpty()) // mandatory
+					bLooksOk = false;
+				//if (Args.value("UPDATEKEY").isEmpty())
+				//	bLooksOk = false;
+				if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
+					bLooksOk = false;
+
+				if (bLooksOk) {
+					QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+					QFile CertFile(TempPath);
+					if (CertFile.open(QFile::WriteOnly)) {
+						CertFile.write(Certificate);
+						CertFile.close();
+					}
+
+					WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+				}
+				else {
+					Certificate.clear();
+					QMessageBox::critical(this, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate not just a portion of it."));
+				}
+			}
+			else if(!g_Certificate.isEmpty()){
+				WindowsMoveFile(CertPath.replace("/", "\\"), "");
+			}
 
 			if (theGUI->m_DarkTheme)
 				palette.setColor(QPalette::Text, Qt::black);
 
 			ui.lblCertExp->setVisible(false);
 
-			bool bRet = ApplyCertificate(Certificate, this);
-
 			if (Certificate.isEmpty())
+			{
 				palette.setColor(QPalette::Base, Qt::white);
-			else if (!bRet) 
-				palette.setColor(QPalette::Base, QColor(255, 192, 192));
-			else if (g_CertInfo.expired || g_CertInfo.outdated) {
-				palette.setColor(QPalette::Base, QColor(255, 255, 192));
-				ui.lblCertExp->setVisible(true);
+			}
+			else if (!theAPI->ReloadCert().IsError())
+			{
+				g_FeatureFlags = theAPI->GetFeatureFlags();
+				theGUI->UpdateCertState();
+
+				if (g_CertInfo.expired || g_CertInfo.outdated) {
+					if(g_CertInfo.expired)
+						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
+					else
+						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
+
+					palette.setColor(QPalette::Base, QColor(255, 255, 192));
+					ui.lblCertExp->setVisible(true);
+				}
+				else {
+					QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
+
+					palette.setColor(QPalette::Base, QColor(192, 255, 192));
+				}
 			}
 			else
-				palette.setColor(QPalette::Base, QColor(192, 255, 192));
+			{
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("This support certificate is not valid."));
+
+				palette.setColor(QPalette::Base, QColor(255, 192, 192));
+				Certificate.clear();
+				g_CertInfo.State = 0;
+			}
+
+			g_Certificate = Certificate;
 
 			ui.txtCertificate->setPalette(palette);
 		}
@@ -576,71 +658,6 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
 	emit OptionsChanged();
-}
-
-bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
-{
-	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
-	if (!Certificate.isEmpty()) {
-
-		auto Args = GetArguments(Certificate, L'\n', L':');
-
-		bool bLooksOk = true;
-		if (Args.value("NAME").isEmpty()) // mandatory
-			bLooksOk = false;
-		//if (Args.value("UPDATEKEY").isEmpty())
-		//	bLooksOk = false;
-		if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
-			bLooksOk = false;
-
-		if (bLooksOk) {
-			QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
-			QFile CertFile(TempPath);
-			if (CertFile.open(QFile::WriteOnly)) {
-				CertFile.write(Certificate);
-				CertFile.close();
-			}
-
-			WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
-		}
-		else {
-			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate not just a portion of it."));
-			return false;
-		}
-	}
-	else if(!g_Certificate.isEmpty()){
-		WindowsMoveFile(CertPath.replace("/", "\\"), "");
-	}
-
-	if (Certificate.isEmpty())
-		return false;
-
-	if (!theAPI->ReloadCert().IsError())
-	{
-		g_FeatureFlags = theAPI->GetFeatureFlags();
-		theGUI->UpdateCertState();
-
-		if (g_CertInfo.expired || g_CertInfo.outdated) {
-			if(g_CertInfo.expired)
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
-			else
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
-		}
-		else {
-			QMessageBox::information(widget, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
-		}
-
-		g_Certificate = Certificate;
-		return true;
-	}
-	else
-	{
-		QMessageBox::critical(widget, "Sandboxie-Plus", tr("This support certificate is not valid."));
-
-		g_CertInfo.State = 0;
-		g_Certificate.clear();
-		return false;
-	}
 }
 
 void CSettingsWindow::apply()

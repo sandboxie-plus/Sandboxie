@@ -118,6 +118,9 @@ IF %archPath% == x64 (
   mkdir %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.exe %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.dll %instPath%\32\
+  
+  copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellExt.dll %instPath%\
+  copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellPkg.msix %instPath%\
 )
 
 copy /y %~dp0..\Sandboxie\install\Templates.ini %instPath%\

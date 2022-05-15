@@ -143,7 +143,7 @@ void CPanelView::RecursiveCopyPanel(const QModelIndex& ModelIndex, QList<QString
 	}
 }
 
-void CPanelView::OnCopyPanel()
+QList<QStringList> CPanelView::DumpPanel()
 {
 	QAbstractItemModel* pModel = GetModel();
 
@@ -153,7 +153,13 @@ void CPanelView::OnCopyPanel()
 		QModelIndex ModelIndex = pModel->index(i, 0);
 		RecursiveCopyPanel(ModelIndex, Rows);
 	}
-	FormatAndCopy(Rows);
+
+	return Rows;
+}
+
+void CPanelView::OnCopyPanel()
+{
+	FormatAndCopy(DumpPanel());
 }
 
 void CPanelView::FormatAndCopy(QList<QStringList> Rows, bool Headder)

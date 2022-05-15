@@ -361,9 +361,15 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString 
 	QString StartArgs;
 	if (bRunElevated)
 		StartArgs += "/elevated ";
-	StartArgs += "/box:" + boxname;
-	if (!arguments.isEmpty())
-		StartArgs += " \"" + arguments + "\"";
+	if (!boxname.isEmpty())
+		StartArgs += "/box:" + boxname;
+	if (!arguments.isEmpty()) {
+		if (!StartArgs.isEmpty()) StartArgs += " ";
+		if(arguments.contains(" "))
+			StartArgs += "\"" + arguments + "\"";
+		else
+			StartArgs += arguments;
+	}
 
 	IUnknown *pUnknown;
 	HRESULT hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC, IID_IUnknown, (void **)&pUnknown);
@@ -381,7 +387,7 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString 
 		if (!workdir.isEmpty())
 			pShellLink->SetWorkingDirectory(workdir.toStdWString().c_str());
 		if (!LinkName.isEmpty()) {
-			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname);
+			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname.isEmpty() ? "DefaultBox" : boxname);
 			pShellLink->SetDescription(desc.toStdWString().c_str());
 		}
 

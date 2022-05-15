@@ -67,6 +67,7 @@ public:
 protected:
 	QString m_Name;
 	QString m_Message;
+	QString m_SubType;
 	quint32 m_ProcessId;
 	quint32 m_ThreadId;
 	QDateTime m_TimeStamp;

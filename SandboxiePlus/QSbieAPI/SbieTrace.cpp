@@ -65,6 +65,7 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 	m_ThreadId = ThreadId;
 	m_Name = LogData.length() > 0 ? LogData.at(0) : QString("(empty)");
 	m_Message = LogData.length() > 1 ? LogData.at(1) : QString();
+	m_SubType = LogData.length() > 2 ? LogData.at(2) : QString();
 	m_Type.Flags = Type;
 
 	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
@@ -135,6 +136,9 @@ QString CTraceEntry::GetTypeStr() const
 	QString Type = GetTypeStr(m_Type.Type);
 	if(Type.isEmpty())
 		Type = "Unknown: " + QString::number(m_Type.Type);
+
+	if(!m_SubType.isEmpty())
+		Type.append("/" + m_SubType);
 
 	if (m_Type.User)
 		Type.append(" (U)");

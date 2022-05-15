@@ -15,7 +15,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.22 / 5.55.22] - 2022-05-xx
 
 ### Added
-- added auto update download and silent install option to sandman.exe
+- added auto update download and silent install option to sandman.exe [#917](https://github.com/sandboxie-plus/Sandboxie/issues/917)
+- trace monitor mode can now also save to file [#1851](https://github.com/sandboxie-plus/Sandboxie/issues/1851)
+- trace log now shows ipc object type information
 
 ### Fixed
 - fixed sandman crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)

@@ -1062,7 +1062,15 @@ _FX NTSTATUS Ipc_CheckGenericObject(
             }
 
             RtlStringCbPrintfW(access_str, sizeof(access_str), L"(I%c) %08X", letter, GrantedAccess);
-            Log_Debug_Msg(mon_type, access_str, Name->Buffer);
+            //Log_Debug_Msg(mon_type, access_str, Name->Buffer);
+
+            if (Session_MonitorCount) {
+	
+                POBJECT_TYPE ObjectType = pObGetObjectType(Object);
+
+		        const WCHAR* strings[4] = { Name->Buffer, access_str, ObjectType ? ObjectType->Name.Buffer : NULL, NULL };
+		        Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+	        }
         }
     }
 

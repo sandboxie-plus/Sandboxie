@@ -1716,9 +1716,16 @@ void CSandMan::OnMaintenance()
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
 
 	// uninstall	
-	else if (sender() == m_pUninstallAll)
+	else if (sender() == m_pUninstallAll) {
+
 		Status = StopSbie(true);
 
+		AutorunEnable(false);
+
+		CSettingsWindow__RemoveContextMenu();
+		CSbieUtils::RemoveContextMenu2();
+	}
+	
 	HandleMaintenance(Status);
 }
 

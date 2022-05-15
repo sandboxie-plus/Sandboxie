@@ -215,6 +215,12 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 
 Qt::CheckState CSettingsWindow__IsContextMenu()
 {
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	foreach(const QString & Key, settings.childGroups()) {
+		if (Key.indexOf("SandboxieShell") == 0)
+			return Qt::Checked;
+	}
+
 	QString cmd = CSbieUtils::GetContextMenuStartCmd();
 	if (cmd.contains("SandMan.exe", Qt::CaseInsensitive)) 
 		return Qt::Checked; // set up and sandman
@@ -225,9 +231,38 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 
 void CSettingsWindow__AddContextMenu()
 {
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (settings.value("CurrentBuild") >= 22000) // Windows 11
+	{
+		QProcess Proc;
+		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RegisterPackage");
+		Proc.waitForFinished();
+		return;
+	}
+
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
 		CSettingsWindow::tr("Run &Sandboxed"), //CSettingsWindow::tr("Explore &Sandboxed"),
 			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+}
+
+void CSettingsWindow__RemoveContextMenu()
+{
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (settings.value("CurrentBuild") >= 22000) // Windows 11
+	{
+		QProcess Proc;
+		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RemovePackage");
+		Proc.waitForFinished();
+	}
+
+	CSbieUtils::RemoveContextMenu();
+}
+
+void CSettingsWindow__AddBrowserIcon()
+{
+	QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
+	Path += "\\" + CSettingsWindow::tr("Sandboxed Web Browser") + ".lnk";
+	CSbieUtils::CreateShortcut(theAPI, Path, "", "", "default_browser");
 }
 
 void CSettingsWindow::LoadSettings()
@@ -398,7 +433,7 @@ void CSettingsWindow::SaveSettings()
 		if (ui.chkShellMenu->isChecked())
 			CSettingsWindow__AddContextMenu();
 		else
-			CSbieUtils::RemoveContextMenu();
+			CSettingsWindow__RemoveContextMenu();
 	}
 
 	if (ui.chkShellMenu2->isChecked() != CSbieUtils::HasContextMenu2()) {

@@ -88,6 +88,8 @@ private:
 };
 
 void CSettingsWindow__AddContextMenu();
+void CSettingsWindow__RemoveContextMenu();
+void CSettingsWindow__AddBrowserIcon();
 
 void WindowsMoveFile(const QString& from, const QString& to);
 

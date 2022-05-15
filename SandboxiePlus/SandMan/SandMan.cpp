@@ -2477,7 +2477,7 @@ void CSandMan::OnUpdateCheck()
 			//	'sha256'
 			//	'signature'
 
-			if (!DownloadUrl.isEmpty() && theConf->GetInt("Options/DownloadUpdates", 1) == 1)
+			if (!DownloadUrl.isEmpty() && theConf->GetInt("Options/DownloadUpdates", 0) == 1)
 				DownloadUpdates(DownloadUrl, bManual);
 			else
 			{

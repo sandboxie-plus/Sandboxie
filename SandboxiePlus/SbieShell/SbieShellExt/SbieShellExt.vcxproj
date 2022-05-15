@@ -39,7 +39,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{16746b0c-5840-4ed4-aedf-1abb617827fd}</ProjectGuid>
     <RootNamespace>PhotoStoreContextMenu</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -143,6 +143,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)\..\..\$(Platform)\$(Configuration)</OutDir>
+    <CustomBuildAfterTargets>Link</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <LinkIncremental>true</LinkIncremental>
@@ -151,6 +152,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)\..\..\$(Platform)\$(Configuration)</OutDir>
+    <CustomBuildAfterTargets>Link</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <LinkIncremental>false</LinkIncremental>
@@ -248,6 +250,10 @@
       <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
       <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Command>$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv </Command>
+      <Outputs>$(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
@@ -286,6 +292,10 @@
       <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
     </Link>
+    <CustomBuildStep>
+      <Command>cmd.exe /k "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv</Command>
+      <Outputs>$(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>

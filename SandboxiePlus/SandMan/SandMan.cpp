@@ -21,6 +21,7 @@
 #include "Views/TraceView.h"
 #include "Windows/SelectBoxWindow.h"
 #include "../UGlobalHotkey/uglobalhotkeys.h"
+#include "Helpers/WinAdmin.h"
 
 CSbiePlusAPI* theAPI = NULL;
 

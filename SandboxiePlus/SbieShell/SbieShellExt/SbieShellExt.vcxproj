@@ -251,7 +251,7 @@
       <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>cmd.exe /c "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv </Command>
+      <Command>"$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv </Command>
       <Outputs>$(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
@@ -293,7 +293,7 @@
       <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
     </Link>
     <CustomBuildStep>
-      <Command>cmd.exe /c "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv</Command>
+      <Command>"$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv</Command>
       <Outputs>$(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>

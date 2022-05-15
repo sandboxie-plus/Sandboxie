@@ -598,7 +598,7 @@ void CSettingsWindow::SaveSettings()
 				}
 				else {
 					Certificate.clear();
-					QMessageBox::critical(this, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate not just a portion of it."));
+					QMessageBox::critical(this, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate, not just a portion of it."));
 				}
 			}
 			else if(!g_Certificate.isEmpty()){

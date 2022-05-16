@@ -354,6 +354,14 @@ SBIE2108 Completamento apparente del programma '%2' eseguito correttamente
 # SBIE2110 Preparazione delle dipendenze di WinSxS per '%2' in corso...
 # .
 
+2111;pop;inf;01
+SBIE2111 Impossibile accedere al processo: %3, chiamata %2
+.
+
+2112;pop;inf;01
+SBIE2112 Impossibile accedere all'oggetto: %3, chiamata %2
+.
+
 2191;pop;inf;01
 SBIE2191 Non è possibile aggiornare %2 mentre è in esecuzione nell'area virtuale.
 .
@@ -368,6 +376,10 @@ SBIE2193 Assicurarsi di eliminare l'area virtuale dopo il completamento del proc
 
 2194;pop;inf;01
 SBIE2194 Windows Installer ha richiesto l'impostazione dell'opzione %2 nel file ini, ma con un livello di isolamento inferiore.
+.
+
+2195;pop;inf;01
+SBIE2195 Per eseguire explorer.exe nell'area virtuale, occorre disattivare l'accesso all'infrastruttura COM.
 .
 
 2198;pop;inf;01
@@ -3367,7 +3379,7 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6004;pop;err;01
-La configurazione dell'area virtuale selezionata richiede un certificato di supporto.
+La configurazione %3 dell'area virtuale %2 richiede un certificato di supporto.
 .
 
 6005;txt;01

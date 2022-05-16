@@ -1189,7 +1189,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="393"/>
         <source>Keep terminated</source>
-        <translation>保持终止</translation>
+        <translation>保留终止的进程</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="397"/>

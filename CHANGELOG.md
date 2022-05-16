@@ -15,14 +15,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.22 / 5.55.22] - 2022-05-15
 
 ### Added
-- added auto update download and silent install option to sandman.exe [#917](https://github.com/sandboxie-plus/Sandboxie/issues/917)
-- trace monitor mode can now also save to file [#1851](https://github.com/sandboxie-plus/Sandboxie/issues/1851)
-- trace log now shows ipc object type information
-- added support for windows 11 context menus
+- added auto-update download and silent install option to SandMan.exe [#917](https://github.com/sandboxie-plus/Sandboxie/issues/917)
+- trace monitor mode can save to file now [#1851](https://github.com/sandboxie-plus/Sandboxie/issues/1851)
+- trace log now shows IPC object type information
+- added support for Windows 11 context menus
 
 ### Fixed
-- fixed sandman crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
-- fixed issue with windows server 2022 build 20348
+- fixed SandMan crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
+- fixed issue with Windows Server 2022 build 20348
 - fixed translation switching issues [#1852](https://github.com/sandboxie-plus/Sandboxie/issues/1852)
 
 

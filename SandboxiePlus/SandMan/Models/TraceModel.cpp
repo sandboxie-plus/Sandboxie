@@ -155,20 +155,20 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 					/*case eProcess:
 					{
 						CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
-						ColValue.Formated = QString("%1 (%2, %3)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId());
+						ColValue.Formatted = QString("%1 (%2, %3)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId());
 						break;
 					}
-					case eTimeStamp:		ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;*/
+					case eTimeStamp:		ColValue.Formatted = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;*/
 					case eProcess:			
 						if(!m_bTree) {
 							QString Name = pEntry->GetProcessName();
-							ColValue.Formated = QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
+							ColValue.Formatted = QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
 								.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId()).arg(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
 						} else 
-							ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
+							ColValue.Formatted = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
 						break;
-						//case eType:			ColValue.Formated = ; break;
-						//case eValue:			ColValue.Formated = ; break;
+						//case eType:			ColValue.Formatted = ; break;
+						//case eValue:			ColValue.Formatted = ; break;
 				}
 			}
 
@@ -252,9 +252,9 @@ CTraceModel::STreeNode* CTraceModel::MkVirtualNode(const QVariant& Id, STreeNode
 		QString Name = GetProcessName(pid);
 		pNode->Values[0].Raw = pid;
 		if(!Name.isEmpty())
-			pNode->Values[0].Formated = tr("%1 (%2)").arg(Name).arg(pid); 
+			pNode->Values[0].Formatted = tr("%1 (%2)").arg(Name).arg(pid); 
 		else
-			pNode->Values[0].Formated = tr("Process %1").arg(pid);
+			pNode->Values[0].Formatted = tr("Process %1").arg(pid);
 	}
 	else if (typeId.first == "tid")
 	{
@@ -262,10 +262,10 @@ CTraceModel::STreeNode* CTraceModel::MkVirtualNode(const QVariant& Id, STreeNode
 		quint32 pid = Split2(pParent->ID.toString(), "_").second.toUInt();
 		LogThreadId(pid, tid);
 		pNode->Values[0].Raw = tid;
-		pNode->Values[0].Formated = tr("Thread %1").arg(tid);
+		pNode->Values[0].Formatted = tr("Thread %1").arg(tid);
 	}
 	else*/
-		pNode->Values[0].Raw = pNode->Values[0].Formated = Id;
+		pNode->Values[0].Raw = pNode->Values[0].Formatted = Id;
 
 	return pNode;
 }

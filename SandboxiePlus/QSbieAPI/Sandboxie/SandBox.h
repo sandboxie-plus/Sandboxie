@@ -42,6 +42,7 @@ public:
 
 	virtual void					UpdateDetails();
 
+	virtual void					SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath);
 	virtual QString					GetFileRoot() const { return m_FilePath; }
 	virtual QString					GetRegRoot() const { return m_RegPath; }
 	virtual QString					GetIpcRoot() const { return m_IpcPath; }
@@ -54,6 +55,7 @@ public:
 	virtual SB_STATUS				RunSandboxed(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
 
+	virtual void					OpenBox() {}
 	virtual void					CloseBox() {}
 
 	virtual bool					IsEnabled() const  { return m_IsEnabled; }

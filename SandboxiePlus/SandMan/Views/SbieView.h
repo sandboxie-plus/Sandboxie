@@ -3,6 +3,7 @@
 #include "../../MiscHelpers/Common/PanelView.h"
 #include "../../MiscHelpers/Common/TreeviewEx.h"
 #include "../Models/SbieModel.h"
+#include <QFileIconProvider>
 
 class CSbieView : public CPanelView
 {
@@ -152,4 +153,6 @@ private:
 	QAction*				m_pRemove;
 
 	int						m_iMenuRun;
+
+	QFileIconProvider		m_IconProvider;
 };

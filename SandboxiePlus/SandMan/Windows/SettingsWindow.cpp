@@ -301,6 +301,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
 	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Shift+Pause")));
 
+	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
+
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
 	
@@ -458,6 +460,8 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/EnablePanicKey", ui.chkPanic->isChecked());
 	theConf->SetValue("Options/PanicKeySequence", ui.keyPanic->keySequence().toString());
 	
+	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
+
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());

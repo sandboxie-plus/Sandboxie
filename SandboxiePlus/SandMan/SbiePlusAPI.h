@@ -29,6 +29,9 @@ protected:
 
 	int						m_JobCount;
 	QMultiMap<quint32, QString> m_WindowMap;
+
+	friend class CSandBoxPlus;
+	class CBoxMonitor*		m_BoxMonitor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,7 +47,12 @@ public:
 
 	virtual void			UpdateDetails();
 
+	virtual void			SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath);
+
+	virtual void			OpenBox();
 	virtual void			CloseBox();
+
+	virtual SB_PROGRESS		CleanBox();
 
 	virtual QString			GetStatusStr() const;
 
@@ -71,6 +79,10 @@ public:
 	virtual int				IsLingeringProgram(const QString& ProgName);
 	virtual void			SetLeaderProgram(const QString& ProgName, bool bSet);
 	virtual int				IsLeaderProgram(const QString& ProgName);
+
+	virtual void			UpdateSize();
+	virtual quint64			GetSize() const						{ if(m_TotalSize == -1) return 0; return m_TotalSize; }
+	virtual void			SetSize(quint64 Size);				//{ m_TotalSize = Size; }
 
 	virtual bool			IsRecoverySuspended() const			{ return m_SuspendRecovery; }
 	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
@@ -126,7 +138,10 @@ protected:
 	bool					m_bApplicationCompartment;
 	int						m_iUnsecureDebugging;
 
+	quint64					m_TotalSize;
+
 	bool					m_SuspendRecovery;
+	bool					m_IsEmpty;
 	QString					m_StatusStr;
 
 	QSet<QString>			m_RecentPrograms;

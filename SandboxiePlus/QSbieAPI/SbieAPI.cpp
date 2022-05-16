@@ -129,7 +129,9 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 	m_pGlobalSection = new CSbieIni("GlobalSettings", this, this);
 	m_pUserSection = new CSbieIni("UserSettings", this, this); // dummy
 
+	m_IniReLoad = false;
 	m_bReloadPending = false;
+	m_bBoxesDirty = false;
 
 	m_LastTraceEntry = 0;
 
@@ -357,6 +359,7 @@ SB_STATUS CSbieAPI::Disconnect()
 
 	m_SandBoxes.clear();
 	m_BoxedProxesses.clear();
+	m_bBoxesDirty = true;
 
 	emit StatusChanged();
 	return SB_OK;
@@ -786,10 +789,12 @@ SB_STATUS CSbieAPI::TakeOver()
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::WatchIni(bool bEnable)
+SB_STATUS CSbieAPI::WatchIni(bool bEnable, bool bReLoad)
 {
-	if (bEnable)
+	if (bEnable) {
 		m_IniWatcher.addPath(m_IniPath);
+		m_IniReLoad = bReLoad;
+	}
 	else
 		m_IniWatcher.removePath(m_IniPath);
 	return SB_OK;
@@ -807,7 +812,9 @@ void CSbieAPI::OnIniChanged(const QString &path)
 void CSbieAPI::OnReloadConfig()
 {
 	m_bReloadPending = false;
-	ReloadConfig();
+	m_bBoxesDirty = true;
+	if (m_IniReLoad) 
+		ReloadConfig();
 }
 
 typedef struct _FILE_FS_VOLUME_INFORMATION {
@@ -1115,13 +1122,17 @@ quint32 CSbieAPI::GetSessionID() const
 	return m->sessionId;
 }
 
-SB_STATUS CSbieAPI::ReloadBoxes(bool bFullUpdate)
+SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 {
+	if (bForceUpdate || (!m_bBoxesDirty && !m_IniWatcher.files().isEmpty()))
+		return SB_OK;
+	m_bBoxesDirty = false;
+
 	QMap<QString, CSandBoxPtr> OldSandBoxes = m_SandBoxes;
 
 	for (int i = 0;;i++)
 	{
-		QString BoxName = SbieIniGet(QString(), QString(), (i | CONF_GET_NO_EXPAND));
+		QString BoxName = SbieIniGet(QString(), QString(), (i | CONF_GET_NO_EXPAND | CONF_GET_NO_TEMPLS));
 		if (BoxName.isNull())
 			break;
 
@@ -1134,10 +1145,8 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bFullUpdate)
 		{
 			pBox = CSandBoxPtr(NewSandBox(BoxName, this));
 			m_SandBoxes.insert(BoxName.toLower(), pBox);
-			UpdateBoxPaths(pBox);
 		}
-		else if(bFullUpdate)
-			UpdateBoxPaths(pBox);
+		UpdateBoxPaths(pBox);
 
 		pBox->m_IsEnabled = bIsEnabled;
 
@@ -1238,6 +1247,8 @@ void CSbieAPI::CommitIniChanges()
 	SbieIniSet("", "", ""); // commit and refresh
 
 	if (bRemoved) m_IniWatcher.addPath(m_IniPath);
+
+	m_bBoxesDirty = true;
 }
 
 QString CSbieAPI::SbieIniGetEx(const QString& Section, const QString& Setting)
@@ -1405,6 +1416,12 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 			if (pBox.isNull())
 				continue;
 
+			if (pBox->m_ActiveProcessCount == 0) {
+				pBox->m_ActiveProcessCount = 1;
+				pBox->OpenBox();
+				emit BoxOpened(pBox->GetName());
+			}
+
 			pProcess->m_pBox = pBox.data();
 			pBox->m_ProcessList.insert(ProcessId, pProcess);
 			m_BoxedProxesses.insert(ProcessId, pProcess);
@@ -1569,9 +1586,11 @@ SB_STATUS CSbieAPI::UpdateBoxPaths(const CSandBoxPtr& pSandBox)
 	if (!Status)
 		return Status;
 
-	pSandBox->m_FilePath = Nt2DosPath(QString::fromWCharArray(FileRoot.c_str(), wcslen(FileRoot.c_str())));
-	pSandBox->m_RegPath = QString::fromWCharArray(KeyRoot.c_str(), wcslen(KeyRoot.c_str()));
-	pSandBox->m_IpcPath = QString::fromWCharArray(IpcRoot.c_str(), wcslen(IpcRoot.c_str()));
+	QString FilePath = Nt2DosPath(QString::fromWCharArray(FileRoot.c_str(), wcslen(FileRoot.c_str())));
+	QString RegPath = QString::fromWCharArray(KeyRoot.c_str(), wcslen(KeyRoot.c_str()));
+	QString IpcPath = QString::fromWCharArray(IpcRoot.c_str(), wcslen(IpcRoot.c_str()));
+
+	pSandBox->SetBoxPaths(FilePath, RegPath, IpcPath);
 	return SB_OK;
 }
 
@@ -2048,7 +2067,7 @@ SB_STATUS CSbieAPI::ReloadConf(quint32 flags, quint32 SessionId)
 	//emit LogMessage("Sandboxie config has been reloaded.", false);
 	emit LogSbieMessage(0, QStringList() << "Sandboxie config has been reloaded" << "" << "", 4);
 
-	ReloadBoxes(true);
+	m_bBoxesDirty = true;
 
 	return SB_OK;
 }
@@ -2318,6 +2337,12 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		if (!pBox)
 			return CBoxedProcessPtr();
 		
+		if (pBox->m_ActiveProcessCount == 0) {
+			pBox->m_ActiveProcessCount = 1;
+			pBox->OpenBox();
+			emit BoxOpened(pBox->GetName());
+		}
+
 		pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
 		pBox->m_ProcessList.insert(ProcessId, pProcess);
 		m_BoxedProxesses.insert(ProcessId, pProcess);

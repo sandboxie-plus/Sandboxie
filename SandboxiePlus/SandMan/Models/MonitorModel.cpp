@@ -71,8 +71,8 @@ QList<QVariant>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& Entry
 
 				/*switch (section)
 				{
-						//case eType:			ColValue.Formated = ; break;
-						//case eValue:			ColValue.Formated = ; break;
+						//case eType:			ColValue.Formatted = ; break;
+						//case eValue:			ColValue.Formatted = ; break;
 				}*/
 			}
 

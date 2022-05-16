@@ -386,6 +386,8 @@ void CSandMan::CreateMenus()
 
 		m_pMenuView->addSeparator();
 
+		m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Refresh View"), this, SLOT(OnRefresh()));
+
 		m_pCleanUpMenu = m_pMenuView->addMenu(CSandMan::GetIcon("Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
 			m_pCleanUpMenu->addSeparator();
@@ -1029,8 +1031,10 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 			Status = pBox->CleanBox();
 
 		Ret = Status;
-		if (Status.GetStatus() == OP_ASYNC)
+		if (Status.GetStatus() == OP_ASYNC) {
 			Ret = AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 Content").arg(pBox->GetName()));
+			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+		}
 	}
 
 finish:
@@ -1144,8 +1148,7 @@ void CSandMan::OnStatusChanged()
 
 		OnIniReloaded();
 
-		if (theConf->GetBool("Options/WatchIni", true))
-			theAPI->WatchIni(true);
+		theAPI->WatchIni(true, theConf->GetBool("Options/WatchIni", true));
 
 		if (!theAPI->ReloadCert().IsError()) {
 			CSettingsWindow::LoadCertificate();
@@ -1855,6 +1858,20 @@ void CSandMan::SetViewMode(bool bAdvanced)
 		m_pToolBar->hide();
 		m_pLogTabs->hide();
 		statusBar()->hide();
+	}
+}
+
+void CSandMan::OnRefresh()
+{
+	if (!theAPI->IsConnected())
+		return;
+
+	theAPI->ReloadBoxes(true);
+
+	if (theConf->GetBool("Options/WatchBoxSize", false)) {
+		QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+		foreach(const CSandBoxPtr & pBox, Boxes)
+			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
 	}
 }
 

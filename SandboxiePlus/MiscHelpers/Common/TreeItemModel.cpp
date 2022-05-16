@@ -110,7 +110,7 @@ void CSimpleTreeModel::Sync(const QMap<QVariant, QVariantMap>& List)
 				Changed = true;
 				ColValue.Raw = Value;
 
-				//ColValue.Formated = 
+				//ColValue.Formatted = 
 			}
 
 			if(State != Changed)
@@ -385,7 +385,7 @@ QVariant CTreeItemModel::NodeData(STreeNode* pNode, int role, int section) const
 		case Qt::DisplayRole:
 		{
 			STreeNode::SValue& Value = pNode->Values[section];
-			return Value.Formated.isValid() ? Value.Formated : Value.Raw;
+			return Value.Formatted.isValid() ? Value.Formatted : Value.Raw;
 		}
 		case Qt::EditRole: // sort role
 		{

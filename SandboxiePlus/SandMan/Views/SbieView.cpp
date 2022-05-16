@@ -8,7 +8,6 @@
 #include "../../MiscHelpers/Common/Common.h"
 #include "../Windows/OptionsWindow.h"
 #include "../Windows/SnapshotsWindow.h"
-#include <QFileIconProvider>
 #include "../../MiscHelpers/Common/CheckableMessageBox.h"
 #include "../Windows/RecoveryWindow.h"
 #include "../Windows/NewBoxWindow.h"
@@ -1351,8 +1350,6 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 	while (m_iMenuRun < m_pMenuRun->actions().count())
 		m_pMenuRun->removeAction(m_pMenuRun->actions().at(m_iMenuRun));
 
-	QFileIconProvider IconProvider;
-
 	QStringList RunOptions = pBox->GetTextList("RunCommand", true);
 	foreach(const QString& RunOption, RunOptions) 
 	{
@@ -1372,7 +1369,7 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		if (Path.left(1) == "\\")
 			Path.prepend(pBox->GetFileRoot());
 
-		pAction->setIcon(IconProvider.icon(QFileInfo(Path)));
+		pAction->setIcon(m_IconProvider.icon(QFileInfo(Path)));
 
 		pAction->setData(NameCmd.second);
 	}

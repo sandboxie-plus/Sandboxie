@@ -8,6 +8,7 @@ HEADERS += ./stdafx.h \
     ./SbiePlusAPI.h \
     ./SbieProcess.h \
     ./BoxJob.h \
+    ./BoxMonitor.h \
     ./Models/SbieModel.h \
     ./Models/TraceModel.h \
     ./Models/MonitorModel.h \
@@ -32,6 +33,7 @@ SOURCES += ./main.cpp \
     ./SbiePlusAPI.cpp \
     ./SbieProcess.cpp \
     ./BoxJob.cpp \
+    ./BoxMonitor.cpp \
     ./Models/TraceModel.cpp \
     ./Models/MonitorModel.cpp \
     ./Models/SbieModel.cpp \

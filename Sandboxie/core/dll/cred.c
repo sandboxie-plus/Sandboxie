@@ -263,17 +263,20 @@ _FX WCHAR *Cred_GetName(
     if (DomainName)
         len += wcslen(DomainName);
     if (TargetName)
-        len += wcslen(TargetName) + 10;
+        //len += wcslen(TargetName) + 10;
+        len += wcslen(TargetName);
     else
         TargetName = L"?";
 
     name = Dll_Alloc(len * sizeof(WCHAR));
 
     if (DomainName)
-        Sbie_snwprintf(name, len, L"%s%s-%s", Cred_DomainCred, DomainName, TargetName);
+        //Sbie_snwprintf(name, len, L"%s%s-%s", Cred_DomainCred, DomainName, TargetName);
+        Sbie_snwprintf(name, len, L"%s", TargetName);
     else
-        Sbie_snwprintf(name, len, L"%s%08X-%s", Cred_SimpleCred, Type, TargetName);
-
+        //Sbie_snwprintf(name, len, L"%s%08X-%s", Cred_SimpleCred, Type, TargetName);
+        Sbie_snwprintf(name, len, L"%s", TargetName);
+  
     return name;
 }
 
@@ -717,9 +720,9 @@ _FX BOOL Cred_WriteItem(const WCHAR *name, void *data, ULONG len)
 _FX BOOL Cred_CredWriteW(void *pCredential, ULONG Flags)
 {
     CREDENTIALW *cred = (CREDENTIALW *)pCredential;
-    void *mrshcred;
+    void *mrshcred = NULL;
     ULONG mrshcred_len;
-    WCHAR *name;
+    WCHAR *name = NULL;
     ULONG err;
     BOOL ok;
 
@@ -1128,9 +1131,12 @@ _FX BOOL Cred_CredRenameW(
 
 _FX BOOL Cred_CredWriteA(void *pCredential, ULONG Flags)
 {
+    /*
     SbieApi_Log(2205, L"CredWriteA");
     SetLastError(ERROR_NO_SUCH_LOGON_SESSION);
     return FALSE;
+    */
+    return __sys_CredWriteA(pCredential, Flags);
 }
 
 
@@ -1209,7 +1215,7 @@ _FX BOOL Cred_CredDeleteA(void *TargetName, ULONG Type, ULONG Flags)
 _FX BOOL Cred_CredReadA(
     void *TargetName, ULONG Type, ULONG Flags, void **ppCredential)
 {
-    SbieApi_Log(2205, L"CredReadA");
+    //SbieApi_Log(2205, L"CredReadA");
     return __sys_CredReadA(TargetName, Type, Flags, ppCredential);
 }
 

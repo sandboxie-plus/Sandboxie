@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with process access [#1603](https://github.com/sandboxie-plus/Sandboxie/issues/1603)
 - fixed translation issue [#1864](https://github.com/sandboxie-plus/Sandboxie/issues/1864)
 - fixed ui issue with box selection window [#1867](https://github.com/sandboxie-plus/Sandboxie/issues/1867)
-
+- fixed ui issue when switching language [#1871](https://github.com/sandboxie-plus/Sandboxie/issues/1871)
 
 
 

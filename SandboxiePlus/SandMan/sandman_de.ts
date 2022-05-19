@@ -47,22 +47,22 @@
     <message>
         <location filename="Models/MonitorModel.cpp" line="115"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="116"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="117"/>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="118"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl</translation>
     </message>
 </context>
 <context>
@@ -1121,7 +1121,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="339"/>
         <location filename="SandMan.cpp" line="594"/>
         <source>Pause Forcing Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausiere erzwingen von Programmen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="342"/>
@@ -1251,12 +1251,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="477"/>
         <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Es ist eine neue Version von Sandboxie-Plus verfügbar&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="488"/>
         <source>Click to install update</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken zur Updateinstallation</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="491"/>
@@ -1266,7 +1266,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="492"/>
         <source>Click to open web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken zum Öffnen des Internetbrowsers</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="691"/>
@@ -1366,7 +1366,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2615"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ein Sandboxie-Plus Update wurde zu folgendem Ort heruntergeladen:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls ein Programm in einer Sandbox läuft wird dieses beendet.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2662"/>
@@ -1531,12 +1531,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="851"/>
         <source> - Driver/Service NOT Running!</source>
-        <translation type="unfinished"></translation>
+        <translation> - Treiber/Dienst läuft NICHT!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="853"/>
         <source> - Deleting Sandbox Content</source>
-        <translation type="unfinished"></translation>
+        <translation> - Lösche Sandboxinhalt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1010"/>
@@ -1546,7 +1546,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1031"/>
         <source>Auto Deleting %1 Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-lösche %1 Inhalt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1053"/>
@@ -1742,7 +1742,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="129"/>
         <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>WARNUNG: Sandboxie-Plus.ini in %1 kann nicht geschrieben werden, Einstellungen werden nicht gespeichert.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1090"/>
@@ -1752,7 +1752,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1091"/>
         <source>Current Config: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Konfiguration: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2146"/>
@@ -2016,7 +2016,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2495"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Es it eine neue Version von Sandboxie-Plus verfügbar.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Neue Versions:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Es ist eine neue Version von Sandboxie-Plus verfügbar.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Neue Version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2497"/>
@@ -2033,7 +2033,9 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine neuen Updates gefunden, Ihr Sandboxie-Plus ist aktuell.
+
+Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur geteste Updates angeboten werden.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2556"/>
@@ -2561,12 +2563,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="767"/>
         <source>This name is already used for a Box Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Name wird bereits für eine Boxgruppe verwendet.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="772"/>
         <source>This name is already used for a Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Name wird bereits für eine Sandbox verwendet.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="820"/>
@@ -2841,7 +2843,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="264"/>
         <source>Sandboxed Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxter Internetbrowser</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="400"/>
@@ -2862,7 +2864,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/SettingsWindow.cpp" line="601"/>
         <source>This does not look like a certificate, please enter the entire certificate, not just a portion of it.</source>
         <oldsource>This does not look like a certificate, please enter the entire certificate not just a portion of it.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Dies scheint kein Zertifikat zu sein, bitte geben Sie das ganze Zertifikat ein, nicht nur einen Teil davon.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="624"/>
@@ -3011,7 +3013,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/TraceView.cpp" line="176"/>
         <source>Monitor mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitormodus</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="180"/>
@@ -3486,7 +3488,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="127"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;Weitere BoxTypen&lt;/b&gt; sind exklusiv verfügbar für  &lt;u&gt;Projektunterstützer&lt;/u&gt;, die verbesserten Privatspähreboxen &lt;b&gt;&lt;font color=&apos;red&apos;&gt;schützen Nutzerdaten vor unbefügtem Zugriff&lt;/font&gt;&lt;/b&gt; durch sandgeboxte Programme.&lt;br /&gt;Falls Sie noch kein Uunterstützer sind, erwägen Sie bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;das Projekt zu unterstützen&lt;/a&gt;, um ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstüzerzertifikat&lt;/a&gt; zu erhalten.&lt;br /&gt;Sie können die anderen Boxtypen testen, indem Sie Boxen mit diesen Typen erstellen, jedoch werden die Prozesse in diesen Boxen nach 5 Minuten beendet.</translation>
+        <translation>&lt;b&gt;Weitere BoxTypen&lt;/b&gt; sind exklusiv verfügbar für  &lt;u&gt;Projektunterstützer&lt;/u&gt;, die verbesserten Privatspähreboxen &lt;b&gt;&lt;font color=&apos;red&apos;&gt;schützen Nutzerdaten vor unbefügtem Zugriff&lt;/font&gt;&lt;/b&gt; durch sandgeboxte Programme.&lt;br /&gt;Falls Sie noch kein Unterstützer sind, erwägen Sie bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;das Projekt zu unterstützen&lt;/a&gt;, um ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstüzerzertifikat&lt;/a&gt; zu erhalten.&lt;br /&gt;Sie können die anderen Boxtypen testen, indem Sie Boxen mit diesen Typen erstellen, jedoch werden die Prozesse in diesen Boxen nach 5 Minuten beendet.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
@@ -4151,7 +4153,7 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1694"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
-        <translation>Priorisiere Regeln basieren ihrer Genauigkeit und Prozessübereinstimmungslevel</translation>
+        <translation>Priorisiere Regeln basierend ihrer Genauigkeit und Prozessübereinstimmungslevel</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1701"/>
@@ -4221,12 +4223,12 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="651"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube das Lesen von nicht sandgeboxten Prozessen (nicht empfohlen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebe Nachricht 2111 aus, falls ein Prozesszugriff abgelehnt wird</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
@@ -4777,7 +4779,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="178"/>
         <source>General Options</source>
-        <translation type="unfinished">Generelle Optionen</translation>
+        <translation>Generelle Optionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="246"/>
@@ -4817,7 +4819,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="686"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Administratoren können das Kommando zum Pausieren von erzwungenen Programmen verwenden</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="693"/>
@@ -4832,7 +4834,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="985"/>
         <source>Download Updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Updates automatisch herunterladen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="494"/>

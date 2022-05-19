@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "BoxMonitor.h"
-#include "MiscHelpers/Common/Common.h"
+#include "../MiscHelpers/Common/Common.h"
 
 CBoxMonitor::CBoxMonitor() 
 { 

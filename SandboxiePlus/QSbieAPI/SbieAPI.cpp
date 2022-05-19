@@ -1928,12 +1928,12 @@ QString CSbieAPI::GetBoxedPath(const QString& BoxName, const QString& Path)
 	CSandBoxPtr pBox = GetBoxByName(BoxName);
 	if (!pBox)
 		return QString();
-	return GetBoxedPath(pBox, Path);
+	return GetBoxedPath(pBox.data(), Path);
 }
 
 //#pragma comment(lib, "mpr.lib")
 
-QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
+QString CSbieAPI::GetBoxedPath(CSandBox* pBox, const QString& Path)
 {
 	QString BoxRoot = pBox->m_FilePath;
 
@@ -1993,7 +1993,7 @@ QString CSbieAPI::GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path)
 	return Paths;*/
 }
 
-QString CSbieAPI::GetRealPath(const CSandBoxPtr& pBox, const QString& Path)
+QString CSbieAPI::GetRealPath(CSandBox* pBox, const QString& Path)
 {
 	QString RealPath;
 	QString BoxRoot = pBox->m_FilePath;
@@ -2063,9 +2063,6 @@ SB_STATUS CSbieAPI::ReloadConf(quint32 flags, quint32 SessionId)
 		return SB_ERR(status);
 
 	emit ConfigReloaded();
-
-	//emit LogMessage("Sandboxie config has been reloaded.", false);
-	emit LogSbieMessage(0, QStringList() << "Sandboxie config has been reloaded" << "" << "", 4);
 
 	m_bBoxesDirty = true;
 

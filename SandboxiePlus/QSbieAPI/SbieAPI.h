@@ -77,8 +77,8 @@ public:
 	virtual bool			GetProcessExemption(quint32 process_id, quint32 action_id);
 
 	virtual QString			GetBoxedPath(const QString& BoxName, const QString& Path);
-	virtual QString			GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path);
-	virtual QString			GetRealPath(const CSandBoxPtr& pBox, const QString& Path);
+	virtual QString			GetBoxedPath(CSandBox* pBox, const QString& Path);
+	virtual QString			GetRealPath(CSandBox* pBox, const QString& Path);
 
 	enum ESetMode
 	{

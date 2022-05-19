@@ -17,6 +17,8 @@ HEADERS += ./stdafx.h \
     ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
     ./Helpers/WinAdmin.h \
+    ./Helpers/ReadDirectoryChanges.h \
+    ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Windows/NewBoxWindow.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
@@ -42,6 +44,8 @@ SOURCES += ./main.cpp \
     ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/WinAdmin.cpp \
+    ./Helpers/ReadDirectoryChanges.cpp \
+    ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \

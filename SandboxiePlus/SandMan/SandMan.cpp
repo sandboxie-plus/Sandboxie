@@ -204,25 +204,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	CreateTrayMenu();
 
-	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
-
-	QWidget* pWidget = new QWidget();
-	pWidget->setMaximumHeight(200);
-	QGridLayout* pLayout = new QGridLayout();
-	pLayout->addWidget(pBar, 0, 0);
-	pWidget->setLayout(pLayout);
-	pBoxWidget->setDefaultWidget(pWidget);*/
-
-	/*QLabel* pLabel = new QLabel("test");
-	pLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	pLabel->setAlignment(Qt::AlignCenter);
-	pBoxWidget->setDefaultWidget(pLabel);*/
-
-	//m_pTrayMenu->addAction(pBoxWidget);
-	//m_pTrayMenu->addSeparator();
-
-	m_pTrayMenu->addAction(m_pExit);
-
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
 	if(g_PendingMessage.isEmpty()){
@@ -598,6 +579,25 @@ void CSandMan::CreateTrayMenu()
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
+
+	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
+
+	QWidget* pWidget = new QWidget();
+	pWidget->setMaximumHeight(200);
+	QGridLayout* pLayout = new QGridLayout();
+	pLayout->addWidget(pBar, 0, 0);
+	pWidget->setLayout(pLayout);
+	pBoxWidget->setDefaultWidget(pWidget);*/
+
+	/*QLabel* pLabel = new QLabel("test");
+	pLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	pLabel->setAlignment(Qt::AlignCenter);
+	pBoxWidget->setDefaultWidget(pLabel);*/
+
+	//m_pTrayMenu->addAction(pBoxWidget);
+	//m_pTrayMenu->addSeparator();
+
+	m_pTrayMenu->addAction(m_pExit);
 }
 
 void CSandMan::OnExit()

@@ -865,7 +865,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
         return FALSE;
     }
 	if (TlsData->gui_connecting_desktop) {
-		// 避免重入
+		// avoid re-entry
 		return TRUE;
 	}
 

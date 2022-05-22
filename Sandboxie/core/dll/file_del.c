@@ -601,17 +601,16 @@ _FX BOOLEAN File_InitDelete_v2()
 //---------------------------------------------------------------------------
 
 
-_FX VOID File_MarkDeleted_internal(LIST* Root, const WCHAR* Path)
+_FX BOOLEAN File_MarkDeleted_internal(LIST* Root, const WCHAR* Path)
 {
-    HANDLE hMutex = File_AcquireMutex(FILE_VFS_MUTEX);
-
-    EnterCriticalSection(File_PathRoot_CritSec);
-
     // 1. remove deleted branche
 
     LIST* Parent = NULL;
     PATH_NODE* Node = File_FindPathBranche_internal(Root, Path, &Parent, FALSE);
     if (Node) {
+        if (Node->flags == FILE_DELETED_FLAG && Node->items.count == 0)
+            return FALSE; // already marked deleted
+
         List_Remove(Parent, Node);
 
         File_ClearPathBranche_internal(&Node->items);
@@ -625,11 +624,7 @@ _FX VOID File_MarkDeleted_internal(LIST* Root, const WCHAR* Path)
 
     // done
 
-    LeaveCriticalSection(File_PathRoot_CritSec);
-
-    File_SavePathTree();
-
-    File_ReleaseMutex(hMutex);
+    return TRUE;
 }
 
 
@@ -648,11 +643,11 @@ _FX NTSTATUS File_MarkDeleted_v2(const WCHAR* TruePath)
 
     EnterCriticalSection(File_PathRoot_CritSec);
 
-    File_MarkDeleted_internal(&File_PathRoot, TruePath);
+    BOOLEAN bSet = File_MarkDeleted_internal(&File_PathRoot, TruePath);
 
     LeaveCriticalSection(File_PathRoot_CritSec);
 
-    File_SavePathTree();
+    if (bSet) File_SavePathTree();
 
     File_ReleaseMutex(hMutex);
 

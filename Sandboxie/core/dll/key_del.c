@@ -84,7 +84,7 @@ BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name);
 VOID File_SetPathFlags_internal(LIST* Root, const WCHAR* Path, ULONG setFlags, ULONG clrFlags, const WCHAR* Relocation);
 ULONG File_GetPathFlags_internal(LIST* Root, const WCHAR* Path, WCHAR** pRelocation, BOOLEAN CheckChildren);
 VOID File_SavePathNode_internal(HANDLE hPathsFile, LIST* parent, WCHAR* Path, ULONG Length, ULONG SetFlags);
-VOID File_MarkDeleted_internal(LIST* Root, const WCHAR* Path);
+BOOLEAN File_MarkDeleted_internal(LIST* Root, const WCHAR* Path);
 VOID File_SetRelocation_internal(LIST* Root, const WCHAR* OldTruePath, const WCHAR* NewTruePath);
 
 HANDLE File_AcquireMutex(const WCHAR* MutexName);
@@ -232,11 +232,11 @@ _FX NTSTATUS Key_MarkDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName)
 
     EnterCriticalSection(Key_PathRoot_CritSec);
 
-    File_MarkDeleted_internal(&Key_PathRoot, FullPath);
+    BOOLEAN bSet = File_MarkDeleted_internal(&Key_PathRoot, FullPath);
 
     LeaveCriticalSection(Key_PathRoot_CritSec);
 
-    Key_SavePathTree();
+    if (bSet) Key_SavePathTree();
 
     File_ReleaseMutex(hMutex);
 

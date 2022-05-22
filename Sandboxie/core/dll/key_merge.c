@@ -198,7 +198,8 @@ _FX NTSTATUS Key_Merge(
             // the same key path, so we are going to use it.
             //
 
-            break;
+            if(Key_PathsVersion == merge->last_paths_version)
+                break;
         }
 
         //
@@ -226,6 +227,8 @@ _FX NTSTATUS Key_Merge(
         merge->handle = KeyHandle;
         merge->ticks = ticks_now;
         // merge->cant_merge = FALSE;       // memzero takes care of this
+
+        merge->last_paths_version = Key_PathsVersion;
 
         merge->name_len = TruePath_len;
         memcpy(merge->name, TruePath, TruePath_len + sizeof(WCHAR));

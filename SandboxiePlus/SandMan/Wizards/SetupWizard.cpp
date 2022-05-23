@@ -40,7 +40,7 @@ void CSetupWizard::showHelp()
     }
 
     if (lastHelpMessage == message)
-        message = tr("Sorry, I already gave what help I could.");
+        message = tr("Sorry, I already gave all the help I could.");
 
     QMessageBox::information(this, tr("Setup Wizard Help"), message);
 
@@ -88,7 +88,7 @@ CIntroPage::CIntroPage(QWidget *parent)
 
     QVBoxLayout *layout = new QVBoxLayout;
     QLabel* pTopLabel = new QLabel(tr("Welcome to the Setup Wizard. This wizard will help you to configure your copy of <b>Sandboxie-Plus</b>. "
-        "You can start this wizard at any time from the Box->Maintenance if you do not wish to complete it now."));
+        "You can start this wizard at any time from the Sandbox->Maintenance menu if you do not wish to complete it now."));
     pTopLabel->setWordWrap(true);
     layout->addWidget(pTopLabel);
 
@@ -101,12 +101,12 @@ CIntroPage::CIntroPage(QWidget *parent)
     m_pLabel = new QLabel(tr("Select how you would like to use Sandboxie-Plus"));
     layout->addWidget(m_pLabel);
 
-    m_pPersonalRadio = new QRadioButton(tr("&Personally for private non comertial use"));
+    m_pPersonalRadio = new QRadioButton(tr("&Personally, for private non-commercial use"));
     layout->addWidget(m_pPersonalRadio);
     connect(m_pPersonalRadio, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("usePersonal", m_pPersonalRadio);
 
-    m_pBusinessRadio = new QRadioButton(tr("&Commercially for business or enterprise use"));
+    m_pBusinessRadio = new QRadioButton(tr("&Commercially, for business or enterprise use"));
     layout->addWidget(m_pBusinessRadio);
     connect(m_pBusinessRadio, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("useBusiness", m_pBusinessRadio);
@@ -166,7 +166,7 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     connect(m_pCertificate, SIGNAL(textChanged()), this, SIGNAL(completeChanged()));
     registerField("useCertificate", m_pCertificate, "plainText");
     
-    m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited periode of time."));
+    m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
     layout->addWidget(m_pEvaluate);
     connect(m_pEvaluate, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("isEvaluate", m_pEvaluate);
@@ -185,8 +185,8 @@ void CCertificatePage::initializePage()
         theConf->SetValue("Options/BusinessUse", 1);
 
         m_pTopLabel->setText(
-            tr("To use <b>Sandboxie-Plus</b> in a business setting an appropriate business use <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">support certificate</a> is required. "
-            "If you do not yet have the required certificate(s) you can get those from the <a href=\"https://xanasoft.com/shop/\">xanasoft.com web shop</a>.")
+            tr("To use <b>Sandboxie-Plus</b> in a business setting, an appropriate <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">support certificate</a> for business use is required. "
+            "If you do not yet have the required certificate(s), you can get those from the <a href=\"https://xanasoft.com/shop/\">xanasoft.com web shop</a>.")
         );
 
         m_pEvaluate->setVisible(true);
@@ -198,8 +198,8 @@ void CCertificatePage::initializePage()
         m_pTopLabel->setText(
             tr("<b>Sandboxie-Plus</b> provides additional features and box types exclusively to <u>project supporters</u>. "
                 "Boxes like the Privacy Enhanced boxes <b><font color='red'>protect user data from illicit access</font></b> by the sandboxed programs. "
-                "If you are not yet a supporter then please consider <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">supporting the project</a> "
-                "to ensure further development of sandboxie and to receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>.")
+                "If you are not yet a supporter, then please consider <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">supporting the project</a> "
+                "to ensure further development of Sandboxie and to receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>.")
         );
 
         m_pEvaluate->setVisible(false);
@@ -273,14 +273,14 @@ int CShellPage::nextId() const
 CFinishPage::CFinishPage(QWidget *parent)
     : QWizardPage(parent)
 {
-    setTitle(tr("Complete Your Configuration"));
+    setTitle(tr("Complete your configuration"));
     setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     QVBoxLayout *layout = new QVBoxLayout;
 
     m_pLabel = new QLabel;
     m_pLabel->setWordWrap(true);
-    m_pLabel->setText(tr("Almost complete, click Finish to apply all selected options and finisch the wizard."));
+    m_pLabel->setText(tr("Almost complete, click Finish to apply all selected options and conclude the wizard."));
     layout->addWidget(m_pLabel);
 
     QWidget* pSpacer = new QWidget();

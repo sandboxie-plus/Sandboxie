@@ -636,7 +636,7 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 			WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
 		}
 		else {
-			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate, please enter the entire certificate not just a portion of it."));
+			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate. Please enter the entire certificate, not just a portion of it."));
 			return false;
 		}
 	}

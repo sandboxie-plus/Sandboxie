@@ -47,22 +47,22 @@
     <message>
         <location filename="Models/MonitorModel.cpp" line="115"/>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="116"/>
         <source>Status</source>
-        <translation type="unfinished">Statut</translation>
+        <translation>Statut</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="117"/>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="118"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Compte</translation>
     </message>
 </context>
 <context>
@@ -1339,12 +1339,12 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="477"/>
         <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Une nouvelle version de Sandboxie-Plus est disponible&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="488"/>
         <source>Click to install update</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer pour installer la mise à jour</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="491"/>
@@ -1354,7 +1354,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="492"/>
         <source>Click to open web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer pour ouvrir le navigateur Web</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="623"/>
@@ -1742,7 +1742,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="SandMan.cpp" line="2615"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Une nouvelle version de Sandboxie-Plus a été téléchargée à l&apos;emplacement suivant : &lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Procéder à l&apos;installation ? Si des programmes tournent dans les bacs à sable, ils seront clos.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2662"/>
@@ -1884,7 +1884,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="SandMan.cpp" line="1091"/>
         <source>Current Config: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration actuelle : %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2146"/>
@@ -2605,12 +2605,12 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/SbieView.cpp" line="767"/>
         <source>This name is already used for a Box Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce nom est déjà utilisé pour un groupe.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="772"/>
         <source>This name is already used for a Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce nom est déjà utilisé pour un bac à sable.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="820"/>
@@ -2817,7 +2817,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="264"/>
         <source>Sandboxed Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Navigateur Web en bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="400"/>
@@ -2838,7 +2838,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
         <location filename="Windows/SettingsWindow.cpp" line="601"/>
         <source>This does not look like a certificate, please enter the entire certificate, not just a portion of it.</source>
         <oldsource>This does not look like a certificate, please enter the entire certificate not just a portion of it.</oldsource>
-        <translation type="unfinished">Cela ne semble pas être un certificat, veuillez entrer le certificat dans son intégralité et non pas juste une fraction.</translation>
+        <translation>Cela ne semble pas être un certificat, veuillez entrer le certificat dans son intégralité.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="624"/>
@@ -2987,7 +2987,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/TraceView.cpp" line="176"/>
         <source>Monitor mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode surveillance</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="180"/>
@@ -3503,12 +3503,12 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Forms/OptionsWindow.ui" line="651"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser la lecture de la mémoire des processus hors des bacs à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Générer un message 2111 quand l&apos;accès est refusé</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="885"/>
@@ -4575,7 +4575,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="178"/>
         <source>General Options</source>
-        <translation type="unfinished">Options générales</translation>
+        <translation>Options générales</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="246"/>
@@ -4821,7 +4821,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="985"/>
         <source>Download Updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Télécharger les mises à jour automatiquement</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="904"/>

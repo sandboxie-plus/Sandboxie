@@ -150,6 +150,7 @@ CCertificatePage::CCertificatePage(QWidget *parent)
 
     m_pTopLabel = new QLabel();
     m_pTopLabel->setWordWrap(true);
+    connect(m_pTopLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
     layout->addWidget(m_pTopLabel);
 
     m_pCertificate = new QPlainTextEdit();
@@ -161,7 +162,7 @@ CCertificatePage::CCertificatePage(QWidget *parent)
 		"UPDATEKEY: 00000000000000000000000000000000\n"
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 	);
-    //layout->addWidget(m_pCertificate); // we dont show this page when there already is a certificat present
+    layout->addWidget(m_pCertificate);
     connect(m_pCertificate, SIGNAL(textChanged()), this, SIGNAL(completeChanged()));
     registerField("useCertificate", m_pCertificate, "plainText");
     
@@ -184,7 +185,7 @@ void CCertificatePage::initializePage()
         theConf->SetValue("Options/BusinessUse", 1);
 
         m_pTopLabel->setText(
-            tr("To use <b>Sandboxie-Plus</b> in a business setting an apropriate business use <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">support certificate</a> is required. "
+            tr("To use <b>Sandboxie-Plus</b> in a business setting an appropriate business use <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">support certificate</a> is required. "
             "If you do not yet have the required certificate(s) you can get those from the <a href=\"https://xanasoft.com/shop/\">xanasoft.com web shop</a>.")
         );
 
@@ -198,7 +199,7 @@ void CCertificatePage::initializePage()
             tr("<b>Sandboxie-Plus</b> provides additional features and box types exclusively to <u>project supporters</u>. "
                 "Boxes like the Privacy Enhanced boxes <b><font color='red'>protect user data from illicit access</font></b> by the sandboxed programs. "
                 "If you are not yet a supporter then please consider <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">supporting the project</a> "
-                "to to ensure furtehr developement of sandboxie and to receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>.")
+                "to ensure further development of sandboxie and to receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>.")
         );
 
         m_pEvaluate->setVisible(false);

@@ -16,6 +16,8 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "handle.h"
+
 //---------------------------------------------------------------------------
 // Service Control Manager
 //---------------------------------------------------------------------------
@@ -238,7 +240,7 @@ _FX BOOL Scm_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE
 
     if (NT_SUCCESS(status) && ProcessHandle == GetCurrentProcess()) {
 
-        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        Handle_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 
@@ -259,7 +261,7 @@ _FX BOOL Scm_OpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL Open
 
     if (NT_SUCCESS(status) && ThreadHandle == GetCurrentThread()) {
 
-        File_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        Handle_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 

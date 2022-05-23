@@ -179,6 +179,7 @@ private slots:
 
 	void				OnViewMode(QAction* action);
 	void				OnAlwaysTop();
+	void				OnRefresh();
 	void				OnCleanUp();
 	void				OnProcView();
 
@@ -258,6 +259,7 @@ private:
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
 	QAction*			m_pUninstallAll;
+	QAction*			m_pSetupWizard;
 	QAction*			m_pExit;
 
 	QMenu*				m_pMenuView;
@@ -265,6 +267,7 @@ private:
 	QAction*			m_pShowHidden;
 	QAction*			m_pWndTopMost;
 	int					m_iMenuViewPos;
+	QAction*			m_pRefreshAll;
 	QMenu*				m_pCleanUpMenu;
 	QAction*			m_pCleanUpProcesses;
 	QAction*			m_pCleanUpMsgLog;

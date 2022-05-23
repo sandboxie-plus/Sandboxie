@@ -82,7 +82,6 @@ const  ULONG                 tzuk = 'xobs';
 // WinMain
 //---------------------------------------------------------------------------
 
-ULONG Dll_Windows = 0;
 
 int WinMain(
     HINSTANCE hInstance,
@@ -97,9 +96,6 @@ int WinMain(
     _Ntdll      = GetModuleHandle(L"ntdll.dll");
     _Kernel32   = GetModuleHandle(L"kernel32.dll");
     GetSystemInfo(&_SystemInfo);
-    if (GetProcAddress(_Ntdll, "LdrFastFailInLoaderCallout")) {
-        Dll_Windows = 10;
-    }
 
     WCHAR *cmdline = GetCommandLine();
     if (cmdline) {

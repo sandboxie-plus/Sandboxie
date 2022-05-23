@@ -291,7 +291,7 @@ static P_WinExec                    __sys_WinExec                   = NULL;
 static P_RunSetupCommandW           __sys_RunSetupCommandW          = NULL;
 
 static P_NtSetInformationProcess    __sys_NtSetInformationProcess   = NULL;
-static P_NtQueryInformationProcess  __sys_NtQueryInformationProcess = NULL;
+       P_NtQueryInformationProcess  __sys_NtQueryInformationProcess = NULL;
 
 static P_NtCreateProcessEx          __sys_NtCreateProcessEx         = NULL;
 
@@ -2765,6 +2765,17 @@ _FX NTSTATUS Proc_NtQueryInformationProcess(
                 RtlInitUnicodeString((UNICODE_STRING*)ProcessInformation, TruePath);    // return non-sandboxed path so caller can't tell he's sandboxed.
         }
     }
+
+	/*if (ProcessInformationClass == ProcessImageFileName && ProcessInformation != NULL) {
+
+		ULONG tmplen;
+		PUNICODE_STRING fileName = (PUNICODE_STRING)ProcessInformation;
+
+		tmplen = File_NtQueryObjectName(fileName, fileName->MaximumLength);
+
+		if (tmplen)
+			outlen = sizeof(UNICODE_STRING) + tmplen;
+	}*/
 
     return status;
 }

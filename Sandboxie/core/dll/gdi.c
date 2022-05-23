@@ -66,7 +66,7 @@ static ULONG Gdi_CreateScalableFontResourceW(
 static void Gdi_AddFontsInBox(void);
 
 static void Gdi_AddFontsInBox_2(
-    HANDLE hFontsDir, void *buf8k, WCHAR *WinFonts);
+    HANDLE hFontsDir, WCHAR *WinFonts);
 
 static int Gdi_EnumFontFamiliesExA(
     HDC hdc, void *lpLogfont, void *lpEnumFontFamExProc,
@@ -618,15 +618,13 @@ _FX void Gdi_AddFontsInBox(void)
 
         if (hFile != INVALID_HANDLE_VALUE) {
 
-            WCHAR *path1 = Dll_AllocTemp(8192);
             BOOLEAN is_copy = FALSE;
-            NTSTATUS status = SbieDll_GetHandlePath(hFile, path1, &is_copy);
+            NTSTATUS status = SbieDll_GetHandlePath(hFile, NULL, &is_copy);
             if (NT_SUCCESS(status) && is_copy) {
 
-                Gdi_AddFontsInBox_2(hFile, path1, WinFonts);
+                Gdi_AddFontsInBox_2(hFile, WinFonts);
             }
-
-            Dll_Free(path1);
+            
             CloseHandle(hFile);
         }
     }
@@ -642,7 +640,7 @@ _FX void Gdi_AddFontsInBox(void)
 //---------------------------------------------------------------------------
 
 
-_FX void Gdi_AddFontsInBox_2(HANDLE hFontsDir, void *buf8k, WCHAR *WinFonts)
+_FX void Gdi_AddFontsInBox_2(HANDLE hFontsDir, WCHAR *WinFonts)
 {
     NTSTATUS status;
     FILE_DIRECTORY_INFORMATION *info;
@@ -650,6 +648,8 @@ _FX void Gdi_AddFontsInBox_2(HANDLE hFontsDir, void *buf8k, WCHAR *WinFonts)
 
     ULONG WinFonts_len = wcslen(WinFonts);
     WinFonts[WinFonts_len] = L'\\';
+
+    WCHAR *buf8k = Dll_AllocTemp(8192);
 
     while (1) {
 
@@ -680,6 +680,8 @@ _FX void Gdi_AddFontsInBox_2(HANDLE hFontsDir, void *buf8k, WCHAR *WinFonts)
             info = (FILE_DIRECTORY_INFORMATION *)next_entry;
         }
     }
+
+    Dll_Free(buf8k);
 }
 
 

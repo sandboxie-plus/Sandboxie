@@ -4,14 +4,18 @@
 #include "SandMan.h"
 #include "..\MiscHelpers\Common\Common.h"
 #include <windows.h>
+#include "BoxMonitor.h"
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
+	m_BoxMonitor = new CBoxMonitor();
+
 	m_JobCount = 0;
 }
 
 CSbiePlusAPI::~CSbiePlusAPI()
 {
+	delete m_BoxMonitor;
 }
 
 CSandBox* CSbiePlusAPI::NewSandBox(const QString& BoxName, class CSbieAPI* pAPI)
@@ -94,7 +98,10 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
 
+	m_TotalSize = theConf->GetValue("SizeCache/" + m_Name, -1).toLongLong();
+
 	m_SuspendRecovery = false;
+	m_IsEmpty = false;
 
 	m_pOptionsWnd = NULL;
 	m_pRecoveryWnd = NULL;
@@ -154,11 +161,56 @@ void CSandBoxPlus::UpdateDetails()
 	CSandBox::UpdateDetails();
 }
 
+void CSandBoxPlus::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
+{
+	CSandBox::SetBoxPaths(FilePath, RegPath, IpcPath);
+	m_IsEmpty = IsEmpty();
+
+	if (theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->AddBox(this);
+}
+
+void CSandBoxPlus::UpdateSize()
+{
+	m_TotalSize = -1;
+	if(theConf->GetBool("Options/WatchBoxSize", false))
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->AddBox(this);
+
+	m_IsEmpty = IsEmpty();
+}
+
+void CSandBoxPlus::SetSize(quint64 Size)
+{ 
+	m_TotalSize = Size; 
+	theConf->SetValue("SizeCache/" + m_Name, Size);
+}
+
+void CSandBoxPlus::OpenBox()
+{
+	CSandBox::OpenBox();
+
+	m_IsEmpty = false;
+	
+	if (theConf->GetBool("Options/WatchBoxSize", false))
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->AddBox(this, true);
+}
+
 void CSandBoxPlus::CloseBox()
 {
 	CSandBox::CloseBox();
 
 	m_SuspendRecovery = false;
+
+	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->CloseBox(this);
+}
+
+SB_PROGRESS CSandBoxPlus::CleanBox()
+{
+	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->CloseBox(this, true);
+	
+	SB_PROGRESS Status = CSandBox::CleanBox();
+
+	return Status;
 }
 
 bool CSandBoxPlus::CheckUnsecureConfig() const
@@ -190,7 +242,7 @@ QString CSandBoxPlus::GetStatusStr() const
 
 	QStringList Status;
 
-	if (IsEmpty())
+	if (m_IsEmpty)
 		Status.append(tr("Empty"));
 
 	if (m_bApplicationCompartment)
@@ -513,6 +565,8 @@ void CSandBoxPlus::OnAsyncFinished()
 
 	if (!m_JobQueue.isEmpty())
 		StartNextJob();
+	else
+		UpdateSize();
 }
 
 void CSandBoxPlus::OnAsyncMessage(const QString& Text)

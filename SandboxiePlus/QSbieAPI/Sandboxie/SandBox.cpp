@@ -119,6 +119,13 @@ void CSandBox::UpdateDetails()
 {
 }
 
+void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
+{
+	m_FilePath = FilePath;
+	m_RegPath = RegPath;
+	m_IpcPath = IpcPath;
+}
+
 SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
 #ifdef _DEBUG
@@ -140,7 +147,7 @@ SB_STATUS CSandBox::TerminateAll()
 
 bool CSandBox::IsEmpty() const
 {
-	return !QDir(m_FilePath).exists();
+	return !QFile::exists(m_FilePath);
 }
 
 SB_PROGRESS CSandBox::CleanBox()
@@ -327,6 +334,8 @@ struct SBoxDataFile
 
 QList<SBoxDataFile> CSandBox__BoxDataFiles = QList<SBoxDataFile>() 
 	<< SBoxDataFile("RegHive", true, false) 
+	<< SBoxDataFile("RegPaths.dat", false, false) 
+	<< SBoxDataFile("FilePaths.dat", false, true)
 ;
 
 bool CSandBox::IsInitialized() const

@@ -106,7 +106,7 @@ CBoxBorder::CBoxBorder(CSbieAPI* pApi, QObject* parent) : QObject(parent)
 	SetLayeredWindowAttributes(m->BorderWnd, 0, 192, LWA_ALPHA);
 	::ShowWindow(m->BorderWnd, SW_HIDE);
 
-	m_uTimerID = startTimer(10);
+	m_uTimerID = startTimer(100);
 }
 
 CBoxBorder::~CBoxBorder()

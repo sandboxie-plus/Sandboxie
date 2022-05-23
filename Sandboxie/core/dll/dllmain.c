@@ -87,6 +87,7 @@ BOOLEAN Dll_RestrictedToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
 BOOLEAN Dll_CompartmentMode = FALSE;
+//BOOLEAN Dll_AlernateIpcNaming = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
@@ -275,6 +276,21 @@ _FX void Dll_InitInjected(void)
 
     Dll_SidStringLen = wcslen(Dll_SidString);
 
+
+    //
+    // break for the debugger, as soon as we have Dll_ImageName
+    //
+
+    if (SbieDll_CheckStringInList(Dll_ImageName, NULL, L"WaitForDebugger")) {
+    //if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"WaitForDebugger", FALSE)) {
+    //if (SbieApi_QueryConfBool(NULL, L"WaitForDebuggerAll", FALSE)) {
+        while (!IsDebuggerPresent()) {
+            OutputDebugString(L"Waiting for Debugger\n");
+            Sleep(500);
+        } __debugbreak();
+    }
+
+
     //
     // query Sandboxie home folder
     //
@@ -332,6 +348,28 @@ _FX void Dll_InitInjected(void)
     Dll_BoxKeyPathLen = wcslen(Dll_BoxKeyPath);
     Dll_BoxIpcPathLen = wcslen(Dll_BoxIpcPath);
 
+  //  Dll_AlernateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlernateIpcNaming", FALSE);
+  //  if (Dll_AlernateIpcNaming) {
+  //
+  //      //
+  //      // instead of using a separate namespace
+  //		// just replace all \ with _ and use it as a sufix rather then an actual path
+  //      // similarly a its done for named pipes already
+  //      // this approche can help to reduce teh footprint when running in portable mode
+  //      // alternatively we could create volatile entries under AppContainerNamedObjects 
+  //      //
+  //
+  //      WCHAR* ptr = (WCHAR*)Dll_BoxIpcPath;
+  //      while (*ptr) {
+  //          WCHAR *ptr2 = wcschr(ptr, L'\\');
+  //          if (ptr2) {
+  //              ptr = ptr2;
+  //              *ptr = L'_';
+  //          } else
+  //              ptr += wcslen(ptr);
+  //      }
+  //  }
+
     //
     // check if process SID is LocalSystem
     //
@@ -354,7 +392,7 @@ _FX void Dll_InitInjected(void)
         Dll_FixWow64Syscall();
 
     if (ok)
-        ok = File_InitHandles();
+        ok = Handle_Init();
 
     if (ok)
         ok = Obj_Init();
@@ -424,7 +462,13 @@ _FX void Dll_InitInjected(void)
     if (ok)
         ok = Gui_InitConsole1();
 
-    if (ok)
+    // we need ipc stuff to be up hance we initialize delete stuff second to last
+    if (ok && File_Delete_v2)
+        File_InitDelete_v2();
+    if (ok && Key_Delete_v2)
+        Key_InitDelete_v2();
+
+    if (ok) // Note: Ldr_Init may cause rpcss to be started early
         ok = Ldr_Init();            // last to initialize
 
     //
@@ -445,32 +489,6 @@ _FX void Dll_InitInjected(void)
 
     if (! Dll_RestrictedToken)
         CustomizeSandbox();
-
-    /*while (! IsDebuggerPresent()) {
-        OutputDebugString(L"BREAK\n");
-        Sleep(500);
-    }
-    __debugbreak();*/
-
-    /*if (_wcsicmp(Dll_ImageName, L"iexplore.exe") == 0) {
-        WCHAR *cmd = GetCommandLine();
-        if (wcsstr(cmd, L"SCODEF")) {
-
-            while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();
-        }
-    }*/
-
-    /*if (_wcsicmp(Dll_ImageName, L"dllhost.exe") == 0) {
-            while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();
-    }*/
 }
 
 
@@ -825,8 +843,10 @@ _FX ULONG_PTR Dll_Ordinal1(
         //
 
         int MustRestartProcess = 0;
-        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
-            MustRestartProcess = 1;
+        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPAC", FALSE))
+                MustRestartProcess = 1;
+        }
 
         else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
             if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)

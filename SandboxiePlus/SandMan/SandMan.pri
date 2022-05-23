@@ -8,6 +8,7 @@ HEADERS += ./stdafx.h \
     ./SbiePlusAPI.h \
     ./SbieProcess.h \
     ./BoxJob.h \
+    ./BoxMonitor.h \
     ./Models/SbieModel.h \
     ./Models/TraceModel.h \
     ./Models/MonitorModel.h \
@@ -16,6 +17,8 @@ HEADERS += ./stdafx.h \
     ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
     ./Helpers/WinAdmin.h \
+    ./Helpers/ReadDirectoryChanges.h \
+    ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Windows/NewBoxWindow.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
@@ -23,7 +26,8 @@ HEADERS += ./stdafx.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
     ./Windows/SelectBoxWindow.h \
-    ./Windows/FileBrowserWindow.h
+    ./Windows/FileBrowserWindow.h\
+    ./Wizards/SetupWizard.h
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
@@ -31,6 +35,7 @@ SOURCES += ./main.cpp \
     ./SbiePlusAPI.cpp \
     ./SbieProcess.cpp \
     ./BoxJob.cpp \
+    ./BoxMonitor.cpp \
     ./Models/TraceModel.cpp \
     ./Models/MonitorModel.cpp \
     ./Models/SbieModel.cpp \
@@ -39,6 +44,8 @@ SOURCES += ./main.cpp \
     ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/WinAdmin.cpp \
+    ./Helpers/ReadDirectoryChanges.cpp \
+    ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
@@ -57,7 +64,8 @@ SOURCES += ./main.cpp \
     ./Windows/SettingsWindow.cpp \
     ./Windows/SnapshotsWindow.cpp \
     ./Windows/SelectBoxWindow.cpp \
-    ./Windows/FileBrowserWindow.cpp
+    ./Windows/FileBrowserWindow.cpp\
+    ./Wizards/SetupWizard.cpp
 
 FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/OptionsWindow.ui \

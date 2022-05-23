@@ -6,7 +6,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.1.0 / 5.56.0] - 2022-01-??
 
+### Added
+- added support for NtRenameKey (this requires UseRegDeleteV2=y) [#205](https://github.com/sandboxie-plus/Sandboxie/issues/205)
+- added box size info [#1780](https://github.com/sandboxie-plus/Sandboxie/issues/1780)
+
+### Changed
+- reworked the mechanism sandboxie uses to mark host files as deleted
+-- the new behavioure creates a data file in the box root FilePaths.dat instead of creating dummy files
+-- it can be enabled with UseFileDeleteV2=y sane for the registry UseRegDeleteV2=y using RegPaths.dat
+- reworked the TlsNameBuffer mechanism to be more versatile and less error prone
+- significantly reduced the CPU usage of sandman.exe
+
+### Fixed
+- fixed folder rename issues (this requires UseFileDeleteV2=y) [#71](https://github.com/sandboxie-plus/Sandboxie/issues/71)
+- fixed issue with process access [#1603](https://github.com/sandboxie-plus/Sandboxie/issues/1603)
+- fixed translation issue [#1864](https://github.com/sandboxie-plus/Sandboxie/issues/1864)
+- fixed ui issue with box selection window [#1867](https://github.com/sandboxie-plus/Sandboxie/issues/1867)
+- fixed ui issue when switching language [#1871](https://github.com/sandboxie-plus/Sandboxie/issues/1871)
 
 
 
@@ -92,7 +110,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed pipe impersonation in compartment mode
-- fixed issue with box clean-up which was introduced in a recent build
+- fixed issue with box clean-up introduced in a recent build
 - fixed missing trace log clean-up command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
 - fixed inability to unpin programs that have been pinned to the run menu  [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
 

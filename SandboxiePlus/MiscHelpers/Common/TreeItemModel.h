@@ -80,7 +80,7 @@ protected:
 		{
 			QVariant Raw;
 			QVariant SortKey;
-			QVariant Formated;
+			QVariant Formatted;
 		};
 		QVector<SValue>		Values;
 	};

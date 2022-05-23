@@ -312,12 +312,12 @@ int CRecoveryWindow::FindFiles(const QString& Folder)
 	//foreach(const QString & Path, theAPI->GetBoxedPath(m_pBox, Folder))
 	//	Count += FindFiles(Folder, Path, Folder);
 	//return Count;
-	return FindFiles(theAPI->GetBoxedPath(m_pBox, Folder), Folder, Folder).first;
+	return FindFiles(theAPI->GetBoxedPath(m_pBox.data(), Folder), Folder, Folder).first;
 }
 
 int CRecoveryWindow::FindBoxFiles(const QString& Folder)
 {
-	QString RealFolder = theAPI->GetRealPath(m_pBox, m_pBox->GetFileRoot() + Folder);
+	QString RealFolder = theAPI->GetRealPath(m_pBox.data(), m_pBox->GetFileRoot() + Folder);
 	if (RealFolder.isEmpty())
 		return 0;
 	return FindFiles(m_pBox->GetFileRoot() + Folder, RealFolder, RealFolder).first;

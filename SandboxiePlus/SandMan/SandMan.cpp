@@ -21,6 +21,7 @@
 #include "Views/TraceView.h"
 #include "Windows/SelectBoxWindow.h"
 #include "../UGlobalHotkey/uglobalhotkeys.h"
+#include "Wizards/SetupWizard.h"
 #include "Helpers/WinAdmin.h"
 
 CSbiePlusAPI* theAPI = NULL;
@@ -203,25 +204,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	CreateTrayMenu();
 
-	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
-
-	QWidget* pWidget = new QWidget();
-	pWidget->setMaximumHeight(200);
-	QGridLayout* pLayout = new QGridLayout();
-	pLayout->addWidget(pBar, 0, 0);
-	pWidget->setLayout(pLayout);
-	pBoxWidget->setDefaultWidget(pWidget);*/
-
-	/*QLabel* pLabel = new QLabel("test");
-	pLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	pLabel->setAlignment(Qt::AlignCenter);
-	pBoxWidget->setDefaultWidget(pLabel);*/
-
-	//m_pTrayMenu->addAction(pBoxWidget);
-	//m_pTrayMenu->addSeparator();
-
-	m_pTrayMenu->addAction(m_pExit);
-
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
 
 	if(g_PendingMessage.isEmpty()){
@@ -355,6 +337,7 @@ void CSandMan::CreateMenus()
 				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
+			m_pSetupWizard = m_pMaintenance->addAction(CSandMan::GetIcon("Software"), tr("Setup Wizard"), this, SLOT(OnMaintenance()));
 			if(IsFullyPortable())
 				m_pUninstallAll = m_pMaintenance->addAction(CSandMan::GetIcon("Uninstall"), tr("Uninstall All"), this, SLOT(OnMaintenance()));
 			
@@ -383,6 +366,8 @@ void CSandMan::CreateMenus()
 		m_pShowAllSessions->setCheckable(true);
 
 		m_pMenuView->addSeparator();
+
+		m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Refresh View"), this, SLOT(OnRefresh()));
 
 		m_pCleanUpMenu = m_pMenuView->addMenu(CSandMan::GetIcon("Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
@@ -594,6 +579,25 @@ void CSandMan::CreateTrayMenu()
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
 	m_pTrayMenu->addSeparator();
+
+	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
+
+	QWidget* pWidget = new QWidget();
+	pWidget->setMaximumHeight(200);
+	QGridLayout* pLayout = new QGridLayout();
+	pLayout->addWidget(pBar, 0, 0);
+	pWidget->setLayout(pLayout);
+	pBoxWidget->setDefaultWidget(pWidget);*/
+
+	/*QLabel* pLabel = new QLabel("test");
+	pLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	pLabel->setAlignment(Qt::AlignCenter);
+	pBoxWidget->setDefaultWidget(pLabel);*/
+
+	//m_pTrayMenu->addAction(pBoxWidget);
+	//m_pTrayMenu->addSeparator();
+
+	m_pTrayMenu->addAction(m_pExit);
 }
 
 void CSandMan::OnExit()
@@ -1027,8 +1031,10 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 			Status = pBox->CleanBox();
 
 		Ret = Status;
-		if (Status.GetStatus() == OP_ASYNC)
+		if (Status.GetStatus() == OP_ASYNC) {
 			Ret = AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 Content").arg(pBox->GetName()));
+			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+		}
 	}
 
 finish:
@@ -1142,8 +1148,7 @@ void CSandMan::OnStatusChanged()
 
 		OnIniReloaded();
 
-		if (theConf->GetBool("Options/WatchIni", true))
-			theAPI->WatchIni(true);
+		theAPI->WatchIni(true, theConf->GetBool("Options/WatchIni", true));
 
 		if (!theAPI->ReloadCert().IsError()) {
 			CSettingsWindow::LoadCertificate();
@@ -1172,6 +1177,18 @@ void CSandMan::OnStatusChanged()
 		if (!Status.IsError() && !theAPI->GetAllBoxes().contains("defaultbox")) {
 			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
 			theAPI->CreateBox("DefaultBox");
+		}
+
+		int BusinessUse = theConf->GetInt("Options/BusinessUse", 2);
+		if (g_CertInfo.business && BusinessUse == 0) // if we have a Business cert switch to that use case
+			theConf->SetValue("Options/BusinessUse", 1);
+
+		int WizardLevel = theConf->GetBool("Options/WizardLevel", 0);
+		if (WizardLevel == 0) {
+			if (CSetupWizard::ShowWizard())
+				UpdateSettings();
+			else // if user canceled mark that and not show again
+				theConf->SetValue("Options/WizardLevel", -1);
 		}
 	}
 	else
@@ -1726,7 +1743,13 @@ void CSandMan::OnMaintenance()
 		CSettingsWindow__RemoveContextMenu();
 		CSbieUtils::RemoveContextMenu2();
 	}
-	
+
+	else if (sender() == m_pSetupWizard) {
+		if (CSetupWizard::ShowWizard())
+			UpdateSettings();
+		return;
+	}
+
 	HandleMaintenance(Status);
 }
 
@@ -1835,6 +1858,20 @@ void CSandMan::SetViewMode(bool bAdvanced)
 		m_pToolBar->hide();
 		m_pLogTabs->hide();
 		statusBar()->hide();
+	}
+}
+
+void CSandMan::OnRefresh()
+{
+	if (!theAPI->IsConnected())
+		return;
+
+	theAPI->ReloadBoxes(true);
+
+	if (theConf->GetBool("Options/WatchBoxSize", false)) {
+		QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+		foreach(const CSandBoxPtr & pBox, Boxes)
+			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
 	}
 }
 
@@ -2031,6 +2068,8 @@ void CSandMan::OnReloadIni()
 
 void CSandMan::OnIniReloaded()
 {
+	OnLogSbieMessage(0, QStringList() << "Sandboxie config has been reloaded" << "" << "", 4);
+
 	m_pBoxView->ReloadUserConfig();
 	m_pPopUpWindow->ReloadHiddenMessages();
 }

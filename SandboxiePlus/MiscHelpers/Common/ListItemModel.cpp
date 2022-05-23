@@ -69,7 +69,7 @@ void CSimpleListModel::Sync(QList<QVariantMap> List)
 				Changed = true;
 				ColValue.Raw = Value;
 
-				//ColValue.Formated = 
+				//ColValue.Formatted = 
 			}
 
 			if(State != Changed)
@@ -195,7 +195,7 @@ QVariant CListItemModel::Data(const QModelIndex &index, int role, int section) c
 		case Qt::DisplayRole:
 		{
 			SListNode::SValue& Value = pNode->Values[section];
-			return Value.Formated.isValid() ? Value.Formated : Value.Raw;
+			return Value.Formatted.isValid() ? Value.Formatted : Value.Raw;
 		}
 		case Qt::EditRole: // sort role
 		{

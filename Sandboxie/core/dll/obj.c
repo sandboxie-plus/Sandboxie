@@ -45,12 +45,6 @@ static NTSTATUS Obj_NtQueryVirtualMemory(
     SIZE_T Length,
     SIZE_T *ResultLength);
 
-static NTSTATUS Obj_NtQueryInformationProcess(
-	HANDLE ProcessHandle,
-	PROCESSINFOCLASS ProcessInformationClass,
-	PVOID ProcessInformation,
-	ULONG ProcessInformationLength,
-	PULONG ReturnLength);
 
 //---------------------------------------------------------------------------
 // Variables
@@ -60,8 +54,6 @@ static NTSTATUS Obj_NtQueryInformationProcess(
 static P_NtQueryObject          __sys_NtQueryObject             = NULL;
 
        P_NtQueryVirtualMemory   __sys_NtQueryVirtualMemory      = NULL;
-
-	   P_NtQueryInformationProcess __sys_NtQueryInformationProcess = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -76,7 +68,6 @@ _FX BOOLEAN Obj_Init(void)
 #else
     SBIEDLL_HOOK(Obj_,NtQueryObject);
     SBIEDLL_HOOK(Obj_,NtQueryVirtualMemory);
-	SBIEDLL_HOOK(Obj_,NtQueryInformationProcess);
 #endif
     return TRUE;
 }
@@ -410,43 +401,4 @@ finish:
 
     SetLastError(LastError);
     return status;
-}
-
-//---------------------------------------------------------------------------
-// Obj_NtQueryVirtualMemory
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Obj_NtQueryInformationProcess(
-	HANDLE ProcessHandle,
-	PROCESSINFOCLASS ProcessInformationClass,
-	PVOID ProcessInformation,
-	ULONG ProcessInformationLength,
-	PULONG ReturnLength)
-{
-	NTSTATUS status;
-	ULONG outlen;
-
-	status = __sys_NtQueryInformationProcess(
-		ProcessHandle, ProcessInformationClass, ProcessInformation, ProcessInformationLength, &outlen);
-	
-	if (ProcessInformationClass == ProcessImageFileName && ProcessInformation != NULL)
-	{
-		//
-		// since file paths are always shorter without the sandbox prefix we can keep this simple
-		//
-
-		ULONG tmplen;
-		PUNICODE_STRING fileName = (PUNICODE_STRING)ProcessInformation;
-
-		tmplen = File_NtQueryObjectName(fileName, fileName->MaximumLength);
-
-		if (tmplen)
-			outlen = sizeof(UNICODE_STRING) + tmplen;
-	}
-
-	if (ReturnLength)
-		*ReturnLength = outlen;
-
-	return status;
 }

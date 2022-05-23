@@ -106,6 +106,7 @@ using namespace std;
 #include <QColorDialog>
 #include <QToolButton>
 #include <QScreen>
+#include <QRadioButton>
 
 // other includes
 

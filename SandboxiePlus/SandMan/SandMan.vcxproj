@@ -196,8 +196,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoxJob.cpp" />
+    <ClCompile Include="BoxMonitor.cpp" />
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
     <ClCompile Include="Helpers\FindTool.cpp" />
+    <ClCompile Include="Helpers\ReadDirectoryChanges.cpp" />
+    <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="main.cpp" />
@@ -233,8 +236,10 @@
     <ClCompile Include="Windows\SelectBoxWindow.cpp" />
     <ClCompile Include="Windows\SettingsWindow.cpp" />
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
+    <ClCompile Include="Wizards\SetupWizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Wizards\SetupWizard.h" />
     <QtMoc Include="Windows\FileBrowserWindow.h" />
     <QtMoc Include="Windows\SelectBoxWindow.h" />
     <QtMoc Include="Views\TraceView.h" />
@@ -250,7 +255,12 @@
     <QtMoc Include="Models\TraceModel.h" />
     <QtMoc Include="Dialogs\MultiErrorDialog.h" />
     <QtMoc Include="BoxJob.h" />
+    <ClInclude Include="..\version.h" />
+    <QtMoc Include="BoxMonitor.h" />
     <ClInclude Include="Helpers\FindTool.h" />
+    <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
+    <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
+    <ClInclude Include="Helpers\ThreadSafeQueue.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
     <QtMoc Include="Models\MonitorModel.h" />
     <ClInclude Include="resource.h" />

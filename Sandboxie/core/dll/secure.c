@@ -722,8 +722,17 @@ _FX NTSTATUS Secure_NtDuplicateObject(
 
         if (SourceProcessHandle == NtCurrentProcess()) {
 
-            if (TargetProcessHandle == NtCurrentProcess() && TargetHandle)
-                File_DuplicateRecover(SourceHandle, *TargetHandle);
+            if (TargetProcessHandle == NtCurrentProcess() && TargetHandle) {
+
+                //
+                // this also duplicates the "recoverability"
+                // of the old handle to the new handle.  needed in particular for
+                // SHFileOperation to recover correctly on Windows Vista
+                //
+
+                if(SourceHandle && *TargetHandle)
+                    Handle_SetupDuplicate(SourceHandle, *TargetHandle);
+            }
 
             if (SourceHandle)
                 Key_NtClose(SourceHandle);

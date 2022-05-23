@@ -46,6 +46,9 @@
       <Extensions>ts</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="Wizards">
+      <UniqueIdentifier>{4bf40c7e-2ce4-4528-813c-3b48b8c56155}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -147,6 +150,18 @@
     <ClCompile Include="Models\MonitorModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
+    <ClCompile Include="Wizards\SetupWizard.cpp">
+      <Filter>Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\ReadDirectoryChanges.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxMonitor.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -160,6 +175,18 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\ReadDirectoryChanges.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\ThreadSafeQueue.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +243,12 @@
     </QtMoc>
     <QtMoc Include="Models\MonitorModel.h">
       <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Wizards\SetupWizard.h">
+      <Filter>Wizards</Filter>
+    </QtMoc>
+    <QtMoc Include="BoxMonitor.h">
+      <Filter>SandMan</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

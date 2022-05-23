@@ -28,7 +28,10 @@
 #include "core/drv/api_defs.h"
 #include "core/svc/msgids.h"
 #include "common/my_version.h"
-
+//#include "core/low/lowdata.h"
+//
+//extern SBIELOW_DATA* SbieApi_data;
+//#define SBIELOW_CALL(x) ((P_##x)&SbieApi_data->x##_code)
 
 #pragma optimize("",off)
 
@@ -141,9 +144,28 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
         // processing a request before sending the next request
         //
 
-        status = NtDeviceIoControlFile(
-            SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
-            API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+        extern P_NtDeviceIoControlFile __sys_NtDeviceIoControlFile;
+        if (__sys_NtDeviceIoControlFile) {
+        
+            //
+            // once NtDeviceIoControlFile is hooked, bypass it
+            //
+        
+            status = __sys_NtDeviceIoControlFile(
+                SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+                API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+        
+        } else {
+        
+            status = NtDeviceIoControlFile(
+                SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+                API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+        }
+
+        // that would be even better but would only work in the native case
+        //status = SBIELOW_CALL(NtDeviceIoControlFile)(
+        //        SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+        //        API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
     }
 
     return status;

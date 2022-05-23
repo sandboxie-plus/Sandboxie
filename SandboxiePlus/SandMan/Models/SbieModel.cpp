@@ -2,7 +2,6 @@
 #include "SbieModel.h"
 #include "../../MiscHelpers/Common/Common.h"
 #include "../../MiscHelpers/Common/IconExtreactor.h"
-#include <QFileIconProvider>
 #include "../SandMan.h"
 
 CSbieModel::CSbieModel(QObject *parent)
@@ -113,6 +112,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	QList<QVariant> Added;
 	QMap<QList<QVariant>, QList<STreeNode*> > New;
 	QHash<QVariant, STreeNode*> Old = m_Map;
+
+	bool bWatchSize = theConf->GetBool("Options/WatchBoxSize", false);
 
 	foreach(const QString& Group, Groups.keys())
 	{
@@ -232,6 +233,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			{
 				case eName:				Value = pBox->GetName(); break;
 				case eStatus:			Value = pBox.objectCast<CSandBoxPlus>()->GetStatusStr(); break;
+				case eInfo:				Value = bWatchSize ? pBox.objectCast<CSandBoxPlus>()->GetSize() : 0; break;
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
@@ -245,7 +247,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 
 				switch (section)
 				{
-				case eName:				ColValue.Formated = Value.toString().replace("_", " "); break;
+				case eName:				ColValue.Formatted = Value.toString().replace("_", " "); break;
+				case eInfo:				ColValue.Formatted = Value.toULongLong() > 0 ? FormatSize(Value.toULongLong()) : ""; break;
 				}
 			}
 
@@ -272,8 +275,6 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 	QString BoxName = pBox->GetName();
 
 	int ActiveCount = 0;
-
-	QFileIconProvider IconProvider;
 
 	foreach(const CBoxedProcessPtr& pProc, ProcessList)
 	{
@@ -326,7 +327,7 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			//else
 			//	pNode->Icon = icons.first().pixmap;
 
-			pNode->Icon = IconProvider.icon(QFileInfo(pProcess->GetFileName()));
+			pNode->Icon = m_IconProvider.icon(QFileInfo(pProcess->GetFileName()));
 			if (pNode->Icon.isNull() || !pNode->Icon.isValid())
 				pNode->Icon = m_ExeIcon;
 			Changed = 1;
@@ -345,7 +346,7 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			case eStatus:			Value = pProcess->GetStatusStr(); break;
 			case eTitle:			Value = theAPI->GetProcessTitle(pProcess->GetProcessId()); break;
 			//case eLogCount:			break; // todo Value = pProcess->GetResourceLog().count(); break;
-			case eTimeStamp:		Value = pProcess->GetTimeStamp(); break;
+			case eInfo:				Value = pProcess->GetTimeStamp(); break;
 			//case ePath:				Value = pProcess->GetFileName(); break;
 			case ePath: {
 									QString CmdLine = pProcess->GetCommandLine(); 
@@ -364,9 +365,9 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 				switch (section)
 				{
-					case eProcessId:		ColValue.Formated = QString::number(pProcess->GetProcessId()); break;
-					//case eLogCount:			ColValue.Formated = QString::number(Value.toInt()); break;
-					case eTimeStamp:		ColValue.Formated = pProcess->GetTimeStamp().toString("hh:mm:ss"); break;
+					case eProcessId:		ColValue.Formatted = QString::number(pProcess->GetProcessId()); break;
+					//case eLogCount:			ColValue.Formatted = QString::number(Value.toInt()); break;
+					case eInfo:				ColValue.Formatted = pProcess->GetTimeStamp().toString("hh:mm:ss"); break;
 				}
 			}
 
@@ -475,8 +476,10 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 			case eProcessId:		return tr("Process ID");
 			case eStatus:			return tr("Status");
 			case eTitle:			return tr("Title");
+			case eInfo:				return tr("Info");
+			//case eSize:				return tr("Size");
 			//case eLogCount:			return tr("Log Count");
-			case eTimeStamp:		return tr("Start Time");
+			//case eTimeStamp:		return tr("Start Time");
 			case ePath:				return tr("Path / Command Line");
 		}
 	}

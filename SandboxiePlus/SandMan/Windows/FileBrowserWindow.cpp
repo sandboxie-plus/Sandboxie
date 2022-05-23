@@ -218,7 +218,7 @@ void CFileBrowserWindow::OnFileMenu(const QPoint&)
                     FileList.append(qMakePair(BoxedPath, RecoveryFolder + "\\" + FileName));
                 }
                 else {
-                    QString RealPath = theAPI->GetRealPath(m_pBox, BoxedPath);
+                    QString RealPath = theAPI->GetRealPath(m_pBox.data(), BoxedPath);
                     FileList.append(qMakePair(BoxedPath, RealPath));
                 }
             }

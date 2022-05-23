@@ -4,7 +4,7 @@
 #include "../SbieProcess.h"
 #include "../../MiscHelpers/Common/TreeItemModel.h"
 #include <QMimeData>
-
+#include <QFileIconProvider>
 
 class CSbieModel : public CTreeItemModel
 {
@@ -45,8 +45,10 @@ public:
 		eProcessId,
 		eTitle,
 		eStatus,
+		eInfo,
+		//eSize,
 		//eLogCount,
-		eTimeStamp,
+		//eTimeStamp,
 		ePath,
 		eCount
 	};
@@ -92,4 +94,5 @@ private:
 	QIcon m_ExeIcon;
 
 	QString m_SbieModelMimeType;
+	QFileIconProvider m_IconProvider;
 };

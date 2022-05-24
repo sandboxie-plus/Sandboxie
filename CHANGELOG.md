@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1.0 / 5.56.0] - 2022-01-??
+## [1.1.0 / 5.56.0] - 2022-05.24
 
 ### Added
 - added support for NtRenameKey (this requires UseRegDeleteV2=y) [#205](https://github.com/sandboxie-plus/Sandboxie/issues/205)

@@ -13,18 +13,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added box size info [#1780](https://github.com/sandboxie-plus/Sandboxie/issues/1780)
 
 ### Changed
-- reworked the mechanism sandboxie uses to mark host files as deleted
--- the new behavioure creates a data file in the box root FilePaths.dat instead of creating dummy files
--- it can be enabled with UseFileDeleteV2=y sane for the registry UseRegDeleteV2=y using RegPaths.dat
-- reworked the TlsNameBuffer mechanism to be more versatile and less error prone
-- significantly reduced the CPU usage of sandman.exe
+- reworked the mechanism Sandboxie uses to mark host files as deleted
+-- under the new behaviour a data file (FilePaths.dat) is created in the box root instead of dummy files
+-- it can be enabled with UseFileDeleteV2=y and also for the registry with UseRegDeleteV2=y which creates a reg file (RegPaths.dat)
+- reworked the TlsNameBuffer mechanism to be more versatile and less error-prone
+- significantly reduced the CPU usage of SandMan.exe
 
 ### Fixed
 - fixed folder rename issues (this requires UseFileDeleteV2=y) [#71](https://github.com/sandboxie-plus/Sandboxie/issues/71)
 - fixed issue with process access [#1603](https://github.com/sandboxie-plus/Sandboxie/issues/1603)
 - fixed translation issue [#1864](https://github.com/sandboxie-plus/Sandboxie/issues/1864)
-- fixed ui issue with box selection window [#1867](https://github.com/sandboxie-plus/Sandboxie/issues/1867)
-- fixed ui issue when switching language [#1871](https://github.com/sandboxie-plus/Sandboxie/issues/1871)
+- fixed UI issue with the box selection window [#1867](https://github.com/sandboxie-plus/Sandboxie/issues/1867)
+- fixed UI issue when switching languages [#1871](https://github.com/sandboxie-plus/Sandboxie/issues/1871)
 
 
 

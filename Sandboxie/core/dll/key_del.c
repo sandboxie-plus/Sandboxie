@@ -172,9 +172,9 @@ _FX VOID Key_RefreshPathTree()
         //
 
         Key_LoadPathTree();
-    }
 
-    FindNextChangeNotification(Key_BoxRootWatcher); // rearm the watcher
+        FindNextChangeNotification(Key_BoxRootWatcher); // rearm the watcher
+    }
 }
 
 
@@ -201,6 +201,8 @@ _FX BOOLEAN Key_InitDelete_v2()
     SbieDll_TranslateNtToDosPath(BoxFilePath);
 
     Key_BoxRootWatcher = FindFirstChangeNotification(BoxFilePath, FALSE, FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE);
+
+    FindNextChangeNotification(Key_BoxRootWatcher); // arm the watcher
 
     return TRUE;
 }

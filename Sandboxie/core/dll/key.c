@@ -362,11 +362,6 @@ _FX BOOLEAN Key_Init(void)
 
     Key_UseObjectNames = SbieApi_QueryConfBool(NULL, L"UseObjectNameForKeys", FALSE);
 
-    Key_Delete_v2 = SbieApi_QueryConfBool(NULL, L"UseRegDeleteV2", FALSE);
-
-    if (Key_Delete_v2)
-        Key_InitDelete_v2();
-
     List_Init(&Key_Handles);
     List_Init(&Key_MergeCacheList);
 
@@ -2515,7 +2510,13 @@ _FX NTSTATUS Key_NtDeleteValueKey(
 
             status = __sys_NtDeleteValueKey(KeyHandle, ValueName);
 
-        } if (Key_Delete_v2){ 
+        } else if (Key_Delete_v2) { 
+
+            RtlInitUnicodeString(&objname, CopyPath);
+
+            OBJECT_ATTRIBUTES objattrs;
+            InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+            Key_CreatePath(&objattrs, NULL);
 
             Key_MarkDeletedEx_v2(TruePath, ValueName->Buffer);
 

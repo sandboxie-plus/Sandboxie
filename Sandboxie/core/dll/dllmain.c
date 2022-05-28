@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -423,6 +423,15 @@ _FX void Dll_InitInjected(void)
     if (ok) {
 
         //
+        // ipc must be initialized before anythign else to make delete v2 work
+        //
+
+        ok = Ipc_Init();
+    }
+
+    if (ok) {
+
+        //
         // Key should be initialized first, to prevent key requests
         // with MAXIMUM_ALLOWED access from failing
         //
@@ -445,9 +454,6 @@ _FX void Dll_InitInjected(void)
         ok = File_Init();
 
     if (ok)
-        ok = Ipc_Init();
-
-    if (ok)
         ok = Secure_Init();
 
     if (ok)
@@ -461,12 +467,6 @@ _FX void Dll_InitInjected(void)
 
     if (ok)
         ok = Gui_InitConsole1();
-
-    // we need ipc stuff to be up hance we initialize delete stuff second to last
-    if (ok && File_Delete_v2)
-        File_InitDelete_v2();
-    if (ok && Key_Delete_v2)
-        Key_InitDelete_v2();
 
     if (ok) // Note: Ldr_Init may cause rpcss to be started early
         ok = Ldr_Init();            // last to initialize

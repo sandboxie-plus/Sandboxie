@@ -364,6 +364,9 @@ _FX BOOLEAN Key_Init(void)
 
     Key_Delete_v2 = SbieApi_QueryConfBool(NULL, L"UseRegDeleteV2", FALSE);
 
+    if (Key_Delete_v2)
+        Key_InitDelete_v2();
+
     List_Init(&Key_Handles);
     List_Init(&Key_MergeCacheList);
 

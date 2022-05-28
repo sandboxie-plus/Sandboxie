@@ -629,13 +629,7 @@ BOOLEAN Handle_Init(void);
 
 BOOLEAN Key_Init(void);
 
-extern BOOLEAN Key_Delete_v2;
-BOOLEAN Key_InitDelete_v2();
-
 BOOLEAN File_Init(void);
-
-extern BOOLEAN File_Delete_v2;
-BOOLEAN File_InitDelete_v2();
 
 BOOLEAN Ipc_Init(void);
 

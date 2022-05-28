@@ -149,6 +149,9 @@ _FX BOOLEAN File_Init(void)
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
 
+    if (File_Delete_v2)
+        File_InitDelete_v2();
+
 	if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
 		if (!File_InitUsers())
 			return FALSE;

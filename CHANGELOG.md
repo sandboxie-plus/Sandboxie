@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed edge issue with windows 11 after KB5014019
 - fixed issues with the new delete mechanism with "SeparateUserFolders=y"
 - fixed credential issue [#1770](https://github.com/sandboxie-plus/Sandboxie/pull/1770)
-
+- fixed force process priorities [#1883](https://github.com/sandboxie-plus/Sandboxie/issues/1883)
 
 
 

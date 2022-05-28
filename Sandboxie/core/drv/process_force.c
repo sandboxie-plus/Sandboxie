@@ -243,6 +243,11 @@ _FX BOX *Process_GetForcedStartBox(
             box = Process_CheckForceFolder(
                         &boxes, ImagePath2, force_alert, &alert);
 
+            if ((! box) && (! alert)) {
+                box = Process_CheckForceProcess(
+                    &boxes, ImageName, force_alert, &alert);
+            }
+
             if ((! box) && CurDir && (! alert)) {
                 box = Process_CheckForceFolder(
                         &boxes, CurDir, force_alert, &alert);
@@ -251,11 +256,6 @@ _FX BOX *Process_GetForcedStartBox(
             if ((! box) && DocArg && (! alert)) {
                 box = Process_CheckForceFolder(
                         &boxes, DocArg, force_alert, &alert);
-            }
-
-            if ((! box) && (! alert)) {
-                box = Process_CheckForceProcess(
-                    &boxes, ImageName, force_alert, &alert);
             }
 
             if (box && Process_IsImmersiveProcess(

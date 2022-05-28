@@ -63,9 +63,9 @@ static BOOL Cred_CredWriteW(void *pCredential, ULONG Flags);
 static BOOL Cred_CredWriteA(void *pCredential, ULONG Flags);
 
 static BOOL Cred_CredReadW(
-    void *TargetName, ULONG Type, ULONG Flags, void **ppCredential);
+    const wchar_t *TargetName, ULONG Type, ULONG Flags, void **ppCredential);
 static BOOL Cred_CredReadA(
-    void *TargetName, ULONG Type, ULONG Flags, void **ppCredential);
+    const char *TargetName, ULONG Type, ULONG Flags, void **ppCredential);
 
 static BOOL Cred_CredWriteDomainCredentialsW(
     void *pTargetInfo, void *pCredential, ULONG Flags);
@@ -87,8 +87,8 @@ static BOOL Cred_CredRenameW(
 static BOOL Cred_CredRenameA(
     void *OldTargetName, void *NewTargetName, ULONG Type, ULONG Flags);
 
-static BOOL Cred_CredDeleteW(void *TargetName, ULONG Type, ULONG Flags);
-static BOOL Cred_CredDeleteA(void *TargetName, ULONG Type, ULONG Flags);
+static BOOL Cred_CredDeleteW(const wchar_t *TargetName, ULONG Type, ULONG Flags);
+static BOOL Cred_CredDeleteA(const char *TargetName, ULONG Type, ULONG Flags);
 
 static BOOL Cred_CredEnumerateW(
     void *pFilter, ULONG Flags, ULONG *pCount, void ***ppCredentials);
@@ -149,6 +149,8 @@ static const WCHAR *Cred_DomainCred = L"DomainCred-";
 extern const WCHAR *Pst_OpenProtectedStorage;
 
 
+//static BOOLEAN Cred_Trace = FALSE;
+
 //---------------------------------------------------------------------------
 // SBIEDLL_HOOK_CRED
 //---------------------------------------------------------------------------
@@ -180,6 +182,8 @@ _FX BOOLEAN Cred_Init_AdvApi(HMODULE module)
 
     if (SbieApi_QueryConfBool(NULL, L"OpenCredentials", FALSE))
         return TRUE;
+
+    //Cred_Trace = SbieApi_QueryConfBool(NULL, L"CredTrace", FALSE);
 
 //    __sys_CredMarshalCredential = (P_CredMarshalCredential)
 //        GetProcAddress(module, "CredMarshalCredential");
@@ -263,7 +267,8 @@ _FX WCHAR *Cred_GetName(
     if (DomainName)
         len += wcslen(DomainName);
     if (TargetName)
-        len += wcslen(TargetName) + 10;
+        //len += wcslen(TargetName) + 10;
+        len += wcslen(TargetName);
     else
         TargetName = L"?";
 
@@ -272,7 +277,8 @@ _FX WCHAR *Cred_GetName(
     if (DomainName)
         Sbie_snwprintf(name, len, L"%s%s-%s", Cred_DomainCred, DomainName, TargetName);
     else
-        Sbie_snwprintf(name, len, L"%s%08X-%s", Cred_SimpleCred, Type, TargetName);
+        //Sbie_snwprintf(name, len, L"%s%08X-%s", Cred_SimpleCred, Type, TargetName);
+        Sbie_snwprintf(name, len, L"%s-%s", Cred_SimpleCred, TargetName);
 
     return name;
 }
@@ -733,6 +739,12 @@ _FX BOOL Cred_CredWriteW(void *pCredential, ULONG Flags)
         return FALSE;
     }
 
+    /*if (Cred_Trace) {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"CredWriteW: %s (%d)", cred->TargetName, cred->Type);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    }*/
+
     name = Cred_GetName(NULL, cred->TargetName, cred->Type);
 
     ok = Cred_WriteItem(name, mrshcred, mrshcred_len);
@@ -752,7 +764,7 @@ _FX BOOL Cred_CredWriteW(void *pCredential, ULONG Flags)
 
 
 _FX BOOL Cred_CredReadW(
-    void *TargetName, ULONG Type, ULONG Flags, void **ppCredential)
+    const wchar_t* TargetName, ULONG Type, ULONG Flags, void** ppCredential)
 {
     HRESULT hr;
     WCHAR *name;
@@ -778,23 +790,32 @@ _FX BOOL Cred_CredReadW(
         if (SUCCEEDED(hr))
             Cred_CoTaskMemFree(mrshcred);
 
-        return __sys_CredReadW(TargetName, Type, Flags, ppCredential);
+        ok = __sys_CredReadW(TargetName, Type, Flags, ppCredential);
+    }
+    else {
+
+        *ppCredential = Cred_Unserialize1(mrshcred);
+
+        Cred_CoTaskMemFree(mrshcred);
+
+        if (*ppCredential) {
+            err = 0;
+            ok = TRUE;
+        }
+        else {
+            err = ERROR_NOT_FOUND;
+            ok = FALSE;
+        }
+
+        SetLastError(err);
     }
 
-    *ppCredential = Cred_Unserialize1(mrshcred);
+    /*if (Cred_Trace) {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"CredReadW: %s (%d) = %d", TargetName, Type, FAILED(hr) ? ok : (ok ? 2 : -1));
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    }*/
 
-    Cred_CoTaskMemFree(mrshcred);
-
-    if (*ppCredential) {
-        err = 0;
-        ok = TRUE;
-    } else {
-        err = ERROR_NOT_FOUND;
-        ok = FALSE;
-    }
-
-
-    SetLastError(err);
     return ok;
 }
 
@@ -944,24 +965,23 @@ _FX BOOL Cred_CredReadDomainCredentialsW(
 //---------------------------------------------------------------------------
 
 
-_FX BOOL Cred_CredDeleteW(void *TargetName, ULONG Type, ULONG Flags)
+_FX BOOL Cred_CredDeleteW(const wchar_t *TargetName, ULONG Type, ULONG Flags)
 {
     WCHAR *name;
     ULONG zero;
-    PCREDENTIALW *cred;
+    CREDENTIALW *cred;
 
     if (!Cred_PreparePStore()) {
         SetLastError(ERROR_NOT_FOUND);
         return FALSE;
     }
-    name = Cred_GetName(NULL, TargetName, Type);
 
-    if (Cred_CredReadW(name, Type, Flags, (void **)&cred)) {
+    if (Cred_CredReadW(TargetName, Type, Flags, &cred)) {
         if (!cred) {
             SetLastError(ERROR_NOT_FOUND);
             return FALSE;
         }
-        if (cred[0]->CredentialBlobSize == sizeof(ULONG) && *(ULONG *)cred[0]->CredentialBlob == 0) {
+        if (cred->CredentialBlobSize == sizeof(ULONG) && *(ULONG *)cred->CredentialBlob == 0) {
             LocalFree(cred);
             SetLastError(ERROR_NOT_FOUND);
             return FALSE;
@@ -973,10 +993,15 @@ _FX BOOL Cred_CredDeleteW(void *TargetName, ULONG Type, ULONG Flags)
     }
     LocalFree(cred);
     zero = 0;
+
+    name = Cred_GetName(NULL, TargetName, Type);
+
     if (!Cred_WriteItem(name, &zero, sizeof(ULONG))) {
+        Dll_Free(name);
         SetLastError(ERROR_NOT_FOUND);
         return FALSE;
     }
+    Dll_Free(name);
     return TRUE;
 }
 
@@ -1193,7 +1218,7 @@ _FX BOOL Cred_CredRenameA(
 //---------------------------------------------------------------------------
 
 
-_FX BOOL Cred_CredDeleteA(void *TargetName, ULONG Type, ULONG Flags)
+_FX BOOL Cred_CredDeleteA(const char *TargetName, ULONG Type, ULONG Flags)
 {
     SbieApi_Log(2205, L"CredDeleteA");
     SetLastError(ERROR_NO_SUCH_LOGON_SESSION);
@@ -1207,7 +1232,7 @@ _FX BOOL Cred_CredDeleteA(void *TargetName, ULONG Type, ULONG Flags)
 
 
 _FX BOOL Cred_CredReadA(
-    void *TargetName, ULONG Type, ULONG Flags, void **ppCredential)
+    const char *TargetName, ULONG Type, ULONG Flags, void **ppCredential)
 {
     SbieApi_Log(2205, L"CredReadA");
     return __sys_CredReadA(TargetName, Type, Flags, ppCredential);

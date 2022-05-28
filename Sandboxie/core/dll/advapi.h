@@ -182,7 +182,7 @@ extern P_SetSecurityInfo        __sys_SetSecurityInfo;
 typedef BOOL (*P_CredWrite)(void *pCredential, ULONG Flags);
 
 typedef BOOL(*P_CredRead)(
-    void *TargetName, ULONG Type, ULONG Flags, void *pCredential);
+    const void *TargetName, ULONG Type, ULONG Flags, void *pCredential);
 
 typedef BOOL(*P_CredWriteDomainCredentials)(
     void *pTargetInfo, void *pCredential, ULONG Flags);

@@ -329,7 +329,7 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 {
 	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + Name, m_pAPI));
 
-	QString scan = pTemplate->GetText("Tmpl.Scan");
+	QString scan = pTemplate->GetText("Tmpl.Scan", QString(), false, false);
 	BOOL scanIpc = (scan.indexOf(L'i') != -1);
 	BOOL scanWin = (scan.indexOf(L'w') != -1);
 	BOOL scanSvc = (scan.indexOf(L's') != -1);

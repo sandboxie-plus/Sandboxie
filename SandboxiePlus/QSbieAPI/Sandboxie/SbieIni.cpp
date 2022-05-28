@@ -59,9 +59,9 @@ SB_STATUS CSbieIni::SetBool(const QString& Setting, bool Value)
 	return SetText(Setting, Value ? "y" : "n");
 }
 
-QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal) const
+QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal, bool bNoExpand) const
 {
-	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL) | (bNoExpand ? CONF_GET_NO_EXPAND : 0);
 	QString Value = m_pAPI->SbieIniGet(m_Name, Setting, flags);
 	if (Value.isNull()) Value = Default;
 	return Value;

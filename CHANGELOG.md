@@ -6,7 +6,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1.0 / 5.56.0] - 2022-05.24
+## [1.1.1 / 5.56.1] - 2022-30-05
+
+### Changed
+- improved implementation of the PreferExternalManifest option
+
+### Fixed
+- fixed edge issue with windows 11 after KB5014019
+- fixed issues with the new delete mechanism with "SeparateUserFolders=y"
+
+
+
+
+## [1.1.0 / 5.56.0] - 2022-05-24
 
 ### Added
 - added support for NtRenameKey (this requires UseRegDeleteV2=y) [#205](https://github.com/sandboxie-plus/Sandboxie/issues/205)

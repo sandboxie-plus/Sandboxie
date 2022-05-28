@@ -232,7 +232,7 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 void CSettingsWindow__AddContextMenu()
 {
 	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (settings.value("CurrentBuild") >= 22000) // Windows 11
+	if (settings.value("CurrentBuild").toInt() >= 22000) // Windows 11
 	{
 		QProcess Proc;
 		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RegisterPackage");
@@ -248,7 +248,7 @@ void CSettingsWindow__AddContextMenu()
 void CSettingsWindow__RemoveContextMenu()
 {
 	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (settings.value("CurrentBuild") >= 22000) // Windows 11
+	if (settings.value("CurrentBuild").toInt() >= 22000) // Windows 11
 	{
 		QProcess Proc;
 		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RemovePackage");

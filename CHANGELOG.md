@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.1 / 5.56.1] - 2022-30-05
 
+### Added
+- Compat templates can now be opened [#1891](https://github.com/sandboxie-plus/Sandboxie/issues/1891)
+
 ### Changed
 - improved implementation of the PreferExternalManifest option
 
@@ -16,6 +19,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with the new delete mechanism with "SeparateUserFolders=y"
 - fixed credential issue [#1770](https://github.com/sandboxie-plus/Sandboxie/pull/1770)
 - fixed force process priorities [#1883](https://github.com/sandboxie-plus/Sandboxie/issues/1883)
+- fixed issues with the new delete V2 mechanism
+- fixed issue with the win 11 emenu on older windows builds [1877](https://github.com/sandboxie-plus/Sandboxie/issues/1877)
 
 
 

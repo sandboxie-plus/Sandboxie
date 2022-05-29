@@ -56,6 +56,7 @@ private slots:
 	void OnDelWarnProg();
 
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
+	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddCompat();
 	void OnDelCompat();
 

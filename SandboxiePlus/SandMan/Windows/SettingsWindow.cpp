@@ -6,6 +6,7 @@
 #include "Helpers/WinAdmin.h"
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "../QSbieAPI/SbieUtils.h"
+#include "OptionsWindow.h"
 
 
 QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
@@ -156,6 +157,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeCompat, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
 
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -828,6 +830,14 @@ void CSettingsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
 {
 	// todo: check if really changed
 	m_CompatChanged = true;
+}
+
+void CSettingsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
+{
+	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + pItem->data(0, Qt::UserRole).toString(), theAPI));
+
+	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
+	OptionsWindow.exec();
 }
 
 void CSettingsWindow::OnAddCompat()

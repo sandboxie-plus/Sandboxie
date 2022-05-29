@@ -3217,6 +3217,10 @@ Consenti l'accesso diretto alla gestione della sessione %2
 Consenti l'accesso diretto alle note di %2
 .
 
+4342;txt;01
+Attiva correzione di %2 per Windows 11 KB5014019
+.
+
 4356;txt;02
 Consenti l'accesso diretto ai segnalibri di %2
 .

@@ -398,8 +398,8 @@ bool CSbieView::UpdateMenu()
 	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 	m_pMenuSnapshots->setEnabled(iSandBoxeCount == 1);
 
-	m_pMenuMoveUp->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
-	m_pMenuMoveDown->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	//m_pMenuMoveUp->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	//m_pMenuMoveDown->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
 	//m_pMenuMoveBy->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
 
 	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
@@ -652,6 +652,13 @@ void CSbieView::OnGroupAction(QAction* Action)
 	}
 	else if (Action == m_pMenuMoveUp /*|| Action == m_pMenuMoveBy*/ || Action == m_pMenuMoveDown)
 	{
+		if (!theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
+			m_pSortProxy->sort(0, Qt::AscendingOrder);
+			m_pSortProxy->setSortRole(Qt::InitialSortOrderRole);
+			theConf->SetValue("MainWindow/BoxTree_UseOrder", true);
+			m_pSbieTree->header()->setSortIndicatorShown(false);
+		}
+
 		int Offset = 0;
 		if (Action == m_pMenuMoveUp)
 			Offset = -1;

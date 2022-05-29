@@ -2068,7 +2068,7 @@ void CSandMan::OnReloadIni()
 
 void CSandMan::OnIniReloaded()
 {
-	OnLogSbieMessage(0, QStringList() << "Sandboxie config has been reloaded" << "" << "", 4);
+	OnLogSbieMessage(0, QStringList() << tr("Sandboxie config has been reloaded") << "" << "", 4);
 
 	m_pBoxView->ReloadUserConfig();
 	m_pPopUpWindow->ReloadHiddenMessages();

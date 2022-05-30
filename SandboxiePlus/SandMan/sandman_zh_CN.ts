@@ -26,7 +26,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="199"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 为&lt;u&gt;项目赞助者&lt;/u&gt;提供额外的沙盒类型和其它高级功能。例如“隐私增强”类型的沙盒&lt;b&gt;&lt;font color=&apos;red&apos;&gt;对用户数据提供额外的非法访问保护&lt;/font&gt;&lt;/b&gt;。如果你还不是赞助者，请考虑 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;来帮助 Sandboxie 的开发工作，并以此获取&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;</translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 为&lt;u&gt;项目赞助者&lt;/u&gt;提供额外的沙盒类型和其它高级功能。例如“隐私增强”类型的沙盒对来自沙盒化程序非法访问用户数据的行为&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供额外的用户数据保护&lt;/font&gt;&lt;/b&gt;。如果你还不是赞助者，请考虑 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;来帮助 Sandboxie 的开发工作，并以此获取&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;</translation>
     </message>
 </context>
 <context>

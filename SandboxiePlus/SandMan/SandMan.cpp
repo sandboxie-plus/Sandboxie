@@ -368,6 +368,9 @@ void CSandMan::CreateMenus()
 		m_pMenuView->addSeparator();
 
 		m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Refresh View"), this, SLOT(OnRefresh()));
+		m_pRefreshAll->setShortcut(QKeySequence("F5"));
+		m_pRefreshAll->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pRefreshAll);
 
 		m_pCleanUpMenu = m_pMenuView->addMenu(CSandMan::GetIcon("Clean"), tr("Clean Up"));
 			m_pCleanUpProcesses = m_pCleanUpMenu->addAction(tr("Cleanup Processes"), this, SLOT(OnCleanUp()));
@@ -1868,10 +1871,9 @@ void CSandMan::OnRefresh()
 
 	theAPI->ReloadBoxes(true);
 
-	if (theConf->GetBool("Options/WatchBoxSize", false)) {
-		QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
-		foreach(const CSandBoxPtr & pBox, Boxes)
-			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+	foreach(const CSandBoxPtr & pBox, Boxes) {
+		pBox.objectCast<CSandBoxPlus>()->UpdateSize();
 	}
 }
 

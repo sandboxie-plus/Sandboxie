@@ -17,11 +17,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Edge issue with Windows 11 after KB5014019
-- fixed issues with the new delete mechanism with "SeparateUserFolders=y" [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
+- fixed issues with the new delete mechanism when "SeparateUserFolders=y" is present [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - fixed credential issue [#1770](https://github.com/sandboxie-plus/Sandboxie/pull/1770)
 - fixed force process priorities [#1883](https://github.com/sandboxie-plus/Sandboxie/issues/1883)
 - fixed issues with the new delete V2 mechanism
-- fixed issue with the Windows 11 emenu on older Windows builds [1877](https://github.com/sandboxie-plus/Sandboxie/issues/1877)
+- fixed issue with the Windows 11 menu on older Windows builds [1877](https://github.com/sandboxie-plus/Sandboxie/issues/1877)
 - refresh now works without WatchBoxSize option [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 
 

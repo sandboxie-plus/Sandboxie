@@ -435,7 +435,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 						QString CurPath = File["DiskPath"].toString();
 						FileMap[File["BoxPath"].toString()].FullPath = CurPath;
 
-						QString RelPath = CurPath.mid(DirPath.length());
+						QString RelPath = CurPath.mid(Split2(DirPath, "\\", true).first.length());
 						if (RelPath.length() > FileMap[File["BoxPath"].toString()].RelPath.length())
 							FileMap[File["BoxPath"].toString()].RelPath = RelPath;
 					}

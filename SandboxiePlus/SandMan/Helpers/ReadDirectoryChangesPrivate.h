@@ -180,9 +180,9 @@ protected:
 		{
 			if ((*I)->GetDirectory() == pRequest->second)
 			{
-				::InterlockedDecrement(&pRequest->first->m_nOutstandingRequests);
-				(*I)->RequestTermination();
-				delete (*I);
+				(*I)->RequestTermination(); // delete done by NotificationCompletion
+				//::InterlockedDecrement(&pRequest->first->m_nOutstandingRequests);
+				//delete (*I);
 				I = m_pBlocks.erase(I);
 			}
 			else

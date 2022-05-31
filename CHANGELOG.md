@@ -23,6 +23,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with the new delete V2 mechanism
 - fixed issue with the win 11 emenu on older windows builds [1877](https://github.com/sandboxie-plus/Sandboxie/issues/1877)
 - refresh now works without WatchBoxSize option [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
+- fixed crash issue with WatchBoxSize=true [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
+- fixed issue with recovery folder paths [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840)
+
 
 
 

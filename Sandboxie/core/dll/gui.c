@@ -821,6 +821,9 @@ _FX BOOL DisallowWin32kSystemCallsIsOn()
 
 extern P_NtSetInformationThread __sys_NtSetInformationThread;
 
+HANDLE Sandboxie_WinSta = NULL;
+HANDLE Sandboxie_Desktop = NULL;
+
 _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 {
     static HDESK _ProcessDesktop = NULL;
@@ -899,6 +902,9 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
         if (! rpl)
             errlvl = 2;
         else {
+
+            Sandboxie_WinSta = (HANDLE)rpl->hsbie_winsta;
+            Sandboxie_Desktop = (HANDLE)rpl->hsbie_desk;
 
             //
             // locate windowstation and desktop functions in user32 dll

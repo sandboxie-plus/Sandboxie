@@ -175,6 +175,7 @@ static BOOLEAN Gui_D3D9_Loaded = FALSE;
 
 static ULONG64 Gui_GetShellWindow_LastTicks = 0;
 
+static BOOLEAN Winsta_Hack = FALSE;
 
 //---------------------------------------------------------------------------
 // Gui_InitEnum
@@ -244,16 +245,11 @@ _FX BOOLEAN Gui_InitEnum(void)
     // raises an error when CreateDesktop is call.  This hook
     // is removed for chrome.  See advapi.c: AdvApi_GetSecurityInfo
 
-    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) && 
-        (Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) &&
-        (Dll_ImageType != DLL_IMAGE_MOZILLA_FIREFOX)) {
-        SBIEDLL_HOOK_GUI(CreateDesktopW);
-        SBIEDLL_HOOK_GUI(CreateDesktopA);
-    }
-    else {
-        SBIEDLL_HOOK_GUI(CreateWindowStationW);
-        SBIEDLL_HOOK_GUI(CreateWindowStationA);
-    }    
+    SBIEDLL_HOOK_GUI(CreateDesktopW);
+    SBIEDLL_HOOK_GUI(CreateDesktopA);
+    
+    SBIEDLL_HOOK_GUI(CreateWindowStationW);
+    SBIEDLL_HOOK_GUI(CreateWindowStationA);
 
     return TRUE;
 }
@@ -582,49 +578,69 @@ _FX HDESK Gui_OpenDesktopA(
 //---------------------------------------------------------------------------
 //Gui_CreateWindowStationW
 //---------------------------------------------------------------------------
-extern HANDLE Sandboxie_WinSta ;
+extern HANDLE Sandboxie_WinSta;
 
 _FX HANDLE Gui_CreateWindowStationW (void *lpwinsta, DWORD dwFlags, ACCESS_MASK dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa) {
     HANDLE myHandle = 0;
 
     myHandle =  __sys_CreateWindowStationW(lpwinsta, dwFlags, dwDesiredAccess, lpsa);
     if (!myHandle) {
-        return Sandboxie_WinSta;
+        if(Sandboxie_WinSta)
+            return Sandboxie_WinSta;
+        SbieApi_Log(2205, L"CreateWindowStation");
     }
     return myHandle;
 }
+
+
+//---------------------------------------------------------------------------
+//Gui_CreateWindowStationA
+//---------------------------------------------------------------------------
+
 
 _FX HANDLE Gui_CreateWindowStationA (void *lpwinsta, DWORD dwFlags, ACCESS_MASK dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa) {
     HANDLE myHandle = 0;
 
     myHandle =  __sys_CreateWindowStationA(lpwinsta, dwFlags, dwDesiredAccess, lpsa);
     if (!myHandle) {
-        return Sandboxie_WinSta;
+        if(Sandboxie_WinSta)
+            return Sandboxie_WinSta;
+        SbieApi_Log(2205, L"CreateWindowStation");
     }
     return myHandle;
 }
+
 //---------------------------------------------------------------------------
 // Gui_CreateDesktopW
 //---------------------------------------------------------------------------
-
+extern HANDLE Sandboxie_Desktop;
 
 _FX HDESK Gui_CreateDesktopW(
     void *lpszDesktop, void *lpszDevice, void *DevMode, ULONG dwFlags,
     ACCESS_MASK dwDesiredAccess, void *SecurityAttributes)
 {
     HANDLE rc = 0;
-    //Call the system CreateDesktopW without a security context. 
-    //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
-
-    //Also see comment in Ntmarta_Init at SBIEDLL_HOOK2(Ntmarta_,GetSecurityInfo) for
-    //Acrobat Reader.  This is needed to allow this process to create a desktop with
-    //the sandboxie restricted token by dropping the security context.  This won't
-    //work without the GetSecrityInfo hook.
-    rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-    if (rc) {
+    
+    rc = __sys_CreateDesktopW(lpszDesktop, lpszDevice, DevMode, dwFlags, dwDesiredAccess, SecurityAttributes);
+    if (rc)
         return rc;
+
+    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) && (Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) && (Dll_ImageType != DLL_IMAGE_MOZILLA_FIREFOX))
+    {
+        //Call the system CreateDesktopW without a security context. 
+        //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
+
+        //Also see comment in Ntmarta_Init at SBIEDLL_HOOK2(Ntmarta_,GetSecurityInfo) for
+        //Acrobat Reader.  This is needed to allow this process to create a desktop with
+        //the sandboxie restricted token by dropping the security context.  This won't
+        //work without the GetSecurityInfo hook.
+        rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
+        if (rc)
+            return rc;
     }
 
+    if (Sandboxie_Desktop)
+        return Sandboxie_Desktop;
     SbieApi_Log(2205, L"CreateDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
 }
@@ -640,11 +656,20 @@ _FX HDESK Gui_CreateDesktopA(
     ACCESS_MASK dwDesiredAccess, void *SecurityAttributes)
 {
     HANDLE rc = 0;
-    rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-    if (rc) {
+    
+    rc = __sys_CreateDesktopA(lpszDesktop, lpszDevice, DevMode, dwFlags, dwDesiredAccess, SecurityAttributes);
+    if (rc)
         return rc;
+
+    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) && (Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) && (Dll_ImageType != DLL_IMAGE_MOZILLA_FIREFOX))
+    {
+        rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
+        if (rc)
+            return rc;
     }
 
+    if (Sandboxie_Desktop)
+        return Sandboxie_Desktop;
     SbieApi_Log(2205, L"CreateDesktop");
     return CreateEvent(NULL, FALSE, FALSE, NULL);
 }

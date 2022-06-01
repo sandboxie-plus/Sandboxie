@@ -94,6 +94,8 @@ struct tagGUI_GET_WINDOW_STATION_RPL
     ULONG64 hwinsta;
     ULONG64 hdesk;
     WCHAR name[96];
+    ULONG64 hsbie_winsta;
+    ULONG64 hsbie_desk;
 };
 
 typedef struct tagGUI_GET_WINDOW_STATION_RPL GUI_GET_WINDOW_STATION_RPL;

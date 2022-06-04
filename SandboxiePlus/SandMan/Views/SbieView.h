@@ -76,7 +76,8 @@ private:
 	void					RenameGroup(const QString OldName, const QString NewName);
 	bool					RenameItem(const QString OldName, const QString NewName);
 
-	void					MoveItem(const QString& Name, const QString& To);
+	void					SetCustomOrder();
+	void					MoveItem(const QString& Name, const QString& To, int pos = -1);
 
 	QString					FindParent(const QString& Name);
 	bool					IsParentOf(const QString& Name, const QString& Group);

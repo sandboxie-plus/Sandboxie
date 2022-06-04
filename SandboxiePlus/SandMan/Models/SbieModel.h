@@ -54,8 +54,8 @@ public:
 	};
 
 signals:
-	void			MoveBox(const QString& Name, const QString& To);
-	void			MoveGroup(const QString& Name, const QString& To);
+	void			MoveBox(const QString& Name, const QString& To, int row);
+	void			MoveGroup(const QString& Name, const QString& To, int row);
 
 protected:
 	bool			Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>& Added);

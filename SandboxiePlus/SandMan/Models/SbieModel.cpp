@@ -530,9 +530,9 @@ bool CSbieModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int 
 
 	foreach(const QString & Name, Boxes) {
 		if(CSbieModel__HasGroupMark(Name))
-			MoveGroup(CSbieModel__RemoveGroupMark(Name), To);
+			MoveGroup(CSbieModel__RemoveGroupMark(Name), To, row);
 		else
-			MoveBox(Name, To);
+			MoveBox(Name, To, row);
 	}
 
 	return true;

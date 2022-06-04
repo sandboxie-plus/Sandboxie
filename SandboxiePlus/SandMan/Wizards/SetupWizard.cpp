@@ -111,12 +111,17 @@ CIntroPage::CIntroPage(QWidget *parent)
     connect(m_pBusinessRadio, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("useBusiness", m_pBusinessRadio);
 
+    QLabel* pNote = new QLabel(tr("Note: this option is immutable"));
+    layout->addWidget(pNote);
+
+
     if (BusinessUse != 2) {
         m_pLabel->setEnabled(false);
         m_pPersonalRadio->setChecked(BusinessUse == 0);
         m_pPersonalRadio->setEnabled(false);
         m_pBusinessRadio->setChecked(BusinessUse == 1);
         m_pBusinessRadio->setEnabled(false);
+        pNote->setEnabled(false);
     }
 
     setLayout(layout);
@@ -167,6 +172,10 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     registerField("useCertificate", m_pCertificate, "plainText");
     
     m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
+    if (g_CertInfo.evaluation) {
+        m_pEvaluate->setEnabled(false);
+        m_pEvaluate->setChecked(true);
+    }
     layout->addWidget(m_pEvaluate);
     connect(m_pEvaluate, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("isEvaluate", m_pEvaluate);
@@ -215,8 +224,8 @@ bool CCertificatePage::isComplete() const
 {
     if (field("useBusiness").toBool())
     {
-        m_pCertificate->setEnabled(!m_pEvaluate->isChecked());
-        if (m_pCertificate->toPlainText().isEmpty() && !m_pEvaluate->isChecked())
+        m_pCertificate->setEnabled(!(m_pEvaluate->isChecked() && m_pEvaluate->isEnabled()));
+        if (m_pCertificate->toPlainText().isEmpty() && !(m_pEvaluate->isChecked() && m_pEvaluate->isEnabled()))
             return false;
     }
     return QWizardPage::isComplete();
@@ -225,7 +234,11 @@ bool CCertificatePage::isComplete() const
 bool CCertificatePage::validatePage()
 {
     QByteArray Certificate = m_pCertificate->toPlainText().toLatin1();
-    if (!m_pEvaluate->isChecked() && !Certificate.isEmpty() && g_Certificate != Certificate) {
+    if (m_pEvaluate->isChecked()) {
+        theAPI->StartEvaluation();
+        theGUI->UpdateCertState();
+    }
+    else if (!m_pEvaluate->isChecked() && !Certificate.isEmpty() && g_Certificate != Certificate) {
 		return CSettingsWindow::ApplyCertificate(Certificate, this);
     }
     return true;

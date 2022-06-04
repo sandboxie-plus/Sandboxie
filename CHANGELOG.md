@@ -11,10 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - compatibility templates can now be viewed from the settings window [#1891](https://github.com/sandboxie-plus/Sandboxie/issues/1891)
 - the refresh command is now bound to F5 [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
+- added option to permanently disable immidate recovery for any given box when it opens [#1478](https://github.com/sandboxie-plus/Sandboxie/issues/1478)
+- double click on the path column now opens the box root in explorer [#1924](https://github.com/sandboxie-plus/Sandboxie/issues/1924)
 
 ### Changed
 - improved implementation of the PreferExternalManifest option
-- win32k hooks are now by default only used for edge and chromium as thay cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902)
+- win32k hooks are now by default only used for edge and chromium as thay cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902) [#1912](https://github.com/sandboxie-plus/Sandboxie/issues/1912) [#1897](https://github.com/sandboxie-plus/Sandboxie/issues/1897)
 
 ### Fixed
 - fixed Edge issue with Windows 11 after KB5014019
@@ -27,7 +29,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed crash issue with WatchBoxSize=true [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - fixed issue with recovery folder paths [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840)
 - fixed issues with sbie desktop and wndStation affecting acrobat reader [#1863](https://github.com/sandboxie-plus/Sandboxie/issues/1863)
-
+- fixed issues with box grouping [#1921](https://github.com/sandboxie-plus/Sandboxie/issues/1921) [#1920](https://github.com/sandboxie-plus/Sandboxie/issues/1920)
+- fixed issues when changing language [#1914](https://github.com/sandboxie-plus/Sandboxie/issues/1914)
 
 
 

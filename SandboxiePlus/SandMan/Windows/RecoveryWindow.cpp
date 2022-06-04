@@ -245,6 +245,7 @@ void CRecoveryWindow::AddFile(const QString& FilePath, const QString& BoxPath)
 
 		QMenu* pCloseMenu = new QMenu(ui.btnClose);
 		pCloseMenu->addAction(tr("Close until all programs stop in this box"), this, SLOT(OnCloseUntil()));
+		pCloseMenu->addAction(tr("Close and Disable Immediate Recovery for this box"), this, SLOT(OnAutoDisable()));
 		ui.btnClose->setPopupMode(QToolButton::MenuButtonPopup);
 		ui.btnClose->setMenu(pCloseMenu);
 	}
@@ -498,6 +499,12 @@ void CRecoveryWindow::OnCount(quint32 fileCount, quint32 folderCount, quint64 to
 void CRecoveryWindow::OnCloseUntil()
 {
 	m_pBox.objectCast<CSandBoxPlus>()->SetSuspendRecovery();
+	close();
+}
+
+void CRecoveryWindow::OnAutoDisable()
+{
+	m_pBox->SetBool("AutoRecover", false);
 	close();
 }
 

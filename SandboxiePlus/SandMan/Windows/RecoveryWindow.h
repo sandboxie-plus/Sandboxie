@@ -60,6 +60,7 @@ private slots:
 	void		OnDeleteAll();
 	void		OnDeleteEverything();
 	void		OnCloseUntil();
+	void		OnAutoDisable();
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
 
 protected:

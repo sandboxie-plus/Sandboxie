@@ -410,10 +410,10 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
 
 #ifndef _WIN64
         if (Dll_IsWow64) 
-            Win32_HookWin32WoW64(); // WoW64 hooks
+            SbieDll_HookWin32WoW64(); // WoW64 hooks
         else 
 #endif
-            Win32_HookWin32SysCalls(hmodule); // Native x86/x64 hooks
+            SbieDll_HookWin32SysCalls(hmodule); // Native x86/x64 hooks
     }
 
 	return TRUE;

@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with sbie desktop and wndStation affecting acrobat reader [#1863](https://github.com/sandboxie-plus/Sandboxie/issues/1863)
 - fixed issues with box grouping [#1921](https://github.com/sandboxie-plus/Sandboxie/issues/1921) [#1920](https://github.com/sandboxie-plus/Sandboxie/issues/1920)
 - fixed issues when changing language [#1914](https://github.com/sandboxie-plus/Sandboxie/issues/1914)
+- fixed issue with BreakoutFodler [#1908](https://github.com/sandboxie-plus/Sandboxie/issues/1908)
 
 
 

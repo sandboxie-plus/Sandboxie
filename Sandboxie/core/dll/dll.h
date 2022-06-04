@@ -802,7 +802,7 @@ BOOLEAN Config_MatchImage(
 
 WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
 
-BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list);
+BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list, ULONG flags);
 
 VOID Config_FreePatternList(LIST* list);
 

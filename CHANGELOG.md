@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved implementation of the PreferExternalManifest option
+- win32k hooks are now by default only used for edge and chromium as thay cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902)
 
 ### Fixed
 - fixed Edge issue with Windows 11 after KB5014019

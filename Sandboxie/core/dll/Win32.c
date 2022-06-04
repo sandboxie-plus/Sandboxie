@@ -393,28 +393,29 @@ _FX BOOLEAN Win32_Init(HMODULE hmodule)
     if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
         return TRUE; // just return on older builds, or not enabled
 
-    // disable Electron Workaround when we are ready to hook the required win32k syscalls
-    extern BOOL Dll_ElectronWorkaround;
-    Dll_ElectronWorkaround = FALSE; 
-
     if (Dll_CompartmentMode || SbieApi_data->flags.bNoSysHooks)
-        return TRUE;
+        return TRUE; // no syscall hooking in comaprtment mode
 
     //
     // chrome needs for a working GPU acceleration the GdiDdDDI* win32k syscalls to have the right user token
+    // this however with some other software causes issues, presumably as then other syscalls would need to have the same token
     //
 
-    WCHAR* cmdline = GetCommandLine();
+    BOOLEAN useByDefualt = (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME);
+    if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"UseWin32kHooks", useByDefualt)) {
 
-    if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"UseWin32kHooks", TRUE)) {
+        // disable Electron Workaround when we are ready to hook the required win32k syscalls
+        extern BOOL Dll_ElectronWorkaround;
+        Dll_ElectronWorkaround = FALSE; 
 
 #ifndef _WIN64
         if (Dll_IsWow64) 
-            SbieDll_HookWin32WoW64(); // WoW64 hooks
+            Win32_HookWin32WoW64(); // WoW64 hooks
         else 
 #endif
-            SbieDll_HookWin32SysCalls(hmodule); // Native x86/x64 hooks
+            Win32_HookWin32SysCalls(hmodule); // Native x86/x64 hooks
     }
 
 	return TRUE;
+
 }

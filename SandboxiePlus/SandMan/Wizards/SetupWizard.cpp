@@ -172,10 +172,6 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     registerField("useCertificate", m_pCertificate, "plainText");
     
     m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
-    if (g_CertInfo.evaluation) {
-        m_pEvaluate->setEnabled(false);
-        m_pEvaluate->setChecked(true);
-    }
     layout->addWidget(m_pEvaluate);
     connect(m_pEvaluate, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("isEvaluate", m_pEvaluate);
@@ -234,11 +230,7 @@ bool CCertificatePage::isComplete() const
 bool CCertificatePage::validatePage()
 {
     QByteArray Certificate = m_pCertificate->toPlainText().toLatin1();
-    if (m_pEvaluate->isChecked()) {
-        theAPI->StartEvaluation();
-        theGUI->UpdateCertState();
-    }
-    else if (!m_pEvaluate->isChecked() && !Certificate.isEmpty() && g_Certificate != Certificate) {
+    if (!m_pEvaluate->isChecked() && !Certificate.isEmpty() && g_Certificate != Certificate) {
 		return CSettingsWindow::ApplyCertificate(Certificate, this);
     }
     return true;

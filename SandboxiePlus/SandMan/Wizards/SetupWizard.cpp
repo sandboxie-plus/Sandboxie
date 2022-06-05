@@ -289,13 +289,13 @@ CWFPPage::CWFPPage(QWidget *parent)
 
     QLabel* pLabel = new QLabel;
     pLabel->setWordWrap(true);
-    pLabel->setText(tr("Using WFP allows sandboxie to reliably enforce IP/Port based rules for network access. "
-        "Unlike system level aplication firewalls sandboxie can use different rules in each box for the same application. "
-        "If you already have a good and reliable aplication firewall and don't need per box rules, you can leave this option unchecked. "
-        "Without WFP enabled sandboxie will still be able to reliably and entirely block processes from accessing the network. "
-        "Howeever the way this work can cause the process to crash, as the driver here blocks required network device endpoints. "
-        "Even with WFP disabled sandboxie will offer to set IP/Port based rules, however those will be applied in user mode only and not be enforced by the driver. "
-        "Hence without WFP enabled a purposfully malicious process could bypass those rules, but not the total netowrk block."));
+    pLabel->setText(tr("Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. "
+        "Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. "
+        "If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. "
+        "Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. "
+        "However, the way this works can cause the process to crash, as the driver here blocks required network device endpoints. "
+        "Even with WFP disabled, Sandboxie will offer to set IP/Port based rules, however those will be applied in user mode only and not be enforced by the driver. "
+        "Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block."));
     layout->addWidget(pLabel);
 
     m_pUseWFP = new QCheckBox(tr("Enable Windows Filtering Platform (WFP) support"));

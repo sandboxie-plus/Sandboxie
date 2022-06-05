@@ -14,6 +14,7 @@ CSetupWizard::CSetupWizard(QWidget *parent)
     setPage(Page_Intro, new CIntroPage);
     setPage(Page_Certificate, new CCertificatePage);
     setPage(Page_Shell, new CShellPage);
+    setPage(Page_WFP, new CWFPPage);
     setPage(Page_Finish, new CFinishPage);
 
     setWizardStyle(ModernStyle);
@@ -64,6 +65,9 @@ bool CSetupWizard::ShowWizard()
 
     if (wizard.field("useBrowserIcon").toBool())
         CSettingsWindow__AddBrowserIcon();
+
+    if (wizard.field("useWFP").toBool())
+        theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", true);
 
     if (wizard.field("isUpdate").toBool()) {
         theConf->SetValue("Options/CheckForUpdates", 1);
@@ -267,6 +271,42 @@ CShellPage::CShellPage(QWidget *parent)
 }
 
 int CShellPage::nextId() const
+{
+    return CSetupWizard::Page_WFP;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CWFPPage
+// 
+
+CWFPPage::CWFPPage(QWidget *parent)
+    : QWizardPage(parent)
+{
+    setTitle(tr("Configure <b>Sandboxie-Plus</b> network filtering"));
+    setSubTitle(tr("Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access."));
+
+    QVBoxLayout *layout = new QVBoxLayout;
+
+    QLabel* pLabel = new QLabel;
+    pLabel->setWordWrap(true);
+    pLabel->setText(tr("Using WFP allows sandboxie to reliably enforce IP/Port based rules for network access. "
+        "Unlike system level aplication firewalls sandboxie can use different rules in each box for the same application. "
+        "If you already have a good and reliable aplication firewall and don't need per box rules, you can leave this option unchecked. "
+        "Without WFP enabled sandboxie will still be able to reliably and entirely block processes from accessing the network. "
+        "Howeever the way this work can cause the process to crash, as the driver here blocks required network device endpoints. "
+        "Even with WFP disabled sandboxie will offer to set IP/Port based rules, however those will be applied in user mode only and not be enforced by the driver. "
+        "Hence without WFP enabled a purposfully malicious process could bypass those rules, but not the total netowrk block."));
+    layout->addWidget(pLabel);
+
+    m_pUseWFP = new QCheckBox(tr("Enable Windows Filtering Platform (WFP) support"));
+    m_pUseWFP->setChecked(false);
+    layout->addWidget(m_pUseWFP);
+    registerField("useWFP", m_pUseWFP);
+
+    setLayout(layout);
+}
+
+int CWFPPage::nextId() const
 {
     return CSetupWizard::Page_Finish;
 }

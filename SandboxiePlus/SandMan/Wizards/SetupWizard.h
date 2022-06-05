@@ -14,7 +14,7 @@ class CSetupWizard : public QWizard
     Q_OBJECT
 
 public:
-    enum { Page_Intro, Page_Certificate, Page_Shell, Page_Finish };
+    enum { Page_Intro, Page_Certificate, Page_Shell, Page_WFP, Page_Finish };
 
     CSetupWizard(QWidget *parent = nullptr);
 
@@ -83,6 +83,23 @@ private:
     QCheckBox *m_pAutoStart;
     QCheckBox *m_pContecxtMenu;
     QCheckBox *m_pBrowserIcon;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CWFPPage
+// 
+
+class CWFPPage : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    CWFPPage(QWidget *parent = nullptr);
+
+    int nextId() const override;
+
+private:
+    QCheckBox *m_pUseWFP;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

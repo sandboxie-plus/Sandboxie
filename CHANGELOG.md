@@ -6,19 +6,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1.1 / 5.56.1] - 2022-05-30
+## [1.1.1 / 5.56.1] - 2022-06-XX
 
 ### Added
 - compatibility templates can now be viewed from the settings window [#1891](https://github.com/sandboxie-plus/Sandboxie/issues/1891)
 - the refresh command is now bound to F5 [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
-- added more 1st start wizard options
-- added option to permanently disable immidate recovery for any given box when it opens [#1478](https://github.com/sandboxie-plus/Sandboxie/issues/1478)
+- added more first start wizard options
+- added option to permanently disable immediate recovery for any given box when it opens [#1478](https://github.com/sandboxie-plus/Sandboxie/issues/1478)
 - double click on the path column now opens the box root in explorer [#1924](https://github.com/sandboxie-plus/Sandboxie/issues/1924)
 
 ### Changed
-- changed love box behavioure [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
+- changed move box behaviour [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
 - improved implementation of the PreferExternalManifest option
-- win32k hooks are now by default only used for edge and chromium as thay cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902) [#1912](https://github.com/sandboxie-plus/Sandboxie/issues/1912) [#1897](https://github.com/sandboxie-plus/Sandboxie/issues/1897)
+- Win32k hooks are now by default only used for Edge and Chromium apps as they cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902) [#1912](https://github.com/sandboxie-plus/Sandboxie/issues/1912) [#1897](https://github.com/sandboxie-plus/Sandboxie/issues/1897)
 
 ### Fixed
 - fixed Edge issue with Windows 11 after KB5014019
@@ -30,12 +30,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - refresh now works without WatchBoxSize option [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - fixed crash issue with WatchBoxSize=true [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - fixed issue with recovery folder paths [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840)
-- fixed issues with sbie desktop and wndStation affecting acrobat reader [#1863](https://github.com/sandboxie-plus/Sandboxie/issues/1863)
+- fixed issues with Sbie desktop and wndStation affecting Acrobat Reader [#1863](https://github.com/sandboxie-plus/Sandboxie/issues/1863)
 - fixed issues with box grouping [#1921](https://github.com/sandboxie-plus/Sandboxie/issues/1921) [#1920](https://github.com/sandboxie-plus/Sandboxie/issues/1920)
 - fixed issues when changing language [#1914](https://github.com/sandboxie-plus/Sandboxie/issues/1914)
-- fixed issue with BreakoutFodler [#1908](https://github.com/sandboxie-plus/Sandboxie/issues/1908)
-- fixed issue with sbiedll.dll for x86 exception handling
-- fixed issues with application specific hives (RegLoadAppKey) affecting Visual Studio [#1576](https://github.com/sandboxie-plus/Sandboxie/issues/1576)
+- fixed issue with BreakoutFolder [#1908](https://github.com/sandboxie-plus/Sandboxie/issues/1908)
+- fixed issue with SbieDll.dll for x86 exception handling
+- fixed issues with application-specific hives (RegLoadAppKey) affecting Visual Studio [#1576](https://github.com/sandboxie-plus/Sandboxie/issues/1576)
 
 
 

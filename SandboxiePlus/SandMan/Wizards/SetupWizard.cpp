@@ -293,8 +293,8 @@ CWFPPage::CWFPPage(QWidget *parent)
         "Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. "
         "If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. "
         "Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. "
-        "However, the way this works can cause the process to crash, as the driver here blocks required network device endpoints. "
-        "Even with WFP disabled, Sandboxie will offer to set IP/Port based rules, however those will be applied in user mode only and not be enforced by the driver. "
+        "However, this can cause the process to crash, as the driver blocks the required network device endpoints. "
+        "Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. "
         "Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block."));
     layout->addWidget(pLabel);
 

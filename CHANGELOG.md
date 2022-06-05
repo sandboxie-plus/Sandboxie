@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - double click on the path column now opens the box root in explorer [#1924](https://github.com/sandboxie-plus/Sandboxie/issues/1924)
 
 ### Changed
-- changed move box behaviour [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
+- changed Move Box behaviour [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
 - improved implementation of the PreferExternalManifest option
 - Win32k hooks are now by default only used for Edge and Chromium apps as they cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902) [#1912](https://github.com/sandboxie-plus/Sandboxie/issues/1912) [#1897](https://github.com/sandboxie-plus/Sandboxie/issues/1897)
 
@@ -35,7 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues when changing language [#1914](https://github.com/sandboxie-plus/Sandboxie/issues/1914)
 - fixed issue with BreakoutFolder [#1908](https://github.com/sandboxie-plus/Sandboxie/issues/1908)
 - fixed issue with SbieDll.dll for x86 exception handling
-- fixed issues with application-specific hives (RegLoadAppKey) affecting Visual Studio [#1576](https://github.com/sandboxie-plus/Sandboxie/issues/1576)
+- fixed issues with application-specific hives (RegLoadAppKey) affecting Visual Studio [#1576](https://github.com/sandboxie-plus/Sandboxie/issues/1576) [#1452](https://github.com/sandboxie-plus/Sandboxie/issues/1452)
 
 
 

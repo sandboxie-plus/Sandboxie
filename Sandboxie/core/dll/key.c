@@ -249,11 +249,11 @@ static NTSTATUS Key_NtRenameKey(
     HANDLE KeyHandle, UNICODE_STRING *ReplacementName);
 
 
-static NTSTATUS Key_NtSaveKey(
-    HANDLE KeyHandle, HANDLE FileHandle);
-
-static NTSTATUS Key_NtSaveKeyEx(
-    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags);
+//static NTSTATUS Key_NtSaveKey(
+//    HANDLE KeyHandle, HANDLE FileHandle);
+//
+//static NTSTATUS Key_NtSaveKeyEx(
+//    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags);
 
 static NTSTATUS Key_NtLoadKey(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
@@ -294,8 +294,8 @@ static P_NtNotifyChangeKey          __sys_NtNotifyChangeKey         = NULL;
 static P_NtNotifyChangeMultipleKeys __sys_NtNotifyChangeMultipleKeys= NULL;
 static P_NtRenameKey                __sys_NtRenameKey               = NULL;
 
-static P_NtSaveKey                  __sys_NtSaveKey                 = NULL;
-static P_NtSaveKeyEx                __sys_NtSaveKeyEx               = NULL;
+//static P_NtSaveKey                  __sys_NtSaveKey                 = NULL;
+//static P_NtSaveKeyEx                __sys_NtSaveKeyEx               = NULL;
 static P_NtLoadKey                  __sys_NtLoadKey                 = NULL;
 static P_NtLoadKey2                 __sys_NtLoadKey2                = NULL;
 static P_NtLoadKey3                 __sys_NtLoadKey3                = NULL;
@@ -427,29 +427,29 @@ _FX BOOLEAN Key_Init(void)
         SBIEDLL_HOOK(Key_, NtOpenKeyEx);
     }
 
-    if (!Dll_CompartmentMode) {
-        SBIEDLL_HOOK(Key_, NtSaveKey);
+    
+    //SBIEDLL_HOOK(Key_, NtSaveKey);
+    //
+    //void* NtSaveKeyEx = GetProcAddress(Dll_Ntdll, "NtSaveKeyEx");
+    //if (NtSaveKeyEx) {
+    //    SBIEDLL_HOOK(Key_,NtSaveKeyEx);
+    //}
 
-        void* NtSaveKeyEx = GetProcAddress(Dll_Ntdll, "NtSaveKeyEx");
-        if (NtSaveKeyEx) {
-            SBIEDLL_HOOK(Key_,NtSaveKeyEx);
-        }
+    SBIEDLL_HOOK(Key_, NtLoadKey);
 
-        SBIEDLL_HOOK(Key_, NtLoadKey);
-
-        void* NtLoadKey2 = GetProcAddress(Dll_Ntdll, "NtLoadKey2");
-        if (NtLoadKey2) {
-            SBIEDLL_HOOK(Key_,NtLoadKey2);
-        }
-        void* NtLoadKey3 = GetProcAddress(Dll_Ntdll, "NtLoadKey3");
-        if (NtLoadKey3) {
-            SBIEDLL_HOOK(Key_,NtLoadKey3);
-        }
-        void* NtLoadKeyEx = GetProcAddress(Dll_Ntdll, "NtLoadKeyEx");
-        if (NtLoadKeyEx) {
-            SBIEDLL_HOOK(Key_,NtLoadKeyEx);
-        }
+    void* NtLoadKey2 = GetProcAddress(Dll_Ntdll, "NtLoadKey2");
+    if (NtLoadKey2) {
+        SBIEDLL_HOOK(Key_,NtLoadKey2);
     }
+    void* NtLoadKey3 = GetProcAddress(Dll_Ntdll, "NtLoadKey3");
+    if (NtLoadKey3) {
+        SBIEDLL_HOOK(Key_,NtLoadKey3);
+    }
+    void* NtLoadKeyEx = GetProcAddress(Dll_Ntdll, "NtLoadKeyEx");
+    if (NtLoadKeyEx) {
+        SBIEDLL_HOOK(Key_,NtLoadKeyEx);
+    }
+    
 
     Dll_OsBuild = GET_PEB_IMAGE_BUILD;
     return TRUE;
@@ -4529,12 +4529,12 @@ finish:
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Key_NtSaveKey(
-    HANDLE KeyHandle, HANDLE FileHandle)
-{
-    SbieApi_Log(2205, L"NtSaveKey");
-    return STATUS_SUCCESS;
-}
+//_FX NTSTATUS Key_NtSaveKey(
+//    HANDLE KeyHandle, HANDLE FileHandle)
+//{
+//    SbieApi_Log(2205, L"NtSaveKey");
+//    return STATUS_SUCCESS;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -4542,51 +4542,28 @@ _FX NTSTATUS Key_NtSaveKey(
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Key_NtSaveKeyEx(
-    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags)
-{
-    SbieApi_Log(2205, L"NtSaveKeyEx");
-    return STATUS_SUCCESS;
-}
+//_FX NTSTATUS Key_NtSaveKeyEx(
+//    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags)
+//{
+//    SbieApi_Log(2205, L"NtSaveKeyEx");
+//    return STATUS_SUCCESS;
+//}
 
 
 //---------------------------------------------------------------------------
 // Key_NtLoadKeyImpl
 //---------------------------------------------------------------------------
 
-
-_FX NTSTATUS Key_NtLoadKeyImpl(
-    OBJECT_ATTRIBUTES *TargetObjectAttributes,
-    OBJECT_ATTRIBUTES *SourceObjectAttributes)
+_FX WCHAR* Key_NtLoadKey_GetPath(OBJECT_ATTRIBUTES* SourceObjectAttributes)
 {
-    ULONG LastError;
-    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
-
     NTSTATUS status;
-    WCHAR *TruePath;
-    WCHAR *CopyPath;
     WCHAR *WorkPath;
     HANDLE FileHandle;
-    FILE_LOAD_KEY_REQ *req;
-
-    //
-    // get the full paths for the registry key and hive file
-    //
-
-    req = Dll_Alloc(sizeof(FILE_LOAD_KEY_REQ));
-    req->h.length = sizeof(FILE_LOAD_KEY_REQ);
-    req->h.msgid = MSGID_FILE_LOAD_KEY;
 
     WorkPath = Dll_Alloc(sizeof(WCHAR) * 8192);
     FileHandle = NULL;
 
-    Dll_PushTlsNameBuffer(TlsData);
-
     __try {
-
-        //
-        // query full DOS file path
-        //
 
         IO_STATUS_BLOCK IoStatusBlock;
 
@@ -4601,17 +4578,60 @@ _FX NTSTATUS Key_NtLoadKeyImpl(
         if (! NT_SUCCESS(status))
             __leave;
 
-        status = SbieDll_GetHandlePath(FileHandle, WorkPath, NULL);
+        BOOLEAN IsBoxedPath;
+        status = SbieDll_GetHandlePath(FileHandle, WorkPath, &IsBoxedPath);
 
-        if (! NT_SUCCESS(status))
-            __leave;
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    if (FileHandle)
+        NtClose(FileHandle);
+
+    if (!NT_SUCCESS(status)) {
+        Dll_Free(WorkPath);
+        WorkPath = NULL;
+    }
+
+    return WorkPath;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtLoadKeyImpl
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtLoadKeyImpl(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    WCHAR *WorkPath)
+{
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
+
+    NTSTATUS status;
+    WCHAR *TruePath;
+    WCHAR *CopyPath;
+    FILE_LOAD_KEY_REQ *req;
+
+    //
+    // get the full paths for the registry key and hive file
+    //
+
+    req = Dll_Alloc(sizeof(FILE_LOAD_KEY_REQ));
+    req->h.length = sizeof(FILE_LOAD_KEY_REQ);
+    req->h.msgid = MSGID_FILE_LOAD_KEY;
+
+    Dll_PushTlsNameBuffer(TlsData);
+
+    __try {
 
         if (! SbieDll_TranslateNtToDosPath(WorkPath)) {
             status = STATUS_ACCESS_DENIED;
             __leave;
         }
 
-        if (wcslen(WorkPath) > 127) {
+        if (wcslen(WorkPath) > 127) { // todo // fix-me: make req->FilePath much longer
             status = STATUS_ACCESS_DENIED;
             __leave;
         }
@@ -4656,9 +4676,6 @@ _FX NTSTATUS Key_NtLoadKeyImpl(
             status = STATUS_ACCESS_DENIED;
     }
 
-    if (FileHandle)
-        NtClose(FileHandle);
-    Dll_Free(WorkPath);
     Dll_Free(req);
 
     SetLastError(LastError);
@@ -4676,12 +4693,28 @@ _FX NTSTATUS Key_NtLoadKey(
     OBJECT_ATTRIBUTES *SourceObjectAttributes)
 {
     NTSTATUS status;
+    WCHAR* WorkPath;
+    UNICODE_STRING objname;
+    OBJECT_ATTRIBUTES objattrs;
+
+    //
+    // get the true file path
+    //
+
+    WorkPath = Key_NtLoadKey_GetPath(SourceObjectAttributes);
+    if (WorkPath) {
+        RtlInitUnicodeString(&objname, WorkPath);
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        SourceObjectAttributes = &objattrs;
+    }
 
     status = __sys_NtLoadKey(TargetObjectAttributes, SourceObjectAttributes);
-    if (status != STATUS_PRIVILEGE_NOT_HELD)
-        return status;
+    if (status == STATUS_PRIVILEGE_NOT_HELD && !Dll_CompartmentMode)
+        status = Key_NtLoadKeyImpl(TargetObjectAttributes, WorkPath);
 
-    return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
+    if(WorkPath) Dll_Free(WorkPath);
+    return status;
 }
 
 
@@ -4695,12 +4728,28 @@ _FX NTSTATUS Key_NtLoadKey2(
     OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags)
 {
     NTSTATUS status;
+    WCHAR* WorkPath;
+    UNICODE_STRING objname;
+    OBJECT_ATTRIBUTES objattrs;
+
+    //
+    // get the true file path
+    //
+
+    WorkPath = Key_NtLoadKey_GetPath(SourceObjectAttributes);
+    if (WorkPath) {
+        RtlInitUnicodeString(&objname, WorkPath);
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        SourceObjectAttributes = &objattrs;
+    }
 
     status = __sys_NtLoadKey2(TargetObjectAttributes, SourceObjectAttributes, Flags);
-    if (status != STATUS_PRIVILEGE_NOT_HELD)
-        return status;
+    if (status == STATUS_PRIVILEGE_NOT_HELD && !Dll_CompartmentMode)
+        status = Key_NtLoadKeyImpl(TargetObjectAttributes, WorkPath);
 
-    return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
+    if(WorkPath) Dll_Free(WorkPath);
+    return status;
 }
 
 
@@ -4715,15 +4764,30 @@ _FX NTSTATUS Key_NtLoadKey3(
     PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unkown)
 {
     NTSTATUS status;
+    WCHAR* WorkPath;
+    UNICODE_STRING objname;
+    OBJECT_ATTRIBUTES objattrs;
+
+    //
+    // get the true file path
+    //
+
+    WorkPath = Key_NtLoadKey_GetPath(SourceObjectAttributes);
+    if (WorkPath) {
+        RtlInitUnicodeString(&objname, WorkPath);
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        SourceObjectAttributes = &objattrs;
+    }
 
     status = __sys_NtLoadKey3(TargetObjectAttributes, SourceObjectAttributes, Flags,
         LoadArguments, LoadArgumentCount, DesiredAccess, KeyHandle, Unkown);
-    if (status != STATUS_PRIVILEGE_NOT_HELD)
-        return status;
+    if (status == STATUS_PRIVILEGE_NOT_HELD && !Dll_CompartmentMode)
+        SbieApi_Log(2205, L"NtLoadKey3");
+        //status = Key_NtLoadKeyImpl(TargetObjectAttributes, WorkPath);
 
-    //return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
-    SbieApi_Log(2205, L"NtLoadKey3");
-    return STATUS_SUCCESS;
+    if(WorkPath) Dll_Free(WorkPath);
+    return status;
 }
 
 
@@ -4738,15 +4802,30 @@ _FX NTSTATUS Key_NtLoadKeyEx(
     HANDLE TrustClassKey, PVOID Reserved, PVOID ObjectContext, PVOID CallbackReserved, PIO_STATUS_BLOCK IoStatusBlock)
 {
     NTSTATUS status;
+    WCHAR* WorkPath;
+    UNICODE_STRING objname;
+    OBJECT_ATTRIBUTES objattrs;
+
+    //
+    // get the true file path
+    //
+
+    WorkPath = Key_NtLoadKey_GetPath(SourceObjectAttributes);
+    if (WorkPath) {
+        RtlInitUnicodeString(&objname, WorkPath);
+        InitializeObjectAttributes(
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        SourceObjectAttributes = &objattrs;
+    }
 
     status = __sys_NtLoadKeyEx(TargetObjectAttributes, SourceObjectAttributes, Flags,
         TrustClassKey, Reserved, ObjectContext, CallbackReserved, IoStatusBlock);
-    if (status != STATUS_PRIVILEGE_NOT_HELD)
-        return status;
+    if (status == STATUS_PRIVILEGE_NOT_HELD && !Dll_CompartmentMode)
+        SbieApi_Log(2205, L"NtLoadKey3");
+        //status = Key_NtLoadKeyImpl(TargetObjectAttributes, WorkPath);
 
-    //return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
-    SbieApi_Log(2205, L"NtLoadKeyEx");
-    return STATUS_SUCCESS;
+    if(WorkPath) Dll_Free(WorkPath);
+    return status;
 }
 
 

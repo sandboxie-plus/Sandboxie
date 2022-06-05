@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - double click on the path column now opens the box root in explorer [#1924](https://github.com/sandboxie-plus/Sandboxie/issues/1924)
 
 ### Changed
+- changed love box behavioure [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
 - improved implementation of the PreferExternalManifest option
 - win32k hooks are now by default only used for edge and chromium as thay cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902) [#1912](https://github.com/sandboxie-plus/Sandboxie/issues/1912) [#1897](https://github.com/sandboxie-plus/Sandboxie/issues/1897)
 
@@ -58,8 +59,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
 ## [1.0.22 / 5.55.22] - 2022-05-15
 
 ### Added
@@ -72,8 +71,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
 - fixed issue with Windows Server 2022 build 20348
 - fixed translation switching issues [#1852](https://github.com/sandboxie-plus/Sandboxie/issues/1852)
-
-
 
 
 
@@ -90,7 +87,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issue with Firefox/Chromium browsers that have been compiled with the MinGW toolchain [#538](https://github.com/sandboxie-plus/Sandboxie/issues/538)
 - fixed issues with folder recovery on Plus UI [#1840](https://github.com/sandboxie-plus/Sandboxie/issues/1840) [#1380](https://github.com/sandboxie-plus/Sandboxie/issues/1380)
-
 
 
 
@@ -123,8 +119,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed further issues with box grouping [#1698](https://github.com/sandboxie-plus/Sandboxie/issues/1698) [#1697](https://github.com/sandboxie-plus/Sandboxie/issues/1697)
 - fixed issues with snapshot UI [#1696](https://github.com/sandboxie-plus/Sandboxie/issues/1696) [#1695](https://github.com/sandboxie-plus/Sandboxie/issues/1695)
 - fixed issue with recovery dialog focus [#1374](https://github.com/sandboxie-plus/Sandboxie/issues/1374)
-
-
 
 
 
@@ -302,7 +296,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.0.9 / 5.55.9] - 2022-01-31
 
 ### Added
@@ -425,7 +418,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - removed obsolete SkyNet rootkit detection from 32 bit build
-
 
 
 
@@ -572,7 +564,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [0.9.8d / 5.53.3] - 2021-11-01
 
 ### Added
@@ -613,7 +604,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [0.9.8b / 5.53.1] - 2021-10-19
 
 ### Added
@@ -637,8 +627,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added missing translation for qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
 - fixed issue with Windows compatibility assistant [#1265](https://github.com/sandboxie-plus/Sandboxie/issues/1265)
 - fixed issue with process image specific settigns [#1307](https://github.com/sandboxie-plus/Sandboxie/issues/1307)
-
-
 
 
 

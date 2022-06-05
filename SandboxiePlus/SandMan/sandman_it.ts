@@ -4,27 +4,27 @@
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="151"/>
+        <location filename="Wizards/SetupWizard.cpp" line="155"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>Installa il certificato di supporto di &lt;b&gt;Sandboxie Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="152"/>
+        <location filename="Wizards/SetupWizard.cpp" line="156"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>Se sei in possesso di un certificato di supporto, si prega di inserirlo nel campo sottostante.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="174"/>
+        <location filename="Wizards/SetupWizard.cpp" line="178"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>Inizia la valutazione senza certificato per un periodo di tempo limitato.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="193"/>
+        <location filename="Wizards/SetupWizard.cpp" line="197"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>Per utilizzare &lt;b&gt;Sandboxie Plus&lt;/b&gt; in un contesto aziendale, è necessario un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;certificato di supporto&lt;/a&gt; per uso commerciale. Se non si dispone ancora del certificato richiesto, è possibile ottenerlo dal &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;negozio web xanasoft.com&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="204"/>
+        <location filename="Wizards/SetupWizard.cpp" line="208"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie Plus&lt;/b&gt; fornisce ulteriori funzionalità e nuovi tipi di aree virtuali esclusivamente ai &lt;u&gt;sostenitori del progetto&lt;/u&gt;. Le aree virtuali con Privacy avanzata &lt;b&gt;&lt;font color=&apos;red&apos;&gt;proteggono i dati utente da accessi non autorizzati&lt;/font&gt;&lt;/b&gt; nei programmi eseguiti.&lt;br /&gt;Se non sei un sostenitore, si prega di &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supportare Sandboxie Plus&lt;/a&gt; per garantirne lo sviluppo e ricevere un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt;.</translation>
     </message>
@@ -73,17 +73,17 @@
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="281"/>
+        <location filename="Wizards/SetupWizard.cpp" line="321"/>
         <source>Complete your configuration</source>
         <translation>Completa la configurazione</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="288"/>
+        <location filename="Wizards/SetupWizard.cpp" line="328"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>Hai quasi finito, fare clic su Fine per applicare tutte le opzioni selezionate e concludere la configurazione guidata.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="300"/>
+        <location filename="Wizards/SetupWizard.cpp" line="340"/>
         <source>Keep Sandboxie-Plus up to date.</source>
         <translation>Mantieni Sandboxie Plus aggiornato.</translation>
     </message>
@@ -91,32 +91,32 @@
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="86"/>
+        <location filename="Wizards/SetupWizard.cpp" line="90"/>
         <source>Introduction</source>
         <translation>Introduzione</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="90"/>
+        <location filename="Wizards/SetupWizard.cpp" line="94"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>Benvenuto nella configurazione guidata di &lt;b&gt;Sandboxie Plus&lt;/b&gt;. È possibile avviarla in qualsiasi momento dal menu Area virtuale-&gt;Manutenzione se non si desidera completarla subito.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="101"/>
+        <location filename="Wizards/SetupWizard.cpp" line="105"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Seleziona come si desidera utilizzare Sandboxie Plus</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="104"/>
+        <location filename="Wizards/SetupWizard.cpp" line="108"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>Uso &amp;privato non commerciale</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="109"/>
+        <location filename="Wizards/SetupWizard.cpp" line="113"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>Uso &amp;commerciale o aziendale</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="114"/>
+        <location filename="Wizards/SetupWizard.cpp" line="118"/>
         <source>Note: this option is immutable</source>
         <translation>Nota: questa opzione non potrà essere cambiata in seguito</translation>
     </message>
@@ -2844,27 +2844,27 @@ Scegliere No per selezionare: %2</translation>
 <context>
     <name>CSetupWizard</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="25"/>
+        <location filename="Wizards/SetupWizard.cpp" line="26"/>
         <source>Setup Wizard</source>
         <translation>Configurazione guidata</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="36"/>
+        <location filename="Wizards/SetupWizard.cpp" line="37"/>
         <source>The decision you make here will affect which page you get to see next.</source>
         <translation>La decisione che verrà adottata qui influenzerà la pagina successiva.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="39"/>
+        <location filename="Wizards/SetupWizard.cpp" line="40"/>
         <source>This help is likely not to be of any help.</source>
         <translation>È improbabile che questo aiuto serva a qualcosa.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="43"/>
+        <location filename="Wizards/SetupWizard.cpp" line="44"/>
         <source>Sorry, I already gave all the help I could.</source>
         <translation>Spiacente, è stato già fornito tutto l&apos;aiuto possibile.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="45"/>
+        <location filename="Wizards/SetupWizard.cpp" line="46"/>
         <source>Setup Wizard Help</source>
         <translation>Aiuto della configurazione guidata</translation>
     </message>
@@ -2872,27 +2872,27 @@ Scegliere No per selezionare: %2</translation>
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="246"/>
+        <location filename="Wizards/SetupWizard.cpp" line="250"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>Configura l&apos;integrazione di &lt;b&gt;Sandboxie Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="247"/>
+        <location filename="Wizards/SetupWizard.cpp" line="251"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Configura come Sandboxie Plus dovrebbe integrarsi nel sistema.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="251"/>
+        <location filename="Wizards/SetupWizard.cpp" line="255"/>
         <source>Start UI with Windows</source>
         <translation>Esegui Sandboxie Plus all&apos;avvio di Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="256"/>
+        <location filename="Wizards/SetupWizard.cpp" line="260"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Aggiungi l&apos;opzione «Avvia nell&apos;area virtuale» al menu contestuale</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="261"/>
+        <location filename="Wizards/SetupWizard.cpp" line="265"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Aggiungi un collegamento sul desktop per l&apos;avvio del browser Web in Sandboxie</translation>
     </message>
@@ -3080,6 +3080,29 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/TraceView.cpp" line="482"/>
         <source>%1</source>
         <translation>%1</translation>
+    </message>
+</context>
+<context>
+    <name>CWFPPage</name>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="285"/>
+        <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
+        <translation>Configura filtri di rete in &lt;b&gt;Sandboxie Plus&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="286"/>
+        <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
+        <translation>Sandboxie può utilizzare la piattaforma di filtraggio di Windows (WFP) per limitare l&apos;accesso di rete.</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="292"/>
+        <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
+        <translation>L&apos;uso di WFP consente a Sandboxie di applicare in modo affidabile regole basate su IP/porta per l&apos;accesso alla rete. A differenza dei firewall applicativi a livello di sistema, Sandboxie può utilizzare regole diverse in ogni area virtuale per la stessa applicazione. Se disponete già di un buon firewall applicativo affidabile e non avete bisogno di regole per ogni area virtuale, potete lasciare questa opzione deselezionata. Senza WFP attivo, Sandboxie sarà comunque in grado di bloccare in modo affidabile e completo i processi di accesso alla rete. Tuttavia, ciò potrebbe causare l&apos;interruzione del processo, poiché il driver blocca gli endpoint dei dispositivi di rete richiesti. Anche con il WFP disattivato, Sandboxie offre la possibilità di impostare regole basate su IP/porta, ma in questo caso saranno applicate solo in modalità utente e non dal driver. Pertanto, senza WFP attivo, un processo intenzionalmente dannoso potrebbe aggirare tali regole, ma non l&apos;intero blocco di rete.</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="301"/>
+        <source>Enable Windows Filtering Platform (WFP) support</source>
+        <translation>Attiva il supporto alla piattaforma di filtraggio di Windows (WFP)</translation>
     </message>
 </context>
 <context>

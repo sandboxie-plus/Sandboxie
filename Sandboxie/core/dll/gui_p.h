@@ -740,7 +740,7 @@ extern  P_LoadString                __sys_LoadStringW;
 
 #define SBIEDLL_HOOK_GUI(proc)                              \
     *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)               \
-        SbieDll_Hook(#proc, __sys_##proc, Gui_##proc);      \
+        SbieDll_Hook(#proc, __sys_##proc, Gui_##proc, module);      \
     if (! __sys_##proc) return FALSE;
 
 
@@ -764,7 +764,7 @@ LRESULT Gui_WindowProcA(
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitClass(void);
+BOOLEAN Gui_InitClass(HMODULE module);
 
 void Gui_Hook_CREATESTRUCT_Handler(void);
 
@@ -784,7 +784,7 @@ void Gui_CREATESTRUCT_Restore(LPARAM lParam);
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitTitle(void);
+BOOLEAN Gui_InitTitle(HMODULE module);
 
 BOOLEAN Gui_ShouldCreateTitle(HWND hWnd);
 
@@ -800,13 +800,13 @@ int Gui_FixTitleA(HWND hWnd, UCHAR *lpWindowTitle, int len);
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitEnum(void);
+BOOLEAN Gui_InitEnum(HMODULE module);
 
 
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitProp(void);
+BOOLEAN Gui_InitProp(HMODULE module);
 
 void Gui_SetWindowProc(HWND hWnd, BOOLEAN force);
 
@@ -814,13 +814,13 @@ void Gui_SetWindowProc(HWND hWnd, BOOLEAN force);
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitMsg(void);
+BOOLEAN Gui_InitMsg(HMODULE module);
 
 
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitWinHooks(void);
+BOOLEAN Gui_InitWinHooks(HMODULE module);
 
 LRESULT Gui_RegisterWinHook(DWORD dwThreadId, ULONG64 ghk);
 
@@ -830,7 +830,7 @@ LRESULT Gui_NotifyWinHooks(void);
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitDlgTmpl(void);
+BOOLEAN Gui_InitDlgTmpl(HMODULE module);
 
 
 //---------------------------------------------------------------------------
@@ -842,7 +842,7 @@ BOOLEAN Ole_DoDragDrop(HWND hWnd, WPARAM wParam, LPARAM lParam);
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_InitMisc(void);
+BOOLEAN Gui_InitMisc(HMODULE module);
 
 
 //---------------------------------------------------------------------------
@@ -859,7 +859,7 @@ void *Gui_CallProxyEx(
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Gui_DDE_Init(void);
+BOOLEAN Gui_DDE_Init(HMODULE module);
 
 WPARAM Gui_DDE_INITIATE_Received(HWND hWnd, WPARAM wParam);
 

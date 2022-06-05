@@ -127,7 +127,7 @@ static LRESULT Gui_MyDialogProc2(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitDlgTmpl(void)
+_FX BOOLEAN Gui_InitDlgTmpl(HMODULE module)
 {
     if (! Gui_RenameClasses)
         return TRUE;

@@ -160,7 +160,7 @@ extern const WCHAR *Pst_OpenProtectedStorage;
     *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)Ldr_GetProcAddrNew(DllName_advapi32, L#proc, #proc); \
     if (*(ULONG_PTR *)&__sys_##proc) {                                      \
         *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)                           \
-            SbieDll_Hook(#proc, __sys_##proc, Cred_##proc);                 \
+            SbieDll_Hook(#proc, __sys_##proc, Cred_##proc, module);         \
         if (! __sys_##proc) return FALSE;                                   \
     }
 

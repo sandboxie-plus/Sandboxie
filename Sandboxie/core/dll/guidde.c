@@ -160,7 +160,7 @@ static ULONG Gui_DDE_REQ_Len;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_DDE_Init(void)
+_FX BOOLEAN Gui_DDE_Init(HMODULE module)
 {
     __sys_PackDDElParam =
                 Ldr_GetProcAddrNew(DllName_user32, L"PackDDElParam","PackDDElParam");

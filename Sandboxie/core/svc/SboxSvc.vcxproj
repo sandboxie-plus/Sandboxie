@@ -245,6 +245,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="DriverAssistSid.cpp" />
     <ClCompile Include="DriverAssistStart.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>

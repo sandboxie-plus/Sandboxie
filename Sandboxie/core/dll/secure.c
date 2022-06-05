@@ -362,6 +362,8 @@ void Secure_InitSecurityDescriptors(void)
 
 _FX BOOLEAN Secure_Init(void)
 {
+    HMODULE module = NULL;
+
     void *RtlQueryElevationFlags;
     void *RtlCheckTokenMembershipEx;
 

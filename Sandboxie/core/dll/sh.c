@@ -1046,7 +1046,7 @@ _FX BOOLEAN SH32_Init(HMODULE module)
 
             *(ULONG_PTR *)&__sys_LdrGetDllHandleEx = (ULONG_PTR)
                 SbieDll_Hook("LdrGetDllHandleEx",
-                    __sys_LdrGetDllHandleEx, SH32_LdrGetDllHandleEx);
+                    __sys_LdrGetDllHandleEx, SH32_LdrGetDllHandleEx, module);
         }
 
         //

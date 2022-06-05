@@ -127,6 +127,8 @@ static const WCHAR *File_DeviceMap_EnvVar   = ENV_VAR_PFX L"DEVICE_MAP";
 
 _FX BOOLEAN File_Init(void)
 {
+    HMODULE module = NULL;
+
     void *RtlGetFullPathName_UEx;
     void *GetTempPathW;
     void *NtQueryDirectoryFileEx = NULL;

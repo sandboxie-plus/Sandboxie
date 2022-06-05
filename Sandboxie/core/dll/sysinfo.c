@@ -122,6 +122,8 @@ BOOLEAN SysInfo_CanUseJobs = FALSE;
 
 _FX BOOLEAN SysInfo_Init(void)
 {
+    HMODULE module = NULL;
+
     void *NtTraceEvent;
 
     if (! Dll_SkipHook(L"ntqsi")) {

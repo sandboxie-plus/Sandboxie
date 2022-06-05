@@ -48,7 +48,7 @@
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Scm_HookRegisterServiceCtrlHandler(void);
+static BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module);
 
 //---------------------------------------------------------------------------
 
@@ -379,9 +379,9 @@ static const WCHAR *_TrustedInstaller = L"TrustedInstaller";
 //---------------------------------------------------------------------------
 
 
-#define SBIEDLL_HOOK_SCM(proc)                              \
-    *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)               \
-        SbieDll_Hook(#proc, __sys_##proc, Scm_##proc);      \
+#define SBIEDLL_HOOK_SCM(proc)                                      \
+    *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)                       \
+        SbieDll_Hook(#proc, __sys_##proc, Scm_##proc, module);      \
     if (! __sys_##proc) return FALSE;
 
 
@@ -609,7 +609,7 @@ _FX BOOLEAN Scm_Init_AdvApi(HMODULE module)
 
     Scm_Notify_Init(module);
 
-    return Scm_HookRegisterServiceCtrlHandler();
+    return Scm_HookRegisterServiceCtrlHandler(module);
 }
 
 
@@ -618,7 +618,7 @@ _FX BOOLEAN Scm_Init_AdvApi(HMODULE module)
 //---------------------------------------------------------------------------
 
 
-BOOLEAN Scm_HookRegisterServiceCtrlHandler(void)
+BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module)
 {
     static const UCHAR PrologW[] = {
         0x45, 0x33, 0xC9,                       // xor r9d,r9d

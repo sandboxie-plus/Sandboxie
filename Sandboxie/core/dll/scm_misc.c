@@ -156,7 +156,7 @@ _FX BOOLEAN Scm_SecHostDll(HMODULE module)
             return FALSE;
         }
 
-        ResPtr = SbieDll_Hook((char *)funcNamesAW[i].FuncNameA, SecPtr, AdvPtr);
+        ResPtr = SbieDll_Hook((char *)funcNamesAW[i].FuncNameA, SecPtr, AdvPtr, module);
         if (! ResPtr)
             return FALSE;
     }

@@ -72,7 +72,7 @@ static ULONG Gui_SetWindowLongA(HWND hWnd, int nIndex, ULONG dwNew);
 static ULONG_PTR Gui_SetWindowLong8(
     HWND hWnd, int nIndex, ULONG_PTR dwNew, ULONG IsAscii);
 
-static BOOLEAN Gui_Hook_SetWindowLong8(void);
+static BOOLEAN Gui_Hook_SetWindowLong8(HMODULE module);
 
 static ULONG Gui_GetClassLongW(HWND hWnd, int nIndex);
 
@@ -93,7 +93,7 @@ static ULONG_PTR Gui_SetWindowLongPtrA(
 static ULONG_PTR Gui_SetWindowLongPtr8(
     HWND hWnd, int nIndex, ULONG_PTR dwNew, ULONG IsAscii);
 
-static BOOLEAN Gui_Hook_SetWindowLongPtr8(void);
+static BOOLEAN Gui_Hook_SetWindowLongPtr8(HMODULE module);
 
 static ULONG_PTR Gui_GetClassLongPtrW(HWND hWnd, int nIndex);
 
@@ -134,7 +134,7 @@ static P_SetWindowLongPtr8         __sys_SetWindowLongPtr8      = 0;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitProp(void)
+_FX BOOLEAN Gui_InitProp(HMODULE module)
 {
     //
     // initialize our Drag-n-Drop atoms
@@ -180,7 +180,7 @@ _FX BOOLEAN Gui_InitProp(void)
             SBIEDLL_HOOK_GUI(SetWindowLongA);
             SBIEDLL_HOOK_GUI(SetWindowLongW);
 
-        } else if (! Gui_Hook_SetWindowLong8())
+        } else if (! Gui_Hook_SetWindowLong8(module))
             return FALSE;
 
 #else ! _WIN64
@@ -204,7 +204,7 @@ _FX BOOLEAN Gui_InitProp(void)
             SBIEDLL_HOOK_GUI(SetWindowLongPtrA);
             SBIEDLL_HOOK_GUI(SetWindowLongPtrW);
 
-        } else if (! Gui_Hook_SetWindowLongPtr8())
+        } else if (! Gui_Hook_SetWindowLongPtr8(module))
             return FALSE;
 
         SBIEDLL_HOOK_GUI(GetClassLongPtrA);
@@ -1053,7 +1053,7 @@ _FX ULONG_PTR Gui_SetWindowLong8(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_Hook_SetWindowLong8(void)
+_FX BOOLEAN Gui_Hook_SetWindowLong8(HMODULE module)
 {
     //
     // on Windows 8.1, the SetWindowLongA and SetWindowLongW functions
@@ -1153,7 +1153,7 @@ _FX ULONG_PTR Gui_SetWindowLongPtr8(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_Hook_SetWindowLongPtr8(void)
+_FX BOOLEAN Gui_Hook_SetWindowLongPtr8(HMODULE module)
 {
     //
     // on Windows 8, the SetWindowLongPtrA and SetWindowLongPtrW functions

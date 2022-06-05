@@ -326,6 +326,8 @@ BOOLEAN RpcRt_IsDynamicPortOpen(const WCHAR* wszPortName);
 
 _FX BOOLEAN Ipc_Init(void)
 {
+    HMODULE module = NULL;
+
     void *NtAlpcCreatePort;
     void *NtAlpcConnectPort;
     void *NtAlpcConnectPortEx;

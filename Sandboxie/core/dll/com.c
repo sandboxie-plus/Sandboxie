@@ -93,7 +93,7 @@ static HRESULT Com_CoCreateInstanceEx(
     REFCLSID rclsid, void *pUnkOuter, ULONG clsctx, void *pServerInfo,
     ULONG cmq, MULTI_QI *pmqs);
 
-static BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code);
+static BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module);
 
 static HRESULT __fastcall Com_CoUnmarshalInterface_W8(
     ULONG_PTR StreamAddr, ULONG64 zero, REFIID riid, void **ppv);
@@ -866,7 +866,7 @@ _FX HRESULT Com_CoCreateInstanceEx(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code)
+_FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
 {
 
     //
@@ -1399,7 +1399,7 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
     if (!Ipc_OpenCOM) {
         if (Dll_OsBuild >= 8400) {
             if (!Com_Hook_CoUnmarshalInterface_W8(
-                (UCHAR*)CoUnmarshalInterface))
+                (UCHAR*)CoUnmarshalInterface, module))
                 return FALSE;
         }
         else {

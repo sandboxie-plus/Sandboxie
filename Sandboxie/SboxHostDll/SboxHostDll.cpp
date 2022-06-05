@@ -131,9 +131,9 @@ BOOLEAN InitHook( HINSTANCE hSbieDll )
 {
     if (hSbieDll)
     {
-        HMODULE hAdvapi32 = GetModuleHandle(L"Advapi32.dll");
+        HMODULE module = GetModuleHandle(L"Advapi32.dll");
 
-        void *OpenProcessToken = (P_OpenProcessToken)GetProcAddress(hAdvapi32, "OpenProcessToken");
+        void *OpenProcessToken = (P_OpenProcessToken)GetProcAddress(module, "OpenProcessToken");
 
         if (OpenProcessToken)
             SBIEDLL_HOOK(SboxHostDll_, OpenProcessToken);

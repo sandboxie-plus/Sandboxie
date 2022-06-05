@@ -79,6 +79,8 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 
 _FX BOOLEAN Gui_InitConsole1(void)
 {
+    HMODULE module = NULL; // fix-me
+
     // NoSbieCons BEGIN
     if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
 

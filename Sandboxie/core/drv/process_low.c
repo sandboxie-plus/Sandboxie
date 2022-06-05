@@ -262,6 +262,23 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
 
         if (proc) {
 
+            __try {
+
+                PSID pSID = (PSID)(ULONG_PTR)parms[2];
+
+                if (pSID) {
+
+                    ProbeForRead(pSID, SECURITY_MAX_SID_SIZE, sizeof(UCHAR));
+
+                    ULONG sid_length = RtlLengthSid(pSID);
+                    proc->SandboxieLogonSid = Mem_Alloc(proc->pool, sid_length);
+                    memcpy(proc->SandboxieLogonSid, pSID, sid_length);
+                }
+
+            } __except (EXCEPTION_EXECUTE_HANDLER) {
+                status = GetExceptionCode();
+            }
+
             KeSetEvent(Process_Low_Event, 0, FALSE);
             status = STATUS_SUCCESS;
 

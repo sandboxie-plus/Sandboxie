@@ -153,7 +153,7 @@ static HANDLE Gui_DummyInputDesktopHandle = NULL;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitMisc(void)
+_FX BOOLEAN Gui_InitMisc(HMODULE module)
 {
     if (! Gui_OpenAllWinClasses) {
 

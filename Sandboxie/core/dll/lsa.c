@@ -28,7 +28,7 @@
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Lsa_Init_Common(const WCHAR *DllName);
+static BOOLEAN Lsa_Init_Common(const WCHAR *DllName, HMODULE module);
 
 static NTSTATUS Lsa_LsaRegisterLogonProcess(
     void *LogonProcessName, HANDLE *LsaHandle, void *SecurityMode);
@@ -59,7 +59,7 @@ static P_LsaRegisterLogonProcess    __sys_LsaRegisterLogonProcess   = NULL;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Lsa_Init_Common(const WCHAR *DllName)
+_FX BOOLEAN Lsa_Init_Common(const WCHAR *DllName, HMODULE module)
 {
     void *LsaRegisterLogonProcess;
 
@@ -111,7 +111,7 @@ _FX BOOLEAN Lsa_Init_Secur32(HMODULE module)
         return TRUE;
     }
 
-    return Lsa_Init_Common(DllName_secur32);
+    return Lsa_Init_Common(DllName_secur32, module);
 }
 
 
@@ -132,5 +132,5 @@ _FX BOOLEAN Lsa_Init_SspiCli(HMODULE module)
         return TRUE;
     }
 
-    return Lsa_Init_Common(DllName_sspicli);
+    return Lsa_Init_Common(DllName_sspicli, module);
 }

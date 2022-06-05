@@ -353,6 +353,8 @@ BOOLEAN Key_Delete_v2 = FALSE;
 
 _FX BOOLEAN Key_Init(void)
 {
+    HMODULE module = NULL;
+
     void *NtRenameKey;
     void *NtOpenKeyEx;
 

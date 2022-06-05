@@ -113,6 +113,14 @@ private:
 	HANDLE InjectLow_OpenProcess(void *_msg);
 
     //
+    // SbieLogin
+    //
+
+    bool GetSandboxieSID(const WCHAR* boxname, UCHAR* SandboxieLogonSid, DWORD dwSidSize);
+
+    void CleanUpSIDs();
+
+    //
     // data
     //
 

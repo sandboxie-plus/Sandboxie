@@ -70,8 +70,8 @@ typedef union _LDR_DLL_NOTIFICATION_DATA {
 //---------------------------------------------------------------------------
 
 
-static void Ldr_CallOneDllCallback(const UCHAR *ImageNameA, ULONG_PTR ImageBase);
-static void Ldr_CallOneDllCallbackXP(const UCHAR *ImageNameA, ULONG_PTR ImageBase);
+static void Ldr_CallOneDllCallback(const UCHAR *ImageNameA, ULONG_PTR ImageBase, BOOL LoadState);
+static void Ldr_CallOneDllCallbackXP(const UCHAR *ImageNameA, ULONG_PTR ImageBase, BOOL LoadState);
 static void Ldr_CallDllCallbacks(void);
 
 static NTSTATUS Ldr_LdrLoadDll(WCHAR *PathString, ULONG *DllFlags, UNICODE_STRING *ModuleName, HANDLE *ModuleHandle);
@@ -90,9 +90,9 @@ static NTSTATUS Ldr_LdrQueryImageFileExecutionOptions(
 static ULONG_PTR Ldr_NtApphelpCacheControl(
     ULONG_PTR Unknown1, ULONG_PTR Unknown2);
 
-void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase);
-void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase);
-void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase);
+void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadState);
+void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState);
+void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState);
 
 static void *Ldr_GetProcAddr_2(const WCHAR *DllName, const WCHAR *ProcName);
 
@@ -145,9 +145,9 @@ typedef NTSTATUS(*P_NtTerminateProcess)(HANDLE ProcessHandle, NTSTATUS ExitStatu
 
 typedef NTSTATUS(*P_NtLoadDriver)(UNICODE_STRING *RegistryPath);
 
-typedef void(*P_LdrDllCallback)(const UCHAR *ImageName, HMODULE ImageBase);
-typedef void(*P_LdrDllCallbackW)(const WCHAR *ImageName, HMODULE ImageBase);
-typedef void(*P_Ldr_CallOneDllCallback)(const UCHAR *ImageNameA, ULONG_PTR ImageBase);
+typedef void(*P_LdrDllCallback)(const UCHAR *ImageName, HMODULE ImageBase, BOOL LoadState);
+typedef void(*P_LdrDllCallbackW)(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState);
+typedef void(*P_Ldr_CallOneDllCallback)(const UCHAR *ImageNameA, ULONG_PTR ImageBase, BOOL LoadState);
 
 
 //---------------------------------------------------------------------------
@@ -280,13 +280,13 @@ void CALLBACK Ldr_LdrDllNotification(ULONG NotificationReason, PLDR_DLL_NOTIFICA
 
     if (NotificationReason == 1) {
         status = __sys_LdrLockLoaderLock(0, NULL, &LdrCookie);
-        Ldr_MyDllCallbackNew(NotificationData->Loaded.BaseDllName->Buffer, (HMODULE)NotificationData->Loaded.DllBase);
+        Ldr_MyDllCallbackNew(NotificationData->Loaded.BaseDllName->Buffer, (HMODULE)NotificationData->Loaded.DllBase, TRUE);
         __sys_LdrUnlockLoaderLock(0, LdrCookie);
 
         return;
     }
     else if (NotificationReason == 2) {
-        Ldr_MyDllCallbackNew(NotificationData->Unloaded.BaseDllName->Buffer, 0);
+        Ldr_MyDllCallbackNew(NotificationData->Unloaded.BaseDllName->Buffer, (HMODULE)NotificationData->Loaded.DllBase, FALSE);
     }
     return;
 }
@@ -382,6 +382,8 @@ BOOL LdrCheckImmersive()
 
 _FX BOOLEAN Ldr_Init()
 {
+    HMODULE module = NULL;
+
     UCHAR *ReadImageFileExecOptions;
 
     //
@@ -547,7 +549,7 @@ _FX BOOLEAN SbieDll_RegisterDllCallback(void *Callback)
 // Ldr_CallOneDllCallback
 //---------------------------------------------------------------------------
 
-_FX void Ldr_CallOneDllCallback(const UCHAR *ImageNameA, ULONG_PTR ImageBase)
+_FX void Ldr_CallOneDllCallback(const UCHAR *ImageNameA, ULONG_PTR ImageBase, BOOL LoadState)
 {
     ULONG i;
 
@@ -556,7 +558,7 @@ _FX void Ldr_CallOneDllCallback(const UCHAR *ImageNameA, ULONG_PTR ImageBase)
         if (!callback)
             break;
         __try {
-            ((P_LdrDllCallback)callback)(ImageNameA, (HMODULE)ImageBase);
+            ((P_LdrDllCallback)callback)(ImageNameA, (HMODULE)ImageBase, LoadState);
         }
         __except (EXCEPTION_EXECUTE_HANDLER) {
         }
@@ -564,7 +566,7 @@ _FX void Ldr_CallOneDllCallback(const UCHAR *ImageNameA, ULONG_PTR ImageBase)
 }
 
 
-_FX void Ldr_CallOneDllCallbackXP(const UCHAR *ImageNameA, ULONG_PTR ImageBase)
+_FX void Ldr_CallOneDllCallbackXP(const UCHAR *ImageNameA, ULONG_PTR ImageBase, BOOL LoadState)
 {
     ULONG i;
 
@@ -581,7 +583,7 @@ _FX void Ldr_CallOneDllCallbackXP(const UCHAR *ImageNameA, ULONG_PTR ImageBase)
             break;
 
         __try {
-            ((P_LdrDllCallbackW)callback)(ImageNameW, (HMODULE)ImageBase);
+            ((P_LdrDllCallbackW)callback)(ImageNameW, (HMODULE)ImageBase, LoadState);
         }
         __except (EXCEPTION_EXECUTE_HANDLER) {
         }
@@ -678,7 +680,8 @@ _FX void Ldr_CallDllCallbacks(void)
 
             if (!found) {
 
-                __my_Ldr_CallOneDllCallback(pOld->Path + pOld->NameOffset, 0);
+                __my_Ldr_CallOneDllCallback(pOld->Path + pOld->NameOffset,
+                    pNew->ImageBaseAddress, FALSE);
             }
         }
     }
@@ -724,7 +727,7 @@ _FX void Ldr_CallDllCallbacks(void)
             RtlFreeUnicodeString(&uni);
 
             __my_Ldr_CallOneDllCallback(pNew->Path + pNew->NameOffset,
-                pNew->ImageBaseAddress);
+                pNew->ImageBaseAddress, TRUE);
 
             if (OldState)
                 Ldr_SetDdagState_W8(pNew->ImageBaseAddress, OldState);
@@ -968,50 +971,54 @@ _FX ULONG_PTR Ldr_NtApphelpCacheControl(
 //---------------------------------------------------------------------------
 
 
-_FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase)
+_FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadState)
 {
     //
     // invoke our sub-modules as necessary
     //
-    if (ImageBase) {
 
-        DLL *dll = Ldr_Dlls;
-        while (dll->nameA) {
-            if (_stricmp(ImageName, dll->nameA) == 0 && (dll->state & 2) == 0) {
+    DLL *dll = Ldr_Dlls;
+    while (dll->nameA) {
+        if (_stricmp(ImageName, dll->nameA) == 0 && (dll->state & 2) == 0) {
+            if (LoadState) {
                 BOOLEAN ok = dll->init_func(ImageBase);
                 if (!ok)
                     SbieApi_Log(2318, dll->nameW);
-                break;
             }
-            ++dll;
+            else {
+                SbieDll_UnHookModule(ImageBase);
+            }
+            break;
         }
+        ++dll;
     }
 }
 
-_FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase)
+_FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState)
 {
     //
     // invoke our sub-modules as necessary
     //
-    if (ImageBase) {
 
-        DLL *dll = Ldr_Dlls;
-        while (dll->nameW) {
-            if (_wcsicmp(ImageName, dll->nameW) == 0 && (dll->state & 2) == 0) {
+    DLL *dll = Ldr_Dlls;
+    while (dll->nameW) {
+        if (_wcsicmp(ImageName, dll->nameW) == 0 && (dll->state & 2) == 0) {
+            if (LoadState) {
                 BOOLEAN ok = dll->init_func(ImageBase);
                 if (!ok)
                     SbieApi_Log(2318, dll->nameW);
-
-                break;
+            } else {
+                SbieDll_UnHookModule(ImageBase);
             }
-
-            ++dll;
+            break;
         }
+
+        ++dll;
     }
 }
 
 
-_FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase)
+_FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState)
 {
     //
     // invoke our sub-modules as necessary
@@ -1021,20 +1028,25 @@ _FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase)
     while (dll->nameW) {
         BOOLEAN ok;
         if (_wcsicmp(ImageName, dll->nameW) == 0 && (dll->state & 2) == 0) {
-            if (ImageBase && !dll->state) {
-                EnterCriticalSection(&Ldr_LoadedModules_CritSec);
-                dll->state = 1;
-                LeaveCriticalSection(&Ldr_LoadedModules_CritSec);
-                ok = dll->init_func(ImageBase);
-                if (!ok)
-                    SbieApi_Log(2318, dll->nameW);
-                break;
+            if (LoadState) {
+                if (!dll->state) {
+                    EnterCriticalSection(&Ldr_LoadedModules_CritSec);
+                    dll->state = 1;
+                    LeaveCriticalSection(&Ldr_LoadedModules_CritSec);
+                    ok = dll->init_func(ImageBase);
+                    if (!ok)
+                        SbieApi_Log(2318, dll->nameW);
+                }
             }
             else {
-                EnterCriticalSection(&Ldr_LoadedModules_CritSec);
-                dll->state = 0;
-                LeaveCriticalSection(&Ldr_LoadedModules_CritSec);
+                if (dll->state) {
+                    SbieDll_UnHookModule(ImageBase);
+                    EnterCriticalSection(&Ldr_LoadedModules_CritSec);
+                    dll->state = 0;
+                    LeaveCriticalSection(&Ldr_LoadedModules_CritSec);
+                }
             }
+            break;
         }
         ++dll;
     }

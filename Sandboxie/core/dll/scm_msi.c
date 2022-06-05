@@ -130,6 +130,7 @@ static HANDLE   Msi_ServerInUseEvent = NULL;
 
 _FX BOOLEAN Scm_SetupMsiHooks()
 {
+    HMODULE module = NULL;
 
     //while (!IsDebuggerPresent())
     //    Sleep(500);

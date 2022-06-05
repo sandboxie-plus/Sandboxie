@@ -119,6 +119,8 @@ __declspec(dllimport) NTSTATUS LdrGetDllHandle(
 
 _FX int Debug_Init(void)
 {
+    HMODULE module = NULL; // fix-me
+
     P_OutputDebugString OutputDebugStringW;
     P_OutputDebugString OutputDebugStringA;
     P_RtlSetLastWin32Error RtlSetLastWin32Error;

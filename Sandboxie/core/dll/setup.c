@@ -136,15 +136,15 @@ static P_CM_Add_Driver_Package_ExW  __sys_CM_Add_Driver_Package_ExW = NULL;
 //---------------------------------------------------------------------------
 
 
-#define DO_CALL_HOOK(name,devName)                              \
-    __sys_##name = SbieDll_Hook(#name, __sys_##name, devName);  \
+#define DO_CALL_HOOK(name,devName)                                      \
+    __sys_##name = SbieDll_Hook(#name, __sys_##name, devName, module);  \
     if (! __sys_##name) return FALSE;
 
-#define HOOK_AW(func)                                           \
-    DO_CALL_HOOK(func##A,Dev_##func##A);                        \
+#define HOOK_AW(func)                                                   \
+    DO_CALL_HOOK(func##A,Dev_##func##A);                                \
     DO_CALL_HOOK(func##W,Dev_##func##W);
 
-#define HOOK(func)                                              \
+#define HOOK(func)                                                      \
     DO_CALL_HOOK(func,Dev_##func);
 
 #define FIND_EP(x) __sys_##x = (P_##x) GetProcAddress(module, #x)

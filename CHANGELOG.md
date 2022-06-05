@@ -34,6 +34,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with box grouping [#1921](https://github.com/sandboxie-plus/Sandboxie/issues/1921) [#1920](https://github.com/sandboxie-plus/Sandboxie/issues/1920)
 - fixed issues when changing language [#1914](https://github.com/sandboxie-plus/Sandboxie/issues/1914)
 - fixed issue with BreakoutFodler [#1908](https://github.com/sandboxie-plus/Sandboxie/issues/1908)
+- fixed issue with sbiedll.dll for x86 exception handling
+- fixed issues with application specific hives (RegLoadAppKey) affecting Visual Studio [#1576](https://github.com/sandboxie-plus/Sandboxie/issues/1576)
+
 
 
 

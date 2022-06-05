@@ -248,12 +248,31 @@ static NTSTATUS Key_NtNotifyChangeMultipleKeys(
 static NTSTATUS Key_NtRenameKey(
     HANDLE KeyHandle, UNICODE_STRING *ReplacementName);
 
+
 static NTSTATUS Key_NtSaveKey(
     HANDLE KeyHandle, HANDLE FileHandle);
+
+static NTSTATUS Key_NtSaveKeyEx(
+    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags);
 
 static NTSTATUS Key_NtLoadKey(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
     OBJECT_ATTRIBUTES *SourceObjectAttributes);
+
+static NTSTATUS Key_NtLoadKey2(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags);
+
+static NTSTATUS Key_NtLoadKey3(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags,
+    PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unkown);
+
+static NTSTATUS Key_NtLoadKeyEx(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags,
+    HANDLE TrustClassKey, PVOID Reserved, PVOID ObjectContext, PVOID CallbackReserved, PIO_STATUS_BLOCK IoStatusBlock);
+
 
 NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 
@@ -274,8 +293,13 @@ static P_NtQueryMultipleValueKey    __sys_NtQueryMultipleValueKey   = NULL;
 static P_NtNotifyChangeKey          __sys_NtNotifyChangeKey         = NULL;
 static P_NtNotifyChangeMultipleKeys __sys_NtNotifyChangeMultipleKeys= NULL;
 static P_NtRenameKey                __sys_NtRenameKey               = NULL;
+
 static P_NtSaveKey                  __sys_NtSaveKey                 = NULL;
+static P_NtSaveKeyEx                __sys_NtSaveKeyEx               = NULL;
 static P_NtLoadKey                  __sys_NtLoadKey                 = NULL;
+static P_NtLoadKey2                 __sys_NtLoadKey2                = NULL;
+static P_NtLoadKey3                 __sys_NtLoadKey3                = NULL;
+static P_NtLoadKeyEx                __sys_NtLoadKeyEx               = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -353,8 +377,6 @@ BOOLEAN Key_Delete_v2 = FALSE;
 
 _FX BOOLEAN Key_Init(void)
 {
-    void *NtRenameKey;
-    void *NtOpenKeyEx;
 
     InitializeCriticalSection(&Key_Handles_CritSec);
 
@@ -394,19 +416,39 @@ _FX BOOLEAN Key_Init(void)
     SBIEDLL_HOOK(Key_,NtQueryMultipleValueKey);
     SBIEDLL_HOOK(Key_,NtNotifyChangeKey);
     SBIEDLL_HOOK(Key_,NtNotifyChangeMultipleKeys);
-    SBIEDLL_HOOK(Key_,NtSaveKey);
-    SBIEDLL_HOOK(Key_,NtLoadKey);
 
-    Dll_OsBuild = 2000;                 // Windows 2000
-
-    NtRenameKey = GetProcAddress(Dll_Ntdll, "NtRenameKey");
+    void* NtRenameKey = GetProcAddress(Dll_Ntdll, "NtRenameKey");
     if (NtRenameKey) {
         SBIEDLL_HOOK(Key_,NtRenameKey);
     }
 
-    NtOpenKeyEx = GetProcAddress(Dll_Ntdll, "NtOpenKeyEx");
+    void* NtOpenKeyEx = GetProcAddress(Dll_Ntdll, "NtOpenKeyEx");
     if (NtOpenKeyEx) {
         SBIEDLL_HOOK(Key_, NtOpenKeyEx);
+    }
+
+    if (!Dll_CompartmentMode) {
+        SBIEDLL_HOOK(Key_, NtSaveKey);
+
+        void* NtSaveKeyEx = GetProcAddress(Dll_Ntdll, "NtSaveKeyEx");
+        if (NtSaveKeyEx) {
+            SBIEDLL_HOOK(Key_,NtSaveKeyEx);
+        }
+
+        SBIEDLL_HOOK(Key_, NtLoadKey);
+
+        void* NtLoadKey2 = GetProcAddress(Dll_Ntdll, "NtLoadKey2");
+        if (NtLoadKey2) {
+            SBIEDLL_HOOK(Key_,NtLoadKey2);
+        }
+        void* NtLoadKey3 = GetProcAddress(Dll_Ntdll, "NtLoadKey3");
+        if (NtLoadKey3) {
+            SBIEDLL_HOOK(Key_,NtLoadKey3);
+        }
+        void* NtLoadKeyEx = GetProcAddress(Dll_Ntdll, "NtLoadKeyEx");
+        if (NtLoadKeyEx) {
+            SBIEDLL_HOOK(Key_,NtLoadKeyEx);
+        }
     }
 
     Dll_OsBuild = GET_PEB_IMAGE_BUILD;
@@ -1280,12 +1322,19 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 #define KEY_READ_WOW64  (KEY_READ |     \
             (DesiredAccess & (KEY_WOW64_32KEY | KEY_WOW64_64KEY)))
 
-        RtlInitUnicodeString(&objname, TruePath);
-        objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
+        //
+        // Application specific hives are loaded under \REGISTRY\A\ and can not be enumerated, or opened by name.
+        // MSDN: All operations on hives loaded by RegLoadAppKey have to be performed relative to the handle returned.
+        // So it is not possible to use TruePath but we can use the original handle relative ObjectAttributes here instead.
+        //
+
+        //RtlInitUnicodeString(&objname, TruePath);
+        //objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
 
         if (CreateOptions == tzuk) {
 
-            status = __sys_NtOpenKey(KeyHandle, DesiredAccess, &objattrs);
+            //status = __sys_NtOpenKey(KeyHandle, DesiredAccess, &objattrs);
+            status = __sys_NtOpenKey(KeyHandle, DesiredAccess, ObjectAttributes);
 
             if (status == STATUS_ACCESS_DENIED &&
                     DesiredAccess == MAXIMUM_ALLOWED) {
@@ -1296,8 +1345,11 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
         } else {
 
+            //status = __sys_NtCreateKey(
+            //    KeyHandle, DesiredAccess, &objattrs,
+            //    TitleIndex, Class, CreateOptions, Disposition);
             status = __sys_NtCreateKey(
-                KeyHandle, DesiredAccess, &objattrs,
+                KeyHandle, DesiredAccess, ObjectAttributes,
                 TitleIndex, Class, CreateOptions, Disposition);
 
             if (status == STATUS_ACCESS_DENIED &&
@@ -4486,11 +4538,24 @@ _FX NTSTATUS Key_NtSaveKey(
 
 
 //---------------------------------------------------------------------------
-// Key_NtLoadKey
+// Key_NtSaveKeyEx
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Key_NtLoadKey(
+_FX NTSTATUS Key_NtSaveKeyEx(
+    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags)
+{
+    SbieApi_Log(2205, L"NtSaveKeyEx");
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtLoadKeyImpl
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtLoadKeyImpl(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
     OBJECT_ATTRIBUTES *SourceObjectAttributes)
 {
@@ -4503,10 +4568,6 @@ _FX NTSTATUS Key_NtLoadKey(
     WCHAR *WorkPath;
     HANDLE FileHandle;
     FILE_LOAD_KEY_REQ *req;
-
-    status = __sys_NtLoadKey(TargetObjectAttributes, SourceObjectAttributes);
-    if (status != STATUS_PRIVILEGE_NOT_HELD)
-        return status;
 
     //
     // get the full paths for the registry key and hive file
@@ -4602,6 +4663,90 @@ _FX NTSTATUS Key_NtLoadKey(
 
     SetLastError(LastError);
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtLoadKey
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtLoadKey(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes)
+{
+    NTSTATUS status;
+
+    status = __sys_NtLoadKey(TargetObjectAttributes, SourceObjectAttributes);
+    if (status != STATUS_PRIVILEGE_NOT_HELD)
+        return status;
+
+    return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtLoadKey2
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtLoadKey2(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags)
+{
+    NTSTATUS status;
+
+    status = __sys_NtLoadKey2(TargetObjectAttributes, SourceObjectAttributes, Flags);
+    if (status != STATUS_PRIVILEGE_NOT_HELD)
+        return status;
+
+    return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtLoadKey3
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtLoadKey3(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags,
+    PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unkown)
+{
+    NTSTATUS status;
+
+    status = __sys_NtLoadKey3(TargetObjectAttributes, SourceObjectAttributes, Flags,
+        LoadArguments, LoadArgumentCount, DesiredAccess, KeyHandle, Unkown);
+    if (status != STATUS_PRIVILEGE_NOT_HELD)
+        return status;
+
+    //return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
+    SbieApi_Log(2205, L"NtLoadKey3");
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtLoadKeyEx
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtLoadKeyEx(
+    OBJECT_ATTRIBUTES *TargetObjectAttributes,
+    OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags,
+    HANDLE TrustClassKey, PVOID Reserved, PVOID ObjectContext, PVOID CallbackReserved, PIO_STATUS_BLOCK IoStatusBlock)
+{
+    NTSTATUS status;
+
+    status = __sys_NtLoadKeyEx(TargetObjectAttributes, SourceObjectAttributes, Flags,
+        TrustClassKey, Reserved, ObjectContext, CallbackReserved, IoStatusBlock);
+    if (status != STATUS_PRIVILEGE_NOT_HELD)
+        return status;
+
+    //return Key_NtLoadKeyImpl(TargetObjectAttributes, SourceObjectAttributes);
+    SbieApi_Log(2205, L"NtLoadKeyEx");
+    return STATUS_SUCCESS;
 }
 
 

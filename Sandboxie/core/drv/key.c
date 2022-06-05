@@ -247,6 +247,13 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
         NULL
     };
 #endif
+    static const WCHAR *openkeys[] = {
+        // Application Hives
+        // https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regloadappkeya
+        // https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/filtering-registry-operations-on-application-hives
+        L"\\REGISTRY\\A\\*", 
+        NULL
+    };
 
     BOOLEAN ok;
 
@@ -295,6 +302,11 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
             Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
             return FALSE;
         }
+    }
+
+    for (i = 0; openkeys[i] && ok; ++i) {
+        ok = Process_AddPath(
+            proc, &proc->open_key_paths, NULL, TRUE, openkeys[i], FALSE);
     }
 
     //

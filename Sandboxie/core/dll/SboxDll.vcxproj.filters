@@ -396,6 +396,9 @@
     <Filter Include="obj">
       <UniqueIdentifier>{05955a21-494a-4624-854e-d7c9b1e33401}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common\ntdll">
+      <UniqueIdentifier>{3306e464-8b2d-48cb-8d8f-0d222f17e31d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="pstore.idl">
@@ -406,10 +409,21 @@
     <CustomBuild Include="util_asm.asm">
       <Filter>hook</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\common\NtCRT\x86\except_handler3.asm">
-      <Filter>common</Filter>
-    </CustomBuild>
     <CustomBuild Include="..\..\common\NtCRT\x64\ntdll.def" />
     <CustomBuild Include="..\..\common\NtCRT\x86\ntdll.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\common\NtCRT\x86\ntdll\eh3valid_user.obj">
+      <Filter>common\ntdll</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\x86\ntdll\exsup.obj">
+      <Filter>common\ntdll</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\x86\ntdll\exsup2.obj">
+      <Filter>common\ntdll</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\x86\ntdll\exsup3.obj">
+      <Filter>common\ntdll</Filter>
+    </Object>
   </ItemGroup>
 </Project>

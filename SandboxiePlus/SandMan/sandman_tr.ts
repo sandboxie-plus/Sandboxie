@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr">
 <context>
+    <name>CCertificatePage</name>
+    <message>
+        <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have a supporter certificate, please fill it into the field below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start evaluation without a certificate for a limited period of time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CCleanUpJob</name>
     <message>
         <source>Deleting Content</source>
@@ -33,6 +56,67 @@
     <message>
         <source>Create Shortcut to sandbox %1</source>
         <translation type="unfinished">%1 korumalı kutusuna kısayol oluştur</translation>
+    </message>
+</context>
+<context>
+    <name>CFinishPage</name>
+    <message>
+        <source>Complete your configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep Sandboxie-Plus up to date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CIntroPage</name>
+    <message>
+        <source>Introduction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select how you would like to use Sandboxie-Plus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Personally, for private non-commercial use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Commercially, for business or enterprise use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: this option is immutable</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMonitorModel</name>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tür</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Durum</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Değer</translation>
+    </message>
+    <message>
+        <source>Count</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -761,6 +845,10 @@ Full path: %4</source>
         <source>Delete everything, including all snapshots</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Close and Disable Immediate Recovery for this box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CResMonModel</name>
@@ -871,7 +959,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Yeni Sandboxie-Plus şu konuma indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Kuruluma başlamak istiyor musunuz? Herhangi bir program korumalı kutu içinde çalışıyorsa, sonlandırılacaktır.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Yeni Sandboxie-Plus şu konuma indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Kuruluma başlamak istiyor musunuz? Herhangi bir program korumalı kutu içinde çalışıyorsa, sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
@@ -1081,7 +1169,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>Loaded Config: %1</source>
-        <translation>Yüklü Yapılandırma: %1</translation>
+        <translation type="vanished">Yüklü Yapılandırma: %1</translation>
     </message>
     <message>
         <source>Reload ini file</source>
@@ -1353,7 +1441,7 @@ Full path: %4</source>
     </message>
     <message>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.</source>
-        <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.</translation>
+        <translation type="vanished">Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sandboxie-Plus is an open source continuation of Sandboxie.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</source>
@@ -1530,10 +1618,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pause Forced Programs Rules</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uninstall All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1547,10 +1631,6 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Auto deleting content of %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto Deleting %1 content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1633,6 +1713,64 @@ No will choose: %2</source>
         <source>There is no updated certificate available.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause Forcing Programs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Setup Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to install update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to open web browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - Driver/Service NOT Running!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - Deleting Sandbox Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Deleting %1 Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current Config: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie config has been reloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No new updates found, your Sandboxie-Plus is up-to-date.
+
+Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSbieModel</name>
@@ -1650,7 +1788,7 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Başlangıç Zamanı</translation>
+        <translation type="vanished">Başlangıç Zamanı</translation>
     </message>
     <message>
         <source>Process ID</source>
@@ -1663,6 +1801,10 @@ No will choose: %2</source>
     <message>
         <source>Title</source>
         <translation>Başlık</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2121,10 +2263,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This Group name is already in use.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2169,15 +2307,19 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deleting %1 content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Also delete all Snapshots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This name is already used for a Box Group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This name is already used for a Sandbox.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2306,6 +2448,60 @@ No will choose: %2</source>
         <source>This certificate is unfortunately outdated.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sandboxed Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSetupWizard</name>
+    <message>
+        <source>Setup Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The decision you make here will affect which page you get to see next.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This help is likely not to be of any help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, I already gave all the help I could.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Setup Wizard Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CShellPage</name>
+    <message>
+        <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure how Sandboxie-Plus should integrate with your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start UI with Windows</source>
+        <translation type="unfinished">Windows başlangıcında kullanıcı arayüzünü (ui) başlat</translation>
+    </message>
+    <message>
+        <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
+        <translation type="unfinished">Dosya gezgini bağlam menüsüne &apos;Korumalı kutuda başlat&apos; seçeneği ekle</translation>
+    </message>
+    <message>
+        <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSnapshotsWindow</name>
@@ -2354,10 +2550,6 @@ No will choose: %2</source>
     </message>
     <message>
         <source>Process %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thread %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2446,6 +2638,56 @@ No will choose: %2</source>
     <message>
         <source>Unknown</source>
         <translation type="unfinished">Bilinmeyen</translation>
+    </message>
+    <message>
+        <source>Monitor mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CUIPage</name>
+    <message>
+        <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the user interface style you prefer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Advanced UI for experts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Simple UI for beginners</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Bright Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Dark Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CWFPPage</name>
+    <message>
+        <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Windows Filtering Platform (WFP) support</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3252,10 +3494,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3454,6 +3692,18 @@ The process match level has a higher priority than the specificity and describes
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Allow to read memory of unsandboxed processes (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue message 2111 when a process access is denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow use of nested job objects (works on Windows 8 and later)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopUpWindow</name>
@@ -3605,7 +3855,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>General Options</source>
-        <translation type="vanished">Genel Ayarlar</translation>
+        <translation>Genel Ayarlar</translation>
     </message>
     <message>
         <source>Program Restrictions</source>
@@ -3613,7 +3863,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>Restart required (!)</source>
-        <translation>Yeniden başlatma gerekir (!)</translation>
+        <translation type="vanished">Yeniden başlatma gerekir (!)</translation>
     </message>
     <message>
         <source>Tray options</source>
@@ -3868,10 +4118,6 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Only Administrator user accounts can use Pause Forced Programs Rules command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit ini Section</source>
         <translation type="unfinished">İni bölümünü düzenle</translation>
     </message>
@@ -3893,6 +4139,18 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <source>In the future, don&apos;t notify about certificate expiration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Updates automatically</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

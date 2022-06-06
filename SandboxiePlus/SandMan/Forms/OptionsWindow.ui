@@ -2086,7 +2086,7 @@ The process match level has a higher priority than the specificity and describes
                  <item row="4" column="1" colspan="2">
                   <widget class="QCheckBox" name="chkNestedJobs">
                    <property name="text">
-                    <string>Allow use of nested job objects (experimental, works on Windows 8 and later)</string>
+                    <string>Allow use of nested job objects (works on Windows 8 and later)</string>
                    </property>
                   </widget>
                  </item>

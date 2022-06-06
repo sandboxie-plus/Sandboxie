@@ -935,7 +935,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="104"/>
         <source>Delete everything, including all snapshots</source>
-        <translation>Elimina tutto, includendo tutte le istantanee</translation>
+        <translation>Elimina tutto, comprese le istantanee</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="130"/>
@@ -1111,7 +1111,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="529"/>
         <source>Trace Log</source>
-        <translation>Registro di Accesso</translation>
+        <translation>Log di accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="535"/>
@@ -1272,12 +1272,12 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="378"/>
         <source>Cleanup Message Log</source>
-        <translation>Pulisci registro dei messaggi</translation>
+        <translation>Pulisci log dei messaggi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <source>Cleanup Trace Log</source>
-        <translation>Pulisci registro di accesso</translation>
+        <translation>Pulisci log di accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="381"/>
@@ -1313,7 +1313,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="393"/>
         <source>Trace Logging</source>
-        <translation>Attiva Registro di Accesso</translation>
+        <translation>Attiva log di accesso</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="397"/>
@@ -3969,7 +3969,7 @@ Il livello di corrispondenza del processo ha una priorità più alta della speci
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2542"/>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation>Limita il registro di Accesso risorse ai soli amministratori</translation>
+        <translation>Limita il log di accesso risorse ai soli amministratori</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2549"/>
@@ -4023,7 +4023,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2640"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation>Registra tutti i SetError nel registro di accesso (genera molto output)</translation>
+        <translation>Registra tutti i SetError nel log di accesso (genera molto output)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2694"/>
@@ -4038,12 +4038,12 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2756"/>
         <source>Access Tracing</source>
-        <translation>Registro di accesso</translation>
+        <translation>Log di accesso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2660"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation>Registra output di debug nel registro di accesso</translation>
+        <translation>Registra output di debug nel log di accesso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
@@ -4130,7 +4130,7 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>Registra tutti gli eventi di accesso visti dal driver nel registro di accesso.
+        <translation>Registra tutti gli eventi di accesso visti dal driver nel log di accesso.
 
 Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli eventi di accesso
 È possibile personalizzare la registrazione specificando nel file ini:
@@ -4151,7 +4151,7 @@ Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli ev
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2729"/>
         <source>Resource Access Monitor</source>
-        <translation>Monitoraggio di accesso</translation>
+        <translation>Monitoraggio risorse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2777"/>

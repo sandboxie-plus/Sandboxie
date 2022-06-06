@@ -61,6 +61,8 @@ public:
 	QIcon				GetBoxIcon(int boxType, bool inUse = false, bool inBusy = false);
 	QString				GetBoxDescription(int boxType);
 
+	void				SetViewMode(bool bAdvanced);
+	
 	bool				CheckCertificate();
 
 	void				UpdateTheme();

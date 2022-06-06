@@ -133,7 +133,7 @@ _FX BOOLEAN SysInfo_Init(void)
     SysInfo_UseSbieJob = !Gui_OpenAllWinClasses && !SbieApi_QueryConfBool(NULL, L"NoAddProcessToJob", FALSE);
 
     if (Dll_OsBuild >= 8400)
-        SysInfo_CanUseJobs = SbieApi_QueryConfBool(NULL, L"AllowBoxedJobs", FALSE);
+        SysInfo_CanUseJobs = SbieApi_QueryConfBool(NULL, L"AllowBoxedJobs", TRUE);
 
     SBIEDLL_HOOK(SysInfo_, NtCreateJobObject);
     SBIEDLL_HOOK(SysInfo_, NtOpenJobObject);

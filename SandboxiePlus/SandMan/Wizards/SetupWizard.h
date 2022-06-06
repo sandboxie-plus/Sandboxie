@@ -14,7 +14,7 @@ class CSetupWizard : public QWizard
     Q_OBJECT
 
 public:
-    enum { Page_Intro, Page_Certificate, Page_Shell, Page_WFP, Page_Finish };
+    enum { Page_Intro, Page_Certificate, Page_UI, Page_Shell, Page_WFP, Page_Finish };
 
     CSetupWizard(QWidget *parent = nullptr);
 
@@ -40,8 +40,8 @@ public:
 
 private:
     QLabel* m_pLabel;
-    QRadioButton *m_pPersonalRadio;
-    QRadioButton *m_pBusinessRadio;
+    QRadioButton *m_pPersonal;
+    QRadioButton *m_pBusiness;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +64,31 @@ private:
     QLabel* m_pTopLabel;
     QPlainTextEdit* m_pCertificate;
     QCheckBox* m_pEvaluate;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CUIPage
+// 
+
+class CUIPage : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    CUIPage(QWidget *parent = nullptr);
+
+    void initializePage() override;
+    int nextId() const override;
+
+private slots:
+    void UpdatePreview();
+
+private:
+    QRadioButton *m_pSimple;
+    QRadioButton *m_pAdvanced;
+    QLabel* m_pPreview;
+    QRadioButton* m_pBrightMode;
+    QRadioButton* m_pDarkMode;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

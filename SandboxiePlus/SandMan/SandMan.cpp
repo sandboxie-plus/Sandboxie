@@ -1188,9 +1188,7 @@ void CSandMan::OnStatusChanged()
 
 		int WizardLevel = theConf->GetBool("Options/WizardLevel", 0);
 		if (WizardLevel == 0) {
-			if (CSetupWizard::ShowWizard())
-				UpdateSettings();
-			else // if user canceled mark that and not show again
+			if (!CSetupWizard::ShowWizard()) // if user canceled mark that and not show again
 				theConf->SetValue("Options/WizardLevel", -1);
 		}
 	}
@@ -1748,8 +1746,7 @@ void CSandMan::OnMaintenance()
 	}
 
 	else if (sender() == m_pSetupWizard) {
-		if (CSetupWizard::ShowWizard())
-			UpdateSettings();
+		CSetupWizard::ShowWizard();
 		return;
 	}
 
@@ -1926,6 +1923,8 @@ void CSandMan::UpdateSettings()
 
 	if (m_Language != theConf->GetString("Options/UiLanguage")) 
 	{
+		theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
+
 		LoadLanguage();
 
 		QTreeViewEx::m_ResetColumns = tr("Reset Columns");
@@ -1939,11 +1938,14 @@ void CSandMan::UpdateSettings()
 		m_pMainLayout->removeWidget(m_pLogSplitter);
 		m_pLogSplitter->deleteLater();
 		CreateView();
+		m_pBoxView->ReloadUserConfig();
 
 		m_pTrayMenu->deleteLater();
 		CreateTrayMenu();
 
 		UpdateLabel();
+
+		m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
 	}
 }
 

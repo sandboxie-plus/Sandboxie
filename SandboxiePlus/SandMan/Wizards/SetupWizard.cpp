@@ -5,6 +5,7 @@
 #include "../Windows/SettingsWindow.h"
 #include "../SandMan.h"
 #include "Helpers/WinAdmin.h"
+#include <QButtonGroup>
 
 QString emailRegExp = QStringLiteral(".+@.+");
 
@@ -13,6 +14,7 @@ CSetupWizard::CSetupWizard(QWidget *parent)
 {
     setPage(Page_Intro, new CIntroPage);
     setPage(Page_Certificate, new CCertificatePage);
+    setPage(Page_UI, new CUIPage);
     setPage(Page_Shell, new CShellPage);
     setPage(Page_WFP, new CWFPPage);
     setPage(Page_Finish, new CFinishPage);
@@ -58,6 +60,16 @@ bool CSetupWizard::ShowWizard()
     //QString Certificate = wizard.field("useCertificate").toString();
     //bool isEvaluate = wizard.field("isEvaluate").toBool();
 
+    if (wizard.field("useAdvanced").toBool())
+        theConf->SetValue("Options/AdvancedView", true);
+    else if (wizard.field("useSimple").toBool())
+        theConf->SetValue("Options/AdvancedView", false);
+    
+    if (wizard.field("useBrightMode").toInt())
+        theConf->SetValue("Options/UseDarkTheme", 0);
+    else if (wizard.field("useDarkMode").toInt())
+        theConf->SetValue("Options/UseDarkTheme", 1);
+
     AutorunEnable(wizard.field("isAutoStart").toBool());
     
     if (wizard.field("useContecxtMenu").toBool())
@@ -76,6 +88,10 @@ bool CSetupWizard::ShowWizard()
     }
 
     theConf->SetValue("Options/WizardLevel", 1);
+
+    theGUI->SetViewMode(theConf->GetBool("Options/AdvancedView", true));
+    theGUI->UpdateSettings();
+    
 
     return true;
 }
@@ -105,15 +121,15 @@ CIntroPage::CIntroPage(QWidget *parent)
     m_pLabel = new QLabel(tr("Select how you would like to use Sandboxie-Plus"));
     layout->addWidget(m_pLabel);
 
-    m_pPersonalRadio = new QRadioButton(tr("&Personally, for private non-commercial use"));
-    layout->addWidget(m_pPersonalRadio);
-    connect(m_pPersonalRadio, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
-    registerField("usePersonal", m_pPersonalRadio);
+    m_pPersonal = new QRadioButton(tr("&Personally, for private non-commercial use"));
+    layout->addWidget(m_pPersonal);
+    connect(m_pPersonal, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
+    registerField("usePersonal", m_pPersonal);
 
-    m_pBusinessRadio = new QRadioButton(tr("&Commercially, for business or enterprise use"));
-    layout->addWidget(m_pBusinessRadio);
-    connect(m_pBusinessRadio, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
-    registerField("useBusiness", m_pBusinessRadio);
+    m_pBusiness = new QRadioButton(tr("&Commercially, for business or enterprise use"));
+    layout->addWidget(m_pBusiness);
+    connect(m_pBusiness, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
+    registerField("useBusiness", m_pBusiness);
 
     QLabel* pNote = new QLabel(tr("Note: this option is immutable"));
     layout->addWidget(pNote);
@@ -121,10 +137,10 @@ CIntroPage::CIntroPage(QWidget *parent)
 
     if (BusinessUse != 2) {
         m_pLabel->setEnabled(false);
-        m_pPersonalRadio->setChecked(BusinessUse == 0);
-        m_pPersonalRadio->setEnabled(false);
-        m_pBusinessRadio->setChecked(BusinessUse == 1);
-        m_pBusinessRadio->setEnabled(false);
+        m_pPersonal->setChecked(BusinessUse == 0);
+        m_pPersonal->setEnabled(false);
+        m_pBusiness->setChecked(BusinessUse == 1);
+        m_pBusiness->setEnabled(false);
         pNote->setEnabled(false);
     }
 
@@ -135,12 +151,12 @@ int CIntroPage::nextId() const
 {
     if(g_Certificate.isEmpty())
         return CSetupWizard::Page_Certificate;
-    return CSetupWizard::Page_Shell;
+    return CSetupWizard::Page_UI;
 }
 
 bool CIntroPage::isComplete() const 
 {
-    if (m_pLabel->isEnabled() && !m_pPersonalRadio->isChecked() && !m_pBusinessRadio->isChecked())
+    if (m_pLabel->isEnabled() && !m_pPersonal->isChecked() && !m_pBusiness->isChecked())
         return false;
     return QWizardPage::isComplete();
 }
@@ -217,7 +233,7 @@ void CCertificatePage::initializePage()
 
 int CCertificatePage::nextId() const
 {
-    return CSetupWizard::Page_Shell;
+    return CSetupWizard::Page_UI;
 }
 
 bool CCertificatePage::isComplete() const 
@@ -238,6 +254,111 @@ bool CCertificatePage::validatePage()
 		return CSettingsWindow::ApplyCertificate(Certificate, this);
     }
     return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CUIPage
+// 
+
+CUIPage::CUIPage(QWidget* parent)
+    : QWizardPage(parent)
+{
+    setTitle(tr("Configure <b>Sandboxie-Plus</b> UI"));
+    setSubTitle(tr("Sellect what UI style you preffer"));
+
+    QGridLayout* layout = new QGridLayout;
+
+    m_pAdvanced = new QRadioButton(tr("&Advanced UI for experts"));
+    m_pAdvanced->setChecked(theConf->GetBool("Options/AdvancedView", true));
+    layout->addWidget(m_pAdvanced, 0, 0);
+    registerField("useAdvanced", m_pAdvanced);
+
+    m_pSimple = new QRadioButton(tr("&Simple UI for beginners"));
+    m_pSimple->setChecked(!theConf->GetBool("Options/AdvancedView", true));
+    layout->addWidget(m_pSimple, 1, 0);
+    registerField("useSimple", m_pSimple);
+
+    QButtonGroup *buttonGroup1 = new QButtonGroup();
+    buttonGroup1->addButton(m_pAdvanced, 0);
+    buttonGroup1->addButton(m_pSimple, 1);
+    connect(buttonGroup1, SIGNAL(buttonClicked(int)), this, SLOT(UpdatePreview()));
+
+    QLabel* pDummy = new QLabel();
+    pDummy->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    layout->addWidget(pDummy, 0, 1, 5, 4);
+    pDummy->setStyleSheet("QLabel { background-color : " + QApplication::palette().color(QPalette::Base).name() + "; }");
+
+    m_pPreview = new QLabel();
+    m_pPreview->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    m_pPreview->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    layout->addWidget(m_pPreview, 0, 1, 5, 4);
+
+    QWidget* pSpacer = new QWidget();
+	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    layout->addWidget(pSpacer, 2, 0);
+
+    m_pBrightMode = new QRadioButton(tr("Use Bright Mode"));
+    layout->addWidget(m_pBrightMode, 3, 0);
+    registerField("useBrightMode", m_pBrightMode);
+
+    m_pDarkMode = new QRadioButton(tr("Use Dark Mode"));
+    layout->addWidget(m_pDarkMode, 4, 0);
+    registerField("useDarkMode", m_pDarkMode);
+
+    QButtonGroup *buttonGroup2 = new QButtonGroup();
+    buttonGroup2->addButton(m_pBrightMode, 0);
+    buttonGroup2->addButton(m_pDarkMode, 1);
+    connect(buttonGroup2, SIGNAL(buttonClicked(int)), this, SLOT(UpdatePreview()));
+
+
+
+    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 1, 1, 1);
+    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 2, 1, 1);
+    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 3, 1, 1);
+    layout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 4, 1, 1);
+
+    setLayout(layout);
+}
+
+void CUIPage::initializePage() 
+{ 
+    QTimer::singleShot(10, this, SLOT(UpdatePreview()));
+}
+
+void CUIPage::UpdatePreview()
+{
+    bool bDark;
+    if (m_pDarkMode->isChecked())
+        bDark = true;
+    else if (m_pBrightMode->isChecked())
+        bDark = false;
+    else { // same as os
+        QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+        bDark = (settings.value("AppsUseLightTheme") == 0);
+    }
+
+    QPixmap preview;
+    if(m_pAdvanced->isChecked() && !bDark)
+        preview = QPixmap::fromImage(QImage(":/Assets/Advanced.png"));
+    else if(m_pAdvanced->isChecked() && bDark)
+        preview =  QPixmap::fromImage(QImage(":/Assets/AdvancedD.png"));
+    else if(m_pSimple->isChecked() && !bDark)
+        preview = QPixmap::fromImage(QImage(":/Assets/Simple.png"));
+    else if(m_pSimple->isChecked() && bDark)
+        preview = QPixmap::fromImage(QImage(":/Assets/SimpleD.png"));
+
+    //QRect rect(0, 0, m_pPreview->width(), m_pPreview->height());
+    //m_pPreview->setPixmap(preview.scaled(preview.width()*5/10, preview.height()*5/10, Qt::KeepAspectRatio, Qt::SmoothTransformation).copy(rect));
+    //m_pPreview->setPixmap(preview.scaled(min(m_pPreview->width(), preview.width()), min(m_pPreview->height(), preview.height()), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    //m_pPreview->setPixmap(preview);
+    //m_pPreview->setPixmap(preview.scaled(preview.width()*7/10, preview.height()*7/10, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    m_pPreview->setPixmap(preview.scaled(min(preview.width(), max(preview.width()*7/10, m_pPreview->width())), 
+        min(preview.height(),max(preview.height()*7/10, m_pPreview->height())), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+
+int CUIPage::nextId() const
+{
+    return CSetupWizard::Page_Shell;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -299,7 +420,7 @@ CWFPPage::CWFPPage(QWidget *parent)
     layout->addWidget(pLabel);
 
     m_pUseWFP = new QCheckBox(tr("Enable Windows Filtering Platform (WFP) support"));
-    m_pUseWFP->setChecked(false);
+    m_pUseWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
     layout->addWidget(m_pUseWFP);
     registerField("useWFP", m_pUseWFP);
 

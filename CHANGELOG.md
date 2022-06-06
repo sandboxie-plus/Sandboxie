@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - changed Move Box behaviour [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
 - improved implementation of the PreferExternalManifest option
 - Win32k hooks are now by default only used for Edge and Chromium apps as they cause issues with other software [#1902](https://github.com/sandboxie-plus/Sandboxie/issues/1902) [#1912](https://github.com/sandboxie-plus/Sandboxie/issues/1912) [#1897](https://github.com/sandboxie-plus/Sandboxie/issues/1897)
-- "AllowBoxedJobs=y" is not the default
+- "AllowBoxedJobs=y" is now the default behaviour
 
 ### Fixed
 - fixed Edge issue with Windows 11 after KB5014019

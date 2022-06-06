@@ -264,7 +264,7 @@ CUIPage::CUIPage(QWidget* parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Configure <b>Sandboxie-Plus</b> UI"));
-    setSubTitle(tr("Sellect what UI style you preffer"));
+    setSubTitle(tr("Select the user interface style you prefer."));
 
     QGridLayout* layout = new QGridLayout;
 

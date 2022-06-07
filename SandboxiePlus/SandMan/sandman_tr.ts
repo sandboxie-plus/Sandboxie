@@ -587,14 +587,6 @@
         <source>Please enter the command line to be executed</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Select Executable File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Executable Files (*.exe)</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CPopUpMessage</name>
@@ -1762,14 +1754,6 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Removed Shortcut: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Added Shortcut to: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Current Config: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1785,10 +1769,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The evaluation periode has expired!!!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2335,19 +2315,11 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start Menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This name is already used for a Box Group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This name is already used for a Sandbox.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(Host) Start Menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2474,18 +2446,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <source>This certificate is unfortunately outdated.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t integrate links</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>As sub group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fully integrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2691,7 +2651,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sellect what UI style you preffer</source>
+        <source>Select the user interface style you prefer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2846,7 +2806,7 @@ Dosyalara erişim için tek tek tüm programlara uygulamak yerine &apos;Tümün�
     </message>
     <message>
         <source>Forced Programs</source>
-        <translation type="vanished">Zorlanmış Programlar</translation>
+        <translation>Zorlanmış Programlar</translation>
     </message>
     <message>
         <source>Add Wnd Class</source>
@@ -3534,10 +3494,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Allow use of nested job objects (experimental, works on Windows 8 and later)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3563,6 +3519,10 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Admin Rights</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3733,47 +3693,15 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Security</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Security Enhancements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use the original Token only for approved NT System Calls</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Restrict access driver/device access to approved once only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable all Security Enhancements (make security hardened box)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Issue message 2111 when a process access is denided</source>
+        <source>Issue message 2111 when a process access is denied</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Program Control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force Programs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breakout Programs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</source>
+        <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4214,23 +4142,7 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Menu Integration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scan shell folders and offer links in run menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Integrate boxes with Host Start Menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
+        <source>Count and display the disk space occupied by each sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

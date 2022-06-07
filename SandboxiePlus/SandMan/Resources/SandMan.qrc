@@ -87,4 +87,10 @@
         <file alias="Full6">Boxes/sandbox-o-full.png</file>
         <file alias="Busy">Boxes/BusyOverlay.png</file>
     </qresource>
+    <qresource prefix="/Assets">
+        <file>Advanced.png</file>
+        <file>AdvancedD.png</file>
+        <file>Simple.png</file>
+        <file>SimpleD.png</file>
+    </qresource>
 </RCC>

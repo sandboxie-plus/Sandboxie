@@ -80,7 +80,7 @@ protected:
 
     HANDLE GetJobObject(const WCHAR *boxname);
 
-    bool GetWindowStationAndDesktopName(WCHAR *out_name, HANDLE* out_winsta, HANDLE* out_desk);
+    bool GetWindowStationAndDesktopName(WCHAR *out_name);
 
 protected:
 

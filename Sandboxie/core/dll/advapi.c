@@ -112,11 +112,8 @@ typedef BOOL (*P_SaferComputeTokenFromLevel)(
 typedef ULONG (*P_GetEffectiveRightsFromAcl)(
     PACL pacl, void *pTrustee, PACCESS_MASK pAccessRights);
 
-//typedef BOOL (*P_EnumWindowStations) (WINSTAENUMPROC lpEnumFunc, LPARAM lParam);
-//typedef HANDLE (*P_OpenWindowStationW) (LPCWSTR lpszWinSta, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
-//
-//typedef BOOL (*P_EnumDesktopsW) (HWINSTA hwinsta, DESKTOPENUMPROCW lpEnumFunc, LPARAM lParam);
-//typedef HANDLE (*P_OpenDesktopW) (LPCWSTR lpszDesktop, DWORD dwFlags, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
+typedef BOOL (*P_EnumWindowStations) (_In_ WINSTAENUMPROC lpEnumFunc, _In_ LPARAM lParam);
+typedef HANDLE (*P_OpenWindowStationW) (LPCWSTR lpszWinSta, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
 
 
 //---------------------------------------------------------------------------
@@ -158,12 +155,8 @@ typedef ULONG (*P_GetEffectiveRightsFromAcl)(
        P_SaferComputeTokenFromLevel __sys_SaferComputeTokenFromLevel = NULL;
 
        P_GetEffectiveRightsFromAcl __sys_GetEffectiveRightsFromAclW = NULL;
-
-       //P_EnumWindowStations     __sys_EnumWindowStationsW       = NULL;
-       //P_OpenWindowStationW     __sys_OpenWindowStationW        = NULL;
-
-//extern P_EnumDesktopsW          __sys_EnumDesktopsW;
-//extern P_OpenDesktopW           __sys_OpenDesktopW;
+       P_EnumWindowStations     __sys_EnumWindowStationsW       = NULL;
+       P_OpenWindowStationW     __sys_OpenWindowStationW        = NULL;
 
 
 static HMODULE AdvApi_Module = NULL;
@@ -496,8 +489,12 @@ _FX ULONG AdvApi_CreateRestrictedToken(
 
 }
 
-/*HANDLE Sandboxie_WinSta = 0;
-HANDLE Sandboxie_Desktop = 0;
+
+HANDLE Sandboxie_WinSta = 0;
+
+BOOL CALLBACK myEnumWindowStationProc(
+    _In_ LPTSTR lpszWindowStation,
+    _In_ LPARAM lParam);
 
 // Get Sandbox Dummy WindowStation Handle
 BOOL CALLBACK myEnumWindowStationProc(
@@ -514,45 +511,12 @@ BOOL CALLBACK myEnumWindowStationProc(
     return TRUE;
 }
 
-BOOL CALLBACK myEnumDesktopsProc(
-    _In_ LPTSTR lpszDesktop,
-    _In_ LPARAM lParam)
-{
-    if ((!lpszDesktop) || (!__sys_OpenDesktopW)) {
-        return FALSE;
-    }
-    if (!_wcsnicmp(lpszDesktop, L"Sandbox", 7)) {
-        const ACCESS_MASK DESKTOP_ALL_ACCESS = 0x1FF; // see WinUser.h
-        Sandboxie_Desktop = __sys_OpenDesktopW(lpszDesktop, 0, FALSE, DESKTOP_ALL_ACCESS);
-        return FALSE;
-    }
-    return TRUE;
-}
-
-
-_FX VOID OpenWinSta()
-{
-    if (!Sandboxie_WinSta) {
-        __sys_EnumWindowStationsW = (P_EnumWindowStations)Ldr_GetProcAddrNew(L"User32.dll", L"EnumWindowStationsW", "EnumWindowStationsW");
-        __sys_OpenWindowStationW = (P_OpenWindowStationW)Ldr_GetProcAddrNew(L"User32.dll", L"OpenWindowStationW", "OpenWindowStationW");
-        if (__sys_EnumWindowStationsW) {
-            __sys_EnumWindowStationsW(myEnumWindowStationProc, 0);
-
-            if (Sandboxie_WinSta) {
-                if (__sys_EnumDesktopsW)
-                    __sys_EnumDesktopsW(Sandboxie_WinSta, myEnumDesktopsProc, 0);
-            }
-        }
-    }
-}*/
 
 // Chrome 52+ now needs to be able to create a WindowStation and Desktop for its sandbox
 // GetSecurityInfo will fail when chrome tries to do a DACL read on the default WindowStation.
 // To pass this security check sandboxie needs to use the handle to the Sandboxie Dummy WindowStation
 // this will allow chrome to create the required WindowStation and Desktop.  See comment in 
 // GuiServer.cpp: GuiServer::GetWindowStationAndDesktopName.
-
-extern HANDLE Sandboxie_WinSta;
 
 _FX DWORD AdvApi_GetSecurityInfo(
     HANDLE handle,
@@ -568,7 +532,13 @@ _FX DWORD AdvApi_GetSecurityInfo(
     rc = __sys_GetSecurityInfo(handle, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
 
     if (rc && ObjectType == SE_WINDOW_OBJECT && SecurityInfo == DACL_SECURITY_INFORMATION) {
-        //OpenWinSta();
+        __sys_EnumWindowStationsW = (P_EnumWindowStations)Ldr_GetProcAddrNew(L"User32.dll", L"EnumWindowStationsW", "EnumWindowStationsW");
+        __sys_OpenWindowStationW = (P_OpenWindowStationW)Ldr_GetProcAddrNew(L"User32.dll", L"OpenWindowStationW", "OpenWindowStationW");
+        if (!Sandboxie_WinSta) {
+            if (__sys_EnumWindowStationsW) {
+                rc = __sys_EnumWindowStationsW(myEnumWindowStationProc, 0);
+            }
+        }
         rc = __sys_GetSecurityInfo(Sandboxie_WinSta, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
     }
     return rc;
@@ -783,7 +753,13 @@ _FX DWORD Ntmarta_GetSecurityInfo(
     rc = __sys_Ntmarta_GetSecurityInfo(handle, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
 
     if (rc && ObjectType == SE_WINDOW_OBJECT && SecurityInfo == DACL_SECURITY_INFORMATION) {
-        //OpenWinSta();
+        __sys_EnumWindowStationsW = (P_EnumWindowStations)Ldr_GetProcAddrNew(L"User32.dll", L"EnumWindowStationsW", "EnumWindowStationsW");
+        __sys_OpenWindowStationW = (P_OpenWindowStationW)Ldr_GetProcAddrNew(L"User32.dll", L"OpenWindowStationW", "OpenWindowStationW");
+        if (!Sandboxie_WinSta) {
+            if (__sys_EnumWindowStationsW) {
+                rc = __sys_EnumWindowStationsW(myEnumWindowStationProc, 0);
+            }
+        }
         rc = __sys_Ntmarta_GetSecurityInfo(Sandboxie_WinSta, ObjectType, SecurityInfo, psidOwner, psidGroup, pDacl, pSacl, ppSecurityDescriptor);
     }
     return rc;

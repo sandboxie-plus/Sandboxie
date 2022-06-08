@@ -175,7 +175,6 @@ static BOOLEAN Gui_D3D9_Loaded = FALSE;
 
 static ULONG64 Gui_GetShellWindow_LastTicks = 0;
 
-static BOOLEAN Winsta_Hack = FALSE;
 
 //---------------------------------------------------------------------------
 // Gui_InitEnum

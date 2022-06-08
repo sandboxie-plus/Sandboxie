@@ -286,6 +286,7 @@ void CSandMan::LoadState()
 	restoreState(theConf->GetBlob("MainWindow/Window_State"));
 	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
 	m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
+	m_pRecoveryLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/RecoveryLog_Columns"));
 	m_pLogSplitter->restoreState(theConf->GetBlob("MainWindow/Log_Splitter"));
 	m_pPanelSplitter->restoreState(theConf->GetBlob("MainWindow/Panel_Splitter"));
 	m_pLogTabs->setCurrentIndex(theConf->GetInt("MainWindow/LogTab", 0));
@@ -297,6 +298,7 @@ void CSandMan::StoreState()
 	theConf->SetBlob("MainWindow/Window_State", saveState());
 	//theConf->SetBlob("MainWindow/BoxTree_Columns", m_pBoxTree->saveState());
 	theConf->SetBlob("MainWindow/LogList_Columns", m_pMessageLog->GetView()->header()->saveState());
+	theConf->SetBlob("MainWindow/RecoveryLog_Columns", m_pRecoveryLog->GetView()->header()->saveState());
 	theConf->SetBlob("MainWindow/Log_Splitter", m_pLogSplitter->saveState());
 	theConf->SetBlob("MainWindow/Panel_Splitter", m_pPanelSplitter->saveState());
 	theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
@@ -377,6 +379,7 @@ void CSandMan::CreateMenus()
 			m_pCleanUpMenu->addSeparator();
 			m_pCleanUpMsgLog = m_pCleanUpMenu->addAction(tr("Cleanup Message Log"), this, SLOT(OnCleanUp()));
 			m_pCleanUpTrace = m_pCleanUpMenu->addAction(tr("Cleanup Trace Log"), this, SLOT(OnCleanUp()));
+			m_pCleanUpRecovery = m_pCleanUpMenu->addAction(tr("Cleanup Recovery Log"), this, SLOT(OnCleanUp()));
 
 		m_pKeepTerminated = m_pMenuView->addAction(CSandMan::GetIcon("Keep"), tr("Keep terminated"), this, SLOT(OnProcView()));
 		m_pKeepTerminated->setCheckable(true);
@@ -527,6 +530,22 @@ void CSandMan::CreateView()
 	m_pTraceView->AddAction(m_pCleanUpTrace);
 
 	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
+
+
+	// Recovery Log
+	m_pRecoveryLog = new CPanelWidgetEx();
+
+	//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
+	((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
+
+	m_pRecoveryLog->GetMenu()->insertAction(m_pRecoveryLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
+	m_pRecoveryLog->GetMenu()->insertSeparator(m_pRecoveryLog->GetMenu()->actions()[0]);
+
+	m_pRecoveryLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	m_pRecoveryLog->GetView()->setSortingEnabled(false);
+
+	m_pLogTabs->addTab(m_pRecoveryLog, tr("Recovery Log"));
+	//
 }
 
 void CSandMan::CreateTrayMenu()
@@ -1389,6 +1408,23 @@ bool CSandMan::CheckCertificate()
 	return false;
 }
 
+void CSandMan::UpdateCertState()
+{
+	g_CertInfo.State = theAPI->GetCertState();
+
+	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30);
+	if (g_CertInfo.outdated)
+		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
+	// outdated always implicates it is no longer valid
+	else if (g_CertInfo.expired) // may be still valid for the current and older builds
+		OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
+			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
+	else if (g_CertInfo.about_to_expire)
+		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60 * 60 * 24)));
+
+	emit CertUpdated();
+}
+
 void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)
 {
 	m_pPopUpWindow->AddUserPrompt(RequestId, Data, ClientPid);
@@ -1456,14 +1492,14 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	return pBoxEx->m_pRecoveryWnd;
 }
 
-SB_PROGRESS CSandMan::RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action)
+SB_PROGRESS CSandMan::RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, int Action)
 {
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandMan::RecoverFilesAsync, pProgress, FileList, Action);
+	QtConcurrent::run(CSandMan::RecoverFilesAsync, pProgress, BoxName, FileList, Action);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
-void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action)
+void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, int Action)
 {
 	SB_STATUS Status = SB_OK;
 
@@ -1506,6 +1542,13 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 
 		if (!QFile::rename(BoxPath, RecoveryPath))
 			Unrecovered.append(BoxPath);
+		else {
+			QMetaObject::invokeMethod(theGUI, "OnFileRecovered", Qt::BlockingQueuedConnection, // show this question using the GUI thread
+				Q_ARG(QString, BoxName),
+				Q_ARG(QString, RecoveryPath),
+				Q_ARG(QString, BoxPath)
+			);
+		}
 	}
 
 	if (!Unrecovered.isEmpty())
@@ -1526,6 +1569,17 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<
 
 
 	pProgress->Finish(Status);
+}
+
+void CSandMan::OnFileRecovered(const QString& BoxName, const QString& FilePath, const QString& BoxPath)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Box|FilePath
+	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
+	pItem->setText(1, BoxName);
+	pItem->setText(2, FilePath);
+	m_pRecoveryLog->GetTree()->addTopLevelItem(pItem);
+
+	m_pRecoveryLog->GetView()->verticalScrollBar()->setValue(m_pRecoveryLog->GetView()->verticalScrollBar()->maximum());
 }
 
 int CSandMan::ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton)
@@ -1881,6 +1935,9 @@ void CSandMan::OnCleanUp()
 	
 	if (sender() == m_pCleanUpTrace || sender() == m_pCleanUpButton)
 		m_pTraceView->Clear();
+
+	if (sender() == m_pCleanUpRecovery || sender() == m_pCleanUpButton)
+		m_pRecoveryLog->GetTree()->clear();
 	
 	if (sender() == m_pCleanUpProcesses || sender() == m_pCleanUpButton)
 		theAPI->UpdateProcesses(false, m_pShowAllSessions->isChecked());
@@ -2399,443 +2456,6 @@ QString CSandMan::GetVersion()
 	return Version;
 }
 
-void CSandMan::CheckForUpdates(bool bManual)
-{
-	if (!m_pUpdateProgress.isNull())
-		return;
-
-	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	AddAsyncOp(m_pUpdateProgress);
-	m_pUpdateProgress->ShowMessage(tr("Checking for updates..."));
-
-	if (m_RequestManager == NULL) 
-		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
-
-
-	QUrlQuery Query;
-	Query.addQueryItem("software", "sandboxie-plus");
-	//QString Branche = theConf->GetString("Options/ReleaseBranche");
-	//if (!Branche.isEmpty())
-	//	Query.addQueryItem("branche", Branche);
-	//Query.addQueryItem("version", GetVersion());
-	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
-	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
-	Query.addQueryItem("language", QString::number(m_LanguageId));
-
-	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
-	if (UpdateKey.isEmpty())
-		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
-	if (!UpdateKey.isEmpty())
-		Query.addQueryItem("update_key", UpdateKey);
-	Query.addQueryItem("auto", bManual ? "0" : "1");
-
-	QUrl Url("https://sandboxie-plus.com/update.php");
-	Url.setQuery(Query);
-
-	QNetworkRequest Request = QNetworkRequest(Url);
-	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	//Request.setRawHeader("Accept-Encoding", "gzip");
-	QNetworkReply* pReply = m_RequestManager->get(Request);
-	pReply->setProperty("manual", bManual);
-	connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateCheck()));
-}
-
-void CSandMan::OnUpdateCheck()
-{
-	if (m_pUpdateProgress.isNull())
-		return;
-
-	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
-	bool bManual = pReply->property("manual").toBool();
-	QByteArray Reply = pReply->readAll();
-	pReply->deleteLater();
-
-	m_pUpdateProgress->Finish(SB_OK);
-	m_pUpdateProgress.clear();
-
-	QVariantMap Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
-	if (Data.isEmpty() || Data["error"].toBool())
-	{
-		QString Error = Data.isEmpty() ? tr("server not reachable") : Data["errorMsg"].toString();
-		OnLogMessage(tr("Failed to check for updates, error: %1").arg(Error), !bManual);
-		if (bManual)
-			QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to check for updates, error: %1").arg(Error));
-		return;
-	}
-
-	bool bNothing = true;
-
-	QStringList IgnoredUpdates = theConf->GetStringList("Options/IgnoredUpdates");
-
-	QString UserMsg = Data["userMsg"].toString();
-	if (!UserMsg.isEmpty())
-	{
-		QString MsgHash = QCryptographicHash::hash(Data["userMsg"].toByteArray(), QCryptographicHash::Md5).toHex().left(8);
-		if (!IgnoredUpdates.contains(MsgHash))
-		{
-			QString FullMessage = UserMsg;
-			QString InfoUrl = Data["infoUrl"].toString();
-			if (!InfoUrl.isEmpty())
-				FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">info page</a>?</p>").arg(InfoUrl);
-
-			CCheckableMessageBox mb(this);
-			mb.setWindowTitle("Sandboxie-Plus");
-			QIcon ico(QLatin1String(":/SandMan.png"));
-			mb.setIconPixmap(ico.pixmap(64, 64));
-			//mb.setTextFormat(Qt::RichText);
-			mb.setText(UserMsg);
-			mb.setCheckBoxText(tr("Don't show this announcement in the future."));
-			
-			if (!InfoUrl.isEmpty()) {
-				mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
-				mb.setDefaultButton(QDialogButtonBox::Yes);
-			}
-			else
-				mb.setStandardButtons(QDialogButtonBox::Ok);
-
-			mb.exec();
-
-			if (mb.isChecked())
-				theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << MsgHash);
-
-			if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
-			{
-				QDesktopServices::openUrl(InfoUrl);
-			}
-
-			bNothing = false;
-		}
-	}
-
-	QString VersionStr = Data["version"].toString();
-	if (!VersionStr.isEmpty()) //&& VersionStr != GetVersion())
-	{
-		UCHAR myVersion[4] = { VERSION_UPD, VERSION_REV, VERSION_MIN, VERSION_MJR }; // ntohl
-		ULONG MyVersion = *(ULONG*)&myVersion;
-
-		ULONG Version = 0;
-		QStringList Nums = VersionStr.split(".");
-		for (int i = 0, Bits = 24; i < Nums.count() && Bits >= 0; i++, Bits -= 8)
-			Version |= (Nums[i].toInt() & 0xFF) << Bits;
-
-		if (Version > MyVersion)
-		if (bManual || !IgnoredUpdates.contains(VersionStr)) // when checked manually always show result
-		{
-			bNothing = false;
-			//QDateTime Updated = QDateTime::fromTime_t(Data["updated"].toULongLong());
-
-			QString DownloadUrl = Data["downloadUrl"].toString();
-			//	'sha256'
-			//	'signature'
-
-			if (!DownloadUrl.isEmpty() && theConf->GetInt("Options/DownloadUpdates", 0) == 1)
-				DownloadUpdates(DownloadUrl, bManual);
-			else
-			{
-				QString UpdateMsg = Data["updateMsg"].toString();
-				QString UpdateUrl = Data["updateUrl"].toString();
-
-				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
-				if (!DownloadUrl.isEmpty())
-					FullMessage += tr("<p>Do you want to download the latest version?</p>");
-				else if (!UpdateUrl.isEmpty())
-					FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">download page</a>?</p>").arg(UpdateUrl);
-
-				CCheckableMessageBox mb(this);
-				mb.setWindowTitle("Sandboxie-Plus");
-				QIcon ico(QLatin1String(":/SandMan.png"));
-				mb.setIconPixmap(ico.pixmap(64, 64));
-				//mb.setTextFormat(Qt::RichText);
-				mb.setText(FullMessage);
-				mb.setCheckBoxText(tr("Don't show this message anymore."));
-				mb.setCheckBoxVisible(!bManual);
-
-				if (!UpdateUrl.isEmpty() || !DownloadUrl.isEmpty()) {
-					mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
-					mb.setDefaultButton(QDialogButtonBox::Yes);
-				}
-				else
-					mb.setStandardButtons(QDialogButtonBox::Ok);
-
-				mb.exec();
-
-				if (mb.isChecked())
-					theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
-
-				if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
-				{
-					if (!DownloadUrl.isEmpty())
-						DownloadUpdates(DownloadUrl, bManual);
-					else
-						QDesktopServices::openUrl(UpdateUrl);
-				}
-			}
-		}
-	}
-
-	if (bNothing) 
-	{
-		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toTime_t());
-
-		if (bManual) {
-			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
-				"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
-		}
-	}
-}
-
-void CSandMan::DownloadUpdates(const QString& DownloadUrl, bool bManual)
-{
-	QNetworkRequest Request = QNetworkRequest(DownloadUrl);
-	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	//Request.setRawHeader("Accept-Encoding", "gzip");
-	QNetworkReply* pReply = m_RequestManager->get(Request);
-	pReply->setProperty("manual", bManual);
-	connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateDownload()));
-	connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
-
-	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	AddAsyncOp(m_pUpdateProgress);
-	m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
-}
-
-void CSandMan::OnUpdateProgress(qint64 bytes, qint64 bytesTotal)
-{
-	if (bytesTotal != 0 && !m_pUpdateProgress.isNull())
-		m_pUpdateProgress->Progress(100 * bytes / bytesTotal);
-}
-
-void CSandMan::OnUpdateDownload()
-{
-	if (m_pUpdateProgress.isNull())
-		return;
-
-	QString TempDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
-	if (TempDir.right(1) != "/")
-		TempDir += "/";
-
-	m_pUpdateProgress->Progress(-1);
-
-	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
-	bool bManual = pReply->property("manual").toBool();
-	quint64 Size = pReply->bytesAvailable();
-	QString Name = pReply->request().url().fileName();
-	if (Name.isEmpty() || Name.right(4).compare(".exe", Qt::CaseInsensitive) != 0)
-		Name = "Sandboxie-Plus-Install.exe";
-
-	QString FilePath = TempDir + Name;
-
-	QFile File(FilePath);
-	if (File.open(QFile::WriteOnly)) {
-		while (pReply->bytesAvailable() > 0)
-			File.write(pReply->read(4096));
-		File.close();
-	}
-
-	pReply->deleteLater();
-
-	m_pUpdateProgress->Finish(SB_OK);
-	m_pUpdateProgress.clear();
-
-	if (File.size() != Size) {
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to download update from: %1").arg(pReply->request().url().toString()));
-		return;
-	}
-
-	theConf->SetValue("Options/PendingUpdatePackage", FilePath);
-	UpdateLabel();
-
-	if (bManual)
-		InstallUpdate();
-}
-
-void CSandMan::InstallUpdate()
-{
-	QString FilePath = theConf->GetString("Options/PendingUpdatePackage");
-	if (FilePath.isEmpty())
-		return;
-
-	QString Message = tr("<p>A Sandboxie-Plus update has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
-		.arg(FilePath).arg("File:///" + Split2(FilePath, "/", true).first);
-	int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, this).exec();
-	if (Ret == QMessageBox::Cancel) {
-		theConf->DelValue("Options/PendingUpdatePackage");
-		UpdateLabel();
-	}
-	if (Ret != QMessageBox::Yes)
-		return;
-	
-	theAPI->TerminateAll();
-
-	wstring wFile = FilePath.toStdWString();
-
-	SHELLEXECUTEINFO si = { 0 };
-	si.cbSize = sizeof(SHELLEXECUTEINFO);
-	si.fMask = SEE_MASK_NOCLOSEPROCESS;
-	si.hwnd = NULL;
-	si.lpVerb = L"runas";
-	si.lpFile = wFile.c_str();
-	si.lpParameters = L"/SILENT";
-	si.lpDirectory = NULL;
-	si.nShow = SW_SHOW;
-	si.hInstApp = NULL;
-
-	if (ShellExecuteEx(&si)) {
-		theConf->DelValue("Options/PendingUpdatePackage");
-		QApplication::quit();
-	}
-}
-
-void CSandMan::OnHelp()
-{
-	if (sender() == m_pSupport)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=donate"));
-	else if (sender() == m_pForum)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-forum"));
-	else if (sender() == m_pManual)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-docs"));
-	else
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=patreon"));
-}
-
-void CSandMan::OnAbout()
-{
-	if (sender() == m_pAbout)
-	{
-		QString AboutCaption = tr(
-			"<h3>About Sandboxie-Plus</h3>"
-			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2022 by DavidXanatos</p>"
-		).arg(GetVersion());
-
-		QString CertInfo;
-		if (!g_Certificate.isEmpty()) {
-			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("NAME"));
-		} else {
-			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
-		}
-
-		QString AboutText = tr(
-			"Sandboxie-Plus is an open source continuation of Sandboxie.<br />"
-			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
-			"<br />"
-			"%3<br />"
-			"<br />"
-			"Driver version: %1<br />"
-			"Features: %2<br />"
-			"<br />"
-			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"
-		).arg(theAPI->GetVersion()).arg(theAPI->GetFeatureStr()).arg(CertInfo);
-
-		QMessageBox *msgBox = new QMessageBox(this);
-		msgBox->setAttribute(Qt::WA_DeleteOnClose);
-		msgBox->setWindowTitle(tr("About Sandboxie-Plus"));
-		msgBox->setText(AboutCaption);
-		msgBox->setInformativeText(AboutText);
-
-		QIcon ico(QLatin1String(":/SandMan.png"));
-		msgBox->setIconPixmap(ico.pixmap(128, 128));
-
-		SafeExec(msgBox);
-	}
-	else if (sender() == m_pAboutQt)
-		QMessageBox::aboutQt(this);
-}
-
-void CSandMan::UpdateCertState()
-{
-	g_CertInfo.State = theAPI->GetCertState();
-
-	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60*60*24*30);
-	if (g_CertInfo.outdated)
-		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
-			// outdated always implicates it is no longer valid
-	else if (g_CertInfo.expired) // may be still valid for the current and older builds
-		OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
-			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
-	else if(g_CertInfo.about_to_expire)
-		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
-
-	emit CertUpdated();
-}
-
-void CSandMan::UpdateCert()
-{
-	QString UpdateKey; // for now only patreons can update the cert automatically
-	if(GetArguments(g_Certificate, L'\n', L':').value("type").indexOf("PATREON") == 0)
-		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
-	if (UpdateKey.isEmpty()) {
-		OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
-		return;
-	}
-
-	if (!m_pUpdateProgress.isNull())
-		return;
-
-	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	AddAsyncOp(m_pUpdateProgress);
-	m_pUpdateProgress->ShowMessage(tr("Checking for certificate..."));
-
-	if (m_RequestManager == NULL) 
-		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
-
-
-	QUrlQuery Query;
-	Query.addQueryItem("UpdateKey", UpdateKey);
-
-	QUrl Url("https://sandboxie-plus.com/get_cert.php");
-	Url.setQuery(Query);
-
-	QNetworkRequest Request = QNetworkRequest(Url);
-	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	//Request.setRawHeader("Accept-Encoding", "gzip");
-	QNetworkReply* pReply = m_RequestManager->get(Request);
-	connect(pReply, SIGNAL(finished()), this, SLOT(OnCertCheck()));
-}
-
-void CSandMan::OnCertCheck()
-{
-	if (m_pUpdateProgress.isNull())
-		return;
-
-	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
-	QByteArray Reply = pReply->readAll();
-	int Code = pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	pReply->deleteLater();
-
-	m_pUpdateProgress->Finish(SB_OK);
-	m_pUpdateProgress.clear();
-
-	if (Code > 299 || Code < 200) {
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("No certificate found on server!"));
-		return;
-	}
-
-	if (Reply.replace("\r\n","\n").compare(g_Certificate.replace("\r\n","\n"), Qt::CaseInsensitive) == 0){
-		QMessageBox::information(this, "Sandboxie-Plus", tr("There is no updated certificate available."));
-		return;
-	}
-
-	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
-	QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
-	QFile CertFile(TempPath);
-	if (CertFile.open(QFile::WriteOnly)) {
-		CertFile.write(Reply);
-		CertFile.close();
-	}
-
-	WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
-
-	if (!theAPI->ReloadCert().IsError()) {
-		CSettingsWindow::LoadCertificate();
-		UpdateCertState();
-	}
-	else { // this should not happen
-		g_Certificate.clear();
-		g_CertInfo.State = 0;
-	}
-}
-
 void CSandMan::SetUITheme()
 {
 	m_ThemeUpdatePending = false;
@@ -2953,234 +2573,7 @@ QT_TRANSLATE_NOOP("CSandBox", "Merging folders: %1 &gt;&gt; %2"),
 QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// WinSpy based window finder
-//
 
-#include <windows.h>
-#include "Helpers/FindTool.h"
+#include "SandManUpdate.cpp"
 
-
-typedef enum DEVICE_SCALE_FACTOR {
-    DEVICE_SCALE_FACTOR_INVALID	= 0,
-    SCALE_100_PERCENT	= 100,
-    SCALE_120_PERCENT	= 120,
-    SCALE_125_PERCENT	= 125,
-    SCALE_140_PERCENT	= 140,
-    SCALE_150_PERCENT	= 150,
-    SCALE_160_PERCENT	= 160,
-    SCALE_175_PERCENT	= 175,
-    SCALE_180_PERCENT	= 180,
-    SCALE_200_PERCENT	= 200,
-    SCALE_225_PERCENT	= 225,
-    SCALE_250_PERCENT	= 250,
-    SCALE_300_PERCENT	= 300,
-    SCALE_350_PERCENT	= 350,
-    SCALE_400_PERCENT	= 400,
-    SCALE_450_PERCENT	= 450,
-    SCALE_500_PERCENT	= 500
-} 	DEVICE_SCALE_FACTOR;
-
-typedef HRESULT (CALLBACK *P_GetScaleFactorForMonitor)(HMONITOR, DEVICE_SCALE_FACTOR*);
-
-UINT GetMonitorScaling(HWND hwnd)
-{
-    static HINSTANCE shcore = LoadLibrary(L"Shcore.dll");
-    if (shcore != nullptr)
-    {
-        if (auto getScaleFactorForMonitor =
-                P_GetScaleFactorForMonitor(GetProcAddress(shcore, "GetScaleFactorForMonitor")))
-        {
-			HMONITOR monitor =
-                MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
-
-            DEVICE_SCALE_FACTOR Scale;
-
-            getScaleFactorForMonitor(monitor, &Scale);
-
-            return Scale;
-        }
-    }
-    return 100;
-}
-
-
-#define IDD_FINDER_TOOL                 111
-#define ID_FINDER_TARGET                112
-#define ID_FINDER_EXPLAIN               113
-#define ID_FINDER_RESULT                114
-
-struct SFinderWndData {
-	int Scale;
-	HFONT hFont;
-};
-
-#define DS(x) ((x) * WndData.Scale / 100)
-
-UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
-{
-	ULONG pid;
-	if (uCode == WFN_END)
-		GetWindowThreadProcessId(hwnd, &pid);
-	else
-		pid = 0;
-
-	hwndTool = GetParent(hwndTool);
-
-	SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwndTool, 0);
-
-	if (pid && pid != GetCurrentProcessId())
-	{
-		RECT rc;
-		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top <= DS(150)) 
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top + DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
-
-		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
-		if (!pProcess.isNull()) 
-		{
-			wstring result = CSandMan::tr("The selected window is running as part of program %1 in sandbox %2").arg(pProcess->GetProcessName()).arg(pProcess->GetBoxName()).toStdWString();
-
-			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
-			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_SHOW);
-		}
-		else
-		{
-			wstring result = CSandMan::tr("The selected window is not running as part of any sandboxed program.").toStdWString();
-
-			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
-			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_SHOW);
-		}
-		::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_RESULT), SW_SHOW);
-	}
-	else
-	{
-		RECT rc;
-		GetWindowRect(hwndTool, &rc);
-		if (rc.bottom - rc.top > DS(150))
-			SetWindowPos(hwndTool, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top - DS(70), SWP_SHOWWINDOW | SWP_NOMOVE);
-
-		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_HIDE);
-		//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_HIDE);
-		::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_RESULT), SW_HIDE);
-	}
-
-	return 0;
-}
-
-// hwnd:    All window processes are passed the handle of the window
-//         that they belong to in hwnd.
-// msg:     Current message (e.g., WM_*) from the OS.
-// wParam:  First message parameter, note that these are more or less
-//          integers, but they are really just "data chunks" that
-//          you are expected to memcpy as raw data to float, etc.
-// lParam:  Second message parameter, same deal as above.
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg)
-	{
-		case WM_CREATE:
-		{
-			CREATESTRUCT* createStruct = (CREATESTRUCT*)lParam;
-			SFinderWndData &WndData = *(SFinderWndData*)createStruct->lpCreateParams;
-			SetWindowLongPtr(hwnd, 0, (LONG_PTR)&WndData);
-
-			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
-
-			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
-			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);
-			CreateWindow(L"Static", L"", WS_CHILD, DS(60), DS(100), DS(180), DS(50), hwnd, (HMENU)ID_FINDER_RESULT, NULL, NULL);
-
-			WndData.hFont = CreateFont(DS(13), 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
-			if (WndData.hFont) {
-				SendMessage(GetDlgItem(hwnd, ID_FINDER_EXPLAIN), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
-				SendMessage(GetDlgItem(hwnd, ID_FINDER_RESULT), WM_SETFONT, (WPARAM)WndData.hFont, TRUE);
-			}
-
-			MakeFinderTool(GetDlgItem(hwnd, ID_FINDER_TARGET), FindProc);
-
-			break;
-		}
-
-		case WM_CLOSE:
-			SFinderWndData &WndData = *(SFinderWndData*)GetWindowLongPtr(hwnd, 0);
-
-			if (WndData.hFont) DeleteObject(WndData.hFont);
-
-			//DestroyWindow(hwnd);
-			PostQuitMessage(0);
-			break;
-	}
-
-	return DefWindowProc(hwnd, msg, wParam, lParam);
-}
-
-DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
-{
-	MSG  msg;
-	WNDCLASS mainWindowClass = { 0 };
-
-	HINSTANCE hInstance = NULL;
-
-	// You can set the main window name to anything, but
-	// typically you should prefix custom window classes
-	// with something that makes it unique.
-	mainWindowClass.lpszClassName = TEXT("SBp.WndFinder");
-
-	mainWindowClass.hInstance = hInstance;
-	mainWindowClass.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
-	mainWindowClass.lpfnWndProc = WndProc;
-	mainWindowClass.hCursor = LoadCursor(0, IDC_ARROW);
-
-	mainWindowClass.cbWndExtra = sizeof(void*); // SFinderWndData
-
-	RegisterClass(&mainWindowClass);
-
-	// Notes:
-	// - The classname identifies the TYPE of the window. Not a C type.
-	//   This is a (TCHAR*) ID that Windows uses internally.
-	// - The window name is really just the window text, this is
-	//   commonly used for captions, including the title
-	//   bar of the window itself.
-	// - parentHandle is considered the "owner" of this
-	//   window. MessageBoxes can use HWND_MESSAGE to
-	//   free them of any window.
-	// - menuHandle: hMenu specifies the child-window identifier,
-	//               an integer value used by a dialog box
-	//               control to notify its parent about events.
-	//               The application determines the child-window
-	//               identifier; it must be unique for all
-	//               child windows with the same parent window.
-
-	SFinderWndData WndData;
-	WndData.Scale = GetMonitorScaling(MainWndHandle);
-
-	HWND hwnd = CreateWindow(mainWindowClass.lpszClassName, CSandMan::tr("Sandboxie-Plus - Window Finder").toStdWString().c_str()
-		, WS_SYSMENU | WS_CAPTION | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, DS(275), DS(135), NULL, 0, hInstance, &WndData);
-
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-
-	return (int)msg.wParam;
-}
-
-void CSandMan::OnWndFinder()
-{
-	m_pWndFinder->setEnabled(false);
-
-	HANDLE hThread = CreateThread(NULL, 0, FinderThreadFunc, NULL, 0, NULL);
-
-	QWinEventNotifier* finishedNotifier = new QWinEventNotifier(hThread);
-	finishedNotifier->setEnabled(true);
-	connect(finishedNotifier, &QWinEventNotifier::activated, this, [finishedNotifier, this, hThread]() {
-		CloseHandle(hThread);
-
-		m_pWndFinder->setEnabled(true);
-
-		finishedNotifier->setEnabled(false);
-		finishedNotifier->deleteLater();
-	});
-}
+#include "SbieFindWnd.cpp"

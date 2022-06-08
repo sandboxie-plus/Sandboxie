@@ -380,7 +380,7 @@ void CPopUpWindow::OnRecoverFile(int Action)
 	QList<QPair<QString, QString>> FileList;
 	FileList.append(qMakePair(pEntry->m_BoxPath, RecoveryFolder + "\\" + FileName));
 
-	SB_PROGRESS Status = theGUI->RecoverFiles(FileList, Action);
+	SB_PROGRESS Status = theGUI->RecoverFiles(pEntry->m_BoxName, FileList, Action);
 	if (Status.GetStatus() == OP_ASYNC)
 		theGUI->AddAsyncOp(Status.GetValue());
 		

@@ -34,7 +34,7 @@ public:
 
 	static QString		GetVersion();
 
-	SB_PROGRESS			RecoverFiles(const QList<QPair<QString, QString>>& FileList, int Action = 0);
+	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
 	enum EDelMode {
 		eDefault,
@@ -81,7 +81,7 @@ protected:
 	SB_STATUS			DisconnectSbie();
 	SB_RESULT(void*)	StopSbie(bool andRemove = false);
 
-	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QList<QPair<QString, QString>>& FileList, int Action = 0);
+	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, int Action = 0);
 
 	QIcon				GetTrayIcon(bool isConnected = true);
 	QString				GetTrayText(bool isConnected = true);
@@ -137,6 +137,7 @@ public slots:
 
 	void				OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
+	void				OnFileRecovered(const QString& BoxName, const QString& FilePath, const QString& BoxPath);
 
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
@@ -236,6 +237,7 @@ private:
 
 	CPanelWidgetEx*		m_pMessageLog;
 	CTraceView*			m_pTraceView;
+	CPanelWidgetEx*		m_pRecoveryLog;
 
 
 	QMenu*				m_pMenuFile;
@@ -272,6 +274,7 @@ private:
 	QAction*			m_pCleanUpProcesses;
 	QAction*			m_pCleanUpMsgLog;
 	QAction*			m_pCleanUpTrace;
+	QAction*			m_pCleanUpRecovery;
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
 	QAction*			m_pShowAllSessions;

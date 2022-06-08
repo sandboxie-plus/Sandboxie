@@ -314,8 +314,10 @@ void CSbieView::Refresh()
 	}
 
 	if (!Added.isEmpty()) {
-		foreach(const QVariant &ID, Added)
-			m_Groups[""].append(ID.toString());
+		foreach(const QVariant& ID, Added) {
+			if(ID.type() == QVariant::String)
+				m_Groups[""].append(ID.toString());
+		}
 
 		QString Grouping = CSbieView__SerializeGroup(m_Groups);
 		theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);

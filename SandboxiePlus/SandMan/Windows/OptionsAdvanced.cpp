@@ -69,7 +69,7 @@ void COptionsWindow::CreateAdvanced()
 void COptionsWindow::LoadAdvanced()
 {
 	ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
-	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
+	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
 	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
@@ -179,7 +179,7 @@ void COptionsWindow::SaveAdvanced()
 
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");
 	WriteAdvancedCheck(ui.chkProtectSCM, "UnrestrictedSCM", "", "y");
-	WriteAdvancedCheck(ui.chkNestedJobs, "AllowBoxedJobs", "y", "");
+	WriteAdvancedCheck(ui.chkNestedJobs, "AllowBoxedJobs", "", "n");
 	WriteAdvancedCheck(ui.chkRestrictServices, "RunServicesAsSystem", "", "y");
 	WriteAdvancedCheck(ui.chkElevateRpcss, "RunRpcssAsSystem", "y", "");
 	WriteAdvancedCheck(ui.chkProtectSystem, "ExposeBoxedSystem", "", "y");

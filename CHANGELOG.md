@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1.1 / 5.56.1] - 2022-06-XX
+## [1.1.1 / 5.56.1] - 2022-06-07
 
 ### Added
 - compatibility templates can now be viewed from the settings window [#1891](https://github.com/sandboxie-plus/Sandboxie/issues/1891)

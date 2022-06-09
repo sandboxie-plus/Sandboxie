@@ -642,7 +642,7 @@ _FX HDESK Gui_CreateDesktopW(
         //the sandboxie restricted token by dropping the security context.  This won't
         //work without the GetSecurityInfo hook.
         rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-        if (rc)
+        //if (rc)
             return rc;
     }
 
@@ -669,7 +669,7 @@ _FX HDESK Gui_CreateDesktopA(
     if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
     {
         rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-        if (rc)
+        //if (rc)
             return rc;
     }
 

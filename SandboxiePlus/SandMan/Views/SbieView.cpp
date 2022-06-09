@@ -315,8 +315,11 @@ void CSbieView::Refresh()
 
 	if (!Added.isEmpty()) {
 		foreach(const QVariant& ID, Added) {
-			if(ID.type() == QVariant::String)
-				m_Groups[""].append(ID.toString());
+			if (ID.type() == QVariant::String) {
+				QString id = ID.toString();
+				if (id.left(1) == "!") id.remove(0, 1); // remove group group marker "!"
+				m_Groups[""].append(id);
+			}
 		}
 
 		QString Grouping = CSbieView__SerializeGroup(m_Groups);

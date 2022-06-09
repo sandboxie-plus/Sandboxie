@@ -632,7 +632,7 @@ _FX HDESK Gui_CreateDesktopW(
     if (rc)
         return rc;
 
-    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
+    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
     {
         //Call the system CreateDesktopW without a security context. 
         //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
@@ -666,7 +666,7 @@ _FX HDESK Gui_CreateDesktopA(
     if (rc)
         return rc;
 
-    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
+    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
     {
         rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
         if (rc)

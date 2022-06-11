@@ -169,7 +169,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - EnableObjectFiltering is now set enabled by default, and replaces Sbie's old process/thread handle filter
-- the $: syntax now accepts a wildcard $:* no more specialized wildcards though
+- the `$:` syntax now accepts a wildcard `$:*` no more specialized wildcards, though
 
 ### Fixed
 - fixed NtGetNextProcess being fully disabled instead of properly filtered

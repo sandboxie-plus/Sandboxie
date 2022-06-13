@@ -184,9 +184,6 @@ void CSandBoxPlus::SetBoxPaths(const QString& FilePath, const QString& RegPath, 
 
 	if (bPathChanged && theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
 		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
-
-	if (theConf->GetBool("Options/ScanStartMenu", true))
-		ScanStartMenu();
 }
 
 void CSandBoxPlus::UpdateSize()
@@ -226,9 +223,6 @@ void CSandBoxPlus::CloseBox()
 	m_SuspendRecovery = false;
 
 	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->CloseBox(this);
-
-	if (theConf->GetBool("Options/ScanStartMenu", true))
-		ScanStartMenu();
 }
 
 SB_PROGRESS CSandBoxPlus::CleanBox()

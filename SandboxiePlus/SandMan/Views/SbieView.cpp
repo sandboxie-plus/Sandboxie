@@ -928,8 +928,6 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
 			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
-			if (theConf->GetBool("Options/ScanStartMenu", true))
-				pBox.objectCast<CSandBoxPlus>()->ScanStartMenu();
 		}	
 	}
 	else if (Action == m_pMenuExplore)

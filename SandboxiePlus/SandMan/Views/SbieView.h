@@ -119,12 +119,14 @@ private:
 	QAction*				m_pMenuPresetsFakeAdmin;
 	QAction*				m_pMenuPresetsINet;
 	QAction*				m_pMenuPresetsShares;
+	QAction*				m_pMenuPresetsRecovery;
 	QAction*				m_pMenuOptions;
 	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;
 	QMenu*					m_pMenuContent;
 	QAction*				m_pMenuExplore;
 	QAction*				m_pMenuBrowse;
+	QAction*				m_pMenuRefresh;
 	QAction*				m_pMenuRegEdit;
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;

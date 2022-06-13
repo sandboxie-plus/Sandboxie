@@ -111,6 +111,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuContent->addSeparator();
 		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRefresh = m_pMenu->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
 	m_pMenuSnapshots = m_pMenu->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenu->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
@@ -133,6 +134,10 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsINet->setCheckable(true);
 		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsShares->setCheckable(true);
+
+		m_pMenuPresets->addSeparator();
+		m_pMenuPresetsRecovery = m_pMenuPresets->addAction(tr("Imminent Recovery"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsRecovery->setCheckable(true);
 	
 	m_pMenuDuplicate = m_pMenu->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
@@ -197,6 +202,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMenu2->addAction(m_pMenuCleanUp);
 	m_pMenu2->addSeparator();
 	m_pMenu2->addAction(m_pMenuOptions);
+	m_pMenu2->addMenu(m_pMenuPresets);
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty())
@@ -454,6 +460,7 @@ bool CSbieView::UpdateMenu()
 	m_pMenuPresetsFakeAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && pBox->GetBool("FakeAdminRights", false));
 	m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
 	m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
+	m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
 
 	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
 	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
@@ -886,6 +893,8 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetINetBlock(m_pMenuPresetsINet->isChecked());
 	else if (Action == m_pMenuPresetsShares)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetAllowShares(m_pMenuPresetsShares->isChecked());
+	else if (Action == m_pMenuPresetsRecovery)
+		m_pMenuPresetsRecovery->setChecked(SandBoxes.first()->SetBool("AutoRecover", m_pMenuPresetsRecovery->isChecked()));
 	else if (Action == m_pMenuOptions)
 	{
 		OnDoubleClicked(m_pSbieTree->selectedRows().first());
@@ -913,6 +922,15 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			pFileBrowserWindow->setWindowState((pFileBrowserWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 			SetForegroundWindow((HWND)pFileBrowserWindow->winId());
 		}
+	}
+	else if (Action == m_pMenuRefresh)
+	{
+		foreach(const CSandBoxPtr& pBox, SandBoxes)
+		{
+			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+			if (theConf->GetBool("Options/ScanStartMenu", true))
+				pBox.objectCast<CSandBoxPlus>()->ScanStartMenu();
+		}	
 	}
 	else if (Action == m_pMenuExplore)
 	{
@@ -1286,11 +1304,14 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 	if (pBox.isNull())
 		return;
 
-	if (index.column() == CSbieModel::ePath)
-		OnSandBoxAction(m_pMenuExplore);
+	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
 
-	if (index.column() != CSbieModel::eName)
-		return;
+		if (index.column() == CSbieModel::ePath)
+			OnSandBoxAction(m_pMenuExplore);
+	}
+
+	//if (index.column() != CSbieModel::eName)
+	//	return;
 
 	if (!pBox->IsEnabled())
 	{

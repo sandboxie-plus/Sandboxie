@@ -154,7 +154,7 @@ public slots:
 	void				OnAsyncProgress(int Progress);
 	void				OnCancelAsync();
 
-	void				OnBoxClosed(const QString& BoxName);
+	void				OnBoxClosed(const CSandBoxPtr& pBox);
 
 	void				CheckForUpdates(bool bManual = true);
 	void				DownloadUpdates(const QString& DownloadUrl, bool bManual);
@@ -247,6 +247,8 @@ private:
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
 	QAction*			m_pDisableForce2;
+	QAction*			m_pDisableRecovery;
+	QAction*			m_pDisableMessages;
 	QMenu*				m_pMaintenance;
 	QAction*			m_pConnect;
 	QAction*			m_pDisconnect;

@@ -5,14 +5,11 @@
 CBoxMonitor::CBoxMonitor() 
 { 
 	m_bTerminate = false;
-	start();
 }
 
 CBoxMonitor::~CBoxMonitor() 
 {
-	m_bTerminate = true;
-	if (!wait(10 * 1000))
-		terminate();
+	Stop();
 }
 
 void CBoxMonitor::Notify(const wstring& strDirectory)
@@ -25,7 +22,7 @@ void CBoxMonitor::Notify(const wstring& strDirectory)
 quint64 CBoxMonitor::CounDirSize(const QString& Directory, SBox* Box) 
 {
 	quint64 TotalSize = 0;
-	if (Box->pBox.isNull() || m_bTerminate)
+	if (m_bTerminate || Box->pBox.isNull())
 		return TotalSize;
 
 	QDir Dir(Directory);
@@ -44,6 +41,8 @@ void CBoxMonitor::run()
 {
 	while (!m_bTerminate) 
 	{
+		Sleep(1000);
+
 		m_Mutex.lock();
 		QList<QString> Keys = m_Boxes.keys();
 		m_Mutex.unlock();
@@ -62,11 +61,13 @@ void CBoxMonitor::run()
 			if (MinScanInterval > 30 * 60 * 1000)
 				MinScanInterval = 30 * 60 * 1000;
 
-			if (Box->Changed && (Box->Closed || Box->LastScan == 0 || (CurTick - Box->LastScan) > MinScanInterval)) {
+			if ((Box->Changed && (!Box->IsWatched || Box->LastScan == 0 || (CurTick - Box->LastScan) > MinScanInterval)) || Box->ForceUpdate) {
 
 				qDebug() << "Rescanning:" << Key << "(" + QDateTime::currentDateTime().toString() + ")";
 
 				quint64 ScanStart = GetCurTick();
+
+				Box->ScanDuration = -1;
 
 				Box->TotalSize = CounDirSize(Key, Box);
 
@@ -79,6 +80,7 @@ void CBoxMonitor::run()
 				);
 
 				Box->Changed = false;
+				Box->ForceUpdate = false;
 			}
 
 			m_Mutex.lock();
@@ -86,14 +88,12 @@ void CBoxMonitor::run()
 				m_Boxes.remove(Key);
 			m_Mutex.unlock();
 		}
-
-		Sleep(1000);
 	}
 }
 
 void CBoxMonitor::UpdateBox(const QString& Path)
 {
-	// Note: this functin runs in the main thread
+	// Note: this private functin runs in the main thread
 
 	m_Mutex.lock();
 	SBox Box = m_Boxes.value(Path);
@@ -103,27 +103,86 @@ void CBoxMonitor::UpdateBox(const QString& Path)
 		Box.pBox->SetSize(Box.TotalSize);
 }
 
-void CBoxMonitor::AddBox(CSandBoxPlus* pBox, bool AndWatch)
+void CBoxMonitor::WatchBox(CSandBoxPlus* pBox)
 {
 	QMutexLocker Lock(&m_Mutex);
+	if (!isRunning()) start();
 
-	m_Boxes[pBox->GetFileRoot()].pBox = pBox;
+	SBox& Box = m_Boxes[pBox->GetFileRoot()];
+	Box.pBox = pBox;
 
-	if (AndWatch) {
-		m_Boxes[pBox->GetFileRoot()].Closed = false;
-		AddDirectory(pBox->GetFileRoot().toStdWString().c_str(), true, FILE_NOTIFY_CHANGE_SIZE);
-	}
-	else
-		m_Boxes[pBox->GetFileRoot()].Changed = true;
+	Box.IsWatched = true;
+	AddDirectory(pBox->GetFileRoot().toStdWString().c_str(), true, FILE_NOTIFY_CHANGE_SIZE);
 }
 
-void CBoxMonitor::CloseBox(CSandBoxPlus* pBox, bool AndClear)
+void CBoxMonitor::ScanBox(CSandBoxPlus* pBox)
 {
 	QMutexLocker Lock(&m_Mutex);
+	if (!isRunning()) start();
 
-	if(AndClear)
-		m_Boxes[pBox->GetFileRoot()].pBox.clear();
-	m_Boxes[pBox->GetFileRoot()].Closed = true;
+	SBox& Box = m_Boxes[pBox->GetFileRoot()];
+	Box.pBox = pBox;
 
-	DetachDirectory(pBox->GetFileRoot().toStdWString().c_str());
+	Box.ForceUpdate = true;
+}
+
+void CBoxMonitor::CloseBox(CSandBoxPlus* pBox)
+{
+	QMutexLocker Lock(&m_Mutex);
+	if (!isRunning()) return;
+
+	SBox& Box = m_Boxes[pBox->GetFileRoot()];
+
+	if(Box.IsWatched)
+		DetachDirectory(pBox->GetFileRoot().toStdWString().c_str());
+	Box.IsWatched = false;
+
+	//Box.Changed = true;
+}
+
+void CBoxMonitor::RemoveBox(CSandBoxPlus* pBox)
+{
+	QMutexLocker Lock(&m_Mutex);
+	if (!isRunning()) return;
+
+	auto I = m_Boxes.find(pBox->GetFileRoot());
+	if (I == m_Boxes.end())
+		return;
+
+	if(I->IsWatched)
+		DetachDirectory(pBox->GetFileRoot().toStdWString().c_str());
+	I->pBox.clear();
+}
+
+bool CBoxMonitor::IsScanPending(const CSandBoxPlus* pBox)
+{
+	QMutexLocker Lock(&m_Mutex);
+	if (!isRunning()) false;
+
+	auto I = m_Boxes.find(pBox->GetFileRoot());
+	if (I == m_Boxes.end())
+		return false;
+
+	return (I->Changed && !I->IsWatched) || I->ForceUpdate || I->ScanDuration == -1;
+}
+
+void CBoxMonitor::Stop()
+{
+	QMutexLocker Lock(&m_Mutex);
+	if (!isRunning()) return;
+
+	m_bTerminate = true;
+
+	if (!wait(10 * 1000)) {
+		terminate();
+		qDebug() << "Failed to stop monitor thread, terminating!!!";
+	}
+
+	while (!m_Boxes.isEmpty()) {
+		SBox Box = m_Boxes.take(m_Boxes.firstKey());
+		if(Box.IsWatched && Box.pBox)
+			DetachDirectory(Box.pBox->GetFileRoot().toStdWString().c_str());
+	}
+
+	m_bTerminate = false;
 }

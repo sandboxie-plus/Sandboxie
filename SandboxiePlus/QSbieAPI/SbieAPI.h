@@ -158,8 +158,12 @@ signals:
 	void					LogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	void					ProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
 	void					FileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
-	void					BoxOpened(const QString& BoxName);
-	void					BoxClosed(const QString& BoxName);
+
+	void					BoxAdded(const CSandBoxPtr& pBox);
+	void					BoxOpened(const CSandBoxPtr& pBox);
+	void					BoxClosed(const CSandBoxPtr& pBox);
+	void					BoxRemoved(const CSandBoxPtr& pBox);
+
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 	void					QueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 

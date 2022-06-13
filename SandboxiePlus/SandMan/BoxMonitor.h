@@ -14,8 +14,14 @@ public:
 
 	virtual void run();
 
-	void AddBox(CSandBoxPlus* pBox, bool AndWatch = false);
-	void CloseBox(CSandBoxPlus* pBox, bool AndClear = false);
+	void WatchBox(CSandBoxPlus* pBox);
+	void ScanBox(CSandBoxPlus* pBox);
+	void CloseBox(CSandBoxPlus* pBox);
+	void RemoveBox(CSandBoxPlus* pBox);
+
+	bool IsScanPending(const CSandBoxPlus* pBox);
+
+	void Stop();
 
 private slots:
 	void UpdateBox(const QString& Path);
@@ -25,16 +31,18 @@ protected:
 	struct SBox
 	{
 		SBox() {
+			ForceUpdate = false;
 			Changed = false;
-			Closed = false;
+			IsWatched = false;
 			LastScan = 0;
 			ScanDuration = 0;
 			TotalSize = 0;
 		}
 
 		QPointer<CSandBoxPlus> pBox;
+		bool ForceUpdate;
 		bool Changed;
-		bool Closed;
+		bool IsWatched;
 		quint64 LastScan;
 		quint64 ScanDuration;
 

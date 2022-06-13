@@ -134,7 +134,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theAPI = new CSbiePlusAPI(this);
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
-	connect(theAPI, SIGNAL(BoxClosed(const QString&)), this, SLOT(OnBoxClosed(const QString&)));
+	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
 
 	m_RequestManager = NULL;
 
@@ -322,6 +322,10 @@ void CSandMan::CreateMenus()
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Window Finder"), this, SLOT(OnWndFinder()));
 		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
+		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));
+		m_pDisableRecovery->setCheckable(true);
+		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message PopUp"));
+		m_pDisableMessages->setCheckable(true);
 		m_pMenuFile->addSeparator();
 		m_pMaintenance = m_pMenuFile->addMenu(CSandMan::GetIcon("Maintenance"), tr("&Maintenance"));
 			m_pConnect = m_pMaintenance->addAction(CSandMan::GetIcon("Connect"), tr("Connect"), this, SLOT(OnMaintenance()));
@@ -369,7 +373,7 @@ void CSandMan::CreateMenus()
 
 		m_pMenuView->addSeparator();
 
-		m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Refresh View"), this, SLOT(OnRefresh()));
+		m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh View"), this, SLOT(OnRefresh()));
 		m_pRefreshAll->setShortcut(QKeySequence("F5"));
 		m_pRefreshAll->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 		this->addAction(m_pRefreshAll);
@@ -600,6 +604,8 @@ void CSandMan::CreateTrayMenu()
 	m_pTrayMenu->addAction(m_pEmptyAll);
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
+	m_pTrayMenu->addAction(m_pDisableRecovery);
+	m_pTrayMenu->addAction(m_pDisableMessages);
 	m_pTrayMenu->addSeparator();
 
 	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);
@@ -1064,12 +1070,8 @@ finish:
 	return Ret;
 }
 
-void CSandMan::OnBoxClosed(const QString& BoxName)
+void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 {
-	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	if (!pBox)
-		return;
-
 	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
 	{
 		bool DeleteShapshots = false;
@@ -1078,7 +1080,7 @@ void CSandMan::OnBoxClosed(const QString& BoxName)
 			return;
 
 		if(theConf->GetBool("Options/AutoBoxOpsNotify", false))
-			OnLogMessage(tr("Auto deleting content of %1").arg(BoxName), true);
+			OnLogMessage(tr("Auto deleting content of %1").arg(pBox->GetName()), true);
 
 		if (theConf->GetBool("Options/UseAsyncBoxOps", false))
 		{
@@ -1218,6 +1220,8 @@ void CSandMan::OnStatusChanged()
 		m_pBoxView->Clear();
 
 		theAPI->WatchIni(false);
+
+		theAPI->StopMonitor();
 	}
 
 	m_pSupport->setVisible(g_Certificate.isEmpty());
@@ -1314,9 +1318,10 @@ void CSandMan::OnLogMessage(const QString& Message, bool bNotify)
 
 void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
 {
-	if ((MsgCode & 0xFFFF) == 2198) // file migration progress
+	if ((MsgCode & 0xFFFF) == 2198 ) // file migration progress
 	{
-		m_pPopUpWindow->ShowProgress(MsgCode, MsgData, ProcessId);
+		if (!m_pDisableMessages->isChecked())
+			m_pPopUpWindow->ShowProgress(MsgCode, MsgData, ProcessId);
 		return;
 	}
 
@@ -1326,7 +1331,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 			m_MissingTemplates.append(MsgData[2]);
 	}
 
-	if ((MsgCode & 0xFFFF) == 6004) // certificat error
+	if ((MsgCode & 0xFFFF) == 6004) // certificate error
 	{
 		static quint64 iLastCertWarning = 0;
 		if (iLastCertWarning + 60 < QDateTime::currentDateTime().toTime_t()) { // reset after 60 seconds
@@ -1378,7 +1383,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 	if ((MsgCode & 0xFFFF) == 2111) // process open denided
 		return; // dont pop that one up
 
-	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true))
+	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true) && !m_pDisableMessages->isChecked())
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
 }
 
@@ -1433,7 +1438,7 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	if (!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended())
+	if ((!pBox.isNull() && pBox.objectCast<CSandBoxPlus>()->IsRecoverySuspended()) || m_pDisableRecovery->isChecked())
 		return;
 
 	if (theConf->GetBool("Options/InstantRecovery", true))
@@ -1477,16 +1482,16 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
-		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox);
+		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, bFind == false);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});
 		pBoxEx->m_pRecoveryWnd->show();
 	}
-	else {
+	/*else {
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 		//SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
-	}
+	}*/
 	if(bFind)
 		pBoxEx->m_pRecoveryWnd->FindFiles();
 	return pBoxEx->m_pRecoveryWnd;
@@ -1580,6 +1585,10 @@ void CSandMan::OnFileRecovered(const QString& BoxName, const QString& FilePath, 
 	m_pRecoveryLog->GetTree()->addTopLevelItem(pItem);
 
 	m_pRecoveryLog->GetView()->verticalScrollBar()->setValue(m_pRecoveryLog->GetView()->verticalScrollBar()->maximum());
+
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	if (pBox)
+		pBox.objectCast<CSandBoxPlus>()->UpdateSize();
 }
 
 int CSandMan::ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton)

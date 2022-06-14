@@ -136,7 +136,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuPresetsShares->setCheckable(true);
 
 		m_pMenuPresets->addSeparator();
-		m_pMenuPresetsRecovery = m_pMenuPresets->addAction(tr("Imminent Recovery"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsRecovery = m_pMenuPresets->addAction(tr("Immediate Recovery"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsRecovery->setCheckable(true);
 	
 	m_pMenuDuplicate = m_pMenu->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox"), this, SLOT(OnSandBoxAction()));

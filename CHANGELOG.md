@@ -19,9 +19,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added missing file recovery log from sbiectrl to sandman [#425](https://github.com/sandboxie-plus/Sandboxie/issues/425)
-- Imminent recovery window will now auto close when all files are recovered [#1498](https://github.com/sandboxie-plus/Sandboxie/issues/1498)
-- the imminent recovery window of sandman is now by default alway on top like in sbiectrl this can be disabled with "Options/RecoveryOnTop=n" [#1465](https://github.com/sandboxie-plus/Sandboxie/issues/1465)
-- added option to toggle Imminent recovery from the presets sub menu [#1653](https://github.com/sandboxie-plus/Sandboxie/issues/1653)
+- Immediate recovery window will now auto close when all files are recovered [#1498](https://github.com/sandboxie-plus/Sandboxie/issues/1498)
+- the Immediate recovery window of sandman is now by default alway on top like in sbiectrl this can be disabled with "Options/RecoveryOnTop=n" [#1465](https://github.com/sandboxie-plus/Sandboxie/issues/1465)
+- added option to toggle Immediate recovery from the presets sub menu [#1653](https://github.com/sandboxie-plus/Sandboxie/issues/1653)
 - added option to disable file recovery and or message pop up globally
 - added per box refresh opzion [#1945](https://github.com/sandboxie-plus/Sandboxie/issues/1945)
 

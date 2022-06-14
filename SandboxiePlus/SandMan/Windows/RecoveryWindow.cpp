@@ -13,10 +13,10 @@
 #endif
 
 
-CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImminent, QWidget *parent)
+CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidget *parent)
 	: QDialog(parent)
 {
-	m_bImminent = bImminent;
+	m_bImmediate = bImmediate;
 		
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
@@ -30,7 +30,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImminent, QWidge
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false) || (bImminent && theConf->GetBool("Options/RecoveryOnTop", true));
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false) || (bImmediate && theConf->GetBool("Options/RecoveryOnTop", true));
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	if (!bAlwaysOnTop) {
@@ -304,7 +304,7 @@ int CRecoveryWindow::FindFiles()
 			Count += FindFiles(Folder);
 	}
 
-	if (m_bImminent && m_FileMap.isEmpty())
+	if (m_bImmediate && m_FileMap.isEmpty())
 		this->close();
 
 	m_pFileModel->Sync(m_FileMap);

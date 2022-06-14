@@ -1467,7 +1467,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 		// todo: resuse window?
 	}
 
-	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, this);
+	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, false, this);
 	if (pRecoveryWindow->FindFiles() == 0 && bCloseEmpty) {
 		delete pRecoveryWindow;
 	}

@@ -7,7 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1.2 / 5.56.2] - 2022-06-??
+## [1.1.3 / 5.56.3] - 2022-06-??
+
+### Fixed
+- fixed issue with recovery window on delete [#1948](https://github.com/sandboxie-plus/Sandboxie/issues/1948)
+
+
+
+
+## [1.1.2 / 5.56.2] - 2022-06-14
 
 ### Added
 - added missing file recovery log from sbiectrl to sandman [#425](https://github.com/sandboxie-plus/Sandboxie/issues/425)

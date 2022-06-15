@@ -18,23 +18,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.2 / 5.56.2] - 2022-06-14
 
 ### Added
-- added missing file recovery log from sbiectrl to sandman [#425](https://github.com/sandboxie-plus/Sandboxie/issues/425)
-- Immediate recovery window will now auto close when all files are recovered [#1498](https://github.com/sandboxie-plus/Sandboxie/issues/1498)
-- the Immediate recovery window of sandman is now by default alway on top like in sbiectrl this can be disabled with "Options/RecoveryOnTop=n" [#1465](https://github.com/sandboxie-plus/Sandboxie/issues/1465)
-- added option to toggle Immediate recovery from the presets sub menu [#1653](https://github.com/sandboxie-plus/Sandboxie/issues/1653)
-- added option to disable file recovery and or message pop up globally
-- added per box refresh opzion [#1945](https://github.com/sandboxie-plus/Sandboxie/issues/1945)
+- added missing file recovery log to SandMan [#425](https://github.com/sandboxie-plus/Sandboxie/issues/425)
+- the immediate recovery window will now auto-close when all files have been recovered [#1498](https://github.com/sandboxie-plus/Sandboxie/issues/1498)
+- the immediate recovery window of SandMan is always on top by default like in SbieCtrl; this can be disabled with "Options/RecoveryOnTop=n" [#1465](https://github.com/sandboxie-plus/Sandboxie/issues/1465)
+- added option to toggle immediate recovery from the presets submenu [#1653](https://github.com/sandboxie-plus/Sandboxie/issues/1653)
+- added option to disable file recovery and message pop-up globally
+- added per box refresh option [#1945](https://github.com/sandboxie-plus/Sandboxie/issues/1945)
 
 ### Changed
-- desktop security workaround used for chrome, firefox and acrobat can now be enabled for all processes using "UseSbieDeskHack=y"
-- inproved double click behavioure [#1935](https://github.com/sandboxie-plus/Sandboxie/issues/1935)
+- the desktop security workaround used for Chrome, Firefox and Acrobat can now be enabled for all processes using "UseSbieDeskHack=y"
+- improved double-click behaviour [#1935](https://github.com/sandboxie-plus/Sandboxie/issues/1935)
 - box size info is refreshed on file recovery
 
 ### Fixed
-- fixed issue with unnececery sandboxie config reloads introduced in 1.1.1
+- fixed issue with unnecessary Sandboxie config reloads introduced in 1.1.1
 - fixed issue with recovery window focus [#1374](https://github.com/sandboxie-plus/Sandboxie/issues/1374)
 - fixed issues with desktop objects introduced in 1.1.1 [#1934](https://github.com/sandboxie-plus/Sandboxie/issues/1934)
-- fixed issues with edge startup boost using a gpo preset
+- fixed issues with Edge startup boost using a GPO preset
 
 
 
@@ -439,7 +439,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added ability to run Win32 store apps in App Compartment mode (on Windows 11 requires COM to be open)
 -- Note: this does not mean UWP store apps, just regular win32 apps packaged to be deployed via the store
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
-- added double click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
+- added double-click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
 - added Ukrainian language on Plus UI (by SuperMaxusa) [#1488](https://github.com/sandboxie-plus/Sandboxie/pull/1488)
 
 ### Changed
@@ -1046,8 +1046,8 @@ Fixed issue with Windows 7
 
 ### Changed
 - replaced the Process List used by the driver with a much faster Hash Map implementation
--- Note: this change provides an almost static system call speed of 1.2µs regardless of the running process count
--- The old list, with 100 programs running required 4.5µs; with 200: 12µs; and with 300: 18µs per syscall
+-- Note: this change provides an almost static system call speed of 1.2Âµs regardless of the running process count
+-- The old list, with 100 programs running required 4.5Âµs; with 200: 12Âµs; and with 300: 18Âµs per syscall
 -- Note: some of the slowdown was also affecting non-sandboxed applications due to how the driver handles certain callbacks
 - replaced the per-process Thread List used by the driver with a much faster Hash Map implementation
 - replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
@@ -1352,7 +1352,7 @@ Fixed issue with Windows 7
 - added confirmation prompts to terminate all commands
 - added window title to boxed process info [#360](https://github.com/sandboxie-plus/Sandboxie/issues/360)
 - added WinSpy based sandboxed window finder [#351](https://github.com/sandboxie-plus/Sandboxie/issues/351)
-- added option to view disabled boxes and double click on box to enable it
+- added option to view disabled boxes and double-click on box to enable it
 
 ### Changed
 - "Reset Columns" now resizes them to fit the content, and it can now be localized [#426](https://github.com/sandboxie-plus/Sandboxie/issues/426)
@@ -1832,7 +1832,7 @@ Fixed issue with Windows 7
 - Processes can be now terminated with the del key, and require a confirmation
 - added sandboxed window border display to SandMan.exe
 - added notification for Sbie log messages
-- added Sandbox Presets sub menu allowing to quickly change some settings
+- added Sandbox Presets submenu allowing to quickly change some settings
 -- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus
 -- And other: Drop admin rights; Block/Allow internet access; Block/Allow access to files on the network
 - added more info to the sandbox status column
@@ -1898,13 +1898,13 @@ Fixed issue with Windows 7
 ## [0.2 / 5.41.0] - 2020-06-08
 
 ### Added
-- IniWatcher, no more clicking reload, the ini is now reloaded automatically every time it changes
+- IniWatcher, the .ini is now reloaded automatically every time it changes
 - added Maintenance menu to the Sandbox menu, allowing to install/uninstall and start/stop Sandboxie driver, service
 - SandMan.exe now is packed with Sbie files and when no Sbie is installed acts as a portable installation
 - added option to clean-up logs
 
 ### Changed
-- Sbie driver now first checks the home path for the Sbie ini before checking SystemRoot
+- Sbie driver now first checks the home path for the SbieIni.exe before checking SystemRoot
 
 ### Fixed
 - FIXED SECURITY ISSUE: sandboxed processes could obtain a write handle on non sandboxed processes (thanks Diversenok)

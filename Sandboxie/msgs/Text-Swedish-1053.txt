@@ -169,7 +169,7 @@ SBIE1231 Inläsning lyckades inte för process %3 %2
 .
 
 1241;pop;err;01
-SBIE1241 Kan inte montera registreringsdatabasen:  %2
+SBIE1241 Kan inte montera registerdatabasen:  %2
 .
 
 1242;pop;err;01
@@ -335,7 +335,7 @@ SBIE2104 Nekade försök att stänga av datorn - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Var god aktivera - Kör som UAC-administratör, i Sandboxie Kontroll, filmeny
+# SBIE2106 Var god aktivera kör som UAC-administratör, i Sandboxie Kontroll, filmeny
 # .
 
 # 2107;pop;inf;01
@@ -441,7 +441,7 @@ SBIE2211 Sandlådad tjänst kunde inte starta:  %2
 .
 
 2212;pop;wrn;01
-SBIE2212 E-postläsaren '%2' är inte inställd på att köras sandlådad
+SBIE2212 E-postklienten '%2' är inte inställd på att köras sandlådad
 .
 
 2213;pop;wrn;01
@@ -477,11 +477,11 @@ SBIE2220 För att tillåta användandet av administrativa privilegier, dubbelkli
 .
 
 2221;pop;wrn;01
-SBIE2221 För att lägga till programmet till Internetåtkomstrestriktioner, dubbelklicka på denna meddelandelinje
+SBIE2221 För att lägga till programmet till Begränsningar -> Internetåtkomst, dubbelklicka på denna meddelandelinje
 .
 
 2222;pop;wrn;01
-SBIE2222 För att lägga till programmet till Start/Köråtkomstrestriktioner, dubbelklicka på denna meddelandelinje
+SBIE2222 För att lägga till programmet till Begränsningar -> Start/Köråtkomst dubbelklicka på denna meddelandelinje
 .
 
 2223;pop;wrn;01
@@ -822,7 +822,7 @@ Systemfelskod:
 # .
 
 3209;txt;01
-Kan inte hitta exe-filen till standarde-postklienten
+Kan inte hitta exe-filen till standard e-postklienten
 .
 
 3210;txt;01
@@ -953,8 +953,8 @@ klickar på kommandot kör sandlådad
 .
 
 3254;txt;01
-För att skippa den här sandlådevalrutan kan du hålla ner Ctrl
-när du klickar på kommandot Kör sandlådad.
+För att skippa det här sandlådevalfönstret kan du hålla ner Ctrl
+när du klickar på kommandot kör sandlådad.
 .
 
 3255;txt;01
@@ -1220,7 +1220,7 @@ Ladda om konfigurationen
 &Hjälpämnen (Web)
 .
 
-3453;txt;01
+3453;txt;02
 Kom igång &guide (Web)
 .
 
@@ -1262,7 +1262,7 @@ Kör webbläsare
 
 3463;txt;01
 Kör e-pos&tklient
-
+.
 
 3464;txt;01
 Kör &valfritt program
@@ -1279,8 +1279,9 @@ Kör &utforskaren
 3467;txt;01
 Uppgradera till Sandboxie-Plus
 .
+
 3471;txt;01
-&Avsluta Program
+Avsluta program
 .
 
 3472;txt;01
@@ -1458,8 +1459,7 @@ Det finns inga processer att avsluta.
 .
 
 3531;txt;01
-VARNING: Processer som kommer avslutas
-kommer inte få chansen att spara någonting
+VARNING: Processer som kommer avslutas kommer inte få chansen att spara någonting
 
 Är du säker på att du vill fortsätta med processavslutandet?
 .
@@ -1469,13 +1469,11 @@ I framtiden, avsluta processer utan att fråga
 .
 
 3533;txt;01
-Du kan kopiera och klistra filer och mappar från en sandlådad utforskares
-mappfönster, och klippa in dem direkt till ett osandlådat mappfönster.
+Du kan kopiera och klistra filer och mappar från en sandlådad utforskares mappfönster, och klippa in dem direkt till ett osandlådat mappfönster.
 .
 
 3534;txt;01
-Du kommer utforska innehållet av en sandlåda i en osandlådad
-utforskares mappfönster.
+Du kommer utforska innehållet av en sandlåda i en osandlådad utforskares mappfönster.
 
 Du kan öppna program och dokument som finns i sandlådan.
 Programmet eller dokumentet kommer starta under bevakning av Sandboxie.
@@ -1557,8 +1555,7 @@ Du kan också använda sandlådor för att testa nya program.
 .
 
 3606;txt;01
-Om du är ny till Sandboxie,
-ta ett ögonblick och läs kom igång guiden
+Om du är ny till Sandboxie, ta ett ögonblick och läs kom igång guiden
 .
 
 3607;txt;01
@@ -1700,7 +1697,7 @@ eller tills du väljer den här funktionen igen.
 .
 
 3599;txt;01
-Du kan stänga av tvingade program för ett specifikt program genom att hålla ner Ctrl+Shift-knapparna medan du klickar på kommandot Kör Sandlådad för programmet
+Du kan stänga av tvingade program för ett specifikt program genom att hålla ner Ctrl+Shift-knapparna, medan du klickar på kommandot kör sandlådad, för programmet
 .
 
 #----------------------------------------------------------------------------
@@ -1951,7 +1948,7 @@ Välj en mapp att lägga till i mapplistan för snabb återställning.
 .
 
 3727;txt;01
-Mappen lades till i mapplistan för nabb återställning.
+Mappen lades till i mapplistan för snabb återställning.
 
 
 Men, just nu finns det inga sandlådade föremål som kan återställas
@@ -2267,6 +2264,8 @@ Välj en mapp för att utesluta den från omedelbar återställning
 
 3837;txt;01
 Skriv in en filtyp att utesluta från omedelbar återställning
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Delete
 #----------------------------------------------------------------------------
@@ -2482,12 +2481,13 @@ Visa inte ett meddelande när en fil är för stor för att kopieras
 
 3909;txt;01
 Filmigrationsinställningen begränsar maxstorleken för kopierandet av en fil in i sandlådan.
-'
+
 Inställningen är för närvarande %3 kilobytes i sandlåda '%2'.
 
 Klicka på - OK, för justerande av begränsningen via öppnande av sandlådeinställningsfönstret, och öppna sidan filmigrationinställningar.
 
 Du kan också ändra gränsen via öppnande av sandlådeinställningsfönstret, och öppna sidan filmigrationinställningar.
+.
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Internet/Start Restrictions
@@ -2536,10 +2536,11 @@ Inga program kan använda internet
 3920;txt;01
 Internetåtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar detta program från att tillgå internet.
 
-Klicka på - OK, för att lägga till program '%3' till internetåtkomstbegränsningar i sandlåda '%2'.
+Klicka på - OK, för att lägga till programmet '%3' till internetåtkomstbegränsningar i sandlåda '%2'.
 
-För att hantera internetåtkomstbegränsningar, öppna sandlådeinställningsfönstret, och öppna behörighetsinställningsgruppen
+För att hantera internetåtkomstbegränsningar, öppna Sandlådeinställningar, och öppna Begränsningar.
 .
+
 # 3921;txt;01
 # Begränsningar::Start/Köråtkomst
 # .
@@ -2563,9 +2564,9 @@ Alla program kan startas och köras.
 3930;txt;01
 Start/Köråtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar detta program från att starta och köra.
 
-Klicka på - OK, för att lägga till program '%3' till Start/Köråtkomstbegränsningar i sandlåda '%2'.
+Klicka på - OK, för att lägga till programmet '%3' till Start/Köråtkomstbegränsningar i sandlåda '%2'.
 
-För hantering av Start/Köråtkomstbegränsningar, öppna sandlådeinställningsfönstret, och öppna begränsningsinställningsgruppen.
+För hantering av Start/Köråtkomstbegränsningar, gå till Sandlådeinställningar -> Begränsningar.
 .
 
 #----------------------------------------------------------------------------
@@ -2657,7 +2658,7 @@ Lägre rättigheter inställningen är aktiverad i sandlåda '%2', och förhindr
 
 Klicka OK för att stänga av lägre rättigheter för sandlådan '%2' för att tillåta användandet av administrativa privilegier i sandlådan.
 
-Du kan alltid ändra lägre rättigheter inställningen genom att öppna sandlådeinställningsfönstret och sen öppna behörighetsinställningsgruppen.
+Du kan alltid ändra inställningen Lägre rättigheter genom att öppna Sandlådeinställningar och sen öppna behörighetsinställningsgruppen.
 .
 
 #----------------------------------------------------------------------------
@@ -2757,11 +2758,11 @@ Windows fildelning kan användas för att passera blockerad filåtkomst. Lägg t
 .
 
 4031;txt;01
-Resursåtkomst::Filåtkomst::Läs-endast åtkomst
+Resursåtkomst::Filåtkomst::Läs-Endast åtkomst
 .
 
 4032;txt;01
-Läs-endast filåtkomst (ReadFilePath)
+Läs-Endast filåtkomst (ReadFilePath)
 .
 
 4033;txt;01
@@ -2769,11 +2770,11 @@ Följande filer och mappar kommer inte kunna ändras av program som körs i denn
 .
 
 4111;txt;01
-Resursåtkomst::Filåtkomst::Skriv-endast åtkomst
+Resursåtkomst::Filåtkomst::Skriv-Endast åtkomst
 .
 
 4112;txt;01
-Skriv-endast filåtkomst (WriteFilePath)
+Skriv-Endast filåtkomst (WriteFilePath)
 .
 
 4113;txt;01
@@ -2813,11 +2814,11 @@ Om en registernyckel matchar någon annan  registeråtkomstinställning, kommer 
 .
 
 4061;txt;01
-Resursåtkomst::Registeråtkomst::Läs-endast åtkomst
+Resursåtkomst::Registeråtkomst::Läs-Endast åtkomst
 .
 
 4062;txt;01
-Läs-endast registeråtkomst (ReadKeyPath)
+Läs-Endast registeråtkomst (ReadKeyPath)
 .
 
 4063;txt;01
@@ -2825,11 +2826,11 @@ Följande registernycklar kommer inte kunna ändras av program i denna sandlåda
 .
 
 4121;txt;01
-Resursåtkomst::Registeråtkomst::Skriv-endast åtkomst
+Resursåtkomst::Registeråtkomst::Skriv-Endast åtkomst
 .
 
 4122;txt;01
-Skriv-endast registeråtkomst (WriteKeyPath)
+Skriv-Endast registeråtkomst (WriteKeyPath)
 .
 
 4123;txt;01
@@ -2957,8 +2958,7 @@ Alternativ plats:
 .
 
 4214;txt;02
-En alternativ plats för '%2'
-bör innehålla följande fil:
+En alternativ plats för '%2' bör innehålla följande fil:
 
 %3
 
@@ -3092,7 +3092,7 @@ Filtrera åtkomst till \enheter\
 #----------------------------------------------------------------------------
 
 4251;txt;01
-Mjukvarukompatibilitet
+Programkompatibilitet
 .
 
 4252;txt;01
@@ -3100,7 +3100,7 @@ Sandboxie har upptäckt följande program på din dator.
 .
 
 4253;txt;01
-Klicka på OK för att verkställa konfigurationsinställningarna för att öka kompatibiliteten för dessa program.
+Klicka på - OK, för att verkställa konfigurationsinställningarna och öka kompatibiliteten för dessa program.
 .
 
 4254;txt;01
@@ -3108,12 +3108,12 @@ Dessa konfigurationsinställningar kommer ha effekt i alla nuvarande sandlådor 
 .
 
 4255;txt;01
-Kolla inte efter mjukvarukompatibilitet i framtiden.
+Kolla inte efter programkompatibilitet i framtiden.
 .
 
 4256;txt;01
 Denna programkonfiguration kan inte tas bort för att den är aktiv i alla sandlådor.
-För att ta bort denna applikationskonfiguration, använd programmet mjukvarukompatibilitet från konfigurationsmenyn.
+För att ta bort denna applikationskonfiguration, använd programmet Programkompatibilitet från menyn Konfigurera
 .
 
 4257;txt;01
@@ -3134,10 +3134,10 @@ system.  Dessa applikationer kan störa Sandboxie`s korrekta funktion.
 
 %2
 
-Vänligen läs sidan kända konflikter på Sandboxie`s webbsida 
+Vänligen läs sidan Kända konflikter på Sandboxie`s webbsida 
 för mer info och lösningar.
 
-Vill du öppna webbsidan kända konflikter nu?
+Vill du öppna webbsidan Kända konflikter nu?
 .
 
 4452;txt;01
@@ -3177,8 +3177,7 @@ Bara administratörer kan använda stäng av tvingade program kommandot
 .
 
 4269;txt;01
-Om du vill kan du läsa om skyddet över 
-globala konfigurationen. Vill du öppna sidan om det nu?
+Om du vill kan du läsa om skyddet över globala konfigurationen. Vill du öppna sidan om det nu?
 .
 
 4271;txt;01
@@ -3246,7 +3245,7 @@ Följande inställningar aktiverar användandet av Sandboxie i kombination med a
 .
 
 4304;txt;01
-Om du vill kompensera för förlorat skydd, aktivera lägre rättigheter i begränsningar i sandlådeinställningar
+Om du vill kompensera för förlorat skydd, aktivera Lägre rättigheter i Begränsningar i Sandlådeinställningar
 .
 
 4305;txt;03
@@ -3358,7 +3357,7 @@ Följande uteslutningar tillåter mediaspelare som körs i denna sandlåda att t
 .
 
 4395;txt;01
-Tillåt %2 direkt åtkomst till mappen Foton för enklare skärmdump
+Tillåt %2 direkt åtkomst till mappen foton för enklare skärmdump
 .
 
 4396;txt;01
@@ -3465,11 +3464,11 @@ Flytta &till
 #----------------------------------------------------------------------------
 
 6001;txt;01
-Sandboxie classic`s UIt (SbieCtrl.exe) har väldigt 
+Sandboxie-Classic UI:t (SbieCtrl.exe) har väldigt 
 begränsad resursövervakande och händelsespårningskapacitet.
 
 För optimal felsökning är det högst tillrådligt att
-installera det nya UIt, Sandboxie-Plus (SandMan.exe),
+installera det nya UI:t, Sandboxie-Plus (SandMan.exe),
 vilket ger utmärkt spårnings och övervakningskapacitet.
 
 Vill du ladda ner Sandboxie-Plus nu?
@@ -3481,7 +3480,7 @@ eller klicka direkt på <a ID="upgrade">here</a> för att nedladda den senaste S
 .
 
 6003;txt;01
-Legacy UIt hos Sandboxie classic har inte support för nätverksbrandväggens funktionalitet.
+Legacy UI:t hos Sandboxie-Classic har inte support för nätverksbrandväggens funktionalitet.
 
 Men du kan dock konfigurera egenskapen som stöds av kärnkomponenterna genom användning av ini file, regler är strukturerade enligt följande:
 NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
@@ -3498,10 +3497,10 @@ Notera: Utan adminrättigheter misslyckas installerare att starta i sandlådan. 
 .
 
 6006;txt;01
-Legacy UIt hos klassiska Sandboxie har endast stöd för några restriktionsalternativ.
+Legacy UI:t hos Sandboxie-Classic har endast stöd för några restriktionsalternativ.
 
 Ytterligare alternativ likt "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" och mycket mer kan göras i ini-sektionen för denna låda.
-Det moderna UIt (SandMan.exe) har också fler anpassningsalternativ för Starta/Kör och internetåtkomstbegränsningar.
+Det moderna UI:t (SandMan.exe) har också fler anpassningsalternativ för Starta/Kör och internetåtkomstbegränsningar.
 
 Om du föredrar att använda ett UI för att kontrollera dessa alternativ, uppgradera till Sandboxie-Plus, som har fullt UI-stöd för alla nya egenskaper.
 .
@@ -3509,7 +3508,7 @@ Om du föredrar att använda ett UI för att kontrollera dessa alternativ, uppgr
 6007;txt;01
 Sandboxie-Plus har utökat integritetsskydd via att switcha det gamla agerandet från en svartlista, t.ex, tillåter läs-tillgång till hela disken, förutom blockerad via Stängd sökväg eller Skriv-sökväg, till ett vitlisteläge där sandlådade program endast är tillåtna att läsa generiska systemplatser, och där lästillgång till de flesta användardata först måste bli uttalat tillåtna.
 
-Legacy UIt hos Sandboxie classic har inte stöd för detta operationsläge. Fast även om det kan konfigureras via ini-filen, rekommenderas det att använda det moderna Sandboxie-Plus UI (Sandman.exe) om du vill använda integritetsutökade lådor.
+Legacy UI:t hos Sandboxie-Classic har inte stöd för detta operationsläge. Fast även om det kan konfigureras via ini-filen, rekommenderas det att använda det moderna Sandboxie-Plus UI (Sandman.exe) om du vill använda integritetsutökade lådor.
 .
 
 #----------------------------------------------------------------------------
@@ -3811,7 +3810,7 @@ Avinstallera (ta bort) den befintliga installationen och dess inställningar
 .
 
 8008;ins;01
-Klicka på Start när du vill starta
+Klicka på - Start, när du vill starta
 .
 
 8009;ins;01
@@ -3827,7 +3826,7 @@ Var god och läs informationen nedan
 .
 
 8012;ins;01
-Tryck nästa för att installera och aktivera Sandboxie systemnivådrivrutin. Denna drivrutin är kärnan av Sandboxie-programmet.
+Klicka på nästa för att installera och aktivera Sandboxie`s systemnivådrivrutin. Denna drivrutin är kärnan av Sandboxie-programmet.
 .
 
 8013;ins;01
@@ -3905,7 +3904,7 @@ Sandboxie kan bara installeras på följande versioner av Microsoft Windows:
 8042;ins;01
 Sandboxie måste installeras på ett användarkonto på din dator.
 
-Om du använder Windows med User Accounts Control (UAC) aktiverat bör du starta installationspaketet och använda - Kör som administratör.
+Om du använder Windows med User Accounts Control (UAC) aktiverat, bör du starta installationspaketet och använda kör som administratör.
 .
 
 8043;ins;01
@@ -3953,8 +3952,7 @@ Klicka på - NEJ, för att radera din Sandboxie.ini fil och förlora dina konfig
 8101;txt;01
 Kan inte installera drivrutinen just nu.
 
-Starta om datorn,
-kör sen installationen igen
+Starta om datorn, kör sen installationen igen
 
 Funktionen som misslyckades är: %2
 .
@@ -3983,6 +3981,5 @@ Följande program måste stängas innan installationen kan fortsätta.
 .
 
 8107;txt;01
-Stäng dessa program och tryck OK för att fortsätta.
-Klicka på - Avsluta, för att avsluta installationen.
+Stäng dessa program och klicka på - OK, för att fortsätta. Klicka på - Avsluta, för att avsluta installationen.
 .

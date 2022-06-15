@@ -95,7 +95,7 @@ SBIE1152 Trampolintilldelning misslyckades %2
 .
 
 1153;evt;pop;err;01
-SBIE1153 Sandboxie-inläsning misslyckades.  Stäng alla program och installera sen om Sandboxie eller starta om din dator.
+SBIE1153 Sandboxie-inläsning misslyckades.  Stäng alla program och starta om din dator, eventuellt installera om Sandboxie.
 .
 
 #----------------------------------------------------------------------------
@@ -163,9 +163,11 @@ SBIE1223 Kan inte byta ut tecken:  %2
 1224;pop;err;01
 SBIE1224 Kan inte hämta tecken:  %2
 .
+
 1231;pop;err;01
 SBIE1231 Inläsning lyckades inte för process %3 %2
 .
+
 1241;pop;err;01
 SBIE1241 Kan inte montera registreringsdatabasen:  %2
 .
@@ -246,6 +248,7 @@ SBIE1319 Blockerade spooler print till fil, %2 %3
 
 1320;pop;wrn;01
 SBIE1320 För att tillåta print spooler att skriva utanför sandlådan för denna process, vänligen dubbelklicka på denna meddelandelinje
+.
 
 1399;pop;inf;01
 %0
@@ -332,7 +335,7 @@ SBIE2104 Nekade försök att stänga av datorn - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Var god aktivera Kör som UAC-administratör i Sandboxie Kontroll, filmeny
+# SBIE2106 Var god aktivera - Kör som UAC-administratör, i Sandboxie Kontroll, filmeny
 # .
 
 # 2107;pop;inf;01
@@ -344,7 +347,7 @@ SBIE2108 Förfalskar framgångsrikt slutförande för programmet '%2'
 .
 
 # 2109;pop;inf;01
-# SBIE2109 Tryck OK när programmet eller installationen har slutförts.
+# SBIE2109 Klicka på - OK, när programmet eller installationen har slutförts.
 # .
 
 # 2110;pop;inf;01
@@ -478,7 +481,7 @@ SBIE2221 För att lägga till programmet till Internetåtkomstrestriktioner, dub
 .
 
 2222;pop;wrn;01
-SBIE2222 För att lägga till  programmet till Start/Köråtkomstrestriktioner, dubbelklicka på denna meddelandelinje
+SBIE2222 För att lägga till programmet till Start/Köråtkomstrestriktioner, dubbelklicka på denna meddelandelinje
 .
 
 2223;pop;wrn;01
@@ -924,7 +927,7 @@ på begäran av ett program som körs i en sandlåda.
 
 3242;txt;01
 För att acceptera eller neka förfrågan, välj
-ett svar i UAC pop-up rutan.
+ett svar i UAC-popupfönstret
 .
 
 3243;txt;01
@@ -941,7 +944,7 @@ Starta programmet utanför Sandboxies översyn
 Detta undantag för sandlådning gäller också för
 alla andra program som startas av det här programmet.
 
-Du kan också välja den här inställningen genom att hålla ner Ctrl och Shift när du
+Du kan också välja den här inställningen genom att hålla ner Ctrl+Shift när du
 klickar på kommandot kör sandlådad
 .
 
@@ -1357,7 +1360,7 @@ Skapa skrivbordsgenväg
 #----------------------------------------------------------------------------
 
 3511;txt;01
-Sandboxie Kontroll kommer nu dölja sin ruta, men kommer
+Sandboxie Kontroll kommer nu dölja sitt fönster, men kommer
 fortsätta köras.  För att visa detta fönster, dubbelklicka
 på den gula Sandboxie-ikonen i systemfältet.
 .
@@ -1692,12 +1695,12 @@ sekunder
 .
 
 3654;txt;01
-När du klickar på OK, kommer tvingade programmekanismen temporärt stängas av, för ett visst antal sekunder som du själv valt.
+När du klickar på - OK, kommer tvingade programmekanismen temporärt stängas av, för ett visst antal sekunder som du själv valt.
 eller tills du väljer den här funktionen igen.
 .
 
 3599;txt;01
-Du kan stänga av tvingade program för ett specifikt program genom att hålla ner Ctrl och Shift-knapparna medan du klickar på kommandot Kör Sandlådad för programmet
+Du kan stänga av tvingade program för ett specifikt program genom att hålla ner Ctrl+Shift-knapparna medan du klickar på kommandot Kör Sandlådad för programmet
 .
 
 #----------------------------------------------------------------------------
@@ -1847,15 +1850,15 @@ Klicka för att lägga till fler genvägar:
 .
 
 3694;txt;01
-Ageranden för Kör sandlådad
+Ageranden för kör sandlådad
 .
 
 3695;txt;01
-Lägg till högerklicket Kör Sandlådad till filer och mappar
+Lägg till högerklicket - Kör sandlådad, till filer och mappar
 .
 
 3696;txt;01
-Lägg till sandlådor som mål för Skicka till
+Lägg till sandlådor som mål för - Skicka till, utförandet
 .
 
 3697;txt;01
@@ -1890,7 +1893,7 @@ Filerna nedanför går att snabbt återställa från sandlådan. Välj en fil el
 .
 
 3713;txt;01
-Klicka på Radera sandlåda för att stänga alla program i sandlådan för att sedan tömma den på allt innehåll.
+Klicka på - Radera sandlåda, för att stänga alla program i sandlådan för att sedan tömma den på allt innehåll.
 .
 
 3714;txt;01
@@ -2263,7 +2266,7 @@ Välj en mapp för att utesluta den från omedelbar återställning
 .
 
 3837;txt;01
-Skriv in en filtyp att utesluta från omedelbar återskapning
+Skriv in en filtyp att utesluta från omedelbar återställning
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Delete
 #----------------------------------------------------------------------------
@@ -2482,7 +2485,7 @@ Filmigrationsinställningen begränsar maxstorleken för kopierandet av en fil i
 '
 Inställningen är för närvarande %3 kilobytes i sandlåda '%2'.
 
-Klicka på OK för justerande av begränsningen via öppnande av sandlådeinställningsfönstret, och öppna sidan filmigrationinställningar.
+Klicka på - OK, för justerande av begränsningen via öppnande av sandlådeinställningsfönstret, och öppna sidan filmigrationinställningar.
 
 Du kan också ändra gränsen via öppnande av sandlådeinställningsfönstret, och öppna sidan filmigrationinställningar.
 
@@ -2533,7 +2536,7 @@ Inga program kan använda internet
 3920;txt;01
 Internetåtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar detta program från att tillgå internet.
 
-Klicka på OK för att lägga till program '%3' till internetåtkomstbegränsningar i sandlåda '%2'.
+Klicka på - OK, för att lägga till program '%3' till internetåtkomstbegränsningar i sandlåda '%2'.
 
 För att hantera internetåtkomstbegränsningar, öppna sandlådeinställningsfönstret, och öppna behörighetsinställningsgruppen
 .
@@ -2560,10 +2563,11 @@ Alla program kan startas och köras.
 3930;txt;01
 Start/Köråtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar detta program från att starta och köra.
 
-Klicka på OK för att lägga till program '%3' till Start/Köråtkomstbegränsningar i sandlåda '%2'.
+Klicka på - OK, för att lägga till program '%3' till Start/Köråtkomstbegränsningar i sandlåda '%2'.
 
 För hantering av Start/Köråtkomstbegränsningar, öppna sandlådeinställningsfönstret, och öppna begränsningsinställningsgruppen.
 .
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Low Level Access / Hardware Access
 #----------------------------------------------------------------------------
@@ -2972,7 +2976,7 @@ Inställningarna nedan bestämmer konfigurationen för programmet '%2'.
 .
 
 4217;txt;01
-Skriv eller klistra in inställningar, klicka sedan på OK för att skapa en ny lokal programkonfiguration.
+Skriv eller klistra in inställningar, klicka sedan på - OK, för att skapa en ny lokal programkonfiguration.
 .
 
 4218;txt;01
@@ -3121,7 +3125,7 @@ Följande kompatibilitetsinställningar används inte längre:
 
 %2
 
-Klicka på OK för att ta bort dessa kompatibilitetsinställningar.
+Klicka på - OK, för att ta bort dessa kompatibilitetsinställningar.
 .
 
 4451;txt;01
@@ -3133,7 +3137,7 @@ system.  Dessa applikationer kan störa Sandboxie`s korrekta funktion.
 Vänligen läs sidan kända konflikter på Sandboxie`s webbsida 
 för mer info och lösningar.
 
-Vill du öppna webbsidan Kända konflikter nu?
+Vill du öppna webbsidan kända konflikter nu?
 .
 
 4452;txt;01
@@ -3342,7 +3346,7 @@ E-postklient
 .
 
 4392;txt;01
-Följande undantag tillåter E-postklienter som körs i denna sandlåda att nå E-postfiler utanför sandlådan.
+Följande undantag tillåter e-postklienter som körs i denna sandlåda att nå e-postfiler utanför sandlådan.
 .
 
 4393;txt;01
@@ -3393,7 +3397,7 @@ Notera: Tvingade program och tvingade mappars inställningar för en sandlåda g
 Ditt användarkonto har nu begränsats för användande av denna sandlåda, 
 och sandlådan kommer att tas bort från visning i huvudfönstret.
 
-För att göra sandlådan synlig och användbar, använd kommandot Visa dold sandlåda i sandlådemenyn.
+För att göra sandlådan synlig och användbar, använd kommandot - Visa dold sandlåda, i sandlådemenyn.
 .
 
 #----------------------------------------------------------------------------
@@ -3409,7 +3413,7 @@ Följande användarkonton är tillåtna att använda den valda sandlådan just n
 .
 
 5124;txt;01
-Klicka på knappen OK för att lägga till ditt användarkonto '%2' till sandlådan och synliggöra den i huvudfönstret. 
+Klicka på knappen - OK, för att lägga till ditt användarkonto '%2' till sandlådan och synliggöra den i huvudfönstret. 
 .
 
 #----------------------------------------------------------------------------
@@ -3576,7 +3580,7 @@ Prova nu:  Radera innehållet i din Defaultbox.  Vänligen finn den gula Sandbox
 Högerklicka på den gula Sandboxie-ikonen,
 
 
-välj sedan DefaultBox, och använd Radera innehåll.
+välj sedan DefaultBox, och använd - Radera innehåll.
 .
 
 7864;txt;01
@@ -3915,7 +3919,7 @@ Om du använder Windows med User Accounts Control (UAC) aktiverat bör du starta
 8051;ins;01
 Programmet Sandboxie Kontroll körs.
 
-Klicka på OK för att stänga det för att sen fortsätta installationen.
+Klicka på - OK, för att stänga det för att sen fortsätta installationen.
 
 Klicka på - Avbryt, för att avbryta installationen.
 .

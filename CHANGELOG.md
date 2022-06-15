@@ -1904,7 +1904,7 @@ Fixed issue with Windows 7
 - added option to clean-up logs
 
 ### Changed
-- Sbie driver now first checks the home path for the SbieIni.exe before checking SystemRoot
+- Sbie driver now first checks the home path for the configuration file Sandboxie.ini before checking SystemRoot
 
 ### Fixed
 - FIXED SECURITY ISSUE: sandboxed processes could obtain a write handle on non sandboxed processes (thanks Diversenok)

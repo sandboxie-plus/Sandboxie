@@ -6,27 +6,27 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="171"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>安裝您的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 贊助者憑證</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="172"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您有贊助者憑證，請填入以下欄位。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="194"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation type="unfinished"></translation>
+        <translation>開始在沒用贊助者憑證的情況下進行有限時間的試用。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="213"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>要在商業環境使用 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 進階設定，需要適用於商業用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助者憑證&lt;/a&gt;。如果您還沒有所需的憑證，可以透過&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 網路商店&lt;/a&gt;取得憑證。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="224"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 為&lt;u&gt;項目贊助者&lt;/u&gt;提供額外的沙箱類型和其它進階功能。例如「隱私增強」類型的沙箱對來自沙箱化程式非法存取使用者資料的行為&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供額外的使用者資料保護&lt;/font&gt;&lt;/b&gt;。如果您還不是贊助者，請考慮 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐贈支援此項目&lt;/a&gt;來幫助 Sandboxie 的開發工作，並以此取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
     </message>
 </context>
 <context>
@@ -75,17 +75,17 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="442"/>
         <source>Complete your configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>完成您的設定</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="449"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>所有設定基本完成了，按下 [完成]，套用所有選取的選項，並結束此精靈。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="461"/>
         <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="unfinished"></translation>
+        <translation>保持 Sandboxie-Plus 持續更新到新版本。</translation>
     </message>
 </context>
 <context>
@@ -93,32 +93,32 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="106"/>
         <source>Introduction</source>
-        <translation type="unfinished"></translation>
+        <translation>摘要資訊</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="110"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation type="unfinished"></translation>
+        <translation>歡迎來到設定指南，本指南將幫助設定您的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本設定。如果您不希望現在就完成精靈設定，您可以從「沙箱 -&gt; 維護」選單中隨時重新啟動此精靈。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="121"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇 Sandboxie-Plus 的用途</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="124"/>
         <source>&amp;Personally, for private non-commercial use</source>
-        <translation type="unfinished"></translation>
+        <translation>個人(&amp;P)，用於私人非商業用途</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="129"/>
         <source>&amp;Commercially, for business or enterprise use</source>
-        <translation type="unfinished"></translation>
+        <translation>商業(&amp;C)，用於商業或企業用途</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="134"/>
         <source>Note: this option is immutable</source>
-        <translation type="unfinished"></translation>
+        <translation>注意：此選項是不可還原的</translation>
     </message>
 </context>
 <context>
@@ -126,22 +126,22 @@
     <message>
         <location filename="Models/MonitorModel.cpp" line="115"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>類型</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="116"/>
         <source>Status</source>
-        <translation type="unfinished">狀態</translation>
+        <translation>狀態</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="117"/>
         <source>Value</source>
-        <translation type="unfinished">值</translation>
+        <translation>值</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="118"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>總計</translation>
     </message>
 </context>
 <context>
@@ -968,7 +968,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="248"/>
         <source>Close and Disable Immediate Recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉並停用此沙箱的快速復原功能</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="268"/>
@@ -1218,7 +1218,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="340"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>設定精靈</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="342"/>
@@ -1263,7 +1263,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="370"/>
         <source>Refresh View</source>
-        <translation type="unfinished"></translation>
+        <translation>更新檢視</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="375"/>
@@ -1369,12 +1369,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="465"/>
         <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;ㄎndboxie-Plus 存在可供選擇的新釋出更新&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="476"/>
         <source>Click to install update</source>
-        <translation type="unfinished"></translation>
+        <translation>安裝更新</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="479"/>
@@ -1384,7 +1384,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="480"/>
         <source>Click to open web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>在瀏覽器開啟捐贈頁面</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="630"/>
@@ -1467,7 +1467,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1100"/>
         <source>Current Config: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>目前設定：%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1773"/>
@@ -1673,7 +1673,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="2658"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sandboxie-Plus 更新檔已下載到：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否立即安裝？任何在沙箱中執行的程式都將被自動終止。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2705"/>
@@ -1743,7 +1743,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="2075"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>已重新載入沙箱設定檔案</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2168"/>
@@ -2052,7 +2052,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Models/SbieModel.cpp" line="479"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>資訊</translation>
     </message>
     <message>
         <source>Start Time</source>
@@ -2551,12 +2551,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="790"/>
         <source>This name is already used for a Box Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱已被用於現有的其它沙箱群組。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="795"/>
         <source>This name is already used for a Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱已被用於現有的其它沙箱。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="843"/>
@@ -2749,7 +2749,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="266"/>
         <source>Sandboxed Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱化瀏覽器</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="404"/>
@@ -2769,7 +2769,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="641"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
-        <translation type="unfinished"></translation>
+        <translation>這看起來不像是一份憑證。請輸入完整的憑證，而不僅僅是其中的一部分。</translation>
     </message>
     <message>
         <source>This does not look like a certificate, please enter the entire certificate, not just a portion of it.</source>
@@ -2838,27 +2838,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="28"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>設定精靈</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="39"/>
         <source>The decision you make here will affect which page you get to see next.</source>
-        <translation type="unfinished"></translation>
+        <translation>您在這裡做出的決定將影響您接下來看到的頁面內容。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="42"/>
         <source>This help is likely not to be of any help.</source>
-        <translation type="unfinished"></translation>
+        <translation>此類幫助很可能沒用提供任何實質性幫助。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="46"/>
         <source>Sorry, I already gave all the help I could.</source>
-        <translation type="unfinished"></translation>
+        <translation>對不起，我已經提供了所有能給的協助。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="48"/>
         <source>Setup Wizard Help</source>
-        <translation type="unfinished"></translation>
+        <translation>設定精靈幫助</translation>
     </message>
 </context>
 <context>
@@ -2866,27 +2866,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="371"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
-        <translation type="unfinished"></translation>
+        <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 系統整合選項</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="372"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>設定 Sandboxie-Plus 應如何與您的系統整合。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="376"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished">系統啟動時啟動介面</translation>
+        <translation>系統啟動時啟動介面</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="381"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished">在檔案總管右鍵新增&apos;在沙箱中執行&apos;</translation>
+        <translation>在檔案總管右鍵新增「在沙箱中執行」</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="386"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation type="unfinished"></translation>
+        <translation>加入沙箱化的網路瀏覽器捷徑到桌面</translation>
     </message>
 </context>
 <context>
@@ -3066,7 +3066,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/TraceView.cpp" line="176"/>
         <source>Monitor mode</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="482"/>
@@ -3079,32 +3079,32 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="266"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
-        <translation type="unfinished"></translation>
+        <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 使用者介面</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="267"/>
         <source>Select the user interface style you prefer.</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇您喜歡的使用者介面風格。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="271"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation type="unfinished"></translation>
+        <translation>適合熟手的進階檢視(&amp;A)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="276"/>
         <source>&amp;Simple UI for beginners</source>
-        <translation type="unfinished"></translation>
+        <translation>適合新手的簡易檢視(&amp;S)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="300"/>
         <source>Use Bright Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>使用淺色主題</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="304"/>
         <source>Use Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>使用深色主題</translation>
     </message>
 </context>
 <context>
@@ -3112,22 +3112,28 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="406"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 的網路過濾功能</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱可以使用 Windows 篩選平台 (WFP) 來限制網路存取。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="413"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用 WFP 使 Sandboxie 能夠可靠地執行基於 IP/連接埠 的網路存取規則。
+與系統層級的應用防火牆不同，Sandboxie 可以針對同一個應用程式在不同的沙箱內設定不同的規則。
+如果您已有一個更友好、更可靠的應用防火牆，並且不需要針對同一應用在不同沙箱設定不同的規則，則可以不勾選此選項。
+如果不啟用 WFP，Sandboxie 仍然能夠有效完全阻止處理程序存取網路。
+然而，這可能會導致處理程序當機，因為驅動程式會阻止程式存取請求的網路裝置端點。
+即使停用 WFP，Sandboxie 也將提供基於 IP/連接埠 的規則過濾功能，但此時規則只能在使用者模式下應用，而無法被驅動程式強制執行。
+因此，如果不啟用 WFP，某些惡意程式可能可以繞過這些規則，但不能繞過整個網路區塊。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="422"/>
         <source>Enable Windows Filtering Platform (WFP) support</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用 Windows 篩選平台 (WFP) 功能支援</translation>
     </message>
 </context>
 <context>
@@ -3899,7 +3905,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="2089"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
-        <translation type="unfinished">允許使用嵌套作業物件 (job object) (實驗性，適用於 Windows 8 及更高版本)</translation>
+        <translation>允許使用嵌套作業物件 (job object) (適用於 Windows 8 及更高版本)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2106"/>
@@ -3939,12 +3945,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="651"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>允許讀取非沙箱處理程序的記憶體 (不推薦)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation type="unfinished"></translation>
+        <translation>處理程序被拒絕存取非沙箱處理程序記憶體時發出問題代碼 2111</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2082"/>
@@ -4634,12 +4640,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="154"/>
         <source>General Options</source>
-        <translation type="unfinished">一般選項</translation>
+        <translation>一般選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="185"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>統計並顯示每個沙箱的磁碟空間佔用情況</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="321"/>
@@ -4765,7 +4771,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="992"/>
         <source>Download Updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>自動下載更新檔案</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="911"/>

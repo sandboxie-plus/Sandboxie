@@ -2445,6 +2445,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
     WCHAR* OriginalPath;
     BOOLEAN TrueOpened;
     //char *pPtr = NULL;
+    BOOLEAN SkipOriginalTry;
 
     //if (wcsstr(Dll_ImageName, L"chrome.exe") != 0) {
     //  *pPtr = 34;
@@ -2518,6 +2519,7 @@ _FX NTSTATUS File_NtCreateFileImpl(
 
     OriginalPath = NULL;
     TrueOpened = FALSE;
+    SkipOriginalTry = FALSE;
 
     __try {
 
@@ -2578,6 +2580,8 @@ _FX NTSTATUS File_NtCreateFileImpl(
             }
         }
     }
+
+    SkipOriginalTry = (status == STATUS_BAD_INITIAL_PC);
 
     //if ( (wcsstr(TruePath, L"Harddisk0\\DR0") != 0) || wcsstr(TruePath, L"HarddiskVolume3") != 0) {
     //  while (! IsDebuggerPresent()) { OutputDebugString(L"BREAK\n"); Sleep(500); }
@@ -3654,7 +3658,7 @@ ReparseLoop:
     // accessible, so try to access the real file
     //
 
-    if (Dll_RestrictedToken && status == STATUS_ACCESS_DENIED) {
+    if (Dll_RestrictedToken && status == STATUS_ACCESS_DENIED && !SkipOriginalTry) {
 
         status = __sys_NtCreateFile(
             FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,

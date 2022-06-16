@@ -11,7 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with recovery window on delete [#1948](https://github.com/sandboxie-plus/Sandboxie/issues/1948)
+- fixed double click issue on path column [#1951](https://github.com/sandboxie-plus/Sandboxie/issues/1951)
+- "AllowBoxedJobs=n" is back the default behaviour as issues were reported [#1954](https://github.com/sandboxie-plus/Sandboxie/issues/1954)
+- fixed issue with internet block [#1955](https://github.com/sandboxie-plus/Sandboxie/issues/1955)
+- fixed grouping issuein the plus ui [#1950](https://github.com/sandboxie-plus/Sandboxie/issues/1950)
 
+### Changed
+- updated classic ui swedish translation (thx pb1)
 
 
 

@@ -1322,6 +1322,10 @@ Program&inställningar
 &Resursåtkomst
 .
 
+3484;txt;01
+Resursåtkomst
+.
+
 3485;txt;01
 Visa fönster
 .

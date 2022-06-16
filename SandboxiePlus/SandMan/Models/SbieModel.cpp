@@ -113,6 +113,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	QMap<QList<QVariant>, QList<STreeNode*> > New;
 	QHash<QVariant, STreeNode*> Old = m_Map;
 
+	bool bGroupsFirst = theConf->GetBool("Options/SortGroupsFirst", false);
+
 	bool bWatchSize = theConf->GetBool("Options/WatchBoxSize", false);
 
 	foreach(const QString& Group, Groups.keys())
@@ -139,6 +141,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			pNode->IsBold = true;
 
 			pNode->Values[eName].Raw = Group;
+			if(bGroupsFirst) 
+				pNode->Values[eName].SortKey = ID;
 			pNode->Values[eStatus].Raw = tr("Box Group");
 		}
 		else

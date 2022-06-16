@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.3 / 5.56.3] - 2022-06-??
 
+### Added
+- added group first sorting [#1922](https://github.com/sandboxie-plus/Sandboxie/issues/1922)
+
 ### Fixed
 - fixed issue with recovery window on delete [#1948](https://github.com/sandboxie-plus/Sandboxie/issues/1948)
 - fixed double click issue on path column [#1951](https://github.com/sandboxie-plus/Sandboxie/issues/1951)

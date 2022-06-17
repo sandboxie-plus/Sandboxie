@@ -14,14 +14,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with recovery window on delete [#1948](https://github.com/sandboxie-plus/Sandboxie/issues/1948)
-- fixed double click issue on path column [#1951](https://github.com/sandboxie-plus/Sandboxie/issues/1951)
-- "AllowBoxedJobs=n" is back the default behaviour as issues were reported [#1954](https://github.com/sandboxie-plus/Sandboxie/issues/1954)
+- fixed double-click issue on path column [#1951](https://github.com/sandboxie-plus/Sandboxie/issues/1951)
+- "AllowBoxedJobs=n" is back to the default behaviour as issues were reported [#1954](https://github.com/sandboxie-plus/Sandboxie/issues/1954)
 - fixed issue with internet block [#1955](https://github.com/sandboxie-plus/Sandboxie/issues/1955)
-- fixed grouping issuein the plus ui [#1950](https://github.com/sandboxie-plus/Sandboxie/issues/1950)
+- fixed grouping issue in the Plus UI [#1950](https://github.com/sandboxie-plus/Sandboxie/issues/1950)
 
 ### Changed
-- updated classic ui swedish translation (thx pb1)
-
+- updated Classic UI Swedish translation (thanks pb1)
+- restored Plus UI Turkish translation [#1419](https://github.com/sandboxie-plus/Sandboxie/issues/1419) (thanks fmbxnary)
 
 
 ## [1.1.2 / 5.56.2] - 2022-06-14
@@ -40,10 +40,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - box size info is refreshed on file recovery
 
 ### Fixed
-- fixed issue with unnecessary Sandboxie config reloads introduced in 1.1.1
+- fixed issue with unnecessary Sandboxie config reloads introduced in 1.1.1 [#1938](https://github.com/sandboxie-plus/Sandboxie/issues/1938)
 - fixed issue with recovery window focus [#1374](https://github.com/sandboxie-plus/Sandboxie/issues/1374)
 - fixed issues with desktop objects introduced in 1.1.1 [#1934](https://github.com/sandboxie-plus/Sandboxie/issues/1934)
-- fixed issues with Edge startup boost using a GPO preset
+- fixed issues with Edge startup boost using a GPO preset [#1913](https://github.com/sandboxie-plus/Sandboxie/issues/1913)
 
 
 

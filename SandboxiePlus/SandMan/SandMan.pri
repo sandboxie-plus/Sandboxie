@@ -49,16 +49,6 @@ SOURCES += ./main.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
-    ./Windows/OptionsAccess.cpp \
-    ./Windows/OptionsAdvanced.cpp \
-    ./Windows/OptionsForce.cpp \
-    ./Windows/OptionsGeneral.cpp \
-    ./Windows/OptionsGrouping.cpp \
-    ./Windows/OptionsNetwork.cpp \
-    ./Windows/OptionsRecovery.cpp \
-    ./Windows/OptionsStart.cpp \
-    ./Windows/OptionsStop.cpp \
-    ./Windows/OptionsTemplates.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
     ./Windows/SettingsWindow.cpp \

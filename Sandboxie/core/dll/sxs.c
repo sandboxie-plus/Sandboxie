@@ -2010,6 +2010,15 @@ _FX BOOLEAN Sxs_PreferExternal(THREAD_DATA *TlsData)
     if (!TlsData->proc_image_path)
         return FALSE;
 
+    //
+    // KB5014019 breaks edge, it seams making edge start its child processes with 
+    // PreferExternalManifest fixes the issue, but the main process must be loaded normally
+    // hence we have ExternalManifestHack that checks the parent and not the target
+    //
+
+    if (Config_GetSettingsForImageName_bool(L"ExternalManifestHack", FALSE))
+        return TRUE;
+
     WCHAR *ptr1 = wcsrchr(TlsData->proc_image_path, L'\\');
 
     WCHAR value[16];

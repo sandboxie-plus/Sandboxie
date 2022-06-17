@@ -233,7 +233,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			{
 				case eName:				Value = pBox->GetName(); break;
 				case eStatus:			Value = pBox.objectCast<CSandBoxPlus>()->GetStatusStr(); break;
-				case eInfo:				Value = bWatchSize ? pBox.objectCast<CSandBoxPlus>()->GetSize() : 0; break;
+				case eInfo:				Value = pBox.objectCast<CSandBoxPlus>()->IsEmptyCached() ? -2 : (bWatchSize ? pBox.objectCast<CSandBoxPlus>()->GetSize() : 0); break;
 				case ePath:				Value = pBox->GetFileRoot(); break;
 			}
 
@@ -248,7 +248,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				switch (section)
 				{
 				case eName:				ColValue.Formatted = Value.toString().replace("_", " "); break;
-				case eInfo:				ColValue.Formatted = Value.toULongLong() > 0 ? FormatSize(Value.toULongLong()) : ""; break;
+				case eInfo:				ColValue.Formatted = Value.toULongLong() == -2 ? tr("Empty") : (Value.toULongLong() > 0 ? FormatSize(Value.toULongLong()) : ""); break;
 				}
 			}
 

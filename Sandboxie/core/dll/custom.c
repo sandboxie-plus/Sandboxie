@@ -41,6 +41,7 @@ static BOOLEAN  DisableRecycleBin(void);
 static BOOLEAN  DisableWinRS(void);
 static BOOLEAN  DisableWerFaultUI(void);
 static BOOLEAN  EnableMsiDebugging(void);
+static BOOLEAN  DisableEdgeBoost(void);
 static BOOLEAN  Custom_EnableBrowseNewProcess(void);
 static BOOLEAN  Custom_DisableBHOs(void);
 static BOOLEAN  Custom_OpenWith(void);
@@ -87,6 +88,7 @@ _FX BOOLEAN CustomizeSandbox(void)
             DisableWinRS();
         DisableWerFaultUI();
         EnableMsiDebugging();
+        DisableEdgeBoost();
         Custom_EnableBrowseNewProcess();
         DeleteShellAssocKeys(0);
         Custom_DisableBHOs();
@@ -453,6 +455,44 @@ _FX BOOLEAN EnableMsiDebugging(void)
                 NtClose(hKeyMSI);
             }
             NtClose(hKeyWin);
+        }
+        NtClose(hKeyRoot);
+    }
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// DisableEdgeBoost
+//
+// Disable esge startup boost
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN DisableEdgeBoost(void)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING uni;
+    HANDLE hKeyRoot;
+    HANDLE hKeyEdge;
+
+    // Open HKLM
+    RtlInitUnicodeString(&uni, Custom_PrefixHKLM);
+    InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+    if (NtOpenKey(&hKeyRoot, KEY_READ, &objattrs) == STATUS_SUCCESS)
+    {
+        // open/create WER parent key
+        RtlInitUnicodeString(&uni, L"SOFTWARE\\Policies\\Microsoft\\Edge");
+        InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, hKeyRoot, NULL);
+        if (Key_OpenOrCreateIfBoxed(&hKeyEdge, KEY_ALL_ACCESS, &objattrs) == STATUS_SUCCESS)
+        {
+            DWORD StartupBoostEnabled = 0;
+            RtlInitUnicodeString(&uni, L"StartupBoostEnabled");
+            status = NtSetValueKey(hKeyEdge, &uni, 0, REG_DWORD, &StartupBoostEnabled, sizeof(StartupBoostEnabled));
+
+            NtClose(hKeyEdge);
         }
         NtClose(hKeyRoot);
     }

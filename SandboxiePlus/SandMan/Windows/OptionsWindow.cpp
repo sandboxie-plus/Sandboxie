@@ -799,6 +799,16 @@ void COptionsWindow::SaveIniSection()
 	LoadIniSection();
 }
 
+#include "OptionsAccess.cpp"
+#include "OptionsAdvanced.cpp"
+#include "OptionsForce.cpp"
+#include "OptionsGeneral.cpp"
+#include "OptionsGrouping.cpp"
+#include "OptionsNetwork.cpp"
+#include "OptionsRecovery.cpp"
+#include "OptionsStart.cpp"
+#include "OptionsStop.cpp"
+#include "OptionsTemplates.cpp"
 
 #include <windows.h>
 

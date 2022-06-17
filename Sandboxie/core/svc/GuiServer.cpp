@@ -605,7 +605,7 @@ void GuiServer::RunSlave(const WCHAR *cmdline)
     // create window station
     //
 
-    if (! pThis->GetWindowStationAndDesktopName(NULL, NULL, NULL))
+    if (! pThis->GetWindowStationAndDesktopName(NULL))
         return;
 
     //
@@ -1190,7 +1190,7 @@ HANDLE GuiServer::GetJobObject(const WCHAR *boxname)
 //---------------------------------------------------------------------------
 
 
-bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name, HANDLE* out_winsta, HANDLE* out_desk)
+bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name)
 {
     static HWINSTA _hWinSta = NULL;
     static HDESK   _hDesk   = NULL;
@@ -1205,8 +1205,6 @@ bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name, HANDLE* out_wins
     if (out_name) {
 
         wcscpy(out_name, _CombinedName);
-        if (out_winsta) *out_winsta = _hWinSta;
-        if (out_desk) *out_desk = _hDesk;
         return true;
     }
 
@@ -1275,8 +1273,6 @@ bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name, HANDLE* out_wins
 
     else {
 
-        if (out_winsta) *out_winsta = _hWinSta;
-
         if (! SetProcessWindowStation(_hWinSta))
             errlvl = 0x62;
         else {
@@ -1289,9 +1285,6 @@ bool GuiServer::GetWindowStationAndDesktopName(WCHAR *out_name, HANDLE* out_wins
             const ACCESS_MASK DESKTOP_ALL_ACCESS = 0x1FF; // see WinUser.h
             _hDesk = CreateDesktop(desktop_name, NULL, NULL, 0,
                                    DESKTOP_ALL_ACCESS | WRITE_OWNER, &sa);
-
-            if (out_desk) *out_desk = _hDesk;
-
             if (! _hDesk)
                 errlvl = 0x63;
 
@@ -1474,9 +1467,7 @@ ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
         GUI_GET_WINDOW_STATION_RPL *rpl =
                         (GUI_GET_WINDOW_STATION_RPL *)args->rpl_buf;
 
-        HANDLE sbie_winsta;
-        HANDLE sbie_desk;
-        if (! GetWindowStationAndDesktopName(rpl->name, &sbie_winsta, &sbie_desk)) {
+        if (! GetWindowStationAndDesktopName(rpl->name)) {
             status = -1;
             errlvl = 0x73;
             goto finish;
@@ -1530,22 +1521,6 @@ ULONG GuiServer::GetWindowStationSlave(SlaveArgs *args)
                               0, FALSE, DUPLICATE_SAME_ACCESS)) {
             status = GetLastError();
             errlvl = 0x76;
-            goto finish;
-        }
-
-        if (! DuplicateHandle(NtCurrentProcess(), sbie_winsta,
-                              hProcess, (HANDLE *)&rpl->hsbie_winsta,
-                              WINSTA_ALL_ACCESS | STANDARD_RIGHTS_REQUIRED, FALSE, 0)) {
-            status = GetLastError();
-            errlvl = 0x85;
-            goto finish;
-        }
-
-        if (! DuplicateHandle(NtCurrentProcess(), sbie_desk,
-                              hProcess, (HANDLE *)&rpl->hsbie_desk,
-                              0, FALSE, DUPLICATE_SAME_ACCESS)) {
-            status = GetLastError();
-            errlvl = 0x86;
             goto finish;
         }
 

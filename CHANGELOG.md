@@ -18,6 +18,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.1.3 / 5.56.3] - 2022-06-??
+
+### Fixed
+- fixed issue with recovery window on delete [#1948](https://github.com/sandboxie-plus/Sandboxie/issues/1948)
+
+
+
+
+## [1.1.2 / 5.56.2] - 2022-06-14
+
+### Added
+- added missing file recovery log from sbiectrl to sandman [#425](https://github.com/sandboxie-plus/Sandboxie/issues/425)
+- Immediate recovery window will now auto close when all files are recovered [#1498](https://github.com/sandboxie-plus/Sandboxie/issues/1498)
+- the Immediate recovery window of sandman is now by default alway on top like in sbiectrl this can be disabled with "Options/RecoveryOnTop=n" [#1465](https://github.com/sandboxie-plus/Sandboxie/issues/1465)
+- added option to toggle Immediate recovery from the presets sub menu [#1653](https://github.com/sandboxie-plus/Sandboxie/issues/1653)
+- added option to disable file recovery and or message pop up globally
+- added per box refresh opzion [#1945](https://github.com/sandboxie-plus/Sandboxie/issues/1945)
+
+### Changed
+- desktop security workaround used for chrome, firefox and acrobat can now be enabled for all processes using "UseSbieDeskHack=y"
+- inproved double click behavioure [#1935](https://github.com/sandboxie-plus/Sandboxie/issues/1935)
+- box size info is refreshed on file recovery
+
+### Fixed
+- fixed issue with unnececery sandboxie config reloads introduced in 1.1.1
+- fixed issue with recovery window focus [#1374](https://github.com/sandboxie-plus/Sandboxie/issues/1374)
+- fixed issues with desktop objects introduced in 1.1.1 [#1934](https://github.com/sandboxie-plus/Sandboxie/issues/1934)
+- fixed issues with edge startup boost using a gpo preset
+
+
+
+
 ## [1.1.1 / 5.56.1] - 2022-06-07
 
 ### Added
@@ -1025,8 +1058,8 @@ Fixed issue with Windows 7
 
 ### Changed
 - replaced the Process List used by the driver with a much faster Hash Map implementation
--- Note: this change provides an almost static system call speed of 1.2Âµs regardless of the running process count
--- The old list, with 100 programs running required 4.5Âµs; with 200: 12Âµs; and with 300: 18Âµs per syscall
+-- Note: this change provides an almost static system call speed of 1.2µs regardless of the running process count
+-- The old list, with 100 programs running required 4.5µs; with 200: 12µs; and with 300: 18µs per syscall
 -- Note: some of the slowdown was also affecting non-sandboxed applications due to how the driver handles certain callbacks
 - replaced the per-process Thread List used by the driver with a much faster Hash Map implementation
 - replaced configuration section list with a hash map to improve configuration performance, and increased line limit to 100000
@@ -1653,7 +1686,7 @@ Fixed issue with Windows 7
 - added text filter to templates view
 - added new compatibility templates:
 -- Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis [#120](https://github.com/sandboxie-plus/Sandboxie/issues/120) [#88](https://github.com/sandboxie-plus/Sandboxie/issues/88)
--- Firefox Quantum, access to Windowsâ€™ FontCachePort for compatibility with Windows 7
+-- Firefox Quantum, access to Windows's FontCachePort for compatibility with Windows 7
 - added experimental debug option "OriginalToken=y" which lets sandboxed processes retain their original unrestricted token
 -- This option is comparable with "OpenToken=y" and is intended only for testing and debugging, it BREAKS most SECURITY guarantees (!)
 - added debug option "NoSandboxieDesktop=y" it disables the desktop proxy mechanism

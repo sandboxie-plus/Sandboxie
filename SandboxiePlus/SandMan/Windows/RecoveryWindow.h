@@ -36,7 +36,7 @@ class CRecoveryWindow : public QDialog
 	Q_OBJECT
 
 public:
-	CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent = Q_NULLPTR);
+	CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate = false, QWidget *parent = Q_NULLPTR);
 	~CRecoveryWindow();
 
 	bool		IsDeleteShapshots() { return m_DeleteShapshots; }
@@ -85,6 +85,7 @@ protected:
 	bool m_bTargetsChanged;
 	bool m_bReloadPending;
 	bool m_DeleteShapshots;
+	bool m_bImmediate;
 
 private:
 	Ui::RecoveryWindow ui;

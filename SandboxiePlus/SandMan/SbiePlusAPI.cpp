@@ -81,6 +81,11 @@ bool CSbiePlusAPI::IsRunningAsAdmin()
 	return true;
 }
 
+void CSbiePlusAPI::StopMonitor()
+{
+	m_BoxMonitor->Stop();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // CSandBoxPlus
 //
@@ -163,18 +168,29 @@ void CSandBoxPlus::UpdateDetails()
 
 void CSandBoxPlus::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
 {
+	bool bPathChanged = (FilePath != m_FilePath);
+
+	if (bPathChanged && !m_FilePath.isEmpty())
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
+
 	CSandBox::SetBoxPaths(FilePath, RegPath, IpcPath);
+
+	if (m_FilePath.isEmpty()) {
+		m_IsEmpty = true;
+		return;
+	}
+
 	m_IsEmpty = IsEmpty();
 
-	if (theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
-		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->AddBox(this);
+	if (bPathChanged && theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
 }
 
 void CSandBoxPlus::UpdateSize()
 {
 	m_TotalSize = -1;
 	if(theConf->GetBool("Options/WatchBoxSize", false))
-		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->AddBox(this);
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
 
 	m_IsEmpty = IsEmpty();
 }
@@ -185,6 +201,11 @@ void CSandBoxPlus::SetSize(quint64 Size)
 	theConf->SetValue("SizeCache/" + m_Name, Size);
 }
 
+bool CSandBoxPlus::IsSizePending() const
+{
+	return ((CSbiePlusAPI*)theAPI)->m_BoxMonitor->IsScanPending(this);
+}
+
 void CSandBoxPlus::OpenBox()
 {
 	CSandBox::OpenBox();
@@ -192,7 +213,7 @@ void CSandBoxPlus::OpenBox()
 	m_IsEmpty = false;
 	
 	if (theConf->GetBool("Options/WatchBoxSize", false))
-		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->AddBox(this, true);
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->WatchBox(this);
 }
 
 void CSandBoxPlus::CloseBox()
@@ -206,7 +227,7 @@ void CSandBoxPlus::CloseBox()
 
 SB_PROGRESS CSandBoxPlus::CleanBox()
 {
-	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->CloseBox(this, true);
+	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
 	
 	SB_PROGRESS Status = CSandBox::CleanBox();
 
@@ -242,8 +263,8 @@ QString CSandBoxPlus::GetStatusStr() const
 
 	QStringList Status;
 
-	if (m_IsEmpty)
-		Status.append(tr("Empty"));
+	//if (m_IsEmpty)
+	//	Status.append(tr("Empty"));
 
 	if (m_bApplicationCompartment)
 		Status.append(tr("Application Compartment"));

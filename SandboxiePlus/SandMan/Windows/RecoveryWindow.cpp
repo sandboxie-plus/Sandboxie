@@ -13,9 +13,11 @@
 #endif
 
 
-CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
+CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidget *parent)
 	: QDialog(parent)
 {
+	m_bImmediate = bImmediate;
+		
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
@@ -28,7 +30,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false) || (bImmediate && theConf->GetBool("Options/RecoveryOnTop", true));
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	if (!bAlwaysOnTop) {
@@ -302,6 +304,9 @@ int CRecoveryWindow::FindFiles()
 			Count += FindFiles(Folder);
 	}
 
+	if (m_bImmediate && m_FileMap.isEmpty())
+		this->close();
+
 	m_pFileModel->Sync(m_FileMap);
 	ui.treeFiles->expandAll();
 	return Count;
@@ -481,7 +486,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 	}
 
 
-	SB_PROGRESS Status = theGUI->RecoverFiles(FileList);
+	SB_PROGRESS Status = theGUI->RecoverFiles(m_pBox->GetName(), FileList);
 	if (Status.GetStatus() == OP_ASYNC)
 	{
 		connect(Status.GetValue().data(), SIGNAL(Finished()), this, SLOT(FindFiles()));
@@ -504,6 +509,7 @@ void CRecoveryWindow::OnCloseUntil()
 
 void CRecoveryWindow::OnAutoDisable()
 {
+	m_pBox.objectCast<CSandBoxPlus>()->SetSuspendRecovery();
 	m_pBox->SetBool("AutoRecover", false);
 	close();
 }

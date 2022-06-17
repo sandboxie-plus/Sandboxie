@@ -19,6 +19,8 @@ public:
 
 	virtual bool			IsBusy() const { return m_JobCount > 0; }
 
+	virtual void			StopMonitor();
+
 protected:
 	friend class CSandBoxPlus;
 
@@ -80,9 +82,12 @@ public:
 	virtual void			SetLeaderProgram(const QString& ProgName, bool bSet);
 	virtual int				IsLeaderProgram(const QString& ProgName);
 
+	virtual bool			IsEmptyCached() const { return m_IsEmpty; }
+
 	virtual void			UpdateSize();
 	virtual quint64			GetSize() const						{ if(m_TotalSize == -1) return 0; return m_TotalSize; }
 	virtual void			SetSize(quint64 Size);				//{ m_TotalSize = Size; }
+	virtual bool			IsSizePending() const;
 
 	virtual bool			IsRecoverySuspended() const			{ return m_SuspendRecovery; }
 	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
@@ -107,7 +112,7 @@ public:
 	class COptionsWindow*	m_pOptionsWnd;
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
-	bool					IsBusy() const { return !m_JobQueue.isEmpty(); }
+	bool					IsBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
 	SB_STATUS				DeleteContentAsync(bool DeleteShapshots = true, bool bOnAutoDelete = false);
 
 public slots:
@@ -118,6 +123,7 @@ public slots:
 
 protected:
 	friend class CSbiePlusAPI;
+
 	virtual bool			CheckUnsecureConfig() const;
 
 	virtual bool			TestProgramGroup(const QString& Group, const QString& ProgName);

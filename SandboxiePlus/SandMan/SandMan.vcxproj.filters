@@ -162,6 +162,12 @@
     <ClCompile Include="BoxMonitor.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
+    <ClCompile Include="SbieFindWnd.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="SandManUpdate.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

@@ -331,6 +331,8 @@ _FX ULONG File_GetPathFlags(const WCHAR* Path, WCHAR** pRelocation)
 
 _FX VOID File_SavePathNode_internal(HANDLE hPathsFile, LIST* parent, WCHAR* Path, ULONG Length, ULONG SetFlags) 
 {
+    IO_STATUS_BLOCK IoStatusBlock;
+
     const WCHAR CrLf[] = L"\r\n";
     WCHAR FlagStr[16] = L"|";
 
@@ -356,20 +358,20 @@ _FX VOID File_SavePathNode_internal(HANDLE hPathsFile, LIST* parent, WCHAR* Path
         if ((child->flags & ~SetFlags) != 0 || child->relocation != NULL) { 
 
             // write the path
-            WriteFile(hPathsFile, Path, Path_Len * sizeof(WCHAR), NULL, NULL);
+            NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, Path, Path_Len * sizeof(WCHAR), NULL, NULL);
 
             // write the flags
             _ultow(child->flags, FlagStr + 1, 16);
-            WriteFile(hPathsFile, FlagStr, wcslen(FlagStr) * sizeof(WCHAR), NULL, NULL);
+            NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, FlagStr, wcslen(FlagStr) * sizeof(WCHAR), NULL, NULL);
 
             // write the relocation
             if (child->relocation != NULL) {
-                WriteFile(hPathsFile, FlagStr, sizeof(WCHAR), NULL, NULL); // write |
-                WriteFile(hPathsFile, child->relocation, wcslen(child->relocation) * sizeof(WCHAR), NULL, NULL);
+                NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, FlagStr, sizeof(WCHAR), NULL, NULL); // write |
+                NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, child->relocation, wcslen(child->relocation) * sizeof(WCHAR), NULL, NULL);
             }
 
             // write line ending
-            WriteFile(hPathsFile, CrLf, sizeof(CrLf) - sizeof(WCHAR), NULL, NULL);
+            NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, CrLf, sizeof(CrLf) - sizeof(WCHAR), NULL, NULL);
         }
 
         File_SavePathNode_internal(hPathsFile, &child->items, Path, Path_Len, SetFlags | child->flags);

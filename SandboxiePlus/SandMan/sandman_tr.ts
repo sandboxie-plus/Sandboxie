@@ -884,7 +884,7 @@
     <message>
         <location filename="Windows/PopUpWindow.h" line="255"/>
         <source>Recover &amp;&amp; Explore</source>
-        <translation>Kurtar &amp;&amp; Keşfet</translation>
+        <translation>Kurtar &amp;&amp; Klasörde Göster</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="256"/>
@@ -1022,7 +1022,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="499"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
-        <translation>Sandbox&apos;ta %3 bayt disk alanı kaplayan %1 dosya ve %2 klasör var.</translation>
+        <translation>Korumalı Alanda %3 disk alanı kaplayan %1 dosya ve %2 klasör var.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="270"/>
@@ -1219,7 +1219,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2248"/>
         <source>Error deleting sandbox folder: %1</source>
-        <translation>Sandbox klasörü silinirken hata: %1</translation>
+        <translation>Korumalı alan klasörü silinirken hata: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="413"/>
@@ -1265,7 +1265,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2239"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
-        <translation>Yapılandırma %1&apos;den %2 korumalı kutusuna kopyalanamadı</translation>
+        <translation>%1 korumalı alanından yapılandırma kopyalaması başarısız oldu: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="962"/>
@@ -1862,7 +1862,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SbieFindWnd.cpp" line="88"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
-        <translation>Seçilen pencere %2 kutusunda %1 programının bir parçası olarak çalışıyor</translation>
+        <translation>Seçilen pencere %2 korumalı alanında %1 programının bir parçası olarak çalışıyor</translation>
     </message>
     <message>
         <location filename="SbieFindWnd.cpp" line="95"/>
@@ -1981,7 +1981,7 @@ Temizlik yapmak ister misin?</translation>
     <message>
         <location filename="SandMan.cpp" line="731"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation>Bu kutu izolasyonu zorlamaz, yalnızca yazılım sanallaştırması için bir uygulama bölmesi olarak kullanılması amaçlanmıştır.</translation>
+        <translation>Bu kutu izolasyon uygulamaz, yalnızca yazılım sanallaştırması için bir uygulama bölmesi olarak kullanılması amaçlanmıştır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="736"/>
@@ -2019,7 +2019,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandManUpdate.cpp" line="318"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation>Sandboxie-Plus, Sandboxie&apos;nin açık kaynaklı bir devamıdır.&lt;br /&gt;Daha fazla bilgi için &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; adresini ziyaret edin.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Sürücü versiyonu: %1&lt;br /&gt;Özellikler: %2&lt;br /&gt;&lt;br /&gt;Simgeler için&lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
+        <translation>Sandboxie-Plus, Sandboxie&apos;nin açık kaynaklı bir devamıdır.&lt;br /&gt;Daha fazla bilgi için &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; adresini ziyaret edin.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Sürücü versiyonu: %1&lt;br /&gt;Özellikler: %2&lt;br /&gt;&lt;br /&gt;Simgeler için &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="348"/>
@@ -2089,7 +2089,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1681"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation>Lütfen Zorunlu Programlar kurallarını devre dışı bırakmak için saniye cinsinden süreyi girin.</translation>
+        <translation>Lütfen Zorlanmış Programlar kurallarını devre dışı bırakmak için saniye cinsinden süreyi girin.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1840"/>
@@ -2165,7 +2165,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="323"/>
         <location filename="SandMan.cpp" line="605"/>
         <source>Pause Forcing Programs</source>
-        <translation>Zorlama Programlarını Duraklat</translation>
+        <translation>Programları Zorlamayı Duraklat</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="346"/>
@@ -2224,7 +2224,7 @@ Hayır şunları seçer: %2</translation>
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
 
-Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğundan emin olmak için genellikle en son GitHub sürümünün arkasındadır.</translation>
+Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğundan emin olmak için genellikle en son GitHub sürümünden eskidir.</translation>
     </message>
     <message>
         <location filename="SandManUpdate.cpp" line="258"/>
@@ -2603,7 +2603,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/SbieView.cpp" line="179"/>
         <source>Set Leader Process</source>
-        <translation>Lider İşlemi Seç</translation>
+        <translation>Lider İşlem Olarak Ayarla</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="106"/>
@@ -2645,8 +2645,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/SbieView.cpp" line="177"/>
         <source>Set Linger Process</source>
-        <translatorcomment>Oyalayıcı İşlemi Ayarla</translatorcomment>
-        <translation>Установить отложенный процесса</translation>
+        <translation>Oyalayıcı İşlem Olarak Ayarla</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="81"/>
@@ -2666,7 +2665,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/SbieView.cpp" line="112"/>
         <source>Explore Content</source>
-        <translation>İçeriği Keşfet</translation>
+        <translation>İçeriği Klasörde Göster</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="110"/>
@@ -2961,7 +2960,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="118"/>
         <source>Close to Tray</source>
-        <translation>Tepsi durumuna kapat</translation>
+        <translation>Simge durumunda küçült</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="703"/>
@@ -3477,7 +3476,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Forms/OptionsWindow.ui" line="939"/>
         <source>Force Folder</source>
-        <translation>Klasörü zorla</translation>
+        <translation>Klasörü Zorla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1574"/>
@@ -3964,7 +3963,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
     <message>
         <location filename="Forms/OptionsWindow.ui" line="311"/>
         <source>Protect this sandbox from deletion or emptying</source>
-        <translation>Bu korumalı kutuyu silinmeye veya boşalmaya karşı koruyun</translation>
+        <translation>Bu korumalı kutuyu silinmeye veya boşaltmaya karşı koruyun</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2579"/>
@@ -4537,7 +4536,7 @@ Bunu tüm programlara uygulamak için &apos;Hepsi için aç&apos; kullanabilir v
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2114"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
-        <translation>Ağır şekilde kısıtlanmış bir işlem token&apos;ı kullanımı yoluyla Güvenlik Yalıtımı, Sandboxie&apos;nin korumalı alan kısıtlamalarını zorlamanın birincil yoludur, bu devre dışı bırakıldığında kutu uygulama bölmesi modunda çalıştırılır, yani artık sağlıklı güvenlik sağlamaz, yalnızca basit uygulama bölümlendirmesi sağlar.</translation>
+        <translation>Şiddetle kısıtlanmış bir işlem token&apos;ı kullanımı yoluyla Güvenlik İzolasyonu, Sandboxie&apos;nin korumalı alan kısıtlamalarını uygulamanın birincil yoludur, bu devre dışı bırakıldığında kutu, uygulama bölmesi modunda çalıştırılır, yani artık sağlıklı güvenlik sağlamaz, yalnızca basit uygulama bölümlendirmesi sağlar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2151"/>
@@ -4906,7 +4905,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="738"/>
         <source>In the future, don&apos;t check software compatibility</source>
-        <translation>Bir daha yazılım uyumluluğunu kontrol etme</translation>
+        <translation>Gelecekte, yazılım uyumluluğunu kontrol etme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="752"/>
@@ -4930,7 +4929,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="236"/>
         <source>On main window close:</source>
-        <translation>Ana pencerede kapat:</translation>
+        <translation>Ana pencere kapatıldığında:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
@@ -5102,7 +5101,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="911"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation>Sandboxie&apos;yi Windows&apos;un devam eden sürümleriyle güncel tutmak ve tüm web tarayıcılarıyla uyumlu tutmak hiç bitmeyen bir çabadır. Lütfen bu çalışmayı bir bağışla desteklemeyi düşünün.&lt;br /&gt;Geliştirmeyi bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal bağışı&lt;/a&gt; ile destekleyebilirsiniz, kredi kartlarıyla da çalışır.&lt;br /&gt;Veya bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon aboneliği&lt;/a&gt; ile sürekli destek sağlayabilirsiniz.</translation>
+        <translation>Sandboxie&apos;yi Windows&apos;un devam eden sürümleriyle güncel ve tüm web tarayıcılarıyla uyumlu tutmak hiç bitmeyen bir çabadır. Lütfen bu çalışmayı bir bağışla desteklemeyi düşünün.&lt;br /&gt;Geliştirmeyi bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal bağışı&lt;/a&gt; ile destekleyebilirsiniz, kredi kartlarıyla da çalışır.&lt;br /&gt;Ya da bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon aboneliği&lt;/a&gt; ile sürekli destek sağlayabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="868"/>
@@ -5122,7 +5121,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="321"/>
         <source>Show Icon in Systray:</source>
-        <translation>Sistem Tepsisinde Simgeyi Göster:</translation>
+        <translation>Simgeyi Sistem Tepsisinde Göster:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="895"/>
@@ -5147,7 +5146,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="253"/>
         <source>Show boxes in tray list:</source>
-        <translation>Tepsi listesinde kutuları göster:</translation>
+        <translation>Kutuları tepsi listesinde göster:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="287"/>
@@ -5202,7 +5201,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="693"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
-        <translation>Yalnızca Yönetici hesapları, Programları Duraklatma Zorlama komutunu kullanabilir</translation>
+        <translation>Yalnızca Yönetici hesapları, Programları Zorlamayı Duraklat komutunu kullanabilir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="992"/>

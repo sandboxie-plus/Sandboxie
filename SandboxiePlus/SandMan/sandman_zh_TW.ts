@@ -3066,7 +3066,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/TraceView.cpp" line="176"/>
         <source>Monitor mode</source>
-        <translation></translation>
+        <translation>監視模式</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="482"/>

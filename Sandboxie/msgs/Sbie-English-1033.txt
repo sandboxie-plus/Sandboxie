@@ -592,6 +592,10 @@ SBIE2322 Cannot rewrite Sandboxie.ini:  %2
 SBIE2323 Cryptography error:  %2
 .
 
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
 2326;pop;err;01
 SBIE2326 Cannot prepare registry:  %2
 .
@@ -3502,7 +3506,7 @@ If you prefer to use a UI to control these options, please upgrade to Sandboxie-
 .
 
 6004;pop;err;01
-The configuration %3 of box %2 requires a supporter certificate.
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
 .
 
 6005;txt;01

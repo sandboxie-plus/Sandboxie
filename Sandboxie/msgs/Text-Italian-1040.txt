@@ -590,6 +590,10 @@ SBIE2322 Impossibile ricreare Sandboxie.ini: %2
 SBIE2323 Errore nella crittografia:  %2
 .
 
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
 2326;pop;err;01
 SBIE2326 Impossibile preparare il registro:  %2
 .
@@ -3383,7 +3387,7 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6004;pop;err;01
-La configurazione %3 dell'area virtuale %2 richiede un certificato di supporto.
+La funzione %3 dell'area virtuale %2 richiede un certificato di supporto, o i processi verranno terminati dopo 5 minuti. Per un uso continuativo, si prega di supportare Sandboxie.
 .
 
 6005;txt;01

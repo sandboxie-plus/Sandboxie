@@ -371,7 +371,7 @@ _FX VOID File_SavePathNode_internal(HANDLE hPathsFile, LIST* parent, WCHAR* Path
             }
 
             // write line ending
-            NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, CrLf, sizeof(CrLf) - sizeof(WCHAR), NULL, NULL);
+            NtWriteFile(hPathsFile, NULL, NULL, NULL, &IoStatusBlock, (void*)CrLf, sizeof(CrLf) - sizeof(WCHAR), NULL, NULL);
         }
 
         File_SavePathNode_internal(hPathsFile, &child->items, Path, Path_Len, SetFlags | child->flags);

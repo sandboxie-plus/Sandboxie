@@ -335,7 +335,7 @@ SBIE2104 Nekade försök att stänga av datorn - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Var god aktivera - Kör som UAC-administratör, i Sandboxie Kontroll, filmenyn.
+# SBIE2106 Var god aktivera Kör som UAC-administratör, i Sandboxie Kontroll, filmenyn.
 # .
 
 # 2107;pop;inf;01
@@ -372,11 +372,11 @@ SBIE2192 För att uppdatera programmet, kör det utanför Sandboxie.
 .
 
 2193;pop;inf;01
-SBIE2193 Se till att radera sandlådan efter du uppdaterat programmet.
+SBIE2193 Se till att radera sandlådan efter att du uppdaterat programmet.
 .
 
 2194;pop;inf;01
-SBIE2194 MSI installerare kräver %2 alternativ att anges i ini, vilket hursom försvagar isoleringen.
+SBIE2194 MSI-installerare kräver %2 alternativ att anges i ini, vilket hursom försvagar isoleringen.
 .
 
 2195;pop;inf;01
@@ -482,7 +482,7 @@ SBIE2221 För att lägga till programmet till Internetåtkomstbegränsningar, du
 .
 
 2222;pop;wrn;01
-SBIE2222 För att lägga till programmet i Start/Köråtkomstbegränsningar, dubbelklicka på denna meddelandelinje
+SBIE2222 För att lägga till programmet i Start / Köråtkomstbegränsningar, dubbelklicka på denna meddelandelinje
 .
 
 2223;pop;wrn;01
@@ -504,7 +504,7 @@ SBIE2301 %2
 .
 
 2302;pop;err;01
-SBIE2302 Processavbildskonfigurationskonflikt: %2
+SBIE2302 Processavbildkonfigurationskonflikt: %2
 .
 
 2303;pop;err;01
@@ -835,7 +835,7 @@ Kunde inte starta programmet Sandboxie Kontroll
 # .
 
 3212;txt;01
-Sandboxies drivrutin (SbieDrv) är inte tillgänglig för Sandlådade program.
+Sandboxies drivrutin (SbieDrv) är inte tillgänglig för sandlådade program.
 Kolla att både drivrutinen och Sandboxies tjänst (SbieSvc) startade utan problem.
 .
 
@@ -922,7 +922,7 @@ Klicka för att stänga det här fönstret och stoppa.
 .
 
 3241;txt;01
-Sandboxie begär administratörrättigheter
+Sandboxie begär administratörsrättigheter
 på begäran av ett program som körs i en sandlåda.
 .
 
@@ -1055,7 +1055,7 @@ Ett fel uppstod medan standardinställningarna blev aktiverade för sandlådan '
 .
 
 3353;txt;01
-&Ändra/Lägg till
+&Ändra / Lägg till
 .
 
 3354;txt;01
@@ -1391,7 +1391,7 @@ Sandboxie-konfigurationen har blivit verkställd och
 kommer gälla för sandlådade program när de startar.
 
 Om något program redan körs sandlådat kommer
-den nya konfigurationen inte gällas för dem.
+den nya konfigurationen inte gälla för dem.
 .
 
 3514;txt;01
@@ -1487,7 +1487,7 @@ Programmet eller dokumentet kommer starta under bevakning av Sandboxie.
 
 Men, det är rekommenderat att ändra innehållet av en sandlåda
 genom att använda en sandlådad instans av utforskaren.  För att göra det, använd
-detta kommando:  Sandlåda -> Kör Sandlådad -> Kör Windows Explorer.
+detta kommando:  Sandlåda > Kör Sandlådad > Kör Utforskaren.
 .
 
 3535;txt;01
@@ -1516,8 +1516,8 @@ kommandot från sandlådemenyn i Sandboxie Kontroll.
 
 3540;txt;01
 Sandboxie.ini konfigurationsfil kan inte bli ändrad för att
-den är lösenordsskyddad.  För att ändra filen använd kommandot Lås konfigurationen 
-för att låsa upp filen
+den är lösenordsskyddad.  För att ändra filen använd kommandot Lås konfigurationen, 
+för att låsa upp den.
 .
 
 3541;txt;01
@@ -2137,7 +2137,7 @@ kommer börja gälla nästa gång dessa program startar
 # .
 
 3775;txt;02
-Du har gjort en ändring som kanske inte är lätt att ändra.
+Du har gjort en ändring som inte är helt lätt att ändra.
 .
 
 #----------------------------------------------------------------------------
@@ -2576,7 +2576,7 @@ Start / Köråtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar 
 
 Klicka på > Ok, för att lägga till programmet '%3' till Start / Köråtkomstbegränsningar i sandlåda '%2'.
 
-För hantering av Start / Köråtkomstbegränsningar, gå till Sandlådeinställningar -> Begränsningar.
+För hantering av Start / Köråtkomstbegränsningar, gå till Sandlådeinställningar > Begränsningar.
 .
 
 #----------------------------------------------------------------------------
@@ -2652,7 +2652,7 @@ Men, om du använder ett administratörskonto kan Sandboxie stänga av fler säk
 .
 
 3945;txt;01
-Minska rättigheter för administratör och power user konton.
+Minska rättigheter för administratörs och power user konton.
 .
 
 # 3946;txt;01
@@ -2704,7 +2704,7 @@ Nätverksfiler och mappar är normalt synliga för sandlådade applikationer.
 .
 
 3957;txt;01
-Om du vill blockera sandlådade applikationer från fil och folderåtkomst på ditt nätverk, kan du aktivera denna inställning. Individuella filer och mappar kan öppnas för sandlådade applikationer genom att lägga till dem i Resursåtkomst -> Filåtkomst.
+Om du vill blockera sandlådade applikationer från fil och folderåtkomst på ditt nätverk, kan du aktivera denna inställning. Individuella filer och mappar kan öppnas för sandlådade applikationer genom att lägga till dem i Resursåtkomst > Filåtkomst.
 .
 
 3958;txt;01
@@ -2766,7 +2766,7 @@ Om en fil eller mapp också finns med i en annan sorts filåtkomstinställning k
 
 4025;txt;01
 Windows fildelning kan användas för att passera blockerad filåtkomst. 
-Lägg till resurser att blockera från Windows fildelning
+Därför, lades en inställning till för att blockera åtkomst till Windows fildelningstjänst.
 .
 
 4031;txt;01
@@ -2942,7 +2942,7 @@ Denna applikations konfiguration innehåller inte en webbadress.
 .
 
 4207;txt;01
-Öka användbarheten av Sandboxie med andra program genom att välja dem i denna listan nedanför.
+Öka användbarheten av Sandboxie med andra program genom att välja dem i denna lista nedanför.
 .
 
 # 4208;txt;01
@@ -3016,7 +3016,7 @@ del av en applikations konfiguration:
 %2
 
 För att ta bort applikationsinställningen från sandlådan,
-kolla på applikationssidan i sandlådeinställningsfönstret.
+kolla på sidan Applikationer i Sandlådeinställningar.
 .
 
 4223;txt;01
@@ -3463,7 +3463,7 @@ För in &grupp
 .
 
 5152;txt;01
-Flytta  &upp
+Flytta &upp
 .
 
 5153;txt;01
@@ -3491,7 +3491,7 @@ Vill du ladda ner Sandboxie-Plus nu?
 
 6002;txt;01
 Besök <a ID="whats_new">sandboxie-plus.com</a> to för att lära om den nya funktionaliteten hos Sandboxie-Plus,
-eller klicka direkt på <a ID="upgrade">here</a> för att nedladda den senaste Sandboxie-Plus installeraren.
+eller klicka direkt på <a ID="upgrade">här</a> för att nedladda den senaste Sandboxie-Plus installeraren.
 .
 
 6003;txt;01

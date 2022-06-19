@@ -94,6 +94,7 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - sebadamus - Spanish
 - xorcan, fmbxnary - Turkish
 - SuperMaxusa, lufog - Ukrainian
+- pb1 - Swedish
 
 More volunteers are welcome here! ;)
 

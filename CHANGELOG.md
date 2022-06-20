@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1.3 / 5.56.3] - 2022-06-19
+## [1.1.3 / 5.56.3] - 2022-06-20
 
 ### Added
 - added group first sorting [#1922](https://github.com/sandboxie-plus/Sandboxie/issues/1922)

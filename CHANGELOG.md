@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - "AllowBoxedJobs=n" is back to the default behaviour as issues were reported [#1954](https://github.com/sandboxie-plus/Sandboxie/issues/1954)
 - fixed issue with internet block [#1955](https://github.com/sandboxie-plus/Sandboxie/issues/1955)
 - fixed grouping issue in the Plus UI [#1950](https://github.com/sandboxie-plus/Sandboxie/issues/1950)
-- fixed issue with CredentialUIBroker.exe on win 11 with win32k hooks [#1839](https://github.com/sandboxie-plus/Sandboxie/issues/1839)
+- fixed issue with CredentialUIBroker.exe on Windows 11 with win32k hooks [#1839](https://github.com/sandboxie-plus/Sandboxie/issues/1839)
 - fixed issue with delete V2 [#1939](https://github.com/sandboxie-plus/Sandboxie/issues/1939)
 
 

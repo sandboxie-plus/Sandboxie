@@ -670,6 +670,9 @@ BOOLEAN WFP_UpdateProcess(PROCESS* proc)
 	BOOLEAN LogTraffic = FALSE;
 	BOOLEAN BlockInternet = FALSE;
 	LIST NewNetFwRules, OldNetFwRules;
+	
+	List_Init(&NewNetFwRules);
+	List_Init(&OldNetFwRules);
 
 	LogTraffic = Process_GetTraceFlag(proc, L"NetFwTrace") != 0;
 

@@ -49,25 +49,58 @@ BOOLEAN SbieDll_FuncSkipHook(const char* func);
 #ifdef _WIN64
 
 typedef struct _VECTOR_TABLE {
+
+  LIST_ELEM list_elem;
+
   void * offset;
   int index;
   int maxEntries;
 } VECTOR_TABLE;
 
-BOOL bVTableEable = TRUE;
-#define NUM_VTABLES 0x10 
-#define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entries
+//BOOL bVTableEable = TRUE;
+//#define NUM_VTABLES 0x10 
+#define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entrys
 
-VECTOR_TABLE SbieDllVectorTable[NUM_VTABLES] = {
-    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
-    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
-    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
-    {0,0,0},{0,0,0},{0,0,0},{0,0,0}
-};
+//VECTOR_TABLE SbieDllVectorTable[NUM_VTABLES] = {
+//    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
+//    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
+//    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
+//    {0,0,0},{0,0,0},{0,0,0},{0,0,0}
+//};
 
-extern CRITICAL_SECTION VT_CriticalSection;
+//CRITICAL_SECTION  VT_CriticalSection;
 #endif _WIN64
 extern ULONG Dll_Windows;
+
+typedef struct _MODULE_HOOK {
+
+    LIST_ELEM   list_elem;
+
+    HMODULE     module;
+    POOL*       pool;
+#ifdef _WIN64
+    LIST        vTables;
+#endif
+} MODULE_HOOK;
+
+LIST Dll_ModuleHooks;
+CRITICAL_SECTION  Dll_ModuleHooks_CritSec;
+
+
+//---------------------------------------------------------------------------
+// SbieApi_HookInit
+//---------------------------------------------------------------------------
+
+
+_FX void SbieDll_HookInit()
+{
+//#ifdef _WIN64
+//    InitializeCriticalSection(&VT_CriticalSection);
+//#endif
+    InitializeCriticalSection(&Dll_ModuleHooks_CritSec);
+    List_Init(&Dll_ModuleHooks);
+}
+
 
 //---------------------------------------------------------------------------
 // SbieApi_HookTramp
@@ -98,11 +131,11 @@ _FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
 
 
 _FX void *SbieDll_Hook(
-    const char *SourceFuncName, void *SourceFunc, void *DetourFunc)
+    const char *SourceFuncName, void *SourceFunc, void *DetourFunc, HMODULE module)
 {
     static const WCHAR *_fmt1 = L"%s (%d)";
     static const WCHAR *_fmt2 = L"%s (%d, %d)";
-    UCHAR *tramp, *func;
+    UCHAR *tramp, *func = NULL;
     void* RegionBase;
     SIZE_T RegionSize;
     ULONG prot, dummy_prot;
@@ -254,6 +287,45 @@ skip_e9_rewrite: ;
 
 #endif _WIN64
 
+
+    //
+    // Get the module hook resource for this module, if module is NULL
+    // its NTDLL or a special case
+    //
+
+    EnterCriticalSection(&Dll_ModuleHooks_CritSec);
+
+    MODULE_HOOK* mod_hook = List_Head(&Dll_ModuleHooks);
+    while (mod_hook) {
+
+        if (mod_hook->module == module)
+            break;
+
+        mod_hook = List_Next(mod_hook);
+    }
+
+    if (!mod_hook) {
+        mod_hook = Dll_Alloc(sizeof(MODULE_HOOK));
+        if (!mod_hook) {
+            SbieApi_Log(2303, _fmt1, SourceFuncName, 51);
+            goto finish;
+        }
+        mod_hook->module = module;
+        mod_hook->pool = NULL;
+#ifdef _WIN64
+        List_Init(&mod_hook->vTables);
+#endif
+        List_Insert_Before(&Dll_ModuleHooks, NULL, mod_hook); // insert first as we probably will use it often in the next few calls
+    }
+    if (!mod_hook->pool) {
+        mod_hook->pool = Pool_CreateTagged(tzuk | 0xFF);
+        if (!mod_hook->pool) {
+            SbieApi_Log(2303, _fmt1, SourceFuncName, 52);
+            goto finish;
+        }
+    }
+
+
     //
     // 64-bit only:  if the function begins with 'call qword ptr [x]'
     // (6 bytes) then overwrite at the call target address.
@@ -268,7 +340,12 @@ skip_e9_rewrite: ;
         // to remove this qword before calling our detour function
         //
 
-        UCHAR *NewDetour = Dll_AllocCode128();
+        //UCHAR *NewDetour = Dll_AllocCode128();
+        UCHAR *NewDetour = Pool_Alloc(mod_hook->pool, 128);
+        if (! NewDetour) {
+            SbieApi_Log(2305, NULL);
+            goto finish;
+        }
 
         NewDetour[0] = 0x58;        // pop rax
         NewDetour[1] = 0x48;        // mov rax, DetourFunc
@@ -309,14 +386,19 @@ skip_e9_rewrite: ;
 #endif _WIN64
 
     //
-    // invoke the driver to create a trampoline
+    // create the trampoline
     //
 
-    tramp = Dll_AllocCode128();
+    //tramp = Dll_AllocCode128();
+    tramp = Pool_Alloc(mod_hook->pool, 128);
+    if (! tramp) {
+        SbieApi_Log(2305, NULL);
+        goto finish;
+    }
 
     if (SbieApi_HookTramp(SourceFunc, tramp) != 0) {
         SbieApi_Log(2303, _fmt1, SourceFuncName, 2);
-        return NULL;
+        goto finish;
     }
 
 	//ULONG ByteCount = *(ULONG*)(tramp + 80);
@@ -346,7 +428,8 @@ skip_e9_rewrite: ;
         if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
             ULONG err = GetLastError();
             SbieApi_Log(2303, _fmt2, SourceFuncName, 33, err);
-            return NULL;
+            func = NULL;
+            goto finish;
         }
     }
 
@@ -389,15 +472,17 @@ skip_e9_rewrite: ;
 
         BOOLEAN hookset = FALSE;
         BOOLEAN defaultRange = FALSE;
-        int i;
-        EnterCriticalSection(&VT_CriticalSection);
+        //int i;
+        //EnterCriticalSection(&VT_CriticalSection);
 
-        if (bVTableEable) {
-            VECTOR_TABLE *ptrVTable = SbieDllVectorTable;
+        //if (bVTableEable) {
+            //VECTOR_TABLE *ptrVTable = SbieDllVectorTable;
             //default step size 
-
-            for (i = 0; i < NUM_VTABLES && !hookset; i++, ptrVTable++) {
-                if (!ptrVTable->offset) { // if the vtable is not yet initialized initialize it
+            //for (i = 0; i < NUM_VTABLES && !hookset; i++, ptrVTable++) {
+            VECTOR_TABLE* ptrVTable = List_Head(&mod_hook->vTables);
+            do {
+                //if (!ptrVTable->offset) { // if the vtable is not yet initialized initialize it
+                if (!ptrVTable || !ptrVTable->offset) { // if there is no vtable create it
                     ULONG_PTR tempAddr;
                     ULONG_PTR step = 0x20000;// + VTABLE_SIZE;
                     ULONG_PTR max_attempts = 0x4000000 / step;
@@ -425,16 +510,31 @@ skip_e9_rewrite: ;
                         tempAddr -= 0x20000000;
                     }
 
+                    if (!ptrVTable) {
+
+                        ptrVTable = Pool_Alloc(mod_hook->pool, sizeof(VECTOR_TABLE));
+                        if (!ptrVTable) {
+                            SbieApi_Log(2303, _fmt1, SourceFuncName, 53);
+                            goto finish;
+                        }
+
+                        memset(ptrVTable, 0, sizeof(VECTOR_TABLE));
+
+                        List_Insert_After(&mod_hook->vTables, NULL, ptrVTable);
+                    }
+
                     for (; !ptrVTable->offset && max_attempts; tempAddr -= step, max_attempts--) {
-                        ptrVTable->offset = VirtualAlloc((void *)tempAddr, VTABLE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
+                        ptrVTable->offset = VirtualAlloc((void*)tempAddr, VTABLE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
                         //  sprintf(buffer,"VTable Offset: func = %p, offset = %p, tryAddress = %p, attempt = 0x%x\n",func,ptrVTable->offset,tempAddr,max_attempts);
                         //  OutputDebugStringA(buffer);
                     }
 
                     ptrVTable->index = 0;
-                    ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void *);
+                    ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void*);
                 }
-                if (ptrVTable->offset) { // check if we have an nitialized vtable
+
+                //if (ptrVTable->offset) { // check if we have an initialized vtable
+                if (ptrVTable && ptrVTable->offset) { // check if we have a vtable
                     target = (ULONG_PTR)&func[6];
                     diff = (ULONG_PTR) &((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
                     diff = diff - target;
@@ -452,19 +552,25 @@ skip_e9_rewrite: ;
                     }
                 }
                 else { // fail and disable vtable if it could not be initialized
-                    bVTableEable = FALSE;
+                    //bVTableEable = FALSE;
                     SbieApi_Log(2303, _fmt1, SourceFuncName, 888);
-                    LeaveCriticalSection(&VT_CriticalSection);
-                    return NULL;
+                    //LeaveCriticalSection(&VT_CriticalSection);
+                    func = NULL;
+                    goto finish;
                 }
-            }
-        }
 
-        LeaveCriticalSection(&VT_CriticalSection);
+                ptrVTable = List_Next(ptrVTable);
+
+            } while (!hookset);
+            //}
+        //}
+
+        //LeaveCriticalSection(&VT_CriticalSection);
         if (!hookset) {
             // OutputDebugStringA("Memory alloc failed: 12 Byte Patch Disabled\n");
             SbieApi_Log(2303, _fmt1, SourceFuncName, 999);
-            return NULL;
+            func = NULL;
+            goto finish;
         }
     }
 
@@ -501,7 +607,50 @@ skip_e9_rewrite: ;
 
 #endif _WIN64
 
+finish:
+    LeaveCriticalSection(&Dll_ModuleHooks_CritSec);
+
     return func;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_UnHookModule
+//---------------------------------------------------------------------------
+
+
+_FX void SbieDll_UnHookModule(HMODULE module)
+{
+    EnterCriticalSection(&Dll_ModuleHooks_CritSec);
+
+    MODULE_HOOK* mod_hook = List_Head(&Dll_ModuleHooks);
+    while (mod_hook) {
+
+        if (mod_hook->module == module) {
+
+            List_Remove(&Dll_ModuleHooks, mod_hook);
+
+#ifdef _WIN64
+            VECTOR_TABLE* ptrVTable = List_Head(&mod_hook->vTables);
+            while (ptrVTable) {
+
+                if (ptrVTable->offset)
+                    VirtualFree(ptrVTable->offset, 0, MEM_RELEASE);
+
+                ptrVTable = List_Next(ptrVTable);
+            }
+#endif
+
+            Pool_Delete(mod_hook->pool);
+            Dll_Free(mod_hook);
+
+            break;
+        }
+
+        mod_hook = List_Next(mod_hook);
+    }
+
+    LeaveCriticalSection(&Dll_ModuleHooks_CritSec);
 }
 
 

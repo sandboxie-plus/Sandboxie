@@ -633,9 +633,10 @@ _FX BOOLEAN AdvApi_EnableDisableSRP(BOOLEAN Enable)
     if (! AdvApi_Module)
         return FALSE;
     if (! __sys_SaferComputeTokenFromLevel) {
+        HMODULE module = AdvApi_Module;
         P_SaferComputeTokenFromLevel SaferComputeTokenFromLevel =
             (P_SaferComputeTokenFromLevel)GetProcAddress(
-                AdvApi_Module, "SaferComputeTokenFromLevel");
+                module, "SaferComputeTokenFromLevel");
         if (SaferComputeTokenFromLevel) {
             SBIEDLL_HOOK(AdvApi_,SaferComputeTokenFromLevel);
         }
@@ -688,7 +689,7 @@ DWORD Ntmarta_GetSecurityInfo(
 
 #define SBIEDLL_HOOK2(pfx,proc)                  \
     *(ULONG_PTR *)&__sys_##pfx##proc = (ULONG_PTR)   \
-    SbieDll_Hook(#proc, proc, pfx##proc);   \
+    SbieDll_Hook(#proc, proc, pfx##proc, module);   \
     if (! __sys_##pfx##proc) return FALSE;
 
 _FX BOOLEAN Ntmarta_Init(HMODULE module)

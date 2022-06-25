@@ -96,6 +96,8 @@ struct _PROCESS {
 
     void *primary_token;
 
+    PSID *SandboxieLogonSid;
+
     // thread data
 
     PERESOURCE threads_lock;

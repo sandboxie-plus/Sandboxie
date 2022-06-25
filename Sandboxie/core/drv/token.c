@@ -51,8 +51,6 @@ NTSTATUS Sbie_SepFilterToken_KernelMode(
     void        **NewToken
 );
 
-BOOLEAN Token_Init_SbieLogin(void);
-
 static BOOLEAN Token_Init_SepFilterToken(void);
 
 static void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject);
@@ -150,7 +148,7 @@ static UCHAR AnonymousLogonSid[12] = {
     SECURITY_ANONYMOUS_LOGON_RID,0,0,0      // SubAuthority
 };
 
-UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
+//UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 }; // SbieLogin
 
 static UCHAR SystemLogonSid[12] = {
 	1,                                      // Revision
@@ -221,15 +219,6 @@ _FX BOOLEAN Token_Init(void)
 
 #undef MySetGroup
 
-	//
-	// find the sid of the sandboxie user if present
-	//
-
-	// SbieLogin BEGIN
-	if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE))
-        Token_Init_SbieLogin();
-	// SbieLogin END
-
     //
     // find SepFilterToken for Token_RestrictHelper1
     //
@@ -252,27 +241,27 @@ _FX BOOLEAN Token_Init(void)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Token_Init_SbieLogin(void)
-{
-    WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
-	UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
-	if (GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName) && AccountName.Length < 64)
-	{
-		wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
-		AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
-		//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
-
-		SID_NAME_USE use;
-		ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
-		WCHAR DomainBuff[20]; // doesn't work without this
-		UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
-
-		SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
-		//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
-	}
-
-    return TRUE;
-}
+//_FX BOOLEAN Token_Init_SbieLogin(void)
+//{
+//    WCHAR AccountBuffer[64]; // DNLEN + 1 + sizeof(SANDBOXIE_USER) + reserve
+//	UNICODE_STRING AccountName = { 0, sizeof(AccountBuffer), AccountBuffer }; // Note: max valid length is (DNLEN (15) + 1) * sizeof(WCHAR), length is in bytes leave half empty
+//	if (NT_SUCCESS(GetRegString(RTL_REGISTRY_ABSOLUTE, L"\\REGISTRY\\MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName", L"ComputerName", &AccountName)) && AccountName.Length < 64)
+//	{
+//		wcscpy(AccountName.Buffer + (AccountName.Length / sizeof(WCHAR)), L"\\" SANDBOXIE_USER);
+//		AccountName.Length += (1 + wcslen(SANDBOXIE_USER)) * sizeof(WCHAR);
+//		//DbgPrint("Sbie, AccountName: %S\n", AccountName.Buffer);
+//
+//		SID_NAME_USE use;
+//		ULONG userSize = sizeof(SandboxieLogonSid), domainSize = 0;
+//		WCHAR DomainBuff[20]; // doesn't work without this
+//		UNICODE_STRING DomainName = { 0, sizeof(DomainBuff), DomainBuff };
+//
+//		SecLookupAccountName(&AccountName, &userSize, (PSID)SandboxieLogonSid, &use, &domainSize, &DomainName);
+//		//DbgPrint("Sbie, SecLookupAccountName: %x; size:%d %d\n", status, userSize, domainSize);
+//	}
+//
+//    return TRUE;
+//}
 
 
 //---------------------------------------------------------------------------
@@ -1009,7 +998,7 @@ _FX BOOLEAN Token_ResetPrimary(PROCESS *proc)
                     ((ULONG_PTR)TokenObject + UserAndGroups_offset);
 
                 // Windows 8.1 update
-                if (SidAndAttrsInToken->Sid == (PSID)AnonymousLogonSid || SidAndAttrsInToken->Sid == (PSID)SandboxieLogonSid)
+                if (SidAndAttrsInToken->Sid == (PSID)proc->SandboxieLogonSid)
                 {
 					//DbgPrint("Sbie, restore token pointer\n");
 
@@ -1270,27 +1259,12 @@ _FX void *Token_RestrictHelper1(
             UCHAR *SidInToken = (UCHAR *)SidAndAttrsInToken->Sid;
             if (SidInToken && SidInToken[1] >= 1) { // SubAuthorityCount >= 1
 
-				PSID NewSid = NULL;
-                
-                // SbieLogin BEGIN
-				if (Conf_Get_Boolean(proc->box->name, L"SandboxieLogon", 0, FALSE))
-				{
-					if (SandboxieLogonSid[0] != 0)
-						NewSid = (PSID)SandboxieLogonSid;
-					else
-						status = STATUS_UNSUCCESSFUL;
-				}
-				else
-				// SbieLogin END
-
-                // debug tip. To disable anonymous logon, set AnonymousLogon=n
-
-                if (Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
+                if (!proc->SandboxieLogonSid && Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
                 {
-					NewSid = (PSID)AnonymousLogonSid;
+					proc->SandboxieLogonSid = (PSID)AnonymousLogonSid;
                 }
 
-				if (NewSid != NULL)
+				if (proc->SandboxieLogonSid)
 				{
 					//  In windows 8.1 Sid can be in two difference places. One is relative to SidAndAttrsInToken. 
 					//  By debugger, the offset is 0xf0 after SidAndAttrsInToken. The other one is with KB2919355, 
@@ -1306,14 +1280,14 @@ _FX void *Token_RestrictHelper1(
 					
 					// When trying apply the SbieLogin token to a system process there is not enough space in the SID
 					// so we need to use a workaround not unlike the one for win 8
-						|| (RtlLengthSid(SidInToken) < RtlLengthSid(NewSid))
+						|| (RtlLengthSid(SidInToken) < RtlLengthSid(proc->SandboxieLogonSid))
 						) {
 
 						//DbgPrint("Sbie, hack token pointer\n");
-						SidAndAttrsInToken->Sid = (PSID)NewSid;
+						SidAndAttrsInToken->Sid = proc->SandboxieLogonSid;
 					}
 					else {
-						memcpy(SidInToken, NewSid, RtlLengthSid(NewSid));
+						memcpy(SidInToken, proc->SandboxieLogonSid, RtlLengthSid(proc->SandboxieLogonSid));
 					}
 				}
             }
@@ -2250,15 +2224,15 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
     PTOKEN_SOURCE			LocalSource = NULL;
 
     PTOKEN_DEFAULT_DACL		NewDefaultDacl = NULL;
-    ULONG DefaultDacl_Length = 0;
-    PACL  Dacl = NULL;
-    PSID  Sid = NULL;
+    PTOKEN_OWNER            NewOwner = NULL;
+    ULONG                   DefaultDacl_Length = 0;
+    PACL                    NewDacl = NULL;
 
     OBJECT_ATTRIBUTES ObjectAttributes;
     SECURITY_QUALITY_OF_SERVICE SecurityQos;
 
     //
-    // Gather information from the original token
+    // Gether informations from the original token
     //
 
     if (   !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenStatistics, &LocalStatistics))
@@ -2283,26 +2257,14 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
     // Change the SID
     //
                 
-    // SbieLogin BEGIN
-	if (Conf_Get_Boolean(proc->box->name, L"SandboxieLogon", 0, FALSE))
-	{
-        if (SandboxieLogonSid[0] != 0)
-            Sid = (PSID)SandboxieLogonSid;
-        else {
-            Log_Status_Ex_Process(MSG_1222, 0xA6, status, NULL, proc->box->session_id, proc->pid);
-            goto finish;
-        }
-	}
-	else
-	// SbieLogin END
-    if (Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
+    if (!proc->SandboxieLogonSid && Conf_Get_Boolean(proc->box->name, L"AnonymousLogon", 0, TRUE))
     {
-		Sid = (PSID)AnonymousLogonSid;
+		proc->SandboxieLogonSid = (PSID)AnonymousLogonSid;
     }
 
-	if (Sid != NULL)
+	if (proc->SandboxieLogonSid)
 	{
-		memcpy(LocalUser->User.Sid, Sid, RtlLengthSid(Sid));
+		memcpy(LocalUser->User.Sid, proc->SandboxieLogonSid, RtlLengthSid(proc->SandboxieLogonSid));
 	}
 
     //
@@ -2323,6 +2285,8 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
         NULL,
         NULL
     );
+
+    //LUID AuthenticationId = ANONYMOUS_LOGON_LUID;
 
     status = SbieCreateToken(
         &TokenHandle,
@@ -2350,7 +2314,7 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
     // Retry with new DACLs on error
     //
 
-    if (Sid && status == STATUS_INVALID_OWNER)
+    if (proc->SandboxieLogonSid && status == STATUS_INVALID_OWNER)
     {
         DefaultDacl_Length = LocalDefaultDacl->DefaultDacl->AclSize;
         
@@ -2364,11 +2328,13 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
 
         memcpy(NewDefaultDacl, LocalDefaultDacl, DefaultDacl_Length);
 
-        NewDefaultDacl->DefaultDacl = Dacl = (PACL)((ULONG_PTR)NewDefaultDacl + sizeof(TOKEN_DEFAULT_DACL));
+        NewDefaultDacl->DefaultDacl = NewDacl = (PACL)((ULONG_PTR)NewDefaultDacl + sizeof(TOKEN_DEFAULT_DACL));
         NewDefaultDacl->DefaultDacl->AclSize += 128;
-        Sid = LocalUser->User.Sid;
 
-        RtlAddAccessAllowedAce(Dacl, ACL_REVISION2, GENERIC_ALL, Sid);
+        NewOwner = (PTOKEN_OWNER)ExAllocatePoolWithTag(PagedPool, sizeof(TOKEN_OWNER), tzuk);
+        NewOwner->Owner = LocalUser->User.Sid;
+
+        RtlAddAccessAllowedAce(NewDacl, ACL_REVISION2, GENERIC_ALL, NewOwner->Owner);
 
         status = SbieCreateToken(
             &TokenHandle,
@@ -2386,7 +2352,7 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
             0, //DeviceGroups,
             MandatoryPolicy,
 
-            (PTOKEN_OWNER)&Sid,
+            NewOwner,
             LocalPrimaryGroup,
             NewDefaultDacl,
             LocalSource
@@ -2398,9 +2364,9 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
             goto finish;
         }
 
-        Token_SetHandleDacl(NtCurrentProcess(), Dacl);
-        Token_SetHandleDacl(NtCurrentThread(), Dacl);
-        Token_SetHandleDacl(TokenHandle, Dacl);
+        Token_SetHandleDacl(NtCurrentProcess(), NewDacl);
+        Token_SetHandleDacl(NtCurrentThread(), NewDacl);
+        Token_SetHandleDacl(TokenHandle, NewDacl);
     }
     else if (!NT_SUCCESS(status))
     {
@@ -2467,6 +2433,7 @@ finish:
     if (LocalSource)        ExFreePool((PVOID)LocalSource);
 
     if (NewDefaultDacl)     ExFreePool((PVOID)NewDefaultDacl);
+    if (NewOwner)           ExFreePool((PVOID)NewOwner);
 
 
     //

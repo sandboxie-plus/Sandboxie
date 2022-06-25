@@ -234,6 +234,8 @@ void DriverAssist::ShutdownPortAndThreads()
 
     if (PortHandle)
         NtClose(PortHandle);
+
+    CleanUpSIDs();
 }
 
 

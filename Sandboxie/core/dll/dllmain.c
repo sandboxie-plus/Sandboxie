@@ -94,10 +94,6 @@ ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 ULONG Dll_OsBuild = 0;  // initialized by Key module
 ULONG Dll_Windows = 0;
 
-#ifdef _WIN64
-CRITICAL_SECTION  VT_CriticalSection;
-#endif
-
 const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
 
 BOOLEAN Dll_SbieTrace = FALSE;
@@ -155,7 +151,6 @@ _FX BOOL WINAPI DllMain(
 
     } else if (dwReason == DLL_PROCESS_ATTACH) {
 #ifdef _WIN64
-        InitializeCriticalSection(&VT_CriticalSection);
         Dll_DigitalGuardian = GetModuleHandleA("DgApi64.dll");
 #else
         Dll_DigitalGuardian = GetModuleHandleA("DgApi.dll");
@@ -167,6 +162,7 @@ _FX BOOL WINAPI DllMain(
             Dll_Windows = 8;
         }
         Dll_InitGeneric(hInstance);
+        SbieDll_HookInit();
 
     } else if (dwReason == DLL_PROCESS_DETACH) {
 
@@ -175,11 +171,6 @@ _FX BOOL WINAPI DllMain(
             File_DoAutoRecover(TRUE);
             Gui_ResetClipCursor();
         }
-
-//#ifdef _WIN64
-//		// cleanup CS
-//		DeleteCriticalSection(&VT_CriticalSection);
-//#endif
 
     }
 

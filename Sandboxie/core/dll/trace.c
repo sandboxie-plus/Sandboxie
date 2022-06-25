@@ -61,6 +61,8 @@ static P_OutputDebugString          __sys_OutputDebugStringA        = NULL;
 
 _FX int Trace_Init(void)
 {
+    HMODULE module = NULL; // fix-me
+
 	P_RtlSetLastWin32Error RtlSetLastWin32Error;
     P_OutputDebugString OutputDebugStringW;
     P_OutputDebugString OutputDebugStringA;

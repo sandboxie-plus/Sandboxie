@@ -122,7 +122,7 @@ BOOLEAN Gui_OpenAllWinClasses = FALSE;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitClass(void)
+_FX BOOLEAN Gui_InitClass(HMODULE module)
 {
     static const WCHAR *Sandbox = L"Sandbox";
     ULONG len;

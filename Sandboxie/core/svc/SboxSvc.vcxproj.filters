@@ -75,6 +75,9 @@
     <ClCompile Include="comserver2.cpp">
       <Filter>ComProxy</Filter>
     </ClCompile>
+    <ClCompile Include="DriverAssistSid.cpp">
+      <Filter>DriverAssist</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />

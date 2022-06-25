@@ -63,6 +63,8 @@ static P_NtQueryObject          __sys_NtQueryObject             = NULL;
 
 _FX BOOLEAN Obj_Init(void)
 {
+    HMODULE module = NULL;
+
 #if 0
     __sys_NtQueryObject = NtQueryObject;
 #else

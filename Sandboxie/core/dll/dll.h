@@ -569,7 +569,7 @@ void Gui_AllowSetForegroundWindow(void);
 
 void Gdi_SplWow64(BOOLEAN Register);
 
-BOOLEAN Gdi_InitZero(void);
+BOOLEAN Gdi_InitZero(HMODULE module);
 
 void Gui_ResetClipCursor(void);
 

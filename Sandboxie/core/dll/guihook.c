@@ -103,7 +103,7 @@ static BOOLEAN Gui_HookInit = FALSE;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitWinHooks(void)
+_FX BOOLEAN Gui_InitWinHooks(HMODULE module)
 {
     InitializeCriticalSection(&Gui_HooksCritSec);
     List_Init(&Gui_Hooks);

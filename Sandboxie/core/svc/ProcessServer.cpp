@@ -967,6 +967,8 @@ BOOL ProcessServer::RunSandboxedSetDacl(
         SECURITY_ANONYMOUS_LOGON_RID,0,0,0      // SubAuthority
     };
 
+    extern UCHAR SandboxieSid[12];
+
     ULONG LastError;
 	HANDLE hToken;
 	ULONG len;
@@ -1006,7 +1008,7 @@ BOOL ProcessServer::RunSandboxedSetDacl(
 		ok = GetTokenInformation(hToken, TokenUser, pUser, 512, &len);
 		LastError = GetLastError();
 
-        if (idProcess != NULL) // this is used when starting a service
+        if (ok && idProcess != NULL) // this is used when starting a service
         {
             //
             // in Sandboxie version 4, the primary process token is going to be
@@ -1014,8 +1016,16 @@ BOOL ProcessServer::RunSandboxedSetDacl(
             // textual SID string and convert it into a SID value
             //
 
-            if (ok && memcmp(pUser->User.Sid, AnonymousLogonSid,
-                sizeof(AnonymousLogonSid)) == 0) {
+            //
+            // in Sandboxie version 5.57 instead of using the anonymous SID 
+            // we can use box specific custom SIDs,
+            // when comparing we skip the revision and the SubAuthorityCount
+            // also we conpare only teh domain portion of the SID as the rest 
+            // will be different for each box
+            //
+           
+            if (memcmp(pUser->User.Sid, AnonymousLogonSid, sizeof(AnonymousLogonSid)) == 0
+             || memcmp(((UCHAR*)pUser->User.Sid) + 2, SandboxieSid, 10) == 0) {
 
                 PSID TempSid;
                 WCHAR SidString[96];

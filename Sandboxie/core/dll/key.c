@@ -377,6 +377,7 @@ BOOLEAN Key_Delete_v2 = FALSE;
 
 _FX BOOLEAN Key_Init(void)
 {
+    HMODULE module = NULL;
 
     InitializeCriticalSection(&Key_Handles_CritSec);
 

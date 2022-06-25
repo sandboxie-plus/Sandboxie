@@ -213,9 +213,9 @@ BOOLEAN Gui_UseProxyService = TRUE;
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Gui_Init2(void);
+static BOOLEAN Gui_Init2(HMODULE module);
 
-static BOOLEAN Gui_Init3(void);
+static BOOLEAN Gui_Init3(HMODULE module);
 
 static BOOL Gui_SetThreadDesktop(HDESK hDesktop);
 
@@ -360,7 +360,7 @@ _FX BOOLEAN Gui_Init(HMODULE module)
 
     const UCHAR *ProcName;
 
-    if (! Gdi_InitZero())       // only if Gdi_Init was not called yet
+    if (! Gdi_InitZero(module))       // only if Gdi_Init was not called yet
         return FALSE;
 
     // NoSbieDesk BEGIN
@@ -530,33 +530,33 @@ import_fail:
     ok = TRUE;
 
     if (ok)
-        ok = Gui_InitClass();
+        ok = Gui_InitClass(module);
 
     if (ok)
-        ok = Gui_InitTitle();
+        ok = Gui_InitTitle(module);
 
     if (ok)
-        ok = Gui_Init2();
+        ok = Gui_Init2(module);
 
     if (ok)
-        ok = Gui_InitEnum();
+        ok = Gui_InitEnum(module);
 
     if (ok)
-        ok = Gui_InitProp();
+        ok = Gui_InitProp(module);
 
     if (ok)
-        ok = Gui_InitMsg();
+        ok = Gui_InitMsg(module);
 
     if (ok)
-        ok = Gui_InitDlgTmpl();
+        ok = Gui_InitDlgTmpl(module);
 
     if (ok)
-        ok = Gui_Init3();
+        ok = Gui_Init3(module);
 
     if (Gui_UseProxyService) {
 
         if (ok)
-            ok = Gui_InitWinHooks();
+            ok = Gui_InitWinHooks(module);
 
         SBIEDLL_HOOK_GUI(AttachThreadInput);
     }
@@ -570,7 +570,7 @@ import_fail:
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_Init2(void)
+_FX BOOLEAN Gui_Init2(HMODULE module)
 {
     SBIEDLL_HOOK_GUI(ExitWindowsEx);
     SBIEDLL_HOOK_GUI(EndTask);
@@ -633,10 +633,10 @@ _FX BOOLEAN Gui_Init2(void)
         SBIEDLL_HOOK_GUI(ActivateKeyboardLayout);
     }
 
-    if (! Gui_InitMisc())
+    if (! Gui_InitMisc(module))
         return FALSE;
 
-    if (! Gui_DDE_Init())
+    if (! Gui_DDE_Init(module))
         return FALSE;
 
     return TRUE;
@@ -648,7 +648,7 @@ _FX BOOLEAN Gui_Init2(void)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_Init3(void)
+_FX BOOLEAN Gui_Init3(HMODULE module)
 {
     //
     // expect that both RegisterDeviceNotificationA and
@@ -754,7 +754,7 @@ _FX void Gui_InitWindows7(void)
             }
 
             *pSourceFunc = (ULONG_PTR)SbieDll_Hook(
-                FuncName, (void *)(*pSourceFunc), DetourFunc);
+                FuncName, (void *)(*pSourceFunc), DetourFunc, NULL); // fix-me: module
         }
     }
 }
@@ -2645,11 +2645,11 @@ _FX NTSTATUS ComDlg32_GetOpenFileNameW(LPVOID lpofn)
     return bRet;
 }
 
-_FX BOOLEAN ComDlg32_Init(HMODULE hModule)
+_FX BOOLEAN ComDlg32_Init(HMODULE module)
 {
     //if (_wcsicmp(Dll_ImageName, L"opera.exe") == 0)
     //{
-        void *GetOpenFileNameW = GetProcAddress(hModule, "GetOpenFileNameW");
+        void *GetOpenFileNameW = GetProcAddress(module, "GetOpenFileNameW");
         SBIEDLL_HOOK(ComDlg32_, GetOpenFileNameW);
     //}
 

@@ -80,7 +80,7 @@ SbieDll_GetStartError=_SbieDll_GetStartError@0
 SbieDll_GetTokenElevationType=_SbieDll_GetTokenElevationType@0
 SbieDll_GetUserPathEx=_SbieDll_GetUserPathEx@4
 
-SbieDll_Hook=_SbieDll_Hook@12
+SbieDll_Hook=_SbieDll_Hook@16
 
 SbieDll_InitPStore=_SbieDll_InitPStore@0
 SbieDll_IsBoxedService=_SbieDll_IsBoxedService@4

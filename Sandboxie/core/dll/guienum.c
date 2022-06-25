@@ -44,7 +44,7 @@ typedef struct _GUI_ENUM_PROC_PARM {
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Gui_HookQueryWindow(void);
+static BOOLEAN Gui_HookQueryWindow(HMODULE module);
 
 static ULONG_PTR Gui_NtUserQueryWindow(HWND hWnd, ULONG_PTR type);
 
@@ -181,7 +181,7 @@ static ULONG64 Gui_GetShellWindow_LastTicks = 0;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitEnum(void)
+_FX BOOLEAN Gui_InitEnum(HMODULE module)
 {
     //
     // hook EnumWindow* and FindWindow* family of functions
@@ -189,7 +189,7 @@ _FX BOOLEAN Gui_InitEnum(void)
 
     if (! Gui_OpenAllWinClasses) {
 
-        if (Gui_UseProxyService && !Gui_HookQueryWindow())
+        if (Gui_UseProxyService && !Gui_HookQueryWindow(module))
             return FALSE;
 
         if (Gui_UseProxyService && !Dll_SkipHook(L"enumwin")) {
@@ -259,7 +259,7 @@ _FX BOOLEAN Gui_InitEnum(void)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_HookQueryWindow(void)
+_FX BOOLEAN Gui_HookQueryWindow(HMODULE module)
 {
     static const WCHAR *_ProcName = L"IsHungAppWindow";
     static char *_ProcNameA = "IsHungAppWindow";

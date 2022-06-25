@@ -720,7 +720,7 @@ _FX int Gdi_EnumFontFamiliesExW(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gdi_InitZero(void)
+_FX BOOLEAN Gdi_InitZero(HMODULE module)
 {
     static void *Saved_GdiDllInitialize = NULL;
     void *GdiDllInitialize;
@@ -784,7 +784,7 @@ _FX BOOLEAN Gdi_Full_Init_impl(HMODULE module, BOOLEAN full)
 
 	InitializeCriticalSection(&Gdi_CritSec);
 
-	if (!Gdi_InitZero())
+	if (!Gdi_InitZero(module))
 		return FALSE;
 
 	//

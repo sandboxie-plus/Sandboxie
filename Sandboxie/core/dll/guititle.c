@@ -60,7 +60,7 @@ static ANSI_STRING Gui_BoxNameTitleA;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitTitle(void)
+_FX BOOLEAN Gui_InitTitle(HMODULE module)
 {
     WCHAR buf[10];
 

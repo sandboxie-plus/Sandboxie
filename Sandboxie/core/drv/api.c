@@ -1301,9 +1301,7 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
             if (Obj_CallbackInstalled)
                 FeatureFlags |= SBIE_FEATURE_FLAG_OB_CALLBACKS;
 
-            extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
-            if (SandboxieLogonSid[0] != 0)
-                FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
+            FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
 
 #ifdef HOOK_WIN32K
             extern ULONG Syscall_MaxIndex32;

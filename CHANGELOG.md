@@ -4,16 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.0 / 5.57.0] - 2022-01-??
+## [1.2.0 / 5.57.0] - 2022-06-??
 
 ### Added
 - Reenginiered "SandboxieLogon=y" and set it on by default, now every sandbox gets its own SID
 -- Note: this enforces the isolation of individual sandboxes from each other.
 
 ### Changed
-- reworked hook management, now unloaded dll'f are properly unhooked [#1243](https://github.com/sandboxie-plus/Sandboxie/issues/1243)
-
-
+- reworked hook management, now unloaded dll's are properly unhooked [#1243](https://github.com/sandboxie-plus/Sandboxie/issues/1243)
+- box order is now stored in the plus ini
 
 
 

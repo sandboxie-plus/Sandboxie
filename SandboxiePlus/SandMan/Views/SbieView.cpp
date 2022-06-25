@@ -329,7 +329,7 @@ void CSbieView::Refresh()
 		}
 
 		QString Grouping = CSbieView__SerializeGroup(m_Groups);
-		theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
+		theConf->SetValue("UIConfig/BoxDisplayOrder", Grouping);
 	}
 }
 
@@ -1493,13 +1493,17 @@ void CSbieView::ReloadUserConfig()
 {
 	m_Groups.clear();
 
-	QString Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
-
+	QString Grouping = theConf->GetString("UIConfig/BoxDisplayOrder");
+	if(Grouping.isEmpty())
+		Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
 	CSbieView__ParseGroup(Grouping, m_Groups);
 
 	UpdateGroupMenu();
 
-	m_Collapsed = SplitStr(theAPI->GetUserSettings()->GetText("BoxCollapsedView"), ",").toSet();
+	QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
+	if (Collapsed.isEmpty())
+		Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
+	m_Collapsed = SplitStr(Collapsed, ",").toSet();
 }
 
 void CSbieView::SaveUserConfig()
@@ -1509,9 +1513,10 @@ void CSbieView::SaveUserConfig()
 	//m_UserConfigChanged = false;
 
 	QString Grouping = CSbieView__SerializeGroup(m_Groups);
-	theAPI->GetUserSettings()->SetText("BoxDisplayOrder", Grouping);
+	theConf->SetValue("UIConfig/BoxDisplayOrder", Grouping);
 
-	theAPI->GetUserSettings()->SetText("BoxCollapsedView", m_Collapsed.toList().join(","));
+	QString Collapsed = m_Collapsed.toList().join(",");
+	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
 }
 
 void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)

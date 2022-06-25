@@ -875,9 +875,9 @@ Comando di eliminazione fallito: %0
 # Sandboxie è stato installato più di 30 giorni fa.
 # .
 
-3232;txt;01
-È possibile utilizzare Sandboxie gratuitamente per tutto il tempo che vuoi.
-.
+# 3232;txt;01
+# È possibile utilizzare Sandboxie gratuitamente per tutto il tempo che vuoi.
+# .
 
 # 3233;txt;01
 # Tuttavia, il caricamento iniziale della versione gratuita durerà alcuni secondi in più.
@@ -1267,6 +1267,10 @@ Avvia &Esplora risorse
 
 3467;txt;01
 Aggiorna a Sandboxie Plus
+.
+
+3468;txt;01
+Guida di migrazione a Sandboxie Plus
 .
 
 3471;txt;01

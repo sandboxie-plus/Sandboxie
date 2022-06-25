@@ -323,8 +323,8 @@ void CSbieView::Refresh()
 		foreach(const QVariant& ID, Added) {
 			if (ID.type() == QVariant::String) {
 				QString id = ID.toString();
-				if (id.left(1) == "!") id.remove(0, 1); // remove group group marker "!"
-				m_Groups[""].append(id);
+				if (id.left(1) != "!")
+					m_Groups[""].append(id);
 			}
 		}
 

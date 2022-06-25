@@ -77,20 +77,24 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - yfdyh000 - Localization support for Plus installer
 - NewKidOnTheBlock - Changelog fixes
 - Naeemh1 - Documentation additions
+- APMichael - Templates additions
+- vedantmgoyal2009 - Workflow to automate Plus releases in Windows Package Manager
+- weihongx9315 - Windows Credentials fix
 
 ## Translators
-- yuhao2348732, nkh0472, yfdyh000, gexgd0419 - Chinese Simplified
+- yuhao2348732, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange - Chinese Simplified
 - TragicLifeHu, Hulen - Chinese Traditional
 - RockyTDR - Dutch
-- clexanis - French
+- clexanis, Mmoi-Fr - French
 - bastik-1001 - German
 - isaak654 - Italian
-- 7zip from [Xanasoft topic](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=10) - Polish
+- [7zip](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=10) - Polish (a new translator is needed to provide updates via pull requests)
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- xorcan - Turkish (disabled for inactivity, a new translator is needed)
-- SuperMaxusa - Ukrainian
+- xorcan, fmbxnary - Turkish
+- SuperMaxusa, lufog - Ukrainian
+- pb1 - Swedish
 
 More volunteers are welcome here! ;)
 

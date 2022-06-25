@@ -1348,7 +1348,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
                     // boxed job to a process will not interfere with the job assigned by SbieSvc
                     //
 
-                    new_proc->can_use_jobs = Conf_Get_Boolean(new_proc->box->name, L"AllowBoxedJobs", 0, TRUE);
+                    new_proc->can_use_jobs = Conf_Get_Boolean(new_proc->box->name, L"AllowBoxedJobs", 0, FALSE);
                 }
 
                 //

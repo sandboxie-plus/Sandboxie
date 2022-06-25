@@ -6,27 +6,27 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="171"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Installieren Sie Ihr &lt;b&gt;Sandboxie-Plus&lt;/b&gt;-Unterstützerzertifikat</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="172"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falls Sie ein Unterstützerzertifikat haben, geben Sie dieses bitte in das Feld hierrunter ein.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="194"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Testphase ohne ein Zertifikat für eine begrenzte Zeit.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="213"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in einer geschäftlichen Umgebung zu verwenden, ist ein geeignetes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; für kommerzielle Zwecke erforderlich. Wenn Sie noch kein(e) erfordliche(s/en) haben, können Sie dies(e) im &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com Webshop&lt;/a&gt; bekommen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="224"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; bietet zusätzliche Funktionen und Boxtypen exklusiv für &lt;u&gt;Projektunterstützer&lt;/u&gt;. Boxen wie die verbesserten Privatsphäreboxen &lt;b&gt;&lt;font color=&apos;red&apos;&gt;zum Schutz der Nutzerdaten vor unerlaubtem Zugriff&lt;/font&gt;&lt;/b&gt; durch sandgeboxte Programme. Wenn Sie noch kein Unterstützer sind, erwägen Sie bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;das Projekt zu unterstützen&lt;/a&gt;, um die zukünftige Entwicklung von Sandboxie sicherzustellen und ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; zu erhalten.</translation>
     </message>
 </context>
 <context>
@@ -75,17 +75,17 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="442"/>
         <source>Complete your configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Konfiguration vervollständigen</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="449"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fast erledigt, Fertig klicken, um alle ausgewählten Optionen anzuwenden und den Assistenten abzuschließen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="461"/>
         <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus aktuell halten.</translation>
     </message>
 </context>
 <context>
@@ -93,32 +93,32 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="106"/>
         <source>Introduction</source>
-        <translation type="unfinished"></translation>
+        <translation>Einführung</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="110"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen beim Einrichtungsassistent. Dieser Assistent wird Ihnen helfen Ihre Kopie von &lt;b&gt;Sandboxie-Plus&lt;/b&gt; zu konfigurieren. Sie können diesen Assistenten jederzeit unter Sandbox-&gt;Wartung aufrufen, falls Sie diesen nicht jetzt abschließen möchten.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="121"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie aus, wie Sie Sandboxie-Plus verwenden möchten</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="124"/>
         <source>&amp;Personally, for private non-commercial use</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Persönlich, für nicht-kommerziellen Gebrauch</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="129"/>
         <source>&amp;Commercially, for business or enterprise use</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kommerziell, für geschäftliche oder unternehmerische Verwendung</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="134"/>
         <source>Note: this option is immutable</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz: Diese Option ist unveränderlich</translation>
     </message>
 </context>
 <context>
@@ -1021,7 +1021,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="248"/>
         <source>Close and Disable Immediate Recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließe und deaktiviere die Sofortwiederherstellung für diese Box</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="268"/>
@@ -1275,7 +1275,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="340"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Einrichtungsassistent</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="342"/>
@@ -1320,7 +1320,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="370"/>
         <source>Refresh View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht aktualisieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="375"/>
@@ -2034,7 +2034,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2075"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxiekonfiguartion wurde neu geladen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2167"/>
@@ -2186,7 +2186,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Models/SbieModel.cpp" line="479"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Start Time</source>
@@ -2966,7 +2966,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="641"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies scheint kein Zertifikat zu sein. Bitte geben Sie das ganze Zertifikat ein, nicht nur einen Teil davon.</translation>
     </message>
     <message>
         <source>This does not look like a certificate, please enter the entire certificate, not just a portion of it.</source>
@@ -3035,27 +3035,27 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="28"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Einrichtungsassistent</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="39"/>
         <source>The decision you make here will affect which page you get to see next.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Entscheidung, die Sie hier machen, wird sich auf die nachfolgende Seite auswirken.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="42"/>
         <source>This help is likely not to be of any help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Hilfe ist wahrscheinlich keine Hilfe.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="46"/>
         <source>Sorry, I already gave all the help I could.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entschuldigen Sie, ich habe Ihnen jegliche Hilfe gegeben, die ich konnte.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="48"/>
         <source>Setup Wizard Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Einrichtungsassistent Hilfe</translation>
     </message>
 </context>
 <context>
@@ -3063,27 +3063,27 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="371"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; Menüintegration konfigurieren</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="372"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren Sie, wie Sandboxie-Plus sich in Ihr System integrieren soll.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="376"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished">Starte Benutzeroberfläche mit Windows</translation>
+        <translation>Starte Benutzeroberfläche mit Windows</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="381"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished">Füge &apos;In Sandbox starten&apos; zum Kontextmenü des Explorers hinzu</translation>
+        <translation>Füge &apos;In Sandbox starten&apos; zum Kontextmenü des Explorers hinzu</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="386"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle eine Desktopverknüpfung zum Starten des Internetbrowsers unter Sandboxie</translation>
     </message>
 </context>
 <context>
@@ -3281,32 +3281,32 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="266"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; Nutzeroberfläche konfigurieren</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="267"/>
         <source>Select the user interface style you prefer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie Ihren bervorzugten Stil der Nutzeroberfläche.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="271"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;rweiterte Nuzteroberfläche für Experten</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="276"/>
         <source>&amp;Simple UI for beginners</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einfache Nutzeroberfläche für Anfänger</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="300"/>
         <source>Use Bright Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutze hellen Modus</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="304"/>
         <source>Use Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutze dunkelen Modus</translation>
     </message>
 </context>
 <context>
@@ -3314,22 +3314,22 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="406"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; Netzwerkfilter konfigurieren</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="407"/>
         <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie kann die Windows Filtering Platform (WFP) nutzen, um den Netzwerkzugriff zu beschränken.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="413"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verwendung von WFP erlaubt Sandboxie verlässlich IP/Port basierte Regeln für den Netzwerkzugriff zu erzwingen. Anders als Programmfirewalls auf Systemebene, kann Sandboxie verschiedene Regeln in jeder Box für das gleiche Programm verwenden. Falls Sie bereits eine gute und verlässliche Programmfirewall haben und die Regeln per Box nicht brauchen, können Sie diese Option ausgeschaltet lassen. Ohne aktivierte WFP ist es Sandboxie immer noch möglich, verlässlich und vollständig Prozesse am Netzwerkzugriff hindern. Jedoch kann dies dazu führen, dass ein Prozess abstürzt, da die Endpunkte der Netzwerkgeräte durch den Treiber blockiert werden. Selbst wenn WFP deaktiviert ist, bietet Sandboxie das Setzen von IP/Port basierten Regeln, welche allerdings nur im Nutzermodus angewendet und nicht durch den Treiber erzwungen werden. Daher könnte, ohne aktivierte WFP, ein absichtlich bösartiger Prozess diese Regeln umgehen, aber nicht die vollständige Netzwerkblockade.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="422"/>
         <source>Enable Windows Filtering Platform (WFP) support</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere Windows Filtering Platform (WFP) Unterstützung</translation>
     </message>
 </context>
 <context>
@@ -4327,7 +4327,7 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="2089"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
-        <translation type="unfinished">Erlaube Verwendung von verschachtelten Jobobjekten (experimentell, funktioniert ab Windows 8 und neuer)</translation>
+        <translation>Erlaube Verwendung von verschachtelten Jobobjekten (funktioniert ab Windows 8 und neuer)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2131"/>
@@ -5004,7 +5004,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="185"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="253"/>

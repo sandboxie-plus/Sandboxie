@@ -1021,7 +1021,12 @@ _FX LONG SbieApi_CheckInternetAccess(
         //
 
         BOOLEAN chk = FALSE;
-        if (len == 6) {
+        if (len == 12) {
+            
+            if (_wcsnicmp(ptr, File_Afd, 3) == 0) // Afd\Endpoint
+                chk = TRUE;
+
+        } else if (len == 6) {
             
             if (_wcsnicmp(ptr, File_RawIp, 6) == 0)
                 chk = TRUE;

@@ -41,7 +41,7 @@ void CBoxMonitor::run()
 {
 	while (!m_bTerminate) 
 	{
-		Sleep(1000);
+		Sleep(100);
 
 		m_Mutex.lock();
 		QList<QString> Keys = m_Boxes.keys();
@@ -168,7 +168,6 @@ bool CBoxMonitor::IsScanPending(const CSandBoxPlus* pBox)
 
 void CBoxMonitor::Stop()
 {
-	QMutexLocker Lock(&m_Mutex);
 	if (!isRunning()) return;
 
 	m_bTerminate = true;
@@ -177,6 +176,8 @@ void CBoxMonitor::Stop()
 		terminate();
 		qDebug() << "Failed to stop monitor thread, terminating!!!";
 	}
+
+	QMutexLocker Lock(&m_Mutex);
 
 	while (!m_Boxes.isEmpty()) {
 		SBox Box = m_Boxes.take(m_Boxes.firstKey());

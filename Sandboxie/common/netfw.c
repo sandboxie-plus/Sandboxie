@@ -549,6 +549,7 @@ static int isxdigit_(int c) { return (isdigit_(c) || (c >= 'A' && c <= 'F') || (
 static int isascii(int iChar) { return((iChar <= 127) && (iChar >= 0)); }
 static int isalnum_(int c) { return (isdigit_(c) || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')); }
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // from BSD sources: http://code.google.com/p/plan9front/source/browse/sys/src/ape/lib/bsd/?r=320990f52487ae84e28961517a4fa0d02d473bac
 
@@ -649,7 +650,7 @@ static int delimchar(int c)
 {
 	if(c == '\0')
 		return 1;
-	if(c == ':' || isascii(c) && isalnum(c))
+	if(c == ':' || isascii(c) && isalnum_(c))
 		return 0;
 	return 1;
 }

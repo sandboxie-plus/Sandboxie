@@ -37,8 +37,6 @@
 
 BEGIN_MESSAGE_MAP(CAboutDialog, CBaseDialog)
 
-    ON_COMMAND(ID_ABOUT_TUTORIAL,       OnTutorial)
-
 END_MESSAGE_MAP()
 
 
@@ -159,28 +157,6 @@ BOOL CAboutDialog::OnInitDialog()
     GetDlgItem(IDOK)->SetWindowText(CMyMsg(MSG_3001));
 
     return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
-// OnRegister
-//---------------------------------------------------------------------------
-
-
-void CAboutDialog::OnRegister()
-{
-}
-
-
-//---------------------------------------------------------------------------
-// OnTutorial
-//---------------------------------------------------------------------------
-
-
-void CAboutDialog::OnTutorial()
-{
-    GetParent()->PostMessage(WM_COMMAND, ID_HELP_TUTORIAL, 0);
-    EndDialog(0);
 }
 
 

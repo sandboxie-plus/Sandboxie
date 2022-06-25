@@ -125,6 +125,7 @@ class CMyFrame : public CFrameWnd
     afx_msg void OnCmdHelpForum();
 	afx_msg void OnCmdHelpUpdate();
     afx_msg void OnCmdHelpUpgrade();
+    afx_msg void OnCmdHelpMigrate();
     afx_msg void OnCmdHelpAbout();
 	//afx_msg LRESULT OnUpdateResult(WPARAM wParam, LPARAM lParam);
     afx_msg void OnCmdTerminateProcess();

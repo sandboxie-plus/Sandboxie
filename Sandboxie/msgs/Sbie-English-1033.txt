@@ -878,9 +878,9 @@ Delete command failed:  %0
 # You have installed Sandboxie more than 30 days ago.
 # .
 
-3232;txt;01
-Personal use of Sandboxie is permitted free of charge for as long as you wish.
-.
+#3232;txt;01
+#Personal use of Sandboxie is permitted free of charge for as long as you wish.
+#.
 
 # 3233;txt;01
 # However, the free version will now pause for a few seconds.
@@ -1273,6 +1273,10 @@ Run &Windows Explorer
 
 3467;txt;01
 Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
 .
 
 3471;txt;01

@@ -77,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="UpdateDialog.cpp" />
     <ClCompile Include="Updater.cpp" />
+    <ClCompile Include="..\common\WebView.c">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutDialog.h" />

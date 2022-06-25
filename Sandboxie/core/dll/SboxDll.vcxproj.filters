@@ -204,9 +204,6 @@
     <ClCompile Include="cred.c">
       <Filter>pst</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\wow64ext\wow64ext.cpp">
-      <Filter>common\wow64ext</Filter>
-    </ClCompile>
     <ClCompile Include="debug.c">
       <Filter>debug</Filter>
     </ClCompile>
@@ -234,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="file_snapshots.c">
       <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\dllimport.c">
+      <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,15 +305,6 @@
     <ClInclude Include="..\..\common\win32_ntddk.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\wow64ext\CMemPtr.h">
-      <Filter>common\wow64ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\wow64ext\internal.h">
-      <Filter>common\wow64ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\wow64ext\wow64ext.h">
-      <Filter>common\wow64ext</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\my_version.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -331,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="handle.h">
       <Filter>obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\dllimport.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -386,9 +380,6 @@
     </Filter>
     <Filter Include="net">
       <UniqueIdentifier>{bbd6a003-d74d-405a-bd10-e2fea62301f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="common\wow64ext">
-      <UniqueIdentifier>{c6a9654a-9f55-43ca-9cd1-7571bb879288}</UniqueIdentifier>
     </Filter>
     <Filter Include="debug">
       <UniqueIdentifier>{db0f9820-8908-4325-96f9-69c82fa9e268}</UniqueIdentifier>

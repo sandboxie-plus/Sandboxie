@@ -594,6 +594,27 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     //DbgPrint("[syscall] request for service %d / %08X\n", syscall_index, syscall_index);
 
+    //
+    // use direct syscalls to access 64 bit memory from a wow process 
+    // instead of using heaven's gate / wow64ext
+    //
+
+    if (syscall_index == 0xFFF && parms[3] != 0) {
+        __try {
+
+            entry = Syscall_GetByName((UCHAR*)parms[3]);
+
+            if(parms[4]) // return found index to the caller to be re used later
+                *(USHORT*)parms[4] = entry->syscall_index; 
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            entry = NULL;
+        }
+    }
+    else 
+        
+    //
+
     if (Syscall_Table && (syscall_index <= Syscall_MaxIndex))
         entry = Syscall_Table[syscall_index];
     else
@@ -933,6 +954,8 @@ _FX BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
     // In Win10, case 0xb9 triggers WbCreateWarbirdProcess/WbDispatchOperation/WbSetTrapFrame
     // and PspSetContextThreadInternal (Warbird operation?) to deliver a apc call in the current
     // thread in user mode. Warbird needs the real thread context.
+    // https://github.com/xpn/warbird_exploit
+    // this exploit only works on x86 windows but can still crash a x64 one
 
     // It seems only NtQuerySystemInfomation is doing this.
     // Call Syscall_Set3 in Syscall_Init if we see a different syscall does this in the future.

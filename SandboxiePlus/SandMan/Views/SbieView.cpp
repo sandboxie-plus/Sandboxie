@@ -1304,8 +1304,10 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
 
-		if (index.column() == CSbieModel::ePath)
+		if (index.column() == CSbieModel::ePath) {
 			OnSandBoxAction(m_pMenuExplore);
+			return;
+		}
 	}
 
 	//if (index.column() != CSbieModel::eName)

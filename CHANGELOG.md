@@ -8,9 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.1 / 5.57.1] - 2022-06-??
 
 ### Fixed
-- fixed dip issue on windows 7
-- fixed issue with software compatibility tab
-- fixed issue with OpenKeyPath's introduced in build 1.1.1 [#2006](https://github.com/sandboxie-plus/Sandboxie/issues/2006)
+- fixed DPI issue on Windows 7
+- fixed issue with Software Compatibility tab
+- fixed issue with OpenKeyPath introduced in build 1.1.1 [#2006](https://github.com/sandboxie-plus/Sandboxie/issues/2006)
 
 
 
@@ -18,13 +18,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.0 / 5.57.0] - 2022-06-28
 
 ### Added
-- Reenginiered "SandboxieLogon=y" and set it on by default, now every sandbox gets its own SID
--- Note: this enforces the isolation of individual sandboxes from each other.
+- re-engineered "SandboxieLogon=y"; it's on by default, as every sandbox gets its own SID now
+-- Note: this enforces strict isolation of sandboxes from each other.
 
 ### Changed
-- reworked hook management, now unloaded dll's are properly unhooked [#1243](https://github.com/sandboxie-plus/Sandboxie/issues/1243)
-- box order is now stored in the plus ini
-- improved dpi scaling behavioure
+- reworked hook management, unloaded DLLs are properly unhooked now [#1243](https://github.com/sandboxie-plus/Sandboxie/issues/1243)
+- box order is now stored in the Sandboxie-Plus.ini
+- improved DPI scaling behaviour
 
 
 
@@ -32,7 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.3 / 5.56.3] - 2022-06-20
 
 ### Added
-- added group first sorting [#1922](https://github.com/sandboxie-plus/Sandboxie/issues/1922)
+- added group-first sorting [#1922](https://github.com/sandboxie-plus/Sandboxie/issues/1922)
 
 ### Changed
 - updated Classic UI Swedish translation (thanks pb1)
@@ -46,7 +46,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed grouping issue in the Plus UI [#1950](https://github.com/sandboxie-plus/Sandboxie/issues/1950)
 - fixed issue with CredentialUIBroker.exe on Windows 11 with win32k hooks [#1839](https://github.com/sandboxie-plus/Sandboxie/issues/1839)
 - fixed issue with delete V2 [#1939](https://github.com/sandboxie-plus/Sandboxie/issues/1939)
-
 
 
 
@@ -82,7 +81,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - the refresh command is now bound to F5 [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - added more first start wizard options
 - added option to permanently disable immediate recovery for any given box when it opens [#1478](https://github.com/sandboxie-plus/Sandboxie/issues/1478)
-- double click on the path column now opens the box root in explorer [#1924](https://github.com/sandboxie-plus/Sandboxie/issues/1924)
+- double-click on the path column now opens the box root in explorer [#1924](https://github.com/sandboxie-plus/Sandboxie/issues/1924)
 
 ### Changed
 - changed Move Box behaviour [#1879](https://github.com/sandboxie-plus/Sandboxie/issues/1879)
@@ -132,6 +131,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
 ## [1.0.22 / 5.55.22] - 2022-05-15
 
 ### Added
@@ -144,6 +144,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
 - fixed issue with Windows Server 2022 build 20348
 - fixed translation switching issues [#1852](https://github.com/sandboxie-plus/Sandboxie/issues/1852)
+
 
 
 
@@ -163,6 +164,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
 ## [1.0.20 / 5.55.20] - 2022-05-02
 
 ### Fixed
@@ -171,6 +173,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with editing start restriction entries
 - fixed issue with the network options tab [#1825](https://github.com/sandboxie-plus/Sandboxie/issues/1825)
 - fixed portable mode issue if SandMan is run as admin [#1764](https://github.com/sandboxie-plus/Sandboxie/issues/1764)
+
 
 
 
@@ -192,6 +195,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed further issues with box grouping [#1698](https://github.com/sandboxie-plus/Sandboxie/issues/1698) [#1697](https://github.com/sandboxie-plus/Sandboxie/issues/1697)
 - fixed issues with snapshot UI [#1696](https://github.com/sandboxie-plus/Sandboxie/issues/1696) [#1695](https://github.com/sandboxie-plus/Sandboxie/issues/1695)
 - fixed issue with recovery dialog focus [#1374](https://github.com/sandboxie-plus/Sandboxie/issues/1374)
+
 
 
 
@@ -723,7 +727,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - the "BoxNameTitle" value can now be set explicitly on a per image name basis [#1190](https://github.com/sandboxie-plus/Sandboxie/issues/1190)
 
 ### Fixed
-- fixed inability to delete read-only files from sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
+- fixed inability to delete read-only files from the sandboxed explorer [#1237](https://github.com/sandboxie-plus/Sandboxie/issues/1237)
 - fixed wrong recovery target in Plus UI [#1274](https://github.com/sandboxie-plus/Sandboxie/issues/1274)
 - fixed SBIE2101 issue introduced with 0.9.7a [#1279](https://github.com/sandboxie-plus/Sandboxie/issues/1279)
 - fixed sorting in the box picker window [#1269](https://github.com/sandboxie-plus/Sandboxie/issues/1269)
@@ -1015,7 +1019,7 @@ Fixed issue with Windows 7
 -- the security-enhanced option "MsiInstallerExemptions=n" is now the default behaviour
 
 ### Fixed
-- fixed issue with the "Explore Sandboxed" command [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
+- fixed issue with the "explore sandboxed" command [#972](https://github.com/sandboxie-plus/Sandboxie/issues/972)
 - rolled back the switch from using NtQueryKey to NtQueryObject as it seems to break some older Windows 10 versions like 1803 [#984](https://github.com/sandboxie-plus/Sandboxie/issues/984)
 -- this change was introduced to fix [#951](https://github.com/sandboxie-plus/Sandboxie/issues/951)
 -- to use NtQueryObject the option "UseObjectNameForKeys=y" can be added to Sandboxie.ini
@@ -1090,7 +1094,7 @@ Fixed issue with Windows 7
 -- not yet enabled in production build
 - the presence of the default box is only checked on connect
 - the portable directory dialog now shows the directory [#924](https://github.com/sandboxie-plus/Sandboxie/issues/924)
-- when terminated, boxed processes now first try doing that by terminating the job object
+- when terminated, boxed processes now try terminating the job object first
 - the driver now can terminate problematic processes by default without the help of the service
 - the box delete routine now retries up to 10 times, see [#954](https://github.com/sandboxie-plus/Sandboxie/issues/954)
 - replaced the Process List used by the service with a much faster Hash Map implementation
@@ -1771,7 +1775,7 @@ Fixed issue with Windows 7
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
 ### Added
-- added explore box content menu option
+- added "explore box" content menu option
 
 ### Fixed
 - fixed thread handle leak in SbieSvc and other components [#144](https://github.com/sandboxie-plus/Sandboxie/issues/144)
@@ -1787,9 +1791,9 @@ Fixed issue with Windows 7
 - added shell integration options to SbiePlus
 
 ### Changed
-- SbieCtrl does not longer auto show the tutorial on first start
+- SbieCtrl no longer auto-shows the tutorial on first start
 - when hooking to the trampoline, the migrated section of the original function is no longer noped out
--- it caused issues with unity games, will be investigated and re-enabled later
+-- it caused issues with Unity games
 
 ### Fixed
 - fixed colour issue with vertical tabs in dark mode
@@ -1797,7 +1801,7 @@ Fixed issue with Windows 7
 - fixed directory listing bug introduced in 5.43
 - fixed issues with settings window when not being connected to driver
 - fixed issue when starting SandMan UI as admin
-- fixed auto content delete not working with SandMan UI
+- fixed auto-content-delete not working with SandMan UI
 
 
 
@@ -1863,7 +1867,7 @@ Fixed issue with Windows 7
 - added finder to resource log
 - added option to hide host processes "HideHostProcess=[name]"
 -- Note: Sbie hides by default processes from other boxes, this behaviour can now be controlled with "HideOtherBoxes=n"
-- Sandboxed RpcSs and DcomLaunch can now be run as system with the option "ProtectRpcSs=y" however this breaks sandboxed explorer and other
+- Sandboxed RpcSs and DcomLaunch can now be run as system with the option "ProtectRpcSs=y" however this breaks the sandboxed explorer and others
 - Built In Clsid whitelist can now be disabled with "OpenDefaultClsid=n"
 - Processes can be now terminated with the del key, and require a confirmation
 - added sandboxed window border display to SandMan.exe

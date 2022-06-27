@@ -370,7 +370,7 @@ bool CSbieAPI::IsConnected() const
 	return m->SbieApiHandle != INVALID_HANDLE_VALUE;
 }
 
-bool CSbieAPI__IsWow64()
+bool CSbieAPI::IsWow64()
 {
 	static bool IsWow64 = false;
 #ifndef _WIN64
@@ -408,7 +408,7 @@ SB_STATUS CSbieAPI__ConnectPort(SSbieAPI* m)
 	//NtRegisterThreadTerminatePort(m->PortHandle);
 
 	m->SizeofPortMsg = sizeof(PORT_MESSAGE);
-	if (CSbieAPI__IsWow64())
+	if (CSbieAPI::IsWow64())
 		m->SizeofPortMsg += sizeof(ULONG) * 4;
 	m->MaxDataLen -= m->SizeofPortMsg;
 

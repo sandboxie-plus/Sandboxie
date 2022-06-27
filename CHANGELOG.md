@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reworked hook management, now unloaded dll's are properly unhooked [#1243](https://github.com/sandboxie-plus/Sandboxie/issues/1243)
 - box order is now stored in the plus ini
-
+- improved dpi scaling behavioure
 
 
 

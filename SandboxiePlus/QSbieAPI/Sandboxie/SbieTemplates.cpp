@@ -191,6 +191,13 @@ void CSbieTemplates::CollectServices()
 
 void CSbieTemplates::CollectProducts()
 {
+	BOOL is64BitOperatingSystem;
+#ifdef _WIN64
+	is64BitOperatingSystem = TRUE;
+#else // ! _WIN64
+	is64BitOperatingSystem = CSbieAPI::IsWow64();
+#endif _WIN64
+
 	m_Products.clear();
 
 	ULONG DesiredAccess = KEY_READ;
@@ -219,7 +226,9 @@ void CSbieTemplates::CollectProducts()
 			break;
 		DesiredAccess |= KEY_WOW64_32KEY;
 #else // ! _WIN64
-		break;
+		if (!is64BitOperatingSystem || (DesiredAccess & KEY_WOW64_64KEY))
+			break;
+		DesiredAccess |= KEY_WOW64_64KEY;
 #endif _WIN64
 	}
 }

@@ -22,7 +22,7 @@
 
 class CSbieAPI;
 
-class QSBIEAPI_EXPORT CBoxBorder: public QObject
+class QSBIEAPI_EXPORT CBoxBorder: public QThread
 {
 	Q_OBJECT
 public:
@@ -30,8 +30,8 @@ public:
 	virtual ~CBoxBorder();
 
 protected:
-	void		timerEvent(QTimerEvent* pEvent);
-	int			m_uTimerID;
+	void		run();
+	bool		m_Running;
 
 	CSbieAPI*	m_Api;
 

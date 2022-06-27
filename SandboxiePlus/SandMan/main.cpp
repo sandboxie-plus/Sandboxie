@@ -17,9 +17,19 @@ int main(int argc, char *argv[])
 {
 #ifdef Q_OS_WIN
 	//SetProcessDPIAware();
+	//SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+	//SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+	
+	typedef DPI_AWARENESS_CONTEXT(WINAPI* P_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT dpiContext);
+	P_SetThreadDpiAwarenessContext pSetThreadDpiAwarenessContext = (P_SetThreadDpiAwarenessContext)GetProcAddress(GetModuleHandle(L"user32.dll"), "SetThreadDpiAwarenessContext");
+	if(pSetThreadDpiAwarenessContext) // not rpesent on windows 7
+		pSetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+
 #endif // Q_OS_WIN 
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
+	//QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
 	//QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+
+	qsrand(QTime::currentTime().msec());
 
 	QtSingleApplication app(argc, argv);
 	app.setQuitOnLastWindowClosed(false);

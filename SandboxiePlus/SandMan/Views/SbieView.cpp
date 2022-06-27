@@ -94,9 +94,10 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunTools = m_pMenuRun->addMenu(CSandMan::GetIcon("Maintenance"), tr("Boxed Tools"));
 			m_pMenuRunCmdAdmin = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (as Admin)"), this, SLOT(OnSandBoxAction()));
-#ifdef _WIN64
-			m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
+#ifndef _WIN64
+			if(CSbieAPI::IsWow64())
 #endif
+				m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
 			m_pMenuRunExplorer = m_pMenuRunTools->addAction(CSandMan::GetIcon("Explore"), tr("Windows Explorer"), this, SLOT(OnSandBoxAction()));
 			m_pMenuRunRegEdit = m_pMenuRunTools->addAction(CSandMan::GetIcon("RegEdit"), tr("Registry Editor"), this, SLOT(OnSandBoxAction()));
 			m_pMenuRunAppWiz = m_pMenuRunTools->addAction(CSandMan::GetIcon("Software"), tr("Programs and Features"), this, SLOT(OnSandBoxAction()));
@@ -870,10 +871,8 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe", true));
-#ifdef _WIN64
 	else if (Action == m_pMenuRunCmd32)
 		Results.append(SandBoxes.first()->RunStart("C:\\WINDOWS\\SysWOW64\\cmd.exe"));
-#endif
 	else if (Action == m_pMenuPresetsShowUAC)
 	{
 		SandBoxes.first()->SetBool("DropAdminRights", false);
@@ -1146,6 +1145,16 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	}
 	else if (Action == m_pMenuMkLink)
 	{
+ 		if (theConf->GetInt("Options/InfoMkLink", -1) == -1)
+		{
+			bool State = false;
+			CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new"
+				"shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.")
+				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
+			if (State)
+				theConf->SetValue("Options/InfoMkLink", 1);
+		}
+
 		QString BoxName = SandBoxes.first()->GetName();
 		QString LinkPath, IconPath, WorkDir;
 		quint32 IconIndex;

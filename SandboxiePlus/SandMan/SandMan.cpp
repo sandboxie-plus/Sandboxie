@@ -268,6 +268,8 @@ CSandMan::~CSandMan()
 	if(m_pEnableMonitoring->isChecked())
 		theAPI->EnableMonitor(false);
 
+	delete m_pBoxBorder;
+
 	killTimer(m_uTimerID);
 
 	m_pTrayIcon->hide();
@@ -1152,7 +1154,7 @@ void CSandMan::OnStatusChanged()
 		{
 			if (m_SbieTemplates->RunCheck())
 			{
-				CSettingsWindow* pSettingsWindow = new CSettingsWindow();
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
 				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
 				pSettingsWindow->showCompat();
 			}
@@ -2040,6 +2042,8 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/AutoCleanupTemplates", -1);
 		theConf->SetValue("Options/WarnTerminateAll", -1);
 		theConf->SetValue("Options/WarnTerminate", -1);
+
+		theConf->SetValue("Options/InfoMkLink", -1);
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);

@@ -43,6 +43,7 @@ public:
 	virtual SB_STATUS		Connect(bool takeOver, bool withQueue);
 	virtual SB_STATUS		Disconnect();
 	virtual bool			IsConnected() const;
+	static  bool			IsWow64();
 
 	virtual QString			GetVersion();
 

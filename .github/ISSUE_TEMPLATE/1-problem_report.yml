@@ -82,6 +82,17 @@ body:
       placeholder: e.g. Sandboxie Plus 1.0.9 64-bit
     validations:
       required: true
+  - type: dropdown
+    id: installation-types
+    attributes:
+      label: Is it a new installation of Sandboxie?
+      options:
+        - "I recently did a new clean installation of Sandboxie."
+        - "I just updated Sandboxie from the previous version."
+        - "I recently upgraded it from an older version than v1.0.22 / 5.55.22."
+        - "I have been in the same version for a while now."
+    validations:
+      required: true
   - type: input
     id: regression
     attributes:

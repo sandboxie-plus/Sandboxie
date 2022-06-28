@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.0 / 5.57.0] - 2022-06-??
+## [1.2.0 / 5.57.0] - 2022-06-28
 
 ### Added
 - Reenginiered "SandboxieLogon=y" and set it on by default, now every sandbox gets its own SID

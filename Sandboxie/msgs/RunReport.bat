@@ -1,4 +1,4 @@
-copy /y c:\work\sbie\msgs\*.txt
+REM copy /y c:\work\sbie\msgs\*.txt
 for %%a in (Text-*-*.txt) do call :MySub %%a
 exit /b
 :MySub

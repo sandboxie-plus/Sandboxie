@@ -2,6 +2,12 @@ name: Feature request
 description: Suggest a new idea for Sandboxie
 labels: ["Feature request"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this request!
+        To see if your feature request has already been reported, you can use the search box on the Issues and Discussions tabs.
+        Also, you may find your answer in our documentation hosted on GitHub: https://sandboxie-plus.github.io/sandboxie-docs
   - type: textarea
     id: describe-feature
     attributes:

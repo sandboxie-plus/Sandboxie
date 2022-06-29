@@ -741,7 +741,7 @@ void CSettingsWindow::OnTab()
 
 			QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + I.key(), theAPI));
 
-			QString Title = pTemplate->GetText("Tmpl.Title");
+			QString Title = pTemplate->GetText("Tmpl.Title", "", false, true, true);
 			if (Title.left(1) == "#")
 			{
 				int End = Title.mid(1).indexOf(",");

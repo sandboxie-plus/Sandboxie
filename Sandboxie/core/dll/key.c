@@ -1329,13 +1329,17 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
         // So it is not possible to use TruePath but we can use the original handle relative ObjectAttributes here instead.
         //
 
-        //RtlInitUnicodeString(&objname, TruePath);
-        //objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
+        BOOLEAN IsAKey = _wcsnicmp(TruePath, L"\\REGISTRY\\A\\", 12) == 0;
+
+        RtlInitUnicodeString(&objname, TruePath);
+        objattrs.SecurityDescriptor = ObjectAttributes->SecurityDescriptor;
 
         if (CreateOptions == tzuk) {
 
-            //status = __sys_NtOpenKey(KeyHandle, DesiredAccess, &objattrs);
-            status = __sys_NtOpenKey(KeyHandle, DesiredAccess, ObjectAttributes);
+            if(IsAKey)
+                status = __sys_NtOpenKey(KeyHandle, DesiredAccess, ObjectAttributes);
+            else
+                status = __sys_NtOpenKey(KeyHandle, DesiredAccess, &objattrs);
 
             if (status == STATUS_ACCESS_DENIED &&
                     DesiredAccess == MAXIMUM_ALLOWED) {
@@ -1346,12 +1350,14 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
         } else {
 
-            //status = __sys_NtCreateKey(
-            //    KeyHandle, DesiredAccess, &objattrs,
-            //    TitleIndex, Class, CreateOptions, Disposition);
-            status = __sys_NtCreateKey(
-                KeyHandle, DesiredAccess, ObjectAttributes,
-                TitleIndex, Class, CreateOptions, Disposition);
+            if(IsAKey)
+                status = __sys_NtCreateKey(
+                    KeyHandle, DesiredAccess, ObjectAttributes,
+                    TitleIndex, Class, CreateOptions, Disposition);
+            else
+                status = __sys_NtCreateKey(
+                    KeyHandle, DesiredAccess, &objattrs,
+                    TitleIndex, Class, CreateOptions, Disposition);
 
             if (status == STATUS_ACCESS_DENIED &&
                     DesiredAccess == MAXIMUM_ALLOWED) {

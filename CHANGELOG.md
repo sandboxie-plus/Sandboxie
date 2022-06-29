@@ -4,6 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.2.1 / 5.57.1] - 2022-06-??
+
+### Fixed
+- fixed dip issue on windows 7
+- fixed issue with software compatibility tab
+- fixed issue with OpenKeyPath's introduced in build 1.1.1 [#2006](https://github.com/sandboxie-plus/Sandboxie/issues/2006)
+
+
+
+
 ## [1.2.0 / 5.57.0] - 2022-06-28
 
 ### Added

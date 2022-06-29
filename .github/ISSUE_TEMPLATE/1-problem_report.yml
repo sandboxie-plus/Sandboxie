@@ -29,11 +29,11 @@ body:
     attributes:
       label: How often did you encounter it so far?
       description: If applicable, write more details about its frequency.
-      placeholder: Whenever I ...
+      placeholder: e.g. Whenever I ...
     validations:
       required: false
   - type: input
-    id: sandboxed-programs
+    id: sandboxed-program
     attributes:
       label: Affected program
       description: |
@@ -67,12 +67,12 @@ body:
         - "Not relevant to my request."
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: expected-behavior
     attributes:
       label: Expected behavior
-      description: A clear and concise description of what you expected to happen.
-      placeholder: Tell what you expect to see!
+      description: A clear and concise description of what you expect to see.
+      placeholder: Tell us what the default behavior should be!
     validations:
       required: true
   - type: input
@@ -118,7 +118,7 @@ body:
     attributes:
       label: Is it a new installation of Sandboxie?
       options:
-        - "I recently did a new clean installation of Sandboxie."
+        - "I recently did a new clean installation."
         - "I just updated Sandboxie from the previous version."
         - "I recently upgraded it from an older version than v1.0.22 / 5.55.22."
         - "I have been in the same version for a while now."
@@ -169,7 +169,7 @@ body:
 
         Tip: You may consider to turn off non-default Windows settings.
       placeholder: |
-        I enabled the following security / policy settings outside Sandboxie:
+        e.g. I enabled the following security / policy settings outside Sandboxie:
         ....
   - type: input
     id: crashdumps

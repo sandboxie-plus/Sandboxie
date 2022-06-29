@@ -11,37 +11,68 @@ body:
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: A clear and concise description of what the problem is. You can add screenshots and provide links to help explain it.
-      placeholder: Tell us what you see!
+      label: Describe what you noticed and did
+      description: |
+        It is highly recommended to write the exact steps to reproduce the behavior.
+
+        You can also add screenshots and provide links to help explain it.
+      placeholder: |
+        Describe as accurately as possible what you saw and did!
+        1. Go to '....'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: input
+    id: prevalence
+    attributes:
+      label: How often did you encounter it so far?
+      description: If applicable, write more details about its frequency.
+      placeholder: Whenever I ...
+    validations:
+      required: false
+  - type: input
+    id: sandboxed-programs
+    attributes:
+      label: Affected program
+      description: |
+        If applicable, in which sandboxed program did you see the problem?
+        
+        If not, you can type something like "Not relevant".
+      placeholder: e.g. Firefox 96.0.3 64-bit, ....
     validations:
       required: true
   - type: input
     id: download-link
     attributes:
       label: Download link
-      description: If you had a compatibility issue, you may want to include a download link to the incompatible software or type something like "Not relevant" or "Not available".
+      description: |
+        If you had a compatibility issue, it is highly recommended to include a download link to the incompatible software.
+        
+        If not, you can type something like "Not relevant" or "Not available".
       placeholder: https://
     validations:
       required: true
-  - type: textarea
-    id: repro
+  - type: dropdown
+    id: sandboxed-or-not
     attributes:
-      label: To Reproduce
-      description: If applicable, write the exact steps to reproduce the behavior.
-      placeholder: |
-        1. Go to '....'
-        2. Click on '....'
-        3. Scroll down to '....'
-        4. See error
+      label: Where is the program located?
+      description: Select "Not relevant" if you don't have any malfunctioning program to report.
+      options:
+        - "The program is installed both inside and outside the sandbox."
+        - "The program is installed only outside the sandbox."
+        - "The program is installed only inside a sandbox (NOT in the real system anyway)."
+        - "I tried to install it only inside a sandbox, but I wasn't able to achieve it."
+        - "Not relevant to my request."
     validations:
-      required: false
+      required: true
   - type: input
     id: expected-behavior
     attributes:
       label: Expected behavior
       description: A clear and concise description of what you expected to happen.
-      placeholder: Tell us what you expect to see!
+      placeholder: Tell what you expect to see!
     validations:
       required: true
   - type: input
@@ -99,12 +130,6 @@ body:
       label: Is it a regression?
       description: If applicable, specify in which Sandboxie version this problem was introduced the first time (including any pre-release version).
       placeholder: e.g. Since 5.55.9 64-bit
-  - type: input
-    id: browsers
-    attributes:
-      label: List of affected browsers
-      description: If applicable, in which sandboxed browsers are you seeing the problem?
-      placeholder: e.g. Firefox 96.0.3 64-bit, ....
   - type: dropdown
     id: box-types
     attributes:
@@ -118,19 +143,6 @@ body:
         - "In an Application Compartment sandbox with no isolation (green sandbox icon)."
         - "All sandbox types (I tried them all)."
         - "I only reproduced it with Sandboxie Classic."
-        - "Not relevant to my request."
-    validations:
-      required: true
-  - type: dropdown
-    id: sandboxed-or-not
-    attributes:
-      label: Where is the program located?
-      description: Select "Not relevant" if you don't have any malfunctioning program to report.
-      options:
-        - "The program is installed both inside and outside the sandbox."
-        - "The program is installed only outside the sandbox."
-        - "The program is installed only inside a sandbox (NOT in the real system anyway)."
-        - "I tried to install it only inside a sandbox, but I wasn't able to achieve it."
         - "Not relevant to my request."
     validations:
       required: true

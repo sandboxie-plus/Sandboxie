@@ -12,6 +12,29 @@ public:
 	void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const;
 };
 
+class CSecretCheckBox : public QCheckBox
+{
+	Q_OBJECT
+public:
+	CSecretCheckBox(const QString& Text) : QCheckBox(Text)
+	{
+		setTristate(false);
+		m_SecretMode = false;
+	}
+
+	bool IsSecretSet() const { return m_SecretMode && this->checkState() == Qt::PartiallyChecked; }
+
+protected:
+	void mouseDoubleClickEvent(QMouseEvent* e)
+	{
+		if (QApplication::keyboardModifiers() & Qt::ControlModifier) {
+			setTristate();
+			m_SecretMode = true;
+		}
+	}
+
+	bool m_SecretMode;
+};
 
 class CSettingsWindow : public QDialog
 {

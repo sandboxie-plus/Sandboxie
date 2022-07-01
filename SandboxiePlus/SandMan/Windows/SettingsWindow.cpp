@@ -122,8 +122,17 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (settings.value("CurrentBuild").toInt() >= 22000) { // Windows 11
+		QCheckBox* SecretCheckBox = new CSecretCheckBox(ui.chkShellMenu->text());
+		((QGridLayout*)((QWidget*)ui.chkShellMenu->parent())->layout())->replaceWidget(ui.chkShellMenu, SecretCheckBox);
+		ui.chkShellMenu->deleteLater();
+		ui.chkShellMenu = SecretCheckBox;
+	}
+
 	LoadSettings();
-	
+
+
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
@@ -231,10 +240,10 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 	return Qt::Unchecked; // not set up
 }
 
-void CSettingsWindow__AddContextMenu()
+void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 {
 	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (settings.value("CurrentBuild").toInt() >= 22000) // Windows 11
+	if (settings.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
 	{
 		QProcess Proc;
 		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RegisterPackage");

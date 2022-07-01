@@ -90,7 +90,7 @@ private:
 	Ui::SettingsWindow ui;
 };
 
-void CSettingsWindow__AddContextMenu();
+void CSettingsWindow__AddContextMenu(bool bAlwaysClassic = false);
 void CSettingsWindow__RemoveContextMenu();
 void CSettingsWindow__AddBrowserIcon();
 

@@ -7,9 +7,9 @@ set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019_64
 set instPath=%~dp0\SbiePlus64
 IF %archPath% == x86 (
 	set archPath=Win32
-	set instPath=%~dp0\SbiePlus32
 	set sysPath=%windir%\SysWOW64
-  set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019
+	set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019
+	set instPath=%~dp0\SbiePlus32
 )
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release
 set sbiePath=%~dp0..\Sandboxie\Bin\%archPath%\SbieRelease
@@ -24,9 +24,11 @@ mkdir %instPath%
 
 ECHO Copying VC Runtime files
 copy %sysPath%\msvcp140.dll %instPath%\
-copy %sysPath%\vcruntime140.dll %instPath%\
 copy %sysPath%\msvcp140_1.dll %instPath%\
-copy %sysPath%\vcruntime140_1.dll %instPath%\
+copy %sysPath%\vcruntime140.dll %instPath%\
+IF %archPath% == x64 (
+	copy %sysPath%\vcruntime140_1.dll %instPath%\
+)
 
 
 ECHO Copying Qt libraries
@@ -118,7 +120,7 @@ IF %archPath% == x64 (
   mkdir %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.exe %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.dll %instPath%\32\
-  
+
   copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellExt.dll %instPath%\
   copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellPkg.msix %instPath%\
 )

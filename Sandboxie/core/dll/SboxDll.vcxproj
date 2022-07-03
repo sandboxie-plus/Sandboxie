@@ -128,6 +128,7 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <AdditionalOptions>/ignore:4281 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_WIN64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -168,6 +169,7 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <AdditionalOptions>/ignore:4281 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_WIN64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>

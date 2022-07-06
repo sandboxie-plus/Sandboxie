@@ -19,8 +19,8 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
-;Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 ;Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 ;Name: "bulgarian"; MessagesFile: "compiler:Languages\Bulgarian.isl"
 ;Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
@@ -327,6 +327,28 @@ swedish.UninstallTaskLabel3=&Behåll konfigureringsfiler och sandlådor%nDetta �
 swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternativ för att ta bort Sandboxie.ini och Sandboxie-Plus.ini:s konfigurationsfiler men behålla sandlådorna oförändrade.
 swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filrotsökvägen.
 
+; Turkish
+turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır"ı ekle
+turkish.AddSandboxedBrowser=Korumalı Alan altında Web tarayıcısını başlatmak için masaüstü kısayolu ekle
+turkish.SandboxieStartMenu1=Korumalı Alanda herhangi bir programı çalıştırın
+turkish.SandboxieStartMenu2=Korumalı Alanda Web Tarayıcısını çalıştır
+turkish.SandboxieStartMenu3=Korumalı Alan Başlangıç Menüsü
+turkish.SandboxedBrowser=Koruma Alanlı Web Tarayıcısı
+turkish.CustomPageLabel1=Kurulum Türünü Seçin
+turkish.CustomPageLabel2=Nasıl kurulacağını seçin
+turkish.CustomPageLabel3=Yükleme Modunu seçin
+turkish.CustomPageInstallMode={#MyAppName} uygulamasını bu bilgisayara kurun
+turkish.CustomPageUpgradeMode=Mevcut {#MyAppName} kurulumunu güncelleyin
+turkish.CustomPagePortableMode=Taşınabilir kullanım için tüm dosyaları bir dizine çıkarın
+turkish.RequiresWin7OrLater=Sandboxie-Plus, Windows 7 veya sonraki bir sürümünü gerektirir.
+turkish.ClassicFound=Sandboxie Classic kurulumu algılandı, önce kaldırılması gerekiyor, şimdi kaldırmak istiyor musunuz?
+turkish.RunSandboxedMenu=&Korumalı Alanda Çalıştır
+turkish.UninstallTaskLabel1=Kaldırma Türünü Seçin
+turkish.UninstallTaskLabel2=Sandboxie-Plus'ı nasıl kaldırmak istersiniz?
+turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları &sakla%nYapılandırma dosyalarınızı ve korumalı alanlarınızı korurken Sandboxie-Plus'ı yeniden yüklemeyi planlıyorsanız, bu en çok önerilen seçenektir.
+turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bu seçeneği belirleyin.
+turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bu seçeneği belirleyin.
+
 ; Ukrainian
 ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню
 ukrainian.AddSandboxedBrowser=Додати ярлик на робочий стіл для запуску браузера в Sandboxie
@@ -337,7 +359,7 @@ ukrainian.SandboxedBrowser=Браузер у пісочниці
 ukrainian.CustomPageLabel1=Оберіть тип встановки
 ukrainian.CustomPageLabel2=Як потрібно встановити
 ukrainian.CustomPageLabel3=Оберіть режим встановки
-ukrainian.CustomPageInstallMode=Встановити {#MyAppName} на цьому комп'ютері
+ukrainian.CustomPageInstallMode=Встановити {#MyAppName} на цьому пристрої
 ukrainian.CustomPageUpgradeMode=Оновити існуючу встановку {#MyAppName}
 ukrainian.CustomPagePortableMode=Витягти всі файли у каталог для портативного режиму
 ukrainian.RequiresWin7OrLater=Для Sandboxie-Plus потрібно Windows 7 або новіше.

@@ -1,4 +1,4 @@
-set version=1.1.1o
+set version=1.1.1q
 
 mkdir %~dp0\OpenSSL
 curl -LsSO --output-dir %~dp0\OpenSSL\ http://wiki.overbyte.eu/arch/openssl-%version%-win64.zip

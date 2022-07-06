@@ -218,6 +218,7 @@ begin
     'russian': Result := 'ru';
     'spanish': Result := 'es';
     'turkish': Result := 'tr';
+    'swedish': Result := 'sv';
     'ukrainian': Result := 'uk';
   end;
 end;

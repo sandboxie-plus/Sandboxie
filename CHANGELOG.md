@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.1 / 5.57.1] - 2022-06-??
 
+### Added
+- added Swedish translation to Plus UI (thanks pb1)
+
 ### Fixed
 - fixed DPI issue on Windows 7
 - fixed issue with Software Compatibility tab

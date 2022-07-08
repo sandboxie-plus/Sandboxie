@@ -217,8 +217,8 @@ begin
     'portuguese': Result := 'pt_PT';
     'russian': Result := 'ru';
     'spanish': Result := 'es';
+    'swedish': Result := 'sv_SE';
     'turkish': Result := 'tr';
-    'swedish': Result := 'sv';
     'ukrainian': Result := 'uk';
   end;
 end;

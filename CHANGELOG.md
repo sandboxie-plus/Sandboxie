@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Swedish translation to Plus UI (thanks pb1)
+- added Vintage View Mode to make sandman UI look just lien sbietrl on the first glance
 
 ### Fixed
 - fixed DPI issue on Windows 7

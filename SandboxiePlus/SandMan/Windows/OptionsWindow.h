@@ -54,6 +54,8 @@ public slots:
 
 private slots:
 
+	void OnItemClicked(QTreeWidgetItem* pItem, int Column);
+
 	//void OnWithTemplates();
 
 	void OnOptChanged();

@@ -187,40 +187,16 @@
         <layout class="QGridLayout" name="gridLayout_14">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_13">
-           <item row="7" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
-             <property name="text">
-              <string>Systray options</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkShellMenu">
-             <property name="text">
-              <string>Add 'Run Sandboxed' to the explorer context menu</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="1" colspan="2">
-            <widget class="QComboBox" name="cmbSysTray"/>
-           </item>
-           <item row="11" column="1" colspan="2">
-            <widget class="QComboBox" name="cmbOnClose"/>
-           </item>
            <item row="11" column="0">
-            <widget class="QLabel" name="label_18">
+            <widget class="QLabel" name="label_20">
              <property name="text">
-              <string>On main window close:</string>
+              <string>Show Icon in Systray:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -231,25 +207,8 @@
              </property>
             </widget>
            </item>
-           <item row="10" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkBoxOpsNotify">
-             <property name="text">
-              <string>Show a tray notification when automatic box operations are started</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="1">
-            <spacer name="verticalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
+           <item row="11" column="1" colspan="2">
+            <widget class="QComboBox" name="cmbSysTray"/>
            </item>
            <item row="3" column="2">
             <spacer name="horizontalSpacer_9">
@@ -264,10 +223,87 @@
              </property>
             </spacer>
            </item>
+           <item row="15" column="3" colspan="2">
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="6" column="2" colspan="3">
+            <widget class="QCheckBox" name="chkShellMenu2">
+             <property name="text">
+              <string>Add 'Run Un-Sandboxed' to the context menu</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkShellMenu">
+             <property name="text">
+              <string>Add 'Run Sandboxed' to the explorer context menu</string>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="1" colspan="3">
             <widget class="QCheckBox" name="chkSvcStart">
              <property name="text">
               <string>Start UI when a sandboxed process is started</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="15" column="1">
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="text">
+              <string>Start Menu Integration</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="1" colspan="2">
+            <widget class="QComboBox" name="cmbTrayBoxes"/>
+           </item>
+           <item row="13" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkBoxOpsNotify">
+             <property name="text">
+              <string>Show a tray notification when automatic box operations are started</string>
              </property>
             </widget>
            </item>
@@ -285,43 +321,45 @@
              </property>
             </widget>
            </item>
-           <item row="6" column="2" colspan="3">
-            <widget class="QCheckBox" name="chkShellMenu2">
+           <item row="8" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkScanMenu">
              <property name="text">
-              <string>Add 'Run Un-Sandboxed' to the context menu</string>
+              <string>Scan shell folders and offer links in run menu</string>
              </property>
             </widget>
            </item>
-           <item row="9" column="1" colspan="2">
-            <widget class="QComboBox" name="cmbTrayBoxes"/>
-           </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="label_20">
+           <item row="14" column="0">
+            <widget class="QLabel" name="label_18">
              <property name="text">
-              <string>Show Icon in Systray:</string>
+              <string>On main window close:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
-             <property name="openExternalLinks">
-              <bool>true</bool>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="text">
+              <string>Systray options</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="3">
-            <spacer name="horizontalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+           <item row="1" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkAutoStart">
+             <property name="text">
+              <string>Start UI with Windows</string>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
+            </widget>
            </item>
-           <item row="9" column="0">
+           <item row="12" column="0">
             <widget class="QLabel" name="label_21">
              <property name="text">
               <string>Show boxes in tray list:</string>
@@ -333,26 +371,6 @@
               <bool>true</bool>
              </property>
             </widget>
-           </item>
-           <item row="1" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkAutoStart">
-             <property name="text">
-              <string>Start UI with Windows</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="3" colspan="2">
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_6">
@@ -368,6 +386,25 @@
              </property>
             </widget>
            </item>
+           <item row="14" column="1" colspan="2">
+            <widget class="QComboBox" name="cmbOnClose"/>
+           </item>
+           <item row="9" column="0" colspan="2">
+            <widget class="QLabel" name="label_22">
+             <property name="text">
+              <string>Integrate boxes with Host Start Menu</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="2">
+            <widget class="QComboBox" name="cmbIntegrateMenu"/>
+           </item>
           </layout>
          </item>
         </layout>
@@ -379,72 +416,15 @@
         <layout class="QGridLayout" name="gridLayout_17">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_15">
-           <item row="7" column="1">
-            <spacer name="verticalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_12">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
+           <item row="5" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkNoIcons">
              <property name="text">
-              <string>Interface Options</string>
+              <string>Don't show icons in menus *</string>
+             </property>
+             <property name="tristate">
+              <bool>true</bool>
              </property>
             </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_24">
-             <property name="text">
-              <string>Font Scaling</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QComboBox" name="cmbFontScale">
-             <property name="editable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_23">
-             <property name="text">
-              <string>High DPI Scaling</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="3">
-            <spacer name="horizontalSpacer_11">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item row="1" column="3">
             <widget class="QLabel" name="label">
@@ -453,30 +433,10 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="2" colspan="2">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>* indetermined means depanding on the view mode</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1" colspan="2">
-            <widget class="QComboBox" name="cmbDPI"/>
-           </item>
-           <item row="2" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkDarkTheme">
-             <property name="text">
-              <string>Use Dark Theme</string>
-             </property>
-             <property name="tristate">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="1" colspan="2">
             <widget class="QCheckBox" name="chkBackground">
              <property name="text">
-              <string>Show Classic Background in box list*</string>
+              <string>Show &quot;Pizza&quot; Background in box list*</string>
              </property>
              <property name="tristate">
               <bool>true</bool>
@@ -493,10 +453,97 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkNoIcons">
+           <item row="7" column="1">
+            <widget class="QComboBox" name="cmbFontScale">
+             <property name="editable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QComboBox" name="cmbDPI"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_12">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
              <property name="text">
-              <string>Don't show icons in menus *</string>
+              <string>Interface Options</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_24">
+             <property name="text">
+              <string>Font Scaling</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>High DPI Scaling</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkDarkTheme">
+             <property name="text">
+              <string>Use Dark Theme</string>
+             </property>
+             <property name="tristate">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="3">
+            <spacer name="horizontalSpacer_11">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="8" column="1">
+            <spacer name="verticalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="9" column="2" colspan="2">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>* indetermined means depanding on the view mode</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkOptTree">
+             <property name="text">
+              <string>Use a Page Tree in the Box Options instead of Nested Tabs *</string>
              </property>
              <property name="tristate">
               <bool>true</bool>

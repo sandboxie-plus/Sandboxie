@@ -1884,8 +1884,6 @@ The process match level has a higher priority than the specificity and describes
         </attribute>
         <layout class="QGridLayout" name="gridLayout_12">
          <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_10">
-           <item row="0" column="0" colspan="2">
             <widget class="QTabWidget" name="tabsAdvanced">
              <property name="font">
               <font>
@@ -2857,8 +2855,6 @@ instead of &quot;*&quot;.</string>
             </widget>
            </item>
           </layout>
-         </item>
-        </layout>
        </widget>
        <widget class="QWidget" name="tabTemplates">
         <attribute name="title">
@@ -2866,8 +2862,6 @@ instead of &quot;*&quot;.</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="1" column="0">
-          <layout class="QGridLayout" name="gridLayout_40">
-           <item row="0" column="0">
             <widget class="QTabWidget" name="tabWidget_2">
              <property name="currentIndex">
               <number>0</number>
@@ -3052,8 +3046,6 @@ Please note that this values are currently user specific and saved globally for 
             </widget>
            </item>
           </layout>
-         </item>
-        </layout>
        </widget>
        <widget class="QWidget" name="tabEdit">
         <attribute name="title">

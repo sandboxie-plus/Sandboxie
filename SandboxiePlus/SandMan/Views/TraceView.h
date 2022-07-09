@@ -44,15 +44,15 @@ class CTraceView : public QWidget
 {
 	Q_OBJECT
 public:
-	CTraceView(QWidget* parent = 0);
+	CTraceView(bool bStandAlone, QWidget* parent = 0);
 	~CTraceView();
-
-	void				Refresh();
-	void				Clear();
 
 	void				AddAction(QAction* pAction);
 
 public slots:
+	void				Refresh();
+	void				Clear();
+
 	void				OnSetTree();
 	void				OnSetMode();
 	void				OnSetPidFilter();
@@ -66,6 +66,9 @@ private slots:
 	void				SaveToFile();
 
 protected:
+	void				timerEvent(QTimerEvent* pEvent);
+	int					m_uTimerID;
+
 	struct SProgInfo
 	{
 		QString Name;
@@ -109,4 +112,19 @@ protected:
 
 	QWidget*			m_pView;
 	QStackedLayout*		m_pLayout;
+};
+
+class CTraceWindow : public QDialog
+{
+	Q_OBJECT
+
+public:
+	CTraceWindow(QWidget *parent = Q_NULLPTR);
+	~CTraceWindow();
+
+signals:
+	void		Closed();
+
+protected:
+	void		closeEvent(QCloseEvent *e);
 };

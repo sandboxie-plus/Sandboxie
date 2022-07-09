@@ -49,24 +49,36 @@ public:
 
 	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
 
-	static void LoadCertificate();
+	static void LoadCertificate(QString CertPath = QString());
+
+	enum ETabs {
+		eOptions = 0,
+		eShell,
+		eGuiConfig,
+		eAdvanced,
+		eProgCtrl,
+		eConfigLock,
+		eSoftCompat,
+		eEditIni,
+		eSupport
+	};
 
 signals:
-	void OptionsChanged();
+	void OptionsChanged(bool bRebuildUI = false);
 	void Closed();
 
 public slots:
 	void ok();
 	void apply();
 
-	void showCompat();
-	void showSupport();
+	void showTab(int Tab);
 
 private slots:
 	void OnChange();
 
 	void OnTab();
 
+	void OnChangeGUI() { m_bRebuildUI = true; }
 	void OnFeaturesChanged() { m_FeaturesChanged = true; }
 
 	void OnBrowse();
@@ -103,6 +115,7 @@ protected:
 	void	LoadIniSection();
 	void	SaveIniSection();
 
+	bool	m_bRebuildUI;
 	int 	m_CompatLoaded;
 	QString m_NewPassword;
 	bool	m_WarnProgsChanged;

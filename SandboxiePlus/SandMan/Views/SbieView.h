@@ -26,7 +26,10 @@ public:
 	virtual void				SelectBox(const QString& Name);
 
 	virtual void				PopUpMenu(const QString& Name);
+	virtual QMenu*				GetMenu(const QString& Name);
 	virtual void				ShowOptions(const QString& Name);
+	virtual void				ShowOptions(const CSandBoxPtr& pBox);
+	virtual void				ShowBrowse(const CSandBoxPtr& pBox);
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 
@@ -71,6 +74,11 @@ protected:
 
 private:
 
+	void					CreateMenu();
+	void					CreateOldMenu();
+	void					CreatTrayMenu();
+
+	bool					UpdateMenu(const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false, const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0, int iGroupe = 0);
 	bool					UpdateMenu();
 	void					UpdateGroupMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
@@ -131,6 +139,7 @@ private:
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;
+	QMenu*					m_pMenuTools;
 	QAction*				m_pMenuDuplicate;
 	QAction*				m_pMenuMoveUp;
 	//QAction*				m_pMenuMoveBy;

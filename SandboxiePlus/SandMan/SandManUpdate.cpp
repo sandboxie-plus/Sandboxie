@@ -286,62 +286,6 @@ void CSandMan::InstallUpdate()
 	}
 }
 
-void CSandMan::OnHelp()
-{
-	if (sender() == m_pSupport)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=donate"));
-	else if (sender() == m_pForum)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-forum"));
-	else if (sender() == m_pManual)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-docs"));
-	else
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=patreon"));
-}
-
-void CSandMan::OnAbout()
-{
-	if (sender() == m_pAbout)
-	{
-		QString AboutCaption = tr(
-			"<h3>About Sandboxie-Plus</h3>"
-			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2022 by DavidXanatos</p>"
-		).arg(GetVersion());
-
-		QString CertInfo;
-		if (!g_Certificate.isEmpty()) {
-			CertInfo = tr("This copy of Sandboxie+ is certified for: %1").arg(GetArguments(g_Certificate, L'\n', L':').value("NAME"));
-		} else {
-			CertInfo = tr("Sandboxie+ is free for personal and non-commercial use.");
-		}
-
-		QString AboutText = tr(
-			"Sandboxie-Plus is an open source continuation of Sandboxie.<br />"
-			"Visit <a href=\"https://sandboxie-plus.com\">sandboxie-plus.com</a> for more information.<br />"
-			"<br />"
-			"%3<br />"
-			"<br />"
-			"Driver version: %1<br />"
-			"Features: %2<br />"
-			"<br />"
-			"Icons from <a href=\"https://icons8.com\">icons8.com</a>"
-		).arg(theAPI->GetVersion()).arg(theAPI->GetFeatureStr()).arg(CertInfo);
-
-		QMessageBox *msgBox = new QMessageBox(this);
-		msgBox->setAttribute(Qt::WA_DeleteOnClose);
-		msgBox->setWindowTitle(tr("About Sandboxie-Plus"));
-		msgBox->setText(AboutCaption);
-		msgBox->setInformativeText(AboutText);
-
-		QIcon ico(QLatin1String(":/SandMan.png"));
-		msgBox->setIconPixmap(ico.pixmap(128, 128));
-
-		SafeExec(msgBox);
-	}
-	else if (sender() == m_pAboutQt)
-		QMessageBox::aboutQt(this);
-}
-
 void CSandMan::UpdateCert()
 {
 	QString UpdateKey; // for now only patreons can update the cert automatically

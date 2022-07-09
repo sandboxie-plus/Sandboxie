@@ -52,16 +52,18 @@ public:
 
 	bool				IsFullyPortable();
 
-	bool				IsShowHidden() { return m_pShowHidden->isChecked(); }
-
+	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
+	bool				KeepTerminated() { return m_pKeepTerminated && m_pKeepTerminated->isChecked(); }
+	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
+	bool				IsDisableRecovery() {return m_pDisableRecovery && m_pDisableRecovery->isChecked();}
+	bool				IsDisableMessages() {return m_pDisableMessages && m_pDisableMessages->isChecked();}
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 
 	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 
-	QIcon				GetBoxIcon(int boxType, bool inUse = false, bool inBusy = false);
+	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
+	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QString				GetBoxDescription(int boxType);
-
-	void				SetViewMode(bool bAdvanced);
 	
 	bool				CheckCertificate();
 
@@ -120,7 +122,7 @@ protected:
 	struct SBoxIcon {
 		QIcon Empty;
 		QIcon InUse;
-		QIcon Busy;
+		//QIcon Busy;
 	};
 	QMap<int, SBoxIcon> m_BoxIcons;
 
@@ -142,7 +144,7 @@ public slots:
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
-	void				UpdateSettings();
+	void				UpdateSettings(bool bRebuildUI);
 	void				OnIniReloaded();
 
 	void				SetupHotKeys();
@@ -168,12 +170,10 @@ public slots:
 	void				OnBoxDblClick(QTreeWidgetItem*);
 
 private slots:
-	void				OnSelectionChanged();
 
 	void				OnMenuHover(QAction* action);
 
-	void				OnNewBox();
-	void				OnNewGroupe();
+	void				OnSandBoxAction();
 	void				OnEmptyAll();
 	void				OnWndFinder();
 	void				OnDisableForce();
@@ -191,7 +191,7 @@ private slots:
 	void				OnResetGUI();
 	void				OnEditIni();
 	void				OnReloadIni();
-	void				OnSetMonitoring();
+	void				OnMonitoring();
 
 	void				OnExit();
 	void				OnHelp();
@@ -208,12 +208,23 @@ private slots:
 
 	void				SetUITheme();
 
+	void				AddLogMessage(const QString& Message);
+	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);
+
 	void				UpdateLabel();
 
 private:
-	void				CreateMenus();
+
+	void				CreateUI();
+
+	void				CreateMenus(bool bAdvanced);
+	void				CreateOldMenus();
+	void				CreateMaintenanceMenu();
+	void				CreateViewBaseMenu();
+	void				CreateHelpMenu(bool bAdvanced);
 	void				CreateToolBar();
-	void				CreateView();
+	void				CreateView(bool bAdvanced);
+	void				CreateTrayIcon();
 	void				CreateTrayMenu();
 
 	void				HandleMaintenance(SB_RESULT(void*) Status);
@@ -270,7 +281,6 @@ private:
 	QActionGroup*		m_pViewMode;
 	QAction*			m_pShowHidden;
 	QAction*			m_pWndTopMost;
-	int					m_iMenuViewPos;
 	QAction*			m_pRefreshAll;
 	QMenu*				m_pCleanUpMenu;
 	QAction*			m_pCleanUpProcesses;
@@ -300,6 +310,11 @@ private:
 	QAction*			m_pAbout;
 	QAction*			m_pAboutQt;
 
+
+	// for old menu
+	QMenu*				m_pSandbox;
+
+
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
 	QAction*			m_pTraySeparator;
@@ -320,13 +335,13 @@ private:
 	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
+	double				m_DefaultFontSize;
 
 	void				LoadLanguage();
 	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);
 	QTranslator			m_Translator[2];
 
 public:
-	QString				m_Language;
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
 };

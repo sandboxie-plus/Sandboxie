@@ -109,23 +109,26 @@ bool CopyDir(const QString& srcDirPath, const QString& destDirPath, bool bMove)
 	return true;
 }
 
-QStringList	ListDir(const QString& srcDirPath)
+QStringList	ListDir(const QString& srcDirPath, const QStringList& NameFilter, bool bAndSubDirs)
 {
 	QStringList FileList;
 	QDir srcDir(srcDirPath);
 	if (!srcDir.exists())
 		return FileList;
 
-	QStringList Files = srcDir.entryList(QDir::Files);
+	QStringList Files = !NameFilter.isEmpty() ? srcDir.entryList(NameFilter, QDir::Files | QDir::System) : srcDir.entryList(QDir::Files | QDir::System);
 	foreach (const QString& FileName, Files)
 		FileList.append(FileName);
 
-	QStringList Dirs = srcDir.entryList(QDir::Dirs);
+	if(!bAndSubDirs)
+		return FileList;
+
+	QStringList Dirs = srcDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 	foreach (const QString& DirName, Dirs)
 	{
-		if (DirName.compare(".") == 0 || DirName.compare("..") == 0)
-			continue;
-		QStringList SubFiles = ListDir(srcDirPath + DirName + "/");
+		//if (DirName.compare(".") == 0 || DirName.compare("..") == 0)
+		//	continue;
+		QStringList SubFiles = ListDir(srcDirPath + "/" + DirName, NameFilter);
 		foreach (const QString& FileName, SubFiles)
 			FileList.append(DirName + "/" + FileName);
 

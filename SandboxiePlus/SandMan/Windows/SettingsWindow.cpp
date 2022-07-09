@@ -84,14 +84,15 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
-	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
-	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
-	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Ampel"));
-	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Lock"));
-	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("EditIni"));
-	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(eOptions, CSandMan::GetIcon("Options"));
+	ui.tabs->setTabIcon(eShell, CSandMan::GetIcon("Shell"));
+	ui.tabs->setTabIcon(eGuiConfig, CSandMan::GetIcon("GUI"));
+	ui.tabs->setTabIcon(eAdvanced, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(eProgCtrl, CSandMan::GetIcon("Ampel"));
+	ui.tabs->setTabIcon(eConfigLock, CSandMan::GetIcon("Lock"));
+	ui.tabs->setTabIcon(eSoftCompat, CSandMan::GetIcon("Compatibility"));
+	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(eSupport, CSandMan::GetIcon("Support"));
 
 
 	ui.tabs->setCurrentIndex(0);
@@ -106,6 +107,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		QString Lang = Locale.nativeLanguageName();
 		ui.uiLang->addItem(Lang, Code);
 	}
+	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.cmbSysTray->addItem(tr("Don't show any icon"));
 	ui.cmbSysTray->addItem(tr("Show Plus icon"));
@@ -120,7 +122,13 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.cmbOnClose->addItem(tr("Close"), "Close");
 
 
-	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
+	ui.cmbDPI->addItem(tr("None"), 0);
+	ui.cmbDPI->addItem(tr("Native"), 1);
+	ui.cmbDPI->addItem(tr("Qt"), 2);
+
+	int FontScales[] = { 75,100,125,150,175,200,225,250,275,300,350,400, 0 };
+	for(int* pFontScales = FontScales; *pFontScales != 0; pFontScales++)
+		ui.cmbFontScale->addItem(tr("%1 %").arg(*pFontScales), *pFontScales);
 
 	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
 	if (settings.value("CurrentBuild").toInt() >= 22000) { // Windows 11
@@ -132,6 +140,17 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	LoadSettings();
 
+	connect(ui.uiLang, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+
+	connect(ui.cmbDPI, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkDarkTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkBackground, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkNoIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+
+
+	m_bRebuildUI = false;
 
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
@@ -204,18 +223,15 @@ CSettingsWindow::~CSettingsWindow()
 	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
 }
 
-void CSettingsWindow::showCompat()
+void CSettingsWindow::showTab(int Tab)
 {
-	m_CompatLoaded = 2;
-	ui.tabs->setCurrentWidget(ui.tabCompat);
-	SafeShow(this);
-}
+	if(Tab == CSettingsWindow::eSoftCompat)
+		m_CompatLoaded = 2;
+	else if(Tab == CSettingsWindow::eSupport)
+		ui.chkNoCheck->setVisible(true);
 
-void CSettingsWindow::showSupport()
-{
-	ui.tabs->setCurrentWidget(ui.tabSupport);
+	ui.tabs->setCurrentIndex(Tab);
 	SafeShow(this);
-	ui.chkNoCheck->setVisible(true);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -299,7 +315,14 @@ void CSettingsWindow::LoadSettings()
 	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
+	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
+
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
+	ui.chkBackground->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseBackground", 2)));
+	ui.chkLargeIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/LargeIcons", 2)));
+	ui.chkNoIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NoIcons", 2)));
+
+	ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 
 	ui.chkNotifications->setChecked(theConf->GetBool("Options/ShowNotifications", true));
 
@@ -337,6 +360,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", true));
 		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
+		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", true));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -362,6 +386,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
+		ui.chkSbieLogon->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
@@ -428,7 +453,14 @@ void CSettingsWindow::SaveSettings()
 {
 	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
 
+	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
+
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
+	theConf->SetValue("Options/UseBackground", CSettingsWindow__Chk2Int(ui.chkBackground->checkState()));
+	theConf->SetValue("Options/LargeIcons", CSettingsWindow__Chk2Int(ui.chkLargeIcons->checkState()));
+	theConf->SetValue("Options/NoIcons", CSettingsWindow__Chk2Int(ui.chkNoIcons->checkState()));
+
+	theConf->SetValue("Options/FontScaling", ui.cmbFontScale->currentData());
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 
@@ -443,8 +475,10 @@ void CSettingsWindow::SaveSettings()
 
 	if (ui.chkShellMenu->checkState() != CSettingsWindow__IsContextMenu())
 	{
-		if (ui.chkShellMenu->isChecked())
-			CSettingsWindow__AddContextMenu();
+		if (ui.chkShellMenu->isChecked()) {
+			CSecretCheckBox* SecretCheckBox = qobject_cast<CSecretCheckBox*>(ui.chkShellMenu);
+			CSettingsWindow__AddContextMenu(SecretCheckBox && SecretCheckBox->IsSecretSet());
+		}
 		else
 			CSettingsWindow__RemoveContextMenu();
 	}
@@ -503,6 +537,7 @@ void CSettingsWindow::SaveSettings()
 		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
 		theAPI->GetGlobalSettings()->SetBool("EnableObjectFiltering", ui.chkObjCb->isChecked());
 		theAPI->GetGlobalSettings()->SetBool("EnableWin32kHooks", ui.chkWin32k->isChecked());
+		theAPI->GetGlobalSettings()->SetBool("SandboxieLogon", ui.chkSbieLogon->isChecked());
 
 
 		if (m_FeaturesChanged) {
@@ -618,7 +653,7 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
-	emit OptionsChanged();
+	emit OptionsChanged(m_bRebuildUI);
 }
 
 bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
@@ -934,13 +969,10 @@ void CSettingsWindow::CertChanged()
 	ui.txtCertificate->setPalette(palette);
 }
 
-void CSettingsWindow::LoadCertificate()
+void CSettingsWindow::LoadCertificate(QString CertPath)
 {
-	QString CertPath;
 	if (theAPI && theAPI->IsConnected())
 		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
-	else
-		CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
 		
 	QFile CertFile(CertPath);
 	if (CertFile.open(QFile::ReadOnly)) {

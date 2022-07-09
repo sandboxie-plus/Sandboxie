@@ -291,14 +291,14 @@ SB_STATUS CSbieAPI::Connect(bool takeOver, bool withQueue)
 	//m->lastRecordNum = 0;
 
 	// Note: this lib is not using all functions hence it can be compatible with multiple driver ABI revisions
-	QStringList CompatVersions = QStringList () << "5.57.0";
-	QString CurVersion = GetVersion();
-	if (!CompatVersions.contains(CurVersion))
-	{
-		NtClose(m->SbieApiHandle);
-		m->SbieApiHandle = INVALID_HANDLE_VALUE;	
-		return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
-	}
+	//QStringList CompatVersions = QStringList () << "5.55.0";
+	//QString CurVersion = GetVersion();
+	//if (!CompatVersions.contains(CurVersion))
+	//{
+	//	NtClose(m->SbieApiHandle);
+	//	m->SbieApiHandle = INVALID_HANDLE_VALUE;	
+	//	return SB_ERR(SB_Incompatible, QVariantList() << CurVersion << CompatVersions.join(", "));
+	//}
 
 	SB_STATUS Status = SB_OK;
 	if (takeOver) {
@@ -1055,6 +1055,7 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, boo
 
 	StartArgs += Command;
 
+	qint64 pid = 0;
 	//wchar_t sysPath[MAX_PATH];
 	//GetSystemDirectoryW(sysPath, MAX_PATH);
 	if (pProcess) {
@@ -1064,6 +1065,7 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, boo
 		pProcess->setProgram(GetStartPath());
 		pProcess->setNativeArguments(StartArgs);
 		pProcess->start();
+		pid = pProcess->processId();
 	} 
 	else {
 		QProcess process;
@@ -1072,7 +1074,7 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, boo
 			process.setWorkingDirectory(WorkingDir);
 		process.setProgram(GetStartPath());
 		process.setNativeArguments(StartArgs);
-		process.startDetached();
+		process.startDetached(&pid);
 	}
 
 	/*
@@ -1109,6 +1111,8 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, boo
     CloseHandle( pi.hThread );
 	*/
 
+	if(pid == 0)
+		return SB_ERR();
 	return SB_OK;
 }
 

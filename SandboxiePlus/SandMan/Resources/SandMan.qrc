@@ -70,6 +70,9 @@
         <file>Actions/Monitor.png</file>
         <file>SideLogo.png</file>
         <file>Actions/Refresh.png</file>
+        <file>Actions/UnPackBox.png</file>
+        <file>Actions/PackBox.png</file>
+        <file>Actions/GUI.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
@@ -93,5 +96,10 @@
         <file>AdvancedD.png</file>
         <file>Simple.png</file>
         <file>SimpleD.png</file>
+        <file>background.png</file>
+        <file>sandboxie-logo.png</file>
+        <file>sandboxie-back.png</file>
+        <file>Classic.png</file>
+        <file>ClassicD.png</file>
     </qresource>
 </RCC>

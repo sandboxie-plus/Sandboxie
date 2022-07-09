@@ -168,6 +168,12 @@
     <ClCompile Include="SandManUpdate.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
+    <ClCompile Include="SandManRecovery.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="SandManTray.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -346,6 +352,9 @@
       <Filter>Translation Files</Filter>
     </None>
     <None Include="sandman_cs.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="sandman_sv.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

@@ -61,9 +61,11 @@ bool CSetupWizard::ShowWizard()
     //bool isEvaluate = wizard.field("isEvaluate").toBool();
 
     if (wizard.field("useAdvanced").toBool())
-        theConf->SetValue("Options/AdvancedView", true);
+        theConf->SetValue("Options/ViewMode", 1);
     else if (wizard.field("useSimple").toBool())
-        theConf->SetValue("Options/AdvancedView", false);
+        theConf->SetValue("Options/ViewMode", 0);
+    else if (wizard.field("useClassic").toBool())
+        theConf->SetValue("Options/ViewMode", 2);
     
     if (wizard.field("useBrightMode").toInt())
         theConf->SetValue("Options/UseDarkTheme", 0);
@@ -89,8 +91,7 @@ bool CSetupWizard::ShowWizard()
 
     theConf->SetValue("Options/WizardLevel", 1);
 
-    theGUI->SetViewMode(theConf->GetBool("Options/AdvancedView", true));
-    theGUI->UpdateSettings();
+    theGUI->UpdateSettings(true);
     
 
     return true;
@@ -269,40 +270,46 @@ CUIPage::CUIPage(QWidget* parent)
     QGridLayout* layout = new QGridLayout;
 
     m_pAdvanced = new QRadioButton(tr("&Advanced UI for experts"));
-    m_pAdvanced->setChecked(theConf->GetBool("Options/AdvancedView", true));
+    m_pAdvanced->setChecked(theConf->GetInt("Options/ViewMode", 1) == 1);
     layout->addWidget(m_pAdvanced, 0, 0);
     registerField("useAdvanced", m_pAdvanced);
 
     m_pSimple = new QRadioButton(tr("&Simple UI for beginners"));
-    m_pSimple->setChecked(!theConf->GetBool("Options/AdvancedView", true));
+    m_pSimple->setChecked(theConf->GetInt("Options/ViewMode", 1) == 0);
     layout->addWidget(m_pSimple, 1, 0);
     registerField("useSimple", m_pSimple);
+
+    m_pClassic = new QRadioButton(tr("&Classic Sandboxie UI"));
+    m_pClassic->setChecked(theConf->GetInt("Options/ViewMode", 1) == 2);
+    layout->addWidget(m_pClassic, 2, 0);
+    registerField("useClassic", m_pClassic);
 
     QButtonGroup *buttonGroup1 = new QButtonGroup();
     buttonGroup1->addButton(m_pAdvanced, 0);
     buttonGroup1->addButton(m_pSimple, 1);
+    buttonGroup1->addButton(m_pClassic, 2);
     connect(buttonGroup1, SIGNAL(buttonClicked(int)), this, SLOT(UpdatePreview()));
 
     QLabel* pDummy = new QLabel();
     pDummy->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    layout->addWidget(pDummy, 0, 1, 5, 4);
+    layout->addWidget(pDummy, 0, 1, 6, 4);
     pDummy->setStyleSheet("QLabel { background-color : " + QApplication::palette().color(QPalette::Base).name() + "; }");
 
     m_pPreview = new QLabel();
     m_pPreview->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     m_pPreview->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    layout->addWidget(m_pPreview, 0, 1, 5, 4);
+    layout->addWidget(m_pPreview, 0, 1, 6, 4);
 
     QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    layout->addWidget(pSpacer, 2, 0);
+    layout->addWidget(pSpacer, 3, 0);
 
     m_pBrightMode = new QRadioButton(tr("Use Bright Mode"));
-    layout->addWidget(m_pBrightMode, 3, 0);
+    layout->addWidget(m_pBrightMode, 4, 0);
     registerField("useBrightMode", m_pBrightMode);
 
     m_pDarkMode = new QRadioButton(tr("Use Dark Mode"));
-    layout->addWidget(m_pDarkMode, 4, 0);
+    layout->addWidget(m_pDarkMode, 5, 0);
     registerField("useDarkMode", m_pDarkMode);
 
     QButtonGroup *buttonGroup2 = new QButtonGroup();
@@ -346,6 +353,10 @@ void CUIPage::UpdatePreview()
         preview = QPixmap::fromImage(QImage(":/Assets/Simple.png"));
     else if(m_pSimple->isChecked() && bDark)
         preview = QPixmap::fromImage(QImage(":/Assets/SimpleD.png"));
+    else if(m_pClassic->isChecked() && !bDark)
+        preview = QPixmap::fromImage(QImage(":/Assets/Classic.png"));
+    else if(m_pClassic->isChecked() && bDark)
+        preview = QPixmap::fromImage(QImage(":/Assets/ClassicD.png"));
 
     //QRect rect(0, 0, m_pPreview->width(), m_pPreview->height());
     //m_pPreview->setPixmap(preview.scaled(preview.width()*5/10, preview.height()*5/10, Qt::KeepAspectRatio, Qt::SmoothTransformation).copy(rect));
@@ -394,6 +405,7 @@ CShellPage::CShellPage(QWidget *parent)
 int CShellPage::nextId() const
 {
     return CSetupWizard::Page_WFP;
+    //return CSetupWizard::Page_Finish;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -117,7 +117,7 @@ MISCHELPERS_EXPORT bool			WriteStringToFile(const QString& filename, const QStri
 MISCHELPERS_EXPORT bool			CreateDir(const QString& path);
 MISCHELPERS_EXPORT bool			DeleteDir(const QString& path, bool bEmpty = false);
 MISCHELPERS_EXPORT bool			CopyDir(const QString& srcDirPath, const QString& destDirPath, bool bMove = false);
-MISCHELPERS_EXPORT QStringList	ListDir(const QString& srcDirPath);
+MISCHELPERS_EXPORT QStringList	ListDir(const QString& srcDirPath, const QStringList& NameFilter = QStringList(), bool bAndSubDirs = true);
 MISCHELPERS_EXPORT bool			SafeRemove(const QString& path);
 
 MISCHELPERS_EXPORT QString GetRelativeSharedPath(const QString& fullPath, const QStringList& shared, QString& rootPath);

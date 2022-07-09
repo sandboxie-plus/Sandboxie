@@ -151,7 +151,7 @@ CMonitorList::~CMonitorList()
 ////////////////////////////////////////////////////////////////////////////////////////
 // CTraceView
 
-CTraceView::CTraceView(QWidget* parent) : QWidget(parent)
+CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 {
 	//m_pTreeList->setItemDelegate(theGUI->GetItemDelegate());
 
@@ -220,9 +220,13 @@ CTraceView::CTraceView(QWidget* parent) : QWidget(parent)
 	connect(m_pTraceStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceStatus);
 
-	m_pAllBoxes = m_pTraceToolBar->addAction(CSandMan::GetIcon("All"), tr("Show All Boxes"), this, SLOT(OnSetFilter()));
-	m_pAllBoxes->setCheckable(true);
-	m_pAllBoxes->setChecked(theConf->GetBool("Options/UseLogTree"));
+	if (bStandAlone)
+		m_pAllBoxes = NULL;
+	else {
+		m_pAllBoxes = m_pTraceToolBar->addAction(CSandMan::GetIcon("All"), tr("Show All Boxes"), this, SLOT(OnSetFilter()));
+		m_pAllBoxes->setCheckable(true);
+		m_pAllBoxes->setChecked(theConf->GetBool("Options/UseLogTree"));
+	}
 
 	m_pTraceToolBar->addSeparator();
 
@@ -233,12 +237,19 @@ CTraceView::CTraceView(QWidget* parent) : QWidget(parent)
 	m_pMainLayout->addWidget(m_pTraceToolBar);
 
 
-
 	m_pView = new QWidget(this);
 	m_pLayout = new QStackedLayout(m_pView);
 	
 	m_pTrace = new CTraceTree(this);
 	((CTraceModel*)m_pTrace->GetModel())->SetTree(m_pTraceTree->isChecked());
+
+	if (bStandAlone) {
+		QAction* pAction = new QAction(tr("Cleanup Trace Log"));
+		connect(pAction, SIGNAL(triggered()), this, SLOT(Clear()));
+		m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[0], pAction);
+		m_pTrace->GetMenu()->insertSeparator(m_pTrace->GetMenu()->actions()[0]);
+	}
+
 	m_pLayout->addWidget(m_pTrace);
 
 	QObject::connect(m_pTrace, SIGNAL(FilterSet(const QRegExp&, bool, int)), this, SLOT(SetFilter(const QRegExp&, bool, int)));
@@ -249,14 +260,22 @@ CTraceView::CTraceView(QWidget* parent) : QWidget(parent)
 	m_pView->setLayout(m_pLayout);
 	m_pMainLayout->addWidget(m_pView);
 
-
 	OnSetMode();
-
+	
+	m_uTimerID = startTimer(1000);
 }
 
 CTraceView::~CTraceView()
 {
-	
+	killTimer(m_uTimerID);
+}
+
+void CTraceView::timerEvent(QTimerEvent* pEvent)
+{
+	if (pEvent->timerId() != m_uTimerID)
+		return;
+
+	Refresh();
 }
 
 int CTraceView__Filter(const CTraceEntryPtr& pEntry, void* params)
@@ -306,7 +325,7 @@ int CTraceView__Filter(const CTraceEntryPtr& pEntry, void* params)
 void CTraceView::Refresh()
 {
 	QList<CSandBoxPtr>Boxes;
-	if(!m_pAllBoxes->isChecked())
+	if(m_pAllBoxes && !m_pAllBoxes->isChecked())
 		Boxes = theGUI->GetBoxView()->GetSelectedBoxes();
 	
 	if (m_pCurrentBox != (Boxes.count() == 1 ? Boxes.first().data() : NULL)) {
@@ -588,4 +607,45 @@ void CTraceView::SaveToFile()
 	}
 
 	File.close();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+// CTraceWindow
+
+CTraceWindow::CTraceWindow(QWidget *parent)
+	: QDialog(parent)
+{
+	Qt::WindowFlags flags = windowFlags();
+	flags |= Qt::CustomizeWindowHint;
+	//flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	//flags |= Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowCloseButtonHint;
+	flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	setWindowFlags(flags);
+
+	this->setWindowTitle(tr("Sandboxie-Plus - Trace Monitor"));
+
+	QGridLayout* pLayout = new QGridLayout();
+	pLayout->setMargin(3);
+	pLayout->addWidget(new CTraceView(true, this), 0, 0);
+	this->setLayout(pLayout);
+
+	restoreGeometry(theConf->GetBlob("TraceWindow/Window_Geometry"));
+}
+
+CTraceWindow::~CTraceWindow()
+{
+	theConf->SetBlob("TraceWindow/Window_Geometry", saveGeometry());
+
+	theAPI->EnableMonitor(false);
+}
+
+void CTraceWindow::closeEvent(QCloseEvent *e)
+{
+	emit Closed();
+	this->deleteLater();
 }

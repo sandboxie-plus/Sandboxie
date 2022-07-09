@@ -96,7 +96,7 @@ quint64 GetRand64()
 {
 	quint64 Rand64;
 #ifdef USE_OPENSSL
-	int Ret = RAND_bytes((byte*)&Rand64, sizeof(uint64));
+	int Ret = RAND_bytes((byte*)&Rand64, sizeof(quint64));
 	ASSERT(Ret == 1); // An error occurs if the PRNG has not been seeded with enough randomness to ensure an unpredictable byte sequence.
 #else
 	//CryptoPP::AutoSeededRandomPool rng;
@@ -429,6 +429,15 @@ QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, const QString& Text, c
 	pAction->setActionGroup(pGroup);
 	pParent->addAction(pAction);
 	return pAction;
+}
+
+void SetPaleteTexture(QPalette& palette, QPalette::ColorRole role, const QImage& image)
+{
+	for (int i = 0; i < QPalette::NColorGroups; ++i) {
+		QBrush brush(image);
+		brush.setColor(palette.brush(QPalette::ColorGroup(i), role).color());
+		palette.setBrush(QPalette::ColorGroup(i), role, brush);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -42,6 +42,15 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pSbieTree->setItemDelegate(theGUI->GetItemDelegate());
 
 	m_pSbieTree->setModel(m_pSortProxy);
+
+	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+	int iLargeIcons = theConf->GetInt("Options/LargeIcons", 2);
+	if (iLargeIcons == 2)
+		iLargeIcons = iViewMode == 2 ? 1 : 0;
+	if (iLargeIcons) {
+		m_pSbieModel->SetLargeIcons();
+		m_pSbieTree->setIconSize(QSize(32, 32));
+	}
 	((CSortFilterProxyModel*)m_pSortProxy)->setView(m_pSbieTree);
 
 	m_pSbieTree->setDragDropMode(QAbstractItemView::InternalMove);
@@ -78,132 +87,12 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	connect(m_pSbieModel, SIGNAL(ToolTipCallback(const QVariant&, QString&)), this, SLOT(OnToolTipCallback(const QVariant&, QString&)), Qt::DirectConnection);
 
-	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
-	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
-	m_pRenGroupe = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Group"), this, SLOT(OnGroupAction()));
-	m_pDelGroupe = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Group"), this, SLOT(OnGroupAction()));
-	m_pStopAsync = m_pMenu->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
-	m_iMenuTop = m_pMenu->actions().count();
-	//m_pMenu->addSeparator();
+	if(iViewMode == 2)
+		CreateOldMenu();
+	else
+		CreateMenu();
 
-	m_pMenuRun = m_pMenu->addMenu(CSandMan::GetIcon("Start"), tr("Run"));
-		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Program"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunBrowser = m_pMenuRun->addAction(CSandMan::GetIcon("Internet"), tr("Default Web Browser"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Default eMail Client"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunTools = m_pMenuRun->addMenu(CSandMan::GetIcon("Maintenance"), tr("Boxed Tools"));
-			m_pMenuRunCmdAdmin = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (as Admin)"), this, SLOT(OnSandBoxAction()));
-#ifndef _WIN64
-			if(CSbieAPI::IsWow64())
-#endif
-				m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
-			m_pMenuRunExplorer = m_pMenuRunTools->addAction(CSandMan::GetIcon("Explore"), tr("Windows Explorer"), this, SLOT(OnSandBoxAction()));
-			m_pMenuRunRegEdit = m_pMenuRunTools->addAction(CSandMan::GetIcon("RegEdit"), tr("Registry Editor"), this, SLOT(OnSandBoxAction()));
-			m_pMenuRunAppWiz = m_pMenuRunTools->addAction(CSandMan::GetIcon("Software"), tr("Programs and Features"), this, SLOT(OnSandBoxAction()));
-			m_pMenuAutoRun = m_pMenuRunTools->addAction(CSandMan::GetIcon("ReloadIni"), tr("Execute Autorun Entries"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRun->addSeparator();
-		m_iMenuRun = m_pMenuRun->actions().count();
-	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
-	m_pMenu->addSeparator();
-	m_pMenuBrowse = m_pMenu->addAction(CSandMan::GetIcon("Tree"), tr("Browse Content"), this, SLOT(OnSandBoxAction()));
-	m_pMenuContent = m_pMenu->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
-		m_pMenuMkLink = m_pMenuContent->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
-		m_pMenuContent->addSeparator();
-		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRefresh = m_pMenu->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
-	m_pMenuSnapshots = m_pMenu->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRecover = m_pMenu->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
-	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
-	m_pMenu->addSeparator();
-	m_pMenuOptions = m_pMenu->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
-
-	m_pMenuPresets = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Sandbox Presets"));
-		m_pMenuPresetsAdmin = new QActionGroup(m_pMenuPresets);
-		m_pMenuPresetsShowUAC = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Ask for UAC Elevation"), 0);
-		m_pMenuPresetsNoAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Drop Admin Rights"), 1);
-		m_pMenuPresetsFakeAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Emulate Admin Rights"), 1 | 2);
-		if (theAPI->IsRunningAsAdmin()) {
-			m_pMenuPresetsNoAdmin->setEnabled(false);
-			m_pMenuPresetsFakeAdmin->setEnabled(false);
-		}
-		connect(m_pMenuPresetsAdmin, SIGNAL(triggered(QAction*)), this, SLOT(OnSandBoxAction(QAction*)));
-
-		m_pMenuPresets->addSeparator();
-		m_pMenuPresetsINet = m_pMenuPresets->addAction(tr("Block Internet Access"), this, SLOT(OnSandBoxAction()));
-		m_pMenuPresetsINet->setCheckable(true);
-		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
-		m_pMenuPresetsShares->setCheckable(true);
-
-		m_pMenuPresets->addSeparator();
-		m_pMenuPresetsRecovery = m_pMenuPresets->addAction(tr("Immediate Recovery"), this, SLOT(OnSandBoxAction()));
-		m_pMenuPresetsRecovery->setCheckable(true);
-	
-	m_pMenuDuplicate = m_pMenu->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox"), this, SLOT(OnSandBoxAction()));
-	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
-	m_iMoveTo = m_pMenu->actions().count();
-	m_pMenuMoveTo = m_pMenu->addMenu(CSandMan::GetIcon("Group"), tr("Move Box/Group"));
-		m_pMenuMoveUp = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Up"), tr("Move Up"), this, SLOT(OnGroupAction()));
-		m_pMenuMoveUp->setShortcut(QKeySequence("Alt+Up"));
-		m_pMenuMoveUp->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		this->addAction(m_pMenuMoveUp);
-		//m_pMenuMoveBy = m_pMenuMoveTo->addAction(tr("Move to Position"), this, SLOT(OnGroupAction())); // does not seam that intuitive for users
-		m_pMenuMoveDown = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Down"), tr("Move Down"), this, SLOT(OnGroupAction()));
-		m_pMenuMoveDown->setShortcut(QKeySequence("Alt+Down"));
-		m_pMenuMoveDown->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		this->addAction(m_pMenuMoveDown);
-		m_pMenuMoveTo->addSeparator();
-	m_pMenuRemove = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
-	m_iMenuBox = m_pMenu->actions().count();
-
-	//UpdateRunMenu();
-
-	m_pMenuTerminate = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Terminate"), this, SLOT(OnProcessAction()));
-	//m_pMenuTerminate->setShortcut(QKeySequence::Delete);
-	//m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-	this->addAction(m_pMenuTerminate);
-	m_pMenuLinkTo = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnProcessAction()));
-	m_pMenuPreset = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Preset"));
-	m_pMenuPinToRun = m_pMenuPreset->addAction(tr("Pin to Run Menu"), this, SLOT(OnProcessAction()));
-	m_pMenuPinToRun->setCheckable(true);
-	m_pMenuBlackList = m_pMenuPreset->addAction(tr("Block and Terminate"), this, SLOT(OnProcessAction()));
-	//m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
-	//m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-	this->addAction(m_pMenuBlackList);
-	m_pMenuAllowInternet = m_pMenuPreset->addAction(tr("Allow internet access"), this, SLOT(OnProcessAction()));
-	m_pMenuAllowInternet->setCheckable(true);
-	m_pMenuMarkForced = m_pMenuPreset->addAction(tr("Force into this sandbox"), this, SLOT(OnProcessAction()));
-	m_pMenuMarkForced->setCheckable(true);
-	m_pMenuMarkLinger = m_pMenuPreset->addAction(tr("Set Linger Process"), this, SLOT(OnProcessAction()));
-	m_pMenuMarkLinger->setCheckable(true);
-	m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Set Leader Process"), this, SLOT(OnProcessAction()));
-	m_pMenuMarkLeader->setCheckable(true);
-	//m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
-	//m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
-	m_iMenuProc = m_pMenu->actions().count();
-
-	m_pRemove = new QAction(this);
-	m_pRemove->setShortcut(QKeySequence::Delete);
-	m_pRemove->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-	this->addAction(m_pRemove);
-	connect(m_pRemove, SIGNAL(triggered()), this, SLOT(OnRemoveItem()));
-
-
-	// menu for the tray
-	m_pMenu2 = new QMenu();
-	m_pMenu2->addMenu(m_pMenuRun);
-	m_pMenu2->addAction(m_pMenuEmptyBox);
-	m_pMenu2->addSeparator();
-	m_pMenu2->addAction(m_pMenuBrowse);
-	m_pMenu2->addAction(m_pMenuExplore);
-	m_pMenu2->addAction(m_pMenuRegEdit);
-	m_pMenu2->addAction(m_pMenuSnapshots);
-	m_pMenu2->addAction(m_pMenuRecover);
-	m_pMenu2->addAction(m_pMenuCleanUp);
-	m_pMenu2->addSeparator();
-	m_pMenu2->addAction(m_pMenuOptions);
-	m_pMenu2->addMenu(m_pMenuPresets);
+	CreatTrayMenu();
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
 	if (Columns.isEmpty())
@@ -237,7 +126,246 @@ void CSbieView::Clear()
 	m_pSbieModel->Clear();
 }
 
+void CSbieView::CreateMenu()
+{
+	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
+	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
+	m_pMenu->addSeparator();
+	m_pRenGroupe = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Group"), this, SLOT(OnGroupAction()));
+	m_pDelGroupe = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Group"), this, SLOT(OnGroupAction()));
+	m_pStopAsync = m_pMenu->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
+	m_iMenuTop = m_pMenu->actions().count();
+	//m_pMenu->addSeparator();
 
+	m_pMenuRun = m_pMenu->addMenu(CSandMan::GetIcon("Start"), tr("Run"));
+		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Program"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunBrowser = m_pMenuRun->addAction(CSandMan::GetIcon("Internet"), tr("Default Web Browser"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Default eMail Client"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunTools = m_pMenuRun->addMenu(CSandMan::GetIcon("Maintenance"), tr("Boxed Tools"));
+			m_pMenuRunCmdAdmin = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (as Admin)"), this, SLOT(OnSandBoxAction()));
+#ifndef _WIN64
+			if(CSbieAPI::IsWow64())
+#endif
+				m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunExplorer = m_pMenuRunTools->addAction(CSandMan::GetIcon("Explore"), tr("Windows Explorer"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunRegEdit = m_pMenuRunTools->addAction(CSandMan::GetIcon("RegEdit"), tr("Registry Editor"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunAppWiz = m_pMenuRunTools->addAction(CSandMan::GetIcon("Software"), tr("Programs and Features"), this, SLOT(OnSandBoxAction()));
+			m_pMenuAutoRun = m_pMenuRunTools->addAction(CSandMan::GetIcon("ReloadIni"), tr("Execute Autorun Entries"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRun->addSeparator();
+		m_iMenuRun = m_pMenuRun->actions().count();
+	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
+	m_pMenu->addSeparator();
+	m_pMenuBrowse = m_pMenu->addAction(CSandMan::GetIcon("Tree"), tr("Browse Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenuContent = m_pMenu->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
+		m_pMenuRefresh = m_pMenuContent->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
+		m_pMenuMkLink = m_pMenuContent->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
+		m_pMenuContent->addSeparator();
+		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
+	m_pMenuSnapshots = m_pMenu->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRecover = m_pMenu->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
+	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenu->addSeparator();
+	m_pMenuOptions = m_pMenu->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
+
+	m_pMenuPresets = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Sandbox Presets"));
+		m_pMenuPresetsAdmin = new QActionGroup(m_pMenuPresets);
+		m_pMenuPresetsShowUAC = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Ask for UAC Elevation"), 0);
+		m_pMenuPresetsNoAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Drop Admin Rights"), 1);
+		m_pMenuPresetsFakeAdmin = MakeAction(m_pMenuPresetsAdmin, m_pMenuPresets, tr("Emulate Admin Rights"), 1 | 2);
+		if (theAPI->IsRunningAsAdmin()) {
+			m_pMenuPresetsNoAdmin->setEnabled(false);
+			m_pMenuPresetsFakeAdmin->setEnabled(false);
+		}
+		connect(m_pMenuPresetsAdmin, SIGNAL(triggered(QAction*)), this, SLOT(OnSandBoxAction(QAction*)));
+
+		m_pMenuPresets->addSeparator();
+		m_pMenuPresetsINet = m_pMenuPresets->addAction(tr("Block Internet Access"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsINet->setCheckable(true);
+		m_pMenuPresetsShares = m_pMenuPresets->addAction(tr("Allow Network Shares"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsShares->setCheckable(true);
+
+		m_pMenuPresets->addSeparator();
+		m_pMenuPresetsRecovery = m_pMenuPresets->addAction(tr("Immediate Recovery"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsRecovery->setCheckable(true);
+	
+	m_pMenuTools = m_pMenu->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
+		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
+
+	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_iMoveTo = m_pMenu->actions().count();
+	m_pMenuMoveTo = m_pMenu->addMenu(CSandMan::GetIcon("Group"), tr("Move Box/Group"));
+		m_pMenuMoveUp = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Up"), tr("Move Up"), this, SLOT(OnGroupAction()));
+		m_pMenuMoveUp->setShortcut(QKeySequence("Alt+Up"));
+		m_pMenuMoveUp->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuMoveUp);
+		//m_pMenuMoveBy = m_pMenuMoveTo->addAction(tr("Move to Position"), this, SLOT(OnGroupAction())); // does not seam that intuitive for users
+		m_pMenuMoveDown = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Down"), tr("Move Down"), this, SLOT(OnGroupAction()));
+		m_pMenuMoveDown->setShortcut(QKeySequence("Alt+Down"));
+		m_pMenuMoveDown->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuMoveDown);
+		m_pMenuMoveTo->addSeparator();
+	m_pMenuRemove = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_iMenuBox = m_pMenu->actions().count();
+
+
+	// Process Menu
+	m_pMenuTerminate = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Terminate"), this, SLOT(OnProcessAction()));
+	//m_pMenuTerminate->setShortcut(QKeySequence::Delete);
+	//m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pMenuTerminate);
+	m_pMenuLinkTo = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnProcessAction()));
+	m_pMenuPreset = m_pMenu->addMenu(CSandMan::GetIcon("Presets"), tr("Preset"));
+		m_pMenuPinToRun = m_pMenuPreset->addAction(tr("Pin to Run Menu"), this, SLOT(OnProcessAction()));
+		m_pMenuPinToRun->setCheckable(true);
+		m_pMenuBlackList = m_pMenuPreset->addAction(tr("Block and Terminate"), this, SLOT(OnProcessAction()));
+		//m_pMenuBlackList->setShortcut(QKeySequence("Shift+Del"));
+		//m_pMenuBlackList->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuBlackList);
+		m_pMenuAllowInternet = m_pMenuPreset->addAction(tr("Allow internet access"), this, SLOT(OnProcessAction()));
+		m_pMenuAllowInternet->setCheckable(true);
+		m_pMenuMarkForced = m_pMenuPreset->addAction(tr("Force into this sandbox"), this, SLOT(OnProcessAction()));
+		m_pMenuMarkForced->setCheckable(true);
+		m_pMenuMarkLinger = m_pMenuPreset->addAction(tr("Set Linger Process"), this, SLOT(OnProcessAction()));
+		m_pMenuMarkLinger->setCheckable(true);
+		m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Set Leader Process"), this, SLOT(OnProcessAction()));
+		m_pMenuMarkLeader->setCheckable(true);
+	//m_pMenuSuspend = m_pMenu->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
+	//m_pMenuResume = m_pMenu->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
+	m_iMenuProc = m_pMenu->actions().count();
+
+
+	m_pRemove = new QAction(this);
+	m_pRemove->setShortcut(QKeySequence::Delete);
+	m_pRemove->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pRemove);
+	connect(m_pRemove, SIGNAL(triggered()), this, SLOT(OnRemoveItem()));
+}
+
+void CSbieView::CreateOldMenu()
+{
+	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
+	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
+	m_pMenu->addSeparator();
+	m_pRenGroupe = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Group"), this, SLOT(OnGroupAction()));
+	m_pDelGroupe = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Group"), this, SLOT(OnGroupAction()));
+	m_pStopAsync = m_pMenu->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
+	m_iMenuTop = m_pMenu->actions().count();
+	//m_pMenu->addSeparator();
+
+	m_pMenuRun = m_pMenu->addMenu(CSandMan::GetIcon("Start"), tr("Run Sandboxed"));
+		m_pMenuRunBrowser = m_pMenuRun->addAction(CSandMan::GetIcon("Internet"), tr("Run Web Browser"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Run eMail Reader"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Any Program"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run From Start Menu"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunExplorer = m_pMenuRun->addAction(CSandMan::GetIcon("Explore"), tr("Run Windows Explorer"), this, SLOT(OnSandBoxAction()));
+		m_pMenuRunCmd = NULL;
+		m_pMenuRunTools = NULL;
+			m_pMenuRunCmdAdmin = NULL;
+			m_pMenuRunCmd32 = NULL;
+			m_pMenuRunRegEdit = NULL;
+			m_pMenuRunAppWiz = NULL;
+			m_pMenuAutoRun = NULL;
+		m_pMenuRun->addSeparator();
+		m_iMenuRun = m_pMenuRun->actions().count();
+
+	m_pMenu->addSeparator();
+	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate Programs"), this, SLOT(OnSandBoxAction()));
+	m_pMenuRecover = m_pMenu->addAction(CSandMan::GetIcon("Recover"), tr("Quick Recover"), this, SLOT(OnSandBoxAction()));
+	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
+	m_pMenuExplore = m_pMenu->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
+
+	m_pMenu->addSeparator();
+	m_pMenuOptions = m_pMenu->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Settings"), this, SLOT(OnSandBoxAction()));
+
+	m_pMenuTools = m_pMenu->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
+		m_pMenuBrowse = m_pMenuTools->addAction(CSandMan::GetIcon("Tree"), tr("Browse Content"), this, SLOT(OnSandBoxAction()));
+		m_pMenuSnapshots = m_pMenuTools->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
+
+		m_pMenuTools->addSeparator();
+		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
+
+		m_pMenuTools->addSeparator();
+		m_pMenuRefresh = m_pMenuTools->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
+		m_pMenuMkLink = m_pMenuTools->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
+
+	m_pMenu->addSeparator();
+	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_iMoveTo = m_pMenu->actions().count();
+	m_pMenuMoveTo = m_pMenu->addMenu(CSandMan::GetIcon("Group"), tr("Move Box/Group"));
+		m_pMenuMoveUp = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Up"), tr("Move Up"), this, SLOT(OnGroupAction()));
+		m_pMenuMoveUp->setShortcut(QKeySequence("Alt+Up"));
+		m_pMenuMoveUp->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuMoveUp);
+		//m_pMenuMoveBy = m_pMenuMoveTo->addAction(tr("Move to Position"), this, SLOT(OnGroupAction())); // does not seam that intuitive for users
+		m_pMenuMoveDown = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Down"), tr("Move Down"), this, SLOT(OnGroupAction()));
+		m_pMenuMoveDown->setShortcut(QKeySequence("Alt+Down"));
+		m_pMenuMoveDown->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuMoveDown);
+		m_pMenuMoveTo->addSeparator();
+	m_pMenuRemove = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Remove Sandbox"), this, SLOT(OnSandBoxAction()));
+	m_iMenuBox = m_pMenu->actions().count();
+
+
+	
+	m_pMenuContent = NULL;
+		m_pMenuRegEdit = NULL;
+	
+	m_pMenuPresets = NULL;
+		m_pMenuPresetsAdmin = NULL;
+		m_pMenuPresetsShowUAC = NULL;
+		m_pMenuPresetsNoAdmin = NULL;
+		m_pMenuPresetsFakeAdmin = NULL;
+		
+		m_pMenuPresetsINet = NULL;
+		m_pMenuPresetsShares = NULL;
+
+		m_pMenuPresetsRecovery = NULL;
+	
+	
+	// Process Menu
+	m_pMenuTerminate = m_pMenu->addAction(CSandMan::GetIcon("Remove"), tr("Terminate"), this, SLOT(OnProcessAction()));
+	//m_pMenuTerminate->setShortcut(QKeySequence::Delete);
+	//m_pMenuTerminate->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pMenuTerminate);
+	m_pMenuLinkTo = m_pMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnProcessAction()));
+	m_pMenuPreset = NULL;
+		m_pMenuPinToRun = NULL;
+		m_pMenuBlackList = NULL;
+		m_pMenuAllowInternet = NULL;
+		m_pMenuMarkForced = NULL;
+		m_pMenuMarkLinger = NULL;
+		m_pMenuMarkLeader = NULL;
+	m_iMenuProc = m_pMenu->actions().count();
+
+
+	m_pRemove = new QAction(this);
+	m_pRemove->setShortcut(QKeySequence::Delete);
+	m_pRemove->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	this->addAction(m_pRemove);
+	connect(m_pRemove, SIGNAL(triggered()), this, SLOT(OnRemoveItem()));
+}
+
+void CSbieView::CreatTrayMenu()
+{
+	m_pMenu2 = new QMenu();
+	m_pMenu2->addMenu(m_pMenuRun);
+	m_pMenu2->addAction(m_pMenuEmptyBox);
+	m_pMenu2->addSeparator();
+	m_pMenu2->addAction(m_pMenuBrowse);
+	m_pMenu2->addAction(m_pMenuExplore);
+	m_pMenu2->addAction(m_pMenuRegEdit);
+	m_pMenu2->addAction(m_pMenuSnapshots);
+	m_pMenu2->addAction(m_pMenuRecover);
+	m_pMenu2->addAction(m_pMenuCleanUp);
+	m_pMenu2->addSeparator();
+	if (m_pMenuPresets) {
+		m_pMenu2->addAction(m_pMenuOptions);
+		m_pMenu2->addMenu(m_pMenuPresets);
+	}
+}
 
 int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m_Groups, const QString& Parent = "", int Index = 0)
 {
@@ -382,7 +510,7 @@ void CSbieView::OnCustomSortByColumn(int column)
 	}
 }
 
-bool CSbieView::UpdateMenu()
+bool CSbieView::UpdateMenu(const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy, const CBoxedProcessPtr &pProcess, int iProcessCount, int iGroupe)
 {
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
@@ -391,7 +519,112 @@ bool CSbieView::UpdateMenu()
 	//	foreach(QAction * pAction, MenuActions) 
 	//		pAction->setEnabled(true);
 	//}
+	
 
+	for (int i = 0; i < m_iMenuTop; i++)
+		MenuActions[i]->setVisible(!bBoxBusy && iSandBoxeCount == 0 && iProcessCount == 0);
+	m_pStopAsync->setVisible(bBoxBusy);
+	m_pRenGroupe->setVisible(iGroupe == 1 && iSandBoxeCount == 0 && iProcessCount == 0);
+	m_pDelGroupe->setVisible(iGroupe > 0 && iSandBoxeCount == 0 && iProcessCount == 0);
+
+	for (int i = m_iMenuTop; i < m_iMenuBox; i++)
+		MenuActions[i]->setVisible(iSandBoxeCount != 0 && iProcessCount == 0);
+	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
+
+	MenuActions[m_iMoveTo]->setVisible((iGroupe > 0 || iSandBoxeCount > 0) && iProcessCount == 0);
+
+	if(iSandBoxeCount == 1)
+		UpdateRunMenu(pBox);
+
+	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
+	m_pMenuTools->setEnabled(iSandBoxeCount == 1);
+	m_pMenuRename->setEnabled(iSandBoxeCount == 1);
+	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
+
+	if (m_pMenuPresets) {
+		m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
+		m_pMenuPresetsShowUAC->setChecked(pBox && !pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
+		m_pMenuPresetsNoAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
+		m_pMenuPresetsFakeAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && pBox->GetBool("FakeAdminRights", false));
+		m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
+		m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
+		m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
+	}
+
+	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
+	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
+	if(m_pMenuRegEdit)m_pMenuRegEdit->setEnabled(iSandBoxeCount == 1);
+	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
+	m_pMenuSnapshots->setEnabled(iSandBoxeCount == 1);
+
+	//m_pMenuMoveUp->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	//m_pMenuMoveDown->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+	//m_pMenuMoveBy->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
+
+	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
+		MenuActions[i]->setVisible(iProcessCount != 0 && iSandBoxeCount == 0);
+	
+	m_pMenuLinkTo->setEnabled(iProcessCount == 1);
+
+	if (!pProcess.isNull()) {
+		CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
+		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
+
+		QString FoundPin;
+		QString FileName = pProcess->GetFileName();
+		foreach(const QString& RunOption, RunOptions) {
+			QString Cmd = Split2(RunOption, "|").second;
+			int pos = Cmd.indexOf(FileName);
+			if (pos == 0 || pos == 1) { // 1 for "
+				FoundPin = RunOption;
+				break;
+			}
+		}
+		if (FoundPin.isEmpty() && FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
+			FileName.remove(0, pBoxPlus->GetFileRoot().length());
+			foreach(const QString& RunOption, RunOptions) {
+				if (Split2(RunOption, "|").second.indexOf(FileName) == 0) {
+					FoundPin = RunOption;
+					break;
+				}
+			}
+		}
+
+		if (m_pMenuPreset) {
+			m_pMenuPinToRun->setChecked(!FoundPin.isEmpty());
+			m_pMenuPinToRun->setData(FoundPin);
+
+			m_pMenuAllowInternet->setChecked(pProcess.objectCast<CSbieProcess>()->HasInternetAccess());
+
+			m_pMenuMarkForced->setChecked(pProcess.objectCast<CSbieProcess>()->IsForcedProgram());
+
+			int isLingering = pProcess.objectCast<CSbieProcess>()->IsLingeringProgram();
+			m_pMenuMarkLinger->setChecked(isLingering != 0);
+			m_pMenuMarkLinger->setEnabled(isLingering != 2);
+			m_pMenuMarkLeader->setChecked(pProcess.objectCast<CSbieProcess>()->IsLeaderProgram());
+		}
+	}
+
+	//m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
+	//m_pMenuResume->setEnabled(iSuspendedCount > 0);
+
+	//if (!isConnected) {
+	//	foreach(QAction * pAction, MenuActions)
+	//		pAction->setEnabled(false);
+	//}
+
+	bool bCtrl = theConf->GetInt("Options/ViewMode", 1) == 1
+		|| (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0;
+
+	m_pCopyCell->setVisible(bCtrl);
+	m_pCopyRow->setVisible(bCtrl);
+	m_pCopyPanel->setVisible(bCtrl);
+
+	return bBoxBusy == false;
+}
+
+bool CSbieView::UpdateMenu()
+{
 	CSandBoxPtr pBox;
 	bool bBoxBusy = false;
 	CBoxedProcessPtr pProcess;
@@ -435,95 +668,7 @@ bool CSbieView::UpdateMenu()
 		iGroupe = 0;
 	}
 
-	for (int i = 0; i < m_iMenuTop; i++)
-		MenuActions[i]->setVisible(!bBoxBusy && iSandBoxeCount == 0 && iProcessCount == 0);
-	m_pStopAsync->setVisible(bBoxBusy);
-	m_pRenGroupe->setVisible(iGroupe == 1 && iSandBoxeCount == 0 && iProcessCount == 0);
-	m_pDelGroupe->setVisible(iGroupe > 0 && iSandBoxeCount == 0 && iProcessCount == 0);
-
-	for (int i = m_iMenuTop; i < m_iMenuBox; i++)
-		MenuActions[i]->setVisible(iSandBoxeCount != 0 && iProcessCount == 0);
-	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
-
-	MenuActions[m_iMoveTo]->setVisible((iGroupe > 0 || iSandBoxeCount > 0) && iProcessCount == 0);
-
-	if(iSandBoxeCount == 1)
-		UpdateRunMenu(pBox);
-
-	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
-	m_pMenuDuplicate->setEnabled(iSandBoxeCount == 1);
-	m_pMenuRename->setEnabled(iSandBoxeCount == 1);
-	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
-
-	m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
-	m_pMenuPresetsShowUAC->setChecked(pBox && !pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
-	m_pMenuPresetsNoAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
-	m_pMenuPresetsFakeAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && pBox->GetBool("FakeAdminRights", false));
-	m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
-	m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
-	m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
-
-	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
-	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
-	m_pMenuRegEdit->setEnabled(iSandBoxeCount == 1);
-	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
-	m_pMenuSnapshots->setEnabled(iSandBoxeCount == 1);
-
-	//m_pMenuMoveUp->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
-	//m_pMenuMoveDown->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
-	//m_pMenuMoveBy->setEnabled(m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
-
-	for (int i = m_iMenuBox; i < m_iMenuProc; i++)
-		MenuActions[i]->setVisible(iProcessCount != 0 && iSandBoxeCount == 0);
-	
-	m_pMenuLinkTo->setEnabled(iProcessCount == 1);
-
-	if (!pProcess.isNull()) {
-		CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
-		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
-
-		QString FoundPin;
-		QString FileName = pProcess->GetFileName();
-		foreach(const QString& RunOption, RunOptions) {
-			QString Cmd = Split2(RunOption, "|").second;
-			int pos = Cmd.indexOf(FileName);
-			if (pos == 0 || pos == 1) { // 1 for "
-				FoundPin = RunOption;
-				break;
-			}
-		}
-		if (FoundPin.isEmpty() && FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
-			FileName.remove(0, pBoxPlus->GetFileRoot().length());
-			foreach(const QString& RunOption, RunOptions) {
-				if (Split2(RunOption, "|").second.indexOf(FileName) == 0) {
-					FoundPin = RunOption;
-					break;
-				}
-			}
-		}
-
-		m_pMenuPinToRun->setChecked(!FoundPin.isEmpty());
-		m_pMenuPinToRun->setData(FoundPin);
-
-		m_pMenuAllowInternet->setChecked(pProcess.objectCast<CSbieProcess>()->HasInternetAccess());
-
-		m_pMenuMarkForced->setChecked(pProcess.objectCast<CSbieProcess>()->IsForcedProgram());
-
-		int isLingering = pProcess.objectCast<CSbieProcess>()->IsLingeringProgram();
-		m_pMenuMarkLinger->setChecked(isLingering != 0);
-		m_pMenuMarkLinger->setEnabled(isLingering != 2);
-		m_pMenuMarkLeader->setChecked(pProcess.objectCast<CSbieProcess>()->IsLeaderProgram());
-	}
-
-	//m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
-	//m_pMenuResume->setEnabled(iSuspendedCount > 0);
-
-	//if (!isConnected) {
-	//	foreach(QAction * pAction, MenuActions)
-	//		pAction->setEnabled(false);
-	//}
-
-	return bBoxBusy == false;
+	return UpdateMenu(pBox, iSandBoxeCount, bBoxBusy, pProcess, iProcessCount, iGroupe);
 }
 
 void CSbieView::OnMenu(const QPoint& Point)
@@ -532,6 +677,7 @@ void CSbieView::OnMenu(const QPoint& Point)
 		return;
 
 	UpdateMenu();
+
 	CPanelView::OnMenu(Point);
 }
 
@@ -848,7 +994,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 		Results.append(SandBoxes.first()->RunStart("mail_agent"));
 	else if (Action == m_pMenuRunExplorer)
 	{
-		if (theConf->GetBool("Options/AdvancedView", true) == false && theConf->GetBool("Options/BoxedExplorerInfo", true))
+		if (theConf->GetInt("Options/ViewMode", 1) != 1 && theConf->GetBool("Options/BoxedExplorerInfo", true))
 		{
 			bool State = false;
 			CCheckableMessageBox::question(this, "Sandboxie-Plus",
@@ -895,33 +1041,9 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 	else if (Action == m_pMenuPresetsRecovery)
 		m_pMenuPresetsRecovery->setChecked(SandBoxes.first()->SetBool("AutoRecover", m_pMenuPresetsRecovery->isChecked()));
 	else if (Action == m_pMenuOptions)
-	{
-		OnDoubleClicked(m_pSbieTree->selectedRows().first());
-	}
+		ShowOptions(SandBoxes.first());
 	else if (Action == m_pMenuBrowse)
-	{
-		if (SandBoxes.first()->IsEmpty()) {
-			QMessageBox("Sandboxie-Plus", tr("This Sandbox is empty."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
-			return;
-		}
-
-		CSandBoxPtr pBox = SandBoxes.first();
-		
-		static QMap<void*, CFileBrowserWindow*> FileBrowserWindows;
-		CFileBrowserWindow* pFileBrowserWindow = FileBrowserWindows.value(pBox.data());
-		if (pFileBrowserWindow == NULL) {
-			pFileBrowserWindow = new CFileBrowserWindow(SandBoxes.first());
-			FileBrowserWindows.insert(pBox.data(), pFileBrowserWindow);
-			connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
-				FileBrowserWindows.remove(pBox.data());
-			});
-			SafeShow(pFileBrowserWindow);
-		}
-		else {
-			pFileBrowserWindow->setWindowState((pFileBrowserWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-			SetForegroundWindow((HWND)pFileBrowserWindow->winId());
-		}
-	}
+		ShowBrowse(SandBoxes.first());
 	else if (Action == m_pMenuRefresh)
 	{
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
@@ -936,7 +1058,7 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 			return;
 		}
 
-		if (theConf->GetBool("Options/AdvancedView", true) == false && theConf->GetBool("Options/ExplorerInfo", true))
+		if (theConf->GetInt("Options/ViewMode", 1) != 1 && theConf->GetBool("Options/ExplorerInfo", true))
 		{
 			bool State = false;
 			CCheckableMessageBox::question(this, "Sandboxie-Plus",
@@ -1304,6 +1426,45 @@ void CSbieView::OnProcessAction(QAction* Action)
 	CSandMan::CheckResults(Results);
 }
 
+void CSbieView::ShowOptions(const CSandBoxPtr& pBox)
+{
+	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+	if (pBoxEx->m_pOptionsWnd == NULL) {
+		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
+		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
+			pBoxEx->m_pOptionsWnd = NULL;
+		});
+		SafeShow(pBoxEx->m_pOptionsWnd);
+	}
+	else {
+		pBoxEx->m_pOptionsWnd->setWindowState((pBoxEx->m_pOptionsWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+		SetForegroundWindow((HWND)pBoxEx->m_pOptionsWnd->winId());
+	}
+}
+
+void CSbieView::ShowBrowse(const CSandBoxPtr& pBox)
+{
+	if (pBox->IsEmpty()) {
+		QMessageBox("Sandboxie-Plus", tr("This Sandbox is empty."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();
+		return;
+	}
+
+	static QMap<void*, CFileBrowserWindow*> FileBrowserWindows;
+	CFileBrowserWindow* pFileBrowserWindow = FileBrowserWindows.value(pBox.data());
+	if (pFileBrowserWindow == NULL) {
+		pFileBrowserWindow = new CFileBrowserWindow(pBox);
+		FileBrowserWindows.insert(pBox.data(), pFileBrowserWindow);
+		connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
+			FileBrowserWindows.remove(pBox.data());
+		});
+		SafeShow(pFileBrowserWindow);
+	}
+	else {
+		pFileBrowserWindow->setWindowState((pFileBrowserWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+		SetForegroundWindow((HWND)pFileBrowserWindow->winId());
+	}
+}
+
 void CSbieView::OnDoubleClicked(const QModelIndex& index)
 {
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
@@ -1327,20 +1488,11 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 		if (QMessageBox("Sandboxie-Plus", tr("This sandbox is disabled, do you want to enable it?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 		pBox->SetText("Enabled", "y");
+		return;
 	}
-
-	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-	if (pBoxEx->m_pOptionsWnd == NULL) {
-		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
-		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
-			pBoxEx->m_pOptionsWnd = NULL;
-		});
-		SafeShow(pBoxEx->m_pOptionsWnd);
-	}
-	else {
-		pBoxEx->m_pOptionsWnd->setWindowState((pBoxEx->m_pOptionsWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-		SetForegroundWindow((HWND)pBoxEx->m_pOptionsWnd->winId());
-	}
+	
+	
+	ShowOptions(pBox);
 }
 
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)
@@ -1461,12 +1613,20 @@ void CSbieView::SelectBox(const QString& Name)
 
 void CSbieView::PopUpMenu(const QString& Name)
 {
-	SelectBox(Name);
-	if (!UpdateMenu())
-		return;
+	//SelectBox(Name);
+	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
+	if (pBox.isNull() || !UpdateMenu(pBox)) return;
 	m_pMenu2->exec(QCursor::pos());
 	//m_pMenu2->popup(QCursor::pos());
 	//OnMenu(QCursor::pos());
+}
+
+QMenu* CSbieView::GetMenu(const QString& Name)
+{
+	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
+	if (pBox.isNull()) return NULL;
+	UpdateMenu(pBox);
+	return m_pMenu;
 }
 
 void CSbieView::ShowOptions(const QString& Name)

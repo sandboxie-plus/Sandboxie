@@ -5,8 +5,10 @@
 #include "../SandMan.h"
 
 CSbieModel::CSbieModel(QObject *parent)
-:CTreeItemModel(parent)
+: CTreeItemModel(parent)
 {
+	m_LargeIcons = false;
+
 	//m_BoxEmpty = QIcon(":/BoxEmpty");
 	//m_BoxInUse = QIcon(":/BoxInUse");
 	m_ExeIcon = QIcon(":/exeIcon32");
@@ -137,7 +139,10 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			New[pNode->Path].append(pNode);
 			Added.append(ID);
 
-			pNode->Icon = theGUI->GetBoxIcon(CSandBoxPlus::eDefault, false);
+			QIcon Icon = theGUI->GetBoxIcon(CSandBoxPlus::eDefault, false);
+			if (m_LargeIcons) // but not for boxes
+				Icon = QIcon(Icon.pixmap(QSize(32,32)).scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+			pNode->Icon = Icon;
 			pNode->IsBold = true;
 
 			pNode->Values[eName].Raw = Group;
@@ -210,16 +215,24 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		bool Busy = pBoxEx->IsBusy();
 		int boxType = pBoxEx->GetType();
 		
+		QIcon Icon;
 		if (pNode->inUse != inUse || (pNode->busyState || Busy) || pNode->boxType != boxType)
 		{
 			pNode->inUse = inUse;
 			pNode->boxType = boxType;
-			if(Busy) pNode->busyState = (pNode->busyState == 1) ? 2 : 1; // make it flach, the cheep way
-			else	 pNode->busyState = 0;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
-			pNode->Icon = theGUI->GetBoxIcon(boxType, inUse, pNode->busyState == 1);
+			Icon = theGUI->GetBoxIcon(boxType, inUse);
+		}
+
+		if (!Icon.isNull()) {
+			if (Busy)	Icon = theGUI->MakeIconBusy(Icon, pNode->busyState++);
+			else		pNode->busyState = 0;
+			if (m_LargeIcons) // but not for boxes
+				Icon = QIcon(Icon.pixmap(QSize(32,32)).scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+			pNode->Icon = Icon;
 			Changed = 1; // set change for first column
 		}
+
 
 		if (pNode->IsGray != !pBoxEx->IsEnabled())
 		{
@@ -494,6 +507,14 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 { 
 	return g_ExeIcon;
 }*/
+
+QVariant CSbieModel::data(const QModelIndex &index, int role) const
+{
+	if(m_LargeIcons && role == Qt::SizeHintRole)
+	    return QSize(32,32);
+
+	return CTreeItemModel::data(index, role);
+}
 
 Qt::ItemFlags CSbieModel::flags(const QModelIndex& index) const 
 {

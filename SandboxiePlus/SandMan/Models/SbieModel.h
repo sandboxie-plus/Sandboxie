@@ -16,6 +16,8 @@ public:
 
 	QList<QVariant>	Sync(const QMap<QString, CSandBoxPtr>& BoxList, const QMap<QString, QStringList>& Groups = QMap<QString, QStringList>(), bool ShowHidden = false);
 
+	void SetLargeIcons(bool bSet = true) { m_LargeIcons = bSet; }
+
 	CSandBoxPtr		GetSandBox(const QModelIndex &index) const;
 	CBoxedProcessPtr GetProcess(const QModelIndex &index) const;
 	QString			GetGroup(const QModelIndex &index) const;
@@ -30,7 +32,8 @@ public:
 	}				GetType(const QModelIndex &index) const;
 
 	Qt::DropActions supportedDropActions() const { return Qt::MoveAction; }
-	Qt::ItemFlags	flags(const QModelIndex& index) const;
+	QVariant data(const QModelIndex &index, int role) const;
+	Qt::ItemFlags flags(const QModelIndex& index) const;
 	QStringList mimeTypes() { return QStringList() << m_SbieModelMimeType; }
 	QMimeData* mimeData(const QModelIndexList& indexes) const;
 	bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const { return true; }
@@ -62,7 +65,7 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; boxType = -1; OrderNumber = 0; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; busyState = 0; boxType = -1; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
@@ -89,6 +92,7 @@ protected:
 
 private:
 
+	bool m_LargeIcons;
 	//QIcon m_BoxEmpty;
 	//QIcon m_BoxInUse;
 	QIcon m_ExeIcon;

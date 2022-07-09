@@ -12,9 +12,9 @@ bool TestWriteRight(const QString& Path)
 	return TestFile.remove();
 }
 
-CSettings::CSettings(const QString& AppName, bool bShared, QMap<QString, SSetting> DefaultValues, QObject* qObject) : QObject(qObject)
+CSettings::CSettings(const QString& AppDir, const QString& AppName, bool bShared, QMap<QString, SSetting> DefaultValues, QObject* qObject) : QObject(qObject)
 {
-	m_ConfigDir = QCoreApplication::applicationDirPath();
+	m_ConfigDir = AppDir;
 	if (!(m_bPortable = QFile::exists(m_ConfigDir + "/" + AppName + ".ini")))
 	{
 		QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);

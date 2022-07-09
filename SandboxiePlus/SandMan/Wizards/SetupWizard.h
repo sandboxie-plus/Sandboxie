@@ -86,6 +86,7 @@ private slots:
 private:
     QRadioButton *m_pSimple;
     QRadioButton *m_pAdvanced;
+    QRadioButton *m_pClassic;
     QLabel* m_pPreview;
     QRadioButton* m_pBrightMode;
     QRadioButton* m_pDarkMode;

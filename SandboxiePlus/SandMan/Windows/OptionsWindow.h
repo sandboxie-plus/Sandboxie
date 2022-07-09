@@ -20,6 +20,22 @@ public:
 
 	static void		TriggerPathReload();
 
+	enum ETabs
+	{
+		eGeneral = 0,
+		eGroups,
+		eForce,
+		eStop,
+		eStart,
+		eInternet,
+		eAccess,
+		eRecover,
+		//eOther,
+		eAdvanced,
+		eTemplates,
+		eEditIni
+	};
+
 	enum EntryTypes {
 		eUndefined = 0,
 		eProcess,
@@ -400,6 +416,12 @@ protected:
 	QSet<QString> m_Programs;
 
 private:
+	void OnTab(int iTabID);
+
+	QStackedLayout* m_pStack;
+	QTreeWidget* m_pTree;
+	int m_iCurrentTab;
+
 	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);

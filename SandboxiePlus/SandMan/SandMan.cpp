@@ -773,14 +773,17 @@ void CSandMan::closeEvent(QCloseEvent *e)
 QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
 {
 	EBoxColors color = eYellow;
-	switch (boxType) {
-	case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
-	case CSandBoxPlus::eHardened:			color = eOrang; break;
-	case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
-	case CSandBoxPlus::eDefault:			color = eYellow; break;
-	case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
-	case CSandBoxPlus::eAppBox:				color = eGreen; break;
-	case CSandBoxPlus::eInsecure:			color = eMagenta; break;
+	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+	if (iViewMode != 2) {
+		switch (boxType) {
+		case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
+		case CSandBoxPlus::eHardened:			color = eOrang; break;
+		case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
+		case CSandBoxPlus::eDefault:			color = eYellow; break;
+		case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
+		case CSandBoxPlus::eAppBox:				color = eGreen; break;
+		case CSandBoxPlus::eInsecure:			color = eMagenta; break;
+		}
 	}
 	//if (inBusy)
 	//	return m_BoxIcons[color].Busy;

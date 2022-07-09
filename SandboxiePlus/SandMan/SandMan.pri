@@ -81,6 +81,6 @@ TRANSLATIONS += sandman_de.ts \
     sandman_uk.ts \
     sandman_zh_CN.ts \
     sandman_zh_TW.ts
-    
+
 
 RESOURCES += Resources/SandMan.qrc

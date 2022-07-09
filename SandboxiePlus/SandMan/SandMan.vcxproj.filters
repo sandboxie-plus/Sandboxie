@@ -354,7 +354,7 @@
     <None Include="sandman_cs.ts">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="sandman_sv.ts">
+    <None Include="sandman_sv_SE.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>

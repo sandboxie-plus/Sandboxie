@@ -58,7 +58,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pSbieTree->setSortingEnabled(false);
 	//m_pSbieTree->header()->setSortIndicatorShown(true);
 	//m_pSbieTree->header()->setSectionsClickable(true);
-	connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnCustomSortByColumn(int)));
+	if(iViewMode != 2)
+		connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnCustomSortByColumn(int)));
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pSbieTree->setStyle(pStyle);
@@ -104,7 +105,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	}
 	else
 		m_pSbieTree->restoreState(Columns);
-	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false))
+	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false) || iViewMode == 2)
 		SetCustomOrder();
 
 	//m_pMenu = new QMenu();
@@ -689,9 +690,19 @@ void CSbieView::UpdateGroupMenu()
 			m_pMenuMoveTo->removeAction(pAction);
 	}
 
-	foreach(const QString& Group, m_Groups.keys())
+	foreach(QString Group, m_Groups.keys())
 	{
-		QAction* pAction = m_pMenuMoveTo->addAction(Group.isEmpty() ? tr("[None]") : Group, this, SLOT(OnGroupAction()));
+		QString Name = Group;
+		
+		for (;;) {
+			QString Parent = FindParent(Group);
+			if (Parent.isEmpty())
+				break;
+			Group = Parent;
+			Name.prepend(Parent + " > ");
+		}
+
+		QAction* pAction = m_pMenuMoveTo->addAction(Name.isEmpty() ? tr("[None]") : Name, this, SLOT(OnGroupAction()));
 		pAction->setData(Group);
 	}
 	//m_pMenuMoveTo->setEnabled(m_Groups.keys().count() > 1);
@@ -705,18 +716,13 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 	RenameItem(OldName, NewName);
 }
 
-bool CSbieView::RenameItem(const QString OldName, const QString NewName)
+void CSbieView::RenameItem(const QString OldName, const QString NewName)
 {
-	if (m_Groups.contains(NewName))
-		return false;
-
 	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 	{
 		if (I.value().removeOne(OldName))
 			I.value().append(NewName);
 	}
-
-	return true;
 }
 
 QString CSbieView::FindParent(const QString& Name)
@@ -875,8 +881,10 @@ void CSbieView::OnGroupAction(QAction* Action)
 		}
 	}
 
-	if (!(Action == m_pMenuMoveUp /*|| Action == m_pMenuMoveBy*/ || Action == m_pMenuMoveDown))
+	if (!(Action == m_pMenuMoveUp /*|| Action == m_pMenuMoveBy*/ || Action == m_pMenuMoveDown)) {
 		m_pSbieModel->Clear(); //todo improve that
+		Refresh();
+	}
 
 	//m_UserConfigChanged = true;
 	UpdateGroupMenu();
@@ -891,14 +899,20 @@ void CSbieView::SetCustomOrder()
 	m_pSbieTree->header()->setSortIndicatorShown(false);
 }
 
-void CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
+bool CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
 {
+	QString From;
+
 	// remove from old
-	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
-		I.value().removeAll(Name);
+	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+		if (I.value().removeAll(Name))
+			From = I.key();
+	}
 
 	// add to new
 	m_Groups[To].insert(pos, Name);
+
+	return From != To;
 }
 
 QString CSbieView::AddNewBox()
@@ -1699,9 +1713,10 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 		index = m_pSbieModel->index(row, 0);
 	QModelIndex index2 = m_pSortProxy->mapFromSource(index);
 	int row2 = index2.row();
-	MoveItem(Name, To, row2);
-
-	m_pSbieModel->Clear(); //todo improve that
+	if (MoveItem(Name, To, row2)) {
+		m_pSbieModel->Clear(); //todo improve that
+		Refresh();
+	}
 
 	//m_UserConfigChanged = true;
 	UpdateGroupMenu();

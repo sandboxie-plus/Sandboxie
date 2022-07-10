@@ -82,10 +82,10 @@ private:
 	bool					UpdateMenu();
 	void					UpdateGroupMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
-	bool					RenameItem(const QString OldName, const QString NewName);
+	void					RenameItem(const QString OldName, const QString NewName);
 
 	void					SetCustomOrder();
-	void					MoveItem(const QString& Name, const QString& To, int pos = -1);
+	bool					MoveItem(const QString& Name, const QString& To, int pos = -1);
 
 	QString					FindParent(const QString& Name);
 	bool					IsParentOf(const QString& Name, const QString& Group);

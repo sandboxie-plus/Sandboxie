@@ -1209,12 +1209,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="327"/>
         <source>Disable File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Dateiwiederherstellung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="329"/>
         <source>Disable Message PopUp</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Nachrichten-PopUp</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="332"/>
@@ -1344,7 +1344,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="388"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellungsprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="397"/>
@@ -1379,12 +1379,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="545"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit|Boxname|Dateipfad</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="553"/>
         <source>Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellungsprotokoll</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="725"/>
@@ -2190,7 +2190,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Models/SbieModel.cpp" line="255"/>
         <source>Empty</source>
-        <translation type="unfinished">Leer</translation>
+        <translation>Leer</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="479"/>
@@ -2500,7 +2500,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="115"/>
         <source>Refresh Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info aktualisieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="116"/>
@@ -2773,7 +2773,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="1151"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Sandboxie Startmenü wird nun angezeigt. Wählen Sie eine Applikation aus diesem Menü und Sandboxie wird eine neue Verknüpfung auf Ihrem tatsächlichen Desktop erstellen, welche Sie dazu verwenden können um die ausgewählte Applikation unter der Kontrolle von Sandboxie aufzurufen.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1225"/>
@@ -2810,7 +2810,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="140"/>
         <source>Immediate Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Sofortwiederherstellung</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="143"/>

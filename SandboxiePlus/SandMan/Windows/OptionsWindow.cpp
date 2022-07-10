@@ -144,7 +144,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 
 	//this->setMinimumHeight(490);
-	ui.tabs->removeTab(8); // misc tab is currently still empty
 
 	ui.tabs->setTabIcon(eGeneral, CSandMan::GetIcon("Options"));
 	ui.tabs->setTabIcon(eGroups, CSandMan::GetIcon("Group"));

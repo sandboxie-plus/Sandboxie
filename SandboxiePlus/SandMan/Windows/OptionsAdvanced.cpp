@@ -143,7 +143,7 @@ void COptionsWindow::LoadAdvanced()
 
 void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 {
-	if (ui.chkShowRecoveryTmpl->isChecked())
+	if (ui.chkShowTriggersTmpl->isChecked())
 	{
 		foreach(const QString& Template, m_pBox->GetTemplates())
 		{

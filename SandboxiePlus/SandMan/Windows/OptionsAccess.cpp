@@ -392,22 +392,22 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 	if (!pProgram)
 		return;
 
-	QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
-	QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
-	QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
-
-	QComboBox* pMode = (QComboBox*)ui.treeAccess->itemWidget(pItem, 2);
-	QLineEdit* pPath = (QLineEdit*)ui.treeAccess->itemWidget(pItem, 3);
-
-	QString Program = pCombo->currentText();
-	int Index = pCombo->findText(Program);
-	if (Index != -1)
-		Program = pCombo->itemData(Index, Qt::UserRole).toString();
-	if (!Program.isEmpty() && Program.left(1) != "<")
-		m_Programs.insert(Program);
-
 	if (bSave)
 	{
+		QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+		QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
+		QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
+
+		QComboBox* pMode = (QComboBox*)ui.treeAccess->itemWidget(pItem, 2);
+		QLineEdit* pPath = (QLineEdit*)ui.treeAccess->itemWidget(pItem, 3);
+
+		QString Program = pCombo->currentText();
+		int Index = pCombo->findText(Program);
+		if (Index != -1)
+			Program = pCombo->itemData(Index, Qt::UserRole).toString();
+		if (!Program.isEmpty() && Program.left(1) != "<")
+			m_Programs.insert(Program);
+
 		if (pItem->data(0, Qt::UserRole).toInt() == eCOM && !pPath->text().isEmpty())
 		{
 			bool isGUID = pPath->text().length() == 38 && pPath->text().left(1) == "{" && pPath->text().right(1) == "}";

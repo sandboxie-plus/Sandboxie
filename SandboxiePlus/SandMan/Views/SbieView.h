@@ -78,7 +78,7 @@ private:
 	void					CreateOldMenu();
 	void					CreatTrayMenu();
 
-	bool					UpdateMenu(const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false, const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0, int iGroupe = 0);
+	bool					UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false, const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0, int iGroupe = 0);
 	bool					UpdateMenu();
 	void					UpdateGroupMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);

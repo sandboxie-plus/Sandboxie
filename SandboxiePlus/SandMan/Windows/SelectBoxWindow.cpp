@@ -107,6 +107,9 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 		Boxes = Boxes2.values();
 	}
 
+	QFileIconProvider IconProvider;
+	bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
+
 	QMap<QString, QTreeWidgetItem*> GroupItems;
 	foreach(const CSandBoxPtr &pBox, Boxes) 
 	{
@@ -120,7 +123,12 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		pItem->setText(0, pBox->GetName().replace("_", " "));
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
-		pItem->setData(0, Qt::DecorationRole, theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount()));
+		QIcon Icon;
+		if(ColorIcons)
+			Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
+		else
+			Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
+		pItem->setData(0, Qt::DecorationRole, Icon);
 		if (pParent)
 			pParent->addChild(pItem);
 		else

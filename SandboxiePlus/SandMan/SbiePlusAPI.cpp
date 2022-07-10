@@ -164,6 +164,11 @@ void CSandBoxPlus::UpdateDetails()
 	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 
 	CSandBox::UpdateDetails();
+
+	m_BoxType = GetTypeImpl();
+
+	QStringList BorderCfg = GetText("BorderColor").split(",");
+	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();
 }
 
 void CSandBoxPlus::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
@@ -292,7 +297,7 @@ QString CSandBoxPlus::GetStatusStr() const
 	return Status.join(", ");
 }
 
-CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 {
 	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
 		return eAppBoxPlus;

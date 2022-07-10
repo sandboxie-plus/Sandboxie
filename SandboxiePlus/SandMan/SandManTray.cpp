@@ -48,46 +48,55 @@ void CSandMan::CreateTrayMenu()
 	pShowHide->setFont(f);
 	m_pTrayMenu->addSeparator();
 
-	m_pTrayList = new QWidgetAction(m_pTrayMenu);
+	m_iTrayPos = m_pTrayMenu->actions().count();
 
-	QWidget* pWidget = new CActionWidget();
-    QHBoxLayout* pLayout = new QHBoxLayout();
-	pLayout->setMargin(0);
-	pWidget->setLayout(pLayout);
+	if (!theConf->GetBool("Options/CompactTray", false))
+	{
+		m_pTrayBoxes = NULL;
+		connect(m_pTrayMenu, SIGNAL(hovered(QAction*)), this, SLOT(OnBoxMenuHover(QAction*)));
+	}
+	else
+	{
+		m_pTrayList = new QWidgetAction(m_pTrayMenu);
 
-	m_pTrayBoxes = new QTreeWidget();
+		QWidget* pWidget = new CActionWidget();
+		QHBoxLayout* pLayout = new QHBoxLayout();
+		pLayout->setMargin(0);
+		pWidget->setLayout(pLayout);
 
-	m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
-	m_pTrayBoxes->setRootIsDecorated(false);
-	//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
-	m_pTrayBoxes->setHeaderHidden(true);
-	m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
-	//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
-	m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
+		m_pTrayBoxes = new QTreeWidget();
 
-	m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
+		m_pTrayBoxes->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		m_pTrayBoxes->setRootIsDecorated(false);
+		//m_pTrayBoxes->setHeaderLabels(tr("         Sandbox").split("|"));
+		m_pTrayBoxes->setHeaderHidden(true);
+		m_pTrayBoxes->setSelectionMode(QAbstractItemView::NoSelection);
+		//m_pTrayBoxes->setSelectionMode(QAbstractItemView::ExtendedSelection);
+		//m_pTrayBoxes->setStyleSheet("QTreeView::item:hover{background-color:#FFFF00;}");
+		m_pTrayBoxes->setItemDelegate(new CTrayBoxesItemDelegate());
 
-	pLayout->insertSpacing(0, 1);// 32);
+		m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 
-	/*QFrame* vFrame = new QFrame;
-	vFrame->setFixedWidth(1);
-	vFrame->setFrameShape(QFrame::VLine);
-	vFrame->setFrameShadow(QFrame::Raised);
-	pLayout->addWidget(vFrame);*/
-	
-	pLayout->addWidget(m_pTrayBoxes);
+		pLayout->insertSpacing(0, 1);// 32);
 
-    m_pTrayList->setDefaultWidget(pWidget);
-	m_pTrayMenu->addAction(m_pTrayList);
+		//QFrame* vFrame = new QFrame;
+		//vFrame->setFixedWidth(1);
+		//vFrame->setFrameShape(QFrame::VLine);
+		//vFrame->setFrameShadow(QFrame::Raised);
+		//pLayout->addWidget(vFrame);
 
+		pLayout->addWidget(m_pTrayBoxes);
 
-	m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnBoxMenu(const QPoint &)));
-	connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
-	//m_pBoxMenu
+		m_pTrayList->setDefaultWidget(pWidget);
+		m_pTrayMenu->addAction(m_pTrayList);
 
-	m_pTraySeparator = m_pTrayMenu->addSeparator();
+		m_pTrayBoxes->setContextMenuPolicy(Qt::CustomContextMenu);
+		connect(m_pTrayBoxes, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnBoxMenu(const QPoint&)));
+		connect(m_pTrayBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
+		//m_pBoxMenu
+	}
+
+	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
 	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
 	m_pDisableForce2->setCheckable(true);
@@ -180,6 +189,76 @@ void CSandMan::OnShowHide()
 		show();
 }
 
+void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
+{
+	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+
+	static QMenu* pEmptyMenu = new QMenu();
+
+	while (!pMenu->actions().at(iOffset)->data().toString().isEmpty())
+		pMenu->removeAction(pMenu->actions().at(iOffset));
+
+	int iNoIcons = theConf->GetInt("Options/NoIcons", 2);
+	if (iNoIcons == 2)
+		iNoIcons = theConf->GetInt("Options/ViewMode", 1) == 2 ? 1 : 0;
+	QFileIconProvider IconProvider;
+	bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
+
+	QAction* pPos = pMenu->actions().at(iOffset);
+	foreach(const CSandBoxPtr & pBox, Boxes)
+	{
+		if (!pBox->IsEnabled())
+			continue;
+
+		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+
+		if (iSysTrayFilter == 2) { // pinned only
+			if (!pBox->GetBool("PinToTray", false))
+				continue;
+		}
+		else if (iSysTrayFilter == 1) { // active + pinned
+			if (pBoxEx->GetActiveProcessCount() == 0 && !pBox->GetBool("PinToTray", false))
+				continue;
+		}
+
+		QAction* pBoxAction = new QAction(pBox->GetName().replace("_", " "));
+		if (!iNoIcons) {
+			QIcon Icon;
+			if (ColorIcons)
+				Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
+			else
+				Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
+			pBoxAction->setIcon(Icon);
+		}
+		pBoxAction->setData("box:" + pBox->GetName());
+		pBoxAction->setMenu(pEmptyMenu);
+		//pBoxAction->setIcon
+		//connect(pBoxAction, SIGNAL(triggered()), this, SLOT(OnBoxMenu()));
+		pMenu->insertAction(pPos, pBoxAction);
+	}
+}
+
+void CSandMan::OnBoxMenuHover(QAction* action)
+{
+	if (action->data().type() != QVariant::String)
+		return;
+	QString Str = action->data().toString();
+	if (Str.left(4) != "box:")
+		return;
+
+	QString Name = Str.mid(4);
+	static QPointer<QAction> pPrev = NULL;
+	if (pPrev.data() != action) {
+		if (!pPrev.isNull()) {
+			pPrev->menu()->close();
+			pPrev->setMenu(new QMenu());
+		}
+		pPrev = action;
+		QMenu* pMenu = theGUI->GetBoxView()->GetMenu(Name);
+		action->setMenu(pMenu);
+	}
+}
+
 void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 {
 	static bool TriggerSet = false;
@@ -188,83 +267,95 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 	{
 		case QSystemTrayIcon::Context:
 		{
-			QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
-
 			int iSysTrayFilter = theConf->GetInt("Options/SysTrayFilter", 0);
 
-			bool bAdded = false;
-			if (m_pTrayBoxes->topLevelItemCount() == 0)
-				bAdded = true; // triger size refresh
-
-			QMap<QString, QTreeWidgetItem*> OldBoxes;
-			for(int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i) 
+			if(!m_pTrayBoxes)
+				CreateBoxMenu(m_pTrayMenu, m_iTrayPos, iSysTrayFilter);
+			else
 			{
-				QTreeWidgetItem* pItem = m_pTrayBoxes->topLevelItem(i);
-				QString Name = pItem->data(0, Qt::UserRole).toString();
-				OldBoxes.insert(Name,pItem);
-			}
-			
-			foreach(const CSandBoxPtr & pBox, Boxes) 
-			{
-				if (!pBox->IsEnabled())
-					continue;
+				QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
-				CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+				bool bAdded = false;
+				if (m_pTrayBoxes->topLevelItemCount() == 0)
+					bAdded = true; // triger size refresh
 
-				if (iSysTrayFilter == 2) { // pinned only
-					if (!pBox->GetBool("PinToTray", false))
-						continue;
-				}
-				else if (iSysTrayFilter == 1) { // active + pinned
-					if (pBoxEx->GetActiveProcessCount() == 0 && !pBox->GetBool("PinToTray", false))
-						continue;
-				}
-
-				QTreeWidgetItem* pItem = OldBoxes.take(pBox->GetName());
-				if(!pItem)
+				QMap<QString, QTreeWidgetItem*> OldBoxes;
+				for (int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i)
 				{
-					pItem = new QTreeWidgetItem();
-					pItem->setData(0, Qt::UserRole, pBox->GetName());
-					pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
-					m_pTrayBoxes->addTopLevelItem(pItem);
-
-					bAdded = true;
+					QTreeWidgetItem* pItem = m_pTrayBoxes->topLevelItem(i);
+					QString Name = pItem->data(0, Qt::UserRole).toString();
+					OldBoxes.insert(Name, pItem);
 				}
 
-				QIcon Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
-				pItem->setData(0, Qt::DecorationRole, Icon);
-			}
+				QFileIconProvider IconProvider;
+				bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
 
-			foreach(QTreeWidgetItem* pItem, OldBoxes)
-				delete pItem;
+				foreach(const CSandBoxPtr & pBox, Boxes)
+				{
+					if (!pBox->IsEnabled())
+						continue;
 
-			if (!OldBoxes.isEmpty() || bAdded) 
-			{
-				auto palette = m_pTrayBoxes->palette();
-				palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(m_DarkTheme ? QPalette::Base : QPalette::Window));
-				m_pTrayBoxes->setPalette(palette);
-				m_pTrayBoxes->setFrameShape(QFrame::NoFrame);
+					CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
 
-				//const int FrameWidth = m_pTrayBoxes->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-				int Height = 0; //m_pTrayBoxes->header()->height() + (2 * FrameWidth);
+					if (iSysTrayFilter == 2) { // pinned only
+						if (!pBox->GetBool("PinToTray", false))
+							continue;
+					}
+					else if (iSysTrayFilter == 1) { // active + pinned
+						if (pBoxEx->GetActiveProcessCount() == 0 && !pBox->GetBool("PinToTray", false))
+							continue;
+					}
 
-				for (QTreeWidgetItemIterator AllIterator(m_pTrayBoxes, QTreeWidgetItemIterator::All); *AllIterator; ++AllIterator)
-					Height += m_pTrayBoxes->visualItemRect(*AllIterator).height();
+					QTreeWidgetItem* pItem = OldBoxes.take(pBox->GetName());
+					if (!pItem)
+					{
+						pItem = new QTreeWidgetItem();
+						pItem->setData(0, Qt::UserRole, pBox->GetName());
+						pItem->setText(0, "  " + pBox->GetName().replace("_", " "));
+						m_pTrayBoxes->addTopLevelItem(pItem);
 
-				QRect scrRect = this->screen()->availableGeometry();
-				int MaxHeight = scrRect.height() / 2;
-				if (Height > MaxHeight) {
-					Height = MaxHeight;
-					if (Height < 64)
-						Height = 64;
+						bAdded = true;
+					}
+
+					QIcon Icon;
+					if (ColorIcons)
+						Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
+					else
+						Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
+					pItem->setData(0, Qt::DecorationRole, Icon);
 				}
 
-				m_pTrayBoxes->setFixedHeight(Height);
+				foreach(QTreeWidgetItem * pItem, OldBoxes)
+					delete pItem;
 
-				m_pTrayMenu->removeAction(m_pTrayList);
-				m_pTrayMenu->insertAction(m_pTraySeparator, m_pTrayList);
+				if (!OldBoxes.isEmpty() || bAdded)
+				{
+					auto palette = m_pTrayBoxes->palette();
+					palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(m_DarkTheme ? QPalette::Base : QPalette::Window));
+					m_pTrayBoxes->setPalette(palette);
+					m_pTrayBoxes->setFrameShape(QFrame::NoFrame);
 
-				m_pTrayBoxes->setFocus();
+					//const int FrameWidth = m_pTrayBoxes->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+					int Height = 0; //m_pTrayBoxes->header()->height() + (2 * FrameWidth);
+
+					for (QTreeWidgetItemIterator AllIterator(m_pTrayBoxes, QTreeWidgetItemIterator::All); *AllIterator; ++AllIterator)
+						Height += m_pTrayBoxes->visualItemRect(*AllIterator).height();
+
+					QRect scrRect = this->screen()->availableGeometry();
+					int MaxHeight = scrRect.height() / 3;
+					if (Height > MaxHeight) {
+						Height = MaxHeight;
+						if (Height < 64)
+							Height = 64;
+					}
+
+					m_pTrayBoxes->setFixedHeight(Height);
+
+					m_pTrayMenu->removeAction(m_pTrayList);
+					m_pTrayMenu->insertAction(m_pTrayMenu->actions().at(m_iTrayPos), m_pTrayList);
+
+					m_pTrayBoxes->setFocus();
+				}
 			}
 
 			m_pTrayMenu->popup(QCursor::pos());	
@@ -302,4 +393,19 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 			m_pPopUpWindow->Poke();
 			break;
 	}
+}
+
+void CSandMan::OnBoxMenu(const QPoint & point)
+{
+	QPoint pos = ((QWidget*)m_pTrayBoxes->parent())->mapFromParent(point);
+	QTreeWidgetItem* pItem = m_pTrayBoxes->itemAt(pos);
+	if (!pItem)
+		return;
+	m_pTrayBoxes->setCurrentItem(pItem);
+
+	CTrayBoxesItemDelegate::m_Hold = true;
+	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
+	CTrayBoxesItemDelegate::m_Hold = false;
+
+	//m_pBoxMenu->popup(QCursor::pos());	
 }

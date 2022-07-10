@@ -330,6 +330,47 @@ bool ReadFromDevice(QIODevice* dev, char* data, int len, int timeout)
 	return dev->read(data, len) == len;
 }
 
+uint8_t clamp(float v) //define a function to bound and round the input float value to 0-255
+{
+    if (v < 0)
+        return 0;
+    if (v > 255)
+        return 255;
+    return (uint8_t)v;
+}
+
+// http://beesbuzz.biz/code/16-hsv-color-transforms
+QRgb change_hsv_c(QRgb rgb, float fHue, float fSat, float fVal)
+{
+	float in_r = qRed(rgb);
+	float in_g = qGreen(rgb);
+	float in_b = qBlue(rgb);
+
+    const float cosA = fSat*cos(fHue*3.14159265f/180); //convert degrees to radians
+    const float sinA = fSat*sin(fHue*3.14159265f/180); //convert degrees to radians
+
+    //helpers for faster calc //first 2 could actually be precomputed
+    const float aThird = 1.0f/3.0f;
+    const float rootThird = sqrtf(aThird);
+    const float oneMinusCosA = (1.0f - cosA);
+    const float aThirdOfOneMinusCosA = aThird * oneMinusCosA;
+    const float rootThirdTimesSinA =  rootThird * sinA;
+    const float plus = aThirdOfOneMinusCosA +rootThirdTimesSinA;
+    const float minus = aThirdOfOneMinusCosA -rootThirdTimesSinA;
+
+    //calculate the rotation matrix
+    float matrix[3][3] = {
+        {   cosA + oneMinusCosA / 3.0f  , minus                         , plus                          },
+        {   plus                        , cosA + aThirdOfOneMinusCosA   , minus                         },
+        {   minus                       , plus                          , cosA + aThirdOfOneMinusCosA   }
+    };
+
+    //Use the rotation matrix to convert the RGB directly
+    float out_r = clamp((in_r*matrix[0][0] + in_g*matrix[0][1] + in_b*matrix[0][2])*fVal);
+    float out_g = clamp((in_r*matrix[1][0] + in_g*matrix[1][1] + in_b*matrix[1][2])*fVal);
+    float out_b = clamp((in_r*matrix[2][0] + in_g*matrix[2][1] + in_b*matrix[2][2])*fVal);
+    return qRgb(out_r, out_g, out_b);
+}
 
 void GrayScale (QImage& Image)
 {

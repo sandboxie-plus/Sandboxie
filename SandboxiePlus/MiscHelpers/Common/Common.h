@@ -84,7 +84,7 @@ private:
 
 MISCHELPERS_EXPORT bool ReadFromDevice(QIODevice* dev, char* data, int len, int timeout = 5000);
 
-
+QRgb MISCHELPERS_EXPORT change_hsv_c(QRgb rgb, float fHue, float fSat, float fVal);
 MISCHELPERS_EXPORT void GrayScale (QImage& Image);
 
 MISCHELPERS_EXPORT QIcon MakeNormalAndGrayIcon(QIcon Icon);

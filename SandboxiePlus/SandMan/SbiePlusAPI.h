@@ -103,11 +103,13 @@ public:
 		eAppBoxPlus,
 		eAppBox,
 		eInsecure,
+		eOpen,
 
 		eUnknown
 	};
 
-	EBoxTypes				GetType() const;
+	EBoxTypes				GetType() const { return m_BoxType; }
+	QRgb					GetColor() const { return m_BoxColor; }
 	
 	class COptionsWindow*	m_pOptionsWnd;
 	class CRecoveryWindow*	m_pRecoveryWnd;
@@ -125,6 +127,7 @@ protected:
 	friend class CSbiePlusAPI;
 
 	virtual bool			CheckUnsecureConfig() const;
+	EBoxTypes				GetTypeImpl() const;
 
 	virtual bool			TestProgramGroup(const QString& Group, const QString& ProgName);
 	virtual void			EditProgramGroup(const QString& Group, const QString& ProgName, bool bSet);
@@ -152,4 +155,7 @@ protected:
 
 	QSet<QString>			m_RecentPrograms;
 
+
+	EBoxTypes				m_BoxType;
+	QRgb					m_BoxColor;
 };

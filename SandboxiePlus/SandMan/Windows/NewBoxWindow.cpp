@@ -108,6 +108,9 @@ void CNewBoxWindow::CreateBox()
 				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
 				break;
 		}
+
+		QRgb rgb = theGUI->GetBoxColor(BoxType);
+		pBox->SetText("BorderColor", QString("#%1%2%3").arg(qBlue(rgb), 2, 16, QChar('0')).arg(qGreen(rgb), 2, 16, QChar('0')).arg(qRed(rgb), 2, 16, QChar('0')) + ",ttl");
 	}
 
 	if(Status.IsError())

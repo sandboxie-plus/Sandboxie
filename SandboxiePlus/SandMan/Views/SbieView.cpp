@@ -34,8 +34,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSortProxy->setSourceModel(m_pSbieModel);
 	m_pSortProxy->setDynamicSortFilter(true);
 
-	QStyle* pStyle = QStyleFactory::create("windows");
-
 	// SbieTree
 	m_pSbieTree = new QTreeViewEx();
 	m_pSbieTree->setExpandsOnDoubleClick(false);
@@ -62,6 +60,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pSbieTree->header()->setSectionsClickable(true);
 	connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnCustomSortByColumn(int)));
 
+	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pSbieTree->setStyle(pStyle);
 
 	m_pSbieTree->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -510,7 +509,7 @@ void CSbieView::OnCustomSortByColumn(int column)
 	}
 }
 
-bool CSbieView::UpdateMenu(const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy, const CBoxedProcessPtr &pProcess, int iProcessCount, int iGroupe)
+bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy, const CBoxedProcessPtr &pProcess, int iProcessCount, int iGroupe)
 {
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
@@ -613,12 +612,9 @@ bool CSbieView::UpdateMenu(const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBo
 	//		pAction->setEnabled(false);
 	//}
 
-	bool bCtrl = theConf->GetInt("Options/ViewMode", 1) == 1
-		|| (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0;
-
-	m_pCopyCell->setVisible(bCtrl);
-	m_pCopyRow->setVisible(bCtrl);
-	m_pCopyPanel->setVisible(bCtrl);
+	m_pCopyCell->setVisible(bAdvanced);
+	m_pCopyRow->setVisible(bAdvanced);
+	m_pCopyPanel->setVisible(bAdvanced);
 
 	return bBoxBusy == false;
 }
@@ -668,7 +664,10 @@ bool CSbieView::UpdateMenu()
 		iGroupe = 0;
 	}
 
-	return UpdateMenu(pBox, iSandBoxeCount, bBoxBusy, pProcess, iProcessCount, iGroupe);
+	bool bAdvanced = theConf->GetInt("Options/ViewMode", 1) == 1
+		|| (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0;
+
+	return UpdateMenu(bAdvanced, pBox, iSandBoxeCount, bBoxBusy, pProcess, iProcessCount, iGroupe);
 }
 
 void CSbieView::OnMenu(const QPoint& Point)
@@ -1615,7 +1614,7 @@ void CSbieView::PopUpMenu(const QString& Name)
 {
 	//SelectBox(Name);
 	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
-	if (pBox.isNull() || !UpdateMenu(pBox)) return;
+	if (pBox.isNull() || !UpdateMenu(false, pBox)) return;
 	m_pMenu2->exec(QCursor::pos());
 	//m_pMenu2->popup(QCursor::pos());
 	//OnMenu(QCursor::pos());
@@ -1625,7 +1624,7 @@ QMenu* CSbieView::GetMenu(const QString& Name)
 {
 	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
 	if (pBox.isNull()) return NULL;
-	UpdateMenu(pBox);
+	UpdateMenu(false, pBox);
 	return m_pMenu;
 }
 

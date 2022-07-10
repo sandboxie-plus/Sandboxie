@@ -65,12 +65,13 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; busyState = 0; boxType = -1; OrderNumber = 0; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; busyState = 0; boxType = -1; boxColor = 0; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
 		int			busyState;
 		int			boxType;
+		int			boxColor;
 		int			OrderNumber;
 
 		CBoxedProcessPtr pProcess;

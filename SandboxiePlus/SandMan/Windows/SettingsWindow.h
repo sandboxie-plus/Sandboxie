@@ -71,7 +71,7 @@ public slots:
 	void ok();
 	void apply();
 
-	void showTab(int Tab);
+	void showTab(int Tab, bool bExclusive = false);
 
 private slots:
 	void OnChange();

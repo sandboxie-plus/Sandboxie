@@ -90,6 +90,13 @@
         <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
         <file alias="Full6">Boxes/sandbox-o-full.png</file>
         <file alias="Busy">Boxes/BusyOverlay.png</file>
+        <file alias="Frame">Boxes/sandbox-frame.png</file>
+        <file alias="Items">Boxes/sandbox-items.png</file>
+        <file alias="Sand">Boxes/sandbox-sand.png</file>
+        <file alias="Empty7">Boxes/sandbox-w-empty.png</file>
+        <file alias="Full7">Boxes/sandbox-w-full.png</file>
+        <file alias="Group">Boxes/sandbox-group.png</file>
+        <file alias="Group2">Boxes/sandbox-group+.png</file>
     </qresource>
     <qresource prefix="/Assets">
         <file>Advanced.png</file>

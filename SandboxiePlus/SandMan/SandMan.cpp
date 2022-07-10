@@ -148,8 +148,17 @@ CSandMan::CSandMan(QWidget *parent)
 
 	for (int i = 0; i < eMaxColor; i++) {
 		m_BoxIcons[i].Empty = QIcon(QString(":/Boxes/Empty%1").arg(i));
-		m_BoxIcons[i].InUse= QIcon(QString(":/Boxes/Full%1").arg(i));
+		m_BoxIcons[i].InUse = QIcon(QString(":/Boxes/Full%1").arg(i));
 	}
+
+	m_BoxColors[CSandBoxPlus::eHardenedPlus] = qRgb(238,35,4);
+	m_BoxColors[CSandBoxPlus::eHardened] = qRgb(247,125,2);
+	m_BoxColors[CSandBoxPlus::eDefaultPlus] = qRgb(1,133,248);
+	m_BoxColors[CSandBoxPlus::eDefault] = qRgb(246,246,2);
+	m_BoxColors[CSandBoxPlus::eAppBoxPlus] = qRgb(3,232,232);
+	m_BoxColors[CSandBoxPlus::eAppBox] = qRgb(0,253,0);
+	m_BoxColors[CSandBoxPlus::eInsecure] = qRgb(244,3,244);
+	m_BoxColors[CSandBoxPlus::eOpen] = qRgb(255,255,255);
 
 	CreateTrayIcon();
 
@@ -312,7 +321,7 @@ void CSandMan::CreateViewBaseMenu()
 		m_pViewMode = new QActionGroup(m_pMenuView);
 		MakeAction(m_pViewMode, m_pMenuView, tr("Simple View"), 0);
 		MakeAction(m_pViewMode, m_pMenuView, tr("Advanced View"), 1);
-		MakeAction(m_pViewMode, m_pMenuView, tr("Classic View"), 2);
+		MakeAction(m_pViewMode, m_pMenuView, tr("Vintage View (like SbieCtrl)"), 2);
 		connect(m_pViewMode, SIGNAL(triggered(QAction*)), this, SLOT(OnViewMode(QAction*)));
 
 		m_pMenuView->addSeparator();
@@ -510,6 +519,8 @@ void CSandMan::CreateOldMenus()
 		m_pKeepTerminated = NULL;
 
 	m_pSandbox = menuBar()->addMenu(tr("&Sandbox"));
+
+		connect(m_pSandbox, SIGNAL(hovered(QAction*)), this, SLOT(OnBoxMenuHover(QAction*)));
 
 		m_pSandbox->addSeparator();
 		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
@@ -775,6 +786,7 @@ QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
 	EBoxColors color = eYellow;
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 	if (iViewMode != 2) {
+		//return GetColorIcon(m_BoxColors[boxType], inUse);
 		switch (boxType) {
 		case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
 		case CSandBoxPlus::eHardened:			color = eOrang; break;
@@ -783,6 +795,7 @@ QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
 		case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
 		case CSandBoxPlus::eAppBox:				color = eGreen; break;
 		case CSandBoxPlus::eInsecure:			color = eMagenta; break;
+		case CSandBoxPlus::eOpen:				color = eWhite; break;
 		}
 	}
 	//if (inBusy)
@@ -790,6 +803,46 @@ QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
 	if (inUse)
 		return m_BoxIcons[color].InUse;
 	return m_BoxIcons[color].Empty;
+}
+
+QIcon CSandMan::GetColorIcon(QColor boxColor, bool inUse)
+{
+	static QPixmap Sand;
+	if(Sand.isNull())
+		Sand = QPixmap(":/Boxes/Sand");
+
+	static QPixmap Frame;
+	if(Frame.isNull())
+		Frame = QPixmap(":/Boxes/Frame");
+
+	static QPixmap Items;
+	if(Items.isNull())
+		Items = QPixmap(":/Boxes/Items");
+
+	QRgb rgb = boxColor.rgba();
+	QImage MySand = Sand.toImage();
+	for (QRgb* c = (QRgb*)MySand.bits(); c != (QRgb*)(MySand.bits() + MySand.byteCount ()); c++) {
+		if(*c == 0xFFFFFFFF)
+			*c = rgb;
+	}
+
+	QPixmap result(32, 32);
+	result.fill(Qt::transparent); // force alpha channel
+	QPainter painter(&result);
+	painter.drawPixmap(0, 0, QPixmap::fromImage(MySand));
+	painter.drawPixmap(0, 0, Frame);
+	if (inUse) 
+	{	
+		rgb = change_hsv_c(rgb, -60, 2, 1); // yellow -> red
+		QImage MyItems = Items.toImage();
+		for (QRgb* c = (QRgb*)MyItems.bits(); c != (QRgb*)(MyItems.bits() + MyItems.byteCount()); c++) {
+			if (*c == 0xFF000000)
+				*c = rgb;
+		}
+		painter.drawPixmap(0, 0, QPixmap::fromImage(MyItems));
+	}
+
+	return QIcon(result);
 }
 
 QIcon CSandMan::MakeIconBusy(const QIcon& Icon, int Index)
@@ -1539,21 +1592,6 @@ void CSandMan::OnNotAuthorized(bool bLoginRequired, bool& bRetry)
 	LoginOpen = false;
 }
 
-void CSandMan::OnBoxMenu(const QPoint & point)
-{
-	QPoint pos = ((QWidget*)m_pTrayBoxes->parent())->mapFromParent(point);
-	QTreeWidgetItem* pItem = m_pTrayBoxes->itemAt(pos);
-	if (!pItem)
-		return;
-	m_pTrayBoxes->setCurrentItem(pItem);
-
-	CTrayBoxesItemDelegate::m_Hold = true;
-	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
-	CTrayBoxesItemDelegate::m_Hold = false;
-
-	//m_pBoxMenu->popup(QCursor::pos());	
-}
-
 void CSandMan::OnBoxDblClick(QTreeWidgetItem* pItem)
 {
 	m_pBoxView->ShowOptions(pItem->data(0, Qt::UserRole).toString());
@@ -1863,7 +1901,7 @@ void CSandMan::OnSettings()
 
 void CSandMan::UpdateSettings(bool bRebuildUI)
 {
-	m_pTrayBoxes->clear(); // force refresh
+	if(m_pTrayBoxes) m_pTrayBoxes->clear(); // force refresh
 
 	//GetBoxView()->UpdateRunMenu();
 
@@ -1896,7 +1934,8 @@ void CSandMan::UpdateSettings(bool bRebuildUI)
 		OnStatusChanged();
 
 		SetUITheme();
-		m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
+
+		if(m_pTrayBoxes) m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 	}
 }
 

@@ -356,6 +356,9 @@ void COptionsWindow::OnBoxTypChanged()
 		break;
 	}
 
+	m_BorderColor = theGUI->GetBoxColor(BoxType);
+	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
+
 	m_GeneralChanged = true;
 	m_AccessChanged = true;
 	m_AdvancedChanged = true;

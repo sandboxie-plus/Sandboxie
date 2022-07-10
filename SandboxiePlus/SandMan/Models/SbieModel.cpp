@@ -116,8 +116,11 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	QHash<QVariant, STreeNode*> Old = m_Map;
 
 	bool bGroupsFirst = theConf->GetBool("Options/SortGroupsFirst", false);
-
 	bool bWatchSize = theConf->GetBool("Options/WatchBoxSize", false);
+	bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
+	bool bPlus = (theAPI->GetFeatureFlags() & CSbieAPI::eSbieFeatureCert) != 0;
+	if (theConf->GetInt("Options/ViewMode", 1) == 2)
+		bPlus = false;
 
 	foreach(const QString& Group, Groups.keys())
 	{
@@ -139,7 +142,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			New[pNode->Path].append(pNode);
 			Added.append(ID);
 
-			QIcon Icon = theGUI->GetBoxIcon(CSandBoxPlus::eDefault, false);
+			QIcon Icon = QIcon(bPlus ? ":/Boxes/Group2" : ":/Boxes/Group"); // theGUI->GetBoxIcon(CSandBoxPlus::eDefault, false);
 			if (m_LargeIcons) // but not for boxes
 				Icon = QIcon(Icon.pixmap(QSize(32,32)).scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 			pNode->Icon = Icon;
@@ -214,14 +217,19 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
 		bool Busy = pBoxEx->IsBusy();
 		int boxType = pBoxEx->GetType();
+		int boxColor = pBoxEx->GetColor();
 		
 		QIcon Icon;
-		if (pNode->inUse != inUse || (pNode->busyState || Busy) || pNode->boxType != boxType)
+		if (pNode->inUse != inUse || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor)
 		{
 			pNode->inUse = inUse;
 			pNode->boxType = boxType;
+			pNode->boxColor = boxColor;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
-			Icon = theGUI->GetBoxIcon(boxType, inUse);
+			if(ColorIcons)
+				Icon = theGUI->GetColorIcon(boxColor, inUse);
+			else
+				Icon = theGUI->GetBoxIcon(boxType, inUse);
 		}
 
 		if (!Icon.isNull()) {

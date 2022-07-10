@@ -279,7 +279,7 @@ CUIPage::CUIPage(QWidget* parent)
     layout->addWidget(m_pSimple, 1, 0);
     registerField("useSimple", m_pSimple);
 
-    m_pClassic = new QRadioButton(tr("&Classic Sandboxie UI"));
+    m_pClassic = new QRadioButton(tr("&Vintage SbieCtrl.exe UI"));
     m_pClassic->setChecked(theConf->GetInt("Options/ViewMode", 1) == 2);
     layout->addWidget(m_pClassic, 2, 0);
     registerField("useClassic", m_pClassic);

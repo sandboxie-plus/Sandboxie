@@ -148,6 +148,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkNoIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	//connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 
 
@@ -155,6 +156,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
+	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 
 	m_FeaturesChanged = false;
@@ -224,12 +226,15 @@ CSettingsWindow::~CSettingsWindow()
 	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
 }
 
-void CSettingsWindow::showTab(int Tab)
+void CSettingsWindow::showTab(int Tab, bool bExclusive)
 {
 	if(Tab == CSettingsWindow::eSoftCompat)
 		m_CompatLoaded = 2;
 	else if(Tab == CSettingsWindow::eSupport)
 		ui.chkNoCheck->setVisible(true);
+
+	if(bExclusive)
+		ui.tabs->tabBar()->setVisible(false);
 
 	ui.tabs->setCurrentIndex(Tab);
 	SafeShow(this);
@@ -323,6 +328,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkLargeIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/LargeIcons", 2)));
 	ui.chkNoIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NoIcons", 2)));
 	ui.chkOptTree->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OptionTree", 2)));
+	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 
 	ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 
@@ -344,6 +350,7 @@ void CSettingsWindow::LoadSettings()
 	
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
+	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
 	ui.chkBoxOpsNotify->setChecked(theConf->GetBool("Options/AutoBoxOpsNotify", false));
 	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 
@@ -462,6 +469,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/LargeIcons", CSettingsWindow__Chk2Int(ui.chkLargeIcons->checkState()));
 	theConf->SetValue("Options/NoIcons", CSettingsWindow__Chk2Int(ui.chkNoIcons->checkState()));
 	theConf->SetValue("Options/OptionTree", CSettingsWindow__Chk2Int(ui.chkOptTree->checkState()));
+	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 
 	theConf->SetValue("Options/FontScaling", ui.cmbFontScale->currentData());
 
@@ -514,6 +522,7 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
+	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
 	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 

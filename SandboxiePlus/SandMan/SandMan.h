@@ -62,6 +62,8 @@ public:
 	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
+	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
+	QIcon				GetColorIcon(QColor boxColor, bool inUse = false);
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QString				GetBoxDescription(int boxType);
 	
@@ -116,8 +118,11 @@ protected:
 		eCyan,
 		eMagenta,
 		eOrang,
+		eWhite,
 		eMaxColor
 	};
+
+	QMap<int, QRgb> m_BoxColors;
 
 	struct SBoxIcon {
 		QIcon Empty;
@@ -172,6 +177,7 @@ public slots:
 private slots:
 
 	void				OnMenuHover(QAction* action);
+	void				OnBoxMenuHover(QAction* action);
 
 	void				OnSandBoxAction();
 	void				OnEmptyAll();
@@ -226,6 +232,7 @@ private:
 	void				CreateView(bool bAdvanced);
 	void				CreateTrayIcon();
 	void				CreateTrayMenu();
+	void				CreateBoxMenu(QMenu* pMenu, int iOffset = 0, int iSysTrayFilter = 0);
 
 	void				HandleMaintenance(SB_RESULT(void*) Status);
 
@@ -317,9 +324,9 @@ private:
 
 	QSystemTrayIcon*	m_pTrayIcon;
 	QMenu*				m_pTrayMenu;
-	QAction*			m_pTraySeparator;
 	QWidgetAction*		m_pTrayList;
 	QTreeWidget*		m_pTrayBoxes;
+	int					m_iTrayPos;
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
 	bool				m_bIconDisabled;

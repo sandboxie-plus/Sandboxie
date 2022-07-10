@@ -523,12 +523,14 @@ void CSandMan::CreateOldMenus()
 		connect(m_pSandbox, SIGNAL(hovered(QAction*)), this, SLOT(OnBoxMenuHover(QAction*)));
 
 		m_pSandbox->addSeparator();
-		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
-		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
-		m_pSandbox->addSeparator();
+		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Sandbox"), this, SLOT(OnSandBoxAction()));
+		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create New Group"), this, SLOT(OnSandBoxAction()));
 
 		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSandBoxAction()));
 		m_pSetContainer->setData(CSettingsWindow::eAdvanced);
+
+		m_pArrangeGroups = m_pSandbox->addAction(tr("Set Layout and Groups"), this, SLOT(OnSandBoxAction()));
+		m_pArrangeGroups->setCheckable(true);
 
 		m_pShowHidden = m_pSandbox->addAction(tr("Reveal Hidden Boxes"));
 		m_pShowHidden->setCheckable(true);
@@ -1606,6 +1608,19 @@ void CSandMan::OnSandBoxAction()
 	else if(pAction == m_pNewGroup)
 		GetBoxView()->AddNewGroup();
 
+	else if (pAction == m_pArrangeGroups)
+	{
+		QMessageBox *msgBox = new QMessageBox(this);
+		msgBox->setAttribute(Qt::WA_DeleteOnClose);
+		msgBox->setWindowTitle("Sandboxie-Plus");
+		msgBox->setText(tr("In the Plus UI this functionality has been integrated into the main sandbox list view."));
+		msgBox->setInformativeText(tr("Using the box/group context menu you can move boxes and groups to other groups. You can also use drag an drop to move the items around. "
+			"Alternatively you can also use the arow keys while holding ALT down to move items up and down within thair group.<br />"
+			"You can create new boxes and groups from the Sandbox menu."));
+		QPixmap pic(":/Assets/LayoutAndGroups.png");
+		msgBox->setIconPixmap(pic.scaled(pic.width() * 3/4, pic.height() * 3/4, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+		SafeExec(msgBox);
+	}
 	// for old menu
 	else
 	{

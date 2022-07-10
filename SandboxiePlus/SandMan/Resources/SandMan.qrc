@@ -108,5 +108,6 @@
         <file>sandboxie-back.png</file>
         <file>Classic.png</file>
         <file>ClassicD.png</file>
+        <file>LayoutAndGroups.png</file>
     </qresource>
 </RCC>

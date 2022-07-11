@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.1 / 5.57.1] - 2022-06-??
+## [1.2.1 / 5.57.1] - 2022-07-11
 
 ### Added
 - added Swedish translation to Plus UI (thanks pb1)

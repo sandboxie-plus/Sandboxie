@@ -114,6 +114,10 @@ protected:
 	QStackedLayout*		m_pLayout;
 };
 
+
+////////////////////////////////////////////////////////////////////////////////////////
+// CTraceWindow
+
 class CTraceWindow : public QDialog
 {
 	Q_OBJECT

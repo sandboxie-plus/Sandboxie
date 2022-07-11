@@ -405,13 +405,6 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 		CreateViewBaseMenu();
 
-		m_pMenuView->addSeparator();
-		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Tree"), tr("Show File Panel"), this, SLOT(OnProcView()));
-		m_pMenuBrowse->setCheckable(true);
-		m_pMenuBrowse->setShortcut(QKeySequence("Ctrl+D"));
-		m_pMenuBrowse->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		this->addAction(m_pMenuBrowse);
-
 	if(bAdvanced) {
 		m_pMenuView->addSeparator();
 
@@ -424,6 +417,13 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pShowHidden = NULL;
 		m_pShowAllSessions = NULL;
 	}
+
+		m_pMenuView->addSeparator();
+		m_pMenuBrowse = m_pMenuView->addAction(/*CSandMan::GetIcon("Tree"),*/ tr("Show File Panel"), this, SLOT(OnProcView()));
+		m_pMenuBrowse->setCheckable(true);
+		m_pMenuBrowse->setShortcut(QKeySequence("Ctrl+D"));
+		m_pMenuBrowse->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuBrowse);
 
 		m_pMenuView->addSeparator();
 
@@ -1682,15 +1682,6 @@ void CSandMan::OnSandBoxAction()
 		GetBoxView()->AddNewBox();
 	else if(pAction == m_pNewGroup)
 		GetBoxView()->AddNewGroup();
-
-	// for old menu
-	else
-	{
-		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-		connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
-		int Tab = pAction->data().toInt();
-		pSettingsWindow->showTab(Tab);
-	}
 }
 
 void CSandMan::OnEmptyAll()
@@ -1964,6 +1955,16 @@ void CSandMan::OnProcView()
 	if (m_pMenuBrowse) {
 		theConf->SetValue("Options/ShowFilePanel", m_pMenuBrowse->isChecked());
 		m_pFileView->setVisible(m_pMenuBrowse->isChecked());
+
+		if (m_pMenuBrowse->isChecked()) {
+			QTimer::singleShot(10, [&] {
+				auto Sizes = m_pPanelSplitter->sizes();
+				if (Sizes.at(1) == 0) {
+					Sizes[1] = 100;
+					m_pPanelSplitter->setSizes(Sizes);
+				}
+			});
+		}
 	}
 }
 

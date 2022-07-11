@@ -213,6 +213,7 @@ DWORD WINAPI FinderThreadFunc(LPVOID lpParam)
 	return (int)msg.wParam;
 }
 
+
 void CSandMan::OnWndFinder()
 {
 	m_pWndFinder->setEnabled(false);

@@ -1098,12 +1098,12 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		CSandBoxPtr pBox;
 		if (m_pPanelSplitter) {
 			QList<CSandBoxPtr> boxes = m_pBoxView->GetSelectedBoxes();
-			if (m_pPanelSplitter->sizes().at(1) > 0 && boxes.count() == 1)
+			if (m_pPanelSplitter->sizes().at(1) > 0 && m_pFileView->isVisible() && boxes.count() == 1)
 				pBox = boxes.first();
 		}
 
 		// for old menu
-		if (m_pBoxCombo) {
+		if (m_pBoxCombo && m_pViewStack->currentIndex() == 1) {
 			QString Name = m_pBoxCombo->currentData().toString();
 			if (Name.isEmpty())
 				Name = "DefaultBox";

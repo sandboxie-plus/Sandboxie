@@ -11,7 +11,7 @@
 #include "../../MiscHelpers/Common/CheckableMessageBox.h"
 #include "../Windows/RecoveryWindow.h"
 #include "../Windows/NewBoxWindow.h"
-#include "../Windows/FileBrowserWindow.h"
+#include "../Views/FileView.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -157,8 +157,9 @@ void CSbieView::CreateMenu()
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenu->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
-	m_pMenuBrowse = m_pMenu->addAction(CSandMan::GetIcon("Tree"), tr("Browse Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuContent = m_pMenu->addMenu(CSandMan::GetIcon("Compatibility"), tr("Box Content"));
+		m_pMenuBrowse = m_pMenuContent->addAction(CSandMan::GetIcon("Tree"), tr("Browse Files"), this, SLOT(OnSandBoxAction()));
+		m_pMenuContent->addSeparator();
 		m_pMenuRefresh = m_pMenuContent->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
 		m_pMenuMkLink = m_pMenuContent->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnSandBoxAction()));
 		m_pMenuContent->addSeparator();

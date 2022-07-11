@@ -138,9 +138,6 @@
     <ClCompile Include="Windows\OptionsTemplates.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Windows\FileBrowserWindow.cpp">
-      <Filter>Windows</Filter>
-    </ClCompile>
     <ClCompile Include="BoxJob.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
@@ -173,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="SandManTray.cpp">
       <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\FileView.cpp">
+      <Filter>Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,9 +244,6 @@
     <QtMoc Include="Windows\SelectBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
-    <QtMoc Include="Windows\FileBrowserWindow.h">
-      <Filter>Windows</Filter>
-    </QtMoc>
     <QtMoc Include="BoxJob.h">
       <Filter>SandMan</Filter>
     </QtMoc>
@@ -261,6 +258,9 @@
     </QtMoc>
     <QtMoc Include="BoxMonitor.h">
       <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Views\FileView.h">
+      <Filter>Views</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +299,6 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\SelectBoxWindow.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="Forms\FileBrowserWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

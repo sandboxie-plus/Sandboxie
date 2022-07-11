@@ -240,9 +240,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Views\FileView.cpp" />
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Views\TraceView.cpp" />
-    <ClCompile Include="Windows\FileBrowserWindow.cpp" />
     <ClCompile Include="Windows\NewBoxWindow.cpp" />
     <ClCompile Include="Windows\OptionsAccess.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -313,8 +313,8 @@
     <ClCompile Include="Wizards\SetupWizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Views\FileView.h" />
     <QtMoc Include="Wizards\SetupWizard.h" />
-    <QtMoc Include="Windows\FileBrowserWindow.h" />
     <QtMoc Include="Windows\SelectBoxWindow.h" />
     <QtMoc Include="Views\TraceView.h" />
     <QtMoc Include="Windows\NewBoxWindow.h" />
@@ -351,7 +351,6 @@
     <Image Include="Resources\SandMan.ico" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Forms\FileBrowserWindow.ui" />
     <QtUic Include="Forms\NewBoxWindow.ui" />
     <QtUic Include="Forms\OptionsWindow.ui" />
     <QtUic Include="Forms\PopUpWindow.ui" />

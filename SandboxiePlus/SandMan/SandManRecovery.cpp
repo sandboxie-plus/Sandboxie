@@ -143,16 +143,19 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QStrin
 
 void CSandMan::AddFileRecovered(const QString& BoxName, const QString& FilePath)
 {
-	if (!m_pRecoveryLog)
-		return;
+	CPanelWidgetEx* pRecoveryLog = m_pRecoveryLog;
+	if (pRecoveryLog == NULL) {
+		pRecoveryLog = m_pRecoveryLogWnd->m_pRecoveryLog;
+		if (!pRecoveryLog) return;
+	}
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Box|FilePath
 	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
 	pItem->setText(1, BoxName);
 	pItem->setText(2, FilePath);
-	m_pRecoveryLog->GetTree()->addTopLevelItem(pItem);
+	pRecoveryLog->GetTree()->addTopLevelItem(pItem);
 
-	m_pRecoveryLog->GetView()->verticalScrollBar()->setValue(m_pRecoveryLog->GetView()->verticalScrollBar()->maximum());
+	pRecoveryLog->GetView()->verticalScrollBar()->setValue(pRecoveryLog->GetView()->verticalScrollBar()->maximum());
 }
 
 void CSandMan::OnFileRecovered(const QString& BoxName, const QString& FilePath, const QString& BoxPath)
@@ -162,4 +165,74 @@ void CSandMan::OnFileRecovered(const QString& BoxName, const QString& FilePath, 
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 	if (pBox)
 		pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+// CRecoveryLogWnd
+
+CRecoveryLogWnd::CRecoveryLogWnd(QWidget *parent)
+	: QDialog(parent)
+{
+	Qt::WindowFlags flags = windowFlags();
+	flags |= Qt::CustomizeWindowHint;
+	//flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	//flags |= Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowCloseButtonHint;
+	flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	setWindowFlags(flags);
+
+	this->setWindowTitle(tr("Sandboxie-Plus - Recovery Log"));
+
+	QGridLayout* pLayout = new QGridLayout();
+	//pLayout->setMargin(3);
+	
+	m_pRecoveryLog = new CPanelWidgetEx();
+
+	//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
+	((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
+
+	QAction* pAction = new QAction(tr("Cleanup Recovery Log"));
+	connect(pAction, SIGNAL(triggered()), m_pRecoveryLog->GetTree(), SLOT(clear()));
+	m_pRecoveryLog->GetMenu()->insertAction(m_pRecoveryLog->GetMenu()->actions()[0], pAction);
+	m_pRecoveryLog->GetMenu()->insertSeparator(m_pRecoveryLog->GetMenu()->actions()[0]);
+
+	m_pRecoveryLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+	m_pRecoveryLog->GetView()->setSortingEnabled(false);
+
+	connect(m_pRecoveryLog->GetTree(), SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnDblClick(QTreeWidgetItem*)));
+
+	pLayout->addWidget(new QLabel(tr("the following files were recently recoered and moved oout of a sandbox.")), 0, 0);
+	pLayout->addWidget(m_pRecoveryLog, 1, 0);
+	this->setLayout(pLayout);
+
+	restoreGeometry(theConf->GetBlob("RecoveryLogWindow/Window_Geometry"));
+}
+
+CRecoveryLogWnd::~CRecoveryLogWnd()
+{
+	theConf->SetBlob("RecoveryLogWindow/Window_Geometry", saveGeometry());
+}
+
+void CRecoveryLogWnd::closeEvent(QCloseEvent *e)
+{
+	emit Closed();
+	//this->deleteLater();
+}
+
+void CRecoveryLogWnd::OnDblClick(QTreeWidgetItem* pItem)
+{
+	ShellExecute(NULL, NULL, L"explorer.exe", (L"/select,\"" + pItem->text(2).toStdWString() + L"\"").c_str(), NULL, SW_SHOWNORMAL);
+}
+
+void CSandMan::OnRecoveryLog()
+{
+	if (!m_pRecoveryLogWnd->isVisible()) {
+		bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+		m_pRecoveryLogWnd->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+		SafeShow(m_pRecoveryLogWnd);
+	}
 }

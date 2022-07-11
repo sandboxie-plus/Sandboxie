@@ -1,68 +1,59 @@
 #include "stdafx.h"
-#include "FileBrowserWindow.h"
+#include "FileView.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
 #include "../QSbieAPI/SbieUtils.h"
 
-CFileBrowserWindow::CFileBrowserWindow(const CSandBoxPtr& pBox, QWidget *parent)
-	: QDialog(parent)
+CFileView::CFileView(QWidget *parent)
+	: QWidget(parent)
 {
-	Qt::WindowFlags flags = windowFlags();
-	flags |= Qt::CustomizeWindowHint;
-	//flags &= ~Qt::WindowContextHelpButtonHint;
-	//flags &= ~Qt::WindowSystemMenuHint;
-	//flags &= ~Qt::WindowMinMaxButtonsHint;
-	flags |= Qt::WindowMinimizeButtonHint;
-	//flags &= ~Qt::WindowCloseButtonHint;
-	setWindowFlags(flags);
+    m_pMainLayout = new QGridLayout();
+	m_pMainLayout->setMargin(0);
+	this->setLayout(m_pMainLayout);
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
-
-	ui.setupUi(this);
-	this->setWindowTitle(tr("%1 - Files").arg(pBox->GetName()));
-
-	m_pBox = pBox;
+    m_pTreeView = new QTreeView();
+    m_pMainLayout->addWidget(m_pTreeView, 0, 0);
 
     m_pFileModel = new QFileSystemModel(this);
     m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
-    m_pFileModel->setRootPath(pBox->GetFileRoot());
-    ui.treeFiles->setModel(m_pFileModel);
-    ui.treeFiles->setRootIndex(m_pFileModel->setRootPath(pBox->GetFileRoot()));
-    ui.treeFiles->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    m_pTreeView->setModel(m_pFileModel);
+    m_pTreeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 #ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
-	ui.treeFiles->setStyle(pStyle);
+	m_pTreeView->setStyle(pStyle);
 #endif
-	ui.treeFiles->setExpandsOnDoubleClick(false);
+	m_pTreeView->setExpandsOnDoubleClick(false);
 
-	ui.treeFiles->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(ui.treeFiles, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnFileMenu(const QPoint &)));
-	connect(ui.treeFiles, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(OnFileDblClick(const QModelIndex &)));
+	m_pTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_pTreeView, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnFileMenu(const QPoint &)));
+	connect(m_pTreeView, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(OnFileDblClick(const QModelIndex &)));
 
-	//statusBar();
-
-	restoreGeometry(theConf->GetBlob("FileBrowserWindow/Window_Geometry"));
-    QByteArray Columns = theConf->GetBlob("FileBrowserWindow/FileTree_Columns");
+    QByteArray Columns = theConf->GetBlob("MainWindow/FileTree_Columns");
 	if (!Columns.isEmpty())
-		ui.treeFiles->header()->restoreState(Columns);
+		m_pTreeView->header()->restoreState(Columns);
 }
 
-CFileBrowserWindow::~CFileBrowserWindow()
+CFileView::~CFileView()
 {
-	theConf->SetBlob("FileBrowserWindow/Window_Geometry",saveGeometry());
-    theConf->SetBlob("FileBrowserWindow/FileTree_Columns", ui.treeFiles->header()->saveState());
+    theConf->SetBlob("MainWindow/FileTree_Columns", m_pTreeView->header()->saveState());
 }
 
-void CFileBrowserWindow::closeEvent(QCloseEvent *e)
+void CFileView::SetBox(const CSandBoxPtr& pBox)
 {
-	emit Closed();
-	this->deleteLater();
+	m_pBox = pBox;
+    QString Root;
+    if (!pBox.isNull()) {
+        Root = pBox->GetFileRoot();
+        QDir().mkpath(Root);
+    }
+    else
+        Root = theAPI->GetSbiePath();
+    //m_pFileModel->setRootPath(Root);
+    m_pTreeView->setRootIndex(m_pFileModel->setRootPath(Root));
 }
-
 
 #include <windows.h>
 #include <Shlobj.h>
@@ -126,15 +117,15 @@ int openShellContextMenu(const QStringList& Files, void * parentWindow)
     {
         addSeparatorToShellContextMenu(hMenu);
 
-        std::wstring Str1 = CFileBrowserWindow::tr("Create Shortcut").toStdWString();
+        std::wstring Str1 = CFileView::tr("Create Shortcut").toStdWString();
         if (Files.count() == 1) {
             addItemToShellContextMenu(hMenu, Str1.c_str(), MENU_CREATE_SHORTCUT);
             addSeparatorToShellContextMenu(hMenu);
         }
 
-        std::wstring Str2 = CFileBrowserWindow::tr("Recover to Any Folder").toStdWString();
+        std::wstring Str2 = CFileView::tr("Recover to Any Folder").toStdWString();
         addItemToShellContextMenu(hMenu, Str2.c_str(), MENU_RECOVER_TO_ANY);
-        std::wstring Str3 = CFileBrowserWindow::tr("Recover to Same Folder").toStdWString();
+        std::wstring Str3 = CFileView::tr("Recover to Same Folder").toStdWString();
         addItemToShellContextMenu(hMenu, Str3.c_str(), MENU_RECOVER);
         
         POINT point;
@@ -163,10 +154,10 @@ int openShellContextMenu(const QStringList& Files, void * parentWindow)
 }
 
 
-void CFileBrowserWindow::OnFileMenu(const QPoint&)
+void CFileView::OnFileMenu(const QPoint&)
 {
     QStringList Files;
-    foreach(const QModelIndex & Index, ui.treeFiles->selectionModel()->selectedIndexes()) {
+    foreach(const QModelIndex & Index, m_pTreeView->selectionModel()->selectedIndexes()) {
         QString BoxedPath = m_pFileModel->fileInfo(Index).absoluteFilePath().replace("/", "\\");
         if (m_pFileModel->fileInfo(Index).isDir())
             BoxedPath += "\\";
@@ -194,7 +185,7 @@ void CFileBrowserWindow::OnFileMenu(const QPoint&)
     switch (iCmd)
     {
         case MENU_RECOVER_TO_ANY:
-            RecoveryFolder = QFileDialog::getExistingDirectory(this, CFileBrowserWindow::tr("Select Directory")).replace("/", "\\");
+            RecoveryFolder = QFileDialog::getExistingDirectory(this, CFileView::tr("Select Directory")).replace("/", "\\");
             if (RecoveryFolder.isEmpty())
                 break;
         case MENU_RECOVER:
@@ -256,9 +247,52 @@ void CFileBrowserWindow::OnFileMenu(const QPoint&)
 
 }
 
-void CFileBrowserWindow::OnFileDblClick(const QModelIndex &)
+void CFileView::OnFileDblClick(const QModelIndex &)
 {
-    QString BoxedPath = m_pFileModel->fileInfo(ui.treeFiles->currentIndex()).absoluteFilePath();
+    QString BoxedPath = m_pFileModel->fileInfo(m_pTreeView->currentIndex()).absoluteFilePath();
 
     ShellExecute(NULL, NULL, BoxedPath.toStdWString().c_str(), NULL, m_pBox->GetFileRoot().toStdWString().c_str(), SW_SHOWNORMAL);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+// CFileBrowserWindow
+
+CFileBrowserWindow::CFileBrowserWindow(const CSandBoxPtr& pBox, QWidget *parent)
+	: QDialog(parent)
+{
+	Qt::WindowFlags flags = windowFlags();
+	flags |= Qt::CustomizeWindowHint;
+	//flags &= ~Qt::WindowContextHelpButtonHint;
+	//flags &= ~Qt::WindowSystemMenuHint;
+	//flags &= ~Qt::WindowMinMaxButtonsHint;
+	flags |= Qt::WindowMinimizeButtonHint;
+	//flags &= ~Qt::WindowCloseButtonHint;
+	setWindowFlags(flags);
+
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
+    m_pMainLayout = new QGridLayout(this);
+    m_FileView = new CFileView();
+    m_FileView->SetBox(pBox);
+    m_pMainLayout->addWidget(m_FileView, 0, 0);
+
+	this->setWindowTitle(tr("%1 - Files").arg(pBox->GetName()));
+
+	
+	//statusBar();
+
+	restoreGeometry(theConf->GetBlob("FileBrowserWindow/Window_Geometry"));
+}
+
+CFileBrowserWindow::~CFileBrowserWindow()
+{
+	theConf->SetBlob("FileBrowserWindow/Window_Geometry",saveGeometry());
+}
+
+void CFileBrowserWindow::closeEvent(QCloseEvent *e)
+{
+	emit Closed();
+	this->deleteLater();
 }

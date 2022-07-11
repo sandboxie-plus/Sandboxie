@@ -629,6 +629,9 @@ CTraceWindow::CTraceWindow(QWidget *parent)
 
 	this->setWindowTitle(tr("Sandboxie-Plus - Trace Monitor"));
 
+	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+
 	QGridLayout* pLayout = new QGridLayout();
 	pLayout->setMargin(3);
 	pLayout->addWidget(new CTraceView(true, this), 0, 0);
@@ -641,7 +644,7 @@ CTraceWindow::~CTraceWindow()
 {
 	theConf->SetBlob("TraceWindow/Window_Geometry", saveGeometry());
 
-	theAPI->EnableMonitor(false);
+	if(!theAPI) theAPI->EnableMonitor(false);
 }
 
 void CTraceWindow::closeEvent(QCloseEvent *e)

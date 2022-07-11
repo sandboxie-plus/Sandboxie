@@ -107,6 +107,7 @@ using namespace std;
 #include <QToolButton>
 #include <QScreen>
 #include <QRadioButton>
+#include <QGridLayout>
 
 // other includes
 

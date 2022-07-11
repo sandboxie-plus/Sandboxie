@@ -25,6 +25,7 @@
 #include "Helpers/WinAdmin.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
 #include "../MiscHelpers/Common/Common.h"
+#include "Views/FileView.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -280,7 +281,12 @@ void CSandMan::CreateUI()
 	if(iViewMode == 1)
 		CreateToolBar();
 
-	CreateView(iViewMode == 1);
+	CreateView(iViewMode);
+
+	if (iViewMode != 2) {
+		m_pMenuBrowse->setChecked(theConf->GetBool("Options/ShowFilePanel", false));
+		m_pFileView->setVisible(m_pMenuBrowse->isChecked());
+	}
 
 	foreach(QAction * pAction, m_pViewMode->actions())
 		pAction->setChecked(pAction->data().toInt() == iViewMode);
@@ -399,6 +405,13 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 		CreateViewBaseMenu();
 
+		m_pMenuView->addSeparator();
+		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Tree"), tr("Show File Panel"), this, SLOT(OnProcView()));
+		m_pMenuBrowse->setCheckable(true);
+		m_pMenuBrowse->setShortcut(QKeySequence("Ctrl+D"));
+		m_pMenuBrowse->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuBrowse);
+
 	if(bAdvanced) {
 		m_pMenuView->addSeparator();
 
@@ -443,6 +456,8 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pEnableMonitoring = m_pMenuView->addAction(CSandMan::GetIcon("SetLogging"), tr("Trace Logging"), this, SLOT(OnMonitoring()));
 	if (bAdvanced)
 		m_pEnableMonitoring->setCheckable(true);
+	if (!bAdvanced)
+		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
 	
 
 	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
@@ -506,10 +521,20 @@ void CSandMan::CreateOldMenus()
 		CreateViewBaseMenu();
 
 		m_pMenuView->addSeparator();
-		m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh View"), this, SLOT(OnRefresh()));
-		m_pRefreshAll->setShortcut(QKeySequence("F5"));
-		m_pRefreshAll->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		this->addAction(m_pRefreshAll);
+		QActionGroup* m_pView = new QActionGroup(m_pMenuView);
+		MakeAction(m_pView, m_pMenuView, tr("Programs"), 0);
+		MakeAction(m_pView, m_pMenuView, tr("Files and Folders"), 1);
+		m_pView->actions().first()->setChecked(true);
+		connect(m_pView, SIGNAL(triggered(QAction*)), this, SLOT(OnView(QAction*)));
+		m_pMenuView->addSeparator();
+		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
+
+		//m_pMenuView->addSeparator();
+		//m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh View"), this, SLOT(OnRefresh()));
+		//m_pRefreshAll->setShortcut(QKeySequence("F5"));
+		//m_pRefreshAll->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		//this->addAction(m_pRefreshAll);
+		m_pRefreshAll = NULL;
 
 		m_pCleanUpMenu = NULL;
 			m_pCleanUpProcesses = NULL;
@@ -525,11 +550,12 @@ void CSandMan::CreateOldMenus()
 		m_pSandbox->addSeparator();
 		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create New Group"), this, SLOT(OnSandBoxAction()));
+		m_pSandbox->addSeparator();
 
-		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSandBoxAction()));
+		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSettingsAction()));
 		m_pSetContainer->setData(CSettingsWindow::eAdvanced);
 
-		m_pArrangeGroups = m_pSandbox->addAction(tr("Set Layout and Groups"), this, SLOT(OnSandBoxAction()));
+		m_pArrangeGroups = m_pSandbox->addAction(tr("Set Layout and Groups"), this, SLOT(OnSettingsAction()));
 		m_pArrangeGroups->setCheckable(true);
 
 		m_pShowHidden = m_pSandbox->addAction(tr("Reveal Hidden Boxes"));
@@ -542,23 +568,36 @@ void CSandMan::CreateOldMenus()
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuOptions->addSeparator();
 
-		QAction* m_pProgramAlert = m_pMenuOptions->addAction(CSandMan::GetIcon("Ampel"), tr("Program Alerts"), this, SLOT(OnSandBoxAction()));
+		QAction* m_pProgramAlert = m_pMenuOptions->addAction(CSandMan::GetIcon("Ampel"), tr("Program Alerts"), this, SLOT(OnSettingsAction()));
 		m_pProgramAlert->setData(CSettingsWindow::eProgCtrl);
-		QAction* m_pWindowsShell = m_pMenuOptions->addAction(CSandMan::GetIcon("Shell"), tr("Windows Shell Integration"), this, SLOT(OnSandBoxAction()));
+		QAction* m_pWindowsShell = m_pMenuOptions->addAction(CSandMan::GetIcon("Shell"), tr("Windows Shell Integration"), this, SLOT(OnSettingsAction()));
 		m_pWindowsShell->setData(CSettingsWindow::eShell);
-		QAction* m_pCompatibility = m_pMenuOptions->addAction(CSandMan::GetIcon("Compatibility"), tr("Software Compatibility"), this, SLOT(OnSandBoxAction()));
+		QAction* m_pCompatibility = m_pMenuOptions->addAction(CSandMan::GetIcon("Compatibility"), tr("Software Compatibility"), this, SLOT(OnSettingsAction()));
 		m_pCompatibility->setData(CSettingsWindow::eSoftCompat);
 
 		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
 		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
 		m_pMenuOptions->addSeparator();
-		QAction* m_pConfigLock = m_pMenuOptions->addAction(CSandMan::GetIcon("Lock"), tr("Lock Configuration"), this, SLOT(OnSandBoxAction()));
+		QAction* m_pConfigLock = m_pMenuOptions->addAction(CSandMan::GetIcon("Lock"), tr("Lock Configuration"), this, SLOT(OnSettingsAction()));
 		m_pConfigLock->setData(CSettingsWindow::eConfigLock);
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(false);
 
+}
+
+void CSandMan::OnView(QAction* pAction)
+{
+	int iView = pAction->data().toInt();
+	if(m_pViewStack) m_pViewStack->setCurrentIndex(iView);
+
+	if (iView == 1) { // files
+		m_pBoxCombo->clear();
+		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
+			m_pBoxCombo->addItem(tr("Sandbox %1").arg(pBox->GetName().replace("_", "")), pBox->GetName());
+		m_pBoxCombo->setCurrentIndex(m_pBoxCombo->findData("DefaultBox"));
+	}
 }
 
 void CSandMan::CreateToolBar()
@@ -641,13 +680,36 @@ void CSandMan::UpdateLabel()
 	m_pLabel->setToolTip(LabelTip);
 }
 
-void CSandMan::CreateView(bool bAdvanced)
+void CSandMan::CreateView(int iViewMode)
 {
 	m_pBoxView = new CSbieView();
+	m_pFileView = new CFileView();
 
-	if (!bAdvanced) 
+	if (iViewMode != 1)
+		m_pRecoveryLogWnd = new CRecoveryLogWnd(m_pMainWidget);
+	else
+		m_pRecoveryLogWnd = NULL;
+
+	if (iViewMode == 2) 
 	{
-		m_pMainLayout->addWidget(m_pBoxView);
+		m_pViewStack = new QStackedLayout();
+		m_pViewStack->addWidget(m_pBoxView);
+
+		QWidget* pFileView = new QWidget();
+		QGridLayout* pFileLayout = new QGridLayout(pFileView);
+		pFileLayout->setMargin(0);
+
+		pFileLayout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 0, 1, 1);
+
+		m_pBoxCombo = new QComboBox();
+		pFileLayout->addWidget(m_pBoxCombo, 0, 1);
+
+		pFileLayout->addWidget(m_pFileView, 1, 0, 1, 2);
+
+		m_pViewStack->addWidget(pFileView);
+
+
+		m_pMainLayout->addLayout(m_pViewStack);
 
 		m_pPanelSplitter = NULL;
 		m_pLogSplitter = NULL;
@@ -661,58 +723,80 @@ void CSandMan::CreateView(bool bAdvanced)
 		return;
 	}
 
-	m_pLogSplitter = new QSplitter();
-	m_pLogSplitter->setOrientation(Qt::Vertical);
-	m_pMainLayout->addWidget(m_pLogSplitter);
+	m_pViewStack = NULL;
+	m_pBoxCombo = NULL;
+
+	if (iViewMode == 1) 
+	{
+		m_pLogSplitter = new QSplitter();
+		m_pLogSplitter->setOrientation(Qt::Vertical);
+		m_pMainLayout->addWidget(m_pLogSplitter);
+	}
 
 	m_pPanelSplitter = new QSplitter();
 	m_pPanelSplitter->setOrientation(Qt::Horizontal);
-	m_pLogSplitter->addWidget(m_pPanelSplitter);
+	if (iViewMode == 1)
+		m_pLogSplitter->addWidget(m_pPanelSplitter);
+	else 
+		m_pMainLayout->addWidget(m_pPanelSplitter);
 
 	m_pPanelSplitter->addWidget(m_pBoxView);
+	m_pPanelSplitter->addWidget(m_pFileView);
 
-	//m_pPanelSplitter->addWidget();
+	m_pPanelSplitter->setCollapsible(0, false);
+	//m_pPanelSplitter->setCollapsible(1, false);
+
+	if (iViewMode == 1)
+	{
+		m_pLogTabs = new QTabWidget();
+		m_pLogSplitter->addWidget(m_pLogTabs);
+
+		// Message Log
+		m_pMessageLog = new CPanelWidgetEx();
+
+		//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
+		((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
+
+		m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
+		m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
+
+		m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+		m_pMessageLog->GetView()->setSortingEnabled(false);
+
+		m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
+		//
+
+		m_pTraceView = new CTraceView(false, this);
+
+		m_pTraceView->AddAction(m_pCleanUpTrace);
+
+		m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
 
 
-	m_pLogTabs = new QTabWidget();
-	m_pLogSplitter->addWidget(m_pLogTabs);
+		// Recovery Log
+		m_pRecoveryLog = new CPanelWidgetEx();
 
-	// Message Log
-	m_pMessageLog = new CPanelWidgetEx();
+		//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
+		((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
 
-	//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-	((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
+		m_pRecoveryLog->GetMenu()->insertAction(m_pRecoveryLog->GetMenu()->actions()[0], m_pCleanUpRecovery);
+		m_pRecoveryLog->GetMenu()->insertSeparator(m_pRecoveryLog->GetMenu()->actions()[0]);
 
-	m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
-	m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
+		m_pRecoveryLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+		m_pRecoveryLog->GetView()->setSortingEnabled(false);
 
-	m_pMessageLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	m_pMessageLog->GetView()->setSortingEnabled(false);
+		m_pLogTabs->addTab(m_pRecoveryLog, tr("Recovery Log"));
+		//
+	}
+	else {
+		m_pLogSplitter = NULL;
 
-	m_pLogTabs->addTab(m_pMessageLog, tr("Sbie Messages"));
-	//
+		m_pLogTabs = NULL;
 
-	m_pTraceView = new CTraceView(false, this);
-
-	m_pTraceView->AddAction(m_pCleanUpTrace);
-
-	m_pLogTabs->addTab(m_pTraceView, tr("Trace Log"));
-
-
-	// Recovery Log
-	m_pRecoveryLog = new CPanelWidgetEx();
-
-	//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
-	((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
-
-	m_pRecoveryLog->GetMenu()->insertAction(m_pRecoveryLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
-	m_pRecoveryLog->GetMenu()->insertSeparator(m_pRecoveryLog->GetMenu()->actions()[0]);
-
-	m_pRecoveryLog->GetView()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-	m_pRecoveryLog->GetView()->setSortingEnabled(false);
-
-	m_pLogTabs->addTab(m_pRecoveryLog, tr("Recovery Log"));
-	//
+		m_pMessageLog = NULL;
+		m_pTraceView = NULL;
+		m_pRecoveryLog = NULL;
+	}
 }
 
 #include "SandManTray.cpp"
@@ -1009,6 +1093,30 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			if (!bIsMonitoring) // don't disable the view as logn as there are entries shown
 				bIsMonitoring = !theAPI->GetTrace().isEmpty();
 			m_pTraceView->setEnabled(bIsMonitoring);
+		}
+
+		CSandBoxPtr pBox;
+		if (m_pPanelSplitter) {
+			QList<CSandBoxPtr> boxes = m_pBoxView->GetSelectedBoxes();
+			if (m_pPanelSplitter->sizes().at(1) > 0 && boxes.count() == 1)
+				pBox = boxes.first();
+		}
+
+		// for old menu
+		if (m_pBoxCombo) {
+			QString Name = m_pBoxCombo->currentData().toString();
+			if (Name.isEmpty())
+				Name = "DefaultBox";
+			pBox = theAPI->GetBoxByName(Name);
+		}
+
+		if (!pBox.isNull()) {
+			if (!m_pFileView->isEnabled()) m_pFileView->setEnabled(true);
+			if (pBox != m_pFileView->GetBox()) m_pFileView->SetBox(pBox);
+		}
+		else if (m_pFileView->isEnabled()) {
+			m_pFileView->setEnabled(false);
+			m_pFileView->SetBox(CSandBoxPtr());
 		}
 
 		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
@@ -1360,42 +1468,9 @@ void CSandMan::OnMenuHover(QAction* action)
 		//m_pMenuStopAll - always enabled
 	}
 
-	static QMenu* pEmptyMenu = new QMenu();
 	if (menuBar()->actions().at(2) == action && m_pSandbox)
-	{
-		while (!m_pSandbox->actions().first()->data().toString().isEmpty())
-			m_pSandbox->removeAction(m_pSandbox->actions().first());
+		CreateBoxMenu(m_pSandbox);
 
-		QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
-
-		QAction* pPos = m_pSandbox->actions().first();
-		foreach(const CSandBoxPtr & pBox, Boxes)
-		{
-			if (!pBox->IsEnabled())
-				continue;
-
-			QAction* pBoxAction = new QAction(pBox->GetName().replace("_", " "));
-			pBoxAction->setData(pBox->GetName());
-			pBoxAction->setMenu(pEmptyMenu);
-			//pBoxAction->setIcon
-			//connect(pBoxAction, SIGNAL(triggered()), this, SLOT(OnBoxMenu()));
-			m_pSandbox->insertAction(pPos, pBoxAction);
-		}
-	}
-
-	if (action->data().type() == QVariant::String) {
-		QString Name = action->data().toString();
-		static QPointer<QAction> pPrev = NULL;
-		if (pPrev.data() != action) {
-			if (!pPrev.isNull()) {
-				pPrev->menu()->close();
-				pPrev->setMenu(new QMenu());
-			}
-			pPrev = action;
-			QMenu* pMenu = theGUI->GetBoxView()->GetMenu(Name);
-			action->setMenu(pMenu);
-		}
-	}
 }
 
 #define HK_PANIC 1
@@ -1608,19 +1683,6 @@ void CSandMan::OnSandBoxAction()
 	else if(pAction == m_pNewGroup)
 		GetBoxView()->AddNewGroup();
 
-	else if (pAction == m_pArrangeGroups)
-	{
-		QMessageBox *msgBox = new QMessageBox(this);
-		msgBox->setAttribute(Qt::WA_DeleteOnClose);
-		msgBox->setWindowTitle("Sandboxie-Plus");
-		msgBox->setText(tr("In the Plus UI this functionality has been integrated into the main sandbox list view."));
-		msgBox->setInformativeText(tr("Using the box/group context menu you can move boxes and groups to other groups. You can also use drag an drop to move the items around. "
-			"Alternatively you can also use the arow keys while holding ALT down to move items up and down within thair group.<br />"
-			"You can create new boxes and groups from the Sandbox menu."));
-		QPixmap pic(":/Assets/LayoutAndGroups.png");
-		msgBox->setIconPixmap(pic.scaled(pic.width() * 3/4, pic.height() * 3/4, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-		SafeExec(msgBox);
-	}
 	// for old menu
 	else
 	{
@@ -1898,6 +1960,11 @@ void CSandMan::OnProcView()
 {
 	if(m_pKeepTerminated) theConf->SetValue("Options/KeepTerminated", m_pKeepTerminated->isChecked());
 	if(m_pShowAllSessions) theConf->SetValue("Options/ShowAllSessions", m_pShowAllSessions->isChecked());
+
+	if (m_pMenuBrowse) {
+		theConf->SetValue("Options/ShowFilePanel", m_pMenuBrowse->isChecked());
+		m_pFileView->setVisible(m_pMenuBrowse->isChecked());
+	}
 }
 
 void CSandMan::OnSettings()
@@ -1911,6 +1978,33 @@ void CSandMan::OnSettings()
 			pSettingsWindow = NULL;
 		});
 		SafeShow(pSettingsWindow);
+	}
+}
+
+// for old menu
+void CSandMan::OnSettingsAction()
+{
+	QAction* pAction = qobject_cast<QAction*>(sender());
+
+	if (pAction == m_pArrangeGroups)
+	{
+		QMessageBox *msgBox = new QMessageBox(this);
+		msgBox->setAttribute(Qt::WA_DeleteOnClose);
+		msgBox->setWindowTitle("Sandboxie-Plus");
+		msgBox->setText(tr("In the Plus UI this functionality has been integrated into the main sandbox list view."));
+		msgBox->setInformativeText(tr("Using the box/group context menu you can move boxes and groups to other groups. You can also use drag an drop to move the items around. "
+			"Alternatively you can also use the arow keys while holding ALT down to move items up and down within thair group.<br />"
+			"You can create new boxes and groups from the Sandbox menu."));
+		QPixmap pic(":/Assets/LayoutAndGroups.png");
+		msgBox->setIconPixmap(pic.scaled(pic.width() * 3/4, pic.height() * 3/4, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+		SafeExec(msgBox);
+	}
+	else
+	{
+		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+		connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
+		int Tab = pAction->data().toInt();
+		pSettingsWindow->showTab(Tab, true);
 	}
 }
 

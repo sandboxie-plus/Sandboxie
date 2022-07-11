@@ -17,6 +17,7 @@
 #include "SbiePlusAPI.h"
 
 class CSbieView;
+class CFileView;
 class CBoxBorder;
 class CSbieTemplates;
 class CTraceView;
@@ -180,6 +181,7 @@ private slots:
 	void				OnBoxMenuHover(QAction* action);
 
 	void				OnSandBoxAction();
+	void				OnSettingsAction();
 	void				OnEmptyAll();
 	void				OnWndFinder();
 	void				OnDisableForce();
@@ -188,9 +190,11 @@ private slots:
 
 	void				OnViewMode(QAction* action);
 	void				OnAlwaysTop();
+	void				OnView(QAction* action);
 	void				OnRefresh();
 	void				OnCleanUp();
 	void				OnProcView();
+	void				OnRecoveryLog();
 
 	void				OnSettings();
 	void				OnResetMsgs();
@@ -229,7 +233,7 @@ private:
 	void				CreateViewBaseMenu();
 	void				CreateHelpMenu(bool bAdvanced);
 	void				CreateToolBar();
-	void				CreateView(bool bAdvanced);
+	void				CreateView(int iViewMode);
 	void				CreateTrayIcon();
 	void				CreateTrayMenu();
 	void				CreateBoxMenu(QMenu* pMenu, int iOffset = 0, int iSysTrayFilter = 0);
@@ -243,19 +247,21 @@ private:
 	QVBoxLayout*		m_pMainLayout;
 
 	QToolBar*			m_pToolBar;
-
 	QSplitter*			m_pPanelSplitter;
-
 	QSplitter*			m_pLogSplitter;
 
+	QStackedLayout*		m_pViewStack;
+	QComboBox*			m_pBoxCombo;
+
 	CSbieView*			m_pBoxView;
+	CFileView*			m_pFileView;
 
 
 	QTabWidget*			m_pLogTabs;
-
 	CPanelWidgetEx*		m_pMessageLog;
 	CTraceView*			m_pTraceView;
 	CPanelWidgetEx*		m_pRecoveryLog;
+	class CRecoveryLogWnd* m_pRecoveryLogWnd;
 
 
 	QMenu*				m_pMenuFile;
@@ -288,6 +294,7 @@ private:
 	QActionGroup*		m_pViewMode;
 	QAction*			m_pShowHidden;
 	QAction*			m_pWndTopMost;
+	QAction*			m_pMenuBrowse;
 	QAction*			m_pRefreshAll;
 	QMenu*				m_pCleanUpMenu;
 	QAction*			m_pCleanUpProcesses;
@@ -297,6 +304,7 @@ private:
 	QToolButton*		m_pCleanUpButton;
 	QAction*			m_pKeepTerminated;
 	QAction*			m_pShowAllSessions;
+	QAction*			m_pArrangeGroups;
 
 	QMenu*				m_pMenuOptions;
 	QAction*			m_pMenuSettings;
@@ -352,5 +360,28 @@ public:
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
 };
+
+
+class CRecoveryLogWnd : public QDialog
+{
+	Q_OBJECT
+
+public:
+	CRecoveryLogWnd(QWidget *parent = Q_NULLPTR);
+	~CRecoveryLogWnd();
+
+private slots:
+	void		OnDblClick(QTreeWidgetItem* pItem);
+
+signals:
+	void		Closed();
+
+protected:
+	friend class CSandMan;
+	void		closeEvent(QCloseEvent *e);
+
+	CPanelWidgetEx* m_pRecoveryLog;
+};
+
 
 extern CSandMan* theGUI;

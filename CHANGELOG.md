@@ -12,7 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Vintage View Mode to make sandman UI look just lien sbietrl on the first glance
 - added alternative tray menu mechanics
 - added ability to auto generate sandbox icons based on the border color
-- added dedicated box group icon
+
+### Changed
+- changed box group icon to a dedicated one
+- browse content is now available as a side panel in the main window
 
 ### Fixed
 - fixed DPI issue on Windows 7

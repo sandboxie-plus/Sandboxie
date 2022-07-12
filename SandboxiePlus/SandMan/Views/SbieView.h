@@ -76,11 +76,13 @@ private:
 
 	void					CreateMenu();
 	void					CreateOldMenu();
-	void					CreatTrayMenu();
+	void					CreateGroupMenu();
+	void					CreateTrayMenu();
 
-	bool					UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false, const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0, int iGroupe = 0);
+	bool					UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false);
+	void					UpdateProcMenu(const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0);
 	bool					UpdateMenu();
-	void					UpdateGroupMenu();
+	void					UpdateMoveMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
 	void					RenameItem(const QString OldName, const QString NewName);
 
@@ -98,14 +100,16 @@ private:
 	CSbieModel*				m_pSbieModel;
 	QSortFilterProxyModel*	m_pSortProxy;
 
-	QMenu*					m_pMenu2;
+	QMenu*					m_pMenuBox;
+	QMenu*					m_pMenuProcess;
+	QMenu*					m_pMenuGroup;
+	QMenu*					m_pMenuTray;
 
 	QAction*				m_pNewBox;
 	QAction*				m_pAddGroupe;
 	QAction*				m_pRenGroupe;
 	QAction*				m_pDelGroupe;
 	QAction*				m_pStopAsync;
-	int						m_iMenuTop;
 	QMenu*					m_pMenuRun;
 	QAction*				m_pMenuRunAny;
 	QAction*				m_pMenuRunMenu;
@@ -145,9 +149,7 @@ private:
 	//QAction*				m_pMenuMoveBy;
 	QAction*				m_pMenuMoveDown;
 	QMenu*					m_pMenuMoveTo;
-	int						m_iMoveTo;
 	QAction*				m_pMenuRename;
-	int						m_iMenuBox;
 
 	QAction*				m_pMenuTerminate;
 	QAction*				m_pMenuLinkTo;
@@ -160,7 +162,6 @@ private:
 	QAction*				m_pMenuPinToRun;
 	//QAction*				m_pMenuSuspend;
 	//QAction*				m_pMenuResume;
-	int						m_iMenuProc;
 
 	QAction*				m_pRemove;
 

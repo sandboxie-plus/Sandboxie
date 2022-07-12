@@ -34,13 +34,27 @@ void CPanelView::AddPanelItemsToMenu(bool bAddSeparator)
 	m_pCopyPanel = m_pMenu->addAction(m_CopyPanel, this, SLOT(OnCopyPanel()));
 }
 
-void CPanelView::OnMenu(const QPoint& Point)
+void CPanelView::AddCopyMenu(QMenu* pMenu, bool bAddSeparator)
+{
+	if(bAddSeparator)
+		pMenu->addSeparator();
+	pMenu->addAction(m_pCopyCell);
+	pMenu->addAction(m_pCopyRow);
+	pMenu->addAction(m_pCopyPanel);
+}
+
+void CPanelView::UpdateCopyMenu()
 {
 	QModelIndex Index = GetView()->currentIndex();
 	
 	m_pCopyCell->setEnabled(Index.isValid());
 	m_pCopyRow->setEnabled(Index.isValid());
 	m_pCopyPanel->setEnabled(true);
+}
+
+void CPanelView::OnMenu(const QPoint& Point)
+{
+	UpdateCopyMenu();
 
 	m_pMenu->popup(QCursor::pos());	
 }

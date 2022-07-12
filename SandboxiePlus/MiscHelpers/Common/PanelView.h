@@ -46,6 +46,8 @@ protected slots:
 	virtual void				RecursiveCopyPanel(const QModelIndex& ModelIndex, QList<QStringList>& Rows, int Level = 0);
 
 protected:
+	void						UpdateCopyMenu();
+	void						AddCopyMenu(QMenu* pMenu, bool bAddSeparator = true);
 	void						FormatAndCopy(QList<QStringList> Rows, bool Headder = true);
 
 	QMenu*						m_pMenu;
